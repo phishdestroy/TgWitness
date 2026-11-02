@@ -16,11 +16,14 @@ def preview(store, options):
     say = report.Words(options["language"])
     analytics = report_analytics.Analytics()
     count = 0
+    selection = report.report_selection.Selection.model_validate(options.get("selection") or {})
+    includes = report.report_selection.compile_selection(selection)
     with store.snapshot() as snapshot:
         rows = iter(snapshot.events())
         for event in islice(rows, PREVIEW_LIMIT):
-            analytics.add(event)
-            count += 1
+            if includes(event):
+                analytics.add(event)
+                count += 1
         sampled = next(rows, None) is not None
     material = report.report_material({"kind": "evidence", "options": options, "digest": {"analytics": analytics.result()}, "event_count": count})
     sections = [report.report_charts.examination_html(material.get("examination"), say),

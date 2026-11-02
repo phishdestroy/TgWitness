@@ -35,7 +35,7 @@ def main():
             page.locator("#report-notes").fill("SYNTHETIC EXAMPLE · Fictional records, no Telegram connection.")
             for template in ("analytical", "editorial", "dossier"):
                 page.locator(f'[name="report-design"][value="{template}"]').check()
-                expect(page.locator("#report-preview-status")).to_contain_text("not signed", timeout=20000)
+                expect(page.locator("#report-design-preview-status")).to_contain_text("not signed", timeout=20000)
                 frame = page.frame_locator("#report-preview-frame")
                 expect(frame.locator("html")).to_have_attribute("data-template", template)
                 expect(frame.locator(".chart-card")).to_have_count(5)
@@ -66,7 +66,7 @@ def main():
                     (output / f"{template}.html").write_text(html, encoding="utf-8")
                 page.locator("#exports-tab-settings").click()
             page.locator('[name="report-design"][value="analytical"]').check()
-            expect(page.locator("#report-preview-status")).to_contain_text("not signed", timeout=20000)
+            expect(page.locator("#report-design-preview-status")).to_contain_text("not signed", timeout=20000)
             for width in (1440, 390):
                 page.set_viewport_size({"width": width, "height": 1100 if width == 1440 else 844})
                 for theme in ("light", "dark"):
@@ -74,12 +74,12 @@ def main():
                     page.locator("#report-form").screenshot(path=str(output / f"studio-{width}-{theme}.png"))
                     assert page.evaluate("document.documentElement.scrollWidth<=innerWidth+1")
             page.locator("#report-participant-chart").uncheck()
-            expect(page.locator("#report-preview-status")).to_contain_text("not signed", timeout=20000)
+            expect(page.locator("#report-design-preview-status")).to_contain_text("not signed", timeout=20000)
             expect(page.frame_locator("#report-preview-frame").locator(".chart-participants")).to_have_count(0)
             # Preview never persists the draft or produces a signature.
             options = page.evaluate("json('report-options')")
             assert options["participant_chart"] and options["design"] == "dossier"
-            hold_api_response(page, '/api/report-preview')
+            hold_api_response(page, '/api/report-design-preview')
             page.locator('#report-case-title').fill('PRIVATE STALE DRAFT')
             page.wait_for_function("()=>typeof releaseAcceptanceResponse==='function'")
             page.evaluate("()=>lock()")

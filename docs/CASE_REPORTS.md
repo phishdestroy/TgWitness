@@ -15,7 +15,48 @@ manifest. Existing signatures and authoritative records are not rewritten.
 
 ### Report studio
 
-Open **Exports → Report settings**. Choose one of three independent visual designs:
+Open **Exports → Configure and preview**. Work through **Data → Contents → Preview**:
+
+1. Use the whole workspace or choose chats, authors, inclusive UTC observation
+   dates and event types. Load the catalog to search chats and authors, or enter
+   their Telegram IDs. Author filters match recorded sender IDs; a deletion
+   notice without a sender does not match an author filter.
+2. Choose charts, participant labels, the transcript and your written findings.
+3. Build the preview. It shows actual counts, activity, participants, sample
+   records, saved changes and missing message-number ranges. Changing a choice
+   marks the preview out of date. Save before downloading HTML, signed PDF,
+   signed JSON or the evidence ZIP.
+
+The data preview counts the complete stable journal prefix, not an initial sample.
+Only displayed sample rows and long lists are bounded; their omitted counts are
+shown. A later export takes a fresh stable snapshot, so ongoing collection may
+increase the figures. Scope, counts and source identity are included in the
+signed report. Opening or previewing the form does not save it.
+
+**This is a report selection, not a minimized handover.** Charts and the transcript
+use the selected records. Integrity, custody and coverage describe the full source
+journal. The evidence ZIP still contains its original records and attachments.
+Use [a minimized handover](EVIDENCE.md) when a recipient must receive only
+the permitted data.
+
+### Read edits, deletions and missing IDs
+
+An edit shows the saved **Before** and **After** text and highlights the changed
+words. A deletion shows the last version saved before the notice. If no earlier
+content was captured, the report says so. When you select only edits or deletions,
+the preceding versions remain available as explicitly labelled context outside
+the filters. Unrelated messages are not added to these histories.
+
+**Unobserved message IDs** are gaps between known numbers in the chosen chats and
+date-derived ID span. Every known source record is checked before declaring a
+number unobserved: filtering out another author, an event type or a date cannot
+create a false gap. Neighboring saved messages are labelled as context. A missing
+number does not establish that a message existed or was deleted; deletion notices
+and unsuccessful rechecks remain separate event types.
+
+### Choose a layout
+
+Open **Exports → Build report**. Choose one of three independent visual designs:
 **Case dossier**, **Intelligence brief** or **Editorial review**. Then choose the
 contents: **Case dossier** (detailed), **Briefing** (an overview), **Activity review**
 (charts without the transcript), or **Custom report**. A content preset keeps your
@@ -32,8 +73,9 @@ The signature preserves these statements; it does not mean an independent expert
 has reviewed them. Private examination notes and full-journal charts are excluded
 from minimized journal handovers.
 
-The preview updates from the unsaved draft using production cover, examination and
-chart components, limited to the first 50,000 journal records. It is explicitly
+The design preview updates from the unsaved draft using production cover, examination and
+chart components, limited to matches within the first 50,000 source records. The data preview below
+calculates the complete selection. It is explicitly
 unsigned and does not persist edits. Cover and Charts buttons switch its section.
 This is not a complete PDF preview. **Save report settings** applies the choices to
 future exports; existing signed files are immutable. PDF uses the chosen palette,
@@ -43,6 +85,9 @@ Trust assessment, coverage limitations and verification instructions stay presen
 Hiding charts or the readable transcript does not remove authoritative source rows
 from the ZIP. Disabled chart series are omitted from the analytical JSON; use a
 minimized export to restrict disclosure of source records.
+
+Data-selection filters apply to journal reports; account and sharing exports retain
+their own acquisition and disclosure scope.
 
 Shared design/chart preferences are frozen into new chat/account exports and account
 sharing previews. Account/sharing language and privacy settings remain independent;

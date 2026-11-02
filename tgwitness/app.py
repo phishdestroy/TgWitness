@@ -2414,7 +2414,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def report_preview_css():
         return Response(report.CSS, media_type="text/css")
 
-    @app.post("/api/report-preview", dependencies=[Depends(authenticate)])
+    @app.post("/api/report-design-preview", dependencies=[Depends(authenticate)])
     async def report_preview(request: Request, body: report.ReportOptions):
         from .report_studio import preview
         options = body.model_dump()
@@ -2422,6 +2422,28 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             options["language"] = panel_language(request)
         async with export_lock:
             return await complete_in_thread(preview, app.state.store, options)
+
+    @app.post("/api/report-preview", dependencies=[Depends(authenticate)])
+    async def preview_report(body: report.ReportOptions):
+        """A draft query, never a settings write or an integrity assertion."""
+        def preview():
+            with app.state.store.snapshot() as snapshot:
+                result = report.report_selection.analyze(snapshot, body.selection,
+                    scratch_root=app.state.store.root / "temporary-exports")
+                keys = result.pop("changed_keys")
+                total = result.pop("changed_total")
+                messages = report.report_history.preview(snapshot.events(), keys,
+                    predicate=report.report_selection.compile_selection(body.selection)) if keys else []
+                result["changes"] = {"messages": messages, "total": total, "listed": len(messages),
+                                     "truncated": total > len(messages)}
+            result["analytics"] = report.report_analytics.selected(result["analytics"], body.model_dump())
+            result["unsigned"] = True
+            return result
+
+        # One full scan per workspace at a time, held until the worker finishes
+        # even when a browser abandons the request. No first-N approximation.
+        async with export_lock:
+            return await complete_in_thread(preview)
 
     def export_visible(request):
         state, allowed = app.state.collector.export_state, visible_chats(request)

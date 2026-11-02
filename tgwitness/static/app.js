@@ -99,7 +99,7 @@ const viewReady=Promise.all([
         if(name==='integrations'){window.TgWitnessIntegrations?.clear();window.TgWitnessWebhooks?.clear();}
         if(name==='sealed')window.TgWitnessCaptureStory?.pause?.();
         if(name==='parameters')parametersView?.leave();
-        if(name==='evidence')exportsView?.leave();
+        if(name==='evidence'){exportsView?.leave();reportSelection?.leave();}
         if(name==='system-log')systemLogView?.leave();
         if(name==='observations')window.TgWitnessJournal?.leave();
       },
@@ -408,6 +408,7 @@ const formsReady=import('./components/forms.js').then(({createFormControls})=>{
     forms:[['report-form',value=>reportDirty=value],['evidence-form',value=>state.evidenceDirty=value],
       ['replica-form',value=>state.replicaDirty=value],['alerts-form',value=>state.alertsDirty=value],
       ['github-form',value=>state.githubDirty=value]].map(([id,setDirty])=>({form:$(id),setDirty}))});
+  $("report-form").querySelector('.form-draft-bar').append($("report-open-downloads"));
 });
 function fmtTime(value,options){return panelTime?.fmtTime(value,options)??tr("No data");}
 function formatTime(value){return fmtTime(value);}
@@ -2419,6 +2420,14 @@ const REPORT_PRESETS={
   activity:{timeline:false,raw_records:false,media_previews:false,group_heartbeats:true,
     activity_chart:true,hourly_chart:true,participant_chart:true,chat_chart:true,composition_chart:true,show_changes:true,show_indicators:true}
 };
+let reportSelection;
+const reportSelectionReady=import('./views/report-selection.js?v=1').then(({createReportSelection})=>{
+  reportSelection=createReportSelection({root:$("report-form"),tr,json,
+    getOwner:()=>state.workspaceRevision+":"+state.profile,
+    ready:()=>reportReady&&reportOwner===reportKey()&&!reportSaving&&state.view==='evidence',
+    options:reportDraft,active:()=>state.view==='evidence'});
+  return reportSelection;
+});
 const reportTemplate=()=>$("report-form").querySelector('[name="report-template"]:checked')?.value||"custom";
 function setReportTemplate(value){
   const known=Object.hasOwn(REPORT_PRESETS,value)||value==="custom"?value:"custom";
@@ -2432,10 +2441,11 @@ function resetReportSettings(){
   clearTimeout(reportPreviewTimer);reportPreviewRequest++;reportPreviewBusy=false;
   reportPreviewSection="cover";
   $("report-preview-frame").removeAttribute("srcdoc");show("report-preview-frame",false);show("report-preview-empty",true);
-  $("report-preview-status").textContent=tr("Preview uses your draft. Save settings before exporting.");
+  $("report-design-preview-status").textContent=tr("Preview uses your draft. Save settings before exporting.");
   reportOwner=null;reportReady=false;reportDirty=false;reportRequest++;reportLoading=null;reportSaving=false;
   $("report-form").reset();$("report-fields").disabled=true;$("report-status").replaceChildren();
   $("report-outline").replaceChildren();$("report-form").querySelector(".report-examination").open=false;
+  reportSelection?.reset();
   $("report-form").querySelectorAll(".form-error").forEach(el=>el.remove());
 }
 function reportControls(){
@@ -2445,6 +2455,7 @@ function reportControls(){
 }
 async function loadReportSettings(){
   if(!state.status)return;
+  await reportSelectionReady;
   const owner=reportKey();
   if(reportOwner!==owner){resetReportSettings();reportOwner=owner;}
   if(reportSaving||reportReady&&reportDirty)return;
@@ -2468,6 +2479,7 @@ async function loadReportSettings(){
         &&$("report-participant-labels").value==="aliases"&&$("report-chart-limit").valueAsNumber===10;
       setReportTemplate(matches?template:"custom");
       $("report-form").querySelectorAll('[name="report-design"]').forEach(input=>input.checked=input.value===(options.design||"dossier"));
+      reportSelection.load(options.selection);
       reportReady=true;reportDirty=false;formControls?.loaded("report-form");$("report-status").textContent=window.TGW_ONLINE_DEMO?tr("Sample data"):"";
       if(!$("report-form").hidden&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();
     }catch(error){
@@ -2507,6 +2519,7 @@ function reportDraft(){
   for(const [id,key] of Object.entries(REPORT_FIELDS))body[key]=$(id).value;
   body.part_size=$("report-part-size").valueAsNumber;body.chart_limit=$("report-chart-limit").valueAsNumber;
   body.template=reportTemplate();
+  body.selection=reportSelection?.read();
   body.design=$("report-form").querySelector('[name="report-design"]:checked')?.value||"dossier";
   for(const [id,key] of Object.entries(REPORT_CHECKS))body[key]=$(id).checked;
   return body;
@@ -2529,47 +2542,57 @@ async function refreshReportPreview(){
   clearTimeout(reportPreviewTimer);
   if(!reportReady||reportOwner!==reportKey()||$("report-form").hidden||window.TGW_ONLINE_DEMO)return;
   if(!$("report-form").checkValidity()){
-    $("report-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
+    $("report-design-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
   }
-  const owner=reportOwner,body=reportDraft(),snapshot=JSON.stringify(body),request=++reportPreviewRequest;
+  const body=reportDraft();
+  if(!$("report-form").checkValidity()){
+    $("report-design-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
+  }
+  const owner=reportOwner,snapshot=JSON.stringify(body),request=++reportPreviewRequest;
   const current=()=>owner===reportOwner&&owner===reportKey()&&request===reportPreviewRequest;
-  reportPreviewBusy=true;reportControls();$("report-preview-status").textContent=tr("Preparing preview…");
+  reportPreviewBusy=true;reportControls();$("report-design-preview-status").textContent=tr("Preparing preview…");
   try{
-    const result=await json("report-preview",body,viewOptions('evidence'));
+    const result=await json("report-design-preview",body,viewOptions('evidence'));
     if(!current()||snapshot!==JSON.stringify(reportDraft())||state.view!=='evidence')return;
     $("report-preview-frame").srcdoc=result.html;show("report-preview-frame",true);show("report-preview-empty",false);
-    $("report-preview-status").textContent=tr(result.sampled?"Draft preview · first 50,000 records · not signed":"Draft preview · {n} records · not signed",{n:result.records.toLocaleString()});
+    $("report-design-preview-status").textContent=tr(result.sampled?"Draft preview · first 50,000 records · not signed":"Draft preview · {n} records · not signed",{n:result.records.toLocaleString()});
   }catch(error){
     if(!current()||error instanceof StaleView||error.name==='AbortError')return;
-    $("report-preview-status").textContent=tr("Preview failed. Update to retry.")+" "+error.message;
+    $("report-design-preview-status").textContent=tr("Preview failed. Update to retry.")+" "+error.message;
   }finally{if(current()){reportPreviewBusy=false;reportControls();}}
 }
 $("report-preview-refresh").addEventListener("click",refreshReportPreview);
 $("exports-tab-settings").addEventListener("click",()=>{if(reportReady&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();});
-$("report-form").addEventListener("input",event=>{if(reportReady){
+$("report-form").addEventListener("input",event=>{if(reportReady&&!event.target.matches("[data-report-search]")){
+  reportSelection?.changed(event);
   if(event.target.name==="report-template")applyReportPreset();
   else if(Object.hasOwn(REPORT_CHECKS,event.target.id)||["report-participant-labels","report-chart-limit"].includes(event.target.id))setReportTemplate("custom");
   syncReportParts();reportDirty=true;$("report-status").textContent=tr("Draft changed. Save before exporting.");
   if(event.target.id.endsWith('-chart')||event.target.id==='report-chart-limit')reportPreviewSection='analytics';
   if(event.target.name==='report-design')reportPreviewSection='cover';
-  $("report-preview-status").textContent=tr("Preview is updating to your draft…");scheduleReportPreview();
+  $("report-design-preview-status").textContent=tr("Preview is updating to your draft…");scheduleReportPreview();
 }});
+$("report-form").addEventListener("change",event=>{syncReportParts();reportSelection?.changed(event);});
 $("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   if(!reportReady||reportOwner!==reportKey()||reportSaving||window.TGW_ONLINE_DEMO)return;
-  if(!$("report-form").reportValidity())return;
   const owner=reportOwner,draft=formControls?.capture("report-form");
   const body=reportDraft();
+  if(!$("report-form").reportValidity())return;
   reportSaving=true;reportControls();
   try{
     await json("report-options",body);if(reportOwner!==owner||reportKey()!==owner)return;
     reportDirty=formControls?.changed(draft)||false;formControls?.accepted(draft,reportDirty);$("report-status").textContent=tr(reportDirty?"Saved. New edits have not been saved.":"Saved. The next export uses these settings.");toast(tr("Report settings saved."));
   }finally{if(reportOwner===owner&&reportKey()===owner){reportSaving=false;reportControls();}}
 });});
+$("report-open-downloads").addEventListener("click",async()=>{
+  if(reportDirty){$("report-status").textContent=tr("Save your changes before downloading a report with these choices.");$("report-status").scrollIntoView({block:"center"});return;}
+  (await exportsReady).select('downloads');$("exports-downloads").scrollIntoView({block:"start"});
+});
 panelQueries("[data-go-reports]").forEach(link=>link.addEventListener("click",event=>{
   event.preventDefault();
-  // Open Exports → Report settings and bring the report language field into view with focus.
+  // Open the builder at the requested section; no draft is saved by navigation.
   Promise.resolve(navigate("evidence")).then(()=>exportsReady).then(view=>{view.select("settings");
-    const field=$("report-language");field.scrollIntoView({block:"center"});field.focus({preventScroll:true});});
+    const field=$(link.dataset.goReports==='data'?"report-data-title":"report-language");field.scrollIntoView({block:"center"});field.focus({preventScroll:true});});
 }));
 $("export-encrypt-on").addEventListener("change",()=>{
   const on=$("export-encrypt-on").checked;show("export-password-field",on);if(on)$("export-password").focus();else $("export-password").value="";

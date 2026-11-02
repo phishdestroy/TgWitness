@@ -75,7 +75,7 @@ def build(output, language="en"):
                     "case_title": "Project Meridian\u00a0— Activity review", "case_id": "DEMO / MRD–2026.10",
                     "organization": "Fictional Research Office", "examiner": "Synthetic analyst",
                     "notes": "SYNTHETIC EXAMPLE · Every message, participant and observation is fictional. No Telegram connection or external timestamp service was used.",
-                    "chart_limit": 5}
+                    "chart_limit": 5, "selection": {"id_gaps": False}}
                 bundle = evidence.export_file(store, vault, "zip", options)
                 checked = verify_bundle(bundle, fingerprint(vault.public_key))
                 assert checked["key_pinned"] and checked["report_pdf"]

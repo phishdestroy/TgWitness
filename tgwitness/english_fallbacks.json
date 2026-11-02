@@ -519,6 +519,7 @@
   "Deployment and verification commands",
   "Description",
   "Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.",
+  "Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.",
   "Design ready · connection not available yet",
   "Destination",
   "Destination saved. Use Send test to check delivery.",
