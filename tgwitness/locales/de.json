@@ -5561,5 +5561,19 @@
 "Thu": "Do",
 "Fri": "Fr",
 "Sat": "Sa",
-"Sun": "So"
+"Sun": "So",
+"<strong>Case dossier</strong><small>Formal cover, measured typography, clear evidence structure.</small>": "<strong>Falldossier</strong><small>Formales Deckblatt, ruhige Typografie, klare Beweisstruktur.</small>",
+"<strong>Intelligence brief</strong><small>Bold numbers, clean charts and a contemporary blue palette.</small>": "<strong>Analysebericht</strong><small>Prägnante Kennzahlen, klare Diagramme und blaue Akzente.</small>",
+"<strong>Editorial review</strong><small>Paper-like layout, expressive headings and warm accents.</small>": "<strong>Redaktioneller Bericht</strong><small>Papierartige Gestaltung, ausdrucksstarke Titel und warme Akzente.</small>",
+"<strong>Activity over time</strong><small>Daily counts or equal date intervals.</small>": "<strong>Aktivität im Zeitverlauf</strong><small>Tageszahlen oder gleich große Datumsintervalle.</small>",
+"<strong>Weekly rhythm</strong><small>Day-of-week × hour heatmap.</small>": "<strong>Wochenrhythmus</strong><small>Heatmap: Wochentag × Stunde.</small>",
+"<strong>Activity by participant</strong><small>Sender counts with unknowns kept visible.</small>": "<strong>Aktivität nach Absender</strong><small>Anzahlen nach Absender; unbekannte Absender bleiben sichtbar.</small>",
+"<strong>Activity by chat</strong><small>Compare included conversations.</small>": "<strong>Aktivität nach Chat</strong><small>Enthaltene Unterhaltungen vergleichen.</small>",
+"<strong>Record composition</strong><small>Messages, edits, deletion notices and other records.</small>": "<strong>Zusammensetzung der Aufzeichnungen</strong><small>Nachrichten, Änderungen, Löschmeldungen und weitere Aufzeichnungen.</small>",
+"<strong>Preview</strong><span>Cover &amp; charts · current journal</span>": "<strong>Vorschau</strong><span>Deckblatt und Diagramme · aktuelles Journal</span>",
+"Draft report preview": "Entwurfsvorschau des Berichts",
+"Top 5": "Top 5",
+"Top 10": "Top 10",
+"Top 20": "Top 20",
+"Top 30": "Top 30"
 }

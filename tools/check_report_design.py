@@ -49,7 +49,8 @@ def main():
                     page.set_viewport_size({'width':width,'height':1000})
                     for theme in ('light','dark'):
                         page.evaluate('(theme)=>document.documentElement.dataset.theme=theme', theme)
-                        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1'), (lang,width,theme)
+                        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1'), (lang,width,theme,
+                            page.evaluate("Array.from(document.querySelectorAll('body *')).filter(e=>e.checkVisibility() && e.getBoundingClientRect().right>innerWidth+1).slice(0,20).map(e=>[e.tagName,e.className,e.getBoundingClientRect().right])"))
                 page.set_viewport_size({'width':1440,'height':1000})
                 page.evaluate("document.documentElement.dataset.theme='light';scrollTo(0,0)")
                 page.screenshot(path=str(output/(lang+'-cover.png')))

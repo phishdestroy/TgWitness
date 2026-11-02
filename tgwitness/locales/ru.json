@@ -5766,5 +5766,19 @@
 "Thu": "Чт",
 "Fri": "Пт",
 "Sat": "Сб",
-"Sun": "Вс"
+"Sun": "Вс",
+"<strong>Case dossier</strong><small>Formal cover, measured typography, clear evidence structure.</small>": "<strong>Досье дела</strong><small>Строгая обложка, спокойная типографика, ясная структура.</small>",
+"<strong>Intelligence brief</strong><small>Bold numbers, clean charts and a contemporary blue palette.</small>": "<strong>Аналитический обзор</strong><small>Крупные показатели, чёткие диаграммы, синие акценты.</small>",
+"<strong>Editorial review</strong><small>Paper-like layout, expressive headings and warm accents.</small>": "<strong>Редакционный обзор</strong><small>Светлая бумага, выразительные заголовки, тёплые акценты.</small>",
+"<strong>Activity over time</strong><small>Daily counts or equal date intervals.</small>": "<strong>Динамика активности</strong><small>По дням или равным интервалам дат.</small>",
+"<strong>Weekly rhythm</strong><small>Day-of-week × hour heatmap.</small>": "<strong>Активность по дням и часам</strong><small>Тепловая карта: день недели × час.</small>",
+"<strong>Activity by participant</strong><small>Sender counts with unknowns kept visible.</small>": "<strong>Активность участников</strong><small>Число записей по авторам; неизвестные показаны отдельно.</small>",
+"<strong>Activity by chat</strong><small>Compare included conversations.</small>": "<strong>Активность по чатам</strong><small>Сравнение включённых переписок.</small>",
+"<strong>Record composition</strong><small>Messages, edits, deletion notices and other records.</small>": "<strong>Состав записей</strong><small>Сообщения, правки, уведомления об удалении и другие записи.</small>",
+"<strong>Preview</strong><span>Cover &amp; charts · current journal</span>": "<strong>Предварительный просмотр</strong><span>Обложка и диаграммы · текущий журнал</span>",
+"Draft report preview": "Предпросмотр черновика отчёта",
+"Top 5": "Первые 5",
+"Top 10": "Первые 10",
+"Top 20": "Первые 20",
+"Top 30": "Первые 30"
 }

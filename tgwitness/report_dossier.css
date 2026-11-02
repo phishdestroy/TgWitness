@@ -3,6 +3,7 @@
 /* The same chart components are used by the studio preview and signed exports. */
 .report-analytics{--chart-accent:var(--accent,#24566e);margin:32px 0;scroll-margin-top:80px}
 .analytics-heading>div{min-width:0;flex:1}.analytics-heading h2{overflow-wrap:anywhere}
+.analytics-kpis>div{min-width:0}.analytics-kpis span{overflow-wrap:anywhere}
 .studio-preview .preview-watermark{position:sticky;top:0;z-index:2;padding:10px 14px;background:#efe6cc;color:#58461d;font:650 10px/1.4 system-ui,sans-serif;letter-spacing:.1em;border:1px solid #d9c9a2}.studio-preview main{padding:16px}.studio-preview .hero{grid-template-columns:1fr;padding:24px}.studio-preview .hero h1{font-size:36px}.studio-preview .hero .keycard{display:none}.studio-preview .hero-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
 .analytics-heading{display:flex;align-items:center;justify-content:space-between;gap:20px}.analytics-heading h2{font:650 clamp(25px,3vw,38px)/1.15 system-ui,sans-serif;letter-spacing:-.045em;margin:8px 0 16px}.analytics-heading .eyebrow{font:600 10px/1.6 system-ui,sans-serif;letter-spacing:.16em;color:var(--muted)}
 .analytics-basis{padding:7px 12px;border:1px solid var(--line);border-radius:30px;font:600 10px/1.3 system-ui,sans-serif;white-space:nowrap}.analytics-method,.analytics-caution{font-size:12px;line-height:1.65;color:var(--muted);max-width:90ch}.analytics-caution{border-inline-start:3px solid var(--chart-accent);padding:8px 16px;margin:24px 0}
