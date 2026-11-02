@@ -7,7 +7,9 @@ deployment record, the redacted installer and the panel token are kept under the
 command line keeps them under deployments/.
 """
 import json
+import os
 import re
+import string
 import secrets
 import threading
 from pathlib import Path
@@ -31,6 +33,7 @@ FILES = {"deployment.json": "application/json", "panel-token.txt": "text/plain; 
          "cloud-init.redacted.yaml": "text/plain; charset=utf-8"}
 HETZNER_TOKEN = re.compile(r"[A-Za-z0-9]{32,128}")
 CLOUDFLARE_TOKEN = re.compile(r"[A-Za-z0-9_-]{20,400}")
+DOMAIN_CHARACTERS = frozenset(string.ascii_lowercase + string.digits + "-")
 
 
 class WizardError(ValueError):
@@ -43,6 +46,14 @@ class WizardError(ValueError):
 
 def plain(value):
     return (value or "").strip()
+
+
+def domain(value):
+    """A DNS name such as example.org, checked label by label rather than with one pattern over the whole name."""
+    labels = value.split(".") if 4 <= len(value) <= 253 else []
+    return (len(labels) >= 2 and len(labels[-1]) >= 2 and set(labels[-1]) <= set(string.ascii_lowercase)
+            and all(0 < len(label) <= 63 and label[0] != "-" and label[-1] != "-"
+                    and set(label) <= DOMAIN_CHARACTERS for label in labels))
 
 
 class Tokens(BaseModel):
@@ -282,6 +293,14 @@ class Jobs:
             job = None if self.job is None else {**self.job, "lines": list(self.job["lines"])}
         return {"job": job, "deployments": self.deployments()}
 
+    def folder(self, *parts):
+        """A path inside the deployments directory, or None for a name that would lead out of it."""
+        root = os.path.normpath(os.path.abspath(self.directory))
+        path = os.path.normpath(os.path.join(root, *parts))
+        if not path.startswith(root + os.sep):
+            return None
+        return Path(path)
+
     def deployments(self):
         found = []
         for path in sorted(self.directory.glob("*/deployment.json")) if self.directory.is_dir() else ():
@@ -301,8 +320,8 @@ class Jobs:
 
     def address(self, name):
         """The quick tunnel's current address, as the server last posted it signed with this deployment's key."""
-        folder = self.directory / name
-        if not cloud.NAME.fullmatch(name) or not (folder / "deployment.json").is_file():
+        folder = self.folder(name) if cloud.NAME.fullmatch(name) else None
+        if folder is None or not (folder / "deployment.json").is_file():
             raise WizardError("This deployment does not exist.")
         record = json.loads((folder / "deployment.json").read_text(encoding="utf-8"))
         if not record.get("beacon") or not (folder / "address-key.txt").is_file():
@@ -321,8 +340,8 @@ class Jobs:
         return {"name": name, "address": found["host"], "posted": found["posted"]}
 
     def file(self, name, filename):
-        path = self.directory / name / filename
-        if not cloud.NAME.fullmatch(name) or filename not in FILES or not path.is_file():
+        path = self.folder(name, filename) if cloud.NAME.fullmatch(name) and filename in FILES else None
+        if path is None or not path.is_file():
             raise WizardError("This deployment file does not exist.")
         return path, FILES[filename]
 
@@ -357,13 +376,14 @@ class Jobs:
 
     def deploy(self, request):
         name = request.name or "tgw-" + secrets.token_hex(3)
-        if not cloud.NAME.fullmatch(name):
+        folder = self.folder(name) if cloud.NAME.fullmatch(name) else None
+        if folder is None:
             raise WizardError("Server name: lowercase letters, digits and hyphens, up to 50 characters.")
-        if (self.directory / name).exists():
+        if folder.exists():
             raise WizardError("A deployment with this name already exists. Choose another server name.")
         quick = not (request.zone or request.account)
         if not quick and (not request.cloudflare_token or not cloud.ACCOUNT.fullmatch(request.account)
-                          or not cloud.HOST.fullmatch(request.zone)):
+                          or not domain(request.zone)):
             raise WizardError("Check the tokens again and choose one of the listed domains.")
         gateway_account = request.account or request.gateway_account
         if request.gateway and not (request.cloudflare_token and cloud.ACCOUNT.fullmatch(gateway_account)):
@@ -380,7 +400,7 @@ class Jobs:
                                    gateway_dns=request.gateway, gateway_location=None,
                                    panel_host=None if quick else name + "." + request.zone, quick_tunnel=quick,
                                    witness_host=None, debug_ssh_key=None, debug_ssh_from=None,
-                                   out=self.directory / name, wait=30)
+                                   out=folder, wait=30)
             if not quick:
                 progress("tunnel", "Cloudflare: creating the tunnel and the address " + args.panel_host)
             record, out = cloud.deploy(args, hetzner, cf, self.fetch, resolve=lambda repository, ref: chosen["commit"],
@@ -396,8 +416,8 @@ class Jobs:
         return self.start("deploy", name, work)
 
     def destroy(self, request):
-        path = self.directory / request.name / "deployment.json"
-        if not cloud.NAME.fullmatch(request.name) or not path.is_file():
+        path = self.folder(request.name, "deployment.json") if cloud.NAME.fullmatch(request.name) else None
+        if path is None or not path.is_file():
             raise WizardError("This deployment does not exist.")
         if request.confirm.strip() != request.name:
             raise WizardError("Type the server name to confirm the deletion.")

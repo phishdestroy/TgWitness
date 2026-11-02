@@ -255,6 +255,27 @@ def check_selection():
     print("ok  location, server type and error messages")
 
 
+def check_boundaries(directory):
+    jobs = cloud_wizard.Jobs(directory / "boundaries")
+    inside = jobs.folder("case-1", "deployment.json")
+    assert (inside.name, inside.parent.name, inside.parent.parent.name) == ("deployment.json", "case-1", "deployments")
+    for parts in (("..",), ("..", "panel-token.txt"), ("../panel", "panel-token.txt"), ("/etc", "passwd")):
+        assert jobs.folder(*parts) is None, parts
+    for name, filename in (("..", "panel-token.txt"), ("case-1", "signing.enc"), ("Case-1", "deployment.json"),
+                           ("case-1", "../deployment.json")):
+        try:
+            jobs.file(name, filename)
+        except cloud_wizard.WizardError:
+            continue
+        raise AssertionError((name, filename))
+    for good in ("example.org", "a-b.example.co.uk", "xn--80ak6aa92e.com"):
+        assert cloud_wizard.domain(good), good
+    for bad in ("example", "-a.org", "a-.org", "a..org", "Example.org", "a.o", "a.org1", "a_b.org", "a." * 130 + "org",
+                "a" * 64 + ".org", "a" * 5000):
+        assert not cloud_wizard.domain(bad), bad
+    print("ok  boundaries: deployment paths stay in their directory; domains checked label by label")
+
+
 def deploy_args(directory, name="case-1"):
     return argparse.Namespace(provider="hetzner", name=name, server_type="cpx22", location="nbg1", image=None,
                               ref=COMMIT, repository=cloud.DEFAULT_REPOSITORY, zone="example.org",
@@ -583,6 +604,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix="cloud-wizard-") as folder:
         directory = Path(folder)
         check_selection()
+        check_boundaries(directory)
         check_command_line(directory)
         check_panel(directory)
         if args.browser:
