@@ -427,7 +427,9 @@ def guide(root, print_text=False, write_only=False):
     if write_only:
         return
     if print_text or os.environ.get("SSH_CONNECTION"):
-        print((root / "START-HERE.txt").read_text(encoding="utf-8"))
+        # Redirected Windows stdout can use a legacy code page without arrows.
+        # Keep navigation readable there; the offline files retain their layout.
+        print((root / "START-HERE.txt").read_text(encoding="utf-8").replace(" → ", " > "))
     else:
         print("Operator guide: " + str(path))
         if sys.stdout.isatty():
