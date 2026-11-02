@@ -112,6 +112,12 @@
   that timestamps, notifications, off-site copies and proxy-list updates are blocked,
   with buttons to set a proxy or turn those requests off. Without a chosen goal, the
   setup card says what the configuration already amounts to.
+- Access can publish a separate public-channel showcase: captured text, saved
+  edits/deletions and signed collection snapshots. Author fields are redacted;
+  attachments and ordinary panel APIs stay closed. Links expire and can be revoked.
+  The original journal is unchanged. Includes an offline snapshot/continuity
+  verifier and synthetic API/browser regressions. See [Showcase](LIVE-SHOWCASE.md).
+
 - Panel fixes. The journal no longer stops at a skipped-attachment record
   ("mediaTypes is not defined"), so its record count and Newer/Older paging stay
   correct. Confirmations and name prompts are panel dialogs instead of
