@@ -24,10 +24,13 @@ cp /lib/apk/db/installed "$out/$profile-$arch.installed"
 cp "$root/$profile.packages" "$out/$profile-$arch.packages"
 awk '/^P:/ {name=substr($0,3)} /^V:/ {print name "=" substr($0,3)}' \
     /lib/apk/db/installed | sort > "$out/$profile-$arch.versions"
-mkdir "$cache/apks"
-# Explicit --no-cache loads the authenticated index for this command too.
-# Every installed version is a constraint, including the complete base closure.
-apk fetch --no-cache --recursive --output "$cache/apks" $(cat "$out/$profile-$arch.versions")
+mkdir -p "$cache/apks" "$cache/root/etc/apk/keys"
+cp -L /etc/apk/keys/* "$cache/root/etc/apk/keys/"
+cp /etc/apk/repositories "$cache/root/etc/apk/repositories"
+cp "$out/$profile-$arch.versions" "$cache/root/etc/apk/world"
+# apk 2.x fetch arguments are package names, not version constraints. Its
+# --world mode reads exact constraints from this isolated package database.
+apk fetch --root "$cache/root" --arch "$arch" --no-cache --world --output "$cache/apks"
 for package in "$cache"/apks/*.apk; do apk verify "$package"; done
 (
     cd "$cache/apks"
