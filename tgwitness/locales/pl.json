@@ -6054,5 +6054,11 @@
 "Group exported": "Wyeksportowana grupa",
 "This group has no accounts to export.": "Ta grupa nie zawiera żadnych kont do wyeksportowania.",
 "Every account of the group must be available to export it.": "Aby wyeksportować grupę, wszystkie konta w niej zawarte muszą być dostępne.",
-"Prepare export": "Przygotuj eksport"
+"Prepare export": "Przygotuj eksport",
+"All accounts and groups": "Wszystkie konta i grupy",
+"Apply a goal": "Zastosuj cel",
+"Export group": "Eksportuj grupę",
+"Fix": "Popraw",
+"Share this value": "Udostępnij tę wartość",
+"Share this value instead": "Udostępnij tę wartość zamiast tego"
 }

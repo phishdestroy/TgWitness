@@ -5982,5 +5982,11 @@
 "Group exported": "گروپ برآمد شد",
 "This group has no accounts to export.": "اس گروپ کے پاس برآمد کرنے کے لیے کوئی اکاؤنٹس نہیں ہیں۔",
 "Every account of the group must be available to export it.": "گروپ کے ہر اکاؤنٹ کو برآمد کرنے کے لیے دستیاب ہونا چاہیے۔",
-"Prepare export": "ایکسپورٹ تیار کریں"
+"Prepare export": "ایکسپورٹ تیار کریں",
+"All accounts and groups": "تمام اکاؤنٹس اور گروپس",
+"Apply a goal": "ایک ہدف لاگو کریں",
+"Export group": "گروپ کی برآمد",
+"Fix": "ٹھیک کریں",
+"Share this value": "اس قدر کو شیئر کریں",
+"Share this value instead": "اس قدر کو شیئر کریں"
 }

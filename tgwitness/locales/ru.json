@@ -6360,5 +6360,11 @@
 "Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "Подписанный экспорт каждого аккаунта в одном ZIP-файле с манифестом, подписанным главным рабочим пространством.",
 "Group exported": "Экспортированная группа",
 "This group has no accounts to export.": "В этой группе нет аккаунтов для экспорта.",
-"Every account of the group must be available to export it.": "Для экспорта группы необходимо, чтобы все аккаунты, входящие в неё, были доступны."
+"Every account of the group must be available to export it.": "Для экспорта группы необходимо, чтобы все аккаунты, входящие в неё, были доступны.",
+"All accounts and groups": "Все аккаунты и группы",
+"Apply a goal": "Применить цель",
+"Export group": "Экспорт группы",
+"Fix": "Исправить",
+"Share this value": "Поделиться этим значением",
+"Share this value instead": "Вместо этого поделитесь этим значением"
 }

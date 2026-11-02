@@ -5982,5 +5982,11 @@
 "Group exported": "समूह निर्यातित",
 "This group has no accounts to export.": "इस समूह में निर्यात करने के लिए कोई खाते नहीं हैं।",
 "Every account of the group must be available to export it.": "समूह के प्रत्येक खाते को निर्यात करने के लिए उपलब्ध होना चाहिए।",
-"Prepare export": "निर्यात तैयार करें"
+"Prepare export": "निर्यात तैयार करें",
+"All accounts and groups": "सभी खाते और समूह",
+"Apply a goal": "एक लक्ष्य लागू करें",
+"Export group": "समूह निर्यात",
+"Fix": "ठीक करें",
+"Share this value": "इस मान को साझा करें",
+"Share this value instead": "इसके बजाय इस मान को साझा करें"
 }

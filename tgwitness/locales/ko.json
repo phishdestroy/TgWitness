@@ -5946,5 +5946,11 @@
 "Group exported": "그룹 내보내기",
 "This group has no accounts to export.": "이 그룹에는 내보낼 계정이 없습니다.",
 "Every account of the group must be available to export it.": "그룹을 내보내려면 그룹에 속한 모든 계정이 사용 가능해야 합니다.",
-"Prepare export": "내보내기 준비"
+"Prepare export": "내보내기 준비",
+"All accounts and groups": "모든 계정 및 그룹",
+"Apply a goal": "목표 적용",
+"Export group": "그룹 내보내기",
+"Fix": "수정",
+"Share this value": "이 값 공유하기",
+"Share this value instead": "대신 이 값을 공유하세요"
 }

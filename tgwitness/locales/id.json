@@ -5946,5 +5946,11 @@
 "Group exported": "Grup yang diekspor",
 "This group has no accounts to export.": "Grup ini tidak memiliki akun yang dapat diekspor.",
 "Every account of the group must be available to export it.": "Setiap akun dalam grup harus tersedia agar grup tersebut dapat diekspor.",
-"Prepare export": "Siapkan ekspor"
+"Prepare export": "Siapkan ekspor",
+"All accounts and groups": "Semua akun dan grup",
+"Apply a goal": "Terapkan tujuan",
+"Export group": "Ekspor grup",
+"Fix": "Perbaiki",
+"Share this value": "Bagikan nilai ini",
+"Share this value instead": "Bagikan nilai ini sebagai gantinya"
 }

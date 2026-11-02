@@ -5982,5 +5982,11 @@
 "Group exported": "গ্রুপ রপ্তানি করা হয়েছে",
 "This group has no accounts to export.": "এই গ্রুপে রপ্তানি করার জন্য কোনো অ্যাকাউন্ট নেই।",
 "Every account of the group must be available to export it.": "গ্রুপের প্রতিটি অ্যাকাউন্টই রপ্তানি করার জন্য উপলব্ধ থাকতে হবে।",
-"Prepare export": "রপ্তানি প্রস্তুত করুন"
+"Prepare export": "রপ্তানি প্রস্তুত করুন",
+"All accounts and groups": "সমস্ত অ্যাকাউন্ট এবং গ্রুপ",
+"Apply a goal": "একটি লক্ষ্য প্রয়োগ করুন",
+"Export group": "গ্রুপ রপ্তানি",
+"Fix": "ফিক্স",
+"Share this value": "এই মান শেয়ার করুন",
+"Share this value instead": "এই মানটি শেয়ার করুন"
 }

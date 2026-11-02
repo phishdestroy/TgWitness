@@ -5946,5 +5946,11 @@
 "Group exported": "Kumpulan dieksport",
 "This group has no accounts to export.": "Kumpulan ini tiada akaun untuk dieksport.",
 "Every account of the group must be available to export it.": "Setiap akaun dalam kumpulan mesti tersedia untuk dieksport.",
-"Prepare export": "Sediakan eksport"
+"Prepare export": "Sediakan eksport",
+"All accounts and groups": "Semua akaun dan kumpulan",
+"Apply a goal": "Terapkan matlamat",
+"Export group": "Eksport kumpulan",
+"Fix": "Betulkan",
+"Share this value": "Kongsi nilai ini",
+"Share this value instead": "Berkongsi nilai ini sebaliknya"
 }

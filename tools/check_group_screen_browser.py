@@ -17,7 +17,8 @@ CHANNEL = -1001234567890
 def group_keys():
     from i18n_keys import script_keys
     source = (ROOT / "tgwitness/static/views/group.js").read_text(encoding="utf-8")
-    return list(dict.fromkeys([*script_keys(source), *EXTRA]))
+    labels = re.findall(r"(?:button|pair)\('([^']+)'", source)
+    return list(dict.fromkeys([*script_keys(source), *labels, *EXTRA]))
 
 
 def check_translations():

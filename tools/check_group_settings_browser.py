@@ -39,6 +39,7 @@ def group_keys():
     keys = script_keys(source)
     keys += re.findall(r"\['[a-z_]+','([^']+)'\]", re.search(r"const OTHER=\[(.*?)\];", source, re.S).group(1))
     keys += re.findall(r"(?:button|message)\('([^']+)'", source)
+    keys += [k for pair in re.findall(r"button\(\w+\?'([^']+)':'([^']+)'", source) for k in pair]
     keys += list(group_settings.LABELS.values())
     return list(dict.fromkeys([*keys, *EXTRA]))
 

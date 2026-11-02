@@ -5982,5 +5982,11 @@
 "Group exported": "Grup dışa aktarıldı",
 "This group has no accounts to export.": "Bu grupta dışa aktarılacak hesap bulunmamaktadır.",
 "Every account of the group must be available to export it.": "Grubu dışa aktarabilmek için grubun tüm hesaplarının erişilebilir olması gerekir.",
-"Prepare export": "Dışa aktarmayı hazırla"
+"Prepare export": "Dışa aktarmayı hazırla",
+"All accounts and groups": "Tüm hesaplar ve gruplar",
+"Apply a goal": "Bir hedef uygula",
+"Export group": "Grubu dışa aktar",
+"Fix": "Düzeltme",
+"Share this value": "Bu değeri paylaş",
+"Share this value instead": "Bunun yerine bu değeri paylaşın"
 }

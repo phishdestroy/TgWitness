@@ -5946,5 +5946,11 @@
 "Group exported": "グループのエクスポート",
 "This group has no accounts to export.": "このグループには、エクスポートするアカウントがありません。",
 "Every account of the group must be available to export it.": "グループをエクスポートするには、そのグループ内のすべてのアカウントが利用可能である必要があります。",
-"Prepare export": "エクスポートの準備"
+"Prepare export": "エクスポートの準備",
+"All accounts and groups": "すべてのアカウントとグループ",
+"Apply a goal": "目標を適用する",
+"Export group": "グループのエクスポート",
+"Fix": "修正",
+"Share this value": "この値を共有する",
+"Share this value instead": "代わりにこの値を共有する"
 }

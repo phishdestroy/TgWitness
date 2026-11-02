@@ -5946,5 +5946,11 @@
 "Group exported": "导出组",
 "This group has no accounts to export.": "该组中没有可导出的账户。",
 "Every account of the group must be available to export it.": "必须所有组中的账户均可用，才能导出该组。",
-"Prepare export": "准备导出"
+"Prepare export": "准备导出",
+"All accounts and groups": "所有账户和组",
+"Apply a goal": "应用目标",
+"Export group": "导出组",
+"Fix": "修正",
+"Share this value": "分享此值",
+"Share this value instead": "请分享此值"
 }

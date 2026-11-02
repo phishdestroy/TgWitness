@@ -5946,5 +5946,11 @@
 "Group exported": "已匯出的群組",
 "This group has no accounts to export.": "此群組中沒有可匯出的帳戶。",
 "Every account of the group must be available to export it.": "必須能存取該群組中的每個帳戶，才能將其匯出。",
-"Prepare export": "準備匯出"
+"Prepare export": "準備匯出",
+"All accounts and groups": "所有帳戶與群組",
+"Apply a goal": "套用目標",
+"Export group": "匯出群組",
+"Fix": "修正",
+"Share this value": "分享此值",
+"Share this value instead": "請改為分享此值"
 }

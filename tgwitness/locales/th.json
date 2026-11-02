@@ -5946,5 +5946,11 @@
 "Group exported": "กลุ่มที่ส่งออก",
 "This group has no accounts to export.": "กลุ่มนี้ไม่มีบัญชีใดที่จะส่งออก",
 "Every account of the group must be available to export it.": "ต้องสามารถเข้าถึงบัญชีทุกบัญชีในกลุ่มได้ เพื่อส่งออกข้อมูลกลุ่มนั้น",
-"Prepare export": "เตรียมการส่งออก"
+"Prepare export": "เตรียมการส่งออก",
+"All accounts and groups": "ทุกบัญชีและทุกกลุ่ม",
+"Apply a goal": "กำหนดเป้าหมาย",
+"Export group": "ส่งออกกลุ่ม",
+"Fix": "แก้ไข",
+"Share this value": "แชร์ค่านี้",
+"Share this value instead": "แชร์ค่านี้แทน"
 }

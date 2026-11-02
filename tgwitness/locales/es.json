@@ -5982,5 +5982,11 @@
 "Group exported": "Grupo exportado",
 "This group has no accounts to export.": "Este grupo no tiene cuentas que exportar.",
 "Every account of the group must be available to export it.": "Para poder exportar el grupo, todas las cuentas que lo componen deben estar disponibles.",
-"Prepare export": "Preparar la exportación"
+"Prepare export": "Preparar la exportación",
+"All accounts and groups": "Todas las cuentas y grupos",
+"Apply a goal": "Aplicar un objetivo",
+"Export group": "Exportar grupo",
+"Fix": "Corregir",
+"Share this value": "Compartir este valor",
+"Share this value instead": "Comparte este valor en su lugar"
 }

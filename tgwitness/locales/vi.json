@@ -5946,5 +5946,11 @@
 "Group exported": "Nhóm đã xuất",
 "This group has no accounts to export.": "Nhóm này không có tài khoản nào để xuất.",
 "Every account of the group must be available to export it.": "Tất cả các tài khoản trong nhóm phải có sẵn thì mới có thể xuất nhóm đó.",
-"Prepare export": "Chuẩn bị xuất"
+"Prepare export": "Chuẩn bị xuất",
+"All accounts and groups": "Tất cả các tài khoản và nhóm",
+"Apply a goal": "Áp dụng mục tiêu",
+"Export group": "Xuất nhóm",
+"Fix": "Sửa lỗi",
+"Share this value": "Chia sẻ giá trị này",
+"Share this value instead": "Hãy chia sẻ giá trị này thay thế"
 }

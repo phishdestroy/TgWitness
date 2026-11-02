@@ -5982,5 +5982,11 @@
 "Group exported": "Guruh eksport qilindi",
 "This group has no accounts to export.": "Ushbu guruhda eksport qilish uchun hech qanday hisob yo'q.",
 "Every account of the group must be available to export it.": "Guruhdagi har bir akkauntni eksport qilish mumkin bo'lishi kerak.",
-"Prepare export": "Eksportni tayyorlang"
+"Prepare export": "Eksportni tayyorlang",
+"All accounts and groups": "Barcha hisoblar va guruhlar",
+"Apply a goal": "Maqsadni qo'llang",
+"Export group": "Guruhni eksport qilish",
+"Fix": "Tuzatish",
+"Share this value": "Ushbu qiymatni ulashing",
+"Share this value instead": "Bu qiymatni o'rniga ulashing"
 }

@@ -6054,5 +6054,11 @@
 "Group exported": "Експортована група",
 "This group has no accounts to export.": "У цій групі немає облікових записів для експорту.",
 "Every account of the group must be available to export it.": "Щоб експортувати групу, усі облікові записи в ній мають бути доступними.",
-"Prepare export": "Підготувати експорт"
+"Prepare export": "Підготувати експорт",
+"All accounts and groups": "Усі облікові записи та групи",
+"Apply a goal": "Застосувати ціль",
+"Export group": "Експорт групи",
+"Fix": "Виправити",
+"Share this value": "Поділитися цим значенням",
+"Share this value instead": "Поділіться цим значенням замість цього"
 }

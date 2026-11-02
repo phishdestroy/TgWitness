@@ -5982,5 +5982,11 @@
 "Group exported": "گروه صادرشده",
 "This group has no accounts to export.": "این گروه هیچ حسابی برای خروجی‌گیری ندارد.",
 "Every account of the group must be available to export it.": "هر حساب از گروه باید برای صدور آن در دسترس باشد.",
-"Prepare export": "آماده‌سازی خروجی"
+"Prepare export": "آماده‌سازی خروجی",
+"All accounts and groups": "تمام حساب‌ها و گروه‌ها",
+"Apply a goal": "اعمال یک هدف",
+"Export group": "صادرات گروه",
+"Fix": "اصلاح",
+"Share this value": "این مقدار را به اشتراک بگذارید",
+"Share this value instead": "به جای آن این مقدار را به اشتراک بگذارید"
 }
