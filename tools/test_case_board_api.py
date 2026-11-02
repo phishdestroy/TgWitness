@@ -1,4 +1,3 @@
-"""HTTP-level authorization and export regressions for private team notes."""
 import asyncio
 import json
 from pathlib import Path
@@ -45,7 +44,6 @@ def test_http_permissions_and_export_isolation(tmp_path):
             feed = await client.get('/api/board', headers=scoped)
             assert len(feed.json()['cards']) == 1 and 'PRIVATE TEAM NOTE' not in feed.text
             assert 'HIDDEN SOURCE' not in (await client.get('/api/board/export', headers=scoped)).text
-            # Existing full-workspace exporters do not acquire board.read through their export right.
             response = await client.get('/api/export/zip', headers=exporter)
             assert response.status_code == 200, response.text[:200]
             path = tmp_path / 'no-board.zip'
@@ -73,7 +71,6 @@ def test_http_permissions_and_export_isolation(tmp_path):
             who = app.state.access.resolve(scoped['Authorization'].split()[1], '127.0.0.1')
             live, _ = notifications(store, 0, who, 'default')
             assert hidden['payload']['id'] not in str(live)
-            # Group membership can widen/narrow scope without changing the grant itself.
             group = {'current':'team'}
             app.state.access.group_of = lambda workspace: group['current']
             app.state.access.grant(saved.json()['access_id'])['groups'] = ['team']

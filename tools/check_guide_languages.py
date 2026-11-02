@@ -1,4 +1,3 @@
-"""Exercise both bundled guides in the application and under a Pages project path."""
 import json
 import os
 from pathlib import Path

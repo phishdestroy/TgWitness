@@ -53,7 +53,6 @@ def check_demo_downloads(browser, url, output, route_request, errors, failed):
         assert manifest["event_count"] == checked["events"]
         assert manifest["head_hash"] == checked["head_hash"]
         events = [json.loads(line) for line in bundle.read("events.jsonl").splitlines()]
-    # Decode JSON from its original UTF-8 bytes, including non-ASCII target titles.
     auxiliary = {}
     for endpoint in ("/api/checkpoint", "/api/run-receipt", "/api/anchor-request"):
         descriptor = answers[endpoint]
@@ -122,7 +121,6 @@ def check_demo_downloads(browser, url, output, route_request, errors, failed):
 
 
 def main():
-    """Run just the signed-download demo acceptance against an already built site."""
     import argparse
 
     if __package__:

@@ -1,4 +1,3 @@
-"""Plain-text editions of the public handbook. No application or data access."""
 import html
 import re
 from urllib.parse import urljoin, urlsplit
@@ -20,7 +19,6 @@ def nodes(node):
 
 
 def markdown(source, url):
-    """Keep the article's prose, commands, links and tables; omit site controls."""
     tree = _Tree(source)
     all_nodes = list(nodes(tree.root))
     code_blocks = []

@@ -1,4 +1,3 @@
-"""Navigation breakpoints, focus and Russian labels against a synthetic panel."""
 import json
 from pathlib import Path
 import sys
@@ -109,7 +108,6 @@ def main():
                 else:
                     expect(page.locator(".sidebar")).to_be_hidden()
                     expect(page.locator("#navigation-toggle")).to_be_visible()
-                    # Connection and interface controls remain available on a second row.
                     bar = page.locator(".topbar").bounding_box()
                     if bar["height"] > 112:
                         page.screenshot(path=str(output / f"topbar-{width}-failure.png"))
@@ -134,8 +132,6 @@ def main():
                     check_layout(page)
                     if width in (1440, 390):
                         page.screenshot(path=str(output / f"journal-{width}-{theme}.png"))
-            # Linux's wider fallback font exposed both a health-bar overflow
-            # and a live-status control clipped inside the journal card.
             page.set_viewport_size({"width": 320, "height": 844})
             page.evaluate("document.documentElement.style.setProperty('--font','\"DejaVu Sans\", sans-serif')")
             page.locator('.journal .live-toggle').evaluate("button=>button.textContent='Page updates: reconnecting'")

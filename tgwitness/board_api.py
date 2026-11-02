@@ -1,4 +1,3 @@
-"""Case Board routes. No collector, notification or external-service calls."""
 import csv
 import copy
 import io
@@ -124,7 +123,6 @@ def register(app, authenticate, workspace):
                             if payload.get("media_sha256"):
                                 media.append({"sha256": payload["media_sha256"], "mime_type": payload.get("mime_type"), "size": payload.get("size"), "name": payload.get("name")})
                         item["preview_media"] = media
-            # Only visible content contributes authors, counters and the live cursor.
             return {"cards": page, "total": len(cards), "next_offset": offset+len(page) if offset+len(page) < len(cards) else None,
                     "collections": sorted([item for item in result["items"] if item["kind"] == "board.collection" and not item["removed"]], key=lambda item: (item.get("order", 0), item["title"])),
                     "authors": list({item["access_id"]: {"id": item["access_id"], "label": item["access_label"]} for item in result["items"]}.values()),
