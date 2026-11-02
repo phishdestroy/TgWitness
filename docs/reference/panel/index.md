@@ -196,6 +196,8 @@ The layers: every record signed and chained; a signed run receipt; attachments s
 
 ## More tools
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **Ask the archive**: search saved observations, review the sources, then decide whether to send them to an AI model. See [archive analysis](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/) and [local OCR and transcription](https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/).
 - **Parameters**: limits and pace of collection, rechecks, downloads, profiles, notifications and exports. Search by name, show **Only changed** values and prepare defaults as a draft with **Restore defaults…**. **Save parameters** applies the values from their next use, and each change is a journal record.
 - **Access**: separate tokens for reviewers, analysts and operators, limited to chosen workspaces, chats and rights. See [access](https://phishdestroy.github.io/TgWitness/docs/reference/access/).

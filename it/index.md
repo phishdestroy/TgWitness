@@ -228,8 +228,6 @@ Per l’esecuzione del programma è necessario Python 3.11 o versioni successive
 
 [Sfogliare le versioni](https://github.com/phishdestroy/TgWitness/releases)
 
-Non dispone di Python su Windows? [Scarichi il pacchetto portatile](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), lo estragga e faccia doppio clic su `TgWitness.cmd`.
-
 FASE 02
 
 ### Scegliete come procedere.

@@ -6,6 +6,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/archi
 
 एक पाइथन प्रक्रिया फ़ास्टएपीआई पैनल और किसी भी संख्या में अलग-थलग वर्कस्पेस को होस्ट करती है, जिनमें से प्रत्येक में एक टेलीथॉन यूज़र-अकाउंट क्लाइंट होता है। SQLite एक केवल-जोड़ने वाला (append-only) हस्ताक्षरित इवेंट जर्नल और परिवर्तनीय परिचालन सेटिंग्स रखता है। एक एन्क्रिप्टेड वॉल्ट में API क्रेडेंशियल, स्ट्रिंगसेशन, और साइनिंग कुंजी होती है। फ्रंटएंड साधारण बंडल HTML/CSS/जावास्क्रिप्ट है: नोड बिल्ड, CDN, या रनटाइम फ्रंटएंड डाउनलोड की आवश्यकता नहीं है।
 
+Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.
+
 | मॉड्यूल | जिम्मेदारी |
 | --- | --- |
 | कलेक्टर.पाइ | अधिकृतकरण, संवाद चयन, अपडेट, स्नैपशॉट, मीडिया कतार, कनेक्शन निगरानी |

@@ -196,6 +196,8 @@ Lapisan-lapisan: setiap rekod ditandatangani dan diikat secara berantai; resit p
 
 ## Alat lain
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **Tanya arkib**: cari pemerhatian yang disimpan, semak sumber, kemudian tentukan sama ada hendak menghantarnya ke model AI. Lihat [analisis arkib](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/) dan [OCR serta transkripsi tempatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/media-analysis/).
 - **Parameter**: had dan kelajuan pengumpulan, semakan semula, muat turun, profil, pemberitahuan dan eksport. Cari mengikut nama, tunjukkan nilai **Hanya yang berubah** dan sediakan nilai lalai sebagai draf dengan **Pulihkan lalai…**. **Simpan parameter** menerapkan nilai daripada penggunaan seterusnya mereka, dan setiap perubahan adalah rekod jurnal.
 - **Akses**: token berasingan untuk penilai, penganalisis dan pengendali, terhad kepada ruang kerja, sembang dan hak yang dipilih. Lihat [akses](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/).

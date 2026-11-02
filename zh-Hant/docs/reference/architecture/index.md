@@ -6,6 +6,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 一個 Python 程序負責託管 FastAPI 控制面板以及任意數量的隔離工作區， 每個工作區皆配有 Telethon 使用者帳戶客戶端。 SQLite 儲存僅支援追加的簽名事件日誌及可變更的操作設定。 加密金庫中存放 API 憑證、StringSession 以及簽名金鑰。 前端採用純粹的打包 HTML/CSS/JavaScript 格式：無需 Node 建置、CDN 或 前端執行時下載。
 
+Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.
+
 | 模組 | 責任聲明 |
 | --- | --- |
 | collector.py | 授權、對話選取、更新、快照、媒體佇列、連線監控 |

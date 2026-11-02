@@ -228,8 +228,6 @@ Für den Start des Programms ist Python 3.11+ erforderlich. Der Windows-Launcher
 
 [Veröffentlichungen durchsuchen](https://github.com/phishdestroy/TgWitness/releases)
 
-Kein Python unter Windows? [Laden Sie das portable Paket herunter](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), entpacken Sie es und doppelklicken Sie auf „`TgWitness.cmd`“.
-
 SCHRITT 02
 
 ### Wählen Sie die Ausführungsart.

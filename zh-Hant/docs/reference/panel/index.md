@@ -196,6 +196,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 ## 更多工具
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **查詢存檔**：搜尋已儲存的觀察記錄、檢視來源，然後決定 是否將其傳送至 AI 模型。請參閱[存檔分析](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/)以及 [本地 OCR 與轉錄功能](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/)。
 - **參數**：資料收集的限制與頻率、重新檢查、下載、設定檔、 通知及匯出功能。可依名稱搜尋、顯示 **僅顯示已變更的** 的數值，並透過 **還原預設值…** 將預設值儲存為草稿。**儲存參數** 會從下次使用時起套用這些數值， 且每次變更都會產生一則日誌記錄。
 - **存取權限**：審查員、分析師和操作員各有獨立的存取憑證，僅限於指定的 工作區、聊天室及權限範圍。詳見[「存取權限」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)。

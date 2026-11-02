@@ -6,6 +6,8 @@ Komponen-komponen kolektor, panel, jurnal, pekerja, dan saksi, serta bagaimana d
 
 Satu proses Python menjalankan panel FastAPI dan sejumlah ruang kerja yang terisolasi, masing-masing dilengkapi dengan klien akun pengguna Telethon. SQLite menyimpan jurnal peristiwa yang ditandatangani dan hanya dapat ditambahkan, serta pengaturan operasional yang dapat diubah. Sebuah brankas terenkripsi menyimpan kredensial API, StringSession, dan kunci penandatanganan. Frontend berupa paket HTML/CSS/JavaScript biasa: tidak diperlukan proses kompilasi Node, CDN, atau pengunduhan frontend saat runtime.
 
+Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.
+
 | Modul | Tanggung Jawab |
 | --- | --- |
 | collector.py | Otorisasi, pemilihan dialog, pembaruan, tangkapan layar, antrian media, pemantauan koneksi |

@@ -228,8 +228,6 @@ cd TgWitness
 
 [リリースを閲覧する](https://github.com/phishdestroy/TgWitness/releases)
 
-WindowsにPythonがインストールされていない場合は、[ポータブルパッケージをダウンロードし](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip)、解凍して「`TgWitness.cmd`」をダブルクリックしてください。
-
 ステップ 02
 
 ### 実行方法をお選びください。

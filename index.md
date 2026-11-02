@@ -236,8 +236,6 @@ Source launch needs Python 3.11+. The Windows launcher offers installation if Py
 
 [Browse releases](https://github.com/phishdestroy/TgWitness/releases)
 
-No Python on Windows? [Download the portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), extract it and double-click `TgWitness.cmd`.
-
 STEP 02
 
 ### Choose how to run.

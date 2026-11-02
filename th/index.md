@@ -228,8 +228,6 @@ cd TgWitness
 
 [ดูเวอร์ชันที่ปล่อยออกมา](https://github.com/phishdestroy/TgWitness/releases)
 
-ไม่มี Python บน Windows? [ดาวน์โหลดแพ็กเกจแบบพกพา (portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip)) แตกไฟล์ออก แล้วคลิกสองครั้งที่ `TgWitness.cmd`
-
 ขั้นตอน 02
 
 ### เลือกวิธีดำเนินการ

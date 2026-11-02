@@ -6,6 +6,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/archi
 
 กระบวนการ Python หนึ่งกระบวนการจะโฮสต์แผงควบคุม FastAPI และพื้นที่ทำงานที่แยกกันจำนวนเท่าใดก็ได้ แต่ละพื้นที่ทำงานมีไคลเอนต์บัญชีผู้ใช้ Telethon SQLite เก็บรักษาบันทึกเหตุการณ์ที่ลงนามและสามารถเพิ่มข้อมูลได้เท่านั้น รวมถึงการตั้งค่าการทำงานที่สามารถปรับเปลี่ยนได้ Vault ที่เข้ารหัสเก็บรักษาข้อมูลรับรอง API, StringSession และกุญแจลงนาม ส่วนหน้า (frontend) เป็น HTML/CSS/JavaScript ที่รวมเป็นไฟล์เดียว: ไม่จำเป็นต้องสร้างด้วย Node, CDNs หรือดาวน์โหลดส่วนหน้า ในระหว่างการทำงาน
 
+Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.
+
 | โมดูล | ความรับผิดชอบ |
 | --- | --- |
 | collector.py | การอนุญาต, การเลือกบทสนทนา, การอัปเดต, ภาพถ่ายหน้าจอ, แถวรอสื่อ, การตรวจสอบการเชื่อมต่อ |

@@ -227,8 +227,6 @@ cd TgWitness
 
 [릴리스 보기](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows에 Python이 설치되어 있지 않으신가요? [휴대용 패키지를 다운로드하여](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip) 압축을 풀고, ‘`TgWitness.cmd`’ 파일을 더블클릭하세요.
-
 2단계
 
 ### 실행 방식을 선택하세요.

@@ -33,6 +33,23 @@
 <p class="verification-shortcut"><a href="../verification/">Những nội dung đã được kiểm thử →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Trang này chỉ có sẵn bằng tiếng Anh.</p><p class="eyebrow">Tham khảo / An ninh &amp; dự án</p><h1>Bản ghi thay đổi</h1><p class="guide-outcome">Mọi thay đổi theo từng phiên bản, bao gồm cả những thay đổi chưa được phát hành.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Liên kết đến phần này">#</a></h2>
+<ul>
+<li>
+<p>Integrate <strong>Extras → Independent capture</strong> into the English main panel: separate
+    browser/AyuGram connections, encrypted control tokens, pinned identity checks,
+    tab selection, start/pause, capture options, snapshots, checkpoints and verified
+    original ZIP downloads. Add optional Docker control-network wiring; keep recorders
+    independently runnable and all connections disabled by default.</p>
+</li>
+<li>
+<p>Add the optional, independent <code>tgwitness-capture</code> preview: selected-tab Chromium
+    PNG/MHTML, consistent AyuGram SQLite snapshots, separately enabled silent video,
+    Ed25519 event chains, signed ZIP/HTML reports and standalone verification.
+    Each recorder starts disabled and keeps its own key and storage. Optional Compose
+    profiles are separate from ordinary startup. A read-only, separately operated
+    witness can retain challenge-bound checkpoints and sign receipts.</p>
+</li>
+</ul>
 <h2 id="080-preview--2-november-2026">0.8.0 preview · 2 November 2026<a class="anchor" href="#080-preview--2-november-2026" aria-label="Liên kết đến phần này">#</a></h2>
 <ul>
 <li>Apply sharing-copy text and contact controls to interaction records, and include

@@ -196,6 +196,8 @@ Các lớp: mọi bản ghi đều được ký và liên kết; biên nhận ch
 
 ## Các công cụ khác
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **Tra cứu kho lưu trữ**: tìm kiếm các quan sát đã lưu, xem lại các nguồn, sau đó quyết định liệu có nên gửi chúng đến mô hình AI hay không. Xem [phân tích kho lưu trữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/analysis/) và [chức năng OCR và phiên âm cục bộ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/media-analysis/).
 - **Các tham số**: giới hạn và tốc độ thu thập, kiểm tra lại, tải xuống, hồ sơ, thông báo và xuất dữ liệu. Tìm kiếm theo tên, hiển thị các giá trị **Chỉ các thông số đã thay đổi** và chuẩn bị các giá trị mặc định dưới dạng bản nháp bằng **Khôi phục mặc định…**. **Lưu các tham số** áp dụng các giá trị từ lần sử dụng tiếp theo, và mỗi thay đổi đều được ghi lại dưới dạng bản ghi nhật ký.
 - **Quyền truy cập**: các mã thông báo riêng biệt dành cho người đánh giá, nhà phân tích và người vận hành, giới hạn trong các không gian làm việc, cuộc trò chuyện và quyền hạn đã chọn. Xem [phần quyền truy cập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/).

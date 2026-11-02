@@ -196,6 +196,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/panel
 
 ## כלים נוספים
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **שאל את הארכיון**: חפש תצפיות שנשמרו, בדוק את המקורות, ואז החלט האם לשלוח אותן למודל בינה מלאכותית. ראה [ניתוח ארכיון](https://phishdestroy.github.io/TgWitness/he/docs/reference/analysis/) ו [OCR ותמלול מקומיים](https://phishdestroy.github.io/TgWitness/he/docs/reference/media-analysis/).
 - **פרמטרים**: מגבלות וקצב האיסוף, בדיקות חוזרות, הורדות, פרופילים, התראות וייצוא. חיפוש לפי שם, הצגת ערכי **רק מה שהשתנה** והכנת הגדרות ברירת מחדל כטיוטה באמצעות **שחזור ברירות מחדל…**. **שמירת פרמטרים** מיישם את הערכים החל מהשימוש הבא, וכל שינוי נרשם ביומן.
 - **גישה**: אסימונים נפרדים למבקרים, אנליסטים ומפעילים, המוגבלים לסביבות עבודה, צ'אטים וזכויות שנבחרו. ראו [גישה](https://phishdestroy.github.io/TgWitness/he/docs/reference/access/).

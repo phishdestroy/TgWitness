@@ -228,8 +228,6 @@ Manba ishga tushirish uchun Python 3.11+ talab etiladi. Windows ishga tushiruvch
 
 [Chiqarilishlarni ko'rib chiqing](https://github.com/phishdestroy/TgWitness/releases)
 
-Windowsda Python yo'qmi? [Portativ paketni yuklab oling](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), arxivni oching va`TgWitness.cmd` fayliga ikki marta boshingiz.
-
 02-qadam
 
 ### Qanday ishlashini tanlang.

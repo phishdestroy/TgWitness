@@ -6,6 +6,8 @@ Các thành phần của bộ thu thập, bảng điều khiển, sổ nhật k�
 
 Một tiến trình Python sẽ lưu trữ bảng điều khiển FastAPI cùng bất kỳ số lượng không gian làm việc độc lập nào, mỗi không gian đều có một khách hàng tài khoản người dùng Telethon. SQLite lưu trữ một nhật ký sự kiện được ký điện tử chỉ ghi thêm và các cài đặt vận hành có thể thay đổi. Một kho lưu trữ được mã hóa chứa thông tin đăng nhập API, StringSession và khóa ký. Giao diện người dùng là các tệp HTML/CSS/JavaScript được đóng gói đơn giản: không cần quá trình biên dịch Node, CDN hay tải xuống giao diện người dùng tại thời điểm chạy.
 
+Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.
+
 | Mô-đun | Trách nhiệm |
 | --- | --- |
 | collector.py | Ủy quyền, lựa chọn hộp thoại, cập nhật, ảnh chụp nhanh, hàng đợi phương tiện, giám sát kết nối |

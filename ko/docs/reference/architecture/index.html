@@ -38,6 +38,19 @@ SQLite는 추가 전용 서명된 이벤트 저널과 변경 가능한 운영 �
 암호화된 볼트에는 API 자격 증명, StringSession 및 서명 키가 저장됩니다.
 프론트엔드는 단순한 번들형 HTML/CSS/JavaScript로 구성되어 있어, Node 빌드, CDN 또는 런타임
 프론트엔드 다운로드가 필요하지 않습니다.</p>
+<p lang="en" translate="no">Optional browser and AyuGram recorders run in <strong>separate processes or containers</strong>.
+The <code>tgwitness_capture</code> package owns their event format, keys, artifacts,
+checkpoint API, independent witness and standalone verifier. It is bundled in the main
+wheel and can also be installed alone from <code>addons/capture</code>, without importing
+the collector. The main panel's <code>capture_api.py</code> and <code>capture_connections.py</code>
+provide administrator-only, workspace-scoped controls under <code>/api/capture</code>;
+connection tokens live in the encrypted vault. No recorder or outbound request starts
+with the main process. Each explicit command verifies a fresh challenge against the
+pinned recorder key. Exports are verified before download and keep their original
+signature; they do not become Telegram message events. Collection sessions and proxy
+routes stay with each client. See the English <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md">Independent
+capture guide</a> for deployment and trust boundaries.</p>
+
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>

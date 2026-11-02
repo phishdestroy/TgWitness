@@ -196,6 +196,8 @@ As camadas: cada registro assinado e encadeado; um recibo de execução assinado
 
 ## Mais ferramentas
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **Consulte o arquivo**: pesquise observações salvas, analise as fontes e, em seguida, decida se deseja enviá-las a um modelo de IA. Veja [a análise do arquivo](https://phishdestroy.github.io/TgWitness/pt/docs/reference/analysis/) e [o OCR e a transcrição locais](https://phishdestroy.github.io/TgWitness/pt/docs/reference/media-analysis/).
 - **Parâmetros**: limites e ritmo de coleta, novas verificações, downloads, perfis, notificações e exportações. Pesquise por nome, exiba os valores de **Apenas alterados** e prepare as configurações padrão como um rascunho com **Restaurar padrões…**. **Salvar parâmetros** aplica os valores a partir do próximo uso, e cada alteração é um registro no diário.
 - **Acesso**: tokens separados para revisores, analistas e operadores, limitados a determinados espaços de trabalho, chats e permissões. Consulte [a seção de acesso](https://phishdestroy.github.io/TgWitness/pt/docs/reference/access/).

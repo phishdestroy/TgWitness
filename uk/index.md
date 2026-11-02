@@ -228,8 +228,6 @@ cd TgWitness
 
 [Переглянути випуски](https://github.com/phishdestroy/TgWitness/releases)
 
-Немає Python на Windows? [Завантажте портативний пакет](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), розпакуйте його та двічі клацніть на файл «`TgWitness.cmd`».
-
 КРОК 02
 
 ### Оберіть спосіб запуску.

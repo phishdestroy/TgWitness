@@ -228,8 +228,6 @@ cd TgWitness
 
 [עיין במהדורות](https://github.com/phishdestroy/TgWitness/releases)
 
-אין לכם Python ב-Windows? [הורידו את החבילה הניידת](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), חלצו אותה ולחצו פעמיים על הקובץ `TgWitness.cmd`.
-
 שלב 02
 
 ### בחרו כיצד להפעיל.

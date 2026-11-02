@@ -228,8 +228,6 @@ A execução do código-fonte requer o Python 3.11 ou superior. O instalador do 
 
 [Navegue pelas versões](https://github.com/phishdestroy/TgWitness/releases)
 
-Não possui o Python no Windows? [Baixe o pacote portátil](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), extraia-o e clique duas vezes em “`TgWitness.cmd`”.
-
 PASSO 02
 
 ### Escolha como executar.
