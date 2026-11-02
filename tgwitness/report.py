@@ -22,9 +22,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import ConfigDict, Field, field_validator
 
-from . import __version__, case_assessment, i18n, message_details
+from . import __version__, case_assessment, i18n, message_details, report_analytics
 from . import indicators as ioc
 from . import viewer
 from .store import canonical, utcnow
@@ -40,7 +40,7 @@ HIDDEN_CODEPOINTS = frozenset((*range(0x00, 0x09), *range(0x0B, 0x20), *range(0x
                              0x200E, 0x200F, 0x2028, 0x2029, *range(0x202A, 0x202F), *range(0x2066, 0x206A)))
 
 
-class ReportOptions(BaseModel):
+class ReportOptions(report_analytics.Presentation):
     """How reports look and what they say about the case. Saved per workspace and recorded,
     signed, in every export manifest and report seal."""
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
@@ -54,6 +54,8 @@ class ReportOptions(BaseModel):
     timeline: bool = True
     raw_records: bool = True
     media_previews: bool = True
+    show_changes: bool = True
+    show_indicators: bool = True
     # Maximum items per signed viewer data file and maximum transcript size included in a PDF.
     part_size: int = Field(default=5000, ge=500, le=100000)
     # Runs of collector heartbeats are listed as one line; each one stays in the journal file.
@@ -129,7 +131,7 @@ def text_keys():
     keys = [node.args[0].value for source in sources for node in ast.walk(ast.parse(source.read_text(encoding="utf-8")))
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + list(SCRIPT_WORDS) + LIMITS + EXPORT_LIMITS + list(MEDIA_NAMES.values()) + ["Media"]
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_analytics.text_keys() + list(SCRIPT_WORDS) + LIMITS + EXPORT_LIMITS + list(MEDIA_NAMES.values()) + ["Media"]
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
@@ -243,6 +245,7 @@ class Digest:
         self.actions, self.previews, self.action_count = {}, {}, 0
         self.own_messages, self.own_total, self.own_scope = [], 0, set()
         self.trust_signals = {"drand": 0, "starts": 0, "tdx": 0}
+        self.analytics = report_analytics.Analytics()
 
     @staticmethod
     def seen(table, value, at):
@@ -252,6 +255,7 @@ class Digest:
         entry["last"], entry["count"] = at, entry["count"] + 1
 
     def add(self, event):
+        self.analytics.journal(event)
         kind, payload, chat = event["kind"], event["payload"], event["chat_id"]
         if kind == "beacon.drand":
             self.trust_signals["drand"] += 1
@@ -332,7 +336,7 @@ class Digest:
         return {"categories": self.categories, "chats": self.chats, "titles": self.titles, "media": self.media,
                 "senders": len(self.senders), "first": self.first, "last": self.last, "first_hash": self.first_hash,
                 "clients": list(self.clients.values()), "routes": list(self.routes.values()), "clocks": self.clocks,
-                "indicators": self.indicators.result(), "trust_signals": dict(self.trust_signals),
+                "indicators": self.indicators.result(), "trust_signals": dict(self.trust_signals), "analytics": self.analytics.result(),
                 "direct_fallbacks": self.direct, "changed": self.changed,
                 "actions": list(self.actions.values()), "action_count": self.action_count,
                 "own_messages": self.own_messages, "own_total": self.own_total, "own_scope": sorted(self.own_scope)}
@@ -484,7 +488,8 @@ def custody(context):
                    "host": {"os": platform.system() + " " + platform.release(), "python": platform.python_version()},
                    "time_standard": "UTC, ISO 8601", "report_language": options.get("language"),
                    "report_options": {k: options.get(k) for k in ("theme", "timeline", "raw_records", "media_previews",
-                                                                   "part_size", "group_heartbeats")}},
+                                                                   "part_size", "group_heartbeats", "show_changes", "show_indicators",
+                                                                   *report_analytics.Presentation.model_fields)}},
         "integrity": {"hash": "SHA-256 (FIPS 180-4)", "signature": "Ed25519 (RFC 8032)",
                       "public_key": context["public_key"], "fingerprint": fingerprint(context["public_key"]),
                       "manifest": "manifest.json lists the SHA-256 of every file; manifest.sig signs it",
@@ -974,13 +979,13 @@ SCRIPT_WORDS = ("Copy", "Copied", "Signature valid · this file not yet checked"
     json.loads('"' + text + '"') for text in re.findall(r'\bsayf?\("((?:[^"\\]|\\.)*)"', CONSOLE_JS)))
 
 
-def head(say, *, title, description, meta, linked, theme):
+def head(say, *, title, description, meta, linked, theme, template="dossier"):
     """Document start: metadata for people, search tools and case-management systems."""
     tags = [("generator", "TgWitness " + __version__), ("description", description),
             ("robots", "noindex, nofollow, noarchive"), ("referrer", "no-referrer"), ("color-scheme", "light dark")]
     tags += meta
     return ('<!doctype html><html lang="' + e(say.language) + '" dir="' + say.direction + '" data-theme="' + e(theme)
-            + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+            + '" data-template="' + e(template) + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             '<meta http-equiv="Content-Security-Policy" content="' + e(CSP) + '"><title>' + e(title) + "</title>"
             '<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">'
             + "".join('<meta name="' + e(n) + '" content="' + e(v) + '">' for n, v in tags if v not in (None, ""))
@@ -1672,7 +1677,7 @@ def records_part_chunks(events, context, part):
         linked = {"@context": "https://schema.org", "@type": "Report", "name": title, "description": description,
                   "inLanguage": say.language, "isPartOf": {"@type": "Report", "identifier": "urn:uuid:" + report_id}}
         yield (head(say, title=title + " · TgWitness", description=description, meta=meta, linked=linked,
-                    theme=options.get("theme", "auto"))
+                    theme=options.get("theme", "auto"), template=options.get("template", "dossier"))
                + bar(say, say("Records") + " · " + label, [("records", say("Records")), ("seal", say("Seal"))])
                ).encode("utf-8")
         facts = [(say("Part"), e(label)), (say("Records"), "#" + num(part["from"]) + " – #" + num(part["to"])),
@@ -1757,6 +1762,7 @@ def report_data(events_again, coverage, context):
                     "messages_sent": digest.get("own_total", 0), "sent_listed": digest.get("own_messages") or []},
         "timestamps": anchors, "coverage": coverage, "custody": custody(context),
         "case_assessment": case_assessment.journal(context, coverage),
+        "analytics": digest.get("analytics"), "presentation": {key: options[key] for key in report_analytics.Presentation.model_fields},
         "indicators": digest.get("indicators") or {"items": [], "total": 0, "not_listed": 0},
         "files": context.get("files") or {},
         "parts": [{k: p[k] for k in ("index", "file", "from", "to", "count", "first_at", "last_at", "sha256") if k in p}
@@ -2170,14 +2176,16 @@ def evidence_chunks(events, coverage=None, context=None):
                                                       "value": context.get("events_sha256")}})
         changed, events_again = digest.get("changed") or set(), context.get("events_again")
         links = [("summary", say("Summary"))] + ([("minimisation", say("Minimisation"))] if handover else []) \
-            + ([("changes", say("Changes"))] if changed and events_again else []) \
+            + ([("changes", say("Changes"))] if changed and events_again and options.get("show_changes", True) else []) \
             + [("case-assessment", say(case_assessment.TITLE)), ("actions", say("Actions")), ("integrity", say("Integrity"))] \
             + ([] if handover else [("timestamps", say("Timestamps"))]) + [("custody", say("Custody")),
                                                                          ("verify", say("Verify"))]
         if options.get("timeline"):
             links.append(("records", say("Records")))
+        if report_analytics.selected(options):
+            links.insert(1, ("analytics", say("Activity & participants")))
         yield (head(say, title=title + " · TgWitness", description=description, meta=meta, linked=linked,
-                    theme=options.get("theme", "auto"))
+                    theme=options.get("theme", "auto"), template=options.get("template", "dossier"))
                + bar(say, label, links, "journal" if data_kind else None)).encode("utf-8")
         facts = [(say("Case ID"), e(options.get("case_id"))), (say("Examiner"), e(options.get("examiner"))),
                  (say("Organization"), e(options.get("organization"))), (say("Created"), when(created)),
@@ -2199,6 +2207,7 @@ def evidence_chunks(events, coverage=None, context=None):
         numbers = iter(range(1, 100))
         yield brief_section(say, *evidence_brief(say, digest, count, anchors, coverage, account_text,
                                                  handover)).encode("utf-8")
+        yield report_analytics.html_section(digest.get("analytics"), options, say).encode("utf-8")
         yield case_assessment.html(case_assessment.journal(context, coverage), say).encode("utf-8")
         yield case_section(say, next(numbers), options, [
             (say("Observing account"), e(account_text)),
@@ -2208,10 +2217,10 @@ def evidence_chunks(events, coverage=None, context=None):
              + e(producer.get("project")))]).encode("utf-8")
         if handover:
             yield minimisation_section(say, next(numbers), handover, count).encode("utf-8")
-        if changed and events_again:
+        if changed and events_again and options.get("show_changes", True):
             yield changes_section(say, next(numbers), message_histories(events_again(), changed), len(changed),
                                   digest["titles"], bool(options.get("timeline"))).encode("utf-8")
-        if (digest.get("indicators") or {}).get("items"):
+        if options.get("show_indicators", True) and (digest.get("indicators") or {}).get("items"):
             yield indicators_section(say, next(numbers), digest["indicators"],
                                      ref_link(context.get("parts"), "records", "seq", "r")).encode("utf-8")
         yield actions_section(say, next(numbers), digest, digest["titles"], bool(options.get("timeline"))).encode("utf-8")
@@ -2520,7 +2529,7 @@ def chat_chunks(meta, records, context):
                                        "identifier": {"@type": "PropertyValue", "propertyID": "sha256",
                                                       "value": context.get("chat_json_sha256")}})
         yield (head(say, title=title + " · TgWitness", description=description, meta=tags, linked=linked,
-                    theme=options.get("theme", "auto"))
+                    theme=options.get("theme", "auto"), template=options.get("template", "dossier"))
                + bar(say, say("Chat export"), [("summary", say("Summary")), ("people", say("Participants")),
                                                ("messages", say("Messages")), ("integrity", say("Integrity")),
                                                ("verify", say("Verify"))], "chat")).encode("utf-8")
@@ -2544,6 +2553,7 @@ def chat_chunks(meta, records, context):
                                               ("id " + str(account["id"])) if account.get("id") else "") if x)
         numbers = iter(range(1, 100))
         yield brief_section(say, *chat_brief(say, meta, stats, ids, account_text)).encode("utf-8")
+        yield report_analytics.html_section(context.get("analytics"), options, say).encode("utf-8")
         yield case_assessment.html(case_assessment.snapshot(context, "chat", meta), say).encode("utf-8")
         yield case_section(say, next(numbers), options, [
             (say("Chat"), '<span class="chathead"><span class="ava ' + colour(chat.get("id")) + '">' + e(initials(chat_title))
@@ -2573,7 +2583,7 @@ def chat_chunks(meta, records, context):
             yield message_ids_section(say, next(numbers), ids).encode("utf-8")
         if context.get("admin_events") is not None:
             yield admin_log_section(say, next(numbers), meta, context["admin_events"]).encode("utf-8")
-        if (context.get("indicators") or {}).get("items"):
+        if options.get("show_indicators", True) and (context.get("indicators") or {}).get("items"):
             yield indicators_section(say, next(numbers), context["indicators"],
                                      ref_link(context.get("parts"), "messages", "message", "m")).encode("utf-8")
         if inline is not None:
@@ -2844,7 +2854,7 @@ def chat_part_chunks(meta, records, context, part):
         linked = {"@context": "https://schema.org", "@type": "Report", "name": title, "description": description,
                   "inLanguage": say.language, "isPartOf": {"@type": "Report", "identifier": "urn:uuid:" + report_id}}
         yield (head(say, title=title + " · TgWitness", description=description, meta=tags, linked=linked,
-                    theme=options.get("theme", "auto"))
+                    theme=options.get("theme", "auto"), template=options.get("template", "dossier"))
                + bar(say, say("Messages") + " · " + label, [("messages", say("Messages")), ("seal", say("Seal"))])
                ).encode("utf-8")
         facts = [(say("Chat"), e(chat_title)), (say("Part"), e(label)),

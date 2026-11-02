@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add Report studio with three document designs, live unsigned cover/chart preview,
+  selectable activity, weekday/hour, participant, chat and composition charts, and
+  journal history/indicator controls. Saved choices reach HTML, signed PDF/JSON and
+  new account/disclosure jobs. Analytics use only included/minimized records, retain
+  unknowns and bounded-grouping counts, and ship as manifest-protected `analytics.json`.
+  Existing signed exports and private disclosure boundaries remain unchanged.
 - Preserve workspace-specific deep links through first setup, keep the shared
   account form current in Settings, and expose file import when adding an account.
   Compact mobile connection controls keep the account identity visible.

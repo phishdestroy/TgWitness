@@ -183,6 +183,7 @@ def export_file(store, vault, fmt, options=None):
             # Titles recorded in the journal win; current source titles fill the rest.
             summary["titles"] = {**{t["chat_id"]: t["title"] for t in store.targets() if t.get("title")},
                                  **summary["titles"]}
+            report.report_analytics.chat_labels(summary["analytics"], summary["titles"])
             context = {"kind": "evidence", "options": options, "report_id": str(uuid.uuid4()), "created_at": utcnow(),
                        "producer": producer(), "limits": LIMITS, "public_key": vault.public_key,
                        "fingerprint": result["fingerprint"], "event_count": result["events"],
@@ -227,6 +228,7 @@ def export_file(store, vault, fmt, options=None):
                 for format, name in (("jsonl", "events.jsonl"), ("csv", "events.csv")):
                     write_member(name, chunks(format))
                 write_member("coverage.json", [json.dumps(coverage, ensure_ascii=False, indent=1).encode("utf-8")])
+                write_member("analytics.json", [canonical(summary["analytics"])])
                 write_member("verify.py", [Path(__file__).with_name("verify.py").read_bytes()])
                 write_indicators(write_member, summary.get("indicators"), context)
                 for event in snapshot.events():
@@ -326,7 +328,7 @@ def write_pdf(write_member, name, render):
 def report_entry(context, options, file="report.html"):
     """The manifest's account of the readable reports: the sealed page, its JSON and PDF twins and any parts."""
     entry = {"id": context["report_id"], "file": file, "language": options["language"], "sealed": True,
-             "custody": "custody.json"}
+             "custody": "custody.json", "presentation": {k: options.get(k, v) for k, v in report.report_analytics.Presentation().model_dump().items()}}
     if "report.json" in context.get("files", {}):
         entry["json"] = "report.json"
     for pdf in ("report.pdf", "chat.pdf"):

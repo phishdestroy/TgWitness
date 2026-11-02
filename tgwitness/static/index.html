@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="light dark">
 <title>TgWitness · Observation workspace</title>
 <link rel="icon" type="image/svg+xml" href="/mark.svg">
-<link rel="stylesheet" href="/style.css?v=0.7.0-chats11">
+<link rel="stylesheet" href="/style.css?v=0.8.0-report-studio1">
 <link rel="stylesheet" href="/components/shell.css?v=1">
 <link rel="stylesheet" href="/components/health.css?v=1">
 <link rel="stylesheet" href="/components/collection.css?v=1">
@@ -33,7 +33,7 @@
 <script defer src="/dialogs.js?v=1"></script>
 <script defer src="/privacy.js?v=1"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.7.0-handoff2-setup2-phala2"></script>
+<script defer src="/app.js?v=0.8.0-report-studio1"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/account-import.js?v=1"></script>
 <script defer src="/integrations.js?v=2"></script>
@@ -570,9 +570,26 @@
   </div>
   </div>
   <form class="card padded report-settings" id="report-form" role="tabpanel" aria-labelledby="exports-tab-settings" hidden>
-    <div class="eyebrow">Readable reports</div><h2>Report settings</h2>
-    <p class="muted">Language, case details and contents of journal and single-chat reports. Case details are signed into the export; leave a field empty to omit it. Account snapshots and sharing copies choose their report language in their own export settings.</p>
+    <div class="studio-heading"><div><div class="eyebrow">FROM RECORDS TO A READABLE STORY</div><h2>Report studio</h2><p class="muted">Choose a design. Select the information. Review the result.</p></div><span class="studio-badge">HTML · PDF · JSON</span></div>
+    <p class="hint">Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.</p>
     <fieldset class="report-fields" id="report-fields" disabled>
+    <fieldset class="studio-templates"><legend>01 · Choose a template</legend>
+      <label class="studio-template"><input type="radio" name="report-template" value="dossier" checked><span class="template-sheet sheet-dossier" aria-hidden="true"><i></i><b></b><em></em><em></em><small></small></span><span><strong>Case dossier</strong><small>Formal cover, measured typography, clear evidence structure.</small></span></label>
+      <label class="studio-template"><input type="radio" name="report-template" value="analytical"><span class="template-sheet sheet-analytical" aria-hidden="true"><i></i><b></b><em></em><em></em><small></small></span><span><strong>Intelligence brief</strong><small>Bold numbers, clean charts and a contemporary blue palette.</small></span></label>
+      <label class="studio-template"><input type="radio" name="report-template" value="editorial"><span class="template-sheet sheet-editorial" aria-hidden="true"><i></i><b></b><em></em><em></em><small></small></span><span><strong>Editorial review</strong><small>Paper-like layout, expressive headings and warm accents.</small></span></label>
+    </fieldset>
+    <div class="studio-layout"><div class="studio-controls">
+    <fieldset class="studio-section"><legend>02 · Statistics & charts</legend><p class="hint">Calculated only from records included in each export. All chart times are UTC.</p>
+      <div class="studio-chart-choices">
+        <label><input id="report-chart-activity" type="checkbox"><span><strong>Activity over time</strong><small>Daily counts or equal date intervals.</small></span></label>
+        <label><input id="report-chart-heatmap" type="checkbox"><span><strong>Weekly rhythm</strong><small>Day-of-week × hour heatmap.</small></span></label>
+        <label><input id="report-chart-participants" type="checkbox"><span><strong>Activity by participant</strong><small>Sender counts with unknowns kept visible.</small></span></label>
+        <label><input id="report-chart-chats" type="checkbox"><span><strong>Activity by chat</strong><small>Compare included conversations.</small></span></label>
+        <label><input id="report-chart-composition" type="checkbox"><span><strong>Record composition</strong><small>Messages, edits, deletion notices and other records.</small></span></label>
+      </div>
+      <label for="report-chart-top-n">Participants and chats shown</label><select id="report-chart-top-n"><option value="5">Top 5</option><option value="10">Top 10</option><option value="20">Top 20</option><option value="30">Top 30</option></select><p class="hint">Remaining observations are grouped as Other / unlisted. Charts describe the selected records, not online presence.</p>
+    </fieldset>
+    <fieldset class="studio-section"><legend>03 · Document details</legend>
     <div class="report-grid">
       <div><label for="report-language">Report language</label><select data-no-translate id="report-language"></select></div>
       <div><label for="report-theme">Report colours</label><select id="report-theme"><option value="auto">Follow the reader's system</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
@@ -582,14 +599,19 @@
       <div><label for="report-organization">Organization</label><input autocomplete="off" id="report-organization" maxlength="160"></div>
     </div>
     <label for="report-notes">Notes for the report</label><textarea id="report-notes" maxlength="4000" rows="3"></textarea>
+    </fieldset>
     <fieldset class="report-parts"><legend>Report contents</legend>
+      <label class="check-label"><input id="report-changes" type="checkbox"> Changed and deleted message histories</label>
+      <label class="check-label"><input id="report-indicators" type="checkbox"> Links and technical indicators</label>
       <label class="check-label"><input id="report-timeline" type="checkbox"> Journal records in HTML and PDF</label>
       <label class="check-label"><input id="report-raw" type="checkbox"> Full JSON record in the HTML viewer</label>
       <label class="check-label"><input id="report-media" type="checkbox"> Photo previews in HTML reports</label>
       <label class="check-label"><input id="report-heartbeats" type="checkbox"> Group consecutive collector heartbeats</label>
       <div class="report-part-size"><label for="report-part-size">Maximum records or messages per data file</label><input id="report-part-size" required max="100000" min="500" step="1" type="number"><p class="hint">Also sets the PDF transcript limit. Larger transcripts remain in the HTML viewer and signed source files. Large data files may be split earlier.</p></div>
     </fieldset>
-    <div class="report-actions"><button class="secondary" type="submit">Save report settings</button></div>
+    <p class="studio-fixed">Trust assessment, coverage limitations and verification instructions stay in every report. Display choices do not remove signed source records.</p>
+    </div><aside class="studio-stage" aria-label="Report preview"><div class="studio-stage-bar"><div><strong>Preview</strong><span>Cover & charts · current journal</span></div><button class="secondary" id="report-preview-refresh" type="button">Update preview</button></div><div class="studio-preview-tabs" role="group" aria-label="Preview section"><button type="button" data-preview-section="cover" aria-pressed="true">Cover</button><button type="button" data-preview-section="analytics" aria-pressed="false">Charts</button></div><p class="hint" id="report-preview-status" role="status">Preview uses your draft. Save settings before exporting.</p><iframe id="report-preview-frame" title="Draft report preview" sandbox="allow-same-origin" referrerpolicy="no-referrer" hidden></iframe><div id="report-preview-empty" class="studio-preview-empty"><span aria-hidden="true">Aa</span><strong>Your report, before you export</strong><p>Review the cover and real chart data here. The preview is unsigned and does not save your edits.</p></div><p class="hint">PDF uses the same chart data and a separate print layout. Account and sharing charts are recalculated from their selected, minimized records.</p></aside></div>
+    <div class="report-actions studio-save"><div><strong>Ready for the next export</strong><p class="hint">Saved settings apply to newly prepared files.</p></div><button class="primary" type="submit">Save report settings</button></div>
     </fieldset>
     <p class="hint" id="report-status" role="status"></p>
     <p class="hint">Every report is sealed: a signature inside the file covers each of its bytes. Readers check it in the browser by dropping the file onto the report, or with <code>python verify.py report.html --fingerprint …</code>. The archive also carries <code>custody.json</code> and <code>SHA256SUMS</code>.</p>

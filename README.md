@@ -174,6 +174,13 @@ evidence map and observation timeline; a ZIP with authoritative data and verific
 instructions. Every conclusion has its basis, limits and independent review step.
 The preview uses fictional messages and a disposable demonstration key.
 
+**Report studio** adds three designs and a live draft preview. Choose daily activity,
+weekday/hour heatmaps, participant and chat rankings, and record composition.
+Charts use included records, preserve unknowns and carry their exact aggregates in
+the signed archive. Sharing copies calculate their statistics after minimization.
+
+[![Fictional report analytics: activity timeline, heatmap, participants and chats](docs/assets/reports/studio-analytics.png)](docs/CASE_REPORTS.md#report-studio)
+
 [Report design and sample generation](docs/CASE_REPORTS.md) · [Русский](docs/ru/CASE_REPORTS.md)
 
 <details>

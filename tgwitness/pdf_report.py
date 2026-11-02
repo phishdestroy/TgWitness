@@ -217,7 +217,7 @@ class MissingGlyphs(logging.Handler):
 
 class Layout:
     """The parts of a formal report, written onto a fpdf2 document."""
-    def __init__(self, pdf, say):
+    def __init__(self, pdf, say, template="dossier"):
         from fpdf.enums import TextEmphasis, XPos, YPos
         from fpdf.fonts import FontFace
         self.pdf, self.say, self.XPos, self.YPos, self.FontFace = pdf, say, XPos, YPos, FontFace
@@ -225,6 +225,12 @@ class Layout:
         self.number = 0
         self.rtl = pdf.rtl
         self.align = "RIGHT" if pdf.rtl else "LEFT"
+        self.accent = report.report_analytics.COLORS.get(template, INK)
+        self.template = template
+
+    def need(self, height):
+        if self.pdf.get_y() + height > self.pdf.h - self.pdf.b_margin:
+            self.pdf.add_page()
 
     def mirror(self, items):
         """Columns in reading order: right to left for Arabic, Persian, Urdu and Hebrew."""
@@ -245,18 +251,18 @@ class Layout:
         pdf = self.pdf
         pdf.add_page()
         pdf.start_section(str(title), level=0)
-        with pdf.local_context(fill_color=INK):
+        with pdf.local_context(fill_color=(248, 242, 233) if self.template == "editorial" else self.accent):
             pdf.rect(0, 0, pdf.w, 37, style="F")
-        with pdf.local_context(fill_color=GOLD):
+        with pdf.local_context(fill_color=self.accent if self.template == "editorial" else GOLD):
             pdf.rect(pdf.l_margin, 36, 28, 1, style="F")
         pdf.set_y(13)
-        self.text("TG / WITNESS", size=13, style="B", color=WHITE)
-        self.text(self.say("Evidence dossier").upper(), size=7.5, color=(214, 224, 228))
+        self.text("TG / WITNESS", size=13, style="B", color=INK if self.template == "editorial" else WHITE)
+        self.text(self.say("Evidence dossier").upper(), size=7.5, color=MUTED if self.template == "editorial" else (214, 224, 228))
         pdf.set_y(48)
         self.text(eyebrow.upper(), size=8, style="B", color=MUTED)
         self.gap(4)
         title_size = 29 if len(str(title)) < 90 else 23 if len(str(title)) < 160 else 19
-        self.text(title, size=title_size, style="B", height=title_size * .42)
+        self.text(title, size=title_size, style="" if self.template == "editorial" else "B", height=title_size * .42)
         self.gap(7)
         pdf.set_draw_color(*LINE)
         pdf.line(pdf.l_margin, pdf.get_y(), pdf.l_margin + pdf.epw, pdf.get_y())
@@ -305,7 +311,7 @@ class Layout:
         else:
             self.gap(3)
         y = pdf.get_y()
-        pdf.set_draw_color(*GOLD)
+        pdf.set_draw_color(*self.accent)
         pdf.line(pdf.l_margin, y, pdf.l_margin + pdf.epw, y)
         pdf.set_draw_color(*LINE)
         pdf.set_y(y + 3)
@@ -395,7 +401,7 @@ class Layout:
         self.heading(say(assessment.OVERVIEW))
         self.grid([say("Reference"), say("Evidence"), say("Status")],
                   [(f"{number:02d}", say(item["title"]), say(assessment.STATUSES[item["status"]]))
-                   for number, item in enumerate(data["checks"], 1)], widths=(8, 48, 44))
+                   for number, item in enumerate(data["checks"], 1)], widths=(14, 44, 42))
 
     def coverage_figure(self, coverage):
         plot = report.coverage_plot(coverage)
@@ -757,7 +763,7 @@ def evidence_pdf(data, context, events=None, certificate=None):
     logging.getLogger("fpdf").addHandler(found)
     logging.getLogger("fontTools.subset").setLevel(logging.ERROR)  # tables it cannot subset are left out, quietly
     try:
-        lay = Layout(pdf, say)
+        lay = Layout(pdf, say, options.get("template", "dossier"))
         label = say("Handover extract") if handover else say("Evidence report")
         title = case.get("title") or (say("Handover extract") if handover else say("Telegram observation journal"))
         pdf.set_title(title)
@@ -787,6 +793,7 @@ def evidence_pdf(data, context, events=None, certificate=None):
                   "first": summary["first_record_at"], "last": summary["last_record_at"]}
         lay.brief(*report.evidence_brief(say, digest, records_total, data["timestamps"], coverage, account_text,
                                          handover))
+        report.report_analytics.pdf_section(lay, data.get("analytics"), options)
         report.case_assessment.pdf(lay, data.get("case_assessment") or report.case_assessment.journal(context, coverage))
         lay.section(say("Case"))
         lay.kv([(say("Case title"), case.get("title")), (say("Case ID"), case.get("id")),
@@ -810,13 +817,13 @@ def evidence_pdf(data, context, events=None, certificate=None):
             if isinstance(selection, dict):
                 lay.kv([(str(k), ", ".join(map(str, v)) if isinstance(v, list) else str(v)) for k, v in selection.items()])
         titles = {str(c["chat_id"]): c["title"] for c in data["chats"] if c.get("title")}
-        if data["changes"]["messages"]:
+        if options.get("show_changes", True) and data["changes"]["messages"]:
             lay.section(say("Changed and deleted messages"), say(
                 "Every saved version of each message that was edited, deleted or not found at a later check. Removed "
                 "words are struck through and added words are marked; each step names its signed record."))
             changes(lay, say, data["changes"], titles)
         actions = data["actions"]
-        if (data.get("indicators") or {}).get("items"):
+        if options.get("show_indicators", True) and (data.get("indicators") or {}).get("items"):
             indicators_section(lay, say, data["indicators"])
         lay.section(say("Actions by the observing account"), say(
             "Actions taken with the observing account change what others in the chat see. They are listed here so "
@@ -1005,7 +1012,7 @@ def chat_pdf(meta, context, messages=None, certificate=None):
     logging.getLogger("fpdf").addHandler(found)
     logging.getLogger("fontTools.subset").setLevel(logging.ERROR)
     try:
-        lay = Layout(pdf, say)
+        lay = Layout(pdf, say, options.get("template", "dossier"))
         title = case.get("title") or chat_title
         pdf.set_title(title)
         pdf.set_author(case.get("examiner") or case.get("organization") or "TgWitness")
@@ -1026,6 +1033,7 @@ def chat_pdf(meta, context, messages=None, certificate=None):
         account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
                                               ("id " + str(account["id"])) if account.get("id") else "") if x)
         lay.brief(*report.chat_brief(say, meta, stats, ids, account_text))
+        report.report_analytics.pdf_section(lay, context.get("analytics"), options)
         report.case_assessment.pdf(lay, report.case_assessment.snapshot(context, "chat", meta))
         lay.section(say("Case"))
         lay.kv([(say("Case title"), case.get("title")), (say("Case ID"), case.get("id")),
@@ -1086,7 +1094,7 @@ def chat_pdf(meta, context, messages=None, certificate=None):
                     (say("Not answered by Telegram"), summary.get("error_type") or "")])
             lay.grid([say("Time"), say("Account"), say("Action"), say("Message"), say("Content")],
                      [list(row) for row in report.admin_rows(say, context["admin_events"], 300)], (17, 13, 16, 8, 46))
-        if (context.get("indicators") or {}).get("items"):
+        if options.get("show_indicators", True) and (context.get("indicators") or {}).get("items"):
             indicators_section(lay, say, context["indicators"])
         limit = options.get("part_size") or report.ReportOptions().part_size
         if parts:

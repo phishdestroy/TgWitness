@@ -2405,18 +2405,27 @@ panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,a
 // Report settings: language, case details and contents of the sealed report in every export.
 const REPORT_FIELDS={"report-language":"language","report-theme":"theme","report-case-title":"case_title",
   "report-case-id":"case_id","report-examiner":"examiner","report-organization":"organization","report-notes":"notes",
-  "report-part-size":"part_size"};
+  "report-part-size":"part_size","report-chart-top-n":"chart_top_n"};
 const REPORT_CHECKS={"report-timeline":"timeline","report-raw":"raw_records","report-media":"media_previews",
-  "report-heartbeats":"group_heartbeats"};
+  "report-heartbeats":"group_heartbeats","report-changes":"show_changes","report-indicators":"show_indicators",
+  "report-chart-activity":"chart_activity","report-chart-heatmap":"chart_heatmap","report-chart-participants":"chart_participants",
+  "report-chart-chats":"chart_chats","report-chart-composition":"chart_composition"};
 let reportOwner=null,reportReady=false,reportDirty=false,reportRequest=0,reportLoading=null,reportSaving=false;
+let reportPreviewRequest=0,reportPreviewTimer=null,reportPreviewBusy=false;
+let reportPreviewSection="cover";
 const reportKey=()=>state.workspaceRevision+":"+state.profile;
 function resetReportSettings(){
+  clearTimeout(reportPreviewTimer);reportPreviewRequest++;reportPreviewBusy=false;
+  reportPreviewSection="cover";
+  $("report-preview-frame").removeAttribute("srcdoc");show("report-preview-frame",false);show("report-preview-empty",true);
+  $("report-preview-status").textContent=tr("Preview uses your draft. Save settings before exporting.");
   reportOwner=null;reportReady=false;reportDirty=false;reportRequest++;reportLoading=null;reportSaving=false;
   $("report-form").reset();$("report-fields").disabled=true;$("report-status").replaceChildren();
   $("report-form").querySelectorAll(".form-error").forEach(el=>el.remove());
 }
 function reportControls(){
   $("report-fields").disabled=!reportReady||reportOwner!==reportKey()||reportSaving||!!window.TGW_ONLINE_DEMO;
+  $("report-preview-refresh").disabled=reportPreviewBusy;
   syncReportParts();
 }
 async function loadReportSettings(){
@@ -2435,9 +2444,13 @@ async function loadReportSettings(){
         select.append(new Option(tr("Same as the panel"),"auto"));
         for(const [code,name] of Object.entries(PANEL_LANGUAGES)){const o=new Option(name,code);o.lang=code;select.append(o);}
       }
+      const top=$("report-chart-top-n");
+      if(options.chart_top_n&&!Array.from(top.options).some(option=>option.value===String(options.chart_top_n)))top.append(new Option(String(options.chart_top_n),String(options.chart_top_n)));
       for(const [id,key] of Object.entries(REPORT_FIELDS))$(id).value=options[key]??"";
       for(const [id,key] of Object.entries(REPORT_CHECKS))$(id).checked=!!options[key];
+      $("report-form").querySelectorAll('[name="report-template"]').forEach(input=>input.checked=input.value===(options.template||"dossier"));
       reportReady=true;reportDirty=false;formControls?.loaded("report-form");$("report-status").textContent=window.TGW_ONLINE_DEMO?tr("Sample data"):"";
+      if(!$("report-form").hidden&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();
     }catch(error){
       if(!current()||error instanceof StaleView||error.name==='AbortError')return;
       const retry=node("button","text-link",tr("Retry"));retry.type="button";
@@ -2452,14 +2465,57 @@ function syncReportParts(){
   $("report-raw").disabled=$("report-heartbeats").disabled=!$("report-timeline").checked;
 }
 $("report-timeline").addEventListener("change",syncReportParts);
-$("report-form").addEventListener("input",()=>{if(reportReady){reportDirty=true;$("report-status").replaceChildren();}});
+function reportDraft(){
+  const body={};
+  for(const [id,key] of Object.entries(REPORT_FIELDS))body[key]=$(id).value;
+  body.part_size=$("report-part-size").valueAsNumber;body.chart_top_n=Number($("report-chart-top-n").value);
+  body.template=$("report-form").querySelector('[name="report-template"]:checked')?.value||"dossier";
+  for(const [id,key] of Object.entries(REPORT_CHECKS))body[key]=$(id).checked;
+  return body;
+}
+function scheduleReportPreview(){
+  clearTimeout(reportPreviewTimer);
+  reportPreviewTimer=setTimeout(()=>refreshReportPreview(),900);
+}
+function showReportPreviewSection(section){
+  reportPreviewSection=section;
+  $("report-form").querySelectorAll('[data-preview-section]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.previewSection===section)));
+  const frame=$("report-preview-frame");
+  if(frame.hidden)return;
+  if(section==='analytics')frame.contentDocument?.getElementById('analytics')?.scrollIntoView({block:'start'});
+  else frame.contentWindow?.scrollTo(0,0);
+}
+$("report-preview-frame").addEventListener('load',()=>showReportPreviewSection(reportPreviewSection));
+$("report-form").querySelectorAll('[data-preview-section]').forEach(button=>button.addEventListener('click',()=>showReportPreviewSection(button.dataset.previewSection)));
+async function refreshReportPreview(){
+  clearTimeout(reportPreviewTimer);
+  if(!reportReady||reportOwner!==reportKey()||$("report-form").hidden||window.TGW_ONLINE_DEMO)return;
+  if(!$("report-form").checkValidity()){
+    $("report-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
+  }
+  const owner=reportOwner,body=reportDraft(),snapshot=JSON.stringify(body),request=++reportPreviewRequest;
+  const current=()=>owner===reportOwner&&owner===reportKey()&&request===reportPreviewRequest;
+  reportPreviewBusy=true;reportControls();$("report-preview-status").textContent=tr("Preparing preview…");
+  try{
+    const result=await json("report-preview",body,viewOptions('evidence'));
+    if(!current()||snapshot!==JSON.stringify(reportDraft())||state.view!=='evidence')return;
+    $("report-preview-frame").srcdoc=result.html;show("report-preview-frame",true);show("report-preview-empty",false);
+    $("report-preview-status").textContent=tr(result.sampled?"Draft preview · first 50,000 records · not signed":"Draft preview · {n} records · not signed",{n:result.records.toLocaleString()});
+  }catch(error){
+    if(!current()||error instanceof StaleView||error.name==='AbortError')return;
+    $("report-preview-status").textContent=tr("Preview failed. Update to retry.")+" "+error.message;
+  }finally{if(current()){reportPreviewBusy=false;reportControls();}}
+}
+$("report-preview-refresh").addEventListener("click",refreshReportPreview);
+$("exports-tab-settings").addEventListener("click",()=>{if(reportReady&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();});
+$("report-form").addEventListener("input",event=>{if(reportReady){reportDirty=true;$("report-status").textContent=tr("Draft changed. Save before exporting.");
+  if(event.target.id.startsWith('report-chart-'))reportPreviewSection='analytics';
+  if(event.target.name==='report-template')reportPreviewSection='cover';
+  $("report-preview-status").textContent=tr("Preview is updating to your draft…");scheduleReportPreview();}});
 $("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   if(!reportReady||reportOwner!==reportKey()||reportSaving||window.TGW_ONLINE_DEMO)return;
   const owner=reportOwner,draft=formControls?.capture("report-form");
-  const body={};
-  for(const [id,key] of Object.entries(REPORT_FIELDS))body[key]=$(id).value;
-  body.part_size=$("report-part-size").valueAsNumber;
-  for(const [id,key] of Object.entries(REPORT_CHECKS))body[key]=$(id).checked;
+  const body=reportDraft();
   reportSaving=true;reportControls();
   try{
     await json("report-options",body);if(reportOwner!==owner||reportKey()!==owner)return;

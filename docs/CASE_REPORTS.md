@@ -13,6 +13,67 @@ manifest. Existing signatures and authoritative records are not rewritten.
 
 ## Document formats and reading order
 
+### Report studio
+
+Open **Exports → Report settings**. Choose **Case dossier**, **Intelligence brief**
+or **Editorial review**, then select activity over time, the UTC weekday/hour heatmap,
+participant rankings, chat rankings and record composition. Rankings show the chosen
+top count, unknown senders separately, and a reconciled Other / unlisted row.
+Change a chart to jump to its preview; Cover and Charts buttons switch preview sections.
+The preview updates from the unsaved draft. **Save report settings** applies it to
+future exports; existing signed files are immutable.
+
+The preview uses the production cover and chart components with up to the first
+50,000 journal records in this workspace. It is unsigned, explicitly labelled,
+does not persist edits and is not a full PDF preview. It adds no independent
+verification claim. PDF uses the chosen palette, its own A4 layout and the same
+aggregate data. Trust assessment, coverage limitations and verification instructions
+remain present when readable histories or indicators are turned off. These display
+choices do not remove data from signed source files or `analytics.json`; use a
+minimized export to restrict disclosure.
+
+Design/chart preferences are frozen into new account jobs and disclosure previews.
+Their language and privacy settings remain independent. Case notes, examiner names
+and private journal metadata are never copied into a sharing export by this feature.
+Account/sharing reports remain HTML protected by their signed archive manifest;
+journal, handover and single-chat kits also provide signed PDFs.
+
+### What the charts count
+
+Journal charts count new, snapshot and recovered **message observations** by UTC
+capture time. Repeated observations can refer to the same Telegram message.
+Edits and deletion notices are separate record categories, never attributed to an
+editor/deleter merely because the message has a sender. Service and operational
+records do not inflate participant activity. Snapshots count included non-service
+message rows by their recorded message time. Missing/naive dates are reported and
+excluded from time charts. These are descriptive statistics, not online presence,
+person identification, completeness or credibility scores.
+
+Activity is binned into at most 90 equal-width UTC date intervals. Exact values
+are available in HTML and `analytics.json`; the last interval may be shorter.
+Empty intervals mean no included observations, not verified inactivity. The heatmap
+aggregates weekday × hour in UTC and retains exact cell values. Participant labels
+come from included records; chat labels can use recorded or current export-time
+titles. IDs distinguish equal names. To bound memory, each grouping retains up to
+10,000 distinct values. Excess counts are explicitly declared and reconciled;
+rankings must not be treated as exhaustive after that limit.
+
+`analytics.json` is protected by the archive's signed file hashes; journal and
+handover `report.json` also embed the same aggregate. Verification detects changed
+bytes. It does not independently certify the statistical method: a reviewer can
+recompute aggregates from the authoritative rows using `report_analytics.collect`.
+Sharing and handover analytics consume only the already minimized rows, including
+their pseudonyms. Unknown senders are not treated as a verified common identity.
+
+Build three fictional designs without Telegram or an external service:
+
+```sh
+python tools/build_report_studio_example.py --output test-results/new-studio-example
+```
+
+Use a new directory for each run. The default sample language is English; `--language`
+also accepts `ru` and `de`.
+
 ![Fictional HTML dossier](assets/reports/dossier-en.png)
 
 The HTML opens with a case cover and key figures. The numbered evidence map links

@@ -423,6 +423,7 @@ def export(store, vault, options, report_options=None):
         digest.hash_images(store.root / "media")
         summary = digest.result()
         summary["titles"] = {**titles, **summary["titles"]}
+        report.report_analytics.chat_labels(summary["analytics"], summary["titles"])
         selection = selection_text(options, summary["titles"], survey.people, minimiser)
         hashes, total, limit = {}, 0, tuning.value(store, "export_max_gib") * 1024**3
         created = utcnow()
@@ -450,6 +451,7 @@ def export(store, vault, options, report_options=None):
             with records_path.open("rb") as handle:
                 write_member("records.jsonl", iter(lambda: handle.read(1024 * 1024), b""))
             write_member("coverage.json", [json.dumps(coverage, ensure_ascii=False, indent=1).encode("utf-8")])
+            write_member("analytics.json", [canonical(summary["analytics"])])
             write_member("verify.py", [Path(__file__).with_name("verify.py").read_bytes()])
             write_indicators(write_member, summary.get("indicators"), context)
             for name in sorted(x for x in minimiser.files if isinstance(x, str) and re.fullmatch("[0-9a-f]{64}", x)):
