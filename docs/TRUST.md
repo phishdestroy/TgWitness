@@ -68,12 +68,12 @@ verify `evidence.zip` against the actual caller fork (`OWNER/TgWitness`):
 gh attestation verify evidence.zip --bundle attestation.jsonl \
   --repo OWNER/TgWitness \
   --signer-workflow phishdestroy/TgWitness/.github/workflows/sealed-collector.yml \
-  --signer-digest b57462af26bb87f4d5f3d7f14be80abb91bc93e1 \
+  --signer-digest d4301a916683ffe3e2c7f49b2def7f679925760c \
   --deny-self-hosted-runners
 ```
 
-Review the [pinned collector workflow](https://github.com/phishdestroy/TgWitness/blob/b57462af26bb87f4d5f3d7f14be80abb91bc93e1/.github/workflows/sealed-collector.yml),
-which checks out collector commit `17a2c931230c6615a86236ee6d593d93311fe5dd`.
+Review the [pinned collector workflow](https://github.com/phishdestroy/TgWitness/blob/d4301a916683ffe3e2c7f49b2def7f679925760c/.github/workflows/sealed-collector.yml),
+which checks out collector commit `5974b5dba782f08ea2b9a708345fd8e4cc45b12f`.
 For journal, attachment, collector-policy and capture-coverage checks, also run
 the verifier from an independently trusted installation:
 
