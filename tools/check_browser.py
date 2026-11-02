@@ -80,7 +80,7 @@ class RunningApp:
 
 
 def unlock(page, server, *, start=False):
-    if not start and not server.app.state.store.get_setting("demo", False):
+    if not server.app.state.store.get_setting("demo", False):
         # Legacy feature checks explicitly skip onboarding and use all controls.
         # test_settings_hub.py exercises the untouched first-run defaults separately.
         store = server.app.state.store
@@ -89,6 +89,17 @@ def unlock(page, server, *, start=False):
         if not store.get_setting('ui_preferences:admin', None):
             store.set_setting('ui_preferences:admin', {'language':'en', 'theme':'system', 'level':'expert',
                 'timezone':page.evaluate("Intl.DateTimeFormat().resolvedOptions().timeZone")})
+        registry=server.app.state.profiles
+        if not getattr(registry,'legacy_setup_fixture',False):
+            original_open=registry.open_entry
+            async def open_legacy_workspace(entry):
+                await original_open(entry)
+                child=registry.entries[entry['id']].get('app')
+                if child:
+                    child.state.store.set_setting('first_run',{'skipped':True})
+                    child.state.store.set_setting('ui_preferences:admin',store.get_setting('ui_preferences:admin'))
+            registry.open_entry=open_legacy_workspace
+            registry.legacy_setup_fixture=True
     page.goto(server.url)
     if server.app.state.store.get_setting("demo",False):
         expect(page.locator("#workspace")).to_be_visible()
@@ -123,12 +134,15 @@ def unlock(page, server, *, start=False):
     assert authenticated.value.ok, authenticated.value.status
     authenticated.value.body()
     expect(page.locator("#workspace")).to_be_visible()
+    page.wait_for_function('()=>window.TGW_ONLINE_DEMO||!!document.documentElement.dataset.uiLevel')
     # Legacy scenario helpers continue into setup through the new task choice.
     # New landing acceptance keeps the chooser visible with start=True.
     if not start and page.locator('#view-start').is_visible():
         button = page.locator('[data-workflow="investigation"]')
         if button.is_visible():
             button.click()
+    if not start:
+        page.evaluate("document.querySelectorAll('.other-sign-in').forEach(el=>el.open=true)")
 
 
 def answer_panel_dialog(page, accept=True, text=None):
@@ -151,7 +165,7 @@ def navigate_panel(page, view):
     """Use the same navigation on desktop and the mobile menu."""
     button = page.locator(f'.sidebar [data-view="{view}"]')
     if not page.evaluate('!!state.status?.demo'):
-        page.wait_for_function('!!document.documentElement.dataset.uiLevel')
+        page.wait_for_function('()=>window.TGW_ONLINE_DEMO||!!document.documentElement.dataset.uiLevel')
     level=button.get_attribute('data-level')
     current=page.locator('html').get_attribute('data-ui-level')
     rank={'simple':0,'standard':1,'expert':2}
@@ -166,6 +180,8 @@ def navigate_panel(page, view):
             page.locator('#nav-more > summary').click()
     button.click()
     expect(page.locator(f"#view-{view}")).to_be_visible()
+    if view == 'connection':
+        page.locator('.other-sign-in').evaluate('el=>el.open=true')
 
 
 def lock_panel(page):
@@ -191,7 +207,7 @@ def reload_panel(page):
 
 
 def check_layout(page, connection=False):
-    assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "Horizontal overflow"
+    assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), page.evaluate("""()=>({width:innerWidth,overflow:[...document.querySelectorAll('body *')].filter(e=>e.checkVisibility()&&e.getBoundingClientRect().right>innerWidth+1).map(e=>[e.tagName,e.id,e.className,e.getBoundingClientRect().right]).slice(0,20)})""")
     for button in page.locator(".sidebar .nav:visible").all():
         bounds = button.bounding_box()
         assert bounds and bounds["x"] >= 0 and bounds["x"] + bounds["width"] <= page.viewport_size["width"] + 1

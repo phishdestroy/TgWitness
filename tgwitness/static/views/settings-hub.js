@@ -63,10 +63,14 @@ export function createSettingsHub(ctx) {
     });return preferencesQueue;
   }
   async function bootstrap() {
-    if(state.status?.demo||window.TGW_ONLINE_DEMO){$('hub-route-status').hidden=true;return;}
+    const demo=state.status?.demo||window.TGW_ONLINE_DEMO;
+    for(const control of document.querySelectorAll('[data-ui-level]'))control.hidden=!!demo;
+    if(demo){$('hub-route-status').hidden=true;return;}
     const loaded=await json('preferences');
     prefs=loaded.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:'simple'};
-    if(!loaded.saved)await savePreferences({});else applyPresentation();
+    const requestedLanguage=new URL(location.href).searchParams.get('lang');
+    if(requestedLanguage===ctx.language&&prefs.language!==requestedLanguage)await savePreferences({language:requestedLanguage});
+    else if(!loaded.saved)await savePreferences({});else applyPresentation();
     if(prefs.language!==ctx.language){await ctx.changeLanguage(prefs.language);return;}
     if(!state.me?.admin||state.status?.demo)return;
     data=await json('settings');draft={...data.wizard};

@@ -292,6 +292,13 @@ def test_browser(tmp_path, monkeypatch):
         page.get_by_role('button',name='Off-site copy',exact=True).click()
         expect(page.locator('#view-settings #replica-form')).to_be_visible()
         expect(page.locator('#replica-enabled')).not_to_be_checked()
+        page.goto(server.url+'/settings?lang=ru')
+        expect(page.locator('#view-settings h1')).to_have_text('Настройки')
+        expect(page.locator('html')).to_have_attribute('data-ui-level','simple')
+        assert server.app.state.store.get_setting('ui_preferences:admin')['language']=='ru'
+        page.goto(server.url+'/settings')
+        expect(page.locator('#view-settings h1')).to_have_text('Настройки')
+        assert page.evaluate("sessionStorage.getItem('tgwitness-token')")==token
         browser.close()
     assert not errors,errors
 

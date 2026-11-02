@@ -83,6 +83,11 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
 .other-sign-in{margin:16px 0;padding:12px;border:1px solid var(--border);border-radius:10px}
 .other-sign-in summary{cursor:pointer;color:var(--muted);font-size:13px}
 .other-sign-in .login-methods{margin-top:12px}
+.other-sign-in .login-methods{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:600px) {
+  .other-sign-in { margin:10px 0; padding:8px; }
+  .other-sign-in .login-methods { margin:8px 0; }
+}
 
 
 .setting-help { display:inline-block; margin-inline-start:8px; position:relative; }
@@ -93,4 +98,11 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
 .top-actions .level-pick { min-width:106px; flex-shrink:0; }
 @media(max-width:600px) { .top-actions .level-pick { min-width:80px; } }
 #mode-switch, #setup-start, .extra-setup { display:none!important; }
+.workspace[data-current-view=connection][data-connection-settings=false]:has(#credentials-form:not([hidden])) .health-toolbar { display:none; }
 .hub-detail > form { margin-top:24px; }
+@media(max-width:1200px) { .workspace .topbar { flex-wrap:wrap; } .topbar .top-actions { max-width:100%; flex-wrap:wrap; } }
+@media(max-width:767px) {
+  .workspace .topbar { flex-wrap:wrap; }
+  .topbar .profile-switch { flex-basis:calc(100% - 52px); }
+  .topbar .top-actions { flex:1 1 100%; max-width:100%; }
+}

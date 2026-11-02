@@ -77,8 +77,8 @@ def file_policy(choice):
                    "max_seconds": 60 if choice == "short_media" and k in ("video", "video_note") else 0}
                for k in MEDIA_TYPES}).model_dump()
     for rule in result["types"].values():
-        if not rule["max_seconds"]:
-            del rule["max_seconds"]
+        if not rule.get("max_seconds"):
+            rule.pop("max_seconds", None)
     return result
 
 
@@ -86,7 +86,7 @@ def wizard_state(app):
     s, c = app.state.store, app.state.collector
     saved = s.get_setting("first_run", None)
     if saved is None:
-        existing = bool(s.get_setting("setup", None) or c.status()["has_session"])
+        existing = bool(s.get_setting("setup", None) or c.status()["has_session"] or s.targets())
         saved = {"completed": existing, "skipped": False}
     return {**Draft().model_dump(), **saved}
 

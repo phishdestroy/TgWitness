@@ -1,7 +1,7 @@
 """Explicit live-event selection, separate from history and attachment policies."""
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, model_serializer
 
 
 class Monitoring(BaseModel):
@@ -26,6 +26,13 @@ class MediaRule(BaseModel):
     enabled: StrictBool = True
     max_mb: int = Field(default=20, ge=1, le=2000)
     max_seconds: int = Field(default=0, ge=0, le=86400)
+
+    @model_serializer(mode="wrap")
+    def serialize(self, handler):
+        value = handler(self)
+        if not self.max_seconds:
+            value.pop("max_seconds", None)
+        return value
 
 
 class Capture(BaseModel):
