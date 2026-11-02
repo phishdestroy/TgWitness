@@ -12,11 +12,12 @@ RUN sh /usr/share/tgwitness-build/containers/install-packages.sh media \
     && python3.12 -m venv /opt/venv
 COPY --from=ocr-build /out/tgwitness-tesseract-build.rsa.pub /etc/apk/keys/
 COPY --from=ocr-build /out/tesseract.apk /tmp/tesseract.apk
-RUN apk add --no-network --no-cache /tmp/tesseract.apk && rm /tmp/tesseract.apk \
+RUN apk add --no-network --repositories-file /dev/null /tmp/tesseract.apk && rm /tmp/tesseract.apk \
     && tesseract --version && tesseract --list-langs
 COPY deploy/media-worker/requirements.lock /requirements.lock
 # Install only reviewed wheel artifacts, including every transitive dependency.
-RUN pip install --no-cache-dir --only-binary=:all: --require-hashes -r /requirements.lock
+RUN pip install --no-cache-dir --only-binary=:all: --require-hashes -r /requirements.lock \
+    && python -m pip check && python -m pip uninstall --yes pip
 COPY deploy/media-worker/worker.py /worker.py
 USER 65534:65534
 ENTRYPOINT ["python", "/worker.py"]

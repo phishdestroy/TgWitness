@@ -43,6 +43,7 @@ python3.12 - <<'PY'
 import hashlib
 import json
 from pathlib import Path
+import stat
 
 lock_path = Path('/build/ocr/sources.lock.json')
 lock = json.loads(lock_path.read_text())
@@ -90,11 +91,24 @@ sbom = {
     ],
 }
 (package / 'usr/share/tgwitness-build/ocr/tesseract.spdx.json').write_text(json.dumps(sbom, indent=2) + '\n')
+# nFPM 2.46.3's tree mode writes Go directory type bits into APK tar modes.
+# Explicit file entries use normal implicit directories and preserve symlinks.
+contents = []
+for path in sorted(package.rglob('*')):
+    destination = '/' + path.relative_to(package).as_posix()
+    if path.is_symlink():
+        contents.append({'src': path.readlink().as_posix(), 'dst': destination, 'type': 'symlink'})
+    elif path.is_file():
+        contents.append({'src': str(path), 'dst': destination,
+                         'file_info': {'mode': stat.S_IMODE(path.stat().st_mode), 'owner': 'root', 'group': 'root'}})
+config = Path('/build/ocr/tesseract.nfpm.yaml').read_text()
+Path('/build/tesseract.nfpm.yaml').write_text(config + '\ncontents:\n' + ''.join(
+    '  - ' + json.dumps(entry, sort_keys=True) + '\n' for entry in contents))
 PY
 case "$(apk --print-arch)" in x86_64) NFPM_ARCH=amd64 ;; aarch64) NFPM_ARCH=arm64 ;; *) exit 2 ;; esac
 export NFPM_ARCH
 openssl genrsa -out /build/tesseract-build.rsa 3072
 openssl rsa -in /build/tesseract-build.rsa -pubout -out /out/tgwitness-tesseract-build.rsa.pub
-nfpm package --packager apk --config /build/ocr/tesseract.nfpm.yaml --target /out/tesseract.apk
+nfpm package --packager apk --config /build/tesseract.nfpm.yaml --target /out/tesseract.apk
 # Do not copy this key or the compiler environment into the final image.
 rm /build/tesseract-build.rsa

@@ -135,6 +135,7 @@ jobs:
           python3 -I tools/test_ocr_advisories.py
           python3 -I tools/check_ocr_advisories.py --output ocr-upstream-advisories.json
       - name: Build the actual image from the public source archive
+        id: build_image
         env:
           AUDIT_DOCKERFILE: ${{ matrix.dockerfile }}
           AUDIT_IMAGE: tgwitness-security:${{ matrix.name }}
@@ -178,6 +179,7 @@ jobs:
           --mount type=bind,source="$GITHUB_WORKSPACE/tools",target=/checks,readonly
           tgwitness-security:runtime-arm64 python /checks/check_container_runtime.py --output /data/checks
       - name: Scan OS and installed library packages
+        if: ${{ !cancelled() && steps.build_image.outcome == 'success' }}
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           version: v0.76.1

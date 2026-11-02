@@ -62,12 +62,11 @@ verified. See the [live test](../VERIFICATION.md#live-telegram-test--27-to-29-oc
 
 ## Remaining validation
 
-The candidate is held from public release while the container HIGH/CRITICAL gate fails.
-The [2 November audit](https://github.com/phishdestroy/TgWitness/actions/runs/41396355070)
-passed Python dependency checks and CodeQL, but found 45 records (9 distinct CVEs)
-in each runtime/sealed image and 72 records (29 distinct CVEs) in the media worker.
-See the [container findings](CODE-SCANNING-2026-11-01.md#remaining-container-findings).
-Do not disable the gate or describe this candidate as security-cleared.
+Publication requires the release revision to pass dependency audits, CodeQL and
+the container HIGH/CRITICAL gate, including findings without an available fix.
+The container audit builds the AMD64 and ARM64 runtime, sealed collector and media
+worker from the public source archive. Source-built Tesseract also has a separate
+upstream advisory check. Use the release's Actions results for the current findings.
 
 CJK PDFs require a suitable installed font or `TGWITNESS_FONT_DIR`; when PDF rendering
 is unavailable, the export keeps its HTML and JSON reports and records the limitation.

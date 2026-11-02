@@ -178,7 +178,7 @@ def run_checks(report):
                 entry["offline_install"] = install(cache, folder, specs)
                 if case == "pristine":
                     success(entry["offline_install"])
-                    entry["installed"] = success(command(["apk", "info", "--root", str(folder / "root"), "--exists", "python-3.12-base"]))
+                    entry["installed"] = success(command(["apk", "info", "--root", str(folder / "root"), "--installed", "python-3.12-base"]))
                 else:
                     assert entry["offline_install"]["returncode"] != 0, "Unauthenticated archive installed successfully"
             entry["status"] = "pass"

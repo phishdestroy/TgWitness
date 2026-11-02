@@ -15,6 +15,7 @@ COPY tgwitness ./tgwitness
 RUN pip install --no-cache-dir --require-hashes -r build.lock \
     && pip install --no-cache-dir --require-hashes --no-build-isolation -r requirements.lock \
     && pip install --no-cache-dir --no-deps --no-build-isolation . \
+    && python -m pip check && python -m pip uninstall --yes pip \
     && addgroup -g 10001 collector && adduser -D -u 10001 -G collector -h /home/collector collector \
     && mkdir /data /witness && chown collector:collector /data /witness
 USER collector
