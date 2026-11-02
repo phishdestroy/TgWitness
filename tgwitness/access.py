@@ -40,6 +40,8 @@ POLICY = {
     "POST /api/privacy/reveal": ("view", "body"),
     "GET /api/services/notifications": ("settings", None),
     "POST /api/analysis/context-export": ("export", "root"),
+    "GET /api/preferences": ("view", "root"),
+    "POST /api/preferences": ("view", "root"),
     "GET /api/analysis/provider": ("view", "root"),
     "GET /api/analysis/media": ("view", "root"),
     "POST /api/analysis/media": ("view", "root"),

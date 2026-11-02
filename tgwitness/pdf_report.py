@@ -705,6 +705,7 @@ def evidence_pdf(data, context, events=None, certificate=None):
                   "first": summary["first_record_at"], "last": summary["last_record_at"]}
         lay.brief(*report.evidence_brief(say, digest, records_total, data["timestamps"], coverage, account_text,
                                          handover))
+        report.case_assessment.pdf(lay, data.get("case_assessment") or report.case_assessment.journal(context, coverage))
         data_name = "records.jsonl" if handover else "events.jsonl"
         lay.qr(paper_lines(report_id, fp, data_name, data["subject"].get("records_sha256" if handover else "events_sha256")))
         lay.section(say("Case"))
@@ -791,7 +792,8 @@ def evidence_pdf(data, context, events=None, certificate=None):
                     name = re.search(r"(?:^|,)CN=((?:\\,|[^,])+)", signer or "")  # the full name is in report.json
                     rows.append([anchor.get("event_count"), anchor.get("service"), "RFC 3161", report.utc_text(anchor.get("time")),
                                  say("Token valid") + " · " + (name.group(1).replace("\\,", ",") if name else signer)
-                                 if signer else say("Check the signature with --tsa-ca")])
+                                 if report.case_assessment.verified_stamp(anchor, 2**63 - 1)
+                                 else say("Checkpoint or timestamp trust not established")])
                 elif anchor.get("kind") == "opentimestamps":
                     rows.append([anchor.get("event_count"), anchor.get("service"), "OpenTimestamps · Bitcoin", "—",
                                  say("Waiting for Bitcoin confirmation") if anchor.get("status") == "pending"
@@ -941,6 +943,7 @@ def chat_pdf(meta, context, messages=None, certificate=None):
         account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
                                               ("id " + str(account["id"])) if account.get("id") else "") if x)
         lay.brief(*report.chat_brief(say, meta, stats, ids, account_text))
+        report.case_assessment.pdf(lay, report.case_assessment.snapshot(context, "chat", meta))
         lay.qr(paper_lines(report_id, fp, "chat.json", context.get("chat_json_sha256")))
         lay.section(say("Case"))
         lay.kv([(say("Case title"), case.get("title")), (say("Case ID"), case.get("id")),

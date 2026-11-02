@@ -156,7 +156,7 @@
     const heading=$("account-heading");
     if(account&&connected){
       const who=account.username?"@"+account.username:"ID "+account.id;
-      heading.textContent=tr(editing?(adding()&&authMethod==="files"?"Add another account":"Sign in again"):"Connected: {who}",{who});
+      if(heading.isConnected)heading.textContent=tr(editing?(adding()&&authMethod==="files"?"Add another account":"Sign in again"):"Connected: {who}",{who});
       $("change-account").textContent=tr("Sign in again");
       $("sign-out").textContent=tr("Disconnect account");
       $("authorized-account").textContent=(account.username?"@"+account.username+" · ":"")+"ID "+account.id;

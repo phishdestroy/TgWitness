@@ -1,4 +1,4 @@
-const paths={start:"start",chats:"chats",observations:"journal",sources:"sources",parameters:"parameters",accounts:"accounts",
+const paths={settings:"settings","first-run":"first-run",start:"start",chats:"chats",observations:"journal",sources:"sources",parameters:"parameters",accounts:"accounts",
   access:"access","system-log":"system-log",integrations:"integrations",evidence:"exports",witness:"extras",connection:"account",analysis:"analysis",sealed:"sealed"};
 const views=Object.fromEntries(Object.entries(paths).map(([view,path])=>[path,view]));
 const legacy={start:"start",account:"connection",connection:"connection",journal:"observations",observations:"observations",

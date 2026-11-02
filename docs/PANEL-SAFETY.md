@@ -51,6 +51,19 @@ late responses from an earlier selection are ignored. The mismatch notice blocks
 content interaction and workspace API requests until resolved. Export confirmation
 names the account, and checks the context again after confirmation.
 
+First setup and Settings reuse the same account form and import checks. Opening
+a direct link keeps its page and workspace, even when first setup is unfinished.
+A delayed setup response cannot take over a newer navigation. Reconnecting an
+account in Settings keeps its workspace and signing key; adding another account
+creates a separate workspace.
+
+Pending Settings confirmations and setup operations belong to the workspace where
+they started. Switching workspaces cancels their continuation, including when the
+two workspaces happen to have identical settings.
+
+A temporary failure while loading the panel keeps the existing session and offers
+**Retry**. Expired or revoked access still requires signing in again.
+
 ## Read-only chat
 
 ```text
@@ -145,6 +158,7 @@ python tools/check_workspace_downloads_browser.py
 python tools/check_prepared_export_access.py
 python tools/check_services_browser.py
 python tools/check_storage_services.py
+python tools/test_settings_hub.py
 node tools/check_privacy_js.cjs
 ```
 

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Preserve workspace-specific deep links through first setup, keep the shared
+  account form current in Settings, and expose file import when adding an account.
+  Compact mobile connection controls keep the account identity visible.
+- Cancel pending Settings confirmations and setup continuations when their
+  workspace changes, including accounts with identical configuration revisions.
+- Keep a valid panel session through temporary startup/network failures and offer
+  Retry. Expired or revoked access still returns the browser to sign-in.
 - Run both panel regression suites on pull requests, including download checks in
   Firefox and WebKit. Release packages now wait for the exact revision's dependency,
   CodeQL and container audits; HIGH/CRITICAL container findings block publication.
@@ -28,6 +35,24 @@
   backups, verified attachment offloading and evidence retention. Recovery checks
   signatures and file hashes; exports require selected offloaded files to be
   restored. Investigation sources can be handed off as Markdown and JSONL.
+- Signed reports now explain the trust basis for the specific archive, with separate
+  export-time checks, recorded observations, missing material and independent review
+  steps. HTML, PDF and signed JSON/manifest assessments share the same facts; English,
+  Russian and German wording is available. Timestamp conclusions require a trusted
+  certificate signature and a checkpoint bound to the exact journal prefix.
+  See [case reports](CASE_REPORTS.md).
+- Added six-step first setup and a unified Settings page with simple, standard and
+  expert presentation levels. Language, device time zone, theme and progress are
+  saved per operator and workspace; language changes preserve the panel session.
+- Copy, monitoring and evidence presets show a diff before changes, preserve optional
+  manual overrides and expose hidden settings through search. External-service
+  permissions are checked when enabling timestamps, notifications and off-site copies.
+- Automatic connection tries public MTProxy, portable WARP, then an explicitly
+  allowed direct route. Checks, a persistent status indicator and recovery actions
+  replace silent proxy failures. HTTPS CONNECT verifies the proxy certificate.
+- File policies can limit video duration; capture and account export enforce the
+  configured size and duration. Existing journals and stored configurations stay
+  intact. See [first setup and settings](ru/SETTINGS.md).
 
 ## 0.8.0 preview · 2 November 2026
 
