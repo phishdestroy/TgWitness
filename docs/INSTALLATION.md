@@ -74,6 +74,8 @@ Retain this fingerprint from a repository revision you trust. A checksum from
 the same download server detects a mismatch; the independently trusted public
 key is what authenticates a release signature.
 
+Use a new, empty directory for the verification downloads below.
+
 **Linux / macOS — run in a new, empty download directory** (requires curl and OpenSSL):
 
 ```sh

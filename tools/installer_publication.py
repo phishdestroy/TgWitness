@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import re
 from urllib.error import HTTPError
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
@@ -18,10 +18,15 @@ NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.+-]{0,150}")
 MAX_BYTES = 64 * 1024 * 1024
 
 
+class NoRedirects(HTTPRedirectHandler):
+    def redirect_request(self, request, response, code, message, headers, target):
+        raise ValueError("Installer downloads must not redirect")
+
+
 def fetch(path, limit=MAX_BYTES):
     request = Request(ORIGIN + "/" + path, headers={
         "User-Agent": "TgWitnessInstallerCheck/1", "Cache-Control": "no-cache"})
-    with urlopen(request, timeout=45) as response:
+    with build_opener(NoRedirects).open(request, timeout=45) as response:
         if response.url != request.full_url:
             raise ValueError("Installer downloads must not redirect")
         data = response.read(limit + 1)
@@ -130,7 +135,8 @@ def verify_public(site):
              if p.is_file() and not p.name.startswith((".", "_"))]
 
     def check(path):
-        if fetch(path) != (site / path).read_bytes():
+        # Workers canonicalizes /index.html to /; downloads must not redirect.
+        if fetch("" if path == "index.html" else path) != (site / path).read_bytes():
             raise ValueError("Published bytes differ: " + path)
 
     with ThreadPoolExecutor(max_workers=6) as pool:

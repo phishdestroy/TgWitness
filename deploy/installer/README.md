@@ -137,6 +137,8 @@ See [Cloudflare's GitHub Actions setup](https://developers.cloudflare.com/worker
 for the token. A local `wrangler login` is not a CI credential. Keep the signing
 key in GitHub; Cloudflare receives public files only. Do not also enable native
 Workers Builds for the same Worker: use one publisher to avoid competing deploys.
+The publish job uses the `installer-production` GitHub environment; any required
+reviewers configured there apply before its deployment credentials are used.
 
 The publication job downloads the artifact from its own successful build, checks
 its source commit and signatures, and copies previously published releases after
