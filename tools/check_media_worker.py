@@ -80,7 +80,7 @@ def main():
             assert hashlib.sha256(path.read_bytes()).hexdigest() == digest
             print("Isolated real OCR passed on generated " + language + " image; input unchanged.", flush=True)
         path = Path(scratch) / "synthetic-speech.wav"
-        phrase = "The quick brown fox jumps over the lazy dog. This is a test of speech recognition."
+        phrase = "This is a voice recording. It is sunny today. The final report contains seven messages."
         subprocess.run([speech, "-v", "en-us", "-s", "135", "-w", str(path), phrase], check=True,
                        capture_output=True, timeout=20)
         with wave.open(str(path), "rb") as audio:
@@ -88,7 +88,8 @@ def main():
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
         result = asyncio.run(run_container(path, MediaJob(chat_id=1, event_seq=1, digest=digest,
                                                          engine="transcription", language="en"), secrets.token_hex(16)))
-        assert {"quick", "brown", "fox", "lazy", "dog"} <= set(re.findall(r"[a-z]+", result["text"].lower())), result["text"]
+        required_words = {"voice", "recording", "sunny", "today", "final", "report", "contains", "seven", "messages"}
+        assert required_words <= set(re.findall(r"[a-z]+", result["text"].lower())), result["text"]
         assert result["engine"] == "faster-whisper" and result["language"] == "en" and result["segments"]
         assert result["engine_version"] == versions["faster_whisper"]
         assert result["model_version"] == FILES["model.bin"][1]
