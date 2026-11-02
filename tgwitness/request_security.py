@@ -32,14 +32,18 @@ class RequestSecurity:
         if not any(address in net for net in self.trusted):
             return str(address)
         values = [v.decode("latin-1") for k, v in scope.get("headers", []) if k.lower() == self.header]
-        if len(values) != 1 or len(values[0]) > 2048:
+        if not values:
             return str(address)
+        if len(values) != 1 or len(values[0]) > 2048:
+            raise ValueError('Invalid forwarded client address.')
         try:
             chain = [ipaddress.ip_address(item.strip()) for item in values[0].split(",")]
         except ValueError:
-            return str(address)
+            raise ValueError('Invalid forwarded client address.') from None
         if self.header == b"cf-connecting-ip":
-            return str(chain[0]) if len(chain) == 1 else str(address)
+            if len(chain) != 1:
+                raise ValueError('Invalid forwarded client address.')
+            return str(chain[0])
         for candidate in reversed(chain):
             if not any(address in net for net in self.trusted):
                 break
@@ -50,7 +54,11 @@ class RequestSecurity:
         if scope["type"] != "http" or scope.get("tgwitness.request_checked"):
             return await self.app(scope, receive, send)
         scope = dict(scope, **{"tgwitness.request_checked": True})
-        address = self.client(scope)
+        try:
+            address = self.client(scope)
+        except ValueError:
+            return await JSONResponse({"detail": "Invalid forwarded client address."}, status_code=400,
+                                      headers={"Cache-Control": "no-store"})(scope, receive, send)
         scope["client"] = (address, (scope.get("client") or (None, 0))[1])
         if self.allowed and scope.get("path") != "/_tgwitness/ready":
             try:

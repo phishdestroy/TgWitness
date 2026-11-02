@@ -42,8 +42,12 @@ async def boundary_checks():
     cf = RequestSecurity(app, trusted='127.0.0.1', header='cf-connecting-ip', allowed='', clock=lambda: clock[0])
     await request(peer='127.0.0.1', headers=[(b'cf-connecting-ip', b'2001:db8::12')], target=cf)
     assert seen[-1] == '2001:db8::12'
-    await request(peer='127.0.0.1', headers=[(b'cf-connecting-ip', b'192.0.2.1,192.0.2.2')], target=cf)
-    assert seen[-1] == '127.0.0.1'
+    assert (await request(peer='127.0.0.1', headers=[(b'cf-connecting-ip', b'192.0.2.1,192.0.2.2')], target=cf))['status'] == 400
+    # Malformed trusted metadata must never inherit an allowlisted local proxy IP.
+    strict = RequestSecurity(app, trusted='127.0.0.1', allowed='127.0.0.1', header='x-forwarded-for')
+    assert (await request(peer='127.0.0.1', headers=[(b'x-forwarded-for', b'invalid')], target=strict))['status'] == 400
+    assert (await request(peer='127.0.0.1', headers=[(b'x-forwarded-for', b'192.0.2.1'), (b'x-forwarded-for', b'192.0.2.2')], target=strict))['status'] == 400
+    assert (await request(peer='127.0.0.1', target=strict))['status'] == 200
     restricted = RequestSecurity(app, trusted='', allowed='198.51.100.0/24')
     assert (await request(target=restricted))['status'] == 403
     assert (await request(peer='198.51.100.9', target=restricted))['status'] == 200

@@ -120,7 +120,9 @@ for the panel process. Opening a stream also consumes the API request budget.
 Forwarded IP headers are ignored unless the actual TCP peer belongs to
 `TGWITNESS_TRUSTED_PROXIES` (comma-separated IPs or CIDRs). Set
 `TGWITNESS_PROXY_HEADER` to `x-forwarded-for` or `cf-connecting-ip`. XFF is walked
-from the nearest proxy toward the first untrusted peer. The managed quick tunnel
+from the nearest proxy toward the first untrusted peer. Malformed or duplicate
+trusted address metadata is rejected, so it cannot inherit an allowlisted proxy
+address. The managed quick tunnel
 trusts the local cloudflared connector; the own-domain setup trusts local Caddy.
 Direct deployments trust no proxy by default. If launching Uvicorn yourself,
 disable its proxy-header processing so this boundary receives the actual peer.
