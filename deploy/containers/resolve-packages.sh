@@ -25,13 +25,10 @@ cp "$root/$profile.packages" "$out/$profile-$arch.packages"
 awk '/^P:/ {name=substr($0,3)} /^V:/ {print name "=" substr($0,3)}' \
     /lib/apk/db/installed | sort > "$out/$profile-$arch.versions"
 mkdir "$cache/apks"
-# Download exactly the versions selected by the authenticated installation.
-# apk add --no-cache does not leave a repository index for a subsequent fetch.
-while IFS='=' read -r name version; do
-    package="$name-$version.apk"
-    wget -q -T 60 -O "$cache/apks/$package" "$repository/$arch/$package"
-    apk verify "$cache/apks/$package"
-done < "$out/$profile-$arch.versions"
+# Explicit --no-cache loads the authenticated index for this command too.
+# Every installed version is a constraint, including the complete base closure.
+apk fetch --no-cache --recursive --output "$cache/apks" $(cat "$out/$profile-$arch.versions")
+for package in "$cache"/apks/*.apk; do apk verify "$package"; done
 (
     cd "$cache/apks"
     sha256sum ./*.apk | sed 's|  ./|  |' | sort -k2
