@@ -122,12 +122,13 @@ def test_preview_preserves_analytics_anchor_without_scripts_or_styles():
 
 
 @pytest.mark.parametrize('design', sorted(report_layouts.DESIGNS))
-def test_case_board_survives_composition_in_signed_html_and_pdf(tmp_path, design):
+def test_case_board_survives_composition_in_signed_html_and_pdf(tmp_path, monkeypatch, design):
     from tgwitness import board
     from tools.test_case_board import ADMIN, bookmark
     from tgwitness.verify import verify_bundle
-    import fitz
+    from tools.test_independent_report_pdf import capture_documents
 
+    documents = capture_documents(monkeypatch)
     vault, store = Vault(tmp_path), Store(tmp_path)
     store.bind(vault)
     try:
@@ -141,8 +142,7 @@ def test_case_board_survives_composition_in_signed_html_and_pdf(tmp_path, design
             assert html.count('id="case-board"') == 1
             assert 'Investigator interpretation' in html
             assert 'Team notes and bookmarks' in html
-            with fitz.open(stream=bundle.read('report.pdf'), filetype='pdf') as document:
-                text = ''.join(page.get_text() for page in document)
+            text = '\n'.join(line for document in documents for line in document.reading_lines)
             assert 'Investigator interpretation' in text and 'Team notes and bookmarks' in text
     finally:
         store.close()
