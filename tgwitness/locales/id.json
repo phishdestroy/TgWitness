@@ -5734,5 +5734,9 @@
 "This workspace is not in the group.": "Ruang kerja ini tidak termasuk dalam grup.",
 "Continuous collection": "Pengumpulan berkelanjutan",
 "Saved files": "Berkas yang disimpan",
-"Can Telegram see this server's address?": "Apakah Telegram dapat melihat alamat server ini?"
+"Can Telegram see this server's address?": "Apakah Telegram dapat melihat alamat server ini?",
+"Case Board card soft limit": "Ambang peringatan kartu Case Board",
+"Case Board comment soft limit": "Ambang peringatan komentar Case Board",
+"Case Board slice page size": "Jumlah rekaman per halaman cuplikan Case Board",
+"Show Case Board media previews": "Tampilkan pratinjau media Case Board"
 }

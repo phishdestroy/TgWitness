@@ -5734,5 +5734,9 @@
 "This workspace is not in the group.": "此工作區不屬於該群組。",
 "Continuous collection": "持續收集",
 "Saved files": "已儲存的檔案",
-"Can Telegram see this server's address?": "Telegram 能否看到此伺服器的位址？"
+"Can Telegram see this server's address?": "Telegram 能否看到此伺服器的位址？",
+"Case Board card soft limit": "Case Board 卡片數量警告閾值",
+"Case Board comment soft limit": "Case Board 留言數量警告閾值",
+"Case Board slice page size": "Case Board 切片每頁記錄數",
+"Show Case Board media previews": "顯示 Case Board 媒體預覽"
 }

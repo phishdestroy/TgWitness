@@ -5768,5 +5768,9 @@
 "This workspace is not in the group.": "এই ওয়ার্কস্পেসটি গ্রুপে নেই।",
 "Continuous collection": "অবিরত সংগ্রহ",
 "Saved files": "সংরক্ষিত ফাইলসমূহ",
-"Can Telegram see this server's address?": "টেলিগ্রাম কি এই সার্ভারের ঠিকানা দেখতে পারে?"
+"Can Telegram see this server's address?": "টেলিগ্রাম কি এই সার্ভারের ঠিকানা দেখতে পারে?",
+"Case Board card soft limit": "Case Board কার্ডের সংখ্যার সতর্কতা সীমা",
+"Case Board comment soft limit": "Case Board মন্তব্যের সংখ্যার সতর্কতা সীমা",
+"Case Board slice page size": "Case Board অংশের প্রতি পৃষ্ঠায় রেকর্ডের সংখ্যা",
+"Show Case Board media previews": "Case Board মিডিয়ার পূর্বরূপ দেখান"
 }

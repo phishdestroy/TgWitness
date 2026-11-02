@@ -28,13 +28,21 @@ from .operator_privacy import private_log
 LOG = logging.getLogger("tgwitness.access")
 JOURNAL_LOG = logging.getLogger("tgwitness.journal")
 
-PERMISSIONS = ("view", "export", "sources", "collect", "interact", "settings", "account")
+PERMISSIONS = ("view", "export", "sources", "collect", "interact", "settings", "account", "board.read", "board.write", "board.manage")
 ADMIN_DEFAULTS = {"max_sessions": 0, "on_limit": "replace", "session_minutes": 720}
 WORKSPACE_ID = re.compile(r"default|[a-f0-9]{32}")
 GROUP_ID = re.compile(r"[a-f0-9]{32}")
 
 
 POLICY = {
+    "GET /api/board": ("board.read", "filter"),
+    "GET /api/board/card/{identifier}": ("board.read", "body"),
+    "GET /api/board/card/{identifier}/participants": ("board.read", "body"),
+    "GET /api/board/slice/{identifier}/records": ("board.read", "body"),
+    "GET /api/board/slice/{identifier}/export": ("board.read", "body"),
+    "GET /api/board/export": ("board.read", "body"),
+    "POST /api/board/slice-preview": ("board.read", "body"),
+    "POST /api/board/{action}": ("board.write", "body"),
     "GET /api/showcase": ("showcase", "root"),
     "GET /api/showcase/{workspace_id}": ("showcase", "root"),
     "GET /api/showcase/{workspace_id}/chats/{chat_id}": ("showcase", "root"),

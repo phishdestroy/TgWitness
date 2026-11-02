@@ -5768,5 +5768,9 @@
 "This workspace is not in the group.": "Ushbu ish maydoni guruhda emas.",
 "Continuous collection": "Uzluksiz yig'ish",
 "Saved files": "Saqlangan fayllar",
-"Can Telegram see this server's address?": "Telegram bu server manzilini ko'rishi mumkinmi?"
+"Can Telegram see this server's address?": "Telegram bu server manzilini ko'rishi mumkinmi?",
+"Case Board card soft limit": "Case Board kartalari soni uchun ogohlantirish chegarasi",
+"Case Board comment soft limit": "Case Board izohlari soni uchun ogohlantirish chegarasi",
+"Case Board slice page size": "Case Board kesimining bir sahifasidagi yozuvlar soni",
+"Show Case Board media previews": "Case Board media oldindan ko‘rishini ko‘rsatish"
 }

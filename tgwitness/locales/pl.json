@@ -5836,5 +5836,9 @@
 "This workspace is not in the group.": "Ten obszar roboczy nie należy do grupy.",
 "Continuous collection": "Ciągłe gromadzenie danych",
 "Saved files": "Zapisane pliki",
-"Can Telegram see this server's address?": "Czy Telegram widzi adres tego serwera?"
+"Can Telegram see this server's address?": "Czy Telegram widzi adres tego serwera?",
+"Case Board card soft limit": "Próg ostrzegawczy kart Case Board",
+"Case Board comment soft limit": "Próg ostrzegawczy komentarzy Case Board",
+"Case Board slice page size": "Rekordy na stronie wycinka Case Board",
+"Show Case Board media previews": "Pokaż podgląd multimediów w Case Board"
 }
