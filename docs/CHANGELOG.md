@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Added signed HTML, JSON and PDF reports with an offline viewer, verified selections,
+  archive sidecars and configurable report contents in all 25 panel languages.
+- Added minimised journal handovers, message details, indicators, collection clock/profile
+  receipts, absent-ID rechecks and admin-log context. Existing signed records remain verifiable.
+- Added workspace protection modes and clearer account-loss reasons; packaged report fonts
+  and assets for wheel and source installations.
+
 - Panel fixes. The journal no longer stops at a skipped-attachment record
   ("mediaTypes is not defined"), so its record count and Newer/Older paging stay
   correct. Confirmations and name prompts are panel dialogs instead of
