@@ -8,7 +8,7 @@ Bir vakayı, ilk toplamadan alıntılanan zaman çizelgesine ve doğrulanabilir 
 
 ## Örnek vaka: Dört farklı sohbet boyunca bir hedef adresin değişmesi
 
-Bir duyuru bir botu işaret ediyor. Bir operasyon grubu yeni bir ödeme hedefini tartışıyor, botun klavyesi bunu gösteriyor ve özel bir takip mesajında bu bilgi tekrarlanıyor. Ardından duyuru düzenleniyor ve bir grup mesajı kayboluyor.
+Bir duyuru bir botu işaret eder. Bir operasyon grubu yeni bir ödeme hedefini tartışır ve botun klavyesi bunu görüntüler. Duyuru düzenlenir, özel bir takip mesajında hedef tekrarlanır ve bir grup mesajı kaybolur.
 
 Sorular şunlardır: Değişiklikten önce ve sonra neler gözlemlendi, her bir öğeyi hangi Telegram hesapları paylaştı, hedef nerede göründü, hangi ek baytları korundu ve hangi aralıklar bilinmiyor?
 
@@ -34,8 +34,8 @@ Akış şeması · Kanallar → Çalışma alanı günlüğü; Gruplar → Çal�
 
 ## 1. Vakayı tanımlayın ve olayın tüm ayrıntılarını toplayın
 
-1. Toplama hesabını kendi çalışma alanına bağlayın. Harici vaka notlarında, vaka referansını, hesap kimliğini, çalışma alanını, gözlem başlangıç tarihini ve güvenilir imza anahtarı parmak izini kaydedin.
-2. Açık **Kaynaklar → Gözlem kapsamı → Soruşturma modu**. Ön ayar, **Tüm hesap**, kanallar/gruplar/özel sohbetler/botlar, kendi eylemler, kaynak profilleri ve yeni keşfedilen kaynaklara ait en son 200 görünür mesajı seçer. İnceledikten sonra **Kapsamı Kaydet**düğmesine basın ve kapsam onayını tamamlayın.
+1. Toplama hesabını kendi çalışma alanına bağlayın. [Case Board](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/) ’da veya vaka kaydınızda vaka referansını, hesap kimliğini, çalışma alanını ve gözlem başlangıcını kaydedin. Güvenilir imza anahtarı parmak izini ayrı olarak saklayın.
+2. Özel bir toplama hesabı için **Kaynaklar → Gözlem kapsamı → Soruşturma modu'nu** açın. Ön ayar, **Tüm hesap**, kanallar/gruplar/özel sohbetler/botlar, kendi eylemler, kaynak profilleri ve yeni keşfedilen kaynaklar için görünür durumdaki en son 200 mesajı seçer. Ayarları gözden geçirin, **Kapsamı Kaydet**’e basın ve kapsam onayını tamamlayın. Ana hesaplar, seçilen sohbetleri veya bir klasörü kullanır; hesap genelinde toplama işlemi, soruşturma için işaretlenmiş hesaplarda kullanılabilir.
 3. **Sohbetleri yükleyin** ve kaynakları hesabın sohbet listesiyle karşılaştırın. Hariç tutulanları kontrol edin. **Parametreler → Hesabın listesinden okunan sohbet sayısı** varsayılan olarak 1.000'dir ve en fazla 20.000'e kadar izin verilir. Liste sınırını aşan kaynaklar, aktif hale geldiklerinde eklenir. Gerçekte sayılanları kaydedin.
 4. **Kayıt ayar**larında, "**Görünür tüm etkinlikler"** seçeneğini seçin ve izleme ayarlarını kaydedin. Ek türlerini/sınırlarını ve boş disk alanını kontrol edin.
 5. Gözlemi başlatın. Kontrollü bir yeni mesaj, düzenleme ve silme işlemini doğrulayın, ardından test referanslarını ve olası hataları kaydedin.
@@ -58,7 +58,7 @@ Her sohbet için bir satır içeren bir kaynak kaydı tutun:
 
 Her kaynak için uygun veri toplama yöntemini kullanın:
 
-- **Kaynaklar**'da **tam geçmişi yükle** (şu anki `main`), etkinleştirilmiş kaynaklardan mevcut geçmiş mesajları çalışma alanı günlüğüne yükler. Duraklatma/devam ettirme ve imzalı ilerleme raporunu destekler. [Geçmiş elde etme bölümüne](https://phishdestroy.github.io/TgWitness/tr/docs/reference/history/) bakın.
+- **"**Kaynaklardan **Tam Geçmişi Yükle" seçeneği,** etkinleştirilmiş kaynaklardan mevcut geçmiş mesajları çalışma alanı günlüğüne yükler. Bu işlem, duraklatma/devam ettirme ve imzalı ilerleme raporunu destekler. [Geçmiş elde etme bölümüne](https://phishdestroy.github.io/TgWitness/tr/docs/reference/history/) bakınız.
 - **Geçmiş anlık görüntüsü,** son zamanlarda görünür olan mesajları gözlem günlüğüne kaydeder. Varsayılan maksimum değer 500'dür; **Parametreler → En büyük geçmiş anlık görüntüsü** seçeneği ile bu değer 10.000'e yükseltilebilir. Bunlar, yeniden oluşturulmuş düzenlemeler değil, güncel geçmiş gözlemleridir.
 - **Sohbetin tamamını dışa aktar → Sohbetin tamamını dışa aktar** veya **Sohbetler → Sohbeti dışa aktar** seçeneği, bir sohbetin o anda görünür olan geçmişini ayrı bir imzalı `chat.json` / `chat.html` paketine aktarır. Davanın kaynakları için bu işlemi tekrarlayın ve her sonucu saklayın.
 - **Yeni bir sohbet veya bot ortaya çıktığında,** profilini ve en fazla 1.000 adet son mesajı kaydedebilir; Soruşturma modunda ise 200 mesaj seçilir. Mod etkinleştirildiğinde, mevcut sohbetler bu verileri geriye dönük olarak almaz.
@@ -103,6 +103,8 @@ Bir bulguda türetilmiş bir profili kullanmadan önce, alıntılanan kayıtlar�
 
 Eklerin hash değerlerini ve bunlara ilişkin mesaj referanslarını karşılaştırın. Aynı dosyalar, bir dosyanın yaratıcısını, ileten kişiyi veya ortak bir operatörü kanıtlamaz. Aynı isimler ve benzer avatarlar tek başına iki Telegram kimliğini tek bir kişiye bağlamaz.
 
+Ekibin çalışma notlarını [Case Board](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/)'da tutun: #146, #188 ve #205 gibi güvendiğiniz kayıtları yer imlerine ekleyin, tam hedef dizgisini vurgulayın ve iki kayıt arasında veya belirli bir zaman aralığında kaydedilen her eylemin bir kesitini kaydedin. Notlar ve durumlar, ekibin incelemesini kendi imzalı geçmişinde tutar; bu geçmiş, kaynak gözlemlerinden ayrı olarak tanımlanabilir.
+
 ## 5. Sohbetler arası zaman çizelgesini oluşturun
 
 **Sohbetler'de** kaydedilen sürümleri ve bunların **Günlük kaydı #…** bağlantılarını kullanın. **Günlük**'te, **Tüm kaynakları Düzenlemeler**, **Silme işlemleri** ve **Kapsam** ile birleştirin. Varsa hem `source_at`'yi hem de `observed_at`'yi koruyun.
@@ -122,7 +124,7 @@ Bu örnek referanslar arasında başka kayıtlar da yer alabilir. Sıra numarala
 
 Her bir hesap için ayrı bir çalışma alanı kullanın ve envanterini tekrarlayın. Her karşılaştırmada hesap kimliğini, rolü, imza anahtarı parmak izini ve kaynak referanslarını saklayın. Mesaj numaraları, sohbetler/hesaplar arasında geçerli genel tanımlayıcılar değildir.
 
-Çalışma alanları arası korelasyon, harici vaka notlarında veya analiz araçlarında gerçekleştirilir. TgWitness'te şu anda çalışma alanları arası genel arama, birleştirilmiş zaman çizelgesi, soruşturma grafiği veya birleştirilmiş vaka arşivi bulunmamaktadır. **Bir** kanalın/süper grubun çoklu hesap olarak dışa aktarılması, hesap günlüklerinin birleştirilmesi değil, ayrı bir işlemdir.
+Case Board, her çalışma alanı içinde kaynağa bağlı notları ve koleksiyonları tutar. Grup ekranı, hesap durumunu toplu olarak inceler ve ayrı çalışma alanlarından alınan verileri bir araya getirebilir. Bu kaynakları vaka notlarınızda veya analiz araçlarınızda ilişkilendirin; her günlük kendi kaynağını ve imza anahtarını korur. Genel arama veya birleştirilmiş çalışma alanları arası zaman çizelgesi oluşturulmaz. Bir kanalın/süper grubun çoklu hesap dışa aktarımı, uygun hesapları kullanarak o sohbetin geçmişini alır.
 
 Daha uzun süreli çalışmalar için, [bağımsız bir tanık](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/) aracılığıyla sınırları koruyun. Kontrollü teslimat kontrollerini kullanarak her hesabın yakalama yolunu ve görünürlüğünü doğrulayın.
 
@@ -134,6 +136,7 @@ Bunları, bir analist tarafından derlenen vaka dizininde bir arada tutun:
 | --- | --- |
 | Vaka notları ve kaynak kaydı | Soru, veri toplama politikası, erişim/rol, bulgular, alternatif açıklamalar ve eksiklikler |
 | Zaman çizelgesi | Her bir giriş için hem zaman bilgisi hem de çalışma alanı/sohbet/mesaj/sıraya ilişkin referanslar |
+| Case Board, kullanılıyorsa dışa aktarma ve kesitler | Kaynağa bağlı yer imleri, alıntılar, ekip notları, koleksiyonlar, revizyon geçmişi ve kanıt ZIP dosyasıyla karşılaştırılarak kontrol edilen seçilmiş kayıtlar |
 | Çalışma alanı başına imzalı kanıt ZIP dosyası | Kaydedilen günlüğün tamamı, içerik listesi ve dahil edilen korunmuş medya dosyaları; panel filtreleri, günlüğün dışa aktarılmasını kısıtlamaz |
 | Ayrı ayrı imzalanmış kişi profil dosyaları | Elde edilen referanslar, ilgili çalışma alanındaki kanıtlarla karşılaştırılarak kontrol edildi |
 | İmzalı tam sohbet dışa aktarımları | Gözlem günlüğünden ayrı olarak, o anda görünür olan geçmişin toplanması |
@@ -147,9 +150,10 @@ Güvenilir bir kurulumdan, dosya adları ve her çalışma alanının gerçek pa
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Gerçek doğrulama sonuçları ve orijinal kanıtlar korunur. Üst düzey vaka dizini, kaynak kaydı ve analistlerin sonuçları harici olarak tutulur; her bir TgWitness kanıtının kendine özgü bir imzası ve doğrulama prosedürü vardır.
+Gerçek doğrulama sonuçlarını ve orijinal kanıtları koruyun. Case Board’daki çalışma alanı notlarını, alıntılanan kaynak materyalle birlikte dışa aktarın. Çalışma alanları arası bulguları en üst düzey vaka dizininde bir araya getirin; her bir TgWitness kanıtının kendine ait imzası ve doğrulama prosedürü vardır.
 
 ## Soruşturmaya uyarlama
 

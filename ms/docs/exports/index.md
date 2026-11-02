@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/exports/
 
-Berkongsi rekod yang disahkan supaya orang lain boleh menyemak.
+Berikan penerima fail yang boleh mereka semak menentang ruang kerja pengumpulan dan sejarahnya yang disimpan.
 
 Simpan rujukanEksport ZIP yang disahkanPenerima mengesahkan
 
@@ -16,9 +16,9 @@ Simpan cap jari kunci awam ruang kerja di luar pengumpul. Semasa pengumpulan, si
 
 ## Muat turun ZIP yang disahkan
 
-Buka **Eksport** dan cipta ZIP bukti yang disahkan. Ia merangkumi jurnal ruang kerja dan manifes fail yang disahkan. Penapis panel tidak mengehadkan eksport jurnal penuh ini: semak bahan sebelum berkongsi.
+Buka **Eksport** dan buat ZIP bukti yang ditandatangani. Ia merangkumi jurnal ruang kerja penuh dan manifes fail yang ditandatangani. Gunakan [Report Studio](https://phishdestroy.github.io/TgWitness/ms/docs/reports/) untuk membentuk laporan yang mudah dibaca, atau [ekstrak](https://phishdestroy.github.io/TgWitness/ms/docs/handover/) [penyerahan](https://phishdestroy.github.io/TgWitness/ms/docs/handover/) untuk menyampaikan hanya data terpilih yang dimampatkan.
 
-Muat turun HTML dan CSV berdiri sendiri berguna untuk bacaan dan analisis. Simpan fail ZIP yang ditandatangani sebagai asal yang boleh disahkan; fail HTML atau CSV berasingan tidak mempunyai tandatangan berdiri sendiri.
+Laporan HTML, PDF dan JSON mempunyai meterai berasingan yang ditandatangani dan boleh disemak secara berasingan. CSV adalah salinan analisis yang mudah; gunakan CSV tepat di dalam ZIP yang disahkan untuk memeriksa integritinya. Simpan ZIP yang ditandatangani apabila penerima juga memerlukan rekod sumber dan lampiran.
 
 ## Sahkan dengan salinan TgWitness yang dipercayai
 
@@ -30,13 +30,14 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 
 
 Apabila kedua-dua rujukan lulus, hasilnya melaporkan `key_pinned: true` dan `checkpoint_checked: true`. Simpan keputusan pengesahan bersama arkib asal. Titik pemeriksaan yang disimpan mesti berada pada atau sebelum sempadan eksport.
 
-## Memahami keputusan
+## Gunakan hasil pengesahan
 
-- **Integriti:** sejarah yang direkodkan dan fail yang dieksport sepadan dengan tandatangan mereka.
-- **Perhatian awal:** titik pemeriksaan luaran membolehkan anda membandingkan eksport dengan awalan jurnal yang telah disimpan sebelum ini.
-- **Penghantaran:** ujian hantar terkawal → sunting → padam memeriksa peristiwa tertentu terhadap rekod yang dirakam.
+- **Periksa fail yang dihantar:** manifes mengikat hash mereka, dan tandatangan rekod mengikat jurnal yang disimpan. Fail yang diubah atau rantaian rekod yang terputus dikesan.
+- **Semak identiti ruang kerja:** cap jari yang disimpan secara berasingan mengenal pasti kunci tandatangan yang anda jangkakan.
+- **Bandingkan sempadan terdahulu:** checkpoint yang disimpan memeriksa eksport menentang awalan jurnal yang disimpan sebelum penyerahan.
+- **Semak liputan pengumpulan:** jurang, keputusan pemerolehan dan hantaran terkawal → sunting → padam ujian menerangkan peristiwa yang dirakam oleh tetapan ini.
 
-Tandatangan yang sah tidak membuktikan bahawa setiap peristiwa Telegram telah tiba, bahawa sumber itu berkata benar atau bahawa jam pengumpul adalah tepat.
+Simpan keputusan ini bersama salinan penerima. Lihat [apa yang ditetapkan oleh pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope) untuk skop pemeriksaan dan penilaian berasingan terhadap tuntutan sumber dan liputan pengumpulan.
 
 ## Menyediakan salinan luar tapak S3
 
@@ -59,30 +60,24 @@ Panel lengkap dengan pilihan lanjutan dibuka. Tiada kelayakan storan dipaparkan.
 | Salin selang | Dari 1 hingga 1,440 minit; lalai 5 minit. Aplikasi mesti berjalan untuk salinan yang dijadualkan. |
 | Penahanan Object Lock | Hari pengekalan dan mod untuk baldi yang menyokong Object Lock. Hari sifar mengekalkan pengekalan lalai baldi. |
 
-1. Masukkan destinasi dan kelayakan. Biarkan **salinan luar tapak** tidak dicentang semasa penyediaan, kemudian pilih **Simpan salinan luar tapak**.
+1. Buat bucket dengan penyedia anda, kemudian masukkan destinasi dan kelayakan. Biarkan **'Keep an off-site copy'** tidak dicentang semasa penyediaan, kemudian pilih **'Save off-site copy**'.
 2. Pilih **Uji sambungan**. Ini memuat naik objek ujian yang disulitkan dan memeriksa respons storan.
 3. Pilih **Muat turun kunci penyulitan**. Simpan fail itu secara berasingan daripada pengumpul; ia diperlukan untuk pemulihan.
 4. Aktifkan kotak semak **Simpan salinan di luar tapak** dan simpan semula. Pilih **Salin sekarang** untuk proses manual, atau biarkan jadual berjalan.
 
-**Tidak melakukannya.** Ia tidak mencipta tong simpanan. Pemunggahan terjadual berhenti apabila aplikasi berhenti.
-
 ## Semak pengekalan dan kemajuan salinan
 
-Di bawah **Pilihan lanjut**, pilih hari pengekalan dan `GOVERNANCE` atau `COMPLIANCE` apabila baldi anda menyokong Object Lock. TgWitness membaca semula mod pengekalan dan tarikh akhir objek yang dimuat naik. Status melaporkan pengesahan, pengekalan yang hilang atau kegagalan semakan; hanya muat naik yang berjaya sahaja tidak mengesahkan pengekalan.
+Di bawah **Pilihan lanjut**, pilih hari pengekalan dan `GOVERNANCE` atau `COMPLIANCE` apabila baldi anda menyokong Object Lock. TgWitness membaca semula mod pengekalan dan tarikh akhir objek yang dimuat naik. Semak hasil pengekalan berasingan: disahkan, pengekalan hilang atau pemeriksaan gagal.
 
 Panel melaporkan pusingan terakhir, bilangan objek, bait yang dipindahkan, sempadan jurnal yang disalin dan sebarang ralat. Media tempatan yang hilang atau berubah dilaporkan dan dicuba semula pada pusingan seterusnya. Fail, titik pemeriksaan dan eksport yang beratur selepas media tersebut masih boleh disalin.
 
-Pemunggahan menggunakan laluan Direct, SOCKS5 atau HTTP ruang kerja. Salinan S3 tidak tersedia melalui MTProxy; aplikasi tidak beralih kepada sambungan terus.
-
-**Tidak melakukannya**. Ia tidak memaksa penyedia menguatkuasakan Object Lock semata-mata kerana muat naik telah diterima.
+Pemunggahan menggunakan laluan Direct, SOCKS5 atau HTTP ruang kerja. Pilih salah satu laluan ini untuk menyalin ke S3; laluan hanya MTProxy akan meninggalkan salinan dalam status menunggu dengan ralat.
 
 ## Simpan kunci pemulihan secara berasingan
 
-JSON yang dimuat turun mengandungi kunci penyahsulit, tetapan destinasi, awalan objek ruang kerja dan cap jari kunci tandatangan. Ia tidak mengandungi kelayakan akses S3: pemulihan memerlukan kelayakan berasingan dengan akses baca ke baldi.
+JSON yang dimuat turun mengandungi kunci penyahsulit, tetapan destinasi, awalan objek ruang kerja dan cap jari kunci tandatangan. Pemulihan memerlukan kedua-dua fail kunci ini dan kelayakan storan berasingan dengan akses baca ke baldi. Simpan kelayakan tersebut dalam pelan pemulihan anda.
 
 Jika anda menukar endpoint, bucket atau awalan folder, muat turun semula fail kunci supaya tetapan destinasi sepadan. Aplikasi memulakan salinan baru jurnal, fail dan checkpoint yang disimpan secara tempatan di destinasi baru. Eksport sembang siap yang telah dikeluarkan daripada barisan muat naik tempatan kekal di destinasi asal mereka.
-
-**Tidak melakukannya.** Ia tidak menyahsulit salinan tanpa kunci yang dieksport. Kredensial akses storan tidak dapat menggantikan kunci tersebut.
 
 ## Pulihkan dan sahkan pada mesin lain
 
@@ -108,4 +103,4 @@ Muat turun dan objek yang didekripsi kekal dalam storan sementara peribadi semen
 
 Pemulihan yang berjaya menghasilkan `events.jsonl`, `media/`, `checkpoints/` dan `exports/` bagi bahan yang terdapat dalam salinan. Simpan hasil JSON arahan bersama bahan yang dipulihkan.
 
-**Tidak melakukannya.** Ia tidak membina semula pemerhatian yang tidak pernah sampai ke jurnal atau menggantikan titik pemeriksaan atau saksi yang disimpan secara bebas.
+Bandingkan bahan yang dipulihkan dengan titik pemeriksaan atau rekod saksi yang anda simpan secara bebas, kemudian semak liputan koleksi yang direkodkan untuk tempoh yang anda perlukan.

@@ -226,7 +226,16 @@ Hesap seçicinin yanındaki **+** tuşuna basın veya **Hesap → Ayarlar → Ba
 
 ### Toplu içe aktarma ve hesap grupları
 
-Birden fazla hesap eklemek, dosyaları temel adlarına göre eşleştirmek ve her girişin sonucunu görmek için **Hesaplar → Hesapları içe aktar** bölümünü kullanın. Her hesabın kendi çalışma alanı vardır. Gruplar oturumları, anahtarları veya kanıtları birleştirmeden bir şablondan seçilen ayarları kopyalayabilir. Bkz. [içe aktarma ve grup kılavuzu](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) ve [MTProxy havuz paneli](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+**Hesaplar → Hesapları içe aktar** seçeneğini kullanarak birden fazla hesap ekleyin, dosyaları temel ada göre eşleştirin ve her oturum açma sonucunu görüntüleyin. Her hesap kendi çalışma alanına sahip olur.
+
+Bir grup, oturumlarını, anahtarlarını veya kanıtlarını birleştirmeden ilgili hesapları bir arada tutar. **Hesaplar** altındaki **grubu açtığınızda**, grubun sayfasına yönlendirilirsiniz: `/groups/<id>`:
+
+- **Hesaplar:** her üyenin bağlantı yolu, gözlemleri ve son mesajı; "**Tümünü** başlat" ve "**Tümünü duraklat"** seçenekleri ile.
+- **Dikkat gerekiyor:** oturumu kapatılmış, erişilemeyen veya bağlantı, giriş, kaynak ya da medya sorunu olan hesaplar; her bir isim kendi kartına yönlendirir.
+- **Birden fazla hesabın görüldüğü sohbetler:** paylaşılan kaynaklar, bunları gözlemleyen hesaplar ve kullanılabilir çalışma alanı gözlem süresindeki kesintiler (en fazla yedi gün). **N hesapla dışa aktarma,** bir kanal veya süper grubun dışa aktarımını bu hesaplar arasında böler ve tek bir arşivi imzalar.
+- **Grubu dışa aktar:** her hesabın imzalanmış dışa aktarımının bulunduğu bir ZIP `accounts/` ve `manifest.json` SHA-256 ve anahtar parmak izlerini listeleyen, ana çalışma alanı tarafından `manifest.signature.json`. Her hesap arşivini, `python -m tgwitness.verify` ve o hesabın güvenilir parmak izi ile ayrı ayrı doğrulayın.
+
+Üyeler grubun ayarlarını paylaşır; bir hesap kendi değerlerini koruyabilir. [Paylaşılan ayarlar](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [içe aktarma ve gruplar kılavuzuna](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) ve [MTProxy havuz panosuna](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) bakın.
 
 ## Çıkış
 

@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 คัดลอก `deploy/env.example` ไปยัง `.env` ตั้งค่า `TGWITNESS_IMAGE` เป็นเวอร์ชันที่เผยแพร่ โดยใช้ เส้นทางรีโพสิตอรี**แบบตัวพิมพ์เล็ก** เช่น:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 
 [กระบวนการปล่อย](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml)เวอร์ชันจะพร้อมใช้งานทันทีหลังจาก โครงการนี้ถูกส่งไปยัง repositori GitHub ที่เปิดใช้งาน Actions แล้ว ระบบจะทำงานเมื่อ GitHub Release ถูก**เผยแพร่** รวมถึงเวอร์ชันก่อนปล่อย (prerelease) การส่งร่าง (drafts) และการส่งแท็ก (tag pushes) เพียงอย่างเดียวจะไม่เผยแพร่แพ็กเกจ
 
-1. กำหนดเวอร์ชันแพ็กเกจและบันทึกการเปลี่ยนแปลง (changelog) แล้วเผยแพร่เวอร์ชันที่ติดแท็กด้วย `v` พร้อมทั้งเวอร์ชัน `pyproject.toml` ที่ถูกต้อง เช่น `v0.7.1`.
+1. กำหนดเวอร์ชันแพ็กเกจและบันทึกการเปลี่ยนแปลง (changelog) แล้วเผยแพร่เวอร์ชันที่ติดแท็กด้วย `v` พร้อมทั้งเวอร์ชัน `pyproject.toml` ที่ถูกต้อง เช่น `v0.8.0`.
 2. กระบวนการทำงานนี้จะตรวจสอบความถูกต้องของแท็กและดำเนินการตรวจสอบ Python ที่ใช้ร่วมกันบน Windows/Linux/macOS, general/account-import/QR browser, source-package และ Docker การติดตั้งแบบเนทีฟใหม่ยัง ได้รับการทดสอบบนระบบปฏิบัติการทั้งสามโดยใช้ Python 3.12
 3. หลังจากผ่านการตรวจสอบทั้งหมดแล้ว ระบบจะทำการทดสอบเบื้องต้น (smoke test) บนภาพระบบ ARM64 ใน QEMU, เผยแพร่ ภาพระบบ AMD64/ARM64 ไปที่`ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, และแนบไฟล์ ZIP แหล่งที่มาและไฟล์ Python wheel พร้อมด้วย sidecars SHA-256 ของพวกมัน ไฟล์ ZIP ที่สามารถใช้งานได้บน Windows คือไฟล์ที่ผ่านการทดสอบโดยกระบวนการตรวจสอบ; กระบวนการเผยแพร่จะดาวน์โหลดและเผยแพร่ไฟล์ดังกล่าวพร้อมทั้งค่า checksum ของมัน
 4. งานสุดท้ายจะดาวน์โหลดแพ็กเกจทั้งสามที่เผยแพร่แล้วอีกครั้งและตรวจสอบ ค่า checksum ของพวกมัน จากนั้นจะเผยแพร่`SHA256SUMS.txt` และ`RELEASE-MANIFEST.json` โดยบันทึก เวอร์ชัน การแก้ไขแหล่งที่มา และขนาดของสินทรัพย์ การอัปโหลดจะไม่เขียนทับ สินทรัพย์ของเวอร์ชันที่เผยแพร่แล้ว

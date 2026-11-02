@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/exports/
 
-Chia sẻ bản ghi có chữ ký để người khác có thể kiểm tra.
+Cung cấp cho người nhận các tệp để họ có thể đối chiếu với không gian làm việc thu thập và lịch sử đã lưu của nó.
 
 Giữ lại tham chiếuXuất tệp ZIP đã được ký điện tửNgười nhận xác minh
 
@@ -16,9 +16,9 @@ Vui lòng lưu dấu vân tay khóa công khai của không gian làm việc bê
 
 ## Tải xuống tệp ZIP đã được ký số
 
-Nhấp vào **“Xuất”** và tạo tệp ZIP bằng chứng đã được ký. Tệp này bao gồm nhật ký không gian làm việc và bản kê khai tệp đã được ký. Các bộ lọc trên bảng điều khiển không giới hạn việc xuất toàn bộ nhật ký này: vui lòng xem xét kỹ nội dung trước khi chia sẻ.
+Mở **tính năng Xuất (Exports)** và tạo tệp ZIP bằng chứng đã ký. Tệp này bao gồm nhật ký không gian làm việc đầy đủ và bản kê khai tệp đã ký. Sử dụng [Report Studio](https://phishdestroy.github.io/TgWitness/vi/docs/reports/) để tạo báo cáo dễ đọc, hoặc [trích xuất](https://phishdestroy.github.io/TgWitness/vi/docs/handover/) [bản](https://phishdestroy.github.io/TgWitness/vi/docs/handover/) [bàn giao](https://phishdestroy.github.io/TgWitness/vi/docs/handover/) để chỉ cung cấp dữ liệu đã chọn và được tối ưu hóa.
 
-Các tệp HTML và CSV có thể tải xuống độc lập rất hữu ích cho việc đọc và phân tích. Quý vị nên giữ tệp ZIP đã được ký làm bản gốc có thể xác minh; các tệp HTML hoặc CSV riêng lẻ không có chữ ký độc lập.
+Các báo cáo định dạng HTML, PDF và JSON đều có con dấu đã ký riêng và có thể được kiểm tra độc lập. Tệp CSV là bản sao thuận tiện cho việc phân tích; hãy sử dụng chính tệp CSV bên trong tệp ZIP đã được xác minh để kiểm tra tính toàn vẹn của nó. Giữ lại tệp ZIP đã ký khi người nhận cũng cần các bản ghi nguồn và tệp đính kèm.
 
 ## Vui lòng xác minh bằng một bản sao đáng tin cậy của TgWitness
 
@@ -30,13 +30,14 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 
 
 Khi cả hai tham chiếu đều hợp lệ, kết quả sẽ báo cáo `key_pinned: true` và `checkpoint_checked: true`. Vui lòng lưu giữ kết quả xác minh cùng với tệp lưu trữ gốc. Điểm kiểm tra được lưu giữ phải nằm tại hoặc trước ranh giới của tệp xuất.
 
-## Hiểu rõ kết quả
+## Sử dụng kết quả xác minh
 
-- **Tính toàn vẹn:** lịch sử được ghi lại và các tệp đã xuất ra khớp với chữ ký của chúng.
-- **Lưu ý trước đó:** điểm kiểm tra bên ngoài cho phép quý vị so sánh tệp xuất với tiền tố nhật ký đã được lưu giữ trước đó.
-- **Quy trình thực hiện:** Một thử nghiệm có kiểm soát về các thao tác “gửi → chỉnh sửa → xóa” sẽ đối chiếu các sự kiện cụ thể với bản ghi đã thu thập được.
+- **Kiểm tra các tệp đã được giao:** tệp manifest liên kết các giá trị băm của chúng, và chữ ký bản ghi liên kết với nhật ký đã lưu. Hệ thống sẽ phát hiện các tệp bị thay đổi hoặc chuỗi bản ghi bị gián đoạn.
+- **Kiểm tra danh tính không gian làm việc:** dấu vân tay được lưu giữ độc lập xác định khóa ký mà bạn mong đợi.
+- **So sánh với ranh giới trước đó:** một điểm kiểm tra được lưu giữ sẽ đối chiếu dữ liệu xuất ra với tiền tố nhật ký được lưu trước khi bàn giao.
+- **Kiểm tra phạm vi thu thập:** các lỗ hổng, kết quả thu thập và thử nghiệm có kiểm soát theo trình tự “gửi → chỉnh sửa → xóa” mô tả các sự kiện mà cấu hình này đã ghi lại.
 
-Một chữ ký hợp lệ không chứng minh rằng mọi sự kiện trên Telegram đều đã được gửi đến, rằng nguồn tin đã nói sự thật hay rằng đồng hồ của người thu thập dữ liệu là chính xác.
+Lưu giữ các kết quả này cùng với bản sao của người nhận. Xem xét [những gì quá trình xác minh xác định được](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) về phạm vi kiểm tra cũng như việc đánh giá riêng biệt các tuyên bố từ nguồn và phạm vi thu thập dữ liệu.
 
 ## Thiết lập bản sao lưu ngoài trang web trên S3
 
@@ -59,30 +60,24 @@ Bảng điều khiển đầy đủ với các tùy chọn nâng cao đã đư�
 | Khoảng thời gian sao chép | Từ 1 đến 1.440 phút; mặc định là 5 phút. Ứng dụng phải đang chạy để thực hiện việc sao chép theo lịch trình. |
 | Chính sách lưu trữ Object Lock | Thời gian lưu trữ và chế độ lưu trữ đối với một bucket hỗ trợ tính năng Object Lock. Giá trị “Zero days” sẽ giữ nguyên cài đặt lưu trữ mặc định của bucket. |
 
-1. Vui lòng nhập địa chỉ đích và thông tin đăng nhập. Trong quá trình chuẩn bị, xin vui lòng để tùy chọn **“Giữ bản sao ngoài trang web”** ở trạng thái chưa được chọn, sau đó chọn **“Lưu bản sao ngoài trang web**”.
+1. Tạo bucket với nhà cung cấp của bạn, sau đó nhập đích đến và thông tin đăng nhập. Để tùy chọn **“Giữ bản sao ngoài trang web”** ở trạng thái không được chọn trong quá trình chuẩn bị, sau đó chọn **“Lưu bản sao ngoài trang web**”.
 2. Chọn **“Kiểm tra kết nối**”. Thao tác này sẽ tải lên một đối tượng thử nghiệm được mã hóa và kiểm tra phản hồi từ bộ lưu trữ.
 3. Vui lòng chọn **“Tải xuống khóa mã hóa**”. Hãy lưu giữ tệp này riêng biệt với công cụ thu thập dữ liệu; tệp này là cần thiết cho quá trình khôi phục dữ liệu.
 4. Vui lòng chọn hộp kiểm **“Lưu bản sao ngoài trang web**” và lưu lại. Chọn **“Sao chép ngay”** để thực hiện thủ công, hoặc để lịch trình tiếp tục chạy.
 
-**Những điều không thực hiện** Công cụ này không tạo ra bất kỳ kho lưu trữ nào. Các tác vụ tải lên theo lịch trình sẽ dừng lại khi ứng dụng ngừng hoạt động.
-
 ## Kiểm tra tiến độ lưu trữ và sao chép
 
-Trong phần**“Tùy chọn khác” (More options)**, quý vị hãy chọn số ngày lưu trữ và `GOVERNANCE` hoặc `COMPLIANCE` nếu kho lưu trữ (bucket) của quý vị hỗ trợ tính năng Object Lock. TgWitness sẽ đọc lại chế độ lưu trữ và thời hạn của đối tượng đã tải lên. Báo cáo trạng thái sẽ xác nhận việc lưu trữ, thông báo thiếu thời hạn lưu trữ hoặc lỗi kiểm tra; việc tải lên thành công không tự động đồng nghĩa với việc xác nhận lưu trữ.
+Trong phần **“More options” (Tùy chọn khác**), hãy chọn số ngày lưu trữ và “`GOVERNANCE`” (Quản trị) hoặc “`COMPLIANCE`” (Tuân thủ) khi bucket của bạn hỗ trợ tính năng Object Lock. TgWitness sẽ đọc lại chế độ lưu trữ và thời hạn của một đối tượng đã tải lên. Kiểm tra kết quả lưu trữ riêng biệt: đã xác nhận, thiếu lưu trữ hoặc kiểm tra không thành công.
 
 Bảng điều khiển hiển thị thông tin về lần quét gần nhất, số lượng đối tượng, dung lượng dữ liệu đã truyền, ranh giới của nhật ký đã sao chép cùng bất kỳ lỗi nào phát sinh. Các phương tiện lưu trữ cục bộ bị thiếu hoặc đã thay đổi sẽ được báo cáo và hệ thống sẽ thử lại trong lần quét tiếp theo. Các tệp tin, điểm kiểm tra và các tác vụ xuất dữ liệu đang chờ xử lý sau phương tiện lưu trữ đó vẫn có thể được sao chép.
 
-Việc tải lên sử dụng các đường dẫn Direct, SOCKS5 hoặc HTTP của không gian làm việc. Tính năng sao chép lên S3 không khả dụng qua MTProxy; ứng dụng sẽ không chuyển sang kết nối trực tiếp.
-
-**Những điều không thực hiện** Việc này không bắt buộc nhà cung cấp phải áp dụng tính năng Object Lock chỉ vì việc tải lên đã được chấp nhận.
+Việc tải lên sử dụng các đường dẫn Direct, SOCKS5 hoặc HTTP của không gian làm việc. Chọn một trong các đường dẫn này để sao chép lên S3; đường dẫn chỉ sử dụng MTProxy sẽ khiến bản sao bị treo với thông báo lỗi.
 
 ## Hãy lưu giữ khóa khôi phục ở một nơi riêng biệt
 
-Tệp JSON đã tải xuống chứa khóa giải mã, cài đặt đích, tiền tố đối tượng không gian làm việc và dấu vân tay khóa ký. Tệp này không chứa thông tin đăng nhập S3: quá trình khôi phục cần có thông tin đăng nhập riêng với quyền truy cập đọc vào bucket.
+Tệp JSON đã tải xuống chứa khóa giải mã, cài đặt đích, tiền tố đối tượng không gian làm việc và dấu vân tay khóa ký. Quá trình khôi phục cần cả tệp khóa này và thông tin đăng nhập lưu trữ riêng biệt có quyền truy cập đọc vào bucket. Hãy lưu giữ chúng trong kế hoạch khôi phục của bạn.
 
 Nếu quý vị thay đổi điểm cuối (endpoint), bucket hoặc tiền tố thư mục, vui lòng tải lại tệp khóa để các cài đặt đích của tệp này khớp với thay đổi. Ứng dụng sẽ khởi tạo một bản sao mới của nhật ký, tệp tin và các điểm kiểm tra được lưu trữ cục bộ tại đích mới. Các bản xuất cuộc trò chuyện đã hoàn tất nhưng đã bị xóa khỏi hàng đợi tải lên cục bộ sẽ vẫn được giữ nguyên tại đích cũ.
-
-**Những điều không thực hiện** Công cụ này sẽ không giải mã bản sao nếu không có khóa đã xuất ra. Thông tin đăng nhập truy cập bộ nhớ lưu trữ không thể thay thế cho khóa đó.
 
 ## Khôi phục và xác minh trên một máy tính khác
 
@@ -108,4 +103,4 @@ Các tệp tải xuống và các đối tượng đã được giải mã sẽ 
 
 Quá trình khôi phục thành công sẽ tạo ra các mã `events.jsonl`, `media/`, `checkpoints/` và `exports/` tương ứng với nội dung có sẵn trong bản sao. Vui lòng lưu giữ kết quả JSON của lệnh cùng với nội dung đã được khôi phục.
 
-**Những điều không thực hiện** Công cụ này không tái tạo các quan sát chưa bao giờ được ghi vào sổ chứng cứ, cũng như không thay thế các điểm kiểm tra hoặc nhân chứng được lưu giữ độc lập.
+So sánh tài liệu đã khôi phục với các điểm kiểm tra hoặc bản ghi chứng cứ mà bạn đã lưu giữ độc lập, sau đó xem xét phạm vi thu thập đã ghi lại cho khoảng thời gian bạn cần.

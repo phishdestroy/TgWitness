@@ -6,6 +6,19 @@ Treść wiadomości może ulec zmianie. Zapis tego, co Pan/Pani zaobserwował(a)
 
 Zapoznaj się z dwoma niewielkimi eksperymentami poniżej. Wykorzystują one fikcyjne wiadomości, działają w Państwa przeglądarce i nigdy nie łączą się z serwisem Telegram.
 
+## Od eksportu czatu do weryfikowalnego zapisu
+
+[Funkcja eksportu w Telegram Desktop](https://telegram.org/blog/export-and-more) pozwala zapisać dostępną historię czatu i multimedia w formacie HTML lub JSON do wykorzystania w trybie offline. TgWitness dodaje bieżący dziennik otrzymanych zmian, podpisy na obserwacjach i eksportach oraz punkty kontrolne, które odbiorcy mogą samodzielnie porównać.
+
+| Zadanie | Eksport z aplikacji Telegram Desktop | TgWitness |
+| --- | --- | --- |
+| Przeglądaj zapisane rozmowy | HTML lub JSON z wybranymi plikami multimedialnymi | Zapisane rozmowy, dziennik z funkcją wyszukiwania oraz raporty dostępne w trybie offline |
+| Śledź zmiany w czasie | Historia dostępna po wyeksportowaniu | Wcześniejsze wersje, późniejsze zmiany oraz obserwacje dotyczące usunięć są przechowywane razem |
+| Sprawdź pliki po przekazaniu | Standardowe pliki eksportowe w formacie HTML/JSON nie są podpisane | Podpisany manifest, podpisy dla poszczególnych rekordów oraz zapieczętowane raporty w formatach HTML/PDF/JSON są weryfikowane przy użyciu zaufanego klucza narzędzia Collector. |
+| Porównaj z wcześniejszym stanem archiwalnym | Należy zachować oddzielną kopię referencyjną lub skrót | Podpisane punkty kontrolne, oddzielny świadek oraz opcjonalne zewnętrzne znaczniki czasu |
+
+Porównanie podpisywania plików opiera się na [narzędziach eksportujących](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) z aplikacji [Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output), sprawdzonych 2 listopada 2026 r. TgWitness podpisuje pliki kluczem kolektora; poniższe sprawdziany pokazują, w jaki sposób odbiorca z niego korzysta.
+
 ## Jedna wiadomość, trzy spostrzeżenia
 
 Gdy Telegram dostarcza nową wiadomość, powiadomienie o edycji lub usunięciu, aplikacja gromadząca dane dodaje trzy odrębne zapisy. Edycja nie zastępuje pierwszego zapisu. Powiadomienie o usunięciu nie powoduje jego skasowania.
@@ -107,6 +120,6 @@ Proszę zweryfikować podpis punktu kontrolnego pod przypiętym kluczem kolektor
 
 [01 / INTEGRALNOŚĆ**Czy ten zapis uległ zmianie?** Należy zweryfikować skróty i podpisy przy użyciu oddzielnego, zaufanego klucza.](https://phishdestroy.github.io/TgWitness/pl/docs/exports/)[02 / CIĄGŁOŚĆ**Co zostało zachowane wcześniej?** Proszę porównać podpisany eksport z punktami kontrolnymi przechowywanymi przez odrębnego świadka.](https://phishdestroy.github.io/TgWitness/pl/docs/witness/)[03 / REALIZACJA**Czy te zdarzenia testowe dotarły?** Należy porównać kontrolowane działania związane z wysyłaniem, edycją i usuwaniem wiadomości z dziennikiem każdego konta.](https://phishdestroy.github.io/TgWitness/pl/docs/cases/)
 
-Zgodny łańcuch skrótów stanowi odpowiedź na pytanie dotyczące integralności. Nie potwierdza on jednak pełnego dostarczenia wiadomości w Telegramie, prawdziwości treści ani niezależnie potwierdzonego czasu obserwacji.
+Należy używać podpisów do sprawdzania zachowanych zapisów, punktów kontrolnych do porównywania wcześniejszych granic oraz testów kontrolowanej dostawy do pomiaru skuteczności gromadzenia danych. Każdy z tych elementów odpowiada na konkretne pytanie. [Należy zapoznać się z zakresem weryfikacji i założeniami dotyczącymi zaufania.](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope)
 
 Proszę śledzić przebieg [całego postępowania wyjaśniającego,](https://phishdestroy.github.io/TgWitness/pl/docs/cases/) od momentu pozyskania danych aż po przygotowanie akt sprawy.

@@ -12,7 +12,7 @@ Beri seorang penilai akses kepada satu sembang, seorang penganalisis kebenaran u
 
 **Skop pengumpulan** menentukan apa yang direkodkan oleh akaun: sembang terpilih, folder Telegram atau keseluruhan akaun. **Skop capaian** menentukan mana-mana akaun dan sembang yang direkodkan boleh dilihat dan digunakan oleh orang lain. Memberi capaian tidak menyertai sembang Telegram, memulakan pengumpulan atau memberi kebenaran akaun Telegram.
 
-Akses boleh membuka ruang kerja terpilih, sembang terpilih di dalamnya, atau semua ruang kerja. **Semua ruang kerja, termasuk yang ditambah kemudian**, juga merangkumi akaun masa depan. Pilih ruang kerja secara eksplisit apabila kes hendak dihadkan kepada ruang tersebut.
+Akses boleh membuka ruang kerja terpilih, sembang terpilih di dalamnya, semua ruang kerja, atau setiap akaun dalam [kumpulan akaun](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/#bulk-import-and-account-groups). **Semua ruang kerja, termasuk yang ditambah kemudian** juga merangkumi akaun masa depan. Akses kumpulan juga merangkumi akaun yang ditambah ke kumpulan itu kemudian. Pilih ruang kerja secara eksplisit apabila kes harus terhad kepada mereka.
 
 ## Memberi seseorang akses
 
@@ -28,6 +28,8 @@ Buka panel dengan token yang dikeluarkan dalam sesi pelayar berasingan dan perik
 
 ## Pilih kebenaran
 
+Untuk demonstrasi awam hanya teks, gunakan **Paparan Awam** sebaliknya akses penilai biasa. Ia memaparkan saluran awam yang dipilih secara eksplisit, suntingan dan pemadaman yang disimpan, serta statistik yang disahkan, dengan medan pengarang disembunyikan dan fail ditutup pada sempadan API. [Buat dan sahkan paparan](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+
 | Kebenaran | Apa yang dibenarkan |
 | --- | --- |
 | `view` | Baca sembang yang dibenarkan, mesej yang dirakam, profil, fail dan rekod jurnal yang ditapis. Sentiasa disertakan. |
@@ -37,6 +39,9 @@ Buka panel dengan token yang dikeluarkan dalam sesi pelayar berasingan dan perik
 | `interact` | Lakukan interaksi Telegram yang disokong dalam skop capaian. Akses terhad sembang tidak boleh menggunakan pratonton pautan untuk seluruh akaun. |
 | `settings` | Ubah tetapan pengumpulan, cap masa, pemberitahuan, salinan luar tapak dan parameter. Memerlukan akses penuh ke ruang kerja. |
 | `account` | Masuk atau log keluar Telegram dan urus laluan sambungan. Memerlukan akses penuh ke ruang kerja. |
+| `board.read` | Bacalah nota Papan Kes hanya dalam ruang kerja dan sembang yang dibenarkan. |
+| `board.write` | Tambah penanda buku, sorotan, hirisan, ulasan dan status buka/semak. Juga memerlukan `board.read`. |
+| `board.manage` | Urus koleksi, status akhir pasukan dan kad peserta lain. Juga memerlukan hak baca/tulis papan. |
 
 Kebenaran dan skop disemak serentak. Menandakan kebenaran tidak akan membuka sembang lain atau membuka operasi merentas ruang kerja untuk capaian terhad pada sembang. Untuk eksport selari, capaian mesti merangkumi sembang yang dieksport dalam setiap akaun yang dipilih. Capaian yang dikeluarkan tidak boleh mencipta capaian baru, mengurus sesi orang lain atau membuka konsol pentadbir.
 
@@ -48,7 +53,7 @@ Kebenaran dan skop disemak serentak. Menandakan kebenaran tidak akan membuka sem
 | Penganalisis menyediakan penyerahan tugas | Perbualan untuk disiasat dan dieksport | `view`, `export`; tambahkan `interact` hanya jika mereka perlu bertindak melalui Telegram |
 | Pengendali pengumpulan | Ruang kerja keseluruhan yang dipilih | `view`, `sources`, `collect`; tambahkan `settings` atau `account` hanya apabila diperlukan |
 
-Ini adalah contoh yang anda konfigurasi dengan kotak semak kebenaran, bukan peranan tetap.
+Preset permulaan Borang Akses juga merangkumi Papan Kes: Pengulas boleh membaca, Penganalisis boleh membaca dan menulis, dan Pengendali boleh mengurusnya. Preset kekal boleh disunting, dan pemberian hak sedia ada tidak diperluas secara automatik. Lihat [Papan Kes](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/) untuk skop sembang yang diwarisi dan privasi eksport.
 
 ## Had dan sesi
 
@@ -67,9 +72,33 @@ IP ialah alamat klien yang dilihat oleh aplikasi. Di sebalik proksi songsang ata
 
 Sunting entri di bawah **Akses** untuk mengubah skop, kebenaran atau hadnya. Perubahan skop dan kebenaran disemak pada permintaan seterusnya, termasuk permintaan daripada sesi yang sudah terbuka. Membatalkan akses akan menamatkan sesinya dan menjadikan token yang dikeluarkan tidak boleh digunakan. **Sesi terbuka** juga membolehkan pentadbir menamatkan sesi individu tanpa membatalkan keseluruhan akses.
 
+Salinan eksport yang disimpan mengekalkan penciptanya, ruang kerja, skop sembang dan kebenaran yang diperlukan. Akses yang dikeluarkan hanya boleh menyenaraikan atau memuat turun salinan sendiri selagi kebenaran tersebut masih terpakai; salinan yang mengandungi Papan Kes juga memerlukan kebenaran b`board.read`. Pentadbir boleh mendapatkan semua salinan. Salinan lama tanpa metadata ini dan bundel kumpulan adalah untuk pentadbir sahaja. Tiket muat turun dan respons fail yang disediakan menyemak semula akses selepas menyediakan fail, sebelum menghantar baitnya.
+
 Pencabutan tidak dapat memulihkan semula fail yang telah dimuat turun oleh seseorang. Log keluar, mengunci panel atau menamatkan sesi tidak menghentikan pengumpul yang sedang berjalan.
 
 ## Apa yang boleh dilihat oleh pentadbir
+
+Pemeriksa dan penganalisis menerima kemajuan pengumpulan tanpa hujung proksi, diagnostik kolam, laluan pelayan atau ralat sambungan mentah. Diagnostik sambungan memerlukan kebenaran `account` ke atas seluruh ruang kerja. Membaca pemberitahuan, salinan luar tapak dan tetapan parameter memerlukan kebenaran `settings`.
+
+Rentetan pelayar penuh User-Agent tidak dikekalkan dalam sesi akses. Peningkatan juga menyingkirkannya daripada cache sesi yang boleh diubah. Log proses panel menyembunyikan alamat IP literal, kelayakan URL dan rahsia berlabel. Log perkhidmatan tempatan dan rekod jurnal yang telah ditandatangani sebelum ini tidak ditulis semula. Peraturan akses dan rekod log masuk yang ditandatangani masih menggunakan alamat klien.
+
+### Gantikan kunci utama
+
+Gunakan **Akses → Had saya → Terbit semula kunci pentadbir**, atau jalankan `tgwitness token rotate` daripada pemasangan yang diuruskan semasa panel sedang berjalan. Semua sesi pelayar sedia ada akan tamat, termasuk sesi yang dibuka dengan token rakan sekerja. Pelayar yang membuat permintaan menerima sesi baru; simpan kunci pentadbir baru sebelum menyembunyikannya. Token rakan sekerja yang telah dikeluarkan kekal sah sehingga dibatalkan secara berasingan. Pemasangan yang menggunakan `TGWITNESS_TOKEN` mesti menukar tetapan persekitaran tersebut dan memulakan semula.
+
+### Batas permintaan dan proksi
+
+API membenarkan sehingga 600 permintaan setiap minit bagi setiap IP klien. Sepuluh pengesahan yang ditolak dalam masa satu minit memulakan tempoh penyejukan eksponen, dari satu saat hingga lima minit. Percubaan yang gagal selepas tempoh penyejukan meningkatkan tempoh tersebut; sepuluh minit tanpa percubaan gagal menetapkan semula peningkatan itu. Penolakan mengembalikan HTTP 429 dan `Retry-After`. Had disimpan dalam memori, dikongsi merentas ruang kerja dalam satu proses panel; memulakan semula akan membersihkannya. Siaran langsung dihadkan kepada empat setiap token pembawa dan 32 untuk proses panel. Membuka siaran juga menggunakan bajet permintaan API.
+
+Badan permintaan mempunyai had masa penerimaan 60 saat (8 saat untuk MCP). Setiap aplikasi mengehadkan badan yang belum selesai kepada 32 permintaan dan 64 MiB had laluan yang diperuntukkan. Badan yang terlalu besar akan mengembalikan 413, badan yang tamat masa akan mengembalikan 408, dan kapasiti badan yang terhabis akan mengembalikan 503 dengan `Retry-After`.
+
+Header IP yang diteruskan diabaikan melainkan rakan sebaya TCP sebenar tergolong dalam `TGWITNESS_TRUSTED_PROXIES` (IP yang dipisahkan dengan koma atau CIDR). Tetapkan `TGWITNESS_PROXY_HEADER` kepada `x-forwarded-for` atau `cf-connecting-ip`. XFF dilalui daripada proksi terdekat ke arah rakan sebaya pertama yang tidak dipercayai. Metadata alamat dipercayai yang rosak atau berganda ditolak, jadi ia tidak dapat mewarisi alamat proksi yang dibenarkan. Terowong pantas yang diurus mempercayai penyambung cloudflared tempatan; tetapan domain sendiri mempercayai Caddy tempatan. Penyebaran langsung secara lalai tidak mempercayai mana-mana proksi. Jika anda melancarkan Uvicorn sendiri, nyahdayakan pemprosesan header-proksi supaya sempadan ini menerima rakan sebaya sebenar.
+
+`TGWITNESS_PANEL_ALLOWED_IPS` mengehadkan semua akses panel, termasuk pentadbir, kepada IP atau CIDR yang disenaraikan. Uji identiti penjejakan pemasang kekal awam dan tidak mengembalikan sebarang data akaun. Sertakan laluan pentadbiran tempatan yang diperlukan sebelum mengaktifkan senarai benarkan. Panduan **START-HERE** untuk pemasangan yang diuruskan merangkumi konfigurasi perkhidmatan dan arahan pemulihan.
+
+Pemilih pertanyaan API `ws` mesti mengenal pasti ruang kerja dalam laluan permintaan; pemilih yang tidak diketahui, tidak sepadan dan dwi salinan ditolak dengan kod 404.
+
+Skrip dan gaya panel membawa metadata integriti SHA-384. Peta import juga merangkumi modul JS yang diimport secara tempatan dalam pelayar yang menyokong integriti import-map. Tindak balas bahasa yang dijana secara dinamik adalah berasingan. Semakan ini mengesan penggantian aset berbanding halaman yang dihantar; ia tidak mewujudkan kepercayaan kepada pelayan yang dikompromi yang boleh menggantikan kedua-dua halaman dan hasnya.
 
 **Log sejak permulaan ini** menggabungkan log proses dengan aktiviti jurnal dari setiap ruang kerja: log masuk, penolakan, perubahan laluan dan tindakan pengendali. Ia adalah konsol dalam memori untuk proses semasa, bukan salinan kekal bagi setiap mesej. Acara mesej yang kerap kekal dalam jurnal dan bukannya memenuhi konsol.
 

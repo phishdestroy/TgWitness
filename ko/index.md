@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/
 
-[오픈 소스 / v0.7.1](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/)
+[오픈 소스 / v0.8.0](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/)
 
 텔레그램 메시지를 캡처하고, 변경 내역을 보존하며, 서명된 기록을 내보냅니다.
 
@@ -60,6 +60,8 @@ TgWitness / 서명된 내보내기 파일로컬 작업 공간
 
 04 / 서명된 내보내기: 매니페스트와 독립적인 검증 기관을 통해 증거 일지를 어디서나 활용할 수 있습니다.
 
+[케이스 보드](https://phishdestroy.github.io/TgWitness/ko/docs/case-board/), [보고서 설계](https://phishdestroy.github.io/TgWitness/ko/docs/reports/) 및 [공유 사본](https://phishdestroy.github.io/TgWitness/ko/docs/handover/)을 통해 저장된 기록을 추적하십시오. [계정 그룹을](https://phishdestroy.github.io/TgWitness/ko/docs/groups/) 함께 [검토하십시오](https://phishdestroy.github.io/TgWitness/ko/docs/groups/).
+
 01 / 캡처
 
 ### 범위는 사용자가 직접 선택합니다.
@@ -84,7 +86,7 @@ TgWitness / 서명된 내보내기 파일로컬 작업 공간
 
 [내보내기 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/exports/)
 
-## 바이트 하나만 변경해도 체인이 알려줍니다.
+## 바이트 하나만 변경해도 검증 과정에서 바로 파악할 수 있습니다.
 
 각 이벤트는 이전 해시에 연결되며 Ed25519 서명을 포함합니다.
 
@@ -94,7 +96,7 @@ TgWitness / 서명된 내보내기 파일로컬 작업 공간
 
 ![별도로 보관된 체크포인트를 통해 수신자는 내보낸 기록부와 이전의 관찰 내용을 비교할 수 있습니다.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-각 검증 메커니즘이 무엇을 입증하는지, 그리고 그 한계가 어디에 있는지 확인해 보십시오.
+파일 해시부터 별도로 보관된 체크포인트에 이르기까지의 검증 절차를 따르십시오.
 
 [8가지 증거 수준 살펴보기](https://phishdestroy.github.io/TgWitness/ko/guides/modes.html#levels)
 
@@ -116,7 +118,7 @@ tgwitness-evidence.zip서명된 번들
 
   독립적인 검증서명된 매니페스트 + 독립형 검증기
 
-서명은 신뢰할 수 있는 키를 기준으로 변조를 감지합니다. 이는 텔레그램 발신 출처를 증명하거나 완전한 캡처를 보장하지는 않습니다. 저널 콘텐츠와 미디어는 사용자가 직접 제공하는 암호화된 저장 공간에 보관해야 합니다.
+수신자는 신뢰할 수 있는 수집기 키를 사용하여 저장된 기록과 파일을 확인합니다. 별도로 보관된 체크포인트는 이전 저널과의 연속성도 확인합니다. [검증 단계를 살펴보세요.](https://phishdestroy.github.io/TgWitness/ko/docs/concepts/#layers)
 
 ## S3 백업. 외부 검증.
 
@@ -154,13 +156,13 @@ Object Lock
 
 [S3 구성 및 사본 복원](https://phishdestroy.github.io/TgWitness/ko/docs/exports/#s3)[검증 세부 정보 읽기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**기능**: 내보낸 복호화 키가 없으면 메시지를 복원하지 않으며, 독립적인 증인을 대체하지도 **않습니다**.
+**복구 키:** 암호화된 사본을 복원할 수 있도록 내보낸 복호화 키를 별도로 저장하십시오.
 
 ### 알림 · 알림
 
 Apprise를 통해 문제 알림, 채팅 변경 사항 및 일일 요약 정보를 메신저, 이메일 또는 사용자 지정 JSON 웹훅으로 받아볼 수 있습니다.
 
-'발췌문' 기능을 활성화하지 않는 한 메시지 본문을 전송하지 **않습니다**.
+**공유할 내용 선택**: 메시지 발췌문은 기본적으로 비활성화되어 있습니다. 신뢰할 수 있는 수신처에 대해서는 이 기능을 활성화하십시오.
 
  [알림 수신처 설정](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#notifications)
 
@@ -168,7 +170,7 @@ Apprise를 통해 문제 알림, 채팅 변경 사항 및 일일 요약 정보�
 
 RFC 3161 및 OpenTimestamps를 사용한 타임스탬프 체크포인트 해시.
 
-**하지 않는 사항**: 처리 중인 캘린더 수신 내역을 확인된 비트코인 타임스탬프로 간주하지 않습니다.
+**결과를** 확인하십시오. 당국의 응답을 확인하거나 OpenTimestamps 영수증을 확인된 비트코인 증명으로 업그레이드하십시오.
 
  [타임스탬프 증빙 자료 확인:](https://phishdestroy.github.io/TgWitness/ko/docs/reference/timestamp/)
 
@@ -176,7 +178,7 @@ RFC 3161 및 OpenTimestamps를 사용한 타임스탬프 체크포인트 해시.
 
 별도의 호스트가 서명된 관측 기록을 보관하며, `TGW1` 체크포인트를 공개할 수 있습니다.
 
-**하지 않는** 사항: 하나의 수집기 호스트에 있는 두 개의 작업 공간을 독립적인 위트니스로 만들지 않습니다.
+“다른 호스트에서 위트니스를 실행하고, 해당 호스트의 서명 키와 저널을 별도로 유지한다”는 **참조 문구를 분리하여 표기하십시오**.
 
  [Witness 설정하기](https://phishdestroy.github.io/TgWitness/ko/docs/witness/)
 
@@ -184,7 +186,7 @@ RFC 3161 및 OpenTimestamps를 사용한 타임스탬프 체크포인트 해시.
 
 재시작 후 이력서. 재확인 및 `coverage.json`를 통해 복구된 메시지와 누락된 부분을 확인할 수 있습니다.
 
-**하지 않는** 기능: 누락된 편집 내역이나 사라진 메시지를 모두 복원하지는 않습니다.
+**‘간격’ 항목을 검토하십시오**. 복구된 현재 메시지와 기록된 중단 사항을 함께 확인하십시오. 캡처된 이전 버전은 계속 사용할 수 있습니다.
 
  [연속성 및 누락 사항 확인](https://phishdestroy.github.io/TgWitness/ko/guides/modes.html#continuity)
 
@@ -225,7 +227,7 @@ cd TgWitness
 
 [릴리스 보기](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows에 Python이 설치되어 있지 않으신가요? [휴대용 패키지를 다운로드하여](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip) 압축을 풀고, ‘`TgWitness.cmd`’ 파일을 더블클릭하세요.
+Windows에 Python이 설치되어 있지 않으신가요? [휴대용 패키지를 다운로드하여](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip) 압축을 풀고, ‘`TgWitness.cmd`’ 파일을 더블클릭하세요.
 
 2단계
 
@@ -260,7 +262,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 소스 코드 설치 시 토큰은 `data/live/panel-token.txt`입니다. 텔레그램 로그인은 내장된 API 설정을 사용하거나 [my.telegram.](https://my.telegram.org)org에서 생성한 본인만의 키 쌍을 사용할 수 있습니다. [전체 설정 가이드 ↗](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [새로운 소식 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/) · [기능 및 알려진 제한 사항 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/)
+**TgWitness 0.8.0** [새로운 소식 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/) · [기능 및 알려진 제한 사항 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/)
 
 ## 명확한 지침. 유용한 다음 단계.
 

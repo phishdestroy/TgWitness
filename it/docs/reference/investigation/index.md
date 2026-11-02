@@ -8,7 +8,7 @@ Seguite un caso attraverso canali, gruppi, chat private e bot, dall’acquisizio
 
 ## Caso di studio: un cambiamento di destinazione in quattro conversazioni
 
-Un annuncio rimanda a un bot. Un gruppo operativo discute una nuova destinazione di pagamento, la tastiera del bot la visualizza e un messaggio privato di follow-up la ripete. L’annuncio viene quindi modificato e un messaggio di gruppo scompare.
+Un annuncio rimanda a un bot. Un gruppo operativo discute una nuova destinazione di pagamento e la tastiera del bot la visualizza. L’annuncio viene modificato, un messaggio privato di follow-up ripete la destinazione e un messaggio di gruppo scompare.
 
 Le domande sono: cosa è stato osservato prima e dopo la modifica, quali account Telegram hanno pubblicato ciascun elemento, dove è apparsa la destinazione, quali byte degli allegati sono stati conservati e quali intervalli rimangono sconosciuti?
 
@@ -34,8 +34,8 @@ Diagramma di flusso · Canali → Registro dell’area di lavoro; Gruppi → Reg
 
 ## 1. Definire il caso e raccogliere l’intera cronologia dei fatti
 
-1. Collegare l’account di raccolta al proprio spazio di lavoro. Nelle note esterne relative al caso, registrare il riferimento del caso, l’ID dell’account, lo spazio di lavoro, l’ora di inizio dell’osservazione e l’impronta digitale della chiave di firma attendibile.
-2. **Fonti** aperte **→ Ambito di osservazione → Modalità di indagine**. L’impostazione predefinita seleziona **l’intero account**, canali/gruppi/chat private/bot, azioni proprie, profili delle fonti e gli ultimi 200 messaggi visibili per le fonti appena individuate. Esaminate l’impostazione, premete **«Salva ambito**» e completate la conferma dell’ambito.
+1. Collegare l’account di raccolta al proprio spazio di lavoro. In [Case Board](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-board/) o nel registro dei casi, registrare il riferimento del caso, l’ID dell’account, lo spazio di lavoro e l’inizio dell’osservazione. Conservare separatamente l’impronta digitale della chiave di firma attendibile.
+2. Per un account di raccolta dedicato, aprire **Fonti → Ambito di osservazione → Modalità investigativa**. L’impostazione predefinita seleziona **L’intero account**, canali/gruppi/chat private/bot, azioni proprie, profili delle fonti e gli ultimi 200 messaggi visibili per le fonti appena scoperte. Verifica le impostazioni, premi **“Salva ambito**” e completa la conferma dell’ambito. Gli account principali utilizzano chat selezionate o una cartella; la raccolta dell’intero account è disponibile per gli account contrassegnati per l’indagine.
 3. **Caricare le chat** e confrontare le fonti con l’elenco delle conversazioni dell’account. Verificare le esclusioni. **Il parametro «Chat lette dall’elenco dell’account»** è impostato di default su 1.000 e consente un massimo di 20.000. Le fonti che superano il limite dell’elenco vengono aggiunte quando diventano attive. Registrare ciò che è stato effettivamente enumerato.
 4. Nelle **impostazioni di registrazione**, selezionare **«Tutte le attività visibili»** e salvare le impostazioni di monitoraggio. Verificare i tipi e i limiti degli allegati e lo spazio libero su disco.
 5. Avviare l’osservazione. Convalidare un nuovo messaggio controllato, una modifica e una cancellazione, quindi conservare i riferimenti del test ed eventuali errori.
@@ -58,7 +58,7 @@ Tenere un registro delle fonti con una riga per ogni chat:
 
 Utilizzi il metodo di acquisizione adeguato per ciascuna fonte:
 
-- **Carica cronologia completa** nelle **fonti** (`main` attuale) carica i messaggi passati disponibili dalle fonti abilitate nel registro dell’area di lavoro. Supporta la pausa/ripresa e un rapporto di avanzamento firmato. Vedi [acquisizione della cronologia](https://phishdestroy.github.io/TgWitness/it/docs/reference/history/).
+- **L'opzione «Carica cronologia completa** nelle **fonti»** carica i messaggi passati disponibili dalle fonti abilitate nel registro dell'area di lavoro. Supporta la funzione di pausa/ripresa e un rapporto di avanzamento firmato. Vedi [acquisizione della cronologia](https://phishdestroy.github.io/TgWitness/it/docs/reference/history/).
 - **L’istantanea della cronologia** salva i messaggi visibili più recenti nel registro di osservazione. Il limite massimo predefinito è 500; **in Parametri → Istantanea della cronologia più ampia** è possibile aumentarlo fino a 10.000. Si tratta di osservazioni della cronologia attuale, non di modifiche ricostruite.
 - **Esportazione completa della chat → Esporta chat completa**, oppure **Chat → Esporta chat**: questa operazione recupera la cronologia attualmente visibile di una chat in un bundle separato e firmato `chat.json` / `chat.html`. Ripetere l’operazione per le fonti del caso e conservare ciascun risultato.
 - **Quando compare una nuova chat o un nuovo bot,** è possibile salvarne il profilo e fino a 1.000 messaggi recenti; la modalità «Indagine» ne seleziona 200. Le chat esistenti non ricevono tale acquisizione in modo retroattivo quando la modalità viene attivata.
@@ -103,6 +103,8 @@ Nell’esempio elaborato:
 
 Confrontare gli hash degli allegati e i riferimenti ai messaggi ad essi associati. L’identità dei file non consente di identificare un autore, un mittente o un operatore comune. La sola coincidenza dei nomi e degli avatar simili non è sufficiente per associare due ID Telegram a un’unica persona.
 
+Conservare le note di lavoro del team su [Case Board](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-board/): aggiungere ai segnalibri i record su cui ci si basa, come #146, #188 e #205, evidenziare la stringa di destinazione esatta e salvare una porzione di ogni azione registrata tra due record o in un intervallo di tempo. Le note e gli stati conservano la revisione del team nella propria cronologia firmata, separatamente identificabile dalle osservazioni di origine.
+
 ## 5. Creare la cronologia tra le chat
 
 Utilizzi le versioni salvate nelle **chat** e i relativi link **al registro n. … del Journal**. Nel **Journal**, combini **tutte le fonti** con **le modifiche**, **le cancellazioni** e **la copertura**. Conservi sia `source_at`, ove fornito, sia `observed_at`.
@@ -122,7 +124,7 @@ Altre registrazioni si verificano tra questi riferimenti di esempio. I numeri di
 
 Utilizzi uno spazio di lavoro separato per ogni account distinto e ne ripeta l’inventario. Conservi l’ID dell’account, il ruolo, l’impronta digitale della chiave di firma e i riferimenti alla fonte in occasione di ogni confronto. I numeri dei messaggi non sono identificatori globali validi per tutte le chat o tutti gli account.
 
-La correlazione tra diversi spazi di lavoro viene effettuata in note di caso esterne o strumenti di analisi. TgWitness attualmente non dispone di una ricerca globale tra spazi di lavoro, di una cronologia unificata, di un grafico investigativo né di un archivio combinato dei casi. L’esportazione multi-account di **un singolo** canale o supergruppo costituisce un’operazione distinta, non una fusione dei registri degli account.
+Case Board conserva le note e le raccolte collegate alle fonti all’interno di ciascun spazio di lavoro. La schermata di gruppo consente di esaminare collettivamente lo stato degli account e di raggruppare le esportazioni separate dagli spazi di lavoro. È possibile correlare tali fonti nelle note del caso o negli strumenti di analisi; ogni registro mantiene la propria origine e la propria chiave di firma. Non viene generata una ricerca globale né una timeline unificata tra gli spazi di lavoro. L’esportazione multi-account di un canale/supergruppo acquisisce la cronologia di quella chat utilizzando gli account idonei.
 
 Per attività di maggiore entità, si raccomanda di avvalersi di un [testimone indipendente](https://phishdestroy.github.io/TgWitness/it/docs/reference/witness/). Utilizzare controlli di consegna controllati per verificare il percorso di acquisizione e la visibilità di ciascun account.
 
@@ -134,6 +136,7 @@ Si prega di conservare questi elementi in un fascicolo del caso compilato da un 
 | --- | --- |
 | Note sul caso e registro delle fonti | Domande, politica di raccolta, accesso/ruolo, risultati, spiegazioni alternative e lacune |
 | Cronologia | Per ogni voce sono indicati sia l’ora che i riferimenti relativi all’area di lavoro, alla chat, al messaggio e alla sequenza |
+| Case Board esportazione e segmenti, se utilizzati | Segnalibri collegati alla fonte, citazioni, note del team, raccolte, cronologia delle revisioni e record selezionati verificati rispetto al file ZIP contenente le prove |
 | File ZIP contenente le prove firmate per ogni area di lavoro | Registro completo delle registrazioni, elenco dei contenuti e file multimediali conservati inclusi; i filtri del pannello non limitano l’esportazione del registro |
 | File dei profili personali firmati separatamente | I riferimenti derivati sono stati verificati confrontandoli con le prove presenti nell’area di lavoro corrispondente |
 | Esportazioni complete e firmate delle chat | Acquisizione della cronologia visibile attuale, separata dal registro di osservazione |
@@ -147,9 +150,10 @@ Da un’installazione attendibile, con i nomi dei file e l’impronta digitale e
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Conservare i risultati effettivi della verifica e gli artefatti originali. La directory di primo livello dei casi, il registro delle fonti e le conclusioni degli analisti sono gestiti esternamente; ogni artefatto di TgWitness dispone di una propria firma e di una propria procedura di verifica.
+Mantenere i risultati effettivi della verifica e gli artefatti originali. Esportare le note dell’area di lavoro da Case Board insieme al materiale di riferimento citato. Raggruppare i risultati relativi a più aree di lavoro nella directory di primo livello del caso; ogni artefatto di TgWitness ha una propria firma e una propria procedura di verifica.
 
 ## Adattare l’indagine
 

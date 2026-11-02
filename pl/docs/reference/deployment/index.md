@@ -127,7 +127,7 @@ Zostanie to udostępnione po pomyślnym zakończeniu [procesu wydania](https://p
 Skopiuj `deploy/env.example` do `.env`. Ustaw `TGWITNESS_IMAGE` na opublikowaną wersję, używając ścieżki do repozytorium **zapisanej małymi literami**, na przykład:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ Proszę sprawdzić dostęp do panelu, tożsamość konta, stan obserwacji oraz z
 
 [Proces wydawania](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) jest gotowy do użycia po umieszczeniu tego projektu w repozytorium GitHub z włączoną funkcją Actions. Uruchamia się on w momencie **opublikowania** wydania na GitHubie, w tym również wersji przedpremierowej. Same wersje robocze i operacje dodawania tagów nie powodują publikacji pakietów.
 
-1. Należy ustawić wersję pakietu oraz dziennik zmian, a następnie opublikować wydanie oznaczone tagiem „`v`” wraz z dokładną wersją „`pyproject.toml`”, np. „`v0.7.1`”.
+1. Należy ustawić wersję pakietu oraz dziennik zmian, a następnie opublikować wydanie oznaczone tagiem „`v`” wraz z dokładną wersją „`pyproject.toml`”, np. „`v0.8.0`”.
 2. Proces ten weryfikuje tag i uruchamia wspólne dla systemów Windows/Linux/macOS sprawdzanie środowiska Python, ogólne/import konta/QR w przeglądarce, pakietu źródłowego oraz Docker. Przeprowadzana jest również nowa instalacja natywna na wszystkich trzech systemach operacyjnych z wykorzystaniem języka Python 3.12.
 3. Po pomyślnym przejściu tych kontroli przeprowadza się testy wstępne obrazu ARM64 w środowisku QEMU, publikuje się obrazy AMD64/ARM64 na stronie `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, a także dołącza się plik ZIP ze źródłami oraz pakiet Python wheel wraz z ich plikami SHA-256. Przenośny plik ZIP dla systemu Windows jest dokładnie tym samym artefaktem, który został przetestowany w ramach procesu kontroli; proces wydania pobiera i publikuje ten artefakt wraz z jego sumą kontrolną.
 4. Ostatnim zadaniem jest ponowne pobranie wszystkich trzech opublikowanych pakietów i zweryfikowanie ich sum kontrolnych. Następnie publikuje się strony `SHA256SUMS.txt` oraz `RELEASE-MANIFEST.json`, rejestrując wersję, numer rewizji źródła oraz rozmiary zasobów. Podczas przesyłania nie dopuszcza się nadpisywania istniejących zasobów wydania.

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/
 
-[متن‌باز / v0.7.1](https://phishdestroy.github.io/TgWitness/fa/docs/reference/changelog/)
+[متن‌باز / v0.8.0](https://phishdestroy.github.io/TgWitness/fa/docs/reference/changelog/)
 
 پیام‌های تلگرام را ضبط کنید، تغییرات آن‌ها را حفظ کنید و یک رکورد امضا شده صادر کنید.
 
@@ -60,6 +60,8 @@ TgWitness / خروجی‌های امضا‌شدهفضای کاری محلی
 
 ۰۴ / خروجی‌های امضا‌شده: دفترچه را همراه خود ببرید، همراه با یک فهرست مشخصات و یک راستی‌آزمای مستقل.
 
+یک رکورد ذخیره شده را از طریق [Case Board](https://phishdestroy.github.io/TgWitness/fa/docs/case-board/)، [طراحی گزارش](https://phishdestroy.github.io/TgWitness/fa/docs/reports/) و یک [نسخهٔ اشتراک‌گذاری‌شده](https://phishdestroy.github.io/TgWitness/fa/docs/handover/) دنبال کنید. [گروه‌های حساب را](https://phishdestroy.github.io/TgWitness/fa/docs/groups/) با هم [مرور کنید](https://phishdestroy.github.io/TgWitness/fa/docs/groups/).
+
 ۰۱ / ضبط
 
 ### شما دامنه را انتخاب می‌کنید.
@@ -84,7 +86,8 @@ TgWitness / خروجی‌های امضا‌شدهفضای کاری محلی
 
 [صادرات و تأیید](https://phishdestroy.github.io/TgWitness/fa/docs/exports/)
 
-## یک بایت را تغییر دهید. زنجیره به شما اطلاع می‌دهد.
+## یک بایت را تغییر دهید.
+اعتبارسنجی به شما اطلاع می‌دهد.
 
 هر رویداد به هش قبلی لینک می‌شود و دارای امضای Ed25519 است.
 
@@ -94,7 +97,7 @@ TgWitness / خروجی‌های امضا‌شدهفضای کاری محلی
 
 ![یک نقطهٔ کنترل جداگانه که به‌طور مستقل نگهداری می‌شود، به دریافت‌کننده امکان می‌دهد تا دفترچهٔ صادرشده را با مشاهده‌ای قبلی مقایسه کند.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-ببینید هر مکانیزم تأیید چه چیزی را برقرار می‌کند و محدودیت‌های آن در کجا قرار دارد.
+بررسی‌ها را از هَش فایل تا نقطه‌کنترل جداگانه نگهداری‌شده دنبال کنید.
 
 [کشف هشت سطح مدرک](https://phishdestroy.github.io/TgWitness/fa/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipبستهٔ امضا‌شده
 
   تأیید مستقلمنشور امضا شده + اعتبارسنج مستقل
 
-امضاها دستکاری را نسبت به یک کلید مورد اعتماد تشخیص می‌دهند. آن‌ها منشأ تلگرام را اثبات نمی‌کنند و ضبط کامل را تضمین نمی‌کنند. محتوای ژورنال و رسانه‌ها نیازمند ذخیره‌سازی رمزگذاری‌شده‌ای هستند که توسط شما فراهم می‌شود.
+گیرندگان، سوابق و فایل‌های ذخیره‌شده را با یک کلید گردآورنده مورد اعتماد بررسی می‌کنند. یک نقطه کنترل جداگانه نیز پیوستگی با دفترچه یادداشت قبلی را بررسی می‌کند. [مراحل تأیید را بررسی کنید.](https://phishdestroy.github.io/TgWitness/fa/docs/concepts/#layers)
 
 ## نسخه‌های S3. بررسی‌های خارجی.
 
@@ -154,13 +157,13 @@ tgwitness-evidence.zipبستهٔ امضا‌شده
 
 [پیکربندی S3 و بازیابی یک نسخه](https://phishdestroy.github.io/TgWitness/fa/docs/exports/#s3)[جزئیات تأیید را در بخوانید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**چه کاری انجام نمی‌دهد** این ابزار بدون کلید رمزگشایی صادرشده بازیابی نمی‌کند و جایگزین شاهدی مستقل نمی‌شود.
+**کلید بازیابی:** کلید رمزگشایی صادرشده را به‌طور جداگانه ذخیره کنید تا بتوانید نسخه رمزگذاری‌شده را بازیابی کنید.
 
 ### اخطاریه‌ها · اپرایز
 
 هشدارهای مشکل، تغییرات چت و خلاصه‌های روزانه از طریق Apprise: پیام‌رسان‌ها، ایمیل یا وب‌هوک JSON خود.
 
-این کار را **انجام نمی‌دهد.** متن پیام را ارسال نمی‌کند مگر اینکه شما گزیده‌ها را فعال کنید.
+**انتخاب کنید چه چیزی را به اشتراک بگذارید**. گزیده‌های پیام به‌طور پیش‌فرض غیرفعال هستند؛ آن‌ها را برای مقاصدی که به آن‌ها اعتماد دارید فعال کنید.
 
  [مقاصد اعلان را پیکربندی کنید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ tgwitness-evidence.zipبستهٔ امضا‌شده
 
 هش‌های نقطه‌کنترل زمانی را با RFC 3161 و OpenTimestamps ثبت کنید.
 
-**چه کاری انجام نمی‌دهد** این ابزار رسید تقویمی در انتظار را به‌عنوان مهر زمانی تأییدشده بیت‌کوین در نظر نمی‌گیرد.
+**نتیجه را دنبال کنید،** پاسخ مرجع را بررسی کنید یا رسید OpenTimestamps را به اثبات بیت‌کوین تأییدشده ارتقا دهید.
 
  [مدارک مهر زمانی را بررسی کنید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ tgwitness-evidence.zipبستهٔ امضا‌شده
 
 یک میزبان جداگانه مشاهدات امضا شده را نگهداری می‌کند و می‌تواند منتشر کند `TGW1` نقاط کنترل را ذخیره می‌کند.
 
-**چه کاری انجام نمی‌دهد** این کار دو فضای کاری روی یک میزبان جمع‌آوری را به شاهدان مستقل تبدیل نمی‌کند.
+**مراجع را جدا کنید.** شاهد را روی میزبان دیگری اجرا کنید و کلید امضا و دفترچهٔ ثبت آن را حفظ کنید.
 
  [شاهد را راه‌اندازی کنید](https://phishdestroy.github.io/TgWitness/fa/docs/witness/)
 
@@ -184,7 +187,7 @@ tgwitness-evidence.zipبستهٔ امضا‌شده
 
 پس از راه‌اندازی مجدد از سر بگیرید. بازبینی مجدد و `coverage.json` نمایش پیام‌های بازیابی‌شده و فواصل زمانی.
 
-**چه کاری انجام نمی‌دهد** این ابزار هر ویرایش از دست رفته یا پیام ناپدیدشده را بازسازی نمی‌کند.
+**فاصله زمانی را بررسی کنید**: پیام‌های بازیابی‌شده فعلی را در کنار وقفه‌های ثبت‌شده ببینید؛ نسخه‌های قبلی هنگام ضبط همچنان در دسترس هستند.
 
  [پیوستگی و فواصل را بررسی کنید](https://phishdestroy.github.io/TgWitness/fa/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ cd TgWitness
 
 [مرور نسخه‌های منتشرشده](https://github.com/phishdestroy/TgWitness/releases)
 
-پایتون روی ویندوز ندارید؟ [بستهٔ قابل حمل را دانلود کنید](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip)، آن را استخراج کرده و روی `TgWitness.cmd` دوبار کلیک کنید.
+پایتون روی ویندوز ندارید؟ [بستهٔ قابل حمل را دانلود کنید](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip)، آن را استخراج کرده و روی `TgWitness.cmd` دوبار کلیک کنید.
 
 مرحلهٔ ۰۲
 
@@ -260,7 +263,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 برای نصب از سورس، توکن در `data/live/panel-token.txt` قرار دارد. ورود به تلگرام می‌تواند از تنظیمات API داخلی استفاده کند یا از جفت توکن خودتان از [my.telegram.org](https://my.telegram.org). [راهنمای کامل راه‌اندازی ↗](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [آخرین تغییرات →](https://phishdestroy.github.io/TgWitness/fa/docs/reference/changelog/) · [ویژگی‌ها و محدودیت‌های شناخته‌شده →](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/)
+**TgWitness 0.8.0** [آخرین تغییرات →](https://phishdestroy.github.io/TgWitness/fa/docs/reference/changelog/) · [ویژگی‌ها و محدودیت‌های شناخته‌شده →](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/)
 
 ## دستورالعمل‌های واضح. یک گام بعدی مفید.
 

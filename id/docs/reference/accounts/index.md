@@ -226,7 +226,16 @@ Tekan **+** di samping pemilih akun, atau buka **Akun → Pengaturan → Pengatu
 
 ### Impor massal dan grup akun
 
-Gunakan **Akun → Impor akun** untuk menambahkan beberapa akun, memasangkan berkas berdasarkan nama dasar, dan melihat hasil setiap login. Setiap akun mendapat ruang kerja sendiri. Grup dapat menyalin pengaturan terpilih dari templat tanpa menggabungkan sesi, kunci, atau bukti. Lihat [panduan impor dan grup](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) dan [dasbor kumpulan MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+Gunakan **Akun → Impor akun** untuk menambahkan beberapa akun, pasangkan berkas berdasarkan nama dasar dan lihat hasil login masing-masing. Setiap akun memiliki ruang kerja tersendiri.
+
+Sebuah grup menyatukan akun-akun yang terkait tanpa menggabungkan sesi, kunci, atau bukti mereka. **Buka grup** di **bagian Akun** untuk menuju ke halamannya di `/groups/<id>`:
+
+- **Akun:** rute koneksi, pengamatan, dan pesan terakhir setiap anggota, dengan **Mulai Semua** dan **Jeda Semua**.
+- **Perlu perhatian:** akun yang telah keluar, tidak tersedia, atau mengalami masalah koneksi, input, sumber, atau media; setiap nama mengarah ke kartunya masing-masing.
+- **Obrolan di beberapa akun menampilkan:** sumber yang dibagikan, akun-akun yang mengamati obrolan tersebut, dan gangguan dalam periode pengamatan ruang kerja yang tersedia (hingga tujuh hari). **Ekspor dengan N akun** membagi ekspor saluran atau supergrup di antara akun-akun tersebut dan menandatangani satu arsip.
+- **Ekspor grup:** satu ZIP dengan ekspor yang telah ditandatangani dari setiap akun di bawah `accounts/` dan `manifest.json` mencantumkan SHA-256 dan sidik jari kunci masing-masing, yang ditandatangani oleh ruang kerja utama di `manifest.signature.json`. Verifikasi setiap arsip akun secara terpisah dengan `python -m tgwitness.verify` dan sidik jari tepercaya akun tersebut.
+
+Anggota berbagi pengaturan grup; sebuah akun dapat mempertahankan nilai-nilainya sendiri. Lihat [pengaturan bersama](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [panduan impor dan grup](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) dan [dasbor kolam MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Keluar
 

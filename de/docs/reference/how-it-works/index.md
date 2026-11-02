@@ -6,7 +6,7 @@ Hash-Kette, Signaturen, Kontrollpunkte und Zeugen werden anhand der genauen Form
 
 TgWitness bewahrt die von einem Erfassungskonto beobachteten Inhalte auf, verknüpft diese Beobachtungen zu einem signierten Protokoll und ermöglicht es einer anderen Person, einen Export anhand eines vertrauenswürdigen Schlüssels und eines zuvor gespeicherten Prüfpunkts zu verifizieren.
 
-Die [lokale Dokumentationswebsite](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) enthält zudem interaktive Beispiele unter `/docs/concepts/` sowie einen Checkpoint-Entscheidungs-Explorer unter `/docs/witness/`. Alle Beispielnachrichten, Zählwerte und Verzögerungen sind fiktiv. Die Hashes in der Chain-Sandbox werden mit SHA-256 im Browser berechnet. Es werden keine Daten an Telegram gesendet.
+Die [lokale Dokumentationswebsite](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) enthält zusätzlich interaktive Beispiele unter `/docs/concepts/`, einen Checkpoint-Entscheidungs-Explorer unter `/docs/witness/` sowie Anleitungen für [das Case Board](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-board/), [die Berichtsgestaltung](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-reports/) und [Auszüge zur Übergabe](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#handover-extract). Alle Beispielnachrichten, Zahlenangaben und Verzögerungen sind fiktiv. Hashes in der Chain-Sandbox werden mit SHA-256 im Browser berechnet. Es werden keine Daten an Telegram gesendet.
 
 ## Eine Nachricht ändert sich; Beobachtungen sammeln sich an
 
@@ -92,7 +92,7 @@ Ablaufdiagramm · Collector / Kontositzung / Schlüssel A → Endpunkt für schr
 
 Der Witness protokolliert Rückgängigmachungen, unterschiedliche Kopfzeilen bei gleicher Zählung, geänderte Schlüssel, ungültige Antworten und fehlende Rückmeldungen. Eine höhere Zählung allein belegt nicht, dass alle früheren Einträge unverändert geblieben sind; vergleichen Sie den Export mit den gespeicherten Prüfpunkten. Ein Witness auf einem anderen Host verhindert, dass er von einem Ausfall des Collector-Hosts betroffen ist; ein separater Betreiber sorgt für zusätzliche Unabhängigkeit.
 
-Der „Witness“ bestätigt den vom „Collector“ gemeldeten Protokollstatus. Er beobachtet nicht eigenständig alle Telegram-Nachrichten. Siehe [Einrichtung des „Witness](https://phishdestroy.github.io/TgWitness/de/docs/reference/witness/)“.
+Der „Witness“ bestätigt den vom „Collector“ gemeldeten Journalstatus. Verwenden Sie einen kontrollierten Zustellungstest, um zu überprüfen, welche Telegram-Aktionen ein Erfassungskonto erreicht haben. Siehe [Einrichtung des „Witness](https://phishdestroy.github.io/TgWitness/de/docs/reference/witness/)“.
 
 ## Testdurchführung unter Berücksichtigung bekannter Maßnahmen
 
@@ -106,14 +106,14 @@ Es zählen nur übereinstimmende erwartete Aktionen; doppelte Empfangsbestätigu
 
 Die [vollständige Anleitung zur Untersuchung](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/) verfolgt den Verlauf eines Vorfalls über einen Kanal, eine Gruppe, einen Bot und einen privaten Chat hinweg:
 
-1. Aktivieren Sie den Untersuchungsmodus für das gesamte Konto und erfassen Sie jeden zugänglichen Chat.
+1. Aktivieren Sie auf einem dedizierten Erfassungskonto den Untersuchungsmodus für das gesamte Konto und erstellen Sie eine Bestandsliste der zugänglichen Chats. Verwenden Sie ausgewählte Chats oder einen Ordner für ein Hauptkonto.
 2. Erfassen Sie Protokoll-Momentaufnahmen, den vollständigen Verlauf pro Chat sowie erhaltene Anhänge.
 3. Speichern Sie Live-Änderungen sowie alle absichtlichen Interaktionen mit den Bedienfeldern zusammen mit den entsprechenden Belegen.
 4. Verfolgen Sie numerische Absender-IDs, Antwortbeziehungen, wiederkehrende Empfänger und Datei- Hashes anhand zitierter Datensätze und Personenprofile.
-5. Rekonstruktion einer chatübergreifenden Zeitleiste mit Zeitstempeln und expliziten Lücken.
+5. Fügen Sie im Case Board quellverknüpfte Notizen und Sammlungen hinzu. Rekonstruieren Sie eine chatübergreifende Zeitleiste mit Zeitstempeln und expliziten Lücken.
 6. Vergleichen Sie die Arbeitsbereiche anderer Konten, wobei deren Ursprünge und Schlüssel getrennt bleiben.
 7. Stellen Sie die signierten Protokolle, Profile und Verlaufsexporte zusammen und überprüfen Sie diese anhand von Fallnotizen.
 
-Der „`/docs/cases/`“-Leitfaden der Website enthält eine interaktive Fallkarte sowie Varianten für Bot-Streitigkeiten, gelöschte Nachrichten und Teilnehmer, die ihren Namen ändern. Fallnotizen und arbeitsbereichsübergreifende Analysen erfolgen extern; die Anwendung generiert nicht automatisch ein globales Ermittlungsdiagramm oder ein zusammengeführtes Fallarchiv.
+Der Leitfaden unter „`/docs/cases/`“ auf der Website enthält eine interaktive Fallkarte sowie Varianten für Streitigkeiten mit Bots, gelöschte Nachrichten und Teilnehmer, die ihren Namen ändern. Das Case Board speichert Notizen und Sammlungen innerhalb eines Arbeitsbereichs. Gruppenexporte stellen separate Arbeitsbereichspakete zusammen; die arbeitsbereichsübergreifende Korrelation und eine kombinierte Zeitleiste bleiben Aufgabe der Analysten.
 
 [Abgeschlossene Validierung und verbleibende Arbeiten](https://phishdestroy.github.io/TgWitness/de/docs/reference/verification/) · [Exportieren und verifizieren](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#investigation-handoff) · [Beginnen Sie mit einem Konto](https://phishdestroy.github.io/TgWitness/de/docs/reference/quickstart/)

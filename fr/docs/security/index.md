@@ -79,7 +79,7 @@ Les destinations facultatives sont configurées par espace de travail. Le texte 
 - Un administrateur de la machine peut tout lire, réécrire et resigner le journal. Conservez l’empreinte numérique et les points de contrôle sur un autre système.
 - Le texte des messages et les fichiers multimédias ne sont pas chiffrés par TgWitness. Veuillez utiliser un chiffrement de disque et définir des autorisations strictes.
 - Une connexion HTTP standard en dehors de localhost expose le jeton sur le réseau. Utilisez le protocole HTTPS ou un tunnel SSH.
-- Les signatures prouvent que ce qui a été enregistré n’a pas été modifié, et non que chaque événement sur Telegram a été enregistré.
+- Vérifiez les enregistrements sauvegardés à l’aide des signatures et des points de contrôle. Vérifiez l’exhaustivité de la collecte et testez la livraison pour les comptes et les sources que vous utilisez.
 
 [Partagez l’accès à un dossier](https://phishdestroy.github.io/TgWitness/fr/docs/access/) en définissant des autorisations, une date d’expiration et des limites de session. Un jeton « witness » reste un identifiant distinct.
 

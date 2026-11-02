@@ -12,7 +12,7 @@ Gewähren Sie einem Prüfer Zugriff auf einen Chat, einem Analysten die Berechti
 
 **Der Erfassungsumfang** bestimmt, was ein Konto aufzeichnet: ausgewählte Chats, einen Telegram-Ordner oder das gesamte Konto. **Der Zugriffsumfang** legt fest, welche dieser aufgezeichneten Konten und Chats eine andere Person einsehen und nutzen kann. Die Gewährung von Zugriff bedeutet nicht, dass man einem Telegram-Chat beitritt, die Erfassung startet oder Berechtigungen für das Telegram-Konto erhält.
 
-Ein Zugriff kann ausgewählte Arbeitsbereiche, ausgewählte Chats innerhalb dieser oder alle Arbeitsbereiche umfassen. **Alle Arbeitsbereiche, einschließlich später hinzugefügter,** decken auch zukünftige Konten ab. Wählen Sie Arbeitsbereiche ausdrücklich aus, wenn ein Fall auf diese beschränkt bleiben soll.
+Ein Zugriff kann ausgewählte Arbeitsbereiche, ausgewählte Chats innerhalb dieser, alle Arbeitsbereiche oder jedes Konto einer [Kontengruppe](https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/#bulk-import-and-account-groups) umfassen. **Alle Arbeitsbereiche, einschließlich später hinzugefügter,** umfassen auch zukünftige Konten. Ein Gruppenzugriff umfasst ebenfalls Konten, die dieser Gruppe später hinzugefügt werden. Wählen Sie Arbeitsbereiche explizit aus, wenn ein Fall auf diese beschränkt bleiben soll.
 
 ## Jemandem Zugriff gewähren
 
@@ -28,6 +28,8 @@ Ein Zugriff kann ausgewählte Arbeitsbereiche, ausgewählte Chats innerhalb dies
 
 ## Wählen Sie die Berechtigungen aus
 
+Verwenden Sie für eine rein textbasierte öffentliche Demonstration **die Option „Public Showcase“** anstelle des normalen Reviewer-Zugriffs. Dabei werden explizit ausgewählte öffentliche Kanäle, gespeicherte Bearbeitungen und Löschungen sowie signierte Statistiken angezeigt, wobei Autorenfelder unkenntlich gemacht und Dateien an der API-Grenze geschlossen werden. [Erstellen und überprüfen Sie ein Showcase](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+
 | Genehmigung | Was es ermöglicht |
 | --- | --- |
 | `view` | Lesen Sie freigegebene Chats, erfasste Nachrichten, Profile, Dateien und gefilterte Protokollaufzeichnungen. Immer enthalten. |
@@ -37,6 +39,9 @@ Ein Zugriff kann ausgewählte Arbeitsbereiche, ausgewählte Chats innerhalb dies
 | `interact` | Führen Sie unterstützte Telegram-Interaktionen innerhalb des Zugriffsumfangs durch. Bei einem auf den Chat beschränkten Zugriff können keine kontoweiten Link-Vorschauen genutzt werden. |
 | `settings` | Ändern Sie die Erfassungseinstellungen, Zeitstempel, Benachrichtigungen, externe Kopien und Parameter. Erfordert Zugriff auf den gesamten Arbeitsbereich. |
 | `account` | Melden Sie sich bei Telegram an oder ab und verwalten Sie Verbindungswege. Erfordert Zugriff auf den gesamten Arbeitsbereich. |
+| `board.read` | Lesen Sie die Notizen im Case Board nur innerhalb des zulässigen Arbeitsbereichs und der zulässigen Chats. |
+| `board.write` | Fügen Sie Lesezeichen, Markierungen, Ausschnitte, Kommentare sowie Öffnungs- und Überprüfungsstatus hinzu. Erfordert außerdem „`board.read`“. |
+| `board.manage` | Verwalten Sie Sammlungen, endgültige Teamstatus und die Karten anderer Teilnehmer. Erfordert außerdem Lese- und Schreibzugriff auf das Board. |
 
 Berechtigungen und Geltungsbereich werden gemeinsam geprüft. Das Aktivieren einer Berechtigung führt nicht dazu, dass andere Chats geöffnet werden oder bei einem auf einen Chat beschränkten Zugriff eine arbeitsbereichsweite Aktion freigeschaltet wird. Für einen parallelen Export muss der Zugriff den exportierten Chat in jedem ausgewählten Konto abdecken. Ein erteilter Zugriff darf keine neuen Zugriffe erstellen, keine Sitzungen anderer Personen verwalten oder die Administratorkonsole öffnen.
 
@@ -48,7 +53,7 @@ Berechtigungen und Geltungsbereich werden gemeinsam geprüft. Das Aktivieren ein
 | Analyst, der eine Übergabe vorbereitet | Die zu untersuchenden und zu exportierenden Chats | `view`, `export`; fügen Sie `interact` nur hinzu, falls diese über Telegram agieren sollen |
 | Erfassungsoperator | Ausgewählte vollständige Arbeitsbereiche | `view`, `sources`, `collect`; fügen Sie `settings` oder `account` nur bei Bedarf hinzu |
 
-Dies sind Beispiele, die Sie über die Kontrollkästchen für Berechtigungen konfigurieren; es handelt sich nicht um festgelegte Rollen.
+Zu den Startvoreinstellungen des Zugriffsformulars gehört auch das Fall-Dashboard: Prüfer können lesen, Analysten können lesen und schreiben, und Betreiber können es verwalten. Die Voreinstellungen bleiben bearbeitbar, und bestehende Berechtigungen werden nicht automatisch erweitert. Siehe [Fall-Dashboard](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-board/) für vererbte Chat-Bereiche und Exportdatenschutz.
 
 ## Beschränkungen und Sitzungen
 
@@ -67,9 +72,33 @@ Die IP-Adresse ist die vom Programm erkannte Client-Adresse. Wenn Sie sich hinte
 
 Bearbeiten Sie einen Eintrag unter **„Zugriffe“**, um dessen Geltungsbereich, Berechtigungen oder Einschränkungen zu ändern. Änderungen am Geltungsbereich und an den Berechtigungen werden bei nachfolgenden Anfragen überprüft, einschließlich Anfragen aus bereits geöffneten Sitzungen. Der Widerruf eines Zugriffs beendet dessen Sitzungen und macht das ausgestellte Token unbrauchbar. **Bei geöffneten Sitzungen** kann der Administrator auch eine einzelne Sitzung beenden, ohne den gesamten Zugriff zu widerrufen.
 
+Gespeicherte Exportkopien behalten ihren Ersteller, den Arbeitsbereich, den Chat-Umfang und die erforderlichen Berechtigungen bei. Ein berechtigter Nutzer kann seine eigenen Kopien nur so lange auflisten oder herunterladen, wie diese Berechtigungen noch gelten; Kopien, die das Case Board enthalten, erfordern zusätzlich die Berechtigung „`board.read`“. Der Administrator kann alle Kopien abrufen. Ältere Kopien ohne diese Metadaten sowie Gruppenbündel sind nur für den Administrator zugänglich. Download-Tickets und vorbereitete Dateiantworten überprüfen den Zugriff erneut nach der Vorbereitung der Datei, bevor deren Daten gesendet werden.
+
 Durch eine Widerrufung können bereits heruntergeladene Dateien nicht wiederhergestellt werden. Das Abmelden, das Sperren des Fensters oder das Beenden einer Sitzung stoppt einen laufenden Collector nicht.
 
 ## Was der Administrator sehen kann
+
+Prüfer und Analysten erhalten Informationen zum Erfassungsfortschritt ohne Proxy-Endpunkte, Pool-Diagnosen, Serverpfade oder rohe Verbindungsfehler. Für die Verbindungsdiagnose ist die Berechtigung „`account`“ für den gesamten Arbeitsbereich erforderlich. Das Lesen von Benachrichtigungen, Offsite-Kopien und Parametereinstellungen erfordert die Berechtigung „`settings`“.
+
+Vollständige Browser-User-Agent-Zeichenfolgen werden in Zugriffssitzungen nicht beibehalten. Bei einem Upgrade werden sie zudem aus dem veränderbaren Sitzungscache entfernt. Das Protokoll des Panel-Prozesses maskiert IP-Literale, URL-Anmeldedaten und gekennzeichnete Geheimnisse. Lokale Dienstprotokolle und zuvor signierte Journal-Einträge werden nicht überschrieben. Zugriffsregeln und signierte Anmeldeeinträge verwenden weiterhin die Client-Adresse.
+
+### Den Hauptschlüssel ersetzen
+
+Verwenden Sie „**Access“ → „Meine Grenzen“ → „Administratorschlüssel** neu ausstellen“ oder führen Sie „ `tgwitness token rotate`“ von einer verwalteten Installation aus, während das Panel läuft. Alle bestehenden Browsersitzungen werden beendet, einschließlich der mit Kollegen- Tokens eröffneten Sitzungen. Der anfragende Browser erhält eine neue Sitzung; speichern Sie den neuen Administratorschlüssel, bevor Sie ihn ausblenden. Ausgestellte Kollegen-Tokens bleiben gültig, bis sie separat widerrufen werden. Bei einer Installation, die `TGWITNESS_TOKEN` verwendet, muss diese Umgebungseinstellung geändert und ein Neustart durchgeführt werden.
+
+### Anfrage- und Proxy-Grenzen
+
+Die API lässt bis zu 600 Anfragen pro Minute pro Client-IP zu. Zehn abgelehnte Authentifizierungen innerhalb einer Minute lösen eine exponentielle Sperrzeit aus, die von einer Sekunde bis zu fünf Minuten reicht. Ein fehlgeschlagener Versuch nach Ablauf der Sperrzeit verlängert diese; zehn Minuten ohne fehlgeschlagenen Versuch setzen die Eskalation zurück. Ablehnungen geben HTTP 429 und `Retry-After` zurück. Die Limits werden im Speicher verwaltet und von allen Arbeitsbereichen innerhalb eines Panel-Prozesses gemeinsam genutzt; ein Neustart löscht sie. Live-Streams sind auf vier pro Träger-Token und 32 für den Panel-Prozess begrenzt. Das Öffnen eines Streams verbraucht ebenfalls das API-Anfrage-Kontingent.
+
+Für Request-Bodies gilt eine Empfangsfrist von 60 Sekunden (8 Sekunden für MCP). Jede Anwendung begrenzt unvollständige Request-Bodies auf 32 Anfragen und 64 MiB reservierte Routenkapazität. Übergroße Request-Bodies führen zu einem 413-Fehler, Request-Bodies mit abgelaufener Zeit zu einem 408-Fehler und erschöpfte Request-Body-Kapazität zu einem 503-Fehler mit „`Retry-After`“.
+
+Weitergeleitete IP-Header werden ignoriert, es sei denn, der tatsächliche TCP-Peer gehört zu `TGWITNESS_TRUSTED_PROXIES` (durch Kommas getrennte IPs oder CIDRs). Setzen Sie `TGWITNESS_PROXY_HEADER` auf `x-forwarded-for` oder `cf-connecting-ip`. XFF wird vom nächstgelegenen Proxy in Richtung des ersten nicht vertrauenswürdigen Peers durchlaufen. Fehlerhafte oder doppelte Metadaten vertrauenswürdiger Adressen werden abgelehnt, sodass sie keine Proxy-Adresse aus der Zulassungsliste erben können. Der verwaltete Quick-Tunnel vertraut dem lokalen Cloudflare-Connector; die Eigen-Domain-Konfiguration vertraut lokalem Caddy. Direkte Bereitstellungen vertrauen standardmäßig keinem Proxy. Wenn Sie Uvicorn selbst starten, deaktivieren Sie dessen Proxy-Header-Verarbeitung, damit diese Grenze den tatsächlichen Peer empfängt.
+
+`TGWITNESS_PANEL_ALLOWED_IPS` beschränkt den gesamten Zugriff auf das Panel, einschließlich des Administrators, auf aufgeführte IP-Adressen oder CIDRs. Die Routing-Identity-Prüfung des Installationsprogramms bleibt öffentlich und gibt keine Kontodaten zurück. Fügen Sie die erforderliche lokale Verwaltungsroute ein, bevor Sie die Zulassungsliste aktivieren. Der Leitfaden „**START-HERE**“ für eine verwaltete Installation enthält die Anweisungen zur Dienstkonfiguration und Wiederherstellung.
+
+Ein API-Abfrage-Selektor vom Typ „`ws`“ muss den Arbeitsbereich im Anforderungspfad identifizieren; unbekannte, nicht übereinstimmende und doppelte Selektoren werden mit dem Status 404 abgelehnt.
+
+Panel-Skripte und -Stile enthalten SHA-384-Integritätsmetadaten. Eine Import-Map deckt zudem lokal importierte JS-Module in Browsern ab, die die Integrität von Import-Maps unterstützen. Die dynamisch generierte Sprachantwort erfolgt separat. Diese Prüfungen erkennen die Ersetzung von Assets im Vergleich zur ausgelieferten Seite; sie begründen jedoch kein Vertrauen in einen kompromittierten Server, der sowohl die Seite als auch deren Hashes ersetzen kann.
 
 **Das Protokoll seit dem Start** kombiniert Prozessprotokolle mit Protokollaktivitäten aus jedem Arbeitsbereich: Anmeldungen, Ablehnungen, Routenänderungen und Bedieneraktionen. Es handelt sich um eine In-Memory-Konsole für den aktuellen Prozess, nicht um eine dauerhafte Kopie jeder einzelnen Nachricht. Häufig auftretende Nachrichtenereignisse verbleiben im Protokoll, anstatt die Konsole zu überfüllen.
 

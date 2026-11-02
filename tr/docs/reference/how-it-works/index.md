@@ -6,7 +6,7 @@ Hash zinciri, imzalar, kontrol noktaları ve tanıklar, doğrulayıcının kulla
 
 TgWitness, toplama hesabının gözlemlediklerini korur, bu gözlemleri imzalı bir günlüğe bağlar ve başka bir kişinin, güvenilir bir anahtar ve daha önce saklanan bir kontrol noktası ile karşılaştırarak dışa aktarılan verileri doğrulamasına olanak tanır.
 
-[Yerel dokümantasyon web](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) sitesi, `/docs/concepts/` adresinde etkileşimli örnekler ve `/docs/witness/` adresinde bir kontrol noktası karar gezgini sunmaktadır. Tüm örnek mesajlar, sayımlar ve gecikmeler kurgusaldır. Zincir sanal ortamındaki hash değerleri, tarayıcıda SHA-256 ile hesaplanır. Telegram'a hiçbir şey gönderilmez.
+[Yerel dokümantasyon web](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) sitesinde `/docs/concepts/` adresinde etkileşimli örnekler, `/docs/witness/` adresinde bir kontrol noktası karar gezgini ve [Case Board](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/), [rapor tasarımı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/) ile [devir-teslim özetleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#handover-extract) için adım adım kılavuzlar bulunmaktadır. Tüm örnek mesajlar, sayımlar ve gecikmeler kurgusaldır. Zincir sanal ortamındaki hash değerleri, tarayıcıda SHA-256 ile hesaplanır. Telegram'a hiçbir şey gönderilmez.
 
 ## Bir mesaj değişir; gözlemler birikir
 
@@ -92,7 +92,7 @@ Akış şeması · Toplayıcı / hesap oturumu / anahtar A → Salt okunur kontr
 
 Tanık, geri alma işlemlerini, aynı sayımda farklı bir başlık, değiştirilen anahtarlar, geçersiz cevaplar ve eksik yanıtları kaydeder. Yalnızca sayının daha büyük olması, daha önceki tüm kayıtların değişmeden kaldığını kanıtlamaz; dışa aktarılan verileri saklanan kontrol noktalarıyla karşılaştırın. Başka bir sunucudaki tanık, toplayıcının sunucusundaki kesintilerden etkilenmez; ayrı bir operatör ise ek bağımsızlık sağlar.
 
-Witness, toplayıcının bildirdiği günlük durumunu doğrular. Tüm Telegram mesajlarını bağımsız olarak gözlemlemez. [Witness kurulumuna](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/) bakınız.
+Tanık, toplayıcının bildirdiği günlük durumunu doğrular. Hangi Telegram eylemlerinin bir toplama hesabına ulaştığını ölçmek için kontrollü teslimat testi kullanın. [Tanık kurulumuna](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/) bakın.
 
 ## Bilinen eylemler karşısında test uygulaması
 
@@ -106,14 +106,14 @@ Yalnızca beklenen eylemler sayılır; yinelenen makbuzlar payı artırmaz. Payd
 
 Bir kanal, grup, bot ve özel sohbet üzerinden yaşanan bir olayı kapsayan [eksiksiz soruşturma kılavuzu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/):
 
-1. Tüm hesap Soruşturma modunu etkinleştirin ve erişilebilir tüm sohbetleri listeleyin.
+1. Özel bir toplama hesabında, tüm hesap için Soruşturma modunu etkinleştirin ve erişilebilir sohbetlerin envanterini çıkarın. Ana hesap için seçilen sohbetleri veya bir klasörü kullanın.
 2. Günlük anlık görüntülerini, sohbet başına tam geçmişi ve saklanan ekleri elde edin.
 3. Canlı değişiklikleri ve panel ile yapılan tüm kasıtlı etkileşimleri, ilgili makbuzlarıyla birlikte saklayın.
 4. Alıntılanan kayıtlar ve kişi profilleri aracılığıyla sayısal gönderen kimliklerini, yanıt ilişkilerini, tekrarlanan alıcıları ve dosya hash değerlerini takip edin.
-5. Zaman damgaları ve açık boşluklar içeren, farklı sohbetler arası bir zaman çizelgesini yeniden oluşturun.
+5. Case Board'a kaynağa bağlı notlar ve koleksiyonlar ekleyin. Hem zaman damgalarını hem de açık boşlukları içeren, farklı sohbetler arası bir zaman çizelgesi oluşturun.
 6. Diğer hesap çalışma alanlarını karşılaştırırken, bunların kaynaklarını ve anahtarlarını ayrı tutun.
 7. İmzalı günlükleri, profilleri ve geçmiş verilerini vaka notlarıyla bir araya getirin ve doğrulayın.
 
-Web sitesindeki `/docs/cases/` kılavuzu, etkileşimli bir vaka haritası ile bot anlaşmazlıkları, silinen mesajlar ve isim değiştiren katılımcılar için çeşitli senaryolar içerir. Vaka notları ve çalışma alanları arası analizler harici kaynaklardan sağlanır; uygulama, otomatik olarak genel bir soruşturma grafiği veya birleştirilmiş bir vaka arşivi oluşturmaz.
+Web sitesindeki `/docs/cases/` kılavuzu, etkileşimli bir vaka haritası ile bot anlaşmazlıkları, silinmiş mesajlar ve isim değiştiren katılımcılar için farklı senaryolar içerir. Case Board, notları ve koleksiyonları bir çalışma alanı içinde tutar. Grup dışa aktarımları, ayrı çalışma alanı paketlerini toplar; çalışma alanları arası korelasyon ve birleştirilmiş zaman çizelgesi ise analistlerin görevleri arasında yer alır.
 
 [Tamamlanan doğrulama ve kalan işler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/) · [Dışa aktarma ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#investigation-handoff) · [Bir hesapla başlayın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)

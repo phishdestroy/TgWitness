@@ -4,19 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/cases/
 
 Przeprowadź całą sprawę, obejmującą różne kanały, grupy, czaty prywatne i boty: gromadź, łącz, odtwarzaj i przekazuj dowody.
 
-Niniejszy przewodnik przedstawia przebieg jednego fikcyjnego zdarzenia na podstawie kompletnego zapisu. Wykorzystuje on rzeczywiste funkcje gromadzenia danych, wyszukiwania, tworzenia profili osób oraz eksportu. Mapa sprawy stanowi przykład dokumentacji; Państwa wnioski oraz rejestr spraw są przechowywane poza aplikacją.
+Ten przewodnik przedstawia przebieg jednego fikcyjnego zdarzenia w ujęciu całościowym. Wykorzystaj funkcje gromadzenia danych, wyszukiwania i profili osób, aby znaleźć źródłowe zapisy, [moduł Case Board](https://phishdestroy.github.io/TgWitness/pl/docs/case-board/) do ich uporządkowania i omówienia, a także [Report Studio](https://phishdestroy.github.io/TgWitness/pl/docs/reports/) do przedstawienia wyników. Ilustrowana mapa poniżej wyjaśnia powiązania w tym przykładzie.
 
 PRZYPADEK Z PRAKTYKI / ZMIANA ODBIORCY PŁATNOŚCI
 
 ### Jedno zdarzenie. Cztery rozmowy. Ślad do odtworzenia.
 
-Ogłoszenie na kanale wskazuje na bota. Grupa operacyjna omawia nowy link do płatności. Prywatna wiadomość uzupełniająca powtarza tę informację. Później ogłoszenie zostaje edytowane, a wiadomość grupowa znika.
+Ogłoszenie na kanale odsyła do bota. Grupa operacyjna omawia nowy link do płatności, a bot go wyświetla. Ogłoszenie zostaje edytowane, w prywatnej wiadomości uzupełniającej powtórzono adres docelowy, a wiadomość grupowa znika.
 
 Kto opublikował każdą z wersji?Gdzie pojawił się ten link?Który plik został zachowany?Co uległo zmianie i kiedy?
 
 Aby uzyskać informacje na temat wczytywania historii, opcjonalnej weryfikacji źródeł przez sztuczną inteligencję, MCP, OCR oraz wychodzących webhooków, zobacz [sekcję „Praca z archiwum](https://phishdestroy.github.io/TgWitness/pl/docs/archive/)”.
 
 ## 1. Zapewnienie pełnego zakresu monitorowania całego konta
+
+W przypadku gromadzenia danych z całego konta należy używać dedykowanego konta do gromadzenia danych. Konta główne mogą gromadzić wybrane czaty lub folder w Telegramie.
 
 1. [Proszę podłączyć konto służące do gromadzenia danych](https://phishdestroy.github.io/TgWitness/pl/docs/accounts/) w oddzielnym obszarze roboczym. Proszę odnotować numer referencyjny sprawy, identyfikator konta, nazwę obszaru roboczego oraz odcisk palca klucza podpisu w notatkach dotyczących sprawy.
 2. **Źródła** otwarte **→ Zakres obserwacji → Tryb dochodzeniowy**. Przejrzyj **całe konto**, wszystkie cztery typy źródeł oraz **własne działania**. To ustawienie wstępne umożliwia zapisanie profilu nowego źródła oraz jego ostatnich **200 widocznych wiadomości**. Proszę nacisnąć **przycisk „Zapisz zakres”** i potwierdzić wybrany zakres.
@@ -33,11 +35,11 @@ Opcja „Całe konto” obejmuje czaty, do których konto to ma dostęp, wraz ze
 
 ## 2. Pozyskiwanie historii i archiwizacja plików
 
-Proszę utworzyć rejestr źródeł dla całego dochodzenia. Każdej rozmowie należy przyporządkować wiersz zawierający jej identyfikator numeryczny, tytuł, konto, uprawnienia/rolę, datę rozpoczęcia monitorowania na żywo, datę pozyskania historii, wyniki dotyczące multimediów oraz znane luki. Źródło należy oznaczyć jako pozyskane dopiero po sprawdzeniu odpowiednich wyników.
+Należy utworzyć zbiór w Case Board na potrzeby dochodzenia i dodać do zakładek odpowiednie zapisane rekordy. Należy prowadzić rejestr źródeł wraz ze sprawą: numeryczny identyfikator każdej rozmowy, tytuł, konto zbierające, dostęp/rola, data rozpoczęcia monitorowania na żywo, data pozyskania historii, wynik multimediów oraz znane luki. Należy oznaczyć źródło jako pozyskane po sprawdzeniu odpowiedniego wyniku.
 
 | Wymagania | Działania w panelu | Co oferuje |
 | --- | --- | --- |
-| Historia w ramach włączonych czatów | Źródła → Wyświetl pełną historię | Obecna funkcja główna: dostępne wiadomości z przeszłości trafiają do dziennika obszaru roboczego wraz z opcją wstrzymania/wznowienia oraz podpisanym raportem z postępów. [Przewodnik po historii](https://phishdestroy.github.io/TgWitness/pl/docs/reference/history/). |
+| Historia w ramach włączonych czatów | Źródła → Wyświetl pełną historię | Dostępne wiadomości z przeszłości trafiają do dziennika obszaru roboczego wraz z opcją wstrzymania/wznowienia oraz podpisanym raportem z postępów. [Przewodnik po historii](https://phishdestroy.github.io/TgWitness/pl/docs/reference/history/). |
 | Istniejący kontekst rozmowy w dzienniku | Źródła → Ustawienia rejestrowania → Migawka historii | Najnowsze widoczne wiadomości jako podpisane obserwacje. Domyślna maksymalna liczba to 500; w sekcji **Parametry → Największy zrzut historii** można zwiększyć tę liczbę do 10 000. |
 | Pełna, aktualnie widoczna historia jednej rozmowy | Eksport całej rozmowy → Eksportuj całą rozmowę lub Rozmowy → Eksportuj rozmowę | Oddzielny, podpisany pakiet zawierający klucze `chat.json` i `chat.html`. Czynność należy powtórzyć dla każdego źródła; należy zachować wyniki zakończenia lub niepowodzenia. |
 | Kontekst pojawienia się nowej rozmowy | Zakres obserwacji → Gdy pojawia się nowa rozmowa lub bot | Profil źródła oraz do 1 000 ostatnich widocznych wiadomości; tryb śledczy wybiera 200. Istniejące czaty nie są objęte tym procesem z mocą wsteczną. |
@@ -63,9 +65,9 @@ Te elementy sterujące wykonują rzeczywiste działania w aplikacji Telegram. Na
 
 ## 4. Śledzenie osób, linków i plików w różnych czatach
 
-1. Otwórz **dziennik**, pozostaw filtr źródeł ustawiony na **„Wszystkie źródła”** i wyszukaj charakterystyczną frazę, domenę, nazwę użytkownika lub zapisany identyfikator. Otwórz każdy pasujący wpis i zanotuj nazwę czatu, identyfikator wiadomości oraz numer sekwencyjny w dzienniku.
+1. Otwórz **dziennik**, pozostaw filtr źródeł ustawiony na **„Wszystkie źródła”** i wyszukaj charakterystyczną frazę, domenę, nazwę użytkownika lub zapisany identyfikator. Otwórz każdy pasujący zapis, a następnie wybierz opcję **„Dodaj do tablicy”**, aby zachować czat, identyfikator wiadomości i odniesienie do dziennika w sprawie.
 2. Aby przejść do odpowiedniej rozmowy, proszę otworzyć **sekcję „Rozmowy” → „Osoby” → „Włącz profile”**, a następnie wybrać daną osobę. Proszę przejrzeć historię nazwisk/nazw użytkowników, relacje odpowiedzi, aktywność, **a także sekcję „Również w…” zawierającą** inne obserwowane rozmowy oraz wyodrębnione linki, portfele lub numery telefonów. Proszę otworzyć cytowane wpisy w dzienniku.
-3. Proszę śledzić ten sam numeryczny identyfikator użytkownika Telegrama w innych czatach w tej przestrzeni roboczej. Proszę traktować pasującą nazwę, wzmiankę o portfelu lub podobny awatar jako wskazówkę do sprawdzenia. Wzmianka o adresie nie potwierdza własności; podobny awatar nie oznacza, że chodzi o tę samą osobę.
+3. Należy śledzić ten sam numeryczny identyfikator użytkownika Telegrama w innych czatach w tym obszarze roboczym. Zgodną nazwę, wzmiankę o portfelu lub podobny awatar należy traktować jako wskazówkę do sprawdzenia; należy zachować odniesienia do źródeł oraz wszelkie dodatkowe informacje dotyczące autorstwa.
 4. Porównaj wartości SHA-256 zachowanych załączników w poszczególnych wpisach. Identyczne skróty potwierdzają zgodność bajtową zapisanych plików. Przed wyciągnięciem wniosków dotyczących tego, kto je udostępnił, należy sprawdzić powiązane wpisy wiadomości i nadawców.
 
 MAPA SPRAWY / PRZEŚLEDŹ ODNIESIENIAPrzykładowa sprawa · nie jest to wykres na żywo
@@ -86,17 +88,17 @@ PRYWATNE / DALSZE DZIAŁANIA**Użytkownik 71001 ponownie podaje miejsce docelowe
 
 Zapis nr 205 · wiadomość nr 922 Potwierdzenie zapisania pliku nr 209
 
-Cztery czaty zawierają różne spostrzeżenia. Należy śledzić zapisy źródłowe dla każdego połączenia; nie należy przypisywać wpisu na kanale do użytkownika 71001 bez podania nadawcy.
+Cztery czaty zawierają różne spostrzeżenia. Należy śledzić rekordy źródłowe dla każdego połączenia; wpis na kanale nie ma przypisanej osoby wysyłającej.
 
-Numeryczne identyfikatory i odniesienia do zapisów zostały wymyślone na potrzeby niniejszego przewodnika. Niniejsza mapa wyjaśnia przebieg pracy analityka z wykorzystaniem funkcji wyszukiwania, profili oraz przeglądu zapisów; aplikacja nie generuje globalnego wykresu śledczego.
+Numeryczne identyfikatory i odniesienia do rekordów zostały wymyślone na potrzeby niniejszego przewodnika. Ta mapa objaśniająca pokazuje, jak połączyć wyniki wyszukiwania, profile i sprawdzone rekordy; Case Board przechowuje odpowiednie karty i odniesienia do źródeł.
 
 | Połączenie | Uwagi uzupełniające | Wniosek: należy zachować |
 | --- | --- | --- |
 | To samo konto w serwisie Telegram | Użytkownik o identyfikatorze 71001 w grupie nr 146 oraz w prywatnym czacie nr 205 | W obu rozmowach podano ten sam identyfikator nadawcy. Kwestia tożsamości w rzeczywistości pozostaje odrębnym zagadnieniem. |
-| Powtarzające się miejsce docelowe | `pay.example.invalid/new` w #146, metadane przycisku #173, edytowany wpis #188 i #205 | Ta sama strona docelowa pojawia się w czterech zaobserwowanych kontekstach. Sam ten fakt nie pozwala ustalić, kto ją kontroluje. |
-| Ta sama liczba bajtów pliku | Identyczne pełne wartości SHA-256 w uzupełnionych potwierdzeniach odbioru multimediów nr 151 i nr 209 | Dwa zachowane załączniki są identyczne pod względem bajtów. Same nazwy plików lub miniatury nie pozwoliłyby tego ustalić. |
+| Powtarzające się miejsce docelowe | `pay.example.invalid/new` w #146, metadane przycisku #173, edytowany wpis #188 i #205 | Ten sam element docelowy pojawia się w czterech zaobserwowanych kontekstach. Należy określić jego kontrolę, korzystając z dodatkowych źródeł. |
+| Ta sama liczba bajtów pliku | Identyczne pełne wartości SHA-256 w uzupełnionych potwierdzeniach odbioru multimediów nr 151 i nr 209 | Dwa zabezpieczone załączniki są identyczne pod względem bajtów. Porównanie zapewniają pełne skróty plików. |
 
-Profile użytkowników obejmują autorów, których wiadomości zostały zapisane w danym czacie, i powiązują ich z innymi czatami w tym *samym dzienniku obszaru roboczego*. Nie stanowią one kompletnego wykazu członków. Skróty awatarów pochodzą z oddzielnej lokalnej pamięci podręcznej; liczba cytowań w profilach podlega konfiguracji w sekcji **Parametry → Liczba cytowanych wpisów na fakt**.
+Profile użytkowników opisują obserwowanych autorów i ich aktywność w *dzienniku* tego *samego obszaru roboczego*, w ramach czatów, do których widz ma dostęp. Jest to widok obserwowanych autorów, a nie pełny wykaz członków. Liczbę cytatów uzupełniających można dostosować w sekcji **Parametry →**Liczba**cytowanych zapisów na fakt**.
 
 ## 5. Odtworzyć sekwencję i zaznaczyć luki
 
@@ -129,11 +131,11 @@ Kolejność wpisów w dzienniku odpowiada kolejności ich otrzymania, a niekonie
 
 Należy utworzyć osobny obszar roboczy dla każdego odrębnego konta i powtórzyć proces określenia zakresu oraz sporządzenia wykazu historii. Należy odnotować przynależność/rolę oraz odcisk klucza podpisującego dla każdego z nich. Identyfikatory należy kwalifikować według obszaru roboczego i czatu: ten sam numer wiadomości nie stanowi globalnego identyfikatora obejmującego wszystkie konta.
 
-Porównaj istotne spostrzeżenia w notatkach dotyczących sprawy lub narzędziach analitycznych, zachowując odniesienie do konta i dziennika dla każdego wiersza. TgWitness nie oferuje obecnie jednej globalnej wyszukiwarki, połączonej osi czasu, wykresu kontaktów ani archiwum spraw obejmującego wszystkie obszary robocze. Pełny eksport jednego kanału lub supergrupy z wielu kont stanowi odrębną funkcję; nie jest to połączenie dzienników wszystkich kont.
+Użyj [grupy](https://phishdestroy.github.io/TgWitness/pl/docs/groups/) [kont](https://phishdestroy.github.io/TgWitness/pl/docs/groups/), aby sprawdzić stan działania, udostępnić wybrane ustawienia i wspólnie wyeksportować konta. Pakiet grupowy zachowuje podpisany dziennik i tożsamość każdego obszaru roboczego. W przypadku jednego kanału lub supergrupy uprawnione konta mogą również podzielić się eksportem pełnej historii. Stwórz oś czasu obejmującą wiele kont w notatkach dotyczących sprawy lub narzędziach analitycznych, zachowując odniesienie do obszaru roboczego i dziennika dla każdego wiersza.
 
 W przypadku dłuższych działań należy zaangażować [niezależnego świadka](https://phishdestroy.github.io/TgWitness/pl/docs/witness/) w celu zachowania wcześniej ustalonych granic. Proszę skorzystać z pilotażowego programu kontrolowanej dostawy, aby zweryfikować ścieżki przechwytywania kont oraz ich widoczność.
 
-## 7. Dostarczenie kompletnego, weryfikowalnego pakietu dowodowego
+## 7. Dostarczenie pakietu dowodowego umożliwiającego weryfikację
 
 Z każdego obszaru roboczego można wyeksportować plik ZIP zawierający podpisany dziennik. Zawiera on pełną treść zarejestrowanego dziennika, niezależnie od filtrów wyszukiwania zastosowanych w panelu. Istnieje możliwość oddzielnego eksportowania profili odpowiednich osób, zachowania pełnych zestawów historii czatów oraz kompletnych dowodów w postaci załączników.
 
@@ -162,7 +164,7 @@ python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Proszę sprawdzić rzeczywiste wyniki weryfikacji, zachować oryginały oraz przechować raport z zakresu analizy, informacje o nieudanych operacjach pozyskiwania danych oraz rejestr transferów wraz z Państwa ustaleniami. Folder nadrzędny sprawy oraz wnioski analityków są tworzone zewnętrznie; poszczególne artefakty TgWitness posiadają własne podpisy.
+Sprawdź wyniki weryfikacji, zachowaj oryginały oraz raport z zakresu, wyniki pozyskania danych i rejestr przekazania wraz z ustaleniami. Zapisz ustalenia w Report Studio i zdecyduj, czy raport ma zawierać materiały z Case Board. Przykładowy folder najwyższego poziomu łączy oddzielne, podpisane artefakty. Dla odbiorcy, który potrzebuje tylko wybranych materiałów, przygotuj [zminimalizowane przekazanie](https://phishdestroy.github.io/TgWitness/pl/docs/handover/).
 
 ## Proszę stosować tę samą metodę w przypadku innych dochodzeń
 
@@ -172,7 +174,7 @@ Proszę sprawdzić rzeczywiste wyniki weryfikacji, zachować oryginały oraz prz
 
 **Ścieżka:** wpis na kanale → zapisany podgląd linku bota → parametr uruchomienia bota → wersje wiadomości i wpisów z klawiatury → wszelkie potwierdzenia wywołania zwrotnego wysłane przez panel → dalsze działania w grupie lub w rozmowie prywatnej. Należy dopasować każdy element docelowy do jego rekordu źródłowego; zachować opisy profili oraz kompletne pliki multimedialne.
 
-**Należy przedstawić:** oś czasu zawierającą zaobserwowaną ofertę i odpowiedzi, odniesienia do źródeł oraz zweryfikowane eksporty danych. Wyświetlony link do płatności nie stanowi dowodu na to, że płatność miała miejsce.
+**Należy dostarczyć:** oś czasu zawierającą zaobserwowaną ofertę i odpowiedzi, odniesienia do źródeł oraz zweryfikowane eksporty. Wszelkie twierdzenia dotyczące zrealizowanej płatności należy poprzeć odpowiednimi zapisami transakcji.
 
 **Wiadomości usunięte po incydencie związanym z wymianą wiadomości między czatami**
 
@@ -180,7 +182,7 @@ Proszę sprawdzić rzeczywiste wyniki weryfikacji, zachować oryginały oraz prz
 
 **Ślad:** wszystkie czaty, których dotyczy zdarzenie → oryginalne wiadomości → dostarczone zmiany → powiadomienia o usunięciu lub późniejsze wyniki wskazujące na brak wiadomości przy ponownej weryfikacji → zachowane załączniki → relacje dotyczące zdarzenia. Proszę porównać obserwacje z niezależnych źródeł wraz z podaną informacją o ich widoczności.
 
-**Należy przedstawić:** sekwencję zachowanych wersji oraz wyraźnie zaznaczone nieznane przedziały czasowe. Nie należy traktować braku wiadomości w historii jako dowodu na to, że dana osoba ją usunęła.
+**Należy przedstawić:** sekwencję zachowanych wersji oraz wyraźnie zaznaczone przedziały nieznanych danych. Należy oddzielnie uwzględnić powiadomienia o usunięciu, nieudane ponowne sprawdzenia oraz wszelkie odniesienia do konkretnych osób.
 
 **Jeden z uczestników zmienia imiona w kilku czatach**
 
@@ -188,4 +190,4 @@ Proszę sprawdzić rzeczywiste wyniki weryfikacji, zachować oryginały oraz prz
 
 **Ścieżka:** numeryczny identyfikator nadawcy → historia zapisanych nazw/nazw użytkowników → odpowiedzi → inne czaty w obszarze roboczym → wymienione miejsca docelowe i zapisane pliki. Należy sprawdzić zapisy źródłowe dla każdego zgłoszonego połączenia; należy oddzielnie traktować konta o podobnych nazwach.
 
-**Dostarczamy:** cytowaną oś czasu aktywności konta oraz odrębne hipotezy dotyczące powiązań. Podobieństwo nazwisk oraz wartość pHash awatara stanowią wskazówki, a nie dowód tożsamości.
+**Należy dostarczyć:** cytowaną oś czasu aktywności konta oraz oddzielne hipotezy dotyczące powiązań. Należy wykorzystać podobieństwo nazw i hash awatara (pHash) do wyboru tropów do dalszej analizy źródeł.

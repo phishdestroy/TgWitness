@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/
 
-[Open source / v0.7.1](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/)
+[Open source / v0.8.0](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/)
 
 Keep what
 you saw.
@@ -64,6 +64,8 @@ TgWitness / Signed exportsLOCAL WORKSPACE
 
 04 / Signed exports Take the journal with you, with a manifest and an independent verifier.
 
+Follow a saved record through [Case Board](https://phishdestroy.github.io/TgWitness/docs/case-board/), [report design](https://phishdestroy.github.io/TgWitness/docs/reports/) and a [sharing copy](https://phishdestroy.github.io/TgWitness/docs/handover/). [Review account groups](https://phishdestroy.github.io/TgWitness/docs/groups/) together.
+
 01 / CAPTURE
 
 ### You choose the scope.
@@ -89,7 +91,7 @@ Signed ZIP, preserved files and an offline report. Optional password protection.
 [Export and verify](https://phishdestroy.github.io/TgWitness/docs/exports/)
 
 ## Change one byte.
-The chain tells you.
+Verification tells you.
 
 Each event links to the previous hash and carries an Ed25519 signature.
 
@@ -99,7 +101,7 @@ Each event links to the previous hash and carries an Ed25519 signature.
 
 ![A separately retained checkpoint lets a recipient compare the exported journal with an earlier observation.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-See what each verification mechanism establishes, and where its limits remain.
+Follow the checks from a file hash to a separately retained checkpoint.
 
 [Explore eight evidence levels](https://phishdestroy.github.io/TgWitness/guides/modes.html#levels)
 
@@ -123,7 +125,7 @@ tgwitness-evidence.zipSIGNED BUNDLE
 
   Independent verificationSigned manifest + standalone verifier
 
-Signatures detect tampering relative to a trusted key. They do not prove Telegram origin or guarantee complete capture. Journal content and media need encrypted storage provided by you.
+Recipients check the saved records and files against a trusted collector key. A separately retained checkpoint also checks continuity with the earlier journal. [Explore the verification steps.](https://phishdestroy.github.io/TgWitness/docs/concepts/#layers)
 
 ## S3 copies.
 External checks.
@@ -162,13 +164,13 @@ Journal and media`AES-256-GCM`S3-compatible storage
 
 [Configure S3 and restore a copy](https://phishdestroy.github.io/TgWitness/docs/exports/#s3)[Read the verification details](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**Does not do** It does not restore without the exported decryption key or replace an independent witness.
+**Recovery key** Save the exported decryption key separately so you can restore the encrypted copy.
 
 ### Notifications · Apprise
 
 Problem alerts, chat changes and daily summaries via Apprise: messengers, email or your own JSON webhook.
 
-**Does not do** It does not send message text unless you enable excerpts.
+**Choose what to share** Message excerpts are off by default; enable them for destinations you trust.
 
  [Configure notification destinations](https://phishdestroy.github.io/TgWitness/docs/reference/operations/#notifications)
 
@@ -176,7 +178,7 @@ Problem alerts, chat changes and daily summaries via Apprise: messengers, email 
 
 Timestamp checkpoint hashes with RFC 3161 and OpenTimestamps.
 
-**Does not do** It does not treat a pending calendar receipt as a confirmed Bitcoin timestamp.
+**Follow the result** Check the authority response or upgrade the OpenTimestamps receipt to a confirmed Bitcoin proof.
 
  [Check timestamp proofs](https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/)
 
@@ -184,7 +186,7 @@ Timestamp checkpoint hashes with RFC 3161 and OpenTimestamps.
 
 A separate host keeps signed observations and can publish `TGW1` checkpoints.
 
-**Does not do** It does not make two workspaces on one collector host into independent witnesses.
+**Separate the reference** Run the witness on another host and retain its own signing key and journal.
 
  [Set up a witness](https://phishdestroy.github.io/TgWitness/docs/witness/)
 
@@ -192,7 +194,7 @@ A separate host keeps signed observations and can publish `TGW1` checkpoints.
 
 Resume after restart. Rechecks and `coverage.json` show recovered messages and gaps.
 
-**Does not do** It does not reconstruct every missed edit or vanished message.
+**Review the interval** See recovered current messages alongside recorded interruptions; earlier versions remain available when captured.
 
  [Inspect continuity and gaps](https://phishdestroy.github.io/TgWitness/guides/modes.html#continuity)
 
@@ -234,7 +236,7 @@ Source launch needs Python 3.11+. The Windows launcher offers installation if Py
 
 [Browse releases](https://github.com/phishdestroy/TgWitness/releases)
 
-No Python on Windows? [Download the portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), extract it and double-click `TgWitness.cmd`.
+No Python on Windows? [Download the portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), extract it and double-click `TgWitness.cmd`.
 
 STEP 02
 
@@ -269,7 +271,7 @@ Open [127.0.0.1:8787](http://127.0.0.1:8787) after launch.
 
 For source installs, the token is in `data/live/panel-token.txt`. Telegram sign-in can use the built-in API settings or your own pair from [my.telegram.org](https://my.telegram.org). [Full setup guide ↗](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [What’s new →](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/) · [Features and known limits →](https://phishdestroy.github.io/TgWitness/docs/reference/features/)
+**TgWitness 0.8.0** [What’s new →](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/) · [Features and known limits →](https://phishdestroy.github.io/TgWitness/docs/reference/features/)
 
 ## Clear instructions.
 A useful next step.

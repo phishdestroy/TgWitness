@@ -226,7 +226,16 @@ Hisob tanlovchisining yonidagi **+** tugmasini bosing yoki **Hisob → Sozlamala
 
 ### Ommaviy import va hisob guruhlari
 
-Bir nechta hisob qo‘shish, fayllarni asosiy nomi bo‘yicha juftlash va har bir kirish natijasini ko‘rish uchun **Hisoblar → Hisoblarni import qilish** bo‘limidan foydalaning. Har bir hisob alohida ish maydoniga ega. Guruhlar seanslar, kalitlar yoki dalillarni birlashtirmasdan namunadan tanlangan sozlamalarni nusxalashi mumkin. [import va guruhlar qo‘llanmasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) va [MTProxy havuzi boshqaruv paneli](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)ga qarang.
+**Hisoblar → Hisoblarni import qilish** orqali bir nechta hisobni qo'shing, fayllarni bazaviy nom bo'yicha juftlang va har bir kirish natijasini ko'ring. Har bir hisobga alohida ish maydoni beriladi.
+
+Guruh tegishli hisoblarni ularning sessiyalari, kalitlari yoki dalillarini birlashtirmasdan birga saqlaydi. **Hisoblar** bo'limidagi **Ochiq guruhni** bosish uning sahifasiga olib boradi `/groups/<id>`:
+
+- **Hisoblar:** har bir a'zoning ulanish yo'li, kuzatuvi va oxirgi xabari, **Barchasini** boshlash va **barchasini to'xtatish**.
+- **E'tibor talab qiladi:** tizimdan chiqarilgan, mavjud bo'lmagan yoki ulanish, qabul qilish, manba yoki media bilan bog'liq muammo bo'lgan hisoblar; har bir nom uning kartasiga olib boradi.
+- **Suhbatlar bir nechta hisoblarni ko'rsatadi:** ulashilgan manbalar, ularni kuzatayotgan hisoblar va mavjud ish maydoni-kuzatuv davrida (7 kungacha) uzilishlar. **N ta hisob bilan eksport** kanal yoki superguruh eksportini ularga bo'lib beradi va bitta arxivni imzolaydi.
+- **Guruhni eksport qilish:** har bir hisobning imzolangan eksporti bilan bitta ZIP `accounts/` va `manifest.json` SHA-256 va kalit barmoq izlarini ro'yxatlab, asosiy ish maydoni tomonidan imzolangan `manifest.signature.json`. Har bir akkaunt arxivini alohida tarzda bilan tasdiqlang. `python -m tgwitness.verify` va o'sha hisobning ishonchli barmoq izi yordamida.
+
+A'zolar guruh sozlamalarini baham ko'radi; hisob o'z qiymatlarini saqlab qolishi mumkin. Qarang [ulashilgan sozlamalar](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [import va guruhlar bo'yicha qo'llanma](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) va [MTProxy pool boshqaruv paneli](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Chiqish
 

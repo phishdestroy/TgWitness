@@ -6,6 +6,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/concepts/
 
 아래의 두 가지 간단한 실험을 살펴보세요. 이 실험들은 가상의 메시지를 사용하며, 브라우저 내에서만 실행되고 텔레그램에 연결되지 않습니다.
 
+## 채팅 내역 내보내기에서 검증 가능한 기록으로
+
+[Telegram Desktop의 내보내기 기능은](https://telegram.org/blog/export-and-more) 사용 가능한 채팅 기록과 미디어를 HTML 또는 JSON 형식으로 내보내 오프라인에서 사용할 수 있게 합니다. TgWitness는 수신된 변경 사항에 대한 지속적인 기록, 관찰 내용 및 내보내기 파일에 대한 서명, 수신자가 독립적으로 비교할 수 있는 체크포인트를 추가합니다.
+
+| 과제 | Telegram 데스크톱 내보내기 | TgWitness |
+| --- | --- | --- |
+| 저장된 대화 읽기 | 선택된 미디어가 포함된 HTML 또는 JSON | 저장된 채팅, 검색 가능한 일지 및 오프라인 보고서 |
+| 시간에 따른 변화를 추적하십시오 | 내보낼 때 확인할 수 있는 기록 | 이전에 캡처된 버전, 이후의 수정 내역 및 삭제 기록이 함께 보존됩니다. |
+| 인계 후 파일 확인 | 표준 HTML/JSON 내보내기 파일에는 서명이 없습니다. | 서명된 매니페스트, 레코드별 서명 및 봉인된 HTML/PDF/JSON 보고서는 신뢰할 수 있는 수집기 키를 기준으로 검증됩니다. |
+| 이전 보존 상태와 비교 | 별도의 참조 사본 또는 해시 값을 보관하십시오. | 서명된 체크포인트, 별도의 위트니스 및 선택적 외부 타임스탬프 |
+
+파일 서명 비교는 2026년 11월 2일에 검토된 [텔레그램 데스크톱 내보내기 작성기를](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) 기준으로 합니다. TgWitness는 수집기의 키로 서명하며, 아래의 확인 사항은 수신자가 이를 어떻게 사용하는지 보여줍니다.
+
 ## 한 가지 메시지, 세 가지 관찰점
 
 텔레그램에서 새 메시지, 수정 알림, 삭제 알림이 전송되면 수집기는 세 가지 별도의 기록을 추가합니다. 수정 알림은 첫 번째 기록을 대체하지 않습니다. 삭제 알림도 해당 기록을 지우지 않습니다.
@@ -107,6 +120,6 @@ hexport[Ncheckpoint] = Hcheckpoint
 
 [01 / 무결성**이 기록이 변경되었나요?** 별도로 신뢰할 수 있는 키를 사용하여 해시값과 서명을 검증합니다.](https://phishdestroy.github.io/TgWitness/ko/docs/exports/)[02 / 연속성**이전에 어떤 내용이 유지되었나요?** 서명된 내보내기 파일을 별도의 증인이 보관한 체크포인트와 비교해 보십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/witness/)[03 / 제공**이 테스트 이벤트들이 도착했나요?** 각 계정의 기록부와 전송, 수정, 삭제 작업을 대조하여 일치 여부를 확인합니다.](https://phishdestroy.github.io/TgWitness/ko/docs/cases/)
 
-일치하는 해시 체인은 무결성 여부에 대한 의문을 해소해 줍니다. 그러나 이는 텔레그램 메시지의 완전한 전달 사실, 메시지의 진실성 또는 독립적으로 신뢰할 수 있는 관찰 시점을 입증하지는 않습니다.
+서명을 사용하여 보존된 기록을 확인하고, 체크포인트를 사용하여 이전 경계와 비교하며, 제어된 전달 테스트를 통해 수집 상태를 측정하십시오. 각각은 특정 질문에 대한 답을 제공합니다. [검증 범위와 신뢰 가정을 숙지하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope)
 
 정보 수집부터 사건 자료 정리까지, [계정 전체에 대한 조사](https://phishdestroy.github.io/TgWitness/ko/docs/cases/) 과정을 따라가 보세요.

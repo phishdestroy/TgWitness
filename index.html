@@ -38,7 +38,7 @@
     <div class="hero-shell">
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <a class="release-label" href="docs/reference/changelog/"><span class="status-dot"></span> Open source <span class="label-divider">/</span> v0.7.1 <span aria-hidden="true">→</span></a>
+        <a class="release-label" href="docs/reference/changelog/"><span class="status-dot"></span> Open source <span class="label-divider">/</span> v0.8.0 <span aria-hidden="true">→</span></a>
         <h1 id="hero-title">Messages change.<br><span>Keep what<br>you saw.</span></h1>
         <p class="hero-description">Capture Telegram messages, preserve their changes, and export a signed record.</p>
         <div class="actions"><a class="button primary" data-home-action="demo" href="demo/?lang=en">Open demo <span aria-hidden="true">→</span></a><a class="button secondary" data-home-action="setup" href="demo/guide.html?lang=en">Setup guide <span aria-hidden="true">↗</span></a></div>
@@ -85,6 +85,7 @@
         <figure id="panel-edits" aria-labelledby="tour-edits" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / Edit history</span><span class="screen-mode">LOCAL WORKSPACE</span></div><img src="assets/detail.png" width="1440" height="900" alt="Detail drawer comparing the captured previous and edited versions of a message" loading="lazy"></div><figcaption><span>03 / Edit history</span> Compare captured versions without overwriting the earlier observation.</figcaption></figure>
         <figure id="panel-exports" aria-labelledby="tour-exports" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / Signed exports</span><span class="screen-mode">LOCAL WORKSPACE</span></div><img src="assets/exports.png" width="1440" height="900" alt="Export workspace offering a signed ZIP, JSONL, CSV and an offline HTML report" loading="lazy"></div><figcaption><span>04 / Signed exports</span> Take the journal with you, with a manifest and an independent verifier.</figcaption></figure>
       </div>
+      <div class="section-actions"><p>Follow a saved record through <a href="docs/case-board/">Case Board</a>, <a href="docs/reports/">report design</a> and a <a href="docs/handover/">sharing copy</a>. <a href="docs/groups/">Review account groups</a> together.</p></div>
     </section>
 
     <section class="principles wrap" aria-label="Designed around your observations">
@@ -94,7 +95,7 @@
     </section>
 
     <section class="proof wrap" id="proof" aria-labelledby="proof-title">
-      <div class="section-heading"><div><p class="eyebrow">HOW THE RECORD HOLDS TOGETHER</p><h2 id="proof-title">Change one byte.<br>The chain tells you.</h2></div><p>Each event links to the previous hash and carries an Ed25519 signature.</p></div>
+      <div class="section-heading"><div><p class="eyebrow">HOW THE RECORD HOLDS TOGETHER</p><h2 id="proof-title">Change one byte.<br>Verification tells you.</h2></div><p>Each event links to the previous hash and carries an Ed25519 signature.</p></div>
       <div class="switcher" data-tabs aria-label="Evidence explanations">
         <div class="tab-buttons" data-tab-buttons>
           <button type="button" id="proof-chain" aria-controls="panel-chain">01 <span>Linked records</span></button>
@@ -105,12 +106,12 @@
         <figure id="panel-tamper" aria-labelledby="proof-tamper" data-tab-panel><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/evidence-tamper-static.svg"><img src="assets/evidence-tamper-animated.svg" width="1200" height="560" loading="lazy" alt="Changing a captured record changes its hash and breaks verification of the linked record."></picture></figure>
         <figure id="panel-checkpoint" aria-labelledby="proof-checkpoint" data-tab-panel><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/evidence-checkpoint-static.svg"><img src="assets/evidence-checkpoint-animated.svg" width="1200" height="560" loading="lazy" alt="A separately retained checkpoint lets a recipient compare the exported journal with an earlier observation."></picture></figure>
       </div>
-      <div class="section-actions"><p>See what each verification mechanism establishes, and where its limits remain.</p><a class="button outline" href="guides/modes.html#levels">Explore eight evidence levels <span aria-hidden="true">→</span></a></div>
+      <div class="section-actions"><p>Follow the checks from a file hash to a separately retained checkpoint.</p><a class="button outline" href="guides/modes.html#levels">Explore eight evidence levels <span aria-hidden="true">→</span></a></div>
     </section>
 
     <section class="integrity" aria-labelledby="integrity-title"><div class="wrap integrity-layout">
       <div><p class="eyebrow">BUILT FOR REVIEW</p><h2 id="integrity-title">Ready for<br>another pair<br><span>of eyes.</span></h2><p>Hand over observations, files and an offline HTML report in one signed bundle.</p><a class="text-link" href="docs/reference/evidence/">Read the evidence model <span aria-hidden="true">↗</span></a></div>
-      <div class="bundle"><div class="bundle-heading"><span class="mono">tgwitness-evidence.zip</span><span class="bundle-tag">SIGNED BUNDLE</span></div><ul><li><span>01</span><div>Original observations<small>JSONL records + CSV table</small></div></li><li><span>02</span><div>Readable context<small>Offline HTML report + preserved media</small></div></li><li><span>03</span><div>Independent verification<small>Signed manifest + standalone verifier</small></div></li></ul><p class="bundle-note">Signatures detect tampering relative to a trusted key. They do not prove Telegram origin or guarantee complete capture. Journal content and media need encrypted storage provided by you.</p></div>
+      <div class="bundle"><div class="bundle-heading"><span class="mono">tgwitness-evidence.zip</span><span class="bundle-tag">SIGNED BUNDLE</span></div><ul><li><span>01</span><div>Original observations<small>JSONL records + CSV table</small></div></li><li><span>02</span><div>Readable context<small>Offline HTML report + preserved media</small></div></li><li><span>03</span><div>Independent verification<small>Signed manifest + standalone verifier</small></div></li></ul><p class="bundle-note">Recipients check the saved records and files against a trusted collector key. A separately retained checkpoint also checks continuity with the earlier journal. <a href="docs/concepts/#layers">Explore the verification steps.</a></p></div>
     </div></section>
 
     <section class="retention wrap" id="retention" aria-labelledby="retention-title">
@@ -134,35 +135,35 @@
         </div>
         <div class="replica-flow" aria-label="Data is encrypted before upload"><span>Journal and media</span><span aria-hidden="true">→</span><code translate="no">AES-256-GCM</code><span aria-hidden="true">→</span><span>S3-compatible storage</span></div>
         <div class="s3-actions"><a class="button primary" href="docs/exports/#s3">Configure S3 and restore a copy <span aria-hidden="true">→</span></a><a class="text-link" href="docs/reference/evidence/#off-site-copy-and-restore-s3">Read the verification details <span aria-hidden="true">↗</span></a></div>
-        <p class="retention-limit"><strong>Does not do</strong> It does not restore without the exported decryption key or replace an independent witness.</p>
+        <p class="retention-limit"><strong>Recovery key</strong> Save the exported decryption key separately so you can restore the encrypted copy.</p>
       </article>
       <div class="retention-grid">
         <article class="retention-card notification-overview" id="notifications" aria-labelledby="notifications-title">
           <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3 id="notifications-title">Notifications · Apprise</h3>
           <p>Problem alerts, chat changes and daily summaries via Apprise: messengers, email or your own JSON webhook.</p>
-          <p class="retention-limit"><strong>Does not do</strong> It does not send message text unless you enable excerpts.</p>
+          <p class="retention-limit"><strong>Choose what to share</strong> Message excerpts are off by default; enable them for destinations you trust.</p>
           <a class="text-link" href="docs/reference/operations/#notifications">Configure notification destinations <span aria-hidden="true">→</span></a>
         </article>
         <article class="retention-card">
           <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3" stroke-linecap="round"/></svg></div>
           <h3>External timestamps</h3>
           <p>Timestamp checkpoint hashes with RFC 3161 and OpenTimestamps.</p>
-          <p class="retention-limit"><strong>Does not do</strong> It does not treat a pending calendar receipt as a confirmed Bitcoin timestamp.</p>
+          <p class="retention-limit"><strong>Follow the result</strong> Check the authority response or upgrade the OpenTimestamps receipt to a confirmed Bitcoin proof.</p>
           <a class="text-link" href="docs/reference/timestamp/">Check timestamp proofs <span aria-hidden="true">→</span></a>
         </article>
         <article class="retention-card">
           <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3>Independent witness</h3>
           <p>A separate host keeps signed observations and can publish <code>TGW1</code> checkpoints.</p>
-          <p class="retention-limit"><strong>Does not do</strong> It does not make two workspaces on one collector host into independent witnesses.</p>
+          <p class="retention-limit"><strong>Separate the reference</strong> Run the witness on another host and retain its own signing key and journal.</p>
           <a class="text-link" href="docs/witness/">Set up a witness <span aria-hidden="true">→</span></a>
         </article>
         <article class="retention-card">
           <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h6m6 0h6M12 7v3m0 4v3" stroke-linecap="round"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></div>
           <h3>Recovery and visible gaps</h3>
           <p>Resume after restart. Rechecks and <code>coverage.json</code> show recovered messages and gaps.</p>
-          <p class="retention-limit"><strong>Does not do</strong> It does not reconstruct every missed edit or vanished message.</p>
+          <p class="retention-limit"><strong>Review the interval</strong> See recovered current messages alongside recorded interruptions; earlier versions remain available when captured.</p>
           <a class="text-link" href="guides/modes.html#continuity">Inspect continuity and gaps <span aria-hidden="true">→</span></a>
         </article>
       </div>
@@ -175,7 +176,7 @@
       <details class="presentation-details installation-details"><summary>Local installation commands</summary>
       <div class="start-layout">
         <div class="start-intro"><span class="step-label">STEP 01</span><h3>Get the source.</h3><p><a class="download-link" href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">Download the source ZIP</a> and extract it, or clone the repository:</p><div class="code-block"><pre><code id="clone-command">git clone https://github.com/phishdestroy/TgWitness.git
-cd TgWitness</code></pre><button class="copy-button" type="button" data-copy="clone-command" hidden>Copy</button></div><p class="small-note">Source launch needs Python 3.11+. The Windows launcher offers installation if Python is missing.</p><a class="text-link" href="https://github.com/phishdestroy/TgWitness/releases">Browse releases <span aria-hidden="true">↗</span></a><p class="small-note">No Python on Windows? <a href="https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip">Download the portable package</a>, extract it and double-click <code>TgWitness.cmd</code>.</p></div>
+cd TgWitness</code></pre><button class="copy-button" type="button" data-copy="clone-command" hidden>Copy</button></div><p class="small-note">Source launch needs Python 3.11+. The Windows launcher offers installation if Python is missing.</p><a class="text-link" href="https://github.com/phishdestroy/TgWitness/releases">Browse releases <span aria-hidden="true">↗</span></a><p class="small-note">No Python on Windows? <a href="https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip">Download the portable package</a>, extract it and double-click <code>TgWitness.cmd</code>.</p></div>
         <div class="start-run"><span class="step-label">STEP 02</span><h3>Choose how to run.</h3><div data-tabs aria-label="Installation platform">
           <div class="tab-buttons platform-tabs" data-tab-buttons><button type="button" id="tab-windows" aria-controls="setup-windows">Windows</button><button type="button" id="tab-unix" aria-controls="setup-unix">Linux / macOS</button><button type="button" id="tab-docker" aria-controls="setup-docker">Docker</button></div>
           <div id="setup-windows" aria-labelledby="tab-windows" data-tab-panel><p>Double-click <code>Start.cmd</code>, or run in PowerShell:</p><div class="code-block"><pre><code id="windows-command">.\Start.cmd</code></pre><button class="copy-button" type="button" data-copy="windows-command" hidden>Copy</button></div><p>Just exploring? Double-click <code>scripts\Demo.cmd</code> for an isolated demo. No Telegram login needed.</p></div>
@@ -185,7 +186,7 @@ docker compose exec tgwitness cat /data/panel-token.txt</code></pre><button clas
         </div><p class="panel-address">Open <a href="http://127.0.0.1:8787">127.0.0.1:8787 <span aria-hidden="true">↗</span></a> after launch.</p><p class="small-note">For source installs, the token is in <code>data/live/panel-token.txt</code>. Telegram sign-in can use the built-in API settings or your own pair from <a href="https://my.telegram.org">my.telegram.org</a>. <a href="docs/reference/quickstart/">Full setup guide ↗</a></p></div>
       </div>
       </details>
-      <p class="release-note"><strong>TgWitness 0.7.1</strong> <a href="docs/reference/changelog/">What’s new →</a> · <a href="docs/reference/features/">Features and known limits →</a></p>
+      <p class="release-note"><strong>TgWitness 0.8.0</strong> <a href="docs/reference/changelog/">What’s new →</a> · <a href="docs/reference/features/">Features and known limits →</a></p>
     </section>
 
     <section class="docs wrap" id="docs" aria-labelledby="docs-title"><div class="section-heading"><div><p class="eyebrow">ONE TASK AT A TIME</p><h2 id="docs-title">Clear instructions.<br>A useful next step.</h2></div><a class="text-link" href="docs/">Explore the guides ↗</a></div><a class="capability-link" href="guides/modes.html"><svg viewBox="0 0 32 32" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2"/><rect x="19" y="3" width="10" height="10" rx="2"/><rect x="3" y="19" width="10" height="10" rx="2"/><path d="m19 25 4 4 7-10" stroke-linecap="round" stroke-linejoin="round"/></svg><div><h3>Modes, scenarios and evidence levels</h3><p>Four collection modes. Eight verification levels. Find the workflow for your case.</p></div><span aria-hidden="true">↗</span></a><div class="doc-links"><a href="docs/accounts/"><span>01</span><div><h3>Connect an account</h3><p>Phone, QR, and supported session imports.</p></div><span aria-hidden="true">↗</span></a><a href="docs/proxies/"><span>02</span><div><h3>Choose a proxy</h3><p>Public MTProxy lists or your own route.</p></div><span aria-hidden="true">↗</span></a><a href="docs/witness/"><span>03</span><div><h3>Set up a witness bot</h3><p>Signed checkpoints in your Telegram channel.</p></div><span aria-hidden="true">↗</span></a><a href="docs/exports/"><span>04</span><div><h3>Export and verify</h3><p>Share captured history and check its integrity.</p></div><span aria-hidden="true">↗</span></a></div></section>

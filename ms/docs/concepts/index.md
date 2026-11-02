@@ -6,6 +6,19 @@ Satu mesej boleh berubah. Rekod apa yang anda perhatikan harus kekal boleh disem
 
 Terokai dua eksperimen kecil di bawah. Mereka menggunakan mesej rekaan, kekal di pelayar anda dan tidak pernah menyambung ke Telegram.
 
+## Dari eksport sembang ke rekod yang boleh disahkan
+
+[Telegram Desktop mengeksport](https://telegram.org/blog/export-and-more) sejarah sembang dan media yang tersedia sebagai HTML atau JSON untuk kegunaan luar talian. TgWitness menambah jurnal berterusan perubahan yang diterima, tandatangan pada pemerhatian dan eksport, serta titik pemeriksaan yang boleh dibandingkan secara bebas oleh penerima.
+
+| Tugas | Eksport Telegram Desktop | TgWitness |
+| --- | --- | --- |
+| Baca perbualan yang disimpan | HTML atau JSON dengan media terpilih | Perbualan yang disimpan, jurnal boleh dicari dan laporan luar talian |
+| Ikuti perubahan dari masa ke masa | Sejarah yang tersedia apabila dieksport | Versi yang dirakam lebih awal, suntingan kemudian dan pemerhatian pemadaman disimpan bersama |
+| Semak fail selepas penyerahan | Fail eksport HTML/JSON standard tidak ditandatangani | Manifest yang ditandatangani, tandatangan bagi setiap rekod dan laporan HTML/PDF/JSON yang disegel disemak menentang kunci pengumpul yang dipercayai |
+| Bandingkan dengan keadaan terdahulu yang disimpan | Simpan salinan rujukan berasingan atau hash | Pemeriksaan bermasa yang ditandatangani, saksi berasingan dan cap masa luaran pilihan |
+
+Perbandingan penandatanganan fail adalah berdasarkan [penulis eksport Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) yang disemak pada 2 November 2026. TgWitness menandatangani dengan kunci pengumpul; pemeriksaan di bawah menunjukkan bagaimana penerima menggunakannya.
+
 ## Satu mesej, tiga pemerhatian
 
 Apabila Telegram menghantar mesej baru, suntingan dan pemberitahuan pemadaman, pengumpul menambah tiga pemerhatian berasingan. Suntingan tidak menggantikan rekod pertama. Pemberitahuan pemadaman tidak memadamkannya.
@@ -107,6 +120,6 @@ Sahkan tandatangan checkpoint di bawah kunci pengumpul yang dipin, kemudian band
 
 [01 / INTEGRITI**Adakah rekod ini berubah?** Sahkan hash dan tandatangan terhadap kunci yang dipercayai secara berasingan.](https://phishdestroy.github.io/TgWitness/ms/docs/exports/)[02 / KELANJUTAN**Apa yang telah disimpan sebelum ini?** Bandingkan eksport yang disahkan dengan titik pemeriksaan yang disimpan oleh saksi berasingan.](https://phishdestroy.github.io/TgWitness/ms/docs/witness/)[03 / PENYAMPAIAN**Adakah acara ujian ini tiba?** Padankan tindakan hantar terkawal, sunting dan padam dengan jurnal setiap akaun.](https://phishdestroy.github.io/TgWitness/ms/docs/cases/)
 
-Rantaian hash yang sepadan menjawab soalan integriti. Ia tidak menetapkan penghantaran Telegram yang lengkap, kebenaran mesej atau masa pemerhatian yang dipercayai secara bebas.
+Gunakan tandatangan untuk memeriksa rekod yang disimpan, titik pemeriksaan untuk membandingkan sempadan terdahulu, dan ujian penghantaran terkawal untuk mengukur pengumpulan. Setiap satu menjawab soalan tertentu. [Baca skop pengesahan dan andaian kepercayaan.](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope)
 
 Ikuti [siasatan keseluruhan akaun](https://phishdestroy.github.io/TgWitness/ms/docs/cases/) dari pemerolehan hingga pakej kes.

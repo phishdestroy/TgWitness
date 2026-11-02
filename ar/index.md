@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/
 
-[مفتوح المصدر / v0.7.1](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/)
+[مفتوح المصدر / v0.8.0](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/)
 
 التقاط رسائل Telegram، والحفاظ على التغييرات التي تطرأ عليها، وتصدير سجل موقّع.
 
@@ -60,6 +60,8 @@ TgWitness / الصادرات الموقعةمساحة العمل المحلية
 
 04 / الصادرات الموقعة اصطحب السجل معك، مع قائمة محتويات ومدقق مستقل.
 
+تتبع السجل المحفوظ عبر [«لوحة القضية](https://phishdestroy.github.io/TgWitness/ar/docs/case-board/)» ([Case Board](https://phishdestroy.github.io/TgWitness/ar/docs/case-board/)) [وتصميم التقرير](https://phishdestroy.github.io/TgWitness/ar/docs/reports/) و[نسخة](https://phishdestroy.github.io/TgWitness/ar/docs/handover/) [المشاركة](https://phishdestroy.github.io/TgWitness/ar/docs/handover/). [راجع مجموعات الحسابات](https://phishdestroy.github.io/TgWitness/ar/docs/groups/) معًا.
+
 01 / التسجيل
 
 ### أنت تختار نطاق العمل.
@@ -84,7 +86,8 @@ TgWitness / الصادرات الموقعةمساحة العمل المحلية
 
 [تصدير وتحقق من](https://phishdestroy.github.io/TgWitness/ar/docs/exports/)
 
-## غيّر بايتًا واحدًا. وستخبرك السلسلة بذلك.
+## إذا تم تغيير بايت واحد،
+فسيُعلمك نظام التحقق بذلك.
 
 يرتبط كل حدث بالتجزئة السابقة ويحمل توقيع Ed25519.
 
@@ -94,7 +97,7 @@ TgWitness / الصادرات الموقعةمساحة العمل المحلية
 
 ![تتيح نقطة تحقق يتم الاحتفاظ بها بشكل منفصل للمستلم مقارنة السجل المُصدَّر مع ملاحظة سابقة.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-اطلع على ما تحدده كل آلية تحقق، وأين تكمن حدودها.
+اتبع عمليات التحقق بدءًا من تجزئة الملف وصولًا إلى نقطة التحقق المحفوظة بشكل منفصل.
 
 [استكشف ثمانية مستويات من الأدلة](https://phishdestroy.github.io/TgWitness/ar/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipحزمة موقعة
 
   التحقق المستقلقائمة موثقة + أداة تحقق مستقلة
 
-تكتشف التوقيعات أي تلاعب مقارنةً بمفتاح موثوق به. وهي لا تثبت أن الرسائل صادرة عن Telegram ولا تضمن التقاطها بالكامل. يحتاج محتوى السجل والملفات الوسائطية إلى تخزين مشفر توفره أنت.
+يقوم المستلمون بمقارنة السجلات والملفات المحفوظة بمفتاح جامع موثوق به. كما تتحقق نقطة فحص محفوظة بشكل منفصل من استمرارية السجل مع السجل السابق. [اكتشف خطوات التحقق.](https://phishdestroy.github.io/TgWitness/ar/docs/concepts/#layers)
 
 ## نسخ على S3. عمليات تدقيق خارجية.
 
@@ -154,13 +157,13 @@ Object Lock
 
 [تكوين S3 واستعادة نسخة](https://phishdestroy.github.io/TgWitness/ar/docs/exports/#s3)[اقرأ تفاصيل التحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**ما لا يفعله** لا تقوم الأداة باستعادة البيانات دون مفتاح فك التشفير الذي تم تصديره، ولا تحل محل الشاهد المستقل.
+**مفتاح الاستعادة:** احفظ مفتاح فك التشفير الذي تم تصديره بشكل منفصل حتى تتمكن من استعادة النسخة المشفرة.
 
 ### الإشعارات · Apprise
 
 تنبيهات بالمشكلات وتغييرات الدردشة والملخصات اليومية عبر Apprise: تطبيقات المراسلة أو البريد الإلكتروني أو webhook JSON الخاص بك.
 
-**لا يقوم** بذلك: لا يرسل نص الرسالة ما لم تقم بتمكين المقتطفات.
+**اختر ما تريد مشاركته**: مقتطفات الرسائل معطلة افتراضيًا؛ قم بتمكينها للوجهات التي تثق بها.
 
  [تكوين وجهات الإشعارات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ Object Lock
 
 تجزئة نقاط التحقق ذات الطابع الزمني باستخدام RFC 3161 و OpenTimestamps.
 
-**ما لا يفعله** ولا تعتبر الإيصال المعلق في التقويم بمثابة طابع زمني مؤكد لبيتكوين.
+**اتبع النتيجة:** تحقق من رد الجهة المختصة أو قم بترقية إيصال OpenTimestamps إلى دليل بيتكوين مؤكد.
 
  [تحقق من أدلة الطوابع الزمنية](https://phishdestroy.github.io/TgWitness/ar/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ Object Lock
 
 يحتفظ مضيف منفصل بالملاحظات الموقعة ويمكنه نشر `TGW1` نقاط التحقق.
 
-**ما لا يفعله** ولا يُعتبر إنشاء مساحتين للعمل على مضيف تجميع واحد بمثابة شاهدين مستقلين.
+**افصل الإشارة** «تشغيل الشاهد على مضيف آخر» واحتفظ بمفتاح التوقيع الخاص به وسجل الأحداث الخاص به.
 
  [إعداد شاهد](https://phishdestroy.github.io/TgWitness/ar/docs/witness/)
 
@@ -184,7 +187,7 @@ Object Lock
 
 استئناف العمل بعد إعادة التشغيل. إعادة الفحص و `coverage.json` عرض الرسائل المستردة والفجوات.
 
-**ما لا يفعله** ولا تعيد الأداة بناء كل تعديل فات أو رسالة اختفت.
+**راجع الفاصل الزمني**: اطلع على الرسائل الحالية المستردة جنبًا إلى جنب مع الانقطاعات المسجلة؛ وتظل الإصدارات السابقة متاحة عند التقاطها.
 
  [فحص الاستمرارية والثغرات](https://phishdestroy.github.io/TgWitness/ar/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ cd TgWitness
 
 [تصفح الإصدارات](https://github.com/phishdestroy/TgWitness/releases)
 
-لا يتوفر لغة Python على نظام Windows؟ [قم بتنزيل الحزمة المحمولة](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip)، وقم بفك ضغطها، ثم انقر نقرًا مزدوجًا على ملف `TgWitness.cmd`.
+لا يتوفر لغة Python على نظام Windows؟ [قم بتنزيل الحزمة المحمولة](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip)، وقم بفك ضغطها، ثم انقر نقرًا مزدوجًا على ملف `TgWitness.cmd`.
 
 الخطوة 02
 
@@ -260,7 +263,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 بالنسبة للتثبيت من المصدر، الرمز هو `data/live/panel-token.txt`. يمكن تسجيل الدخول إلى Telegram باستخدام إعدادات واجهة برمجة التطبيقات (API) المدمجة أو الزوج الخاص بك من [my.telegram.org](https://my.telegram.org). [دليل الإعداد الكامل ↗](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [ما الجديد →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/) · [الميزات والقيود المعروفة →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/)
+**TgWitness 0.8.0** [ما الجديد →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/) · [الميزات والقيود المعروفة →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/)
 
 ## تعليمات واضحة. خطوة تالية مفيدة.
 

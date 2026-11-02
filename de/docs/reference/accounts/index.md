@@ -226,7 +226,16 @@ Drücken Sie **+** neben der Kontoauswahl oder öffnen Sie **Konto → Einstellu
 
 ### Stapelimport und Kontogruppen
 
-Unter **Konten → Konten importieren** können Sie mehrere Konten hinzufügen, Dateien nach Basisnamen zuordnen und jedes Anmeldeergebnis sehen. Jedes Konto erhält einen eigenen Arbeitsbereich. Gruppen können ausgewählte Einstellungen aus einer Vorlage kopieren, ohne Sitzungen, Schlüssel oder Belege zusammenzuführen. Siehe [die Anleitung für Import und Gruppen](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) und [das MTProxy-Pool-Dashboard](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+Verwenden Sie **„Konten“ → „Konten importieren“**, um mehrere Konten hinzuzufügen, Dateien anhand des Basisnamens zuzuordnen und die jeweiligen Anmeldeergebnisse einzusehen. Jedes Konto erhält einen eigenen Arbeitsbereich.
+
+Eine Gruppe fasst verwandte Konten zusammen, ohne deren Sitzungen, Schlüssel oder Beweismaterialien zusammenzuführen. **„Gruppe** unter **‚Konten‘ öffnen**“ führt zu deren Seite unter `/groups/<id>`:
+
+- **Konten:** Verbindungsweg, Beobachtungen und letzte Nachricht jedes Mitglieds, mit den Funktionen **„Alle** starten“ und **„Alle pausieren**“.
+- **Erfordert Aufmerksamkeit:** Konten, bei denen die Anmeldung beendet wurde, die nicht verfügbar sind oder bei denen ein Verbindungs-, Erfassungs-, Quellen- oder Medienproblem vorliegt; jeder Name führt zu der entsprechenden Karte.
+- **Chats mehrerer Konten zeigen:** gemeinsam genutzte Quellen, die Konten, die diese beobachten, sowie Unterbrechungen im verfügbaren Beobachtungszeitraum des Arbeitsbereichs (bis zu sieben Tage). **Der Export mit N Konten** teilt den Export eines Kanals oder einer Supergruppe auf diese Konten auf und signiert ein Archiv.
+- **Gruppe exportieren:** ein ZIP mit dem signierten Export jedes Kontos unter `accounts/` und `manifest.json` mit einer Auflistung der SHA-256- und Schlüssel-Fingerabdrücke, signiert vom Haupt- Arbeitsbereich in `manifest.signature.json`. Überprüfen Sie jedes Kontoarchiv einzeln mit `python -m tgwitness.verify` und dem vertrauenswürdigen Fingerabdruck dieses Kontos.
+
+Die Mitglieder nutzen die gemeinsamen Einstellungen der Gruppe; ein Konto kann jedoch eigene Werte beibehalten. Siehe [„Gemeinsame Einstellungen“](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [die Anleitung zu Import und Gruppen](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) sowie [das Dashboard „MTProxy-Pool](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)“.
 
 ## Abmelden
 

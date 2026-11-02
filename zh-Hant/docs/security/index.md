@@ -79,7 +79,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/security/
 - 該伺服器的管理員可讀取所有內容，並能重寫及重新簽署該日誌。請將指紋與檢查點儲存於另一套系統中。
 - TgWitness 不會對訊息內容及媒體檔案進行加密。請使用磁碟加密並設定嚴格的存取權限。
 - 若透過 localhost 以外的純 HTTP 連線，網路將暴露該存取憑證。請使用 HTTPS 或 SSH 隧道。
-- 簽名用以證明所記錄的內容未被篡改，而非證明每個 Telegram 事件均已被記錄。
+- 請透過簽名與檢查點核對已儲存的紀錄。檢視資料蒐集範圍，並針對您使用的帳戶與來源測試資料傳遞功能。
 
 可透過權限設定、有效期限及會話限制，[分享案件存取權限](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/access/)。證人代幣仍為獨立的憑證。
 

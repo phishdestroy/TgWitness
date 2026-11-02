@@ -8,7 +8,7 @@ Bir ishni kanallar, guruhlar, shaxsiy suhbatlar va botlar bo'ylab dastlabki olis
 
 ## Tahlil qilingan holat: manzil to'rtta suhbat davomida o'zgargan
 
-E'lon botga ishora qiladi. Amaliyot guruhi yangi to'lov manzilini muhokama qiladi, botning klaviaturasi uni ko'rsatadi va shaxsiy keyingi xabar uni takrorlaydi. Keyin e'lon tahrirlanadi va guruh xabari yo'qoladi.
+E'lon botga yo'naltiradi. Operatsiyalar guruhi yangi to'lov manzilini muhokama qiladi va botning klaviaturasi uni ko'rsatadi. E'lon tahrirlanadi, maxfiy keyingi xabar manzilni takrorlaydi va guruh xabari yo'qoladi.
 
 Savollar quyidagilar: o'zgarishdan oldin va keyin nima kuzatilgan, Telegram akkauntlaridan qaysi biri har bir elementni joylagan, manzil qayerda paydo bo'lgan, qaysi ilova baytlari saqlangan va qaysi oraliklar noma'lum bo'lib qolmoqda?
 
@@ -34,8 +34,8 @@ Oqim sxemasi · Kanal → Ish maydoni jurnali; Guruhlar → Ish maydoni jurnali;
 
 ## 1. Holatni aniqlang va butun hisobotni to'plang
 
-1. Yig'ish hisobini o'z ish maydonida bog'lang. Tashqi ish yozuvlarida ish referensiyasi, hisob IDsi, ish maydoni, kuzatuv boshlanishi va ishonchli imzo kaliti barmoq izini qayd eting.
-2. Ochiq **manbalar → Kuzatuv doirasi → Tergov rejimi**. Oldindan sozlama **butun hisobni**, kanallar/guruhlar/shaxsiy suhbatlar/botlarni, o'z harakatlaringizni, manba profillarini va yangi topilgan manbalar uchun so'nggi 200 ta ko'rinadigan xabarni tanlaydi. Uni ko'rib chiqing, "**Doirani saqlash**" tugmasini bosing va doirani tasdiqlashni yakunlang.
+1. Yig'ish hisobini o'z ish maydonida bog'lang. [Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/) yoki ish yurituv reyestringizda ish referensiyasi, hisob ID, ish maydoni va kuzatuv boshlanishini qayd eting. Ishonchli imzolash kalitining barmoq izini mustaqil saqlang.
+2. Maxsus yig'ish hisobvarag'i uchun **Manbalar → Kuzatuv doirasi → Tergov rejimini** oching. Oldindan sozlama **butun hisobvarag'**, kanallar/guruhlar/shaxsiy suhbatlar/botlar, o'z harakatlari, manba profillari va yangi topilgan manbalar uchun so'nggi 200 ta ko'rinadigan xabarni tanlaydi. Uni ko'rib chiqing, **"Domenni saqlash**" **tugmasini** bosing va domenni tasdiqlashni yakunlang. Asosiy hisoblar tanlangan suhbatlar yoki papkani ishlatadi; butun hisob bo'yicha yig'ish tergov uchun belgilangan hisoblarga mavjud.
 3. **Suhbatlarni yuklang** va manbalarni hisobning dialog ro'yxati bilan solishtiring. Istisnolarni tekshiring. **Parametrlar → Hisob ro'yxatidan o'qilgan suhbatlar**bo'yicha standart qiymat 1 000 ga teng va 20 000 gacha ruxsat etiladi. Ro'yxat chegarasidan oshgan manbalar ular faollashganda qo'shiladi. Haqiqatan qaysi manbalar sanab o'tilganini qayd eting.
 4. **Yozib olish sozlamalar**ida "**Barcha ko'rinadigan faoliyat**"ni tanlang va monitoring sozlamalarini saqlang. Ilova turlari/cheklovlarini hamda bo'sh disk joyini ko'rib chiqing.
 5. Kuzatuvni boshlang. Nazorat ostidagi yangi xabar, tahrir va o'chirishni tasdiqlang, so'ngra test ma'lumotlarini va har qanday xatolarni saqlab qo'ying.
@@ -58,7 +58,7 @@ Har bir suhbat uchun alohida qator bilan manba ro'yxatini saqlang:
 
 Har bir manba uchun to'g'ri olish usulini qo'llang:
 
-- **Manbalar** bo'limida **to'liq tarixni yuklash** (hozirgi `main`) yoqilgan manbalardan mavjud avvalgi xabarlarni ish maydoni jurnaliga yuklaydi. U pauza/davom ettirish va imzolangan progress hisobotini qo'llab-quvvatlaydi. [Tarixni olish bo'limiga](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/) qarang.
+- **Manbalar** bo'limida **to'liq tarixni yuklash** yoqilgan manbalardan mavjud bo'lgan avvalgi xabarlarni ish maydoni jurnaliga yuklaydi. U pauza/davom ettirishni va imzolangan progress hisobotini qo'llab-quvvatlaydi. [Tarixni olish bo'limiga](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/) qarang.
 - **History snapshot** yaqinda ko'rinadigan so'nggi xabarlarni kuzatuv jurnaliga saqlaydi. Uning standart maksimal qiymati 500; **Parametrlar → Eng katta history snapshot** buni 10 000 gacha oshirishi mumkin. Bu joriy tarix kuzatuvlari bo'lib, qayta tiklangan tahrirlar emas.
 - **To'liq suhbat eksporti → To'liq suhbatni** yoki **Suhbatlar → Suhbatni eksport qilish** hozirda ko'rinadigan bitta suhbat tarixini alohida imzolangan `chat.json`/`chat.html` paketiga oladi. Ish manbalari bo'yicha takrorlang va har bir natijani saqlang.
 - **Yangi chat yoki bot paydo bo'lganda**uning profilini va so'nggi 1 000 tagacha xabarni saqlash mumkin; tekshiruv rejimi 200 tasini tanlaydi. Mavjud chatlarga bu retroaktiv tarzda qo'llanilmaydi, agar rejim yoqilganda.
@@ -103,6 +103,8 @@ Ishlangan misolda:
 
 Ilovadagi hashlarni va ularga tegishli xabar havolalarini solishtiring. Bir xil fayllar muallif, tarqatuvchi yoki umumiy operatorni aniqlamaydi. Bir xil ism va o'xshash avatarlar o'zi ikki Telegram IDni bitta shaxsga biriktirmaydi.
 
+Jamoaning [Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/)'dagi ish yozuvlarini saqlang: #146, #188 va #205 kabi tayanadigan yozuvlarni belgilab qo'ying, aniq manzil satrini ajratib ko'rsating va har bir yozib olingan harakatning ikki yozuv orasidagi yoki vaqt oralig'idagi bo'lagini saqlang. Eslatmalar va holatlar jamoaning ko'rib chiqishini o'z imzolangan tarixida saqlaydi, ularni manba kuzatuvlaridan alohida aniqlash mumkin.
+
 ## 5. Sohil-chatlar bo'yicha voqealar jadvalini tuzing
 
 **Suhbatlardagi** saqlangan versiyalar va ularning **Jurnal yozuvidagi #…** havolalaridan foydalaning. Jurnalda **Barcha manbalarni Tahrirlar**, **O'chirishlar** va **Qamrov** bilan birlashtiring. Taqdim etilgan hollarda ham `source_at`, ham `observed_at` ni saqlang.
@@ -122,7 +124,7 @@ Ushbu misolli havolalar orasida boshqa yozuvlar ham mavjud. Ketma-ketlik raqamla
 
 Har bir alohida akkaunt uchun alohida ish maydonidan foydalaning va uning inventarizatsiyasini takrorlang. Har bir solishtirishda akkaunt IDsi, roli, imzolash kaliti barmoq izi va manba havolalarini saqlang. Xabar raqamlari suhbatlar/akkauntlar bo'ylab global identifikator hisoblanmaydi.
 
-Turli ish maydonlari o'rtasidagi korrelyatsiya tashqi ish holatlari eslatmalari yoki tahlil vositalarida amalga oshiriladi. Hozirda TgWitness'da global miqyosda turli ish maydonlari bo'ylab qidiruv, birlashtirilgan vaqt chizig'i, tergov grafi yoki birlashtirilgan ish holatlari arxivi mavjud emas. **Bitta** kanal/superguruhning ko'p hisobga eksport qilinishi hisob jurnallarini birlashtirish emas, balki alohida operatsiyadir.
+Case Board har bir ish maydonida manba-bog'langan eslatmalar va kollektsiyalarni saqlaydi. Guruh ekrani hisob maqomini birgalikda ko'rib chiqadi va alohida ish maydonlari eksportlarini birlashtirishi mumkin. Ushbu manbalarni ish eslatmalaringizda yoki tahlil vositalaringizda bog'lang; har bir jurnal o'zining kelib chiqishi va imzolash kalitini saqlaydi. Global qidiruv yoki birlashtirilgan, turli ish maydonlari bo'ylab vaqt chizig'i yaratilmaydi. Bir kanal/superguruhning ko'p hisobga eksport qilish mos hisoblar yordamida o'sha suhbat tarixini oladi.
 
 Uzoq muddatli ishda [mustaqil guvoh](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/) bilan chegaralarni saqlang. Har bir hisobning yozib olish yo'li va ko'rinishini aniqlash uchun nazoratli yetkazib berish tekshiruvlaridan foydalaning.
 
@@ -134,6 +136,7 @@ Ularni tahlilchi tuzgan ish direktoriyasida birga saqlang:
 | --- | --- |
 | Holat yozuvlari va manba ro'yxati | Savol, yig'ish siyosati, kirish/rol, natijalar, muqobil izohlar va bo'shliqlar |
 | Vaqt chizig'i | Har bir yozuv uchun vaqt hamda ish maydoni/suhbat/xabar/ketma-ketlik ma'lumotlari |
+| Case Board eksporti va slices, agar ishlatilsa | Manbaga bog'langan belgilamalar, iqtiboslar, jamoa eslatmalari, to'plamlar, tahrir tarixi va tanlangan yozuvlar dalillar ZIP-fayliga solingan holda tekshiriladi |
 | Har bir ish maydoni uchun imzolangan dalillar ZIP | To'liq yozib olingan jurnal, manifest va ilova qilingan saqlangan media; panel filtrlari jurnal eksportini cheklamaydi |
 | Alohida imzolangan foydalanuvchi profil fayllari | Olingan manbalar tegishli ish maydoni dalillari bilan solishtirib tekshirildi |
 | Imzolangan to'liq chat eksportlari | Joriy ko'rinadigan tarixni olish, kuzatuv jurnalidan alohida |
@@ -147,9 +150,10 @@ Ishonchli o'rnatmadan, fayl nomlari va har bir ish maydonining haqiqiy barmoq iz
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Haqiqiy tekshiruv natijalari va asl artefaktlar saqlanadi. Eng yuqori darajadagi ish katalogi, manba registri va tahlilchi xulosalari tashqarida saqlanadi; har bir TgWitness artefaktining o'z imzosi va tekshiruv tartibi mavjud.
+Haqiqiy tekshiruv natijalari va asl artefaktlarni saqlang. Case Board'dagi ish maydoni eslatmalarini keltirilgan manba materiallari bilan birga eksport qiling. Turli ish maydonlari bo'ylab olingan topilmalarni eng yuqori darajadagi ish papkasi katalogida to'plang; har bir TgWitness artefaktining o'z imzosi va tekshiruv tartibi mavjud.
 
 ## Tergovni moslashtiring
 

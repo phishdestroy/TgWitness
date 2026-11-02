@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 `deploy/env.example`를 `.env`로 복사하십시오. `TGWITNESS_IMAGE`를 공개된 버전으로 설정할 때는 **소문자** 리포지토리 경로를 사용하십시오. 예:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 
 이 프로젝트가 Actions가 활성화된 GitHub 저장소에 푸시되면 [릴리스](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml)워크플로가 바로 사용 가능해집니다. 이 워크플로는 프리릴리스를 포함하여 GitHub 릴리스가 **게시될** 때 실행됩니다. 초안이나 태그 푸시만으로는 패키지가 게시되지 않습니다.
 
-1. 패키지 버전과 변경 내역을 설정한 후, `v` 태그와 `pyproject.toml`의 정확한 버전(예: `v0.7.1`)을 함께 지정하여 릴리스를 게시하십시오.
+1. 패키지 버전과 변경 내역을 설정한 후, `v` 태그와 `pyproject.toml`의 정확한 버전(예: `v0.8.0`)을 함께 지정하여 릴리스를 게시하십시오.
 2. 이 워크플로는 태그를 검증하고, Windows/Linux/macOS에서 공통으로 사용되는 Python, general/account-import/QR 브라우저, 소스 패키지 및 Docker 검사를 실행합니다. 또한 Python 3.12를 사용하여 세 가지 운영 체제 모두에서 새로운 네이티브 설치도 수행됩니다.
 3. 이러한 검사가 통과되면, QEMU 환경에서 ARM64 이미지를 스모크 테스트하고, AMD64/ARM64 이미지를 `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` 에 게시하며, 소스 ZIP 파일과 Python 휠 파일, 그리고 해당 SHA-256 사이드카 파일을 첨부합니다. Windows용 포터블 ZIP 파일은 검사 워크플로우에서 테스트된 것과 정확히 동일한 아티팩트이며, 릴리스 워크플로우는 해당 아티팩트와 그 체크섬을 다운로드하여 게시합니다.
 4. 마지막 작업에서는 게시된 세 가지 패키지를 모두 다시 다운로드하여 체크섬을 확인합니다. 그런 다음 `SHA256SUMS.txt` 및 `RELEASE-MANIFEST.json` 을 게시하며, 버전, 소스 리비전 및 자산 크기를 기록합니다. 업로드 시 기존 릴리스 자산을 덮어쓰지 않습니다.

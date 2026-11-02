@@ -79,7 +79,7 @@ Opcjonalne lokalizacje docelowe konfiguruje się dla poszczególnych obszarów r
 - Administrator urządzenia może odczytać całą zawartość dziennika, a także go przeredagować i ponownie podpisać. Odciski palców i punkty kontrolne należy przechowywać na innym systemie.
 - Treść wiadomości i pliki multimedialne nie są szyfrowane przez TgWitness. Należy stosować szyfrowanie dysku oraz rygorystyczne uprawnienia.
 - Korzystanie z protokołu HTTP poza lokalnym hostem (localhost) powoduje ujawnienie tokenu w sieci. Prosimy o korzystanie z protokołu HTTPS lub tunelu SSH.
-- Podpisy potwierdzają, że zarejestrowane dane nie zostały zmienione, a nie to, że każde zdarzenie w Telegramie zostało zarejestrowane.
+- Należy sprawdzić zapisane dane pod kątem obecności podpisów i punktów kontrolnych. Należy zweryfikować zakres gromadzonych danych oraz przetestować proces dostarczania danych dla wykorzystywanych kont i źródeł.
 
 [Udostępnianie dostępu do sprawy](https://phishdestroy.github.io/TgWitness/pl/docs/access/) z uwzględnieniem uprawnień, terminów ważności i limitów sesji. Token świadka pozostaje odrębnym poświadczeniem.
 

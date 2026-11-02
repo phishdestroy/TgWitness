@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/
 
-[Código aberto / v0.7.1](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/)
+[Código aberto / v0.8.0](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/)
 
 Capture mensagens do Telegram, preserve suas alterações e exporte um registro assinado.
 
@@ -60,6 +60,8 @@ TgWitness / Exportações assinadasESPAÇO DE TRABALHO LOCAL
 
 04 / Exportações assinadas Leve o registro com você, acompanhado de um manifesto e de um verificador independente.
 
+Acompanhe um registro salvo por meio do [Case Board](https://phishdestroy.github.io/TgWitness/pt/docs/case-board/), [da elaboração do relatório](https://phishdestroy.github.io/TgWitness/pt/docs/reports/) e de uma [cópia para compartilhamento](https://phishdestroy.github.io/TgWitness/pt/docs/handover/). [Analise grupos de contas](https://phishdestroy.github.io/TgWitness/pt/docs/groups/) em conjunto.
+
 01 / CAPTURA
 
 ### O senhor escolhe o escopo.
@@ -84,7 +86,8 @@ Arquivo ZIP assinado, arquivos preservados e um relatório offline. Proteção p
 
 [Exportar e verificar](https://phishdestroy.github.io/TgWitness/pt/docs/exports/)
 
-## Altere um byte. A cadeia informa a você.
+## Altere um byte.
+A verificação irá indicar.
 
 Cada evento possui um link para o hash anterior e contém uma assinatura Ed25519.
 
@@ -94,7 +97,7 @@ Cada evento possui um link para o hash anterior e contém uma assinatura Ed25519
 
 ![Um ponto de verificação mantido separadamente permite que o destinatário compare o registro exportado com uma observação anterior.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-Veja o que cada mecanismo de verificação estabelece e quais são os seus limites.
+Siga as verificações desde o hash de um arquivo até um ponto de verificação mantido separadamente.
 
 [Explore os oito níveis de evidência](https://phishdestroy.github.io/TgWitness/pt/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipPACOTE ASSINADO
 
   Verificação independenteManifesto assinado + verificador independente
 
-As assinaturas detectam adulterações em relação a uma chave confiável. Elas não comprovam a origem do Telegram nem garantem a captura completa. O conteúdo do registro e as mídias precisam de armazenamento criptografado fornecido por você.
+Os destinatários verificam os registros e arquivos salvos em relação a uma chave de coletor confiável. Um ponto de verificação mantido separadamente também verifica a continuidade com o diário anterior. [Explore as etapas de verificação.](https://phishdestroy.github.io/TgWitness/pt/docs/concepts/#layers)
 
 ## Cópias no S3. Verificações externas.
 
@@ -154,13 +157,13 @@ Revista e mídia`AES-256-GCM`Armazenamento compatível com S3
 
 [Configure o S3 e restaure uma cópia](https://phishdestroy.github.io/TgWitness/pt/docs/exports/#s3)[Leia os detalhes da verificação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**O que não faz** A ferramenta não restaura as mensagens sem a chave de descriptografia exportada nem substitui uma testemunha independente.
+**Chave de recuperação:** salve a chave de descriptografia exportada separadamente para que você possa restaurar a cópia criptografada.
 
 ### Notificações · Apprise
 
 Alertas de problemas, alterações no chat e resumos diários via Apprise: aplicativos de mensagens, e-mail ou seu próprio webhook JSON.
 
-**Não faz**: não envia o texto da mensagem, a menos que você habilite os trechos.
+**Escolha o que compartilhar:** trechos de mensagens estão desativados por padrão; habilite-os para destinatários em quem você confia.
 
  [Configurar destinos de notificação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ Alertas de problemas, alterações no chat e resumos diários via Apprise: aplic
 
 Hashes de pontos de verificação com data e hora usando RFC 3161 e OpenTimestamps.
 
-**O que não faz** Ele não considera um recibo pendente no calendário como um carimbo de data/hora confirmado do Bitcoin.
+**Acompanhe o resultado:** verifique a resposta da autoridade ou atualize o recibo do OpenTimestamps para uma prova confirmada de Bitcoin.
 
  [Verifique as provas de data e hora](https://phishdestroy.github.io/TgWitness/pt/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ Hashes de pontos de verificação com data e hora usando RFC 3161 e OpenTimestam
 
 Um servidor separado armazena as observações assinadas e pode publicar `TGW1` pontos de verificação.
 
-**O que não faz** Isso não transforma dois espaços de trabalho em um único host coletor em testemunhas independentes.
+**Separe a referência** “Execute o TgWitness em outro host” e mantenha sua própria chave de assinatura e diário.
 
  [Configure um Witness](https://phishdestroy.github.io/TgWitness/pt/docs/witness/)
 
@@ -184,7 +187,7 @@ Um servidor separado armazena as observações assinadas e pode publicar `TGW1` 
 
 Retomar após reinicialização. Verifica novamente e `coverage.json` exiba as mensagens recuperadas e as lacunas.
 
-**O que não faz** A ferramenta não reconstrói todas as edições perdidas ou mensagens que desapareceram.
+**Analise o intervalo:** veja as mensagens atuais recuperadas juntamente com as interrupções registradas; as versões anteriores permanecem disponíveis quando capturadas.
 
  [Verifique a continuidade e as lacunas](https://phishdestroy.github.io/TgWitness/pt/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ A execução do código-fonte requer o Python 3.11 ou superior. O instalador do 
 
 [Navegue pelas versões](https://github.com/phishdestroy/TgWitness/releases)
 
-Não possui o Python no Windows? [Baixe o pacote portátil](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), extraia-o e clique duas vezes em “`TgWitness.cmd`”.
+Não possui o Python no Windows? [Baixe o pacote portátil](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), extraia-o e clique duas vezes em “`TgWitness.cmd`”.
 
 PASSO 02
 
@@ -260,7 +263,7 @@ Acesse [127.0.0.1:8787](http://127.0.0.1:8787) após a inicialização.
 
 Para instalações a partir do código-fonte, o token é `data/live/panel-token.txt`. O login no Telegram pode ser feito usando as configurações da API integrada ou seu próprio par de chaves obtido em [my.telegram.org](https://my.telegram.org). [Guia completo de configuração ↗](https://phishdestroy.github.io/TgWitness/pt/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [Novidades →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/) · [Recursos e limitações conhecidas →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/)
+**TgWitness 0.8.0** [Novidades →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/) · [Recursos e limitações conhecidas →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/)
 
 ## Instruções claras. Um próximo passo útil.
 

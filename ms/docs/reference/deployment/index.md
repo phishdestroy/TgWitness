@@ -127,7 +127,7 @@ Ini akan tersedia selepas [aliran kerja pelepasan](https://phishdestroy.github.i
 Salin `deploy/env.example` ke `.env`. Tetapkan `TGWITNESS_IMAGE` ke versi terbitan, menggunakan laluan repositori **huruf kecil**, contohnya:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ Semak akses panel, identiti akaun, status pemerhatian, dan liputan selepas kemas
 
 [Aliran kerja pelepasan](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) sedia untuk digunakan selepas projek ini dihantar ke repositori GitHub dengan Actions diaktifkan. Ia berjalan apabila GitHub Release **diterbitkan**, termasuk prapelepasan. Draf dan penghantaran tag sahaja tidak menerbitkan pakej.
 
-1. Aturkan versi pakej dan log perubahan, kemudian terbitkan rilisan yang ditandakan dengan `v` ditambah versi `pyproject.toml` yang tepat, seperti `v0.7.1`.
+1. Aturkan versi pakej dan log perubahan, kemudian terbitkan rilisan yang ditandakan dengan `v` ditambah versi `pyproject.toml` yang tepat, seperti `v0.8.0`.
 2. Aliran kerja mengesahkan tag dan menjalankan pemeriksaan Python yang dikongsi untuk Windows/Linux/macOS, pelayar umum/import akaun/QR, pakej sumber, dan Docker. Pemasangan asli baharu juga dijalankan pada ketiga-tiga sistem pengendalian menggunakan Python 3.12.
 3. Selepas pemeriksaan tersebut lulus, ia menjalankan ujian asap pada imej ARM64 di bawah QEMU, menerbitkan imej AMD64/ARM64 ke `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, dan melampirkan fail ZIP sumber serta roda Python dengan fail sampingan SHA-256 mereka. ZIP mudah alih Windows adalah artifak tepat yang diuji oleh aliran kerja pemeriksaan; aliran kerja pelepasan memuat turun dan menerbitkan artifak tersebut serta jumlah semaknya.
 4. Satu tugas akhir memuat turun semula ketiga-tiga pakej yang diterbitkan dan mengesahkan checksum mereka. Ia kemudian menerbitkan `SHA256SUMS.txt` dan `RELEASE-MANIFEST.json`, merekodkan versi, revisi sumber dan saiz aset. Pemunggahan menolak untuk menimpa aset keluaran sedia ada.

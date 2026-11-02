@@ -4,7 +4,35 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/conne
 
 身份验证、自动代理池、IP 模式、备用策略、外部请求及密钥存储。
 
-本文档描述了 TgWitness 0.7.1 的行为及其限制。身份验证、 源访问、网络连接和捕获完整性属于各自独立的状态。 有关登录步骤、文件格式和多账户管理，请先参阅 [“账户与会话格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/)”部分。有关事件策略和重启 行为，请参阅[“数据采集原理”部分](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)。
+本文档描述了 TgWitness 0.8.0 的行为及其限制。身份验证、 源访问、网络连接和捕获完整性属于各自独立的状态。 有关登录步骤、文件格式和多账户管理，请先参阅 [“账户与会话格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/)”部分。有关事件策略和重启 行为，请参阅[“数据采集原理”部分](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)。
+
+## 连接设置指南
+
+在 **Connection** 中，管理员可选择 **该账户**、**一个账户 组** 或 **所有账户**，然后选择一条路由。**“审查选择”** 列出了 受影响的账户。**“准备并检查”** 测试建议的路由，同时不更改 已保存的路由。**“应用已检查的连接”** 再次检查，如有必要则暂停监控， 保存路由并恢复已运行的监控。 它绝不会在先前处于空闲状态的账户中启动数据收集。历史数据下载仍处于 暂停状态，可单独恢复。切换前请暂停正在进行的导出操作。
+
+群组更改默认会为每个账户保留其独立路径。仅当预览列表中显示了您期望的更改时， 才应清除该选项。 应用程序会报告每个 账户的结果；这并非跨数据库的“全有或全无”式操作。若 切换失败，该账户将恢复之前的设置。恢复失败的情况会 明确显示。预览有效期为十分钟，且连接 设置或群组成员资格的更改需要重新检查。
+
+| 路径 | TgWitness 管理的内容 |
+| --- | --- |
+| 直接 | 来自主机的连接；未检测到外部主机 VPN，也未强制执行。 |
+| VPN | 每个账户仅有一个全隧道 WireGuard 配置文件，由本地用户空间中的 SOCKS5 进程承载。不安装任何主机接口或驱动程序。 |
+| 我的代理 | SOCKS5、HTTP CONNECT 或 MTProxy 凭据。SOCKS5/HTTP 字段可填写 URL。选择多个账户时，将共享此处输入的代理。 |
+| 公开版 MTProto | 现有池分配Telegram路由。在高级设置中配置单独的合适代理之前，外部请求将被禁用。 |
+| WARP | 为每个选定的账户建立独立的本地隧道，并将 WARP 注册信息和 WireGuard 配置文件保存在该账户的保险库中。 |
+
+当前路由检查使用全新的未认证Telegram传输通道，而非 该账户的会话。对于支持HTTP的路由，它还会请求通过该路由进行Cloudflare的HTTPS 追踪，并显示其报告的出口IP、国家、WARP状态 以及检查时间。 测得的延迟是Telegram连接建立时间， 而非ICMP ping。除非跟踪报告显示WARP处于活动状态，否则WARP准备将失败。 这些检查旨在验证连通性，而非捕获消息的 真实性或完整性。仅凭本地进程正在运行，并不代表出口检查成功。
+
+### 便携版 WARP 和 WireGuard
+
+这是一个 **非官方的 WARP 集成**，使用 [wgcf 2.3.1](https://github.com/ViRb3/wgcf/releases/tag/v2.3.1) 和 [wireproxy 1.1.3](https://github.com/windtf/wireproxy/releases/tag/v1.1.3)。 管理员需在首次下载或 WARP 注册之前明确接受该设置。 这些设置连接会直接连接到 GitHub 和 Cloudflare，并 泄露设备的 IP 地址。普通账户的流量在应用该设置前 仍保持原有路由。Cloudflare 会选择出口地址和国家；不同的隧道 可以共享同一个出口地址。该功能不提供国家选择、周期性 IP 轮换以及全主机范围的 VPN 杀开关功能。
+
+支持下载的辅助程序：Linux 和 macOS x86-64/ARM64，以及 Windows x86-64。 会根据已审核源代码中捆绑的 SHA-256 哈希值对构建产物进行校验， 并在启动前再次对缓存的可执行文件进行校验。 任何辅助程序均不会被添加到 PATH 环境变量中，也不会作为系统服务安装，或配置为公开监听器。所有文件均位于 工作区下的 `portable-routes/` 目录中，并存储在加密的保险库条目内。 环回监听器 SOCKS5 需要独立生成的凭据。
+
+私有配置文件和 WARP 账户凭据使用现有的 工作区保险库进行加密。运行期间，辅助程序需要一份仅所有者可见的明文配置文件； 正常停止时该文件会被删除。主机崩溃可能会导致该文件残留在 仅所有者可见的数据文件夹中。这不会对磁盘进行加密，也无法防止 管理员访问。 如果面板的父管道 消失，监督程序将关闭隧道。失败的隧道绝不会启用直接回退。面板重启 将恢复选定的隧道；启动失败时，将在限定延迟后重试。**停止 隧道** 也会暂停监视并保持已停止状态。**启动隧道** 启动隧道；准备就绪后需单独恢复监视。
+
+上传的 WireGuard 配置文件必须包含一个接口和一个对等节点、完整的 IPv4 和 IPv6 路由，且不得包含钩子、包含语句、环境变量替换或额外的 监听器。公共端点地址将在启动前解析并固定。 请使用外部 VPN 或 SOCKS5 网关来连接 OpenVPN/IPsec 及私有端点。
+
+合成检查项为 `python tools/check_guided_connection.py` 和 `python tools/check_guided_connection_browser.py`。可选的 `python tools/check_portable_routes_runtime.py` 会下载经过验证的辅助程序，并 通过回环测试环境测试其实际本地进程生命周期。该操作 不会注册 Cloudflare 设备，也不会使用 Telegram 账户。
 
 ## 认证方法
 
@@ -94,6 +122,10 @@ MTProto 是 Telegram 的协议。Telethon 是 TgWitness 使用的 Python 客户�
 **Telegram 流量和 HTTPS 请求使用不同的路由。**列表下载使用 独立的 HTTPS 连接以及提供的外部请求路由。 `TGWITNESS_PROXY_FEED_PROXY` 会通过 HTTP/SOCKS5 代理显式覆盖该路由； 两种 Compose 收集器变体均会转发该路由。后台池遵循主工作区。 不会向数据源提供商发送任何 Telegram 会话、API 凭据、控制面板令牌或机器人令牌。 提供商名称、快照日期和下载路径会显示在**“列表来源”部分**。
 
 MTProxy 仅传输 Telegram 流量。工作区中的 HTTP 操作（如时间戳、 通知、异地副本和源头验证）在 配置时会使用独立的 SOCKS5/HTTP 代理，随后则使用该账户的 SOCKS5/HTTP 路由。若未配置上述任一设置，Hide IP 将拒绝 该请求；其他模式则允许直接连接。 外部请求可被禁用。明确 配置的订阅源下载代理仍由操作员单独控制。 独立的见证服务保持其自身的路由。
+
+通过 SOCKS5 或 HTTP 代理发出的仅限公开的外部 HTTP 请求，将通过 同一代理，使用 Cloudflare DNS over HTTPS（`https://1.1.1.1/dns-query`）解析 目标地址。仅主机名和 A/AAAA 查询类型会发送至解析器； 服务 URL、凭据和通知内容均不包含在内。 TLS 会验证 解析器证书与其 IP 地址是否匹配。系统会检查两种地址族， 若返回私有、回环、链路本地或保留地址，则拒绝该请求。 连接使用经过验证的数值地址，同时保留服务原始的 HTTP Host 和 TLS 证书名称。 通知 HTTP 转发和 CONNECT 请求采用相同的目标检查机制。若 DNS 查询失败且 无本地目标 DNS 或直接备用方案，则停止该请求。成功的响应将按 代理路由在内存中缓存，最长 30 秒且不超过其 DNS TTL； 缓存上限为 128 条记录。 代理主机名本身可以使用本地 DNS。 SOCKS 和 CONNECT 请求失败时，可在发送 服务请求正文之前尝试另一个经过验证的地址。纯 HTTP 转发会在请求失败时报告错误，而不会 自动通过另一个地址重发其请求正文。
+
+对于由操作员管理的私有服务，现有的服务器环境设置 `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` 允许私有目标，并保持 代理端的主机名解析。该设置无法通过控制面板启用。仅限公共 模式会在查询公共解析器之前拒绝 `.onion` 目标；Tor 洋葱 服务需要明确的私有目标设置以及合适的代理。 此 DNS 行为适用于外部 HTTP 操作，不适用于 Telegram 的传输协议。 Cloudflare 提供了关于 [JSON DNS 端点的](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/)文档。
 
 ****自动池参数**** 在 **参数 → 自动 MTProxy** 下，配置失败阈值、冷却时间、 计划轮换、代理共享以及允许的备用延迟。 | 控制项 | 默认值 | | --- | --- | | 替换前的断开次数 | 10 分钟内 3 次 | | 每次连接尝试尝试的代理数量 | 3 | | 故障后的首次/最长休息时间 | 10 分钟 / 6 小时 | | 计划轮换 | 已禁用；故障时切换 | | 每个代理的账户数 | 0：优先使用独立条目，需要时共享。设置为 1 则等待独占条目。 | | 允许 Direct 回退前的延迟 | 10 分钟；Hide IP 仍拒绝 Direct | | 数据源刷新 / 传输检查 | 60 / 10 分钟；主工作区设置适用于共享池 | 不同的代理并不保证会使用不同的出口地址。这些设置不会 覆盖 Telegram 的限制，也无法保证匿名性。
 

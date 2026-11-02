@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/how-i
 
 TgWitness שומר את מה שנצפה על ידי חשבון האיסוף, מקשר תצפיות אלה ליומן חתום ומאפשר לאדם אחר לאמת ייצוא באמצעות מפתח מהימן ונקודת ביקורת שנשמרה קודם לכן.
 
-[אתר התיעוד המקומי](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) מוסיף דוגמאות אינטראקטיביות ב-`/docs/concepts/`, ומחקר החלטות Checkpoint ב- `/docs/witness/`. כל הודעות הדוגמה, הספירות והעיכובים הם פיקטיביים. חתימות ה-hash בסביבת הבדיקה של השרשרת מחושבות באמצעות SHA-256 בדפדפן. שום דבר לא נשלח ל-Telegram.
+[אתר התיעוד המקומי](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) מוסיף דוגמאות אינטראקטיביות ב-`/docs/concepts/`, מחשבון החלטות בנקודות ביקורת ב- `/docs/witness/`, ומדריכים מפורטים [ל-Case Board](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/), [לעיצוב דוחות](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/) [ולתקצירי](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#handover-extract) [מסירת התיק](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#handover-extract). כל הודעות הדוגמה, הספירות והעיכובים הם פיקטיביים. חתימות ה-hash בסביבת הבדיקה של ה-chain מחושבות באמצעות SHA-256 בדפדפן. שום דבר לא נשלח ל-Telegram.
 
 ## הודעה משתנה; התצפיות מצטברות
 
@@ -92,7 +92,7 @@ Nexport ≥ Ncheckpoint and hexport[Ncheckpoint] = Hcheckpoint
 
 ה-Witness מתעד ביטולים, כותרת שונה באותו ספירה, מפתחות ששונו, תשובות לא חוקיות ותגובות חסרות. ספירה גבוהה יותר כשלעצמה אינה מוכיחה שכל הרשומות הקודמות נותרו ללא שינוי; יש להשוות את הייצוא עם נקודות הבקרה שנשמרו. שימוש ב-Witness במארח אחר מונע השפעה של השבתת המארח של האספן; מפעיל נפרד מעניק עצמאות נוספת.
 
-ה-Witness מאמת את מצב היומן המדווח על ידי האספן. הוא אינו מפקח באופן עצמאי על כל הודעות Telegram. ראו [הגדרת ה-Witness](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/).
+ה-witness מאמת את מצב היומן המדווח על ידי ה-collector. השתמשו בבדיקת מסירה מבוקרת כדי למדוד אילו פעולות ב-Telegram הגיעו לחשבון האיסוף. ראו [הגדרת ה-witness](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/).
 
 ## בדיקת תפקוד מול פעולות ידועות
 
@@ -106,14 +106,14 @@ R = |observed∩expected| / |expected| Δ t = treceipt - taction
 
 [המדריך המלא לחקירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/) עוקב אחר אירוע המתרחש בערוץ, בקבוצה, בבוט ובצ'אט פרטי:
 
-1. הפעל את מצב החקירה של החשבון כולו וסקור את כל הצ'אטים הנגישים.
+1. בחשבון איסוף ייעודי, הפעל את מצב החקירה של החשבון כולו ו ערוך רשימת צ'אטים נגישים. השתמש בצ'אטים נבחרים או בתיקייה עבור חשבון ראשי.
 2. השג תמונות מצב של היומן, היסטוריה מלאה לכל צ'אט וקבצים מצורפים שנשמרו.
 3. יש לשמור את השינויים בזמן אמת ואת כל האינטראקציות המכוונות בלוח עם האישורים המתאימים.
 4. עקבו אחר מזהי שולח מספריים, קשרי תגובה, יעדים חוזרים ו- השיישים של קבצים באמצעות רשומות מצוטטות ופרופילים אישיים.
-5. שחזור ציר זמן חוצה-צ'אטים הכולל הן חותמות זמן והן פערים מפורשים.
+5. יש להוסיף הערות ואוספים המקושרים למקורות ב-Case Board. יש לשחזר ציר זמן חוצה-צ'אטים הכולל הן חותמות זמן והן פערים מפורשים.
 6. השוואת סביבות עבודה של חשבונות אחרים תוך שמירה על הפרדה בין מקורותיהם ומפתחותיהם.
 7. יש לאסוף ולאמת את היומנים החתומים, הפרופילים והייצואים של ההיסטוריה יחד עם הערות התיק.
 
-המדריך "`/docs/cases/`" באתר כולל מפת מקרים אינטראקטיבית וגרסאות שונות למקרים של מחלוקות בין בוטים, הודעות שהוסרו ומשתתפים שמשנים שמות. הערות על המקרים והניתוח הבין-סביבתי הם חיצוניים; היישום אינו יוצר באופן אוטומטי גרף חקירה גלובלי או ארכיון מקרים מאוחד.
+המדריך בכתובת `/docs/cases/` באתר כולל מפת תיקים אינטראקטיבית וגרסאות לסכסוכים הקשורים לבוטים, להודעות שהוסרו ולמשתתפים שמשנים שמות. Case Board שומר הערות ואוספים בתוך סביבת עבודה. ייצוא קבוצתי אוסף חבילות נפרדות של סביבות עבודה; הקורלציה בין סביבות העבודה וציר הזמן המשולב נותרים בתחום אחריותו של האנליסט.
 
 [אימות שהושלם ועבודה שנותרה](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/) · [ייצוא ואימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#investigation-handoff) · [התחל עם חשבון אחד](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)

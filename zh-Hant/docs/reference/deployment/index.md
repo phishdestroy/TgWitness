@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 將 `deploy/env.example` 複製到 `.env`。將 `TGWITNESS_IMAGE` 設定為已發布的版本，並使用 **小寫的**儲存庫路徑，例如：
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 
 當此 專案推送至已啟用 Actions 的 GitHub 儲存庫後，[發布工作流程](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml)即已就緒。該流程會在 **發布** GitHub Release 時執行，包含預發布版本。僅推送草稿或標籤 並不會發布套件。
 
-1. 設定套件版本與變更紀錄，然後發布一個標記為 `v` 加上確切 `pyproject.toml` 版本（例如 `v0.7.1`）的發行版本。
+1. 設定套件版本與變更紀錄，然後發布一個標記為 `v` 加上確切 `pyproject.toml` 版本（例如 `v0.8.0`）的發行版本。
 2. 此工作流程會驗證標籤，並執行適用於 Windows/Linux/macOS 的共用 Python、 general/account-import/QR 瀏覽器、原始碼套件及 Docker 檢查。此外，亦會在 這三種作業系統上，使用 Python 3.12 進行全新的原生安裝測試。
 3. 在通過上述檢查後，系統會於 QEMU 環境下對 ARM64 映像進行煙霧測試，並將 AMD64/ARM64 映像發佈至`ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` ， 同時附上原始碼 ZIP 檔與 Python wheel 檔案及其 SHA-256 校驗檔。 Windows 便攜版 ZIP 檔即為檢查工作流程所測試的精確產出物； 發佈工作流程會下載並發佈該產出物及其校驗和。
 4. 最後一個工作流程會再次下載所有三個已發佈的套件，並驗證其 校驗和。接著發佈`SHA256SUMS.txt` 和`RELEASE-MANIFEST.json` ，並記錄 版本、原始碼修訂版本及資產大小。上傳時不會覆寫 現有的發佈資產。

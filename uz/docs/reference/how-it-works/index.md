@@ -6,7 +6,7 @@ Hash zanjiri, imzolar, tekshiruv nuqtalari va guvohlar verifikator ishlatadigan 
 
 TgWitness yig'uvchi akkaunt tomonidan kuzatilganlarni saqlaydi, bu kuzatuvlarni imzolangan jurnalga bog'laydi va boshqa shaxsga ishonchli kalit hamda oldin saqlangan tekshiruv nuqtasiga nisbatan eksportni tasdiqlash imkonini beradi.
 
-[Mahalliy hujjatlar sayti](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)`/docs/concepts/` manzilida interaktiv misollar va `/docs/witness/` manzilida qaror nuqtalari eksplorerini taklif etadi. Barcha misol xabarlari, hisob-kitoblar va kechikishlar tasavvuriydir. Zanjirli qumli maydondagi hashlar brauzerda SHA-256 yordamida hisoblanadi. Hech narsa Telegramga yuborilmaydi.
+[Mahalliy hujjatlar veb-sayti](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)`/docs/concepts/` manzilida interaktiv misollar, `/docs/witness/` manzilida Checkpoint qarorlar eksplorerini va [Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/), [hisobot dizayni](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-reports/) hamda [topshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#handover-extract) bo'yicha bosqichma-bosqich ko'rsatmalarni o'z ichiga oladi. Barcha misol xabarlar, hisoblar va kechikishlar tasodifiydir. Zanjirli qumdonidagi xeshlar brauzerda SHA-256 yordamida hisoblanadi. Hech narsa Telegramga yuborilmaydi.
 
 ## Xabar o'zgaradi; kuzatuvlar to'planadi
 
@@ -92,7 +92,7 @@ Oqim sxemasi · Yig'uvchi / hisob sessiyasi / kalit A → Faqat o'qish uchun mo'
 
 Guvoh rollbackni, bir xil hisobda boshqa sarlavhani, o'zgartirilgan kalitlarni, noto'g'ri javoblarni va yetishmayotgan javoblarni qayd etadi. Faqat katta hisob har bir avvalgi yozuv o'zgarmaganligini aniqlamaydi; saqlangan tekshiruv nuqtalari bilan eksportni solishtiring. Boshqa mezbonidagi guvoh yig'uvchining mezbonidagi uzilishni bo'lishishdan saqlaydi; alohida operator esa qo'shimcha mustaqillik beradi.
 
-Guvox yig'uvchining xabar bergan jurnal holatini tasdiqlaydi. U mustaqil ravishda barcha Telegram xabarlarini kuzatmaydi. [Guvoxni sozlashni](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/) ko'ring.
+Guvox yig'uvchining xabar bergan jurnal holatini tasdiqlaydi. Telegram harakatlarining qaysilari yig'uvchi hisobga yetib borganini o'lchash uchun nazoratli yetkazib berish testidan foydalaning. [Guvoxni sozlashni](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/) ko'ring.
 
 ## Ma'lum harakatlarga qarshi test yetkazib berish
 
@@ -106,14 +106,14 @@ Faqat mos kelgan kutilgan harakatlar hisobga olinadi; takroriy kvitansiyalar his
 
 [To'liq tergov bosqichlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/) kanalda, guruhda, botda va shaxsiy suhbatda sodir bo'lgan hodisani kuzatadi:
 
-1. Butun hisobni tekshirish rejimini yoqing va mavjud bo'lgan barcha suhbatlarni ro'yxatlang.
+1. Maxsus yig'ish hisobida butun hisobni tergov rejimiga o'tkazing va inventorizatsiya qilinadigan suhbatlarni yoqish. Asosiy hisob uchun tanlangan suhbatlar yoki papkani ishlating.
 2. Jurnal snapshotlarini, har bir chat bo'yicha to'liq tarixni va saqlangan ilovalarni oling.
 3. Jonli o'zgarishlarni va paneldagi har qanday ataylab amalga oshirilgan o'zaro ta'sirlarni ularning kvitansiyalari bilan saqlang.
 4. Raqamli jo'natuvchi IDlari, javob munosabatlari, takroriy manzillar va fayl hashlarini keltirilgan yozuvlar va shaxs profillari bo'ylab kuzating.
-5. Vaqt tamg'alari va aniq bo'shliqlar bilan kesishgan suhbatlarning vaqt chizig'ini qayta tuzing.
+5. Case Board'da manba-bog'langan eslatmalar va to'plamlar qo'shing. Chatlararo kronologiyani vaqt belgilari va aniq bo'shliqlar bilan qayta tiklang.
 6. Boshqa hisob ma'lumotlari ish maydonlarini ularning kelib chiqishi va kalitlarini alohida saqlagan holda solishtiring.
 7. Imzolangan jurnal, profil va tarix eksportlarini ish yozuvlari bilan birga to'plang va tekshiring.
 
-Saytdagi "`/docs/cases/`" qo'llanmasiga interaktiv ish xaritasi va botlar bo'yicha nizolar, o'chirilgan xabarlar hamda ishtirokchilarning ismlarini o'zgartirishi kabi variantlar kiritilgan. Ish yozuvlari va turli ish maydonlari bo'ylab tahlil tashqi; ilova global tergov grafigini yoki birlashtirilgan ish arxivini avtomatik yaratmaydi.
+Veb-saytning `/docs/cases/` qo'llanmasida botlar bo'yicha nizolar, o'chirilgan xabarlar va ishtirokchilarning ismlarini o'zgartirishi uchun interaktiv ish holati xaritasi hamda variantlar mavjud. Case Board eslatmalar va kollektsiyalarni ish maydonida saqlaydi. Guruh eksportlari alohida ish maydoni paketlarini to'playdi; ish maydonlari o'rtasidagi korrelyatsiya va birlashtirilgan vaqt chizig'i tahlilchining vazifasi bo'lib qoladi.
 
 [Yakunlangan tasdiqlash va qolgan ishlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/) · [Eksport va tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#investigation-handoff) · [Bir akkaunt bilan boshlang](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)

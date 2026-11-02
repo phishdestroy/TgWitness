@@ -6,6 +6,19 @@ Xabar o'zgarishi mumkin. Siz kuzatgan narsalarning yozuvi tekshirib ko'rilishi m
 
 Quyida ikkita kichik tajribani o'rganing. Ular badiiy xabarlarni ishlatadi, brauzeringizda qoladi va hech qachon Telegramga ulanmaydi.
 
+## Suhbat eksportidan tekshiriladigan yozuvga
+
+[Telegram Desktop](https://telegram.org/blog/export-and-more) oflayn foydalanish uchun mavjud suhbat tarixi va media fayllarini HTML yoki JSON formatida [eksport qiladi](https://telegram.org/blog/export-and-more). TgWitness qabul qilingan o'zgarishlarning uzluksiz jurnalini, kuzatuvlar va eksportlarga imzolarni hamda qabul qiluvchilar mustaqil ravishda solishtirishi mumkin bo'lgan tekshiruv nuqtalarini qo'shadi.
+
+| Vazifa | Telegram Desktop eksporti | TgWitness |
+| --- | --- | --- |
+| Saqlangan suhbatlarni o'qish | HTML yoki JSON tanlangan media bilan | Saqlangan suhbatlar, qidiriladigan jurnal va oflayn hisobotlar |
+| Vaqt o'tishi bilan o'zgarishni kuzating | Eksport qilganda mavjud bo'lgan tarix | Oldin ushlab olingan versiyalar, keyingi tahrirlar va o'chirish kuzatuvlari birga saqlanadi |
+| Topshiruvdan so'ng fayllarni tekshiring | Standart HTML/JSON eksport fayllari imzolangan emas | Imzolangan manifest, har bir yozuv bo'yicha imzolar va muhrlangan HTML/PDF/JSON hisobotlari ishonchli yig'uvchi kalitiga qarshi tekshiriladi |
+| Oldingi saqlangan holat bilan solishtiring | Alohida referens nusxa yoki xeshni saqlang | Imzolangan tekshiruv nuqtalari, alohida guvoh va ixtiyoriy tashqi vaqt belgilari |
+
+Faylni imzolash bo'yicha taqqoslash [Telegram Desktop eksporti yozuvchilari](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) tomonidan 2026-yil 2-noyabrda ko'rib chiqilgan ma'lumotlarga asoslanadi. TgWitness yig'uvchining kaliti bilan imzolaydi; quyidagi tekshiruvlar qabul qiluvchining uni qanday ishlatishini ko'rsatadi.
+
 ## Bir xabar, uch kuzatuv
 
 Telegram yangi xabar, tahrir va o'chirish bildirishnomasini yetkazganda, yig'uvchi uchta alohida kuzatuvni qo'shadi. Tahrir birinchi yozuvni almashtirmaydi. O'chirish bildirishnomasi uni o'chirib tashlamaydi.
@@ -107,6 +120,6 @@ Mahkamlangan yig'uvchi kalit ostidagi tekshiruv nuqtasi imzosini tasdiqlang, so'
 
 [01 / BUTUNLIK**Bu yozuv o'zgardi-mi?** Hashlar va imzolarni alohida ishonchli kalitga qarshi tekshiring.](https://phishdestroy.github.io/TgWitness/uz/docs/exports/)[02 / DAVOMI**Avval nimalar saqlangan edi?** Imzolangan eksportni alohida guvoh tomonidan saqlangan tekshiruv nuqtalari bilan solishtiring.](https://phishdestroy.github.io/TgWitness/uz/docs/witness/)[03 / ETKAZIB BERISH**Bu test voqealari yetib keldimi?** Har bir akkaunt jurnalida amalga oshirilgan jo'natish, tahrirlash va o'chirish harakatlarini mos keltiring.](https://phishdestroy.github.io/TgWitness/uz/docs/cases/)
 
-Mos keladigan xesh zanjiri yaxlitlik savoliga javob beradi. U Telegram xabarining to'liq yetkazilganini, xabar haqiqatini yoki mustaqil ishonchli kuzatuv vaqtini aniqlamaydi.
+Saqlangan yozuvlarni tekshirish uchun imzo, oldingi chegarani solishtirish uchun tekshiruv nuqtalari va yig'ish hajmini o'lchash uchun nazoratli yetkazib berish testlaridan foydalaning. Har biri ma'lum bir savolga javob beradi. [Verifikatsiya doirasi va ishonch taxminlarini o'qing.](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope)
 
 [Hisobni to'liq o'rganish](https://phishdestroy.github.io/TgWitness/uz/docs/cases/)ni ma'lumotlarni olishdan ish hujjatlari paketini tayyorlashgacha kuzating.

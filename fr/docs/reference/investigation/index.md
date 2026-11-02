@@ -8,7 +8,7 @@ Suivez une affaire à travers les canaux, les groupes, les discussions privées 
 
 ## Exemple concret : un changement de destination au cours de quatre conversations
 
-Une annonce fait référence à un bot. Un groupe opérationnel discute d’une nouvelle destination de paiement, le clavier du bot l’affiche, puis un message privé de suivi la répète. L’annonce est ensuite modifiée et un message de groupe disparaît.
+Une annonce fait référence à un bot. Un groupe opérationnel discute d’une nouvelle destination de paiement, et le clavier du bot l’affiche. L’annonce est modifiée, un message privé de suivi répète la destination, puis un message de groupe disparaît.
 
 Les questions sont les suivantes : qu’a-t-on observé avant et après la modification, quels comptes Telegram ont publié chaque élément, où la destination est-elle apparue, quels octets de pièce jointe ont été conservés, et quels intervalles restent inconnus ?
 
@@ -34,8 +34,8 @@ Organigramme · Chaînes → Journal de l'espace de travail; Groupes → Journal
 
 ## 1. Définir le cas et recueillir l’intégralité des faits
 
-1. Connectez le compte de collecte dans son propre espace de travail. Dans les notes externes relatives au dossier, consignez la référence du dossier, l’identifiant du compte, l’espace de travail, la date de début de l’observation et l’empreinte de la clé de signature de confiance.
-2. **Sources** ouvertes **→ Portée d’observation → Mode d’enquête**. Le préréglage sélectionne « **Compte complet** », les chaînes/groupes/discussions privées/bots, vos propres actions, les profils des sources et les 200 derniers messages visibles pour les sources nouvellement découvertes. Vérifiez ces paramètres, cliquez sur **« Enregistrer la portée »**, puis confirmez la portée.
+1. Associez le compte de collecte à son propre espace de travail. Dans [Case Board](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/) ou dans votre registre des dossiers, consignez la référence du dossier, l’identifiant du compte, l’espace de travail et la date de début de l’observation. Conservez séparément l’empreinte digitale de la clé de signature de confiance.
+2. Pour créer un compte dédié à la collecte, ouvrez **Sources → Portée d’observation → Mode enquête**. Le préréglage sélectionne « **Compte entier** », les chaînes/groupes/discussions privées/bots, les actions personnelles, les profils source et les 200 derniers messages visibles pour les sources nouvellement découvertes. Vérifiez ces paramètres, cliquez sur **« Enregistrer la portée** », puis confirmez la portée. Les comptes principaux utilisent les discussions sélectionnées ou un dossier ; la collecte sur l’ensemble du compte est disponible pour les comptes marqués pour enquête.
 3. **Chargez les discussions** et comparez les sources avec la liste des conversations du compte. Vérifiez les exclusions. **Le paramètre « Nombre de discussions lues à partir de la liste du compte »** est défini par défaut sur 1 000 et peut aller jusqu’à 20 000. Les sources dépassant la limite de la liste sont ajoutées dès qu’ elles deviennent actives. Enregistrez ce qui a effectivement été recensé.
 4. Dans **les paramètres d’enregistrement**, sélectionnez « **Toutes les activités visibles »** et enregistrez les paramètres de surveillance. Vérifiez les types et limites de pièces jointes ainsi que l’espace disque disponible.
 5. Lancez l’observation. Validez un nouveau message contrôlé, une modification et une suppression, puis conservez les références du test ainsi que les éventuels échecs.
@@ -58,7 +58,7 @@ Tenez un registre des sources avec une ligne par conversation :
 
 Utilisez la méthode d’acquisition adaptée à chaque source :
 
-- **La fonction « Charger l'historique complet** dans **les sources** » (`main` actuellement) charge les anciens messages disponibles provenant des sources activées dans le journal de l'espace de travail. Elle prend en charge la mise en pause/reprise ainsi qu'un rapport de progression signé. Voir la section « [Acquisition de l'historique](https://phishdestroy.github.io/TgWitness/fr/docs/reference/history/) ».
+- **La fonction « Charger l’historique complet** dans **Sources »** charge les anciens messages disponibles provenant des sources activées dans le journal de l’espace de travail. Elle prend en charge la mise en pause/reprise ainsi qu’un rapport de progression signé. Voir « [Acquisition de l’historique](https://phishdestroy.github.io/TgWitness/fr/docs/reference/history/) ».
 - **L'instantané de l'historique** enregistre les messages visibles récents dans le journal d'observation. Sa limite maximale par défaut est de 500 ; sous **Paramètres → « Largest history snapshot »,** vous pouvez augmenter cette limite jusqu'à 10 000. Il s'agit d'observations de l'historique actuel, et non de modifications reconstituées.
 - **Exportation complète de la conversation → « Exporter la conversation complète** », ou **« Conversations » → « Exporter la conversation** », permet de récupérer l’ historique actuellement visible d’une conversation dans un ensemble distinct signé `chat.json` / `chat.html`. Répétez l’opération pour les sources du dossier et conservez chaque résultat.
 - **Lorsqu’un nouveau chat ou un nouveau bot apparaît,** il est possible d’en enregistrer le profil ainsi que jusqu’à 1 000 messages récents ; le mode « Enquête » en sélectionne 200. Les chats existants ne bénéficient pas de cette collecte rétroactive lorsque le mode est activé.
@@ -103,6 +103,8 @@ Dans l’exemple ci-dessous :
 
 Comparez les hachages des pièces jointes et les références de messages qui leur sont associées. Des fichiers identiques ne permettent pas d’établir l’identité d’un créateur, d’un expéditeur ou d’un opérateur commun. Des noms identiques et des avatars similaires ne suffisent pas à eux seuls à associer deux identifiants Telegram à une seule et même personne.
 
+Conservez les notes de travail de l’équipe sur [Case Board](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/) : ajoutez aux favoris les enregistrements sur lesquels vous vous appuyez, tels que #146, #188 et #205, mettez en surbrillance la chaîne de destination exacte, et enregistrez un extrait de chaque action enregistrée entre deux enregistrements ou sur une plage horaire. Les notes et les statuts conservent l’examen effectué par l’équipe dans leur propre historique signé, distinct des observations sources.
+
 ## 5. Créer la chronologie inter-discussions
 
 Utilisez les versions enregistrées dans **les discussions** et leurs liens **vers le journal n°…** Dans **le journal**, regroupez **toutes les sources** avec **les modifications**, **les suppressions** et **la couverture**. Conservez à la fois `source_at`, lorsqu’il est fourni, et `observed_at`.
@@ -122,7 +124,7 @@ D’autres enregistrements peuvent se situer entre ces exemples de références.
 
 Utilisez un espace de travail distinct pour chaque compte et répétez l’inventaire de celui-ci. Conservez l’identifiant du compte, le rôle, l’empreinte de la clé de signature et les références sources à chaque comparaison. Les numéros de message ne constituent pas des identifiants globaux valables pour l’ensemble des discussions et des comptes.
 
-La corrélation entre espaces de travail s’effectue dans des notes de dossier externes ou des outils d’analyse. TgWitness ne dispose actuellement ni de recherche globale inter-espaces de travail, ni de chronologie fusionnée, ni de graphe d’enquête, ni d’archive de dossiers combinée. L’exportation multi-comptes d’**un** canal ou d’un supergroupe constitue une opération distincte, et non une fusion des journaux des comptes.
+Case Board conserve les notes et les collections liées aux sources au sein de chaque espace de travail. L’écran de groupe permet de passer en revue ensemble l’état des comptes et peut regrouper les exportations provenant d’espaces de travail distincts. Mettez ces sources en corrélation dans vos notes de dossier ou vos outils d’analyse ; chaque journal conserve sa propre origine et sa propre clé de signature. Aucune recherche globale ni chronologie fusionnée entre les espaces de travail n’est générée. L’exportation multi-comptes d’un canal/supergroupe récupère l’historique de ce chat à partir des comptes éligibles.
 
 Pour les travaux de plus grande envergure, veillez à respecter les limites en faisant appel à un [témoin indépendant](https://phishdestroy.github.io/TgWitness/fr/docs/reference/witness/). Utilisez des contrôles de livraison pour valider le chemin de capture et la visibilité de chaque compte.
 
@@ -134,6 +136,7 @@ Conservez ces éléments ensemble dans un dossier de dossier constitué par un a
 | --- | --- |
 | Notes d’enquête et registre des sources | Question, politique de collecte, accès/rôle, conclusions, explications alternatives et lacunes |
 | Chronologie | Mention des dates ainsi que des références à l’espace de travail, au chat, au message et à la séquence pour chaque entrée |
+| Case Board exportation et extraits, le cas échéant | Signets liés aux sources, citations, notes d’équipe, collections, historique des révisions et enregistrements sélectionnés vérifiés par rapport au fichier ZIP contenant les preuves |
 | Fichier ZIP de preuves signées par espace de travail | Journal complet des enregistrements, manifeste et médias conservés inclus ; les filtres du panneau ne restreignent pas l'exportation du journal |
 | Fichiers de profil des personnes signés séparément | Références dérivées vérifiées par rapport aux preuves correspondantes de l’espace de travail |
 | Exportations signées de l’intégralité des discussions | Acquisition de l'historique visible en temps réel, distincte du journal d'observation |
@@ -147,9 +150,10 @@ Conservez ces éléments ensemble dans un dossier de dossier constitué par un a
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Conservez les résultats de vérification réels et les artefacts d’origine. Le répertoire de cas de premier niveau, le registre des sources et les conclusions des analystes sont gérés en externe ; chaque artefact TgWitness dispose de sa propre signature et de sa propre procédure de vérification.
+Conservez les résultats de vérification réels et les artefacts d’origine. Exportez les notes de l’espace de travail de Case Board avec les documents sources cités. Regroupez les résultats provenant de différents espaces de travail dans le répertoire de l’affaire de niveau supérieur ; chaque artefact TgWitness possède sa propre signature et sa propre procédure de vérification.
 
 ## Adapter l’enquête
 

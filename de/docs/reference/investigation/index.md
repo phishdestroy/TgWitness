@@ -8,7 +8,7 @@ Verfolgen Sie einen Fall über Kanäle, Gruppen, private Chats und Bots hinweg, 
 
 ## Beispielfall: Eine Änderung des Zielortes über vier Unterhaltungen hinweg
 
-Eine Ankündigung verweist auf einen Bot. Eine Einsatzgruppe bespricht ein neues Zahlungsziel, die Tastatur des Bots zeigt es an, und in einer privaten Folgenachricht wird es wiederholt. Die Ankündigung wird anschließend bearbeitet, und eine Gruppennachricht verschwindet.
+Eine Ankündigung verweist auf einen Bot. Eine Einsatzgruppe bespricht ein neues Zahlungsziel, und die Tastatur des Bots zeigt dieses an. Die Ankündigung wird bearbeitet, in einer privaten Folgenachricht wird das Ziel wiederholt, und eine Gruppennachricht verschwindet.
 
 Die Fragen lauten: Was wurde vor und nach der Änderung beobachtet, welche Telegram- Konten haben die einzelnen Einträge gepostet, wo erschien das Ziel, welche Bytes der Anhänge wurden erhalten und welche Zeitintervalle bleiben unbekannt?
 
@@ -34,8 +34,8 @@ Ablaufdiagramm · Kanäle → Arbeitsbereichsprotokoll; Gruppen → Arbeitsberei
 
 ## 1. Definieren Sie den Fall und erfassen Sie den gesamten Sachverhalt
 
-1. Verbinden Sie das Erfassungskonto mit dem zugehörigen Arbeitsbereich. Halten Sie in externen Fallnotizen die Fallreferenz, die Konto-ID, den Arbeitsbereich, den Beginn der Beobachtung sowie den vertrauenswürdigen Fingerabdruck des Signaturschlüssels fest.
-2. Open **Sources → Beobachtungsumfang → Untersuchungsmodus**. Die Voreinstellung umfasst **das gesamte Konto**, Kanäle/Gruppen/private Chats/Bots, eigene Aktionen, Quellenprofile sowie die letzten 200 sichtbaren Nachrichten für neu entdeckte Quellen. Überprüfen Sie die Angaben, klicken Sie auf **„Umfang speichern**“ und schließen Sie die Bestätigung des Umfangs ab.
+1. Verbinden Sie das Erfassungskonto in einem eigenen Arbeitsbereich. Erfassen Sie im [Case Board](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-board/) oder in Ihrem Fallregister die Fallreferenz, die Konto-ID, den Arbeitsbereich und den Beginn der Beobachtung. Bewahren Sie den Fingerabdruck des vertrauenswürdigen Signaturschlüssels separat auf.
+2. Für ein spezielles Erfassungskonto öffnen Sie **„Quellen“ → „Beobachtungsumfang“ → „Ermittlungsmodus**“. Die Voreinstellung wählt **„Gesamtes Konto**“, Kanäle/Gruppen/private Chats/Bots, eigene Aktionen, Quellenprofile sowie die letzten 200 sichtbaren Nachrichten für neu entdeckte Quellen aus. Überprüfen Sie die Auswahl, klicken Sie auf **„Umfang speichern**“ und schließen Sie die Bestätigung des Umfangs ab. Hauptkonten verwenden ausgewählte Chats oder einen Ordner; die Erfassung des gesamten Kontos ist für Konten verfügbar, die zur Untersuchung markiert sind.
 3. **Laden Sie Chats** und vergleichen Sie die Quellen mit der Dialogliste des Kontos. Überprüfen Sie die Ausschlüsse. **Der Parameter „Chats, die aus der Liste des Kontos gelesen werden“** ist standardmäßig auf 1.000 eingestellt und erlaubt bis zu 20.000. Quellen, die über das Listenlimit hinausgehen, werden hinzugefügt, sobald sie aktiv werden. Zeichnen Sie auf, was tatsächlich erfasst wurde.
 4. Wählen Sie in **den Aufzeichnungseinstellungen „Alle sichtbaren Aktivitäten**“ aus und speichern Sie die Überwachungseinstellungen. Überprüfen Sie die Anhangstypen/-beschränkungen sowie den freien Speicherplatz.
 5. Beobachtung starten. Überprüfen Sie eine kontrollierte neue Nachricht, eine Bearbeitung und eine Löschung und speichern Sie anschließend die Testreferenzen sowie etwaige Fehler.
@@ -58,7 +58,7 @@ Führen Sie ein Quellenverzeichnis mit einer Zeile pro Chat:
 
 Verwenden Sie für jede Quelle die geeignete Erfassungsmethode:
 
-- **„Vollständigen Verlauf** in **Quellen laden**“ (aktuell `main`) lädt verfügbare frühere Nachrichten aus aktivierten Quellen in das Arbeitsbereichsprotokoll. Die Funktion unterstützt das Anhalten/Fortsetzen sowie einen signierten Fortschrittsbericht. Siehe [Verlaufserfassung](https://phishdestroy.github.io/TgWitness/de/docs/reference/history/).
+- **„Vollständigen Verlauf** in **Quellen laden“** lädt verfügbare frühere Nachrichten aus aktivierten Quellen in das Arbeitsbereichsprotokoll. Die Funktion unterstützt das Anhalten/Fortsetzen sowie einen signierten Fortschrittsbericht. Siehe [„Verlaufserfassung](https://phishdestroy.github.io/TgWitness/de/docs/reference/history/)“.
 - **Der Verlaufs-Snapshot** speichert die zuletzt sichtbaren Nachrichten im Beobachtungsprotokoll. Der standardmäßige Höchstwert beträgt 500; unter **„Parameter → Größter Verlaufs-Snapshot“** kann dieser Wert auf 10.000 erhöht werden. Dabei handelt es sich um aktuelle Verlaufsbeobachtungen, nicht um rekonstruierte Bearbeitungen.
 - **„Gesamten Chat exportieren“ → „Gesamten Chat exportieren**“ oder **„Chats“ → „Chat exportieren**“ ruft den derzeit sichtbaren Verlauf eines Chats in ein separates, signiertes `chat.json`-/ `chat.html`-Bundle ab. Wiederholen Sie diesen Vorgang für die Quellen des Falls und bewahren Sie jedes Ergebnis auf.
 - **Wenn ein neuer Chat oder Bot erscheint,** können dessen Profil und bis zu 1.000 der letzten Nachrichten gespeichert werden; im Untersuchungsmodus werden 200 ausgewählt. Bestehende Chats erhalten diese Aufzeichnung nicht rückwirkend, wenn der Modus aktiviert wird.
@@ -103,6 +103,8 @@ Im Beispiel:
 
 Vergleichen Sie die Hashes der Anhänge und die zugehörigen Nachrichtenreferenzen. Identische Dateien lassen keine Rückschlüsse auf einen Ersteller, Weiterleiter oder gemeinsamen Betreiber zu. Gleiche Namen und ähnliche Avatare allein reichen nicht aus, um zwei Telegram-IDs einer Person zuzuordnen.
 
+Bewahren Sie die Arbeitsnotizen des Teams auf [dem](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-board/) [Case Board](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-board/) auf: Setzen Sie Lesezeichen für die Datensätze, auf die Sie sich stützen, wie z. B. #146, #188 und #205, markieren Sie die genaue Zielzeichenfolge und speichern Sie einen Ausschnitt jeder aufgezeichneten Aktion zwischen zwei Datensätzen oder in einem Zeitbereich. Notizen und Statusangaben bewahren die Überprüfung durch das Team in einem eigenen, signierten Verlauf auf, der von den Beobachtungen der Quelle getrennt identifizierbar ist.
+
 ## 5. Erstellen Sie die chatübergreifende Zeitleiste
 
 Verwenden Sie die gespeicherten Versionen in **Chats** und deren Links **zum Protokoll-Eintrag Nr. …** . Kombinieren Sie im **Protokoll alle Quellen** mit **Bearbeitungen**, **Löschungen** und **der Berichterstattung**. Behalten Sie sowohl `source_at`, sofern vorhanden, als auch `observed_at` bei.
@@ -122,7 +124,7 @@ Zwischen diesen Beispielverweisen liegen weitere Aufzeichnungen vor. Sequenznumm
 
 Verwenden Sie für jedes einzelne Konto einen separaten Arbeitsbereich und wiederholen Sie dessen Bestandsaufnahme. Bewahren Sie bei jedem Vergleich die Konto-ID, die Rolle, den Fingerabdruck des Signaturschlüssels und die Quellenangaben auf. Nachrichtennummern sind keine globalen Identifikatoren, die über Chats und Konten hinweg gelten.
 
-Die arbeitsbereichsübergreifende Korrelation erfolgt in externen Fallnotizen oder Analysewerkzeugen. TgWitness verfügt derzeit über keine globale, arbeitsbereichsübergreifende Suche, keine zusammengeführte Zeitleiste, keinen Ermittlungsgraphen und kein kombiniertes Fallarchiv. Der Export mehrerer Konten eines Kanals/einer Supergruppe ist ein separater Vorgang und stellt keine Zusammenführung der Kontenprotokolle dar.
+„Case Board“ verwaltet quellverknüpfte Notizen und Sammlungen innerhalb jedes Arbeitsbereichs. Auf dem Gruppenbildschirm wird der Kontostatus gemeinsam überprüft, und es können separate Arbeitsbereichs-Exporte gebündelt werden. Korrelieren Sie diese Quellen in Ihren Fallnotizen oder Analyse-Tools; jedes Protokoll behält seine eigene Herkunft und seinen eigenen Signaturschlüssel bei. Eine globale Suche oder eine zusammengeführte, arbeitsbereichsübergreifende Zeitleiste wird nicht generiert. Der Export mehrerer Konten eines Kanals/einer Supergruppe erfasst den Verlauf dieses Chats unter Verwendung der berechtigten Konten.
 
 Bei umfangreicheren Projekten sollten Sie die Grenzen durch einen [unabhängigen Zeugen](https://phishdestroy.github.io/TgWitness/de/docs/reference/witness/) wahren. Verwenden Sie kontrollierte Zustellungsprüfungen, um den Erfassungsweg und die Sichtbarkeit jedes Kontos zu überprüfen.
 
@@ -134,6 +136,7 @@ Fassen Sie diese Informationen in einem von einem Analysten zusammengestellten F
 | --- | --- |
 | Fallnotizen und Quellenverzeichnis | Fragen, Erfassungsrichtlinien, Zugriffsrechte/Rollen, Ergebnisse, alternative Erklärungen und Lücken |
 | Zeitleiste | Angaben zu Zeitpunkten sowie Verweise auf Arbeitsbereich, Chat, Nachricht und Sequenz für jeden Eintrag |
+| Case Board Export und Ausschnitte, falls verwendet | Quellenverknüpfte Lesezeichen, Zitate, Teamnotizen, Sammlungen, Revisionsverlauf und ausgewählte Datensätze, die mit der ZIP-Datei der Beweismittel abgeglichen wurden |
 | Signierte Beweisdatei im ZIP-Format pro Arbeitsbereich | Vollständiges Protokoll, Manifest und enthaltene, gesicherte Medien; Filterfelder schränken den Protokollexport nicht ein |
 | Separat signierte Personenprofil-Dateien | Abgeleitete Referenzen wurden anhand der entsprechenden Beweismittel im Arbeitsbereich überprüft |
 | Signierte vollständige Chat-Exporte | Erfassung des aktuell sichtbaren Verlaufs, getrennt vom Beobachtungsprotokoll |
@@ -147,9 +150,10 @@ Aus einer vertrauenswürdigen Installation, mit Dateinamen und dem tatsächliche
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Die tatsächlichen Verifizierungsergebnisse und Originalartefakte werden beibehalten. Das oberste Fallverzeichnis, das Quellenregister und die Schlussfolgerungen der Analysten werden extern verwaltet; jedes TgWitness-Artefakt verfügt über eine eigene Signatur und ein eigenes Verifizierungsverfahren.
+Behalten Sie die tatsächlichen Verifizierungsergebnisse und Originalartefakte bei. Exportieren Sie Arbeitsbereichsnotizen aus dem Case Board zusammen mit dem zitierten Quellenmaterial. Stellen Sie arbeitsbereichsübergreifende Ergebnisse im obersten Fallverzeichnis zusammen; jedes TgWitness-Artefakt verfügt über eine eigene Signatur und ein eigenes Verifizierungsverfahren.
 
 ## Passen Sie die Untersuchung an
 

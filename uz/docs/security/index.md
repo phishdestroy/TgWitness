@@ -79,7 +79,7 @@ Ixtiyoriy manzillar har bir ish maydoni bo'yicha sozlanadi. Xabar matni va media
 - Uskunaning administratori hamma narsani o'qishi, jurnalni qayta yozishi va qayta imzolashi mumkin. Barmoq izi va tekshiruv nuqtalarini boshqa tizimda saqlang.
 - TgWitness xabar matni va media fayllarini shifrlamaydi. Diskni shifrlash va qat'iy ruxsatnomalarni qo'llang.
 - Localhostdan tashqaridagi oddiy HTTP tarmoqda tokenni ko'rsatadi. HTTPS yoki SSH tunneli ishlating.
-- Imzolar yozib olingan ma'lumot o'zgartirilmaganligini tasdiqlaydi, har bir Telegram hodisasi yozib olinganligini emas.
+- Imzolar va tekshiruv nuqtalari bilan saqlangan yozuvlarni tekshiring. Ishlatadigan hisoblar va manbalar bo'yicha to'plam qamrovini ko'rib chiqing va yetkazib berishni sinab ko'ring.
 
 Ruxsatlar, amal qilish muddati va sessiya cheklovlari bilan [ishga kirish huquqini ulashing](https://phishdestroy.github.io/TgWitness/uz/docs/access/). Guvoh tokeni alohida kirish vositasi bo‘lib qoladi.
 

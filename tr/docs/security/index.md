@@ -79,7 +79,7 @@ Varsayılan ayar: Bu makineden yalnızca Telegram bağlantısı dışarıya çı
 - Sistemin bir yöneticisi her şeyi okuyabilir ve günlüğü yeniden yazıp yeniden imzalayabilir. Parmak izini ve kontrol noktalarını başka bir sistemde saklayın.
 - Mesaj metinleri ve medya dosyaları TgWitness tarafından şifrelenmez. Disk şifreleme ve sıkı izin ayarları kullanın.
 - localhost dışındaki düz HTTP bağlantısı, ağ üzerinde token'ı gösterir. HTTPS veya bir SSH tüneli kullanın.
-- İmzalar, kaydedilenlerin değiştirilmediğini kanıtlar; her Telegram olayının kaydedildiğini değil.
+- Kaydedilen kayıtları imzalar ve kontrol noktalarıyla doğrulayın. Kullandığınız hesaplar ve kaynaklar için toplama kapsamını gözden geçirin ve teslimatını test edin.
 
 İzinler, geçerlilik süresi ve oturum sınırlamalarıyla [bir vakaya erişimi paylaşın](https://phishdestroy.github.io/TgWitness/tr/docs/access/). Tanık jetonu ayrı bir kimlik bilgisi olarak kalır.
 

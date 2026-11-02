@@ -6,6 +6,19 @@ Uma mensagem pode ser alterada. O registro do que o senhor observou deve permane
 
 Explore dois pequenos experimentos a seguir. Eles utilizam mensagens fictícias, permanecem no seu navegador e nunca se conectam ao Telegram.
 
+## De uma exportação de bate-papo a um registro verificável
+
+[As exportações do Telegram Desktop](https://telegram.org/blog/export-and-more) salvam o histórico de bate-papo e as mídias disponíveis como HTML ou JSON para uso offline. O TgWitness adiciona um registro contínuo das alterações recebidas, assinaturas nas observações e exportações, além de pontos de verificação que os destinatários podem comparar de forma independente.
+
+| Tarefa | Exportação do Telegram Desktop | TgWitness |
+| --- | --- | --- |
+| Ler conversas salvas | HTML ou JSON com mídia selecionada | Bate-papos salvos, diário pesquisável e relatórios offline |
+| Acompanhe as mudanças ao longo do tempo | O histórico disponível ao ser exportado | Versões capturadas anteriormente, edições posteriores e observações de exclusão são mantidas juntas |
+| Verifique os arquivos após a entrega | Os arquivos de exportação padrão em HTML/JSON não são assinados | Manifesto assinado, assinaturas por registro e relatórios HTML/PDF/JSON selados, verificados em relação a uma chave de coletor confiável |
+| Compare com um estado anterior mantido | Mantenha uma cópia de referência separada ou um hash | Pontos de verificação assinados, uma testemunha separada e carimbos de data/hora externos opcionais |
+
+A comparação de assinatura de arquivos baseia-se nos [geradores de exportação](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) do [Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) revisados em 2 de novembro de 2026. O TgWitness assina com a chave do coletor; as verificações abaixo mostram como um destinatário a utiliza.
+
 ## Uma mensagem, três observações
 
 Quando o Telegram entrega uma nova mensagem, uma edição ou um aviso de exclusão, o coletor acrescenta três observações distintas. A edição não substitui o registro original. Um aviso de exclusão não o apaga.
@@ -107,6 +120,6 @@ Verifique a assinatura do ponto de verificação sob a chave do coletor fixada e
 
 [01 / INTEGRIDADE**Este registro sofreu alguma alteração?** Verifique os hashes e as assinaturas em relação a uma chave confiável separada.](https://phishdestroy.github.io/TgWitness/pt/docs/exports/)[02 / CONTINUIDADE**O que foi mantido anteriormente?** Compare uma exportação assinada com os pontos de verificação mantidos por uma testemunha independente.](https://phishdestroy.github.io/TgWitness/pt/docs/witness/)[03 / ENTREGA**Esses eventos de teste chegaram?** Compare as ações controladas de envio, edição e exclusão com o registro de cada conta.](https://phishdestroy.github.io/TgWitness/pt/docs/cases/)
 
-Uma cadeia de hashes correspondente responde a uma questão de integridade. Ela não comprova a entrega completa do Telegram, a veracidade de uma mensagem ou um horário de observação considerado confiável de forma independente.
+Use assinaturas para verificar os registros retidos, pontos de verificação para comparar um limite anterior e testes de entrega controlada para avaliar a coleta. Cada um responde a uma pergunta específica. [Leia o escopo da verificação e as premissas de confiança.](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope)
 
 Acompanhe toda a [investigação da conta,](https://phishdestroy.github.io/TgWitness/pt/docs/cases/) desde a aquisição até o pacote do caso.

@@ -6,7 +6,7 @@ Se explican la cadena de hash, las firmas, los puntos de control y los testigos 
 
 TgWitness conserva lo que ha observado una cuenta recopiladora, vincula dichas observaciones en un registro firmado y permite que otra persona verifique una exportación comparándola con una clave de confianza y un punto de control conservado anteriormente.
 
-El [sitio web de documentación local](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) incluye ejemplos interactivos en `/docs/concepts/`, así como un explorador de decisiones de puntos de control en `/docs/witness/`. Todos los mensajes de ejemplo, recuentos y retrasos son ficticios. Los hash de la cadena de pruebas se calculan con SHA-256 en el navegador. No se envía nada a Telegram.
+El [sitio web de documentación local](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) incluye ejemplos interactivos en `/docs/concepts/`, un explorador de decisiones de puntos de control en `/docs/witness/` y guías paso a paso para [el «Case Board»](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-board/), [el diseño de informes](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-reports/) y [los extractos de traspaso](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#handover-extract). Todos los mensajes de ejemplo, recuentos y retrasos son ficticios. Los hash en el entorno de pruebas de la cadena se calculan con SHA-256 en el navegador. No se envía nada a Telegram.
 
 ## Un mensaje cambia; las observaciones se acumulan
 
@@ -92,7 +92,7 @@ Diagrama de flujo · Recopilador / sesión de cuenta / clave A → Punto final d
 
 El testigo registra retrocesos, un encabezado diferente con el mismo recuento, claves modificadas, respuestas no válidas y respuestas que faltan. Un recuento mayor por sí solo no garantiza que todos los registros anteriores permanezcan inalterados; compare la exportación con los puntos de control conservados. Un testigo en otro servidor evita verse afectado por las interrupciones del servidor del recopilador; un operador independiente aporta una mayor independencia.
 
-El «witness» certifica el estado del registro notificado por el recopilador. No observa de forma independiente todos los mensajes de Telegram. Véase [la configuración del «witness](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/)».
+El «witness» certifica el estado del diario notificado por el «collector». Utilice una prueba de entrega controlada para comprobar qué acciones de Telegram llegaron a una cuenta de recopilación. Consulte [la configuración del «witness](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/)».
 
 ## Prueba de entrega frente a acciones conocidas
 
@@ -106,14 +106,14 @@ Solo cuentan las acciones esperadas que coincidan; los recibos duplicados no aum
 
 A continuación se presenta [el proceso completo de investigación](https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/) tras un incidente que abarca un canal, un grupo, un bot y un chat privado:
 
-1. Active el modo de investigación de toda la cuenta y realice un inventario de todos los chats accesibles.
+1. En una cuenta de recopilación específica, active el modo de investigación de toda la cuenta e haga un inventario de los chats accesibles. Utilice los chats seleccionados o una carpeta para una cuenta principal.
 2. Obtenga instantáneas del registro, el historial completo de cada chat y los archivos adjuntos conservados.
 3. Conserve los cambios en tiempo real y cualquier interacción deliberada con los paneles junto con sus comprobantes.
 4. Realice un seguimiento de los identificadores numéricos de los remitentes, las relaciones de respuesta, los destinatarios recurrentes y los hashes de los archivos a través de los registros citados y los perfiles de las personas.
-5. Reconstruya una cronología entre chats con marcas de tiempo y lagunas explícitas.
+5. Añade notas vinculadas a las fuentes y colecciones en Case Board. Reconstruye una línea temporal entre chats con marcas de tiempo y lagunas explícitas.
 6. Compare los espacios de trabajo de otras cuentas manteniendo separados sus orígenes y claves.
 7. Recopile y verifique los registros firmados, los perfiles y las exportaciones del historial junto con las notas del caso.
 
-La guía «`/docs/cases/`» del sitio web incluye un mapa interactivo de casos y variantes para disputas entre bots, mensajes eliminados y participantes que cambian de nombre. Las notas de los casos y el análisis entre espacios de trabajo son externos; la aplicación no genera automáticamente un gráfico global de la investigación ni un archivo de casos fusionado.
+La guía `/docs/cases/` del sitio web incluye un mapa interactivo de casos y variantes para disputas entre bots, mensajes eliminados y participantes que cambian de nombre. Case Board mantiene las notas y las recopilaciones dentro de un espacio de trabajo. Las exportaciones en grupo recopilan paquetes de espacios de trabajo independientes; la correlación entre espacios de trabajo y la línea de tiempo combinada siguen siendo tareas del analista.
 
 [Validación completada y trabajo pendiente](https://phishdestroy.github.io/TgWitness/es/docs/reference/verification/) · [Exportar y verificar](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#investigation-handoff) · [Empiece con una cuenta](https://phishdestroy.github.io/TgWitness/es/docs/reference/quickstart/)

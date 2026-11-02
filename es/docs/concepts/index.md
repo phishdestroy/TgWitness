@@ -6,6 +6,19 @@ Un mensaje puede modificarse. El registro de lo que ha observado debe seguir sie
 
 Explore a continuación dos pequeños experimentos. Utilizan mensajes ficticios, se ejecutan directamente en su navegador y nunca se conectan a Telegram.
 
+## De una exportación de chat a un registro verificable
+
+[Las exportaciones de Telegram Desktop](https://telegram.org/blog/export-and-more) guardan el historial de chat y los archivos multimedia disponibles en formato HTML o JSON para su uso sin conexión. TgWitness añade un registro continuo de los cambios recibidos, firmas en las observaciones y exportaciones, y puntos de control que los destinatarios pueden comparar de forma independiente.
+
+| Tarea | Exportación desde Telegram Desktop | TgWitness |
+| --- | --- | --- |
+| Leer conversaciones guardadas | HTML o JSON con archivos multimedia seleccionados | Chats guardados, diario con función de búsqueda e informes sin conexión |
+| Seguir la evolución a lo largo del tiempo | El historial disponible al exportarlo | Las versiones capturadas anteriormente, las modificaciones posteriores y las observaciones de eliminación se conservan juntas. |
+| Revisar los archivos tras la entrega | Los archivos de exportación estándar en formato HTML/JSON no están firmados. | Manifiesto firmado, firmas por registro e informes sellados en formato HTML/PDF/JSON verificados con una clave de recopilador de confianza. |
+| Comparar con un estado anterior conservado | Conserva una copia de referencia separada o un hash | Puntos de control firmados, un testigo independiente y marcas de tiempo externas opcionales |
+
+La comparación de la firma de archivos se basa en los [generadores de exportación de Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) revisados el 2 de noviembre de 2026. TgWitness firma con la clave del recopilador; las comprobaciones que figuran a continuación muestran cómo la utiliza un destinatario.
+
 ## Un mensaje, tres observaciones
 
 Cuando Telegram envía un nuevo mensaje, una modificación o un aviso de eliminación, la herramienta de recopilación añade tres registros independientes. La modificación no sustituye al primer registro. Un aviso de eliminación no lo borra.
@@ -107,6 +120,6 @@ Verifique la firma del punto de control bajo la clave del recopilador fijada y, 
 
 [01 / INTEGRIDAD**¿Ha cambiado este registro?** Verifique los hash y las firmas con una clave de confianza independiente.](https://phishdestroy.github.io/TgWitness/es/docs/exports/)[02 / CONTINUIDAD**¿Qué se había conservado anteriormente?** Compare una exportación firmada con los puntos de control conservados por un testigo independiente.](https://phishdestroy.github.io/TgWitness/es/docs/witness/)[03 / ENTREGA**¿Han llegado estos eventos de prueba?** Compare las acciones controladas de envío, edición y eliminación con el registro de cada cuenta.](https://phishdestroy.github.io/TgWitness/es/docs/cases/)
 
-Una cadena de hash coincidente responde a una pregunta de integridad. No confirma la entrega completa del mensaje en Telegram, la veracidad de un mensaje ni una hora de observación fiable de forma independiente.
+Utilice las firmas para comprobar los registros conservados, los puntos de control para comparar un límite anterior y las pruebas de entrega controlada para evaluar la recopilación. Cada uno de ellos responde a una pregunta concreta. [Lea el alcance de la verificación y los supuestos de confianza.](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope)
 
 Siga la [investigación completa de la cuenta,](https://phishdestroy.github.io/TgWitness/es/docs/cases/) desde la adquisición hasta el expediente del caso.

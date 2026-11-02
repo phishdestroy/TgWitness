@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/exports/
 
-Teilen Sie eine signierte Aufzeichnung, die von anderen überprüft werden kann.
+Stellen Sie dem Empfänger Dateien zur Verfügung, die er mit dem Erfassungsarbeitsbereich und dessen gespeichertem Verlauf abgleichen kann.
 
 Bitte verweisen Sie daraufSignierte ZIP-Datei exportierenDer Empfänger überprüft
 
@@ -16,9 +16,9 @@ Speichern Sie den Fingerabdruck des öffentlichen Schlüssels des Arbeitsbereich
 
 ## Laden Sie die signierte ZIP-Datei herunter
 
-Öffnen Sie **„Exports“** und erstellen Sie eine signierte ZIP-Datei mit den Beweismitteln. Diese enthält das Arbeitsbereichsprotokoll sowie ein signiertes Dateimanifest. Die Filter im Bedienfeld schränken diesen Export des vollständigen Protokolls nicht ein: Überprüfen Sie das Material, bevor Sie es weitergeben.
+Öffnen Sie **„Exports“** und erstellen Sie eine signierte ZIP-Datei mit Beweismaterial. Diese enthält das vollständige Arbeitsprotokoll sowie ein signiertes Dateimanifest. Verwenden Sie [„Report Studio“](https://phishdestroy.github.io/TgWitness/de/docs/reports/), um einen übersichtlichen Bericht zu erstellen, oder einen [Übergabeauszug](https://phishdestroy.github.io/TgWitness/de/docs/handover/), um nur ausgewählte, minimierte Daten zu übermitteln.
 
-Einzelne HTML- und CSV-Downloads sind für das Lesen und die Analyse nützlich. Bewahren Sie die signierte ZIP-Datei als überprüfbares Original auf; die separate HTML- oder CSV-Datei verfügt über keine eigenständige Signatur.
+HTML-, PDF- und JSON-Berichte sind mit eigenen Signatursiegeln versehen und können separat überprüft werden. CSV-Dateien dienen als praktische Analysekopie; verwenden Sie die exakte CSV-Datei aus der verifizierten ZIP-Datei, um deren Integrität zu überprüfen. Bewahren Sie die signierte ZIP-Datei auf, wenn der Empfänger auch die Quelldatensätze und Anhänge benötigt.
 
 ## Überprüfen Sie dies anhand einer vertrauenswürdigen Kopie von TgWitness
 
@@ -30,13 +30,14 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 
 
 Wenn beide Referenzen erfolgreich sind, werden im Ergebnis „`key_pinned: true`“ und „`checkpoint_checked: true`“ angezeigt. Bewahren Sie das Verifizierungsergebnis zusammen mit dem Originalarchiv auf. Der beibehaltene Prüfpunkt muss an der Grenze des Exports oder davor liegen.
 
-## Das Ergebnis verstehen
+## Verwenden Sie das Verifizierungsergebnis
 
-- **Integrität:** Der aufgezeichnete Verlauf und die exportierten Dateien stimmen mit ihren Signaturen überein.
-- **Frühere Anmerkung: Über** einen externen Prüfpunkt können Sie den Export mit einem zuvor gespeicherten Protokollpräfix vergleichen.
-- **Durchführung:** Ein kontrollierter Testablauf („Senden → Bearbeiten → Löschen“) gleicht bestimmte Ereignisse mit den erfassten Aufzeichnungen ab.
+- **Überprüfen Sie die gelieferten Dateien:** Das Manifest verknüpft deren Hashes, und Datensatzsignaturen verknüpfen das gespeicherte Protokoll. Eine geänderte Datei oder eine unterbrochene Datensatzkette wird erkannt.
+- **Überprüfen Sie die Identität des Arbeitsbereichs:** Der unabhängig gespeicherte Fingerabdruck identifiziert den von Ihnen erwarteten Signaturschlüssel.
+- **Vergleichen Sie eine frühere Grenze:** Ein beibehaltener Checkpoint gleicht den Export mit einem vor der Übergabe gespeicherten Journalpräfix ab.
+- **Überprüfen Sie den Erfassungsumfang:** Lücken, Erfassungsergebnisse und ein kontrollierter Test mit den Schritten „Senden → Bearbeiten → Löschen“ beschreiben die Ereignisse, die diese Konfiguration erfasst hat.
 
-Eine gültige Signatur beweist nicht, dass jedes Telegram-Ereignis eingegangen ist, dass die Quelle die Wahrheit gesagt hat oder dass die Uhr des Erfassers korrekt war.
+Bewahren Sie diese Ergebnisse zusammen mit der Kopie des Empfängers auf. Prüfen Sie, [was die Verifizierung](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope) hinsichtlich des Umfangs der Überprüfungen und der separaten Bewertung von Quellenangaben und Erfassungsgrad [ergibt](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope).
 
 ## Richten Sie die externe S3-Kopie ein
 
@@ -59,30 +60,24 @@ Das vollständige Bedienfeld mit erweiterten Optionen ist aufgeklappt. Es werden
 | Kopierintervall | Von 1 bis 1.440 Minuten; Standardwert 5 Minuten. Für geplante Sicherungen muss die Anwendung ausgeführt werden. |
 | Aufbewahrungsfrist für „Object Lock“ | Aufbewahrungsdauer und -modus für einen Bucket, der „Object Lock“ unterstützt. Bei „Zero Days“ bleibt die Standardaufbewahrungsdauer des Buckets in Kraft. |
 
-1. Geben Sie den Zielort und die Anmeldedaten ein. Lassen Sie das Kontrollkästchen **„Externe Kopie aufbewahren“** während der Vorbereitung deaktiviert und wählen Sie anschließend **„Externe Kopie speichern“** aus.
+1. Erstellen Sie den Bucket bei Ihrem Anbieter und geben Sie anschließend dessen Zielort und Anmeldedaten ein. Lassen Sie die****Option**„Externe Kopie behalten“** während der Vorbereitung deaktiviert und wählen Sie anschließend **„Externe Kopie speichern“** aus.
 2. Wählen Sie **„Verbindung testen“** aus. Dadurch wird ein verschlüsseltes Testobjekt hochgeladen und die Antwort des Speichers überprüft.
 3. Wählen Sie **„Verschlüsselungsschlüssel herunterladen“** aus. Bewahren Sie diese Datei getrennt vom Datenerfassungs-Tool auf; sie wird für die Wiederherstellung benötigt.
 4. Aktivieren Sie das Kontrollkästchen **„Externe Kopie erstellen“** und speichern Sie erneut. Wählen Sie **„Jetzt kopieren“** für einen manuellen Durchlauf oder lassen Sie den Zeitplan weiterlaufen.
 
-**Funktionsumfang:** Es wird **kein** Speicher-Bucket erstellt. Geplante Uploads werden beendet, sobald die Anwendung beendet wird.
-
 ## Aufbewahrungsstatus und Kopierfortschritt prüfen
 
-Wählen Sie unter **„Weitere Optionen**“ die Aufbewahrungsdauer sowie „`GOVERNANCE`“ oder „`COMPLIANCE`“ aus, sofern Ihr Speicher „Object Lock“ unterstützt. TgWitness liest den Aufbewahrungsmodus und die Frist eines hochgeladenen Objekts zurück. Der Status meldet eine Bestätigung, eine fehlende Aufbewahrung oder einen Prüfungsfehler; ein erfolgreicher Upload allein ist keine Bestätigung der Aufbewahrung.
+Wählen Sie unter **„Weitere Optionen**“ die Aufbewahrungsdauer sowie „`GOVERNANCE`“ oder „`COMPLIANCE`“ aus, wenn Ihr Bucket „Object Lock“ unterstützt. TgWitness liest den Aufbewahrungsmodus und die Frist eines hochgeladenen Objekts aus. Überprüfen Sie das separate Aufbewahrungsergebnis: bestätigt, fehlende Aufbewahrung oder Überprüfung fehlgeschlagen.
 
 Das Panel meldet den letzten Durchlauf, die Anzahl der Objekte, die übertragenen Bytes, die Grenze des kopierten Protokolls sowie etwaige Fehler. Fehlende oder geänderte lokale Medien werden gemeldet und im nächsten Durchlauf erneut versucht. Dateien, Checkpoints und in der Warteschlange befindliche Exporte, die nach diesen Medien folgen, können weiterhin kopiert werden.
 
-Uploads erfolgen über die „Direct“-Route, SOCKS5 oder HTTP des Arbeitsbereichs. Das Kopieren in S3 ist über MTProxy nicht verfügbar; die Anwendung weicht nicht auf eine direkte Verbindung aus.
-
-Dies **bedeutet nicht,** dass ein Anbieter die „Object Lock“-Funktion allein aufgrund der Annahme des Uploads durchsetzen muss.
+Uploads erfolgen über die Route „Direct“, „SOCKS5“ oder „HTTP“ des Arbeitsbereichs. Wählen Sie eine dieser Routen für das Kopieren in S3; eine Route, die ausschließlich MTProxy verwendet, lässt die Kopie mit einem Fehler hängend.
 
 ## Bewahren Sie den Wiederherstellungsschlüssel separat auf
 
-Die heruntergeladene JSON-Datei enthält den Entschlüsselungsschlüssel, die Zieleinstellungen, das Präfix des Arbeitsbereichsobjekts und den Fingerabdruck des Signaturschlüssels. Sie enthält keine S3-Zugangsdaten: Für die Wiederherstellung sind separate Zugangsdaten mit Lesezugriff auf den Bucket erforderlich.
+Die heruntergeladene JSON-Datei enthält den Entschlüsselungsschlüssel, die Zieleinstellungen, das Präfix für Arbeitsbereichsobjekte und den Fingerabdruck des Signaturschlüssels. Für die Wiederherstellung sind sowohl diese Schlüsseldatei als auch separate Speicherzugangsdaten mit Lesezugriff auf den Bucket erforderlich. Nehmen Sie diese in Ihren Wiederherstellungsplan auf.
 
 Wenn Sie den Endpunkt, den Bucket oder das Ordnerpräfix ändern, laden Sie die Schlüsseldatei erneut herunter, damit die Zieleinstellungen übereinstimmen. Die Anwendung startet eine neue Kopie des lokal gespeicherten Protokolls, der Dateien und der Checkpoints am neuen Speicherort. Abgeschlossene Chat-Exporte, die bereits aus der lokalen Upload-Warteschlange entfernt wurden, verbleiben an ihrem bisherigen Speicherort.
-
-**Funktionsweise:** Die Kopie wird ohne den exportierten Schlüssel nicht entschlüsselt. Zugangsdaten für den Speicher können diesen Schlüssel nicht ersetzen.
 
 ## Wiederherstellung und Überprüfung auf einem anderen Rechner
 
@@ -108,4 +103,4 @@ Downloads und entschlüsselte Objekte verbleiben in einem privaten Zwischenspeic
 
 Bei erfolgreicher Wiederherstellung werden die Werte „`events.jsonl`“, „`media/`“, „`checkpoints/`“ und „`exports/`“ für das in der Kopie verfügbare Material ausgegeben. Bewahren Sie das JSON-Ergebnis des Befehls zusammen mit dem wiederhergestellten Material auf.
 
-**Nicht möglich:** Es rekonstruiert keine Beobachtungen, die das Protokoll nie erreicht haben, und ersetzt keine unabhängig gespeicherten Kontrollpunkte oder Zeugenaussagen.
+Vergleichen Sie das wiederhergestellte Material mit Ihren unabhängig gespeicherten Kontrollpunkten oder Zeugenprotokollen und überprüfen Sie anschließend den Erfassungsumfang der Aufzeichnungen für den von Ihnen benötigten Zeitraum.

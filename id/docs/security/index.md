@@ -79,7 +79,7 @@ Tujuan penyimpanan opsional dikonfigurasi per ruang kerja. Teks pesan dan media 
 - Seorang administrator sistem dapat membaca seluruh isi jurnal, serta mengedit dan menandatanganinya kembali. Simpan sidik jari dan titik pemeriksaan pada sistem lain.
 - Teks pesan dan media tidak dienkripsi oleh TgWitness. Gunakan enkripsi disk dan izin akses yang ketat.
 - Penggunaan HTTP biasa di luar localhost akan menampilkan token di jaringan. Gunakan HTTPS atau terowongan SSH.
-- Tanda tangan tersebut membuktikan bahwa apa yang direkam tidak diubah, bukan berarti setiap peristiwa di Telegram telah direkam.
+- Periksa catatan yang disimpan dengan tanda tangan dan titik pemeriksaan. Tinjau cakupan pengumpulan dan uji pengiriman untuk akun dan sumber yang Anda gunakan.
 
 [Bagikan akses ke suatu kasus](https://phishdestroy.github.io/TgWitness/id/docs/access/) dengan izin, batas waktu, dan batasan sesi. Token saksi tetap merupakan kredensial terpisah.
 

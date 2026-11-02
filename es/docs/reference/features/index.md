@@ -2,9 +2,9 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/features/
 
-Lo que TgWitness ofrece en la actualidad, las limitaciones de la plataforma Telegram y lo que queda por desarrollar en el futuro.
+El modelo de recopilación actual, los flujos de trabajo con varias cuentas, las exportaciones y los límites operativos de TgWitness.
 
-Referencia de diseño: 26 de octubre de 2026. El principal caso de uso son los grupos privados de Telegram y los canales a los que tienen acceso las cuentas conectadas. Este documento distingue entre el comportamiento implementado, los límites de la plataforma y el trabajo futuro. Un elemento de la arquitectura objetivo no implica que la función ya exista.
+TgWitness conserva las conversaciones de Telegram a las que tienen acceso las cuentas conectadas, registra los cambios observados y prepara exportaciones verificables. Esta referencia describe el modelo de recopilación, los flujos de trabajo actuales y sus límites.
 
 ## Aplicación independiente
 
@@ -12,17 +12,19 @@ TgWitness cuenta con su propia instalación, su propio directorio de datos y su 
 
 El operador vincula sus cuentas, selecciona las fuentes visibles para cada una de ellas y obtiene un registro de observaciones guardado. El panel muestra el contenido, los cambios guardados, la procedencia de las observaciones y las lagunas conocidas. Otro investigador puede verificar el material exportado.
 
-Hay cuatro estados distintos que son relevantes: la autorización de la cuenta, el acceso a una fuente, un recopilador operativo y el grado en que se establece la integridad de la entrega. Ninguno de los tres primeros demuestra automáticamente el cuarto. Un grupo inactivo no es necesariamente un recopilador defectuoso.
+El panel distingue entre la autorización de la cuenta, el acceso a una fuente, la actividad del recopilador y la cobertura registrada. Revisa esos estados en conjunto al evaluar un intervalo con pocos mensajes o un problema de conexión.
 
 ## Investigaciones compartidas
 
-Un administrador puede emitir [tokens de acceso](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/) limitados a espacios de trabajo y chats individuales, con siete permisos, restricciones de IP, caducidad, límites de inicio de sesión y control de sesión. Un revisor con acceso de solo lectura puede examinar un caso sin necesidad de recibir la autorización de Telegram ni la clave del panel principal. El acceso limitado a los chats permanece independiente de la configuración general de la cuenta y de las exportaciones completas del registro.
+Un administrador puede emitir [tokens de acceso](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/) limitados a espacios de trabajo y chats individuales, con permisos por acción, restricciones de IP, caducidad, límites de inicio de sesión y control de sesión. Un revisor con acceso de solo lectura puede examinar un caso sin recibir la autorización de Telegram ni la clave del panel principal. El acceso limitado al chat permanece independiente de la configuración general de la cuenta y de las exportaciones completas del diario.
 
 MTProxy automático mantiene rutas de Telegram operativas a partir de cuatro fuentes públicas o de un catálogo de operadores. [Los modos de IP](https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/#ip-modes) determinan si, en caso de fallo, se debe esperar a otro proxy o si se puede utilizar una ruta directa expresamente permitida. Las solicitudes HTTP externas cuentan con una ruta independiente y un interruptor de desactivación.
 
 ## Herramientas de archivo
 
 [La adquisición de historiales](https://phishdestroy.github.io/TgWitness/es/docs/reference/history/), [la búsqueda y el análisis de archivos](https://phishdestroy.github.io/TgWitness/es/docs/reference/analysis/),[el MCP de solo lectura](https://phishdestroy.github.io/TgWitness/es/docs/reference/mcp/), [el OCR y la transcripción locales](https://phishdestroy.github.io/TgWitness/es/docs/reference/media-analysis/), así como[los webhooks salientes](https://phishdestroy.github.io/TgWitness/es/docs/reference/webhooks/) se incluyen en 0.7.1. Los informes analíticos y el texto reconocido permanecen separados de los eventos capturados.
+
+[Case Board](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-board/) añade marcadores vinculados a fuentes, citas, notas y colecciones dentro de un espacio de trabajo. El [generador de informes](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-reports/) selecciona el material, las secciones y uno de los ocho diseños disponibles para las exportaciones compatibles en formato HTML/PDF.
 
 ## Extras opcionales
 
@@ -53,9 +55,9 @@ El panel admite un número ilimitado de **espacios de trabajo**, cada uno con su
 
 Cambiar el espacio de trabajo visible no detiene a otro recopilador. Se rechaza la autorización de cuentas duplicadas entre espacios de trabajo. Un registro ya vinculado a una cuenta de Telegram no puede reasignarse a otra; sí se permite volver a conectar la misma cuenta. De este modo se preserva la identidad de la cuenta y el ámbito de los ID de mensajes pertinentes.
 
-No existe un número fijo ni se garantiza un rendimiento medido. Los espacios de trabajo comparten un proceso de Python y un bucle de eventos. La implementación de trabajadores de cuentas independientes sigue siendo una tarea pendiente. Para aislar los procesos actuales, utilice instalaciones, puertos y directorios de datos independientes.
+La aplicación no establece un número fijo de espacios de trabajo. Cada espacio de trabajo ejecuta sus propias tareas de recopilación para la supervisión de conexiones, descargas de archivos multimedia, revisiones y captación de nuevos chats dentro de un proceso compartido de Python y un bucle de eventos. El rendimiento depende de la carga de trabajo. Para aislar los procesos, utilice instalaciones, puertos y directorios de datos independientes.
 
-Asigne a cada cuenta las fuentes a las que pueda acceder. Diferentes cuentas pueden observar el mismo grupo, pero sus observaciones permanecen separadas y conservan su origen. Dos cuentas en un mismo equipo controlado por un operador no constituyen dos testigos independientes. Las exportaciones se realizan por espacio de trabajo; no se ha implementado la posibilidad de generar un paquete de caso fusionado ni una cronología global de Telegram.
+Asigna a cada cuenta las fuentes a las que puede acceder. Diferentes cuentas pueden observar el mismo grupo, pero sus observaciones permanecen separadas y conservan su origen. Dos cuentas en un mismo equipo controlado por un operador no constituyen dos testigos independientes. **La exportación de grupo** agrupa los archivos ZIP de los espacios de trabajo firmados por separado con una lista de archivos firmada que contiene sus ID de espacio de trabajo, hash y huellas de las claves de firma. Cada diario conserva su propio límite. Crea una línea temporal combinada entre espacios de trabajo en las notas del caso o en herramientas de análisis, conservando esas referencias a las fuentes.
 
 ## Captura y atribución
 
@@ -63,13 +65,13 @@ La sección «Fuentes» ofrece opciones por cuenta para mensajes nuevos, modific
 
 | Material | Capturado ahora | Límites |
 | --- | --- | --- |
-| Mensaje | Texto, identificadores de interlocutor/mensaje, metadatos del remitente, respuestas y sobre de actualización original | El mensaje no cuenta con una firma de Telegram verificable públicamente. |
+| Mensaje | Texto, identificadores de interlocutor/mensaje, metadatos del remitente, respuestas y sobre de actualización original | Se conserva como una observación visible en la cuenta y firmada por el recopilador. |
 | Editar | Nueva versión observada y cualquier versión guardada anteriormente | Las modificaciones realizadas durante el tiempo de inactividad pueden perderse; el remitente no es necesariamente quien realiza la edición. |
 | Eliminación | Notificación y contenido capturado previamente, si lo hubiera | Por lo general, no se indica quién ha eliminado el mensaje ni la hora exacta de la acción. |
-| Eliminación sin alcance | Notificación original a nivel de cuenta sin especular sobre el interlocutor | La correlación estricta con los identificadores (ID) correspondientes a cuentas guardados previamente es una tarea pendiente. |
+| Aviso de eliminación a nivel de cuenta | Aviso original; los registros resueltos incluyen el chat guardado y el método de correlación. | Se requiere exactamente una coincidencia de un chat privado o un grupo ordinario guardado previamente dentro del ámbito; los demás identificadores permanecen en «`deletion.unscoped`». Los identificadores de canales y supergrupos quedan excluidos de esta correlación. |
 | Reacción | Contadores de mensajes enviados e identidades recientes visibles | Para obtener una lista completa de los reactores disponibles es necesario realizar consultas por separado; los canales pueden ocultar identidades. |
 | Afiliación | Mensajes de servicio y actualizaciones enviadas a los participantes | La visibilidad depende del rol y del tipo de chat; la ausencia de eventos no implica que no se hayan producido. |
-| Acciones de administración | Solo se incluyen las actualizaciones relevantes que se hayan publicado. | No se ha implementado la consulta independiente del registro de administración. |
+| Acciones de administración | Actualizaciones relevantes entregadas y una instantánea del registro de administración en las exportaciones de chats de canales y supergrupos. | La exportación lee el registro cuando está disponible para la cuenta de administrador que realiza la exportación; la consulta continua del registro de administración queda fuera de este proceso. |
 | Archivo adjunto | Descriptor de la versión original, bytes descargados/SHA-256 y resultados de los intentos | Un archivo eliminado puede ser irrecuperable; la última versión no se sustituye. |
 | Historia | Captura de pantalla explícita de los mensajes visibles en ese momento | No reconstruye todas las modificaciones ni el contenido eliminado. |
 | Proceso de recopilación | Inicio/parada, señal de actividad, errores, configuración, alcance y recepción de programas | Autodeclaración, no certificación independiente del proceso |
@@ -85,7 +87,9 @@ Telegram distingue entre la entrega pasiva y el sondeo activo breve. Su document
 | Modo | Objetivo | Estado |
 | --- | --- | --- |
 | Observación estándar | Registre las actualizaciones recibidas de fuentes seleccionadas | Implementado |
-| Observación prioritaria | Comprobaciones adicionales de diferencias para un conjunto de fuentes delimitado | No se ha implementado como modo de usuario |
+| Revisiones prioritarias | Las fuentes marcadas con una estrella utilizan su propio intervalo configurable y tienen prioridad en cada pasada de revisión delimitada. | Implementado con consultas de historial y mensajes |
+
+La estrella de prioridad controla estas revisiones. El sondeo corto adicional «`updates.getChannelDifference` » no se muestra como un modo de usuario independiente.
 
 Las consultas arbitrarias de alta frecuencia, que ignoren FloodWait o asuman una capacidad lineal procedente de cuentas adicionales, no constituyen un modelo de dimensionamiento válido. Los límites predeterminados son los primeros 1.000 diálogos de la lista, hasta 500 mensajes por instantánea del historial, entre 1 y 2.000 MiB por archivo recopilado según el tipo, y 4 GiB de contenido ZIP firmado sin comprimir; cada uno de estos valores se modifica por espacio de trabajo en **«Parámetros**». Las exportaciones no tienen un límite fijo de recuento de eventos. El modo alternativo del navegador está limitado a 128 MiB de forma predeterminada; la CLI de transmisión tiene un límite de transferencia configurable, de 5 GiB de forma predeterminada.
 
@@ -114,9 +118,9 @@ El recibo de proceso firmado contiene un identificador de ejecución aleatorio; 
 | Análisis del archivo del programa | Informe del propio recopilador sobre los archivos analizados |
 | Respuesta válida e independiente de la TSA | Existencia de bytes concretos en el momento TSA bajo supuestos de confianza explícitos |
 
-Se han implementado la preparación de solicitudes según el RFC 3161 y la verificación de respuestas mediante OpenSSL. El envío automático no está implementado. Una solicitud o una firma local que incluya la hora del equipo no constituye una marca de tiempo independiente. Véase [TIMESTAMP.md](https://phishdestroy.github.io/TgWitness/es/docs/reference/timestamp/).
+Se han implementado la preparación de solicitudes según el RFC 3161 y la verificación de respuestas mediante OpenSSL. El modo «Evidence» también envía los hash de los puntos de control a los servicios de marca de tiempo configurados. Conserva y verifica la respuesta de la autoridad para establecer un punto de referencia temporal independiente. Consulta [TIMESTAMP.md](https://phishdestroy.github.io/TgWitness/es/docs/reference/timestamp/).
 
-Un operador que controle el colector y la clave de firma puede falsificar nuevas observaciones firmadas. Las firmas no establecen el origen en Telegram, la veracidad ni la admisibilidad jurídica automática. Para garantizar una custodia más sólida, se requiere un almacenamiento independiente con puntos de control y registro temporal, controles de acceso a las claves, registros de transferencia y verificación mediante software de confianza.
+Conserve los puntos de control de forma independiente, controle el acceso a las claves de firma, mantenga registros de transferencia y verifique las exportaciones con software de confianza. El [alcance de la verificación](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope) explica cómo se complementan entre sí esas comprobaciones y qué supuestos de confianza se aplican.
 
 ## Exportación, implementación y traspaso
 
@@ -140,4 +144,4 @@ Antes de una versión estable, especifique:
 6. Instalación limpia en la matriz de sistemas operativos y contenedores prevista, y restauración de copias de seguridad verificada.
 7. Revisión independiente de la seguridad, las firmas y las afirmaciones relativas a la atribución y las pruebas.
 
-La consulta del registro de administración, las listas de reactores adicionales, la consulta prioritaria, los trabajadores independientes y el cifrado en toda la aplicación siguen siendo tareas pendientes. El acceso a paneles con alcance limitado se describe en [«Acceso y permisos](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/)». La versión 0.6 admite el TData de una sola cuenta delimitada y la importación de archivos de cuenta descritos en [ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/). Revise los términos de la API de Telegram antes de la publicación. Las referencias de investigación y los resultados sobre la plataforma se encuentran en [RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md).
+El acceso limitado a los paneles se describe en [«Acceso y permisos](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/)». La versión 0.6 admite la importación de TData de una sola cuenta delimitada y la importación de archivos de cuenta descritas en [ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/). Revisa los términos de la API de Telegram antes de la publicación. Las referencias de investigación y los resultados sobre la plataforma se encuentran en [RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md).

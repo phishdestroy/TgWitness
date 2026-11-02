@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/
 
-[โอเพนซอร์ส / v0.7.1](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/)
+[โอเพนซอร์ส / v0.8.0](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/)
 
 บันทึกข้อความ Telegram, รักษาการเปลี่ยนแปลงของข้อความ และส่งออกบันทึกที่มีลายเซ็น
 
@@ -60,6 +60,8 @@ TgWitness / การส่งออกที่มีลายเซ็นพ�
 
 04 / การส่งออกที่มีลายเซ็น นำบันทึกนี้ไปด้วย พร้อมด้วยรายการเนื้อหาและผู้ตรวจสอบอิสระ
 
+ติดตามบันทึกที่เก็บไว้ผ่าน [Case Board](https://phishdestroy.github.io/TgWitness/th/docs/case-board/) [การออกแบบรายงาน](https://phishdestroy.github.io/TgWitness/th/docs/reports/) และ[สำเนาสำหรับแบ่งปัน](https://phishdestroy.github.io/TgWitness/th/docs/handover/) [ตรวจสอบกลุ่มบัญชี](https://phishdestroy.github.io/TgWitness/th/docs/groups/)ร่วมกัน
+
 01 / CAPTURE
 
 ### คุณเป็นผู้กำหนดขอบเขต
@@ -84,7 +86,8 @@ TgWitness / การส่งออกที่มีลายเซ็นพ�
 
 [ส่งออกและตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/exports/)
 
-## เปลี่ยนเพียงหนึ่งไบต์ ระบบจะแจ้งให้คุณทราบ
+## เปลี่ยนเพียงหนึ่งไบต์ ระบบ
+ตรวจสอบจะแจ้งให้ทราบ
 
 ทุกเหตุการณ์จะมีลิงก์ไปยังแฮชของเหตุการณ์ก่อนหน้า และมาพร้อมลายเซ็น Ed25519
 
@@ -94,7 +97,7 @@ TgWitness / การส่งออกที่มีลายเซ็นพ�
 
 ![จุดตรวจสอบที่เก็บไว้แยกต่างหากช่วยให้ผู้รับสามารถเปรียบเทียบบันทึกที่ส่งออกกับข้อมูลที่บันทึกไว้ก่อนหน้านี้](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-ดูว่ากลไกการตรวจสอบแต่ละอย่างกำหนดอะไร และข้อจำกัดของมันอยู่ที่ใด
+ปฏิบัติตามขั้นตอนการตรวจสอบตั้งแต่ค่าแฮชของไฟล์ไปจนถึงจุดตรวจสอบที่เก็บไว้แยกต่างหาก
 
 [สำรวจแปดระดับหลักฐาน](https://phishdestroy.github.io/TgWitness/th/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipแพ็กเกจที่ลงนาม
 
   การตรวจสอบอย่างอิสระไฟล์แมนิเฟสต์ที่ลงนาม + เครื่องตรวจสอบแบบสแตนด์อโลน
 
-ลายเซ็นช่วยตรวจจับการแก้ไขข้อมูลเมื่อเทียบกับกุญแจที่เชื่อถือได้ แต่ไม่พิสูจน์แหล่งที่มาของ Telegram หรือรับประกันการบันทึกข้อมูลอย่างครบถ้วน เนื้อหาของบันทึกและสื่อต้องได้รับการจัดเก็บในระบบที่เข้ารหัส ซึ่งคุณเป็นผู้จัดเตรียมเอง
+ผู้รับจะตรวจสอบบันทึกและไฟล์ที่เก็บไว้โดยใช้กุญแจผู้เก็บข้อมูลที่เชื่อถือได้ จุดตรวจสอบที่เก็บไว้แยกต่างหากยังตรวจสอบความต่อเนื่องกับบันทึกก่อนหน้าด้วย [สำรวจขั้นตอนการตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/concepts/#layers)
 
 ## สำเนา S3 การตรวจสอบจากภายนอก
 
@@ -154,13 +157,13 @@ Object Lock
 
 [ตั้งค่า S3 และกู้คืนสำเนา](https://phishdestroy.github.io/TgWitness/th/docs/exports/#s3)[อ่านรายละเอียดการตรวจสอบได้ที่](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**ไม่ทำ** ไม่สามารถกู้คืนข้อมูลได้หากไม่มีกุญแจถอดรหัสที่ส่งออก หรือแทนที่พยานอิสระ
+**กุญแจกู้คืน**: เก็บกุญแจถอดรหัสที่ส่งออกไว้แยกต่างหาก เพื่อที่คุณจะสามารถกู้คืนสำเนาที่เข้ารหัสได้
 
 ### การแจ้งเตือน · Apprise
 
 รับการแจ้งเตือนปัญหา การเปลี่ยนแปลงในแชท และสรุปประจำวันผ่าน Apprise: ผ่านแอปส่งข้อความ อีเมล หรือ webhook JSON ของคุณเอง
 
-ไม่ส่งข้อความข้อความเว้นแต่คุณจะเปิดใช้งานการคัดลอกข้อความ
+**เลือกเนื้อหาที่จะแชร์** ส่วนข้อความที่ถูกคัดลอกจะถูกปิดไว้ตามค่าเริ่มต้น; เปิดใช้งานสำหรับปลายทางที่คุณเชื่อถือ
 
  [กำหนดจุดหมายการแจ้งเตือน](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ Object Lock
 
 แฮชจุดตรวจสอบเวลาตาม RFC 3161 และ OpenTimestamps.
 
-**ไม่ทำ** ไม่ถือว่าใบรับการนัดหมายในปฏิทินที่ยังไม่ได้รับการยืนยันเป็นเวลาประทับของ Bitcoin ที่ได้รับการยืนยันแล้ว
+**ติดตามผลลัพธ์** ตรวจสอบการตอบกลับจากหน่วยงานที่มีอำนาจ หรืออัปเกรดใบเสร็จ OpenTimestamps เป็นหลักฐาน Bitcoin ที่ได้รับการยืนยัน
 
  [ตรวจสอบหลักฐานเวลา](https://phishdestroy.github.io/TgWitness/th/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ Object Lock
 
 เซิร์ฟเวอร์แยกต่างหากจะเก็บรักษาข้อมูลการสังเกตที่ลงนามแล้ว และสามารถเผยแพร่จุดตรวจสอบ`TGW1` ได้
 
-**ไม่ทำ** ไม่ทำให้พื้นที่ทำงานสองแห่งบนโฮสต์ผู้รวบรวมข้อมูลเดียวกันกลายเป็นพยานอิสระ
+**แยกส่วนอ้างอิง** "Run the witness on another host" และรักษาคีย์การลงนามและบันทึกประจำวัน (journal) ของมันไว้
 
  [ตั้งค่า witness](https://phishdestroy.github.io/TgWitness/th/docs/witness/)
 
@@ -184,7 +187,7 @@ Object Lock
 
 ต่อจากจุดที่หยุดไว้หลังการรีสตาร์ท ระบบตรวจสอบซ้ำและ`coverage.json` แสดงข้อความที่กู้คืนได้และช่องว่าง
 
-**ไม่ทำ** ไม่สร้างใหม่ทุกการแก้ไขที่พลาดไปหรือข้อความที่หายไป
+**ตรวจสอบช่วงเวลา** ดูข้อความปัจจุบันที่กู้คืนได้พร้อมกับ**ช่วงเวลา**ที่บันทึกการขัดจังหวะ; เวอร์ชันก่อนหน้ายังคงใช้งานได้เมื่อถูกบันทึกไว้
 
  [ตรวจสอบความต่อเนื่องและช่องว่าง](https://phishdestroy.github.io/TgWitness/th/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ cd TgWitness
 
 [ดูเวอร์ชันที่ปล่อยออกมา](https://github.com/phishdestroy/TgWitness/releases)
 
-ไม่มี Python บน Windows? [ดาวน์โหลดแพ็กเกจแบบพกพา (portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip)) แตกไฟล์ออก แล้วคลิกสองครั้งที่ `TgWitness.cmd`
+ไม่มี Python บน Windows? [ดาวน์โหลดแพ็กเกจแบบพกพา (portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip)) แตกไฟล์ออก แล้วคลิกสองครั้งที่ `TgWitness.cmd`
 
 ขั้นตอน 02
 
@@ -260,7 +263,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 สำหรับการติดตั้งจากแหล่งต้นแบบ โทเค็นอยู่ที่ `data/live/panel-token.txt` การลงชื่อเข้าใช้ Telegram สามารถใช้การตั้งค่า API ที่มาพร้อมระบบ หรือคู่กุญแจของคุณเองจาก [my.telegram.org](https://my.telegram.org) [คู่มือการตั้งค่าครบถ้วน ↗](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [มีอะไรใหม่ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/) · [คุณสมบัติและข้อจำกัดที่ทราบ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
+**TgWitness 0.8.0** [มีอะไรใหม่ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/) · [คุณสมบัติและข้อจำกัดที่ทราบ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
 
 ## คำแนะนำที่ชัดเจน ขั้นตอนต่อไปที่มีประโยชน์
 

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/
 
-[Nguồn mở / v0.7.1](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/)
+[Nguồn mở / v0.8.0](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/)
 
 Ghi lại các tin nhắn Telegram, bảo toàn các thay đổi của chúng và xuất bản ghi có chữ ký.
 
@@ -60,6 +60,8 @@ TgWitness / Các tệp xuất có chữ kýKHÔNG GIAN LÀM VIỆC ĐỊA PHƯƠ
 
 04 / Xuất dữ liệu có chữ ký: Mang theo sổ nhật ký của quý vị, kèm theo bản kê khai và một bên xác minh độc lập.
 
+Theo dõi một bản ghi đã lưu qua [Case Board](https://phishdestroy.github.io/TgWitness/vi/docs/case-board/), [thiết kế báo cáo](https://phishdestroy.github.io/TgWitness/vi/docs/reports/) và bản [sao chia sẻ](https://phishdestroy.github.io/TgWitness/vi/docs/handover/). [Xem xét các nhóm tài khoản](https://phishdestroy.github.io/TgWitness/vi/docs/groups/) cùng nhau.
+
 01 / GHI LẠI
 
 ### Quý vị tự quyết định phạm vi áp dụng.
@@ -84,7 +86,8 @@ Tệp ZIP được ký số, các tệp được bảo toàn và báo cáo ngo�
 
 [Xuất và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/exports/)
 
-## Chỉ cần thay đổi một byte. Chuỗi khối sẽ thông báo cho quý vị.
+## Chỉ cần thay đổi một byte.
+Hệ thống xác minh sẽ thông báo cho bạn.
 
 Mỗi sự kiện đều có liên kết đến mã băm trước đó và đi kèm với chữ ký Ed25519.
 
@@ -94,7 +97,7 @@ Mỗi sự kiện đều có liên kết đến mã băm trước đó và đi k
 
 ![Một điểm kiểm tra được lưu giữ riêng biệt cho phép người nhận so sánh nhật ký đã xuất với một bản ghi trước đó.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-Hãy tìm hiểu xem từng cơ chế xác minh thiết lập những gì, cũng như những hạn chế của chúng nằm ở đâu.
+Tuân thủ các bước kiểm tra từ băm tệp đến điểm kiểm tra được lưu giữ riêng biệt.
 
 [Khám phá tám cấp độ bằng chứng](https://phishdestroy.github.io/TgWitness/vi/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipGÓI CÓ CHỨNG THỰC
 
   Xác minh độc lậpBản kê khai có chữ ký + công cụ xác minh độc lập
 
-Các chữ ký dùng để phát hiện hành vi giả mạo dựa trên một khóa tin cậy. Chúng không chứng minh nguồn gốc từ Telegram cũng như không đảm bảo việc ghi lại đầy đủ. Nội dung nhật ký và các tệp đa phương tiện cần được lưu trữ dưới dạng mã hóa do quý vị cung cấp.
+Người nhận sẽ đối chiếu các bản ghi và tệp đã lưu với khóa thu thập đáng tin cậy. Một điểm kiểm tra được lưu giữ riêng biệt cũng kiểm tra tính liên tục với nhật ký trước đó. [Tìm hiểu các bước xác minh.](https://phishdestroy.github.io/TgWitness/vi/docs/concepts/#layers)
 
 ## Bản sao trên S3. Các kiểm tra bên ngoài.
 
@@ -154,13 +157,13 @@ Tạp chí và phương tiện truyền thông`AES-256-GCM`Bộ lưu trữ tươ
 
 [Cấu hình S3 và khôi phục bản sao](https://phishdestroy.github.io/TgWitness/vi/docs/exports/#s3)[Xem chi tiết xác minh tại](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**Những điều không thực hiện** Công cụ này không thể khôi phục dữ liệu nếu thiếu khóa giải mã đã xuất ra, cũng như không thể thay thế vai trò của một nhân chứng độc lập.
+**Khóa khôi phục:** Lưu trữ khóa giải mã đã xuất riêng biệt để bạn có thể khôi phục bản sao đã được mã hóa.
 
 ### Thông báo · Apprise
 
 Cảnh báo sự cố, thay đổi trong cuộc trò chuyện và bản tóm tắt hàng ngày qua Apprise: các ứng dụng nhắn tin, email hoặc webhook JSON của riêng quý vị.
 
-**Không thực hiện** Nó sẽ không gửi nội dung tin nhắn trừ khi quý vị bật tính năng trích dẫn.
+**Chọn nội dung cần chia sẻ:** Trích đoạn tin nhắn bị tắt theo mặc định; hãy bật tính năng này cho các địa chỉ nhận tin mà bạn tin cậy.
 
  [Cấu hình điểm đến thông báo](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ Cảnh báo sự cố, thay đổi trong cuộc trò chuyện và bản tóm t�
 
 Tạo băm điểm kiểm tra dấu thời gian bằng RFC 3161 và OpenTimestamps.
 
-**Những điều không thực hiện** Công cụ này không coi biên nhận lịch đang chờ xử lý là dấu thời gian Bitcoin đã được xác nhận.
+**Theo dõi kết quả:** Kiểm tra phản hồi từ cơ quan chức năng hoặc nâng cấp biên nhận OpenTimestamps lên bằng chứng Bitcoin đã được xác nhận.
 
  [Kiểm tra bằng chứng dấu thời gian](https://phishdestroy.github.io/TgWitness/vi/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ Tạo băm điểm kiểm tra dấu thời gian bằng RFC 3161 và OpenTimestam
 
 Một máy chủ riêng biệt sẽ lưu trữ các quan sát đã được ký và có thể công bố `TGW1` các điểm kiểm tra.
 
-**Những điều không thực hiện** Việc này không biến hai không gian làm việc trên cùng một máy chủ thu thập dữ liệu thành các nhân chứng độc lập.
+**Tách riêng phần tham chiếu** “Chạy TgWitness trên một máy chủ khác và giữ nguyên khóa ký và nhật ký riêng của nó”.
 
  [Thiết lập một Witness](https://phishdestroy.github.io/TgWitness/vi/docs/witness/)
 
@@ -184,7 +187,7 @@ Một máy chủ riêng biệt sẽ lưu trữ các quan sát đã được ký 
 
 Tiếp tục sau khi khởi động lại. Kiểm tra lại và `coverage.json` hiển thị các tin nhắn đã khôi phục cùng các khoảng trống.
 
-**Những điều không thực hiện** Công cụ này không tái tạo lại mọi thao tác chỉnh sửa bị bỏ sót hoặc tin nhắn đã biến mất.
+**Xem lại khoảng thời gian**: Xem các tin nhắn hiện tại đã được khôi phục cùng với các sự gián đoạn đã được ghi lại; các phiên bản trước đó vẫn có sẵn khi được ghi lại.
 
  [Kiểm tra tính liên tục và các khoảng trống](https://phishdestroy.github.io/TgWitness/vi/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ Việc khởi chạy ứng dụng yêu cầu Python 3.11 trở lên. Trình kh�
 
 [Xem các bản phát hành](https://github.com/phishdestroy/TgWitness/releases)
 
-Không có Python trên Windows? Vui lòng [tải xuống gói phần mềm di động](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), giải nén và nhấp đúp vào tệp `TgWitness.cmd`.
+Không có Python trên Windows? Vui lòng [tải xuống gói phần mềm di động](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), giải nén và nhấp đúp vào tệp `TgWitness.cmd`.
 
 BƯỚC 02
 
@@ -260,7 +263,7 @@ Vui lòng truy cập [127.0.0.1:8787](http://127.0.0.1:8787) sau khi khởi ch�
 
 Đối với cài đặt từ nguồn, mã thông báo nằm trong `data/live/panel-token.txt`. Việc đăng nhập Telegram có thể sử dụng cài đặt API tích hợp sẵn hoặc cặp khóa riêng của bạn từ [my.telegram.org](https://my.telegram.org). [Hướng dẫn cài đặt đầy đủ ↗](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [Có gì mới →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/) · [Các tính năng và giới hạn đã biết →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/)
+**TgWitness 0.8.0** [Có gì mới →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/) · [Các tính năng và giới hạn đã biết →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/)
 
 ## Hướng dẫn rõ ràng. Bước tiếp theo hữu ích.
 

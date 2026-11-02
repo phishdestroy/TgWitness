@@ -127,7 +127,7 @@ Bu, başarılı bir [sürüm yayın iş akışı](https://phishdestroy.github.io
 `deploy/env.example`'yi `.env`'ye kopyalayın. `TGWITNESS_IMAGE`'yi, **küçük harfli** depo yolunu kullanarak yayınlanan sürüme ayarlayın, örneğin:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ Güncellemeden sonra panel erişimini, hesap kimliğini, gözlem durumunu ve kap
 
 Bu proje, Actions özelliği etkinleştirilmiş bir GitHub deposuna yüklendikten sonra [sürüm yayınlama iş akışı](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) kullanıma hazır hale gelir. Bu iş akışı, ön sürüm dahil olmak üzere bir GitHub Sürümü yayınlandığında çalışır. Taslaklar ve etiket yüklemeleri tek başına paketlerin yayınlanmasına yol açmaz.
 
-1. Paket sürümünü ve değişiklik günlüğünü belirleyin, ardından `v` etiketiyle ve `pyproject.toml`'nin tam sürümünü (örneğin `v0.7.1`) içeren bir sürüm yayınlayın.
+1. Paket sürümünü ve değişiklik günlüğünü belirleyin, ardından `v` etiketiyle ve `pyproject.toml`'nin tam sürümünü (örneğin `v0.8.0`) içeren bir sürüm yayınlayın.
 2. İş akışı, etiketi doğrular ve paylaşılan Windows/Linux/macOS Python, general/account-import/QR tarayıcı, kaynak paket ve Docker kontrollerini çalıştırır. Ayrıca, Python 3.12 kullanılarak üç işletim sisteminin tümünde yeni yerel kurulum da gerçekleştirilir.
 3. Bu kontroller başarıyla tamamlandıktan sonra, QEMU altında bir ARM64 görüntüsüne hızlı test uygular, AMD64/ARM64 görüntülerini `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` adresine yayınlar ve kaynak ZIP dosyasını ile Python wheel dosyasını SHA-256 yan dosyalarıyla birlikte ekler. Windows taşınabilir ZIP dosyası, kontrol iş akışı tarafından test edilen artefaktın aynısıdır; sürüm iş akışı bu artefaktı ve sağlama toplamını indirip yayınlar.
 4. Son işlem, yayınlanmış üç paketi de yeniden indirir ve bunların sağlama toplamlarını doğrular. Ardından `SHA256SUMS.txt` ve `RELEASE-MANIFEST.json` adreslerini yayınlayarak sürümü, kaynak revizyonunu ve varlık boyutlarını kaydeder. Yüklemeler, mevcut sürüm varlıklarının üzerine yazmayı reddeder.

@@ -8,7 +8,7 @@ Acompanhe um caso em canais, grupos, conversas privadas e bots, desde a aquisiç
 
 ## Caso prático: uma mudança de destino ao longo de quatro conversas
 
-Um anúncio indica um bot. Um grupo de operações discute um novo destino de pagamento, o teclado do bot o exibe e uma mensagem privada de acompanhamento o repete. O anúncio é então editado e uma mensagem do grupo desaparece.
+Um anúncio indica um bot. Um grupo de operações discute um novo destino de pagamento, e o teclado do bot o exibe. O anúncio é editado, uma mensagem privada de acompanhamento repete o destino, e uma mensagem de grupo desaparece.
 
 As perguntas são: o que foi observado antes e depois da alteração, quais contas do Telegram publicaram cada item, onde o destino apareceu, quais bytes do anexo foram preservados e quais intervalos permanecem desconhecidos?
 
@@ -34,8 +34,8 @@ Diagrama de fluxo · Canais → Diário do espaço de trabalho; Grupos → Diár
 
 ## 1. Defina o caso e reúna todo o relato
 
-1. Conecte a conta de coleta em seu próprio espaço de trabalho. Em notas externas do caso, registre a referência do caso, o ID da conta, o espaço de trabalho, o início da observação e a impressão digital confiável da chave de assinatura.
-2. **Fontes** abertas **→ Escopo de observação → Modo de investigação**. A predefinição seleciona **“Conta inteira”**, canais/grupos/conversas privadas/bots, ações próprias, perfis de fontes e as últimas 200 mensagens visíveis para fontes recém-descobertas. Analise-o, pressione **“Salvar escopo**” e conclua a confirmação do escopo.
+1. Conecte a conta de coleta em seu próprio espaço de trabalho. No [Case Board](https://phishdestroy.github.io/TgWitness/pt/docs/reference/case-board/) ou em seu registro de casos, registre a referência do caso, o ID da conta, o espaço de trabalho e o início da observação. Mantenha a impressão digital da chave de assinatura confiável de forma independente.
+2. Para uma conta dedicada à coleta, abra **Fontes → Escopo de observação → Modo de investigação**. A predefinição seleciona **“Conta inteira”**, canais/grupos/conversas privadas/bots, ações próprias, perfis de fonte e as últimas 200 mensagens visíveis para fontes recém-descobertas. Revise-a, pressione **“Salvar escopo**” e conclua a confirmação do escopo. As contas principais utilizam chats selecionados ou uma pasta; a coleta de toda a conta está disponível para contas marcadas para investigação.
 3. **Carregue as conversas** e compare as fontes com a lista de diálogos da conta. Verifique as exclusões. **Parâmetros →** O número padrão de **bate-papos lidos da lista da conta** é 1.000 e permite até 20.000. As fontes que excederem o limite da lista são adicionadas quando se tornam ativas. Registre o que foi efetivamente enumerado.
 4. Nas **configurações de gravação**, selecione **“Todas as atividades visíveis”** e salve as configurações de monitoramento. Verifique os tipos e limites de anexos, bem como o espaço livre em disco.
 5. Inicie a observação. Valide uma nova mensagem controlada, uma edição e uma exclusão e, em seguida, registre as referências do teste e quaisquer falhas.
@@ -58,7 +58,7 @@ Mantenha um registro de fontes com uma linha por conversa:
 
 Utilize o método de aquisição adequado para cada fonte:
 
-- **A função “Carregar histórico completo** em **Fontes”** (`main` atual) carrega as mensagens anteriores disponíveis das fontes habilitadas no diário da área de trabalho. Ela oferece suporte à pausa/retomada e a um relatório de progresso assinado. Consulte [aquisição de histórico](https://phishdestroy.github.io/TgWitness/pt/docs/reference/history/).
+- **A opção “Carregar histórico completo** nas **fontes”** carrega as mensagens anteriores disponíveis das fontes habilitadas no diário da área de trabalho. Ela oferece suporte à pausa/retomada e a um relatório de progresso assinado. Consulte [aquisição de histórico](https://phishdestroy.github.io/TgWitness/pt/docs/reference/history/).
 - **O instantâneo do histórico** salva as mensagens visíveis mais recentes no diário de observação. Seu limite máximo padrão é 500; **em Parâmetros → Maior instantâneo do histórico,** é possível aumentar esse número para 10.000. Trata-se de observações do histórico atual, e não de edições reconstruídas.
 - **Exportação completa do chat → Exportar chat completo**, ou **Chats → Exportar chat**, extrai o histórico atualmente visível de um chat para um pacote separado assinado `chat.json` / `chat.html`. Repita o procedimento para as fontes do caso e mantenha cada resultado.
 - **Quando um novo chat ou bot aparece,** é possível salvar seu perfil e até 1.000 mensagens recentes; o modo de investigação seleciona 200. Os chats existentes não recebem essa captura retroativamente quando o modo é ativado.
@@ -103,6 +103,8 @@ No exemplo prático:
 
 Compare os hashes dos anexos e as referências das mensagens a eles associadas. Arquivos idênticos não indicam um criador, remetente ou operador comum. Nomes iguais e avatares semelhantes, por si só, não permitem associar dois IDs do Telegram a uma única pessoa.
 
+Mantenha as anotações de trabalho da equipe no [Case Board](https://phishdestroy.github.io/TgWitness/pt/docs/reference/case-board/): marque os registros nos quais você se baseia, como #146, #188 e #205, destaque a sequência de caracteres de destino exata e salve um trecho de cada ação registrada entre dois registros ou em um intervalo de tempo. As notas e os status mantêm a revisão da equipe em seu próprio histórico assinado, separadamente identificável das observações de origem.
+
 ## 5. Criar a linha do tempo entre conversas
 
 Utilize as versões salvas nos **Chats** e seus links **de registro no Diário #…** No **Diário**, combine **todas as fontes** com **as edições**, **exclusões** e **cobertura**. Mantenha tanto o `source_at`, quando fornecido, quanto o `observed_at`.
@@ -122,7 +124,7 @@ Outros registros ocorrem entre essas referências de exemplo. Os números de seq
 
 Utilize um espaço de trabalho separado para cada conta distinta e repita seu inventário. Mantenha o ID da conta, a função, a impressão digital da chave de assinatura e as referências de origem em cada comparação. Os números das mensagens não são identificadores globais entre bate-papos/contas.
 
-A correlação entre espaços de trabalho é realizada em notas de caso externas ou em ferramentas de análise. Atualmente, o TgWitness não dispõe de pesquisa global entre espaços de trabalho, linha do tempo unificada, gráfico de investigação ou arquivo de casos combinado. A exportação para várias contas de **um** canal/supergrupo é uma operação distinta, não uma fusão dos registros das contas.
+O Case Board mantém notas e coleções vinculadas às fontes dentro de cada espaço de trabalho. A tela de grupo analisa o status das contas em conjunto e pode agrupar exportações de espaços de trabalho separados. Correlacione essas fontes em suas notas de caso ou ferramentas de análise; cada diário mantém sua própria origem e chave de assinatura. Não é gerada uma busca global nem uma linha do tempo combinada entre espaços de trabalho . A exportação para várias contas de um canal/supergrupo obtém o histórico desse chat usando as contas elegíveis.
 
 Para trabalhos mais extensos, mantenha os limites com uma [testemunha independente](https://phishdestroy.github.io/TgWitness/pt/docs/reference/witness/). Utilize verificações de entrega controladas para validar o caminho de captura e a visibilidade de cada conta.
 
@@ -134,6 +136,7 @@ Mantenha esses elementos reunidos em um diretório de casos organizado por um an
 | --- | --- |
 | Notas de caso e registro de fontes | Questões, política de coleta, acesso/função, conclusões, explicações alternativas e lacunas |
 | Linha do tempo | Referências tanto às datas quanto ao espaço de trabalho/bate-papo/mensagem/sequência para cada entrada |
+| Case Board exportação e trechos, se utilizados | Marcadores vinculados à fonte, citações, notas da equipe, coleções, histórico de revisões e registros selecionados verificados em relação ao arquivo ZIP de provas |
 | Arquivo ZIP de evidências assinadas por espaço de trabalho | Registro completo, manifesto e mídia preservada incluída; os filtros do painel não restringem a exportação do registro |
 | Arquivos de perfis de pessoas assinados separadamente | Referências derivadas verificadas em relação às evidências correspondentes do espaço de trabalho |
 | Exportações completas e assinadas de conversas | Aquisição do histórico visível atual, separada do registro de observação |
@@ -147,9 +150,10 @@ A partir de uma instalação confiável, com nomes de arquivos e a impressão di
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Conserve os resultados reais da verificação e os artefatos originais. O diretório de casos de nível superior, o registro de fontes e as conclusões dos analistas são mantidos externamente; cada artefato do TgWitness possui sua própria assinatura e procedimento de verificação.
+Mantenha os resultados reais da verificação e os artefatos originais. Exporte as notas da área de trabalho do Case Board juntamente com o material de fonte citado. Reúna as descobertas entre áreas de trabalho no diretório de nível superior do caso; cada artefato do TgWitness possui sua própria assinatura e procedimento de verificação.
 
 ## Adapte a investigação
 

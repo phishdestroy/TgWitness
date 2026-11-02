@@ -6,7 +6,7 @@ Spiegazione di catena di hash, firme, punti di controllo e testimoni con le form
 
 TgWitness conserva ciò che un account di raccolta ha rilevato, collega tali osservazioni in un registro firmato e consente a un’altra persona di verificare un’esportazione confrontandola con una chiave affidabile e un punto di controllo precedentemente conservato.
 
-Il [sito web di documentazione locale](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) aggiunge esempi interattivi all’indirizzo `/docs/concepts/` e un esploratore delle decisioni dei checkpoint all’indirizzo `/docs/witness/`. Tutti i messaggi di esempio, i conteggi e i ritardi sono fittizi. Gli hash nella sandbox della catena vengono calcolati con SHA-256 nel browser. Nulla viene inviato a Telegram.
+Il [sito web della documentazione locale](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) aggiunge esempi interattivi alla pagina `/docs/concepts/`, un esploratore delle decisioni sui checkpoint alla pagina `/docs/witness/` e guide dettagliate per [Case Board](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-board/), [la progettazione dei report](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-reports/) e [gli estratti relativi al passaggio di consegne](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#handover-extract). Tutti i messaggi di esempio, i conteggi e i ritardi sono fittizi. Gli hash nella sandbox della catena vengono calcolati con SHA-256 nel browser. Nulla viene inviato a Telegram.
 
 ## Un messaggio cambia; le osservazioni si accumulano
 
@@ -92,7 +92,7 @@ Diagramma di flusso · Collector / sessione dell’account / chiave A → Endpoi
 
 Il witness registra i rollback, un conteggio diverso a parità di numero, chiavi modificate, risposte non valide e risposte mancanti. Un conteggio più elevato di per sé non garantisce che ogni registrazione precedente rimanga invariata; si confronti l’esportazione con i checkpoint conservati. Un witness su un altro host evita di subire le interruzioni di servizio dell’host del collettore; un operatore separato garantisce ulteriore indipendenza.
 
-Il «witness» attesta lo stato del registro segnalato dal «collector». Esso non osserva in modo indipendente tutti i messaggi di Telegram. Si veda [la configurazione del «witness](https://phishdestroy.github.io/TgWitness/it/docs/reference/witness/)».
+Il “witness” attesta lo stato del registro segnalato dal “collector”. Utilizzare un test di consegna controllata per verificare quali azioni di Telegram abbiano raggiunto un account di raccolta. Vedere [la configurazione del “witness](https://phishdestroy.github.io/TgWitness/it/docs/reference/witness/)”.
 
 ## Verifica del funzionamento rispetto ad azioni note
 
@@ -106,14 +106,14 @@ Conta solo l’azione prevista; le ricevute duplicate non aumentano il numerator
 
 [La guida completa all’indagine](https://phishdestroy.github.io/TgWitness/it/docs/reference/investigation/) segue lo svolgimento di un incidente attraverso un canale, un gruppo, un bot e una chat privata:
 
-1. Attivare la modalità di indagine sull’intero account e catalogare tutte le chat accessibili.
+1. Su un account dedicato alla raccolta, attivare la modalità Investigazione per l’intero account e effettuare l’inventario delle chat accessibili. Utilizzare le chat selezionate o una cartella per l’account principale.
 2. Acquisisca istantanee del registro, la cronologia completa per ogni chat e gli allegati conservati.
 3. Conservare le modifiche in tempo reale e qualsiasi interazione intenzionale con i pannelli, corredata delle relative ricevute.
 4. Tracciate gli ID numerici dei mittenti, le relazioni di risposta, le destinazioni ricorrenti e gli hash dei file attraverso i record citati e i profili delle persone.
-5. Ricostruite una cronologia delle conversazioni incrociate con indicazione sia dei timestamp che delle lacune esplicite.
+5. Aggiungere note e raccolte collegate alle fonti in Case Board. Ricostruire una cronologia incrociata delle chat con sia i timestamp che le lacune esplicite.
 6. Confrontare gli spazi di lavoro di altri account mantenendo separate le rispettive origini e chiavi.
 7. Compilare e verificare i registri firmati, i profili e le esportazioni della cronologia insieme alle note relative al caso.
 
-La guida «`/docs/cases/`» del sito web include una mappa interattiva dei casi e varianti per controversie relative ai bot, messaggi rimossi e partecipanti che cambiano nome. Le note sui casi e l’analisi incrociata tra spazi di lavoro sono esterne; l’applicazione non genera automaticamente un grafico investigativo globale né un archivio dei casi unificato.
+La guida `/docs/cases/` del sito web include una mappa interattiva dei casi e varianti per controversie relative ai bot, messaggi rimossi e partecipanti che cambiano nome. Case Board conserva note e raccolte all’interno di uno spazio di lavoro. Le esportazioni di gruppo raccolgono pacchetti separati di spazi di lavoro; la correlazione tra spazi di lavoro e la linea temporale combinata rimangono di competenza degli analisti.
 
 [Convalida completata e lavoro residuo](https://phishdestroy.github.io/TgWitness/it/docs/reference/verification/) · [Esportare e verificare](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#investigation-handoff) · [Inizi con un solo account](https://phishdestroy.github.io/TgWitness/it/docs/reference/quickstart/)

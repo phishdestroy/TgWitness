@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 העתיקו את `deploy/env.example` ל-`.env`. הגדירו את `TGWITNESS_IMAGE` לגרסה שפורסמה, תוך שימוש בנתיב המאגר **באותיות קטנות**, לדוגמה:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 
 [תהליך שחרור](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml)הגרסאות מוכן לשימוש לאחר שהפרויקט יועלה למאגר GitHub עם Actions מופעל. הוא פועל כאשר **מתפרסמת** גרסה ב-GitHub, כולל גרסת טרום-שחרור. טיוטות ודחיפות תגיות לבדן אינן מפרסמות חבילות.
 
-1. הגדר את גרסת החבילה ואת יומן השינויים, ולאחר מכן פרסם גרסה המתויגת ב-`v` בתוספת הגרסה המדויקת של `pyproject.toml`, כגון `v0.7.1`.
+1. הגדר את גרסת החבילה ואת יומן השינויים, ולאחר מכן פרסם גרסה המתויגת ב-`v` בתוספת הגרסה המדויקת של `pyproject.toml`, כגון `v0.8.0`.
 2. תהליך העבודה מאמת את התג ומריץ את בדיקות Python המשותפות ל-Windows/Linux/macOS, בדיקות דפדפן כלליות/ייבוא חשבונות/QR, חבילת המקור ו-Docker. כמו כן, מתבצעת התקנה מקורית חדשה בכל שלושת מערכות ההפעלה באמצעות Python 3.12.
 3. לאחר שעברו בדיקות אלה, מתבצע מבחן עישון לתמונת ARM64 תחת QEMU, מתפרסמות תמונות AMD64/ARM64 ב- `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, ומצורפים קובץ ה-ZIP המקורי ו-Python wheel עם קבצי ה-SHA-256 הנלווים. קובץ ה-ZIP הנייד של Windows הוא אותו ארטפקט שנבדק על ידי תהליך הבדיקות; תהליך השחרור מוריד ומפרסם ארטפקט זה ואת בדיקת הסיכום שלו.
 4. משימה סופית מורידה שוב את שלושת החבילות שפורסמו ומאמתת את סכומי הבקרה שלהן. לאחר מכן היא מפרסמת את `SHA256SUMS.txt` ו- `RELEASE-MANIFEST.json`, תוך תיעוד הגרסה, גרסת המקור וגודל הנכסים. ההעלאות מסרבות להחליף נכסי גרסה קיימים.

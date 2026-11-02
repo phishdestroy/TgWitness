@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/evidence
 
 Contents of the signed ZIP, record kinds, process receipts, people profiles, off-site copies and offline verification.
 
-An observation is not a conclusion. A sender ID is not a real-world identity. The account-visible service update is the source; Telegram does not cryptographically sign these saved records for a third-party investigator.
+TgWitness preserves account-visible Telegram observations in a signed journal. Recipients can verify the saved records, attachments and reports against a trusted collector key, then compare the journal with an independently retained checkpoint. This page describes the formats, the checks and the material to keep for handover.
 
 ## What is signed
 
@@ -15,14 +15,15 @@ An observation is not a conclusion. A sender ID is not a real-world identity. Th
 | Preserved attachments | SHA-256 and byte count in a signed `media.saved` event; file hash in the signed ZIP manifest | The original bytes inside the verified ZIP |
 | Checkpoint | Ed25519 signature over journal length, head hash, public key, and creation time | An independent copy retained before a disputed change |
 | Run receipt | Separately signed collector measurements; also included in a signed `process.started` event | The receipt and associated journal; measurements are self-reported |
-| Standalone CSV or HTML | No standalone cryptographic signature; event hashes alone are insufficient | Use the exact copy inside the verified ZIP for integrity checking |
+| Readable reports: `report.html` and its parts, `report.json`, `report.pdf`, `chat.pdf` | An Ed25519 seal per file over its content; the PDF also carries a standard PDF signature (see [Readable reports](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#readable-reports)) | The file as received and the trusted key fingerprint; the ZIP it describes |
+| Standalone CSV | No standalone cryptographic signature; event hashes alone are insufficient | Use the exact copy inside the verified ZIP for integrity checking |
 | Screenshots, printouts, or PDF produced by a browser | No TgWitness signature on the derivative | Keep the original verified package and document how the derivative was made |
 
-The collector verifies journal signatures before generating every export format. That source check does not create a signature on a separately downloaded CSV or HTML file. A valid JSONL event signature likewise does not provide the attachment bytes or independently establish that the entire observed journal was supplied.
+The collector verifies journal signatures before generating every export format. Readable HTML and PDF reports carry their own seals; standalone CSV is checked as part of a signed ZIP. Keep the ZIP to retain the attachment bytes and manifest, and a separate checkpoint to check the journal against an earlier boundary.
 
 ## Investigation handoff
 
-1. Record the case reference, operator, numeric Telegram account ID, selected sources, collection policy, and collection period in your case notes. TgWitness preserves observations; case assignment and custody records are managed outside the application. Qualify the intended collection setup with the [live acceptance procedure](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md).
+1. Record the case reference, operator, numeric Telegram account ID, selected sources, collection policy, and collection period in your case notes. TgWitness preserves observations and supports source-linked notes and collections in [Case Board](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/). Keep transfer and custody records with your case materials. Check the intended collection setup with the [live acceptance procedure](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md).
 2. Retain the workspace's public-key fingerprint independently before relying on its exports. Save signed checkpoints outside the collector during collection. Record interruptions and the limits of the account's visibility.
 3. Export a **signed ZIP** and retain the signed run receipt. Use a checkpoint at or before the exported journal boundary. A later checkpoint can correctly reject an earlier export as too short. Exports include the full workspace journal, regardless of panel filters; review the material before sharing it.
 4. Have the recipient verify the ZIP with a trusted copy of the verifier and the independently supplied fingerprint/checkpoint. From a trusted checkout with its Python environment active:
@@ -43,11 +44,62 @@ The collector verifies journal signatures before generating every export format.
    1. Record the archive's SHA-256, export boundary, transfer date, sender, and recipient in your custody record. Keep the original package intact and work from copies. Share evidence files rather than the application's private data directory, which also contains account sessions and signing secrets. For transfer, an export can be put into a password-protected AES-256 ZIP. The password only protects confidentiality and is not stored; the recipient extracts the archive and verifies the signed export inside, which is unchanged.
    2. If independent time anchoring is required, follow the [RFC 3161 procedure](https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/) and retain the request, checkpoint, trusted CA information, and verified authority response. Preparing a request alone does not obtain a timestamp.
 
-Successful verification establishes integrity relative to the trusted collector key and retained boundary. Source truth, complete Telegram delivery, trusted time, and legal admissibility require separate evidence. This version has not completed live Telegram qualification or an independent forensic/security assessment.
+Successful verification establishes integrity relative to the trusted collector key and retained boundary. See [verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) for the trust assumptions and [validation results](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) for the checks performed.
 
-A copied collector key can sign a fabricated replacement journal. Verification against an independently retained checkpoint or witness record detects a changed earlier prefix; signature verification alone cannot. A witness fixes what the collector presented, so it does not independently establish the truth of records fabricated before their first external checkpoint. Cloud deployment reports check configuration and collector-reported measurements; they do not establish that a private key was never copied during bootstrap.
+Notifications sent through Apprise help operators follow workspace and chat activity. They contain names and counts; excerpts of deleted and edited messages are optional and off by default. Use the signed journal and exports for the retained record. With a workspace proxy, notifications use the same route; services that cannot use it, and MTProxy routes, are refused.
 
-Notifications sent through Apprise contain workspace and chat names and counts; short excerpts of deleted and edited messages are added only when the operator turns them on (off by default). They are a convenience signal, not evidence: delivery is not guaranteed, and only the journal and its signed exports record what was observed. With a workspace proxy, notifications use the same route; services that cannot use it, and MTProxy routes, are refused.
+## Handover extract
+
+A signed ZIP carries the whole workspace journal. When a court, a lawyer or an abuse desk needs only some chats, a period or certain people, **Exports → Handover extract** prepares a minimised copy (`tgwitness-handover-v1`) according to the selected disclosure rules. The operator states the purpose and chooses the chats, an optional period (UTC), the people the extract is about, what happens to everyone else (shown, replaced by pseudonyms P01, P02… or left out), which message texts stay, which attachments and profile photos are included, and whether phone numbers and e-mail addresses in texts are masked. The purpose and these rules are in the signed manifest and in the report; the journal records `handover.exported` with the access that prepared it and the file's SHA-256, not the contents.
+
+`verify.py` checks an extract in two ways. A record shown unchanged is verified in full: its content against its hash, its Ed25519 signature and its link to an included predecessor. A minimised record keeps the original hash and signature, so the signature still verifies, but the withheld fields cannot be recomputed from it; the record names what was withheld and the report marks it. The manifest names the journal length and head with the collector's signature over that head, and counts the records left out; `coverage.json` describes the chosen chats. Names inside file names are not detected. Review the final files before sharing: free text, file names and selected attachments can still identify people. Keep the full signed ZIP: the extract is a disclosure, not a replacement.
+
+## Readable reports
+
+Signed evidence, handover and chat ZIPs carry readable HTML and JSON reports, plus PDF when the required fonts are available, in the selected report language. Each report is sealed with the workspace's Ed25519 key and can be verified separately: `python -m tgwitness.verify FILE --fingerprint KEY [--evidence ZIP]`.
+
+- `report.html` / `chat.html`: the seal statement (`tgwitness-report-seal-v1`) closes the file and signs the SHA-256 of every byte before it. Long journals and chats are split into parts of a configurable size (Report settings, 500 to 100,000 records; 5,000 by default): `records/records-0001.html` or `messages/messages-0001.html`, each sealed with its number, range and the total, and listed with its SHA-256 in the signed manifest. Runs of collector heartbeats are shown as one line unless Report settings list them one by one.
+- `report.json` (`tgwitness-report-json-v1`, keys `format`, `report`, `seal`): the seal signs the SHA-256 of the canonical JSON of `report`, so the facts can be read by case systems and scripts and a selection for data protection can be made from them while the signed file stays whole.
+- `report.pdf` / `chat.pdf`: a formal document for printing and filing, signed twice over the same bytes, the whole file except the signature value (`/ByteRange`). The standard PDF signature (`adbe.pkcs7.detached`, CMS with SHA-256 and ECDSA P-256) uses a self-issued document-signing certificate kept in the workspace vault; its subject serial number is the Ed25519 key fingerprint. The Ed25519 seal travels inside the CMS as the unsigned attribute `2.25.240684792623320047764573196045913242332` and names the certificate's SHA-256 with `"content": "pdf-byte-range"`, so the Ed25519 key vouches for the certificate. A PDF reader shows whether the file changed after signing and calls the signer unknown until the certificate is trusted; compare the Ed25519 fingerprint instead. Chinese, Japanese and Korean PDFs need a font on the server (or in `TGWITNESS_FONT_DIR`); without one the ZIP carries the HTML and JSON reports only.
+
+In a channel or supergroup Telegram numbers messages 1, 2, 3… in order. A chat export lists the first and last number, how many are present and every run of absent numbers in `message-ids.json`, the manifest and the `chat.json` header, and marks each gap where it falls in the transcript. `verify.py` recounts them from `chat.json`. An absent number is a message Telegram did not return (deleted before the export, or not visible to the account); in private chats and basic groups numbers are shared by all of the account's chats and gaps are not counted.
+
+After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer means Telegram has no message under that number for this account; it does not say whether the message was deleted or was never visible to the account. A message Telegram does return then was missed while reading and is added to the export, marked `found_on_recheck`.
+
+Every report opens with **In brief**: one paragraph, then what the material shows and what it does not (who is behind an account, completeness of delivery, deletions before observation, clock time without a timestamp). The page's own seal stamp turns amber when the browser has checked the seal's signature, not the page: a browser does not give a page its own bytes. It turns green only when the reader drops the file into the check at the end of the page and every byte matches, and only if the page shown is that file; otherwise it turns red.
+
+Each report names the program exactly: the git commit when the collector runs from a checkout or the installer sets `TGWITNESS_COMMIT`, and the SHA-256 of its source files (`source_tree_sha256`, the canonical JSON of path → SHA-256 of every `.py`, `.js`, `.css`, `.html` and `.svg` file in the package), which a checkout of that commit reproduces unless files were changed. The Telegram client is named with its library, API layer and data centre. When observation starts and when a chat export begins and ends, the collector asks Telegram for its time (`updates.getState`, whole seconds) and records Telegram's time minus the collector's clock, with the uncertainty from the round trip; the reports show these measurements under Chain of custody. A chat export also records when it read the history, apart from the dates of the messages.
+
+### Offline report viewer and archive guide
+
+Extract the complete ZIP before opening `chat.html` or `report.html`. The viewer provides search, filters, participants, indicators, record details and JSON/CSV selections without a server. Keep `viewer/` and `media/` next to the report. Selections are derivatives: use `verify.py SELECTION.json
+--evidence ARCHIVE.zip` to compare them with the signed archive. The verifier checks the report ID, signing key, archive boundary and every selected item; edited, missing and duplicate items fail. Selection notes and creation time remain unsigned metadata.
+
+Current archive exports store viewer chunks in `viewer/*.html`. Each chunk is loaded in a sandboxed frame with scripts allowed but **without** same-origin access, and posts its JSON text to the report. The report checks the message source and its SHA-256 against the signed descriptor before display. The report's own CSP permits only its hashed application script. Missing data can be recovered by choosing the matching ZIP in the Check tab; data read from the ZIP is parsed without execution. Earlier exported reports keep their own embedded viewer and remain verifiable.
+
+Message-number gaps are shown only for a complete, unfiltered ascending chat feed. Hiding a category or failing to load a data chunk must not turn an omitted row into evidence of a missing message. Search highlights operate on plain text before HTML escaping, preserving literal markup.
+
+The browser checks manifest signatures, the report ID and key, and all listed file hashes. It rejects ambiguous or malformed ZIP structures, duplicate names and unsafe paths, and caps files at 256 MiB and declared total contents at 4 GiB. Use the standalone verifier for larger archives. This browser check complements the verifier's checks of journal chains and data semantics.
+
+`README.txt` contains a start guide, an aligned file inventory, verification instructions and data format notes in the report language, followed by a complete English guide. `SHA256SUMS` covers the files listed within it, excluding itself, `manifest.json` and `manifest.sig`; the signed manifest also covers `SHA256SUMS`. Keep the original ZIP unchanged and save working files outside the extracted folder. PDF reports include section bookmarks and case/report identification on later pages.
+
+Report settings are saved per workspace. The report language can follow the panel or be fixed; an explicit language on an export request overrides that choice for that export only. Every panel language is accepted, including the four right-to-left languages.
+
+The journal transcript switch controls its HTML viewer and PDF transcript. Full record JSON is an HTML detail option: when enabled, the viewer carries the exact exported record, including a minimised record in a handover. Disabling it does not alter the authoritative journal file. Photo previews apply to both chat and journal HTML. Consecutive heartbeat runs can be collapsed without removing records; expanding long runs loads their rows incrementally.
+
+`part_size` is the maximum item count per viewer data file (500–100000), and the maximum transcript size included in a PDF. Viewer chunks also split at a 16 MiB data budget. Longer PDF transcripts are omitted with an explicit pointer to the signed source files and HTML viewer. A standalone HTML report embeds at most 20000 items or 32 MiB of item data; once exceeded, it releases those items and directs the reader to the archive. These display limits never truncate the signed source files. The PDF font setup combines CJK fonts where needed: a Chinese font alone may lack Korean Hangul.
+
+### The chat at export time
+
+A chat export records what Telegram said about the chat when the export began: Telegram's own labels (`scam`, `fake`, `restricted` with its reasons, `verified`), usernames, description, member and admin counts, the linked discussion, content protection, whether new members see earlier messages and from which message on this account sees the history (`available_min_id`), the date of message 1 when it is the chat's creation, and the SHA-256 of the chat photo (saved in `media/`). It records the exporting account's place in the chat: role, join date, who invited it and, for an admin, its rights. A request Telegram refuses is named instead.
+
+When the exporting account is an admin, the export reads the chat's admin log (Telegram keeps about 48 hours) into `admin-log.json`: deletions and edits with the content and the account that acted. It is the one record of a deletion that names who deleted.
+
+### Indicators
+
+The reports list, and the archive carries as `indicators.csv`, `indicators.stix.json` (STIX 2.1) and `indicators.misp.json` (MISP event), what an abuse desk can act on in the recorded messages: links and domains (also hidden behind text, in buttons and in link previews), cryptocurrency addresses, Telegram usernames and invite links, phone numbers, e-mail addresses and saved pictures. Bitcoin, Litecoin, Dogecoin and TRON addresses are listed only when their base58 checksum holds, segwit addresses when their bech32 or bech32m checksum holds and TON addresses when their CRC holds; EVM and Solana addresses are marked as not checked. Pictures carry SHA-256 and a perceptual hash (dHash, 64 bits) that recompressed or resized copies keep nearly unchanged. Reports write indicators so that they do not open by accident (`hxxps[://]example[.]com`); the files keep the values as they were. Every indicator is marked unknown and not for automatic detection (STIX `indicator_types: unknown`, MISP `to_ids: false`, distribution to the own organisation): being listed says that a message contained it, not that it is malicious. A link whose text shows a different address than it opens is marked in the report.
+
+The PDF reports end with an examiner's declaration to sign by hand, a checklist for a notary or court expert, and a QR code (also on the first page) with the report ID, the key fingerprint and the SHA-256 of the authoritative data, so that a printout leads back to its archive.
 
 ## Event canonicalization
 
@@ -85,11 +137,15 @@ Every signed ZIP carries `coverage.json`, the HTML report opens with the same su
 - **Message IDs not observed.** For channels and supergroups, which number messages per chat, the IDs missing between observed ones are listed as ranges. They are reported as *not observed* — deleted, never delivered, or outside the saved history — never as deleted. Private chats and ordinary groups share an account-wide sequence, so gaps there mean nothing and are not listed.
 - Chat-level gap notices (for example Telegram asking for difference recovery in one channel) are counted as notes; they do not interrupt global coverage.
 
+When Telegram stops accepting the account, the `coverage.gap` record that ends observation carries `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` or `not_authorized`) and the Telegram error; `verify.py` names the cause where the period ends.
+
 Coverage describes what this collector recorded. It is not proof that Telegram delivered every update during a continuous period.
 
 ## Producer
 
 The signed manifest of evidence ZIPs, chat exports, witness journals and the statement of people-profile files contain `producer`: software, version, project (PhishDestroy), homepage and source repository. The HTML report shows the same line, and `verify.py` prints it as part of what it verified. Archives made before this field existed verify as before and are reported as not naming a producer.
+
+Each `observation.started` record also names the Telegram client that observed: its `api_id` (never the hash), whether that is a built-in public pair or the operator's own application, the client description sent in Telegram's connection request, and the kind of connection route with the IP mode (no proxy address or secret). The report and `custody.json` list every distinct client and route with when they were recorded, and the times no listed proxy answered and Telegram saw the server's address. Journals recorded before this say so.
 
 ## People profiles
 
@@ -115,13 +171,21 @@ Obtain verifier code from a trusted checkout or reviewed independent copy. A ver
 
 A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix. Retain a checkpoint outside the collector before a disputed change: an attacker controlling both archive and checkpoint can replace both.
 
-A valid signature from an unpinned key establishes internal consistency only. Even a pinned key cannot prove truthful source content if the collector or key was compromised before recording. External timestamping and trusted capture are separate requirements. TgWitness does not promise admissibility or forensic certification.
+## Verification scope
+
+The signatures identify the collector key and protect the saved material. Pin its fingerprint independently to associate that key with the expected collector. Telegram updates are the input to collection; TgWitness signs its observations of those updates. The signatures are not signatures issued by Telegram or by message authors.
+
+A retained checkpoint or witness record detects a changed earlier journal prefix, including a replacement signed with a copied collector key. Records fabricated before their first independent checkpoint require source corroboration: a collector key holder can sign new material. Keep signing-key access controlled and retain references separately.
+
+Assess account visibility and delivery using coverage records and controlled tests. Use a verified external timestamp for independent time anchoring. A sender ID identifies a Telegram account; link it to a person through your investigation. Program receipts and cloud checks describe collector-reported measurements and deployment configuration. See [validation results](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) for measured behavior and its scope.
 
 ## Attachments
 
 Files are addressed by SHA-256 under media/. A media.saved event links a hash and byte length to a specific message event. Raw filenames are metadata, never local paths. Media bytes are downloaded asynchronously, so immediate deletion may prevent capture. Disabled collection, oversize/unknown-size files, download failures, and interrupted downloads are visible as outcomes. A process crash can leave unreferenced partial files; they are not included in exports.
 
 The ZIP exporter verifies stored media against their names. JSONL, CSV, and HTML exports verify event signatures but do not carry media bytes. Derivative reports are conveniences; events.jsonl is the authoritative event representation.
+
+A full chat export saves attachments within the workspace's attachment settings into media/, named by SHA-256. Each message record in chat.json names its file (`file`, `file_sha256`) or the reason it is absent (`file_status`), together with what the reader saw around the text: links behind the text, forward origin, bot buttons, signature, views and the auto-delete timer. `verify.py` checks that every named file is in the signed manifest under that hash.
 
 ## Durable collection and process receipts (0.2)
 
@@ -155,4 +219,20 @@ The panel prepares a request archive containing canonical checkpoint.json bytes,
 
 `python -m tgwitness.anchor verify` calls OpenSSL ts twice: once against checkpoint bytes and once against the original request. A trusted CA file is required explicitly; included certificates are not automatically trusted. Request checking is optional at the CLI, so retain and supply --request to check the nonce. The result states whether it was checked. The collector checkpoint signature and journal must still be verified separately with the trusted collector fingerprint.
 
-The current verifier does not fetch revocation information or implement long-term archival validation after certificate expiry. Do not equate successful signature verification with a qualified timestamp or legal admissibility. A real independent TSA has not been contacted during development. See [procedure](https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/).
+Verification checks the response signature, checkpoint bytes and, when supplied, the original request under the specified CA trust. Revocation checks and long-term archival validation after certificate expiry are outside the current verifier. See the [procedure](https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/) and [validation results](https://phishdestroy.github.io/TgWitness/docs/reference/verification/).
+
+## Optional records in evidence mode: drand and Telegram devices
+
+Two more records can run on the same passes as the timestamps. Both are off by default and take effect only while evidence mode is on: Extras → Evidence → **More witnesses · optional**, or `"drand": true` and `"devices": true` in `POST /api/evidence`. One failing does not stop the other or the timestamps; the panel shows the latest result of each under the form.
+
+**drand** (`beacon.drand`). Each pass writes the newest round of drand quicknet, the public randomness of the League of Entropy (a round every 3 seconds), into the journal: `chain`, `round`, `randomness`, `signature`, `round_time` and the `relay` that answered. A verified unpredictable round supplies a lower time reference for the subsequent hash-linked material. A verified timestamp on a later checkpoint supplies an upper time reference. These checks bound the linked material; collection coverage is assessed separately. The collector asks `drand.cloudflare.com` first, then the relays of Protocol Labs, through the workspace route, one request per pass.
+
+`verify.py` checks that each randomness is the SHA-256 of its signature and that the round time is right, and reports the rounds, the longest stretch without one and how far behind drand the collector's clock was. It does not check the BLS signature. `--check-drand` compares the rounds with a Cloudflare relay and a Protocol Labs relay, all of them or a random sample of 100 in a long journal; a round that differs fails the verification.
+
+**Telegram devices** (`account.devices`). Each pass reads the account's sessions with `account.getAuthorizations`, the list Telegram shows in Settings → Devices, and records it: in full when it changed since the previous pass, with the `added` and `removed` session hashes, otherwise only its count and SHA-256. Device model, platform, app and version, creation and last activity, country and region are kept; IP addresses are not, because evidence exports leave your hands. The collector's own session is active all the time, so only other sessions' activity counts as a change. `verify.py` reports how often the list was recorded and each new and ended session. It reads the list only while observation runs.
+
+What they do not show: drand proves no more than the order of records against public time, and the device list is Telegram's statement through the collector, signed by the collector like every other record.
+
+Tested on 1 November 2026: `tools/check_evidence_witnesses.py --live` wrote a real round from `drand.cloudflare.com`, exported the journal and confirmed the round with `drand.cloudflare.com` and `api.drand.sh`; the device list ran against simulated Telegram answers, not a real account.
+
+**Cloudflare Gateway log** (`cloudflare.gateway_dns`). For a server that resolves through Cloudflare Gateway ([Gateway DNS](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md#cloudflare-as-an-outside-witness)), each pass copies what Gateway logged since the previous copy: one record per window of at most three hours with `from`, `until`, the `location_id`, the server's `address` when one is set, and the `queries` as `[at, name, type, rcode, decision, colo]`, also when there were none. Set it under **Cloudflare Gateway log**: account, location, optional address and a read-only token (Account Analytics Read; Zero Trust PII Read to keep one address of a shared location). The panel checks them with one request before saving; the token stays encrypted and never enters the journal. `verify.py` lists the windows, the names looked up most and any time no copy covers; a record whose count does not match its queries fails. A window that holds more than one page of queries in a single second keeps that page and says the rest is missing. The copy is Cloudflare's answer through the collector, signed by the collector; within 24 hours anyone with a read-only token can compare it with Cloudflare.

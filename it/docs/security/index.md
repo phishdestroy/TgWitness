@@ -79,7 +79,7 @@ Le destinazioni opzionali vengono configurate per ogni area di lavoro. Il testo 
 - Un amministratore del sistema può leggere tutto, nonché riscrivere e rifirmare il registro. Si raccomanda di conservare l’impronta digitale e i punti di controllo su un altro sistema.
 - Il testo dei messaggi e i file multimediali non vengono crittografati da TgWitness. Si raccomanda di utilizzare la crittografia del disco e di impostare autorizzazioni rigorose.
 - L’uso del protocollo HTTP standard al di fuori di localhost espone il token sulla rete. Si raccomanda di utilizzare HTTPS o un tunnel SSH.
-- Le firme dimostrano che quanto registrato non è stato modificato, non che ogni evento su Telegram sia stato registrato.
+- Verificare i record salvati tramite le firme e i checkpoint. Esaminare la copertura della raccolta e testare la consegna per gli account e le fonti utilizzati.
 
 [Condivida l’accesso a un caso](https://phishdestroy.github.io/TgWitness/it/docs/access/) con autorizzazioni, scadenza e limiti di sessione. Il token di Testimone rimane una credenziale separata.
 

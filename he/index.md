@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/
 
-[קוד פתוח / v0.7.1](https://phishdestroy.github.io/TgWitness/he/docs/reference/changelog/)
+[קוד פתוח / v0.8.0](https://phishdestroy.github.io/TgWitness/he/docs/reference/changelog/)
 
 תיעוד הודעות טלגרם, שימור השינויים בהן וייצוא תיעוד חתום.
 
@@ -60,6 +60,8 @@ TgWitness / ייצוא חתוםסביבת עבודה מקומית
 
 04 / ייצוא חתום קחו את היומן אתכם, עם רשימת תוכן ומאמת עצמאי.
 
+עקבו אחר רשומה שנשמרה באמצעות [Case Board](https://phishdestroy.github.io/TgWitness/he/docs/case-board/), [עיצוב הדוח](https://phishdestroy.github.io/TgWitness/he/docs/reports/) וה[עתק](https://phishdestroy.github.io/TgWitness/he/docs/handover/) [לשיתוף](https://phishdestroy.github.io/TgWitness/he/docs/handover/). [סקרו קבוצות חשבונות](https://phishdestroy.github.io/TgWitness/he/docs/groups/) יחד.
+
 01 / לכידה
 
 ### אתם בוחרים את היקף הפעילות.
@@ -84,7 +86,8 @@ TgWitness / ייצוא חתוםסביבת עבודה מקומית
 
 [ייצא ואמת את](https://phishdestroy.github.io/TgWitness/he/docs/exports/)
 
-## שנה בייט אחד. השרשרת תודיע לך.
+## שינוי של בייט אחד.
+האימות יגלה זאת.
 
 כל אירוע מקושר להאש הקודם ונושא חתימת Ed25519.
 
@@ -94,7 +97,7 @@ TgWitness / ייצוא חתוםסביבת עבודה מקומית
 
 ![נקודת ביקורת הנשמרת בנפרד מאפשרת למקבל להשוות את היומן המיוצא עם תצפית קודמת.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-ראו מה קובע כל מנגנון אימות, והיכן נותרים גבולותיו.
+יש לעקוב אחר הבדיקות החל מהאש של הקובץ ועד לנקודת ביקורת שנשמרה בנפרד.
 
 [גלו שמונה רמות ראיות](https://phishdestroy.github.io/TgWitness/he/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipחבילה חתומה
 
   אימות עצמאירשימת תוכן חתומה + בודק עצמאי
 
-חתימות מזהות חבלה ביחס למפתח מהימן. הן אינן מוכיחות את מקורן ב-Telegram ואינן מבטיחות תיעוד מלא. תוכן היומן והמדיה זקוקים לאחסון מוצפן שתספקו בעצמכם.
+הנמענים בודקים את הרשומות והקבצים שנשמרו מול מפתח אוסף מהימן. נקודת ביקורת הנשמרת בנפרד בודקת גם את הרציפות ביחס ליומן הקודם. [עיינו בשלבי האימות.](https://phishdestroy.github.io/TgWitness/he/docs/concepts/#layers)
 
 ## עותקים ב-S3. בדיקות חיצוניות.
 
@@ -154,13 +157,13 @@ Object Lock
 
 [הגדר את S3 ושחזר עותק](https://phishdestroy.github.io/TgWitness/he/docs/exports/#s3)[קראו את פרטי האימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-הכלי **אינו** משחזר את ההודעות ללא מפתח הפענוח שיוצא, ואינו מהווה תחליף לעד עצמאי.
+**מפתח שחזור:** שמור את מפתח הפענוח שיוצא בנפרד, כדי שתוכל לשחזר את העותק המוצפן.
 
 ### התראות · Apprise
 
 התראות על בעיות, שינויים בצ'אט וסיכומים יומיים באמצעות Apprise: אפליקציות מסרים מיידיים, דוא"ל או webhook JSON משלכם.
 
-**אינו** שולח את טקסט ההודעה, אלא אם תפעיל את האפשרות להציג קטעים נבחרים.
+**בחרו מה לשתף:** קטעי הודעות מוסתרים כברירת מחדל; הפכו אותם לזמינים עבור נמענים שאתם סומכים עליהם.
 
  [הגדרת יעדי ההתראות](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ Object Lock
 
 חשיפת חתימות זמן (timestamp) באמצעות RFC 3161 ו-OpenTimestamps.
 
-**אינו עושה** זאת: אינו מתייחס לאישור לוח שנה הממתין לאישור כאל חותמת זמן מאושרת של ביטקוין.
+**עקבו אחר התוצאה:** בדקו את תגובת הרשות או שדרגו את הקבלה של OpenTimestamps להוכחת ביטקוין מאושרת.
 
  [בדקו את הוכחות חותמות הזמן](https://phishdestroy.github.io/TgWitness/he/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ Object Lock
 
 שרת נפרד שומר את התצפיות החתומות ויכול לפרסם נקודות ביקורת מסוג `TGW1`.
 
-**אינו** הופך שני סביבות עבודה על מארח-אספן אחד לעדים עצמאיים.
+**יש להפריד בין ההפניה** "הפעל את ה-Witness במארח אחר" ולשמור על מפתח החתימה והיומן הייחודיים לו.
 
  [הגדר עד](https://phishdestroy.github.io/TgWitness/he/docs/witness/)
 
@@ -184,7 +187,7 @@ Object Lock
 
 המשך לאחר הפעלה מחדש. בדיקות חוזרות ו-`coverage.json` מציגות הודעות ששוחזרו ופערים.
 
-**אינו מבצע**: אינו משחזר כל עריכה שהוחמצה או הודעה שנעלמה.
+**סקור את פרק הזמן:** צפה בהודעות הנוכחיות ששוחזרו לצד ההפרעות שתועדו; גרסאות קודמות נותרות זמינות לאחר תיעודן.
 
  [בדקו את הרצף והפערים](https://phishdestroy.github.io/TgWitness/he/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ cd TgWitness
 
 [עיין במהדורות](https://github.com/phishdestroy/TgWitness/releases)
 
-אין לכם Python ב-Windows? [הורידו את החבילה הניידת](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), חלצו אותה ולחצו פעמיים על הקובץ `TgWitness.cmd`.
+אין לכם Python ב-Windows? [הורידו את החבילה הניידת](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), חלצו אותה ולחצו פעמיים על הקובץ `TgWitness.cmd`.
 
 שלב 02
 
@@ -260,7 +263,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 להתקנות מהמקור, האסימון הוא `data/live/panel-token.txt`. ניתן להשתמש בהגדרות ה-API המובנות לצורך כניסה ל-Telegram, או בזוג המפתחות האישי שלכם מ[-my.telegram.org](https://my.telegram.org). [מדריך התקנה מלא ↗](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [מה חדש →](https://phishdestroy.github.io/TgWitness/he/docs/reference/changelog/) · [תכונות ומגבלות ידועות →](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/)
+**TgWitness 0.8.0** [מה חדש →](https://phishdestroy.github.io/TgWitness/he/docs/reference/changelog/) · [תכונות ומגבלות ידועות →](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/)
 
 ## הוראות ברורות. צעד מועיל להמשך.
 

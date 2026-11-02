@@ -6,6 +6,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/concepts/
 
 请在下方探索两个小型实验。它们使用虚构的消息，完全在您的浏览器内运行，且绝不会连接到 Telegram。
 
+## 从聊天记录导出到可验证的记录
+
+[Telegram Desktop 的导出功能可](https://telegram.org/blog/export-and-more)将可用的聊天记录和媒体文件保存为 HTML 或 JSON 格式，以便离线使用。TgWitness 增加了接收变更的持续日志、对观察结果和导出文件的签名，以及收件人可独立进行比对的检查点。
+
+| 任务 | Telegram Desktop 导出 | TgWitness |
+| --- | --- | --- |
+| 阅读已保存的对话 | HTML 或 JSON 格式，含选定媒体文件 | 已保存的聊天记录、可搜索的日志和离线报告 |
+| 跟踪随时间的变化 | 导出时可用的历史记录 | 早期捕获的版本、后续编辑以及删除记录将一并保留 |
+| 移交后检查文件 | 标准的 HTML/JSON 导出文件未签名 | 已签名的清单、每条记录的签名以及经过可信采集器密钥验证的密封 HTML/PDF/JSON 报告 |
+| 与先前保留的状态进行比较 | 请保留一份单独的参考副本或哈希值 | 已签名的检查点、独立的见证文件以及可选的外部时间戳 |
+
+文件签名对比基于 2026 年 11 月 2 日审核的 [Telegram Desktop 导出工具](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output)。TgWitness 使用采集器的密钥进行签名；下文的验证步骤展示了接收方如何使用该密钥。
+
 ## 一条消息，三点观察
 
 当 Telegram 发送新消息、编辑通知或删除通知时，采集器会分别追加三条独立的记录。编辑操作不会替换最初的记录，删除通知也不会将其清除。
@@ -107,6 +120,6 @@ hexport[Ncheckpoint] = Hcheckpoint
 
 [01 / 完整性**该记录是否发生了变化？** 使用独立的可信密钥验证哈希值和签名。](https://phishdestroy.github.io/TgWitness/zh/docs/exports/)[02 / 连续性**之前保留了哪些内容？** 将签名导出文件与由独立见证方保存的检查点进行比对。](https://phishdestroy.github.io/TgWitness/zh/docs/witness/)[03 / 交付**这些测试事件是否已到达？** 将受控的发送、编辑和删除操作与每个账户的日志进行比对。](https://phishdestroy.github.io/TgWitness/zh/docs/cases/)
 
-匹配的哈希链可回答完整性问题。它并不能证明 Telegram 消息已完整送达、消息内容的真实性，或提供一个独立可信的观察时间。
+使用签名核查保留的记录，使用检查点与较早的边界进行比对，并使用受控交付测试来衡量采集效果。每项操作都旨在解答一个具体问题。[请阅读验证范围和信任假设。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)
 
 [全程追踪从获取账户到整理案件资料包的完整调查](https://phishdestroy.github.io/TgWitness/zh/docs/cases/)过程。

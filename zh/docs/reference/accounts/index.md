@@ -226,7 +226,16 @@ TData 是 Telegram Desktop 应用程序（来自 desktop.telegram.org 的跨平�
 
 ### 批量导入和账户分组
 
-使用 **账户 → 导入账户** 添加多个账户，按基本文件名配对文件，并查看每次登录的结果。每个账户都有独立的工作区。分组可从模板复制选定的设置，而不会合并会话、密钥或证据。请参阅[导入和分组指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings)和[MTProxy 池控制面板](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)。
+使用**“账户”→“导入账户**”可添加多个账户，按文件基名配对文件 并查看每个登录结果。每个账户都有独立的工作区。
+
+“组”可将相关账户集中管理，同时不会合并其会话、密钥或 证据。在**“账户**”页面中**点击“开放组**”可跳转至其页面： `/groups/<id>`:
+
+- **账户:**每位成员的连接路径、观察记录和最后一条消息，并提供 **“全部**启动”和**“全部暂停”功能**。
+- **需要关注:**已注销、不可用或存在 连接、接收、来源或媒体问题的账户；每个名称均链接至其卡片。
+- **多个账户可见的聊天记录包括：** 共享来源、正在查看这些记录的账户以及 可用工作区观察期间（最长七天）内的中断情况。**使用 N 个账户进行导出时，** 会将频道或超级群组的导出内容分配给这些账户，并为一个存档文件签名。
+- **导出组:**包含一个 ZIP，其中包含每个账户的已签名导出文件，位于 `accounts/` ，并 `manifest.json` 列出其SHA-256和密钥指纹，由主 工作区在 `manifest.signature.json`。请使用 `python -m tgwitness.verify` 并使用该账户的可信指纹进行验证。
+
+成员共享群组的设置；单个账户可保留其自身的设置值。 请参阅[共享设置](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups)、 [导入与群组指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) 以及 [MTProxy 数据池仪表盘](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)。
 
 ## 退出登录
 

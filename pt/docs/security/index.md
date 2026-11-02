@@ -79,7 +79,7 @@ Os destinos opcionais são configurados por espaço de trabalho. O texto das men
 - Um administrador do sistema pode ler todo o conteúdo, bem como reescrever e assinar novamente o registro. Mantenha a impressão digital e os pontos de verificação em outro sistema.
 - O texto das mensagens e as mídias não são criptografados pelo TgWitness. Utilize criptografia de disco e permissões rigorosas.
 - O uso de HTTP simples fora do localhost expõe o token na rede. Utilize HTTPS ou um túnel SSH.
-- As assinaturas comprovam que o que foi registrado não foi alterado, e não que todos os eventos do Telegram tenham sido registrados.
+- Verifique os registros salvos com assinaturas e pontos de verificação. Analise a abrangência da coleta e teste a entrega para as contas e fontes que você utiliza.
 
 [Compartilhe o acesso a um caso](https://phishdestroy.github.io/TgWitness/pt/docs/access/) com permissões, prazo de validade e limites de sessão. Um token de testemunha continua sendo uma credencial separada.
 

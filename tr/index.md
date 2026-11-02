@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/
 
-[Açık kaynak / v0.7.1](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/)
+[Açık kaynak / v0.8.0](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/)
 
 Telegram mesajlarını yakalayın, değişikliklerini koruyun ve imzalı bir kayıt olarak dışa aktarın.
 
@@ -60,6 +60,8 @@ TgWitness / İmzalı dışa aktarımlarYEREL ÇALIŞMA ALANI
 
 04 / İmzalı dışa aktarımlar Günlüğü, bir manifest ve bağımsız bir doğrulayıcıyla birlikte yanınızda taşıyın.
 
+[Case Board](https://phishdestroy.github.io/TgWitness/tr/docs/case-board/), [rapor tasarımı](https://phishdestroy.github.io/TgWitness/tr/docs/reports/) ve [paylaşım kopyası](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) aracılığıyla kaydedilmiş bir kaydı takip edin. [Hesap gruplarını](https://phishdestroy.github.io/TgWitness/tr/docs/groups/) birlikte [inceleyin](https://phishdestroy.github.io/TgWitness/tr/docs/groups/).
+
 01 / KAYIT
 
 ### Kapsamı siz belirlersiniz.
@@ -84,7 +86,8 @@ Yakalanan sürümler, silme bildirimleri ve gözlem boşlukları günlüğünde 
 
 ['yi dışa aktarın ve doğrulayın](https://phishdestroy.github.io/TgWitness/tr/docs/exports/)
 
-## Bir baytı değiştirin. Zincir size haber verir.
+## Bir baytı bile değiştirmeyin.
+Doğrulama sistemi size bunu bildirir.
 
 Her olay bir önceki hash değerine bağlanır ve bir Ed25519 imzası taşır.
 
@@ -94,7 +97,7 @@ Her olay bir önceki hash değerine bağlanır ve bir Ed25519 imzası taşır.
 
 ![Ayrı olarak saklanan bir kontrol noktası, alıcının dışa aktarılan günlüğü daha önceki bir gözlemle karşılaştırmasına olanak tanır.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-Her bir doğrulama mekanizmasının neyi belirlediğini ve sınırlarının nerede olduğunu inceleyin.
+Dosya hash değerinden ayrı olarak saklanan kontrol noktasına kadar olan kontrolleri takip edin.
 
 [Sekiz kanıt seviyesini keşfedin](https://phishdestroy.github.io/TgWitness/tr/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipİMZALI PAKET
 
   Bağımsız doğrulamaİmzalı manifest + bağımsız doğrulayıcı
 
-İmzalar, güvenilir bir anahtara göre tahrifatları tespit eder. Telegram kaynaklı olduğunu kanıtlamazlar veya mesajların eksiksiz olarak kaydedildiğini garanti etmezler. Günlük içeriği ve medya dosyaları için sizin tarafınızdan sağlanacak şifreli depolama alanı gereklidir.
+Alıcılar, kaydedilen kayıtları ve dosyaları güvenilir bir toplayıcı anahtarıyla karşılaştırarak kontrol eder. Ayrı olarak saklanan bir kontrol noktası da önceki günlükle sürekliliği kontrol eder. [Doğrulama adımlarını inceleyin.](https://phishdestroy.github.io/TgWitness/tr/docs/concepts/#layers)
 
 ## S3 kopyaları. Harici kontroller.
 
@@ -154,13 +157,13 @@ Dergi ve medya`AES-256-GCM`S3 uyumlu depolama alanı
 
 [S3'ü yapılandırın ve kopyasını geri yükleyin](https://phishdestroy.github.io/TgWitness/tr/docs/exports/#s3)[Doğrulama ayrıntılarını okuyun:](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**Ne yapmaz** Dışa aktarılan şifre çözme anahtarı olmadan verileri geri yüklemez veya bağımsız bir tanığın yerini almaz.
+**Geri yükleme anahtarı:** Şifrelenmiş kopyayı geri yükleyebilmeniz için dışa aktarılan şifre çözme anahtarını ayrı bir yerde saklayın.
 
 ### Bildirimler · Apprise
 
 Apprise aracılığıyla sorun uyarıları, sohbet değişiklikleri ve günlük özetler: mesajlaşma uygulamaları, e-posta veya kendi JSON webhook'unuz.
 
-**Yapılmayanlar**: Alıntıları etkinleştirmediğiniz sürece mesaj metnini göndermez.
+**Neyi paylaşacağınızı seçin.** Mesaj alıntıları varsayılan olarak kapalıdır; güvendiğiniz alıcılar için bunları etkinleştirin.
 
  [Bildirim hedeflerini yapılandırın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ Apprise aracılığıyla sorun uyarıları, sohbet değişiklikleri ve günlük 
 
 Zaman damgası kontrol noktası hash'lerini RFC 3161 ve OpenTimestamps ile oluşturun.
 
-**Ne yapmaz** Beklemede olan takvim makbuzu, onaylanmış bir Bitcoin zaman damgası olarak değerlendirilmez.
+**Sonucu takip edin:** Yetkili kurumun yanıtını kontrol edin veya OpenTimestamps makbuzunu onaylanmış bir Bitcoin kanıtına yükseltin.
 
  [Zaman damgası kanıtlarını kontrol edin:](https://phishdestroy.github.io/TgWitness/tr/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ Zaman damgası kontrol noktası hash'lerini RFC 3161 ve OpenTimestamps ile oluş
 
 Ayrı bir sunucu, imzalanmış gözlemleri saklar ve `TGW1` kontrol noktalarını yayınlayabilir.
 
-**Ne yapmaz** Aynı toplayıcı sunucudaki iki çalışma alanını bağımsız tanıklar haline getirmez.
+**"**Tanığı başka bir ana bilgisayarda çalıştırın**" referansını ayırın** ve kendi imzalama anahtarını ve günlüğünü koruyun.
 
  [Bir tanık oluşturun](https://phishdestroy.github.io/TgWitness/tr/docs/witness/)
 
@@ -184,7 +187,7 @@ Ayrı bir sunucu, imzalanmış gözlemleri saklar ve `TGW1` kontrol noktaların�
 
 Yeniden başlatmanın ardından devam edin. Yeniden kontrol edin ve `coverage.json` kurtarılan mesajları ve eksiklikleri gösterir.
 
-**Ne yapmaz** Kaçırılan her düzenlemeyi veya kaybolan her mesajı yeniden oluşturmaz.
+**Aralığı gözden geçirin:** Kurtarılan güncel mesajları kaydedilen kesintilerle birlikte görüntüleyin; yakalandığında önceki sürümler kullanılabilir durumda kalır.
 
  [Sürekliliği ve boşlukları inceleyin](https://phishdestroy.github.io/TgWitness/tr/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ Kaynak kodun çalıştırılması için Python 3.11+ gereklidir. Python yüklü 
 
 [Sürümleri inceleyin](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows'ta Python yok mu? [Taşınabilir paketi indirin](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), açın ve `TgWitness.cmd` dosyasına çift tıklayın.
+Windows'ta Python yok mu? [Taşınabilir paketi indirin](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), açın ve `TgWitness.cmd` dosyasına çift tıklayın.
 
 ADIM 02
 
@@ -260,7 +263,7 @@ Başlatma işleminden sonra [127.0.0.1:8787 adresini](http://127.0.0.1:8787) aç
 
 Kaynak koddan kurulumlarda token `data/live/panel-token.txt`'dir. Telegram oturum açma işlemi için yerleşik API ayarları veya [my.telegram.org](https://my.telegram.org) adresinden aldığınız kendi anahtar çiftinizi kullanabilirsiniz. [Tam kurulum kılavuzu ↗](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [Yenilikler →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/) · [Özellikler ve bilinen sınırlamalar →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/)
+**TgWitness 0.8.0** [Yenilikler →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/) · [Özellikler ve bilinen sınırlamalar →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/)
 
 ## Anlaşılır talimatlar. Yararlı bir sonraki adım.
 

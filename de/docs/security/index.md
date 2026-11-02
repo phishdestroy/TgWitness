@@ -79,7 +79,7 @@ Optionale Speicherorte werden pro Arbeitsbereich konfiguriert. Nachrichtentexte 
 - Ein Administrator des Servers kann alle Einträge einsehen und das Protokoll überschreiben sowie neu signieren. Bewahren Sie den Fingerabdruck und die Kontrollpunkte auf einem anderen System auf.
 - Nachrichtentexte und Medien werden von TgWitness nicht verschlüsselt. Verwenden Sie Festplattenverschlüsselung und strenge Zugriffsberechtigungen.
 - Bei einer einfachen HTTP-Verbindung außerhalb von „localhost“ wird das Token im Netzwerk sichtbar. Verwenden Sie HTTPS oder einen SSH-Tunnel.
-- Die Signaturen belegen, dass die aufgezeichneten Inhalte nicht verändert wurden – nicht jedoch, dass jedes Telegram-Ereignis aufgezeichnet wurde.
+- Überprüfen Sie gespeicherte Datensätze anhand von Signaturen und Kontrollpunkten. Überprüfen Sie den Erfassungsumfang und testen Sie die Bereitstellung für die von Ihnen verwendeten Konten und Quellen.
 
 [Teilen Sie den Zugriff auf einen Fall](https://phishdestroy.github.io/TgWitness/de/docs/access/) mit Berechtigungen, Ablaufdaten und Sitzungsbeschränkungen. Ein Witness-Token bleibt eine separate Zugangsberechtigung.
 

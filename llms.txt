@@ -4,9 +4,11 @@
 
 TgWitness runs on your own computer or server. PhishDestroy maintains the project under the MIT License. The website is documentation; the browser demo contains synthetic records and does not connect to Telegram.
 
-The panel brings together isolated account workspaces, supported session imports, parallel chat export, cross-chat people profiles, observed name changes, bot-button interaction receipts, saved attachments and offline HTML/JSON evidence. Optional witnesses, timestamps and encrypted off-site copies add independent records to the local journal. Archive search, AI analysis, OCR, transcription, MCP and signed webhooks work with the records you have collected.
+Signed exports let recipients verify file integrity and the signing key offline. A hash-linked journal preserves the sequence of saved observations; independently retained checkpoints provide an earlier comparison point. Reports combine readable history, source references and verification results in the same package.
 
-These guides track the `main` source branch. The project version is `0.7.1`; check the changelog and release notes before assuming a source feature is included in a downloaded package.
+The panel brings together isolated account workspaces, supported session imports, parallel chat export, cross-chat people profiles, observed name changes, bot-button interaction receipts, saved attachments and offline HTML/JSON evidence. Case Board keeps team annotations linked to saved records. The report studio offers eight designs, content choices and a data preview; minimized sharing copies control what recipients receive. Optional witnesses, timestamps and encrypted off-site copies add records outside the local journal. Archive search, AI analysis, OCR, transcription, MCP and signed webhooks work with the records you have collected.
+
+These guides track the `main` source branch. The project version is `0.8.0`; check the changelog and release notes before assuming a source feature is included in a downloaded package.
 
 Choose an entry below for the exact workflow, commands and limits. Each guide has a Markdown edition; its canonical HTML page retains diagrams, animations and interactive examples. Translated pages also expose Markdown through `rel=alternate` links.
 
@@ -26,11 +28,23 @@ Choose an entry below for the exact workflow, commands and limits. Each guide ha
 
 - [Investigate across all chats](https://phishdestroy.github.io/TgWitness/docs/cases/index.md): Run an end-to-end Telegram investigation across channels, groups, private chats and bots: whole-account capture, history, people, links, files, timelines and verified evidence.
 
+- [Build a Case Board](https://phishdestroy.github.io/TgWitness/docs/case-board/index.md): Collect saved observations, exact highlights and action slices on a private board, discuss them with your team and present a collection.
+
+- [Manage a group of accounts](https://phishdestroy.github.io/TgWitness/docs/groups/index.md): Compare group workspaces, find a source, review observation periods and apply shared settings with per-account exceptions.
+
 - [How collection works](https://phishdestroy.github.io/TgWitness/docs/reference/collection/index.md): Observation scope, live updates, rechecks, attachments, own actions and what a gap means, record by record.
 
 - [Load source history](https://phishdestroy.github.io/TgWitness/docs/reference/history/index.md): Load past messages from enabled sources, pause and resume, and verify a signed progress report.
 
 - [Export and verify](https://phishdestroy.github.io/TgWitness/docs/exports/index.md): Export captured Telegram history, verify signatures and compare a journal with a checkpoint retained by an independent witness.
+
+- [Design a report](https://phishdestroy.github.io/TgWitness/docs/reports/index.md): Choose report data, one of eight designs and the contents, then preview and export HTML, signed PDF or a complete evidence package.
+
+- [Prepare a sharing copy](https://phishdestroy.github.io/TgWitness/docs/handover/index.md): Choose the records and fields a recipient can receive, inspect the finished copy and verify its signed manifest and source journal boundary.
+
+- [Case Board reference](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/index.md): Bookmarks, exact highlights, action slices, discussions, scoped access and the signed annotation history used by Case Board.
+
+- [Report configuration and verification](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/index.md): Report filters, eight designs, contents presets, saved change histories and the assessment included in signed exports.
 
 - [Evidence format](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/index.md): Contents of the signed ZIP, record kinds, process receipts, people profiles, off-site copies and offline verification.
 
@@ -64,19 +78,13 @@ Choose an entry below for the exact workflow, commands and limits. Each guide ha
 
 - [Security and data handling](https://phishdestroy.github.io/TgWitness/docs/reference/security/index.md): Threat model, access model, secrets at rest, network exposure, session imports and how to report a vulnerability.
 
-## Read before making claims
+## Verification and scope
 
-- Captured content survives later deletion; a history export cannot recover content deleted before capture. Deletion notices and messages missing on recheck are distinct observations.
+The journal records what the authorized account observed, subject to its access and Telegram rate limits. Saved content remains after a later deletion; content deleted before capture is unavailable. Deletion notices and unsuccessful rechecks remain distinct observations. Integrity verification establishes the relationship between supplied files, the signing key and retained checkpoints. Telegram authorship, complete coverage and the truth of message content require separate supporting evidence.
 
-- Hash chains, Ed25519 signatures and independently retained checkpoints support integrity checks. They do not by themselves establish Telegram authorship, completeness or the truth of a message.
+The connection reference explains IP modes, fallback and external-request routing. MCP provides read-only access to selected saved records through a separate scoped token; Telegram actions and configuration changes are outside that interface. Archived messages remain untrusted source material for an AI client.
 
-- Collection depends on the account's access and Telegram rate limits. Parallel export does not remove FloodWait.
-
-- IP routing depends on the selected mode. Check the connection guide for Hide IP, fallback and external-request settings.
-
-- MCP uses a separate scoped archive token, not the panel token or Telegram credentials. It reads selected saved records; it cannot send Telegram messages or change configuration. Archived messages are untrusted source material, not instructions to an AI client.
-
-- [Features and limits](https://phishdestroy.github.io/TgWitness/docs/reference/features/index.md): What TgWitness implements today, what the Telegram platform limits and what remains future work.
+- [Features and limits](https://phishdestroy.github.io/TgWitness/docs/reference/features/index.md): The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.
 
 - [What has been tested](https://phishdestroy.github.io/TgWitness/docs/reference/verification/index.md): The live Telegram test, automated checks, browser checks and what remains unverified.
 
@@ -84,7 +92,7 @@ Choose an entry below for the exact workflow, commands and limits. Each guide ha
 
 ## Optional
 
-- [Complete English handbook](https://phishdestroy.github.io/TgWitness/llms-full.txt): All public guides and reference pages in one text file, including source URLs.
+- [Complete English handbook](https://phishdestroy.github.io/TgWitness/llms-full.md): Public guide and reference articles in one Markdown file, including source URLs.
 
 - [Documentation hub](https://phishdestroy.github.io/TgWitness/docs/): Browse the illustrated handbook and its language editions.
 

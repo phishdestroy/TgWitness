@@ -8,7 +8,7 @@ Lacak sebuah kasus melintasi saluran, grup, obrolan pribadi, dan bot, mulai dari
 
 ## Contoh kasus: perubahan tujuan dalam empat percakapan
 
-Sebuah pengumuman mengarah ke sebuah bot. Sebuah grup operasional mendiskusikan tujuan pembayaran baru, keyboard bot menampilkannya, dan pesan tindak lanjut pribadi mengulanginya. Pengumuman tersebut kemudian diedit dan pesan grup menghilang.
+Sebuah pengumuman mengarah ke sebuah bot. Sebuah grup operasional mendiskusikan tujuan pembayaran baru, dan keyboard bot menampilkannya. Pengumuman tersebut diedit, sebuah pesan tindak lanjut pribadi mengulangi tujuan tersebut, dan pesan grup menghilang.
 
 Pertanyaannya adalah: apa yang diamati sebelum dan sesudah perubahan, akun Telegram mana yang memposting setiap item, di mana tujuan tersebut muncul, byte lampiran mana yang dipertahankan, dan interval apa saja yang masih belum diketahui?
 
@@ -34,8 +34,8 @@ Diagram alur · Saluran → Jurnal ruang kerja; Grup → Jurnal ruang kerja; Obr
 
 ## 1. Menjelaskan kasus dan mengumpulkan seluruh kronologi peristiwa
 
-1. Hubungkan akun pengumpul ke ruang kerjanya sendiri. Dalam catatan kasus eksternal, catat referensi kasus, ID akun, ruang kerja, waktu mulai pengamatan, dan sidik jari kunci penandatanganan tepercaya.
-2. **Sumber** Terbuka **→ Cakupan pengamatan → Mode investigasi**. Pengaturan default memilih **Seluruh akun**, saluran/grup/obrolan pribadi/bot, tindakan sendiri, profil sumber, serta 200 pesan terbaru yang terlihat untuk sumber yang baru ditemukan. Tinjau pengaturan tersebut, tekan **Simpan cakupan**, dan selesaikan konfirmasi cakupan.
+1. Hubungkan akun pengumpul ke ruang kerjanya sendiri. Di [Case Board](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-board/) atau daftar kasus Anda, catat referensi kasus, ID akun, ruang kerja, dan waktu mulai pengamatan. Simpan sidik jari kunci penandatanganan tepercaya secara terpisah.
+2. Untuk akun pengumpulan khusus, buka **Sumber → Cakupan pengamatan → Mode investigasi**. Pengaturan default memilih **Seluruh akun**, saluran/grup/obrolan pribadi/bot, tindakan sendiri, profil sumber, dan 200 pesan terbaru yang terlihat untuk sumber yang baru ditemukan. Tinjau pengaturan tersebut, tekan "**Simpan Cakupan**", dan selesaikan konfirmasi cakupan. Akun utama menggunakan obrolan yang dipilih atau folder; pengumpulan seluruh akun tersedia untuk akun yang ditandai untuk investigasi.
 3. **Muat obrolan** dan bandingkan sumber-sumber tersebut dengan daftar obrolan akun. Periksa pengecualian. **Parameter → Obrolan yang dibaca dari daftar akun** secara default berjumlah 1.000 dan memungkinkan hingga 20.000. Sumber di luar batas daftar akan ditambahkan saat mereka menjadi aktif. Catat apa yang sebenarnya terdaftar.
 4. Di **pengaturan Perekaman**, pilih **Semua aktivitas yang terlihat** dan simpan pengaturan pemantauan. Periksa jenis lampiran/batasannya serta ruang disk yang tersedia.
 5. Mulai pengamatan. Validasi pesan baru yang dikendalikan, pengeditan, dan penghapusan, kemudian simpan referensi pengujian dan segala kegagalan yang terjadi.
@@ -58,7 +58,7 @@ Buatlah daftar sumber dengan satu baris per obrolan:
 
 Gunakan metode pengumpulan data yang tepat untuk setiap sumber:
 
-- **Memuat riwayat lengkap** di **Sumber** (`main` saat ini) memuat pesan-pesan masa lalu yang tersedia dari sumber yang diaktifkan ke dalam jurnal ruang kerja. Fitur ini mendukung jeda/lanjutkan serta laporan kemajuan yang ditandatangani. Lihat [perolehan riwayat](https://phishdestroy.github.io/TgWitness/id/docs/reference/history/).
+- **Fitur "Load full history** in **Sources"** memuat riwayat pesan masa lalu yang tersedia dari sumber yang diaktifkan ke dalam jurnal ruang kerja. Fitur ini mendukung fungsi jeda/lanjutkan serta laporan kemajuan yang ditandatangani. Lihat [bagian akuisisi riwayat](https://phishdestroy.github.io/TgWitness/id/docs/reference/history/).
 - **Cuplikan riwayat** menyimpan pesan-pesan terbaru yang terlihat ke dalam jurnal pengamatan. Nilai maksimum defaultnya adalah 500; melalui menu **Parameter → Largest history snapshot,** nilai tersebut dapat ditingkatkan hingga 10.000. Ini adalah pengamatan riwayat terkini, bukan hasil rekonstruksi pengeditan.
 - **Ekspor obrolan lengkap → Ekspor obrolan lengkap**, atau **Obrolan → Ekspor obrolan**, mengambil riwayat obrolan yang saat ini terlihat dari satu obrolan ke dalam bundel `chat.json` / `chat.html` terpisah yang telah ditandatangani. Ulangi untuk sumber-sumber kasus tersebut dan simpan setiap hasilnya.
 - **Ketika obrolan atau bot baru muncul**, profilnya serta hingga 1.000 pesan terbaru dapat disimpan; mode penyelidikan memilih 200 pesan. Obrolan yang sudah ada tidak menerima pencatatan tersebut secara retroaktif saat mode tersebut diaktifkan.
@@ -103,6 +103,8 @@ Dalam contoh yang telah disusun:
 
 Bandingkan hash lampiran dan referensi pesan yang terkait. File yang identik tidak membuktikan adanya pembuat, pengirim ulang, atau operator yang sama. Nama yang sama dan avatar yang mirip saja tidak cukup untuk menggabungkan dua ID Telegram menjadi satu orang.
 
+Simpan catatan kerja tim di [Case Board](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-board/): tandai catatan yang Anda andalkan, seperti #146, #188, dan #205, sorot string tujuan yang tepat, dan simpan potongan dari setiap tindakan yang terekam di antara dua catatan atau dalam rentang waktu tertentu. Catatan dan status menyimpan tinjauan tim dalam riwayat bertanda tangan tersendiri, yang dapat diidentifikasi secara terpisah dari pengamatan sumber.
+
 ## 5. Membuat garis waktu lintas obrolan
 
 Gunakan versi yang disimpan di **Obrolan** beserta tautan **catatan Jurnal #…**-nya. Di **Jurnal**, gabungkan **Semua sumber** dengan **Pengeditan**, **Penghapusan,** dan **Cakupan**. Simpan baik `source_at` (jika tersedia) maupun `observed_at`.
@@ -122,7 +124,7 @@ Catatan lain terjadi di antara referensi contoh ini. Nomor urut mengatur pengama
 
 Gunakan ruang kerja terpisah untuk setiap akun yang berbeda dan ulangi inventarisasinya. Simpan ID akun, peran, sidik jari kunci penandatanganan, dan referensi sumber pada setiap perbandingan. Nomor pesan bukanlah pengenal global yang berlaku di seluruh obrolan/akun.
 
-Korelasi lintas ruang kerja dilakukan dalam catatan kasus eksternal atau alat analisis. Saat ini, TgWitness belum memiliki fitur pencarian lintas ruang kerja secara global, garis waktu terpadu, grafik investigasi, atau arsip kasus gabungan. Ekspor multi-akun dari **satu** saluran/supergrup merupakan operasi yang berbeda, bukan penggabungan jurnal akun.
+Case Board menyimpan catatan dan koleksi yang tertaut ke sumber di dalam setiap ruang kerja. Layar grup meninjau status akun secara bersama-sama dan dapat menggabungkan ekspor dari ruang kerja yang terpisah. Korelasikan sumber-sumber tersebut dalam catatan kasus atau alat analisis Anda; setiap jurnal mempertahankan asal dan kunci penandatanganannya sendiri. Pencarian global atau garis waktu lintas ruang kerja yang digabungkan tidak dihasilkan. Ekspor multi-akun dari satu saluran/supergrup mengambil riwayat obrolan tersebut menggunakan akun-akun yang memenuhi syarat.
 
 Untuk pekerjaan yang lebih panjang, pertahankan batasan dengan [saksi independen](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/). Gunakan pemeriksaan pengiriman terkontrol untuk memverifikasi jalur penangkapan dan visibilitas setiap akun.
 
@@ -134,6 +136,7 @@ Simpan semua ini dalam direktori kasus yang disusun oleh analis:
 | --- | --- |
 | Catatan kasus dan daftar sumber | Pertanyaan, kebijakan pengumpulan data, akses/peran, temuan, penjelasan alternatif, dan celah |
 | Garis Waktu | Referensi waktu serta ruang kerja/obrolan/pesan/urutan untuk setiap entri |
+| Case Board ekspor dan potongan, jika digunakan | Penanda yang tertaut ke sumber, kutipan, catatan tim, koleksi, riwayat revisi, dan catatan terpilih yang telah diverifikasi berdasarkan berkas ZIP bukti |
 | Berkas ZIP bukti yang ditandatangani per ruang kerja | Jurnal yang direkam secara lengkap, manifes, dan media yang disimpan; filter panel tidak membatasi ekspor jurnal |
 | Berkas profil orang yang ditandatangani secara terpisah | Referensi yang diperoleh telah diverifikasi berdasarkan bukti di ruang kerja yang sesuai |
 | Ekspor obrolan lengkap yang ditandatangani | Pengambilan riwayat yang terlihat saat ini, terpisah dari jurnal pengamatan |
@@ -147,9 +150,10 @@ Dari instalasi tepercaya, dengan nama file dan sidik jari aktual setiap ruang ke
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Simpan hasil verifikasi aktual dan artefak asli. Direktori kasus tingkat atas, daftar sumber, dan kesimpulan analis disimpan secara eksternal; setiap artefak TgWitness memiliki tanda tangan dan prosedur verifikasi tersendiri.
+Pertahankan hasil verifikasi yang sebenarnya dan artefak asli. Ekspor catatan ruang kerja dari Case Board bersama dengan materi sumber yang dikutip. Kumpulkan temuan lintas ruang kerja di direktori kasus tingkat atas; setiap artefak TgWitness memiliki tanda tangan dan prosedur verifikasi tersendiri.
 
 ## Sesuaikan penyelidikan
 

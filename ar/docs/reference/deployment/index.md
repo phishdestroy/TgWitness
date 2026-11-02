@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 انسخ `deploy/env.example` إلى `.env`. اضبط `TGWITNESS_IMAGE` على الإصدار المنشور، باستخدام مسار المستودع **بالأحرف الصغيرة**، على سبيل المثال:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 
 يصبح [سير عمل الإصدار](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) جاهزًا للاستخدام بعد نقل هذا المشروع إلى مستودع GitHub مع تمكين ميزة Actions. ويتم تشغيله عند **نشر** إصدار GitHub، بما في ذلك الإصدارات التمهيدية. ولا تؤدي المسودات وعمليات دفع العلامات بحد ذاتها إلى نشر الحزم.
 
-1. قم بتعيين إصدار الحزمة وسجل التغييرات، ثم انشر إصدارًا مُعلَّمًا بـ `v` بالإضافة إلى الإصدار الدقيق من `pyproject.toml`، مثل `v0.7.1`.
+1. قم بتعيين إصدار الحزمة وسجل التغييرات، ثم انشر إصدارًا مُعلَّمًا بـ `v` بالإضافة إلى الإصدار الدقيق من `pyproject.toml`، مثل `v0.8.0`.
 2. يقوم سير العمل بالتحقق من صحة العلامة وتشغيل فحوصات Python المشتركة بين أنظمة التشغيل Windows/Linux/macOS، وكذلك فحوصات general/account-import/QR browser، و source-package، و Docker. كما يتم إجراء تثبيت أصلي جديد على جميع أنظمة التشغيل الثلاثة باستخدام Python 3.12.
 3. بعد اجتياز تلك الفحوصات، يتم إجراء اختبار أولي لصورة ARM64 تحت QEMU، ونشر صور AMD64/ARM64 على `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` ، وإرفاق ملف ZIP المصدر وملف Python wheel مع ملفات SHA-256 المرفقة بهما. ملف ZIP القابل للنقل على نظام Windows هو نفس الملف الذي تم اختباره من خلال سير عمل الفحوصات؛ ويقوم سير عمل الإصدار بتنزيل ونشر ذلك الملف ومجموعه الاختباري.
 4. تقوم مهمة أخيرة بتنزيل الحزم الثلاث المنشورة مرة أخرى والتحقق من مجموعاتها الاختبارية. ثم تنشر `SHA256SUMS.txt` و `RELEASE-MANIFEST.json` ، مسجلةً الإصدار ومراجعة المصدر وأحجام الموارد. وترفض عمليات التحميل الكتابة فوق موارد الإصدار الموجودة.

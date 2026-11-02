@@ -226,7 +226,16 @@ Tekan **+** di sebelah pemilih akaun, atau buka **Akaun → Tetapan → Tetapan 
 
 ### Import pukal dan kumpulan akaun
 
-Gunakan **Akaun → Import akaun** untuk menambah beberapa akaun, memadankan fail mengikut nama asas dan melihat hasil setiap log masuk. Setiap akaun mendapat ruang kerja sendiri. Kumpulan boleh menyalin tetapan terpilih daripada templat tanpa menggabungkan sesi, kunci atau bukti. Lihat [panduan import dan kumpulan](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) dan [papan pemuka kumpulan MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+Gunakan **Akaun → Import akaun** untuk menambah beberapa akaun, padankan fail mengikut nama asas dan lihat setiap keputusan log masuk. Setiap akaun mendapat ruang kerja sendiri.
+
+Kumpulan mengekalkan akaun berkaitan bersama tanpa menggabungkan sesi, kunci atau bukti mereka. **Membuka kumpulan** pada **Akaun** membawa ke halaman kumpulan itu di `/groups/<id>`:
+
+- **Akaun:** laluan sambungan setiap ahli, pemerhatian dan mesej terakhir, dengan Mulakan**semua** dan **Jeda semua**.
+- **Perlu perhatian:** akaun yang telah log keluar, tidak tersedia atau mempunyai masalah sambungan, kemasukan, sumber atau media; setiap nama membawa ke kadnya.
+- **Perbualan beberapa akaun lihat:** sumber yang dikongsi, akaun yang memerhatikannya dan gangguan dalam tempoh pemerhatian ruang kerja tersedia (sehingga tujuh hari). **Eksport dengan N akaun** membahagikan eksport saluran atau superkumpulan di antara mereka dan menandatangani satu arkib.
+- **Eksport kumpulan:** satu ZIP dengan eksport bermassa tandatangan setiap akaun di bawah `accounts/` dan `manifest.json` menyenaraikan SHA-256 dan cap jari kunci mereka, disahkan oleh ruang kerja utama dalam `manifest.signature.json`. Sahkan setiap arkib akaun secara berasingan dengan `python -m tgwitness.verify` dan cap jari yang dipercayai bagi akaun tersebut.
+
+Ahli berkongsi tetapan kumpulan; akaun boleh mengekalkan nilai tersendiri. Lihat [tetapan yang dikongsi](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [panduan import dan kumpulan](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) dan [papan pemuka kolam MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Log keluar
 

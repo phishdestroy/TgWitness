@@ -6,7 +6,7 @@ Wyjaśnienie pojęć łańcucha skrótów, podpisów, punktów kontrolnych i św
 
 TgWitness zachowuje dane zebrane przez konto gromadzące, łączy te obserwacje w podpisany dziennik i umożliwia innej osobie weryfikację eksportowanych danych przy użyciu zaufanego klucza oraz wcześniej zachowanego punktu kontrolnego.
 
-[Lokalna strona internetowa z dokumentacją](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) zawiera interaktywne przykłady pod adresem `/docs/concepts/` oraz narzędzie do analizy decyzji dotyczących punktów kontrolnych pod adresem `/docs/witness/`. Wszystkie przykładowe wiadomości, liczby i opóźnienia są fikcyjne. Skróty w piaskownicy łańcucha są obliczane za pomocą algorytmu SHA-256 w przeglądarce. Żadne dane nie są przesyłane do serwisu Telegram.
+[Lokalna strona internetowa z dokumentacją](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) zawiera interaktywne przykłady w sekcji `/docs/concepts/`, narzędzie do przeglądania decyzji dotyczących punktów kontrolnych w sekcji `/docs/witness/` oraz instrukcje dotyczące [Case Board](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-board/), [projektowania raportów](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-reports/) i [fragmentów dokumentacji przekazywania](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#handover-extract). Wszystkie przykładowe wiadomości, liczby i opóźnienia są fikcyjne. Skróty w piaskownicy łańcucha są obliczane za pomocą algorytmu SHA-256 w przeglądarce. Żadne dane nie są wysyłane do serwisu Telegram.
 
 ## Wiadomość ulega zmianie; obserwacje się kumulują
 
@@ -92,7 +92,7 @@ Schemat blokowy · Moduł gromadzący / sesja konta / klucz A → Punkt końcowy
 
 Narzędzie Witness rejestruje cofnięcia zmian, odmienne nagłówki przy tej samej liczbie, zmienione klucze, nieprawidłowe odpowiedzi oraz brakujące odpowiedzi. Sama wyższa liczba nie oznacza, że wszystkie wcześniejsze zapisy pozostały niezmienione; proszę porównać eksport z zachowanymi punktami kontrolnymi. Umieszczenie narzędzia Witness na innym serwerze pozwala uniknąć skutków awarii serwera kolektora; oddzielny operator zapewnia dodatkową niezależność.
 
-Świadek potwierdza stan dziennika zgłoszony przez narzędzie zbierające dane. Nie prowadzi on niezależnej obserwacji wszystkich wiadomości z Telegrama. Zobacz [konfigurację świadka](https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/).
+Świadek potwierdza zgłoszony przez zbierającego stan dziennika. Należy skorzystać z testu kontrolowanej dostawy, aby sprawdzić, które działania w Telegramie dotarły do konta zbierającego. Zobacz [konfigurację świadka](https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/).
 
 ## Testowanie działania w oparciu o znane scenariusze
 
@@ -106,14 +106,14 @@ Liczą się wyłącznie działania zgodne z oczekiwaniami; zduplikowane potwierd
 
 [Pełny opis przebiegu dochodzenia](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/) obejmuje incydent występujący na kanale, w grupie, w botcie oraz w prywatnym czacie:
 
-1. Włącz tryb dochodzeniowy obejmujący całe konto i sporządź wykaz wszystkich dostępnych czatów.
+1. Na dedykowanym koncie do gromadzenia danych włącz tryb dochodzeniowy dla całego konta i zrób spis dostępnych czatów. Użyj wybranych czatów lub folderu dla konta głównego.
 2. Pobieraj zrzuty ekranu dziennika, pełną historię poszczególnych czatów oraz zachowane załączniki.
 3. Należy zachować zmiany wprowadzane na bieżąco oraz wszelkie celowe interakcje z panelami wraz z ich potwierdzeniami.
 4. Proszę śledzić numeryczne identyfikatory nadawców, relacje odpowiedzi, powtarzające się adresy docelowe oraz skróty plików w oparciu o cytowane zapisy i profile użytkowników.
-5. Odtworzenie osi czasu obejmującej różne czaty, zawierającej zarówno znaczniki czasu, jak i wyraźne luki.
+5. Należy dodawać notatki powiązane ze źródłami oraz zbiory w Case Board. Należy odtworzyć oś czasu obejmującą różne czaty z uwzględnieniem zarówno znaczników czasu, jak i wyraźnych luk.
 6. Porównuj obszary robocze innych kont, zachowując jednocześnie odrębność ich pochodzenia i kluczy.
 7. Prosimy o zestawienie i weryfikację podpisanych dzienników, profili oraz eksportów historii wraz z notatkami dotyczącymi spraw.
 
-Przewodnik „`/docs/cases/`” dostępny na stronie zawiera interaktywną mapę spraw oraz warianty dotyczące sporów z botami, usuniętych wiadomości oraz zmian nazw użytkowników. Notatki dotyczące spraw oraz analiza między przestrzeniami roboczymi odbywają się zewnętrznie; aplikacja nie generuje automatycznie globalnego wykresu śledczego ani scalonego archiwum spraw.
+Przewodnik na stronie internetowej w sekcji `/docs/cases/` zawiera interaktywną mapę sprawy oraz warianty dotyczące sporów z botami, usuniętych wiadomości i zmian nazw użytkowników. Case Board przechowuje notatki i zbiory danych w obrębie obszaru roboczego. Eksporty grupowe gromadzą oddzielne pakiety z obszarów roboczych; korelacja między obszarami roboczymi oraz połączona oś czasu pozostają zadaniem analityków.
 
 [Zakończona walidacja i pozostałe zadania](https://phishdestroy.github.io/TgWitness/pl/docs/reference/verification/) · [Eksportowanie i weryfikacja](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#investigation-handoff) · [Zacznij od jednego konta](https://phishdestroy.github.io/TgWitness/pl/docs/reference/quickstart/)

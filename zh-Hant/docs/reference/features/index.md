@@ -2,9 +2,9 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/
 
-TgWitness 目前已實現的功能、Telegram 平台的限制，以及未來尚待完成的工作。
+TgWitness 的現行蒐集模型、多帳號工作流程、匯出功能及操作範圍。
 
-設計參考：2026年10月26日。主要應用場景為連線帳戶可存取的私人 Telegram 群組 及頻道。本文件將 已實作的功能、平台限制與未來工作區分開來。目標架構 項目並不代表該功能已實際存在。
+TgWitness 可保存連線帳戶可存取的 Telegram 對話內容， 記錄觀察到的變更，並準備可驗證的匯出檔案。本參考文件說明 資料蒐集模型、現行工作流程及其範圍。
 
 ## 獨立應用程式
 
@@ -12,17 +12,19 @@ TgWitness 擁有專屬的安裝程序、資料目錄及發行週期。內建的 
 
 操作者可連結其帳戶、選擇彼此可見的來源，並取得 一份儲存的觀察日誌。控制面板會顯示內容、已儲存的變更、觀察 來源及已知缺漏。其他調查人員可驗證匯出的資料。
 
-有四種不同的狀態至關重要：帳戶授權、對來源的存取權限、可正常運作的 收集器，以及傳送完整性已確立的程度。前三者 均無法自動證明第四項。一個靜默的群組未必 代表收集器已失敗。
+該面板區分帳戶授權、來源存取權限、收集器 活動及記錄範圍。在評估 訊息較少或出現連線問題的區間時，請一併檢視這些狀態。
 
 ## 共享調查
 
-管理員可發行範圍限於工作區及 個別聊天室的[存取憑證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)，並具備七項權限、IP 限制、有效期限、登入次數限制 及會話控制功能。唯讀審查員無需取得 Telegram 授權或主控制面板金鑰，即可檢視案件。 僅限特定聊天室的存取權限 與全帳戶設定及完整日誌匯出功能相互獨立。
+管理員可發行範圍限於工作區及 個別聊天室的[存取憑證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)，並可設定每項操作的權限、IP 限制、有效期限、登入次數限制 及會話控制。唯讀審查員無需取得 Telegram 授權或主面板金鑰，即可檢視案件。 僅限聊天室的存取權限 與全帳戶設定及完整日誌匯出功能相互獨立。
 
 自動 MTProxy 會從四個公開來源或 營運商目錄中維護可運作的 Telegram 路由。[IP 模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/#ip-modes)決定 當發生故障時，系統是否必須等待另一個代理伺服器，或是可使用明確允許的直接路由。 外部 HTTP 請求擁有獨立的路由及關閉開關。
 
 ## 歸檔工具
 
 0.7.1 包含[歷史紀錄擷取](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/history/)、[檔案庫搜尋與分析](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/)、[唯讀 MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/)、[本地 OCR／轉錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/)以及[外發 webhook](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/webhooks/)功能。分析報告與辨識出的文字將與 擷取的事件分開儲存。
+
+[「案件看板」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/)可在工作區內新增與來源連結的書籤、引文、筆記及 彙整集。[報告建構器](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)可選取 素材、章節，並從八種設計中選擇一種，以支援 HTML/PDF 匯出。
 
 ## 可選附加功能
 
@@ -53,9 +55,9 @@ TgWitness 擁有專屬的安裝程序、資料目錄及發行週期。內建的 
 
 切換顯示的工作區並不會停止其他資料擷取器的運作。跨工作區的重複帳戶 授權將被拒絕。已綁定至某個 Telegram 帳戶的日誌無法重新指派給其他帳戶；但允許重新連線至同一帳戶。 此舉可確保帳戶身分及相關訊息 ID 範圍的完整性。
 
-沒有固定的數量限制，亦不保證特定吞吐量。各工作區共用一個 Python 程序和事件迴圈。獨立的帳戶處理程序仍屬未來開發計畫。若要 實現當前的程序隔離，請使用獨立的安裝、埠號及資料目錄。
+本應用程式未設定固定的工作區數量。每個工作區皆在 共享的 Python 程序與事件迴圈中，執行其專屬的收集器 任務，包括連線監控、媒體下載、重新檢查及新聊天室匯入。處理量取決於工作負載。為 實現程序隔離，請使用獨立的安裝、連接埠及資料目錄。
 
-請為每個帳戶指派其可存取的來源。不同帳戶可能監測同一個 群組，但其監測記錄仍屬獨立，並保留原始來源。同一台由操作者控制的機器上的兩個帳戶 並不構成兩個獨立的證人。匯出功能 以工作區為單位；目前尚未實作合併案件資料包或全域 Telegram 時間軸功能。
+為每個帳戶指派其可存取的來源。不同帳戶可能觀察同一個 群組，但其觀察記錄仍保持獨立，並保留原始來源。同一台由操作員控制的機器上的兩個帳戶 並不構成兩個獨立的證人。**匯出群組時，** 會將分別簽署的工作區 ZIP 檔與一份簽署的檔案清單打包，該清單包含其 工作區 ID、雜湊值及簽署金鑰指紋。 每個日誌皆保留其自身的 邊界。可在案件筆記或分析工具中建立跨工作區的綜合時間軸， 並保留這些來源參考資訊。
 
 ## 擷取與來源標示
 
@@ -63,13 +65,13 @@ TgWitness 擁有專屬的安裝程序、資料目錄及發行週期。內建的 
 
 | 資料 | 立即擷取 | 分隔線 |
 | --- | --- | --- |
-| 訊息 | 文字內容、同儕/訊息 ID、發送者元資料、回覆內容及原始更新封套 | 該訊息沒有可公開驗證的 Telegram 簽名 |
+| 訊息 | 文字內容、同儕/訊息 ID、發送者元資料、回覆內容及原始更新封套 | 以「由收集者簽署、帳戶可見的觀察記錄」形式保存 |
 | 編輯 | 新觀察到的版本以及任何先前儲存的版本 | 系統停機期間的中間編輯內容可能會遺失；發送者未必就是編輯者 |
 | 刪除 | 通知及先前擷取的內容（如有） | 通常不包含刪除者或確切的操作時間 |
-| 未受範圍限制的刪除 | 原始帳戶層級通知，不推測對端身分 | 與先前儲存的帳戶範圍內 ID 建立嚴格關聯性，尚待未來開發 |
+| 帳戶層級刪除通知 | 原始通知；已解決的紀錄包含儲存的聊天內容及關聯分析方法 | 範圍內必須精確包含一個先前已儲存的「私人聊天」或「一般群組」配對；其他 ID 將保留為「`deletion.unscoped`」。頻道和超級群組的 ID 不包含在此關聯範圍內 |
 | 反應 | 已交付的計數器及可見的近期身分資訊 | 完整的可用反應器清單需另行查詢；頻道可能會隱藏身分 |
 | 會員 | 服務訊息及已送達的參與者更新 | 可見性取決於角色與聊天類型；事件缺失並不代表該事件不存在 |
-| 管理員操作 | 僅提供相關的已發布更新 | 目前尚未實作獨立的管理員日誌擷取功能 |
+| 管理員操作 | 相關已交付更新及管理員日誌快照，皆包含於頻道／超級群組聊天記錄的匯出檔案中 | 匯出功能會在匯出管理員帳戶可存取時讀取日誌；持續輪詢管理員日誌的功能不屬於此流程範圍 |
 | 附件 | 原始版本描述、下載位元組數／SHA-256 及嘗試結果 | 已消失的檔案可能無法恢復；最新版本不會被替換 |
 | 歷史沿革 | 當前可見訊息的明確快照 | 不會還原所有編輯或刪除的內容 |
 | 收集程序 | 啟動／停止、心跳訊號、錯誤、設定、監控範圍及程式收據 | 此為自我聲明，並非獨立的流程認證 |
@@ -85,7 +87,9 @@ Telegram 將「被動傳送」與「主動短輪詢」區分開來。其更新 �
 | 模式 | 目的 | 狀態 |
 | --- | --- | --- |
 | 標準觀察 | 記錄來自選定來源的已發佈更新 | 已實作 |
-| 優先觀察事項 | 針對有限來源集進行額外的差異檢查 | 未以使用者模式實作 |
+| 優先級複核 | 已標記的來源採用其自身可配置的間隔，並在每次限定範圍的重新檢查循環中具有優先權 | 已實作歷史紀錄與訊息查詢功能 |
+
+優先級星號用於控制這些重新檢查。額外的 ``updates.getChannelDifference` ` 短間隔輪詢功能不會作為獨立的使用者模式對外公開。
 
 任意的高頻率輪詢、忽略 FloodWait 設定，或假設額外帳戶具備線性處理能力， 均非有效的規模估算模型。預設限制為 前 1,000 個列出的對話，每個歷史快照最多 500 則訊息， 每種類型的收集檔案為 1–2,000 MiB，以及 4 GiB 未壓縮的簽名 ZIP 內容；各項 限制皆可於**「參數」**中針對各工作區進行調整。匯出資料無固定事件數上限。 瀏覽器備用模式預設上限為 128 MiB；串流 CLI 具有可配置的 傳輸限制，預設為 5 GiB。
 
@@ -114,9 +118,9 @@ Telegram 將「被動傳送」與「主動短輪詢」區分開來。其更新 �
 | 程式檔案大小測量 | 關於已測量檔案的收集器自我報告 |
 | 有效的獨立 TSA 回應 | 在明確的信任假設下，特定時戳（TSA）時間點下特定位元組的存在性 |
 
-已實作 RFC 3161 請求準備及 OpenSSL 回應驗證功能。 自動提交功能尚未實作。攜帶機器 時間的請求或本機簽名並非獨立的時間戳記。請參閱 [TIMESTAMP.md](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/timestamp/)。
+已實作 RFC 3161 請求準備及 OpenSSL 回應驗證功能。 「證據模式」亦會將檢查點雜湊值提交至已設定的時間戳記服務。 請保留並驗證主管機關的回應，以建立獨立的時間錨點。 請參閱 [TIMESTAMP.md](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/timestamp/)。
 
-掌控資料收集器與簽署金鑰的操作者，可偽造新的簽署 觀察紀錄。這些簽署並不能證明訊息源自 Telegram、其真實性，亦不代表自動 具備法律可採納性。若要確保更強的證據保存，需具備獨立的檢查點／時間戳記儲存、 金鑰存取控制、傳輸紀錄，以及由可信賴軟體進行的驗證。
+獨立保留檢查點、控制簽署金鑰的存取權限、保存傳輸 紀錄，並使用可信賴的軟體驗證匯出檔案。[驗證範圍](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) 說明了這些檢查如何相互補充，以及適用哪些信任假設。
 
 ## 匯出、部署與移交
 
@@ -140,4 +144,4 @@ Telegram 將「被動傳送」與「主動短輪詢」區分開來。其更新 �
 6. 在目標作業系統／容器組合上進行乾淨安裝，並驗證備份與還原功能。
 7. 針對安全性、簽名以及來源歸屬／證據主張的獨立審查。
 
-管理日誌擷取、額外的反應器清單、優先級擷取、獨立工作程序， 以及全應用程式的加密功能，仍屬未來開發工作。範圍限定的面板存取權限說明 請參閱「[存取與權限](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)」章節。0.6 版支援 如 [ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/) 所述的「有限單一帳戶 TData」及「帳戶檔案匯入」功能。 發布前請詳閱 Telegram API 條款。研究參考文獻與平台 調查結果請參閱 [RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md)。
+「[存取與權限](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)」章節中說明了分域式面板存取權限。0.6 版支援 [《ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/)》中所述的「有限單一帳戶 TData」及「帳戶檔案匯入」功能。 發佈前請詳閱 Telegram API 條款。相關研究參考資料及平台 調查結果請參閱[《RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md)》。

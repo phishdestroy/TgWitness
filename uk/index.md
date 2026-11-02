@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/
 
-[Відкрите програмне забезпечення / v0.7.1](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/)
+[Відкрите програмне забезпечення / v0.8.0](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/)
 
 Збирайте повідомлення Telegram, зберігайте їхні зміни та експортуйте підписаний запис.
 
@@ -60,6 +60,8 @@ TgWitness / Підписані експортовані даніМІСЦЕВИЙ
 
 04 / Підписані експортовані дані. Візьміть журнал із собою — разом із маніфестом та незалежним верифікатором.
 
+Відстежуйте збережений запис за допомогою [Case Board](https://phishdestroy.github.io/TgWitness/uk/docs/case-board/), [оформлення звіту](https://phishdestroy.github.io/TgWitness/uk/docs/reports/) та [копії](https://phishdestroy.github.io/TgWitness/uk/docs/handover/) [для обміну](https://phishdestroy.github.io/TgWitness/uk/docs/handover/). [Переглядайте групи облікових записів](https://phishdestroy.github.io/TgWitness/uk/docs/groups/) разом.
+
 01 / ЗАПИС
 
 ### Ви обираєте сферу застосування.
@@ -84,7 +86,8 @@ TgWitness / Підписані експортовані даніМІСЦЕВИЙ
 
 [Експортувати та перевірити](https://phishdestroy.github.io/TgWitness/uk/docs/exports/)
 
-## Зміни один байт — ланцюжок про це повідомить.
+## Змініть хоча б один байт —
+система перевірки одразу про це повідомить.
 
 Кожна подія містить посилання на попередній хеш та підпис Ed25519.
 
@@ -94,7 +97,7 @@ TgWitness / Підписані експортовані даніМІСЦЕВИЙ
 
 ![Окремо збережений контрольний пункт дозволяє одержувачу порівняти експортований журнал із попередніми даними.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-Дізнайтеся, що забезпечує кожен механізм верифікації та де пролягають його межі.
+Дотримуйтесь перевірок — від хешу файлу до окремо збереженої контрольної точки.
 
 [Ознайомтеся з вісьмома рівнями доказовості](https://phishdestroy.github.io/TgWitness/uk/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipПІДПИСАНИЙ ПАКЕТ
 
   Незалежна перевіркаПідписаний маніфест + автономний верифікатор
 
-Підписи виявляють спроби фальсифікації на основі надійного ключа. Вони не підтверджують походження з Telegram і не гарантують повного збереження даних. Вміст журналу та мультимедійні файли потребують зашифрованого сховища, яке ви повинні забезпечити самостійно.
+Одержувачі перевіряють збережені записи та файли за допомогою надійного ключа колектора. Окремо збережений контрольний пункт також перевіряє узгодженість із попереднім журналом. [Ознайомтеся з етапами перевірки.](https://phishdestroy.github.io/TgWitness/uk/docs/concepts/#layers)
 
 ## Копії на S3. Зовнішні перевірки.
 
@@ -154,13 +157,13 @@ Object Lock
 
 [Налаштуйте S3 та відновте копію](https://phishdestroy.github.io/TgWitness/uk/docs/exports/#s3)[Ознайомтеся з деталями перевірки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**Чого не робить** відновлює **дані** без експортованого ключа дешифрування та не замінює незалежного свідка.
+**Ключ відновлення:** Збережіть експортований ключ дешифрування окремо, щоб мати змогу відновити зашифровану копію.
 
 ### Сповіщення · Apprise
 
 Сповіщення про проблеми, зміни в чатах та щоденні зведення через Apprise: месенджери, електронну пошту або власний JSON-вебхук.
 
-**Не виконується**: текст повідомлень не надсилається, якщо ви не увімкнули функцію уривків.
+**Виберіть, чим ділитися:** уривки повідомлень за замовчуванням вимкнені; увімкніть їх для адресатів, яким ви довіряєте.
 
  [Налаштувати пункти призначення сповіщень](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ Object Lock
 
 Хешуйте контрольні точки з часовими мітками за допомогою RFC 3161 та OpenTimestamps.
 
-**Чого не робить**. Не розглядає очікуване підтвердження в календарі як підтверджену мітку часу Bitcoin.
+**Слідкуйте за результатом:** перевірте відповідь компетентного органу або оновлюйте квитанцію OpenTimestamps до підтвердженого доказу Bitcoin.
 
  [Перевірити докази з часовими мітками](https://phishdestroy.github.io/TgWitness/uk/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ Object Lock
 
 Окремий хост зберігає підписані спостереження та може публікувати `TGW1` контрольні точки.
 
-**Чого не робить**: не перетворює два робочі простори на одному хості-колекторі на незалежні джерела доказів.
+**Виділіть посилання** «Запустити свідка на іншому хості» та збережіть його власний ключ підпису та журнал.
 
  [Налаштуйте Witness](https://phishdestroy.github.io/TgWitness/uk/docs/witness/)
 
@@ -184,7 +187,7 @@ Object Lock
 
 Продовження роботи після перезапуску. Повторна перевірка та `coverage.json` відображення відновлених повідомлень та пропусків.
 
-**Чого не робить** відтворює кожне пропущене редагування або зникле повідомлення.
+**Перегляньте інтервал:** переглядайте відновлені поточні повідомлення разом із зафіксованими перервами; попередні версії залишаються доступними після їхнього збереження.
 
  [Перевірте послідовність та пропуски](https://phishdestroy.github.io/TgWitness/uk/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ cd TgWitness
 
 [Переглянути випуски](https://github.com/phishdestroy/TgWitness/releases)
 
-Немає Python на Windows? [Завантажте портативний пакет](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), розпакуйте його та двічі клацніть на файл «`TgWitness.cmd`».
+Немає Python на Windows? [Завантажте портативний пакет](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), розпакуйте його та двічі клацніть на файл «`TgWitness.cmd`».
 
 КРОК 02
 
@@ -260,7 +263,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 Для встановлення з вихідного коду токен знаходиться в `data/live/panel-token.txt`. Для входу в Telegram можна використовувати вбудовані налаштування API або власну пару з [my.telegram.org](https://my.telegram.org). [Повна інструкція з налаштування ↗](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [Що нового →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/) · [Функції та відомі обмеження →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/)
+**TgWitness 0.8.0** [Що нового →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/) · [Функції та відомі обмеження →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/)
 
 ## Чіткі інструкції. Корисний наступний крок.
 
