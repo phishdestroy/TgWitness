@@ -128,6 +128,13 @@
     try{const result=await call("preview",body);if(turn!==generation)return;plan=result;sources(result);}
     catch(error){if(turn===generation)$("ask-sources").replaceChildren(viewState("error",tr("Could not load data"),error.message));throw error;}
   });});
+  $("ask-context-export").addEventListener("click",event=>busy(event.currentTarget,async()=>{
+    if(!plan||!may("export"))return;
+    const source_ids=[...$("ask-sources").querySelectorAll("input:checked")].map(el=>el.value);
+    if(!source_ids.length)throw new Error(tr("Select at least one source."));
+    const response=await api("analysis/context-export",{plan_id:plan.plan_id,source_ids},{root:true});
+    saveBlob(await response.blob(),"tgwitness-research-context.zip");
+  }));
   function claims(items,box){
     box.replaceChildren();
     if(!items.length)box.append(viewState("empty",tr("Not found in the available archive"),tr("The selected sources do not support an answer.")));

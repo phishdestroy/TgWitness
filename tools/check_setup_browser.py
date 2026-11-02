@@ -49,7 +49,7 @@ def main():
                 assert not missing, (lang, missing)
             navigate_panel(page, "witness")
             expect(page.locator("#witness-form")).to_be_hidden()
-            expect(page.locator(".extra-card")).to_have_count(6)
+            expect(page.locator(".extra-card")).to_have_count(7)
             before = len(writes)
             for name in ("setup", "alerts", "evidence", "cloud", "github"):
                 opener = page.locator("#extras-open-" + name)

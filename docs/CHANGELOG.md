@@ -1,5 +1,23 @@
 # Changelog
 
+## Unreleased
+
+- Inspect account files before connecting: settings-only JSON cannot be imported as
+  a session, paired files are checked together, and additional accounts get their
+  own workspace. Connected accounts and typed-name deletion are visible on Account.
+- Keep URL, workspace selector and loaded account in agreement. A mismatch blocks
+  actions. Exports and Telegram actions name the account in their confirmation.
+  Chats open read-only, mask detected secrets without rewriting originals, and
+  journal reveals. Empty chats can load history with a result or a retry.
+- Fall back to ordinary downloads when the browser refuses its file picker or
+  writer. Prepared journal exports retain their size, SHA-256 and a download-again
+  action. Journal numbering, missing-time text and chat date spacing are clearer.
+- Add a searchable notification-service catalog, service icons, an optional
+  operator-owned control bot and Discord witness publication. Storage separates
+  backups, verified attachment offloading and evidence retention. Recovery checks
+  signatures and file hashes; exports require selected offloaded files to be
+  restored. Investigation sources can be handed off as Markdown and JSONL.
+
 ## 0.8.0 preview · 2 November 2026
 
 - Fixed Windows portable packaging of fpdf2's public colour profile and licence;

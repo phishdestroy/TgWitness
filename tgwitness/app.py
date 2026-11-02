@@ -41,6 +41,8 @@ from .anchor import request_archive
 from .anchoring import EvidenceMode, anchor_loop, evidence_settings, gateway_rows, request_anchor
 from . import replica
 from . import alerts
+from .storage import Storage
+from .operator_bot import OperatorBot
 from .network import NetworkConfig, RoutePolicy, parse_mtproxy_link
 from . import proxy_catalog, proxy_sources
 from .proxy_catalog import NoProxyAvailable, ProxyPool, PublicCatalog, feed_network
@@ -328,6 +330,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         resume_task = None
         anchor_task = None
         replica_task = None
+        storage_task = operator_bot_task = None
         alert_task = None
         host_task = None
         pool_task = None
@@ -418,7 +421,11 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             app.state.replica_wakeup, app.state.replica_status = asyncio.Event(), {"busy": False}
             app.state.host_status = {}  # the assurance loop's latest host measurement
             app.state.alert_wakeup = asyncio.Event()
+            app.state.storage = Storage(store, vault, collector.outside_route)
+            app.state.operator_bot = OperatorBot(app.state)
             if not store.get_setting("demo", False):
+                storage_task = asyncio.create_task(app.state.storage.loop())
+                operator_bot_task = asyncio.create_task(app.state.operator_bot.loop())
 
                 alert_task = asyncio.create_task(alerts.alert_loop(
                     store, vault, collector.outside_route, app.state.alert_wakeup, profile_id))
@@ -479,7 +486,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 if getattr(app.state, "account_export", None):
                     await app.state.account_export.close()
                 check_task = shared_pool.check_task if proxy_pool is None else None
-                for task in (resume_task, anchor_task, replica_task, alert_task, host_task, pool_task, check_task):
+                for task in (resume_task, anchor_task, replica_task, alert_task, host_task, pool_task, check_task,
+                             storage_task, operator_bot_task, getattr(getattr(app.state, "storage", None), "task", None)):
                     if task:
                         task.cancel()
                         await asyncio.gather(task, return_exceptions=True)
@@ -721,7 +729,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         collector_status, parts, targets = scoped_status(app, allowed)
         principal = request.state.principal
         collector_status, parts = status_parts(principal, collector_status, parts, allowed)
-        result = {"demo": store.get_setting("demo", False),
+        result = {"workspace_id": profile_id, "demo": store.get_setting("demo", False),
                 "analysis": {"enabled": ai.enabled(app.state) and not store.get_setting("demo", False),
                              "media_available": media_analysis.available() and not store.get_setting("demo", False)},
                 "collector": collector_status, "stats": store.stats(allowed),
@@ -911,6 +919,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 raise HTTPException(400, str(exc)) from None
             if not account.get("session"):
                 raise HTTPException(400, "These files hold no login session. Add the .session or TData of the account.")
+            if bool(account.get("api_id")) != bool(account.get("api_hash")):
+                raise HTTPException(422, "Session found, but its application settings are incomplete. Supply both API ID and API hash in the JSON, or select the session file without this JSON to use the built-in app settings.")
             registry = app.state.profiles
             expected, key = account.get("expected_user_id"), session_key(account["session"])
             # Before any connection: the same key from a second proxy address while its workspace is
@@ -1123,16 +1133,23 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.post("/api/auth/import", dependencies=[Depends(authenticate)])
     async def import_account(body: AccountImport):
         require_live()
-        async with op_lock:
-            require_live()
-            if app.state.collector.export_claim:
-                raise HTTPException(409, "Pause the active export before importing another account.")
-            if app.state.collector.running:
-                raise HTTPException(400, "Pause observation before importing another account.")
-            try:
-                return await asyncio.to_thread(import_accounts, [item.model_dump() for item in body.files], body.passcode)
-            except ValueError as exc:
-                raise HTTPException(400, str(exc)) from None
+        # Conversion is read-only. Validate the file even while a collector runs;
+        # connecting a converted session remains a separately guarded operation.
+        try:
+            result = await asyncio.to_thread(import_accounts, [item.model_dump() for item in body.files], body.passcode)
+            if not result["has_authorization"]:
+                raise ValueError("No session — only application settings. Add a .session or TData file, or sign in by phone or QR.")
+            if bool(result.get("api_id")) != bool(result.get("api_hash")):
+                raise ValueError("Session found, but its application settings are incomplete. Supply both API ID and API hash in the JSON, or select the session file without this JSON to use the built-in app settings.")
+            return result
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from None
+
+    @app.post("/api/auth/import/preview", dependencies=[Depends(authenticate)])
+    async def import_preview(body: AccountImport):
+        require_live()
+        from .account_import import preview
+        return await asyncio.to_thread(preview, [item.model_dump() for item in body.files], body.passcode)
 
     @app.post("/api/auth/qr/start", dependencies=[Depends(authenticate)])
     async def start_qr(body: Credentials, request: Request):
@@ -2384,7 +2401,12 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 path.unlink(missing_ok=True)
                 raise
 
-        async with export_lock:
+        async with export_lock, app.state.storage.lock:
+            if fmt == "zip":
+                try:
+                    app.state.storage.require_local_media()
+                except ValueError as exc:
+                    raise HTTPException(409, str(exc)) from None
             try:
                 path = await build_file(build)
             except pdf_report.MissingFont as exc:
@@ -2439,9 +2461,11 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 path.unlink(missing_ok=True)
                 raise
 
-        async with export_lock:
+        async with export_lock, app.state.storage.lock:
             try:
                 path = await build_file(build)
+            except handover.RemoteAttachment as exc:
+                raise HTTPException(409, str(exc)) from None
             except handover.EmptySelection as exc:
                 raise HTTPException(422, str(exc)) from None
             except Exception as exc:
@@ -2459,6 +2483,104 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def prepared_exports():
         from .export_history import listing
         return listing(app.state.store)
+
+    prepared_tickets = {}
+
+    async def identify_download(request, credential):
+        try:
+            principal = await identify(request, HTTPAuthorizationCredentials(scheme='Bearer', credentials=credential))
+            await authenticate(request, principal)
+            return principal
+        except HTTPException as exc:
+            if exc.status_code == 401:
+                raise HTTPException(403, 'This access has expired.') from None
+            raise
+
+    @app.post("/api/exports/{export_id}/ticket", dependencies=[Depends(authenticate)])
+    async def export_ticket(export_id: str, request: Request):
+        from .export_history import locate
+        try:
+            async with export_lock:
+                await complete_in_thread(locate, app.state.store, export_id)
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from None
+        now = time.monotonic()
+        for key, value in list(prepared_tickets.items()):
+            if value[0] < now:
+                prepared_tickets.pop(key, None)
+        if len(prepared_tickets) >= 100:
+            raise HTTPException(429, "Too many pending downloads. Retry in a minute.")
+        ticket = secrets.token_urlsafe(32)
+        prepared_tickets[ticket] = (now + 120, export_id, request.headers.get("authorization", "").partition(" ")[2])
+        path = ("" if profile_id == "default" else "/profiles/" + profile_id) + "/api/exports/" + export_id + "/download"
+        response = Response(json.dumps({"url": path}), media_type="application/json")
+        response.set_cookie("tgwitness-download", ticket, max_age=120, path=path, httponly=True,
+                            samesite="strict", secure=request.url.scheme == "https")
+        return response
+
+    @app.get("/api/exports/{export_id}/download")
+    async def export_again(export_id: str, request: Request):
+        from .export_history import download_copy, headers
+        if request.headers.get("authorization"):
+            scheme, _, credential = request.headers['authorization'].partition(' ')
+            if scheme.lower() != 'bearer':
+                raise HTTPException(401, 'Use a Bearer access token.')
+            who = await identify(request, HTTPAuthorizationCredentials(scheme="Bearer", credentials=credential))
+            await authenticate(request, who)
+        else:
+            entry = prepared_tickets.pop(request.cookies.get("tgwitness-download", ""), None)
+            if not entry or entry[0] < time.monotonic() or entry[1] != export_id:
+                raise HTTPException(403, "This download link expired. Choose Download again in the panel.")
+            try:
+                credential = entry[2]
+                who = await identify_download(request, credential)
+                if who is None:
+                    raise Refused("This access has expired.")
+                access_check(who, profile_id, POLICY["GET /api/exports/{export_id}/download"], {})
+            except Refused as exc:
+                raise HTTPException(403, str(exc)) from None
+        receipt = {}
+
+        def prepare_download():
+            path, metadata = download_copy(app.state.store, export_id)
+            receipt.update(metadata)
+            return path
+
+        try:
+            async with export_lock:
+                path = await build_file(prepare_download)
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from None
+        # Copying a large saved file can take time. Recheck revocation before
+        # any response bytes escape, and remove the copy on every early exit.
+        try:
+            try:
+                who = await identify_download(request, credential)
+                if who is None:
+                    raise Refused('This access has expired.')
+                access_check(who, profile_id, POLICY['GET /api/exports/{export_id}/download'], {})
+            except Refused as exc:
+                raise HTTPException(403, str(exc)) from None
+            extension = "zip" if receipt["encrypted"] or receipt["format"] == "handover" else receipt["format"]
+            return TemporaryDownload(path, filename="tgwitness-" + profile_id[:8] + "-" + export_id[:8] + "." + extension,
+                                     media_type="application/octet-stream", headers={**headers(receipt), "Cache-Control": "no-store"})
+        except BaseException:
+            path.unlink(missing_ok=True)
+            raise
+
+    class Reveal(BaseModel):
+        chat_id: int
+        message_id: int | None = None
+        reason: Literal['message', 'display_preference'] = 'message'
+
+    @app.post("/api/privacy/reveal", dependencies=[Depends(authenticate)])
+    async def reveal_secret(body: Reveal, request: Request):
+        require_chat(request, body.chat_id)
+        if body.reason == 'message' and body.message_id is None:
+            raise HTTPException(422, 'Select the message to reveal.')
+        app.state.store.append("panel.secret_revealed", {"chat_id": body.chat_id, "message_id": body.message_id,
+                                "reason": body.reason, "operator": request.state.principal.owner})
+        return {"recorded": True}
 
     @app.get("/api/media/{digest}", dependencies=[Depends(authenticate)])
     async def media(request: Request, digest: str, inline: bool = False):
@@ -2481,6 +2603,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
     from .webhook_api import register as register_webhooks
     register_webhooks(app, authenticate, profile_id)
+    from .storage_api import register as register_storage
+    register_storage(app, authenticate, require_live)
 
     if allow_profiles:
 

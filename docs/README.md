@@ -43,6 +43,8 @@ The proxy and witness bot are separate options.
 
 ## Find your workflow
 
+[Panel safeguards and import checks](PANEL-SAFETY.md) · [Cloud storage, disk space and recovery](STORAGE.md)
+
 History loading, archive analysis, MCP, local OCR/transcription and webhooks are
 included in 0.7.1. [Start with the workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/).
 

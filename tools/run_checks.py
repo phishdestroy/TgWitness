@@ -39,6 +39,8 @@ SUITES = {
         "check_capture_language_browser.py",
     ),
     "browser-ux": (
+        "check_import_preflight.py", "check_chat_safety_browser.py", "check_workspace_downloads_browser.py",
+        "check_storage_services.py", "check_prepared_export_access.py", "check_services_browser.py",
         "check_workflows_browser.py", "check_disclosure_preview_browser.py", "check_handoff_languages_browser.py",
         "check_router_browser.py", "check_view_host_browser.py", "check_view_lifecycle_browser.py",
         "check_polling_browser.py", "check_time_browser.py", "check_shell_browser.py",
