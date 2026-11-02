@@ -235,7 +235,7 @@ TData היא התיקייה `tdata` של יישום Telegram Desktop (האפלי
 - **בצ'אטים של מספר חשבונות ניתן לראות:** מקורות משותפים, החשבונות העוקבים אחריהם ו הפרעות בתקופת התצפית על סביבת העבודה הזמינה (עד שבעה ימים). **ייצוא עם N חשבונות** מחלק את הייצוא של ערוץ או סופר-קבוצה ביניהם וחותם על ארכיון אחד.
 - **ייצוא קבוצה:** תמונה אחת ZIP עם הייצוא החתום של כל חשבון תחת `accounts/` ו `manifest.json` ורשימה של טביעות האצבעות של ה-SHA-256 והמפתח, חתומות על ידי סביבת העבודה הראשית ב `manifest.signature.json`. יש לאמת כל ארכיון חשבון בנפרד באמצעות `python -m tgwitness.verify` ובאמצעות טביעת האצבע המהימנה של אותו חשבון.
 
-חברי הקבוצה חולקים את הגדרות הקבוצה; חשבון יכול לשמור על הערכים שלו. ראו [הגדרות משותפות](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [המדריך לייבוא ולקבוצות](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) [ולוח המחוונים של מאגר ה-MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+חברי הקבוצה חולקים את הגדרות הקבוצה; חשבון יכול לשמור על הערכים שלו. ראו [הגדרות משותפות](https://phishdestroy.github.io/TgWitness/he/docs/reference/settings/#account-groups), [המדריך לייבוא ולקבוצות](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) [ולוח המחוונים של מאגר ה-MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## התנתק
 
@@ -278,6 +278,6 @@ TData היא התיקייה `tdata` של יישום Telegram Desktop (האפלי
 | מזהה החשבון אינו תואם לחשבון שיובא | מזהה המשתמש בקובץ שונה מזה ש-Telegram מדווח עליו; הקובץ מיועד לחשבון אחר. |
 | החשבון כבר שייך לסביבת עבודה אחרת | פתח את סביבת העבודה הזו במקום להוסיף את החשבון פעמיים. |
 | קשור, אך חסרה קבוצה פרטית מרשימת הצ'אטים תחת "**מקורות"** | בדוק את החברות. הבוחר בודק את 1,000 השיחות הראשונות; הגדל את המגבלה תחת **"פרמטרים"**. |
-| החיבור באמצעות פרוקסי נכשל | בדוק את מצב הניתוב ומצב ה-IP. מצב MTProxy האוטומטי מנסה כניסה פעילה אחרת. מצב "הסתרת IP" ממתין; מצב הגיבוי שנבחר במפורש יכול להתחבר ישירות לאחר העיכוב שהוגדר. ראה [מצבי ניתוב](https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/#ip-modes). |
+| החיבור באמצעות פרוקסי נכשל | בדקו את מצב הניתוב וה-IP. ניסיון אוטומטי MTProxy מנסה כניסה אחרת שעובדת. "הסתר את כתובת ההמתנה"; "ישיר" (Direct) כפתרון אחרון יכול להתחבר ישירות לאחר העיכוב שהוגדר. ראו [מצבי ניתוב](https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/#ip-modes). |
 
 ראו גם: [חיבור ואבטחה](https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/) עבור פרוקסי והצפנה, [וכיצד מתבצע האיסוף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/) של הנתונים הנלכדים לאחר הכניסה למערכת.

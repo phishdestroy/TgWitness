@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/case-
 
 Filtros de informes, ocho diseños, plantillas de contenido, historiales de cambios guardados y la evaluación incluida en las exportaciones firmadas.
 
-[Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE_REPORTS.md)
-
 Convierta las observaciones seleccionadas en un resumen legible del caso: su cuestión, alcance, cambios guardados, gráficos, conclusiones y referencias a las fuentes. Cada informe ofrece al destinatario una forma de comprobar el material entregado e inspeccionar la cobertura de la recopilación.
 
 La sección **«Base de confianza y limitaciones»** aparece en los informes de diario, traspaso, chat, cuenta y uso compartido. Los archivos PDF de diario y traspaso utilizan la misma evaluación que su archivo «`report.json`» firmado. Los manifiestos ZIP incluyen «`case_assessment`» en el manifiesto firmado. Esta evaluación se transmite junto con el material exportado. Las observaciones originales conservan sus firmas existentes.

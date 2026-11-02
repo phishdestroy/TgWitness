@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/witne
 
 Jalankan TgWitness dengan kunci dan botnya sendiri, publikasikan titik pemeriksaan yang ditandatangani ke saluran, dan periksa ekspor data berdasarkan titik pemeriksaan tersebut.
 
-[Pengaturan bot dan proxy dalam bahasa Rusia](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+[Ekspor dan verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/) · [Jaminan tinggi](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/) · [Panduan panel](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#extras)
 
 Sebuah pengumpul menandatangani jurnalnya sendiri, sehingga siapa pun yang mengendalikan pengumpul dan kuncinya secara prinsip dapat mengubah atau memotong jurnal tersebut dan menandatanganinya kembali. Witness membuat hal tersebut dapat terdeteksi. Ini adalah proses terpisah — wadah lain, atau lebih tepatnya server yang dijalankan oleh pihak lain — yang setiap beberapa menit mengambil bagian awal jurnal yang telah ditandatangani oleh pengumpul, menandatangani apa yang dilihatnya dengan kuncinya sendiri, menyimpannya dalam jurnalnya sendiri, dan mempostingnya ke saluran Telegram.
 
@@ -27,7 +27,7 @@ Diagram alur · Pengumpul → Witness (titik pemeriksaan yang ditandatangani: ju
 | Kunci Ed25519 dan jurnal miliknya sendiri | Brankas pengumpul, kunci penandatanganan, atau token panel |
 | Token bot Telegram miliknya sendiri | Isi pesan: bagian awal berisi jumlah catatan dan hash |
 
-Token dibuat di halaman **Witness** panel, ditampilkan sekali, dan disimpan hanya sebagai SHA-256. Token ini membuka tepat satu titik akhir, `GET /api/witness/head`, yang mengembalikan titik pemeriksaan yang baru ditandatangani beserta penghitung koleksi tanpa konten yang ditandatangani dan status kesehatan operasional. Token ini tidak dapat membuka panel, membaca isi pesan, atau mengubah pengaturan, dan token panel tidak diterima di sana. Cabut token di halaman yang sama. Pengumpul mencatat saat kunci saksi baru mulai melakukan pemeriksaan (`witness.seen`) dan menampilkan pemeriksaan terakhir per token; seorang saksi yang belum melakukan pemeriksaan dalam 2,5 interval akan ditandai sebagai terlambat.
+Token dibuat di **Extras → Independent witness**, ditampilkan sekali, dan disimpan hanya sebagai SHA-256. Token ini membuka tepat satu titik akhir, `GET /api/witness/head`yang mengembalikan titik pemeriksaan yang baru ditandatangani beserta penghitung koleksi tanpa konten yang telah ditandatangani dan status kesehatan operasional. Token ini tidak dapat membuka panel, membaca isi pesan, atau mengubah pengaturan, dan token panel tidak diterima di sana. Cabut token di halaman yang sama. Pengumpul mencatat saat kunci saksi baru mulai melakukan pemeriksaan (`witness.seen`) dan menampilkan pemeriksaan terakhir per token; seorang saksi yang belum melakukan pemeriksaan dalam 2,5 interval akan ditandai sebagai terlambat.
 
 Saksi baru mengirimkan tantangan acak pada setiap jajak pendapat; pernyataan penangkapan mengulanginya di bawah tanda tangan pengumpul. Penghitung terikat pada titik pemeriksaan yang tepat dan disertakan dalam posting saksi yang ditandatangani. Kepala warisan tetap diterima oleh saksi mandiri. Pertumbuhan jurnal saja tidak pernah dihitung sebagai pesan baru.
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 Anda memerlukan bot Telegram (buatlah dengan @BotFather), sebuah saluran di mana bot tersebut menjadi administrator, serta alamat pengumpul yang dapat diakses oleh saksi — melalui HTTPS di luar jaringan pribadi (lihat profil HTTPS pada [bagian penerapan](https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/)).
 
-Buka **Ekstra → Bot di saluran Anda → Atur bot** di panel. Tiga langkah mencakup akses baca-saja, saluran Anda, dan interval, lalu meluncurkan saksi. Kebijakan publikasi, proxy HTTP/SOCKS5 opsional, dan alamat API Bot khusus terdapat di **pengaturan Lanjutan** . Formulir ini mengunduh `witness.json` dengan kunci pengumpul ruang kerja ini yang disematkan. Unduh token hanya-baca yang baru dibuat dengan **Simpan berkas akses** sebagai `witness-token.txt` ; letakkan berkas tersebut beserta `bot-token.txt` yang dibuat di host saksi di samping berkas JSON tersebut. Pengumpul tidak pernah menerima token bot. Pengunduhan tidak akan memulai layanan atau mempublikasikan pesan. Tidak ada saksi proyek yang dihosting yang secara implisit didaftarkan.
+Buka **Ekstra → Saksi independen → Konfigurasi** di panel. Tiga langkah mencakup akses baca-saja, saluran Anda, dan interval, lalu meluncurkan saksi. Kebijakan publikasi, proxy HTTP/SOCKS5 opsional, dan alamat API Bot khusus terdapat di bawah **Pengaturan Lanjutan**. Formulir ini mengunduh `witness.json` dengan kunci pengumpul ruang kerja ini yang telah disematkan. Unduh token baca-saja yang baru dibuat dengan **Simpan berkas akses** sebagai `witness-token.txt`; simpan token tersebut beserta `bot-token.txt`yang dibuat di host saksi di samping JSON tersebut. Pengumpul tidak pernah menerima token bot. Pengunduhan tidak akan memulai layanan atau mempublikasikan pesan. Tidak ada saksi proyek yang dihosting yang secara implisit terdaftar.
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### Publikasikan ke Discord
+
+Seorang saksi dapat memposting ke saluran Discord alih-alih ke Telegram. Di Discord, buka **Edit Channel → Integrations → Webhooks**, buat webhook, dan salin URL-nya. Di panel tersebut, pilih **Discord webhook · saluran Anda** pada langkah 2. Di server saksi, simpan URL tersebut sebagai `discord-webhook.txt` di samping `witness.json`; URL tersebut tidak akan pernah sampai ke pengumpul.
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+Seorang saksi memiliki satu penerbit: saluran Telegram atau webhook Discord, bukan keduanya. Postingan memuat pernyataan yang ditandatangani yang sama dan tidak dapat menandai siapa pun. Postingan yang lebih panjang dari batas 2.000 karakter Discord akan diganti dengan baris pendek yang dilengkapi dengan salinan lengkap yang dilampirkan sebagai `witness-check.txt`. Setiap ID posting dicatat sebagai `witness.posted`. `verify.py --channel`hanya membaca ekspor saluran Telegram, jadi untuk Discord, simpan jurnal saksi: jurnal tersebut menyimpan setiap cek.
+
 ### Opsi
 
 | Opsi | Lingkungan | Default | Arti |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | Kunci saksi dan jurnal |
 | `--config` | `_CONFIG` | – | Berkas JSON dengan salah satu opsi di atas |
 
-Alamat pengumpul, token, dan saluran berasal dari `--collector`, `--token`, atau `--token-file`, `--bot-token`, `--bot-token-file`, dan `--channel`, atau `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, dan `_CHANNEL`, yang menjaga kerahasiaan di luar daftar proses.
+Alamat pengumpul, token, dan saluran berasal dari `--collector`, `--token` atau `--token-file`, `--bot-token` atau `--bot-token-file`, `--discord-webhook-file` dan `--channel`, atau `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` dan `_CHANNEL`, yang mencegah rahasia masuk ke dalam daftar proses.
 
 Sebuah berkas konfigurasi menggunakan nama opsi dengan garis bawah, ditambah `texts`, yang menggantikan kata-kata dalam postingan saluran:
 
@@ -123,6 +134,36 @@ Sebuah berkas konfigurasi menggunakan nama opsi dengan garis bawah, ditambah `te
 Kunci `texts`: `ok`, `key_changed`, `rollback`, `fork`, `invalid`, `no_response`, `collector`, `records`, `head`. Baris perintah lebih diutamakan daripada lingkungan, dan lingkungan lebih diutamakan daripada berkas. Opsi atau kunci teks yang tidak dikenal akan menghentikan proses pencatatan dengan menampilkan pesan, bukan diabaikan. Penyusunan kata tidak pernah memengaruhi verifikasi: verify.py memeriksa token yang ditandatangani di akhir setiap posting. Dengan `--post changes` atau `problems`, pemeriksaan yang tidak diposting tetap ada di jurnal saksi dan `verify.py` mencantumkannya sebagai tidak pernah diposting; catatan awal menyebutkan kebijakan tersebut. Setiap pemeriksaan tetap muncul di jurnal, sehingga semakin sedikit posting berarti semakin sedikit waktu Telegram yang independen, bukan semakin sedikit pemeriksaan.
 
 Tanpa saluran, TgWitness tetap menyimpan jurnalnya. Simpan sidik jari kunci TgWitness (`python -m tgwitness.witness fingerprint`) di tempat lain.
+
+## Halaman bukti publik untuk beberapa ruang kerja
+
+`python -m tgwitness.proof` TgWitness dapat menangani hingga 32 ruang kerja sekaligus dan menampilkan halaman hanya-baca yang berisi pemeriksaan terbaru yang telah ditandatangani untuk masing-masing ruang kerja. Setiap ruang kerja memiliki kunci saksi dan jurnal tersendiri di dalam folder data serta kunci pengumpul yang disematkan; pengiriman ke saluran Telegram bersifat opsional untuk setiap ruang kerja. Mulailah dari [proof.config.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example):
+
+| Bidang | Arti |
+| --- | --- |
+| `title` | Judul halaman, 1–100 karakter |
+| `data_dir` | Kunci dan jurnal saksi, terkait dengan berkas; default `proof-data` |
+| `interval`, `timeout` | Jeda antara pemeriksaan (1–1440, default 5); waktu tunggu dalam detik (5–600, default 20) |
+| `workspaces[].id`, `label` | Alias singkat huruf kecil dan nama yang ditampilkan |
+| `workspaces[].collector` | Alamat Collector; ruang kerja lainnya berakhir dengan `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | Diperlukan, berbeda untuk setiap ruang kerja |
+| `workspaces[].token_file` | File yang berisi token saksi read-only dari ruang kerja tersebut |
+| `workspaces[].channel`, `bot_token_file` | Opsional, secara bersamaan: posting setiap pemeriksaan ke saluran |
+| `workspaces[].proxy`, `bot_api` | Rute opsional dan alamat API Bot |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+Perintah pertama memvalidasi berkas dan berkas token tanpa membuka koneksi. Halaman ini hanya merespons permintaan GET dan HEAD:
+
+- `/` menampilkan setiap ruang kerja; ruang kerja yang tidak diperiksa selama 2,5 interval akan ditandai sebagai usang.
+- `/api/proof` mengembalikan hasil yang sama dengan JSON.
+- `/api/proof/<id>` mengunduh pernyataan terbaru yang telah ditandatangani (`tgwitness-public-proof-v1`): nomor dan hash catatan saksi, status, kunci pengumpul yang disematkan, titik pemeriksaan, penghitung pengumpulan, serta apakah posting saluran berhasil, yang ditandatangani oleh kunci saksi ruang kerja tersebut.
+- `/healthz` Menampilkan kode kesalahan 503 ketika monitor ruang kerja telah berhenti beroperasi.
+
+Beri halaman tersebut nama hostnya sendiri, seperti [Caddyfile.proof.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example). Untuk verifikasi, ekspor jurnal saksi ruang kerja dengan `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` dan gunakan sebagaimana dijelaskan di bawah ini.
 
 ## Verifikasi
 

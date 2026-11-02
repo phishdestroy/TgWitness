@@ -6,7 +6,7 @@ Lesezeichen, exakte Markierungen, Aktionsausschnitte, Diskussionen, bereichsbezo
 
 Case Board bietet einem Ermittlungsteam eine gemeinsame Arbeitsansicht des gespeicherten Materials. Setzen Sie ein Lesezeichen für eine Beobachtung, markieren Sie eine bestimmte Passage, speichern Sie eine Reihe von Aktionen und besprechen Sie diese mit Kollegen. Karten behalten ihre Quellenverweise und den signierten Revisionsverlauf bei. Team-Anmerkungen verbleiben im Arbeitsbereich und sind separat von den ursprünglichen Telegram-Beobachtungen erkennbar.
 
-[Beweismodell](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/) · [Zugriff](https://phishdestroy.github.io/TgWitness/de/docs/reference/access/) · [Berichte](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-reports/) · [Russisch](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[Beweismodell](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/) · [Zugriff](https://phishdestroy.github.io/TgWitness/de/docs/reference/access/) · [Berichte](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-reports/)
 
 ![Zusammenfassung der Ermittlungsergebnisse](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

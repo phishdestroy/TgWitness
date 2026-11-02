@@ -51,7 +51,7 @@ O acesso à demonstração local é aberto automaticamente, sem a necessidade de
 
 ![Configurações de monitoramento por conta com dados de origem sintéticos](https://phishdestroy.github.io/TgWitness/assets/sources.png)
 
-Em **Fontes → Configurações de captura → Escolha quais alterações preservar**, selecione novas mensagens, edições, notificações de exclusão, atualizações de reações e eventos de participação de forma independente. A configuração padrão mantém todas as categorias. A opção **“Mensagens, edições e exclusões”** mantém o contexto original ao desativar atualizações separadas de reações e de membros. **“Todas as atividades visíveis”** restaura todas as cinco. As predefinições alteram o formato; pressione **“Salvar configurações de monitoramento”** para aplicar.
+Em **Fontes → Gravação → Escolha quais alterações preservar**, selecione novas mensagens, edições, avisos de exclusão, atualizações de reações e eventos de participação de forma independente. A configuração padrão mantém todas as categorias. A opção **“Mensagens, edições e exclusões”** mantém o contexto original ao desativar atualizações separadas de reações e membros. **A opção “Todas as atividades visíveis”** restaura todas as cinco. As predefinições alteram o formato; pressione **“Salvar configurações de gravação**” para aplicar.
 
 A política salva se aplica a todas as fontes selecionadas naquele espaço de trabalho. Outros espaços de trabalho mantêm suas próprias configurações. Cada alteração efetiva registra valores assinados de “antes” e “depois” ; a política atual também é incluída nos recibos de processo e nos registros de início de observação . Desativar uma categoria não exclui observações anteriores. Reativá-la não recupera as alterações perdidas. Nesta versão, não há substituição de categoria por grupo.
 
@@ -65,7 +65,7 @@ A exclusão de um espaço de trabalho adicional interrompe seu coletor e remove 
 
 ## Notificações
 
-Abra **“Fontes” → “Notificações” → “Alertas” e um resumo diário**. O TgWitness utiliza o Apprise para enviar alertas para o Matrix, Telegram, Discord, Slack, ntfy, e-mail e outros serviços compatíveis. É possível adicionar vários destinos a um único espaço de trabalho.
+Abra **Extras → Notificações → Configurar**. TgWitness utiliza o Apprise para enviar alertas para o Matrix, Telegram, Discord, Slack, ntfy, e-mail e outros serviços compatíveis. É possível adicionar vários destinos a um único espaço de trabalho.
 
 1. Insira uma URL de destino do Apprise por linha. Utilize o [catálogo de serviços e os formatos de URL](https://appriseit.com/services/) correspondentes ao seu serviço.
 2. Ative a opção **“Enviar notificações**” e, em seguida, selecione alertas de problemas, alterações nos chats monitorados e um resumo diário. A hora do resumo utiliza a hora do servidor.

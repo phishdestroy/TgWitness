@@ -6,15 +6,15 @@ Hesabı bağlı tutun. Rotasının ne zaman sunucunun adresini kullanabileceğin
 
 ## Önce IP modunu seçin
 
-01**IP'yi Gizle**
+01**Adresi gizle**
 
 Bir proxy kullanın. Hiçbiri işe yaramazsa, doğrudan Telegram bağlantısı olmadan bekleyin.
 
-02**Yedek seçeneğine izin ver**
+02**Son çare olarak Direct**
 
 Yapılandırılan gecikme süresinin ardından Direct'e izin verin; biri yanıt verdiğinde çalışan bir proxy'ye geri dönün.
 
-03**Tünel / VPN**
+03**Tünel veya VPN arkasında bulunan sunucu**
 
 Barındırıcı ağından doğrudan bağlantı izin verin. Bu seçenek bir VPN kurmaz veya doğrulamaz.
 
@@ -27,7 +27,7 @@ Yol, bağlantıyı seçer. IP modu, doğrudan bağlantıya izin verilip verilmey
 3. **Telegram bağlantısını** kaydedin ve **test** edin. Oturum açmadan önce de çalışır.
 4. Toplamaya başladıktan sonra, kontrol edilen mesajın günlüğe ulaştığını kontrol edin.
 
-Yeni çalışma alanları, IP Gizleme özelliğine sahip otomatik MTProxy kullanır. Havuz, dört kamuya açık kaynağı birleştirir, girişleri kontrol eder, çalışan rotaları korur ve arızalı proxy'leri değiştirir. Başarısız indirmelerde önceki anlık görüntüler saklanır.
+Yeni çalışma alanları, "**Adresi Gizle"** seçeneği ile otomatik MTProxy kullanır. Havuz, dört halka açık kaynağı birleştirir, girişleri kontrol eder, çalışan rotaları korur ve arızalı proxy'leri değiştirir. Başarısız indirmeler, önceki anlık görüntüleri saklar.
 
 ## Kendi proxy'nizi kullanın
 

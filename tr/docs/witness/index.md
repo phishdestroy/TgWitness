@@ -40,8 +40,8 @@ BotFather ile bir bot oluşturun ve bu botun sizin kontrolünüz altındaki bir 
 
 ## Ekstra bölümündeki üç adım
 
-1. **Yalnızca okuma erişimi. Ekstralar'ı** açın **→ Kanalınıza bir bot ekleyin**, bir tanık jetonu oluşturun ve erişim dosyasını kaydedin. Bu erişim, kontrol noktalarını ve durum bilgilerini okumaya izin verir; sohbetlere veya toplayıcı kontrollerine erişim sağlamaz.
-2. **Kanal ve aralık.** Kanalı ve tanık tarafından erişilebilir bir toplayıcı adresini girin. Ayar dosyasını kaydedin.
+1. **Salt okunur erişim.** **Ekstralar → Bağımsız tanık** dosyasını açın, bir tanık jetonu oluşturun ve erişim dosyasını kaydedin. Bu, sohbetleri veya toplayıcı kontrollerini değil, kontrol noktalarını ve durum bilgilerini okumanıza olanak tanır.
+2. **Kanal ve aralık.** Bir Telegram kanalı veya Discord webhook'u seçin ve tanık tarafından erişilebilir bir toplayıcı adresi girin. Ayar dosyasını kaydedin.
 3. **Başlatma.** Witness sunucusunda oluşturulan `witness.json`, `witness-token.txt` ve `bot-token.txt` dosyalarını bir araya getirin. Yüklü proje ortamında aşağıdaki komutları çalıştırın.
 
 ```
@@ -50,6 +50,8 @@ python -m tgwitness.witness run --config witness.json
 ```
 
 Dosyaları indirmek, tanık aracını başlatmaz. İlk imzalı gönderinin kanalda göründüğünü kontrol edin, ardından tanık aracının açık anahtar parmak izini ayrı bir yerde saklayın.
+
+Discord için, kanalın webhook URL'sini bot jetonu yerine `discord-webhook.txt` şeklinde kaydedin. Bir tanık, Telegram kanalı veya Discord kanalı gibi tek bir yere gönderi yapar; Discord mesajından daha uzun kontroller ekli dosya olarak gelir.
 
 ## Yayın sıklığını seçin
 

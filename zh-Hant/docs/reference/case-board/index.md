@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 「案件看板」為調查團隊提供一個可共享的儲存資料工作視圖。您可以將 觀察結果加入書籤、標示特定段落、儲存一系列操作，並與同事進行討論。 卡片會保留其來源參考資訊及經簽署的修訂歷史紀錄。團隊註解會保留在 工作區中，並可與原始的 Telegram 觀察結果明確區分。
 
-[證據模型](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/) · [存取](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/) · [報告](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/) · [俄語](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[證據模型](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/) · [存取](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/) · [報告](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)
 
 ![綜合調查資訊流](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

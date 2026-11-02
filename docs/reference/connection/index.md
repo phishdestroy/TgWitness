@@ -81,26 +81,26 @@ Conversion transfers authorization, not original messages, the entity cache or a
 
 MTProto is Telegram's protocol. Telethon is the Python client library TgWitness uses. MTProxy is a Telegram transport proxy; SOCKS5 and HTTP CONNECT provide general tunnels. None replaces account authentication.
 
-Save the route for each workspace in **Account → Settings → Connection settings → Change connection route** before signing in. New workspaces default to **Automatic MTProxy · public lists** with Hide IP behavior. Existing workspaces that explicitly used Direct retain a mode permitting it.
+Save the route for each workspace in **Account → Settings → Connection settings → Change connection route** before signing in. New workspaces default to **Automatic MTProxy · public lists** with **Hide the address**. Existing workspaces that explicitly used Direct retain a mode permitting it.
 
 ## IP modes
 
-The route chooses the connection. The IP mode determines when the server's address may be exposed. These controls do not install a VPN or route all machine traffic.
+The route chooses the connection. The IP mode, **IP protection** in the panel's Account section, determines when the server's address may be exposed. These controls do not install a VPN or route all machine traffic.
 
 | Mode | Telegram | External requests |
 | --- | --- | --- |
-| Hide IP (`hide`) | Use a proxy; wait if none works. No direct fallback. | Require SOCKS5/HTTP; refuse requests without an applicable proxy. |
-| Allow fallback (`fallback`) | Automatic MTProxy may use Direct after the configured delay, then return to a working proxy. | Prefer a configured external proxy or the account's SOCKS5/HTTP route; otherwise Direct is allowed. |
-| Tunnel / VPN (`tunnel`) | Direct routes and immediate automatic-pool fallback are permitted. | Direct is permitted when no applicable proxy is configured. |
+| Hide the address (`hide`) | Use a proxy; wait if none works. No direct fallback. | Require SOCKS5/HTTP; refuse requests without an applicable proxy. |
+| Direct as a last resort (`fallback`) | Automatic MTProxy may use Direct after the configured delay, then return to a working proxy. | Prefer a configured external proxy or the account's SOCKS5/HTTP route; otherwise Direct is allowed. |
+| Server behind a tunnel or VPN (`tunnel`) | Direct routes and immediate automatic-pool fallback are permitted. | Direct is permitted when no applicable proxy is configured. |
 
-Tunnel/VPN mode assumes you manage that network separately. Without a working tunnel, destinations can see the server's own address. Select the mode according to your actual network, not the name of the option.
+The tunnel or VPN mode assumes you manage that network separately. Without a working tunnel, destinations can see the server's own address. Select the mode according to your actual network, not the name of the option.
 
 ### Choose a route
 
 | Route | Settings | Boundary |
 | --- | --- | --- |
 | Automatic MTProxy | Built-in lists or an operator catalog | Maintains a working Telegram route; direct fallback depends on the IP mode |
-| Direct | Tunnel/VPN mode | Telethon uses the host's network route |
+| Direct | Tunnel or VPN mode | Telethon uses the host's network route |
 | SOCKS5 | Host, port, optional username/password | python-socks, remote destination DNS enabled |
 | HTTP CONNECT | Host, port, optional username/password | Plain HTTP CONNECT; TLS to the proxy itself is not implemented |
 | MTProxy | Host, port, secret | Experimental Telethon transport; 32 hex digits or `dd` + 32 hex digits |
@@ -121,13 +121,13 @@ Failed, empty or incompatible feed responses retain the previous source snapshot
 
 **Telegram traffic and HTTPS requests use different routes.** List downloads use a separate HTTPS connection and the supplied external-request route. `TGWITNESS_PROXY_FEED_PROXY` explicitly overrides that route with an HTTP/SOCKS5 proxy; both collector Compose variants forward it. The background pool follows the main workspace. No Telegram session, API credentials, panel token or bot token is sent to feed providers. Provider names, snapshot dates and the download route appear under **Where the list comes from**.
 
-An MTProxy carries Telegram traffic only. Workspace HTTP operations such as timestamps, notifications, off-site copies and source checks use a separate SOCKS5/HTTP proxy when configured, then the account's SOCKS5/HTTP route. Without either, Hide IP refuses the request; the other modes permit Direct. External requests can be disabled. An explicitly configured feed-download proxy remains a separate operator override. The independent witness service keeps its own route.
+An MTProxy carries Telegram traffic only. Workspace HTTP operations such as timestamps, notifications, off-site copies and source checks use a separate SOCKS5/HTTP proxy when configured, then the account's SOCKS5/HTTP route. Without either, Hide the address refuses the request; the other modes permit Direct. External requests can be disabled. An explicitly configured feed-download proxy remains a separate operator override. The independent witness service keeps its own route.
 
 Public-only external HTTP requests through SOCKS5 or HTTP proxies resolve the destination with Cloudflare DNS over HTTPS at `https://1.1.1.1/dns-query`, through that same proxy. Only the hostname and A/AAAA query types go to the resolver; service URLs, credentials and notification contents are not included. TLS verifies the resolver certificate for its IP address. Both address families are checked, and any private, loopback, link-local or reserved answer rejects the request. Connections use a checked numeric address while retaining the service's original HTTP Host and TLS certificate name. Notification HTTP forwarding and CONNECT requests use the same destination checks. DNS failure stops the request without local destination DNS or a direct fallback. Successful answers are cached in memory per proxy route for at most 30 seconds and no longer than their DNS TTL; the cache is limited to 128 entries. The proxy hostname itself may use local DNS. SOCKS and CONNECT failures can try another checked address before sending the service request body. Plain HTTP forwarding reports a failed request without automatically replaying its body through another address.
 
 For operator-managed private services, the existing server environment setting `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` permits private destinations and keeps proxy-side hostname resolution. It cannot be enabled from the panel. Public-only mode rejects `.onion` destinations before querying the public resolver; Tor onion services require that explicit private-destination setting and a suitable proxy. This DNS behavior applies to external HTTP operations, not Telegram's transport. Cloudflare documents the [JSON DNS endpoint](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Automatic pool parameters**** Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay. | Control | Default | | --- | --- | | Disconnects before replacement | 3 within 10 minutes | | Proxies tried per connection attempt | 3 | | First / maximum rest after failure | 10 minutes / 6 hours | | Planned rotation | Disabled; switch on failure | | Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. | | Delay before permitted Direct fallback | 10 minutes; Hide IP still refuses Direct | | Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool | Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+****Automatic pool parameters**** Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay. | Control | Default | | --- | --- | | Disconnects before replacement | 3 within 10 minutes | | Proxies tried per connection attempt | 3 | | First / maximum rest after failure | 10 minutes / 6 hours | | Planned rotation | Disabled; switch on failure | | Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. | | Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct | | Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool | Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 To replace the public list with your own operator catalog, configure the override below. It disables external subscriptions entirely, including when its `proxies` array is empty.
 

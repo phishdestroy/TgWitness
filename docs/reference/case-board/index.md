@@ -6,7 +6,7 @@ Bookmarks, exact highlights, action slices, discussions, scoped access and the s
 
 Case Board gives an investigation team a shared working view of saved material. Bookmark an observation, highlight an exact passage, save a range of actions, and discuss it with colleagues. Cards retain their source references and signed revision history. Team annotations stay in the workspace, separately identifiable from the original Telegram observations.
 
-[Evidence model](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/) · [Access](https://phishdestroy.github.io/TgWitness/docs/reference/access/) · [Reports](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/) · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[Evidence model](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/) · [Access](https://phishdestroy.github.io/TgWitness/docs/reference/access/) · [Reports](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/)
 
 ![Synthetic investigation feed](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

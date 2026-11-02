@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/witne
 
 Uruchom program Witness z własnym kluczem i botem, opublikuj podpisane punkty kontrolne na kanale i porównaj z nimi wyeksportowane dane.
 
-[Konfiguracja bota i serwera proxy w języku rosyjskim](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+[Eksportowanie i weryfikacja](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/) · [Wysoki poziom bezpieczeństwa](https://phishdestroy.github.io/TgWitness/pl/docs/reference/high-assurance/) · [Przewodnik po panelach](https://phishdestroy.github.io/TgWitness/pl/docs/reference/panel/#extras)
 
 Moduł zbierający podpisuje swój własny dziennik, więc każdy, kto kontroluje ten moduł oraz jego klucz, mógłby w zasadzie przeredagować lub skrócić dziennik, a następnie podpisać go ponownie. Świadek sprawia, że jest to wykrywalne. Jest to odrębny proces — inny kontener, a raczej serwer obsługiwany przez inną osobę — który co kilka minut pobiera podpisaną czołówkę dziennika kolektora, podpisuje to, co zauważył, własnym kluczem, przechowuje to we własnym dzienniku i publikuje na kanale Telegramu.
 
@@ -27,7 +27,7 @@ Schemat blokowy · Collector → Witness (podpisany punkt kontrolny: liczba zapi
 | Własny klucz Ed25519 i dziennik | Skarbiec kolektora, klucz podpisujący lub token panelowy |
 | Własny token bota w serwisie Telegram | Treść wiadomości: nagłówek zawiera liczbę zapisów oraz skrót |
 
-Token jest generowany na stronie **„Witness”** w panelu, wyświetlany jednorazowo i przechowywany wyłącznie w postaci klucza SHA-256. Otwiera on dokładnie jeden punkt końcowy, `GET /api/witness/head`, który zwraca świeżo podpisany punkt kontrolny wraz z podpisanymi licznikami zbiorów bez treści oraz informacją o stanie operacyjnym. Nie może on otworzyć panelu, odczytać treści wiadomości ani zmienić ustawień, a token panelu nie jest tam akceptowany. Cofnięcie tokenu odbywa się na tej samej stronie. Kolektor rejestruje moment rozpoczęcia sprawdzania przez nowy klucz świadka (`witness.seen`) oraz pokazuje ostatnie sprawdzenie dla każdego tokenu; świadek, który nie przeprowadził sprawdzenia w ciągu 2,5 interwału, zostaje oznaczony jako przeterminowany.
+Token jest tworzony w **sekcji „Extras” → „Independent witness”**, wyświetlany jednorazowo i przechowywany wyłącznie jako SHA-256. Otwiera dokładnie jeden punkt końcowy, `GET /api/witness/head`, który zwraca świeżo podpisany punkt kontrolny wraz z podpisanymi licznikami zbiorów bez treści oraz stanem operacyjnym. Nie może on otwierać panelu, odczytywać treści wiadomości ani zmieniać ustawień, a token panelu nie jest tam akceptowany. Token można unieważnić na tej samej stronie. Kolektor rejestruje moment, w którym nowy klucz świadka rozpoczyna sprawdzanie (`witness.seen`) oraz wyświetla ostatnią weryfikację dla każdego tokenu; świadek, który nie przeprowadził weryfikacji w ciągu 2,5 interwału, jest oznaczany jako zaległy.
 
 Nowi świadkowie wysyłają losowe hasło weryfikacyjne przy każdej ankiecie; instrukcja przechwytywania powtarza je pod podpisem kolektora. Liczniki są powiązane z konkretnym punktem kontrolnym i są uwzględniane w podpisanych wpisach świadków. Starsze nagłówki są nadal akceptowane przez samodzielnego świadka. Sam wzrost objętości dziennika nigdy nie jest traktowany jako nowa wiadomość.
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 Potrzebny jest Państwu bot w Telegramie (można go utworzyć za pomocą @BotFather), kanał, w którym bot ten pełni funkcję administratora, oraz adres kolektora dostępny dla świadka — za pośrednictwem protokołu HTTPS poza siecią prywatną (patrz profil HTTPS w [sekcji wdrożenia](https://phishdestroy.github.io/TgWitness/pl/docs/reference/deployment/)).
 
-Proszę otworzyć **menu „Dodatki” → „Bot w Państwa kanale” → „Skonfiguruj bota”** w panelu. Trzy kroki obejmują ustawienie dostępu tylko do odczytu, wybór kanału oraz określenie częstotliwości, a następnie uruchomienie bota. Polityka publikacji, opcjonalny serwer proxy HTTP/SOCKS5 oraz niestandardowy adres API bota znajdują się w **ustawieniach zaawansowanych** . Formularz pobiera plik `witness.json` z przypisanym kluczem kolektora dla tego obszaru roboczego. Proszę pobrać nowo utworzony token tylko do odczytu, **zapisując plik dostępu** jako `witness-token.txt` ; proszę umieścić go oraz plik `bot-token.txt` utworzony na hoście Witness obok tego pliku JSON. Kolektor nigdy nie otrzymuje tokenu bota. Pobieranie nie powoduje uruchomienia usługi ani opublikowania komunikatu. Żaden świadek projektu hostowanego nie jest domyślnie rejestrowany.
+W panelu otwórz **opcję Dodatki → Niezależny świadek → Konfiguruj**. Trzy kroki obejmują dostęp tylko do odczytu, Twój kanał i interwał, a następnie uruchomienie świadka. Polityka publikacji, opcjonalny serwer proxy HTTP/SOCKS5 oraz niestandardowy adres API bota znajdują się w **ustawieniach zaawansowanych**. Formularz pobiera `witness.json` z przypiętym kluczem kolektora tego obszaru roboczego. Pobierz nowo utworzony token tylko do odczytu, wybierając opcję **„Zapisz plik dostępu** jako” `witness-token.txt`; umieść go wraz z `bot-token.txt`utworzony na hoście świadka obok tego pliku JSON. Kolektor nigdy nie otrzymuje tokenu bota. Pobieranie nie uruchamia usługi ani nie publikuje wiadomości. Żaden świadek projektu hostowanego nie jest domyślnie rejestrowany.
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### Opublikuj na Discordzie
+
+Świadek może publikować posty na kanale Discord zamiast w Telegramie. W Discordzie otwórz **Edytuj kanał → Integracje → Webhooki**, utwórz webhook i skopiuj jego adres URL. W panelu wybierz **Webhook Discorda · twój kanał** w kroku 2. Na serwerze świadka zapisz adres URL jako `discord-webhook.txt` obok `witness.json`; nigdy nie trafia do kolektora.
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+Każdy wpis ma jednego nadawcę: kanał w Telegramie lub webhook Discorda, ale nie oba jednocześnie. Wpisy zawierają tę samą podpisaną deklarację i nie mogą powiadamiać nikogo. Wpis dłuższy niż limit Discorda wynoszący 2 000 znaków jest zastępowany krótką linią z pełnym plikiem kontrolnym dołączonym jako `witness-check.txt`. Każdy identyfikator postu jest rejestrowany jako `witness.posted`. `verify.py --channel`odczytuje wyłącznie eksporty z kanałów Telegramu, więc w przypadku Discorda należy prowadzić dziennik świadka: zawiera on każdy check.
+
 ### Opcje
 
 | Opcja | Środowisko | Domyślnie | Znaczenie |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | Klucz Witness i dziennik |
 | `--config` | `_CONFIG` | – | Plik JSON zawierający dowolną z powyższych opcji |
 
-Adres kolektora, tokeny oraz kanał pochodzą z `--collector`, `--token` lub `--token-file`, `--bot-token` lub `--bot-token-file` i `--channel`, albo `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE` i `_CHANNEL`, co pozwala na utrzymanie poufności poza listą procesów.
+Adres kolektora, tokeny i kanał pochodzą z `--collector`, `--token` lub `--token-file`, `--bot-token` lub `--bot-token-file`, `--discord-webhook-file` oraz `--channel`, lub `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` oraz `_CHANNEL`, co sprawia, że sekrety nie pojawiają się na liście procesów.
 
 Plik konfiguracyjny wykorzystuje nazwy opcji z podkreśleniami oraz symbol `texts`, który zastępuje słowa w postach kanału:
 
@@ -123,6 +134,36 @@ Plik konfiguracyjny wykorzystuje nazwy opcji z podkreśleniami oraz symbol `text
 Klucze `texts`: `ok`, `key_changed`, `rollback`, `fork`, `invalid`, `no_response`, `collector`, `records`, `head`. Wiersz pole wygrywa z środowiskiem, a środowisko z plikiem. Nieznane opcje lub klucze tekstowe powodują zatrzymanie działania narzędzia „witness” i wyświetlenie komunikatu zamiast ich ignorowania. Sformułowanie nigdy nie ma wpływu na weryfikację: skrypt verify.py sprawdza podpisany token na końcu każdego wpisu. W przypadku `--post changes` lub `problems` kontrole, które nie zostały opublikowane, nadal znajdują się w dzienniku świadków, a `verify.py` wymienia je jako nigdy nieopublikowane; rekord początkowy określa politykę. Każda kontrola nadal pojawia się w dzienniku, więc mniejsza liczba wpisów oznacza mniejszą liczbę niezależnych czasów w Telegramie, a nie mniejszą liczbę kontroli.
 
 Nawet bez kanału aplikacja TgWitness nadal prowadzi swój dziennik. Proszę przechowywać odcisk klucza aplikacji TgWitness (`python -m tgwitness.witness fingerprint`) w innym miejscu.
+
+## Publiczna strona z dowodami dla kilku obszarów roboczych
+
+`python -m tgwitness.proof` Obsługuje do 32 obszarów roboczych jednocześnie i udostępnia stronę tylko do odczytu z najnowszym podpisanym raportem dla każdego z nich. Każdy obszar roboczy otrzymuje własny klucz świadka oraz dziennik w folderze danych, a także przypięty klucz kolektora; publikowanie na kanale Telegramu jest opcjonalne dla każdego obszaru roboczego. Zacznij od pliku [proof.config.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example):
+
+| Dziedzina | Znaczenie |
+| --- | --- |
+| `title` | Tytuł strony, 1–100 znaków |
+| `data_dir` | Klucze i dzienniki Witness, powiązane z plikiem; domyślnie `proof-data` |
+| `interval`, `timeout` | Czas w minutach między sprawdzaniami (1–1440, domyślnie 5); czas oczekiwania w sekundach (5–600, domyślnie 20) |
+| `workspaces[].id`, `label` | Krótki alias pisany małymi literami oraz nazwa wyświetlana |
+| `workspaces[].collector` | Adres kolektora; nazwy pozostałych obszarów roboczych kończą się na `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | Wymagane, różne dla każdego obszaru roboczego |
+| `workspaces[].token_file` | Plik zawierający token świadka tego obszaru roboczego z prawem tylko do odczytu |
+| `workspaces[].channel`, `bot_token_file` | Opcjonalnie, łącznie: publikuj każdy wpis na kanale |
+| `workspaces[].proxy`, `bot_api` | Opcjonalna trasa i adres API bota |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+Pierwsze polecenie weryfikuje plik oraz pliki tokenów bez nawiązywania połączenia. Strona obsługuje wyłącznie żądania GET i HEAD:
+
+- `/` wyświetla wszystkie obszary robocze; obszar roboczy, który nie został zaznaczony przez 2,5 interwału, jest oznaczany jako nieaktualny.
+- `/api/proof` zwraca to samo co JSON.
+- `/api/proof/<id>` pobiera najnowsze podpisane oświadczenie (`tgwitness-public-proof-v1`): numer i skrót zapisu świadka, status, przypięty klucz zbierającego, punkt kontrolny, liczniki zbiorów oraz informacja, czy publikacja na kanale zakończyła się powodzeniem, podpisane kluczem świadka danego obszaru roboczego.
+- `/healthz` zwraca kod 503, gdy monitor obszaru roboczego przestał działać.
+
+Nadaj stronie własną nazwę hosta, np. [Caddyfile.proof.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example). W celu weryfikacji wyeksportuj dziennik świadectw obszaru roboczego, `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` i wykorzystaj go zgodnie z poniższym opisem.
 
 ## Zweryfikuj
 

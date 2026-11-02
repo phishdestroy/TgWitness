@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-
 
 Các bộ lọc báo cáo, tám mẫu thiết kế, cài đặt sẵn nội dung, lịch sử thay đổi đã lưu và phần đánh giá được bao gồm trong các tệp xuất có chữ ký.
 
-[Tiếng Nga](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE_REPORTS.md)
-
 Chuyển các quan sát đã chọn thành một bản tường trình dễ đọc về vụ việc: câu hỏi, phạm vi, các thay đổi đã lưu, biểu đồ, kết quả và tham chiếu nguồn. Mỗi báo cáo cung cấp cho người nhận một cách để kiểm tra tài liệu được giao và xem xét phạm vi thu thập của nó.
 
 Phần **“Cơ sở tin cậy và giới hạn**” xuất hiện trong các báo cáo nhật ký, bàn giao, trò chuyện, tài khoản và chia sẻ. Các tệp PDF nhật ký và bàn giao sử dụng cùng một bản đánh giá như tệp `report.json` đã được ký. Danh sách nội dung ZIP chứa thông tin đánh giá vụ việc (`case_assessment`) trong tệp danh sách nội dung đã được ký. Bản đánh giá này đi kèm với tài liệu được xuất ra. Các quan sát ban đầu vẫn giữ nguyên chữ ký hiện có của chúng.

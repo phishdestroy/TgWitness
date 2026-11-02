@@ -6,7 +6,7 @@ Bookmark, sorotan tepat, potongan tindakan, diskusi, akses terbatas, dan riwayat
 
 Case Board memberikan tim investigasi tampilan kerja bersama atas materi yang disimpan. Tandai sebuah pengamatan, sorot bagian tertentu, simpan serangkaian tindakan, dan diskusikan dengan rekan kerja. Kartu-kartu tersebut mempertahankan referensi sumber dan riwayat revisi yang ditandatangani. Anotasi tim tetap berada di ruang kerja, dan dapat dibedakan secara terpisah dari pengamatan Telegram asli.
 
-[Model bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/) · [Akses](https://phishdestroy.github.io/TgWitness/id/docs/reference/access/) · [Laporan](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-reports/) · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[Model bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/) · [Akses](https://phishdestroy.github.io/TgWitness/id/docs/reference/access/) · [Laporan](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-reports/)
 
 ![Umpan investigasi sintetis](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

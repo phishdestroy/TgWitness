@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/witness/
 
 Run a witness with its own key and bot, publish signed checkpoints to a channel and check exports against it.
 
-[Настройка бота и прокси на русском](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+[Export and verify](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/) · [High assurance](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/) · [Panel guide](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#extras)
 
 A collector signs its own journal, so whoever controls the collector and its key could in principle rewrite or truncate the journal and sign it again. A witness makes that detectable. It is a separate process — another container, or better a server someone else runs — that every few minutes fetches the collector's signed journal head, signs what it saw with its own key, keeps it in its own journal and posts it to a Telegram channel.
 
@@ -27,7 +27,7 @@ Flow diagram · Collector → Witness (signed checkpoint: record count + head ha
 | Its own Ed25519 key and journal | The collector's vault, signing key or panel token |
 | Its own Telegram bot token | Message content: the head is a record count and a hash |
 
-The token is created on the panel's **Witness** page, shown once and stored only as a SHA-256. It opens exactly one endpoint, `GET /api/witness/head`, which returns a freshly signed checkpoint plus signed content-free collection counters and operational health. It cannot open the panel, read message content or change settings, and the panel token is not accepted there. Revoke a token on the same page. The collector records when a new witness key starts checking (`witness.seen`) and shows the last check per token; a witness that has not checked within 2.5 intervals is marked overdue.
+The token is created in **Extras → Independent witness**, shown once and stored only as a SHA-256. It opens exactly one endpoint, `GET /api/witness/head`, which returns a freshly signed checkpoint plus signed content-free collection counters and operational health. It cannot open the panel, read message content or change settings, and the panel token is not accepted there. Revoke a token on the same page. The collector records when a new witness key starts checking (`witness.seen`) and shows the last check per token; a witness that has not checked within 2.5 intervals is marked overdue.
 
 New witnesses send a random challenge on each poll; the capture statement echoes it under the collector signature. Counters are bound to the exact checkpoint and are included in signed witness posts. Legacy heads remain accepted by the standalone witness. Journal growth alone is never counted as a new message.
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 You need a Telegram bot (create one with @BotFather), a channel where that bot is an administrator, and the collector's address reachable from the witness — over HTTPS outside a private network (see the HTTPS profile in [deployment](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/)).
 
-Open **Extras → A bot in your channel → Set up a bot** in the panel. Three steps cover read-only access, your channel and interval, then launching the witness. Publication policy, optional HTTP/SOCKS5 proxy and custom Bot API address are under **Advanced settings**. The form downloads `witness.json` with this workspace's collector key pinned. Download the newly created read-only token with **Save access file** as `witness-token.txt`; place it and a `bot-token.txt` created on the witness host beside that JSON. The collector never receives the bot token. Downloading does not start a service or publish a message. No hosted project witness is implicitly enrolled.
+Open **Extras → Independent witness → Configure** in the panel. Three steps cover read-only access, your channel and interval, then launching the witness. Publication policy, optional HTTP/SOCKS5 proxy and custom Bot API address are under **Advanced settings**. The form downloads `witness.json` with this workspace's collector key pinned. Download the newly created read-only token with **Save access file** as `witness-token.txt`; place it and a `bot-token.txt` created on the witness host beside that JSON. The collector never receives the bot token. Downloading does not start a service or publish a message. No hosted project witness is implicitly enrolled.
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### Publish to Discord
+
+A witness can post to a Discord channel instead of Telegram. In Discord, open **Edit Channel → Integrations → Webhooks**, create a webhook and copy its URL. In the panel, choose **Discord webhook · your channel** in step 2. On the witness host, save the URL as `discord-webhook.txt` next to `witness.json`; it never reaches the collector.
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+A witness has one publisher: a Telegram channel or a Discord webhook, not both. Posts carry the same signed statement and cannot ping anyone. A post longer than Discord's 2,000 characters is replaced by a short line with the full check attached as `witness-check.txt`. Each post ID is recorded as `witness.posted`. `verify.py --channel` reads Telegram channel exports only, so for Discord keep the witness journal: it holds every check.
+
 ### Options
 
 | Option | Environment | Default | Meaning |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | Witness key and journal |
 | `--config` | `_CONFIG` | – | JSON file with any of the options above |
 
-The collector address, tokens and channel come from `--collector`, `--token` or `--token-file`, `--bot-token` or `--bot-token-file` and `--channel`, or `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE` and `_CHANNEL`, which keeps secrets out of the process list.
+The collector address, tokens and channel come from `--collector`, `--token` or `--token-file`, `--bot-token` or `--bot-token-file`, `--discord-webhook-file` and `--channel`, or `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` and `_CHANNEL`, which keeps secrets out of the process list.
 
 A config file uses the option names with underscores, plus `texts`, which replaces the words of the channel posts:
 
@@ -123,6 +134,36 @@ A config file uses the option names with underscores, plus `texts`, which replac
 `texts` keys: `ok`, `key_changed`, `rollback`, `fork`, `invalid`, `no_response`, `collector`, `records`, `head`. The command line wins over the environment, the environment over the file. Unknown options or text keys stop the witness with a message instead of being ignored. Wording never affects verification: verify.py checks the signed token at the end of every post. With `--post changes` or `problems`, checks that were not posted are still in the witness journal and `verify.py` lists them as never posted; the start record names the policy. Every check still appears in the journal, so fewer posts mean fewer independent Telegram times, not fewer checks.
 
 Without a channel the witness still keeps its journal. Keep the witness key fingerprint (`python -m tgwitness.witness fingerprint`) somewhere else.
+
+## Public proof page for several workspaces
+
+`python -m tgwitness.proof` witnesses up to 32 workspaces at once and serves a read-only page with the latest signed check of each. Every workspace gets its own witness key and journal under the data folder and a pinned collector key; posting to a Telegram channel is optional per workspace. Start from [proof.config.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example):
+
+| Field | Meaning |
+| --- | --- |
+| `title` | Page title, 1–100 characters |
+| `data_dir` | Witness keys and journals, relative to the file; default `proof-data` |
+| `interval`, `timeout` | Minutes between checks (1–1440, default 5); seconds to wait (5–600, default 20) |
+| `workspaces[].id`, `label` | Short lowercase alias and the name shown |
+| `workspaces[].collector` | Collector address; other workspaces end in `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | Required, different for each workspace |
+| `workspaces[].token_file` | File with that workspace's read-only witness token |
+| `workspaces[].channel`, `bot_token_file` | Optional, together: post each check to a channel |
+| `workspaces[].proxy`, `bot_api` | Optional route and Bot API address |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+The first command validates the file and the token files without opening a connection. The page answers only GET and HEAD:
+
+- `/` shows every workspace; a workspace without a check for 2.5 intervals is marked stale.
+- `/api/proof` returns the same as JSON.
+- `/api/proof/<id>` downloads the latest signed statement (`tgwitness-public-proof-v1`): witness record number and hash, status, pinned collector key, checkpoint, collection counters and whether the channel post succeeded, signed by that workspace's witness key.
+- `/healthz` answers 503 when a workspace's monitor has stopped.
+
+Give the page its own hostname, as in [Caddyfile.proof.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example). For verification, export a workspace's witness journal with `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` and use it as described below.
 
 ## Verify
 

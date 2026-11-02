@@ -8,7 +8,7 @@ Travaillez sur les messages enregistrés et les modifications, reliez vos conclu
 
 Guides illustrés
 
-[### Case Board Veillez à ce que les observations, les citations exactes et les notes de l'équipe restent liées entre elles.](https://phishdestroy.github.io/TgWitness/fr/docs/case-board/) [### Report Studio Choisissez le support et l’un des huit modèles de rapport.](https://phishdestroy.github.io/TgWitness/fr/docs/reports/) [### Partage du texte Préparez un extrait signé contenant les champs dont le destinataire a besoin.](https://phishdestroy.github.io/TgWitness/fr/docs/handover/) [### Groupes de comptes Examinez les comptes ensemble et conservez leurs espaces de travail séparés.](https://phishdestroy.github.io/TgWitness/fr/docs/groups/)
+[### Case Board Veillez à ce que les observations, les citations exactes et les notes de l'équipe restent liées entre elles.](https://phishdestroy.github.io/TgWitness/fr/docs/case-board/) [### Report Studio Choisissez le support et l’un des huit modèles de rapport.](https://phishdestroy.github.io/TgWitness/fr/docs/reports/) [### Partage de la copie Préparez un extrait signé contenant les champs dont le destinataire a besoin.](https://phishdestroy.github.io/TgWitness/fr/docs/handover/) [### Groupes de comptes Examinez les comptes ensemble et conservez leurs espaces de travail séparés.](https://phishdestroy.github.io/TgWitness/fr/docs/groups/)
 
 [## Modes, scénarios et niveaux de preuve Portées de collecte, limites des événements, huit mécanismes de vérification et six scénarios d’enquête fictifs.](https://phishdestroy.github.io/TgWitness/fr/guides/modes.html)
 
@@ -34,19 +34,19 @@ Tous les documents du projet, présentés ici avec leurs schémas. Les guides co
 
 Configuration
 
-[Mise en route rapide](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/)[Formats des comptes et des sessions](https://phishdestroy.github.io/TgWitness/fr/docs/reference/accounts/)[Accès et autorisations](https://phishdestroy.github.io/TgWitness/fr/docs/reference/access/)[Connexion, proxys et protection des données](https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/)[Déploiement](https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/)
+[Mise en route rapide](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/)[Installation, vérification et mise à jour](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/)[Première configuration et paramètres](https://phishdestroy.github.io/TgWitness/fr/docs/reference/settings/)[Formats des comptes et des sessions](https://phishdestroy.github.io/TgWitness/fr/docs/reference/accounts/)[Accès et autorisations](https://phishdestroy.github.io/TgWitness/fr/docs/reference/access/)[Connexion, proxys et protection des données](https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/)[Déploiement](https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/)[Déploiement hautement sécurisé](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/)
 
 Collecter
 
-[Fonctionnement de la collecte](https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/)[Charger l'historique des sources](https://phishdestroy.github.io/TgWitness/fr/docs/reference/history/)[Workflows et opérations](https://phishdestroy.github.io/TgWitness/fr/docs/reference/operations/)[Mode enquête](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)[Fonctionnalités et limites](https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/)
+[Guide des panneaux](https://phishdestroy.github.io/TgWitness/fr/docs/reference/panel/)[Fonctionnement de la collecte](https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/)[Charger l'historique des sources](https://phishdestroy.github.io/TgWitness/fr/docs/reference/history/)[Workflows et opérations](https://phishdestroy.github.io/TgWitness/fr/docs/reference/operations/)[Mode enquête](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)[Fonctionnalités et limites](https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/)
 
 Archives et intégrations
 
-[Référence « Case Board »](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/)[Analyse des archives](https://phishdestroy.github.io/TgWitness/fr/docs/reference/analysis/)[MCP en lecture seule](https://phishdestroy.github.io/TgWitness/fr/docs/reference/mcp/)[OCR et transcription en local](https://phishdestroy.github.io/TgWitness/fr/docs/reference/media-analysis/)[Webhooks sortants](https://phishdestroy.github.io/TgWitness/fr/docs/reference/webhooks/)
+[Référence « Case Board »](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/)[Analyse des archives](https://phishdestroy.github.io/TgWitness/fr/docs/reference/analysis/)[MCP en lecture seule](https://phishdestroy.github.io/TgWitness/fr/docs/reference/mcp/)[OCR et transcription en local](https://phishdestroy.github.io/TgWitness/fr/docs/reference/media-analysis/)[Webhooks sortants](https://phishdestroy.github.io/TgWitness/fr/docs/reference/webhooks/)[Vitrine publique](https://phishdestroy.github.io/TgWitness/fr/docs/reference/showcase/)
 
 Preuves
 
-[Fonctionnement des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/)[Configuration et vérification des rapports](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-reports/)[Format des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/)[Témoin indépendant](https://phishdestroy.github.io/TgWitness/fr/docs/reference/witness/)[Horodatages](https://phishdestroy.github.io/TgWitness/fr/docs/reference/timestamp/)
+[Fonctionnement des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/)[Configuration et vérification des rapports](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-reports/)[Exportation de comptes](https://phishdestroy.github.io/TgWitness/fr/docs/reference/account-export/)[Format des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/)[Témoin indépendant](https://phishdestroy.github.io/TgWitness/fr/docs/reference/witness/)[Horodatages](https://phishdestroy.github.io/TgWitness/fr/docs/reference/timestamp/)[Stockage et restauration](https://phishdestroy.github.io/TgWitness/fr/docs/reference/storage/)
 
 Sécurité et projet
 

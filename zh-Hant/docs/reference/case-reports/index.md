@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 報告篩選器、八種設計範本、內容預設值、已儲存的變更歷史紀錄，以及簽署後匯出檔案中所包含的評估結果。
 
-[俄語](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE_REPORTS.md)
-
 將選定的觀察結果轉化為敘述案件的易讀報告：包含案件問題、 範圍、已儲存的變更、圖表、調查結果及來源參考。每份報告皆提供 收件者一種方式，用以核對所交付的資料，並檢視其蒐集 範圍。
 
 「**信任基礎與限制**」章節會出現在日誌、移交、聊天、 帳戶及分享報告中。日誌與移交的 PDF 檔案採用與 其簽署過的 ``report.json`` 相同的評估結果。ZIP 清單在簽署過的 清單中包含 ``case_assessment``。此評估結果會隨同匯出的資料一併傳遞。原始 觀察結果則保留其現有的簽名。

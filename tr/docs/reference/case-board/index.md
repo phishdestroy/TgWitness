@@ -6,7 +6,7 @@ Case Board tarafından kullanılan yer imleri, tam vurgu işaretleri, eylem dili
 
 Case Board, soruşturma ekibine kaydedilen materyallerin paylaşımlı bir çalışma görünümünü sunar. Bir gözlemi yer imlerine ekleyin, belirli bir bölümü vurgulayın, bir dizi eylemi kaydedin ve bunları meslektaşlarınızla tartışın. Kartlar, kaynak referanslarını ve imzalı revizyon geçmişini korur. Ekip açıklamaları, çalışma alanında kalır ve orijinal Telegram gözlemlerinden ayrı olarak tanımlanabilir.
 
-[Kanıt modeli](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/) · [Erişim](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/) · [Raporlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/) · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[Kanıt modeli](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/) · [Erişim](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/) · [Raporlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/)
 
 ![Sentetik soruşturma akışı](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

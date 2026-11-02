@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-
 
 Penapis laporan, lapan reka bentuk, pratetap kandungan, sejarah perubahan yang disimpan dan penilaian yang disertakan dalam eksport yang ditandatangani.
 
-[Bahasa Rusia](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE_REPORTS.md)
-
 Ubah pemerhatian terpilih menjadi satu akaun kes yang mudah dibaca: persoalannya, skopnya, perubahan yang disimpan, carta, penemuan dan rujukan sumber. Setiap laporan memberi penerima cara untuk menyemak bahan yang dihantar dan memeriksa liputan pengumpulannya.
 
 Bahagian **Asas kepercayaan dan had** muncul dalam laporan jurnal, penyerahan, sembang, akaun dan perkongsian. PDF jurnal dan penyerahan menggunakan penilaian yang sama seperti `report.json` yang ditandatangani. Manifest ZIP membawa `case_assessment` dalam manifest yang ditandatangani. Penilaian ini dibawa bersama bahan yang dieksport. Pengamatan asal mengekalkan tandatangan sedia ada mereka.

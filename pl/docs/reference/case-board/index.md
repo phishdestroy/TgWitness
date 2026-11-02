@@ -6,7 +6,7 @@ Zakładki, dokładne zaznaczenia, fragmenty działań, dyskusje, dostęp z ogran
 
 Case Board zapewnia zespołowi śledczemu wspólny widok zapisanych materiałów. Można dodać do zakładek swoje spostrzeżenia, zaznaczyć konkretny fragment, zapisać sekwencję działań i omówić je z kolegami. Karty zachowują odniesienia do źródeł oraz podpisaną historię zmian. Adnotacje zespołu pozostają w przestrzeni roboczej i można je odróżnić od oryginalnych obserwacji z Telegrama.
 
-[Model dowodowy](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/) · [Dostęp](https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/) · [Raporty](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-reports/) · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[Model dowodowy](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/) · [Dostęp](https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/) · [Raporty](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-reports/)
 
 ![Zbiorczy kanał informacyjny dotyczący dochodzeń](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

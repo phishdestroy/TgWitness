@@ -6,15 +6,15 @@ Mantenere l’account connesso. Stabilire esplicitamente quando il suo percorso 
 
 ## Selezionare innanzitutto la modalità IP
 
-01**Nascondi l’IP**
+01**Nascondi l’indirizzo**
 
 Utilizzi un proxy. Qualora nessuno funzionasse, attenda senza una connessione diretta a Telegram.
 
-02**Consentire l’alternativa**
+02**Direct come ultima risorsa**
 
 Consentire l’accesso diretto trascorso il ritardo configurato; tornare a un proxy funzionante quando uno di essi risponde.
 
-03**Tunnel / VPN**
+03**Server protetto da un tunnel o da una VPN**
 
 Consentire percorsi diretti attraverso la rete dell’host. Questa opzione non installa né verifica una VPN.
 
@@ -27,7 +27,7 @@ Il percorso determina il tipo di connessione. La modalità IP stabilisce se è c
 3. Salvi ed esegua **il test di connessione a Telegram**. Funziona anche prima dell’accesso.
 4. Dopo aver avviato la raccolta, si verifichi che un messaggio di controllo venga inserito nel registro.
 
-I nuovi spazi di lavoro utilizzano MTProxy automatico con la funzione «Hide IP». Il pool combina quattro fonti pubbliche, verifica le voci, mantiene i percorsi funzionanti e sostituisce i proxy non funzionanti. I download non riusciti conservano le istantanee precedenti.
+I nuovi spazi di lavoro utilizzano automaticamente MTProxy con l’opzione **“Nascondi l’indirizzo**”. Il pool combina quattro fonti pubbliche, verifica le voci, mantiene i percorsi funzionanti e sostituisce i proxy non funzionanti. I download non riusciti conservano le istantanee precedenti.
 
 ## Utilizzi il proprio proxy
 

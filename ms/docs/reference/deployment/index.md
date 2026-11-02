@@ -19,7 +19,7 @@ Untuk pakej mudah alih, ekstrak `TgWitness-<version>-windows-amd64-portable.zip`
 | Pembantu Docker di Windows | `scripts\Docker.cmd` | Ya; pembantu menunggu kesihatan pelayan web. |
 | Pembantu Docker pada Linux/macOS | `sh scripts/docker-start.sh` | Ya; pembantu menunggu kesihatan pelayan web. |
 
-Untuk pelayan awan yang boleh disemak oleh pihak ketiga — dicipta melalui API penyedia, tanpa SSH, hanya boleh diakses melalui Terowong Cloudflare — lihat [penyebaran jaminan tinggi](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md).
+Untuk pelayan awan yang boleh disemak oleh pihak ketiga — dicipta melalui API penyedia, tanpa SSH, hanya boleh diakses melalui Terowong Cloudflare — lihat [penyebaran jaminan tinggi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/).
 
 Perisian asli mencipta `.venv` peribadi dan memasang kebergantungan yang dilampirkan. Docker membinanya di dalam imej, tanpa memerlukan Python hos. Persediaan kali pertama perlu akses Internet. Apabila tiada Python 3.11+ ditemui, `Start.cmd` akan bertanya sebelum memasang Python 3.12 untuk pengguna Windows semasa (winget, jika tidak, pemuat turun python.org selepas memeriksa tandatangan Python Software Foundation); ia tidak pernah meminta keistimewaan pentadbir. Docker dan perkhidmatan OS kekal sebagai prasyarat.
 
@@ -250,7 +250,7 @@ Panel memaparkan media yang sedang menunggu/gagal, media tertua yang menunggu, r
 
 ## Pilihan sambungan dan perlindungan
 
-Rute sambungan adalah bagi setiap ruang kerja dan perlu dikonfigurasikan sebelum kebenaran. SOCKS5/HTTP CONNECT menggunakan kebergantungan python-socks yang dipasang. MTProxy menggunakan pengangkutan perantaraan rawak eksperimental Telethon; rahsia TLS palsu tidak disokong. Fallback langsung bergantung pada [mod IP](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/#ip-modes) yang dipilih: Sembunyikan IP menolaknya; mod fallback eksplisit membenarkannya selepas kelewatan. Mod Terowong/VPN membenarkan laluan langsung tetapi tidak mewujudkan VPN. Ini bukan dasar rangkaian untuk seluruh sistem.
+Rute sambungan adalah bagi setiap ruang kerja dan perlu dikonfigurasikan sebelum kebenaran. SOCKS5/HTTP CONNECT menggunakan kebergantungan python-socks yang dipasang. MTProxy menggunakan pengangkutan perantaraan rawak eksperimental Telethon; rahsia TLS palsu tidak disokong. Fallback terus bergantung pada [mod IP](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/#ip-modes) yang dipilih: **Sembunyikan alamat** menolak sambungan; **Direct sebagai pilihan terakhir** membenarkannya selepas kelewatan. **Pelayan di belakang terowong atau VPN** membenarkan laluan terus tetapi tidak mewujudkan VPN. Ini bukan dasar rangkaian untuk seluruh sistem.
 
 Untuk pemasangan baharu, TGWITNESS_VAULT_KEY_FILE menunjuk kepada fail kunci induk rawak yang dilindungi secara berasingan. Pasangkannya secara baca sahaja di luar /data dalam sebuah kontena. Peliharalah metadata garam vault.external.json awam bersama setiap ruang kerja dan kunci induk secara berasingan. Vault tempatan sedia ada memerlukan migrasi yang dirancang; menetapkan pembolehubah ini tidak akan menukarnya secara senyap. Penyimpanan dan eksport mesej/media tidak disulitkan oleh aplikasi. Gunakan volum yang disulitkan dan storan sementara peribadi yang mencukupi di mana diperlukan.
 

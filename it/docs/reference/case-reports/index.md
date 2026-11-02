@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/case-
 
 Filtri per i report, otto modelli, impostazioni predefinite per i contenuti, cronologie delle modifiche salvate e la valutazione inclusa nelle esportazioni firmate.
 
-[Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE_REPORTS.md)
-
 Trasformare le osservazioni selezionate in una descrizione leggibile del caso: la sua domanda, l’ambito, le modifiche salvate, i grafici, i risultati e i riferimenti alle fonti. Ogni rapporto offre al destinatario la possibilità di verificare il materiale consegnato e di esaminarne la copertura della raccolta.
 
 La sezione **«Basi di fiducia e limitazioni**» compare nei report relativi a registro, consegna, chat, account e condivisione. I PDF relativi al registro e alla consegna utilizzano la stessa valutazione del loro file «`report.json`» firmato. I manifesti ZIP contengono «`case_assessment`» nel manifesto firmato. Tale valutazione accompagna il materiale esportato. Le osservazioni originali mantengono le loro firme esistenti.

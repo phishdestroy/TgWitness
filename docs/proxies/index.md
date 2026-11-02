@@ -6,15 +6,15 @@ Keep the account connected. Decide explicitly when its route may use the server'
 
 ## Choose the IP mode first
 
-01**Hide IP**
+01**Hide the address**
 
 Use a proxy. When none works, wait without a direct Telegram connection.
 
-02**Allow fallback**
+02**Direct as a last resort**
 
 Permit Direct after the configured delay; return to a working proxy when one answers.
 
-03**Tunnel / VPN**
+03**Server behind a tunnel or VPN**
 
 Allow direct routes through the host's network. This option does not install or verify a VPN.
 
@@ -27,7 +27,7 @@ The route chooses the connection. The IP mode determines whether a direct connec
 3. Save and run **Test Telegram connection**. It also works before sign-in.
 4. After starting collection, check that a controlled message reaches the journal.
 
-New workspaces use automatic MTProxy with Hide IP behavior. The pool combines four public sources, probes entries, retains working routes and replaces failing proxies. Failed downloads retain the previous snapshots.
+New workspaces use automatic MTProxy with **Hide the address**. The pool combines four public sources, probes entries, retains working routes and replaces failing proxies. Failed downloads retain the previous snapshots.
 
 ## Use your own proxy
 

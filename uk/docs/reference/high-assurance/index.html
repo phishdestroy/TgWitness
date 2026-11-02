@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="uk" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Розгортання з високим рівнем безпеки · Довідка | TgWitness</title>
+<meta name="description" content="Захищений сервер, що працює цілодобово без вихідних, на Hetzner або Phala Cloud, шлюз DNS та перевірки, які може повторити третя сторона."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:title" content="Розгортання з високим рівнем безпеки · Довідка | TgWitness"><meta property="og:description" content="Захищений сервер, що працює цілодобово без вихідних, на Hetzner або Phala Cloud, шлюз DNS та перевірки, які може повторити третя сторона.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/high-assurance/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/high-assurance/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/high-assurance/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/high-assurance/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/high-assurance/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/", "url": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/", "name": "Розгортання з високим рівнем безпеки · Довідка | TgWitness", "description": "Захищений сервер, що працює цілодобово без вихідних, на Hetzner або Phala Cloud, шлюз DNS та перевірки, які може повторити третя сторона.", "inLanguage": "uk", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Головна", "item": "https://phishdestroy.github.io/TgWitness/uk/"}, {"@type": "ListItem", "position": 2, "name": "Документація", "item": "https://phishdestroy.github.io/TgWitness/uk/docs/"}, {"@type": "ListItem", "position": 3, "name": "Довідка", "item": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Розгортання з високим рівнем безпеки", "item": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Перейти до вмісту</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Документація</span></a>
+<nav aria-label="Посібники"><a href="../../concepts/">Ілюстрований посібник</a><a href="../../">Усі посібники</a><a href="../">Довідка</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Мова"><span aria-hidden="true">◍</span> Українська</summary><div class="lang-list"><a href="../../../../docs/reference/high-assurance/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/high-assurance/" hreflang="ru" lang="ru">Русский</a><a href="./" hreflang="uk" lang="uk" aria-current="true">Українська</a><a href="../../../../es/docs/reference/high-assurance/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/high-assurance/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/high-assurance/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/high-assurance/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/high-assurance/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/high-assurance/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/high-assurance/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/high-assurance/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/high-assurance/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/high-assurance/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/high-assurance/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/high-assurance/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/high-assurance/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/high-assurance/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/high-assurance/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/high-assurance/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/high-assurance/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/high-assurance/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/high-assurance/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/high-assurance/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/high-assurance/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/high-assurance/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Перемикання між світлою та темною темою"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Посібники"><a href="../../../guides/modes.html">Режими, сценарії та рівні доказовості</a><p class="nav-label">Перші кроки</p><a href="../../start/">Почніть за лічені хвилини</a><a href="../../dedicated-account/">Спеціальний обліковий запис</a><a href="../../accounts/">Підключити обліковий запис</a><a href="../../proxies/">Виберіть проксі-сервер</a><a href="../../exports/">Експорт та перевірка</a><a href="../../capture/">Запис дій на GitHub Actions</a><p class="nav-label">Розслідування та звітність</p><a href="../../cases/">Проведіть розслідування у всіх чатах</a><a href="../../case-board/">Створити «Case Board»</a><a href="../../reports/">Створіть звіт</a><a href="../../handover/">Підготуйте копію для поширення</a><a href="../../groups/">Управління групою облікових записів</a><p class="nav-label">Розуміння доказів</p><a href="../../concepts/">Дізнайтеся, як працює система збереження доказів</a><a href="../../security/">Забезпечте безпеку</a><a href="../../witness/">Налаштування бота-свідка</a><p class="nav-label">Дізнайтеся більше</p><a href="../../archive/">Робота з архівом</a><a href="../../access/">Поділитися справою</a><a href="../../server/">Забезпечте його безперебійну роботу</a><a href="../../troubleshooting/">З’ясуйте, що пішло не так</a></nav><nav class="wiki-nav" aria-label="Довідка"><p class="nav-label"><a class="nav-label-link" href="../">Довідка</a></p><details class="wiki-group" open><summary>Налаштування</summary><a href="../quickstart/">Швидкий старт</a><a href="../installation/">Встановлення, перевірка та оновлення</a><a href="../settings/">Перше налаштування та параметри</a><a href="../accounts/">Формати облікових записів та сеансів</a><a href="../access/">Доступ та дозволи</a><a href="../connection/">Підключення, проксі-сервери та захист даних</a><a href="../deployment/">Впровадження</a><a href="./" aria-current="page">Розгортання з високим рівнем безпеки</a></details><details class="wiki-group"><summary>Зібрати</summary><a href="../panel/">Посібник з панелей</a><a href="../collection/">Як відбувається збір даних</a><a href="../history/">Завантажити історію джерел</a><a href="../operations/">Робочі процеси та операції</a><a href="../investigation/">Режим розслідування</a><a href="../features/">Можливості та обмеження</a></details><details class="wiki-group"><summary>Архів та інтеграції</summary><a href="../case-board/">Довідка щодо Case Board</a><a href="../analysis/">Аналіз архіву</a><a href="../mcp/">MCP тільки для читання</a><a href="../media-analysis/">Локальне розпізнавання тексту (OCR) та транскрипція</a><a href="../webhooks/">Вихідні веб-хуки</a><a href="../showcase/">Публічна вітрина</a></details><details class="wiki-group"><summary>Докази</summary><a href="../how-it-works/">Як працює система збереження доказів</a><a href="../case-reports/">Налаштування та перевірка звітів</a><a href="../account-export/">Експорт облікового запису</a><a href="../evidence/">Формат доказів</a><a href="../witness/">Незалежний свідок</a><a href="../timestamp/">Часові мітки</a><a href="../storage/">Зберігання та відновлення</a></details><details class="wiki-group"><summary>Безпека та проект</summary><a href="../security/">Безпека та обробка даних</a><a href="../architecture/">Архітектура</a><a href="../verification/">Що було протестовано</a><a href="../license/">Повідомлення про несумісність ліцензій та архітектури</a><a href="../notice/">Повідомлення про несумісність з певними операторами</a><a href="../changelog/">Журнал змін</a></details></nav><p class="sidebar-note">v0.8.0<br>З відкритим кодом · Працює на вашому комп’ютері</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Посібники"><a href="../../../">Головна</a> <span aria-hidden="true">/</span> <a href="../../">Документація</a> <span aria-hidden="true">/</span> <a href="../">Довідка</a> <span aria-hidden="true">/</span> <span aria-current="page">Розгортання з високим рівнем безпеки</span></nav>
+<p class="verification-shortcut"><a href="../verification/">Що було протестовано →</a></p>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Пошук у документації</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Спробуйте «проксі», «хеш-ланцюг», «токен» або «свідок»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Зручний пошук" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введіть слово, щоб здійснити пошук у посібниках та довідковій інформації. Результати пошуку залишаються у вашому браузері.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Довідка / Налаштування</p><h1>Розгортання з високим рівнем безпеки</h1><p class="guide-outcome">Захищений сервер, що працює цілодобово без вихідних, на Hetzner або Phala Cloud, шлюз DNS та перевірки, які може повторити третя сторона.</p><div class="wiki-body"><p>Підписаний журнал підтверджує, що записи не були змінені <strong>після</strong> підписання. У серйозних випадках
+наступне питання полягає в тому, чи міг хтось змінити дані <strong>до</strong> їх підписання:
+хто запускав колектор, на якій машині та чи хтось входив у систему. Цей опціональний
+режим розгортає колектор таким чином, щоб третя сторона могла це перевірити, використовуючи записи, що зберігаються
+хмарним провайдером та Cloudflare, а не покладаючись на слова оператора.</p>
+<p>Звичайне використання локальних середовищ та Docker залишається без змін. Ніщо тут не працює, доки ви не розгорнете систему за допомогою
+<code>python -m tgwitness.cloud</code>, а колектор зчитує дані зі свого хоста лише тоді, коли розгортання встановлює
+<code>TGWITNESS_ASSURANCE</code>.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 926 298" width="926" height="298" role="img" aria-labelledby="flow-9-title flow-9-desc"><title id="flow-9-title">Блок-схема</title><desc id="flow-9-desc">Оператор → Сервер, брандмауер без правил вхідного трафіку (API-інтерфейс провайдера); Оператор → Тунель і DNS (API Cloudflare); Сервер, брандмауер без правил вхідного трафіку → Тунель і DNS (тільки вихідні повідомлення); Сервер, брандмауер без правил вхідного трафіку → Ключ підпису, створений на сервері; Verifier, токени тільки для читання → Журнал провайдера та брандмауер; Verifier, токени тільки для читання → Адреса тунельного коннектора та вхідний трафік; Verifier, токени тільки для читання → Підписана заява /api/assurance; Verifier, токени тільки для читання → ЗIP-архів доказів</desc><defs><marker id="flow-9-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M375.7 55.0C375.7 87.5 139.1 87.5 139.1 120.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:252" pathLength="252"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.8s" repeatCount="indefinite" path="M375.7 55.0C375.7 87.5 139.1 87.5 139.1 120.0"/></circle><path class="flow-edge" d="M375.7 55.0C375.7 149.0 286.8 149.0 286.8 243.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:214" pathLength="214"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.4s" repeatCount="indefinite" path="M375.7 55.0C375.7 149.0 286.8 149.0 286.8 243.0"/></circle><path class="flow-edge" d="M139.1 178.0C139.1 210.5 286.8 210.5 286.8 243.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:169" pathLength="169"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.9s" repeatCount="indefinite" path="M139.1 178.0C139.1 210.5 286.8 210.5 286.8 243.0"/></circle><path class="flow-edge" d="M139.1 178.0C139.1 206.0 109.7 206.0 109.7 234.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:65" pathLength="65"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M139.1 178.0C139.1 206.0 109.7 206.0 109.7 234.0"/></circle><path class="flow-edge" d="M539.1 64.0C539.1 92.0 333.4 92.0 333.4 120.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:219" pathLength="219"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.4s" repeatCount="indefinite" path="M539.1 64.0C539.1 92.0 333.4 92.0 333.4 120.0"/></circle><path class="flow-edge" d="M539.1 64.0C539.1 87.5 520.9 87.5 520.9 111.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:52" pathLength="52"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M539.1 64.0C539.1 87.5 520.9 87.5 520.9 111.0"/></circle><path class="flow-edge" d="M539.1 64.0C539.1 92.0 691.1 92.0 691.1 120.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:168" pathLength="168"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.9s" repeatCount="indefinite" path="M539.1 64.0C539.1 92.0 691.1 92.0 691.1 120.0"/></circle><path class="flow-edge" d="M539.1 64.0C539.1 96.5 847.5 96.5 847.5 129.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:321" pathLength="321"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="3.6s" repeatCount="indefinite" path="M539.1 64.0C539.1 96.5 847.5 96.5 847.5 129.0"/></circle><g class="flow-node" style="--i:0"><rect x="323.7" y="15.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="375.7" y="35.0">Оператор</tspan></text></g><g class="flow-node" style="--i:0"><rect x="445.7" y="6.0" width="186.7" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="539.1" y="26.0">Verifier, токени тільки</tspan><tspan x="539.1" y="44.0">для читання</tspan></text></g><g class="flow-node" style="--i:1"><rect x="45.7" y="120.0" width="186.7" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="139.1" y="140.0">Сервер, брандмауер без</tspan><tspan x="139.1" y="158.0">правил вхідного трафіку</tspan></text></g><g class="flow-node" style="--i:1"><rect x="250.4" y="120.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="333.4" y="140.0">Журнал провайдера та</tspan><tspan x="333.4" y="158.0">брандмауер</tspan></text></g><g class="flow-node" style="--i:1"><rect x="434.4" y="111.0" width="172.9" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="520.9" y="131.0">Адреса тунельного</tspan><tspan x="520.9" y="149.0">коннектора та вхідний</tspan><tspan x="520.9" y="167.0">трафік</tspan></text></g><g class="flow-node" style="--i:1"><rect x="625.3" y="120.0" width="131.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="691.1" y="140.0">Підписана заява</tspan><tspan x="691.1" y="158.0">/api/assurance</tspan></text></g><g class="flow-node" style="--i:1"><rect x="774.8" y="129.0" width="145.3" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="847.5" y="149.0">ЗIP-архів доказів</tspan></text></g><g class="flow-node" style="--i:2"><rect x="231.4" y="243.0" width="110.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="286.8" y="263.0">Тунель і DNS</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="234.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="109.7" y="254.0">Ключ підпису, створений на</tspan><tspan x="109.7" y="272.0">сервері</tspan></text></g><g class="flow-label" style="--i:0"><rect x="112.7" y="85.2" width="167.2" height="23.0" rx="6"/><text x="196.3" y="96.7" text-anchor="middle" dominant-baseline="central">API-інтерфейс провайдера</text></g><g class="flow-label" style="--i:0"><rect x="256.2" y="164.0" width="104.2" height="23.0" rx="6"/><text x="308.3" y="175.5" text-anchor="middle" dominant-baseline="central">API Cloudflare</text></g><g class="flow-label" style="--i:1"><rect x="158.1" y="208.2" width="186.1" height="23.0" rx="6"/><text x="251.1" y="219.7" text-anchor="middle" dominant-baseline="central">тільки вихідні повідомлення</text></g></svg></div><details class="flow-steps"><summary>Діаграма у вигляді тексту</summary><ol><li>Оператор → Сервер, брандмауер без правил вхідного трафіку (API-інтерфейс провайдера)</li><li>Оператор → Тунель і DNS (API Cloudflare)</li><li>Сервер, брандмауер без правил вхідного трафіку → Тунель і DNS (тільки вихідні повідомлення)</li><li>Сервер, брандмауер без правил вхідного трафіку → Ключ підпису, створений на сервері</li><li>Verifier, токени тільки для читання → Журнал провайдера та брандмауер</li><li>Verifier, токени тільки для читання → Адреса тунельного коннектора та вхідний трафік</li><li>Verifier, токени тільки для читання → Підписана заява /api/assurance</li><li>Verifier, токени тільки для читання → ЗIP-архів доказів</li></ol></details></figure>
+<h2 id="what-a-verifier-can-check">Що може перевіряти верифікатор<a class="anchor" href="#what-a-verifier-can-check" aria-label="Посилання на цей розділ">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Заява</th>
+<th>Як це перевіряється</th>
+<th>Веде</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Сервер було створено за допомогою API провайдера у відомий час</td>
+<td>Об’єкт «Сервер» та його створення у власному журналі провайдера</td>
+<td>Провайдер</td>
+</tr>
+<tr>
+<td>Ніхто не використовував шляхи доступу провайдера</td>
+<td>Журнал запитів консолі, відновлення, скидання пароля, перебудови, ISO, образів, резервних копій</td>
+<td>Провайдер</td>
+</tr>
+<tr>
+<td>Ніщо не могло підключитися до нього</td>
+<td>Брандмауер провайдера не має правил вхідного трафіку; SSH приховано з моменту першого запуску</td>
+<td>Провайдер (брандмауер), хост (SSH)</td>
+</tr>
+<tr>
+<td>До панелі можна отримати доступ лише через тунель</td>
+<td>Вхідний тунель перенаправляє трафік виключно на панель; коннектор працює з адреси сервера</td>
+<td>Cloudflare</td>
+</tr>
+<tr>
+<td>Саме це програмне забезпечення працює</td>
+<td>Підписаний хеш дерева вихідного коду колектора дорівнює копії розгорнутого коміту</td>
+<td>Collector, перевірено за допомогою Git</td>
+</tr>
+<tr>
+<td>Ключ підпису було створено на цьому сервері</td>
+<td>Ключ підписує повідомлення, в якому вказано ідентифікатор сервера провайдера та хеш отриманого ним файлу cloud-init</td>
+<td>Collector, перевірений провайдером</td>
+</tr>
+<tr>
+<td>Журнал належить цьому ключу та серверу</td>
+<td>Кожен процес, що запускається в доказі ZIP, містить показники хосту для цього сервера</td>
+<td>Докази ZIP</td>
+</tr>
+</tbody>
+</table></div>
+<p>Показники хосту (SSH-приймачі та процеси, поточні сесії, входи в <code>wtmp</code>, завантаження)
+повідомляються самим колектором і підписуються під час кожного запуску процесу та у
+<code>host.state</code> записів щоразу, коли вони змінюються. Користувач із правами root на сервері міг би їх сфальсифікувати; вони
+підтримують записи провайдера та Cloudflare, а не замінюють їх.</p>
+<h2 id="providers">Провайдери<a class="anchor" href="#providers" aria-label="Посилання на цей розділ">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th><code>--provider</code></th>
+<th>Повноваження</th>
+<th>Доступ Verifier лише для читання</th>
+<th>Журнал провайдера для верифікатора</th>
+<th>Зберігається для</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hetzner</code></td>
+<td><code>HCLOUD_TOKEN</code></td>
+<td>Токен для читання того самого проєкту</td>
+<td>Дії сервера та брандмауера</td>
+<td>Поки ці ресурси існують</td>
+</tr>
+<tr>
+<td><code>digitalocean</code></td>
+<td><code>DIGITALOCEAN_TOKEN</code></td>
+<td>Особистий токен доступу тільки для читання</td>
+<td>Дії Droplet</td>
+<td>Поки Droplet існує</td>
+</tr>
+<tr>
+<td><code>linode</code></td>
+<td><code>LINODE_TOKEN</code></td>
+<td><code>linodes</code>, <code>firewall</code>, <code>events</code> області, доступні лише для читання</td>
+<td>Події облікового запису, версії правил брандмауера</td>
+<td>90 днів</td>
+</tr>
+<tr>
+<td><code>vultr</code></td>
+<td><code>VULTR_API_KEY</code></td>
+<td>Користувач із доступом на читання та <code>activity_logs</code> дозволом</td>
+<td>Журнал активності облікового запису (метод, шлях, виконавець)</td>
+<td>30 днів, а з підпискою на журнал аудиту — ще довше</td>
+</tr>
+<tr>
+<td><code>aws</code></td>
+<td><code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code></td>
+<td><code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroups</code>, <code>cloudtrail:LookupEvents</code></td>
+<td>Історія подій CloudTrail</td>
+<td>90 днів</td>
+</tr>
+<tr>
+<td><code>phala</code></td>
+<td><code>PHALA_CLOUD_API_KEY</code></td>
+<td>Ключ API цього ж робочого простору</td>
+<td>Зміни в додатку: зміни в коді та середовищі, перезапуски, оновлення ОС</td>
+<td>Поки додаток існує</td>
+</tr>
+<tr>
+<td><code>generic</code></td>
+<td>немає</td>
+<td>немає</td>
+<td>none: <strong>самозасвідчений</strong></td>
+<td>–</td>
+</tr>
+</tbody>
+</table></div>
+<p>Для кожної справи використовуйте окремий проєкт, команду, обліковий запис або підобліковий запис: тоді
+доступ верифікатора «тільки для читання» показуватиме лише це розгортання. Повноваження зчитуються з
+<code>--provider-token-file</code> або з наведеної вище змінної, ніколи — з командного рядка. Для AWS у файлі
+вказується <code>ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]</code>; регіон — це <code>--location</code>.</p>
+<p>У кожному звіті вказується, що саме не відображається у записах кожного провайдера. Коротко: Hetzner
+реєструє запити до консолі; консоль відновлення DigitalOcean, Lish/Glish від Linode та веб-
+консоль Vultr не реєструються як такі, тому доступ root блокується під час першого завантаження, а для входу в консоль
+потрібно скинути пароль або змінити параметри завантаження, що реєструється. Vultr повертає адресу консолі
+будь-якому ключу, який може зчитувати інстанцію; ані запис, ані звіт її не зберігають.</p>
+<h2 id="confidential-vm-on-phala-cloud-intel-tdx">Конфіденційна віртуальна машина на Phala Cloud (Intel TDX)<a class="anchor" href="#confidential-vm-on-phala-cloud-intel-tdx" aria-label="Посилання на цей розділ">#</a></h2>
+<p>При цьому <code>--provider phala</code> колектор працює у конфіденційній віртуальній машині Intel TDX на
+<a href="https://phala.com/">Phala Cloud</a>, якою керує dstack. Хост та персонал Phala не можуть читати її
+пам’ять, а процесор підписує підтвердження того, що саме запустила машина. Верифікатор не
+покладається лише на слова Phala: <code>tgwitness.tdx</code> самостійно перевіряє кожне підтвердження, аж до закріпленого кореневого сертифікату Intel
+SGX Root CA, порівнюючи його зі списками відкликаних сертифікатів Intel та підписаними даними платформи Intel, і відхиляє
+машини, які можна налагоджувати або мігрувати.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Створення звіту</th>
+<th>Що він показує</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tdx_binding</code></td>
+<td>Атестація охоплює підписану заяву збирача та випадкове значення цього запиту</td>
+</tr>
+<tr>
+<td><code>tdx_quote</code></td>
+<td>Intel гарантує достовірність сертифікації; вона вважається успішною лише тоді, коли Intel оцінює платформу як актуальну</td>
+</tr>
+<tr>
+<td><code>tdx_compose_hash</code></td>
+<td>RTMR3, відтворений із журналу подій dstack, вимірює кількість повідомлень, складених у додатку, про які повідомляє колектор</td>
+</tr>
+<tr>
+<td><code>tdx_compose</code></td>
+<td>Цей код байт за байтом збігається з тим, що генерує розгорнутий комміт: вихідні файли прив’язані за хешем, обидва зображення — за дайджестом, іншого коду немає</td>
+</tr>
+<tr>
+<td><code>tdx_identity</code></td>
+<td>Атестація надходить від розгорнутого додатка та екземпляра, з використанням ключів із KMS Phala та зашифрованого диска</td>
+</tr>
+<tr>
+<td><code>tdx_os</code></td>
+<td>При <code>--tdx-measurements</code>, MRTD та RTMR0-2 дорівнюють значенням, обчисленим на основі образу ОС dstack (<code>dstack-mr measure --json</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Кожен запуск колектора, зафіксований у журналі, має таке підтвердження, тому
+<code>verify --evidence</code> перевіряє кожен запуск. Список версій додатка від Phala слугує
+журналом постачальника: якщо код змінився після розгортання, звіт не проходить.</p>
+<p>У панелі виберіть <strong>«Конфіденційна віртуальна машина · Phala Cloud»</strong>
+у розділі <strong>«Додаткові функції»</strong>
+→ <strong>«Сервер 24/7»</strong>
+та вставте ключ API Phala Cloud; швидкий тунель працює так само, як на Hetzner. З командного рядка:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type tdx.small \
+    --ref v0.8.0 --repository https://github.com/phishdestroy/TgWitness --quick-tunnel \
+    --provider-token-file phala-key.txt
+python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
+    --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
+    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json</code></pre>
+<p><code>--tdx-collateral</code> зчитує сертифікати та списки відкликаних сертифікатів Intel із файлу, а не
+завантажує їх із сайту Intel. Шлюз DNS тут недоступний: у Phala немає брандмауера провайдера
+для вихідного трафіку.</p>
+<p>Атестація не може виключити наявність вразливості в модулі TDX або мікрокоді Intel, а також фізичного доступу до
+шини пам’яті. Той, хто контролює додаток в обліковому записі Phala, може розгорнути інший компоуз;
+він з’являється як нова версія з новим хешем компоузу. Хост контролює джерело часу
+машини та мережу.</p>
+<h2 id="before-you-start">Перш ніж почати<a class="anchor" href="#before-you-start" aria-label="Посилання на цей розділ">#</a></h2>
+<ol>
+<li>Зона Cloudflare, її ідентифікатор облікового запису та токен API з правами <strong>«Cloudflare Tunnel Edit</strong>»,
+    <strong>«Zone Read»</strong> і <strong>«DNS Edit»</strong>, наданий за допомогою <code>--cloudflare-token-file</code> або
+    <code>CLOUDFLARE_API_TOKEN</code>. Для верифікатора: <strong>«Cloudflare Tunnel Read</strong>», <strong>«DNS Read»</strong> та, для
+    журналу аудиту, <strong>«Account Settings Read</strong>». Без домену
+    <a href="#quick-tunnel-without-a-domain">швидкий тунель</a> не потребує нічого з цього.</li>
+<li>Повноваження провайдера з правом запису до виділеного проєкту; <code>lock</code> використовує те саме:<ul>
+<li>Hetzner: токен API з правами на читання та запис;</li>
+<li>DigitalOcean: особистий токен доступу з правом запису;</li>
+<li>Linode: особистий токен доступу з <code>linodes</code>, <code>firewall</code> та <code>events</code> областями доступу для читання/запису;</li>
+<li>Vultr: ключ API виділеного облікового запису або субоблікового запису;</li>
+<li>AWS: дозволено використовувати облікові дані IAM <code>ec2:DescribeVpcs</code>, <code>ec2:DescribeImages</code>,
+    <code>ec2:CreateSecurityGroup</code>, <code>ec2:AuthorizeSecurityGroupIngress</code>, <code>ec2:RunInstances</code>,
+    <code>ec2:CreateTags</code>, <code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroupRules</code> та
+    <code>ec2:RevokeSecurityGroupIngress</code>.</li>
+</ul>
+</li>
+<li>Коміт, який потрібно виконати. Тег релізу одноразово розпізнається як відповідний коміт за допомогою <code>git ls-remote</code>;
+    сервер завжди отримує лише 40-символьний коміт.</li>
+</ol>
+<h2 id="from-the-panel">З панелі<a class="anchor" href="#from-the-panel" aria-label="Посилання на цей розділ">#</a></h2>
+<p>На вашому комп’ютері через меню <strong>«Додаткові» → «Сервер 24/7»</strong> запускається те саме <code>deploy</code> для Hetzner у три
+кроки: виберіть Європу або США, вставте токен Hetzner (читання та запис), а потім перегляньте
+тип сервера, щомісячну вартість, адресу та версію, які панель знайшла за цим токеном. Нічого
+не створюється, доки ви не підтвердите. Панель показує кожен крок у вигляді <code>deploy</code> з’являється у звіті, а потім —
+адресу, токен панелі та відбиток ключа підпису. Без домену сервер отримує
+<a href="#quick-tunnel-without-a-domain">швидкий тунель</a>
+; <strong>у розділі «Ваші сервери» → «Знайти поточну адресу»</strong>
+його можна перевірити знову після перезапуску. Щоб отримати фіксовану адресу під власним доменом, відкрийте
+<strong>«Додатково» · «Ваш власний домен»</strong>
+і додайте токен Cloudflare (підготовлене посилання вибирає «Зона
+читання», «Редагування DNS» та «Редагування тунелю Cloudflare»).</p>
+<p>Токени передаються з кожною запитом із вкладки браузера до TgWitness на тому самому комп’ютері
+і ніде не записуються; запис розгортання, відредагований файл cloud-init, токен панелі та,
+для швидкого тунелю, ключ адреси зберігаються в <code>deployments/NAME</code> всередині каталогу даних.
+Панель надає доступ до цього лише головному адміністратору через пряме з’єднання з петлею зворотного зв’язку
+(<code>127.0.0.1</code>, без проксі-серверів чи заголовків тунелю); панель, до якої звертаються через мережу, замість цього показує команди
+. Версія за замовчуванням відповідає тегу релізу панелі, що працює, який визначається через
+API GitHub. Місцезнаходження, тип сервера та ціна надходять з API Hetzner: <code>cpx22</code> якщо така
+пропонуються, інакше — найдешевший тип x86 з щонайменше 2 ГБ пам’яті.</p>
+<h2 id="quick-tunnel-without-a-domain">Швидкий тунель без домену<a class="anchor" href="#quick-tunnel-without-a-domain" aria-label="Посилання на цей розділ">#</a></h2>
+<p><code>--quick-tunnel</code> замінює <code>--zone</code>, <code>--cloudflare-account</code> та <code>--panel-host</code>; не використовується жоден обліковий запис
+або токен Cloudflare:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --quick-tunnel --provider-token-file hetzner.token</code></pre>
+<p>На сервері cloudflared відкриває
+<a href="https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/">швидкий тунель</a>
+до панелі: випадкова <code>https://….trycloudflare.com</code> адреса, яка змінюється щоразу, коли cloudflared
+або сервер перезапускається. Невеликий сервіс на сервері публікує кожну адресу у випадковій темі ntfy.sh
+, підписану (HMAC-SHA256) ключем, який зберігається лише у каталозі розгортання
+(<code>address-key.txt</code>), і повторює це кожні три години, оскільки ntfy.sh зберігає публікації протягом 12.
+<code>deploy</code> та <strong>«Знайти поточну адресу»</strong> приймають лише підписані публікації, тому підроблена публікація не може
+перенаправити вас та ваш токен панелі на чужу адресу. Тема міститься у записі та
+опублікованому cloud-init: кожен, хто має доступ до них, може прочитати поточну адресу, яка все одно вимагає введення
+токена панелі. Сервер у жодному разі не відкриває вхідний порт.</p>
+<p>Скільки це коштує: жоден обліковий запис Cloudflare не веде обліку швидкого тунелю, тому <code>verify</code> звіт про
+тунель, коннектор та перевірку DNS буде недоступним, і результат, у кращому випадку, <code>incomplete</code>;
+записи провайдера, брандмауер, підписана заява, вимірювання хосту та порівняння інсталяторів
+перевіряються як зазвичай. Для порівняння байтів з еталонним інсталятором потрібен розгорнутий комміт,
+який уже знає <code>--quick-tunnel</code>; витяг версії 0.7.0 створює інсталятор домену та повідомляє
+про різницю. Cloudflare не надає швидким тунелям гарантії безперебійної роботи, дозволяє 200 запитів у
+процесі обробки та не підтримує Server-Sent Events, тому оновлення панелі в режимі реального часу (версії після 0.7.0)
+можуть не надходити через тунель, і сторінку доведеться перезавантажити; ця частина ще не перевірялася. У випадку,
+коли система має працювати безперебійно, використовуйте власний домен.</p>
+<h2 id="deploy">Розгортання<a class="anchor" href="#deploy" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Спочатку перегляньте все, що буде надіслано. <code>plan</code> не надсилає запитів до провайдера чи Cloudflare:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud plan --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org</code></pre>
+<p>Потім виконайте розгортання з тими самими параметрами та обліковими даними:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org \
+    --witness-host case-witness.example.org \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>Типи серверів для початку: <code>cpx22</code> (Hetzner), <code>s-1vcpu-2gb</code> (DigitalOcean), <code>g6-standard-1</code>
+(Linode), <code>vc2-1c-2gb</code> (Vultr), <code>t3.small</code> (AWS). <code>--location</code> та <code>--image</code> за замовчуванням для кожного
+провайдера — Ubuntu 24.04 у європейському регіоні.</p>
+<p><code>--repository</code> приймає коміт з іншого репозиторію Git за протоколом https без вказівки облікових даних в
+URL (за замовчуванням <code>https://github.com/phishdestroy/TgWitness.git</code>). <code>deploy</code> також приймає <code>--out</code>
+для іншого каталогу розгортання (за замовчуванням <code>deployments/NAME</code>; каталог, у якому вже знаходиться
+розгортання, відхиляється) та <code>--wait</code>, час у хвилинах, протягом якого слід чекати на підписану заяву колектора:
+від 1 до 240, за замовчуванням 20, або 60 для <code>generic</code>.</p>
+<p>Команда:</p>
+<ol>
+<li>створює тунель Cloudflare, вхідний трафік якого перенаправляє ім’я хосту панелі на саму панель, а також,
+    якщо вказано, ім’я хосту свідка на <code>/api/witness/head</code> і <code>/api/assurance</code> тільки;</li>
+<li>створює проксі-записи CNAME для цих імен хостів, відхиляючи імена, які вже існують;</li>
+<li>створює брандмауер-провайдер без правил вхідного трафіку та сервер за ним без SSH-ключа,
+    без резервних копій, без консольного агента та з cloud-init, який маскує SSH, блокує root, встановлює
+    <code>cloudflared</code>, завантажує саме цей комміт, перевіряє його та запускає TgWitness як
+    захищену службу systemd;</li>
+<li>очікує на підписану заяву колектора та перевіряє, чи вказано в ній цей сервер та
+    хеш цього файлу cloud-init.</li>
+</ol>
+<p><code>deployments/case-2026-11/</code> Потім містить:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Файл</th>
+<th>Зміст</th>
+<th>Поділитися?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deployment.json</code></td>
+<td>Ідентифікатори, хеші, здійснені виклики API (метод, шлях, статус) та перше підписане твердження</td>
+<td>Так, за допомогою верифікатора</td>
+</tr>
+<tr>
+<td><code>cloud-init.redacted.yaml</code></td>
+<td>Точний код cloud-init, у якому два секретні параметри замінено на <code>REDACTED</code></td>
+<td>Так</td>
+</tr>
+<tr>
+<td><code>panel-token.txt</code></td>
+<td>Токен панелі</td>
+<td>Ні</td>
+</tr>
+</tbody>
+</table></div>
+<p>Кореневий пароль провайдера, токен тунелю та токен панелі ніколи не записуються
+<code>deployment.json</code>. Опублікуйте відбиток колектора, наведений у кінці, через канал,
+яким ви не керуєте самостійно, наприклад, через канал свідків або у повідомленні одержувачу.</p>
+<p>Увійдіть у Telegram за адресою <code>https://case.example.org</code> за допомогою токена панелі, як зазначено в
+<a href="../accounts/">посібнику з налаштування облікового запису</a>. Дії панелі записуються у підписаному журналі; це не
+сесії SSH. <a href="../witness/">Свідок</a> може запитувати <code>https://case-witness.example.org</code>.</p>
+<p>SSH відсутній: якщо запуск не вдається, колектор ніколи не відповідає. Видаліть сервер і
+розгорніть його знову або скористайтеся розгортанням для налагодження, щоб знайти причину.</p>
+<h3 id="secrets-in-the-user-data">Секрети в даних користувача<a class="anchor" href="#secrets-in-the-user-data" aria-label="Посилання на цей розділ">#</a></h3>
+<p>Cloud-init містить два секретні ключі: токен панелі та токен тунелю Cloudflare.
+Ключ підпису серед них немає; він створюється на сервері. Hetzner, DigitalOcean та Linode
+не повертають дані користувачів через свої API. Vultr повертає їх будь-якому ключу, який може читати
+інстанцію, а EC2 — через <code>DescribeInstanceAttribute</code>. Для AWS надайте верифікатору лише три
+дії з таблиці, ніколи <code>ec2:Describe*</code>. Для Vultr припускайте, що ключ верифікатора може зчитувати обидва
+токенів. Токен тунелю дозволяє запустити другий коннектор: <code>verify</code> повідомляє про будь-який коннектор,
+що не знаходиться на сервері, і заяви колектора не можна підробити таким чином, оскільки кожна з них
+підписується новим викликом. З <code>--quick-tunnel</code> другим секретом є ключ адреси:
+хто б його не прочитав, може опублікувати фальшиву адресу, яку панель прийме.</p>
+<p>У публічній заяві збирача не вказуються адреса сервера та джерела логінів;
+обидві ці інформації залишаються у підписаному журналі.</p>
+<h2 id="debug-deployment-and-lock">Налагодження розгортання та блокування<a class="anchor" href="#debug-deployment-and-lock" aria-label="Посилання на цей розділ">#</a></h2>
+<p><code>--debug-ssh-key KEY --debug-ssh-from 198.51.100.4</code> зберігає SSH для одного ключа з однієї адреси
+або невеликої мережі, максимум /24 для IPv4 або /48 для IPv6. <code>KEY</code> вже зареєстрований у
+провайдера: ім’я або ID SSH-ключа в проєкті Hetzner, ID або відбиток
+SSH-ключа в команді DigitalOcean, ім’я користувача Linode, SSH-ключі якого додано до профілю root,
+ID SSH-ключа в обліковому записі Vultr або ім’я пари ключів EC2 у регіоні. Ці
+параметри не застосовуються до <code>generic</code>. Таке розгортання реєструється як <code>debug</code> і <strong>ніколи не</strong> позначається як
+«високого рівня безпеки». Коли ви закінчите, виконайте <code>sudo tgwitness-lock</code> як останню команду останнього
+сеансу SSH, а потім:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud lock --record deployments/case-2026-11/deployment.json --provider-token-file hetzner.token</code></pre>
+<p>Брандмауер втрачає всі правила вхідного трафіку. Звіти показують, коли SSH було дозволено, а коли
+його було закрито; це вікно залишається видимим.</p>
+<h2 id="remove-a-deployment">Видалити розгортання<a class="anchor" href="#remove-a-deployment" aria-label="Посилання на цей розділ">#</a></h2>
+<p><code>destroy</code> Видаляє сервер та його брандмауер, знайдені за міткою розгортання, щоб
+розгортання, яке завершилося невдачею на півдорозі, також було видалено, а потім — записи DNS, що вказують на його
+тунель, та сам тунель. Журнал сервера та ключ підпису видаляються разом із ним: спочатку експортуйте
+докази. Запис залишається, позначений <code>removed</code>, із API-викликами видалення.</p>
+<pre><code class="language-sh">python -m tgwitness.cloud destroy --record deployments/case-2026-11/deployment.json --confirm case-2026-11 \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>Видалення через API реалізовано для Hetzner. Для інших провайдерів <code>destroy</code> перед
+видаленням будь-чого зупиняється та вказує мітку для видалення в консолі провайдера. Ручно встановлений
+сервер (<code>generic</code>) втрачає лише свій тунель та записи DNS. Швидке розгортання тунелю не потребує
+токену Cloudflare: його тунель закінчується на сервері, а публікації з ntfy.sh втрачають чинність протягом
+12 годин.</p>
+<h2 id="any-server-self-attested">Будь-який сервер (самосертифікований)<a class="anchor" href="#any-server-self-attested" aria-label="Посилання на цей розділ">#</a></h2>
+<p><code>--provider generic</code> призначений для сервера, придбаного або встановленого вручну. <code>deploy</code> створює тунель
+та DNS, записує <code>install.sh</code> (приватний) та <code>install.redacted.sh</code> (для публікації), а потім очікує.
+Скопіюйте <code>install.sh</code> на щойно встановлений сервер Ubuntu 24.04 і запустіть його там:</p>
+<pre><code class="language-sh">sudo bash install.sh</code></pre>
+<p>Він фіксує стан хоста в тому вигляді, яким він був (логіни, акаунти, <code>authorized_keys</code>, сокети прослуховування,
+сервіси, заплановані завдання, пакети), встановлює коміт, увімкне брандмауер хосту, видалить
+себе, замаскує SSH та завершить сесію. Звіт щодо такого сервера є, у кращому разі,
+<strong>САМОПІДТВЕРДЖЕНИМ</strong>: той, хто запустив інсталятор, мав права root до цього, і жодних записів про провайдера
+немає у розпорядженні верифікатора. Це все ж краще, ніж нез’ясований сервер: інвентар,
+хеш інсталятора та кожен наступний вхід підписані.</p>
+<h2 id="verify">Перевірити<a class="anchor" href="#verify" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Верифікатору потрібні <code>deployment.json</code>опублікований інсталятор, облікові дані лише для читання та,
+в ідеалі, копію коміту й доказ ZIP:</p>
+<pre><code class="language-sh">git clone -c core.autocrlf=false https://github.com/phishdestroy/TgWitness.git checkout
+git -C checkout checkout 0123456789abcdef0123456789abcdef01234567
+python -m tgwitness.cloud verify --record deployment.json \
+    --provider-token-file read-only.token --cloudflare-token-file cloudflare-read.token \
+    --fingerprint COLLECTOR_FINGERPRINT --cloud-init cloud-init.redacted.yaml \
+    --source checkout --evidence tgwitness-evidence.zip --report report.md</code></pre>
+<p>Усі дані про провайдера та параметри Cloudflare запитуються верифікатором у цей момент; запис
+надає лише ідентифікатори, щодо яких слід зробити запит. Код виходу дорівнює 0 для <strong>PASS</strong>, 1 для <strong>FAIL</strong> та 2 для
+<strong>REVIEW</strong>, <strong>INCOMPLETE</strong> або <strong>SELF-ATTESTED</strong>. <code>--fingerprint</code> повинен надходити з незалежного
+каналу; без нього ключ порівнюється лише із записом оператора. <code>python verify.py</code>
+все одно перевіряє самі докази ZIP, як описано в розділі <a href="../evidence/">«Докази</a>».</p>
+<p>Дії провайдера класифікуються: створення та запуск протягом 30 хвилин після створення проходять перевірку;
+консоль, відновлення, скидання пароля, перебудова, ISO, образи, знімки, резервні копії, Systems Manager,
+EC2 Instance Connect та відкриття брандмауера — не проходять перевірку; дії з живленням та все непередбачуване
+позначаються для перевірки. Невідома дія ніколи не проходить непоміченою.</p>
+<h2 id="report-for-evidence-handover">Звіт про передачу доказів<a class="anchor" href="#report-for-evidence-handover" aria-label="Посилання на цей розділ">#</a></h2>
+<p><code>--report report.md</code> створює звіт у форматі Markdown і <code>report.json</code> поруч із ним:</p>
+<ol>
+<li>результат, відбиток ключа колектора, розгортання, провайдер, коміт, сервер, брандмауер, тунель;</li>
+<li>кожен запит із зазначенням його статусу та джерела (API провайдера, API Cloudflare, звіт колектора,
+    журнал доказів);</li>
+<li>журнал провайдера з оцінкою кожної дії та, якщо провайдер це фіксує, виконавцем дії;</li>
+<li>кінцеві точки Cloudflare, що містять з’єднання тунелю, конфігурацію та журнал аудиту;</li>
+<li>підписана заява колекціонера;</li>
+<li>що встановлює звіт, а що — ні;</li>
+<li>команди для відтворення цього, а також SHA-256 кожного файлу, який було надано.</li>
+</ol>
+<p>Передайте звіт, <code>report.json</code>, <code>deployment.json</code>, опублікований інсталятор та
+докази ZIP. Складіть звіт якомога раніше: журнали провайдерів зберігаються протягом обмеженого періоду.</p>
+<h2 id="cloudflare-as-an-outside-witness">Cloudflare як зовнішній свідок<a class="anchor" href="#cloudflare-as-an-outside-witness" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Усе це є необов’язковим. Без облікового запису Cloudflare сервер все одно працює, і два з
+цих варіантів працюють сьогодні:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Що</th>
+<th>Що він показує</th>
+<th>У TgWitness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Швидкий тунель або тунель вашого домену</td>
+<td>До панелі можна отримати доступ лише через тунель</td>
+<td>Майстер налаштування сервера, див. вище</td>
+</tr>
+<tr>
+<td>ретранслятор drand <code>drand.cloudflare.com</code></td>
+<td>записи після раунду drand є новішими за нього: щоденник велося по ходу подій</td>
+<td>режим доказів, <strong>більше свідків</strong>, без облікового запису (<a href="../evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices">формат</a>)</td>
+</tr>
+<tr>
+<td>Повідомлення про стан тунелю</td>
+<td>коли тунель не працював, електронною поштою або через веб-хук від Cloudflare</td>
+<td>Налаштуйте їх у панелі управління Cloudflare</td>
+</tr>
+<tr>
+<td>DNS-шлюз (<code>--gateway-dns</code>або <strong>Cloudflare Gateway DNS</strong> у майстрі)</td>
+<td>кожен домен, який сервер перевіряв, відповідь на який надавала Cloudflare через TLS; брандмауер Hetzner не дозволяє DNS-запитам досягати нічого іншого; чи може політика шлюзу переписати відповіді</td>
+<td>Hetzner, безкоштовний тарифний план Zero Trust, без домену; <code>verify</code> перевіряє брандмауер, місцезнаходження, ведення журналів, політики, запити сервера та журнал аудиту; режим «evidence» копіює журнал у щоденник</td>
+</tr>
+<tr>
+<td>Шлюз із клієнтом Cloudflare One на сервері — вихідний брандмауер, що пропускає лише трафік через Cloudflare</td>
+<td>кожен з’єднання, встановлене сервером, а не лише DNS</td>
+<td>ще не створено</td>
+</tr>
+<tr>
+<td>Доступ перед панеллю</td>
+<td>хто та коли увійшов до панелі</td>
+<td>не реалізовано: потрібно мати власний домен</td>
+</tr>
+<tr>
+<td>Реєстрація SSH-команд</td>
+<td>кожна команда в сеансі налагодження</td>
+<td>ще не створено</td>
+</tr>
+</tbody>
+</table></div>
+<p>Logpush, який зберігає власну копію Cloudflare в R2, є функцією для корпоративних клієнтів: у рамках безкоштовного
+тарифного плану Cloudflare відповідає <code>logpush is not enabled for this account</code>. Журнал шлюзу зберігається там 24
+години, тому режим доказів копіює його в підписаний журнал (<strong>журнал Cloudflare Gateway із
+DNS-запитами цього сервера</strong> — токен лише для читання з доступом «Account Analytics Read»).</p>
+<p>Без плану «Zero Trust» обліковий запис має одне DNS-розташування. Коли Cloudflare відхиляє інше,
+сервер використовує існуюче, а його запити розрізняються за адресою; цей фільтр
+також потребує доступу до персональних даних за принципом «Zero Trust», і <code>destroy</code> залишає спільне розташування. Один запит до журналу охоплює
+не більше трьох годин, тому копіювання та <code>verify</code> читання даних за день у тригодинних вікнах.</p>
+<p>DNS-шлюз охоплює системний резолвер. DNS через HTTPS на порту 443 до іншого резолвера, а також
+з’єднання з адресами, які ніде не шукаються (наприклад, у дата-центрах Telegram), не фіксуються
+у його журналі.</p>
+<p>Cloudflare не має доступу до шифрованих даних Telegram, інших пристроїв, пов’язаних з обліковим записом Telegram
+(список пристроїв у режимі «evidence mode» фіксує їх з боку Telegram) або гіпервізора провайдера.</p>
+<p>1 листопада 2026 року Gateway DNS працював із реальним хмарним сервісом Hetzner та безкоштовним обліковим записом Cloudflare:
+Hetzner прийняв правила вихідного трафіку, на сервері було встановлено версію v0.7.0, і кожен запит проходив
+через Gateway за протоколом TLS, швидкий тунель працював через цей брандмауер, і <code>verify</code> прочитав
+19 імен сервера з Cloudflare (дзеркала Ubuntu та Hetzner, GitHub, PyPI, NTP,
+тунель, ntfy.sh). Панель скопіювала 36 запитів у восьми вікнах до журналу та
+<code>verify.py</code> узагальнила їх без пропусків; <code>destroy</code> вилучила сервер і брандмауер та покинула
+спільне приміщення.</p>
+<h2 id="what-this-does-not-establish">Що це не встановлює<a class="anchor" href="#what-this-does-not-establish" aria-label="Посилання на цей розділ">#</a></h2>
+<ul>
+<li>Провайдер та його персонал контролюють гіпервізор, диски та мережу.</li>
+<li>Показники хосту самозвітуються збирачем даних.</li>
+<li>Раніше вміст правил брандмауера зберігається не в усіх журналах провайдерів; лише Linode зберігає версії правил.</li>
+<li>Це не містить нової інформації щодо автентичності повідомлень; див. розділ <a href="../evidence/">«Докази</a>».</li>
+</ul>
+<h2 id="tested-here">Перевірено тут<a class="anchor" href="#tested-here" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Логіка розгортання, блокування та верифікації перевіряється за допомогою автоматизованих тестів на основі імітованих
+API-інтерфейсів Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail та Cloudflare, створених на основі їхніх
+опублікованих довідників API, а також підписання запитів AWS — на основі опублікованих AWS прикладів.
+<code>tools/check_cloud_wizard.py</code> запускає майстер налаштування сервера панелі таким самим чином — із доменом та
+за допомогою швидкого тунелю. <code>tools/check_tdx.py</code> перевіряє справжні атестації Intel TDX з dcap-qvl та dstack
+аж до кореневого сертифіката Intel (джерела в <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md">tools/tdx/README.md</a>); <code>tools/check_phala.py</code>запускає команди розгортання, перевірки, журналу, знищення та майстра панелі на імітованому хмарному середовищі Phala Cloud,
+сертифікати якого походять із підробленої системи PKI, схожої на систему Intel. Шлях Phala ще не було
+випробувано на самому хмарному середовищі Phala Cloud.</p>
+<p>1 листопада 2026 року швидкий тунельний маршрут працював через справжню <strong>хмару Hetzner</strong> (Нюрнберг, <code>cpx22</code>,
+TgWitness v0.7.0), справжнього ntfy.sh та GitHub, як з панелі управління, так і з коду:</p>
+<ul>
+<li>перевірка ціни, потім створення за допомогою кнопок на панелі: сервер запускається через 13 секунд,
+    підписана заява з відповідними хешами екземпляра та інсталятора — приблизно через дві хвилини;</li>
+<li>власна панель сервера, що відкривається за адресою trycloudflare.com і приймає
+    токен панелі; без токена вона видає код 401;</li>
+<li>після перезавантаження через API Hetzner сервер опублікував нову підписану адресу; <strong>знайшов
+    поточну адресу</strong>, стара адреса перестала відповідати, ключ підпису залишився
+    незмінним; непідписаний допис у темі ntfy.sh було проігноровано;</li>
+<li><code>verify</code> щодо API Hetzner: сервер, брандмауер без правил вхідного трафіку, заява, прив’язка,
+    вимірювання хосту, завантаження та хеш вихідного коду з гілки v0.7.0 пройшли перевірку; перевірки Cloudflare
+    були недоступні, як описано вище; інсталятор відрізнявся від того, що використовується для збірки v0.7.0,
+    і повністю збігався байт за байтом із тим, що використовується для збірки коду цієї версії;</li>
+<li>Видалення з панелі призвело до видалення саме того сервера та брандмауера, які були позначені під час розгортання;
+    інші сервери та брандмауери в тому самому проєкті залишилися недоторканими.</li>
+</ul>
+<p>Ще не тестувалося на реальних акаунтах: розгортання під вашим власним доменом (тунель Cloudflare та
+DNS), інші провайдери, розгортання для налагодження та <code>lock</code>, обліковий запис Telegram на такому сервері,
+а також оперативні оновлення пізніших версій через швидкий тунель. Перевірте перше розгортання на
+кожному провайдері за допомогою <code>plan</code>, розгортання для налагодження та <code>verify</code> перш ніж покладатися на нього під час роботи над справою.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/HIGH-ASSURANCE.md">Редагувати цю сторінку на GitHub ↗</a><a class="next-guide" href="../panel/"><span>Наступний крок</span><strong>Посібник з панелей →</strong></a><p>Ці посібники описують поточну реалізацію. Результати перевірки та існуючі прогалини задокументовані окремо. <a href="../verification/">Що було протестовано →</a></p></footer>
+</main>
+<aside class="toc" aria-label="На цій сторінці"><p class="nav-label">На цій сторінці</p><a href="#what-a-verifier-can-check">Що може перевіряти верифікатор</a><a href="#providers">Провайдери</a><a href="#confidential-vm-on-phala-cloud-intel-tdx">Конфіденційна віртуальна машина на Phala Cloud (Intel TDX)</a><a href="#before-you-start">Перш ніж почати</a><a href="#from-the-panel">З панелі</a><a href="#quick-tunnel-without-a-domain">Швидкий тунель без домену</a><a href="#deploy">Розгортання</a><a href="#debug-deployment-and-lock">Налагодження розгортання та блокування</a><a href="#remove-a-deployment">Видалити розгортання</a><a href="#any-server-self-attested">Будь-який сервер (самосертифікований)</a><a href="#verify">Перевірити</a><a href="#report-for-evidence-handover">Звіт про передачу доказів</a><a href="#cloudflare-as-an-outside-witness">Cloudflare як зовнішній свідок</a><a href="#what-this-does-not-establish">Що це не встановлює</a><a href="#tested-here">Перевірено тут</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>З відкритим кодом · Працює на вашому комп’ютері</span><a href="../../../../LICENSE">Ліцензія MIT</a><a href="../notice/">Повідомлення оператора</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Безпека</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Очікування повідомлення", "Step through a fictional send, edit and delete.": "Покроковий огляд вигаданого процесу надсилання, редагування та видалення повідомлення.", "No observations yet. Start the sequence or advance one event.": "Поки що немає коментарів. Почати послідовність або перейти до наступної події.", "Meet at 10:00": "Зустріч о 10:00", "A new message is visible in the chat.": "У чаті з’явилося нове повідомлення.", "Record 1 appended: the collector observed the original message.": "Додано запис № 1: збирач зафіксував оригінальне повідомлення.", "Meet at 11:00": "Зустріч о 11:00", "The current text changes. The earlier observation stays.": "Поточний текст змінюється. Попереднє зауваження залишається.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Додано запис 2: редагування є новим спостереженням. Запис 1 все ще містить оригінальний текст.", "Message deleted": "Повідомлення видалено", "The message has disappeared from the chat view.": "Повідомлення зникло з вікна чату.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Додано запис 3: повідомлення про видалення зберігається разом з обома зафіксованими версіями.", "0 records": "0 записів", "1 record": "1 запис", "2 records": "2 записи", "3 records": "3 записи", "Complete / {n} of 3": "Завершено / {n} з 3", "Step / {n} of 3": "Крок / {n} із 3", "Pause": "Пауза", "Replay sequence": "Послідовність відтворення", "Play sequence": "Послідовність відтворення", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Доступний статичний приклад. Щоб інтерактивно обчислити хеші, відкрийте цю сторінку через HTTPS або у локальному попередньому перегляді з підтримкою Web Crypto.", "No record supplied": "Записів не надано", "Tail removed": "Кінець видалено", "≠ saved hash": "≠ збережений хеш", "Rebuilt · different hash": "Перероблено · інший хеш", "= saved hash": "= збережений хеш", "Same length and matching head.": "Однакова довжина та відповідний заголовок.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Усі три обчислені хеші збігаються із збереженими хешами. Цей зразок відповідає збереженому обмеженню у три записи.", "Same saved head; the journal prefix fails verification.": "Збережено той самий заголовок; префікс журналу не пройшов перевірку.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Запис № 2 більше не збігається зі своїм збереженим хешем. Перевірка лише кінцевого збереженого заголовка не дозволила б виявити це; верифікатор перевіряє кожен запис.", "Head differs from the retained checkpoint.": "Заголовок відрізняється від збереженого контрольного пункту.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Відновлені хеші пов’язані між собою, але кінцевий хеш змінився. Збережений контрольний пункт відхиляє цю історію. Оригінальні підписи також не пройдуть перевірку для змінених записів.", "Too short: 2 supplied records \u003c 3 retained records.": "Занадто коротко: 2 надані записи \u003c 3 збережені записи.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Два решти хеші все ще збігаються. Збережений контрольний пункт розкриває відсутню кінцеву частину. Без цієї попередньої межі сам лише цей коротший префікс не виявив би пропуску.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "У цьому браузері неможливо обчислити хеш. Наведені нижче формули та пояснення залишаються доступними.", "{n} records": "{n} записів", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Прийнято: кількість зростає, підпис перевірено, а ключ збігається. Свідок зберігає цю нову межу.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Відкат: підписана відповідь повідомляє про меншу кількість записів, ніж останній прийнятий контрольний пункт. Witness фіксує проблему та зберігає попередню прийняту межу.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Форк: кількість не змінилася, але головна гілка відрізняється. Свідок фіксує розбіжність і зберігає раніше прийняту межу.", "No answer": "Немає відповіді", "boundary unknown": "межа невідома", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Відсутність відповіді: свідок фіксує невдалу перевірку. Він не може визначити поточний стан збирача. Якщо свідок все ще має доступ до Bot API і це дозволено його політикою публікації, він може опублікувати інформацію про цю невдачу.", "Send {n}": "Надіслати {n}", "Edit {n}": "Редагувати {n}", "Delete {n}": "Видалити {n}", "Both accounts captured all six expected observations in this example.": "Обидва акаунти відобразили всі шість очікуваних спостережень у цьому прикладі.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Акаунт B все одно зафіксував 6 із 6. Дві квитанції завантажилися довше. Коефіцієнт фіксації та затримка отримання квитанцій дають відповіді на різні питання.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Акаунт B зафіксував 5 із 6 до закінчення відведеного часу (83,3 %). Відсутнє редагування не має виміряної затримки. Цей результат описує лише шість контрольованих дій.", "not observed by cutoff": "не дотримано терміну подачі", "{s} seconds": "{s} секунд", "Exact values follow in the table.": "Точні значення наведено в таблиці.", "{s} s": "{s} s", "Not observed": "Не дотримано", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Чотири чати містять різні спостереження. Слідкуйте за вихідними записами для кожного з’єднання; не прив’язуйте публікацію в каналі до користувача 71001 без вказаного відправника.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Записи № 146 та № 205 містять однаковий ідентифікатор відправника — 71001. Це пов’язує виявлені публікації одного облікового запису Telegram у двох чатах. Це не дозволяє ідентифікувати реальну особу чи приписати публікацію каналу конкретній особі.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Адреса pay.example.invalid/new з’являється у записі групи № 146, на клавіатурі бота № 173, у редагуванні каналу № 188 та у приватному повідомленні № 205. Повторне згадування адресата пов’язує цей матеріал; це не доводить спільного контролю над цими акаунтами.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "У цьому вигаданому випадку завершені квитанції про отримання медіафайлів № 151 та № 209 мають однакові повні значення SHA-256. Порівняйте фактичні байти та пов’язані з ними записи повідомлень. Файл, що збігається, не ідентифікує його автора та не доводить, хто його переслав.", "the encrypted off-site copy": "зашифрована зовнішня копія", "notifications": "повідомлення", "checkpoint hashes for timestamps": "хеші контрольних точок для позначок часу", "signed checkpoints for the witness": "підписані контрольні точки для свідка", "Switched on in this example": "У цьому прикладі ввімкнено", "Optional · off by default": "Необов’язкове · за замовчуванням вимкнено", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Залишаючи цей пристрій: підключення до Telegram та {list}. Нічого іншого.", "Default: only the Telegram connection leaves this machine.": "За замовчуванням: з цього комп’ютера надходить лише з’єднання з Telegram.", "{done} of {total} done": "{done} з {total} виконано", "Mark step {n} as done": "Позначити крок {n} як виконаний", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Текст", "Copied": "Скопійовано", "Command copied.": "Команда скопійована.", "Selected — Ctrl/Cmd+C": "Виділити — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Команда вибрана. Скопіюйте її вручну.", "Command copied to clipboard.": "Команда скопійована до буфера обміну.", "Select text": "Виділити текст", "Clipboard unavailable. Command selected; copy it manually.": "Буфер обміну недоступний. Команда вибрана; скопіюйте її вручну.", "A message arrives. The first observation is saved.": "Надходить повідомлення. Перше спостереження збережено.", "The time changes. Both captured versions stay.": "Час змінюється. Обидві зафіксовані версії залишаються.", "The message disappears. The captured history remains.": "Повідомлення зникає. Зафіксована історія залишається.", "Pause example animation": "Приклад анімації паузи", "Play example animation": "Переглянути приклад анімації", "Play": "Відтворити", "Full-size workspace screenshot": "Знімок екрана робочої області у повному розмірі", "Workspace screenshot · fictional data": "Знімок екрана робочого простору · вигадані дані", "Close": "Закрити", "Close screenshot": "Закрити скріншот", "Scrollable full-size screenshot": "Повний знімок екрана з можливістю прокрутки", "Enlarge: {name}": "Збільшити: {name}", "View full size": "Переглянути у повному розмірі", "Step {n} of {total}": "Крок {n} із {total}"}</script>
+</body></html>

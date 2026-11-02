@@ -51,7 +51,7 @@ Akses demo tempatan dibuka secara automatik tanpa memasukkan token secara manual
 
 ![Tetapan pemantauan setiap akaun dengan data sumber sintetik](https://phishdestroy.github.io/TgWitness/assets/sources.png)
 
-Dalam **Sumber → Tetapan Rakaman → Pilih perubahan yang ingin disimpan**, pilih mesej baru, suntingan, notis pemadaman, kemas kini reaksi dan acara keahlian secara berasingan. Lalai mengekalkan semua kategori. **Mesej, Suntingan & Pemadaman** mengekalkan konteks asal sambil menyahdayakan kemas kini reaksi/ahli secara berasingan. **Semua aktiviti yang boleh dilihat** memulihkan kesemuanya lima. Tetapan pra-tetap menukar borang; tekan **Simpan tetapan pemantauan** untuk menerapkan.
+Di **Sumber → Rakaman → Pilih perubahan yang ingin disimpan**, pilih mesej baru, suntingan, notis pemadaman, kemas kini reaksi dan acara keahlian secara berasingan. Lalai menyelamatkan semua kategori. **Mesej, suntingan & pemadaman** mengekalkan konteks asal sambil menyahaktifkan kemas kini reaksi/ahli berasingan. **Semua aktiviti yang kelihatan** memulihkan kelima-limanya. Pratetap mengubah borang; tekan **Simpan tetapan rakaman** untuk menerapkan.
 
 Dasar yang disimpan terpakai kepada semua sumber terpilih dalam ruang kerja tersebut. Ruang kerja lain mengekalkan tetapan mereka sendiri. Setiap perubahan sebenar merekodkan nilai sebelum/selepas yang disahkan; dasar semasa juga disertakan dalam resit proses dan rekod permulaan pemerhatian. Mematikan kategori tidak memadam pemerhatian terdahulu. Mengaktifkan semula tidak memulihkan perubahan yang terlepas. Tiada keutamaan kategori mengikut kumpulan dalam versi ini.
 
@@ -65,7 +65,7 @@ Memadam ruang kerja tambahan menghentikan pengumpulnya dan memadam data tempatan
 
 ## Pemberitahuan
 
-**Sumber** Terbuka **→ Pemberitahuan → Amaran dan ringkasan harian**. TgWitness menggunakan Apprise untuk menghantar amaran ke Matrix, Telegram, Discord, Slack, ntfy, e-mel dan perkhidmatan lain yang disokong. Anda boleh menambah beberapa destinasi ke satu ruang kerja.
+Buka **Extras → Notifikasi → Konfigurasikan**. TgWitness menggunakan Apprise untuk menghantar amaran ke Matrix, Telegram, Discord, Slack, ntfy, e-mel dan perkhidmatan lain yang disokong. Anda boleh menambah beberapa destinasi ke satu ruang kerja.
 
 1. Masukkan satu URL destinasi Apprise setiap baris. Gunakan [katalog perkhidmatan dan format URL](https://appriseit.com/services/) untuk perkhidmatan anda.
 2. Hidupkan **penghantaran pemberitahuan**, kemudian pilih amaran masalah, perubahan dalam sembang yang diperhatikan dan ringkasan harian. Jam ringkasan menggunakan waktu pelayan.

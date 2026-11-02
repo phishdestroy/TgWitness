@@ -6,7 +6,7 @@ Penanda buku, sorotan tepat, hirisan tindakan, perbincangan, akses terhad dan se
 
 Case Board memberikan pasukan penyiasatan paparan kerja bersama bagi bahan yang disimpan. Tandakan pemerhatian, sorot petikan tepat, simpan satu siri tindakan, dan bincangkannya dengan rakan sekerja. Kad mengekalkan rujukan sumber dan sejarah semakan yang disahkan. Anotasi pasukan kekal di ruang kerja, boleh dibezakan secara berasingan daripada pemerhatian Telegram asal.
 
-[Model bukti](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/) · [Akses](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/) · [Laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-reports/) · [Bahasa Rusia](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[Model bukti](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/) · [Akses](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/) · [Laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-reports/)
 
 ![Suapan siasatan sintetik](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

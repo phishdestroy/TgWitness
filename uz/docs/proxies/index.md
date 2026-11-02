@@ -6,15 +6,15 @@ Hisobni ulangan holda saqlang. Qachon uning yo'li server manzilidan foydalanishi
 
 ## Avvalo IP rejimini tanlang
 
-01**IPni yashirish**
+01**Manishani yashirish**
 
 Proxy-dan foydalaning. Hech biri ishlamasa, Telegramga bevosita ulanmasdan kuting.
 
-02**Zaxira variantga ruxsat bering**
+02**Oxirgi chora sifatida to'g'ridan-to'g'ri**
 
 Sozlangan kechikishdan so'ng Direct ruxsat etilsin; javob berilganda ishchi proksiga qaytish.
 
-03**Tunnel / VPN**
+03**Tunnel yoki VPN ortidagi server**
 
 Mehmondo'st tarmog'i orqali to'g'ridan-to'g'ri yo'nalishlarni ruxsat eting. Ushbu opsiya VPNni o'rnatmaydi yoki tekshirmaydi.
 
@@ -27,7 +27,7 @@ Yo'l ulanishni tanlaydi. IP rejimi to'g'ridan-to'g'ri ulanishga ruxsat berilishi
 3. **Telegram ulanishini sinovdan o'tkazishni** saqlang va ishga tushiring. Bu shuningdek tizimga kirishdan oldin ham ishlaydi.
 4. Yig'ishni boshlagandan so'ng, nazorat ostidagi xabar jurnalga yetib kelganini tekshiring.
 
-Yangi ish maydonchalari IP-ni yashirish xususiyatiga ega avtomatik MTProxy-dan foydalanadi. Pool to'rtta ommaviy manbani birlashtiradi, kirishlarni tekshiradi, ishchi yo'nalishlarni saqlab qoladi va ishlamay qolgan proksi-larni almashtiradi. Muvaffaqiyatsiz yuklab olishlar avvalgi snapshot-larni saqlab qoladi.
+Yangi ish maydonchalari avtomatik proxy (MTProxy) va **manzilni yashirish (Hide the address**) funksiyasidan foydalanadi. Havza to'rtta ommaviy manbani birlashtiradi, kirishlarni tekshiradi, ishlayotgan yo'nalishlarni saqlab qoladi va ishlamay qolgan proxylarni almashtiradi. Muvaffaqiyatsiz yuklab olishlar oldingi snapshotlarni saqlab qoladi.
 
 ## O'zingizning proksingizdan foydalaning
 

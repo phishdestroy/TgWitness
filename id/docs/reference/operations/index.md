@@ -51,7 +51,7 @@ Akses demo lokal terbuka secara otomatis tanpa perlu memasukkan token secara man
 
 ![Pengaturan pemantauan per akun dengan data sumber sintetis](https://phishdestroy.github.io/TgWitness/assets/sources.png)
 
-Di **Sumber → Pengaturan penangkapan → Pilih perubahan mana yang akan disimpan**, pilih pesan baru, pengeditan, pemberitahuan penghapusan, pembaruan reaksi, dan peristiwa keanggotaan secara terpisah. Pengaturan default menyimpan semua kategori. **Pesan, pengeditan, & penghapusan** mempertahankan konteks asli sambil menonaktifkan pembaruan reaksi/keanggotaan terpisah. **Semua aktivitas yang terlihat** memulihkan kelima kategori tersebut. Pengaturan awal mengubah formatnya; tekan **Simpan pengaturan pemantauan** untuk menerapkannya.
+Di **Sumber → Perekaman → Pilih perubahan yang akan disimpan**, pilih pesan baru, pengeditan, pemberitahuan penghapusan, pembaruan reaksi, dan peristiwa keanggotaan secara terpisah. Pengaturan default menyimpan semua kategori. **Pesan, pengeditan, & penghapusan** mempertahankan konteks asli sambil menonaktifkan pembaruan reaksi/keanggotaan terpisah. **Semua aktivitas yang terlihat** memulihkan kelima kategori tersebut. Preset mengubah bentuknya; tekan **Simpan pengaturan perekaman** untuk menerapkan.
 
 Kebijakan yang disimpan berlaku untuk semua sumber yang dipilih di ruang kerja tersebut. Ruang kerja lainnya mempertahankan pengaturannya masing-masing. Setiap perubahan aktual mencatat nilai sebelum/sesudah yang telah ditandatangani; kebijakan saat ini juga disertakan dalam tanda terima proses dan catatan awal pengamatan. Menonaktifkan suatu kategori tidak menghapus pengamatan sebelumnya. Mengaktifkan kembali tidak akan memulihkan perubahan yang terlewatkan. Tidak ada penggantian kategori per-kelompok dalam versi ini.
 
@@ -65,7 +65,7 @@ Menghapus ruang kerja tambahan akan menghentikan pengumpulnya dan menghapus data
 
 ## Pemberitahuan
 
-Buka **Sumber → Pemberitahuan → Peringatan dan ringkasan harian**. TgWitness menggunakan Apprise untuk mengirim peringatan ke Matrix, Telegram, Discord, Slack, ntfy, email, dan layanan lain yang didukung. Anda dapat menambahkan beberapa tujuan ke satu ruang kerja.
+Buka **Ekstra → Pemberitahuan → Konfigurasi**. TgWitness menggunakan Apprise untuk mengirim pemberitahuan ke Matrix, Telegram, Discord, Slack, ntfy, email, dan layanan lain yang didukung. Anda dapat menambahkan beberapa tujuan ke satu ruang kerja.
 
 1. Masukkan satu URL tujuan Apprise per baris. Gunakan [katalog layanan dan format URL](https://appriseit.com/services/) yang sesuai untuk layanan Anda.
 2. Aktifkan "**Kirim pemberitahuan**", lalu pilih peringatan masalah, perubahan dalam obrolan yang dipantau, dan ringkasan harian. Jam dalam ringkasan menggunakan waktu server.

@@ -6,7 +6,7 @@ Belgilar, aniq ajratmalar, harakat bo'laklari, muhokamalar, chegaralangan kirish
 
 Case Board tergov guruhiga saqlangan materiallarning umumiy ishlash ko'rinishini taqdim etadi. Kuzatuvni belgilash, aniq parchani ajratib ko'rsatish, bir qator harakatlarni saqlash va uni hamkasblar bilan muhokama qilish mumkin. Kartalar manba havolalarini va imzolangan tahrir tarixini saqlaydi. Guruh izohlari ish maydonida qoladi, ular asl Telegram kuzatuvlaridan alohida ajratib ko'rsatiladi.
 
-[Dalil modeli](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/) · [Kirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/) · [Hisobotlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-reports/) · [Rus tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[Dalil modeli](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/) · [Kirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/) · [Hisobotlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-reports/)
 
 ![Sun'iy tergov lentasi](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

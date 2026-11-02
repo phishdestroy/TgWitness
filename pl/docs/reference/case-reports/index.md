@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-
 
 Filtry raportów, osiem szablonów, gotowe ustawienia treści, zapisana historia zmian oraz ocena zawarta w podpisanych plikach eksportowych.
 
-[Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE_REPORTS.md)
-
 Przekształć wybrane obserwacje w czytelny opis sprawy: jej przedmiot, zakres, zapisane zmiany, wykresy, ustalenia i odniesienia do źródeł. Każdy raport daje odbiorcy możliwość sprawdzenia dostarczonego materiału i zweryfikowania zakresu zgromadzonych danych.
 
 Sekcja **„Podstawa zaufania i ograniczenia”** pojawia się w raportach dziennika, przekazania, czatu, konta oraz udostępniania. Pliki PDF dziennika i przekazania wykorzystują tę samą ocenę, co ich podpisany plik `report.json`. Manifesty ZIP zawierają element `case_assessment` w podpisanym manifeście. Ocena ta jest przekazywana wraz z wyeksportowanym materiałem. Oryginalne obserwacje zachowują swoje istniejące podpisy.

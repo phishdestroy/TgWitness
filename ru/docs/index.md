@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/
 
 Установка
 
-[Быстрый старт](https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/)[Аккаунты и форматы сессий](https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/)[Доступ и разрешения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/access/)[Подключение, прокси и защита данных](https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/)[Развёртывание](https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/)
+[Быстрый старт](https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/)[Установка, проверка и обновление](https://phishdestroy.github.io/TgWitness/ru/docs/reference/installation/)[Первоначальная настройка и параметры](https://phishdestroy.github.io/TgWitness/ru/docs/reference/settings/)[Аккаунты и форматы сессий](https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/)[Доступ и разрешения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/access/)[Подключение, прокси и защита данных](https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/)[Развёртывание](https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/)[Развертывание с высоким уровнем безопасности](https://phishdestroy.github.io/TgWitness/ru/docs/reference/high-assurance/)
 
 Сбор
 
-[Как устроен сбор](https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/)[Загрузить историю источников](https://phishdestroy.github.io/TgWitness/ru/docs/reference/history/)[Работа и обслуживание](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/)[Режим расследования](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)[Возможности и ограничения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/)
+[Руководство по панелям](https://phishdestroy.github.io/TgWitness/ru/docs/reference/panel/)[Как устроен сбор](https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/)[Загрузить историю источников](https://phishdestroy.github.io/TgWitness/ru/docs/reference/history/)[Работа и обслуживание](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/)[Режим расследования](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)[Возможности и ограничения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/)
 
 Архив и интеграции
 
-[Справочная информация по Case Board](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/)[Анализ архива](https://phishdestroy.github.io/TgWitness/ru/docs/reference/analysis/)[MCP только для чтения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/)[Локальное распознавание текста (OCR) и транскрипция](https://phishdestroy.github.io/TgWitness/ru/docs/reference/media-analysis/)[Исходящие веб-хуки](https://phishdestroy.github.io/TgWitness/ru/docs/reference/webhooks/)
+[Справочная информация по Case Board](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/)[Анализ архива](https://phishdestroy.github.io/TgWitness/ru/docs/reference/analysis/)[MCP только для чтения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/)[Локальное распознавание текста (OCR) и транскрипция](https://phishdestroy.github.io/TgWitness/ru/docs/reference/media-analysis/)[Исходящие веб-хуки](https://phishdestroy.github.io/TgWitness/ru/docs/reference/webhooks/)[Публичная витрина](https://phishdestroy.github.io/TgWitness/ru/docs/reference/showcase/)
 
 Доказательства
 
-[Как устроены доказательства](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/)[Настройка и проверка отчетов](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-reports/)[Формат доказательств](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/)[Независимый свидетель](https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/)[Метки времени](https://phishdestroy.github.io/TgWitness/ru/docs/reference/timestamp/)
+[Как устроены доказательства](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/)[Настройка и проверка отчетов](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-reports/)[Экспорт аккаунта](https://phishdestroy.github.io/TgWitness/ru/docs/reference/account-export/)[Формат доказательств](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/)[Независимый свидетель](https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/)[Метки времени](https://phishdestroy.github.io/TgWitness/ru/docs/reference/timestamp/)[Хранение и восстановление](https://phishdestroy.github.io/TgWitness/ru/docs/reference/storage/)
 
 Безопасность и проект
 

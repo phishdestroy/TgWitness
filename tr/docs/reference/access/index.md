@@ -28,7 +28,7 @@ Verilen jetonu içeren paneli ayrı bir tarayıcı oturumunda açın ve teslim e
 
 ## İzinleri seçin
 
-Yalnızca metin içeren halka açık bir tanıtım için, sıradan inceleme erişimi yerine **Halka Açık Tanıtım'ı** kullanın. Bu özellik, açıkça seçilmiş halka açık kanalları, saklanan düzenlemeleri ve silme işlemlerini ve imzalanmış istatistikleri gösterir; yazar alanları gizlenir ve dosyalar API sınırında kapatılır. [Bir tanıtım oluşturun ve doğrulayın](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+Yalnızca metin içeren halka açık bir tanıtım için, sıradan inceleme erişimi yerine **Halka Açık Tanıtım'ı** kullanın. Bu özellik, açıkça seçilmiş halka açık kanalları, saklanan düzenlemeleri ve silme işlemlerini ve imzalanmış istatistikleri gösterir; yazar alanları gizlenir ve dosyalar API sınırında kapatılır. [Bir tanıtım oluşturun ve doğrulayın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/showcase/).
 
 | İzin | Neleri sağlar? |
 | --- | --- |
@@ -70,7 +70,7 @@ IP, uygulama tarafından görülen istemci adresidir. Ters proxy veya tünel ark
 
 ## Erişimi değiştirme veya geri çekme
 
-Kapsamını, izinlerini veya sınırlarını değiştirmek için **Erişimler** altındaki bir girişi düzenleyin. Kapsam ve izin değişiklikleri, halihazırda açık olan oturumlardan gelen istekler de dahil olmak üzere sonraki isteklerde kontrol edilir. Bir erişimin iptal edilmesi, ilgili oturumları sonlandırır ve verilen jetonu kullanılamaz hale getirir. **Açık oturumlar** ayrıca, yöneticinin tüm erişimi iptal etmeden tek bir oturumu sonlandırmasına olanak tanır.
+**"Verilen erişim**" altındaki bir girişi düzenleyerek kapsamını, izinlerini veya sınırlarını değiştirebilirsiniz. Kapsam ve izin değişiklikleri, halihazırda açık olan oturumlardan gelen istekler de dahil olmak üzere sonraki isteklerde kontrol edilir. Bir erişimin iptal edilmesi, ilgili oturumları sonlandırır ve verilen jetonu kullanılamaz hale getirir. **Açık oturumlar özelliği** ayrıca, yöneticinin tüm erişimi iptal etmeden tek bir oturumu sonlandırmasına olanak tanır.
 
 Kaydedilen dışa aktarım kopyaları, oluşturucusunu, çalışma alanını, sohbet kapsamını ve gerekli izinleri korur. Erişim izni verilen bir kullanıcı, yalnızca bu izinler geçerli olduğu sürece kendi kopyalarını listeleyebilir veya indirebilir; Case Board içeren kopyalar için ayrıca `board.read` izni gereklidir. Yönetici tüm kopyaları alabilir. Bu meta verileri ve grup paketlerini içermeyen eski kopyalar yalnızca yönetici tarafından erişilebilir. İndirme biletleri ve hazırlanmış dosya yanıtları, dosya hazırlandıktan sonra, baytları gönderilmeden önce erişimi yeniden kontrol eder.
 

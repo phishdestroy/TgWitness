@@ -28,7 +28,7 @@ Apra il pannello con il token generato in una sessione separata del browser e ve
 
 ## Selezionare le autorizzazioni
 
-Per una dimostrazione pubblica solo testuale, utilizzare **la “Vetrina pubblica”** anziché il normale accesso per i revisori. Mostra i canali pubblici esplicitamente selezionati, le modifiche e le cancellazioni conservate e le statistiche firmate, con i campi dell’autore oscurati e i file chiusi al confine dell’API. [Creare e verificare una vetrina](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+Per una dimostrazione pubblica solo testuale, utilizzare **la “Vetrina pubblica”** anziché il normale accesso per i revisori. Mostra i canali pubblici esplicitamente selezionati, le modifiche e le cancellazioni conservate e le statistiche firmate, con i campi dell’autore oscurati e i file chiusi al confine dell’API. [Creare e verificare una vetrina](https://phishdestroy.github.io/TgWitness/it/docs/reference/showcase/).
 
 | Autorizzazione | Cosa consente |
 | --- | --- |
@@ -70,7 +70,7 @@ L’IP è l’indirizzo del client rilevato dall’applicazione. Se si utilizza 
 
 ## Modificare o revocare l’accesso
 
-Modifichi una voce nella **sezione «Accessi»** per modificarne l’ambito, le autorizzazioni o i limiti. Le modifiche relative all’ambito e alle autorizzazioni vengono verificate nelle richieste successive, comprese quelle provenienti da sessioni già aperte. La revoca di un accesso termina le relative sessioni e rende inutilizzabile il token emesso. **La funzione «Sessioni aperte»** consente inoltre all’amministratore di terminare una singola sessione senza revocare l’intero accesso.
+Modifica una voce nella sezione **«Accesso concesso»** per modificarne l’ambito, le autorizzazioni o i limiti. Le modifiche all’ambito e alle autorizzazioni vengono verificate nelle richieste successive, comprese quelle provenienti da sessioni già aperte. La revoca di un accesso termina le relative sessioni e rende inutilizzabile il token emesso. **La funzione «Sessioni aperte»** consente inoltre all’amministratore di terminare una singola sessione senza revocare l’intero accesso.
 
 Le copie di esportazione salvate mantengono il nome del creatore, l’area di lavoro, l’ambito della chat e le autorizzazioni richieste. Un utente a cui è stato concesso l’accesso può visualizzare o scaricare le proprie copie solo finché tali autorizzazioni sono valide; le copie contenenti il Case Board richiedono inoltre l’autorizzazione «`board.read`». L’amministratore può recuperare tutte le copie. Le copie più vecchie prive di questi metadati e i pacchetti di gruppo sono accessibili solo all’amministratore. I ticket di download e le risposte con file preparati verificano nuovamente l’accesso dopo la preparazione del file, prima di inviarne i byte.
 

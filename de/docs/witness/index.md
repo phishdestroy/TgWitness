@@ -40,8 +40,8 @@ Erstellen Sie mit BotFather einen Bot und erlauben Sie ihm, in einem von Ihnen k
 
 ## Drei Schritte unter „Extras“
 
-1. **Nur-Lese-Zugriff.** Öffnen Sie **„Extras“ → „Ein Bot in Ihrem Kanal“**, erstellen Sie ein Witness-Token und speichern Sie die Zugriffsdatei. Damit können Sie Checkpoints und den Systemzustand einsehen, jedoch keine Unterhaltungen oder Steuerelemente des Collectors.
-2. **Kanal und Intervall.** Geben Sie den Kanal und eine vom Witness erreichbare Sammleradresse ein. Speichern Sie die Einstellungsdatei.
+1. **Schreibgeschützter Zugriff.** Öffnen Sie **„Extras“ → „Unabhängiger Witness“**, erstellen Sie ein Witness-Token und speichern Sie die Zugriffsdatei. Damit können Sie Checkpoints und den Systemzustand einsehen, jedoch keine Unterhaltungen oder Collector-Einstellungen.
+2. **Kanal und Intervall.** Wählen Sie einen Telegram-Kanal oder einen Discord-Webhook aus und geben Sie eine vom Witness erreichbare Collector-Adresse ein. Speichern Sie die Einstellungsdatei.
 3. **Start.** Fügen Sie „`witness.json`“, „`witness-token.txt`“ und ein auf dem Witness-Host erstelltes „`bot-token.txt`“ zusammen ein. Führen Sie die folgenden Befehle in der installierten Projektumgebung aus.
 
 ```
@@ -50,6 +50,8 @@ python -m tgwitness.witness run --config witness.json
 ```
 
 Das Herunterladen der Dateien löst den Witness nicht aus. Vergewissern Sie sich, dass der erste signierte Beitrag im Kanal erscheint, und speichern Sie anschließend den Fingerabdruck des öffentlichen Schlüssels des Witness separat.
+
+Für Discord speicherst du die Webhook-URL des Kanals als `discord-webhook.txt` anstelle des Bot-Tokens. Ein Witness veröffentlicht an einer Stelle, entweder in einem Telegram-Kanal oder einem Discord-Kanal; Checks, die länger sind als eine Discord-Nachricht, werden als angehängte Datei gesendet.
 
 ## Wählen Sie aus, wie oft Sie Beiträge veröffentlichen möchten
 

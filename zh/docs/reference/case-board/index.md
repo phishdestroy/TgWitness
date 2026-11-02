@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-
 
 “案件看板”为调查团队提供了一个共享的已保存材料工作视图。您可以对 观察结果添加书签、突出显示具体段落、保存一系列操作，并与同事进行讨论。 卡片会保留其来源引用和已签名的修订历史。团队注释保留在 工作区中，可与原始 Telegram 观察结果区分开来。
 
-[证据模型](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/) · [访问](https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/) · [报告](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/) · [俄语](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[证据模型](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/) · [访问](https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/) · [报告](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)
 
 ![综合调查信息流](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

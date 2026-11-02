@@ -51,7 +51,7 @@ L’accesso alla demo locale si avvia automaticamente senza l’inserimento manu
 
 ![Impostazioni di monitoraggio per singolo account con dati di origine sintetici](https://phishdestroy.github.io/TgWitness/assets/sources.png)
 
-In **Fonti → Impostazioni di acquisizione → Scegliere quali modifiche conservare**, selezionare in modo indipendente i nuovi messaggi, le modifiche, le notifiche di cancellazione, gli aggiornamenti delle reazioni e gli eventi relativi all’appartenenza. L’impostazione predefinita conserva tutte le categorie. L’opzione **Messaggi, modifiche e cancellazioni** mantiene il contesto originale disabilitando al contempo gli aggiornamenti separati relativi alle reazioni e ai membri. L’opzione **«Tutte le attività visibili»** ripristina tutte e cinque le categorie. Le impostazioni predefinite modificano la forma; premere **«Salva impostazioni di monitoraggio»** per applicare le modifiche.
+In **Fonti → Registrazione → Scegli quali modifiche conservare**, seleziona in modo indipendente i nuovi messaggi, le modifiche, gli avvisi di cancellazione, gli aggiornamenti delle reazioni e gli eventi relativi all’appartenenza. L’impostazione predefinita conserva tutte le categorie. L’opzione **Messaggi, modifiche e cancellazioni** mantiene il contesto originale disabilitando gli aggiornamenti separati relativi alle reazioni e ai membri. L’opzione **Tutte le attività visibili** ripristina tutte e cinque le categorie. Le impostazioni predefinite modificano il modulo; premi **Salva impostazioni di registrazione** per applicarle.
 
 La politica salvata si applica a tutte le fonti selezionate in quell’area di lavoro. Le altre aree di lavoro mantengono le proprie impostazioni. Ogni modifica effettiva registra i valori prima e dopo firmati; la politica corrente è inclusa anche nelle ricevute di processo e nei registri di inizio osservazione. La disattivazione di una categoria non elimina le osservazioni precedenti. La riattivazione non recupera le modifiche perse. In questa versione non è prevista la possibilità di sovrascrivere le categorie a livello di gruppo.
 
@@ -65,7 +65,7 @@ L’eliminazione di un’area di lavoro aggiuntiva arresta il relativo collettor
 
 ## Notifiche
 
-**Fonti** aperte **→ Notifiche → Avvisi e riepilogo giornaliero**. TgWitness utilizza Apprise per inviare avvisi a Matrix, Telegram, Discord, Slack, ntfy, e-mail e altri servizi supportati. È possibile aggiungere diverse destinazioni a un unico spazio di lavoro.
+Apri **Extra → Notifiche → Configura**. TgWitness utilizza Apprise per inviare avvisi a Matrix, Telegram, Discord, Slack, ntfy, e-mail e altri servizi supportati. È possibile aggiungere diverse destinazioni a un unico spazio di lavoro.
 
 1. Inserisca un URL di destinazione Apprise per riga. Utilizzi il [catalogo dei servizi e i formati URL](https://appriseit.com/services/) relativi al Suo servizio.
 2. Attivare l’opzione **“Invia notifiche”**, quindi selezionare gli avvisi relativi a problemi, alle modifiche nelle chat monitorate e a un riepilogo giornaliero. L’ora indicata nel riepilogo si basa sull’ora del server.

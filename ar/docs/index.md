@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/
 
 أدلة مصورة
 
-[### لوحة الحالة احرص على ربط الملاحظات والاقتباسات الدقيقة وملاحظات الفريق ببعضها البعض.](https://phishdestroy.github.io/TgWitness/ar/docs/case-board/) [### استوديو التقارير اختر المادة وأحد تصاميم التقارير الثمانية.](https://phishdestroy.github.io/TgWitness/ar/docs/reports/) [### نسخة للمشاركة قم بإعداد مقتطف موقّع يتضمن الحقول التي يحتاجها المستلم.](https://phishdestroy.github.io/TgWitness/ar/docs/handover/) [### مجموعات الحسابات قم بمراجعة الحسابات معًا مع الحفاظ على فصل مساحات العمل الخاصة بكل منها.](https://phishdestroy.github.io/TgWitness/ar/docs/groups/)
+[### لوحة الحالة احرص على ربط الملاحظات والاقتباسات الدقيقة وملاحظات الفريق ببعضها البعض.](https://phishdestroy.github.io/TgWitness/ar/docs/case-board/) [### استوديو التقارير اختر المادة وأحد تصاميم التقارير الثمانية.](https://phishdestroy.github.io/TgWitness/ar/docs/reports/) [### مشاركة النسخة قم بإعداد مقتطف موقّع يتضمن الحقول التي يحتاجها المستلم.](https://phishdestroy.github.io/TgWitness/ar/docs/handover/) [### مجموعات الحسابات قم بمراجعة الحسابات معًا مع الحفاظ على فصل مساحات العمل الخاصة بكل منها.](https://phishdestroy.github.io/TgWitness/ar/docs/groups/)
 
 [## الأوضاع، والسيناريوهات، ومستويات الأدلة نطاقات التجميع، وحدود الأحداث، وثماني آليات للتحقق، وستة سيناريوهات تحقيق خيالية.](https://phishdestroy.github.io/TgWitness/ar/guides/modes.html)
 
@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/
 
 الإعداد
 
-[البداية السريعة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)[الحسابات وتنسيقات الجلسات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/)[الوصول والأذونات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/)[الاتصال، والوكلاء، وحماية البيانات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/)[النشر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/)
+[البداية السريعة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)[التثبيت والتحقق والتحديث](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/)[الإعداد الأولي والإعدادات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/settings/)[الحسابات وتنسيقات الجلسات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/)[الوصول والأذونات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/)[الاتصال، والوكلاء، وحماية البيانات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/)[النشر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/)[نشر عالي الأمان](https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/)
 
 جمع
 
-[كيفية عمل عملية الجمع](https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/)[تحميل سجل المصدر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/history/)[سير العمل والعمليات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/)[وضع التحقيق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)[الميزات والقيود](https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/)
+[دليل اللوحة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/)[كيفية عمل عملية الجمع](https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/)[تحميل سجل المصدر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/history/)[سير العمل والعمليات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/)[وضع التحقيق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)[الميزات والقيود](https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/)
 
 الأرشيف والتكاملات
 
-[مرجع «لوحة القضية»](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/)[تحليل الأرشيف](https://phishdestroy.github.io/TgWitness/ar/docs/reference/analysis/)[MCP للقراءة فقط](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/)[التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/media-analysis/)[الويب هوكس الصادرة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/webhooks/)
+[مرجع «لوحة القضية»](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/)[تحليل الأرشيف](https://phishdestroy.github.io/TgWitness/ar/docs/reference/analysis/)[MCP للقراءة فقط](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/)[التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/media-analysis/)[الويب هوكس الصادرة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/webhooks/)[عرض عام](https://phishdestroy.github.io/TgWitness/ar/docs/reference/showcase/)
 
 الأدلة
 
-[كيف تعمل الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/)[تكوين التقارير والتحقق منها](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-reports/)[تنسيق الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/)[شاهد مستقل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/)[الطوابع الزمنية](https://phishdestroy.github.io/TgWitness/ar/docs/reference/timestamp/)
+[كيف تعمل الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/)[تكوين التقارير والتحقق منها](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-reports/)[تصدير الحساب](https://phishdestroy.github.io/TgWitness/ar/docs/reference/account-export/)[تنسيق الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/)[شاهد مستقل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/)[الطوابع الزمنية](https://phishdestroy.github.io/TgWitness/ar/docs/reference/timestamp/)[التخزين والاستعادة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/)
 
 الأمن والمشروع
 

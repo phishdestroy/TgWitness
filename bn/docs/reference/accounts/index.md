@@ -235,7 +235,7 @@ TData হল টেলিগ্রাম ডেস্কটপ অ্যাপ�
 - **চ্যাটগুলো একাধিক অ্যাকাউন্টে দেখা যায়:** শেয়ারকৃত উৎসসমূহ, সেগুলো পর্যবেক্ষণকারী অ্যাকাউন্টসমূহ এবং উপলব্ধ ওয়ার্কস্পেস-পর্যবেক্ষণ সময়সীমা (সর্বোচ্চ সাত দিন) এর মধ্যে বিঘ্ন। **Nটি অ্যাকাউন্টের সাথে এক্সপোর্ট** একটি চ্যানেল বা সুপারগ্রুপ এক্সপোর্টকে তাদের মধ্যে ভাগ করে এবং একটি আর্কাইভ স্বাক্ষর করে।
 - **গ্রুপ রপ্তানি:** প্রতিটি অ্যাকাউন্টের স্বাক্ষরিত এক্সপোর্টসহ একটি ZIP `accounts/` এবং `manifest.json` তাদের SHA-256 এবং কী ফিঙ্গারপ্রিন্ট তালিকাভুক্ত করে, প্রধান ওয়ার্কস্পেস দ্বারা স্বাক্ষরিত `manifest.signature.json`প্রতিটি অ্যাকাউন্ট আর্কাইভ স্বতন্ত্রভাবে যাচাই করুন `python -m tgwitness.verify` এবং সেই অ্যাকাউন্টের ট্রাস্টেড ফিঙ্গারপ্রিন্ট ব্যবহার করে যাচাই করুন।
 
-সদস্যরা গ্রুপের সেটিংস শেয়ার করে; একটি অ্যাকাউন্ট তার নিজস্ব মান রাখতে পারে। [শেয়ারকৃত সেটিংস](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [ইমপোর্ট এবং গ্রুপ গাইড](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) দেখুন এবং [MTProxy পুল ড্যাশবোর্ড](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)।
+সদস্যরা গ্রুপের সেটিংস শেয়ার করে; একটি অ্যাকাউন্ট তার নিজস্ব মান রাখতে পারে। [শেয়ারকৃত সেটিংস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/settings/#account-groups), [ইমপোর্ট এবং গ্রুপ গাইড](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) দেখুন এবং [MTProxy পুল ড্যাশবোর্ড](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)।
 
 ## সাইন আউট
 
@@ -278,6 +278,6 @@ TData হল টেলিগ্রাম ডেস্কটপ অ্যাপ�
 | অ্যাকাউন্ট আইডি আমদানি করা অ্যাকাউন্টের সাথে মিলছে না। | ফাইলের ব্যবহারকারী আইডি টেলিগ্রামের রিপোর্ট করা আইডি থেকে ভিন্ন; ফাইলটি অন্য একটি অ্যাকাউন্টের জন্য। |
 | অ্যাকাউন্ট ইতিমধ্যেই অন্য একটি ওয়ার্কস্পেসের অন্তর্গত। | অ্যাকাউন্টটি দুইবার যোগ করার পরিবর্তে সেই ওয়ার্কস্পেসটি খুলুন। |
 | সংযুক্ত, কিন্তু সোর্সেসের চ্যাট তালিকায় একটি ব্যক্তিগত গ্রুপ নেই। | সদস্যতা পরীক্ষা করুন। পিকার প্রথম ১,০০০টি ডায়ালগ পরিদর্শন করে; প্যারামিটারে সীমা বাড়ান। |
-| প্রক্সি সংযোগ ব্যর্থ হয়েছে | রুট এবং আইপি মোড পরীক্ষা করুন। স্বয়ংক্রিয় MTProxy অন্য একটি কার্যকর এন্ট্রি চেষ্টা করে। হিড আইপি মোড অপেক্ষা করে; স্পষ্টভাবে নির্বাচিত ফ্যালব্যাক মোড কনফিগারকৃত বিলম্বের পর সরাসরি সংযোগ করতে পারে। [রাউটিং মোড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/#ip-modes) দেখুন। |
+| প্রক্সি সংযোগ ব্যর্থ হয়েছে | রুট এবং আইপি মোড পরীক্ষা করুন। স্বয়ংক্রিয় MTProxy অন্য একটি কার্যকর এন্ট্রি চেষ্টা করে। Hide the address অপেক্ষা করে; Direct, শেষ বিকল্প হিসেবে, নির্ধারিত বিলম্বের পর সরাসরি সংযোগ করতে পারে। [রাউটিং মোড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/#ip-modes) দেখুন। |
 
 আরও দেখুন: প্রক্সি এবং এনক্রিপশনের জন্য [সংযোগ ও নিরাপত্তা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/), এবং সাইন-ইন করার পর কী সংগ্রহ করা হয় তা [কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/)।

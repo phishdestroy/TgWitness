@@ -8,7 +8,7 @@ Saqlangan xabarlar va o'zgarishlar bilan ishlang, topilmalaringizni ularning man
 
 Illyustratsiyalangan qo'llanmalar
 
-[### Case Board Kuzatuvlar, aniq iqtiboslar va jamoa eslatmalarini bog'lab saqlang.](https://phishdestroy.github.io/TgWitness/uz/docs/case-board/) [### Report studio Materialni va sakkizta hisobot dizaynidan birini tanlang.](https://phishdestroy.github.io/TgWitness/uz/docs/reports/) [### Matnni ulashish Qabul qiluvchiga kerak bo'lgan maydonlarni o'z ichiga olgan imzolangan qismini tayyorlang.](https://phishdestroy.github.io/TgWitness/uz/docs/handover/) [### Hisob guruhlari Hisoblarni birgalikda ko'rib chiqing va ularning ish maydonlarini alohida saqlang.](https://phishdestroy.github.io/TgWitness/uz/docs/groups/)
+[### Case Board Kuzatuvlar, aniq iqtiboslar va jamoa eslatmalarini bog'lab saqlang.](https://phishdestroy.github.io/TgWitness/uz/docs/case-board/) [### Report studio Materialni va sakkizta hisobot dizaynidan birini tanlang.](https://phishdestroy.github.io/TgWitness/uz/docs/reports/) [### Ko'chirishni baham ko'rish Qabul qiluvchiga kerak bo'lgan maydonlarni o'z ichiga olgan imzolangan qismini tayyorlang.](https://phishdestroy.github.io/TgWitness/uz/docs/handover/) [### Hisob guruhlari Hisoblarni birgalikda ko'rib chiqing va ularning ish maydonlarini alohida saqlang.](https://phishdestroy.github.io/TgWitness/uz/docs/groups/)
 
 [## Rejimlar, ssenariylar va dalillar darajalari Yig'ish doiralari, voqea chegaralari, sakkizta tasdiqlash mexanizmi va oltita badiiy tergov ssenariysi.](https://phishdestroy.github.io/TgWitness/uz/guides/modes.html)
 
@@ -34,19 +34,19 @@ Loyihaning har bir hujjati bu yerda diagrammalari bilan berilgan. Qo'llanmalar q
 
 Sozlash
 
-[Tez boshlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)[Hisoblar va sessiya formatlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/)[Kirish va ruxsatnomalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/)[Ulanish, proksi va ma'lumotlarni himoya qilish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/)[Joriy etish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
+[Tez boshlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)[O'rnatish, tekshirish va yangilash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/)[Birinchi sozlash va parametrlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/settings/)[Hisoblar va sessiya formatlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/)[Kirish va ruxsatnomalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/)[Ulanish, proksi va ma'lumotlarni himoya qilish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/)[Joriy etish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)[Yuqori ishonchlilikka ega joylashtirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/)
 
 Yig'ish
 
-[Yig'ish qanday ishlaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/)[Manba tarixini yuklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/)[Ish jarayonlari va operatsiyalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/)[Tergov rejimi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)[Imkoniyatlar va cheklovlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
+[Panel bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/)[Yig'ish qanday ishlaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/)[Manba tarixini yuklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/)[Ish jarayonlari va operatsiyalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/)[Tergov rejimi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)[Imkoniyatlar va cheklovlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
 
 Arxiv va integratsiyalar
 
-[Case Board havolasi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/)[Arxiv tahlili](https://phishdestroy.github.io/TgWitness/uz/docs/reference/analysis/)[Faqat o'qish uchun MCP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/)[Mahalliy OCR va transkripsiya](https://phishdestroy.github.io/TgWitness/uz/docs/reference/media-analysis/)[Chiquvchi webhooks](https://phishdestroy.github.io/TgWitness/uz/docs/reference/webhooks/)
+[Case Board havolasi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/)[Arxiv tahlili](https://phishdestroy.github.io/TgWitness/uz/docs/reference/analysis/)[Faqat o'qish uchun MCP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/)[Mahalliy OCR va transkripsiya](https://phishdestroy.github.io/TgWitness/uz/docs/reference/media-analysis/)[Chiquvchi webhooks](https://phishdestroy.github.io/TgWitness/uz/docs/reference/webhooks/)[Jamoat namoyishi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/showcase/)
 
 Dalil
 
-[Dalil qanday ishlaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-it-works/)[Hisobotni sozlash va tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-reports/)[Dalil formati](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)[Mustaqil guvoh](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/)[Vaqt tamg'alari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/timestamp/)
+[Dalil qanday ishlaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-it-works/)[Hisobotni sozlash va tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-reports/)[Hisobni eksport qilish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/account-export/)[Dalil formati](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)[Mustaqil guvoh](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/)[Vaqt tamg'alari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/timestamp/)[Saqlash va tiklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/)
 
 Xavfsizlik va loyiha
 

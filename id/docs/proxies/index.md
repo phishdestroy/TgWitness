@@ -6,15 +6,15 @@ Pastikan akun tetap terhubung. Tentukan secara eksplisit kapan rute tersebut bol
 
 ## Pilih mode IP terlebih dahulu
 
-01**Sembunyikan IP**
+01**Sembunyikan alamat**
 
 Gunakan proxy. Jika tidak ada yang berfungsi, tunggu tanpa koneksi langsung ke Telegram.
 
-02**Izinkan opsi cadangan**
+02**Langsung sebagai pilihan terakhir**
 
 Izinkan koneksi langsung setelah penundaan yang telah dikonfigurasi; kembali ke proxy yang berfungsi saat ada yang merespons.
 
-03**Tunnel / VPN**
+03**Server yang berada di balik terowongan atau VPN**
 
 Izinkan rute langsung melalui jaringan host. Opsi ini tidak menginstal atau memverifikasi VPN.
 
@@ -27,7 +27,7 @@ Rute menentukan koneksi. Mode IP menentukan apakah koneksi langsung diizinkan.
 3. Simpan dan jalankan **Uji Koneksi Telegram**. Fitur ini juga berfungsi sebelum masuk (sign-in).
 4. Setelah memulai pengumpulan, pastikan bahwa pesan yang dikendalikan telah tercatat dalam jurnal.
 
-Ruang kerja baru menggunakan MTProxy otomatis dengan fitur Hide IP. Pool ini menggabungkan empat sumber publik, memeriksa entri, mempertahankan rute yang berfungsi, dan mengganti proxy yang gagal. Unduhan yang gagal tetap menyimpan snapshot sebelumnya.
+Ruang kerja baru menggunakan MTProxy otomatis dengan opsi "**Sembunyikan alamat"**. Pool ini menggabungkan empat sumber publik, memeriksa entri, mempertahankan rute yang berfungsi, dan mengganti proxy yang gagal. Unduhan yang gagal tetap menyimpan snapshot sebelumnya.
 
 ## Gunakan proxy Anda sendiri
 

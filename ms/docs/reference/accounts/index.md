@@ -235,7 +235,7 @@ Kumpulan mengekalkan akaun berkaitan bersama tanpa menggabungkan sesi, kunci ata
 - **Perbualan beberapa akaun lihat:** sumber yang dikongsi, akaun yang memerhatikannya dan gangguan dalam tempoh pemerhatian ruang kerja tersedia (sehingga tujuh hari). **Eksport dengan N akaun** membahagikan eksport saluran atau superkumpulan di antara mereka dan menandatangani satu arkib.
 - **Eksport kumpulan:** satu ZIP dengan eksport bermassa tandatangan setiap akaun di bawah `accounts/` dan `manifest.json` menyenaraikan SHA-256 dan cap jari kunci mereka, disahkan oleh ruang kerja utama dalam `manifest.signature.json`. Sahkan setiap arkib akaun secara berasingan dengan `python -m tgwitness.verify` dan cap jari yang dipercayai bagi akaun tersebut.
 
-Ahli berkongsi tetapan kumpulan; akaun boleh mengekalkan nilai tersendiri. Lihat [tetapan yang dikongsi](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [panduan import dan kumpulan](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) dan [papan pemuka kolam MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+Ahli berkongsi tetapan kumpulan; akaun boleh mengekalkan nilai tersendiri. Lihat [tetapan yang dikongsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/settings/#account-groups), [panduan import dan kumpulan](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) dan [papan pemuka kolam MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Log keluar
 
@@ -278,6 +278,6 @@ Pengubah hanya membaca Telethon SQLite (sehingga 64 MiB), tidak pernah mengubah 
 | ID akaun tidak sepadan dengan akaun yang diimport | ID pengguna fail itu berbeza daripada yang dilaporkan oleh Telegram; fail itu adalah untuk akaun lain. |
 | Akaun ini sudah dimiliki oleh ruang kerja lain | Buka ruang kerja itu bukannya menambah akaun itu dua kali. |
 | Disambungkan, tetapi satu kumpulan peribadi hilang daripada senarai sembang dalam **Sumber** | Semak keahlian. Pemilih memeriksa 1,000 dialog pertama; naikkan had di bawah **Parameter**. |
-| Sambungan proksi gagal | Semak laluan dan mod IP. MTProxy automatik mencuba entri lain yang berfungsi. Mod Sembunyikan IP menunggu; mod sandaran yang dipilih secara eksplisit boleh menyambung terus selepas kelewatan yang dikonfigurasikan. Lihat [mod penjejakan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/#ip-modes). |
+| Sambungan proksi gagal | Periksa laluan dan mod IP. MTProxy automatik mencuba entri lain yang berfungsi. Tunggu menyembunyikan alamat; Direct sebagai pilihan terakhir boleh menyambung terus selepas kelewatan yang ditetapkan. Lihat [mod penjejakan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/#ip-modes). |
 
 Lihat juga: [sambungan dan keselamatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/) untuk proksi dan penyulitan, dan [bagaimana pengumpulan berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/) untuk apa yang dirakam selepas log masuk.

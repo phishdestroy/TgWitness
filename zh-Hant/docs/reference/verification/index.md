@@ -97,7 +97,7 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 此為原始手動選取建置版本的歷史測試紀錄。關於當前的自動池與 IP 模式，請參閱[連線設定](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/#ip-modes)。下方的計數數據及未支援功能均屬於該測試版本。
 
-新增了來自 SoliSpirit/mtproto 及 zakky8/mtproto-proxy-pro 的捆綁式公開快照與明確的 HTTPS 刷新功能。 在此主機上，應用程式下載器已於 2026 年 10 月 29 日 UTC 12:58 成功擷取兩組資料源：經過 過濾、去重及每來源 64 筆條目的限制後，共計 **118 個唯一的相容端點**。 此操作僅驗證清單檢索功能， 並非驗證透過這些端點的連線能力或訊息傳遞。在此作業過程中， 並無真實帳戶連線至清單中的代理伺服器。[操作員與使用者指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/PROXIES.md)。
+新增了來自 SoliSpirit/mtproto 和 zakky8/mtproto-proxy-pro 的捆綁式公開快照，以及明確的 HTTPS 刷新功能。 在此主機上，應用程式下載器於 2026 年 10 月 29 日 UTC 時間 12:58 成功擷取了這兩組資料源：經過 過濾、去重及每來源 64 筆條目的限制後，共計 **118 個唯一的相容端點**。此操作僅驗證清單檢索功能， 而非透過這些端點的連線能力或訊息傳送能力。在此作業期間，並無真實帳戶 連線至清單中的代理伺服器。[操作員與使用者指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md)。
 
 來源回應若失敗、為空或不相容，將保留先前條目及日期。 更新 不會變更所選的路徑。公開地址經驗證後，其解析出的 IP 位址會在選取時被固定 ；操作員／手動路徑仍保持獨立。連線探測功能現已 可在帳戶登入前的面板中使用。偽 TLS ee 及自動代理伺服器選擇 功能仍不支援。操作員目錄將完全覆寫訂閱設定。
 
@@ -111,7 +111,7 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 ## 可選附加功能簡報 · 2026年10月29日
 
-原先的 Proof 機器人入口現已改為**「Extras」**：先提供簡要概述，隨後是 針對所選選項的獨立設定頁面。Witness 表單分為三個步驟，其中 連線管理、網路選項及部署細節均以摺疊式呈現。GitHub 已 明確納入規劃，且無需填寫憑證表單。[俄文概述](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/EXTRAS.md)。
+原先的 Proof 機器人目的地現已改為**「Extras」**：先是簡短的概述，接著是 針對所選選項的獨立設定頁面。見證表單分為三個步驟，其中 連線管理、網路選項及部署細節均以摺疊式呈現。GitHub 功能 已明確納入規劃，且無需填寫憑證表單。[「Extras」概述](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#extras)。
 
 - 已通過 30 項針對在地化、Witness 設定及發佈檢查的針對性測試。
 - Chromium 設定驗收測試已通過（英文／俄文、淺色／深色模式，解析度 390／1440 像素）： 鍵盤焦點與回車鍵功能正常，選取附加功能時無隱含連結，草稿 保留功能，固定設定／代幣下載功能，鎖定時清除代幣，以及 本地指南錨點運作正常。 版面配置與實色背景文字對比度檢查均通過。
@@ -124,7 +124,7 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 ## Witness 機器人與代理伺服器設定審計 · 2026年10月29日
 
-Witness 設定（現位於**「進階功能」→「頻道中的機器人」**）會準備一個獨立部署的 Witness：固定收集器 金鑰、範圍限定代幣下載、專屬頻道、發布政策、HTTP/SOCKS5 路由以及自訂 機器人 API。 該機器人憑證將保留在見證主機上。其新的 `--check-config` 可在 無需建立網路連線或生成金鑰的情況下，驗證配置與檔案。JSON 檔案路徑將根據配置進行解析。所有 Compose 見證變體現已轉發 HTTP 代理與機器人 API 設定。
+見證者設定（現**位於「進階」→「獨立見證者」**）可準備一個獨立部署的見證者：固定收集器 金鑰、範圍限定代幣下載、專屬頻道、發佈政策、HTTP/SOCKS5 路由以及自訂 Bot API。Bot 代幣將保留在見證者主機上。其新的 `--check-config` 驗證 配置與檔案，無需建立網路連線或產生金鑰。JSON 檔案路徑會根據配置進行解析。所有 Compose 見證變體現已轉發 HTTP 代理與 Bot API 設定。
 
 帳戶設定支援由操作員管理的公開 MTProxy 目錄、自訂 Telegram 代理連結預覽，以及現有的手動欄位。目錄回應會省略機密資訊； 選取後，路徑將儲存於工作區金庫中。若目錄缺失或格式錯誤， 仍可使用手動路徑。 預設情況下，不會生成或啟用任何專案代理伺服器位址或託管見證服務。當外部見證者必須連線至其控制面板保持私密的收集器時，Caddy 範例僅會公開範圍限定的頭端點。
 
@@ -136,7 +136,7 @@ Witness 設定（現位於**「進階功能」→「頻道中的機器人」**�
 - 已通過 Ruff 檢查、來源／連結驗證，以及 Compose／工作流程 YAML 解析。
 - 此重新建構的工具已通過獨立安裝、面板／靜態資源及 API 授權 檢查，並通過針對直接與串流式 32 項事件合成匯出資料的獨立驗證。
 
-收據：`test-results/setup-full-suite.log`、`setup-final-focused.log`、 `setup-browser/receipt.json`、`setup-browser-final.log` 及 `setup-package.log`。 這些測試使用合成帳戶／代理伺服器以及本機 Bot API 測試環境。它們並不 聲稱代表真實的機器人發布、運作中的公開 MTProxy 伺服器、遠端 CI 執行或 Docker 部署。上述保留的真實 Telegram 監測歷史記錄仍屬獨立的 證據。[設定說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md)。
+收據： `test-results/setup-full-suite.log`, `setup-final-focused.log`, `setup-browser/receipt.json`, `setup-browser-final.log` 以及 `setup-package.log`。 這些測試使用合成帳戶／代理伺服器以及本機 Bot API 模擬環境。它們並未 聲稱涉及真實的機器人發布、運作中的公開 MTProxy 伺服器、遠端 CI 執行或 Docker 部署。上述保留的真實 Telegram 觀察紀錄仍屬獨立的 證據。[設定說明](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/#run-a-witness)。
 
 ## 簡報與文件審閱 · 2026年10月29日
 

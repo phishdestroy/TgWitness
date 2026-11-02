@@ -40,8 +40,8 @@ Crie um bot com o BotFather e permita que ele publique em um canal sob seu contr
 
 ## Três etapas em “Extras”
 
-1. **Acesso somente para leitura.** Abra **“Extras” → Um bot no seu canal**, crie um token de testemunha e salve o arquivo de acesso. Ele permite a leitura de pontos de verificação e do estado de integridade, mas não de conversas nem dos controles do coletor.
-2. **Canal e intervalo.** Insira o canal e um endereço de coletor acessível a partir do TgWitness. Salve o arquivo de configurações.
+1. **Acesso somente para leitura.** Abra **Extras → Testemunha independente**, crie um token de testemunha e salve o arquivo de acesso. Isso permite a leitura de pontos de verificação e do estado de integridade, mas não de conversas nem de controles do coletor.
+2. **Canal e intervalo.** Escolha um canal do Telegram ou um webhook do Discord e insira um endereço de coletor acessível a partir da testemunha. Salve o arquivo de configurações.
 3. **Inicialização.** Coloque `witness.json`, `witness-token.txt` e um `bot-token.txt` criados no servidor do TgWitness juntos. Execute os comandos abaixo no ambiente do projeto instalado.
 
 ```
@@ -50,6 +50,8 @@ python -m tgwitness.witness run --config witness.json
 ```
 
 O download dos arquivos não inicia o witness. Verifique se a primeira postagem assinada aparece no canal e, em seguida, guarde separadamente a impressão digital da chave pública do witness.
+
+Para o Discord, salve a URL do webhook do canal como `discord-webhook.txt` em vez do token do bot. Uma testemunha publica em um único local, seja um canal do Telegram ou um canal do Discord; verificações mais longas do que uma mensagem do Discord chegam como um arquivo anexado.
 
 ## Escolha a frequência de publicação
 

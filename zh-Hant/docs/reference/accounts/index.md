@@ -235,7 +235,7 @@ TData 即是 Telegram Desktop 應用程式（來自 desktop.telegram.org 的跨�
 - **多個帳戶可查看的聊天內容包含：** 共享來源、正在監看這些來源的帳戶，以及 可用工作區監看期間（最長七天）內的中斷情況。**使用 N 個帳戶進行匯出時，** 系統會將頻道或超級群組的匯出內容分配至各帳戶，並對單一存檔進行簽署。
 - **匯出群組:**包含一個 ZIP，其中每個帳戶的簽名匯出檔位於 `accounts/` ，並 `manifest.json` 列出其SHA-256與金鑰指紋，並由主 工作區在 `manifest.signature.json`。請使用 `python -m tgwitness.verify` 並使用該帳戶的可信指紋，分別驗證每個帳戶的存檔。
 
-成員共享群組的設定；每個帳號可保留其自身的設定值。 請參閱「[共享設定](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups)」、 [「匯入與群組指南」](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) 以及 [MTProxy 資料池儀表板](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)。
+成員共享群組的設定；每個帳號可保留其自身的設定值。 請參閱「[共享設定](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/settings/#account-groups)」、 [「匯入與群組指南」](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) 以及 [MTProxy 資料池儀表板](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)。
 
 ## 登出
 
@@ -278,6 +278,6 @@ TData 即是 Telegram Desktop 應用程式（來自 desktop.telegram.org 的跨�
 | 帳號 ID 與匯入的帳號不符 | 該檔案的用戶 ID 與 Telegram 所顯示的不符；此檔案屬於另一個帳號。 |
 | 該帳號已屬於另一個工作區 | 請開啟該工作區，而非重複新增該帳號兩次。 |
 | 已連線，但「**來源」**中的聊天清單缺少一個私人群組 | 檢查會員資格。篩選器會檢查前 1,000 個對話；請在「**參數」**中提高此限制。 |
-| 代理連線失敗 | 請檢查路由與 IP 模式。自動 MTProxy 會嘗試其他可用的連接選項；隱藏 IP 模式則會等待；明確選定的備用模式則會在設定的延遲時間過後直接連線。請參閱[路由模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/#ip-modes)。 |
+| 代理連線失敗 | 請檢查路由與 IP 模式。自動模式 MTProxy 會嘗試其他可用的入口。隱藏位址模式會進行等待；「直接」模式作為最後手段，可在設定的延遲時間過後直接連線。請參閱[路由模式說明](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/#ip-modes)。 |
 
 另請參閱：代理伺服器與加密的[連線及安全性](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/)， 以及登入後資料擷取的[運作方式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/)。

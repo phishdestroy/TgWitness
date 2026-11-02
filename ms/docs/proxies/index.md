@@ -6,15 +6,15 @@ Pastikan akaun kekal disambungkan. Tetapkan secara eksplisit bila laluannya bole
 
 ## Pilih mod IP terlebih dahulu
 
-01**Sembunyikan IP**
+01**Sembunyikan alamat**
 
 Gunakan proksi. Apabila tiada yang berfungsi, tunggu tanpa sambungan Telegram terus.
 
-02**Benarkan sandaran**
+02**Direktori sebagai pilihan terakhir**
 
 Benarkan Direct selepas kelewatan yang telah ditetapkan; kembali ke proksi kerja apabila seseorang menjawab.
 
-03**Terowong / VPN**
+03**Pelayan di sebalik terowong atau VPN**
 
 Benarkan laluan terus melalui rangkaian hos. Pilihan ini tidak memasang atau mengesahkan VPN.
 
@@ -27,7 +27,7 @@ Rute memilih sambungan. Mod IP menentukan sama ada sambungan terus dibenarkan.
 3. Simpan dan jalankan **ujian sambungan Telegram**. Ia juga berfungsi sebelum log masuk.
 4. Selepas memulakan pengumpulan, semak bahawa mesej terkawal sampai ke jurnal.
 
-Ruang kerja baharu menggunakan MTProxy automatik dengan tingkah laku Sembunyikan IP. Kolam gabungan ini menggabungkan empat sumber awam, menyemak kemasukan, mengekalkan laluan aktif dan menggantikan proksi yang gagal. Muat turun yang gagal mengekalkan snapshot sebelumnya.
+Ruang kerja baru menggunakan MTProxy automatik dengan **Sembunyikan alamat**. Kolam menggabungkan empat sumber awam, menyiasat entri, mengekalkan laluan kerja dan menggantikan proksi yang gagal. Muat turun yang gagal mengekalkan snapshot sebelumnya.
 
 ## Gunakan proksi anda sendiri
 

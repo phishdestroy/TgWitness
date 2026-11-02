@@ -8,7 +8,7 @@ Kaydedilen mesajlar ve değişiklikler üzerinde çalışın, bulgularınızı k
 
 Resimli kılavuzlar
 
-[### Case Board Gözlemler, tam alıntılar ve ekip notları arasındaki bağlantıları koruyun.](https://phishdestroy.github.io/TgWitness/tr/docs/case-board/) [### Rapor stüdyosu Malzemeyi ve sekiz rapor tasarımından birini seçin.](https://phishdestroy.github.io/TgWitness/tr/docs/reports/) [### Paylaşım metni Alıcının ihtiyaç duyduğu alanları içeren, imzalı bir özet hazırlayın.](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) [### Hesap grupları Hesapları birlikte inceleyin ve çalışma alanlarını ayrı tutun.](https://phishdestroy.github.io/TgWitness/tr/docs/groups/)
+[### Case Board Gözlemler, tam alıntılar ve ekip notları arasındaki bağlantıları koruyun.](https://phishdestroy.github.io/TgWitness/tr/docs/case-board/) [### Rapor stüdyosu Malzemeyi ve sekiz rapor tasarımından birini seçin.](https://phishdestroy.github.io/TgWitness/tr/docs/reports/) [### Kopyalama paylaşımı Alıcının ihtiyaç duyduğu alanları içeren, imzalı bir özet hazırlayın.](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) [### Hesap grupları Hesapları birlikte inceleyin ve çalışma alanlarını ayrı tutun.](https://phishdestroy.github.io/TgWitness/tr/docs/groups/)
 
 [## Modlar, senaryolar ve kanıt düzeyleri Toplama kapsamları, olay sınırları, sekiz doğrulama mekanizması ve altı kurgusal soruşturma senaryosu.](https://phishdestroy.github.io/TgWitness/tr/guides/modes.html)
 
@@ -34,19 +34,19 @@ Projenin tüm belgeleri, diyagramlarıyla birlikte burada sunulmaktadır. Kılav
 
 Kurulum
 
-[Hızlı başlangıç](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)[Hesaplar ve oturum biçimleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/)[Erişim ve izinler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/)[Bağlantı, proxy'ler ve veri koruma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/)[Uygulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)
+[Hızlı başlangıç](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)[Yükleme, doğrulama ve güncelleme](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/)[İlk kurulum ve ayarlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/settings/)[Hesaplar ve oturum biçimleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/)[Erişim ve izinler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/)[Bağlantı, proxy'ler ve veri koruma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/)[Uygulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)[Yüksek güvenilirlikli dağıtım](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/)
 
 Topla
 
-[Veri toplama süreci nasıl işliyor?](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/)[Kaynak geçmişini yükle](https://phishdestroy.github.io/TgWitness/tr/docs/reference/history/)[İş akışları ve işlemler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/)[Soruşturma modu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)[Özellikler ve sınırlamalar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/)
+[Panel kılavuzu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/)[Veri toplama süreci nasıl işliyor?](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/)[Kaynak geçmişini yükle](https://phishdestroy.github.io/TgWitness/tr/docs/reference/history/)[İş akışları ve işlemler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/)[Soruşturma modu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)[Özellikler ve sınırlamalar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/)
 
 Arşiv ve entegrasyonlar
 
-[Case Board referansı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/)[Arşiv analizi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/analysis/)[Salt okunur MCP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/)[Yerel OCR ve transkripsiyon](https://phishdestroy.github.io/TgWitness/tr/docs/reference/media-analysis/)[Giden webhook'lar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/webhooks/)
+[Case Board referansı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/)[Arşiv analizi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/analysis/)[Salt okunur MCP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/)[Yerel OCR ve transkripsiyon](https://phishdestroy.github.io/TgWitness/tr/docs/reference/media-analysis/)[Giden webhook'lar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/webhooks/)[Halka açık vitrin](https://phishdestroy.github.io/TgWitness/tr/docs/reference/showcase/)
 
 Kanıt
 
-[Kanıt sistemi nasıl çalışır?](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/)[Rapor yapılandırması ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/)[Kanıt formatı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)[Bağımsız tanık](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/)[Zaman damgaları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/timestamp/)
+[Kanıt sistemi nasıl çalışır?](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/)[Rapor yapılandırması ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/)[Hesap dışa aktarma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/account-export/)[Kanıt formatı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)[Bağımsız tanık](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/)[Zaman damgaları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/timestamp/)[Depolama ve kurtarma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/storage/)
 
 Güvenlik ve proje
 

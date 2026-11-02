@@ -40,8 +40,8 @@ Buat bot menggunakan BotFather dan izinkan bot tersebut untuk memposting di salu
 
 ## Tiga langkah di bagian Ekstra
 
-1. **Akses hanya baca.** Buka **Ekstra → Bot di saluran Anda**, buat token saksi, dan simpan berkas akses. Fitur ini memungkinkan Anda membaca titik pemeriksaan dan status kesehatan, bukan percakapan atau pengaturan pengumpul.
-2. **Saluran dan interval.** Masukkan saluran dan alamat pengumpul yang dapat dijangkau dari saksi. Simpan berkas pengaturan.
+1. **Akses hanya baca.** Buka **Extras → Independent witness**, buat token saksi, dan simpan berkas akses. Fitur ini memungkinkan pembacaan titik pemeriksaan dan status kesehatan, bukan percakapan atau pengaturan pengumpul.
+2. **Saluran dan interval.** Pilih saluran Telegram atau webhook Discord, lalu masukkan alamat pengumpul yang dapat dijangkau dari saksi. Simpan berkas pengaturan.
 3. **Peluncuran.** Gabungkan `witness.json`, `witness-token.txt`, dan `bot-token.txt` yang dibuat di host saksi. Jalankan perintah di bawah ini di lingkungan proyek yang telah diinstal.
 
 ```
@@ -50,6 +50,8 @@ python -m tgwitness.witness run --config witness.json
 ```
 
 Mengunduh berkas-berkas tersebut tidak akan memulai proses pencatatan. Pastikan posting pertama yang telah ditandatangani muncul di saluran, lalu simpan sidik jari kunci publik alat tersebut secara terpisah.
+
+Untuk Discord, simpan URL webhook saluran sebagai `discord-webhook.txt` bukan token bot. Seorang saksi memposting ke satu tempat, baik saluran Telegram maupun saluran Discord; verifikasi yang lebih panjang daripada pesan Discord akan dikirim sebagai lampiran.
 
 ## Pilih seberapa sering ingin mempublikasikan
 

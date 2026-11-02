@@ -97,7 +97,7 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 这是原始手动选择构建版本的历史测试记录。有关当前的自动池和 IP 模式，请参阅[连接设置](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/#ip-modes)。下文中的计数数据和不支持的功能均属于该测试版本。
 
-新增了来自 SoliSpirit/mtproto 和 zakky8/mtproto-proxy-pro 的捆绑公共快照以及显式的 HTTPS 刷新功能。 在此主机上，应用程序下载器于 2026 年 10 月 29 日 12:58（UTC） 成功获取了这两个数据源：经过过滤、去重以及每个来源 64 条记录的限制后， 共获得 **118 个唯一的兼容端点**。 这验证了列表的检索功能， 而非通过这些端点的连接性或消息传递。在此过程中， 没有真实账户连接到列表中的代理。[操作员和用户指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/PROXIES.md)。
+新增了来自 SoliSpirit/mtproto 和 zakky8/mtproto-proxy-pro 的打包公共快照以及显式 HTTPS 刷新功能。 在此主机上，应用程序下载器于 2026年10月29日 12:58（UTC）成功获取了这两个数据源：经过 过滤、去重及每个来源64条条目的限制后，共获得**118个唯一的兼容端点**。这验证了列表的检索， 而非通过这些端点的连接性或消息传递。在此过程中，没有任何真实账户 连接到列表中的代理。[操作员和用户指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md)。
 
 源响应失败、为空或不兼容时，将保留之前的条目和日期。 更新 不会更改所选路由。公共地址经验证后，其解析出的 IP 地址将在 选中时被固定；运营商/手动路由仍保持独立。连接探测功能现已在 账户登录前的面板中提供。虚假 TLS 扩展和自动代理选择 仍不支持。运营商的目录将完全覆盖订阅设置。
 
@@ -111,7 +111,7 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 ## 可选附加功能演示 · 2026年10月29日
 
-原 Proof 机器人入口现已改为**“扩展功能”（Extras）**：先简要概述，随后是 针对所选选项的独立设置页面。Witness 表单分为三个步骤，其中 连接管理、网络选项和部署详情均以折叠形式呈现。GitHub 支持 已明确规划，且无需填写凭据表单。[俄语概述](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/EXTRAS.md)。
+原“Proof”机器人入口现已更名为**“Extras**”：先是一个简要概述，随后是 针对所选选项的单独设置页面。见证表单分为三个步骤，其中 连接管理、网络选项和部署详情被折叠隐藏。GitHub 已 明确纳入规划，且无需填写凭据表单。[“Extras”概述](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#extras)。
 
 - 已通过 30 项针对本地化、Witness 配置及发布检查的专项测试。
 - Chromium 设置验收测试通过（英语/俄语，浅色/深色模式，分辨率 390/1440 像素）： 键盘焦点与回车键响应正常，选择附加功能时无隐式关联，草稿 保留功能正常，已固定配置/令牌下载功能正常，锁屏时令牌清除功能正常，且 本地指南锚点正常工作。 布局及纯色背景下的文本对比度检查均通过。
@@ -124,7 +124,7 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 ## Witness 机器人和代理设置审核 · 2026年10月29日
 
-Witness 设置（现**位于“扩展”→“频道中的机器人**”）将准备一个独立部署的 Witness：固定收集器 密钥、范围限定令牌下载、专属频道、发布策略、HTTP/SOCKS5 路由以及自定义 机器人 API。 机器人令牌保留在见证服务器上。其新的`--check-config`可在 无需建立网络连接或生成密钥的情况下验证配置和文件。JSON 文件路径在配置文件旁解析。所有Compose见证变体现均转发 HTTP代理和机器人API设置。
+见证设置（现**位于“Extras” → “Independent witness**”）用于配置一个独立部署的见证：固定收集器 密钥、范围限定令牌下载、专用频道、发布策略、HTTP/SOCKS5 路由以及自定义 Bot API。机器人令牌保留在见证主机上。其新的 `--check-config` 会验证 配置和文件，而无需建立网络连接或生成密钥。JSON 文件路径在配置文件旁解析。所有 Compose 见证变体现均转发 HTTP 代理和 Bot API 设置。
 
 账户设置支持由操作员管理的公共 MTProxy 目录、自定义 Telegram 代理链接预览以及现有的手动字段。目录响应中会省略机密信息； 选择后，路由将存储在工作区保险库中。若目录缺失或格式错误， 仍可使用手动路由。 默认情况下，不会生成或启用任何项目代理地址或托管见证服务。当外部见证方必须访问其控制面板保持私有的收集器时，Caddy 示例仅公开受范围限制的 head 端点。
 
@@ -136,7 +136,7 @@ Witness 设置（现**位于“扩展”→“频道中的机器人**”）将�
 - 已通过 Ruff 检查、来源/链接验证以及 Compose/工作流 YAML 解析。
 - 该重构版本通过了独立安装、面板/静态资源及 API 身份验证 检查，并完成了对直接导出和流式传输的 32 项事件合成导出数据的独立验证。
 
-收据：`test-results/setup-full-suite.log`、`setup-final-focused.log`、 `setup-browser/receipt.json`、`setup-browser-final.log` 和 `setup-package.log`。 这些测试使用了合成账户/代理以及本地 Bot API 测试环境。它们并不 声称代表真实的机器人发布、可运行的公共 MTProxy 服务器、远程 CI 运行或 Docker 部署。上述保留的真实 Telegram 观察记录仍作为一项独立的 证据。[设置说明](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md)。
+收据： `test-results/setup-full-suite.log`, `setup-final-focused.log`, `setup-browser/receipt.json`, `setup-browser-final.log` 以及 `setup-package.log`。 这些测试使用了合成账户/代理以及本地 Bot API 测试环境。它们并不 声称涉及真实的机器人发布、可运行的公共 MTProxy 服务器、远程 CI 运行或 Docker 部署。上文保留的真实 Telegram 观察记录仍作为一项独立的 证据。[设置说明](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#run-a-witness)。
 
 ## 演示与文档评审 · 2026年10月29日
 

@@ -223,7 +223,7 @@ ZIP 匯出工具會根據檔案名稱驗證儲存的媒體檔案。JSONL、CSV �
 
 ## 證據模式下的可選記錄：drand 及 Telegram 裝置
 
-還有兩項記錄可與時間戳記在同一輪處理中執行。這兩項預設皆為關閉狀態， 且僅在證據模式開啟時生效：[進階] → [證據] → **更多見證者 · 可選**， 或 `"drand": true` 以及 `"devices": true`（位於 `POST /api/evidence` 中）。其中一項失敗不會阻礙 另一項或時間戳記的執行；面板會在表單下方顯示各項的最新結果。
+另有兩項記錄功能可與時間戳記在同一輪處理中執行。這兩項功能預設皆為關閉狀態， 且僅在「證據模式」開啟時才會生效：[進階] → [證據與備份] → [**更多見證者] · 可選**， 或 `"drand": true` 以及 `"devices": true` 在 `POST /api/evidence`中。其中一項功能發生錯誤並不會阻礙 另一項功能或時間戳記的運作；面板會在表單下方顯示各項功能的最新結果。
 
 **drand** （`beacon.drand` ）。每次處理都會將最新一輪的 drand quicknet（即「熵聯盟」的公開 隨機數，每 3 秒一輪）寫入日誌：`chain` 、 `round` 、`randomness` 、`signature` 、`round_time` 以及回應的 `relay` 。一個經過驗證的 不可預測的輪次，為後續透過雜湊連結的材料提供較早的時間參考點。 後續檢查點上的經驗證時間戳記則提供時間上限參考。這些檢查 界定了鏈結資料的範圍；資料收集的覆蓋範圍則另行評估。收集器會先查詢 `drand.cloudflare.com` ，接著透過工作區路徑查詢 Protocol Labs 的中繼站，每輪執行一次請求。
 
@@ -235,4 +235,4 @@ ZIP 匯出工具會根據檔案名稱驗證儲存的媒體檔案。JSONL、CSV �
 
 於 2026 年 11 月 1 日進行測試：`tools/check_evidence_witnesses.py --live` 向 `drand.cloudflare.com` 發起了一輪真實互動，匯出日誌並與 `drand.cloudflare.com` 及 `api.drand.sh` 確認該互動；裝置清單是針對模擬的 Telegram 回應進行運作，而非真實帳戶。
 
-**Cloudflare Gateway 日誌** (`cloudflare.gateway_dns`)。 對於透過 Cloudflare Gateway（[Gateway DNS](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md#cloudflare-as-an-outside-witness)）進行解析的伺服器，每次 複製都會擷取自上次複製以來 Gateway 所記錄的內容：每個時間窗（最長三 小時）對應一筆記錄，包含 `from`、`until`、`location_id`、伺服器的 `address`（若已設定），以及 `queries`（當其值為 `[at, name, type, rcode, decision, colo]` 時，即使該欄位為空亦然）。 請在 **下設定 Cloudflare Gateway 日誌**：帳戶、位置、可選地址以及一個唯讀代幣（帳戶 分析讀取權限；零信任 PII 讀取權限，用於保留共享位置中的一個地址）。控制面板會在儲存前透過單一請求驗證 這些資訊；憑證始終保持加密狀態，且絕不會進入日誌。 `verify.py` 列出時間窗、查詢最頻繁的名稱，以及任何未被副本涵蓋的時間點；若某筆記錄 的計數與其查詢不符，則會失敗。 若某個時間窗在單一秒內包含超過一頁的 查詢，則保留該頁並標示其餘部分遺失。該副本是 Cloudflare 透過收集器傳回的回應，並由收集器簽署；在 24 小時內，任何持有 唯讀憑證者皆可將其與 Cloudflare 進行比對。
+**Cloudflare Gateway 日誌** (`cloudflare.gateway_dns`)。 對於透過 Cloudflare Gateway（[Gateway DNS](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)）進行解析的伺服器，每次 複製都會擷取自上次複製以來 Gateway 所記錄的內容：每個時間窗（最長三 小時）對應一筆記錄，包含 `from`、`until`、`location_id`、伺服器的 `address`（若已設定），以及 `queries`（當其值為 `[at, name, type, rcode, decision, colo]` 時，即使該欄位為空亦然）。 請在 **下設定 Cloudflare Gateway 日誌**：帳戶、位置、可選地址以及一個唯讀代幣（帳戶 分析讀取權限；零信任 PII 讀取權限，用於保留共享位置中的一個地址）。控制面板會在儲存前透過單一請求驗證 這些資訊；憑證始終保持加密狀態，且絕不會進入日誌。 `verify.py` 列出時間窗、查詢最頻繁的名稱，以及任何未被副本涵蓋的時間點；若某筆記錄 的計數與其查詢不符，則會失敗。 若某個時間窗在單一秒內包含超過一頁的 查詢，則保留該頁並標示其餘部分遺失。該副本是 Cloudflare 透過收集器傳回的回應，並由收集器簽署；在 24 小時內，任何持有 唯讀憑證者皆可將其與 Cloudflare 進行比對。

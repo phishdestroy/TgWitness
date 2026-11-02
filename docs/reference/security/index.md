@@ -48,7 +48,7 @@ For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random
 
 Proxy configuration is encrypted in the vault. Passwords and MTProxy secrets are not returned by the API or written to evidence records. Each workspace chooses its Telegram route and an [IP mode](https://phishdestroy.github.io/TgWitness/docs/reference/connection/#ip-modes).
 
-Hide IP mode refuses direct Telegram fallback and requires a proxy for external HTTP requests. The explicitly selected fallback mode permits direct Telegram access after its delay; tunnel/VPN mode permits direct routes. Choosing tunnel mode does not install or verify a VPN. These settings do not control all machine traffic, browsers, package managers or local proxy-host DNS resolution.
+**Hide the address** refuses direct Telegram fallback and requires a proxy for external HTTP requests. The explicitly selected fallback mode permits direct Telegram access after its delay; tunnel/VPN mode permits direct routes. Choosing tunnel mode does not install or verify a VPN. These settings do not control all machine traffic, browsers, package managers or local proxy-host DNS resolution.
 
 MTProxy carries Telegram traffic only. External requests can use a separate SOCKS5/HTTP proxy, the workspace's SOCKS5/HTTP route, or an allowed direct route; they can also be disabled. The independent witness has its own transport settings. Ordinary SOCKS5/HTTP CONNECT authentication is not encrypted by those proxy protocols themselves. Fake TLS MTProxy secrets remain unsupported.
 

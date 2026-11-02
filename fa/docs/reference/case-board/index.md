@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-
 
 کیس‌بورد یک نمای کاری مشترک از مطالب ذخیره‌شده را در اختیار تیم تحقیق قرار می‌دهد. یک مشاهده را بوکمارک کنید، یک بخش دقیق را برجسته کنید، یک مجموعه از اقدامات را ذخیره کنید و آن را با همکاران خود بحث کنید. کارت‌ها ارجاع منابع و تاریخچه بازبینی امضا شده خود را حفظ می‌کنند. حاشیه‌نویسی‌های تیمی در فضای کاری باقی می‌مانند و به طور جداگانه از مشاهدات اصلی تلگرام قابل تشخیص هستند.
 
-[مدل مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) · [دسترسی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/) · [گزارش‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-reports/) · [روسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[مدل مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) · [دسترسی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/) · [گزارش‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-reports/)
 
 ![جریان کاوش مصنوعی](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

@@ -19,7 +19,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/deplo
 | עוזר Docker ב-Windows | `scripts\Docker.cmd` | כן; התוכנה ממתינה לבדיקת תקינות שרת האינטרנט. |
 | עוזר Docker ב-Linux/macOS | `sh scripts/docker-start.sh` | כן; התוכנה ממתינה לבדיקת תקינות שרת האינטרנט. |
 
-לגבי שרת ענן שצד שלישי אמור להיות מסוגל לבדוק — שנוצר באמצעות ה-API של הספק, ללא SSH, ונגיש רק דרך Cloudflare Tunnel — ראו [פריסה ברמת אבטחה גבוהה](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md).
+לגבי שרת ענן שצד שלישי אמור להיות מסוגל לבדוק — שנוצר באמצעות ה-API של הספק, ללא SSH, ונגיש רק דרך Cloudflare Tunnel — ראו [פריסה ברמת אבטחה גבוהה](https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/).
 
 הפעלה מקורית יוצרת קובץ `.venv` פרטי ומתקינה את התלויות המוצמדות. Docker בונה אותן בתוך התמונה, ללא צורך ב-Python במארח. ההתקנה הראשונית דורשת גישה לאינטרנט. כאשר לא נמצא Python 3.11 ומעלה, ה-`Start.cmd` מבקש אישור לפני התקנת Python 3.12 עבור המשתמש הנוכחי ב-Windows (באמצעות winget, או לחלופין באמצעות מתקין python.org לאחר בדיקת החתימה של Python Software Foundation); הוא לעולם אינו מבקש הרשאות מנהל. Docker ושירותי מערכת ההפעלה נותרים תנאים מוקדמים.
 
@@ -250,7 +250,7 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 ## אפשרויות חיבור והגנה
 
-נתיבי החיבור הם לכל סביבת עבודה ויש להגדירם לפני ההרשאה. SOCKS5/HTTP CONNECT משתמשים בתלות המוצמדת python-socks. MTProxy משתמש ב- תחבורה ביניים אקראית ניסיונית של Telethon; סודות TLS מזויפים אינם נתמכים. המעבר הישיר למצב גיבוי תלוי במצב [ה-IP](https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/#ip-modes) הנבחר: מצב "הסתרת IP" מסרב לכך; מצב הגיבוי המפורש מאפשר זאת לאחר עיכוב. מצב מנהרה/VPN מאפשר נתיבים ישירים אך אינו יוצר VPN. זו אינה מדיניות רשת מערכתית.
+נתיבי החיבור הם לכל סביבת עבודה ויש להגדירם לפני ההרשאה. SOCKS5/HTTP CONNECT משתמשים בתלות המוצמדת python-socks. MTProxy משתמש ב- תחבורה ביניים אקראית ניסיונית של Telethon; סודות TLS מזויפים אינם נתמכים. המעבר הישיר תלוי במצב [ה-IP](https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/#ip-modes) הנבחר: **"הסתר את הכתובת**" מסרב לכך; **"ישיר" כאמצעי אחרון** מאפשר זאת לאחר עיכוב. **שרת שמאחורי מנהרה או VPN** מאפשר נתיבים ישירים אך אינו יוצר VPN. זו אינה מדיניות רשת מערכתית.
 
 בהתקנות חדשות, TGWITNESS_VAULT_KEY_FILE מצביע על קובץ מפתח ראשי אקראי המוגן בנפרד. יש לעגן אותו לקריאה בלבד מחוץ ל-/data בתוך קונטיינר. יש לשמור את מטא-הנתונים הציבוריים של salt בקובץ vault.external.json בנפרד עבור כל סביבת עבודה והמפתח הראשי. כספות מקומיות קיימות דורשות הגירה מתוכננת; הגדרת משתנה זה אינה ממירה אותן באופן אוטומטי. אחסון וייצוא של הודעות/מדיה אינם מוצפנים על ידי היישום. יש להשתמש בנפחים מוצפנים ובאחסון זמני פרטי מספיק במידת הצורך.
 

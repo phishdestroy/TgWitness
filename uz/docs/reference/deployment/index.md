@@ -19,7 +19,7 @@ Portativ paket uchun GitHub Releases'dan `TgWitness-<version>-windows-amd64-port
 | Windows uchun Docker yordamchisi | `scripts\Docker.cmd` | Ha; yordamchi veb-server sog'lig'ini kutadi. |
 | Linux/macOS uchun Docker yordamchisi | `sh scripts/docker-start.sh` | Ha; yordamchi veb-server sog'lig'ini kutadi. |
 
-Uchinchi tomon tekshira oladigan bulutli server uchun — provayder API orqali yaratilgan, SSHsiz, faqat Cloudflare Tunnel orqali erishiladigan — [yuqori ishonchlilikka ega joylashtirishni](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md) ko'ring.
+Uchinchi tomon tekshira oladigan bulutli server uchun — provayder API orqali yaratilgan, SSHsiz, faqat Cloudflare Tunnel orqali erishiladigan — [yuqori ishonchlilikka ega joylashtirishni](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/) ko'ring.
 
 Native startup maxfiy `.venv`ni yaratadi va bog'langan bog'liqliklarni o'rnatadi. Docker ularni host Pythonni talab qilmay, image ichida quradi. Birinchi marta o'rnatish uchun Internetga ulanish zarur. Python 3.11+ topilmasa, `Start.cmd` hozirgi Windows foydalanuvchisi uchun Python 3.12 ni o'rnatishdan oldin so'raydi (winget orqali, aks holda Python Software Foundation imzosi tekshirilgach python.org installyeridan); u hech qachon administrator huquqlarini so'ramaydi. Docker va OS xizmatlari oldindan talab qilinadi.
 
@@ -250,7 +250,7 @@ Panel navbatga qo'yilgan/muvaffaqiyatsiz bo'lgan media, eng qadimgi kutayotgan m
 
 ## Ulanish va himoya variantlari
 
-Ulanish yo'nalishlari har bir ish maydoni uchun alohida bo'lib, avtorizatsiyadan oldin sozlanishi kerak. SOCKS5/HTTP CONNECT pinlangan python-socks bog'liqligidan foydalanadi. MTProxy Telethonning eksperimental tasodifiy o'rta transportidan foydalanadi; Fake TLS ee sirlarini qo'llab-quvvatlamaydi. To'g'ridan-to'g'ri zaxira rejim tanlangan [IP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/#ip-modes)rejimiga bog'liq: IP ni yashirish (Hide IP) buni rad etadi; aniq zaxira rejimi kechikishdan so'ng bunga ruxsat beradi. Tunnel/VPN rejimi to'g'ridan-to'g'ri yo'nalishlarga ruxsat beradi, lekin VPN yaratmaydi. Bu butun tizim bo'ylab tarmoq siyosati emas.
+Ulanish yo'nalishlari har bir ish maydoni uchun alohida bo'lib, avtorizatsiyadan oldin sozlanishi kerak. SOCKS5/HTTP CONNECT pinlangan python-socks bog'liqligidan foydalanadi. MTProxy Telethonning eksperimental tasodifiy o'rta transportidan foydalanadi; Fake TLS ee sirlarini qo'llab-quvvatlamaydi. To'g'ridan-to'g'ri zaxira tanlangan [IP-rejim](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/#ip-modes) ga bog'liq: **Manishani yashirish** uni rad etadi; **Oxirgi chora sifatida to'g'ridan-to'g'ri** kechikishdan so'ng ruxsat beradi. **Tunnel yoki VPN ortidagi server** to'g'ridan-to'g'ri yo'nalishlarni ruxsat etadi, lekin VPN yaratmaydi. Bu butun tizim bo'ylab tarmoq siyosati emas.
 
 Yangi o'rnatishlar uchun TGWITNESS_VAULT_KEY_FILE alohida himoyalangan tasodifiy master-kalit faylga yo'naltiriladi. Uni konteynerda /data tashqarisida faqat o'qish uchun o'rnatish kerak. Har bir ish maydoni va master kalit uchun public vault.external.json tuz metama'lumotlarini alohida saqlang. Mavjud mahalliy omborlar rejalashtirilgan migratsiyani talab qiladi; ushbu o'zgaruvchini sozlash ularni jimjit konvertatsiya qilmaydi. Xabar/media saqlash va eksportlar ilova tomonidan shifrlanmaydi. Zarur bo'lganda shifrlangan hajmlar va yetarli shaxsiy vaqtinchalik saqlashdan foydalaning.
 

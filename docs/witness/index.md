@@ -43,8 +43,8 @@ Create a bot with BotFather and allow it to post in a channel you control. Choos
 
 ## Three steps in Extras
 
-1. **Read-only access.** Open **Extras → A bot in your channel**, create a witness token and save the access file. It allows reading checkpoints and health, not conversations or collector controls.
-2. **Channel and interval.** Enter the channel and a collector address reachable from the witness. Save the settings file.
+1. **Read-only access.** Open **Extras → Independent witness**, create a witness token and save the access file. It allows reading checkpoints and health, not conversations or collector controls.
+2. **Channel and interval.** Choose a Telegram channel or a Discord webhook and enter a collector address reachable from the witness. Save the settings file.
 3. **Launch.** Put `witness.json`, `witness-token.txt` and a `bot-token.txt` created on the witness host together. Run the commands below in the installed project environment.
 
 ```
@@ -53,6 +53,8 @@ python -m tgwitness.witness run --config witness.json
 ```
 
 Downloading the files does not start the witness. Check that the first signed post appears in the channel, then retain the witness’s public-key fingerprint separately.
+
+For Discord, save the channel’s webhook URL as `discord-webhook.txt` instead of the bot token. A witness posts to one place, a Telegram channel or a Discord channel; checks longer than a Discord message arrive as an attached file.
 
 ## Choose how often to publish
 

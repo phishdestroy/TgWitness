@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>High-assurance deployment · Reference | TgWitness</title>
+<meta name="description" content="A sealed 24/7 server on Hetzner or Phala Cloud, Gateway DNS and the checks a third party can repeat."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="High-assurance deployment · Reference | TgWitness"><meta property="og:description" content="A sealed 24/7 server on Hetzner or Phala Cloud, Gateway DNS and the checks a third party can repeat.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/high-assurance/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/high-assurance/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/high-assurance/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/high-assurance/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/high-assurance/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/", "name": "High-assurance deployment · Reference | TgWitness", "description": "A sealed 24/7 server on Hetzner or Phala Cloud, Gateway DNS and the checks a third party can repeat.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "High-assurance deployment", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/high-assurance/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/high-assurance/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/high-assurance/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/high-assurance/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/high-assurance/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/high-assurance/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/high-assurance/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/high-assurance/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/high-assurance/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/high-assurance/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/high-assurance/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/high-assurance/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../fr/docs/reference/high-assurance/" hreflang="fr" lang="fr">Français</a><a href="../../../de/docs/reference/high-assurance/" hreflang="de" lang="de">Deutsch</a><a href="../../../it/docs/reference/high-assurance/" hreflang="it" lang="it">Italiano</a><a href="../../../uz/docs/reference/high-assurance/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../ko/docs/reference/high-assurance/" hreflang="ko" lang="ko">한국어</a><a href="../../../zh-Hant/docs/reference/high-assurance/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../ms/docs/reference/high-assurance/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../pl/docs/reference/high-assurance/" hreflang="pl" lang="pl">Polski</a><a href="../../../ja/docs/reference/high-assurance/" hreflang="ja" lang="ja">日本語</a><a href="../../../th/docs/reference/high-assurance/" hreflang="th" lang="th">ไทย</a><a href="../../../he/docs/reference/high-assurance/" hreflang="he" lang="he">עברית</a><a href="../../../bn/docs/reference/high-assurance/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../dedicated-account/">Dedicated account</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><a href="../../capture/">GitHub Actions capture</a><p class="nav-label">Investigation & reporting</p><a href="../../cases/">Investigate across all chats</a><a href="../../case-board/">Build a Case Board</a><a href="../../reports/">Design a report</a><a href="../../handover/">Prepare a sharing copy</a><a href="../../groups/">Manage a group of accounts</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../security/">Keep it secure</a><a href="../../witness/">Set up a witness bot</a><p class="nav-label">Go further</p><a href="../../archive/">Work the archive</a><a href="../../access/">Share a case</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group" open><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../installation/">Install, verify and update</a><a href="../settings/">First setup and settings</a><a href="../accounts/">Accounts and session formats</a><a href="../access/">Access and permissions</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a><a href="./" aria-current="page">High-assurance deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../panel/">Panel guide</a><a href="../collection/">How collection works</a><a href="../history/">Load source history</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Archive & integrations</summary><a href="../case-board/">Case Board reference</a><a href="../analysis/">Archive analysis</a><a href="../mcp/">Read-only MCP</a><a href="../media-analysis/">Local OCR and transcription</a><a href="../webhooks/">Outgoing webhooks</a><a href="../showcase/">Public showcase</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../case-reports/">Report configuration and verification</a><a href="../account-export/">Account export</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a><a href="../storage/">Storage and recovery</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.8.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">High-assurance deployment</span></nav>
+<p class="verification-shortcut"><a href="../verification/">What has been tested →</a></p>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Set up</p><h1>High-assurance deployment</h1><p class="guide-outcome">A sealed 24/7 server on Hetzner or Phala Cloud, Gateway DNS and the checks a third party can repeat.</p><div class="wiki-body"><p>A signed journal proves that records were not changed <strong>after</strong> signing. For serious cases
+the next question is whether anyone could have shaped the data <strong>before</strong> it was signed:
+who ran the collector, on which machine, and whether someone logged in to it. This optional
+mode deploys the collector so that a third party can check that, using records kept by the
+cloud provider and Cloudflare rather than the operator's word.</p>
+<p>Ordinary local and Docker use is unchanged. Nothing here runs unless you deploy with
+<code>python -m tgwitness.cloud</code>, and the collector reads its host only when the deployment sets
+<code>TGWITNESS_ASSURANCE</code>.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 986 262" width="986" height="262" role="img" aria-labelledby="flow-9-title flow-9-desc"><title id="flow-9-title">Flow diagram</title><desc id="flow-9-desc">Operator → Server, firewall without inbound rules (provider API); Operator → Tunnel and DNS (Cloudflare API); Server, firewall without inbound rules → Tunnel and DNS (outbound only); Server, firewall without inbound rules → Signing key created on the server; Verifier, read-only tokens → Provider log and firewall; Verifier, read-only tokens → Tunnel connector address and ingress; Verifier, read-only tokens → Signed /api/assurance statement; Verifier, read-only tokens → Evidence ZIP</desc><defs><marker id="flow-9-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M407.6 46.0C407.6 69.5 133.1 69.5 133.1 93.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:283" pathLength="283"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="3.1s" repeatCount="indefinite" path="M407.6 46.0C407.6 69.5 133.1 69.5 133.1 93.0"/></circle><path class="flow-edge" d="M407.6 46.0C407.6 126.5 293.7 126.5 293.7 207.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:207" pathLength="207"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.3s" repeatCount="indefinite" path="M407.6 46.0C407.6 126.5 293.7 126.5 293.7 207.0"/></circle><path class="flow-edge" d="M133.1 151.0C133.1 179.0 293.7 179.0 293.7 207.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:176" pathLength="176"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="2.0s" repeatCount="indefinite" path="M133.1 151.0C133.1 179.0 293.7 179.0 293.7 207.0"/></circle><path class="flow-edge" d="M133.1 151.0C133.1 174.5 109.7 174.5 109.7 198.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:54" pathLength="54"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M133.1 151.0C133.1 174.5 109.7 174.5 109.7 198.0"/></circle><path class="flow-edge" d="M581.3 46.0C581.3 74.0 348.1 74.0 348.1 102.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:245" pathLength="245"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.7s" repeatCount="indefinite" path="M581.3 46.0C581.3 74.0 348.1 74.0 348.1 102.0"/></circle><path class="flow-edge" d="M581.3 46.0C581.3 69.5 563.2 69.5 563.2 93.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:52" pathLength="52"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M581.3 46.0C581.3 69.5 563.2 69.5 563.2 93.0"/></circle><path class="flow-edge" d="M581.3 46.0C581.3 69.5 764.4 69.5 764.4 93.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:194" pathLength="194"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.2s" repeatCount="indefinite" path="M581.3 46.0C581.3 69.5 764.4 69.5 764.4 93.0"/></circle><path class="flow-edge" d="M581.3 46.0C581.3 74.0 924.3 74.0 924.3 102.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:352" pathLength="352"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="3.9s" repeatCount="indefinite" path="M581.3 46.0C581.3 74.0 924.3 74.0 924.3 102.0"/></circle><g class="flow-node" style="--i:0"><rect x="355.6" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="407.6" y="26.0">Operator</tspan></text></g><g class="flow-node" style="--i:0"><rect x="477.6" y="6.0" width="207.4" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="581.3" y="26.0">Verifier, read-only tokens</tspan></text></g><g class="flow-node" style="--i:1"><rect x="36.3" y="93.0" width="193.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="133.1" y="113.0">Server, firewall without</tspan><tspan x="133.1" y="131.0">inbound rules</tspan></text></g><g class="flow-node" style="--i:1"><rect x="247.9" y="102.0" width="200.5" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="348.1" y="122.0">Provider log and firewall</tspan></text></g><g class="flow-node" style="--i:1"><rect x="466.4" y="93.0" width="193.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="563.2" y="113.0">Tunnel connector address</tspan><tspan x="563.2" y="131.0">and ingress</tspan></text></g><g class="flow-node" style="--i:1"><rect x="678.0" y="93.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="764.4" y="113.0">Signed /api/assurance</tspan><tspan x="764.4" y="131.0">statement</tspan></text></g><g class="flow-node" style="--i:1"><rect x="868.9" y="102.0" width="110.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="924.3" y="122.0">Evidence ZIP</tspan></text></g><g class="flow-node" style="--i:2"><rect x="231.4" y="207.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="293.7" y="227.0">Tunnel and DNS</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="198.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="109.7" y="218.0">Signing key created on the</tspan><tspan x="109.7" y="236.0">server</tspan></text></g><g class="flow-label" style="--i:0"><rect x="153.6" y="64.6" width="91.6" height="23.0" rx="6"/><text x="199.4" y="76.1" text-anchor="middle" dominant-baseline="central">provider API</text></g><g class="flow-label" style="--i:0"><rect x="269.1" y="137.7" width="104.2" height="23.0" rx="6"/><text x="321.2" y="149.2" text-anchor="middle" dominant-baseline="central">Cloudflare API</text></g><g class="flow-label" style="--i:1"><rect x="205.9" y="175.4" width="97.9" height="23.0" rx="6"/><text x="254.9" y="186.9" text-anchor="middle" dominant-baseline="central">outbound only</text></g></svg></div><details class="flow-steps"><summary>Diagram as text</summary><ol><li>Operator → Server, firewall without inbound rules (provider API)</li><li>Operator → Tunnel and DNS (Cloudflare API)</li><li>Server, firewall without inbound rules → Tunnel and DNS (outbound only)</li><li>Server, firewall without inbound rules → Signing key created on the server</li><li>Verifier, read-only tokens → Provider log and firewall</li><li>Verifier, read-only tokens → Tunnel connector address and ingress</li><li>Verifier, read-only tokens → Signed /api/assurance statement</li><li>Verifier, read-only tokens → Evidence ZIP</li></ol></details></figure>
+<h2 id="what-a-verifier-can-check">What a verifier can check<a class="anchor" href="#what-a-verifier-can-check" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>How it is checked</th>
+<th>Kept by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The server was created through the provider API at a known time</td>
+<td>Server object and its creation in the provider's own log</td>
+<td>Provider</td>
+</tr>
+<tr>
+<td>Nobody used the provider's access paths</td>
+<td>Log of console requests, rescue, password reset, rebuild, ISO, images, backups</td>
+<td>Provider</td>
+</tr>
+<tr>
+<td>Nothing could connect to it</td>
+<td>The provider firewall has no inbound rules; SSH is masked from the first boot</td>
+<td>Provider (firewall), host (SSH)</td>
+</tr>
+<tr>
+<td>The panel is reached only through the tunnel</td>
+<td>Tunnel ingress forwards to the panel alone; the connector runs from the server's address</td>
+<td>Cloudflare</td>
+</tr>
+<tr>
+<td>This exact software runs</td>
+<td>The collector's signed source-tree hash equals a checkout of the deployed commit</td>
+<td>Collector, checked against Git</td>
+</tr>
+<tr>
+<td>The signing key was created on that server</td>
+<td>The key signs a statement naming the provider's server ID and the hash of the cloud-init it received</td>
+<td>Collector, checked against the provider</td>
+</tr>
+<tr>
+<td>The journal belongs to that key and server</td>
+<td>Every process start in the evidence ZIP carries the host measurement for that server</td>
+<td>Evidence ZIP</td>
+</tr>
+</tbody>
+</table></div>
+<p>Host measurements (SSH listeners and processes, current sessions, logins in <code>wtmp</code>, the boot)
+are reported by the collector itself and are signed into every process start and into
+<code>host.state</code> records whenever they change. Root on the server could falsify them; they
+support the provider and Cloudflare records rather than replace them.</p>
+<h2 id="providers">Providers<a class="anchor" href="#providers" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th><code>--provider</code></th>
+<th>Credentials</th>
+<th>Verifier's read-only access</th>
+<th>Provider log for the verifier</th>
+<th>Kept for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hetzner</code></td>
+<td><code>HCLOUD_TOKEN</code></td>
+<td>Read token of the same project</td>
+<td>Server and firewall actions</td>
+<td>While the resources exist</td>
+</tr>
+<tr>
+<td><code>digitalocean</code></td>
+<td><code>DIGITALOCEAN_TOKEN</code></td>
+<td>Read-only personal access token</td>
+<td>Droplet actions</td>
+<td>While the Droplet exists</td>
+</tr>
+<tr>
+<td><code>linode</code></td>
+<td><code>LINODE_TOKEN</code></td>
+<td><code>linodes</code>, <code>firewall</code>, <code>events</code> read-only scopes</td>
+<td>Account events, firewall rule versions</td>
+<td>90 days</td>
+</tr>
+<tr>
+<td><code>vultr</code></td>
+<td><code>VULTR_API_KEY</code></td>
+<td>User with read access and the <code>activity_logs</code> permission</td>
+<td>Account activity log (method, path, actor)</td>
+<td>30 days, longer with an audit-log subscription</td>
+</tr>
+<tr>
+<td><code>aws</code></td>
+<td><code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code></td>
+<td><code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroups</code>, <code>cloudtrail:LookupEvents</code></td>
+<td>CloudTrail event history</td>
+<td>90 days</td>
+</tr>
+<tr>
+<td><code>phala</code></td>
+<td><code>PHALA_CLOUD_API_KEY</code></td>
+<td>An API key of the same workspace</td>
+<td>Application revisions: compose and environment changes, restarts, OS upgrades</td>
+<td>While the application exists</td>
+</tr>
+<tr>
+<td><code>generic</code></td>
+<td>none</td>
+<td>none</td>
+<td>none: <strong>self-attested</strong></td>
+<td>–</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use a dedicated project, team, account or sub-account for each case: the verifier's
+read-only access then shows only this deployment. Credentials are read from
+<code>--provider-token-file</code> or the variable above, never from the command line. For AWS the file
+holds <code>ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]</code>; the region is <code>--location</code>.</p>
+<p>What each provider's records cannot show is printed in every report. In short: Hetzner
+logs console requests; DigitalOcean's Recovery Console, Linode's Lish/Glish and Vultr's web
+console are not logged as such, so root is locked at the first boot and a console login
+would need a password reset or a boot change, which are logged. Vultr returns the console
+address to any key that can read the instance; neither the record nor the report stores it.</p>
+<h2 id="confidential-vm-on-phala-cloud-intel-tdx">Confidential VM on Phala Cloud (Intel TDX)<a class="anchor" href="#confidential-vm-on-phala-cloud-intel-tdx" aria-label="Link to this section">#</a></h2>
+<p>With <code>--provider phala</code> the collector runs in an Intel TDX confidential virtual machine on
+<a href="https://phala.com/">Phala Cloud</a>, managed by dstack. The host and Phala's staff cannot read its
+memory, and the processor signs an attestation of what the machine booted. The verifier does not
+take Phala's word for it: <code>tgwitness.tdx</code> checks every attestation itself, up to the pinned Intel
+SGX Root CA, against Intel's revocation lists and Intel's signed platform data, and refuses
+machines that can be debugged or migrated.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Report entry</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tdx_binding</code></td>
+<td>The attestation covers the signed statement of the collector and the random value of this request</td>
+</tr>
+<tr>
+<td><code>tdx_quote</code></td>
+<td>Intel vouches for the attestation; it passes only when Intel rates the platform as up to date</td>
+</tr>
+<tr>
+<td><code>tdx_compose_hash</code></td>
+<td>RTMR3, replayed from the dstack event log, measures the app-compose the collector reports</td>
+</tr>
+<tr>
+<td><code>tdx_compose</code></td>
+<td>That compose is byte for byte the one the code of the deployed commit builds: source files pinned by hash, both images by digest, no other code</td>
+</tr>
+<tr>
+<td><code>tdx_identity</code></td>
+<td>The attestation comes from the deployed application and instance, with keys from Phala's KMS and an encrypted disk</td>
+</tr>
+<tr>
+<td><code>tdx_os</code></td>
+<td>With <code>--tdx-measurements</code>, MRTD and RTMR0-2 equal the values computed from the dstack OS image (<code>dstack-mr measure --json</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Every start of the collector recorded in the journal carries such an attestation, so
+<code>verify --evidence</code> checks each start. Phala's list of application revisions serves as the
+provider log: if the compose changed after the deployment, the report fails.</p>
+<p>In the panel choose <strong>Confidential virtual machine · Phala Cloud</strong> under <strong>Extras</strong> → <strong>Server 24/7</strong>
+and paste a Phala Cloud API key; the quick tunnel works as on Hetzner. From the command line:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type tdx.small \
+    --ref v0.8.0 --repository https://github.com/phishdestroy/TgWitness --quick-tunnel \
+    --provider-token-file phala-key.txt
+python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
+    --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
+    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json</code></pre>
+<p><code>--tdx-collateral</code> reads Intel's certificates and revocation lists from a file instead of
+downloading them from Intel. Gateway DNS is not available here: Phala has no provider firewall
+for outgoing traffic.</p>
+<p>An attestation cannot rule out a flaw in Intel's TDX module or microcode, or physical access to
+the memory bus. Whoever controls the application in Phala's account can deploy another compose;
+it appears as a new revision with a new compose hash. The host controls the machine's time
+source and network.</p>
+<h2 id="before-you-start">Before you start<a class="anchor" href="#before-you-start" aria-label="Link to this section">#</a></h2>
+<ol>
+<li>A Cloudflare zone, its account ID, and an API token with <strong>Cloudflare Tunnel Edit</strong>,
+    <strong>Zone Read</strong> and <strong>DNS Edit</strong>, given with <code>--cloudflare-token-file</code> or
+    <code>CLOUDFLARE_API_TOKEN</code>. For the verifier: <strong>Cloudflare Tunnel Read</strong>, <strong>DNS Read</strong> and, for
+    the audit log, <strong>Account Settings Read</strong>. Without a domain, a
+    <a href="#quick-tunnel-without-a-domain">quick tunnel</a> needs none of this.</li>
+<li>Provider credentials with write access to a dedicated project; <code>lock</code> uses the same:<ul>
+<li>Hetzner: API token with Read &amp; Write permission;</li>
+<li>DigitalOcean: personal access token with write access;</li>
+<li>Linode: personal access token with <code>linodes</code>, <code>firewall</code> and <code>events</code> read/write scopes;</li>
+<li>Vultr: API key of a dedicated account or sub-account;</li>
+<li>AWS: IAM credentials allowed <code>ec2:DescribeVpcs</code>, <code>ec2:DescribeImages</code>,
+    <code>ec2:CreateSecurityGroup</code>, <code>ec2:AuthorizeSecurityGroupIngress</code>, <code>ec2:RunInstances</code>,
+    <code>ec2:CreateTags</code>, <code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroupRules</code> and
+    <code>ec2:RevokeSecurityGroupIngress</code>.</li>
+</ul>
+</li>
+<li>The commit to run. A release tag is resolved once to its commit with <code>git ls-remote</code>;
+    the server only ever receives the 40-character commit.</li>
+</ol>
+<h2 id="from-the-panel">From the panel<a class="anchor" href="#from-the-panel" aria-label="Link to this section">#</a></h2>
+<p>On your own computer, <strong>Extras → Server 24/7</strong> runs the same <code>deploy</code> for Hetzner in three
+steps: choose Europe or the United States, paste a Hetzner token (Read &amp; Write), then review
+the server type, monthly price, address and version the panel found with that token. Nothing
+is created before you confirm. The panel shows each step as <code>deploy</code> reports it, then the
+address, the panel token and the signing key fingerprint. Without a domain the server gets a
+<a href="#quick-tunnel-without-a-domain">quick tunnel</a>; <strong>Your servers → Find the current address</strong>
+looks it up again after a restart. For a fixed address under your own domain, open
+<strong>Optional · your own domain</strong> and add a Cloudflare token (the prepared link selects Zone
+Read, DNS Edit and Cloudflare Tunnel Edit).</p>
+<p>The tokens travel with each request from the browser tab to TgWitness on the same computer
+and are not written anywhere; the deployment record, redacted cloud-init, panel token and,
+for a quick tunnel, the address key are kept in <code>deployments/NAME</code> inside the data directory.
+The panel offers this only to the main administrator on a direct loopback connection
+(<code>127.0.0.1</code>, no proxy or tunnel headers); a panel reached over a network shows the commands
+instead. The version defaults to the release tag of the running panel, resolved through the
+GitHub API. Location, server type and price come from Hetzner's API: <code>cpx22</code> where it is
+offered, otherwise the cheapest x86 type with at least 2 GB of memory.</p>
+<h2 id="quick-tunnel-without-a-domain">Quick tunnel without a domain<a class="anchor" href="#quick-tunnel-without-a-domain" aria-label="Link to this section">#</a></h2>
+<p><code>--quick-tunnel</code> replaces <code>--zone</code>, <code>--cloudflare-account</code> and <code>--panel-host</code>; no Cloudflare
+account or token is involved:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --quick-tunnel --provider-token-file hetzner.token</code></pre>
+<p>On the server, cloudflared opens a
+<a href="https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/">quick tunnel</a>
+to the panel: a random <code>https://….trycloudflare.com</code> address that changes whenever cloudflared
+or the server restarts. A small service on the server posts each address to a random ntfy.sh
+topic, signed (HMAC-SHA256) with a key only the deployment directory holds
+(<code>address-key.txt</code>), and repeats it every three hours because ntfy.sh keeps posts for 12.
+<code>deploy</code> and <strong>Find the current address</strong> accept signed posts only, so a forged post cannot
+send you, and your panel token, to someone else's address. The topic is in the record and the
+published cloud-init: whoever has them can read the current address, which still asks for the
+panel token. The server keeps no inbound port either way.</p>
+<p>What it costs: no Cloudflare account keeps records of a quick tunnel, so <code>verify</code> reports the
+tunnel, connector and DNS check as unavailable and the result is at best <code>incomplete</code>; the
+provider records, firewall, signed statement, host measurements and installer comparison are
+checked as usual. The byte comparison with the reference installer needs a deployed commit
+that already knows <code>--quick-tunnel</code>; a 0.7.0 checkout builds the domain installer and reports
+the difference. Cloudflare gives quick tunnels no uptime guarantee, allows 200 requests in
+flight and does not carry Server-Sent Events, so the panel's live updates (versions after 0.7.0)
+may not arrive through one and a view needs reloading; that part has not been tried. For a case
+that has to stand, use your own domain.</p>
+<h2 id="deploy">Deploy<a class="anchor" href="#deploy" aria-label="Link to this section">#</a></h2>
+<p>Look at everything that will be sent first. <code>plan</code> makes no provider or Cloudflare request:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud plan --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org</code></pre>
+<p>Then deploy with the same options and the credentials:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org \
+    --witness-host case-witness.example.org \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>Server types to start with: <code>cpx22</code> (Hetzner), <code>s-1vcpu-2gb</code> (DigitalOcean), <code>g6-standard-1</code>
+(Linode), <code>vc2-1c-2gb</code> (Vultr), <code>t3.small</code> (AWS). <code>--location</code> and <code>--image</code> default to each
+provider's Ubuntu 24.04 in a European region.</p>
+<p><code>--repository</code> takes the commit from another https Git repository, without credentials in the
+URL (default <code>https://github.com/phishdestroy/TgWitness.git</code>). <code>deploy</code> also accepts <code>--out</code>
+for another deployment directory (default <code>deployments/NAME</code>; a directory that already holds a
+deployment is refused) and <code>--wait</code>, the minutes to wait for the collector's signed statement:
+1 to 240, default 20, or 60 for <code>generic</code>.</p>
+<p>The command:</p>
+<ol>
+<li>creates a Cloudflare tunnel whose ingress forwards the panel hostname to the panel and,
+    if given, the witness hostname to <code>/api/witness/head</code> and <code>/api/assurance</code> only;</li>
+<li>creates proxied CNAME records for those hostnames, refusing names that already exist;</li>
+<li>creates a provider firewall without inbound rules and a server behind it with no SSH key,
+    no backups, no console agent, and cloud-init that masks SSH, locks root, installs
+    <code>cloudflared</code>, fetches exactly the commit, checks it and starts TgWitness as a
+    hardened systemd service;</li>
+<li>waits for the collector's signed statement and checks that it names this server and the
+    hash of this cloud-init.</li>
+</ol>
+<p><code>deployments/case-2026-11/</code> then holds:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Contents</th>
+<th>Share?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deployment.json</code></td>
+<td>IDs, hashes, the API calls made (method, path, status) and the first signed statement</td>
+<td>Yes, with the verifier</td>
+</tr>
+<tr>
+<td><code>cloud-init.redacted.yaml</code></td>
+<td>The exact cloud-init with its two secrets replaced by <code>REDACTED</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>panel-token.txt</code></td>
+<td>The panel token</td>
+<td>No</td>
+</tr>
+</tbody>
+</table></div>
+<p>The provider's root password, the tunnel token and the panel token are never written to
+<code>deployment.json</code>. Publish the collector fingerprint printed at the end through a channel
+you do not control alone, for example a witness channel or a message to the recipient.</p>
+<p>Sign in to Telegram at <code>https://case.example.org</code> with the panel token, as in the
+<a href="../accounts/">account guide</a>. Panel actions are recorded in the signed journal; they are not
+SSH sessions. A <a href="../witness/">witness</a> can poll <code>https://case-witness.example.org</code>.</p>
+<p>There is no SSH: if the bootstrap fails, the collector never answers. Delete the server and
+deploy again, or use a debug deployment to find the cause.</p>
+<h3 id="secrets-in-the-user-data">Secrets in the user data<a class="anchor" href="#secrets-in-the-user-data" aria-label="Link to this section">#</a></h3>
+<p>The cloud-init carries two secrets: the panel token and the Cloudflare tunnel token. The
+signing key is not among them; it is created on the server. Hetzner, DigitalOcean and Linode
+do not return user data through their API. Vultr returns it to any key that can read the
+instance, and EC2 through <code>DescribeInstanceAttribute</code>. For AWS give the verifier only the three
+actions in the table, never <code>ec2:Describe*</code>. For Vultr, assume the verifier's key can read both
+tokens. A tunnel token lets someone run a second connector: <code>verify</code> reports any connector
+not on the server, and the collector's statements cannot be forged that way because each one
+signs a fresh challenge. With <code>--quick-tunnel</code> the second secret is the address key instead:
+whoever reads it can post a false address that the panel would accept.</p>
+<p>The collector's public statement leaves out the server's address and the sources of logins;
+both stay in the signed journal.</p>
+<h2 id="debug-deployment-and-lock">Debug deployment and lock<a class="anchor" href="#debug-deployment-and-lock" aria-label="Link to this section">#</a></h2>
+<p><code>--debug-ssh-key KEY --debug-ssh-from 198.51.100.4</code> keeps SSH for one key from one address
+or small network, at most a /24 for IPv4 or a /48 for IPv6. <code>KEY</code> is already registered with
+the provider: the name or ID of an SSH key in the Hetzner project, the ID or fingerprint of an
+SSH key in the DigitalOcean team, a Linode username whose profile SSH keys are added to root,
+the ID of an SSH key in the Vultr account, or the name of an EC2 key pair in the region. These
+options do not apply to <code>generic</code>. Such a deployment is recorded as <code>debug</code> and is <strong>never</strong> reported as
+high-assurance. When you are done, run <code>sudo tgwitness-lock</code> as the last command of the last
+SSH session, then:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud lock --record deployments/case-2026-11/deployment.json --provider-token-file hetzner.token</code></pre>
+<p>The firewall loses every inbound rule. Reports then show when SSH was allowed and when it
+was closed; that window stays visible.</p>
+<h2 id="remove-a-deployment">Remove a deployment<a class="anchor" href="#remove-a-deployment" aria-label="Link to this section">#</a></h2>
+<p><code>destroy</code> deletes the server and its firewall, found by the deployment's label so that a
+deployment which failed half-way is removed as well, then the DNS records that point to its
+tunnel, and the tunnel. The server's journal and signing key are deleted with it: export the
+evidence first. The record stays, marked <code>removed</code>, with the API calls of the removal.</p>
+<pre><code class="language-sh">python -m tgwitness.cloud destroy --record deployments/case-2026-11/deployment.json --confirm case-2026-11 \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>Removal through the API is implemented for Hetzner. For other providers <code>destroy</code> stops before
+deleting anything and names the label to delete in the provider's console. A hand-installed
+server (<code>generic</code>) loses only its tunnel and DNS records. A quick tunnel deployment needs no
+Cloudflare token: its tunnel ends with the server, and its posts expire from ntfy.sh within
+12 hours.</p>
+<h2 id="any-server-self-attested">Any server (self-attested)<a class="anchor" href="#any-server-self-attested" aria-label="Link to this section">#</a></h2>
+<p><code>--provider generic</code> is for a server bought or installed by hand. <code>deploy</code> creates the tunnel
+and DNS, writes <code>install.sh</code> (private) and <code>install.redacted.sh</code> (to publish), and waits.
+Copy <code>install.sh</code> to a freshly installed Ubuntu 24.04 server and run it there:</p>
+<pre><code class="language-sh">sudo bash install.sh</code></pre>
+<p>It records the host as it was (logins, accounts, <code>authorized_keys</code>, listening sockets,
+services, scheduled jobs, packages), installs the commit, enables a host firewall, deletes
+itself, masks SSH and ends the session. The report for such a server is at best
+<strong>SELF-ATTESTED</strong>: whoever ran the installer had root before it, and no provider record is
+available to the verifier. It is still better than an unexplained server: the inventory,
+the installer hash and every later login are signed.</p>
+<h2 id="verify">Verify<a class="anchor" href="#verify" aria-label="Link to this section">#</a></h2>
+<p>The verifier needs <code>deployment.json</code>, the published installer, read-only credentials and,
+ideally, a checkout of the commit and an evidence ZIP:</p>
+<pre><code class="language-sh">git clone -c core.autocrlf=false https://github.com/phishdestroy/TgWitness.git checkout
+git -C checkout checkout 0123456789abcdef0123456789abcdef01234567
+python -m tgwitness.cloud verify --record deployment.json \
+    --provider-token-file read-only.token --cloudflare-token-file cloudflare-read.token \
+    --fingerprint COLLECTOR_FINGERPRINT --cloud-init cloud-init.redacted.yaml \
+    --source checkout --evidence tgwitness-evidence.zip --report report.md</code></pre>
+<p>Every provider and Cloudflare value is requested by the verifier at that moment; the record
+supplies only the IDs to ask about. The exit code is 0 for <strong>PASS</strong>, 1 for <strong>FAIL</strong> and 2 for
+<strong>REVIEW</strong>, <strong>INCOMPLETE</strong> or <strong>SELF-ATTESTED</strong>. <code>--fingerprint</code> should come from an independent
+channel; without it the key is compared with the operator's record only. <code>python verify.py</code>
+still verifies the evidence ZIP itself, as in <a href="../evidence/">Evidence</a>.</p>
+<p>Provider actions are classified: creation and start within 30 minutes of creation pass;
+console, rescue, password reset, rebuild, ISO, images, snapshots, backups, Systems Manager,
+EC2 Instance Connect and firewall openings fail; power actions and anything not expected
+are marked for review. An unknown action never passes silently.</p>
+<h2 id="report-for-evidence-handover">Report for evidence handover<a class="anchor" href="#report-for-evidence-handover" aria-label="Link to this section">#</a></h2>
+<p><code>--report report.md</code> writes the Markdown report and <code>report.json</code> beside it:</p>
+<ol>
+<li>result, collector key fingerprint, deployment, provider, commit, server, firewall, tunnel;</li>
+<li>every check with its status and source (provider API, Cloudflare API, collector statement,
+    evidence journal);</li>
+<li>the provider log with each action's assessment and, where the provider records it, the actor;</li>
+<li>the Cloudflare endpoints holding the tunnel's connections, configuration and audit log;</li>
+<li>the signed collector statement;</li>
+<li>what the report establishes and what it does not;</li>
+<li>commands to reproduce it, and the SHA-256 of every file it was given.</li>
+</ol>
+<p>Hand over the report, <code>report.json</code>, <code>deployment.json</code>, the published installer and the
+evidence ZIP. Produce the report early: provider logs are kept for limited periods.</p>
+<h2 id="cloudflare-as-an-outside-witness">Cloudflare as an outside witness<a class="anchor" href="#cloudflare-as-an-outside-witness" aria-label="Link to this section">#</a></h2>
+<p>Everything here is optional. Without a Cloudflare account the server still runs, and two of
+these work today:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>What it shows</th>
+<th>In TgWitness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quick tunnel or your domain's tunnel</td>
+<td>the panel is reached only through the tunnel</td>
+<td>the server wizard, see above</td>
+</tr>
+<tr>
+<td>drand relay <code>drand.cloudflare.com</code></td>
+<td>records after a drand round are newer than it: the journal was written as it went</td>
+<td>evidence mode, <strong>More witnesses</strong>, no account (<a href="../evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices">format</a>)</td>
+</tr>
+<tr>
+<td>Tunnel health notifications</td>
+<td>when the tunnel was down, by email or webhook from Cloudflare</td>
+<td>set them in the Cloudflare dashboard</td>
+</tr>
+<tr>
+<td>Gateway DNS (<code>--gateway-dns</code>, or <strong>Cloudflare Gateway DNS</strong> in the wizard)</td>
+<td>every name the server looked up, answered by Cloudflare over TLS; the Hetzner firewall lets DNS reach nothing else; whether a Gateway policy could rewrite answers</td>
+<td>Hetzner, free Zero Trust plan, no domain; <code>verify</code> checks the firewall, the location, logging, policies, the server's queries and the audit log; evidence mode copies the log into the journal</td>
+</tr>
+<tr>
+<td>Gateway with the Cloudflare One client on the server, an outbound firewall that allows only Cloudflare</td>
+<td>every connection the server made, not just DNS</td>
+<td>not built yet</td>
+</tr>
+<tr>
+<td>Access in front of the panel</td>
+<td>who signed in to the panel and when</td>
+<td>not built: needs your own domain</td>
+</tr>
+<tr>
+<td>SSH command logging</td>
+<td>each command in a debug session</td>
+<td>not built yet</td>
+</tr>
+</tbody>
+</table></div>
+<p>Logpush, which would keep Cloudflare's own copy in R2, is an Enterprise feature: on the free
+plan Cloudflare answers <code>logpush is not enabled for this account</code>. Its Gateway log lasts 24
+hours there, so evidence mode copies it into the signed journal (<strong>Cloudflare Gateway's log of
+this server's DNS queries</strong>, a read-only token with Account Analytics Read).</p>
+<p>Without a Zero Trust plan an account has one DNS location. When Cloudflare refuses another,
+the server shares the existing one and its queries are told apart by its address; that filter
+needs Zero Trust PII Read as well, and <code>destroy</code> leaves a shared location. One log query spans
+at most three hours, so the copy and <code>verify</code> read the day in three-hour windows.</p>
+<p>Gateway DNS covers the system resolver. DNS over HTTPS on port 443 to another resolver, and
+connections to an address looked up nowhere (Telegram's data centres, for one), are not in
+its log.</p>
+<p>Cloudflare cannot see inside Telegram's encryption, other devices on the Telegram account
+(evidence mode's device list records them from Telegram's side) or the provider's hypervisor.</p>
+<p>On 1 November 2026 Gateway DNS ran against real Hetzner Cloud and a free Cloudflare account:
+Hetzner accepted the outbound rules, the server installed v0.7.0 with every lookup going
+through Gateway over TLS, the quick tunnel worked through that firewall, and <code>verify</code> read
+the server's 19 names back from Cloudflare (Ubuntu and Hetzner mirrors, GitHub, PyPI, NTP,
+the tunnel, ntfy.sh). The panel copied 36 queries in eight windows into a journal and
+<code>verify.py</code> summarised them without gaps; <code>destroy</code> removed the server and firewall and left
+the shared location.</p>
+<h2 id="what-this-does-not-establish">What this does not establish<a class="anchor" href="#what-this-does-not-establish" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>The provider and its staff control the hypervisor, disks and network.</li>
+<li>Host measurements are self-reported by the collector.</li>
+<li>Earlier firewall rule contents are not in every provider log; only Linode keeps rule versions.</li>
+<li>It says nothing new about message authenticity; see <a href="../evidence/">Evidence</a>.</li>
+</ul>
+<h2 id="tested-here">Tested here<a class="anchor" href="#tested-here" aria-label="Link to this section">#</a></h2>
+<p>The deployment, lock and verification logic is covered by automated tests against simulated
+Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail and Cloudflare APIs built from their
+published API references, and the AWS request signing against AWS's published examples.
+<code>tools/check_cloud_wizard.py</code> runs the panel's server wizard the same way, with a domain and
+with a quick tunnel. <code>tools/check_tdx.py</code> verifies real Intel TDX attestations from dcap-qvl and dstack
+up to Intel's root certificate (sources in <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md">tools/tdx/README.md</a>); <code>tools/check_phala.py</code>
+runs deploy, verify, the journal, destroy and the panel wizard against a simulated Phala Cloud
+whose attestations come from a forged PKI shaped like Intel's. The Phala path has not yet been
+tried on Phala Cloud itself.</p>
+<p>On 1 November 2026 the quick tunnel path ran against real <strong>Hetzner Cloud</strong> (Nuremberg, <code>cpx22</code>,
+TgWitness v0.7.0), real ntfy.sh and GitHub, from the panel and from code:</p>
+<ul>
+<li>the price check, then creation from the panel's buttons: server running after 13 seconds,
+    signed statement with matching instance and installer hashes after about two minutes;</li>
+<li>the server's own panel opened through its trycloudflare.com address and accepted the
+    panel token; without the token it answers 401;</li>
+<li>after a reboot through the Hetzner API the server posted a new signed address, <strong>Find the
+    current address</strong> found it, the old address stopped answering, the signing key stayed the
+    same; an unsigned post to an ntfy.sh topic was ignored;</li>
+<li><code>verify</code> against Hetzner's API: server, firewall without inbound rules, statement, binding,
+    host measurements, boot and the source hash of a v0.7.0 checkout passed; the Cloudflare
+    checks were unavailable, as described above; the installer differed from the one v0.7.0
+    builds and equalled byte for byte the one this version's code builds;</li>
+<li>deletion from the panel removed exactly the server and firewall the deployment labelled;
+    other servers and firewalls in the same project were untouched.</li>
+</ul>
+<p>Not yet run against real accounts: a deployment under your own domain (Cloudflare tunnel and
+DNS), the other providers, a debug deployment and <code>lock</code>, a Telegram account on such a server,
+and the live updates of later versions through a quick tunnel. Check the first deployment on
+each provider with <code>plan</code>, a debug deployment and <code>verify</code> before relying on it in a case.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/HIGH-ASSURANCE.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../panel/"><span>Next step</span><strong>Panel guide →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#what-a-verifier-can-check">What a verifier can check</a><a href="#providers">Providers</a><a href="#confidential-vm-on-phala-cloud-intel-tdx">Confidential VM on Phala Cloud (Intel TDX)</a><a href="#before-you-start">Before you start</a><a href="#from-the-panel">From the panel</a><a href="#quick-tunnel-without-a-domain">Quick tunnel without a domain</a><a href="#deploy">Deploy</a><a href="#debug-deployment-and-lock">Debug deployment and lock</a><a href="#remove-a-deployment">Remove a deployment</a><a href="#any-server-self-attested">Any server (self-attested)</a><a href="#verify">Verify</a><a href="#report-for-evidence-handover">Report for evidence handover</a><a href="#cloudflare-as-an-outside-witness">Cloudflare as an outside witness</a><a href="#what-this-does-not-establish">What this does not establish</a><a href="#tested-here">Tested here</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="he" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>פריסה ברמת אבטחה גבוהה · הפניה | TgWitness</title>
+<meta name="description" content="שרת מאובטח הפועל 24/7 ב-Hetzner או ב-Phala Cloud, Gateway DNS ובדיקות שצד שלישי יכול לחזור עליהן."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="פריסה ברמת אבטחה גבוהה · הפניה | TgWitness"><meta property="og:description" content="שרת מאובטח הפועל 24/7 ב-Hetzner או ב-Phala Cloud, Gateway DNS ובדיקות שצד שלישי יכול לחזור עליהן.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/high-assurance/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/high-assurance/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/high-assurance/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/high-assurance/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/high-assurance/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/", "url": "https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/", "name": "פריסה ברמת אבטחה גבוהה · הפניה | TgWitness", "description": "שרת מאובטח הפועל 24/7 ב-Hetzner או ב-Phala Cloud, Gateway DNS ובדיקות שצד שלישי יכול לחזור עליהן.", "inLanguage": "he", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "דף הבית", "item": "https://phishdestroy.github.io/TgWitness/he/"}, {"@type": "ListItem", "position": 2, "name": "תיעוד", "item": "https://phishdestroy.github.io/TgWitness/he/docs/"}, {"@type": "ListItem", "position": 3, "name": "הפניה", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "פריסה ברמת אבטחה גבוהה", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">דלג לתוכן</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / תיעוד</span></a>
+<nav aria-label="מדריכים"><a href="../../concepts/">מדריך חזותי</a><a href="../../">כל המדריכים</a><a href="../">הפניה</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="שפה"><span aria-hidden="true">◍</span> עברית</summary><div class="lang-list"><a href="../../../../docs/reference/high-assurance/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/high-assurance/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/high-assurance/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/high-assurance/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/high-assurance/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/high-assurance/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/high-assurance/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/high-assurance/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/high-assurance/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/high-assurance/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/high-assurance/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/high-assurance/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/high-assurance/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/high-assurance/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/high-assurance/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/high-assurance/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/high-assurance/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/high-assurance/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/high-assurance/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/high-assurance/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/high-assurance/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/high-assurance/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/high-assurance/" hreflang="th" lang="th">ไทย</a><a href="./" hreflang="he" lang="he" aria-current="true">עברית</a><a href="../../../../bn/docs/reference/high-assurance/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="החלפה בין ערכת נושא בהירה לכהה"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="מדריכים"><a href="../../../guides/modes.html">מצבים, תרחישים ורמות ראיות</a><p class="nav-label">צעדים ראשונים</p><a href="../../start/">התחילו תוך דקות ספורות</a><a href="../../dedicated-account/">חשבון ייעודי</a><a href="../../accounts/">חבר חשבון</a><a href="../../proxies/">בחר פרוקסי</a><a href="../../exports/">ייצוא ואימות</a><a href="../../capture/">תיעוד פעולות GitHub</a><p class="nav-label">חקירה ודיווח</p><a href="../../cases/">חקור בכל הצ'אטים</a><a href="../../case-board/">הקימו לוח תיקים</a><a href="../../reports/">עיצוב דוח</a><a href="../../handover/">הכן עותק לשיתוף</a><a href="../../groups/">ניהול קבוצת חשבונות</a><p class="nav-label">הבנת הראיות</p><a href="../../concepts/">ראו כיצד הראיות פועלות</a><a href="../../security/">שמרו על האבטחה</a><a href="../../witness/">הגדרת בוט Witness</a><p class="nav-label">המשך לקרוא</p><a href="../../archive/">עבוד עם הארכיון</a><a href="../../access/">שתף מקרה</a><a href="../../server/">המשך להפעיל את האתר</a><a href="../../troubleshooting/">גלה מה השתבש</a></nav><nav class="wiki-nav" aria-label="הפניה"><p class="nav-label"><a class="nav-label-link" href="../">הפניה</a></p><details class="wiki-group" open><summary>הגדרה</summary><a href="../quickstart/">התחלה מהירה</a><a href="../installation/">התקנה, אימות ועדכון</a><a href="../settings/">התקנה ראשונית והגדרות</a><a href="../accounts/">חשבונות ופורמטים של הפעלות</a><a href="../access/">גישה והרשאות</a><a href="../connection/">חיבור, פרוקסי והגנה על נתונים</a><a href="../deployment/">פריסה</a><a href="./" aria-current="page">פריסה ברמת אבטחה גבוהה</a></details><details class="wiki-group"><summary>אסף</summary><a href="../panel/">מדריך לפאנלים</a><a href="../collection/">כיצד מתבצע האיסוף</a><a href="../history/">טען היסטוריית המקור</a><a href="../operations/">תהליכי עבודה ותפעול</a><a href="../investigation/">מצב חקירה</a><a href="../features/">תכונות ומגבלות</a></details><details class="wiki-group"><summary>ארכיון ושילובים</summary><a href="../case-board/">הפניה ל-Case Board</a><a href="../analysis/">ניתוח ארכיונים</a><a href="../mcp/">MCP לקריאה בלבד</a><a href="../media-analysis/">OCR מקומי ותמלול</a><a href="../webhooks/">webhooks יוצאים</a><a href="../showcase/">תצוגה ציבורית</a></details><details class="wiki-group"><summary>ראיות</summary><a href="../how-it-works/">כיצד פועלת הראיה</a><a href="../case-reports/">תצורת הדוח ואימותו</a><a href="../account-export/">ייצוא חשבונות</a><a href="../evidence/">פורמט הראיות</a><a href="../witness/">עד עצמאי</a><a href="../timestamp/">חותמות זמן</a><a href="../storage/">אחסון ושחזור</a></details><details class="wiki-group"><summary>אבטחה ופרויקט</summary><a href="../security/">אבטחה וטיפול בנתונים</a><a href="../architecture/">ארכיטקטורה</a><a href="../verification/">מה נבדק</a><a href="../license/">הודעה בנושא הרישיון ואי־תאימות ארכיטקטונית</a><a href="../notice/">הודעה על חוסר תאימות למפעיל</a><a href="../changelog/">יומן שינויים</a></details></nav><p class="sidebar-note">v0.8.0<br>קוד פתוח · פועל על המחשב שלכם</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">פריסה ברמת אבטחה גבוהה</span></nav>
+<p class="verification-shortcut"><a href="../verification/">מה נבדק ←</a></p>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">הפניה / הגדרה</p><h1>פריסה ברמת אבטחה גבוהה</h1><p class="guide-outcome">שרת מאובטח הפועל 24/7 ב-Hetzner או ב-Phala Cloud, Gateway DNS ובדיקות שצד שלישי יכול לחזור עליהן.</p><div class="wiki-body"><p>יומן חתום מוכיח שהרשומות לא שונו <strong>לאחר</strong> החתימה. במקרים חמורים
+השאלה הבאה היא האם מישהו יכול היה לשנות את הנתונים <strong>לפני</strong> החתימה:
+מי הפעיל את האספן, על איזה מחשב, והאם מישהו התחבר אליו. מצב אופציונלי זה
+מפעיל את האספן כך שצד שלישי יוכל לבדוק זאת, באמצעות רשומות המוחזקות על ידי
+ספק הענן ו-Cloudflare, במקום להסתמך על דברי המפעיל.</p>
+<p>השימוש הרגיל בסביבה מקומית וב-Docker נותר ללא שינוי. שום דבר כאן לא פועל אלא אם כן אתם מבצעים פריסה באמצעות
+<code>python -m tgwitness.cloud</code>, והאספן קורא את המארח שלו רק כאשר הפריסה מוגדרת
+<code>TGWITNESS_ASSURANCE</code>.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 972 262" width="972" height="262" role="img" aria-labelledby="flow-9-title flow-9-desc"><title id="flow-9-title">תרשים זרימה</title><desc id="flow-9-desc">מפעיל → שרת, חומת אש ללא כללי כניסה (API של הספק); מפעיל → מנהרה ו-DNS (ממשק ה-API של Cloudflare); שרת, חומת אש ללא כללי כניסה → מנהרה ו-DNS (יוצא בלבד); שרת, חומת אש ללא כללי כניסה → מפתח חתימה שנוצר בשרת; Verifier, אסימונים לקריאה בלבד → יומן ספק וחומת אש; Verifier, אסימונים לקריאה בלבד → כתובת מחבר המנהרה וכניסה; Verifier, אסימונים לקריאה בלבד → הצהרת /api/assurance חתומה; Verifier, אסימונים לקריאה בלבד → קובץ ZIP של הראיות</desc><defs><marker id="flow-9-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M354.4 55.0C354.4 83.0 109.4 83.0 109.4 111.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:257" pathLength="257"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.9s" repeatCount="indefinite" path="M354.4 55.0C354.4 83.0 109.4 83.0 109.4 111.0"/></circle><path class="flow-edge" d="M354.4 55.0C354.4 135.5 248.9 135.5 248.9 216.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:201" pathLength="201"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.2s" repeatCount="indefinite" path="M354.4 55.0C354.4 135.5 248.9 135.5 248.9 216.0"/></circle><path class="flow-edge" d="M109.4 169.0C109.4 192.5 248.9 192.5 248.9 216.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:152" pathLength="152"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.7s" repeatCount="indefinite" path="M109.4 169.0C109.4 192.5 248.9 192.5 248.9 216.0"/></circle><path class="flow-edge" d="M109.4 169.0C109.4 192.5 92.4 192.5 92.4 216.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:51" pathLength="51"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M109.4 169.0C109.4 192.5 92.4 192.5 92.4 216.0"/></circle><path class="flow-edge" d="M524.6 64.0C524.6 92.0 286.5 92.0 286.5 120.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:250" pathLength="250"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.8s" repeatCount="indefinite" path="M524.6 64.0C524.6 92.0 286.5 92.0 286.5 120.0"/></circle><path class="flow-edge" d="M524.6 64.0C524.6 92.0 474.0 92.0 474.0 120.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:80" pathLength="80"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M524.6 64.0C524.6 92.0 474.0 92.0 474.0 120.0"/></circle><path class="flow-edge" d="M524.6 64.0C524.6 92.0 692.5 92.0 692.5 120.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:183" pathLength="183"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.0s" repeatCount="indefinite" path="M524.6 64.0C524.6 92.0 692.5 92.0 692.5 120.0"/></circle><path class="flow-edge" d="M524.6 64.0C524.6 92.0 890.3 92.0 890.3 120.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:375" pathLength="375"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="4.2s" repeatCount="indefinite" path="M524.6 64.0C524.6 92.0 890.3 92.0 890.3 120.0"/></circle><g class="flow-node" style="--i:0"><rect x="302.4" y="15.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="354.4" y="35.0">מפעיל</tspan></text></g><g class="flow-node" style="--i:0"><rect x="424.4" y="6.0" width="200.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="524.6" y="26.0">Verifier, אסימונים לקריאה</tspan><tspan x="524.6" y="44.0">בלבד</tspan></text></g><g class="flow-node" style="--i:1"><rect x="23.0" y="111.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="109.4" y="131.0">שרת, חומת אש ללא כללי</tspan><tspan x="109.4" y="149.0">כניסה</tspan></text></g><g class="flow-node" style="--i:1"><rect x="213.9" y="120.0" width="145.3" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="286.5" y="140.0">יומן ספק וחומת אש</tspan></text></g><g class="flow-node" style="--i:1"><rect x="377.2" y="120.0" width="193.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="474.0" y="140.0">כתובת מחבר המנהרה וכניסה</tspan></text></g><g class="flow-node" style="--i:1"><rect x="588.8" y="120.0" width="207.4" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="692.5" y="140.0">הצהרת /api/assurance חתומה</tspan></text></g><g class="flow-node" style="--i:1"><rect x="814.2" y="120.0" width="152.2" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="890.3" y="140.0">קובץ ZIP של הראיות</tspan></text></g><g class="flow-node" style="--i:2"><rect x="196.9" y="216.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="248.9" y="236.0">מנהרה ו-DNS</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="216.0" width="172.9" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="92.4" y="236.0">מפתח חתימה שנוצר בשרת</tspan></text></g><g class="flow-label" style="--i:0"><rect x="126.0" y="79.4" width="85.3" height="23.0" rx="6"/><text x="168.6" y="90.9" text-anchor="middle" dominant-baseline="central">API של הספק</text></g><g class="flow-label" style="--i:0"><rect x="190.8" y="146.7" width="167.2" height="23.0" rx="6"/><text x="274.4" y="158.2" text-anchor="middle" dominant-baseline="central">ממשק ה-API של Cloudflare</text></g><g class="flow-label" style="--i:1"><rect x="178.8" y="187.6" width="72.7" height="23.0" rx="6"/><text x="215.2" y="199.1" text-anchor="middle" dominant-baseline="central">יוצא בלבד</text></g></svg></div><details class="flow-steps"><summary>תרשים כטקסט</summary><ol><li>מפעיל → שרת, חומת אש ללא כללי כניסה (API של הספק)</li><li>מפעיל → מנהרה ו-DNS (ממשק ה-API של Cloudflare)</li><li>שרת, חומת אש ללא כללי כניסה → מנהרה ו-DNS (יוצא בלבד)</li><li>שרת, חומת אש ללא כללי כניסה → מפתח חתימה שנוצר בשרת</li><li>Verifier, אסימונים לקריאה בלבד → יומן ספק וחומת אש</li><li>Verifier, אסימונים לקריאה בלבד → כתובת מחבר המנהרה וכניסה</li><li>Verifier, אסימונים לקריאה בלבד → הצהרת /api/assurance חתומה</li><li>Verifier, אסימונים לקריאה בלבד → קובץ ZIP של הראיות</li></ol></details></figure>
+<h2 id="what-a-verifier-can-check">מה יכול בודק לבדוק<a class="anchor" href="#what-a-verifier-can-check" aria-label="קישור לסעיף זה">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>טענה</th>
+<th>כיצד מתבצע הבדיקה</th>
+<th>מתוחזק על ידי</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>השרת נוצר באמצעות ה-API של הספק במועד ידוע</td>
+<td>אובייקט השרת ויצירתו ביומן של הספק עצמו</td>
+<td>ספק</td>
+</tr>
+<tr>
+<td>אף אחד לא השתמש בנתיבי הגישה של הספק</td>
+<td>יומן בקשות קונסולה, חילוץ, איפוס סיסמה, בנייה מחדש, ISO, תמונות, גיבויים</td>
+<td>ספק</td>
+</tr>
+<tr>
+<td>שום דבר לא הצליח להתחבר אליו</td>
+<td>בחומת האש של הספק אין כללים לכניסה; SSH מוסתר החל מהאתחול הראשון</td>
+<td>ספק (חומת אש), מארח (SSH)</td>
+</tr>
+<tr>
+<td>ניתן לגשת ללוח זה אך ורק דרך המנהרה</td>
+<td>הכניסה למנהרה מועברת אל הלוח בלבד; המחבר פועל מכתובת השרת</td>
+<td>Cloudflare</td>
+</tr>
+<tr>
+<td>התוכנה הזו בדיוק פועלת</td>
+<td>ה-hash החתום של עץ המקור של האספן שווה ל-checkout של ה-commit שהוטמע</td>
+<td>Collector, נבדק מול Git</td>
+</tr>
+<tr>
+<td>מפתח החתימה נוצר בשרת זה</td>
+<td>המפתח חותם על הצהרה המציינת את מזהה השרת של הספק ואת ה-hash של ה-cloud-init שקיבל</td>
+<td>Collector, נבדק מול הספק</td>
+</tr>
+<tr>
+<td>היומן שייך למפתח ולשרת הזה</td>
+<td>כל תהליך שמתחיל בראיות ZIP נושא את מדידת המארח עבור אותו שרת</td>
+<td>ראיות ZIP</td>
+</tr>
+</tbody>
+</table></div>
+<p>מדדי המארח (מאזיני SSH ותהליכים, הפעלות נוכחיות, כניסות <code>wtmp</code>, האתחול)
+מדווחים על ידי האספן עצמו ונחתמים בכל התחלת תהליך ובכל
+<code>host.state</code> לרשומות בכל פעם שהם משתנים. משתמש root בשרת יכול לזייף אותם; הם
+תומכים ברשומות של הספק ושל Cloudflare במקום להחליף אותן.</p>
+<h2 id="providers">ספקים<a class="anchor" href="#providers" aria-label="קישור לסעיף זה">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th><code>--provider</code></th>
+<th>אישורים</th>
+<th>גישה לקריאה בלבד של ה-Verifier</th>
+<th>יומן הספק עבור המאמת</th>
+<th>נשמר עבור</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hetzner</code></td>
+<td><code>HCLOUD_TOKEN</code></td>
+<td>אסימון קריאה של אותו פרויקט</td>
+<td>פעולות שרת וחומת אש</td>
+<td>כל עוד המשאבים קיימים</td>
+</tr>
+<tr>
+<td><code>digitalocean</code></td>
+<td><code>DIGITALOCEAN_TOKEN</code></td>
+<td>אסימון גישה אישי לקריאה בלבד</td>
+<td>פעולות Droplet</td>
+<td>כל עוד ה-Droplet קיים</td>
+</tr>
+<tr>
+<td><code>linode</code></td>
+<td><code>LINODE_TOKEN</code></td>
+<td><code>linodes</code>, <code>firewall</code>, <code>events</code> היקפים לקריאה בלבד</td>
+<td>אירועי חשבון, גרסאות של כללי חומת האש</td>
+<td>90 ימים</td>
+</tr>
+<tr>
+<td><code>vultr</code></td>
+<td><code>VULTR_API_KEY</code></td>
+<td>משתמש בעל גישת קריאה והרשאה <code>activity_logs</code> הרשאה</td>
+<td>יומן פעילות החשבון (שיטה, נתיב, מבצע)</td>
+<td>30 ימים, ואף יותר עם מנוי ל-audit-log</td>
+</tr>
+<tr>
+<td><code>aws</code></td>
+<td><code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code></td>
+<td><code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroups</code>, <code>cloudtrail:LookupEvents</code></td>
+<td>היסטוריית האירועים של CloudTrail</td>
+<td>90 ימים</td>
+</tr>
+<tr>
+<td><code>phala</code></td>
+<td><code>PHALA_CLOUD_API_KEY</code></td>
+<td>מפתח API של אותו סביבת עבודה</td>
+<td>עדכוני יישום: שינויים בקוד ובסביבה, הפעלות מחדש, שדרוגי מערכת הפעלה</td>
+<td>כל עוד האפליקציה קיימת</td>
+</tr>
+<tr>
+<td><code>generic</code></td>
+<td>אין</td>
+<td>אין</td>
+<td>אין: <strong>מאומת עצמית</strong></td>
+<td>–</td>
+</tr>
+</tbody>
+</table></div>
+<p>השתמשו בפרויקט, צוות, חשבון או חשבון משנה ייעודיים לכל תיק: הגישה
+לקריאה בלבד של המאמת תציג אז רק פריסה זו. פרטי ההזדהות נקראים
+<code>--provider-token-file</code> או מהמשתנה שלעיל, לעולם לא משורת הפקודה. עבור AWS, הקובץ
+מכיל <code>ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]</code>; האזור הוא <code>--location</code>.</p>
+<p>מה שהרישומים של כל ספק אינם יכולים להציג מודפס בכל דוח. בקיצור: Hetzner
+מתעד בקשות לקונסולה; קונסולת השחזור של DigitalOcean, Lish/Glish של Linode והקונסולה האינטרנטית של Vultr
+אינן מתועדות ככאלה, ולכן הגישה ל-root נעולה בעת האתחול הראשון וכניסה לקונסולה
+תדרוש איפוס סיסמה או שינוי באתחול, אשר מתועדים. Vultr מחזירה את כתובת הקונסולה
+לכל מפתח שיכול לקרוא את המופע; לא התיעוד ולא הדוח מאחסנים אותה.</p>
+<h2 id="confidential-vm-on-phala-cloud-intel-tdx">מכונה וירטואלית סודית ב-Phala Cloud (Intel TDX)<a class="anchor" href="#confidential-vm-on-phala-cloud-intel-tdx" aria-label="קישור לסעיף זה">#</a></h2>
+<p>כאשר <code>--provider phala</code> האספן פועל במכונה וירטואלית חסויה מסוג Intel TDX ב-
+<a href="https://phala.com/">Phala Cloud</a>, המנוהלת על ידי dstack. המארח וצוות Phala אינם יכולים לקרוא את
+הזיכרון שלו, והמעבד חותם על אישור המציין מה הותקן במכונה. המאמת אינו
+סומך על דברי Phala: <code>tgwitness.tdx</code> הוא בודק בעצמו כל אישור, עד ל-Intel
+SGX Root CA המוצמד, מול רשימות הביטול של Intel ונתוני הפלטפורמה החתומים של Intel, ומסרב
+למכונות שניתן לאתר בהן באגים או להעבירן.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>הזנת דוח</th>
+<th>מה הוא מציג</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tdx_binding</code></td>
+<td>האישור מכסה את ההצהרה החתומה של האספן ואת הערך האקראי של בקשה זו</td>
+</tr>
+<tr>
+<td><code>tdx_quote</code></td>
+<td>אינטל מאשרת את האישור; הוא ניתן רק כאשר אינטל מעריכה שהפלטפורמה מעודכנת</td>
+</tr>
+<tr>
+<td><code>tdx_compose_hash</code></td>
+<td>RTMR3, המופעל מחדש מתוך יומן האירועים של dstack, מודד את פעולות כתיבת ההודעות באפליקציה שעליהן מדווח האספן</td>
+</tr>
+<tr>
+<td><code>tdx_compose</code></td>
+<td>קוד זה, בייט אחר בייט, הוא הקוד שהקוד של ה-commit שהוטמע בונה: קבצי מקור המוצמדים לפי hash, שתי התמונות לפי digest, ללא קוד אחר</td>
+</tr>
+<tr>
+<td><code>tdx_identity</code></td>
+<td>האישור מגיע מהיישום ומהמופע שהוטמעו, עם מפתחות מ-KMS של Phala ודיסק מוצפן</td>
+</tr>
+<tr>
+<td><code>tdx_os</code></td>
+<td>כאשר <code>--tdx-measurements</code>, MRTD ו-RTMR0-2 שווים לערכים שחושבו מתמונת מערכת ההפעלה dstack (<code>dstack-mr measure --json</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>כל הפעלה של האספן המתועדת ביומן נושאת אישור כזה, ולכן
+<code>verify --evidence</code> המערכת בודקת כל הפעלה. רשימת גרסאות היישום של Phala משמשת כ
+יומן הספק: אם ה-compose השתנה לאחר הפריסה, הדוח נכשל.</p>
+<p>בלוח הבקרה, בחר &quot;<strong>מכונה וירטואלית חסויה · Phala Cloud&quot;</strong>
+תחת &quot;<strong>תוספות</strong>
+&quot; → &quot;<strong>שרת 24/7</strong>
+&quot; והדבק מפתח API של Phala Cloud; המנהרה המהירה פועלת כמו ב-Hetzner. משורת הפקודה:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type tdx.small \
+    --ref v0.8.0 --repository https://github.com/phishdestroy/TgWitness --quick-tunnel \
+    --provider-token-file phala-key.txt
+python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
+    --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
+    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json</code></pre>
+<p><code>--tdx-collateral</code> קורא את האישורים ורשימות הביטול של Intel מקובץ במקום
+להוריד אותם מ-Intel. שירות ה-DNS של השער אינו זמין כאן: ל-Phala אין חומת אש של ספק
+לתעבורה יוצאת.</p>
+<p>אישור אינו יכול לשלול פגם במודול ה-TDX או במיקרוקוד של Intel, או גישה פיזית
+לאוטובוס הזיכרון. מי ששולט ביישום בחשבון של Phala יכול לפרוס קומפוזיציה נוספת;
+היא מופיעה כגרסה חדשה עם חתימת קומפוזיציה חדשה. המארח שולט במקור הזמן
+של המחשב וברשת.</p>
+<h2 id="before-you-start">לפני שתתחילו<a class="anchor" href="#before-you-start" aria-label="קישור לסעיף זה">#</a></h2>
+<ol>
+<li>אזור Cloudflare, מזהה החשבון שלו ואסימון API עם <strong>עריכת Cloudflare Tunnel</strong>,
+    <strong>אזור קריאה</strong> ו-<strong>עריכת DNS</strong>, הניתנים באמצעות <code>--cloudflare-token-file</code> או
+    <code>CLOUDFLARE_API_TOKEN</code>. עבור המאמת: <strong>קריאה ב-Cloudflare Tunnel</strong>, <strong>קריאת DNS</strong>, ועבור
+    יומן הביקורת, <strong>הגדרות חשבון – קריאה</strong>. ללא דומיין,
+    <a href="#quick-tunnel-without-a-domain">מנהרה מהירה</a> אינו זקוק לשום דבר מזה.</li>
+<li>פרטי הזדהות של ספק עם גישה לכתיבה לפרויקט ייעודי; <code>lock</code> משתמש באותו הדבר:<ul>
+<li>Hetzner: אסימון API עם הרשאות קריאה וכתיבה;</li>
+<li>DigitalOcean: אסימון גישה אישי עם הרשאת כתיבה;</li>
+<li>Linode: אסימון גישה אישי עם <code>linodes</code>, <code>firewall</code> ו <code>events</code> היקפי קריאה/כתיבה;</li>
+<li>Vultr: מפתח API של חשבון ייעודי או חשבון משנה;</li>
+<li>AWS: אישורי IAM מותרים <code>ec2:DescribeVpcs</code>, <code>ec2:DescribeImages</code>,
+    <code>ec2:CreateSecurityGroup</code>, <code>ec2:AuthorizeSecurityGroupIngress</code>, <code>ec2:RunInstances</code>,
+    <code>ec2:CreateTags</code>, <code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroupRules</code> ו-
+    <code>ec2:RevokeSecurityGroupIngress</code>.</li>
+</ul>
+</li>
+<li>הקומיט שיש להריץ. תגית שחרור מפורשת פעם אחת לקומיט שלה באמצעות <code>git ls-remote</code>;
+    השרת מקבל תמיד רק את ה-commit בן 40 התווים.</li>
+</ol>
+<h2 id="from-the-panel">מהלוח<a class="anchor" href="#from-the-panel" aria-label="קישור לסעיף זה">#</a></h2>
+<p>במחשב האישי שלכם, תפריט <strong>Extras → Server 24/7</strong> מפעיל את אותו <code>deploy</code> עבור Hetzner בשלושה
+שלבים: בחרו באירופה או בארצות הברית, הדביקו אסימון Hetzner (קריאה וכתיבה), ואז בדקו
+את סוג השרת, המחיר החודשי, הכתובת והגרסה שהלוח מצא באמצעות האסימון הזה. שום דבר
+לא נוצר לפני שתאשרו. הלוח מציג כל שלב כפי <code>deploy</code> כפי שהוא מדווח עליה, ולאחר מכן את
+הכתובת, אסימון הפאנל וטביעת האצבע של מפתח החתימה. ללא דומיין, השרת מקבל
+<a href="#quick-tunnel-without-a-domain">מנהרה מהירה</a>
+; <strong>השרתים שלך → מצא את הכתובת הנוכחית</strong>
+מחפש אותה שוב לאחר הפעלה מחדש. עבור כתובת קבועה תחת הדומיין שלך, פתח
+<strong>&#x27;אופציונלי&#x27; · הדומיין שלך</strong>
+והוסף אסימון Cloudflare (הקישור המוכן בוחר &#x27;קריאת אזור&#x27;
+, &#x27;עריכת DNS&#x27; ו&#x27;עריכת מנהרת Cloudflare&#x27;).</p>
+<p>האסימונים מועברים עם כל בקשה מכרטיסיית הדפדפן אל TgWitness באותו מחשב
+ואינם נשמרים בשום מקום; תיעוד הפריסה, קובץ cloud-init שעבר עריכה, אסימון הפאנל ו,
+במקרה של מנהרה מהירה, מפתח הכתובת נשמרים <code>deployments/NAME</code> בתוך ספריית הנתונים.
+הלוח מציע זאת רק למנהל הראשי בחיבור לולאה חוזרת ישיר
+(<code>127.0.0.1</code>, ללא כותרות פרוקסי או מנהרה); לוח נגיש דרך הרשת מציג את הפקודות
+במקום זאת. ברירת המחדל של הגרסה היא תג השחרור של הלוח הפועל, המתורגם באמצעות
+API של GitHub. המיקום, סוג השרת והמחיר מגיעים מ-API של Hetzner: <code>cpx22</code> במקומות שבהם הוא
+מוצע, אחרת סוג ה-x86 הזול ביותר עם לפחות 2 GB של זיכרון.</p>
+<h2 id="quick-tunnel-without-a-domain">מנהרה מהירה ללא דומיין<a class="anchor" href="#quick-tunnel-without-a-domain" aria-label="קישור לסעיף זה">#</a></h2>
+<p><code>--quick-tunnel</code> מחליף <code>--zone</code>, <code>--cloudflare-account</code> ו <code>--panel-host</code>; אין צורך בחשבון או בטוקן של Cloudflare:
+;</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --quick-tunnel --provider-token-file hetzner.token</code></pre>
+<p>בשרת, cloudflared פותח
+<a href="https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/">מנהרה מהירה</a>
+אל לוח הבקרה: כתובת אקראית <code>https://….trycloudflare.com</code> המתחלף בכל פעם ש-cloudflared
+או השרת מופעלים מחדש. שירות קטן בשרת מפרסם כל כתובת בנושא אקראי ב-ntfy.sh
+, חתום (HMAC-SHA256) במפתח שנמצא רק בספריית הפריסה
+(<code>address-key.txt</code>), וחוזר על כך כל שלוש שעות מכיוון ש-ntfy.sh שומר את ההודעות למשך 12.
+<code>deploy</code> ו-<strong>Find the current address</strong> מקבלים רק פרסומים חתומים, כך שפרסום מזויף לא יכול
+לשלוח אותך, ואת אסימון הפאנל שלך, לכתובת של מישהו אחר. הנושא נמצא ברשומה וב-
+cloud-init שפורסם: מי שיש לו אותם יכול לקרוא את הכתובת הנוכחית, שעדיין מבקשת את
+אסימון הפאנל. השרת לא שומר על יציאה נכנסת בשום מקרה.</p>
+<p>מה זה עולה: אף חשבון Cloudflare אינו שומר תיעוד של מנהרה זמנית, ולכן <code>verify</code> הדוחות על
+המנהרה, המחבר ובדיקת ה-DNS מופיעים כלא זמינים, והתוצאה היא במקרה הטוב <code>incomplete</code>;
+הרישומים של הספק, חומת האש, ההצהרה החתומה, מדידות המארח והשוואת המתקין
+נבדקים כרגיל. השוואת הבתים עם מתקין הייחוס דורשת commit שהוטמע
+שכבר יודע <code>--quick-tunnel</code>; צ&#x27;ק-אאוט של גרסה 0.7.0 בונה את מתקין הדומיין ומדווח
+על ההבדל. Cloudflare אינה מעניקה למנהרות מהירות כל ערבות לזמן פעילות, מאפשרת 200 בקשות
+בזמן אמת ואינה מעבירה אירועים הנשלחים מהשרת (Server-Sent Events), ולכן העדכונים החיים בלוח הבקרה (גרסאות לאחר 0.7.0)
+עלולים שלא להגיע דרכן, ויש צורך לטעון מחדש את התצוגה; חלק זה טרם נבדק. במקרה
+שצריך לעמוד במבחן, השתמשו בדומיין משלכם.</p>
+<h2 id="deploy">פריסה<a class="anchor" href="#deploy" aria-label="קישור לסעיף זה">#</a></h2>
+<p>בדקו תחילה את כל מה שיישלח. <code>plan</code> אינו מבצע בקשות לספק או ל-Cloudflare:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud plan --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org</code></pre>
+<p>לאחר מכן, בצעו פריסה עם אותן אפשרויות ואותם פרטי הזדהות:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org \
+    --witness-host case-witness.example.org \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>סוגי שרתים להתחלה: <code>cpx22</code> (Hetzner), <code>s-1vcpu-2gb</code> (DigitalOcean), <code>g6-standard-1</code>
+(Linode), <code>vc2-1c-2gb</code> (Vultr), <code>t3.small</code> (AWS). <code>--location</code> וב <code>--image</code> כברירת מחדל,
+Ubuntu 24.04 של כל ספק באזור אירופי.</p>
+<p><code>--repository</code> מקבל את ה-commit ממאגר Git אחר ב-https, ללא פרטי הזדהות ב-
+URL (כברירת מחדל <code>https://github.com/phishdestroy/TgWitness.git</code>). <code>deploy</code> מקבל גם <code>--out</code>
+לספריית פריסה אחרת (ברירת מחדל <code>deployments/NAME</code>; ספרייה שכבר מכילה
+פריסה נדחית) ו <code>--wait</code>, מספר הדקות שיש להמתין להצהרה החתומה של האספן:
+1 עד 240, ברירת מחדל 20, או 60 עבור <code>generic</code>.</p>
+<p>הפקודה:</p>
+<ol>
+<li>יוצר מנהרה של Cloudflare שהכניסה שלה מעבירה את שם המארח של הלוח אל הלוח,
+    ואם ניתן, את שם המארח של ה-witness אל <code>/api/witness/head</code> ו <code>/api/assurance</code> בלבד;</li>
+<li>יוצר רשומות CNAME באמצעות פרוקסי עבור שמות המארחים הללו, תוך דחיית שמות שכבר קיימים;</li>
+<li>יוצר חומת אש של ספק ללא כללי כניסה, ומאחוריה שרת ללא מפתח SSH,
+    ללא גיבויים, ללא סוכן קונסולה, ו-cloud-init שמסתיר את ה-SSH, נועל את ה-root, מתקין
+    <code>cloudflared</code>, מוריד בדיוק את ה-commit, בודק אותו ומפעיל את TgWitness כ
+    שירות systemd מחוזק;</li>
+<li>ממתין להצהרה החתומה של האספן ובודק שהיא מציינת את השרת הזה ואת
+    ה-hash של ה-cloud-init הזה.</li>
+</ol>
+<p><code>deployments/case-2026-11/</code> ואז מכיל:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>קובץ</th>
+<th>תוכן העניינים</th>
+<th>לשתף?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deployment.json</code></td>
+<td>מזהים, חתימות hash, קריאות ה-API שבוצעו (שיטה, נתיב, סטטוס) וההצהרה החתומה הראשונה</td>
+<td>כן, באמצעות המאמת</td>
+</tr>
+<tr>
+<td><code>cloud-init.redacted.yaml</code></td>
+<td>ה-cloud-init המדויק, כאשר שני הסודות שלו הוחלפו ב- <code>REDACTED</code></td>
+<td>כן</td>
+</tr>
+<tr>
+<td><code>panel-token.txt</code></td>
+<td>אסימון הפאנל</td>
+<td>לא</td>
+</tr>
+</tbody>
+</table></div>
+<p>סיסמת השורש של הספק, אסימון המנהרה ואסימון הפאנל לעולם אינם נכתבים
+<code>deployment.json</code>. פרסם את טביעת האצבע של האספן המופיעה בסוף דרך ערוץ
+שאינך שולט בו לבד, למשל ערוץ עדים או הודעה לנמען.</p>
+<p>היכנסו ל-Telegram בכתובת <code>https://case.example.org</code> באמצעות אסימון הפאנל, כפי שמוסבר
+<a href="../accounts/">במדריך לחשבון</a>. פעולות הפאנל נרשמות ביומן החתום; הן אינן
+הפעלות SSH. <a href="../witness/">עד</a> יכול לבצע סקר <code>https://case-witness.example.org</code>.</p>
+<p>אין SSH: אם תהליך האתחול נכשל, האספן לעולם לא יגיב. מחקו את השרת ו
+הפעילו אותו מחדש, או השתמשו בפריסה לאיתור באגים כדי לאתר את הגורם.</p>
+<h3 id="secrets-in-the-user-data">סודות בנתוני המשתמש<a class="anchor" href="#secrets-in-the-user-data" aria-label="קישור לסעיף זה">#</a></h3>
+<p>ה-cloud-init נושא שני סודות: אסימון הפאנל ואסימון המנהרה של Cloudflare.
+מפתח החתימה אינו נכלל ביניהם; הוא נוצר בשרת. Hetzner, DigitalOcean ו-Linode
+אינם מחזירים נתוני משתמש דרך ה-API שלהם. Vultr מחזיר אותם לכל מפתח שיכול לקרוא את
+האינסטנס, ו-EC2 דרך <code>DescribeInstanceAttribute</code>. עבור AWS, יש לתת למאמת רק את שלושת
+הפעולות המופיעות בטבלה, לעולם לא <code>ec2:Describe*</code>. עבור Vultr, יש להניח שמפתח המאמת יכול לקרוא את שני
+האסימונים. אסימון מנהרה מאפשר למישהו להפעיל מחבר שני: <code>verify</code> מדווח על כל מחבר
+שאינו נמצא בשרת, ולא ניתן לזייף את ההצהרות של האספן בדרך זו, מכיוון שכל אחת מהן
+חותמת על אתגר חדש. עם <code>--quick-tunnel</code> הסוד השני הוא מפתח הכתובת:
+מי שקורא אותו יכול לפרסם כתובת כוזבת שהפאנל יקבל.</p>
+<p>בהצהרה הפומבית של האספן לא מוזכרים כתובת השרת ומקורות הכניסות;
+שניהם נשארים ביומן החתום.</p>
+<h2 id="debug-deployment-and-lock">איתור באגים בפריסה ונעילה<a class="anchor" href="#debug-deployment-and-lock" aria-label="קישור לסעיף זה">#</a></h2>
+<p><code>--debug-ssh-key KEY --debug-ssh-from 198.51.100.4</code> שומר SSH עבור מפתח אחד מכתובת אחת
+או מרשת קטנה, לכל היותר /24 עבור IPv4 או /48 עבור IPv6. <code>KEY</code> כבר רשום אצל
+הספק: השם או המזהה של מפתח SSH בפרויקט Hetzner, המזהה או טביעת האצבע של
+מפתח SSH בצוות DigitalOcean, שם משתמש ב-Linode שמפתחות ה-SSH בפרופיל שלו מתווספים ל-root,
+המזהה של מפתח SSH בחשבון Vultr, או השם של זוג מפתחות EC2 באזור. אפשרויות
+אלה אינן חלות על <code>generic</code>. פריסה כזו נרשמת כ <code>debug</code> ול<strong>עולם לא</strong> מדווחת כ
+בעלת אבטחה גבוהה. בסיום, הפעל <code>sudo tgwitness-lock</code> כפקודה האחרונה של
+הפעלת ה-SSH האחרונה, ולאחר מכן:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud lock --record deployments/case-2026-11/deployment.json --provider-token-file hetzner.token</code></pre>
+<p>חומת האש מאבדת כל כלל נכנס. לאחר מכן, הדוחות מראים מתי הותר שימוש ב-SSH ומתי
+הוא נסגר; חלון זה נשאר גלוי.</p>
+<h2 id="remove-a-deployment">הסרת פריסה<a class="anchor" href="#remove-a-deployment" aria-label="קישור לסעיף זה">#</a></h2>
+<p><code>destroy</code> מחיקת השרת וחומת האש שלו, הנמצאים לפי תווית הפריסה, כך ש
+פריסה שנכשלה באמצע התהליך תוסר גם היא, ולאחר מכן רשומות ה-DNS שמפנות אל
+המנהרה, והמנהרה עצמה. יומן השרת ומפתח החתימה נמחקים יחד איתו: יש לייצא את
+הראיות תחילה. התיעוד נשאר, מסומן <code>removed</code>, עם קריאות ה-API של ההסרה.</p>
+<pre><code class="language-sh">python -m tgwitness.cloud destroy --record deployments/case-2026-11/deployment.json --confirm case-2026-11 \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>הסרה באמצעות ה-API מיושמת עבור Hetzner. עבור ספקים אחרים <code>destroy</code> עוצר לפני
+מחיקת כל דבר ומציין את התווית למחיקה בקונסולת הספק. שרת המותקן ידנית
+(<code>generic</code>) מאבד רק את רשומות המנהרה וה-DNS שלו. פריסת מנהרה מהירה אינה דורשת
+אסימון Cloudflare: המנהרה שלה מסתיימת בשרת, וההודעות שלה פוקעות מ-ntfy.sh תוך
+12 שעות.</p>
+<h2 id="any-server-self-attested">כל שרת (בעל אימות עצמי)<a class="anchor" href="#any-server-self-attested" aria-label="קישור לסעיף זה">#</a></h2>
+<p><code>--provider generic</code> מיועד לשרת שנרכש או הותקן באופן ידני. <code>deploy</code> יוצר את המנהרה
+ואת ה-DNS, כותב <code>install.sh</code> (פרטי) ו <code>install.redacted.sh</code> (לפרסום), וממתין.
+העתיקו <code>install.sh</code> לשרת Ubuntu 24.04 שהותקן זה עתה והפעל אותו שם:</p>
+<pre><code class="language-sh">sudo bash install.sh</code></pre>
+<p>הוא מתעד את המארח כפי שהיה (כניסות, חשבונות, <code>authorized_keys</code>, שקעי האזנה,
+שירותים, משימות מתוזמנות, חבילות), מתקין את ה-commit, מפעיל את חומת האש של המארח, מוחק
+את עצמו, מסווה את ה-SSH ומסיים את ההפעלה. הדוח עבור שרת כזה הוא, במקרה הטוב,
+<strong>&quot;מאומת עצמית&quot;</strong>: מי שהריץ את תוכנית ההתקנה החזיק בזכויות root לפני כן, ואין תיעוד של הספק
+זמין למאמת. זה עדיין עדיף על שרת בלתי מוסבר: המלאי,
+ה-hash של תוכנית ההתקנה וכל כניסה מאוחרת יותר חתומים.</p>
+<h2 id="verify">אמת<a class="anchor" href="#verify" aria-label="קישור לסעיף זה">#</a></h2>
+<p>המאמת זקוק <code>deployment.json</code>, את תוכנת ההתקנה שפורסמה, פרטי התחברות לקריאה בלבד, ו,
+באופן אידיאלי, צ&#x27;ק-אאוט של הקומיט וראיה ZIP:</p>
+<pre><code class="language-sh">git clone -c core.autocrlf=false https://github.com/phishdestroy/TgWitness.git checkout
+git -C checkout checkout 0123456789abcdef0123456789abcdef01234567
+python -m tgwitness.cloud verify --record deployment.json \
+    --provider-token-file read-only.token --cloudflare-token-file cloudflare-read.token \
+    --fingerprint COLLECTOR_FINGERPRINT --cloud-init cloud-init.redacted.yaml \
+    --source checkout --evidence tgwitness-evidence.zip --report report.md</code></pre>
+<p>כל ספק וערך של Cloudflare מתבקשים על ידי המאמת באותו הרגע; הרישום
+מספק רק את המזהים שעליהם יש לשאול. קוד היציאה הוא 0 עבור <strong>PASS</strong>, 1 עבור <strong>FAIL</strong> ו-2 עבור
+<strong>REVIEW</strong>, <strong>INCOMPLETE</strong> או <strong>SELF-ATTESTED</strong>. <code>--fingerprint</code> צריך להגיע מערוץ עצמאי;
+בלעדיו, המפתח מושווה רק לרישום של המפעיל. <code>python verify.py</code>
+עדיין מאמת את הראיות ZIP בעצמו, כפי שמופיע בסעיף <a href="../evidence/">&quot;ראיות&quot;</a>.</p>
+<p>פעולות הספק מסווגות: יצירה והפעלה תוך 30 דקות מרגע היצירה עוברות;
+קונסולה, חילוץ, איפוס סיסמה, בנייה מחדש, ISO, תמונות, תמונות מצב, גיבויים, מנהל מערכות,
+חיבור EC2 Instance Connect ופתיחת חומות אש נכשלות; פעולות חשמל וכל דבר בלתי צפוי
+מסומנים לבדיקה. פעולה לא ידועה לעולם לא עוברת בשקט.</p>
+<h2 id="report-for-evidence-handover">דוח להעברת ראיות<a class="anchor" href="#report-for-evidence-handover" aria-label="קישור לסעיף זה">#</a></h2>
+<p><code>--report report.md</code> כותב את הדוח ב-Markdown ו <code>report.json</code> לידו:</p>
+<ol>
+<li>תוצאה, טביעת אצבע של מפתח האספן, פריסה, ספק, התחייבות, שרת, חומת אש, מנהרה;</li>
+<li>כל בדיקה עם הסטטוס והמקור שלה (API של הספק, API של Cloudflare, דוח האספן,
+    יומן הראיות);</li>
+<li>יומן הספק עם הערכת כל פעולה, ובמקרים שבהם הספק מתעד זאת – גם זהות המבצע;</li>
+<li>נקודות הקצה של Cloudflare המכילות את חיבורי המנהרה, התצורה ויומן הביקורת;</li>
+<li>הצהרת האספן החתומה;</li>
+<li>מה הדוח קובע ומה לא;</li>
+<li>פקודות לשחזור התהליך, וה-SHA-256 של כל קובץ שניתן לו.</li>
+</ol>
+<p>העבר את הדוח, <code>report.json</code>, <code>deployment.json</code>, את תוכנת ההתקנה שפורסמה ואת
+הראיות ZIP. הכינו את הדוח בהקדם: יומני הספק נשמרים לתקופות מוגבלות.</p>
+<h2 id="cloudflare-as-an-outside-witness">Cloudflare כעד חיצוני<a class="anchor" href="#cloudflare-as-an-outside-witness" aria-label="קישור לסעיף זה">#</a></h2>
+<p>הכל כאן הוא אופציונלי. גם ללא חשבון Cloudflare השרת עדיין פועל, ושניים
+מהאלה פועלים כיום:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>מה</th>
+<th>מה הוא מציג</th>
+<th>ב-TgWitness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>מנהרה מהירה או מנהרה של הדומיין שלכם</td>
+<td>ניתן לגשת ללוח רק דרך המנהרה</td>
+<td>אשף השרת, ראו לעיל</td>
+</tr>
+<tr>
+<td>drand relay <code>drand.cloudflare.com</code></td>
+<td>הרשומות לאחר סיבוב drand חדשות יותר ממנה: היומן נכתב תוך כדי התקדמות</td>
+<td>מצב ראיות, <strong>עדים נוספים</strong>, ללא חשבון (<a href="../evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices">פורמט</a>)</td>
+</tr>
+<tr>
+<td>התראות על תקינות המנהרה</td>
+<td>כאשר המנהרה הייתה מושבתת, באמצעות דוא&quot;ל או Webhook מ-Cloudflare</td>
+<td>הגדר אותם בלוח הבקרה של Cloudflare</td>
+</tr>
+<tr>
+<td>Gateway DNS (<code>--gateway-dns</code>, או <strong>Cloudflare Gateway DNS</strong> באשף)</td>
+<td>כל שם שהשרת חיפש, נענה על ידי Cloudflare באמצעות TLS; חומת האש של Hetzner מונעת מ-DNS להגיע לכל דבר אחר; האם מדיניות השער יכולה לשנות את התשובות</td>
+<td>Hetzner, תוכנית Zero Trust חינמית, ללא דומיין; <code>verify</code> בודק את חומת האש, המיקום, הרישום, המדיניות, שאילתות השרת ויומן הביקורת; מצב הראיות מעתיק את היומן אל היומן</td>
+</tr>
+<tr>
+<td>שער עם לקוח Cloudflare One בשרת, חומת אש יוצאת המאפשרת רק את Cloudflare</td>
+<td>כל חיבור שהשרת ביצע, לא רק DNS</td>
+<td>עדיין לא נבנה</td>
+</tr>
+<tr>
+<td>גישה מול הפאנל</td>
+<td>מי התחבר לפאנל ומתי</td>
+<td>לא נבנה: דורש דומיין משלך</td>
+</tr>
+<tr>
+<td>רישום פקודות SSH</td>
+<td>כל פקודה בסשן ניפוי באגים</td>
+<td>עדיין לא נבנה</td>
+</tr>
+</tbody>
+</table></div>
+<p>Logpush, אשר ישמור עותק של Cloudflare ב-R2, הוא תכונה של תוכנית Enterprise: בתוכנית החינמית
+Cloudflare עונה <code>logpush is not enabled for this account</code>. יומן ה-Gateway נשמר שם למשך 24
+שעות, ולכן מצב הראיות מעתיק אותו ליומן החתום (<strong>יומן ה-Cloudflare Gateway של
+שאילתות ה-DNS של שרת זה</strong>, אסימון לקריאה בלבד עם &#x27;קריאת ניתוח חשבונות&#x27;).</p>
+<p>ללא תוכנית Zero Trust, לחשבון יש מיקום DNS אחד. כאשר Cloudflare דוחה מיקום אחר,
+השרת משתף את המיקום הקיים, והשאילתות שלו מובחנות לפי כתובתו; מסנן זה
+זקוק גם ל-Zero Trust PII Read, ו <code>destroy</code> מה שמותיר מיקום משותף. שאילתת יומן אחת משתרעת
+לכל היותר על פני שלוש שעות, ולכן הקריאה וה <code>verify</code> לקריאה של היום בחלונות של שלוש שעות.</p>
+<p>Gateway DNS מכסה את מפתרון השמות של המערכת. DNS over HTTPS ביציאה 443 למפתרון שמות אחר, ו
+חיבורים לכתובת שלא נבדקה בשום מקום (למשל, מרכזי הנתונים של Telegram), אינם מופיעים
+ביומן שלה.</p>
+<p>Cloudflare אינה יכולה לראות את תוכן ההצפנה של Telegram, מכשירים אחרים בחשבון Telegram
+(רשימת המכשירים במצב הראיות מתעדת אותם מצד Telegram) או את ההיפר-ויזור של הספק.</p>
+<p>ב-1 בנובמבר 2026, ה-DNS של Gateway פעל מול ענן Hetzner אמיתי וחשבון Cloudflare חינמי:
+Hetzner קיבל את הכללים היוצאים, השרת התקין את גרסה 0.7.0 וכל חיפוש עבר
+דרך Gateway באמצעות TLS, המנהרה המהירה פעלה דרך חומת האש הזו, ו <code>verify</code> קרא
+את 19 השמות של השרת חזרה מ-Cloudflare (מראות של Ubuntu ו-Hetzner, GitHub, PyPI, NTP,
+המנהרה, ntfy.sh). הפאנל העתיק 36 שאילתות בשמונה חלונות ליומן ו
+<code>verify.py</code> סיכם אותן ללא פערים; <code>destroy</code> הסיר את השרת ואת חומת האש ועזב
+את המיקום המשותף.</p>
+<h2 id="what-this-does-not-establish">מה שהדבר הזה לא קובע<a class="anchor" href="#what-this-does-not-establish" aria-label="קישור לסעיף זה">#</a></h2>
+<ul>
+<li>הספק וצוותו שולטים בהיפר-ויזור, בדיסקים וברשת.</li>
+<li>נתוני המארח מדווחים באופן עצמאי על ידי האספן.</li>
+<li>תוכן כללי חומת האש הקודמים אינו מופיע בכל יומני הספקים; רק Linode שומר את גרסאות הכללים.</li>
+<li>אין כאן שום דבר חדש בנוגע לאותנטיות ההודעות; ראו &quot;<a href="../evidence/">ראיות</a>&quot;.</li>
+</ul>
+<h2 id="tested-here">נבדק כאן<a class="anchor" href="#tested-here" aria-label="קישור לסעיף זה">#</a></h2>
+<p>לוגיקת הפריסה, הנעילה והאימות מכוסה על ידי בדיקות אוטומטיות מול ממשקי API מדומים של
+Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail ו-Cloudflare, שנבנו על סמך
+התיעוד שפורסם על ידי החברות הללו, וכן חתימת בקשות AWS בהתאם לדוגמאות שפורסמו על ידי AWS.
+<code>tools/check_cloud_wizard.py</code> מפעיל את אשף השרת של הפאנל באותו אופן, עם דומיין
+ועם מנהרה מהירה. <code>tools/check_tdx.py</code> מאמת אישורים אמיתיים של Intel TDX מ-dcap-qvl ו-dstack
+עד לתעודת השורש של Intel (מקורות <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md">ב-tools/tdx/README.md</a>); <code>tools/check_phala.py</code>מפעיל את הפקודות deploy, verify, the journal, destroy ואת אשף הפאנל מול ענן Phala מדומה
+שהאישורים שלו מגיעים מ-PKI מזויף המעוצב בדמות זה של Intel. נתיב ה-Phala טרם
+נבדק על ענן Phala עצמו.</p>
+<p>ב-1 בנובמבר 2026 נבדקה נתיב המנהרה המהיר מול <strong>Hetzner Cloud</strong> האמיתי (נירנברג, <code>cpx22</code>,
+TgWitness v0.7.0), ntfy.sh ו-GitHub אמיתיים, הן מהלוח והן מהקוד:</p>
+<ul>
+<li>בדיקת המחיר, ולאחר מכן יצירה באמצעות הכפתורים בלוח הבקרה: השרת מתחיל לפעול לאחר 13 שניות,
+    הצהרה חתומה עם חתימות תואמות של המופע והמתקין לאחר כ-2 דקות;</li>
+<li>לוח הבקרה של השרת עצמו נפתח דרך כתובתו trycloudflare.com וקיבל את
+    אסימון הלוח; ללא האסימון הוא מחזיר תגובה 401;</li>
+<li>לאחר אתחול מחדש באמצעות ה-API של Hetzner, השרת פרסם כתובת חתומה חדשה. מצאתי<strong> את
+    הכתובת הנוכחית</strong>, הכתובת הישנה הפסיקה לענות, מפתח החתימה נשאר
+    זהה; פוסט לא חתום לנושא ב-ntfy.sh התעלם;</li>
+<li><code>verify</code> בהשוואה ל-API של Hetzner: שרת, חומת אש ללא כללי כניסה, הצהרה, קישור,
+    מדידות מארח, אתחול וה-hash המקורי של צ&#x27;ק-אאוט v0.7.0 עברו; בדיקות Cloudflare
+    לא היו זמינות, כפי שתואר לעיל; המתקין היה שונה מזה ש-v0.7.0
+    בונה, והיה זהה בייט אחר בייט לזה שהקוד של גרסה זו בונה;</li>
+<li>המחיקה מהלוח הסירה בדיוק את השרת וחומת האש שסימנו בפריסה;
+    שרתים וחומות אש אחרים באותו הפרויקט נותרו ללא שינוי.</li>
+</ul>
+<p>טרם נבדק על חשבונות אמיתיים: פריסה תחת הדומיין שלכם (מנהרת Cloudflare ו-
+DNS), ספקים אחרים, פריסת ניפוי באגים ו <code>lock</code>, חשבון Telegram בשרת כזה,
+והעדכונים החיים של גרסאות מאוחרות יותר דרך מנהרה מהירה. בדקו את הפריסה הראשונה אצל
+כל ספק באמצעות <code>plan</code>, פריסת ניפוי באגים ו <code>verify</code> לפני שתסתמכו עליו בתיק.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/HIGH-ASSURANCE.md">ערוך דף זה ב-GitHub ↗</a><a class="next-guide" href="../panel/"><span>השלב הבא</span><strong>מדריך לפאנלים ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../verification/">מה נבדק ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#what-a-verifier-can-check">מה יכול בודק לבדוק</a><a href="#providers">ספקים</a><a href="#confidential-vm-on-phala-cloud-intel-tdx">מכונה וירטואלית סודית ב-Phala Cloud (Intel TDX)</a><a href="#before-you-start">לפני שתתחילו</a><a href="#from-the-panel">מהלוח</a><a href="#quick-tunnel-without-a-domain">מנהרה מהירה ללא דומיין</a><a href="#deploy">פריסה</a><a href="#debug-deployment-and-lock">איתור באגים בפריסה ונעילה</a><a href="#remove-a-deployment">הסרת פריסה</a><a href="#any-server-self-attested">כל שרת (בעל אימות עצמי)</a><a href="#verify">אמת</a><a href="#report-for-evidence-handover">דוח להעברת ראיות</a><a href="#cloudflare-as-an-outside-witness">Cloudflare כעד חיצוני</a><a href="#what-this-does-not-establish">מה שהדבר הזה לא קובע</a><a href="#tested-here">נבדק כאן</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>קוד פתוח · פועל על המחשב שלכם</span><a href="../../../../LICENSE">רישיון MIT</a><a href="../notice/">הודעת המפעיל</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">אבטחה</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "ממתין להודעה", "Step through a fictional send, edit and delete.": "עקבו אחר תהליך דמיוני של שליחה, עריכה ומחיקה.", "No observations yet. Start the sequence or advance one event.": "אין עדיין הערות. התחל את הרצף או עבור לאירוע הבא.", "Meet at 10:00": "נפגש בשעה 10:00", "A new message is visible in the chat.": "הודעה חדשה נראית בצ'אט.", "Record 1 appended: the collector observed the original message.": "הודעה מס' 1 מצורפת: האספן הבחין בהודעה המקורית.", "Meet at 11:00": "נפגש בשעה 11:00", "The current text changes. The earlier observation stays.": "הטקסט הנוכחי משתנה. ההערה הקודמת נשארת.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "רשומה 2 צורפה: העריכה מהווה תצפית חדשה. ברשומה 1 עדיין מופיע הטקסט המקורי.", "Message deleted": "ההודעה נמחקה", "The message has disappeared from the chat view.": "ההודעה נעלמה מתצוגת הצ'אט.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "הוספה של תיעוד 3: הודעת המחיקה נשמרת לצד שתי הגרסאות שנצפו.", "0 records": "0 רשומות", "1 record": "1 רשומה", "2 records": "2 רשומות", "3 records": "3 רשומות", "Complete / {n} of 3": "השלם / {n} מתוך 3", "Step / {n} of 3": "שלב / {n} מתוך 3", "Pause": "הפסקה", "Replay sequence": "רצף השמעה", "Play sequence": "רצף הפעלה", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "דוגמה סטטית זמינה. כדי לחשב חתימות hash באופן אינטראקטיבי, פתחו דף זה ב-HTTPS או בתצוגה מקדימה ב-localhost עם תמיכה ב-Web Crypto.", "No record supplied": "לא נמסר תיעוד", "Tail removed": "הזנב הוסר", "≠ saved hash": "≠ חתימת hash שנשמרה", "Rebuilt · different hash": "נבנה מחדש · חתימה שונה", "= saved hash": "= חתימת hash שנשמרה", "Same length and matching head.": "אורך זהה וכותרת תואמת.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "שלושת ההאשים שחושבו תואמים להאשים שנשמרו. דוגמה זו תואמת את הגבול של שלוש רשומות שנשמר.", "Same saved head; the journal prefix fails verification.": "אותו כותרת שמורה; קידומת היומן נכשלה באימות.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "הרשומה 2 כבר אינה תואמת את ה-hash השמור שלה. בדיקה של ה-head האחרון שנשמר בלבד עלולה לפספס זאת; המאמת בודק כל רשומה.", "Head differs from the retained checkpoint.": "הכותרת שונה מנקודת הבדיקה שנשמרה.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ה-hash המשוחזרים מקושרים זה לזה, אך ה-head הסופי השתנה. נקודת הבדיקה שנשמרה דוחה היסטוריה זו. חתימות מקוריות גם הן לא יאושרו על רשומות ששונו.", "Too short: 2 supplied records \u003c 3 retained records.": "קצר מדי: 2 רשומות שסופקו \u003c 3 רשומות שנשמרו.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "שני ה-hash הנותרים עדיין תואמים. נקודת הבדיקה שנשמרה חושפת את החלק החסר. ללא הגבול הקודם הזה, הקידומת הקצרה הזו לבדה לא הייתה חושפת את ההשמטה.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "חישוב ה-Hash אינו זמין בדפדפן זה. הנוסחאות וההסבר הסטטי המופיעים להלן נותרים זמינים.", "{n} records": "{n} רשומות", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "התקבל: הספירה גדלה, החתימה מאומתת והמפתח תואם. העד שומר על הגבול החדש הזה.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "חזרה לאחור: התשובה החתומה מדווחת על פחות רשומות מאשר נקודת הבדיקה האחרונה שאושרה. ה-Witness מתעד את הבעיה ושומר על הגבול שאושר קודם לכן.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: הספירה נותרה ללא שינוי, אך הראש שונה. ה-witness מתעד את חילוקי הדעות ושומר על הגבול שהתקבל קודם לכן.", "No answer": "אין תשובה", "boundary unknown": "גבול לא ידוע", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "אין תגובה: ה-Witness מתעד את הבדיקה שנכשלה. הוא אינו יכול לקבוע את מצבו הנוכחי של האספן. אם ה-Witness עדיין יכול להגיע ל-Bot API ומדיניות הפרסום שלו מאפשרת זאת, הוא יכול לפרסם את הכישלון הזה.", "Send {n}": "שלח {n}", "Edit {n}": "ערוך {n}", "Delete {n}": "מחק {n}", "Both accounts captured all six expected observations in this example.": "שני החשבונות תיעדו את כל ששת הממצאים הצפויים בדוגמה זו.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "חשבון B עדיין תפס 6 מתוך 6. שתי קבלות לקחו יותר זמן. יחס הלכידה ועיכוב קבלת ההודעות עונים על שאלות שונות.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "חשבון B תפס 5 מתוך 6 עד למועד הסיום (83.3%). לעריכה החסרה אין עיכוב נמדד. תוצאה זו מתארת רק את שש הפעולות המבוקרות.", "not observed by cutoff": "לא נצפה עד למועד הסגירה", "{s} seconds": "{s} שניות", "Exact values follow in the table.": "הערכים המדויקים מופיעים בטבלה.", "{s} s": "{s} s", "Not observed": "לא נצפה", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "ארבעה צ'אטים מספקים תצפיות שונות. יש לעקוב אחר רשומות המקור עבור כל חיבור; אין לייחס את ההודעה בערוץ למשתמש 71001 ללא ציון השולח.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "הרשומות מס' 146 ו-205 מציגות את אותו מזהה שולח, 71001. דבר זה מקשר בין הפוסטים שנצפו בחשבון טלגרם בשני צ'אטים שונים. הוא אינו מזהה אדם אמיתי ואינו מייחס את הפוסט לערוץ.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "כתובת היעד pay.example.invalid/new מופיעה ברישום הקבוצה מס' 146, במקלדת הבוט מס' 173, בעריכת הערוץ מס' 188 ובהודעה פרטית מס' 205. כתובת יעד חוזרת מקשרת בין החומרים; היא אינה מהווה הוכחה לשליטה משותפת בחשבונות אלה.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "בקבלות המדיה המושלמות מס' 151 ו-209 יש ערכי SHA-256 מלאים זהים במקרה הבדיוני הזה. השוו את הבתים בפועל ואת רשומות ההודעות הקשורות אליהם. הקובץ התואם אינו מזהה את יוצרו ואינו מוכיח מי העביר אותו.", "the encrypted off-site copy": "העותק המוצפן מחוץ לאתר", "notifications": "התראות", "checkpoint hashes for timestamps": "חשישי checkpoint עבור חותמות זמן", "signed checkpoints for the witness": "נקודות ביקורת חתומות עבור ה-Witness", "Switched on in this example": "מופעל בדוגמה זו", "Optional · off by default": "אופציונלי · כבוי כברירת מחדל", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "יוצא מהמכשיר הזה: החיבור ל-Telegram ו-{list}. שום דבר אחר.", "Default: only the Telegram connection leaves this machine.": "ברירת מחדל: רק החיבור ל-Telegram יוצא ממחשב זה.", "{done} of {total} done": "{done} מתוך {total} הושלמו", "Mark step {n} as done": "סמן את השלב {n} כ\"בוצע\"", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "העתק", "Copied": "הועתק", "Command copied.": "הפקודה הועתקה.", "Selected — Ctrl/Cmd+C": "נבחר — Ctrl/Cmd+C", "Command selected. Copy it manually.": "הפקודה נבחרה. העתיקו אותה ידנית.", "Command copied to clipboard.": "הפקודה הועתקה ללוח.", "Select text": "בחר טקסט", "Clipboard unavailable. Command selected; copy it manually.": "הלוח אינו זמין. הפקודה נבחרה; העתק אותה ידנית.", "A message arrives. The first observation is saved.": "הודעה נכנסת. התצפית הראשונה נשמרת.", "The time changes. Both captured versions stay.": "הזמן משתנה. שתי הגרסאות שנשמרו נשארות.", "The message disappears. The captured history remains.": "ההודעה נעלמת. ההיסטוריה שנשמרה נשארת.", "Pause example animation": "השהה את האנימציה לדוגמה", "Play example animation": "הפעל אנימציה לדוגמה", "Play": "הפעל", "Full-size workspace screenshot": "צילום מסך של סביבת העבודה בגודל מלא", "Workspace screenshot · fictional data": "צילום מסך של סביבת העבודה · נתונים פיקטיביים", "Close": "סגור", "Close screenshot": "סגור צילום מסך", "Scrollable full-size screenshot": "צילום מסך בגודל מלא הניתן לגלילה", "Enlarge: {name}": "הגדל: {name}", "View full size": "הצג בגודל מלא", "Step {n} of {total}": "שלב {n} מתוך {total}"}</script>
+</body></html>

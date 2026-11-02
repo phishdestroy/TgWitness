@@ -28,7 +28,7 @@ Proszę otworzyć panel z wygenerowanym tokenem w osobnej sesji przeglądarki i 
 
 ## Proszę wybrać uprawnienia
 
-Aby przeprowadzić publiczną prezentację zawierającą wyłącznie tekst, należy skorzystać z **opcji** **„Publiczna prezentacja”** zamiast zwykłego dostępu recenzenta. Wyświetla ona wyraźnie wybrane kanały publiczne, zachowane edycje i usunięcia oraz podpisane statystyki, przy czym pola autora są zamazane, a pliki zamknięte na granicy API. [Utwórz i zweryfikuj prezentację](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+Aby przeprowadzić publiczną prezentację zawierającą wyłącznie tekst, należy skorzystać z **opcji** **„Publiczna prezentacja”** zamiast zwykłego dostępu recenzenta. Wyświetla ona wyraźnie wybrane kanały publiczne, zachowane edycje i usunięcia oraz podpisane statystyki, przy czym pola autora są zamazane, a pliki zamknięte na granicy API. [Utwórz i zweryfikuj prezentację](https://phishdestroy.github.io/TgWitness/pl/docs/reference/showcase/).
 
 | Uprawnienia | Możliwości narzędzia |
 | --- | --- |
@@ -70,7 +70,7 @@ Adres IP to adres klienta widoczny dla aplikacji. W przypadku korzystania z serw
 
 ## Zmiana lub cofnięcie dostępu
 
-Proszę edytować wpis w **sekcji „Dostępy”**, aby zmienić jego zakres, uprawnienia lub ograniczenia. Zmiany zakresu i uprawnień są sprawdzane przy kolejnych żądaniach, w tym przy żądaniach pochodzących z sesji, które są już otwarte. Cofnięcie dostępu powoduje zakończenie sesji i uniemożliwia korzystanie z wydanego tokenu. Funkcja **otwartych sesji** pozwala również administratorowi zakończyć pojedynczą sesję bez konieczności cofania całego dostępu.
+Edytuj wpis w sekcji **„Przyznany dostęp”**, aby zmienić jego zakres, uprawnienia lub ograniczenia. Zmiany zakresu i uprawnień są sprawdzane przy kolejnych żądaniach, w tym przy żądaniach pochodzących z sesji, które są już otwarte. Cofnięcie dostępu kończy sesje i uniemożliwia korzystanie z wydanego tokenu. **Funkcja „Otwarte sesje”** pozwala również administratorowi zakończyć pojedynczą sesję bez cofania całego dostępu.
 
 Zapisane kopie eksportu zachowują informacje o twórcy, obszarze roboczym, zakresie czatu oraz wymaganych uprawnieniach. Osoba, której przyznano dostęp, może wyświetlać lub pobierać własne kopie tylko tak długo, jak długo te uprawnienia są ważne; kopie zawierające Case Board wymagają również uprawnienia „`board.read`”. Administrator może pobrać wszystkie kopie. Starsze kopie bez tych metadanych oraz pakiety grupowe są dostępne wyłącznie dla administratora. Bilety pobierania i przygotowane odpowiedzi plikowe ponownie sprawdzają uprawnienia po przygotowaniu pliku, przed wysłaniem jego danych.
 

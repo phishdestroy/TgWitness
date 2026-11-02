@@ -28,7 +28,7 @@ Ouvrez le panneau contenant le jeton généré dans une session de navigateur di
 
 ## Choisissez les autorisations
 
-Pour une démonstration publique en mode texte uniquement, utilisez **la « vitrine publique »** plutôt qu'un accès « réviseur » classique. Elle affiche explicitement les canaux publics sélectionnés, les modifications et suppressions conservées, ainsi que les statistiques signées, les champs d'auteur étant masqués et les fichiers fermés à la limite de l'API. [Créez et vérifiez une vitrine](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+Pour une démonstration publique en mode texte uniquement, utilisez **la « vitrine publique »** plutôt qu'un accès « réviseur » classique. Elle affiche explicitement les canaux publics sélectionnés, les modifications et suppressions conservées, ainsi que les statistiques signées, les champs d'auteur étant masqués et les fichiers fermés à la limite de l'API. [Créez et vérifiez une vitrine](https://phishdestroy.github.io/TgWitness/fr/docs/reference/showcase/).
 
 | Autorisation | Ce qu’il permet |
 | --- | --- |
@@ -70,7 +70,7 @@ L'adresse IP correspond à l'adresse du client telle qu'elle est perçue par l'a
 
 ## Modifier ou retirer l'accès
 
-Modifiez une entrée sous **« Accès »** pour modifier sa portée, ses autorisations ou ses limites. Les modifications de portée et d’autorisations sont vérifiées lors des requêtes suivantes, y compris les requêtes provenant de sessions déjà ouvertes. La révocation d’un accès met fin à ses sessions et rend le jeton émis inutilisable. La gestion **des sessions ouvertes** permet également à l’administrateur de mettre fin à une session individuelle sans révoquer l’accès dans son intégralité.
+Modifiez une entrée sous **« Accès accordé »** pour modifier sa portée, ses autorisations ou ses limites. Les modifications de portée et d’autorisations sont vérifiées lors des requêtes suivantes, y compris les requêtes provenant de sessions déjà ouvertes. La révocation d’un accès met fin à ses sessions et rend le jeton émis inutilisable. La fonctionnal**ité « Sessions ouvertes »** permet également à l’administrateur de mettre fin à une session individuelle sans révoquer l’accès dans son intégralité.
 
 Les copies d'exportation enregistrées conservent leur créateur, leur espace de travail, la portée de la conversation et les autorisations requises. Un utilisateur disposant d’un accès peut répertorier ou télécharger ses propres copies uniquement tant que ces autorisations sont encore valides ; les copies contenant le « Case Board » nécessitent également l’autorisation « `board.read` ». L’administrateur peut récupérer toutes les copies. Les copies plus anciennes ne comportant pas ces métadonnées et les lots de groupes sont réservés à l’administrateur. Les tickets de téléchargement et les réponses de fichiers préparées vérifient à nouveau les droits d’accès après la préparation du fichier, avant l’envoi de ses octets.
 

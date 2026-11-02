@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/
 
 圖文並茂的指南
 
-[### 案件看板 請確保觀察結果、精確引述及團隊筆記保持關聯性。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/case-board/) [### 報告工作室 請選擇素材及八種報告設計之一。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reports/) [### 分享副本 請根據收件者所需欄位，準備一份經簽署的摘錄文件。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/handover/) [### 帳戶群組 請共同審查帳戶，並將各帳戶的工作區分開。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/groups/)
+[### 案件看板 請確保觀察結果、精確引述及團隊筆記保持關聯性。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/case-board/) [### 報告工作室 請選擇素材及八種報告設計之一。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reports/) [### 分享副本 請根據收件者所需欄位，準備一份經簽署的摘錄文件。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/handover/) [### 帳號群組 請共同審查帳戶，並將各帳戶的工作區分開。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/groups/)
 
 [## 模式、情境與證據等級 收集範圍、事件邊界、八種驗證機制以及六個虛構的調查情境。](https://phishdestroy.github.io/TgWitness/zh-Hant/guides/modes.html)
 
@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/
 
 設定
 
-[快速入門](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)[帳戶與會話格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/)[存取與權限](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)[連線、代理伺服器與資料保護](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/)[部署](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
+[快速入門](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)[安裝、驗證與更新](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/)[首次設定與設定選項](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/settings/)[帳戶與會話格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/)[存取與權限](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)[連線、代理伺服器與資料保護](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/)[部署](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)[高可信度部署](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/)
 
 收集
 
-[資料蒐集原理](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/)[載入來源歷史紀錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/history/)[工作流程與操作](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/operations/)[調查模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)[功能與限制](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/)
+[面板指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/)[資料蒐集原理](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/)[載入來源歷史紀錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/history/)[工作流程與操作](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/operations/)[調查模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)[功能與限制](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/)
 
 存檔與整合功能
 
-[「案件看板」參考說明](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/)[檔案分析](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/)[唯讀 MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/)[本地 OCR 與文字轉錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/)[外發 Webhook](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/webhooks/)
+[「案件看板」參考說明](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/)[檔案分析](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/)[唯讀 MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/)[本地 OCR 與文字轉錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/)[外發 Webhook](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/webhooks/)[公開展示](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/showcase/)
 
 證據
 
-[證據的運作方式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/)[報告配置與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)[證據格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)[獨立見證人](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/)[時間戳記](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/timestamp/)
+[證據的運作方式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/)[報告配置與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)[帳戶匯出](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/account-export/)[證據格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)[獨立見證人](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/)[時間戳記](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/timestamp/)[儲存與還原](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/)
 
 安全性與專案
 

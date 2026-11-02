@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/case-
 
 Case Board מספק לצוות החקירה תצוגה משותפת של החומר שנשמר. ניתן לסמן הערה, להדגיש קטע מדויק, לשמור רצף פעולות ולדון בו עם עמיתים. הכרטיסים שומרים על הפניות למקורותיהם ועל היסטוריית הגרסאות החתומה. ההערות של הצוות נשארות בסביבת העבודה, וניתן לזהותן בנפרד מהתצפיות המקוריות ב-Telegram.
 
-[מודל הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/) · [גישה](https://phishdestroy.github.io/TgWitness/he/docs/reference/access/) · [דוחות](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/) · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[מודל הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/) · [גישה](https://phishdestroy.github.io/TgWitness/he/docs/reference/access/) · [דוחות](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/)
 
 ![עדכון חקירה סינתטי](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

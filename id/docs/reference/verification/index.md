@@ -97,7 +97,7 @@ Entri-entri lama di bawah ini menjelaskan proses pengujian masing-masing; sebagi
 
 Ini adalah catatan pengujian historis dari versi asli yang dipilih secara manual. Untuk mode pool otomatis dan IP saat ini, lihat [pengaturan koneksi](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/#ip-modes). Jumlah dan fitur yang tidak didukung di bawah ini merupakan bagian dari revisi yang diuji tersebut.
 
-Menambahkan snapshot publik yang dibundel dan penyegaran HTTPS eksplisit dari SoliSpirit/mtproto dan zakky8/mtproto-proxy-pro. Di host ini, pengunduh aplikasi berhasil mengambil kedua umpan pada tanggal 29 Oktober 2026 pukul 12:58 UTC: **118 titik akhir unik yang kompatibel** setelah penyaringan, penghapusan duplikat, dan batasan 64 entri per sumber. Hal ini memverifikasi pengambilan daftar, bukan konektivitas atau pengiriman pesan melalui titik akhir tersebut. Tidak ada akun nyata yang terhubung ke proxy yang terdaftar selama pekerjaan ini. [Panduan operator dan pengguna](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/PROXIES.md).
+Ditambahkan snapshot publik yang dibundel dan penyegaran HTTPS eksplisit dari SoliSpirit/mtproto dan zakky8/mtproto-proxy-pro. Di host ini, pengunduh aplikasi berhasil mengambil kedua umpan tersebut pada 29 Oktober 2026 pukul 12:58 UTC: **118 titik akhir unik yang kompatibel** setelah penyaringan, penghapusan duplikat, dan batasan 64 entri per sumber. Hal ini memverifikasi pengambilan daftar, bukan konektivitas atau pengiriman pesan melalui titik-titik akhir tersebut. Tidak ada akun nyata yang terhubung ke proxy yang terdaftar selama pekerjaan ini. [Panduan operator dan pengguna](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md).
 
 Respons sumber yang gagal/kosong/tidak kompatibel tetap mempertahankan entri dan tanggal sebelumnya. Pembaruan tidak mengubah rute yang dipilih. Alamat publik divalidasi dan IP yang diselesaikan disematkan saat dipilih; rute operator/manual tetap terpisah. Uji koneksi kini tersedia di panel sebelum masuk ke akun. TLS ee palsu dan pemilihan proxy otomatis masih tidak didukung. Katalog operator sepenuhnya menggantikan langganan.
 
@@ -111,7 +111,7 @@ Bukti: `test-results/public-proxy-research/download-receipt.json`, `test-results
 
 ## Presentasi fitur tambahan opsional · 29 Oktober 2026
 
-Tujuan bot Proof sebelumnya kini menjadi **Extras**: ikhtisar singkat yang diikuti oleh halaman pengaturan terpisah untuk opsi yang dipilih. Formulir saksi memiliki tiga langkah, dengan pengelolaan koneksi, opsi jaringan, dan detail penerapan yang disembunyikan. GitHub secara eksplisit direncanakan dan tidak memiliki formulir kredensial. [Ikhtisar dalam bahasa Rusia](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/EXTRAS.md).
+Tujuan bot Proof sebelumnya kini menjadi **Extras**: ikhtisar singkat yang diikuti oleh halaman pengaturan terpisah untuk opsi yang dipilih. Formulir saksi memiliki tiga langkah, dengan pengelolaan koneksi, opsi jaringan, dan detail penerapan yang disembunyikan. GitHub secara eksplisit direncanakan dan tidak memiliki formulir kredensial. [Ikhtisar Extras](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#extras).
 
 - 30 tes terfokus telah dilalui untuk lokalisasi, pengaturan TgWitness, dan pemeriksaan publikasi.
 - Pengujian penerimaan pengaturan Chromium lulus dalam bahasa Inggris/Rusia, mode terang/gelap, pada resolusi 390/1440 piksel: fokus keyboard dan tombol Enter, tidak ada koneksi tersembunyi saat memilih fitur tambahan, penyimpanan draf, unduhan konfigurasi/token yang disematkan, penghapusan token saat terkunci, dan tautan panduan lokal yang berfungsi. Pemeriksaan tata letak dan kontras teks dengan latar belakang solid telah lulus.
@@ -124,7 +124,7 @@ Tanda terima: `test-results/setup-browser/receipt.json`, `test-results/quick-nav
 
 ## Audit pengaturan bot dan proxy Witness · 29 Oktober 2026
 
-Pengaturan saksi (sekarang **Ekstra → Bot di saluran Anda**) menyiapkan saksi yang dihosting secara independen: kunci pengumpul yang disematkan , unduhan token berskala, saluran sendiri, kebijakan publikasi, rute HTTP/SOCKS5, dan API Bot khusus. Token bot tetap berada di host saksi. Kunci `--check-config` barunya memvalidasi konfigurasi dan berkas tanpa membuka koneksi jaringan atau membuat kunci. Jalur berkas JSON diresolusi di samping konfigurasi. Semua varian saksi Compose kini meneruskan pengaturan proxy HTTP dan Bot API.
+Pengaturan saksi (sekarang **Ekstra → Saksi independen**) menyiapkan saksi yang diterapkan secara independen: kunci pengumpul yang disematkan , unduhan token berskala, saluran sendiri, kebijakan publikasi, rute HTTP/SOCKS5, dan API Bot khusus. Token bot tetap berada di host saksi. Fitur barunya `--check-config` memvalidasi konfigurasi dan berkas tanpa membuka koneksi jaringan atau membuat kunci. Jalur berkas JSON diselesaikan di samping konfigurasi. Semua varian saksi Compose kini meneruskan pengaturan proxy HTTP dan Bot API.
 
 Pengaturan akun mendukung katalog MTProxy publik yang dikelola operator, pratinjau tautan proxy Telegram kustom, dan bidang manual yang sudah ada. Respons katalog menghilangkan informasi rahasia; pemilihan menyimpan rute di brankas ruang kerja. Katalog yang hilang atau rusak membuat rute manual tetap tersedia. Tidak ada alamat proxy proyek atau layanan saksi yang dihosting yang diciptakan atau diaktifkan secara default. Contoh Caddy hanya mengekspos titik akhir head yang terbatas ketika saksi eksternal harus menjangkau pengumpul yang panelnya tetap bersifat pribadi.
 
@@ -136,7 +136,7 @@ Validasi:
 - Ruff, pemeriksaan sumber/tautan, serta penguraian YAML Compose/alur kerja telah lulus.
 - Roda yang dibangun ulang telah lulus pemeriksaan instalasi terisolasi, panel/sumber daya statis, dan otentikasi API, serta verifikasi independen terhadap ekspor sintetis 32 peristiwa, baik yang langsung maupun yang dialirkan.
 
-Bukti: `test-results/setup-full-suite.log`, `setup-final-focused.log`, `setup-browser/receipt.json`, `setup-browser-final.log`, dan `setup-package.log`. Pemeriksaan ini menggunakan akun sintetis/proksi dan fixture Bot API lokal. Pemeriksaan ini tidak mengklaim adanya publikasi bot yang sebenarnya, server MTProxy publik yang berfungsi, eksekusi CI jarak jauh, atau penyebaran Docker. Riwayat pengamatan Telegram yang sebenarnya yang disimpan di atas tetap menjadi bukti terpisah. [Petunjuk pengaturan](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+Bukti: `test-results/setup-full-suite.log`, `setup-final-focused.log`, `setup-browser/receipt.json`, `setup-browser-final.log` dan `setup-package.log`. Pengujian ini menggunakan akun sintetis/proksi dan fixture Bot API lokal. Pengujian ini tidak mengklaim adanya publikasi bot yang sebenarnya, server publik yang aktif MTProxy, eksekusi CI jarak jauh, atau penyebaran Docker. Riwayat pengamatan Telegram asli yang disimpan di atas tetap menjadi bukti terpisah. [Petunjuk pengaturan](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/#run-a-witness).
 
 ## Tinjauan presentasi dan dokumentasi · 29 Oktober 2026
 

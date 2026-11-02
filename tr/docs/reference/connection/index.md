@@ -81,26 +81,26 @@ Dönüştürme işlemi, orijinal mesajları, varlık önbelleğini veya kalıcı
 
 MTProto, Telegram'ın protokolüdür. Telethon, TgWitness'in kullandığı Python istemci kütüphanesidir. MTProxy, bir Telegram aktarım proxy'sidir; SOCKS5 ve HTTP CONNECT genel tüneller sağlar. Hiçbiri hesap kimlik doğrulamasının yerini almaz.
 
-Giriş yapmadan önce **Hesap → Ayarlar → Bağlantı ayarları → Bağlantı yolunu değiştir** seçeneğinden her bir çalışma alanı için yolu kaydedin. Yeni çalışma alanları varsayılan olarak **Otomatik MTProxy ·** IP Gizleme özelliğine sahip **genel listeler** olarak ayarlanır. Doğrudan (Direct) seçeneğini açıkça kullanan mevcut çalışma alanları, bunu izin veren modu korur.
+Giriş yapmadan önce **Hesap → Ayarlar → Bağlantı ayarları → Bağlantı yolunu değiştir** seçeneğinden her çalışma alanı için yolu kaydedin. Yeni çalışma alanları varsayılan olarak **Otomatik MTProxy · adresi gizle** seçeneğine sahip **genel listeler** olarak ayarlanır. Direct'i açıkça kullanan mevcut çalışma alanları, bunu izin veren modu korur.
 
 ## IP modları
 
-Yol, bağlantıyı seçer. IP modu, sunucunun adresinin ne zaman ifşa olabileceğini belirler. Bu denetimler bir VPN kurmaz veya tüm makine trafiğini yönlendirmez.
+Yol, bağlantıyı seçer. Panelin Hesap bölümündeki IP modu ve **IP koruması**, sunucunun adresinin ne zaman açığa çıkabileceğini belirler. Bu denetimler bir VPN kurmaz veya tüm makine trafiğini yönlendirmez.
 
 | Mod | Telegram | Dış talepler |
 | --- | --- | --- |
-| Hide IP (`hide`) | Bir proxy kullanın; hiçbiri çalışmazsa bekleyin. Doğrudan yedek çözüm yoktur. | SOCKS5/HTTP gerektirir; uygun bir proxy içermeyen istekleri reddeder. |
-| Yedek seçeneğe izin ver (`fallback`) | Otomatik MTProxy, yapılandırılan gecikme süresinin ardından Direct'i kullanabilir, ardından çalışan bir proxy'ye geri dönebilir. | Önceden yapılandırılmış bir harici proxy veya hesabın SOCKS5/HTTP yolunu tercih edin; aksi takdirde Direct kullanımına izin verilir. |
-| Tünel / VPN (`tunnel`) | Doğrudan yollar ve anında otomatik havuz yedeklemesi izin verilir. | Uygulanabilir bir proxy yapılandırılmamışsa doğrudan erişim izin verilir. |
+| Adresi gizle (`hide`) | Bir proxy kullanın; hiçbiri çalışmazsa bekleyin. Doğrudan yedek çözüm yoktur. | SOCKS5/HTTP gerektirir; uygun bir proxy içermeyen istekleri reddeder. |
+| Son çare olarak Direct (`fallback`) | Otomatik MTProxy, yapılandırılan gecikme süresinin ardından Direct'i kullanabilir, ardından çalışan bir proxy'ye geri dönebilir. | Önceden yapılandırılmış bir harici proxy veya hesabın SOCKS5/HTTP yolunu tercih edin; aksi takdirde Direct kullanımına izin verilir. |
+| Tünel veya VPN arkasında bulunan sunucu (`tunnel`) | Doğrudan yollar ve anında otomatik havuz yedeklemesi izin verilir. | Uygulanabilir bir proxy yapılandırılmamışsa doğrudan erişim izin verilir. |
 
-Tünel/VPN modu, söz konusu ağı ayrı olarak yönettiğinizi varsayar. Çalışır durumda bir tünel olmadan, hedefler sunucunun kendi adresini görebilir. Modu, seçeneğin adına göre değil, gerçek ağınıza göre seçin.
+Tünel veya VPN modu, bu ağı ayrı olarak yönettiğinizi varsayar. Çalışır durumda bir tünel olmadan, hedefler sunucunun kendi adresini görebilir. Modu, seçeneğin adına göre değil, gerçek ağınıza göre seçin.
 
 ### Bir yol seçin
 
 | Yol | Ayarlar | Sınır |
 | --- | --- | --- |
 | Otomatik MTProxy | Yerleşik listeler veya bir operatör kataloğu | Çalışır durumda bir Telegram rotası sağlar; doğrudan yedekleme, IP moduna bağlıdır |
-| Doğrudan | Tünel/VPN modu | Telethon, sunucunun ağ yolunu kullanır |
+| Doğrudan | Tünel veya VPN modu | Telethon, sunucunun ağ yolunu kullanır |
 | SOCKS5 | Sunucu, bağlantı noktası, isteğe bağlı kullanıcı adı/şifre | python-socks, uzaktaki hedef DNS etkinleştirildi |
 | HTTP CONNECT | Sunucu, bağlantı noktası, isteğe bağlı kullanıcı adı/şifre | Düz HTTP CONNECT; proxy sunucusuna yönelik TLS desteği uygulanmamıştır |
 | MTProxy | Sunucu, bağlantı noktası, gizli anahtar | Deneysel Telethon aktarım biçimi; 32 onaltılık basamak veya `dd` + 32 onaltılık basamak |
@@ -121,13 +121,13 @@ Başarısız, boş veya uyumsuz besleme yanıtlarında önceki kaynak anlık gö
 
 **Telegram trafiği ve HTTPS istekleri farklı yollar kullanır.** Liste indirmeleri, ayrı bir HTTPS bağlantısı ve sağlanan harici istek yolunu kullanır. `TGWITNESS_PROXY_FEED_PROXY`, bu yolu bir HTTP/SOCKS5 proxy ile açıkça geçersiz kılar; her iki Compose toplayıcı varyantı da bunu iletir. Arka plan havuzu, ana çalışma alanını takip eder. Feed sağlayıcılara hiçbir Telegram oturumu, API kimlik bilgileri, panel jetonu veya bot jetonu gönderilmez. Sağlayıcı adları, anlık görüntü tarihleri ve indirme yolu, **“Listenin kaynağı”** bölümünde görünür.
 
-Bir MTProxy yalnızca Telegram trafiğini taşır. Zaman damgaları, bildirimler, site dışı kopyalar ve kaynak kontrolleri gibi çalışma alanı HTTP işlemleri, yapılandırıldığında ayrı bir SOCKS5/HTTP proxy'si kullanır, ardından hesabın SOCKS5/HTTP yolunu kullanır. Her ikisi de yoksa, Hide IP isteği reddeder; diğer modlar Doğrudan erişime izin verir. Dış istekler devre dışı bırakılabilir. Açıkça yapılandırılmış bir besleme indirme proxy’si, ayrı bir operatör geçersiz kılma seçeneği olarak kalır. Bağımsız tanık hizmeti kendi rotasını korur.
+MTProxy, yalnızca Telegram trafiğini taşır. Zaman damgaları, bildirimler, site dışı kopyalar ve kaynak kontrolleri gibi çalışma alanı HTTP işlemleri, yapılandırıldığında ayrı bir SOCKS5/HTTP proxy'si kullanır, ardından hesabın SOCKS5/HTTP rotasını kullanır. Her ikisi de yoksa, "Adresi Gizle" seçeneği isteği reddeder; diğer modlar "Doğrudan" seçeneğine izin verir. Harici istekler devre dışı bırakılabilir. Açıkça yapılandırılmış bir besleme indirme proxy'si, ayrı bir operatör geçersiz kılma seçeneği olarak kalır. Bağımsız tanık hizmeti kendi yolunu korur.
 
 SOCKS5 veya HTTP proxy'leri aracılığıyla yapılan, yalnızca genel erişime açık harici HTTP istekleri, `https://1.1.1.1/dns-query` adresindeki Cloudflare DNS over HTTPS ile aynı proxy üzerinden hedefi çözümler. Yalnızca ana bilgisayar adı ve A/AAAA sorgu türleri çözümleyiciye gönderilir; hizmet URL'leri, kimlik bilgileri ve bildirim içerikleri dahil edilmez. TLS, çözümleyicinin IP adresi için sertifikasını doğrular. Her iki adres ailesi de kontrol edilir ve özel, geri döngü, bağlantı-yerel veya ayrılmış yanıtlar isteği reddeder. Bağlantılar, hizmetin orijinal HTTP Ana Bilgisayarı ve TLS sertifika adını korurken, doğrulanmış sayısal bir adres kullanır. Bildirim HTTP yönlendirmesi ve CONNECT istekleri aynı hedef denetimlerini kullanır. DNS hatası, yerel hedef DNS veya doğrudan yedekleme olmadan isteği durdurur. Başarılı yanıtlar, proxy rotası başına en fazla 30 saniye ve DNS TTL'lerinden daha uzun olmamak kaydıyla bellekte önbelleğe alınır; önbellek 128 girdiyle sınırlıdır. Proxy ana bilgisayar adı kendisi yerel DNS kullanabilir. SOCKS ve CONNECT hataları, hizmet isteği gövdesini göndermeden önce başka bir doğrulanmış adresi deneyebilir. Düz HTTP yönlendirmesi, isteğin başarısız olduğunu bildirir ve gövdesini başka bir adres üzerinden otomatik olarak tekrar göndermez.
 
 Operatör tarafından yönetilen özel hizmetler için, mevcut sunucu ortamı ayarı `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1`, özel hedefleri izin verir ve proxy tarafında ana bilgisayar adı çözümlemesini korur. Bu ayar panelden etkinleştirilemez. Yalnızca genel mod, genel çözümleyicisine sorgu göndermeden önce `.onion` hedeflerini reddeder; Tor onion hizmetleri, bu açık özel hedef ayarını ve uygun bir proxy gerektirir. Bu DNS davranışı, Telegram'ın aktarım protokolü için değil, harici HTTP işlemleri için geçerlidir. Cloudflare, [JSON DNS uç](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) noktasını belgelemektedir.
 
-****Otomatik havuz parametreleri**** **Parametreler → Otomatik MTProxy** altında, hata eşiğini, bekleme süresini, planlı rotasyonu, proxy paylaşımını ve izin verilen yedekleme gecikmesini yapılandırın. | Kontrol | Varsayılan | | --- | --- | | Değiştirilmeden önce bağlantı kesme | 10 dakika içinde 3 kez | | Bağlantı denemesi başına denenecek proxy sayısı | 3 | | Hata sonrası ilk / maksimum bekleme süresi | 10 dakika / 6 saat | | Planlı rotasyon | Devre dışı; arıza durumunda etkinleştir | | Proxy başına hesap sayısı | 0: ayrı girişleri tercih edin, gerektiğinde paylaşın. Özel bir girişi beklemek için 1'i ayarlayın. | | İzin verilen Direct yedeklemesinden önceki gecikme | 10 dakika; Hide IP hala Direct'i reddediyor | | Besleme yenileme / aktarım kontrolleri | 60 / 10 dakika; ana çalışma alanı değerleri paylaşılan havuz için geçerlidir | Farklı proxy'ler, farklı çıkış adreslerini garanti etmez. Bu ayarlar, Telegram sınırlarını geçersiz kılmaz veya anonimliği garanti etmez.
+****Otomatik havuz parametreleri**** **Parametreler → Otomatik MTProxy** altında, hata eşiğini, bekleme süresini, planlı rotasyonu, proxy paylaşımını ve izin verilen yedekleme gecikmesini yapılandırın. | Kontrol | Varsayılan | | --- | --- | | Değiştirme öncesi bağlantı kesme | 10 dakika içinde 3 kez | | Bağlantı denemesi başına denenecek proxy sayısı | 3 | | Hata sonrası ilk / maksimum bekleme süresi | 10 dakika / 6 saat | | Planlı rotasyon | Devre dışı; hata durumunda etkinleştir | | Proxy başına hesap sayısı | 0: ayrı girişleri tercih edin, gerektiğinde paylaşın. Özel bir girişi beklemek için 1'i ayarlayın. | | Doğrudan yedeklemeye izin verilmeden önceki gecikme | 10 dakika; adres hâlâ Doğrudan'ı reddediyorsa gizle | | Besleme yenileme / aktarım kontrolleri | 60 / 10 dakika; ana çalışma alanı değerleri paylaşılan havuz için geçerlidir | Farklı proxy'ler, farklı çıkış adreslerini garanti etmez. Bu ayarlar, Telegram sınırlarını geçersiz kılmaz veya anonimliği garanti etmez.
 
 Genel listeyi kendi operatör kataloğunuzla değiştirmek için aşağıdaki geçersiz kılma ayarını yapılandırın. Bu ayar, `proxies` dizisi boş olduğunda da dahil olmak üzere harici abonelikleri tamamen devre dışı bırakır.
 

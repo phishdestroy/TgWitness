@@ -19,7 +19,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/deplo
 | Windows 版 Docker 辅助工具 | `scripts\Docker.cmd` | 是的；该辅助程序会等待 Web 服务器的运行状态。 |
 | Linux/macOS 上的 Docker 辅助工具 | `sh scripts/docker-start.sh` | 是的；该辅助程序会等待 Web 服务器的运行状态。 |
 
-关于第三方应能进行核查的云服务器——该服务器通过 服务商的 API 创建，不使用 SSH，仅可通过 Cloudflare Tunnel 访问——请参阅 [“高可信度部署”](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md)。
+关于第三方应能进行核查的云服务器——该服务器通过 服务商的 API 创建，不使用 SSH，仅可通过 Cloudflare Tunnel 访问——请参阅 [“高可信度部署”](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/)。
 
 原生启动程序会生成一个私有`.venv`，并安装已固定的依赖项。 Docker会在镜像内部构建这些依赖项，无需主机端的Python。首次 设置需要互联网连接。 若未检测到 Python 3.11 及以上版本，`Start.cmd` 会在 为当前 Windows 用户安装 Python 3.12 之前征得用户同意（使用 winget，否则在验证 Python 软件基金会签名后使用 python.org 安装程序）；该过程绝不会请求 管理员权限。Docker 和操作系统服务仍是必备条件。
 
@@ -250,7 +250,7 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 ## 连接与保护选项
 
-连接路径按工作区设置，应在授权前进行配置。 SOCKS5/HTTP CONNECT 使用固定的 python-socks 依赖项。MTProxy 使用 Telethon 的 实验性随机中间传输协议；不支持 Fake TLS ee 密钥。 直接回退取决于所选的 [IP 模式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/#ip-modes)：“隐藏 IP”模式不允许直接回退；显式回退模式在延迟后允许直接回退；隧道/VPN 模式允许直接路由，但不会建立 VPN。这并非全系统范围的网络策略。
+连接路径按工作区划分，应在授权前进行配置。 SOCKS5/HTTP CONNECT 使用固定的 python-socks 依赖项。MTProxy 使用 Telethon 的 实验性随机化中间传输；不支持伪 TLS ee 密钥。 直接回退取决于所选的 [IP 模式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/#ip-modes)：**“隐藏地址**”模式会拒绝直接连接；**“直接连接（作为最后手段）**”模式则会在延迟后允许直接连接。**位于隧道或 VPN 后的服务器**允许直接连接，但不会建立 VPN。这并非全系统的网络策略。
 
 对于新安装，TGWITNESS_VAULT_KEY_FILE 应指向一个单独受保护的随机 主密钥文件。请在容器外的 /data 目录下以只读方式挂载该文件。请将每个工作区的 vault.external.json 公开盐元数据与主密钥分别妥善保存。 现有本地保险库需要进行有计划的迁移；设置此变量不会 自动将其转换。消息/媒体存储和导出内容未经过应用程序加密。 请根据需要使用加密卷和足够的私有临时存储空间。
 

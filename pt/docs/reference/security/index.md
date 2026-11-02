@@ -48,7 +48,7 @@ Para um novo diretório de dados, o TGWITNESS_VAULT_KEY_FILE pode fornecer uma c
 
 A configuração do proxy é criptografada no cofre. Senhas e segredos do MTProxy não são retornados pela API nem registrados nos registros de evidências. Cada espaço de trabalho escolhe sua rota do Telegram e um [modo de IP](https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/#ip-modes).
 
-O modo “Ocultar IP” recusa o fallback direto do Telegram e requer um proxy para solicitações HTTP externas. O modo de fallback explicitamente selecionado permite o acesso direto ao Telegram após um certo atraso; o modo “túnel/VPN” permite rotas diretas. A escolha do modo de túnel não instala nem verifica uma VPN. Essas configurações não controlam todo o tráfego da máquina, navegadores, gerenciadores de pacotes ou a resolução de DNS do host do proxy local.
+**A opção “Ocultar o endereço”** desativa o fallback direto do Telegram e exige um proxy para solicitações HTTP externas. O modo de fallback explicitamente selecionado permite o acesso direto ao Telegram após um atraso; o modo túnel/VPN permite rotas diretas. A escolha do modo túnel não instala nem verifica uma VPN. Essas configurações não controlam todo o tráfego da máquina, navegadores, gerenciadores de pacotes ou a resolução de DNS do proxy local.
 
 O MTProxy transporta apenas o tráfego do Telegram. Solicitações externas podem utilizar um proxy SOCKS5/HTTP separado, a rota SOCKS5/HTTP do espaço de trabalho ou uma rota direta permitida; elas também podem ser desativadas. A testemunha independente possui suas próprias configurações de transporte. A autenticação CONNECT padrão do SOCKS5/HTTP não é criptografada por esses próprios protocolos de proxy. Segredos TLS falsos do MTProxy continuam sem suporte.
 

@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 
 מדריכים מאוירים
 
-[### Case Board יש לשמור על הקשר בין תצפיות, ציטוטים מדויקים והערות הצוות.](https://phishdestroy.github.io/TgWitness/he/docs/case-board/) [### סטודיו לדוחות בחרו את החומר ואת אחד משמונת עיצובי הדוחות.](https://phishdestroy.github.io/TgWitness/he/docs/reports/) [### שיתוף הטקסט הכן תמצית חתומה הכוללת את השדות הדרושים למקבל.](https://phishdestroy.github.io/TgWitness/he/docs/handover/) [### קבוצות חשבונות יש לעיין בחשבונות יחד ולשמור על הפרדה בין סביבות העבודה שלהם.](https://phishdestroy.github.io/TgWitness/he/docs/groups/)
+[### Case Board יש לשמור על הקשר בין תצפיות, ציטוטים מדויקים והערות הצוות.](https://phishdestroy.github.io/TgWitness/he/docs/case-board/) [### סטודיו לדוחות בחרו את החומר ואת אחד משמונת עיצובי הדוחות.](https://phishdestroy.github.io/TgWitness/he/docs/reports/) [### שיתוף העתק הכן תמצית חתומה הכוללת את השדות הדרושים למקבל.](https://phishdestroy.github.io/TgWitness/he/docs/handover/) [### קבוצות חשבונות יש לעיין בחשבונות יחד ולשמור על הפרדה בין סביבות העבודה שלהם.](https://phishdestroy.github.io/TgWitness/he/docs/groups/)
 
 [## מצבים, תרחישים ורמות ראיות היקפי איסוף, גבולות אירועים, שמונה מנגנוני אימות וששה תרחישי חקירה בדיוניים.](https://phishdestroy.github.io/TgWitness/he/guides/modes.html)
 
@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 
 הגדרה
 
-[התחלה מהירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)[חשבונות ופורמטים של הפעלות](https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/)[גישה והרשאות](https://phishdestroy.github.io/TgWitness/he/docs/reference/access/)[חיבור, פרוקסי והגנה על נתונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/)[פריסה](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
+[התחלה מהירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)[התקנה, אימות ועדכון](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/)[התקנה ראשונית והגדרות](https://phishdestroy.github.io/TgWitness/he/docs/reference/settings/)[חשבונות ופורמטים של הפעלות](https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/)[גישה והרשאות](https://phishdestroy.github.io/TgWitness/he/docs/reference/access/)[חיבור, פרוקסי והגנה על נתונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/)[פריסה](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)[פריסה ברמת אבטחה גבוהה](https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/)
 
 אסף
 
-[כיצד מתבצע האיסוף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/)[טען היסטוריית המקור](https://phishdestroy.github.io/TgWitness/he/docs/reference/history/)[תהליכי עבודה ותפעול](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/)[מצב חקירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)[תכונות ומגבלות](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/)
+[מדריך לפאנלים](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/)[כיצד מתבצע האיסוף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/)[טען היסטוריית המקור](https://phishdestroy.github.io/TgWitness/he/docs/reference/history/)[תהליכי עבודה ותפעול](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/)[מצב חקירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)[תכונות ומגבלות](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/)
 
 ארכיון ושילובים
 
-[הפניה ל-Case Board](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/)[ניתוח ארכיונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/analysis/)[MCP לקריאה בלבד](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/)[OCR מקומי ותמלול](https://phishdestroy.github.io/TgWitness/he/docs/reference/media-analysis/)[webhooks יוצאים](https://phishdestroy.github.io/TgWitness/he/docs/reference/webhooks/)
+[הפניה ל-Case Board](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/)[ניתוח ארכיונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/analysis/)[MCP לקריאה בלבד](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/)[OCR מקומי ותמלול](https://phishdestroy.github.io/TgWitness/he/docs/reference/media-analysis/)[webhooks יוצאים](https://phishdestroy.github.io/TgWitness/he/docs/reference/webhooks/)[תצוגה ציבורית](https://phishdestroy.github.io/TgWitness/he/docs/reference/showcase/)
 
 ראיות
 
-[כיצד פועלת הראיה](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/)[תצורת הדוח ואימותו](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/)[פורמט הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)[עד עצמאי](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/)[חותמות זמן](https://phishdestroy.github.io/TgWitness/he/docs/reference/timestamp/)
+[כיצד פועלת הראיה](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/)[תצורת הדוח ואימותו](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/)[ייצוא חשבונות](https://phishdestroy.github.io/TgWitness/he/docs/reference/account-export/)[פורמט הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)[עד עצמאי](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/)[חותמות זמן](https://phishdestroy.github.io/TgWitness/he/docs/reference/timestamp/)[אחסון ושחזור](https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/)
 
 אבטחה ופרויקט
 

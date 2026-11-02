@@ -235,7 +235,7 @@ TData คือโฟลเดอร์`tdata` ของแอปพลิเค
 - **การสนทนาที่หลายบัญชีสามารถดูได้:** แหล่งข้อมูลที่แชร์, บัญชีที่ติดตามการสนทนาเหล่านั้น และ การขัดจังหวะในช่วงเวลาการติดตามในพื้นที่ทำงานที่มีอยู่ (สูงสุด 7 วัน) **การส่งออกด้วย N บัญชี** จะแบ่งการส่งออกช่องหรือกลุ่มใหญ่ระหว่างบัญชีเหล่านั้น และลงนามในไฟล์เก็บถาวรหนึ่งไฟล์
 - **ส่งออกกลุ่ม:**ZIP หนึ่งอัน พร้อมกับการส่งออกที่ลงนามของแต่ละบัญชีภายใต้ `accounts/` และ `manifest.json` แสดงรายการSHA-256 และลายนิ้วมือกุญแจ ซึ่งได้รับการลงนามโดยพื้นที่ทำงานหลัก ใน `manifest.signature.json`. ตรวจสอบไฟล์เก็บถาวรของแต่ละบัญชีแยกกันด้วย `python -m tgwitness.verify` และลายนิ้วมือที่เชื่อถือได้ของบัญชีนั้น
 
-สมาชิกจะแบ่งปันการตั้งค่าของกลุ่ม; แต่บัญชีแต่ละบัญชีสามารถเก็บค่าการตั้งค่าของตัวเองได้ [ดูการตั้งค่าที่แบ่งปัน](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups) [คู่มือการนำเข้าและกลุ่ม](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) [และแดชบอร์ดกลุ่มMTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)
+สมาชิกจะแบ่งปันการตั้งค่าของกลุ่ม; แต่บัญชีแต่ละบัญชีสามารถเก็บค่าการตั้งค่าของตัวเองได้ [ดูการตั้งค่าที่แบ่งปัน](https://phishdestroy.github.io/TgWitness/th/docs/reference/settings/#account-groups) [คู่มือการนำเข้าและกลุ่ม](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) [และแดชบอร์ดกลุ่มMTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)
 
 ## ออกจากระบบ
 
@@ -278,6 +278,6 @@ TData คือโฟลเดอร์`tdata` ของแอปพลิเค
 | ID บัญชีไม่ตรงกับบัญชีที่นำเข้า | ID ผู้ใช้ของไฟล์นี้แตกต่างจากที่ Telegram รายงาน; ไฟล์นี้ใช้สำหรับบัญชีอื่น |
 | บัญชีนี้อยู่ในพื้นที่ทำงานอื่นแล้ว | เปิดพื้นที่ทำงานนั้นแทนที่จะเพิ่มบัญชีสองครั้ง |
 | มีการเชื่อมต่อ แต่กลุ่มส่วนตัวหนึ่งขาดหายไปจากรายชื่อแชทใน**ส่วนแหล่งข้อมูล** | ตรวจสอบสมาชิกภาพ ตัวเลือกจะตรวจสอบการสนทนา 1,000 ครั้งแรก; เพิ่มขีดจำกัดในส่วน **Parameters** |
-| การเชื่อมต่อผ่านพร็อกซีล้มเหลว | ตรวจสอบโหมดการกำหนดเส้นทางและโหมด IP โหมด MTProxy อัตโนมัติจะลองใช้ทางเข้าอื่นที่ทำงานได้ โหมดซ่อน IP จะรอ; โหมดสำรองที่เลือกไว้อย่างชัดเจนสามารถเชื่อมต่อโดยตรงหลังจากช่วงเวลาหน่วงที่กำหนดไว้ [ดูโหมดการกำหนดเส้นทาง](https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/#ip-modes) |
+| การเชื่อมต่อผ่านพร็อกซีล้มเหลว | ตรวจสอบโหมดเส้นทางและ IP ระบบจะลองใช้ทางเข้าอื่นที่ทำงานได้โดยอัตโนมัติ MTProxy ซ่อนการรอที่อยู่; Direct เป็นทางเลือกสุดท้ายที่สามารถเชื่อมต่อโดยตรงหลังจากช่วงเวลาหน่วงที่กำหนดไว้ ดู[โหมดการกำหนดเส้นทาง](https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/#ip-modes) |
 
 ดูเพิ่มเติม: [การเชื่อมต่อและความปลอดภัย](https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/)สำหรับพร็อกซีและการเข้ารหัส, [และวิธีการทำงานของการเก็บ](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/)ข้อมูลสำหรับเนื้อหาที่ถูกบันทึกหลังการลงชื่อเข้าใช้
