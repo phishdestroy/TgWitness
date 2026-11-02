@@ -110,6 +110,7 @@ def disclosure_checks():
             assert http.get(child_url + '?ws=default', headers=root_headers).status_code == 404
             # A refused route policy cannot partly overwrite the saved settings.
             before = app.state.collector.policy_state()
+            assert before['outside_enabled'] is False
             denied = http.post('/api/network/policy', headers=root_headers, json={'exposure': 'hide', 'outside_enabled': True})
             assert denied.status_code == 400, (denied.status_code, denied.content)
             assert app.state.collector.policy_state() == before

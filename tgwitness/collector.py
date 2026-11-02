@@ -723,7 +723,9 @@ class Collector:
         """This workspace's IP mode; a workspace that chose a direct route before the modes existed keeps it."""
         saved = self.store.get_setting("route_policy", None)
         if saved is None:
-            return RoutePolicy(exposure="tunnel" if self.network_config().kind == "direct" else "hide").model_dump()
+            kind = self.network_config().kind
+            return RoutePolicy(exposure="tunnel" if kind == "direct" else "hide",
+                               outside_enabled=kind in ("direct", "socks5", "http") or self.outside_proxy() is not None).model_dump()
         return RoutePolicy.model_validate(saved).model_dump()
 
     def outside_proxy(self):
