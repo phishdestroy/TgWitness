@@ -80,6 +80,15 @@ class RunningApp:
 
 
 def unlock(page, server, *, start=False):
+    if not start and not server.app.state.store.get_setting("demo", False):
+        # Legacy feature checks explicitly skip onboarding and use all controls.
+        # test_settings_hub.py exercises the untouched first-run defaults separately.
+        store = server.app.state.store
+        if not store.get_setting('first_run', None):
+            store.set_setting('first_run', {'skipped': True})
+        if not store.get_setting('ui_preferences:admin', None):
+            store.set_setting('ui_preferences:admin', {'language':'en', 'theme':'system', 'level':'expert',
+                'timezone':page.evaluate("Intl.DateTimeFormat().resolvedOptions().timeZone")})
     page.goto(server.url)
     if server.app.state.store.get_setting("demo",False):
         expect(page.locator("#workspace")).to_be_visible()
@@ -141,6 +150,14 @@ def answer_panel_dialog(page, accept=True, text=None):
 def navigate_panel(page, view):
     """Use the same navigation on desktop and the mobile menu."""
     button = page.locator(f'.sidebar [data-view="{view}"]')
+    if not page.evaluate('!!state.status?.demo'):
+        page.wait_for_function('!!document.documentElement.dataset.uiLevel')
+    level=button.get_attribute('data-level')
+    current=page.locator('html').get_attribute('data-ui-level')
+    rank={'simple':0,'standard':1,'expert':2}
+    if level in rank and current in rank and rank[level]>rank[current]:
+        page.locator('select.level-pick').select_option(level)
+        expect(page.locator('html')).to_have_attribute('data-ui-level',level)
     toggle = page.locator("#navigation-toggle")
     if page.viewport_size["width"] < 768 and toggle.get_attribute("aria-expanded") != "true":
         toggle.click()
