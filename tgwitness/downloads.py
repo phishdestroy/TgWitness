@@ -1,4 +1,3 @@
-"""Own temporary downloads across worker cancellation and broken HTTP connections."""
 from pathlib import Path
 
 from starlette.responses import FileResponse
@@ -28,3 +27,15 @@ class TemporaryDownload(FileResponse):
             await super().__call__(scope, receive, send)
         finally:
             Path(self.path).unlink(missing_ok=True)
+
+
+class RetainedDownload(FileResponse):
+    def __init__(self, path, *, release, **kwargs):
+        super().__init__(path, **kwargs)
+        self.release = release
+
+    async def __call__(self, scope, receive, send):
+        try:
+            await super().__call__(scope, receive, send)
+        finally:
+            self.release()

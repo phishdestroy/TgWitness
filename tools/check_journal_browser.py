@@ -1,4 +1,3 @@
-"""Journal filters, navigation and evidence inspection on a synthetic local archive."""
 import argparse
 from datetime import datetime, timedelta, timezone
 import hashlib
@@ -251,6 +250,7 @@ def inspector(page):
     page.wait_for_function("seq=>state.drawerSeq!==seq", arg=first)
     page.locator(f'#events-body .event-row[data-seq="{first}"]').click()
     page.wait_for_function("seq=>state.drawerSeq===seq", arg=first)
+    expect(drawer.locator('.lineage button').first).to_be_visible()
     page.evaluate("""()=>[...document.querySelector('#detail-drawer').querySelectorAll('button,summary,a,audio,video,[tabindex="0"]')]
       .filter(n=>!n.disabled&&n.getClientRects().length).at(-1).focus()""")
     page.keyboard.press("Tab")
@@ -262,14 +262,13 @@ def inspector(page):
     page.locator(".journal-json summary").click()
     expect(page.locator(".journal-json .json-key").first).to_be_visible()
     assert page.locator(".journal-json code").inner_text() == page.evaluate("JSON.stringify(state.events.find(e=>e.seq===state.drawerSeq),null,2)")
-    # Token markup contains text only, and even a long signed record has a bounded DOM preview.
     safe = page.evaluate("""async()=>{
       const {signedRecordPreview}=await import('/components/journal.js?v=4');
       const value={text:'<img src=x onerror="window.__journal_xss=1">',long:'x'.repeat(200000)};
       const preview=signedRecordPreview(value,{node,tr});document.body.append(preview);preview.open=true;
       await new Promise(resolve=>setTimeout(resolve,50));
       const result={size:preview.querySelector('code').textContent.length,images:preview.querySelectorAll('img').length,
-        hint:preview.querySelector('.hint')?.textContent,ran:window.__journal_xss||false};preview.remove();return result;
+        hint:[...preview.querySelectorAll('.hint')].map(item=>item.textContent).join(' '),ran:window.__journal_xss||false};preview.remove();return result;
     }""")
     assert safe["size"] == 120000 and safe["images"] == 0 and not safe["ran"] and "complete record" in safe["hint"]
     for width, height in ((1440, 1000), (390, 844)):

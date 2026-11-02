@@ -1,4 +1,3 @@
-"""Exercise quick navigation with synthetic data, keyboard, locales and narrow screens."""
 import json
 import tempfile
 
@@ -33,7 +32,7 @@ def main():
             page.locator("#quick-open").click()
             expect(dialog).to_be_visible()
             expect(search).to_be_focused()
-            destinations = ["start", "chats", "observations", "sources", "evidence", "accounts", "witness",
+            destinations = ["start", "board", "chats", "observations", "sources", "evidence", "settings", "accounts", "witness",
                             "parameters", "connection", "access", "system-log", "integrations"]
             expect(dialog.get_by_role("option")).to_have_count(len(destinations))
             actual_destinations = dialog.get_by_role("option").evaluate_all(
@@ -115,7 +114,7 @@ def main():
                     page.keyboard.press("Escape")
 
             for lang, query in (("ru", "журнал"), ("ar", "observations")):
-                context.add_cookies([{"name": "tgwitness-lang", "value": lang, "url": server.url}])
+                page.evaluate("lang=>{const url=new URL(location.href);url.searchParams.set(\"lang\",lang);history.replaceState(null,\"\",url);}",lang)
                 page.reload()
                 expect(page.locator("#workspace")).to_be_visible()
                 page.keyboard.press("Control+k")
@@ -124,7 +123,6 @@ def main():
                 expected = ["observations", "system-log"] if lang == "ru" else ["observations"]
                 expect(destinations).to_have_count(len(expected))
                 assert destinations.evaluate_all("nodes=>nodes.map(node=>node.dataset.destination)") == expected
-                # Both Russian labels contain "журнал"; select the intended destination explicitly.
                 journal = dialog.locator('[data-destination="observations"]')
                 expect(journal).to_be_visible()
                 journal.click()

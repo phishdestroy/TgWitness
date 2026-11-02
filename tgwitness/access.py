@@ -1,14 +1,7 @@
-"""Who opens the panel, what they see and do there, and the main administrator's console.
-
-The panel token (panel-token.txt) stays the main administrator's key. The administrator issues
-further access: a token is shown once and the vault keeps only its SHA-256. Each access opens the
-workspaces and chats it names, with the permissions ticked for it, and can be bound to addresses,
-a number of sign-ins, an end date and a number of parallel sessions. Signing in with any token
-starts a session; the panel then works with the session, which can be listed and ended.
-"""
 import hashlib
 import ipaddress
 import logging
+import os
 import re
 import secrets
 import sys
@@ -17,21 +10,42 @@ import time
 from collections import deque
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Literal
+from typing import Callable, Literal
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import BaseModel, Field, StrictBool, field_validator, model_validator
 
 from .store import utcnow
+from .operator_privacy import private_log
 
 LOG = logging.getLogger("tgwitness.access")
 JOURNAL_LOG = logging.getLogger("tgwitness.journal")
 
-PERMISSIONS = ("view", "export", "sources", "collect", "interact", "settings", "account")
+PERMISSIONS = ("view", "export", "sources", "collect", "interact", "settings", "account", "board.read", "board.write", "board.manage")
 ADMIN_DEFAULTS = {"max_sessions": 0, "on_limit": "replace", "session_minutes": 720}
 WORKSPACE_ID = re.compile(r"default|[a-f0-9]{32}")
+GROUP_ID = re.compile(r"[a-f0-9]{32}")
 
 
 POLICY = {
+    "GET /api/board": ("board.read", "filter"),
+    "GET /api/board/card/{identifier}": ("board.read", "body"),
+    "GET /api/board/card/{identifier}/participants": ("board.read", "body"),
+    "GET /api/board/slice/{identifier}/records": ("board.read", "body"),
+    "GET /api/board/slice/{identifier}/export": ("board.read", "body"),
+    "GET /api/board/export": ("board.read", "body"),
+    "POST /api/board/slice-preview": ("board.read", "body"),
+    "POST /api/board/{action}": ("board.write", "body"),
+    "GET /api/showcase": ("showcase", "root"),
+    "GET /api/showcase/{workspace_id}": ("showcase", "root"),
+    "GET /api/showcase/{workspace_id}/chats/{chat_id}": ("showcase", "root"),
+    "POST /api/auth/import/preview": ("account", None),
+    "GET /api/exports/{export_id}/download": ("export", None),
+    "POST /api/exports/{export_id}/ticket": ("export", None),
+    "POST /api/privacy/reveal": ("view", "body"),
+    "GET /api/services/notifications": ("settings", None),
+    "POST /api/analysis/context-export": ("export", "root"),
+    "GET /api/preferences": ("view", "root"),
+    "POST /api/preferences": ("view", "root"),
     "GET /api/analysis/provider": ("view", "root"),
     "GET /api/analysis/media": ("view", "root"),
     "POST /api/analysis/media": ("view", "root"),
@@ -62,19 +76,23 @@ POLICY = {
     "GET /api/scope": ("view", None),
     "GET /api/evidence": ("view", None),
     "GET /api/source-check": ("view", None),
-    "GET /api/replica": ("view", None),
+    "GET /api/replica": ("settings", None),
     "GET /api/health": ("view", None),
-    "GET /api/alerts": ("view", None),
-    "GET /api/parameters": ("view", None),
+    "GET /api/alerts": ("settings", None),
+    "GET /api/parameters": ("settings", None),
+    "GET /api/mode": ("view", None),
     "GET /api/checkpoint": ("view", None),
     "GET /api/run-receipt": ("view", None),
     "POST /api/verify": ("view", None),
     "GET /api/exports/history": ("export", None),
     "GET /api/export/{fmt}": ("export", None),
     "POST /api/export/{fmt}": ("export", None),
+    "POST /api/handover": ("export", "body"),
     "GET /api/anchor-request": ("export", None),
     "GET /api/report-options": ("view", None),
     "POST /api/report-options": ("export", None),
+    "POST /api/report-preview": ("export", None),
+    "POST /api/report-design-preview": ("export", None),
     "GET /api/chats/{chat_id}/dossier/export": ("export", "path"),
     "POST /api/chats/{chat_id}/dossier/export": ("export", "path"),
     "POST /api/chat-export/start": ("export", "body"),
@@ -117,6 +135,7 @@ POLICY = {
     "POST /api/alerts": ("settings", None),
     "POST /api/alerts/test": ("settings", None),
     "POST /api/parameters": ("settings", None),
+    "PATCH /api/mode": ("settings", None),
     "GET /api/witness": ("settings", None),
     "POST /api/witness/tokens": ("settings", None),
     "DELETE /api/witness/tokens/{token_id}": ("settings", None),
@@ -147,7 +166,7 @@ QUIET_KINDS = ("message.", "reaction.", "membership.", "media.saved", "collector
 
 
 class Refused(Exception):
-    """The access exists but may not do this; the text is shown in the panel."""
+    pass
 
 
 def digest(token):
@@ -160,10 +179,12 @@ def unix_iso(value):
 
 class GrantSettings(BaseModel):
     label: str = Field(min_length=1, max_length=80)
+    showcase: StrictBool = False
     permissions: list[Literal[PERMISSIONS]] = Field(default_factory=lambda: ["view"], max_length=len(PERMISSIONS))
     all_workspaces: bool = False
 
     workspaces: dict[str, list[int] | None] = Field(default_factory=dict, max_length=1000)
+    groups: list[str] = Field(default_factory=list, max_length=100)
     ips: list[str] = Field(default_factory=list, max_length=100)
     bind_first_ip: bool = False
     max_uses: int | None = Field(default=None, ge=1, le=1000000)
@@ -199,9 +220,19 @@ class GrantSettings(BaseModel):
                 if not chats or len(chats) > 10000:
                     raise ValueError("Choose at least one chat, or open the whole workspace.")
                 self.workspaces[key] = sorted(set(chats))
-        if not self.all_workspaces and not self.workspaces:
+        if any(not GROUP_ID.fullmatch(group) for group in self.groups):
+            raise ValueError("Unknown account group.")
+        self.groups = sorted(set(self.groups))
+        if not self.all_workspaces and not self.workspaces and not self.groups:
             raise ValueError("Choose at least one workspace for this access.")
         self.permissions = [p for p in PERMISSIONS if p in {"view", *self.permissions}]
+        if self.showcase:
+            if self.all_workspaces or self.groups or any(chats is None for chats in self.workspaces.values()):
+                raise ValueError("A showcase opens only explicitly selected public channels.")
+            if len(self.workspaces) > 16 or sum(len(chats) for chats in self.workspaces.values()) > 64:
+                raise ValueError("A showcase supports up to 16 workspaces and 64 channels.")
+            if self.permissions != ["view"]:
+                raise ValueError("A showcase is read-only. Additional permissions are not allowed.")
         return self
 
 
@@ -217,35 +248,42 @@ class Principal:
     label: str
     grant: dict | None = None
     session_id: str | None = None
+    group_of: Callable | None = None
 
     @property
     def owner(self):
         return "admin" if self.admin else self.grant["id"]
 
+    def by_group(self, profile_id):
+        groups = self.grant.get("groups") or []
+        return bool(groups and self.group_of and self.group_of(profile_id) in groups)
+
     def opens(self, profile_id):
-        return self.admin or self.grant["all_workspaces"] or profile_id in self.grant["workspaces"]
+        return (self.admin or self.grant["all_workspaces"] or profile_id in self.grant["workspaces"]
+                or self.by_group(profile_id))
 
     def chats(self, profile_id):
-        """None: every chat of the workspace; otherwise the only chat IDs this access sees."""
-        if self.admin or self.grant["all_workspaces"]:
+        if self.admin or self.grant["all_workspaces"] or self.by_group(profile_id):
             return None
         listed = self.grant["workspaces"].get(profile_id)
         return None if listed is None else set(listed)
 
     def may(self, permission):
+        if not self.admin and self.grant.get("showcase"):
+            return permission == "showcase"
         return self.admin or permission in self.grant["permissions"]
 
     def public(self):
         if self.admin:
             return {"admin": True, "label": self.label, "permissions": list(PERMISSIONS), "all_workspaces": True,
                     "workspaces": {}, "expires_at": None}
-        return {"admin": False, "label": self.label, "permissions": self.grant["permissions"],
+        return {"admin": False, "label": self.label, "showcase": bool(self.grant.get("showcase")),
+                "permissions": ["showcase"] if self.grant.get("showcase") else self.grant["permissions"],
                 "all_workspaces": self.grant["all_workspaces"], "workspaces": self.grant["workspaces"],
-                "expires_at": unix_iso(self.grant["expires_at"])}
+                "groups": self.grant.get("groups") or [], "expires_at": unix_iso(self.grant["expires_at"])}
 
 
 def check(principal, profile_id, rule, path_params):
-    """Raises Refused if an issued access may not make this request."""
     if principal.admin:
         return
     if rule is None:
@@ -264,13 +302,16 @@ def check(principal, profile_id, rule, path_params):
 
 
 class Console(logging.Handler):
-    """Everything the process logs since it started, kept in memory for the administrator's console."""
-
     def __init__(self, size=5000):
         super().__init__(logging.INFO)
         self.lines, self.counter, self.guard = deque(maxlen=size), 0, threading.Lock()
+        self.last = None
 
     def emit(self, record):
+        with self.guard:
+            if record is self.last:
+                return
+            self.last = record
         try:
             text = record.getMessage()
             if record.exc_info and record.exc_info[1] is not None:
@@ -280,7 +321,7 @@ class Console(logging.Handler):
         with self.guard:
             self.counter += 1
             self.lines.append({"n": self.counter, "at": utcnow(), "level": record.levelname,
-                               "source": record.name, "text": text[:2000]})
+                               "source": record.name, "text": private_log(text[:8000])[:2000]})
 
     def after(self, n, limit=500):
         with self.guard:
@@ -311,22 +352,42 @@ class Console(logging.Handler):
 
 
 class AccessControl:
-    """Issued accesses (in the vault) and the open sessions of the whole installation."""
-
     def __init__(self, vault, store, console=None):
+        from .live_stream import StreamSlots
+        self.stream_slots = StreamSlots()
         self.vault, self.store = vault, store
         saved = vault.read("access")
         self.grants = saved.get("grants", [])
         now = time.time()
-        self.sessions = {s["sha256"]: {**s, "requests": 0} for s in saved.get("sessions", []) if s["expires"] > now}
+        saved_sessions = saved.get("sessions", []) if saved.get("panel_key") == digest(vault.token) else []
+        self.sessions = {s["sha256"]: {**s, "agent": "", "requests": 0}
+                         for s in saved_sessions if s["expires"] > now}
         self.lock = threading.RLock()
         self.console = console or Console()
         self.labels = lambda profile_id: profile_id
+        self.group_of = None
+        if any(s.get("agent") for s in saved.get("sessions", [])):
+            self.save()
 
 
     def save(self):
         sessions = [{k: v for k, v in s.items() if k != "requests"} for s in self.sessions.values()]
-        self.vault.save("access", {"grants": self.grants, "sessions": sessions})
+        self.vault.save("access", {"grants": self.grants, "sessions": sessions, "panel_key": digest(self.vault.token)})
+
+    def rotate_token(self):
+        from .security import private_write
+        if os.environ.get("TGWITNESS_TOKEN"):
+            raise Refused("The main token is set by TGWITNESS_TOKEN. Change that setting and restart the panel.")
+        token = secrets.token_urlsafe(32)
+        with self.lock:
+            count = len(self.sessions)
+            private_write(self.vault.root / "panel-token.txt", token.encode())
+            self.vault.token = token
+            self.sessions.clear()
+            self.save()
+        self.store.append("access.main_token_rotated", {"sessions_ended": count})
+        LOG.info("Main panel token replaced; %d sessions ended", count)
+        return token, count
 
     def admin_settings(self):
         return {**ADMIN_DEFAULTS, **self.store.get_setting("access_admin", {})}
@@ -353,7 +414,6 @@ class AccessControl:
         return not grant.get("bound_ip") or grant["bound_ip"] == str(ip)
 
     def refuse(self, grant, address, now, signing_in):
-        """Raises Refused (and logs it) if this access may not be used now from this address."""
         try:
             if grant["expires_at"] is not None and now >= grant["expires_at"]:
                 raise Refused("This access has expired.")
@@ -372,7 +432,6 @@ class AccessControl:
 
 
     def login(self, token, address, agent):
-        """A new session for a valid token, or None for an unknown token. Raises Refused."""
         now = time.time()
         with self.lock:
             for sha in [k for k, s in self.sessions.items() if s["expires"] <= now]:
@@ -402,7 +461,7 @@ class AccessControl:
                     grant["bound_ip"] = address
             session_token = "tgws_" + secrets.token_urlsafe(32)
             session = {"sha256": digest(session_token), "id": secrets.token_hex(8), "owner": owner,
-                       "address": address, "agent": (agent or "")[:200], "created": now, "last_seen": now,
+                       "address": address, "agent": "", "created": now, "last_seen": now,
                        "expires": now + settings["session_minutes"] * 60, "requests": 0}
             self.sessions[session["sha256"]] = session
             self.save()
@@ -415,10 +474,9 @@ class AccessControl:
         if session["owner"] == "admin":
             return Principal(True, "Main administrator", None, session["id"])
         grant = self.grant(session["owner"])
-        return Principal(False, grant["label"], grant, session["id"])
+        return Principal(False, grant["label"], grant, session["id"], self.group_of)
 
     def resolve(self, credential, address):
-        """The principal behind a bearer credential, or None. Raises Refused."""
         if secrets.compare_digest(digest(credential), digest(self.vault.token)):
             return Principal(True, "Main administrator (panel token)")
         now = time.time()
@@ -447,7 +505,6 @@ class AccessControl:
             return self.principal(session)
 
     def end(self, session_id, reason):
-        """Close a session; with a reason the journal records it."""
         with self.lock:
             found = next((s for s in self.sessions.values() if s["id"] == session_id), None)
             if found is None:
@@ -463,9 +520,10 @@ class AccessControl:
 
 
     def journal_view(self, grant):
-        return {"access_id": grant["id"], **{k: grant[k] for k in (
+        return {"access_id": grant["id"], "showcase": bool(grant.get("showcase")), **{k: grant[k] for k in (
             "label", "permissions", "all_workspaces", "workspaces", "ips", "bind_first_ip", "max_uses",
-            "max_sessions", "on_limit", "session_minutes")}, "expires_at": unix_iso(grant["expires_at"])}
+            "max_sessions", "on_limit", "session_minutes")}, "groups": grant.get("groups") or [],
+            "expires_at": unix_iso(grant["expires_at"])}
 
     def issue(self, settings: GrantSettings):
         if settings.expires_at is not None and settings.expires_at <= time.time():
@@ -485,6 +543,8 @@ class AccessControl:
             grant = self.grant(grant_id)
             if grant is None:
                 raise Refused("Unknown access.")
+            if bool(grant.get("showcase")) != settings.showcase:
+                raise Refused("Create a new access to change between a showcase and ordinary panel access.")
             if settings.expires_at is not None and settings.expires_at <= time.time():
                 raise Refused("Choose an end date in the future.")
             if not settings.bind_first_ip:
@@ -511,6 +571,16 @@ class AccessControl:
             self.save()
         self.store.append("access.revoked", {"access_id": grant_id, "label": grant["label"]})
         LOG.info("Access %s revoked", grant["label"])
+
+    def forget_group(self, group_id):
+        with self.lock:
+            changed = [g for g in self.grants if group_id in (g.get("groups") or [])]
+            for grant in changed:
+                grant["groups"] = [g for g in grant["groups"] if g != group_id]
+            if changed:
+                self.save()
+        for grant in changed:
+            self.store.append("access.changed", self.journal_view(grant))
 
     def set_admin(self, settings: AdminSettings):
         with self.store.transaction():
@@ -545,7 +615,6 @@ class AccessControl:
                 "permissions": list(PERMISSIONS)}
 
     def journal_listener(self, profile_id):
-        """Mirror journal records of one workspace into the console (without message content)."""
         def listen(event):
             if event["kind"].startswith(QUIET_KINDS):
                 return

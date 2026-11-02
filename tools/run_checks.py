@@ -1,11 +1,4 @@
-"""Run explicit independent CI checks, with bounded concurrency and durable results.
-
-Each check runs in its own process and temporary directory. No shell or wildcard
-discovery is used. Failure does not prevent the remaining checks from running.
-Timeout cleanup has a five-second budget. Process-tree termination is best
-effort; a descendant that detaches itself may survive, but cannot hold the runner
-open through an inherited output pipe.
-"""
+"""Run explicit independent CI checks, with bounded concurrency and durable results."""
 import argparse
 import asyncio
 from dataclasses import dataclass
@@ -25,18 +18,37 @@ ROOT = Path(__file__).resolve().parents[1]
 MAX_LOG_BYTES = 4 * 1024**2
 SUITES = {
     "browser": (
+        "test_case_board.py", "test_case_board_api.py", "check_case_board_browser.py",
+        "check_showcase.py", "check_showcase_browser.py",
+        "test_settings_hub.py", "test_case_assessment.py", "test_group_settings.py", "test_group_overview.py",
+        "check_operator_security.py", "check_operator_browser.py",
+        "check_guided_connection.py", "check_guided_connection_browser.py",
         "check_session_reservations.py", "check_account_recovery.py",
         "check_browser.py", "check_mcp_transport.py", "check_integrations_browser.py",
         "check_mcp_browser.py", "check_settings_browser.py", "check_analysis_browser.py",
         "check_account_browser.py", "check_fleet_browser.py", "check_proxy_async_browser.py",
         "check_export_async_browser.py", "check_account_export_browser.py", "check_refresh_browser.py",
-        "check_account_reports.py",
+        "check_account_reports.py", "check_report_design.py", "check_report_studio.py", "test_snapshot_analytics.py", "test_report_analytics.py", "test_report_composition.py", "check_report_builder_browser.py",
+        "test_report_selection.py", "test_report_selection_exports.py", "test_report_history_context.py", "check_report_selection_browser.py",
+        "test_report_record_metadata.py", "test_pdf_record_metadata.py",
+        "test_report_styles.py", "test_report_styles_pdf.py", "check_report_styles_browser.py", "check_report_style_documents.py",
+        "check_independent_report_designs_browser.py",
+        "test_account_report_layouts.py",
+        "test_independent_report_html.py", "test_independent_report_pdf.py",
         "check_analyst_browser.py", "check_history_browser.py", "check_sealed_browser.py",
         "check_interactions_browser.py", "check_workspace_browser.py", "check_quick_browser.py",
         "check_proof_browser.py", "check_setup_browser.py", "check_public_proxies_browser.py",
-        "check_capture_language_browser.py",
+        "check_capture_language_browser.py", "check_application_guides.py",
     ),
     "browser-ux": (
+        "test_audit_security_fixes.py", "test_audit_data_fixes.py", "test_audit_platform_fixes.py",
+        "test_release_data_fixes.py",
+        "test_proxy_destination_dns.py",
+        "test_ai_routes.py",
+        "check_audit_frontend_browser.py",
+        "check_bootstrap_recovery_browser.py",
+        "check_import_preflight.py", "check_chat_safety_browser.py", "check_workspace_downloads_browser.py",
+        "check_storage_services.py", "check_prepared_export_access.py", "check_services_browser.py",
         "check_workflows_browser.py", "check_disclosure_preview_browser.py", "check_handoff_languages_browser.py",
         "check_router_browser.py", "check_view_host_browser.py", "check_view_lifecycle_browser.py",
         "check_polling_browser.py", "check_time_browser.py", "check_shell_browser.py",
@@ -46,8 +58,11 @@ SUITES = {
         "check_account_states_browser.py",
         "check_access_sections_browser.py", "check_journal_browser.py", "check_exports_browser.py",
         "check_controls_browser.py", "check_quick_search_browser.py",
+        "check_cloud_wizard.py", "check_evidence_witnesses.py", "check_setup_levels.py", "check_first_run.py",
+        "check_group_settings_browser.py", "check_group_screen_browser.py", "check_gateway_dns.py", "check_tdx.py", "check_phala.py",
     ),
-    "site": ("check_site.py", "check_docs_site.py", "check_report_example.py"),
+    "site": ("check_site.py", "check_docs_site.py", "check_docs_workflows.py", "test_site_metadata.py",
+             "check_report_example.py", "check_guide_languages.py"),
 }
 
 
@@ -58,7 +73,6 @@ class Check:
 
 
 async def stop_process(process):
-    """Stop descendants too: a timed-out check may own a browser and an app."""
     if os.name == "nt":
         killer = await asyncio.create_subprocess_exec(
             str(Path(os.environ.get("SystemRoot", r"C:\Windows")) / "System32/taskkill.exe"),
@@ -73,7 +87,6 @@ async def stop_process(process):
             os.killpg(process.pid, signal.SIGTERM)
         except ProcessLookupError:
             pass
-        # Also kill descendants that ignored TERM, even if their parent exited.
         try:
             await asyncio.wait_for(process.wait(), 2)
         except TimeoutError:
@@ -91,13 +104,10 @@ async def stop_process(process):
 
 
 async def finish_output(process, reader, log, result):
-    """Escaped descendants must not turn a timeout into an unbounded pipe wait."""
     try:
         result["output_truncated"] = await asyncio.wait_for(asyncio.shield(reader), 2)
     except TimeoutError:
         result["output_interrupted"] = result["output_truncated"] = True
-        # asyncio has no public StreamReader.close(). Close its pipe transport.
-        # This also releases a pending Windows Proactor pipe read.
         transport = getattr(process.stdout, "_transport", None)
         if transport is not None:
             transport.close()
@@ -110,7 +120,6 @@ async def finish_output(process, reader, log, result):
 
 
 async def capture_output(stream, log):
-    """Drain all output, while bounding each artifact and memory consumption."""
     kept = total = 0
     limit = MAX_LOG_BYTES - 256
     while chunk := await stream.read(65536):
@@ -144,7 +153,6 @@ async def run_one(check, output, timeout, cwd):
                     stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT, **kwargs)
                 reader = asyncio.create_task(capture_output(process.stdout, log))
                 try:
-                    # Include output draining: orphan children must not hold a pipe forever.
                     await asyncio.wait_for(asyncio.gather(process.wait(), asyncio.shield(reader)), timeout)
                     result["status"] = "passed" if process.returncode == 0 else "failed"
                 except TimeoutError:

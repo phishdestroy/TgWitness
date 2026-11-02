@@ -1,4 +1,3 @@
-"""Analyst workflow acceptance against a local synthetic journal. No Telegram traffic."""
 import hashlib
 import json
 import tempfile
@@ -8,7 +7,7 @@ from types import SimpleNamespace as NS
 from PIL import Image, ImageDraw
 from playwright.sync_api import expect, sync_playwright
 
-from check_browser import ROOT, RunningApp, hold_api_response, launch_browser, release_api_response, unlock
+from check_browser import ROOT, RunningApp, answer_panel_dialog, hold_api_response, launch_browser, release_api_response, unlock
 from tools.browser_fixtures import CHAT, FakeClient, saved_session
 
 
@@ -241,6 +240,7 @@ def source_checks(page, server, output):
     page.locator("#target-list .source-select").check()
     page.locator("#target-bulk-action").select_option("pause")
     page.locator("#target-bulk-apply").click()
+    answer_panel_dialog(page)
     expect(page.locator("#target-list .source-state")).to_have_text("Paused")
     assert not server.app.state.store.targets()[0]["enabled"]
     page.locator("#target-filter").select_option("paused")
@@ -288,7 +288,6 @@ def palette_checks(page):
     expect(page.locator("#quick-option-workspace-default")).to_be_visible()
     page.locator("#quick-option-workspace-default").click()
     expect(page.locator("#profile-select")).to_have_value("default")
-    # Wait for the final syncLive before installing the synthetic stream.
     page.wait_for_function("()=>state.profile==='default'&&!document.querySelector('#workspace').inert")
 
 
@@ -372,6 +371,7 @@ def batch_lock(page):
     hold_api_response(page, "/targets/batch")
     page.locator("#target-bulk-action").select_option("pause")
     page.locator("#target-bulk-apply").click()
+    answer_panel_dialog(page)
     expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
     for button in page.locator("#target-bulk-actions button").all():
         expect(button).to_be_disabled()

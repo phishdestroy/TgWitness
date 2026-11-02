@@ -2,6 +2,7 @@
 
 - [Home](Home.md)
 - [Getting started](Getting-Started.md)
+- [Panel guide](../PANEL.md)
 
 **01 · Connect and capture**
 
@@ -13,6 +14,8 @@
 
 - [Export one chat](Chat-Export.md)
 - [Investigations](Investigations.md)
+- [Case Board](../CASE-BOARD.md)
+- [Report studio](../CASE_REPORTS.md)
 - [Archive, AI and integrations](Archive-and-Integrations.md)
 - [Exports and verification](Exports-and-Verification.md)
 

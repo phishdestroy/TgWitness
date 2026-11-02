@@ -9,8 +9,9 @@ import json
 import re
 from datetime import datetime
 
-from . import i18n
-from .report import Words
+from . import case_assessment, i18n, report_layouts, snapshot_analytics
+from .report_analytics import Presentation
+from .report import DOSSIER_CSS, Words
 
 MEDIA_PATH = re.compile(r'media/[0-9a-f]{64}\Z')
 COUNT_LABELS = {'messages': 'Messages', 'chats': 'Chats', 'media': 'Media files included',
@@ -141,11 +142,16 @@ def opening(context, title, sharing=False):
     kind = say('Sharing copy') if sharing else say('Account export')
     lead = (say('A minimized, signed copy for review and sharing. The original account export is unchanged.') if sharing else
             say('A snapshot of history visible to this Telegram account during acquisition.'))
-    yield encoded('<!doctype html><html lang="' + say.language + '" dir="' + say.direction + '"><head><meta charset="utf-8">'
+    design = Presentation.model_validate(context.get('presentation') or {}).design
+    # Keep older frozen jobs readable while new layouts share the report palette.
+    template = {'quire': 'editorial', 'atlas': 'analytical'}.get(design, 'dossier')
+    layout_attribute = ' data-report-design="' + design + '"' if design in report_layouts.DESIGNS else ''
+    yield encoded('<!doctype html><html data-template="' + template + '"' + layout_attribute + ' lang="' + say.language + '" dir="' + say.direction + '"><head><meta charset="utf-8">'
                   '<meta name="viewport" content="width=device-width,initial-scale=1">'
                   '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">'
-                  '<title>' + e(title) + ' · TgWitness</title><style>' + CSS + '</style></head><body><main>'
-                  '<header><div class="brand" dir="ltr">TGWITNESS</div><p class="badge">' + e(kind) + '</p>'
+                  '<title>' + e(title) + ' · TgWitness</title><style>' + CSS + case_assessment.CSS + DOSSIER_CSS + report_layouts.CSS + '</style></head><body class="dossier account-dossier"><main>'
+                  '<header class="account-cover"><div class="cover-register"><span dir="ltr">TG / WITNESS</span><span>'
+                  + e(say('Evidence dossier')) + '</span></div><p class="badge">' + e(kind) + '</p>'
                   '<h1 class="user" dir="auto">' + e(title) + '</h1><p class="lead">' + e(lead) + '</p></header>')
 
 
@@ -224,13 +230,27 @@ def ending(say):
 
 
 def account_index(context, chats):
+    if (context.get('presentation') or {}).get('design') in report_layouts.DESIGNS:
+        from .account_report_layouts import index
+        yield from index(context, chats)
+        return
     say = Words(context.get('report_language', 'en'))
     yield from opening(context, say('Account export'))
     yield encoded('<nav><a href="#start">' + e(say('Start here')) + '</a><a href="#chats">' + e(say('Chats')) + '</a><a href="#coverage">' + e(say('Coverage')) +
                   '</a><a href="#verification">' + e(say('Verification')) + '</a></nav>')
     yield encoded(recipient_guide(say))
+    yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
+    yield encoded(case_assessment.html(case_assessment.snapshot(context), say))
     yield encoded('<p class="notice">' + e(say('Original account data may contain personal information. Prepare a separate minimized copy before sharing.')) + '</p>')
     yield encoded(stats(context.get('counts', {}), say) + copy_context(context, say) + scope(context.get('options', {}), say))
+    yield from coverage_section(context, say)
+    yield from chats_section(chats, say)
+    yield from omissions_section(context, say)
+    yield encoded(verification(context, say))
+    yield ending(say)
+
+
+def coverage_section(context, say):
     coverage = context.get('coverage', {})
     complete = (context.get('complete_within_scope') is True and coverage.get('inventory_complete') is True
                 and type(coverage.get('failures')) is int and coverage['failures'] == 0
@@ -242,14 +262,23 @@ def account_index(context, chats):
                          ('Failures and gaps', coverage.get('failures'))):
         if type(value) is int:
             yield encoded('<dt>' + e(say(label)) + '</dt><dd>' + str(value) + '</dd>')
-    yield encoded('</dl>' + technical(coverage, say) + '</section><section id="chats"><h2>' + e(say('Chats')) + '</h2><ul class="chat-list">')
+    yield encoded('</dl>' + technical(coverage, say) + '</section>')
+
+
+def chats_section(chats, say):
+    yield encoded('<section id="chats"><h2>' + e(say('Chats')) + '</h2><ul class="chat-list">')
     for chat in chats:
         if type(chat.get('id')) is not int:
             continue
         yield encoded('<li><a class="user" dir="auto" href="chats/' + str(chat['id']) + '.html">' +
                       e(text(chat.get('title')) or str(chat['id'])) + '</a><span>' + e(say('Messages')) + ': ' +
                       e(chat.get('message_count', '—')) + '</span></li>')
-    yield encoded('</ul></section><section><h2>' + e(say('Omissions and unavailable data')) + '</h2><ul>')
+    yield encoded('</ul></section>')
+
+
+def omissions_section(context, say):
+    coverage = context.get('coverage', {})
+    yield encoded('<section><h2>' + e(say('Omissions and unavailable data')) + '</h2><ul>')
     omissions = context.get('omissions', ())
     if not omissions:
         note = (say('See signed page receipts for recorded acquisition failures.') if coverage.get('failures') else
@@ -264,8 +293,6 @@ def account_index(context, chats):
             continue
         yield encoded('<li class="user" dir="auto">' + e(shown) + '</li>')
     yield encoded('</ul><p>' + e(say('Signed JSONL pages and capture receipts are authoritative. Other account data is retained in those pages.')) + '</p></section>')
-    yield encoded(verification(context, say))
-    yield ending(say)
 
 
 def shared_row(row):
@@ -330,13 +357,18 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
 
 
 def account_chat(context, chat, rows):
+    if (context.get('presentation') or {}).get('design') in report_layouts.DESIGNS:
+        from .account_report_layouts import transcript
+        yield from transcript(context, rows, chat=chat)
+        return
     say = Words(context.get('report_language', 'en'))
     yield from opening(context, text(chat.get('title')) or str(chat.get('id', '')))
     yield encoded('<p><a href="../index.html">← ' + e(say('Account export')) + '</a></p><p>' +
                   e(say('Message records are shown in captured page order. Signed JSONL remains authoritative.')) + '</p>')
     yield encoded(copy_context(context, say))
+    yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
     yield encoded('<p>' + e(say('Cite the archive reference, the file path and the record reference beside a message. Record numbers apply only to this copy.')) + '</p>')
-    yield encoded('<nav><a href="#messages">' + e(say('Messages')) + '</a><a href="#verification">' +
+    yield encoded('<nav><a href="#messages">' + e(say('Messages')) + '</a><a href="#case-assessment">' + e(say(case_assessment.TITLE)) + '</a><a href="#verification">' +
                   e(say('Verification')) + '</a></nav><section id="messages">')
     page_path = 'chats/' + str(chat['id']) + '.html' if type(chat.get('id')) is int else 'chat.html'
     seen = False
@@ -346,16 +378,24 @@ def account_chat(context, chat, rows):
     if not seen:
         yield encoded('<p>' + e(say('No message records are included in this view. Check the scope and omissions before drawing conclusions.')) + '</p>')
     yield encoded('</section>')
+    yield encoded(case_assessment.html(case_assessment.snapshot(context, 'account_chat',
+        {'message_count': chat.get('message_count')}), say))
     yield encoded(verification(context, say))
     yield ending(say)
 
 
 def sharing_report(context, rows):
+    if (context.get('presentation') or {}).get('design') in report_layouts.DESIGNS:
+        from .account_report_layouts import transcript
+        yield from transcript(context, rows, sharing=True)
+        return
     say = Words(context.get('report_language', 'en'))
     yield from opening(context, say('Sharing copy'), sharing=True)
     yield encoded('<nav><a href="#start">' + e(say('Start here')) + '</a><a href="#messages">' + e(say('Messages')) + '</a><a href="#verification">' +
                   e(say('Verification')) + '</a></nav>')
     yield encoded(recipient_guide(say, sharing=True))
+    yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
+    yield encoded(case_assessment.html(case_assessment.snapshot(context, "sharing"), say))
     # Only explicitly public policy fields are rendered. No private criteria, map or source rows.
     public = {key: context.get('policy', {}).get(key) for key in (*SCOPE_LABELS, 'purpose')}
     yield encoded(stats(context.get('counts', {}), say) + copy_context(context, say, sharing=True) + scope(public, say, sharing=True))
@@ -381,5 +421,5 @@ def text_keys():
     keys = [node.args[0].value for node in ast.walk(tree) if isinstance(node, ast.Call)
             and isinstance(node.func, ast.Name) and node.func.id == 'say' and node.args
             and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + list(COUNT_LABELS.values()) + list(SCOPE_LABELS.values()) +
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + list(COUNT_LABELS.values()) + list(SCOPE_LABELS.values()) +
                               list(VALUES.values()) + list(CONTEXT_LABELS.values()) + ['Tasks completed', 'Tasks planned', 'Failures and gaps']))

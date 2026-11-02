@@ -1,9 +1,3 @@
-"""Restricted, single-account/single-chat capture application for disposable runners.
-
-This deliberately does not mount the normal administration app. Configuration is
-supplied by the pinned runner, never by an HTTP request. No import, file upload,
-network configuration, arbitrary RPC, signing, or plaintext download API exists.
-"""
 import argparse
 import asyncio
 import hashlib
@@ -17,7 +11,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -290,9 +284,12 @@ def create_app(root, output, config, client_factory=WitnessClient):
         return app.state.session.status()
 
     @app.post("/api/phone")
-    async def phone(body: Phone):
+    async def phone(body: Phone, request: Request):
+        from .client_identity import language_defaults
+        languages = language_defaults(request.headers.get("x-tgwitness-language"),
+                                      request.headers.get("x-tgwitness-system-language") or request.headers.get("accept-language"))
         return await operation(app.state.session.collector.start_phone, body.phone,
-                               body.api_id, body.api_hash, login=True, fresh=True)
+                               body.api_id, body.api_hash, None, languages, login=True, fresh=True)
 
     @app.post("/api/code")
     async def code(body: Code):
@@ -303,10 +300,14 @@ def create_app(root, output, config, client_factory=WitnessClient):
         return await operation(app.state.session.collector.confirm_password, body.password, login=True)
 
     @app.post("/api/qr")
-    async def qr(body: Login):
+    async def qr(body: Login, request: Request):
         import qrcode
         from qrcode.image.svg import SvgPathImage
-        result = await operation(app.state.session.collector.start_qr, body.api_id, body.api_hash, login=True, fresh=True)
+        from .client_identity import language_defaults
+        languages = language_defaults(request.headers.get("x-tgwitness-language"),
+                                      request.headers.get("x-tgwitness-system-language") or request.headers.get("accept-language"))
+        result = await operation(app.state.session.collector.start_qr, body.api_id, body.api_hash,
+                                 None, languages, login=True, fresh=True)
         output = io.BytesIO()
         qrcode.make(result.pop("url"), image_factory=SvgPathImage).save(output)
         return {**result, "svg": output.getvalue().decode()}

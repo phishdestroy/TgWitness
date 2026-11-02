@@ -1,4 +1,3 @@
-"""Isolated account collectors behind one authenticated panel."""
 import asyncio
 from contextlib import ExitStack
 import re
@@ -11,7 +10,6 @@ from . import health
 from .account_import import session_key
 
 
-# What a group shares, copied from its template workspace: setting keys in each workspace's store.
 GROUP_SECTIONS = {
     "parameters": ("parameters",),
     "reports": ("report_options",),
@@ -30,14 +28,17 @@ class Profiles:
         label = app.state.store.get_setting("profile_label", "Main account")
         self.entries = {"default": {"id": "default", "label": label, "app": app, "cm": None}}
         self.opening = {}
-        self.session_reservations = {}  # authorization keys reserved before a connection can start
-        self.account_reservations = {}  # account IDs held through the durable ownership write
+        self.session_reservations = {}
+        self.account_reservations = {}
         self.lock = asyncio.Lock()
         app.state.collector.account_guard = self.check_account
+        app.state.group_link = lambda: self.inheritance("default")
+
+    def inheritance(self, profile_id):
+        from .group_settings import member_view
+        return member_view(self, profile_id)
 
     def holder(self, account_id=None, key=None, collector=None):
-        """The workspace that already holds this Telegram account, by its ID once signed in or by the
-        authorization key of its session, or None."""
         for entry in self.entries.values():
             other = entry["app"]
             if not other or other.state.collector is collector:
@@ -55,8 +56,6 @@ class Profiles:
         return None
 
     def check_account(self, account_id, collector, key=None):
-        """Refuse an account another workspace holds. An imported session is checked by its key before it
-        connects: the same key from a second address can make Telegram revoke it (AUTH_KEY_DUPLICATED)."""
         if self.holder(account_id, key, collector):
             raise ValueError("This Telegram account already belongs to another profile. Use its existing workspace.")
         if key:
@@ -69,7 +68,7 @@ class Profiles:
         existing = reservations.get(identity)
         if existing is not None:
             if existing["owner"] is owner:
-                return lambda: None  # an outer import already holds this lease
+                return lambda: None
             raise ValueError("This Telegram account is being imported right now.")
         lease = {"owner": owner}
         reservations[identity] = lease
@@ -80,7 +79,6 @@ class Profiles:
         return release
 
     def reserve_session(self, key, owner):
-        """Reserve a key synchronously before any await; return an identity-bound release callback."""
         if not key:
             raise ValueError("These files hold no login session. Add the .session or TData of the account.")
         if self.holder(key=key, collector=owner):
@@ -93,7 +91,6 @@ class Profiles:
         return self._reserve(self.account_reservations, account_id, owner)
 
     def transfer_session(self, key, owner, collector, account_id=None):
-        """Give a still-held import lease to its child without opening a reservation gap."""
         lease = self.session_reservations.get(key)
         if lease is None or lease["owner"] is not owner:
             raise ValueError("The account import no longer holds its session reservation.")
@@ -111,6 +108,8 @@ class Profiles:
         except BaseException:
             await self.close()
             raise
+        from .group_settings import migrate
+        migrate(self)
 
     async def open_entry(self, entry):
         if not re.fullmatch(r"[a-f0-9]{32}", entry["id"]):
@@ -136,6 +135,7 @@ class Profiles:
         finally:
             self.opening.pop(entry["id"], None)
         self.entries[entry["id"]] = {**entry, "app": child, "cm": cm}
+        child.state.group_link = lambda: self.inheritance(entry["id"])
 
     async def create(self, label, group=None):
         async with self.lock:
@@ -149,6 +149,9 @@ class Profiles:
                 items = self.app.state.store.get_setting("profiles", [])
                 self.app.state.store.set_setting("profiles", [*items, entry])
                 self.app.state.store.append("profile.created", entry)
+            if group is not None:
+                from .group_settings import adopt_all
+                await adopt_all(self, entry["id"], self._group(group))
             return entry
 
     async def rename(self, profile_id, label):
@@ -186,6 +189,8 @@ class Profiles:
                 raise ValueError("This account is part of a running multi-account export. "
                                  "Cancel the export or wait for it to finish, then delete the account.")
             child = entry.get("app")
+            if child and getattr(child.state, "account_downloads", None):
+                raise ValueError("Finish active downloads before deleting this workspace.")
             if child and (child.state.collector.export_claim
                           or getattr(child.state, "operation_lock", None) and child.state.operation_lock.locked()
                           or getattr(child.state, "account_export", None) and child.state.account_export.busy()
@@ -225,8 +230,6 @@ class Profiles:
             self.entries.pop(profile_id, None)
             return {"id": profile_id, "deleted": True}
 
-    # Groups: workspaces that share settings, copied from one of them on request ------------------
-
     def groups(self):
         return self.app.state.store.get_setting("profile_groups", [])
 
@@ -245,7 +248,6 @@ class Profiles:
         return group
 
     async def save_group(self, group_id, label, template=None, sections=None):
-        """Create (group_id None) or update a group; returns it."""
         async with self.lock:
             if not label.strip():
                 raise ValueError("Enter a group label.")
@@ -279,6 +281,9 @@ class Profiles:
             with self.app.state.store.transaction():
                 self.app.state.store.set_setting("profile_groups", [g for g in self.groups() if g["id"] != group_id])
                 self.app.state.store.append("profile_group.deleted", {"group_id": group_id})
+            access = getattr(self.app.state, "access", None)
+            if hasattr(access, "forget_group"):
+                access.forget_group(group_id)
             return {"id": group_id, "deleted": True}
 
     def _assign(self, profile_id, group_id):
@@ -305,10 +310,6 @@ class Profiles:
             return {"id": profile_id, "group": group_id}
 
     async def apply_group(self, group_id):
-        """Copy the group's shared settings from its template to every other member; returns each result.
-
-        Every member records what it received in its own journal. The IP mode goes through the
-        member's collector, so a workspace that is observing keeps its route until it is paused."""
         from .network import RoutePolicy
         async with self.lock:
             group = self._group(group_id)
@@ -318,6 +319,8 @@ class Profiles:
             source = template["app"].state.store
             settings = {key: source.get_setting(key, None)
                         for section in group.get("sections", []) for key in GROUP_SECTIONS[section]}
+            from .group_settings import read
+            template_ip = read(template["app"], ["ip"])["ip"]
             results = []
             for profile_id in self.members(group_id):
                 entry = self.entries[profile_id]
@@ -339,6 +342,7 @@ class Profiles:
                         except ValueError:
                             skipped.append(section)
                             continue
+                        store.set_setting("ip_choice", template_ip)
                         applied.append(section)
                         continue
                     with store.transaction():
@@ -356,8 +360,15 @@ class Profiles:
                                                         "skipped_while_observing": skipped})
                 results.append({"id": profile_id, "label": entry["label"], "status": "applied" if applied else "skipped",
                                 "applied": applied, "skipped": skipped})
-            self.app.state.store.append("profile_group.applied", {"group_id": group_id, "members": len(results)})
-            return {"group": group, "results": results}
+            from .group_settings import SECTION_KEYS, read, save_values
+            current = read(template["app"], [k for section in group.get("sections", []) for k in SECTION_KEYS[section]])
+            shared = {**group.get("values", {}),
+                      **{k: v for k, v in current.items() if v is not None and not (k == "files" and v == "custom")}}
+            with self.app.state.store.transaction():
+                save_values(self, group_id, shared)
+                self.app.state.store.append("profile_group.applied", {"group_id": group_id, "members": len(results),
+                                                                     "shared": sorted(current)})
+            return {"group": {**group, "values": shared}, "results": results}
 
     def summary(self):
         with ExitStack() as snapshots:

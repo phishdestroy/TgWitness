@@ -7,7 +7,7 @@ from urllib.parse import urlsplit
 
 from playwright.sync_api import expect, sync_playwright
 
-from check_browser import RunningApp, launch_browser
+from check_browser import RunningApp, answer_panel_dialog, launch_browser
 from tgwitness import i18n
 
 
@@ -215,6 +215,7 @@ def main():
             for _ in range(2):
                 with page.expect_download() as saved:
                     page.locator('[data-account-export-action="download"]').click()
+                    answer_panel_dialog(page)
                 assert saved.value.suggested_filename == "tgwitness-account-export-synthetic-job.zip"
             assert len(downloads) == 2
             page.locator('[data-account-export-action="disclosure"]').click()
@@ -238,8 +239,8 @@ def main():
             expect(page.locator("#account-disclosure-create")).to_be_disabled()
             page.locator("#account-disclosure-check").click()
             expect(page.locator("#account-disclosure-create")).to_be_enabled()
-            page.once("dialog", lambda dialog: dialog.accept())
             page.locator("#account-disclosure-create").click()
+            answer_panel_dialog(page)
             expect(page.locator("#account-disclosure-dialog")).to_be_hidden()
             expect(page.locator("#account-export-jobs")).to_contain_text("Signed sharing copies")
             expect(page.locator('[data-account-export-action="disclosure-download"]')).to_be_focused()
@@ -256,6 +257,7 @@ def main():
             for _ in range(2):
                 with page.expect_download() as saved:
                     page.locator('[data-account-export-action="disclosure-download"]').click()
+                    answer_panel_dialog(page)
                 assert saved.value.suggested_filename == "tgwitness-disclosure-fictional-derivative.zip"
             assert len(downloads) == 4
             # A second copy must retain its own focus and note when another job field updates.
@@ -300,8 +302,8 @@ def main():
                 expect(note).to_be_visible()
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), width
                 page.screenshot(path=str(output / f'account-{width}.png'), full_page=True)
-            page.once("dialog", lambda dialog: dialog.accept())
             page.locator('[data-account-export-action="delete"]').click()
+            answer_panel_dialog(page)
             expect(page.locator("#account-export-jobs")).to_contain_text("No account exports yet")
             for width in (390, 320):
                 page.set_viewport_size({"width": width, "height": 844})

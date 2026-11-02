@@ -1,4 +1,3 @@
-"""Explicit, previewed disclosure derivatives. Original account evidence is never rewritten."""
 import asyncio
 import base64
 import hashlib
@@ -36,6 +35,7 @@ class DisclosurePolicy(BaseModel):
     model_config = ConfigDict(extra='forbid')
     purpose: str = Field(min_length=1, max_length=1000)
     report_language: str = 'en'
+    report_presentation: account_report.Presentation = Field(default_factory=account_report.Presentation)
     from_utc: str | None = None
     to_utc: str | None = None
     sender_ids: list[int] = Field(default_factory=list, max_length=10000)
@@ -91,7 +91,6 @@ class DisclosurePolicy(BaseModel):
 
 
 def source_rows(archive):
-    """Read only sealed message pages; account/contacts/avatars are never copied."""
     inventory = json.loads(archive.read('inventory.json'))['statement']
     chats = {row['id']: row for row in inventory['chats']}
     for name in sorted(n for n in archive.namelist() if n.startswith('receipts/')):
@@ -121,7 +120,6 @@ def visible_text(row):
 
 
 def date_text(value):
-    """A date field cannot carry nested source metadata into the projection."""
     if not isinstance(value, str):
         return None
     try:
@@ -136,7 +134,6 @@ def plain_string(value):
 
 
 def mask_literals(text, pattern, replacement):
-    """Match full Unicode casefolds, replacing spans in the unchanged original text."""
     if not pattern:
         return text
     matches = list(pattern.finditer(text.casefold()))
@@ -190,8 +187,6 @@ class Projection:
         def add_term(value):
             if isinstance(value, str) and 2 <= len(value) <= 200:
                 folded = value.casefold()
-                # Omitted message text needs no name dictionary, but the public
-                # purpose still needs masking. Retain only its possible matches.
                 if purpose_only and folded not in folded_purpose:
                     return
                 terms.add(folded)
@@ -200,9 +195,6 @@ class Projection:
 
         if policy.identity_mode != 'keep':
             for chat, row in source_rows(source):
-                # Direct-chat titles can identify a person even when its sender
-                # object was unavailable. Generic group/channel titles are not
-                # treated as personal names in arbitrary message text.
                 if chat.get('kind') in ('private', 'bot'):
                     add_term(chat.get('title'))
                 if self.reveal(sender_id(row)):
@@ -225,8 +217,6 @@ class Projection:
                             add_term(username.get('username'))
                 if len(terms) + len(ids) > MAX_MASK_TERMS:
                     raise ValueError('Too many known identities to mask safely. Narrow the source export or omit message text.')
-        # Matching on casefolded text covers expansions such as Straße/STRASSE.
-        # IDs match whole numeric tokens, never a substring of another ID or decimal.
         patterns = [re.escape(t) for t in sorted(terms, key=len, reverse=True)]
         patterns += [r'(?<![\w.+-])' + re.escape(t) + r'(?![\w.])' for t in sorted(ids, key=len, reverse=True)]
         self.pattern = re.compile('|'.join(patterns)) if patterns else None
@@ -266,7 +256,6 @@ class Projection:
                            or plain_string(person.get('title')) or plain_string(row.get('from')) or str(uid or 'Unknown'),
                            username=plain_string(person.get('username')) or plain_string(row.get('from_username')) or None)
         else:
-            # An absent sender ID does not establish that two messages share a sender.
             subject = uid if uid is not None else ['unknown', chat['id'], row['id']]
             message.update(from_id=self.alias('participant', subject), sender=self.alias('Participant', subject))
             message['redacted_fields'].extend(['sender_identity', 'chat_identity', 'message_id'])
@@ -289,13 +278,10 @@ class Projection:
                     message['attachments'].append({k: item[k] for k in ('outcome', 'file', 'sha256', 'bytes')})
         elif row.get('attachments'):
             message['redacted_fields'].append('attachments')
-        # Forward headers, entities, reply quotes, usernames, locations, contact cards,
-        # avatars and raw Telegram payloads are deliberately outside this allowlist.
         return {'chat': public_chat, 'message': message}
 
 
 def public_policy(policy, projection=None):
-    # The public purpose must not echo otherwise-private selection or identity criteria.
     private_terms = {str(value) for value in (*policy.sender_ids, *policy.disclose_user_ids)}
     private_terms.update(policy.text_contains)
     private_terms.update(policy.redact_terms)
@@ -313,14 +299,6 @@ def public_policy(policy, projection=None):
 
 
 def archive_limit(path):
-    """Allow the local ZIP's expanded size, independently of its media-only budget.
-
-    Completed sources are pinned to their published ZIP digest/size before this
-    allowance is used. The full verifier still authenticates the collector and
-    streams every hash, with its member-count, whole-member and line limits.
-    Locally generated derivatives use the same bounded per-call allowance;
-    external CLI verification retains its explicit --max-gib requirement.
-    """
     with zipfile.ZipFile(path) as archive:
         members = archive.infolist()
         if len(members) > MAX_MEMBERS:
@@ -434,19 +412,24 @@ class Disclosures:
                         if matches(row, policy):
                             yield projection.apply(chat, row)
 
+                analytics = account_report.snapshot_analytics.Analytics("sharing")
+
                 def message_bytes():
                     for row in rows():
+                        analytics.snapshot(row['message'], row['chat'])
                         counts['messages'] += 1
                         chats.add(row['chat']['id'])
                         media.update(a['file'] for a in row['message']['attachments'])
                         yield canonical(row) + b'\n'
                 write('messages.jsonl', message_bytes())
                 counts.update(chats=len(chats), media=len(media))
-                report_context = {'report_language': policy.report_language, 'policy': shared_policy,
+                report_context = {'report_language': policy.report_language, 'policy': shared_policy, 'archive': True,
+                    'presentation': policy.report_presentation.model_dump(), 'analytics': account_report.snapshot_analytics.project(analytics.result(), policy.report_presentation.model_dump()),
                     'archive_reference': identity, 'created_at': created,
                     'counts': counts, 'fingerprint': fingerprint(self.vault.public_key),
                     'source_archive_sha256': digest, 'limitations': WARNINGS}
                 write('index.html', account_report.sharing_report(report_context, rows()))
+                write('analytics.json', [canonical(report_context['analytics'])])
                 for name in sorted(media):
                     with source.open(name) as stream:
                         write(name, iter(lambda: stream.read(1024**2), b''))
@@ -459,10 +442,11 @@ class Disclosures:
                     + 'For large packages add --max-gib with the expanded size. index.html is protected by the manifest.\n').encode()])
                 write('SHA256SUMS', [''.join(f'{v}  {k}\n' for k, v in sorted(hashes.items())).encode()])
                 manifest = dict(format='tgwitness-account-disclosure-v1', public_key=self.vault.public_key,
-                    report_language=policy.report_language,
+                    report_language=policy.report_language, report_presentation=policy.report_presentation.model_dump(),
                     fingerprint=fingerprint(self.vault.public_key), disclosure_id=identity, created_at=created,
                     source_archive_sha256=digest, source_collector_fingerprint=fingerprint(self.vault.public_key),
-                    policy=shared_policy, counts=counts, files=hashes, limitations=WARNINGS)
+                    policy=shared_policy, counts=counts, files=hashes, limitations=WARNINGS,
+                    case_assessment=account_report.case_assessment.snapshot(report_context, "sharing"))
                 target.writestr('manifest.json', canonical(manifest))
                 target.writestr('manifest.sig', self.vault.sign(canonical(manifest)))
             verify_account_disclosure(stage, fingerprint(self.vault.public_key), max_gib=archive_limit(stage))

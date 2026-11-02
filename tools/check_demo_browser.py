@@ -7,6 +7,11 @@ import zipfile
 
 from playwright.sync_api import expect, sync_playwright
 
+if __package__:
+    from .browser_helpers import answer_panel_dialog
+else:
+    from browser_helpers import answer_panel_dialog
+
 
 def check_demo_downloads(browser, url, output, route_request, errors, failed):
     context = browser.new_context(viewport={"width": 1440, "height": 1000}, reduced_motion="reduce")
@@ -30,13 +35,15 @@ def check_demo_downloads(browser, url, output, route_request, errors, failed):
     expect(page.locator("#view-evidence")).to_be_visible()
     expect(page.locator('#export-task-journal')).to_have_attribute('aria-pressed', 'true')
     expect(page.locator('#export-account-panel')).to_be_hidden()
-    expect(page.locator('#view-evidence [data-export="html"]')).to_be_hidden()
+    expect(page.locator('#view-evidence [data-export="html"]')).to_be_visible()
+    expect(page.locator('#view-evidence [data-export="jsonl"]')).to_be_hidden()
     answers = page.request.get(url + "demo/fixtures.json").json()
     for fmt in ("zip", "html", "jsonl", "csv"):
-        if fmt == "html":
+        if fmt == "jsonl":
             page.locator('#export-more-formats > summary').click()
         with page.expect_download() as pending:
             page.locator(f'#view-evidence [data-export="{fmt}"]').click()
+            answer_panel_dialog(page)
         download = pending.value
         assert download.failure() is None
         saved = output / ("demo-sample." + fmt)
@@ -50,7 +57,6 @@ def check_demo_downloads(browser, url, output, route_request, errors, failed):
         assert manifest["event_count"] == checked["events"]
         assert manifest["head_hash"] == checked["head_hash"]
         events = [json.loads(line) for line in bundle.read("events.jsonl").splitlines()]
-    # Decode JSON from its original UTF-8 bytes, including non-ASCII target titles.
     auxiliary = {}
     for endpoint in ("/api/checkpoint", "/api/run-receipt", "/api/anchor-request"):
         descriptor = answers[endpoint]
@@ -98,6 +104,7 @@ def check_demo_downloads(browser, url, output, route_request, errors, failed):
         for repeat in range(2):
             with page.expect_download() as pending:
                 page.locator(f'[data-account-export-action="{action}"]').click()
+                answer_panel_dialog(page)
             sample = output / f'demo-{action}-{repeat}.zip'
             pending.value.save_as(sample)
             data = sample.read_bytes()
@@ -118,7 +125,6 @@ def check_demo_downloads(browser, url, output, route_request, errors, failed):
 
 
 def main():
-    """Run just the signed-download demo acceptance against an already built site."""
     import argparse
 
     if __package__:

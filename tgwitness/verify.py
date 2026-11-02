@@ -1,16 +1,4 @@
-"""Standalone verifier: python verify.py bundle.zip [--fingerprint SHA256] [--tsa-ca ROOT.pem].
-
-Accepts a signed observation bundle (tgwitness-evidence-v1), a signed chat export
-(tgwitness-chat-export-v1), a signed account export (tgwitness-account-export-v1),
-a minimized disclosure (tgwitness-account-disclosure-v1), an independent witness
-journal (tgwitness-witness-v1) or a
-people-profile file (tgwitness-dossier-v1 JSON); the format is detected from the file.
-For an observation bundle it also reports continuous observation periods, gaps and
-message IDs that were never observed. With --witness WITNESS.zip it checks that every
-journal head the witness saw is part of this journal, and with --channel it checks the
-witness's channel posts against the witness journal.
-Archives and checkpoints made before the rename carry tgwatch-* names and are accepted.
-"""
+"""Standalone verifier"""
 import argparse
 import base64
 import bisect
@@ -25,6 +13,7 @@ import sqlite3
 import subprocess
 import sys
 import tempfile
+import unicodedata
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -49,14 +38,17 @@ MAX_SMALL_MEMBER_BYTES = 16 * 1024**2
 MAX_RECORD_BYTES = 64 * 1024**2
 MAX_JSON_BYTES = 256 * 1024**2
 OTS_PENDING, OTS_BITCOIN = bytes.fromhex("83dfe30d2ef90c8e"), bytes.fromhex("0588960d73d71901")
-# A readable report ends with a seal: a signed statement over the SHA-256 of every byte before it.
 SEAL_OPEN = b'<script type="application/tgwitness-seal+json" id="tgwitness-seal">'
 SEAL_CLOSE = b"</script></body></html>\n"
-SEAL_WINDOW = 1024 * 1024  # the seal is always within the last mebibyte of a report
+SEAL_WINDOW = 1024 * 1024
+DRAND_CHAIN = "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971"
+DRAND_GENESIS, DRAND_PERIOD = 1692803367, 3
+DRAND_RELAYS = ("https://drand.cloudflare.com", "https://api.drand.sh", "https://api2.drand.sh", "https://api3.drand.sh")
+DRAND_CHECK_LIMIT = 100
+GATEWAY_FIELDS = ("at", "name", "type", "rcode", "decision", "colo")
 
 
 def open_archive(path, max_gib=None):
-    """Open a ZIP and enforce member count, duplicates and total expanded size before any read."""
     limit = MAX_UNCOMPRESSED_GIB if max_gib is None else max_gib
     if type(limit) not in (int, float) or not math.isfinite(limit) or limit <= 0:
         raise ValueError("Archive size limit must be a positive finite number of GiB")
@@ -77,7 +69,6 @@ def open_archive(path, max_gib=None):
 
 
 def read_member(archive, name, limit=MAX_SMALL_MEMBER_BYTES):
-    """A whole member, bounded by both its declared size and the bytes actually produced."""
     if archive.getinfo(name).file_size > limit:
         raise ValueError(name + " exceeds the verifier's size limit for this member")
     with archive.open(name) as stream:
@@ -100,7 +91,6 @@ def member_digest(archive, name):
 
 
 def bounded_lines(stream):
-    """Lines of a journal or chat file, refusing one longer than any record could be."""
     for line in iter(lambda: stream.readline(MAX_RECORD_BYTES + 1), stream.read(0)):
         if len(line) > MAX_RECORD_BYTES:
             raise ValueError("A record exceeds the verifier's size limit")
@@ -115,7 +105,6 @@ def read_json_file(path):
 
 
 def der(data, offset):
-    """Tag, value start and value end of the DER element at offset."""
     tag, length, start = data[offset], data[offset + 1], offset + 2
     if length & 0x80:
         count = length & 0x7F
@@ -128,7 +117,6 @@ def der(data, offset):
 
 
 def children(data, start, end):
-    """(tag, offset, value start, value end) of each DER element between start and end."""
     found, offset = [], start
     while offset < end:
         tag, value_start, value_end = der(data, offset)
@@ -164,8 +152,6 @@ ECDSA_SIGNATURES = {"1.2.840.10045.4.3.2": hashes.SHA256, "1.2.840.10045.4.3.3":
 
 
 def timestamp_token(reply):
-    """The parts of an RFC 3161 reply, read strictly: status, the TSTInfo bytes, the certificates and
-    the one SignerInfo of the signed data around them."""
     tag, start, end = der(reply, 0)
     if tag != 0x30 or end != len(reply):
         raise ValueError("Not an RFC 3161 timestamp reply")
@@ -210,7 +196,6 @@ def generalized_time(raw):
 
 
 def tst_info(tst):
-    """Imprint algorithm and hash, time and nonce of a TSTInfo, by position as RFC 3161 defines it."""
     tag, start, end = der(tst, 0)
     items = children(tst, start, end) if tag == 0x30 and end == len(tst) else []
     if len(items) < 5 or [t for t, *_ in items[:5]] != [0x02, 0x06, 0x30, 0x02, 0x18]:
@@ -231,8 +216,6 @@ def query_nonce(query):
 
 
 def timestamp_reply_summary(reply, digest, query=None):
-    """Status and time of an RFC 3161 reply whose TSTInfo stamps exactly this SHA-256 (and the request's nonce).
-    The signature is checked by timestamp_signature, or by OpenSSL with --tsa-ca."""
     token = timestamp_token(reply)
     info = tst_info(token["tst"])
     if info["algorithm"] != "2.16.840.1.101.3.4.2.1" or info["hash"] != digest:
@@ -257,7 +240,6 @@ def signed_attributes(reply, start, end):
 
 
 def signing_certificate_hash(reply, attributes):
-    """The hash algorithm and the hash of the signer's certificate named in the ESS attribute."""
     if SIGNING_CERTIFICATE_V2 in attributes:
         name, default = SIGNING_CERTIFICATE_V2, hashes.SHA256
     elif SIGNING_CERTIFICATE in attributes:
@@ -278,9 +260,6 @@ def signing_certificate_hash(reply, attributes):
 
 
 def timestamp_signature(reply, roots):
-    """Who signed an RFC 3161 reply, checked: the hash of the TSTInfo in the signed attributes, the
-    signature over them, the certificate the ESS attribute names, its critical time-stamping key usage
-    as its only use, and a chain valid at the stamped time up to one of the given root certificates."""
     token = timestamp_token(reply)
     when = tst_info(token["tst"])["time"]
     _, _, start, end = token["signer"]
@@ -380,12 +359,6 @@ def timestamp_signature(reply, roots):
 
 
 def ots_summary(proof, digest):
-    """Validate the OTS structure, not its commitment against a Bitcoin block.
-
-    Attestation tags count only at tree leaves, never inside operation arguments
-    or opaque attestation payloads. Keep this standalone and network-free: the
-    recipient must still run `ots verify` to authenticate a Bitcoin timestamp.
-    """
     head = OTS_MAGIC + b"\x01\x08"
     if len(digest) != 32 or proof[:len(head)] != head or proof[len(head):len(head) + 32] != digest:
         raise ValueError("The OpenTimestamps proof is not for this checkpoint")
@@ -500,7 +473,6 @@ def find_openssl():
 
 
 def openssl_verify_timestamp(data, reply, query, ca_path):
-    """Check the TSA signature and certificate chain against only the given root certificate."""
     binary = find_openssl()
     with tempfile.TemporaryDirectory() as tmp:
         paths = {}
@@ -518,7 +490,6 @@ def openssl_verify_timestamp(data, reply, query, ca_path):
 
 
 def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None):
-    """Checkpoints anchored in evidence mode: each checkpoint, then every answer stored for it."""
     results = []
     for name in sorted(n for n in names if n.startswith("anchors/") and n.endswith(".json")):
         data = read_member(archive, name)
@@ -545,7 +516,6 @@ def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None
 
 
 def is_format(value, name):
-    """True for tgwitness-<name>, or tgwatch-<name> written before the project was renamed."""
     return value in ("tgwitness-" + name, "tgwatch-" + name)
 
 
@@ -576,7 +546,6 @@ def hash_bytes(value):
 
 
 class MerkleFrontier:
-    """Streaming tree root using O(log n) memory, recomputed from exported events."""
     def __init__(self):
         self.nodes = []
         self.count = 0
@@ -609,7 +578,6 @@ def merkle_path(value):
 
 
 def verify_inclusion(event_hash, index, size, root, path):
-    """RFC 9162 section 2.1.3.2; all unused/extra nodes are rejected."""
     if not 0 <= index < size:
         raise ValueError("Merkle leaf outside tree")
     fn, sn, calculated = index, size - 1, merkle_leaf(event_hash)
@@ -630,7 +598,6 @@ def verify_inclusion(event_hash, index, size, root, path):
 
 
 def verify_consistency(first, second, first_root, second_root, path):
-    """RFC 9162 section 2.1.4.2, plus explicit empty/equal tree cases."""
     nodes = merkle_path(path)
     if not 0 <= first <= second:
         raise ValueError("Invalid Merkle tree sizes")
@@ -668,7 +635,6 @@ def verify_consistency(first, second, first_root, second_root, path):
 
 
 def verify_continuity(value, checkpoint, previous=None, challenge=None):
-    """Authenticate the tree, its journal head and its extension of a retained boundary."""
     statement, proof = value["statement"], value["proof"]
     if (set(value) != {"statement", "signature", "proof"}
             or set(statement) != {"format", "public_key", "event_count", "head_hash", "root", "challenge"}
@@ -718,6 +684,18 @@ MESSAGE_KINDS = ("message.new", "message.snapshot", "message.edited", "message.r
 INTERRUPTIONS = {"transport_disconnected": "connection to Telegram lost",
                  "authorization_required": "Telegram signed the account out",
                  "resume_failed": "observation could not resume after a restart"}
+ACCOUNT_LOSS = {"account_banned": "account banned", "account_deleted": "account deleted",
+                "account_frozen": "account frozen", "session_duplicated": "session used in two places",
+                "session_revoked": "session revoked", "session_expired": "session expired",
+                "session_ended": "session no longer recognised", "not_authorized": "no reason given"}
+
+
+def missing_ranges(ordered):
+    return [(a + 1, b - 1) for a, b in zip(ordered, ordered[1:]) if b - a > 1]
+
+
+def numbered_per_chat(chat_id):
+    return isinstance(chat_id, int) and chat_id < CHANNEL_IDS_BELOW
 
 
 def parse_time(value):
@@ -725,14 +703,6 @@ def parse_time(value):
 
 
 class Coverage:
-    """Continuous observation periods, gaps, and message IDs never observed, read from the journal.
-
-    A period runs from "observation started" until a pause, a stop, a lost connection, a process
-    restart, or a silence longer than three heartbeat intervals and at least three minutes (heartbeats
-    come every minute unless the operator changed the interval; each heartbeat records it). Message
-    IDs missing between observed ones are reported as "not observed", never as deleted: they may
-    be deleted, never delivered, or simply outside the saved history.
-    """
     def __init__(self):
         self.periods, self.gaps, self.notes = [], [], []
         self.start = self.alive = self.closed_at = self.close_reason = None
@@ -783,7 +753,8 @@ class Coverage:
         elif kind == "coverage.gap":
             reason = payload.get("reason")
             if chat_id is None and reason in INTERRUPTIONS:
-                self.close(at, INTERRUPTIONS[reason])
+                cause = ACCOUNT_LOSS.get(payload.get("cause")) if reason == "authorization_required" else None
+                self.close(at, INTERRUPTIONS[reason] + (": " + cause if cause else ""))
                 self.disconnected = reason == "transport_disconnected"
             else:
                 self.notes.append({"at": at, "chat_id": chat_id, "reason": reason})
@@ -798,8 +769,7 @@ class Coverage:
         if kind == "scope.applied":
             for added in payload.get("added") or []:
                 self.titles[added.get("chat_id")] = added.get("title")
-        if kind in MESSAGE_KINDS and chat_id is not None and chat_id < CHANNEL_IDS_BELOW \
-                and isinstance(event["message_id"], int):
+        if kind in MESSAGE_KINDS and numbered_per_chat(chat_id) and isinstance(event["message_id"], int):
             self.ids.setdefault(chat_id, set()).add(event["message_id"])
 
     def result(self, ranges_per_chat=50):
@@ -815,7 +785,7 @@ class Coverage:
         unobserved = []
         for chat_id, ids in sorted(self.ids.items()):
             ordered = sorted(ids)
-            holes = [(a + 1, b - 1) for a, b in zip(ordered, ordered[1:]) if b - a > 1]
+            holes = missing_ranges(ordered)
             unobserved.append({"chat_id": chat_id, "title": self.titles.get(chat_id),
                                "observed_from": ordered[0], "observed_to": ordered[-1], "observed": len(ordered),
                                "not_observed": sum(high - low + 1 for low, high in holes),
@@ -829,7 +799,6 @@ class Coverage:
 
 
 def coverage_lines(coverage):
-    """Plain-language summary of Coverage.result() for people reading verifier output."""
     def span(seconds):
         hours, rest = divmod(int(seconds), 3600)
         return (str(hours) + " h " if hours else "") + str(rest // 60) + " min"
@@ -843,6 +812,202 @@ def coverage_lines(coverage):
                          + "-" + str(chat["observed_to"]) + ", " + str(chat["not_observed"])
                          + " ID(s) not observed in " + str(chat["ranges_total"]) + " range(s) (not evidence of deletion)")
     return lines or ["No observation period recorded."]
+
+
+def drand_time(number):
+    return datetime.fromtimestamp(DRAND_GENESIS + (number - 1) * DRAND_PERIOD, timezone.utc).isoformat(
+        timespec="milliseconds")
+
+
+def drand_beacon(value):
+    if not isinstance(value, dict) or type(value.get("round")) is not int or value["round"] < 1:
+        raise ValueError("drand value without a round number")
+    signature, randomness = value.get("signature"), value.get("randomness")
+    if not (isinstance(signature, str) and re.fullmatch(r"[0-9a-f]{96}", signature) and isinstance(randomness, str)
+            and hashlib.sha256(bytes.fromhex(signature)).hexdigest() == randomness):
+        raise ValueError("drand randomness is not the hash of its signature")
+    return {"round": value["round"], "randomness": randomness, "signature": signature}
+
+
+class OutsideRecords:
+    def __init__(self):
+        self.rounds, self.checks, self.changes = [], [], []
+        self.devices, self.largest_gap, self.clock_behind = {}, 0, 0
+        self.windows, self.names, self.gaps, self.queries, self.truncated = [], {}, [], 0, 0
+
+    def add(self, event):
+        at, kind, payload = event["observed_at"], event["kind"], event["payload"]
+        if kind == "beacon.drand":
+            beacon = drand_beacon(payload)
+            if payload.get("chain") != DRAND_CHAIN or payload.get("round_time") != drand_time(beacon["round"]):
+                raise ValueError("drand value from another chain or with a wrong round time at record "
+                                 + str(event["seq"]))
+            self.clock_behind = max(self.clock_behind,
+                                    (parse_time(payload["round_time"]) - parse_time(at)).total_seconds())
+            if self.rounds:
+                self.largest_gap = max(self.largest_gap,
+                                       (parse_time(at) - parse_time(self.rounds[-1]["at"])).total_seconds())
+            self.rounds.append({"seq": event["seq"], "at": at, **beacon, "round_time": payload["round_time"]})
+        elif kind == "cloudflare.gateway_dns":
+            queries, fields = payload.get("queries"), payload.get("fields")
+            try:
+                window = parse_time(payload["from"]) < parse_time(payload["until"])
+            except (KeyError, AttributeError, TypeError, ValueError):
+                window = False
+            if not (window and isinstance(queries, list) and fields == list(GATEWAY_FIELDS)
+                    and payload.get("count") == len(queries)
+                    and all(isinstance(q, list) and len(q) == len(GATEWAY_FIELDS) for q in queries)):
+                raise ValueError("Cloudflare Gateway log record " + str(event["seq"]) + " is malformed")
+            previous = self.windows[-1] if self.windows else None
+            if previous and previous["location_id"] == payload.get("location_id") \
+                    and previous["address"] == payload.get("address") and payload["from"] != previous["until"]:
+                self.gaps.append({"from": previous["until"], "until": payload["from"], "at": at})
+            self.windows.append({"seq": event["seq"], "at": at, "from": payload["from"], "until": payload["until"],
+                                 "count": len(queries), "location_id": payload.get("location_id"),
+                                 "address": payload.get("address")})
+            self.queries += len(queries)
+            self.truncated += payload.get("truncated") is True
+            for query in queries:
+                self.names[str(query[1])] = self.names.get(str(query[1]), 0) + 1
+        elif kind == "account.devices" and type(payload.get("count")) is int:
+            self.checks.append(at)
+            listed = payload.get("devices")
+            if isinstance(listed, list):
+                current = {str(d.get("hash")): d for d in listed if isinstance(d, dict)}
+                self.changes.append({"at": at, "count": payload["count"], "devices": list(current.values()),
+                                     "added": [current.get(h, {"hash": h}) for h in payload.get("added") or []],
+                                     "removed": [self.devices.get(h, {"hash": h}) for h in payload.get("removed") or []]})
+                self.devices = current
+
+    def result(self):
+        return {"drand": {"rounds": len(self.rounds), "chain": DRAND_CHAIN,
+                          "first": self.rounds[0] if self.rounds else None,
+                          "last": self.rounds[-1] if self.rounds else None,
+                          "largest_gap_seconds": round(self.largest_gap),
+                          "clock_behind_seconds": round(self.clock_behind, 1) if self.clock_behind > 0 else 0,
+                          "meaning": "Records after a drand round were written after the round's time: nobody "
+                                     "knows a round's value earlier. Rounds are compared with drand relays only "
+                                     "with --check-drand."},
+                "devices": {"checks": len(self.checks), "first_check": self.checks[0] if self.checks else None,
+                            "last_check": self.checks[-1] if self.checks else None, "changes": self.changes[:200],
+                            "changes_total": len(self.changes),
+                            "meaning": "Telegram's list of sessions of this account (Settings, Devices) as the "
+                                       "collector received it; IP addresses are not recorded."},
+                "gateway": {"windows": len(self.windows), "queries": self.queries,
+                            "first": self.windows[0]["from"] if self.windows else None,
+                            "last": self.windows[-1]["until"] if self.windows else None,
+                            "locations": sorted({w["location_id"] for w in self.windows if w["location_id"]}),
+                            "addresses": sorted({w["address"] for w in self.windows if w["address"]}),
+                            "names": sorted(self.names.items(), key=lambda item: (-item[1], item[0]))[:100],
+                            "names_total": len(self.names), "gaps": self.gaps[:50], "gaps_total": len(self.gaps),
+                            "truncated_windows": self.truncated,
+                            "meaning": "DNS queries as Cloudflare Gateway logged them and its API returned them to "
+                                       "the collector, window after window; a gap is time no copy covers. Cloudflare "
+                                       "keeps its own copy 24 hours on the free plan."}}
+
+
+def device_name(device, active=False):
+    if set(device) == {"hash"}:
+        return "session " + str(device["hash"])
+    parts = [" ".join(str(device.get(k) or "") for k in ("device_model", "platform", "system_version")).strip(),
+             " ".join(str(device.get(k) or "") for k in ("app_name", "app_version")).strip(),
+             str(device.get("country") or "")]
+    if device.get("current"):
+        parts.append("this collector")
+    elif active and device.get("active_at"):
+        parts.append("active " + str(device["active_at"]))
+    return ", ".join(p for p in parts if p)
+
+
+def outside_lines(outside):
+    lines, drand, devices = [], outside["drand"], outside["devices"]
+    if drand["rounds"]:
+        lines.append(str(drand["rounds"]) + " drand round(s) recorded from " + drand["first"]["at"] + " to "
+                     + drand["last"]["at"] + "; the longest stretch without a new round is "
+                     + str(round(drand["largest_gap_seconds"] / 60)) + " min")
+        checked = drand.get("checked")
+        if not checked:
+            lines.append("Rounds not compared with drand relays: run with --check-drand")
+        elif checked["relays"]:
+            lines.append("Confirmed by drand relays: " + str(checked["confirmed"]) + " of " + str(checked["asked"])
+                         + " round(s) asked (" + ", ".join(checked["relays"]) + ")"
+                         + ("" if len(checked["relays"]) > 1 else "; only one operator answered"))
+        else:
+            lines.append("Rounds could not be compared: no drand relay answered")
+        if drand["clock_behind_seconds"] > 1:
+            lines.append("The collector's clock was up to " + str(drand["clock_behind_seconds"])
+                         + " s behind drand time")
+    gateway = outside.get("gateway") or {}
+    if gateway.get("windows"):
+        lines.append("Cloudflare Gateway DNS log copied in " + str(gateway["windows"]) + " window(s) from "
+                     + gateway["first"] + " to " + gateway["last"] + ": " + str(gateway["queries"]) + " quer(ies), "
+                     + str(gateway["names_total"]) + " name(s)"
+                     + (" from " + ", ".join(gateway["addresses"]) if gateway["addresses"] else ""))
+        if gateway["names"]:
+            lines.append("Names looked up most: " + ", ".join(name + " (" + str(count) + ")"
+                                                               for name, count in gateway["names"][:15]))
+        lines += ["Gateway log not copied from " + gap["from"] + " to " + gap["until"] for gap in gateway["gaps"][:10]]
+        if gateway.get("truncated_windows"):
+            lines.append(str(gateway["truncated_windows"]) + " window(s) held more queries in one second than one "
+                         "page of Cloudflare's log: the rest of that second is not in the copy")
+    if devices["checks"]:
+        lines.append("Telegram device list recorded " + str(devices["checks"]) + " time(s) from "
+                     + devices["first_check"] + " to " + devices["last_check"] + "; it changed "
+                     + str(max(0, devices["changes_total"] - 1)) + " time(s) after the first list")
+        for change in devices["changes"][:20]:
+            lines += [change["at"] + ": new session: " + device_name(d) for d in change["added"]]
+            lines += [change["at"] + ": session ended: " + device_name(d) for d in change["removed"]]
+            if not (change["added"] or change["removed"]):
+                lines.append(change["at"] + ": " + str(change["count"]) + " session(s): "
+                             + "; ".join(device_name(d, True) for d in change["devices"]))
+    return lines
+
+
+def confirm_drand(rounds, relays=DRAND_RELAYS, limit=DRAND_CHECK_LIMIT, fetch=None):
+    import random
+    chosen = rounds if len(rounds) <= limit else \
+        [rounds[0], rounds[-1]] + random.SystemRandom().sample(rounds[1:-1], limit - 2)
+    fetch = fetch or drand_fetcher()
+    used = []
+    for group in (relays[:1], relays[1:]):
+        for relay in group:
+            try:
+                answers = [(item, drand_beacon(fetch(relay, item["round"]))) for item in chosen]
+            except (OSError, ValueError):
+                continue
+            for item, answer in answers:
+                if answer["randomness"] != item["randomness"]:
+                    raise ValueError("drand round " + str(item["round"]) + " at record " + str(item["seq"])
+                                     + " differs from " + relay + ": the recorded value is not drand's")
+            used.append(relay)
+            break
+    return {"asked": len(chosen), "confirmed": len(chosen) if used else 0, "relays": used}
+
+
+def drand_fetcher():
+    import http.client
+    from urllib.parse import urlsplit
+    connections = {}
+
+    def fetch(relay, number):
+        host = urlsplit(relay).hostname
+        for attempt in (0, 1):
+            connection = connections.get(host) or http.client.HTTPSConnection(host, timeout=20)
+            connections[host] = connection
+            try:
+                connection.request("GET", "/" + DRAND_CHAIN + "/public/" + str(number),
+                                   headers={"Accept": "application/json", "User-Agent": "TgWitness verify"})
+                reply = connection.getresponse()
+                body = reply.read(4096)
+                if reply.status != 200:
+                    raise OSError(relay + " answered HTTP " + str(reply.status))
+                return json.loads(body)
+            except (http.client.HTTPException, ConnectionError):
+                connection.close()
+                connections.pop(host, None)
+                if attempt:
+                    raise OSError(relay + " closed the connection")
+    return fetch
 
 
 def verify_events(events, public_key):
@@ -887,10 +1052,7 @@ def verify_checkpoint(checkpoint, public_key, event_count, hash_at):
         raise ValueError("Journal disagrees with the retained checkpoint")
 
 
-# Readable reports --------------------------------------------------------------------------
-
 def read_sealed(stream):
-    """(SHA-256 of the bytes before the seal, seal) of a report; None when it has none (older exports)."""
     digest, window = hashlib.sha256(), b""
     for chunk in iter(lambda: stream.read(1024 * 1024), b""):
         window += chunk
@@ -908,7 +1070,6 @@ def read_sealed(stream):
 
 
 def check_seal(sealed, public_key=None, expected_fingerprint=None):
-    """What a sealed report says it describes, once its signature and its bytes are checked."""
     content, seal = sealed
     statement = seal["statement"]
     if not is_format(statement.get("format"), "report-seal-v1"):
@@ -934,8 +1095,100 @@ def archive_seal(archive, name, public_key):
     return check_seal(sealed, public_key) if sealed else None
 
 
+REPORT_JSON = "report-json-v1"
+PDF_SEAL = "2.25.240684792623320047764573196045913242332"
+SIGNING_TIME = "1.2.840.113549.1.9.5"
+
+
+def read_pdf_seal(data):
+    ranges = re.findall(rb"/ByteRange\s*\[\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*\]", data)
+    if len(ranges) != 1:
+        raise ValueError("Not a PDF signed by TgWitness: exactly one signature is expected")
+    a, b, c, d = map(int, ranges[0])
+    if a != 0 or not 0 < b < c or c + d != len(data) or data[b:b + 1] != b"<" or data[c - 1:c] != b">":
+        raise ValueError("The PDF signature does not cover the whole file")
+    raw = bytes.fromhex(data[b + 1:c - 1].decode("ascii"))
+    content = hashlib.sha256(data[:b] + data[c:]).digest()
+    _, start, end = der(raw, 0)
+    info = children(raw, start, end)
+    if oid(raw, info[0][2], info[0][3]) != SIGNED_DATA:
+        raise ValueError("The PDF signature is not CMS signed data")
+    _, start, end = der(raw, info[1][2])
+    signed = children(raw, start, end)
+    certificates = next(item for item in signed if item[0] == 0xA0)
+    tag, offset, _, value_end = children(raw, certificates[2], certificates[3])[0]
+    der_certificate = raw[offset:value_end]
+    certificate = x509.load_der_x509_certificate(der_certificate)
+    signer = children(raw, signed[-1][2], signed[-1][3])[0]
+    parts = children(raw, signer[2], signer[3])
+    attributes = next(item for item in parts if item[0] == 0xA0)
+    unsigned = next((item for item in parts if item[0] == 0xA1), None)
+    signature = next(item for item in parts if item[0] == 0x04)
+
+    def values(item):
+        found = {}
+        for _, _, s, e in children(raw, item[2], item[3]):
+            kind = children(raw, s, e)
+            found[oid(raw, kind[0][2], kind[0][3])] = children(raw, kind[1][2], kind[1][3])[0]
+        return found
+    signed_attributes = values(attributes)
+    digest = signed_attributes.get(MESSAGE_DIGEST)
+    if digest is None or raw[digest[2]:digest[3]] != content:
+        raise ValueError("The PDF was changed after it was signed")
+    certificate.public_key().verify(raw[signature[2]:signature[3]], b"\x31" + raw[attributes[1] + 1:attributes[3]],
+                                    ec.ECDSA(hashes.SHA256()))
+    seal = values(unsigned).get(PDF_SEAL) if unsigned else None
+    if seal is None:
+        raise ValueError("The PDF signature carries no TgWitness seal")
+    seal = json.loads(raw[seal[2]:seal[3]].decode("utf-8"))
+    certificate_sha256 = hashlib.sha256(der_certificate).hexdigest()
+    if seal["statement"].get("document_certificate_sha256") != certificate_sha256 \
+            or seal["statement"].get("content") != "pdf-byte-range":
+        raise ValueError("The seal does not vouch for the certificate that signed this PDF")
+    when = signed_attributes.get(SIGNING_TIME)
+    names = certificate.subject.get_attributes_for_oid(x509.NameOID.COMMON_NAME)
+    return content.hex(), seal, {"certificate": names[0].value if names else certificate.subject.rfc4514_string(),
+                                 "certificate_subject": certificate.subject.rfc4514_string(),
+                                 "certificate_sha256": certificate_sha256,
+                                 "signing_time": raw[when[2]:when[3]].decode("ascii") if when else None}
+
+
+def read_json_seal(data):
+    if not isinstance(data, dict) or set(data) != {"format", "report", "seal"} \
+            or not is_format(data.get("format"), REPORT_JSON):
+        raise ValueError("Not a TgWitness JSON report")
+    return hashlib.sha256(canonical(data["report"])).hexdigest(), data["seal"]
+
+
+def report_companions(archive, manifest, public, describes):
+    files, report = manifest["files"], manifest.get("report") or {}
+    checked = {"json": None, "parts": 0, "pdf": None}
+    if "report.json" in files:
+        seal = check_seal(read_json_seal(json.loads(read_member(archive, "report.json", MAX_JSON_BYTES))), public)
+        if not describes(seal["subject"]):
+            raise ValueError("report.json describes a different export")
+        checked["json"] = seal
+    for name in ("report.pdf", "chat.pdf"):
+        if name in files:
+            content, seal, signature = read_pdf_seal(read_member(archive, name, MAX_JSON_BYTES))
+            seal = check_seal((content, seal), public)
+            if not describes(seal["subject"]):
+                raise ValueError(name + " describes a different export")
+            checked["pdf"] = {**seal, "file": name, "pdf_signature": signature}
+    parts = report.get("parts") or []
+    for number, part in enumerate(parts, 1):
+        name = part.get("file") if isinstance(part, dict) else None
+        if name not in files:
+            raise ValueError("A report part named in the manifest is missing: " + str(name))
+        seal = archive_seal(archive, name, public)
+        subject = (seal or {}).get("subject") or {}
+        if not seal or not describes(subject) or subject.get("part") != number or subject.get("parts") != len(parts):
+            raise ValueError("Report part " + name + " does not belong to this export")
+        checked["parts"] += 1
+    return checked
+
+
 def check_sums(archive, manifest):
-    """SHA256SUMS (for sha256sum -c) must repeat the signed manifest's hash of every other file."""
     if "SHA256SUMS" not in manifest["files"]:
         return None
     listed = {}
@@ -948,19 +1201,33 @@ def check_sums(archive, manifest):
 
 
 def verify_report(path, expected_fingerprint=None, evidence=None):
-    """A report handed over on its own: its seal and, with --evidence, the archive it describes."""
-    with open(path, "rb") as stream:
-        sealed = read_sealed(stream)
+    signature = None
+    if Path(path).suffix.lower() == ".json":
+        sealed = read_json_seal(read_json_file(path))
+    elif Path(path).suffix.lower() == ".pdf":
+        if Path(path).stat().st_size > MAX_JSON_BYTES:
+            raise ValueError(Path(path).name + " exceeds the verifier's size limit")
+        content, seal, signature = read_pdf_seal(Path(path).read_bytes())
+        sealed = content, seal
+    else:
+        with open(path, "rb") as stream:
+            sealed = read_sealed(stream)
     if not sealed:
         raise ValueError("This report has no seal: it was made before seals or not by TgWitness")
     seal = check_seal(sealed, None, expected_fingerprint)
     subject = seal["subject"]
     result = {"format": "tgwitness-report-seal-v1", "fingerprint": seal["fingerprint"], "report_seal": seal,
-              "producer": seal["producer"], "key_pinned": bool(expected_fingerprint), "evidence_checked": False}
+              "producer": seal["producer"], "key_pinned": bool(expected_fingerprint), "evidence_checked": False,
+              **({"pdf_signature": signature} if signature else {})}
     if evidence:
         if is_format(bundle_format(evidence), "chat-export-v1"):
             checked = verify_chat_export(evidence, expected_fingerprint)
             matches = checked["chat_json_sha256"] == subject.get("chat_json_sha256")
+        elif is_format(bundle_format(evidence), "handover-v1"):
+            checked = verify_handover(evidence, expected_fingerprint)
+            with open_archive(evidence) as archive:
+                matches = read_manifest(archive)["files"].get("records.jsonl") == subject.get("records_sha256") \
+                    and checked["head_hash"] == subject.get("head_hash")
         else:
             checked = verify_bundle(evidence, expected_fingerprint)
             count = subject.get("event_count")
@@ -973,7 +1240,472 @@ def verify_report(path, expected_fingerprint=None, evidence=None):
     return result
 
 
-def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None):
+def verify_selection(path, expected_fingerprint=None, evidence=None):
+    data = read_json_file(path)
+    if data.get("statement", {}).get("format") == "tgwitness-board-selection-v1":
+        return verify_board_selection(data, expected_fingerprint, evidence)
+    if not isinstance(data, dict) or data.get("format") != "tgwitness-selection-v1":
+        raise ValueError("Unsupported selection format")
+    if not evidence:
+        raise ValueError("A viewer selection requires --evidence with its signed source archive")
+    source, items = data.get("source"), data.get("items")
+    if not isinstance(source, dict) or not isinstance(items, list) or not items:
+        raise ValueError("A selection must contain a source and at least one item")
+    kind = source.get("kind")
+    if kind == "journal":
+        archive_format = bundle_format(evidence)
+        kind = "handover" if is_format(archive_format, "handover-v1") else "evidence" if is_format(archive_format, "evidence-v1") else None
+    verifier = {"chat": verify_chat_export, "evidence": verify_bundle, "handover": verify_handover}.get(kind)
+    if verifier is None:
+        raise ValueError("Unsupported selection source kind")
+    checked = verifier(evidence, expected_fingerprint)
+    seal = checked.get("report_seal") or {}
+    if source.get("fingerprint") != checked["fingerprint"] or source.get("report_id") != seal.get("report_id"):
+        raise ValueError("Selection describes a different report or signing key")
+    subject = seal.get("subject") or {}
+    boundary = ("chat_id", "chat_json_sha256") if kind == "chat" else ("head_hash",) if kind == "handover" else ("head_hash", "event_count")
+    if canonical({k: source.get(k) for k in boundary}) != canonical({k: subject.get(k) for k in boundary}):
+        raise ValueError("Selection describes a different archive boundary")
+    if kind == "handover" and (type(source.get("event_count")) is not int or source["event_count"] != checked["journal_events"]):
+        raise ValueError("Selection describes a different archive boundary")
+    identity = "id" if kind == "chat" else "seq"
+    wanted = {}
+    for item in items:
+        if not isinstance(item, dict) or type(item.get(identity)) is not int or item[identity] < 1:
+            raise ValueError("Selection item has an invalid identifier")
+        if item[identity] in wanted:
+            raise ValueError("Selection contains duplicate identifiers")
+        wanted[item[identity]] = item
+    member = "chat.json" if kind == "chat" else "records.jsonl" if kind == "handover" else "events.jsonl"
+    digest_key = "chat_json_sha256" if kind == "chat" else "records_sha256" if kind == "handover" else "events_sha256"
+    matched = set()
+    with open_archive(evidence) as archive:
+        # Bind the data read in this pass to the verified report, too.
+        if member_digest(archive, member) != subject.get(digest_key):
+            raise ValueError("Source data changed after archive verification")
+
+        def records():
+            with archive.open(member) as stream:
+                for line in bounded_lines(stream):
+                    yield json.loads(line)
+
+        for record in chat_messages(archive) if kind == "chat" else records():
+            number = record.get(identity)
+            if number not in wanted:
+                continue
+            if number in matched:
+                raise ValueError("Source has duplicate identifiers for a selected item")
+            expected = record
+            if kind != "chat":
+                payload = record.get("payload") if isinstance(record.get("payload"), dict) else {}
+                sender = payload.get("sender_observation") if isinstance(payload.get("sender_observation"), dict) else {}
+                text = payload.get("text")
+                expected = {"seq": number, "hash": record.get("hash"), "kind": record.get("kind"),
+                            "observed_at": record.get("observed_at"), "chat_id": record.get("chat_id"),
+                            "message_id": record.get("message_id"),
+                            "sender_id": payload.get("sender_id", sender.get("id")),
+                            "text": text if isinstance(text, str) and text else None}
+            if canonical(wanted[number]) != canonical(expected):
+                raise ValueError("Selection item differs from signed source: " + str(number))
+            matched.add(number)
+    if matched != set(wanted):
+        raise ValueError("Selection contains items absent from its source archive")
+    return {"format": "tgwitness-selection-v1", "fingerprint": checked["fingerprint"],
+            "key_pinned": bool(expected_fingerprint), "source_kind": kind, "report_id": source["report_id"],
+            "items_checked": len(matched), "evidence_checked": True, "selection_signed": False,
+            "producer": checked.get("producer"), "case": checked.get("case") or {}}
+
+
+ANNOTATION_FIELDS = ("seq", "at", "access_id", "access_label", "kind", "payload", "previous_hash")
+ANNOTATION_FORMAT = "tgwitness-annotations-v1"
+BOARD_KINDS = {"board." + kind for kind in ("bookmark", "highlight", "slice", "collection", "comment", "status", "move", "remove")}
+
+
+def verify_board_selection(data, expected_fingerprint=None, evidence=None):
+    statement = data["statement"]
+    public = statement["public_key"]
+    fp = fingerprint(public)
+    if expected_fingerprint and fp != expected_fingerprint:
+        raise ValueError("Selection key differs from trusted fingerprint")
+    Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
+        base64.b64decode(data["signature"], validate=True), canonical(statement))
+    if not evidence:
+        raise ValueError("A board selection requires --evidence with its signed source archive")
+    checked = verify_bundle(evidence, expected_fingerprint)
+    if checked["fingerprint"] != fp:
+        raise ValueError("Selection belongs to a different workspace key")
+    items = statement["items"]
+    wanted = {item["seq"]: item for item in items}
+    if len(wanted) != len(items):
+        raise ValueError("Duplicate selection records")
+    boundary, matched, at_boundary = statement["journal_head"], set(), "0" * 64
+    with open_archive(evidence) as archive, archive.open("events.jsonl") as incoming:
+        for line in bounded_lines(incoming):
+            event = json.loads(line)
+            if event["seq"] == boundary["seq"]:
+                at_boundary = event["hash"]
+            if event["seq"] in wanted:
+                if event["seq"] > boundary["seq"] or event != wanted[event["seq"]]:
+                    raise ValueError("Selection item differs from signed source")
+                matched.add(event["seq"])
+    if matched != set(wanted) or boundary["hash"] != at_boundary or boundary["seq"] > checked["events"]:
+        raise ValueError("Selection source boundary or records missing")
+    with tempfile.TemporaryDirectory(prefix="tgwitness-selection-") as temporary:
+        db = sqlite3.connect(str(Path(temporary) / "query.sqlite3"))
+        try:
+            db.execute("CREATE TABLE events(seq INTEGER PRIMARY KEY,hash TEXT,observed_at TEXT,chat_id INTEGER,message_id INTEGER,kind TEXT,actor_id INTEGER,payload TEXT)")
+            with open_archive(evidence) as archive, archive.open("events.jsonl") as incoming:
+                for line in bounded_lines(incoming):
+                    event = json.loads(line)
+                    if event["seq"] > boundary["seq"]:
+                        break
+                    db.execute("INSERT INTO events VALUES(?,?,?,?,?,?,?,?)", tuple(event[key] for key in
+                        ("seq", "hash", "observed_at", "chat_id", "message_id", "kind", "actor_id")) + (canonical(event["payload"]).decode(),))
+            board_prepare(db)
+            where, args = board_where(statement["query"], boundary["seq"])
+            selected = {row[0] for row in db.execute("SELECT seq FROM events WHERE " + where, args)}
+            if selected != set(wanted):
+                raise ValueError("Selection does not contain the complete signed slice query")
+        finally:
+            db.close()
+    return {"format": statement["format"], "fingerprint": fp, "key_pinned": bool(expected_fingerprint),
+            "items_checked": len(matched), "evidence_checked": True, "selection_signed": True,
+            "source_kind": "evidence", "report_id": None, "producer": checked.get("producer"), "case": checked.get("case") or {}}
+
+
+def annotation_hash(record):
+    return hashlib.sha256(canonical({"format": ANNOTATION_FORMAT,
+        **{key: record[key] for key in ANNOTATION_FIELDS}})).hexdigest()
+
+
+def board_replay(records, public_key=None):
+    key = Ed25519PublicKey.from_public_bytes(base64.b64decode(public_key, validate=True)) if public_key else None
+    items, history, previous, count, action_ids = {}, [], "0" * 64, 0, set()
+    for count, record in enumerate(records, 1):
+        if set(record) != set(ANNOTATION_FIELDS) | {"hash", "signature"}:
+            raise ValueError("Unexpected annotation fields")
+        if type(record["seq"]) is not int or record["seq"] != count or record["previous_hash"] != previous or record["hash"] != annotation_hash(record):
+            raise ValueError("Broken annotations chain at " + str(count))
+        if (not re.fullmatch(r"admin|[a-f0-9]{16}", record["access_id"]) or
+            not isinstance(record["access_label"], str) or not 1 <= len(record["access_label"]) <= 240 or
+            datetime.fromisoformat(record["at"]).tzinfo is None):
+            raise ValueError("Invalid annotation author or timestamp")
+        if key:
+            key.verify(base64.b64decode(record["signature"], validate=True), bytes.fromhex(record["hash"]))
+        kind, payload = record["kind"], record["payload"]
+        if kind not in BOARD_KINDS or not isinstance(payload, dict) or not re.fullmatch(r"[a-f0-9]{32}", payload.get("id", "")):
+            raise ValueError("Invalid board annotation")
+        previous = record["hash"]
+        identifier = payload["id"]
+        metadata = {"annotation_seq": count, "annotation_hash": previous, "at": record["at"],
+                    "access_id": record["access_id"], "access_label": record["access_label"], "kind": kind}
+        if kind in {"board.status", "board.move", "board.remove"}:
+            if identifier in action_ids or identifier in items:
+                raise ValueError("Duplicate board action identifier")
+            action_ids.add(identifier)
+            card = items.get(payload.get("card_id"))
+            if not card or card.get("removed"):
+                raise ValueError("Board action refers to a missing card")
+            if kind == "board.status":
+                if payload.get("state") not in {"open", "review", "confirmed", "dismissed"}:
+                    raise ValueError("Invalid board status")
+                card["state"] = payload["state"]
+                history.append({**payload, **metadata})
+            elif kind == "board.move":
+                collection = items.get(payload.get("collection_id"))
+                if payload.get("collection_id") and (not collection or collection["kind"] != "board.collection" or collection.get("removed")):
+                    raise ValueError("Board move refers to a missing collection")
+                card["collection_id"] = payload.get("collection_id")
+            else:
+                card["removed"] = True
+                if card["kind"] == "board.collection":
+                    for member in items.values():
+                        if member.get("collection_id") == card["id"]:
+                            member["collection_id"] = None
+            continue
+        if identifier in action_ids:
+            raise ValueError("Duplicate board action identifier")
+        old = items.get(identifier)
+        if old:
+            if old.get("removed") or payload.get("supersedes") != old["annotation_hash"] or old["kind"] != kind:
+                raise ValueError("Invalid board revision")
+        elif payload.get("supersedes"):
+            raise ValueError("Board revision has no predecessor")
+        if kind == "board.comment" and payload.get("parent_id") not in items:
+            raise ValueError("Board comment has no parent")
+        item = {**payload, **metadata, "state": old.get("state", "open") if old else "open",
+                "collection_id": old.get("collection_id") if old else None, "removed": False,
+                "created_access_id": old["created_access_id"] if old else record["access_id"],
+                "created_access_label": old["created_access_label"] if old else record["access_label"],
+                "created_at": old["created_at"] if old else record["at"]}
+        items[identifier] = item
+        if kind == "board.collection":
+            for card_id in payload.get("card_ids", []):
+                card = items.get(card_id)
+                if not card or card["kind"] not in {"board.bookmark", "board.highlight", "board.slice"} or card.get("removed"):
+                    raise ValueError("Collection refers to a missing card")
+                card["collection_id"] = identifier
+    return {"annotations_head": {"seq": count, "hash": previous}, "items": list(items.values()), "status_history": history}
+
+
+def board_scope(item, lookup, trail=None):
+    trail = set() if trail is None else trail
+    identifier = item.get("id")
+    if identifier in trail:
+        raise ValueError("Cyclic board reference")
+    trail.add(identifier)
+    kind = item["kind"]
+    if kind in {"board.bookmark", "board.highlight"}:
+        chat = item["target"].get("chat_id")
+        return {chat} if chat is not None else None
+    if kind == "board.slice":
+        query = item["query"]
+        if query.get("include_unscoped"):
+            return None
+        return set(query.get("chat_ids") or [query["chat_id"]])
+    if kind == "board.collection":
+        return set(item.get("chat_ids", [])) or None
+    parent = lookup.get(item.get("parent_id") or item.get("card_id"))
+    return board_scope(parent, lookup, trail) if parent else None
+
+
+def board_where(query, boundary=None):
+    chats = query.get("chat_ids") or [query.get("chat_id")]
+    if not chats or any(type(chat) is not int for chat in chats) or len(chats) > 1000:
+        raise ValueError("Invalid slice chat scope")
+    parts, args = [], list(chats)
+    chat_clause = "chat_id IN (" + ",".join("?" * len(chats)) + ")"
+    if query.get("include_unscoped"):
+        chat_clause = "(" + chat_clause + " OR (chat_id IS NULL AND kind='deletion.unscoped'))"
+    parts.append(chat_clause)
+    for field, op, name in (("observed_at", ">=", "from"), ("observed_at", "<=", "to")):
+        if query.get(name):
+            value = query[name]
+            if datetime.fromisoformat(value).tzinfo is None:
+                raise ValueError("Slice timestamps need a timezone")
+            parts.append("julianday(" + field + ") " + op + " julianday(?)")
+            args.append(value)
+    for name, op in (("from_message_id", ">="), ("to_message_id", "<=")):
+        if query.get(name) is not None:
+            parts.append("message_id " + op + " ?")
+            args.append(query[name])
+    kinds = query.get("kinds", "all")
+    if kinds != "all":
+        if not isinstance(kinds, list) or not 1 <= len(kinds) <= 40:
+            raise ValueError("Invalid slice kinds")
+        clauses = []
+        for kind in kinds:
+            if not isinstance(kind, str) or not re.fullmatch(r"[a-z][a-z0-9_]*(?:\.[a-z0-9_*]+)+", kind):
+                raise ValueError("Invalid slice kind")
+            clauses.append("kind GLOB ?")
+            args.append(kind)
+        parts.append("(" + " OR ".join(clauses) + ")")
+    if actors := query.get("actors"):
+        parts.append("actor_id IN (" + ",".join("?" * len(actors)) + ")")
+        args.extend(actors)
+    if query.get("search"):
+        parts.append("instr(board_search(payload),?)>0")
+        args.append(board_search(query["search"]))
+    if query.get("hide_system"):
+        parts.append("kind NOT IN ('collector.heartbeat','host.state') AND NOT (kind='media.skipped' AND COALESCE(json_extract(payload,'$.reason'),'')='media download disabled')")
+    if boundary is not None:
+        parts.append("seq <= ?")
+        args.append(boundary)
+    return " AND ".join(parts), args
+
+
+def board_search(value):
+    return unicodedata.normalize("NFC", str(value or "").casefold())
+
+
+def board_prepare(connection):
+    connection.create_function("board_search", 1, board_search, deterministic=True)
+
+
+def board_slice_summary(connection, query, boundary=None):
+    board_prepare(connection)
+    where, args = board_where(query, boundary)
+    digest, count, first, last = hashlib.sha256(b"["), 0, None, None
+    for seq, value in connection.execute("SELECT seq,hash FROM events WHERE " + where + " ORDER BY hash", args):
+        digest.update((b"," if count else b"") + canonical(value))
+        count += 1
+        first, last = min(first or seq, seq), max(last or seq, seq)
+    digest.update(b"]")
+    counts = dict(connection.execute("SELECT kind,count(*) FROM events WHERE " + where + " GROUP BY kind", args))
+    start, end, placed = connection.execute("SELECT min(julianday(observed_at)),max(julianday(observed_at)),count(julianday(observed_at)) FROM events WHERE " + where, args).fetchone()
+    bins = [0] * 24
+    if start is not None:
+        span = max(end-start, 1 / 86400)
+        for bucket, total in connection.execute("SELECT min(23,cast((julianday(observed_at)-?)/?*24 AS INTEGER)),count(*) FROM events WHERE " + where + " AND julianday(observed_at) IS NOT NULL GROUP BY 1", (start, span, *args)):
+            bins[bucket] = total
+    def iso(day):
+        return datetime.fromtimestamp((day-2440587.5)*86400, timezone.utc).isoformat(timespec="seconds") if day is not None else None
+    return {"record_count": count, "result_hash": digest.hexdigest(), "first_seq": first, "last_seq": last, "counts": counts,
+            "timeline": {"from": iso(start), "to": iso(end), "bins": bins, "unplaced": count-placed, "basis": "observed_at UTC"}}
+
+
+def verify_board(archive, manifest, checkpoint=None):
+    files = manifest["files"]
+    if not {"annotations.jsonl", "case-board.json"} & set(files):
+        if manifest.get("annotations_head") or (checkpoint or {}).get("statement", {}).get("annotations_head"):
+            raise ValueError("Missing retained annotations")
+        return None
+    if not {"annotations.jsonl", "case-board.json"} <= set(files):
+        raise ValueError("Incomplete Case Board export")
+    public = manifest["public_key"]
+    if archive.getinfo("annotations.jsonl").file_size > MAX_JSON_BYTES:
+        raise ValueError("Annotations exceed the verifier's 256 MiB replay limit")
+    with archive.open("annotations.jsonl") as incoming:
+        records = [json.loads(line) for line in bounded_lines(incoming)]
+    replay = board_replay(records, public)
+    signed = json.loads(read_member(archive, "case-board.json", MAX_JSON_BYTES))
+    statement = signed["statement"]
+    Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
+        base64.b64decode(signed["signature"], validate=True), canonical(statement))
+    if statement.get("format") != "tgwitness-case-board-v1" or statement.get("public_key") != public:
+        raise ValueError("Case Board format or key mismatch")
+    if statement.get("state") != replay or manifest.get("annotations_head") != replay["annotations_head"]:
+        raise ValueError("Case Board state differs from annotations")
+    if statement.get("journal_head") != {"seq": manifest["event_count"], "hash": manifest["head_hash"]}:
+        raise ValueError("Case Board journal boundary mismatch")
+    retained_heads = [(checkpoint or {}).get("statement", {}).get("annotations_head")]
+    for name in files:
+        if name.startswith("anchors/") and name.endswith(".json"):
+            retained_heads.append(json.loads(read_member(archive, name)).get("statement", {}).get("annotations_head"))
+    for retained in (head for head in retained_heads if head):
+        seq = retained.get("seq")
+        if type(seq) is not int or seq < 0 or seq > len(records) or retained.get("hash") != (records[seq-1]["hash"] if seq else "0" * 64):
+            raise ValueError("Annotations disagree with retained checkpoint")
+    dangling, changed, slices = [], [], {}
+    with tempfile.TemporaryDirectory(prefix="tgwitness-board-verify-") as temporary:
+        db = sqlite3.connect(str(Path(temporary) / "journal.sqlite3"))
+        try:
+            db.execute("CREATE TABLE events(seq INTEGER PRIMARY KEY,hash TEXT UNIQUE,observed_at TEXT,chat_id INTEGER,message_id INTEGER,kind TEXT,actor_id INTEGER,payload TEXT)")
+            with archive.open("events.jsonl") as incoming:
+                for line in bounded_lines(incoming):
+                    event = json.loads(line)
+                    db.execute("INSERT INTO events VALUES(?,?,?,?,?,?,?,?)", tuple(event[key] for key in
+                        ("seq", "hash", "observed_at", "chat_id", "message_id", "kind", "actor_id")) + (canonical(event["payload"]).decode(),))
+            for record in records:
+                payload = record["payload"]
+                if target := payload.get("target"):
+                    row = db.execute("SELECT seq,chat_id,message_id,kind,payload FROM events WHERE hash=?", (target["event_hash"],)).fetchone()
+                    if row is None:
+                        dangling.append({"id": payload["id"], "event_hash": target["event_hash"]})
+                    else:
+                        if any(target.get(k) != row[i] for i, k in enumerate(("seq", "chat_id", "message_id", "kind"))):
+                            raise ValueError("Board target metadata differs from journal")
+                        if record["kind"] == "board.highlight":
+                            selection, text = payload["range"], json.loads(row[4]).get(payload["range"]["field"])
+                            if (not isinstance(text, str) or selection.get("version") != target["event_hash"] or
+                                type(selection.get("start")) is not int or type(selection.get("length")) is not int or
+                                selection["start"] < 0 or selection["length"] < 1 or
+                                text[selection["start"]:selection["start"]+selection["length"]] != selection["quote"]):
+                                raise ValueError("Highlight differs from the exact saved version")
+                if record["kind"] == "board.slice":
+                    snapshot = payload["snapshot"]
+                    boundary = snapshot["journal_head"]
+                    row = db.execute("SELECT hash FROM events WHERE seq=?", (boundary["seq"],)).fetchone()
+                    if boundary["hash"] != (row[0] if row else "0" * 64 if boundary["seq"] == 0 else None):
+                        raise ValueError("Slice creation boundary differs from journal")
+                    original = board_slice_summary(db, payload["query"], boundary["seq"])
+                    if any(snapshot.get(k) != original[k] for k in ("record_count", "result_hash", "first_seq", "last_seq")):
+                        raise ValueError("Slice bookmark snapshot differs from its original journal prefix")
+            for item in replay["items"]:
+                if item["kind"] != "board.slice" or item["removed"]:
+                    continue
+                query, snapshot = item["query"], item["snapshot"]
+                where, args = board_where(query)
+                hashes = [row[0] for row in db.execute("SELECT hash FROM events WHERE " + where + " ORDER BY hash", args)]
+                added = [row[0] for row in db.execute("SELECT seq FROM events WHERE " + where + " AND seq>? ORDER BY seq", (*args, snapshot["journal_head"]["seq"]))]
+                current = board_slice_summary(db, query)
+                expected = {"id": item["id"], "query": query, "snapshot": snapshot, "current": current,
+                            "event_hashes": hashes, "added_seq": added, "removed_seq": []}
+                name = "board/slices/" + item["id"] + ".json"
+                if name not in files or json.loads(read_member(archive, name, MAX_JSON_BYTES)) != expected:
+                    raise ValueError("Exported slice differs from journal: " + item["id"])
+                slices[item["id"]] = name
+                if added:
+                    changed.append({"id": item["id"], "added": len(added), "removed": 0,
+                                    "message": "slice changed since bookmark: +" + str(len(added)) + "/−0 records"})
+        finally:
+            db.close()
+    if {name for name in files if name.startswith("board/slices/")} != set(slices.values()):
+        raise ValueError("Unexpected board slice files")
+    return {"annotations_head": replay["annotations_head"], "dangling": dangling, "slice_changes": changed,
+            "collections": [{"id": item["id"], "title": item["title"]} for item in replay["items"]
+                            if item["kind"] == "board.collection" and not item["removed"]]}
+
+
+def verify_board_disclosure(archive, manifest):
+    if "case-board.json" not in manifest["files"]:
+        return None
+    signed = json.loads(read_member(archive, "case-board.json", MAX_JSON_BYTES))
+    statement, public = signed["statement"], manifest["public_key"]
+    if statement.get("format") != "tgwitness-case-board-handover-v1" or statement.get("public_key") != public:
+        raise ValueError("Invalid handover board format or signing key")
+    Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
+        base64.b64decode(signed["signature"], validate=True), canonical(statement))
+    cards = statement["material"]["cards"]
+    wanted = {card["target"]["event_hash"]: card for card in cards if card.get("target")}
+    matched = set()
+    with archive.open("records.jsonl") as incoming:
+        for line in bounded_lines(incoming):
+            record = json.loads(line)
+            if record["hash"] in wanted:
+                for card in cards:
+                    if card.get("target", {}).get("event_hash") == record["hash"] and card.get("observation") != record:
+                        raise ValueError("Board exposes content outside the handover record")
+                matched.add(record["hash"])
+    if matched != set(wanted):
+        raise ValueError("Board refers to a record not disclosed in the handover")
+    if "report.json" in manifest["files"]:
+        report = json.loads(read_member(archive, "report.json", MAX_JSON_BYTES))
+        if report["report"].get("case_board") != statement["material"]:
+            raise ValueError("Readable report and board disclosure differ")
+    return {"cards": len(cards), "meaning": "Minimised team notes, signed by the collector; not the original annotations chain"}
+
+
+def verify_board_document(path, expected_fingerprint=None, evidence=None):
+    signed = read_json_file(path)
+    statement = signed["statement"]
+    public = statement["public_key"]
+    fp = fingerprint(public)
+    if expected_fingerprint and fp != expected_fingerprint:
+        raise ValueError("Case Board key differs from trusted fingerprint")
+    Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
+        base64.b64decode(signed["signature"], validate=True), canonical(statement))
+    if statement["format"] == "tgwitness-case-board-v1" and evidence:
+        checked = verify_bundle(evidence, expected_fingerprint)
+        if checked["fingerprint"] != fp:
+            raise ValueError("Case Board belongs to another workspace key")
+        count = statement["state"]["annotations_head"]["seq"]
+        with open_archive(evidence) as archive, archive.open("annotations.jsonl") as incoming:
+            prefix = []
+            for line in bounded_lines(incoming):
+                row = json.loads(line)
+                if row["seq"] > count:
+                    break
+                prefix.append(row)
+        if board_replay(prefix, public) != statement["state"]:
+            raise ValueError("Case Board state differs from its signed annotations prefix")
+        boundary = statement["journal_head"]
+        source_head = {"seq": 0, "hash": "0" * 64}
+        with open_archive(evidence) as archive, archive.open("events.jsonl") as incoming:
+            for line in bounded_lines(incoming):
+                row = json.loads(line)
+                if row["seq"] > boundary["seq"]:
+                    break
+                source_head = {"seq": row["seq"], "hash": row["hash"]}
+        if source_head != boundary:
+            raise ValueError("Case Board journal boundary differs from its evidence source")
+    elif evidence:
+        raise ValueError("Verify a minimized board with its containing handover ZIP")
+    return {"format": statement["format"], "fingerprint": fp, "key_pinned": bool(expected_fingerprint),
+            "annotations_checked": bool(evidence), "meaning": "Team opinions; signature authenticates the signed document, not the truth of a conclusion"}
+
+
+def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None, check_drand=False):
     with open_archive(path) as archive:
         names = archive.namelist()
         manifest = read_manifest(archive)
@@ -991,12 +1723,16 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None)
             if member_digest(archive, name) != digest:
                 raise ValueError("File hash mismatch: " + name)
         sums = check_sums(archive, manifest)
+
+        def describes(subject):
+            return (subject.get("event_count") == manifest["event_count"]
+                    and subject.get("head_hash") == manifest["head_hash"]
+                    and subject.get("events_sha256") == manifest["files"].get("events.jsonl"))
         seal = archive_seal(archive, "report.html", public) if "report.html" in manifest["files"] else None
-        if seal and (seal["subject"].get("event_count") != manifest["event_count"]
-                     or seal["subject"].get("head_hash") != manifest["head_hash"]
-                     or seal["subject"].get("events_sha256") != manifest["files"].get("events.jsonl")):
+        if seal and not describes(seal["subject"]):
             raise ValueError("The report seal describes a different journal")
-        observed = Coverage()
+        companions = report_companions(archive, manifest, public, describes)
+        observed, outside = Coverage(), OutsideRecords()
 
         def measured(lines):
             for line in lines:
@@ -1010,15 +1746,20 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None)
                     if size is not None and archive.getinfo(name).file_size != size:
                         raise ValueError("Preserved media size differs from the signed journal: " + digest)
                 observed.add(event)
+                outside.add(event)
                 yield event
         with archive.open("events.jsonl") as stream:
             result = verify_events(measured(bounded_lines(stream)), public)
         if result["events"] != manifest["event_count"] or result["head_hash"] != manifest["head_hash"]:
             raise ValueError("Manifest does not match journal")
         result["coverage"] = observed.result()
+        result["outside"] = outside.result()
+        if check_drand and outside.rounds:
+            result["outside"]["drand"]["checked"] = confirm_drand(outside.rounds)
         result["producer"] = manifest.get("producer")
         result.update(format=manifest["format"], files_checked=len(manifest["files"]), sha256sums=sums,
-                      report_seal=seal, case=manifest.get("case") or {})
+                      report_seal=seal, report_json=companions["json"], report_parts=companions["parts"],
+                      report_pdf=companions["pdf"], case=manifest.get("case") or {})
 
         def hash_at(seq):
             if seq == 0:
@@ -1032,13 +1773,14 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None)
         if checkpoint:
             verify_checkpoint(checkpoint, public, result["events"], hash_at)
         result["anchors"] = verify_anchors(archive, names, public, result["events"], hash_at, tsa_ca)
+        result["board"] = verify_board(archive, manifest, checkpoint)
         result["key_pinned"] = bool(expected_fingerprint)
         result["checkpoint_checked"] = checkpoint is not None
         return result
 
 
-def verify_chat_export(path, expected_fingerprint=None):
-    with open_archive(path) as archive:
+def verify_chat_export(path, expected_fingerprint=None, max_gib=None):
+    with open_archive(path, max_gib=max_gib) as archive:
         names = archive.namelist()
         manifest = read_manifest(archive)
         if not is_format(manifest["format"], "chat-export-v1"):
@@ -1055,21 +1797,139 @@ def verify_chat_export(path, expected_fingerprint=None):
             if member_digest(archive, name) != digest:
                 raise ValueError("File hash mismatch: " + name)
         parts = verify_parts(archive, manifest) if manifest.get("parts") else None
+        attachments = check_attachments(archive, manifest)
         sums = check_sums(archive, manifest)
+
+        def describes(subject):
+            return (subject.get("chat_id") == (manifest.get("chat") or {}).get("id")
+                    and subject.get("message_count") == manifest.get("message_count")
+                    and subject.get("chat_json_sha256") == manifest["files"].get("chat.json"))
         seal = archive_seal(archive, "chat.html", public) if "chat.html" in manifest["files"] else None
-        if seal and (seal["subject"].get("chat_id") != (manifest.get("chat") or {}).get("id")
-                     or seal["subject"].get("message_count") != manifest.get("message_count")
-                     or seal["subject"].get("chat_json_sha256") != manifest["files"].get("chat.json")):
+        if seal and not describes(seal["subject"]):
             raise ValueError("The report seal describes a different chat export")
+        companions = report_companions(archive, manifest, public, describes)
+        ids = check_message_ids(archive, manifest) if "message-ids.json" in manifest["files"] else None
         return {"format": manifest["format"], "fingerprint": fp,
                 "message_count": manifest.get("message_count"), "producer": manifest.get("producer"),
                 "chat": manifest.get("chat"), "key_pinned": bool(expected_fingerprint), "parts": parts,
                 "files_checked": len(manifest["files"]), "chat_json_sha256": manifest["files"].get("chat.json"),
-                "sha256sums": sums, "report_seal": seal, "case": manifest.get("case") or {}}
+                "attachments": attachments, "sha256sums": sums, "report_seal": seal,
+                "report_parts": companions["parts"], "report_pdf": companions["pdf"], "message_ids": ids,
+                "case": manifest.get("case") or {}}
+
+
+def message_id_summary(chat_id, ids):
+    holes = missing_ranges(ids)
+    return {"chat_id": chat_id, "numbered_per_chat": numbered_per_chat(chat_id),
+            "first_id": ids[0] if ids else None, "last_id": ids[-1] if ids else None, "present": len(ids),
+            "missing": sum(high - low + 1 for low, high in holes) if numbered_per_chat(chat_id) else None,
+            "missing_ranges": [[low, high] for low, high in holes] if numbered_per_chat(chat_id) else []}
+
+
+def check_message_ids(archive, manifest):
+    claimed = json.loads(read_member(archive, "message-ids.json", MAX_JSON_BYTES))
+    ids = sorted({m["id"] for m in chat_messages(archive) if type(m.get("id")) is int})
+    counted = message_id_summary((manifest.get("chat") or {}).get("id"), ids)
+    if {k: claimed.get(k) for k in counted} != counted:
+        raise ValueError("message-ids.json disagrees with the messages in chat.json")
+    return {k: counted[k] for k in ("first_id", "last_id", "present", "missing")} | {
+        "missing_ranges": len(counted["missing_ranges"]), "numbered_per_chat": counted["numbered_per_chat"]}
+
+
+def verify_handover(path, expected_fingerprint=None):
+    with open_archive(path) as archive:
+        names = archive.namelist()
+        manifest = read_manifest(archive)
+        if not is_format(manifest["format"], "handover-v1"):
+            raise ValueError("Unsupported handover format")
+        public = manifest["public_key"]
+        fp = fingerprint(public)
+        if expected_fingerprint and fp != expected_fingerprint:
+            raise ValueError("Public key differs from the independently trusted fingerprint")
+        key = Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True))
+        key.verify(base64.b64decode(read_member(archive, "manifest.sig"), validate=True), canonical(manifest))
+        files = manifest["files"]
+        if set(names) != set(files) | {"manifest.json", "manifest.sig"}:
+            raise ValueError("Unexpected or missing bundle members")
+        for name, digest in files.items():
+            if member_digest(archive, name) != digest:
+                raise ValueError("File hash mismatch: " + name)
+            if name.startswith("media/") and name[len("media/"):] != digest:
+                raise ValueError("Attachment name differs from its SHA-256: " + name)
+        sums = check_sums(archive, manifest)
+        journal = manifest["journal"]
+        count, head = journal["event_count"], journal["head_hash"]
+        if type(count) is not int or count < 1 or not re.fullmatch(r"[0-9a-f]{64}", str(head)):
+            raise ValueError("Malformed journal boundary")
+        key.verify(base64.b64decode(journal["head_signature"], validate=True), bytes.fromhex(head))
+        counts, previous, referenced = {"unchanged": 0, "minimised": 0}, None, set()
+        with archive.open("records.jsonl") as stream:
+            for line in bounded_lines(stream):
+                record = json.loads(line)
+                minimised = record.get("minimised")
+                if set(record) != set(FIELDS) | {"hash", "signature"} | ({"minimised"} if "minimised" in record else set()):
+                    raise ValueError("Unexpected or missing fields at record " + str(record.get("seq")))
+                seq = record["seq"]
+                if type(seq) is not int or not 1 <= seq <= count or (previous and seq <= previous["seq"]):
+                    raise ValueError("Records out of journal order at record " + str(seq))
+                if not re.fullmatch(r"[0-9a-f]{64}", str(record["hash"])):
+                    raise ValueError("Malformed hash at record " + str(seq))
+                if minimised is None:
+                    if hashlib.sha256(canonical({k: record[k] for k in FIELDS})).hexdigest() != record["hash"]:
+                        raise ValueError("Changed content at record " + str(seq))
+                    if previous and previous["seq"] == seq - 1 and record["previous_hash"] != previous["hash"]:
+                        raise ValueError("Broken hash chain at record " + str(seq))
+                    counts["unchanged"] += 1
+                else:
+                    if not isinstance(minimised, list) or not minimised or not all(isinstance(x, str) for x in minimised):
+                        raise ValueError("A minimised record must name what was withheld: record " + str(seq))
+                    counts["minimised"] += 1
+                key.verify(base64.b64decode(record["signature"], validate=True), bytes.fromhex(record["hash"]))
+                if seq == count and record["hash"] != head:
+                    raise ValueError("The last record differs from the journal head")
+                if record["kind"] in ("media.saved", "actor.avatar_saved"):
+                    digest = (record["payload"] or {}).get("media_sha256")
+                    if "media/" + str(digest) in files:
+                        referenced.add("media/" + digest)
+                previous = record
+        if counts != {k: manifest["counts"].get(k) for k in counts}:
+            raise ValueError("Record counts differ from the signed manifest")
+        if {name for name in files if name.startswith("media/")} - referenced:
+            raise ValueError("The extract carries an attachment no record refers to")
+        def describes(subject):
+            return subject.get("records_sha256") == files.get("records.jsonl") and subject.get("head_hash") == head
+        seal = archive_seal(archive, "report.html", public) if "report.html" in files else None
+        if seal and not describes(seal["subject"]):
+            raise ValueError("The report seal describes a different extract")
+        companions = report_companions(archive, manifest, public, describes)
+        board_disclosure = verify_board_disclosure(archive, manifest)
+    return {"format": manifest["format"], "fingerprint": fp, "key_pinned": bool(expected_fingerprint),
+            "board_disclosure": board_disclosure,
+            "purpose": manifest.get("purpose"), "records_unchanged": counts["unchanged"],
+            "records_minimised": counts["minimised"], "records_left_out": manifest["counts"].get("left_out"),
+            "journal_events": count, "head_hash": head, "attachments": len(referenced),
+            "files_checked": len(files), "sha256sums": sums, "report_seal": seal,
+            "report_json": companions["json"], "report_parts": companions["parts"], "report_pdf": companions["pdf"],
+            "case": manifest.get("case") or {}, "producer": manifest.get("producer")}
+
+
+def check_attachments(archive, manifest):
+    files = manifest["files"]
+    for name, digest in files.items():
+        if name.startswith("media/") and name[len("media/"):] != digest:
+            raise ValueError("Attachment name differs from its SHA-256: " + name)
+    referenced = 0
+    for message in chat_messages(archive):
+        name = message.get("file")
+        if name is None:
+            continue
+        if not isinstance(name, str) or files.get(name) is None or files[name] != message.get("file_sha256"):
+            raise ValueError("Message #" + str(message.get("id")) + " names an attachment missing from the archive")
+        referenced += 1
+    return referenced
 
 
 def chat_messages(archive):
-    """Stream messages from chat.json, written one message per line by TgWitness."""
     with archive.open("chat.json") as stream:
         inside = False
         for raw in bounded_lines(io.TextIOWrapper(stream, encoding="utf-8")):
@@ -1084,7 +1944,6 @@ def chat_messages(archive):
 
 
 def verify_parts(archive, manifest):
-    """Multi-account export: every account signed the ranges it fetched; recompute them."""
     ranges = []
     for part in manifest["parts"]:
         statement = part["statement"]
@@ -1119,12 +1978,6 @@ def verify_parts(archive, manifest):
 
 
 def verify_account_export(path, expected_fingerprint=None, max_gib=None):
-    """Authenticate a frozen account-export acquisition, without asserting Telegram completeness.
-
-    The signed inventory fixes the selected tasks. Page receipts bind their original
-    JSONL bytes and downloaded attachments before packaging; their global chain and
-    per-task cursors must agree. A partial acquisition can be cryptographically valid.
-    """
     def integer(value, name, minimum=0):
         if type(value) is not int or value < minimum:
             raise ValueError("Invalid account export " + name)
@@ -1424,7 +2277,6 @@ def account_export_lines(result):
 
 
 def verify_account_disclosure(path, expected_fingerprint=None, source=None, max_gib=None):
-    """A separately signed minimized derivative; source linkage is not proof of derivation."""
     with open_archive(path, max_gib=max_gib) as archive, tempfile.TemporaryDirectory() as temporary:
         manifest = read_manifest(archive)
         if manifest.get("format") != "tgwitness-account-disclosure-v1":
@@ -1440,7 +2292,7 @@ def verify_account_disclosure(path, expected_fingerprint=None, source=None, max_
         files = manifest["files"]
         if not isinstance(files, dict) or set(archive.namelist()) != set(files) | {"manifest.json", "manifest.sig"}:
             raise ValueError("Unexpected or missing disclosure archive members")
-        allowed = {"messages.jsonl", "index.html", "README.txt", "verify.py", "SHA256SUMS"}
+        allowed = {"messages.jsonl", "index.html", "analytics.json", "README.txt", "verify.py", "SHA256SUMS"}
         for name, checksum in files.items():
             if name not in allowed and not re.fullmatch(r"media/[0-9a-f]{64}", name):
                 raise ValueError("Unexpected disclosure content: " + name)
@@ -1532,7 +2384,6 @@ def bundle_format(path):
 
 
 def bundle_hashes(path, seqs):
-    """{seq: hash} for the wanted records of an evidence bundle's events.jsonl, in one pass."""
     wanted, found = set(seqs), {}
     if not wanted:
         return found
@@ -1549,7 +2400,6 @@ CAPTURE_KINDS = ("message.new", "message.edited", "message.deleted", "message.re
 
 
 def verify_capture(value, checkpoint):
-    """Authenticate counters and bind them to the exact signed checkpoint."""
     statement = value["statement"]
     fields = {"format", "created_at", "public_key", "event_count", "head_hash", "challenge", "counts", "last_message_at", "health"}
     if set(value) != {"statement", "signature"} or set(statement) != fields:
@@ -1618,7 +2468,6 @@ def bundle_capture_prefixes(bundle_path, boundaries):
 
 
 def check_capture_prefix(value, bundle_path):
-    """Recount a previously verified evidence prefix, including its last message time."""
     statement = value["statement"]
     prefix = bundle_capture_prefixes(bundle_path, [statement["event_count"]]).get(statement["event_count"])
     if prefix is None or prefix["head_hash"] != statement["head_hash"]:
@@ -1640,7 +2489,6 @@ def unb64url(text):
 
 
 def post_statement(event, witness_fingerprint):
-    """What a witness posts to its channel for one of its journal records (signed separately)."""
     payload = event["payload"]
     statement = {"format": "tgwitness-witness-post-v1", "witness": witness_fingerprint, "seq": event["seq"],
             "at": event["observed_at"], "record_hash": event["hash"],
@@ -1658,7 +2506,6 @@ def post_token(statement, signature_b64):
 
 
 def verify_witness(path, expected_fingerprint=None):
-    """A witness journal export (tgwitness-witness-v1): signatures, chain, and what the witness saw."""
     with open_archive(path) as archive:
         names = archive.namelist()
         manifest = read_manifest(archive)
@@ -1679,7 +2526,6 @@ def verify_witness(path, expected_fingerprint=None):
         retained = {}
 
         def observed(stream):
-            """One pass: each event is read when the chain check asks for it, then summarised."""
             nonlocal interval
             for line in bounded_lines(stream):
                 if not line.strip():
@@ -1733,8 +2579,6 @@ def verify_witness(path, expected_fingerprint=None):
 
 
 def witnessed_periods(witness, key=None):
-    """Times the witness got consistent answers without a miss, and the gaps between them.
-    With key, only answers signed by that collector key count as consistent."""
     limit = (witness.get("interval_minutes") or 10) * 60 * 2.5
     timeline = sorted([(a["at"], a["status"] == "ok" and key in (None, a["collector_fingerprint"]))
                        for a in witness["anchors"]]
@@ -1758,7 +2602,6 @@ def witnessed_periods(witness, key=None):
 
 
 def cross_check_witness(witness, bundle_path, bundle_result):
-    """Every head the witness saw must be a prefix of the exported journal (same key, same hash)."""
     count, key = bundle_result["events"], bundle_result["fingerprint"]
     mine = [a for a in witness["anchors"] if a["collector_fingerprint"] == key]
     hashes = bundle_hashes(bundle_path, {a["event_count"] for a in mine
@@ -1810,7 +2653,6 @@ def cross_check_witness(witness, bundle_path, bundle_result):
 
 
 def channel_texts(source):
-    """(message id, date, text) of channel posts: a Telegram Desktop JSON export, a saved page or a t.me/s URL."""
     source = str(source)
     if source.startswith(("http://", "https://")):
         import urllib.parse
@@ -1842,7 +2684,6 @@ def channel_texts(source):
 
 
 def check_channel(witness, source):
-    """Signed witness posts in the channel must match the witness journal record by record."""
     key = Ed25519PublicKey.from_public_bytes(base64.b64decode(witness["public_key"], validate=True))
     matching, invalid, differing, foreign, dates = set(), [], [], 0, {}
     for message_id, date, text in channel_texts(source):
@@ -1875,7 +2716,6 @@ def check_channel(witness, source):
 
 
 def verify_dossier(path, expected_fingerprint=None, bundle=None):
-    """A people-profile file: signature, and optionally every referenced record against an evidence export."""
     value = read_json_file(path)
     statement = value["statement"]
     if not is_format(statement.get("format"), "dossier-v1"):
@@ -2003,27 +2843,28 @@ def producer_line(producer):
     if not producer:
         return "Producer: not named in this (older) archive."
     return ("Producer (signed): " + str(producer.get("software")) + " " + str(producer.get("version")) + " - "
-            + str(producer.get("project")) + " - " + str(producer.get("homepage")))
+            + str(producer.get("project")) + " - " + str(producer.get("homepage"))
+            + (" - commit " + str(producer["commit"]) if producer.get("commit") else "")
+            + (" - source files SHA-256 " + str(producer["source_tree_sha256"]) if producer.get("source_tree_sha256") else ""))
 
 
 def fingerprint_colors(value):
-    """Sixteen (hue, saturation, lightness) blocks drawn from a fingerprint, the same in report and console:
-    two copies whose colours differ were signed by different keys. Compare the full hex to be sure."""
     data = bytes.fromhex(value)
     return [(data[i] * 360 // 256, 68, 40 + data[i + 1] % 24) for i in range(0, 32, 2)]
 
-
-# Console -----------------------------------------------------------------------------------
 
 SAY = {
     "ru": {
         "TgWitness verifier": "Проверка TgWitness",
         "Signed Telegram evidence · Ed25519 · SHA-256": "Подписанные доказательства из Telegram · Ed25519 · SHA-256",
         "File": "Файл", "Type": "Тип", "Signer": "Подписант", "Checks": "Проверки", "Timestamps": "Метки времени",
-        "Coverage": "Покрытие наблюдения", "Case": "Дело", "Notes": "Примечания", "Details": "Подробности",
+        "Coverage": "Покрытие наблюдения", "Live recording and devices": "Запись в реальном времени и устройства",
+        "Case": "Дело", "Notes": "Примечания", "Details": "Подробности",
         "Evidence archive": "Архив доказательств", "Chat export": "Экспорт чата", "Witness journal": "Журнал свидетеля",
         "People profiles": "Профили людей", "Public proof": "Публичное доказательство",
         "Sealed report": "Опечатанный отчёт", "History report": "Отчёт об истории",
+        "Viewer selection": "Выборка из пульта", "Items": "Записи",
+        "Unsigned selection; item content matched against the signed archive": "Выборка без подписи; записи сверены с подписанным архивом",
         "Manifest signature": "Подпись манифеста", "Ed25519 · valid": "Ed25519 · верна",
         "Signature": "Подпись", "File hashes": "Хеши файлов",
         "{n} files · SHA-256 match": "файлов: {n} · SHA-256 совпадают",
@@ -2061,9 +2902,12 @@ SAY = {
         "TgWitness verifier": "Перевірка TgWitness",
         "Signed Telegram evidence · Ed25519 · SHA-256": "Підписані докази з Telegram · Ed25519 · SHA-256",
         "File": "Файл", "Type": "Тип", "Signer": "Підписант", "Checks": "Перевірки", "Timestamps": "Мітки часу",
-        "Coverage": "Покриття спостереження", "Case": "Справа", "Notes": "Примітки", "Details": "Подробиці",
+        "Coverage": "Покриття спостереження", "Live recording and devices": "Запис у реальному часі та пристрої",
+        "Case": "Справа", "Notes": "Примітки", "Details": "Подробиці",
         "Evidence archive": "Архів доказів", "Chat export": "Експорт чату", "Witness journal": "Журнал свідка",
         "People profiles": "Профілі людей", "Public proof": "Публічний доказ", "Sealed report": "Опечатаний звіт", "History report": "Звіт про історію",
+        "Viewer selection": "Вибірка з переглядача", "Items": "Записи",
+        "Unsigned selection; item content matched against the signed archive": "Вибірка без підпису; записи звірено з підписаним архівом",
         "Manifest signature": "Підпис маніфесту", "Ed25519 · valid": "Ed25519 · дійсний",
         "Signature": "Підпис", "File hashes": "Хеші файлів",
         "{n} files · SHA-256 match": "файлів: {n} · SHA-256 збігаються",
@@ -2101,11 +2945,10 @@ SAY = {
 KINDS = {"evidence": "Evidence archive", "chat": "Chat export", "account": "Account export",
          "account_disclosure": "Account disclosure", "witness": "Witness journal",
          "dossier": "People profiles", "proof": "Public proof", "report": "Sealed report",
-         "history": "History report"}
+         "history": "History report", "handover": "Handover extract", "selection": "Viewer selection"}
 
 
 def console_language(choice=None):
-    """--lang, else the terminal's locale when it is Russian or Ukrainian, else English."""
     if choice:
         return choice
     value = next((os.environ[name] for name in ("LC_ALL", "LC_MESSAGES", "LANG") if os.environ.get(name)), "")
@@ -2117,7 +2960,6 @@ def console_language(choice=None):
 
 
 def enable_ansi(stream):
-    """Windows consoles show colours once virtual terminal processing is switched on."""
     if os.name != "nt":
         return True
     try:
@@ -2132,7 +2974,6 @@ def enable_ansi(stream):
 
 
 class Console:
-    """The verifier's answer for a person at a terminal; scripts and pipes get the plain form."""
     WIDTH = 66
     STYLES = {"ok": "1;32", "bad": "1;31", "warn": "1;33", "dim": "2", "bold": "1", "accent": "1;38;5;75",
               "okbar": "1;97;42", "badbar": "1;97;41"}
@@ -2141,7 +2982,7 @@ class Console:
         try:
             "".join(SAY.get(lang, {}).values()).encode(stream.encoding or "ascii")
         except (LookupError, UnicodeEncodeError):
-            lang = "en"  # a console that cannot show the language gets English rather than escapes
+            lang = "en"
         self.stream, self.words, self.lang = stream, SAY.get(lang, {}), lang
         try:
             "✔✘⚠◷•─│╭╮╰╯█⠋".encode(stream.encoding or "ascii")
@@ -2326,12 +3167,32 @@ class Console:
             if result.get("parts"):
                 self.check("ok", "Accounts", self.t("{n} account(s) signed their message ranges", n=len(result["parts"])))
             self.seal(result, "chat.html")
+        elif shown == "handover":
+            self.check("ok", "Manifest signature", self.t("Ed25519 · valid"))
+            self.check("ok", "File hashes", self.t("{n} files · SHA-256 match", n=self.number(result["files_checked"])))
+            self.check("ok", "Unchanged records", self.t("{n} · hash, signature and chain checked",
+                                                         n=self.number(result["records_unchanged"])))
+            self.check("warn" if result["records_minimised"] else "ok", "Minimised records",
+                       self.t("{n} · signature over the original record checked",
+                              n=self.number(result["records_minimised"])))
+            self.check("none", "Left out", self.t("{n} records of {total} in the journal",
+                                                  n=self.number(result["records_left_out"]),
+                                                  total=self.number(result["journal_events"])))
+            self.seal(result, "report.html")
+        elif shown == "selection":
+            self.check("ok", "Described archive", self.t("verified and matches the seal"))
+            self.check("ok", "Items", str(result["items_checked"]))
+            self.check("ok" if result.get("selection_signed") else "none", "Signature",
+                       "Signed Case Board selection; exact records matched against the archive" if result.get("selection_signed")
+                       else self.t("Unsigned selection; item content matched against the signed archive"))
         elif shown == "report":
             seal = result["report_seal"]
             subject = seal["subject"]
             self.check("ok", "Report seal", self.t("{name} · intact · language {lang}", name=path.name, lang=seal["language"]))
-            described = (self.t("{n} records · head {hash}", n=self.number(subject.get("event_count")),
-                                hash=str(subject.get("head_hash"))[:8] + "…") if "event_count" in subject else
+            described = (self.t("{n} records · head {hash}", n=self.number(subject.get("event_count",
+                                                                                     subject.get("record_count"))),
+                                hash=str(subject.get("head_hash"))[:8] + "…")
+                         if "event_count" in subject or "record_count" in subject else
                          self.t("{n} messages · {title}", n=self.number(subject.get("message_count")),
                                 title=subject.get("chat_title") or subject.get("chat_id")))
             self.check("none", "Describes", described)
@@ -2345,8 +3206,9 @@ class Console:
         if shown == "evidence":
             self.timestamps(result.get("anchors") or [])
             self.lines("Coverage", coverage_lines(result["coverage"]))
+            self.lines("Live recording and devices", outside_lines(result["outside"]), limit=12)
             notes = [n for n in notes if n not in coverage_lines(result["coverage"])
-                     and not n.startswith("No retained checkpoint")]
+                     and n not in outside_lines(result["outside"]) and not n.startswith("No retained checkpoint")]
         elif shown == "account":
             self.lines("Coverage", account_export_lines(result), limit=12)
             notes = [note for note in notes if note not in account_export_lines(result)]
@@ -2354,7 +3216,7 @@ class Console:
             self.lines("Details", ["messages: " + str(result["counts"]["messages"]),
                                    "chats: " + str(result["counts"]["chats"]), "media: " + str(result["counts"]["media"]),
                                    result["meaning"]])
-        elif shown not in ("chat", "report"):
+        elif shown not in ("chat", "report", "handover"):
             facts = [key + ": " + json.dumps(value, ensure_ascii=False) for key, value in result.items()
                      if isinstance(value, (str, int, bool)) and key != "fingerprint"]
             self.lines("Details", facts, limit=12)
@@ -2371,7 +3233,6 @@ class Console:
 
 
 class Spinner:
-    """A small animation on stderr while large archives are hashed; gone before the answer is printed."""
     def __init__(self, stream, text, frames):
         import threading
         self.stream, self.text, self.frames = stream, text, frames
@@ -2412,6 +3273,9 @@ def main():
     parser.add_argument("--channel", help="Witness channel posts: Telegram Desktop result.json, saved page or t.me/s URL")
     parser.add_argument("--evidence", type=Path,
                         help="With a profile/proof/history JSON, sealed report or disclosure: verify the referenced original archive")
+    parser.add_argument("--check-drand", action="store_true",
+                        help="Compare the drand rounds in the journal with drand relays (needs internet)")
+    parser.add_argument("--board", action="store_true", help="Print Case Board collections, dangling references and slice changes")
     parser.add_argument("--max-gib", type=int, default=MAX_UNCOMPRESSED_GIB,
                         help="Largest uncompressed archive to read, in GiB (default 4)")
     output = parser.add_mutually_exclusive_group()
@@ -2441,12 +3305,28 @@ def main():
     if spinner:
         spinner.__enter__()
     try:
-        if args.bundle.suffix.lower() in (".html", ".htm"):
+        if args.bundle.suffix.lower() in (".html", ".htm", ".pdf"):
             shown, result = "report", verify_report(args.bundle, args.fingerprint, args.evidence)
             pinned = bool(args.fingerprint)
         elif args.bundle.suffix.lower() == ".json":
-            kind = read_json_file(args.bundle).get("statement", {}).get("format")
-            if is_format(kind, "public-proof-v1"):
+            data = read_json_file(args.bundle)
+            kind = data.get("statement", {}).get("format")
+            if kind == "tgwitness-board-selection-v1":
+                shown, result = "selection", verify_selection(args.bundle, args.fingerprint, args.evidence)
+                pinned = bool(args.fingerprint)
+                notes.append("Signed Case Board selection; exact records matched against the signed journal archive.")
+            elif kind in {"tgwitness-case-board-v1", "tgwitness-case-board-disclosure-v1", "tgwitness-case-board-handover-v1"}:
+                shown, result = "board", verify_board_document(args.bundle, args.fingerprint, args.evidence)
+                pinned = bool(args.fingerprint)
+                notes.append(result["meaning"])
+            elif data.get("format") == "tgwitness-selection-v1":
+                shown, result = "selection", verify_selection(args.bundle, args.fingerprint, args.evidence)
+                pinned = bool(args.fingerprint)
+                notes.append("The selection is unsigned. Its items match the verified archive; selection time and notes are not authenticated.")
+            elif is_format(data.get("format"), REPORT_JSON):
+                shown, result = "report", verify_report(args.bundle, args.fingerprint, args.evidence)
+                pinned = bool(args.fingerprint)
+            elif is_format(kind, "public-proof-v1"):
                 shown = "proof"
                 result = verify_public_proof(args.bundle, args.fingerprint, args.witness_fingerprint, args.evidence)
             elif is_format(kind, "history-report-v1"):
@@ -2479,6 +3359,12 @@ def main():
             shown = "chat"
             result = verify_chat_export(args.bundle, args.fingerprint)
             pinned = bool(args.fingerprint)
+        elif is_format(archive_format, "handover-v1"):
+            shown = "handover"
+            result = verify_handover(args.bundle, args.fingerprint)
+            pinned = bool(args.fingerprint)
+            notes.append("Minimised records are authenticated by the signature over the original record's hash; "
+                         "confirm their content against the complete journal by that hash.")
         elif is_format(archive_format, "witness-v1"):
             shown = "witness"
             result = verify_witness(args.bundle, args.witness_fingerprint or args.fingerprint)
@@ -2487,8 +3373,9 @@ def main():
             result.pop("statements")
         else:
             result = verify_bundle(args.bundle, args.fingerprint,
-                                   read_json_file(args.checkpoint) if args.checkpoint else None, args.tsa_ca)
-            notes += coverage_lines(result["coverage"])
+                                   read_json_file(args.checkpoint) if args.checkpoint else None, args.tsa_ca,
+                                   args.check_drand)
+            notes += coverage_lines(result["coverage"]) + outside_lines(result["outside"])
             pinned = bool(args.fingerprint)
             if not args.checkpoint:
                 notes.append("No retained checkpoint supplied: records removed from the end of this journal are not "
@@ -2516,6 +3403,11 @@ def main():
                                  + " trailing record(s) have no matching witness checkpoint.")
 
                 pinned = pinned or bool(args.witness_fingerprint and result["witness"]["consistent"])
+        if args.board and result.get("board"):
+            notes.append("Case Board annotations: " + str(result["board"]["annotations_head"]["seq"]))
+            notes.extend("Collection: " + item["title"] for item in result["board"]["collections"])
+            notes.extend(item["message"] for item in result["board"]["slice_changes"])
+            notes.extend("Dangling board target: " + item["id"] + " / " + item["event_hash"] for item in result["board"]["dangling"])
         check = result.get("channel_check") or (result.get("witness") or {}).get("channel_check")
         if check and (check["invalid_signatures"] or check["differ_from_journal"]):
             raise ValueError("Channel posts do not match the witness journal")
@@ -2559,6 +3451,19 @@ def main():
     if seal:
         print("Report seal verified: " + ("chat.html" if shown == "chat" else "report.html" if shown == "evidence"
                                           else args.bundle.name) + ", language " + str(seal["language"]) + ".")
+    if result.get("report_json"):
+        print("JSON report seal verified: report.json.")
+    pdf = result.get("report_pdf") or (result if result.get("pdf_signature") else None)
+    if pdf:
+        print("PDF signature and Ed25519 seal verified: " + str(pdf.get("file") or args.bundle.name)
+              + " (certificate " + pdf["pdf_signature"]["certificate"] + ").")
+    if result.get("report_parts"):
+        print("Report parts verified: " + str(result["report_parts"]) + ", each sealed over this export.")
+    ids = result.get("message_ids")
+    if ids and ids["numbered_per_chat"]:
+        print("Message IDs " + str(ids["first_id"]) + "-" + str(ids["last_id"]) + ": " + str(ids["present"])
+              + " present, " + str(ids["missing"]) + " absent in " + str(ids["missing_ranges"])
+              + " range(s); message-ids.json matches chat.json.")
     if result.get("sha256sums"):
         print("SHA256SUMS matches the signed manifest.")
     for line in notes:

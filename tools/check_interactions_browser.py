@@ -1,4 +1,3 @@
-"""Mini-client acceptance against a synthetic Telegram transport; no live account is used."""
 import asyncio
 import json
 import os
@@ -21,6 +20,27 @@ from tools.browser_fixtures import offer
 from tools.browser_fixtures import SHOP_BOT
 from tgwitness.evidence import export_file
 from tgwitness.verify import verify_bundle
+
+
+def open_composer(page):
+    allow_writes(page)
+    if page.locator("#chat-compose-open").is_visible():
+        page.locator("#chat-compose-open").click()
+    expect(page.locator("#chat-compose")).to_be_visible()
+
+
+def allow_writes(page):
+    if page.locator('#chat-read-only').is_checked():
+        page.locator('#chat-read-only').uncheck()
+
+
+def confirm_action(page):
+    page.wait_for_function("()=>document.querySelector('dialog.chat-action-confirm[open]')||!actionBusy&& !document.querySelector('#chat-send')?.hasAttribute('aria-busy')")
+    dialog = page.locator('dialog.chat-action-confirm[open]')
+    if dialog.count():
+        if dialog.locator('#chat-action-remember').is_visible():
+            dialog.locator('#chat-action-remember').check()
+        dialog.locator('[data-confirm-action="true"]').click()
 
 
 def main():
@@ -52,14 +72,27 @@ def main():
                 raise
             page.locator('[data-view="chats"]').click()
             expect(page.locator("#chat-message")).to_be_enabled()
+            expect(page.locator("#chat-compose")).to_be_hidden()
+            expect(page.locator('#chat-read-only')).to_be_checked()
+            allow_writes(page)
+            expect(page.locator("#chat-compose-open")).to_contain_text("Write as")
+            open_composer(page)
+            expect(page.locator("#chat-compose-warning")).to_contain_text("Chat members will see this message")
             page.locator("#chat-message").fill("<b>plain text from the panel</b>")
             page.locator("#chat-send").click()
+            confirm_action(page)
             expect(page.locator("#interaction-result")).to_contain_text("Action completed")
-            expect(page.locator("#chat-feed .bubble-text").last).to_have_text("<b>plain text from the panel</b>")
+            try:
+                expect(page.locator("#chat-feed .bubble-text").last).to_have_text("<b>plain text from the panel</b>")
+            except AssertionError:
+                print('Receipt:', page.locator('#interaction-result').inner_text(), 'Errors:', errors)
+                print('Chat messages:', page.evaluate('state.chatMessages.map(m=>({id:m.message_id,text:m.text,captured:m.captured}))'))
+                raise
             assert page.locator("#chat-feed .bubble-text b").count() == 0
             page.locator("#msg-10 .bubble-meta button", has_text="Reply").click()
             page.locator("#chat-message").fill("reply from panel")
             page.locator("#chat-send").click()
+            confirm_action(page)
             expect(page.locator("#chat-feed .reply-quote")).to_have_count(1)
             page.locator("#msg-10 .msg-button", has_text="I paid").get_by_role("button").click()
             expect(page.locator("#interaction-result")).to_contain_text("Recorded answer")
@@ -124,6 +157,7 @@ def main():
               };
             }""", "/api/chats/" + str(CHAT) + "/messages?limit=60")
             page.locator("#chat-link-preview button").click()
+            confirm_action(page)
             expect(page.locator("#chat-name")).to_have_text("Channel 123")
             expect(page.locator("#interaction-result")).to_contain_text("Action completed and recorded.")
             expect(page.locator("#interaction-result")).to_contain_text("Chat refresh failed")
@@ -138,11 +172,14 @@ def main():
             expect(page.locator("#interaction-result")).to_contain_text("Action completed and recorded.")
             assert len(server.app.state.collector.client.joined) == 1
             page.locator(".chat-item", has_text="Synthetic shop bot").click()
+            allow_writes(page)
             page.locator("#msg-10 .msg-button", has_text="I paid").get_by_role("button").click()
+            confirm_action(page)
             expect(page.locator("#interaction-result")).to_contain_text("Recorded answer")
 
             assert page.locator('#interaction-result a[href^="https:"]').count() == 0
             expect(page.locator("#chat-message")).to_be_enabled()
+            open_composer(page)
             page.locator("#chat-message").fill("Draft intended for the bot")
             sent = len(server.app.state.collector.client.sent)
             hold_api_response(page, "/api/chats/" + str(CHAT) + "/messages?limit=60")
@@ -157,10 +194,25 @@ def main():
             assert len(server.app.state.collector.client.sent) == sent
             release_api_response(page)
             expect(page.locator("#chat-message")).to_be_enabled()
+            open_composer(page)
             page.locator("#chat-message").fill("Message intended for the group")
-            page.locator("#chat-send").click()
+            with page.expect_response(lambda response: response.request.method == "POST"
+                    and response.url.endswith("/api/interactions")
+                    and response.request.post_data_json.get("action") == "send"
+                    and response.request.post_data_json.get("chat_id") == CHAT
+                    and response.request.post_data_json.get("text") == "Message intended for the group") as group_send:
+                page.locator("#chat-send").click()
+                expect(page.locator('dialog.chat-action-confirm[open]')).to_be_visible()
+                page.evaluate("refreshStatus()")
+                expect(page.locator("#chat-send")).to_have_attribute("aria-busy", "true")
+                expect(page.locator("#chat-send")).to_be_disabled()
+                assert len(server.app.state.collector.client.sent) == sent
+                confirm_action(page)
+            assert group_send.value.ok and group_send.value.json()["status"] == "succeeded"
             expect(page.locator("#chat-send")).to_be_enabled()
+            assert len(server.app.state.collector.client.sent) == sent + 1
             assert server.app.state.collector.client.sent[-1][0] == 123
+            assert server.app.state.collector.client.sent[-1][1] == "Message intended for the group"
 
             page.locator(".chat-item", has_text="Synthetic shop bot").click()
             expect(page.locator("#chat-message")).to_be_enabled()
@@ -173,6 +225,7 @@ def main():
             release_api_response(page)
             expect(page.locator("#chat-name")).to_have_text("Synthetic shop bot")
             expect(page.locator("#chat-feed")).not_to_contain_text("Message intended for the group")
+            open_composer(page)
             for width, height in [(1440, 1000), (390, 844), (320, 800)]:
                 page.set_viewport_size({"width": width, "height": height})
                 for theme in ("light", "dark"):
@@ -197,6 +250,16 @@ def main():
             expect(page.locator("#chat-send")).to_have_text("Send")
             expect(page.locator("#chat-message")).to_have_attribute("placeholder", "Write a message…")
             expect(page.locator("#chat-compose-account")).to_contain_text("Sending as")
+            sent = len(server.app.state.collector.client.sent)
+            server.app.state.store.set_setting("setup", {"goal": "evidence"})
+            page.evaluate("refreshStatus()")
+            expect(page.locator('#chat-read-only')).to_be_disabled()
+            expect(page.locator('.chat-safety-hint')).to_contain_text("Sending is off")
+            refused = page.evaluate("""chat=>json('interactions',{request_id:'evidence-goal-refusal-check',action:'send',
+                chat_id:chat,text:'must not be sent'}).then(()=>'sent',error=>error.message)""", CHAT)
+            assert "Evidence for a case" in refused, refused
+            assert len(server.app.state.collector.client.sent) == sent
+            server.app.state.store.set_setting("setup", None)
             assert not errors, errors
             browser.close()
         archive = export_file(store, server.app.state.vault, "zip")
@@ -206,7 +269,8 @@ def main():
                               "join and observe", "light/dark at 1440/390/320", "lock clears draft",
                               "English controls", "signed evidence verifies", "no browser errors",
                               "refresh failure preserves receipt and request ID", "chat switch blocks sending",
-                              "stale chat response ignored", "join receipt survives destination load failure"],
+                              "stale chat response ignored", "join receipt survives destination load failure",
+                              "status poll preserves pending consent", "group send confirms exact recipient and text"],
                    "events_verified": verified["events"]}
         (output / "receipt.json").write_text(json.dumps(receipt, indent=2), encoding="utf-8")
         print(json.dumps(receipt, indent=2))

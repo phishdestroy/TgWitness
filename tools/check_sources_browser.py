@@ -1,11 +1,10 @@
-"""Sources tabs and recording drafts against a synthetic local workspace."""
 import json
 import tempfile
 from pathlib import Path
 
 from playwright.sync_api import expect, sync_playwright
 
-from check_browser import (ROOT, RunningApp, hold_api_response, launch_browser, navigate_panel,
+from check_browser import (ROOT, answer_panel_dialog, RunningApp, hold_api_response, launch_browser, navigate_panel,
                            release_api_response, unlock)
 from tools.browser_fixtures import saved_session
 
@@ -59,6 +58,8 @@ def check_targets(page, server):
     expect(page.locator("#target-selection-count")).to_have_text("7 selected")
     page.locator("#target-bulk-action").select_option("pause")
     page.locator("#target-bulk-apply").click()
+    answer_panel_dialog(page)
+    expect(rows.locator(".source-state").first).to_have_text("Paused")
     expect(page.locator("#target-card")).to_have_attribute("aria-busy", "false")
     assert rows.locator(".source-state").all_text_contents() == ["Paused"] * 7
     page.locator("#target-filter").select_option("enabled")
@@ -67,7 +68,6 @@ def check_targets(page, server):
     page.locator("#target-clear-filters").click()
     page.locator("#target-sort").select_option("name")
 
-    # A failed update keeps the selection and can be retried without another click per row.
     page.locator("#target-search").fill("source 02")
     page.locator("#target-select-page").check()
     page.locator("#target-bulk-action").select_option("priority")
@@ -79,7 +79,6 @@ def check_targets(page, server):
     page.locator("#target-bulk-apply").click()
     expect(rows.locator('[data-source-action="star"]')).to_have_attribute("aria-pressed", "true")
 
-    # Exclusions merge into a newer unsaved Scope draft instead of replacing it.
     page.evaluate("""async()=>{await json('scope',{...state.status.scope,mode:'account',acknowledged:true});
         await refreshStatus();await loadScope();}""")
     page.locator("#sources-tab-scope").click()
@@ -88,6 +87,7 @@ def check_targets(page, server):
     page.locator("#target-select-page").check()
     page.locator("#target-bulk-action").select_option("exclude")
     page.locator("#target-bulk-apply").click()
+    answer_panel_dialog(page)
     expect(rows.locator(".source-state")).to_have_text("Excluded")
     expect(page.locator("#target-card")).to_have_attribute("aria-busy", "false")
     page.locator("#sources-tab-scope").click()
@@ -95,18 +95,20 @@ def check_targets(page, server):
     expect(page.locator("#scope-exclude")).to_contain_text("Investigation source 02")
     page.locator("#sources-tab-chats").click()
     rows.locator(".source-state").click()
+    expect(rows.locator(".source-state")).to_have_text("Excluded")
+    rows.locator(".source-row-menu > summary").click()
+    rows.locator('[data-source-action="enable"]').click()
     expect(rows.locator(".source-state")).to_have_text("Enabled")
     expect(page.locator("#target-card")).to_have_attribute("aria-busy", "false")
     assert page.evaluate("state.scopeDirty && !state.scopeExclude.includes(-1000000001001)")
 
-    # Removing membership never removes signed history.
     store = server.app.state.store
     saved = store.append("message.new", {"text": "retained evidence"}, chat_id=-1000000001001,
                          message_id=7)
     page.locator("#target-select-page").check()
     page.locator("#target-bulk-action").select_option("remove")
-    page.once("dialog", lambda dialog: dialog.accept())
     page.locator("#target-bulk-apply").click()
+    answer_panel_dialog(page)
     expect(rows).to_have_count(0)
     expect(page.locator("#sources-tab-count")).to_have_text("20")
     assert store.events(chat_id=-1000000001001, message_id=7)[0]["seq"] == saved["seq"]
@@ -209,7 +211,6 @@ def check_dialog_refresh(page, server):
     expect(page.locator("#dialog-list button").nth(1)).to_be_disabled()
     expect(page.locator("#sources-tab-count")).to_have_text("21")
 
-    # A late refresh cannot navigate away from the journal or discard the old list on failure.
     hold_api_response(page, "/api/dialogs")
     page.locator("#load-dialogs").click()
     expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
@@ -323,12 +324,29 @@ def main():
                     page.screenshot(path=str(output / f"{tab}-{width}-{theme}.png"), full_page=True)
                     checks.append({"theme": theme, "width": width, "tab": tab, "height": height})
 
+        page.locator("#sources-tab-scope").click()
+        page.locator("#scope-investigation").click()
+        answer_panel_dialog(page, accept=False)
+        assert server.app.state.store.get_setting("scope", {}).get("mode", "selected") == "selected"
+        page.locator("#scope-investigation").click()
+        answer_panel_dialog(page)
+        for _ in range(100):
+            saved = server.app.state.store.get_setting("scope", {})
+            if saved.get("mode") == "account":
+                break
+            page.wait_for_timeout(50)
+        assert saved["mode"] == "account" and saved["new_chats"] == {"profile": True, "history": 200}, saved
+        page.evaluate("""json('scope',{mode:'selected',folder_id:null,types:{channels:true,groups:true,private:true,bots:true},
+            exclude:[],own_actions:true,new_chats:{profile:false,history:0}}).then(()=>{state.scopeDirty=false;return loadScope();})""")
         check_targets(page, server)
         check_export_location(page)
         check_dialog_refresh(page, server)
         page.set_viewport_size({"width": 1440, "height": 1000})
         page.locator("#sources-tab-recording").click()
         second = page.evaluate("json('profiles',{label:'Independent workspace'}).then(value=>value.id)")
+        second_store = server.app.state.profiles.entries[second]["app"].state.store
+        second_store.set_setting('first_run', {'skipped': True})
+        second_store.set_setting('ui_preferences:admin', {'language':'en','theme':'system','timezone':'UTC','level':'expert'})
         second_capture = server.app.state.profiles.entries[second]["app"].state.store.get_setting("capture")
         assert second_capture is not None and not second_capture["types"]["animation"]["enabled"]
         page.evaluate("loadProfiles()")
@@ -338,6 +356,7 @@ def main():
         page.locator("#target-bulk-action").select_option("pause")
         hold_api_response(page, "/api/targets/batch")
         page.locator("#target-bulk-apply").click()
+        answer_panel_dialog(page)
         expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
         page.locator("#profile-select").select_option(second)
         expect(page.locator("#workspace")).to_have_js_property("inert", False)

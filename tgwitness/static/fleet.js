@@ -1,6 +1,5 @@
 (() => {
   "use strict";
-  // Account groups with shared settings, and importing many accounts into their own workspaces.
   let groups = [], sections = [], picked = [], importing = false, stopping = false;
   let loadSerial = 0, formRevision = -1, restorePoint = null, loadError = "", creating = null;
   const settings = new Map(), moving = new Map(), writing = new Map(), groupActions = new Map();
@@ -94,12 +93,42 @@
         const result = await json("profiles/" + encodeURIComponent(profileId) + "/group", {group: marker.group || null},
                                  {root: true, method: "PUT"});
         await acceptWrite(result, serial); toast(tr("Workspace moved."));
+        if (marker.group) await offerShared(marker.group, profileId);
       } finally {
         if (moving.get(profileId) === marker) moving.delete(profileId);
         if (revision === state.workspaceRevision) decorate();
       }
     }));
     return select;
+  }
+
+  async function offerShared(groupId, profileId) {
+    const revision = state.workspaceRevision;
+    const shared = await json("profile-groups/" + encodeURIComponent(groupId) + "/settings", undefined, {root: true});
+    const member = shared.members.find(m => m.id === profileId);
+    if (!member?.available || !member.own.length) return;
+    const keys = member.own.filter(key => key !== "route");
+    if (!keys.length) return;
+    const names = keys.map(key => tr(shared.keys.find(k => k.key === key)?.label || key));
+    const list = names.length > 6 ? [...names.slice(0, 6), tr("and {n} more", {n: names.length - 6})] : names;
+    if (!(await window.TgWitnessDialogs.confirm(trn("{n} setting of this account differs from the group {name}:", "{n} settings of this account differ from the group {name}:",
+        keys.length, {name: shared.group.label}) + "\n\n" + list.join("\n") + "\n\n" +
+        tr("Take the group's values? Otherwise the account keeps its own and Settings marks them ✏️."),
+        {title: tr("Take the shared settings?"), confirmText: tr("Take the group's values")}))) return;
+    if (revision !== state.workspaceRevision) return;
+    const result = await json("profile-groups/" + encodeURIComponent(groupId) + "/settings/adopt", {profiles: [profileId], keys}, {root: true});
+    const remaining = result.members.find(m => m.id === profileId)?.own || [];
+    if (result.failed.length) toast(result.failed.map(f => f.label + ": " + tr(f.error)).join(" · "), true);
+    else if (remaining.includes("route") || result.kept_own?.length) toast(tr("Settings saved.") + " " + tr("Own route preserved"));
+    else if (remaining.length) toast(tr("Settings saved."));
+    else toast(tr("The account now follows the group."));
+  }
+
+  function openShared(group) {
+    return busy(null, async () => {
+      await navigate("settings");
+      if (state.view === "settings") await settingsHub?.openGroup(group.id);
+    });
   }
 
   function updateGroupSelect(select,profileId,current){
@@ -115,7 +144,7 @@
       updateSettings(entry);
       return entry.panel;
     }
-    const panel = node("details", "fleet-group-settings"), summary = node("summary", "", tr("Shared settings"));
+    const panel = node("details", "fleet-group-settings"), summary = node("summary", "", tr("Copy settings from one account"));
     const body = node("div", "fleet-settings-body");
     const templateLabel = node("label", "", tr("Copy from")), template = node("select");
     template.id = "fleet-template-" + group.id; templateLabel.htmlFor = template.id;
@@ -136,7 +165,7 @@
       await acceptWrite(result, serial); entry.dirty = false; decorate();
       toast(tr("Group settings saved. Use Apply to copy them to the members."));
     })));
-    body.append(templateLabel, template, node("p", "hint", tr("These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.")), checks, save);
+    body.append(templateLabel, template, node("p", "hint", tr("Apply copies these settings from the chosen account to every other member, and the group then shares them: accounts added later start with them. Each member records what it received in its signed journal; an observing account keeps its IP mode until it is paused.")), checks, save);
     for (const field of body.querySelectorAll("input, select, button")) field.disabled = !editable();
     panel.append(summary, body);
     updateSettings(entry);
@@ -158,7 +187,6 @@
     groupControls(group.id);
   }
 
-  // Start or pause every member at once; members without a session or already in that state are left alone
   function groupRun(group) {
     const members = () => (state.profiles || []).filter(p => group.members.includes(p.id) && p.collector);
     const due = {start: p => !p.collector.running && p.collector.has_session, stop: p => p.collector.running};
@@ -223,7 +251,7 @@
     })));
     const rename = node("button", "quiet small", tr("Rename")); rename.type = "button";
     rename.addEventListener("click", () => busy(rename, () => writeGroup(group.id, async serial => {
-      const label = (window.prompt(tr("New name for this group:"), group.label) || "").trim();
+      const label = ((await window.TgWitnessDialogs.prompt(tr("New name for this group:"), {title: tr("Rename"), value: group.label, maxLength: 80})) || "").trim();
       if (!label || label === group.label) return;
       const result = await json("profile-groups/" + group.id, {label, template: group.template, sections: group.sections},
                                {root: true, method: "PATCH"});
@@ -231,11 +259,17 @@
     })));
     const remove = node("button", "quiet small danger-text", tr("Delete group")); remove.type = "button";
     remove.addEventListener("click", () => busy(remove, () => writeGroup(group.id, async serial => {
-      if (!window.confirm(tr("Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.", {name: group.label}))) return;
+      if (!(await window.TgWitnessDialogs.confirm(tr("Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.", {name: group.label}), {danger: true, confirmText: tr("Delete")}))) return;
       const result = await json("profile-groups/" + group.id, undefined, {root: true, method: "DELETE"});
       await acceptWrite(result, serial); fillSelects(); decorate();
     })));
-    actions.append(apply, ...groupRun(group), rename, remove);
+    const shared = node("button", "secondary small", tr("Shared settings")); shared.type = "button";
+    shared.dataset.action = "shared-settings"; shared.disabled = !editable();
+    shared.addEventListener("click", () => openShared(group));
+    const page = node("button", "secondary small", tr("Open group")); page.type = "button";
+    page.dataset.action = "open-group";
+    page.addEventListener("click", () => busy(null, () => window.TgWitnessOpenGroup?.(group.id)));
+    actions.append(page, shared, apply, ...groupRun(group), rename, remove);
     for (const button of [rename, remove]) button.disabled = !editable() || writing.has(group.id);
     head.append(who, actions);
     section.append(head);if(headerOnly)return section;
@@ -274,9 +308,16 @@
       if(!members.length)members.push(grid.querySelector('.fleet-empty')||node('p','hint fleet-empty',tr('No workspaces in this group yet. Move one here or import accounts into it.')));
       placeChildren(grid,members);return section;
     });
-    // Move cards before retiring an old group, so removal never drops an account.
     placeChildren(list,[...cards].filter(([id])=>window.TgWitnessAccounts?.ownsRows||!membership.has(id)).map(([,card])=>card));
     placeChildren(box,sections);
+    if (!groups.length) {
+      const empty = node("div", "fleet-groups-empty");
+      const create = node("button", "secondary small", tr("New group")); create.type = "button";
+      create.disabled = !editable() || !!creating;
+      create.addEventListener("click", () => $("fleet-group-new").click());
+      empty.append(node("p", "", tr("No groups yet. A group keeps shared settings for several accounts: connection, recording and notifications.")), create);
+      box.replaceChildren(empty);
+    }
     $("fleet-import-open").disabled = !editable();
     $("fleet-group-new").disabled = !editable() || !!creating;
     let title = $("fleet-ungrouped");
@@ -294,7 +335,6 @@
     }
   }
 
-  // Bulk import ---------------------------------------------------------------------------
   function bundles(files) {
     const byName = new Map();
     for (const file of files) {
@@ -331,8 +371,6 @@
 
   function pick(files) {
     if (importing || !editable()) return;
-    // Dropped files skip the chooser's filter: other types are shown as not importable, not counted as ready;
-    // SQLite journals and hidden files that travel next to sessions are left out silently
     files = files.filter(f => !f.name.startsWith(".") && !/-journal$/i.test(f.name));
     const supported = file => /\.(session|json|zip|txt)$/i.test(file.name);
     picked = bundles(files.filter(f => f.size <= 8 * 1024 * 1024 && supported(f)));
@@ -340,7 +378,6 @@
     renderPicked(files.filter(f => !supported(f)));
   }
 
-  // The server prefixes its reason and names the other workspace: translate the parts, not the sentence
   function importError(message) {
     const reason = /^Not imported: (.+)$/s.exec(message)?.[1] ?? message;
     const owner = /^This Telegram account already has a workspace: (.+)\.$/s.exec(reason)?.[1];
@@ -427,7 +464,7 @@
   $("fleet-import-start").addEventListener("click", () => busy(null, run));
   $("fleet-group-new").addEventListener("click", () => busy(null, async () => {
     if (!editable() || creating) return;
-    const label = (window.prompt(tr("Name of the new group:"), "") || "").trim(); if (!label) return;
+    const label = ((await window.TgWitnessDialogs.prompt(tr("Name of the new group:"), {title: tr("New group"), maxLength: 80})) || "").trim(); if (!label) return;
     const marker = {}, serial = ++loadSerial;
     creating = marker; $("fleet-group-new").disabled = true;
     try {

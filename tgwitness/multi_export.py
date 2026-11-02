@@ -1,34 +1,19 @@
-"""Export one chat with several accounts at once, merged into a single signed bundle.
-
-The chat's message numbers 1..N (N = newest message when the export starts) are cut into
-ranges of CHUNK numbers placed in a shared queue. Every selected account takes the next
-range, fetches it with its own single client and takes another, so an account waiting
-out a FloodWait simply does less and a range left by a failed account is fetched by
-another. Telegram flood limits apply per account, so throughput grows with accounts.
-
-Rules followed: each account uses only its existing client (a second connection on the
-same authorization key makes Telegram revoke the session: AUTH_KEY_DUPLICATED), and the
-same Telegram account can never be in two workspaces. Ranges only make sense where
-message numbers are per chat — channels and supergroups. Ordinary groups number messages
-per account, so they are exported by the starting account alone.
-
-Integrity: a range's SHA-256 is computed while its messages arrive. Before signing, every
-range file is re-read and must reproduce that hash. Each account signs, with its own key,
-the ranges it fetched; the starting account signs the whole bundle.
-"""
 import asyncio
+import bisect
 import hashlib
 import json
 import secrets
 import time
 from contextlib import suppress
+from telethon.tl import types
 
 from . import chat_export
 from . import replica
 from . import report
 from . import tuning
+from .collector import absent_numbers, merge_history, message_record
 from .store import canonical, utcnow
-from .verify import fingerprint
+from .verify import fingerprint, verify_chat_export
 from .workers import complete_in_thread
 
 CHUNK = 2000
@@ -65,7 +50,6 @@ class MultiExport:
         if not lead.reserve_export(export_id):
             raise ValueError("The starting account is already exporting. Wait for it or cancel it.")
         reserved = {lead_id: lead}
-        # Reserve the coordinator and selected workspaces before Telegram yields control.
         self.preparing = {lead_id, *profile_ids}
         try:
             entity = await lead.resolve_for_export(chat_id)
@@ -74,7 +58,7 @@ class MultiExport:
             total, newest = getattr(latest, "total", None) or 0, (latest[0].id if latest else 0)
             basic_group = info.get("kind") == "group"
             chosen = [lead_id] + [p for p in dict.fromkeys(profile_ids) if p != lead_id]
-            if basic_group:
+            if not isinstance(entity, (types.Channel, types.ChannelForbidden)):
                 chosen = [lead_id]
             workers = []
             for profile_id in chosen:
@@ -123,8 +107,6 @@ class MultiExport:
             collector.release_export(export_id)
 
     def uses(self, profile_id):
-        """Whether a running export still depends on this workspace (its store, client or keys)."""
-
         return profile_id in self.preparing or bool(self.task and not self.task.done() and (
             profile_id == self.state["lead"] or any(
                 w["profile_id"] == profile_id and w["state"] != "skipped"
@@ -205,6 +187,8 @@ class MultiExport:
         try:
 
             directory.mkdir(mode=0o700, exist_ok=True)
+            clock = await lead.telegram_clock()
+            profile, observer, problems = await lead.chat_profile(lead_entity)
             lead.store.append("chat_export.started", {
                 "chat_id": state["chat_id"], "title": info.get("title"), "mode": "multi_account",
                 "accounts": [w["account_id"] for w in state["workers"] if w["state"] == "pending"],
@@ -214,16 +198,43 @@ class MultiExport:
                 raise RuntimeError("Some message ranges could not be fetched by any selected account.")
             parts = [results[low] for low, _ in reversed(ranges)]
             await complete_in_thread(self.merge, parts, scratch)
-            signed = self.sign_parts(parts)
             message_count = sum(p["count"] for p in parts)
+            recheck = None
+            if state["chat_id"] < -1000000000000:
+                absent = absent_numbers(scratch)
+                if absent:
+                    try:
+                        recheck, missed = await lead.recheck_absent(lead_entity, absent)
+                    except asyncio.CancelledError:
+                        raise
+                    except Exception as exc:
+                        recheck, missed = {"asked_at": utcnow(), "asked": 0, "absent_total": len(absent),
+                                           "error_type": type(exc).__name__}, []
+                    if missed:
+                        recovered = [{**message_record(m), "found_on_recheck": True} for m in missed]
+                        absent_ids = set(absent)
+                        if any(row["id"] not in absent_ids for row in recovered):
+                            raise ValueError("Recovered messages do not match the absent message IDs.")
+                        parts = await complete_in_thread(self.recheck_parts, parts, recovered, state["lead"])
+                        merge_history(scratch, recovered)
+                        next(worker for worker in state["workers"] if worker["profile_id"] == state["lead"])["captured"] += len(missed)
+                    message_count += len(missed)
+            signed = self.sign_parts(parts)
+            log = await lead.admin_log(lead_entity) if observer.get("role") in ("creator", "admin") else None
             meta = {"chat": {"id": state["chat_id"], "title": info.get("title"), "kind": info.get("kind"),
-                             "visibility": info.get("visibility")},
+                             "visibility": info.get("visibility"), "profile": profile,
+                             **({"profile_errors": problems} if problems else {})},
+                    "observer": observer, "recheck": recheck, "admin_log": log,
                     "account": lead.store.get_setting("account", None), "message_count": message_count,
                     "collection": {"mode": "multi_account", "range_size": CHUNK, "newest_message_id": newest,
                                    "scope": "message numbers 1..newest_message_id at export start"},
-                    "parts": signed}
+                    "parts": signed, "client": lead.client_identity(), "route": lead.route_receipt(),
+                    "acquisition": {"started_at": state["started_at"], "finished_at": utcnow(),
+                                    "clock_at_start": clock, "clock_at_end": await lead.telegram_clock()}}
+            max_gib = tuning.value(lead.store, "export_max_gib")
             await complete_in_thread(chat_export.build_bundle, scratch, meta, lead.vault, out,
-                                    tuning.value(lead.store, "export_max_gib") * 1024**3, report_options)
+                                    max_gib * 1024**3, report_options)
+            await complete_in_thread(verify_chat_export, out, fingerprint(lead.vault.public_key), max_gib)
             replica.outbox(lead.store, out)
             self.path = out
             state.update(phase="done", ready=True, captured=message_count, eta_seconds=0)
@@ -255,7 +266,6 @@ class MultiExport:
 
     @staticmethod
     def merge(parts, scratch):
-        """Concatenate ranges newest first; each must still match the hash taken on arrival."""
         with scratch.open("w", encoding="utf-8") as merged:
             for part in parts:
                 digest, count = hashlib.sha256(), 0
@@ -270,8 +280,58 @@ class MultiExport:
                     raise ValueError("Range " + str(part["low"]) + "-" + str(part["high"]) +
                                      " changed on disk after it was fetched; export stopped.")
 
+    @staticmethod
+    def recheck_parts(parts, recovered, lead_id):
+        # Keep v1's non-overlapping ranges and attribute recovered rows to their actual fetcher.
+        recovered_by_id = {row["id"]: row for row in recovered}
+        if len(recovered_by_id) != len(recovered) or any(type(mid) is not int for mid in recovered_by_id):
+            raise ValueError("Recovered messages do not match the absent message IDs.")
+        prepared, included = [], set()
+        for part in parts:
+            found = sorted(mid for mid in recovered_by_id if part["low"] <= mid <= part["high"])
+            if not found:
+                prepared.append(part)
+                continue
+            pieces, start = [], part["low"]
+            for mid in found:
+                if start < mid:
+                    pieces.append({"low": start, "high": mid - 1, "profile_id": part["profile_id"]})
+                pieces.append({"low": mid, "high": mid, "profile_id": lead_id})
+                start = mid + 1
+            if start <= part["high"]:
+                pieces.append({"low": start, "high": part["high"], "profile_id": part["profile_id"]})
+            lows = [item["low"] for item in pieces]
+            hashes, counts = [hashlib.sha256() for _ in pieces], [0] * len(pieces)
+            original, count = hashlib.sha256(), 0
+            with part["path"].open(encoding="utf-8") as source:
+                for line in source:
+                    if not line.strip():
+                        continue
+                    row = json.loads(line)
+                    mid = row["id"]
+                    if type(mid) is not int or mid in recovered_by_id or not part["low"] <= mid <= part["high"]:
+                        raise ValueError("Recovered messages do not match the absent message IDs.")
+                    encoded = canonical(row) + b"\n"
+                    original.update(encoded)
+                    count += 1
+                    index = bisect.bisect_right(lows, mid) - 1
+                    hashes[index].update(encoded)
+                    counts[index] += 1
+            if count != part["count"] or original.hexdigest() != part["sha256"]:
+                raise ValueError("Range " + str(part["low"]) + "-" + str(part["high"]) +
+                                 " changed on disk after it was fetched; export stopped.")
+            for mid in found:
+                index = bisect.bisect_right(lows, mid) - 1
+                hashes[index].update(canonical(recovered_by_id[mid]) + b"\n")
+                counts[index] += 1
+            prepared.extend({**piece, "count": count, "sha256": digest.hexdigest()}
+                            for piece, count, digest in reversed(list(zip(pieces, counts, hashes))))
+            included.update(found)
+        if included != recovered_by_id.keys():
+            raise ValueError("Recovered messages do not match the absent message IDs.")
+        return prepared
+
     def sign_parts(self, parts):
-        """One statement per account, signed with that account's own key."""
         by_profile = {}
         for part in parts:
             by_profile.setdefault(part["profile_id"], []).append(part)

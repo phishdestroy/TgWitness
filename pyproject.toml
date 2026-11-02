@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tgwitness"
-version = "0.7.1"
+version = "0.8.0"
 description = "Telegram observation journal with version history and signed evidence exports"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -31,14 +31,17 @@ dependencies = [
   "cryptography>=48.0.1,<51",
   "python-socks[asyncio]>=2.7,<4",
   "qrcode>=8.2,<9",
+  "tzdata>=2026.3",
   "pyzipper>=0.4.0,<1",
   "apprise>=1.11.0,<3",
   "pillow>=13,<14",
   "requests[socks]>=2.33.0,<3",
+  "fpdf2>=2.9,<3",
+  "uharfbuzz>=0.45,<1",
 ]
 
 [project.optional-dependencies]
-dev = ["httpx>=0.27,<1", "playwright>=1.48,<2", "ruff>=0.15,<1"]
+dev = ["httpx>=0.27,<1", "playwright>=1.48,<2", "ruff>=0.15,<1", "pytest>=9.1.1,<10"]
 research = ["requests>=2.33.0,<3", "beautifulsoup4>=4.12,<5"]
 mcp = ["mcp>=2.3,<3", "httpx>=0.28,<1"]
 
@@ -62,6 +65,7 @@ include-package-data = false
 
 [tool.setuptools.package-data]
 tgwitness = [
+  "report_console.js", "report_console.css", "report_skin.css", "report_dossier.css", "report_styles.css", "report_layouts.css", "report_icons.svg",
   "static/*.html", "static/*.css", "static/*.js", "static/*.svg",
   "static/core/*.js",
   "static/components/*.js", "static/components/*.css",
@@ -74,6 +78,9 @@ tgwitness = [
   "locales/hi.json", "locales/id.json", "locales/vi.json", "locales/zh.json",
   "guide_locales/*.json",
   "english_fallbacks.json", "public_proxies.json", "sealed_policy.json",
+  "schemas/board-*.json",
+  "client_profiles.json", "client_profiles.LICENSE",
+  "fonts/*.ttf", "fonts/OFL.txt", "fonts/NotoSerif-OFL.txt",
 ]
 
 [tool.ruff]

@@ -1,4 +1,3 @@
-"""DigitalOcean: Droplets, Cloud Firewalls and Droplet actions (api.digitalocean.com)."""
 import json
 
 from .base import DeployError, Provider, network, resource_name
@@ -48,7 +47,9 @@ class DigitalOcean(Provider):
             return status == "completed"
         self.wait_until(done, "action " + str(action_id))
 
-    def create(self, spec, user_data, rules):
+    def create(self, spec, user_data, rules, outbound=()):
+        if outbound:
+            raise DeployError(self.title + ": outbound firewall rules are not implemented here")
         tag = "tgwitness-" + spec["deployment_id"]
         firewall = self.call("POST", "/firewalls", {
             "name": resource_name(spec), "tags": [tag], "outbound_rules": OUTBOUND,

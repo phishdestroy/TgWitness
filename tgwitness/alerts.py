@@ -1,18 +1,13 @@
-"""Notifications through Apprise: problems, changes in observed chats and a daily summary.
-
-By default only chat names, counts and problem descriptions leave the machine. Message text
-is added only when the operator turns on text excerpts. The panel's notification list uses
-the same wording.
-"""
 import asyncio
 import hashlib
 import re
 import socket
 import threading
 from contextlib import contextmanager, suppress
+from contextvars import ContextVar
 from datetime import datetime, timedelta, timezone
 from typing import Literal
-from urllib.parse import quote, urlsplit
+from urllib.parse import quote, urlsplit, urlunsplit
 
 from pydantic import BaseModel, Field
 
@@ -28,7 +23,8 @@ EXCERPT_CHARS = 120
 CHANGES = {"message.deleted": "deleted", "message.edited": "edited", "message.missing_on_recheck": "missing"}
 PROBLEM_KINDS = ("storage.low", "storage.ok", "coverage.gap", "collector.error", "connection.retry_failed",
                  "source.access_unconfirmed", "export.failed", "chat_export.interrupted", "replica.completed",
-                 "anchor.completed", "profile.unavailable", "host.state")
+                 "anchor.completed", "profile.unavailable", "host.state", "storage.completed")
+COMPLETION_KINDS = ("account_export.completed", "chat_export.completed", "snapshot.completed", "storage.completed")
 
 CHANGE_SCAN = 5000
 PROBLEM_PAGES = 20
@@ -49,6 +45,7 @@ class AlertSettings(BaseModel):
     enabled: bool = False
     problems: bool = True
     changes: bool = False
+    completions: bool = False
     daily: bool = True
     daily_hour: int = Field(default=9, ge=0, le=23)
     language: Literal[i18n.LANGUAGES] = "en"
@@ -59,6 +56,12 @@ def alert_settings(store):
     return AlertSettings(**store.get_setting("alerts", {})).model_dump()
 
 
+def change_record(settings, urls):
+    return {**settings, "destinations": len(urls), "services": sorted({u.split("://", 1)[0].lower() for u in urls}),
+            "content": "chat names, counts and excerpts of changed messages" if settings["include_text"] else
+                       "chat names and counts only, never message text"}
+
+
 def tr(words, text, **values):
     out = words.get(text)
     out = out if isinstance(out, str) else text
@@ -66,7 +69,6 @@ def tr(words, text, **values):
 
 
 def describe(url):
-    """Apprise's own masked form of a destination, or None when Apprise cannot use it."""
     import apprise
     plugin = apprise.Apprise.instantiate(url)
     return plugin.url(privacy=True) if plugin else None
@@ -84,39 +86,136 @@ def route_problem(urls, network):
 
 
 def proxy_url(network, address=None):
-    """address: the proxy's resolved and checked address, connected instead of its name."""
     if network.kind == "direct":
         return None
     login = (quote(network.username, safe="") + ":" + quote(network.password, safe="") + "@") if network.username else ""
-    host = address or network.host
+    host = network.host if network.kind == "http" and network.tls else address or network.host
     host = "[" + host + "]" if ":" in host else host
 
-    return ("socks5h" if network.kind == "socks5" else "http") + "://" + login + host + ":" + str(network.port)
+    scheme = "socks5h" if network.kind == "socks5" else "https" if network.tls else "http"
+    return scheme + "://" + login + host + ":" + str(network.port)
 
 
-_guard = {"on": False, "allowed": set(), "refused": None}
+_guard = ContextVar("notification_route_guard", default=None)
 
 
 class Refused(OSError):
-    """An internal destination; an OSError, so the services report it as a failed connection."""
+    pass
 
 
 def _checked(host, port):
-    """The addresses to connect to, checked once and then used (no second lookup); None: unchecked."""
-    if not _guard["on"] or host in _guard["allowed"]:
+    guard = _guard.get()
+    if guard is None:
+        return None
+    if host in guard["pinned"]:
+        return guard["pinned"][host]
+    if not guard["on"] or host in guard["allowed"]:
         return None
     addresses = list(dict.fromkeys(info[4][0] for info in socket.getaddrinfo(host, port, type=socket.SOCK_STREAM)))
     try:
         netclient.refuse_internal(host, addresses)
     except netclient.RouteError as error:
-        _guard["refused"] = str(error)
+        guard["refused"] = str(error)
         raise Refused(str(error)) from None
     return addresses
+
+
+def _proxy_targets(host):
+    guard = _guard.get()
+    network = guard.get("network") if guard else None
+    if not guard or not guard["on"] or network is None or network.kind == "direct":
+        return None
+    try:
+        return asyncio.run(netclient.public_proxy_addresses(host, network, 15))
+    except Exception as exc:
+        guard["refused"] = str(exc)
+        raise Refused(str(exc)) from None
+
+
+def _install_proxy_guard():
+    import socks
+    from urllib3.connection import HTTPConnection, HTTPSConnection
+    if getattr(socks.create_connection, "notification_guarded", False):
+        return
+    original_socket = socks.create_connection
+    original_tunnel = HTTPConnection._tunnel
+    original_request = HTTPConnection.request
+    original_connect = HTTPSConnection.connect
+
+    def socks_connection(destination, *args, **kwargs):
+        addresses = _proxy_targets(destination[0])
+        if not addresses:
+            return original_socket(destination, *args, **kwargs)
+        failure = OSError("No reachable destination address")
+        for address in addresses:
+            try:
+                return original_socket((address, destination[1]), *args, **kwargs)
+            except OSError as exc:
+                failure = exc
+        raise failure
+
+    def connect(self):
+        addresses = _proxy_targets(self._tunnel_host) if self._tunnel_host else None
+        if not addresses:
+            return original_connect(self)
+        failure = OSError("No reachable destination address")
+        tunnel_state = (self._tunnel_host, self._tunnel_port, self._tunnel_scheme, self._tunnel_headers)
+        try:
+            for address in addresses:
+                self._tunnel_host, self._tunnel_port, self._tunnel_scheme, self._tunnel_headers = tunnel_state
+                self._notification_target = address
+                try:
+                    return original_connect(self)
+                except OSError as exc:
+                    self.close()
+                    failure = exc
+            raise failure
+        finally:
+            self.__dict__.pop("_notification_target", None)
+            self._tunnel_host, self._tunnel_port, self._tunnel_scheme, self._tunnel_headers = tunnel_state
+
+    def tunnel(self):
+        addresses = _proxy_targets(self._tunnel_host)
+        if not addresses:
+            return original_tunnel(self)
+        host, headers = self._tunnel_host, self._tunnel_headers
+        target = getattr(self, "_notification_target", addresses[0])
+        authority = ("[" + target + "]" if ":" in target else target) + ":" + str(self._tunnel_port)
+        self._tunnel_host = target
+        self._tunnel_headers = {k: v for k, v in headers.items() if k.lower() != "host"}
+        self._tunnel_headers["Host"] = authority
+        try:
+            return original_tunnel(self)
+        finally:
+            self._tunnel_host, self._tunnel_headers = host, headers
+
+    def request(self, method, url, body=None, headers=None, **kwargs):
+        parts = urlsplit(url)
+        if parts.scheme == "http" and parts.hostname:
+            addresses = _proxy_targets(parts.hostname)
+            if addresses:
+                target = addresses[0]
+                authority = ("[" + target + "]" if ":" in target else target)
+                if parts.port:
+                    authority += ":" + str(parts.port)
+                url = urlunsplit((parts.scheme, authority, parts.path, parts.query, parts.fragment))
+                headers = dict(headers or {})
+                if not any(k.lower() == "host" for k in headers):
+                    original = "[" + parts.hostname + "]" if ":" in parts.hostname else parts.hostname
+                    headers["Host"] = original + (":" + str(parts.port) if parts.port else "")
+        return original_request(self, method, url, body, headers, **kwargs)
+
+    socks_connection.notification_guarded = True
+    socks.create_connection = socks_connection
+    HTTPConnection._tunnel = tunnel
+    HTTPConnection.request = request
+    HTTPSConnection.connect = connect
 
 
 def _install_guard():
     import smtplib
     import urllib3.util.connection as connection
+    _install_proxy_guard()
     if getattr(connection.create_connection, "guarded", False):
         return
     plain = connection.create_connection
@@ -146,17 +245,20 @@ def _install_guard():
 
 @contextmanager
 def _routed(proxy):
-    """Apprise sends through requests; for this send its proxy settings are the workspace route only."""
     import requests
     original = requests.Session.merge_environment_settings
+    token = _guard.set({"on": False, "allowed": set(), "refused": None, "pinned": {}})
 
     def merge(self, url, proxies, stream, verify, cert):
+        guard = _guard.get()
+        if guard is None:
+            return original(self, url, proxies, stream, verify, cert)
         host = urlsplit(url).hostname or ""
-        if proxy and _guard["on"] and netclient.literal(host):
+        if proxy and guard["on"]:
             try:
-                netclient.refuse_internal(host, [netclient.literal(host)])
-            except netclient.RouteError as error:
-                _guard["refused"] = str(error)
+                _proxy_targets(host)
+            except Refused as error:
+                guard["refused"] = str(error)
                 raise requests.exceptions.ConnectionError(str(error)) from None
         settings = original(self, url, {}, stream, verify, cert)
         settings["proxies"] = {"http": proxy, "https": proxy} if proxy else {}
@@ -166,10 +268,10 @@ def _routed(proxy):
         yield
     finally:
         requests.Session.merge_environment_settings = original
+        _guard.reset(token)
 
 
 def deliver(urls, title, body, network):
-    """Send one notification to every destination. Returns how many accepted it and the first error."""
     import apprise
     problem = route_problem(urls, network)
     if problem:
@@ -182,23 +284,25 @@ def deliver(urls, title, body, network):
                 info[4][0] for info in socket.getaddrinfo(network.host, network.port, type=socket.SOCK_STREAM))))
         except (netclient.RouteError, OSError) as exc:
             return {"sent": 0, "failed": len(urls), "error": str(exc)[:300]}
-    _install_guard()
     with _send_lock, _routed(proxy_url(network, address)):
-        _guard.update(on=not netclient.private_allowed(), refused=None,
-                      allowed={address} if address else set())
+        _install_guard()
+        guard = _guard.get()
+        guard.update(on=not netclient.private_allowed(), refused=None,
+                      network=network,
+                      allowed={address} if address else set(),
+                      pinned={network.host: [address]} if address else {})
         try:
-            bundle = apprise.Apprise(asset=apprise.AppriseAsset(http_redirects=False))
+            bundle = apprise.Apprise(asset=apprise.AppriseAsset(http_redirects=False, async_mode=False))
             for url in urls:
                 bundle.add(url)
-            # URL redirect=yes overrides the asset default in Apprise. Enforce
-            # the application's policy after parsing, without rewriting service
-            # paths, query credentials or the workspace's transport settings.
             for service in bundle:
                 service.redirects = False
+                service.asset.async_mode = False
             result = bundle.notify(body=body, title=title)
         finally:
-            _guard["on"] = False
-        refused = _guard["refused"]
+            guard["on"] = False
+            guard["pinned"] = {}
+        refused = guard["refused"]
     if isinstance(result, bool):
         return {"sent": len(urls) if result else 0, "failed": 0 if result else len(urls),
                 "error": None if result else refused or "The service did not accept the notification."}
@@ -216,6 +320,20 @@ def human_size(n):
         n /= 1024
 
 
+def account_loss_line(cause, words):
+    if cause == "account_banned":
+        return tr(words, "Telegram banned this account. Observation stopped; the journal is kept.")
+    if cause == "account_frozen":
+        return tr(words, "Telegram froze this account and refuses most requests. Observation stopped; "
+                         "the account can appeal through @SpamBot.")
+    if cause == "account_deleted":
+        return tr(words, "The Telegram account was deleted. Observation stopped; the journal is kept.")
+    if cause == "session_duplicated":
+        return tr(words, "Telegram ended this session because it was used in two places at once. "
+                         "Sign in again with a new session.")
+    return tr(words, "Telegram signed this account out. Sign in again to resume observation.")
+
+
 def problem_line(event, titles, words):
     p, kind = event["payload"], event["kind"]
     where = titles.get(event["chat_id"], str(event["chat_id"])) if event["chat_id"] is not None else ""
@@ -225,7 +343,7 @@ def problem_line(event, titles, words):
     if kind == "storage.ok":
         return tr(words, "Disk space available again; photo and file downloads resumed.")
     if kind == "coverage.gap" and p.get("reason") == "authorization_required":
-        return tr(words, "Telegram signed this account out. Sign in again to resume observation.")
+        return account_loss_line(p.get("cause"), words)
     if kind == "coverage.gap":
         return tr(words, "Coverage gap{where}: {reason}", where=" (" + where + ")" if where else "",
                   reason=p.get("reason") or "")
@@ -243,7 +361,8 @@ def problem_line(event, titles, words):
         return tr(words, "Chat export stopped ({chat}): {error}", chat=where, error=p["error_type"])
     if kind == "replica.completed" and p.get("error"):
         return tr(words, "Off-site copy stopped: {error}", error=p["error"])
-    # A checkpoint another service stamped on an earlier pass is partly covered, as when some answer at once.
+    if kind == "storage.completed" and p.get("error"):
+        return tr(words, "Storage task stopped: {error}", error=p["error"])
     if kind == "anchor.completed" and not any(r.get("ok") for r in p.get("results", [])) and not p.get("covered"):
         return tr(words, "No timestamp service answered for the latest checkpoint.")
     if kind == "profile.unavailable":
@@ -255,7 +374,6 @@ def problem_line(event, titles, words):
 
 
 def host_line(state, words):
-    """A server deployed with python -m tgwitness.cloud measured SSH or a login; closing them is no problem."""
     before, found, login = state.get("before") or {}, [], False
     if state.get("ssh_listening") and not before.get("ssh_listening"):
         found.append(tr(words, "port 22 accepts connections"))
@@ -275,9 +393,22 @@ def host_line(state, words):
     return tr(words, "SSH change on the server, no new login recorded: {details}", details="; ".join(found))
 
 
-def change_line(title, counts, words):
-    return tr(words, "{chat}: {deleted} deleted, {edited} edited, {missing} not found", chat=title,
-              deleted=counts.get("deleted", 0), edited=counts.get("edited", 0), missing=counts.get("missing", 0))
+CHANGE_PARTS = (("deleted_saved", "{n} deleted, text kept"), ("deleted_unsaved", "{n} deleted before saving"),
+                ("edited", "{n} edited"), ("missing", "{n} not found on recheck"))
+
+
+def split_deletions(store, chat_id, counts, deleted_ids):
+    if not counts.get("deleted"):
+        return counts
+    saved = store.saved_message_ids(chat_id, deleted_ids)
+    kept = sum(1 for message in deleted_ids if message in saved)
+    return {**counts, "deleted_saved": kept, "deleted_unsaved": counts["deleted"] - kept}
+
+
+def change_line(title, counts, words, period=None):
+    parts = ", ".join(tr(words, label, n=counts[key]) for key, label in CHANGE_PARTS if counts.get(key))
+    template = "{chat}, this hour: {changes}" if period == "hour" else "{chat}: {changes}"
+    return tr(words, template, chat=title, changes=parts or tr(words, "no changes"))
 
 
 def discovered_line(title, words):
@@ -285,7 +416,6 @@ def discovered_line(title, words):
 
 
 def excerpt_line(store, event, title, words, chars=EXCERPT_CHARS):
-    """One changed message with a short excerpt of its text (only when text excerpts are on)."""
     if event["kind"] == "message.edited":
         text = event["payload"].get("text") or ""
     else:
@@ -301,10 +431,12 @@ def excerpt_line(store, event, title, words, chars=EXCERPT_CHARS):
     return tr(words, "{chat} · not found #{id}: {excerpt}", **values)
 
 
-def change_item(event, title, words):
+def change_item(event, title, words, kept=None):
     values = {"chat": title, "id": event["message_id"]}
     if event["kind"] == "message.deleted":
-        return tr(words, "Message #{id} deleted in {chat}", **values)
+        if kept is False:
+            return tr(words, "Message #{id} deleted in {chat} before its text was saved", **values)
+        return tr(words, "Message #{id} deleted in {chat}; its text was saved", **values)
     if event["kind"] == "message.edited":
         return tr(words, "Message #{id} edited in {chat}", **values)
     return tr(words, "Message #{id} not found at recheck in {chat}", **values)
@@ -337,7 +469,6 @@ def timestamp_answered(payload):
 
 
 def problem_group(event):
-    """Typed identity and recovery family. Distinct user operations remain individual records."""
     p, kind, chat = notice_payload(event), event["kind"], event["chat_id"]
     fields, family = None, kind
     if kind == "collector.error":
@@ -413,11 +544,6 @@ def notice_entry(event, level, text, read_key, *, group_id=None, count_exact=Tru
 
 
 def panel_items(store, words, limit=60, *, allowed_chats=None, workspace_id="default"):
-    """Bounded, scoped notification projection; the signed journal is never changed.
-
-    Recurring problems and chat changes are grouped per UTC hour. Known recovery events
-    separate problem episodes. A truncated scan reports lower-bound counts explicitly.
-    """
     if limit <= 0 or allowed_chats is not None and not allowed_chats:
         return []
     titles = {t["chat_id"]: t["title"] for t in store.targets()
@@ -465,16 +591,20 @@ def panel_items(store, words, limit=60, *, allowed_chats=None, workspace_id="def
         if event["chat_id"] is None:
             continue
         key = notice_key(workspace_id, "changes", event["chat_id"], notice_hour(event))
-        group = groups.setdefault(key, {"event": event, "first": event, "counts": {}, "count": 0})
+        group = groups.setdefault(key, {"event": event, "first": event, "counts": {}, "count": 0, "deleted": []})
         change = CHANGES[event["kind"]]
         group["counts"][change] = group["counts"].get(change, 0) + 1
+        if change == "deleted":
+            group["deleted"].append(event["message_id"])
         group["count"] += 1
         group["first"] = event
     changes = []
     for key, group in groups.items():
         event, count = group["event"], group["count"]
         title = titles.get(event["chat_id"], str(event["chat_id"]))
-        text = change_item(event, title, words) if count == 1 else change_line(title, group["counts"], words)
+        counts = split_deletions(store, event["chat_id"], group["counts"], group["deleted"])
+        text = (change_item(event, title, words, kept=bool(counts.get("deleted_saved")) if group["deleted"] else None)
+                if count == 1 else change_line(title, counts, words, period="hour"))
         if truncated:
             text = tr(words, "Recent changes in {chat}", chat=title)
         item = notice_entry(event, "change", text, key, count_exact=not truncated)
@@ -523,8 +653,23 @@ def workspace_name(store):
     return "ID " + str(account["id"]) if account.get("id") else "TgWitness"
 
 
+def completion_line(event, titles, words):
+    payload, kind = event["payload"], event["kind"]
+    if kind == "account_export.completed":
+        return tr(words, "Account export finished. Review its coverage and download it in the panel.") if payload.get("complete_within_scope") else tr(
+            words, "Account export finished with gaps. Review incomplete sources in the panel.")
+    if kind == "chat_export.completed":
+        return tr(words, "Chat export finished: {chat}, {n} messages.", chat=titles.get(event["chat_id"], str(event["chat_id"])),
+                  n=payload.get("message_count", 0))
+    if kind == "snapshot.completed":
+        return tr(words, "History loading finished: {n} messages saved.", n=payload.get("captured", 0))
+    if kind == "storage.completed" and not payload.get("error"):
+        return tr(words, "Storage task finished: {n} files verified, {size} freed locally.",
+                  n=payload.get("files", 0), size=human_size(payload.get("freed_bytes", 0)))
+    return None
+
+
 def collect(store, cursor, titles, words, include_text=False, max_lines=MAX_LINES, chars=EXCERPT_CHARS):
-    """Problem lines, per-chat change counts, newly added chats and (optionally) excerpts after cursor."""
     problems, changes, discovered, excerpts = [], {}, [], []
     while True:
         events = store.events_after(cursor, BATCH)
@@ -536,6 +681,8 @@ def collect(store, cursor, titles, words, include_text=False, max_lines=MAX_LINE
             if change and event["chat_id"] is not None:
                 per_chat = changes.setdefault(event["chat_id"], {})
                 per_chat[change] = per_chat.get(change, 0) + 1
+                if change == "deleted":
+                    per_chat.setdefault("_deleted", []).append(event["message_id"])
                 if include_text and len(excerpts) <= max_lines:
                     excerpts.append(excerpt_line(store, event, titles.get(event["chat_id"], str(event["chat_id"])),
                                                  words, chars))
@@ -546,8 +693,8 @@ def collect(store, cursor, titles, words, include_text=False, max_lines=MAX_LINE
             return cursor, problems, changes, discovered, excerpts
 
 
-async def alert_pass(store, vault, network, now=None):
-    settings, urls = alert_settings(store), vault.read("alerts").get("urls", [])
+async def _destination_pass(store, vault, network, now=None, urls=None):
+    settings = alert_settings(store)
     head = (store.stats()["head"] or {}).get("seq", 0)
     if not settings["enabled"] or not urls:
         store.set_setting("alerts_cursor", head)
@@ -562,9 +709,16 @@ async def alert_pass(store, vault, network, now=None):
     if settings["problems"] and problems:
         messages.append((tr(words, "TgWitness · {name}: problems", name=name), capped(problems, words, limit)))
     if settings["changes"] and (changes or discovered):
-        lines = [change_line(titles.get(chat, str(chat)), counts, words) for chat, counts in changes.items()]
+        lines = [change_line(titles.get(chat, str(chat)),
+                             split_deletions(store, chat, counts, counts.pop("_deleted", [])), words)
+                 for chat, counts in changes.items()]
         messages.append((tr(words, "TgWitness · {name}: changes in observed chats", name=name),
                          capped(discovered + lines + excerpts, words, limit)))
+    if settings["completions"]:
+        completed = [line for event in reversed(store.events_of(COMPLETION_KINDS, limit=limit + 1, after=start, before=cursor + 1))
+                     if (line := completion_line(event, titles, words))]
+        if completed:
+            messages.append((tr(words, "TgWitness · {name}: completed tasks", name=name), capped(completed, words, limit)))
     local = (now or datetime.now(timezone.utc)).astimezone()
     daily_due = settings["daily"] and local.hour >= settings["daily_hour"] \
         and store.get_setting("alerts_daily", None) != local.date().isoformat()
@@ -583,6 +737,69 @@ async def alert_pass(store, vault, network, now=None):
         if daily_due:
             store.set_setting("alerts_daily", local.date().isoformat())
     if messages:
+        store.set_setting("alerts_last", {"at": utcnow(), "notifications": sent, "error": error})
+    return {"notifications": sent, "error": error}
+
+
+class _DestinationProgress:
+    KEYS = {"alerts_cursor": "cursor", "alerts_daily": "daily", "alerts_last": "last"}
+
+    def __init__(self, store, progress):
+        self.store, self.progress = store, progress
+
+    def __getattr__(self, name):
+        return getattr(self.store, name)
+
+    def get_setting(self, key, default=None):
+        if key in self.KEYS:
+            return self.progress.get(self.KEYS[key], default)
+        return self.store.get_setting(key, default)
+
+    def set_setting(self, key, value):
+        if key in self.KEYS:
+            self.progress[self.KEYS[key]] = value
+        else:
+            self.store.set_setting(key, value)
+
+
+async def alert_pass(store, vault, network, now=None):
+    settings = alert_settings(store)
+    urls = list(dict.fromkeys(vault.read("alerts").get("urls", [])))
+    head = (store.stats()["head"] or {}).get("seq", 0)
+    if not settings["enabled"] or not urls:
+        store.set_setting("alerts_cursor", head)
+        store.set_setting("alerts_delivery", {})
+        return None
+    keys = {hashlib.sha256(url.encode()).hexdigest(): url for url in urls}
+    saved = store.get_setting("alerts_delivery", {}) or {}
+    progress = {key: saved.get(key, {"cursor": store.get_setting("alerts_cursor", head),
+                                   "daily": store.get_setting("alerts_daily", None)}) for key in keys}
+    instant = (now or datetime.now(timezone.utc)).timestamp()
+    sent, error = 0, None
+    for key, url in keys.items():
+        state = progress[key]
+        if state.get("retry_at", 0) > instant:
+            error = error or (state.get("last") or {}).get("error")
+            continue
+        try:
+            result = await _destination_pass(_DestinationProgress(store, state), vault, network, now, [url])
+        except Exception as exc:
+            result = {"notifications": 0, "error": type(exc).__name__}
+            state["last"] = {"at": utcnow(), **result}
+        sent += result["notifications"]
+        if result["error"]:
+            error = error or result["error"]
+            state["failures"] = min(state.get("failures", 0) + 1, 8)
+            state["retry_at"] = instant + min(3600, 30 * 2 ** (state["failures"] - 1))
+        else:
+            state.pop("failures", None)
+            state.pop("retry_at", None)
+        store.set_setting("alerts_delivery", progress)
+    store.set_setting("alerts_cursor", min(state["cursor"] for state in progress.values()))
+    days = [state.get("daily") for state in progress.values()]
+    if all(days):
+        store.set_setting("alerts_daily", min(days))
+    if sent or error:
         store.set_setting("alerts_last", {"at": utcnow(), "notifications": sent, "error": error})
     return {"notifications": sent, "error": error}
 

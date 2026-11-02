@@ -1,4 +1,3 @@
-"""Witness configuration and proxy setup acceptance; local fixtures only."""
 import json
 import os
 import sys
@@ -8,7 +7,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from check_browser import RunningApp, unlock, check_layout, launch_browser, navigate_panel
+from check_browser import RunningApp, answer_panel_dialog, unlock, check_layout, launch_browser, navigate_panel
 from playwright.sync_api import expect, sync_playwright
 from tgwitness import i18n
 
@@ -49,8 +48,9 @@ def main():
                 assert not missing, (lang, missing)
             navigate_panel(page, "witness")
             expect(page.locator("#witness-form")).to_be_hidden()
-            expect(page.locator(".extra-card")).to_have_count(5)
+            expect(page.locator(".extra-card")).to_have_count(7)
             before = len(writes)
+            expect(page.locator('.extra-setup')).to_be_hidden()
             for name in ("alerts", "evidence", "cloud", "github"):
                 opener = page.locator("#extras-open-" + name)
                 opener.focus()
@@ -106,6 +106,7 @@ def main():
             assert catalog_reads, "Selecting MTProxy must load its catalog"
             assert page.locator("#network-secret").input_value() == ""
             page.locator("#proxy-catalog-apply").click()
+            answer_panel_dialog(page)
             expect(page.locator("#route-detail")).to_contain_text("proxy.example.org:443")
             assert server.app.state.collector.network_config().secret == secret
             if page.locator("#entry-settings").get_attribute("aria-expanded") != "true":
@@ -118,10 +119,11 @@ def main():
             expect(page.locator("#network-secret")).to_have_value(secret)
             assert server.app.state.collector.network_config().host == "proxy.example.org"
             page.locator('#network-form [type="submit"]').click()
+            answer_panel_dialog(page)
             expect(page.locator("#route-detail")).to_contain_text("own.example.org:8443")
             expect(page.locator("#network-secret")).to_have_value("")
             for lang in ("en", "ru"):
-                context.add_cookies([{"name": "tgwitness-lang", "value": lang, "url": server.url}])
+                page.evaluate("lang=>{const url=new URL(location.href);url.searchParams.set(\"lang\",lang);history.replaceState(null,\"\",url);}",lang)
                 page.reload()
                 expect(page.locator("#workspace")).to_be_visible()
                 for width in (390, 1440):

@@ -14,11 +14,37 @@
 <p align="center"><strong>Your Telegram investigation workspace.</strong><br>Export chats, preserve observed changes and trace connections back to the source.<br>Self-hosted. Separate accounts. Signed handoffs.</p>
 
 <p align="center">
-  <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.7.1 · pre-release"></a>
+  <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.8.0 · pre-release"></a>
   <a href="docs/VERIFICATION.md"><img src="docs/assets/presentation/identity-meta-verification.svg" width="158" height="30" alt="Tested environments"></a>
   <img src="docs/assets/presentation/identity-meta-languages.svg" width="279" height="30" alt="25 interface languages · 26 guide languages">
   <a href="LICENSE"><img src="docs/assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a>
 </p>
+
+<a name="quick-start"></a>
+<a name="run-it-on-your-machine"></a>
+
+## Install
+
+Python included. Use the same commands to update.
+
+**Linux / macOS**
+
+```sh
+curl -fsSL https://get.destroy.tools/install.sh | bash
+```
+
+**Windows · PowerShell or CMD**
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.destroy.tools/install.ps1 | iex"
+```
+
+<sub>Ubuntu server: run as root. Desktop: run as your normal user.</sub>
+
+[Setup & panel access](docs/INSTALLATION.md) ·
+[Signatures & SHA-256](https://get.destroy.tools/#verification) ·
+[Update](docs/INSTALLATION.md#update-an-existing-installation) ·
+[ZIP downloads](https://github.com/phishdestroy/TgWitness/releases)
 
 <a name="screenshots"></a>
 
@@ -54,11 +80,9 @@
   <a href="docs/COLLECTION.md"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-history-mobile.svg"><img src="docs/assets/presentation/readme-nav-history.svg" width="32%" alt="Collection and saved versions"></picture></a>
 </p>
 
-In the panel, **Start here** offers **Export my account** for a
-one-off [signed account snapshot](docs/ACCOUNT-EXPORT.md), or **Follow an investigation**
-for ongoing observation. Choose a task, connect an account and review its scope;
-collection only starts when you explicitly start it. Less common controls live
-under **More tools & settings**.
+Choose what you want to do: [export your account](docs/ACCOUNT-EXPORT.md) or
+[follow an investigation](docs/INVESTIGATION.md). Connect an account, choose the
+chats and files to save, then start when you are ready.
 
 **Choose your scope:** selected chats, a Telegram folder or the whole account.
 Keep each account in its own workspace, with separate sources, session and signing key.
@@ -90,8 +114,8 @@ transcription, and send HMAC-signed webhooks.
 
 | Task | What you get |
 | --- | --- |
-| [Load older messages](docs/HISTORY.md) | Enabled sources → workspace history, with pause/resume and a signed progress report. |
-| [Export with several accounts](docs/ACCOUNTS.md#multiple-accounts) | Split one chat's acquisition across eligible accounts; each keeps its own session and signing key. |
+| [Load older messages](docs/HISTORY.md) | Save older messages from your selected chats. Pause and resume without starting over. |
+| [Export with several accounts](docs/ACCOUNTS.md#multiple-accounts) | Use several connected accounts to export one chat. Each account keeps its own session and signing key. |
 | [Import a batch of accounts](docs/ACCOUNTS.md#bulk-import-and-account-groups) | Pair session files automatically, see each login result and organize workspaces into groups with shared settings. |
 | [Manage the MTProxy pool](docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) | Ping, countries, filters and your own lists; one shared catalog with separate account routes. |
 | [Bring an existing session](docs/ACCOUNTS.md) | Telegram Desktop TData, Telethon, Pyrogram, StringSession or an auth key. |
@@ -106,27 +130,6 @@ transcription, and send HMAC-signed webhooks.
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
-<a name="quick-start"></a>
-<a name="run-it-on-your-machine"></a>
-
-## Your first capture
-
-**Windows portable:** [download TgWitness 0.7.1](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip),
-extract it and run **`TgWitness.cmd`**. Python is included.
-
-**From source:** [download the source](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-source.zip)
-with **Python 3.11+** installed. The launcher prepares the environment.
-
-[All downloads and SHA-256 checksums](https://github.com/phishdestroy/TgWitness/releases/tag/v0.7.1).
-
-| | Windows | Linux / macOS |
-| --- | --- | --- |
-| Try the demo | `scripts\Demo.cmd` | `sh start.sh --demo` |
-| Connect Telegram | `Start.cmd` | `sh start.sh` |
-
-Open **http://127.0.0.1:8787**. Use a separate Telegram account. Stop the demo before
-starting live mode; the live panel token is in `data/live/panel-token.txt`.
-
 <p align="center">
   <a href="https://phishdestroy.github.io/TgWitness/docs/start/"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-setup-mobile.svg"><img src="docs/assets/presentation/readme-nav-setup.svg" width="32%" alt="Setup guide"></picture></a>
   <a href="https://phishdestroy.github.io/TgWitness/docs/dedicated-account/"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-account-mobile.svg"><img src="docs/assets/presentation/readme-nav-account.svg" width="32%" alt="Prepare your account"></picture></a>
@@ -140,7 +143,7 @@ Run the pinned collector from your fork, select one chat and download an encrypt
 archive with GitHub provenance. The capture helper is also available under
 **Exports** in the panel.
 
-[Open the capture page](https://phishdestroy.github.io/TgWitness/docs/capture/) · [Instructions](docs/SEALED-ACTIONS.md) · [Русский](docs/ru/SEALED-ACTIONS.md)
+[Open the capture page](https://phishdestroy.github.io/TgWitness/docs/capture/) · [Instructions](docs/SEALED-ACTIONS.md)
 
 </details>
 
@@ -175,6 +178,96 @@ alone does not prove Telegram origin or complete history.
 [Evidence format](docs/EVIDENCE.md) · [Independent witness](docs/WITNESS.md) · [External timestamps](docs/TIMESTAMP.md)
 
 </details>
+
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
+
+<!-- authors-manifesto:start -->
+
+<a name="manifesto"></a>
+
+## What nobody can prove, including us
+
+<picture>
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-manifesto-mobile.svg">
+  <img src="docs/assets/presentation/readme-manifesto.svg" width="1200" alt="No signature makes a Telegram message true — ours included. We preserve what the account saw, link it so that a change shows, and hand you the verifier.">
+</picture>
+
+**We publish this under a project name, not a person's.** No title, degree or prefix
+belongs in front of it: a credential describes who is speaking, not what
+happened. The same bytes that would be doubted in one pair of hands do not become
+true in another. Whoever brings evidence is an interested party — we are no
+exception — so we would rather you checked the file than believed the author.
+
+We do not think a method exists that makes Telegram content certain. The one
+thing that would settle it is a signature from Telegram, over the message, that
+a third party can check. Telegram does not do that — not in an export, not
+anywhere else. Everything after that, ours included, is a record of what somebody
+saw.
+
+<details>
+<summary><strong>What we found looking into this</strong><br><sub>unequal standards, borrowed reputation, and why an export settles nothing</sub></summary>
+
+We read through cases where chat material decided the outcome, and we collected
+such material ourselves, recently, the same way everyone does. Two things became
+clear.
+
+**The standard moves with the accusation.** Where one side is already assumed to be
+right, a screenshot settles the matter. Where the other side has to clear its
+name, a full export filmed from beginning to end is waved away. The same
+artifact, opposite weight.
+
+**Filming does not fix it.** An export recorded on video, with the archive signed on
+camera, shows that a file existed and was signed. It says nothing about where the
+content came from.
+
+We name no tools, because the problem is not in any of them. Capture software,
+page archiving and device extraction all preserve faithfully what they were
+given. The question none of them answers is who gave it to them. Ask that
+instead: who is telling you this, who signed the file, who answers for the data.
+Telegram did not sign it, and Telegram is not on anyone's side here. What is left
+is the motive of whoever collected it, and the ways in are many.
+
+A vendor's standing says nothing about the person holding the tool. Neither does
+its price, its customer list, nor how much it would lose by being wrong. Those
+are facts about a company, and the question in front of you is the motive of
+whoever ran it that day. A trusted signature over a false record is worse than no
+signature at all: it does not fail quietly, it lends the falsehood someone else's
+reputation.
+
+Where such material is accepted today, it is usually accepted on the examiner's
+oath, their licence, and the fact that forging every background request and
+cached fragment of a page by hand is tedious. Those are procedural guarantees,
+not mathematical ones. Tedious is not impossible, an oath is worth whatever the
+person swearing it is worth, and both weigh unevenly — they help most whoever
+already has standing to lose.
+
+**This is why an export should not be the thing that decides.** Open one in a text
+editor, change a 1 to a 2, save. Nothing complains, and there is nothing to
+compare it against. No cache tricks, no DNS, no interception — a text editor.
+
+We are not saying Telegram's export is insecure. Registration, payments and
+account protection are defended deliberately and well. Export is simply not that
+kind of feature: forks export too, the format carries no integrity of any kind,
+and it was never meant to vouch for its own contents.
+
+</details>
+
+> **We take no side in what is recorded.** Who runs the tool is not the tool's
+> business, and its purpose is plain: preserve what was there, as completely and as
+> checkably as it can be preserved. This software is not on its operator's side. It
+> is on the side of the record staying what it was — about everyone in it,
+> including whoever collected it.
+
+So we claim no proof. TgWitness signs what the connected account saw, links every
+record to the one before it, and ships the verifier inside the archive, so the
+outcome is not ours to assert. Where a record can be anchored outside this
+machine — an independent witness, an external timestamp — we do that and show it.
+What stays unproven is written down, in the verifier's own output and in the
+[trust model](docs/SECURITY-MODEL.md).
+
+<!-- authors-manifesto:end -->
+
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
 <a name="operations"></a>
 <a name="layout-review"></a>

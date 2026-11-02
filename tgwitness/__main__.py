@@ -8,8 +8,6 @@ LOOPBACK = {"127.0.0.1", "localhost", "::1"}
 
 
 def should_open_browser(host, no_browser, environ=os.environ, interactive=None):
-    """Only a person starting the panel on this computer gets a browser tab: never in Docker,
-    services, scheduled tasks or scripts, and never for an address reachable from elsewhere."""
     if interactive is None:
 
         interactive = all(stream is not None and getattr(stream, "isatty", lambda: False)()
@@ -18,8 +16,6 @@ def should_open_browser(host, no_browser, environ=os.environ, interactive=None):
 
 
 def open_when_ready(url, host, port, token_file=None, timeout=60):
-    """Open the panel once it answers. For a real workspace, show the token in this console,
-    as the Docker helper does; the token never goes into the address bar or browser history."""
     import socket
     import time
     import webbrowser
@@ -39,7 +35,6 @@ def open_when_ready(url, host, port, token_file=None, timeout=60):
 
 
 def banner(demo, stream=None):
-    """A framed heading for a person starting the panel at a terminal; plain "TgWitness" otherwise."""
     from . import __version__
     stream = stream or sys.stdout
     if not (stream and getattr(stream, "isatty", lambda: False)()):
@@ -94,7 +89,7 @@ def main():
                          args=(url, args.host, args.port, None if args.demo else root / "panel-token.txt")).start()
     uvicorn.run(create_app(root, demo=args.demo), host=args.host, port=args.port, workers=1,
                 access_log=False, log_level="info", log_config=server_logging(root),
-                timeout_keep_alive=KEEP_ALIVE_SECONDS)
+                timeout_keep_alive=KEEP_ALIVE_SECONDS, proxy_headers=False)
 
 
 if __name__ == "__main__":

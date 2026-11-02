@@ -1,9 +1,3 @@
-"""Compare the running program with one commit of a public GitHub repository, such as an operator's fork.
-
-Every measured program file (the set in provenance.source_files) is compared by its git blob id with
-the file in the commit's tree, so no token and no download of the repository are needed. A checkout
-with Windows line endings is compared as git stored it (text=auto in .gitattributes).
-"""
 import hashlib
 import json
 import re
@@ -11,7 +5,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 from . import netclient
-from .provenance import source_files, source_tree_sha256
+from .provenance import SOURCE_POLICY, measured_path, source_files, source_tree_sha256
 from .store import utcnow
 
 API = "https://api.github.com/repos/"
@@ -30,7 +24,6 @@ class Limited(ValueError):
 
 
 def repository(text):
-    """(owner, name) of github.com/owner/name, a full https address or owner/name."""
     found = REPOSITORY.fullmatch((text or "").strip())
     if not found:
         raise ValueError("not a GitHub repository")
@@ -38,7 +31,6 @@ def repository(text):
 
 
 def blob_ids(data):
-    """Git blob ids of a file as it is on disk and, for a CRLF checkout, as git stored it."""
     def blob(content):
         return hashlib.sha1(b"blob %d\0" % len(content) + content).hexdigest()
     ids = {blob(data)}
@@ -86,9 +78,10 @@ async def check(text, ref, network, root=PACKAGE):
         path = entry["path"]
         if entry["type"] == "blob" and path.startswith(prefix):
             relative = path[len(prefix):]
-            if Path(relative).suffix in (".py", ".js", ".css", ".html", ".svg") and "__pycache__" not in relative:
+            if measured_path(relative):
                 remote[relative] = entry["sha"]
     local = {relative: blob_ids((Path(root) / relative).read_bytes()) for relative in measured}
     return {"repository": "https://github.com/" + owner + "/" + name, "ref": ref, "commit": commit,
-            "checked_at": utcnow(), "files": len(local), "source_tree_sha256": source_tree_sha256(measured),
+            "checked_at": utcnow(), "files": len(local), "source_policy": SOURCE_POLICY,
+            "source_tree_sha256": source_tree_sha256(measured),
             **compare(local, remote)}

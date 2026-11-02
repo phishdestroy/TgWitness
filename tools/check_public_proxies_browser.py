@@ -1,4 +1,3 @@
-"""Public-list UI acceptance with a local collector and synthetic download/transport fixtures."""
 import ipaddress
 import json
 import os
@@ -9,7 +8,7 @@ from urllib.parse import urlsplit
 
 from playwright.sync_api import expect, sync_playwright
 
-from check_browser import (ROOT, RunningApp, check_layout, hold_api_response, launch_browser,
+from check_browser import (ROOT, RunningApp, answer_panel_dialog, check_layout, hold_api_response, launch_browser,
                            navigate_panel, release_api_response, unlock)
 from tgwitness import i18n, proxy_catalog as catalogs
 
@@ -74,6 +73,7 @@ def main():
                 row = next(row for row in listing["proxies"] if is_ip(row["host"]))
                 page.locator("#proxy-catalog-select").select_option(row["id"])
                 page.locator("#proxy-catalog-apply").click()
+                answer_panel_dialog(page)
                 expect(page.locator("#route-detail")).to_contain_text(row["host"])
                 settings(page)
                 page.locator("#network-test").click()
@@ -108,7 +108,7 @@ def main():
                 assert page.locator("#proxy-catalog-select option").count() == 2
 
                 for lang in ("en", "ru"):
-                    context.add_cookies([{"name": "tgwitness-lang", "value": lang, "url": server.url}])
+                    page.evaluate("lang=>{const url=new URL(location.href);url.searchParams.set(\"lang\",lang);history.replaceState(null,\"\",url);}",lang)
                     page.reload()
                     expect(page.locator("#workspace")).to_be_visible()
                     settings(page)

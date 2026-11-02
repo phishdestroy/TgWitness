@@ -4,12 +4,13 @@ import io
 import ipaddress
 import json
 import logging
+import os
 import re
 import secrets
+import threading
 from secrets import token_bytes as secrets_token
 import time
 from datetime import datetime, timezone
-from collections import defaultdict, deque
 from contextlib import asynccontextmanager, suppress
 from pathlib import Path
 from typing import Literal
@@ -17,15 +18,14 @@ from typing import Literal
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field, StrictBool, StrictInt, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, model_validator
 from telethon.errors import FloodWaitError, RPCError
 
 from . import __version__
 from .workers import complete_in_thread
 from .account_export import AccountExport, AccountExportOptions
 from .disclosure import Disclosures, DisclosurePolicy
-from .downloads import TemporaryDownload, build_file
+from .downloads import RetainedDownload, TemporaryDownload, build_file
 from .access import POLICY, AccessControl, AdminSettings, Console, GrantSettings, Refused, check as access_check
 from .collector import AUTHORIZATION_ERRORS, Collector
 from .demo import seed_demo
@@ -38,9 +38,11 @@ from .provenance import run_receipt
 from .middleware import RequestLimit, request_limit
 from .account_import import import_accounts, IMPORT_REQUEST_LIMIT, session_key
 from .anchor import request_archive
-from .anchoring import EvidenceMode, anchor_loop, evidence_settings, request_anchor
+from .anchoring import EvidenceMode, anchor_loop, evidence_settings, gateway_rows, request_anchor
 from . import replica
 from . import alerts
+from .storage import Storage
+from .operator_bot import OperatorBot
 from .network import NetworkConfig, RoutePolicy, parse_mtproxy_link
 from . import proxy_catalog, proxy_sources
 from .proxy_catalog import NoProxyAvailable, ProxyPool, PublicCatalog, feed_network
@@ -48,16 +50,21 @@ from .monitoring import Capture, Monitoring, capture_settings, monitoring_settin
 from .scope import (EXCLUDE_LIMIT, WIDE_WARNING, Recheck, ScopeUpdate, recheck_settings, scope_settings,
                     unexclude)
 from . import assurance
+from . import cloud_wizard
 from . import health
 from . import netclient
 from . import source_check
 from . import dossier
 from . import report
+from . import pdf_report
+from . import handover
+from . import modes
 from . import recording
 from . import tuning
 from . import witness_api
 from . import interactions
-from .store import Store, canonical
+from . import levels
+from .store import Store, canonical, utcnow
 from .verify import fingerprint
 
 
@@ -66,9 +73,13 @@ class Credentials(BaseModel):
     api_hash: str | None = Field(default=None, pattern=r"^[a-fA-F0-9]{32}$")
     session: str = Field(default="", max_length=4096)
     expected_user_id: int | None = Field(default=None, gt=0)
+    client_profile: dict[str, str] | None = None
 
     @model_validator(mode="after")
     def complete_api_pair(self):
+        from .client_identity import validate
+        if self.client_profile is not None:
+            self.client_profile = validate(self.client_profile)
         if (self.api_id is None) != (self.api_hash is None):
             raise ValueError("Provide both API ID and API hash, or use this workspace's saved credentials.")
         return self
@@ -100,6 +111,29 @@ class Password(BaseModel):
     password: str = Field(min_length=1, max_length=512)
 
 
+class GatewayLog(BaseModel):
+    account: str = Field(pattern=r"^[0-9a-f]{32}$")
+    location_id: str
+    address: str = ""
+    token: str = Field(default="", max_length=400)
+
+    @model_validator(mode="after")
+    def plain(self):
+        self.location_id = self.location_id.strip().lower().replace("-", "")
+        if not re.fullmatch(r"[0-9a-f]{32}", self.location_id):
+            raise ValueError("Enter the Gateway DNS location ID from Cloudflare Zero Trust.")
+        self.address = self.address.strip()
+        if self.address:
+            try:
+                ipaddress.ip_address(self.address)
+            except ValueError:
+                raise ValueError("Enter this server's public IP address, or leave the field empty.") from None
+        self.token = self.token.strip()
+        if self.token.startswith("cfk_") or (self.token and not re.fullmatch(r"[A-Za-z0-9_-]{20,400}", self.token)):
+            raise ValueError("Paste a Cloudflare API token with read access, not the Global API Key.")
+        return self
+
+
 class SourceCheck(BaseModel):
     repository: str = Field(min_length=3, max_length=200)
     ref: str = Field(min_length=1, max_length=200)
@@ -114,6 +148,18 @@ class AlertUpdate(alerts.AlertSettings):
 class ExportPassword(BaseModel):
 
     password: str = Field(min_length=12, max_length=256)
+
+
+class HandoverRequest(handover.Options):
+    password: str | None = Field(default=None, min_length=12, max_length=256)
+    language: str | None = Field(default=None, max_length=16)
+
+
+class ModeChange(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    mode: modes.Mode
+    confirm_downgrade: StrictBool = False
+    reason: Literal["chosen", "later"] = "chosen"
 
 
 class Target(BaseModel):
@@ -198,6 +244,7 @@ class ParametersUpdate(BaseModel):
 
 class ChatExport(BaseModel):
     chat_id: int
+    language: str | None = Field(default=None, max_length=16)
 
 
 class MultiExportStart(BaseModel):
@@ -239,19 +286,30 @@ class AccessLogin(BaseModel):
 
 
 def panel_language(request):
-    """The language the panel is shown in; reports set to "Same as the panel" use it."""
     return i18n.pick(request.cookies.get(i18n.COOKIE), request.headers.get("accept-language"))
+
+
+def client_languages(request):
+    from .client_identity import language_defaults
+    return language_defaults(panel_language(request), request.headers.get("x-tgwitness-system-language")
+                             or request.headers.get("accept-language"))
+
+
+def report_options(store, request, language=None):
+    options = report.resolved(store, panel_language(request))
+    if language:
+        if language not in i18n.LANGUAGES:
+            raise HTTPException(422, "Unsupported report language")
+        options["language"] = language
+    return options
 
 
 def create_app(data_dir=None, demo=False, client_factory=None, token_override=None, allow_profiles=True,
                account_guard=None, proxy_pool=None, access=None, profile_id="default"):
     root = Path(data_dir or "data").resolve()
-    failures = defaultdict(deque)
     bearer = HTTPBearer(auto_error=False)
     op_lock = asyncio.Lock()
     export_lock = asyncio.Lock()
-    from .live_stream import StreamSlots
-    stream_slots = StreamSlots()
     public_proxies = PublicCatalog(root)
 
     shared_pool = proxy_pool or ProxyPool(public_proxies)
@@ -269,6 +327,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         resume_task = None
         anchor_task = None
         replica_task = None
+        storage_task = operator_bot_task = None
         alert_task = None
         host_task = None
         pool_task = None
@@ -277,6 +336,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         profiles = None
         try:
             cleanup_exports(root)
+            threading.Thread(target=pdf_report.available, name="pdf-preload", daemon=True).start()
             vault = Vault(root)
             if token_override:
                 vault.token = token_override
@@ -292,18 +352,26 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                     raise RuntimeError("Refusing to mix synthetic data into a real journal.")
                 seed_demo(store)
             elif store.get_setting("capture", None) is None:
-                # Freeze defaults before the first startup record. An older journal without an
-                # explicit policy previously enabled every type; an upgrade must retain that choice.
                 policy = capture_settings(store)
                 if store.stats()["total"]:
                     for rule in policy["types"].values():
                         rule["enabled"] = True
                 store.set_setting("capture", policy)
+            await complete_in_thread(modes.migrate, store)
             collector = Collector(store, vault, **({"client_factory": client_factory} if client_factory else {}))
             collector.account_guard = account_guard
             collector.proxy_pool = shared_pool
             app.state.store, app.state.vault, app.state.collector = store, vault, collector
             app.state.account_export = AccountExport(collector, store, vault)
+            from .guided_connection import GuidedConnection
+            app.state.connection = GuidedConnection(app, profile_id)
+            collector.portable_routes = app.state.connection.portable
+            if not demo:
+                try:
+                    await app.state.connection.portable.restore()
+                except Exception as exc:
+                    store.append("network.tunnel_unavailable", {"error_type": type(exc).__name__})
+                app.state.connection.maintenance = asyncio.create_task(app.state.connection.maintain())
             app.state.disclosures = Disclosures(app.state.account_export, vault)
             app.state.access = access or AccessControl(vault, store, console)
             if not access:
@@ -330,6 +398,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 app.state.assurance = {"mode": selected, "provider": provider}
                 app.state.run_receipt["host"] = await asyncio.to_thread(
                     assurance.snapshot, selected, provider, detail=True)
+                quote = await asyncio.to_thread(assurance.start_attestation, selected, app.state.run_receipt)
+                if quote is not None:
+                    app.state.run_receipt["tdx_start"] = quote
             collector.run_id = app.state.run_receipt["run_id"]
             previous = store.stats()["head"]
             process_event = store.append("process.started", {"version": __version__, "previous_observation": previous,
@@ -340,14 +411,19 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             journal_ready = True
             app.state.anchor_wakeup, app.state.anchor_status = asyncio.Event(), {"busy": False}
             app.state.replica_wakeup, app.state.replica_status = asyncio.Event(), {"busy": False}
-            app.state.host_status = {}  # the assurance loop's latest host measurement
+            app.state.host_status = {}
             app.state.alert_wakeup = asyncio.Event()
+            app.state.storage = Storage(store, vault, collector.outside_route)
+            app.state.operator_bot = OperatorBot(app.state)
             if not store.get_setting("demo", False):
+                storage_task = asyncio.create_task(app.state.storage.loop())
+                operator_bot_task = asyncio.create_task(app.state.operator_bot.loop())
 
                 alert_task = asyncio.create_task(alerts.alert_loop(
                     store, vault, collector.outside_route, app.state.alert_wakeup, profile_id))
                 anchor_task = asyncio.create_task(anchor_loop(
-                    store, collector.outside_route, app.state.anchor_wakeup, app.state.anchor_status))
+                    store, collector.outside_route, app.state.anchor_wakeup, app.state.anchor_status,
+                    collector.signed_in_devices, lambda: vault.read("gateway").get("token") and vault.read("gateway")))
                 replica_task = asyncio.create_task(replica.replica_loop(
                     store, vault, collector.outside_route, app.state.replica_wakeup, app.state.replica_status))
                 if app.state.assurance:
@@ -379,6 +455,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                                       access=app.state.access, profile_id=Path(path).name, **options)
                 profiles = Profiles(app, root, child_factory)
                 app.state.profiles = profiles
+                app.state.access.group_of = profiles.group_of
                 await profiles.open()
                 app.state.multi_export = MultiExport(profiles)
                 from .archive_api import startup as start_mcp
@@ -395,18 +472,22 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 if getattr(app.state, "multi_export", None):
                     await app.state.multi_export.close()
                 if profiles:
+                    await app.state.connection.close()
                     await profiles.close()
                 if getattr(app.state, "disclosures", None):
                     await app.state.disclosures.close()
                 if getattr(app.state, "account_export", None):
                     await app.state.account_export.close()
                 check_task = shared_pool.check_task if proxy_pool is None else None
-                for task in (resume_task, anchor_task, replica_task, alert_task, host_task, pool_task, check_task):
+                for task in (resume_task, anchor_task, replica_task, alert_task, host_task, pool_task, check_task,
+                             storage_task, operator_bot_task, getattr(getattr(app.state, "storage", None), "task", None)):
                     if task:
                         task.cancel()
                         await asyncio.gather(task, return_exceptions=True)
                 if collector:
                     await collector.stop(shutdown=True)
+                if getattr(app.state, "connection", None):
+                    await app.state.connection.close()
                 if store and journal_ready:
                     store.append("process.stopped", {"reason": "graceful shutdown"})
                     retain_checkpoint(store, vault)
@@ -419,13 +500,25 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
     app = FastAPI(title="TgWitness", version=__version__, lifespan=lifespan,
                   docs_url=None, redoc_url=None, openapi_url=None)
+    installation_id = os.environ.get("TGWITNESS_INSTALLATION_ID", "")
+
+    @app.get("/_tgwitness/ready", include_in_schema=False)
+    async def installation_ready():
+        if not re.fullmatch(r"[0-9a-f]{64}", installation_id):
+            raise HTTPException(404, "Not found")
+        return Response(installation_id, media_type="text/plain", headers={"Cache-Control": "no-store"})
+
     app.state.operation_lock, app.state.closing = op_lock, False
     app.add_middleware(RequestLimit, max_body=16384)
 
     @app.middleware("http")
     async def headers(request, call_next):
+        if "/api/" in request.url.path and "ws" in request.query_params:
+            workspace_path = re.match(r"^/profiles/([a-f0-9]{32})/api/", request.url.path)
+            selected = workspace_path[1] if workspace_path else profile_id
+            if request.query_params.getlist("ws") != [selected]:
+                return JSONResponse({"detail": "Unknown workspace selector."}, status_code=404)
         if request.headers.get("content-length", "").isdigit() and int(request.headers["content-length"]) > request_limit(request.url.path):
-            from fastapi.responses import JSONResponse
             return JSONResponse({"detail": "Request body too large"}, status_code=413)
         response = await call_next(request)
         audit = getattr(request.state, "audit", None)
@@ -461,6 +554,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 or len(app.state.profiles.entries) != 1
                 or app.state.vault.read("credentials").get("session")):
             return False
+        return direct_local(request)
+
+    def direct_local(request):
         try:
             if not request.client or not ipaddress.ip_address(request.client.host).is_loopback:
                 return False
@@ -469,7 +565,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 return False
         except ValueError:
             return False
-        if any(name in request.headers for name in ("forwarded", "x-forwarded-for", "x-forwarded-host", "x-forwarded-proto")):
+        if any(name in request.headers for name in ("forwarded", "x-forwarded-for", "x-forwarded-host", "x-forwarded-proto",
+                                                    "x-real-ip", "cf-connecting-ip")):
             return False
         if request.headers.get("sec-fetch-site") not in (None, "same-origin", "none"):
             return False
@@ -492,26 +589,12 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return {"available": True, "token": app.state.local_demo_token}
 
     def reject_access(request, detail):
-
-
-        address = request.client.host if request.client else "unknown"
-        now = time.monotonic()
-        if address not in failures and len(failures) >= 4096:
-            failures.clear()
-        queue = failures[address]
-        while queue and queue[0] < now - 60:
-            queue.popleft()
-        if len(queue) >= 15:
-            raise HTTPException(429, "Too many failed access attempts. Wait one minute.",
-                                headers={"Retry-After": "60"})
-        queue.append(now)
         raise HTTPException(401, detail, headers={"WWW-Authenticate": "Bearer"})
 
     def client_address(request):
         return request.client.host if request.client else "unknown"
 
     async def identify(request: Request, credential: HTTPAuthorizationCredentials = Depends(bearer)):
-        """Who is asking: the panel token, a session started with any token, or the local demo."""
         principal = None
         if credential:
             if local_demo_access(request) and secrets.compare_digest(
@@ -528,7 +611,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return principal
 
     async def authenticate(request: Request, principal=Depends(identify)):
-        """An issued access may use only the routes, workspaces and chats it was given."""
         route = request.scope.get("route")
         rule = POLICY.get(request.method + " " + route.path) if route else None
         try:
@@ -538,7 +620,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return principal
 
     def visible_chats(request):
-        """None for every chat of this workspace, otherwise the chat IDs the access opens."""
         return request.state.principal.chats(profile_id)
 
     def visible_targets(request):
@@ -579,7 +660,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return current, parts, targets
 
     async def authenticate_witness(request: Request, credential: HTTPAuthorizationCredentials = Depends(bearer)):
-        """Witness tokens open only the signed journal head; the panel token is not accepted here."""
         entry = witness_api.match(app.state.vault, credential.credentials) if credential else None
         if not entry:
             reject_access(request, "Unknown witness token.")
@@ -590,6 +670,10 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(503, "This workspace is closing. Wait for it to finish.")
         if app.state.store.get_setting("demo", False):
             raise HTTPException(409, "This is a synthetic demo. Start a separate data directory for real observation.")
+
+    def require_external(enabled):
+        if enabled and not app.state.collector.route_policy()["outside_enabled"]:
+            raise HTTPException(409, "This feature needs external requests. Allow them in Settings first.")
 
     async def perform_operation(call, *args):
         collector = app.state.collector
@@ -629,10 +713,13 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.get("/api/status", dependencies=[Depends(authenticate)])
     async def status(request: Request):
         from . import ai, media_analysis
+        from .operator_privacy import connection_details, status_parts, without_diagnostics
         store, vault = app.state.store, app.state.vault
         allowed = visible_chats(request)
         collector_status, parts, targets = scoped_status(app, allowed)
-        return {"version": __version__, "demo": store.get_setting("demo", False),
+        principal = request.state.principal
+        collector_status, parts = status_parts(principal, collector_status, parts, allowed)
+        result = {"workspace_id": profile_id, "demo": store.get_setting("demo", False),
                 "analysis": {"enabled": ai.enabled(app.state) and not store.get_setting("demo", False),
                              "media_available": media_analysis.available() and not store.get_setting("demo", False)},
                 "collector": collector_status, "stats": store.stats(allowed),
@@ -643,16 +730,25 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 "monitoring": monitoring_settings(store), "scope": collector_status["scope"],
                 "recheck": recheck_settings(store),
                 "dossiers": [c for c in dossier.enabled_chats(store) if allowed is None or c in allowed],
-                "parameters": tuning.values(store),
+                "setup_answered": store.get_setting("setup", None) is not None,
+                "setup_goal": (store.get_setting("setup", None) or {}).get("goal"),
                 "fingerprint": fingerprint(vault.public_key), "limitations": LIMITS,
-                "protection": {"vault_key_mode": vault.key_mode, "secrets_encrypted": True,
-                               "journal_encrypted_by_app": False, "media_encrypted_by_app": False},
-                "run_id": app.state.run_receipt["run_id"], "chats_limited": allowed is not None,
+                "chats_limited": allowed is not None,
                 "assurance": bool(app.state.assurance)}
+        if connection_details(principal, allowed):
+            result.update(version=__version__, run_id=app.state.run_receipt["run_id"],
+                          protection={"vault_key_mode": vault.key_mode, "secrets_encrypted": True,
+                                      "journal_encrypted_by_app": False, "media_encrypted_by_app": False})
+        else:
+            result['history'] = without_diagnostics(result['history'])
+        if principal.admin or principal.may("settings") and allowed is None:
+            result["parameters"] = tuning.values(store)
+        return result
 
     if allow_profiles:
         @app.get("/api/profiles", dependencies=[Depends(authenticate)])
         async def profiles_list(request: Request):
+            from .operator_privacy import status_parts
             principal, listed = request.state.principal, []
             for entry in app.state.profiles.summary():
                 if not principal.opens(entry["id"]):
@@ -664,9 +760,67 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                                                 if workspace else (None, None, []))
                     entry = {**entry, "stats": None, "sources_enabled": sum(bool(t["enabled"]) for t in targets),
                              "collector": current, "health": parts, "sources_total": len(targets)}
-                listed.append(entry)
+                current, parts = status_parts(principal, entry["collector"], entry["health"], allowed)
+                listed.append({**entry, "collector": current, "health": parts})
             return {"profiles": listed, "limit": Profiles.MAX_PROFILES,
                     "model": "independent account collectors and signing identities"}
+
+        cloud_jobs = app.state.cloud_jobs = cloud_wizard.Jobs(root)
+
+        def require_cloud(request):
+            require_live()
+            if not direct_local(request):
+                raise HTTPException(403, "Servers are started from TgWitness on your own computer. Open the panel "
+                                         "there at 127.0.0.1; cloud tokens are never sent to a panel over the network.")
+
+        def cloud_error(exc):
+            return {"error": {"message": str(exc), "technical": exc.technical}}
+
+        @app.get("/api/cloud", dependencies=[Depends(authenticate)])
+        async def cloud_status(request: Request):
+            return {**cloud_jobs.status(), "local": direct_local(request), "version": __version__}
+
+        @app.post("/api/cloud/check", dependencies=[Depends(authenticate)])
+        async def cloud_check(request: Request, body: cloud_wizard.Check):
+            require_cloud(request)
+            try:
+                return await asyncio.to_thread(cloud_jobs.check, body)
+            except cloud_wizard.WizardError as exc:
+                return cloud_error(exc)
+
+        @app.post("/api/cloud/deploy", dependencies=[Depends(authenticate)])
+        async def cloud_deploy(request: Request, body: cloud_wizard.Deploy):
+            require_cloud(request)
+            try:
+                return cloud_jobs.deploy(body)
+            except cloud_wizard.WizardError as exc:
+                return cloud_error(exc)
+
+        @app.post("/api/cloud/destroy", dependencies=[Depends(authenticate)])
+        async def cloud_destroy(request: Request, body: cloud_wizard.Destroy):
+            require_cloud(request)
+            try:
+                return cloud_jobs.destroy(body)
+            except cloud_wizard.WizardError as exc:
+                return cloud_error(exc)
+
+        @app.post("/api/cloud/address", dependencies=[Depends(authenticate)])
+        async def cloud_address(request: Request, body: cloud_wizard.Address):
+            require_cloud(request)
+            try:
+                return await asyncio.to_thread(cloud_jobs.address, body.name)
+            except cloud_wizard.WizardError as exc:
+                return cloud_error(exc)
+
+        @app.get("/api/cloud/deployments/{name}/{filename}", dependencies=[Depends(authenticate)])
+        async def cloud_file(request: Request, name: str, filename: str):
+            require_cloud(request)
+            try:
+                path, media = cloud_jobs.file(name, filename)
+            except cloud_wizard.WizardError as exc:
+                raise HTTPException(404, str(exc)) from None
+            return Response(path.read_bytes(), media_type=media,
+                            headers={"Content-Disposition": 'attachment; filename="' + name + "-" + filename + '"'})
 
         @app.post("/api/profiles", dependencies=[Depends(authenticate)])
         async def profiles_create(body: ProfileCreate):
@@ -740,10 +894,15 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 raise HTTPException(400, str(exc)) from None
             return groups_view()
 
+        from .group_settings import register as register_group_settings
+        register_group_settings(app, authenticate, require_live)
+        from .group_overview import register as register_group_overview
+        register_group_overview(app, authenticate)
+        from .group_export import register as register_group_export
+        register_group_export(app, authenticate)
+
         @app.post("/api/profiles/import", dependencies=[Depends(authenticate)])
-        async def profiles_import(body: ProfileImport):
-            """One account per request: convert its files, give it a new workspace and connect the session.
-            A workspace whose session does not log in is removed again; the uploads are never stored."""
+        async def profiles_import(body: ProfileImport, request: Request):
             require_live()
             if (body.api_id is None) != (body.api_hash is None):
                 raise HTTPException(422, "Provide both API ID and API hash, or leave both empty.")
@@ -753,10 +912,10 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 raise HTTPException(400, str(exc)) from None
             if not account.get("session"):
                 raise HTTPException(400, "These files hold no login session. Add the .session or TData of the account.")
+            if bool(account.get("api_id")) != bool(account.get("api_hash")):
+                raise HTTPException(422, "Session found, but its application settings are incomplete. Supply both API ID and API hash in the JSON, or select the session file without this JSON to use the built-in app settings.")
             registry = app.state.profiles
             expected, key = account.get("expected_user_id"), session_key(account["session"])
-            # Before any connection: the same key from a second proxy address while its workspace is
-            # connected can make Telegram revoke it (AUTH_KEY_DUPLICATED)
             holder = registry.holder(expected, key)
             if holder:
                 raise HTTPException(409, "This Telegram account already has a workspace: " + holder["label"] + ".")
@@ -774,7 +933,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             label = body.label.strip() or (body.files[0].name.rsplit(".", 1)[0][:80] or "Imported account")
             try:
                 entry = await registry.create(label, body.group)
-                # Only this new child's operation lock is held; the main workspace and registry stay usable.
                 child = registry.entries[entry["id"]]["app"]
                 if child is None:
                     raise ValueError("The new workspace could not start.")
@@ -785,9 +943,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                         raise ValueError("The new workspace could not start.")
                     await asyncio.wait_for(collector.configure(
                         body.api_id or account.get("api_id"), body.api_hash or account.get("api_hash"),
-                        account["session"], expected), tuning.value(app.state.store, "operation_timeout_seconds"))
+                        account["session"], expected, account.get("client_profile"), client_languages(request)),
+                        tuning.value(app.state.store, "operation_timeout_seconds"))
                     account_info = child.state.store.get_setting("account", {}) or {}
-                    # Keep the account photo, then disconnect until the operator chooses sources.
                     with suppress(Exception):
                         await asyncio.wait_for(collector.avatar(account_info.get("id")), 20)
                     await collector.stop()
@@ -814,7 +972,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                        for pid in profile_ids)
 
         def multi_visible(request):
-            """An issued access sees a multi-account export only if it opens that chat in each of its accounts."""
             state = app.state.multi_export.state
             return not state or opens_chat_everywhere(request.state.principal, state["chat_id"],
                                                       [state["lead"], *(w["profile_id"] for w in state["workers"])])
@@ -870,13 +1027,26 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                          kind: str | None = None, before: int | None = None,
                          search: str | None = None, limit: int = 100,
                          since: str | None = None, until: str | None = None, hide_system: bool = False,
-                         after: int | None = None, include_count: bool = False):
+                         after: int | None = None, include_count: bool = False,
+                         slice_id: str | None = None, added_since: bool = False):
         if not 1 <= limit <= 500 or (search and len(search) > 200):
             raise HTTPException(422, "Limit must be 1–500; search must be at most 200 characters.")
         if kind and (len(kind) > 300 or len(kind.split(",")) > 16):
             raise HTTPException(422, "Choose at most 16 event types.")
         if before is not None and after is not None or any(value is not None and not 0 <= value < 2**53 for value in (before, after)):
             raise HTTPException(422, "Choose one valid journal cursor.")
+        if slice_id:
+            from .board import Board
+            def slice_window():
+                try:
+                    with app.state.store.snapshot() as snapshot:
+                        return Board(app.state.store, profile_id).journal_window(snapshot.connection,
+                            request.state.principal, slice_id, before, after, limit, added_since)
+                except Refused as exc:
+                    raise HTTPException(403, str(exc)) from None
+                except KeyError:
+                    raise HTTPException(404, "Slice not found.") from None
+            return await complete_in_thread(slice_window)
         if chat_id is not None:
             require_chat(request, chat_id)
         dates = []
@@ -922,10 +1092,10 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(503, "The journal is busy. Narrow the filters and retry.") from None
 
     @app.get("/api/stream", dependencies=[Depends(authenticate)])
-    async def journal_stream(request: Request, after: int = 0,
+    async def journal_stream(request: Request, after: int = 0, board_after: int = 0,
                              credential: HTTPAuthorizationCredentials = Depends(bearer)):
         from .live_stream import LimitedStreamingResponse, stream
-        if not 0 <= after <= 9223372036854775807:
+        if not 0 <= after <= 9223372036854775807 or not 0 <= board_after <= 9223372036854775807:
             raise HTTPException(422, "Invalid journal cursor.")
         token = credential.credentials
 
@@ -937,46 +1107,62 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             if principal is None:
                 raise Refused("Access ended")
             access_check(principal, profile_id, POLICY["GET /api/stream"], {})
+            request.state.stream_principal = principal
             return principal.chats(profile_id)
+
+        def board_authorize():
+            authorize()
+            principal = request.state.stream_principal
+            return principal if principal.may("board.read") else None
 
         async def updates():
             try:
                 yield ": connected\n\n"
-                async for item in stream(app.state.store, after, authorize, request.is_disconnected):
+                async for item in stream(app.state.store, after, authorize, request.is_disconnected,
+                                         board_after=board_after, board_authorize=board_authorize, workspace=profile_id):
                     yield item
             except Refused:
                 yield "event: access-ended\ndata: {}\n\n"
 
-        return LimitedStreamingResponse(updates(), slots=stream_slots, media_type="text/event-stream",
+        from .access import digest
+        return LimitedStreamingResponse(updates(), slots=app.state.access.stream_slots, owner=digest(token), media_type="text/event-stream",
                                         headers={"X-Accel-Buffering": "no", "Cache-Control": "no-store"})
 
     @app.post("/api/auth/configure", dependencies=[Depends(authenticate)])
-    async def configure(body: Credentials):
-        return await operation(app.state.collector.configure, body.api_id, body.api_hash, body.session, body.expected_user_id)
+    async def configure(body: Credentials, request: Request):
+        return await operation(app.state.collector.configure, body.api_id, body.api_hash, body.session,
+                               body.expected_user_id, body.client_profile, client_languages(request))
 
     @app.post("/api/auth/phone/start", dependencies=[Depends(authenticate)])
-    async def start_phone(body: PhoneLogin):
-        return await operation(app.state.collector.start_phone, body.phone, body.api_id, body.api_hash)
+    async def start_phone(body: PhoneLogin, request: Request):
+        return await operation(app.state.collector.start_phone, body.phone, body.api_id, body.api_hash,
+                               body.client_profile, client_languages(request))
 
     @app.post("/api/auth/import", dependencies=[Depends(authenticate)])
     async def import_account(body: AccountImport):
         require_live()
-        async with op_lock:
-            require_live()
-            if app.state.collector.export_claim:
-                raise HTTPException(409, "Pause the active export before importing another account.")
-            if app.state.collector.running:
-                raise HTTPException(400, "Pause observation before importing another account.")
-            try:
-                return await asyncio.to_thread(import_accounts, [item.model_dump() for item in body.files], body.passcode)
-            except ValueError as exc:
-                raise HTTPException(400, str(exc)) from None
+        try:
+            result = await asyncio.to_thread(import_accounts, [item.model_dump() for item in body.files], body.passcode)
+            if not result["has_authorization"]:
+                raise ValueError("No session — only application settings. Add a .session or TData file, or sign in by phone or QR.")
+            if bool(result.get("api_id")) != bool(result.get("api_hash")):
+                raise ValueError("Session found, but its application settings are incomplete. Supply both API ID and API hash in the JSON, or select the session file without this JSON to use the built-in app settings.")
+            return result
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from None
+
+    @app.post("/api/auth/import/preview", dependencies=[Depends(authenticate)])
+    async def import_preview(body: AccountImport):
+        require_live()
+        from .account_import import preview
+        return await asyncio.to_thread(preview, [item.model_dump() for item in body.files], body.passcode)
 
     @app.post("/api/auth/qr/start", dependencies=[Depends(authenticate)])
-    async def start_qr(body: Credentials):
+    async def start_qr(body: Credentials, request: Request):
         import qrcode
         from qrcode.image.svg import SvgPathImage
-        result = await operation(app.state.collector.start_qr, body.api_id, body.api_hash)
+        result = await operation(app.state.collector.start_qr, body.api_id, body.api_hash,
+                                 body.client_profile, client_languages(request))
         url = result.pop("url")
         output = io.BytesIO()
         qrcode.make(url, image_factory=SvgPathImage, border=4).save(output)
@@ -991,8 +1177,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return await operation(app.state.collector.cancel_qr, login_id)
 
     async def approved_route(request, config):
-        """A proxy resolving inside this machine or its network (a local Tor or SOCKS5 proxy) may be set only
-        by the main administrator; the saved route remembers that. A request's own local_proxy is ignored."""
         if config is None or config.kind not in ("socks5", "http", "mtproxy"):
             return config and config.model_copy(update={"local_proxy": False})
         try:
@@ -1007,6 +1191,52 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.post("/api/network", dependencies=[Depends(authenticate)])
     async def network(request: Request, body: NetworkConfig):
         return await operation(app.state.collector.set_network, await approved_route(request, body))
+
+    from .guided_connection import ApplyDraft, ConnectionDraft
+
+    @app.get("/api/connection", dependencies=[Depends(authenticate)])
+    async def connection_state():
+        return app.state.connection.public()
+
+    @app.post("/api/connection/preview", dependencies=[Depends(authenticate)])
+    async def connection_preview(body: ConnectionDraft):
+        require_live()
+        try:
+            return app.state.connection.preview(body)
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from None
+
+    @app.post("/api/connection/prepare", dependencies=[Depends(authenticate)])
+    async def connection_prepare(body: ConnectionDraft):
+        require_live()
+        try:
+            return app.state.connection.start_prepare(body)
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from None
+
+    @app.post("/api/connection/apply", dependencies=[Depends(authenticate)])
+    async def connection_apply(body: ApplyDraft):
+        require_live()
+        try:
+            return app.state.connection.start_apply(body.plan)
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from None
+
+    @app.post("/api/connection/check", dependencies=[Depends(authenticate)])
+    async def connection_check():
+        return await operation(app.state.connection.check_current)
+
+    @app.post("/api/connection/cancel", dependencies=[Depends(authenticate)])
+    async def connection_cancel():
+        return await operation(app.state.connection.cancel)
+
+    @app.post("/api/connection/stop", dependencies=[Depends(authenticate)])
+    async def connection_stop():
+        return await operation(app.state.connection.control, "stop")
+
+    @app.post("/api/connection/start", dependencies=[Depends(authenticate)])
+    async def connection_start():
+        return await operation(app.state.connection.control, "start")
 
     @app.get("/api/network/policy", dependencies=[Depends(authenticate)])
     async def network_policy():
@@ -1053,7 +1283,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return await operation(apply)
 
     def lists_updated_at(sources):
-        """When the newest list in use was actually downloaded; a blocked or failed attempt changes nothing."""
         stamps = []
         for source in sources:
             with suppress(TypeError, ValueError):
@@ -1062,7 +1291,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return max(stamps, default=None)
 
     def proxy_view(principal=None):
-        """The shared automatic pool as the panel shows it: every server, its check and its users."""
         catalog = shared_pool.catalog
         labels = {str(app.state.store.root): app.state.store.get_setting("profile_label", "this workspace")}
         profiles = getattr(app.state, "profiles", None)
@@ -1243,7 +1471,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return {"targets": visible_targets(request)}
 
     def remove_targets(ids):
-        """Remove validated sources as one transaction, then clear rebuildable caches."""
         store = app.state.store
         existing = {t["chat_id"]: t for t in store.targets()}
         if any(chat_id not in existing for chat_id in ids):
@@ -1311,6 +1538,10 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             result = remove_targets([chat_id])
         return {"targets": visible_targets(request), **result}
 
+    def save_capture(store, saved):
+        store.set_setting("capture", saved)
+        store.append("capture.changed", capture_settings(store))
+
     @app.post("/api/capture", dependencies=[Depends(authenticate)])
     async def capture(body: Capture):
         require_live()
@@ -1319,8 +1550,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 saved = body.model_dump()
                 if "record_disabled_media" not in body.model_fields_set:
                     saved["record_disabled_media"] = capture_settings(app.state.store)["record_disabled_media"]
-                app.state.store.set_setting("capture", saved)
-                app.state.store.append("capture.changed", capture_settings(app.state.store))
+                save_capture(app.state.store, saved)
             app.state.collector.media_wakeup.set()
         return capture_settings(app.state.store)
 
@@ -1397,14 +1627,13 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return scope_state()
 
     def outside_state():
-        """How requests outside Telegram leave this workspace, and why not when they cannot."""
         route = app.state.collector.outside_route()
         return {"route": route.kind, "route_problem": str(route.error) if route.kind == "none" else None}
 
     def timestamps_health(outside):
         store = app.state.store
         last, success = store.get_setting("evidence_last", None), store.get_setting("evidence_success", None)
-        if success is None and last and any(r.get("ok") for r in last.get("results", [])):  # saved before 0.7
+        if success is None and last and any(r.get("ok") for r in last.get("results", [])):
             success = {"at": last["at"], "verified_at": last["at"] if any(
                 r.get("ok") and r.get("kind") == "rfc3161" for r in last["results"]) else None}
         return health.timestamps(evidence_settings(store), last, success, store.get_setting("evidence_failure", None),
@@ -1413,7 +1642,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     def replica_health(outside):
         store = app.state.store
         last, success = store.get_setting("replica_last", None), store.get_setting("replica_success", None)
-        if success is None and last and not last.get("error"):  # saved before 0.7
+        if success is None and last and not last.get("error"):
             success = {"at": last["at"], "journal_seq": last.get("journal_seq")}
         return health.replica(replica.replica_settings(store), last, success, app.state.replica_status,
                               outside["route_problem"], (store.stats()["head"] or {}).get("seq", 0), health.now_utc())
@@ -1422,9 +1651,21 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return health.server(app.state.assurance, app.state.run_receipt.get("host"), app.state.host_status,
                              health.now_utc())
 
+    def gateway_state():
+        saved = app.state.vault.read("gateway")
+        suggested = None
+        if app.state.assurance:
+            described = (assurance.deployment() or {}).get("gateway") or {}
+            if described.get("location_id"):
+                suggested = {"account": described.get("account"), "location_id": described["location_id"],
+                             "address": (app.state.assurance.get("provider") or {}).get("public_ipv4")}
+        return {"account": saved.get("account"), "location_id": saved.get("location_id"),
+                "address": saved.get("address"), "has_token": bool(saved.get("token")), "suggested": suggested}
+
     def evidence_state():
         store, outside = app.state.store, outside_state()
         return {"settings": evidence_settings(store), "last": store.get_setting("evidence_last", None),
+                "witnesses": store.get_setting("evidence_witnesses", None) or {}, "gateway": gateway_state(),
                 "busy": app.state.anchor_status["busy"], **outside, "health": timestamps_health(outside),
                 "defaults": EvidenceMode().model_dump(exclude={"enabled"})}
 
@@ -1435,13 +1676,48 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.post("/api/evidence", dependencies=[Depends(authenticate)])
     async def set_evidence(body: EvidenceMode):
         require_live()
+        require_external(body.enabled)
         store, vault = app.state.store, app.state.vault
         was = evidence_settings(store)["enabled"]
         with store.transaction():
-            store.set_setting("evidence", body.model_dump())
-            store.append("evidence.changed", {**body.model_dump(), "fingerprint": fingerprint(vault.public_key)})
+            save_evidence(store, body)
         if body.enabled and not was:
             request_anchor(store, vault, app.state.anchor_wakeup)
+        return evidence_state()
+
+    def save_evidence(store, body):
+        store.set_setting("evidence", body.model_dump())
+        store.append("evidence.changed", {**body.model_dump(), "fingerprint": fingerprint(app.state.vault.public_key)})
+
+    @app.post("/api/evidence/gateway", dependencies=[Depends(authenticate)])
+    async def set_gateway_log(body: GatewayLog):
+        require_live()
+        store, vault = app.state.store, app.state.vault
+        token = body.token or vault.read("gateway").get("token")
+        if not token:
+            raise HTTPException(422, "Paste the read-only Cloudflare token.")
+        config = {"account": body.account, "location_id": body.location_id, "address": body.address or None,
+                  "token": token}
+        try:
+            await gateway_rows(app.state.collector.outside_route(), config, time.time() - 3600, time.time() - 60)
+        except (netclient.RouteError, OSError, asyncio.TimeoutError):
+            raise HTTPException(502, "Cloudflare could not be reached through this workspace's connection route.")
+        except (netclient.HTTPError, ValueError, KeyError, IndexError, TypeError):
+            raise HTTPException(422, "Cloudflare did not accept this account, location or token. The token needs "
+                                     "Account Analytics Read, and Zero Trust PII Read to keep one address only.")
+        vault.save("gateway", config)
+        store.append("evidence.gateway_set", {k: config[k] for k in ("account", "location_id", "address")})
+        return evidence_state()
+
+    @app.delete("/api/evidence/gateway", dependencies=[Depends(authenticate)])
+    async def remove_gateway_log():
+        require_live()
+        store = app.state.store
+        app.state.vault.save("gateway", {})
+        with store.transaction():
+            if evidence_settings(store)["gateway"]:
+                save_evidence(store, EvidenceMode(**{**evidence_settings(store), "gateway": False}))
+            store.append("evidence.gateway_removed", {})
         return evidence_state()
 
     @app.post("/api/evidence/anchor", dependencies=[Depends(authenticate)])
@@ -1455,6 +1731,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     def source_state():
         last, receipt = app.state.store.get_setting("source_check", None), app.state.run_receipt
         return {"last": last, "version": __version__, "source_tree_sha256": receipt["source_tree_sha256"],
+                "source_policy": receipt.get("source_policy"),
                 "files": len(receipt["source_files"]), **outside_state(),
 
                 "current": bool(last) and last["source_tree_sha256"] == receipt["source_tree_sha256"]}
@@ -1462,6 +1739,39 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.get("/api/source-check", dependencies=[Depends(authenticate)])
     async def get_source_check():
         return source_state()
+
+    def mode_facts():
+        store, vault, collector = app.state.store, app.state.vault, app.state.collector
+        outside = outside_state()
+        return {"media": capture_settings(store)["download_media"],
+                "checkpoint": store.retained_checkpoint() is not None,
+                "recheck": recheck_settings(store),
+                "alerts": {**alerts.alert_settings(store), "destinations": len(vault.read("alerts").get("urls", []))},
+                "witness": witness_api.state(vault, store)["tokens"],
+                "evidence": evidence_settings(store), "timestamps": timestamps_health(outside),
+                "replica": replica.replica_settings(store), "replica_last": store.get_setting("replica_last", None),
+                "report": report.saved(store).model_dump(), "source_check": source_state(),
+                "route": collector.route_policy(), "network": collector.network_config().kind,
+                "direct_fallback": collector.direct_fallback, "outside_route": outside["route"],
+                "assurance": bool(app.state.assurance)}
+
+    def mode_state():
+        return modes.state(app.state.store, mode_facts())
+
+    @app.get("/api/mode", dependencies=[Depends(authenticate)])
+    async def get_mode():
+        return mode_state()
+
+    @app.patch("/api/mode", dependencies=[Depends(authenticate)])
+    async def change_mode(request: Request, body: ModeChange):
+        principal = request.state.principal
+        try:
+            modes.change(app.state.store, body.mode, {"access_id": principal.owner, "label": principal.label},
+                         confirm_downgrade=body.confirm_downgrade, reason=body.reason,
+                         active=mode_state()["active"])
+        except modes.Downgrade as exc:
+            raise HTTPException(409, str(exc)) from None
+        return mode_state()
 
     @app.post("/api/source-check", dependencies=[Depends(authenticate)])
     async def run_source_check(body: SourceCheck):
@@ -1498,16 +1808,81 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return replica_state()
 
     @app.get("/api/health", dependencies=[Depends(authenticate)])
-    async def get_health():
-        """What each part is doing now, apart from whether it is switched on (health.py)."""
+    async def get_health(request: Request):
         outside = outside_state()
-        return {"checked_at": health.iso(health.now_utc()), "collector": health.collector_of(app.state),
-                "timestamps": timestamps_health(outside), "replica": replica_health(outside),
-                "server": server_health()}
+        parts = {"collector": health.collector_of(app.state), "timestamps": timestamps_health(outside),
+                 "replica": replica_health(outside), "server": server_health()}
+        from .operator_privacy import status_parts
+        _, parts = status_parts(request.state.principal, {}, parts, visible_chats(request))
+        return {"checked_at": health.iso(health.now_utc()), **parts}
+
+    def setup_state():
+        store, outside = app.state.store, outside_state()
+        saved = store.get_setting("setup", None)
+        place = (saved or {}).get("place") or ("server" if app.state.assurance else "computer")
+        assessment = levels.assess(evidence_settings(store), replica.replica_settings(store),
+                                   alerts.alert_settings(store), app.state.vault.read("alerts").get("urls", []),
+                                   app.state.assurance, source_state(),
+                                   witness_api.state(app.state.vault, store)["tokens"], place,
+                                   bool(app.state.vault.read("gateway").get("token")))
+        return {"saved": saved, "recommended": levels.RECOMMENDED, "assessment": assessment,
+                "levels": levels.LEVELS, "sealed": bool(app.state.assurance),
+                "limits": {"dialog_limit": levels.DIALOG_LIMIT, "reserve_mb": levels.LARGE_MEDIA_RESERVE_MB},
+                "current": {"size": levels.size_choice(tuning.value(store, "dialog_limit")),
+                            "files": levels.files_choice(capture_settings(store)), "place": place},
+                "health": {"timestamps": timestamps_health(outside)["state"],
+                           "replica": replica_health(outside)["state"]}}
+
+    @app.get("/api/setup", dependencies=[Depends(authenticate)])
+    async def get_setup():
+        return setup_state()
+
+    @app.post("/api/setup", dependencies=[Depends(authenticate)])
+    async def apply_setup(body: levels.Setup):
+        require_live()
+        store, vault = app.state.store, app.state.vault
+        evidence_was = evidence_settings(store)
+        try:
+            planned = levels.plan(body, evidence_was, capture_settings(store), tuning.values(store))
+            saved, before, after = tuning.changes(store, planned["parameters"])
+        except (ValueError, tuning.Invalid) as exc:
+            raise HTTPException(422, str(exc)) from None
+        changed = [name for name in ("evidence", "capture") if planned[name]] + (["parameters"] if after else [])
+        async with op_lock:
+            with store.transaction():
+                if planned["evidence"]:
+                    save_evidence(store, EvidenceMode(**planned["evidence"]))
+                if planned["capture"]:
+                    save_capture(store, Capture(**planned["capture"]).model_dump())
+                if after:
+                    save_parameters(store, saved, before, after)
+                store.set_setting("setup", {**body.model_dump(), "at": utcnow()})
+                store.append("setup.applied", {**body.model_dump(), "changed": changed})
+        if planned["evidence"] and planned["evidence"]["enabled"] and not evidence_was["enabled"]:
+            request_anchor(store, vault, app.state.anchor_wakeup)
+        if planned["capture"]:
+            app.state.collector.media_wakeup.set()
+        if after:
+            app.state.alert_wakeup.set()
+        return {**setup_state(), "changed": changed}
+
+    @app.post("/api/setup/skip", dependencies=[Depends(authenticate)])
+    async def skip_setup():
+        require_live()
+        app.state.store.set_setting("setup", {"skipped": True, "at": utcnow()})
+        return setup_state()
 
     @app.post("/api/replica", dependencies=[Depends(authenticate)])
     async def set_replica(body: ReplicaUpdate):
         require_live()
+        require_external(body.enabled)
+        manager = app.state.storage
+        if manager.lock.locked() or (manager.task and not manager.task.done()):
+            raise HTTPException(409, "Wait for the current storage operation to finish.")
+        async with manager.lock:
+            return await save_replica(body)
+
+    async def save_replica(body):
         store, vault = app.state.store, app.state.vault
         secrets = dict(vault.read("replica"))
         if body.access_key or body.secret_key:
@@ -1517,7 +1892,15 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         settings = body.model_dump(exclude={"access_key", "secret_key"})
         if settings["enabled"] and not (settings["endpoint"] and settings["bucket"] and secrets.get("access_key")):
             raise HTTPException(422, "Enter the endpoint, bucket and access keys before turning the copy on.")
+        manager = app.state.storage
+        obsolete = []
+        if manager.public()["settings"]["backend"] == "s3":
+            try:
+                obsolete = await complete_in_thread(manager.obsolete_copies, manager.destination(replica_config=settings))
+            except ValueError as exc:
+                raise HTTPException(409, str(exc)) from None
         secrets.setdefault("key", base64.b64encode(secrets_token(32)).decode())
+        manager.discard_copies(obsolete)
         vault.save("replica", secrets)
         with store.transaction():
             store.set_setting("replica", settings)
@@ -1538,6 +1921,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
     @app.post("/api/alerts", dependencies=[Depends(authenticate)])
     async def set_alerts(request: Request, body: AlertUpdate):
+        require_external(body.enabled)
         require_live()
         store, vault = app.state.store, app.state.vault
         saved = vault.read("alerts").get("urls", [])
@@ -1560,11 +1944,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         vault.save("alerts", {"urls": urls})
         with store.transaction():
             store.set_setting("alerts", settings)
-            store.append("alerts.changed", {**settings, "destinations": len(urls),
-                                            "services": sorted({u.split("://", 1)[0].lower() for u in urls}),
-                                            "content": "chat names, counts and excerpts of changed messages"
-                                                       if settings["include_text"] else
-                                                       "chat names and counts only, never message text"})
+            store.append("alerts.changed", alerts.change_record(settings, urls))
         app.state.alert_wakeup.set()
         return alert_state()
 
@@ -1685,13 +2065,18 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(422, {"message": str(exc), "parameter": exc.key}) from None
         if after:
             with store.transaction():
-                store.set_setting("parameters", saved)
-                store.append("parameters.changed", {
-                    "before": before, "after": after,
-                    "applies": "from the next use of each value; Telegram client timeouts and retries from "
-                               "the next connection"})
+                save_parameters(store, saved, before, after)
             app.state.alert_wakeup.set()
         return tuning.described(store)
+
+    def save_parameters(store, saved, before, after):
+        store.set_setting("parameters", saved)
+        store.append("parameters.changed", {
+            "before": before, "after": after,
+            "applies": "from the next use of each value; Telegram client timeouts and retries from "
+                       "the next connection"})
+
+    app.state.save_parameters = save_parameters
 
     @app.get("/api/chats", dependencies=[Depends(authenticate)])
     async def chats(request: Request):
@@ -1756,15 +2141,20 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                                                       if allowed is None or chat in allowed]}
 
     @app.get("/api/chats/{chat_id}/dossier", dependencies=[Depends(authenticate)])
-    async def dossier_view(chat_id: int):
+    async def dossier_view(request: Request, chat_id: int):
         title = dossier_title(chat_id)
-        return await asyncio.to_thread(dossier.signed, app.state.store, app.state.vault, chat_id, title, producer())
+        allowed = visible_chats(request)
+        value = await asyncio.to_thread(dossier.signed, app.state.store, app.state.vault, chat_id, title, producer(),
+                                        allowed_chats=allowed)
+        await recheck_export_scope(request, allowed)
+        return value
 
-    async def dossier_file(chat_id, password=None):
+    async def dossier_file(request, chat_id, password=None):
         title = dossier_title(chat_id)
+        allowed = visible_chats(request)
 
         def build():
-            value = dossier.signed(app.state.store, app.state.vault, chat_id, title, producer())
+            value = dossier.signed(app.state.store, app.state.vault, chat_id, title, producer(), allowed_chats=allowed)
             directory = root / "temporary-exports"
             directory.mkdir(mode=0o700, exist_ok=True)
             if directory.resolve().parent != root:
@@ -1781,16 +2171,22 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 raise
 
         async with export_lock:
-            return await build_file(build)
+            path = await build_file(build)
+        try:
+            await recheck_export_scope(request, allowed)
+            return path
+        except BaseException:
+            path.unlink(missing_ok=True)
+            raise
 
     @app.get("/api/chats/{chat_id}/dossier/export", dependencies=[Depends(authenticate)])
-    async def dossier_export(chat_id: int):
-        path = await dossier_file(chat_id)
+    async def dossier_export(request: Request, chat_id: int):
+        path = await dossier_file(request, chat_id)
         return TemporaryDownload(path, filename="tgwitness-dossier-" + str(chat_id) + ".json", media_type="application/json")
 
     @app.post("/api/chats/{chat_id}/dossier/export", dependencies=[Depends(authenticate)])
-    async def dossier_export_encrypted(chat_id: int, body: ExportPassword):
-        path = await dossier_file(chat_id, body.password)
+    async def dossier_export_encrypted(request: Request, chat_id: int, body: ExportPassword):
+        path = await dossier_file(request, chat_id, body.password)
         return TemporaryDownload(path, filename="tgwitness-dossier-" + str(chat_id) + "-encrypted.zip",
                                  media_type="application/zip")
 
@@ -1841,12 +2237,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(404)
         path = await app.state.collector.avatar(peer_id)
         if not path:
-            return Response(status_code=204)  # no photo (yet): not an error the browser should log
+            return Response(status_code=204)
         return FileResponse(path, media_type="image/jpeg", headers={"Cache-Control": "private, max-age=3600"})
 
-    # Account-wide acquisition can reach data outside the observation scope and
-    # account contacts. These routes deliberately stay outside issued-access POLICY:
-    # only the installation administrator may acquire or prepare a disclosure.
     @app.get("/api/account-export", dependencies=[Depends(authenticate)])
     async def account_export_jobs():
         jobs = app.state.account_export.list_jobs()
@@ -1858,6 +2251,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
     @app.post("/api/account-export/start", dependencies=[Depends(authenticate)])
     async def account_export_start(body: AccountExportOptions):
+        from .report_studio import presentation
+        if "report_presentation" not in body.model_fields_set:
+            body.report_presentation = presentation(report.saved(app.state.store))
         return await operation(app.state.account_export.start, body.model_dump())
 
     @app.get("/api/account-export/{export_id}", dependencies=[Depends(authenticate)])
@@ -1878,28 +2274,88 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def account_export_resume(export_id: str):
         return await operation(app.state.account_export.resume, export_id)
 
+    account_downloads = {}
+    app.state.account_downloads = account_downloads
+
     @app.delete("/api/account-export/{export_id}", dependencies=[Depends(authenticate)])
     async def account_export_remove(export_id: str):
-        if app.state.disclosures.busy(export_id):
-            raise HTTPException(409, "Wait for the disclosure package to finish before removing its source.")
-        return await operation(app.state.account_export.remove, export_id)
+        async def remove():
+            # operation holds op_lock; downloads acquire their lease under it too.
+            if account_downloads.get(export_id):
+                raise HTTPException(409, "Wait for the active download to finish before removing this export.")
+            if app.state.disclosures.busy(export_id):
+                raise HTTPException(409, "Wait for the disclosure package to finish before removing its source.")
+            return await app.state.account_export.remove(export_id)
+        return await operation(remove)
 
-    @app.get("/api/account-export/{export_id}/download", dependencies=[Depends(authenticate)])
-    async def account_export_download(export_id: str):
+    def account_download_path(export_id, disclosure_id=None):
         try:
-            path = app.state.account_export.result_path(export_id)
+            path = (app.state.disclosures.result_path(export_id, disclosure_id) if disclosure_id
+                    else app.state.account_export.result_path(export_id))
         except ValueError:
             path = None
         if not path:
-            raise HTTPException(404, "No finished account export is available.")
-        state = app.state.account_export.public(export_id)
-        headers = {"Cache-Control": "private, no-store"}
-        if state.get("archive_sha256"):
-            headers["ETag"] = '"' + state["archive_sha256"] + '"'
-        return FileResponse(path, filename="tgwitness-account-export.zip", media_type="application/zip", headers=headers)
+            raise HTTPException(404, "No finished disclosure is available." if disclosure_id else
+                                "No finished account export is available.")
+        return path
+
+    async def account_job_ticket(request, export_id, disclosure_id=None):
+        async with op_lock:
+            if app.state.closing:
+                raise HTTPException(503, "This workspace is closing. Wait for it to finish.")
+            await identify_download(request, request.headers.get("authorization", "").partition(" ")[2])
+            account_download_path(export_id, disclosure_id)
+            target = f"account-export/{export_id}" + (f"/disclosures/{disclosure_id}" if disclosure_id else "")
+            return issue_download_ticket(request, target, target + "/download")
+
+    async def account_job_download(request, export_id, disclosure_id=None):
+        target = f"account-export/{export_id}" + (f"/disclosures/{disclosure_id}" if disclosure_id else "")
+        credential = await authorize_download(request, target)
+        async with op_lock:
+            if app.state.closing:
+                raise HTTPException(503, "This workspace is closing. Wait for it to finish.")
+            # Waiting for a concurrent job operation must not outlive revocation.
+            await identify_download(request, credential)
+            path = account_download_path(export_id, disclosure_id)
+            headers = {"Cache-Control": "private, no-store", "X-TgWitness-Download-Ticket": target + "/ticket"}
+            if not disclosure_id:
+                state = app.state.account_export.public(export_id)
+                if state.get("archive_sha256"):
+                    headers["ETag"] = '"' + state["archive_sha256"] + '"'
+            account_downloads[export_id] = account_downloads.get(export_id, 0) + 1
+            released = False
+
+            def release():
+                nonlocal released
+                if not released:
+                    released = True
+                    remaining = account_downloads.get(export_id, 1) - 1
+                    if remaining:
+                        account_downloads[export_id] = remaining
+                    else:
+                        account_downloads.pop(export_id, None)
+
+            try:
+                return RetainedDownload(path, release=release,
+                    filename="tgwitness-minimized-disclosure.zip" if disclosure_id else "tgwitness-account-export.zip",
+                    media_type="application/zip", headers=headers)
+            except BaseException:
+                release()
+                raise
+
+    @app.post("/api/account-export/{export_id}/ticket", dependencies=[Depends(authenticate)])
+    async def account_export_ticket(export_id: str, request: Request):
+        return await account_job_ticket(request, export_id)
+
+    @app.get("/api/account-export/{export_id}/download")
+    async def account_export_download(export_id: str, request: Request):
+        return await account_job_download(request, export_id)
 
     @app.post("/api/account-export/{export_id}/disclosure/preview", dependencies=[Depends(authenticate)])
     async def disclosure_preview(request: Request, export_id: str, body: DisclosurePolicy):
+        from .report_studio import presentation
+        if "report_presentation" not in body.model_fields_set:
+            body.report_presentation = presentation(report.saved(app.state.store))
         require_live()
         principal = request.state.principal
         async with op_lock:
@@ -1926,22 +2382,19 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             except (ValueError, OSError, KeyError) as exc:
                 raise HTTPException(409, str(exc)) from None
 
-    @app.get("/api/account-export/{export_id}/disclosures/{disclosure_id}/download", dependencies=[Depends(authenticate)])
-    async def disclosure_download(export_id: str, disclosure_id: str):
-        try:
-            path = app.state.disclosures.result_path(export_id, disclosure_id)
-        except ValueError:
-            path = None
-        if not path:
-            raise HTTPException(404, "No finished disclosure is available.")
-        return FileResponse(path, filename="tgwitness-minimized-disclosure.zip", media_type="application/zip",
-                            headers={"Cache-Control": "private, no-store"})
+    @app.post("/api/account-export/{export_id}/disclosures/{disclosure_id}/ticket", dependencies=[Depends(authenticate)])
+    async def disclosure_ticket(export_id: str, disclosure_id: str, request: Request):
+        return await account_job_ticket(request, export_id, disclosure_id)
+
+    @app.get("/api/account-export/{export_id}/disclosures/{disclosure_id}/download")
+    async def disclosure_download(export_id: str, disclosure_id: str, request: Request):
+        return await account_job_download(request, export_id, disclosure_id)
 
     @app.post("/api/chat-export/start", dependencies=[Depends(authenticate)])
     async def chat_export_start(request: Request, body: ChatExport):
         require_chat(request, body.chat_id)
         return await operation(app.state.collector.start_export, body.chat_id,
-                               report.resolved(app.state.store, panel_language(request)))
+                               report_options(app.state.store, request, body.language))
 
     @app.get("/api/report-options", dependencies=[Depends(authenticate)])
     async def get_report_options():
@@ -1949,8 +2402,39 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
     @app.post("/api/report-options", dependencies=[Depends(authenticate)])
     async def set_report_options(body: report.ReportOptions):
-        # Recorded, signed, in every export manifest and report seal; not a journal event of its own.
         return report.save(app.state.store, body).model_dump()
+
+    @app.get("/report-preview.css")
+    async def report_preview_css():
+        return Response(report.CSS, media_type="text/css")
+
+    @app.post("/api/report-design-preview", dependencies=[Depends(authenticate)])
+    async def report_preview(request: Request, body: report.ReportOptions):
+        from .report_studio import preview
+        options = body.model_dump()
+        if options["language"] == "auto":
+            options["language"] = panel_language(request)
+        async with export_lock:
+            return await complete_in_thread(preview, app.state.store, options)
+
+    @app.post("/api/report-preview", dependencies=[Depends(authenticate)])
+    async def preview_report(body: report.ReportOptions):
+        def preview():
+            with app.state.store.snapshot() as snapshot:
+                result = report.report_selection.analyze(snapshot, body.selection,
+                    scratch_root=app.state.store.root / "temporary-exports")
+                keys = result.pop("changed_keys")
+                total = result.pop("changed_total")
+                messages = report.report_history.preview(snapshot.events(), keys,
+                    predicate=report.report_selection.compile_selection(body.selection)) if keys else []
+                result["changes"] = {"messages": messages, "total": total, "listed": len(messages),
+                                     "truncated": total > len(messages)}
+            result["analytics"] = report.report_analytics.selected(result["analytics"], body.model_dump())
+            result["unsigned"] = True
+            return result
+
+        async with export_lock:
+            return await complete_in_thread(preview)
 
     def export_visible(request):
         state, allowed = app.state.collector.export_state, visible_chats(request)
@@ -1986,8 +2470,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
     @app.get("/api/assurance")
     async def assurance_statement(challenge: str = ""):
-        """Public in high-assurance mode only: the signing key and the host it was created on.
-        No message content, sources or account data; absent from ordinary installations."""
         if not app.state.assurance:
             raise HTTPException(404)
         if challenge and (len(challenge) != 32 or any(c not in "0123456789abcdef" for c in challenge)):
@@ -2009,25 +2491,36 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         except Exception:
             raise HTTPException(409, "Journal integrity verification failed. Preserve the directory for inspection.") from None
 
-    async def build_export(fmt, request, password=None):
+    async def build_export(fmt, request, password=None, language=None):
         from . import export_history
         receipt = {}
-        options = report.resolved(app.state.store, panel_language(request))
+        options = report_options(app.state.store, request, language)
+        principal = request.state.principal
+        include_board = principal.may("board.read")
+        permissions = ["view", "export"] + (["board.read"] if include_board else [])
 
         def build():
-            path = export_file(app.state.store, app.state.vault, fmt, options)
+            path = export_file(app.state.store, app.state.vault, fmt, options, include_board=include_board)
             try:
                 if password is not None:
                     path = encrypt_export(path, fmt, password)
-                receipt.update(export_history.prepared(app.state.store, path, fmt, password is not None))
+                receipt.update(export_history.prepared(app.state.store, path, fmt, password is not None,
+                               owner=principal.owner, workspace=profile_id, required_permissions=permissions))
                 return path
             except BaseException:
                 path.unlink(missing_ok=True)
                 raise
 
-        async with export_lock:
+        async with export_lock, app.state.storage.lock:
+            if fmt == "zip":
+                try:
+                    app.state.storage.require_local_media()
+                except ValueError as exc:
+                    raise HTTPException(409, str(exc)) from None
             try:
                 path = await build_file(build)
+            except pdf_report.MissingFont as exc:
+                raise HTTPException(409, str(exc)) from None
             except Exception as exc:
                 app.state.store.append("export.failed", {"format": fmt, "error_type": type(exc).__name__})
                 raise HTTPException(409, "Export failed integrity, size, or file checks. Inspect local data and limits.") from None
@@ -2035,28 +2528,207 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             from .webhooks import export_completed
             await export_completed(app.state.store, app.state.vault, profile_id)
             app.state.alert_wakeup.set()
+            await recheck_export_scope(request, None)
+            require_prepared_access(request, receipt)
         except BaseException:
             path.unlink(missing_ok=True)
             raise
         return path, export_history.headers(receipt)
 
+    app.state.build_export = build_export
+
     @app.get("/api/export/{fmt}", dependencies=[Depends(authenticate)])
-    async def export(request: Request, fmt: Literal["zip", "jsonl", "csv", "html"]):
-        path, headers = await build_export(fmt, request)
-        media_types = {"zip": "application/zip", "jsonl": "application/x-ndjson",
-                       "csv": "text/csv", "html": "text/html"}
-        return TemporaryDownload(path, filename="tgwitness-evidence." + fmt, media_type=media_types[fmt], headers=headers)
+    async def export(request: Request, fmt: Literal["zip", "jsonl", "csv", "html", "json", "pdf"],
+                     language: str | None = None):
+        path, headers = await build_export(fmt, request, language=language)
+        media_types = {"zip": "application/zip", "jsonl": "application/x-ndjson", "csv": "text/csv",
+                       "html": "text/html", "json": "application/json", "pdf": "application/pdf"}
+        name = "tgwitness-report." + fmt if fmt in ("json", "pdf") else "tgwitness-evidence." + fmt
+        return TemporaryDownload(path, filename=name, media_type=media_types[fmt], headers=headers)
 
     @app.post("/api/export/{fmt}", dependencies=[Depends(authenticate)])
-    async def export_encrypted(request: Request, fmt: Literal["zip", "jsonl", "csv", "html"], body: ExportPassword):
+    async def export_encrypted(request: Request, fmt: Literal["zip", "jsonl", "csv", "html", "json", "pdf"],
+                               body: ExportPassword, language: str | None = None):
 
-        path, headers = await build_export(fmt, request, body.password)
+        path, headers = await build_export(fmt, request, body.password, language)
         return TemporaryDownload(path, filename="tgwitness-evidence-" + fmt + "-encrypted.zip", media_type="application/zip", headers=headers)
 
+    @app.post("/api/handover", dependencies=[Depends(authenticate)])
+    async def export_handover(request: Request, body: HandoverRequest):
+        for chat in body.chats:
+            require_chat(request, chat)
+        if body.case_board != "off" and not request.state.principal.may("board.read"):
+            raise HTTPException(403, "Reading Case Board requires board.read.")
+        from . import export_history
+        options = report_options(app.state.store, request, body.language)
+        selection = handover.Options.model_validate(body.model_dump(exclude={"password", "language"}))
+        receipt, summary = {}, {}
+        principal = request.state.principal
+        permissions = ["view", "export"] + (["board.read"] if body.case_board != "off" else [])
+
+        def build():
+            path, recorded = handover.export(app.state.store, app.state.vault, selection, options)
+            try:
+                summary.update(recorded)
+                if body.password is not None:
+                    path = encrypt_export(path, "zip", body.password, "tgwitness-handover.zip")
+                receipt.update(export_history.prepared(app.state.store, path, "handover", body.password is not None,
+                               owner=principal.owner, workspace=profile_id, required_permissions=permissions,
+                               chat_ids=body.chats))
+                return path
+            except BaseException:
+                path.unlink(missing_ok=True)
+                raise
+
+        async with export_lock, app.state.storage.lock:
+            try:
+                path = await build_file(build)
+            except (handover.RemoteAttachment, handover.MissingAttachment) as exc:
+                raise HTTPException(409, str(exc)) from None
+            except handover.EmptySelection as exc:
+                raise HTTPException(422, str(exc)) from None
+            except Exception as exc:
+                app.state.store.append("export.failed", {"format": "handover", "error_type": type(exc).__name__})
+                raise HTTPException(409, "Export failed integrity, size, or file checks. Inspect local data and limits.") from None
+        try:
+            await recheck_export_scope(request, set(body.chats))
+            require_prepared_access(request, receipt)
+        except BaseException:
+            path.unlink(missing_ok=True)
+            raise
+        principal = request.state.principal
+        app.state.store.append("handover.exported", {
+            **summary, "file_sha256": receipt.get("sha256"), "encrypted": body.password is not None,
+            "by": {"access_id": principal.owner, "label": principal.label},
+            "meaning": "a minimised extract was prepared; its contents are not repeated here"})
+        return TemporaryDownload(path, filename="tgwitness-handover" + ("-encrypted" if body.password else "") + ".zip",
+                                 media_type="application/zip", headers=export_history.headers(receipt))
+
     @app.get("/api/exports/history", dependencies=[Depends(authenticate)])
-    async def prepared_exports():
+    async def prepared_exports(request: Request):
         from .export_history import listing
-        return listing(app.state.store)
+        return listing(app.state.store, principal=request.state.principal, profile_id=profile_id)
+
+    prepared_tickets = {}
+
+    async def identify_download(request, credential):
+        try:
+            principal = await identify(request, HTTPAuthorizationCredentials(scheme='Bearer', credentials=credential))
+            await authenticate(request, principal)
+            return principal
+        except HTTPException as exc:
+            if exc.status_code == 401:
+                raise HTTPException(403, 'This access has expired.') from None
+            raise
+
+    async def recheck_export_scope(request, original_chats):
+        await identify_download(request, request.headers.get("authorization", "").partition(" ")[2])
+        current = visible_chats(request)
+        if current is not None and (original_chats is None or not set(original_chats) <= current):
+            raise HTTPException(403, "This chat is not open to this access.")
+
+    def require_prepared_access(request, entry):
+        from .export_history import permitted
+        if not permitted(entry, request.state.principal, profile_id):
+            raise HTTPException(403, "This export is not open to this access.")
+
+    def prepared_access(request, export_id):
+        from .export_history import metadata
+        entry = metadata(app.state.store, export_id)
+        if entry is None:
+            raise HTTPException(404, "This prepared export is unavailable.")
+        require_prepared_access(request, entry)
+        return entry
+
+    def issue_download_ticket(request, target, api_path):
+        now = time.monotonic()
+        for key, value in list(prepared_tickets.items()):
+            if value[0] < now:
+                prepared_tickets.pop(key, None)
+        if len(prepared_tickets) >= 100:
+            raise HTTPException(429, "Too many pending downloads. Retry in a minute.")
+        ticket = secrets.token_urlsafe(32)
+        prepared_tickets[ticket] = (now + 120, target, request.headers.get("authorization", "").partition(" ")[2])
+        path = ("" if profile_id == "default" else "/profiles/" + profile_id) + "/api/" + api_path
+        response = Response(json.dumps({"url": path}), media_type="application/json", headers={"Cache-Control": "no-store"})
+        response.set_cookie("tgwitness-download", ticket, max_age=120, path=path, httponly=True,
+                            samesite="strict", secure=request.url.scheme == "https")
+        return response
+
+    async def authorize_download(request, target):
+        if request.headers.get("authorization"):
+            scheme, _, credential = request.headers['authorization'].partition(' ')
+            if scheme.lower() != 'bearer':
+                raise HTTPException(401, 'Use a Bearer access token.')
+            who = await identify(request, HTTPAuthorizationCredentials(scheme="Bearer", credentials=credential))
+            await authenticate(request, who)
+        else:
+            entry = prepared_tickets.pop(request.cookies.get("tgwitness-download", ""), None)
+            if not entry or entry[0] < time.monotonic() or entry[1] != target:
+                raise HTTPException(403, "This download link expired. Choose Download again in the panel.")
+            credential = entry[2]
+            await identify_download(request, credential)
+        return credential
+
+    @app.post("/api/exports/{export_id}/ticket", dependencies=[Depends(authenticate)])
+    async def export_ticket(export_id: str, request: Request):
+        from .export_history import locate
+        try:
+            async with export_lock:
+                prepared_access(request, export_id)
+                await complete_in_thread(locate, app.state.store, export_id)
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from None
+        await identify_download(request, request.headers.get("authorization", "").partition(" ")[2])
+        prepared_access(request, export_id)
+        return issue_download_ticket(request, export_id, "exports/" + export_id + "/download")
+
+    @app.get("/api/exports/{export_id}/download")
+    async def export_again(export_id: str, request: Request):
+        from .export_history import download_copy, headers
+        credential = await authorize_download(request, export_id)
+        receipt = {}
+
+        def prepare_download():
+            path, metadata = download_copy(app.state.store, export_id)
+            receipt.update(metadata)
+            return path
+
+        try:
+            async with export_lock:
+                prepared_access(request, export_id)
+                path = await build_file(prepare_download)
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from None
+        try:
+            try:
+                who = await identify_download(request, credential)
+                if who is None:
+                    raise Refused('This access has expired.')
+                access_check(who, profile_id, POLICY['GET /api/exports/{export_id}/download'], {})
+                require_prepared_access(request, receipt)
+            except Refused as exc:
+                raise HTTPException(403, str(exc)) from None
+            extension = "zip" if receipt["encrypted"] or receipt["format"] in ("handover", "group") else receipt["format"]
+            return TemporaryDownload(path, filename="tgwitness-" + profile_id[:8] + "-" + export_id[:8] + "." + extension,
+                                     media_type="application/octet-stream", headers={**headers(receipt), "Cache-Control": "no-store"})
+        except BaseException:
+            path.unlink(missing_ok=True)
+            raise
+
+    class Reveal(BaseModel):
+        chat_id: int
+        message_id: int | None = None
+        reason: Literal['message', 'display_preference'] = 'message'
+
+    @app.post("/api/privacy/reveal", dependencies=[Depends(authenticate)])
+    async def reveal_secret(body: Reveal, request: Request):
+        require_chat(request, body.chat_id)
+        if body.reason == 'message' and body.message_id is None:
+            raise HTTPException(422, 'Select the message to reveal.')
+        app.state.store.append("panel.secret_revealed", {"chat_id": body.chat_id, "message_id": body.message_id,
+                                "reason": body.reason, "operator": request.state.principal.owner})
+        return {"recorded": True}
 
     @app.get("/api/media/{digest}", dependencies=[Depends(authenticate)])
     async def media(request: Request, digest: str, inline: bool = False):
@@ -2078,7 +2750,11 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return FileResponse(path, media_type="application/octet-stream", filename=digest)
 
     from .webhook_api import register as register_webhooks
+    from .board_api import register as register_board
+    register_board(app, authenticate, profile_id)
     register_webhooks(app, authenticate, profile_id)
+    from .storage_api import register as register_storage
+    register_storage(app, authenticate, require_live)
 
     if allow_profiles:
 
@@ -2109,10 +2785,16 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             unknown = set(settings.workspaces) - set(app.state.profiles.entries)
             if unknown:
                 raise HTTPException(422, "Unknown workspace.")
+            if set(settings.groups) - {g["id"] for g in app.state.profiles.groups()}:
+                raise HTTPException(422, "Unknown account group.")
+            from .showcase import validate_scope
+            validate_scope(app.state.profiles, settings)
             return settings
 
         def access_state(request):
-            return app.state.access.state(request.state.principal.session_id)
+            return {**app.state.access.state(request.state.principal.session_id),
+                    "groups": [{"id": g["id"], "label": g["label"], "members": app.state.profiles.members(g["id"])}
+                               for g in app.state.profiles.groups()]}
 
         @app.get("/api/access", dependencies=[Depends(authenticate)])
         async def access_overview(request: Request):
@@ -2153,6 +2835,16 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             app.state.access.set_admin(body)
             return access_state(request)
 
+        @app.post("/api/access/token", dependencies=[Depends(authenticate)])
+        async def access_rotate_token(request: Request):
+            require_live()
+            try:
+                token, ended = app.state.access.rotate_token()
+            except Refused as exc:
+                raise HTTPException(409, str(exc)) from None
+            session, principal = app.state.access.login(token, client_address(request), None)
+            return {"token": token, "session": session, "me": principal.public(), "sessions_ended": ended}
+
         @app.get("/api/access/console", dependencies=[Depends(authenticate)])
         async def access_console(after: int = 0):
             console = app.state.access.console
@@ -2162,14 +2854,21 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             return {"lines": lines, "last": lines[-1]["n"] if lines else after}
 
         from .archive_api import register as register_archive
+        from .showcase import register as register_showcase
+        register_showcase(app, authenticate)
         register_archive(app, authenticate)
         from .analysis_api import register as register_analysis
         register_analysis(app, authenticate)
         from .media_analysis_api import register as register_media_analysis
         register_media_analysis(app, authenticate)
         app.mount("/profiles", ProfileDispatch(app), name="profiles")
+    from .settings_hub import register as register_settings
+    register_settings(app, authenticate, require_live, operation, save_evidence, save_capture)
     from .panel_routes import register as register_panel
-    static = StaticFiles(directory=Path(__file__).parent / "static", html=True)
+    from .panel_assets import PanelFiles
+    static = PanelFiles(directory=Path(__file__).parent / "static")
     register_panel(app, static)
     app.mount("/", static, name="panel")
+    from .request_security import RequestSecurity
+    app.add_middleware(RequestSecurity)
     return app

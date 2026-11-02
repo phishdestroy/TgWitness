@@ -1,4 +1,3 @@
-"""Package public source only; explicitly excludes accounts, sessions, data, and environments."""
 import hashlib
 import zipfile
 import tomllib
@@ -8,11 +7,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
 FILES = [
+    "tgwitness/client_profiles.LICENSE",
+    "tgwitness/fonts/OFL.txt",
+    "tgwitness/fonts/NotoSerif-OFL.txt",
     "deploy/installer/install.sh.in", "deploy/installer/install.ps1.in", "deploy/installer/install.cmd.in",
+    "deploy/installer/release-signing.pub",
     "deploy/installer/index.html", "deploy/installer/style.css", "deploy/installer/site.js", "deploy/installer/wrangler.toml",
     "deploy/media-worker/Dockerfile", "deploy/media-worker/worker.py",
     "deploy/media-worker/requirements.in", "deploy/media-worker/requirements.lock",
-    "integrations/webhook.schema.json", "integrations/n8n-tgwitness.json", "tools/check_webhook_example.cjs",
+    "integrations/webhook.schema.json", "integrations/n8n-tgwitness.json", "tools/check_webhook_example.cjs", "tools/check_privacy_js.cjs",
     "tools/check_writeonly_drafts.mjs", "deploy/constraints-mcp.txt",
     "deploy/Dockerfile.sealed", "scripts/sealed_runner.py",
     "README.md", "docs/QUICKSTART.md", "LICENSE", "NOTICE", ".github/SECURITY.md", ".github/SUPPORT.md", ".github/CONTRIBUTING.md", "docs/CHANGELOG.md", "pyproject.toml",
@@ -21,6 +24,13 @@ FILES = [
     ".gitignore", ".gitattributes", ".dockerignore", "deploy/env.example", "deploy/constraints.txt", "deploy/requirements.lock", "deploy/build.lock",
     "deploy/audit.lock", "deploy/browser.lock", "deploy/mcp.lock", "deploy/site.lock",
 ]
+FILES.extend("tgwitness/fonts/" + name for name in (
+    "NotoSans-Regular.ttf", "NotoSans-Bold.ttf", "NotoSansMono-Regular.ttf",
+    "NotoSerif-Regular.ttf", "NotoSerif-Bold.ttf",
+    "NotoSansArabic-Regular.ttf", "NotoSansHebrew-Regular.ttf", "NotoSansDevanagari-Regular.ttf",
+    "NotoSansBengali-Regular.ttf", "NotoSansThai-Regular.ttf", "NotoSansSymbols2-Regular.ttf",
+    "NotoEmoji-Regular.ttf",
+))
 FILES.extend("website/demo/downloads/" + name for name in (
     "tgwitness-demo.zip", "tgwitness-demo.jsonl", "tgwitness-demo.csv", "tgwitness-demo.html",
     "tgwitness-demo-checkpoint.json", "tgwitness-demo-run-receipt.json", "tgwitness-demo-timestamp-request.zip",
@@ -28,6 +38,10 @@ FILES.extend("website/demo/downloads/" + name for name in (
 ))
 FILES.extend("website/demo/report/" + name for name in (
     "index.html", "report.html", "sharing-copy.zip", "example.json",
+))
+FILES.extend("tools/tdx/" + name for name in (
+    "intel-v4.quote.hex", "intel-v4.collateral.json", "intel-v5-td15ex.quote.hex", "intel-v5-td15ex.collateral.json",
+    "intel-outdated.collateral.json", "dstack-v4.json", "dstack-v4.collateral.json",
 ))
 DIRECTORIES = {
     "tgwitness": {".md", ".py", ".html", ".css", ".js", ".svg", ".json"},
@@ -40,7 +54,8 @@ DIRECTORIES = {
 LANGUAGES = ("ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh",
              "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn")
 GUIDE_LANGUAGES = ("fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "am", "bn")
-PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", "sealed_policy.json", *("locales/" + language + ".json" for language in LANGUAGES),
+PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", "sealed_policy.json", "client_profiles.json", *("locales/" + language + ".json" for language in LANGUAGES),
+                *("schemas/board-" + name + ".json" for name in ("bookmark", "highlight", "slice", "collection", "comment", "status", "move", "remove")),
                 "guide_locales/keys.json", *("guide_locales/" + language + ".json" for language in GUIDE_LANGUAGES)}
 
 SITE_JSON = {"i18n/" + language + ".json" for language in
@@ -56,7 +71,6 @@ PRIVATE_DIRECTORIES = {"data", "proof-data", "proof-config", "proxy-config", "wi
 
 
 def is_public_file(path, directory):
-    """JSON is an explicit resource allowlist, never a blanket source extension."""
     relative = path.relative_to(directory)
     parts = tuple(part.casefold() for part in relative.parts)
     if any(part in PRIVATE_DIRECTORIES or part.startswith("tgwitness-backup") for part in parts[:-1]):
@@ -94,7 +108,6 @@ def main():
     out.mkdir(exist_ok=True)
     target = out / ("TgWitness-" + VERSION + "-source.zip")
     manifest = []
-    # Stage on the destination filesystem: a failed build leaves the previous ZIP intact.
     with tempfile.TemporaryDirectory(prefix=".source-build-", dir=out) as temporary:
         staged = Path(temporary) / target.name
         with zipfile.ZipFile(staged, "w") as archive:
@@ -108,7 +121,6 @@ def main():
             digest = hashlib.file_digest(stream, "sha256").hexdigest()
         checksum = staged.with_suffix(".zip.sha256")
         checksum.write_bytes((digest + "  " + target.name + "\n").encode("utf-8"))
-        # Each rename is atomic; a failure between them leaves a detectable checksum mismatch.
         staged.replace(target)
         checksum.replace(target.with_suffix(".zip.sha256"))
     print("Public source archive:", target)
@@ -116,7 +128,6 @@ def main():
 
 
 def write_member(archive, name, data):
-    # Archive timestamps are neutral metadata, never a claim about collection/build time.
     member = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
     member.create_system = 3
     member.external_attr = 0o100644 << 16

@@ -4,6 +4,18 @@ For your first connection, use [accounts and session formats](ACCOUNTS.md).
 For an explanation of saved versions, event policies, and gaps, see
 [how collection works](COLLECTION.md). This guide covers daily operation and recovery.
 
+A managed installation includes **START-HERE.html** and **START-HERE.txt** beside
+its launcher, with the repository link and commands tailored to its installation
+path. Run `tgwitness guide --print` over SSH, or `tgwitness paths` to locate the
+actual data directory. A root systemd install stores private state under
+`/var/lib/tgwitness-…`; `/opt/tgwitness` holds the program.
+
+For a managed temporary Cloudflare tunnel, `tgwitness tunnel off` closes public
+access while the local panel and collection keep running. `tgwitness tunnel on`
+enables it; `tgwitness tunnel restart` creates a new tunnel connection. Use
+`tgwitness open` to see its current address. An explicit off setting survives
+service restarts. `tgwitness stop` stops both the panel and collection.
+
 ## Operator workflow
 
 ```mermaid
@@ -55,11 +67,11 @@ or proxied demo access retain token authentication. Demo entry grants no Telegra
 
 ![Per-account monitoring settings with synthetic source data](assets/sources.png)
 
-In **Sources → Capture settings → Choose which changes to preserve**, select new messages, edits,
+In **Sources → Recording → Choose which changes to preserve**, select new messages, edits,
 deletion notices, reaction updates and membership events independently. The default
 retains all categories. **Messages, edits & deletions** keeps the original context
 while disabling separate reaction/member updates. **All visible activity** restores
-all five. Presets change the form; press **Save monitoring settings** to apply.
+all five. Presets change the form; press **Save recording settings** to apply.
 
 The saved policy applies to all selected sources in that workspace. Other
 workspaces retain their own settings. Each actual change records signed before/after
@@ -91,7 +103,7 @@ under their own retention policy.
 
 ## Notifications
 
-Open **Sources → Notifications → Alerts and a daily summary**. TgWitness uses
+Open **Extras → Notifications → Configure**. TgWitness uses
 Apprise to send alerts to Matrix, Telegram, Discord, Slack, ntfy, email and other
 supported services. You can add several destinations to one workspace.
 

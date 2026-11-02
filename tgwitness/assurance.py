@@ -1,11 +1,3 @@
-"""Host measurements for a collector deployed in high-assurance mode (python -m tgwitness.cloud).
-
-Enabled only by TGWITNESS_ASSURANCE=<provider>; an ordinary installation never reads any of this.
-The collector process measures its own host: SSH listeners and processes, current and past
-logins, the boot, and what the provider's metadata service says about the server and the
-cloud-init it was created with. Root on the host could falsify every value; the point is
-to compare them with the records the provider and Cloudflare keep themselves.
-"""
 import argparse
 import asyncio
 import hashlib
@@ -13,11 +5,14 @@ import json
 import os
 import re
 import struct
+import threading
+import time
 import urllib.request
 from pathlib import Path
 
 from .providers import NAMES, get
 from .store import canonical, utcnow
+from .tdx import report_data
 from .verify import fingerprint
 
 MODES = NAMES
@@ -30,6 +25,8 @@ USER_PROCESS = 7
 SSH_PROCESSES = ("sshd", "sshd-session")
 ATTESTATION = ("self-reported by the collector process on its own host; root on that host could "
                "falsify it. Compare with the provider's action log, firewall and the Cloudflare tunnel record.")
+QUOTES = threading.Lock()
+CACHE = {}
 
 
 def mode(environ=os.environ):
@@ -40,7 +37,6 @@ def mode(environ=os.environ):
 
 
 def redact_user_data(text):
-    """The cloud-init a third party may read: identical except for the two secret values."""
     return SECRET_LINE.sub(r"\1\2=REDACTED", text)
 
 
@@ -57,9 +53,6 @@ def metadata_request(url, method="GET", headers=None, timeout=2):
 
 
 def provider_record(selected, request=metadata_request, root=Path("/")):
-    """What the provider's metadata service says about this server; read once per process start.
-    Of the user data only its hashes and its redacted text are kept: the verifier compares that
-    text byte for byte with the installer the deployed commit builds."""
     record = {"provider": selected}
     try:
         found = get(selected).metadata(request, Path(root))
@@ -77,7 +70,6 @@ def text(value):
 
 
 def logins(path):
-    """USER_PROCESS entries of a utmp/wtmp file: interactive logins, never boot or system entries."""
     data = Path(path).read_bytes()
     found = []
     for offset in range(0, len(data) - UTMP.size + 1, UTMP.size):
@@ -89,7 +81,6 @@ def logins(path):
 
 
 def listening(port, proc):
-    """True when anything (sshd or systemd socket activation) listens on the TCP port."""
     for name in ("net/tcp", "net/tcp6"):
         try:
             rows = (Path(proc) / name).read_text().splitlines()[1:]
@@ -135,7 +126,6 @@ def host_state(root=Path("/")):
 
 
 def deployment(root=Path("/")):
-    """The deployment description cloud-init wrote; its hash binds it to the published cloud-init."""
     try:
         raw = (Path(root) / DEPLOYMENT_FILE).read_bytes()
         return {"sha256": hashlib.sha256(raw).hexdigest(), **json.loads(raw)}
@@ -144,9 +134,6 @@ def deployment(root=Path("/")):
 
 
 def snapshot(selected, provider, root=Path("/"), detail=False):
-    """The measured host. With detail (the signed start record), a hand-installed server adds
-    the inventory its installer took before changing anything."""
-
     value = {"format": "tgwitness-host-v1", "mode": selected, "measured_at": utcnow(),
              "provider": {k: v for k, v in provider.items() if k != "user_data_redacted"},
              "deployment": deployment(root), **host_state(root), "attestation": ATTESTATION}
@@ -159,14 +146,11 @@ def snapshot(selected, provider, root=Path("/"), detail=False):
 
 
 def changes(state):
-    """The part of the host state whose change is worth a signed journal record."""
     return {k: state.get(k) for k in ("boot_id", "ssh_listening", "ssh_processes", "sessions", "logins",
                                       "wtmp_sha256")}
 
 
 async def assurance_loop(store, selected, provider, interval=60, root=Path("/"), status=None):
-    """Append host.state whenever SSH, logins or the boot change; quiet while nothing changes.
-    status, when given, holds the latest measurement for the panel (health.server)."""
     last = None
     while True:
         state = await asyncio.to_thread(host_state, root)
@@ -184,20 +168,50 @@ PRIVATE_HOST = ("recent_logins",)
 PRIVATE_PROVIDER = ("public_ipv4",)
 
 
+def attestation(selected, value):
+    attest = getattr(get(selected), "attest", None)
+    if attest is None:
+        return None
+    try:
+        with QUOTES:
+            return attest(report_data(value))
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        return {"error": type(exc).__name__ + ": " + str(exc)[:200]}
+
+
+def start_attestation(selected, receipt):
+    return attestation(selected, start_binding(receipt))
+
+
+def start_binding(run):
+    value = {"format": "tgwitness-tdx-start-v1", "public_key": run.get("public_key"), "run_id": run.get("run_id"),
+             "source_tree_sha256": run.get("source_tree_sha256"), "host": run.get("host")}
+    if "source_policy" in run:
+        value["source_policy"] = run["source_policy"]
+    return value
+
+
 def statement(vault, receipt, run_event_seq, selected, provider, challenge=None, root=Path("/")):
-    """The public, signed answer of /api/assurance: who signs this journal and on which host."""
+    if not challenge and CACHE.get("until", 0) > time.monotonic() and CACHE.get("key") == vault.public_key:
+        return CACHE["answer"]
     host = {k: v for k, v in snapshot(selected, provider, root).items() if k not in PRIVATE_HOST}
     host["provider"] = {k: v for k, v in provider.items() if k not in PRIVATE_PROVIDER}
     value = {"format": "tgwitness-assurance-v1", "created_at": utcnow(), "challenge": challenge,
              "public_key": vault.public_key, "fingerprint": fingerprint(vault.public_key),
              "run_id": receipt["run_id"], "run_event_seq": run_event_seq, "version": receipt["version"],
              "source_tree_sha256": receipt["source_tree_sha256"], "host": host}
-    return {"statement": value, "signature": vault.sign(canonical(value))}
+    if "source_policy" in receipt:
+        value["source_policy"] = receipt["source_policy"]
+    answer = {"statement": value, "signature": vault.sign(canonical(value))}
+    quote = attestation(selected, value)
+    if quote is not None:
+        answer["tdx"] = quote
+        if not challenge:
+            CACHE.update(until=time.monotonic() + 30, key=vault.public_key, answer=answer)
+    return answer
 
 
 def install_record(script, preinstall, out):
-    """Run by install.sh on a hand-installed server: the hashes of the installer as it ran (with and
-    without its two secrets), its text without them, and the hash of the inventory taken before installation."""
     text = Path(script).read_bytes().decode()
     hashes = user_data_hashes(text)
     value = {"format": "tgwitness-install-v1", "recorded_at": utcnow(), "sha256": hashes["user_data_sha256"],

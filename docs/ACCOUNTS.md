@@ -291,9 +291,26 @@ sign in.
 ### Bulk import and account groups
 
 Use **Accounts → Import accounts** to add several accounts, pair files by basename
-and see each login result. Each account gets its own workspace. Groups can copy
-selected settings from a template without merging sessions, keys or evidence.
-See [the import and groups guide](wiki/Accounts.md#import-accounts-and-share-settings)
+and see each login result. Each account gets its own workspace.
+
+A group keeps related accounts together without merging their sessions, keys or
+evidence. **Open group** on **Accounts** leads to its page at `/groups/<id>`:
+
+- **Accounts:** each member's connection route, observation and last message, with
+  **Start all** and **Pause all**.
+- **Needs attention:** accounts that were signed out, are unavailable or have a
+  connection, intake, source or media problem; each name leads to its card.
+- **Chats several accounts see:** shared sources, the accounts observing them and
+  interruptions in the available workspace-observation period (up to seven days). **Export with N accounts**
+  splits a channel or supergroup export between them and signs one archive.
+- **Export group:** one ZIP with each account's signed export under `accounts/` and
+  `manifest.json` listing their SHA-256 and key fingerprints, signed by the main
+  workspace in `manifest.signature.json`. Verify each account archive on its own with
+  `python -m tgwitness.verify` and that account's trusted fingerprint.
+
+Members share the group's settings; an account can keep its own values.
+See [shared settings](SETTINGS.md#account-groups),
+[the import and groups guide](wiki/Accounts.md#import-accounts-and-share-settings)
 and [the MTProxy pool dashboard](wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Sign out
@@ -347,7 +364,7 @@ makes no network request and refuses to overwrite an existing output file.
 | Account ID does not match the imported account | The file's user ID differs from what Telegram reports; the file is for another account. |
 | Account already belongs to another workspace | Open that workspace instead of adding the account twice. |
 | Connected, but a private group is missing from the chat list in **Sources** | Check membership. The picker inspects the first 1,000 dialogs; raise the limit under **Parameters**. |
-| Proxy connection fails | Check the route and IP mode. Automatic MTProxy tries another working entry. Hide IP mode waits; the explicitly selected fallback mode can connect directly after its configured delay. See [routing modes](CONNECTION-SECURITY.md#ip-modes). |
+| Proxy connection fails | Check the route and IP mode. Automatic MTProxy tries another working entry. Hide the address waits; Direct as a last resort can connect directly after its configured delay. See [routing modes](CONNECTION-SECURITY.md#ip-modes). |
 
 See also: [connection and security](CONNECTION-SECURITY.md) for proxies and encryption,
 and [how collection works](COLLECTION.md) for what is captured after sign-in.

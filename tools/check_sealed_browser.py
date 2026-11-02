@@ -57,6 +57,8 @@ def custom_qr_capture(context, root, record):
             expect(page.locator("#qr-image")).to_be_visible()
             candidate = runner.app.state.session.collector.login_client
             assert candidate.pair == pair
+            assert candidate.options["lang_code"] == "en"
+            assert candidate.options["system_lang_code"] == page.evaluate("navigator.language")
             candidate.loop.call_soon_threadsafe(candidate.scan.set)
             expect(page.locator("#selection")).to_be_visible()
             expect(page.locator("#api-hash")).to_have_value("")
@@ -73,7 +75,6 @@ def custom_qr_capture(context, root, record):
 
 
 def credential_controls(page):
-    """Check browser validation and exact payloads; offline acceptance checks the real login paths."""
     expect(page.locator("#api-id")).to_be_hidden()
     page.locator("#custom-api summary").click()
     page.locator("#api-id").fill("123")
@@ -112,7 +113,6 @@ def credential_controls(page):
 
 
 def main():
-    # This check runs in the sealed/browser [dev] environment, which includes httpx.
     asyncio.run(check_login())
     screenshots = ROOT / "test-results" / "sealed-experience"
     screenshots.mkdir(parents=True, exist_ok=True)
@@ -192,7 +192,7 @@ def main():
             server = uvicorn.Server(uvicorn.Config(app, log_level="error", access_log=False))
             thread = threading.Thread(target=server.run, kwargs={"sockets": [sock]}, daemon=True)
             thread.start()
-            deadline = time.monotonic() + 60  # slow starts under load; ready returns at once
+            deadline = time.monotonic() + 60
             while not server.started:
                 if time.monotonic() > deadline:
                     raise RuntimeError("Synthetic server did not start")
@@ -211,6 +211,9 @@ def main():
             capture.locator("#code").fill("12345")
             capture.locator("#confirm-code").click()
             expect(capture.locator("#selection")).to_be_visible()
+            saved_profile = app.state.session.vault.read("credentials")["client_profile"]
+            assert saved_profile["lang_code"] == "ru"
+            assert saved_profile["system_lang_code"] == capture.evaluate("navigator.language")
             pair, = RecordingClient.attempts
             assert pair in api_pool.POOL
             capture.locator("#refresh").click()

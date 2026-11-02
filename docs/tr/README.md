@@ -13,7 +13,7 @@
   <img alt="FastAPI + Telethon" src="https://img.shields.io/badge/FastAPI-Telethon-243a52?logo=fastapi&amp;logoColor=white">
   <img alt="Docker Compose" src="https://img.shields.io/badge/Docker-Compose-243a52?logo=docker&amp;logoColor=white">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-243a52">
-  <img alt="Version: 0.7.1" src="https://img.shields.io/badge/version-0.7.1-243a52">
+  <img alt="Version: 0.8.0" src="https://img.shields.io/badge/version-0.8.0-243a52">
 </p>
 
 <p align="center">
@@ -57,7 +57,7 @@
 - **İmzalı, doğrulanabilir dışa aktarımlar.** Her olay, hash zincirine eklenir (SHA-256) ve imzalanır (Ed25519). İmzalı ZIP dosyası, JSONL, CSV, çevrimdışı HTML raporu, korunmuş medya dosyaları ve bağımsız bir doğrulayıcı içerir.
 - **Şifre korumalı dışa aktarımlar.** İsteğe bağlı olarak herhangi bir dışa aktarmayı, 7-Zip ve WinRAR tarafından okunabilen WinZip AES-256 ZIP formatına koyabilirsiniz; içindeki imzalı içerik değişmeden kalır. Bir test arşivi libarchive'da (Windows `tar`) bayt bayt açıldı ve yanlış şifre reddedildi ([kanıt modeli](../EVIDENCE.md#investigation-handoff)).
 - **Bildirimler.** Sorunlar (düşük disk alanı, oturumu kapatılmış hesap, toplayıcı, kopyalama veya zaman damgası hataları), gözlemlenen sohbetlerdeki değişiklikler ve günlük özet, [Apprise](https://github.com/caronc/apprise) aracılığıyla Matrix, Telegram, Discord, Slack, ntfy, e-posta ve diğer birçok hizmete gönderilir — alıntıları etkinleştirmediğiniz sürece mesaj metni içermez — ve panelde listelenir. Teslimat, yerel bir uç noktaya karşı test edilmiştir; hizmetlerin kendisi henüz test edilmemiştir.
-- **25 arayüz dili.** Panel ve tam dokümantasyon, Almanca, Fransızca, Japonca ve İbranice dahil olmak üzere aynı dilleri paylaşmaktadır. Çeviriler DeepL ile hazırlanmıştır. Telegram içeriği ve günlük kayıtları her zaman kaydedildiği şekilde aynen görüntülenir.
+- **25 arayüz dili.** Panel ve tam dokümantasyon, Almanca, Fransızca, Japonca ve İbranice dahil olmak üzere aynı dilleri paylaşmaktadır. Telegram içeriği ve günlük kayıtları her zaman kaydedildiği şekilde aynen görüntülenir.
 - **Açık ve koyu tema.** Varsayılan olarak sistem ayarlarını takip eder; seçim, tarayıcı başına kaydedilir.
 - **Klavyeyle kolay gezinme.** Bir bölümü bulmak için **Ctrl+K** (Mac: **⌘K**) tuşlarına basın veya **"Git..." seçeneğini** seçin. Bölümü açmak için ok tuşlarını ve Enter tuşunu kullanın; Escape tuşu menüyü kapatır.
 - **Birden fazla hesap.** Her biri kendi Telegram oturumu, günlüğü, imzalama anahtarı, proxy rotası ve yakalama politikasına sahip, sınırsız sayıda izole çalışma alanı.

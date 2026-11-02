@@ -1,8 +1,4 @@
-"""Capture panel screenshots from synthetic data. Never connects to Telegram.
-
-python tools/capture_screenshots.py            # review set in test-results/screens
-python tools/capture_screenshots.py --docs     # README images in docs/assets
-"""
+"""Capture panel screenshots from synthetic data."""
 import argparse
 import sys
 import tempfile
@@ -55,12 +51,15 @@ def main():
         dark.close()
         page.get_by_role("button", name="Edits", exact=True).click()
         page.locator("#events-body tr").first.click()
-        expect(page.locator(".detail-block.after")).to_be_visible()
+        page.get_by_role("button", name="Side by side", exact=True).click()
+        expect(page.get_by_text("Newly observed version", exact=True)).to_be_visible()
+        expect(page.locator('.review-split > div')).to_have_count(2)
         shoot(page, "detail.png")
         page.keyboard.press("Escape")
         page.get_by_role("button", name="All events", exact=True).click()
         page.locator('[data-view="sources"]').click()
-        page.locator("#source-options > summary").click()
+        expect(page.locator("#view-sources")).to_be_visible()
+        page.locator('#sources-tab-recording').click()
 
         page.evaluate("document.querySelectorAll('#view-sources [disabled]').forEach(n => n.disabled = false)")
         shoot(page, "sources.png", full_page=not args.docs)
@@ -108,6 +107,12 @@ def main():
         if not args.docs:
             page.goto(live.url + "/guide.html")
             shoot(page, "guide.png")
+        from tools.build_case_board_example import seed_board
+        seed_board(demo.app.state.store)
+        page.goto(demo.url + '/board')
+        expect(page.locator('.board-feed .board-card')).to_have_count(3)
+        page.evaluate('scrollTo(0,0)')
+        shoot(page, 'case-board.png')
         browser.close()
 
 

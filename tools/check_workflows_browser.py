@@ -1,4 +1,3 @@
-"""Task chooser, private export handoff and permission boundaries; synthetic accounts only."""
 import json
 from pathlib import Path
 import tempfile
@@ -10,8 +9,37 @@ from check_browser import RunningApp, launch_browser, navigate_panel, unlock
 from check_account_export_browser import DEFAULTS
 
 
+def hold_connection_navigation(page, selector):
+    page.evaluate("""selector => {
+      const probe={fetch:window.fetch,busy:window.busy,armed:false,held:false,pending:null};
+      window.workflowNavigationProbe=probe;
+      window.fetch=async(...args)=>{
+        const response=await probe.fetch.apply(window,args);
+        if(probe.armed&&!probe.held&&new URL(String(args[0]),location.href).pathname==='/api/network/policy'){
+          probe.held=true;
+          await new Promise(resolve=>{probe.release=resolve;});
+        }
+        return response;
+      };
+      window.busy=(button,work)=>{
+        if(!button?.matches(selector))return probe.busy(button,work);
+        probe.armed=true;probe.pending=probe.busy(button,work);return probe.pending;
+      };
+    }""", selector)
+    page.locator(selector).click()
+    page.wait_for_function("()=>typeof window.workflowNavigationProbe?.release==='function'")
+    expect(page.locator("#view-connection")).to_be_visible()
+
+
+def release_connection_navigation(page):
+    page.evaluate("""async()=>{
+      const probe=window.workflowNavigationProbe;
+      window.fetch=probe.fetch;window.busy=probe.busy;
+      probe.release();await probe.pending;delete window.workflowNavigationProbe;
+    }""")
+
+
 def hold_configure(page):
-    """Hold only this button's first real response; later view loads must finish normally."""
     page.evaluate("""() => {
       const probe={fetch:window.fetch,busy:window.busy,armed:false,held:false,pending:null};
       window.workflowResponseProbe=probe;
@@ -40,7 +68,6 @@ def hold_configure(page):
 
 
 def release_configure(page):
-    # Await the original click handler, not a timer or an assertion made before its continuation.
     page.evaluate("""async()=>{
       const probe=window.workflowResponseProbe;
       window.fetch=probe.fetch;window.busy=probe.busy;
@@ -70,12 +97,13 @@ def main():
             page.on("request", lambda request: writes.append((request.method, urlsplit(request.url).path))
                     if request.method not in ("GET", "HEAD", "OPTIONS") else None)
             unlock(page, server, start=True)
+            page.wait_for_function("window.TgWitnessRouter?.started")
             expect(page.locator("#view-start")).to_be_visible()
             expect(page.locator("#workflow-account-card")).to_be_visible()
             expect(page.locator("#workflow-investigation-card")).to_be_visible()
             expect(page.locator("#view-start h1")).to_contain_text("What")
             before = list(writes)
-            page.locator('[data-workflow="account"]').click()
+            hold_connection_navigation(page, '[data-workflow="account"]')
             expect(page.locator("#view-connection")).to_be_visible()
             expect(page.locator("#workflow-handoff")).to_be_visible()
             expect(page.locator("#workflow-continue")).to_be_hidden()
@@ -84,11 +112,32 @@ def main():
             assert not server.app.state.collector.running
             checks.append("English chooser and disconnected export handoff make no backend writes")
 
-            # Real local auth endpoints, backed by FakeClient; no credential or session fixture injection.
             page.locator("#phone").fill("+15550001111")
             page.locator("#auth-continue").click()
             expect(page.locator("#code-form")).to_be_visible()
             page.locator("#code").fill("11111")
+            release_connection_navigation(page)
+            expect(page.locator("#code-form")).to_be_visible()
+            expect(page.locator("#code")).to_be_focused()
+            expect(page.locator("#code")).to_have_value("11111")
+            checks.append("late workflow navigation preserves the code step reached during the real policy read")
+
+            pending_auth_writes = list(writes)
+            for selector, view in (('[data-workflow="investigation"]', "start"),
+                                   ('[data-workflow="account"]', "start"),
+                                   ("#account-export-configure", "evidence")):
+                navigate_panel(page, view)
+                if view == "evidence":
+                    page.locator("#export-task-account").click()
+                hold_connection_navigation(page, selector)
+                expect(page.locator("#code-form")).to_be_visible()
+                expect(page.locator("#code")).to_have_value("11111")
+                release_connection_navigation(page)
+                expect(page.locator("#code-form")).to_be_visible()
+                expect(page.locator("#code")).to_have_value("11111")
+            assert writes == pending_auth_writes, "Returning to a workflow changed pending authentication"
+            checks.append("all three workflow sign-in entrypoints preserve a pending code and its draft on return")
+
             page.locator("#code-form button[type=submit]").click()
             expect(page.locator("#authorized-state")).to_be_visible()
             expect(page.locator("#workflow-continue")).to_be_visible()
@@ -174,7 +223,7 @@ def main():
 
             second = page.evaluate("()=>json('profiles',{label:'Synthetic second workspace'},{root:true})")
             page.evaluate("()=>loadProfiles()")
-            before = list(writes)  # Creating the synthetic workspace above is the explicit fixture write.
+            before = list(writes)
             hold_configure(page)
             page.evaluate("id=>switchProfile(id,{discardConfirmed:true})", second["id"])
             assert page.evaluate("state.profile") == second["id"]
@@ -186,7 +235,6 @@ def main():
             assert writes == before, "Switching workspaces changed observation or export state"
             checks.append("late configure response cannot reopen or copy drafts/jobs into another workspace")
 
-            # An explicit URL must win over the default task chooser, including a full reload.
             page.goto(server.url + "/journal?ws=default")
             expect(page.locator("#view-observations")).to_be_visible()
             expect(page.locator("#view-start")).to_have_count(0)
@@ -210,7 +258,6 @@ def main():
                         expect(page.locator("#nav-more")).not_to_have_attribute("open", "")
                     page.keyboard.press("Enter")
                     expect(page.locator("#nav-more")).to_have_attribute("open", "")
-                    # Every Tab stays within the modal navigation; Escape restores the trigger.
                     for _ in range(24):
                         page.keyboard.press("Tab")
                         assert page.evaluate("document.querySelector('.sidebar').contains(document.activeElement)")
@@ -224,7 +271,6 @@ def main():
                 assert page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"), width
             checks.append("320/390/1440 layouts, expanded navigation keyboard trap and Escape focus")
 
-            # Grants use the real backend; no status/permission response mocks.
             for label, permissions, scope in (
                 ("Read only", ["view"], None),
                 ("Journal exporter", ["view", "export"], None),

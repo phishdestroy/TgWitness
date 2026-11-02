@@ -1,4 +1,3 @@
-"""Offline source archive, private-file, secret-scan and failed-write regressions."""
 import hashlib
 import base64
 import csv
@@ -22,8 +21,6 @@ def check_publication_secrets():
     scanner = importlib.util.module_from_spec(spec)
     with patch.dict(sys.modules, {"build_source": builder}):
         spec.loader.exec_module(scanner)
-    # Assemble synthetic credentials so publication scanning never needs a fixture
-    # exemption and no real key/environment variable is read by this regression.
     suffix = "SyntheticCanary0123" * 3
     uuid = "12345678" + "-1234" * 3 + "-123456789abc"
     values = ["sk-" + suffix, "sk-" + "proj-" + suffix, "sk-" + "svcacct-" + suffix,
@@ -36,7 +33,6 @@ def check_publication_secrets():
         findings = scanner.secret_findings("public text\n" + value, "synthetic.py")
         assert len(findings) == 1 and "synthetic.py:2:" in findings[0]
         assert all(secret not in findings[0] for secret in (value, suffix, uuid)) and "value withheld" in findings[0]
-        # The same guard must cover approved demonstration archives as well as source.
         payload = io.BytesIO()
         with zipfile.ZipFile(payload, "w") as archive:
             archive.writestr("notes.txt", "public text\n" + value)
@@ -48,7 +44,7 @@ def check_publication_secrets():
         assert scanner.secret_findings(value, "public.py") == []
 
 
-def check_portable_metadata(root):
+def check_portable_package(root):
     spec = importlib.util.spec_from_file_location("build_portable", Path(__file__).with_name("build_portable.py"))
     portable = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(portable)
@@ -111,12 +107,49 @@ def check_portable_metadata(root):
         raise AssertionError("Malformed RECORD was accepted")
     assert (metadata / "direct_url.json").exists(), "Malformed metadata caused partial cleanup"
 
+    stage = root / "portable-layout"
+    resources = (
+        "python/Lib/site-packages/fpdf/data/__init__.py",
+        "python/Lib/site-packages/fpdf/data/color_profiles/__init__.py",
+        "python/Lib/site-packages/fpdf/data/color_profiles/sRGB2014.icc",
+        "python/Lib/site-packages/fpdf/data/color_profiles/sRGB2014.icc.LICENSE",
+    )
+    for name in resources:
+        path = stage / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"Public dependency resource\n")
+    archive = root / "portable.zip"
+    portable.write_release(stage, archive)
+    original = archive.read_bytes()
+    with zipfile.ZipFile(archive) as released:
+        assert set(released.namelist()) == {stage.name + "/" + name for name in resources}
+    for name in (
+        "data/vault.key",
+        "python/Lib/site-packages/tgwitness/data/notes.txt",
+        "python/Lib/site-packages/fpdf/data/extra.txt",
+        "python/Lib/site-packages/fpdf/data/color_profiles/vault.key",
+        "python/Lib/site-packages/fpdf/DATA/extra.txt",
+        "python/Lib/site-packages/fpdf/data/color_profiles/__pycache__/module.pyc",
+    ):
+        private = stage / name
+        private.parent.mkdir(parents=True, exist_ok=True)
+        private.write_bytes(b"PRIVATE_CANARY")
+        try:
+            portable.write_release(stage, archive)
+        except SystemExit:
+            pass
+        else:
+            raise AssertionError("Private portable path was accepted: " + name)
+        finally:
+            private.unlink()
+        assert archive.read_bytes() == original, "Rejected input replaced a valid portable ZIP"
+
 
 def main():
     check_publication_secrets()
     with tempfile.TemporaryDirectory(prefix="tgwitness-source-check-") as temporary:
         root = Path(temporary).resolve()
-        check_portable_metadata(root)
+        check_portable_package(root)
         source = root / "tgwitness"
         source.mkdir()
         original = {
@@ -193,13 +226,12 @@ def main():
         assert checksum.read_bytes() == first_sum
         assert sorted(path.name for path in target.parent.iterdir()) == sorted([target.name, checksum.name])
 
-        # A real source change must affect both the ZIP and its embedded manifest.
         (root / "README.md").write_bytes(b"Changed public source\n")
         build((2020, 1, 2, 3, 4, 6, 0, 2, 0))
         assert target.read_bytes() != first
         with zipfile.ZipFile(target) as archive:
             assert archive.read("TgWitness/README.md") == b"Changed public source\n"
-    print("Source archive checks passed: repeatability, metadata, exact bytes, private exclusions, secret redaction, interrupted writes and portable metadata hygiene.")
+    print("Source archive checks passed: repeatability, metadata, exact bytes, private exclusions, secret redaction, interrupted writes, portable metadata and PDF resources.")
 
 
 if __name__ == "__main__":

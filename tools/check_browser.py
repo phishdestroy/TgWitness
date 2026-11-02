@@ -1,8 +1,6 @@
-"""Synthetic end-to-end browser acceptance. Never connects to Telegram."""
 import asyncio
 import json
 import hashlib
-import os
 import zipfile
 import socket
 import sys
@@ -22,6 +20,7 @@ from tgwitness.app import create_app
 from tgwitness.proxy_catalog import ProxyPool
 from tgwitness.verify import verify_bundle
 from tools.browser_fixtures import FakeClient, saved_session
+from tools.browser_helpers import answer_panel_dialog, check_layout, launch_browser
 
 
 async def _listed(route, operator=False):
@@ -39,12 +38,6 @@ async def _idle(self):
 ProxyPool.pin, ProxyPool.probe, ProxyPool.run = staticmethod(_listed), staticmethod(_answers), _idle
 
 
-def launch_browser(p):
-
-
-    return p.chromium.launch(headless=True, channel=os.environ.get("TGWITNESS_BROWSER_CHANNEL") or None)
-
-
 class RunningApp:
     def __init__(self, path, demo=False, client_factory=FakeClient):
         self.app = create_app(path, demo=demo, client_factory=client_factory)
@@ -57,7 +50,6 @@ class RunningApp:
 
     def __enter__(self):
         self.thread.start()
-        # A cold optional MCP SDK import is slower on Windows CI.
         deadline = time.monotonic() + 45
         try:
             while not self.server.started:
@@ -80,6 +72,24 @@ class RunningApp:
 
 
 def unlock(page, server, *, start=False):
+    if not server.app.state.store.get_setting("demo", False):
+        store = server.app.state.store
+        if not store.get_setting('first_run', None):
+            store.set_setting('first_run', {'skipped': True})
+        if not store.get_setting('ui_preferences:admin', None):
+            store.set_setting('ui_preferences:admin', {'language':'en', 'theme':'system', 'level':'expert',
+                'timezone':page.evaluate("Intl.DateTimeFormat().resolvedOptions().timeZone")})
+        registry=server.app.state.profiles
+        if not getattr(registry,'legacy_setup_fixture',False):
+            original_open=registry.open_entry
+            async def open_legacy_workspace(entry):
+                await original_open(entry)
+                child=registry.entries[entry['id']].get('app')
+                if child:
+                    child.state.store.set_setting('first_run',{'skipped':True})
+                    child.state.store.set_setting('ui_preferences:admin',store.get_setting('ui_preferences:admin'))
+            registry.open_entry=open_legacy_workspace
+            registry.legacy_setup_fixture=True
     page.goto(server.url)
     if server.app.state.store.get_setting("demo",False):
         expect(page.locator("#workspace")).to_be_visible()
@@ -114,17 +124,25 @@ def unlock(page, server, *, start=False):
     assert authenticated.value.ok, authenticated.value.status
     authenticated.value.body()
     expect(page.locator("#workspace")).to_be_visible()
-    # Legacy scenario helpers continue into setup through the new task choice.
-    # New landing acceptance keeps the chooser visible with start=True.
+    page.wait_for_function('()=>window.TGW_ONLINE_DEMO||!!document.documentElement.dataset.uiLevel')
     if not start and page.locator('#view-start').is_visible():
         button = page.locator('[data-workflow="investigation"]')
         if button.is_visible():
             button.click()
+    if not start:
+        page.evaluate("document.querySelectorAll('.other-sign-in').forEach(el=>el.open=true)")
 
 
 def navigate_panel(page, view):
-    """Use the same navigation on desktop and the mobile menu."""
     button = page.locator(f'.sidebar [data-view="{view}"]')
+    if not page.evaluate('!!state.status?.demo'):
+        page.wait_for_function('()=>window.TGW_ONLINE_DEMO||!!document.documentElement.dataset.uiLevel')
+    level=button.get_attribute('data-level')
+    current=page.locator('html').get_attribute('data-ui-level')
+    rank={'simple':0,'standard':1,'expert':2}
+    if level in rank and current in rank and rank[level]>rank[current]:
+        page.locator('select.level-pick').select_option(level)
+        expect(page.locator('html')).to_have_attribute('data-ui-level',level)
     toggle = page.locator("#navigation-toggle")
     if page.viewport_size["width"] < 768 and toggle.get_attribute("aria-expanded") != "true":
         toggle.click()
@@ -133,6 +151,8 @@ def navigate_panel(page, view):
             page.locator('#nav-more > summary').click()
     button.click()
     expect(page.locator(f"#view-{view}")).to_be_visible()
+    if view == 'connection':
+        page.locator('.other-sign-in').evaluate('el=>el.open=true')
 
 
 def lock_panel(page):
@@ -147,54 +167,32 @@ def lock_panel(page):
 
 
 def reload_panel(page):
-    """Wait for authenticated bootstrap, separately from the render assertion."""
-    with page.expect_response(
-        lambda response: response.url.endswith("/api/status")
-        and response.request.method == "GET", timeout=20000,
-    ) as ready:
-        page.reload()
+    requests, errors = [], []
+    def response_seen(response):
+        if '/api/' in response.url:
+            requests.append((urlsplit(response.url).path, response.status))
+    def error_seen(error):
+        errors.append(str(error))
+    page.on('response', response_seen)
+    page.on('pageerror', error_seen)
+    try:
+        with page.expect_response(
+            lambda response: response.url.endswith("/api/status")
+            and response.request.method == "GET", timeout=20000,
+        ) as ready:
+            page.reload()
+    except Exception:
+        print('Reload bootstrap failed:', {'url': page.url, 'requests': requests, 'errors': errors,
+              'login_error': page.locator('#login-error').text_content()}, flush=True)
+        raise
+    finally:
+        page.remove_listener('response', response_seen)
+        page.remove_listener('pageerror', error_seen)
     assert ready.value.ok, ready.value.status
     expect(page.locator("#workspace")).to_be_visible()
 
 
-def check_layout(page, connection=False):
-    assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "Horizontal overflow"
-    for button in page.locator(".sidebar .nav:visible").all():
-        bounds = button.bounding_box()
-        assert bounds and bounds["x"] >= 0 and bounds["x"] + bounds["width"] <= page.viewport_size["width"] + 1
-    if connection:
-        for selector in ("#phone", "#auth-continue"):
-            bounds = page.locator(selector).bounding_box()
-            assert bounds and bounds["y"]+bounds["height"] <= page.viewport_size["height"], "Phone login requires initial scrolling"
-    if page.locator("#view-observations").is_visible() and page.locator("#events-body tr").count():
-        row = page.locator("#events-body tr").first
-        assert row.locator("td").nth(2).is_visible() or row.locator(".event-mobile-meta").is_visible(), \
-            "Timeline timestamps disappeared at this width"
-
-
-    failures = page.evaluate("""() => {
-      const rgba=s=>(s.match(/[\\d.]+/g)||[]).map(Number);
-      const blend=(fg,bg)=>fg.slice(0,3).map((v,i)=>v*(fg[3]??1)+bg[i]*(1-(fg[3]??1)));
-      const luminance=c=>c.map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4}).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);
-      const result=[];
-      for(const el of document.querySelectorAll('body *')){
-        if(![...el.childNodes].some(n=>n.nodeType===3&&n.textContent.trim())||!el.checkVisibility({checkVisibilityCSS:true})||el.closest('[disabled]'))continue;
-        const cs=getComputedStyle(el);if(cs.visibility!=='visible')continue;
-        let chain=[],n=el,skip=false;
-        while(n){const s=getComputedStyle(n);chain.unshift(s);if(Number(s.opacity)<1||/url\\(/.test(s.backgroundImage))skip=true;n=n.parentElement;}
-        if(skip)continue;
-        let bg=[255,255,255];for(const s of chain)bg=blend(rgba(s.backgroundColor),bg);
-        const color=blend(rgba(cs.color),bg), a=luminance(color),b=luminance(bg),ratio=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);
-        const large=parseFloat(cs.fontSize)>=24||(parseFloat(cs.fontSize)>=18.66&&Number(cs.fontWeight)>=700);
-        if(ratio<(large?3:4.5))result.push({text:el.textContent.trim().slice(0,65),selector:el.id||el.className,ratio:+ratio.toFixed(2),color:cs.color});
-      }
-      return result;
-    }""")
-    assert not failures, failures
-
-
 def hold_api_response(page, path):
-    """Keep the real API response, but let the UI change before its promise resolves."""
     page.evaluate("""path => {
       window.acceptanceFetch=window.fetch;window.releaseAcceptanceResponse=null;
       window.fetch=async(...args)=>{
@@ -216,7 +214,6 @@ def release_api_response(page):
 
 
 def check_journal_messages(page, expected):
-    """Read the dashboard in its active view, then restore the user's screen."""
     previous = page.evaluate("state.view")
     page.evaluate("navigate('observations')")
     expect(page.locator("#view-observations")).to_be_visible()
@@ -301,14 +298,13 @@ def check_reading_states(browser, server):
 
 
 def check_languages(browser, server):
-    """Every shipped string has a translation or explicit English fallback; language choice works."""
     assert i18n.pick(None, None) == i18n.pick(None, "zz-ZZ") == "en"
     assert i18n.pick("en", "ru,en;q=0.5") == "en" and i18n.words("en") == {}
     context = browser.new_context(viewport={"width": 1440, "height": 1060}, reduced_motion="reduce", locale="en-US")
     page, errors, keys = context.new_page(), [], []
     page.on("pageerror", lambda exc: errors.append(str(exc)))
     panel_scripts = ("app.js", "integrations.js", "analysis.js", "media-analysis.js", "webhooks.js", "proxies.js",
-                     "fleet.js", "review.js", "live.js")
+                     "fleet.js", "review.js", "live.js", "services.js", "account-import.js")
     for script in panel_scripts:
         page.route("**/" + script + "*", lambda route: route.abort())
     page.goto(server.url + "/")
@@ -353,8 +349,6 @@ def check_languages(browser, server):
 
 
 def check_themes(browser, server):
-    """The dark theme keeps text contrast on every view; a chosen theme overrides the system one and persists;
-    motion can be kept on when the system asks for less."""
     context = browser.new_context(viewport={"width": 1440, "height": 1060}, reduced_motion="reduce", color_scheme="dark")
     page, errors = context.new_page(), []
     page.on("pageerror", lambda exc: errors.append(str(exc)))
@@ -467,13 +461,11 @@ def main():
             expect(page.locator("#detail-drawer")).not_to_be_visible()
             page.get_by_role("button", name="All events", exact=True).click()
             page.get_by_role("button", name="Deletions", exact=True).click()
-            # The unfiltered table already contains three deletion icons.
-            # Wait until the filter has replaced all rows before selecting one.
             expect(page.locator("#events-body tr")).to_have_count(3)
             expect(page.locator("#events-body tr:has(.event-icon.delete)")).to_have_count(3)
             page.locator("#events-body tr:has(.event-icon.delete)").first.click()
             expect(page.locator("#detail-content")).to_contain_text("Last captured content")
-            expect(page.locator("#detail-content")).to_contain_text("Deleter not supplied")
+            expect(page.locator("#detail-content")).to_contain_text("Telegram does not report who deleted the message")
             page.keyboard.press("Escape")
             page.get_by_role("button", name="All events", exact=True).click()
             page.get_by_role("button", name="Membership", exact=True).click()
@@ -489,6 +481,7 @@ def main():
             expect(page.locator("#verification-result")).to_contain_text("event signatures")
             with page.expect_download() as pending:
                 page.get_by_role("button", name="Download signed ZIP").click()
+                answer_panel_dialog(page)
             bundle = output / "browser-evidence.zip"
             pending.value.save_as(bundle)
             assert verify_bundle(bundle)["events"] > 25
@@ -499,8 +492,9 @@ def main():
                 close:async()=>{window.writerClosed=true},abort:async()=>{window.writerAborted=true}
               })});}""")
             page.get_by_role("button", name="Download signed ZIP").click()
+            answer_panel_dialog(page)
             page.wait_for_function("()=>window.writerClosed===true")
-            expect(page.locator("#toast")).to_have_text("Evidence export saved.")
+            expect(page.locator("#toast")).to_have_text("Export sent to your browser. Check Downloads for the saved file.")
             assert page.evaluate("window.writerClosed")
             streamed = output / "browser-streamed-evidence.zip"
             streamed.write_bytes(bytes(page.evaluate("window.savedChunks.flat()")))
@@ -510,6 +504,7 @@ def main():
             page.on("request", lambda req: requests_before.append(req.url) if "/api/export/" in req.url else None)
             page.evaluate("() => {window.showSaveFilePicker=async()=>{throw new DOMException('Cancelled','AbortError')};}")
             page.get_by_role("button", name="Download signed ZIP").click()
+            answer_panel_dialog(page)
             expect(page.get_by_role("button", name="Download signed ZIP")).to_be_enabled()
             assert not requests_before, "Cancelled file chooser must not start an export"
             page.evaluate("""() => {window.writerAborted=false;
@@ -518,15 +513,17 @@ def main():
                 close:async()=>{throw new Error('Failed stream must not be closed')},
                 abort:async()=>{window.writerAborted=true}
               })});}""")
-            page.get_by_role("button", name="Download signed ZIP").click()
-            expect(page.locator("#toast")).to_have_text("Synthetic disk full")
+            with page.expect_download():
+                page.get_by_role("button", name="Download signed ZIP").click()
+                answer_panel_dialog(page)
             assert page.evaluate("window.writerAborted")
             page.evaluate("window.showSaveFilePicker=undefined")
             page.route("**/api/export/jsonl", lambda route: route.fulfill(status=200,
                        headers={"Content-Length":str(128*1024**2+1), "Content-Type":"application/x-ndjson"}, body=b""))
             page.locator('#export-more-formats > summary').click()
             page.locator('[data-export="jsonl"]').click()
-            expect(page.locator("#toast")).to_contain_text("cannot stream this large export")
+            answer_panel_dialog(page)
+            expect(page.locator("#toast")).to_contain_text("too large for this browser")
             page.unroute("**/api/export/jsonl")
             check_layout(page)
             with page.expect_download() as pending:
@@ -585,6 +582,7 @@ def main():
             page.locator("#network-username").fill("synthetic-user")
             page.locator("#network-password").fill("synthetic-proxy-secret")
             page.locator('#network-form button[type="submit"]').click()
+            answer_panel_dialog(page)
             expect(page.locator("#route-summary")).to_have_text("SOCKS5 proxy")
             expect(page.locator("#network-password")).to_have_value("")
             page.screenshot(path=str(output / "connection-proxy.png"), full_page=True)
@@ -667,8 +665,8 @@ def main():
             page.locator("#export-chat-tools > summary").click()
             page.locator("#snapshot-form button").click()
             expect(page.locator("#toast")).to_contain_text("Saved 3 history observations", timeout=15000)
-            page.once("dialog", lambda dialog: dialog.accept())
             page.locator("#collector-toggle").click()
+            answer_panel_dialog(page)
             expect(page.locator("#collector-toggle")).to_have_text("Start observation")
 
             navigate_panel(page, "parameters")
@@ -715,7 +713,7 @@ def main():
             navigate_panel(page, "connection")
             page.locator('[data-auth-method="files"]').click()
             session_path = run / "synthetic.tgwitness-session"
-            session_path.write_text(saved_session(b"y"), encoding="ascii")  # another account, another key
+            session_path.write_text(saved_session(b"y"), encoding="ascii")
             page.locator("#session-file").set_input_files(session_path)
 
             started = time.monotonic()
@@ -783,8 +781,8 @@ def main():
             from tgwitness.store import canonical
             Ed25519PublicKey.from_public_bytes(base64.b64decode(signed["public_key"])).verify(
                 base64.b64decode(signed["signature"]), canonical(signed["statement"]))
-            page.once("dialog", lambda dialog: dialog.accept())
             page.locator("#collector-toggle").click()
+            answer_panel_dialog(page)
             expect(page.locator("#collector-toggle")).to_have_text("Start observation")
             page.goto(live.url + "/guide.html")
             expect(page.locator("html")).to_have_attribute("lang", "en")

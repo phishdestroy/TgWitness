@@ -1,4 +1,3 @@
-"""Named routes and browser history against a synthetic local archive."""
 from pathlib import Path
 import sys
 import tempfile
@@ -56,7 +55,6 @@ def main():
             page.locator("#close-detail").click()
             expect(page.locator("#detail-drawer")).to_be_hidden()
 
-            # Reload a named path, including all journal filters and a timezone-bearing bound.
             date_url = app.url + "/journal?" + urlencode({**{key: values[0] for key, values in filters.items()}, "since": event["observed_at"]})
             page.goto(date_url)
             expect(page.locator("#view-observations")).to_be_visible()
@@ -92,16 +90,19 @@ def main():
             page.reload()
             page.wait_for_function("()=>state.chat===-1002&&state.chatInfo!==null")
 
-            # An explicit workspace in a deep link must be chosen before fetching its record.
             page.goto(app.url + "/journal/event/" + str(second_event["seq"]) + "?ws=" + second)
-            expect(page.locator("#detail-drawer")).to_contain_text("Only in second case")
+            try:
+                expect(page.locator("#detail-drawer")).to_contain_text("Only in second case")
+            except AssertionError:
+                print('Route bootstrap:', page.locator('#login-error').text_content(), errors,
+                      page.evaluate('({token:!!state.token,saved:!!sessionStorage.getItem("tgwitness-token"),profile:state.profile,started:accessStarted})'),requests[-20:])
+                raise
             assert page.evaluate("state.profile") == second
             page.goto(app.url + "/?workspace=default&event=" + str(event["seq"]) + "#journal")
             expect(page.locator("#detail-drawer")).to_contain_text("Invoice revised")
             expect(page).to_have_url(app.url + "/journal/event/" + str(event["seq"]) + "?ws=default")
             assert parse_qs(urlsplit(page.url).query)["ws"] == ["default"]
 
-            # The view mounts before its initial fetch completes and the legacy URL is replaced.
             page.add_init_script("""(() => {
               const fetch=window.fetch.bind(window);
               const held=window.acceptanceLegacyRoute={active:location.hash==='#observations',pending:[]};
@@ -115,11 +116,10 @@ def main():
             page.goto(app.url + "/#observations")
             expect(page.locator("#view-observations")).to_be_visible()
             page.wait_for_function("()=>acceptanceLegacyRoute.pending.length>0")
-            expect(page).to_have_url(app.url + "/#observations")
+            expect(page).to_have_url(app.url + "/?ws=default#observations")
             page.evaluate("acceptanceLegacyRoute.active=false;acceptanceLegacyRoute.pending.splice(0).forEach(resolve=>resolve())")
             expect(page).to_have_url(app.url + "/journal?ws=default")
 
-            # Back during a delayed workspace restore must win over its late status response.
             page.evaluate("navigate('sources')")
             page.evaluate("id=>switchProfile(id)", second)
             expect(page).to_have_url(app.url + "/sources?ws=" + second)
@@ -141,7 +141,6 @@ def main():
             expect(page.locator("#view-sources")).to_be_visible()
             assert page.evaluate("state.profile") == "default"
 
-            # The same module uses a query route on Pages, retaining its real document path.
             codec = page.evaluate("""async()=>{const {parseRoute,routeURL}=await import('/router.js');
               const url=routeURL({view:'observations',workspace:'default',seq:42,q:'invoice'},
                 {base:'https://phishdestroy.github.io/TgWitness/demo/?lang=de',staticDemo:true});

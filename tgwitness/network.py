@@ -1,4 +1,3 @@
-"""Explicit per-account Telegram route; credentials never belong in journal events."""
 import base64
 import binascii
 import ipaddress
@@ -7,7 +6,7 @@ import os
 import re
 from pathlib import Path
 from typing import Literal
-from urllib.parse import parse_qs, urlsplit
+from urllib.parse import parse_qs, urlsplit, unquote
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -15,12 +14,6 @@ from telethon.network.connection import ConnectionTcpMTProxyRandomizedIntermedia
 
 
 class OpenSSLCTR:
-    """AES-CTR of Telegram's obfuscated transports (MTProxy) through OpenSSL.
-
-    Telethon's AESModeCTR is pure Python: it deciphers a few hundred KB/s per CPU core, so a busy
-    MTProxy route held a whole core and the panel waited seconds for every answer. Same continuous
-    keystream as Telethon's: encrypting and decrypting are one operation.
-    """
     def __init__(self, key, iv):
         self._stream = Cipher(algorithms.AES(key), modes.CTR(iv)).encryptor()
 
@@ -40,7 +33,6 @@ EXPOSURES = ("hide", "fallback", "tunnel")
 
 
 class NoRoute:
-    """No route for requests outside Telegram: netclient and notifications refuse them with this error."""
     kind, telegram_only = "none", True
 
     def __init__(self, error):
@@ -54,7 +46,6 @@ class RoutePolicy(BaseModel):
 
 
 def hex_secret(value):
-    """Telegram links carry an MTProxy key as hex or as base64url; keep the hex form."""
     if re.fullmatch(r"(?:[a-fA-F0-9]{2})+", value):
         return value.lower()
     if not re.fullmatch(r"[A-Za-z0-9_+/-]{22,}={0,2}", value):
@@ -79,9 +70,15 @@ class NetworkConfig(BaseModel):
 
 
     local_proxy: bool = False
+    tls: bool = False
+    tls_server_name: str = ""
 
     @model_validator(mode="after")
     def check_route(self):
+        if self.tls and self.kind != "http":
+            raise ValueError("TLS to the proxy is supported for HTTPS CONNECT only.")
+        if self.tls:
+            self.tls_server_name = self.host
         if self.kind == "direct":
             if any((self.host, self.username, self.password, self.secret)):
                 raise ValueError("Direct mode must not include proxy credentials.")
@@ -113,6 +110,7 @@ class NetworkConfig(BaseModel):
 
     def public(self, fallback=False):
         return {"kind": self.kind, "host": self.host,
+                "tls": self.tls,
                 "port": self.port if self.kind not in ("direct", "mtproxy_auto") else None,
                 "has_credentials": bool(self.username or self.password or self.secret),
                 "fallback_to_direct": fallback, "scope": "Telegram client traffic only"}
@@ -132,19 +130,35 @@ class NetworkConfig(BaseModel):
             secret = self.secret if len(self.secret) == 34 else "dd" + self.secret
             return {"connection": ConnectionTcpMTProxyRandomizedIntermediate,
                     "proxy": (self.host, self.port, secret)}
+        if self.tls:
+            from .https_proxy import HTTPSConnection
+            return {"connection": HTTPSConnection, "proxy": self.model_dump()}
         return {"proxy": {"proxy_type": self.kind, "addr": self.host, "port": self.port,
                           "rdns": True, "username": self.username or None, "password": self.password or None}}
 
 
+def parse_proxy_url(value):
+    value = value.strip()
+    if value.startswith(("tg://", "https://t.me/", "https://telegram.me/")):
+        return parse_mtproxy_link(value)
+    try:
+        parts = urlsplit(value)
+        if parts.scheme not in ("socks5", "socks5h", "http", "https") or parts.path not in ("", "/") or parts.query or parts.fragment:
+            raise ValueError
+        return NetworkConfig(kind="socks5" if parts.scheme.startswith("socks5") else "http",
+            host=parts.hostname or "", port=parts.port or (1080 if parts.scheme.startswith("socks5") else 443 if parts.scheme == "https" else 80),
+            username=unquote(parts.username or ""), password=unquote(parts.password or ""), tls=parts.scheme == "https")
+    except ValueError:
+        raise ValueError("Enter a tg://proxy, socks5://, http:// or https:// proxy address.") from None
+
+
 def saved_route(raw):
-    """A route read back from the vault."""
     if raw and raw.get("host") and "local_proxy" not in raw:
         raw = {**raw, "local_proxy": True}
     return NetworkConfig.model_validate(raw)
 
 
 def parse_mtproxy_link(link):
-    """Parse Telegram's proxy links without opening them or changing the saved route."""
     message = "Use a tg://proxy or https://t.me/proxy link with server, port and secret."
     if not isinstance(link, str) or len(link) > 2048:
         raise ValueError(message)
@@ -165,7 +179,6 @@ def parse_mtproxy_link(link):
 
 
 def proxy_catalog():
-    """An operator-provided local catalog, never an unsolicited third-party proxy feed."""
     filename = os.environ.get("TGWITNESS_PROXY_CATALOG")
     if not filename:
         return False, []

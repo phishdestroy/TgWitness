@@ -1,9 +1,3 @@
-"""List the English interface strings that the translations in tgwitness/locales must cover.
-
-Script keys are the strings passed to tr()/trn() in the panel scripts. Server keys are the fixed
-messages the panel can show from the server and the notification texts. Keys of the static pages
-are listed in the browser by pageKeys() and checked by tools/check_browser.py.
-"""
 import ast
 import json
 import re
@@ -18,9 +12,9 @@ PANEL_MODULES = ("app.py", "collector.py", "account_import.py", "tdata.py", "ses
                  "profiles.py", "multi_export.py", "alerts.py", "witness_api.py", "tuning.py", "interactions.py",
                  "access.py", "history.py", "archive.py", "archive_api.py", "ai.py", "analysis.py", "analysis_api.py",
                  "media_analysis.py", "media_analysis_api.py", "webhooks.py", "webhook_api.py", "proxy_catalog.py",
-                 "proxy_sources.py", "account_export.py", "account_export_transport.py", "account_report.py", "disclosure.py")
+                 "proxy_sources.py", "account_export.py", "account_export_transport.py", "account_report.py", "disclosure.py",
+                 "cloud_wizard.py", "levels.py")
 
-# Labels passed through small renderer tables (tr(label)), rather than literal tr() calls.
 DYNAMIC_SCRIPT_KEYS = (
     "Inline diff", "Side by side", "Raw", "Previously observed", "Newly observed version",
     "All", "Priority", "Paused", "Unconfirmed access", "Enable selected", "Pause selected",
@@ -40,11 +34,20 @@ DYNAMIC_SCRIPT_KEYS = (
     "Install MCP support in this Python environment and restart TgWitness.",
     "MCP support is installed. Restart TgWitness to activate the endpoint.",
     "visible to this account during the recorded acquisition intervals",
+    "Version on GitHub", "A few seconds", "Cloudflare tunnel and address", "Hetzner firewall and server",
+    "Usually under a minute", "TgWitness installs itself on the server",
+    "Usually several minutes; the panel waits up to 30", "The server answers with its signing key",
+    "Hetzner server and firewall", "Cloudflare address and tunnel", "Done", "Up and running", "Server deleted",
+    "Starting",
+    "Open the panel address and sign in with the panel token.", "Connect a Telegram account in the server's panel.",
+    "Choose the chats to observe.", "Save the deployment record",
+    "Phala Cloud confidential virtual machine", "Usually a few minutes", "TgWitness installs itself in the confidential virtual machine",
+    "Usually several minutes; the panel waits up to 40", "The server answers with its signing key and Intel's attestation",
+    "Save the measured docker-compose file",
 )
 
 
 def js_literal(body):
-    """Decode a quoted JS string's contents without evaluating source code."""
     escapes = {"b": "\b", "f": "\f", "n": "\n", "r": "\r", "t": "\t", "v": "\v", "0": "\0"}
     def replace(match):
         value = match.group(1)
@@ -60,7 +63,6 @@ def js_literal(body):
 
 
 def calls(source):
-    """Yield the source text of every tr(...)/trn(...) call, including nested calls."""
     for match in re.finditer(r"(?<![\w.$])(?:[A-Za-z_$][\w$]*\.)?trn?\(", source):
         depth, i, quote = 1, match.end(), None
         while depth and i < len(source):
@@ -112,7 +114,7 @@ def server_keys():
             texts = []
             if isinstance(node, ast.Call):
                 func = getattr(node.func, "id", None) or getattr(node.func, "attr", "")
-                if func in ("HTTPException", "ValueError", "RouteError", "Refused"):
+                if func in ("HTTPException", "ValueError", "RouteError", "Refused", "WizardError"):
                     texts = node.args
                 elif name == "disclosure.py" and func == "append" and isinstance(node.func.value, ast.Name) \
                         and node.func.value.id == "warnings":
@@ -134,7 +136,8 @@ def server_keys():
         sys.path.insert(0, str(PACKAGE.parent))
     from tgwitness.tuning import texts
     from tgwitness.account_report import text_keys as account_report_keys
-    return list(dict.fromkeys(keys + texts() + account_report_keys()))
+    from tgwitness.modes import texts as mode_texts
+    return list(dict.fromkeys(keys + texts() + account_report_keys() + mode_texts()))
 
 
 if __name__ == "__main__":

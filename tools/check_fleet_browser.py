@@ -1,11 +1,10 @@
-"""Bulk account import, groups and shared proxies with synthetic sessions."""
 import json
 import tempfile
 from pathlib import Path
 
 from playwright.sync_api import expect, sync_playwright
 
-from check_browser import (ROOT, RunningApp, hold_api_response, launch_browser,
+from check_browser import (ROOT, RunningApp, answer_panel_dialog, hold_api_response, launch_browser,
                            release_api_response, unlock)
 from tools.browser_fixtures import saved_session
 from check_fleet_async_browser import main as check_async_groups
@@ -81,7 +80,6 @@ def main():
         page.locator("#fleet-import-start").click()
         expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
         expect(page.locator("#fleet-group")).to_be_disabled()
-        # Close and Stop stay usable while accounts are imported; both end the queue after the current account
         expect(page.locator("#fleet-import-close")).to_be_enabled()
         expect(page.locator("#fleet-import-stop")).to_be_visible()
         page.locator("#top-lock").click()
@@ -100,7 +98,6 @@ def main():
         assert len(imported) == before + 1, "Locking must stop the remaining import queue"
         assert not any(e["label"] == "delta" for e in server.app.state.profiles.entries.values())
 
-        # Switching awaits its final scoped notification read before releasing the workspace.
         with page.expect_response(lambda response: response.url == server.url + "/profiles/" + alpha + "/api/notifications"
                                   and response.request.method == "GET", timeout=20000) as switched:
             page.locator("#profile-select").select_option(alpha)
@@ -119,20 +116,19 @@ def main():
         page.locator("#pool-search").fill("7.7.7.7")
         expect(page.locator("#pool-rows .pool-row")).to_have_count(1)
         page.locator("#pool-rows button").click()
+        answer_panel_dialog(page)
         expect(page.locator("#route-detail")).to_contain_text("7.7.7.7")
         assert server.app.state.profiles.entries[alpha]["app"].state.collector.network_config().host == "7.7.7.7"
         for width in (1440, 390, 320):
             page.set_viewport_size({"width": width, "height": 1000})
-            assert page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"), width
+            assert page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"), page.evaluate("""()=>({width:innerWidth,overflow:[...document.querySelectorAll('body *')].filter(e=>e.checkVisibility()&&e.getBoundingClientRect().right>innerWidth+1).map(e=>[e.tagName,e.id,e.className,e.getBoundingClientRect().right]).slice(0,25)})""")
             page.screenshot(path=str(output / ("proxies-" + str(width) + ".png")), full_page=True)
         page.set_viewport_size({"width": 1440, "height": 1000})
         page.locator('[data-view="accounts"]').click()
         page.locator("#fleet-import-open").click()
         page.locator("#fleet-files").set_input_files(account_files("finished", 505))
         page.locator("#fleet-import-start").click()
-        expect(page.locator("#fleet-results .ok")).to_have_count(1, timeout=30000)  # an import connects
-        # The result row is marked before the queue's final profile/group refresh.
-        # Wait for the form to become usable before selecting a second batch.
+        expect(page.locator("#fleet-results .ok")).to_have_count(1, timeout=30000)
         expect(page.locator("#fleet-import-stop")).to_be_hidden(timeout=30000)
         expect(page.locator("#fleet-files")).to_be_enabled()
         expect(page.locator("#fleet-import-close")).to_be_enabled()

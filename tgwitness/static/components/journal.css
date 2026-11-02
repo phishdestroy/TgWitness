@@ -76,16 +76,18 @@
   .journal .card-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 8px; }
   .journal .card-heading h2 { grid-column: 1 / -1; min-width: 0; margin: 0; }
   .journal .card-heading button { min-height: 44px; max-width: 100%; }
-  .journal #refresh { justify-self: start; }
-  .journal .live-controls { min-width: 0; max-width: 100%; margin-inline-start: 0; justify-content: flex-end; }
+  .journal #refresh { justify-self: start; grid-column: 1; grid-row: 2; }
+  .journal .live-controls { min-width: 0; max-width: 100%; margin-inline-start: 0; justify-content: flex-end; grid-column: 2; grid-row: 2; }
+  .journal #journal-to-slice { grid-column: 1 / -1; grid-row: 3; }
+  .journal .board-slice-context { grid-column: 1 / -1; grid-row: 4; min-width: 0; overflow-wrap: anywhere; }
   .journal .live-toggle { overflow-wrap: anywhere; }
   .journal .filters { padding:12px; gap:10px; }
   .journal-controls { grid-template-columns:minmax(0,1fr); }
   .journal-type-filters { display:flex; flex-wrap:nowrap; overflow-x:auto; gap:5px; padding-bottom:5px; scrollbar-width:thin; }
   .journal-type-filters .filter { flex:none; min-height:36px; padding:6px 10px; font-size:12px; }
   .journal-source-options { max-height:min(250px,45vh); }
-  .journal-date-filters { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:3px; }
-  .journal-date-filters .filter { padding:6px 3px; }
+  .journal-date-filters { gap:3px; }
+  .journal-date-filters .filter { flex:1 1 auto; padding:6px 8px; }
   .journal-filter-chip { max-width:100%; }
   .journal-pager { width:100%; margin-left:0; justify-content:space-between; }
 }

@@ -218,7 +218,7 @@ Copy `deploy/env.example` to `.env`. Set `TGWITNESS_IMAGE` to the published vers
 the **lowercase** repository path, for example:
 
 ```dotenv
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -327,7 +327,7 @@ GitHub Release is **published**, including a prerelease. Drafts and tag pushes
 alone do not publish packages.
 
 1. Set the package version and changelog, then publish a release tagged with `v`
-   plus the exact `pyproject.toml` version, such as `v0.7.1`.
+   plus the exact `pyproject.toml` version, such as `v0.8.0`.
 2. The workflow validates the tag and runs the shared Windows/Linux/macOS Python,
    general/account-import/QR browser, source-package, and Docker checks. Fresh native installation is also
    exercised on all three operating systems using Python 3.12.
@@ -447,7 +447,7 @@ in [access and permissions](ACCESS.md); independent checkpoints are covered by t
 Connection routes are per workspace and should be configured before authorization.
 SOCKS5/HTTP CONNECT use the pinned python-socks dependency. MTProxy uses Telethon's
 experimental randomized intermediate transport; Fake TLS ee secrets are unsupported.
-Direct fallback depends on the selected [IP mode](CONNECTION-SECURITY.md#ip-modes): Hide IP refuses it; the explicit fallback mode permits it after a delay. Tunnel/VPN mode permits direct routes but does not create a VPN. This is not a system-wide network policy.
+Direct fallback depends on the selected [IP mode](CONNECTION-SECURITY.md#ip-modes): **Hide the address** refuses it; **Direct as a last resort** permits it after a delay. **Server behind a tunnel or VPN** permits direct routes but does not create a VPN. This is not a system-wide network policy.
 
 For new installations, TGWITNESS_VAULT_KEY_FILE points to a separately protected random
 master-key file. Mount it read-only outside /data in a container. Preserve the public

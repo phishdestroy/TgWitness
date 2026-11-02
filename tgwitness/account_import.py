@@ -1,4 +1,3 @@
-"""Convert bounded account uploads in memory; never contact Telegram or save uploads."""
 import base64
 import binascii
 import json
@@ -11,6 +10,7 @@ from telethon.crypto import AuthKey
 from telethon.sessions import StringSession
 
 from .tdata import read_tdata_zip
+from . import client_identity
 
 MAX_UPLOAD = 8 * 1024**2
 IMPORT_REQUEST_LIMIT = 12 * 1024**2
@@ -19,8 +19,6 @@ DC_ADDRESSES = {1: "149.154.175.53", 2: "149.154.167.51", 3: "149.154.175.100",
 
 
 def string_session(dc, key):
-    """Always the reference address of the DC: an address from an untrusted file could be a server
-    that answers with the key it handed over and stands in for Telegram."""
     if type(dc) is not int or dc not in DC_ADDRESSES or not isinstance(key, bytes) or len(key) != 256:
         raise ValueError("Expected a production Telegram DC (1–5) and a complete 256-byte authorization key.")
     session = StringSession()
@@ -30,7 +28,6 @@ def string_session(dc, key):
 
 
 def session_key(value):
-    """The authorization key of a StringSession, or None: one account imported twice has one key."""
     try:
         session = StringSession((value or "").strip())
     except (ValueError, TypeError, binascii.Error, struct.error):
@@ -39,7 +36,6 @@ def session_key(value):
 
 
 def validate_string(value):
-    """The StringSession rebuilt from its DC and key alone; its address and port are ignored."""
     if not isinstance(value, str) or len(value) > 4096:
         raise ValueError("Expected a Telethon StringSession of at most 4 KiB.")
     try:
@@ -104,6 +100,9 @@ def json_account(payload):
     if not isinstance(raw, dict):
         raise ValueError("Import one JSON account object, not a bulk account list.")
     result = {"format": "Account JSON"}
+    client_profile = client_identity.from_account(raw)
+    if client_profile:
+        result["client_profile"] = client_profile
     aliases = {"api_id": ("api_id", "app_id"), "api_hash": ("api_hash", "app_hash"),
                "session": ("string_session", "session_string", "session"),
                "expected_user_id": ("user_id", "id"), "auth_key": ("auth_key", "auth_key_hex")}
@@ -142,6 +141,8 @@ def identity(value):
 
 
 def import_accounts(files, passcode=""):
+    if not 1 <= len(files) <= 4:
+        raise ValueError("Select 1–4 account files totaling at most 8 MiB.")
     total, converted = 0, []
     for item in files:
         try:
@@ -154,7 +155,7 @@ def import_accounts(files, passcode=""):
         suffix = PurePath(item["name"]).suffix.lower()
         if content.startswith(b"SQLite format 3\0"):
             result = sqlite_session(content)
-        elif content.startswith(b"PK\x03\x04"):
+        elif content.startswith(b"PK\x03\x04") or suffix == ".zip":
             dc, key, user_id = read_tdata_zip(content, passcode)
             result = {"session": string_session(dc, key), "expected_user_id": user_id, "format": "TData ZIP"}
         elif suffix == ".json":
@@ -169,14 +170,35 @@ def import_accounts(files, passcode=""):
         converted.append(result)
     merged = {"formats": [item["format"] for item in converted]}
     for result in converted:
-        for key in ("session", "api_id", "api_hash", "expected_user_id"):
+        for key in ("session", "api_id", "api_hash", "expected_user_id", "client_profile"):
             if key not in result:
                 continue
             if key in merged:
                 same = identity(merged[key]) == identity(result[key]) if key == "session" else merged[key] == result[key]
                 if not same:
-                    raise ValueError("Selected files describe different accounts or API credentials. Import one account at a time.")
+                    if key == "api_id":
+                        raise ValueError("The selected files contain different API IDs. Choose the JSON belonging to this session; do not combine files from different apps.")
+                    if key == "api_hash":
+                        raise ValueError("The selected files contain different API hashes. Use one matching API ID and hash pair.")
+                    if key == "client_profile":
+                        raise ValueError("The selected JSON files describe different devices. Keep the JSON belonging to this session.")
+                    raise ValueError("The selected files contain different account sessions. Import one account at a time into separate workspaces.")
             else:
                 merged[key] = result[key]
     merged["has_authorization"] = bool(merged.get("session"))
     return merged
+
+
+def preview(files, passcode=""):
+    try:
+        result = import_accounts(files, passcode)
+    except (ValueError, OSError) as exc:
+        return {"state": "invalid", "can_connect": False, "message": str(exc)}
+    ready = result["has_authorization"]
+    if ready and bool(result.get("api_id")) != bool(result.get("api_hash")):
+        return {"state": "incomplete", "can_connect": False, "formats": result["formats"],
+                "message": "Session found, but its application settings are incomplete. Supply both API ID and API hash in the JSON, or select the session file without this JSON to use the built-in app settings."}
+    return {"state": "ready" if ready else "missing_session", "can_connect": ready,
+            "formats": result["formats"], "client_profile": result.get("client_profile"), "api_id": result.get("api_id"),
+            "message": "Session found. Telegram will validate it when you connect." if ready else
+            "No session — only application settings. Add a .session or TData file, or sign in by phone or QR."}

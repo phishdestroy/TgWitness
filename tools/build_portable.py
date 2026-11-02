@@ -1,11 +1,3 @@
-"""Build a self-contained Windows package: the official embeddable Python plus TgWitness.
-
-Run on 64-bit Windows with Python 3.12 (the embedded runtime's version):
-
-    python tools/build_portable.py            # dist/TgWitness-<version>-windows-amd64-portable.zip
-
-The user extracts the ZIP and double-clicks TgWitness.cmd; nothing is installed system-wide.
-"""
 import argparse
 import csv
 import hashlib
@@ -109,21 +101,27 @@ PRIVATE_NAMES = {"vault.key", "panel-token.txt", "credentials.json", "account.js
                  ".instance.lock"}
 PRIVATE_SUFFIXES = (".session", ".session-journal", ".tgwitness-session", ".jsonl", ".sqlite", ".sqlite3",
                     ".db", ".db-wal", ".db-shm")
+FPDF_RESOURCES = {
+    "python/Lib/site-packages/fpdf/data/__init__.py",
+    "python/Lib/site-packages/fpdf/data/color_profiles/__init__.py",
+    "python/Lib/site-packages/fpdf/data/color_profiles/sRGB2014.icc",
+    "python/Lib/site-packages/fpdf/data/color_profiles/sRGB2014.icc.LICENSE",
+}
 
 
 def release_problem(relative):
-    """Why a package-relative path must not be shipped, or None. Shared by the folder and ZIP checks."""
     parts = relative.split("/")
     if parts[0] not in TOP_LEVEL or (parts[0] != "python" and len(parts) > 1):
         return "unexpected entry outside the package layout"
     name = parts[-1].lower()
-    if any(part in ("data", "__pycache__") for part in parts[:-1]) or name in PRIVATE_NAMES or name.endswith(PRIVATE_SUFFIXES):
+    folders = {part.lower() for part in parts[:-1]}
+    if ("__pycache__" in folders or "data" in folders and relative not in FPDF_RESOURCES
+            or name in PRIVATE_NAMES or name.endswith(PRIVATE_SUFFIXES)):
         return "private or generated file"
     return None
 
 
 def release_files(stage):
-    """Every file of the staged package, refusing links and anything outside the allowlist."""
     files = []
     for path in sorted(stage.rglob("*")):
         relative = path.relative_to(stage).as_posix()
@@ -138,7 +136,6 @@ def release_files(stage):
 
 
 def write_release(stage, target):
-    """Write the ZIP beside the target, check what it actually contains, then replace the target."""
     files = release_files(stage)
     partial = target.with_name(target.name + ".part")
     with zipfile.ZipFile(partial, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
@@ -169,7 +166,6 @@ def embedded_runtime(arch, cache, supplied=None):
 
 
 def clean_app_install_metadata(site_packages):
-    """Drop local pip provenance and records for the app launchers replaced by CMD files."""
     metadata = site_packages / ("tgwitness-" + VERSION + ".dist-info")
     record = metadata / "RECORD"
     with record.open(encoding="utf-8", newline="") as source:

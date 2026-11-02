@@ -1,4 +1,3 @@
-"""Browser acceptance of account import and QR login using only synthetic credentials."""
 import json
 import sys
 import tempfile
@@ -31,6 +30,8 @@ def main():
                 const response = await original(...args);
                 if (String(args[0]) === '/api/demo-access') {
                     await new Promise(resolve => { window.releaseAcceptanceBootstrap = resolve; });
+                    const parse=response.json.bind(response);
+                    response.json=async()=>{const value=await parse();window.acceptanceBootstrapParsed=true;return value;};
                 }
                 return response;
             };
@@ -48,6 +49,8 @@ def main():
                 page.locator('#entry-settings').click()
 
         def choose_method(method):
+            if method in ('files','key'):
+                page.locator('.other-sign-in').evaluate('el=>el.open=true')
             button=page.locator('[data-auth-method="'+method+'"]')
             if button.get_attribute('aria-pressed') != 'true': button.click()
 
@@ -85,7 +88,11 @@ def main():
         expect(page.locator("#method-description")).to_contain_text("one session format")
         scenarios.append("file formats explain which session to choose and when JSON is needed")
         page.locator(".import-advanced summary").click()
-        metadata = json.dumps({"app_id":123,"app_hash":"a"*32}).encode()
+        client_profile = {"device_model":"Synthetic laptop", "system_version":"Windows 11", "app_version":"6.0.0 x64",
+                          "lang_code":"en", "system_lang_code":"en-US", "lang_pack":"tdesktop"}
+        metadata = json.dumps({"app_id":123,"app_hash":"a"*32, "device":client_profile["device_model"],
+                               "sdk":client_profile["system_version"],
+                               **{k:v for k,v in client_profile.items() if k not in ("device_model", "system_version")}}).encode()
         files = [("telethon.session",sqlite_fixture()), ("pyrogram.session",sqlite_fixture("pyrogram")),
                  ("tdata.zip",tdata_fixture("synthetic-passcode")), ("account.json",metadata)]
         page.locator("#tdata-passcode").fill("synthetic-passcode")
@@ -109,15 +116,17 @@ def main():
         page.locator("#credentials-form button[type=submit]").click()
         expect(page.locator("#authorized-state")).to_be_visible()
         assert not server.app.state.collector.running
+        assert server.app.state.vault.read("credentials")["client_profile"] == client_profile
+        assert server.app.state.collector.client.options["device_model"] == client_profile["device_model"]
+        assert page.evaluate("importClientProfile") is None
         scenarios.append("imported account ID checked during authorization")
+        scenarios.append("companion JSON device, OS, version and languages reach the client and encrypted vault")
 
         def workspace_api_path(path):
             profile = page.evaluate("state.profile")
             return ("" if profile == "default" else "/profiles/" + profile) + "/api/" + path
 
         def request_qr(button):
-            # Cold QR rendering may outlast the UI assertion budget. Wait for
-            # the request itself, then keep the normal rendering assertions.
             path = workspace_api_path("auth/qr/start")
             with page.expect_response(lambda response: urlsplit(response.url).path == path
                                       and response.request.method == "POST", timeout=25000) as pending:
@@ -126,9 +135,14 @@ def main():
 
         def reload_workspace():
             path = workspace_api_path("status")
-            with page.expect_response(lambda response: urlsplit(response.url).path == path
-                                      and response.request.method == "GET", timeout=20000) as pending:
-                page.reload()
+            try:
+                with page.expect_response(lambda response: urlsplit(response.url).path == path
+                                          and response.request.method == "GET", timeout=20000) as pending:
+                    page.reload()
+            except Exception:
+                print("Reload diagnostics", path, page.evaluate("""()=>({url:location.pathname+location.search,profile:state.profile,
+                  error:$('login-error').textContent,toast:$('toast').textContent,hasToken:!!state.token})"""), errors)
+                raise
             assert pending.value.status == 200
             expect(page.locator("#workspace")).to_be_visible()
 
@@ -136,8 +150,7 @@ def main():
             if page.locator("#authorized-state").is_visible():
                 page.locator("#change-account").click()
             expect(page.locator("#credentials-form")).to_be_visible()
-
-
+            page.locator('.other-sign-in').evaluate('el=>el.open=true')
             if page.locator("#api-details").get_attribute("open") is None:
                 page.locator("#api-details summary").click()
             expect(page.locator("#api-id")).to_be_visible()
@@ -156,7 +169,8 @@ def main():
         candidate = begin_qr()
         page.wait_for_function("typeof window.releaseAcceptanceBootstrap === 'function'")
         page.evaluate("window.releaseAcceptanceBootstrap()")
-        page.wait_for_load_state("networkidle")
+        page.wait_for_function('()=>window.acceptanceBootstrapParsed===true')
+        page.evaluate('()=>new Promise(requestAnimationFrame)')
         expect(page.locator("#qr-state")).to_be_visible()
         expect(page.locator("#authorized-state")).not_to_be_visible()
         scenarios.append("late startup response cannot replace an active QR sign-in")
@@ -189,8 +203,6 @@ def main():
         page.locator('[aria-label="Lock workspace"]:visible').first.click()
         expect(page.locator("#gate")).to_be_visible()
         page.wait_for_function("()=>!$('qr-image').getAttribute('src')")
-        # Unlock loads only the active Account screen. A late policy response
-        # must not reset a QR sign-in started while account settings load.
         hold_api_response(page, "/network/policy")
         page.locator("#panel-token").fill(server.app.state.vault.token)
         page.locator("#unlock-form button[type=submit]").click()
@@ -200,8 +212,9 @@ def main():
         assert not candidate.connected
         open_account()
         candidate = begin_qr()
+        page.evaluate('state.policy=null')
         release_api_response(page)
-        page.wait_for_load_state("networkidle")
+        page.wait_for_function('()=>state.policy!==null')
         expect(page.locator("#qr-state")).to_be_visible()
         scenarios.append("sign-in is ready before account settings load and is not reset when they arrive")
         response = context.request.post(server.url+"/api/profiles",data={"label":"Second synthetic account"},
@@ -218,6 +231,7 @@ def main():
         expect(page.locator("#profile-select")).to_have_value(child)
         expect(page.locator("#credentials-form")).to_be_visible()
         assert not candidate2.connected
+        assert page.evaluate("importClientProfile") is None
         scenarios += ["wrong-account QR rejected", "lock clears and cancels QR", "new login replaces pending QR",
                       "workspace switch cancels only its pending QR"]
         if not page.locator("#session-file").is_visible():
@@ -225,57 +239,64 @@ def main():
         if not page.locator("#import-account").is_visible():
             page.locator(".import-advanced summary").click()
         page.locator("#session-file").set_input_files({"name":"metadata.json","mimeType":"application/json","buffer":metadata})
-        page.locator("#import-account").click()
-        expect(page.locator("#import-result")).to_contain_text("API metadata only")
+        expect(page.locator("#import-result")).to_have_attribute("data-state", "missing_session")
+        expect(page.locator("#import-result")).to_contain_text("No session")
         expect(page.locator("#session-string")).to_have_value("")
+        expect(page.locator("#auth-continue")).to_be_disabled()
         scenarios.append("JSON metadata alone does not imply authorization")
-        page.locator("#auth-continue").click()
-        expect(page.locator("#login-note")).to_contain_text("API credentials loaded")
+        page.locator("#import-result button", has_text="Sign in by phone").click()
         assert server.app.state.collector.login_client is None
         expect(page.locator("#phone")).to_be_visible()
-        expect(page.locator("#api-id")).to_have_value("123")
-        expect(page.locator("#api-hash")).to_have_value("a"*32)
         expect(page.locator("#import-details")).not_to_be_visible()
-        scenarios.append("metadata-only import points to phone or QR and preserves API fields")
+        assert page.evaluate("importClientProfile") is None
+        choose_method("qr")
+        request_qr("#start-qr")
+        page.locator("#qr-cancel").click()
+        expect(page.locator("#credentials-form")).to_be_visible()
+        choose_method("phone")
+        page.locator("#phone").fill("+15550001111")
+        page.locator("#auth-continue").click()
+        expect(page.locator("#code-form")).to_be_visible()
+        page.locator("#auth-back").click()
+        scenarios.append("metadata-only import blocks connect and offers explicit phone or QR sign-in")
         choose_method("files")
         if not page.locator("#api-id").is_visible():
             open_settings()
             if not page.locator("#api-id").is_visible(): page.locator("#api-details summary").click()
         page.locator("#api-id").fill("")
-        hold_api_response(page,"/api/auth/import")
+        hold_api_response(page,"/api/auth/import/preview")
         page.locator("#session-file").set_input_files({"name":"old.json","mimeType":"application/json","buffer":metadata})
-        page.locator("#import-account").click()
         page.wait_for_function("() => window.releaseAcceptanceResponse !== null")
+        page.evaluate("window.fetch=window.acceptanceFetch")
         newer = json.dumps({"app_id":456,"app_hash":"b"*32}).encode()
         page.locator("#session-file").set_input_files({"name":"new.json","mimeType":"application/json","buffer":newer})
         release_api_response(page)
         expect(page.locator("#import-account")).to_be_enabled()
         expect(page.locator("#api-id")).to_have_value("")
         assert page.locator("#session-file").evaluate("input=>input.files[0].name") == "new.json"
-        page.locator("#import-account").click()
-        expect(page.locator("#api-id")).to_have_value("456")
+        expect(page.locator("#import-result")).to_have_attribute("data-state", "missing_session")
+        expect(page.locator("#auth-continue")).to_be_disabled()
         scenarios.append("late import cannot overwrite newer selected files")
-        hold_api_response(page,"/api/auth/import")
+        hold_api_response(page,"/api/auth/import/preview")
         page.locator("#session-file").set_input_files({"name":"old.json","mimeType":"application/json","buffer":metadata})
-        page.locator("#import-account").click()
         page.wait_for_function("() => window.releaseAcceptanceResponse !== null")
         choose_method("qr")
         release_api_response(page)
-        expect(page.locator("#import-account")).to_be_enabled()
-        expect(page.locator("#api-id")).to_have_value("456")
+        expect(page.locator("#import-account")).not_to_be_visible()
+        expect(page.locator("#api-id")).to_have_value("")
         expect(page.locator("#session-string")).to_have_value("")
         expect(page.locator("#start-qr")).to_be_visible()
         scenarios.append("changing login method discards a late file import")
         choose_method("files")
-        hold_api_response(page,"/api/auth/import")
+        hold_api_response(page,"/api/auth/import/preview")
         page.locator("#session-file").set_input_files({"name":"old.json","mimeType":"application/json","buffer":metadata})
-        page.locator("#import-account").click()
         page.wait_for_function("() => window.releaseAcceptanceResponse !== null")
         paste_pair("789:"+"c"*32)
         release_api_response(page)
         expect(page.locator("#import-account")).to_be_enabled()
         expect(page.locator("#api-id")).to_have_value("789")
         expect(page.locator("#api-hash")).to_have_value("c"*32)
+        assert page.evaluate("importClientProfile") is None
         scenarios.append("late import cannot replace a newly pasted API pair")
         choose_method("phone")
         page.locator("#phone").fill("+1 (555) 000-1111")
@@ -310,9 +331,10 @@ def main():
         open_account()
         choose_method("files")
         page.locator("#session-file").set_input_files({"name":"metadata.json","mimeType":"application/json","buffer":metadata})
-        page.locator("#auth-continue").click()
+        expect(page.locator("#import-result")).to_have_attribute("data-state", "missing_session")
+        expect(page.locator("#auth-continue")).to_be_disabled()
+        page.locator("#import-result button", has_text="Sign in by phone").click()
         expect(page.locator("#phone")).to_be_visible()
-        expect(page.locator("#login-note")).to_contain_text("API credentials loaded")
         choose_method("files")
         direct_files = [("telethon.session",sqlite_fixture()), ("pyrogram.session",sqlite_fixture("pyrogram")),
                         ("tdata.zip",tdata_fixture()), ("account.json",metadata)]
@@ -324,16 +346,20 @@ def main():
         open_settings()
         page.locator("#profile-select").select_option("default")
         expect(page.locator("#authorized-state")).to_be_visible()
-        page.locator("#change-account").click()
+        page.locator("#account-add-another").click()
         choose_method("files")
         if page.locator("#entry-settings").get_attribute("aria-expanded") == "true": page.locator("#entry-settings").click()
         page.locator("#session-file").set_input_files([
             {"name":name,"mimeType":"application/octet-stream","buffer":data} for name,data in direct_files])
         page.locator("#auth-continue").click()
+        from check_browser import answer_panel_dialog
+        answer_panel_dialog(page)
+        expect(page.locator("#credentials-form .form-error")).to_contain_text("already has a workspace")
+        page.evaluate("setAuthStep('authorized')")
         expect(page.locator("#authorized-state")).to_be_visible()
         expect(page.locator("#api-details")).not_to_have_attribute("open", "")
-        scenarios += ["metadata file directly leads to phone entry", "four matching files connect with one button",
-                      "one-button import preserves the cross-profile account guard"]
+        scenarios += ["metadata file blocks connect and offers phone entry", "four matching files keep the cross-profile guard",
+                      "occupied workspace import cannot duplicate an existing session"]
 
         page.locator("#change-account").click()
         choose_method("key")
@@ -439,6 +465,18 @@ def main():
             connect = page.locator("#auth-continue").bounding_box()
             assert connect["y"] >= 0 and connect["y"] + connect["height"] < 844, (width, connect)
         scenarios.append("file-import submit stays visible with fallback font metrics at 320/390px")
+        page.evaluate("setAuthStep('authorized')")
+        page.locator('#account-add-another').click()
+        for width in (390, 320):
+            page.set_viewport_size({'width': width, 'height': 844})
+            check_layout(page)
+            heading = page.locator('.connection-simple > .page-heading').bounding_box()
+            title = page.locator('#account-heading').bounding_box()
+            connect = page.locator('#auth-continue').bounding_box()
+            assert title['width'] >= heading['width'] - 1, (width, heading, title)
+            assert 0 <= connect['y'] and connect['y'] + connect['height'] < 844, (width, connect)
+            page.screenshot(path=str(output / ('add-another-' + str(width) + '.png')))
+        scenarios.append('add-another mobile heading and connect action fit 320/390px with fallback fonts')
         assert not errors and not outbound, {"errors":errors,"outbound":outbound}
         receipt = {"passed":True,"scenarios":scenarios,"page_errors":errors,"external_requests":outbound}
         (output / "receipt.json").write_text(json.dumps(receipt,indent=2),encoding="utf-8")
