@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="en" dir="ltr" class="docs-root">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1120"><title>Features and limits | TgWitness</title>
-<meta name="description" content="What TgWitness implements today, what the Telegram platform limits and what remains future work."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/">
+<meta name="theme-color" content="#0b1120"><title>Features and limits · Reference | TgWitness</title>
+<meta name="description" content="The current collection model, multi-account workflows, exports and operational boundaries of TgWitness."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
 <meta property="og:locale" content="en_US">
-<meta property="og:title" content="Features and limits | TgWitness"><meta property="og:description" content="What TgWitness implements today, what the Telegram platform limits and what remains future work.">
+<meta property="og:title" content="Features and limits · Reference | TgWitness"><meta property="og:description" content="The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.">
 <meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TgWitness — Telegram observation journal">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/features/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/features/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/features/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/features/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/features/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/features/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/features/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/features/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/features/", "name": "Features and limits | TgWitness", "description": "What TgWitness implements today, what the Telegram platform limits and what remains future work.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Features and limits", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/features/"}]}]}</script>
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/features/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/features/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/features/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/features/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/features/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/features/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/features/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/features/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/features/", "name": "Features and limits · Reference | TgWitness", "description": "The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/docs/reference/features/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/features/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Features and limits", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/features/"}]}]}</script>
 <script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
 <link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../../docs.css">
@@ -27,28 +27,26 @@
 <div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/features/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/features/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/features/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/features/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/features/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/features/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/features/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/features/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/features/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/features/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/features/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/features/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../fr/docs/reference/features/" hreflang="fr" lang="fr">Français</a><a href="../../../de/docs/reference/features/" hreflang="de" lang="de">Deutsch</a><a href="../../../it/docs/reference/features/" hreflang="it" lang="it">Italiano</a><a href="../../../uz/docs/reference/features/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../ko/docs/reference/features/" hreflang="ko" lang="ko">한국어</a><a href="../../../zh-Hant/docs/reference/features/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../ms/docs/reference/features/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../pl/docs/reference/features/" hreflang="pl" lang="pl">Polski</a><a href="../../../ja/docs/reference/features/" hreflang="ja" lang="ja">日本語</a><a href="../../../th/docs/reference/features/" hreflang="th" lang="th">ไทย</a><a href="../../../he/docs/reference/features/" hreflang="he" lang="he">עברית</a><a href="../../../bn/docs/reference/features/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
 </div></header>
 <div class="docs-layout">
-<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../dedicated-account/">Dedicated account</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><a href="../../capture/">GitHub Actions capture</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../archive/">Work the archive</a><a href="../../access/">Share a case</a><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../access/">Access and permissions</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group" open><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../history/">Load source history</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="./" aria-current="page">Features and limits</a></details><details class="wiki-group"><summary>Archive & integrations</summary><a href="../analysis/">Archive analysis</a><a href="../mcp/">Read-only MCP</a><a href="../media-analysis/">Local OCR and transcription</a><a href="../webhooks/">Outgoing webhooks</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.1<br>Open source · Runs on your machine</p></aside>
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../dedicated-account/">Dedicated account</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><a href="../../capture/">GitHub Actions capture</a><p class="nav-label">Investigation & reporting</p><a href="../../cases/">Investigate across all chats</a><a href="../../case-board/">Build a Case Board</a><a href="../../reports/">Design a report</a><a href="../../handover/">Prepare a sharing copy</a><a href="../../groups/">Manage a group of accounts</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../security/">Keep it secure</a><a href="../../witness/">Set up a witness bot</a><p class="nav-label">Go further</p><a href="../../archive/">Work the archive</a><a href="../../access/">Share a case</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../access/">Access and permissions</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group" open><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../history/">Load source history</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="./" aria-current="page">Features and limits</a></details><details class="wiki-group"><summary>Archive & integrations</summary><a href="../case-board/">Case Board reference</a><a href="../analysis/">Archive analysis</a><a href="../mcp/">Read-only MCP</a><a href="../media-analysis/">Local OCR and transcription</a><a href="../webhooks/">Outgoing webhooks</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../case-reports/">Report configuration and verification</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.8.0<br>Open source · Runs on your machine</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Features and limits</span></nav>
 <p class="verification-shortcut"><a href="../verification/">What has been tested →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Reference / Collect</p><h1>Features and limits</h1><p class="guide-outcome">What TgWitness implements today, what the Telegram platform limits and what remains future work.</p><div class="wiki-body"><p>Design reference: 26 October 2026. The primary use case is private Telegram groups
-and channels accessible to the connected accounts. This document separates
-implemented behavior, platform boundaries and future work. A target architecture
-item is not a claim that the feature already exists.</p>
+<article class="guide-content"><p class="eyebrow">Reference / Collect</p><h1>Features and limits</h1><p class="guide-outcome">The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.</p><div class="wiki-body"><p>TgWitness preserves Telegram conversations accessible to connected accounts,
+records observed changes and prepares verifiable exports. This reference describes
+the collection model, current workflows and their boundaries.</p>
 <h2 id="standalone-application">Standalone application<a class="anchor" href="#standalone-application" aria-label="Link to this section">#</a></h2>
 <p>TgWitness has its own installation, data directory, and release lifecycle. The bundled
 web interface handles setup and review; exported records can be used independently.</p>
 <p>The operator connects their accounts, chooses sources visible to each, and obtains
 a saved observation journal. The panel exposes content, saved changes, observation
 provenance and known gaps. Another investigator can verify the exported material.</p>
-<p>Four distinct states matter: account authorization, access to a source, a working
-collector, and the extent to which delivery completeness is established. None of
-the first three automatically proves the fourth. A quiet group is not necessarily
-a failed collector.</p>
+<p>The panel distinguishes account authorization, access to a source, collector
+activity and recorded coverage. Review those states together when assessing an
+interval with few messages or a connection problem.</p>
 <h2 id="shared-investigations">Shared investigations<a class="anchor" href="#shared-investigations" aria-label="Link to this section">#</a></h2>
 <p>An administrator can issue <a href="../access/">access tokens</a> scoped to workspaces and
-individual chats, with seven permissions, IP restrictions, expiry, sign-in limits
+individual chats, with per-action permissions, IP restrictions, expiry, sign-in limits
 and session control. A read-only reviewer can inspect a case without receiving
 Telegram authorization or the main panel key. Chat-limited access stays separate
 from account-wide settings and full-journal exports.</p>
@@ -61,6 +59,9 @@ External HTTP requests have a separate route and off switch.</p>
 <a href="../mcp/">read-only MCP</a>, <a href="../media-analysis/">local OCR/transcription</a> and
 <a href="../webhooks/">outgoing webhooks</a> are included in 0.7.1. Analytical reports and recognized text stay separate
 from captured events.</p>
+<p><a href="../case-board/">Case Board</a> adds source-linked bookmarks, quotes, notes and
+collections within a workspace. The <a href="../case-reports/">report constructor</a> selects
+material, sections and one of eight designs for supported HTML/PDF exports.</p>
 <h2 id="optional-extras">Optional extras<a class="anchor" href="#optional-extras" aria-label="Link to this section">#</a></h2>
 <p>Everyday setup is account → sources → observation. <strong>Extras</strong> is a separate destination
 with a Telegram witness bot and a GitHub capture preview. Each states its availability and requirements before showing
@@ -103,13 +104,17 @@ links or real sessions in public fixtures.</p>
 authorization across workspaces is rejected. A journal already bound to one Telegram
 account cannot be reassigned to another; reconnecting the same account is allowed.
 This preserves account identity and the relevant message-ID scope.</p>
-<p>There is no fixed number and no measured throughput guarantee. Workspaces share a
-Python process and event loop. Separate account workers remain future work. For
-current process isolation, use separate installations, ports and data directories.</p>
+<p>The application sets no fixed workspace count. Each workspace runs its own collector
+tasks for connection monitoring, media downloads, rechecks and new-chat intake within
+a shared Python process and event loop. Throughput depends on the workload. For
+process isolation, use separate installations, ports and data directories.</p>
 <p>Assign each account sources it can access. Different accounts may observe the same
 group, but their observations remain separate and retain their origin. Two accounts
-on one operator-controlled machine are not two independent witnesses. Exports are
-per workspace; a merged case package or global Telegram timeline is not implemented.</p>
+on one operator-controlled machine are not two independent witnesses. <strong>Export group</strong>
+bundles the separately signed workspace ZIPs with a signed file list containing their
+workspace IDs, hashes and signing-key fingerprints. Each journal retains its own
+boundary. Build a combined cross-workspace timeline in case notes or analysis tools,
+retaining those source references.</p>
 <h2 id="capture-and-attribution">Capture and attribution<a class="anchor" href="#capture-and-attribution" aria-label="Link to this section">#</a></h2>
 <p>Sources provides per-account switches for new messages, edits, deletions, reactions
 and membership. Presets retain either all categories or messages/edits/deletions.
@@ -131,7 +136,7 @@ separate-update switches. There are no per-group category overrides yet.</p>
 <tr>
 <td>Message</td>
 <td>Text, peer/message IDs, sender metadata, replies and original update envelope</td>
-<td>No publicly verifiable Telegram signature for the message</td>
+<td>Preserved as an account-visible observation signed by the collector</td>
 </tr>
 <tr>
 <td>Edit</td>
@@ -144,9 +149,9 @@ separate-update switches. There are no per-group category overrides yet.</p>
 <td>Usually no deleter or precise action time</td>
 </tr>
 <tr>
-<td>Unscoped deletion</td>
-<td>Original account-level notice without guessing the peer</td>
-<td>Strict correlation with previously saved account-scoped IDs is future work</td>
+<td>Account-level deletion notice</td>
+<td>Original notice; resolved records include the saved chat and correlation method</td>
+<td>Requires exactly one previously saved private-chat or ordinary-group match in scope; other IDs stay <code>deletion.unscoped</code>. Channel and supergroup IDs are excluded from this correlation</td>
 </tr>
 <tr>
 <td>Reaction</td>
@@ -160,8 +165,8 @@ separate-update switches. There are no per-group category overrides yet.</p>
 </tr>
 <tr>
 <td>Admin actions</td>
-<td>Only relevant delivered updates</td>
-<td>Separate admin-log polling is not implemented</td>
+<td>Relevant delivered updates and an admin-log snapshot in channel/supergroup chat exports</td>
+<td>The export reads the log when available to the exporting admin account; continuous admin-log polling is outside this path</td>
 </tr>
 <tr>
 <td>Attachment</td>
@@ -207,12 +212,14 @@ sources</strong>. This is not a limit of ten selected groups or a completeness g
 <td>Implemented</td>
 </tr>
 <tr>
-<td>Priority observation</td>
-<td>Additional difference checks for a bounded source set</td>
-<td>Not implemented as a user mode</td>
+<td>Priority rechecks</td>
+<td>Starred sources use their own configurable interval and take precedence in each bounded recheck pass</td>
+<td>Implemented with history and message queries</td>
 </tr>
 </tbody>
 </table></div>
+<p>The priority star controls these rechecks. Additional <code>updates.getChannelDifference</code>
+short polling is not exposed as a separate user mode.</p>
 <p>Arbitrary high-frequency polling, ignoring FloodWait or assuming linear capacity
 from extra accounts is not a valid sizing model. Default limits are the
 first 1,000 listed dialogs, up to 500 messages per history snapshot,
@@ -283,12 +290,12 @@ A retained local checkpoint can detect rollback to an earlier journal prefix.</p
 </tbody>
 </table></div>
 <p>RFC 3161 request preparation and OpenSSL response verification are implemented.
-Automatic submission is not. A request or local signature carrying the machine's
-time is not an independent timestamp. See <a href="../timestamp/">TIMESTAMP.md</a>.</p>
-<p>An operator controlling the collector and signing key can fabricate new signed
-observations. The signatures do not establish Telegram origin, truth or automatic
-legal admissibility. Stronger custody requires independent checkpoint/time storage,
-key access controls, transfer records and verification from trusted software.</p>
+Evidence mode also submits checkpoint hashes to configured timestamp services.
+Retain and verify the authority's response to establish an independent time anchor.
+See <a href="../timestamp/">TIMESTAMP.md</a>.</p>
+<p>Retain checkpoints independently, control access to signing keys, keep transfer
+records and verify exports with trusted software. The <a href="../evidence/#verification-scope">verification scope</a>
+explains how those checks complement one another and which trust assumptions apply.</p>
 <h2 id="export-deployment-and-handoff">Export, deployment and handoff<a class="anchor" href="#export-deployment-and-handoff" aria-label="Link to this section">#</a></h2>
 <p>A signed ZIP contains original JSONL, CSV, HTML, preserved attachments, hashes, a
 signed manifest and a convenience verifier. It covers one workspace and a fixed full
@@ -321,13 +328,11 @@ See <a href="../connection/">CONNECTION-SECURITY.md</a> and <a href="../operatio
 <li>Clean installation on the intended OS/container matrix and verified backup restore.</li>
 <li>Independent review of security, signatures and attribution/evidence claims.</li>
 </ol>
-<p>Admin-log polling, additional reactor lists, priority polling, separate workers,
-application-wide encryption remain future work. Scoped panel access is described
-in <a href="../access/">access and permissions</a>. Version 0.6 supports
+<p>Scoped panel access is described in <a href="../access/">access and permissions</a>. Version 0.6 supports
 the bounded single-account TData and account-file import described in <a href="../accounts/">ACCOUNTS.md</a>.
 Review Telegram API terms before publication. Research references and platform
 findings are in <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md">RESEARCH.md</a>.</p></div></article>
-<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/PRODUCT.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../how-it-works/"><span>Next step</span><strong>How the evidence works →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/PRODUCT.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../case-board/"><span>Next step</span><strong>Case Board reference →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
 </main>
 <aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#standalone-application">Standalone application</a><a href="#shared-investigations">Shared investigations</a><a href="#archive-tools">Archive tools</a><a href="#optional-extras">Optional extras</a><a href="#protocol-and-private-sources">Protocol and private sources</a><a href="#multiple-accounts">Multiple accounts</a><a href="#capture-and-attribution">Capture and attribution</a><a href="#capacity-and-telegram-limits">Capacity and Telegram limits</a><a href="#reliability-and-recovery">Reliability and recovery</a><a href="#evidence-model">Evidence model</a><a href="#export-deployment-and-handoff">Export, deployment and handoff</a><a href="#stable-release-criteria">Stable release criteria</a></aside>
 </div>

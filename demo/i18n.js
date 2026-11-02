@@ -31,7 +31,6 @@ function walkPage(visit,root=document.body){
       const value=el.getAttribute(name);
       if(value&&wordy(value))visit({key:normal(value),apply:text=>el.setAttribute(name,text)});
     }
-    // Textareas have translatable labels, but their text and value belong to the user.
     if(el.tagName==="TEXTAREA")return;
     if(el.children.length&&inlineOnly(el)&&wordy(el.textContent)){
       if(visit({key:normal(el.innerHTML),apply:html=>{el.innerHTML=html;}},true))return;
@@ -59,8 +58,9 @@ function translatePage(){
   const title=DICT[normal(document.title)];if(typeof title==="string")document.title=title;
   walkPage(item=>{const text=DICT[item.key];if(typeof text!=="string")return false;item.apply(text);return true;});
 }
-function setLanguage(lang){
+async function setLanguage(lang){
   if(!Object.hasOwn(LANGUAGES,lang))return;
+  try{await window.tgwSaveLanguage?.(lang);}catch(error){window.alert(error.message);return;}
   document.cookie="tgwitness-lang="+encodeURIComponent(lang)+"; path=/; max-age=31536000; SameSite=Strict";
   const guideRoot=document.body.dataset.guideRoot;
   const url=guideRoot?new URL(lang==="am"?"demo/dedicated-account.html":(lang==="en"?"":lang+"/")+"docs/dedicated-account/",new URL(guideRoot,location.href)):new URL(location.href);
@@ -68,6 +68,7 @@ function setLanguage(lang){
   url.hash=location.hash;location.assign(url.href);
 }
 translatePage();
+if(new URL(location.href).searchParams.has('lang'))document.cookie='tgwitness-lang='+encodeURIComponent(LANG)+'; path=/; max-age=31536000; SameSite=Strict';
 document.querySelectorAll("[data-site-doc]").forEach(link=>{
   const lang=Object.hasOwn(PANEL_LANGUAGES,LANG)&&LANG!=="en"?LANG+"/":"";
   link.href="https://phishdestroy.github.io/TgWitness/"+lang+"docs/reference/"+link.dataset.siteDoc+"/";

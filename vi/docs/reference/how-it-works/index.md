@@ -6,7 +6,7 @@ Các khái niệm về chuỗi băm, chữ ký, điểm kiểm tra và nhân ch�
 
 TgWitness lưu giữ những gì tài khoản thu thập đã quan sát được, liên kết các quan sát đó vào một nhật ký có chữ ký và cho phép người khác xác minh bản xuất dữ liệu dựa trên một khóa đáng tin cậy cùng với một điểm kiểm tra đã được lưu giữ trước đó.
 
-[Trang web tài liệu địa phương](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) này bổ sung các ví dụ tương tác tại `/docs/concepts/`, cùng công cụ khám phá quyết định tại các điểm kiểm tra tại `/docs/witness/`. Tất cả các tin nhắn ví dụ, số lượng và thời gian trễ đều là hư cấu. Các giá trị băm trong môi trường thử nghiệm chuỗi được tính toán bằng SHA-256 ngay trong trình duyệt. Không có dữ liệu nào được gửi đến Telegram.
+[Trang web tài liệu địa](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) [phương](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) bổ sung các ví dụ tương tác tại `/docs/concepts/`, công cụ khám phá quyết định tại `/docs/witness/`, và các hướng dẫn chi tiết về [Case Board](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/), [thiết kế báo cáo](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/) và [trích xuất quá trình bàn giao](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#handover-extract). Tất cả các tin nhắn ví dụ, số lượng và thời gian trễ đều là hư cấu. Các giá trị băm trong môi trường thử nghiệm chuỗi được tính toán bằng SHA-256 trong trình duyệt. Không có dữ liệu nào được gửi đến Telegram.
 
 ## Một tin nhắn thay đổi; các quan sát được tích lũy
 
@@ -92,7 +92,7 @@ Sơ đồ quy trình · Trình thu thập / phiên tài khoản / khóa A → Đ
 
 TgWitness ghi lại các thao tác khôi phục, sự thay đổi người đứng đầu tại cùng một số đếm, các khóa bị thay đổi, các câu trả lời không hợp lệ và các phản hồi bị thiếu. Chỉ riêng số đếm lớn hơn không đủ để khẳng định rằng mọi bản ghi trước đó vẫn giữ nguyên; quý vị hãy so sánh tệp xuất với các điểm kiểm tra được lưu giữ. Việc triển khai TgWitness trên một máy chủ khác giúp tránh ảnh hưởng từ sự cố ngừng hoạt động của máy chủ thu thập dữ liệu; việc có một nhà điều hành riêng biệt mang lại sự độc lập bổ sung.
 
-Witness xác nhận trạng thái nhật ký được báo cáo bởi bộ thu thập. Công cụ này không quan sát độc lập tất cả các tin nhắn trên Telegram. Vui lòng tham khảo [phần thiết lập Witness](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/).
+Witness xác nhận trạng thái nhật ký được báo cáo bởi Collector. Sử dụng kiểm tra giao hàng có kiểm soát để đo lường các hành động Telegram nào đã đến tài khoản thu thập. Xem [phần thiết lập Witness](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/).
 
 ## Kiểm tra khả năng xử lý các hành động đã biết
 
@@ -106,14 +106,14 @@ Chỉ các hành động phù hợp với dự kiến mới được tính; các
 
 [Quy trình điều tra đầy đủ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/) được trình bày theo diễn biến của một sự cố xảy ra trên kênh, nhóm, bot và cuộc trò chuyện riêng tư:
 
-1. Kích hoạt Chế độ điều tra toàn bộ tài khoản và lập danh mục tất cả các cuộc trò chuyện có thể truy cập được.
+1. Trên tài khoản thu thập chuyên dụng, hãy bật chế độ Điều tra toàn bộ tài khoản và lập danh sách các cuộc trò chuyện có thể truy cập. Sử dụng các cuộc trò chuyện đã chọn hoặc một thư mục cho tài khoản chính.
 2. Lấy các bản chụp nhanh nhật ký, lịch sử đầy đủ theo từng cuộc trò chuyện và các tệp đính kèm được lưu giữ.
 3. Lưu lại các thay đổi theo thời gian thực và mọi tương tác có chủ đích trên bảng điều khiển kèm theo biên nhận tương ứng.
 4. Theo dõi các ID người gửi dạng số, mối quan hệ trả lời, các địa chỉ nhận lặp lại và băm tệp thông qua các bản ghi được trích dẫn và hồ sơ cá nhân.
-5. Tái tạo dòng thời gian liên cuộc trò chuyện với cả dấu thời gian và các khoảng trống rõ ràng.
+5. Thêm ghi chú và bộ sưu tập được liên kết với nguồn trong Case Board. Tái tạo dòng thời gian xuyên các cuộc trò chuyện với cả dấu thời gian và các khoảng trống rõ ràng.
 6. So sánh các không gian làm việc của các tài khoản khác nhau trong khi vẫn giữ nguyên nguồn gốc và khóa của từng tài khoản.
 7. Tổng hợp và xác minh các nhật ký có chữ ký, hồ sơ người dùng cũng như các bản xuất lịch sử cùng với các ghi chú vụ việc.
 
-Hướng dẫn `/docs/cases/` trên trang web này bao gồm bản đồ vụ việc tương tác cùng các trường hợp cụ thể liên quan đến tranh chấp giữa các bot, tin nhắn bị xóa và việc người tham gia thay đổi tên. Ghi chú vụ việc và phân tích liên không gian làm việc được thực hiện bên ngoài; ứng dụng không tự động tạo ra sơ đồ điều tra tổng thể hay kho lưu trữ vụ việc hợp nhất.
+Hướng dẫn tại `/docs/cases/` trên trang web bao gồm bản đồ vụ việc tương tác và các biến thể cho các tranh chấp liên quan đến bot, tin nhắn bị xóa và người tham gia thay đổi tên. Case Board lưu trữ ghi chú và bộ sưu tập trong một không gian làm việc. Tính năng xuất theo nhóm thu thập các gói không gian làm việc riêng biệt; việc tương quan giữa các không gian làm việc và dòng thời gian tổng hợp vẫn thuộc phạm vi công việc của nhà phân tích.
 
 [Các công việc đã hoàn tất và các công việc còn lại](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/) · [Xuất và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#investigation-handoff) · [Bắt đầu với một tài khoản](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)

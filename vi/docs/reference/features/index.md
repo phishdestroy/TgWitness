@@ -2,9 +2,9 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/
 
-Những tính năng mà TgWitness hiện đang triển khai, những hạn chế của nền tảng Telegram và những công việc còn cần thực hiện trong tương lai.
+Mô hình thu thập hiện tại, quy trình làm việc với nhiều tài khoản, tính năng xuất dữ liệu và các giới hạn vận hành của TgWitness.
 
-Tham chiếu thiết kế: ngày 26 tháng 10 năm 2026. Trường hợp sử dụng chính là các nhóm và kênh Telegram riêng tư mà các tài khoản được kết nối có thể truy cập. Tài liệu này phân biệt rõ giữa hành vi đã được triển khai, giới hạn của nền tảng và các công việc trong tương lai. Một mục kiến trúc mục tiêu không đồng nghĩa với việc tính năng đó đã tồn tại.
+TgWitness lưu trữ các cuộc trò chuyện trên Telegram mà các tài khoản được kết nối có thể truy cập, ghi lại các thay đổi được quan sát và chuẩn bị các tệp xuất có thể xác minh. Tài liệu tham khảo này mô tả mô hình thu thập, các quy trình làm việc hiện tại và phạm vi áp dụng của chúng.
 
 ## Ứng dụng độc lập
 
@@ -12,17 +12,19 @@ TgWitness có quy trình cài đặt, thư mục dữ liệu và chu kỳ phát 
 
 Người vận hành kết nối các tài khoản của mình, chọn các nguồn mà mỗi tài khoản có thể truy cập, và nhận được một sổ nhật ký quan sát đã được lưu trữ. Bảng điều khiển hiển thị nội dung, các thay đổi đã lưu, nguồn gốc của quan sát và các lỗ hổng đã biết. Một điều tra viên khác có thể xác minh tài liệu đã xuất ra.
 
-Có bốn trạng thái riêng biệt cần được xem xét: ủy quyền tài khoản, quyền truy cập vào nguồn, một bộ thu thập đang hoạt động, và mức độ hoàn chỉnh của việc chuyển phát được xác định. Không có trạng thái nào trong ba trạng thái đầu tiên tự động chứng minh được trạng thái thứ tư. Một nhóm im lặng không nhất thiết có nghĩa là bộ thu thập đã thất bại.
+Bảng điều khiển phân biệt giữa ủy quyền tài khoản, quyền truy cập vào nguồn, hoạt động của trình thu thập và phạm vi ghi lại. Hãy xem xét các trạng thái này cùng nhau khi đánh giá một khoảng thời gian có ít tin nhắn hoặc gặp sự cố kết nối.
 
 ## Các cuộc điều tra chung
 
-Quản trị viên có thể cấp [các mã thông báo truy cập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/) được giới hạn phạm vi cho các không gian làm việc và các cuộc trò chuyện riêng lẻ, kèm theo bảy quyền truy cập, hạn chế địa chỉ IP, thời hạn hiệu lực, giới hạn đăng nhập và kiểm soát phiên làm việc. Người xem chỉ đọc có thể kiểm tra một vụ việc mà không cần nhận sự ủy quyền từ Telegram hay khóa bảng điều khiển chính. Quyền truy cập giới hạn theo cuộc trò chuyện được tách biệt với các cài đặt chung của tài khoản và tính năng xuất toàn bộ nhật ký.
+Quản trị viên có thể cấp [mã thông báo truy cập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/) trong phạm vi không gian làm việc và các cuộc trò chuyện riêng lẻ, với quyền truy cập theo từng hành động, hạn chế IP, thời hạn hiệu lực, giới hạn đăng nhập và kiểm soát phiên làm việc. Người đánh giá chỉ có quyền đọc có thể kiểm tra một vụ việc mà không cần xác thực Telegram hoặc khóa bảng điều khiển chính. Quyền truy cập giới hạn trong cuộc trò chuyện được tách biệt với các cài đặt toàn tài khoản và việc xuất toàn bộ nhật ký.
 
 MTProxy tự động duy trì các tuyến kết nối Telegram hoạt động từ bốn nguồn công khai hoặc danh mục của nhà điều hành. [Chế độ IP](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/#ip-modes) quyết định liệu trong trường hợp lỗi, hệ thống phải chờ proxy khác hay có thể sử dụng tuyến kết nối trực tiếp được cho phép rõ ràng. Các yêu cầu HTTP bên ngoài có tuyến kết nối riêng biệt và công tắc tắt.
 
 ## Công cụ lưu trữ
 
 [Tính năng thu thập lịch sử](https://phishdestroy.github.io/TgWitness/vi/docs/reference/history/), [tìm kiếm và phân tích kho lưu trữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/analysis/),[MCP chỉ đọc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/), [OCR/chuyển đổi văn bản cục bộ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/media-analysis/) và[webhook gửi đi](https://phishdestroy.github.io/TgWitness/vi/docs/reference/webhooks/) được bao gồm trong 0.7.1. Các báo cáo phân tích và văn bản được nhận diện được tách biệt với các sự kiện đã ghi lại.
+
+[Case Board](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/) cho phép thêm dấu trang liên kết với nguồn, trích dẫn, ghi chú và bộ sưu tập trong không gian làm việc. [Trình tạo](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/) [báo](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/) [cáo](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/) cho phép chọn nội dung, các phần và một trong tám mẫu thiết kế để xuất sang định dạng HTML/PDF được hỗ trợ.
 
 ## Các tính năng bổ sung tùy chọn
 
@@ -53,9 +55,9 @@ Bảng điều khiển này hỗ trợ bất kỳ số lượng không **gian l�
 
 Việc chuyển đổi không gian làm việc đang hiển thị sẽ không làm dừng hoạt động của bộ thu thập khác. Việc ủy quyền tài khoản trùng lặp giữa các không gian làm việc sẽ bị từ chối. Một sổ nhật ký đã được liên kết với một tài khoản Telegram không thể được gán lại cho tài khoản khác; tuy nhiên, việc kết nối lại cùng một tài khoản vẫn được phép. Điều này giúp duy trì danh tính tài khoản và phạm vi ID tin nhắn liên quan.
 
-Không có số lượng cố định và không có đảm bảo về thông lượng được đo lường. Các không gian làm việc chia sẻ chung một quá trình Python và vòng lặp sự kiện. Việc triển khai các công cụ xử lý tài khoản riêng biệt vẫn là nhiệm vụ trong tương lai. Để tách biệt các quá trình hiện tại, vui lòng sử dụng các bản cài đặt, cổng và thư mục dữ liệu riêng biệt.
+Ứng dụng không giới hạn số lượng không gian làm việc. Mỗi không gian làm việc chạy các tác vụ thu thập dữ liệu riêng để giám sát kết nối, tải xuống phương tiện, kiểm tra lại và thu thập các cuộc trò chuyện mới trong một quy trình Python và vòng lặp sự kiện chung. Thông lượng phụ thuộc vào khối lượng công việc. Để cách ly quy trình, hãy sử dụng các bản cài đặt, cổng và thư mục dữ liệu riêng biệt.
 
-Gán cho mỗi tài khoản các nguồn mà tài khoản đó có thể truy cập. Các tài khoản khác nhau có thể theo dõi cùng một nhóm, nhưng các quan sát của chúng vẫn được tách biệt và giữ nguyên nguồn gốc. Hai tài khoản trên cùng một máy do một người vận hành kiểm soát không được coi là hai nhân chứng độc lập. Việc xuất dữ liệu được thực hiện theo từng không gian làm việc; tính năng gói hồ sơ vụ việc hợp nhất hoặc dòng thời gian Telegram toàn cầu hiện chưa được triển khai.
+Gán cho mỗi tài khoản các nguồn mà tài khoản đó có thể truy cập. Các tài khoản khác nhau có thể quan sát cùng một nhóm, nhưng các quan sát của chúng vẫn tách biệt và giữ nguyên nguồn gốc. Hai tài khoản trên cùng một máy do người vận hành kiểm soát không phải là hai nhân chứng độc lập. **Tính năng xuất nhóm** sẽ gộp các tệp ZIP không gian làm việc được ký riêng lẻ với một danh sách tệp đã ký chứa ID không gian làm việc, băm và dấu vân tay khóa ký của chúng. Mỗi nhật ký giữ nguyên ranh giới riêng của mình. Xây dựng dòng thời gian kết hợp xuyên không gian làm việc trong ghi chú vụ việc hoặc công cụ phân tích, vẫn giữ nguyên các tham chiếu nguồn đó.
 
 ## Ghi lại và xác định nguồn gốc
 
@@ -63,13 +65,13 @@ Tính năng Nguồn cung cấp các tùy chọn riêng cho từng tài khoản �
 
 | Nội dung | Đã ghi lại ngay lập tức | Phạm vi |
 | --- | --- | --- |
-| Thông điệp | Nội dung văn bản, ID người dùng/ID tin nhắn, siêu dữ liệu người gửi, các phản hồi và gói tin cập nhật gốc | Tin nhắn này không có chữ ký Telegram có thể xác minh công khai |
+| Thông điệp | Nội dung văn bản, ID người dùng/ID tin nhắn, siêu dữ liệu người gửi, các phản hồi và gói tin cập nhật gốc | Được lưu giữ dưới dạng một quan sát có thể xem được trong tài khoản và được người thu thập ký tên |
 | Chỉnh sửa | Phiên bản mới được ghi nhận và bất kỳ phiên bản nào đã được lưu trước đó | Các thao tác chỉnh sửa tạm thời trong thời gian hệ thống ngừng hoạt động có thể bị mất; người gửi không nhất thiết phải là người chỉnh sửa |
 | Việc xóa | Thông báo và nội dung đã được ghi lại trước đó (nếu có) | Thông thường không ghi nhận người xóa hoặc thời gian thực hiện hành động cụ thể |
-| Việc xóa không được xác định phạm vi | Thông báo gốc ở cấp tài khoản mà không cần phỏng đoán về đối tượng liên quan | Việc đảm bảo sự tương quan chặt chẽ với các ID phạm vi tài khoản đã được lưu trữ trước đó là nhiệm vụ cần thực hiện trong tương lai |
+| Thông báo xóa tài khoản | Thông báo gốc; các bản ghi đã được giải quyết bao gồm cuộc trò chuyện đã lưu và phương pháp tương quan | Yêu cầu chính xác một kết quả khớp từ cuộc trò chuyện riêng tư hoặc nhóm thông thường đã được lưu trước đó trong phạm vi; các ID khác sẽ được đánh dấu là “`deletion.unscoped`”. ID kênh và siêu nhóm bị loại trừ khỏi mối tương quan này |
 | Phản hồi | Số liệu thống kê và danh tính gần đây được hiển thị rõ ràng | Danh sách đầy đủ các máy chủ phản hồi hiện có cần phải thực hiện các truy vấn riêng biệt; các kênh có thể ẩn danh tính |
 | Thành viên | Thông báo dịch vụ và các bản cập nhật được gửi đến người tham gia | Khả năng hiển thị phụ thuộc vào vai trò và loại cuộc trò chuyện; việc thiếu các sự kiện không đồng nghĩa với việc chúng không tồn tại |
-| Các thao tác của quản trị viên | Chỉ cung cấp các bản cập nhật có liên quan | Chức năng lấy mẫu nhật ký quản trị riêng biệt hiện chưa được triển khai |
+| Các thao tác của quản trị viên | Các bản cập nhật liên quan đã được cung cấp và bản chụp nhanh nhật ký quản trị trong các tệp xuất từ cuộc trò chuyện kênh/siêu nhóm | Quá trình xuất dữ liệu sẽ đọc nhật ký khi có sẵn cho tài khoản quản trị viên thực hiện xuất; việc kiểm tra liên tục nhật ký quản trị nằm ngoài quy trình này |
 | Tệp đính kèm | Mô tả phiên bản gốc, số byte đã tải xuống/SHA-256 và kết quả các lần thử | Một tệp đã biến mất có thể không thể khôi phục được; phiên bản mới nhất sẽ không được thay thế |
 | Lịch sử | Ảnh chụp màn hình chi tiết các tin nhắn hiện đang hiển thị | Không tái tạo lại toàn bộ các nội dung đã được chỉnh sửa hoặc xóa bỏ |
 | Quy trình thu thập dữ liệu | Khởi động/dừng, tín hiệu hoạt động, lỗi, cài đặt, phạm vi và biên nhận chương trình | Báo cáo tự nguyện, không phải là chứng nhận quy trình độc lập |
@@ -85,7 +87,9 @@ Telegram phân biệt giữa việc gửi tin nhắn thụ động và việc th
 | Chế độ | Mục đích | Tình trạng |
 | --- | --- | --- |
 | Quan sát tiêu chuẩn | Ghi lại các bản cập nhật được gửi từ các nguồn đã chọn | Đã triển khai |
-| Quan sát ưu tiên | Các kiểm tra sự khác biệt bổ sung đối với tập nguồn có giới hạn | Chưa được triển khai dưới dạng chế độ người dùng |
+| Kiểm tra lại các nội dung ưu tiên | Các nguồn được đánh dấu sao sử dụng khoảng thời gian có thể tùy chỉnh riêng và được ưu tiên trong mỗi lần kiểm tra lại có giới hạn | Được triển khai với các truy vấn lịch sử và tin nhắn |
+
+Biểu tượng sao ưu tiên kiểm soát các lần kiểm tra lại này. Các lần thăm dò ngắn bổ sung thông qua ``updates.getChannelDifference` ` không được hiển thị dưới dạng chế độ người dùng riêng biệt.
 
 Việc lấy mẫu ngẫu nhiên với tần suất cao, bỏ qua FloodWait hoặc giả định dung lượng tuyến tính từ các tài khoản bổ sung không phải là mô hình xác định quy mô hợp lệ. Các giới hạn mặc định là 1.000 cuộc đối thoại đầu tiên được liệt kê, tối đa 500 tin nhắn cho mỗi bản chụp lịch sử, 1–2.000 MiB cho mỗi tệp thu thập theo loại, và 4 GiB nội dung ZIP đã ký không nén; mỗi giới hạn này có thể được điều chỉnh cho từng không gian làm việc trong **phần Thông số**. Các tệp xuất không có giới hạn cố định về số lượng sự kiện. Chế độ dự phòng trình duyệt bị giới hạn ở mức 128 MiB theo mặc định; CLI truyền trực tuyến có giới hạn truyền tải có thể cấu hình, mặc định là 5 GiB.
 
@@ -114,9 +118,9 @@ Biên bản quá trình có chữ ký chứa ID chạy ngẫu nhiên; các phiê
 | Đo lường kích thước tệp chương trình | Báo cáo tự đánh giá của Collector về các tệp đã được đo lường |
 | Phản hồi độc lập hợp lệ từ TSA | Sự tồn tại của các byte cụ thể tại thời điểm TSA dựa trên các giả định tin cậy rõ ràng |
 
-Việc chuẩn bị yêu cầu theo RFC 3161 và xác minh phản hồi bằng OpenSSL đã được triển khai. Tính năng gửi tự động thì chưa được triển khai. Một yêu cầu hoặc chữ ký cục bộ mang thời gian của máy không phải là dấu thời gian độc lập. Vui lòng tham khảo [tệp TIMESTAMP.md](https://phishdestroy.github.io/TgWitness/vi/docs/reference/timestamp/).
+Việc chuẩn bị yêu cầu theo RFC 3161 và xác minh phản hồi bằng OpenSSL đã được triển khai. Chế độ bằng chứng (Evidence mode) cũng gửi các giá trị băm điểm kiểm tra (checkpoint hashes) đến các dịch vụ đóng dấu thời gian đã được cấu hình. Lưu giữ và xác minh phản hồi từ cơ quan có thẩm quyền để thiết lập một mốc thời gian độc lập. Xem [TIMESTAMP.md](https://phishdestroy.github.io/TgWitness/vi/docs/reference/timestamp/).
 
-Người vận hành kiểm soát bộ thu thập dữ liệu và khóa ký có thể tạo ra các bằng chứng mới đã được ký. Các chữ ký này không xác nhận nguồn gốc từ Telegram, tính xác thực hay tính hợp lệ pháp lý tự động. Để đảm bảo việc lưu giữ dữ liệu an toàn hơn, cần có điểm kiểm tra độc lập/lưu trữ theo thời gian, các biện pháp kiểm soát truy cập khóa, hồ sơ chuyển giao và quá trình xác minh từ phần mềm đáng tin cậy.
+Lưu giữ các điểm kiểm tra một cách độc lập, kiểm soát quyền truy cập vào khóa ký, lưu giữ hồ sơ chuyển giao và xác minh các tệp xuất bằng phần mềm đáng tin cậy. [Phạm vi](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) [xác](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) [minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) giải thích cách các kiểm tra này bổ sung cho nhau và các giả định về độ tin cậy nào được áp dụng.
 
 ## Xuất dữ liệu, triển khai và bàn giao
 
@@ -140,4 +144,4 @@ Trước khi phát hành phiên bản ổn định, cần làm rõ:
 6. Quá trình cài đặt sạch trên ma trận hệ điều hành/môi trường container mục tiêu và đã xác minh khả năng khôi phục từ bản sao lưu.
 7. Đánh giá độc lập về các vấn đề an ninh, chữ ký điện tử cũng như các tuyên bố liên quan đến nguồn gốc và bằng chứng.
 
-Việc lấy dữ liệu nhật ký quản trị, danh sách máy chủ phản hồi bổ sung, lấy dữ liệu ưu tiên, các công cụ xử lý riêng biệt, cũng như mã hóa toàn bộ ứng dụng vẫn là những công việc cần thực hiện trong tương lai. Quyền truy cập theo phạm vi bảng điều khiển được mô tả trong phần [“Quyền truy cập và quyền hạn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/)”. Phiên bản 0.6 hỗ trợ TData giới hạn cho một tài khoản duy nhất và tính năng nhập tệp tài khoản được mô tả trong [tệp ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/). Vui lòng xem lại các điều khoản API của Telegram trước khi công bố. Các tài liệu tham khảo nghiên cứu và kết quả phân tích nền tảng được trình bày trong [tệp RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md).
+Quyền truy cập bảng điều khiển có giới hạn được mô tả trong phần [“Truy cập và quyền hạn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/)”. Phiên bản 0.6 hỗ trợ TData giới hạn cho một tài khoản duy nhất và tính năng nhập tệp tài khoản được mô tả trong [ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/). Vui lòng xem lại các điều khoản API của Telegram trước khi xuất bản. Các tài liệu tham khảo nghiên cứu và kết quả nghiên cứu về nền tảng có trong [RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md).

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/
 
-[Ochiq manba / v0.7.1](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/)
+[Ochiq manba / v0.8.0](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/)
 
 Telegram xabarlarini yozib oling, ularning o'zgartirishlarini saqlang va imzolangan yozuvni eksport qiling.
 
@@ -60,6 +60,8 @@ TgWitness / Imzolangan eksportlarMAHALLI ISH JOYI
 
 04 / Imzolangan eksportlar Jurnalni o'zingiz bilan olib yuring, manifest va mustaqil tasdiqlovchi bilan.
 
+[Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/case-board/), [hisobot dizayni](https://phishdestroy.github.io/TgWitness/uz/docs/reports/) va [ulashish nusxasi](https://phishdestroy.github.io/TgWitness/uz/docs/handover/) orqali saqlangan yozuvni kuzatib chiqing. [Hisob ma'lumotlari guruhlarini](https://phishdestroy.github.io/TgWitness/uz/docs/groups/) birgalikda [ko'rib chiqing](https://phishdestroy.github.io/TgWitness/uz/docs/groups/).
+
 01 / QAYD ETISH
 
 ### Doirani siz belgilaysiz.
@@ -84,7 +86,8 @@ Imzolangan ZIP, saqlangan fayllar va oflayn hisobot. Ixtiyoriy parol bilan himoy
 
 [ni eksport qiling va tasdiqlang](https://phishdestroy.github.io/TgWitness/uz/docs/exports/)
 
-## Bir baytni o'zgartiring. Zanjir sizga xabar beradi.
+## Bir baytni o'zgartiring.
+Verifikatsiya sizga xabar beradi.
 
 Har bir voqea oldingi xeshga bog'lanadi va Ed25519 imzusi bilan birga keladi.
 
@@ -94,7 +97,7 @@ Har bir voqea oldingi xeshga bog'lanadi va Ed25519 imzusi bilan birga keladi.
 
 ![Alohida saqlangan tekshiruv nuqtasi qabul qiluvchiga eksport qilingan jurnalni avvalgi kuzatuv bilan solishtirish imkonini beradi.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-Har bir tekshirish mexanizmi nimani aniqlaydi va uning chegaralari qayerda ekanligini ko'ring.
+Hash qilingan fayldan alohida saqlangan tekshiruv nuqtasigacha bo'lgan tekshiruvlarni bajarishni kuzating.
 
 [sakkizta dalil darajasini o'rganing](https://phishdestroy.github.io/TgWitness/uz/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipIMZOLANGAN TO'PLAM
 
   Mustaqil tasdiqlashImzolangan manifest + mustaqil tasdiqlovchi
 
-Imzolar ishonchli kalitga nisbatan o'zgartirishlarni aniqlaydi. Ular Telegram manbasini isbotlamaydi va to'liq yozib olinishni kafolatlamaydi. Jurnal mazmuni va media fayllarni siz ta'minlagan shifrlangan saqlash joyiga joylashtirish kerak.
+Qabul qiluvchilar saqlangan yozuvlar va fayllarni ishonchli yig'uvchi kalitiga muvofiq tekshiradilar. Alohida saqlangan tekshirish nuqtasi ham avvalgi jurnal bilan uzluksizlikni tekshiradi. [Tasdiqlash bosqichlarini o'rganing.](https://phishdestroy.github.io/TgWitness/uz/docs/concepts/#layers)
 
 ## S3 nusxalari. Tashqi tekshiruvlar.
 
@@ -154,13 +157,13 @@ Jurnal va media`AES-256-GCM`S3 bilan mos ombor
 
 [S3 ni sozlang va nusxani tiklang](https://phishdestroy.github.io/TgWitness/uz/docs/exports/#s3)[Verifikatsiya tafsilotlarini o'qing](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-U eksport qilingan dekripsiya kaliti bo'lmasa ishlamaydi va mustaqil guvohni almashtirmaydi.
+**Qayta tiklash kaliti.** Eksport qilingan dekripsiya kalitini alohida saqlang, shunda shifrlangan nusxani tiklashingiz mumkin.
 
 ### Bildirishnomalar · Xabardor qilish
 
 Muammo bildirishnomalari, suhbat o'zgarishlari va kunlik xulosalar Apprise orqali: messenjerlar, elektron pochta yoki o'zingizning JSON webhook-ingiz orqali.
 
-U**qilmaydi.** U xabar matnini jo'natmaydi, agar siz parchalarni yoqmagan bo'lsangiz.
+**Qaysi ma'lumotni ulashishni tanlang.** Xabar parchalarini ulashish standart bo'yicha o'chirilgan; ishonadigan manzillaringiz uchun ularni yoqing.
 
  [Bildirishnoma manzillarini sozlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ U**qilmaydi.** U xabar matnini jo'natmaydi, agar siz parchalarni yoqmagan bo'lsa
 
 Vaqt tamg'asi tekshiruv nuqtalari hashlarini RFC 3161 va OpenTimestamps yordamida.
 
-**Qilmaydi.** Kutayotgan kalendar kvitansiyani tasdiqlangan Bitcoin vaqt belgisi sifatida qabul qilmaydi.
+**Natijani** tekshiring, vakolatli javobni **tasdiqlang** yoki OpenTimestamps kvitansiyasini tasdiqlangan Bitcoin isbotiga yangilang.
 
  [Timestamp dalillarini tekshiring](https://phishdestroy.github.io/TgWitness/uz/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ Vaqt tamg'asi tekshiruv nuqtalari hashlarini RFC 3161 va OpenTimestamps yordamid
 
 Alohida host imzolangan kuzatuvlarni saqlaydi va`TGW1` tekshiruv nuqtalarini e'lon qilishi mumkin.
 
-U **buni bajarmaydi:** bitta to'plovchi mezbonidagi ikki ish maydonini mustaqil guvohlarga aylantirmaydi.
+**Reference bo'limini ajrating.** Witness'ni boshqa hostda ishga tushiring va uning o'z imzolash kaliti hamda jurnalini saqlang.
 
  [guvohini sozlang](https://phishdestroy.github.io/TgWitness/uz/docs/witness/)
 
@@ -184,7 +187,7 @@ U **buni bajarmaydi:** bitta to'plovchi mezbonidagi ikki ish maydonini mustaqil 
 
 Qayta ishga tushirgandan keyin davom ettiring. Qayta tekshiruvlar va `coverage.json` tiklangan xabarlar va bo'shliqlarni ko'rsatadi.
 
-U**buni bajarmaydi:** u har bir o'tkazib yuborilgan tahrir yoki yo'qolgan xabarni qayta tiklamaydi.
+**Intervallni ko'rib chiqing:** tiklangan joriy xabarlarni qayd etilgan uzilishlar bilan birga ko'ring; ilgari yozib olingan versiyalar ham mavjud bo'ladi.
 
  [Uzluksizlik va bo'shliqlarni tekshirish](https://phishdestroy.github.io/TgWitness/uz/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ Manba ishga tushirish uchun Python 3.11+ talab etiladi. Windows ishga tushiruvch
 
 [Chiqarilishlarni ko'rib chiqing](https://github.com/phishdestroy/TgWitness/releases)
 
-Windowsda Python yo'qmi? [Portativ paketni yuklab oling](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), arxivni oching va`TgWitness.cmd` fayliga ikki marta boshingiz.
+Windowsda Python yo'qmi? [Portativ paketni yuklab oling](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), arxivni oching va`TgWitness.cmd` fayliga ikki marta boshingiz.
 
 02-qadam
 
@@ -260,7 +263,7 @@ Ishga tushirgandan so‘ng [127.0.0.1:8787](http://127.0.0.1:8787) manzilini och
 
 Manba kodidan o'rnatishda token `data/live/panel-token.txt` da joylashgan. Telegramga kirish uchun o'rnatilgan API sozlamalaridan yoki [my.telegram.org](https://my.telegram.org) saytidan olingan o'zingizning juft kalitingizdan foydalanishingiz mumkin. [To'liq sozlash bo'yicha qo'llanma ↗](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [Nima yangilik →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/) · [Xususiyatlar va ma'lum cheklovlar →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
+**TgWitness 0.8.0** [Nima yangilik →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/) · [Xususiyatlar va ma'lum cheklovlar →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
 
 ## Aniq ko'rsatmalar. Foydali keyingi qadam.
 

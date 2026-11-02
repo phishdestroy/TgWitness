@@ -8,7 +8,7 @@ Ikuti satu kes merentasi saluran, kumpulan, sembang peribadi dan bot, daripada p
 
 ## Kes yang dikaji: destinasi berubah merentasi empat perbualan
 
-Sebuah pengumuman merujuk kepada bot. Kumpulan operasi membincangkan destinasi pembayaran baharu, papan kekunci bot memaparkannya, dan susulan peribadi mengulanginya. Pengumuman itu kemudian disunting dan mesej kumpulan hilang.
+Satu pengumuman merujuk kepada bot. Kumpulan operasi membincangkan destinasi pembayaran baharu, dan papan kekunci bot memaparkan destinasi tersebut. Pengumuman itu disunting, susulan peribadi mengulangi destinasi tersebut, dan mesej kumpulan hilang.
 
 Soalan-soalannya ialah: apa yang diperhatikan sebelum dan selepas perubahan, akaun Telegram mana yang menyiarkan setiap item, di mana destinasi muncul, bait lampiran mana yang terpelihara, dan selang masa mana yang masih tidak diketahui?
 
@@ -34,8 +34,8 @@ Diyagram aliran · Saluran → Jurnal ruang kerja; Kumpulan → Jurnal ruang ker
 
 ## 1. Takrifkan kes dan kumpulkan keseluruhan keterangan
 
-1. Sambungkan akaun pengumpulan ke ruang kerjanya sendiri. Dalam nota kes luaran, catatkan rujukan kes, ID akaun, ruang kerja, permulaan pemerhatian dan cap jari kunci penandatanganan yang dipercayai.
-2. **Sumber** Terbuka **→ Skop Pengamatan → Mod Siasatan**. Preset memilih **keseluruhan akaun**, saluran/kumpulan/perbualan peribadi/bot, tindakan sendiri, profil sumber dan 200 mesej terkini yang boleh dilihat untuk sumber yang baru ditemui. Semak ia, tekan **Simpan Skop**, dan lengkapkan pengesahan skop.
+1. Sambungkan akaun pengumpulan di ruang kerjanya sendiri. Di [Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/) atau daftar kes anda, rekod rujukan kes, ID akaun, ruang kerja dan permulaan pemerhatian. Simpan cap jari kunci tandatangan yang dipercayai secara berasingan.
+2. Untuk akaun pengumpulan khusus, buka **Sumber → Skop pemerhatian → Mod siasatan**. Preset memilih **keseluruhan akaun**, saluran/kumpulan/perbualan peribadi/bot, tindakan sendiri, profil sumber dan 200 mesej boleh dilihat terkini untuk sumber yang baru ditemui. Semak ia, tekan **Simpan skop**, dan lengkapkan pengesahan skop. Akaun utama menggunakan sembang terpilih atau folder; pengumpulan seluruh akaun tersedia untuk akaun yang ditandakan untuk siasatan.
 3. **Muat sembang** dan bandingkan sumber dengan senarai dialog akaun. Semak pengecualian. **Parameter → Perbualan yang dibaca daripada senarai akaun** secara lalai adalah 1,000 dan membenarkan sehingga 20,000. Sumber yang melebihi had senarai akan ditambah apabila mereka menjadi aktif. Rekod apa yang sebenarnya disenaraikan.
 4. Dalam **Tetapan Rakaman**, pilih **Semua aktiviti yang kelihatan** dan simpan tetapan pemantauan. Semak jenis/had lampiran dan ruang cakera kosong.
 5. Mulakan pemerhatian. Sahkan mesej baru terkawal, suntingan dan pemadaman, kemudian simpan rujukan ujian dan sebarang kegagalan.
@@ -58,7 +58,7 @@ Simpan daftar sumber dengan satu baris bagi setiap sembang:
 
 Gunakan kaedah pemerolehan yang sesuai untuk setiap sumber:
 
-- **Muat sejarah penuh** dalam **Sumber** (`main` semasa) memuatkan mesej lalu yang tersedia daripada sumber yang diaktifkan ke dalam jurnal ruang kerja. Ia menyokong hentikan/lanjutan dan laporan kemajuan yang disahkan. Lihat [pemerolehan sejarah](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/).
+- **Muat sejarah penuh** dalam **Sumber** memuat mesej lalu yang tersedia daripada sumber yang diaktifkan ke dalam jurnal ruang kerja. Ia menyokong henti/lanjutan dan laporan kemajuan yang ditandatangani. Lihat [pemerolehan sejarah](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/).
 - **Snepaduan sejarah** menyimpan mesej yang baru-baru ini kelihatan ke dalam jurnal pemerhatian. Had maksima lalai ialah 500; **Parameter → Snepaduan sejarah terbesar** boleh meningkatkannya kepada 10,000. Ini adalah pemerhatian sejarah semasa, bukan suntingan yang dibina semula.
 - **Eksport sembang penuh → Eksport sembang penuh**, atau **Sembang → Eksport sembang**, memuat turun sejarah yang kini kelihatan bagi satu sembang ke dalam bundel berasingan yang ditandatangani `chat.json`/`chat.html`. Ulang untuk sumber kes dan simpan setiap hasil.
 - **Apabila sembang atau bot baru muncul,** ia boleh menyimpan profilnya dan sehingga 1,000 mesej terkini; mod siasatan memilih 200. Sembang sedia ada tidak menerima pengambilan semula secara retroaktif apabila mod ini diaktifkan.
@@ -103,6 +103,8 @@ Dalam contoh terperinci:
 
 Bandingkan hash lampiran dan rujukan mesej yang berkaitan. Fail yang sama tidak menentukan pencipta, penghantar atau pengendali bersama. Nama yang sama dan avatar yang serupa sahaja tidak menyatukan dua ID Telegram menjadi satu individu.
 
+Simpan nota kerja pasukan di [Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/): tandakan rekod yang anda gunakan, seperti #146, #188 dan #205, sorot rentetan destinasi yang tepat, dan simpan potongan setiap tindakan yang direkodkan antara dua rekod atau dalam julat masa. Nota dan status mengekalkan semakan pasukan dalam sejarah berasingan yang disahkan, boleh dikenal pasti secara berasingan daripada pemerhatian sumber.
+
 ## 5. Membina garis masa rentas sembang
 
 Gunakan versi yang disimpan dalam Perbualan dan rekod Jurnal mereka pautan #… . Dalam Jurnal, gabungkan Semua sumber dengan Suntingan, Pemadaman dan Liputan. Simpan kedua-dua `source_at`, jika disediakan, dan `observed_at`.
@@ -122,7 +124,7 @@ Rekod lain berlaku di antara rujukan contoh ini. Nombor urutan menyusun pemerhat
 
 Gunakan ruang kerja berasingan untuk setiap akaun berbeza dan ulangi inventori akaun tersebut. Simpan ID akaun, peranan, cap jari kunci tandatangan dan rujukan sumber pada setiap perbandingan. Nombor mesej bukan pengecam global merentas sembang/akaun.
 
-Korelasi merentas ruang kerja dilakukan dalam nota kes luaran atau alat analisis. TgWitness pada masa ini tidak mempunyai carian merentas ruang kerja global, garis masa gabungan, graf penyiasatan atau arkib kes gabungan. Eksport berbilang akaun untuk **satu** saluran/superkumpulan adalah operasi yang berbeza, bukan penggabungan jurnal akaun.
+Case Board menyimpan nota dan koleksi yang dipautkan kepada sumber dalam setiap ruang kerja. Skrin kumpulan menyemak status akaun secara bersama dan boleh menggabungkan eksport ruang kerja berasingan. Hubungkan sumber-sumber tersebut dalam nota kes atau alat analisis anda; setiap jurnal mengekalkan asal usul dan kunci tandatangan tersendiri. Carian global atau garis masa merentas ruang kerja yang disatukan tidak dijana. Eksport berbilang akaun bagi satu saluran/superkumpulan memperoleh sejarah sembang tersebut menggunakan akaun yang layak.
 
 Untuk kerja yang lebih panjang, kekalkan batasan dengan [saksi bebas](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/). Gunakan pemeriksaan penghantaran terkawal untuk menilai jejak tangkapan dan keterlihatan setiap akaun.
 
@@ -134,6 +136,7 @@ Simpan semua ini bersama dalam direktori kes yang disusun oleh penganalisis:
 | --- | --- |
 | Nota kes dan daftar sumber | Soalan, dasar pengumpulan, akses/peranan, penemuan, penjelasan alternatif dan kekosongan |
 | Garis Masa | Kedua-dua masa dan rujukan ruang kerja/perbualan/mesej/urutan bagi setiap entri |
+| Case Board, eksport dan kepingan, jika digunakan | Penanda buku yang dipautkan kepada sumber, petikan, nota pasukan, koleksi, sejarah semakan dan rekod terpilih disemak menentang ZIP bukti |
 | ZIP bukti yang ditandatangani bagi setiap ruang kerja | Jurnal rakaman lengkap, manifes dan media terpelihara yang disertakan; penapis panel tidak mengehadkan eksport jurnal |
 | Fail profil orang yang ditandatangani secara berasingan | Rujukan terbitan disemak menentang bukti ruang kerja yang sepadan |
 | Eksport sembang penuh yang disahkan | Perolehan sejarah yang kelihatan semasa, berasingan daripada jurnal pemerhatian |
@@ -147,9 +150,10 @@ Daripada pemasangan yang dipercayai, dengan nama fail dan cap jari sebenar setia
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Simpan keputusan pengesahan sebenar dan artifak asal. Direktori kes peringkat tertinggi, daftar sumber dan kesimpulan penganalisis diselenggara secara luaran; setiap artifak TgWitness mempunyai tandatangan dan prosedur pengesahan tersendiri.
+Pelihara keputusan pengesahan sebenar dan artifak asal. Eksport nota ruang kerja daripada Papan Kes bersama bahan sumber yang dirujuk. Kumpulkan penemuan merentas ruang kerja dalam direktori kes aras tertinggi; setiap artifak TgWitness mempunyai tandatangan dan prosedur pengesahan tersendiri.
 
 ## Sesuaikan siasatan
 

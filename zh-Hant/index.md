@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/
 
-[開源 / v0.7.1](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/)
+[開源 / v0.8.0](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/)
 
 擷取 Telegram 訊息、保存其變更紀錄，並匯出經簽署的紀錄。
 
@@ -60,6 +60,8 @@ TgWitness / 簽名輸出檔本地工作區
 
 04 / 簽名輸出 將日誌隨身攜帶，附有清單及獨立驗證者。
 
+透過「[案件看板](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/case-board/)」、「[報告設計」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reports/)及「[分享副本」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/handover/)追蹤已儲存的紀錄。一併[檢視帳戶群組](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/groups/)。
+
 01 / 擷取
 
 ### 範圍由您決定。
@@ -84,7 +86,8 @@ TgWitness / 簽名輸出檔本地工作區
 
 [匯出並驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/)
 
-## 只要改變一個位元組，區塊鏈就會告訴你。
+## 只要變更一個位元組，
+驗證機制便會立即偵測到。
 
 每個事件皆連結至前一個雜湊值，並附有 Ed25519 數位簽名。
 
@@ -94,7 +97,7 @@ TgWitness / 簽名輸出檔本地工作區
 
 ![透過獨立保存的檢查點，收件者可將匯出的日誌與先前的觀察記錄進行比對。](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-了解每種驗證機制能達成什麼，以及其局限性何在。
+請遵循從檔案雜湊值到獨立保留檢查點的核對流程。
 
 [探索八個證據等級](https://phishdestroy.github.io/TgWitness/zh-Hant/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zip簽名套件
 
   獨立驗證簽名清單 + 獨立驗證器
 
-簽名是根據可信密鑰來偵測篡改行為。簽名無法證明訊息源自 Telegram，亦無法保證完整擷取。日誌內容及媒體檔案需由您自行提供加密儲存空間。
+接收方會使用可信的收集器金鑰，對已儲存的記錄和檔案進行驗證。另行保留的檢查點亦會核對其與先前日誌的連續性。[請參閱驗證步驟。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/concepts/#layers)
 
 ## S3 備份。外部驗證。
 
@@ -154,13 +157,13 @@ Object Lock
 
 [設定 S3 並還原副本](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/#s3)[閱讀驗證詳情](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**無法** 若未持有已匯出的解密金鑰，本工具無法還原訊息，亦無法取代獨立證人。
+**復原金鑰** 請將匯出的解密金鑰另行儲存，以便您能還原加密副本。
 
 ### 通知 · Apprise
 
 透過 Apprise 接收問題警示、聊天記錄變更及每日摘要：可透過即時通訊軟體、電子郵件或您自訂的 JSON Webhook 接收。
 
-**不執行** 除非您啟用摘錄功能，否則不會傳送訊息內容。
+**選擇要分享的內容** 訊息摘錄預設為關閉狀態；請僅對您信任的接收方啟用此功能。
 
  [設定通知接收端點](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ Object Lock
 
 採用 RFC 3161 及 OpenTimestamps 進行時間戳記檢查點雜湊運算。
 
-**不將**待處理的日曆收據視為已確認的比特幣時間戳記。
+**根據結果採取後續行動：**查核主管機關的回覆，或將 OpenTimestamps 收據升級為經確認的比特幣證明。
 
  [查看時間戳記證明](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ Object Lock
 
 另有一台獨立伺服器負責儲存經簽名的觀察記錄，並可發布 `TGW1` 檢查點。
 
-**無法做到：**它無法將同一收集器主機上的兩個工作區轉變為獨立的證據來源。
+**請將參考內容「**在另一台主機上執行 TgWitness，並保留其專屬的簽名金鑰和日誌」**獨立列出**。
 
  [設定一個 Witness](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/witness/)
 
@@ -184,7 +187,7 @@ Object Lock
 
 重新啟動後恢復運作。重新檢查及 `coverage.json` 顯示已恢復的訊息與遺漏部分。
 
-**無法做到**：本工具無法還原所有遺漏的編輯紀錄或已消失的訊息。
+**檢視時間區間：**可同時查看已恢復的當前訊息與記錄的中斷情況；一旦擷取，較早的版本仍可取得。
 
  [檢查連續性與缺口](https://phishdestroy.github.io/TgWitness/zh-Hant/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ cd TgWitness
 
 [瀏覽版本](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows 上沒有 Python？[請下載可攜式套件](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip)，解壓縮後雙擊 `TgWitness.cmd`。
+Windows 上沒有 Python？[請下載可攜式套件](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip)，解壓縮後雙擊 `TgWitness.cmd`。
 
 步驟 02
 
@@ -260,7 +263,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 若透過原始碼安裝，代幣位於 `data/live/panel-token.txt`。Telegram 登入可使用內建的 API 設定，或您從 [my.telegram.org](https://my.telegram.org) 取得的專屬金鑰對。[完整設定指南 ↗](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [最新動態 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/) · [功能與已知限制 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/)
+**TgWitness 0.8.0** [最新動態 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/) · [功能與已知限制 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/)
 
 ## 清晰的操作指引。實用的下一步建議。
 

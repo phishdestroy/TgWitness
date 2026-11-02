@@ -2,9 +2,9 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/
 
-TgWitness'in şu anda uyguladığı özellikler, Telegram platformunun getirdiği kısıtlamalar ve gelecekte yapılması gereken çalışmalar.
+TgWitness’in mevcut toplama modeli, çoklu hesap iş akışları, dışa aktarımlar ve operasyonel sınırları.
 
-Tasarım referansı: 26 Ekim 2026. Başlıca kullanım senaryosu, bağlı hesapların erişebildiği özel Telegram grupları ve kanallarıdır. Bu belge, uygulanmış davranışları, platform sınırlarını ve gelecekteki çalışmaları birbirinden ayırır. Bir hedef mimari öğesi, söz konusu özelliğin halihazırda mevcut olduğu iddiası değildir.
+TgWitness, bağlı hesapların erişebildiği Telegram sohbetlerini korur, gözlemlenen değişiklikleri kaydeder ve doğrulanabilir dışa aktarımlar hazırlar. Bu kılavuzda toplama modeli, mevcut iş akışları ve bunların sınırları açıklanmaktadır.
 
 ## Bağımsız uygulama
 
@@ -12,17 +12,19 @@ TgWitness'in kendine ait kurulum süreci, veri dizini ve sürüm yaşam döngüs
 
 Kullanıcı hesaplarını birbirine bağlar, her birinin görebileceği kaynakları seçer ve kaydedilmiş bir gözlem günlüğü elde eder. Panel, içeriği, kaydedilen değişiklikleri, gözlemin kaynağını ve bilinen eksiklikleri gösterir. Başka bir araştırmacı, dışa aktarılan materyali doğrulayabilir.
 
-Dört farklı durum önemlidir: hesap yetkilendirmesi, kaynağa erişim, çalışan bir toplayıcı ve iletimin eksiksizliğinin ne ölçüde tespit edildiği. İlk üçünün hiçbiri dördüncüyü otomatik olarak kanıtlamaz. Sessiz bir grup, mutlaka başarısız bir toplayıcı anlamına gelmez.
+Panel, hesap yetkilendirmesini, kaynağa erişimi, toplayıcının faaliyetini ve kaydedilen kapsamı birbirinden ayırır. Mesaj sayısının az olduğu bir zaman aralığını veya bir bağlantı sorununu değerlendirirken bu durumları birlikte gözden geçirin.
 
 ## Ortak soruşturmalar
 
-Bir yönetici, yedi izin seviyesi, IP kısıtlamaları, son kullanma tarihi, oturum açma sınırları ve oturum kontrolü ile çalışma alanlarına ve bireysel sohbetlere özel [erişim jetonları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/) verebilir. Salt okunur bir denetçi, Telegram yetkilendirmesi veya ana panel anahtarı almadan bir vakayı inceleyebilir. Sohbetle sınırlı erişim, hesap genelindeki ayarlardan ve tam günlük dışa aktarımlarından ayrı tutulur.
+Bir yönetici, eylem bazında izinler, IP kısıtlamaları, son kullanma tarihi, oturum açma sınırları ve oturum kontrolü içeren, çalışma alanları ve bireysel sohbetlerle sınırlı [erişim jetonları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/) verebilir. Salt okunur bir gözden geçiren, Telegram yetkilendirmesi veya ana panel anahtarı almadan bir vakayı inceleyebilir. Sohbetle sınırlı erişim, hesap genelindeki ayarlardan ve tam günlük dışa aktarımlarından ayrı tutulur.
 
 Otomatik MTProxy, dört kamuya açık kaynaktan veya bir operatör kataloğundan çalışan Telegram rotalarını sürdürür. [IP modları,](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/#ip-modes) bir arıza durumunda başka bir proxy'nin beklenmesi gerekip gerekmediğini veya açıkça izin verilen doğrudan bir rotanın kullanılabileceğini belirler. Harici HTTP istekleri için ayrı bir rota ve devre dışı bırakma seçeneği mevcuttur.
 
 ## Arşivleme araçları
 
 [Geçmiş verilerinin toplanması](https://phishdestroy.github.io/TgWitness/tr/docs/reference/history/), [arşiv arama ve analizi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/analysis/),[salt okunur MCP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/), [yerel OCR/transkripsiyon](https://phishdestroy.github.io/TgWitness/tr/docs/reference/media-analysis/) ve[giden webhook'lar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/webhooks/) 0.7.1 adresinde yer almaktadır. Analitik raporlar ve tanınan metinler, yakalanan olaylardan ayrı tutulur.
+
+[Case Board](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/), çalışma alanı içinde kaynağa bağlı yer imleri, alıntılar, notlar ve koleksiyonlar ekler. [Rapor oluşturucu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/), desteklenen HTML/PDF dışa aktarımları için materyali, bölümleri ve sekiz tasarımdan birini seçer.
 
 ## İsteğe bağlı ek özellikler
 
@@ -53,9 +55,9 @@ Panel, her biri aşağıdakilere sahip olan sınırsız sayıda **çalışma ala
 
 Görüntülenen çalışma alanının değiştirilmesi, başka bir toplayıcının çalışmasını durdurmaz. Çalışma alanları arasında hesap yetkilendirmesinin tekrarlanması reddedilir. Zaten bir Telegram hesabına bağlanmış bir günlük, başka bir hesaba yeniden atanamaz; ancak aynı hesabın yeniden bağlanmasına izin verilir. Bu, hesap kimliğini ve ilgili mesaj kimliği kapsamını korur.
 
-Sabit bir sayı veya ölçülmüş iş hacmi garantisi yoktur. Çalışma alanları, bir Python süreci ve olay döngüsünü paylaşır. Ayrı hesap işleyicileri, gelecekte gerçekleştirilecek bir çalışmadır. Mevcut süreç yalıtımı için ayrı kurulumlar, bağlantı noktaları ve veri dizinleri kullanın.
+Uygulama, sabit bir çalışma alanı sayısı belirlemez. Her çalışma alanı, bağlantı izleme, medya indirmeleri, yeniden kontroller ve yeni sohbet alımları için kendi toplayıcı görevlerini, paylaşılan bir Python süreci ve olay döngüsü içinde çalıştırır. İş hacmi, iş yüküne bağlıdır. Süreç yalıtımı için ayrı kurulumlar, bağlantı noktaları ve veri dizinleri kullanın.
 
-Her hesaba erişebileceği kaynakları atayın. Farklı hesaplar aynı grubu gözlemleyebilir, ancak gözlemleri ayrı kalır ve kaynakları korunur. Tek bir operatör tarafından kontrol edilen makinede bulunan iki hesap, iki bağımsız tanık sayılmaz. Dışa aktarımlar çalışma alanı bazında yapılır; birleştirilmiş vaka paketi veya genel Telegram zaman çizelgesi özelliği uygulanmamaktadır.
+Her hesaba erişebileceği kaynakları atayın. Farklı hesaplar aynı grubu gözlemleyebilir, ancak gözlemleri ayrı kalır ve kaynakları korunur. Bir operatör tarafından kontrol edilen makinedeki iki hesap, iki bağımsız tanık değildir. **Dışa aktarma işlemi** , ayrı ayrı imzalanmış çalışma alanı ZIP dosyalarını, bunların çalışma alanı kimliklerini, hash değerlerini ve imza anahtarı parmak izlerini içeren imzalı bir dosya listesiyle bir araya getirir. Her günlük kendi sınırlarını korur. Vaka notlarında veya analiz araçlarında, bu kaynak referanslarını koruyarak çalışma alanları arası birleşik bir zaman çizelgesi oluşturun.
 
 ## Kaydetme ve kaynak gösterme
 
@@ -63,13 +65,13 @@ Kaynaklar, yeni mesajlar, düzenlemeler, silme işlemleri, tepkiler ve üyelik i
 
 | Materyal | Şu anda kaydediliyor | Sınır |
 | --- | --- | --- |
-| Mesaj | Metin, eş/mesaj kimlikleri, gönderen meta verileri, yanıtlar ve orijinal güncelleme zarfı | Mesaj için kamuya açık olarak doğrulanabilir bir Telegram imzası yok |
+| Mesaj | Metin, eş/mesaj kimlikleri, gönderen meta verileri, yanıtlar ve orijinal güncelleme zarfı | Toplayıcı tarafından imzalanmış, hesap tarafından görülebilen bir gözlem olarak korunur |
 | Düzenle | Gözlemlenen yeni sürüm ve daha önce kaydedilmiş tüm sürümler | Hizmet kesintisi sırasında yapılan ara düzenlemeler kaybolabilir; gönderenin mutlaka düzenleyici olduğu söylenemez. |
 | Silme | Bildirim ve varsa önceden yakalanan içerik | Genellikle silen kişi veya kesin eylem zamanı belirtilmez |
-| Kapsam dışı silme | Karşı tarafı tahmin etmeden, orijinal hesap düzeyinde bildirim | Daha önce kaydedilmiş hesap kapsamındaki kimlik numaralarıyla sıkı bir korelasyon sağlanması, gelecekte ele alınacak bir konudur. |
+| Hesap düzeyinde silme bildirimi | Orijinal bildirim; çözülmüş kayıtlar, kaydedilmiş sohbeti ve korelasyon yöntemini içerir | Kapsamda tam olarak bir adet önceden kaydedilmiş özel sohbet veya normal grup eşleşmesi bulunmalıdır; diğer kimlikler “`deletion.unscoped`” olarak kalır. Kanal ve süper grup kimlikleri bu eşleştirme kapsamı dışında tutulur. |
 | Tepki | Saçma sayıları ve görünür son kimlikler | Elde edilebilir tam reaktör listesi için ayrı sorgular gerekir; kanallar kimlikleri gizleyebilir |
 | Üyelik | Hizmet mesajları ve katılımcılara gönderilen güncellemeler | Görünürlük, role ve sohbet türüne bağlıdır; eksik olaylar, yokluğu kanıtlamaz |
-| Yönetici işlemleri | Yalnızca ilgili güncellemeler sunulur | Ayrı bir yönetici günlüğü sorgulama özelliği uygulanmamıştır |
+| Yönetici işlemleri | İlgili teslim edilen güncellemeler ve kanal/süper grup sohbeti dışa aktarımlarında bir yönetici günlüğü anlık görüntüsü | Dışa aktarma işlemi, dışa aktarma yetkisine sahip yönetici hesabı için mevcut olduğunda günlüğü okur; yönetici günlüğünün sürekli olarak taranması bu yolun dışındadır. |
 | Ek | Orijinal sürüm tanımlayıcısı, indirilen bayt sayısı/SHA-256 ve deneme sonuçları | Silinen bir dosya geri kazanılamayabilir; en son sürüm bunun yerine geçmez |
 | Tarihçe | O anda görünür olan mesajların açık bir anlık görüntüsü | Tüm düzenlemeleri veya silinen içeriği yeniden oluşturmaz |
 | Toplayıcı süreci | Başlatma/durdurma, durum kontrolü, hatalar, ayarlar, kapsam ve program alımı | Kendi beyanına dayalı, bağımsız bir süreç doğrulaması değildir |
@@ -85,7 +87,9 @@ Telegram, pasif iletim ile aktif kısa sorgulamayı birbirinden ayırır. Günce
 | Mod | Amaç | Durum |
 | --- | --- | --- |
 | Standart gözlem | Seçilen kaynaklardan gelen güncellemeleri kaydetme | Uygulandı |
-| Öncelikli gözlem | Sınırlı bir kaynak kümesi için ek farklılık kontrolleri | Kullanıcı modu olarak uygulanmamıştır |
+| Öncelikli yeniden kontroller | Yıldızlı kaynaklar kendi yapılandırılabilir aralıklarını kullanır ve her sınırlı yeniden kontrol aşamasında öncelik kazanır. | Geçmiş ve mesaj sorguları ile uygulanmıştır |
+
+Öncelik yıldızı bu yeniden kontrolleri yönetir. Ek `updates.getChannelDifference` kısa sorgulama işlevi, ayrı bir kullanıcı modu olarak sunulmaz.
 
 FloodWait'i göz ardı eden veya ek hesaplardan gelen kapasitenin doğrusal olduğunu varsayan keyfi yüksek frekanslı sorgulama, geçerli bir boyutlandırma modeli değildir. Varsayılan sınırlar şunlardır: listelenen ilk 1.000 diyalog, geçmiş anlık görüntüsü başına en fazla 500 mesaj, türüne göre toplanan her dosya için 1–2.000 MiB ve sıkıştırılmamış imzalı ZIP içeriği için 4 GiB’dir; bunların her biri **Parametreler** altından çalışma alanı başına değiştirilebilir. Dışa aktarmalarda sabit bir olay sayısı sınırı yoktur. Tarayıcı yedeği varsayılan olarak 128 MiB ile sınırlıdır; akış CLI’sinde yapılandırılabilir bir aktarım sınırı vardır ve varsayılan değer 5 GiB’dir.
 
@@ -114,9 +118,9 @@ Her olay, bir sıra numarası, yerel UTC gözlem zamanı, varsa kaynak zamanı, 
 | Program dosyası boyutu | Ölçülen dosyalar hakkında toplayıcının kendi raporu |
 | Geçerli bağımsız TSA yanıtı | Açık güven varsayımları altında TSA zamanına göre belirli baytların varlığı |
 
-RFC 3161 istek hazırlığı ve OpenSSL yanıt doğrulaması uygulanmaktadır. Otomatik gönderim ise uygulanmamaktadır. Makinenin saatini içeren bir istek veya yerel imza, bağımsız bir zaman damgası değildir. [TIMESTAMP.md](https://phishdestroy.github.io/TgWitness/tr/docs/reference/timestamp/) dosyasına bakınız.
+RFC 3161 istek hazırlığı ve OpenSSL yanıt doğrulaması uygulanmaktadır. Kanıt modu ayrıca kontrol noktası hash'lerini yapılandırılmış zaman damgası hizmetlerine gönderir. Bağımsız bir zaman referansı oluşturmak için yetkili kurumun yanıtını saklayın ve doğrulayın. [TIMESTAMP.md dosyasına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/timestamp/) bakın.
 
-Toplayıcıyı ve imzalama anahtarını kontrol eden bir operatör, yeni imzalı gözlemler uydurabilir. İmzalar, Telegram'ın kaynağını, doğruluğunu veya otomatik yasal kabul edilebilirliğini kanıtlamaz. Daha güçlü bir saklama süreci için bağımsız kontrol noktaları/zamanlı depolama, anahtar erişim kontrolleri, aktarım kayıtları ve güvenilir yazılımlar tarafından doğrulama gereklidir.
+Kontrol noktalarını bağımsız olarak saklayın, imzalama anahtarlarına erişimi kontrol edin, aktarım kayıtlarını tutun ve dışa aktarımları güvenilir yazılımlarla doğrulayın. [Doğrulama kapsamı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) , bu kontrollerinin birbirini nasıl tamamladığını ve hangi güven varsayımlarının geçerli olduğunu açıklar.
 
 ## Dışa aktarma, devreye alma ve devretme
 
@@ -140,4 +144,4 @@ Kararlı sürüm yayınlanmadan önce şu açıklamayı ekleyin:
 6. Hedeflenen işletim sistemi/konteyner matrisinde sorunsuz kurulum ve doğrulanmış yedekleme geri yüklemesi.
 7. Güvenlik, imzalar ve atıf/kanıt iddialarına ilişkin bağımsız inceleme.
 
-Yönetici günlüğü sorgulama, ek reaktör listeleri, öncelikli sorgulama, ayrı işleyiciler ve uygulama genelinde şifreleme, gelecekte gerçekleştirilecek işler arasında yer almaktadır. Kapsamlı panel erişimi, [erişim ve izinler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/) bölümünde açıklanmaktadır. 0.6 sürümü, [ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) dosyasında açıklanan sınırlı tek hesaplı TData ve hesap dosyası içe aktarmayı desteklemektedir. Yayınlamadan önce Telegram API şartlarını gözden geçirin. Araştırma referansları ve platform bulguları [RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md) dosyasında yer almaktadır.
+Kapsamlı panel erişimi, [erişim ve izinler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/) bölümünde açıklanmıştır. 0.6 sürümü, [ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) dosyasında açıklanan sınırlı tek hesaplı TData ve hesap dosyası içe aktarmasını destekler. Yayınlamadan önce Telegram API şartlarını gözden geçirin. Araştırma referansları ve platform bulguları [RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md) dosyasında yer almaktadır.

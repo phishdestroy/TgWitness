@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/inves
 
 ## 案例分析：四个对话中目的地发生变化
 
-一条公告指向了一个机器人。一个行动小组讨论了一个新的付款 目的地，该机器人的键盘上显示了该信息，随后在一次私下跟进中又重复了这一信息。 随后该公告被编辑，一条群组消息消失了。
+一条公告指向了一个机器人。一个行动小组正在讨论一个新的付款 目的地，该机器人的键盘上显示了该信息。公告被编辑后， 一条私信跟进再次提到了该目的地，随后一条群组消息消失了。
 
 需要弄清楚的问题包括：变更前后观察到了什么，哪些 Telegram 账户发布了每条内容，目标出现在何处，哪些附件字节 被保留下来，以及哪些时间间隔仍无法确定？
 
@@ -34,8 +34,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/inves
 
 ## 1. 界定案件并收集完整案情
 
-1. 在专属工作区中连接采集账户。在外部案件记录中， 记录案件编号、账户 ID、工作区、监控起始时间以及可信 签名密钥指纹。
-2. 开放**来源 → 监控范围 → 调查模式**。该预设选项包括 **“整个账户**”、“频道/群组/私聊/机器人”、“自身操作”、“来源 资料”以及新发现来源的最新 200 条可见消息。 请仔细核对，点击**“保存范围**”，并完成范围确认。
+1. 在独立的工作区中连接采集账户。在[“案件看板](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-board/) ”或您的案件登记簿中，记录案件编号、账户 ID、工作区及 观察开始时间。请独立保留受信任的签名密钥指纹。
+2. 若要创建专用采集账户，请打开**“来源”→“观察范围”→“调查模式**”。该预设选项包含 **“整个账户**”、“频道/群组/私聊/机器人”、“自身操作”、“来源 配置文件”以及新发现来源的最新 200 条可见消息。 请核对设置，点击**“保存范围**”，并完成范围确认。 主账户可使用选定的聊天或文件夹；全账户采集功能 仅对已标记为“调查”状态的账户开放。
 3. **加载聊天记录**，并将来源与该账户的对话列表进行比对。 检查 排除项。**参数 → 从账户列表中读取的聊天数量**默认值为 1,000，最大支持 20,000。超出列表限制的来源会在 其变为活跃状态时被添加。记录实际枚举的内容。
 4. 在**“记录设置**”中，选择**“所有可见活动**”，并保存 监控设置。请检查附件类型/限制及可用磁盘空间。
 5. 开始观察。验证一条受控的新消息、编辑操作和删除操作，然后 保留测试参考信息及任何失败情况。
@@ -58,7 +58,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/inves
 
 针对每个消息源，请选用合适的采集方式：
 
-- 在**“来源”**（当前为 `main`）中**加载完整历史记录**，将已启用来源中可用的过往 消息加载到工作区日志中。该功能支持暂停/恢复 操作，并提供带签名的进度报告。参见[历史记录获取](https://phishdestroy.github.io/TgWitness/zh/docs/reference/history/)。
+- “在**来源**中**加载完整历史记录**”功能会将已启用来源中可用的过往 消息加载到工作区日志中。该功能支持暂停/恢复 操作，并提供带签名的进度报告。参见[“历史记录采集](https://phishdestroy.github.io/TgWitness/zh/docs/reference/history/)”。
 - **历史快照**将最近可见的消息保存到观察日志中。 其默认上限为 500 条；**通过“参数 → 最大历史快照**”可将 该上限提高至 10,000 条。这些是当前的历史观察记录，而非重建的编辑记录。
 - **“导出完整聊天记录”→“导出完整聊天记录**”，或**“聊天”→“导出聊天记录**”，将 当前可见的某次聊天记录导出为一个独立的、经过签名的 `chat.json` / `chat.html` 数据包。针对案件中的各个消息源重复此操作，并保留每个结果。
 - **当出现新的聊天或机器人时**，可保存其资料以及多达 1,000 条最近的 消息；调查模式下则保存 200 条。启用该模式后，现有聊天记录不会 追溯性地被纳入。
@@ -103,6 +103,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/inves
 
 请对比附件哈希值及其关联的消息引用。文件完全相同 并不能证明其创建者、转发者或共同操作者。仅凭相同的名称和 相似的头像，不能将两个 Telegram ID 归为同一人。
 
+请将团队的工作笔记保存在[“案件看板](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-board/)”上：对您依赖的记录 （如 #146、#188 和 #205）添加书签，突出显示确切的目标字符串，并 保存两个记录之间或某个时间范围内所有记录操作的片段。 笔记 和状态会将团队的审查记录保留在其各自的已签名历史记录中，可与 源观察记录区分开来。
+
 ## 5. 构建跨聊天室时间线
 
 使用**“聊天**”中的已保存版本及其**日志记录 #…** 链接。在 **日志中**，将**所有来源**与**编辑**、**删除**及**覆盖内容**合并。 如已提供，请同时保留 `source_at` 和 `observed_at`。
@@ -122,7 +124,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/inves
 
 为每个独立账户使用单独的工作区，并重复执行其清点操作。 每次比对时，请保留账户 ID、角色、签名密钥指纹及来源参考信息。 消息编号并非跨聊天/账户的全局标识符。
 
-跨工作区的关联分析需在外部案件笔记或分析 工具中进行。TgWitness 目前不支持全局跨工作区搜索、合并时间线、 调查图谱或综合案件档案。**单个** 频道/超级群的多账户导出属于另一项操作，并非账户日志的合并。
+“案件看板”在每个工作区内保存与来源关联的笔记和集合。 群组界面可集中查看账户状态，并能将不同工作区的 导出数据打包。您可在案件笔记或分析工具中关联这些来源；每个日志 均保留其原始来源和签名密钥。系统不会生成全局搜索结果或合并的跨工作区 时间线。 单个频道/超级群组的多账户导出 将使用符合条件的账户获取该聊天记录的历史。
 
 对于较长的操作，需通过[独立见证人](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/)保持边界。 使用受控投递检查来验证 每个账户的捕获路径和可见性。
 
@@ -134,6 +136,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/inves
 | --- | --- |
 | 案件笔记与来源登记册 | 问题、数据收集政策、访问权限/角色、调查结果、替代解释及数据缺口 |
 | 时间线 | 每条记录均包含时间信息以及工作区/聊天/消息/序列的引用信息 |
+| Case Board（若使用）导出和片段 | 与源文件关联的书签、引文、团队笔记、收藏集、修订历史以及选定记录均需与证据 ZIP 文件进行核对 |
 | 每个工作区对应的签名证据 ZIP 文件 | 完整的记录日志、清单及包含的保存媒体；面板过滤器不会缩小日志导出范围 |
 | 单独签名的用户资料文件 | 已根据对应的工作区证据核查了引用的来源 |
 | 带签名的完整聊天记录导出 | 当前可见历史记录的采集，与观察日志分开处理 |
@@ -147,9 +150,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/inves
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-保留实际的验证结果和原始证据文件。顶级案件 目录、来源登记册和分析师结论均在外部维护； 每个 TgWitness 证据文件都有其独立的签名和验证流程。
+保留实际的验证结果和原始证据。将“案件看板”中的工作区 笔记与引用的源材料一同导出。将跨工作区的 调查结果汇总到顶级案件目录中；每个 TgWitness 证据都有其专属的 签名和验证流程。
 
 ## 调整调查
 

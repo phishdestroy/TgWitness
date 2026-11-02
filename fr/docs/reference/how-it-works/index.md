@@ -6,7 +6,7 @@ Explication de la chaîne de hachage, des signatures, des points de contrôle et
 
 TgWitness conserve ce qu’un compte de collecte a observé, relie ces observations dans un journal signé et permet à une autre personne de vérifier une exportation à l’aide d’une clé de confiance et d’un point de contrôle conservé antérieurement.
 
-Le [site web de documentation local](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) propose des exemples interactifs à l’adresse `/docs/concepts/`, ainsi qu’un explorateur de décisions « checkpoint » à l’adresse `/docs/witness/`. Tous les messages d’exemple, les nombres et les délais sont fictifs. Les hachages dans le bac à sable de la chaîne sont calculés à l’aide de l’algorithme SHA-256 dans le navigateur. Aucune donnée n’est envoyée à Telegram.
+Le [site web de documentation local](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) propose des exemples interactifs à l’adresse `/docs/concepts/`, un explorateur de décisions de points de contrôle à l’adresse `/docs/witness/`, ainsi que des guides pas à pas pour [le Case Board](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/), [la conception des rapports](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-reports/) et [les extraits de transfert](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#handover-extract). Tous les exemples de messages, les comptages et les délais sont fictifs. Les hachages dans le bac à sable de la chaîne sont calculés avec SHA-256 dans le navigateur. Aucune donnée n’est envoyée à Telegram.
 
 ## Un message évolue ; les observations s’accumulent
 
@@ -92,7 +92,7 @@ Organigramme · Collecteur / session de compte / clé A → Point de contrôle e
 
 Le témoin enregistre les annulations, les en-têtes différents pour un même compteur, les clés modifiées, les réponses non valides et les réponses manquantes. Un compteur plus élevé ne suffit pas à lui seul à établir que tous les enregistrements antérieurs sont restés inchangés ; comparez l’exportation avec les points de contrôle conservés. Un témoin hébergé sur un autre serveur évite de subir la panne du serveur du collecteur ; un opérateur distinct apporte une indépendance supplémentaire.
 
-Le « witness » certifie l’état du journal tel que signalé par le collecteur. Il n’ observe pas de manière indépendante l’ensemble des messages Telegram. Voir [la configuration du « witness](https://phishdestroy.github.io/TgWitness/fr/docs/reference/witness/) ».
+Le « witness » atteste de l’état du journal signalé par le collecteur. Utilisez un test de livraison contrôlé pour vérifier quelles actions Telegram ont bien atteint un compte de collecte. Voir [la configuration du « witness](https://phishdestroy.github.io/TgWitness/fr/docs/reference/witness/) ».
 
 ## Test de mise en œuvre par rapport à des actions connues
 
@@ -106,14 +106,14 @@ Seules les actions conformes aux attentes sont prises en compte ; les reçus en 
 
 [Le guide complet de l’enquête](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/) suit le déroulement d’un incident sur un canal, dans un groupe, via un bot et dans une conversation privée :
 
-1. Activez le mode « Enquête sur l’ensemble du compte » et répertoriez toutes les discussions accessibles.
+1. Sur un compte de collecte dédié, activez le mode « Enquête sur l'ensemble du compte » et répertoriez les discussions accessibles. Utilisez les discussions sélectionnées ou un dossier pour un compte principal.
 2. Récupérez des instantanés du journal, l'historique complet de chaque conversation et les pièces jointes conservées.
 3. Conservez les modifications en temps réel ainsi que toutes les interactions délibérées avec les panneaux, accompagnées de leurs justificatifs.
 4. Suivez les identifiants numériques des expéditeurs, les relations de réponse, les destinataires récurrents et les hachages de fichiers à travers les enregistrements cités et les profils des personnes.
-5. Reconstituez une chronologie inter-discussions comprenant à la fois des horodatages et des lacunes explicites.
+5. Ajoutez des notes et des collections liées aux sources dans Case Board. Reconstituez une chronologie inter-discussions en incluant à la fois les horodatages et les lacunes explicites.
 6. Comparez les espaces de travail d’autres comptes tout en conservant leurs origines et leurs clés distinctes.
 7. Compilez et vérifiez les journaux signés, les profils et les exportations d’historique à l’aide des notes de dossier.
 
-Le guide « `/docs/cases/` » du site web comprend une carte interactive des dossiers ainsi que des variantes pour les litiges impliquant des bots, les messages supprimés et les participants changeant de nom. Les notes de dossier et l’analyse inter-espaces de travail sont externes ; l’application ne génère pas automatiquement de graphe d’enquête global ni d’archive de dossiers fusionnés.
+Le guide `/docs/cases/` du site web comprend une carte interactive des dossiers et des variantes pour les litiges liés aux bots, les messages supprimés et les participants changeant de nom. Case Board conserve les notes et les collections au sein d’un espace de travail. Les exportations groupées rassemblent des paquets d’espaces de travail distincts ; la corrélation entre les espaces de travail et la chronologie combinée restent du ressort des analystes.
 
 [Validation terminée et travaux restants](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/) · [Exporter et vérifier](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#investigation-handoff) · [Commencez par un seul compte](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/)

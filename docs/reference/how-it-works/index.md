@@ -6,7 +6,7 @@ Hash chain, signatures, checkpoints and witnesses explained with the exact formu
 
 TgWitness preserves what a collecting account observed, links those observations into a signed journal and lets another person verify an export against a trusted key and an earlier retained checkpoint.
 
-The [local documentation website](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) adds interactive examples at `/docs/concepts/`, a checkpoint decision explorer at `/docs/witness/`. All example messages, counts and delays are fictional. Hashes in the chain sandbox are calculated with SHA-256 in the browser. Nothing is sent to Telegram.
+The [local documentation website](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) adds interactive examples at `/docs/concepts/`, a checkpoint decision explorer at `/docs/witness/`, and walkthroughs for [Case Board](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/), [report design](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/) and [handover extracts](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#handover-extract). All example messages, counts and delays are fictional. Hashes in the chain sandbox are calculated with SHA-256 in the browser. Nothing is sent to Telegram.
 
 ## A message changes; observations accumulate
 
@@ -92,7 +92,7 @@ Flow diagram · Collector / account session / key A → Read-only checkpoint end
 
 The witness records rollback, a different head at the same count, changed keys, invalid answers and missing responses. A larger count alone does not establish that every earlier record remains unchanged; compare the export with retained checkpoints. A witness on another host avoids sharing the collector's host outage; a separate operator gives additional independence.
 
-The witness attests to the collector's reported journal state. It does not independently observe all Telegram messages. See [witness setup](https://phishdestroy.github.io/TgWitness/docs/reference/witness/).
+The witness attests to the collector's reported journal state. Use a controlled delivery test to measure which Telegram actions reached a collecting account. See [witness setup](https://phishdestroy.github.io/TgWitness/docs/reference/witness/).
 
 ## Test delivery against known actions
 
@@ -106,14 +106,14 @@ Only matched expected actions count; duplicate receipts do not increase the nume
 
 The [complete investigation walkthrough](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/) follows an incident across a channel, group, bot and private chat:
 
-1. Enable whole-account Investigation mode and inventory every accessible chat.
+1. On a dedicated collecting account, enable whole-account Investigation mode and inventory accessible chats. Use selected chats or a folder for a main account.
 2. Acquire journal snapshots, per-chat full history and preserved attachments.
 3. Keep live changes and any deliberate panel interactions with their receipts.
 4. Follow numeric sender IDs, reply relationships, repeated destinations and file hashes through cited records and people profiles.
-5. Reconstruct a cross-chat timeline with both timestamps and explicit gaps.
+5. Add source-linked notes and collections in Case Board. Reconstruct a cross-chat timeline with both timestamps and explicit gaps.
 6. Compare other account workspaces while keeping their origins and keys separate.
 7. Assemble and verify the signed journals, profiles and history exports with case notes.
 
-The website's `/docs/cases/` guide includes an interactive case map and variants for bot disputes, removed messages and participants changing names. Case notes and cross-workspace analysis are external; the application does not automatically generate a global investigation graph or a merged case archive.
+The website's `/docs/cases/` guide includes an interactive case map and variants for bot disputes, removed messages and participants changing names. Case Board keeps notes and collections within a workspace. Group exports collect separate workspace packages; cross-workspace correlation and a combined timeline remain analyst work.
 
 [Completed validation and remaining work](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) · [Export and verify](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#investigation-handoff) · [Start with one account](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)

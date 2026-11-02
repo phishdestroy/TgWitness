@@ -4,19 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/cases/
 
 Trabaje en un caso completo a través de canales, grupos, chats privados y bots: recopile, relacione, reconstruya y entregue las pruebas.
 
-Este tutorial sigue el desarrollo de un incidente ficticio a lo largo de toda una cuenta. Utiliza las funciones reales de recopilación, búsqueda, perfiles de personas y exportación. El mapa del caso es un ejemplo de documentación; sus conclusiones y el registro del caso se mantienen fuera de la aplicación.
+Este tutorial sigue un incidente ficticio a lo largo de todo el proceso. Utiliza las funciones de recopilación, búsqueda y perfiles de personas para encontrar los registros originales; [el «Case Board»](https://phishdestroy.github.io/TgWitness/es/docs/case-board/) para organizarlos y analizarlos, y [el «Report Studio»](https://phishdestroy.github.io/TgWitness/es/docs/reports/) para presentar los resultados. El mapa ilustrado a continuación explica las conexiones de este ejemplo.
 
 CASO RESUELTO / UN DESTINO DE PAGO MODIFICADO
 
 ### Un incidente. Cuatro conversaciones. Un rastro que reconstruir.
 
-Un anuncio en un canal remite a un bot. Un grupo de operaciones debate sobre un nuevo enlace de pago. Un mensaje privado de seguimiento lo repite. Más tarde, el anuncio se edita y un mensaje del grupo desaparece.
+Un anuncio en un canal remite a un bot. Un grupo de operaciones debate sobre un nuevo enlace de pago y el bot lo muestra. Se edita el anuncio, un mensaje privado de seguimiento repite el destino y un mensaje de grupo desaparece.
 
 ¿Quién publicó cada versión?¿Dónde apareció el enlace?¿Qué archivo se conservó?¿Qué ha cambiado y cuándo?
 
 Para la carga del historial, la revisión opcional de fuentes mediante IA, MCP, OCR y webhooks salientes, consulta [«Trabajar con el archivo](https://phishdestroy.github.io/TgWitness/es/docs/archive/)».
 
 ## 1. Establecer una cobertura que abarque toda la cuenta
+
+Utiliza una cuenta de recopilación específica para el alcance de toda la cuenta. Las cuentas principales pueden recopilar chats seleccionados o una carpeta de Telegram.
 
 1. [Conecte la cuenta de recopilación](https://phishdestroy.github.io/TgWitness/es/docs/accounts/) en su propio espacio de trabajo. Anote la referencia del caso, el ID de la cuenta, el nombre del espacio de trabajo y la huella digital de la clave de firma en sus notas del caso.
 2. **Fuentes** abiertas **→ Ámbito de observación → Modo de investigación**. Revise **toda la cuenta**, los cuatro tipos de fuentes y **las acciones propias**. Esta configuración preestablecida permite guardar el perfil de una nueva fuente y sus últimos **200 mensajes visibles**. Pulse **«Guardar ámbito»** y complete la confirmación del ámbito.
@@ -33,11 +35,11 @@ La opción «Cuenta completa» abarca los chats a los que esta cuenta tiene acce
 
 ## 2. Obtener el historial y conservar los archivos
 
-Cree un registro de fuentes para toda la investigación. Asigne a cada chat una fila con su identificador numérico, título, cuenta, acceso/función, inicio en tiempo real, adquisición del historial, resultado multimedia y lagunas conocidas. Marque una fuente como adquirida únicamente tras comprobar el resultado correspondiente.
+Crea una colección en el «Case Board» para la investigación y marca como favoritos los registros guardados pertinentes. Mantén un registro de fuentes junto con el caso: el identificador numérico de cada chat, el título, la cuenta de recopilación, el acceso/rol, el inicio en tiempo real, la adquisición del historial, el resultado multimedia y las lagunas conocidas. Marca una fuente como adquirida tras comprobar el resultado correspondiente.
 
 | Se necesita | Acción en el panel | Qué ofrece |
 | --- | --- | --- |
-| Historial de los chats habilitados | Fuentes → Cargar historial completo | Funcionalidad principal actual: los mensajes anteriores disponibles se incorporan al registro del espacio de trabajo, con opciones de pausa/reanudación y un informe de progreso firmado. [Guía del historial](https://phishdestroy.github.io/TgWitness/es/docs/reference/history/). |
+| Historial de los chats habilitados | Fuentes → Cargar historial completo | Los mensajes anteriores disponibles se incorporan al diario del espacio de trabajo, con funciones de pausa/reanudación y un informe de progreso firmado. [Guía del historial](https://phishdestroy.github.io/TgWitness/es/docs/reference/history/). |
 | Contexto del chat existente en el registro | Fuentes → Ajustes de grabación → Instantánea del historial | Los mensajes visibles recientes aparecen como observaciones firmadas. El límite máximo por defecto es de 500; en **«Parámetros» → «Instantánea de historial más grande»** se puede aumentar hasta 10 000. |
 | Historial completo, tal y como se muestra actualmente, de un chat | Exportación completa del chat → Exportar el chat completo, o Chats → Exportar chat | Un paquete firmado independiente con `chat.json` y `chat.html`. Repita el proceso por cada fuente; conserve los resultados de éxito o fracaso. |
 | Contexto en el que aparece un nuevo chat | Ámbito de observación → Cuando aparece un nuevo chat o un nuevo bot | Un perfil de la fuente y hasta 1.000 mensajes recientes visibles; el modo de investigación selecciona 200. Los chats existentes no reciben esta recopilación de forma retroactiva. |
@@ -63,9 +65,9 @@ Estos controles realizan acciones reales en Telegram. Una llamada de retorno pul
 
 ## 4. Realice un seguimiento de personas, enlaces y archivos en los distintos chats
 
-1. Abra **el diario**, deje el filtro de fuentes en **«Todas las fuentes»** y busque una frase distintiva, un dominio, un nombre de usuario o un identificador guardado. Abra cada registro que coincida y anote su chat, el ID del mensaje y el número de secuencia del diario.
+1. Abre **el «Diario»**, deja el filtro de fuentes en **«Todas las fuentes»** y busca una frase distintiva, un dominio, un nombre de usuario o un identificador guardado. Abre cada registro que coincida y, a continuación, selecciona **«Añadir al panel»** para conservar su chat, el ID del mensaje y la referencia del diario en el caso.
 2. Para acceder a un chat concreto, abra **«Chats» → «Personas» → «Activar perfiles»** y, a continuación, seleccione una persona. Revise el historial de nombres y nombres de usuario, las relaciones de respuesta, la actividad, así como **«También en…»:** otros chats observados y enlaces extraídos, carteras o números de teléfono. Abra los registros del diario citados.
-3. Siga el mismo identificador numérico de usuario de Telegram en otros chats de este espacio de trabajo. Considere un nombre coincidente, una mención a un monedero o un avatar similar como una pista que debe comprobar. Una dirección mencionada no establece la titularidad; un avatar similar no confirma que se trate de la misma persona.
+3. Sigue el mismo ID numérico de usuario de Telegram en otros chats de este espacio de trabajo. Considera un nombre coincidente, una mención a un monedero o un avatar similar como una pista que hay que comprobar; conserva las referencias a las fuentes y cualquier atribución que las respalde.
 4. Compare los valores SHA-256 de los archivos adjuntos conservados entre los distintos registros. La coincidencia de los hash garantiza la identidad a nivel de byte de los archivos guardados. Examine los registros asociados del mensaje y del remitente antes de llegar a una conclusión sobre quién los compartió.
 
 MAPA DEL CASO / SIGA LAS REFERENCIASCaso ficticio · no es un gráfico en tiempo real
@@ -86,17 +88,17 @@ PRIVADO / SEGUIMIENTO**El usuario 71001 repite el destino**
 
 Registro n.º 205 · mensaje n.º 922. Recibo de archivo guardado n.º 209
 
-Cuatro chats aportan observaciones diferentes. Siga los registros originales de cada conexión; no asigne la publicación del canal al usuario 71001 sin un remitente identificado.
+Cuatro chats aportan diferentes observaciones. Sigue los registros originales de cada conexión; la publicación del canal no tiene remitente identificado.
 
-Los identificadores numéricos y las referencias de los registros son ficticios para este tutorial. Este esquema explica el flujo de trabajo de un analista mediante búsquedas, perfiles y la inspección de registros; la aplicación no genera un gráfico global de la investigación.
+Los identificadores numéricos y las referencias de los registros son ficticios para este tutorial. Este mapa explicativo muestra cómo relacionar los resultados de búsqueda, los perfiles y los registros inspeccionados; el «Case Board» almacena las fichas correspondientes y las referencias a las fuentes.
 
 | Conexión | Observación complementaria | Conclusión: mantener |
 | --- | --- | --- |
 | La misma cuenta de Telegram | ID de usuario 71001 en el grupo n.º 146 y en el chat privado n.º 205 | En ambos chats aparece el mismo identificador de remitente facilitado. La identidad en el mundo real sigue siendo una cuestión aparte. |
-| Destino repetido | `pay.example.invalid/new` en el n.º 146, metadatos del botón en el n.º 173, publicación editada en los n.º 188 y 205 | El mismo destino aparece en cuatro contextos observados. Esto por sí solo no permite determinar quién lo controla. |
-| Mismo número de bytes del archivo | Valores SHA-256 completos idénticos en los recibos multimedia completados n.º 151 y n.º 209 | Los dos archivos adjuntos conservados son idénticos al byte. Los nombres de los archivos o las miniaturas por sí solos no bastarían para demostrarlo. |
+| Destino repetido | `pay.example.invalid/new` en el n.º 146, metadatos del botón en el n.º 173, publicación editada en los n.º 188 y 205 | El mismo destino aparece en cuatro contextos observados. Atribuye su control utilizando fuentes adicionales. |
+| Mismo número de bytes del archivo | Valores SHA-256 completos idénticos en los recibos multimedia completados n.º 151 y n.º 209 | Los dos archivos adjuntos conservados son idénticos al byte. Los hash completos de los archivos permiten realizar la comparación. |
 
-Los perfiles de usuarios incluyen a los autores con mensajes guardados en ese chat y los relacionan con otros chats del *mismo diario* del *espacio de trabajo*. No constituyen un directorio completo de miembros. Los hash de los avatares proceden de una caché local independiente; las citas de los perfiles tienen un límite configurable en **«Parámetros» → «Registros citados por hecho**».
+Los perfiles de usuario describen a los autores observados y su actividad en el *diario del* *mismo espacio de trabajo*, dentro de los chats a los que tiene acceso el usuario. Se trata de una vista de los autores observados, más que de un directorio completo de miembros. Ajusta el número de citas de apoyo en **Parámetros → Registros citados por hecho**.
 
 ## 5. Reconstruir la secuencia y señalar las lagunas
 
@@ -129,11 +131,11 @@ La secuencia del registro sigue el orden de recepción, no necesariamente el de 
 
 Añada un espacio de trabajo para cada cuenta distinta y repita el inventario del alcance y el historial. Registre la pertenencia o función y la huella digital de la clave de firma de cada una. Mantenga los identificadores calificados por espacio de trabajo y chat: el mismo número de mensaje no constituye un identificador global válido para todas las cuentas.
 
-Compare las observaciones relevantes en sus notas de caso o herramientas de análisis, conservando la referencia de la cuenta y del registro para cada fila. Actualmente, TgWitness no ofrece una búsqueda global, una línea temporal combinada, un gráfico de contactos ni un archivo de casos que abarque todos los espacios de trabajo. La exportación completa de varias cuentas de un canal o supergrupo es una función independiente; no se trata de una fusión de todos los registros de las cuentas.
+Utiliza un [grupo de cuentas](https://phishdestroy.github.io/TgWitness/es/docs/groups/) para revisar el estado operativo, compartir ajustes seleccionados y exportar las cuentas conjuntamente. El paquete de grupo conserva el diario firmado y la identidad de cada espacio de trabajo. En el caso de un canal o un supergrupo, las cuentas que cumplan los requisitos también pueden dividir una exportación del historial completo. Crea una línea temporal que abarque varias cuentas en tus notas del caso o herramientas de análisis, conservando la referencia al espacio de trabajo y al diario para cada fila.
 
 En trabajos de mayor duración, incorpore un [testigo independiente](https://phishdestroy.github.io/TgWitness/es/docs/witness/) para mantener los límites establecidos anteriormente. Utilice el programa piloto de entrega controlada para validar las rutas de captura y la visibilidad de las cuentas.
 
-## 7. Entregue un expediente completo y verificable
+## 7. Entregar un paquete de caso verificable
 
 Exporte un archivo ZIP del registro firmado desde cada espacio de trabajo. Este contiene el registro completo, independientemente de los filtros de búsqueda del panel. Exporte por separado los perfiles de las personas relevantes, conserve cada paquete completo del historial de chat y mantenga las pruebas completas de los archivos adjuntos.
 
@@ -162,7 +164,7 @@ python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Compruebe los resultados reales del verificador, conserve los originales y guarde el informe de cobertura, los errores de adquisición y el registro de transferencias junto con sus conclusiones. La carpeta principal del caso y las conclusiones de los analistas se recopilan externamente; los artefactos individuales de TgWitness llevan sus propias firmas.
+Comprueba los resultados del verificador, conserva los originales y guarda el informe de cobertura, los resultados de la adquisición y el registro de transferencia junto con tus conclusiones. Redacta las conclusiones en Report Studio y decide si el informe incluye material de Case Board. La carpeta de nivel superior del ejemplo combina los artefactos firmados por separado. Para un destinatario que solo necesite material seleccionado, prepara una [entrega reducida](https://phishdestroy.github.io/TgWitness/es/docs/handover/).
 
 ## Utilice el mismo método para otras investigaciones
 
@@ -172,7 +174,7 @@ Compruebe los resultados reales del verificador, conserve los originales y guard
 
 **Rastreo:** publicación de entrada en el canal → vista previa del enlace del bot guardado → parámetro de inicio del bot → mensajes y versiones de teclado → cualquier acuse de recibo emitido por el panel → seguimiento en grupo o privado. Asigne cada destino a su registro de origen; conserve las descripciones de los perfiles y los archivos multimedia completos.
 
-**Se proporciona:** una cronología de la oferta observada y las respuestas, las referencias de las fuentes y las exportaciones verificadas. El hecho de que se muestre un enlace de pago no constituye prueba de que se haya producido dicho pago.
+**Se debe entregar:** una cronología de la oferta observada y las respuestas, las referencias de las fuentes y las exportaciones verificadas. Se debe respaldar cualquier afirmación sobre un pago completado con sus propios registros de transacción.
 
 **Mensajes eliminados tras un incidente entre chats**
 
@@ -180,7 +182,7 @@ Compruebe los resultados reales del verificador, conserve los originales y guard
 
 **Rastreo:** todos los chats afectados → mensajes originales → modificaciones entregadas → avisos de eliminación o resultados posteriores de «no encontrado» al volver a comprobar → archivos adjuntos conservados → cobertura en torno al incidente. Compare las observaciones de cuentas independientes con la visibilidad indicada.
 
-**Resultado:** una secuencia de versiones conservadas e intervalos de tiempo desconocidos explícitos. No se debe interpretar la ausencia de un mensaje en el historial como prueba de que una persona concreta lo haya eliminado.
+**Se debe reflejar:** una secuencia de versiones conservadas e intervalos desconocidos explícitos. Mantén por separado los avisos de eliminación, las revisiones fallidas y cualquier atribución a una persona.
 
 **Un participante cambia de nombre en varios chats**
 
@@ -188,4 +190,4 @@ Compruebe los resultados reales del verificador, conserve los originales y guard
 
 **Rastreo:** identificador numérico del remitente → historial de nombres/nombres de usuario guardados → respuestas → otros chats en el espacio de trabajo → destinatarios mencionados y archivos guardados. Compruebe los registros de origen de cada conexión identificada; mantenga separadas las cuentas similares.
 
-**Resultado:** una cronología de la actividad de la cuenta con referencias y hipótesis independientes sobre las relaciones. La similitud de nombres y el pHash del avatar son pistas, no pruebas de identidad.
+**Resultado esperado:** una cronología de la actividad de la cuenta con referencias y hipótesis separadas sobre las relaciones. Utiliza la similitud de nombres y el pHash del avatar para seleccionar pistas que justifiquen un análisis más detallado de las fuentes.

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/exports/
 
-Share a signed record that someone else can check.
+Give a recipient files they can check against the collecting workspace and its saved history.
 
 Retain a referenceExport signed ZIPRecipient verifies
 
@@ -16,9 +16,9 @@ Save the workspace’s public-key fingerprint outside the collector. During coll
 
 ## Download the signed ZIP
 
-Open **Exports** and create a signed evidence ZIP. It includes the workspace journal and a signed file manifest. Panel filters do not limit this full-journal export: review the material before sharing it.
+Open **Exports** and create a signed evidence ZIP. It includes the full workspace journal and a signed file manifest. Use [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/) to shape its readable report, or a [handover extract](https://phishdestroy.github.io/TgWitness/docs/handover/) to deliver only selected, minimized data.
 
-Standalone HTML and CSV downloads are useful for reading and analysis. Keep the signed ZIP as the verifiable original; the separate HTML or CSV file has no standalone signature.
+HTML, PDF and JSON reports carry their own signed seals and can be checked separately. CSV is a convenient analysis copy; use the exact CSV inside the verified ZIP to check its integrity. Keep the signed ZIP when the recipient also needs the source records and attachments.
 
 ## Verify with a trusted copy of TgWitness
 
@@ -30,13 +30,14 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 
 
 When both references pass, the result reports `key_pinned: true` and `checkpoint_checked: true`. Keep the verification result with the original archive. The retained checkpoint must be at or before the export’s boundary.
 
-## Understand the result
+## Use the verification result
 
-- **Integrity:** the recorded history and exported files match their signatures.
-- **Earlier observation:** an external checkpoint lets you compare the export with a previously retained journal prefix.
-- **Delivery:** a controlled send → edit → delete test checks specific events against the captured record.
+- **Check the delivered files:** the manifest binds their hashes, and record signatures bind the saved journal. A changed file or broken record chain is detected.
+- **Check the workspace identity:** the independently retained fingerprint identifies the signing key you expected.
+- **Compare an earlier boundary:** a retained checkpoint checks the export against a journal prefix saved before the handoff.
+- **Review collection coverage:** gaps, acquisition results and a controlled send → edit → delete test describe the events this setup captured.
 
-A valid signature does not prove that every Telegram event arrived, that the source told the truth or that the collector’s clock was correct.
+Keep these results with the recipient's copy. See [what verification establishes](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) for the scope of the checks and the separate assessment of source claims and collection coverage.
 
 ## Set up the S3 off-site copy
 
@@ -59,30 +60,24 @@ The complete panel with advanced options expanded. No storage credentials are sh
 | Copy interval | From 1 to 1,440 minutes; default 5 minutes. The application must be running for scheduled copies. |
 | Object Lock retention | Retention days and mode for a bucket that supports Object Lock. Zero days leaves the bucket’s default retention in effect. |
 
-1. Enter the destination and credentials. Leave **Keep an off-site copy** unchecked while preparing, then select **Save off-site copy**.
+1. Create the bucket with your provider, then enter its destination and credentials. Leave **Keep an off-site copy** unchecked while preparing, then select **Save off-site copy**.
 2. Select **Test connection**. This uploads an encrypted test object and checks the storage response.
 3. Select **Download encryption key**. Keep that file separately from the collector; it is required for recovery.
 4. Enable the **Keep an off-site copy** checkbox and save again. Select **Copy now** for a manual pass, or leave the schedule running.
 
-**Does not do** It does not create a storage bucket. Scheduled uploads stop when the application stops.
-
 ## Check retention and copy progress
 
-Under **More options**, choose retention days and `GOVERNANCE` or `COMPLIANCE` when your bucket supports Object Lock. TgWitness reads back the retention mode and deadline of an uploaded object. The status reports confirmation, missing retention or a check failure; a successful upload alone is not confirmation of retention.
+Under **More options**, choose retention days and `GOVERNANCE` or `COMPLIANCE` when your bucket supports Object Lock. TgWitness reads back the retention mode and deadline of an uploaded object. Review the separate retention result: confirmed, missing retention or check failed.
 
 The panel reports the last pass, object count, transferred bytes, the copied journal boundary and any error. Missing or changed local media is reported and retried on the next pass. Files, checkpoints and queued exports after that media can still be copied.
 
-Uploads use the workspace’s Direct, SOCKS5 or HTTP route. S3 copying is unavailable over MTProxy; the application does not fall back to a direct connection.
-
-**Does not do** It does not make a provider enforce Object Lock merely because the upload was accepted.
+Uploads use the workspace’s Direct, SOCKS5 or HTTP route. Choose one of these routes for S3 copying; an MTProxy-only route leaves the copy pending with an error.
 
 ## Keep the recovery key separately
 
-The downloaded JSON contains the decryption key, destination settings, workspace object prefix and signing-key fingerprint. It does not contain the S3 access credentials: recovery needs separate credentials with read access to the bucket.
+The downloaded JSON contains the decryption key, destination settings, workspace object prefix and signing-key fingerprint. Recovery needs both this key file and separate storage credentials with read access to the bucket. Keep them in your recovery plan.
 
 If you change the endpoint, bucket or folder prefix, download the key file again so its destination settings match. The application starts a new copy of the locally retained journal, files and checkpoints at the new destination. Finished chat exports already removed from the local upload queue remain at their previous destination.
-
-**Does not do** It does not decrypt the copy without the exported key. Storage access credentials cannot replace that key.
 
 ## Restore and verify on another machine
 
@@ -108,4 +103,4 @@ Downloads and decrypted objects stay in private temporary storage while the enti
 
 Successful recovery produces `events.jsonl`, `media/`, `checkpoints/` and `exports/` for the material available in the copy. Keep the command’s JSON result with the recovered material.
 
-**Does not do** It does not reconstruct observations that never reached the journal or replace an independently retained checkpoint or witness.
+Compare recovered material with your independently retained checkpoints or witness records, then review the recorded collection coverage for the period you need.

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/exports/
 
-Udostępnij podpisany zapis, który może zweryfikować inna osoba.
+Należy udostępnić odbiorcy pliki, które będzie mógł porównać z obszarem roboczym zbierania danych i jego zapisaną historią.
 
 Zachować odniesienieEksportuj podpisany plik ZIPOdbiorca weryfikuje
 
@@ -16,9 +16,9 @@ Proszę zapisać odcisk klucza publicznego obszaru roboczego poza kolektorem. Po
 
 ## Pobierz podpisany plik ZIP
 
-Proszę otworzyć **opcję „Eksportuj”** i utworzyć podpisany plik ZIP z dowodami. Zawiera on dziennik obszaru roboczego oraz podpisany manifest plików. Filtry panelowe nie ograniczają eksportu pełnego dziennika: proszę przejrzeć materiał przed jego udostępnieniem.
+Otwórz **opcję „Exports”** i utwórz podpisany plik ZIP z dowodami. Zawiera on pełny dziennik obszaru roboczego oraz podpisany manifest plików. Skorzystaj z [narzędzia](https://phishdestroy.github.io/TgWitness/pl/docs/reports/) [„Report Studio”](https://phishdestroy.github.io/TgWitness/pl/docs/reports/), aby stworzyć czytelny raport, lub z opcji [„Handover Extract”](https://phishdestroy.github.io/TgWitness/pl/docs/handover/), aby dostarczyć wyłącznie wybrane, zredukowane dane.
 
-Pliki HTML i CSV do pobrania w postaci samodzielnych plików są przydatne do przeglądania i analizy. Proszę zachować podpisany plik ZIP jako weryfikowalny oryginał; oddzielny plik HTML lub CSV nie posiada samodzielnego podpisu.
+Raporty w formatach HTML, PDF i JSON posiadają własne podpisane pieczęcie i można je weryfikować oddzielnie. Plik CSV stanowi wygodną kopię do analizy; w celu sprawdzenia jego integralności należy użyć dokładnie tego samego pliku CSV, który znajduje się w zweryfikowanym pliku ZIP. Należy zachować podpisany plik ZIP, jeśli odbiorca potrzebuje również oryginalnych zapisów i załączników.
 
 ## Proszę zweryfikować to za pomocą zaufanej kopii TgWitness
 
@@ -30,13 +30,14 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 
 
 Gdy oba odniesienia zostaną zatwierdzone, w raporcie wynikowym pojawią się wartości `key_pinned: true` i `checkpoint_checked: true`. Wynik weryfikacji należy zachować wraz z oryginalnym archiwum. Zachowany punkt kontrolny musi znajdować się na granicy eksportu lub przed nią.
 
-## Zrozumienie wyniku
+## Wykorzystaj wynik weryfikacji
 
-- **Integralność:** zarejestrowana historia oraz wyeksportowane pliki są zgodne z ich podpisami.
-- **Wcześniejsza uwaga:** zewnętrzny punkt kontrolny umożliwia porównanie wyeksportowanych danych z wcześniej zachowanym prefiksem dziennika.
-- **Realizacja:** kontrolowany test wysyłania → edycji → usuwania pozwala zweryfikować konkretne zdarzenia w oparciu o zarejestrowane dane.
+- **Należy sprawdzić dostarczone pliki:** manifest wiąże ich skróty, a podpisy rekordów wiążą zapisany dziennik. Wykrywane są zmienione pliki lub przerwane łańcuchy rekordów.
+- **Sprawdź tożsamość obszaru roboczego:** niezależnie przechowywany odcisk palca identyfikuje klucz podpisujący, którego oczekiwałeś.
+- **Porównaj wcześniejszy punkt graniczny:** zachowany punkt kontrolny weryfikuje eksport w oparciu o prefiks dziennika zapisany przed przekazaniem.
+- **Należy sprawdzić zakres zebranych danych:** luki, wyniki pozyskania oraz kontrolowany test „wyślij → edytuj → usuń” opisują zdarzenia zarejestrowane w tej konfiguracji.
 
-Ważny podpis nie stanowi dowodu na to, że każde zdarzenie w Telegramie miało miejsce, że źródło podało prawdziwe informacje ani że zegar osoby gromadzącej dane był prawidłowo ustawiony.
+Wyniki te należy zachować wraz z kopią przeznaczoną dla odbiorcy. Należy sprawdzić, [co ustala weryfikacja](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) w zakresie kontroli oraz oddzielnej oceny twierdzeń źródłowych i zakresu gromadzenia danych.
 
 ## Skonfiguruj kopię zapasową w usłudze S3 poza siedzibą firmy
 
@@ -59,30 +60,24 @@ Pełny panel z rozwijanymi opcjami zaawansowanymi. Nie są wyświetlane żadne d
 | Interwał kopiowania | Od 1 do 1 440 minut; domyślnie 5 minut. Aby kopie były tworzone zgodnie z harmonogramem, aplikacja musi być uruchomiona. |
 | Przechowywanie danych w Object Lock | Okres przechowywania i tryb dla zasobnika obsługującego funkcję Object Lock. Ustawienie „zero dni” powoduje, że obowiązuje domyślny okres przechowywania zasobnika. |
 
-1. Wprowadź miejsce docelowe oraz dane uwierzytelniające. Podczas przygotowywania pozostaw **opcję „Zachowaj kopię poza lokalizacją”** niezaznaczoną, a następnie wybierz opcję **„Zapisz kopię poza lokalizacją**”.
+1. Utwórz zasób w swoim serwisie, a następnie wprowadź jego lokalizację docelową i dane uwierzytelniające. Podczas przygotowywania pozostaw **opcję „Zachowaj kopię poza lokalizacją”** niezaznaczoną, a następnie wybierz opcję **„Zapisz kopię poza lokalizacją**”.
 2. Proszę wybrać opcję **„Test połączenia**”. Spowoduje to przesłanie zaszyfrowanego obiektu testowego i sprawdzenie odpowiedzi serwera.
 3. Proszę wybrać opcję **„Pobierz klucz szyfrujący**”. Proszę przechowywać ten plik oddzielnie od programu zbierającego dane; będzie on niezbędny do odzyskania danych.
 4. Zaznacz pole wyboru **„Zachowaj kopię poza serwerem**” i zapisz ponownie. Wybierz opcję **„Kopiuj teraz”**, aby przeprowadzić operację ręcznie, lub pozostaw harmonogram w działaniu.
 
-**Nie** tworzy kontenera pamięci masowej. Zaplanowane przesyłanie danych zostaje wstrzymane wraz z zakończeniem działania aplikacji.
-
 ## Sprawdź stan przechowywania danych i postęp kopiowania
 
-W sekcji **„Więcej opcji**” proszę wybrać liczbę dni przechowywania oraz opcję „`GOVERNANCE`” lub „`COMPLIANCE`”, jeśli Państwa zasób danych obsługuje funkcję Object Lock. TgWitness odczytuje tryb przechowywania oraz termin ważności przesłanego obiektu. Status informuje o potwierdzeniu, braku przechowywania lub niepowodzeniu weryfikacji; samo pomyślne przesłanie nie stanowi potwierdzenia przechowywania.
+W sekcji **„More options”** (**Więcej opcji**) wybierz liczbę dni przechowywania oraz opcję „`GOVERNANCE`” (Zarządzanie) lub „`COMPLIANCE`” (Zgodność), jeśli Twój zasób danych obsługuje funkcję Object Lock. TgWitness odczytuje tryb przechowywania i termin wygaśnięcia przesłanego obiektu. Sprawdź oddzielny wynik przechowywania: potwierdzone, brak przechowywania lub niepowodzenie sprawdzania.
 
 Panel wyświetla informacje o ostatnim przebiegu, liczbie obiektów, liczbie przesłanych bajtów, granicy skopiowanego dziennika oraz ewentualnych błędach. Brakujące lub zmienione nośniki lokalne są zgłaszane, a próba ich skopiowania jest powtarzana podczas następnego przebiegu. Pliki, punkty kontrolne oraz eksporty oczekujące w kolejce po tych nośnikach mogą nadal zostać skopiowane.
 
-Przesyłanie danych odbywa się za pośrednictwem protokołów Direct, SOCKS5 lub HTTP w ramach obszaru roboczego. Kopiowanie do S3 nie jest dostępne za pośrednictwem MTProxy; aplikacja nie przechodzi w tryb połączenia bezpośredniego.
-
-**Nie powoduje** to, że dostawca jest zobowiązany do egzekwowania funkcji Object Lock wyłącznie z powodu zaakceptowania przesłanego pliku.
+Przesyłanie danych odbywa się za pośrednictwem trasy Direct, SOCKS5 lub HTTP w obszarze roboczym. Należy wybrać jedną z tych tras do kopiowania do S3; trasa wykorzystująca wyłącznie MTProxy powoduje, że kopiowanie pozostaje w stanie oczekującym z komunikatem o błędzie.
 
 ## Klucz odtwarzający należy przechowywać oddzielnie
 
-Pobrany plik JSON zawiera klucz deszyfrujący, ustawienia miejsca docelowego, prefiks obiektu obszaru roboczego oraz odcisk palca klucza podpisu. Nie zawiera on danych uwierzytelniających dostępu do S3: przywrócenie danych wymaga oddzielnych danych uwierzytelniających z uprawnieniami do odczytu w zasobniku.
+Pobrany plik JSON zawiera klucz deszyfrujący, ustawienia miejsca docelowego, prefiks obiektu obszaru roboczego oraz odcisk palca klucza podpisu. Odzyskiwanie wymaga zarówno tego pliku klucza, jak i oddzielnych poświadczeń dostępu do pamięci masowej z uprawnieniami do odczytu w zasobniku. Należy uwzględnić je w planie odzyskiwania danych.
 
 W przypadku zmiany punktu końcowego, zasobnika lub prefiksu folderu należy ponownie pobrać plik klucza, aby ustawienia miejsca docelowego były zgodne. Aplikacja uruchamia nową kopię lokalnie przechowywanego dziennika, plików i punktów kontrolnych w nowym miejscu docelowym. Gotowe eksporty czatów, które zostały już usunięte z lokalnej kolejki przesyłania, pozostają w poprzednim miejscu docelowym.
-
-**Nie** odszyfrowuje kopii bez wyeksportowanego klucza. Dane uwierzytelniające dostępu do pamięci masowej nie mogą zastąpić tego klucza.
 
 ## Przywrócenie i weryfikacja na innym komputerze
 
@@ -108,4 +103,4 @@ Pobrane i odszyfrowane obiekty pozostają w prywatnej pamięci tymczasowej na cz
 
 Pomyślne odzyskanie danych generuje wyniki `events.jsonl`, `media/`, `checkpoints/` oraz `exports/` dla materiałów dostępnych w kopii. Proszę zachować wynik polecenia w formacie JSON wraz z odzyskanymi materiałami.
 
-**Nie odtwarza** obserwacji, które nigdy nie trafiły do dziennika, ani nie zastępuje niezależnie zachowanych punktów kontrolnych lub świadków.
+Porównaj odzyskane materiały z niezależnie zachowanymi punktami kontrolnymi lub zapisami świadków, a następnie przejrzyj zakres zgromadzonych danych dla wybranego okresu.

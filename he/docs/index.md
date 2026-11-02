@@ -1,22 +1,32 @@
-# עקבו אחר המסר. הבינו את הראיות.
+# מרשומות Telegram לתיק ברור.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 
-בצעו את התיעוד הראשון שלכם, בדקו כיצד הראיות פועלות, ואז בנו את התצורה הדרושה לכם.
+עבדו עם הודעות ושינויים שנשמרו, קישרו את הממצאים שלכם למקורותיהם, והכינו קבצים חתומים לבדיקה.
 
-[המדריך האינטראקטיבי לשטח**הביאו לשינוי. גלו מה מתועד בראיות.** הצג את היסטוריית ההודעה, שנה את הרישום ועקוב אחר ה-hash שלה. עיינו במדריך הוויזואלי](https://phishdestroy.github.io/TgWitness/he/docs/concepts/) [## מצבים, תרחישים ורמות ראיות היקפי איסוף, גבולות אירועים, שמונה מנגנוני אימות וששה תרחישי חקירה בדיוניים.](https://phishdestroy.github.io/TgWitness/he/guides/modes.html)
+## למדו על תהליכי העבודה
+
+מדריכים מאוירים
+
+[### Case Board יש לשמור על הקשר בין תצפיות, ציטוטים מדויקים והערות הצוות.](https://phishdestroy.github.io/TgWitness/he/docs/case-board/) [### סטודיו לדוחות בחרו את החומר ואת אחד משמונת עיצובי הדוחות.](https://phishdestroy.github.io/TgWitness/he/docs/reports/) [### שיתוף הטקסט הכן תמצית חתומה הכוללת את השדות הדרושים למקבל.](https://phishdestroy.github.io/TgWitness/he/docs/handover/) [### קבוצות חשבונות יש לעיין בחשבונות יחד ולשמור על הפרדה בין סביבות העבודה שלהם.](https://phishdestroy.github.io/TgWitness/he/docs/groups/)
+
+[## מצבים, תרחישים ורמות ראיות היקפי איסוף, גבולות אירועים, שמונה מנגנוני אימות וששה תרחישי חקירה בדיוניים.](https://phishdestroy.github.io/TgWitness/he/guides/modes.html)
 
 ## ההודעה הראשונה שנלכדה
 
 [### התחילו תוך דקות ספורות נסו את TgWitness עם נתוני דוגמה, ולאחר מכן הפעילו סביבת עבודה משלכם לניטור טלגרם ב-Windows, Linux או macOS.](https://phishdestroy.github.io/TgWitness/he/docs/start/)[### חשבון ייעודי הכינו חשבון טלגרם נפרד לצורך איסוף הנתונים.](https://phishdestroy.github.io/TgWitness/he/docs/dedicated-account/)[### חבר חשבון חברו את Telegram באמצעות קוד QR, מספר טלפון או ייבוא הפעלה. בחרו מקורות וודאו שהודעות חדשות מגיעות ליומן שלכם.](https://phishdestroy.github.io/TgWitness/he/docs/accounts/)[### בחר פרוקסי שמור על נתיבי MTProxy אוטומטיים או השתמש בפרוקסי משלך. בחר מצבי IP, כללי גיבוי והנתיב לבקשות חיצוניות.](https://phishdestroy.github.io/TgWitness/he/docs/proxies/)[### ייצוא ואימות ייצוא היסטוריית טלגרם שנלכדה, אימות חתימות והשוואת היומן לנקודת ביקורת שנשמרה על ידי עד בלתי תלוי.](https://phishdestroy.github.io/TgWitness/he/docs/exports/)[### תיעוד פעולות GitHub ייצא צ'אט אחד מ-Telegram ל-GitHub Runner זמני.](https://phishdestroy.github.io/TgWitness/he/docs/capture/)
 
+## מרשומות שנשמרו לדוח משותף
+
+[### חקור בכל הצ'אטים ביצוע חקירה מקיפה ב-Telegram על פני ערוצים, קבוצות, צ'אטים פרטיים ובוטים: תיעוד מלא של החשבון, היסטוריה, משתמשים, קישורים, קבצים, ציר זמן וראיות מאומתות.](https://phishdestroy.github.io/TgWitness/he/docs/cases/)[### הקימו לוח תיקים אספו תצפיות שנשמרו, נקודות עיקריות מדויקות וקטעי פעולות בלוח פרטי, דנו בהן עם הצוות שלכם והציגו את האוסף.](https://phishdestroy.github.io/TgWitness/he/docs/case-board/)[### עיצוב דוח בחרו את נתוני הדוח, אחד משמונה עיצובים ואת התוכן, ולאחר מכן צפו בתצוגה מקדימה וייצאו קובץ HTML, קובץ PDF חתום או חבילת ראיות מלאה.](https://phishdestroy.github.io/TgWitness/he/docs/reports/)[### הכן עותק לשיתוף יש לבחור את הרשומות והשדות שהנמען יכול לקבל, לבדוק את העותק המוגמר ולאמת את רשימת התוכן החתומה ואת גבולות יומן המקור.](https://phishdestroy.github.io/TgWitness/he/docs/handover/)[### ניהול קבוצת חשבונות השוו בין סביבות עבודה קבוצתיות, אתרו מקור, סקרו תקופות תצפית והחילו הגדרות משותפות עם חריגים לכל חשבון.](https://phishdestroy.github.io/TgWitness/he/docs/groups/)
+
 ## למדו על ידי ניסיון
 
-[### ראו כיצד הראיות פועלות עקבו אחר הודעה משלב הלכידה ועד לנקודת הבדיקה. שנו רשומה לדוגמה, חשבו מחדש את שרשרת ה-SHA-256 שלה וראו מה נקודת הבדיקה שנשמרה מזהה.](https://phishdestroy.github.io/TgWitness/he/docs/concepts/)[### חקור בכל הצ'אטים ביצוע חקירה מקיפה ב-Telegram על פני ערוצים, קבוצות, צ'אטים פרטיים ובוטים: תיעוד מלא של החשבון, היסטוריה, משתמשים, קישורים, קבצים, ציר זמן וראיות מאומתות.](https://phishdestroy.github.io/TgWitness/he/docs/cases/)[### שמרו על האבטחה גלו היכן מאוחסנים הפעלות, מפתחות וראיות, מה יוצא מהמחשב שלכם, מה מכסים אמצעי ההגנה וכיצד לחזק את ההתקנה.](https://phishdestroy.github.io/TgWitness/he/docs/security/)
+[### ראו כיצד הראיות פועלות עקבו אחר הודעה משלב הלכידה ועד לנקודת הבדיקה. שנו רשומה לדוגמה, חשבו מחדש את שרשרת ה-SHA-256 שלה וראו מה נקודת הבדיקה שנשמרה מזהה.](https://phishdestroy.github.io/TgWitness/he/docs/concepts/)[### שמרו על האבטחה גלו היכן מאוחסנים הפעלות, מפתחות וראיות, מה יוצא מהמחשב שלכם, מה מכסים אמצעי ההגנה וכיצד לחזק את ההתקנה.](https://phishdestroy.github.io/TgWitness/he/docs/security/)[### הגדרת בוט Witness פרסם נקודות ביקורת חתומות מהיומן בערוץ הטלגרם שלך באמצעות עד נפרד, עם מפתח משלו וגישה לאספן לקריאה בלבד.](https://phishdestroy.github.io/TgWitness/he/docs/witness/)
 
 ## הוסף רק את מה שאתה צריך
 
-[### עבוד עם הארכיון טען היסטוריה, חפש ברשומות שנשמרו, בדוק מקורות בינה מלאכותית וחבר את הכלים שלך.](https://phishdestroy.github.io/TgWitness/he/docs/archive/)[### שתף מקרה הענק למבקרים ולמנתחים גישה לחשבונות וצ'אטים נבחרים, עם הרשאות נפרדות, הגבלות על משך ההפעלה ואסימונים הניתנים לביטול.](https://phishdestroy.github.io/TgWitness/he/docs/access/)[### הגדרת בוט Witness פרסם נקודות ביקורת חתומות מהיומן בערוץ הטלגרם שלך באמצעות עד נפרד, עם מפתח משלו וגישה לאספן לקריאה בלבד.](https://phishdestroy.github.io/TgWitness/he/docs/witness/)[### המשך להפעיל את האתר הפעל את TgWitness בשרת עם אחסון קבוע, גישה לפאנל פרטי, גיבויים ובדיקות לאחר אתחול מחדש.](https://phishdestroy.github.io/TgWitness/he/docs/server/)[### גלה מה השתבש בדקו את הגישה ללוח הבקרה, את החיבור ל-Telegram, הודעות חסרות, את מצב ה-FloodWait ואת מצב ה-witness באמצעות האותות המתאימים לכל בעיה.](https://phishdestroy.github.io/TgWitness/he/docs/troubleshooting/)
+[### עבוד עם הארכיון טען היסטוריה, חפש ברשומות שנשמרו, בדוק מקורות בינה מלאכותית וחבר את הכלים שלך.](https://phishdestroy.github.io/TgWitness/he/docs/archive/)[### שתף מקרה הענק למבקרים ולמנתחים גישה לחשבונות וצ'אטים נבחרים, עם הרשאות נפרדות, הגבלות על משך ההפעלה ואסימונים הניתנים לביטול.](https://phishdestroy.github.io/TgWitness/he/docs/access/)[### המשך להפעיל את האתר הפעל את TgWitness בשרת עם אחסון קבוע, גישה לפאנל פרטי, גיבויים ובדיקות לאחר אתחול מחדש.](https://phishdestroy.github.io/TgWitness/he/docs/server/)[### גלה מה השתבש בדקו את הגישה ללוח הבקרה, את החיבור ל-Telegram, הודעות חסרות, את מצב ה-FloodWait ואת מצב ה-witness באמצעות האותות המתאימים לכל בעיה.](https://phishdestroy.github.io/TgWitness/he/docs/troubleshooting/)
 
 ## ההפניה המלאה
 
@@ -32,11 +42,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 
 ארכיון ושילובים
 
-[ניתוח ארכיונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/analysis/)[MCP לקריאה בלבד](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/)[OCR מקומי ותמלול](https://phishdestroy.github.io/TgWitness/he/docs/reference/media-analysis/)[webhooks יוצאים](https://phishdestroy.github.io/TgWitness/he/docs/reference/webhooks/)
+[הפניה ל-Case Board](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/)[ניתוח ארכיונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/analysis/)[MCP לקריאה בלבד](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/)[OCR מקומי ותמלול](https://phishdestroy.github.io/TgWitness/he/docs/reference/media-analysis/)[webhooks יוצאים](https://phishdestroy.github.io/TgWitness/he/docs/reference/webhooks/)
 
 ראיות
 
-[כיצד פועלת הראיה](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/)[פורמט הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)[עד עצמאי](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/)[חותמות זמן](https://phishdestroy.github.io/TgWitness/he/docs/reference/timestamp/)
+[כיצד פועלת הראיה](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/)[תצורת הדוח ואימותו](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/)[פורמט הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)[עד עצמאי](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/)[חותמות זמן](https://phishdestroy.github.io/TgWitness/he/docs/reference/timestamp/)
 
 אבטחה ופרויקט
 

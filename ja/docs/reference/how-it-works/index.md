@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-i
 
 TgWitnessは、収集アカウントが観測した内容を保存し、それらの観測結果を 署名付きジャーナルにリンクさせ、信頼できる 鍵と以前に保存されたチェックポイントを用いて、別の担当者がエクスポート内容を検証できるようにします。
 
-[このローカルドキュメントサイト](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)には、 `/docs/concepts/` にインタラクティブな例、 `/docs/witness/` にチェックポイント決定エクスプローラーが追加されています。すべての例示メッセージ、 カウント、および遅延は架空のものです。チェーンサンドボックス内のハッシュは、 ブラウザ上で SHA-256 を使用して計算されます。Telegram には一切送信されません。
+[ローカルのドキュメントウェブサイト](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)には、 `/docs/concepts/` にインタラクティブな例、 `/docs/witness/` にチェックポイント決定エクスプローラー、および [Case Board](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/)、 [レポート作成](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-reports/)、[引き渡し抜粋](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#handover-extract)の手順解説が追加されています。 すべてのサンプルメッセージ、 カウント、遅延は架空のものです。チェーンサンドボックス内のハッシュは、 ブラウザ上で SHA-256 を使用して計算されます。Telegram には何も送信されません。
 
 ## メッセージは変化し、観察結果は蓄積されていきます
 
@@ -92,7 +92,7 @@ Nexport ≥ Ncheckpoint and hexport[Ncheckpoint] = Hcheckpoint
 
 このウィットネスは、ロールバック、同じカウント数で異なるヘッダー、変更されたキー、 無効な回答、および欠落した応答を記録します。カウント数が増加しただけでは、 それ以前のすべての記録が変更されていないとは断定できません。エクスポートデータを、保存されている チェックポイントと比較してください。別のホスト上のウィットネスを利用することで、コレクターのホストの障害の影響を受けずに済みます。 また、別のオペレーターが運用することで、さらなる独立性が確保されます。
 
-この「witness」は、コレクターから報告されたジャーナルの状態を証明するものです。 Telegramのすべてのメッセージを独自に監視するものではありません。[witnessの設定についてはこちら](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/)をご覧ください。
+ウィットネスは、コレクターが報告したジャーナルの状態を証明します。制御された 配信テストを使用して、どの Telegram アクションが収集アカウントに到達したかを測定してください。 [ウィットネスの設定を](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/)参照してください。
 
 ## 既知のアクションに対するテストの実施
 
@@ -106,14 +106,14 @@ R = |observed∩expected| / |expected| Δ t = treceipt - taction
 
 [調査の完全な手順は](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)、 チャンネル、グループ、ボット、プライベートチャットにまたがるインシデントを例に解説しています：
 
-1. アカウント全体の調査モードを有効にし、アクセス可能なすべてのチャットを網羅的に記録します。
+1. 専用の収集アカウントで、アカウント全体の調査モードを有効にし、 アクセス可能なチャットを一覧表示します。メインアカウントには、選択したチャットまたはフォルダを使用します。
 2. ジャーナルのスナップショット、チャットごとの完全な履歴、および保存された添付データを取得できます。
 3. リアルタイムの変更や、パネルとの意図的なやり取りを、その記録とともに保存します。
 4. 引用された記録や人物プロフィールを通じて、数値の送信者ID、返信の関係性、繰り返される宛先、およびファイルの ハッシュを追跡します。
-5. タイムスタンプと明示的な空白期間の両方を含め、チャット間のタイムラインを再構築します。
+5. Case Board にソースにリンクされたメモやコレクションを追加してください。タイムスタンプと明示的な空白期間の両方を含めた、チャット横断的な タイムラインを再構築してください。
 6. 他のアカウントのワークスペースを比較しつつ、それぞれの起源と鍵を分離して管理します。
 7. 署名付きジャーナル、プロフィール、履歴のエクスポートデータを、ケースノートとともにまとめ、検証してください。
 
-当サイトの「`/docs/cases/`」ガイドには、インタラクティブなケースマップや、 ボットをめぐる紛争、削除されたメッセージ、参加者の名前変更などに関する対応例が掲載されています。ケースノート やワークスペース横断的な分析は外部で行われます。本アプリケーションは、 グローバルな調査グラフや統合されたケースアーカイブを自動的に生成するものではありません。
+ウェブサイトの `/docs/cases/` ガイドには、インタラクティブなケースマップや、 ボットをめぐる紛争、削除されたメッセージ、参加者の名前変更に対応したバリエーションが含まれています。Case Board は、ワークスペース内にメモやコレクションを管理します。グループエクスポートでは、個別の ワークスペースパッケージをまとめて収集しますが、ワークスペース間の相関分析や統合タイムラインの作成は、 引き続きアナリストの業務となります。
 
 [検証完了事項および残りの作業](https://phishdestroy.github.io/TgWitness/ja/docs/reference/verification/) · [エクスポートと検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#investigation-handoff) · [まずは1つのアカウントから始めましょう](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)

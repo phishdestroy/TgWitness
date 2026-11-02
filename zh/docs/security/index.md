@@ -79,7 +79,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/security/
 - 服务器管理员可以读取所有内容，并可重写和重新签署日志。请将指纹和检查点保存在另一台系统上。
 - TgWitness 不会对消息文本和媒体文件进行加密。请使用磁盘加密并设置严格的权限。
 - 若通过 localhost 以外的普通 HTTP 连接，网络上将暴露令牌。请使用 HTTPS 或 SSH 隧道。
-- 签名仅证明所记录的内容未被篡改，而非证明每个 Telegram 事件均已被记录。
+- 通过签名和检查点核对已保存的记录。审查数据采集的覆盖范围，并针对您使用的账户和来源测试数据交付情况。
 
 可通过设置权限、有效期和会话限制[来共享案件访问权限](https://phishdestroy.github.io/TgWitness/zh/docs/access/)。Witness 令牌仍作为独立的凭证存在。
 

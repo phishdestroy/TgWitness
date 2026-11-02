@@ -2,9 +2,9 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/
 
-Bugungi kunda TgWitness nimani amalga oshiradi, Telegram platformasi nimani cheklaydi va kelajakda bajarilishi lozim bo'lgan ishlar.
+Joriy yig'ish modeli, ko'p hisobli ish jarayonlari, eksportlar va TgWitness'ning operatsion chegaralari.
 
-Dizayn referensi: 26 oktyabr 2026. Asosiy foydalanish holati bog'langan hisoblarga kirish mumkin bo'lgan shaxsiy Telegram guruhlari va kanallardir. Ushbu hujjat amalga oshirilgan xatti-harakatlar, platforma chegaralari va kelajakdagi ishlarni ajratadi. Maqsadli arxitektura elementi xususiyat allaqachon mavjudligini da'vo qilmaydi.
+TgWitness ulanilgan hisoblarga kirish mumkin bo'lgan Telegram suhbatlarini saqlaydi, kuzatilgan o'zgarishlarni qayd etadi va tekshirilishi mumkin bo'lgan eksportlarni tayyorlaydi. Ushbu qo'llanma to'plash modelini, joriy ish jarayonlarini va ularning chegaralarini tasvirlaydi.
 
 ## Mustaqil ilova
 
@@ -12,17 +12,19 @@ TgWitness o'zining o'rnatish jarayoni, ma'lumotlar katalogi va chiqarish hayotiy
 
 Operator o'z hisoblarini bog'laydi, har birida ko'rinadigan manbalarni tanlaydi va saqlangan kuzatuv jurnalini oladi. Panel kontentni, saqlangan o'zgarishlarni, kuzatuv kelib chiqishini va ma'lum bo'shliqlarni ko'rsatadi. Boshqa tergovchi eksport qilingan materialni tasdiqlay oladi.
 
-To'rt alohida holat muhim: hisobni avtorizatsiya qilish, manbaga kirish, ishlaydigan yig'uvchi va yetkazib berish to'liqligining qanchalik aniqlanganligi. Birinchi uchtasi to'rtinchisini avtomatik ravishda isbotlamaydi. Jim guruh har doim ham ishlamagan yig'uvchi degani emas.
+Panel akkauntni avtorizatsiya qilish, manbaga kirish, yig'uvchi faoliyati va qayd etilgan qamrovni ajratib ko'rsatadi. Kam xabarli intervallarni yoki ulanish muammosini baholashda ushbu holatlarni birgalikda ko'rib chiqing.
 
 ## Hamkorlikdagi tergovlar
 
-Administrator ish maydonlari va yakka chatlar uchun mo'ljallangan, yetti xil ruxsat, IP-cheklovlar, amal qilish muddati, kirish limitlari va sessiya nazorati bilan [access tokenlarini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/) chiqarishi mumkin. Faqat o'qish huquqiga ega ko'rib chiquvchi Telegram avtorizatsiyasini yoki asosiy panel kalitini olmasdan ishni tekshirishi mumkin. Suhbat bilan cheklangan kirish akkaunt bo'ylab sozlamalar va to'liq jurnal eksportlaridan alohida bo'lib qoladi.
+Administrator ish maydonlari va yakka chatlarga mo'ljallangan, har bir harakat uchun ruxsatnomalar, IP-cheklovlar, amal qilish muddati, tizimga kirish limitlari va sessiya nazorati bilan [kirish tokenlarini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/) berishi mumkin. Faqat o'qish huquqiga ega ko'rib chiquvchi Telegram avtorizatsiyasini yoki asosiy panel kalitini olmasdan ishni tekshirishi mumkin. Suhbat bilan cheklangan kirish akkaunt bo'ylab sozlamalar va to'liq jurnal eksportlaridan alohida bo'lib qoladi.
 
 Avtomatik MTProxy to'rtta ommaviy manba yoki operator katalogidan Telegram ishchi yo'nalishlarini saqlab turadi. [IP rejimlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/#ip-modes) nosozlikda boshqa proksiga kutish kerakmi yoki aniq ruxsat etilgan to'g'ridan-to'g'ri yo'nalishdan foydalanish mumkinligini belgilaydi. Tashqi HTTP so'rovlariga alohida yo'nalish va o'chirish tugmasi mavjud.
 
 ## Arxiv vositalari
 
 0.7.1-da [tarixni olish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/), [arxiv qidiruvi va tahlili](https://phishdestroy.github.io/TgWitness/uz/docs/reference/analysis/),[faqat o'qish uchun mo'ljallangan MCP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/), [mahalliy OCR/transkripsiya](https://phishdestroy.github.io/TgWitness/uz/docs/reference/media-analysis/) va[chiquvchi webhooks funksiyalari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/webhooks/) mavjud. Analitik hisobotlar va tan olingan matn yozib olingan voqealardan alohida saqlanadi.
+
+[Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/) ish maydonida manbaga bog'langan belgilamalar, iqtiboslar, eslatmalar va to'plamlarni qo'shadi. [Hisobot konstruktori](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-reports/) material, bo'limlar va qo'llab-quvvatlanadigan HTML/PDF eksportlari uchun sakkiz xil dizayndan birini tanlaydi.
 
 ## Ixtiyoriy qo'shimchalar
 
@@ -53,9 +55,9 @@ Panel istalgan sonli **ish maydonlar**ini qo'llab-quvvatlaydi, har biri o'ziga x
 
 Ko'rsatilayotgan ish maydonini o'zgartirish boshqa yig'uvchini to'xtatmaydi. Ish maydonlari bo'ylab bir xil hisobni avtorizatsiya qilish takrorlanishi rad etiladi. Allaqachon bir Telegram hisobiga bog'langan jurnalni boshqa hisobga o'tkazib bo'lmaydi; bir xil hisobni qayta ulash esa ruxsat etiladi. Bu hisob identifikatori va tegishli xabar-ID doirasini saqlab qoladi.
 
-Belgilangan soni yo'q va o'tkazuvchanlik bo'yicha kafolat yo'q. Ish maydonchalari Python jarayoni va voqealar tsiklini baham ko'radi. Alohida akkaunt ishchi protsesslari keyinchalik ishlab chiqiladi. Joriy jarayon izolyatsiyasi uchun alohida o'rnatishlar, portlar va ma'lumotlar kataloglaridan foydalaning.
+Ilova doimiy ish maydonlari sonini belgilamaydi. Har bir ish maydoni ulanishni monitoring qilish, media yuklab olish, qayta tekshirish va yangi suhbatlarni qabul qilish bo'yicha Collector vazifalarini umumiy Python jarayoni va voqea sikli ichida bajaradi. Ishlash tezligi yuklanishga bog'liq. Jarayonlarni izolyatsiya qilish uchun alohida o'rnatishlar, portlar va ma'lumotlar kataloglaridan foydalaning.
 
-Har bir akkauntga uning kirish imkoniga ega bo'lgan manbalarni tayinlang. Turli akkauntlar bir xil guruhni kuzatishi mumkin, lekin ularning kuzatuvlari alohida bo'lib qoladi va kelib chiqishini saqlaydi. Operator nazoratidagi bir mashina ustidagi ikki akkaunt ikki mustaqil guvoh emas. Eksportlar ish maydoni bo'yicha amalga oshiriladi; birlashtirilgan ish paketi yoki global Telegram vaqt chizig'i amalga oshirilmagan.
+Har bir akkauntga uning kirish imkoniga ega bo'lgan manbalarni tayinlang. Turli akkauntlar bir xil guruhni kuzatishi mumkin, lekin ularning kuzatuvlari alohida bo'lib qoladi va kelib chiqishini saqlaydi. Operator nazoratidagi bir mashina ustidagi ikki akkaunt ikki mustaqil guvoh emas. **Eksport guruhi** alohida imzolangan ish maydoni ZIP-fayllarini ularning ish maydoni ID-lari, xeshlari va imzo kaliti barmoq izlarini o'z ichiga olgan imzolangan fayllar ro'yxati bilan birlashtiradi. Har bir jurnal o'z chegarasini saqlaydi. Ish yozuvlari yoki tahlil vositalarida manba havolalarini saqlagan holda birlashtirilgan kesma-ish maydoni vaqt chizig'ini yarating.
 
 ## Yozib olish va mansubligini aniqlash
 
@@ -63,13 +65,13 @@ Manbalar har bir akkaunt bo'yicha yangi xabarlar, tahrirlar, o'chirishlar, munos
 
 | Material | Hozir qayd etildi | Chegara |
 | --- | --- | --- |
-| Xabar | Matn, peer/xabar IDlari, jo'natuvchining metadata ma'lumotlari, javoblar va asl yangilanish konverti | Xabarda ommaviy tasdiqlanadigan Telegram imzosi yo'q |
+| Xabar | Matn, peer/xabar IDlari, jo'natuvchining metadata ma'lumotlari, javoblar va asl yangilanish konverti | Yig'uvchi tomonidan imzolangan va hisobga ko'rinadigan kuzatuv sifatida saqlangan |
 | Tahrir | Yangi kuzatilgan versiya va ilgari saqlangan har qanday versiyalar | Vaqtinchalik to'xtash davrida oraliq tahrirlar yo'qolishi mumkin; jo'natuvchi har doim tahrirchi bo'lmasligi mumkin |
 | O'chirish | Bildirishnoma va oldindan olingan kontent, agar mavjud bo'lsa | Odatda o'chiruvchi ma'lum emas yoki aniq harakat vaqti ko'rsatilmagan |
-| Doiradan tashqaridagi o'chirish | Hamkasbni taxmin qilmasdan, asl hisob darajasidagi ogohlantirish | Avval saqlangan hisob-doirasidagi IDlar bilan qat'iy bog'liqlikni ta'minlash kelajakdagi ish |
+| Hisob darajasidagi o'chirish bildirishnomasi | Asl bildirishnoma; hal qilingan yozuvlar saqlangan suhbat va korrelyatsiya usulini o'z ichiga oladi | Doirada aniq bir marta oldin saqlangan shaxsiy suhbat yoki oddiy guruh mos kelishini talab qiladi; boshqa IDlar `deletion.unscoped` holatda qoladi. Kanal va superguruh IDlari ushbu korrelyatsiyadan mustasno. |
 | Reaksiya | Yetkazilgan hisoblagichlar va ko'rinadigan yaqinda aniqlangan shaxslar | To'liq mavjud reaktorlar ro'yxati uchun alohida so'rovlar talab etiladi; kanallar shaxsiyatlarni yashirishi mumkin |
 | A'zolik | Xizmat xabarlari va ishtirokchilarga yetkazilgan yangilanishlar | Ko'rinish roli va suhbat turiga bog'liq; yo'qolgan voqealar yo'qligini tasdiqlamaydi |
-| Ma'mur harakatlari | Faqat tegishli yetkazilgan yangilanishlar | Ma'muriy loglarni alohida so'rov (polling) orqali olish amalga oshirilmagan |
+| Ma'mur harakatlari | Mavzuga oid yetkazilgan yangilanishlar va admin-log snapshoti kanal/superguruh chat eksportlarida | Eksport mavjud bo'lganda eksport qilayotgan admin akkauntining logini o'qiydi; admin-logni uzluksiz so'rov qilish ushbu yo'ldan tashqarida |
 | Ilova | Asl versiya tavsifi, yuklab olingan baytlar/SHA-256 va urinish natijalari | Yo'qolgan fayl tiklanmasligi mumkin; eng so'nggi versiya o'rniga qo'yilmaydi |
 | Tarix | Joriy ko'rinadigan xabarlarning aniq snapshoti | Barcha tahrirlar yoki o'chirilgan kontentni qayta tiklamaydi |
 | Yig'uvchi jarayon | Boshlash/to'xtatish, yurak urishi, xatolar, sozlamalar, doira va dastur kvitasi | O'z-o'zini hisoblash, mustaqil jarayonni tasdiqlash emas |
@@ -85,7 +87,9 @@ Telegram passiv yetkazib berishni faol qisqa so'rovlardan ajratadi. Uning yangil
 | Rejim | Maqsad | Holat |
 | --- | --- | --- |
 | Standart kuzatuv | Tanlangan manbalardan olingan yangilanishlarni qayd eting | Amalga oshirildi |
-| Prioritetli kuzatuv | Cheklangan manba to'plami uchun qo'shimcha farq tekshiruvlari | Foydalanuvchi rejimida amalga oshirilmagan |
+| Prioritetli qayta tekshiruvlar | Yulduzchali manbalar o'zlarining sozlanadigan intervallaridan foydalanadi va har bir chegaralangan qayta tekshirish bosqichida ustunlikka ega bo'ladi | Tarix va xabar so'rovlari bilan amalga oshirilgan |
+
+Prioritet yulduzi ushbu qayta tekshiruvlarni nazorat qiladi. Qo'shimcha`updates.getChannelDifference` qisqa so'rovlari alohida foydalanuvchi rejimida taqdim etilmagan.
 
 FloodWait-ni e'tiborsiz qoldirish yoki qo'shimcha hisoblardan chiziqli sig'imni taxmin qilish bilan istalgan yuqori chastotali so'rov yig'ish o'lchamlarini aniqlash uchun haqiqiy model emas. Standart cheklovlar – ro'yxatda keltirilgan birinchi 1 000 dialog, har bir tarix nusxasida 500 tagacha xabar. Har bir to'plangan fayl turi bo'yicha 1–2 000 MiB va siqilmagan imzolangan ZIP kontenti uchun 4 GiB; har biri **Parametrlar** bo'limidagi ish maydoni bo'yicha o'zgartiriladi. Eksportlarga voqealar soni bo'yicha aniq cheklov qo'yilmagan. Brauzer zaxira rejimi bo'yicha 128 MiB bilan cheklangan; oqimli CLI sozlanadigan uzatish chegarasiga ega, bo'yicha 5 GiB.
 
@@ -114,9 +118,9 @@ Imzolangan jarayon kvitasi tasodifiy ishchi ID; TgWitness/Python/OS/qaramlik ver
 | Proqram-fayl o'lchovi | O'lchangan fayllar bo'yicha Collector o'z-o'zini hisobot |
 | Haqiqiy mustaqil TSA javobi | TSA vaqti bo'yicha aniq ishonch farazlari ostida ma'lum baytlarning mavjudligi |
 
-RFC 3161 so'rovini tayyorlash va OpenSSL javobini tekshirish amalga oshirilgan. Avtomatik yuborish amalga oshirilmagan. Mashina vaqtini o'zida aks ettirgan so'rov yoki mahalliy imzo mustaqil vaqt belgilovchi emas. Qarang: [TIMESTAMP.md](https://phishdestroy.github.io/TgWitness/uz/docs/reference/timestamp/).
+RFC 3161 so'rovini tayyorlash va OpenSSL javobini tasdiqlash amalga oshirilgan. Dalil rejimi shuningdek tekshiruv nuqtasi xeshlarini sozlangan vaqt belgilash xizmatlariga yuboradi. Mustaqil vaqt nuqtasini o'rnatish uchun vakolatli organ javobini saqlab, tasdiqlang. Qarang: [TIMESTAMP.md](https://phishdestroy.github.io/TgWitness/uz/docs/reference/timestamp/).
 
-Yig'uvchi va imzolash kalitini boshqaruvchi operator yangi imzolangan kuzatuvlarni soxtalashtirishi mumkin. Imzolar Telegram kelib chiqishini, haqiqatni yoki avtomatik huquqiy qabul qilinishini tasdiqlamaydi. Qattiqroq saqlash mustaqil nazorat nuqtasi/vaqtli saqlash, kalitga kirishni nazorat qilish, uzatish yozuvlari va ishonchli dasturiy ta'minotdan tasdiqni talab qiladi.
+Tekshiruv nuqtalarini mustaqil saqlang, imzolash kalitlariga kirishni nazorat qiling, uzatish yozuvlarini saqlang va eksportlarni ishonchli dasturiy ta'minot yordamida tasdiqlang. [Verifikatsiya doirasi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) bu tekshiruvlar bir-birini qanday to'ldirishini va qaysi ishonch taxminlari qo'llanilishini tushuntiradi.
 
 ## Eksport, joriy etish va topshirish
 
@@ -140,4 +144,4 @@ Barqaror chiqarilishdan oldin, aniqlang:
 6. Mo'ljallangan OS/konteyner matritsasida toza o'rnatish va tasdiqlangan zaxira nusxasini tiklash.
 7. Xavfsizlik, imzo va atributsiya/dalil da'volarining mustaqil ko'rib chiqilishi.
 
-Administrator-log so'rovi, qo'shimcha reaktorlar ro'yxatlari, ustuvor so'rov, alohida ishchilar va ilova bo'ylab shifrlash hali kelajakdagi ishlar qatorida qolmoqda. Cheklangan panelga kirish [access va permissions](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/) bo'limida tasvirlangan. 0.6-versiya [ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) da tasvirlangan chegaralangan yagona hisob TData va hisob-fayl importini qo'llab-quvvatlaydi. Nashr etishdan oldin Telegram API shartlarini ko'rib chiqing. Tadqiqot manbalari va platforma topilmalari [RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md) hujjatida keltirilgan.
+Panelga cheklangan kirish huquqi [Access and Permissions](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/) bo'limida tasvirlangan. 0.6-versiya [ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) hujjatida keltirilgan chegaralangan yagona hisobli TData va hisob-fayl importini qo'llab-quvvatlaydi. Nashr etishdan oldin Telegram API shartlarini ko'rib chiqing. Tadqiqot manbalari va platforma topilmalari [RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md) hujjatida keltirilgan.

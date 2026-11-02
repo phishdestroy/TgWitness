@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/
 
-[اوپن سورس / v0.7.1](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/)
+[اوپن سورس / v0.8.0](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/)
 
 ٹیلیگرام پیغامات کو محفوظ کریں، ان میں تبدیلیاں برقرار رکھیں، اور ایک دستخط شدہ ریکارڈ برآمد کریں۔
 
@@ -60,6 +60,8 @@ TgWitness / دستخط شدہ برآمداتمقامی ورک اسپیس
 
 04 / دستخط شدہ برآمدات: جرنل کو اپنے ساتھ لے جائیں، ایک مینیفیسٹ اور ایک آزاد تصدیق کار کے ساتھ۔
 
+[کیس بورڈ](https://phishdestroy.github.io/TgWitness/ur/docs/case-board/)، [رپورٹ ڈیزائن](https://phishdestroy.github.io/TgWitness/ur/docs/reports/) اور [شیئرنگ کاپی](https://phishdestroy.github.io/TgWitness/ur/docs/handover/) کے ذریعے محفوظ شدہ ریکارڈ کی پیروی کریں۔ [اکاؤنٹ گروپس کا جائزہ](https://phishdestroy.github.io/TgWitness/ur/docs/groups/) ایک ساتھ [ل](https://phishdestroy.github.io/TgWitness/ur/docs/groups/)یں۔
+
 01 / کیپچر
 
 ### آپ دائرہ کار خود منتخب کرتے ہیں۔
@@ -84,7 +86,8 @@ TgWitness / دستخط شدہ برآمداتمقامی ورک اسپیس
 
 [کو برآمد کریں اور تصدیق کریں۔](https://phishdestroy.github.io/TgWitness/ur/docs/exports/)
 
-## ایک بائٹ تبدیل کریں۔ چین آپ کو بتائے گی۔
+## ایک بائٹ تبدیل کریں۔
+تصدیق آپ کو بتائے گی۔
 
 ہر واقعہ پچھلے ہیش سے منسلک ہوتا ہے اور Ed25519 دستخط رکھتا ہے۔
 
@@ -94,7 +97,7 @@ TgWitness / دستخط شدہ برآمداتمقامی ورک اسپیس
 
 ![ایک علیحدہ محفوظ چیک پوائنٹ وصول کنندہ کو برآمد شدہ جرنل کا موازنہ پہلے کے مشاہدے سے کرنے کی اجازت دیتا ہے۔](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-دیکھیں کہ ہر تصدیقی میکانزم کیا قائم کرتا ہے اور اس کی حدود کہاں ہیں۔
+فائل ہیش سے ایک علیحدہ محفوظ چیک پوائنٹ تک چیکس کی پیروی کریں۔
 
 [کے آٹھ ثبوت کی سطحوں کا جائزہ لیں۔](https://phishdestroy.github.io/TgWitness/ur/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipمصنوعی طور پر دستخط شدہ بنڈل
 
   آزادانہ تصدیقدستخط شدہ مینیفیسٹ + خود مختار تصدیق کنندہ
 
-دستخط ایک معتبر کلید کے حوالے سے جعلسازی کا پتہ لگاتے ہیں۔ یہ ٹیلیگرام کے ماخذ ہونے کا ثبوت نہیں دیتے اور مکمل ریکارڈنگ کی ضمانت نہیں دیتے۔ جرنل کا مواد اور میڈیا آپ کی فراہم کردہ انکرپٹڈ اسٹوریج میں محفوظ رہنا چاہیے۔
+موصول کنندگان محفوظ شدہ ریکارڈز اور فائلوں کو ایک معتبر کلیکٹر کلید کے خلاف چیک کرتے ہیں۔ ایک الگ سے محفوظ کردہ چیک پوائنٹ بھی پہلے کے جرنل کے ساتھ تسلسل کی جانچ کرتا ہے۔ [تصدیقی مراحل کا جائزہ لیں۔](https://phishdestroy.github.io/TgWitness/ur/docs/concepts/#layers)
 
 ## S3 نقول۔ بیرونی تصدیقات۔
 
@@ -154,13 +157,13 @@ tgwitness-evidence.zipمصنوعی طور پر دستخط شدہ بنڈل
 
 [S3 کو کنفیگر کریں اور ایک کاپی بحال کریں](https://phishdestroy.github.io/TgWitness/ur/docs/exports/#s3)[تصدیقی تفصیلات پڑھیں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**یہ کیا نہیں کرتا** یہ برآمد شدہ ڈی کرپشن کلید کے بغیر بحال نہیں کرتا اور نہ ہی کسی آزاد گواہ کی جگہ لیتا ہے۔
+**ریکوری کلید:** برآمد شدہ ڈی کرپشن کلید کو الگ سے محفوظ کریں تاکہ آپ خفیہ شدہ کاپی کو بحال کر سکیں۔
 
 ### اطلاعات · اپریز
 
 مسئلے کے الرٹس، چیٹ میں تبدیلیاں اور روزانہ کے خلاصے Apprise کے ذریعے: میسنجرز، ای میل یا آپ کے اپنے JSON ویب ہُک۔
 
-**یہ نہیں کرتا۔** یہ پیغام کا متن تب تک نہیں بھیجتا جب تک آپ اقتباسات کو فعال نہ کریں۔
+**منتخب کریں کہ کیا شیئر کرنا ہے**: پیغام کے اقتباسات بطورِ پیشِ فرض بند ہیں؛ انہیں اُن منزلوں کے لیے فعال کریں جن پر آپ بھروسہ کرتے ہیں۔
 
  [اطلاع کے مقامات ترتیب دیں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ tgwitness-evidence.zipمصنوعی طور پر دستخط شدہ بنڈل
 
 ٹائم اسٹیمپ چیک پوائنٹ ہیشز کو RFC 3161 اور OpenTimestamps کے ساتھ محفوظ کریں۔
 
-**یہ کیا نہیں کرتا** یہ زیر التوا کیلنڈر رسید کو تصدیق شدہ بٹ کوائن ٹائم اسٹیمپ کے طور پر نہیں لیتا۔
+**نتیجے کی پیروی کریں،** اتھارٹی کے جواب کی تصدیق کریں یا OpenTimestamps کی رسید کو ایک تصدیق شدہ بٹ کوائن ثبوت میں اپ گریڈ کریں۔
 
  [ٹائم اسٹیمپ ثبوت چیک کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ tgwitness-evidence.zipمصنوعی طور پر دستخط شدہ بنڈل
 
 ایک الگ ہوسٹ دستخط شدہ مشاہدات کو محفوظ رکھتا ہے اور شائع کر سکتا ہے `TGW1` چیک پوائنٹس۔
 
-**یہ کیا نہیں کرتا** یہ ایک کلیکٹر ہوسٹ پر دو ورک اسپیسز کو آزاد گواہوں میں تبدیل نہیں کرتا۔
+**حوالہ کو الگ کریں:** گواہ کو کسی دوسرے ہوسٹ پر چلائیں اور اس کی اپنی دستخطی کلید اور جرنل کو برقرار رکھیں۔
 
  [نامی ایک ویٹنس سیٹ اپ کریں۔](https://phishdestroy.github.io/TgWitness/ur/docs/witness/)
 
@@ -184,7 +187,7 @@ tgwitness-evidence.zipمصنوعی طور پر دستخط شدہ بنڈل
 
 ری اسٹارٹ کے بعد دوبارہ شروع کریں۔ دوبارہ چیک اور `coverage.json` بازیاب شدہ پیغامات اور خالی جگہیں دکھائیں۔
 
-**یہ کیا نہیں کرتا** یہ ہر رہ جانے والی ترمیم یا غائب شدہ پیغام کو دوبارہ تشکیل نہیں دیتا۔
+**وقفے کا جائزہ لیں:** بازیافت شدہ موجودہ پیغامات کو ریکارڈ شدہ خلل کے ساتھ دیکھیں؛ جب پہلے کے ورژنز محفوظ کیے گئے ہوں تو وہ بھی دستیاب رہتے ہیں۔
 
  [تسلسل اور خلاء کا معائنہ کریں](https://phishdestroy.github.io/TgWitness/ur/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ cd TgWitness
 
 [پر ریلیزز براؤز کریں](https://github.com/phishdestroy/TgWitness/releases)
 
-ونڈوز پر پائتھن نہیں ہے؟ [پورٹیبل پیکیج ڈاؤن لوڈ کریں](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip)، اسے نکالیں اور `TgWitness.cmd` پر ڈبل کلک کریں۔
+ونڈوز پر پائتھن نہیں ہے؟ [پورٹیبل پیکیج ڈاؤن لوڈ کریں](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip)، اسے نکالیں اور `TgWitness.cmd` پر ڈبل کلک کریں۔
 
 مرحلہ 02
 
@@ -260,7 +263,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ماخذ انسٹالیشن کے لیے ٹوکن `data/live/panel-token.txt` میں موجود ہے۔ ٹیلیگرام سائن ان بلٹ ان API سیٹنگز یا [my.telegram.org](https://my.telegram.org) سے آپ کے اپنے جوڑے کا استعمال کر سکتا ہے۔ [مکمل سیٹ اپ گائیڈ ↗](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [کیا نیا ہے →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/) · [خصوصیات اور معلوم حدود →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
+**TgWitness 0.8.0** [کیا نیا ہے →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/) · [خصوصیات اور معلوم حدود →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
 
 ## واضح ہدایات۔ ایک مفید اگلا قدم۔
 

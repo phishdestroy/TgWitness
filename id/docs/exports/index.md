@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/exports/
 
-Bagikan catatan yang telah ditandatangani sehingga orang lain dapat memeriksanya.
+Berikan file kepada penerima yang dapat mereka periksa dengan membandingkannya terhadap ruang kerja pengumpulan dan riwayat yang tersimpan di dalamnya.
 
 Simpan referensiEkspor ZIP yang ditandatanganiPenerima memverifikasi
 
@@ -16,9 +16,9 @@ Simpan sidik jari kunci publik ruang kerja di luar pengumpul. Selama proses peng
 
 ## Unduh ZIP yang telah ditandatangani
 
-Buka **"Exports"** dan buat berkas ZIP bukti yang ditandatangani. Berkas ini mencakup jurnal ruang kerja dan daftar isi berkas yang ditandatangani. Filter panel tidak membatasi ekspor jurnal lengkap ini: periksa materi tersebut sebelum membagikannya.
+Buka **Ekspor** dan buat ZIP bukti yang ditandatangani. ZIP tersebut mencakup jurnal ruang kerja lengkap dan manifes file yang ditandatangani. Gunakan [Report Studio](https://phishdestroy.github.io/TgWitness/id/docs/reports/) untuk menyusun laporan yang mudah dibaca, atau [ekstrak](https://phishdestroy.github.io/TgWitness/id/docs/handover/) [penyerahan](https://phishdestroy.github.io/TgWitness/id/docs/handover/) untuk mengirimkan hanya data yang dipilih dan dipersingkat.
 
-Unduhan HTML dan CSV yang berdiri sendiri berguna untuk pembacaan dan analisis. Simpan berkas ZIP yang telah ditandatangani sebagai salinan asli yang dapat diverifikasi; berkas HTML atau CSV terpisah tidak memiliki tanda tangan yang berdiri sendiri.
+Laporan dalam format HTML, PDF, dan JSON dilengkapi dengan segel tanda tangan masing-masing dan dapat diverifikasi secara terpisah. CSV merupakan salinan yang praktis untuk analisis; gunakan file CSV yang tepat di dalam ZIP yang telah diverifikasi untuk memeriksa integritasnya. Simpan ZIP yang telah ditandatangani jika penerima juga memerlukan catatan sumber dan lampiran.
 
 ## Verifikasi dengan salinan TgWitness yang tepercaya
 
@@ -30,13 +30,14 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 
 
 Jika kedua referensi lolos, hasilnya akan melaporkan `key_pinned: true` dan `checkpoint_checked: true`. Simpan hasil verifikasi bersama arsip aslinya. Titik pemeriksaan yang disimpan harus berada pada atau sebelum batas ekspor.
 
-## Memahami hasilnya
+## Gunakan hasil verifikasi
 
-- **Integritas:** riwayat yang direkam dan berkas yang diekspor sesuai dengan tanda tangannya.
-- **Catatan sebelumnya:** titik pemeriksaan eksternal memungkinkan Anda membandingkan hasil ekspor dengan awalan jurnal yang telah disimpan sebelumnya.
-- **Pelaksanaan:** uji coba terkontrol berupa kirim → edit → hapus memeriksa peristiwa-peristiwa tertentu berdasarkan catatan yang telah direkam.
+- **Periksa berkas yang dikirimkan:** manifes mengikat hash-nya, dan tanda tangan catatan mengikat jurnal yang disimpan. Berkas yang diubah atau rantai catatan yang terputus akan terdeteksi.
+- **Periksa identitas ruang kerja:** sidik jari yang disimpan secara independen mengidentifikasi kunci penandatanganan yang Anda harapkan.
+- **Bandingkan batas waktu sebelumnya:** titik pemeriksaan yang disimpan akan memverifikasi ekspor tersebut dengan awalan jurnal yang disimpan sebelum penyerahan.
+- **Tinjau cakupan pengumpulan:** celah, hasil akuisisi, dan uji coba terkontrol kirim → edit → hapus menggambarkan peristiwa yang terekam oleh pengaturan ini.
 
-Tanda tangan yang sah tidak membuktikan bahwa setiap peristiwa Telegram telah diterima, bahwa sumber tersebut mengatakan yang sebenarnya, atau bahwa jam pengumpulnya akurat.
+Simpan hasil ini bersama salinan penerima. Perhatikan [apa yang ditetapkan oleh verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) terkait ruang lingkup pemeriksaan serta penilaian terpisah atas klaim sumber dan cakupan pengumpulan.
 
 ## Siapkan salinan cadangan di luar lokasi di S3
 
@@ -59,30 +60,24 @@ Panel lengkap dengan opsi lanjutan yang diperluas. Tidak ada kredensial penyimpa
 | Interval penyalinan | Dari 1 hingga 1.440 menit; default 5 menit. Aplikasi harus dalam keadaan berjalan untuk pencadangan terjadwal. |
 | Penyimpanan Object Lock | Jumlah hari penyimpanan dan mode untuk bucket yang mendukung Object Lock. Nilai "Zero days" membuat pengaturan penyimpanan default bucket tetap berlaku. |
 
-1. Masukkan tujuan dan kredensial. Biarkan opsi "**Simpan salinan di luar lokasi"** tidak dicentang saat mempersiapkan, lalu pilih **"Simpan salinan di luar lokasi**".
+1. Buat bucket dengan penyedia layanan Anda, lalu masukkan tujuan dan kredensialnya. Biarkan opsi **“Simpan salinan di luar lokasi”** tidak dicentang saat mempersiapkan, lalu pilih **“Simpan salinan di luar lokasi**”.
 2. Pilih "**Uji Koneksi**". Ini akan mengunggah objek uji terenkripsi dan memeriksa respons penyimpanan.
 3. Pilih **"Unduh kunci enkripsi**". Simpan berkas tersebut terpisah dari pengumpul data; berkas ini diperlukan untuk pemulihan.
 4. Aktifkan kotak centang "**Simpan salinan di luar situs**" dan simpan kembali. Pilih "**Salin sekarang"** untuk proses manual, atau biarkan penjadwalan berjalan.
 
-**Yang tidak dilakukan** Alat ini tidak membuat bucket penyimpanan. Pengunggahan terjadwal akan berhenti ketika aplikasi dihentikan.
-
 ## Periksa retensi dan kemajuan penyalinan
 
-Di bawah **"More options**", pilih jumlah hari penyimpanan dan "`GOVERNANCE`" atau "`COMPLIANCE`" jika bucket Anda mendukung Object Lock. TgWitness akan membaca kembali mode penyimpanan dan batas waktu objek yang diunggah. Laporan status akan menunjukkan konfirmasi, penyimpanan yang hilang, atau kegagalan verifikasi; unggahan yang berhasil saja tidak menjamin penyimpanan.
+Di bawah **"More options**", pilih jangka waktu penyimpanan dan "`GOVERNANCE`" atau "`COMPLIANCE`" jika bucket Anda mendukung Object Lock. TgWitness membaca kembali mode penyimpanan dan batas waktu objek yang diunggah. Periksa hasil penyimpanan terpisah: dikonfirmasi, penyimpanan tidak ditemukan, atau pemeriksaan gagal.
 
 Panel ini melaporkan putaran terakhir, jumlah objek, byte yang ditransfer, batas jurnal yang disalin, dan kesalahan apa pun. Media lokal yang hilang atau berubah akan dilaporkan dan dicoba kembali pada putaran berikutnya. File, titik pemeriksaan, dan ekspor yang antri setelah media tersebut masih dapat disalin.
 
-Pengunggahan menggunakan rute Direct, SOCKS5, atau HTTP dari ruang kerja. Penyalinan ke S3 tidak tersedia melalui MTProxy; aplikasi ini tidak beralih ke koneksi langsung.
-
-**Yang tidak dilakukan** Hal ini tidak mewajibkan penyedia layanan untuk menerapkan Object Lock hanya karena unggahan tersebut diterima.
+Pengunggahan menggunakan rute Direct, SOCKS5, atau HTTP di ruang kerja. Pilih salah satu rute ini untuk penyalinan ke S3; rute yang hanya menggunakan MTProxy akan membuat penyalinan tertunda dengan pesan kesalahan.
 
 ## Simpan kunci pemulihan secara terpisah
 
-Berkas JSON yang diunduh berisi kunci dekripsi, pengaturan tujuan, awalan objek ruang kerja, dan sidik jari kunci penandatanganan. Berkas tersebut tidak berisi kredensial akses S3: proses pemulihan memerlukan kredensial terpisah dengan akses baca ke bucket.
+Berkas JSON yang diunduh berisi kunci dekripsi, pengaturan tujuan, awalan objek ruang kerja, dan sidik jari kunci penandatanganan. Pemulihan memerlukan berkas kunci ini serta kredensial penyimpanan terpisah yang memiliki akses baca ke bucket. Simpanlah keduanya dalam rencana pemulihan Anda.
 
 Jika Anda mengubah titik akhir (endpoint), bucket, atau awalan folder, unduh kembali berkas kunci agar pengaturan tujuannya sesuai. Aplikasi ini akan memulai salinan baru dari jurnal, berkas, dan titik pemeriksaan yang disimpan secara lokal di tujuan baru tersebut. Ekspor obrolan yang sudah selesai dan telah dihapus dari antrian unggahan lokal tetap berada di tujuan sebelumnya.
-
-**Yang tidak dilakukan** Alat ini tidak akan mendekripsi salinan tersebut tanpa kunci yang diekspor. Kredensial akses penyimpanan tidak dapat menggantikan kunci tersebut.
 
 ## Pulihkan dan verifikasi di mesin lain
 
@@ -108,4 +103,4 @@ File yang diunduh dan objek yang telah didekripsi disimpan di penyimpanan sement
 
 Pemulihan yang berhasil akan menghasilkan `events.jsonl`, `media/`, `checkpoints/`, dan `exports/` untuk materi yang tersedia dalam salinan tersebut. Simpan hasil JSON perintah tersebut bersama dengan materi yang telah dipulihkan.
 
-**Yang tidak dilakukan** Alat ini tidak merekonstruksi pengamatan yang tidak pernah tercatat dalam jurnal tersebut atau menggantikan titik pemeriksaan atau saksi yang disimpan secara independen.
+Bandingkan materi yang dipulihkan dengan titik pemeriksaan atau catatan saksi yang Anda simpan secara independen, lalu tinjau cakupan pengumpulan yang terekam untuk periode yang Anda butuhkan.

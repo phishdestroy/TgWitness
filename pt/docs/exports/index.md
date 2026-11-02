@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/exports/
 
-Compartilhe um registro assinado que outra pessoa possa verificar.
+Forneça aos destinatários arquivos que possam ser comparados com o espaço de trabalho de coleta e seu histórico salvo.
 
 Manter uma referênciaExportar ZIP assinadoO destinatário verifica
 
@@ -16,9 +16,9 @@ Salve a impressão digital da chave pública do espaço de trabalho fora do cole
 
 ## Baixe o arquivo ZIP assinado
 
-Abra **o “Exports”** e crie um arquivo ZIP de evidências assinado. Ele inclui o diário da área de trabalho e um manifesto de arquivos assinado. Os filtros do painel não limitam essa exportação do diário completo: analise o material antes de compartilhá-lo.
+Abra **o “Exports”** e crie um arquivo ZIP de evidências assinado. Ele inclui o diário completo da área de trabalho e um manifesto de arquivos assinado. Use [o “Report Studio”](https://phishdestroy.github.io/TgWitness/pt/docs/reports/) para elaborar um relatório legível ou um [extrato de transferência](https://phishdestroy.github.io/TgWitness/pt/docs/handover/) para entregar apenas dados selecionados e minimizados.
 
-Os downloads independentes em HTML e CSV são úteis para leitura e análise. Mantenha o arquivo ZIP assinado como o original verificável; o arquivo HTML ou CSV separado não possui assinatura independente.
+Os relatórios em HTML, PDF e JSON possuem seus próprios selos assinados e podem ser verificados separadamente. O CSV é uma cópia prática para análise; use o CSV exato contido no ZIP verificado para verificar sua integridade. Mantenha o ZIP assinado quando o destinatário também precisar dos registros de origem e dos anexos.
 
 ## Verifique com uma cópia confiável do TgWitness
 
@@ -30,13 +30,14 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 
 
 Quando ambas as referências forem aprovadas, o resultado indicará `key_pinned: true` e `checkpoint_checked: true`. Mantenha o resultado da verificação junto com o arquivo original. O ponto de verificação retido deve estar no limite da exportação ou antes dele.
 
-## Compreenda o resultado
+## Utilize o resultado da verificação
 
-- **Integridade:** o histórico registrado e os arquivos exportados correspondem às respectivas assinaturas.
-- **Observação anterior:** um ponto de verificação externo permite que o senhor compare a exportação com um prefixo de registro previamente armazenado.
-- **Execução:** um teste controlado de envio → edição → exclusão verifica eventos específicos em relação ao registro capturado.
+- **Verifique os arquivos entregues:** o manifesto vincula seus hashes, e as assinaturas dos registros vinculam o diário salvo. Qualquer arquivo alterado ou cadeia de registros quebrada será detectada.
+- **Verifique a identidade do espaço de trabalho:** a impressão digital mantida de forma independente identifica a chave de assinatura esperada.
+- **Compare um limite anterior:** um ponto de verificação retido compara a exportação com um prefixo de diário salvo antes da transferência.
+- **Analise a cobertura da coleta:** lacunas, resultados da aquisição e um teste controlado de envio → edição → exclusão descrevem os eventos capturados por essa configuração.
 
-Uma assinatura válida não comprova que todos os eventos do Telegram tenham sido recebidos, que a fonte tenha dito a verdade ou que o relógio do coletor estivesse correto.
+Mantenha esses resultados na cópia do destinatário. Verifique [o que a verificação estabelece](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope) quanto ao escopo das verificações e à avaliação separada das alegações das fontes e da cobertura da coleta.
 
 ## Configure a cópia externa no S3
 
@@ -59,30 +60,24 @@ O painel completo com opções avançadas está expandido. Nenhuma credencial de
 | Intervalo de cópia | De 1 a 1.440 minutos; padrão de 5 minutos. O aplicativo deve estar em execução para que as cópias programadas sejam realizadas. |
 | Retenção do Object Lock | Período de retenção e modo para um bucket compatível com o Object Lock. O valor “zero dias” mantém a retenção padrão do bucket em vigor. |
 
-1. Insira o destino e as credenciais. Deixe a opção **“Manter uma cópia externa”** desmarcada durante a preparação e, em seguida, selecione **“Salvar cópia externa**”.
+1. Crie o bucket com seu provedor e, em seguida, insira o destino e as credenciais. Deixe a opção **“Manter uma cópia externa”** desmarcada durante a preparação e, depois, selecione **“Salvar cópia externa**”.
 2. Selecione **“Testar conexão**”. Isso envia um objeto de teste criptografado e verifica a resposta do armazenamento.
 3. Selecione **“Baixar chave de criptografia**”. Mantenha esse arquivo separado do coletor; ele é necessário para a recuperação.
 4. Marque a caixa de seleção **“Manter uma cópia externa”** e salve novamente. Selecione **“Copiar agora**” para uma execução manual ou deixe a programação em execução.
 
-**O que não faz** A ferramenta não cria um bucket de armazenamento. Os envios programados são interrompidos quando o aplicativo é encerrado.
-
 ## Verifique a retenção e o andamento da cópia
 
-Em **“Mais opções”**, selecione o número de dias de retenção e “`GOVERNANCE`” ou “`COMPLIANCE`” caso seu bucket ofereça suporte ao Object Lock. O TgWitness retorna o modo de retenção e o prazo de validade de um objeto enviado. O status informa se houve confirmação, se a retenção está ausente ou se ocorreu uma falha na verificação; o simples fato de o envio ter sido bem-sucedido não constitui, por si só, confirmação da retenção.
+Em **“Mais opções”**, escolha os dias de retenção e “`GOVERNANCE`” ou “`COMPLIANCE`” quando seu bucket for compatível com o Object Lock. O TgWitness recupera o modo de retenção e o prazo de um objeto enviado. Verifique o resultado de retenção separado: confirmado, retenção ausente ou falha na verificação.
 
 O painel informa a última passagem, a contagem de objetos, os bytes transferidos, o limite do registro copiado e quaisquer erros. Mídias locais ausentes ou alteradas são relatadas e a operação é repetida na próxima passagem. Arquivos, pontos de verificação e exportações em fila após essa mídia ainda podem ser copiados.
 
-Os envios utilizam a rota Direct, SOCKS5 ou HTTP do espaço de trabalho. A cópia para o S3 não está disponível via MTProxy; o aplicativo não recorre a uma conexão direta.
-
-**O que não faz** O fato de o upload ter sido aceito não obriga o provedor a aplicar o Object Lock.
+Os envios utilizam as rotas Direct, SOCKS5 ou HTTP do espaço de trabalho. Escolha uma dessas rotas para a cópia para o S3; uma rota exclusivamente MTProxy deixa a cópia pendente com um erro.
 
 ## Guarde a chave de recuperação em local separado
 
-O arquivo JSON baixado contém a chave de descriptografia, as configurações de destino, o prefixo do objeto do espaço de trabalho e a impressão digital da chave de assinatura. Ele não contém as credenciais de acesso ao S3: a recuperação requer credenciais separadas com acesso de leitura ao bucket.
+O arquivo JSON baixado contém a chave de descriptografia, as configurações de destino, o prefixo do objeto do espaço de trabalho e a impressão digital da chave de assinatura. A recuperação requer tanto esse arquivo de chave quanto credenciais de armazenamento separadas com acesso de leitura ao bucket. Inclua-as em seu plano de recuperação.
 
 Caso altere o endpoint, o bucket ou o prefixo da pasta, baixe o arquivo de chave novamente para que as configurações de destino correspondam. O aplicativo inicia uma nova cópia do registro, dos arquivos e dos pontos de verificação mantidos localmente no novo destino. As exportações de bate-papos concluídas que já foram removidas da fila de upload local permanecem em seu destino anterior.
-
-**O que não faz** A ferramenta não descriptografa a cópia sem a chave exportada. As credenciais de acesso ao armazenamento não podem substituir essa chave.
 
 ## Restaurar e verificar em outro computador
 
@@ -108,4 +103,4 @@ Os arquivos baixados e os objetos descriptografados permanecem em um armazenamen
 
 A recuperação bem-sucedida gera `events.jsonl`, `media/`, `checkpoints/` e `exports/` para o material disponível na cópia. Guarde o resultado JSON do comando junto com o material recuperado.
 
-**O que não faz** Ela não reconstrói observações que nunca chegaram ao registro nem substitui um ponto de verificação ou testemunha mantidos de forma independente.
+Compare o material recuperado com seus pontos de verificação ou registros de testemunho mantidos de forma independente e, em seguida, analise a cobertura da coleta registrada para o período de que você precisa.

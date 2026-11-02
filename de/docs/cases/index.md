@@ -4,19 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/cases/
 
 Bearbeiten Sie einen gesamten Fall über Kanäle, Gruppen, private Chats und Bots hinweg: Sammeln, verknüpfen, rekonstruieren und übergeben Sie die Beweismittel.
 
-Diese Schritt-für-Schritt-Anleitung verfolgt einen fiktiven Vorfall über den gesamten Verlauf hinweg. Dabei werden die tatsächlichen Funktionen zur Erfassung, Suche, Erstellung von Personenprofilen und zum Export genutzt. Die Fallübersicht dient als Dokumentationsbeispiel; Ihre Schlussfolgerungen und Ihr Fallregister werden außerhalb der Anwendung geführt.
+Diese Schritt-für-Schritt-Anleitung verfolgt einen fiktiven Vorfall über den gesamten Verlauf hinweg. Nutzen Sie die Funktionen „Erfassung“, „Suche“ und „Personenprofile“, um die Quelldatensätze zu finden, [das „Case Board“](https://phishdestroy.github.io/TgWitness/de/docs/case-board/), um diese zu organisieren und zu besprechen, sowie [das „Report Studio“](https://phishdestroy.github.io/TgWitness/de/docs/reports/), um die Ergebnisse zu präsentieren. Die untenstehende illustrierte Übersicht verdeutlicht die Zusammenhänge in diesem Beispiel.
 
 BEARBEITETER FALL / EINE GEÄNDERTE ZAHLUNGSADRESSE
 
 ### Ein Vorfall. Vier Unterhaltungen. Eine Spur, die es zu rekonstruieren gilt.
 
-Eine Kanalankündigung verweist auf einen Bot. Eine Einsatzgruppe bespricht einen neuen Zahlungslink. Eine private Folgenachricht wiederholt diesen. Später wird die Ankündigung bearbeitet und eine Gruppennachricht verschwindet.
+Eine Kanalankündigung verweist auf einen Bot. Eine Einsatzgruppe bespricht einen neuen Zahlungslink, und der Bot zeigt ihn an. Die Ankündigung wird bearbeitet, in einer privaten Folge-Nachricht wird das Ziel erneut genannt, und eine Gruppennachricht verschwindet.
 
 Wer hat die jeweilige Version gepostet?Wo ist der Link erschienen?Welche Datei wurde gesichert?Was hat sich geändert und wann?
 
 Informationen zum Laden des Verlaufs, zur optionalen Überprüfung durch KI, zu MCP, OCR und ausgehenden Webhooks finden Sie unter [„Das Archiv bearbeiten](https://phishdestroy.github.io/TgWitness/de/docs/archive/)“.
 
 ## 1. Erfassen Sie den gesamten Account
+
+Verwenden Sie ein spezielles Erfassungskonto für den gesamten Kontenumfang. Hauptkonten können ausgewählte Chats oder einen Telegram-Ordner erfassen.
 
 1. [Verbinden Sie das Erfassungskonto](https://phishdestroy.github.io/TgWitness/de/docs/accounts/) in einem eigenen Arbeitsbereich. Halten Sie die Fallreferenz, die Konto-ID, den Namen des Arbeitsbereichs und den Fingerabdruck des Signaturschlüssels in Ihren Fallnotizen fest.
 2. Open **Sources → Beobachtungsumfang → Untersuchungsmodus**. Überprüfen Sie **„Gesamtes Konto“**, alle vier Quelltypen und **„Eigene Aktionen**“. Mit dieser Voreinstellung können Sie das Profil einer neuen Quelle sowie deren letzte **200 sichtbare Nachrichten** speichern. Klicken Sie auf **„Umfang speichern“** und schließen Sie die Bestätigung des Umfangs ab.
@@ -33,11 +35,11 @@ Nachrichten · Bearbeitungen · Löschhinweise · sichtbare Reaktionen · Mitgli
 
 ## 2. Verlauf erfassen und Dateien sichern
 
-Erstellen Sie ein Quellenverzeichnis für die gesamte Untersuchung. Weisen Sie jedem Chat eine Zeile mit seiner numerischen ID, dem Titel, dem Konto, dem Zugriff/der Rolle, dem Startzeitpunkt, der Erfassung des Verlaufs, den Medienergebnissen und bekannten Lücken zu. Markieren Sie eine Quelle erst dann als erfasst, nachdem Sie das entsprechende Ergebnis überprüft haben.
+Erstellen Sie eine „Case Board“-Sammlung für die Untersuchung und setzen Sie Lesezeichen für die relevanten gespeicherten Datensätze. Führen Sie parallel zum Fall ein Quellenregister: numerische ID jedes Chats, Titel, Erfassungskonto, Zugriffsberechtigung/Rolle, Startzeitpunkt, Erfassung des Verlaufs, Medienergebnis und bekannte Lücken. Markieren Sie eine Quelle nach Überprüfung des entsprechenden Ergebnisses als erfasst.
 
 | Anforderungen | Aktivität im Panel | Was es bietet |
 | --- | --- | --- |
-| Verlauf aller aktivierten Chats | Quellen → Vollständigen Verlauf laden | Aktuelle Hauptfunktion: Verfügbare vergangene Nachrichten werden in das Arbeitsbereichsprotokoll aufgenommen, mit Pause-/Fortsetzen-Funktion und einem signierten Fortschrittsbericht. [Anleitung zur Verlaufsanzeige](https://phishdestroy.github.io/TgWitness/de/docs/reference/history/). |
+| Verlauf aller aktivierten Chats | Quellen → Vollständigen Verlauf laden | Verfügbare frühere Nachrichten werden in das Arbeitsbereichsprotokoll aufgenommen, mit den Funktionen „Pause/Fortsetzen“ und einem signierten Fortschrittsbericht. [Anleitung zur Verlaufsanzeige](https://phishdestroy.github.io/TgWitness/de/docs/reference/history/). |
 | Bestehender Chat-Kontext im Protokoll | Quellen → Aufzeichnungseinstellungen → Verlaufs-Snapshot | Zuletzt sichtbare Nachrichten als signierte Beobachtungen. Standardmäßig maximal 500; unter **„Parameter“ → „Größter Verlaufssnapshot“** kann dieser Wert auf bis zu 10.000 erhöht werden. |
 | Vollständiger, derzeit sichtbarer Verlauf eines Chats | Gesamten Chat exportieren → Gesamten Chat exportieren oder Chats → Chat exportieren | Ein separates signiertes Bundle mit „`chat.json`“ und „`chat.html`“. Wiederholen Sie diesen Vorgang für jede Quelle; bewahren Sie die Ergebnisse bezüglich Erfolg oder Misserfolg auf. |
 | Kontext beim Erscheinen eines neuen Chats | Beobachtungsumfang → Wenn ein neuer Chat oder Bot erscheint | Ein Quellenprofil und bis zu 1.000 zuletzt sichtbare Nachrichten; im Untersuchungsmodus werden 200 ausgewählt. Bestehende Chats werden nicht rückwirkend erfasst. |
@@ -63,9 +65,9 @@ Diese Steuerelemente führen echte Telegram-Aktionen aus. Ein in einer anderen T
 
 ## 4. Verfolgen Sie Personen, Links und Dateien über Chats hinweg
 
-1. Öffnen Sie **das Protokoll**, belassen Sie den Quellenfilter auf **„Alle Quellen“** und suchen Sie nach einer bestimmten Phrase, einer Domain, einem Benutzernamen oder einer gespeicherten Kennung. Öffnen Sie jeden treffenden Eintrag und notieren Sie den Chat, die Nachrichten-ID und die Protokollnummer.
+1. Öffnen Sie **das Journal**, lassen Sie den Quellenfilter auf **„Alle Quellen“** eingestellt und suchen Sie nach einer bestimmten Phrase, einer Domain, einem Benutzernamen oder einer gespeicherten Kennung. Öffnen Sie jeden treffenden Datensatz und wählen Sie dann **„Zum Board hinzufügen“**, um den Chat, die Nachrichten-ID und den Journalverweis im Fall zu speichern.
 2. Um einen relevanten Chat aufzurufen, öffnen Sie **„Chats“ → „Personen“ → „Profile aktivieren“** und wählen Sie anschließend eine Person aus. Überprüfen Sie den Verlauf von Namen/Benutzernamen, Antwortbeziehungen, Aktivitäten sowie **„Auch in…“ –** weitere beobachtete Chats und extrahierte Links, Wallets oder Telefonnummern. Öffnen Sie die zitierten Protokollaufzeichnungen.
-3. Verfolgen Sie dieselbe numerische Telegram-Benutzer-ID in anderen Chats innerhalb dieses Arbeitsbereichs. Betrachten Sie einen übereinstimmenden Namen, die Erwähnung einer Wallet oder einen ähnlichen Avatar als einen Hinweis, den es zu überprüfen gilt. Eine erwähnte Adresse belegt nicht die Eigentümerschaft; ein ähnlicher Avatar belegt nicht, dass es sich um dieselbe Person handelt.
+3. Verfolgen Sie dieselbe numerische Telegram-Benutzer-ID in anderen Chats innerhalb dieses Arbeitsbereichs. Behandeln Sie einen übereinstimmenden Namen, eine Erwähnung der Wallet oder einen ähnlichen Avatar als Hinweis, den es zu überprüfen gilt; behalten Sie die Quellenangaben und alle unterstützenden Zuordnungen bei.
 4. Vergleichen Sie die SHA-256-Werte der gespeicherten Anhänge über verschiedene Datensätze hinweg. Übereinstimmende Hash-Werte bestätigen die Byte-Identität der gespeicherten Dateien. Prüfen Sie die zugehörigen Nachrichten- und Absenderdatensätze, bevor Sie Rückschlüsse darauf ziehen, wer diese geteilt hat.
 
 FALLÜBERSICHT / VERWEISEN VERFOLGENFiktiver Fall · keine Echtzeit-Grafik
@@ -86,17 +88,17 @@ PRIVAT / WEITERFÜHRUNG**Benutzer 71001 wiederholt das Ziel**
 
 Eintrag Nr. 205 · Nachricht Nr. 922 · Speicherbestätigung Nr. 209
 
-Vier Chats liefern unterschiedliche Beobachtungen. Verfolgen Sie die Quelldatensätze für jede Verbindung; ordnen Sie den Kanalbeitrag nicht dem Nutzer 71001 zu, solange kein Absender angegeben ist.
+Vier Chats liefern unterschiedliche Beobachtungen. Verfolgen Sie die Quelldatensätze für jede Verbindung; der Kanalbeitrag hat keinen zuordenbaren Absender.
 
-Die numerischen IDs und Datensatzreferenzen wurden für diese Anleitung fiktiv erstellt. Diese Übersicht erläutert den Arbeitsablauf eines Analysten unter Verwendung von Suchfunktionen, Profilen und der Überprüfung von Datensätzen; die Anwendung erstellt kein globales Untersuchungsdiagramm.
+Die numerischen IDs und Datensatzreferenzen wurden für diese Anleitung fiktiv erstellt. Diese übersichtliche Darstellung zeigt, wie Suchergebnisse, Profile und geprüfte Datensätze miteinander verknüpft werden; das „Case Board“ speichert die entsprechenden Karten und Quellenangaben.
 
 | Zusammenhang | Unterstützende Anmerkung | Fazit: Beibehalten |
 | --- | --- | --- |
 | Gleicher Telegram-Account | Benutzer-ID 71001 in der Gruppe #146 und im privaten Chat #205 | In beiden Chats wurde dieselbe Absender-ID angegeben. Die tatsächliche Identität bleibt eine separate Frage. |
-| Wiederholtes Ziel | `pay.example.invalid/new` in #146, Metadaten der Schaltfläche #173, bearbeitete Beiträge #188 und #205 | Derselbe Zielort taucht in vier beobachteten Kontexten auf. Dies allein lässt noch keinen Rückschluss darauf zu, wer ihn kontrolliert. |
-| Gleiche Dateigröße | Identische vollständige SHA-256-Werte in den abgeschlossenen Medienbelegen Nr. 151 und Nr. 209 | Die beiden erhaltenen Anhänge sind byteweise identisch. Dateinamen oder Miniaturansichten allein würden dies nicht belegen. |
+| Wiederholtes Ziel | `pay.example.invalid/new` in #146, Metadaten der Schaltfläche #173, bearbeitete Beiträge #188 und #205 | Das gleiche Ziel taucht in vier beobachteten Kontexten auf. Ordnen Sie dessen Steuerung anhand zusätzlicher Quellen zu. |
+| Gleiche Dateigröße | Identische vollständige SHA-256-Werte in den abgeschlossenen Medienbelegen Nr. 151 und Nr. 209 | Die beiden gesicherten Anhänge sind byteweise identisch. Die vollständigen Datei-Hashes dienen als Vergleichsgrundlage. |
 
-Personenprofile umfassen Autoren mit gespeicherten Nachrichten in diesem Chat und verknüpfen diese mit anderen Chats im *Protokoll desselben Arbeitsbereichs*. Sie stellen kein vollständiges Mitgliederverzeichnis dar. Avatar-Hashes stammen aus einem separaten lokalen Cache; die Anzahl der Profilverweise kann unter **„Parameter“ → „Pro Fakt zitierte Datensätze“** konfiguriert werden.
+Personenprofile beschreiben beobachtete Autoren und deren Aktivitäten im *Journal* *desselben Arbeitsbereichs* innerhalb der für den Betrachter zugelassenen Chats. Es handelt sich hierbei um eine Ansicht der beobachteten Autoren und nicht um ein vollständiges Mitgliederverzeichnis. Passen Sie die Anzahl der unterstützenden Zitate unter **„Parameter“ → „Pro Fakt zitierte Datensätze**“ an.
 
 ## 5. Rekonstruieren Sie die Abfolge und markieren Sie die Lücken
 
@@ -129,11 +131,11 @@ Die Reihenfolge im Protokoll richtet sich nach dem Eingangszeitpunkt, nicht unbe
 
 Fügen Sie für jedes einzelne Konto einen Arbeitsbereich hinzu und wiederholen Sie die Erfassung des Umfangs und des Verlaufs. Erfassen Sie für jedes Konto die Mitgliedschaft/Rolle sowie den Fingerabdruck des Signaturschlüssels. Halten Sie Identifikatoren nach Arbeitsbereich und Chat qualifiziert: Die gleiche Nachrichtennummer ist kein globaler, kontoübergreifender Identifikator.
 
-Vergleichen Sie relevante Beobachtungen in Ihren Fallnotizen oder Analyse-Tools und behalten Sie dabei die Kontonummer sowie die Protokollreferenz für jede Zeile bei. TgWitness bietet derzeit keine werkraumübergreifende globale Suche, keine zusammengeführte Zeitleiste, kein Personen-Diagramm und kein Fallarchiv an. Ein vollständiger Export eines Kanals oder einer Supergruppe über mehrere Konten hinweg ist eine separate Funktion; es handelt sich dabei nicht um eine Zusammenführung aller Kontoprotokolle.
+Verwenden Sie eine [Kontengruppe](https://phishdestroy.github.io/TgWitness/de/docs/groups/), um den Betriebsstatus zu überprüfen, ausgewählte Einstellungen zu teilen und die Konten gemeinsam zu exportieren. Das Gruppenpaket bewahrt das signierte Protokoll und die Identität jedes Arbeitsbereichs. Für einen Kanal oder eine Supergruppe können berechtigte Konten auch einen vollständigen Verlaufsexport aufteilen. Erstellen Sie eine kontenübergreifende Zeitleiste in Ihren Fallnotizen oder Analysewerkzeugen und behalten Sie dabei die Arbeitsbereichs- und Protokollreferenz für jede Zeile bei.
 
 Fügen Sie bei länger andauernden Arbeiten einen [unabhängigen Zeugen](https://phishdestroy.github.io/TgWitness/de/docs/witness/) hinzu, um frühere Abgrenzungen beizubehalten. Nutzen Sie das Pilotprojekt zur kontrollierten Zustellung, um die Erfassungswege und die Sichtbarkeit der Konten zu überprüfen.
 
-## 7. Ein vollständiges, überprüfbares Fallpaket bereitstellen
+## 7. Ein überprüfbares Fallpaket liefern
 
 Exportieren Sie aus jedem Arbeitsbereich eine ZIP-Datei mit dem signierten Protokoll. Diese enthält das vollständige aufgezeichnete Protokoll, unabhängig von den Suchfiltern im Bedienfeld. Exportieren Sie relevante Personenprofile separat, bewahren Sie jedes vollständige Chat-Verlaufsbündel auf und sichern Sie die vollständigen Anhangsnachweise.
 
@@ -162,7 +164,7 @@ python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Überprüfen Sie die tatsächlichen Verifizierungsergebnisse, bewahren Sie die Originale auf und fügen Sie den Abdeckungsbericht, die Erfassungsfehler sowie das Übertragungsprotokoll Ihren Erkenntnissen bei. Der übergeordnete Fallordner und die Schlussfolgerungen der Analysten werden extern zusammengestellt; die einzelnen TgWitness-Artefakte sind jeweils mit einer eigenen Signatur versehen.
+Überprüfen Sie die Ergebnisse der Verifizierung, bewahren Sie die Originale auf und fügen Sie Ihren Ergebnissen den Abdeckungsbericht, die Erfassungsergebnisse und das Übertragungsprotokoll bei. Verfassen Sie Ihre Ergebnisse in „Report Studio“ und entscheiden Sie, ob der Bericht Material aus dem „Case Board“ enthalten soll. Der Beispielordner auf oberster Ebene fasst die einzelnen signierten Artefakte zusammen. Für Empfänger, die nur ausgewähltes Material benötigen, bereiten Sie eine [reduzierte Übergabe](https://phishdestroy.github.io/TgWitness/de/docs/handover/) vor.
 
 ## Wenden Sie dieselbe Methode auch bei anderen Ermittlungen an
 
@@ -172,7 +174,7 @@ python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_
 
 **Ablauf:** Beitrag im Kanal → gespeicherte Vorschau des Bot-Links → Startparameter des Bots → Nachrichten und Tastatureingaben → etwaige vom Panel ausgestellte Rückrufbestätigungen → weitere Nachrichten in Gruppen oder privaten Chats. Ordnen Sie jedes Ziel dem entsprechenden Quelldatensatz zu; behalten Sie Profilbeschreibungen und angehängte Medien bei.
 
-**Lieferumfang:** eine Zeitleiste der beobachteten Angebote und Antworten, die Quellenangaben sowie verifizierte Exporte. Ein angezeigter Zahlungslink ist kein Beweis dafür, dass eine Zahlung stattgefunden hat.
+**Liefern Sie:** eine Zeitleiste der beobachteten Angebote und Antworten, die Quellenangaben und die verifizierten Exporte. Untermauern Sie jede Behauptung bezüglich einer abgeschlossenen Zahlung mit den entsprechenden Transaktionsbelegen.
 
 **Nach einem „Cross-Chat“-Vorfall gelöschte Nachrichten**
 
@@ -180,7 +182,7 @@ python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_
 
 **Nachverfolgung:** alle betroffenen Chats → Originalnachrichten → übermittelte Bearbeitungen → Löschmeldungen oder spätere Ergebnisse, bei denen bei erneuter Überprüfung ein Fehlen festgestellt wurde → erhaltene Anhänge → Berichterstattung rund um den Vorfall. Vergleichen Sie Beobachtungen unabhängiger Konten mit deren angegebenen Sichtbarkeitsstatus.
 
-**Ergebnis:** eine Abfolge von gespeicherten Versionen und explizit gekennzeichneten unbekannten Zeiträumen. Eine fehlende Nachrichtenhistorie darf nicht als Beweis dafür gewertet werden, dass eine bestimmte Person diese gelöscht hat.
+**Zu liefern sind:** eine Abfolge von gesicherten Versionen und explizit gekennzeichnete unbekannte Zeiträume. Löschhinweise, erfolglose Nachprüfungen und jegliche Zuordnung zu einer Person sind separat zu dokumentieren.
 
 **Ein Teilnehmer wechselt in mehreren Chats seinen Namen**
 
@@ -188,4 +190,4 @@ python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_
 
 **Nachverfolgung:** numerische Absender-ID → gespeicherte Namen/Benutzernamen-Historie → Antworten → weitere Chats im Arbeitsbereich → erwähnte Ziele und gespeicherte Dateien. Überprüfen Sie die Quelldatensätze für jede behauptete Verbindung; halten Sie ähnlich klingende Konten getrennt.
 
-**Lieferumfang:** eine zitierte Zeitleiste der Kontoaktivitäten sowie separate Hypothesen zu Zusammenhängen. Namensähnlichkeiten und Avatar-pHash dienen als Anhaltspunkte, nicht als Identitätsnachweis.
+**Ergebnis:** eine zitierte Zeitleiste der Kontoaktivitäten und separate Hypothesen zu Zusammenhängen. Nutzen Sie Namensähnlichkeiten und den Avatar-pHash, um Anhaltspunkte für die weitere Überprüfung von Quellen auszuwählen.

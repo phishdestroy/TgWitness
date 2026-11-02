@@ -226,7 +226,16 @@ Appuyez sur **+** à côté du sélecteur de compte, ou ouvrez **Compte → Para
 
 ### Importation par lots et groupes de comptes
 
-Ouvrez **Comptes → Importer des comptes** pour ajouter plusieurs comptes, associer les fichiers par nom et voir le résultat de chaque connexion. Chaque compte dispose de son propre espace de travail. Les groupes peuvent copier certains réglages depuis un modèle sans fusionner les sessions, les clés ni les preuves. Consultez [le guide d’importation et des groupes](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) et [le tableau de bord du pool MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+Utilisez **Comptes → Importer des comptes** pour ajouter plusieurs comptes, associer des fichiers par nom de base et consulter le résultat de chaque connexion. Chaque compte dispose de son propre espace de travail.
+
+Un groupe regroupe des comptes liés sans fusionner leurs sessions, leurs clés ou leurs preuves. **Ouvrir le groupe** sur **Comptes** mène à sa page à l'adresse `/groups/<id>`:
+
+- **Comptes:** itinéraire de connexion, observation et dernier message de chaque membre, avec les boutons « **Tout** démarrer » et « **Tout mettre en pause** ».
+- **Nécessite une attention:** les comptes dont la session a été déconnectée, qui sont indisponibles ou qui présentent un problème de connexion, d’acquisition, de source ou de média ; chaque nom renvoie vers sa fiche.
+- **Les discussions impliquant plusieurs comptes permettent de visualiser :** les sources partagées, les comptes qui les surveillent et les interruptions dans la période d’observation de l’espace de travail disponible (jusqu’à sept jours). **L’exportation avec N comptes** répartit l’exportation d’un canal ou d’un supergroupe entre eux et signe une seule archive.
+- **Exporter le groupe:** une image ZIP contenant l’exportation signée de chaque compte sous `accounts/` et `manifest.json` répertoriant leurs SHA-256 et leurs empreintes de clé, signées par l’ espace de travail principal dans `manifest.signature.json`. Vérifiez chaque archive de compte individuellement à l’aide de `python -m tgwitness.verify` et l’empreinte digitale de confiance de ce compte.
+
+Les membres partagent les paramètres du groupe ; un compte peut conserver ses propres valeurs. Consultez la section sur [les paramètres partagés](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [le guide d'importation et des groupes](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) ainsi que [le tableau de bord du pool MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Se déconnecter
 

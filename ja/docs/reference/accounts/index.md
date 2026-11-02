@@ -226,7 +226,16 @@ TDataとは、Telegram Desktopアプリケーション（desktop.telegram.orgか
 
 ### 一括インポートとアカウントグループ
 
-**アカウント → アカウントのインポート** で複数のアカウントを追加し、拡張子を除く名前でファイルを組み合わせ、各ログインの結果を確認できます。各アカウントには独立したワークスペースがあります。グループはセッション、鍵、証拠を統合せずに、テンプレートから選択した設定をコピーできます。[インポートとグループのガイド](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings)と[MTProxy プールのダッシュボード](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)をご覧ください。
+**「アカウント」→「アカウントのインポート」**を使用して複数のアカウントを追加し、ベース名でファイルを紐付け、 各ログイン結果を確認できます。各アカウントには独自のワークスペースが割り当てられます。
+
+グループは、関連するアカウントをまとめて管理しますが、セッション、鍵、 証拠は統合されません。**「Accounts**」の**「グループ」を開くと**、そのページが表示されます。 `/groups/<id>`:
+
+- **アカウント:**各メンバーの接続経路、観察内容、最後のメッセージが表示され、 「**すべて**開始」および「**すべて一時停止」**の機能があります。
+- **要確認:**ログアウトされたアカウント、利用できないアカウント、または 接続、取り込み、ソース、メディアに問題があるアカウント。各名称をクリックすると、そのカードが表示されます。
+- **複数のアカウントが閲覧できるチャットには、** 共有ソース、それらを閲覧しているアカウント、および 利用可能なワークスペースの閲覧期間（最大7日間）における中断が表示されます。**N個のアカウントでのエクスポートでは** 、チャンネルまたはスーパーグループのエクスポートが各アカウントに分割され、1つのアーカイブに署名されます。
+- **グループのエクスポート:**各アカウントの署名付きエクスポートが以下に格納された1つのZIP `accounts/` 、 `manifest.json` 各アカウントのSHA-256およびキーのフィンガープリントを列挙し、メイン ワークスペースによって `manifest.signature.json`。各アカウントのアーカイブは、 `python -m tgwitness.verify` およびそのアカウントの信頼済みフィンガープリントを使用して、各アカウントのアーカイブを個別に検証してください。
+
+メンバーはグループの設定を共有しますが、各アカウントは独自の設定値を保持することもできます。 [共有設定](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups)、 [インポートおよびグループのガイド](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings)、 ならびに[MTProxyプールダッシュボード](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)をご覧ください。
 
 ## ログアウト
 

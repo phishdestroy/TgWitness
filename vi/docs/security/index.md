@@ -79,7 +79,7 @@ Các đích lưu trữ tùy chọn được cấu hình riêng cho từng không
 - Quản trị viên của hệ thống có thể xem toàn bộ nội dung cũng như chỉnh sửa và ký lại sổ nhật ký. Vui lòng lưu giữ dấu vân tay và các điểm kiểm tra trên một hệ thống khác.
 - Nội dung tin nhắn và tệp đa phương tiện không được TgWitness mã hóa. Quý vị nên sử dụng tính năng mã hóa đĩa và thiết lập quyền truy cập nghiêm ngặt.
 - Việc sử dụng HTTP thuần túy ngoài phạm vi localhost sẽ khiến mã thông báo bị lộ trên mạng. Vui lòng sử dụng HTTPS hoặc đường hầm SSH.
-- Các chữ ký chứng minh rằng nội dung đã được ghi lại không bị thay đổi, chứ không phải là mọi sự kiện trên Telegram đều được ghi lại.
+- Kiểm tra các bản ghi đã lưu bằng chữ ký và điểm kiểm tra. Xem xét phạm vi thu thập và kiểm tra việc chuyển giao đối với các tài khoản và nguồn mà bạn sử dụng.
 
 [Chia sẻ quyền truy cập vào một vụ việc](https://phishdestroy.github.io/TgWitness/vi/docs/access/) kèm theo các quyền hạn, thời hạn hiệu lực và giới hạn phiên làm việc. Mã thông báo chứng nhân vẫn là một thông tin xác thực riêng biệt.
 

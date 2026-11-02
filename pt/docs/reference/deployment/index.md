@@ -127,7 +127,7 @@ Isso fica disponível após a conclusão bem-sucedida [do fluxo de trabalho de l
 Copie `deploy/env.example` para `.env`. Defina `TGWITNESS_IMAGE` como a versão publicada, utilizando o caminho do repositório **em letras minúsculas**, por exemplo:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ Verifique o acesso ao painel, a identidade da conta, o estado de observação e 
 
 O [fluxo de trabalho de lançamento](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) estará pronto para uso após este projeto ser enviado para um repositório do GitHub com o Actions habilitado. Ele é executado quando um lançamento no GitHub é **publicado**, incluindo um pré-lançamento. Rascunhos e envios de tags por si sós não publicam pacotes.
 
-1. Defina a versão do pacote e o registro de alterações e, em seguida, publique uma versão marcada com `v` mais a versão exata de `pyproject.toml`, como `v0.7.1`.
+1. Defina a versão do pacote e o registro de alterações e, em seguida, publique uma versão marcada com `v` mais a versão exata de `pyproject.toml`, como `v0.8.0`.
 2. O fluxo de trabalho valida a tag e executa as verificações compartilhadas do Python para Windows/Linux/macOS, do navegador geral/importação de conta/QR, do pacote-fonte e do Docker. A instalação nativa nova também é realizada nos três sistemas operacionais utilizando o Python 3.12.
 3. Após a aprovação dessas verificações, ele realiza testes preliminares em uma imagem ARM64 no QEMU, publica imagens AMD64/ARM64 em `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, e anexa o ZIP de código-fonte e o wheel Python com seus arquivos SHA-256. O ZIP portátil para Windows é exatamente o artefato testado pelo fluxo de trabalho de verificações; o fluxo de trabalho de lançamento baixa e publica esse artefato e sua soma de verificação.
 4. Uma tarefa final baixa novamente todos os três pacotes publicados e verifica suas somas de verificação. Em seguida, publica `SHA256SUMS.txt` e `RELEASE-MANIFEST.json`, registrando a versão, a revisão do código-fonte e os tamanhos dos recursos. Os uploads não sobrescrevem os recursos de versão existentes.

@@ -127,7 +127,7 @@ Tính năng này sẽ khả dụng sau khi [quy trình phát hành](https://phis
 Sao chép `deploy/env.example` vào `.env`. Đặt `TGWITNESS_IMAGE` thành phiên bản đã được phát hành, bằng cách sử dụng đường dẫn kho lưu trữ **viết thường**, ví dụ:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ Vui lòng kiểm tra quyền truy cập bảng điều khiển, thông tin nhậ
 
 [Quy trình phát hành](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) đã sẵn sàng để sử dụng sau khi dự án này được đẩy lên kho lưu trữ GitHub có bật tính năng Actions. Quy trình này sẽ được thực thi khi một bản phát hành GitHub được **công bố**, bao gồm cả bản phát hành trước. Việc đẩy bản nháp và thẻ một mình sẽ không dẫn đến việc công bố các gói phần mềm.
 
-1. Vui lòng thiết lập phiên bản gói phần mềm và nhật ký thay đổi, sau đó phát hành bản cập nhật được gắn thẻ `v` cùng với phiên bản `pyproject.toml` chính xác, chẳng hạn như `v0.7.1`.
+1. Vui lòng thiết lập phiên bản gói phần mềm và nhật ký thay đổi, sau đó phát hành bản cập nhật được gắn thẻ `v` cùng với phiên bản `pyproject.toml` chính xác, chẳng hạn như `v0.8.0`.
 2. Quy trình làm việc này sẽ xác thực thẻ và thực thi các kiểm tra chung trên trình duyệt Python chia sẻ cho Windows/Linux/macOS, kiểm tra thư mục general/account-import/QR, gói nguồn và Docker. Việc cài đặt bản gốc mới cũng được thực hiện trên cả ba hệ điều hành này bằng Python 3.12.
 3. Sau khi các kiểm tra này thành công, hệ thống sẽ thực hiện kiểm tra nhanh (smoke test) hình ảnh ARM64 trên QEMU, đăng tải các hình ảnh AMD64/ARM64 lên `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, và đính kèm tệp ZIP nguồn cùng gói Python wheel kèm theo các tệp SHA-256 tương ứng. Tệp ZIP di động dành cho Windows chính là bản phát hành đã được kiểm tra bởi quy trình kiểm tra; quy trình phát hành sẽ tải xuống và đăng tải bản phát hành đó cùng với tổng kiểm tra (checksum) của nó.
 4. Một tác vụ cuối cùng sẽ tải xuống lại cả ba gói đã được phát hành và xác minh tổng kiểm tra của chúng. Sau đó, nó sẽ phát hành `SHA256SUMS.txt` và `RELEASE-MANIFEST.json`, ghi lại phiên bản, bản sửa đổi nguồn và kích thước tài nguyên. Quá trình tải lên sẽ từ chối ghi đè lên các tài nguyên phát hành hiện có.

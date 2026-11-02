@@ -6,6 +6,19 @@ Sebuah pesan dapat berubah. Catatan tentang apa yang Anda amati harus tetap dapa
 
 Jelajahi dua eksperimen kecil di bawah ini. Eksperimen ini menggunakan pesan fiktif, berjalan di dalam browser Anda, dan tidak pernah terhubung ke Telegram.
 
+## Dari ekspor obrolan menjadi catatan yang dapat diverifikasi
+
+[Ekspor Telegram Desktop](https://telegram.org/blog/export-and-more) menyimpan riwayat obrolan dan media yang tersedia dalam format HTML atau JSON untuk penggunaan offline. TgWitness menambahkan jurnal berkelanjutan mengenai perubahan yang diterima, tanda tangan pada pengamatan dan ekspor, serta titik pemeriksaan yang dapat dibandingkan secara mandiri oleh penerima.
+
+| Tugas | Ekspor Telegram Desktop | TgWitness |
+| --- | --- | --- |
+| Baca percakapan yang disimpan | HTML atau JSON dengan media yang dipilih | Obrolan yang disimpan, jurnal yang dapat dicari, dan laporan offline |
+| Ikuti perubahan dari waktu ke waktu | Riwayat yang tersedia saat diekspor | Versi yang diambil sebelumnya, pengeditan selanjutnya, dan catatan penghapusan disimpan secara bersamaan |
+| Periksa berkas setelah penyerahan | Berkas ekspor HTML/JSON standar tidak ditandatangani | Manifest yang ditandatangani, tanda tangan per catatan, dan laporan HTML/PDF/JSON yang disegel diverifikasi menggunakan kunci pengumpul tepercaya |
+| Bandingkan dengan status yang disimpan sebelumnya | Simpan salinan referensi terpisah atau hash | Titik pemeriksaan yang ditandatangani, saksi terpisah, dan cap waktu eksternal opsional |
+
+Perbandingan penandatanganan berkas didasarkan pada [penulis ekspor Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) yang ditinjau pada tanggal 2 November 2026. TgWitness menandatangani berkas dengan kunci pengumpul; pemeriksaan di bawah ini menunjukkan bagaimana penerima menggunakannya.
+
 ## Satu pesan, tiga pengamatan
 
 Ketika Telegram mengirimkan pesan baru, pemberitahuan pengeditan, dan pemberitahuan penghapusan, aplikasi pengumpul menambahkan tiga catatan terpisah. Pengeditan tidak menggantikan catatan pertama. Pemberitahuan penghapusan tidak menghapusnya.
@@ -107,6 +120,6 @@ Verifikasi tanda tangan titik pemeriksaan di bawah kunci pengumpul yang disematk
 
 [01 / INTEGRITAS**Apakah catatan ini berubah?** Verifikasi hash dan tanda tangan menggunakan kunci tepercaya yang terpisah.](https://phishdestroy.github.io/TgWitness/id/docs/exports/)[02 / KONTINUITAS**Apa yang telah disimpan sebelumnya?** Bandingkan ekspor yang ditandatangani dengan titik pemeriksaan yang disimpan oleh saksi terpisah.](https://phishdestroy.github.io/TgWitness/id/docs/witness/)[03 / PENYAMPAIAN**Apakah peristiwa uji coba ini telah diterima?** Cocokkan tindakan pengiriman, pengeditan, dan penghapusan yang dikendalikan dengan jurnal masing-masing akun.](https://phishdestroy.github.io/TgWitness/id/docs/cases/)
 
-Rantai hash yang cocok menjawab pertanyaan mengenai integritas. Hal ini tidak membuktikan pengiriman pesan Telegram secara lengkap, kebenaran suatu pesan, atau waktu pengamatan yang dapat dipercaya secara independen.
+Gunakan tanda tangan untuk memeriksa catatan yang disimpan, titik pemeriksaan (checkpoints) untuk membandingkan batas waktu sebelumnya, dan uji pengiriman terkontrol untuk mengukur proses pengumpulan. Masing-masing menjawab pertanyaan spesifik. [Bacalah ruang lingkup verifikasi dan asumsi kepercayaan.](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope)
 
 Ikuti [penyelidikan akun secara menyeluruh](https://phishdestroy.github.io/TgWitness/id/docs/cases/) mulai dari pengumpulan data hingga penyusunan berkas kasus.

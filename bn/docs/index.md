@@ -1,22 +1,32 @@
-# বার্তাটি অনুসরণ করুন। প্রমাণটি বুঝুন।
+# টেলিগ্রাম রেকর্ড থেকে একটি স্পষ্ট মামলা।
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/
 
-আপনার প্রথম ক্যাপচার পান, প্রমাণ কীভাবে কাজ করে তা অন্বেষণ করুন, তারপর আপনার প্রয়োজনীয় সেটআপ তৈরি করুন।
+সংরক্ষিত বার্তা এবং পরিবর্তনগুলোর সাথে কাজ করুন, আপনার ফলাফলগুলোকে তাদের উৎসগুলোর সাথে সংযুক্ত করুন, এবং পর্যালোচনার জন্য স্বাক্ষরিত ফাইল প্রস্তুত করুন।
 
-[ইন্টার‌্যাক্টিভ ফিল্ড গাইড**পরিবর্তন করুন। দেখুন প্রমাণ কী ধরে।** একটি বার্তার ইতিহাস প্লে করুন, একটি রেকর্ড পরিবর্তন করুন এবং এর হ্যাশ অনুসরণ করুন। ভিজ্যুয়াল গাইড অন্বেষণ করুন](https://phishdestroy.github.io/TgWitness/bn/docs/concepts/) [## মোড, পরিস্থিতি এবং প্রমাণ স্তর সংগ্রহের পরিধি, ঘটনার সীমা, আটটি যাচাইকরণ প্রক্রিয়া এবং ছয়টি কাল্পনিক তদন্ত পরিস্থিতি।](https://phishdestroy.github.io/TgWitness/bn/guides/modes.html)
+## ওয়ার্কফ্লোগুলো অন্বেষণ করুন
+
+চিত্রসহ গাইড
+
+[### কেস বোর্ড পর্যবেক্ষণ, সঠিক উদ্ধৃতি এবং দলের নোটগুলো সংযুক্ত রাখুন।](https://phishdestroy.github.io/TgWitness/bn/docs/case-board/) [### রিপোর্ট স্টুডিও উপকরণ নির্বাচন করুন এবং আটটি রিপোর্ট ডিজাইনের মধ্যে একটি বেছে নিন।](https://phishdestroy.github.io/TgWitness/bn/docs/reports/) [### শেয়ার করার জন্য অনুলিপি প্রাপ্তকারীর প্রয়োজনীয় ক্ষেত্রসমূহ সহ স্বাক্ষরিত একটি সারসংক্ষেপ প্রস্তুত করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/handover/) [### অ্যাকাউন্ট গ্রুপসমূহ একসঙ্গে অ্যাকাউন্ট পর্যালোচনা করুন এবং তাদের ওয়ার্কস্পেস আলাদা রাখুন।](https://phishdestroy.github.io/TgWitness/bn/docs/groups/)
+
+[## মোড, পরিস্থিতি এবং প্রমাণ স্তর সংগ্রহের পরিধি, ঘটনার সীমা, আটটি যাচাইকরণ প্রক্রিয়া এবং ছয়টি কাল্পনিক তদন্ত পরিস্থিতি।](https://phishdestroy.github.io/TgWitness/bn/guides/modes.html)
 
 ## আপনার প্রথম ধারণকৃত বার্তা
 
 [### মিনিটখানেকের মধ্যে শুরু করুন নমুনা ডেটা দিয়ে TgWitness পরীক্ষা করুন, তারপর Windows, Linux বা macOS-এ আপনার নিজস্ব টেলিগ্রাম পর্যবেক্ষণ কর্মক্ষেত্র চালু করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/start/)[### নিবেদিত অ্যাকাউন্ট সংগ্রহের জন্য একটি পৃথক টেলিগ্রাম অ্যাকাউন্ট প্রস্তুত করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/dedicated-account/)[### একটি অ্যাকাউন্ট সংযুক্ত করুন QR কোড, ফোন নম্বর বা সেশন আমদানির মাধ্যমে টেলিগ্রাম সংযুক্ত করুন। উৎস নির্বাচন করুন এবং নিশ্চিত করুন যে নতুন বার্তাগুলো আপনার জার্নালে আসছে।](https://phishdestroy.github.io/TgWitness/bn/docs/accounts/)[### একটি প্রক্সি নির্বাচন করুন স্বয়ংক্রিয় MTProxy রুটগুলো বজায় রাখুন অথবা আপনার নিজস্ব প্রক্সি ব্যবহার করুন। আইপি মোড, ফ্যালব্যাক নিয়ম এবং বাহ্যিক অনুরোধের জন্য রুট নির্বাচন করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/proxies/)[### রপ্তানি এবং যাচাই করুন রেকর্ডকৃত টেলিগ্রাম ইতিহাস রপ্তানি করুন, স্বাক্ষর যাচাই করুন এবং একটি স্বাধীন সাক্ষীর সংরক্ষিত চেকপয়েন্টের সাথে জার্নাল তুলনা করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/exports/)[### GitHub Actions ক্যাপচার একটি টেলিগ্রাম চ্যাট অস্থায়ী GitHub রানারে রপ্তানি করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/capture/)
 
+## সংরক্ষিত রেকর্ড থেকে একটি ভাগ করা রিপোর্ট
+
+[### সমস্ত চ্যাট জুড়ে তদন্ত করুন চ্যানেল, গ্রুপ, ব্যক্তিগত চ্যাট এবং বট জুড়ে একটি এন্ড-টু-এন্ড টেলিগ্রাম তদন্ত পরিচালনা করুন: সম্পূর্ণ অ্যাকাউন্ট ক্যাপচার, ইতিহাস, মানুষ, লিঙ্ক, ফাইল, টাইমলাইন এবং যাচাইকৃত প্রমাণ।](https://phishdestroy.github.io/TgWitness/bn/docs/cases/)[### একটি কেস বোর্ড তৈরি করুন সংরক্ষিত পর্যবেক্ষণ, সঠিক হাইলাইট এবং অ্যাকশন স্লাইসগুলো একটি ব্যক্তিগত বোর্ডে সংগ্রহ করুন, সেগুলো আপনার দলের সাথে আলোচনা করুন এবং একটি সংগ্রহ উপস্থাপন করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/case-board/)[### একটি রিপোর্ট ডিজাইন করুন রিপোর্ট ডেটা নির্বাচন করুন, আটটি ডিজাইনের মধ্যে একটি এবং বিষয়বস্তু নির্বাচন করুন, তারপর পূর্বরূপ দেখুন এবং HTML, স্বাক্ষরিত PDF বা সম্পূর্ণ প্রমাণ প্যাকেজ রপ্তানি করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/reports/)[### একটি শেয়ার করার কপি প্রস্তুত করুন প্রাপ্তি গ্রহণকারী যে রেকর্ড এবং ক্ষেত্রগুলি গ্রহণ করতে পারে তা নির্বাচন করুন, চূড়ান্ত কপি পর্যালোচনা করুন এবং এর স্বাক্ষরিত ম্যানিফেস্ট ও সোর্স জার্নাল সীমানা যাচাই করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/handover/)[### অ্যাকাউন্টের একটি গ্রুপ পরিচালনা করুন গ্রুপ ওয়ার্কস্পেসগুলো তুলনা করুন, একটি উৎস খুঁজুন, পর্যবেক্ষণ সময়কাল পর্যালোচনা করুন এবং প্রতি-অ্যাকাউন্ট ব্যতিক্রমসহ ভাগ করা সেটিংস প্রয়োগ করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/groups/)
+
 ## চেষ্টা করে শিখুন
 
-[### প্রমাণ কীভাবে কাজ করে দেখুন একটি বার্তা ক্যাপচার থেকে চেকপয়েন্ট পর্যন্ত অনুসরণ করুন। একটি নমুনা রেকর্ড পরিবর্তন করুন, এর SHA-256 চেইন পুনরায় গণনা করুন এবং দেখুন সংরক্ষিত চেকপয়েন্ট কী সনাক্ত করে।](https://phishdestroy.github.io/TgWitness/bn/docs/concepts/)[### সমস্ত চ্যাট জুড়ে তদন্ত করুন চ্যানেল, গ্রুপ, ব্যক্তিগত চ্যাট এবং বট জুড়ে একটি এন্ড-টু-এন্ড টেলিগ্রাম তদন্ত পরিচালনা করুন: সম্পূর্ণ অ্যাকাউন্ট ক্যাপচার, ইতিহাস, মানুষ, লিঙ্ক, ফাইল, টাইমলাইন এবং যাচাইকৃত প্রমাণ।](https://phishdestroy.github.io/TgWitness/bn/docs/cases/)[### এটি নিরাপদ রাখুন দেখুন সেশন, কী এবং প্রমাণ কোথায় সংরক্ষিত আছে, আপনার মেশিন থেকে কী কী বেরিয়ে যায়, সুরক্ষা ব্যবস্থাগুলো কী কী আচ্ছাদন করে এবং কীভাবে একটি ইনস্টলেশন আরও সুরক্ষিত করা যায়।](https://phishdestroy.github.io/TgWitness/bn/docs/security/)
+[### প্রমাণ কীভাবে কাজ করে দেখুন একটি বার্তা ক্যাপচার থেকে চেকপয়েন্ট পর্যন্ত অনুসরণ করুন। একটি নমুনা রেকর্ড পরিবর্তন করুন, এর SHA-256 চেইন পুনরায় গণনা করুন এবং দেখুন সংরক্ষিত চেকপয়েন্ট কী সনাক্ত করে।](https://phishdestroy.github.io/TgWitness/bn/docs/concepts/)[### এটি নিরাপদ রাখুন দেখুন সেশন, কী এবং প্রমাণ কোথায় সংরক্ষিত আছে, আপনার মেশিন থেকে কী কী বেরিয়ে যায়, সুরক্ষা ব্যবস্থাগুলো কী কী আচ্ছাদন করে এবং কীভাবে একটি ইনস্টলেশন আরও সুরক্ষিত করা যায়।](https://phishdestroy.github.io/TgWitness/bn/docs/security/)[### একটি উইটনেস বট সেট আপ করুন স্বাক্ষরিত জার্নাল চেকপয়েন্টগুলো একটি পৃথক উইটনেস, নিজস্ব কী এবং শুধুমাত্র-পঠনযোগ্য কালেক্টর অ্যাক্সেস সহ আপনার টেলিগ্রাম চ্যানেলে প্রকাশ করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/witness/)
 
 ## শুধুমাত্র আপনার প্রয়োজনীয় অংশই যোগ করুন
 
-[### আর্কাইভ নিয়ে কাজ করুন লোড ইতিহাস, সংরক্ষিত রেকর্ড অনুসন্ধান, এআই উৎস পর্যালোচনা এবং আপনার টুলগুলো সংযুক্ত করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/archive/)[### একটি কেস শেয়ার করুন পর্যালোচক ও বিশ্লেষকদের নির্বাচিত অ্যাকাউন্ট ও চ্যাটে পৃথক অনুমতি, সেশন সীমা এবং বাতিলযোগ্য টোকেনসহ অ্যাক্সেস দিন।](https://phishdestroy.github.io/TgWitness/bn/docs/access/)[### একটি উইটনেস বট সেট আপ করুন স্বাক্ষরিত জার্নাল চেকপয়েন্টগুলো একটি পৃথক উইটনেস, নিজস্ব কী এবং শুধুমাত্র-পঠনযোগ্য কালেক্টর অ্যাক্সেস সহ আপনার টেলিগ্রাম চ্যানেলে প্রকাশ করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/witness/)[### এটি চালু রাখুন স্থায়ী স্টোরেজ, ব্যক্তিগত প্যানেল অ্যাক্সেস, ব্যাকআপ এবং রিস্টার্টের পর চেকসহ একটি সার্ভারে TgWitness চালান।](https://phishdestroy.github.io/TgWitness/bn/docs/server/)[### কি ভুল হয়েছে তা খুঁজে বের করুন প্রতি সমস্যার জন্য সঠিক সংকেত ব্যবহার করে চেক প্যানেল অ্যাক্সেস, টেলিগ্রাম সংযোগ, অনুপস্থিত বার্তা, FloodWait এবং উইটনেস স্ট্যাটাস পরীক্ষা করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/troubleshooting/)
+[### আর্কাইভ নিয়ে কাজ করুন লোড ইতিহাস, সংরক্ষিত রেকর্ড অনুসন্ধান, এআই উৎস পর্যালোচনা এবং আপনার টুলগুলো সংযুক্ত করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/archive/)[### একটি কেস শেয়ার করুন পর্যালোচক ও বিশ্লেষকদের নির্বাচিত অ্যাকাউন্ট ও চ্যাটে পৃথক অনুমতি, সেশন সীমা এবং বাতিলযোগ্য টোকেনসহ অ্যাক্সেস দিন।](https://phishdestroy.github.io/TgWitness/bn/docs/access/)[### এটি চালু রাখুন স্থায়ী স্টোরেজ, ব্যক্তিগত প্যানেল অ্যাক্সেস, ব্যাকআপ এবং রিস্টার্টের পর চেকসহ একটি সার্ভারে TgWitness চালান।](https://phishdestroy.github.io/TgWitness/bn/docs/server/)[### কি ভুল হয়েছে তা খুঁজে বের করুন প্রতি সমস্যার জন্য সঠিক সংকেত ব্যবহার করে চেক প্যানেল অ্যাক্সেস, টেলিগ্রাম সংযোগ, অনুপস্থিত বার্তা, FloodWait এবং উইটনেস স্ট্যাটাস পরীক্ষা করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/troubleshooting/)
 
 ## সম্পূর্ণ রেফারেন্স
 
@@ -32,11 +42,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/
 
 আর্কাইভ ও ইন্টিগ্রেশনসমূহ
 
-[আর্কাইভ বিশ্লেষণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/analysis/)[শুধুমাত্র-পঠন MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/)[স্থানীয় OCR এবং প্রতিলিপি](https://phishdestroy.github.io/TgWitness/bn/docs/reference/media-analysis/)[প্রস্থানকারী ওয়েবহুকস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/webhooks/)
+[কেস বোর্ড রেফারেন্স](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/)[আর্কাইভ বিশ্লেষণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/analysis/)[শুধুমাত্র-পঠন MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/)[স্থানীয় OCR এবং প্রতিলিপি](https://phishdestroy.github.io/TgWitness/bn/docs/reference/media-analysis/)[প্রস্থানকারী ওয়েবহুকস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/webhooks/)
 
 প্রমাণ
 
-[প্রমাণ কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/)[প্রমাণের ফর্ম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)[স্বতন্ত্র সাক্ষী](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/)[টাইমস্ট্যাম্পস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/timestamp/)
+[প্রমাণ কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/)[রিপোর্ট কনফিগারেশন এবং যাচাইকরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-reports/)[প্রমাণের ফর্ম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)[স্বতন্ত্র সাক্ষী](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/)[টাইমস্ট্যাম্পস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/timestamp/)
 
 নিরাপত্তা ও প্রকল্প
 

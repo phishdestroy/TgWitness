@@ -226,7 +226,16 @@ Hãy nhấn vào mã **+** bên cạnh trình chọn tài khoản, hoặc truy c
 
 ### Nhập hàng loạt và nhóm tài khoản
 
-Dùng **Tài khoản → Nhập tài khoản** để thêm nhiều tài khoản, ghép tệp theo tên gốc và xem kết quả từng lần đăng nhập. Mỗi tài khoản có không gian làm việc riêng. Nhóm có thể sao chép các thiết lập đã chọn từ mẫu mà không gộp phiên, khóa hay bằng chứng. Xem [hướng dẫn nhập và nhóm](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) và [bảng điều khiển nhóm MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+Sử dụng **Accounts → Import accounts** để thêm nhiều tài khoản, ghép nối các tệp theo tên gốc và xem kết quả đăng nhập của từng tài khoản. Mỗi tài khoản sẽ có không gian làm việc riêng.
+
+Một nhóm giúp tập hợp các tài khoản có liên quan lại với nhau mà không hợp nhất các phiên, khóa hoặc bằng chứng của chúng. **Mở nhóm** trên **Tài khoản** dẫn đến trang của nó tại `/groups/<id>`:
+
+- **Tài khoản:** lộ trình kết nối, thông tin quan sát và tin nhắn cuối cùng của từng thành viên, kèm theo Bắt đầu**tất cả** và **Tạm dừng tất cả**.
+- **Cần chú ý:** các tài khoản đã đăng xuất, không khả dụng hoặc gặp vấn đề về kết nối, nhập liệu, nguồn hoặc phương tiện; mỗi tên sẽ dẫn đến thẻ thông tin tương ứng.
+- **Các cuộc trò chuyện trên nhiều tài khoản hiển thị:** các nguồn được chia sẻ, các tài khoản đang theo dõi chúng và các gián đoạn trong khoảng thời gian quan sát không gian làm việc có sẵn (tối đa bảy ngày). **Khi xuất với N tài khoản,** quá trình xuất kênh hoặc siêu nhóm sẽ được chia đều giữa các tài khoản này và tạo ra một tệp lưu trữ duy nhất.
+- **Xuất nhóm:** một ZIP chứa bản xuất đã được ký của từng tài khoản dưới `accounts/` và `manifest.json` liệt kê các SHA-256 và dấu vân tay khóa của chúng, được ký bởi không gian làm việc chính trong `manifest.signature.json`. Xác minh từng bản lưu trữ tài khoản riêng lẻ bằng `python -m tgwitness.verify` và dấu vân tay đáng tin cậy của tài khoản đó.
+
+Các thành viên chia sẻ cài đặt chung của nhóm; mỗi tài khoản có thể giữ nguyên các giá trị riêng của mình. Xem [phần cài đặt chung](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [hướng dẫn nhập dữ liệu và quản lý nhóm](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) cùng với [bảng điều khiển nhóm MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Đăng xuất
 

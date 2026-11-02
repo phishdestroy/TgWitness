@@ -10,15 +10,15 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/
 
 ## 收集
 
-[### 数据采集原理 观察范围、实时更新、复核、附件、用户操作以及“缺口”的含义，逐条记录。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)[### 加载源代码历史记录 从已启用的来源加载历史消息，暂停和恢复操作，并验证带签名的进度报告。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/history/)[### 工作流程与操作 控制面板的日常操作：模式、监控类别、参数、通知、导出、备份及容量。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/)[### 调查模式 涵盖频道、群组、私聊和机器人的全账户调查，从调查范围到经过验证的案件资料包。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)[### 功能与限制 TgWitness 当前已实现的功能、Telegram 平台的限制以及未来仍需完成的工作。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/)
+[### 数据采集原理 观察范围、实时更新、复核、附件、用户操作以及“缺口”的含义，逐条记录。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)[### 加载源代码历史记录 从已启用的来源加载历史消息，暂停和恢复操作，并验证带签名的进度报告。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/history/)[### 工作流程与操作 控制面板的日常操作：模式、监控类别、参数、通知、导出、备份及容量。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/)[### 调查模式 涵盖频道、群组、私聊和机器人的全账户调查，从调查范围到经过验证的案件资料包。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)[### 功能与限制 TgWitness 的当前采集模型、多账户工作流、导出功能及操作边界。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/)
 
 ## 存档与集成
 
-[### 存档分析 搜索已保存的消息、审查 AI 输入内容，并保存附有来源参考信息的分析报告。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/analysis/)[### 只读 MCP 将 MCP 客户端连接到选定的工作区和聊天群组，并授予具有时效性且可撤销的访问权限。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/)[### 本地 OCR 和转录 通过本地工作进程识别捕获的图像和音频；将生成的文本与源文件保持关联。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/media-analysis/)[### 外发 webhook 将带 HMAC 签名的指定范围事件发送至 HTTPS 接收端，支持重试并提供投递状态。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/webhooks/)
+[### “案件看板”参考 书签、精确高亮、操作片段、讨论、范围访问以及“案件看板”所使用的签名注释历史记录。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-board/)[### 存档分析 搜索已保存的消息、审查 AI 输入内容，并保存附有来源参考信息的分析报告。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/analysis/)[### 只读 MCP 将 MCP 客户端连接到选定的工作区和聊天群组，并授予具有时效性且可撤销的访问权限。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/)[### 本地 OCR 和转录 通过本地工作进程识别捕获的图像和音频；将生成的文本与源文件保持关联。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/media-analysis/)[### 外发 webhook 将带 HMAC 签名的指定范围事件发送至 HTTPS 接收端，支持重试并提供投递状态。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/webhooks/)
 
 ## 证据
 
-[### 证据的运作原理 通过验证者实际使用的精确公式，详细解释了哈希链、签名、检查点和见证人等概念。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/)[### 证据格式 签名 ZIP 文件的内容、记录类型、操作收据、用户资料、异地副本及离线验证。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)[### 独立见证者 运行一个带有独立密钥和机器人的 Witness 实例，将签名后的检查点发布到频道中，并据此验证导出数据。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/)[### 时间戳 签名检查点采用 RFC 3161 时间戳：向认证机构发送的内容以及如何验证响应。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/)
+[### 证据的运作原理 通过验证者实际使用的精确公式，详细解释了哈希链、签名、检查点和见证人等概念。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/)[### 报告配置与验证 报告过滤器、八种设计模板、内容预设、已保存的变更历史记录以及评估结果均包含在已签名的导出文件中。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)[### 证据格式 签名 ZIP 文件的内容、记录类型、操作收据、用户资料、异地副本及离线验证。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)[### 独立见证者 运行一个带有独立密钥和机器人的 Witness 实例，将签名后的检查点发布到频道中，并据此验证导出数据。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/)[### 时间戳 签名检查点采用 RFC 3161 时间戳：向认证机构发送的内容以及如何验证响应。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/)
 
 ## 安全与项目
 

@@ -4,19 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/cases/
 
 Xử lý toàn bộ vụ việc trên các kênh, nhóm, cuộc trò chuyện riêng tư và bot: thu thập, kết nối, tái tạo và bàn giao bằng chứng.
 
-Hướng dẫn này sẽ theo dõi một vụ việc giả định từ đầu đến cuối. Hướng dẫn sử dụng các tính năng thu thập, tìm kiếm, lập hồ sơ cá nhân và xuất dữ liệu thực tế. Bản đồ vụ việc chỉ là một ví dụ minh họa trong tài liệu; các kết luận và sổ đăng ký vụ việc của quý vị sẽ được lưu trữ bên ngoài ứng dụng.
+Hướng dẫn này theo dõi một vụ việc giả định qua toàn bộ quy trình. Sử dụng các tính năng thu thập, tìm kiếm và hồ sơ cá nhân để tìm các bản ghi nguồn, [Case Board](https://phishdestroy.github.io/TgWitness/vi/docs/case-board/) để sắp xếp và thảo luận về chúng, và [Report Studio](https://phishdestroy.github.io/TgWitness/vi/docs/reports/) để trình bày kết quả. Bản đồ minh họa bên dưới giải thích các mối liên hệ trong ví dụ này.
 
 TRƯỜNG HỢP ĐÃ XỬ LÝ / ĐỊA CHỈ NHẬN THANH TOÁN ĐÃ ĐƯỢC THAY ĐỔI
 
 ### Một sự cố. Bốn cuộc trò chuyện. Một dấu vết cần được tái hiện.
 
-Một thông báo trên kênh đề cập đến một bot. Một nhóm vận hành thảo luận về một liên kết thanh toán mới. Một tin nhắn riêng tư tiếp theo nhắc lại nội dung đó. Sau đó, thông báo này bị chỉnh sửa và một tin nhắn trong nhóm biến mất.
+Một thông báo trên kênh dẫn đến một bot. Một nhóm vận hành thảo luận về một liên kết thanh toán mới, và bot hiển thị liên kết đó. Thông báo được chỉnh sửa, một tin nhắn riêng tư tiếp theo nhắc lại địa chỉ đích, và một tin nhắn nhóm biến mất.
 
 Ai là người đã đăng tải từng phiên bản?Liên kết này xuất hiện ở đâu?Tệp nào đã được lưu giữ?Điều gì đã thay đổi và vào thời điểm nào?
 
 Để tải lịch sử, xem xét nguồn bằng AI (tùy chọn), MCP, OCR và webhook gửi đi, hãy xem [phần "Quản lý kho lưu trữ"](https://phishdestroy.github.io/TgWitness/vi/docs/archive/).
 
 ## 1. Đảm bảo phạm vi bao quát toàn bộ tài khoản
+
+Sử dụng tài khoản thu thập chuyên dụng cho phạm vi toàn bộ tài khoản. Các tài khoản chính có thể thu thập các cuộc trò chuyện được chọn hoặc một thư mục Telegram.
 
 1. [Vui lòng kết nối tài khoản thu thập dữ liệu](https://phishdestroy.github.io/TgWitness/vi/docs/accounts/) trong không gian làm việc riêng của nó. Ghi lại mã tham chiếu vụ việc, ID tài khoản, tên không gian làm việc và dấu vân tay khóa ký vào ghi chú vụ việc của quý vị.
 2. **Nguồn** mở **→ Phạm vi quan sát → Chế độ điều tra**. Xem xét **toàn bộ tài khoản**, cả bốn loại nguồn và **các hành động của chính người dùng**. Cài đặt sẵn này cho phép lưu hồ sơ của một nguồn mới cùng **200 tin nhắn hiển thị** gần nhất của nguồn đó. Nhấn **Lưu phạm vi** và hoàn tất việc xác nhận phạm vi.
@@ -33,11 +35,11 @@ Tin nhắn · các thao tác chỉnh sửa · thông báo xóa · phản ứng h
 
 ## 2. Thu thập lịch sử và bảo quản các tệp tin
 
-Xây dựng sổ đăng ký nguồn cho toàn bộ cuộc điều tra. Gán cho mỗi cuộc trò chuyện một hàng với ID số, tiêu đề, tài khoản, quyền truy cập/vai trò, thời điểm bắt đầu theo dõi trực tiếp, quá trình thu thập lịch sử, kết quả phương tiện truyền thông và các khoảng trống đã biết. Chỉ đánh dấu nguồn là đã thu thập sau khi kiểm tra kết quả liên quan.
+Tạo bộ sưu tập Case Board cho cuộc điều tra và đánh dấu các bản ghi đã lưu liên quan. Duy trì sổ đăng ký nguồn song song với vụ việc: ID số của mỗi cuộc trò chuyện, tiêu đề, tài khoản thu thập, quyền truy cập/vai trò, thời điểm bắt đầu trực tiếp, quá trình thu thập lịch sử, kết quả phương tiện và các khoảng trống đã biết. Đánh dấu nguồn là đã thu thập sau khi kiểm tra kết quả liên quan.
 
 | Yêu cầu | Thao tác trên bảng điều khiển | Các tính năng mà công cụ này cung cấp |
 | --- | --- | --- |
-| Lịch sử trong các cuộc trò chuyện đã kích hoạt | Nguồn → Tải lịch sử đầy đủ | Tính năng chính hiện tại: các tin nhắn trong quá khứ có sẵn sẽ được đưa vào nhật ký không gian làm việc, kèm theo tính năng tạm dừng/tiếp tục và báo cáo tiến độ có chữ ký. [Hướng dẫn sử dụng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/history/). |
+| Lịch sử trong các cuộc trò chuyện đã kích hoạt | Nguồn → Tải lịch sử đầy đủ | Các tin nhắn trước đây có sẵn sẽ được đưa vào nhật ký không gian làm việc, kèm theo tính năng tạm dừng/tiếp tục và báo cáo tiến độ có chữ ký. [Hướng dẫn lịch sử](https://phishdestroy.github.io/TgWitness/vi/docs/reference/history/). |
 | Bối cảnh cuộc trò chuyện hiện có trong sổ ghi chép | Nguồn → Cài đặt ghi lại → Bản chụp lịch sử | Các tin nhắn hiển thị gần đây dưới dạng các quan sát đã được ký xác thực. Giá trị mặc định tối đa là 500; tại mục **Thông số → Bản chụp lịch sử lớn nhất**, quý vị có thể tăng con số này lên đến 10.000. |
 | Lịch sử đầy đủ hiện có của một cuộc trò chuyện | Xuất toàn bộ cuộc trò chuyện → Xuất toàn bộ cuộc trò chuyện, hoặc Cuộc trò chuyện → Xuất cuộc trò chuyện | Một gói dữ liệu được ký riêng biệt với các thuật toán `chat.json` và `chat.html`. Thực hiện lặp lại cho từng nguồn; lưu giữ kết quả thành công hoặc thất bại. |
 | Bối cảnh khi một cuộc trò chuyện mới xuất hiện | Phạm vi quan sát → Khi một cuộc trò chuyện hoặc bot mới xuất hiện | Hồ sơ nguồn và tối đa 1.000 tin nhắn gần đây có thể hiển thị; Chế độ điều tra sẽ chọn 200 tin nhắn. Các cuộc trò chuyện hiện có sẽ không được ghi lại các tin nhắn này theo hình thức hồi tố. |
@@ -63,9 +65,9 @@ Các chức năng điều khiển này thực hiện các thao tác thực tế 
 
 ## 4. Theo dõi các cá nhân, liên kết và tệp tin trong các cuộc trò chuyện
 
-1. Mở **Sổ nhật ký**, để bộ lọc nguồn ở chế độ **“Tất cả nguồn”** và tìm kiếm một cụm từ đặc trưng, tên miền, tên người dùng hoặc mã định danh đã lưu. Mở từng bản ghi phù hợp và ghi lại nội dung trò chuyện, ID tin nhắn cùng số thứ tự trong sổ nhật ký của bản ghi đó.
+1. Mở Open **Journal**, để bộ lọc nguồn ở chế độ **“Tất cả nguồn”** và tìm kiếm một cụm từ đặc trưng, tên miền, tên người dùng hoặc mã định danh đã lưu. Mở từng bản ghi khớp kết quả, sau đó chọn **“To board”** để lưu lại cuộc trò chuyện, ID tin nhắn và tham chiếu nhật ký của bản ghi đó vào hồ sơ vụ việc.
 2. Để xem một cuộc trò chuyện cụ thể, hãy mở **Chats → People → Bật hồ sơ**, sau đó chọn một người. Xem lại lịch sử tên/tên người dùng, mối quan hệ trả lời, hoạt động, **cũng như các mục “Cũng trong…”** bao gồm các cuộc trò chuyện khác được theo dõi và các liên kết, ví tiền điện tử hoặc số điện thoại đã trích xuất. Mở các bản ghi nhật ký được trích dẫn.
-3. Hãy theo dõi cùng một ID người dùng Telegram (dạng số) trong các cuộc trò chuyện khác thuộc không gian làm việc này. Hãy coi tên trùng khớp, việc đề cập đến ví tiền điện tử hoặc hình đại diện tương tự như một manh mối cần kiểm tra. Việc đề cập đến một địa chỉ không chứng minh quyền sở hữu; hình đại diện tương tự cũng không chứng minh đó là cùng một người.
+3. Theo dõi cùng một ID người dùng Telegram (số) trong các cuộc trò chuyện khác trong không gian làm việc này. Xem tên trùng khớp, đề cập đến ví hoặc ảnh đại diện tương tự như một manh mối cần kiểm tra; giữ nguyên các tham chiếu nguồn và bất kỳ thông tin nguồn gốc hỗ trợ nào.
 4. So sánh các giá trị SHA-256 của tệp đính kèm được lưu giữ giữa các bản ghi. Các giá trị băm trùng khớp đảm bảo tính nhất quán về byte của các tệp đã lưu. Kiểm tra các bản ghi tin nhắn và người gửi liên quan trước khi đưa ra kết luận về người đã chia sẻ chúng.
 
 BẢN ĐỒ VỤ VIỆC / THEO DÕI CÁC THAM CHIẾUTrường hợp giả định · không phải biểu đồ thực tế
@@ -86,17 +88,17 @@ RIÊNG TƯ / THEO DÕI**Người dùng 71001 lặp lại địa chỉ đích**
 
 Bản ghi số 205 · tin nhắn số 922 · Biên nhận tệp đã lưu số 209
 
-Bốn cuộc trò chuyện cung cấp các quan sát khác nhau. Vui lòng theo dõi các bản ghi nguồn cho từng kết nối; không gán bài đăng trên kênh cho người dùng 71001 nếu không có thông tin người gửi được xác định rõ.
+Bốn cuộc trò chuyện cung cấp các quan sát khác nhau. Theo dõi các bản ghi nguồn cho mọi kết nối; bài đăng trên kênh không có người gửi được xác định.
 
-Các mã số nhận dạng và tham chiếu bản ghi được đặt ra riêng cho hướng dẫn này. Sơ đồ này giải thích quy trình làm việc của nhà phân tích thông qua việc sử dụng tính năng tìm kiếm, hồ sơ người dùng và kiểm tra bản ghi; ứng dụng này không tạo ra sơ đồ điều tra tổng thể.
+Các ID số và tham chiếu bản ghi được tạo ra riêng cho hướng dẫn này. Bản đồ giải thích này cho thấy cách kết nối kết quả tìm kiếm, hồ sơ và các bản ghi đã kiểm tra; Case Board lưu trữ các thẻ tương ứng và tham chiếu nguồn.
 
 | Kết nối | Quan sát bổ sung | Kết luận cần giữ lại |
 | --- | --- | --- |
 | Cùng một tài khoản Telegram | ID người dùng 71001 trong nhóm #146 và cuộc trò chuyện riêng tư #205 | ID người gửi được cung cấp giống hệt nhau trong cả hai cuộc trò chuyện. Danh tính thực tế vẫn là một vấn đề riêng biệt. |
-| Địa chỉ đích lặp lại | `pay.example.invalid/new` tại #146, siêu dữ liệu nút #173, bài đăng đã chỉnh sửa #188 và #205 | Cùng một địa chỉ đích xuất hiện trong bốn bối cảnh được quan sát. Chỉ riêng điều này chưa đủ để xác định ai là người kiểm soát địa chỉ đó. |
-| Cùng số byte tệp | Các giá trị SHA-256 hoàn toàn trùng khớp trong các biên nhận phương tiện đã hoàn tất số #151 và #209 | Hai tệp đính kèm được lưu giữ này có nội dung byte hoàn toàn giống hệt nhau. Chỉ dựa vào tên tệp hoặc hình thu nhỏ thì không thể xác định được điều này. |
+| Địa chỉ đích lặp lại | `pay.example.invalid/new` tại #146, siêu dữ liệu nút #173, bài đăng đã chỉnh sửa #188 và #205 | Cùng một đích đến xuất hiện trong bốn bối cảnh được quan sát. Xác định quyền kiểm soát của nó bằng cách sử dụng các nguồn bổ sung. |
+| Cùng số byte tệp | Các giá trị SHA-256 hoàn toàn trùng khớp trong các biên nhận phương tiện đã hoàn tất số #151 và #209 | Hai tệp đính kèm được lưu trữ có nội dung byte hoàn toàn giống nhau. Các giá trị băm đầy đủ của tệp cung cấp cơ sở so sánh. |
 
-Các hồ sơ cá nhân bao gồm thông tin về những người dùng có tin nhắn được lưu trữ trong cuộc trò chuyện đó và liên kết họ với các cuộc trò chuyện khác trong *cùng* một *nhật ký không gian làm việc*. Đây không phải là danh bạ thành viên đầy đủ. Các giá trị băm (hash) của ảnh đại diện được lấy từ bộ nhớ đệm cục bộ riêng biệt; số lượng trích dẫn trong hồ sơ có giới hạn có thể cấu hình tại **mục Cài đặt → Số bản ghi được trích dẫn cho mỗi sự kiện**.
+Hồ sơ người dùng mô tả các tác giả được quan sát và hoạt động của họ trong *nhật ký* *cùng không gian làm việc*, trong phạm vi các cuộc trò chuyện được phép của người xem. Đây là chế độ xem tác giả được quan sát, chứ không phải danh sách thành viên đầy đủ. Điều chỉnh số lượng trích dẫn hỗ trợ trong **mục** **Parameters → Records cited per fact**.
 
 ## 5. Phục dựng trình tự và đánh dấu các khoảng trống
 
@@ -129,11 +131,11 @@ Thứ tự trong nhật ký dựa trên thời điểm nhận được, không n
 
 Thêm một không gian làm việc cho từng tài khoản riêng biệt và lặp lại quy trình xác định phạm vi cũng như lập danh mục lịch sử. Ghi lại thông tin về tư cách thành viên/vai trò và dấu vân tay khóa ký cho từng tài khoản. Đảm bảo các định danh được xác định rõ theo không gian làm việc và cuộc trò chuyện: cùng một số tin nhắn không phải là định danh chung áp dụng cho tất cả các tài khoản.
 
-Quý vị có thể so sánh các quan sát có liên quan trong ghi chú vụ việc hoặc các công cụ phân tích của mình, đồng thời lưu giữ thông tin tài khoản và tham chiếu nhật ký cho từng hàng. Hiện tại, TgWitness chưa cung cấp tính năng tìm kiếm toàn cục, dòng thời gian hợp nhất, sơ đồ mối quan hệ giữa các cá nhân hoặc kho lưu trữ vụ việc trên các không gian làm việc. Tính năng xuất toàn bộ dữ liệu từ nhiều tài khoản của một kênh hoặc siêu nhóm là một tính năng riêng biệt; đây không phải là sự hợp nhất của tất cả các nhật ký tài khoản.
+Sử dụng [nhóm](https://phishdestroy.github.io/TgWitness/vi/docs/groups/) [tài](https://phishdestroy.github.io/TgWitness/vi/docs/groups/) [khoản](https://phishdestroy.github.io/TgWitness/vi/docs/groups/) để xem xét trạng thái hoạt động, chia sẻ các cài đặt đã chọn và xuất các tài khoản cùng nhau. Gói nhóm giữ lại nhật ký đã ký và danh tính của từng không gian làm việc. Đối với một kênh hoặc siêu nhóm, các tài khoản đủ điều kiện cũng có thể chia sẻ việc xuất toàn bộ lịch sử. Tạo dòng thời gian liên tài khoản trong ghi chú vụ việc hoặc công cụ phân tích của bạn, đồng thời giữ lại tham chiếu đến không gian làm việc và nhật ký cho mỗi hàng.
 
 Trong quá trình làm việc kéo dài, hãy bổ sung một [nhân chứng độc lập](https://phishdestroy.github.io/TgWitness/vi/docs/witness/) để duy trì các ranh giới đã thiết lập từ trước. Sử dụng chương trình thí điểm phân phối có kiểm soát để xác định các lộ trình thu thập và phạm vi hiển thị của các tài khoản.
 
-## 7. Cung cấp một bộ hồ sơ vụ việc đầy đủ và có thể kiểm chứng
+## 7. Cung cấp một gói hồ sơ vụ việc có thể kiểm tra được
 
 Xuất tệp ZIP chứa nhật ký đã được ký điện tử từ từng không gian làm việc. Tệp này chứa toàn bộ nhật ký đã ghi lại, bất kể các bộ lọc tìm kiếm trên bảng điều khiển. Xuất riêng các hồ sơ cá nhân có liên quan, lưu giữ từng gói lịch sử trò chuyện đầy đủ và bảo toàn các bằng chứng đính kèm đã hoàn chỉnh.
 
@@ -162,7 +164,7 @@ python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Vui lòng kiểm tra kết quả xác minh thực tế, lưu giữ các bản gốc, đồng thời lưu lại báo cáo phạm vi, các trường hợp thu thập thất bại và bản ghi chuyển giao cùng với các phát hiện của quý vị. Thư mục cấp cao nhất của vụ việc và kết luận của nhà phân tích được tổng hợp bên ngoài; các bằng chứng riêng lẻ của TgWitness đều có chữ ký riêng.
+Kiểm tra kết quả xác minh, bảo toàn các bản gốc và lưu giữ báo cáo phạm vi, kết quả thu thập và bản ghi chuyển giao cùng với các phát hiện của bạn. Viết các phát hiện trong Report Studio và chọn xem báo cáo có bao gồm tài liệu từ Case Board hay không. Thư mục cấp cao nhất trong ví dụ này kết hợp các tài liệu đã được ký riêng lẻ. Đối với người nhận chỉ cần tài liệu được chọn lọc, hãy chuẩn bị một [bản chuyển giao được tối giản hóa](https://phishdestroy.github.io/TgWitness/vi/docs/handover/).
 
 ## Áp dụng phương pháp tương tự cho các cuộc điều tra khác
 
@@ -172,7 +174,7 @@ Vui lòng kiểm tra kết quả xác minh thực tế, lưu giữ các bản g�
 
 **Quá trình theo dõi:** bài đăng khi tham gia kênh → bản xem trước liên kết bot đã lưu → tham số khởi động bot → các tin nhắn và phiên bản nhập liệu từ bàn phím → bất kỳ biên nhận phản hồi nào do bảng điều khiển phát hành → các hoạt động tiếp theo trong nhóm/riêng tư. Phối hợp từng mục đích với bản ghi nguồn tương ứng; lưu giữ các mô tả hồ sơ và phương tiện truyền thông đã hoàn tất.
 
-**Nội dung cung cấp:** dòng thời gian ghi lại các đề nghị và phản hồi được quan sát, các nguồn tham chiếu và các tệp xuất đã được xác minh. Việc hiển thị một liên kết thanh toán không phải là bằng chứng cho thấy giao dịch thanh toán đã diễn ra.
+**Cung cấp:** dòng thời gian về đề nghị và các phản hồi được ghi nhận, các tham chiếu nguồn và các tệp xuất đã được xác minh. Hỗ trợ bất kỳ tuyên bố nào về việc thanh toán đã hoàn tất bằng các bản ghi giao dịch tương ứng.
 
 **Các tin nhắn bị xóa sau một sự cố liên quan đến nhiều cuộc trò chuyện**
 
@@ -180,7 +182,7 @@ Vui lòng kiểm tra kết quả xác minh thực tế, lưu giữ các bản g�
 
 **Theo dõi:** tất cả các cuộc trò chuyện bị ảnh hưởng → tin nhắn gốc → các nội dung đã chỉnh sửa được gửi đi → thông báo xóa hoặc kết quả không tìm thấy khi kiểm tra lại sau đó → các tệp đính kèm được lưu giữ → phạm vi bao quát xung quanh sự cố. So sánh các quan sát từ các tài khoản độc lập với mức độ hiển thị được nêu rõ của chúng.
 
-**Cần đảm bảo:** một chuỗi các phiên bản được lưu giữ cùng với các khoảng thời gian không xác định được nêu rõ. Không được coi việc một tin nhắn trong lịch sử không còn tồn tại là bằng chứng cho thấy một cá nhân cụ thể nào đó đã xóa tin nhắn đó.
+**Cung cấp:** một chuỗi các phiên bản đã được lưu trữ và các khoảng thời gian chưa xác định được nêu rõ. Giữ lại các thông báo xóa, các lần kiểm tra lại không thành công và bất kỳ thông tin nào liên quan đến một cá nhân được hỗ trợ riêng biệt.
 
 **Một người tham gia thay đổi tên trong nhiều cuộc trò chuyện**
 
@@ -188,4 +190,4 @@ Vui lòng kiểm tra kết quả xác minh thực tế, lưu giữ các bản g�
 
 **Quá trình theo dõi:** ID người gửi dạng số → lịch sử tên/tên người dùng đã lưu → các phản hồi → các cuộc trò chuyện khác trong không gian làm việc → các địa chỉ được đề cập và các tệp đã lưu. Kiểm tra các bản ghi nguồn cho mọi kết nối được xác định; phân biệt rõ các tài khoản có tên tương tự.
 
-**Cung cấp:** dòng thời gian hoạt động của tài khoản kèm theo các nguồn tham chiếu và các giả thuyết riêng biệt về các mối quan hệ. Sự trùng khớp về tên và giá trị pHash của ảnh đại diện chỉ là manh mối, không phải bằng chứng xác thực danh tính.
+**Kết quả đầu ra:** một dòng thời gian hoạt động tài khoản có trích dẫn và các giả thuyết riêng biệt về mối quan hệ. Sử dụng sự tương đồng về tên và pHash của ảnh đại diện để lựa chọn các manh mối cho việc xem xét nguồn thông tin sâu hơn.

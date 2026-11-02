@@ -8,7 +8,7 @@ Kompleksowe dochodzenia dotyczące całych kont, obejmujące kanały, grupy, cza
 
 ## Przykładowa sprawa: zmiana miejsca docelowego w czterech rozmowach
 
-W ogłoszeniu pojawia się odniesienie do bota. Grupa operacyjna omawia nowy adres docelowy płatności, klawiatura bota wyświetla go, a w prywatnej wiadomości uzupełniającej informacja ta zostaje powtórzona. Następnie ogłoszenie zostaje edytowane, a wiadomość grupowa znika.
+Ogłoszenie odsyła do bota. Grupa operacyjna omawia nowy adres docelowy płatności, a klawiatura bota wyświetla go. Ogłoszenie zostaje edytowane, w prywatnej wiadomości uzupełniającej powtórzono adres docelowy, a wiadomość grupowa znika.
 
 Pytania brzmią: co zaobserwowano przed i po zmianie, które konta w Telegramie opublikowały poszczególne wpisy, gdzie pojawił się adresat, które bajty załącznika zostały zachowane oraz jakie przedziały czasowe pozostają nieznane?
 
@@ -34,8 +34,8 @@ Schemat blokowy · Kanały → Dziennik obszaru roboczego; Grupy → Dziennik ob
 
 ## 1. Zdefiniowanie sprawy i zebranie pełnego opisu zdarzenia
 
-1. Należy podłączyć konto służące do gromadzenia danych w oddzielnym obszarze roboczym. W zewnętrznych notatkach dotyczących sprawy należy odnotować numer referencyjny sprawy, identyfikator konta, obszar roboczy, datę rozpoczęcia obserwacji oraz zaufany odcisk klucza podpisu.
-2. **Źródła** otwarte **→ Zakres obserwacji → Tryb dochodzeniowy**. Ustawienie domyślne obejmuje **całe konto**, kanały/grupy/prywatne czaty/boty, własne działania, profile źródeł oraz 200 najnowszych widocznych wiadomości dla nowo wykrytych źródeł. Proszę zapoznać się z tymi ustawieniami, nacisnąć **przycisk „Zapisz zakres**” i potwierdzić wybrany zakres.
+1. Połącz konto zbierające w osobnym obszarze roboczym. W [Case Board](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-board/) lub w rejestrze spraw zapisz numer referencyjny sprawy, identyfikator konta, obszar roboczy oraz datę rozpoczęcia obserwacji. Oddzielnie zachowaj zaufany odcisk palca klucza podpisu.
+2. Aby utworzyć dedykowane konto do gromadzenia danych, otwórz opcję **Źródła → Zakres obserwacji → Tryb dochodzeniowy**. Ustawienie domyślne wybiera opcję **Całe konto**, kanały/grupy/prywatne czaty/boty, własne działania, profile źródeł oraz 200 najnowszych widocznych wiadomości dla nowo wykrytych źródeł. Sprawdź ustawienia, naciśnij **„Zapisz zakres**” i potwierdź wybór zakresu. Konta główne korzystają z wybranych czatów lub folderu; gromadzenie danych z całego konta jest dostępne dla kont oznaczonych do dochodzenia.
 3. **Proszę załadować czaty** i porównać źródła z listą rozmów na koncie. Sprawdź wykluczenia. **Parametr „Czatów odczytywanych z listy konta”** domyślnie wynosi 1 000 i pozwala na maksymalnie 20 000. Źródła wykraczające poza limit listy są dodawane, gdy stają się aktywne. Zapisz to, co faktycznie zostało zliczone.
 4. W **ustawieniach rejestrowania** proszę wybrać opcję **„Wszystkie widoczne działania**” i zapisać ustawienia monitorowania. Proszę sprawdzić typy załączników i limity oraz ilość wolnego miejsca na dysku.
 5. Rozpocznij obserwację. Zweryfikuj kontrolowaną nową wiadomość, edycję oraz usunięcie, a następnie zachowaj odniesienia testowe oraz wszelkie niepowodzenia.
@@ -58,7 +58,7 @@ Proszę prowadzić rejestr źródeł, w którym każdy wiersz odpowiada jednej r
 
 Należy stosować odpowiednią metodę pozyskiwania danych dla każdego źródła:
 
-- **Funkcja „Załaduj pełną historię** ze **źródeł**” (obecnie `main`) ładuje dostępne przeszłe wiadomości z włączonych źródeł do dziennika obszaru roboczego. Obsługuje ona wstrzymywanie/wznawianie oraz podpisany raport o postępach. Zobacz sekcję [„Pozyskiwanie historii](https://phishdestroy.github.io/TgWitness/pl/docs/reference/history/)”.
+- **Opcja „Załaduj pełną historię** ze **źródeł”** ładuje dostępne wcześniejsze wiadomości z włączonych źródeł do dziennika obszaru roboczego. Obsługuje ona funkcję wstrzymywania/wznawiania oraz podpisany raport z postępów. Zobacz sekcję [„Pozyskiwanie historii](https://phishdestroy.github.io/TgWitness/pl/docs/reference/history/)”.
 - **Zrzut historii** zapisuje ostatnie widoczne wiadomości w dzienniku obserwacji. Domyślna maksymalna liczba wynosi 500; w sekcji **Parametry → Największy zrzut historii** można zwiększyć tę liczbę do 10 000. Są to bieżące obserwacje historii, a nie zrekonstruowane zmiany.
 - **Eksport całej rozmowy → opcja „Eksportuj całą rozmowę**” lub **„Rozmowy” → „Eksportuj rozmowę**” pobiera aktualnie widoczną historię jednej rozmowy do oddzielnego, podpisanego pakietu `chat.json` / `chat.html`. Proszę powtórzyć tę czynność dla wszystkich źródeł danej sprawy i zachować każdy wynik.
 - **W przypadku pojawienia się nowego czatu lub bota** narzędzie może zapisać jego profil oraz do 1000 najnowszych wiadomości; tryb śledczy wybiera 200. Istniejące czaty nie są objęte tym funkcjonowaniem z mocą wsteczną po włączeniu trybu.
@@ -103,6 +103,8 @@ W przykładzie:
 
 Proszę porównać skróty załączników oraz powiązane z nimi odniesienia do wiadomości. Identyczne pliki nie pozwalają ustalić twórcy, osoby przekazującej ani wspólnego operatora. Same identyczne nazwy i podobne awatary nie pozwalają połączyć dwóch identyfikatorów Telegramu w jedną osobę.
 
+Zachowaj notatki robocze zespołu w [Case Board](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-board/): dodaj do zakładek zapisy, na których się opierasz, takie jak #146, #188 i #205, zaznacz dokładny ciąg docelowy oraz zapisz fragment każdej zarejestrowanej czynności pomiędzy dwoma zapisami lub w danym przedziale czasowym. Notatki i statusy zachowują przegląd zespołu w osobnej, podpisanej historii, którą można odróżnić od obserwacji źródłowych.
+
 ## 5. Stworzenie osi czasu obejmującej różne czaty
 
 Należy korzystać z linków do zapisanych wersji w **sekcji „Czat”** oraz do **wpisów w dzienniku o numerze #…** W **dzienniku** należy połączyć **wszystkie źródła** z **edycjami**, **usunięciami** i **zakresem**. Należy zachować zarówno `source_at` (o ile jest podany), jak i `observed_at`.
@@ -122,7 +124,7 @@ Pomiędzy podanymi przykładowymi odniesieniami występują inne zapisy. Numery 
 
 Należy korzystać z oddzielnego obszaru roboczego dla każdego odrębnego konta i powtarzać proces inwentaryzacji. Przy każdym porównaniu należy zachować identyfikator konta, rolę, odcisk klucza podpisu oraz odniesienia do źródeł. Numery wiadomości nie są globalnymi identyfikatorami obowiązującymi we wszystkich czatach i na wszystkich kontach.
 
-Korelacja między przestrzeniami roboczymi odbywa się w zewnętrznych notatkach dotyczących spraw lub narzędziach analitycznych. TgWitness nie posiada obecnie funkcji globalnego wyszukiwania między przestrzeniami roboczymi, scalonej osi czasu, wykresu śledczego ani połączonego archiwum spraw. Eksport danych z wielu kont z **jednego** kanału lub supergrupy stanowi odrębną operację, a nie połączenie dzienników tych kont.
+Case Board przechowuje notatki powiązane ze źródłami oraz zbiory w obrębie każdego obszaru roboczego. Ekran grupowy umożliwia wspólny przegląd statusu kont i pozwala łączyć eksporty z poszczególnych obszarów roboczych. Można korelować te źródła w notatkach dotyczących sprawy lub narzędziach analitycznych; każdy dziennik zachowuje swoje pochodzenie i klucz podpisu. Nie jest generowane globalne wyszukiwanie ani scalona oś czasu obejmująca wszystkie obszary robocze. Eksport z wielu kont dla jednego kanału/supergrupy pobiera historię czatu przy użyciu kwalifikujących się kont.
 
 W przypadku dłuższych projektów należy zachować niezależność w stosunku do [niezależnego świadka](https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/). Należy stosować kontrolowane weryfikacje dostarczenia w celu potwierdzenia ścieżki przechwytywania i widoczności każdego konta.
 
@@ -134,6 +136,7 @@ Proszę zgromadzić te materiały w katalogu sprawy przygotowanym przez analityk
 | --- | --- |
 | Notatki dotyczące spraw i rejestr źródeł | Pytania, polityka gromadzenia danych, dostęp/role, ustalenia, alternatywne wyjaśnienia oraz luki |
 | Oś czasu | Dla każdego wpisu podano zarówno datę i godzinę, jak i odniesienia do obszaru roboczego, czatu, wiadomości oraz sekwencji |
+| Case Board eksport i fragmenty, jeśli są używane | Zakładki powiązane ze źródłami, cytaty, notatki zespołu, kolekcje, historia zmian oraz wybrane zapisy sprawdzone pod kątem zgodności z plikiem ZIP zawierającym dowody |
 | Podpisany plik ZIP z dowodami dla każdego obszaru roboczego | Kompletny zarejestrowany dziennik, spis treści oraz zawarte w nim zachowane pliki multimedialne; filtry panelowe nie ograniczają zakresu eksportowanego dziennika |
 | Oddzielnie podpisane pliki zawierające profile osób | Wprowadzone odniesienia zostały zweryfikowane w oparciu o dowody z odpowiedniego obszaru roboczego |
 | Podpisane eksporty pełnych rozmów | Bieżące gromadzenie widocznej historii, niezależne od dziennika obserwacji |
@@ -147,9 +150,10 @@ Z zaufanej instalacji, wraz z nazwami plików i rzeczywistymi odciskami palców 
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Należy zachować rzeczywiste wyniki weryfikacji oraz oryginalne artefakty. Katalog najwyższego poziomu sprawy, rejestr źródeł oraz wnioski analityków są przechowywane zewnętrznie; każdy artefakt TgWitness posiada własny podpis oraz procedurę weryfikacji.
+Należy zachować rzeczywiste wyniki weryfikacji oraz oryginalne artefakty. Należy wyeksportować notatki z obszaru roboczego z Case Board wraz z cytowanymi materiałami źródłowymi. Należy zebrać ustalenia z różnych obszarów roboczych w katalogu sprawy najwyższego poziomu; każdy artefakt TgWitness posiada własny podpis i procedurę weryfikacji.
 
 ## Dostosowanie dochodzenia
 

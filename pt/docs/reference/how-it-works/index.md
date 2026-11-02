@@ -6,7 +6,7 @@ Cadeia de hash, assinaturas, pontos de verificação e testemunhas explicados co
 
 O TgWitness preserva o que uma conta coletora observou, vincula essas observações a um registro assinado e permite que outra pessoa verifique uma exportação por meio de uma chave confiável e de um ponto de verificação retido anteriormente.
 
-O [site de documentação local](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) inclui exemplos interativos em `/docs/concepts/` e um explorador de decisões de pontos de verificação em `/docs/witness/`. Todas as mensagens de exemplo, contagens e atrasos são fictícios. Os hashes na sandbox da cadeia são calculados com SHA-256 no navegador. Nada é enviado ao Telegram.
+O [site de documentação local](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) inclui exemplos interativos em `/docs/concepts/`, um explorador de decisões de pontos de verificação em `/docs/witness/` e tutoriais para [o Case Board](https://phishdestroy.github.io/TgWitness/pt/docs/reference/case-board/), [o design de relatórios](https://phishdestroy.github.io/TgWitness/pt/docs/reference/case-reports/) e [trechos de transferência](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#handover-extract). Todas as mensagens de exemplo, contagens e atrasos são fictícios. Os hashes na sandbox da cadeia são calculados com SHA-256 no navegador. Nada é enviado ao Telegram.
 
 ## Uma mensagem é alterada; as observações se acumulam
 
@@ -92,7 +92,7 @@ Diagrama de fluxo · Coletor / sessão da conta / chave A → Endpoint de ponto 
 
 A testemunha registra reversões, um cabeçalho diferente com a mesma contagem, chaves alteradas, respostas inválidas e respostas ausentes. Uma contagem maior, por si só, não comprova que todos os registros anteriores permaneçam inalterados; compare a exportação com os pontos de verificação retidos. Uma testemunha em outro servidor evita o risco de ficar sem acesso devido a uma interrupção no servidor do coletor; um operador independente proporciona maior independência.
 
-A testemunha atesta o estado do diário relatado pelo coletor. Ela não observa de forma independente todas as mensagens do Telegram. Consulte [a configuração da testemunha](https://phishdestroy.github.io/TgWitness/pt/docs/reference/witness/).
+A testemunha atesta o estado do diário relatado pelo coletor. Use um teste de entrega controlada para verificar quais ações do Telegram chegaram a uma conta coletora. Consulte [a configuração da testemunha](https://phishdestroy.github.io/TgWitness/pt/docs/reference/witness/).
 
 ## Teste de entrega em relação a ações conhecidas
 
@@ -106,14 +106,14 @@ Apenas as ações esperadas correspondentes são contabilizadas; recibos duplica
 
 [O passo a passo completo da investigação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/) acompanha um incidente que ocorre em um canal, grupo, bot e conversa privada:
 
-1. Ative o modo de investigação de toda a conta e faça um inventário de todos os chats acessíveis.
+1. Em uma conta dedicada à coleta, ative o modo de investigação de conta completa e faça o inventário das conversas acessíveis. Use conversas selecionadas ou uma pasta para uma conta principal.
 2. Obtenha instantâneos do registro, histórico completo por conversa e anexos preservados.
 3. Mantenha as alterações em tempo real e quaisquer interações deliberadas no painel com seus registros.
 4. Acompanhe IDs numéricos de remetentes, relações de respostas, destinos repetidos e hashes de arquivos por meio de registros citados e perfis de pessoas.
-5. Reconstrua uma linha do tempo entre conversas com registros de data e hora e lacunas explícitas.
+5. Adicione notas vinculadas às fontes e coleções no Case Board. Reconstrua uma linha do tempo entre chats com registros de data e hora e lacunas explícitas.
 6. Compare os espaços de trabalho de outras contas, mantendo suas origens e chaves separadas.
 7. Reúna e verifique os registros assinados, perfis e exportações de histórico com notas do caso.
 
-O guia `/docs/cases/` do site inclui um mapa interativo de casos e variantes para disputas envolvendo bots, mensagens removidas e participantes que alteram seus nomes. As anotações de caso e a análise entre espaços de trabalho são externas; o aplicativo não gera automaticamente um gráfico global de investigação nem um arquivo de casos consolidado.
+O guia `/docs/cases/` do site inclui um mapa interativo de casos e variantes para disputas envolvendo bots, mensagens removidas e participantes que alteram nomes. O Case Board mantém anotações e coleções dentro de um espaço de trabalho. As exportações em grupo reúnem pacotes separados de espaços de trabalho; a correlação entre espaços de trabalho e uma linha do tempo combinada continuam sendo tarefas do analista.
 
 [Validação concluída e trabalho pendente](https://phishdestroy.github.io/TgWitness/pt/docs/reference/verification/) · [Exportar e verificar](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#investigation-handoff) · [Comece com uma conta](https://phishdestroy.github.io/TgWitness/pt/docs/reference/quickstart/)

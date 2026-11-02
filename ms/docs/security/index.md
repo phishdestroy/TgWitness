@@ -79,7 +79,7 @@ Tujuan pilihan dikonfigurasikan mengikut ruang kerja. Teks mesej dan media disim
 - Pentadbir mesin boleh membaca semuanya dan menulis semula serta menandatangani semula jurnal tersebut. Simpan cap jari dan titik pemeriksaan pada sistem lain.
 - Teks mesej dan media tidak disulitkan oleh TgWitness. Gunakan penyulitan cakera dan kebenaran yang ketat.
 - HTTP biasa di luar localhost mendedahkan token di rangkaian. Gunakan HTTPS atau terowong SSH.
-- Tandatangan membuktikan apa yang dirakam tidak diubah, bukan bahawa setiap peristiwa Telegram telah dirakam.
+- Semak rekod yang disimpan dengan tandatangan dan titik pemeriksaan. Semak liputan pengumpulan dan uji penghantaran untuk akaun dan sumber yang anda gunakan.
 
 [Berkongsi akses kepada satu kes](https://phishdestroy.github.io/TgWitness/ms/docs/access/) dengan kebenaran, tarikh luput dan had sesi. Token saksi kekal sebagai kelayakan berasingan.
 

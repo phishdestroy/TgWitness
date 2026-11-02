@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-i
 
 TgWitness 保存收集账户所观察到的内容，将这些观察结果 整合到一份经过签名的日志中，并允许其他人使用可信 密钥和先前保留的检查点来验证导出内容。
 
-[本地文档网站](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)还提供了 位于 `/docs/concepts/` 的交互式示例，以及位于 `/docs/witness/` 的检查点决策探索器。所有示例消息、 计数和延迟均为虚构。链式沙盒中的哈希值是在浏览器中使用 SHA-256 算法计算得出的。没有任何数据会被发送至 Telegram。
+[本地文档网站](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)新增了 位于 `/docs/concepts/` 的交互式示例、位于 `/docs/witness/` 的检查点决策探索器，以及关于[“案件看板](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-board/)”、 [报告设计](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)和[移交摘录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#handover-extract)的操作指南。 所有示例消息、 计数和延迟均为虚构。链式沙盒中的哈希值是在浏览器中使用 SHA-256 算法计算得出的。没有任何数据会被发送至 Telegram。
 
 ## 消息在变；观察在积累
 
@@ -92,7 +92,7 @@ Nexport ≥ Ncheckpoint and hexport[Ncheckpoint] = Hcheckpoint
 
 该见证工具会记录回滚操作、在相同计数下出现的不同头部、密钥变更、 无效答案及缺失的响应。仅凭计数增加并不能证明 所有早期记录均未发生变更；请将导出数据与保留的 检查点进行比对。在另一台主机上部署见证工具可避免受收集器主机故障的影响； 由独立操作员管理则能提供额外的独立性。
 
-该“见证人”对收集器报告的日志状态进行认证。它不会 独立观察所有 Telegram 消息。请参阅[见证人设置](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/)。
+见证人会验证采集器报告的日志状态。使用受控 投递测试来检测哪些 Telegram 操作已到达采集账户。 请参阅[见证人设置](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/)。
 
 ## 针对已知操作的测试交付
 
@@ -106,14 +106,14 @@ R = |observed∩expected| / |expected| Δ t = treceipt - taction
 
 [完整的调查流程演示](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)将围绕一起 涉及频道、群组、机器人和私聊的事件展开：
 
-1. 启用“全账户调查模式”，并清点所有可访问的聊天记录。
+1. 在专用采集账户中，启用“整个账户”调查模式并 清点可访问的聊天记录。可选择特定聊天记录或文件夹作为主账户。
 2. 获取日志快照、按聊天分列的完整历史记录以及已保存的附件。
 3. 保留实时更改以及任何有意的面板交互及其操作记录。
 4. 通过引用的记录和用户资料，追踪数字发件人 ID、回复关系、重复收件人和文件 哈希值。
-5. 重建包含时间戳和明确时间间隔的跨聊天时间线。
+5. 在“案件看板”中添加与来源关联的注释和集合。重建跨聊天 时间线，其中应包含时间戳和明确的间隔。
 6. 在保持各账户的来源和密钥相互独立的同时，比较其他账户的工作区。
 7. 汇总并验证带签名的日志、用户资料及历史数据导出文件，并附上案件备注。
 
-该网站的《`/docs/cases/`指南》包含交互式案件地图及针对 机器人争议、已删除消息和参与者更名等情况的处理方案。案件笔记 和跨工作区分析功能为外部功能；该应用程序不会自动 生成全局调查图或合并的案件档案。
+网站上的 `/docs/cases/` 指南包含交互式案件地图，并针对 机器人纠纷、已删除消息以及参与者更改名称等情况提供了多种处理方案。Case Board 将笔记和收集内容保存在工作区内。批量导出功能可收集独立的 工作区包；跨工作区关联分析及合并时间线仍由 分析师负责。
 
 [已完成验证及剩余工作](https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/) · [导出与验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#investigation-handoff) · [从一个账户开始](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)

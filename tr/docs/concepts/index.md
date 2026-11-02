@@ -6,6 +6,19 @@ Bir mesaj değişebilir. Gözlemlediklerinizin kaydı, her zaman doğrulanabilir
 
 Aşağıdaki iki küçük denemeyi inceleyin. Bu denemeler kurgusal mesajlar kullanır, tarayıcınızda kalır ve hiçbir zaman Telegram'a bağlanmaz.
 
+## Sohbet dışa aktarımından doğrulanabilir bir kayda
+
+[Telegram Desktop,](https://telegram.org/blog/export-and-more) çevrimdışı kullanım için mevcut sohbet geçmişini ve medyayı HTML veya JSON olarak [dışa](https://telegram.org/blog/export-and-more) aktarır. TgWitness, alınan değişikliklerin sürekli bir günlüğünü, gözlemler ve dışa aktarımlar üzerindeki imzaları ve alıcıların bağımsız olarak karşılaştırabileceği kontrol noktalarını ekler.
+
+| Görev | Telegram Desktop dışa aktarma | TgWitness |
+| --- | --- | --- |
+| Kaydedilmiş sohbetleri okuyun | Seçilen medya ile birlikte HTML veya JSON | Kaydedilmiş sohbetler, aranabilir günlük ve çevrimdışı raporlar |
+| Zaman içindeki değişiklikleri takip edin | Dışa aktarıldığında erişilebilen geçmiş | Daha önce yakalanan sürümler, sonradan yapılan düzenlemeler ve silme gözlemleri bir arada tutulur |
+| Devir teslimden sonra dosyaları kontrol edin | Standart HTML/JSON dışa aktarım dosyaları imzalanmamıştır | İmzalı manifest, kayıt başına imzalar ve mühürlü HTML/PDF/JSON raporları, güvenilir bir toplayıcı anahtarıyla karşılaştırılarak kontrol edilir. |
+| Daha önceki bir saklama durumuyla karşılaştırın | Ayrı bir referans kopyası veya hash tutun | İmzalı kontrol noktaları, ayrı bir tanık ve isteğe bağlı harici zaman damgaları |
+
+Dosya imzalama karşılaştırması, 2 Kasım 2026 tarihinde incelenen [Telegram Desktop dışa aktarma yazıcı](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output)larına dayanmaktadır. TgWitness, toplayıcının anahtarıyla imza atar; aşağıdaki kontroller, alıcının bunu nasıl kullandığını gösterir.
+
 ## Tek mesaj, üç gözlem
 
 Telegram yeni bir mesaj, bir düzenleme veya bir silme bildirimi gönderdiğinde, toplayıcı uygulama üç ayrı gözlem ekler. Düzenleme, ilk kaydı değiştirmez. Silme bildirimi ise onu silmez.
@@ -107,6 +120,6 @@ Sabitlenmiş toplayıcı anahtarının altındaki kontrol noktası imzasını do
 
 [01 / BÜTÜNLÜK**Bu kayıtta bir değişiklik mi oldu?** Hash değerlerini ve imzaları, ayrı bir güvenilir anahtarla karşılaştırarak doğrulayın.](https://phishdestroy.github.io/TgWitness/tr/docs/exports/)[02 / SÜREKLİLİK**Daha önce neler korunmuştu?** İmzalı bir dışa aktarım dosyasını, ayrı bir tanık tarafından tutulan kontrol noktalarıyla karşılaştırın.](https://phishdestroy.github.io/TgWitness/tr/docs/witness/)[03 / TESLİMAT**Bu test olayları geldi mi?** Her hesabın günlüğüyle, kontrollü gönderme, düzenleme ve silme işlemlerini karşılaştırın.](https://phishdestroy.github.io/TgWitness/tr/docs/cases/)
 
-Eşleşen bir hash zinciri, bütünlük sorusuna yanıt verir. Ancak bu, mesajın Telegram üzerinden tam olarak iletildiğini, mesajın doğruluğunu veya bağımsız olarak güvenilir bir gözlem zamanını kanıtlamaz.
+Saklanan kayıtları kontrol etmek için imzaları, önceki bir sınırı karşılaştırmak için kontrol noktalarını ve toplama işlemini ölçmek için kontrollü teslimat testlerini kullanın. Her biri belirli bir soruyu yanıtlar. [Doğrulama kapsamını ve güven varsayımlarını okuyun.](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope)
 
 Vakalara ilişkin bilgilerin toplanmasından dava dosyasının hazırlanmasına kadar [tüm soruşturma](https://phishdestroy.github.io/TgWitness/tr/docs/cases/) sürecini takip edin.

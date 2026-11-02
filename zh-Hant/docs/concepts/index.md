@@ -6,6 +6,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/concepts/
 
 請探索以下兩個小型實驗。它們使用虛構的訊息，全程在您的瀏覽器內運行，且絕不會連線至 Telegram。
 
+## 從聊天記錄匯出到可驗證的紀錄
+
+[Telegram Desktop 的匯出功能](https://telegram.org/blog/export-and-more)會將可用的聊天紀錄和媒體檔案以 HTML 或 JSON 格式儲存，供離線使用。TgWitness 則會持續記錄收到的變更、對觀察結果及匯出檔案的簽名，並建立檢查點，供收件者獨立進行比對。
+
+| 任務 | Telegram 桌面版匯出 | TgWitness |
+| --- | --- | --- |
+| 閱讀已儲存的對話 | HTML 或 JSON 格式，並包含選定的媒體檔案 | 已儲存的聊天紀錄、可搜尋的日誌及離線報告 |
+| 追蹤隨時間的變化 | 匯出時可用的歷史紀錄 | 先前擷取的版本、後續編輯內容及刪除記錄將一併保留 |
+| 交接後請檢查檔案 | 標準的 HTML/JSON 匯出檔案均未簽名 | 經簽署的清單、每筆記錄的簽名，以及經過可信收集器金鑰驗證的密封 HTML/PDF/JSON 報告 |
+| 與先前保留的狀態進行比對 | 請另行保留一份參考副本或雜湊值 | 已簽署的檢查點、獨立的見證者及可選的外部時間戳記 |
+
+檔案簽名比較係基於 2026 年 11 月 2 日審閱的 [Telegram Desktop 匯出寫入器](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output)。TgWitness 會使用收集器的金鑰進行簽名；以下檢查說明了收件者如何使用該簽名。
+
 ## 一條訊息，三項觀察
 
 當 Telegram 傳送新訊息、編輯通知或刪除通知時，收集器會分別追加三項獨立的記錄。編輯操作不會取代最初的記錄，刪除通知也不會將其刪除。
@@ -107,6 +120,6 @@ hexport[Ncheckpoint] = Hcheckpoint
 
 [01 / 完整性**這則記錄有變更嗎？** 請使用獨立的可信密鑰來驗證雜湊值與數位簽名。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/)[02 / 連續性**先前保留了哪些內容？** 將簽名過的匯出檔與由獨立見證者保存的檢查點進行比對。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/witness/)[03 / 交付**這些測試事件是否已送達？** 將各帳戶的發送、編輯及刪除操作與其對應的日誌進行比對。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/cases/)
 
-相符的雜湊鏈可解答完整性相關問題。它並不能證明 Telegram 訊息已完整送達、訊息內容屬實，亦無法確立獨立可信的觀察時間。
+使用簽名來核對保留的記錄、使用檢查點來比對較早的邊界，並使用受控傳輸測試來衡量資料蒐集成效。每項操作皆旨在解答特定問題。[請詳閱驗證範圍與信任假設。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)
 
 追蹤從帳戶取得到案件檔案編製的[完整調查](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/cases/)過程。

@@ -79,7 +79,7 @@ Los destinos opcionales se configuran por espacio de trabajo. El texto de los me
 - Un administrador del servidor puede leer todo el contenido, así como reescribir y volver a firmar el registro. Guarde la huella digital y los puntos de control en otro sistema.
 - TgWitness no cifra el texto de los mensajes ni los archivos multimedia. Utilice el cifrado de disco y establezca permisos estrictos.
 - El protocolo HTTP sin cifrar fuera de localhost expone el token en la red. Utilice HTTPS o un túnel SSH.
-- Las firmas demuestran que lo registrado no ha sido modificado, no que se haya registrado cada evento de Telegram.
+- Comprueba los registros guardados con firmas y puntos de control. Revisa la cobertura de la recopilación y prueba la entrega para las cuentas y fuentes que utilices.
 
 [Comparta el acceso a un caso](https://phishdestroy.github.io/TgWitness/es/docs/access/) con permisos, plazos de caducidad y límites de sesión. El token de testigo sigue siendo una credencial independiente.
 

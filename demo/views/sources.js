@@ -1,3 +1,5 @@
+import {priorityHint} from "../components/priority.js?v=1";
+
 const monitoring = ["messages", "edits", "deletions", "reactions", "membership"];
 const media = [
   ["photo", "Photos"], ["video", "Videos"], ["animation", "GIFs & animations"],
@@ -14,7 +16,6 @@ function changes(before, after) {
   return before === after ? 0 : 1;
 }
 
-/** Sources keeps drafts, selection and chat-list requests within one workspace. */
 export function createSources(context) {
   const {root, tr, getState, getSession, may, json, refreshStatus, toast} = context;
   const find = id => root.querySelector("#" + id);
@@ -59,6 +60,8 @@ export function createSources(context) {
 
   function buildMedia() {
     const box = find("media-rules");
+    const durations=root.ownerDocument.createElement('details'), summary=root.ownerDocument.createElement('summary');
+    summary.textContent=tr('Duration limits');durations.append(summary);durations.className='media-duration-details';
     for (const [key, label] of media) {
       const row = root.ownerDocument.createElement("div");
       row.className = "media-rule";
@@ -74,7 +77,16 @@ export function createSources(context) {
       const unit = root.ownerDocument.createElement("span");
       unit.className = "unit"; unit.textContent = tr("MiB");
       field.append(size, unit); row.append(checkbox, title, field); box.append(row);
+      if (['video','video_note','animation','voice','audio'].includes(key)) {
+        const duration = root.ownerDocument.createElement('input');
+        Object.assign(duration, {id:'media-seconds-'+key,type:'number',min:'0',max:'86400',step:'1',value:'0'});
+        duration.dataset.level='expert';
+        duration.setAttribute('aria-label',tr('Maximum duration in seconds, 0 means unlimited'));
+        const durationLabel = root.ownerDocument.createElement('label');durationLabel.className='media-duration';
+        durationLabel.append(tr(label)+' · '+tr('Duration limit, seconds (0 = unlimited)'),duration);durations.append(durationLabel);
+      }
     }
+    box.after(durations);
   }
   buildMedia();
 
@@ -86,6 +98,7 @@ export function createSources(context) {
         download_media: find("download-media").checked, max_media_mb: Number(find("max-media").value),
         types: Object.fromEntries(media.map(([key]) => [key, {
           enabled: find("media-on-" + key).checked, max_mb: Number(find("media-max-" + key).value),
+          ...(Number(find('media-seconds-'+key)?.value) ? {max_seconds:Number(find('media-seconds-'+key).value)} : {}),
         }])),
       },
       recheck: {recheck_minutes: Number(find("recheck-priority").value),
@@ -103,6 +116,7 @@ export function createSources(context) {
         const rule = value.types[key] || {enabled: true, max_mb: value.max_media_mb};
         find("media-on-" + key).checked = rule.enabled;
         find("media-max-" + key).value = String(rule.max_mb);
+        if(find('media-seconds-'+key))find('media-seconds-'+key).value=String(rule.max_seconds||0);
       }
     } else {
       find("recheck-priority").value = String(value.recheck_minutes);
@@ -219,24 +233,33 @@ export function createSources(context) {
         const state = sourceState(target, status), stateCell = element("td", "source-status-cell");
         const label = {enabled: tr("Enabled"), paused: tr("Paused"), excluded: tr("Excluded"),
           unconfirmed: tr("Unconfirmed"), ignored: tr("Ignored")}[state];
-        const toggle = sourceButton("toggle", target, label, "source-state " + state);
-        toggle.setAttribute("aria-label", tr(target.enabled && state !== "excluded"
-          ? "Pause recording for {name}" : "Enable recording for {name}", {name: target.title}));
-        stateCell.append(toggle);
+        stateCell.append(element("span", "source-state " + state, label));
+        const seen = status.collector.source_status?.[String(target.chat_id)];
+        if (seen?.state === "receiving_updates" || state === "unconfirmed")
+          stateCell.append(element("span", "source-reason", context.termText(
+            seen.state === "receiving_updates" ? "receiving_updates" : seen.reason || "not_in_dialogs")));
         const starCell = element("td", "source-star-cell");
         const star = sourceButton("star", target, "", "icon-button star" + (target.priority ? " on" : ""));
         star.append(context.icon("star")); star.setAttribute("aria-pressed", String(!!target.priority));
-        star.setAttribute("aria-label", tr("Priority recheck for {name}", {name: target.title}));
-        star.title = tr(target.priority ? "Priority" : "Regular");
+        const hint = priorityHint(tr, !!target.priority, getState().status?.collector);
+        star.setAttribute("aria-label", hint + " — " + target.title); star.title = hint;
         starCell.append(star);
         const menuCell = element("td", "source-menu-cell"), menu = element("details", "source-row-menu");
         const summary = element("summary", "", "⋯");
         summary.setAttribute("aria-label", tr("Actions for {name}", {name: target.title}));
         summary.dataset.sourceFocus = target.chat_id + ":menu";
         const actions = element("div", "source-row-actions");
+        const item = (action, label, consequence, className) => {
+          const button = sourceButton(action, target, label, "quiet small source-menu-item" + (className ? " " + className : ""));
+          button.append(element("small", "", consequence)); actions.append(button);
+        };
+        if (target.enabled && state !== "excluded")
+          item("pause", tr("Pause recording"), tr("New messages, edits and deletions in this chat are not saved until you resume. Saved records stay."));
+        else
+          item("enable", tr("Resume recording"), tr("New messages, edits and deletions in this chat are saved again."));
         if ((status.scope?.mode || "selected") !== "selected" && state !== "excluded")
-          actions.append(sourceButton("exclude", target, tr("Exclude from scope")));
-        actions.append(sourceButton("remove", target, tr("Remove source")));
+          item("exclude", tr("Exclude from scope"), tr("Recording stops and the scope no longer adds this chat. Saved records stay."));
+        item("remove", tr("Remove source"), tr("The chat leaves the source list and recording stops. Saved messages and files stay; cached people profiles are removed."), "danger-text");
         menu.append(summary, actions); menuCell.append(menu);
         row.append(pick, name, type, stateCell, starCell, menuCell); fragment.append(row);
       }
@@ -276,16 +299,20 @@ export function createSources(context) {
     find("target-select-matching").textContent = tr(matches.length > 500 ? "Select first 500 matching" : "Select all matching");
   }
 
-  async function runSourceAction(ids, action) {
-    const state = getState(), status = state.status;
+  async function runSourceAction(ids, action, {confirmed = false} = {}) {
+    const state = getState(), status = state.status, current = getSession(), profile = state.profile;
     if (sourceBusy || dialogLoading || !status || status.demo || !may("sources") || !ids.length) return;
     if (ids.length > 500) {toast(tr("Choose up to 500 sources at a time."), true); return;}
     const wide = (status.scope?.mode || "selected") !== "selected";
-    if (action === "remove" && !context.confirm(tr(ids.length === 1
+    if (!confirmed && (action === "pause" || action === "exclude") && !(await context.confirm(tr(action === "pause"
+      ? "Pause recording of {n} sources? New messages, edits and deletions in them are not saved until you resume. Saved records stay."
+      : "Exclude {n} sources from the scope? Recording stops and the scope no longer adds them. Saved records stay.", {n: ids.length})))) return;
+    if (action === "remove" && !confirmed && !(await context.confirm(tr(ids.length === 1
       ? "Remove this source? Saved messages and files stay. Cached people profiles are removed."
       : "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.", {n: ids.length})
-      + (wide ? " " + tr("These chats are also excluded so the scope does not add them again.") : ""))) return;
-    const current = getSession(), attempt = ++sourceAttempt, profile = state.profile;
+      + (wide ? " " + tr("These chats are also excluded so the scope does not add them again.") : ""), {danger: true}))) return;
+    if (current !== getSession()) return;
+    const attempt = ++sourceAttempt;
     sourceBusy = true; renderTargets(); renderDialogs(); renderDialogRefresh();
     try {
       let result;
@@ -360,10 +387,22 @@ export function createSources(context) {
     if (!target) return;
     button.closest("details")?.removeAttribute("open");
     let action = button.dataset.sourceAction;
-    if (action === "toggle") action = target.enabled && sourceState(target, getState().status) !== "excluded" ? "pause" : "enable";
     if (action === "star") action = target.priority ? "regular" : "priority";
-    runSourceAction([target.chat_id], action);
+    const owner = getSession();
+    confirmRowAction(target, action).then(confirmed => {
+      if (confirmed && owner === getSession()) runSourceAction([target.chat_id], action, {confirmed: true});
+    });
   });
+  async function confirmRowAction(target, action) {
+    const dialogs = window.TgWitnessDialogs;
+    if (action === "pause") return dialogs.confirm(tr("Pause recording of {name}? New messages, edits and deletions in this chat are not saved until you resume. Saved records stay.", {name: target.title}),
+      {confirmText: tr("Pause recording")});
+    if (action === "exclude") return dialogs.confirm(tr("Exclude {name} from the scope? Recording stops and the scope no longer adds this chat. Saved records stay.", {name: target.title}),
+      {confirmText: tr("Exclude from scope")});
+    if (action === "remove") return dialogs.typed(tr("Remove {name} from the sources? Recording stops and the chat leaves the list. Saved messages and files stay; cached people profiles are removed.", {name: target.title}),
+      target.title, {title: tr("Remove source"), confirmText: tr("Remove source")});
+    return true;
+  }
 
   function matchingDialogs() {
     const term = find("dialog-search").value.trim().toLocaleLowerCase(), kind = find("dialog-kind").value;

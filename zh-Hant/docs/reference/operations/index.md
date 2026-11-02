@@ -6,6 +6,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 首次連線時，請[使用帳戶與連線格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/)。 關於儲存版本、事件政策及資料缺口等說明，請參閱 [「資料蒐集運作方式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/)」。本指南涵蓋日常操作與資料復原。
 
+受管安裝包含 **、START-HERE.html、** 及 **START-HERE.txt、**，以及 其啟動程式，其中儲存庫連結與指令已針對其安裝路徑 進行客製化。透過 SSH 執行 `tgwitness guide --print`，或執行 `tgwitness paths` 以定位 實際資料目錄。root 權限的 systemd 安裝會將私有狀態儲存於 `/var/lib/tgwitness-…`；`/opt/tgwitness` 則存放程式本体。
+
+對於受管理的臨時 Cloudflare 隧道，`tgwitness tunnel off` 會關閉公開 存取，同時本地控制面板和資料收集功能仍會繼續運作。`tgwitness tunnel on` 會啟用公開存取；`tgwitness tunnel restart` 會建立新的隧道連線。使用 `tgwitness open` 可查看其當前位址。明確的關閉設定會保留至 服務重新啟動後。`tgwitness stop` 會同時停止控制面板和資料收集功能。
+
 ## 操作員工作流程
 
 流程圖 · 選擇儲存方式與金鑰保護機制 → 使用其憑證開啟控制面板; 使用其憑證開啟控制面板 → 選擇工作區; 選擇工作區 → 設定直接連線或代理伺服器路徑; 設定直接連線或代理伺服器路徑 → 輸入電話號碼或選擇檔案／QR 碼; 輸入電話號碼或選擇檔案／QR 碼 → 驗證帳號身分並選擇可加入的群組; 驗證帳號身分並選擇可加入的群組 → 儲存事件與附件政策，然後開始監測; 儲存事件與附件政策，然後開始監測 → 監控錯誤、存取、佇列及磁碟狀況; 監控錯誤、存取、佇列及磁碟狀況 → 保留獨立檢查點; 保留獨立檢查點 → 匯出與驗證資料 · 選擇儲存方式與金鑰保護機制 · 使用其憑證開啟控制面板 · 選擇工作區 · 設定直接連線或代理伺服器路徑 · 輸入電話號碼或選擇檔案／QR 碼 · 驗證帳號身分並選擇可加入的群組 · 儲存事件與附件政策，然後開始監測 · 監控錯誤、存取、佇列及磁碟狀況 · 保留獨立檢查點 · 匯出與驗證資料

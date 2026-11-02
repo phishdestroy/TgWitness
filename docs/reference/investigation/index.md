@@ -8,7 +8,7 @@ Follow a case across channels, groups, private chats and bots, from initial acqu
 
 ## Worked case: a destination changes across four conversations
 
-An announcement points to a bot. An operations group discusses a new payment destination, the bot's keyboard displays it, and a private follow-up repeats it. The announcement is then edited and a group message disappears.
+An announcement points to a bot. An operations group discusses a new payment destination, and the bot's keyboard displays it. The announcement is edited, a private follow-up repeats the destination, and a group message disappears.
 
 The questions are: what was observed before and after the change, which Telegram accounts posted each item, where the destination appeared, which attachment bytes were preserved, and what intervals remain unknown?
 
@@ -34,8 +34,8 @@ Flow diagram · Channels → Workspace journal; Groups → Workspace journal; Pr
 
 ## 1. Define the case and collect the whole account
 
-1. Connect the collecting account in its own workspace. In external case notes, record the case reference, account ID, workspace, observation start and trusted signing-key fingerprint.
-2. Open **Sources → Observation scope → Investigation mode**. The preset selects **Whole account**, channels/groups/private chats/bots, own actions, source profiles and the latest 200 visible messages for newly discovered sources. Review it, press **Save scope**, and complete the scope confirmation.
+1. Connect the collecting account in its own workspace. In [Case Board](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/) or your case register, record the case reference, account ID, workspace and observation start. Retain the trusted signing-key fingerprint independently.
+2. For a dedicated collecting account, open **Sources → Observation scope → Investigation mode**. The preset selects **Whole account**, channels/groups/private chats/bots, own actions, source profiles and the latest 200 visible messages for newly discovered sources. Review it, press **Save scope**, and complete the scope confirmation. Main accounts use selected chats or a folder; whole-account collection is available to accounts marked for investigation.
 3. **Load chats** and compare the sources with the account's dialog list. Check exclusions. **Parameters → Chats read from the account's list** defaults to 1,000 and allows up to 20,000. Sources beyond the list limit are added when they become active. Record what was actually enumerated.
 4. In **Recording settings**, select **All visible activity** and save the monitoring settings. Review attachment types/limits and free disk space.
 5. Start observation. Validate a controlled new message, edit and deletion, then retain the test references and any failures.
@@ -58,7 +58,7 @@ Keep a source register with one row per chat:
 
 Use the right acquisition for each source:
 
-- **Load full history** in **Sources** (current `main`) loads available past messages from enabled sources into the workspace journal. It supports pause/resume and a signed progress report. See [history acquisition](https://phishdestroy.github.io/TgWitness/docs/reference/history/).
+- **Load full history** in **Sources** loads available past messages from enabled sources into the workspace journal. It supports pause/resume and a signed progress report. See [history acquisition](https://phishdestroy.github.io/TgWitness/docs/reference/history/).
 - **History snapshot** saves recent visible messages into the observation journal. Its default maximum is 500; **Parameters → Largest history snapshot** can raise that to 10,000. These are current history observations, not reconstructed edits.
 - **Full chat export → Export full chat**, or **Chats → Export chat**, fetches the currently visible history of one chat into a separate signed `chat.json` / `chat.html` bundle. Repeat for the case's sources and retain each result.
 - **When a new chat or bot appears** can save its profile and up to 1,000 recent messages; Investigation mode selects 200. Existing chats do not receive that intake retroactively when the mode is enabled.
@@ -103,6 +103,8 @@ In the worked example:
 
 Compare attachment hashes and their associated message references. Identical files do not establish a creator, forwarder or common operator. Equal names and similar avatars alone do not join two Telegram IDs into one person.
 
+Keep the team's working notes on [Case Board](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/): bookmark the records you rely on, such as #146, #188 and #205, highlight the exact destination string, and save a slice of every recorded action between two records or in a time range. Notes and statuses retain the team's review in their own signed history, separately identifiable from the source observations.
+
 ## 5. Build the cross-chat timeline
 
 Use saved versions in **Chats** and their **Journal record #…** links. In **Journal**, combine **All sources** with **Edits**, **Deletions** and **Coverage**. Keep both `source_at`, where supplied, and `observed_at`.
@@ -122,7 +124,7 @@ Other records occur between these example references. Sequence numbers order obs
 
 Use a separate workspace for every distinct account and repeat its inventory. Keep account ID, role, signing-key fingerprint and source references with every comparison. Message numbers are not global identifiers across chats/accounts.
 
-Cross-workspace correlation is performed in external case notes or analysis tools. TgWitness currently has no global cross-workspace search, merged timeline, investigation graph or combined case archive. Multi-account export of **one** channel/supergroup is a different operation, not a merger of the account journals.
+Case Board keeps source-linked notes and collections within each workspace. The group screen reviews account status together and can bundle separate workspace exports. Correlate those sources in your case notes or analysis tools; each journal retains its own origin and signing key. A global search or merged cross-workspace timeline is not generated. Multi-account export of one channel/supergroup acquires that chat's history using the eligible accounts.
 
 For longer work, retain boundaries with an [independent witness](https://phishdestroy.github.io/TgWitness/docs/reference/witness/). Use controlled delivery checks to qualify each account's capture path and visibility.
 
@@ -134,6 +136,7 @@ Keep these together in an analyst-assembled case directory:
 | --- | --- |
 | Case notes and source register | Question, collection policy, access/role, findings, alternate explanations and gaps |
 | Timeline | Both times and workspace/chat/message/sequence references for each entry |
+| Case Board export and slices, if used | Source-linked bookmarks, quotes, team notes, collections, revision history and selected records checked against the evidence ZIP |
 | Signed evidence ZIP per workspace | Complete recorded journal, manifest and included preserved media; panel filters do not narrow the journal export |
 | Separately signed people-profile files | Derived references checked against the matching workspace evidence |
 | Signed full chat exports | Current visible-history acquisition, separate from the observation journal |
@@ -147,9 +150,10 @@ From a trusted installation, with filenames and each workspace's actual fingerpr
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Retain the actual verification results and original artifacts. The top-level case directory, source register and analyst conclusions are maintained externally; each TgWitness artifact has its own signature and verification procedure.
+Retain the actual verification results and original artifacts. Export workspace notes from Case Board alongside the cited source material. Assemble cross-workspace findings in the top-level case directory; each TgWitness artifact has its own signature and verification procedure.
 
 ## Adapt the investigation
 

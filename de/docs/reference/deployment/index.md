@@ -127,7 +127,7 @@ Diese wird nach einem erfolgreichen [Release-Workflow](https://phishdestroy.gith
 Kopieren Sie `deploy/env.example` nach `.env`. Setzen Sie `TGWITNESS_IMAGE` auf die veröffentlichte Version, wobei Sie den Repository-Pfad **in Kleinbuchstaben** verwenden, zum Beispiel:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ Verwenden Sie die „Compose“-Datei(en) Ihrer Installation auch für die voran
 
 Der [Release-Workflow](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) ist einsatzbereit, sobald dieses Projekt in ein GitHub-Repository mit aktivierten Actions übertragen wurde. Er wird ausgeführt, wenn ein GitHub-Release **veröffentlicht** wird, einschließlich einer Vorabversion. Entwürfe und Tag-Pushes allein führen nicht zur Veröffentlichung von Paketen.
 
-1. Legen Sie die Paketversion und das Changelog fest und veröffentlichen Sie anschließend eine Version mit dem Tag „`v`“ sowie der genauen „`pyproject.toml`“-Version, beispielsweise „`v0.7.1`“.
+1. Legen Sie die Paketversion und das Changelog fest und veröffentlichen Sie anschließend eine Version mit dem Tag „`v`“ sowie der genauen „`pyproject.toml`“-Version, beispielsweise „`v0.8.0`“.
 2. Der Workflow validiert das Tag und führt die gemeinsamen Python-, allgemeinen/Konto-Import-/QR-Browser-, Quellpaket- und Docker-Prüfungen unter Windows, Linux und macOS durch. Eine neue native Installation wird ebenfalls auf allen drei Betriebssystemen unter Verwendung von Python 3.12 durchgeführt.
 3. Nachdem diese Prüfungen erfolgreich abgeschlossen sind, führt das System einen Smoke-Test eines ARM64-Images unter QEMU durch, veröffentlicht AMD64/ARM64-Images unter `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, und fügt die Quell-ZIP-Datei sowie das Python-Wheel mit ihren SHA-256-Sidecars bei. Die Windows-portable ZIP-Datei ist genau das Artefakt, das vom Prüf-Workflow getestet wurde; der Release-Workflow lädt dieses Artefakt und seine Prüfsumme herunter und veröffentlicht sie.
 4. Ein abschließender Vorgang lädt alle drei veröffentlichten Pakete erneut herunter und überprüft deren Prüfsummen. Anschließend werden `SHA256SUMS.txt` und `RELEASE-MANIFEST.json` veröffentlicht, wobei die Version, die Quellcode-Revision und die Größe der Assets protokolliert werden. Beim Hochladen werden vorhandene Release-Assets nicht überschrieben.

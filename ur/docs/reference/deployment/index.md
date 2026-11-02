@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 `deploy/env.example` کی کاپی `.env` میں کریں۔ `TGWITNESS_IMAGE` کو شائع شدہ ورژن پر سیٹ کریں، **چھوٹے حروف کے** ریپوزیٹری راستے کا استعمال کرتے ہوئے، مثال کے طور پر:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 
 [ریلیز کا ورک فلو](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) اس پروجیکٹ کو ایک GitHub ریپوزیٹری میں Actions فعال کر کے پش کرنے کے بعد استعمال کے لیے تیار ہوتا ہے۔ یہ اس وقت چلتا ہے جب ایک GitHub ریلیز **شائع** ہوتی ہے، بشمول پری ریلیز۔ صرف ڈرافٹس اور ٹیگ پشز پیکجز شائع نہیں کرتے۔
 
-1. پیکج کا ورژن اور تبدیلیوں کا لاگ سیٹ کریں، پھر `v` کے ٹیگ کے ساتھ ایک ریلیز شائع کریں اس کے علاوہ بالکل درست `pyproject.toml` ورژن، جیسے `v0.7.1`۔
+1. پیکج کا ورژن اور تبدیلیوں کا لاگ سیٹ کریں، پھر `v` کے ٹیگ کے ساتھ ایک ریلیز شائع کریں اس کے علاوہ بالکل درست `pyproject.toml` ورژن، جیسے `v0.8.0`۔
 2. ورک فلو ٹیگ کی توثیق کرتا ہے اور مشترکہ Windows/Linux/macOS Python، general/account-import/QR browser، source-package، اور Docker چیکس چلاتا ہے۔ تازہ نیٹیو انسٹالیشن بھی Python 3.12 استعمال کرتے ہوئے تینوں آپریٹنگ سسٹمز پر آزمائی جاتی ہے۔
 3. ان چیکس کے پاس ہونے کے بعد، یہ QEMU کے تحت ARM64 امیج کا سموک ٹیسٹ کرتا ہے، AMD64/ARM64 امیجز کو `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` پر شائع کرتا ہے، اور ماخذ ZIP اور Python wheel کو ان کے SHA-256 سائیڈ کارز کے ساتھ منسلک کرتا ہے۔ Windows پورٹیبل ZIP وہی آرٹیفیکٹ ہے جسے چیکس کے ورک فلو نے ٹیسٹ کیا؛ ریلیز ورک فلو اس آرٹیفیکٹ اور اس کے چیک سم کو ڈاؤن لوڈ اور شائع کرتا ہے۔
 4. ایک آخری کام تمام تین شائع شدہ پیکجز کو دوبارہ ڈاؤن لوڈ کرتا ہے اور ان کے چیک سمز کی تصدیق کرتا ہے۔ پھر یہ `SHA256SUMS.txt` اور `RELEASE-MANIFEST.json` شائع کرتا ہے، ورژن، ماخذ کی ریویژن اور اثاثوں کے سائز کو ریکارڈ کرتے ہوئے۔ اپ لوڈز موجودہ ریلیز کے اثاثوں کو اوور رائٹ کرنے سے انکار کرتے ہیں۔

@@ -4,19 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/cases/
 
 Tangani seluruh kasus di berbagai saluran, grup, obrolan pribadi, dan bot: kumpulkan, hubungkan, rekonstruksi, dan serahkan bukti tersebut.
 
-Panduan ini mengikuti satu insiden fiktif dari awal hingga akhir. Panduan ini menggunakan fitur pengumpulan, pencarian, profil pengguna, dan ekspor yang sebenarnya. Peta kasus hanyalah contoh dokumentasi; kesimpulan dan daftar kasus Anda disimpan di luar aplikasi.
+Panduan ini mengikuti satu insiden fiktif melalui seluruh proses. Gunakan fitur pengumpulan, pencarian, dan profil orang untuk menemukan catatan sumber, [Case Board](https://phishdestroy.github.io/TgWitness/id/docs/case-board/) untuk mengatur dan mendiskusikannya, serta [Report Studio](https://phishdestroy.github.io/TgWitness/id/docs/reports/) untuk mempresentasikan temuan. Peta bergambar di bawah ini menjelaskan hubungan dalam contoh ini.
 
 KASUS YANG TELAH DITANGANI / TUJUAN PEMBAYARAN YANG BERUBAH
 
 ### Satu insiden. Empat percakapan. Jejak yang perlu direkonstruksi.
 
-Sebuah pengumuman di saluran mengarah ke sebuah bot. Sebuah grup operasional mendiskusikan tautan pembayaran baru. Sebuah pesan tindak lanjut di saluran pribadi mengulanginya. Kemudian, pengumuman tersebut diedit dan pesan grup tersebut menghilang.
+Sebuah pengumuman di saluran mengarah ke sebuah bot. Sebuah grup operasional mendiskusikan tautan pembayaran baru, dan bot menampilkannya. Pengumuman tersebut diedit, pesan tindak lanjut pribadi mengulangi tujuan tautan tersebut, dan pesan grup menghilang.
 
 Siapa yang memposting setiap versi?Di mana tautan tersebut muncul?File mana yang disimpan?Apa yang berubah, dan kapan?
 
 Untuk pemuatan riwayat, tinjauan sumber AI opsional, MCP, OCR, dan webhook keluar, lihat "[Work the archive](https://phishdestroy.github.io/TgWitness/id/docs/archive/)".
 
 ## 1. Menjangkau seluruh akun
+
+Gunakan akun pengumpulan khusus untuk cakupan seluruh akun. Akun utama dapat mengumpulkan obrolan tertentu atau folder Telegram.
 
 1. [Hubungkan akun pengumpul](https://phishdestroy.github.io/TgWitness/id/docs/accounts/) ke ruang kerja tersendiri. Catat nomor referensi kasus, ID akun, nama ruang kerja, dan sidik jari kunci penandatanganan dalam catatan kasus Anda.
 2. **Sumber** Terbuka **→ Cakupan pengamatan → Mode investigasi**. Tinjau **seluruh akun**, keempat jenis sumber, dan **tindakan sendiri**. Pengaturan awal ini memungkinkan penyimpanan profil sumber baru beserta **200 pesan** terbarunya **yang terlihat**. Tekan **Simpan cakupan** dan selesaikan konfirmasi cakupan.
@@ -33,11 +35,11 @@ Pesan · pengeditan · pemberitahuan penghapusan · reaksi yang terlihat · peri
 
 ## 2. Mengumpulkan riwayat dan menyimpan berkas-berkas tersebut
 
-Buatlah daftar sumber untuk seluruh penyelidikan. Berikan setiap obrolan satu baris yang berisi ID numerik, judul, akun, akses/peran, waktu mulai real-time, perolehan riwayat, hasil media, dan celah yang diketahui. Tandai sumber sebagai telah diperoleh hanya setelah memeriksa hasil yang relevan.
+Buat koleksi Case Board untuk penyelidikan dan tandai catatan yang disimpan yang relevan. Buat daftar sumber bersama kasus: ID numerik setiap obrolan, judul, akun pengumpul, akses/peran, waktu mulai aktif, riwayat perolehan, hasil media, dan celah yang diketahui. Tandai sumber sebagai telah diperoleh setelah memeriksa hasil yang relevan.
 
 | Kebutuhan | Tindakan di panel | Fitur yang disediakan |
 | --- | --- | --- |
-| Riwayat di seluruh obrolan yang diaktifkan | Sumber → Muat riwayat lengkap | Fitur utama saat ini: pesan-pesan lama yang tersedia dimasukkan ke dalam jurnal ruang kerja, dilengkapi dengan fitur jeda/lanjutkan serta laporan kemajuan yang ditandatangani. [Panduan riwayat](https://phishdestroy.github.io/TgWitness/id/docs/reference/history/). |
+| Riwayat di seluruh obrolan yang diaktifkan | Sumber → Muat riwayat lengkap | Pesan-pesan lama yang tersedia dimasukkan ke dalam jurnal ruang kerja, dilengkapi dengan fitur jeda/lanjutkan serta laporan kemajuan yang telah ditandatangani. [Panduan riwayat](https://phishdestroy.github.io/TgWitness/id/docs/reference/history/). |
 | Konteks obrolan yang ada dalam jurnal | Sumber → Pengaturan perekaman → Cuplikan riwayat | Pesan-pesan terbaru yang terlihat sebagai catatan yang telah ditandatangani. Batas maksimum default 500; **Parameter → "Largest history snapshot"** dapat menaikkan batas tersebut hingga 10.000. |
 | Riwayat lengkap dari satu obrolan yang saat ini terlihat | Ekspor obrolan lengkap → Ekspor obrolan lengkap, atau Obrolan → Ekspor obrolan | Sebuah bundel terpisah yang ditandatangani dengan `chat.json` dan `chat.html`. Ulangi untuk setiap sumber; simpan hasil keberhasilan/kegagalan. |
 | Konteks saat obrolan baru muncul | Ruang lingkup pengamatan → Saat obrolan atau bot baru muncul | Profil sumber dan hingga 1.000 pesan terbaru yang terlihat; Mode penyelidikan memilih 200 pesan. Obrolan yang sudah ada tidak akan dimasukkan ke dalam catatan ini secara retroaktif. |
@@ -63,9 +65,9 @@ Kontrol-kontrol ini melakukan tindakan Telegram yang sebenarnya. Tombol callback
 
 ## 4. Melacak orang, tautan, dan berkas di seluruh obrolan
 
-1. Buka **Jurnal**, biarkan filter sumber pada "**Semua sumber"** dan cari frasa, domain, nama pengguna, atau pengenal yang tersimpan yang khas. Buka setiap catatan yang cocok dan catat obrolannya, ID pesan, serta nomor urut jurnal.
+1. Buka **Journal**, biarkan filter sumber pada "**Semua sumber"** dan cari frasa khas, domain, nama pengguna, atau pengenal yang disimpan. Buka setiap catatan yang cocok, lalu pilih **"To board"** untuk menyimpan obrolan, ID pesan, dan referensi jurnal dalam kasus tersebut.
 2. Untuk obrolan yang relevan, buka **Obrolan → Orang → Aktifkan profil**, lalu pilih seseorang. Tinjau riwayat nama/nama pengguna, hubungan balasan, aktivitas, **serta "Juga di..."** obrolan lain yang diamati dan tautan, dompet, atau nomor telepon yang diekstraksi. Buka catatan jurnal yang dikutip.
-3. Ikuti ID pengguna Telegram numerik yang sama ke obrolan lain di ruang kerja ini. Anggap nama yang cocok, penyebutan dompet, atau avatar yang serupa sebagai petunjuk yang perlu diperiksa. Alamat yang disebutkan tidak membuktikan kepemilikan; avatar yang serupa tidak membuktikan bahwa itu adalah orang yang sama.
+3. Ikuti ID pengguna Telegram numerik yang sama ke obrolan lain di ruang kerja ini. Perlakukan nama yang cocok, penyebutan dompet, atau avatar serupa sebagai petunjuk untuk diperiksa; pertahankan referensi sumber dan atribusi pendukung apa pun.
 4. Bandingkan nilai SHA-256 lampiran yang disimpan di seluruh catatan. Nilai hash yang sama mendukung identitas byte dari file yang disimpan. Periksa catatan pesan dan pengirim yang terkait sebelum menarik kesimpulan tentang siapa yang membagikannya.
 
 PETA KASUS / IKUTI REFERENSIKasus fiktif · bukan grafik aktual
@@ -86,17 +88,17 @@ PRIVAT / TINDAK LANJUT**Pengguna 71001 mengulangi tujuan**
 
 Catatan #205 · pesan #922 Tanda terima file yang disimpan #209
 
-Empat obrolan memberikan pengamatan yang berbeda-beda. Ikuti catatan sumber untuk setiap koneksi; jangan mengaitkan posting saluran tersebut dengan pengguna 71001 tanpa pengirim yang teridentifikasi.
+Empat obrolan memberikan pengamatan yang berbeda-beda. Ikuti catatan sumber untuk setiap koneksi; postingan saluran tersebut tidak mencantumkan pengirimnya.
 
-ID numerik dan referensi catatan yang digunakan dalam panduan ini adalah fiktif. Peta ini menjelaskan alur kerja seorang analis dalam menggunakan fitur pencarian, profil, dan pemeriksaan catatan; aplikasi ini tidak menghasilkan grafik investigasi global.
+ID numerik dan referensi catatan dibuat khusus untuk panduan ini. Peta penjelasan ini menunjukkan cara menghubungkan hasil pencarian, profil, dan catatan yang diperiksa; Case Board menyimpan kartu dan referensi sumber yang sesuai.
 
 | Koneksi | Pengamatan pendukung | Kesimpulan yang perlu dipertahankan |
 | --- | --- | --- |
 | Akun Telegram yang sama | ID Pengguna 71001 di grup #146 dan obrolan pribadi #205 | ID pengirim yang sama tercantum di kedua obrolan tersebut. Identitas di dunia nyata tetap menjadi pertanyaan terpisah. |
-| Tujuan yang diulang | `pay.example.invalid/new` di #146, metadata tombol #173, postingan yang diedit #188 dan #205 | Tujuan yang sama muncul dalam empat konteks yang diamati. Hal ini saja tidak cukup untuk menentukan siapa yang mengendalikannya. |
-| Ukuran file yang sama | Nilai SHA-256 yang sama persis pada tanda terima media yang telah selesai #151 dan #209 | Kedua lampiran yang disimpan tersebut identik secara byte. Nama file atau thumbnail saja tidak cukup untuk membuktikannya. |
+| Tujuan yang diulang | `pay.example.invalid/new` di #146, metadata tombol #173, postingan yang diedit #188 dan #205 | Tujuan yang sama muncul dalam empat konteks yang diamati. Tentukan kontrolnya dengan menggunakan sumber tambahan. |
+| Ukuran file yang sama | Nilai SHA-256 yang sama persis pada tanda terima media yang telah selesai #151 dan #209 | Kedua lampiran yang diawetkan memiliki byte yang identik. Hash file lengkap menyediakan perbandingan tersebut. |
 
-Profil pengguna mencakup penulis yang memiliki pesan tersimpan dalam obrolan tersebut dan menghubungkannya dengan obrolan lain dalam *jurnal ruang kerja* yang *sama*. Profil ini bukanlah direktori keanggotaan yang lengkap. Nilai hash avatar berasal dari cache lokal terpisah; kutipan profil memiliki batas yang dapat dikonfigurasi di bawah **Parameter → Catatan yang dikutip per fakta**.
+Profil pengguna menggambarkan penulis yang teramati dan aktivitas mereka dalam *jurnal ruang kerja* *yang* *sama*, di dalam obrolan yang diizinkan bagi pemirsa. Ini adalah tampilan penulis yang teramati, bukan direktori keanggotaan lengkap. Sesuaikan jumlah kutipan pendukung di bawah **Parameter → Catatan yang dikutip per fakta**.
 
 ## 5. Rekonstruksi urutan dan tandai celah-celahnya
 
@@ -129,11 +131,11 @@ Urutan jurnal mengikuti urutan penerimaan, bukan urutan tindakan asli di Telegra
 
 Tambahkan ruang kerja untuk setiap akun yang berbeda dan ulangi inventarisasi cakupan serta riwayat. Catat keanggotaan/peran dan sidik jari kunci penandatanganan untuk masing-masing akun. Pastikan pengidentifikasi dikualifikasikan berdasarkan ruang kerja dan obrolan: nomor pesan yang sama bukanlah pengidentifikasi lintas akun secara global.
 
-Bandingkan pengamatan yang relevan dalam catatan kasus atau alat analisis Anda, dengan tetap mencantumkan referensi akun dan jurnal untuk setiap baris. Saat ini, TgWitness belum menyediakan fitur pencarian global tunggal, garis waktu gabungan, grafik kontak, atau arsip kasus yang mencakup seluruh ruang kerja. Ekspor lengkap multi-akun dari satu saluran atau supergrup merupakan fitur terpisah; ini bukanlah penggabungan dari semua jurnal akun.
+Gunakan [grup](https://phishdestroy.github.io/TgWitness/id/docs/groups/) [akun](https://phishdestroy.github.io/TgWitness/id/docs/groups/) untuk meninjau status operasional, berbagi pengaturan yang dipilih, dan mengekspor akun-akun tersebut secara bersamaan. Paket grup ini mempertahankan jurnal yang telah ditandatangani dan identitas masing-masing ruang kerja. Untuk satu saluran atau supergrup, akun-akun yang memenuhi syarat juga dapat membagi ekspor riwayat lengkap. Susun garis waktu lintas akun dalam catatan kasus atau alat analisis Anda, dengan tetap mempertahankan referensi ruang kerja dan jurnal untuk setiap baris.
 
 Selama proses kerja yang lebih lama, tambahkan [saksi independen](https://phishdestroy.github.io/TgWitness/id/docs/witness/) untuk mempertahankan batasan-batasan sebelumnya. Gunakan uji coba pengiriman terkontrol untuk memverifikasi jalur penangkapan dan visibilitas akun-akun tersebut.
 
-## 7. Menyediakan paket kasus yang lengkap dan dapat diverifikasi
+## 7. Serahkan paket kasus yang dapat diverifikasi
 
 Ekspor berkas ZIP jurnal yang telah ditandatangani dari setiap ruang kerja. Berkas tersebut berisi jurnal lengkap yang terekam, terlepas dari filter pencarian panel. Ekspor profil orang-orang yang relevan secara terpisah, pertahankan setiap bundel riwayat obrolan lengkap, dan simpan bukti lampiran yang telah lengkap.
 
@@ -162,7 +164,7 @@ python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Periksa hasil verifikasi yang sebenarnya, simpan salinan asli, dan pertahankan laporan cakupan, kegagalan akuisisi, serta catatan transfer bersama temuan Anda. Folder kasus tingkat atas dan kesimpulan analis disusun secara eksternal; setiap artefak TgWitness memiliki tanda tangan tersendiri.
+Periksa hasil verifikasi, pertahankan dokumen asli, dan simpan laporan cakupan, hasil akuisisi, serta catatan transfer bersama temuan Anda. Tulis temuan di Report Studio dan tentukan apakah laporan tersebut akan menyertakan materi Case Board. Folder tingkat atas pada contoh ini menggabungkan artefak-artefak terpisah yang telah ditandatangani. Untuk penerima yang hanya memerlukan materi tertentu, siapkan [serah terima](https://phishdestroy.github.io/TgWitness/id/docs/handover/) [yang](https://phishdestroy.github.io/TgWitness/id/docs/handover/) [disederhanakan](https://phishdestroy.github.io/TgWitness/id/docs/handover/).
 
 ## Gunakan metode yang sama untuk penyelidikan lainnya
 
@@ -172,7 +174,7 @@ Periksa hasil verifikasi yang sebenarnya, simpan salinan asli, dan pertahankan l
 
 **Jejak:** postingan masuk saluran → pratinjau tautan bot yang disimpan → parameter awal bot → pesan dan versi keyboard → tanda terima panggilan balik yang dikeluarkan panel → tindak lanjut grup/pribadi. Cocokkan setiap tujuan dengan catatan sumbernya; pertahankan deskripsi profil dan media yang lengkap.
 
-**Hasil yang disajikan:** garis waktu penawaran dan tanggapan yang teramati, referensi sumber, serta ekspor data yang telah diverifikasi. Tautan pembayaran yang ditampilkan bukanlah bukti bahwa pembayaran telah terjadi.
+**Sertakan:** garis waktu penawaran dan tanggapan yang teramati, referensi sumber, serta ekspor yang telah diverifikasi. Dukung setiap klaim mengenai pembayaran yang telah diselesaikan dengan catatan transaksinya masing-masing.
 
 **Pesan yang dihapus setelah insiden lintas obrolan**
 
@@ -180,7 +182,7 @@ Periksa hasil verifikasi yang sebenarnya, simpan salinan asli, dan pertahankan l
 
 **Jejak:** semua obrolan yang terpengaruh → pesan asli → pengeditan yang terkirim → pemberitahuan penghapusan atau hasil "hilang saat diperiksa ulang" → lampiran yang disimpan → cakupan seputar insiden tersebut. Bandingkan pengamatan dari akun independen dengan tingkat visibilitas yang disebutkan.
 
-**Hasil:** urutan versi yang disimpan dan interval yang tidak diketahui secara eksplisit. Jangan jadikan riwayat pesan yang tidak ada sebagai bukti bahwa seseorang telah menghapusnya.
+**Hasilkan:** urutan versi yang telah dilestarikan dan interval yang tidak diketahui secara eksplisit. Pertahankan pemberitahuan penghapusan, pemeriksaan ulang yang gagal, dan atribusi apa pun kepada seseorang yang didukung secara terpisah.
 
 **Seorang peserta mengganti nama di beberapa obrolan**
 
@@ -188,4 +190,4 @@ Periksa hasil verifikasi yang sebenarnya, simpan salinan asli, dan pertahankan l
 
 **Jejak:** ID pengirim numerik → riwayat nama/nama pengguna yang disimpan → balasan → obrolan lain di ruang kerja → tujuan yang disebutkan dan file yang disimpan. Periksa catatan sumber untuk setiap koneksi yang diklaim; pisahkan akun yang mirip.
 
-**Hasil yang diberikan:** garis waktu aktivitas akun yang disertai sumber rujukan dan hipotesis terpisah mengenai hubungan antar akun. Kesamaan nama dan pHash avatar hanyalah petunjuk, bukan bukti identitas.
+**Hasilkan:** garis waktu aktivitas akun yang disertakan referensi dan hipotesis terpisah mengenai hubungan antarelemen. Gunakan kemiripan nama dan pHash avatar untuk memilih petunjuk yang akan ditindaklanjuti guna tinjauan sumber lebih lanjut.

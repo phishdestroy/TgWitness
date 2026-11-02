@@ -2,9 +2,9 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/
 
-Apa yang dilaksanakan oleh TgWitness hari ini, apa yang dihadkan oleh platform Telegram dan apa yang masih menjadi kerja akan datang.
+Model pengumpulan semasa, aliran kerja berbilang akaun, eksport dan sempadan operasi TgWitness.
 
-Rujukan reka bentuk: 26 Oktober 2026. Kes penggunaan utama ialah kumpulan Telegram peribadi dan saluran yang boleh diakses oleh akaun yang disambungkan. Dokumen ini memisahkan tingkah laku yang dilaksanakan, sempadan platform dan kerja akan datang. Item seni bina sasaran bukanlah satu tuntutan bahawa ciri tersebut sudah wujud.
+TgWitness mengekalkan perbualan Telegram yang boleh diakses oleh akaun yang disambungkan, merekod perubahan yang diperhatikan dan menyediakan eksport yang boleh disahkan. Rujukan ini menerangkan model pengumpulan, aliran kerja semasa dan sempadannya.
 
 ## Aplikasi berdiri sendiri
 
@@ -12,17 +12,19 @@ TgWitness mempunyai pemasangan, direktori data, dan kitaran hayat keluaran terse
 
 Pengendali menyambungkan akaun mereka, memilih sumber yang boleh dilihat oleh setiap akaun, dan mendapatkan jurnal pemerhatian yang disimpan. Panel memaparkan kandungan, perubahan yang disimpan, asal-usul pemerhatian dan kekosongan yang diketahui. Penyiasat lain boleh mengesahkan bahan yang dieksport.
 
-Empat keadaan berasingan yang penting: kebenaran akaun, akses kepada sumber, pengumpul berfungsi, dan sejauh mana kelengkapan penghantaran ditetapkan. Tiada satu pun daripada tiga yang pertama secara automatik membuktikan yang keempat. Kumpulan yang senyap tidak semestinya pengumpul yang gagal.
+Panel membezakan pengesahan akaun, akses kepada sumber, aktiviti pengumpul dan liputan yang direkodkan. Semak keadaan-keadaan tersebut secara bersama apabila menilai selang dengan sedikit mesej atau masalah sambungan.
 
 ## Siasatan Bersama
 
-Pentadbir boleh mengeluarkan [token akses](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/) yang terhad kepada ruang kerja dan sembang individu, dengan tujuh kebenaran, sekatan IP, tarikh luput, had log masuk dan kawalan sesi. Pemeriksa baca sahaja boleh memeriksa kes tanpa menerima kebenaran Telegram atau kunci panel utama. Akses terhad kepada sembang kekal berasingan daripada tetapan seluruh akaun dan eksport jurnal penuh.
+Pentadbir boleh mengeluarkan [token akses](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/) yang terhad kepada ruang kerja dan sembang individu, dengan kebenaran bagi setiap tindakan, sekatan IP, tamat tempoh, had log masuk dan kawalan sesi. Pemeriksa baca sahaja boleh memeriksa kes tanpa menerima kebenaran Telegram atau kunci panel utama. Akses terhad kepada sembang kekal berasingan daripada tetapan seluruh akaun dan eksport jurnal penuh.
 
 MTProxy automatik mengekalkan laluan Telegram berfungsi daripada empat sumber awam atau katalog pengendali. [Mod IP](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/#ip-modes) menentukan sama ada kegagalan perlu menunggu proksi lain atau boleh menggunakan laluan terus yang dibenarkan secara eksplisit. Permintaan HTTP luaran mempunyai laluan berasingan dan suis mati.
 
 ## Alat arkib
 
 [Pendapatan sejarah](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/), [carian arkib dan analisis](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/), [MCP baca sahaja](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/), [OCR/transkripsi tempatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/media-analysis/) dan [webhook keluaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/webhooks/) disertakan dalam 0.7.1. Laporan analitik dan teks yang diiktiraf kekal berasingan daripada peristiwa yang dirakam.
+
+[Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/) menambah penanda buku, petikan, nota dan koleksi yang dipautkan kepada sumber dalam ruang kerja. [Pembina](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-reports/) [laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-reports/) memilih bahan, seksyen dan salah satu daripada lapan reka bentuk untuk eksport HTML/PDF yang disokong.
 
 ## Tambahan pilihan
 
@@ -53,9 +55,9 @@ Panel ini menyokong sebarang bilangan **ruang kerja**, setiap satu dengan:
 
 Menukar ruang kerja yang dipaparkan tidak menghentikan pengumpul lain. Pengesahan akaun dwi di merentasi ruang kerja ditolak. Jurnal yang sudah diikat dengan satu akaun Telegram tidak boleh ditugaskan semula kepada akaun lain; menyambung semula akaun yang sama dibenarkan. Ini mengekalkan identiti akaun dan skop ID-mesej yang berkaitan.
 
-Tiada bilangan tetap dan tiada jaminan throughput yang diukur. Ruang kerja berkongsi proses Python dan gelung acara. Pekerja akaun berasingan masih dalam rancangan masa depan. Untuk pengasingan proses semasa, gunakan pemasangan, port dan direktori data berasingan.
+Aplikasi ini tidak menetapkan bilangan ruang kerja tetap. Setiap ruang kerja menjalankan tugas pengumpulnya sendiri untuk pemantauan sambungan, muat turun media, semakan semula dan pengambilan sembang baru dalam proses Python dan gelung acara yang dikongsi. Kelajuan pemprosesan bergantung pada beban kerja. Untuk pengasingan proses, gunakan pemasangan, port dan direktori data yang berasingan.
 
-Tugaskan setiap akaun sumber yang boleh diaksesnya. Akaun yang berbeza mungkin memerhati kumpulan yang sama, tetapi pemerhatian mereka kekal berasingan dan mengekalkan asal-usulnya. Dua akaun pada satu mesin yang dikawal oleh pengendali bukanlah dua saksi bebas. Eksport adalah mengikut ruang kerja; pakej kes gabungan atau garis masa Telegram global tidak dilaksanakan.
+Tugaskan setiap akaun sumber yang boleh diaksesnya. Akaun yang berbeza mungkin memerhati kumpulan yang sama, tetapi pemerhatian mereka kekal berasingan dan mengekalkan asal usulnya. Dua akaun pada satu mesin yang dikawal oleh pengendali bukanlah dua saksi bebas. **Eksport kumpulan** membundelkan ZIP ruang kerja yang ditandatangani secara berasingan dengan senarai fail yang ditandatangani yang mengandungi ID ruang kerja, hash dan cap jari kunci penandatanganan mereka. Setiap jurnal mengekalkan sempadannya sendiri. Bina garis masa merentas ruang kerja gabungan dalam nota kes atau alat analisis, sambil mengekalkan rujukan sumber tersebut.
 
 ## Perekodan dan atribusi
 
@@ -63,13 +65,13 @@ Sumber menyediakan suis bagi setiap akaun untuk mesej baru, suntingan, pemadaman
 
 | Bahan | Direkod sekarang | Batas |
 | --- | --- | --- |
-| Mesej | Teks, ID rakan/mesej, metadata penghantar, balasan dan sampul kemas kini asal | Tiada tandatangan Telegram yang boleh disahkan secara terbuka untuk mesej ini |
+| Mesej | Teks, ID rakan/mesej, metadata penghantar, balasan dan sampul kemas kini asal | Dipelihara sebagai pemerhatian yang boleh dilihat oleh akaun dan ditandatangani oleh pengumpul |
 | Sunting | Versi baharu yang diperhatikan dan mana-mana versi yang telah disimpan sebelum ini | Suntingan pertengahan semasa waktu henti boleh hilang; penghantar tidak semestinya penyunting |
 | Pembuangan | Notifikasi dan kandungan yang telah dirakam sebelum ini, jika ada | Biasanya tiada maklumat tentang penghapus atau masa tindakan tepat |
-| Pembuangan tanpa skop | Notis peringkat akaun asal tanpa meneka rakan sebaya | Korelasi ketat dengan ID skop akaun yang telah disimpan sebelum ini akan dikembangkan pada masa hadapan |
+| Notis pemadaman peringkat akaun | Notis asal; rekod yang diselesaikan merangkumi sembang yang disimpan dan kaedah korelasi | Memerlukan tepat satu padanan sembang peribadi atau kumpulan biasa yang telah disimpan sebelum ini dalam skop; ID lain kekal `deletion.unscoped`. ID saluran dan superkumpulan dikecualikan daripada korelasi ini |
 | Reaksi | Pengira semula yang dihantar dan identiti terkini yang dapat dilihat | Senarai reaktor lengkap yang tersedia memerlukan pertanyaan berasingan; saluran mungkin menyembunyikan identiti |
 | Keahlian | Mesej perkhidmatan dan kemas kini peserta yang dihantar | Kelihatan bergantung pada peranan dan jenis sembang; peristiwa yang hilang tidak membuktikan ketiadaan |
-| Tindakan pentadbir | Hanya kemas kini berkaitan yang disampaikan | Pemungutan log pentadbir berasingan tidak dilaksanakan |
+| Tindakan pentadbir | Kemas kini yang berkaitan telah disampaikan dan snapshot log pentadbir dalam eksport sembang saluran/superkumpulan | Eksport membaca log apabila tersedia untuk akaun pentadbir yang mengeksport; pemantauan log pentadbir secara berterusan berada di luar aliran kerja ini |
 | Lampiran | Deskriptor versi asal, bait yang dimuat turun/SHA-256 dan keputusan percubaan | Fail yang hilang mungkin tidak dapat dipulihkan; versi terkini tidak digantikan |
 | Sejarah | Sneak peek eksplisit mesej yang kini kelihatan | Tidak membina semula semua suntingan atau kandungan yang dipadam |
 | Proses pengumpul | Mula/henti, degupan jantung, ralat, tetapan, skop dan resit program | Laporan kendiri, bukan pengesahan proses bebas |
@@ -85,7 +87,9 @@ Telegram membezakan penghantaran pasif daripada tinjauan pendek aktif. Dokumenta
 | Mod | Tujuan | Status |
 | --- | --- | --- |
 | Pemerhatian standard | Merekod kemas kini yang disampaikan daripada sumber terpilih | Dipelaksanaan |
-| Perhatian utama | Semakan perbezaan tambahan untuk set sumber terhad | Tidak dilaksanakan sebagai mod pengguna |
+| Semakan semula keutamaan | Sumber yang diberi bintang menggunakan selang yang boleh dikonfigurasi sendiri dan diutamakan dalam setiap kitaran semakan semula terhad | Dilaksanakan dengan pertanyaan sejarah dan mesej |
+
+Bintang keutamaan mengawal semakan semula ini. Pemanggilan pantas tambahan `updates.getChannelDifference` tidak didedahkan sebagai mod pengguna berasingan.
 
 Pemeriksaan kekerapan tinggi sewenang-wenangnya, mengabaikan FloodWait atau menganggap kapasiti linear daripada akaun tambahan bukanlah model saiz yang sah. Had lalai ialah 1,000 dialog yang disenaraikan pertama, sehingga 500 mesej setiap potret sejarah, 1–2,000 MiB bagi setiap fail yang dikumpul mengikut jenis, dan 4 GiB kandungan ZIP yang ditandatangani tanpa pemampatan; setiap satu diubah mengikut ruang kerja di bawah **Parameter**. Eksport tiada had tetap bilangan acara. Fallback pelayar terhad kepada 128 MiB secara lalai; CLI penstriman mempunyai had pemindahan yang boleh dikonfigurasi, iaitu 5 GiB secara lalai.
 
@@ -114,9 +118,9 @@ Resit proses yang disahkan mengandungi ID larian rawak; versi TgWitness/Python/O
 | Pengukuran fail program | Laporan kendiri pengumpul mengenai fail yang diukur |
 | Tindak balas TSA bebas yang sah | Wujudnya bait tertentu pada masa TSA di bawah andaian kepercayaan eksplisit |
 
-Persiapan permintaan RFC 3161 dan pengesahan respons OpenSSL telah dilaksanakan. Penghantaran automatik tidak dilaksanakan. Permintaan atau tandatangan tempatan yang membawa masa mesin bukanlah cap masa bebas. Lihat [TIMESTAMP.md](https://phishdestroy.github.io/TgWitness/ms/docs/reference/timestamp/).
+Persiapan permintaan RFC 3161 dan pengesahan respons OpenSSL telah dilaksanakan. Mod bukti juga menghantar hashes titik pemeriksaan kepada perkhidmatan cop masa yang dikonfigurasikan. Simpan dan sahkan respons pihak berkuasa untuk menetapkan penanda masa bebas. Lihat [TIMESTAMP.md](https://phishdestroy.github.io/TgWitness/ms/docs/reference/timestamp/).
 
-Seorang pengendali yang mengawal kunci pengumpul dan tandatangan boleh mencipta pemerhatian bertandatangan baharu. Tandatangan tersebut tidak menetapkan asal Telegram, kebenaran atau kebolehterimaan undang-undang secara automatik. Pemilikan yang lebih kukuh memerlukan titik pemeriksaan/penyimpanan masa bebas, kawalan akses kunci, rekod pemindahan dan pengesahan daripada perisian yang dipercayai.
+Simpan titik pemeriksaan secara berasingan, kawal akses kepada kunci penandatanganan, simpan rekod pemindahan dan sahkan eksport dengan perisian yang dipercayai. [Skop](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope) [pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope) menerangkan bagaimana pemeriksaan tersebut saling melengkapi dan andaian kepercayaan yang terpakai.
 
 ## Eksport, penyebaran dan penyerahan
 
@@ -140,4 +144,4 @@ Sebelum pelepasan stabil, nyatakan:
 6. Pemasangan bersih pada matriks OS/kontena yang dimaksudkan dan pemulihan sandaran yang disahkan.
 7. Pemeriksaan bebas terhadap keselamatan, tandatangan dan dakwaan atribusi/bukti.
 
-Pemeriksaan log pentadbir, senarai reaktor tambahan, pemeriksaan keutamaan, pekerja berasingan, penyulitan merentas aplikasi kekal sebagai kerja akan datang. Akses panel terhad diterangkan dalam [akses dan kebenaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/). Versi 0.6 menyokong TData akaun tunggal terhad dan import fail akaun yang diterangkan dalam [ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/). Semak terma API Telegram sebelum penerbitan. Rujukan penyelidikan dan penemuan platform terdapat dalam [RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md).
+Akses panel terhad diterangkan dalam [Akses dan Kebenaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/). Versi 0.6 menyokong TData akaun tunggal terhad dan import fail-akaun yang diterangkan dalam [ACCOUNTS.md](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/). Semak terma API Telegram sebelum penerbitan. Rujukan penyelidikan dan penemuan platform terdapat dalam [RESEARCH.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md).

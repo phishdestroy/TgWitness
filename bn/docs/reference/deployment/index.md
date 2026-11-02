@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 `deploy/env.example`-কে `.env`-এ কপি করুন। `TGWITNESS_IMAGE`-কে প্রকাশিত সংস্করণে সেট করুন, ছোট হাতের রেপোজিটরি পথ ব্যবহার করে, উদাহরণস্বরূপ:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 
 এই প্রকল্পটি Actions-সক্ষম একটি GitHub রিপোজিটরিতে পুশ করার পর [রিলিজ ওয়ার্কফ্লো](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) ব্যবহারের জন্য প্রস্তুত। এটি একটি GitHub রিলিজ **প্রকাশ** করার সময় চলে, প্রি-রিলিজ সহ। শুধুমাত্র ড্রাফ্ট এবং ট্যাগ পুশ করলে প্যাকেজ প্রকাশিত হয় না।
 
-1. প্যাকেজের সংস্করণ এবং পরিবর্তনলগ সেট করুন, তারপর `v` ট্যাগসহ একটি রিলিজ প্রকাশ করুন এবং সঠিক `pyproject.toml` সংস্করণ, যেমন `v0.7.1`।
+1. প্যাকেজের সংস্করণ এবং পরিবর্তনলগ সেট করুন, তারপর `v` ট্যাগসহ একটি রিলিজ প্রকাশ করুন এবং সঠিক `pyproject.toml` সংস্করণ, যেমন `v0.8.0`।
 2. ওয়ার্কফ্লো ট্যাগটি যাচাই করে এবং শেয়ার্ড Windows/Linux/macOS Python, general/account-import/QR browser, source-package, এবং Docker চেকগুলি চালায়। Python 3.12 ব্যবহার করে সব তিনটি অপারেটিং সিস্টেমেই ফ্রেশ নেটিভ ইনস্টলেশনও পরীক্ষা করা হয়েছে।
 3. সেই চেকগুলো পাস হওয়ার পর, এটি QEMU-এর অধীনে ARM64 ইমেজের স্মোক-টেস্ট করে, `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`-এ AMD64/ARM64 ইমেজগুলো প্রকাশ করে, এবং সোর্স ZIP ও Python wheel-কে তাদের SHA-256 সাইডকারসহ সংযুক্ত করে। Windows পোর্টেবল ZIP হল চেক ওয়ার্কফ্লো দ্বারা পরীক্ষিত সঠিক আর্টিফ্যাক্ট; রিলিজ ওয়ার্কফ্লো সেই আর্টিফ্যাক্ট এবং এর চেকসাম ডাউনলোড ও প্রকাশ করে।
 4. একটি চূড়ান্ত কাজ তিনটি প্রকাশিত প্যাকেজ আবার ডাউনলোড করে এবং তাদের চেকসাম যাচাই করে। তারপর এটি `SHA256SUMS.txt` এবং `RELEASE-MANIFEST.json` প্রকাশ করে, সংস্করণ, সোর্স রিভিশন এবং সম্পদের আকার রেকর্ড করে। আপলোডগুলি বিদ্যমান রিলিজ সম্পদগুলিকে ওভাররাইট করতে অস্বীকার করে।

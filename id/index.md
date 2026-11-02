@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/
 
-[Sumber terbuka / v0.7.1](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/)
+[Sumber terbuka / v0.8.0](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/)
 
 Rekam pesan Telegram, pertahankan perubahannya, dan ekspor catatan yang telah ditandatangani.
 
@@ -60,6 +60,8 @@ TgWitness / Ekspor yang ditandatanganiRUANG KERJA LOKAL
 
 04 / Ekspor yang ditandatangani Bawa jurnal tersebut bersama Anda, lengkap dengan daftar isi dan verifikator independen.
 
+Lacak catatan yang disimpan melalui [Case Board](https://phishdestroy.github.io/TgWitness/id/docs/case-board/), [desain laporan,](https://phishdestroy.github.io/TgWitness/id/docs/reports/) dan [salinan](https://phishdestroy.github.io/TgWitness/id/docs/handover/) yang [dibagikan](https://phishdestroy.github.io/TgWitness/id/docs/handover/). [Tinjau kelompok akun](https://phishdestroy.github.io/TgWitness/id/docs/groups/) secara bersamaan.
+
 01 / PENANGKAPAN
 
 ### Anda yang menentukan cakupannya.
@@ -84,7 +86,8 @@ ZIP yang ditandatangani, file yang dipertahankan, dan laporan offline. Perlindun
 
 [Ekspor dan verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/exports/)
 
-## Ubah satu byte. Rantai blok akan memberitahukannya kepada Anda.
+## Ubah satu byte saja.
+Verifikasi akan memberitahukannya kepada Anda.
 
 Setiap peristiwa tertaut ke hash sebelumnya dan dilengkapi dengan tanda tangan Ed25519.
 
@@ -94,7 +97,7 @@ Setiap peristiwa tertaut ke hash sebelumnya dan dilengkapi dengan tanda tangan E
 
 ![Titik pemeriksaan yang disimpan secara terpisah memungkinkan penerima membandingkan jurnal yang diekspor dengan catatan sebelumnya.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-Lihat apa yang ditetapkan oleh masing-masing mekanisme verifikasi, serta di mana batasannya tetap berada.
+Ikuti langkah-langkah verifikasi mulai dari hash file hingga titik pemeriksaan yang disimpan secara terpisah.
 
 [Jelajahi delapan tingkat bukti](https://phishdestroy.github.io/TgWitness/id/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipPAKET YANG TELAH DITANDATANGANI
 
   Verifikasi independenManifest yang ditandatangani + verifikator mandiri
 
-Tanda tangan mendeteksi adanya manipulasi berdasarkan kunci tepercaya. Tanda tangan tersebut tidak membuktikan asal pesan dari Telegram atau menjamin pencatatan yang lengkap. Isi jurnal dan media memerlukan penyimpanan terenkripsi yang disediakan oleh Anda.
+Penerima memeriksa catatan dan berkas yang disimpan dengan membandingkannya menggunakan kunci pengumpul tepercaya. Titik pemeriksaan yang disimpan secara terpisah juga memeriksa kesinambungan dengan jurnal sebelumnya. [Pelajari langkah-langkah verifikasi.](https://phishdestroy.github.io/TgWitness/id/docs/concepts/#layers)
 
 ## Salinan S3. Pemeriksaan eksternal.
 
@@ -154,13 +157,13 @@ Jurnal dan media`AES-256-GCM`Penyimpanan yang kompatibel dengan S3
 
 [Konfigurasikan S3 dan pulihkan salinan](https://phishdestroy.github.io/TgWitness/id/docs/exports/#s3)[Baca detail verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**Yang tidak dilakukan** Alat ini tidak dapat memulihkan pesan tanpa kunci dekripsi yang diekspor atau menggantikan saksi independen.
+**Kunci pemulihan:** Simpan kunci dekripsi yang diekspor secara terpisah agar Anda dapat memulihkan salinan yang terenkripsi.
 
 ### Pemberitahuan · Apprise
 
 Pemberitahuan masalah, perubahan obrolan, dan ringkasan harian melalui Apprise: aplikasi pesan instan, email, atau webhook JSON Anda sendiri.
 
-**Tidak dilakukan**: Pesan teks tidak akan dikirim kecuali Anda mengaktifkan kutipan.
+**Pilih apa yang akan dibagikan.** Kutipan pesan dinonaktifkan secara default; aktifkan fitur ini untuk tujuan yang Anda percayai.
 
  [Konfigurasikan tujuan pemberitahuan](https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ Pemberitahuan masalah, perubahan obrolan, dan ringkasan harian melalui Apprise: 
 
 Lakukan hashing titik pemeriksaan waktu dengan RFC 3161 dan OpenTimestamps.
 
-**Yang tidak dilakukan** Situs ini tidak menganggap tanda terima kalender yang masih tertunda sebagai cap waktu Bitcoin yang telah dikonfirmasi.
+**Ikuti hasilnya**. Periksa tanggapan otoritas atau tingkatkan tanda terima OpenTimestamps menjadi bukti Bitcoin yang terkonfirmasi.
 
  [Periksa bukti cap waktu](https://phishdestroy.github.io/TgWitness/id/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ Lakukan hashing titik pemeriksaan waktu dengan RFC 3161 dan OpenTimestamps.
 
 Host terpisah menyimpan pengamatan yang telah ditandatangani dan dapat menerbitkan `TGW1` titik pemeriksaan.
 
-**Yang tidak dilakukan** Hal ini tidak menjadikan dua ruang kerja pada satu host pengumpul sebagai saksi yang independen.
+**Pisahkan referensi "**Jalankan TgWitness di host lain" dan pertahankan kunci penandatanganan serta jurnalnya sendiri.
 
  [Siapkan saksi](https://phishdestroy.github.io/TgWitness/id/docs/witness/)
 
@@ -184,7 +187,7 @@ Host terpisah menyimpan pengamatan yang telah ditandatangani dan dapat menerbitk
 
 Lanjutkan setelah restart. Melakukan pemeriksaan ulang dan `coverage.json` menampilkan pesan yang berhasil dipulihkan serta celah-celah yang ada.
 
-**Yang tidak dilakukan** Alat ini tidak merekonstruksi setiap pengeditan yang terlewatkan atau pesan yang hilang.
+**Tinjau interval:** Lihat pesan terkini yang dipulihkan bersamaan dengan gangguan yang tercatat; versi sebelumnya tetap tersedia saat ditangkap.
 
  [Periksa kontinuitas dan celah](https://phishdestroy.github.io/TgWitness/id/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ Peluncuran sumber memerlukan Python 3.11+. Peluncur Windows menawarkan instalasi
 
 [Telusuri rilis](https://github.com/phishdestroy/TgWitness/releases)
 
-Tidak ada Python di Windows? [Unduh paket portabel](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), ekstrak, lalu klik dua kali berkas `TgWitness.cmd`.
+Tidak ada Python di Windows? [Unduh paket portabel](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), ekstrak, lalu klik dua kali berkas `TgWitness.cmd`.
 
 LANGKAH 02
 
@@ -260,7 +263,7 @@ Buka [127.0.0.1:8787](http://127.0.0.1:8787) setelah diluncurkan.
 
 Untuk instalasi dari sumber, tokennya adalah `data/live/panel-token.txt`. Masuk ke Telegram dapat menggunakan pengaturan API bawaan atau pasangan kunci Anda sendiri dari [my.telegram.org](https://my.telegram.org). [Panduan pengaturan lengkap ↗](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/) · [Fitur dan batasan yang diketahui →](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/)
+**TgWitness 0.8.0** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/) · [Fitur dan batasan yang diketahui →](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/)
 
 ## Petunjuk yang jelas. Langkah selanjutnya yang bermanfaat.
 

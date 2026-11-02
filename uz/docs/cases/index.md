@@ -4,19 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/cases/
 
 Kanallar, guruhlar, shaxsiy suhbatlar va botlar bo'ylab butun ishni yuritish: dalillarni to'plash, bog'lash, qayta tiklash va topshirish.
 
-Ushbu bosqichma-bosqich ko'rsatma bir xayoliy hodisani to'liq hisob yozuvi orqali kuzatadi. U haqiqiy yig'ish, qidiruv, foydalanuvchi profil va eksport funksiyalaridan foydalanadi. Ish xaritasi hujjat misolidir; sizning xulosalaringiz va ish reyestri ilovadan tashqarida saqlanadi.
+Ushbu bosqichma-bosqich ko'rsatma bir xayoliy hodisani boshidan oxirigacha kuzatadi. Manba yozuvlarini topish uchun yig'ish, qidiruv va odam profillaridan foydalaning, ularni tartibga solish va muhokama qilish uchun [Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/case-board/)'dan, natijalarni taqdim etish uchun [Report Studio](https://phishdestroy.github.io/TgWitness/uz/docs/reports/)'dan foydalaning. Quyidagi illyustratsiyalangan xarita ushbu misoldagi bog'liqliklarni tushuntiradi.
 
 KO'RILGAN ISH / O'ZGARTIRILGAN TO'LOV MANZILI
 
 ### Bir hodisa. To'rt suhbat. Qoldiq izni qayta tiklash.
 
-Kanal e'lonida botga havola qilinadi. Operatsiyalar guruhi yangi to'lov havolasini muhokama qiladi. Xususiy keyingi xabar uni takrorlaydi. Keyinroq e'lon tahrirlanadi va guruh xabari yo'qoladi.
+Kanal e'lonida botga havola beriladi. Operatsiyalar guruhi yangi to'lov havolasini muhokama qiladi va bot uni ko'rsatadi. E'lon tahrirlanadi, shaxsiy keyingi xabar manzilni takrorlaydi va guruh xabari yo'qoladi.
 
 Har bir versiyani kim joyladi?Havo kim paydo bo'ldi?Qaysi fayl saqlangan?Nima o'zgardi va qachon?
 
 Tarixni yuklash, ixtiyoriy AI manba tekshiruvi, MCP, OCR va chiquvchi webhooks uchun [Work the archive bo'limiga](https://phishdestroy.github.io/TgWitness/uz/docs/archive/) qarang.
 
 ## 1. Butun hisob bo'ylab qamrovni o'rnatish
+
+Butun akkaunt doirasini qamrab olish uchun maxsus yig'ish akkauntidan foydalaning. Asosiy akkauntlar tanlangan suhbatlarni yoki Telegram papkasini yig'ishi mumkin.
 
 1. [Yig'ish akkauntini o'z ish maydonida ulanib qo'ying](https://phishdestroy.github.io/TgWitness/uz/docs/accounts/). Ishga oid ma'lumotlarga ish referensiyasi, akkaunt ID-si, ish maydoni nomi va imzolash kaliti barmoq izini qoldiring.
 2. Ochiq **manbalar → Kuzatuv doirasi → Tergov rejimi**. **Butun hisobni**, to'rtta manba turini va **o'z harakatlaringizni** ko'rib chiqing. Ushbu oldindan sozlash yangi manbaning profilini va uning so'nggi **200 ta ko'rinadigan xabarini** saqlash imkonini beradi. "**Doirani saqlash"** tugmasini bosing va doirani tasdiqlashni yakunlang.
@@ -33,11 +35,11 @@ Xabarlar · tahrirlar · o'chirish bildirishnomalari · ko'rinadigan munosabatla
 
 ## 2. Tarixni olish va fayllarni saqlash
 
-Butun tergov uchun manba ro'yxatini tuzing. Har bir suhbatga uning raqamli ID-si, sarlavhasi, hisobi, kirish/roli, jonli boshlanishi, tarixni olish, media natijasi va ma'lum bo'shliqlar bilan satr ajrating. Manbani tegishli natijani tekshirgandan keyingina olingan deb belgilang.
+Tergov uchun Case Board to'plamini yarating va tegishli saqlangan yozuvlarni belgilab qo'ying. Ish bilan birga manba ro'yxatini saqlang: har bir suhbatning raqamli ID-si, sarlavhasi, yig'uvchi hisobvarag'i, kirish/roli, jonli boshlanishi, tarixiy ma'lumotlarni olish, media natijasi va ma'lum bo'shliqlar. Tegishli natijani tekshirgach, manbani olingan deb belgilang.
 
 | Kerak | Panelda harakat | U nimani taqdim etadi |
 | --- | --- | --- |
-| Yoqilgan suhbatlardagi tarix | Manbalar → To'liq tarixni yuklash | Joriy asosiy: mavjud eski xabarlar ish maydoni jurnaliga kiritiladi, tanaffus/davom ettirish va imzolangan progress hisobotiga ega. [Tarix bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/). |
+| Yoqilgan suhbatlardagi tarix | Manbalar → To'liq tarixni yuklash | Mavjud avvalgi xabarlar ish maydonining jurnaliga kiritiladi, to'xtatish/davom ettirish va imzolangan ijro hisobotiga ega. [Tarix bo'yicha yo'riqnoma](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/). |
 | Jurnalning mavjud suhbat konteksti | Manbalar → Yozuv sozlamalari → Tarixni snapshot qilish | Yaqinda ko'rinadigan xabarlar imzolangan kuzatuvlar sifatida. Standart maksimal 500; **Parametrlar → Eng katta tarix nusxasi** uni 10 000 gacha oshirishi mumkin. |
 | Hozirda ko'rinadigan bitta suhbatning to'liq tarixi | To'liq suhbat eksporti → To'liq suhbatni eksport qilish, yoki Suhbatlar → Suhbatni eksport qilish | `chat.json` va `chat.html` bilan alohida imzolangan paket. Har bir manba bo'yicha takrorlang; muvaffaqiyat/muvaffaqiyatsizlik natijalarini saqlang. |
 | Yangi suhbat paydo bo'lganda kontekst | Kuzatuv doirasi → Yangi suhbat yoki bot paydo bo'lganda | Manba profil va so'nggi 1 000 ta ko'rinadigan xabar; Tergov rejimi 200 tasini tanlaydi. Mavjud suhbatlarga bu ma'lumot retroaktiv tarzda qo'llanilmaydi. |
@@ -63,9 +65,9 @@ Ushbu nazoratlar haqiqiy Telegram harakatlarini bajaradi. Boshqa Telegram ilovas
 
 ## 4. Suhbatlar bo'ylab odamlar, havolalar va fayllarni kuzatib boring
 
-1. Ochiq **jurnalni** oching, manba filtrini "**Barcha manbalar**"da qoldiring va o'ziga xos ibora, domen, foydalanuvchi nomi yoki saqlangan identifikatorni qidiring. Har bir mos yozuvni oching va uning suhbat IDsi, xabar IDsi hamda jurnal ketma-ketlik raqamini qayd eting.
+1. Open **Journal'ni** oching, manba filtrini "**Barcha manbalar**"da qoldiring va o'ziga xos ibora, domen, foydalanuvchi nomi yoki saqlangan identifikator bo'yicha qidiring. Har bir mos yozuvni oching, so'ngra uning suhbatini, xabar ID'sini va jurnal havolasini ishga qo'shish uchun **"To board**"ni tanlang.
 2. Mavzuga oid suhbatni ochish uchun **Chats → People → Profillarni yoqishni**tanlang, so'ngra shaxsni tanlang. Ism/foydalanuvchi nomi tarixini, javob munosabatlarini, faoliyatni ko'rib chiqing; **shuningdek,** boshqa kuzatilgan suhbat**larda** va olingan havolalarda, hamyonlarda yoki telefon raqamlarida **ham**. Keltirilgan jurnal yozuvlarini oching.
-3. Ushbu ish maydonidagi boshqa suhbatlarda ham xuddi shu raqamli Telegram foydalanuvchi IDni kuzating. Mos keladigan ism, hamyon tilga olinishi yoki o'xshash avatarni tekshirish uchun iz sifatida qabul qiling. Tilga olingan manzil egalikni aniqlamaydi; o'xshash avatar esa bir xil shaxs ekanligini tasdiqlamaydi.
+3. Ushbu ish maydonida Telegram foydalanuvchi ID raqamini boshqa suhbatlarda ham bir xil tarzda qo'llang. Mos keladigan ism, hamyon tilga olinishi yoki shunga o'xshash avatarni tekshirish uchun potentsial ma'lumot sifatida qabul qiling; manba havolalarini va har qanday qo'shimcha tasdiqlovchi ma'lumotlarni saqlang.
 4. Saqlangan ilovalar uchun SHA-256 qiymatlarini yozuvlar bo'ylab solishtiring. Bir xil xeshlar saqlangan fayllarning bayt darajasidagi ekvivalentligini tasdiqlaydi. Kim ularni ulashganligi haqida xulosa qilishdan oldin tegishli xabar va jo'natuvchi yozuvlarini tekshiring.
 
 ISH XARITASI / MANBALARGA E'TIBOR BERINGBadiiy holat · jonli grafika emas
@@ -86,17 +88,17 @@ MAXFIY / KUZATUV**Foydalanuvchi 71001 manzilni takrorlaydi**
 
 Yozuv #205 · xabar #922 Saqlangan fayl kvitasi #209
 
-To'rtta suhbat turli kuzatuvlarni taqdim etadi. Har bir ulanish bo'yicha manba yozuvlarini kuzating; jo'natuvchi aniqlanmagan holda kanal postini 71001 foydalanuvchiga biriktirmang.
+To'rtta suhbat turli kuzatuvlarni taqdim etadi. Har bir ulanish uchun manba yozuvlarini kuzating; kanal postining jo'natuvchisi aniqlanmagan.
 
-Raqamli identifikatorlar va yozuv referensiyalari ushbu qo'llanma uchun ixtiro qilingan. Ushbu xarita qidiruv, profillar va yozuvlarni tekshirish orqali tahlilchining ish jarayonini tushuntiradi; ilova global tergov grafini yaratmaydi.
+Raqamli identifikatorlar va yozuv havolalari ushbu bosqichma-bosqich ko'rsatma uchun ixtiro qilingan. Ushbu tushuntiruvchi xarita qidiruv natijalari, profillar va tekshirilgan yozuvlarni qanday bog'lashni ko'rsatadi; Case Board tegishli kartalar va manba havolalarini saqlaydi.
 
 | Ulanish | Kuzatuvni qo'llab-quvvatlash | Saqlash uchun xulosa |
 | --- | --- | --- |
 | Xuddi shu Telegram akkaunti | Foydalanuvchi ID 71001 #146 guruhida va #205 shaxsiy suhbatida | Ikkala suhbatda ham bir xil jo'natuvchi ID taqdim etilgan. Haqiqiy dunyo identifikatori esa alohida masala bo'lib qoladi. |
-| Takroriy manzil | `pay.example.invalid/new` #146-da, tugma metadatalari #173-da, tahrirlangan post #188 va #205-da | Bir xil manzil to'rt kuzatilgan kontekstda paydo bo'ladi. Bu o'zi uni kim nazorat qilishini aniqlamaydi. |
-| Bir xil fayl baytlari | Tugallangan media kvitansiyalari #151 va #209 dagi SHA-256 qiymatlari teng | Saqlangan ikkita ilova bayt darajasida bir xil. Faqat fayl nomlari yoki miniatura rasmlari buni aniqlay olmaydi. |
+| Takroriy manzil | `pay.example.invalid/new` #146-da, tugma metadatalari #173-da, tahrirlangan post #188 va #205-da | Xuddi shu manzil to'rt kuzatilgan kontekstda paydo bo'ladi. Uning boshqaruvini qo'shimcha manbalardan foydalangan holda aniqlang. |
+| Bir xil fayl baytlari | Tugallangan media kvitansiyalari #151 va #209 dagi SHA-256 qiymatlari teng | Saqlangan ikkita ilova bayt darajasida bir xil. To'liq fayl xeshlari solishtirishni ta'minlaydi. |
 
-Foydalanuvchi profillari mualliflarni o'sha suhbatdagi saqlangan xabarlari bilan qamrab oladi va ularni *bir xil ish maydoni*jurnalidagi boshqa suhbatlarga bog'laydi. Ular to'liq a'zolik katalogi emas. Avatar xeshlari alohida mahalliy keshdan olinadi; profil keltirishlari **Parametrlar → Har bir fakt bo'yicha keltirilgan yozuvlar soni** bo'limida sozlanadigan cheklovga ega.
+Foydalanuvchi profillari kuzatilgan mualliflar va ularning faoliyatini *bir* *xil ish maydoni*jurnalida, ko'ruvchiga ruxsat berilgan suhbatlar doirasida tasvirlaydi. Bu to'liq a'zolik katalogi emas, balki kuzatilgan mualliflar ko'rinishi. **Parametrlar → Har bir fakt bo'yicha keltirilgan manbalar** soni bo'limida qo'llab-quvvatlovchi iqtiboslar sonini sozlang.
 
 ## 5. Ketma-ketlikni qayta tiklang va bo'shliqlarni belgilang
 
@@ -129,11 +131,11 @@ Jurnal ketma-ketligi kelib tushish tartibini ko'rsatadi, lekin albatta Telegram'
 
 Har bir alohida akkaunt uchun ish maydonini qo'shing va doira hamda tarix inventarizatsiyasini takrorlang. Har birining a'zolik/rol va imzolash kaliti barmoq izini qayd eting. Identifikatorlarni ish maydoni va suhbat bo'yicha aniqlang: bir xil xabar raqami global akkauntlararo identifikator hisoblanmaydi.
 
-Holat yozuvlaringiz yoki tahlil vositalaringizdagi tegishli kuzatuvlarni har bir qatordagi hisob va jurnal ma'lumotlarini saqlagan holda solishtiring. TgWitness hozirda ish maydonlari bo'ylab yagona qidiruv, birlashtirilgan vaqt chizig'i, odamlar grafi yoki ish hujjatlari arxivini taqdim etmaydi. Bitta kanal yoki superguruhning ko'p hisobli to'liq eksporti alohida xususiyat bo'lib, bu barcha hisob jurnallarini birlashtirish emas.
+[Hisoblar guruh](https://phishdestroy.github.io/TgWitness/uz/docs/groups/)idan foydalanib, ish holatini ko'rib chiqing, tanlangan sozlamalarni ulashing va hisoblarni birgalikda eksport qiling. Guruh paketi har bir ish maydonining imzolangan jurnali va identifikatorini saqlaydi. Bitta kanal yoki superguruh uchun mos hisoblar to'liq tarixni eksport qilishni ham bo'lishishi mumkin. Ish yozuvlaringizda yoki tahlil vositalaringizda hisoblararo vaqt chizig'ini tuzing, har bir qatordagi ish maydoni va jurnal havolasini saqlab qoling.
 
 Uzoq muddatli ish davomida avvalgi chegaralarni saqlab qolish uchun [mustaqil guvoh](https://phishdestroy.github.io/TgWitness/uz/docs/witness/)ni qo'shing. Hisoblarning qamrab olish yo'llari va ko'rinishini aniqlash uchun boshqariladigan yetkazib berish pilotidan foydalaning.
 
-## 7. To'liq, tekshirilishi mumkin bo'lgan ish paketini yetkazib bering
+## 7. Tekshiriladigan ish paketini yetkazib bering
 
 Har bir ish maydonidan imzolangan jurnal ZIP-faylini eksport qiling. U panel qidiruv filtrlaridan qat'i nazar to'liq yozib olingan jurnalni o'z ichiga oladi. Tegishli odamlar profillarini alohida eksport qiling, har bir to'liq suhbat tarixi paketini saqlang va to'liq ilova dalillarini saqlang.
 
@@ -162,7 +164,7 @@ python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Haqiqiy verifikatsiya natijalarini tekshiring, asl nusxalarni saqlang va topilmalaringiz bilan birga qamrov hisobotini, olishdagi xatoliklarni hamda uzatish yozuvlarini saqlang. Eng yuqori darajadagi ish papkasi va tahlilchi xulosalari tashqarida tuziladi; alohida TgWitness artefaktlari esa o'z imzolariga ega.
+Verifikatsiya natijalarini tekshiring, asl nusxalarni saqlang va topilmalaringiz bilan birga qamrov hisobotini, olish natijalarini hamda uzatish yozuvini saqlang. Topilmalarni Report Studio'da yozing va hisobotga Case Board materialini kiritishni tanlang. Misol uchun yuqori darajadagi papka alohida imzolangan artefaktlarni birlashtiradi. Faqat tanlangan materialga muhtoj qabul qiluvchi uchun [minimal topshirish hujjatini](https://phishdestroy.github.io/TgWitness/uz/docs/handover/) tayyorlang.
 
 ## Boshqa tergovlar uchun ham xuddi shu usulni qo'llang
 
@@ -172,7 +174,7 @@ Haqiqiy verifikatsiya natijalarini tekshiring, asl nusxalarni saqlang va topilma
 
 **Iz:** kanalga yozuv post → saqlangan bot-havola ko'rinishi → bot boshlang'ich parametri → xabarlar va klaviatura versiyalari → har qanday panel tomonidan berilgan callback kvitasi → guruh/shaxsiy keyingi kuzatuv. Har bir manzilni uning manba yozuviga mos keltiring; profil tavsiflarini va yakunlangan media ma'lumotlarini saqlang.
 
-**Taqdim eting:** kuzatilgan taklif va javoblarning vaqt chizig'i, manba havolalari va tasdiqlangan eksportlar. Ko'rsatilgan to'lov havolasi to'lov amalga oshganligiga dalil emas.
+**Taqdim eting:** kuzatilgan taklif va javoblarning vaqt chizig'i, manbaa havolalari va tasdiqlangan eksportlar. Har qanday to'lov yakunlanganligi haqidagi da'voni o'z tranzaksiya yozuvlari bilan qo'llab-quvvatlang.
 
 **Suhbatlararo hodisadan so'ng o'chirib tashlangan xabarlar**
 
@@ -180,7 +182,7 @@ Haqiqiy verifikatsiya natijalarini tekshiring, asl nusxalarni saqlang va topilma
 
 **Iz:** barcha ta'sirlangan suhbatlar → asl xabarlar → yetkazilgan tahrirlar → o'chirish bildirishnomalari yoki keyingi qayta tekshirishda yo'qolish natijalari → saqlangan ilovalar → hodisa atrofidagi qamrov. Mustaqil hisob kuzatuvlarini ularning ko'rsatilgan ko'rinishlari bilan solishtiring.
 
-**Yetkaziladi:** saqlangan versiyalar ketma-ketligi va aniq noma'lum oraliklar. Yo'q bo'lgan tarix xabarini ma'lum bir shaxs uni o'chirganligiga dalil deb qabul qilmang.
+**Yetkazib bering:** saqlangan versiyalar ketma-ketligi va aniq noma'lum oraliklar. O'chirish bildirishnomalari, muvaffaqiyatsiz qayta tekshiruvlar va har qanday shaxsga tegishlilikni alohida qo'llab-quvvatlang.
 
 **Ishtirokchi bir nechta suhbatlarda ismlarini o'zgartiradi**
 
@@ -188,4 +190,4 @@ Haqiqiy verifikatsiya natijalarini tekshiring, asl nusxalarni saqlang va topilma
 
 **Iz:** raqamli jo'natuvchi ID → saqlangan ism/foydalanuvchi nomi tarixi → javoblar → ish maydonidagi boshqa suhbatlar → tilga olingan manzillar va saqlangan fayllar. Har bir da'vo qilingan bog'lanish uchun manba yozuvlarini tekshiring; o'xshash hisoblarni alohida saqlang.
 
-**Taqdim eting:** manbaga tayanib ko'rsatilgan hisob-faoliyat kronologiyasi va munosabatlar haqidagi alohida gipotezalar. Ism o'xshashligi va avatar pHash – bu taxminlar bo'lib, shaxsni isbotlovchi dalil emas.
+**Taqdim eting:** manba ko'rsatilgan hisob-faoliyatining vaqt bo'ylab chizmasini va munosabatlar haqidagi alohida gipotezalarni. Ism o'xshashligi va avatar pHashidan foydalanib, keyingi manba ko'rib chiqish uchun ustuvor yo'nalishlarni tanlang.

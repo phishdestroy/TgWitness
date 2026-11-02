@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 TgWitness 會保存收集帳戶所觀察到的內容，將這些觀察結果 串聯成一份經簽署的日誌，並允許其他人透過可信 金鑰及先前保留的檢查點，對匯出內容進行驗證。
 
-[本地文件網站](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)另提供 互動式範例（網址：`/docs/concepts/`），以及檢查點決策探索工具（網址： `/docs/witness/`）。所有範例訊息、 計數及延遲皆為虛構。鏈式沙盒中的雜湊值係透過 瀏覽器中的 SHA-256 演算法計算得出。任何資料均不會傳送至 Telegram。
+[本地文件網站](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)新增了 位於 `/docs/concepts/` 的互動式範例、位於 `/docs/witness/` 的檢查點決策探索工具，以及關於「[案件看板](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/)」、「 [報告設計](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)」與「[移交摘錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#handover-extract)」的操作指南。 所有範例訊息、 計數值及延遲時間均為虛構。鏈式沙盒中的雜湊值是透過 瀏覽器中的 SHA-256 演算法計算得出。任何資料均不會傳送至 Telegram。
 
 ## 訊息隨之改變；觀察結果不斷累積
 
@@ -92,7 +92,7 @@ Nexport ≥ Ncheckpoint and hexport[Ncheckpoint] = Hcheckpoint
 
 該見證系統會記錄回滾、相同計數下的不同頭部、變更的金鑰、 無效答案及缺失的回應。僅憑計數增加，並不能證明 所有較早的記錄均未被修改；請將匯出內容與保留的 檢查點進行比對。將見證系統部署於另一台主機，可避免受收集器主機中斷的影響； 由獨立的操作員負責，則能提供額外的獨立性。
 
-該「見證者」僅針對收集器所回報的日誌狀態進行認證，並不會 獨立監控所有 Telegram 訊息。請參閱[見證者設定說明](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/)。
+「見證者」會對收集器回報的日誌狀態進行驗證。請使用受控 傳送測試來測量哪些 Telegram 操作已送達至收集帳戶。 請參閱[見證者設定](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/)。
 
 ## 針對已知操作進行測試
 
@@ -106,14 +106,14 @@ R = |observed∩expected| / |expected| Δ t = treceipt - taction
 
 [完整的調查流程指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)將以某起事件為例， 涵蓋頻道、群組、機器人及私人聊天室等情境：
 
-1. 啟用「整個帳戶」調查模式，並清點所有可存取的聊天室。
+1. 在專用的蒐集帳號上，啟用「整個帳號」調查模式，並 清點可存取的聊天室。針對主帳號，可選用特定聊天室或資料夾。
 2. 可取得日誌快照、各聊天室的完整歷史紀錄以及已保存的附件。
 3. 將即時變更及任何有意的面板互動連同其交易憑證一併保留。
 4. 透過引用的記錄及用戶檔案，追蹤數值發送者 ID、回覆關係、重複收件者及檔案 雜湊值。
-5. 重建跨聊天室的時間軸，其中包含時間戳記及明確的空白處。
+5. 在「案件看板」中新增與來源連結的註解及彙整項目。重建跨聊天室 的時間軸，其中須包含時間戳記及明確的空白區段。
 6. 在保持原始來源與金鑰獨立的前提下，比較其他帳戶的工作區。
 7. 彙整並驗證經簽署的日誌、使用者檔案及歷史記錄匯出檔，並附上案件筆記。
 
-該網站的《`/docs/cases/`指南》包含互動式案件地圖，並針對 機器人爭議、已刪除訊息及參與者更名等情況提供多種處理方案。案件筆記 與跨工作區分析屬外部功能；本應用程式不會自動 生成全球調查圖譜或合併案件檔案庫。
+網站的 `/docs/cases/` 指南包含互動式案件地圖，並針對 聊天機器人爭議、已刪除訊息及參與者更名等情況提供不同處理方式。Case Board 將筆記與資料集存放在工作區內。群組匯出功能會分別彙整 各工作區的資料包；跨工作區的關聯分析與整合時間軸仍屬 分析人員的工作範疇。
 
 [已完成驗證與待完成工作](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/) · [匯出與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#investigation-handoff) · [從一個帳戶開始](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)

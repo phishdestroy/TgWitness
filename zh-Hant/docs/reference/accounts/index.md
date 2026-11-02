@@ -226,7 +226,16 @@ TData 即是 Telegram Desktop 應用程式（來自 desktop.telegram.org 的跨�
 
 ### 批次匯入和帳戶群組
 
-使用 **帳戶 → 匯入帳戶** 新增多個帳戶，依基本檔名配對檔案，並查看每次登入的結果。每個帳戶都有獨立的工作區。群組可從範本複製選定的設定，而不會合併工作階段、金鑰或證據。請參閱[匯入和群組指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings)和[MTProxy 集區控制台](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)。
+請使用「**帳戶」→「匯入帳戶」**來新增多個帳戶，根據檔案基名配對檔案 並查看每個登入結果。每個帳戶都會擁有專屬的工作區。
+
+群組可將相關帳戶彙整在一起，同時不會合併其會話、金鑰或 證據。在「**帳戶」**中**開啟「群組」**將導向其頁面： `/groups/<id>`:
+
+- **帳戶:**每位成員的連線路徑、觀察記錄及最後一則訊息，並附有 「**全部**啟動」與「**全部暫停」功能**。
+- **需要注意:**已登出、無法使用，或存在 連線、匯入、來源或媒體問題的帳戶；每個名稱皆可導向其對應的卡片。
+- **多個帳戶可查看的聊天內容包含：** 共享來源、正在監看這些來源的帳戶，以及 可用工作區監看期間（最長七天）內的中斷情況。**使用 N 個帳戶進行匯出時，** 系統會將頻道或超級群組的匯出內容分配至各帳戶，並對單一存檔進行簽署。
+- **匯出群組:**包含一個 ZIP，其中每個帳戶的簽名匯出檔位於 `accounts/` ，並 `manifest.json` 列出其SHA-256與金鑰指紋，並由主 工作區在 `manifest.signature.json`。請使用 `python -m tgwitness.verify` 並使用該帳戶的可信指紋，分別驗證每個帳戶的存檔。
+
+成員共享群組的設定；每個帳號可保留其自身的設定值。 請參閱「[共享設定](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups)」、 [「匯入與群組指南」](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) 以及 [MTProxy 資料池儀表板](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)。
 
 ## 登出
 

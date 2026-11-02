@@ -79,7 +79,7 @@ Optional destinations are configured per workspace. Message text and media are s
 - An administrator of the machine can read everything and rewrite and re-sign the journal. Keep the fingerprint and checkpoints on another system.
 - Message text and media are not encrypted by TgWitness. Use disk encryption and strict permissions.
 - Plain HTTP beyond localhost shows the token on the network. Use HTTPS or an SSH tunnel.
-- Signatures prove what was recorded was not changed, not that every Telegram event was recorded.
+- Check saved records with signatures and checkpoints. Review collection coverage and test delivery for the accounts and sources you use.
 
 [Share access to a case](https://phishdestroy.github.io/TgWitness/docs/access/) with permissions, expiry and session limits. A witness token remains a separate credential.
 

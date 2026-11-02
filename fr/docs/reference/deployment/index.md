@@ -127,7 +127,7 @@ Ce site devient accessible une fois le [workflow de publication](https://phishde
 Copiez `deploy/env.example` vers `.env`. Définissez `TGWITNESS_IMAGE` sur la version publiée, en utilisant le chemin d'accès au dépôt **en minuscules**, par exemple :
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
 TGWITNESS_PORT=8787
 ```
 
@@ -206,7 +206,7 @@ Vérifiez l’accès au panneau de configuration, l’identité du compte, l’�
 
 Le [workflow de publication](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) est prêt à l’emploi dès que ce projet est poussé vers un dépôt GitHub sur lequel les Actions sont activées. Il s’exécute lorsqu’une version GitHub est **publiée**, y compris une préversion. Les brouillons et les poussées de balises ne suffisent pas à eux seuls à publier des paquets.
 
-1. Définissez la version du paquet et le journal des modifications, puis publiez une version portant le tag « `v` » suivi de la version exacte « `pyproject.toml` », par exemple « `v0.7.1` ».
+1. Définissez la version du paquet et le journal des modifications, puis publiez une version portant le tag « `v` » suivi de la version exacte « `pyproject.toml` », par exemple « `v0.8.0` ».
 2. Le workflow valide le tag et exécute les vérifications communes à Windows/Linux/macOS concernant Python, general/account-import/QR browser, le paquet source et Docker. Une nouvelle installation native est également effectuée sur les trois systèmes d'exploitation à l'aide de Python 3.12.
 3. Une fois ces vérifications réussies, le système effectue des tests de fonctionnement sur une image ARM64 sous QEMU, publie les images AMD64/ARM64 sur `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, et joint le fichier ZIP source et le fichier wheel Python avec leurs fichiers SHA-256 associés. Le fichier ZIP portable pour Windows correspond exactement à l'artefact testé par le workflow de vérification ; le workflow de publication télécharge et publie cet artefact ainsi que sa somme de contrôle.
 4. Une tâche finale télécharge à nouveau les trois paquets publiés et vérifie leurs sommes de contrôle. Elle publie ensuite `SHA256SUMS.txt` et `RELEASE-MANIFEST.json`, en enregistrant la version, la révision source et la taille des ressources. Les téléchargements ne remplacent pas les ressources de version existantes.

@@ -226,7 +226,16 @@ TData는 텔레그램 데스크톱 애플리케이션(desktop.telegram.org에서
 
 ### 일괄 가져오기 및 계정 그룹
 
-**계정 → 계정 가져오기**에서 여러 계정을 추가하고, 확장자를 제외한 이름으로 파일을 연결하며, 각 로그인 결과를 확인하세요. 계정마다 별도의 작업 공간이 생성됩니다. 그룹은 세션, 키 또는 증거를 합치지 않고 템플릿에서 선택한 설정을 복사할 수 있습니다. [가져오기 및 그룹 안내](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings)와 [MTProxy 풀 대시보드](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)를 참조하세요.
+**‘계정’ → ‘계정 가져오기’를** 사용하여 여러 계정을 추가하고, 파일의 기본 이름을 기준으로 파일을 매칭하며 각 로그인 결과를 확인할 수 있습니다. 각 계정에는 고유한 작업 공간이 할당됩니다.
+
+그룹은 세션, 키 또는 증거를 병합하지 않고 관련 계정들을 한데 묶어줍니다. **‘계정’** 메뉴의 **‘그룹 열기’를** 클릭하면 해당 페이지로 이동합니다. `/groups/<id>`:
+
+- **계정:** 각 구성원의 접속 경로, 관찰 내용 및 마지막 메시지를 표시하며, **'모두** 시작' 및 **'모두 일시 중지'** 기능이 있습니다.
+- **주의 필요:** 로그아웃되었거나, 사용할 수 없거나, 연결, 입력, 소스 또는 미디어 문제가 있는 계정; 각 이름은 해당 카드로 연결됩니다.
+- **여러 계정이 볼 수 있는 채팅:** 공유된 출처, 이를 관찰하는 계정 및 사용 가능한 작업 공간 관찰 기간(최대 7일) 내의 중단 사항. **N개 계정으로 내보내기 시** , 채널 또는 슈퍼그룹 내보내기 파일을 해당 계정들 간에 분할하고 하나의 아카이브에 서명합니다.
+- **그룹 내보내기:** 각 계정의 서명된 내보내기 파일이 포함된 ZIP 하나씩 `accounts/` 아래에 `manifest.json` 각 계정의 SHA-256 및 키 지문 목록을 포함하며, 이는 메인 워크스페이스에서 `manifest.signature.json`. 각 계정 아카이브는 `python -m tgwitness.verify` 해당 계정의 신뢰할 수 있는 지문으로 개별적으로 검증하십시오.
+
+멤버들은 그룹 설정을 공유하며, 각 계정은 자체 설정을 유지할 수 있습니다. [공유 설정](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [가져오기 및 그룹 가이드](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) 그리고 [MTProxy 풀 대시보드를](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) 참조하세요.
 
 ## 로그아웃
 

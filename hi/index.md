@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/
 
-[ओपन सोर्स / v0.7.1](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/)
+[ओपन सोर्स / v0.8.0](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/)
 
 टेलीग्राम संदेशों को कैप्चर करें, उनके परिवर्तनों को संरक्षित करें, और एक हस्ताक्षरित रिकॉर्ड निर्यात करें।
 
@@ -60,6 +60,8 @@ TgWitness / हस्ताक्षरित निर्यातस्था�
 
 04 / हस्ताक्षरित निर्यात: एक मैनिफेस्ट और एक स्वतंत्र सत्यापक के साथ जर्नल को अपने साथ ले जाएँ।
 
+[Case Board](https://phishdestroy.github.io/TgWitness/hi/docs/case-board/), [रिपोर्ट डिज़ाइन](https://phishdestroy.github.io/TgWitness/hi/docs/reports/) और एक [साझा प्रति](https://phishdestroy.github.io/TgWitness/hi/docs/handover/) के माध्यम से एक सहेजे गए रिकॉर्ड का अनुसरण करें। [खाता समूहों की समीक्षा](https://phishdestroy.github.io/TgWitness/hi/docs/groups/) एक साथ [करें](https://phishdestroy.github.io/TgWitness/hi/docs/groups/)।
+
 01 / कैप्चर
 
 ### आप दायरा चुनते हैं।
@@ -84,7 +86,8 @@ TgWitness / हस्ताक्षरित निर्यातस्था�
 
 [का निर्यात और सत्यापन करें](https://phishdestroy.github.io/TgWitness/hi/docs/exports/)
 
-## एक बाइट बदलें। चेन आपको बताती है।
+## एक बाइट बदलें।
+सत्यापन आपको बताएगा।
 
 प्रत्येक घटना पिछले हैश से जुड़ी होती है और एक Ed25519 हस्ताक्षर रखती है।
 
@@ -94,7 +97,7 @@ TgWitness / हस्ताक्षरित निर्यातस्था�
 
 ![एक अलग से सुरक्षित चेकपॉइंट प्राप्तकर्ता को निर्यात किए गए जर्नल की तुलना पहले के अवलोकन से करने की अनुमति देता है।](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-देखें कि प्रत्येक सत्यापन तंत्र क्या स्थापित करता है, और इसकी सीमाएँ कहाँ तक हैं।
+फ़ाइल हैश से एक अलग रूप से रखे गए चेकपॉइंट तक जांच प्रक्रिया का पालन करें।
 
 [के आठ साक्ष्य स्तरों का अन्वेषण करें](https://phishdestroy.github.io/TgWitness/hi/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ tgwitness-evidence.zipहस्ताक्षरित बंडल
 
   स्वतंत्र सत्यापनहस्ताक्षरित मैनिफेस्ट + स्वतंत्र सत्यापक
 
-हस्ताक्षर एक विश्वसनीय कुंजी के सापेक्ष छेड़छाड़ का पता लगाते हैं। वे टेलीग्राम उत्पत्ति को प्रमाणित नहीं करते और पूर्ण कैप्चर की गारंटी नहीं देते। जर्नल सामग्री और मीडिया के लिए आपके द्वारा प्रदान किया गया एन्क्रिप्टेड भंडारण आवश्यक है।
+प्राप्तकर्ता भरोसेमंद कलेक्टर कुंजी के विरुद्ध सहेजे गए रिकॉर्ड और फ़ाइलों की जाँच करते हैं। एक अलग से रखी गई चेकपॉइंट भी पूर्व जर्नल के साथ निरंतरता की जाँच करती है। [सत्यापन चरणों का अन्वेषण करें।](https://phishdestroy.github.io/TgWitness/hi/docs/concepts/#layers)
 
 ## S3 प्रतियाँ। बाहरी जांचें।
 
@@ -154,13 +157,13 @@ tgwitness-evidence.zipहस्ताक्षरित बंडल
 
 [S3 कॉन्फ़िगर करें और एक प्रति पुनर्स्थापित करें](https://phishdestroy.github.io/TgWitness/hi/docs/exports/#s3)[के सत्यापन विवरण पढ़ें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**क्या नहीं करता** यह निर्यात की गई डिक्रिप्शन कुंजी के बिना पुनर्स्थापित नहीं करता और न ही किसी स्वतंत्र गवाह को प्रतिस्थापित करता है।
+**रिकवरी कुंजी:** निर्यात की गई डिक्रिप्शन कुंजी को अलग से सुरक्षित रखें ताकि आप एन्क्रिप्टेड प्रतिलिपि को पुनर्स्थापित कर सकें।
 
 ### सूचनाएं · अप्राइज़
 
 प्रॉब्लम अलर्ट, चैट में बदलाव और दैनिक सारांश Apprise के माध्यम से: मैसेंजर, ईमेल या आपका अपना JSON वेबहुक।
 
-यह**नहीं करता।** यह संदेश पाठ तब तक नहीं भेजता जब तक आप अंश सक्षम नहीं करते।
+**चुनें कि क्या साझा करना है।** संदेश अंश डिफ़ॉल्ट रूप से बंद होते हैं; उन गंतव्यों के लिए उन्हें सक्षम करें जिन पर आप भरोसा करते हैं।
 
  [सूचना गंतव्यों को कॉन्फ़िगर करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ tgwitness-evidence.zipहस्ताक्षरित बंडल
 
 RFC 3161 और OpenTimestamps के साथ टाइमस्टैम्प चेकपॉइंट हैश।
 
-**क्या नहीं करता** यह लंबित कैलेंडर रसीद को पुष्टि किए गए बिटकॉइन टाइमस्टैम्प के रूप में नहीं मानता।
+**परिणाम की** जाँच **करें,** प्राधिकरण प्रतिक्रिया की पुष्टि करें या OpenTimestamps रसीद को एक पुष्ट Bitcoin प्रमाण में अपग्रेड करें।
 
  [टाइमस्टैम्प प्रमाण देखें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ RFC 3161 और OpenTimestamps के साथ टाइमस्टैम्�
 
 एक अलग होस्ट हस्ताक्षरित अवलोकन रखता है और प्रकाशित कर सकता है `TGW1` चेकपॉइंट्स।
 
-**क्या नहीं करता** यह एक कलेक्टर होस्ट पर दो वर्कस्पेस को स्वतंत्र गवाहों में नहीं बदलता।
+**संदर्भ को अलग करें:** गवाह को किसी अन्य होस्ट पर चलाएँ और उसकी अपनी हस्ताक्षर कुंजी और जर्नल को बनाए रखें।
 
  [एक विटनेस सेट अप करें](https://phishdestroy.github.io/TgWitness/hi/docs/witness/)
 
@@ -184,7 +187,7 @@ RFC 3161 और OpenTimestamps के साथ टाइमस्टैम्�
 
 पुनरारंभ के बाद फिर से शुरू करें। पुनः जाँच और `coverage.json` पुनः प्राप्त संदेश और अंतराल दिखाएँ।
 
-**क्या नहीं करता** यह हर चूके गए संपादन या गायब संदेश को पुनर्निर्मित नहीं करता।
+**अंतराल की समीक्षा करें:** पुनर्प्राप्त वर्तमान संदेशों को दर्ज की गई रुकावटों के साथ देखें; जब कैप्चर किया जाता है तो पुराने संस्करण उपलब्ध रहते हैं।
 
  [निरंतरता और अंतरालों का निरीक्षण करें](https://phishdestroy.github.io/TgWitness/hi/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ cd TgWitness
 
 [रिलीज़ ब्राउज़ करें](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows पर Python नहीं है? [पोर्टेबल पैकेज डाउनलोड करें](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), इसे एक्सट्रेक्ट करें और `TgWitness.cmd` पर डबल-क्लिक करें।
+Windows पर Python नहीं है? [पोर्टेबल पैकेज डाउनलोड करें](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), इसे एक्सट्रेक्ट करें और `TgWitness.cmd` पर डबल-क्लिक करें।
 
 चरण 02
 
@@ -260,7 +263,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 सोर्स इंस्टॉल्स के लिए, टोकन `data/live/panel-token.txt` में है। टेलीग्राम साइन-इन अंतर्निहित API सेटिंग्स या [my.telegram.org](https://my.telegram.org) से आपके अपने जोड़े का उपयोग कर सकता है। [पूर्ण सेटअप गाइड ↗](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
 
-**TgWitness 0.7.1** [क्या नया है →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/) · [विशेषताएँ और ज्ञात सीमाएँ →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/)
+**TgWitness 0.8.0** [क्या नया है →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/) · [विशेषताएँ और ज्ञात सीमाएँ →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/)
 
 ## स्पष्ट निर्देश। एक उपयोगी अगला कदम।
 

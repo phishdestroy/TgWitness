@@ -6,7 +6,7 @@ Rantaian hash, tandatangan, titik pemeriksaan dan saksi dijelaskan dengan formul
 
 TgWitness mengekalkan apa yang diperhatikan oleh akaun pengumpul, memautkan pemerhatian tersebut ke dalam jurnal yang ditandatangani dan membolehkan pihak lain mengesahkan eksport tersebut terhadap kunci yang dipercayai dan checkpoint yang telah disimpan sebelum ini.
 
-[Laman web dokumentasi tempatan](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) menambah contoh interaktif di `/docs/concepts/`, penjelajah keputusan checkpoint di `/docs/witness/`. Semua mesej contoh, kiraan dan kelewatan adalah rekaan. Hashes dalam kotak pasir rantaian dikira menggunakan SHA-256 dalam pelayar. Tiada apa-apa yang dihantar ke Telegram.
+[Laman web dokumentasi tempatan](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) menambah contoh interaktif di `/docs/concepts/`, penjelajah keputusan checkpoint di `/docs/witness/`, dan panduan langkah demi langkah untuk [Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/), [reka bentuk laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-reports/) dan [ekstrak penyerahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#handover-extract). Semua mesej contoh, kiraan dan kelewatan adalah rekaan. Hashes dalam sandbox rantaian dikira dengan SHA-256 dalam pelayar. Tiada apa yang dihantar ke Telegram.
 
 ## Satu mesej berubah; pemerhatian terkumpul
 
@@ -92,7 +92,7 @@ Diyagram aliran · Pengumpul / sesi akaun / kunci A → Titik akhir checkpoint b
 
 Saksi merekodkan rollback, kepala berbeza pada kiraan yang sama, kunci yang diubah, jawapan tidak sah dan respons yang hilang. Kiraan yang lebih besar sahaja tidak membuktikan bahawa setiap rekod terdahulu kekal tidak berubah; bandingkan eksport dengan checkpoint yang disimpan. Saksi pada hos lain mengelakkan perkongsian gangguan hos pengumpul; seorang pengendali berasingan memberikan kebebasan tambahan.
 
-Saksi mengesahkan keadaan jurnal yang dilaporkan oleh pengumpul. Ia tidak memerhati semua mesej Telegram secara bebas. Lihat [tetapan saksi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/).
+Saksi mengesahkan keadaan jurnal yang dilaporkan oleh pengumpul. Gunakan ujian penghantaran terkawal untuk mengukur tindakan Telegram mana yang sampai ke akaun pengumpul. Lihat [tetapan saksi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/).
 
 ## Uji penghantaran terhadap tindakan yang diketahui
 
@@ -106,14 +106,14 @@ Hanya tindakan yang sepadan dengan jangkaan dikira; resit gandaan tidak meningka
 
 [Panduan lengkap penyiasatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/) ini mengikuti satu insiden merentasi saluran, kumpulan, bot dan sembang peribadi:
 
-1. Aktifkan mod siasatan akaun sepenuhnya dan inventori semua sembang yang boleh diakses.
+1. Pada akaun pengumpulan khusus, aktifkan mod Siasatan untuk keseluruhan akaun dan inventori sembang yang boleh diakses. Gunakan sembang terpilih atau folder untuk akaun utama.
 2. Dapatkan snapshot jurnal, sejarah penuh setiap sembang dan lampiran yang disimpan.
 3. Simpan perubahan secara langsung dan sebarang interaksi panel yang disengajakan beserta resitnya.
 4. Ikuti ID penghantar numerik, hubungan balasan, destinasi berulang dan hash fail melalui rekod yang dirujuk dan profil individu.
-5. Membina semula garis masa sembang silang dengan cap masa dan jurang yang jelas.
+5. Tambah nota dan koleksi yang dipautkan kepada sumber dalam Case Board. Rekonstruksi garis masa merentas sembang dengan cap masa dan jurang yang nyata.
 6. Bandingkan ruang kerja akaun lain sambil memisahkan asal usul dan kunci mereka.
 7. Himpunkan dan sahkan jurnal yang ditandatangani, profil dan eksport sejarah dengan nota kes.
 
-Panduan `/docs/cases/` di laman web ini merangkumi peta kes interaktif dan varian untuk pertikaian bot, mesej yang dipadam dan peserta yang menukar nama. Nota kes dan analisis merentas ruang kerja adalah luaran; aplikasi ini tidak secara automatik menjana graf siasatan global atau arkib kes gabungan.
+Panduan `/docs/cases/` di laman web merangkumi peta kes interaktif dan varian untuk pertikaian bot, mesej yang dipadam dan peserta yang menukar nama. Case Board menyimpan nota dan koleksi dalam ruang kerja. Eksport kumpulan mengumpul pakej ruang kerja berasingan; korelasi merentas ruang kerja dan garis masa gabungan kekal sebagai kerja penganalisis.
 
 [Pengesahan yang telah diselesaikan dan kerja yang masih tinggal](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/) · [Eksport dan sahkan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#investigation-handoff) · [Mulakan dengan satu akaun](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)

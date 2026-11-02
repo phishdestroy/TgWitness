@@ -226,7 +226,16 @@ Pressione **+** ao lado do seletor de conta ou abra **Conta → Configurações 
 
 ### Importação em lote e grupos de contas
 
-Use **Contas → Importar contas** para adicionar várias contas, combinar arquivos pelo nome e ver o resultado de cada login. Cada conta recebe seu próprio espaço de trabalho. Os grupos podem copiar configurações selecionadas de um modelo sem unir sessões, chaves ou evidências. Veja [o guia de importação e grupos](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) e [o painel do pool MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+Use **Contas → Importar contas** para adicionar várias contas, emparelhar arquivos pelo nome base e visualizar o resultado de cada login. Cada conta recebe seu próprio espaço de trabalho.
+
+Um grupo mantém contas relacionadas juntas sem mesclar suas sessões, chaves ou evidências. Clicar em **“Grupo aberto”** em **“Contas”** leva à página correspondente em `/groups/<id>`:
+
+- **Contas:** rota de conexão, observações e última mensagem de cada membro, com **“Iniciar tudo”** e **“Pausar tudo**”.
+- **Requer atenção:** contas que foram desconectadas, estão indisponíveis ou apresentam um problema de conexão, entrada, fonte ou mídia; cada nome leva ao respectivo cartão.
+- **Nas conversas de várias contas, é possível ver:** fontes compartilhadas, as contas que as observam e interrupções no período de observação do espaço de trabalho disponível (até sete dias). **A exportação com N contas** divide a exportação de um canal ou supergrupo entre elas e assina um único arquivo.
+- **Exportar grupo:** uma ZIP com a exportação assinada de cada conta em `accounts/` e `manifest.json` listando suas impressões digitais de SHA-256 e chaves, assinadas pelo espaço de trabalho principal em `manifest.signature.json`. Verifique cada arquivo de conta separadamente com `python -m tgwitness.verify` e a impressão digital confiável dessa conta.
+
+Os membros compartilham as configurações do grupo; uma conta pode manter seus próprios valores. Consulte [as configurações compartilhadas](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [o guia de importação e grupos](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) e [o painel de pool MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Sair
 

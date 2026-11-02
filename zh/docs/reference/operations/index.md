@@ -6,6 +6,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/opera
 
 首次连接时，请[使用账户和会话格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/)。 有关保存版本、事件策略和数据缺失的说明，请参阅 [“数据采集原理](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)”。本指南涵盖日常操作和数据恢复。
 
+受管安装包除启动器外，还包含 **、START-HERE.html、**、**、START-HERE.txt 以及**， 其中包含针对其安装路径定制的仓库链接和命令。通过 SSH 运行 `tgwitness guide --print`，或运行 `tgwitness paths` 以定位 实际数据目录。root 级 systemd 安装将私有状态存储在 `/var/lib/tgwitness-…` 中；`/opt/tgwitness` 存放程序本体。
+
+对于托管式临时 Cloudflare 隧道，`tgwitness tunnel off` 将关闭公共 访问，同时本地控制面板和数据收集功能仍继续运行。`tgwitness tunnel on` 将其启用；`tgwitness tunnel restart` 创建新的隧道连接。使用 `tgwitness open` 查看其当前地址。显式关闭设置在 服务重启后仍会保留。`tgwitness stop` 将同时停止控制面板和数据收集功能。
+
 ## 操作员工作流程
 
 流程图 · 选择存储方式和密钥保护方案 → 使用其令牌打开面板; 使用其令牌打开面板 → 选择工作区; 选择工作区 → 配置直连或代理路径; 配置直连或代理路径 → 输入手机号码或选择文件 / QR码; 输入手机号码或选择文件 / QR码 → 验证账户身份并选择可加入的群组; 验证账户身份并选择可加入的群组 → 保存事件和附件策略，然后开始监控; 保存事件和附件策略，然后开始监控 → 监控错误、访问、队列和磁盘; 监控错误、访问、队列和磁盘 → 保留独立检查点; 保留独立检查点 → 导出和验证材料 · 选择存储方式和密钥保护方案 · 使用其令牌打开面板 · 选择工作区 · 配置直连或代理路径 · 输入手机号码或选择文件/ QR码 · 验证账户身份并选择可加入的群组 · 保存事件和附件策略，然后开始监控 · 监控错误、访问、队列和磁盘 · 保留独立检查点 · 导出和验证材料

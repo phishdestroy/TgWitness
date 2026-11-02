@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-i
 
 TgWitness는 수집 계정이 감지한 내용을 보존하고, 이러한 감지 내용을 서명된 기록부에 연결하며, 다른 사용자가 신뢰할 수 있는 키와 이전에 보관된 체크포인트를 기준으로 내보낸 데이터를 검증할 수 있도록 합니다.
 
-이 [지역 문서 웹사이트에는](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) `/docs/concepts/`에 대화형 예제가, `/docs/witness/`에 체크포인트 결정 탐색기가 추가되어 있습니다. 모든 예시 메시지, 횟수 및 지연 시간은 가상의 것입니다. 체인 샌드박스 내의 해시는 브라우저에서 SHA-256을 사용하여 계산됩니다. 텔레그램으로 전송되는 정보는 없습니다.
+[로컬 문서 웹사이트](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)에는 `/docs/concepts/`에 대화형 예시, `/docs/witness/`에 체크포인트 결정 탐색기, 그리고 [Case Board](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-board/), [보고서 설계](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-reports/) 및 [인계 발췌문에](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#handover-extract) 대한 단계별 안내가 추가되어 있습니다. 모든 예시 메시지, 카운트 및 지연 시간은 가상의 것입니다. 체인 샌드박스 내의 해시는 브라우저에서 SHA-256을 사용하여 계산됩니다. 텔레그램으로 전송되는 정보는 없습니다.
 
 ## 메시지가 변경되고, 관찰 기록이 축적됩니다
 
@@ -92,7 +92,7 @@ Nexport ≥ Ncheckpoint and hexport[Ncheckpoint] = Hcheckpoint
 
 이 위트니스는 롤백, 동일한 카운트에서 다른 헤더, 변경된 키, 무효한 응답 및 누락된 응답을 기록합니다. 카운트가 더 크다고 해서 이전 기록이 모두 변경되지 않았다고 단정할 수는 없습니다. 내보낸 데이터를 보존된 체크포인트와 비교해 보십시오. 다른 호스트에 위치한 위트니스는 수집기 호스트의 서비스 중단을 피할 수 있으며, 별도의 운영자가 관리함으로써 추가적인 독립성을 확보할 수 있습니다.
 
-이 ‘witness’는 수집기가 보고한 저널 상태를 인증합니다. 모든 텔레그램 메시지를 독립적으로 관찰하지는 않습니다. [witness 설정 방법을](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/) 참조하십시오.
+위트니스(witness)는 수집기가 보고한 저널 상태를 증명합니다. 제어된 전달 테스트를 사용하여 어떤 텔레그램 작업이 수집 계정에 도달했는지 측정하십시오. [위트니스 설정을](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/) 참조하십시오.
 
 ## 알려진 동작에 대한 테스트 실행
 
@@ -106,14 +106,14 @@ R = |observed∩expected| / |expected| Δ t = treceipt - taction
 
 다음은 채널, 그룹, 봇 및 비공개 채팅 전반에 걸쳐 발생한 사건에 대한 [완전한 조사 절차](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/) 안내입니다:
 
-1. 전체 계정 조사 모드를 활성화하고 접근 가능한 모든 채팅 내역을 목록화하세요.
+1. 전용 수집 계정에서 전체 계정 조사 모드를 활성화하고 접근 가능한 채팅 목록을 작성하십시오. 메인 계정에는 선택한 채팅이나 폴더를 사용하십시오.
 2. 저널 스냅샷, 채팅별 전체 기록 및 보존된 첨부 파일을 확보할 수 있습니다.
 3. 실시간 변경 사항과 의도적인 패널 상호작용을 해당 기록과 함께 보관합니다.
 4. 인용된 기록 및 인물 프로필을 통해 발신자 ID, 답장 관계, 반복되는 수신처 및 파일 해시를 추적합니다.
-5. 타임스탬프와 명확한 공백을 모두 포함하여 채팅 간 타임라인을 재구성합니다.
+5. Case Board에 출처와 연결된 메모 및 수집 항목을 추가하십시오. 타임스탬프와 명시적인 공백을 모두 포함하여 채팅 간 타임라인을 재구성하십시오.
 6. 다른 계정의 작업 공간을 비교하되, 각 계정의 출처와 키는 별도로 유지합니다.
 7. 서명된 기록부, 프로필 및 내역 내보내기 파일을 사건 메모와 함께 통합하고 검증합니다.
 
-이 웹사이트의 ‘`/docs/cases/`’ 가이드에는 대화형 사건 지도와 봇 관련 분쟁, 삭제된 메시지, 참가자 이름 변경 등에 대한 다양한 시나리오가 포함되어 있습니다. 사건 기록 및 워크스페이스 간 분석 기능은 외부에서 제공되며, 이 애플리케이션은 전체 조사 그래프나 통합 사건 아카이브를 자동으로 생성하지 않습니다.
+웹사이트의 `/docs/cases/` 가이드에는 대화형 사건 지도와 봇 분쟁, 삭제된 메시지, 참가자 이름 변경에 대한 다양한 시나리오가 포함되어 있습니다. Case Board는 작업 공간 내에서 메모와 수집 자료를 관리합니다. 그룹 내보내기를 통해 별도의 작업 공간 패키지를 수집할 수 있으며, 작업 공간 간 상관 관계 분석 및 통합 타임라인 작업은 여전히 분석가의 몫입니다.
 
 [완료된 검증 사항 및 남은 작업](https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/) · [내보내기 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#investigation-handoff) · [계정 하나부터 시작하세요](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)

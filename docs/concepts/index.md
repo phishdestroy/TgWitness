@@ -6,6 +6,19 @@ A message can change. The record of what you observed should remain checkable.
 
 Explore two small experiments below. They use fictional messages, stay in your browser and never connect to Telegram.
 
+## From a chat export to a verifiable record
+
+[Telegram Desktop exports](https://telegram.org/blog/export-and-more) save available chat history and media as HTML or JSON for offline use. TgWitness adds an ongoing journal of received changes, signatures on observations and exports, and checkpoints that recipients can compare independently.
+
+| Task | Telegram Desktop export | TgWitness |
+| --- | --- | --- |
+| Read saved conversations | HTML or JSON with selected media | Saved chats, searchable journal and offline reports |
+| Follow a change over time | The history available when exported | Earlier captured versions, later edits and deletion observations retained together |
+| Check files after handover | Standard HTML/JSON export files are unsigned | Signed manifest, per-record signatures and sealed HTML/PDF/JSON reports checked against a trusted collector key |
+| Compare with an earlier retained state | Keep a separate reference copy or hash | Signed checkpoints, a separate witness and optional external timestamps |
+
+The file-signing comparison is based on the [Telegram Desktop export writers](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) reviewed on 2 November 2026. TgWitness signs with the collector’s key; the checks below show how a recipient uses it.
+
 ## One message, three observations
 
 When Telegram delivers a new message, an edit and a deletion notice, the collector appends three separate observations. The edit does not replace the first record. A deletion notice does not erase it.
@@ -107,6 +120,6 @@ Verify the checkpoint signature under the pinned collector key, then compare its
 
 [01 / INTEGRITY**Did this record change?** Verify hashes and signatures against a separately trusted key.](https://phishdestroy.github.io/TgWitness/docs/exports/)[02 / CONTINUITY**What was retained earlier?** Compare a signed export with checkpoints kept by a separate witness.](https://phishdestroy.github.io/TgWitness/docs/witness/)[03 / DELIVERY**Did these test events arrive?** Match controlled send, edit and delete actions against each account’s journal.](https://phishdestroy.github.io/TgWitness/docs/cases/)
 
-A matching hash chain answers an integrity question. It does not establish complete Telegram delivery, the truth of a message or an independently trusted observation time.
+Use signatures to check the retained records, checkpoints to compare an earlier boundary, and controlled delivery tests to measure collection. Each answers a specific question. [Read the verification scope and trust assumptions.](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope)
 
 Follow the [whole-account investigation](https://phishdestroy.github.io/TgWitness/docs/cases/) from acquisition to case package.

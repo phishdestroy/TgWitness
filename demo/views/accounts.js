@@ -94,7 +94,6 @@ export function createAccounts(context) {
     page=Math.min(page,Math.max(0,Math.ceil(filtered.length/10)-1));visible=filtered.slice(page*10,page*10+10);
     const shown=new Set(visible.map(p=>p.id)),cards=new Map([...root.querySelectorAll('.account-card')].map(n=>[n.dataset.profile,n])),box=find('accounts-list');
     for(const card of cards.values()){decorate(card);card.hidden=!shown.has(card.dataset.profile);}
-    // Move only when ordering changes; ordinary status polls retain focus and controls.
     let cursor=box.firstElementChild;
     for(const p of [...filtered,...list.filter(p=>!filtered.includes(p))]){const card=cards.get(p.id);if(!card)continue;
       if(card!==cursor)box.insertBefore(card,cursor);cursor=card.nextElementSibling;}
@@ -107,7 +106,7 @@ export function createAccounts(context) {
     const chosen=profiles().filter(p=>selected.has(p.id)&&eligible(p,action));if(!chosen.length)return;
     const text=action==='stop'?tr('Pause {n} workspaces? New messages, edits and deletions will not be collected while paused. Missed activity can only be recovered partly.',{n:chosen.length}):
       tr('Resume {n} workspaces? They will connect to Telegram and collect their selected sources. Telegram request limits still apply.',{n:chosen.length});
-    if(!window.confirm(text+'\n\n'+chosen.map(p=>p.label).join('\n')))return;
+    if(!(await window.TgWitnessDialogs.confirm(text+'\n\n'+chosen.map(p=>p.label).join('\n'))))return;
     const started=getSession();working=true;updateStatus();const done=[],failed=[];
     try{
       for(const p of chosen){

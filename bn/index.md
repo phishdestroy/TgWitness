@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/
 
-[মুক্ত উৎস / v0.7.1](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/)
+[মুক্ত উৎস / v0.8.0](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/)
 
 টেলিগ্রাম বার্তাগুলো ক্যাপচার করুন, তাদের পরিবর্তন সংরক্ষণ করুন, এবং স্বাক্ষরিত রেকর্ড রপ্তানি করুন।
 
@@ -60,6 +60,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/
 
 ০৪ / স্বাক্ষরিত রপ্তানি: একটি ম্যানিফেস্ট এবং একজন স্বাধীন যাচাইকারীর সঙ্গে আপনার জার্নালটি সঙ্গে রাখুন।
 
+[Case Board](https://phishdestroy.github.io/TgWitness/bn/docs/case-board/), [রিপোর্ট ডিজাইন](https://phishdestroy.github.io/TgWitness/bn/docs/reports/) এবং একটি [শেয়ারিং কপির](https://phishdestroy.github.io/TgWitness/bn/docs/handover/) মাধ্যমে সংরক্ষিত রেকর্ড অনুসরণ করুন। একসঙ্গে [অ্যাকাউন্ট গ্রুপগুলি পর্যালোচনা করুন](https://phishdestroy.github.io/TgWitness/bn/docs/groups/)।
+
 ০১ / ক্যাপচার
 
 ### আপনি পরিসর নির্বাচন করুন।
@@ -84,7 +86,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/
 
 [রপ্তানি এবং যাচাই করুন](https://phishdestroy.github.io/TgWitness/bn/docs/exports/)
 
-## একটি বাইট পরিবর্তন করুন। চেইন আপনাকে বলবে।
+## একটি বাইট পরিবর্তন করুন।
+যাচাইকরণ আপনাকে জানিয়ে দেবে।
 
 প্রতিটি ইভেন্ট পূর্ববর্তী হ্যাশের সাথে সংযুক্ত এবং একটি Ed25519 স্বাক্ষর বহন করে।
 
@@ -94,7 +97,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/
 
 ![একটি পৃথকভাবে সংরক্ষিত চেকপয়েন্ট প্রাপককে রপ্তানি করা জার্নালকে পূর্বের পর্যবেক্ষণের সাথে তুলনা করার সুযোগ দেয়।](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-দেখুন প্রতিটি যাচাইকরণ প্রক্রিয়া কী প্রতিষ্ঠা করে এবং এর সীমাবদ্ধতা কোথায় রয়েছে।
+ফাইল হ্যাশ থেকে পৃথকভাবে সংরক্ষিত চেকপয়েন্ট পর্যন্ত চেকগুলি অনুসরণ করুন।
 
 [-এর আটটি প্রমাণ স্তর অন্বেষণ করুন](https://phishdestroy.github.io/TgWitness/bn/guides/modes.html#levels)
 
@@ -116,7 +119,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/
 
   স্বতন্ত্র যাচাইকরণস্বাক্ষরিত ম্যানিফেস্ট + স্বতন্ত্র যাচাইকারী
 
-স্বাক্ষরগুলো একটি বিশ্বস্ত কী-এর তুলনায় হস্তক্ষেপ সনাক্ত করে। এগুলো টেলিগ্রামের উৎস প্রমাণ করে না বা সম্পূর্ণ ধারণের নিশ্চয়তা দেয় না। জার্নাল বিষয়বস্তু এবং মিডিয়ার জন্য আপনাকে এনক্রিপ্ট করা স্টোরেজ প্রদান করতে হবে।
+প্রাপ্তরা সংরক্ষিত রেকর্ড এবং ফাইলগুলো একটি বিশ্বস্ত কালেক্টর কী-র বিরুদ্ধে যাচাই করে। পৃথকভাবে সংরক্ষিত একটি চেকপয়েন্ট পূর্ববর্তী জার্নালের ধারাবাহিকতাও পরীক্ষা করে। [যাচাইকরণ ধাপগুলো অন্বেষণ করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/concepts/#layers)
 
 ## S3 কপি। বাহ্যিক যাচাইকরণ।
 
@@ -154,13 +157,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/
 
 [S3 কনফিগার করুন এবং একটি কপি পুনরুদ্ধার করুন](https://phishdestroy.github.io/TgWitness/bn/docs/exports/#s3)[-এর যাচাইকরণ বিবরণ পড়ুন।](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-করে না। রপ্তানি করা ডিক্রিপশন কী ছাড়া এটি পুনরুদ্ধার করে না বা একটি স্বাধীন সাক্ষীকে প্রতিস্থাপন করে না।
+**রিকভারি কী:** এনক্রিপ্ট করা কপি পুনরুদ্ধার করার জন্য রপ্তানি করা ডিক্রিপশন কীটি আলাদাভাবে সংরক্ষণ করুন।
 
 ### অবহিতকরণ · অবহিত করা
 
 সমস্যা সতর্কতা, চ্যাট পরিবর্তন এবং দৈনিক সারসংক্ষেপ Apprise-এর মাধ্যমে: মেসেঞ্জার, ইমেইল বা আপনার নিজস্ব JSON ওয়েবহুক।
 
-**করে না।** আপনি যদি উদ্ধৃতিগুলি সক্ষম না করেন তবে এটি বার্তার টেক্সট পাঠায় না।
+**কি শেয়ার করবেন তা নির্বাচন করুন:** বার্তার উদ্ধৃতিসমূহ ডিফল্টভাবে বন্ধ থাকে; আপনি বিশ্বাস করেন এমন গন্তব্যের জন্য সেগুলো সক্রিয় করুন।
 
  [নোটিফিকেশন গন্তব্যসমূহ কনফিগার করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#notifications)
 
@@ -168,7 +171,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/
 
 RFC 3161 এবং OpenTimestamps ব্যবহার করে টাইমস্ট্যাম্প চেকপয়েন্ট হ্যাশ।
 
-**করে না** এটি একটি পেন্ডিং ক্যালেন্ডার রসিদকে নিশ্চিত বিটকয়েন টাইমস্ট্যাম্প হিসেবে গণ্য করে না।
+**ফলাফল অনুসরণ করুন,** কর্তৃপক্ষের প্রতিক্রিয়া যাচাই করুন অথবা OpenTimestamps রসিদকে একটি নিশ্চিত বিটকয়েন প্রমাণে আপগ্রেড করুন।
 
  [টাইমস্ট্যাম্প প্রমাণগুলি পরীক্ষা করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/timestamp/)
 
@@ -176,7 +179,7 @@ RFC 3161 এবং OpenTimestamps ব্যবহার করে টাইম�
 
 একটি পৃথক হোস্ট স্বাক্ষরিত পর্যবেক্ষণ সংরক্ষণ করে এবং `TGW1` চেকপয়েন্ট প্রকাশ করতে পারে।
 
-**করে না** এটি একটি কালেক্টর হোস্টে থাকা দুইটি ওয়ার্কস্পেসকে স্বাধীন সাক্ষ্যে পরিণত করে না।
+**রেফারেন্স আলাদা করুন:** সাক্ষীকে অন্য হোস্টে চালান এবং এর নিজস্ব স্বাক্ষর কী ও জার্নাল সংরক্ষণ করুন।
 
  [নামে একটি সাক্ষী সেট আপ করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/witness/)
 
@@ -184,7 +187,7 @@ RFC 3161 এবং OpenTimestamps ব্যবহার করে টাইম�
 
 পুনরায় শুরু করার পর পুনরায় শুরু করুন। পুনরায় যাচাইকরণ এবং `coverage.json` পুনরুদ্ধারকৃত বার্তা এবং ফাঁকগুলি দেখায়।
 
-**করে না:** এটি প্রতিটি মিস করা সম্পাদনা বা অদৃশ্য হয়ে যাওয়া বার্তা পুনর্গঠন করে না।
+**ইন্টারভাল পর্যালোচনা করুন:** পুনরুদ্ধারকৃত বর্তমান বার্তাগুলো রেকর্ডকৃত বিঘ্নগুলোর পাশে দেখুন; পূর্বের সংস্করণগুলো ধারণের সময় থেকে উপলব্ধ থাকে।
 
  [অব্যাহততা এবং ফাঁক পরিদর্শন করুন](https://phishdestroy.github.io/TgWitness/bn/guides/modes.html#continuity)
 
@@ -225,7 +228,7 @@ cd TgWitness
 
 [রিলিজগুলো ব্রাউজ করুন](https://github.com/phishdestroy/TgWitness/releases)
 
-উইন্ডোজে পাইথন নেই? [পোর্টেবল প্যাকেজটি ডাউনলোড করুন](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), এটি এক্সট্র্যাক্ট করুন এবং `TgWitness.cmd`-এ ডাবল-ক্লিক করুন।
+উইন্ডোজে পাইথন নেই? [পোর্টেবল প্যাকেজটি ডাউনলোড করুন](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), এটি এক্সট্র্যাক্ট করুন এবং `TgWitness.cmd`-এ ডাবল-ক্লিক করুন।
 
 ধাপ ০২
 
@@ -260,7 +263,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 সোর্স ইনস্টলের জন্য টোকেনটি `data/live/panel-token.txt`-এ রয়েছে। টেলিগ্রাম সাইন-ইন বিল্ট-ইন API সেটিংস ব্যবহার করতে পারে অথবা [my.telegram.org](https://my.telegram.org) থেকে আপনার নিজস্ব জোড়া ব্যবহার করতে পারে। [সম্পূর্ণ সেটআপ গাইড ↗](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
 
-**টিজিউইটনেস 0.7.1** [নতুন কী →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/) · [বৈশিষ্ট্যসমূহ এবং পরিচিত সীমাবদ্ধতা →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/)
+**টিজিউইটনেস 0.8.0** [নতুন কী →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/) · [বৈশিষ্ট্যসমূহ এবং পরিচিত সীমাবদ্ধতা →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/)
 
 ## স্পষ্ট নির্দেশনা। একটি উপকারী পরবর্তী পদক্ষেপ।
 

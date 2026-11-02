@@ -6,7 +6,7 @@ Penjelasan mengenai rantai hash, tanda tangan, titik pemeriksaan, dan saksi, dis
 
 TgWitness menyimpan apa yang diamati oleh akun pengumpul, menghubungkan pengamatan tersebut ke dalam jurnal yang ditandatangani, dan memungkinkan orang lain memverifikasi ekspor tersebut dengan menggunakan kunci tepercaya serta titik pemeriksaan yang disimpan sebelumnya.
 
-[Situs web dokumentasi lokal](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) ini menambahkan contoh interaktif di `/docs/concepts/`, serta penjelajah keputusan checkpoint di `/docs/witness/`. Semua pesan contoh, jumlah, dan penundaan bersifat fiktif. Hash dalam sandbox rantai dihitung menggunakan SHA-256 di browser. Tidak ada data yang dikirim ke Telegram.
+[Situs web dokumentasi lokal](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) menambahkan contoh interaktif di `/docs/concepts/`, penjelajah keputusan titik pemeriksaan di `/docs/witness/`, serta panduan langkah demi langkah untuk [Case Board](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-board/), [desain laporan](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-reports/), dan [cuplikan serah terima](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#handover-extract). Semua pesan contoh, jumlah, dan penundaan bersifat fiktif. Hash di sandbox rantai dihitung dengan SHA-256 di browser. Tidak ada data yang dikirim ke Telegram.
 
 ## Sebuah pesan berubah; pengamatan terus bertambah
 
@@ -92,7 +92,7 @@ Diagram alur · Pengumpul / sesi akun / kunci A → Titik akhir checkpoint yang 
 
 Witness mencatat rollback, nilai head yang berbeda pada hitungan yang sama, kunci yang diubah, jawaban yang tidak valid, dan respons yang hilang. Hitungan yang lebih besar saja tidak menjamin bahwa setiap catatan sebelumnya tetap tidak berubah; bandingkan ekspor dengan titik pemeriksaan yang disimpan. Witness di host lain menghindari dampak gangguan pada host pengumpul; operator terpisah memberikan kemandirian tambahan.
 
-Witness memverifikasi status jurnal yang dilaporkan oleh pengumpul. Alat ini tidak secara independen memantau semua pesan Telegram. Lihat [pengaturan Witness](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/).
+Saksi membuktikan status jurnal yang dilaporkan oleh pengumpul. Gunakan uji pengiriman terkontrol untuk mengukur tindakan Telegram mana yang sampai ke akun pengumpul. Lihat [pengaturan saksi](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/).
 
 ## Pengujian pengiriman terhadap tindakan yang diketahui
 
@@ -106,14 +106,14 @@ Hanya tindakan yang sesuai dengan yang diharapkan yang dihitung; tanda terima ga
 
 [Panduan penyelidikan lengkap](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/) berikut ini menguraikan alur kejadian yang terjadi di saluran, grup, bot, dan obrolan pribadi:
 
-1. Aktifkan mode Investigasi seluruh akun dan inventarisasi setiap obrolan yang dapat diakses.
+1. Pada akun pengumpulan khusus, aktifkan mode Investigasi seluruh akun dan buat inventaris obrolan yang dapat diakses. Gunakan obrolan yang dipilih atau folder untuk akun utama.
 2. Peroleh cuplikan jurnal, riwayat lengkap per obrolan, dan lampiran yang disimpan.
 3. Simpan perubahan secara real-time dan setiap interaksi panel yang disengaja beserta bukti transaksinya.
 4. Lacak ID pengirim numerik, hubungan balasan, tujuan yang berulang, dan hash file melalui catatan yang dikutip serta profil pengguna.
-5. Merekonstruksi garis waktu lintas obrolan dengan cap waktu dan celah yang jelas.
+5. Tambahkan catatan dan koleksi yang tertaut ke sumber di Case Board. Rekonstruksi garis waktu lintas obrolan dengan cap waktu dan celah yang jelas.
 6. Bandingkan ruang kerja akun lain sambil tetap memisahkan asal-usul dan kuncinya.
 7. Kumpulkan dan verifikasi jurnal yang telah ditandatangani, profil, serta ekspor riwayat bersama dengan catatan kasus.
 
-Panduan `/docs/cases/` di situs web ini mencakup peta kasus interaktif dan varian-variannya untuk sengketa bot, pesan yang dihapus, dan peserta yang mengganti nama. Catatan kasus serta analisis lintas ruang kerja bersifat eksternal; aplikasi ini tidak secara otomatis menghasilkan grafik investigasi global atau arsip kasus gabungan.
+Panduan di situs web pada bagian `/docs/cases/` mencakup peta kasus interaktif dan varian untuk sengketa bot, pesan yang dihapus, dan peserta yang mengganti nama. Case Board menyimpan catatan dan koleksi di dalam ruang kerja. Ekspor grup mengumpulkan paket ruang kerja terpisah; korelasi lintas ruang kerja dan garis waktu gabungan tetap menjadi tugas analis.
 
 [Validasi yang telah diselesaikan dan pekerjaan yang masih harus dilakukan](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/) · [Ekspor dan verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#investigation-handoff) · [Mulailah dengan satu akun](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
