@@ -5917,5 +5917,40 @@
 "These are observed account references, not verified identities or a complete member list.": "這些是觀察到的帳戶參考，並非經核實的身分或完整的成員清單。",
 "This is a bounded reading copy, not the complete selected journal.": "此為有限閱讀副本，並非完整的選定期刊。",
 "This reading copy shows {n} messages. The viewer and chat.json retain the complete export.": "此閱讀副本顯示 {n} 則訊息。檢視器與 chat.json 保留完整的匯出內容。",
-"Views": "檢視"
+"Views": "檢視",
+"No goal yet: choose one in the group settings.": "尚未設定目標：請在群組設定中選擇一個。",
+"Nothing needs attention.": "無需特別注意。",
+"{n} ms": "{n} 毫秒",
+"not checked": "未核對",
+"Chats several accounts see": "多個帳戶可見的聊天室",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "多個帳戶可共同匯出同一則聊天紀錄：每個帳戶各自擷取其中一部分，而該檔案僅需簽署一次。僅限頻道與超級群組。",
+"No chat is seen by more than one account of this group yet.": "目前尚無任何聊天紀錄被該群組中超過一個帳戶所看見。",
+"none of them records it": "它們都沒有記錄這項內容",
+"not observed in the last {days} days": "過去 {days} 天內未觀察到",
+"no interruptions in {days} days": "{days}天內未曾中斷",
+"{n} of {total} accounts see it": "{n} 個 {total} 個帳戶看到此內容",
+"recording paused": "錄製暫停",
+"Showing {n} of {total}.": "顯示 {n} 筆，共 {total} 筆。",
+"Open group": "開啟群組",
+"{n} interruptions in {days} days": {
+"other": "{days}天內發生{n}次中斷"
+},
+"{n} interruption in {days} days": "{days}天內發生{n}次中斷",
+"Export with {n} accounts": {
+"other": "以 {n} 個帳戶匯出"
+},
+"Export with {n} account": "以 {n} 個帳戶匯出",
+"Export the records of every account in the group {name}?": "是否要匯出群組 {name} 中所有帳戶的記錄？",
+"Group export saved: each account’s signed export and a signed list of them.": "已儲存的群組匯出檔：每個帳戶的簽名匯出檔，以及這些帳戶的簽名清單。",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "每個帳戶的簽名輸出皆封裝於一個 ZIP 檔案中，並附有由主工作區簽名的清單檔案。",
+"Group exported": "已匯出的群組",
+"This group has no accounts to export.": "此群組中沒有可匯出的帳戶。",
+"Every account of the group must be available to export it.": "必須能存取該群組中的每個帳戶，才能將其匯出。",
+"Prepare export": "準備匯出",
+"All accounts and groups": "所有帳戶與群組",
+"Apply a goal": "套用目標",
+"Export group": "匯出群組",
+"Fix": "修正",
+"Share this value": "分享此值",
+"Share this value instead": "請改為分享此值"
 }

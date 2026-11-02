@@ -5917,5 +5917,40 @@
 "These are observed account references, not verified identities or a complete member list.": "이는 관찰된 계정 참조일 뿐, 검증된 신원이나 완전한 회원 목록이 아닙니다.",
 "This is a bounded reading copy, not the complete selected journal.": "이 문서는 전체 선정된 저널이 아닌, 제한된 열람용 사본입니다.",
 "This reading copy shows {n} messages. The viewer and chat.json retain the complete export.": "이 읽기용 사본에는 {n}개의 메시지가 표시됩니다. 뷰어와 chat.json에는 전체 내보내기 내용이 그대로 유지됩니다.",
-"Views": "뷰"
+"Views": "뷰",
+"No goal yet: choose one in the group settings.": "아직 목표가 없습니다: 그룹 설정에서 하나를 선택하세요.",
+"Nothing needs attention.": "특별히 주의할 사항은 없습니다.",
+"{n} ms": "{n}ms",
+"not checked": "확인되지 않음",
+"Chats several accounts see": "여러 계정이 볼 수 있는 채팅",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "여러 계정이 하나의 채팅을 함께 내보낼 수 있습니다. 각 계정이 채팅의 일부를 가져오고, 아카이브는 한 번만 서명됩니다. 채널과 슈퍼그룹에만 해당됩니다.",
+"No chat is seen by more than one account of this group yet.": "아직 이 그룹에 속한 두 개 이상의 계정이 동일한 채팅을 보고 있는 경우는 없습니다.",
+"none of them records it": "이 중 어느 것도 이를 기록하지 않습니다",
+"not observed in the last {days} days": "지난 {days}일 동안 관찰되지 않음",
+"no interruptions in {days} days": "{days}일 동안 중단 없음",
+"{n} of {total} accounts see it": "{total}개 계정 중 {n}개가 이를 확인합니다",
+"recording paused": "기록 일시 중지됨",
+"Showing {n} of {total}.": "{total}개 중 {n}개를 표시 중입니다.",
+"Open group": "그룹 열기",
+"{n} interruptions in {days} days": {
+"other": "{days}일 동안 {n}회의 중단"
+},
+"{n} interruption in {days} days": "{days}일 동안 {n}회의 중단",
+"Export with {n} accounts": {
+"other": "{n}개 계정으로 내보내기"
+},
+"Export with {n} account": "{n}개 계정으로 내보내기",
+"Export the records of every account in the group {name}?": "그룹 {name}에 속한 모든 계정의 기록을 내보내시겠습니까?",
+"Group export saved: each account’s signed export and a signed list of them.": "그룹 내보내기 저장: 각 계정의 서명된 내보내기 파일과 해당 계정 목록의 서명된 파일.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "각 계정의 서명된 내보내기 파일을 하나의 ZIP 파일로 묶은 것으로, 메인 워크스페이스에서 서명한 매니페스트가 포함되어 있습니다.",
+"Group exported": "그룹 내보내기",
+"This group has no accounts to export.": "이 그룹에는 내보낼 계정이 없습니다.",
+"Every account of the group must be available to export it.": "그룹을 내보내려면 그룹에 속한 모든 계정이 사용 가능해야 합니다.",
+"Prepare export": "내보내기 준비",
+"All accounts and groups": "모든 계정 및 그룹",
+"Apply a goal": "목표 적용",
+"Export group": "그룹 내보내기",
+"Fix": "수정",
+"Share this value": "이 값 공유하기",
+"Share this value instead": "대신 이 값을 공유하세요"
 }

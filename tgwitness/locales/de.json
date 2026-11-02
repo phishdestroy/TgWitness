@@ -5974,5 +5974,42 @@
 "These are observed account references, not verified identities or a complete member list.": "Es handelt sich hierbei um beobachtete Kontoverweise, nicht um verifizierte Identitäten oder eine vollständige Mitgliederliste.",
 "This is a bounded reading copy, not the complete selected journal.": "Dies ist eine eingeschränkte Lesekopie, nicht die vollständige Ausgabe der ausgewählten Zeitschrift.",
 "This reading copy shows {n} messages. The viewer and chat.json retain the complete export.": "Diese Lesekopie zeigt {n} Nachrichten an. Der Viewer und die Datei „chat.json“ enthalten den vollständigen Export.",
-"Views": "Ansichten"
+"Views": "Ansichten",
+"No goal yet: choose one in the group settings.": "Noch kein Ziel: Wählen Sie eines in den Einstellungen der Gruppe aus.",
+"Nothing needs attention.": "Es gibt nichts zu beachten.",
+"{n} ms": "{n} ms",
+"not checked": "nicht geprüft",
+"Chats several accounts see": "Chats, die mehrere Konten sehen",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "Mehrere Konten können einen Chat gemeinsam exportieren: Jedes ruft einen Teil davon ab, und das Archiv wird einmal signiert. Nur Kanäle und Supergruppen.",
+"No chat is seen by more than one account of this group yet.": "Bislang wird kein Chat von mehr als einem Konto dieser Gruppe angezeigt.",
+"none of them records it": "Keines davon zeichnet dies auf",
+"not observed in the last {days} days": "in den letzten {days} Tagen nicht beobachtet",
+"no interruptions in {days} days": "{days} Tage ohne Unterbrechungen",
+"{n} of {total} accounts see it": "{n} von {total} Konten sehen dies",
+"recording paused": "Aufzeichnung angehalten",
+"Showing {n} of {total}.": "{n} von {total} werden angezeigt.",
+"Open group": "Gruppe öffnen",
+"{n} interruptions in {days} days": {
+"one": "{n} Unterbrechung in {days} Tagen",
+"other": "{n} Unterbrechungen in {days} Tagen"
+},
+"{n} interruption in {days} days": "{n} Unterbrechung in {days} Tagen",
+"Export with {n} accounts": {
+"one": "Exportieren mit {n} Konto",
+"other": "Export mit {n} Konten"
+},
+"Export with {n} account": "Exportieren mit {n} Konto",
+"Export the records of every account in the group {name}?": "Die Datensätze aller Konten in der Gruppe {name} exportieren?",
+"Group export saved: each account’s signed export and a signed list of them.": "Gruppenexport gespeichert: der signierte Export jedes Kontos und eine signierte Liste dieser Exporte.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "Der signierte Export jedes Kontos in einer ZIP-Datei, mit einem vom Haupt-Workspace signierten Manifest.",
+"Group exported": "Gruppe exportiert",
+"This group has no accounts to export.": "Diese Gruppe enthält keine Konten, die exportiert werden können.",
+"Every account of the group must be available to export it.": "Jedes Konto der Gruppe muss verfügbar sein, damit die Gruppe exportiert werden kann.",
+"Prepare export": "Export vorbereiten",
+"All accounts and groups": "Alle Konten und Gruppen",
+"Apply a goal": "Ziel anwenden",
+"Export group": "Gruppe exportieren",
+"Fix": "Korrektur",
+"Share this value": "Diesen Wert teilen",
+"Share this value instead": "Teilen Sie stattdessen diesen Wert"
 }

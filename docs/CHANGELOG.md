@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Group screen at `/groups/<id>`: accounts, problems, shared chats with coverage, group export.
 - Add Reading series and Ledger & margin to the report builder, with distinct
   HTML and native signed PDF chapters, live preview, account and sharing layouts,
   and DeepL translations. Preserve selected scope and minimized data across designs.

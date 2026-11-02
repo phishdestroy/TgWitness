@@ -192,7 +192,6 @@ class GrantSettings(BaseModel):
     all_workspaces: bool = False
 
     workspaces: dict[str, list[int] | None] = Field(default_factory=dict, max_length=1000)
-    # Account groups: every workspace in them, including ones added to the group later.
     groups: list[str] = Field(default_factory=list, max_length=100)
     ips: list[str] = Field(default_factory=list, max_length=100)
     bind_first_ip: bool = False
@@ -236,7 +235,6 @@ class GrantSettings(BaseModel):
             raise ValueError("Choose at least one workspace for this access.")
         self.permissions = [p for p in PERMISSIONS if p in {"view", *self.permissions}]
         if self.showcase:
-            # A group opens whole accounts, including ones added later; a showcase lists its channels.
             if self.all_workspaces or self.groups or any(chats is None for chats in self.workspaces.values()):
                 raise ValueError("A showcase opens only explicitly selected public channels.")
             if len(self.workspaces) > 16 or sum(len(chats) for chats in self.workspaces.values()) > 64:
@@ -258,7 +256,7 @@ class Principal:
     label: str
     grant: dict | None = None
     session_id: str | None = None
-    group_of: Callable | None = None  # the account group of a workspace, from the main panel
+    group_of: Callable | None = None
 
     @property
     def owner(self):
@@ -597,7 +595,6 @@ class AccessControl:
         LOG.info("Access %s revoked", grant["label"])
 
     def forget_group(self, group_id):
-        """A deleted group opens nothing; accesses that named it stop naming it."""
         with self.lock:
             changed = [g for g in self.grants if group_id in (g.get("groups") or [])]
             for grant in changed:

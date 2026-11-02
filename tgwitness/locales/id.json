@@ -5917,5 +5917,40 @@
 "These are observed account references, not verified identities or a complete member list.": "Ini adalah referensi akun yang diamati, bukan identitas yang terverifikasi atau daftar anggota yang lengkap.",
 "This is a bounded reading copy, not the complete selected journal.": "Ini adalah salinan bacaan terbatas, bukan jurnal terpilih secara lengkap.",
 "This reading copy shows {n} messages. The viewer and chat.json retain the complete export.": "Salinan bacaan ini menampilkan {n} pesan. Penampil dan chat.json mempertahankan ekspor lengkap.",
-"Views": "Tampilan"
+"Views": "Tampilan",
+"No goal yet: choose one in the group settings.": "Belum ada tujuan: pilih salah satu di pengaturan grup.",
+"Nothing needs attention.": "Tidak ada yang perlu diperhatikan.",
+"{n} ms": "{n} ms",
+"not checked": "belum dicentang",
+"Chats several accounts see": "Obrolan yang dapat dilihat oleh beberapa akun",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "Beberapa akun dapat mengekspor satu obrolan secara bersamaan: masing-masing mengambil bagian darinya dan arsip tersebut ditandatangani satu kali. Hanya berlaku untuk saluran dan supergrup.",
+"No chat is seen by more than one account of this group yet.": "Belum ada obrolan yang terlihat oleh lebih dari satu akun dalam grup ini.",
+"none of them records it": "tidak ada satupun yang merekamnya",
+"not observed in the last {days} days": "tidak terdeteksi dalam {days} hari terakhir",
+"no interruptions in {days} days": "tidak ada gangguan selama {days} hari",
+"{n} of {total} accounts see it": "{n} dari {total} akun melihatnya",
+"recording paused": "perekaman dijeda",
+"Showing {n} of {total}.": "Menampilkan {n} dari {total}.",
+"Open group": "Buka grup",
+"{n} interruptions in {days} days": {
+"other": "{n} gangguan dalam {days} hari"
+},
+"{n} interruption in {days} days": "{n} gangguan dalam {days} hari",
+"Export with {n} accounts": {
+"other": "Ekspor dengan {n} akun"
+},
+"Export with {n} account": "Ekspor dengan {n} akun",
+"Export the records of every account in the group {name}?": "Ekspor catatan dari setiap akun dalam grup {name}?",
+"Group export saved: each account’s signed export and a signed list of them.": "Ekspor grup telah disimpan: ekspor yang telah ditandatangani dari setiap akun dan daftar yang telah ditandatangani dari akun-akun tersebut.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "Ekspor yang telah ditandatangani dari setiap akun dalam satu berkas ZIP, dengan manifes yang ditandatangani oleh ruang kerja utama.",
+"Group exported": "Grup yang diekspor",
+"This group has no accounts to export.": "Grup ini tidak memiliki akun yang dapat diekspor.",
+"Every account of the group must be available to export it.": "Setiap akun dalam grup harus tersedia agar grup tersebut dapat diekspor.",
+"Prepare export": "Siapkan ekspor",
+"All accounts and groups": "Semua akun dan grup",
+"Apply a goal": "Terapkan tujuan",
+"Export group": "Ekspor grup",
+"Fix": "Perbaiki",
+"Share this value": "Bagikan nilai ini",
+"Share this value instead": "Bagikan nilai ini sebagai gantinya"
 }

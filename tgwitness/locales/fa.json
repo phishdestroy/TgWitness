@@ -5951,5 +5951,42 @@
 "These are observed account references, not verified identities or a complete member list.": "این‌ها ارجاع به حساب‌های مشاهده‌شده هستند، نه هویت‌های تأییدشده یا فهرست کامل اعضا.",
 "This is a bounded reading copy, not the complete selected journal.": "این یک نسخهٔ خواندنی محدود است، نه کل مجلهٔ منتخب.",
 "This reading copy shows {n} messages. The viewer and chat.json retain the complete export.": "این نسخهٔ خواندنی {n} پیام را نشان می‌دهد. ویوئر و فایل chat.json خروجی کامل را حفظ می‌کنند.",
-"Views": "نماها"
+"Views": "نماها",
+"No goal yet: choose one in the group settings.": "هنوز هیچ هدفی وجود ندارد: یکی را در تنظیمات گروه انتخاب کنید.",
+"Nothing needs attention.": "نیازی به توجه نیست.",
+"{n} ms": "{n} میلی‌ثانیه",
+"not checked": "انتخاب نشده",
+"Chats several accounts see": "گفتگوهایی که چندین حساب می‌بینند",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "چند حساب می‌توانند یک گفتگوی مشترک را به‌صورت یکجا صادر کنند: هر حساب بخشی از آن را دریافت می‌کند و آرشیو تنها یک‌بار امضا می‌شود. فقط برای کانال‌ها و ابرگروه‌ها.",
+"No chat is seen by more than one account of this group yet.": "هنوز هیچ چتی توسط بیش از یک حساب از این گروه مشاهده نشده است.",
+"none of them records it": "هیچ‌کدام از آن‌ها آن را ضبط نمی‌کنند",
+"not observed in the last {days} days": "در {days} روز گذشته مشاهده نشده است",
+"no interruptions in {days} days": "بدون وقفه در {days} روز",
+"{n} of {total} accounts see it": " {n} از {total} حساب آن را می‌بینند",
+"recording paused": "ثبت متوقف شد",
+"Showing {n} of {total}.": "نمایش {n} از {total}.",
+"Open group": "گروه باز",
+"{n} interruptions in {days} days": {
+"one": "{n} وقفه در {days} روز",
+"other": "{n} وقفه در {days} روز"
+},
+"{n} interruption in {days} days": "{n} وقفه در {days} روز",
+"Export with {n} accounts": {
+"one": "صادرات با {n} حساب",
+"other": "صادرات با {n} حساب"
+},
+"Export with {n} account": "صادرات با {n} حساب",
+"Export the records of every account in the group {name}?": "آیا رکوردهای هر حساب در گروه {name} را صادر می‌کنید؟",
+"Group export saved: each account’s signed export and a signed list of them.": "خروجی گروه ذخیره شد: خروجی امضا شده هر حساب و فهرستی امضا شده از آن‌ها.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "خروجی امضا‌شدهٔ هر حساب در یک فایل ZIP، همراه با یک مانیفست امضا‌شده توسط فضای کاری اصلی.",
+"Group exported": "گروه صادرشده",
+"This group has no accounts to export.": "این گروه هیچ حسابی برای خروجی‌گیری ندارد.",
+"Every account of the group must be available to export it.": "هر حساب از گروه باید برای صدور آن در دسترس باشد.",
+"Prepare export": "آماده‌سازی خروجی",
+"All accounts and groups": "تمام حساب‌ها و گروه‌ها",
+"Apply a goal": "اعمال یک هدف",
+"Export group": "صادرات گروه",
+"Fix": "اصلاح",
+"Share this value": "این مقدار را به اشتراک بگذارید",
+"Share this value instead": "به جای آن این مقدار را به اشتراک بگذارید"
 }

@@ -5917,5 +5917,40 @@
 "These are observed account references, not verified identities or a complete member list.": "これらは観測されたアカウントの参照であり、検証済みの身元や完全なメンバーリストではありません。",
 "This is a bounded reading copy, not the complete selected journal.": "これは限定された閲覧用コピーであり、選択されたジャーナルの完全版ではありません。",
 "This reading copy shows {n} messages. The viewer and chat.json retain the complete export.": "この閲覧用コピーには{n}件のメッセージが表示されています。ビューアおよびchat.jsonには、完全なエクスポート内容が保持されています。",
-"Views": "ビュー"
+"Views": "ビュー",
+"No goal yet: choose one in the group settings.": "まだ目標は設定されていません：グループ設定で1つ選択してください。",
+"Nothing needs attention.": "特に注意すべき点はありません。",
+"{n} ms": "{n}ミリ秒",
+"not checked": "未確認",
+"Chats several accounts see": "複数のアカウントが閲覧できるチャット",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "複数のアカウントで1つのチャットをまとめてエクスポートすることができます。各アカウントがその一部を取得し、アーカイブには1回だけ署名が行われます。チャンネルおよびスーパーグループのみ対象です。",
+"No chat is seen by more than one account of this group yet.": "現時点では、このグループの複数のアカウントで同じチャットが表示されているものはありません。",
+"none of them records it": "いずれも記録されません",
+"not observed in the last {days} days": "過去{days}日間、確認されませんでした",
+"no interruptions in {days} days": "{days}日間、中断なし",
+"{n} of {total} accounts see it": "{total}アカウントのうち{n}がこれを閲覧しています",
+"recording paused": "記録を一時停止しました",
+"Showing {n} of {total}.": "{total}件のうち{n}件を表示しています。",
+"Open group": "グループを開く",
+"{n} interruptions in {days} days": {
+"other": "{days}日間で{n}回の中断"
+},
+"{n} interruption in {days} days": "{days}日間で{n}回の中断",
+"Export with {n} accounts": {
+"other": "{n}つのアカウントでエクスポート"
+},
+"Export with {n} account": "{n}つのアカウントでエクスポート",
+"Export the records of every account in the group {name}?": "グループ{name}内のすべてのアカウントの記録をエクスポートしますか？",
+"Group export saved: each account’s signed export and a signed list of them.": "グループのエクスポートが保存されました：各アカウントの署名付きエクスポートデータと、それらの署名付きリストです。",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "各アカウントの署名付きエクスポートデータを1つのZIPファイルにまとめ、メインワークスペースによって署名されたマニフェストを同梱しています。",
+"Group exported": "グループのエクスポート",
+"This group has no accounts to export.": "このグループには、エクスポートするアカウントがありません。",
+"Every account of the group must be available to export it.": "グループをエクスポートするには、そのグループ内のすべてのアカウントが利用可能である必要があります。",
+"Prepare export": "エクスポートの準備",
+"All accounts and groups": "すべてのアカウントとグループ",
+"Apply a goal": "目標を適用する",
+"Export group": "グループのエクスポート",
+"Fix": "修正",
+"Share this value": "この値を共有する",
+"Share this value instead": "代わりにこの値を共有する"
 }

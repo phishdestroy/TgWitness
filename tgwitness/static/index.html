@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="/views/sources.css?v=18">
 <link rel="stylesheet" href="/views/parameters.css?v=21">
 <link rel="stylesheet" href="/views/accounts.css?v=30">
+<link rel="stylesheet" href="/views/group.css?v=1">
 <link rel="stylesheet" href="/views/setup.css?v=3">
 <link rel="stylesheet" href="/views/settings-hub.css?v=3">
 <link rel="stylesheet" href="/views/connection.css?v=1">
@@ -42,7 +43,7 @@
 <script defer src="/media-analysis.js?v=2"></script>
 <script defer src="/webhooks.js?v=2"></script>
 <script defer src="/proxies.js?v=3"></script>
-<script defer src="/fleet.js?v=5"></script>
+<script defer src="/fleet.js?v=6"></script>
 <script defer src="/review.js?v=1"></script>
 <script defer src="/live.js?v=2"></script>
 <script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=4"></script><script defer src="/cloud-capture.js?v=6"></script>
@@ -1533,6 +1534,7 @@
   <details class="accounts-groups" id="accounts-groups"><summary>Groups and shared settings</summary><div id="fleet-groups"></div></details>
   <form class="card padded profile-create" id="account-add-form"><div class="eyebrow">Add account</div><h2>New workspace</h2><p class="muted">Create an isolated workspace, then connect a distinct Telegram account inside it. Importing the same session into two workspaces can disrupt update delivery.</p><label for="account-add-label">Workspace name</label><input id="account-add-label" maxlength="80" placeholder="e.g. Research account 2" required><label for="account-add-group">Group · optional</label><select id="account-add-group"></select><button class="secondary" type="submit">Add workspace</button><p class="hint" id="accounts-limit"></p></form>
 </section>
+<section class="view" hidden id="view-group"></section>
 
 <section class="view" hidden id="view-analysis">
   <div class="page-heading"><div><h1>Ask the archive</h1><p class="page-description" id="analysis-description">Search saved observations, review the sources, then choose whether to use AI.</p></div></div>

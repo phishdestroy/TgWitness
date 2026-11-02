@@ -5951,5 +5951,42 @@
 "These are observed account references, not verified identities or a complete member list.": "ये देखे गए खाते के संदर्भ हैं, सत्यापित पहचान या संपूर्ण सदस्य सूची नहीं।",
 "This is a bounded reading copy, not the complete selected journal.": "यह एक सीमित पठन प्रति है, संपूर्ण चयनित जर्नल नहीं।",
 "This reading copy shows {n} messages. The viewer and chat.json retain the complete export.": "यह रीडिंग कॉपी {n} संदेश दिखाती है। व्यूअर और chat.json पूरा एक्सपोर्ट बनाए रखते हैं।",
-"Views": "दृश्य"
+"Views": "दृश्य",
+"No goal yet: choose one in the group settings.": "अभी कोई लक्ष्य नहीं: समूह सेटिंग्स में से एक चुनें।",
+"Nothing needs attention.": "किसी भी चीज़ पर ध्यान देने की आवश्यकता नहीं है।",
+"{n} ms": "{n} मिलीसेकंड",
+"not checked": "चेक नहीं किया गया",
+"Chats several accounts see": "चैट्स जो कई खाते देखते हैं",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "कई खाते एक साथ एक चैट एक्सपोर्ट कर सकते हैं: प्रत्येक उसका एक हिस्सा प्राप्त करता है और आर्काइव एक बार साइन किया जाता है। केवल चैनल और सुपरग्रुप।",
+"No chat is seen by more than one account of this group yet.": "इस समूह के किसी भी खाते द्वारा अभी तक कोई चैट नहीं देखी गई है।",
+"none of them records it": "इनमें से कोई भी इसे रिकॉर्ड नहीं करता",
+"not observed in the last {days} days": "पिछले {days} दिनों में नहीं देखा गया",
+"no interruptions in {days} days": "{days} दिनों में कोई रुकावट नहीं",
+"{n} of {total} accounts see it": "{n} में से {total} खाते इसे देखते हैं",
+"recording paused": "रिकॉर्डिंग रुकी हुई",
+"Showing {n} of {total}.": "{total} में से {n} दिखा रहा है।",
+"Open group": "समूह खोलें",
+"{n} interruptions in {days} days": {
+"one": "{days} दिनों में {n} रुकावट",
+"other": "{days} दिनों में {n} रुकावटें"
+},
+"{n} interruption in {days} days": "{days} दिनों में {n} रुकावट",
+"Export with {n} accounts": {
+"one": "{n} खाते के साथ निर्यात करें",
+"other": "{n} खातों के साथ निर्यात करें"
+},
+"Export with {n} account": "{n} खाते के साथ निर्यात करें",
+"Export the records of every account in the group {name}?": "{name} समूह में प्रत्येक खाते के रिकॉर्ड निर्यात करें?",
+"Group export saved: each account’s signed export and a signed list of them.": "समूह निर्यात सहेजा गया: प्रत्येक खाते का हस्ताक्षरित निर्यात और उनकी एक हस्ताक्षरित सूची।",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "प्रत्येक खाते का एक ही ZIP फ़ाइल में हस्ताक्षरित निर्यात, मुख्य वर्कस्पेस द्वारा हस्ताक्षरित एक मैनिफ़ेस्ट के साथ।",
+"Group exported": "समूह निर्यातित",
+"This group has no accounts to export.": "इस समूह में निर्यात करने के लिए कोई खाते नहीं हैं।",
+"Every account of the group must be available to export it.": "समूह के प्रत्येक खाते को निर्यात करने के लिए उपलब्ध होना चाहिए।",
+"Prepare export": "निर्यात तैयार करें",
+"All accounts and groups": "सभी खाते और समूह",
+"Apply a goal": "एक लक्ष्य लागू करें",
+"Export group": "समूह निर्यात",
+"Fix": "ठीक करें",
+"Share this value": "इस मान को साझा करें",
+"Share this value instead": "इसके बजाय इस मान को साझा करें"
 }

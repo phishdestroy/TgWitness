@@ -5917,5 +5917,40 @@
 "These are observed account references, not verified identities or a complete member list.": "เหล่านี้เป็นการอ้างอิงบัญชีที่สังเกตได้ ไม่ใช่ตัวตนที่ได้รับการยืนยันหรือรายชื่อสมาชิกที่ครบถ้วน",
 "This is a bounded reading copy, not the complete selected journal.": "นี่เป็นสำเนาอ่านที่มีขอบเขตจำกัด ไม่ใช่ฉบับเต็มของวารสารที่เลือก",
 "This reading copy shows {n} messages. The viewer and chat.json retain the complete export.": "สำเนาอ่านนี้แสดงข้อความ{n} ข้อความ ผู้ชมและไฟล์ chat.json ยังคงเก็บการส่งออกครบถ้วน",
-"Views": "มุมมอง"
+"Views": "มุมมอง",
+"No goal yet: choose one in the group settings.": "ยังไม่มีเป้าหมาย: เลือกหนึ่งข้อในตั้งค่ากลุ่ม",
+"Nothing needs attention.": "ไม่มีส่วนใดที่ต้องแก้ไข",
+"{n} ms": "{n} ms",
+"not checked": "ยังไม่ได้รับการตรวจสอบ",
+"Chats several accounts see": "การสนทนาที่บัญชีหลายบัญชีสามารถเห็นได้",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "หลายบัญชีสามารถส่งออกการสนทนาหนึ่งครั้งร่วมกันได้: แต่ละบัญชีจะดึงข้อมูลส่วนหนึ่งมา และไฟล์เก็บถาวรจะถูกลงนามเพียงครั้งเดียว ใช้ได้เฉพาะกับช่อง (Channels) และกลุ่มใหญ่ (Supergroups) เท่านั้น",
+"No chat is seen by more than one account of this group yet.": "ยังไม่มีบัญชีใดในกลุ่มนี้ที่เห็นการสนทนานี้มากกว่าหนึ่งบัญชี",
+"none of them records it": "ไม่มีเครื่องมือใดที่บันทึกข้อมูลนี้",
+"not observed in the last {days} days": "ไม่พบใน{days}{days} วันที่ผ่านมา",
+"no interruptions in {days} days": "ไม่มีการขัดจังหวะใน{days} วัน",
+"{n} of {total} accounts see it": "{n} ในจำนวน {total} บัญชีเห็นข้อความนี้",
+"recording paused": "การบันทึกถูกหยุดชั่วคราว",
+"Showing {n} of {total}.": "แสดง {n} จาก {total}.",
+"Open group": "เปิดกลุ่ม",
+"{n} interruptions in {days} days": {
+"other": "{n} ครั้งใน{days} วัน"
+},
+"{n} interruption in {days} days": "{n} ครั้งใน{days} วัน",
+"Export with {n} accounts": {
+"other": "ส่งออกข้อมูลพร้อมบัญชี {n} บัญชี"
+},
+"Export with {n} account": "ส่งออกข้อมูลพร้อมบัญชี {n} บัญชี",
+"Export the records of every account in the group {name}?": "ส่งออกข้อมูลบันทึกของทุกบัญชีในกลุ่ม{name}?",
+"Group export saved: each account’s signed export and a signed list of them.": "การส่งออกกลุ่มได้บันทึกแล้ว: ไฟล์ส่งออกที่ลงนามของแต่ละบัญชี และรายชื่อบัญชีเหล่านั้นที่ลงนามแล้ว",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "ไฟล์ส่งออกที่ลงนามของแต่ละบัญชีในไฟล์ ZIP เดียว พร้อมด้วยไฟล์ manifest ที่ลงนามโดยพื้นที่ทำงานหลัก",
+"Group exported": "กลุ่มที่ส่งออก",
+"This group has no accounts to export.": "กลุ่มนี้ไม่มีบัญชีใดที่จะส่งออก",
+"Every account of the group must be available to export it.": "ต้องสามารถเข้าถึงบัญชีทุกบัญชีในกลุ่มได้ เพื่อส่งออกข้อมูลกลุ่มนั้น",
+"Prepare export": "เตรียมการส่งออก",
+"All accounts and groups": "ทุกบัญชีและทุกกลุ่ม",
+"Apply a goal": "กำหนดเป้าหมาย",
+"Export group": "ส่งออกกลุ่ม",
+"Fix": "แก้ไข",
+"Share this value": "แชร์ค่านี้",
+"Share this value instead": "แชร์ค่านี้แทน"
 }

@@ -5951,5 +5951,42 @@
 "These are observed account references, not verified identities or a complete member list.": "Trata-se de referências a contas observadas, não de identidades verificadas ou de uma lista completa de membros.",
 "This is a bounded reading copy, not the complete selected journal.": "Esta é uma cópia de leitura restrita, não a revista selecionada na íntegra.",
 "This reading copy shows {n} messages. The viewer and chat.json retain the complete export.": "Esta cópia de leitura mostra {n} mensagens. O visualizador e o arquivo chat.json mantêm a exportação completa.",
-"Views": "Visualizações"
+"Views": "Visualizações",
+"No goal yet: choose one in the group settings.": "Ainda não há meta: escolha uma nas configurações do grupo.",
+"Nothing needs attention.": "Não há nada que exija atenção.",
+"{n} ms": "{n} ms",
+"not checked": "não verificado",
+"Chats several accounts see": "Conversas que várias contas visualizam",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "Várias contas podem exportar um chat em conjunto: cada uma busca uma parte dele e o arquivo é assinado uma única vez. Apenas canais e supergrupos.",
+"No chat is seen by more than one account of this group yet.": "Nenhuma conversa foi visualizada por mais de uma conta desse grupo até o momento.",
+"none of them records it": "nenhuma delas registra isso",
+"not observed in the last {days} days": "não observado nos últimos {days} dias",
+"no interruptions in {days} days": "sem interrupções há {days} dias",
+"{n} of {total} accounts see it": "{n} de {total} contas veem isso",
+"recording paused": "gravação pausada",
+"Showing {n} of {total}.": "Exibindo {n} de {total}.",
+"Open group": "Abrir grupo",
+"{n} interruptions in {days} days": {
+"one": "{n} interrupção em {days} dias",
+"other": "{n} interrupções em {days} dias"
+},
+"{n} interruption in {days} days": "{n} interrupção em {days} dias",
+"Export with {n} accounts": {
+"one": "Exportar com {n} conta",
+"other": "Exportar com {n} contas"
+},
+"Export with {n} account": "Exportar com {n} conta",
+"Export the records of every account in the group {name}?": "Exportar os registros de todas as contas do grupo {name}?",
+"Group export saved: each account’s signed export and a signed list of them.": "Exportação do grupo salva: a exportação assinada de cada conta e uma lista assinada delas.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "A exportação assinada de cada conta em um arquivo ZIP, com um manifesto assinado pelo espaço de trabalho principal.",
+"Group exported": "Grupo exportado",
+"This group has no accounts to export.": "Este grupo não possui contas para exportar.",
+"Every account of the group must be available to export it.": "Todas as contas do grupo devem estar disponíveis para que ele possa ser exportado.",
+"Prepare export": "Preparar exportação",
+"All accounts and groups": "Todas as contas e grupos",
+"Apply a goal": "Aplicar uma meta",
+"Export group": "Exportar grupo",
+"Fix": "Corrigir",
+"Share this value": "Compartilhar este valor",
+"Share this value instead": "Compartilhe este valor em vez disso"
 }

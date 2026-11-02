@@ -5917,5 +5917,40 @@
 "These are observed account references, not verified identities or a complete member list.": "Đây là các tham chiếu tài khoản được quan sát, không phải danh tính đã được xác minh hay danh sách thành viên đầy đủ.",
 "This is a bounded reading copy, not the complete selected journal.": "Đây là bản sao đọc có giới hạn, không phải là toàn bộ tạp chí đã chọn.",
 "This reading copy shows {n} messages. The viewer and chat.json retain the complete export.": "Bản sao đọc này hiển thị {n} tin nhắn. Trình xem và tệp chat.json vẫn giữ nguyên bản xuất đầy đủ.",
-"Views": "Các chế độ xem"
+"Views": "Các chế độ xem",
+"No goal yet: choose one in the group settings.": "Chưa có mục tiêu nào: hãy chọn một mục tiêu trong cài đặt nhóm.",
+"Nothing needs attention.": "Không có gì cần chú ý.",
+"{n} ms": "{n} ms",
+"not checked": "chưa được kiểm tra",
+"Chats several accounts see": "Các cuộc trò chuyện mà nhiều tài khoản có thể xem",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "Nhiều tài khoản có thể xuất một cuộc trò chuyện cùng nhau: mỗi tài khoản sẽ lấy một phần của cuộc trò chuyện đó và tệp lưu trữ sẽ được ký một lần. Chỉ áp dụng cho các kênh và siêu nhóm.",
+"No chat is seen by more than one account of this group yet.": "Hiện tại, chưa có cuộc trò chuyện nào được hiển thị cho nhiều hơn một tài khoản trong nhóm này.",
+"none of them records it": "không có cái nào ghi lại điều đó",
+"not observed in the last {days} days": "không được ghi nhận trong {days} ngày qua",
+"no interruptions in {days} days": "không có sự gián đoạn trong {days} ngày",
+"{n} of {total} accounts see it": "{n} trong số {total} tài khoản nhìn thấy nó",
+"recording paused": "đang tạm dừng ghi lại",
+"Showing {n} of {total}.": "Hiển thị {n} trong số {total}.",
+"Open group": "Mở nhóm",
+"{n} interruptions in {days} days": {
+"other": "{n} lần gián đoạn trong {days} ngày"
+},
+"{n} interruption in {days} days": "{n} lần gián đoạn trong {days} ngày",
+"Export with {n} accounts": {
+"other": "Xuất với {n} tài khoản"
+},
+"Export with {n} account": "Xuất với {n} tài khoản",
+"Export the records of every account in the group {name}?": "Xuất các bản ghi của mọi tài khoản trong nhóm {name}?",
+"Group export saved: each account’s signed export and a signed list of them.": "Đã lưu bản xuất nhóm: bản xuất đã ký của từng tài khoản và danh sách đã ký của các tài khoản đó.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "Tệp xuất đã ký của từng tài khoản được gói trong một tệp ZIP, kèm theo tệp manifest được ký bởi không gian làm việc chính.",
+"Group exported": "Nhóm đã xuất",
+"This group has no accounts to export.": "Nhóm này không có tài khoản nào để xuất.",
+"Every account of the group must be available to export it.": "Tất cả các tài khoản trong nhóm phải có sẵn thì mới có thể xuất nhóm đó.",
+"Prepare export": "Chuẩn bị xuất",
+"All accounts and groups": "Tất cả các tài khoản và nhóm",
+"Apply a goal": "Áp dụng mục tiêu",
+"Export group": "Xuất nhóm",
+"Fix": "Sửa lỗi",
+"Share this value": "Chia sẻ giá trị này",
+"Share this value instead": "Hãy chia sẻ giá trị này thay thế"
 }

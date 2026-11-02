@@ -5917,5 +5917,40 @@
 "These are observed account references, not verified identities or a complete member list.": "这些是观察到的账户引用，而非经过验证的身份或完整的成员列表。",
 "This is a bounded reading copy, not the complete selected journal.": "这是一份受限阅读副本，并非所选期刊的完整版本。",
 "This reading copy shows {n} messages. The viewer and chat.json retain the complete export.": "此阅读副本显示了{n}条消息。查看器和chat.json文件保留了完整的导出内容。",
-"Views": "视图"
+"Views": "视图",
+"No goal yet: choose one in the group settings.": "尚未设定目标：请在组设置中选择一个。",
+"Nothing needs attention.": "无需特别注意。",
+"{n} ms": "{n}毫秒",
+"not checked": "未核对",
+"Chats several accounts see": "多个账户可见的聊天",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "多个账户可以共同导出一个聊天记录：每个账户分别获取其中的一部分，然后对整个存档进行一次签名。仅限频道和超级群组。",
+"No chat is seen by more than one account of this group yet.": "目前尚无该组中超过一个账户能看到该聊天记录。",
+"none of them records it": "它们都没有记录该内容",
+"not observed in the last {days} days": "在过去 {days} 天内未观察到",
+"no interruptions in {days} days": "{days}天内未中断",
+"{n} of {total} accounts see it": "{n}个账户（总计{total}个）看到了该内容",
+"recording paused": "录制已暂停",
+"Showing {n} of {total}.": "显示 {n} 个，共 {total} 个。",
+"Open group": "打开组",
+"{n} interruptions in {days} days": {
+"other": "{days}天内发生{n}次中断"
+},
+"{n} interruption in {days} days": "{days}天内发生{n}次中断",
+"Export with {n} accounts": {
+"other": "导出 {n} 个账户"
+},
+"Export with {n} account": "导出 {n} 个账户",
+"Export the records of every account in the group {name}?": "导出组{name}中所有账户的记录？",
+"Group export saved: each account’s signed export and a signed list of them.": "已保存的组导出：每个账户的签名导出文件及其签名列表。",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "每个账户的签名导出文件打包在一个 ZIP 文件中，其中包含由主工作区签名的清单文件。",
+"Group exported": "导出组",
+"This group has no accounts to export.": "该组中没有可导出的账户。",
+"Every account of the group must be available to export it.": "必须所有组中的账户均可用，才能导出该组。",
+"Prepare export": "准备导出",
+"All accounts and groups": "所有账户和组",
+"Apply a goal": "应用目标",
+"Export group": "导出组",
+"Fix": "修正",
+"Share this value": "分享此值",
+"Share this value instead": "请分享此值"
 }
