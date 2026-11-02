@@ -9,6 +9,10 @@
   and report failures per account. WARP/WireGuard helpers stay in the data folder,
   use pinned SHA-256 downloads and stop when the owning panel exits.
 
+- Long labels no longer spill on phones: the Sources tabs wrap their text, and the
+  journal's period buttons wrap to a second row instead of five fixed columns. Russian
+  gains the missing route, IP protection and administrator key confirmations; a working
+  part of the status strip reads "Работает" and the custom period "Другое".
 - Added signed HTML, JSON and PDF reports with an offline viewer, verified selections,
   archive sidecars and configurable report contents in all 25 panel languages.
 - Added minimised journal handovers, message details, indicators, collection clock/profile
