@@ -99,13 +99,21 @@ def pdf(lay, data):
         if collection["description"]:
             lay.text(collection["description"], size=9)
         for card in cards:
-            lay.heading(card.get("title") or card["kind"])
+            lay.gap(5)
+            lay.need(32)
+            lay.text(card.get("title") or card["kind"], size=12, style="B")
+            lay.gap(2)
             lay.text(card["access_label"] + " · " + card["at"] + " · " + card["state"], size=8)
             if target := card.get("target"):
                 lay.text("#" + str(target["seq"]) + " · " + target["kind"] + " · " + str(target.get("chat_id")), size=9)
                 quote = card.get("range", {}).get("quote") if card["kind"] == "board.highlight" else (card.get("observation") or {}).get("payload", {}).get("text")
                 if quote:
-                    lay.text(quote, size=10)
+                    lay.gap(2)
+                    if len(quote) <= 800:
+                        lay.need(45)
+                        lay.callout(quote, color=(175,146,90))
+                    else:
+                        lay.text(quote, size=10)
                 if card["kind"] == "board.highlight":
                     lay.text(say("Highlight is tied to this saved version."), size=8)
                 if card.get("dangling"):
@@ -114,7 +122,9 @@ def pdf(lay, data):
                 lay.text(say("Slice recomputed: +{added} / −{removed} records since bookmark.", **card["diff"]), size=9)
                 lay.grid([say("Kind"), say("Records")], [[kind, str(count)] for kind, count in card["current"]["counts"].items()], (75, 25))
             if card.get("note"):
+                lay.gap(2)
                 lay.text(card["note"], size=9)
             for comment in card["comments"]:
+                lay.gap(2)
                 lay.text(comment["access_label"] + " · " + comment["at"], size=8)
                 lay.text(comment["text"], size=9)

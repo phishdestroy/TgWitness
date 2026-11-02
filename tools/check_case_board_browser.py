@@ -4,7 +4,7 @@ import tempfile
 
 from playwright.sync_api import expect, sync_playwright
 
-from check_browser import RunningApp, launch_browser, unlock
+from check_browser import RunningApp, check_layout, launch_browser, unlock
 from tgwitness.access import Principal
 from tgwitness.board import Board
 
@@ -89,6 +89,11 @@ def main():
             expect(page.locator('#view-board h1')).to_have_text('Доска дела')
             expect(page.locator('.board-feed .board-card')).to_have_count(7)
             page.screenshot(path=str(output / 'board-ru.png'))
+            check_layout(page)
+            page.emulate_media(color_scheme='dark')
+            expect(page.locator('html')).to_have_attribute('data-theme','dark')
+            check_layout(page)
+            page.screenshot(path=str(output / 'board-dark.png'))
             page.evaluate('()=>lock()')
             assert page.evaluate("()=>panelRoots.get('board').querySelector('.board-feed').textContent") == ''
             assert not errors, errors

@@ -2256,6 +2256,8 @@ def evidence_chunks(events, coverage=None, context=None):
                                                                          ("verify", say("Verify"))]
         if material.get("analytics"):
             links.insert(1, ("report-analytics", say(report_charts.TITLE)))
+        if (context.get("case_board") or {}).get("cards"):
+            links.insert(2, ("case-board", say("Case Board")))
         if material.get("examination"):
             links.insert(1, ("examination", say(report_charts.REVIEW_TITLE)))
         if material.get("selection"):
