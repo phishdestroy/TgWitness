@@ -13,7 +13,7 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
     warp:tr('Run a local WARP tunnel for this account. TgWitness manages it inside its data folder using wgcf and wireproxy, an unofficial integration. No system VPN or driver is installed.'),
   };
   function status(text, error=false){get('connect-progress').textContent=text;get('connect-progress').classList.toggle('error',error);}
-  function invalidate(){draft=null;plan=null;status('');get('connect-prepare').hidden=true;get('connect-apply').hidden=true;get('connect-review').replaceChildren();}
+  function invalidate(){draft=null;plan=null;status('');get('connect-prepare').hidden=true;get('connect-apply').hidden=true;get('connect-continue').hidden=true;get('connect-review').replaceChildren();}
   function choose(value){
     mode=value;invalidate();
     for(const button of root.querySelectorAll('[data-connect-mode]')){
@@ -65,6 +65,7 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
     const busy=['preparing','applying'].includes(job.state);setBusy(busy);
     get('connect-apply').hidden=job.state!=='ready';get('connect-prepare').hidden=true;
     get('connect-cancel').hidden=!['preparing','ready'].includes(job.state);
+    get('connect-continue').hidden=job.state!=='applied'||job.rows.some(row=>!row.applied||row.error);
     if(job.state==='ready'){
       plan=job.plan;get('connect-step').textContent=tr('3. Review and apply');rows(job.rows);
       status(tr('Connection checked. Review the accounts below, then apply. This preview expires in 10 minutes.'));
@@ -87,6 +88,7 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
       group.replaceChildren(...result.groups.map(g=>{const o=el('option',g.label);o.value=g.id;return o;}));group.value=selected||result.groups[0]?.id||'';
       get('connect-current').textContent=routeName(current.current.mode)+
         (current.current.managed?' · '+tr(current.current.process_running?'Local tunnel running':'Local tunnel stopped'):'');
+      get('connect-toggle').textContent=tr('Connection route')+' · '+routeName(current.current.mode);
       get('connect-check-result').textContent=proof(current.current.check);
       get('connect-stop').hidden=!current.current.managed||!current.current.process_running;
       get('connect-start').hidden=!current.current.managed||current.current.process_running;
@@ -142,6 +144,10 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
   get('connect-cancel').addEventListener('click',e=>action(e.currentTarget,async stamp=>{
     await json('connection/cancel',{},{root:true});if(stamp===generation){invalidate();await load();status(tr('Connection draft discarded. Saved settings were not changed.'));}
   }));
+  get('connect-continue').addEventListener('click',()=>{
+    get('connect-details').open=false;
+    document.getElementById('account-heading')?.scrollIntoView({block:'center',behavior:'smooth'});
+  });
   for(const control of ['start','stop'])get('connect-'+control).addEventListener('click',e=>action(e.currentTarget,async stamp=>{
     if(control==='stop'&&!await askConfirm(tr('Stop this tunnel and pause observation? This account stays offline until you start the tunnel again.'),{confirmText:tr('Stop tunnel')}))return;
     if(stamp!==generation)return;await json('connection/'+control,{});if(stamp===generation){await load();await refreshStatus();}

@@ -18,6 +18,7 @@ def main():
             unlock(page, server)
             navigate_panel(page, 'connection')
             expect(page.locator('#connect-guide')).to_be_visible()
+            page.locator('#connect-toggle').click()
             expect(page.locator('[data-connect-mode]')).to_have_count(5)
             page.locator('[data-connect-mode="proxy"]').click()
             page.locator('#connect-proxy-url').fill('socks5://name:private@proxy.example.org:1080')

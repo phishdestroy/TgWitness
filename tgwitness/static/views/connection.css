@@ -1,4 +1,6 @@
-.connect-guide{grid-column:1/-1;margin:0 0 1.5rem;min-width:0}
+.connect-guide{grid-column:1/-1;margin:0 0 1rem;min-width:0;padding:0;scroll-margin-top:80px}
+.connect-guide>details>summary{padding:16px 24px;cursor:pointer;font-weight:600}
+.connect-body{padding:0 24px 24px}
 .connect-guide .connect-heading{display:flex;justify-content:space-between;align-items:start;gap:1rem;flex-wrap:wrap}
 .connect-guide h2{margin:.3rem 0}.connect-guide h3{margin:1rem 0 .6rem}
 .connect-current{padding:1rem;margin:1rem 0;background:var(--surface-2,var(--bg));border:1px solid var(--line,var(--border));border-radius:12px}

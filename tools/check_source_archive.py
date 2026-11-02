@@ -110,6 +110,25 @@ def check_portable_metadata(root):
     else:
         raise AssertionError("Malformed RECORD was accepted")
     assert (metadata / "direct_url.json").exists(), "Malformed metadata caused partial cleanup"
+    stage = root / "portable"
+    public_profile = stage / "python/Lib/site-packages/fpdf/data/color_profiles/sRGB2014.icc"
+    public_profile.parent.mkdir(parents=True, exist_ok=True)
+    public_profile.write_bytes(b"Synthetic public ICC resource")
+    assert public_profile in portable.release_files(stage)
+    for relative in ("python/Lib/site-packages/fpdf/data/operator.txt",
+                     "python/Lib/site-packages/tgwitness/Data/private.py",
+                     "python/Lib/site-packages/fpdf/data/panel-token.txt"):
+        canary = stage / relative
+        canary.parent.mkdir(parents=True, exist_ok=True)
+        canary.write_bytes(b"PRIVATE_CANARY")
+        try:
+            portable.release_files(stage)
+        except SystemExit:
+            pass
+        else:
+            raise AssertionError("Portable archive accepted private data: " + relative)
+        finally:
+            canary.unlink()
 
 
 def main():

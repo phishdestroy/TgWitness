@@ -990,6 +990,7 @@
 
 <section class="view" hidden id="view-connection">
   <section class="card padded connect-guide" id="connect-guide" aria-labelledby="connect-title" hidden>
+    <details id="connect-details"><summary id="connect-toggle">Connection route</summary><div class="connect-body">
     <div class="connect-heading"><div><div class="eyebrow">Before you connect</div><h2 id="connect-title">Choose how this account connects</h2><p class="hint">Choose a route, check it, then apply. Your saved connection keeps working while you prepare.</p></div><span class="eyebrow" id="connect-step">1. Choose a route</span></div>
     <div class="connect-current"><strong id="connect-current">Current connection</strong><p class="hint" id="connect-check-result" role="status">Not checked yet</p><div class="route-actions"><button type="button" class="secondary" id="connect-check">Check now</button><button type="button" class="secondary" id="connect-start" hidden>Start tunnel</button><button type="button" class="quiet" id="connect-stop" hidden>Stop tunnel</button></div></div>
     <fieldset id="connect-fields"><legend class="sr-only">Connection settings</legend>
@@ -1014,8 +1015,9 @@
       <p id="connect-warp-note" class="hint">Each selected account gets its own local tunnel. Cloudflare chooses the exit address and country; separate tunnels may share an exit IP. WARP does not authenticate message content.</p>
       <details><summary>External requests</summary><label class="check-label"><input type="checkbox" id="connect-outside" checked>Use this route for timestamps, notifications and other requests outside Telegram</label><p class="hint">Applying replaces a separately configured external proxy. MTProxy carries only Telegram, so external requests stay off until you configure their own proxy under Advanced. Proxied routes never fall back to Direct.</p></details>
     </fieldset>
-    <div class="route-actions"><button type="button" class="secondary" id="connect-preview">Review selection</button><button type="button" id="connect-prepare" hidden>Prepare and check</button><button type="button" id="connect-apply" hidden>Apply checked connection</button><button type="button" class="quiet" id="connect-cancel" hidden>Discard draft</button></div>
+    <div class="route-actions"><button type="button" class="secondary" id="connect-preview">Review selection</button><button type="button" id="connect-prepare" hidden>Prepare and check</button><button type="button" id="connect-apply" hidden>Apply checked connection</button><button type="button" class="quiet" id="connect-cancel" hidden>Discard draft</button><button type="button" id="connect-continue" hidden>Continue</button></div>
     <p id="connect-progress" class="hint" role="status" aria-live="polite"></p><div id="connect-review" class="connect-review"></div>
+    </div></details>
   </section>
 <div class="connection-simple">
   <div class="page-heading">
