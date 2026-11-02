@@ -9,6 +9,11 @@ export function createAccessView({root,tr,navigate,localInput,getState}) {
     link.className='secondary';link.dataset.showcaseLink='';link.textContent=tr('Public showcase');
     root.querySelector('.page-heading').append(link);
   }
+  function syncShowcase(){
+    const state=getState();
+    root.querySelector('[data-showcase-link]').hidden=!state.me?.admin||!!state.status?.demo||!!window.TGW_ONLINE_DEMO;
+  }
+  syncShowcase();
   // The ordinary editor does not carry the redaction mode. Keep these grants in
   // their dedicated manager instead of submitting a form that changes their mode.
   root.addEventListener('click',event=>{
@@ -77,7 +82,7 @@ export function createAccessView({root,tr,navigate,localInput,getState}) {
   on(find('access-workspace-picked'),'change',workspaceFilter);
   on(find('access-workspaces'),'change',workspaceFilter);
   on(find('access-all'),'change',workspaceFilter);
-  return {showTab,syncForm,workspaceFilter,enter(){showTab(current);workspaceFilter();},
-    updateStatus(){},leave(){},resetSession(){current='grants';find('access-workspace-search').value='';find('access-workspace-picked').checked=false;showTab(current);},
+  return {showTab,syncForm,workspaceFilter,enter(){showTab(current);workspaceFilter();syncShowcase();},
+    updateStatus:syncShowcase,leave(){},resetSession(){current='grants';find('access-workspace-search').value='';find('access-workspace-picked').checked=false;showTab(current);syncShowcase();},
     destroy(){listeners.abort();}};
 }
