@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Long labels no longer spill on phones: the Sources tabs wrap their text, and the
+  journal's period buttons wrap to a second row instead of five fixed columns. Russian
+  gains the missing route, IP protection and administrator key confirmations; a working
+  part of the status strip reads "Работает" and the custom period "Другое".
 - No consequential action on a single stray click. In Sources the status badge only
   shows the state; pausing, resuming, excluding and removing are in the row menu, each
   with what it does, pausing and excluding are confirmed (also in bulk), and removing a
