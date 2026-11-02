@@ -1530,7 +1530,7 @@ function mediaLimitText(c,short=false){
   if(!on.length)return tr("no attachment types");
   const part=t=>tr("{type} {n} MB",{type:tr(MEDIA_TYPE_LABELS[t]),n:types[t].max_mb});
   if(!short)return on.map(part).join(", ");
-  return on.slice(0,2).map(part).join(" · ")+(on.length>2?" · "+tr("+{n} more",{n:on.length-2}):"");
+  return part(on[0])+(on.length>1?" · "+tr("+{n} more",{n:on.length-1}):"");
 }
 function renderHistory(){
   const s=state.status,h=s?.history||{phase:"none"},phase=h.phase;
@@ -3874,7 +3874,7 @@ function renderChat(){
   const kind={supergroup:tr("Group"),megagroup:tr("Group"),group:tr("Group"),chat:tr("Group"),channel:tr("Channel"),broadcast:tr("Channel"),bot:tr("Bot"),user:tr("Private chat"),private:tr("Private chat")}[info.kind]||termText(info.kind);
   // The counters of /api/chats, with the definitions shared by the chat list and the notifications.
   const split=typeof info.deleted_saved==="number";
-  $("chat-sub").textContent=[kind,tr("{n} saved",{n:(split?info.saved:info.messages||0).toLocaleString()}),
+  $("chat-sub").textContent=$("chat-sub").title=[kind,tr("{n} saved",{n:(split?info.saved:info.messages||0).toLocaleString()}),
     split?(info.deleted_saved?tr("{n} deleted, text kept",{n:info.deleted_saved}):""):(info.deleted?tr("{n} deleted",{n:info.deleted}):""),
     split&&info.deleted_unsaved?tr("{n} deleted before saving",{n:info.deleted_unsaved}):"",
     info.missing?tr("{n} not found on recheck",{n:info.missing}):"",info.edited?tr("{n} edited",{n:info.edited}):""].filter(Boolean).join(" · ");
@@ -3902,7 +3902,7 @@ function renderChatStatus(){
   else say(c.connected?"ok":"warn",c.connected?tr("Observing"):tr("Reconnecting to Telegram"),c.connected?tr("Observing — new messages, edits and deletions are saved as they happen.")+recheckText(c):tr("Reconnecting to Telegram — missed changes are requested again once connected."));
   const mode=node("div","chat-mode-chips");
   for(const [name,label] of [['mode',tr("Mode: {mode}",{mode:recordingMode(s)})],['files',s.capture?.download_media?mediaLimitText(s.capture,true):tr("Files off")]]){
-    const allowed=!s.demo&&viewAllowed('sources'),chip=node(allowed?'button':'span','chat-setting-chip',label);chip.dataset.recording=name;chip.title=modeSummary(s);
+    const allowed=!s.demo&&viewAllowed('sources'),chip=node(allowed?'button':'span','chat-setting-chip',label);chip.dataset.recording=name;chip.title=label+' · '+modeSummary(s);
     if(allowed){chip.type='button';chip.setAttribute('aria-label',label+' · '+tr('Recording settings'));chip.addEventListener('click',()=>busy(chip,openRecordingSettings));}mode.append(chip);
   }
   const filters=node("div","chat-filters");filters.setAttribute("role","group");filters.setAttribute("aria-label",tr("Show messages"));

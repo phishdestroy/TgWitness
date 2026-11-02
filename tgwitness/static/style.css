@@ -921,6 +921,8 @@ button.pill { cursor: pointer; font-family: inherit; }
 .chat-title > div { min-width: 0; }
 .chat-title h2 { font-size: 17px; white-space: normal; overflow-wrap: anywhere; }
 .chat-title p { white-space: normal; }
+/* On narrow screens the counters stay on one line (full text in the tooltip), so the feed keeps its height. */
+@media (max-width: 767px) { .chat-title p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } }
 .chat-actions { flex: none; flex-wrap: nowrap; gap: 6px; }
 .chat-actions select, .chat-actions button { min-height: 34px; font-size: 13px; }
 .chat-actions button { padding: 0 10px; }
