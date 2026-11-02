@@ -143,7 +143,7 @@ Run the pinned collector from your fork, select one chat and download an encrypt
 archive with GitHub provenance. The capture helper is also available under
 **Exports** in the panel.
 
-[Open the capture page](https://phishdestroy.github.io/TgWitness/docs/capture/) · [Instructions](docs/SEALED-ACTIONS.md) · [Русский](docs/ru/SEALED-ACTIONS.md)
+[Open the capture page](https://phishdestroy.github.io/TgWitness/docs/capture/) · [Instructions](docs/SEALED-ACTIONS.md)
 
 </details>
 
@@ -181,7 +181,7 @@ the signed archive. Sharing copies calculate their statistics after minimization
 
 [![Fictional report analytics: activity timeline, heatmap, participants and chats](docs/assets/reports/studio-analytics.png)](docs/CASE_REPORTS.md#report-studio)
 
-[Report design and sample generation](docs/CASE_REPORTS.md) · [Русский](docs/ru/CASE_REPORTS.md)
+[Report design and sample generation](docs/CASE_REPORTS.md)
 
 <details>
 <summary><strong>Inside the signed record</strong> · hashes, signatures and independent checkpoints</summary>
