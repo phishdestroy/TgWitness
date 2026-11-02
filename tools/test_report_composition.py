@@ -84,7 +84,7 @@ def test_signed_composition_and_original_bytes(tmp_path):
             path.write_text(json.dumps(forged),encoding='utf-8')
             with pytest.raises((ValueError,InvalidSignature)):
                 verify_report(path,pin)
-        flags={key:False for key in ('activity_chart','hourly_chart','participant_chart','chat_chart')}
+        flags={key:False for key in ('activity_chart','hourly_chart','participant_chart','chat_chart','composition_chart')}
         without=evidence.export_file(store,vault,'zip',{**options,**flags})
         with zipfile.ZipFile(without) as bundle:
             assert bundle.read('events.jsonl')==original
@@ -97,6 +97,26 @@ def test_signed_composition_and_original_bytes(tmp_path):
             for name in bundle.namelist():
                 assert b'PRIVATE FINDING' not in bundle.read(name), name
             assert 'analytics' not in json.loads(bundle.read('report.json'))['report']
+    finally:
+        store.close()
+
+
+def test_hidden_histories_and_indicators_keep_the_source(tmp_path):
+    vault, store = Vault(tmp_path), Store(tmp_path)
+    store.bind(vault)
+    try:
+        store.append('message.new', {'text': 'https://example.org/original', 'sender_id': 913321}, -1001, 1)
+        store.append('message.edited', {'text': 'https://example.org/revised', 'sender_id': 913321}, -1001, 1)
+        original = sorted(store.events(), key=lambda row: row['seq'])
+        options = {**report.resolved(), 'timeline': False, 'show_changes': False, 'show_indicators': False}
+        hidden = evidence.export_file(store, vault, 'zip', options)
+        with zipfile.ZipFile(hidden) as bundle:
+            html = bundle.read('report.html').decode()
+            assert 'id="changes"' not in html and 'id="indicators"' not in html
+            assert [json.loads(line) for line in bundle.read('events.jsonl').splitlines()] == original
+        shown = evidence.export_file(store, vault, 'html', {**options, 'show_changes': True, 'show_indicators': True})
+        html = shown.read_text(encoding='utf-8')
+        assert 'id="changes"' in html and 'id="indicators"' in html
     finally:
         store.close()
 
