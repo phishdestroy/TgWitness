@@ -1,4 +1,3 @@
-"""Synthetic end-to-end browser acceptance. Never connects to Telegram."""
 import asyncio
 import json
 import hashlib
@@ -57,7 +56,6 @@ class RunningApp:
 
     def __enter__(self):
         self.thread.start()
-        # A cold optional MCP SDK import is slower on Windows CI.
         deadline = time.monotonic() + 45
         try:
             while not self.server.started:
@@ -81,8 +79,6 @@ class RunningApp:
 
 def unlock(page, server, *, start=False):
     if not server.app.state.store.get_setting("demo", False):
-        # Legacy feature checks explicitly skip onboarding and use all controls.
-        # test_settings_hub.py exercises the untouched first-run defaults separately.
         store = server.app.state.store
         if not store.get_setting('first_run', None):
             store.set_setting('first_run', {'skipped': True})
@@ -135,8 +131,6 @@ def unlock(page, server, *, start=False):
     authenticated.value.body()
     expect(page.locator("#workspace")).to_be_visible()
     page.wait_for_function('()=>window.TGW_ONLINE_DEMO||!!document.documentElement.dataset.uiLevel')
-    # Legacy scenario helpers continue into setup through the new task choice.
-    # New landing acceptance keeps the chooser visible with start=True.
     if not start and page.locator('#view-start').is_visible():
         button = page.locator('[data-workflow="investigation"]')
         if button.is_visible():
@@ -146,9 +140,6 @@ def unlock(page, server, *, start=False):
 
 
 def answer_panel_dialog(page, accept=True, text=None):
-    """Answer the panel's own confirm/prompt dialog (static/dialogs.js), which replaced window.confirm/prompt.
-
-    A typed confirmation is filled with the expected name unless another text is given."""
     dialog = page.locator("dialog.panel-dialog[open]")
     expect(dialog).to_have_count(1)
     field = dialog.locator("input")
@@ -162,7 +153,6 @@ def answer_panel_dialog(page, accept=True, text=None):
 
 
 def navigate_panel(page, view):
-    """Use the same navigation on desktop and the mobile menu."""
     button = page.locator(f'.sidebar [data-view="{view}"]')
     if not page.evaluate('!!state.status?.demo'):
         page.wait_for_function('()=>window.TGW_ONLINE_DEMO||!!document.documentElement.dataset.uiLevel')
@@ -196,7 +186,6 @@ def lock_panel(page):
 
 
 def reload_panel(page):
-    """Wait for authenticated bootstrap, separately from the render assertion."""
     requests, errors = [], []
     def response_seen(response):
         if '/api/' in response.url:
@@ -259,7 +248,6 @@ def check_layout(page, connection=False):
 
 
 def hold_api_response(page, path):
-    """Keep the real API response, but let the UI change before its promise resolves."""
     page.evaluate("""path => {
       window.acceptanceFetch=window.fetch;window.releaseAcceptanceResponse=null;
       window.fetch=async(...args)=>{
@@ -281,7 +269,6 @@ def release_api_response(page):
 
 
 def check_journal_messages(page, expected):
-    """Read the dashboard in its active view, then restore the user's screen."""
     previous = page.evaluate("state.view")
     page.evaluate("navigate('observations')")
     expect(page.locator("#view-observations")).to_be_visible()
@@ -366,7 +353,6 @@ def check_reading_states(browser, server):
 
 
 def check_languages(browser, server):
-    """Every shipped string has a translation or explicit English fallback; language choice works."""
     assert i18n.pick(None, None) == i18n.pick(None, "zz-ZZ") == "en"
     assert i18n.pick("en", "ru,en;q=0.5") == "en" and i18n.words("en") == {}
     context = browser.new_context(viewport={"width": 1440, "height": 1060}, reduced_motion="reduce", locale="en-US")
@@ -418,8 +404,6 @@ def check_languages(browser, server):
 
 
 def check_themes(browser, server):
-    """The dark theme keeps text contrast on every view; a chosen theme overrides the system one and persists;
-    motion can be kept on when the system asks for less."""
     context = browser.new_context(viewport={"width": 1440, "height": 1060}, reduced_motion="reduce", color_scheme="dark")
     page, errors = context.new_page(), []
     page.on("pageerror", lambda exc: errors.append(str(exc)))
@@ -532,8 +516,6 @@ def main():
             expect(page.locator("#detail-drawer")).not_to_be_visible()
             page.get_by_role("button", name="All events", exact=True).click()
             page.get_by_role("button", name="Deletions", exact=True).click()
-            # The unfiltered table already contains three deletion icons.
-            # Wait until the filter has replaced all rows before selecting one.
             expect(page.locator("#events-body tr")).to_have_count(3)
             expect(page.locator("#events-body tr:has(.event-icon.delete)")).to_have_count(3)
             page.locator("#events-body tr:has(.event-icon.delete)").first.click()
@@ -786,7 +768,7 @@ def main():
             navigate_panel(page, "connection")
             page.locator('[data-auth-method="files"]').click()
             session_path = run / "synthetic.tgwitness-session"
-            session_path.write_text(saved_session(b"y"), encoding="ascii")  # another account, another key
+            session_path.write_text(saved_session(b"y"), encoding="ascii")
             page.locator("#session-file").set_input_files(session_path)
 
             started = time.monotonic()

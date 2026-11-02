@@ -1,4 +1,3 @@
-"""Check the built public site in Chromium, with no Telegram or external requests."""
 import json
 import os
 from pathlib import Path
