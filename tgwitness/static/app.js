@@ -3184,6 +3184,7 @@ function renderServerHealth(s){
 }
 async function loadExtras(){
   window.TgWitnessServices?.load();
+  window.TgWitnessIndependentCapture?.select();
   await Promise.all([loadWitness(),loadAlerts(),loadEvidence(),loadReplica(),loadAssurance(),loadSourceCheck(),loadSetup(),modesUI?.refresh()]);
 }
 

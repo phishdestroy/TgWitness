@@ -253,8 +253,9 @@ def test_integrated_panel_real_capture_export_and_layout(tmp_path, request):
             page.locator("#capture-ayugram-check").click()
             page.wait_for_timeout(150)
             assert pending
-            page.evaluate("""async()=>{const p=await json('profiles',{label:'Isolated capture workspace'},{root:true});
-                await loadProfiles();await switchProfile(p.id);await navigate('witness');selectExtra('capture');}""")
+            second = page.evaluate("""async()=>{const p=await json('profiles',{label:'Isolated capture workspace'},{root:true});
+                await loadProfiles();return p.id;}""")
+            page.locator('#profile-select').select_option(second)
             pending[0].fulfill(status=200, json={"status": {"fingerprint": recorder.fingerprint}})
             expect(page.locator("#capture-ayugram-status")).to_contain_text("Connection disabled")
             expect(page.locator("#capture-ayugram-pin")).to_have_value("")
