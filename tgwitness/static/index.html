@@ -418,7 +418,7 @@
   <div id="verification-result" role="status"></div>
   <div class="exports-tabs" role="tablist" aria-label="Export options">
     <button type="button" role="tab" id="exports-tab-downloads" data-export-tab="downloads" aria-controls="exports-downloads" aria-selected="true">Downloads</button>
-    <button type="button" role="tab" id="exports-tab-settings" data-export-tab="settings" aria-controls="report-form" aria-selected="false" tabindex="-1">Report settings</button>
+    <button type="button" role="tab" id="exports-tab-settings" data-export-tab="settings" aria-controls="report-form" aria-selected="false" tabindex="-1">Build report</button>
   </div>
   <p class="notice error" id="exports-account-error" hidden role="alert"></p>
   <div id="exports-downloads" role="tabpanel" aria-labelledby="exports-tab-downloads">
@@ -501,6 +501,12 @@
     <label for="export-language">Report language</label><select data-no-translate id="export-language"></select>
     <span class="hint">For the signed ZIP, the readable report, the handover extract and chat exports below. Case details and contents: <a data-go-reports="settings" href="#">Report settings</a>.</span>
   </div>
+  <section class="card padded report-card report-download-card" id="export-readable-report">
+    <div class="card-heading"><div><h2>Readable report</h2><p>Choose chats, authors and dates. Review activity, saved changes and missing message IDs before downloading.</p></div><button class="primary" type="button" data-go-reports="data"><svg aria-hidden="true" class="icon"><use href="#i-report"/></svg> Configure and preview</button></div>
+    <p>The sealed report on its own: HTML to read, PDF to print and file, JSON for case systems and scripts. Each file carries its own signature.</p>
+    <div class="report-formats"><button class="secondary" data-export="html" data-no-translate type="button">HTML</button><button class="secondary" data-export="pdf" data-no-translate type="button">PDF</button><button class="secondary" data-export="json" data-no-translate type="button">JSON</button></div>
+    <p class="hint">Downloads use your saved report choices. Save changes in Build report before downloading.</p>
+  </section>
   <div class="evidence-hero card" data-mode-anchor data-mode-feature="signed_exports">
     <div class="evidence-symbol"><svg aria-hidden="true" class="icon"><use href="#i-archive"/></svg></div>
     <div class="evidence-body">
@@ -515,7 +521,6 @@
   <div class="export-grid">
     <button class="card export-card" data-export="jsonl"><span class="file-icon"><svg aria-hidden="true" class="icon"><use href="#i-braces"/></svg></span><h3>JSONL journal</h3><p>Original event records and individual signatures. One event per line.</p><span>Download .jsonl</span></button>
     <button class="card export-card" data-export="csv"><span class="file-icon"><svg aria-hidden="true" class="icon"><use href="#i-table"/></svg></span><h3>Spreadsheet</h3><p>Review observations in your analysis tools. Formula-safe cells.</p><span>Download .csv</span></button>
-    <div class="card export-card report-card"><span class="file-icon"><svg aria-hidden="true" class="icon"><use href="#i-report"/></svg></span><h3>Readable report</h3><p>The sealed report on its own: HTML to read, PDF to print and file, JSON for case systems and scripts. Each file carries its own signature.</p><div class="report-formats"><button class="secondary" data-export="html" data-no-translate type="button">HTML</button><button class="secondary" data-export="pdf" data-no-translate type="button">PDF</button><button class="secondary" data-export="json" data-no-translate type="button">JSON</button></div></div>
   </div>
   <section class="card padded" data-mode-anchor data-mode-feature="github_capture" id="sealed-capture-option">
     <h2>GitHub Actions capture (preview)</h2>
@@ -571,8 +576,41 @@
   </div>
   <form class="card padded report-settings" id="report-form" role="tabpanel" aria-labelledby="exports-tab-settings" hidden>
     <div class="eyebrow">Readable reports</div><h2>Build your report</h2>
-    <p class="muted">Choose a starting layout, then make it fit your case. Your next export includes the saved choices.</p>
+    <p class="muted">Choose the data, arrange the contents and inspect the actual records before saving.</p>
     <fieldset class="report-fields" id="report-fields" disabled>
+    <nav class="report-steps" aria-label="Report preparation">
+      <button class="quiet" type="button" data-report-step="report-data"><b>1</b> Data</button>
+      <button class="quiet" type="button" data-report-step="report-content"><b>2</b> Contents</button>
+      <button class="quiet" type="button" data-report-step="report-preview"><b>3</b> Preview</button>
+    </nav>
+    <section class="report-data" id="report-data" aria-labelledby="report-data-title">
+      <div class="report-section-heading"><span aria-hidden="true">01</span><div><h3 id="report-data-title" tabindex="-1">Choose your data</h3><p class="hint">Use the complete workspace or focus on particular chats, authors and dates.</p></div></div>
+      <div class="report-scope-mode">
+        <label class="check-label"><input type="radio" name="report-selection-mode" id="report-selection-all" value="all" checked> Whole workspace</label>
+        <label class="check-label"><input type="radio" name="report-selection-mode" id="report-selection-chosen" value="chosen"> Choose data</label>
+      </div>
+      <fieldset id="report-selection-options" class="report-selection-options" disabled>
+        <div class="report-grid"><div><label for="report-selection-from">From date (UTC)</label><input type="date" id="report-selection-from"></div><div><label for="report-selection-to">Through date (UTC)</label><input type="date" id="report-selection-to"></div></div>
+        <p class="hint">Both dates are included. Dates refer to when TgWitness observed a record, not when a message was sent.</p>
+        <div class="report-catalog-toolbar"><button class="secondary" id="report-load-catalog" type="button">Load chats and authors</button><p class="hint">Read the recorded workspace once to populate these choices. Author counts follow the chosen chats and dates; build a new preview to refresh them.</p></div>
+        <div class="report-grid report-catalog-grid">
+          <div><h4>Chats</h4><input type="search" data-report-search="chats" aria-label="Find a recorded chat" placeholder="Find a recorded chat"><div class="report-catalog" id="report-chat-catalog" data-no-translate></div><p class="hint" id="report-chat-count" data-no-translate></p><details class="report-manual"><summary>Add chat IDs</summary><label for="report-selection-chats">Chat IDs, separated by commas</label><input id="report-selection-chats" type="text" inputmode="text" autocomplete="off" placeholder="-1001234567890, -1009876543210"><p class="hint">An empty list includes all chats. Selected IDs stay selected even if absent from the list above.</p></details></div>
+          <div><h4>Authors</h4><input type="search" data-report-search="senders" aria-label="Find an account ID" placeholder="Find an account ID"><div class="report-catalog" id="report-sender-catalog" data-no-translate></div><p class="hint" id="report-sender-count" data-no-translate></p><p class="hint">Author filters match recorded sender IDs. Deletion notices without a sender are excluded.</p><details class="report-manual"><summary>Add author IDs</summary><label for="report-selection-senders">Account IDs, separated by commas</label><input id="report-selection-senders" type="text" inputmode="text" autocomplete="off"><p class="hint">An empty list includes all authors. A sender filter excludes records whose sender is unknown.</p></details></div>
+        </div>
+        <fieldset class="report-kind-options"><legend>Record types</legend><div class="report-chart-choices">
+          <label class="check-label"><input id="report-kind-new" data-report-kind="message.new" type="checkbox" checked> New messages</label>
+          <label class="check-label"><input id="report-kind-snapshot" data-report-kind="message.snapshot" type="checkbox" checked> History observations</label>
+          <label class="check-label"><input id="report-kind-recovered" data-report-kind="message.recovered" type="checkbox" checked> Recovered messages</label>
+          <label class="check-label"><input id="report-kind-edited" data-report-kind="message.edited" type="checkbox" checked> Edits</label>
+          <label class="check-label"><input id="report-kind-deleted" data-report-kind="message.deleted" type="checkbox" checked> Deletion notices</label>
+          <label class="check-label"><input id="report-kind-missing" data-report-kind="message.missing_on_recheck" type="checkbox" checked> Missing on recheck</label>
+        </div></fieldset>
+      </fieldset>
+      <label class="check-label"><input id="report-selection-gaps" type="checkbox" checked> Include missing message IDs and neighboring records</label>
+      <p class="hint">Missing numbers are gaps in the observed IDs, not proof of deletion.</p>
+      <p class="report-scope-notice">Scope applies to the report. The evidence ZIP keeps the complete original journal; use a minimized handover to share only selected data.</p>
+    </section>
+    <div class="report-section-heading" id="report-content"><span aria-hidden="true">02</span><div><h3 tabindex="-1">Arrange the contents</h3><p class="hint">These choices change the report layout. Your data selection stays the same.</p></div></div>
     <fieldset class="report-templates"><legend>Start with a template</legend>
       <div class="report-template-grid">
         <label class="report-template"><input type="radio" name="report-template" value="dossier" id="report-template-dossier" checked>
@@ -636,7 +674,14 @@
       <label class="check-label"><input id="report-heartbeats" type="checkbox"> Group consecutive collector heartbeats</label>
       <div class="report-part-size"><label for="report-part-size">Maximum records or messages per data file</label><input id="report-part-size" required max="100000" min="500" step="1" type="number"><p class="hint">Also sets the PDF transcript limit. Larger transcripts remain in the HTML viewer and signed source files. Large data files may be split earlier.</p></div>
     </fieldset>
-    <div class="report-actions"><button class="secondary" type="submit">Save report settings</button></div>
+    <section class="report-preview" id="report-preview" aria-labelledby="report-preview-title">
+      <div class="report-section-heading"><span aria-hidden="true">03</span><div><h3 id="report-preview-title" tabindex="-1">Inspect the actual data</h3><p class="hint">This preview uses your current choices. It does not save them or create a signed export.</p></div></div>
+      <div class="report-preview-toolbar"><button class="primary" type="button" id="report-preview-run">Build preview</button><button class="secondary" type="button" id="report-preview-retry" hidden>Retry preview</button><span id="report-preview-stale" class="report-preview-stale" hidden>Choices changed. Rebuild the preview.</span></div>
+      <p id="report-preview-status" class="hint" role="status" data-no-translate></p>
+      <div id="report-preview-result" data-no-translate></div>
+    </section>
+    <div class="report-actions"><button class="secondary" type="submit">Save report settings</button><button class="secondary" type="button" id="report-open-downloads">Go to downloads</button></div>
+    <p class="hint">Save your choices, then download HTML, PDF or the signed ZIP. A preview can become outdated as new records arrive.</p>
     </fieldset>
     <p class="hint" id="report-status" role="status"></p>
     <p class="hint">Every report is sealed: a signature inside the file covers each of its bytes. Readers check it in the browser by dropping the file onto the report, or with <code>python verify.py report.html --fingerprint …</code>. The archive also carries <code>custody.json</code> and <code>SHA256SUMS</code>.</p>

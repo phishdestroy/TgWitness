@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Configure report data by chat, author, UTC observation dates and event type.
+  Preview real activity, participants, messages and missing-ID ranges before
+  saving. HTML, PDF and JSON apply the same scope while preserving the original
+  signed journal. Edits show Before/After text; deletions show previously saved
+  content, with out-of-selection history explicitly marked as context.
 - Build full-journal reports from dossier, briefing, activity or custom presets.
   Select time, weekday/hour, participant and chat charts; add signed examination
   notes. HTML, PDF and JSON share exact observation counts and source hashes.
