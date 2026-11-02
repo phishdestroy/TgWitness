@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased
+
+- Added six-step first setup and a unified Settings page with simple, standard and
+  expert presentation levels. Language, device time zone, theme and progress are
+  saved per operator and workspace; language changes preserve the panel session.
+- Copy, monitoring and evidence presets show a diff before changes, preserve optional
+  manual overrides and expose hidden settings through search. External-service
+  permissions are checked when enabling timestamps, notifications and off-site copies.
+- Automatic connection tries public MTProxy, portable WARP, then an explicitly
+  allowed direct route. Checks, a persistent status indicator and recovery actions
+  replace silent proxy failures. HTTPS CONNECT verifies the proxy certificate.
+- File policies can limit video duration; capture and account export enforce the
+  configured size and duration. Existing journals and stored configurations stay
+  intact. See [first setup and settings](ru/SETTINGS.md).
+
 ## 0.8.0 preview · 2 November 2026
 
 - Fixed Windows portable packaging of fpdf2's public colour profile and licence;
