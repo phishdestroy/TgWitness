@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 Використовуйте підписи для перевірки збережених записів, контрольні точки — для порівняння з попередніми межами, а тести контрольованої доставки — для оцінки ефективності збору даних. Кожен із цих елементів дає відповідь на конкретне питання. [Ознайомтеся з обсягом перевірки та припущеннями щодо надійності.](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope)
 
 Слідкуйте за [розслідуванням усього облікового запису —](https://phishdestroy.github.io/TgWitness/uk/docs/cases/) від його отримання до формування матеріалів справи.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

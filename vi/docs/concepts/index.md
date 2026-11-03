@@ -123,3 +123,5 @@ Hãy xác minh chữ ký của điểm kiểm tra dưới khóa thu thập đư�
 Sử dụng chữ ký để kiểm tra các bản ghi được lưu giữ, điểm kiểm tra để so sánh với ranh giới trước đó và các bài kiểm tra giao nhận có kiểm soát để đo lường hiệu quả thu thập. Mỗi phương pháp này đều trả lời một câu hỏi cụ thể. [Hãy đọc kỹ phạm vi xác minh và các giả định về độ tin cậy.](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope)
 
 Theo dõi [toàn bộ quá trình điều tra tài khoản,](https://phishdestroy.github.io/TgWitness/vi/docs/cases/) từ giai đoạn thu thập dữ liệu cho đến khi hoàn thiện hồ sơ vụ việc.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 使用签名核查保留的记录，使用检查点与较早的边界进行比对，并使用受控交付测试来衡量采集效果。每项操作都旨在解答一个具体问题。[请阅读验证范围和信任假设。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)
 
 [全程追踪从获取账户到整理案件资料包的完整调查](https://phishdestroy.github.io/TgWitness/zh/docs/cases/)过程。
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

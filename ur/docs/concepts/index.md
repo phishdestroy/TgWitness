@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 محفوظ کردہ ریکارڈز کی تصدیق کے لیے دستخط، پہلے کی حد کے موازنہ کے لیے چیک پوائنٹس، اور کلیکشن کی پیمائش کے لیے کنٹرولڈ ڈیلیوری ٹیسٹ استعمال کریں۔ ہر ایک ایک مخصوص سوال کا جواب دیتا ہے۔ [تصدیق کے دائرہ کار اور اعتماد کے مفروضات پڑھیں۔](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope)
 
 حصول سے لے کر کیس پیکج تک [پورے اکاؤنٹ کی تفتیش](https://phishdestroy.github.io/TgWitness/ur/docs/cases/) کی پیروی کریں۔
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

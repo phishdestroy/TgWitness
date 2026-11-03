@@ -123,3 +123,5 @@ Sabitlenmiş toplayıcı anahtarının altındaki kontrol noktası imzasını do
 Saklanan kayıtları kontrol etmek için imzaları, önceki bir sınırı karşılaştırmak için kontrol noktalarını ve toplama işlemini ölçmek için kontrollü teslimat testlerini kullanın. Her biri belirli bir soruyu yanıtlar. [Doğrulama kapsamını ve güven varsayımlarını okuyun.](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope)
 
 Vakalara ilişkin bilgilerin toplanmasından dava dosyasının hazırlanmasına kadar [tüm soruşturma](https://phishdestroy.github.io/TgWitness/tr/docs/cases/) sürecini takip edin.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

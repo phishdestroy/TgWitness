@@ -24,6 +24,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 
 [### ראו כיצד הראיות פועלות עקבו אחר הודעה משלב הלכידה ועד לנקודת הבדיקה. שנו רשומה לדוגמה, חשבו מחדש את שרשרת ה-SHA-256 שלה וראו מה נקודת הבדיקה שנשמרה מזהה.](https://phishdestroy.github.io/TgWitness/he/docs/concepts/)[### שמרו על האבטחה גלו היכן מאוחסנים הפעלות, מפתחות וראיות, מה יוצא מהמחשב שלכם, מה מכסים אמצעי ההגנה וכיצד לחזק את ההתקנה.](https://phishdestroy.github.io/TgWitness/he/docs/security/)[### הגדרת בוט Witness פרסם נקודות ביקורת חתומות מהיומן בערוץ הטלגרם שלך באמצעות עד נפרד, עם מפתח משלו וגישה לאספן לקריאה בלבד.](https://phishdestroy.github.io/TgWitness/he/docs/witness/)
 
+[### Export Clinic Watch a controlled Telegram Desktop export experiment, compare seven test conversations, and inspect the original recording and paired files.](https://phishdestroy.github.io/TgWitness/docs/export-clinic/)
+
 ## הוסף רק את מה שאתה צריך
 
 [### עבוד עם הארכיון טען היסטוריה, חפש ברשומות שנשמרו, בדוק מקורות בינה מלאכותית וחבר את הכלים שלך.](https://phishdestroy.github.io/TgWitness/he/docs/archive/)[### שתף מקרה הענק למבקרים ולמנתחים גישה לחשבונות וצ'אטים נבחרים, עם הרשאות נפרדות, הגבלות על משך ההפעלה ואסימונים הניתנים לביטול.](https://phishdestroy.github.io/TgWitness/he/docs/access/)[### המשך להפעיל את האתר הפעל את TgWitness בשרת עם אחסון קבוע, גישה לפאנל פרטי, גיבויים ובדיקות לאחר אתחול מחדש.](https://phishdestroy.github.io/TgWitness/he/docs/server/)[### גלה מה השתבש בדקו את הגישה ללוח הבקרה, את החיבור ל-Telegram, הודעות חסרות, את מצב ה-FloodWait ואת מצב ה-witness באמצעות האותות המתאימים לכל בעיה.](https://phishdestroy.github.io/TgWitness/he/docs/troubleshooting/)

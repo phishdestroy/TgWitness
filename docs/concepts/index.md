@@ -123,3 +123,5 @@ Verify the checkpoint signature under the pinned collector key, then compare its
 Use signatures to check the retained records, checkpoints to compare an earlier boundary, and controlled delivery tests to measure collection. Each answers a specific question. [Read the verification scope and trust assumptions.](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope)
 
 Follow the [whole-account investigation](https://phishdestroy.github.io/TgWitness/docs/cases/) from acquisition to case package.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

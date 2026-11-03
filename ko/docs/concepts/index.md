@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 서명을 사용하여 보존된 기록을 확인하고, 체크포인트를 사용하여 이전 경계와 비교하며, 제어된 전달 테스트를 통해 수집 상태를 측정하십시오. 각각은 특정 질문에 대한 답을 제공합니다. [검증 범위와 신뢰 가정을 숙지하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope)
 
 정보 수집부터 사건 자료 정리까지, [계정 전체에 대한 조사](https://phishdestroy.github.io/TgWitness/ko/docs/cases/) 과정을 따라가 보세요.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

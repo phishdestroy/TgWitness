@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 Verwenden Sie Signaturen, um die aufbewahrten Datensätze zu überprüfen, Checkpoints, um einen früheren Stichtag zu vergleichen, und kontrollierte Zustellungstests, um die Erfassung zu messen. Jedes dieser Verfahren beantwortet eine bestimmte Frage. [Lesen Sie den Überprüfungsumfang und die Vertrauensannahmen.](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope)
 
 Verfolgen Sie die [gesamte Untersuchung eines Kontos](https://phishdestroy.github.io/TgWitness/de/docs/cases/) von der Erfassung bis zur Fallakte.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

@@ -103,3 +103,7 @@ The connection reference explains IP modes, fallback and external-request routin
 - [MIT License](https://phishdestroy.github.io/TgWitness/LICENSE): Software license.
 
 - [Operator incompatibility notice](https://phishdestroy.github.io/TgWitness/docs/reference/notice/index.md): Our operator notice on Taylor Wessing and its source record.
+
+## Controlled experiment
+
+- [Export Clinic](https://phishdestroy.github.io/TgWitness/docs/export-clinic/index.md): Watch a controlled Telegram Desktop export experiment, compare seven test conversations, and inspect the original recording and paired files.

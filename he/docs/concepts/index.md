@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 יש להשתמש בחתימות כדי לבדוק את הרשומות שנשמרו, בנקודות ביקורת כדי להשוות לגבול קודם, ובבדיקות מסירה מבוקרות כדי למדוד את האיסוף. כל אחת מהן עונה על שאלה ספציפית. [יש לקרוא את היקף האימות ואת הנחות האמון.](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope)
 
 עקבו אחר [חקירת החשבון במלואו,](https://phishdestroy.github.io/TgWitness/he/docs/cases/) החל מהשגתו ועד להרכבת תיק החקירה.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

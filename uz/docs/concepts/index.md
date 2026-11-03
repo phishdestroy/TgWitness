@@ -123,3 +123,5 @@ Mahkamlangan yig'uvchi kalit ostidagi tekshiruv nuqtasi imzosini tasdiqlang, so'
 Saqlangan yozuvlarni tekshirish uchun imzo, oldingi chegarani solishtirish uchun tekshiruv nuqtalari va yig'ish hajmini o'lchash uchun nazoratli yetkazib berish testlaridan foydalaning. Har biri ma'lum bir savolga javob beradi. [Verifikatsiya doirasi va ishonch taxminlarini o'qing.](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope)
 
 [Hisobni to'liq o'rganish](https://phishdestroy.github.io/TgWitness/uz/docs/cases/)ni ma'lumotlarni olishdan ish hujjatlari paketini tayyorlashgacha kuzating.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

@@ -123,3 +123,5 @@ Verifichi la firma del checkpoint sotto la chiave del collettore fissata in prim
 Utilizzare le firme per verificare i record conservati, i checkpoint per confrontare un limite precedente e i test di consegna controllata per misurare la raccolta. Ciascuno di essi risponde a una domanda specifica. [Leggere l’ambito di verifica e i presupposti di affidabilità.](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#verification-scope)
 
 Segua [l’intero processo investigativo,](https://phishdestroy.github.io/TgWitness/it/docs/cases/) dall’acquisizione fino alla compilazione del fascicolo.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

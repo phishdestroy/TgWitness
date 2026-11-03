@@ -123,3 +123,5 @@ Verifique la firma del punto de control bajo la clave del recopilador fijada y, 
 Utilice las firmas para comprobar los registros conservados, los puntos de control para comparar un límite anterior y las pruebas de entrega controlada para evaluar la recopilación. Cada uno de ellos responde a una pregunta concreta. [Lea el alcance de la verificación y los supuestos de confianza.](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope)
 
 Siga la [investigación completa de la cuenta,](https://phishdestroy.github.io/TgWitness/es/docs/cases/) desde la adquisición hasta el expediente del caso.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

@@ -24,6 +24,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/
 
 [### 証拠の仕組みをご覧ください メッセージの取得からチェックポイントまでの流れを追跡します。サンプルレコードを変更し、そのSHA-256チェーンを再計算して、保持されているチェックポイントが何を検出するかを確認してください。](https://phishdestroy.github.io/TgWitness/ja/docs/concepts/)[### セキュリティを確保してください セッション、鍵、証拠データの保存場所、端末から送信される情報、保護対象の範囲、およびインストールのセキュリティ強化方法についてご確認ください。](https://phishdestroy.github.io/TgWitness/ja/docs/security/)[### Witnessボットの設定 署名済みのジャーナルのチェックポイントを、個別のウィットネス、独自の鍵、および読み取り専用コレクターアクセス権を設定して、Telegramチャンネルに公開できます。](https://phishdestroy.github.io/TgWitness/ja/docs/witness/)
 
+[### Export Clinic Watch a controlled Telegram Desktop export experiment, compare seven test conversations, and inspect the original recording and paired files.](https://phishdestroy.github.io/TgWitness/docs/export-clinic/)
+
 ## 必要な情報のみを追加してください
 
 [### アーカイブの操作 履歴の読み込み、保存された記録の検索、AIソースの確認、およびツールの連携が可能です。](https://phishdestroy.github.io/TgWitness/ja/docs/archive/)[### 事例を共有する レビュー担当者やアナリストに対し、個別の権限、セッション制限、および取り消し可能なトークンを設定して、選択されたアカウントやチャットへのアクセス権を付与します。](https://phishdestroy.github.io/TgWitness/ja/docs/access/)[### 稼働を継続してください TgWitnessは、永続的なストレージ、プライベートパネルへのアクセス、バックアップ機能、および再起動後のチェック機能を備えたサーバー上で実行してください。](https://phishdestroy.github.io/TgWitness/ja/docs/server/)[### 何が問題だったのかを確認する 各問題に応じた適切なシグナルを使用して、パネルへのアクセス状況、Telegramとの接続状況、メッセージの欠落、FloodWait、およびWitnessのステータスを確認してください。](https://phishdestroy.github.io/TgWitness/ja/docs/troubleshooting/)

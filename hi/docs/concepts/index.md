@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 रखे गए रिकॉर्ड की जांच के लिए हस्ताक्षरों का, पहले की सीमा की तुलना के लिए चेकपॉइंट्स का, और संग्रह को मापने के लिए नियंत्रित वितरण परीक्षणों का उपयोग करें। प्रत्येक एक विशिष्ट प्रश्न का उत्तर देता है। [सत्यापन के दायरे और विश्वास संबंधी मान्यताओं को पढ़ें।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope)
 
 प्राप्ति से लेकर केस पैकेज तक [पूरे खाते की जांच](https://phishdestroy.github.io/TgWitness/hi/docs/cases/) का अनुसरण करें।
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.
