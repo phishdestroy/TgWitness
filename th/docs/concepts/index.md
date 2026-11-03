@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 ใช้ลายเซ็นเพื่อตรวจสอบบันทึกที่เก็บรักษาไว้ ใช้จุดตรวจสอบ (checkpoints) เพื่อเปรียบเทียบกับขอบเขตก่อนหน้า และใช้การทดสอบการส่งมอบที่ควบคุม (controlled delivery tests) เพื่อวัดผลการเก็บรวบรวม แต่ละวิธีตอบคำถามเฉพาะเจาะจง [อ่านขอบเขตการตรวจสอบและสมมติฐานความเชื่อถือ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope)
 
 ติดตามกระบวนการ[สืบสวนบัญชีทั้งหมด](https://phishdestroy.github.io/TgWitness/th/docs/cases/) ตั้งแต่ขั้นตอนการรวบรวมข้อมูลจนถึงการจัดทำชุดเอกสารคดี
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

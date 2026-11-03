@@ -24,6 +24,8 @@ Illustrated guides
 
 [### See how evidence works Follow a message from capture to checkpoint. Change a sample record, recalculate its SHA-256 chain and see what a retained checkpoint detects.](https://phishdestroy.github.io/TgWitness/docs/concepts/)[### Keep it secure See where sessions, keys and evidence live, what leaves your machine, what the protections cover and how to harden an installation.](https://phishdestroy.github.io/TgWitness/docs/security/)[### Set up a witness bot Publish signed journal checkpoints to your Telegram channel with a separate witness, its own key and read-only collector access.](https://phishdestroy.github.io/TgWitness/docs/witness/)
 
+[### Export Clinic Watch a controlled Telegram Desktop export experiment, compare seven test conversations, and inspect the original recording and paired files.](https://phishdestroy.github.io/TgWitness/docs/export-clinic/)
+
 ## Add only what you need
 
 [### Work the archive Load history, search saved records, review AI sources and connect your tools.](https://phishdestroy.github.io/TgWitness/docs/archive/)[### Share a case Give reviewers and analysts access to selected accounts and chats, with separate permissions, session limits and revocable tokens.](https://phishdestroy.github.io/TgWitness/docs/access/)[### Keep it running Run TgWitness on a server with persistent storage, private panel access, backups and checks after a restart.](https://phishdestroy.github.io/TgWitness/docs/server/)[### Find what went wrong Check panel access, Telegram connection, missing messages, FloodWait and witness status using the right signals for each problem.](https://phishdestroy.github.io/TgWitness/docs/troubleshooting/)

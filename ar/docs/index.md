@@ -24,6 +24,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/
 
 [### تعرف على كيفية عمل الأدلة تتبع رسالة ما من لحظة التقاطها حتى نقطة التحقق. قم بتعديل سجل نموذجي، وأعد حساب سلسلة SHA-256 الخاصة به، وشاهد ما تكتشفه نقطة التحقق المحفوظة.](https://phishdestroy.github.io/TgWitness/ar/docs/concepts/)[### حافظ على أمانها تعرف على أماكن تخزين الجلسات والمفاتيح والأدلة، وما الذي يغادر جهازك، وما الذي تغطيه إجراءات الحماية، وكيفية تعزيز أمان التثبيت.](https://phishdestroy.github.io/TgWitness/ar/docs/security/)[### إعداد روبوت «Witness» انشر نقاط التحقق من السجل الموقّع على قناتك في Telegram باستخدام شاهد منفصل، ومفتاح خاص به، ووصول للقائم بالتجميع للقراءة فقط.](https://phishdestroy.github.io/TgWitness/ar/docs/witness/)
 
+[### Export Clinic Watch a controlled Telegram Desktop export experiment, compare seven test conversations, and inspect the original recording and paired files.](https://phishdestroy.github.io/TgWitness/docs/export-clinic/)
+
 ## أضف فقط ما تحتاجه
 
 [### العمل على الأرشيف تحميل السجل، والبحث في السجلات المحفوظة، ومراجعة مصادر الذكاء الاصطناعي، وربط أدواتك.](https://phishdestroy.github.io/TgWitness/ar/docs/archive/)[### شارك حالة امنح المراجعين والمحللين إمكانية الوصول إلى حسابات ومحادثات محددة، مع أذونات منفصلة، وحدود للجلسات، ورموز قابلة للإلغاء.](https://phishdestroy.github.io/TgWitness/ar/docs/access/)[### حافظ على استمرار عملها قم بتشغيل TgWitness على خادم مزود بمساحة تخزين دائمة، ووصول خاص إلى لوحة التحكم، ونسخ احتياطية، وعمليات فحص بعد إعادة التشغيل.](https://phishdestroy.github.io/TgWitness/ar/docs/server/)[### اكتشف ما الذي حدث تحقق من الوصول إلى لوحة التحكم، واتصال Telegram، والرسائل المفقودة، وFloodWait، وحالة الشاهد باستخدام الإشارات الصحيحة لكل مشكلة.](https://phishdestroy.github.io/TgWitness/ar/docs/troubleshooting/)

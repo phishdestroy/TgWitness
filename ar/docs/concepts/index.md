@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 استخدم التوقيعات للتحقق من السجلات المحتفظ بها، ونقاط الفحص لمقارنة حدود سابقة، واختبارات التسليم الخاضعة للرقابة لقياس عملية التجميع. كل منها يجيب على سؤال محدد. [اقرأ نطاق التحقق وافتراضات الثقة.](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope)
 
 تابع [التحقيق الكامل للحساب](https://phishdestroy.github.io/TgWitness/ar/docs/cases/) بدءًا من الحصول على البيانات وحتى إعداد ملف القضية.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

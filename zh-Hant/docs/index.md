@@ -24,6 +24,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/
 
 [### 了解證據如何運作 追蹤訊息從擷取到檢查點的整個過程。修改一個範例記錄，重新計算其 SHA-256 鏈，並觀察保留的檢查點會偵測到什麼變化。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/concepts/)[### 確保安全 了解會話、金鑰與證據的儲存位置、哪些資料會離開您的裝置、防護措施涵蓋的範圍，以及如何強化系統安全性。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/security/)[### 設定 Witness 機器人 透過獨立的見證者（配有專屬金鑰及唯讀收集器存取權限），將簽署過的日誌檢查點發佈至您的 Telegram 頻道。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/witness/)
 
+[### Export Clinic Watch a controlled Telegram Desktop export experiment, compare seven test conversations, and inspect the original recording and paired files.](https://phishdestroy.github.io/TgWitness/docs/export-clinic/)
+
 ## 僅添加必要內容
 
 [### 瀏覽檔案庫 載入歷史紀錄、搜尋已儲存的記錄、檢視 AI 來源，並串接您的工具。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/archive/)[### 分享案例 讓審查員和分析師能夠存取選定的帳戶和聊天室，並設有獨立的權限、會話限制及可撤銷的存取憑證。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/access/)[### 讓它持續運作 請在具備持久儲存空間、私人控制台存取權限、備份功能，且重啟後能自動執行檢查的伺服器上運行 TgWitness。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/server/)[### 找出問題所在 請透過針對各問題的正確訊號，檢查控制面板存取權限、Telegram 連線狀態、訊息遺失、FloodWait 及 Witness 狀態。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/troubleshooting/)

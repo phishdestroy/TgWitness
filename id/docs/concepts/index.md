@@ -123,3 +123,5 @@ Verifikasi tanda tangan titik pemeriksaan di bawah kunci pengumpul yang disematk
 Gunakan tanda tangan untuk memeriksa catatan yang disimpan, titik pemeriksaan (checkpoints) untuk membandingkan batas waktu sebelumnya, dan uji pengiriman terkontrol untuk mengukur proses pengumpulan. Masing-masing menjawab pertanyaan spesifik. [Bacalah ruang lingkup verifikasi dan asumsi kepercayaan.](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope)
 
 Ikuti [penyelidikan akun secara menyeluruh](https://phishdestroy.github.io/TgWitness/id/docs/cases/) mulai dari pengumpulan data hingga penyusunan berkas kasus.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

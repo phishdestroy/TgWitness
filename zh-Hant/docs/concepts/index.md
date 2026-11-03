@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 使用簽名來核對保留的記錄、使用檢查點來比對較早的邊界，並使用受控傳輸測試來衡量資料蒐集成效。每項操作皆旨在解答特定問題。[請詳閱驗證範圍與信任假設。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)
 
 追蹤從帳戶取得到案件檔案編製的[完整調查](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/cases/)過程。
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

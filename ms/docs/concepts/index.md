@@ -123,3 +123,5 @@ Sahkan tandatangan checkpoint di bawah kunci pengumpul yang dipin, kemudian band
 Gunakan tandatangan untuk memeriksa rekod yang disimpan, titik pemeriksaan untuk membandingkan sempadan terdahulu, dan ujian penghantaran terkawal untuk mengukur pengumpulan. Setiap satu menjawab soalan tertentu. [Baca skop pengesahan dan andaian kepercayaan.](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope)
 
 Ikuti [siasatan keseluruhan akaun](https://phishdestroy.github.io/TgWitness/ms/docs/cases/) dari pemerolehan hingga pakej kes.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

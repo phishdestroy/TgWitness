@@ -123,3 +123,5 @@ Vérifiez la signature du point de contrôle sous la clé de collecte épinglée
 Utilisez les signatures pour vérifier les enregistrements conservés, les points de contrôle pour comparer une limite antérieure et les tests de livraison contrôlée pour évaluer la collecte. Chacun répond à une question spécifique. [Lisez la portée de la vérification et les hypothèses de confiance.](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#verification-scope)
 
 Suivez l'[enquête complète sur le compte,](https://phishdestroy.github.io/TgWitness/fr/docs/cases/) de l'acquisition jusqu'au dossier d'affaire.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

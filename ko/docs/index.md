@@ -24,6 +24,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/
 
 [### 증거가 어떻게 활용되는지 확인하기 메시지가 캡처된 시점부터 체크포인트에 도달할 때까지의 경로를 추적해 보세요. 샘플 기록을 변경하고, 해당 기록의 SHA-256 체인을 재계산한 후, 보존된 체크포인트가 이를 어떻게 감지하는지 확인해 보세요.](https://phishdestroy.github.io/TgWitness/ko/docs/concepts/)[### 보안을 유지하세요 세션, 키 및 증거가 어디에 저장되는지, 시스템 외부로 전송되는 정보는 무엇인지, 보안 조치가 어떤 범위를 포함하는지, 그리고 설치 환경을 어떻게 강화할 수 있는지 확인하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/security/)[### Witness 봇 설정하기 별도의 증인(witness), 고유한 키, 읽기 전용 수집기(collector) 액세스 권한을 통해 서명된 기록부 체크포인트를 텔레그램 채널에 게시하세요.](https://phishdestroy.github.io/TgWitness/ko/docs/witness/)
 
+[### Export Clinic Watch a controlled Telegram Desktop export experiment, compare seven test conversations, and inspect the original recording and paired files.](https://phishdestroy.github.io/TgWitness/docs/export-clinic/)
+
 ## 필요한 내용만 추가하십시오
 
 [### 아카이브 활용하기 이력을 불러오고, 저장된 기록을 검색하며, AI 출처를 검토하고, 사용 중인 도구와 연동하세요.](https://phishdestroy.github.io/TgWitness/ko/docs/archive/)[### 사례 공유하기 검토자와 분석가에게 별도의 권한, 세션 제한 및 취소 가능한 토큰을 통해 선별된 계정 및 채팅에 대한 접근 권한을 부여합니다.](https://phishdestroy.github.io/TgWitness/ko/docs/access/)[### 계속 운영해 주세요 TgWitness는 영구 저장소, 전용 패널 액세스, 백업 기능 및 재시작 후 점검 기능이 갖춰진 서버에서 실행하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/server/)[### 문제가 발생한 원인을 파악하세요 각 문제에 맞는 신호를 사용하여 패널 액세스, 텔레그램 연결, 누락된 메시지, FloodWait 및 위트니스 상태를 확인하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/troubleshooting/)

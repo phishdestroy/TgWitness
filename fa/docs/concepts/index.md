@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 از امضاها برای بررسی سوابق نگهداری‌شده، از نقاط کنترل برای مقایسه مرزهای قبلی و از آزمون‌های تحویل کنترل‌شده برای اندازه‌گیری مجموعه استفاده کنید. هر یک به یک سؤال خاص پاسخ می‌دهد. [دامنه تأیید و فرضیات اعتماد را مطالعه کنید.](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope)
 
 [تحقیقات کل حساب](https://phishdestroy.github.io/TgWitness/fa/docs/cases/) را از مرحلهٔ به‌دست‌آوردن تا بستهٔ پرونده دنبال کنید.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

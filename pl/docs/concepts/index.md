@@ -123,3 +123,5 @@ Proszę zweryfikować podpis punktu kontrolnego pod przypiętym kluczem kolektor
 Należy używać podpisów do sprawdzania zachowanych zapisów, punktów kontrolnych do porównywania wcześniejszych granic oraz testów kontrolowanej dostawy do pomiaru skuteczności gromadzenia danych. Każdy z tych elementów odpowiada na konkretne pytanie. [Należy zapoznać się z zakresem weryfikacji i założeniami dotyczącymi zaufania.](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope)
 
 Proszę śledzić przebieg [całego postępowania wyjaśniającego,](https://phishdestroy.github.io/TgWitness/pl/docs/cases/) od momentu pozyskania danych aż po przygotowanie akt sprawy.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

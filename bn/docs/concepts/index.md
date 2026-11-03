@@ -123,3 +123,5 @@ hexport[Ncheckpoint] = Hcheckpoint
 সংরক্ষিত রেকর্ড যাচাই করতে স্বাক্ষর, পূর্ববর্তী সীমা তুলনা করতে চেকপয়েন্ট, এবং সংগ্রহ পরিমাপ করতে নিয়ন্ত্রিত ডেলিভারি পরীক্ষা ব্যবহার করুন। প্রতিটি একটি নির্দিষ্ট প্রশ্নের উত্তর দেয়। [যাচাইয়ের পরিধি এবং বিশ্বাস সংক্রান্ত অনুমানগুলি পড়ুন।](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope)
 
 অধিগ্রহণের পর থেকে মামলা প্যাকেজ পর্যন্ত [সম্পূর্ণ হিসাব তদন্ত](https://phishdestroy.github.io/TgWitness/bn/docs/cases/) অনুসরণ করুন।
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

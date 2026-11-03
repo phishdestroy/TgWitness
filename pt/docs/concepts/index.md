@@ -123,3 +123,5 @@ Verifique a assinatura do ponto de verificação sob a chave do coletor fixada e
 Use assinaturas para verificar os registros retidos, pontos de verificação para comparar um limite anterior e testes de entrega controlada para avaliar a coleta. Cada um responde a uma pergunta específica. [Leia o escopo da verificação e as premissas de confiança.](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope)
 
 Acompanhe toda a [investigação da conta,](https://phishdestroy.github.io/TgWitness/pt/docs/cases/) desde a aquisição até o pacote do caso.
+
+[Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.
