@@ -5,7 +5,7 @@
 `--provider phala --quick-tunnel` ran against real **Phala Cloud** (`tdx.small`, region
 US-WEST-1) with a Phala Cloud API key of an empty workspace, real ntfy.sh, GitHub and Intel PCS.
 The CVM installed commit `df7d860c` (v0.8.1); deploy, verify and destroy ran from the command
-line with the fixes below. Four CVMs cost about 1.3 US cents together.
+line with the fixes below. Seven CVMs cost about 1.9 US cents together.
 
 The first two deployments found five differences from the simulated Phala Cloud.
 [`tools/check_phala.py`](../tools/check_phala.py) now reproduces each, and fails without its fix:
@@ -70,12 +70,27 @@ The fourth deployment, with these:
   booted from the published `dstack-0.5.12`; the restart and the new boot were REVIEW.
 - `destroy` left the workspace empty.
 
-Found, not fixed: the wizard's price leaves out the disk; Phala bills `tdx.small` at $0.06078 an
-hour, and its API gives the disk price only for an existing CVM.
+The fifth deployment ran the collector from commit `53a0f7e9`, which has all of the above:
 
-Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, the wizard's create
-and delete buttons against Phala Cloud, the `dstack-0.6.1` image, and a collector that signs its
-address running on Phala Cloud.
+- The collector posted its address signed with its own key, next to the operator's HMAC post.
+  Two forged posts were then added to the topic, one with a zeroed HMAC and one signed by another
+  Ed25519 key, both claiming a time in the year 2096. `verify` took the address signed by the
+  collector key and passed all 16 checks; the seal again carried the qualified Belgian time stamp,
+  FreeTSA's and the verifier's signature, and `check-report` confirmed them.
+- After a restart the collector posted the new address signed: `verify` found it at once, the
+  operator's **Find the current address** 27 seconds later from the HMAC post, and both ignored
+  the forged posts. `verify --evidence` confirmed two starts booted from `dstack-0.5.12`.
+- Deploy printed what Phala bills the CVM, disk included: $0.06078 an hour.
+
+The panel wizard ran against Phala Cloud twice, once through its job API and once through the
+browser with a real Chromium: the price check, creation with the commit under **Advanced**, all six
+attestation checks passed, the server list showing the billed price (44.37 USD a month), **Find
+the current address**, the measured compose download, and deletion. The browser saw no page errors.
+Each time the workspace was empty afterwards.
+
+Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the `dstack-0.6.1`
+image. The wizard's price before creation is Phala's compute price only, as its API names the disk
+price only for an existing CVM; the server list shows the billed price after creation.
 
 ## Live server journal inventory · 1 November 2026
 
