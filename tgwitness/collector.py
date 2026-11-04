@@ -224,6 +224,7 @@ def sender_observation(sender):
     observed = {
         "id": getattr(sender, "id", None), "username": getattr(sender, "username", None),
         "display_name": utils.get_display_name(sender),
+        "partial": bool(getattr(sender, "min", False)),
         "meaning": "cached Telegram profile at observation; names are mutable",
     }
     flags = {name: getattr(sender, name) for name in SENDER_FLAGS if isinstance(getattr(sender, name, None), bool)}
@@ -1815,6 +1816,8 @@ class Collector:
                     "connected": connected, "run_id": self.run_id, "monotonic_ns": time.monotonic_ns(),
                     "media_jobs": self.store.media_stats(), "interval_seconds": interval,
                     "meaning": "collector liveness, not proof of complete capture"})
+                from .people import refresh_one
+                await refresh_one(self)
             if checkpoint_at is None or now - checkpoint_at >= self.param("checkpoint_minutes") * 60 - 1:
                 checkpoint_at = now
                 retain_checkpoint(self.store, self.vault)
@@ -2034,6 +2037,10 @@ class Collector:
             return
         try:
             settings = monitoring_settings(self.store)
+            if isinstance(update, (types.UpdateUserStatus, types.UpdateUserName, types.UpdateUser)):
+                from .people import observe_update
+                observe_update(self.store, update, profiles=settings["profiles"], presence=settings["presence"], raw=plain(update))
+                return
             if isinstance(update, (types.UpdateNewMessage, types.UpdateNewChannelMessage)) and isinstance(
                     update.message, types.MessageService):
 
@@ -2614,6 +2621,9 @@ class Collector:
             self.people.pop(next(iter(self.people)))
         self.people[utils.get_peer_id(entity)] = entity
         if chat_id is not None:
+            if self.running and self.selected(chat_id) and monitoring_settings(self.store)["profiles"]:
+                from .people import observe_entity
+                observe_entity(self.store, entity, chat_id)
             self.avatar_history.observe(entity, chat_id=chat_id)
 
     async def avatar(self, peer_id):

@@ -423,7 +423,7 @@ const termLabels={offline:tr("offline"),ready:tr("ready"),credentials:tr("creden
   not_in_dialogs:tr("not found among the account's chats"),beyond_dialog_limit:tr("beyond the chats listed for this account"),public_username:tr("public username"),
   private_or_unlisted:tr("private or unlisted"),creator:tr("creator"),administrator:tr("administrator"),
   member_or_unknown:tr("member or unknown"),unknown:tr("unknown"),messages:tr("messages"),edits:tr("edits"),
-  deletions:tr("deletions"),reactions:tr("reactions"),membership:tr("membership")};
+  deletions:tr("deletions"),reactions:tr("reactions"),membership:tr("membership"),profiles:tr("profile changes"),presence:tr("online statuses")};
 const termText=value=>termLabels[value]??String(value??"").replaceAll("_"," ");
 function actionOwner(){
   const profile=state.profile,token=state.token,revision=state.workspaceRevision;
@@ -2512,6 +2512,18 @@ const reportSelectionReady=import('./views/report-selection.js?v=1').then(({crea
   return reportSelection;
 });
 const reportTemplate=()=>$("report-form").querySelector('[name="report-template"]:checked')?.value||"custom";
+let reportConfigurations;
+const reportConfigurationsReady=import('./views/report-profiles.js?v=1').then(({createReportProfiles})=>{
+  reportConfigurations=createReportProfiles({root:$("report-profiles"),tr,json,owner:reportKey,
+    ready:()=>reportReady&&reportOwner===reportKey()&&!reportSaving&&state.view==='evidence',draft:reportDraft,run:busy,
+    apply:options=>{
+      for(const [id,key] of Object.entries(REPORT_FIELDS))if(Object.hasOwn(options,key))$(id).value=options[key];
+      for(const [id,key] of Object.entries(REPORT_CHECKS))if(Object.hasOwn(options,key))$(id).checked=options[key];
+      setReportDesign(options.design);setReportTemplate(options.template);
+      discardReportDraft();$("report-theme").dispatchEvent(new Event('input',{bubbles:true}));
+    }});
+  return reportConfigurations;
+});
 const reportDesign=()=>$("report-form").querySelector('[name="report-design"]:checked')?.value||"classic";
 function setReportDesign(value){
   const choices=[...$("report-form").querySelectorAll('[name="report-design"]')];
@@ -2537,6 +2549,7 @@ function resetReportSettings(){
   $("report-form").reset();$("report-fields").disabled=true;$("report-status").replaceChildren();
   $("report-outline").replaceChildren();$("report-form").querySelector(".report-examination").open=false;
   reportSelection?.reset();
+  reportConfigurations?.reset();
   $("report-form").querySelectorAll(".form-error").forEach(el=>el.remove());
 }
 function reportControls(){
@@ -2546,7 +2559,7 @@ function reportControls(){
 }
 async function loadReportSettings(){
   if(!state.status)return;
-  await reportSelectionReady;
+  await Promise.all([reportSelectionReady,reportConfigurationsReady]);
   const owner=reportKey();
   if(reportOwner!==owner){resetReportSettings();reportOwner=owner;}
   if(reportSaving||reportReady&&reportDirty)return;
@@ -2570,6 +2583,7 @@ async function loadReportSettings(){
       setReportDesign(options.design);
       reportSelection.load(options.selection);
       reportReady=true;reportDirty=false;formControls?.loaded("report-form");$("report-status").textContent=window.TGW_ONLINE_DEMO?tr("Sample data"):"";
+      await reportConfigurations.load();if(!current()||state.view!=='evidence')return;
       if(!$("report-form").hidden&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();
     }catch(error){
       if(!current()||error instanceof StaleView||error.name==='AbortError')return;
@@ -2659,7 +2673,7 @@ async function refreshReportPreview(){
 }
 $("report-preview-refresh").addEventListener("click",refreshReportPreview);
 $("exports-tab-settings").addEventListener("click",()=>{if(reportReady&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();});
-$("report-form").addEventListener("input",event=>{if(reportReady&&!event.target.matches("[data-report-search]")){
+$("report-form").addEventListener("input",event=>{if(reportReady&&!event.target.closest('#report-profiles')&&!event.target.matches("[data-report-search]")){
   reportSelection?.changed(event);
   if(event.target.name==="report-template")applyReportPreset();
   else if(Object.hasOwn(REPORT_CHECKS,event.target.id)||["report-participant-labels","report-chart-limit"].includes(event.target.id))setReportTemplate("custom");
@@ -4218,8 +4232,8 @@ function recheckText(c){
   return " "+tr("Last recheck {time}: {recovered} recovered, {missing} not found.",{time:fmtTime(c.recheck.at),recovered:c.recheck.recovered,missing:c.recheck.missing});
 }
 function recordingMode(s){
-  const m=s.monitoring||{},on=["messages","edits","deletions","reactions","membership"].filter(k=>m[k]);
-  return on.length===5?tr("Everything"):on.join()==="messages,edits,deletions"?tr("Messages, edits & deletions"):
+  const m=s.monitoring||{},on=["messages","edits","deletions","reactions","membership","profiles","presence"].filter(k=>m[k]);
+  return on.length===7?tr("Everything"):on.join()==="messages,edits,deletions"?tr("Messages, edits & deletions"):
     on.length?tr("Custom: {list}",{list:on.map(termText).join(", ")}):tr("Nothing selected");
 }
 function modeSummary(s){
@@ -4403,7 +4417,7 @@ function renderChatStatus(){
     f.addEventListener("click",()=>{state.chatFilter=key;renderChatStatus();renderChatFeed();});filters.append(f);
   }
   const tabs=node('div','chat-view-tabs');tabs.setAttribute('role','group');tabs.setAttribute('aria-label',tr('Chat views'));
-  const views=[['messages',tr('Messages')],['people',tr('People')],['profile',tr('Profile')]];
+  const views=[['messages',tr('Messages')],['people',tr('People')],['activity',tr('Activity timeline')],['profile',tr('Profile')]];
   if(s.analysis?.enabled&&!s.demo&&viewAllowed('analysis'))views.push(['ai',tr('AI context')]);
   for(const [name,label] of views){const tab=node('button','filter'+(state.chatView===name?' active':''),label);tab.type='button';tab.dataset.chatView=name;
     tab.setAttribute('aria-pressed',String(state.chatView===name));tab.addEventListener('click',()=>{
@@ -4429,9 +4443,18 @@ function renderChatStatus(){
   if(focusedFilter)box.querySelector('[data-chat-filter="'+focusedFilter+'"]')?.focus({preventScroll:true});
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
 }
+let peopleTimeline;
+const peopleTimelineReady=import('./views/people-timeline.js?v=1').then(({createPeopleTimeline})=>{
+  peopleTimeline=createPeopleTimeline({root:$("chat-feed"),json,tr,
+    owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
+    active:()=>state.view==='chats'&&state.chatView==='activity'&&state.chat!==null,
+    record:openRecord,formatTime:fmtFull});return peopleTimeline;
+});
+window.addEventListener('tgwitness:lock',()=>peopleTimeline?.reset());
 function renderChatFeed(){
   if(state.view!=='chats')return;
   const feed=$("chat-feed"),s=state.status,info=state.chatInfo;
+  if(state.chatView==='activity'){peopleTimelineReady.then(view=>view.load());return;}
   if(state.chatView==="people"){
     const generation=chatGeneration;
     if(!feed.querySelector(".people"))feed.replaceChildren(viewState("loading",tr("Loading…")));

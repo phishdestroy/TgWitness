@@ -16,7 +16,8 @@ from pathlib import Path
 from typing import Literal
 
 from cryptography.exceptions import InvalidSignature
-from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Query, Request
+from fastapi import Path as ApiPath
 from fastapi.responses import FileResponse, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, model_validator
@@ -57,7 +58,9 @@ from . import health
 from . import netclient
 from . import source_check
 from . import dossier
+from . import people
 from . import report
+from . import report_profiles
 from . import pdf_report
 from . import handover
 from . import modes
@@ -2172,6 +2175,29 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(409, "Turn on people profiles for this chat first.")
         return next((t["title"] for t in app.state.store.targets() if t["chat_id"] == chat_id), None)
 
+    @app.get("/api/chats/{chat_id}/people", dependencies=[Depends(authenticate)])
+    async def people_list(request: Request, chat_id: int = ApiPath(ge=-(2**63), le=2**63-1),
+                          quiet_days: int = Query(7, ge=1, le=365),
+                          offset: int = Query(0, ge=0, le=1000000), limit: int = Query(100, ge=1, le=200),
+                          mode: Literal["all", "quiet", "deleted", "departed", "never_posted"] = "all"):
+        value = await asyncio.to_thread(people.listing, app.state.store, chat_id,
+                                        quiet_days=quiet_days, offset=offset, limit=limit, mode=mode)
+        await recheck_export_scope(request, {chat_id})
+        return value
+
+    @app.get("/api/chats/{chat_id}/people/{user_id}", dependencies=[Depends(authenticate)])
+    async def person_timeline(request: Request, chat_id: int = ApiPath(ge=-(2**63), le=2**63-1),
+                              user_id: int = ApiPath(ge=1, le=2**63-1),
+                              before: int | None = Query(None, ge=1, le=2**63-1),
+                              limit: int = Query(100, ge=1, le=200), quiet_days: int = Query(7, ge=1, le=365)):
+        try:
+            value = await asyncio.to_thread(people.timeline, app.state.store, chat_id, user_id,
+                                            before=before, limit=limit, quiet_days=quiet_days)
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from None
+        await recheck_export_scope(request, {chat_id})
+        return value
+
     @app.post("/api/chats/{chat_id}/dossier", dependencies=[Depends(authenticate)])
     async def dossier_switch(request: Request, chat_id: int, body: DossierSwitch):
         require_live()
@@ -2443,6 +2469,25 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.post("/api/report-options", dependencies=[Depends(authenticate)])
     async def set_report_options(body: report.ReportOptions):
         return report.save(app.state.store, body).model_dump()
+
+    @app.get("/api/report-profiles", dependencies=[Depends(authenticate)])
+    async def get_report_profiles():
+        return {"profiles": report_profiles.catalog(app.state.store), "fields": sorted(report_profiles.LAYOUT_FIELDS)}
+
+    @app.post("/api/report-profiles", dependencies=[Depends(authenticate)])
+    async def save_report_profile(body: report_profiles.Profile):
+        try:
+            return report_profiles.save(app.state.store, body)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from None
+
+    @app.delete("/api/report-profiles/{profile_id}", dependencies=[Depends(authenticate)])
+    async def delete_report_profile(profile_id: str):
+        try:
+            report_profiles.remove(app.state.store, profile_id)
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from None
+        return {"removed": True}
 
     @app.get("/report-preview.css")
     async def report_preview_css():
