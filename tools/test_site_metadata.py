@@ -114,7 +114,8 @@ def test_llms_index_leads_with_workflows_and_verification():
     assert "Signed exports let recipients verify file integrity" in intro
     assert "eight designs" in intro and "Case Board" in intro
     assert all(f"/docs/{slug}/index.md" in content for slug in NEW_GUIDES)
-    assert "Telegram authorship, complete coverage" in content
+    assert "GitHub Actions capture adds an attestation" in content
+    assert "signing key and retained checkpoints" in content
     assert "content deleted before capture is unavailable" in content
     assert "llms-full.md" in content
 
@@ -189,6 +190,7 @@ def check_built_site(output):
         assert len({item["url"] for item in pages}) == len(pages), lang
         expected = {"reference/" + slug + "/" for slug in (REFERENCE if lang in build_site.LANGS else build_site.NOTICE_SLUGS)}
         expected.add("../" + site_modes.LOCAL)
+        expected.add(build_site.relative(prefix + "docs/", build_site.site_export_clinic.PATH))
         if lang in build_site.LANGS:
             expected.update(slug + "/" for slug in GUIDES)
         assert {item["url"] for item in pages} == expected, lang
@@ -199,6 +201,7 @@ def check_built_site(output):
     articles = {base + "/docs/" + slug + "/" for slug in GUIDES}
     articles.update(base + "/" + build_site.WIKI_HUB + slug + "/" for slug in REFERENCE)
     articles.add(base + "/" + site_modes.LOCAL)
+    articles.add(base + "/" + build_site.site_export_clinic.PATH)
     assert Counter(urls) == Counter(articles), "Missing or repeated handbook article"
     for slug in NEW_GUIDES:
         page = (output / "docs" / slug / "index.html").read_text(encoding="utf-8")
