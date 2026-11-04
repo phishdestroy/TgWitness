@@ -2,11 +2,11 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/export-clinic/
 
-Official software. Altered local records. A controlled experiment about what a Telegram export can establish.
+The chat says FAIL. The exported page says PASS. Watch the change, compare the files and check how it happened.
 
-**This is not a Telegram exploit.** Test accounts and scripted conversations are used throughout. A separate local helper deliberately changed selected exported files; the official client executable was unchanged. The intervention is disclosed in the recording and here.
+This experiment uses test accounts and scripted conversations. Telegram Desktop was downloaded from the official source and its executable was unchanged. A local helper deliberately changed selected export files.
 
-Watch an ordinary sequence: download Telegram Desktop, sign in, inspect the chats and export them. Then compare the messages with the locally altered files. The question is what establishes the history of those bytes after they reach the device.
+Watch the download, sign-in and export, then compare the Telegram conversation with the altered HTML and JSON. The experiment shows where an ordinary export can be changed and why a record of the collection process matters.
 
 **1:59.7** condensed film**6:08.8** full source recording**7** test conversations
 
@@ -60,18 +60,20 @@ JavaScript is disabled. The default bot comparison and all downloads remain avai
 
 ## What the comparison demonstrates
 
-Telegram's [normal export feature](https://telegram.org/blog/export-and-more) saves available history and selected media for offline use. A process with sufficient access to the storage can change those files. Downloading the official application establishes the application's origin; it does not authenticate the subsequent history of its output.
+Telegram's [normal export feature](https://telegram.org/blog/export-and-more) saves history and selected media as local files. Here, a helper with write access changes those files while the official client continues to show the original conversation. The paired files let you inspect each change.
 
 1. **Official client:** download, sign in and inspect the test conversations.
 2. **Native export:** the client writes HTML, JSON and selected images.
 3. **Disclosed intervention:** a local helper deliberately changes selected files.
 4. **Comparison:** the conversation and altered export appear side by side.
 
-### A genuine signature can cover altered input
+### Record the data as it is collected
 
-A console could calculate hashes, sign data and report successful verification even when the input had already been altered. A hash identifies bytes; a signature binds bytes to a key. Neither establishes whether a person actually sent the statement represented by those bytes. See [Ed25519 verification](https://www.rfc-editor.org/rfc/rfc8032.html#section-5.1.7).
+The timing of a signature matters. Signing an already altered export preserves that altered version. TgWitness connects to Telegram, records the content delivered to the account, and signs and links journal entries during collection. The recipient can check the saved records and files against those signatures and independently retained checkpoints.
 
-The acquisition environment, collector key, observation coverage and independent checkpoints matter. TgWitness signatures are collector attestations. Direct API collection does not remove these trust assumptions. [Explore the evidence model](https://phishdestroy.github.io/TgWitness/docs/concepts/).
+For an externally recorded collection process, [GitHub Actions capture](https://phishdestroy.github.io/TgWitness/docs/capture/) runs a pinned TgWitness collector with a fresh Telegram session. GitHub attests the resulting archive. Verification checks the approved workflow and collector version, the archive digest, journal and attachments.
+
+[Verify a TgWitness archive](https://phishdestroy.github.io/TgWitness/docs/exports/#verify) · [Try changing a signed record](https://phishdestroy.github.io/TgWitness/docs/concepts/#chain) · [Run a GitHub capture](https://phishdestroy.github.io/TgWitness/docs/capture/)
 
 ## What Forensic Tools Actually Certify
 
@@ -143,8 +145,6 @@ A subject who wishes to challenge a TgWitness attestation would need to compromi
 
 We are not claiming our tools are better — we do not have a commercial product and have no interest in one. We observed a problem: the widespread assumption that forensic software output equals historical truth, and that expert signatures equal proof. That assumption is rarely challenged at the technical level in the proceedings where it matters most. This experiment is one controlled data point. The math has no opinion about titles.
 
-No signing-console demonstration is claimed to appear in this recording.
-
 ## Download the materials
 
 Videos and ZIP files are hosted on [phishdestroy.io](https://phishdestroy.io/). Choose the files you want to inspect. Both ZIPs contain selected test data and documentation. The modification tool, source, configuration, credentials and sessions are excluded.
@@ -182,17 +182,19 @@ Ten files in the outer ZIP. The separate full MP4 is omitted because the origina
 - [Open full MP4 · 6:08.8 · 29.9 MB](https://phishdestroy.io/research/telegram-export/2026-11-03/export-clinic-full.mp4) — a browser-friendly container conversion, without video re-encoding.
 - [Open condensed MP4 · 1:59.7 · 14.3 MB](https://phishdestroy.io/research/telegram-export/2026-11-03/export-clinic-2min.mp4) — playback-speed changes are labeled.
 
-[Download checksums](https://phishdestroy.github.io/TgWitness/assets/export-clinic/SHA256SUMS.txt)[Video edit map](https://phishdestroy.github.io/TgWitness/assets/export-clinic/recording-manifest.json)[Paired-file manifest](https://phishdestroy.github.io/TgWitness/assets/export-clinic/review-file-manifest.json)[Metadata review](https://phishdestroy.github.io/TgWitness/assets/export-clinic/original-metadata-notes.md)[Full English description](https://phishdestroy.github.io/TgWitness/assets/export-clinic/article-en.md)
+[Download checksums](https://phishdestroy.github.io/TgWitness/assets/export-clinic/SHA256SUMS.txt)[Video edit map](https://phishdestroy.github.io/TgWitness/assets/export-clinic/recording-manifest.json)[Paired-file manifest](https://phishdestroy.github.io/TgWitness/assets/export-clinic/review-file-manifest.json)[Metadata review](https://phishdestroy.github.io/TgWitness/assets/export-clinic/original-metadata-notes.md)[Current explanation and verification guide](https://phishdestroy.github.io/TgWitness/assets/export-clinic/article-en.md)
 
-**How “before” was assembled:** changed files were restored byte for byte from retained backups, matched to their recorded hashes. Unchanged viewer assets were copied from the captured export. The result is a reconstructed pre-change folder tree, not a separately preserved original whole-folder archive. These operator-generated records are not Telegram server attestations.
+The downloadable review ZIP retains its original README and article. The current explanation includes the TgWitness collection and verification guide.
+
+**How “before” was assembled:** this is a reconstructed pre-change folder tree. Changed files were restored byte for byte from retained backups and matched to their recorded hashes. Unchanged viewer assets were copied from the captured export. The file manifest documents the supplied versions.
 
 Across the seven conversations, there are 45 message records; 17 records and 32 files differ. Each version contains 340 files. PDF attachments were not selected in the recorded exports and are absent from these archives.
 
-## Scope and limits
+## Experiment details
 
-**Is this a Telegram security exploit?**
+**Where did the change happen?**
 
-No. The intervention is ordinary local-file modification in a controlled environment. This experiment does not compromise Telegram's servers, alter the official client executable or break its encryption.
+A local helper changed files written by Telegram Desktop. The official client executable and the conversations visible in Telegram were unchanged. The comparison shows the original messages beside the altered export.
 
 **Are these complete account exports?**
 
@@ -206,19 +208,19 @@ No. The recorded export settings excluded file attachments. The test messages an
 
 No executables, helper source, transformation configuration, session data, credentials or full working logs are included. The small JavaScript files inside the paired exports are Telegram's unchanged standard HTML-viewer assets, checked to be identical across both versions.
 
-**What do the checksums and clock establish?**
+**How do I check the downloaded files?**
 
-Checksums identify the exact supplied bytes. They do not independently authenticate the conversation. The video clock is the host's clock; it is not an independent trusted timestamp. The recording's technical metadata also cannot prove the absence of prior editing.
+Calculate each file's SHA-256 and compare it with the published checksums. Matching values confirm that you have the published bytes. The file manifest lists both export versions; the video edit map documents the condensed film. Recording times come from the host clock.
 
-**Does API collection remove this trust problem?**
+**How does TgWitness make the record checkable?**
 
-Direct collection can reduce reliance on files supplied after the event. TgWitness documents signed observations, hash chains and independently retained checkpoints. These remain collector attestations: their value depends on the acquisition environment, key trust, coverage and independent checks. [Read the collection model ↗](https://phishdestroy.github.io/TgWitness/docs/concepts/)
+The collector signs entries as it receives data from Telegram. The archive includes the journal, file hashes and verification data. Retain a key fingerprint and checkpoint separately, then check the recipient's copy against them. GitHub capture adds verification of the approved collection workflow and its output. [Follow the verification steps ↗](https://phishdestroy.github.io/TgWitness/docs/exports/)
 
 **What about Telegram Web and mobile apps?**
 
 Those are separate planned experiments. This Desktop recording does not establish behavior of mobile storage, backups or Web clients. [Read the scoped follow-up plan ↗](https://phishdestroy.github.io/TgWitness/assets/export-clinic/next-experiments-en.md)
 
-This experiment makes no finding about evidence in a particular legal case or the conduct of a particular examiner. Public-source material appearing in the scripted conversations is scene content, not a conclusion of this experiment.
+The seven conversations were prepared for this experiment. The recording, paired exports and change ledger document the local-file changes described above.
 
 Controlled local-file experiment · 3 November 2026
 

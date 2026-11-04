@@ -10,7 +10,7 @@ JavaScriptを有効にして、鍵を生成し、アーカイブを復号して�
 
 **Preview available from `main`.** A fork launches a pinned reusable workflow from `phishdestroy/TgWitness`. The workflow reads one selected chat using a newly created Telegram session, attests the resulting evidence ZIP, and uploads only recipient-encrypted handoffs. The normal administration panel is not exposed.
 
-This is an ordinary GitHub-hosted runner, not confidential hardware. GitHub, the approved collector and dependencies, the helper page, the browser, and the HTTPS tunnel remain in the trust boundary. A GitHub attestation binds bytes to an approved workflow; it does not give the messages a Telegram signature, establish historical completeness, or certify that nobody accessed the host.
+The verifier checks the archive against its GitHub attestation, the approved workflow and collector commits, and the signed journal and attachment hashes. The collection process uses pinned upstream code and fresh storage. A reviewer can inspect that code and verify the delivered archive against its recorded run.
 
 ## User flow
 
@@ -33,13 +33,14 @@ The repository must contain the published pinned source and reusable-workflow co
 | --- | --- |
 | Collect one accessible chat during a limited session and give a reviewer an externally attested archive | GitHub Actions capture (preview) |
 | Observe several chats continuously, manage accounts, search and read a growing archive | Local or Docker workspace |
-| Prove that messages were never fabricated, recover unseen deletions, or hide live processing from the hosting provider | Neither mode establishes this |
 
 This starts a separate capture with a new login. It does not upload your existing local journal, export the currently open workspace, or reuse its Telegram session. An unfinished cloud capture cannot resume after its runner is destroyed; a new workflow starts a new capture. The helper is English/Russian; its entry points are translated with the rest of the interface.
 
 The workspace's **Exports → Open capture helper** opens the complete wizard inside the panel. The standalone page uses the same wizard, controls and themes. Both keep keys and decryption in your browser. GitHub workflow startup and the temporary Telegram panel open in separate tabs; the wizard tells you when to return. Locking the workspace clears the wizard's in-memory key. Your saved key file remains on your device.
 
 ## What is public, and what must stay private
+
+Collection runs on a standard GitHub-hosted runner. GitHub, the approved collector and dependencies, the helper page, the browser and the HTTPS tunnel are trusted parts of this setup. The temporary host processes the Telegram session and plaintext messages; the delivered artifacts are encrypted for the recipient.
 
 Forking copies project code into your repository. It does **not** export your Telegram account. The recipient workflow input is a public encryption key. Keep `sealed-key.json`, Telegram credentials, login codes, 2FA passwords and the decrypted connection URL out of commits, workflow inputs and public logs.
 
