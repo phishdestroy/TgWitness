@@ -1503,12 +1503,27 @@
 
 <dialog aria-labelledby="export-dialog-title" class="export-dialog" id="export-dialog">
   <form method="dialog" id="export-dialog-form">
-    <h2 id="export-dialog-title">Export the whole chat</h2>
+    <h2 id="export-dialog-title">Export chat messages</h2>
     <div id="export-dialog-facts"></div>
+    <div id="export-saved-jobs"></div>
+    <fieldset class="export-accounts"><legend>Period and message selection</legend>
+      <label>Period <select id="export-period"><option value="all">All available history</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="month">Previous calendar month</option><option value="custom">Custom dates</option></select></label>
+      <div class="field-row"><label>From date <input id="export-from" type="datetime-local"></label><label>Until (excluded) <input id="export-to" type="datetime-local"></label></div>
+      <p class="hint" id="export-timezone"></p>
+      <label>Message language <select id="export-message-language"><option value="">Any language</option><option value="en">English</option><option value="ru">Russian</option><option value="uk">Ukrainian</option><option value="de">German</option><option value="fr">French</option><option value="es">Spanish</option><option value="zh">Chinese</option><option value="ar">Arabic</option></select></label>
+      <label class="check-label"><input id="export-uncertain-language" type="checkbox"> Include uncertain or mixed language</label>
+      <label>Replies <select id="export-reply-mode"><option value="all">All messages</option><option value="replies">Messages that are replies</option><option value="answered">Messages that received a reply</option></select></label>
+      <label>Look for replies <select id="export-reply-scope"><option value="period">Within the selected period</option><option value="through_start">Until acquisition starts</option></select></label>
+      <label>Context <select id="export-context"><option value="0">Selected messages only</option><option value="1">Include direct parents and replies</option><option value="3">Include up to 3 levels of context</option><option value="10">Include up to 10 levels of context</option></select></label>
+      <label>Maximum context messages <input id="export-context-limit" type="number" min="0" max="100000" value="1000"></label>
+      <label>Text contains <input id="export-text" type="text" maxlength="200" placeholder="Optional literal phrase"></label>
+      <label class="check-label"><input id="export-media" type="checkbox"> Download selected attachments using this account's capture limits</label>
+      <p class="hint">Language is detected locally. Context can fall outside the selected dates or language and is labelled separately.</p>
+    </fieldset>
     <fieldset class="export-accounts"><legend>Accounts that download it</legend><div id="export-dialog-accounts"></div>
-      <button class="text-link" id="export-select-all" type="button">Select all connected accounts</button></fieldset>
+      <button class="text-link" id="export-select-all" type="button">Select all idle accounts</button></fieldset>
     <p class="export-estimate" id="export-dialog-estimate"></p>
-    <p class="hint">Each account downloads its own share of message numbers with its own connection, so more accounts finish sooner. Every account must be able to open the chat (member, or a public chat). Each account signs the part it downloaded; the account that starts the export signs the whole archive. Observation keeps running.</p>
+    <p class="hint">One account runs one task. Monitoring accounts cannot join this export. Pause monitoring explicitly or select other idle accounts. Committed chunks are retained when an export is paused.</p>
     <div class="export-dialog-actions"><button class="secondary" type="button" value="cancel" id="export-dialog-cancel">Cancel</button><button class="primary" id="export-dialog-start" type="submit" value="start">Start export</button></div>
   </form>
 </dialog>

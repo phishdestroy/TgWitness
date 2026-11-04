@@ -15,6 +15,7 @@ from contextlib import asynccontextmanager, suppress
 from pathlib import Path
 from typing import Literal
 
+from cryptography.exceptions import InvalidSignature
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -33,7 +34,8 @@ from .evidence import LIMITS, checkpoint, encrypt_export, export_file, producer,
 from . import i18n
 from .security import InstanceLock, Vault
 from .profiles import GROUP_SECTIONS, Profiles, ProfileDispatch
-from .multi_export import MultiExport
+from .distributed_export import DistributedExport as MultiExport
+from .message_selection import Selection
 from .provenance import run_receipt
 from .middleware import RequestLimit, request_limit
 from .account_import import import_accounts, IMPORT_REQUEST_LIMIT, session_key
@@ -251,6 +253,7 @@ class MultiExportStart(BaseModel):
     chat_id: int
     lead: str = Field(default="default", max_length=64)
     profiles: list[str] = Field(default_factory=list, max_length=256)
+    selection: Selection = Field(default_factory=Selection)
 
 
 class ProfileCreate(BaseModel):
@@ -708,8 +711,21 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             require_live()
             if (app.state.collector.export_claim and getattr(call, "__name__", "") in {
                     "configure", "start_phone", "start_qr", "send_code", "confirm_code", "confirm_password",
-                    "sign_out", "set_network", "set_route_policy", "apply"}):
-                raise HTTPException(409, "Pause the active export before changing its account or connection.")
+                    "sign_out", "set_network", "set_route_policy", "apply", "dialogs", "save_profile",
+                    "preview", "execute", "check_current", "test_network", "control"}):
+                raise HTTPException(409, "This account is busy. Pause its current task before another Telegram operation.")
+            collector = app.state.collector
+            if not collector.running and getattr(call, "__name__", "") in {"dialogs", "save_profile", "preview", "execute"}:
+                owner = "manual:" + secrets.token_hex(16)
+                if not collector.reserve_export(owner):
+                    raise HTTPException(409, "This account is busy. Pause its current task before another Telegram operation.")
+                try:
+                    return await perform_operation(call, *args)
+                finally:
+                    try:
+                        await collector.avatar_history.close()
+                    finally:
+                        collector.release_export(owner)
             return await perform_operation(call, *args)
 
     @app.get("/api/status", dependencies=[Depends(authenticate)])
@@ -973,8 +989,13 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             return all(principal.opens(pid) and (principal.chats(pid) is None or chat_id in principal.chats(pid))
                        for pid in profile_ids)
 
-        def multi_visible(request):
-            state = app.state.multi_export.state
+        def multi_visible(request, export_id=None):
+            try:
+                state = app.state.multi_export.public(export_id)
+            except (ValueError, KeyError, OSError, InvalidSignature):
+                raise HTTPException(404, "Unknown or invalid distributed export.") from None
+            if not state.get("id"):
+                return True
             return not state or opens_chat_everywhere(request.state.principal, state["chat_id"],
                                                       [state["lead"], *(w["profile_id"] for w in state["workers"])])
 
@@ -983,28 +1004,45 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             if not opens_chat_everywhere(request.state.principal, body.chat_id, [body.lead, *body.profiles]):
                 raise HTTPException(403, "This access does not open this chat in every chosen account.")
             return await operation(app.state.multi_export.start, body.chat_id, body.profiles, body.lead,
-                                   panel_language(request))
+                                   panel_language(request), body.selection.model_dump())
 
         @app.get("/api/multi-export/current", dependencies=[Depends(authenticate)])
         async def multi_export_current(request: Request):
             return app.state.multi_export.public() if multi_visible(request) else {"phase": "none"}
 
+        @app.get("/api/multi-export/jobs", dependencies=[Depends(authenticate)])
+        async def multi_export_jobs(request: Request):
+            return {"jobs": [job for job in app.state.multi_export.list_jobs()
+                             if multi_visible(request, job["id"])]}
+
         @app.get("/api/multi-export/{export_id}", dependencies=[Depends(authenticate)])
         async def multi_export_poll(request: Request, export_id: str):
-            return app.state.multi_export.poll(export_id) if multi_visible(request) else {"phase": "unknown"}
+            return app.state.multi_export.poll(export_id) if multi_visible(request, export_id) else {"phase": "unknown"}
+
+        @app.post("/api/multi-export/{export_id}/pause", dependencies=[Depends(authenticate)])
+        async def multi_export_pause(request: Request, export_id: str):
+            if not multi_visible(request, export_id):
+                raise HTTPException(403, "This access does not open every participating account.")
+            return await app.state.multi_export.pause(export_id)
+
+        @app.post("/api/multi-export/{export_id}/resume", dependencies=[Depends(authenticate)])
+        async def multi_export_resume(request: Request, export_id: str):
+            if not multi_visible(request, export_id):
+                raise HTTPException(403, "This access does not open every participating account.")
+            return await operation(app.state.multi_export.resume, export_id)
 
         @app.post("/api/multi-export/{export_id}/cancel", dependencies=[Depends(authenticate)])
         async def multi_export_cancel(request: Request, export_id: str):
-            if not multi_visible(request):
+            if not multi_visible(request, export_id):
                 raise HTTPException(403, "This access does not open this chat in every chosen account.")
-            return await app.state.multi_export.cancel(export_id)
+            return await operation(app.state.multi_export.cancel, export_id)
 
         @app.get("/api/multi-export/{export_id}/download", dependencies=[Depends(authenticate)])
         async def multi_export_download(request: Request, export_id: str):
-            path = app.state.multi_export.result_path(export_id) if multi_visible(request) else None
+            path = app.state.multi_export.result_path(export_id) if multi_visible(request, export_id) else None
             if not path:
                 raise HTTPException(404, "No finished export is available to download.")
-            return TemporaryDownload(path, filename="tgwitness-chat-export.zip", media_type="application/zip")
+            return FileResponse(path, filename="tgwitness-chat-export.zip", media_type="application/zip")
 
         @app.patch("/api/profiles/{profile_id}", dependencies=[Depends(authenticate)])
         async def profiles_rename(profile_id: str, body: ProfileCreate):

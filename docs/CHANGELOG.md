@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Reserve each account exclusively for monitoring, history or an export. Serialize Telegram RPCs and persist full FloodWait deadlines.
+- Add durable distributed chat exports with date/language/reply filters, bounded labelled context, signed chunks and explicit pause/resume. See [Distributed chat export](DISTRIBUTED-EXPORT.md).
+
 ## 0.8.1 preview · 2 November 2026
 
 - Build the runtime, sealed and media containers on a pinned Wolfi/glibc base
