@@ -174,8 +174,9 @@ Each observed change adds a record. The previous hash links it to the journal; a
 2. **Preserve** delivered events in a signed, append-only journal, with captured versions and coverage gaps.
 3. **Verify** an export independently, using a key fingerprint you retained outside the collector.
 
-A signature establishes integrity relative to a trusted key. It does **not** prove
-Telegram origin, complete capture, or that the operator told the truth.
+The signed journal preserves the content delivered to the account, source
+identifiers and captured versions. A recipient checks signatures and file hashes,
+then compares the journal against independently retained checkpoints.
 [Understand the evidence model →](HOW-IT-WORKS.md)
 
 <details>
@@ -288,13 +289,15 @@ python tgwitness/verify.py tgwitness-evidence.zip --fingerprint TRUSTED_PUBLIC_K
 The verifier prints the signed producer, continuous observation periods, gaps and message
 IDs that were never observed, and fails if the journal differs from any head the witness saw.
 
-Signatures provide tamper evidence relative to a trusted signing key. They do **not** prove
-Telegram origin, truthful content or trusted time, and they do not protect against an operator who
-controls the collector and its key. For trusted time, evidence mode (off by default) timestamps
-checkpoints with RFC 3161 authorities and OpenTimestamps calendars, or the panel prepares an
-offline RFC 3161 request ([timestamp procedure](TIMESTAMP.md)). Both are tested against
-local test servers, not yet against the public services. See the [evidence model](EVIDENCE.md)
-and the [investigation handoff](EVIDENCE.md#investigation-handoff) checklist.
+Retain the signing-key fingerprint and checkpoints outside the collector so the
+recipient has an independent reference for verification. For externally recorded
+capture provenance, [GitHub Actions capture](SEALED-ACTIONS.md) checks the archive
+against the approved hosted workflow and collector version.
+
+For trusted time, evidence mode timestamps checkpoints with RFC 3161 authorities
+and OpenTimestamps calendars, or the panel prepares an offline RFC 3161 request.
+See the [timestamp procedure](TIMESTAMP.md), [verification record](VERIFICATION.md)
+and [investigation handoff](EVIDENCE.md#investigation-handoff) checklist.
 
 </details>
 
