@@ -54,8 +54,8 @@ POLICY = {
     "POST /api/privacy/reveal": ("view", "body"),
     "GET /api/services/notifications": ("settings", None),
     "POST /api/analysis/context-export": ("export", "root"),
-    "GET /api/preferences": ("view", "root"),
-    "POST /api/preferences": ("view", "root"),
+    "GET /api/preferences": ("view", "filter"),
+    "POST /api/preferences": ("view", "filter"),
     "GET /api/analysis/provider": ("view", "root"),
     "GET /api/analysis/media": ("view", "root"),
     "POST /api/analysis/media": ("view", "root"),
@@ -312,8 +312,13 @@ def check(principal, profile_id, rule, path_params):
     if allowed is not None:
         if chat is None:
             raise Refused("This access opens only chosen chats; this part of the workspace is closed to it.")
-        if chat == "path" and int(path_params["chat_id"]) not in allowed:
-            raise Refused("This chat is not open to this access.")
+        if chat == "path":
+            try:
+                chat_id = int(path_params["chat_id"])
+            except (KeyError, TypeError, ValueError):
+                raise Refused("This chat is not open to this access.") from None
+            if chat_id not in allowed:
+                raise Refused("This chat is not open to this access.")
 
 
 class Console(logging.Handler):

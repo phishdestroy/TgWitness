@@ -12,15 +12,22 @@ def networks(value):
                  for item in value.split(",") if item.strip())
 
 
+NAT64 = ipaddress.ip_network("64:ff9b::/96")
+
+
+def unmapped(ip):
+    return ip.ipv4_mapped or ip if ip.version == 6 else ip
+
+
 def bucket(address):
     try:
-        ip = ipaddress.ip_address(address)
+        ip = unmapped(ipaddress.ip_address(address))
     except ValueError:
         return address
     if ip.version == 4:
         return str(ip)
-    if ip.ipv4_mapped is not None:
-        return str(ip.ipv4_mapped)
+    if ip in NAT64:
+        return str(ipaddress.IPv4Address(int(ip) & 0xFFFFFFFF))
     # One IPv6 subscriber usually holds a whole /64; per-address limits would be trivial to rotate around.
     return str(ipaddress.ip_network((ip, 64), strict=False))
 
@@ -38,7 +45,7 @@ class RequestSecurity:
     def client(self, scope):
         peer = (scope.get("client") or ("unknown", 0))[0]
         try:
-            address = ipaddress.ip_address(peer)
+            address = unmapped(ipaddress.ip_address(peer))
         except ValueError:
             return peer
         if not any(address in net for net in self.trusted):
@@ -49,7 +56,7 @@ class RequestSecurity:
         if len(values) != 1 or len(values[0]) > 2048:
             raise ValueError('Invalid forwarded client address.')
         try:
-            chain = [ipaddress.ip_address(item.strip()) for item in values[0].split(",")]
+            chain = [unmapped(ipaddress.ip_address(item.strip())) for item in values[0].split(",")]
         except ValueError:
             raise ValueError('Invalid forwarded client address.') from None
         if self.header == b"cf-connecting-ip":
