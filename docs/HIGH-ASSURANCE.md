@@ -127,8 +127,8 @@ The report is sealed, in `certificate.seal.json` and the `.tsq`/`.tsr` files bes
 | RFC 3161 time stamp, FreeTSA | A second, independent time stamp |
 | Verifier signature | Ed25519 over a statement naming the report's SHA-256 and every time stamp, with the verifier's own key (`--sign-with FOLDER`, default `~/.tgwitness/verifier`); the PDF carries a signature by the same key |
 
-`--timestamp URL` (repeatable) chooses other authorities, `--timestamp none` none, `--sign-with
-none` leaves the seal unsigned. `check-report` checks the report's hash, the verifier signature,
+`--timestamp URL` (repeatable) chooses other authorities, `--timestamp none` none,
+`--sign-with none` leaves the seal unsigned. `check-report` checks the report's hash, the verifier signature,
 each time stamp to a trusted root and its qualified status, and the PDF's signature. The legal
 weight of a qualified time stamp outside the EU, and of the report as a whole, is for the court
 or authority that receives it; the seal shows when the report existed and that it has not changed.
