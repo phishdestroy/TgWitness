@@ -46,8 +46,9 @@ Two further findings, fixed afterwards:
   exist, and `statement` failed: a forger could not pass as the collector, but could block
   third-party verification, for up to 12 hours with a forged future timestamp. The collector now
   also posts its address signed with its own key, `verify` accepts only such posts when the
-  collector makes them, and posts are ordered by ntfy.sh's receive time.
-  [`tools/check_cloud_wizard.py`](../tools/check_cloud_wizard.py) replays the forged posts. A CVM
+  collector makes them, signed posts are ordered by the time signed into them, so an old one sent
+  again stays old, and unsigned posts by ntfy.sh's receive time.
+  [`tools/check_cloud_wizard.py`](../tools/check_cloud_wizard.py) replays forged and old posts. A CVM
   runs this only from a commit that contains it, so this run's collector did not sign its address
   yet and `verify` said so.
 - `tdx_os` could not run without `dstack-mr`, whose current version has `measure-os` rather than
