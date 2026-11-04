@@ -86,6 +86,7 @@
   #view-sources .sources-tabs .tab-count { min-width: 16px; padding-inline: 4px; font-size: 11px; }
   #view-sources .recording-sections .padded { padding: 16px; }
   #view-sources .recording-sections { grid-template-columns: 1fr; }
+  #view-sources .recording-sections .monitoring-options { gap: 10px; }
   #view-sources .recording-sections .monitoring-presets { gap: 6px; margin: 12px 0; }
   #view-sources .recording-sections .monitoring-presets button { flex: 1 1 auto; font-size: 12px; }
   #view-sources .recording-savebar { flex-wrap: wrap; bottom: 6px; padding: 12px; gap: 10px; }

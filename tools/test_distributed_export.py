@@ -360,6 +360,62 @@ def test_preflight_cancellation_releases_every_account(tmp_path):
     asyncio.run(scenario())
 
 
+@pytest.mark.parametrize("interruption", ["failure", "pause", "repeated_pause", "failure_then_pause"])
+def test_workers_finish_cleanup_before_accounts_are_released(tmp_path, interruption):
+    async def scenario():
+        manager, entries = coordinator(tmp_path, [message(1)])
+        entered, draining, release, stopped = (asyncio.Event() for _ in range(4))
+        workers = []
+
+        async def work(worker):
+            workers.append(asyncio.current_task())
+            if worker["profile_id"] == "account0":
+                await entered.wait()
+                if interruption.startswith("failure"):
+                    raise OSError("Synthetic chunk-index failure")
+                await asyncio.Event().wait()
+            else:
+                entered.set()
+                try:
+                    await asyncio.Event().wait()
+                finally:
+                    draining.set()
+                    await release.wait()
+                    stopped.set()
+
+        manager.work = work
+        try:
+            state = await manager.start(CHAT, list(entries), "account0")
+            await asyncio.wait_for(entered.wait(), 5)
+            if interruption in ("pause", "repeated_pause"):
+                manager.task.cancel()
+            await asyncio.wait_for(draining.wait(), 5)
+            assert manager.busy() and manager.db is not None and not stopped.is_set()
+            for entry in entries.values():
+                collector = entry["app"].state.collector
+                assert collector.export_claim == state["id"]
+                assert not collector.reserve_export("competing-task")
+            if interruption in ("repeated_pause", "failure_then_pause"):
+                manager.task.cancel()
+                await asyncio.sleep(0)
+                assert manager.busy() and not stopped.is_set()
+            release.set()
+            await asyncio.wait_for(asyncio.gather(manager.task, return_exceptions=True), 5)
+            assert stopped.is_set() and all(task.done() for task in workers)
+            assert manager.db is None and not manager.busy()
+            assert manager.state["phase"] == ("failed" if interruption == "failure" else "paused")
+            assert all(entry["app"].state.collector.export_claim is None for entry in entries.values())
+        finally:
+            release.set()
+            for task in workers:
+                if not task.done():
+                    task.cancel()
+            await asyncio.gather(*workers, return_exceptions=True)
+            await manager.close()
+            close_entries(entries)
+    asyncio.run(scenario())
+
+
 def test_context_cap_and_precise_half_open_dates(tmp_path):
     options = Selection(from_utc="2026-10-05T00:00:00Z", to_utc="2026-10-05T00:00:01Z",
                         text_contains=["root"], context_depth=1, max_context_messages=2)

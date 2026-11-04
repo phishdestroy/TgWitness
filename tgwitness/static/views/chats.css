@@ -75,6 +75,8 @@ button.chat-setting-chip:hover { border-color: var(--accent); color: var(--accen
   .workspace[data-current-view="chats"] .chat-item { gap: 8px; padding-inline: 8px; }
 }
 @media (max-width: 767px) {
+  .chat-view-tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; align-self: stretch; }
+  .chat-view-tabs .filter { flex: 0 0 auto; white-space: nowrap; }
   .chat-safety { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px 12px; padding:6px 12px; }
   .chat-safety label { min-height:28px; }
   .chat-safety-hint { display:none; }

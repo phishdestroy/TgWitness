@@ -692,7 +692,10 @@ def main():
             page.locator("#parameters-menu > summary").click()
             page.locator("#parameters-reset").click()
             page.locator("#parameters-reset-apply").click()
-            page.locator("#parameters-save").click()
+            with page.expect_response(lambda response: response.url.endswith("/api/parameters")
+                                      and response.request.method == "POST") as reset_saved:
+                page.locator("#parameters-save").click()
+            assert reset_saved.value.ok
             expect(page.locator(".parameter-row.changed")).to_have_count(0)
             assert live.app.state.store.get_setting("parameters") == {}
             reload_panel(page)

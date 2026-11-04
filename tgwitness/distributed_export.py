@@ -466,7 +466,24 @@ class DistributedExport:
             clock = await lead.telegram_clock()
             profile, observer, problems = await lead.chat_profile(self.entities[self.job["lead"]])
             log = await lead.admin_log(self.entities[self.job["lead"]]) if observer.get("role") in ("admin", "creator") else None
-            await asyncio.gather(*(self.work(w) for w in self.state["workers"] if w["state"] != "skipped"))
+            workers = [asyncio.create_task(self.work(w)) for w in self.state["workers"] if w["state"] != "skipped"]
+            try:
+                await asyncio.gather(*workers)
+            finally:
+                # gather propagates a worker error without stopping its siblings.
+                # Keep the index and every account reservation until they finish.
+                for task in workers:
+                    if not task.done() and not task.cancelling():
+                        task.cancel()
+                drained = asyncio.gather(*workers, return_exceptions=True)
+                interrupted = False
+                while not drained.done():
+                    try:
+                        await asyncio.shield(drained)
+                    except asyncio.CancelledError:
+                        interrupted = True
+                if interrupted:
+                    raise asyncio.CancelledError
             if self.db.execute("SELECT 1 FROM tasks WHERE phase!='done' LIMIT 1").fetchone():
                 raise ValueError("Some ranges could not be read. Saved chunks are retained; resume when accounts are available.")
             self.state["phase"] = "selecting"

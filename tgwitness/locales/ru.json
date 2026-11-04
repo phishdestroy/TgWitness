@@ -1,4 +1,6 @@
 {
+  "<strong>Profile changes</strong><small>Save name changes and deletion flags for known users.</small>": "<strong>Изменения профиля</strong><small>Сохранять смены имён и признаки удаления известных аккаунтов.</small>",
+  "<strong>Visible online statuses</strong><small>Save received statuses. Presence is account-wide; no extra polling.</small>": "<strong>Доступные статусы онлайн</strong><small>Сохранять полученные статусы аккаунта без дополнительного опроса. Статус не указывает конкретный чат.</small>",
 "No session — only application settings. Add a .session or TData file, or sign in by phone or QR.": "Нет сессии — только настройки приложения. Добавьте .session или TData либо войдите по телефону или QR-коду.",
 "Session found. Telegram will validate it when you connect.": "Сессия найдена. При подключении Telegram проверит, действительна ли она.",
 "Session found": "Сессия найдена",
