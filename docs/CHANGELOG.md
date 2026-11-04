@@ -26,6 +26,9 @@
 - Quick tunnel addresses are also posted signed with the collector key, so a verifier is not
   misled by forged posts on the address topic; on Phala Cloud the tunnel check passes, since its
   connector runs inside the measured compose.
+- Signed address posts are ordered by the time signed into them, so an old post sent to the topic
+  again does not replace the current address; unsigned posts are still ordered by ntfy.sh's
+  receive time.
 
 ## 0.8.1 preview · 2 November 2026
 

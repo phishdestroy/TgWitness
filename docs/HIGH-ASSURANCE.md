@@ -204,9 +204,10 @@ published cloud-init: whoever has them can read the current address, which still
 panel token. The server keeps no inbound port either way.
 
 A verifier has no address key, and anyone who reads the topic can post to it. So the collector
-also posts the address itself, signed with its own Ed25519 key, and `verify` takes the newest
-post signed by the collector key in the deployment record; posts are ordered by the time ntfy.sh
-received them, not the time they claim. A collector from before this change signs nothing, and
+also posts the address itself, signed with its own Ed25519 key, and `verify` takes, of the posts
+signed by the collector key in the deployment record, the one with the latest signed time, so an
+old post sent again stays old. Unsigned posts are ordered by the time ntfy.sh received them, not
+the time they claim. A collector from before this change signs nothing, and
 `verify` then takes the newest post and says so in the `statement` check; a forged post can
 only make that check fail, since the address must still answer with the collector's key.
 
