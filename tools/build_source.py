@@ -16,6 +16,7 @@ CONTAINER_INPUTS = (
 )
 FILES = [
     "tgwitness/client_profiles.LICENSE",
+    "tgwitness/dstack_measurement.LICENSE",
     "tgwitness/fonts/OFL.txt",
     "tgwitness/fonts/NotoSerif-OFL.txt",
     "deploy/installer/install.sh.in", "deploy/installer/install.ps1.in", "deploy/installer/install.cmd.in",
@@ -61,7 +62,9 @@ FILES.extend("website/export-clinic/media/" + name for name in EXPORT_CLINIC_ASS
 FILES.extend("tools/tdx/" + name for name in (
     "intel-v4.quote.hex", "intel-v4.collateral.json", "intel-v5-td15ex.quote.hex", "intel-v5-td15ex.collateral.json",
     "intel-outdated.collateral.json", "dstack-v4.json", "dstack-v4.collateral.json",
+    "phala-dstack-0.5.12.json", "phala-dstack-0.5.12.collateral.json",
 ))
+FILES.append("tools/tsa/time-stamps.json")
 FILES.extend("addons/capture/" + name for name in (
     "README.md", "pyproject.toml", "requirements.lock", "lock_from_project.py", "compose.yaml",
     "config/browser.example.json", "config/ayugram.example.json",
