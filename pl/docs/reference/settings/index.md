@@ -62,10 +62,3 @@ Strona grupy `/groups/<id>` pokazuje członków, sprawy wymagające uwagi oraz c
 W obszarze roboczym z aktywną sesją lub wcześniej zakończoną konfiguracją kreator nie jest wyświetlany. Jego wartości nie są zastępowane przez cel podczas ładowania strony. Ukrycie pola nie wyłącza tej funkcji ani nie usuwa jej wartości.
 
 Szacunkowa wielkość i czas obejmują do trzech wybranych czatów i do 20 wiadomości z każdego z nich. Jest to wartość orientacyjna: nie uwzględnia ona limitów serwisu Telegram, prędkości danego serwera ani plików w poszczególnych czatach.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

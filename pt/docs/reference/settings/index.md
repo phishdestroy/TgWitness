@@ -62,10 +62,3 @@ A página do grupo `/groups/<id>` mostra os membros, o que precisa de atenção 
 Um espaço de trabalho com uma sessão ou uma configuração concluída anteriormente não exibe o assistente. Seus valores não são substituídos por uma meta quando a página é carregada. Ocultar um campo não desativa o recurso nem exclui seu valor.
 
 A estimativa de tamanho e tempo considera até três conversas selecionadas e até 20 mensagens de cada uma. Trata-se de uma estimativa: ela não prevê os limites do Telegram, a velocidade de um determinado servidor nem os arquivos presentes em cada conversa.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

@@ -224,9 +224,6 @@ dari akun tambahan bukanlah model penentuan ukuran yang valid. Batas default ada
 dapat diubah per ruang kerja di bawah <strong>Parameter</strong>. Ekspor tidak memiliki batasan jumlah peristiwa yang tetap.
 Fallback browser dibatasi hingga 128 MiB secara default; CLI streaming memiliki
 batas transfer yang dapat dikonfigurasi, 5 GiB secara default.</p>
-<p><code>tools/check_capacity.py</code> mengukur pengambilan dan ekspor data sintetis lokal. Hasilnya
-bukanlah pengukuran pengiriman Telegram atau jumlah obrolan nyata yang dijamin. Lihat
-<a href="../verification/">VERIFICATION.md</a> untuk versi yang diukur dan beban kerja.</p>
 <h2 id="reliability-and-recovery">Keandalan dan pemulihan<a class="anchor" href="#reliability-and-recovery" aria-label="Tautan ke bagian ini">#</a></h2>
 <p>Perilaku yang diimplementasikan meliputi WAL SQLite/transaksi sinkron; penulisan pesan
 dan tugas media secara atomik; tugas yang persisten dan penundaan percobaan ulang; deskriptor versi asli;

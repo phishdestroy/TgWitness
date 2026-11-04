@@ -32,8 +32,6 @@ Desteklenen yardımcı program indirmeleri: Linux ve macOS x86-64/ARM64 ile Wind
 
 Yüklenen WireGuard profilleri bir Arayüz ve bir Eş, tam IPv4 ve IPv6 rotaları içermeli; kanca, dahil etme, ortam değiştirme veya fazladan dinleyici içermemelidir. Genel uç nokta adresleri, başlatma öncesinde çözümlenir ve sabitlenir. OpenVPN/IPsec ve özel uç noktalar için harici bir VPN veya SOCKS5 ağ geçidi kullanın.
 
-Sentetik kontroller `python tools/check_guided_connection.py` ve `python tools/check_guided_connection_browser.py`'dir. İsteğe bağlı `python tools/check_portable_routes_runtime.py`, doğrulanmış yardımcı programları indirir ve bunların gerçek yerel işlem yaşam döngüsünü loopback fikstürlerine karşı test eder. Bu işlem, bir Cloudflare cihazını kaydetmez veya bir Telegram hesabı kullanmaz.
-
 ## Kimlik doğrulama yöntemleri
 
 **API Kimliği ve API hash'i bir uygulamayı tanımlar; hesap girişinin yerini almazlar.** TgWitness'te bunlar isteğe bağlıdır. Öncelik sırası: forma girilen bir çift, ardından içe aktarılan hesap JSON'undan bir çift, sonra çalışma alanında kaydedilen çift ve son olarak da Telegram'ın birini reddetmesi durumunda otomatik rotasyonla rastgele sırayla denen genel çift havuzundan gelenler denir; Telegram bir çifti reddettiğinde otomatik rotasyonla rastgele sırayla denenir. Yalnızca Telegram Desktop çifti (2040), eşleşen Telegram Desktop istemci açıklamasıyla birlikte gönderilir. [my.telegram.org](https://my.telegram.org) adresindeki API Geliştirme Araçları'ndan aldığınız kendi çiftiniz tüm hesaplarınızla kullanılabilir; her hesabın yine de kendi yetkilendirme bilgisi vardır.
@@ -70,8 +68,6 @@ python -m tgwitness.sessions account.session --out account.tgwitness-session
 
 1. **Hesap ekle → Dosyalar** bölümünden sonucu yükleyin veya dizesini yapıştırın ve devam edin.
 2. Ekranda görüntülenen sayısal hesap kimliğini kontrol edin, kaynakları seçin ve gözlemi başlatın.
-
-Dönüştürücü, SQLite'ı salt okunur olarak açar, şema yükseltmesi veya ağ isteği gerçekleştirmez ve oturumu yazdırmaz. Şema sürümünü, tablo türlerini, tek bir oturum satırını, IP/bağlantı noktası/veri merkezi ve anahtar uzunluğunu kontrol eder. CLI girişi 64 MiB ile sınırlıdır; StringSession metni 4 KiB ile sınırlıdır. Panel dönüştürme, dosyaları kimliği doğrulanmış TgWitness sunucusuna yükler, bunları bellekte işler ve yüklenen orijinalleri kaydetmeden normalleştirilmiş kimlik bilgilerini o tarayıcıya geri gönderir. Uzak sunucu için HTTPS kullanın.
 
 **Dönüştürülen dosya, şifrelenmemiş bir hesap erişim şifresidir.** Bunu güvenli bir depolama alanında saklayın ve asla bir üçüncü taraf dönüştürme hizmetine aktarmayın veya göndermeyin. TgWitness, yetkilendirilmiş oturumu şifreli kasasında saklar. Bir oturumu kopyalamak, ayrı bir yetkilendirme oluşturmaz: klonlanmış yetkilendirme anahtarlarıyla eşzamanlı istemciler çalıştırmayın ve bağımsız güncelleme teslimi olduğunu varsaymayın.
 
@@ -115,15 +111,9 @@ Yerleşik liste dört kaynağı birleştirir: [SoliSpirit/mtproto](https://githu
 
 Otomatik rotalar etkinken, listeler saat başı yenilenir ve aktarım kontrolleri varsayılan olarak her on dakikada bir çalıştırılır. Bu aralıklar yapılandırılabilir. **Genel listeleri güncellemek** bir yenileme gerektirir; listeyi yalnızca görüntülemek, kaydedilmiş bir manuel rotayı değiştirmez.
 
-Her besleme yanıtı 1 MiB ile sınırlıdır; istek zaman aşımı sekiz saniye ve toplam indirme süresi 20 saniyedir; yönlendirmeler reddedilir. Kaynak başına en fazla 64 uyumlu giriş saklanır ve tekilleştirilir. Ayrıştırıcı, desteklenen onaltılık ve base64url gizli anahtarlarını ve JSON beslemesini kabul eder. Sahte TLS `ee`'leri, geçersiz bağlantılar, özel/ayrılmış IP sabitleri ve yerel ana bilgisayar adları atlanır. Ana bilgisayar adları kullanılmadan önce çözümlenir ve kontrol edilir; seçilen IP, o bağlantı için sabitlenir. Otomatik yeniden edinme işlemi, ana bilgisayar adını tekrar çözümler; yeniden çözümlemek için manuel bir girişi tekrar uygulayın.
-
-Başarısız, boş veya uyumsuz besleme yanıtlarında önceki kaynak anlık görüntüsü korunur. Güncellemeler atomiktir, serileştirilmiştir ve çalışma alanı başına dakikada bir denemeyle sınırlıdır. Başarılı bir aktarım denemesi, anonimlik veya yakalama tamlığını değil, bağlantı kurulduğunu gösterir.
-
 **Telegram trafiği ve HTTPS istekleri farklı yollar kullanır.** Liste indirmeleri, ayrı bir HTTPS bağlantısı ve sağlanan harici istek yolunu kullanır. `TGWITNESS_PROXY_FEED_PROXY`, bu yolu bir HTTP/SOCKS5 proxy ile açıkça geçersiz kılar; her iki Compose toplayıcı varyantı da bunu iletir. Arka plan havuzu, ana çalışma alanını takip eder. Feed sağlayıcılara hiçbir Telegram oturumu, API kimlik bilgileri, panel jetonu veya bot jetonu gönderilmez. Sağlayıcı adları, anlık görüntü tarihleri ve indirme yolu, **“Listenin kaynağı”** bölümünde görünür.
 
 MTProxy, yalnızca Telegram trafiğini taşır. Zaman damgaları, bildirimler, site dışı kopyalar ve kaynak kontrolleri gibi çalışma alanı HTTP işlemleri, yapılandırıldığında ayrı bir SOCKS5/HTTP proxy'si kullanır, ardından hesabın SOCKS5/HTTP rotasını kullanır. Her ikisi de yoksa, "Adresi Gizle" seçeneği isteği reddeder; diğer modlar "Doğrudan" seçeneğine izin verir. Harici istekler devre dışı bırakılabilir. Açıkça yapılandırılmış bir besleme indirme proxy'si, ayrı bir operatör geçersiz kılma seçeneği olarak kalır. Bağımsız tanık hizmeti kendi yolunu korur.
-
-SOCKS5 veya HTTP proxy'leri aracılığıyla yapılan, yalnızca genel erişime açık harici HTTP istekleri, `https://1.1.1.1/dns-query` adresindeki Cloudflare DNS over HTTPS ile aynı proxy üzerinden hedefi çözümler. Yalnızca ana bilgisayar adı ve A/AAAA sorgu türleri çözümleyiciye gönderilir; hizmet URL'leri, kimlik bilgileri ve bildirim içerikleri dahil edilmez. TLS, çözümleyicinin IP adresi için sertifikasını doğrular. Her iki adres ailesi de kontrol edilir ve özel, geri döngü, bağlantı-yerel veya ayrılmış yanıtlar isteği reddeder. Bağlantılar, hizmetin orijinal HTTP Ana Bilgisayarı ve TLS sertifika adını korurken, doğrulanmış sayısal bir adres kullanır. Bildirim HTTP yönlendirmesi ve CONNECT istekleri aynı hedef denetimlerini kullanır. DNS hatası, yerel hedef DNS veya doğrudan yedekleme olmadan isteği durdurur. Başarılı yanıtlar, proxy rotası başına en fazla 30 saniye ve DNS TTL'lerinden daha uzun olmamak kaydıyla bellekte önbelleğe alınır; önbellek 128 girdiyle sınırlıdır. Proxy ana bilgisayar adı kendisi yerel DNS kullanabilir. SOCKS ve CONNECT hataları, hizmet isteği gövdesini göndermeden önce başka bir doğrulanmış adresi deneyebilir. Düz HTTP yönlendirmesi, isteğin başarısız olduğunu bildirir ve gövdesini başka bir adres üzerinden otomatik olarak tekrar göndermez.
 
 Operatör tarafından yönetilen özel hizmetler için, mevcut sunucu ortamı ayarı `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1`, özel hedefleri izin verir ve proxy tarafında ana bilgisayar adı çözümlemesini korur. Bu ayar panelden etkinleştirilemez. Yalnızca genel mod, genel çözümleyicisine sorgu göndermeden önce `.onion` hedeflerini reddeder; Tor onion hizmetleri, bu açık özel hedef ayarını ve uygun bir proxy gerektirir. Bu DNS davranışı, Telegram'ın aktarım protokolü için değil, harici HTTP işlemleri için geçerlidir. Cloudflare, [JSON DNS uç](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) noktasını belgelemektedir.
 
@@ -174,8 +164,6 @@ SOCKS5 ve düz HTTP CONNECT, proxy kimlik bilgilerini veya istemci-proxy tüneli
 
 Hesap bölümündeki **depolama koruması** bu durumları gösterir. Panel jetonu bir erişim gizli anahtarıdır, şifreleme parolası değildir. Yönetici erişimi sağlar; [düzenlenen jetonların](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/) kapsamı hesaplar ve sohbetlerle sınırlandırılabilir. Çalışma alanları ana süreci paylaşır ve izole edilmiş kiracılar değildir.
 
-Açıkça başlatılmış, izole edilmiş sentetik bir demo, doğrudan bir loopback bağlantısı üzerinden otomatik olarak açılabilir. Bu, ayrı bir işlem ömrü özelliğini kullanır; ne yapılandırılmış panel jetonunu açığa çıkarır ne de gerçek çalışma alanlarına erişim izni verir. Uzak, proxy üzerinden veya kaynaklar arası istekler bu otomatik giriş özelliğini elde edemez/kullanamaz. Bu kolaylık, gerçek hesap verileri için kimlik doğrulama sınırını ortadan kaldırmaz.
-
 BitLocker, LUKS, FileVault veya yönetilen şifreli bir birim, kendi tehdit modelleri kapsamında depolama alanını koruyabilir. Kilidi açılmış ve çalışır durumdaki bir makinenin yöneticisi yine de verileri okuyabilir. Depolama planlamasına SQLite WAL/SHM, medya, geçici dışa aktarımlar, takas alanı, yedeklemeler ve tarayıcı indirmelerini dahil edin. Bir Docker birimi, sırf birim olduğu için şifrelenmez. TgWitness, SQLCipher veya nesne şifrelemesini uygulamaz.
 
 ## Harici ana anahtar
@@ -203,17 +191,3 @@ Her çalışma alanı, rastgele bir genel tuz değeri ve HKDF-SHA256 aracılığ
 Tüm çalışma alanları aynı ana anahtardan türetilir; bu anahtarın güvenliğinin ihlali tüm kurulumu etkiler. Çalışan işlem, gizli bilgileri şifresini çözebilir. Bu bir HSM veya parola KDF değildir. Rastgele bir anahtarın yerine keyfi insan parolaları kabul edilmez.
 
 Kasıtlı bir geçiş gerçekleştirilip doğrulanana kadar mevcut kurulumlar için mevcut anahtarı kullanmaya devam edin. `vault.key`'yi silmek veya ana anahtarı değiştirmek, oturumlara/imza anahtarlarına erişimi engelleyebilir. Şifrelenmiş yedekleri ve anahtarları ayrı tutun ve kurtarma işlemini izole bir ortamda test edin.
-
-## Kaynaklar ve doğrulama kapsamı
-
-26 Ekim 2026 tarihinde gözden geçirilmiştir:
-
-- https://core.telegram.org/api/auth
-- https://core.telegram.org/api/obtaining_api_id
-- https://docs.telethon.dev/en/stable/basic/signing-in.html
-- https://docs.telethon.dev/en/stable/concepts/sessions.html
-- https://core.telegram.org/mtproto/mtproto-transports
-- https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp
-- Telethon 1.45.0: SQLiteSession, StringSession, `Connection._proxy_connect`, `TcpMTProxy.normalize_secret` ve indirme yöntemleri.
-
-Yerel testler, loopback SOCKS5/HTTP CONNECT test senaryolarını, sentetik SQLite oturumlarını, yol izolasyonunu, gizli bilgilerin hariç tutulmasını ve eksik anahtar reddetmesini kapsar. Bu testler, gerçek Telegram/proxy birlikte çalışabilirliğini veya canlı MTProxy davranışını doğrulamaz. [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/) ve [LIVE_ACCEPTANCE.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) dosyalarına bakınız.

@@ -32,11 +32,11 @@
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../">홈</a> <span aria-hidden="true">/</span> <a href="../">문서</a> <span aria-hidden="true">/</span> <span aria-current="page">케이스 보드 구축하기</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">문서 / 10</p><h1>케이스 보드 구축하기</h1><p class="guide-outcome">저장된 텔레그램 관찰 내용을 팀이 함께 검토할 수 있는 사건으로 전환하십시오.</p>
-<p>Case Board는 출처 참조 정보 옆에 북마크, 정확한 텍스트 하이라이트, 저장된 슬라이스 및 토론 내용을 함께 보관합니다. 컬렉션은 사건에 작업 구조를 제공하며, 서명된 수정 내역은 팀이 이를 어떻게 발전시켜 왔는지를 보존합니다.</p>
+<article class="guide-content"><p class="eyebrow">문서 / 10</p><h1>케이스 보드 구축하기</h1><p class="guide-outcome">저장된 메시지를 팀이 함께 작업하는 사건으로 바꿉니다.</p>
+<p>북마크, 정확한 인용, 슬라이스, 토론이 각각 출처에 연결됩니다. 모든 변경은 서명된 수정본입니다.</p>
 
 <h2 id="first-card">메시지에서 사건 카드로</h2>
-<ol><li><strong>‘조사’ → ‘케이스 보드’를</strong> 표준 모드 또는 전문가 모드로 엽니다. 해당 사건에 대한 수집 항목을 생성하고 채팅 범위를 선택합니다.</li><li><strong>저널</strong> 이나 저장된 채팅에서 <strong>‘보드에 추가’를</strong> 선택하거나, 해당 기록을 선택하고 <strong>B 키를</strong> 누르십시오. 카드가 수신함으로 이동합니다. 적절한 제목을 지정하고 컬렉션으로 이동시키십시오.</li><li>저장된 채팅 메시지에서 해당 구절을 선택하고 <strong>‘하이라이트(Highlight)’ → ‘보드(board)’를</strong> 선택하여 정확한 인용문과 메시지 버전을 유지하십시오. 해당 내용이 중요한 이유를 설명하는 메모를 추가하십시오.</li><li>주장을 확인해야 할 때마다 해당 카드를 검토하고, 검토 상태를 지정하며, 원본 맥락으로 되돌아가십시오. <strong>‘프레젠테이션’</strong> 기능을 사용하여 동료들과 함께 수집 내용을 단계별로 살펴보세요.</li></ol>
+<ol><li><strong>조사 → 케이스 보드</strong>(표준 또는 전문가 모드). 사건용 컬렉션을 만듭니다.</li><li><strong>저널</strong>이나 채팅에서 <strong>보드에 추가</strong>(또는 <strong>B</strong>)를 누릅니다. 카드는 받은편지함에 들어가며, 제목을 붙이고 옮깁니다.</li><li>메시지에서 텍스트를 선택하고, <strong>하이라이트 → 보드</strong>가 정확한 인용과 버전을 보관합니다. 왜 중요한지 적어 둡니다.</li><li>토론하고, 상태를 정하고, 필요할 때마다 출처로 돌아갑니다. <strong>프레젠테이션</strong>으로 팀에게 차례로 보여 줍니다.</li></ol>
 
 <section class="workflow-lab" data-workflow="board" aria-labelledby="board-example-title">
   <h3 id="board-example-title">변경된 결제 링크 하나를 따라가세요</h3>
@@ -58,15 +58,15 @@
 </section>
 
 <h2 id="slices">유용한 범위를 한 번에 저장하세요</h2>
-<p>한 채팅에서 두 개의 기록을 Shift 키를 누른 채 클릭하여 <strong>‘Slice </strong>between’을 선택하거나, <strong>‘Slice by time’을</strong> 선택하거나, 현재 저널 필터를 저장하십시오. 저장하기 전에 개수를 확인하십시오. 저장된 쿼리를 적용하려면 슬라이스를 다시 여십시오. <strong>‘북마크 이후 추가된 기록 표시’를</strong> 선택하면 나중에 추가된 기록을 확인할 수 있습니다.</p>
-<p>타임 슬라이스는 수집기의 관찰 시간을 따릅니다. 메시지 ID 슬라이스는 이후 변경 사항이 발생함에 따라 선택된 메시지를 추적할 수 있습니다. 저장된 생성 경계 정보를 통해 수신자는 원래 선택 내용과 이후 상태를 비교할 수 있습니다.</p>
+<p>두 메시지를 Shift+클릭해 <strong>사이 슬라이스</strong>, <strong>시간별 슬라이스</strong>를 사용하거나 현재 저널 필터를 저장합니다. <strong>북마크 이후 추가된 기록 표시</strong>로 나중에 들어온 것을 봅니다.</p>
+<p>시간 슬라이스는 관찰 시각을 쓰고, 메시지 ID 슬라이스는 그 메시지가 바뀌는 대로 따라갑니다.</p>
 
 <h2 id="team">각 동료에게 적절한 역할을 부여하십시오</h2>
-<p><strong>검토자는</strong> 보드를 확인하고, <strong>분석가는</strong> 카드와 코멘트를 추가하며, <strong>운영자는</strong> 수집 작업과 검토 결정을 관리합니다. 작업 공간 및 채팅 권한은 카드, 원본 컨텍스트 및 토론에 적용됩니다. 명확한 출처 표기를 위해 명명된 접근 권한을 사용하십시오.</p>
+<p><strong>검토자</strong>는 읽고, <strong>분석가</strong>는 카드와 댓글을 추가하며, <strong>운영자</strong>는 컬렉션과 결정도 관리합니다. 채팅 권한은 카드에도 적용됩니다.</p>
 
 <h2 id="deliver">이 작업을 결과물로 완성해 주십시오.</h2>
-<p>슬라이스를 서명된 JSON으로 내보내거나, 스프레드시트용 CSV를 사용하십시오. 보고서 설정에는 북마크와 슬라이스를 포함할 수 있으며, 선택 시 팀 코멘트를 추가할 수 있습니다. <a href="../reports/">Report </a>Studio에서 이러한 내용을 선택하십시오. 저장된 슬라이스가 자동으로 보고서를 구성하지는 않습니다. 수신자가 제한된 경우, 별도의 <a href="../handover/">인계 제어</a> 기능을 사용하십시오.</p>
-<p>서명된 수정 사항, 정확한 인용문 일치, 선택 내용 확인 및 권한에 대해서는 <a href="../reference/case-board/">Case Board 참조</a> 문서를 확인하십시오.</p>
+<p>슬라이스는 서명된 JSON이나 CSV로 내보냅니다. 보고서에는 북마크, 슬라이스, 댓글을 넣을 수 있으며, <a href="../reports/">Report studio</a>에서 설정합니다. 제한된 수신자에게는 <a href="../handover/">인계</a>를 사용하십시오.</p>
+<p>자세히: <a href="../reference/case-board/">Case Board 참조</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/case-board/">전체 참고 문헌 →</a><a class="next-guide" href="../reports/"><span>다음 단계</span><strong>보고서 설계 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../reference/verification/">테스트된 내용 →</a></p></footer>
 </main>

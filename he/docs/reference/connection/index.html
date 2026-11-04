@@ -119,11 +119,6 @@ PATH, אינו מותקן כשירות מערכת, ואינו מקבל מאזי�
 ו-IPv6 מלאים, וללא hooks, includes, תחליפי סביבה או
 מאזינים נוספים. כתובות נקודות קצה ציבוריות נפתרות ומוצמדות לפני ההפעלה.
 השתמש ב-VPN חיצוני או בשער SOCKS5 עבור OpenVPN/IPsec ונקודות קצה פרטיות.</p>
-<p>הבדיקות הסינתטיות הן <code>python tools/check_guided_connection.py</code> ו-
-<code>python tools/check_guided_connection_browser.py</code>. האפשרות האופציונלית
-<code>python tools/check_portable_routes_runtime.py</code> מורידה עוזרים מאומתים ו
-בודקת את מחזור החיים המקומי בפועל של התהליכים שלהם מול מתקני לולבק. היא
-אינה רושמת מכשיר Cloudflare ואינה משתמשת בחשבון Telegram.</p>
 <h2 id="authentication-methods">שיטות אימות<a class="anchor" href="#authentication-methods" aria-label="קישור לסעיף זה">#</a></h2>
 <p><strong>מזהה ה-API וה-hash של ה-API מזהים יישום; הם אינם מחליפים את פרטי הכניסה לחשבון.</strong>
 
@@ -219,12 +214,6 @@ PATH, אינו מותקן כשירות מערכת, ואינו מקבל מאזי�
     הדבק את המחרוזת שלה, והמשך.</li>
 <li>בדקו את מזהה החשבון המספרי המוצג, בחרו מקורות והתחילו במעקב.</li>
 </ol>
-<p>הממיר פותח את SQLite לקריאה בלבד, אינו מבצע שדרוג סכימה או בקשת רשת,
-ואינו מדפיס את ההפעלה. הוא בודק את גרסת הסכימה, סוגי הטבלאות, שורה אחת
-מההפעלה, IP/יציאה/מרכז נתונים ואורך המפתח. קלט CLI מוגבל ל-64 MiB; טקסט StringSession
-מוגבל ל-4 KiB. המרה באמצעות לוח הבקרה מעלה קבצים לשרת TgWitness
-המאומת, מעבד אותם בזיכרון, ומחזיר את פרטי הזיהוי הנורמליים לאותו
-דפדפן מבלי לשמור את הקבצים המקוריים שהועלו. יש להשתמש ב-HTTPS עבור שרת מרוחק.</p>
 <p><strong>הקובץ שהומר הוא סיסמת גישה לחשבון שאינה מוצפנת.</strong> יש לשמור אותו
 במקום אחסון מוגן, ואסור בשום אופן להעלות אותו או לשלוח אותו לשירות המרה של צד שלישי. TgWitness
 שומר את ההפעלה המורשית בכספת המוצפנת שלו. העתקת הפעלה אינה
@@ -331,17 +320,6 @@ MTProxy הוא פרוקסי העברה של טלגרם; SOCKS5 ו-HTTP CONNECT �
 <p>כאשר מסלולים אוטומטיים פעילים, הרשימות מתעדכנות מדי שעה ובדיקות העברה מתבצעות
 מדי עשר דקות כברירת מחדל. ניתן להגדיר מרווחי זמן אלה. <strong>עדכון רשימות ציבוריות</strong>
 מחייב רענון; הצגת הרשימה בלבד אינה משנה מסלול ידני שנשמר.</p>
-<p>כל תגובה בפיד מוגבלת ל-1 MiB עם זמן המתנה של שמונה שניות לבקשה ו
-מועד אחרון להורדה של 20 שניות בסך הכל; הפניות
-נדחות. עד 64 רשומות תואמות לכל מקור נשמרות ונעשות בהן הסרת כפילויות.
-המנתח מקבל סודות תומכים בשיטת הקסדצימלית וב-base64url וכן את פיד ה-JSON.
-<code>ee</code> TLS מזויף, קישורים לא חוקיים, ליטרלים של כתובות IP פרטיות/שמורות ושמות מארחים מקומיים
-מוחמצים. שמות מארחים מפורשים ונבדקים לפני השימוש, וכתובת ה-IP שנבחרה נקבעת
-לאותו חיבור. רכישה מחדש אוטומטית מפרשת שם מארח שוב; יש להחיל מחדש
-ערך ידני כדי לפרש אותו שוב.</p>
-<p>תגובות פיד שנכשלו, ריקות או שאינן תואמות שומרות על תמונת המצב הקודמת של המקור.
-העדכונים הם אטומיים, מסודרים ברצף ומוגבלים לניסיון אחד בדקה לכל סביבת עבודה.
-בדיקת העברה מוצלחת מבססת קישוריות, אך לא אנונימיות או שלמות הלכידה.</p>
 <p><strong>תעבורת טלגרם ובקשות HTTPS משתמשות בנתיבים שונים.</strong> הורדות רשימות משתמשות ב
 חיבור HTTPS נפרד ובנתיב הבקשות החיצוני המסופק.
 <code>TGWITNESS_PROXY_FEED_PROXY</code> מבטל במפורש נתיב זה באמצעות פרוקסי HTTP/SOCKS5;
@@ -354,21 +332,6 @@ MTProxy הוא פרוקסי העברה של טלגרם; SOCKS5 ו-HTTP CONNECT �
 הבקשה; המצבים האחרים מאפשרים &quot;ישיר&quot;. ניתן להשבית בקשות חיצוניות. פרוקסי להורדת פיד שהוגדר במפורש
 נשאר כקיצור דרך נפרד של המפעיל.
 שירות העדים העצמאי שומר על המסלול שלו.</p>
-<p>בקשות HTTP חיצוניות המיועדות לציבור בלבד, באמצעות SOCKS5 או פרוקסי HTTP, פותרות את
-היעד באמצעות Cloudflare DNS over HTTPS ב-<code>https://1.1.1.1/dns-query</code>, דרך
-אותו פרוקסי. רק שם המארח וסוגי השאילתות A/AAAA מועברים למפתרון;
-כתובות URL של שירותים, אישורים ותוכן התראות אינם כלולים. TLS מאמת
-את תעודת הפותר עבור כתובת ה-IP שלו. שתי משפחות הכתובות נבדקות,
-וכל תשובה פרטית, לולאה, מקומית לקישור או שמורה דוחה את הבקשה.
-החיבורים משתמשים בכתובת מספרית שנבדקה תוך שמירה על
-שם המארח HTTP המקורי של השירות ושם תעודת ה-TLS. העברת HTTP של התראות ובקשות CONNECT
-משתמשות באותן בדיקות יעד. כשל ב-DNS עוצר את הבקשה ללא
-DNS יעד מקומי או גיבוי ישיר. תשובות מוצלחות נשמרות במטמון
-בזיכרון לפי נתיב פרוקסי למשך 30 שניות לכל היותר ולא יותר מ-TTL ה-DNS שלהן;
-המטמון מוגבל ל-128 רשומות. שם המארח של ה-proxy עצמו עשוי להשתמש ב-DNS מקומי.
-במקרה של כשלים ב-SOCKS וב-CONNECT ניתן לנסות כתובת מאומתת אחרת לפני שליחת
-גוף בקשת השירות. העברת HTTP רגילה מדווחת על בקשה שנכשלה מבלי
-לשחזר אוטומטית את גופה דרך כתובת אחרת.</p>
 <p>עבור שירותים פרטיים המנוהלים על ידי מפעיל, הגדרת סביבת השרת הקיימת
 <code>TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1</code> מאפשרת יעדים פרטיים ושומרת על
 פתרון שמות מארחים בצד הפרוקסי. לא ניתן להפעיל אותה מהלוח. מצב &quot;ציבורי בלבד&quot;
@@ -487,11 +450,6 @@ Telegram מספקת לעתים קרובות כתובות IP מספריות של 
 סוד גישה, ולא סיסמת הצפנה. הוא מעניק גישה למנהל;
 ניתן להגביל את טווח <a href="../access/">האסימונים שהונפקו</a> לחשבונות ולצ&#x27;אטים. סביבות העבודה חולקות
 את תהליך המארח ואינן דיירים מבודדים.</p>
-<p>הדגמה סינתטית מבודדת, שהופעלה במפורש, יכולה להיפתח באופן אוטומטי באמצעות
-חיבור לופבק ישיר. הדבר נעשה באמצעות יכולת נפרדת למשך חיי התהליך; היא אינה
-חושפת את אסימון הפאנל שהוגדר ואינה מעניקה גישה לסביבות עבודה אמיתיות. בקשות מרחוק,
-באמצעות פרוקסי או בין-מקורות אינן יכולות להשיג/להשתמש ביכולת הכניסה האוטומטית הזו.
-נוחות זו אינה מבטלת את מגבלת האימות עבור נתוני חשבונות אמיתיים.</p>
 <p>BitLocker, LUKS, FileVault או אמצעי אחסון מוצפן מנוהל יכולים להגן על האחסון בהתאם
 למודלי האיום הרלוונטיים. מנהל מערכת של מחשב פועל שאינו נעול
 עדיין יכול לקרוא את הנתונים. יש לכלול את SQLite WAL/SHM, מדיה, ייצוא זמני, swap, גיבויים
@@ -522,26 +480,10 @@ KDF של סיסמה. לא מתקבלות סיסמאות אנושיות שריר�
 <p>יש לשמור על המפתח הקיים עבור התקנות קיימות עד לביצוע
 ואישור של מעבר מכוון. מחיקת ה-<code>vault.key</code> או החלפת מפתח ראשי עלולה לשבש
 את הגישה למפתחות הפעלה/חתימה. יש לשמור גיבויים ומפתחות מוצפנים בנפרד ולבדוק
-את תהליך השחזור בסביבה מבודדת.</p>
-<h2 id="sources-and-verification-scope">מקורות והיקף האימות<a class="anchor" href="#sources-and-verification-scope" aria-label="קישור לסעיף זה">#</a></h2>
-<p>נבדק ב-26 באוקטובר 2026:</p>
-<ul>
-<li>https://core.telegram.org/api/auth</li>
-<li>https://core.telegram.org/api/obtaining_api_id</li>
-<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
-<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
-<li>https://core.telegram.org/mtproto/mtproto-transports</li>
-<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
-<li>Telethon 1.45.0: SQLiteSession, StringSession, <code>Connection._proxy_connect</code>,
-    <code>TcpMTProxy.normalize_secret</code> ושיטות הורדה.</li>
-</ul>
-<p>הבדיקות המקומיות כוללות מתקני loopback SOCKS5/HTTP CONNECT, הפעלות SQLite סינתטיות,
-בידוד מסלולים, אי-הכללת סודות ודחיית מפתחות חסרים. הן אינן בודקות
-תאימות אמיתית בין Telegram לפרוקסי או התנהגות MTProxy בזמן אמת. ראו
-<a href="../verification/">VERIFICATION.md</a> <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">ו-LIVE_ACCEPTANCE.md</a>.</p></div></article>
+את תהליך השחזור בסביבה מבודדת.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">ערוך דף זה ב-GitHub ↗</a><a class="next-guide" href="../deployment/"><span>השלב הבא</span><strong>פריסה ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../verification/">מה נבדק ←</a></p></footer>
 </main>
-<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#guided-connection-setup">הגדרת חיבור מודרכת</a><a href="#authentication-methods">שיטות אימות</a><a href="#import-a-telethon-session-file">ייבוא קובץ הפעלה של Telethon</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon ושרתי פרוקסי</a><a href="#ip-modes">מצבי IP</a><a href="#encryption-and-signatures">הצפנה וחתימות</a><a href="#external-master-key">מפתח ראשי חיצוני</a><a href="#sources-and-verification-scope">מקורות והיקף האימות</a></aside>
+<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#guided-connection-setup">הגדרת חיבור מודרכת</a><a href="#authentication-methods">שיטות אימות</a><a href="#import-a-telethon-session-file">ייבוא קובץ הפעלה של Telethon</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon ושרתי פרוקסי</a><a href="#ip-modes">מצבי IP</a><a href="#encryption-and-signatures">הצפנה וחתימות</a><a href="#external-master-key">מפתח ראשי חיצוני</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>קוד פתוח · פועל על המחשב שלכם</span><a href="../../../../LICENSE">רישיון MIT</a><a href="../notice/">הודעת המפעיל</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">אבטחה</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "ממתין להודעה", "Step through a fictional send, edit and delete.": "עקבו אחר תהליך דמיוני של שליחה, עריכה ומחיקה.", "No observations yet. Start the sequence or advance one event.": "אין עדיין הערות. התחל את הרצף או עבור לאירוע הבא.", "Meet at 10:00": "נפגש בשעה 10:00", "A new message is visible in the chat.": "הודעה חדשה נראית בצ'אט.", "Record 1 appended: the collector observed the original message.": "הודעה מס' 1 מצורפת: האספן הבחין בהודעה המקורית.", "Meet at 11:00": "נפגש בשעה 11:00", "The current text changes. The earlier observation stays.": "הטקסט הנוכחי משתנה. ההערה הקודמת נשארת.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "רשומה 2 צורפה: העריכה מהווה תצפית חדשה. ברשומה 1 עדיין מופיע הטקסט המקורי.", "Message deleted": "ההודעה נמחקה", "The message has disappeared from the chat view.": "ההודעה נעלמה מתצוגת הצ'אט.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "הוספה של תיעוד 3: הודעת המחיקה נשמרת לצד שתי הגרסאות שנצפו.", "0 records": "0 רשומות", "1 record": "1 רשומה", "2 records": "2 רשומות", "3 records": "3 רשומות", "Complete / {n} of 3": "השלם / {n} מתוך 3", "Step / {n} of 3": "שלב / {n} מתוך 3", "Pause": "הפסקה", "Replay sequence": "רצף השמעה", "Play sequence": "רצף הפעלה", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "דוגמה סטטית זמינה. כדי לחשב חתימות hash באופן אינטראקטיבי, פתחו דף זה ב-HTTPS או בתצוגה מקדימה ב-localhost עם תמיכה ב-Web Crypto.", "No record supplied": "לא נמסר תיעוד", "Tail removed": "הזנב הוסר", "≠ saved hash": "≠ חתימת hash שנשמרה", "Rebuilt · different hash": "נבנה מחדש · חתימה שונה", "= saved hash": "= חתימת hash שנשמרה", "Same length and matching head.": "אורך זהה וכותרת תואמת.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "שלושת ההאשים שחושבו תואמים להאשים שנשמרו. דוגמה זו תואמת את הגבול של שלוש רשומות שנשמר.", "Same saved head; the journal prefix fails verification.": "אותו כותרת שמורה; קידומת היומן נכשלה באימות.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "הרשומה 2 כבר אינה תואמת את ה-hash השמור שלה. בדיקה של ה-head האחרון שנשמר בלבד עלולה לפספס זאת; המאמת בודק כל רשומה.", "Head differs from the retained checkpoint.": "הכותרת שונה מנקודת הבדיקה שנשמרה.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ה-hash המשוחזרים מקושרים זה לזה, אך ה-head הסופי השתנה. נקודת הבדיקה שנשמרה דוחה היסטוריה זו. חתימות מקוריות גם הן לא יאושרו על רשומות ששונו.", "Too short: 2 supplied records \u003c 3 retained records.": "קצר מדי: 2 רשומות שסופקו \u003c 3 רשומות שנשמרו.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "שני ה-hash הנותרים עדיין תואמים. נקודת הבדיקה שנשמרה חושפת את החלק החסר. ללא הגבול הקודם הזה, הקידומת הקצרה הזו לבדה לא הייתה חושפת את ההשמטה.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "חישוב ה-Hash אינו זמין בדפדפן זה. הנוסחאות וההסבר הסטטי המופיעים להלן נותרים זמינים.", "{n} records": "{n} רשומות", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "התקבל: הספירה גדלה, החתימה מאומתת והמפתח תואם. העד שומר על הגבול החדש הזה.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "חזרה לאחור: התשובה החתומה מדווחת על פחות רשומות מאשר נקודת הבדיקה האחרונה שאושרה. ה-Witness מתעד את הבעיה ושומר על הגבול שאושר קודם לכן.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: הספירה נותרה ללא שינוי, אך הראש שונה. ה-witness מתעד את חילוקי הדעות ושומר על הגבול שהתקבל קודם לכן.", "No answer": "אין תשובה", "boundary unknown": "גבול לא ידוע", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "אין תגובה: ה-Witness מתעד את הבדיקה שנכשלה. הוא אינו יכול לקבוע את מצבו הנוכחי של האספן. אם ה-Witness עדיין יכול להגיע ל-Bot API ומדיניות הפרסום שלו מאפשרת זאת, הוא יכול לפרסם את הכישלון הזה.", "Send {n}": "שלח {n}", "Edit {n}": "ערוך {n}", "Delete {n}": "מחק {n}", "Both accounts captured all six expected observations in this example.": "שני החשבונות תיעדו את כל ששת הממצאים הצפויים בדוגמה זו.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "חשבון B עדיין תפס 6 מתוך 6. שתי קבלות לקחו יותר זמן. יחס הלכידה ועיכוב קבלת ההודעות עונים על שאלות שונות.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "חשבון B תפס 5 מתוך 6 עד למועד הסיום (83.3%). לעריכה החסרה אין עיכוב נמדד. תוצאה זו מתארת רק את שש הפעולות המבוקרות.", "not observed by cutoff": "לא נצפה עד למועד הסגירה", "{s} seconds": "{s} שניות", "Exact values follow in the table.": "הערכים המדויקים מופיעים בטבלה.", "{s} s": "{s} s", "Not observed": "לא נצפה", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "ארבעה צ'אטים מספקים תצפיות שונות. יש לעקוב אחר רשומות המקור עבור כל חיבור; אין לייחס את ההודעה בערוץ למשתמש 71001 ללא ציון השולח.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "הרשומות מס' 146 ו-205 מציגות את אותו מזהה שולח, 71001. דבר זה מקשר בין הפוסטים שנצפו בחשבון טלגרם בשני צ'אטים שונים. הוא אינו מזהה אדם אמיתי ואינו מייחס את הפוסט לערוץ.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "כתובת היעד pay.example.invalid/new מופיעה ברישום הקבוצה מס' 146, במקלדת הבוט מס' 173, בעריכת הערוץ מס' 188 ובהודעה פרטית מס' 205. כתובת יעד חוזרת מקשרת בין החומרים; היא אינה מהווה הוכחה לשליטה משותפת בחשבונות אלה.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "בקבלות המדיה המושלמות מס' 151 ו-209 יש ערכי SHA-256 מלאים זהים במקרה הבדיוני הזה. השוו את הבתים בפועל ואת רשומות ההודעות הקשורות אליהם. הקובץ התואם אינו מזהה את יוצרו ואינו מוכיח מי העביר אותו.", "the encrypted off-site copy": "העותק המוצפן מחוץ לאתר", "notifications": "התראות", "checkpoint hashes for timestamps": "חשישי checkpoint עבור חותמות זמן", "signed checkpoints for the witness": "נקודות ביקורת חתומות עבור ה-Witness", "Switched on in this example": "מופעל בדוגמה זו", "Optional · off by default": "אופציונלי · כבוי כברירת מחדל", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "יוצא מהמכשיר הזה: החיבור ל-Telegram ו-{list}. שום דבר אחר.", "Default: only the Telegram connection leaves this machine.": "ברירת מחדל: רק החיבור ל-Telegram יוצא ממחשב זה.", "{done} of {total} done": "{done} מתוך {total} הושלמו", "Mark step {n} as done": "סמן את השלב {n} כ\"בוצע\"", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "העתק", "Copied": "הועתק", "Command copied.": "הפקודה הועתקה.", "Selected — Ctrl/Cmd+C": "נבחר — Ctrl/Cmd+C", "Command selected. Copy it manually.": "הפקודה נבחרה. העתיקו אותה ידנית.", "Command copied to clipboard.": "הפקודה הועתקה ללוח.", "Select text": "בחר טקסט", "Clipboard unavailable. Command selected; copy it manually.": "הלוח אינו זמין. הפקודה נבחרה; העתק אותה ידנית.", "A message arrives. The first observation is saved.": "הודעה נכנסת. התצפית הראשונה נשמרת.", "The time changes. Both captured versions stay.": "הזמן משתנה. שתי הגרסאות שנשמרו נשארות.", "The message disappears. The captured history remains.": "ההודעה נעלמת. ההיסטוריה שנשמרה נשארת.", "Pause example animation": "השהה את האנימציה לדוגמה", "Play example animation": "הפעל אנימציה לדוגמה", "Play": "הפעל", "Full-size workspace screenshot": "צילום מסך של סביבת העבודה בגודל מלא", "Workspace screenshot · fictional data": "צילום מסך של סביבת העבודה · נתונים פיקטיביים", "Close": "סגור", "Close screenshot": "סגור צילום מסך", "Scrollable full-size screenshot": "צילום מסך בגודל מלא הניתן לגלילה", "Enlarge: {name}": "הגדל: {name}", "View full size": "הצג בגודל מלא", "Step {n} of {total}": "שלב {n} מתוך {total}"}</script>

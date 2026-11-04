@@ -32,55 +32,55 @@
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../">홈</a> <span aria-hidden="true">/</span> <a href="../">문서</a> <span aria-hidden="true">/</span> <span aria-current="page">내보내기 및 검증</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">문서 / 07</p><h1>내보내기 및 검증</h1><p class="guide-outcome">수신자가 수집 작업 공간 및 저장된 내역과 대조하여 확인할 수 있는 파일을 제공하십시오.</p>
+<article class="guide-content"><p class="eyebrow">문서 / 07</p><h1>내보내기 및 검증</h1><p class="guide-outcome">받는 사람이 귀하의 작업 공간과 직접 대조해 확인할 수 있는 파일을 건넵니다.</p>
 <div class="flow-strip export-flow" aria-label="증거 인계: 신뢰할 수 있는 참조 정보를 보관하고, 서명된 ZIP 파일을 내보낸 후, 수신자와 함께 검증합니다."><span>참조 유지</span><span>서명된 ZIP 파일 내보내기</span><span>수신자가 검증합니다</span></div>
-<p>서명과 체크포인트가 처음이신가요? <a href="../concepts/#chain">샘플 기록을 변경해</a> 보고 어떤 검사가 이를 감지하는지 확인해 보세요.</p>
+<p>서명과 체크포인트가 처음이신가요? <a href="../concepts/#chain">예시 기록을 바꿔 보고</a> 어떤 검사가 잡아내는지 보십시오.</p>
 <p>수집 담당자와는 별도로 사본을 보관하고 싶으신가요? <a href="#s3">S3 설정</a>, <a href="#s3-retention">오브젝트 잠금</a> 또는 <a href="#s3-restore">검증된 복구 기능을</a> 확인해 보세요.</p>
 <h2 id="retain">신뢰할 수 있는 참고 자료로 활용</h2>
-<p>컬렉터 외부에 워크스페이스의 공개 키 지문을 저장하십시오. 수집 중에는 서명된 체크포인트를 다른 곳에 보관하거나 <a href="../witness/">독립적인 증인을</a> 활용하십시오. 이러한 참조 정보를 통해 수신자는 키와 이전 저널 경계를 확인할 수 있습니다.</p>
+<p>작업 공간 키 지문은 수집기가 아닌 다른 곳에 적어 두십시오. 수집하는 동안 서명된 체크포인트도 다른 곳에 보관하거나 <a href="../witness/">독립 증인</a>을 실행하십시오. 받는 사람은 이것으로 키와 저널의 이전 상태를 확인합니다.</p>
 <h2 id="export">서명된 ZIP 파일 다운로드</h2>
-<p><strong>‘Exports’를</strong> 열고 서명된 증거용 ZIP 파일을 생성하십시오. 여기에는 전체 작업 공간 일지와 서명된 파일 매니페스트가 포함됩니다. <a href="../reports/">‘Report Studio’를</a> 사용하여 가독성 높은 보고서를 작성하거나, <a href="../handover/">‘handover </a>extract’를 통해 선별되고 최소화된 데이터만 전달할 수 있습니다.</p>
-<p>HTML, PDF 및 JSON 보고서에는 각각 서명된 인장이 포함되어 있으며 별도로 확인할 수 있습니다. CSV는 분석에 편리한 사본입니다. 검증된 ZIP 파일 내의 정확한 CSV 파일을 사용하여 무결성을 확인하십시오. 수신자가 원본 기록 및 첨부 파일도 필요로 하는 경우, 서명된 ZIP 파일을 보관하십시오.</p>
+<p><strong>내보내기</strong> → 서명된 증거 ZIP. 전체 저널과 서명된 파일 매니페스트가 들어 있습니다. 읽기 쉬운 보고서는 <a href="../reports/">Report studio</a>에서 만들거나, 선택한 데이터만 <a href="../handover/">인계용 추출</a>로 보냅니다.</p>
+<p>HTML, PDF, JSON 보고서에는 각자의 봉인이 있습니다. CSV는 작업용 사본일 뿐이며, 무결성이 필요하면 검증된 ZIP 안의 CSV를 사용하십시오.</p>
 <h2 id="verify">신뢰할 수 있는 TgWitness 사본을 통해 확인해 보세요.</h2>
-<p>설치된 프로젝트 환경에서 예시 지문 및 파일 경로를 다음과 같이 변경하십시오:</p>
+<p>프로젝트 환경에서, 귀하의 지문과 경로로:</p>
 <pre><code>python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
-<p>두 참조 모두 검증을 통과하면 결과 보고서에 <code>key_pinned: true</code>와 <code>checkpoint_checked: true</code>가 표시됩니다. 검증 결과를 원본 아카이브와 함께 보관하십시오. 보관된 체크포인트는 내보내기 경계를 포함하거나 그 이전이어야 합니다.</p>
+<p>통과하면 <code>key_pinned: true</code>와 <code>checkpoint_checked: true</code>가 표시됩니다. 그 출력을 아카이브 옆에 보관하십시오. 체크포인트는 내보내기의 끝 또는 그 이전에 있어야 합니다.</p>
 <h2 id="meaning">검증 결과 사용</h2>
-<ul><li><strong>전달된 파일을 확인하십시오:</strong> 매니페스트는 파일의 해시를 연결하고, 레코드 서명은 저장된 저널을 연결합니다. 변경된 파일이나 끊어진 레코드 체인이 감지됩니다.</li><li><strong>작업 공간 신원을 확인하십시오:</strong> 독립적으로 보관된 지문은 예상한 서명 키와 일치하는지 확인합니다.</li><li><strong>이전 경계를 비교해 보십시오:</strong> 보존된 체크포인트는 인계 전에 저장된 저널 접두사와 비교하여 내보내기 내용을 확인합니다.</li><li><strong>수집 범위를 검토하십시오:</strong> 누락된 부분, 수집 결과, 그리고 통제된 ‘보내기 → 편집 → 삭제’ 테스트를 통해 이 설정이 포착한 이벤트들을 확인할 수 있습니다.</li></ul>
-<p>이 결과를 수신자 사본에 함께 보관하십시오. 검사의 범위와 출처 주장 및 수집 범위에 대한 별도 평가에 대해 <a href="../reference/evidence/#verification-scope">검증이 무엇을 확립하는지</a> 확인하십시오.</p>
+<ul><li><strong>파일:</strong> 매니페스트가 해시를, 서명이 저널을 묶습니다. 어떤 변경도 드러납니다.</li><li><strong>신원:</strong> 보관해 둔 지문이 예상한 키임을 증명합니다.</li><li><strong>이전 상태:</strong> 체크포인트가 내보내기를 인계 전에 저장한 저널 앞부분과 비교합니다.</li><li><strong>범위:</strong> 공백, 수집 결과, 보내기 → 편집 → 삭제 테스트가 이 구성이 실제로 잡아낸 것을 보여 줍니다.</li></ul>
+<p>자세히: <a href="../reference/evidence/#verification-scope">검증이 증명하는 것과 증명하지 않는 것</a>.</p>
 
 <h2 id="s3">S3 오프사이트 백업 설정</h2>
-<p>실행 중인 작업 공간에서 [Exports] → [Off-site copy]를 엽니다. 이 선택적 기능은 AWS S3 및 기타 S3 호환 서비스와 연동됩니다. 이 기능은 저널 세그먼트, 보존된 사진 및 파일, 타임스탬프 응답이 포함된 체크포인트, 완료된 채팅 내보내기 파일을 복사합니다. 모든 객체는 업로드 전에 수집기에서 <code>AES-256-GCM</code>를 사용하여 암호화됩니다.</p>
-<p>온라인 데모에서는 업로드 기능이 비활성화된 상태에서 동일한 제어 기능을 보여줍니다. 저장소 인증 정보는 본인이 직접 실행 중인 작업 공간에서만 입력하십시오.</p>
+<p>작업 공간의 <strong>내보내기 → 오프사이트 사본</strong>. AWS S3와 S3 호환 저장소에서 작동합니다. 저널 세그먼트, 저장된 파일, 타임스탬프가 있는 체크포인트, 완료된 채팅 내보내기를 복사하며, 각각 수집기를 떠나기 전에 <code>AES-256-GCM</code>으로 암호화됩니다.</p>
+<p>온라인 데모는 업로드가 꺼진 상태로 이 컨트롤을 보여 줍니다. 실제 자격 증명은 귀하의 설치에서만 입력하십시오.</p>
 <figure><a href="../../../assets/off-site-copy.png"><img src="../../../assets/off-site-copy.png" width="1136" height="825" alt="오프사이트 복사 패널 전체: 엔드포인트, 리전, 버킷, 액세스 키, 일정, 오브젝트 잠금 및 복구 키 제어" loading="lazy"></a><figcaption>고급 옵션이 포함된 전체 패널이 펼쳐진 모습입니다. 저장소 인증 정보는 표시되지 않습니다.</figcaption></figure>
 <div class="table-wrap"><table><caption>내보내기 → 외부 사본의 저장 설정</caption><thead><tr><th scope="col">분야</th><th scope="col">입력할 내용</th></tr></thead><tbody>
-<tr><th scope="row">엔드포인트</th><td>버킷 경로나 인증 정보가 포함되지 않은 저장 서비스 URL. 가상의 예시: <code>https://s3.example.invalid</code>.</td></tr>
-<tr><th scope="row">지역</th><td>통신사가 요구하는 지역 코드입니다. 애플리케이션의 기본값은 <code>us-east-1</code>입니다.</td></tr>
-<tr><th scope="row">버킷</th><td>접근 가능한 기존 버킷. 가상의 예시: <code>example-case-backup</code>.</td></tr>
-<tr><th scope="row">버킷 내 폴더</th><td>객체 접두사; 기본값은 <code>tgwitness</code>입니다. 애플리케이션은 이 작업 공간의 서명 키 지문에서 파생된 접두사를 추가합니다.</td></tr>
-<tr><th scope="row">액세스 키 ID / 비밀 액세스 키</th><td>저장소 인증 정보를 모두 함께 입력하십시오. 이 정보는 워크스페이스 볼트에 저장됩니다. 저장된 인증 정보 쌍을 유지하려면 이후 저장 시 두 항목 모두 비워 두십시오.</td></tr>
-<tr><th scope="row">경로 형식 주소</th><td>서비스 제공업체에 따라, 기능이 활성화된 경우 ‘<code>endpoint/bucket</code>’를, 비활성화된 경우 ‘<code>bucket.endpoint</code>’를 사용하십시오.</td></tr>
-<tr><th scope="row">복사 간격</th><td>1분에서 1,440분까지 설정 가능하며, 기본값은 5분입니다. 예약된 백업을 수행하려면 애플리케이션이 실행 중이어야 합니다.</td></tr>
-<tr><th scope="row">Object Lock 보존</th><td>Object Lock을 지원하는 버킷의 보존 기간 및 모드. 보존 기간을 0일로 설정하면 버킷의 기본 보존 설정이 적용됩니다.</td></tr>
+<tr><th scope="row">엔드포인트</th><td>저장소 URL. 버킷 경로나 자격 증명은 넣지 않습니다. 예: <code>https://s3.example.invalid</code>.</td></tr>
+<tr><th scope="row">지역</th><td>공급자가 요구하는 값. 기본값 <code>us-east-1</code>.</td></tr>
+<tr><th scope="row">버킷</th><td>쓰기 권한이 있는 기존 버킷. 예: <code>example-case-backup</code>.</td></tr>
+<tr><th scope="row">버킷 내 폴더</th><td>접두사, 기본값 <code>tgwitness</code>. 그 위에 작업 공간별 접두사가 붙습니다.</td></tr>
+<tr><th scope="row">액세스 키 ID / 비밀 액세스 키</th><td>둘을 함께 입력하며 볼트에 저장됩니다. 나중에 둘 다 비워 두면 그대로 유지됩니다.</td></tr>
+<tr><th scope="row">경로 형식 주소</th><td>켜짐: <code>endpoint/bucket</code>. 꺼짐: <code>bucket.endpoint</code>. 공급자에 따라 다릅니다.</td></tr>
+<tr><th scope="row">복사 간격</th><td>1~1,440분, 기본값 5. 앱이 실행 중일 때만.</td></tr>
+<tr><th scope="row">Object Lock 보존</th><td>버킷이 Object Lock을 지원하면 일수와 모드. 0이면 버킷 기본값을 유지합니다.</td></tr>
 </tbody></table></div>
 <ol>
-<li>서비스 제공업체에서 버킷을 생성한 후, 저장 위치와 인증 정보를 입력하십시오. 준비 단계에서는 <strong>‘오프사이트 사본 보관’ 옵션을</strong> 선택 해제해 두었다가, 나중에 <strong>‘오프사이트 사본 저장’을</strong> 선택하십시오.</li>
-<li><strong>&#x27;연결 테스트&#x27;를</strong> 선택하세요. 그러면 암호화된 테스트 객체가 업로드되고 저장소의 응답이 확인됩니다.</li>
-<li><strong>&#x27;암호화 키 다운로드&#x27;를</strong> 선택하십시오. 해당 파일은 복구 시 필요하므로 수집기와는 별도로 보관하십시오.</li>
-<li><strong>&#x27;오프사이트 사본 보관&#x27;</strong> 확인란을 선택하고 다시 저장하십시오. 수동 처리를 원하면 <strong>&#x27;지금 복사&#x27;를</strong> 선택하거나, 예약된 일정을 그대로 실행하십시오.</li>
+<li>버킷을 만들고, <strong>오프사이트 사본 보관</strong>을 체크하지 않은 채 대상과 자격 증명을 입력한 뒤 <strong>오프사이트 사본 저장</strong>을 누릅니다.</li>
+<li><strong>연결 테스트</strong>는 암호화된 테스트 객체를 업로드합니다.</li>
+<li><strong>암호화 키 다운로드</strong> 후 수집기와 떨어진 곳에 보관합니다. 키가 없으면 복구도 없습니다.</li>
+<li><strong>오프사이트 사본 보관</strong>을 체크하고 저장한 다음 <strong>지금 복사</strong>를 누르거나 일정에 맡깁니다.</li>
 </ol>
 
 <h2 id="s3-retention">보관 현황 및 복사 진행 상황 확인</h2>
-<p>&#x27;추가<strong> 옵션</strong>(<strong>More options</strong>)&#x27;에서 보존 기간을 선택하고, 버킷이 Object Lock을 지원하는 경우 &#x27;<code>GOVERNANCE</code>&#x27; 또는 &#x27;<code>COMPLIANCE</code>&#x27;를 선택하십시오. TgWitness는 업로드된 객체의 보존 모드 및 기한을 다시 읽어옵니다. 별도의 보존 결과(확인됨, 보존 정보 누락 또는 확인 실패)를 검토하십시오.</p>
-<p>패널에는 마지막 처리 결과, 객체 수, 전송된 바이트 수, 복사된 저널 경계 및 오류 사항이 표시됩니다. 누락되거나 변경된 로컬 미디어는 보고되며, 다음 처리 시 재시도됩니다. 해당 미디어 이후의 파일, 체크포인트 및 대기 중인 내보내기 작업은 여전히 복사될 수 있습니다.</p>
-<p>업로드는 워크스페이스의 Direct, SOCKS5 또는 HTTP 경로를 사용합니다. S3 복사 시 이 경로 중 하나를 선택하십시오. MTProxy 전용 경로를 선택하면 복사 작업이 오류와 함께 보류 상태로 남게 됩니다.</p>
+<p><strong>추가 옵션</strong>에서 보존 일수와 <code>GOVERNANCE</code> 또는 <code>COMPLIANCE</code>를 고릅니다. TgWitness는 업로드된 객체에서 보존 설정을 다시 읽어 확인됨, 없음, 확인 실패 중 하나로 알려 줍니다.</p>
+<p>패널에는 마지막 실행, 객체 수, 바이트, 복사된 저널 경계, 오류가 표시됩니다. 없는 로컬 파일은 보고되고 다음 실행 때 다시 시도되며, 나머지는 계속 복사됩니다.</p>
+<p>업로드는 직접 연결, SOCKS5, HTTP로 나갑니다. MTProxy 전용 경로에서는 사본이 오류와 함께 대기합니다.</p>
 
 <h2 id="s3-key">복구 키는 별도로 보관하십시오</h2>
-<p>다운로드한 JSON 파일에는 복호화 키, 대상 설정, 작업 공간 객체 접두사 및 서명 키 지문이 포함되어 있습니다. 복구를 위해서는 이 키 파일과 버킷에 대한 읽기 권한이 있는 별도의 저장소 인증 정보가 모두 필요합니다. 이를 복구 계획에 반드시 포함시켜 두십시오.</p>
-<p>엔드포인트, 버킷 또는 폴더 접두사를 변경하는 경우, 대상 설정이 일치하도록 키 파일을 다시 다운로드하십시오. 애플리케이션은 로컬에 보관된 저널, 파일 및 체크포인트의 새 복사본을 새로운 대상 위치에서 시작합니다. 로컬 업로드 대기열에서 이미 제거된 완료된 채팅 내보내기 파일은 이전 대상 위치에 그대로 남아 있습니다.</p>
+<p>키 JSON에는 복호화 키, 대상, 접두사, 키 지문이 들어 있습니다. 복구하려면 이것과 읽기 권한이 있는 저장소 자격 증명이 필요합니다.</p>
+<p>엔드포인트, 버킷, 접두사를 바꿨나요? 키를 다시 다운로드하십시오. 새 사본은 새 대상에서 시작되며, 이전 채팅 내보내기는 원래 자리에 남습니다.</p>
 
 <h2 id="s3-restore">다른 컴퓨터에서 복원 및 검증하기</h2>
-<p>신뢰할 수 있는 TgWitness 설치본, 다운로드한 키 JSON 파일, 읽기 권한이 있는 저장소 인증 정보, 그리고 빈 출력 디렉터리를 사용하십시오. 아래의 가상의 인증 정보 자리 표시자를 실제 정보로 대체하십시오.</p>
+<p>신뢰할 수 있는 TgWitness 설치, 키 JSON, 읽기 전용 저장소 자격 증명, 빈 폴더가 필요합니다:</p>
 <h3>Windows PowerShell</h3>
 <pre><code>$env:TGWITNESS_S3_ACCESS_KEY = 'YOUR_READ_ACCESS_KEY'
 $env:TGWITNESS_S3_SECRET_KEY = 'YOUR_READ_SECRET_KEY'
@@ -89,9 +89,8 @@ python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out 
 <pre><code>export TGWITNESS_S3_ACCESS_KEY='YOUR_READ_ACCESS_KEY'
 export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence</code></pre>
-<p>다운로드된 파일과 복호화된 객체는 비공개 임시 저장소에 보관되며, 이 동안 전체 저널, 보존된 체크포인트, 보존된 미디어의 해시 및 크기가 검증됩니다. 안전하지 않은 경로, 충돌하는 저널 세그먼트, 체크포인트보다 짧은 저널은 거부됩니다. 검증에 실패한 경우 복원된 파일은 게시되지 않습니다.</p>
-<p>복원이 성공하면 복사본에 포함된 자료에 대해 <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> 및 <code>exports/</code>가 생성됩니다. 복원된 자료와 함께 명령어의 JSON 결과도 보관하십시오.</p>
-<p>복구된 자료를 별도로 보관해 둔 체크포인트나 증인 기록과 비교한 후, 필요한 기간에 대한 기록된 수집 범위를 검토하십시오.</p>
+<p>모든 것은 먼저 비공개 임시 폴더에서 확인됩니다: 전체 저널, 체크포인트, 파일 해시와 크기. 안전하지 않은 경로, 충돌하는 세그먼트, 체크포인트보다 짧은 저널은 실패하며, 이때는 아무것도 기록되지 않습니다.</p>
+<p>성공하면 <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code>, <code>exports/</code>를 얻습니다. 명령의 JSON 출력을 함께 보관하고, 직접 보관한 체크포인트나 증인 기록과 비교하십시오.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/evidence/">전체 참고 문헌 →</a><a class="next-guide" href="../reports/"><span>다음 단계</span><strong>보고서 설계 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../reference/verification/">테스트된 내용 →</a></p></footer>
 </main>

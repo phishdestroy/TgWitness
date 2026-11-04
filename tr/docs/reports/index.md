@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reports/
 
-Okuyucuya, vaka sorusundan kaydedilmiş kayıtlara kadar net bir yol haritası sunun.
+Okuru dava sorusundan doğrudan kaydedilmiş kayıtlara götürün.
 
-Report Studio, veri seçimi, okunabilir değişiklik geçmişleri, grafikler ve yazdığınız bulguları bir araya getirir. Desteklenen HTML ve yerel PDF çıktılarına sekiz entegre tasarım uygulanır. HTML, PDF ve JSON raporları kendi imzalı mühürlerini taşır; ZIP manifestosu da paketteki dosyaları birbirine bağlar. HTML ve PDF, nihai mizanpajları tamamlandıktan sonra mühürlenir.
+Report studio seçtiğiniz verileri, değişiklik geçmişlerini, grafikleri ve bulgularınızı bir araya getirir. Sekiz tasarım, HTML ve yerel PDF. Her HTML, PDF ve JSON rapor sizin anahtarınızla mühürlenir.
 
 ## Üç adımda bir rapor oluşturun
 
-1. **Dışa Aktar → Yapılandır ve önizle → Veri seçeneğini** açın. Tüm çalışma alanını kullanın veya sohbetleri, yazarları, UTC gözlem tarihlerini ve kayıt türlerini seçin. Tarihler, TgWitness'in kaydı ne zaman gözlemlediğini belirtir.
-2. "**Tasarım ve içerik**" bölümünde bir tasarım ve içerik ön ayarı seçin. Etkinlik çizelgelerini, katılımcı etiketlerini, transkripti, kaydedilen değişiklikleri ve isteğe bağlı Case Board materyallerini seçin. Vaka ayrıntılarınızı ve inceleme notlarınızı ekleyin.
-3. **Önizleme'yi** açarak sayıları, etkinlikleri, katılımcıları, örneklem kayıtlarını ve eksik kimlik aralıklarını inceleyin. Ayarları kaydedin, ardından ihtiyacınız olan formatı indirin.
+1. **Dışa aktarımlar → Yapılandır ve önizle → Veri**: tüm çalışma alanı ya da seçtiğiniz sohbetler, yazarlar, tarihler (UTC, TgWitness'ın kaydı gördüğü zaman) ve kayıt türleri.
+2. **Tasarım ve içerik**: bir tasarım ve neyin gireceğini seçin: grafikler, katılımcılar, döküm, değişiklikler, Case Board öğeleri, dava ayrıntıları ve notlar.
+3. **Önizleme**: sayıları, etkinliği, örnekleri ve eksik kimlik aralıklarını kontrol edin. Kaydedin, sonra gereken biçimi indirin.
 
 ### Okuyucu için kaydedilen materyali aynı şekilde düzenleyin
 
@@ -55,16 +55,16 @@ Alıcı, dosyayı ve güvenilir parmak izini kontrol eder.
 
 ## Bir okuma stili seçin
 
-**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading serisi ve Ledger & margin,** aynı temel kayıtları farklı düzenlerde sunar. Tasarım değiştirildiğinde veri seçimi ve yazılı notlar korunur. Rapor dili, desteklenen 25 dilden seçilebilir.
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin**: aynı kayıtlar, farklı görünüm. Değiştirince seçim ve notlar korunur. 25 dilden herhangi biri.
 
-Okuma serisi, vaka, kapsam, bulgular ve değişiklikleri bir bölüm çubuğu etrafında gruplandırır. Ledger & margin, numaralı bölümler ve geniş kenar boşluğu kullanır. Her ikisi de hesap HTML özetlerini ve kopya paylaşımını destekler. Yerel PDF'ler, pakete dahil edilmiş yazı tipleriyle oluşturulur; kullanıcının bilgisayarında PDF oluşturmak için tarayıcı veya Node kurulumu gerekmez. Çince, Japonca ve Korece PDF'ler için ayrıca sunucuda, sistem genelinde kurulmuş veya `TGWITNESS_FONT_DIR` dizinine yerleştirilmiş Noto Sans CJK gibi uygun bir yazı tipinin bulunması gerekir. Bu yazı tipi yoksa, ZIP dosyası HTML ve JSON raporlarını içerir.
+PDF'ler paketlenmiş yazı tipleriyle, tarayıcı olmadan üretilir. Çince, Japonca ve Korece için sunucuda Noto Sans CJK gibi bir yazı tipi gerekir (sistem genelinde ya da `TGWITNESS_FONT_DIR` içinde); yoksa yalnızca HTML ve JSON alırsınız.
 
 ## Değişikliği bağlamı içinde okuyun
 
-Kaydedilen düzenlemeler, önceki ve sonraki halleriyle gösterilir. Bir silme bildirimine, en son yakalanan sürüm eşlik edebilir. Yanıtlar, alıntılar, iletmeler, tepkiler, düğmeler ve ek meta verileri, mevcut referanslarını korur. Dosya SHA-256 ve günlük kaydı hash değerleri ayrı ayrı etiketlenir.
+Düzenlemeler öncesini ve sonrasını, silmeler son kaydedilen sürümü gösterir. Yanıtlar, iletmeler, tepkiler, düğmeler ve ekler başvurularını korur.
 
-Tasarım önizlemesi, ilk 50.000 kaynak kayıttan eşleşen kayıtları kullanarak kapak, inceleme ve grafik bileşenlerini gösterir. Ayrı veri önizlemesi, tam seçim sayılarını belirlemek için kararlı günlük anlık görüntüsünün tamamını tarar ve görüntülenen örnek sınırları etiketlenir. Nihai sayfa numaralandırmasını incelemek için bir PDF oluşturun. Tam hesap dışa aktarımında bir HTML genel bakışı bulunur; tek tek sohbet PDF’leri seçilen tasarımı kullanır.
+Tasarım önizlemesi ilk 50.000 kaydı kullanır, veri önizlemesi her şeyi tam sayar. Son sayfa düzeni için PDF'i oluşturun.
 
 ## Alıcının kopyasını özenle seçin
 
-Rapor filtreleri, okunabilir raporu şekillendirir. Tam kanıt ZIP dosyası, orijinal günlüğü ve ekleri korur. Alıcının yalnızca seçilen verileri alması gerektiğinde, [en az miktarda veri içeren](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) bir [devir işlemi](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) kullanın. [Rapor içeriğini ve doğrulamayı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/) inceleyin veya [tamamlanmış dışa aktarmayı doğrulayın](https://phishdestroy.github.io/TgWitness/tr/docs/exports/).
+Süzgeçler yalnızca raporu biçimlendirir; kanıt ZIP'i hâlâ tüm günlüğü ve dosyaları içerir. Alıcı daha azını almalıysa [küçültülmüş bir teslim](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) kullanın. Daha fazlası: [rapor içeriği](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/), [dışa aktarımı doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/exports/).

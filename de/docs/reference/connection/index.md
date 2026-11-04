@@ -32,8 +32,6 @@ Private Profile und WARP-Kontodaten werden mit dem vorhandenen Workspace-Tresor 
 
 Hochgeladene WireGuard-Profile müssen eine Schnittstelle und einen Peer sowie vollständige IPv4- und IPv6-Routen enthalten und dürfen keine Hooks, Includes, Umgebungsersetzungen oder zusätzliche Listener enthalten. Öffentliche Endpunktadressen werden vor dem Start aufgelöst und festgelegt. Verwenden Sie ein externes VPN oder das SOCKS5-Gateway für OpenVPN/IPsec und private Endpunkte.
 
-Die synthetischen Prüfungen lauten `python tools/check_guided_connection.py` und `python tools/check_guided_connection_browser.py`. Der optionale Befehl `python tools/check_portable_routes_runtime.py` lädt verifizierte Helfer herunter und testet deren tatsächlichen lokalen Prozesslebenszyklus anhand von Loopback-Fixtures. Dabei wird kein Cloudflare-Gerät registriert und kein Telegram-Konto verwendet.
-
 ## Authentifizierungsmethoden
 
 **Die API-ID und der API-Hash identifizieren eine Anwendung; sie ersetzen nicht die Kontoanmeldung.** Sie sind in TgWitness optional. Prioritätsreihenfolge: ein im Formular eingegebenes Paar, dann eines aus einer importierten Konto-JSON-Datei, dann das im Arbeitsbereich gespeicherte Paar, dann der integrierte Pool von 50 öffentlichen Paare, die in zufälliger Reihenfolge ausprobiert werden, mit automatischer Rotation, wenn Telegram eines ablehnt. Nur das Telegram-Desktop-Paar (2040) wird zusammen mit einer passenden Beschreibung des Telegram-Desktop-Clients gesendet. Ihr eigenes Paar aus den API-Entwicklungstools unter [my.telegram.org](https://my.telegram.org) kann für alle Ihre Konten verwendet werden; jedes Konto verfügt weiterhin über eine eigene Autorisierung.
@@ -70,8 +68,6 @@ python -m tgwitness.sessions account.session --out account.tgwitness-session
 
 1. Laden Sie unter **„Konto hinzufügen“ → „Dateien**“ das Ergebnis hoch oder fügen Sie den entsprechenden Text ein und fahren Sie fort.
 2. Überprüfen Sie die angezeigte numerische Konto-ID, wählen Sie die Quellen aus und beginnen Sie mit der Beobachtung.
-
-Der Konverter öffnet SQLite im schreibgeschützten Modus, führt weder eine Schemaaktualisierung noch eine Netzwerkanfrage durch und gibt die Sitzung nicht aus. Er überprüft die Schemaversion, die Tabellentypen, eine einzelne Sitzungszeile, IP/Port/DC sowie die Schlüssellänge. Die CLI-Eingabe ist auf 64 MiB begrenzt; der Text von „StringSession“ ist auf 4 KiB begrenzt. Bei der Panel-Konvertierung werden Dateien auf den authentifizierten TgWitness-Server hochgeladen, im Arbeitsspeicher verarbeitet und die normalisierten Anmeldedaten an diesen Browser zurückgegeben, ohne die hochgeladenen Originale zu speichern. Verwenden Sie HTTPS für einen Remote-Server.
 
 **Die konvertierte Datei ist ein unverschlüsseltes Passwort für den Kontozugang.** Bewahren Sie ihn an einem geschützten Ort auf und übertragen Sie ihn niemals in ein Repository oder senden Sie ihn an einen externen Konvertierungsdienst. TgWitness speichert die autorisierte Sitzung in seinem verschlüsselten Tresor. Das Kopieren einer Sitzung führt nicht zur Erstellung einer separaten Autorisierung: Führen Sie keine parallelen Clients mit geklonten Authentifizierungsschlüsseln aus und gehen Sie nicht davon aus, dass Aktualisierungen unabhängig voneinander bereitgestellt werden.
 
@@ -115,15 +111,9 @@ Die integrierte Liste vereint vier Quellen: [SoliSpirit/mtproto](https://github.
 
 Solange automatische Routen aktiv sind, werden die Listen stündlich aktualisiert und Transportprüfungen standardmäßig alle zehn Minuten durchgeführt. Diese Intervalle sind konfigurierbar. **Das Aktualisieren öffentlicher Listen** löst eine Aktualisierung aus; das bloße Anzeigen der Liste ändert nichts an einer gespeicherten manuellen Route.
 
-Jede Feed-Antwort ist auf 1 MiB begrenzt, mit einem Zeitlimit von acht Sekunden für die Anfrage und einer Gesamt-Download-Frist von 20 Sekunden; Weiterleitungen werden abgelehnt. Pro Quelle werden bis zu 64 kompatible Einträge beibehalten und dedupliziert. Der Parser akzeptiert unterstützte hexadezimale und Base64URL-Schlüssel sowie den JSON-Feed. Gefälschte TLS-`ee`-Zertifikate, ungültige Links, private/reservierte IP-Literale und lokale Hostnamen werden übersprungen. Hostnamen werden vor der Verwendung aufgelöst und überprüft, und die ausgewählte IP-Adresse wird für diese Verbindung festgehalten. Bei der automatischen Neuerfassung wird ein Hostname erneut aufgelöst; wenden Sie einen manuellen Eintrag erneut an, um ihn erneut aufzulösen.
-
-Fehlgeschlagene, leere oder inkompatible Feed-Antworten behalten den vorherigen Quell-Snapshot bei. Aktualisierungen erfolgen atomar, serialisiert und sind auf einen Versuch pro Minute und Arbeitsbereich beschränkt. Eine erfolgreiche Transportprüfung stellt die Konnektivität her, nicht jedoch Anonymität oder die Vollständigkeit der Erfassung.
-
 **Telegram-Datenverkehr und HTTPS-Anfragen nutzen unterschiedliche Routen.** Listen-Downloads verwenden eine separate HTTPS-Verbindung sowie die bereitgestellte Route für externe Anfragen. „`TGWITNESS_PROXY_FEED_PROXY`“ überschreibt diese Route explizit durch einen HTTP/SOCKS5-Proxy; beide „Compose“-Varianten des Collectors leiten diese weiter. Der Hintergrundpool folgt dem Hauptarbeitsbereich. Es werden keine Telegram-Sitzungen, API-Zugangsdaten, Panel-Token oder Bot-Token an Feed-Anbieter gesendet. Anbieternamen, Erfassungsdaten und die Download-Route werden unter **„Woher die Liste stammt“** angezeigt.
 
 Ein MTProxy überträgt ausschließlich Telegram-Datenverkehr. HTTP-Vorgänge des Arbeitsbereichs wie Zeitstempel, Benachrichtigungen, externe Kopien und Quellprüfungen nutzen einen separaten SOCKS5/HTTP-Proxy, sofern konfiguriert, andernfalls die SOCKS5/HTTP-Route des Kontos. Fehlt beides, lehnt „Hide the address“ die Anfrage ab; die anderen Modi erlauben „Direct“. Externe Anfragen können deaktiviert werden. Ein explizit konfigurierter Feed-Download-Proxy bleibt eine separate Operator-Übersteuerung. Der unabhängige Witness-Dienst behält seine eigene Route bei.
-
-Nur öffentlich zugängliche externe HTTP-Anfragen über SOCKS5- oder HTTP-Proxys lösen die Zieladresse mit Cloudflare DNS über HTTPS unter `https://1.1.1.1/dns-query` auf, und zwar über denselben Proxy. Nur der Hostname und die Abfragetypen A/AAAA werden an den Resolver weitergeleitet; Dienst-URLs, Anmeldedaten und Benachrichtigungsinhalte werden nicht übermittelt. TLS überprüft das Resolver-Zertifikat anhand seiner IP-Adresse. Beide Adressfamilien werden geprüft, und jede private, Loopback-, Link-Local- oder reservierte Antwort führt zur Ablehnung der Anfrage. Verbindungen verwenden eine geprüfte numerische Adresse, wobei der ursprüngliche HTTP-Host und der TLS-Zertifikatsname des Dienstes beibehalten werden. Die HTTP-Weiterleitung von Benachrichtigungen und CONNECT- Anfragen unterliegen denselben Zielprüfungen. Ein DNS-Fehler stoppt die Anfrage, sofern kein lokales Ziel-DNS oder ein direkter Fallback vorhanden ist. Erfolgreiche Antworten werden pro Proxy-Route für maximal 30 Sekunden und nicht länger als ihre DNS-TTL im Speicher zwischengespeichert; der Cache ist auf 128 Einträge begrenzt. Der Proxy-Hostname selbst kann lokales DNS verwenden. Bei SOCKS- und CONNECT-Fehlern kann eine andere geprüfte Adresse versucht werden, bevor der Anfrage-Body an den Dienst gesendet wird. Bei der einfachen HTTP-Weiterleitung wird eine fehlgeschlagene Anfrage gemeldet, ohne dass ihr Body automatisch über eine andere Adresse erneut gesendet wird.
 
 Bei vom Betreiber verwalteten privaten Diensten erlaubt die vorhandene Serverumgebungseinstellung „ `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1`“ private Ziele und behält die Hostnamenauflösung auf Proxy-Seite bei. Sie kann nicht über das Panel aktiviert werden. Der „Nur-öffentlich“-Modus lehnt „`.onion`“-Ziele ab, bevor der öffentliche Resolver abgefragt wird; Tor-Onion-Dienste erfordern diese explizite Einstellung für private Ziele sowie einen geeigneten Proxy. Dieses DNS-Verhalten gilt für externe HTTP-Vorgänge, nicht für den Telegram-Transport. Cloudflare dokumentiert den [JSON-DNS-Endpunkt](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
@@ -174,8 +164,6 @@ SOCKS5 und einfaches HTTP CONNECT verschlüsseln an sich weder die Proxy-Anmelde
 
 **Der Speicherschutz** im Konto zeigt diese Zustände an. Das Panel-Token ist ein Zugriffsgeheimnis, kein Verschlüsselungspasswort. Es gewährt Administratorzugriff; [ausgestellte Token](https://phishdestroy.github.io/TgWitness/de/docs/reference/access/) können auf Konten und Chats beschränkt werden. Arbeitsbereiche teilen sich den Host-Prozess und sind keine isolierten Mandanten.
 
-Eine explizit gestartete, isolierte synthetische Demo kann automatisch über eine direkte Loopback-Verbindung geöffnet werden. Dies nutzt eine separate, auf die Prozesslaufzeit begrenzte Funktion; dabei wird weder das konfigurierte Panel-Token offengelegt noch wird Zugriff auf echte Arbeitsbereiche gewährt. Remote-, Proxy- oder Cross-Origin-Anfragen können diese Funktion zum automatischen Aufruf nicht abrufen oder nutzen. Diese Erleichterung hebt die Authentifizierungsgrenze für echte Kontodaten nicht auf.
-
 BitLocker, LUKS, FileVault oder ein verwaltetes verschlüsseltes Volume können Speichermedien im Rahmen ihrer jeweiligen Bedrohungsmodelle schützen. Ein Administrator eines entsperrten, laufenden Rechners kann die Daten weiterhin lesen. Berücksichtigen Sie SQLite-WAL/SHM, Medien, temporäre Exporte, Auslagerungsspeicher, Backups sowie Browser-Downloads bei der Speicherplanung. Ein Docker-Volume ist nicht allein deshalb verschlüsselt, weil es sich um ein Volume handelt. TgWitness implementiert weder SQLCipher noch Objektverschlüsselung.
 
 ## Externer Hauptschlüssel
@@ -203,17 +191,3 @@ Jeder Arbeitsbereich erhält ein zufälliges öffentliches Salt sowie einen eige
 Alle Arbeitsbereiche leiten sich vom selben Hauptschlüssel ab; dessen Kompromittierung wirkt sich auf die gesamte Installation aus. Der laufende Prozess kann Geheimnisse entschlüsseln. Es handelt sich hierbei nicht um ein HSM oder ein Passwort-KDF. Beliebige, von Menschen festgelegte Passwörter werden nicht anstelle eines Zufallsschlüssels akzeptiert.
 
 Behalten Sie den bestehenden Schlüssel für bestehende Installationen bei, bis eine gezielte Migration durchgeführt und verifiziert wurde. Das Löschen von „`vault.key`“ oder das Ersetzen eines Hauptschlüssels kann den Zugriff auf Sitzungen/Signaturschlüssel zunichte machen. Bewahren Sie verschlüsselte Sicherungskopien und Schlüssel getrennt auf und testen Sie die Wiederherstellung in einer isolierten Instanz.
-
-## Quellen und Umfang der Überprüfung
-
-Überprüft am 26. Oktober 2026:
-
-- https://core.telegram.org/api/auth
-- https://core.telegram.org/api/obtaining_api_id
-- https://docs.telethon.dev/en/stable/basic/signing-in.html
-- https://docs.telethon.dev/en/stable/concepts/sessions.html
-- https://core.telegram.org/mtproto/mtproto-transports
-- https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp
-- Telethon 1.45.0: SQLiteSession, StringSession, „`Connection._proxy_connect`“, „ `TcpMTProxy.normalize_secret`“ und Download-Methoden.
-
-Lokale Tests umfassen Loopback-SOCKS5-/HTTP-CONNECT-Fixtures, synthetische SQLite-Sitzungen, Routenisolierung, Ausschluss geheimer Daten und Ablehnung bei fehlendem Schlüssel. Sie stellen keine tatsächliche Interoperabilität zwischen Telegram und Proxy oder das Live-Verhalten von MTProxy her. Siehe [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/de/docs/reference/verification/) und [LIVE_ACCEPTANCE.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md).

@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="رہنما"><a href="../../">گھر</a> <span aria-hidden="true">/</span> <a href="../">دستاویزات</a> <span aria-hidden="true">/</span> <span aria-current="page">اسے محفوظ رکھیں</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">کیا جانچا گیا ہے ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">دستاویزات میں تلاش کریں</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، ہیش چین، ٹوکن یا ویٹنس آزمائیں…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="خلاصہ تلاش" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">رہنما اور حوالہ جات میں تلاش کرنے کے لیے ایک لفظ ٹائپ کریں۔ تلاش آپ کے براؤزر میں ہی رہتی ہے۔</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">دستاویزات / 14</p><h1>اسے محفوظ رکھیں</h1><p class="guide-outcome">Telegram کے راستے، عوامی پروکسی فہرستیں اور اختیاری بیرونی خدمات جانیں۔ جانیں کہ ہر راز کیا کھولتا ہے، حفاظتی اقدامات کیا کور کرتے ہیں اور آپ کے لیے کیا چھوڑتے ہیں۔</p>
+<article class="guide-content"><p class="eyebrow">دستاویزات / 14</p><h1>اسے محفوظ رکھیں</h1><p class="guide-outcome">آپ کی مشین سے کیا باہر جاتا ہے، ہر سیکرٹ کیا کھولتا ہے، اور حفاظتیں کیا سنبھالتی ہیں بمقابلہ کیا آپ کی ذمہ داری ہے۔</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>پینل کا پتہ بطورِ ڈیفالٹ</span></div><div role="listitem"><strong>256-بٹ</strong><span>تصادفی پینل ٹوکن</span></div><div role="listitem"><strong translate="no">0</strong><span>سی ڈی اینز، تجزیات یا دور دراز فانٹس</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>ہر ریکارڈ پر دستخط</span></div></div>
 <h2 id="map">جہاں سب کچھ موجود ہے</h2>
-<p>کلیکٹر، اس کا پینل اور ہر محفوظ شدہ ریکارڈ آپ کے چلائے گئے کمپیوٹر یا سرور پر ہی رہتا ہے۔ ٹیلیگرام بطور ڈیفالٹ واحد منزل ہے؛ ہر دوسری منزل ایک الگ سوئچ ہے۔</p>
+<p>کلیکٹر، پینل اور ہر ریکارڈ آپ کی مشین پر رہتے ہیں۔ ڈیفالٹ طور پر صرف Telegram سے رابطہ ہوتا ہے؛ باقی سب الگ سوئچ ہے۔</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / جو چیز مشین سے نکلتی ہے</span><span class="sample-tag">آپ کی تنصیب</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="اختیاری منزلوں کو آن یا آف کریں"><button type="button" data-flow-toggle="replica" aria-pressed="false">آف سائٹ کاپی</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">اطلاعات</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">ٹائم اسٹیمپس</button><button type="button" data-flow-toggle="witness" aria-pressed="false">گواہ</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>خفیہ</th><th>جہاں اسے محفوظ رکھا جاتا ہے</th><th>یہ کیا انلاک کرتا ہے</th><th>اگر یہ لیک ہو جائے</th></tr></thead>
 <tbody>
-<tr><td><strong>پینل ٹوکن</strong></td><td><code>panel-token.txt</code> ڈیٹا ڈائریکٹری میں؛ براؤزر اسے صرف ٹیب کے لیے محفوظ رکھتا ہے</td><td>ہر ورک اسپیس میں ہر چیز: پڑھیں اور برآمد کریں، دائرہ کار تبدیل کریں، اکاؤنٹس میں سائن ان کریں</td><td>TgWitness روک دیں، <code>panel-token.txt</code> حذف کریں، دوبارہ شروع کریں: ایک نیا ٹوکن بنایا گیا ہے</td></tr>
+<tr><td><strong>پینل ٹوکن</strong></td><td>ڈیٹا ڈائریکٹری میں <code>panel-token.txt</code>؛ براؤزر اسے فی ٹیب رکھتا ہے</td><td>ہر ورک اسپیس میں سب کچھ</td><td>TgWitness روکیں، <code>panel-token.txt</code> حذف کریں، دوبارہ شروع کریں: نیا ملے گا</td></tr>
 <tr><td><strong>ٹیلیگرام سیشن</strong></td><td>والٹ، خفیہ شدہ (<code>credentials.enc</code>)</td><td>خود ٹیلیگرام اکاؤنٹ</td><td>Telegram میں سیشن ختم کریں: <em>سیٹنگز → ڈیوائسز</em></td></tr>
-<tr><td><strong>دستخطی کلید</strong></td><td>والٹ، خفیہ شدہ (<code>signing.enc</code>)</td><td>ان ریکارڈز پر دستخط جو آپ کی انگلی کے نشان کے تحت تصدیق کیے جاتے ہیں</td><td>چیک پوائنٹس دوسری جگہ محفوظ کیے جاتے ہیں، ایک گواہ اور ٹائم اسٹیمپس بتاتے ہیں کہ پہلے کیا موجود تھا۔</td></tr>
-<tr><td><strong>والٹ کی</strong></td><td><code>vault.key</code>ڈیٹا کے ساتھ، یا نئی ڈیٹا ڈائریکٹری کے لیے بیرونی ماسٹر کی</td><td>والٹ کو ڈیکریپٹ کرنا</td><td>سیشن اور سگننگ کی کو بھی لیک شدہ سمجھیں۔</td></tr>
-<tr><td><strong>ویٹنس ٹوکن</strong></td><td>ویٹنس ہوسٹ پر</td><td>صرف پڑھنے کے لیے: دستخط شدہ چیک پوائنٹس اور ہیلتھ</td><td>اسے Witness صفحے پر حذف کریں؛ ایک نیا بنائیں</td></tr>
-<tr><td><strong>آف سائٹ کاپی کی</strong></td><td>والٹ؛ بازیابی کے لیے ایک بار ڈاؤن لوڈ کریں</td><td>آف سائٹ کاپی کی ڈیکرپشن</td><td>جو بھی محفوظ شدہ اشیاء کے پاس ہو وہ انہیں ڈیکرپٹ کر سکتا ہے: اس کاپی کو افشاء شدہ سمجھیں۔</td></tr>
+<tr><td><strong>دستخطی کلید</strong></td><td>والٹ، خفیہ شدہ (<code>signing.enc</code>)</td><td>آپ کے فنگر پرنٹ کے تحت ریکارڈز پر دستخط</td><td>کہیں اور رکھے چیک پوائنٹس، گواہ اور ٹائم اسٹیمپس اب بھی دکھاتے ہیں کہ پہلے کیا موجود تھا</td></tr>
+<tr><td><strong>والٹ کی</strong></td><td>ڈیٹا کے ساتھ <code>vault.key</code>، یا بیرونی ماسٹر کلید</td><td>والٹ</td><td>فرض کریں سیشن اور دستخطی کلید بھی لیک ہو گئیں</td></tr>
+<tr><td><strong>ویٹنس ٹوکن</strong></td><td>ویٹنس ہوسٹ پر</td><td>صرف پڑھنا: چیک پوائنٹس اور صحت</td><td>گواہ صفحے پر اسے حذف کریں، نیا بنائیں</td></tr>
+<tr><td><strong>آف سائٹ کاپی کی</strong></td><td>والٹ؛ بازیابی کے لیے ایک بار ڈاؤن لوڈ کریں</td><td>آف سائٹ کاپی</td><td>جس کے پاس bucket بھی ہو وہ اسے ڈکرپٹ کر سکتا ہے: کاپی کو بے نقاب سمجھیں</td></tr>
 </tbody></table></div>
 <h2 id="threats">حفاظتی اقدامات کیا احاطہ کرتے ہیں</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> شامل</h3><ul>
-<li>ایک ایکسپورٹ میں تبدیل شدہ، حذف شدہ یا ترتیب نو شدہ ریکارڈ: ہیش چین یا دستخط اب تصدیق نہیں ہوتے۔</li>
-<li>ایک جرنل کو چیک پوائنٹ کے بعد کاٹ کر دوبارہ بنایا گیا جب کہ چیک پوائنٹ کہیں اور محفوظ رکھا گیا تھا: اب محفوظ شدہ چیک پوائنٹ میل نہیں کھاتا۔</li>
-<li>پینل ٹوکن کا اندازہ لگانا: 256 بے ترتیب بٹس، مستقل وقت میں موازنہ کیے جاتے ہیں؛ 15 ناکامیوں کے بعد ایک پتے کو مسترد کر دیا جاتا ہے۔</li>
-<li>دشمنانہ چیٹ کا مواد: متن صرف ٹیکسٹ کی صورت میں شامل کیا جاتا ہے، کبھی HTML کے طور پر نہیں؛ منسلکات فائلوں کے طور پر ڈاؤن لوڈ ہوتے ہیں؛ پینل کسی دوسری سائٹ سے کچھ بھی لوڈ نہیں کرتا۔</li>
-<li>ایک کاپی شدہ ڈیٹا ڈائریکٹری بیرونی والٹ کلید کے ساتھ: سیشنز اور دستخطی کلیدیں ماسٹر کلید کے بغیر انکرپٹڈ رہتی ہیں۔</li>
+<li>بدلا ہوا، ہٹایا گیا یا دوبارہ ترتیب دیا ریکارڈ: ہیش چین یا دستخط ٹوٹ جاتا ہے۔</li>
+<li>کہیں اور چیک پوائنٹ محفوظ کرنے کے بعد جرنل کاٹا یا دوبارہ بنایا گیا: چیک پوائنٹ میل کھانا بند کر دیتا ہے۔</li>
+<li>ٹوکن کا اندازہ: 256 بے ترتیب بٹس، مستقل وقت کا موازنہ، فی منٹ 15 ناکامیاں اور پتہ بلاک۔</li>
+<li>مخالفانہ چیٹ مواد: متن متن ہی رہتا ہے، کبھی HTML نہیں؛ اٹیچمنٹس فائلوں کے طور پر ڈاؤن لوڈ ہوتی ہیں؛ پینل دوسری سائٹس سے کچھ لوڈ نہیں کرتا۔</li>
+<li>بیرونی والٹ کلید کے ساتھ چوری شدہ ڈیٹا ڈائریکٹری: سیشنز اور کلیدیں انکرپٹ رہتی ہیں۔</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> آپ کے لیے چھوڑا گیا</h3><ul>
-<li>مین پینل ٹوکن کے پاس مکمل کنٹرول ہوتا ہے۔ دوسرے افراد کو ان کے مطلوبہ اکاؤنٹس، چیٹس اور کارروائیوں تک محدود رسائی دیں؛ مرکزی کلید کو نجی رکھیں۔</li>
-<li>مشین کا منتظم سب کچھ پڑھ سکتا ہے اور جرنل کو دوبارہ لکھ کر دوبارہ دستخط کر سکتا ہے۔ فنگر پرنٹ اور چیک پوائنٹس کو کسی دوسرے نظام پر محفوظ رکھیں۔</li>
-<li>پیغام کا متن اور میڈیا TgWitness کے ذریعے انکرپٹ نہیں کیے جاتے۔ ڈسک انکرپشن اور سخت اجازت نامے استعمال کریں۔</li>
-<li>لوکل ہوسٹ سے باہر سادہ HTTP نیٹ ورک پر ٹوکن ظاہر کرتا ہے۔ HTTPS یا SSH سرنگ استعمال کریں۔</li>
-<li>دستخطوں اور چیک پوائنٹس کے ساتھ محفوظ شدہ ریکارڈز کی جانچ کریں۔ اپنی استعمال کردہ اکاؤنٹس اور ذرائع کے لیے مجموعے کی کوریج کا جائزہ لیں اور ترسیل کا ٹیسٹ کریں۔</li>
+<li>مرکزی ٹوکن سب کچھ کر سکتا ہے۔ دوسروں کو محدود رسائی دیں اور مرکزی اپنے پاس رکھیں۔</li>
+<li>مشین پر جو بھی ایڈمن ہو وہ سب پڑھ سکتا ہے اور جرنل پر دوبارہ دستخط کر سکتا ہے۔ فنگر پرنٹ اور چیک پوائنٹس کہیں اور رکھیں۔</li>
+<li>TgWitness پیغامات اور میڈیا انکرپٹ نہیں کرتا۔ ڈسک انکرپٹ کریں، اجازتیں سخت کریں۔</li>
+<li>localhost کے باہر سادہ HTTP ٹوکن لیک کرتا ہے۔ HTTPS یا SSH ٹنل استعمال کریں۔</li>
+<li>دستخط نہیں بتاتے کہ کیا چھوٹ گیا۔ اپنے اکاؤنٹس اور ذرائع پر کوریج جانچیں اور ترسیل ٹیسٹ کریں۔</li>
 </ul></section>
 </div>
-<p><a href="../access/">کسی کیس تک رسائی شیئر کریں</a> اور اجازتیں، میعاد اور سیشن کی حدود مقرر کریں۔ گواہ کا ٹوکن ایک الگ سند رہتا ہے۔</p>
+<p>اجازتوں، میعاد اور سیشن حدود کے ساتھ <a href="../access/">کیس تک رسائی شیئر کریں</a>۔</p>
 <h2 id="hardening">انسٹالیشن کو مزید محفوظ بنائیں</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>8 میں سے 0 مکمل</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>ایک مخصوص ٹیلیگرام اکاؤنٹ استعمال کریں</strong> — کبھی اپنا مرکزی اکاؤنٹ استعمال نہ کریں۔ پینل ٹوکن اور سیشن آپ کو اس پر مکمل کنٹرول دیتے ہیں۔</span></li>
-<li><span class="check-text"><strong>پینل کو 127.0.0.1 پر ہی رکھیں۔</strong> اسے دور دراز سے صرف HTTPS (شامل شدہ Caddy کنفیگریشن) یا SSH ٹنل کے ذریعے ہی رسائی دیں۔</span></li>
-<li><span class="check-text">ڈیٹا ڈائریکٹری رکھنے والی <strong>ڈسک کو انکرپٹ کریں</strong>: پیغامات کا متن اور میڈیا جیسا پہنچا ویسا ہی محفوظ کیا جاتا ہے۔</span></li>
-<li><span class="check-text"><strong>ڈیٹا ڈائریکٹری کو</strong> سروس اکاؤنٹ تک <strong>محدود کریں</strong>۔ یونکس پر نئی ڈائریکٹریوں کو موڈ 0700 دیا جاتا ہے؛ ونڈوز پر فولڈر کی اجازت نامے سیٹ کریں۔</span></li>
-<li><span class="check-text"><strong>والٹ ماسٹر کلید کو</strong> سرورز پر <strong>کہیں اور محفوظ رکھیں</strong>: ڈیٹا ڈائریکٹری بنانے سے پہلے <code>TGWITNESS_VAULT_KEY_FILE</code> سیٹ کریں۔</span></li>
-<li><span class="check-text"><strong>دستیخط کی کلید کے فنگر پرنٹ اور چیک پوائنٹس کو</strong> کسی دوسرے نظام میں <strong>محفوظ کریں</strong>، اور دوسرے ہوسٹ پر ایک گواہ شامل کریں۔</span></li>
+<li><span class="check-text"><strong>مخصوص Telegram اکاؤنٹ استعمال کریں</strong>، کبھی اپنا مرکزی نہیں۔</span></li>
+<li><span class="check-text"><strong>پینل کو 127.0.0.1 پر رکھیں۔</strong> ریموٹ رسائی صرف HTTPS (ساتھ آنے والا Caddy) یا SSH ٹنل سے۔</span></li>
+<li><span class="check-text"><strong>ڈسک انکرپٹ کریں</strong> جس پر ڈیٹا ڈائریکٹری ہے، پیغامات اور میڈیا جوں کے توں محفوظ ہوتے ہیں۔</span></li>
+<li><span class="check-text"><strong>ڈیٹا ڈائریکٹری کو محدود کریں</strong> سروس اکاؤنٹ تک (Unix پر 0700، Windows پر فولڈر اجازتیں)۔</span></li>
+<li><span class="check-text"><strong>سرورز پر والٹ کلید کہیں اور رکھیں</strong>: پہلی بار شروع کرنے سے پہلے <code>TGWITNESS_VAULT_KEY_FILE</code> سیٹ کریں۔</span></li>
+<li><span class="check-text"><strong>فنگر پرنٹ اور چیک پوائنٹس محفوظ کریں</strong> کسی دوسرے سسٹم پر، گواہ دوسرے ہوسٹ پر چلائیں۔</span></li>
 <li><span class="check-text"><code>data/</code>، سیشنز، <code>panel-token.txt</code> یا والٹ کیز کو <strong>کبھی</strong> GitHub یا کسی چیٹ میں <strong>اپ لوڈ نہ کریں</strong>۔</span></li>
 <li><span class="check-text"><code>Authorization</code> ہیڈرز یا ریورس پروکسی پر درخواست کے باڈی <strong>لاگ نہ کریں</strong>۔</span></li>
 </ol>
 </div>
-<details><summary>کیا میں پینل ٹوکن کو ڈیٹا ضائع کیے بغیر تبدیل کر سکتا ہوں؟</summary><p>جی ہاں۔ ٹوکن صرف پینل کھولتا ہے۔ TgWitness کو روکیں، ڈیٹا ڈائریکٹری سے <code>panel-token.txt</code> حذف کریں اور دوبارہ شروع کریں؛ جرنل، سیشنز اور کیز بغیر متاثر ہوئے رہیں گے۔ <code>TGWITNESS_TOKEN</code> سیٹ ہونے کی صورت میں فائل کے بجائے ماحول کی قدر استعمال ہوتی ہے۔</p></details>
-<details><summary>پیغامات آرام کی حالت میں کیوں محفوظ نہیں کیے جاتے؟</summary><p>جمع کرنے والے کو انہیں پڑھنا ہوتا ہے تاکہ تلاش، ورژنوں کا موازنہ اور برآمد کیا جا سکے۔ ایک ہی مشین پر کلید کے ذریعے ان کا انکرپٹ کرنا اس شخص کے خلاف بہت کم مؤثر ہوگا جو اس مشین کو پڑھ سکتا ہے۔ ڈسک انکرپشن بند یا چوری شدہ ڈسک کو محفوظ رکھتی ہے؛ سخت اجازت نامے چلتی ہوئی ڈسک کو محفوظ رکھتے ہیں۔</p></details>
+<details><summary>کیا میں پینل ٹوکن کو ڈیٹا ضائع کیے بغیر تبدیل کر سکتا ہوں؟</summary><p>ہاں، یہ صرف پینل کھولتا ہے۔ TgWitness روکیں، <code>panel-token.txt</code> حذف کریں، دوبارہ شروع کریں۔ جرنل، سیشنز اور کلیدیں رہتی ہیں۔ اگر <code>TGWITNESS_TOKEN</code> سیٹ ہو تو اس کی قدر فائل پر غالب رہتی ہے۔</p></details>
+<details><summary>پیغامات آرام کی حالت میں کیوں محفوظ نہیں کیے جاتے؟</summary><p>کلیکٹر کو تلاش، موازنے اور ایکسپورٹ کے لیے انہیں پڑھنا پڑتا ہے۔ اسی مشین پر رکھی کلید اس شخص کو نہیں روکے گی جو ویسے بھی وہ مشین پڑھ سکتا ہے۔ ڈسک انکرپشن چوری شدہ ڈسک کو بچاتی ہے، اجازتیں چلتے سسٹم کو۔</p></details>
 <h2 id="report">کمزوری کی اطلاع کریں</h2>
-<p><strong>سیکیورٹی →</strong> GitHub ریپوزیٹری میں <strong>کمزوری رپورٹ</strong> کریں۔ ورژن، اثر اور کم از کم مصنوعی دوبارہ پیدا کرنے کا طریقہ شامل کریں۔ کبھی بھی کریڈینشلز، اکاؤنٹ ڈائریکٹریز یا اصل شواہد کے آرکائیوز نہ بھیجیں۔ اگر نجی رپورٹنگ دستیاب نہ ہو تو بغیر استحصال کی تفصیلات کے نجی چینل کی درخواست کے لیے ایک ایشو کھولیں۔</p>
+<p>GitHub پر <strong>Security → Report a vulnerability</strong>۔ ورژن، اثر اور جعلی ڈیٹا کے ساتھ کم سے کم ری پرو۔ کبھی اسناد، اکاؤنٹ فولڈرز یا اصل ثبوت نہ بھیجیں۔ اگر نجی رپورٹنگ بند ہو تو نجی چینل مانگنے کے لیے issue کھولیں، ایکسپلائٹ کی تفصیل کے بغیر۔</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">مکمل حوالہ ←</a><a class="next-guide" href="../start/"><span>اگلا قدم</span><strong>چند منٹ میں شروع کریں ←</strong></a><p>یہ رہنما موجودہ نفاذ کو بیان کرتے ہیں۔ توثیق کے نتائج اور باقی ماندہ خلائیں علیحدہ طور پر دستاویزی شکل میں درج ہیں۔ <a href="../reference/verification/">کیا جانچا گیا ہے ←</a></p></footer>
 </main>

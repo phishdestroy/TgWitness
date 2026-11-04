@@ -32,12 +32,12 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../">Dokumentasi</a> <span aria-hidden="true">/</span> <span aria-current="page">Kelola sekelompok akun</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentasi / 13</p><h1>Kelola sekelompok akun</h1><p class="guide-outcome">Kelola beberapa akun pengumpul secara bersamaan sambil tetap menjaga agar catatan dan identitas penandatangan setiap akun tetap terpisah.</p>
-<p>Grup akun menggabungkan status koneksi, kontrol pemantauan, pengaturan bersama, dan ekspor ke dalam satu tampilan kerja. Fitur ini berguna ketika beberapa akun menangani penyelidikan yang sama atau memerlukan pengaturan operasional yang konsisten.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentasi / 13</p><h1>Kelola sekelompok akun</h1><p class="guide-outcome">Jalankan beberapa akun bersama, masing-masing tetap dengan catatan dan kuncinya sendiri.</p>
+<p>Grup menyatukan status koneksi, mulai/jeda, pengaturan bersama, dan ekspor di satu layar. Praktis saat beberapa akun menangani kasus yang sama.</p>
 
 <h2 id="overview">Buka ikhtisar grup</h2>
-<p>Di bagian <strong>Akun</strong>, buka grup tersebut. Setiap akun menampilkan status pemantauannya, rute koneksi, latensi rute terbaru yang terukur saat pemeriksaan terkini berhasil, dan pesan terakhir yang disimpan. Tautan <strong>“Perlu Perhatian”</strong> mengarah ke akun-akun yang memerlukan tindakan; <strong>tombol “Perbaiki”</strong> membuka ruang kerja dan kontrol yang relevan.</p>
-<p><strong>Fitur &quot;Start all&quot;</strong> dan <strong>&quot;Pause all&quot;</strong> berlaku pada akun yang memenuhi syarat setelah konfirmasi. <strong>Pengaturan grup</strong> membagikan pengaturan yang dipilih; akun dengan nilai tersendiri akan mempertahankan nilai tersebut hingga Anda memilih untuk menggantinya.</p>
+<p>Buka grupnya di <strong>Akun</strong>. Setiap akun menampilkan status, rute, latensi, dan pesan tersimpan terakhir. <strong>Perlu perhatian</strong> mencantumkan yang bermasalah, <strong>Perbaiki</strong> membawa Anda langsung ke sana.</p>
+<p><strong>Mulai semua</strong> / <strong>Jeda semua</strong> bertanya dulu sebelum bertindak. <strong>Pengaturan grup</strong> dibagikan, tetapi nilai milik akun tetap ada sampai Anda menggantinya.</p>
 
 <section class="workflow-lab" data-workflow="groups" aria-labelledby="groups-example-title">
   <h3 id="groups-example-title">Tinjau perubahan rute di seluruh grup</h3>
@@ -59,15 +59,15 @@
 </section>
 
 <h2 id="route">Ubah alur dengan menambahkan langkah peninjauan</h2>
-<ol><li>Pilih &quot;<strong>Ubah rute grup</strong>&quot;, lalu pilih jenis koneksi dan pengaturannya.</li><li>Pilih <strong>opsi &quot;Review&quot;</strong>. Tinjau akun-akun yang tercantum beserta pengaturan rute khusus masing-masing.</li><li>Pilih <strong>&quot;Prepare&quot; dan &quot;Check&quot;</strong>. Proses &quot;Check&quot; menggunakan saluran Telegram yang baru; rute HTTP yang didukung juga melaporkan pemeriksaan keluar HTTPS-nya.</li><li>Pilih &quot;<strong>Apply checked connection&quot;</strong> dan periksa hasil setiap akun. Pengamatan yang sebelumnya berjalan akan dilanjutkan jika aplikasi berhasil; akun yang tidak aktif tetap tidak aktif.</li></ol>
-<p>Latency menggambarkan pengukuran waktu penyiapan koneksi Telegram. Pemeriksaan exit-IP menggambarkan rute tersebut pada waktu pemeriksaan yang tercatat. Otorisasi akun dan kesehatan pemantauan memiliki indikator masing-masing; perubahan grup dapat menghasilkan hasil yang berbeda-beda per akun.</p>
+<ol><li><strong>Ubah rute grup</strong>, pilih jenis dan pengaturannya.</li><li><strong>Tinjau pilihan</strong>: akun mana yang berubah dan mana yang punya rute sendiri.</li><li><strong>Siapkan dan periksa</strong> menguji koneksi Telegram baru, dan jika memungkinkan juga IP keluar.</li><li><strong>Terapkan koneksi yang diperiksa</strong> dan lihat setiap hasilnya. Akun yang berjalan melanjutkan, yang diam tetap diam.</li></ol>
+<p>Latensi adalah waktu menyiapkan koneksi Telegram; IP keluar adalah yang ditampilkan rute saat diperiksa. Hasilnya bisa berbeda per akun.</p>
 
 <h2 id="shared-chats">Gunakan akses tumpang tindih</h2>
-<p><strong>Obrolan yang dapat dilihat oleh beberapa akun</strong> menampilkan sumber yang dibagikan dan cakupan pengamatan ruang kerja yang tersedia. Saluran dan supergrup yang memenuhi syarat dapat menggunakan <strong>opsi “Ekspor dengan … akun”</strong> untuk membagi proses pengambilan riwayat satu obrolan. Obrolan pribadi dan grup biasa tetap berada di akun awal karena nomor pesan mereka termasuk dalam riwayat akun tersebut.</p>
+<p><strong>Obrolan yang dilihat beberapa akun</strong> mencantumkan sumber bersama dan cakupannya. Kanal dan supergrup bisa diekspor beberapa akun sekaligus lewat <strong>Ekspor dengan … akun</strong>. Obrolan pribadi dan grup biasa tidak bisa; nomor pesannya berlaku per akun.</p>
 
 <h2 id="export-group">Ekspor grup sebagai paket</h2>
-<p><strong>Grup ekspor</strong> membuat satu berkas ZIP yang berisi ekspor bertanda tangan dari setiap akun serta daftar bertanda tangan dari berkas-berkas tersebut. Identitas dan sidik jari ruang kerja asli tetap tersedia untuk verifikasi. Bangun narasi lintas akun menggunakan referensi tersebut; satu garis waktu gabungan tetap disusun secara terpisah.</p>
-<p>Lanjutkan dengan <a href="../reports/">desain laporan</a>, <a href="../case-board/">Case Board di dalam ruang kerja</a>, atau <a href="../exports/">verifikasi ekspor</a>.</p>
+<p><strong>Ekspor grup</strong> memberi satu ZIP berisi ekspor bertanda tangan setiap akun dan daftar bertanda tangannya. Masing-masing mempertahankan sidik jarinya untuk verifikasi. Lini masa gabungan tetap Anda susun sendiri.</p>
+<p>Berikutnya: <a href="../reports/">laporan</a>, <a href="../case-board/">Case Board</a>, <a href="../exports/">memverifikasi ekspor</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">Referensi lengkap →</a><a class="next-guide" href="../cases/"><span>Langkah selanjutnya</span><strong>Selidiki seluruh obrolan →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../reference/verification/">Apa yang telah diuji →</a></p></footer>
 </main>

@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reports/
 
-为读者提供从案件问题到保存记录的清晰路径。
+让读者从案件问题直接到达保存的记录。
 
-报告工作室集成了数据筛选、可读的变更历史、图表以及您撰写的调查结果。八种集成设计适用于受支持的 HTML 和原生 PDF 输出格式。HTML、PDF 和 JSON 报告均带有各自的签名印章；ZIP 清单还会将包中的文件进行绑定。HTML 和 PDF 将在最终版式确定后加盖印章。
+Report studio 汇总您挑选的数据、变更历史、图表和您的发现。八种设计，HTML 和原生 PDF。每份 HTML、PDF 和 JSON 报告都用您的密钥封印。
 
 ## 三步生成报告
 
-1. 打开**“导出”→“配置和预览”→“数据”**。可使用整个工作区，或选择聊天、作者、包含 UTC 观察日期的记录以及记录类型。日期指 TgWitness 观察到该记录的时间。
-2. 在**“设计与内容**”部分，选择一个设计和内容预设。选择活动图表、参与者标签、对话记录、已保存的更改以及可选的“案件看板”材料。添加您的案件详情和审查笔记。
-3. 打开**“预览**”以查看计数、活动、参与者、抽样记录及缺失的 ID 范围。保存设置后，下载您所需的格式。
+1. **导出 → 配置和预览 → 数据**：整个工作区，或选择聊天、作者、日期（UTC，即 TgWitness 看到记录的时间）和记录类型。
+2. **设计与内容**：选择设计和要包含的内容：图表、参与者、聊天记录、变更、Case Board 条目、您的案件详情和笔记。
+3. **预览**：检查数量、活动、样本和缺失的 ID 范围。保存，然后下载所需格式。
 
 ### 为读者整理相同的保存材料
 
@@ -55,16 +55,16 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reports/
 
 ## 选择阅读风格
 
-**“经典”、“编辑”、“简报”、“分析”、“技术”、“概述”、“阅读系列”以及“账本与边注”**以不同的编排形式呈现相同的底层记录。更改设计时，数据选择和书面注释将保持不变。报告语言可从 25 种支持的语言中选择。
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin**：相同的记录，不同的外观。切换时保留您的选择和笔记。可用 25 种语言中的任意一种。
 
-“阅读系列”将案件、范围、调查结果和变更围绕章节导航栏进行分组。“账本与页边距”采用编号章节和宽页边距。两种模式均支持账户 HTML 概览及副本共享。 原生 PDF 文件会随附字体生成；用户设备无需安装浏览器或 Node 即可创建 PDF。中文、日文和韩文的 PDF 文件还需服务器上安装合适的字体（如 Noto Sans CJK），该字体需在系统范围内部署或放置于 `TGWITNESS_FONT_DIR` 目录中。若未安装，ZIP 包将仅保留 HTML 和 JSON 报告。
+PDF 使用内置字体生成，无需浏览器。中文、日文和韩文需要服务器上有 Noto Sans CJK 之类的字体（系统级或位于 `TGWITNESS_FONT_DIR`），否则只能得到 HTML 和 JSON。
 
 ## 结合上下文阅读变更内容
 
-已保存的编辑内容会显示修改前后的对比。删除通知可附带最后捕获的版本。回复、引用、转发、点赞、按钮及附件元数据均保留其可用的引用信息。文件的 SHA-256 哈希值和日志记录哈希值会分别标注。
+编辑显示前后对比，删除显示最后保存的版本。回复、转发、表情回应、按钮和附件都保留其引用。
 
-设计预览展示了封面、审查和图表组件，其中使用了前 50,000 条源记录中的匹配记录。独立的数据预览会扫描完整的稳定日志快照以获取确切的选择计数，并标注了显示的样本限制。生成 PDF 以检查最终的分页情况。 完整账户导出包含 HTML 概览；其各个聊天记录的 PDF 文件均采用所选设计。
+设计预览使用前 50,000 条记录，数据预览精确统计全部内容。要查看最终页面布局，请生成 PDF。
 
 ## 请审慎选择受众版本
 
-报告过滤器可生成易于阅读的报告。完整的证据 ZIP 文件保留了原始日志和附件。当接收方只需接收选定数据时，请使用[精简版移交](https://phishdestroy.github.io/TgWitness/zh/docs/handover/)。查看[报告内容及验证信息](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)，或[对已完成的导出文件进行验证](https://phishdestroy.github.io/TgWitness/zh/docs/exports/)。
+筛选只影响报告，证据 ZIP 仍包含完整日志和文件。如果接收方应得到更少，请使用[精简移交](https://phishdestroy.github.io/TgWitness/zh/docs/handover/)。更多：[报告内容](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)，[验证导出](https://phishdestroy.github.io/TgWitness/zh/docs/exports/)。

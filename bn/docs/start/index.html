@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="গাইডসমূহ"><a href="../../">হোম</a> <span aria-hidden="true">/</span> <a href="../">ডকুমেন্টেশন</a> <span aria-hidden="true">/</span> <span aria-current="page">মিনিটখানেকের মধ্যে শুরু করুন</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">কি পরীক্ষা করা হয়েছে →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">ডকুমেন্টেশন অনুসন্ধান করুন</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="প্রক্সি, হ্যাশ চেইন, টোকেন বা উইটনেস চেষ্টা করুন…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="স্পষ্ট অনুসন্ধান" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">গাইড এবং রেফারেন্স অনুসন্ধান করতে একটি শব্দ টাইপ করুন। অনুসন্ধান আপনার ব্রাউজারেই থাকবে।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">ডকুমেন্টেশন / 04</p><h1>মিনিটখানেকের মধ্যে শুরু করুন</h1><p class="guide-outcome">প্রথমে একটি কার্যকর উদাহরণ অন্বেষণ করুন। তারপর আপনার নিজস্ব অ্যাকাউন্ট সংযুক্ত করুন।</p>
+<article class="guide-content"><p class="eyebrow">ডকুমেন্টেশন / 04</p><h1>মিনিটখানেকের মধ্যে শুরু করুন</h1><p class="guide-outcome">আগে ডেমোতে ঘুরে দেখুন, তারপর নিজের অ্যাকাউন্ট যুক্ত করুন।</p>
 <h2 id="demo">অ্যাকাউন্ট ছাড়াই চারপাশে দেখুন</h2>
-<p>প্রজেক্টটি ডাউনলোড বা ক্লোন করুন, <strong>Python 3.11 বা তার পরবর্তী সংস্করণ</strong> ইনস্টল করুন, এবং ডেমো চালান। লঞ্চারটি একটি স্থানীয় পরিবেশ তৈরি করে এবং পিন করা নির্ভরতাগুলো ইনস্টল করে।</p>
+<p>প্রকল্প নিন, <strong>Python 3.11 বা নতুন</strong> রাখুন, ডেমো চালান। বাকি সব লঞ্চার সেট করে।</p>
 <pre><code>git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness</code></pre>
 <div class="platforms"><section><h3>উইন্ডোজ</h3><pre><code>.\scripts\Demo.cmd</code></pre></section><section><h3>লিনাক্স / ম্যাকওএস</h3><pre><code>sh start.sh --demo</code></pre></section></div>
-<p>ব্রাউজার কাল্পনিক বার্তা সহ একটি কর্মক্ষেত্র খোলে। একটি কথোপকথন খুলুন, একটি সম্পাদনা তুলনা করুন এবং একটি রপ্তানি পরীক্ষা করুন। ডেমো মোড টেলিগ্রামের সাথে সংযোগ করে না।</p>
+<p>বানানো বার্তাসহ একটি ওয়ার্কস্পেস ব্রাউজারে খোলে। একটি চ্যাট খুলুন, একটি সম্পাদনা তুলনা করুন, একটি এক্সপোর্ট দেখুন। Telegram জড়িত নয়।</p>
 <figure><img src="../../../assets/chats-dark.png" width="1440" height="1000" alt="নমুনা বার্তা সহ TgWitness কথোপকথন দৃশ্য" loading="lazy"><figcaption>একটি নমুনা কর্মস্থান। আপনার নিজস্ব জার্নাল আলাদাভাবে শুরু হয়।</figcaption></figure>
 <h2 id="live">আপনার নিজস্ব কর্মক্ষেত্র শুরু করুন</h2>
-<p>ডেমো প্রক্রিয়াটি বন্ধ করুন, তারপর সাধারণ লঞ্চার ব্যবহার করুন:</p>
+<p>ডেমো বন্ধ করুন, তারপর:</p>
 <div class="platforms"><section><h3>উইন্ডোজ</h3><pre><code>.\Start.cmd</code></pre></section><section><h3>লিনাক্স / ম্যাকওএস</h3><pre><code>sh start.sh</code></pre></section></div>
-<p>লঞ্চারে প্রদর্শিত স্থানীয় ঠিকানাটি খুলুন। যদি জিজ্ঞাসা করা হয়, টার্মিনালে উল্লেখিত নামের স্থানীয় ফাইল থেকে প্যানেল অ্যাক্সেস টোকেনটি প্রবেশ করান। এটি TgWitness আনলক করে; এটি টেলিগ্রাম সাইন-ইন থেকে আলাদা।</p>
+<p>লঞ্চার যে ঠিকানা দেখায় তা খুলুন এবং উল্লেখ করা ফাইল থেকে <strong>প্যানেল অ্যাক্সেস টোকেন</strong> পেস্ট করুন। এটি TgWitness-এর জন্য, Telegram-এর জন্য নয়।</p>
 <h2 id="next">আপনার প্রথম বার্তাটি ধারণ করুন</h2>
-<ol><li><a href="../accounts/">একটি নিবেদিত টেলিগ্রাম অ্যাকাউন্ট সংযুক্ত করুন।</a></li><li>অ্যাকাউন্টটি যে গ্রুপ বা চ্যানেলে অ্যাক্সেস করতে পারে তা নির্বাচন করুন, তারপর পর্যবেক্ষণ শুরু করুন।</li><li>আপনি নিয়ন্ত্রণ করেন এমন একটি পরীক্ষা গ্রুপে একটি নতুন বার্তা পাঠান এবং যাচাই করুন যে এটি জার্নালে প্রদর্শিত হচ্ছে।</li></ol>
+<ol><li><a href="../accounts/">একটি নিবেদিত টেলিগ্রাম অ্যাকাউন্ট সংযুক্ত করুন।</a></li><li>একটি গ্রুপ বা চ্যানেল বেছে পর্যবেক্ষণ শুরু করুন।</li><li>আপনার টেস্ট গ্রুপে একটি বার্তা পাঠান এবং জার্নালে তা আসতে দেখুন।</li></ol>
 <p class="callout">সার্ভার ইনস্টলেশনের জন্য <a href="../server/">Keep it running</a> অনুসরণ করুন।</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/quickstart/">পূর্ণ রেফারেন্স →</a><a class="next-guide" href="../accounts/"><span>পরবর্তী ধাপ</span><strong>একটি অ্যাকাউন্ট সংযুক্ত করুন →</strong></a><p>এই গাইডগুলো বর্তমান বাস্তবায়ন বর্ণনা করে। যাচাইকরণ ফলাফল এবং অবশিষ্ট ফাঁকগুলো আলাদাভাবে নথিভুক্ত করা হয়েছে। <a href="../reference/verification/">কি পরীক্ষা করা হয়েছে →</a></p></footer>

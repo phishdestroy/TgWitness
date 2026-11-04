@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/witness/
 
-Proszę zlecić oddzielnemu procesowi sprawdzenie dziennika i opublikowanie podpisanych punktów kontrolnych na Państwa kanale.
+Osobny proces sprawdza Twój dziennik i publikuje podpisane punkty kontrolne na kanale.
 
 ## Dwa serwery, dwa klucze podpisujące
 
@@ -36,33 +36,33 @@ Wszystkie przykładowe odpowiedzi zakładają ważny podpis oraz przypięty kluc
 
 ## Przygotowanie bota i kanału
 
-Proszę utworzyć bota za pomocą BotFather i zezwolić mu na publikowanie postów w kanale, którym Pan/Pani zarządza. Proszę wybrać komputer lub serwer, na którym będzie działać narzędzie. Oddzielny serwer i operator zapewniają większą niezależność niż uruchomienie drugiego procesu na serwerze osoby gromadzącej dane.
+Utwórz bota przez BotFather i pozwól mu publikować na Twoim kanale. Świadka uruchom gdzie indziej: inny host, najlepiej prowadzony przez kogoś innego, jest wart znacznie więcej niż drugi proces obok kolektora.
 
 ## Trzy kroki w sekcji „Dodatki”
 
-1. **Dostęp tylko do odczytu.** Otwórz **menu „Extras” → „Independent witness”**, utwórz token świadka i zapisz plik dostępu. Umożliwia to odczyt punktów kontrolnych i stanu systemu, ale nie rozmów ani elementów sterujących kolektora.
-2. **Kanał i interwał.** Wybierz kanał w Telegramie lub webhook Discorda i wprowadź adres kolektora dostępny z poziomu świadka. Zapisz plik ustawień.
-3. **Uruchomienie.** Umieść razem pliki `witness.json`, `witness-token.txt` oraz `bot-token.txt` utworzone na serwerze Witness. Proszę uruchomić poniższe polecenia w zainstalowanym środowisku projektowym.
+1. **Dostęp tylko do odczytu.** **Dodatki → Niezależny świadek**, utwórz token i zapisz plik. Czyta punkty kontrolne i stan, nic więcej.
+2. **Kanał i interwał.** Kanał Telegram albo webhook Discorda, plus adres kolektora dostępny dla świadka. Zapisz plik ustawień.
+3. **Uruchomienie.** Połóż `witness.json`, `witness-token.txt` i `bot-token.txt` razem na hoście świadka i uruchom:
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
 python -m tgwitness.witness run --config witness.json
 ```
 
-Pobranie plików nie uruchamia narzędzia TgWitness. Proszę sprawdzić, czy w kanale pojawił się pierwszy podpisany wpis, a następnie oddzielnie zachować odcisk klucza publicznego narzędzia TgWitness.
+Poczekaj na pierwszy podpisany post na kanale, potem zapisz odcisk świadka w bezpiecznym miejscu.
 
-W przypadku Discorda należy zapisać adres URL webhooka kanału jako `discord-webhook.txt` zamiast tokenu bota. Świadek publikuje w jednym miejscu – na kanale Telegramu lub Discordzie; pliki większe niż wiadomość na Discordzie są przesyłane jako załączniki.
+Wolisz Discorda? Zapisz URL webhooka jako `discord-webhook.txt`. Jeden świadek publikuje w jednym miejscu; długie kontrole przychodzą na Discorda jako plik.
 
 ## Proszę wybrać częstotliwość publikacji
 
-Publikowanie każdego sprawdzenia tworzy regularny zewnętrzny zapis. W odstępach pięciominutowych oznacza to około 288 wpisów dziennie na każdy obszar roboczy. Ustawienia zaawansowane umożliwiają również publikowanie informacji o zmianach lub problemach, korzystanie z serwera proxy oraz podanie niestandardowego adresu API bota.
+Publikowanie każdej kontroli daje regularny zewnętrzny zapis: co pięć minut to około 288 postów dziennie na przestrzeń. Ustawienia zaawansowane pozwalają publikować tylko przy zmianach lub problemach, używać proxy albo własnego Bot API.
 
 **Co właściwie poświadcza ten bot?**
 
-Świadek zwraca się do podmiotu gromadzącego dane o podpisany punkt kontrolny, weryfikuje go przy użyciu oczekiwanego klucza i prowadzi oddzielny, podpisany dziennik. Rejestruje on zarówno brakujące odpowiedzi i odrzucone odpowiedzi, jak i pomyślnie przeprowadzone weryfikacje. Publikacja nadal zależy od tego, czy świadek działa i ma dostęp do interfejsu API botów serwisu Telegram.
+Prosi kolektor o podpisany punkt kontrolny, sprawdza go oczekiwanym kluczem i prowadzi własny podpisany dziennik, także z pominiętymi i odrzuconymi odpowiedziami.
 
-Narzędzie to weryfikuje stan dziennika zgłoszony przez moduł zbierający dane. Nie monitoruje ono samodzielnie każdej wiadomości w Telegramie. W tym celu należy zastosować test kontrolowanego dostarczania.
+Sprawdza stan dziennika, a nie śledzi Telegrama sam. Do tego przeprowadź kontrolowany test dostarczania.
 
 ## Proszę sprawdzić dowody później
 
-Należy zachować dziennik świadków, posty z kanałów oraz niezależnie zapisane odciski palców. [Pełna procedura weryfikacji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/#verify) polega na porównaniu ich z podpisanym eksportem pochodzącym od osoby gromadzącej dane.
+Zachowaj dziennik świadka, posty i odciski. [Jak je sprawdzić](https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/#verify) wobec eksportu kolektora.

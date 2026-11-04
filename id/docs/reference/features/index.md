@@ -93,8 +93,6 @@ Bintang prioritas mengontrol pemeriksaan ulang ini. Pemeriksaan singkat tambahan
 
 Polling frekuensi tinggi yang sewenang-wenang, mengabaikan FloodWait, atau mengasumsikan kapasitas linier dari akun tambahan bukanlah model penentuan ukuran yang valid. Batas default adalah 1.000 percakapan pertama yang terdaftar, hingga 500 pesan per cuplikan riwayat, 1–2.000 MiB per berkas yang dikumpulkan berdasarkan jenisnya, dan 4 GiB konten ZIP yang ditandatangani dan tidak terkompresi; masing-masing dapat diubah per ruang kerja di bawah **Parameter**. Ekspor tidak memiliki batasan jumlah peristiwa yang tetap. Fallback browser dibatasi hingga 128 MiB secara default; CLI streaming memiliki batas transfer yang dapat dikonfigurasi, 5 GiB secara default.
 
-`tools/check_capacity.py` mengukur pengambilan dan ekspor data sintetis lokal. Hasilnya bukanlah pengukuran pengiriman Telegram atau jumlah obrolan nyata yang dijamin. Lihat [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/) untuk versi yang diukur dan beban kerja.
-
 ## Keandalan dan pemulihan
 
 Perilaku yang diimplementasikan meliputi WAL SQLite/transaksi sinkron; penulisan pesan dan tugas media secara atomik; tugas yang persisten dan penundaan percobaan ulang; deskriptor versi asli; upaya ulang terbatas; FloodWait media yang disimpan; unduhan media di luar penantian jaringan peristiwa teks; ekspor awalan stabil sementara penulisan selanjutnya berlanjut; pengaturan atomik dan catatan audit; pelestarian otorisasi yang berfungsi setelah kegagalan login pengganti; isolasi ruang kerja tambahan yang rusak; upaya koneksi ulang eksplisit; pelaporan kehilangan otorisasi yang terpisah; serta deteksi perubahan waktu jam dinding menggunakan jam monotonik.

@@ -117,11 +117,6 @@ starts the tunnel; resume observation separately when ready.</p>
 and IPv6 routes, and no hooks, includes, environment substitutions or extra
 listeners. Public endpoint addresses are resolved and pinned before startup.
 Use an external VPN or SOCKS5 gateway for OpenVPN/IPsec and private endpoints.</p>
-<p>The synthetic checks are <code>python tools/check_guided_connection.py</code> and
-<code>python tools/check_guided_connection_browser.py</code>. The optional
-<code>python tools/check_portable_routes_runtime.py</code> downloads verified helpers and
-tests their actual local process lifecycle against loopback fixtures. It does
-not register a Cloudflare device or use a Telegram account.</p>
 <h2 id="authentication-methods">Authentication methods<a class="anchor" href="#authentication-methods" aria-label="Link to this section">#</a></h2>
 <p><strong>API ID and API hash identify an application; they do not replace account login.</strong>
 They are optional in TgWitness. Precedence: a pair entered in the form, then one from an
@@ -216,12 +211,6 @@ There is no passcode recovery. Phone/2FA or QR login creates a separate authoriz
     paste its string, and continue.</li>
 <li>Check the displayed numeric account ID, select sources and start observation.</li>
 </ol>
-<p>The converter opens SQLite read-only, performs no schema upgrade or network request,
-and does not print the session. It checks schema version, table types, a single
-session row, IP/port/DC and key length. CLI input is limited to 64 MiB; StringSession
-text is limited to 4 KiB. Panel conversion uploads files to the authenticated TgWitness
-server, processes them in memory, and returns the normalized credentials to that
-browser without saving the uploaded originals. Use HTTPS for a remote server.</p>
 <p><strong>The converted file is an unencrypted account-access secret.</strong> Keep it in protected
 storage and never commit it or send it to a third-party conversion service. TgWitness
 saves the authorized session in its encrypted vault. Copying a session does not
@@ -328,17 +317,6 @@ or erase its journal. Route choices and changes are recorded in the signed journ
 <p>While automatic routes are active, lists refresh hourly and transport checks run
 every ten minutes by default. These intervals are configurable. <strong>Update public lists</strong>
 requests a refresh; viewing the list alone does not change a saved manual route.</p>
-<p>Each feed response is limited to 1 MiB with an eight-second request timeout and a
-20-second overall download deadline; redirects
-are rejected. Up to 64 compatible entries per source are retained and deduplicated.
-The parser accepts supported hexadecimal and base64url secrets and the JSON feed.
-Fake TLS <code>ee</code>, invalid links, private/reserved IP literals and local hostnames are
-skipped. Hostnames are resolved and checked before use, and the chosen IP is pinned
-for that connection. Automatic reacquisition resolves a hostname again; reapply a
-manual entry to resolve it again.</p>
-<p>Failed, empty or incompatible feed responses retain the previous source snapshot.
-Updates are atomic, serialized and limited to one attempt per minute per workspace.
-A successful transport probe establishes connectivity, not anonymity or capture completeness.</p>
 <p><strong>Telegram traffic and HTTPS requests use different routes.</strong> List downloads use a
 separate HTTPS connection and the supplied external-request route.
 <code>TGWITNESS_PROXY_FEED_PROXY</code> explicitly overrides that route with an HTTP/SOCKS5 proxy;
@@ -351,21 +329,6 @@ configured, then the account's SOCKS5/HTTP route. Without either, Hide the addre
 request; the other modes permit Direct. External requests can be disabled. An explicitly
 configured feed-download proxy remains a separate operator override.
 The independent witness service keeps its own route.</p>
-<p>Public-only external HTTP requests through SOCKS5 or HTTP proxies resolve the
-destination with Cloudflare DNS over HTTPS at <code>https://1.1.1.1/dns-query</code>, through
-that same proxy. Only the hostname and A/AAAA query types go to the resolver;
-service URLs, credentials and notification contents are not included. TLS verifies
-the resolver certificate for its IP address. Both address families are checked,
-and any private, loopback, link-local or reserved answer rejects the request.
-Connections use a checked numeric address while retaining the service's original
-HTTP Host and TLS certificate name. Notification HTTP forwarding and CONNECT
-requests use the same destination checks. DNS failure stops the request without
-local destination DNS or a direct fallback. Successful answers are cached in
-memory per proxy route for at most 30 seconds and no longer than their DNS TTL;
-the cache is limited to 128 entries. The proxy hostname itself may use local DNS.
-SOCKS and CONNECT failures can try another checked address before sending the
-service request body. Plain HTTP forwarding reports a failed request without
-automatically replaying its body through another address.</p>
 <p>For operator-managed private services, the existing server environment setting
 <code>TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1</code> permits private destinations and keeps
 proxy-side hostname resolution. It cannot be enabled from the panel. Public-only
@@ -483,11 +446,6 @@ are cloud chats; MTProto does not turn them into end-to-end encrypted Secret Cha
 access secret, not an encryption password. It grants administrator access;
 <a href="../access/">issued tokens</a> can be scoped to accounts and chats. Workspaces share
 the host process and are not isolated tenants.</p>
-<p>An explicitly started, isolated synthetic demo can open automatically over a direct
-loopback connection. This uses a separate process-lifetime capability; it neither
-reveals the configured panel token nor grants access to real workspaces. Remote,
-proxied or cross-origin requests cannot obtain/use this automatic-entry capability.
-This convenience does not remove the authentication boundary for real account data.</p>
 <p>BitLocker, LUKS, FileVault or a managed encrypted volume can protect storage under
 their respective threat models. An administrator of an unlocked running machine
 can still read data. Include SQLite WAL/SHM, media, temporary exports, swap, backups
@@ -518,26 +476,10 @@ password KDF. Arbitrary human passwords are not accepted in place of a random ke
 <p>Keep the existing key for existing installations until a deliberate migration is
 implemented and verified. Deleting <code>vault.key</code> or replacing a master key can destroy
 access to sessions/signing keys. Keep encrypted backups and keys separately and
-test recovery in an isolated instance.</p>
-<h2 id="sources-and-verification-scope">Sources and verification scope<a class="anchor" href="#sources-and-verification-scope" aria-label="Link to this section">#</a></h2>
-<p>Reviewed on 26 October 2026:</p>
-<ul>
-<li>https://core.telegram.org/api/auth</li>
-<li>https://core.telegram.org/api/obtaining_api_id</li>
-<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
-<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
-<li>https://core.telegram.org/mtproto/mtproto-transports</li>
-<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
-<li>Telethon 1.45.0: SQLiteSession, StringSession, <code>Connection._proxy_connect</code>,
-    <code>TcpMTProxy.normalize_secret</code> and download methods.</li>
-</ul>
-<p>Local tests cover loopback SOCKS5/HTTP CONNECT fixtures, synthetic SQLite sessions,
-route isolation, secret exclusion and missing-key refusal. They do not establish
-real Telegram/proxy interoperability or live MTProxy behavior. See
-<a href="../verification/">VERIFICATION.md</a> and <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a>.</p></div></article>
+test recovery in an isolated instance.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../deployment/"><span>Next step</span><strong>Deployment →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
 </main>
-<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#guided-connection-setup">Guided connection setup</a><a href="#authentication-methods">Authentication methods</a><a href="#import-a-telethon-session-file">Import a Telethon session file</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon and proxies</a><a href="#ip-modes">IP modes</a><a href="#encryption-and-signatures">Encryption and signatures</a><a href="#external-master-key">External master key</a><a href="#sources-and-verification-scope">Sources and verification scope</a></aside>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#guided-connection-setup">Guided connection setup</a><a href="#authentication-methods">Authentication methods</a><a href="#import-a-telethon-session-file">Import a Telethon session file</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon and proxies</a><a href="#ip-modes">IP modes</a><a href="#encryption-and-signatures">Encryption and signatures</a><a href="#external-master-key">External master key</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
 <script id="site-dict" type="application/json">{}</script>

@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/groups/
 
-Gestiona varias cuentas de recopilación a la vez, manteniendo diferenciados los registros y la identidad de firma de cada cuenta.
+Gestione varias cuentas juntas, cada una con sus propios registros y su clave.
 
-Un grupo de cuentas reúne el estado de la conexión, los controles de observación, la configuración compartida y las exportaciones en una única vista de trabajo. Resulta útil cuando varias cuentas abarcan la misma investigación o necesitan una configuración operativa coherente.
+Un grupo reúne en una pantalla el estado de conexión, iniciar/pausar, los ajustes compartidos y las exportaciones. Práctico cuando varias cuentas trabajan el mismo caso.
 
 ## Abrir la vista general del grupo
 
-En **«Cuentas»**, abre el grupo. Cada cuenta muestra su estado de observación, la ruta de conexión, la última latencia de ruta medida cuando se ha realizado con éxito una comprobación reciente y el último mensaje guardado. Los enlaces **«Requiere atención»** remiten a las cuentas que necesitan revisión; **«Corregir»** abre el espacio de trabajo y los controles pertinentes.
+Abra el grupo en **Cuentas**. Cada cuenta muestra su estado, ruta, latencia y último mensaje guardado. **Requiere atención** lista las que fallan y **Arreglar** le lleva directo.
 
-**Las opciones «Iniciar todo»** y **«Pausar todo»** se aplican a las cuentas que cumplan los requisitos tras la confirmación. **La configuración de grupo** comparte los ajustes seleccionados; las cuentas con sus propios valores los conservan hasta que decidas sustituirlos.
+**Iniciar todas** / **Pausar todas** preguntan antes de actuar. Los **Ajustes del grupo** se comparten, pero los valores propios de una cuenta se mantienen hasta que los sustituya.
 
 ### Revisar un cambio de ruta en un grupo
 
@@ -51,19 +51,19 @@ Cuenta de referencia: se mantiene la ruta propia.
 
 ## Modifica la ruta añadiendo un paso de revisión
 
-1. Selecciona **«Cambiar la ruta del grupo**» y, a continuación, elige el tipo de conexión y la configuración.
-2. Selecciona **«Revisar selección**». Revisa las cuentas de la lista y sus modificaciones de ruta individuales.
-3. Selecciona **«Preparar y comprobar**». La comprobación utiliza un transporte de Telegram nuevo; las rutas HTTP compatibles también informan de su comprobación de salida HTTPS.
-4. Selecciona **«Aplicar conexión marcada»** e inspecciona el resultado de cada cuenta. La observación que se estaba ejecutando anteriormente se reanuda cuando la aplicación tiene éxito; las cuentas inactivas permanecen inactivas.
+1. **Cambiar la ruta del grupo**, elija tipo y ajustes.
+2. **Revisar selección**: qué cuentas cambian y cuáles tienen ruta propia.
+3. **Preparar y comprobar** prueba una conexión nueva con Telegram y, cuando se puede, la IP de salida.
+4. **Aplicar conexión comprobada** y mire cada resultado. Las cuentas activas continúan; las inactivas siguen así.
 
-La latencia describe el tiempo medido de establecimiento de la conexión de Telegram. Una comprobación de la IP de salida describe esa ruta en el momento de la comprobación registrado. La autorización de la cuenta y el estado de la observación tienen sus propios indicadores; un cambio de grupo puede dar lugar a resultados diferentes según la cuenta.
+La latencia es el tiempo de establecer la conexión con Telegram; la IP de salida es la que mostró la ruta al comprobarla. Los resultados pueden variar por cuenta.
 
 ## Utilizar el acceso superpuesto
 
-**La opción «Chats que ven varias cuentas**» muestra las fuentes compartidas y la cobertura de observación del espacio de trabajo disponible. Los canales y supergrupos elegibles pueden utilizar **la opción «Exportar con… cuentas»** para dividir la adquisición del historial de un chat. Los chats privados y los grupos normales permanecen en la cuenta inicial, ya que sus números de mensajes pertenecen al historial de dicha cuenta.
+**Chats que ven varias cuentas** lista las fuentes compartidas y su cobertura. Canales y supergrupos se pueden exportar con varias cuentas a la vez mediante **Exportar con … cuentas**. Los chats privados y grupos básicos no: allí los números de mensaje son por cuenta.
 
 ## Exportar el grupo como un paquete
 
-**El grupo «Export»** crea un archivo ZIP que contiene la exportación firmada de cada cuenta y una lista firmada de dichos archivos. Las identidades y huellas digitales originales del espacio de trabajo siguen estando disponibles para su verificación. Elabora una narrativa que abarque todas las cuentas utilizando esas referencias; la línea temporal única fusionada se sigue montando por separado.
+**Exportar grupo** da un ZIP con la exportación firmada de cada cuenta y una lista firmada de ellas. Cada una conserva su huella para la verificación. La cronología unificada la monta usted.
 
-Continúa con [el diseño del informe](https://phishdestroy.github.io/TgWitness/es/docs/reports/), [un «Case Board» dentro de un espacio de trabajo](https://phishdestroy.github.io/TgWitness/es/docs/case-board/) o [la verificación de la exportación](https://phishdestroy.github.io/TgWitness/es/docs/exports/).
+Siguiente: [informes](https://phishdestroy.github.io/TgWitness/es/docs/reports/), [Case Board](https://phishdestroy.github.io/TgWitness/es/docs/case-board/), [verificar exportaciones](https://phishdestroy.github.io/TgWitness/es/docs/exports/).

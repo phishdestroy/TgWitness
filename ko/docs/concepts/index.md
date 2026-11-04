@@ -2,26 +2,26 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/concepts/
 
-메시지는 변경될 수 있습니다. 여러분이 확인한 내용의 기록은 언제든지 검증 가능해야 합니다.
+메시지는 바뀝니다. 귀하가 본 것에 대한 기록은 바뀌면 안 되고, 누구나 그것을 확인할 수 있어야 합니다.
 
-아래의 두 가지 간단한 실험을 살펴보세요. 이 실험들은 가상의 메시지를 사용하며, 브라우저 내에서만 실행되고 텔레그램에 연결되지 않습니다.
+아래에 작은 실험 두 개가 있습니다. 가짜 메시지이며, 모든 것이 브라우저에서 실행되고 텔레그램으로는 아무것도 가지 않습니다.
 
 ## 채팅 내역 내보내기에서 검증 가능한 기록으로
 
-[Telegram Desktop의 내보내기 기능은](https://telegram.org/blog/export-and-more) 사용 가능한 채팅 기록과 미디어를 HTML 또는 JSON 형식으로 내보내 오프라인에서 사용할 수 있게 합니다. TgWitness는 수신된 변경 사항에 대한 지속적인 기록, 관찰 내용 및 내보내기 파일에 대한 서명, 수신자가 독립적으로 비교할 수 있는 체크포인트를 추가합니다.
+[Telegram Desktop 내보내기](https://telegram.org/blog/export-and-more)는 지금 보이는 기록을 HTML이나 JSON으로 저장합니다. TgWitness는 여기에 계속 이어지는 변경 저널, 모든 기록의 서명, 다른 사람이 대조할 수 있는 체크포인트를 더합니다.
 
 | 과제 | Telegram 데스크톱 내보내기 | TgWitness |
 | --- | --- | --- |
 | 저장된 대화 읽기 | 선택된 미디어가 포함된 HTML 또는 JSON | 저장된 채팅, 검색 가능한 일지 및 오프라인 보고서 |
-| 시간에 따른 변화를 추적하십시오 | 내보낼 때 확인할 수 있는 기록 | 이전에 캡처된 버전, 이후의 수정 내역 및 삭제 기록이 함께 보존됩니다. |
-| 인계 후 파일 확인 | 표준 HTML/JSON 내보내기 파일에는 서명이 없습니다. | 서명된 매니페스트, 레코드별 서명 및 봉인된 HTML/PDF/JSON 보고서는 신뢰할 수 있는 수집기 키를 기준으로 검증됩니다. |
+| 시간에 따른 변화를 추적하십시오 | 내보낼 때 확인할 수 있는 기록 | 이전 버전, 이후 편집, 삭제를 모두 보관 |
+| 인계 후 파일 확인 | 표준 HTML/JSON 내보내기 파일에는 서명이 없습니다. | 서명된 매니페스트, 서명된 기록, 봉인된 보고서를 신뢰할 수 있는 키로 확인 |
 | 이전 보존 상태와 비교 | 별도의 참조 사본 또는 해시 값을 보관하십시오. | 서명된 체크포인트, 별도의 위트니스 및 선택적 외부 타임스탬프 |
 
-파일 서명 비교는 2026년 11월 2일에 검토된 [텔레그램 데스크톱 내보내기 작성기를](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) 기준으로 합니다. TgWitness는 수집기의 키로 서명하며, 아래의 확인 사항은 수신자가 이를 어떻게 사용하는지 보여줍니다.
+이 비교는 2026년 11월 2일 기준 [Telegram Desktop 내보내기 코드](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output)를 바탕으로 합니다.
 
 ## 한 가지 메시지, 세 가지 관찰점
 
-텔레그램에서 새 메시지, 수정 알림, 삭제 알림이 전송되면 수집기는 세 가지 별도의 기록을 추가합니다. 수정 알림은 첫 번째 기록을 대체하지 않습니다. 삭제 알림도 해당 기록을 지우지 않습니다.
+새 메시지, 편집, 삭제는 세 개의 별도 기록이 됩니다. 편집은 첫 기록을 덮어쓰지 않고, 삭제도 그것을 지우지 않습니다.
 
 01 / 메시지 이동 경로예시 순서
 
@@ -61,11 +61,11 @@ Telegram delivers an update to the collector, which appends a journal record. ·
 
 이미 선택된 소스 하나에 대한 간소화된 경로. 운영 기록도 실제 저널을 공유합니다. 캡처 내용은 해당 계정이 볼 수 있는 내용과 텔레그램이 제공하는 내용에 따라 달라집니다.
 
-삭제 알림에는 신뢰할 수 있는 삭제 시간이나 메시지를 삭제한 사람이 명시되지 않습니다. 이러한 정보를 알 수 없게 함으로써, ‘관찰’과 ‘추측’ 사이의 구분이 유지됩니다.
+텔레그램은 누가 메시지를 삭제했는지, 정확히 언제인지 알려 주지 않습니다. TgWitness는 추측하지 않고 그 필드를 비워 둡니다.
 
 ## 기록을 변경하세요. 해시를 추적하세요.
 
-각 기록에는 이전 기록의 해시가 포함됩니다. 해당 기록의 해시는 해당 링크를 포함한 이벤트 필드 전체를 포괄합니다. 외부에 보관된 체크포인트는 특정 저널 길이와 시작 해시를 고정합니다.
+모든 기록에는 바로 앞 기록의 해시가 들어 있습니다. 다른 곳에 보관한 체크포인트가 저널 길이와 마지막 해시를 고정합니다.
 
 02 / HASH-CHAIN SANDBOX실제 SHA-256 · 기록 예시
 
@@ -105,23 +105,23 @@ h0 = 064
 hi = hex(SHA-256(C(ei)))
 σi = Ed25519.Sign(sk, unhex(hi))
 
-**C**는 9개의 이벤트 필드를 UTF-8 JSON 형식으로 직렬화합니다: 정렬된 키, 여분의 공백 없음, ASCII 이스케이프 없음, NaN/무한대 없음. 이벤트의 `previous_hash`는 hi−1입니다. 표시된 h0는 64개의 0 문자를 의미하며, 서명은 32바이트의 원시 다이제스트를 포함합니다.
+**C**는 아홉 개의 이벤트 필드를 UTF-8 JSON으로 만든 것입니다: 키 정렬, 불필요한 공백 없음, ASCII 이스케이프 없음, NaN/무한대 없음. `previous_hash`는 hi−1, h0은 0 64개이며, 서명은 다이제스트의 원시 32바이트를 대상으로 합니다.
 
-9개의 필드는 `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload` 및 `previous_hash`입니다. 이는 TgWitness에 [문서화된 JSON 인코딩](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#event-canonicalization) 방식이며, 해시 및 서명 자체는 해시 입력 필드가 아닙니다.
+필드: `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload`, `previous_hash`. 전체 사양: [이벤트 인코딩](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#event-canonicalization).
 
 유지된 체크포인트
 
 Nexport ≥ Ncheckpoint
 hexport[Ncheckpoint] = Hcheckpoint
 
-고정된 수집기 키 아래에 있는 체크포인트 서명을 확인한 다음, 그 경계를 검증된 저널과 비교하십시오. 이후에 내보낸 파일에는 더 많은 기록이 포함될 수 있으나, 이전 체크포인트에서는 여전히 일치해야 합니다.
+고정된 키로 체크포인트 서명을 확인한 다음, 저널과 비교합니다. 이후의 내보내기는 더 길어도 되지만, 체크포인트 지점에서는 일치해야 합니다.
 
 ## 세 가지 질문, 세 가지 다른 확인 절차
 
-[01 / 무결성**이 기록이 변경되었나요?** 별도로 신뢰할 수 있는 키를 사용하여 해시값과 서명을 검증합니다.](https://phishdestroy.github.io/TgWitness/ko/docs/exports/)[02 / 연속성**이전에 어떤 내용이 유지되었나요?** 서명된 내보내기 파일을 별도의 증인이 보관한 체크포인트와 비교해 보십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/witness/)[03 / 제공**이 테스트 이벤트들이 도착했나요?** 각 계정의 기록부와 전송, 수정, 삭제 작업을 대조하여 일치 여부를 확인합니다.](https://phishdestroy.github.io/TgWitness/ko/docs/cases/)
+[01 / 무결성**이 기록이 변경되었나요?** 신뢰하는 키로 해시와 서명을 확인합니다.](https://phishdestroy.github.io/TgWitness/ko/docs/exports/)[02 / 연속성**이전에 어떤 내용이 유지되었나요?** 내보내기를 증인이 보관한 체크포인트와 비교합니다.](https://phishdestroy.github.io/TgWitness/ko/docs/witness/)[03 / 제공**이 테스트 이벤트들이 도착했나요?** 테스트 메시지를 보내고, 편집하고, 삭제한 뒤 각 계정이 무엇을 잡았는지 봅니다.](https://phishdestroy.github.io/TgWitness/ko/docs/cases/)
 
-서명을 사용하여 보존된 기록을 확인하고, 체크포인트를 사용하여 이전 경계와 비교하며, 제어된 전달 테스트를 통해 수집 상태를 측정하십시오. 각각은 특정 질문에 대한 답을 제공합니다. [검증 범위와 신뢰 가정을 숙지하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope)
+서명은 "바뀌었는가", 체크포인트는 "이전에 있던 것과 일치하는가", 테스트 메시지는 "모두 잡았는가"에 답합니다. [검증이 증명하는 것과 증명하지 않는 것.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope)
 
-정보 수집부터 사건 자료 정리까지, [계정 전체에 대한 조사](https://phishdestroy.github.io/TgWitness/ko/docs/cases/) 과정을 따라가 보세요.
+다음: 시작부터 사건 패키지까지 [계정 전체 조사](https://phishdestroy.github.io/TgWitness/ko/docs/cases/).
 
 [Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

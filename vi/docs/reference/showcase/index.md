@@ -54,12 +54,3 @@ Việc xác minh chữ ký và tính nhất quán có thể phát hiện các th
 Sử dụng **tính năng “Revoke”** trong trình quản lý showcase hoặc phần **“Access**” hiện có để đóng liên kết và kết thúc tất cả các phiên của nó. Người truy cập sẽ xóa các bản ghi đang hiển thị khi yêu cầu phát hiện rằng quyền truy cập đã kết thúc. Thời hạn và quyền truy cập được kiểm tra trên mỗi yêu cầu. Quyền truy cập showcase không thể chuyển đổi trực tiếp thành quyền truy cập bảng điều khiển thông thường; hãy tạo một quyền truy cập mới để thay đổi chế độ.
 
 Trang web được phục vụ thông qua địa chỉ HTTPS hiện có của hệ thống cài đặt. Việc chia sẻ một liên kết sẽ không mở cổng mới, tạo đường hầm hoặc thay đổi DNS. Mã HTML và API vẫn được lưu trữ trên hệ thống cài đặt của người dùng. Người truy cập bản demo không thể sử dụng các API thông thường liên quan đến tin nhắn, hồ sơ, phương tiện, xuất dữ liệu hoặc quản lý với quyền truy cập này.
-
-## Kiểm tra hồi quy cục bộ
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Cả hai đều sử dụng bản ghi tổng hợp và máy chủ HTTP cục bộ. Chúng không kết nối với Telegram.

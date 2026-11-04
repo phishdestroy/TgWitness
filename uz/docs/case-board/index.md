@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/case-board/
 
-Saqlangan Telegram kuzatuvlarini jamoangiz birgalikda ko'rib chiqishi mumkin bo'lgan ishga aylantiring.
+Saqlangan xabarlarni jamoangiz birga ishlaydigan ishga aylantiring.
 
-Case Board manba havolalari yonida belgilashlar, aniq matnli ajratmalar, saqlangan bo'laklar va muhokamalarni saqlaydi. To'plam ishga tushirilgan ishga tuzilma beradi; imzolangan tahrirlar jamoaning uni qanday rivojlantirganini saqlab qoladi.
+Xatcho'plar, aniq iqtiboslar, kesimlar va muhokama, har biri o'z manbasiga bog'langan. Har bir o'zgarish imzolangan tahrir.
 
 ## Xabardan ish kartasiga
 
-1. **Tergovni** oching **→ Ish taxtasini** Standart yoki Mutaxassis rejimida ishga tushiring. Ish uchun to'plam yarating va uning chat doirasini tanlang.
-2. **Jurnal** yoki saqlangan suhbatda "**To board**"ni tanlang yoki yozuvni markalab **B tugmas**ini bosing. Karta Inboxga kiradi; unga foydali sarlavha bering va uni kollektsiyangizga o'tkazing.
-3. Saqlangan chat xabaridagi matnni tanlang va aniq iqtibos hamda xabar versiyasini saqlash uchun **Highlight → board ni** tanlang. Nega bu muhimligini tushuntiruvchi izoh qo'shing.
-4. Kartani muhokama qiling, ko'rib chiqish holatini belgilang va da'vo tekshirilishi kerak bo'lganda har safar uning manba kontekstiga qayting. **Presentation'dan** foydalanib, kollektsiyani hamkasblar bilan birgalikda bosqichma-bosqich ko'rib chiqing.
+1. **Tergov → Case Board** (Standart yoki Ekspert rejimi). Ish uchun to'plam yarating.
+2. **Jurnal** yoki chatda **Taxtaga** (yoki **B**) ni bosing. Karta Kiruvchilarga tushadi, unga sarlavha bering va ko'chiring.
+3. Xabardagi matnni belgilang, **Belgilash → taxta** aniq iqtibos va versiyani saqlaydi. Nima uchun muhimligini yozing.
+4. Muhokama qiling, holat belgilang, kerak bo'lganda manbaga qayting. **Taqdimot** jamoani bosqichma-bosqich olib o'tadi.
 
 ### O'zgartirilgan bitta to'lov havolasiga rioya qiling
 
@@ -48,16 +48,16 @@ Izoh va Telegram kuzatuvi alohida aniqlanishi mumkin bo'lib qoladi.
 
 ## Foydali diapazonni bir marta saqlang
 
-Bir suhbatda Shift bosib ikki yozuvni tanlab, **ular orasidagi** **Slice'ni** tanlang yoki joriy Journal filtrlarini saqlang. Saqlashdan oldin hisobni tekshiring. Slice'ni qayta ochib, saqlangan so'rovni qo'llang; **belgilangan joyga qo'shilgan yozuvlarni ko'rsatish** keyingi qo'shimchalarni namoyish etadi.
+Ikki xabarni Shift bilan bosib **Oradagi kesim**, **Vaqt bo'yicha kesim**dan foydalaning yoki joriy Jurnal filtrlarini saqlang. **Xatcho'pdan keyin qo'shilgan yozuvlarni ko'rsatish** keyin kelganlarni ko'rsatadi.
 
-Vaqt bo'lagi yig'uvchi kuzatuv vaqtidan keyin keladi. Xabar-ID bo'lagi tanlangan xabarlarga keyingi o'zgarishlar kelgan sari qo'shilishi mumkin. Saqlangan yaratish chegarasi qabul qiluvchiga asl tanlovni uning keyingi holati bilan solishtirish imkonini beradi.
+Vaqt kesimlari kuzatuv vaqtidan foydalanadi; xabar ID kesimlari o'sha xabarlarni o'zgarganda kuzatib boradi.
 
 ## Har bir hamkasbga to'g'ri rolni bering
 
-**Ko'rib chiquvchi** doskani o'qiydi; **tahlilchi** kartalar va izohlar qo'shadi; **operator** ham to'plamlarni va ko'rib chiqish qarorlarini boshqaradi. Ish maydoni va chat ruxsatlari kartalarga, manba kontekstiga va muhokamalarga tatbiq etiladi. Aniq mansubiyatni ko'rsatish uchun nomlangan kirish huquqlaridan foydalaning.
+**Ko'rib chiquvchi** o'qiydi, **Tahlilchi** kartalar va izohlar qo'shadi, **Operator** to'plamlar va qarorlarni ham boshqaradi. Chat ruxsatlari kartalarga ham tegishli.
 
 ## Ishni yetkazib beriladigan hujjatga o'tkazing
 
-Bir bo'lakni imzolangan JSON shaklida eksport qiling yoki jadval uchun CSV formatidan foydalaning. Hisobot sozlamalariga belgilamalar va bo'laklar, tanlanganida jamoa izohlari bilan kiritilishi mumkin. Ushbu mazmunni [Report Studio](https://phishdestroy.github.io/TgWitness/uz/docs/reports/)'da tanlang; saqlangan bo'lak avtomatik ravishda hisobotni sozlamaydi. Cheklangan qabul qiluvchi uchun alohida [topshirish boshqaruvlar](https://phishdestroy.github.io/TgWitness/uz/docs/handover/)idan foydalaning.
+Kesimlar imzolangan JSON yoki CSV sifatida eksport qilinadi. Hisobotlarga xatcho'plar, kesimlar va izohlar kirishi mumkin, buni [Report studio](https://phishdestroy.github.io/TgWitness/uz/docs/reports/)'da sozlang. Cheklangan qabul qiluvchi uchun [topshirish](https://phishdestroy.github.io/TgWitness/uz/docs/handover/)dan foydalaning.
 
-Imzolangan tahrirlar, aniq iqtibos mosligi, tanlovni tekshirish va ruxsatnomalar bo'yicha [Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/)bo'yicha [ma'lumotnoma](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/) bilan tanishing.
+Batafsil: [Case Board ma'lumotnomasi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/).

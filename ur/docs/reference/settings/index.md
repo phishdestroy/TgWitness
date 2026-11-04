@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/setti
 ایک ورک اسپیس جس میں سیشن یا پہلے مکمل شدہ سیٹ اپ موجود ہو، اسے وزرڈ نہیں ملتا۔ صفحہ لوڈ ہونے پر اس کی قدریں گول کے ذریعے تبدیل نہیں ہوتیں۔ کسی فیلڈ کو چھپانے سے یہ خصوصیت بند نہیں ہوتی اور نہ ہی اس کی قدر حذف ہوتی ہے۔
 
 سائز اور وقت کا تخمینہ تین منتخب چیٹس اور ہر ایک سے 20 پیغامات تک پڑھتا ہے۔ یہ ایک تخمینہ ہے: یہ ٹیلیگرام کی حدود، کسی مخصوص سرور کی رفتار یا ہر چیٹ میں موجود فائلوں کی پیشگوئی نہیں کرتا۔
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

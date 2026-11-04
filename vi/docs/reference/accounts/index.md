@@ -241,20 +241,6 @@ Các thành viên chia sẻ cài đặt chung của nhóm; mỗi tài khoản c�
 
 **Tài khoản → Đăng xuất khỏi Telegram** (với chế độ quan sát tạm dừng) sẽ yêu cầu Telegram kết thúc phiên làm việc, do đó phiên này cũng sẽ biến mất khỏi mục **Cài đặt → Thiết bị** của tài khoản, đồng thời xóa phiên làm việc khỏi kho lưu trữ không gian làm việc. Nhật ký, các nguồn, cài đặt và khóa ký vẫn được giữ lại, và nhật ký sẽ ghi lại thao tác đăng xuất này. Không gian làm việc vẫn thuộc về tài khoản đó: chỉ có tài khoản đó mới có thể kết nối lại với nó. Nếu Telegram không phản hồi, phiên làm việc vẫn sẽ bị xóa tại đây và bảng điều khiển sẽ hiển thị thông báo tương ứng; quý vị hãy kết thúc phiên làm việc trong Telegram tại **Cài đặt → Thiết bị**.
 
-## Chuyển đổi phiên Telethon sang chế độ ngoại tuyến
-
-Bảng điều khiển này nhập trực tiếp các tệp `.session`. Để chuyển đổi ngoại tuyến sang tệp StringSession, hãy chạy lệnh từ thư mục dự án:
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-Trình chuyển đổi này chỉ đọc tệp Telethon SQLite (tối đa 64 MiB), không bao giờ sửa đổi dữ liệu đầu vào, không thực hiện bất kỳ yêu cầu mạng nào và từ chối ghi đè lên tệp đầu ra hiện có.
-
 ## Bảo vệ an toàn cho các tệp tài khoản
 
 - Hãy coi mọi `.session`, TData ZIP, StringSession, Auth Key và tệp JSON tài khoản như một mật khẩu. TgWitness lưu trữ thông tin ủy quyền đã nhập vào kho lưu trữ được mã hóa của mình; quý vị có thể xóa các tệp gốc sau đó.

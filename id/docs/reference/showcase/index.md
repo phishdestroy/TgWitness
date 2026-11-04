@@ -54,12 +54,3 @@ Verifikasi tanda tangan dan konsistensi dapat mendeteksi perubahan relatif terha
 Gunakan **Revoke** di manajer showcase atau bagian **Akses** yang ada untuk menutup tautan dan mengakhiri semua sesinya. Pengunjung akan menghapus catatan yang ditampilkan ketika permintaan mendeteksi bahwa akses telah berakhir. Masa berlaku dan izin diperiksa pada setiap permintaan. Izin showcase tidak dapat dikonversi menjadi akses panel biasa di tempat; buat izin baru untuk mengubah mode.
 
 Sajikan halaman ini melalui alamat HTTPS yang sudah ada pada instalasi. Mempublikasikan tautan tidak akan membuka port baru, membuat terowongan, atau mengubah DNS. Kode HTML dan API tetap berada di instalasi pengguna. Pengunjung showcase tidak dapat menggunakan API pesan, profil, media, ekspor, atau manajemen biasa dengan akses ini.
-
-## Pemeriksaan regresi lokal
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Keduanya menggunakan catatan sintetis dan server HTTP lokal. Keduanya tidak terhubung ke Telegram.

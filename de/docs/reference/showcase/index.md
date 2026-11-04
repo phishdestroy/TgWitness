@@ -54,12 +54,3 @@ Die Signatur- und Konsistenzprüfung kann Änderungen im Verhältnis zu einer fe
 Verwenden Sie **„Revoke“** im Showcase-Manager oder im bestehenden Abschnitt **„Zugriff“,** um den Link zu schließen und alle zugehörigen Sitzungen zu beenden. Der Besucher löscht angezeigte Datensätze, sobald eine Anfrage feststellt, dass der Zugriff beendet wurde. Ablaufdatum und Berechtigungen werden bei jeder Anfrage überprüft. Showcase-Berechtigungen können nicht direkt in einen gewöhnlichen Panel-Zugriff umgewandelt werden; erstellen Sie eine neue Berechtigung, um den Modus zu ändern.
 
 Die Seite wird über die bestehende HTTPS-Adresse der Installation bereitgestellt. Das Veröffentlichen eines Links öffnet keinen neuen Port, erstellt keinen Tunnel und ändert keine DNS-Einstellungen. Der HTML-Code und die API bleiben auf der Installation des Nutzers. Ein Besucher der Demo kann mit diesem Zugriff die üblichen APIs für Nachrichten, Profile, Medien, Export oder Verwaltung nicht nutzen.
-
-## Lokale Regressionstests
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Beide nutzen synthetische Datensätze und einen lokalen HTTP-Server. Sie stellen keine Verbindung zu Telegram her.

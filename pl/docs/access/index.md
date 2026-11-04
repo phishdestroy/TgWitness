@@ -6,47 +6,47 @@ Udostępnijcie sprawę, której ktoś potrzebuje. Resztę zachowajcie pod kontro
 
 01**Proszę wybrać dowód**
 
-Proszę wybrać całe obszary robocze konta lub poszczególne zarejestrowane czaty.
+Całe przestrzenie albo pojedyncze czaty.
 
 02**Proszę wybrać działania**
 
-Należy przyznać uprawnienia do przeglądania, eksportowania lub konkretne uprawnienia operacyjne, których dana osoba potrzebuje.
+Podgląd, eksport albo tylko potrzebne operacje.
 
 03**Ustal granice**
 
-Wygeneruj osobisty token z terminem ważności, limitami sesji oraz opcjonalnymi ograniczeniami dotyczącymi adresów IP.
+Osobisty token z terminem ważności, limitem sesji i regułami IP, jeśli chcesz.
 
 Zakres gromadzenia danych określa, co jest rejestrowane. Zakres dostępu określa, co dana osoba może zobaczyć i zrobić.
 
 ## Przyznaj komuś dostęp
 
-1. Zaloguj się jako administrator i otwórz sekcję **„Dostęp**”.
-2. Proszę podać nazwę konta oraz wybrać obszary robocze i czaty.
-3. Proszę zachować **opcję „Wyświetl”** dla recenzenta. Proszę dodać **opcję „Eksportuj”,** jeśli recenzent ma pobrać zapisy.
+1. Jako administrator otwórz **Dostęp**.
+2. Nadaj nazwę, wybierz przestrzenie i czaty.
+3. Recenzentowi wystarczy **Podgląd**. Do pobierania dodaj **Eksport**.
 4. Proszę ustawić ograniczenia, a następnie kliknąć przycisk **„Utwórz dostęp**”.
-5. Proszę skopiować wyświetlony jednorazowy token. Proszę przesłać go prywatnie wraz z adresem panelu.
-6. Przed przekazaniem prosimy o sprawdzenie, czy strona wyświetla się poprawnie w osobnej sesji przeglądarki.
+5. Skopiuj token (pokazywany raz) i wyślij go prywatnie razem z adresem panelu.
+6. Najpierw sprawdź, co ta osoba zobaczy, w osobnej sesji przeglądarki.
 
 ## Zacznij od zadania, które muszą wykonać
 
 | Osoba | Dostęp | Wynik |
 | --- | --- | --- |
-| Recenzent | Wybrane rozmowy; tylko do wglądu | Proszę zapoznać się z zarejestrowaną rozmową bez wprowadzania zmian w zebranych danych. |
-| Analityk | Wybrane rozmowy; przeglądanie i eksportowanie | Proszę przejrzeć i pobrać zapisy niezbędne do prowadzenia sprawy. |
-| Operator | Wybrane całe obszary robocze; źródła i zbiór | Zarządzaj obserwowanymi danymi oraz uruchamiaj lub zatrzymuj moduły zbierające dane. |
+| Recenzent | Wybrane rozmowy; tylko do wglądu | Czyta czat, nie może niczego zmienić. |
+| Analityk | Wybrane rozmowy; przeglądanie i eksportowanie | Czyta i pobiera to, czego potrzebuje sprawa. |
+| Operator | Wybrane całe obszary robocze; źródła i zbiór | Decyduje, co obserwować, uruchamia i zatrzymuje kolektory. |
 
-Są to konfiguracje, które Państwo wybierają, a nie stałe role. Ustawienia dotyczące całego konta oraz pełne eksporty dziennika pozostają niedostępne w ramach dostępu ograniczonego do czatu, nawet jeśli włączono inne uprawnienie. Dostęp do całego obszaru roboczego obejmuje również przyszłe konta.
+To tylko przykłady, nie stałe role. Dostęp ograniczony do czatów nigdy nie dostaje ustawień konta ani pełnych eksportów dziennika. Dostęp do wszystkich przestrzeni obejmuje konta dodane później.
 
 ## W każdej chwili mogą Państwo zmienić zdanie
 
-Proszę edytować uprawnienia dostępu, aby zmienić zakres działań, jakie mogą być wykonywane w kolejnych żądaniach. Proszę zakończyć jedną sesję lub cofnąć cały dostęp, aby zakończyć wszystkie sesje. Plików, które zostały już pobrane, nie można odzyskać. Zakończenie sesji panelowej nie powoduje zatrzymania gromadzenia danych.
+Zmieniaj dostęp kiedy chcesz, działa od następnego żądania. Zakończ jedną sesję albo odwołaj wszystko. Już pobranych plików nie da się cofnąć. Zbieranie działa dalej.
 
 **Ograniczenia dotyczące sesji i adresów IP**
 
-Ogranicz liczbę sesji równoległych i pomyślnych logowań, ustaw bezwzględną datę zakończenia, zezwól na określone adresy IP lub podsieci albo powiązaj dostęp z adresem używanym podczas pierwszego logowania. Wygasanie sesji jest uzależnione od braku aktywności; wyświetlanie otwartego panelu liczy się jako aktywność. Proszę sprawdzić adres klienta wyświetlany przez aplikację, gdy działa ona za serwerem proxy lub tunelem.
+Ogranicz równoległe sesje i logowania, ustaw datę końca, zezwól na IP lub podsieci albo przypnij do IP pierwszego logowania. Ważność liczy się według bezczynności, otwarty panel liczy się jako aktywny. Za proxy sprawdź, jaki IP klienta widzi aplikacja.
 
 **Klucz główny i dziennik aktywności**
 
-Administrator przechowuje token panelu głównego. Użytkownicy z przyznanym dostępem nie mogą zarządzać uprawnieniami innych osób ani otwierać konsoli administratora. Konsola wyświetla bieżącą aktywność procesów we wszystkich obszarach roboczych; podpisane zapisy dostępu przechowują zdarzenia związane z przyznaniem uprawnień i sesjami bez wykorzystania tokenów. Obszary robocze współdzielą proces hosta i nie izolują danych od administratora serwera.
+Główny token zostaje u administratora. Wydany dostęp nie może zarządzać cudzym dostępem ani otwierać konsoli administratora. Zmiany dostępu i sesje są podpisywane w dzienniku, bez tokenów. Administrator serwera nadal widzi wszystko.
 
-Należy wykorzystać [pełny opis uprawnień](https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/) dla wszystkich siedmiu uprawnień, reguł sesji oraz ograniczeń administratora.
+Wszystkie siedem uprawnień i zasady sesji: [dokumentacja dostępu](https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/).

@@ -241,20 +241,6 @@ Die Mitglieder nutzen die gemeinsamen Einstellungen der Gruppe; ein Konto kann j
 
 **„Konto → Bei Telegram abmelden“** (bei pausierter Überwachung) fordert Telegram auf, die Sitzung zu beenden, sodass diese auch aus den **„Einstellungen → Geräte**“ des Kontos verschwindet und die Sitzung aus dem Arbeitsbereich-Tresor entfernt wird. Das Protokoll, die Quellen, die Einstellungen und der Signaturschlüssel bleiben erhalten, und das Protokoll zeichnet die Abmeldung auf. Der Arbeitsbereich gehört weiterhin zu seinem Konto: Nur dieses Konto kann sich erneut damit verbinden. Wenn Telegram nicht antwortet, wird die Sitzung dennoch hier entfernt und dies wird im Bedienfeld angezeigt; beenden Sie sie in Telegram unter **„Einstellungen“ → „Geräte**“.
 
-## Eine Telethon-Sitzung offline konvertieren
-
-Das Panel importiert `.session`-Dateien direkt. Für eine Offline-Konvertierung in eine StringSession-Datei führen Sie im Projektordner folgenden Befehl aus:
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-Der Konverter liest ausschließlich Telethon-SQLite-Dateien (bis zu 64 MiB), verändert die Eingabedaten in keiner Weise, führt keine Netzwerkanfragen durch und überschreibt keine bereits vorhandene Ausgabedatei.
-
 ## Sichere Aufbewahrung von Kontodateien
 
 - Behandeln Sie jedes `.session`, jede TData-ZIP-Datei, jede StringSession, jeden Auth-Schlüssel und jede Konto-JSON-Datei wie ein Passwort. TgWitness speichert die importierten Autorisierungsdaten in seinem verschlüsselten Tresor; Sie können die Originaldateien anschließend löschen.

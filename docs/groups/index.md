@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/groups/
 
-Manage several collecting accounts together while keeping each account's records and signing identity distinct.
+Run several accounts together, each still with its own records and key.
 
-An account group brings connection status, observation controls, shared settings and exports into one working view. It is useful when several accounts cover the same investigation or need a consistent operating setup.
+A group puts connection status, start/pause, shared settings and exports on one screen. Handy when several accounts work the same case.
 
 ## Open the group overview
 
-In **Accounts**, open the group. Each account shows its observation state, connection route, latest measured route latency when a current check succeeded, and last saved message. **Needs attention** links to the accounts that need work; **Fix** opens the relevant workspace and control.
+Open the group in **Accounts**. Each account shows its state, route, latency and last saved message. **Needs attention** lists the broken ones, **Fix** takes you straight there.
 
-**Start all** and **Pause all** act on eligible accounts after confirmation. **Group settings** shares selected settings; accounts with their own values keep them until you choose to replace them.
+**Start all** / **Pause all** ask before acting. **Group settings** are shared, but an account's own values stay until you replace them.
 
 ### Review a route change across a group
 
@@ -51,19 +51,19 @@ Reference account: own route retained.
 
 ## Change the route with a review step
 
-1. Select **Change the group route**, then choose the connection type and settings.
-2. Choose **Review selection**. Review the listed accounts and their individual route overrides.
-3. Select **Prepare and check**. The check uses a fresh Telegram transport; supported HTTP routes also report their HTTPS exit check.
-4. Select **Apply checked connection** and inspect each account's result. Previously running observation resumes where application succeeds; idle accounts remain idle.
+1. **Change the group route**, pick the type and settings.
+2. **Review selection**: see which accounts change and which have their own route.
+3. **Prepare and check** tests a fresh Telegram connection, plus the exit IP where possible.
+4. **Apply checked connection** and look at each result. Running accounts resume, idle ones stay idle.
 
-Latency describes the measured Telegram connection setup. An exit-IP check describes that route at the recorded check time. Account authorization and observation health have their own indicators; a group change can finish with different outcomes per account.
+Latency is the Telegram connection setup time, the exit IP is what the route showed at check time. Results can differ per account.
 
 ## Use overlapping access
 
-**Chats several accounts see** shows shared sources and the available workspace-observation coverage. Eligible channels and supergroups can use **Export with … accounts** to divide one chat's history acquisition. Private chats and ordinary groups stay with the starting account because their message numbers belong to an account's history.
+**Chats several accounts see** lists shared sources and their coverage. Channels and supergroups can be exported by several accounts at once with **Export with … accounts**. Private chats and basic groups can't, their message numbers are per account.
 
 ## Export the group as a package
 
-**Export group** creates one ZIP containing each account's signed export and a signed list of those files. The original workspace identities and fingerprints remain available for verification. Build a cross-account narrative using those references; a single merged timeline is still assembled separately.
+**Export group** gives one ZIP with every account's signed export and a signed list of them. Each keeps its own fingerprint for verification. A merged timeline you still build yourself.
 
-Continue with [report design](https://phishdestroy.github.io/TgWitness/docs/reports/), [a Case Board within a workspace](https://phishdestroy.github.io/TgWitness/docs/case-board/), or [export verification](https://phishdestroy.github.io/TgWitness/docs/exports/).
+Next: [reports](https://phishdestroy.github.io/TgWitness/docs/reports/), [Case Board](https://phishdestroy.github.io/TgWitness/docs/case-board/), [verifying exports](https://phishdestroy.github.io/TgWitness/docs/exports/).

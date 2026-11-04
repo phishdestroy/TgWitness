@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/handover/
 
-Condividere le osservazioni rilevanti mantenendo intatto lo spazio di lavoro originale.
+Condivida solo il necessario, l’originale resta intatto.
 
-Un "handover" è un estratto separato e firmato. Scegli le chat e le persone, riduci le identità o il testo e decidi quali file e note del team devono essere inclusi nella copia del destinatario. Il relativo manifesto registra la selezione e il numero di record invariati, ridotti e omessi.
+Una consegna è un estratto firmato a parte: scelga chat e persone, nasconda identità o testo, decida quali file e note della squadra includere. Il manifest registra cosa è stato tenuto, ridotto e lasciato fuori.
 
 ## Preparare l’estratto per il destinatario
 
-1. Aprire **Esportazioni → Estratto per il passaggio di consegne**. Indicare lo scopo, selezionare le chat e, facoltativamente, il periodo UTC, quindi selezionare **Carica i partecipanti delle chat selezionate** se sono necessari i nomi dei soggetti.
-2. Scegli come gestire tutti gli altri utenti: utilizza pseudonimi, ometti i loro messaggi o mostrali così come sono stati registrati. Imposta il testo dei messaggi e gli allegati in modo indipendente; se lo desideri, maschera i numeri di telefono e gli indirizzi e-mail.
-3. Scegliere se includere i segnalibri e le sezioni di Case Board oppure le schede con i commenti. In questo testo, gli alias degli investigatori possono sostituire i nomi dei team.
-4. Selezionare **“Scarica estratto di consegna**”. Aprire localmente il report generato e i record selezionati, verificare l’archivio e controllare la copia prima di inviarla.
+1. **Esportazioni → Estratto di consegna**: scriva lo scopo, scelga chat e periodo e usi **Carica le persone delle chat scelte** se servono persone con nome.
+2. Tutti gli altri: pseudonimi, esclusi o come registrati. Testo e file sono interruttori separati; telefoni ed e-mail si possono mascherare.
+3. Case Board: niente, segnalibri e porzioni, oppure schede con commenti. I nomi della squadra si possono sostituire con alias.
+4. **Scarica estratto di consegna**, lo apra, lo verifichi e lo riveda prima di inviarlo.
 
 ### Un originale, una copia destinata alla condivisione
 
@@ -54,12 +54,12 @@ Un pacchetto separato collegato ai confini del registro di origine
 
 | Controllo | Impatto sul testo |
 | --- | --- |
-| Persone | Mantenere identificabili i soggetti selezionati; pseudonimizzare o omettere gli altri partecipanti a discrezione. |
-| Testo | Includere tutto il testo, solo il testo delle persone selezionate e dell’account osservatore, oppure omettere il testo dei messaggi e i relativi campi di dettaglio contenenti testo. |
-| File | Scegli i file delle persone selezionate e dell’account di osservazione, tutti i file dei messaggi visualizzati oppure nessun file. |
-| Case Board | Non utilizzare elementi della bacheca, segnalibri e sezioni, né schede con discussioni di gruppo. |
+| Persone | Le persone scelte restano con il nome; le altre ricevono pseudonimi o vengono escluse. |
+| Testo | Tutto il testo, solo quello delle persone scelte e del Suo account, oppure nessuno. |
+| File | File delle persone scelte e del Suo account, tutti i file mostrati oppure nessuno. |
+| Case Board | Niente, segnalibri e porzioni, oppure schede con discussione. |
 
-Verificare il testo libero e il contenuto dei file, nonché le identità: uno pseudonimo non rimuove automaticamente tutti i nomi presenti in un messaggio o in un allegato. Se un file selezionato per la conservazione non è disponibile, ripristinarlo oppure omettere esplicitamente gli allegati prima di generare l’estratto.
+Legga anche testo e file: uno pseudonimo non toglie i nomi scritti dentro un messaggio o un allegato. Se manca un file scelto, lo ripristini o escluda gli allegati.
 
 ## Assicurarsi che il testo sia verificabile in modo indipendente
 
@@ -67,4 +67,4 @@ Verificare il testo libero e il contenuto dei file, nonché le identità: uno ps
 python -m tgwitness.verify handover.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Conservare separatamente l’archivio originale delle prove firmate e i checkpoint. Il trasferimento registra la propria proiezione, in modo che il destinatario possa verificare la copia consegnata senza ricevere l’intero spazio di lavoro. [Report Studio](https://phishdestroy.github.io/TgWitness/it/docs/reports/) fornisce il proprio layout di lettura; [la verifica dell’esportazione](https://phishdestroy.github.io/TgWitness/it/docs/exports/) spiega i riferimenti attendibili.
+Conservi Lei l’archivio originale e i punti di controllo. Il destinatario può verificare la sua copia senza ricevere l’intero spazio. Design: [Report studio](https://phishdestroy.github.io/TgWitness/it/docs/reports/). Riferimenti affidabili: [verifica dell’esportazione](https://phishdestroy.github.io/TgWitness/it/docs/exports/).

@@ -2,28 +2,28 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/cases/
 
-Kanallar, gruplar, özel sohbetler ve botlar genelinde bir vakayı baştan sona ele alın: kanıtları toplayın, birbiriyle ilişkilendirin, yeniden yapılandırın ve teslim edin.
+Kanallar, gruplar, özel sohbetler ve botlar boyunca koca bir dava: topla, noktaları birleştir, zaman çizelgesini yeniden kur, teslim et.
 
-Bu adım adım kılavuz, kurgusal bir olayı baştan sona ele almaktadır. Kaynak kayıtları bulmak için toplama, arama ve kişi profillerini, bunları düzenlemek ve tartışmak için [Case Board'u](https://phishdestroy.github.io/TgWitness/tr/docs/case-board/) ve bulguları sunmak için [Report Studio'yu](https://phishdestroy.github.io/TgWitness/tr/docs/reports/) kullanın. Aşağıdaki resimli harita, bu örnekteki bağlantıları açıklamaktadır.
+Baştan sona uydurma bir olay. Toplama, arama ve kişi profilleri kayıtları bulur, [Case Board](https://phishdestroy.github.io/TgWitness/tr/docs/case-board/) düzenler, [Report studio](https://phishdestroy.github.io/TgWitness/tr/docs/reports/) sunar.
 
 ÇÖZÜLMÜŞ VAKA / DEĞİŞTİRİLEN ÖDEME HEDEFİ
 
 ### Tek bir olay. Dört konuşma. Yeniden canlandırılması gereken bir iz.
 
-Bir kanal duyurusu bir bota yönlendirir. Bir operasyon grubu yeni bir ödeme bağlantısını tartışır ve bot bunu görüntüler. Duyuru düzenlenir, özel bir takip mesajında hedef adres tekrarlanır ve bir grup mesajı kaybolur.
+Bir kanal gönderisi bir bota yönlendirir. Bir grup yeni bir ödeme bağlantısından söz eder ve bot onu gösterir. Gönderi düzenlenir, özel bir sohbet bağlantıyı tekrarlar, bir grup mesajı kaybolur.
 
 Her bir sürümü kim yayınladı?Bağlantı nerede göründü?Hangi dosya saklandı?Neler değişti ve ne zaman?
 
-Geçmiş verilerin yüklenmesi, isteğe bağlı yapay zeka kaynak incelemesi, MCP, OCR ve giden webhook'lar hakkında bilgi için "[Arşivi Kullan](https://phishdestroy.github.io/TgWitness/tr/docs/archive/)" bölümüne bakın.
+Geçmiş yükleme, yapay zekâ, MCP, OCR ve webhook'lar: [Arşivle çalışmak](https://phishdestroy.github.io/TgWitness/tr/docs/archive/).
 
 ## 1. Hesabın tamamını kapsayacak şekilde kapsam oluşturun
 
-Hesabın tamamını kapsayan bir toplama hesabı kullanın. Ana hesaplar, seçilen sohbetleri veya bir Telegram klasörünü toplayabilir.
+Tüm hesap kapsamı yalnızca ayrı bir hesapta. Ana hesap seçili sohbetler ya da bir klasörle sınırlı kalır.
 
-1. [Toplama hesabını kendi çalışma alanına bağlayın](https://phishdestroy.github.io/TgWitness/tr/docs/accounts/). Vaka referansını, hesap kimliğini, çalışma alanı adını ve imza anahtarı parmak izini vaka notlarınıza kaydedin.
-2. Açık **Kaynaklar → Gözlem kapsamı → Soruşturma modu**. **Tüm hesabı**, dört kaynak türünün tamamını ve **Kendi eylemlerini** inceleyin. Bu ön ayar, yeni bir kaynağın profilini ve **görünür durumdaki** en son **200 mesajını** kaydetmenizi sağlar. **Kapsamı kaydet seçeneğine** basın ve kapsam onayını tamamlayın.
-3. **"Sohbetleri Yükle"** düğmesine basın. Kaynakları hesabın sohbet listesiyle karşılaştırın ve hariç tutulanları inceleyin. **"Parametreler" → "Hesabın listesinden okunan sohbetler**" altında, gerekirse başlangıç liste sınırını ayarlayın: varsayılan değer 1.000 sohbettir ve 20.000'e kadar yapılandırılabilir. Sınırı aşan sohbetler, aktif hale geldiklerinde tespit edilir.
-4. **Kayıt**ayarlarında, "**Görünür tüm etkinlikler"** seçeneğini seçin ve kaydedin. Ek türlerini, boyut sınırlarını ve boş disk alanını gözden geçirin. Kuruluma güvenmeden önce gözlemi başlatın ve kontrollü bir mesajı, düzenlemeyi ve silme işlemini doğrulayın.
+1. [Hesabı bağlayın](https://phishdestroy.github.io/TgWitness/tr/docs/accounts/), kendi çalışma alanında. Dava referansını, hesap kimliğini, çalışma alanını ve anahtar parmak izini not edin.
+2. **Kaynaklar → Gözlem kapsamı → Soruşturma kipi**: **Tüm hesap**, dört kaynak türünün hepsi, **Kendi eylemleri**. Her yeni sohbetin profili ve son **200 görünür mesajı** kaydedilir. **Kapsamı kaydet** ve onaylayın.
+3. **Sohbetleri yükle** ve hesabın sohbet listesiyle karşılaştırın. Sınır 1.000 sohbettir (**Parametreler → Hesap listesinden okunan sohbetler** ile 20.000'e kadar); ötesindekiler etkinleştiklerinde görünür.
+4. **Kayıt ayarları** → **Tüm görünür etkinlik**, ek sınırlarını ve disk alanını kontrol edin. Başlatın, sonra bir mesaj, bir düzenleme ve bir silmeyle test edin.
 
 KanallarGruplarÖzel sohbetlerBotlar
 
@@ -31,44 +31,44 @@ TEK HESAP / TEK İMZA ANAHTARI**Seçilen tüm hesapta görülebilen etkinlikler 
 
 Mesajlar · düzenlemeler · silme bildirimleri · görünür tepkiler · üyelik etkinlikleri · kendi eylemleri
 
-“Tüm hesap”, bu hesabın erişebileceği sohbetleri, yapılandırılmış kaynak türleri ve hariç tutulanlar dahil olmak üzere kapsar. Gizli sohbetler kullanılamaz. Güncellemeler geldikçe yeni diyaloglar eklenir; bu modun etkinleştirilmesi, mevcut her sohbetin eski geçmişinin tamamını otomatik olarak indirmez.
+"Tüm hesap", istisnalar dışında bu hesabın açabildiği her sohbettir. Gizli sohbetler yok. Yeni sohbetler ortaya çıktıkça eklenir; eski geçmiş kendiliğinden indirilmez.
 
 ## 2. Geçmişi elde etme ve dosyaları koruma
 
-Soruşturma için bir Case Board koleksiyonu oluşturun ve ilgili kaydedilmiş kayıtları yer imlerine ekleyin. Vaka ile birlikte bir kaynak kaydı tutun: her sohbetin sayısal kimliği, başlığı, toplama hesabı, erişim/rol, canlı başlangıç, geçmiş edinimi, medya sonucu ve bilinen eksiklikler. İlgili sonucu kontrol ettikten sonra kaynağı "edindi" olarak işaretleyin.
+Bir Case Board koleksiyonu oluşturun ve önemli olanları işaretleyin. Bir kaynak kaydı tutun: sohbet kimliği, başlık, hesap, rol, canlı yakalamanın başlangıcı, geçmiş sonucu, medya sonucu, boşluklar.
 
 | İhtiyaç | Paneldeki eylem | Neler sunar? |
 | --- | --- | --- |
 | Etkinleştirilmiş sohbetlerdeki geçmiş | Kaynaklar → Tüm geçmişi yükle | Erişilebilir geçmiş mesajlar, duraklatma/devam ettirme ve imzalı bir ilerleme raporu ile birlikte çalışma alanı günlüğüne girer. [Geçmiş kılavuzu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/history/). |
-| Günlükteki mevcut sohbet içeriği | Kaynaklar → Kayıt ayarları → Geçmiş anlık görüntüsü | Görünür durumdaki son mesajlar, imzalı gözlemler olarak gösterilir. Varsayılan maksimum sayı 500'dür; **Parametreler → En büyük geçmiş anlık görüntüsü seçeneği ile** bu sayı 10.000'e kadar artırılabilir. |
-| Bir sohbetin şu anda görünür olan tam geçmişi | Sohbeti tamamen dışa aktar → Sohbeti tamamen dışa aktar veya Sohbetler → Sohbeti dışa aktar | `chat.json` ve `chat.html` içeren ayrı bir imzalı paket. Kaynak başına tekrarlayın; tamamlanma/başarısızlık sonuçlarını saklayın. |
-| Yeni bir sohbet ortaya çıktığında geçerli olan bağlam | Gözlem kapsamı → Yeni bir sohbet veya bot ortaya çıktığında | Bir kaynak profili ve en fazla 1.000 adet son görünür mesaj; Soruşturma modunda 200 adet seçilir. Mevcut sohbetler bu verileri geriye dönük olarak almaz. |
-| Ek boyutu | Görünür ekleri indir + tür başına sınırlar | `media.saved` değerini, SHA-256 değerini ve bayt sayısını kontrol edin. Kuyrukta bekleyen, atlanan veya başarısız olan bir indirme, korunmuş bir dosya sayılmaz. |
+| Günlükteki mevcut sohbet içeriği | Kaynaklar → Kayıt ayarları → Geçmiş anlık görüntüsü | Son mesajlar imzalı kayıtlar olarak. Varsayılan 500, **Parametreler → En büyük geçmiş anlık görüntüsü** ile 10.000'e kadar. |
+| Bir sohbetin şu anda görünür olan tam geçmişi | Sohbeti tamamen dışa aktar → Sohbeti tamamen dışa aktar veya Sohbetler → Sohbeti dışa aktar | `chat.json` ve `chat.html` içeren ayrı bir imzalı paket, sohbet başına bir tane. |
+| Yeni bir sohbet ortaya çıktığında geçerli olan bağlam | Gözlem kapsamı → Yeni bir sohbet veya bot ortaya çıktığında | Profili ve en fazla 1.000 son mesajı (soruşturma kipinde 200). Mevcut sohbetlere uygulanmaz. |
+| Ek boyutu | Görünür ekleri indir + tür başına sınırlar | SHA-256 ve boyutla birlikte `media.saved` arayın. Kuyrukta, atlandı ya da başarısız demek kaydedilmedi demektir. |
 
-Sohbetin tam olarak dışa aktarılması ayrı bir anlık görüntüdür; tüm geçmişi günlüğe veya kişi profillerine aktarmaz. TgWitness içinde arama yapmanız gereken geçmiş veriler için, etkinleştirilmiş kaynaklar genelinde "**Tüm geçmişi yükle**" seçeneğini veya sınırlı günlük anlık görüntülerini kullanın. İşlemi başlatmadan önce kaynak listesini gözden geçirin.
+Bir sohbet dışa aktarımı günlüğe ya da kişi profillerine girmez. TgWitness içinde eski geçmişte aramak için **Tüm geçmişi yükle**'yi ya da anlık görüntüleri kullanın.
 
-İncelenen vakada, duyuru kanalını, operasyon grubunu, botla yapılan sohbeti ve özel takip mesajlarını elde edin. Fatura eklerinin baytlarını ve hash değerlerini koruyun. Bugün mevcut olan geçmiş veriler, yakalanmadan önce silinmiş bir mesajı veya Telegram'ın artık geri getirmediği ara düzenlemeleri yeniden oluşturamaz.
+Burada: kanal, grup, bot sohbeti ve özel sohbet, artı fatura dosyası ve karması. Yakalamadan önce silinen geri gelmez.
 
 ## 3. Gelişen konuşmayı ve kendi eylemlerinizi takip edin
 
-Vaka geliştikçe gözlemi sürdürün. Aktif vaka sohbetlerini öncelikli kaynaklar olarak işaretleyin; öncelik ve diğer kaynaklardan yeniden kontrol ayarlarını **Kayıt ayarları → Yeniden Kontrol** bölümünden yapılandırın. Çalışma ilerledikçe `recheck.completed`, devam eden güncelleme, FloodWait ve medya sonuçlarını gözden geçirin.
+Çalışmaya devam etsin. Sıcak sohbetleri yıldızla öncelikli yapın, yeniden kontrolleri **Kayıt ayarları → Yeniden kontrol**'de ayarlayın ve `recheck.completed`, FloodWait ve medya sonuçlarını izleyin.
 
-Mevcut kaynak açıklamalarını, bot komutlarını ve Telegram'ın döndürdüğü diğer meta verileri korumak için **Sohbetler → Profil → Profili şimdi kaydet seçeneğini** kullanın. Bu kaynak profili, günlük mesajlarından oluşturulan kişi profillerinden ayrıdır.
+**Sohbetler → Profil → Profili şimdi kaydet**, sohbet açıklamasını, bot komutlarını ve diğer üst verileri kaydeder.
 
 **Vaka kapsamında bir botu takip etme veya daveti kabul etme**
 
-1. **Sohbetler → Telegram bağlantısını aç** seçeneğinde, önce önizlemeyi kaydedin. Orijinal bağlantı ve görüntülenen önizleme, imzalı kayıtlar haline gelir.
-2. Soruşturma gerektiriyorsa, **Join / open**komutu kaynağa katılır veya açar ve sağlanan başlangıç parametresiyle bir botu başlatır. Beklemede olan bir katılım isteği, kayıtta beklemede kalır.
-3. Belgelemeniz gereken bir eylem için, panelin metin yanıtını veya desteklenen **"Düğmeye Bas"** kontrolünü kullanın. Günlük, geri gönderilen geri arama metni veya URL dahil olmak üzere `interaction.requested` ve `interaction.result` bilgilerini saklar.
+1. **Sohbetler → Telegram bağlantısı aç**, önce önizlemeyi kaydedin. Bağlantı ve önizleme imzalı kayıt olur.
+2. Gerekirse **Katıl / aç ve gözle** sohbete katılır ya da botu başlangıç parametresiyle başlatır.
+3. Bir eylemi belgelemek için panelden yanıtlayın ya da **Düğmeye bas**'ı kullanın. Botun yanıtıyla birlikte `interaction.requested` ve `interaction.result` alırsınız.
 
-Bu denetimler gerçek Telegram eylemlerini gerçekleştirir. Farklı bir Telegram uygulamasında basılan bir geri arama düğmesi, toplayıcı tarafından görülemez; ancak botun ardından gelen mesajı veya düzenlemesi görülebilir. Web uygulamaları, ödemeler ve telefon/konum talepleri mini istemcinin kapsamı dışındadır.
+Bunlar gerçek eylemlerdir. Başka bir uygulamada basılan düğmeler görünmez, yalnızca botun yanıtı görünür. Web uygulaması, ödeme ya da telefon/konum yok.
 
 ## 4. Sohbetlerdeki kişileri, bağlantıları ve dosyaları takip edin
 
-1. Open **Journal'ı** açın, kaynak filtresini "**Tüm kaynaklar**" olarak bırakın ve belirgin bir ifade, etki alanı, kullanıcı adı veya kaydedilmiş tanımlayıcıyı arayın. Eşleşen her kaydı açın, ardından **"To board"** seçeneğini seçerek sohbeti, mesaj kimliğini ve günlük referansını davada saklayın.
-2. İlgili bir sohbeti incelemek için **Sohbetler → Kişiler → Profilleri aç seçeneğini** açın, ardından bir kişi seçin. İsim/kullanıcı adı geçmişini, yanıt ilişkilerini, etkinliği, **Ayrıca… bölümündeki** diğer gözlemlenen sohbetleri ve çıkarılan bağlantıları, cüzdanları veya telefon numaralarını inceleyin. Alıntılanan kayıt defteri kayıtlarını açın.
-3. Bu çalışma alanındaki diğer sohbetlerde aynı sayısal Telegram kullanıcı kimliğini takip edin. Eşleşen bir isim, cüzdan bahsi veya benzer bir avatarı kontrol edilmesi gereken bir ipucu olarak değerlendirin; kaynak referanslarını ve destekleyici atıfları koruyun.
-4. Kayıtlar arasında saklanan eklerin SHA-256 değerlerini karşılaştırın. Eşleşen hash değerleri, kaydedilen dosyaların bayt düzeyinde özdeşliğini destekler. Bunları kimin paylaştığına dair bir sonuca varmadan önce, ilgili mesaj ve gönderen kayıtlarını inceleyin.
+1. **Günlük**, **Tüm kaynaklar**, bir ifade, alan adı ya da kullanıcı adı arayın. Sonuçları açın ve **Panoya** gönderin.
+2. **Sohbetler → Kişiler → Profilleri aç**, bir kişi seçin: ad geçmişi, yanıtlar, etkinlik, **Ayrıca şurada…**, bağlantılar, cüzdanlar, telefonlar. Alıntılanan kayıtları açın.
+3. Aynı sayısal kullanıcı kimliğini diğer sohbetlerde izleyin. Eşleşen bir ad, cüzdan ya da avatar ipucudur, kanıt değil.
+4. Dosya karmalarını karşılaştırın. Aynı SHA-256 = aynı baytlar. Onları kimin paylaştığı ayrı bir soru.
 
 VAKA HARİTASI / KAYNAKLARI İZLEKurgusal vaka · gerçek zamanlı bir grafik değildir
 
@@ -94,15 +94,15 @@ Sayısal kimlikler ve kayıt referansları bu adım adım kılavuz için uydurul
 
 | Bağlantı | Destekleyici gözlem | Korunacak sonuç |
 | --- | --- | --- |
-| Aynı Telegram hesabı | #146 numaralı grupta ve #205 numaralı özel sohbette 71001 numaralı kullanıcı | Her iki sohbette de aynı gönderen kimliği paylaşılmıştır. Gerçek kimlik ise ayrı bir konudur. |
-| Tekrarlanan hedef | `pay.example.invalid/new`, #146; düğme meta verileri, #173; düzenlenmiş gönderiler, #188 ve #205 | Aynı hedef, gözlemlenen dört bağlamda geçmektedir. Ek kaynakları kullanarak bu hedefin kontrolünü belirleyin. |
-| Aynı dosya baytları | Tamamlanmış medya makbuzları #151 ve #209'daki SHA-256 değerleri birbiriyle eşleşiyor | Korunan iki ek, bayt bazında aynıdır. Karşılaştırma, dosyaların tam hash değerleri ile yapılır. |
+| Aynı Telegram hesabı | #146 numaralı grupta ve #205 numaralı özel sohbette 71001 numaralı kullanıcı | İki sohbette de aynı gönderen kimliği. Gerçek hayatta kim olduğu başka bir soru. |
+| Tekrarlanan hedef | `pay.example.invalid/new`, #146; düğme meta verileri, #173; düzenlenmiş gönderiler, #188 ve #205 | Aynı bağlantı dört yerde. Onu kimin kontrol ettiği için başka kaynaklar gerekir. |
+| Aynı dosya baytları | Tamamlanmış medya makbuzları #151 ve #209'daki SHA-256 değerleri birbiriyle eşleşiyor | İki dosya bayt bayt aynı. |
 
-Kişi profilleri, gözlemlenen yazarları ve bunların *aynı çalışma alanı*günlüğündeki faaliyetlerini, görüntüleyicinin erişim izni olan sohbetler kapsamında açıklar. Bu, eksiksiz bir üye dizininden ziyade, gözlemlenen yazarlara ait bir görünümdür. **Parametreler → Her bir olaya atıfta bulunulan kayıtlar** altındaki destekleyici alıntı sayısını ayarlayın.
+Profiller yalnızca *bu çalışma alanında* bir şey yazmış kişileri kapsar, üye listesi değildir. Olgu başına alıntı: **Parametreler → Olgu başına alıntılanan kayıt**.
 
 ## 5. Sırayı yeniden oluşturun ve eksiklikleri işaretleyin
 
-**"Sohbetler"** bölümünde, kaydedilmiş sürümleri ve bunların "**Günlük kaydı #…"** bağlantılarını inceleyin. **"Günlük"** bölümünde, **"Tüm kaynaklar**" ile **"Düzenlemeler**", **"Silme İşlemleri**" ve **"Kapsam"** seçeneklerini kullanın. Sağlanan Telegram tarihi ile toplayıcının gözlem zamanını kullanarak bir vaka zaman çizelgesi oluşturun.
+**Sohbetler**'de sürümler, sonra **Günlük**'te **Tüm kaynaklar** + **Düzenlemeler**, **Silmeler**, **Kapsam**. Zaman çizelgesine iki zamanı da koyun: Telegram tarihi ve gözlem anı.
 
 1. 09:00 · #101**Kanal gönderisi yakalandı**
 
@@ -125,19 +125,19 @@ Kişi profilleri, gözlemlenen yazarları ve bunların *aynı çalışma alanı*
 
 Açıklayıcı gözlem zamanları ve referanslar. Bu girişler arasında başka günlük kayıtları da yer almaktadır.
 
-Günlük sıralaması, mesajların alındığı sırayı yansıtır; bu, Telegram'daki orijinal eylemlerin sırasıyla aynı olması gerekmez. Daha yeni bir canlı mesajdan sonra, daha eski bir geçmiş anlık görüntüsü gelebilir. Canlı gözlemleri, anlık görüntüleri, kurtarılan mesajları, silme bildirimlerini ve “yeniden kontrol edildiğinde eksik” olanları birbirinden ayrı tutun. Kapsamda bir boşluk olduğu her yerde açıkça “bilinmeyen aralık” ibaresini ekleyin; daha sonraki bir anlık görüntü bu boşluğu ortadan kaldırmaz.
+Günlük sırası varış sırasıdır, olayların sırası olmak zorunda değildir. Canlı kayıtları, anlık görüntüleri, kurtarılan mesajları, silmeleri ve "yeniden kontrolde bulunamadı"yı ayrı tutun ve her boşluğu bilinmeyen olarak işaretleyin.
 
 ## 6. Uygulamayı diğer toplama hesaplarına genişletin
 
-Her bir ayrı hesap için bir çalışma alanı ekleyin ve kapsam ile geçmiş envanterini tekrarlayın. Her biri için üyelik/rol ve imza anahtarı parmak izini kaydedin. Tanımlayıcıları çalışma alanı ve sohbet bazında nitelendirin: aynı mesaj numarası, hesaplar arası genel bir tanımlayıcı değildir.
+Hesap başına bir çalışma alanı, aynı adımlar. Her birinin rolünü ve parmak izini not edin. Mesaj numaraları hesaba özgüdür, bu yüzden çalışma alanını ve sohbeti her zaman belirtin.
 
-Bir [hesap grubu](https://phishdestroy.github.io/TgWitness/tr/docs/groups/) kullanarak çalışma durumunu inceleyin, seçilen ayarları paylaşın ve hesapları toplu olarak dışa aktarın. Grup paketi, her çalışma alanının imzalı günlüğünü ve kimliğini korur. Tek bir kanal veya süper grup için, uygun hesaplar tam geçmiş dışa aktarımını da paylaşabilir. Vaka notlarınızda veya analiz araçlarınızda hesaplar arası bir zaman çizelgesi oluşturun; her satır için çalışma alanı ve günlük referansını koruyun.
+Bir [hesap grubu](https://phishdestroy.github.io/TgWitness/tr/docs/groups/) durumu gösterir, ayarları paylaşır ve herkesi birlikte dışa aktarır; her biri kendi günlüğü ve anahtarıyla. Hesaplar arası zaman çizelgesini notlarınızda kurarsınız.
 
-Daha uzun süreli çalışmalar sırasında, önceki sınırları korumak için [bağımsız bir tanık](https://phishdestroy.github.io/TgWitness/tr/docs/witness/) ekleyin. Hesapların yakalama yollarını ve görünürlüğünü doğrulamak için kontrollü teslim pilotunu kullanın.
+Uzun bir dava mı? Bir [bağımsız tanık](https://phishdestroy.github.io/TgWitness/tr/docs/witness/) ekleyin ve her hesabın gerçekte neyi yakaladığını test edin.
 
 ## 7. Doğrulanabilir bir vaka paketi sunun
 
-Her çalışma alanından imzalı bir günlük ZIP dosyasını dışa aktarın. Bu dosya, panel arama filtrelerinden bağımsız olarak kaydedilen günlüğün tamamını içerir. İlgili kişi profillerini ayrı olarak dışa aktarın, her bir sohbet geçmişi paketini tam olarak koruyun ve eksiksiz ek kanıtlarını muhafaza edin.
+Her çalışma alanından imzalı bir ZIP (her zaman tüm günlük, süzgeçler fark etmez), artı kişi profilleri, sohbet dışa aktarımları ve dosyalar.
 
 ```
 CASE-001/                         # assembled by the analyst
@@ -156,7 +156,7 @@ CASE-001/                         # assembled by the analyst
   SHA256SUMS                      # hashes of the delivered files
 ```
 
-Güvenilir parmak izlerini ayrı bir kanal üzerinden saklayın. Güvenilir bir kurulumdan, her bir kanıt parçasını kendi çalışma alanı kimliğiyle karşılaştırarak doğrulayın:
+Parmak izlerini ayrı gönderin. Her şeyi kendi çalışma alanına karşı doğrulayın:
 
 ```
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
@@ -164,30 +164,4 @@ python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Doğrulayıcı sonuçlarını kontrol edin, orijinalleri koruyun ve kapsam raporunu, toplama sonuçlarını ve aktarım kaydını bulgularınızla birlikte saklayın. Bulguları Report Studio'da yazın ve raporun Case Board materyallerini içerip içermeyeceğini seçin. Örnek üst düzey klasör, ayrı ayrı imzalanmış öğeleri bir araya getirir. Yalnızca seçilen materyallere ihtiyaç duyan bir alıcı için, [özet](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) bir [devir](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) hazırlayın.
-
-## Diğer soruşturmalarda da aynı yöntemi kullanın
-
-**Bot kaynaklı bir sipariş veya ödeme anlaşmazlığı**
-
-**Soru:** Bot ne vaat etmişti, hangi düğme hedefi sunulmuştu ve sonrasında ne değişti?
-
-**İzleme:** kanal girişi gönderisi → kaydedilmiş bot bağlantısı önizlemesi → bot başlatma parametresi → mesajlar ve klavye sürümleri → panel tarafından gönderilen herhangi bir geri arama onayı → grup/özel takip. Her bir hedefi kaynak kaydıyla eşleştirin; profil açıklamalarını ve tamamlanmış medya öğelerini koruyun.
-
-**Sunulacaklar:** gözlemlenen teklif ve yanıtların zaman çizelgesi, kaynak referansları ve doğrulanmış dışa aktarımlar. Tamamlanmış bir ödemeyle ilgili her türlü iddiayı, ilgili işlem kayıtlarıyla destekleyin.
-
-**Sohbetler arası bir olayın ardından silinen mesajlar**
-
-**Soru:** İlgili mesajlar kaybolmadan önce neler gözlemlenmişti?
-
-**İzleme:** etkilenen tüm sohbetler → orijinal mesajlar → iletilen düzenlemeler → silme bildirimleri veya daha sonra yeniden kontrol edildiğinde eksik olduğu tespit edilen sonuçlar → saklanan ekler → olayla ilgili haberler. Bağımsız hesap gözlemlerini, belirtilen görünürlük düzeyleriyle karşılaştırın.
-
-**Sonuç:** Korunan sürümlerin sırası ve açıkça belirtilmiş bilinmeyen aralıklar. Silme bildirimlerini, başarısız yeniden kontrolleri ve herhangi bir kişiye atfedilen bilgileri ayrı olarak destekleyin.
-
-**Bir katılımcı, birkaç sohbet arasında isimlerini değiştiriyor**
-
-**Soru:** İsim değişikliğine rağmen hangi gözlemlenen etkinlik aynı Telegram hesabına aittir?
-
-**İzleme:** sayısal gönderen kimliği → kaydedilmiş ad/kullanıcı adı geçmişi → yanıtlar → çalışma alanındaki diğer sohbetler → bahsedilen hedefler ve kaydedilmiş dosyalar. İddia edilen her bağlantı için kaynak kayıtlarını kontrol edin; benzer hesapları ayrı tutun.
-
-**Sonuç:** Alıntılanan hesap etkinlik zaman çizelgesi ve ilişkiler hakkında ayrı hipotezler. İsim benzerliklerini ve avatar pHash değerlerini kullanarak, kaynakların daha ayrıntılı incelenmesi için ipuçları seçin.
+Doğrulayıcı çıktısını, orijinalleri, kapsamı ve teslim kaydını bulgularınızla birlikte saklayın. Hepsini Report studio'da yazın. Alıcıya daha azı gerekiyorsa [küçültülmüş bir teslim](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) hazırlayın.

@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/setti
 包含会话或先前已完成配置的工作区不会显示向导。 页面加载时，其值不会被目标值替换。隐藏字段不会 禁用该功能，也不会删除其值。
 
 大小和时间估算基于最多三个选定的聊天，以及每个聊天中最多 20 条消息。 这仅为估算值：它无法预测 Telegram 的限制、特定 服务器的速度，也无法预测每个聊天中的文件内容。
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

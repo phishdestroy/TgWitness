@@ -2,33 +2,33 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/server/
 
-Assicurarsi che il collettore rimanga disponibile e che i suoi dati rimangano intatti anche dopo i riavvii.
+Tenga il collector attivo e i dati al sicuro tra un riavvio e l’altro.
 
 ## Scegliere un metodo di avvio
 
-Per un’installazione nativa, si prega di utilizzare il [launcher](https://phishdestroy.github.io/TgWitness/it/docs/start/) e gli esempi di servizio presenti nella cartella [`deploy/`.](https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md) Per Docker, si prega di installare Docker con Compose ed eseguire il comando dalla directory del progetto:
+Nativo: il [launcher](https://phishdestroy.github.io/TgWitness/it/docs/start/) più i modelli di servizio in [deploy/](https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md). Docker, dalla cartella del progetto:
 
 ```
 docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt
 ```
 
-Il pannello predefinito è in ascolto sull’indirizzo di loopback dell’host, porta 8787. Lo si può aprire localmente o tramite un tunnel SSH. Utilizzi il token fornito dal secondo comando per sbloccare il pannello.
+Il pannello ascolta su localhost:8787. Lo apra in locale o tramite un tunnel SSH, con il token del secondo comando.
 
 ## Conservare l’intera directory dei dati
 
-Le installazioni native utilizzano `data/live`. Docker utilizza il volume persistente `tgwitness-data`. Conservare insieme i registri, le sessioni degli account, le chiavi e lo stato operativo. Un’esportazione firmata costituisce una prova utile, ma non rappresenta un backup completo dell’installazione.
+Nativo: `data/live`. Docker: il volume `tgwitness-data`. Diari, sessioni e chiavi stanno insieme. Un’esportazione firmata è una prova, non un backup.
 
-1. Interrompa la raccolta prima di eseguire un backup completo.
-2. Copiare l’intera directory dei dati privati in un archivio protetto esterno all’host.
-3. Si raccomanda di testare il ripristino in un’installazione isolata prima di fare affidamento sul backup.
+1. Prima fermi la raccolta.
+2. Copi l’intera cartella dati in un posto sicuro, fuori dall’host.
+3. Provi a ripristinarla su un’installazione separata prima di fidarsi.
 
 ## Verificare dopo il riavvio
 
-Verifichi l’area di lavoro prevista e la chiave, la connessione a Telegram, le fonti selezionate e l’acquisizione dei nuovi messaggi. Lo stato salvato di MTProto e la funzione di recupero consentono di recuperare gli aggiornamenti che Telegram conserva ancora. Non è possibile ricostruire ogni aggiornamento scaduto né una modifica cancellata prima dell’acquisizione.
+Controlli spazio e chiave, connessione, fonti e che arrivino messaggi nuovi. TgWitness recupera ciò che Telegram ha ancora, non tutto ciò che è successo mentre era spento.
 
-Per «stato del container» si intende che il server web risponde. Si utilizzino un messaggio di prova e un controllo di verifica per valutare la raccolta e la pubblicazione esterna.
+Un container «sano» significa che il server web risponde. Se la raccolta funziona lo diranno un messaggio di prova e il testimone.
 
 ## Pubblicate solo ciò che intendete pubblicare
 
-La guida all’implementazione include esempi HTTPS, comandi relativi ai volumi persistenti, aggiornamenti e procedure di ripristino. Per l’implementazione vengono forniti comandi Docker; il [registro di convalida](https://phishdestroy.github.io/TgWitness/it/docs/reference/verification/) attuale identifica gli ambienti effettivamente testati.
+HTTPS, volumi, aggiornamenti e ripristino sono nel riferimento di deployment. Cosa è stato davvero testato: [registro di convalida](https://phishdestroy.github.io/TgWitness/it/docs/reference/verification/).

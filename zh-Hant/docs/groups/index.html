@@ -32,12 +32,12 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首頁</a> <span aria-hidden="true">/</span> <a href="../">文件說明</a> <span aria-hidden="true">/</span> <span aria-current="page">管理一組帳戶</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文件說明 / 13</p><h1>管理一組帳戶</h1><p class="guide-outcome">可同時管理多個收集帳戶，同時確保每個帳戶的記錄與簽署身分保持獨立。</p>
-<p>「帳戶群組」將連線狀態、監控設定、共用設定及匯出功能整合至單一工作介面中。當多個帳戶涉及同一項調查，或需要一致的操作設定時，此功能便十分實用。</p>
+<article class="guide-content"><p class="eyebrow">文件說明 / 13</p><h1>管理一組帳戶</h1><p class="guide-outcome">同時執行多個帳戶，每個帳戶仍有自己的紀錄和金鑰。</p>
+<p>群組將連線狀態、啟動/暫停、共用設定和匯出放在同一個畫面。多個帳戶處理同一案件時很方便。</p>
 
 <h2 id="overview">開啟群組概覽</h2>
-<p>在<strong>「帳戶」</strong>中，開啟該群組。每個帳戶會顯示其監測狀態、連線路徑、最近一次檢查成功時測得的路徑延遲，以及最後儲存的訊息。<strong>需注意</strong>連結會指向需要處理的帳戶；<strong>點擊「修復」</strong>可開啟相關工作區與控制介面。</p>
-<p><strong>「全部開始」</strong>與「<strong>全部暫停」</strong>功能將在確認後對符合條件的帳戶生效。<strong>「群組設定」</strong>可共用選定的設定；具有獨立設定值的帳戶將保留其設定，直至您選擇覆寫為止。</p>
+<p>在<strong>帳戶</strong>中開啟群組。每個帳戶顯示其狀態、路由、延遲和最後保存的訊息。<strong>需注意</strong>列出有問題的帳戶，<strong>修復</strong>直接帶您過去。</p>
+<p><strong>全部開始</strong> / <strong>全部暫停</strong>會先詢問再執行。<strong>群組設定</strong>是共用的，但帳戶自己的值會保留，直到您替換它們。</p>
 
 <section class="workflow-lab" data-workflow="groups" aria-labelledby="groups-example-title">
   <h3 id="groups-example-title">檢視群組內的路徑變更</h3>
@@ -59,15 +59,15 @@
 </section>
 
 <h2 id="route">在流程中新增「審查」步驟</h2>
-<ol><li>請選擇「<strong>變更群組路由</strong>」，然後選擇連線類型及設定。</li><li>選擇<strong>「審查」選項</strong>。審查清單中的帳戶及其各自的路由覆寫設定。</li><li>選擇「<strong>準備」並執行檢查</strong>。此檢查會使用全新的 Telegram 傳輸通道；受支援的 HTTP 路由亦會回報其 HTTPS 出口檢查結果。</li><li>選擇「<strong>套用已選中的連線」</strong>，並檢查每個帳戶的結果。先前正在執行的監測將在應用程式成功處繼續進行；閒置帳戶則維持閒置狀態。</li></ol>
-<p>延遲（Latency）描述的是測量到的 Telegram 連線建立狀況。出口 IP 檢查則描述在記錄檢查時間點的該條路徑狀況。帳戶授權與監測狀態各有其指標；群組變更可能因帳戶而異，產生不同的結果。</p>
+<ol><li><strong>變更群組路由</strong>，選擇類型和設定。</li><li><strong>檢視選擇</strong>：查看哪些帳戶會變更，哪些有自己的路由。</li><li><strong>準備並檢查</strong>會測試新的 Telegram 連線，並在可能時測試出口 IP。</li><li><strong>套用已檢查的連線</strong>，並查看每個結果。執行中的帳戶會繼續，閒置的維持閒置。</li></ol>
+<p>延遲是建立 Telegram 連線的時間，出口 IP 是檢查時路由顯示的位址。結果可能因帳戶而異。</p>
 
 <h2 id="shared-chats">使用重疊存取權限</h2>
-<p><strong>「多個帳戶可見的聊天室」</strong>功能會顯示共享來源及可用的工作區觀察範圍。符合資格的頻道和超級群組可使用<strong>「與…帳戶匯出」</strong>功能，將單一聊天室的歷史紀錄取得作業進行分攤。私人聊天室和一般群組則保留在起始帳戶下，因為其訊息編號屬於該帳戶的歷史紀錄。</p>
+<p><strong>多個帳戶可見的聊天室</strong>列出共用來源及其涵蓋範圍。頻道和超級群組可以透過<strong>以 … 個帳戶匯出</strong>由多個帳戶同時匯出。私人聊天和一般群組不行，它們的訊息編號依帳戶計算。</p>
 
 <h2 id="export-group">將群組匯出為套件</h2>
-<p><strong>匯出群組會</strong>建立一個 ZIP 檔案，其中包含每個帳戶的簽名匯出檔以及這些檔案的簽名清單。原始工作區的身分識別資訊與指紋仍可供驗證。請利用這些參考資料建構跨帳戶的敘事脈絡；單一的合併時間軸仍需另行彙整。</p>
-<p>請繼續進行<a href="../reports/">報告設計</a>、<a href="../case-board/">工作區內的「案件看板</a>」，或<a href="../exports/">執行匯出驗證</a>。</p>
+<p><strong>匯出群組</strong>會產生一個 ZIP，包含每個帳戶的簽名匯出及其簽名清單。每份匯出都保留自己的指紋以供驗證。合併的時間軸仍需您自行整理。</p>
+<p>下一步：<a href="../reports/">報告</a>，<a href="../case-board/">Case Board</a>，<a href="../exports/">驗證匯出</a>。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">完整參考資料 →</a><a class="next-guide" href="../cases/"><span>下一步</span><strong>跨所有聊天室進行調查 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../reference/verification/">已測試的內容 →</a></p></footer>
 </main>

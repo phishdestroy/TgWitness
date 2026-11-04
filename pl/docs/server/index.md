@@ -2,33 +2,33 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/server/
 
-Należy zapewnić dostępność modułu zbierającego dane oraz zachowanie integralności danych po każdym ponownym uruchomieniu.
+Utrzymuj kolektor w działaniu, a dane bezpieczne przy restartach.
 
 ## Proszę wybrać metodę uruchomienia
 
-W przypadku instalacji natywnej proszę skorzystać z programu [uruchamiającego](https://phishdestroy.github.io/TgWitness/pl/docs/start/) oraz przykładów usług znajdujących się w katalogu [`deploy/`](https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md). W przypadku Docker proszę zainstalować Docker z Compose i uruchomić z katalogu projektu:
+Natywnie: [launcher](https://phishdestroy.github.io/TgWitness/pl/docs/start/) plus szablony usług w [deploy/](https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md). Docker, z folderu projektu:
 
 ```
 docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt
 ```
 
-Domyślny panel nasłuchuje na adresie pętli zwrotnej hosta, na porcie 8787. Proszę otworzyć go lokalnie lub poprzez tunel SSH. Aby odblokować panel, należy użyć tokenu z drugiego polecenia.
+Panel nasłuchuje na localhost:8787. Otwieraj lokalnie albo przez tunel SSH, z tokenem z drugiego polecenia.
 
 ## Należy zachować cały katalog danych
 
-W przypadku instalacji natywnych stosowany jest wolumin `data/live`. W środowisku Docker wykorzystywany jest trwały wolumin `tgwitness-data`. Należy przechowywać dzienniki, sesje kont, klucze oraz stan operacyjny w jednym miejscu. Podpisany eksport stanowi przydatny dowód, jednak nie jest to pełna kopia zapasowa instalacji.
+Natywnie: `data/live`. Docker: wolumen `tgwitness-data`. Dzienniki, sesje i klucze trzymaj razem. Podpisany eksport to dowód, a nie kopia zapasowa.
 
-1. Należy przerwać gromadzenie danych przed wykonaniem spójnej kopii zapasowej.
-2. Proszę skopiować cały katalog danych prywatnych do zabezpieczonej pamięci poza serwerem.
-3. Przed skorzystaniem z kopii zapasowej należy przetestować przywracanie danych w izolowanej instalacji.
+1. Najpierw zatrzymaj zbieranie.
+2. Skopiuj cały katalog danych w bezpieczne miejsce poza hostem.
+3. Spróbuj przywrócić go na osobnej instalacji, zanim mu zaufasz.
 
 ## Proszę sprawdzić po ponownym uruchomieniu
 
-Proszę potwierdzić oczekiwane środowisko pracy i klucz, połączenie z Telegramem, wybrane źródła oraz przechwytywanie nowych wiadomości. Zapisany stan MTProto oraz funkcja nadrabiania zaległości pomagają odzyskać aktualizacje, które Telegram nadal przechowuje. Nie jest możliwe odtworzenie wszystkich wygasłych aktualizacji ani edycji usuniętych przed ich przechwyceniem.
+Sprawdź przestrzeń i klucz, połączenie, źródła i to, czy przychodzą nowe wiadomości. TgWitness nadrabia to, co Telegram jeszcze ma, a nie wszystko, co działo się podczas przestoju.
 
-Prawidłowe działanie kontenera oznacza, że serwer internetowy odpowiada. Należy zastosować wiadomość testową oraz kontrolę weryfikacyjną w celu oceny procesu gromadzenia danych i ich publikacji zewnętrznej.
+„Zdrowy” kontener znaczy, że serwer WWW odpowiada. Czy zbieranie działa, pokażą wiadomość testowa i świadek.
 
 ## Proszę publikować wyłącznie to, co zamierzają Państwo opublikować
 
-Dokumentacja wdrożeniowa zawiera przykłady wykorzystania protokołu HTTPS, polecenia dotyczące woluminów trwałych, a także instrukcje dotyczące aktualizacji i przywracania danych. Do wdrożenia udostępniono polecenia Docker; aktualny [rejestr walidacji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/verification/) określa środowiska, w których przeprowadzono rzeczywiste testy.
+HTTPS, wolumeny, aktualizacje i przywracanie są w dokumentacji wdrożenia. Co naprawdę przetestowano: [rejestr weryfikacji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/verification/).

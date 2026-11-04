@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/witness/
 
-Laissez un processus distinct vérifier le journal et publier des points de contrôle signés sur votre chaîne.
+Un processus séparé vérifie votre journal et publie des points de contrôle signés dans un canal.
 
 ## Deux serveurs, deux clés de signature
 
@@ -36,33 +36,33 @@ Tous les exemples de réponse partent du principe qu’une signature valide et l
 
 ## Préparez un bot et une chaîne
 
-Créez un bot à l’aide de BotFather et autorisez-le à publier dans un canal que vous contrôlez. Choisissez un ordinateur ou un serveur pour le « witness ». Un hébergeur et un opérateur distincts garantissent une plus grande indépendance qu’un deuxième processus sur le serveur du collecteur.
+Créez un bot avec BotFather et laissez-le publier dans votre canal. Faites tourner le témoin ailleurs : un autre hôte, idéalement géré par quelqu’un d’autre, vaut bien plus qu’un second processus à côté du collecteur.
 
 ## Trois étapes dans la rubrique « Extras »
 
-1. **Accès en lecture seule.** Ouvrez « **Extras » → « Témoin indépendant** », créez un jeton de témoin et enregistrez le fichier d'accès. Cela permet de consulter les points de contrôle et l'état de santé, mais pas les conversations ni les commandes du collecteur.
-2. **Canal et intervalle.** Choisissez un canal Telegram ou un webhook Discord, puis saisissez une adresse de collecteur accessible depuis le témoin. Enregistrez le fichier de paramètres.
-3. **Lancement.** Placez ensemble les fichiers `witness.json`, `witness-token.txt` et `bot-token.txt` créés sur l’hôte « witness ». Exécutez les commandes ci-dessous dans l’environnement du projet installé.
+1. **Accès en lecture seule.** **Extras → Témoin indépendant**, créez un jeton et enregistrez le fichier. Il lit les points de contrôle et l’état, rien d’autre.
+2. **Canal et intervalle.** Canal Telegram ou webhook Discord, plus une adresse du collecteur joignable par le témoin. Enregistrez le fichier de réglages.
+3. **Lancement.** Placez `witness.json`, `witness-token.txt` et `bot-token.txt` ensemble sur l’hôte du témoin et lancez :
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
 python -m tgwitness.witness run --config witness.json
 ```
 
-Le téléchargement des fichiers ne lance pas le « witness ». Vérifiez que le premier message signé apparaît bien dans la chaîne, puis conservez séparément l’empreinte de la clé publique du « witness ».
+Attendez la première publication signée dans le canal, puis conservez l’empreinte du témoin en lieu sûr.
 
-Pour Discord, enregistrez l’URL du webhook du canal comme `discord-webhook.txt` au lieu du jeton du bot. Un témoin publie à un seul endroit, soit un canal Telegram, soit un canal Discord ; les vérifications plus longues qu’un message Discord arrivent sous forme de fichier joint.
+Plutôt Discord ? Enregistrez l’URL du webhook dans `discord-webhook.txt`. Un témoin publie à un seul endroit ; sur Discord, les longues vérifications arrivent sous forme de fichier.
 
 ## Choisissez la fréquence de publication
 
-La publication de chaque vérification crée un enregistrement externe régulier. À raison d’intervalles de cinq minutes, cela représente environ 288 publications par espace de travail et par jour. Les paramètres avancés permettent également de publier les modifications ou les problèmes, d’utiliser un proxy et de définir une adresse API de bot personnalisée.
+Publier chaque vérification crée une trace externe régulière : toutes les cinq minutes, cela fait environ 288 publications par jour et par espace. Les réglages avancés permettent de publier seulement en cas de changement ou de problème, d’utiliser un proxy ou une Bot API personnalisée.
 
 **Que certifie réellement ce bot ?**
 
-Le témoin demande au collecteur un point de contrôle signé, le vérifie par rapport à la clé attendue et tient un journal signé distinct. Il enregistre les réponses manquantes et les réponses rejetées, ainsi que les vérifications réussies. La publication dépend toujours du fonctionnement du témoin et de sa capacité à accéder à l’API Bot de Telegram.
+Il demande au collecteur un point de contrôle signé, le vérifie avec la clé attendue et tient son propre journal signé, y compris les réponses manquées et rejetées.
 
-Il vérifie l’état du journal tel que signalé par le collecteur. Il n’observe pas de manière indépendante chaque message Telegram. Pour cela, veuillez ajouter le test de livraison contrôlée.
+Il vérifie l’état du journal ; il n’observe pas Telegram lui-même. Pour cela, faites un test de livraison contrôlé.
 
 ## Vérifiez les preuves ultérieurement
 
-Conservez le journal des témoins, les publications des chaînes et les empreintes enregistrées de manière indépendante. La [procédure de vérification complète](https://phishdestroy.github.io/TgWitness/fr/docs/reference/witness/#verify) les compare à l’exportation signée par l’utilisateur.
+Conservez le journal du témoin, les publications et les empreintes. [Comment les vérifier](https://phishdestroy.github.io/TgWitness/fr/docs/reference/witness/#verify) face à l’export du collecteur.

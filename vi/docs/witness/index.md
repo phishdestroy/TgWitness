@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/witness/
 
-Hãy để một quy trình riêng biệt kiểm tra nhật ký này và đăng các mốc kiểm tra đã được ký lên kênh của quý vị.
+Một tiến trình riêng kiểm tra sổ nhật ký của bạn và đăng các điểm kiểm tra có chữ ký lên một kênh.
 
 ## Hai máy chủ, hai khóa ký
 
@@ -36,33 +36,33 @@ Tất cả các ví dụ trả lời đều giả định có chữ ký hợp l�
 
 ## Chuẩn bị một bot và một kênh
 
-Hãy tạo một bot bằng BotFather và cho phép bot này đăng bài trong một kênh do quý vị quản lý. Chọn một máy tính hoặc máy chủ làm máy chủ lưu trữ cho công cụ này. Việc sử dụng máy chủ và người vận hành riêng biệt sẽ mang lại sự độc lập cao hơn so với việc chạy một tiến trình thứ hai trên máy chủ của người thu thập dữ liệu.
+Tạo một bot bằng BotFather và cho phép nó đăng bài trong kênh của bạn. Hãy chạy nhân chứng ở nơi khác: một máy chủ khác, lý tưởng là do người khác vận hành, giá trị hơn nhiều so với một tiến trình thứ hai cạnh máy thu thập.
 
 ## Ba bước trong phần Tiện ích bổ sung
 
-1. **Quyền truy cập chỉ đọc.** Mở **Extras → Independent witness**, tạo mã chứng thực (witness token) và lưu tệp truy cập. Tính năng này cho phép đọc các điểm kiểm tra (checkpoints) và trạng thái hoạt động (health), không bao gồm các cuộc trò chuyện hay các điều khiển của trình thu thập dữ liệu.
-2. **Kênh và khoảng thời gian.** Chọn một kênh Telegram hoặc webhook Discord và nhập địa chỉ bộ thu có thể truy cập được từ witness. Lưu tệp cài đặt.
-3. **Khởi chạy.** Đặt các tệp `witness.json`, `witness-token.txt` và `bot-token.txt` đã được tạo trên máy chủ chứng thực vào cùng một thư mục. Vui lòng thực thi các lệnh dưới đây trong môi trường dự án đã cài đặt.
+1. **Quyền chỉ đọc.** **Tiện ích → Nhân chứng độc lập**, tạo token, lưu tệp. Nó đọc điểm kiểm tra và tình trạng, không gì khác.
+2. **Kênh và khoảng thời gian.** Kênh Telegram hoặc webhook Discord, cùng địa chỉ máy thu thập mà nhân chứng truy cập được. Lưu tệp cài đặt.
+3. **Khởi chạy.** Đặt `witness.json`, `witness-token.txt` và `bot-token.txt` cùng nhau trên máy chủ nhân chứng và chạy:
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
 python -m tgwitness.witness run --config witness.json
 ```
 
-Việc tải xuống các tệp tin sẽ không khởi động công cụ TgWitness. Vui lòng kiểm tra xem bài đăng có chữ ký đầu tiên đã xuất hiện trong kênh hay chưa, sau đó lưu lại dấu vân tay khóa công khai của công cụ TgWitness một cách riêng biệt.
+Chờ bài đăng có chữ ký đầu tiên trong kênh, rồi lưu dấu vân tay của nhân chứng ở nơi an toàn.
 
-Đối với Discord, hãy lưu URL webhook của kênh dưới dạng `discord-webhook.txt` thay vì mã thông báo bot. Một nhân chứng đăng bài lên một nơi, một kênh Telegram hoặc một kênh Discord; các bản kiểm tra dài hơn một tin nhắn Discord sẽ được gửi dưới dạng tệp đính kèm.
+Muốn dùng Discord? Lưu URL webhook thành `discord-webhook.txt`. Một nhân chứng đăng vào một nơi; các lần kiểm tra dài đến Discord dưới dạng tệp.
 
 ## Chọn tần suất đăng tải
 
-Việc xuất bản mỗi lần kiểm tra sẽ tạo ra một bản ghi bên ngoài định kỳ. Với khoảng thời gian 5 phút một lần, điều này tương đương khoảng 288 bài đăng cho mỗi không gian làm việc mỗi ngày. Các cài đặt nâng cao còn cho phép xuất bản khi có thay đổi hoặc sự cố, sử dụng máy chủ proxy và địa chỉ API Bot tùy chỉnh.
+Đăng mỗi lần kiểm tra tạo ra một bản ghi bên ngoài đều đặn: cứ năm phút một lần là khoảng 288 bài mỗi ngày cho mỗi không gian làm việc. Cài đặt nâng cao có thể chỉ đăng khi có thay đổi hoặc sự cố, dùng proxy hoặc Bot API tùy chỉnh.
 
 **Thực tế, bot này xác nhận điều gì?**
 
-TgWitness yêu cầu người thu thập cung cấp một điểm kiểm tra đã được ký, xác minh điểm kiểm tra đó dựa trên khóa dự kiến và lưu giữ một sổ nhật ký riêng biệt đã được ký. Công cụ này ghi lại các phản hồi bị thiếu và các câu trả lời bị từ chối cũng như các lần kiểm tra thành công. Việc công bố vẫn phụ thuộc vào việc TgWitness đang hoạt động và có thể kết nối với Bot API của Telegram.
+Nó yêu cầu máy thu thập cung cấp điểm kiểm tra có chữ ký, kiểm tra bằng khóa mong đợi và giữ sổ nhật ký có chữ ký riêng, kể cả các phản hồi bị lỡ và bị từ chối.
 
-Công cụ này kiểm tra trạng thái nhật ký được báo cáo bởi bộ thu thập dữ liệu. Công cụ này không tự động theo dõi từng tin nhắn Telegram. Để thực hiện việc đó, quý vị cần thêm tính năng kiểm tra việc gửi tin nhắn có kiểm soát.
+Nó kiểm tra trạng thái sổ nhật ký, bản thân nó không theo dõi Telegram. Để làm việc đó, hãy chạy một phép thử nhận tin có kiểm soát.
 
 ## Xin vui lòng kiểm tra bằng chứng sau này
 
-Hãy lưu giữ sổ nhật ký chứng cứ, các bài đăng trên kênh và các dấu vân tay được lưu trữ độc lập. [Quy trình xác minh đầy đủ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#verify) sẽ so sánh các dữ liệu này với tệp xuất có chữ ký của người thu thập.
+Giữ sổ nhật ký của nhân chứng, các bài đăng và dấu vân tay. [Cách đối chiếu chúng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#verify) với bản xuất của máy thu thập.

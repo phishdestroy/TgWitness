@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/groups/
 
-Verwalten Sie mehrere Erfassungskonten gleichzeitig und halten Sie dabei die Datensätze sowie die Signaturidentität jedes Kontos getrennt.
+Betreiben Sie mehrere Konten zusammen, jedes weiterhin mit eigenen Einträgen und eigenem Schlüssel.
 
-Eine Kontengruppe fasst Verbindungsstatus, Überwachungssteuerungen, gemeinsame Einstellungen und Exporte in einer Arbeitsansicht zusammen. Dies ist nützlich, wenn mehrere Konten dieselbe Untersuchung abdecken oder eine einheitliche Betriebskonfiguration benötigen.
+Eine Gruppe bringt Verbindungsstatus, Start/Pause, gemeinsame Einstellungen und Exporte auf einen Bildschirm. Praktisch, wenn mehrere Konten am selben Fall arbeiten.
 
 ## Gruppenübersicht öffnen
 
-Öffnen Sie in **„Accounts**“ die Gruppe. Zu jedem Account werden der Beobachtungsstatus, die Verbindungsroute, die zuletzt gemessene Routenlatenz bei erfolgreicher aktueller Überprüfung sowie die zuletzt gespeicherte Nachricht angezeigt. Links **mit dem Hinweis „Beachtung erforderlich“** verweisen auf die Accounts, die bearbeitet werden müssen; über **„Fix“** werden der entsprechende Arbeitsbereich und die Steuerung geöffnet.
+Öffnen Sie die Gruppe unter **Konten**. Jedes Konto zeigt Status, Route, Latenz und letzte gespeicherte Nachricht. **Erfordert Aufmerksamkeit** listet die defekten, **Beheben** bringt Sie direkt hin.
 
-**„Alle starten“** und **„Alle anhalten“** wirken sich nach Bestätigung auf berechtigte Konten aus. **Gruppeneinstellungen** geben ausgewählte Einstellungen frei; Konten mit eigenen Werten behalten diese bei, bis Sie sich entscheiden, sie zu überschreiben.
+**Alle starten** / **Alle pausieren** fragen vorher nach. **Gruppeneinstellungen** werden geteilt, aber die eigenen Werte eines Kontos bleiben, bis Sie sie ersetzen.
 
 ### Überprüfen Sie eine Routenänderung innerhalb einer Gruppe
 
@@ -51,19 +51,19 @@ Referenzkonto: eigene Route beibehalten.
 
 ## Ändern Sie die Route mit einem Überprüfungsschritt
 
-1. Wählen Sie **„Gruppenroute ändern**“ und legen Sie anschließend den Verbindungstyp und die Einstellungen fest.
-2. Wählen Sie **„Auswahl überprüfen**“. Überprüfen Sie die aufgelisteten Konten und deren individuelle Routenüberschreibungen.
-3. Wählen Sie **„Vorbereiten und prüfen**“. Bei der Prüfung wird ein neuer Telegram-Transport verwendet; unterstützte HTTP-Routen melden zudem ihre HTTPS-Ausgangsprüfung.
-4. Wählen Sie **„Markierte Verbindung anwenden“** und überprüfen Sie das Ergebnis jedes Kontos. Zuvor laufende Überwachungen werden dort fortgesetzt, wo die Anwendung erfolgreich ist; inaktive Konten bleiben inaktiv.
+1. **Gruppenroute ändern**, Typ und Einstellungen wählen.
+2. **Auswahl prüfen**: welche Konten sich ändern und welche eine eigene Route haben.
+3. **Vorbereiten und prüfen** testet eine frische Telegram-Verbindung und, wo möglich, die Ausgangs-IP.
+4. **Geprüfte Verbindung anwenden** und jedes Ergebnis ansehen. Laufende Konten machen weiter, inaktive bleiben inaktiv.
 
-Die Latenz beschreibt den gemessenen Aufbau der Telegram-Verbindung. Eine Exit-IP-Prüfung beschreibt diese Route zum Zeitpunkt der aufgezeichneten Überprüfung. Die Kontoautorisierung und der Zustand der Überwachung haben eigene Indikatoren; eine Gruppenänderung kann je nach Konto zu unterschiedlichen Ergebnissen führen.
+Latenz ist die Zeit für den Verbindungsaufbau zu Telegram, die Ausgangs-IP ist das, was die Route bei der Prüfung zeigte. Ergebnisse können je Konto abweichen.
 
 ## Verwenden Sie überlappende Zugriffsrechte
 
-**Unter „Chats mehrerer Konten anzeigen“** werden gemeinsam genutzte Quellen und der verfügbare Erfassungsbereich im Arbeitsbereich angezeigt. Berechtigte Kanäle und Supergruppen können **die** **Funktion** **„Exportieren mit … Konten“** nutzen, um die Erfassung des Chatverlaufs eines Chats aufzuteilen. Private Chats und normale Gruppen verbleiben beim Startkonto, da ihre Nachrichtenzahlen zum Verlauf dieses Kontos gehören.
+**Chats, die mehrere Konten sehen** listet gemeinsame Quellen und ihre Abdeckung. Kanäle und Supergruppen lassen sich mit **Mit … Konten exportieren** von mehreren Konten gleichzeitig exportieren. Private Chats und einfache Gruppen nicht, ihre Nachrichtennummern gelten pro Konto.
 
 ## Die Gruppe als Paket exportieren
 
-**Die Exportgruppe** erstellt eine ZIP-Datei, die den signierten Export jedes Kontos sowie eine signierte Liste dieser Dateien enthält. Die ursprünglichen Identitäten und Fingerabdrücke des Arbeitsbereichs bleiben zur Überprüfung verfügbar. Erstellen Sie anhand dieser Referenzen eine kontoübergreifende Darstellung; eine einzige zusammengeführte Zeitleiste wird weiterhin separat zusammengestellt.
+**Gruppe exportieren** liefert ein ZIP mit dem signierten Export jedes Kontos und einer signierten Liste davon. Jedes behält seinen Fingerabdruck für die Prüfung. Eine zusammengeführte Zeitleiste bauen Sie weiterhin selbst.
 
-Fahren Sie mit [der Berichtsgestaltung](https://phishdestroy.github.io/TgWitness/de/docs/reports/), [einem Case Board innerhalb eines Arbeitsbereichs](https://phishdestroy.github.io/TgWitness/de/docs/case-board/) oder [der Exportüberprüfung](https://phishdestroy.github.io/TgWitness/de/docs/exports/) fort.
+Weiter: [Berichte](https://phishdestroy.github.io/TgWitness/de/docs/reports/), [Case Board](https://phishdestroy.github.io/TgWitness/de/docs/case-board/), [Exporte prüfen](https://phishdestroy.github.io/TgWitness/de/docs/exports/).

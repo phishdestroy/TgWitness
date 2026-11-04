@@ -32,8 +32,6 @@ Shaxsiy profillar va WARP hisob ma'lumotlari mavjud ish maydoni seyfida shifrlan
 
 Yuklangan WireGuard profillari bitta Interface va bitta Peer, to'liq IPv4 va IPv6 yo'nalishlari, shuningdek hech qanday hooklar, includes, muhit o'zgaruvchilari yoki qo'shimcha tinglovchilarni o'z ichiga olishi kerak. Jamoat endpoint manzillari ishga tushishdan oldin aniqlanib, mahkamlanadi. OpenVPN/IPsec va xususiy endpointlar uchun tashqi VPN yoki SOCKS5 darvozasidan foydalaning.
 
-Sun'iy tekshiruvlar `python tools/check_guided_connection.py` va `python tools/check_guided_connection_browser.py`. Ixtiyoriy `python tools/check_portable_routes_runtime.py` tasdiqlangan yordamchilarni yuklab oladi va ularning haqiqiy mahalliy jarayon hayotiy tsiklini loopback ulanishlarga qarshi sinovdan o'tkazadi. U Cloudflare qurilmasini ro'yxatdan o'tkazmaydi va Telegram hisobidan foydalanmaydi.
-
 ## Avtorizatsiya usullari
 
 **API ID va API xesh ilovani aniqlaydi; ular hisobga kirishni almashtirmaydi.** Ular TgWitness'da ixtiyoriydir. Uстунлик tartibi: avval formaga kiritilgan juftlik, keyin import qilingan hisob JSON'idan olingan juftlik, keyin ish maydonida saqlangan juftlik, so'ngra 50 ta juftlikdan iborat o'rnatilgan bazadan juftlik (2040) mos Telegram Desktop mijoz tavsifi bilan yuboriladi. [my.telegram.org](https://my.telegram.org) saytidagi API Development Tools bo'limidan olingan o'zingizning juftlikni barcha hisoblaringiz bilan ishlatishingiz mumkin; har bir hisobning alohida ruxsati saqlanadi.
@@ -70,8 +68,6 @@ python -m tgwitness.sessions account.session --out account.tgwitness-session
 
 1. **Hisob qo'shish → Fayllar** bo'limida natijani yuklang yoki uning satrini joylang va davom eting.
 2. Ko'rsatilgan raqamli akkaunt IDni tekshiring, manbalarni tanlang va kuzatuvni boshlang.
-
-Konverter SQLite'ni faqat o'qish rejimida ochadi, sxema yangilanishi yoki tarmoq so'rovini bajarmaydi va sessiyani chop etmaydi. U sxema versiyasini, jadvallar turini, bitta sessiya qatorini, IP/port/DC va kalit uzunligini tekshiradi. CLI kiritilishi 64 MiB bilan cheklangan; StringSession matni 4 KiB bilan cheklangan. Panel konversiyasi fayllarni autentifikatsiyalangan TgWitness serveriga yuklaydi, ularni xotirada qayta ishlaydi va yuklangan asl nusxalarni saqlamasdan, normalizatsiya qilingan ma'lumotlarni shu brauzerga qaytaradi. Masofaviy server uchun HTTPS dan foydalaning.
 
 **Konvertlangan fayl shifrlanmagan akkauntga kirish siridir.** Uni himoyalangan saqlash joyida saqlang va hech qachon uni commit qilmang yoki uchinchi tomon konversiya xizmatiga yubormang. TgWitness ruxsat etilgan sessiyani o'zining shifrlangan omborida saqlaydi. Sessiyani nusxalash alohida ruxsatnoma yaratmaydi: klonlangan avtorizatsiya kalitlari bilan bir vaqtda bir nechta klientni ishga tushirmang va mustaqil yangilanish yetkazib berilishini kutmang.
 
@@ -115,15 +111,9 @@ Ichki ro'yxat to'rt manbani birlashtiradi: [SoliSpirit/mtproto](https://github.c
 
 Avtomatik yo'nalishlar faol bo'lganda, ro'yxatlar soatiga bir marta yangilanadi va transport tekshiruvlari standart bo'yicha har o'n daqiqada bajariladi. Ushbu oraliklarni sozlash mumkin. **Jamoat ro'yxatlarini yangilash** so'rovi yangilanishni talab qiladi; ro'yxatni faqat ko'rish saqlangan qo'lda yo'nalishni o'zgartirmaydi.
 
-Har bir feed javobi sakkiz soniyalik so'rov timeouti va 20 soniyalik umumiy yuklab olish muddati bilan 1 MiB bilan cheklangan; yo'naltirishlar rad etiladi. Manba bo'yicha 64 tagacha mos yozuv saqlanadi va takrorlari olib tashlanadi. Parser qo'llab-quvvatlanadigan hexadecimal va base64url sirlar hamda JSON feedni qabul qiladi. Soxta TLS `ee`, noto'g'ri havolalar, xususiy/zaxira IP-manzillar va mahalliy hostnomalar e'tiborsiz qoldiriladi. Hostnomalar foydalanishdan oldin aniqlanib tekshiriladi va tanlangan IP-manzil o'sha ulanish uchun mahkamlanadi. Avtomatik qayta olish hostnomani yana aniqlaydi; uni yana aniqlash uchun qo'lda kiritishni qayta qo'llang.
-
-Muvaffaqiyatsiz, bo'sh yoki mos kelmaydigan feed javoblari oldingi manba snapshotini saqlab qoladi. Yangilanishlar atomik, ketma-ketlashtirilgan va har bir ish maydoni bo'yicha daqiqasiga bitta urinish bilan cheklangan. Muvaffaqiyatli transport probe ulanishni o'rnatadi, anonimlikni yoki to'liqlikni emas.
-
 **Telegram trafigi va HTTPS so'rovlari turli yo'llardan foydalanadi.** Ro'yxatni yuklab olish alohida HTTPS ulanish va taqdim etilgan external-request yo'lidan foydalanadi. `TGWITNESS_PROXY_FEED_PROXY` bu yo'lni HTTP/SOCKS5 proksi bilan aniq bekor qiladi; ikkala collector Compose varianti ham uni yo'naltiradi. Orqa fondagi pool asosiy ish maydonchasiga ergashadi. Telegram sessiyasi, API ma'lumotlari, panel tokeni yoki bot tokeni feed provayderlariga yuborilmaydi. Provayder nomlari, snapshot sanalari va yuklab olish yo'li **"Ro'yxat qayerdan olingan"** bo'limida ko'rsatiladi.
 
 MTProxy faqat Telegram trafigini o'tkazadi. Ish maydoni HTTP amaliyotlari, masalan, vaqt tamg'alari, bildirishnomalar, masofaviy nusxalar va manba tekshiruvlari, sozlanganida alohida SOCKS5/HTTP proksidan, keyin hisobning SOCKS5/HTTP yo'nalishidan foydalanadi. Ikkalasiz, Hide the address so'rovni rad etadi; boshqa rejimlar Direct-ni ruxsat etadi. Tashqi so'rovlarni o'chirib qo'yish mumkin. Aniq sozlangan feed-download proksi alohida operator ustunligi bo'lib qoladi. Mustaqil guvoh xizmati o'z yo'lini saqlab qoladi.
-
-Faqat ommaviy tashqi HTTP so'rovlari SOCKS5 yoki HTTP proksi orqali manzilni `https://1.1.1.1/dns-query` manzilida Cloudflare DNS over HTTPS orqali, o'sha proksi orqali aniqlaydi. Faqat host nomi va A/AAAA so'rov turlari resolverga yuboriladi; xizmat URL manzillari, kredensial ma'lumotlari va bildirishnoma mazmuni kiritilmaydi. TLS o'z IP manzili uchun resolver sertifikatini tasdiqlaydi. Har ikkala manzil oilasi tekshiriladi va har qanday xususiy, loopback, link-local yoki bandlangan javob so'rovni rad etadi. Ulanishlar tekshirilgan raqamli manzildan foydalanadi, shu bilan birga xizmatning asl HTTP Host va TLS sertifikat nomini saqlab qoladi. Bildirishnoma HTTP yo'naltirish va CONNECT so'rovlari bir xil manzil tekshiruvlaridan foydalanadi. DNS xatosi so'rovni mahalliy manzil DNS yoki to'g'ridan-to'g'ri zaxira variantisiz to'xtatadi. Muvaffaqiyatli javoblar har bir proxy yo'nalishi bo'yicha xotirada maksimal 30 soniyaga va ularning DNS TTL muddatidan oshmay saqlanadi; kesh 128 yozuv bilan cheklangan. Proxy hostnomi o'zi mahalliy DNS-dan foydalanishi mumkin. SOCKS va CONNECT xatolari xizmat so'rovi tanasini yuborishdan oldin boshqa tekshirilgan manzilni sinab ko'rishi mumkin. Oddiy HTTP yo'naltirish esa so'rov tanasini avtomatik ravishda boshqa manzilga qayta yubormasdan, muvaffaqiyatsiz so'rovni xabar qiladi.
 
 Operator boshqariladigan xususiy xizmatlar uchun mavjud server muhit sozlamasi `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` xususiy manzillarni ruxsat etadi va proxy tomonidan host nomini aniqlashni saqlaydi. Uni panel orqali yoqib bo'lmaydi. Faqat ommaviy rejim `.onion` manzillarini ommaviy resolver so'ralmasidan oldin rad etadi; Tor onion xizmatlari aniq xususiy manzil sozlamasi va mos proxy talab qiladi. Ushbu DNS xatti-harakatlari Telegram transportiga emas, balki tashqi HTTP operatsiyalariga tegishli. Cloudflare [JSON DNS oxirgi](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) nuqtasini hujjatlashtiradi.
 
@@ -174,8 +164,6 @@ SOCKS5 va oddiy HTTP CONNECT proxy ma'lumotlarini yoki mijozdan proxyga bo'lgan 
 
 Hisobdagi **saqlash himoyasi** ushbu holatlarni ko'rsatadi. Panel tokeni shifrlash paroli emas, balki kirish siridir. U administratorga kirish huquqini beradi; [chiqarilgan tokenlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/) hisoblar va suhbatlar bo'yicha chegaralangan bo'lishi mumkin. Ish maydonchalari host jarayonini baham ko'radi va alohida izolyatsiyalangan tenantlar emas.
 
-Ochiq-oydin boshlangan, izolyatsiyalangan sintetik demo to'g'ridan-to'g'ri loopback ulanishi orqali avtomatik ravishda ochilishi mumkin. Bu alohida jarayon umr-muddati imkoniyatidan foydalanadi; u sozlangan panel tokenini oshkor qilmaydi va haqiqiy ish maydonlariga kirish huquqini bermaydi. Masofaviy, proksi orqali yoki cross-origin so'rovlar ushbu avtomatik kirish imkoniyatini ololmaydi yoki undan foydalana olmaydi. Bu qulaylik haqiqiy hisob ma'lumotlari uchun autentifikatsiya chegarasini olib tashlamaydi.
-
 BitLocker, LUKS, FileVault yoki boshqariladigan shifrlangan hajm tegishli tahdid modellariga muvofiq saqlashni himoya qilishi mumkin. Yechilmagan holda ishlayotgan mashinaning ma'murchisi hanuzgacha ma'lumotlarni o'qishi mumkin. Saqlash rejalashtirishda SQLite WAL/SHM, media, vaqtinchalik eksportlar, swap, zaxira nusxalar va brauzer yuklamalarini hisobga oling. Docker hajmi faqatgina hajm bo'lgani uchun shifrlanmaydi. TgWitness SQLCipher yoki obyekt shifrlashni amalga oshirmaydi.
 
 ## Tashqi bosh kalit
@@ -203,17 +191,3 @@ Har bir ish maydoni tasodifiy ommaviy salt va HKDF-SHA256 orqali hosil qilingan 
 Barcha ish maydonchalari bitta asosiy kalitdan kelib chiqadi; uning buzilishi butun o'rnatishga ta'sir qiladi. Ish jarayoni sirlarni dekript qila oladi. Bu HSM yoki parol KDF emas. Tasodifiy kalit o'rniga ixtiyoriy inson parollari qabul qilinmaydi.
 
 Mavjud o'rnatmalarda maqsadli migratsiya amalga oshirilib, tekshirilguncha joriy kalitni saqlang. `vault.key`ni o'chirish yoki bosh kalitni almashtirish sessiyalarga/imzolash kalitlariga kirishni yo'qotishiga olib kelishi mumkin. Shifrlangan zaxira nusxalar va kalitlarni alohida saqlang hamda tiklashni izolyatsiyalangan muhitda sinab ko'ring.
-
-## Manbalar va tekshiruv doirasi
-
-2026-yil 26-oktabrda ko'rib chiqilgan:
-
-- https://core.telegram.org/api/auth
-- https://core.telegram.org/api/obtaining_api_id
-- https://docs.telethon.dev/en/stable/basic/signing-in.html
-- https://docs.telethon.dev/en/stable/concepts/sessions.html
-- https://core.telegram.org/mtproto/mtproto-transports
-- https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp
-- Telethon 1.45.0: SQLiteSession, StringSession, String`Connection._proxy_connect`, String `TcpMTProxy.normalize_secret` va yuklab olish usullari.
-
-Mahalliy testlar loopback SOCKS5/HTTP CONNECT ulanishlari, sun'iy SQLite sessiyalari, yo'nalish izolyatsiyasi, maxfiy istisno va kalit yo'qligi rad etilishini qamrab oladi. Ular haqiqiy Telegram/proxy o'zaro mosligini yoki jonli MTProxy xulq-atvorini ta'minlamaydi. [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/) va [LIVE_ACCEPTANCE.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) hujjatlariga qarang.

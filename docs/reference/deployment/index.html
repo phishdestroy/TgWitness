@@ -112,14 +112,6 @@ your normal OS account; administrator/root privileges are not required by TgWitn
     must use Linux containers on Windows. The container installs its
     own Python dependencies; the host does not need a separate Python installation.</li>
 </ul>
-<p>Use persistent local storage for the data directory. Plan capacity from messages,
-media, WAL growth, exports and backups; there is no evidence-based universal minimum
-disk/RAM specification for every workload. CPU architectures and Python versions
-without compatible dependency wheels may require additional build tools and their
-own qualification. "Portable" is not a claim of universal OS or hardware support.</p>
-<p>Windows 11/Python 3.12 is locally verified. Linux/macOS/container definitions and CI
-are supplied but have not been executed on this development host. See
-<a href="../verification/">VERIFICATION.md</a> for the exact scope.</p>
 <h2 id="local-computer">Local computer<a class="anchor" href="#local-computer" aria-label="Link to this section">#</a></h2>
 <p>Use <code>Start.cmd</code> on Windows or <code>sh start.sh</code> on Linux/macOS. <code>scripts\Setup.cmd</code> or
 <code>sh start.sh --setup-only</code> prepares
@@ -132,7 +124,6 @@ Use <code>--json</code> for structured output. Pass the intended <code>--data-di
 <code>--port</code>. The check does not install packages, create a journal or connect Telegram;
 it is not an integrity or coverage qualification. Startup separately verifies
 existing journals. <code>python start.py --help</code> also avoids installation.</p>
-<p>Options:</p>
 <p>After using start.py, run auxiliary commands with <code>.venv\Scripts\python.exe</code> on
 Windows or <code>.venv/bin/python</code> on Linux/macOS, or activate that environment first.
 The <code>python -m ...</code> examples below assume the environment is active.</p>
@@ -181,9 +172,6 @@ package's <code>data</code> folder. To update, stop TgWitness, extract the new v
 folder and copy the <code>data</code> folder across.</p>
 <p>Build it yourself on 64-bit Windows with Python 3.12:</p>
 <pre><code class="language-sh">python tools/build_portable.py</code></pre>
-<p>The builder verifies the runtime checksum, installs the constrained dependencies into
-the package, runs the readiness check with the embedded interpreter and writes the ZIP
-and checksum to <code>dist/</code>.</p>
 <h2 id="container">Container<a class="anchor" href="#container" aria-label="Link to this section">#</a></h2>
 <pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
 <p>This creates a named persistent volume for /data.
@@ -238,9 +226,6 @@ another workspace). For a witness on a separate server, run by someone else, use
 <code>deploy/compose/compose.witness.yaml</code> there with <code>TGWITNESS_WITNESS_COLLECTOR</code> set to the collector's HTTPS
 address; that file contains only the witness.</p>
 <h2 id="install-a-published-image">Install a published image<a class="anchor" href="#install-a-published-image" aria-label="Link to this section">#</a></h2>
-<p>This becomes available after a successful <a href="#automated-github-releases">release workflow</a>
-and public GHCR package configuration. The repository's owner/name is not hardcoded
-into this source tree. Use the image shown in that release's workflow summary.</p>
 <p>Copy <code>deploy/env.example</code> to <code>.env</code>. Set <code>TGWITNESS_IMAGE</code> to the published version, using
 the <strong>lowercase</strong> repository path, for example:</p>
 <pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
@@ -301,37 +286,6 @@ directory, replace source files, and run <code>python start.py --setup-only</cod
 <p>Check panel access, account identity, observation state, and coverage after an
 update. Restarting does not reconstruct missed Telegram updates. A rollback may
 require the pre-update backup if a future version changes storage formats.</p>
-<h2 id="automated-github-releases">Automated GitHub releases<a class="anchor" href="#automated-github-releases" aria-label="Link to this section">#</a></h2>
-<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">release workflow</a> is ready to use after this
-project is pushed to a GitHub repository with Actions enabled. It runs when a
-GitHub Release is <strong>published</strong>, including a prerelease. Drafts and tag pushes
-alone do not publish packages.</p>
-<ol>
-<li>Set the package version and changelog, then publish a release tagged with <code>v</code>
-    plus the exact <code>pyproject.toml</code> version, such as <code>v0.8.0</code>.</li>
-<li>The workflow validates the tag and runs the shared Windows/Linux/macOS Python,
-    general/account-import/QR browser, source-package, and Docker checks. Fresh native installation is also
-    exercised on all three operating systems using Python 3.12.</li>
-<li>After those checks pass, it smoke-tests an ARM64 image under QEMU, publishes
-    AMD64/ARM64 images to <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>,
-    and attaches the source ZIP and Python wheel with their SHA-256 sidecars.
-    The Windows portable ZIP is the exact artifact tested by the checks workflow;
-    the release workflow downloads and publishes that artifact and its checksum.</li>
-<li>A final job downloads all three published packages again and verifies their
-    checksums. It then publishes <code>SHA256SUMS.txt</code> and <code>RELEASE-MANIFEST.json</code>, recording
-    the version, source revision and asset sizes. Uploads refuse to overwrite
-    existing release assets.</li>
-<li>After the first publication, open the GHCR package settings and set visibility
-    to <strong>Public</strong> if anonymous image pulls are intended. A public source repository
-    alone does not guarantee a public container package. Organization policies must
-    permit package publication. The workflow uses <code>GITHUB_TOKEN</code>; no registry
-    password or VPS credentials belong in the repository.</li>
-</ol>
-<p>Remote workflow success has not been established by this local preparation. ARM64
-emulation is a smoke check, not native-hardware or live Telegram qualification.
-This automates release packaging; starting a server still requires the Compose
-command and its domain/host prerequisites. Existing servers are not silently
-upgraded or restarted when a release is published.</p>
 <h2 id="remote-server">Remote server<a class="anchor" href="#remote-server" aria-label="Link to this section">#</a></h2>
 <p>Keep the service bound to loopback and use an SSH tunnel, or terminate HTTPS at a
 reverse proxy. The base Compose file is local-only; the optional
@@ -392,11 +346,6 @@ not overwritten, and incomplete downloads are not published as finished files.
 If TGWITNESS_TOKEN overrides the generated token, use a separately protected file
 containing that active value: panel-token.txt is not rewritten by the override.
 The command's SHA-256 is only a transfer checksum; independently verify the signed ZIP.</p>
-<p>Server export files remain inside each workspace's private <code>temporary-exports/</code>.
-Successful responses clean up their files. Interrupted exports are removed at the
-next workspace startup with its exclusive instance lock held. This directory is part
-of the storage threat/capacity model; use an encrypted data volume. Production-scale
-multi-gigabyte transfers still require qualification on your target system.</p>
 <p>The panel displays queued/failed media, oldest pending media, free disk, Telegram
 request pauses, and sources whose access is unconfirmed. These diagnostics are not
 a complete end-to-end delivery monitor. Workspaces share a process; a noisy account can
@@ -404,22 +353,11 @@ still affect others. Separate worker processes, retention/rotation, durable upda
 recovery and full deployment qualification remain. Scoped panel access is documented
 in <a href="../access/">access and permissions</a>; independent checkpoints are covered by the
 <a href="../witness/">witness guide</a>.</p>
-<h2 id="connection-and-protection-options">Connection and protection options<a class="anchor" href="#connection-and-protection-options" aria-label="Link to this section">#</a></h2>
-<p>Connection routes are per workspace and should be configured before authorization.
-SOCKS5/HTTP CONNECT use the pinned python-socks dependency. MTProxy uses Telethon's
-experimental randomized intermediate transport; Fake TLS ee secrets are unsupported.
-Direct fallback depends on the selected <a href="../connection/#ip-modes">IP mode</a>: <strong>Hide the address</strong> refuses it; <strong>Direct as a last resort</strong> permits it after a delay. <strong>Server behind a tunnel or VPN</strong> permits direct routes but does not create a VPN. This is not a system-wide network policy.</p>
-<p>For new installations, TGWITNESS_VAULT_KEY_FILE points to a separately protected random
-master-key file. Mount it read-only outside /data in a container. Preserve the public
-vault.external.json salt metadata with each workspace and the master key separately.
-Existing local vaults require a planned migration; setting this variable does not
-silently convert them. Message/media storage and exports are not application-encrypted.
-Use encrypted volumes and sufficient private temporary storage where needed.</p>
 <p>Detailed procedures: <a href="../connection/">connection/security</a> and
 <a href="../operations/">operating modes</a>.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../high-assurance/"><span>Next step</span><strong>High-assurance deployment →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
 </main>
-<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#choose-an-installation">Choose an installation</a><a href="#installation-requirements">Installation requirements</a><a href="#local-computer">Local computer</a><a href="#windows-portable-package">Windows portable package</a><a href="#container">Container</a><a href="#install-a-published-image">Install a published image</a><a href="#automatic-https-on-a-server">Automatic HTTPS on a server</a><a href="#updates-and-backups">Updates and backups</a><a href="#automated-github-releases">Automated GitHub releases</a><a href="#remote-server">Remote server</a><a href="#restart-and-gaps">Restart and gaps</a><a href="#backup-restore-and-capacity">Backup, restore, and capacity</a><a href="#connection-and-protection-options">Connection and protection options</a></aside>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#choose-an-installation">Choose an installation</a><a href="#installation-requirements">Installation requirements</a><a href="#local-computer">Local computer</a><a href="#windows-portable-package">Windows portable package</a><a href="#container">Container</a><a href="#install-a-published-image">Install a published image</a><a href="#automatic-https-on-a-server">Automatic HTTPS on a server</a><a href="#updates-and-backups">Updates and backups</a><a href="#remote-server">Remote server</a><a href="#restart-and-gaps">Restart and gaps</a><a href="#backup-restore-and-capacity">Backup, restore, and capacity</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
 <script id="site-dict" type="application/json">{}</script>

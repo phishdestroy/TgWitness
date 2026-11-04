@@ -224,9 +224,6 @@ provenant de comptes supplémentaires, ne constitue pas un modèle de dimensionn
 valeur est modifiable par espace de travail dans <strong>les paramètres</strong>. Les exportations ne sont soumises à aucune limite fixe de nombre d’événements.
 Le mode de secours via le navigateur est limité à 128 MiB par défaut ; l’interface CLI de streaming dispose d’une
 limite de transfert configurable, fixée à 5 GiB par défaut.</p>
-<p><code>tools/check_capacity.py</code> mesure l’ingestion et l’exportation de données synthétiques au niveau local. Ses résultats
-ne constituent pas des mesures de livraison de Telegram ni un décompte garanti des conversations réelles. Consultez
-<a href="../verification/">le fichier VERIFICATION.md</a> pour connaître la version mesurée et la charge de travail.</p>
 <h2 id="reliability-and-recovery">Fiabilité et récupération<a class="anchor" href="#reliability-and-recovery" aria-label="Lien vers cette section">#</a></h2>
 <p>Les fonctionnalités implémentées comprennent : WAL SQLite et transactions synchrones ; écritures atomiques des messages
 et des tâches multimédias ; tâches persistantes et délais de réessai ; descripteurs de version d’origine ;

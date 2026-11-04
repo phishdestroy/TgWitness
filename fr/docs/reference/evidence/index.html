@@ -138,11 +138,6 @@ ne permet pas d’obtenir un horodatage.</li>
 <p>Une vérification réussie établit l’intégrité par rapport à la clé de collecte de confiance
 et aux limites définies. Consultez <a href="#verification-scope">la portée de la vérification</a> pour connaître les
 hypothèses de confiance et <a href="../verification/">les résultats</a> <a href="../verification/">de validation</a> des contrôles effectués.</p>
-<p>Les notifications envoyées via Apprise aident les opérateurs à suivre l’activité de l’espace de travail et des discussions.
-Elles contiennent des noms et des nombres ; les extraits de messages supprimés et modifiés sont facultatifs
-et désactivés par défaut. Utilisez le journal signé et les exportations pour l’enregistrement conservé.
-Avec un proxy d’espace de travail, les notifications empruntent le même chemin ; les services qui ne peuvent pas l’utiliser,
-ainsi que les chemins MTProxy, sont refusés.</p>
 <h2 id="handover-extract">Extrait de la passation de pouvoir<a class="anchor" href="#handover-extract" aria-label="Lien vers cette section">#</a></h2>
 <p>Un fichier ZIP signé contient l&#x27;intégralité du journal de l&#x27;espace de travail. Lorsqu&#x27;un tribunal, un avocat ou un service de lutte contre les abus n&#x27;a besoin
 que de certaines conversations, d&#x27;une période donnée ou de certaines personnes, la fonction « <strong>Exportations → Extrait de transfert »</strong> prépare une copie allégée
@@ -226,12 +221,6 @@ de filtrage, d'affichage des participants, des indicateurs, des détails des enr
 --evidence ARCHIVE.zip</code> pour les comparer avec l'archive signée.
 Le vérificateur contrôle l’ID du rapport, la clé de signature, la limite de l’archive et chaque élément sélectionné ; les éléments modifiés,
 manquants ou en double sont rejetés. Les notes de sélection et l’heure de création restent des métadonnées non signées.</p>
-<p>Les exportations d'archives actuelles stockent les segments de visualisation dans <code>viewer/*.html</code>. Chaque segment est chargé dans un cadre en mode sandbox
-où les scripts sont autorisés, mais <strong> sans accès de même origine que </strong>, et publie son texte JSON dans le rapport.
-Le rapport vérifie la source du message et son SHA-256 par rapport au descripteur signé avant l'affichage.
-La CSP propre au rapport n’autorise que son script d’application haché. Les données manquantes peuvent être récupérées en
-sélectionnant le fichier ZIP correspondant dans l’onglet « Vérifier » ; les données lues à partir du fichier ZIP sont analysées sans être exécutées.
-Les rapports exportés antérieurement conservent leur propre visionneuse intégrée et restent vérifiables.</p>
 <p>Les écarts entre les numéros de messages ne s'affichent que pour un flux de discussion complet, non filtré et classé par ordre croissant. Le fait de masquer une
 catégorie ou de ne pas parvenir à charger un bloc de données ne doit pas transformer une ligne omise en preuve de l'absence d'un
 message. Les surlignages de recherche s'appliquent au texte brut avant l'échappement « HTML », en conservant le balisage littéral.</p>
@@ -244,20 +233,6 @@ remarques sur le format des données dans la langue du rapport, suivis d’un gu
 fichiers qui y sont répertoriés, à l’exception de lui-même, de <code>manifest.json</code> et de <code>manifest.sig</code> ; le manifeste signé
 couvre également <code>SHA256SUMS</code>. Ne modifiez pas le fichier ZIP d’origine et enregistrez les fichiers de travail en dehors du
 dossier extrait. Les rapports PDF comprennent des signets de section et l’identification du dossier/rapport sur les pages suivantes.</p>
-<p>Les paramètres des rapports sont enregistrés par espace de travail. La langue du rapport peut suivre celle du panneau ou être fixe ;
-une langue explicitement spécifiée dans une demande d’exportation remplace ce choix pour cette exportation uniquement. Toutes les langues
-du panneau sont acceptées, y compris les quatre langues s’écrivant de droite à gauche.</p>
-<p>Le commutateur de transcription du journal contrôle sa visionneuse HTML et sa transcription PDF. L'enregistrement complet JSON est
-une option de détail HTML : lorsqu'elle est activée, la visionneuse affiche l'enregistrement exporté à l'identique, y compris un
-enregistrement réduit lors d'un transfert. Sa désactivation ne modifie pas le fichier journal de référence. Les
-aperçus photo s’appliquent à la fois au chat et au journal HTML. Les séries consécutives de pulsations peuvent être réduites sans
-supprimer d’enregistrements ; le développement de longues séries charge leurs lignes de manière incrémentielle.</p>
-<p><code>part_size</code> correspond au nombre maximal d’éléments par fichier de données de visualisation (500–100 000) et à la taille maximale de la transcription
-incluse dans un fichier PDF. Les segments de visualisation sont également fractionnés à partir d’un seuil de 16 Mio de données. Les transcriptions PDF plus longues
-sont omises, avec un pointeur explicite vers les fichiers sources signés et le visualiseur HTML. Un rapport autonome de type « HTML »
-intègre au maximum 20 000 éléments ou 32 Mio de données d’éléments ; une fois cette limite dépassée, il libère ces éléments et
-redirige le lecteur vers l’archive. Ces limites d’affichage ne tronquent jamais les fichiers sources signés.
-La configuration de polices PDF combine les polices CJK lorsque cela est nécessaire : une police chinoise seule peut ne pas inclure le hangul coréen.</p>
 <h3 id="the-chat-at-export-time">La conversation au moment de l'exportation<a class="anchor" href="#the-chat-at-export-time" aria-label="Lien vers cette section">#</a></h3>
 <p>Une exportation de discussion enregistre ce que Telegram indiquait à propos de la discussion au moment où l'exportation a commencé : les propres
 étiquettes de Telegram (<code>scam</code>, <code>fake</code>, <code>restricted</code> avec leurs justifications, <code>verified</code>), les noms d'utilisateur, la description, le nombre de
@@ -472,10 +447,6 @@ de la vérification, aucun fichier restauré n’est publié. Les contrôles de 
 et la date renvoyés avec le délai envoyé lors du téléchargement (tolérance d’arrondi d’une seconde). Un délai expiré,
 non valide ou raccourci n’est pas considéré comme vérifié. Le statut indique l’objet échantillonné
 dont la conservation a été relue pour ce cycle de téléchargement.</p>
-<p>La progression de la copie est limitée à la destination et à la clé de chiffrement. La modification du point de terminaison, du compartiment
-ou du préfixe déclenche une copie complète du journal, des médias et des points de contrôle conservés localement vers
-cette destination. L’ancienne progression non limitée est conservée, mais n’est relancée qu’une seule fois après la mise à niveau. Les exportations historiques
-de discussions déjà supprimées de la boîte d’envoi locale restent à leur destination précédente.</p>
 <p>Les fichiers locaux manquants ou corrompus sont signalés comme une erreur du cycle et le curseur de fichier reste positionné avant
 ceux-ci, de sorte que le fichier soit réessayé lors du cycle suivant ; les fichiers, points de contrôle et exportations qui suivent sont tout de même
 copiés. La restauration vérifie
@@ -544,9 +515,6 @@ a été enregistrée, ainsi que chaque nouvelle session et chaque session termin
 <p>Ce qu’ils ne montrent pas : drand ne prouve rien de plus que l’ordre des enregistrements par rapport à l’heure publique,
 et la liste des appareils correspond à la déclaration de Telegram transmise par le collecteur, signée par ce dernier
 comme tous les autres enregistrements.</p>
-<p>Testé le 1er novembre 2026 : <code>tools/check_evidence_witnesses.py --live</code> a rédigé un véritable échange avec
-<code>drand.cloudflare.com</code>, a exporté le journal et a confirmé l'échange avec <code>drand.cloudflare.com</code>
-et <code>api.drand.sh</code> ; la liste des appareils a été testée avec des réponses simulées de Telegram, et non avec un compte réel.</p>
 <p><strong> Journal de Cloudflare Gateway </strong> (<code>cloudflare.gateway_dns</code>). Pour un serveur dont la résolution s'effectue via
 Cloudflare Gateway (<a href="../high-assurance/#cloudflare-as-an-outside-witness"> Gateway DNS </a>), chaque
 pass copie ce que Gateway a enregistré depuis la copie précédente : un enregistrement par fenêtre de trois

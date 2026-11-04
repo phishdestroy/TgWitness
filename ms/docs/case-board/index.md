@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/case-board/
 
-Ubah pemerhatian Telegram yang disimpan menjadi satu kes yang boleh disemak bersama oleh pasukan anda.
+Jadikan mesej tersimpan sebagai kes yang diusahakan pasukan anda bersama.
 
-Case Board menyimpan penanda buku, sorotan teks tepat, potongan yang disimpan dan perbincangan di sebelah rujukan sumber mereka. Satu koleksi memberikan kes tersebut struktur kerja; semakan bertandatangan mengekalkan bagaimana pasukan membangunkan ia.
+Tanda buku, petikan tepat, hirisan dan perbincangan, setiap satu dipautkan ke sumbernya. Setiap perubahan ialah semakan bertandatangan.
 
 ## Dari mesej ke kad kes
 
-1. Buka **Siasatan → Papan Kes** dalam mod Standard atau Pakar. Buat satu koleksi untuk kes dan pilih skop sembangannya.
-2. Dalam **Jurnal** atau sembang yang disimpan, pilih **'To board**', atau fokuskan rekod dan tekan **B**. Kad itu memasuki Inbox; beri tajuk yang berguna dan pindahkan ke koleksi anda.
-3. Pilih petikan dalam mesej sembang yang disimpan dan pilih **Sorot → papan** untuk mengekalkan petikan tepat dan versi mesej. Tambah nota yang menerangkan mengapa ia penting.
-4. Bincangkan kad, tetapkan status semakan, dan kembali ke konteks sumbernya setiap kali tuntutan perlu disemak. Gunakan **Presentation** untuk meneroka koleksi bersama rakan sekerja.
+1. **Siasatan → Papan Kes** (mod Standard atau Pakar). Buat koleksi untuk kes itu.
+2. Dalam **Jurnal** atau sembang tekan **Ke papan** (atau **B**). Kad masuk ke Peti Masuk, beri tajuk dan alihkannya.
+3. Pilih teks dalam mesej, **Serlahkan → papan** menyimpan petikan tepat dan versinya. Catat mengapa ia penting.
+4. Bincang, tetapkan status, kembali ke sumber bila-bila perlu. **Pembentangan** membawa pasukan melaluinya.
 
 ### Ikuti satu pautan pembayaran yang telah diubah
 
@@ -48,16 +48,16 @@ Anotasi dan pemerhatian Telegram kekal boleh dikenal pasti secara berasingan.
 
 ## Simpan julat berguna sekali
 
-Klik Shift pada dua rekod dalam satu sembang untuk **Slice between**, pilih **Slice by time**, atau simpan penapis Journal semasa. Semak bilangan sebelum menyimpan. Buka semula slice untuk menerapkan pertanyaan yang disimpannya; **Tunjukkan rekod yang ditambah sejak penanda buku** untuk mendedahkan penambahan kemudian.
+Shift-klik dua mesej untuk **Hiris di antara**, gunakan **Hiris mengikut masa**, atau simpan penapis Jurnal semasa. **Tunjukkan rekod yang ditambah sejak tanda buku** menunjukkan apa yang masuk kemudian.
 
-Potongan masa mengikuti masa pemerhatian pengumpul. Potongan ID-mesej boleh mengikuti mesej yang dipilih apabila perubahan kemudian tiba. Batas penciptaan yang disimpan membolehkan penerima membandingkan pemilihan asal dengan keadaannya kemudian.
+Hirisan masa menggunakan masa pemerhatian; hirisan ID mesej mengikuti mesej tersebut apabila ia berubah.
 
 ## Berikan setiap rakan sekerja peranan yang betul
 
-**Pemeriksa** membaca papan; **Penganalisis** menambah kad dan komen; **Pengendali** juga menguruskan koleksi dan keputusan semakan. Kebenaran ruang kerja dan sembang terpakai pada kad, konteks sumber dan perbincangan. Gunakan pemberian akses bernama untuk atribusi yang jelas.
+**Penyemak** membaca, **Penganalisis** menambah kad dan komen, **Pengendali** juga mengurus koleksi dan keputusan. Kebenaran sembang terpakai pada kad juga.
 
 ## Bawa kerja ini ke dalam dokumen penghantaran
 
-Eksport hirisan sebagai JSON yang ditandatangani, atau gunakan CSV untuk hamparan. Tetapan laporan boleh merangkumi penanda buku dan hirisan, dengan komen pasukan apabila dipilih. Pilih kandungan ini di [Studio Laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reports/); hirisan yang disimpan tidak secara automatik mengkonfigurasi laporan. Untuk penerima terhad, gunakan [kawalan penyerahan](https://phishdestroy.github.io/TgWitness/ms/docs/handover/) berasingan.
+Hirisan dieksport sebagai JSON bertandatangan atau CSV. Laporan boleh merangkumi tanda buku, hirisan dan komen, tetapkannya dalam [Report studio](https://phishdestroy.github.io/TgWitness/ms/docs/reports/). Untuk penerima terhad, gunakan [serahan](https://phishdestroy.github.io/TgWitness/ms/docs/handover/).
 
-Bacalah [rujukan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/) [Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/) untuk semakan bertandatangan, padanan petikan tepat, pengesahan pemilihan dan kebenaran.
+Butiran: [rujukan Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/).

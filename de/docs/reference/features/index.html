@@ -224,9 +224,6 @@ ersten 1.000 aufgelisteten Dialogen, bis zu 500 Nachrichten pro Verlaufs-Snapsho
 können pro Arbeitsbereich unter <strong>„Parameter“</strong> angepasst werden. Exporte unterliegen keiner festen Obergrenze für die Anzahl der Ereignisse.
 Der Browser-Fallback ist standardmäßig auf 128 MiB begrenzt; die Streaming-CLI verfügt über ein konfigurierbares
 Übertragungslimit, standardmäßig 5 GiB.</p>
-<p><code>tools/check_capacity.py</code> misst die lokale Erfassung und den Export synthetischer Daten. Die Ergebnisse
-stellen keine Messungen der Telegram-Zustellung dar und garantieren keine tatsächliche Chat-Anzahl. Siehe
-<a href="../verification/">VERIFICATION.md</a> für die gemessene Version und die Arbeitslast.</p>
 <h2 id="reliability-and-recovery">Zuverlässigkeit und Wiederherstellung<a class="anchor" href="#reliability-and-recovery" aria-label="Link zu diesem Abschnitt">#</a></h2>
 <p>Zu den implementierten Funktionen gehören SQLite-WAL/synchrone Transaktionen; atomare
 Schreibvorgänge für Nachrichten und Medienaufträge; persistente Aufträge und Wiederholungsverzögerungen; Deskriptoren für Originalversionen;

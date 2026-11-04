@@ -2,45 +2,45 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/proxies/
 
-Hisobni ulangan holda saqlang. Qachon uning yo'li server manzilidan foydalanishi mumkinligini aniq belgilang.
+Hisobni onlayn saqlang va server IP'sini ko'rsatishi mumkinmi yoki yo'qmi, o'zingiz hal qiling.
 
 ## Avvalo IP rejimini tanlang
 
 01**Manishani yashirish**
 
-Proxy-dan foydalaning. Hech biri ishlamasa, Telegramga bevosita ulanmasdan kuting.
+Faqat proksi. Hech biri ishlamasa, kutadi.
 
 02**Oxirgi chora sifatida to'g'ridan-to'g'ri**
 
-Sozlangan kechikishdan so'ng Direct ruxsat etilsin; javob berilganda ishchi proksiga qaytish.
+Kechikishdan keyin to'g'ridan-to'g'ri ulanadi, biror proksi ishlashi bilan unga qaytadi.
 
 03**Tunnel yoki VPN ortidagi server**
 
-Mehmondo'st tarmog'i orqali to'g'ridan-to'g'ri yo'nalishlarni ruxsat eting. Ushbu opsiya VPNni o'rnatmaydi yoki tekshirmaydi.
+To'g'ridan-to'g'ri ulanish mumkin. U siz uchun VPN'ni sozlamaydi va tekshirmaydi.
 
 Yo'l ulanishni tanlaydi. IP rejimi to'g'ridan-to'g'ri ulanishga ruxsat berilishini aniqlaydi.
 
 ## Let the pool maintain the route
 
-1. **Hisobni** oching **→ Sozlamalar → Ulanish sozlamalari**.
-2. IP rejimini va **avtomatik MTProxy-ni** tanlang yoki doimiy marshrutni kiriting.
-3. **Telegram ulanishini sinovdan o'tkazishni** saqlang va ishga tushiring. Bu shuningdek tizimga kirishdan oldin ham ishlaydi.
-4. Yig'ishni boshlagandan so'ng, nazorat ostidagi xabar jurnalga yetib kelganini tekshiring.
+1. **Hisob → Sozlamalar → Ulanish sozlamalari**.
+2. IP rejimini va **Avtomatik MTProxy**ni yoki qat'iy marshrutni tanlang.
+3. Saqlang, **Telegram ulanishini sinash** (kirishdan oldin ham ishlaydi).
+4. Yig'ishni boshlang va o'zingizga sinov xabari yuboring.
 
-Yangi ish maydonchalari avtomatik proxy (MTProxy) va **manzilni yashirish (Hide the address**) funksiyasidan foydalanadi. Havza to'rtta ommaviy manbani birlashtiradi, kirishlarni tekshiradi, ishlayotgan yo'nalishlarni saqlab qoladi va ishlamay qolgan proxylarni almashtiradi. Muvaffaqiyatsiz yuklab olishlar oldingi snapshotlarni saqlab qoladi.
+Yangi ish maydonlari avtomatik MTProxy va **Manzilni yashirish** bilan boshlanadi. Pul to'rtta ochiq ro'yxatni oladi, serverlarni tekshiradi, yaxshilarini saqlaydi va o'liklarini almashtiradi.
 
 ## O'zingizning proksingizdan foydalaning
 
-SOCKS5 yoki HTTP CONNECT ma'lumotlarini kiriting, qo'llab-quvvatlanadigan Telegram proksi havolasini joylang yoki operator katalogini taqdim eting. Faol marshrutni o'zgartirishdan oldin kuzatuvni to'xtating. `ee` bilan boshlanadigan soxta TLS MTProxy sirlarini qo'llab-quvvatlamaydi.
+SOCKS5, HTTP CONNECT, Telegram proksi havolasi yoki operator katalogi. Almashtirishdan oldin kuzatuvni to'xtating. Fake TLS sirlari (`ee`…) ishlamaydi.
 
 **Aylantirish, ulashish va qayta urinish sozlamalari**
 
-**Parametrlar → Avtomatik MTProxy** bo'limida xato chegaralarini, sovish muddatlarini, rejalashtirilgan aylantirishni va har bir proxy uchun hisoblarni sozlang. Ulashish chegarasi birga belgilanganida, eksklyuziv yozuv mavjud bo'lmaganda hisob kutishga majbur bo'ladi. Ro'yxatni yangilash va probe intervallari asosiy ish maydonining qiymatlariga amal qiladi. Alohida proxy'lar alohida chiqish IP manzillarini kafolatlamaydi.
+**Parametrlar → Avtomatik MTProxy**: xato chegaralari, tanaffuslar, aylanish, har bir proksiga hisoblar. Cheklov 1 hisob ulashish o'rniga kutishini bildiradi. Turli proksilar baribir bitta chiqish IP'sini bo'lishishi mumkin.
 
 ## Telegramni tashqi so'rovlardan ajratish
 
-MTProxy faqat Telegram trafigini o'tkazadi. Vaqt tamg'alari, bildirishnomalar, nusxalar va manba tekshiruvlari alohida SOCKS5/HTTP proksi, hisobning SOCKS5/HTTP yo'li yoki IP rejimi ruxsat etsa Direct orqali amalga oshiriladi. Ushbu tashqi so'rovlarni o'chirib qo'yish mumkin.
+MTProxy faqat Telegram'ni tashiydi. Vaqt belgilari, bildirishnomalar, nusxalar va kod tekshiruvlari alohida SOCKS5/HTTP proksi, hisobning SOCKS5/HTTP marshruti yoki rejim ruxsat bersa to'g'ridan-to'g'ri o'tadi. Yoki ularni o'chiring.
 
-`TGWITNESS_PROXY_FEED_PROXY` aniq yo'lni sozlaydi. [Mustaqil guvoh](https://phishdestroy.github.io/TgWitness/uz/docs/witness/) o'z sozlamalarini saqlaydi. Ushbu boshqaruvlar tizim VPN-ni o'rnatmaydi va brauzer trafigini yo'naltirmaydi.
+`TGWITNESS_PROXY_FEED_PROXY` ro'yxatlarni yuklab olish marshrutini belgilaydi. [Guvoh](https://phishdestroy.github.io/TgWitness/uz/docs/witness/)ning o'z sozlamalari bor. Bularning hech biri brauzeringiz yoki tizim tarmog'ingizga tegmaydi.
 
-[Barcha rejimlar, standart sozlamalar va manba ro'yxatlarini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/#ip-modes) ko'ring yoki [hisob yo'nalishini kim o'zgartirishi mumkinligini tanlang](https://phishdestroy.github.io/TgWitness/uz/docs/access/).
+Batafsil: [rejimlar va standart qiymatlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/#ip-modes), [marshrutlarni kim o'zgartira oladi](https://phishdestroy.github.io/TgWitness/uz/docs/access/).

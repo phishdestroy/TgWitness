@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/witness/
 
-Alohida jarayon jurnalni tekshirsin va imzolangan tekshiruv nuqtalarini kanalingizga e'lon qilsin.
+Alohida jarayon jurnalingizni tekshiradi va imzolangan nazorat nuqtalarini kanalga joylaydi.
 
 ## Ikki mezbon, ikki imzolash kaliti
 
@@ -36,33 +36,33 @@ Barcha javob misollari haqiqiy imzo va biriktirilgan kalitni taxmin qiladi. Bu y
 
 ## Bot va kanal tayyorlang
 
-BotFather yordamida bot yarating va uni o'zingiz nazorat qiladigan kanalga post qilishga ruxsat bering. Guvoh uchun kompyuter yoki server tanlang. Alohida host va operator kollektor serveridagi ikkinchi jarayondan ko'ra kuchliroq mustaqillikni ta'minlaydi.
+BotFather bilan bot yarating va unga kanalingizda post qilishga ruxsat bering. Guvohni boshqa joyda ishga tushiring: boshqa xost, iloji bo'lsa boshqa kishi boshqaradigan, kollektor yonidagi ikkinchi jarayondan ancha qimmatli.
 
 ## Extras bo'limida uchta qadam
 
-1. **Faqat o'qish huquqi.**ni oching, **Qo'shimchalar → Mustaqil guvoh** yarating va kirish faylini saqlang. Bu tekshiruv nuqtalarini va holatni o'qishga imkon beradi, suhbatlarni yoki kollektor boshqaruvlarini emas.
-2. **Kanal va intervallar.** Telegram kanalini yoki Discord webhook-ni tanlang va guvohdan erishiladigan kollektor manzilini kiriting. Sozlamalar faylini saqlang.
-3. **Boshlash.** Witness hostida yaratilgan `witness.json`, `witness-token.txt` va `bot-token.txt` ni birga joylashtiring. O'rnatilgan loyiha muhitida quyidagi buyruqlarni ijro eting.
+1. **Faqat o'qish uchun kirish.** **Qo'shimchalar → Mustaqil guvoh**, token yarating, faylni saqlang. U faqat nazorat nuqtalari va holatni o'qiydi.
+2. **Kanal va interval.** Telegram kanali yoki Discord webhook'i, shuningdek guvoh yeta oladigan kollektor manzili. Sozlamalar faylini saqlang.
+3. **Ishga tushirish.** `witness.json`, `witness-token.txt` va `bot-token.txt` ni guvoh xostiga birga joylashtiring va ishga tushiring:
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
 python -m tgwitness.witness run --config witness.json
 ```
 
-Fayllarni yuklab olish witness dasturini ishga tushirmaydi. Kanalda birinchi imzolangan post paydo bo'lishini tekshiring, so'ngra guvohning jamoat kaliti barmoq izini alohida saqlang.
+Kanalda birinchi imzolangan post chiqishini kuting, so'ng guvoh barmoq izini xavfsiz joyda saqlang.
 
-Discord uchun kanalning webhook URL manzilini `discord-webhook.txt` bot tokeni o'rniga. Witness yozuvni faqat bitta joyga – Telegram kanali yoki Discord kanali – joylaydi; Discord xabaridan uzunroq tekshiruvlar esa ilova qilingan fayl sifatida keladi.
+Uning o'rniga Discord? Webhook URL'ini `discord-webhook.txt` sifatida saqlang. Bitta guvoh bitta joyga post qiladi; uzun tekshiruvlar Discord'ga fayl sifatida keladi.
 
 ## Nashr etish chastotasini tanlang
 
-Har bir tekshiruvni e'lon qilish muntazam tashqi yozuvni yaratadi. Har besh daqiqada, bu kuniga har bir ish maydoni uchun taxminan 288 ta postga to'g'ri keladi. Kengaytirilgan sozlamalar o'zgarishlar yoki muammolar bo'lganda e'lon qilish, proksi va maxsus Bot API manzilini ham taklif etadi.
+Har bir tekshiruvni post qilish muntazam tashqi yozuv beradi: har besh daqiqada bu har bir ish maydoni uchun kuniga taxminan 288 ta post. Kengaytirilgan sozlamalar faqat o'zgarish yoki muammo bo'lganda post qilishi, proksi yoki maxsus Bot API ishlatishi mumkin.
 
 **Bot aslida nimani tasdiqlaydi?**
 
-Guvoҳ yig'uvchidan imzolangan tekshiruv nuqtasini so'raydi, uni kutilayotgan kalitga qarshi tekshiradi va alohida imzolangan jurnalni saqlaydi. U yo'qolgan javoblar va rad etilgan javoblarni, shuningdek muvaffaqiyatli tekshiruvlarni qayd etadi. Nashr guvoҳ Telegram Bot APIga ulanib, uni ishga tushirishiga bog'liq bo'lib qoladi.
+U kollektordan imzolangan nazorat nuqtasini so'raydi, uni kutilgan kalit bilan tekshiradi va o'z imzolangan jurnalini, o'tkazib yuborilgan va rad etilgan javoblar bilan birga, saqlaydi.
 
-U yig'uvchining xabar bergan jurnal holatini tekshiradi. U har bir Telegram xabarini mustaqil ravishda kuzatmaydi. Buning uchun nazorat ostidagi yetkazib berish testini qo'shing.
+U jurnal holatini tekshiradi, Telegram'ning o'zini kuzatmaydi. Buning uchun nazorat ostidagi yetkazish sinovini o'tkazing.
 
 ## Dalillarni keyin tekshiring
 
-Guvoxlik jurnalini, kanal postlarini va mustaqil saqlangan barmoq izlarini saqlang. [To'liq tekshirish protsedurasi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#verify) ularni yig'uvchining imzolangan eksporti bilan solishtiradi.
+Guvoh jurnali, postlar va barmoq izlarini saqlang. Kollektor eksportiga nisbatan [ularni qanday tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#verify).

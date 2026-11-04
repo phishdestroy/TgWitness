@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reports/
 
-Hướng dẫn người đọc một lộ trình rõ ràng từ câu hỏi vụ việc đến các bản ghi đã lưu.
+Đưa người đọc từ câu hỏi của vụ việc thẳng tới các bản ghi đã lưu.
 
-Report Studio kết hợp tính năng chọn dữ liệu, lịch sử thay đổi dễ đọc, biểu đồ và các kết luận bằng văn bản của bạn. Tám mẫu thiết kế tích hợp áp dụng cho các định dạng đầu ra HTML và PDF gốc được hỗ trợ. Các báo cáo HTML, PDF và JSON đều có con dấu đã ký riêng; tệp ZIP manifest cũng liên kết các tệp trong gói. HTML và PDF được niêm phong sau khi bố cục cuối cùng hoàn tất.
+Report studio ghép dữ liệu bạn chọn, lịch sử thay đổi, biểu đồ và các phát hiện của bạn. Tám thiết kế, HTML và PDF gốc. Mọi báo cáo HTML, PDF và JSON đều được niêm phong bằng khóa của bạn.
 
 ## Tạo báo cáo trong ba bước
 
-1. Mở **Exports → Configure and preview → Data**. Sử dụng toàn bộ không gian làm việc hoặc chọn các cuộc trò chuyện, tác giả, bao gồm cả ngày quan sát theo UTC và các loại bản ghi. Các ngày này mô tả thời điểm TgWitness quan sát được bản ghi.
-2. Trong phần **“Thiết kế & nội dung**”, hãy chọn một mẫu thiết kế và nội dung có sẵn. Chọn biểu đồ hoạt động, nhãn người tham gia, bản ghi chép, các thay đổi đã lưu và tài liệu Case Board tùy chọn. Thêm chi tiết vụ việc và ghi chú điều tra của bạn.
-3. Mở **phần** **Xem trước** để xem số liệu thống kê, hoạt động, người tham gia, các bản ghi được lấy mẫu và các dải ID bị thiếu. Lưu cài đặt, sau đó tải xuống định dạng bạn cần.
+1. **Xuất → Cấu hình và xem trước → Dữ liệu**: toàn bộ không gian làm việc, hoặc chọn cuộc trò chuyện, tác giả, ngày (UTC, lúc TgWitness thấy bản ghi) và loại bản ghi.
+2. **Thiết kế & nội dung**: chọn thiết kế và những gì được đưa vào: biểu đồ, người tham gia, bản ghi hội thoại, thay đổi, mục Case Board, chi tiết vụ việc và ghi chú của bạn.
+3. **Xem trước**: kiểm tra số lượng, hoạt động, mẫu và các dải ID bị thiếu. Lưu, rồi tải định dạng bạn cần.
 
 ### Sắp xếp lại các tài liệu đã lưu trữ sao cho phù hợp với người đọc
 
@@ -55,16 +55,16 @@ Người nhận kiểm tra tệp và dấu vân tay đáng tin cậy.
 
 ## Chọn phong cách trình bày
 
-**Các chế độ Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series và Ledger & margin** trình bày cùng một bản ghi cơ bản dưới các bố cục khác nhau. Việc thay đổi thiết kế vẫn giữ nguyên lựa chọn dữ liệu và các ghi chú đã viết. Ngôn ngữ báo cáo có thể được chọn từ 25 ngôn ngữ được hỗ trợ.
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin**: cùng bản ghi, khác diện mạo. Khi chuyển, lựa chọn và ghi chú của bạn vẫn được giữ. Bất kỳ ngôn ngữ nào trong 25 ngôn ngữ.
 
-Chuỗi đọc nhóm các trường hợp, phạm vi, kết quả và thay đổi xung quanh một thanh phân đoạn. Ledger & margin sử dụng các chương được đánh số và lề rộng. Cả hai đều hỗ trợ tổng quan HTML tài khoản và chia sẻ bản sao. Các tệp PDF gốc được tạo ra với các phông chữ đi kèm; máy tính của người dùng không cần cài đặt trình duyệt hoặc Node để tạo PDF. Các tệp PDF tiếng Trung, tiếng Nhật và tiếng Hàn còn yêu cầu một phông chữ phù hợp trên máy chủ, chẳng hạn như Noto Sans CJK, được cài đặt trên toàn hệ thống hoặc đặt trong thư mục `TGWITNESS_FONT_DIR`. Nếu không có phông chữ này, tệp ZIP sẽ chỉ giữ lại các báo cáo HTML và JSON.
+PDF được tạo bằng phông chữ đi kèm, không cần trình duyệt. Tiếng Trung, Nhật và Hàn cần phông chữ như Noto Sans CJK trên máy chủ (toàn hệ thống hoặc trong `TGWITNESS_FONT_DIR`), nếu không bạn chỉ có HTML và JSON.
 
 ## Đọc nội dung thay đổi cùng với bối cảnh của nó
 
-Các chỉnh sửa đã lưu hiển thị cả phiên bản trước và sau. Thông báo xóa có thể đi kèm với phiên bản cuối cùng được ghi lại. Các phản hồi, trích dẫn, chia sẻ, phản ứng, nút bấm và siêu dữ liệu tệp đính kèm vẫn giữ nguyên các tham chiếu có sẵn. Băm SHA-256 của tệp và băm bản ghi nhật ký được ghi nhãn riêng biệt.
+Lần sửa hiển thị trước và sau, lần xóa hiển thị phiên bản đã lưu cuối cùng. Trả lời, chuyển tiếp, biểu cảm, nút và tệp đính kèm giữ nguyên tham chiếu.
 
-Bản xem trước thiết kế hiển thị các thành phần bìa, kiểm tra và biểu đồ bằng cách sử dụng các bản ghi khớp nhau trong số 50.000 bản ghi nguồn đầu tiên. Bản xem trước dữ liệu riêng biệt quét toàn bộ bản chụp nhật ký ổn định để xác định số lượng lựa chọn chính xác, với các giới hạn mẫu được hiển thị và gắn nhãn. Tạo tệp PDF để kiểm tra cách phân trang cuối cùng. Việc xuất toàn bộ tài khoản có bản tổng quan dưới dạng HTML; các tệp PDF trò chuyện riêng lẻ sử dụng thiết kế đã chọn.
+Bản xem trước thiết kế dùng 50.000 bản ghi đầu tiên, bản xem trước dữ liệu đếm chính xác mọi thứ. Để xem bố cục trang cuối cùng, hãy tạo PDF.
 
 ## Chọn bản dành cho người nhận một cách cẩn thận
 
-Các bộ lọc báo cáo giúp định hình báo cáo dễ đọc. Tệp ZIP chứa toàn bộ bằng chứng giữ nguyên nhật ký gốc và các tệp đính kèm. Sử dụng quy trình [bàn giao tối giản](https://phishdestroy.github.io/TgWitness/vi/docs/handover/) khi người nhận chỉ cần nhận dữ liệu đã chọn. Xem [nội dung báo cáo và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/) hoặc [xác minh tệp xuất đã hoàn tất](https://phishdestroy.github.io/TgWitness/vi/docs/exports/).
+Bộ lọc chỉ định hình báo cáo, ZIP bằng chứng vẫn chứa toàn bộ sổ nhật ký và tệp. Nếu người nhận chỉ nên nhận ít hơn, hãy dùng [bản bàn giao rút gọn](https://phishdestroy.github.io/TgWitness/vi/docs/handover/). Thêm: [nội dung báo cáo](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/), [xác minh bản xuất](https://phishdestroy.github.io/TgWitness/vi/docs/exports/).

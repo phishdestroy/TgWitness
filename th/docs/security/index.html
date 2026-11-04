@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../">เอกสาร</a> <span aria-hidden="true">/</span> <span aria-current="page">รักษาความปลอดภัย</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">เอกสาร / 14</p><h1>รักษาความปลอดภัย</h1><p class="guide-outcome">เข้าใจเส้นทางของ Telegram, รายชื่อพร็อกซีสาธารณะ และบริการภายนอกที่เลือกใช้ได้ รู้ว่าแต่ละความลับจะปลดล็อกอะไร, การป้องกันครอบคลุมอะไร และส่วนใดที่คุณต้องรับผิดชอบเอง</p>
+<article class="guide-content"><p class="eyebrow">เอกสาร / 14</p><h1>รักษาความปลอดภัย</h1><p class="guide-outcome">อะไรออกจากเครื่องของคุณ ความลับแต่ละอย่างเปิดอะไรได้ และการป้องกันครอบคลุมอะไรเทียบกับสิ่งที่เป็นความรับผิดชอบของคุณ</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>ที่อยู่ panel ตามค่าเริ่มต้น</span></div><div role="listitem"><strong>256 บิต</strong><span>token แผงสุ่ม</span></div><div role="listitem"><strong translate="no">0</strong><span>CDN, ระบบวิเคราะห์ข้อมูล หรือฟอนต์จากระยะไกล</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>ลายเซ็นบนทุกบันทึก</span></div></div>
 <h2 id="map">ที่เก็บรวบรวมทุกสิ่ง</h2>
-<p>เครื่องมือเก็บข้อมูล แผงควบคุม และบันทึกทุกชิ้นที่เก็บไว้จะอยู่บนคอมพิวเตอร์หรือเซิร์ฟเวอร์ที่คุณใช้รันเครื่องมือนี้ Telegram เป็นจุดหมายปลายทางเดียวตามค่าเริ่มต้น ส่วนจุดหมายปลายทางอื่น ๆ ต้องตั้งค่าแยกกัน</p>
+<p>เครื่องเก็บข้อมูล แผงควบคุม และทุกรายการอยู่บนเครื่องของคุณ โดยค่าเริ่มต้นติดต่อเฉพาะ Telegram อย่างอื่นทั้งหมดเป็นสวิตช์แยก</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / สิ่งที่เครื่องทิ้งไว้</span><span class="sample-tag">การติดตั้งของคุณ</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="เปิดหรือปิดจุดหมายปลายทางที่เลือกได้"><button type="button" data-flow-toggle="replica" aria-pressed="false">เนื้อหาบนเว็บไซต์อื่น</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">การแจ้งเตือน</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">ข้อมูลเวลา</button><button type="button" data-flow-toggle="witness" aria-pressed="false">Witness</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>ลับ</th><th>สถานที่จัดเก็บ</th><th>ประโยชน์ที่ได้รับ</th><th>หากข้อมูลรั่วไหล</th></tr></thead>
 <tbody>
-<tr><td><strong>โทเค็นของแผง</strong></td><td><code>panel-token.txt</code> ในไดเรกทอรีข้อมูล; เบราว์เซอร์เก็บไว้สำหรับแท็บนั้นเท่านั้น</td><td>ทุกสิ่งในทุกพื้นที่ทำงาน: อ่านและส่งออกข้อมูล, ปรับเปลี่ยนขอบเขต, เข้าสู่ระบบบัญชี</td><td>หยุด TgWitness, ลบ <code>panel-token.txt</code>, แล้วเริ่มใหม่: โทเค็นใหม่ถูกสร้างขึ้น</td></tr>
+<tr><td><strong>โทเค็นของแผง</strong></td><td><code>panel-token.txt</code> ในไดเรกทอรีข้อมูล เบราว์เซอร์เก็บไว้ต่อแท็บ</td><td>ทุกอย่างในทุกพื้นที่ทำงาน</td><td>หยุด TgWitness ลบ <code>panel-token.txt</code> เริ่มใหม่: คุณจะได้โทเค็นใหม่</td></tr>
 <tr><td><strong>เซสชัน Telegram</strong></td><td>Vault, เข้ารหัส (<code>credentials.enc</code>)</td><td>บัญชี Telegram เอง</td><td>ปิดเซสชันใน Telegram โดยไปที่ <em>การตั้งค่า → อุปกรณ์</em></td></tr>
-<tr><td><strong>กุญแจการลงนาม</strong></td><td>Vault, เข้ารหัส (<code>signing.enc</code>)</td><td>การลงลายมือชื่อในบันทึกที่สามารถตรวจสอบได้ผ่านลายนิ้วมือของคุณ</td><td>จุดตรวจสอบถูกเก็บไว้ที่อื่น โดยพยานและเวลาประทับตราจะแสดงให้เห็นว่าข้อมูลใดเคยมีอยู่ก่อน</td></tr>
-<tr><td><strong>กุญแจ Vault</strong></td><td><code>vault.key</code> ข้างข้อมูล หรือกุญแจหลักภายนอกสำหรับไดเรกทอรีข้อมูลใหม่</td><td>การถอดรหัสห้องนิรภัย</td><td>ถือว่ากุญแจเซสชันและกุญแจลงนามถูกรั่วไหลด้วย</td></tr>
-<tr><td><strong>โทเค็น Witness</strong></td><td>บนเซิร์ฟเวอร์ของ TgWitness</td><td>อ่านได้เท่านั้น: จุดตรวจสอบที่ลงนามและสถานะความสมบูรณ์</td><td>ลบมันบนหน้า Witness; สร้างหน้าใหม่</td></tr>
-<tr><td><strong>ข้อความหลักสำหรับใช้ภายนอกเว็บไซต์</strong></td><td>Vault; ดาวน์โหลดเพียงครั้งเดียวเพื่อกู้คืนข้อมูล</td><td>การถอดรหัสสำเนาที่เก็บไว้นอกเว็บไซต์</td><td>ผู้ใดก็ตามที่ถือครองข้อมูลที่เก็บไว้สามารถถอดรหัสได้: ให้ถือว่าสำเนานั้นถูกเปิดเผย</td></tr>
+<tr><td><strong>กุญแจการลงนาม</strong></td><td>Vault, เข้ารหัส (<code>signing.enc</code>)</td><td>การลงนามรายการภายใต้ลายนิ้วมือของคุณ</td><td>checkpoint ที่เก็บไว้ที่อื่น พยาน และการประทับเวลายังแสดงสิ่งที่มีอยู่ก่อนหน้า</td></tr>
+<tr><td><strong>กุญแจ Vault</strong></td><td><code>vault.key</code> ข้างข้อมูล หรือคีย์หลักภายนอก</td><td>ห้องนิรภัย</td><td>ให้ถือว่าเซสชันและคีย์ลงนามรั่วไหลด้วย</td></tr>
+<tr><td><strong>โทเค็น Witness</strong></td><td>บนเซิร์ฟเวอร์ของ TgWitness</td><td>อ่านอย่างเดียว: checkpoint และสถานะ</td><td>ลบในหน้าพยาน แล้วสร้างใหม่</td></tr>
+<tr><td><strong>ข้อความหลักสำหรับใช้ภายนอกเว็บไซต์</strong></td><td>Vault; ดาวน์โหลดเพียงครั้งเดียวเพื่อกู้คืนข้อมูล</td><td>สำเนานอกสถานที่</td><td>ใครก็ตามที่มี bucket ด้วยจะถอดรหัสได้: ให้ถือว่าสำเนาถูกเปิดเผย</td></tr>
 </tbody></table></div>
 <h2 id="threats">สิ่งที่การคุ้มครองครอบคลุม</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> ได้รับการครอบคลุม</h3><ul>
-<li>บันทึกที่ถูกแก้ไข ลบ หรือจัดเรียงใหม่ในไฟล์ที่ส่งออก: ห่วงโซ่แฮชหรือลายเซ็นไม่สามารถตรวจสอบความถูกต้องได้อีกต่อไป</li>
-<li>บันทึกที่ถูกตัดทอนหรือสร้างขึ้นใหม่หลังจากจุดตรวจสอบ (checkpoint) ถูกเก็บไว้ที่อื่น: จุดตรวจสอบที่เก็บไว้ไม่ตรงกันอีกต่อไป</li>
-<li>การคาดเดาโทเค็นของแผง: 256 บิตแบบสุ่ม, เปรียบเทียบในเวลาคงที่; หลังจากล้มเหลว 15 ครั้งต่อนาที ที่อยู่จะถูกปฏิเสธ</li>
-<li>เนื้อหาการสนทนาที่มีลักษณะเป็นภัยคุกคาม: ข้อความจะถูกแทรกเป็นข้อความธรรมดาเท่านั้น ไม่เคยเป็น HTML; ไฟล์แนบจะถูกดาวน์โหลดเป็นไฟล์; แผงควบคุมไม่โหลดเนื้อหาใดๆ จากเว็บไซต์อื่น</li>
-<li>ไดเรกทอรีข้อมูลที่คัดลอกมาพร้อมกุญแจ vault ภายนอก: กุญแจเซสชันและกุญแจลงนามจะยังคงถูกเข้ารหัสไว้โดยไม่มีกุญแจหลัก</li>
+<li>รายการที่ถูกเปลี่ยน ลบ หรือเรียงใหม่: สายแฮชหรือลายเซ็นจะขาด</li>
+<li>บันทึกที่ถูกตัดหรือสร้างใหม่หลังจากคุณเก็บ checkpoint ไว้ที่อื่น: checkpoint จะไม่ตรงกันอีก</li>
+<li>การเดาโทเค็น: สุ่ม 256 บิต เปรียบเทียบแบบเวลาคงที่ ล้มเหลว 15 ครั้งต่อนาทีที่อยู่นั้นจะถูกบล็อก</li>
+<li>เนื้อหาแชทที่เป็นอันตราย: ข้อความยังคงเป็นข้อความ ไม่เคยเป็น HTML ไฟล์แนบดาวน์โหลดเป็นไฟล์ แผงควบคุมไม่โหลดอะไรจากเว็บไซต์อื่น</li>
+<li>ไดเรกทอรีข้อมูลที่ถูกขโมยโดยใช้คีย์ห้องนิรภัยภายนอก: เซสชันและคีย์ยังคงเข้ารหัส</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> ขึ้นอยู่กับคุณ</h3><ul>
-<li>ผู้ถือโทเค็นของแผงหลักมีสิทธิ์ควบคุมอย่างเต็มที่ ให้สิทธิ์เข้าถึงแบบจำกัดแก่บุคคลอื่นสำหรับบัญชี การสนทนา และกิจกรรมที่พวกเขาต้องการ; และเก็บกุญแจหลักไว้เป็นความลับ</li>
-<li>ผู้ดูแลระบบสามารถอ่านข้อมูลทั้งหมดได้ รวมถึงแก้ไขและลงนามใหม่ในบันทึกดังกล่าว ควรเก็บลายนิ้วมือและจุดตรวจสอบไว้บนระบบอื่น</li>
-<li>ข้อความและสื่อในข้อความไม่ได้รับการเข้ารหัสโดย TgWitness โปรดใช้การเข้ารหัสดิสก์และกำหนดสิทธิ์การเข้าถึงอย่างเคร่งครัด</li>
-<li>การเชื่อมต่อ HTTP แบบธรรมดาที่อยู่นอก localhost จะทำให้โทเค็นปรากฏบนเครือข่าย ให้ใช้ HTTPS หรืออุโมงค์ SSH</li>
-<li>ตรวจสอบบันทึกที่เก็บไว้ด้วยลายเซ็นและจุดตรวจสอบ (checkpoints) ตรวจสอบความครอบคลุมของการเก็บรวบรวมข้อมูล และทดสอบการส่งข้อมูลสำหรับบัญชีและแหล่งข้อมูลที่คุณใช้</li>
+<li>โทเค็นหลักทำได้ทุกอย่าง ให้สิทธิ์แบบจำกัดขอบเขตแก่ผู้อื่นและเก็บโทเค็นหลักไว้กับตัวเอง</li>
+<li>ใครก็ตามที่เป็นผู้ดูแลเครื่องอ่านได้ทุกอย่างและลงนามบันทึกใหม่ได้ เก็บลายนิ้วมือและ checkpoint ไว้ที่อื่น</li>
+<li>TgWitness ไม่เข้ารหัสข้อความและสื่อ เข้ารหัสดิสก์ และจำกัดสิทธิ์ให้แน่นหนา</li>
+<li>HTTP ธรรมดานอก localhost ทำให้โทเค็นรั่ว ใช้ HTTPS หรือ SSH tunnel</li>
+<li>ลายเซ็นไม่บอกว่าพลาดอะไรไป ตรวจความครอบคลุมและทดสอบการส่งถึงบนบัญชีและแหล่งข้อมูลของคุณเอง</li>
 </ul></section>
 </div>
-<p><a href="../access/">แบ่งปันสิทธิ์การเข้าถึงคดี</a>พร้อมด้วยสิทธิ์การเข้าถึง ระยะเวลาหมดอายุ และข้อจำกัดของเซสชัน โทเค็นพยานยังคงเป็นข้อมูลรับรองที่แยกต่างหาก</p>
+<p><a href="../access/">แชร์สิทธิ์เข้าถึงคดี</a> พร้อมสิทธิ์ วันหมดอายุ และขีดจำกัดเซสชัน</p>
 <h2 id="hardening">เสริมความปลอดภัยให้ระบบติดตั้ง</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>เสร็จแล้ว 0 จาก 8</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>ใช้บัญชี Telegram ที่จัดไว้เฉพาะ</strong> — อย่าใช้บัญชีหลักของคุณเด็ดขาด โทเค็นของแผงควบคุมและเซสชันจะให้คุณควบคุมบัญชีนั้นได้อย่างเต็มที่</span></li>
-<li><span class="check-text"><strong>ให้แผงควบคุมอยู่ที่ 127.0.0.1</strong> และเข้าถึงจากระยะไกลได้เฉพาะผ่าน HTTPS (การตั้งค่า Caddy ที่มาพร้อม) หรือทางอุโมงค์ SSH เท่านั้น</span></li>
-<li><span class="check-text"><strong>เข้ารหัสดิสก์</strong>ที่เก็บไดเรกทอรีข้อมูล: ข้อความและสื่อจะถูกเก็บไว้ตามสภาพที่รับมา</span></li>
-<li><span class="check-text"><strong>จำกัดสิทธิ์การเข้าถึงไดเรกทอรีข้อมูลให้</strong>เฉพาะบัญชีบริการเท่านั้น สำหรับระบบ Unix ให้ตั้งค่าสิทธิ์ของไดเรกทอรีใหม่เป็น mode 0700 ส่วนใน Windows ให้ตั้งค่าสิทธิ์ของโฟลเดอร์</span></li>
-<li><span class="check-text">เก็บกุญแจหลักของ vault ไว้ที่เซิร์ฟเวอร์อื่น: ตั้งค่า <code>TGWITNESS_VAULT_KEY_FILE</code> ก่อนสร้างไดเรกทอรีข้อมูล</span></li>
-<li><span class="check-text"><strong>เก็บลายนิ้วมือของกุญแจลงนามและจุดตรวจสอบ</strong>ไว้บนระบบอื่น และเพิ่มผู้เป็นพยานบนโฮสต์อื่น</span></li>
+<li><span class="check-text"><strong>ใช้บัญชี Telegram เฉพาะ</strong> อย่าใช้บัญชีหลักเด็ดขาด</span></li>
+<li><span class="check-text"><strong>ให้แผงควบคุมอยู่ที่ 127.0.0.1</strong> การเข้าถึงระยะไกลผ่าน HTTPS (Caddy ที่มาพร้อมกัน) หรือ SSH tunnel เท่านั้น</span></li>
+<li><span class="check-text"><strong>เข้ารหัสดิสก์</strong> ที่มีไดเรกทอรีข้อมูล ข้อความและสื่อถูกเก็บตามสภาพ</span></li>
+<li><span class="check-text"><strong>จำกัดไดเรกทอรีข้อมูล</strong> ให้บัญชีบริการเท่านั้น (0700 บน Unix สิทธิ์โฟลเดอร์บน Windows)</span></li>
+<li><span class="check-text"><strong>เก็บคีย์ห้องนิรภัยไว้ที่อื่น</strong> บนเซิร์ฟเวอร์: ตั้ง <code>TGWITNESS_VAULT_KEY_FILE</code> ก่อนเริ่มครั้งแรก</span></li>
+<li><span class="check-text"><strong>บันทึกลายนิ้วมือและ checkpoint</strong> ไว้บนระบบอื่น และรันพยานบนโฮสต์อื่น</span></li>
 <li><span class="check-text"><strong>ห้ามอัปโหลด</strong>กุญแจ<code>data/</code>, กุญแจเซสชัน, <code>panel-token.txt</code> หรือกุญแจ vault ไปยัง GitHub หรือในห้องแชท</span></li>
 <li><span class="check-text"><strong>อย่าบันทึก</strong>ส่วนหัว<code>Authorization</code> หรือเนื้อหาคำขอที่พร็อกซีแบบย้อนกลับ</span></li>
 </ol>
 </div>
-<details><summary>สามารถเปลี่ยนโทเค็นของแผงควบคุมได้โดยไม่สูญเสียข้อมูลหรือไม่?</summary><p>ใช่ โทเค็นนี้ใช้เพียงเพื่อเปิดแผงควบคุมเท่านั้น ให้หยุด TgWitness ลบ <code>panel-token.txt</code> ออกจากไดเรกทอรีข้อมูล แล้วเริ่มโปรแกรมใหม่; บันทึก เซสชัน และกุญแจจะไม่ถูกเปลี่ยนแปลง เมื่อตั้งค่า <code>TGWITNESS_TOKEN</code> แล้ว ค่าในสภาพแวดล้อมจะถูกใช้แทนไฟล์</p></details>
-<details><summary>ทำไมข้อความจึงไม่ได้รับการเข้ารหัสเมื่ออยู่ในระบบ?</summary><p>ผู้เก็บข้อมูลต้องอ่านไฟล์เหล่านี้เพื่อค้นหา เปรียบเทียบเวอร์ชัน และส่งออก การเข้ารหัสไฟล์ด้วยกุญแจบนเครื่องเดียวกันจะเพิ่มความปลอดภัยได้เพียงเล็กน้อยต่อผู้ที่สามารถเข้าถึงข้อมูลบนเครื่องนั้นได้ การเข้ารหัสดิสก์ช่วยปกป้องดิสก์ที่ถูกหยุดทำงานหรือถูกขโมย ส่วนการกำหนดสิทธิ์การเข้าถึงอย่างเคร่งครัดจะช่วยปกป้องดิสก์ที่กำลังทำงานอยู่</p></details>
+<details><summary>สามารถเปลี่ยนโทเค็นของแผงควบคุมได้โดยไม่สูญเสียข้อมูลหรือไม่?</summary><p>ได้ มันเปิดได้แค่แผงควบคุม หยุด TgWitness ลบ <code>panel-token.txt</code> แล้วเริ่มใหม่ บันทึก เซสชัน และคีย์ยังอยู่ หากตั้ง <code>TGWITNESS_TOKEN</code> ไว้ ค่านั้นจะมีผลเหนือไฟล์</p></details>
+<details><summary>ทำไมข้อความจึงไม่ได้รับการเข้ารหัสเมื่ออยู่ในระบบ?</summary><p>เครื่องเก็บข้อมูลต้องอ่านข้อมูลเหล่านี้เพื่อค้นหา เปรียบเทียบ และส่งออก คีย์บนเครื่องเดียวกันไม่ได้หยุดคนที่อ่านเครื่องนั้นได้อยู่แล้ว การเข้ารหัสดิสก์ป้องกันดิสก์ที่ถูกขโมย สิทธิ์ป้องกันระบบที่กำลังทำงาน</p></details>
 <h2 id="report">รายงานช่องโหว่</h2>
-<p>ใช้ <strong>Security → Report a vulnerability</strong> ใน repositori GitHub ให้ระบุเวอร์ชัน ผลกระทบ และขั้นตอนการจำลองปัญหาขั้นต่ำ อย่าส่งข้อมูลรับรองการเข้าสู่ระบบ ไดเรกทอรีบัญชี หรือไฟล์หลักฐานจริง หากไม่สามารถรายงานแบบส่วนตัวได้ ให้เปิด issue เพื่อขอช่องสื่อสารส่วนตัว โดยไม่ระบุรายละเอียดการโจมตี</p>
+<p><strong>Security → Report a vulnerability</strong> บน GitHub ระบุเวอร์ชัน ผลกระทบ และขั้นตอนจำลองขั้นต่ำด้วยข้อมูลสมมติ อย่าส่งข้อมูลรับรอง โฟลเดอร์บัญชี หรือหลักฐานจริง หากปิดการรายงานแบบส่วนตัว ให้เปิด issue เพื่อขอช่องทางส่วนตัว โดยไม่ใส่รายละเอียดการโจมตี</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">อ้างอิงเต็ม →</a><a class="next-guide" href="../start/"><span>ขั้นตอนต่อไป</span><strong>เริ่มใช้งานได้ภายในไม่กี่นาที →</strong></a><p>คู่มือเหล่านี้อธิบายการนำไปใช้ในปัจจุบัน ผลการตรวจสอบความถูกต้องและช่องว่างที่ยังเหลืออยู่ได้รับการบันทึกไว้อย่างแยกต่างหาก <a href="../reference/verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p></footer>
 </main>

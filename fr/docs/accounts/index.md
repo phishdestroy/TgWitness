@@ -2,17 +2,17 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/accounts/
 
-Un espace de travail contient un compte, son journal et sa clé de signature.
+Un espace = un compte, son journal et sa clé.
 
 ## Choisissez votre mode de connexion
 
-Créez **des comptes**, ajoutez un espace de travail et ouvrez ses paramètres de connexion. Utilisez un compte dédié à l'observation.
+**Comptes** → ajouter un espace → paramètres de connexion. Utilisez un compte séparé pour cela.
 
-- **Code QR :** scannez-le depuis les paramètres de votre appareil Telegram et confirmez la nouvelle connexion.
-- **Numéro de téléphone :** saisissez le numéro, le code envoyé par Telegram et votre mot de passe de vérification en deux étapes s’il est activé.
-- **Importation de session :** importez une session prise en charge ou des données de Telegram Desktop vous appartenant.
+- **Code QR :** scannez-le depuis l’écran Appareils de Telegram et confirmez.
+- **Numéro de téléphone :** numéro, code, puis mot de passe 2FA si vous en avez un.
+- **Import de session :** votre propre fichier de session ou vos données Telegram Desktop.
 
-Choisissez un profil API intégré ou saisissez votre propre identifiant API et votre propre hachage. Un profil API identifie le client ; il ne permet pas de se connecter à un compte ni de rendre la connexion anonyme.
+Utilisez un profil d’API intégré ou votre propre API ID et hash. Il identifie seulement l’application : il ne vous connecte pas et ne cache rien.
 
 **Avez-vous d'abord besoin d'un proxy ?**
 
@@ -20,20 +20,20 @@ Vous pouvez [choisir et tester l'itinéraire de connexion](https://phishdestroy.
 
 ## Choisissez ce que vous souhaitez surveiller
 
-1. Ouvrez la liste des sources et sélectionnez les discussions, groupes ou chaînes dont vous avez besoin.
-2. Vérifiez les paramètres de collecte, y compris ceux relatifs aux fichiers multimédias, avant de commencer la surveillance.
-3. Lancez le collecteur et vérifiez sa connexion ainsi que son activité récente.
+1. Choisissez les chats, groupes ou canaux dont vous avez besoin.
+2. Vérifiez les paramètres de collecte, médias compris.
+3. Démarrez et vérifiez la connexion et l’activité récente.
 
-Le compte doit pouvoir accéder à la source. Selon leur rôle, les utilisateurs peuvent voir des événements différents ; le journal reflète ce que ce compte a reçu.
+Le compte doit avoir accès. Admins et membres ne voient pas la même chose ; le journal montre ce que ce compte a reçu.
 
-Pour une enquête portant sur l’intégralité du compte, utilisez **Sources → Portée de l’observation → Mode enquête**, vérifiez les paramètres, puis cliquez sur « **Enregistrer la portée** ». Le [guide complet de l’enquête](https://phishdestroy.github.io/TgWitness/fr/docs/cases/) couvre tous les types de discussions visibles, l’historique ancien, les profils des utilisateurs, les références entre discussions et le transfert des preuves.
+Le compte entier ? **Sources → Périmètre d’observation → Mode enquête**, vérifiez puis **Enregistrer le périmètre**. Guide complet : [enquêter sur un compte entier](https://phishdestroy.github.io/TgWitness/fr/docs/cases/).
 
 ## Vérifiez l'intégralité du chemin d'accès
 
-Dans un groupe de test que vous contrôlez, envoyez un message unique depuis un autre compte, modifiez-le puis supprimez-le. Vérifiez que ces trois événements apparaissent bien dans le journal, puis [exportez et vérifiez](https://phishdestroy.github.io/TgWitness/fr/docs/exports/) l'enregistrement.
+Dans votre groupe de test, envoyez un message depuis un autre compte, modifiez-le, supprimez-le. Les trois événements doivent apparaître dans le journal. Ensuite, [exportez et vérifiez](https://phishdestroy.github.io/TgWitness/fr/docs/exports/).
 
-Un statut « connecté » confirme la connexion. Un message de test capturé confirme qu’un événement particulier a bien été transmis à cet espace de travail.
+« Connecté » signifie que la connexion fonctionne. Un message de test capturé signifie que les événements arrivent vraiment.
 
 ## Ajouter un autre compte
 
-Créez un autre espace de travail dans **la section « Comptes »** et répétez la configuration. Conservez l’empreinte de la clé de signature de chaque compte afin de pouvoir identifier ses exportations ultérieurement.
+Nouvel espace dans **Comptes**, mêmes étapes. Notez l’empreinte de clé de chaque compte pour distinguer les exports plus tard.

@@ -32,8 +32,6 @@ Profil peribadi dan kelayakan akaun WARP disulitkan dengan peti kerja sedia ada.
 
 Profil WireGuard yang dimuat naik mesti mengandungi satu Antara muka dan satu Rakan Sebaya, laluan IPv4 dan IPv6 penuh, dan tiada cangkuk, termasuk, penggantian persekitaran atau pendengar tambahan. Alamat hujung awam diselesaikan dan dikunci sebelum permulaan. Gunakan VPN luaran atau gerbang SOCKS5 untuk OpenVPN/IPsec dan hujung peribadi.
 
-Semakan sintetik ialah `python tools/check_guided_connection.py` dan `python tools/check_guided_connection_browser.py`. `python tools/check_portable_routes_runtime.py` pilihan memuat turun pembantu yang disahkan dan menguji kitar hayat proses tempatan sebenar mereka terhadap fixture loopback. Ia tidak mendaftarkan peranti Cloudflare atau menggunakan akaun Telegram.
-
 ## Kaedah pengesahan
 
 **ID API dan hash API mengenal pasti aplikasi; ia tidak menggantikan log masuk akaun.** Ia adalah pilihan dalam TgWitness. Keutamaan: sepasang yang dimasukkan dalam borang, kemudian satu daripada JSON akaun yang diimport, kemudian sepasang yang disimpan dalam ruang kerja, kemudian kolam terbina dalam sebanyak 50 pasangan Telegram Desktop (2040) dihantar dengan keterangan klien Telegram Desktop yang sepadan. Pasangan anda sendiri daripada Alat Pembangunan API di [my.telegram.org](https://my.telegram.org) boleh digunakan dengan semua akaun anda; setiap akaun masih mempunyai kebenaran tersendiri.
@@ -70,8 +68,6 @@ python -m tgwitness.sessions account.session --out account.tgwitness-session
 
 1. Di bawah **Tambah akaun → Fail**, muat naik hasil atau tampal rentetannya, dan teruskan.
 2. Semak ID akaun numerik yang dipaparkan, pilih sumber dan mulakan pemerhatian.
-
-Pengubah membuka SQLite hanya-baca, tidak melakukan peningkatan skema atau permintaan rangkaian, dan tidak mencetak sesi. Ia memeriksa versi skema, jenis jadual, satu baris sesi, IP/port/DC dan panjang kunci. Input CLI terhad kepada 64 MiB; teks StringSession terhad kepada 4 KiB. Panel penukaran memuat naik fail ke pelayan TgWitness yang disahkan, memprosesnya dalam memori, dan memulangkan kelayakan yang dinormalisasi ke pelayar tersebut tanpa menyimpan fail asal yang dimuat naik. Gunakan HTTPS untuk pelayan jauh.
 
 **Fail yang ditukar adalah rahsia akses akaun yang tidak disulitkan.** Simpannya dalam simpanan terlindung dan jangan sekali-kali komit atau hantar ke perkhidmatan penukaran pihak ketiga. TgWitness menyimpan sesi yang dibenarkan dalam peti besi yang disulitkannya. Menyalin sesi tidak mencipta kebenaran berasingan: jangan jalankan klien serentak dengan kunci kebenaran klon dan menganggap penghantaran kemas kini secara berasingan.
 
@@ -115,15 +111,9 @@ Senarai terbina dalam menggabungkan empat sumber: [SoliSpirit/mtproto](https://g
 
 Semasa laluan automatik diaktifkan, senarai dikemas kini setiap jam dan pemeriksaan pengangkutan dijalankan setiap sepuluh minit secara lalai. Jeda ini boleh diubah suai. **Mengemas kini senarai awam** memerlukan penyegaran; melihat senarai sahaja tidak mengubah laluan manual yang disimpan.
 
-Setiap respons suapan dihadkan kepada 1 MiB dengan had masa permintaan lapan saat dan tarikh akhir muat turun keseluruhan 20 saat; penalaan semula ditolak. Sehingga 64 entri serasi bagi setiap sumber disimpan dan diasingkan. Pemarser menerima rahsia heksadesimal dan base64url yang disokong serta suapan JSON. `ee` TLS palsu, pautan tidak sah, literal IP peribadi/tertahan dan nama hos tempatan diabaikan. Nama hos diselesaikan dan diperiksa sebelum digunakan, dan IP yang dipilih dikunci untuk sambungan tersebut. Pengambilan semula automatik menyelesaikan nama hos sekali lagi; terapkan semula kemasukan manual untuk menyelesaikannya sekali lagi.
-
-Tindak balas suapan yang gagal, kosong atau tidak serasi mengekalkan tangkapan sumber sebelumnya. Kemas kini bersifat atom, disusun secara bersiri dan terhad kepada satu percubaan setiap minit bagi setiap ruang kerja. Siasatan penghantaran yang berjaya mewujudkan sambungan, bukananonimiti atau kelengkapan tangkapan.
-
 **Lalu lintas Telegram dan permintaan HTTPS menggunakan laluan yang berbeza.** Muat turun senarai menggunakan sambungan HTTPS berasingan dan laluan permintaan luaran yang disediakan. `TGWITNESS_PROXY_FEED_PROXY` secara eksplisit menimpa laluan itu dengan proksi HTTP/SOCKS5; kedua-dua varian Compose pengumpul meneruskannya. Kolam latar belakang mengikuti ruang kerja utama. Tiada sesi Telegram, kelayakan API, token panel atau token bot dihantar kepada penyedia feed. Nama penyedia, tarikh snapshot dan laluan muat turun muncul di bawah Bahagian **'Where the list comes from**'.
 
 MTProxy hanya membawa trafik Telegram. Operasi HTTP ruang kerja seperti cap masa, pemberitahuan, salinan luar tapak dan semakan sumber menggunakan proksi SOCKS5/HTTP berasingan apabila dikonfigurasikan, kemudian laluan SOCKS5/HTTP akaun. Tanpa kedua-duanya, Hide the address menolak permintaan; mod lain membenarkan Direct. Permintaan luaran boleh dilumpuhkan. Proksi muat turun suapan yang dikonfigurasikan secara eksplisit kekal sebagai override pengendali berasingan. Perkhidmatan saksi bebas mengekalkan laluan tersendiri.
-
-Permintaan HTTP luaran yang hanya untuk awam melalui SOCKS5 atau proksi HTTP menyelesaikan destinasi dengan Cloudflare DNS melalui HTTPS di `https://1.1.1.1/dns-query`, melalui proksi yang sama. Hanya nama hos dan jenis pertanyaan A/AAAA dihantar ke penyelesai; URL perkhidmatan, kelayakan dan kandungan pemberitahuan tidak disertakan. TLS mengesahkan sijil penyelesai untuk alamat IPnya. Kedua-dua keluarga alamat diperiksa, dan sebarang jawapan peribadi, gelung balik, tempatan-pautan atau yang diperuntukkan akan menolak permintaan tersebut. Sambungan menggunakan alamat numerik yang diperiksa sambil mengekalkan Host HTTP dan nama sijil TLS asal perkhidmatan. Penghantaran semula HTTP pemberitahuan dan permintaan CONNECT menggunakan pemeriksaan destinasi yang sama. Kegagalan DNS menghentikan permintaan tanpa DNS destinasi tempatan atau pelarian langsung. Jawapan yang berjaya disimpan dalam cache memori bagi setiap laluan proksi selama maksimum 30 saat dan tidak lebih lama daripada TTL DNS mereka; cache ini terhad kepada 128 entri. Nama hos proksi itu sendiri boleh menggunakan DNS tempatan. Kegagalan SOCKS dan CONNECT boleh mencuba alamat semak lain sebelum menghantar badan permintaan perkhidmatan. Pengalihan HTTP biasa melaporkan permintaan yang gagal tanpa secara automatik menghantar semula badannya melalui alamat lain.
 
 Untuk perkhidmatan peribadi yang diuruskan oleh pengendali, tetapan persekitaran pelayan sedia ada `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` membenarkan destinasi peribadi dan mengekalkan penyelesaian nama hos di pihak proksi. Ia tidak boleh diaktifkan dari panel. Mod hanya awam menolak destinasi `.onion` sebelum membuat pertanyaan kepada penyelesai awam; perkhidmatan bawang Tor memerlukan tetapan destinasi peribadi yang jelas tersebut dan proksi yang sesuai. Tingkah laku DNS ini terpakai kepada operasi HTTP luaran, bukan pengangkutan Telegram. Cloudflare mendokumenkan [hujung titik akhir DNS JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
@@ -174,8 +164,6 @@ SOCKS5 dan HTTP CONNECT biasa tidak menyulitkan kelayakan proksi atau terowong k
 
 **Perlindungan storan** dalam Akaun memaparkan keadaan ini. Token panel adalah rahsia capaian, bukan kata laluan penyulitan. Ia memberi akses pentadbir; [token yang dikeluarkan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/) boleh dihadkan kepada akaun dan sembang. Ruang kerja berkongsi proses hos dan bukan penyewa terasing.
 
-Demonstrasi sintetik yang dimulakan secara eksplisit dan terasing boleh dibuka secara automatik melalui sambungan loopback langsung. Ini menggunakan keupayaan jangka hayat proses yang berasingan; ia tidak mendedahkan token panel yang dikonfigurasikan mahupun memberi akses kepada ruang kerja sebenar. Permintaan jauh, melalui proksi atau merentas asal tidak dapat memperoleh/menggunakan keupayaan kemasukan automatik ini. Kemudahan ini tidak menghapuskan sempadan pengesahan untuk data akaun sebenar.
-
 BitLocker, LUKS, FileVault atau volum yang disulitkan yang diuruskan boleh melindungi storan di bawah model ancaman masing-masing. Pentadbir mesin yang sedang berjalan dan tidak dikunci masih boleh membaca data. Sertakan SQLite WAL/SHM, media, eksport sementara, swap, sandaran dan muat turun pelayar dalam perancangan storan. Isipadu Docker tidak disulitkan semata-mata kerana ia adalah isipadu. TgWitness tidak melaksanakan SQLCipher atau penyulitan objek.
 
 ## Kunci induk luaran
@@ -203,17 +191,3 @@ Setiap ruang kerja menerima garam awam rawak dan kunci Fernet sendiri yang diper
 Semua ruang kerja berpunca daripada kunci induk yang sama; komprominya menjejaskan keseluruhan pemasangan. Proses yang sedang berjalan boleh menyahsulitkan rahsia. Ini bukan HSM atau KDF kata laluan. Kata laluan sewenang-wenangnya tidak diterima sebagai ganti kunci rawak.
 
 Simpan kunci sedia ada untuk pemasangan sedia ada sehingga migrasi yang disengajakan dilaksanakan dan disahkan. Memadam `vault.key` atau menggantikan kunci induk boleh memusnahkan akses kepada sesi/kunci penandatanganan. Simpan sandaran yang disulitkan dan kunci secara berasingan dan uji pemulihan dalam contoh terasing.
-
-## Sumber dan skop pengesahan
-
-Disemak pada 26 Oktober 2026:
-
-- https://core.telegram.org/api/auth
-- https://core.telegram.org/api/obtaining_api_id
-- https://docs.telethon.dev/en/stable/basic/signing-in.html
-- https://docs.telethon.dev/en/stable/concepts/sessions.html
-- https://core.telegram.org/mtproto/mtproto-transports
-- https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp
-- Telethon 1.45.0: SQLiteSession, StringSession, String`Connection._proxy_connect`, String `TcpMTProxy.normalize_secret` dan kaedah muat turun.
-
-Ujian tempatan merangkumi tetapan loopback SOCKS5/HTTP CONNECT, sesi SQLite sintetik, pengasingan laluan, pengecualian rahsia dan penolakan kunci hilang. Ia tidak menetapkan interoperabiliti sebenar Telegram/proksi atau tingkah laku MTProxy secara langsung. Lihat [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/) dan [LIVE_ACCEPTANCE.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md).

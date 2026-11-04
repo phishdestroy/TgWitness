@@ -32,11 +32,11 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首页</a> <span aria-hidden="true">/</span> <a href="../">文档</a> <span aria-hidden="true">/</span> <span aria-current="page">设计报告</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文档 / 11</p><h1>设计报告</h1><p class="guide-outcome">为读者提供从案件问题到保存记录的清晰路径。</p>
-<p>报告工作室集成了数据筛选、可读的变更历史、图表以及您撰写的调查结果。八种集成设计适用于受支持的 HTML 和原生 PDF 输出格式。HTML、PDF 和 JSON 报告均带有各自的签名印章；ZIP 清单还会将包中的文件进行绑定。HTML 和 PDF 将在最终版式确定后加盖印章。</p>
+<article class="guide-content"><p class="eyebrow">文档 / 11</p><h1>设计报告</h1><p class="guide-outcome">让读者从案件问题直接到达保存的记录。</p>
+<p>Report studio 汇总您挑选的数据、变更历史、图表和您的发现。八种设计，HTML 和原生 PDF。每份 HTML、PDF 和 JSON 报告都用您的密钥封印。</p>
 
 <h2 id="build">三步生成报告</h2>
-<ol><li>打开<strong>“导出”→“配置和预览”→“数据”</strong>。可使用整个工作区，或选择聊天、作者、包含 UTC 观察日期的记录以及记录类型。日期指 TgWitness 观察到该记录的时间。</li><li>在<strong>“设计与内容</strong>”部分，选择一个设计和内容预设。选择活动图表、参与者标签、对话记录、已保存的更改以及可选的“案件看板”材料。添加您的案件详情和审查笔记。</li><li>打开<strong>“预览</strong>”以查看计数、活动、参与者、抽样记录及缺失的 ID 范围。保存设置后，下载您所需的格式。</li></ol>
+<ol><li><strong>导出 → 配置和预览 → 数据</strong>：整个工作区，或选择聊天、作者、日期（UTC，即 TgWitness 看到记录的时间）和记录类型。</li><li><strong>设计与内容</strong>：选择设计和要包含的内容：图表、参与者、聊天记录、变更、Case Board 条目、您的案件详情和笔记。</li><li><strong>预览</strong>：检查数量、活动、样本和缺失的 ID 范围。保存，然后下载所需格式。</li></ol>
 
 <section class="workflow-lab" data-workflow="report" aria-labelledby="report-example-title">
   <h3 id="report-example-title">为读者整理相同的保存材料</h3>
@@ -60,15 +60,15 @@
 </section>
 
 <h2 id="designs">选择阅读风格</h2>
-<p><strong>“经典”、“编辑”、“简报”、“分析”、“技术”、“概述”、“阅读系列”以及“账本与边注”</strong>以不同的编排形式呈现相同的底层记录。更改设计时，数据选择和书面注释将保持不变。报告语言可从 25 种支持的语言中选择。</p>
-<p>“阅读系列”将案件、范围、调查结果和变更围绕章节导航栏进行分组。“账本与页边距”采用编号章节和宽页边距。两种模式均支持账户 HTML 概览及副本共享。 原生 PDF 文件会随附字体生成；用户设备无需安装浏览器或 Node 即可创建 PDF。中文、日文和韩文的 PDF 文件还需服务器上安装合适的字体（如 Noto Sans CJK），该字体需在系统范围内部署或放置于 <code>TGWITNESS_FONT_DIR</code> 目录中。若未安装，ZIP 包将仅保留 HTML 和 JSON 报告。</p>
+<p><strong>Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger &amp; margin</strong>：相同的记录，不同的外观。切换时保留您的选择和笔记。可用 25 种语言中的任意一种。</p>
+<p>PDF 使用内置字体生成，无需浏览器。中文、日文和韩文需要服务器上有 Noto Sans CJK 之类的字体（系统级或位于 <code>TGWITNESS_FONT_DIR</code>），否则只能得到 HTML 和 JSON。</p>
 
 <h2 id="read">结合上下文阅读变更内容</h2>
-<p>已保存的编辑内容会显示修改前后的对比。删除通知可附带最后捕获的版本。回复、引用、转发、点赞、按钮及附件元数据均保留其可用的引用信息。文件的 SHA-256 哈希值和日志记录哈希值会分别标注。</p>
-<p>设计预览展示了封面、审查和图表组件，其中使用了前 50,000 条源记录中的匹配记录。独立的数据预览会扫描完整的稳定日志快照以获取确切的选择计数，并标注了显示的样本限制。生成 PDF 以检查最终的分页情况。 完整账户导出包含 HTML 概览；其各个聊天记录的 PDF 文件均采用所选设计。</p>
+<p>编辑显示前后对比，删除显示最后保存的版本。回复、转发、表情回应、按钮和附件都保留其引用。</p>
+<p>设计预览使用前 50,000 条记录，数据预览精确统计全部内容。要查看最终页面布局，请生成 PDF。</p>
 
 <h2 id="sharing">请审慎选择受众版本</h2>
-<p>报告过滤器可生成易于阅读的报告。完整的证据 ZIP 文件保留了原始日志和附件。当接收方只需接收选定数据时，请使用<a href="../handover/">精简版移交</a>。查看<a href="../reference/case-reports/">报告内容及验证信息</a>，或<a href="../exports/">对已完成的导出文件进行验证</a>。</p>
+<p>筛选只影响报告，证据 ZIP 仍包含完整日志和文件。如果接收方应得到更少，请使用<a href="../handover/">精简移交</a>。更多：<a href="../reference/case-reports/">报告内容</a>，<a href="../exports/">验证导出</a>。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/case-reports/">完整引用 →</a><a class="next-guide" href="../handover/"><span>下一步</span><strong>准备一份共享副本 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../reference/verification/">已测试的内容 →</a></p></footer>
 </main>

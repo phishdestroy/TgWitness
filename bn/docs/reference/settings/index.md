@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/setti
 একটি ওয়ার্কস্পেস যার একটি সেশন চলছে বা পূর্বে সম্পন্ন একটি সেটআপ রয়েছে, উইজার্ড পায় না। পৃষ্ঠা লোড হলে এর মান কোনো গোল দ্বারা প্রতিস্থাপিত হয় না। একটি ফিল্ড লুকানো বৈশিষ্ট্যটি বন্ধ করে না বা এর মান মুছে ফেলে না।
 
 আকার এবং সময় অনুমান সর্বোচ্চ তিনটি নির্বাচিত চ্যাট এবং প্রতিটি থেকে সর্বোচ্চ ২০টি বার্তা পড়ে। এটি একটি অনুমান: এটি টেলিগ্রামের সীমা, কোনো নির্দিষ্ট সার্ভারের গতি বা প্রতিটি চ্যাটের ফাইল সম্পর্কে পূর্বাভাস দেয় না।
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

@@ -62,10 +62,3 @@ Laman kumpulan `/groups/<id>` menunjukkan ahli, perkara yang memerlukan perhatia
 Sebuah ruang kerja dengan sesi atau persediaan yang telah selesai sebelum ini tidak akan mendapat wizard. Nilainya tidak digantikan oleh matlamat apabila halaman dimuat. Menyembunyikan medan tidak menutup ciri tersebut atau memadam nilainya.
 
 Saiz dan anggaran masa membaca sehingga tiga sembang terpilih dan sehingga 20 mesej daripada masing-masing. Ia hanyalah anggaran: ia tidak meramalkan had Telegram, kelajuan pelayan tertentu atau fail dalam setiap sembang.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

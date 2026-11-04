@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首页</a> <span aria-hidden="true">/</span> <a href="../">文档</a> <span aria-hidden="true">/</span> <span aria-current="page">保持其运行</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文档 / 17</p><h1>保持其运行</h1><p class="guide-outcome">确保采集器在重启后仍可正常运行，且其数据保持完整。</p>
+<article class="guide-content"><p class="eyebrow">文档 / 17</p><h1>保持其运行</h1><p class="guide-outcome">让采集器保持运行，数据在重启后依然安全。</p>
 <h2 id="launch">选择启动方式</h2>
-<p>若要进行本地安装，请使用 <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> 目录中的<a href="../start/">启动器和服务的示例</a>。若使用 Docker，请安装 Docker with Compose，并从项目目录运行：</p>
+<p>原生：<a href="../start/">启动器</a>加上 <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> 中的服务模板。Docker，在项目文件夹中执行：</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>默认控制面板监听主机的回环地址，端口为 8787。您可以在本地或通过 SSH 隧道打开它。使用第二个命令生成的令牌解锁控制面板。</p>
+<p>面板监听 localhost:8787。在本地或通过 SSH 隧道打开，使用第二条命令输出的令牌。</p>
 <h2 id="storage">保留整个数据目录</h2>
-<p>原生安装使用 <code>data/live</code>。Docker 则使用持久化卷 <code>tgwitness-data</code>。请将日志、账户会话、密钥和运行状态集中保存。签名导出文件虽可作为有效证据，但并非完整的安装备份。</p>
-<ol><li>在完成一致性备份之前，请停止数据收集。</li><li>将完整的私有数据目录复制到主机外部的受保护存储中。</li><li>在依赖备份之前，请先在隔离环境中测试数据恢复。</li></ol>
+<p>原生：<code>data/live</code>。Docker：<code>tgwitness-data</code> 卷。日志、会话和密钥必须放在一起。签名导出是证据，不是备份。</p>
+<ol><li>先停止采集。</li><li>将整个数据目录复制到主机以外的安全位置。</li><li>在信任它之前，先在单独的安装上试着恢复。</li></ol>
 <h2 id="check">重启后请检查</h2>
-<p>请确认预期的工作区和密钥、Telegram 连接、已选来源以及新消息捕获设置。保存的 MTProto 状态和补录功能可帮助恢复 Telegram 仍保留的更新内容。但该工具无法重建所有已过期的更新，也无法还原在捕获前被删除的编辑内容。</p>
-<p class="callout">容器状态正常指 Web 服务器能够响应。请使用受控消息和见证检查来评估数据采集及外部发布情况。</p>
+<p>检查工作区和密钥、连接、来源，以及新消息是否进来。TgWitness 会补上 Telegram 仍保留的内容，而不是停机期间发生的一切。</p>
+<p class="callout">容器“健康”表示 Web 服务器有响应。采集是否正常，要看测试消息和见证人。</p>
 <h2 id="public">仅发布您有意发布的内容</h2>
-<p>部署参考指南包含 HTTPS 示例、持久卷命令、更新及恢复步骤。提供了用于部署的 Docker 命令；当前的<a href="../reference/verification/">验证</a>记录列出了实际经过测试的环境。</p>
+<p>HTTPS、卷、更新和恢复见部署参考。实际测试过的内容：<a href="../reference/verification/">验证记录</a>。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">完整引用 →</a><a class="next-guide" href="../troubleshooting/"><span>下一步</span><strong>查找问题所在 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../reference/verification/">已测试的内容 →</a></p></footer>
 </main>

@@ -224,9 +224,6 @@ da 1 a 2.000 MiB per file raccolto in base al tipo e 4 GiB di contenuto ZIP firm
 di questi valori è modificabile per ogni area di lavoro nella sezione <strong>«Parametri</strong>». Le esportazioni non hanno un limite fisso al numero di eventi.
 Il fallback del browser è limitato a 128 MiB per impostazione predefinita; la CLI di streaming presenta un
 limite di trasferimento configurabile, pari a 5 GiB per impostazione predefinita.</p>
-<p><code>tools/check_capacity.py</code> misura l’acquisizione e l’esportazione di dati sintetici a livello locale. I suoi risultati
-non costituiscono misurazioni delle consegne di Telegram né un conteggio garantito delle conversazioni reali. Si veda
-<a href="../verification/">VERIFICATION.md</a> per la versione misurata e il carico di lavoro.</p>
 <h2 id="reliability-and-recovery">Affidabilità e recupero<a class="anchor" href="#reliability-and-recovery" aria-label="Collegamento a questa sezione">#</a></h2>
 <p>Le funzionalità implementate includono transazioni SQLite WAL/sincrone; scritture atomiche di
 messaggi e operazioni relative ai file multimediali; operazioni persistenti e ritardi di riprova; descrittori della versione originale;

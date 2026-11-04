@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/groups/
 
-Kelola beberapa akaun pengumpulan sekaligus sambil memastikan rekod setiap akaun dan identiti tandatangan masing-masing berasingan.
+Jalankan beberapa akaun bersama, setiap satu masih dengan rekod dan kuncinya sendiri.
 
-Kumpulan akaun menggabungkan status sambungan, kawalan pemerhatian, tetapan kongsi dan eksport ke dalam satu paparan kerja. Ia berguna apabila beberapa akaun merangkumi siasatan yang sama atau memerlukan tetapan operasi yang konsisten.
+Kumpulan meletakkan status sambungan, mula/jeda, tetapan dikongsi dan eksport pada satu skrin. Berguna apabila beberapa akaun mengusahakan kes yang sama.
 
 ## Buka gambaran keseluruhan kumpulan
 
-Dalam **Akaun**, buka kumpulan. Setiap akaun memaparkan status pemerhatiannya, laluan sambungan, kelewatan laluan terkini yang diukur apabila pemeriksaan semasa berjaya, dan mesej terakhir disimpan. Pautan **'Perlukan Perhatian'** ke akaun yang memerlukan kerja; **'Betulkan'** membuka ruang kerja dan kawalan berkaitan.
+Buka kumpulan dalam **Akaun**. Setiap akaun menunjukkan keadaan, laluan, kependaman dan mesej tersimpan terakhir. **Perlukan Perhatian** menyenaraikan yang rosak, **Baiki** membawa anda terus ke sana.
 
-**Mulakan Semua** dan **Tunda Semua** bertindak pada akaun yang layak selepas pengesahan. **Tetapan kumpulan** berkongsi tetapan terpilih; akaun dengan nilai tersendiri mengekalkan nilai tersebut sehingga anda memilih untuk menggantikannya.
+**Mulakan semua** / **Jeda semua** bertanya sebelum bertindak. **Tetapan kumpulan** dikongsi, tetapi nilai akaun sendiri kekal sehingga anda menggantikannya.
 
 ### Melihat semula perubahan laluan dalam kumpulan
 
@@ -51,19 +51,19 @@ Akaun rujukan: laluan sendiri dikekalkan.
 
 ## Ubah laluan dengan langkah semakan
 
-1. Pilih **Ubah laluan kumpulan**, kemudian pilih jenis sambungan dan tetapan.
-2. Pilih **Pilihan Semakan**. Semak akaun yang disenaraikan dan penafian laluan individu mereka.
-3. Pilih **Sediakan dan semak**. Semakan menggunakan saluran Telegram baharu; laluan HTTP yang disokong juga melaporkan pemeriksaan keluar HTTPS mereka.
-4. Pilih **Terapkan sambungan yang diperiksa** dan periksa keputusan setiap akaun. Pengawasan yang sedang dijalankan sebelum ini disambung apabila aplikasi berjaya; akaun tidak aktif kekal tidak aktif.
+1. **Tukar laluan kumpulan**, pilih jenis dan tetapan.
+2. **Semak pilihan**: lihat akaun mana yang berubah dan mana yang mempunyai laluan sendiri.
+3. **Sedia dan semak** menguji sambungan Telegram baharu, serta IP keluar jika boleh.
+4. **Guna sambungan yang disemak** dan lihat setiap hasil. Akaun yang berjalan menyambung semula, yang terbiar kekal terbiar.
 
-Latensi menerangkan penyediaan sambungan Telegram yang diukur. Semakan IP keluar menerangkan laluan tersebut pada masa semakan yang direkodkan. Pengesahan akaun dan kesihatan pemantauan mempunyai penunjuk masing-masing; perubahan kumpulan boleh berakhir dengan hasil yang berbeza bagi setiap akaun.
+Kependaman ialah masa persediaan sambungan Telegram, IP keluar ialah apa yang ditunjukkan laluan semasa semakan. Hasil boleh berbeza bagi setiap akaun.
 
 ## Gunakan akses bertindih
 
-**Perbualan beberapa akaun**memaparkan sumber yang dikongsi dan liputan pemerhatian ruang kerja yang tersedia. Saluran dan superkumpulan yang layak boleh menggunakan **Eksport dengan … akaun** untuk membahagikan pemerolehan sejarah satu perbualan. Perbualan peribadi dan kumpulan biasa kekal dengan akaun asal kerana nombor mesej mereka tergolong dalam sejarah akaun tersebut.
+**Sembang yang dilihat beberapa akaun** menyenaraikan sumber dikongsi dan liputannya. Saluran dan superkumpulan boleh dieksport oleh beberapa akaun sekali gus dengan **Eksport dengan … akaun**. Sembang peribadi dan kumpulan asas tidak boleh, nombor mesejnya adalah mengikut akaun.
 
 ## Eksport kumpulan sebagai pakej
 
-**Kumpulan eksport** mencipta satu fail ZIP yang mengandungi eksport berasingan setiap akaun yang ditandatangani dan satu senarai berasingan fail tersebut yang ditandatangani. Identiti dan cap jari ruang kerja asal kekal tersedia untuk pengesahan. Bina naratif merentas akaun menggunakan rujukan tersebut; satu garisan masa gabungan tunggal masih disusun secara berasingan.
+**Eksport kumpulan** memberikan satu ZIP dengan eksport bertandatangan setiap akaun dan senarai bertandatangannya. Setiap satu mengekalkan cap jarinya sendiri untuk pengesahan. Garis masa gabungan masih anda bina sendiri.
 
-Teruskan dengan [reka bentuk laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reports/), [papan kes dalam ruang kerja](https://phishdestroy.github.io/TgWitness/ms/docs/case-board/), atau [pengesahan eksport](https://phishdestroy.github.io/TgWitness/ms/docs/exports/).
+Seterusnya: [laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reports/), [Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/case-board/), [mengesahkan eksport](https://phishdestroy.github.io/TgWitness/ms/docs/exports/).

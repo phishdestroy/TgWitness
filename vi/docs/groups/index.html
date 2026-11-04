@@ -32,12 +32,12 @@
 <nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <span aria-current="page">Quản lý một nhóm tài khoản</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Những nội dung đã được kiểm thử →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Tài liệu hướng dẫn / 13</p><h1>Quản lý một nhóm tài khoản</h1><p class="guide-outcome">Quản lý nhiều tài khoản thu thập cùng lúc đồng thời đảm bảo tính riêng biệt của các bản ghi và danh tính ký tên của từng tài khoản.</p>
-<p>Nhóm tài khoản tập hợp trạng thái kết nối, các điều khiển quan sát, cài đặt chung và tính năng xuất dữ liệu vào một giao diện làm việc duy nhất. Tính năng này hữu ích khi nhiều tài khoản liên quan đến cùng một cuộc điều tra hoặc cần một cấu hình hoạt động nhất quán.</p>
+<article class="guide-content"><p class="eyebrow">Tài liệu hướng dẫn / 13</p><h1>Quản lý một nhóm tài khoản</h1><p class="guide-outcome">Chạy nhiều tài khoản cùng nhau, mỗi tài khoản vẫn có bản ghi và khóa riêng.</p>
+<p>Nhóm đặt trạng thái kết nối, bắt đầu/tạm dừng, cài đặt dùng chung và bản xuất trên một màn hình. Tiện khi nhiều tài khoản cùng làm một vụ việc.</p>
 
 <h2 id="overview">Mở tổng quan về nhóm</h2>
-<p>Trong phần <strong>Tài khoản</strong>, hãy mở nhóm. Mỗi tài khoản hiển thị trạng thái quan sát, đường dẫn kết nối, độ trễ đường dẫn được đo gần nhất khi kiểm tra hiện tại thành công và tin nhắn được lưu gần nhất. Các liên kết <strong>“Cần chú ý”</strong> dẫn đến các tài khoản cần xử lý; <strong>nút “Sửa”</strong> mở không gian làm việc và bảng điều khiển liên quan.</p>
-<p><strong>Các tùy chọn “Bắt đầu tất cả”</strong> và <strong>“Tạm dừng tất cả”</strong> sẽ áp dụng cho các tài khoản đủ điều kiện sau khi xác nhận. <strong>Cài đặt nhóm</strong> chia sẻ các thiết lập đã chọn; các tài khoản có giá trị riêng sẽ giữ nguyên các thiết lập đó cho đến khi bạn quyết định thay thế chúng.</p>
+<p>Mở nhóm trong <strong>Tài khoản</strong>. Mỗi tài khoản hiển thị trạng thái, tuyến, độ trễ và tin nhắn được lưu gần nhất. <strong>Cần chú ý</strong> liệt kê những cái đang lỗi, <strong>Sửa</strong> đưa bạn thẳng tới đó.</p>
+<p><strong>Bắt đầu tất cả</strong> / <strong>Tạm dừng tất cả</strong> sẽ hỏi trước khi thực hiện. <strong>Cài đặt nhóm</strong> được dùng chung, nhưng giá trị riêng của tài khoản vẫn giữ cho đến khi bạn thay.</p>
 
 <section class="workflow-lab" data-workflow="groups" aria-labelledby="groups-example-title">
   <h3 id="groups-example-title">Kiểm tra thay đổi lộ trình trong một nhóm</h3>
@@ -59,15 +59,15 @@
 </section>
 
 <h2 id="route">Thay đổi quy trình bằng cách thêm bước xem xét</h2>
-<ol><li>Chọn <strong>“Thay đổi lộ trình nhóm”</strong>, sau đó chọn loại kết nối và cài đặt.</li><li>Chọn <strong>tùy chọn “Review</strong>”. Kiểm tra các tài khoản được liệt kê và các thiết lập đường dẫn tùy chỉnh riêng lẻ của từng tài khoản.</li><li>Chọn <strong>“Chuẩn bị và kiểm tra</strong>”. Quá trình kiểm tra sử dụng kênh truyền tải Telegram mới; các tuyến HTTP được hỗ trợ cũng báo cáo kết quả kiểm tra cổng ra HTTPS của chúng.</li><li>Chọn <strong>“Áp dụng kết nối đã chọn”</strong> và kiểm tra kết quả của từng tài khoản. Quá trình quan sát đang chạy trước đó sẽ tiếp tục từ điểm ứng dụng thành công; các tài khoản không hoạt động sẽ vẫn ở trạng thái không hoạt động.</li></ol>
-<p>Độ trễ mô tả quá trình thiết lập kết nối Telegram đã được đo lường. Kiểm tra địa chỉ IP đầu ra mô tả tuyến đường đó tại thời điểm kiểm tra được ghi lại. Tình trạng ủy quyền tài khoản và tình trạng hoạt động giám sát có các chỉ số riêng; việc thay đổi nhóm có thể dẫn đến các kết quả khác nhau tùy theo từng tài khoản.</p>
+<ol><li><strong>Thay đổi lộ trình nhóm</strong>, chọn loại và cài đặt.</li><li><strong>Xem lại lựa chọn</strong>: xem tài khoản nào thay đổi và tài khoản nào có tuyến riêng.</li><li><strong>Chuẩn bị và kiểm tra</strong> thử một kết nối Telegram mới, cùng IP thoát nếu có thể.</li><li><strong>Áp dụng kết nối đã kiểm tra</strong> và xem từng kết quả. Tài khoản đang chạy tiếp tục, tài khoản đang nghỉ vẫn nghỉ.</li></ol>
+<p>Độ trễ là thời gian thiết lập kết nối Telegram, IP thoát là IP mà tuyến hiển thị lúc kiểm tra. Kết quả có thể khác nhau giữa các tài khoản.</p>
 
 <h2 id="shared-chats">Sử dụng quyền truy cập chồng chéo</h2>
-<p><strong>Tính năng “Chats several accounts see”</strong> hiển thị các nguồn được chia sẻ và phạm vi quan sát không gian làm việc hiện có. Các kênh và siêu nhóm đủ điều kiện có thể sử dụng <strong>tính</strong> <strong>năng</strong> <strong>“Export with … accounts”</strong> để chia nhỏ quá trình thu thập lịch sử của một cuộc trò chuyện. Các cuộc trò chuyện riêng tư và nhóm thông thường vẫn thuộc về tài khoản ban đầu vì số tin nhắn của chúng thuộc về lịch sử của tài khoản đó.</p>
+<p><strong>Trò chuyện mà nhiều tài khoản thấy</strong> liệt kê các nguồn chung và phạm vi của chúng. Kênh và siêu nhóm có thể được nhiều tài khoản xuất cùng lúc bằng <strong>Xuất với … tài khoản</strong>. Trò chuyện riêng và nhóm thường thì không, vì số tin nhắn của chúng tính theo từng tài khoản.</p>
 
 <h2 id="export-group">Xuất nhóm dưới dạng gói</h2>
-<p><strong>Tính năng xuất nhóm</strong> tạo ra một tệp ZIP chứa bản xuất đã được ký của từng tài khoản và danh sách các tệp đó cũng đã được ký. Danh tính và dấu vân tay của không gian làm việc gốc vẫn có sẵn để xác minh. Xây dựng một câu chuyện xuyên suốt các tài khoản bằng cách sử dụng các tham chiếu đó; một dòng thời gian hợp nhất duy nhất vẫn được lập riêng biệt.</p>
-<p>Tiếp tục với <a href="../reports/">thiết kế báo cáo</a>, <a href="../case-board/">Case Board trong không gian làm việc</a> hoặc <a href="../exports/">xuất dữ liệu để xác minh</a>.</p>
+<p><strong>Xuất nhóm</strong> cho một ZIP chứa bản xuất có chữ ký của mọi tài khoản và danh sách có chữ ký của chúng. Mỗi bản giữ dấu vân tay riêng để xác minh. Dòng thời gian gộp thì bạn vẫn phải tự dựng.</p>
+<p>Tiếp theo: <a href="../reports/">báo cáo</a>, <a href="../case-board/">Case Board</a>, <a href="../exports/">xác minh bản xuất</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">Tham khảo đầy đủ →</a><a class="next-guide" href="../cases/"><span>Bước tiếp theo</span><strong>Điều tra trên tất cả các cuộc trò chuyện →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../reference/verification/">Những nội dung đã được kiểm thử →</a></p></footer>
 </main>

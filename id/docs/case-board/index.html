@@ -32,11 +32,11 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../">Dokumentasi</a> <span aria-hidden="true">/</span> <span aria-current="page">Buat Case Board</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentasi / 10</p><h1>Buat Case Board</h1><p class="guide-outcome">Ubah pengamatan Telegram yang disimpan menjadi sebuah kasus yang dapat ditinjau bersama oleh tim Anda.</p>
-<p>Case Board menyimpan penanda, sorotan teks persis, potongan yang disimpan, dan diskusi di samping referensi sumbernya. Sebuah koleksi memberikan struktur kerja pada kasus; revisi yang ditandatangani melestarikan bagaimana tim mengembangkannya.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentasi / 10</p><h1>Buat Case Board</h1><p class="guide-outcome">Ubah pesan tersimpan menjadi kasus yang dikerjakan tim Anda bersama.</p>
+<p>Penanda, kutipan persis, potongan, dan diskusi, masing-masing terhubung ke sumbernya. Setiap perubahan adalah revisi bertanda tangan.</p>
 
 <h2 id="first-card">Dari pesan ke kartu kasus</h2>
-<ol><li>Buka <strong>Investigasi → Case Board</strong> dalam mode Standar atau Ahli. Buat koleksi untuk kasus tersebut dan pilih cakupan obrolannya.</li><li>Di <strong>Journal</strong> atau obrolan yang disimpan, pilih <strong>&quot;To board</strong>&quot;, atau sorot catatan tersebut dan tekan <strong>B</strong>. Kartu tersebut akan masuk ke Inbox; berikan judul yang berguna dan pindahkan ke koleksi Anda.</li><li>Pilih bagian dalam pesan obrolan yang disimpan, lalu pilih <strong>Sorot → papan</strong> untuk mempertahankan kutipan dan versi pesan yang tepat. Tambahkan catatan yang menjelaskan mengapa hal tersebut penting.</li><li>Diskusikan kartu tersebut, tetapkan status tinjauan, dan kembali ke konteks asalnya setiap kali klaim perlu diverifikasi. Gunakan <strong>fitur Presentasi</strong> untuk memandu rekan kerja melalui proses pengumpulan data.</li></ol>
+<ol><li><strong>Investigasi → Case Board</strong> (mode Standar atau Ahli). Buat koleksi untuk kasusnya.</li><li>Di <strong>Jurnal</strong> atau obrolan, tekan <strong>Ke papan</strong> (atau <strong>B</strong>). Kartu masuk ke Kotak masuk; beri judul lalu pindahkan.</li><li>Pilih teks di pesan, <strong>Sorot → papan</strong> menyimpan kutipan persis dan versinya. Catat mengapa itu penting.</li><li>Diskusikan, beri status, kembali ke sumber kapan pun perlu. <strong>Presentasi</strong> membawa tim menelusuri materinya.</li></ol>
 
 <section class="workflow-lab" data-workflow="board" aria-labelledby="board-example-title">
   <h3 id="board-example-title">Ikuti satu tautan pembayaran yang telah diubah</h3>
@@ -58,15 +58,15 @@
 </section>
 
 <h2 id="slices">Simpan rentang yang berguna sekali saja</h2>
-<p>Tekan Shift dan klik dua catatan dalam satu obrolan untuk <strong>memotong (Slice) di antara keduanya</strong>, pilih <strong>&quot;Potong berdasarkan waktu</strong>&quot;, atau simpan filter Jurnal saat ini. Periksa jumlahnya sebelum menyimpan. Buka kembali potongan tersebut untuk menerapkan kueri yang telah disimpan; <strong>Tampilkan catatan yang ditambahkan sejak penanda halaman</strong> untuk melihat penambahan selanjutnya.</p>
-<p>Potongan waktu mengikuti waktu pengamatan pengumpul. Potongan ID pesan dapat mengikuti pesan yang dipilih seiring dengan masuknya perubahan selanjutnya. Batas pembuatan yang disimpan memungkinkan penerima membandingkan pilihan asli dengan statusnya di kemudian hari.</p>
+<p>Shift-klik dua pesan untuk <strong>Potongan di antara</strong>, gunakan <strong>Potongan menurut waktu</strong>, atau simpan filter Jurnal saat ini. <strong>Tampilkan catatan sejak penanda</strong> memperlihatkan yang datang kemudian.</p>
+<p>Potongan waktu memakai waktu pengamatan; potongan ID pesan mengikuti pesan-pesan itu saat berubah.</p>
 
 <h2 id="team">Berikan peran yang tepat kepada setiap rekan kerja</h2>
-<p><strong>Peninjau</strong> membaca papan; <strong>Analis</strong> menambahkan kartu dan komentar; <strong>Operator</strong> juga mengelola koleksi dan keputusan peninjauan. Izin ruang kerja dan obrolan berlaku untuk kartu, konteks sumber, dan diskusi. Gunakan pemberian akses berlabel untuk atribusi yang jelas.</p>
+<p><strong>Peninjau</strong> membaca, <strong>Analis</strong> menambah kartu dan komentar, <strong>Operator</strong> juga mengelola koleksi dan keputusan. Izin obrolan juga berlaku untuk kartu.</p>
 
 <h2 id="deliver">Selesaikan pekerjaan ini menjadi hasil akhir yang siap diserahkan</h2>
-<p>Ekspor potongan data sebagai JSON yang ditandatangani, atau gunakan CSV untuk spreadsheet. Pengaturan laporan dapat mencakup penanda dan potongan data, beserta komentar tim jika dipilih. Pilih konten-konten ini di <a href="../reports/">Report Studio</a>; potongan data yang disimpan tidak secara otomatis mengonfigurasi laporan. Untuk penerima yang dibatasi, gunakan <a href="../handover/">kontrol penyerahan</a> terpisah.</p>
-<p>Baca panduan <a href="../reference/case-board/">referensi Case Board</a> mengenai revisi yang ditandatangani, pencocokan kutipan yang tepat, verifikasi pemilihan, dan izin.</p>
+<p>Potongan diekspor sebagai JSON bertanda tangan atau CSV. Laporan bisa memuat penanda, potongan, dan komentar; atur itu di <a href="../reports/">Report studio</a>. Untuk penerima terbatas, gunakan <a href="../handover/">serah terima</a>.</p>
+<p>Detail: <a href="../reference/case-board/">referensi Case Board</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/case-board/">Referensi lengkap →</a><a class="next-guide" href="../reports/"><span>Langkah selanjutnya</span><strong>Rancang laporan →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../reference/verification/">Apa yang telah diuji →</a></p></footer>
 </main>

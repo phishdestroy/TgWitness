@@ -62,10 +62,3 @@ Trang nhóm `/groups/<id>` hiển thị danh sách thành viên, những nội d
 Một không gian làm việc có phiên làm việc hoặc đã được thiết lập trước đó sẽ không hiển thị trình hướng dẫn. Các giá trị của nó sẽ không bị thay thế bởi mục tiêu khi trang được tải. Việc ẩn một trường không tắt tính năng này hoặc xóa giá trị của nó.
 
 Ước tính về dung lượng và thời gian dựa trên tối đa ba cuộc trò chuyện được chọn và tối đa 20 tin nhắn từ mỗi cuộc trò chuyện. Đây chỉ là ước tính: nó không dự đoán các giới hạn của Telegram, tốc độ của một máy chủ cụ thể hoặc các tệp trong mỗi cuộc trò chuyện.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

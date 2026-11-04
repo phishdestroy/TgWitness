@@ -32,55 +32,55 @@
 <nav class="breadcrumbs" aria-label="Anleitungen"><a href="../../">Startseite</a> <span aria-hidden="true">/</span> <a href="../">Dokumentation</a> <span aria-hidden="true">/</span> <span aria-current="page">Exportieren und verifizieren</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Was wurde getestet? →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Durchsuchen Sie die Dokumentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Versuchen Sie es mit „Proxy“, „Hash-Kette“, „Token“ oder „Witness“ …" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Klare Suche" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Geben Sie ein Wort ein, um die Anleitungen und das Nachschlagewerk zu durchsuchen. Die Suche erfolgt in Ihrem Browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentation / 07</p><h1>Exportieren und verifizieren</h1><p class="guide-outcome">Stellen Sie dem Empfänger Dateien zur Verfügung, die er mit dem Erfassungsarbeitsbereich und dessen gespeichertem Verlauf abgleichen kann.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentation / 07</p><h1>Exportieren und verifizieren</h1><p class="guide-outcome">Geben Sie jemandem Dateien, die er selbst gegen Ihren Arbeitsbereich prüfen kann.</p>
 <div class="flow-strip export-flow" aria-label="Übergabe von Beweismitteln: Bewahren Sie einen vertrauenswürdigen Verweis auf, exportieren Sie die signierte ZIP-Datei und überprüfen Sie diese gemeinsam mit dem Empfänger."><span>Bitte verweisen Sie darauf</span><span>Signierte ZIP-Datei exportieren</span><span>Der Empfänger überprüft</span></div>
-<p>Sind Sie neu im Bereich Signaturen und Prüfpunkte? <a href="../concepts/#chain">Ändern Sie einen Beispieldatensatz</a> und sehen Sie, welche Prüfungen dies erkennen.</p>
+<p>Neu bei Signaturen und Prüfpunkten? <a href="../concepts/#chain">Ändern Sie einen Beispieleintrag</a> und sehen Sie, welche Prüfungen es bemerken.</p>
 <p>Möchten Sie eine Kopie außerhalb des Datensammlers aufbewahren? Gehen Sie zu <a href="#s3">„S3-Einrichtung“</a>, <a href="#s3-retention">„Objekt-Sperre“</a> oder <a href="#s3-restore">„verifizierte Wiederherstellung</a>“.</p>
 <h2 id="retain">Eine vertrauenswürdige Referenz bereitstellen</h2>
-<p>Speichern Sie den Fingerabdruck des öffentlichen Schlüssels des Arbeitsbereichs außerhalb des Erfassungssystems. Bewahren Sie während der Erfassung signierte Kontrollpunkte an einem anderen Ort auf oder nutzen Sie einen <a href="../witness/">unabhängigen Zeugen</a>. Anhand dieser Referenzen kann ein Empfänger den Schlüssel und eine frühere Protokollgrenze überprüfen.</p>
+<p>Notieren Sie den Schlüssel-Fingerabdruck des Arbeitsbereichs irgendwo außerhalb des Collectors. Bewahren Sie während der Erfassung auch signierte Prüfpunkte woanders auf oder betreiben Sie einen <a href="../witness/">unabhängigen Zeugen</a>. Dagegen prüft der Empfänger den Schlüssel und einen früheren Journalstand.</p>
 <h2 id="export">Laden Sie die signierte ZIP-Datei herunter</h2>
-<p>Öffnen Sie <strong>„Exports“</strong> und erstellen Sie eine signierte ZIP-Datei mit Beweismaterial. Diese enthält das vollständige Arbeitsprotokoll sowie ein signiertes Dateimanifest. Verwenden Sie <a href="../reports/">„Report Studio“</a>, um einen übersichtlichen Bericht zu erstellen, oder einen <a href="../handover/">Übergabeauszug</a>, um nur ausgewählte, minimierte Daten zu übermitteln.</p>
-<p>HTML-, PDF- und JSON-Berichte sind mit eigenen Signatursiegeln versehen und können separat überprüft werden. CSV-Dateien dienen als praktische Analysekopie; verwenden Sie die exakte CSV-Datei aus der verifizierten ZIP-Datei, um deren Integrität zu überprüfen. Bewahren Sie die signierte ZIP-Datei auf, wenn der Empfänger auch die Quelldatensätze und Anhänge benötigt.</p>
+<p><strong>Exporte</strong> → signiertes Beweis-ZIP. Es enthält das ganze Journal und ein signiertes Dateimanifest. Den lesbaren Bericht gestalten Sie im <a href="../reports/">Report studio</a>, oder Sie schicken nur ausgewählte Daten als <a href="../handover/">Übergabeauszug</a>.</p>
+<p>HTML-, PDF- und JSON-Berichte tragen eigene Siegel. CSV ist nur eine Arbeitskopie; für die Integrität nehmen Sie die CSV aus dem geprüften ZIP.</p>
 <h2 id="verify">Überprüfen Sie dies anhand einer vertrauenswürdigen Kopie von TgWitness</h2>
-<p>Ersetzen Sie in der installierten Projektumgebung den Beispiel-Fingerabdruck und die Dateipfade:</p>
+<p>In der Projektumgebung, mit Ihrem eigenen Fingerabdruck und Pfaden:</p>
 <pre><code>python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
-<p>Wenn beide Referenzen erfolgreich sind, werden im Ergebnis „<code>key_pinned: true</code>“ und „<code>checkpoint_checked: true</code>“ angezeigt. Bewahren Sie das Verifizierungsergebnis zusammen mit dem Originalarchiv auf. Der beibehaltene Prüfpunkt muss an der Grenze des Exports oder davor liegen.</p>
+<p>Bei Erfolg sehen Sie <code>key_pinned: true</code> und <code>checkpoint_checked: true</code>. Bewahren Sie diese Ausgabe beim Archiv auf. Der Prüfpunkt muss am Ende des Exports oder davor liegen.</p>
 <h2 id="meaning">Verwenden Sie das Verifizierungsergebnis</h2>
-<ul><li><strong>Überprüfen Sie die gelieferten Dateien:</strong> Das Manifest verknüpft deren Hashes, und Datensatzsignaturen verknüpfen das gespeicherte Protokoll. Eine geänderte Datei oder eine unterbrochene Datensatzkette wird erkannt.</li><li><strong>Überprüfen Sie die Identität des Arbeitsbereichs:</strong> Der unabhängig gespeicherte Fingerabdruck identifiziert den von Ihnen erwarteten Signaturschlüssel.</li><li><strong>Vergleichen Sie eine frühere Grenze:</strong> Ein beibehaltener Checkpoint gleicht den Export mit einem vor der Übergabe gespeicherten Journalpräfix ab.</li><li><strong>Überprüfen Sie den Erfassungsumfang:</strong> Lücken, Erfassungsergebnisse und ein kontrollierter Test mit den Schritten „Senden → Bearbeiten → Löschen“ beschreiben die Ereignisse, die diese Konfiguration erfasst hat.</li></ul>
-<p>Bewahren Sie diese Ergebnisse zusammen mit der Kopie des Empfängers auf. Prüfen Sie, <a href="../reference/evidence/#verification-scope">was die Verifizierung</a> hinsichtlich des Umfangs der Überprüfungen und der separaten Bewertung von Quellenangaben und Erfassungsgrad <a href="../reference/evidence/#verification-scope">ergibt</a>.</p>
+<ul><li><strong>Dateien:</strong> Das Manifest bindet ihre Hashes, die Signaturen binden das Journal. Jede Änderung fällt auf.</li><li><strong>Identität:</strong> Der aufbewahrte Fingerabdruck belegt, dass es der erwartete Schlüssel ist.</li><li><strong>Früherer Stand:</strong> Ein Prüfpunkt vergleicht den Export mit einem vor der Übergabe gespeicherten Journalanfang.</li><li><strong>Abdeckung:</strong> Lücken, Erfassungsergebnisse und ein Test Senden → Bearbeiten → Löschen zeigen, was dieses Setup wirklich erfasst hat.</li></ul>
+<p>Details: <a href="../reference/evidence/#verification-scope">was die Prüfung beweist und was nicht</a>.</p>
 
 <h2 id="s3">Richten Sie die externe S3-Kopie ein</h2>
-<p>Öffnen Sie in Ihrem aktiven Arbeitsbereich <strong>„Exporte“ → „Externe Kopie</strong>“. Diese optionale Funktion ist mit AWS S3 und anderen S3-kompatiblen Diensten kompatibel. Sie kopiert Protokollsegmente, gesicherte Fotos und Dateien, Checkpoints mit ihren Zeitstempel-Antworten sowie abgeschlossene Chat-Exporte. Jedes Objekt wird vor dem Hochladen auf dem Collector mit „<code>AES-256-GCM</code>“ verschlüsselt.</p>
-<p>Die Online-Demo zeigt dieselben Bedienelemente, wobei das Hochladen deaktiviert ist. Geben Sie Ihre Speicherzugangsdaten bitte nur in Ihrem eigenen, laufenden Arbeitsbereich ein.</p>
+<p><strong>Exporte → Externe Kopie</strong> in Ihrem Arbeitsbereich. Funktioniert mit AWS S3 und allem, was S3-kompatibel ist. Kopiert Journalsegmente, gespeicherte Dateien, Prüfpunkte mit ihren Zeitstempeln und fertige Chat-Exporte, jeweils mit <code>AES-256-GCM</code> verschlüsselt, bevor sie den Collector verlassen.</p>
+<p>Die Online-Demo zeigt diese Einstellungen mit deaktiviertem Upload. Echte Zugangsdaten nur in Ihrer eigenen Installation eingeben.</p>
 <figure><a href="../../../assets/off-site-copy.png"><img src="../../../assets/off-site-copy.png" width="1136" height="825" alt="Vollständiges Off-Site-Kopier-Panel: Endpunkt, Region, Bucket, Zugriffsschlüssel, Zeitplan, „Object Lock“- und Wiederherstellungsschlüssel-Steuerelemente" loading="lazy"></a><figcaption>Das vollständige Bedienfeld mit erweiterten Optionen ist aufgeklappt. Es werden keine Anmeldedaten für den Speicher angezeigt.</figcaption></figure>
 <div class="table-wrap"><table><caption>Speichereinstellungen unter „Exporte“ → „Externe Kopie“</caption><thead><tr><th scope="col">Fachgebiet</th><th scope="col">Was ist einzugeben?</th></tr></thead><tbody>
-<tr><th scope="row">Endpunkt</th><td>Die URL des Speicherdienstes, ohne Bucket-Pfad oder Anmeldedaten. Fiktives Beispiel: <code>https://s3.example.invalid</code>.</td></tr>
-<tr><th scope="row">Region</th><td>Die von Ihrem Provider geforderte Region. Die Standardeinstellung der Anwendung lautet „<code>us-east-1</code>“.</td></tr>
-<tr><th scope="row">Bucket</th><td>Ein bereits vorhandener Bucket, auf den Sie zugreifen können. Fiktives Beispiel: <code>example-case-backup</code>.</td></tr>
-<tr><th scope="row">Ordner im Bucket</th><td>Das Objektpräfix; Standardwert <code>tgwitness</code>. Die Anwendung fügt ein Präfix hinzu, das aus dem Fingerabdruck des Signaturschlüssels dieses Arbeitsbereichs abgeleitet wird.</td></tr>
-<tr><th scope="row">Zugriffs-ID / Geheimer Zugangsschlüssel</th><td>Geben Sie beide Speicherzugangsdaten gemeinsam ein. Diese werden im Workspace-Tresor gespeichert. Lassen Sie bei späteren Speichervorgängen beide Felder leer, um das gespeicherte Paar beizubehalten.</td></tr>
-<tr><th scope="row">Adressen im Pfadformat</th><td>Verwenden Sie je nach Anbieter „<code>endpoint/bucket</code>“, wenn die Funktion aktiviert ist, oder „<code>bucket.endpoint</code>“, wenn sie deaktiviert ist.</td></tr>
-<tr><th scope="row">Kopierintervall</th><td>Von 1 bis 1.440 Minuten; Standardwert 5 Minuten. Für geplante Sicherungen muss die Anwendung ausgeführt werden.</td></tr>
-<tr><th scope="row">Aufbewahrungsfrist für „Object Lock“</th><td>Aufbewahrungsdauer und -modus für einen Bucket, der „Object Lock“ unterstützt. Bei „Zero Days“ bleibt die Standardaufbewahrungsdauer des Buckets in Kraft.</td></tr>
+<tr><th scope="row">Endpunkt</th><td>Speicher-URL, ohne Bucket-Pfad oder Zugangsdaten. Beispiel: <code>https://s3.example.invalid</code>.</td></tr>
+<tr><th scope="row">Region</th><td>Was Ihr Anbieter verlangt. Standard <code>us-east-1</code>.</td></tr>
+<tr><th scope="row">Bucket</th><td>Ein vorhandener Bucket mit Schreibrechten. Beispiel: <code>example-case-backup</code>.</td></tr>
+<tr><th scope="row">Ordner im Bucket</th><td>Präfix, Standard <code>tgwitness</code>. Ein Präfix pro Arbeitsbereich kommt dazu.</td></tr>
+<tr><th scope="row">Zugriffs-ID / Geheimer Zugangsschlüssel</th><td>Beide zusammen, im Tresor gespeichert. Später beide leer lassen, um sie zu behalten.</td></tr>
+<tr><th scope="row">Adressen im Pfadformat</th><td>An: <code>endpoint/bucket</code>. Aus: <code>bucket.endpoint</code>. Hängt vom Anbieter ab.</td></tr>
+<tr><th scope="row">Kopierintervall</th><td>1 bis 1.440 Minuten, Standard 5. Nur solange die App läuft.</td></tr>
+<tr><th scope="row">Aufbewahrungsfrist für „Object Lock“</th><td>Tage und Modus, wenn der Bucket Object Lock unterstützt. Null lässt den Bucket-Standard.</td></tr>
 </tbody></table></div>
 <ol>
-<li>Erstellen Sie den Bucket bei Ihrem Anbieter und geben Sie anschließend dessen Zielort und Anmeldedaten ein. Lassen Sie die<strong> </strong>Option<strong> „Externe Kopie behalten“</strong> während der Vorbereitung deaktiviert und wählen Sie anschließend <strong>„Externe Kopie speichern“</strong> aus.</li>
-<li>Wählen Sie <strong>„Verbindung testen“</strong> aus. Dadurch wird ein verschlüsseltes Testobjekt hochgeladen und die Antwort des Speichers überprüft.</li>
-<li>Wählen Sie <strong>„Verschlüsselungsschlüssel herunterladen“</strong> aus. Bewahren Sie diese Datei getrennt vom Datenerfassungs-Tool auf; sie wird für die Wiederherstellung benötigt.</li>
-<li>Aktivieren Sie das Kontrollkästchen <strong>„Externe Kopie erstellen“</strong> und speichern Sie erneut. Wählen Sie <strong>„Jetzt kopieren“</strong> für einen manuellen Durchlauf oder lassen Sie den Zeitplan weiterlaufen.</li>
+<li>Bucket anlegen, Ziel und Zugangsdaten mit deaktiviertem <strong>Externe Kopie behalten</strong> ausfüllen, <strong>Externe Kopie speichern</strong> klicken.</li>
+<li><strong>Verbindung testen</strong> lädt ein verschlüsseltes Testobjekt hoch.</li>
+<li><strong>Verschlüsselungsschlüssel herunterladen</strong> und fern vom Collector aufbewahren. Kein Schlüssel, keine Wiederherstellung.</li>
+<li><strong>Externe Kopie behalten</strong> aktivieren, speichern, dann <strong>Jetzt kopieren</strong> oder den Zeitplan laufen lassen.</li>
 </ol>
 
 <h2 id="s3-retention">Aufbewahrungsstatus und Kopierfortschritt prüfen</h2>
-<p>Wählen Sie unter <strong>„Weitere Optionen</strong>“ die Aufbewahrungsdauer sowie „<code>GOVERNANCE</code>“ oder „<code>COMPLIANCE</code>“ aus, wenn Ihr Bucket „Object Lock“ unterstützt. TgWitness liest den Aufbewahrungsmodus und die Frist eines hochgeladenen Objekts aus. Überprüfen Sie das separate Aufbewahrungsergebnis: bestätigt, fehlende Aufbewahrung oder Überprüfung fehlgeschlagen.</p>
-<p>Das Panel meldet den letzten Durchlauf, die Anzahl der Objekte, die übertragenen Bytes, die Grenze des kopierten Protokolls sowie etwaige Fehler. Fehlende oder geänderte lokale Medien werden gemeldet und im nächsten Durchlauf erneut versucht. Dateien, Checkpoints und in der Warteschlange befindliche Exporte, die nach diesen Medien folgen, können weiterhin kopiert werden.</p>
-<p>Uploads erfolgen über die Route „Direct“, „SOCKS5“ oder „HTTP“ des Arbeitsbereichs. Wählen Sie eine dieser Routen für das Kopieren in S3; eine Route, die ausschließlich MTProxy verwendet, lässt die Kopie mit einem Fehler hängend.</p>
+<p>Unter <strong>Weitere Optionen</strong> Aufbewahrungstage und <code>GOVERNANCE</code> oder <code>COMPLIANCE</code> wählen. TgWitness liest die Aufbewahrung von einem hochgeladenen Objekt zurück und meldet: bestätigt, fehlt oder Prüfung fehlgeschlagen.</p>
+<p>Das Panel zeigt den letzten Durchlauf, Objektanzahl, Bytes, kopierte Journalgrenze und Fehler. Eine fehlende lokale Datei wird gemeldet und im nächsten Durchlauf erneut versucht, der Rest wird weiter kopiert.</p>
+<p>Uploads laufen direkt, über SOCKS5 oder HTTP. Mit einer reinen MTProxy-Route wartet die Kopie mit einem Fehler.</p>
 
 <h2 id="s3-key">Bewahren Sie den Wiederherstellungsschlüssel separat auf</h2>
-<p>Die heruntergeladene JSON-Datei enthält den Entschlüsselungsschlüssel, die Zieleinstellungen, das Präfix für Arbeitsbereichsobjekte und den Fingerabdruck des Signaturschlüssels. Für die Wiederherstellung sind sowohl diese Schlüsseldatei als auch separate Speicherzugangsdaten mit Lesezugriff auf den Bucket erforderlich. Nehmen Sie diese in Ihren Wiederherstellungsplan auf.</p>
-<p>Wenn Sie den Endpunkt, den Bucket oder das Ordnerpräfix ändern, laden Sie die Schlüsseldatei erneut herunter, damit die Zieleinstellungen übereinstimmen. Die Anwendung startet eine neue Kopie des lokal gespeicherten Protokolls, der Dateien und der Checkpoints am neuen Speicherort. Abgeschlossene Chat-Exporte, die bereits aus der lokalen Upload-Warteschlange entfernt wurden, verbleiben an ihrem bisherigen Speicherort.</p>
+<p>Das Schlüssel-JSON enthält den Entschlüsselungsschlüssel, das Ziel, das Präfix und den Schlüssel-Fingerabdruck. Zur Wiederherstellung brauchen Sie es plus Speicherzugangsdaten mit Leserecht.</p>
+<p>Endpunkt, Bucket oder Präfix geändert? Laden Sie den Schlüssel neu herunter. Am neuen Ziel startet eine frische Kopie, alte Chat-Exporte bleiben, wo sie waren.</p>
 
 <h2 id="s3-restore">Wiederherstellung und Überprüfung auf einem anderen Rechner</h2>
-<p>Verwenden Sie eine vertrauenswürdige Installation von TgWitness, die heruntergeladene JSON-Schlüsseldatei, Speicherzugangsdaten mit Lesezugriff sowie ein leeres Ausgabeverzeichnis. Ersetzen Sie die unten aufgeführten fiktiven Platzhalter für die Zugangsdaten.</p>
+<p>Sie brauchen eine vertrauenswürdige TgWitness-Installation, das Schlüssel-JSON, Nur-Lese-Zugangsdaten und einen leeren Ordner:</p>
 <h3>Windows PowerShell</h3>
 <pre><code>$env:TGWITNESS_S3_ACCESS_KEY = 'YOUR_READ_ACCESS_KEY'
 $env:TGWITNESS_S3_SECRET_KEY = 'YOUR_READ_SECRET_KEY'
@@ -89,9 +89,8 @@ python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out 
 <pre><code>export TGWITNESS_S3_ACCESS_KEY='YOUR_READ_ACCESS_KEY'
 export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence</code></pre>
-<p>Downloads und entschlüsselte Objekte verbleiben in einem privaten Zwischenspeicher, während das gesamte Protokoll, die gespeicherten Kontrollpunkte sowie die Hashes und Größen der erhaltenen Medien überprüft werden. Unsichere Pfade, widersprüchliche Protokollsegmente und ein Protokoll, das kürzer ist als sein Kontrollpunkt, werden abgelehnt. Bei einer fehlgeschlagenen Überprüfung werden keine wiederhergestellten Dateien veröffentlicht.</p>
-<p>Bei erfolgreicher Wiederherstellung werden die Werte „<code>events.jsonl</code>“, „<code>media/</code>“, „<code>checkpoints/</code>“ und „<code>exports/</code>“ für das in der Kopie verfügbare Material ausgegeben. Bewahren Sie das JSON-Ergebnis des Befehls zusammen mit dem wiederhergestellten Material auf.</p>
-<p>Vergleichen Sie das wiederhergestellte Material mit Ihren unabhängig gespeicherten Kontrollpunkten oder Zeugenprotokollen und überprüfen Sie anschließend den Erfassungsumfang der Aufzeichnungen für den von Ihnen benötigten Zeitraum.</p>
+<p>Erst wird alles in einem privaten Temp-Ordner geprüft: das ganze Journal, Prüfpunkte, Datei-Hashes und Größen. Unsichere Pfade, widersprüchliche Segmente oder ein Journal kürzer als sein Prüfpunkt schlagen fehl, und dann wird nichts geschrieben.</p>
+<p>Bei Erfolg bekommen Sie <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> und <code>exports/</code>. Bewahren Sie die JSON-Ausgabe des Befehls dazu auf und vergleichen Sie mit selbst aufbewahrten Prüfpunkten oder Zeugen-Einträgen.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/evidence/">Vollständige Quellenangabe →</a><a class="next-guide" href="../reports/"><span>Nächster Schritt</span><strong>Erstellen Sie einen Bericht →</strong></a><p>Diese Leitfäden beschreiben die aktuelle Implementierung. Validierungsergebnisse und verbleibende Lücken werden separat dokumentiert. <a href="../reference/verification/">Was wurde getestet? →</a></p></footer>
 </main>

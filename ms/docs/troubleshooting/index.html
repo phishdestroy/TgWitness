@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../">Home</a> <span aria-hidden="true">/</span> <a href="../">Dokumentasi</a> <span aria-hidden="true">/</span> <span aria-current="page">Temui apa yang salah</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentasi / 18</p><h1>Temui apa yang salah</h1><p class="guide-outcome">Mulakan dengan simptom. Periksa satu lapisan pada satu masa.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentasi / 18</p><h1>Temui apa yang salah</h1><p class="guide-outcome">Mulakan dari gejala, semak satu perkara pada satu masa.</p>
 <h2 id="panel">Panel meminta token</h2>
-<p>Gunakan token panel daripada fail tempatan yang dipaparkan oleh pelancar. Untuk Docker, jalankan <code>docker compose exec tgwitness cat /data/panel-token.txt</code>. Kod log masuk Telegram, token BotFather dan token saksi baca sahaja mempunyai tujuan yang berbeza.</p>
+<p>Ia mahukan token panel daripada fail yang dicetak pelancar. Docker: <code>docker compose exec tgwitness cat /data/panel-token.txt</code>. Bukan kod Telegram, bukan token bot, bukan token saksi.</p>
 <h2 id="network">Telegram tidak bersambung</h2>
-<p>Buka tetapan sambungan dan jalankan pemeriksaan sambungan. Jika menggunakan proksi awam, cuba entri lain dan simpan laluan secara eksplisit. Semak jenis proksi dan format rahsia yang disokong. Mengemas kini senarai awam tidak menukar laluan akaun.</p>
+<p>Jalankan semakan sambungan. Pada proksi awam, pilih yang lain dan simpan. Semak jenis proksi dan format rahsia. Menyegar semula senarai tidak menukar laluan dengan sendirinya.</p>
 <h2 id="messages">Disambungkan, tetapi tiada mesej baru</h2>
-<ol><li>Periksa bahawa observation sedang berjalan di ruang kerja yang betul.</li><li>Pastikan sumber telah dipilih dan dapat dilihat oleh akaun tersebut.</li><li>Hantar mesej baharu unik dalam kumpulan terkawal dan cari teks tepat itu.</li><li>Semak jurnal operasi untuk gangguan, kerja tertangguh atau ralat Telegram.</li></ol>
-<p>Snapshot sejarah dan peristiwa mesej baru adalah berbeza. Sumber senyap boleh disambungkan tanpa menghasilkan mesej baru. Gunakan ujian penghantaran terkawal apabila kesempurnaan menjadi penting.</p>
+<ol><li>Adakah pemerhatian berjalan, dalam ruang kerja yang betul?</li><li>Adakah sumber dipilih dan kelihatan kepada akaun itu?</li><li>Hantar mesej unik dalam kumpulan ujian anda dan carinya.</li><li>Cari gangguan atau ralat Telegram dalam jurnal.</li></ol>
+<p>Sembang yang sunyi memang tiada apa yang baharu. Jika kelengkapan penting, jalankan ujian penghantaran terkawal.</p>
 <h2 id="wait">FloodWait atau jeda selepas memulakan semula</h2>
-<p>FloodWait bermaksud Telegram memerlukan jeda. Tunggu tempoh yang dinyatakan dan semak beban kerja pengumpulan; penyambungan semula berulang tidak membatalkan had. Keadaan kemas kini yang disimpan membantu mengejar ketinggalan selepas mula semula, tetapi kemas kini yang telah tamat tempoh dan beberapa tetingkap gangguan kekal sebagai keterbatasan. Catatkan jurang tersebut daripada menganggap jurnal itu lengkap.</p>
+<p>FloodWait ialah Telegram berkata "perlahan sikit". Tunggu sehingga ia berlalu dan kurangkan beban, menyambung semula tidak membantu. Selepas mula semula TgWitness mengejar apa yang Telegram masih ada; selebihnya ialah jurang, jadi catatkannya.</p>
 <h2 id="bot">Bot telah dikonfigurasikan tetapi tidak menyiarkan apa-apa</h2>
-<p>Pastikan proses saksi benar-benar berjalan, bot boleh membuat hantaran di saluran dan saksi dapat mengakses API Pengumpul dan Bot. Periksa jurnalnya untuk penerbitan yang gagal. Hanya tinjauan Pengumpul yang berjaya sahaja tidak mengesahkan hantaran di saluran.</p>
+<p>Adakah saksi berjalan, bolehkah bot menyiar dalam saluran, bolehkah ia mencapai pengumpul dan Bot API? Cari hantaran yang gagal dalam jurnalnya. Tinjauan di pihak pengumpul tidak bermaksud hantaran telah keluar.</p>
 <h2 id="github">Di manakah integrasi token GitHub?</h2>
 <p><strong>Dirancang.</strong> Extras menerangkan aliran kerja verifikasi fork dan binaan yang dicadangkan. Pada masa ini tiada borang token GitHub atau pengesahan automatik bahawa pemasangan yang sedang berjalan sepadan dengan repositori. Lihat <a href="../reference/features/">status ciri semasa</a>.</p>
-<p>Apabila melaporkan masalah, sertakan versi, sistem operasi, langkah-langkah dan ralat yang disensor. Pastikan sesi, token, mesej peribadi dan direktori data tidak dimasukkan ke dalam isu awam.</p>
+<p>Melaporkan pepijat? Versi, OS, langkah dan ralat yang telah disunting. Jangan sekali-kali letakkan sesi, token, mesej peribadi atau direktori data dalam issue awam.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">Rujukan penuh →</a><a class="next-guide" href="../start/"><span>Langkah seterusnya</span><strong>Mulakan dalam beberapa minit →</strong></a><p>Panduan ini menerangkan pelaksanaan semasa. Keputusan pengesahan dan jurang yang masih ada didokumenkan secara berasingan. <a href="../reference/verification/">Apa yang telah diuji →</a></p></footer>
 </main>

@@ -32,11 +32,11 @@
 <nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../">Dokumentacja</a> <span aria-hidden="true">/</span> <span aria-current="page">Utwórz tablicę sprawy</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Co zostało przetestowane →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentacja / 10</p><h1>Utwórz tablicę sprawy</h1><p class="guide-outcome">Przekształć zapisane obserwacje z Telegrama w sprawę, którą Twój zespół może wspólnie przeanalizować.</p>
-<p>Case Board przechowuje zakładki, zaznaczenia dokładnego tekstu, zapisane fragmenty oraz dyskusje obok odniesień do źródeł. Zbiór nadaje sprawie strukturę roboczą; podpisane wersje dokumentują sposób, w jaki zespół ją opracowywał.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentacja / 10</p><h1>Utwórz tablicę sprawy</h1><p class="guide-outcome">Zamień zapisane wiadomości w sprawę, nad którą pracuje cały zespół.</p>
+<p>Zakładki, dokładne cytaty, wycinki i dyskusje, każde powiązane ze źródłem. Każda zmiana to podpisana rewizja.</p>
 
 <h2 id="first-card">Od wiadomości do karty sprawy</h2>
-<ol><li>Otwórz <strong>opcję „Dochodzenie” → „Case Board”</strong> w trybie standardowym lub eksperckim. Utwórz zbiór dla danej sprawy i wybierz zakres czatów.</li><li>W <strong>dzienniku</strong> lub zapisanej rozmowie wybierz <strong>op</strong>cję <strong>„Dodaj do tablicy</strong>” lub zaznacz zapis i naciśnij <strong>klawisz</strong> <strong>B</strong>. Karta trafi do skrzynki odbiorczej; nadaj jej trafny tytuł i przenieś do swojej kolekcji.</li><li>Zaznacz fragment zapisanej wiadomości czatu i wybierz <strong>opcję</strong> <strong>„Podświetl” → „tablica”</strong>, aby zachować dokładny cytat i wersję wiadomości. Dodaj notatkę wyjaśniającą, dlaczego ma to znaczenie.</li><li>Omów kartę, przypisz status weryfikacji i wróć do kontekstu źródłowego, gdy zajdzie potrzeba sprawdzenia danego twierdzenia. Skorzystaj z <strong>funkcji „Prezentacja”,</strong> aby przejrzeć zebrane dane wraz z współpracownikami.</li></ol>
+<ol><li><strong>Dochodzenie → Case Board</strong> (tryb Standardowy lub Ekspert). Utwórz kolekcję dla sprawy.</li><li>W <strong>Dzienniku</strong> lub w czacie kliknij <strong>Na tablicę</strong> (albo <strong>B</strong>). Karta trafi do skrzynki odbiorczej — nadaj jej tytuł i przenieś.</li><li>Zaznacz tekst w wiadomości — <strong>Wyróżnij → tablica</strong> zachowa dokładny cytat i wersję. Zanotuj, dlaczego to ważne.</li><li>Dyskutuj, ustawiaj status, wracaj do źródła, kiedy trzeba. <strong>Prezentacja</strong> przeprowadzi zespół przez materiał.</li></ol>
 
 <section class="workflow-lab" data-workflow="board" aria-labelledby="board-example-title">
   <h3 id="board-example-title">Należy zastosować jeden zmieniony link do płatności</h3>
@@ -58,15 +58,15 @@
 </section>
 
 <h2 id="slices">Zapisz przydatny zakres raz</h2>
-<p>Kliknij z wciśniętym klawiszem Shift dwa zapisy w jednej rozmowie, aby <strong>utworzyć</strong> <strong>wycinek między nimi</strong>, wybierz <strong>opcję</strong> <strong>„Wycinek według czasu</strong>” lub zapisz bieżące filtry dziennika. Przed zapisaniem sprawdź liczbę zapisów. Otwórz ponownie wycinek, aby zastosować zapisane zapytanie; opcja <strong>„Pokaż zapisy dodane od momentu utworzenia zakładki”</strong> pozwala wyświetlić późniejsze dodania.</p>
-<p>Przedział czasowy odpowiada czasowi obserwacji przez moduł zbierający. Przedział identyfikatorów wiadomości może śledzić wybrane wiadomości w miarę pojawiania się późniejszych zmian. Zapisana granica utworzenia pozwala odbiorcy porównać pierwotny wybór z jego późniejszym stanem.</p>
+<p>Shift+klik na dwóch wiadomościach dla <strong>Wycinek pomiędzy</strong>, użyj <strong>Wycinek według czasu</strong> albo zapisz bieżące filtry dziennika. <strong>Pokaż wpisy dodane od zakładki</strong> pokaże, co przyszło później.</p>
+<p>Wycinki czasowe używają czasu obserwacji, wycinki według ID śledzą te wiadomości, gdy się zmieniają.</p>
 
 <h2 id="team">Przypisz każdemu współpracownikowi odpowiednią rolę</h2>
-<p><strong>Recenzent</strong> przegląda tablicę; <strong>analityk</strong> dodaje karty i komentarze; <strong>operator</strong> zarządza również zbiorami i decyzjami dotyczącymi przeglądu. Uprawnienia do obszaru roboczego i czatu mają zastosowanie do kart, kontekstu źródłowego i dyskusji. Należy stosować nazwane uprawnienia dostępu w celu jasnego przypisania autorstwa.</p>
+<p><strong>Recenzent</strong> czyta, <strong>Analityk</strong> dodaje karty i komentarze, <strong>Operator</strong> zarządza też kolekcjami i decyzjami. Uprawnienia do czatów dotyczą także kart.</p>
 
 <h2 id="deliver">Przekształć tę pracę w gotowy produkt</h2>
-<p>Wyeksportuj fragment jako podpisany plik JSON lub użyj formatu CSV do arkusza kalkulacyjnego. Ustawienia raportu mogą obejmować zakładki i fragmenty, a po zaznaczeniu tej opcji – również komentarze zespołu. Wybierz te elementy w <a href="../reports/">Report Studio</a>; zapisany fragment nie powoduje automatycznej konfiguracji raportu. W przypadku odbiorcy z ograniczonymi uprawnieniami użyj oddzielnych <a href="../handover/">elementów sterujących przekazywaniem</a>.</p>
-<p>Zapoznaj się z <a href="../reference/case-board/">wytycznymi</a> dotyczącymi <a href="../reference/case-board/">Case Board</a> w zakresie podpisanych poprawek, dokładnego dopasowania cytatów, weryfikacji zaznaczeń oraz uprawnień.</p>
+<p>Wycinki eksportują się do podpisanego JSON lub CSV. Raporty mogą zawierać zakładki, wycinki i komentarze — ustawia się to w <a href="../reports/">Report studio</a>. Dla odbiorcy z ograniczonym dostępem użyj <a href="../handover/">przekazania</a>.</p>
+<p>Szczegóły: <a href="../reference/case-board/">dokumentacja Case Board</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/case-board/">Pełne odniesienie →</a><a class="next-guide" href="../reports/"><span>Kolejny krok</span><strong>Opracuj raport →</strong></a><p>Niniejsze wytyczne opisują aktualną implementację. Wyniki walidacji oraz pozostałe luki zostały udokumentowane oddzielnie. <a href="../reference/verification/">Co zostało przetestowane →</a></p></footer>
 </main>

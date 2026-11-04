@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../">תיעוד</a> <span aria-hidden="true">/</span> <span aria-current="page">שמרו על האבטחה</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">מה נבדק ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">תיעוד / 14</p><h1>שמרו על האבטחה</h1><p class="guide-outcome">הכירו את המסלולים של טלגרם, רשימות פרוקסי ציבוריות ושירותים חיצוניים אופציונליים. דעו מה כל סוד חושף, מה ההגנות מכסות ומה הן מותירות בידיכם.</p>
+<article class="guide-content"><p class="eyebrow">תיעוד / 14</p><h1>שמרו על האבטחה</h1><p class="guide-outcome">מה עוזב את המחשב שלכם, מה כל סוד פותח, ומה ההגנות מכסות לעומת מה שעליכם.</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>כתובת הפאנל כברירת מחדל</span></div><div role="listitem"><strong>256 סיביות</strong><span>אסימון פאנל אקראי</span></div><div role="listitem"><strong translate="no">0</strong><span>רשתות CDN, ניתוח נתונים או גופנים מרחוק</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>חתימה על כל רשומה</span></div></div>
 <h2 id="map">הכל נמצא כאן</h2>
-<p>אוסף הנתונים, לוח הבקרה שלו וכל הרשומות שנשמרו נשארים במחשב או בשרת שבו אתם מריצים אותו. טלגרם היא היעד היחיד כברירת מחדל; כל יעד אחר הוא מתג נפרד.</p>
+<p>האוסף, הלוח וכל רשומה נשארים על המחשב שלכם. כברירת מחדל רק Telegram מקבל פנייה; כל השאר הוא מתג נפרד.</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / מה יוצא מהמכונה</span><span class="sample-tag">ההתקנה שלך</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="הפעלה או כיבוי של יעדים אופציונליים"><button type="button" data-flow-toggle="replica" aria-pressed="false">טקסט מחוץ לאתר</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">התראות</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">חותמות זמן</button><button type="button" data-flow-toggle="witness" aria-pressed="false">Witness</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>סודי</th><th>היכן הוא נשמר</th><th>מה זה מאפשר</th><th>אם המידע ידלף</th></tr></thead>
 <tbody>
-<tr><td><strong>אסימון פאנל</strong></td><td><code>panel-token.txt</code> בספריית הנתונים; הדפדפן שומר אותו עבור הכרטיסייה בלבד</td><td>כל מה שיש בכל סביבת עבודה: קריאה וייצוא, שינוי היקף, כניסה לחשבונות</td><td>עצור את TgWitness, מחק את ה-<code>panel-token.txt</code>, הפעל אותו מחדש: נוצר אסימון חדש</td></tr>
+<tr><td><strong>אסימון פאנל</strong></td><td><code>panel-token.txt</code> בתיקיית הנתונים; הדפדפן שומר אותו לכל לשונית</td><td>הכול בכל סביבת עבודה</td><td>עצרו את TgWitness, מחקו את <code>panel-token.txt</code>, הפעילו שוב: תקבלו חדש</td></tr>
 <tr><td><strong>הפעלת טלגרם</strong></td><td>כספת, מוצפנת (<code>credentials.enc</code>)</td><td>חשבון ה-Telegram עצמו</td><td>סיים את ההפעלה ב-Telegram תחת <em>&#x27;הגדרות&#x27; → &#x27;מכשירים&#x27;</em></td></tr>
-<tr><td><strong>מפתח חתימה</strong></td><td>כספת, מוצפנת (<code>signing.enc</code>)</td><td>חתימה על רשומות הניתנות לאימות באמצעות טביעת האצבע שלך</td><td>נקודות ביקורת שנשמרו במקום אחר, עדות וחותמות זמן מראות מה היה קיים לפני כן</td></tr>
-<tr><td><strong>מפתח הכספת</strong></td><td><code>vault.key</code> לצד הנתונים, או מפתח ראשי חיצוני לספריית נתונים חדשה</td><td>פענוח הכספת</td><td>יש להתייחס גם למפתח ההפעלה ולמפתח החתימה כאל מידע שהודלף</td></tr>
-<tr><td><strong>אסימון Witness</strong></td><td>בשרת Witness</td><td>לקריאה בלבד: נקודות ביקורת חתומות ומצב תקינות</td><td>מחק אותו בדף Witness; צור דף חדש</td></tr>
-<tr><td><strong>מפתח טקסט מחוץ לאתר</strong></td><td>Vault; הורידו אותו פעם אחת לצורך שחזור</td><td>פענוח העותק החיצוני</td><td>כל מי שמחזיק גם באובייקטים המאוחסנים יכול לפענח אותם: יש להתייחס לעותק זה כאל עותק חשוף</td></tr>
+<tr><td><strong>מפתח חתימה</strong></td><td>כספת, מוצפנת (<code>signing.enc</code>)</td><td>חתימה על רשומות תחת טביעת האצבע שלכם</td><td>נקודות ביקורת במקום אחר, עד וחותמות זמן עדיין מראים מה היה קודם</td></tr>
+<tr><td><strong>מפתח הכספת</strong></td><td><code>vault.key</code> ליד הנתונים, או מפתח ראשי חיצוני</td><td>הכספת</td><td>הניחו שגם הסשן ומפתח החתימה דלפו</td></tr>
+<tr><td><strong>אסימון Witness</strong></td><td>בשרת Witness</td><td>קריאה בלבד: נקודות ביקורת ותקינות</td><td>מחקו אותו בעמוד העד, צרו חדש</td></tr>
+<tr><td><strong>מפתח טקסט מחוץ לאתר</strong></td><td>Vault; הורידו אותו פעם אחת לצורך שחזור</td><td>העותק מחוץ לאתר</td><td>מי שיש לו גם את ה-bucket יכול לפענח: התייחסו לעותק כחשוף</td></tr>
 </tbody></table></div>
 <h2 id="threats">מה מכסות ההגנות</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> מכוסה</h3><ul>
-<li>רשומה ששונתה, הוסרה או סודרה מחדש בייצוא: שרשרת ההאש או החתימה כבר אינן מאומתות.</li>
-<li>יומן שנקצץ או נבנה מחדש לאחר שנקודת ביקורת נשמרה במקום אחר: נקודת הביקורת שנשמרה כבר אינה תואמת.</li>
-<li>ניחוש אסימון הפאנל: 256 סיביות אקראיות, המושוות בזמן קבוע; לאחר 15 כישלונות בדקה, הכתובת נדחית.</li>
-<li>תוכן צ&#x27;אט עוין: טקסט מוחדר כטקסט, לעולם לא כ-HTML; קבצים מצורפים יורדים כקבצים; הפאנל אינו טוען דבר מאתרים אחרים.</li>
-<li>ספריית נתונים מועתקת עם מפתח כספת חיצוני: הפעלות ומפתחות החתימה נשארים מוצפנים ללא המפתח הראשי.</li>
+<li>רשומה ששונתה, הוסרה או סודרה מחדש: שרשרת הגיבוב או חתימה נשברות.</li>
+<li>יומן שקוצץ או נבנה מחדש אחרי ששמרתם נקודת ביקורת במקום אחר: נקודת הביקורת מפסיקה להתאים.</li>
+<li>ניחוש הטוקן: 256 ביט אקראיים, השוואה בזמן קבוע, 15 כישלונות בדקה והכתובת נחסמת.</li>
+<li>תוכן צ'אט עוין: טקסט נשאר טקסט, אף פעם לא HTML; קבצים מצורפים יורדים כקבצים; הלוח לא טוען כלום מאתרים אחרים.</li>
+<li>תיקיית נתונים גנובה עם מפתח כספת חיצוני: סשנים ומפתחות נשארים מוצפנים.</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> נתון לבחירתך</h3><ul>
-<li>לבעל האסימון של הלוח הראשי יש שליטה מלאה. הענק לאנשים אחרים גישה מוגבלת לחשבונות, לצ&#x27;אטים ולפעולות הדרושות להם; שמור על סודיות המפתח הראשי.</li>
-<li>מנהל המערכת יכול לקרוא את כל התוכן, ולשכתב ולחתום מחדש על היומן. יש לשמור את טביעת האצבע ונקודות הבקרה במערכת אחרת.</li>
-<li>טקסט ההודעות והמדיה אינם מוצפנים על ידי TgWitness. יש להשתמש בהצפנת דיסק ובהגדרות הרשאות קפדניות.</li>
-<li>שימוש ב-HTTP רגיל מחוץ ל-localhost חושף את האסימון ברשת. יש להשתמש ב-HTTPS או במנהרת SSH.</li>
-<li>יש לבדוק את הרשומות השמורות באמצעות חתימות ונקודות ביקורת. יש לבחון את היקף האיסוף ולבדוק את המסירה עבור החשבונות והמקורות שבהם אתם משתמשים.</li>
+<li>הטוקן הראשי יכול הכול. תנו לאחרים גישה מוגבלת ושמרו את הראשי לעצמכם.</li>
+<li>מי שמנהל במחשב יכול לקרוא הכול ולחתום מחדש על היומן. שמרו את טביעת האצבע ונקודות הביקורת במקום אחר.</li>
+<li>TgWitness לא מצפין הודעות ומדיה. הצפינו את הדיסק, הקשיחו הרשאות.</li>
+<li>HTTP רגיל מחוץ ל-localhost מדליף את הטוקן. השתמשו ב-HTTPS או במנהרת SSH.</li>
+<li>חתימות לא אומרות לכם מה הוחמץ. בדקו כיסוי ובצעו בדיקת מסירה בחשבונות ובמקורות שלכם.</li>
 </ul></section>
 </div>
-<p><a href="../access/">שתפו גישה לתיק</a> באמצעות הרשאות, תוקף ומגבלות זמן. אסימון העד נשאר אמצעי אימות נפרד.</p>
+<p><a href="../access/">שתפו גישה לתיק</a> עם הרשאות, תפוגה ומגבלות סשן.</p>
 <h2 id="hardening">חיזוק אבטחת ההתקנה</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>0 מתוך 8 הושלמו</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>השתמשו בחשבון טלגרם ייעודי</strong> — לעולם לא בחשבון הראשי שלכם. אסימון הפאנל והפעלה מעניקים שליטה מלאה עליו.</span></li>
-<li><span class="check-text"><strong>השאר את הפאנל בכתובת 127.0.0.1.</strong> גש אליו מרחוק רק באמצעות HTTPS (תצורת Caddy המצורפת) או מנהרת SSH.</span></li>
-<li><span class="check-text"><strong>הצפן את הדיסק</strong> שבו נמצאת ספריית הנתונים: טקסט ההודעות והמדיה מאוחסנים כפי שהתקבלו.</span></li>
-<li><span class="check-text"><strong>הגבל את ספריית הנתונים</strong> לחשבון השירות. לספריות חדשות מוקצה מצב 0700 ב-Unix; ב-Windows, הגדר את ההרשאות של התיקייה.</span></li>
-<li><span class="check-text"><strong>יש לשמור את מפתח המאסטר של הכספת במיקום אחר</strong> בשרתים: יש להגדיר את `<code>TGWITNESS_VAULT_KEY_FILE</code>` לפני יצירת ספריית הנתונים.</span></li>
-<li><span class="check-text"><strong>יש לשמור את טביעת האצבע של מפתח החתימה ואת נקודות הבקרה</strong> במערכת אחרת, ולהוסיף עד במערכת אחרת.</span></li>
+<li><span class="check-text"><strong>השתמשו בחשבון Telegram ייעודי</strong>, אף פעם לא בחשבון הראשי.</span></li>
+<li><span class="check-text"><strong>השאירו את הלוח על 127.0.0.1.</strong> גישה מרחוק רק דרך HTTPS (Caddy המצורף) או מנהרת SSH.</span></li>
+<li><span class="check-text"><strong>הצפינו את הדיסק</strong> שעליו תיקיית הנתונים, הודעות ומדיה נשמרות כמו שהן.</span></li>
+<li><span class="check-text"><strong>הגבילו את תיקיית הנתונים</strong> לחשבון השירות (0700 ב-Unix, הרשאות תיקייה ב-Windows).</span></li>
+<li><span class="check-text"><strong>שמרו את מפתח הכספת במקום אחר</strong> בשרתים: הגדירו <code>TGWITNESS_VAULT_KEY_FILE</code> לפני ההפעלה הראשונה.</span></li>
+<li><span class="check-text"><strong>שמרו את טביעת האצבע ונקודות הביקורת</strong> על מערכת אחרת, הריצו עד על מארח אחר.</span></li>
 <li><span class="check-text"><strong>לעולם אין להעלות</strong> את המפתחות <code>data/</code>, sessions, <code>panel-token.txt</code> או vault ל-GitHub או לצ&#x27;אט.</span></li>
 <li><span class="check-text"><strong>אין לתעד</strong> כותרות <code>Authorization</code> או גופי בקשות בפרוקסי הפוך.</span></li>
 </ol>
 </div>
-<details><summary>האם ניתן לשנות את אסימון הפאנל מבלי לאבד נתונים?</summary><p>כן. האסימון רק פותח את הלוח. עצרו את TgWitness, מחקו את <code>panel-token.txt</code> מספריית הנתונים והפעילו אותו מחדש; היומן, ההפעלות והמפתחות נותרים ללא שינוי. כאשר <code>TGWITNESS_TOKEN</code> מוגדר, נעשה שימוש בערך הסביבה במקום בקובץ.</p></details>
-<details><summary>מדוע ההודעות אינן מוצפנות במצב מנוחה?</summary><p>על האספן לקרוא את ההודעות כדי לחפש, להשוות גרסאות ולייצא אותן. הצפנתן באמצעות מפתח על אותה מכונה לא תוסיף הרבה מול מי שיכול לקרוא את המכונה הזו. הצפנת דיסק מגנה על דיסק מושבת או גנוב; הרשאות קפדניות מגנות על דיסק פעיל.</p></details>
+<details><summary>האם ניתן לשנות את אסימון הפאנל מבלי לאבד נתונים?</summary><p>כן, הוא רק פותח את הלוח. עצרו את TgWitness, מחקו את <code>panel-token.txt</code>, הפעילו שוב. היומן, הסשנים והמפתחות נשארים. אם <code>TGWITNESS_TOKEN</code> מוגדר, הערך שלו גובר על הקובץ.</p></details>
+<details><summary>מדוע ההודעות אינן מוצפנות במצב מנוחה?</summary><p>האוסף חייב לקרוא אותם כדי לחפש, להשוות ולייצא. מפתח על אותו מחשב לא יעצור מישהו שממילא יכול לקרוא את המחשב הזה. הצפנת דיסק מגנה על דיסק גנוב, הרשאות מגנות על מערכת פועלת.</p></details>
 <h2 id="report">דווח על פגיעות אבטחה</h2>
-<p>השתמשו <strong>באפשרות &quot;אבטחה&quot; → &quot;דווח על פגיעות&quot;</strong> במאגר GitHub. ציינו את הגרסה, את ההשפעה ואת השלבים המינימליים הדרושים לשחזור הבעיה. לעולם אל תשלחו פרטי הזדהות, ספריות חשבון או ארכיוני ראיות אמיתיים. אם דיווח פרטי אינו זמין, פתחו בקשה לערוץ פרטי ללא פרטים על הפרצה.</p>
+<p><strong>Security → Report a vulnerability</strong> ב-GitHub. גרסה, השפעה ושחזור מינימלי עם נתונים מזויפים. לעולם אל תשלחו פרטי גישה, תיקיות חשבון או ראיות אמיתיות. אם דיווח פרטי כבוי, פתחו issue שמבקש ערוץ פרטי, בלי פרטי ניצול.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">הפניה מלאה ←</a><a class="next-guide" href="../start/"><span>השלב הבא</span><strong>התחילו תוך דקות ספורות ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../reference/verification/">מה נבדק ←</a></p></footer>
 </main>

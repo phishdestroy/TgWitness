@@ -32,12 +32,12 @@
 <nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../">Belgeler</a> <span aria-hidden="true">/</span> <span aria-current="page">Bir hesap grubunu yönetin</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Neler test edildi →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Belgeler / 13</p><h1>Bir hesap grubunu yönetin</h1><p class="guide-outcome">Her hesabın kayıtlarını ve imza kimliğini ayrı tutarken, birden fazla toplama hesabını bir arada yönetin.</p>
-<p>Bir hesap grubu, bağlantı durumunu, gözlem kontrollerini, paylaşılan ayarları ve dışa aktarmaları tek bir çalışma görünümünde bir araya getirir. Bu özellik, aynı soruşturmayı kapsayan veya tutarlı bir çalışma düzenine ihtiyaç duyan birden fazla hesap olduğunda kullanışlıdır.</p>
+<article class="guide-content"><p class="eyebrow">Belgeler / 13</p><h1>Bir hesap grubunu yönetin</h1><p class="guide-outcome">Birden çok hesabı birlikte yürütün, her biri yine kendi kayıtları ve anahtarıyla.</p>
+<p>Bir grup bağlantı durumunu, başlat/duraklat'ı, paylaşılan ayarları ve dışa aktarımları tek ekranda toplar. Birden çok hesap aynı dava üzerinde çalışırken kullanışlıdır.</p>
 
 <h2 id="overview">Grup genel bakışını açın</h2>
-<p><strong>Hesaplar</strong> bölümünde grubu açın. Her hesap, gözlem durumunu, bağlantı yolunu, son kontrolün başarılı olduğu zamanki en son ölçülen yol gecikmesini ve en son kaydedilen mesajı gösterir. <strong>Dikkat gerektiren</strong> bağlantılar, üzerinde çalışılması gereken hesaplara yönlendirir; <strong>Düzelt seçeneği,</strong> ilgili çalışma alanını ve kontrol panelini açar.</p>
-<p><strong>&quot;Tümünü Başlat</strong>&quot; ve <strong>&quot;Tümünü Duraklat&quot; seçenekleri,</strong> onaylandıktan sonra uygun hesaplar üzerinde işlem yapar. <strong>Grup ayarları,</strong> seçilen ayarları paylaşır; kendi değerlerine sahip hesaplar, siz bunları değiştirmeyi seçene kadar bu değerleri korur.</p>
+<p>Grubu <strong>Hesaplar</strong>'da açın. Her hesap durumunu, rotasını, gecikmesini ve son kaydedilen mesajını gösterir. <strong>İlgi gerekiyor</strong> sorunluları listeler, <strong>Düzelt</strong> sizi doğrudan oraya götürür.</p>
+<p><strong>Tümünü başlat</strong> / <strong>Tümünü duraklat</strong> harekete geçmeden önce sorar. <strong>Grup ayarları</strong> paylaşılır, ama bir hesabın kendi değerleri siz değiştirene kadar kalır.</p>
 
 <section class="workflow-lab" data-workflow="groups" aria-labelledby="groups-example-title">
   <h3 id="groups-example-title">Bir grup genelinde yapılan rota değişikliğini gözden geçirin</h3>
@@ -59,15 +59,15 @@
 </section>
 
 <h2 id="route">Bir inceleme adımı ekleyerek süreci değiştirin</h2>
-<ol><li><strong>&quot;Grup rotasını değiştir</strong>&quot; seçeneğini seçin, ardından bağlantı türünü ve ayarları belirleyin.</li><li><strong>&quot;Seçimi Gözden Geç&quot; seçeneğini</strong> seçin. Listelenen hesapları ve her birinin rota geçersiz kılma ayarlarını inceleyin.</li><li><strong>&quot;Hazırla ve kontrol et&quot;</strong> seçeneğini seçin. Kontrol işlemi yeni bir Telegram aktarımını kullanır; desteklenen HTTP rotaları ayrıca HTTPS çıkış kontrolünü de bildirir.</li><li><strong>&quot;İşaretli bağlantıyı uygula&quot;</strong> seçeneğini seçin ve her hesabın sonucunu inceleyin. Daha önce yürütülmekte olan gözlem, uygulamanın başarılı olduğu yerden devam eder; etkin olmayan hesaplar ise etkin olmayan durumda kalır.</li></ol>
-<p>Gecikme, ölçülen Telegram bağlantı kurulumunu tanımlar. Çıkış IP kontrolü, kaydedilen kontrol zamanındaki o rotayı tanımlar. Hesap yetkilendirme ve gözlem durumunun kendi göstergeleri vardır; bir grup değişikliği, hesap başına farklı sonuçlarla sonuçlanabilir.</p>
+<ol><li><strong>Grup rotasını değiştir</strong>, türü ve ayarları seçin.</li><li><strong>Seçimi gözden geçir</strong>: hangi hesaplar değişiyor, hangilerinin kendi rotası var.</li><li><strong>Hazırla ve kontrol et</strong> taze bir Telegram bağlantısını ve mümkünse çıkış IP'sini test eder.</li><li><strong>Kontrol edilen bağlantıyı uygula</strong> ve her sonuca bakın. Çalışan hesaplar devam eder, boşta olanlar boşta kalır.</li></ol>
+<p>Gecikme Telegram bağlantısının kurulma süresidir; çıkış IP'si, rotanın kontrol anında gösterdiğidir. Sonuçlar hesaba göre değişebilir.</p>
 
 <h2 id="shared-chats">Çakışan erişim kullanın</h2>
-<p><strong>&quot;Birkaç hesap tarafından görülen sohbetler&quot; seçeneği,</strong> paylaşılan kaynakları ve mevcut çalışma alanı gözlem kapsamını gösterir. Uygun kanallar ve süper gruplar, bir sohbetin geçmişini bölmek için <strong>&quot;… hesaplarıyla dışa aktar&quot;</strong> seçeneğini kullanabilir. Özel sohbetler ve normal gruplar, mesaj numaraları bir hesabın geçmişine ait olduğu için başlangıç hesabında kalır.</p>
+<p><strong>Birden çok hesabın gördüğü sohbetler</strong> paylaşılan kaynakları ve kapsamlarını listeler. Kanallar ve süper gruplar <strong>… hesapla dışa aktar</strong> ile birden çok hesapla aynı anda dışa aktarılabilir. Özel sohbetler ve basit gruplar olmaz; oradaki mesaj numaraları hesaba özgüdür.</p>
 
 <h2 id="export-group">Grubu bir paket olarak dışa aktarın</h2>
-<p><strong>Dışa aktarma grubu,</strong> her hesabın imzalanmış dışa aktarımını ve bu dosyaların imzalanmış bir listesini içeren tek bir ZIP dosyası oluşturur. Orijinal çalışma alanı kimlikleri ve parmak izleri, doğrulama amacıyla kullanılabilir durumda kalır. Bu referansları kullanarak hesaplar arası bir anlatı oluşturun; tek bir birleştirilmiş zaman çizelgesi yine de ayrı olarak derlenir.</p>
-<p><a href="../reports/">Rapor tasarımı</a>, <a href="../case-board/">çalışma alanı içindeki bir Case Board</a> veya <a href="../exports/">dışa aktarma doğrulaması</a> ile devam edin.</p>
+<p><strong>Grubu dışa aktar</strong>, her hesabın imzalı dışa aktarımını ve bunların imzalı listesini içeren tek bir ZIP verir. Her biri doğrulama için kendi parmak izini korur. Birleşik zaman çizelgesini yine siz kurarsınız.</p>
+<p>Sıradaki: <a href="../reports/">raporlar</a>, <a href="../case-board/">Case Board</a>, <a href="../exports/">dışa aktarımları doğrulama</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">Tam referans →</a><a class="next-guide" href="../cases/"><span>Sonraki adım</span><strong>Tüm sohbetleri inceleyin →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="../reference/verification/">Neler test edildi →</a></p></footer>
 </main>

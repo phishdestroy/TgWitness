@@ -32,12 +32,12 @@
 <nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../">Dokumentacja</a> <span aria-hidden="true">/</span> <span aria-current="page">Zarządzanie grupą kont</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Co zostało przetestowane →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentacja / 13</p><h1>Zarządzanie grupą kont</h1><p class="guide-outcome">Zarządzaj jednocześnie kilkoma kontami do gromadzenia danych, zachowując odrębność zapisów i tożsamości podpisującej dla każdego konta.</p>
-<p>Grupa kont łączy w jednym widoku roboczym status połączenia, elementy sterujące obserwacją, wspólne ustawienia oraz funkcje eksportu. Jest to przydatne, gdy kilka kont dotyczy tego samego dochodzenia lub wymaga spójnej konfiguracji operacyjnej.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentacja / 13</p><h1>Zarządzanie grupą kont</h1><p class="guide-outcome">Prowadź kilka kont razem — każde nadal z własnymi wpisami i kluczem.</p>
+<p>Grupa zbiera na jednym ekranie stan połączeń, start/pauzę, wspólne ustawienia i eksporty. Wygodne, gdy kilka kont pracuje nad jedną sprawą.</p>
 
 <h2 id="overview">Otwórz przegląd grupy</h2>
-<p>W sekcji „<strong>Konta</strong>” otwórz grupę. Każde konto pokazuje swój stan obserwacji, trasę połączenia, najnowsze zmierzone opóźnienie trasy w momencie pomyślnego zakończenia bieżącej kontroli oraz ostatnią zapisaną wiadomość. Linki <strong>„Wymaga uwagi”</strong> odsyłają do kont, które wymagają działania; <strong>opcja „Napraw”</strong> otwiera odpowiedni obszar roboczy i panel sterowania.</p>
-<p><strong>Funkcje „Uruchom wszystko”</strong> i <strong>„Wstrzymaj wszystko”</strong> działają na kwalifikujących się kontach po potwierdzeniu. <strong>Ustawienia grupowe</strong> udostępniają wybrane ustawienia; konta z własnymi wartościami zachowują je do momentu, aż zdecydujesz się je zastąpić.</p>
+<p>Otwórz grupę w <strong>Kontach</strong>. Przy każdym koncie widać stan, trasę, opóźnienie i ostatnią zapisaną wiadomość. <strong>Wymaga uwagi</strong> wymienia te z problemami, <strong>Napraw</strong> prowadzi prosto do nich.</p>
+<p><strong>Uruchom wszystkie</strong> / <strong>Wstrzymaj wszystkie</strong> pytają przed działaniem. <strong>Ustawienia grupy</strong> są wspólne, ale własne wartości konta zostają, dopóki ich nie zastąpisz.</p>
 
 <section class="workflow-lab" data-workflow="groups" aria-labelledby="groups-example-title">
   <h3 id="groups-example-title">Sprawdź zmianę trasy w całej grupie</h3>
@@ -59,15 +59,15 @@
 </section>
 
 <h2 id="route">Zmiana ścieżki z uwzględnieniem etapu weryfikacji</h2>
-<ol><li>Wybierz opcję <strong>„Zmień trasę grupy</strong>”, a następnie wybierz typ połączenia i ustawienia.</li><li>Wybierz <strong>opcję „Przeglądaj wybór</strong>”. Przejrzyj wymienione konta i ich indywidualne nadpisania tras.</li><li>Wybierz opcję <strong>„Przygotuj i sprawdź</strong>”. Sprawdzanie wykorzystuje nowy kanał transmisji Telegram; obsługiwane trasy HTTP zgłaszają również wynik kontroli wyjściowej HTTPS.</li><li>Należy wybrać opcję <strong>„Zastosuj zaznaczone połączenia”</strong> i sprawdzić wyniki dla każdego konta. Wcześniej uruchomiona obserwacja jest wznawiana tam, gdzie aplikacja zakończyła się powodzeniem; konta nieaktywne pozostają nieaktywne.</li></ol>
-<p>Opóźnienie opisuje zmierzoną czasowo konfigurację połączenia z Telegramem. Sprawdzenie adresu IP wyjściowego opisuje tę trasę w momencie rejestracji. Autoryzacja konta i stan obserwacji mają swoje własne wskaźniki; zmiana grupy może zakończyć się różnymi wynikami w zależności od konta.</p>
+<ol><li><strong>Zmień trasę grupy</strong>, wybierz typ i ustawienia.</li><li><strong>Przejrzyj wybór</strong>: które konta się zmienią, a które mają własną trasę.</li><li><strong>Przygotuj i sprawdź</strong> testuje świeże połączenie z Telegramem i, gdzie się da, wyjściowy IP.</li><li><strong>Zastosuj sprawdzone połączenie</strong> i obejrzyj każdy wynik. Działające konta wznowią pracę, bezczynne takie zostaną.</li></ol>
+<p>Opóźnienie to czas nawiązania połączenia z Telegramem, wyjściowy IP to to, co trasa pokazała podczas sprawdzenia. Wyniki mogą się różnić między kontami.</p>
 
 <h2 id="shared-chats">Należy stosować nakładające się uprawnienia dostępu</h2>
-<p><strong>W sekcji „Czat z kilkoma kontami” </strong>wyświetlane są wspólne źródła oraz zakres obserwacji dostępny w obszarze roboczym. Kwalifikujące się kanały i supergrupy mogą korzystać z <strong>opcji</strong> <strong>„Eksportuj z … kontami”</strong>, aby podzielić proces pozyskiwania historii jednego czatu. Czat prywatny i zwykłe grupy pozostają przy koncie początkowym, ponieważ numery ich wiadomości należą do historii tego konta.</p>
+<p><strong>Czaty widziane przez kilka kont</strong> pokazują wspólne źródła i ich pokrycie. Kanały i supergrupy można eksportować kilkoma kontami naraz przez <strong>Eksportuj … kontami</strong>. Czaty prywatne i zwykłe grupy nie: tam numery wiadomości są osobne dla każdego konta.</p>
 
 <h2 id="export-group">Eksportuj grupę jako pakiet</h2>
-<p><strong>Grupa eksportująca</strong> tworzy jeden plik ZIP zawierający podpisany eksport każdego konta oraz podpisaną listę tych plików. Oryginalne tożsamości i odciski palców obszaru roboczego pozostają dostępne do weryfikacji. Należy stworzyć narrację obejmującą różne konta, korzystając z tych odniesień; pojedyncza, scalona oś czasu jest nadal tworzona oddzielnie.</p>
-<p>Przejdź do <a href="../reports/">projektowania raportu</a>, <a href="../case-board/">tablicy sprawy w obszarze roboczym</a> lub <a href="../exports/">weryfikacji eksportu</a>.</p>
+<p><strong>Eksportuj grupę</strong> daje jeden ZIP z podpisanym eksportem każdego konta i podpisaną ich listą. Każde zachowuje własny odcisk do weryfikacji. Wspólną chronologię nadal budujesz sam.</p>
+<p>Dalej: <a href="../reports/">raporty</a>, <a href="../case-board/">Case Board</a>, <a href="../exports/">weryfikacja eksportów</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">Pełne odniesienie →</a><a class="next-guide" href="../cases/"><span>Kolejny krok</span><strong>Przeprowadzanie dochodzeń we wszystkich czatach →</strong></a><p>Niniejsze wytyczne opisują aktualną implementację. Wyniki walidacji oraz pozostałe luki zostały udokumentowane oddzielnie. <a href="../reference/verification/">Co zostało przetestowane →</a></p></footer>
 </main>

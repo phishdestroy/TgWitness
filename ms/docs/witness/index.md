@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/witness/
 
-Biarkan proses berasingan memeriksa jurnal dan menerbitkan titik pemeriksaan yang disahkan ke saluran anda.
+Proses berasingan menyemak jurnal anda dan menyiarkan checkpoint bertandatangan ke saluran.
 
 ## Dua hos, dua kunci tandatangan
 
@@ -36,33 +36,33 @@ Semua contoh jawapan menganggap tandatangan sah dan kunci yang dipaku. Hashes di
 
 ## Sediakan bot dan saluran
 
-Buat bot dengan BotFather dan benarkan ia menyiarkan dalam saluran yang anda kawal. Pilih komputer atau pelayan untuk saksi. Host dan pengendali berasingan menyediakan kebebasan yang lebih kukuh berbanding proses kedua pada pelayan pengumpul.
+Buat bot dengan BotFather dan benarkan ia menyiar dalam saluran anda. Jalankan saksi di tempat lain: hos lain, sebaik-baiknya dikendalikan orang lain, jauh lebih bernilai daripada proses kedua di sebelah pengumpul.
 
 ## Tiga langkah dalam Extras
 
-1. **Akses baca sahaja.** Buka **Extras → Saksi Bebas**, cipta token saksi dan simpan fail akses. Ia membolehkan membaca titik pemeriksaan dan kesihatan, bukan perbualan atau kawalan pengumpul.
-2. **Saluran dan selang.** Pilih saluran Telegram atau webhook Discord dan masukkan alamat pengumpul yang boleh dihubungi dari saksi. Simpan fail tetapan.
-3. **Pelancaran.** Letakkan `witness.json`, `witness-token.txt` dan `bot-token.txt` yang dicipta pada hos saksi bersama-sama. Jalankan arahan di bawah dalam persekitaran projek yang dipasang.
+1. **Akses baca sahaja.** **Tambahan → Saksi Bebas**, cipta token, simpan fail. Ia membaca checkpoint dan kesihatan, tiada yang lain.
+2. **Saluran dan selang.** Saluran Telegram atau webhook Discord, serta alamat pengumpul yang boleh dicapai saksi. Simpan fail tetapan.
+3. **Lancar.** Letakkan `witness.json`, `witness-token.txt` dan `bot-token.txt` bersama pada hos saksi dan jalankan:
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
 python -m tgwitness.witness run --config witness.json
 ```
 
-Muat turun fail tidak memulakan saksi. Semak bahawa pos pertama yang ditandatangani muncul dalam saluran, kemudian simpan cap jari kunci awam saksi secara berasingan.
+Tunggu hantaran bertandatangan pertama dalam saluran, kemudian simpan cap jari saksi di tempat selamat.
 
-Untuk Discord, simpan URL webhook saluran sebagai `discord-webhook.txt` bukannya token bot. Seorang saksi menyiarkan di satu tempat, sama ada saluran Telegram atau saluran Discord; pemeriksaan yang lebih panjang daripada mesej Discord akan tiba sebagai fail lampiran.
+Discord pula? Simpan URL webhook sebagai `discord-webhook.txt`. Satu saksi menyiar ke satu tempat; semakan panjang tiba sebagai fail di Discord.
 
 ## Pilih kekerapan penerbitan
 
-Menerbitkan setiap pemeriksaan mewujudkan rekod luaran berkala. Pada selang lima minit, iaitu kira-kira 288 siaran setiap ruang kerja setiap hari. Tetapan lanjutan juga menawarkan penerbitan untuk perubahan atau masalah, proksi dan alamat Bot API tersuai.
+Menyiar setiap semakan memberi rekod luar yang tetap: setiap lima minit ialah kira-kira 288 hantaran sehari bagi setiap ruang kerja. Tetapan lanjutan boleh menyiar hanya apabila ada perubahan atau masalah, menggunakan proksi atau Bot API tersuai.
 
 **Apa sebenarnya yang disahkan oleh bot ini?**
 
-Saksi meminta pengumpul untuk titik pemeriksaan yang ditandatangani, mengesahkannya dengan kunci yang dijangka dan menyimpan jurnal berasingan yang ditandatangani. Ia merekodkan respons yang hilang dan jawapan yang ditolak serta pemeriksaan yang berjaya. Penerbitan masih bergantung pada saksi yang dijalankan dan mencapai Bot API Telegram.
+Ia meminta checkpoint bertandatangan daripada pengumpul, menyemaknya dengan kunci yang dijangka dan menyimpan jurnal bertandatangannya sendiri, termasuk jawapan yang terlepas dan ditolak.
 
-Ia memeriksa status jurnal yang dilaporkan oleh pengumpul. Ia tidak memerhati secara bebas setiap mesej Telegram. Untuk itu, tambahkan ujian penghantaran terkawal.
+Ia menyemak keadaan jurnal, ia tidak memerhati Telegram sendiri. Untuk itu, jalankan ujian penghantaran terkawal.
 
 ## Semak bukti kemudian
 
-Simpan jurnal saksi, pos saluran dan cap jari yang disimpan secara bebas. [Prosedur pengesahan penuh](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#verify) membandingkannya dengan eksport berasingan pengumpul yang ditandatangani.
+Simpan jurnal saksi, hantaran dan cap jari. [Cara menyemaknya](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#verify) terhadap eksport pengumpul.

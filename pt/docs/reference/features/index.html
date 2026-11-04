@@ -224,9 +224,6 @@ primeiros 1.000 diálogos listados, até 500 mensagens por instantâneo do hist�
 é alterado por espaço de trabalho na seção <strong>“Parâmetros</strong>”. As exportações não possuem limite fixo de contagem de eventos.
 O fallback do navegador está limitado a 128 MiB por padrão; a CLI de streaming possui um
 limite de transferência configurável, de 5 GiB por padrão.</p>
-<p>O <code>tools/check_capacity.py</code> mede a ingestão e a exportação sintéticas locais. Seus resultados
-não constituem medições de entrega do Telegram nem uma contagem garantida de conversas reais. Consulte
-<a href="../verification/">VERIFICATION.md</a> para obter informações sobre a versão medida e a carga de trabalho.</p>
 <h2 id="reliability-and-recovery">Confiabilidade e recuperação<a class="anchor" href="#reliability-and-recovery" aria-label="Link para esta seção">#</a></h2>
 <p>O comportamento implementado inclui WAL do SQLite/transações síncronas; gravações atômicas de
 mensagens e tarefas de mídia; tarefas persistentes e atrasos de repetição; descritores da versão original;

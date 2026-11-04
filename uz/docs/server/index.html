@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <span aria-current="page">Uni ishlashda davom ettiring</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Nima sinovdan o&#x27;tkazilgan →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentatsiya / 17</p><h1>Uni ishlashda davom ettiring</h1><p class="guide-outcome">Yig&#x27;gichni doimiy ravishda ishlashga tayyor holda saqlang va qayta ishga tushirishlar davomida uning ma&#x27;lumotlari saqlansin.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentatsiya / 17</p><h1>Uni ishlashda davom ettiring</h1><p class="guide-outcome">Kollektorni ishlab turgan va ma'lumotlarni qayta ishga tushirishlarda xavfsiz saqlang.</p>
 <h2 id="launch">Boshlash usulini tanlang</h2>
-<p>Mahalliy o&#x27;rnatish uchun <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy</a>/dagi <a href="../start/">ishga tushiruvchi</a> fayl va xizmat misollaridan foydalaning. Docker uchun Compose yordamida Docker-ni o&#x27;rnating va loyiha katalogidan ishga tushiring:</p>
+<p>Mahalliy: <a href="../start/">ishga tushirgich</a> va <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> dagi xizmat shablonlari. Docker, loyiha papkasidan:</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>O&#x27;rnatilgan panel mezbonning loopback manzili, 8787-port orqali tinglaydi. Uni mahalliy tarmoqda yoki SSH tunneli orqali oching. Panelni ochish uchun ikkinchi buyruqdagi tokenni ishlating.</p>
+<p>Panel localhost:8787 da tinglaydi. Uni mahalliy yoki SSH tunneli orqali, ikkinchi buyruqdagi token bilan oching.</p>
 <h2 id="storage">Butun ma&#x27;lumotlar katalogini saqlang</h2>
-<p>Mahalliy o&#x27;rnatishlar <code>data/live</code> dan foydalanadi. Docker esa doimiy <code>tgwitness-data</code> hajmdan foydalanadi. Jurnalni, hisob sessiyalarini, kalitlarni va operatsion holatni birga saqlaydi. Imzolangan eksport foydali dalildir, lekin bu to&#x27;liq o&#x27;rnatish zaxira nusxasi emas.</p>
-<ol><li>Muntazam zaxira nusxasini olishdan oldin yig&#x27;ishni to&#x27;xtating.</li><li>To&#x27;liq shaxsiy ma&#x27;lumotlar katalogini mezbonning tashqarisidagi himoyalangan saqlash joyiga nusxalang.</li><li>Zaxira nusxaga tayanishdan oldin uni izolyatsiyalangan o&#x27;rnatishga sinov tiklash.</li></ol>
+<p>Mahalliy: <code>data/live</code>. Docker: <code>tgwitness-data</code> hajmi. Jurnallar, sessiyalar va kalitlar birga bo'lishi kerak. Imzolangan eksport dalil, zaxira nusxa emas.</p>
+<ol><li>Avval yig'ishni to'xtating.</li><li>Butun ma'lumotlar katalogini xostdan tashqaridagi xavfsiz joyga nusxalang.</li><li>Ishonishdan oldin uni alohida o'rnatmada tiklab ko'ring.</li></ol>
 <h2 id="check">Qayta ishga tushirgandan so&#x27;ng tekshiring</h2>
-<p>Kutilayotgan ish maydoni va kalitni, Telegram ulanishini, tanlangan manbalarni va yangi xabarni qayd etishni tasdiqlang. Saqlangan MTProto holati va orqada qolgan yangilanishlarni tiklash yordami Telegram hali saqlab turgan yangilanishlarni qaytarib olishga yordam beradi. Ular muddati tugagan har bir yangilanishni yoki qayd etishdan oldin o&#x27;chirib tashlangan tahrirni qayta tiklay olmaydi.</p>
-<p class="callout">Kontener holati veb-server javob berishini anglatadi. Yig&#x27;ish va tashqi e&#x27;lon qilishni baholash uchun nazoratli xabar va guvoh tekshiruvidan foydalaning.</p>
+<p>Ish maydoni va kalit, ulanish, manbalar va yangi xabarlar kelayotganini tekshiring. TgWitness Telegram'da hali bor narsani to'ldiradi, o'chiq turgan paytda sodir bo'lgan hamma narsani emas.</p>
+<p class="callout">"healthy" konteyner veb-server javob berayotganini bildiradi. Yig'ish ishlayaptimi, buni sinov xabari va guvoh aytadi.</p>
 <h2 id="public">Faqat niyat qilgan narsangizni e&#x27;lon qiling</h2>
-<p>Joylashtirish bo&#x27;yicha qo&#x27;llanmada HTTPS misollari, doimiy hajmli buyruqlar, yangilash va tiklash bosqichlari keltirilgan. Joylashtirish uchun Docker buyruqlari taqdim etilgan; joriy <a href="../reference/verification/">tasdiqlash yozuvi</a> haqiqatan sinovdan o&#x27;tkazilgan muhitlarni aniqlaydi.</p>
+<p>HTTPS, hajmlar, yangilanishlar va tiklash joylashtirish ma'lumotnomasida. Haqiqatan sinovdan o'tgan narsa: <a href="../reference/verification/">tasdiqlash yozuvi</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">To'liq manba →</a><a class="next-guide" href="../troubleshooting/"><span>Keyingi qadam</span><strong>Nima noto'g'ri ketganini aniqlang →</strong></a><p>Ushbu qo&#x27;llanmalar joriy amalga oshirishni tasvirlaydi. Tasdiqlash natijalari va qolgan bo&#x27;shliqlar alohida hujjatlashtirilgan. <a href="../reference/verification/">Nima sinovdan o&#x27;tkazilgan →</a></p></footer>
 </main>

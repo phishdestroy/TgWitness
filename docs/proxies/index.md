@@ -2,45 +2,45 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/proxies/
 
-Keep the account connected. Decide explicitly when its route may use the server's address.
+Keep the account online, and decide yourself whether it may ever show your server's IP.
 
 ## Choose the IP mode first
 
 01**Hide the address**
 
-Use a proxy. When none works, wait without a direct Telegram connection.
+Proxy only. If none works, it waits.
 
 02**Direct as a last resort**
 
-Permit Direct after the configured delay; return to a working proxy when one answers.
+Goes direct after a delay, back to a proxy once one works.
 
 03**Server behind a tunnel or VPN**
 
-Allow direct routes through the host's network. This option does not install or verify a VPN.
+Direct is fine. It doesn't set up or check the VPN for you.
 
 The route chooses the connection. The IP mode determines whether a direct connection is permitted.
 
 ## Let the pool maintain the route
 
-1. Open **Account → Settings → Connection settings**.
-2. Choose the IP mode and **Automatic MTProxy**, or enter a fixed route.
-3. Save and run **Test Telegram connection**. It also works before sign-in.
-4. After starting collection, check that a controlled message reaches the journal.
+1. **Account → Settings → Connection settings**.
+2. Pick the IP mode and **Automatic MTProxy**, or a fixed route.
+3. Save, **Test Telegram connection** (works before sign-in too).
+4. Start collecting and send yourself a test message.
 
-New workspaces use automatic MTProxy with **Hide the address**. The pool combines four public sources, probes entries, retains working routes and replaces failing proxies. Failed downloads retain the previous snapshots.
+New workspaces start on automatic MTProxy with **Hide the address**. The pool pulls four public lists, checks servers, keeps the good ones and swaps out dead ones.
 
 ## Use your own proxy
 
-Enter SOCKS5 or HTTP CONNECT details, paste a supported Telegram proxy link, or provide an operator catalog. Pause observation before changing an active route. Fake TLS MTProxy secrets beginning with `ee` remain unsupported.
+SOCKS5, HTTP CONNECT, a Telegram proxy link or an operator catalog. Pause observation before switching. Fake TLS secrets (`ee`…) don't work.
 
 **Rotation, sharing and retry settings**
 
-Under **Parameters → Automatic MTProxy**, set failure thresholds, cooldowns, planned rotation and accounts per proxy. A sharing limit of one makes an account wait when no exclusive entry is available. List refresh and probe intervals follow the main workspace's values. Separate proxies do not guarantee separate exit IPs.
+**Parameters → Automatic MTProxy**: failure thresholds, cooldowns, rotation, accounts per proxy. Limit 1 means an account waits rather than share. Different proxies can still share an exit IP.
 
 ## Separate Telegram from external requests
 
-MTProxy carries Telegram traffic only. Timestamps, notifications, copies and source checks use a separate SOCKS5/HTTP proxy, the account's SOCKS5/HTTP route, or Direct where the IP mode permits it. Those external requests can be disabled.
+MTProxy only carries Telegram. Timestamps, notifications, copies and code checks go through a separate SOCKS5/HTTP proxy, the account's SOCKS5/HTTP route, or direct if the mode allows. Or turn them off.
 
-An explicit `TGWITNESS_PROXY_FEED_PROXY` configures the feed downloader's route. The [independent witness](https://phishdestroy.github.io/TgWitness/docs/witness/) keeps its own settings. These controls do not install a system VPN or route browser traffic.
+`TGWITNESS_PROXY_FEED_PROXY` sets the route for list downloads. The [witness](https://phishdestroy.github.io/TgWitness/docs/witness/) has its own settings. None of this touches your browser or system network.
 
-See [all modes, defaults and source lists](https://phishdestroy.github.io/TgWitness/docs/reference/connection/#ip-modes), or [choose who may change an account's route](https://phishdestroy.github.io/TgWitness/docs/access/).
+More: [modes and defaults](https://phishdestroy.github.io/TgWitness/docs/reference/connection/#ip-modes), [who may change routes](https://phishdestroy.github.io/TgWitness/docs/access/).

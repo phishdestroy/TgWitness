@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="راهنماها"><a href="../../">خانه</a> <span aria-hidden="true">/</span> <a href="../">مستندسازی</a> <span aria-hidden="true">/</span> <span aria-current="page">آن را امن نگه دارید</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">آنچه آزمایش شده است ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">جستجو در مستندات</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، زنجیره هش، توکن یا ویسنس را امتحان کنید…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="جستجوی واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">یک کلمه تایپ کنید تا در راهنماها و مرجع جستجو شود. جستجو در مرورگر شما باقی می‌ماند.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">مستندسازی / 14</p><h1>آن را امن نگه دارید</h1><p class="guide-outcome">راه‌های دسترسی به تلگرام، فهرست‌های پروکسی عمومی و سرویس‌های خارجی اختیاری را بشناسید. بدانید هر رمز چه امکاناتی را باز می‌کند، چه محافظت‌هایی را فراهم می‌آورد و چه مواردی را به شما واگذار می‌کند.</p>
+<article class="guide-content"><p class="eyebrow">مستندسازی / 14</p><h1>آن را امن نگه دارید</h1><p class="guide-outcome">چه چیزی از دستگاه شما خارج می‌شود، هر راز چه چیزی را باز می‌کند و حفاظت‌ها چه چیزی را پوشش می‌دهند در برابر آنچه بر عهده شماست.</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>آدرس پنل به‌صورت پیش‌فرض</span></div><div role="listitem"><strong>۲۵۶ بیتی</strong><span>توکن پنل تصادفی</span></div><div role="listitem"><strong translate="no">0</strong><span>شبکه‌های توزیع محتوا (CDN)، تحلیل‌ها یا فونت‌های دور</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>امضا در هر رکورد</span></div></div>
 <h2 id="map">جایی که همه‌چیز زندگی می‌کند</h2>
-<p>جمع‌آورنده، پنل آن و هر رکورد ذخیره‌شده روی کامپیوتری یا سروری که آن را اجرا می‌کنید باقی می‌ماند. تلگرام به‌صورت پیش‌فرض تنها مقصد است؛ هر مقصد دیگر یک کلید جداگانه دارد.</p>
+<p>جمع‌کننده، پنل و هر رکورد روی دستگاه شما می‌مانند. به‌طور پیش‌فرض فقط با Telegram تماس گرفته می‌شود؛ بقیه هر کدام یک کلید جداگانه است.</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">۰۶ / آنچه از دستگاه خارج می‌شود</span><span class="sample-tag">نصب شما</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="مقاصد اختیاری را فعال یا غیرفعال کنید"><button type="button" data-flow-toggle="replica" aria-pressed="false">نسخه خارج از محل</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">اخطاریه‌ها</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">برچسب‌های زمانی</button><button type="button" data-flow-toggle="witness" aria-pressed="false">شاهد</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>مخفی</th><th>محلی که نگهداری می‌شود</th><th>آنچه را که باز می‌کند</th><th>اگر فاش شود</th></tr></thead>
 <tbody>
-<tr><td><strong>توکن پنل</strong></td><td><code>panel-token.txt</code> در دایرکتوری داده‌ها؛ مرورگر آن را فقط برای همان زبانه نگه می‌دارد</td><td>همه چیز در هر فضای کاری: خواندن و خروجی‌گیری، تغییر دامنه، ورود به حساب‌ها</td><td>TgWitness را متوقف کنید، <code>panel-token.txt</code> را حذف کنید، دوباره آن را راه‌اندازی کنید: یک توکن جدید ایجاد می‌شود</td></tr>
+<tr><td><strong>توکن پنل</strong></td><td><code>panel-token.txt</code> در پوشه داده؛ مرورگر آن را برای هر زبانه نگه می‌دارد</td><td>همه چیز در هر فضای کاری</td><td>TgWitness را متوقف کنید، <code>panel-token.txt</code> را حذف کنید، دوباره اجرا کنید: یک توکن جدید می‌گیرید</td></tr>
 <tr><td><strong>جلسه تلگرام</strong></td><td> گاوصندوق، رمزگذاری‌شده (<code>credentials.enc</code>)</td><td>خود حساب تلگرام</td><td>جلسه را در تلگرام تحت <em>«تنظیمات» → «دستگاه‌ها»</em> پایان دهید.</td></tr>
-<tr><td><strong>کلید امضا</strong></td><td> گاوصندوق، رمزگذاری‌شده (<code>signing.enc</code>)</td><td>امضای سوابقی که زیر اثر انگشت شما تأیید می‌شوند</td><td>نقاط کنترل در مکان‌های دیگر نگهداری می‌شوند، یک شاهد و نشانه‌های زمانی نشان می‌دهند چه چیزی قبلاً وجود داشته است</td></tr>
-<tr><td><strong>کلید گاوصندوق</strong></td><td><code>vault.key</code> در کنار داده‌ها، یا یک کلید اصلی خارجی برای یک دایرکتوری داده جدید</td><td>رمزگشایی گاوصندوق</td><td>کلید جلسه و کلید امضا را نیز به‌عنوان فاش‌شده در نظر بگیرید</td></tr>
-<tr><td><strong>توکن شاهد</strong></td><td>روی میزبان شاهد</td><td>فقط خواندنی: نقاط کنترل امضا شده و وضعیت سلامت</td><td>آن را در صفحهٔ Witness حذف کنید؛ یکی جدید بسازید</td></tr>
-<tr><td><strong>کپی کلید خارج از محل</strong></td><td> گاوصندوق؛ یک‌بار آن را دانلود کنید تا در صورت نیاز بازیابی شود</td><td>رمزگشایی نسخهٔ خارج از محل</td><td>هر کسی که اشیاء ذخیره‌شده را در اختیار داشته باشد، می‌تواند آن‌ها را رمزگشایی کند: آن نسخه را به‌عنوان افشا شده در نظر بگیرید</td></tr>
+<tr><td><strong>کلید امضا</strong></td><td> گاوصندوق، رمزگذاری‌شده (<code>signing.enc</code>)</td><td>امضای رکوردها با اثر انگشت شما</td><td>نقاط بازرسی در جای دیگر، شاهد و مهرهای زمانی همچنان نشان می‌دهند پیش‌تر چه وجود داشت</td></tr>
+<tr><td><strong>کلید گاوصندوق</strong></td><td><code>vault.key</code> کنار داده‌ها، یا یک کلید اصلی خارجی</td><td>گاوصندوق</td><td>فرض کنید نشست و کلید امضا هم نشت کرده‌اند</td></tr>
+<tr><td><strong>توکن شاهد</strong></td><td>روی میزبان شاهد</td><td>فقط‌خواندنی: نقاط بازرسی و سلامت</td><td>آن را در صفحه شاهد حذف کنید، یکی تازه بسازید</td></tr>
+<tr><td><strong>کپی کلید خارج از محل</strong></td><td> گاوصندوق؛ یک‌بار آن را دانلود کنید تا در صورت نیاز بازیابی شود</td><td>کپی خارج از محل</td><td>هر کسی که bucket را هم داشته باشد می‌تواند رمزگشایی کند: کپی را افشاشده فرض کنید</td></tr>
 </tbody></table></div>
 <h2 id="threats">محدودهٔ پوشش حفاظتی</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> پوشش داده شده</h3><ul>
-<li>یک رکورد تغییر یافته، حذف شده یا جابجا شده در یک خروجی: زنجیره هش یا امضا دیگر تأیید نمی‌شود.</li>
-<li>ژورنالی که پس از یک نقطهٔ کنترل که در جای دیگری نگهداری شده بود، بازسازی یا بازگردانده شد: نقطهٔ کنترل نگهداری‌شده دیگر مطابقت ندارد.</li>
-<li>حدس توکن پنل: ۲۵۶ بیت تصادفی که در زمان ثابت مقایسه می‌شوند؛ پس از ۱۵ خطا در یک دقیقه، آدرس رد می‌شود.</li>
-<li>محتوای چت خصمانه: متن به‌صورت متن درج می‌شود، هرگز به‌عنوان HTML؛ پیوست‌ها به‌صورت فایل دانلود می‌شوند؛ پنل هیچ‌چیز را از سایت‌های دیگر بارگذاری نمی‌کند.</li>
-<li>یک دایرکتوری دادهٔ کپی‌شده با کلید گاوصندوق خارجی: جلسات و کلیدهای امضا بدون کلید اصلی رمزگذاری‌شده باقی می‌مانند.</li>
+<li>رکوردی که تغییر کرده، حذف یا جابه‌جا شده: زنجیره هش یا یک امضا می‌شکند.</li>
+<li>ژورنالی که پس از ذخیره نقطه بازرسی در جای دیگر کوتاه یا بازسازی شده: نقطه بازرسی دیگر منطبق نیست.</li>
+<li>حدس زدن توکن: 256 بیت تصادفی، مقایسه با زمان ثابت، 15 شکست در دقیقه و آدرس مسدود می‌شود.</li>
+<li>محتوای خصمانه گفتگو: متن متن می‌ماند و هرگز HTML نمی‌شود؛ پیوست‌ها به‌صورت فایل دانلود می‌شوند؛ پنل چیزی از سایت‌های دیگر بارگذاری نمی‌کند.</li>
+<li>پوشه داده دزدیده‌شده با کلید گاوصندوق خارجی: نشست‌ها و کلیدها رمزگذاری‌شده می‌مانند.</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> به شما واگذار شد</h3><ul>
-<li>توکن پنل اصلی کنترل کامل دارد. دسترسی محدود به حساب‌ها، چت‌ها و اقداماتی که دیگران نیاز دارند بدهید؛ کلید اصلی را خصوصی نگه دارید.</li>
-<li>یک مدیر سیستم می‌تواند همه چیز را بخواند و دفترچه را بازنویسی و دوباره امضا کند. اثر انگشت و نقاط کنترل را روی سیستمی دیگر نگه دارید.</li>
-<li>متن پیام و رسانه‌ها توسط TgWitness رمزگذاری نمی‌شوند. از رمزگذاری دیسک و مجوزهای سخت‌گیرانه استفاده کنید.</li>
-<li>HTTP ساده فراتر از localhost توکن را در شبکه نمایش می‌دهد. از HTTPS یا تونل SSH استفاده کنید.</li>
-<li>سوابق ذخیره‌شده را با امضاها و نقاط کنترل بررسی کنید. پوشش جمع‌آوری را بازبینی کرده و تحویل را برای حساب‌ها و منابعی که استفاده می‌کنید، آزمایش کنید.</li>
+<li>توکن اصلی همه کار می‌کند. به دیگران دسترسی محدود بدهید و توکن اصلی را برای خودتان نگه دارید.</li>
+<li>هر کسی که روی دستگاه مدیر باشد می‌تواند همه چیز را بخواند و ژورنال را دوباره امضا کند. اثر انگشت و نقاط بازرسی را جای دیگری نگه دارید.</li>
+<li>TgWitness پیام‌ها و رسانه را رمزگذاری نمی‌کند. دیسک را رمزگذاری کنید و مجوزها را محدود کنید.</li>
+<li>HTTP ساده بیرون از localhost توکن را نشت می‌دهد. از HTTPS یا تونل SSH استفاده کنید.</li>
+<li>امضاها نمی‌گویند چه چیزی از دست رفته. پوشش را بررسی کنید و تحویل را روی حساب‌ها و منابع خودتان آزمایش کنید.</li>
 </ul></section>
 </div>
-<p><a href="../access/">اشتراک دسترسی به یک پرونده</a> با مجوزها، تاریخ انقضا و محدودیت‌های جلسه. توکن شاهد همچنان یک اعتبارنامهٔ جداگانه باقی می‌ماند.</p>
+<p><a href="../access/">دسترسی به یک پرونده را به اشتراک بگذارید</a> با مجوزها، انقضا و محدودیت نشست.</p>
 <h2 id="hardening">سخت‌گیری یک نصب</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>۰ از ۸ انجام شد</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>از یک حساب تلگرام اختصاصی استفاده کنید</strong> — هرگز از حساب اصلی خود <strong>استفاده</strong> نکنید. توکن پنل و جلسه کنترل کامل آن را در اختیار شما قرار می‌دهند.</span></li>
-<li><span class="check-text"><strong>پنل را روی 127.0.0.1 نگه دارید.</strong> فقط از طریق HTTPS (پیکربندی همراه Caddy) یا تونل SSH از راه دور به آن دسترسی پیدا کنید.</span></li>
-<li><span class="check-text"><strong>دیسکی را</strong> که دایرکتوری داده‌ها را در خود جای داده <strong>رمزگذاری کنید</strong>: متن پیام و رسانه‌ها همان‌طور که دریافت شده‌اند ذخیره می‌شوند.</span></li>
-<li><span class="check-text"><strong>دایرکتوری داده‌ها را</strong> به حساب سرویس <strong>محدود کنید</strong>. دایرکتوری‌های جدید روی یونیکس با حالت 0700 ایجاد می‌شوند؛ در ویندوز، مجوزهای پوشه را تنظیم کنید.</span></li>
-<li><span class="check-text"><strong>کلید اصلی گاوصندوق را در جای دیگری</strong> روی سرورها <strong>نگه دارید</strong>: قبل از ایجاد دایرکتوری داده، <code>TGWITNESS_VAULT_KEY_FILE</code> را تنظیم کنید.</span></li>
-<li><span class="check-text"><strong>اثر انگشت کلید امضا و نقاط کنترل را</strong> در سیستمی دیگر <strong>ذخیره کنید</strong> و شاهد را روی میزبان دیگری اضافه کنید.</span></li>
+<li><span class="check-text"><strong>از یک حساب Telegram اختصاصی استفاده کنید</strong>، هرگز حساب اصلی‌تان را.</span></li>
+<li><span class="check-text"><strong>پنل را روی 127.0.0.1 نگه دارید.</strong> دسترسی از راه دور فقط با HTTPS (Caddy همراه) یا تونل SSH.</span></li>
+<li><span class="check-text"><strong>دیسک را رمزگذاری کنید</strong> که پوشه داده روی آن است، پیام‌ها و رسانه همان‌طور که هستند ذخیره می‌شوند.</span></li>
+<li><span class="check-text"><strong>پوشه داده را محدود کنید</strong> به حساب سرویس (0700 در Unix، مجوزهای پوشه در Windows).</span></li>
+<li><span class="check-text"><strong>کلید گاوصندوق را جای دیگری نگه دارید</strong> روی سرورها: پیش از اولین اجرا <code>TGWITNESS_VAULT_KEY_FILE</code> را تنظیم کنید.</span></li>
+<li><span class="check-text"><strong>اثر انگشت و نقاط بازرسی را ذخیره کنید</strong> روی سیستمی دیگر، و شاهد را روی میزبانی دیگر اجرا کنید.</span></li>
 <li><span class="check-text"><strong>هرگز</strong> کلیدهای <code>data/</code>، sessions، <code>panel-token.txt</code> یا vault را در گیت‌هاب یا یک چت <strong>آپلود نکنید</strong>.</span></li>
 <li><span class="check-text">سربرگ‌های <code>Authorization</code> را در یک پروکسی معکوس <strong>ثبت نکنید</strong>.</span></li>
 </ol>
 </div>
-<details><summary>آیا می‌توانم توکن پنل را بدون از دست دادن داده‌ها تغییر دهم؟</summary><p>بله. توکن فقط پنل را باز می‌کند. TgWitness را متوقف کنید، <code>panel-token.txt</code> را از دایرکتوری داده‌ها حذف کنید و دوباره آن را راه‌اندازی کنید؛ دفترچه یادداشت، جلسات و کلیدها دست‌نخورده باقی می‌مانند. با تنظیم <code>TGWITNESS_TOKEN</code>، به جای فایل از مقدار محیط استفاده می‌شود.</p></details>
-<details><summary>چرا پیام‌ها هنگام ذخیره‌سازی رمزگذاری نمی‌شوند؟</summary><p>گردآورنده باید آن‌ها را بخواند تا جستجو، مقایسه نسخه‌ها و صدور آن‌ها را انجام دهد. رمزگذاری آن‌ها با کلیدی روی همان دستگاه، در برابر کسی که می‌تواند آن دستگاه را بخواند، تأثیر اندکی دارد. رمزگذاری دیسک، دیسک متوقف‌شده یا دزدیده‌شده را محافظت می‌کند؛ مجوزهای سخت‌گیرانه، دیسک در حال اجرا را محافظت می‌کنند.</p></details>
+<details><summary>آیا می‌توانم توکن پنل را بدون از دست دادن داده‌ها تغییر دهم؟</summary><p>بله، فقط پنل را باز می‌کند. TgWitness را متوقف کنید، <code>panel-token.txt</code> را حذف کنید، دوباره اجرا کنید. ژورنال، نشست‌ها و کلیدها می‌مانند. اگر <code>TGWITNESS_TOKEN</code> تنظیم شده باشد، مقدار آن بر فایل مقدم است.</p></details>
+<details><summary>چرا پیام‌ها هنگام ذخیره‌سازی رمزگذاری نمی‌شوند؟</summary><p>جمع‌کننده باید آن‌ها را بخواند تا جستجو، مقایسه و خروجی‌گیری کند. کلیدی روی همان دستگاه جلوی کسی را که به هر حال می‌تواند آن دستگاه را بخواند نمی‌گیرد. رمزگذاری دیسک از دیسک دزدیده‌شده محافظت می‌کند و مجوزها از سیستم در حال اجرا.</p></details>
 <h2 id="report">گزارش یک آسیب‌پذیری</h2>
-<p>از منوی <strong>Security → Report a vulnerability</strong> در مخزن گیت‌هاب استفاده کنید. نسخه، تأثیر و حداقل بازتولید مصنوعی را درج کنید. هرگز اطلاعات ورود، دایرکتوری‌های حساب یا آرشیوهای واقعی شواهد را ارسال نکنید. اگر گزارش خصوصی در دسترس نیست، یک issue باز کنید و درخواست کانال خصوصی بدون جزئیات اکسپلویت را مطرح کنید.</p>
+<p><strong>Security → Report a vulnerability</strong> در GitHub. نسخه، تأثیر و بازتولید حداقلی با داده جعلی. هرگز اعتبارنامه، پوشه حساب یا شواهد واقعی نفرستید. اگر گزارش خصوصی خاموش است، یک issue باز کنید و کانال خصوصی بخواهید، بدون جزئیات بهره‌برداری.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">مرجع کامل ←</a><a class="next-guide" href="../start/"><span>مرحله بعدی</span><strong>در چند دقیقه شروع کنید ←</strong></a><p>این راهنماها پیاده‌سازی فعلی را توصیف می‌کنند. نتایج اعتبارسنجی و شکاف‌های باقی‌مانده به‌طور جداگانه مستند شده‌اند. <a href="../reference/verification/">آنچه آزمایش شده است ←</a></p></footer>
 </main>

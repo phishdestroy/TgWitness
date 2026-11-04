@@ -120,11 +120,6 @@ PATH 環境變數、安裝為系統服務，亦不會配置公開監聽器。所
 及 IPv6 路由，且不得包含鉤子（hooks）、包含（includes）、環境變數替換或額外的
 監聽器（listeners）。公開端點位址會在啟動前進行解析並固定。
 請使用外部 VPN 或 SOCKS5 閘道，以支援 OpenVPN/IPsec 及私有端點。</p>
-<p>合成檢查項目為 <code>python tools/check_guided_connection.py</code> 和
-<code>python tools/check_guided_connection_browser.py</code>。可選的
-<code>python tools/check_portable_routes_runtime.py</code> 會下載經過驗證的輔助程式，並
-透過迴路測試裝置，測試其實際的本地進程生命週期。此操作
-不會註冊 Cloudflare 裝置，亦不會使用 Telegram 帳戶。</p>
 <h2 id="authentication-methods">驗證方法<a class="anchor" href="#authentication-methods" aria-label="此節的連結">#</a></h2>
 <p><strong>API ID 和 API 雜湊值用於識別應用程式；它們並不能取代帳戶登入。</strong>
 
@@ -220,12 +215,6 @@ Telegram Desktop 配對組 (2040) 會隨附相應的 Telegram Desktop 客戶端�
     貼上其字串，然後繼續。</li>
 <li>請確認顯示的數字帳號 ID，選擇來源並開始監測。</li>
 </ol>
-<p>此轉換器以唯讀模式開啟 SQLite，不會執行任何資料結構升級或網路請求，
-也不會輸出該會話內容。它會檢查資料結構版本、資料表類型、單一
-會話列、IP/埠/資料中心以及金鑰長度。命令列介面 (CLI) 輸入限制為 64 MiB；StringSession
-文字限制為 4 KiB。 面板轉換會將檔案上傳至已驗證的 TgWitness
-伺服器，在記憶體中進行處理，並將標準化的憑證傳回該
-瀏覽器，且不會儲存上傳的原始檔案。若使用遠端伺服器，請採用 HTTPS。</p>
 <p><strong>轉換後的檔案為未加密的帳戶存取密鑰。</strong> 請將其存放在受保護的
 儲存空間中，切勿將其提交至版本控制系統或傳送給第三方轉換服務。TgWitness
 會將授權會話儲存於其加密金庫中。複製會話並不會
@@ -332,17 +321,6 @@ MTProxy 是一款 Telegram 傳輸代理伺服器；SOCKS5 和 HTTP CONNECT 提�
 <p>當自動路由處於啟用狀態時，清單預設每小時刷新一次，傳輸檢查則
 每十分鐘執行一次。這些間隔時間均可自行設定。<strong>更新公開清單</strong>
 會觸發刷新；僅瀏覽清單並不會變更已儲存的手動路由。</p>
-<p>每個資料源的回應限制為 1 MiB，請求超時為 8 秒，
-整體下載時限為 20 秒；重定向
-將被拒絕。每個來源最多保留 64 筆相容的條目，並進行去重處理。
-解析器支援十六進位數、base64url 密鑰以及 JSON 資料源。
-偽造的 TLS <code>ee</code>、無效連結、私有／保留的 IP 字面量以及本機主機名稱將被
-跳過。主機名稱會在使用前進行解析與檢查，且所選的 IP 地址將被
-固定用於該連線。自動重新取得會再次解析主機名稱；若要再次解析，請重新套用
-手動輸入的項目。</p>
-<p>若饋送回應失敗、為空或不相容，系統將保留先前的來源快照。
-更新操作具有原子性與序列化特性，且每分鐘每個工作區僅限嘗試一次。
-成功的傳輸探測僅代表連線已建立，並不代表匿名性或擷取完整性。</p>
 <p><strong>Telegram 流量與 HTTPS 請求使用不同的路由。</strong>清單下載會使用
 獨立的 HTTPS 連線，並透過提供的外部請求路由進行。
 <code>TGWITNESS_PROXY_FEED_PROXY</code> 會明確地以 HTTP/SOCKS5 代理伺服器覆寫該路由；
@@ -355,21 +333,6 @@ MTProxy 是一款 Telegram 傳輸代理伺服器；SOCKS5 和 HTTP CONNECT 提�
 該請求；其他模式則允許「直接」傳輸。外部請求可被停用。明確
 設定的資訊流下載代理伺服器仍屬獨立的操作員覆寫選項。
 獨立的見證服務則維持其專屬的路徑。</p>
-<p>透過 SOCKS5 或 HTTP 代理伺服器發送的僅限公開外部 HTTP 請求，會透過
-同一代理伺服器，使用 Cloudflare DNS over HTTPS <code>https://1.1.1.1/dns-query</code> 解析
-目標位址。僅主機名稱及 A/AAAA 查詢類型會傳送至解析器；
-服務 URL、憑證及通知內容均不包含在內。 TLS 會驗證
-解析器憑證以確認其 IP 位址。系統會檢查兩種位址家族，
-若收到任何私有、迴圈、鏈路本位或保留的回應，則會拒絕該請求。
-連線會使用經驗證的數值位址，同時保留服務原始的
-HTTP Host 及 TLS 憑證名稱。 通知 HTTP 轉發與 CONNECT
-請求均採用相同的目標檢查機制。若 DNS 查詢失敗，且無
-本地目標 DNS 或直接備用方案，則會中止該請求。成功的回應會依
-代理路由分別儲存在記憶體中，最長 30 秒且不超過其 DNS TTL；
-快取上限為 128 筆條目。 代理主機名稱本身可使用本機 DNS。
-SOCKS 和 CONNECT 失敗時，可在傳送
-服務請求正文之前嘗試另一個經過驗證的位址。純 HTTP 轉發會在請求失敗時回報錯誤，
-而不會自動透過另一個位址重傳其正文。</p>
 <p>對於由營運商管理的私有服務，現有的伺服器環境設定
 <code>TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1</code> 可允許私有目的地，並維持
 代理端的主機名稱解析。此設定無法透過控制面板啟用。僅限公開
@@ -488,11 +451,6 @@ Telegram 通常會提供數據中心的數值 IP 位址。</p>
 存取密鑰，而非加密密碼。它授予管理員存取權限；
 <a href="../access/">已發行的憑證</a>可限定於特定帳戶和聊天室。工作區共享
 主進程，並非獨立的租戶。</p>
-<p>一個明確啟動且隔離的合成示範環境，可透過直接
-迴路連接自動開啟。此功能採用獨立的進程生命週期機制；既不會
-洩露已設定的面板憑證，也不會授予存取真實工作區的權限。遠端、
-代理或跨來源的請求均無法取得或使用此自動進入功能。
-此便利功能並不會消除針對真實帳戶資料的驗證邊界。</p>
 <p>BitLocker、LUKS、FileVault 或受管加密卷宗皆可在
 各自的威脅模型下保護儲存裝置。 已解鎖且正在運行的機器之管理員
 仍可讀取資料。在儲存規劃中，應納入 SQLite WAL/SHM、媒體檔案、臨時匯出檔案、交換檔、備份
@@ -523,26 +481,10 @@ HKDF-SHA256 衍生的專屬 Fernet 金鑰。<code>vault.external.json</code> 僅
 <p>在刻意規劃的遷移方案
 實施並驗證完成之前，請保留現有安裝環境中的現有金鑰。刪除 <code>vault.key</code> 或更換主金鑰可能會導致
 無法存取會話／簽署金鑰。請將加密備份與金鑰分開存放，並
-在隔離的實例中測試還原功能。</p>
-<h2 id="sources-and-verification-scope">資料來源與驗證範圍<a class="anchor" href="#sources-and-verification-scope" aria-label="此節的連結">#</a></h2>
-<p>審閱日期：2026年10月26日：</p>
-<ul>
-<li>https://core.telegram.org/api/auth</li>
-<li>https://core.telegram.org/api/obtaining_api_id</li>
-<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
-<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
-<li>https://core.telegram.org/mtproto/mtproto-transports</li>
-<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
-<li>Telethon 1.45.0：SQLiteSession、StringSession、<code>Connection._proxy_connect</code>、
-    <code>TcpMTProxy.normalize_secret</code> 及下載方法。</li>
-</ul>
-<p>本地測試涵蓋迴路 SOCKS5/HTTP CONNECT 測試案例、模擬的 SQLite 會話、
-路由隔離、機密資料排除以及缺失金鑰時的拒絕機制。這些測試並未建立
-真實的 Telegram/代理伺服器互通性，亦未模擬 MTProxy 的實際運作行為。請參閱
-<a href="../verification/">VERIFICATION.md</a> 及 <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a>。</p></div></article>
+在隔離的實例中測試還原功能。</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">在 GitHub 上編輯此頁面 ↗</a><a class="next-guide" href="../deployment/"><span>下一步</span><strong>部署 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../verification/">已測試的內容 →</a></p></footer>
 </main>
-<aside class="toc" aria-label="本頁內容"><p class="nav-label">本頁內容</p><a href="#guided-connection-setup">引導式連線設定</a><a href="#authentication-methods">驗證方法</a><a href="#import-a-telethon-session-file">匯入 Telethon 會話檔案</a><a href="#mtproto-telethon-and-proxies">MTProto、Telethon 及代理伺服器</a><a href="#ip-modes">IP 模式</a><a href="#encryption-and-signatures">加密與簽名</a><a href="#external-master-key">外部主金鑰</a><a href="#sources-and-verification-scope">資料來源與驗證範圍</a></aside>
+<aside class="toc" aria-label="本頁內容"><p class="nav-label">本頁內容</p><a href="#guided-connection-setup">引導式連線設定</a><a href="#authentication-methods">驗證方法</a><a href="#import-a-telethon-session-file">匯入 Telethon 會話檔案</a><a href="#mtproto-telethon-and-proxies">MTProto、Telethon 及代理伺服器</a><a href="#ip-modes">IP 模式</a><a href="#encryption-and-signatures">加密與簽名</a><a href="#external-master-key">外部主金鑰</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>開源 · 可在您的機器上運行</span><a href="../../../../LICENSE">MIT 授權條款</a><a href="../notice/">操作員公告</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全性</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "等待訊息", "Step through a fictional send, edit and delete.": "透過一個虛構的發送、編輯和刪除流程逐步了解操作。", "No observations yet. Start the sequence or advance one event.": "目前尚無觀察記錄。開始執行序列或跳至下一則事件。", "Meet at 10:00": "上午 10:00 見面", "A new message is visible in the chat.": "聊天室中顯示了一則新訊息。", "Record 1 appended: the collector observed the original message.": "新增記錄 1 筆：收集器已偵測到原始訊息。", "Meet at 11:00": "上午 11:00 見面", "The current text changes. The earlier observation stays.": "當前文本有所變更。先前的觀察結果維持不變。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "新增記錄 2：此編輯為一項新觀察結果。記錄 1 仍保留原始文字。", "Message deleted": "訊息已刪除", "The message has disappeared from the chat view.": "該訊息已從聊天視圖中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "新增「Record 3」：刪除通知將與兩個被觀察到的版本一併保留。", "0 records": "0 筆記錄", "1 record": "1 筆記錄", "2 records": "2 筆記錄", "3 records": "3 筆記錄", "Complete / {n} of 3": "完成 / {n} 共 3 項", "Step / {n} of 3": "步驟 / 3 中的 {n}", "Pause": "暫停", "Replay sequence": "重播序列", "Play sequence": "播放順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "靜態範例已上線。若要互動式計算雜湊值，請透過 HTTPS 開啟此頁面，或使用支援 Web Crypto 的 localhost 預覽。", "No record supplied": "未提供記錄", "Tail removed": "尾部內容已移除", "≠ saved hash": "≠ 已儲存的雜湊值", "Rebuilt · different hash": "重新建置 · 不同雜湊值", "= saved hash": "= 儲存的雜湊值", "Same length and matching head.": "篇幅相同且標題一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "這三個計算出的雜湊值均與儲存的雜湊值相符。此樣本符合保留的三筆記錄邊界。", "Same saved head; the journal prefix fails verification.": "儲存的標題相同；但日誌前綴無法通過驗證。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "記錄 2 已與其儲存的雜湊值不符。若僅檢查最後儲存的「頭部」，將無法發現此問題；驗證器會檢查每一筆記錄。", "Head differs from the retained checkpoint.": "標題與保留的檢查點不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的雜湊值彼此關聯，但最終的頭部已發生變更。保留的檢查點會拒絕此歷史記錄。若記錄內容遭變更，原始簽名亦將驗證失敗。", "Too short: 2 supplied records \u003c 3 retained records.": "過短：提供的 2 筆記錄 \u003c 保留的 3 筆記錄。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩餘的兩個雜湊值仍然匹配。保留的檢查點揭示了缺失的部分。若無該較早的邊界，僅憑這個較短的前綴是無法揭露此遺漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此瀏覽器無法進行雜湊運算。下方的公式與靜態說明仍可正常顯示。", "{n} records": "{n} 筆記錄", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：計數持續增加，簽名經驗證無誤，且金鑰匹配。該見證者保留此新界限。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滾：簽名答覆所報告的記錄數量少於最後一個被接受的檢查點。Witness 會記錄此問題，並保留較早的被接受邊界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉（Fork）：分支數量未變，但分支頭不同。該見證系統會記錄此分歧，並保留先前被接受的分支邊界。", "No answer": "無回應", "boundary unknown": "邊界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "無回應：Witness 會記錄驗證失敗的狀況。它無法判定收集器的當前狀態。若 Witness 仍能連線至 Bot API，且其發布政策允許，則可發布該次失敗的紀錄。", "Send {n}": "傳送 {n}", "Edit {n}": "編輯 {n}", "Delete {n}": "刪除 {n}", "Both accounts captured all six expected observations in this example.": "在此範例中，兩個帳戶均完整記錄了預期的六項觀察結果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "帳號 B 仍成功擷取了 6 則中的 6 則。其中兩則收據的擷取時間較長。擷取率與收據延遲反映的是不同的問題。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "帳戶 B 在截止時間前成功擷取了 6 項中的 5 項（83.3%）。遺漏的那項編輯操作未測得任何延遲。此結果僅描述這六項受控操作。", "not observed by cutoff": "未在截止時間前觀察到", "{s} seconds": "{s} 秒", "Exact values follow in the table.": "具體數值詳見下表。", "{s} s": "{s} s", "Not observed": "未觀察到", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四個聊天室提供了不同的觀察結果。請追蹤每項連結的原始記錄；若未標明發送者，請勿將該頻道貼文歸屬於使用者 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記錄 #146 和 #205 顯示相同的發送者 ID：71001。這將兩個聊天室中觀察到的 Telegram 帳號貼文相互連結。此資訊並未識別任何現實世界中的人士，亦未歸屬該頻道貼文的來源。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目的地 pay.example.invalid/new 出現在群組記錄 #146、機器人鍵盤 #173、頻道編輯 #188 以及私人訊息 #205 中。重複出現的目的地將這些資料連結起來；但這並不能證明這些帳戶受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虛構案例中，已完成的媒體收據 #151 與 #209 具有完全相同的 SHA-256 值。請比較實際位元組及其相關的訊息記錄。該匹配檔案並未標示其創建者，亦無法證明是由誰轉發的。", "the encrypted off-site copy": "加密的異地備份", "notifications": "通知", "checkpoint hashes for timestamps": "時間戳記的檢查點雜湊值", "signed checkpoints for the witness": "TgWitness 的簽名檢查點", "Switched on in this example": "此範例中已啟用", "Optional · off by default": "可選 · 預設為關閉", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "離開這台機器時：Telegram 連線及 {list}。除此之外別無他物。", "Default: only the Telegram connection leaves this machine.": "預設設定：僅 Telegram 連線會離開這台機器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "將步驟 {n} 標記為已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "複製", "Copied": "複製", "Command copied.": "指令已複製。", "Selected — Ctrl/Cmd+C": "選取 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已選取指令。請手動複製。", "Command copied to clipboard.": "指令已複製至剪貼簿。", "Select text": "選取文字", "Clipboard unavailable. Command selected; copy it manually.": "剪貼簿無法使用。已選取指令；請手動複製。", "A message arrives. The first observation is saved.": "一則訊息送達。首項觀察記錄已儲存。", "The time changes. Both captured versions stay.": "時間雖變，但兩份記錄版本皆保留。", "The message disappears. The captured history remains.": "訊息雖已消失，但被擷取的歷史紀錄依然存在。", "Pause example animation": "暫停範例動畫", "Play example animation": "播放範例動畫", "Play": "播放", "Full-size workspace screenshot": "全螢幕工作區螢幕截圖", "Workspace screenshot · fictional data": "工作區螢幕截圖 · 虛構資料", "Close": "關閉", "Close screenshot": "關閉螢幕截圖", "Scrollable full-size screenshot": "可捲動的全螢幕截圖", "Enlarge: {name}": "放大：{name}", "View full size": "檢視完整尺寸", "Step {n} of {total}": "第 {n} 步，共 {total} 步"}</script>

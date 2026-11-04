@@ -54,12 +54,3 @@ Pengesahan tandatangan dan konsistensi boleh mengesan perubahan berbanding sempa
 Gunakan **Revoke** dalam pengurus paparan atau bahagian **Akses** sedia ada untuk menutup pautan dan menamatkan semua sesi. Pelawat memadam rekod yang dipaparkan apabila permintaan mengesan bahawa akses telah tamat. Tamat tempoh dan kebenaran disemak pada setiap permintaan. Pemberian paparan tidak boleh ditukar kepada akses panel biasa di tempat; buat pemberian baharu untuk menukar mod.
 
 Hidangkan halaman melalui alamat HTTPS sedia ada pada pemasangan. Menerbitkan pautan tidak membuka port baru, mewujudkan terowong atau menukar DNS. HTML dan API kekal pada pemasangan pengguna. Pelawat paparan tidak boleh menggunakan API biasa untuk mesej, profil, media, eksport atau pengurusan dengan capaian ini.
-
-## Semakan regresi tempatan
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Kedua-duanya menggunakan rekod sintetik dan pelayan HTTP tempatan. Mereka tidak menyambung ke Telegram.

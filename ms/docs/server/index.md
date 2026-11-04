@@ -2,33 +2,33 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/server/
 
-Pastikan pengumpul sentiasa tersedia dan datanya kekal utuh selepas dimulakan semula.
+Pastikan pengumpul terus berjalan dan data selamat melalui mula semula.
 
 ## Pilih kaedah pelancaran
 
-Untuk pemasangan asli, gunakan [pelancar](https://phishdestroy.github.io/TgWitness/ms/docs/start/) dan contoh perkhidmatan dalam [deploy/.](https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md) Untuk Docker, pasang Docker dengan Compose dan jalankan dari direktori projek:
+Asli: [pelancar](https://phishdestroy.github.io/TgWitness/ms/docs/start/) serta templat perkhidmatan dalam [deploy/](https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md). Docker, dari folder projek:
 
 ```
 docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt
 ```
 
-Panel lalai mendengar pada alamat loopback hos, port 8787. Buka secara tempatan atau melalui terowong SSH. Gunakan token daripada arahan kedua untuk membuka kunci panel.
+Panel mendengar pada localhost:8787. Bukanya secara setempat atau melalui terowong SSH, dengan token daripada arahan kedua.
 
 ## Simpan keseluruhan direktori data
 
-Pemasangan asli menggunakan `data/live`. Docker menggunakan volum `tgwitness-data` yang berterusan. Menyimpan jurnal, sesi akaun, kunci dan keadaan operasi bersama-sama. Eksport yang ditandatangani adalah bukti yang berguna, tetapi ia bukan sandaran penuh pemasangan.
+Asli: `data/live`. Docker: volum `tgwitness-data`. Jurnal, sesi dan kunci mesti bersama. Eksport bertandatangan ialah bukti, bukan sandaran.
 
-1. Hentikan pengumpulan sebelum membuat sandaran yang konsisten.
-2. Salin keseluruhan direktori data peribadi ke storan terlindung di luar hos.
-3. Uji pemulihan ke dalam pemasangan terasing sebelum bergantung pada sandaran.
+1. Hentikan pengumpulan dahulu.
+2. Salin seluruh direktori data ke tempat selamat, di luar hos.
+3. Cuba pulihkannya pada pemasangan berasingan sebelum anda mempercayainya.
 
 ## Semak selepas memulakan semula
 
-Sahkan ruang kerja dan kunci yang dijangka, sambungan Telegram, sumber terpilih dan tangkapan mesej baru. Status MTProto yang disimpan dan bantuan catch-up membantu memulihkan kemas kini yang masih disimpan oleh Telegram. Mereka tidak dapat membina semula setiap kemas kini yang telah tamat tempoh atau suntingan yang dipadam sebelum tangkapan.
+Semak ruang kerja dan kunci, sambungan, sumber dan sama ada mesej baharu masuk. TgWitness mengejar apa yang Telegram masih ada, bukan segala yang berlaku semasa ia terhenti.
 
-Kesihatan kontena bermaksud pelayan web memberi respons. Gunakan mesej terkawal dan pemeriksaan saksi untuk menilai pengumpulan dan penerbitan luaran.
+Bekas "healthy" bermaksud pelayan web menjawab. Sama ada pengumpulan berfungsi, mesej ujian dan saksi akan memberitahu.
 
 ## Terbitkan hanya apa yang anda niatkan
 
-Rujukan penyebaran merangkumi contoh HTTPS, arahan volum kekal, langkah kemas kini dan pemulihan. Arahan Docker disediakan untuk penyebaran; [rekod pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/) semasa mengenal pasti persekitaran yang benar-benar diuji.
+HTTPS, volum, kemas kini dan pemulihan ada dalam rujukan pengerahan. Apa yang benar-benar telah diuji: [rekod pengesahsahihan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/).

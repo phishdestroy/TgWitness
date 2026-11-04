@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../">होम</a> <span aria-hidden="true">/</span> <a href="../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <span aria-current="page">इसे चालू रखें</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">क्या परीक्षण किया गया है →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">दस्तावेज़ीकरण / 17</p><h1>इसे चालू रखें</h1><p class="guide-outcome">कलेक्टर को उपलब्ध रखें और पुनरारंभों के दौरान इसके डेटा को अक्षुण्ण रखें।</p>
+<article class="guide-content"><p class="eyebrow">दस्तावेज़ीकरण / 17</p><h1>इसे चालू रखें</h1><p class="guide-outcome">कलेक्टर चलता रखें और डेटा रीस्टार्ट के दौरान सुरक्षित रखें।</p>
 <h2 id="launch">लॉन्च विधि चुनें</h2>
-<p>नेटिव इंस्टॉलेशन के लिए, <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> में दिए गए <a href="../start/">लॉन्चर</a> और सेवा उदाहरणों का उपयोग करें। Docker के लिए, Compose के साथ Docker इंस्टॉल करें और प्रोजेक्ट डायरेक्टरी से चलाएँ:</p>
+<p>नेटिव: <a href="../start/">लॉन्चर</a> और <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> में सर्विस टेम्पलेट। Docker, प्रोजेक्ट फ़ोल्डर से:</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>डिफ़ॉल्ट पैनल होस्ट के लूपबैक एड्रेस, पोर्ट 8787 पर सुनता है। इसे स्थानीय रूप से या SSH टनल के माध्यम से खोलें। पैनल को अनलॉक करने के लिए दूसरी कमांड से प्राप्त टोकन का उपयोग करें।</p>
+<p>पैनल localhost:8787 पर सुनता है। इसे स्थानीय रूप से या SSH टनल से खोलें, दूसरी कमांड के टोकन के साथ।</p>
 <h2 id="storage">पूरे डेटा निर्देशिका को रखें</h2>
-<p>नेटिव इंस्टॉलेशन <code>data/live</code> का उपयोग करते हैं। डॉकर स्थायी <code>tgwitness-data</code> वॉल्यूम का उपयोग करता है। जर्नल, खाता सत्र, कुंजियाँ और परिचालन स्थिति एक साथ रखें। एक हस्ताक्षरित एक्सपोर्ट उपयोगी साक्ष्य है, लेकिन यह पूर्ण इंस्टॉलेशन बैकअप नहीं है।</p>
-<ol><li>सुसंगत बैकअप लेने से पहले संग्रहण बंद करें।</li><li>पूरे निजी डेटा निर्देशिका की प्रति होस्ट के बाहर सुरक्षित भंडारण में कॉपी करें।</li><li>बैकअप पर निर्भर करने से पहले एक अलग इंस्टॉलेशन में पुनर्स्थापना का परीक्षण करें।</li></ol>
+<p>नेटिव: <code>data/live</code>। Docker: <code>tgwitness-data</code> वॉल्यूम। जर्नल, सेशन और कुंजियाँ साथ रहनी चाहिए। हस्ताक्षरित एक्सपोर्ट साक्ष्य है, बैकअप नहीं।</p>
+<ol><li>पहले संग्रह रोकें।</li><li>पूरी डेटा डायरेक्टरी होस्ट से बाहर किसी सुरक्षित जगह कॉपी करें।</li><li>भरोसा करने से पहले अलग इंस्टॉल पर पुनर्स्थापना आज़माएँ।</li></ol>
 <h2 id="check">पुनरारंभ के बाद जाँचें</h2>
-<p>अपेक्षित कार्यक्षेत्र और कुंजी, टेलीग्राम कनेक्शन, चयनित स्रोत और नए संदेश कैप्चर की पुष्टि करें। सहेजा गया MTProto राज्य और कैच-अप सहायता उन अपडेट्स को पुनः प्राप्त करने में मदद करते हैं जिन्हें टेलीग्राम अभी भी रखता है। वे हर समाप्त हो चुके अपडेट या कैप्चर से पहले हटाए गए संपादन को पुनर्स्थापित नहीं कर सकते।</p>
-<p class="callout">कंटेनर स्वास्थ्य का अर्थ है कि वेब सर्वर प्रतिक्रिया देता है। संग्रहण और बाहरी प्रकाशन का आकलन करने के लिए एक नियंत्रित संदेश और एक विटनेस चेक का उपयोग करें।</p>
+<p>वर्कस्पेस और कुंजी, कनेक्शन, स्रोत और नए संदेशों का आना जाँचें। TgWitness वही पूरा करता है जो Telegram के पास अब भी है, वह सब नहीं जो बंद रहने के दौरान हुआ।</p>
+<p class="callout">"healthy" कंटेनर का मतलब है वेब सर्वर जवाब देता है। संग्रह काम कर रहा है या नहीं, टेस्ट संदेश और गवाह बताएँगे।</p>
 <h2 id="public">केवल वही प्रकाशित करें जो आपका इरादा हो</h2>
-<p>डिप्लॉयमेंट संदर्भ में HTTPS उदाहरण, पर्सिस्टेंट-वॉल्यूम कमांड, अपडेट और पुनर्स्थापना चरण शामिल हैं। डिप्लॉयमेंट के लिए Docker कमांड प्रदान किए गए हैं; वर्तमान <a href="../reference/verification/">वैलिडेशन रिकॉर्ड</a> वास्तव में परीक्षण किए गए वातावरणों की पहचान करता है।</p>
+<p>HTTPS, वॉल्यूम, अपडेट और पुनर्स्थापना डिप्लॉयमेंट संदर्भ में हैं। जो सच में टेस्ट हुआ: <a href="../reference/verification/">सत्यापन रिकॉर्ड</a>।</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">पूर्ण संदर्भ →</a><a class="next-guide" href="../troubleshooting/"><span>अगला कदम</span><strong>खोजें कि क्या गलत हुआ →</strong></a><p>ये मार्गदर्शिकाएँ वर्तमान कार्यान्वयन का वर्णन करती हैं। सत्यापन परिणाम और शेष अंतराल अलग से दस्तावेजीकृत किए गए हैं। <a href="../reference/verification/">क्या परीक्षण किया गया है →</a></p></footer>
 </main>

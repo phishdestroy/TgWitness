@@ -32,55 +32,55 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../">Home</a> <span aria-hidden="true">/</span> <a href="../">Dokumentasi</a> <span aria-hidden="true">/</span> <span aria-current="page">Eksport dan sahkan</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentasi / 07</p><h1>Eksport dan sahkan</h1><p class="guide-outcome">Berikan penerima fail yang boleh mereka semak menentang ruang kerja pengumpulan dan sejarahnya yang disimpan.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentasi / 07</p><h1>Eksport dan sahkan</h1><p class="guide-outcome">Serahkan fail yang boleh disemak sendiri oleh penerima terhadap ruang kerja anda.</p>
 <div class="flow-strip export-flow" aria-label="Penyerahan bukti: simpan rujukan yang dipercayai, eksport ZIP yang ditandatangani, sahkan dengan penerima"><span>Simpan rujukan</span><span>Eksport ZIP yang disahkan</span><span>Penerima mengesahkan</span></div>
-<p>Baru dengan tandatangan dan checkpoint? <a href="../concepts/#chain">Ubah rekod sampel</a> dan lihat pemeriksaan mana yang mengesaninya.</p>
+<p>Baru dengan tandatangan dan checkpoint? <a href="../concepts/#chain">Ubah rekod contoh</a> dan lihat semakan mana yang menangkapnya.</p>
 <p>Menyimpan salinan jauh daripada pengumpul? Pergi ke <a href="#s3">tetapan S3</a>, <a href="#s3-retention">Object Lock</a> atau <a href="#s3-restore">pemulihan disahkan</a>.</p>
 <h2 id="retain">Simpan rujukan yang dipercayai</h2>
-<p>Simpan cap jari kunci awam ruang kerja di luar pengumpul. Semasa pengumpulan, simpan titik pemeriksaan yang disahkan di tempat lain atau gunakan <a href="../witness/">saksi bebas</a>. Rujukan ini membolehkan penerima memeriksa kunci dan sempadan jurnal terdahulu.</p>
+<p>Catat cap jari kunci ruang kerja di tempat selain pengumpul. Semasa mengumpul, simpan juga checkpoint bertandatangan di tempat lain, atau jalankan <a href="../witness/">saksi bebas</a>. Itulah yang digunakan penerima untuk menyemak kunci dan keadaan jurnal terdahulu.</p>
 <h2 id="export">Muat turun ZIP yang disahkan</h2>
-<p>Buka <strong>Eksport</strong> dan buat ZIP bukti yang ditandatangani. Ia merangkumi jurnal ruang kerja penuh dan manifes fail yang ditandatangani. Gunakan <a href="../reports/">Report Studio</a> untuk membentuk laporan yang mudah dibaca, atau <a href="../handover/">ekstrak</a> <a href="../handover/">penyerahan</a> untuk menyampaikan hanya data terpilih yang dimampatkan.</p>
-<p>Laporan HTML, PDF dan JSON mempunyai meterai berasingan yang ditandatangani dan boleh disemak secara berasingan. CSV adalah salinan analisis yang mudah; gunakan CSV tepat di dalam ZIP yang disahkan untuk memeriksa integritinya. Simpan ZIP yang ditandatangani apabila penerima juga memerlukan rekod sumber dan lampiran.</p>
+<p><strong>Eksport</strong> → ZIP bukti bertandatangan. Ia mengandungi seluruh jurnal dan manifes fail bertandatangan. Bentukkan laporan yang mudah dibaca dalam <a href="../reports/">Report studio</a>, atau hantar data terpilih sahaja sebagai <a href="../handover/">ekstrak serahan</a>.</p>
+<p>Laporan HTML, PDF dan JSON membawa meterai masing-masing. CSV hanyalah salinan kerja; untuk integriti gunakan CSV di dalam ZIP yang telah disahkan.</p>
 <h2 id="verify">Sahkan dengan salinan TgWitness yang dipercayai</h2>
-<p>Dalam persekitaran projek yang dipasang, gantikan cap jari contoh dan laluan fail:</p>
+<p>Dalam persekitaran projek, dengan cap jari dan laluan anda sendiri:</p>
 <pre><code>python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
-<p>Apabila kedua-dua rujukan lulus, hasilnya melaporkan <code>key_pinned: true</code> dan <code>checkpoint_checked: true</code>. Simpan keputusan pengesahan bersama arkib asal. Titik pemeriksaan yang disimpan mesti berada pada atau sebelum sempadan eksport.</p>
+<p>Jika lulus, anda melihat <code>key_pinned: true</code> dan <code>checkpoint_checked: true</code>. Simpan output itu di sebelah arkib. Checkpoint mesti berada pada atau sebelum hujung eksport.</p>
 <h2 id="meaning">Gunakan hasil pengesahan</h2>
-<ul><li><strong>Periksa fail yang dihantar:</strong> manifes mengikat hash mereka, dan tandatangan rekod mengikat jurnal yang disimpan. Fail yang diubah atau rantaian rekod yang terputus dikesan.</li><li><strong>Semak identiti ruang kerja:</strong> cap jari yang disimpan secara berasingan mengenal pasti kunci tandatangan yang anda jangkakan.</li><li><strong>Bandingkan sempadan terdahulu:</strong> checkpoint yang disimpan memeriksa eksport menentang awalan jurnal yang disimpan sebelum penyerahan.</li><li><strong>Semak liputan pengumpulan:</strong> jurang, keputusan pemerolehan dan hantaran terkawal → sunting → padam ujian menerangkan peristiwa yang dirakam oleh tetapan ini.</li></ul>
-<p>Simpan keputusan ini bersama salinan penerima. Lihat <a href="../reference/evidence/#verification-scope">apa yang ditetapkan oleh pengesahan</a> untuk skop pemeriksaan dan penilaian berasingan terhadap tuntutan sumber dan liputan pengumpulan.</p>
+<ul><li><strong>Fail:</strong> manifes mengikat hash fail, tandatangan mengikat jurnal. Sebarang perubahan akan kelihatan.</li><li><strong>Identiti:</strong> cap jari yang anda simpan membuktikan itu kunci yang anda jangkakan.</li><li><strong>Keadaan terdahulu:</strong> checkpoint membandingkan eksport dengan awalan jurnal yang disimpan sebelum serahan.</li><li><strong>Liputan:</strong> jurang, hasil pemerolehan dan ujian hantar → sunting → padam menunjukkan apa yang benar-benar ditangkap oleh persediaan ini.</li></ul>
+<p>Butiran: <a href="../reference/evidence/#verification-scope">apa yang dibuktikan oleh pengesahan dan apa yang tidak</a>.</p>
 
 <h2 id="s3">Menyediakan salinan luar tapak S3</h2>
-<p>Di ruang kerja anda yang sedang berjalan, buka <strong>Eksport → Salinan luar tapak</strong>. Ciri pilihan ini berfungsi dengan AWS S3 dan perkhidmatan lain yang serasi S3. Ia menyalin segmen jurnal, foto dan fail yang disimpan, titik pemeriksaan dengan respons cap masa mereka, dan eksport sembang yang telah selesai. Setiap objek disulitkan pada pengumpul dengan <code>AES-256-GCM</code> sebelum dimuat naik.</p>
-<p>Demonstrasi dalam talian memaparkan kawalan yang sama dengan muat naik dilumpuhkan. Masukkan kelayakan storan hanya di ruang kerja anda sendiri yang sedang dijalankan.</p>
+<p><strong>Eksport → Salinan luar tapak</strong> dalam ruang kerja anda. Berfungsi dengan AWS S3 dan apa-apa yang serasi S3. Ia menyalin segmen jurnal, fail tersimpan, checkpoint dengan cap masanya dan eksport sembang yang siap, setiap satu disulitkan dengan <code>AES-256-GCM</code> sebelum meninggalkan pengumpul.</p>
+<p>Demo dalam talian menunjukkan kawalan ini dengan muat naik dimatikan. Masukkan kelayakan sebenar hanya dalam pemasangan anda sendiri.</p>
 <figure><a href="../../../assets/off-site-copy.png"><img src="../../../assets/off-site-copy.png" width="1136" height="825" alt="Panel salinan luar tapak lengkap: hujung, rantau, baldi, kunci akses, jadual, kawalan Kunci Objek dan kunci pemulihan" loading="lazy"></a><figcaption>Panel lengkap dengan pilihan lanjutan dibuka. Tiada kelayakan storan dipaparkan.</figcaption></figure>
 <div class="table-wrap"><table><caption>Tetapan penyimpanan dalam Eksport → Salinan luar tapak</caption><thead><tr><th scope="col">Medan</th><th scope="col">Apa yang perlu dimasukkan</th></tr></thead><tbody>
-<tr><th scope="row">Titik hujung</th><td>URL perkhidmatan penyimpanan, tanpa laluan bakul atau kelayakan. Contoh rekaan: <code>https://s3.example.invalid</code></td></tr>
-<tr><th scope="row">Wilayah</th><td>Wilayah yang diperlukan oleh penyedia anda. Lalai aplikasi ialah <code>us-east-1</code>.</td></tr>
-<tr><th scope="row">Bucket</th><td>Dump sedia ada yang boleh anda akses. Contoh fiksyen: <code>example-case-backup</code>.</td></tr>
-<tr><th scope="row">Folder dalam baldi</th><td>Awalan objek; lalai <code>tgwitness</code>. Aplikasi menambah awalan yang diperoleh daripada cap jari kunci tandatangan ruang kerja ini.</td></tr>
-<tr><th scope="row">ID kunci akses / Kunci akses rahsia</th><td>Masukkan kedua-dua kelayakan storan sekaligus. Ia disimpan dalam peti besi ruang kerja. Biarkan kedua-duanya kosong pada simpanan kemudian untuk mengekalkan pasangan yang disimpan.</td></tr>
-<tr><th scope="row">Alamat gaya Path</th><td>Gunakan <code>endpoint/bucket</code> apabila diaktifkan, atau <code>bucket.endpoint</code> apabila dinyahaktifkan, mengikut penyedia.</td></tr>
-<tr><th scope="row">Salin selang</th><td>Dari 1 hingga 1,440 minit; lalai 5 minit. Aplikasi mesti berjalan untuk salinan yang dijadualkan.</td></tr>
-<tr><th scope="row">Penahanan Object Lock</th><td>Hari pengekalan dan mod untuk baldi yang menyokong Object Lock. Hari sifar mengekalkan pengekalan lalai baldi.</td></tr>
+<tr><th scope="row">Titik hujung</th><td>URL storan, tanpa laluan bucket atau kelayakan. Contoh: <code>https://s3.example.invalid</code>.</td></tr>
+<tr><th scope="row">Wilayah</th><td>Apa sahaja yang diperlukan penyedia anda. Lalai <code>us-east-1</code>.</td></tr>
+<tr><th scope="row">Bucket</th><td>Bucket sedia ada yang boleh anda tulis. Contoh: <code>example-case-backup</code>.</td></tr>
+<tr><th scope="row">Folder dalam baldi</th><td>Awalan, lalai <code>tgwitness</code>. Awalan bagi setiap ruang kerja ditambah di atasnya.</td></tr>
+<tr><th scope="row">ID kunci akses / Kunci akses rahsia</th><td>Kedua-duanya bersama, disimpan dalam peti besi. Biarkan kedua-duanya kosong kemudian untuk mengekalkannya.</td></tr>
+<tr><th scope="row">Alamat gaya Path</th><td>Hidup: <code>endpoint/bucket</code>. Mati: <code>bucket.endpoint</code>. Bergantung pada penyedia.</td></tr>
+<tr><th scope="row">Salin selang</th><td>1 hingga 1,440 minit, lalai 5. Hanya semasa aplikasi berjalan.</td></tr>
+<tr><th scope="row">Penahanan Object Lock</th><td>Hari dan mod, jika bucket menyokong Object Lock. Sifar mengekalkan lalai bucket.</td></tr>
 </tbody></table></div>
 <ol>
-<li>Buat bucket dengan penyedia anda, kemudian masukkan destinasi dan kelayakan. Biarkan <strong>&#x27;Keep an off-site copy&#x27;</strong> tidak dicentang semasa penyediaan, kemudian pilih <strong>&#x27;Save off-site copy</strong>&#x27;.</li>
-<li>Pilih <strong>Uji sambungan</strong>. Ini memuat naik objek ujian yang disulitkan dan memeriksa respons storan.</li>
-<li>Pilih <strong>Muat turun kunci penyulitan</strong>. Simpan fail itu secara berasingan daripada pengumpul; ia diperlukan untuk pemulihan.</li>
-<li>Aktifkan kotak semak <strong>Simpan salinan di luar tapak</strong> dan simpan semula. Pilih <strong>Salin sekarang</strong> untuk proses manual, atau biarkan jadual berjalan.</li>
+<li>Cipta bucket, isikan destinasi dan kelayakan dengan <strong>Simpan salinan luar tapak</strong> tidak ditanda, tekan <strong>Simpan salinan luar tapak</strong>.</li>
+<li><strong>Uji sambungan</strong> memuat naik objek ujian yang disulitkan.</li>
+<li><strong>Muat turun kunci penyulitan</strong> dan simpan jauh daripada pengumpul. Tiada kunci, tiada pemulihan.</li>
+<li>Tandakan <strong>Simpan salinan luar tapak</strong>, simpan, kemudian <strong>Salin sekarang</strong> atau biarkan jadual berjalan.</li>
 </ol>
 
 <h2 id="s3-retention">Semak pengekalan dan kemajuan salinan</h2>
-<p>Di bawah <strong>Pilihan lanjut</strong>, pilih hari pengekalan dan <code>GOVERNANCE</code> atau <code>COMPLIANCE</code> apabila baldi anda menyokong Object Lock. TgWitness membaca semula mod pengekalan dan tarikh akhir objek yang dimuat naik. Semak hasil pengekalan berasingan: disahkan, pengekalan hilang atau pemeriksaan gagal.</p>
-<p>Panel melaporkan pusingan terakhir, bilangan objek, bait yang dipindahkan, sempadan jurnal yang disalin dan sebarang ralat. Media tempatan yang hilang atau berubah dilaporkan dan dicuba semula pada pusingan seterusnya. Fail, titik pemeriksaan dan eksport yang beratur selepas media tersebut masih boleh disalin.</p>
-<p>Pemunggahan menggunakan laluan Direct, SOCKS5 atau HTTP ruang kerja. Pilih salah satu laluan ini untuk menyalin ke S3; laluan hanya MTProxy akan meninggalkan salinan dalam status menunggu dengan ralat.</p>
+<p>Di bawah <strong>Lagi pilihan</strong> pilih hari pengekalan dan <code>GOVERNANCE</code> atau <code>COMPLIANCE</code>. TgWitness membaca semula pengekalan daripada objek yang dimuat naik dan memberitahu anda: disahkan, tiada atau semakan gagal.</p>
+<p>Panel menunjukkan larian terakhir, bilangan objek, bait, sempadan jurnal yang disalin dan ralat. Fail setempat yang hilang dilaporkan dan dicuba semula pada larian berikutnya, yang lain terus disalin.</p>
+<p>Muat naik melalui sambungan terus, SOCKS5 atau HTTP. Dengan laluan MTProxy sahaja, salinan menunggu dengan ralat.</p>
 
 <h2 id="s3-key">Simpan kunci pemulihan secara berasingan</h2>
-<p>JSON yang dimuat turun mengandungi kunci penyahsulit, tetapan destinasi, awalan objek ruang kerja dan cap jari kunci tandatangan. Pemulihan memerlukan kedua-dua fail kunci ini dan kelayakan storan berasingan dengan akses baca ke baldi. Simpan kelayakan tersebut dalam pelan pemulihan anda.</p>
-<p>Jika anda menukar endpoint, bucket atau awalan folder, muat turun semula fail kunci supaya tetapan destinasi sepadan. Aplikasi memulakan salinan baru jurnal, fail dan checkpoint yang disimpan secara tempatan di destinasi baru. Eksport sembang siap yang telah dikeluarkan daripada barisan muat naik tempatan kekal di destinasi asal mereka.</p>
+<p>JSON kunci mengandungi kunci penyahsulitan, destinasi, awalan dan cap jari kunci. Untuk pemulihan anda memerlukannya serta kelayakan storan dengan akses baca.</p>
+<p>Menukar endpoint, bucket atau awalan? Muat turun kunci sekali lagi. Salinan baharu bermula di destinasi baharu; eksport sembang lama kekal di tempatnya.</p>
 
 <h2 id="s3-restore">Pulihkan dan sahkan pada mesin lain</h2>
-<p>Gunakan pemasangan TgWitness yang dipercayai, fail JSON kunci yang dimuat turun, butiran storan dengan kebenaran baca, dan direktori output kosong. Gantikan penanda tempat butiran rekaan di bawah.</p>
+<p>Anda memerlukan pemasangan TgWitness yang dipercayai, JSON kunci, kelayakan storan baca sahaja dan folder kosong:</p>
 <h3>Windows PowerShell</h3>
 <pre><code>$env:TGWITNESS_S3_ACCESS_KEY = 'YOUR_READ_ACCESS_KEY'
 $env:TGWITNESS_S3_SECRET_KEY = 'YOUR_READ_SECRET_KEY'
@@ -89,9 +89,8 @@ python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out 
 <pre><code>export TGWITNESS_S3_ACCESS_KEY='YOUR_READ_ACCESS_KEY'
 export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence</code></pre>
-<p>Muat turun dan objek yang didekripsi kekal dalam storan sementara peribadi sementara keseluruhan jurnal, titik pemeriksaan yang disimpan dan has serta saiz media yang dipelihara diperiksa. Laluan tidak selamat, segmen jurnal yang bertembung dan jurnal yang lebih pendek daripada titik pemeriksaannya ditolak. Pengesahan yang gagal tidak menerbitkan sebarang fail yang dipulihkan.</p>
-<p>Pemulihan yang berjaya menghasilkan <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> dan <code>exports/</code> bagi bahan yang terdapat dalam salinan. Simpan hasil JSON arahan bersama bahan yang dipulihkan.</p>
-<p>Bandingkan bahan yang dipulihkan dengan titik pemeriksaan atau rekod saksi yang anda simpan secara bebas, kemudian semak liputan koleksi yang direkodkan untuk tempoh yang anda perlukan.</p>
+<p>Semuanya disemak dahulu dalam folder sementara peribadi: seluruh jurnal, checkpoint, hash dan saiz fail. Laluan tidak selamat, segmen yang bercanggah atau jurnal yang lebih pendek daripada checkpointnya akan gagal, dan ketika itu tiada apa yang ditulis keluar.</p>
+<p>Jika berjaya, anda mendapat <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> dan <code>exports/</code>. Simpan output JSON arahan bersamanya, dan bandingkan dengan checkpoint atau rekod saksi yang anda simpan sendiri.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/evidence/">Rujukan penuh →</a><a class="next-guide" href="../reports/"><span>Langkah seterusnya</span><strong>Reka laporan →</strong></a><p>Panduan ini menerangkan pelaksanaan semasa. Keputusan pengesahan dan jurang yang masih ada didokumenkan secara berasingan. <a href="../reference/verification/">Apa yang telah diuji →</a></p></footer>
 </main>

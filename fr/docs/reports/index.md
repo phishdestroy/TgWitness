@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reports/
 
-Indiquez clairement au lecteur le chemin à suivre depuis la question relative à l’affaire jusqu’aux enregistrements sauvegardés.
+Menez le lecteur de la question de l’affaire directement aux entrées enregistrées.
 
-Report Studio combine une sélection de données, des historiques de modifications lisibles, des graphiques et vos conclusions écrites. Huit modèles intégrés s’appliquent aux formats de sortie pris en charge : HTML et PDF natif. Les rapports HTML, PDF et JSON comportent leurs propres sceaux signés ; le manifeste ZIP regroupe également les fichiers dans l’archive. Les fichiers HTML et PDF sont scellés une fois leur mise en page finale terminée.
+Report studio rassemble les données choisies, les historiques de modifications, les graphiques et vos conclusions. Huit modèles, HTML et PDF natif. Chaque rapport HTML, PDF et JSON est scellé avec votre clé.
 
 ## Créer un rapport en trois étapes
 
-1. Ouvrez **Exports → Configurer et prévisualiser → Données**. Utilisez l’ensemble de l’espace de travail ou sélectionnez des discussions, des auteurs, des dates d’observation UTC inclusives et des types d’enregistrements. Les dates indiquent quand TgWitness a observé l’enregistrement.
-2. Dans « **Design & contents** », choisissez un modèle de mise en page et de contenu. Sélectionnez les graphiques d’activité, les étiquettes des participants, la transcription, les modifications enregistrées et les éléments facultatifs du « Case Board ». Ajoutez les détails de votre dossier et vos notes d’examen.
-3. Ouvrez **« Aperçu »** pour vérifier les nombres, l’activité, les participants, les enregistrements échantillonnés et les plages d’identifiants manquantes. Enregistrez les paramètres, puis téléchargez le format dont vous avez besoin.
+1. **Exports → Configurer et prévisualiser → Données** : l’espace entier, ou les chats, auteurs, dates (UTC, quand TgWitness a vu l’entrée) et types d’entrées que vous choisissez.
+2. **Modèle et contenu** : choisissez un modèle et ce qui y figure : graphiques, participants, transcription, modifications, éléments Case Board, détails de l’affaire et notes.
+3. **Aperçu** : vérifiez les décomptes, l’activité, les échantillons et les plages d’ID manquantes. Enregistrez, puis téléchargez le format voulu.
 
 ### Organisez les éléments enregistrés de manière cohérente pour le lecteur
 
@@ -55,16 +55,16 @@ Le destinataire vérifie le fichier et l’empreinte numérique certifiée.
 
 ## Choisissez un style de lecture
 
-**Les rubriques « Classique », « Éditorial », « Briefing », « Analytique », « Technique », « Aperçu », « Série de lectures » et « Grand livre et marge** **»** présentent les mêmes enregistrements sous-jacents selon différentes mises en page. La modification de la mise en page conserve la sélection des données et les notes écrites. La langue du rapport peut être choisie parmi les 25 langues prises en charge.
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin** : les mêmes entrées, un autre rendu. Changer de modèle garde la sélection et les notes. N’importe laquelle des 25 langues.
 
-La « Reading series » regroupe le dossier, le périmètre, les conclusions et les modifications autour d’une colonne de section. « Ledger & margin » utilise des chapitres numérotés et une large marge. Les deux formats prennent également en charge les aperçus HTML des comptes et le partage de copies. Les PDF natifs sont générés avec les polices intégrées ; l’ordinateur de l’utilisateur ne nécessite aucune installation de navigateur ou de Node pour la création de PDF. Les PDF en chinois, japonais et coréen nécessitent en outre une police adaptée sur le serveur, telle que Noto Sans CJK, installée à l’échelle du système ou placée dans `TGWITNESS_FONT_DIR`. En son absence, l’archive ZIP conserve les rapports HTML et JSON.
+Les PDF sont produits avec des polices fournies, sans navigateur. Le chinois, le japonais et le coréen nécessitent une police comme Noto Sans CJK sur le serveur (dans le système ou dans `TGWITNESS_FONT_DIR`) ; sinon vous n’obtenez que HTML et JSON.
 
 ## Lire une modification en tenant compte de son contexte
 
-Les modifications enregistrées s’affichent « avant » et « après ». Une notification de suppression peut être accompagnée de la dernière version capturée. Les réponses, citations, partages, réactions, boutons et métadonnées des pièces jointes conservent leurs références disponibles. Les hachages SHA-256 des fichiers et des enregistrements du journal sont indiqués séparément.
+Les modifications montrent avant et après, les suppressions la dernière version enregistrée. Réponses, transferts, réactions, boutons et pièces jointes gardent leurs références.
 
-L’aperçu de la mise en page présente la couverture, l’analyse et les graphiques à partir d’enregistrements correspondants parmi les 50 000 premiers enregistrements sources. L’aperçu séparé des données analyse l’intégralité de l’instantané stable du journal pour obtenir le nombre exact d’éléments sélectionnés, avec indication des limites d’échantillonnage affichées. Générez un PDF pour vérifier la pagination finale. L’exportation complète du compte comporte un aperçu au format HTML ; ses fichiers PDF individuels de discussion utilisent la mise en page choisie.
+L’aperçu du modèle utilise les 50 000 premières entrées, l’aperçu des données compte tout exactement. Pour la mise en page finale, générez le PDF.
 
 ## Choisissez soigneusement la version destinée au destinataire
 
-Les filtres de rapport permettent de structurer un rapport lisible. Le fichier ZIP complet des preuves conserve le journal d’origine et les pièces jointes. Utilisez un [transfert allégé](https://phishdestroy.github.io/TgWitness/fr/docs/handover/) lorsque le destinataire ne doit recevoir que des données sélectionnées. Consultez [le contenu du rapport et procédez à sa vérification,](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-reports/) ou [vérifiez l’exportation terminée](https://phishdestroy.github.io/TgWitness/fr/docs/exports/).
+Les filtres ne façonnent que le rapport ; le ZIP de preuves contient toujours le journal et les fichiers complets. Si le destinataire doit recevoir moins, utilisez une [transmission minimisée](https://phishdestroy.github.io/TgWitness/fr/docs/handover/). Plus : [contenu du rapport](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-reports/), [vérifier l’export](https://phishdestroy.github.io/TgWitness/fr/docs/exports/).

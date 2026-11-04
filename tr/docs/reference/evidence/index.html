@@ -138,11 +138,6 @@ zaman damgası elde etmez.</li>
 <p>Başarılı bir doğrulama, güvenilir toplayıcı
 anahtarı ve korunan sınır ile ilgili bütünlüğü teyit eder. Gerçekleştirilen kontrollerle ilgili
 güven varsayımları ve <a href="../verification/">doğrulama sonuçları</a> için <a href="#verification-scope">doğrulama kapsamına</a> bakınız.</p>
-<p>Apprise aracılığıyla gönderilen bildirimler, operatörlerin çalışma alanı ve sohbet etkinliklerini takip etmelerine yardımcı olur.
-Bildirimler isimleri ve sayılarını içerir; silinen ve düzenlenmiş mesajların alıntıları isteğe bağlıdır
-ve varsayılan olarak kapalıdır. Saklanan kayıt için imzalı günlüğü ve dışa aktarımları kullanın.
-Çalışma alanı proxy&#x27;si kullanıldığında bildirimler aynı yolu izler; bunu kullanamayan hizmetler
-ve MTProxy yolları reddedilir.</p>
 <h2 id="handover-extract">Devir teslim özeti<a class="anchor" href="#handover-extract" aria-label="Bu bölüme bağlantı">#</a></h2>
 <p>İmzalı bir ZIP dosyası, çalışma alanının tüm günlüğünü içerir. Bir mahkeme, avukat veya ihbar birimi
 sadece bazı sohbetlere, belirli bir döneme veya belirli kişilere ihtiyaç duyduğunda, <strong>Dışa Aktar → Devir Çıkarımı seçeneği</strong>, seçilen ifşa kurallarına göre
@@ -225,12 +220,6 @@ filtreler, katılımcılar, göstergeler, kayıt ayrıntıları ve JSON/CSV seç
 --evidence ARCHIVE.zip</code> dosyasını kullanın.
 Doğrulayıcı, rapor kimliğini, imzalama anahtarını, arşiv sınırını ve seçilen her bir öğeyi kontrol eder; düzenlenmiş,
 eksik ve yinelenen öğeler kabul edilmez. Seçim notları ve oluşturulma zamanı, imzalanmamış meta veriler olarak kalır.</p>
-<p>Mevcut arşiv dışa aktarımları, görüntüleyici parçalarını <code>viewer/*.html</code> içinde depolar. Her parça, komut dosyalarına izin verilen ancak <strong></strong> aynı kaynak erişimi olmayan bir sanal ortam
-çerçevesinde yüklenir ve JSON metnini rapora gönderir.
-Rapor, görüntülenmeden önce mesaj kaynağını ve SHA-256'yi imzalı tanımlayıcıyla karşılaştırır.
-Raporun kendi CSP'si yalnızca hashlenmiş uygulama komut dosyasına izin verir. Eksik veriler,
-"Kontrol" sekmesinden eşleşen ZIP dosyası seçilerek kurtarılabilir; ZIP dosyasından okunan veriler yürütülmeden ayrıştırılır.
-Daha önce dışa aktarılan raporlar kendi gömülü görüntüleyicilerini korur ve doğrulanabilir kalır.</p>
 <p>Mesaj numarası boşlukları yalnızca tam, filtrelenmemiş ve artan sıralı sohbet akışında gösterilir. Bir
 kategorinin gizlenmesi veya bir veri bloğunun yüklenememesi, atlanan bir satırı eksik bir
 mesajın kanıtı haline getirmemelidir. Arama vurgulamaları, HTML kaçış kodlamasından önce düz metin üzerinde çalışır ve literal işaretlemeyi korur.</p>
@@ -243,20 +232,6 @@ rapor dilinde veri formatı notlarını içerir; bunu tam bir İngilizce kılavu
 kendisi, <code>manifest.json</code> ve <code>manifest.sig</code> hariç olmak üzere içinde listelenen dosyaları kapsar; imzalı manifest
 ayrıca <code>SHA256SUMS</code>'yi de kapsar. Orijinal ZIP dosyasını değiştirmeden koruyun ve çalışma dosyalarını
 çıkarılan klasörün dışına kaydedin. PDF raporları, bölüm yer imlerini ve sonraki sayfalarda vaka/rapor tanımlamalarını içerir.</p>
-<p>Rapor ayarları çalışma alanı başına kaydedilir. Rapor dili panel dilini takip edebilir veya sabitlenebilir;
-bir dışa aktarma isteğinde açıkça belirtilen dil, yalnızca o dışa aktarma için bu seçimi geçersiz kılar. Dört sağdan sola yazılan dil dahil olmak üzere her panel
-dili kabul edilir.</p>
-<p>Günlük transkripti anahtarı, HTML görüntüleyicisini ve PDF transkriptini kontrol eder. Tam kayıt JSON,
-HTML ayrıntı seçeneğidir: etkinleştirildiğinde, görüntüleyici, bir devir teslimdeki
-küçültülmüş kayıt da dahil olmak üzere, dışa aktarılan kaydı tam olarak taşır. Bu seçeneğin devre dışı bırakılması, yetkili günlük dosyasını değiştirmez. Fotoğraf
-önizlemeleri hem sohbet hem de günlük HTML için geçerlidir. Ardışık kalp atışı serileri, kayıtlar silinmeden
-daraltılabilir; uzun seriler genişletildiğinde satırları aşamalı olarak yüklenir.</p>
-<p><code>part_size</code>, görüntüleyici veri dosyası başına maksimum öğe sayısıdır (500–100000) ve bir PDF dosyasında yer alabilen maksimum
-transkript boyutudur. Görüntüleyici parçaları ayrıca 16 MiB'lik veri sınırında bölünür. Daha uzun PDF transkriptleri,
-imzalı kaynak dosyalara ve HTML görüntüleyicisine açık bir işaretçi eklenerek atlanır. Bağımsız bir HTML
-raporu en fazla 20.000 öğeyi veya 32 MiB öğe verisini içerir; bu sınır aşıldığında, söz konusu öğeleri serbest bırakır ve
-okuyucuyu arşive yönlendirir. Bu görüntüleme sınırları, imzalı kaynak dosyalarını asla kesmez.
-PDF yazı tipi kurulumu, gerektiğinde CJK yazı tiplerini birleştirir: tek başına bir Çince yazı tipinde Korece Hangul bulunmayabilir.</p>
 <h3 id="the-chat-at-export-time">Dışa aktarım anındaki sohbet<a class="anchor" href="#the-chat-at-export-time" aria-label="Bu bölüme bağlantı">#</a></h3>
 <p>Bir sohbet dışa aktarma işlemi, dışa aktarma başladığında Telegram'nin sohbet hakkında söylediklerini kaydeder: Telegram'nin kendi
 etiketleri (<code>scam</code>, <code>fake</code>, <code>restricted</code> ve gerekçeleri, <code>verified</code>), kullanıcı adları, açıklama, üye
@@ -471,10 +446,6 @@ doğrulama durumunda geri yüklenen dosya yayınlanmaz. Saklama kontrolleri, ger
 modunu ve tarihini, yükleme sırasında gönderilen son tarihle karşılaştırır (bir saniyelik yuvarlama toleransı). Süresi dolmuş,
 geçersiz veya kısaltılmış son tarihler doğrulanmış olarak kabul edilmez. Durum raporu, o yükleme geçişi için
 saklama süresi okunan örnek nesneyi bildirir.</p>
-<p>Kopyalama işlemi, hedef konum ve şifreleme anahtarı ile sınırlıdır. Uç nokta, depolama alanı
-veya önek değiştirildiğinde, yerel olarak saklanan günlük, medya ve kontrol noktalarının
-söz konusu hedefe tam bir kopyası oluşturulur. Eski, kapsam dışı işlemler korunur ancak yükseltme sonrasında bir kez yeniden oynatılır. Yerel
-giden kutusundan zaten kaldırılmış olan geçmiş sohbet dışa aktarımları, önceki hedef konumlarında kalır.</p>
 <p>Eksik veya bozuk yerel medya, geçiş hatası olarak rapor edilir ve medya imleci bunun önünde
 tutulur, böylece dosya bir sonraki geçişte tekrar denenir; bundan sonraki dosyalar, kontrol noktaları ve dışa aktarımlar yine de
 kopyalanır. Geri yükleme,
@@ -543,9 +514,6 @@ kaydedildiğini ve her yeni ve sona eren oturumu bildirir. Listeyi yalnızca gö
 <p>Göstermedikleri şey: drand, kayıtların kamuya açık zamana göre sıralamasını kanıtlamaktan öteye gitmez,
 ve cihaz listesi, diğer tüm kayıtlar gibi toplayıcı tarafından imzalanmış,
 Telegram'nin toplayıcı aracılığıyla yaptığı beyan niteliğindedir.</p>
-<p>1 Kasım 2026'da test edildi: <code>tools/check_evidence_witnesses.py --live</code>,
-<code>drand.cloudflare.com</code>'den gerçek bir tur yazdı, günlüğü dışa aktardı ve turu <code>drand.cloudflare.com</code>
-ve <code>api.drand.sh</code> ile onayladı; cihaz listesi, gerçek bir hesap değil, simüle edilmiş Telegram yanıtlarına karşı çalıştırıldı.</p>
 <p><strong> Cloudflare Gateway günlüğü </strong> (<code>cloudflare.gateway_dns</code>). Cloudflare Gateway (<a href="../high-assurance/#cloudflare-as-an-outside-witness">Gateway DNS</a>) üzerinden çözümleme yapan bir sunucu için, her
 kopyalama işlemi, bir önceki kopyalamadan bu yana Gateway'in kaydettiği verileri kopyalar: en fazla üç
 saatlik bir zaman aralığı başına bir kayıt; <code>from</code>, <code>until</code>, <code>location_id</code>, ayarlanmışsa sunucunun <code>address</code> ve

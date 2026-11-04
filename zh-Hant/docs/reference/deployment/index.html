@@ -112,14 +112,6 @@ Docker 會在映像檔內建置這些組件，無需主機端的 Python。首次
     必須使用 Linux 容器。該容器會自行安裝
     所需的 Python 依賴項；主機無需另行安裝 Python。</li>
 </ul>
-<p>請使用持久性本地儲存空間作為資料目錄。規劃容量時需考量訊息、
-媒體檔案、WAL 增長、匯出及備份等因素；目前尚無基於實證的通用最低
-磁碟／記憶體規格適用於所有工作負載。若 CPU 架構與 Python 版本
-缺乏相容的依賴項輪（wheel），可能需要額外的建置工具及其
-專屬的驗證程序。 「可攜式」並非指聲稱支援所有作業系統或硬體。</p>
-<p>已於本地端驗證 Windows 11/Python 3.12 環境。Linux/macOS/容器設定檔及持續整合 (CI)
-雖已提供，但尚未在此開發主機上執行。具體範圍請參閱
-<a href="../verification/">VERIFICATION.md</a> 檔案。</p>
 <h2 id="local-computer">本地電腦<a class="anchor" href="#local-computer" aria-label="此節的連結">#</a></h2>
 <p>請在 Windows 系統上使用 <code>Start.cmd</code>，或在 Linux/macOS 系統上使用 <code>sh start.sh</code>。<code>scripts\Setup.cmd</code> 或
 <code>sh start.sh --setup-only</code> 會預先
@@ -132,7 +124,6 @@ Docker 會在映像檔內建置這些組件，無需主機端的 Python。首次
 <code>--port</code>。此檢查不會安裝套件、建立日誌或連線至 Telegram；
 亦非完整性或覆蓋範圍的驗證。啟動時會另行驗證
 現有日誌。<code>python start.py --help</code> 亦會跳過安裝步驟。</p>
-<p>選項：</p>
 <p>執行 start.py 後，請在 Windows 系統上使用 <code>.venv\Scripts\python.exe</code>，或在 Linux/macOS 系統上使用 <code>.venv/bin/python</code> 來執行輔助指令，亦可先啟用該環境。
 以下 <code>python -m ...</code> 範例假設該環境已啟用。</p>
 <pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
@@ -180,9 +171,6 @@ TGWITNESS_VAULT_KEY_FILE 用於在新安裝時選取外部金鑰模式；詳見�
 資料夾，並將 <code>data</code> 資料夾複製過去。</p>
 <p>請在 64 位元 Windows 系統上使用 Python 3.12 自行建置：</p>
 <pre><code class="language-sh">python tools/build_portable.py</code></pre>
-<p>建置程式會驗證執行時校驗和，將受限的依賴項安裝至
-套件中，使用內嵌的解釋器執行就緒檢查，並將 ZIP 檔案
-與校驗和寫入 <code>dist/</code>。</p>
 <h2 id="container">容器<a class="anchor" href="#container" aria-label="此節的連結">#</a></h2>
 <pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
 <p>此操作將為 /data 建立一個命名持久化卷。
@@ -241,9 +229,6 @@ docker compose logs witness                     # witness key fingerprint</code>
 設定為收集器的 HTTPS
 位址；該檔案僅包含證據日誌。</p>
 <h2 id="install-a-published-image">安裝已發佈的映像檔<a class="anchor" href="#install-a-published-image" aria-label="此節的連結">#</a></h2>
-<p>此網站將於<a href="#automated-github-releases">發布工作流程</a>
-成功完成，且 GHCR 套件配置公開後正式上線。儲存庫的所有者／名稱並未硬編碼
-於此原始碼樹中。請使用該次發布工作流程摘要中顯示的圖片。</p>
 <p>將 <code>deploy/env.example</code> 複製到 <code>.env</code>。將 <code>TGWITNESS_IMAGE</code> 設定為已發布的版本，並使用
 <strong>小寫的</strong>儲存庫路徑，例如：</p>
 <pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
@@ -304,30 +289,6 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 <p>更新後，請檢查控制面板存取權限、帳戶身分、監測狀態及覆蓋範圍。
 重新啟動並不會重建遺漏的 Telegram 更新。若未來版本變更儲存格式，
 回滾操作可能需要使用更新前的備份。</p>
-<h2 id="automated-github-releases">GitHub 自動發佈<a class="anchor" href="#automated-github-releases" aria-label="此節的連結">#</a></h2>
-<p>當此
-專案推送至已啟用 Actions 的 GitHub 儲存庫後，<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">發布工作流程</a>即已就緒。該流程會在
-<strong>發布</strong> GitHub Release 時執行，包含預發布版本。僅推送草稿或標籤
-並不會發布套件。</p>
-<ol>
-<li>設定套件版本與變更紀錄，然後發布一個標記為 <code>v</code>
-    加上確切 <code>pyproject.toml</code> 版本（例如 <code>v0.8.0</code>）的發行版本。</li>
-<li>此工作流程會驗證標籤，並執行適用於 Windows/Linux/macOS 的共用 Python、
-    general/account-import/QR 瀏覽器、原始碼套件及 Docker 檢查。此外，亦會在
-    這三種作業系統上，使用 Python 3.12 進行全新的原生安裝測試。</li>
-<li>在通過上述檢查後，系統會於 QEMU 環境下對 ARM64 映像進行煙霧測試，並將 AMD64/ARM64 映像發佈至<code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code> ， 同時附上原始碼 ZIP 檔與 Python wheel 檔案及其 SHA-256 校驗檔。 Windows 便攜版 ZIP 檔即為檢查工作流程所測試的精確產出物； 發佈工作流程會下載並發佈該產出物及其校驗和。</li>
-<li>最後一個工作流程會再次下載所有三個已發佈的套件，並驗證其 校驗和。接著發佈<code>SHA256SUMS.txt</code> 和<code>RELEASE-MANIFEST.json</code> ，並記錄 版本、原始碼修訂版本及資產大小。上傳時不會覆寫 現有的發佈資產。</li>
-<li>首次發佈後，請開啟 GHCR 套件設定，並將可見性
-    設為「<strong>公開」</strong>，若需進行匿名影像擷取。僅有公開的原始碼儲存庫
-    並不能保證套件會以公開容器形式發佈。組織政策必須
-    允許套件發佈。此工作流程使用 <code>GITHUB_TOKEN</code>；儲存庫中
-    不得包含任何註冊表密碼或 VPS 憑證。</li>
-</ol>
-<p>此本地準備工作尚未證實遠端工作流程能順利運作。ARM64
-模擬僅為初步測試，並非原生硬體或實際 Telegram 環境的驗證。
-此功能可自動化版本發佈封裝；啟動伺服器仍需使用 Compose
-指令及其網域／主機的先決條件。當新版本發佈時，現有伺服器不會自動
-進行升級或重新啟動。</p>
 <h2 id="remote-server">遠端伺服器<a class="anchor" href="#remote-server" aria-label="此節的連結">#</a></h2>
 <p>請將服務限制在迴路連接並使用 SSH 隧道，或讓 HTTPS 連線在
 反向代理伺服器處終止。基礎 Compose 檔案僅限本地使用；可選的
@@ -389,11 +350,6 @@ signing.enc、credentials.enc、SQLite 資料庫／WAL 檔案、媒體檔案、�
 若 TGWITNESS_TOKEN 覆寫了生成的憑證，請使用一個獨立受保護的檔案
 來存放該有效值：panel-token.txt 不會因覆寫而被改寫。
 該指令的 SHA-256 僅為傳輸校驗和；請獨立驗證已簽名的 ZIP 檔案。</p>
-<p>伺服器匯出檔案將保留於各工作區的私有 <code>temporary-exports/</code> 目錄中。
-成功執行的匯出作業會清理其檔案。中斷的匯出作業將於
-下次工作區啟動時移除，屆時該工作區將保持其專屬實例鎖定狀態。此目錄屬於
-儲存威脅／容量模型的一部分；請使用加密資料卷。生產級別的
-數吉字節級傳輸仍需在您的目標系統上進行驗證。</p>
 <p>該面板顯示排隊中／失敗的媒體檔案、最舊的待處理媒體檔案、可用磁碟空間、Telegram
 請求暫停狀態，以及存取權限未經確認的來源。這些診斷資訊並非
 完整的端對端傳輸監控。工作區共用同一個程序；若某個帳戶活動頻繁，
@@ -401,22 +357,11 @@ signing.enc、credentials.enc、SQLite 資料庫／WAL 檔案、媒體檔案、�
 恢復以及完整的部署認證仍維持不變。控制面板的範圍式存取權限已記錄於
 <a href="../access/">「存取與權限」</a>文件中；獨立檢查點則由「
 <a href="../witness/">見證指南</a>」涵蓋。</p>
-<h2 id="connection-and-protection-options">連線與保護選項<a class="anchor" href="#connection-and-protection-options" aria-label="此節的連結">#</a></h2>
-<p>連線路徑依工作區而定，應在授權前完成設定。
-SOCKS5/HTTP CONNECT 會使用已固定（pinned）的 python-socks 依賴項。MTProxy 採用 Telethon 的
-實驗性隨機化中間傳輸；不支援偽 TLS ee 密鑰。
-直接備用模式取決於所選的 <a href="../connection/#ip-modes">IP 模式</a>：「<strong>隱藏位址」</strong>會拒絕此模式；<strong>「直接作為最後手段」</strong>則會在延遲後允許此模式。<strong>位於隧道或 VPN 後方的伺服器允許</strong>直接路由，但不會建立 VPN。這並非系統層級的網路政策。</p>
-<p>對於新安裝，TGWITNESS_VAULT_KEY_FILE 應指向一個獨立受保護的隨機
-主金鑰檔案。請在容器中將其以唯讀方式掛載至 /data 目錄之外。請分別將每個工作區的公開
-vault.external.json 鹽值元資料與主金鑰妥善保存。
-現有的本地金庫需要進行有計畫的遷移；設定此變數並不會
-自動將其轉換。訊息／媒體儲存及匯出內容均未經應用程式加密。
-請視需要使用加密卷宗及足夠的私人臨時儲存空間。</p>
 <p>詳細操作流程：<a href="../connection/">連線／安全性</a>及
 <a href="../operations/">運作模式</a>。</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">在 GitHub 上編輯此頁面 ↗</a><a class="next-guide" href="../high-assurance/"><span>下一步</span><strong>高可信度部署 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../verification/">已測試的內容 →</a></p></footer>
 </main>
-<aside class="toc" aria-label="本頁內容"><p class="nav-label">本頁內容</p><a href="#choose-an-installation">選擇安裝方式</a><a href="#installation-requirements">安裝需求</a><a href="#local-computer">本地電腦</a><a href="#windows-portable-package">Windows 便攜版套件</a><a href="#container">容器</a><a href="#install-a-published-image">安裝已發佈的映像檔</a><a href="#automatic-https-on-a-server">伺服器上的自動 HTTPS 功能</a><a href="#updates-and-backups">更新與備份</a><a href="#automated-github-releases">GitHub 自動發佈</a><a href="#remote-server">遠端伺服器</a><a href="#restart-and-gaps">重新啟動與資料缺口</a><a href="#backup-restore-and-capacity">備份、還原與儲存容量</a><a href="#connection-and-protection-options">連線與保護選項</a></aside>
+<aside class="toc" aria-label="本頁內容"><p class="nav-label">本頁內容</p><a href="#choose-an-installation">選擇安裝方式</a><a href="#installation-requirements">安裝需求</a><a href="#local-computer">本地電腦</a><a href="#windows-portable-package">Windows 便攜版套件</a><a href="#container">容器</a><a href="#install-a-published-image">安裝已發佈的映像檔</a><a href="#automatic-https-on-a-server">伺服器上的自動 HTTPS 功能</a><a href="#updates-and-backups">更新與備份</a><a href="#remote-server">遠端伺服器</a><a href="#restart-and-gaps">重新啟動與資料缺口</a><a href="#backup-restore-and-capacity">備份、還原與儲存容量</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>開源 · 可在您的機器上運行</span><a href="../../../../LICENSE">MIT 授權條款</a><a href="../notice/">操作員公告</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全性</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "等待訊息", "Step through a fictional send, edit and delete.": "透過一個虛構的發送、編輯和刪除流程逐步了解操作。", "No observations yet. Start the sequence or advance one event.": "目前尚無觀察記錄。開始執行序列或跳至下一則事件。", "Meet at 10:00": "上午 10:00 見面", "A new message is visible in the chat.": "聊天室中顯示了一則新訊息。", "Record 1 appended: the collector observed the original message.": "新增記錄 1 筆：收集器已偵測到原始訊息。", "Meet at 11:00": "上午 11:00 見面", "The current text changes. The earlier observation stays.": "當前文本有所變更。先前的觀察結果維持不變。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "新增記錄 2：此編輯為一項新觀察結果。記錄 1 仍保留原始文字。", "Message deleted": "訊息已刪除", "The message has disappeared from the chat view.": "該訊息已從聊天視圖中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "新增「Record 3」：刪除通知將與兩個被觀察到的版本一併保留。", "0 records": "0 筆記錄", "1 record": "1 筆記錄", "2 records": "2 筆記錄", "3 records": "3 筆記錄", "Complete / {n} of 3": "完成 / {n} 共 3 項", "Step / {n} of 3": "步驟 / 3 中的 {n}", "Pause": "暫停", "Replay sequence": "重播序列", "Play sequence": "播放順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "靜態範例已上線。若要互動式計算雜湊值，請透過 HTTPS 開啟此頁面，或使用支援 Web Crypto 的 localhost 預覽。", "No record supplied": "未提供記錄", "Tail removed": "尾部內容已移除", "≠ saved hash": "≠ 已儲存的雜湊值", "Rebuilt · different hash": "重新建置 · 不同雜湊值", "= saved hash": "= 儲存的雜湊值", "Same length and matching head.": "篇幅相同且標題一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "這三個計算出的雜湊值均與儲存的雜湊值相符。此樣本符合保留的三筆記錄邊界。", "Same saved head; the journal prefix fails verification.": "儲存的標題相同；但日誌前綴無法通過驗證。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "記錄 2 已與其儲存的雜湊值不符。若僅檢查最後儲存的「頭部」，將無法發現此問題；驗證器會檢查每一筆記錄。", "Head differs from the retained checkpoint.": "標題與保留的檢查點不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的雜湊值彼此關聯，但最終的頭部已發生變更。保留的檢查點會拒絕此歷史記錄。若記錄內容遭變更，原始簽名亦將驗證失敗。", "Too short: 2 supplied records \u003c 3 retained records.": "過短：提供的 2 筆記錄 \u003c 保留的 3 筆記錄。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩餘的兩個雜湊值仍然匹配。保留的檢查點揭示了缺失的部分。若無該較早的邊界，僅憑這個較短的前綴是無法揭露此遺漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此瀏覽器無法進行雜湊運算。下方的公式與靜態說明仍可正常顯示。", "{n} records": "{n} 筆記錄", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：計數持續增加，簽名經驗證無誤，且金鑰匹配。該見證者保留此新界限。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滾：簽名答覆所報告的記錄數量少於最後一個被接受的檢查點。Witness 會記錄此問題，並保留較早的被接受邊界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉（Fork）：分支數量未變，但分支頭不同。該見證系統會記錄此分歧，並保留先前被接受的分支邊界。", "No answer": "無回應", "boundary unknown": "邊界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "無回應：Witness 會記錄驗證失敗的狀況。它無法判定收集器的當前狀態。若 Witness 仍能連線至 Bot API，且其發布政策允許，則可發布該次失敗的紀錄。", "Send {n}": "傳送 {n}", "Edit {n}": "編輯 {n}", "Delete {n}": "刪除 {n}", "Both accounts captured all six expected observations in this example.": "在此範例中，兩個帳戶均完整記錄了預期的六項觀察結果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "帳號 B 仍成功擷取了 6 則中的 6 則。其中兩則收據的擷取時間較長。擷取率與收據延遲反映的是不同的問題。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "帳戶 B 在截止時間前成功擷取了 6 項中的 5 項（83.3%）。遺漏的那項編輯操作未測得任何延遲。此結果僅描述這六項受控操作。", "not observed by cutoff": "未在截止時間前觀察到", "{s} seconds": "{s} 秒", "Exact values follow in the table.": "具體數值詳見下表。", "{s} s": "{s} s", "Not observed": "未觀察到", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四個聊天室提供了不同的觀察結果。請追蹤每項連結的原始記錄；若未標明發送者，請勿將該頻道貼文歸屬於使用者 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記錄 #146 和 #205 顯示相同的發送者 ID：71001。這將兩個聊天室中觀察到的 Telegram 帳號貼文相互連結。此資訊並未識別任何現實世界中的人士，亦未歸屬該頻道貼文的來源。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目的地 pay.example.invalid/new 出現在群組記錄 #146、機器人鍵盤 #173、頻道編輯 #188 以及私人訊息 #205 中。重複出現的目的地將這些資料連結起來；但這並不能證明這些帳戶受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虛構案例中，已完成的媒體收據 #151 與 #209 具有完全相同的 SHA-256 值。請比較實際位元組及其相關的訊息記錄。該匹配檔案並未標示其創建者，亦無法證明是由誰轉發的。", "the encrypted off-site copy": "加密的異地備份", "notifications": "通知", "checkpoint hashes for timestamps": "時間戳記的檢查點雜湊值", "signed checkpoints for the witness": "TgWitness 的簽名檢查點", "Switched on in this example": "此範例中已啟用", "Optional · off by default": "可選 · 預設為關閉", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "離開這台機器時：Telegram 連線及 {list}。除此之外別無他物。", "Default: only the Telegram connection leaves this machine.": "預設設定：僅 Telegram 連線會離開這台機器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "將步驟 {n} 標記為已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "複製", "Copied": "複製", "Command copied.": "指令已複製。", "Selected — Ctrl/Cmd+C": "選取 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已選取指令。請手動複製。", "Command copied to clipboard.": "指令已複製至剪貼簿。", "Select text": "選取文字", "Clipboard unavailable. Command selected; copy it manually.": "剪貼簿無法使用。已選取指令；請手動複製。", "A message arrives. The first observation is saved.": "一則訊息送達。首項觀察記錄已儲存。", "The time changes. Both captured versions stay.": "時間雖變，但兩份記錄版本皆保留。", "The message disappears. The captured history remains.": "訊息雖已消失，但被擷取的歷史紀錄依然存在。", "Pause example animation": "暫停範例動畫", "Play example animation": "播放範例動畫", "Play": "播放", "Full-size workspace screenshot": "全螢幕工作區螢幕截圖", "Workspace screenshot · fictional data": "工作區螢幕截圖 · 虛構資料", "Close": "關閉", "Close screenshot": "關閉螢幕截圖", "Scrollable full-size screenshot": "可捲動的全螢幕截圖", "Enlarge: {name}": "放大：{name}", "View full size": "檢視完整尺寸", "Step {n} of {total}": "第 {n} 步，共 {total} 步"}</script>

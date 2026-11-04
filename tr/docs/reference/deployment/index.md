@@ -34,17 +34,11 @@ Yerel kurulum için Python 3.11 veya üstü sürümü (`venv` ve `ensurepip` ile
 - **macOS:** Güncel bir Python 3.11+ dağıtımını yükleyin; işletim sistemi tarafından sağlanan yorumlayıcının gereksinimi karşıladığını varsaymayın. Proje dizininden `python3 start.py` dosyasını kullanın.
 - **Docker:** Compose v2.20 veya daha yeni bir sürümle birlikte Docker Engine/Desktop kullanın. Docker Desktop, Windows üzerinde Linux konteynerleri kullanmalıdır. Konteyner, kendi Python bağımlılıklarını yükler; ana bilgisayarda ayrı bir Python kurulumu gerekmez.
 
-Veri dizini için kalıcı yerel depolama alanı kullanın. Mesajlar, medya dosyaları, WAL büyümesi, dışa aktarmalar ve yedeklemelerden yola çıkarak kapasite planlaması yapın; her iş yükü için kanıta dayalı evrensel bir minimum disk/RAM spesifikasyonu bulunmamaktadır. Uyumlu bağımlılık tekerlekleri olmayan CPU mimarileri ve Python sürümleri, ek derleme araçları ve bunların kendi yeterlilik testlerini gerektirebilir. "Taşınabilir" ifadesi, evrensel işletim sistemi veya donanım desteği iddiası değildir.
-
-Windows 11/Python 3.12 yerel olarak doğrulanmıştır. Linux/macOS/konteyner tanımları ve CI sağlanmıştır ancak bu geliştirme sunucusunda çalıştırılmamıştır. Kesin kapsam için [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/) dosyasına bakınız.
-
 ## Yerel bilgisayar
 
 Windows'ta `Start.cmd`'yi, Linux/macOS'ta `sh start.sh`'yi kullanın. `scripts\Setup.cmd` veya `sh start.sh --setup-only`, ortamı hazırlar. Başlatıcı, ilk kullanımda bağımlılıkları yükler; sonraki başlatmalarda mevcut ortam yeniden kullanılır. Kurulum ve Telegram verilerinin toplanması için internet erişimi gereklidir, ancak mevcut kayıtlara göz atma ve dışa aktarma işlemleri çevrimdışı olarak gerçekleştirilebilir.
 
 Kurulumdan sonra `python start.py --check` komutunu çalıştırarak, bir toplayıcı başlatmadan yerel bağımlılıkları, Ed25519'u, depolama alanını, anahtar yapılandırmasını ve dinleme adresini kontrol edin. Yapılandırılmış çıktı için `--json` komutunu kullanın. İstenen `--data-dir`, `--host` ve `--port` komutlarını çalıştırın. Bu kontrol, paket yüklemez, günlük oluşturmaz veya Telegram'a bağlanmaz; bu, bütünlük veya kapsam yeterliliği değerlendirmesi değildir. Başlangıç işlemi, mevcut günlükleri ayrı olarak doğrular. `python start.py --help` komutu da yüklemeyi gerektirmez.
-
-Seçenekler:
 
 start.py dosyasını kullandıktan sonra, Windows'ta `.venv\Scripts\python.exe`, Linux/macOS'ta `.venv/bin/python` ile yardımcı komutları çalıştırın veya önce bu ortamı etkinleştirin. Aşağıdaki `python -m ...` örnekleri, ortamın etkin olduğunu varsaymaktadır.
 
@@ -73,8 +67,6 @@ Python 3.12 kullanarak 64 bit Windows üzerinde kendiniz derleyin:
 ```
 python tools/build_portable.py
 ```
-
-Derleyici, çalışma zamanı sağlama toplamını doğrular, kısıtlanmış bağımlılıkları pakete yükler, gömülü yorumlayıcıyla hazırlık kontrolünü çalıştırır ve ZIP dosyasını ile sağlama toplamını `dist/` dosyasına yazar.
 
 ## Konteyner
 
@@ -121,8 +113,6 @@ docker compose logs witness                     # witness key fingerprint
 Hizmet, Compose ağı içindeki toplayıcıya `http://tgwitness:8787` adresinden ulaşır (`TGWITNESS_WITNESS_COLLECTOR` bu değeri geçersiz kılar; örneğin, `/profiles/<workspace ID>` başka bir çalışma alanı için). Başka biri tarafından işletilen ayrı bir sunucudaki tanık dosyası için, `deploy/compose/compose.witness.yaml` dosyasını kullanın ve `TGWITNESS_WITNESS_COLLECTOR` 'yi toplayıcının HTTPS adresine ayarlayın; bu dosya yalnızca tanık dosyasını içerir.
 
 ## Yayınlanmış bir görüntüyü yükleyin
-
-Bu, başarılı bir [sürüm yayın iş akışı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/#automated-github-releases) ve halka açık GHCR paketi yapılandırmasının ardından kullanıma açılır. Deponun sahibi/adı bu kaynak ağacına sabit olarak kodlanmamıştır. Söz konusu sürümün iş akışı özetinde gösterilen görüntüyü kullanın.
 
 `deploy/env.example`'yi `.env`'ye kopyalayın. `TGWITNESS_IMAGE`'yi, **küçük harfli** depo yolunu kullanarak yayınlanan sürüme ayarlayın, örneğin:
 
@@ -202,18 +192,6 @@ Yukarıdaki durdurma/kopyalama komutları için de kurulumunuzun Compose dosyala
 
 Güncellemeden sonra panel erişimini, hesap kimliğini, gözlem durumunu ve kapsama alanını kontrol edin. Yeniden başlatma, kaçırılan Telegram güncellemelerini geri getirmez. Gelecekteki bir sürümde depolama formatları değişirse, geri alma işlemi için güncelleme öncesi yedeğe ihtiyaç duyulabilir.
 
-## Otomatik GitHub sürümleri
-
-Bu proje, Actions özelliği etkinleştirilmiş bir GitHub deposuna yüklendikten sonra [sürüm yayınlama iş akışı](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) kullanıma hazır hale gelir. Bu iş akışı, ön sürüm dahil olmak üzere bir GitHub Sürümü yayınlandığında çalışır. Taslaklar ve etiket yüklemeleri tek başına paketlerin yayınlanmasına yol açmaz.
-
-1. Paket sürümünü ve değişiklik günlüğünü belirleyin, ardından `v` etiketiyle ve `pyproject.toml`'nin tam sürümünü (örneğin `v0.8.0`) içeren bir sürüm yayınlayın.
-2. İş akışı, etiketi doğrular ve paylaşılan Windows/Linux/macOS Python, general/account-import/QR tarayıcı, kaynak paket ve Docker kontrollerini çalıştırır. Ayrıca, Python 3.12 kullanılarak üç işletim sisteminin tümünde yeni yerel kurulum da gerçekleştirilir.
-3. Bu kontroller başarıyla tamamlandıktan sonra, QEMU altında bir ARM64 görüntüsüne hızlı test uygular, AMD64/ARM64 görüntülerini `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` adresine yayınlar ve kaynak ZIP dosyasını ile Python wheel dosyasını SHA-256 yan dosyalarıyla birlikte ekler. Windows taşınabilir ZIP dosyası, kontrol iş akışı tarafından test edilen artefaktın aynısıdır; sürüm iş akışı bu artefaktı ve sağlama toplamını indirip yayınlar.
-4. Son işlem, yayınlanmış üç paketi de yeniden indirir ve bunların sağlama toplamlarını doğrular. Ardından `SHA256SUMS.txt` ve `RELEASE-MANIFEST.json` adreslerini yayınlayarak sürümü, kaynak revizyonunu ve varlık boyutlarını kaydeder. Yüklemeler, mevcut sürüm varlıklarının üzerine yazmayı reddeder.
-5. İlk yayınlamadan sonra, GHCR paket ayarlarını açın ve anonim görüntü alımları planlanıyorsa görünürlüğü "**Herkese Açık**" olarak ayarlayın. Yalnızca herkese açık bir kaynak deposu kendi başına herkese açık bir konteyner paketini garanti etmez. Kurum politikaları paket yayınlamasına izin vermelidir. İş akışı `GITHUB_TOKEN` kullanır; depoda herhangi bir kayıt şifresi veya VPS kimlik bilgileri bulunmamalıdır.
-
-Bu yerel hazırlık ile uzaktan iş akışının başarısı henüz kanıtlanmamıştır. ARM64 emülasyonu, yerel donanım veya canlı Telegram yeterliliği değil, bir ön test niteliğindedir. Bu, sürüm paketlemeyi otomatikleştirir; bir sunucuyu başlatmak için hala Compose komutu ve bunun etki alanı/ana bilgisayar ön koşulları gereklidir. Bir sürüm yayınlandığında mevcut sunucular sessizce yükseltilmez veya yeniden başlatılmaz.
-
 ## Uzak sunucu
 
 Hizmeti loopback ile sınırlı tutun ve bir SSH tüneli kullanın ya da HTTPS'yi bir ters proxy'de sonlandırın. Temel Compose dosyası yalnızca yerel kullanım içindir; isteğe bağlı `deploy/compose/compose.https.yaml` overlay'i, yapılandırılmış bir etki alanı için Caddy sağlar. Taşıyıcı belirtecini URL’lerden ve proxy günlüklerinden uzak tutun. Ters proxy, istek boyutunu ve bağlantı hızlarını sınırlamalıdır. Düz HTTP’yi İnternet’e maruz bırakmayın.
@@ -244,14 +222,6 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 Başka bir çalışma alanı için **İhracat → Çalışma Alanı Kimliği**'nden `--profile ID`'yi, uzak bir sunucu için `--format zip|jsonl|csv|html`, `--url https://your-server`'yi veya 5 GiB aktarım sınırını değiştirmek için `--max-mib`'yi kullanın. Düz HTTP yalnızca loopback için izin verilir. Jetonlar başlıklarda iletilir, yönlendirmeler reddedilir, mevcut dosyalar üzerine yazılmaz ve tamamlanmamış indirmeler tamamlanmış dosyalar olarak yayınlanmaz. TGWITNESS_TOKEN, oluşturulan jetonu geçersiz kılarsa, bu aktif değeri içeren ayrı olarak korunan bir dosya kullanın: panel-token.txt dosyası, geçersiz kılma işlemiyle yeniden yazılmaz. Komutun SHA-256 değeri yalnızca bir aktarım sağlama toplamıdır; imzalı ZIP dosyasını bağımsız olarak doğrulayın.
 
-Sunucu dışa aktarım dosyaları, her çalışma alanının özel `temporary-exports/` dizininde kalır. Başarılı işlemler, dosyalarını temizler. Kesintiye uğrayan dışa aktarımlar, özel örnek kilidi tutulmuş haldeyken bir sonraki çalışma alanının başlatılması sırasında kaldırılır. Bu dizin, depolama tehdidi/kapasite modelinin bir parçasıdır; şifrelenmiş bir veri birimi kullanın. Üretim ölçeğindeki birkaç gigabaytlık aktarımlar için yine de hedef sisteminizde uygunluk değerlendirmesi gereklidir.
-
 Panel, kuyrukta bekleyen/başarısız medya öğelerini, en eski bekleyen medya öğelerini, boş disk alanını, Telegram istek duraklamalarını ve erişimi onaylanmamış kaynakları gösterir. Bu tanılama bilgileri, tam kapsamlı bir uçtan uca teslimat izleme aracı değildir. Çalışma alanları aynı süreci paylaşır; sorunlu bir hesap diğerlerini yine de etkileyebilir. Ayrı işçi süreçleri, saklama/dönüşüm, dayanıklı güncelleme kurtarma ve tam dağıtım yeterliliği devam etmektedir. Kapsamlı panel erişimi, [erişim ve izinler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/) bölümünde belgelenmiştir; bağımsız kontrol noktaları ise [tanık](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/)kılavuzunda ele alınmaktadır.
-
-## Bağlantı ve koruma seçenekleri
-
-Bağlantı yolları çalışma alanı bazındadır ve yetkilendirme öncesinde yapılandırılmalıdır. SOCKS5/HTTP CONNECT, sabitlenmiş python-socks bağımlılığını kullanır. MTProxy, Telethon'un deneysel rastgele ara aktarımını kullanır; Sahte TLS ee gizli anahtarları desteklenmez. Doğrudan yedekleme, seçilen [IP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/#ip-modes)moduna bağlıdır: **Adresi Gizle seçeneği** bunu reddeder; **Son Çare Olarak Doğrudan seçeneği ise** bir gecikmeden sonra buna izin verir. **Tünel veya VPN arkasında bulunan sunucu,** doğrudan rotalara izin verir ancak bir VPN oluşturmaz. Bu, sistem genelinde geçerli bir ağ politikası değildir.
-
-Yeni kurulumlarda, TGWITNESS_VAULT_KEY_FILE değişkeni, ayrı olarak korunan rastgele bir ana anahtar dosyasına işaret eder. Bu dosyayı bir konteyner içinde /data dizininin dışında salt okunur olarak bağlayın. Her çalışma alanı ve ana anahtar için vault.external.json salt meta verilerini ayrı ayrı saklayın. Mevcut yerel kasalar için planlı bir geçiş gereklidir; bu değişkenin ayarlanması, kasaları otomatik olarak dönüştürmez. Mesaj/medya depolama ve dışa aktarımlar uygulama tarafından şifrelenmez. Gerektiğinde şifreli birimler ve yeterli miktarda özel geçici depolama alanı kullanın.
 
 Ayrıntılı prosedürler: [bağlantı/güvenlik](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/) ve [çalışma modları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/).

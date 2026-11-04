@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/setti
 セッションがあるワークスペースや、以前にセットアップが完了しているワークスペースでは、ウィザードは表示されません。 ページが読み込まれても、その値は目標によって上書きされることはありません。フィールドを非表示にしても、 その機能がオフになったり、値が削除されたりすることはありません。
 
 サイズと所要時間の見積もりは、選択されたチャットを最大3つ、各チャットから最大20件のメッセージを読み込むことを前提としています。 これはあくまで概算であり、Telegramの制限、特定のサーバーの速度、 あるいは各チャット内のファイル内容までは予測していません。
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

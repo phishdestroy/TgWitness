@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/handover/
 
-Chia sẻ các quan sát liên quan đồng thời giữ nguyên không gian làm việc ban đầu.
+Chỉ chia sẻ những gì cần, bản gốc vẫn nguyên vẹn.
 
-Việc bàn giao là một bản trích xuất riêng biệt đã được ký tên. Chọn các cuộc trò chuyện và người tham gia, rút gọn thông tin nhận dạng hoặc nội dung văn bản, và quyết định những tệp tin và ghi chú của nhóm nào sẽ được đưa vào bản sao của người nhận. Danh sách nội dung (manifest) ghi lại các mục đã chọn cùng số lượng bản ghi không thay đổi, đã rút gọn và bị loại bỏ.
+Bản bàn giao là một bản trích xuất có chữ ký riêng: chọn cuộc trò chuyện và người, ẩn danh tính hoặc nội dung, chọn tệp và ghi chú của nhóm. Bản kê ghi lại những gì được giữ, cắt bớt và loại bỏ.
 
 ## Chuẩn bị bản trích xuất cho người nhận
 
-1. Mở **Exports → Handover extract**. Ghi rõ mục đích, chọn các cuộc trò chuyện và khoảng thời gian UTC (tùy chọn), sau đó chọn **Load people of the chosen chats** nếu bạn cần các đối tượng được nêu tên.
-2. Chọn cách xử lý các đối tượng khác: sử dụng biệt danh, bỏ qua tin nhắn của họ hoặc hiển thị nguyên văn như đã ghi lại. Đặt nội dung tin nhắn và tệp đính kèm một cách độc lập; tùy chọn che giấu số điện thoại và địa chỉ email.
-3. Hãy quyết định xem có nên bao gồm các dấu trang và phần trích xuất của Case Board, hay các thẻ kèm bình luận hay không. Các biệt danh của điều tra viên có thể thay thế tên nhóm trong bản dịch này.
-4. Chọn **“Tải xuống bản trích xuất bàn giao**”. Mở báo cáo đã tạo và các bản ghi đã chọn trên máy tính cục bộ, xác minh kho lưu trữ và kiểm tra bản sao trước khi gửi đi.
+1. **Xuất → Trích xuất bàn giao**: ghi mục đích, chọn cuộc trò chuyện và khoảng thời gian, **Tải người từ các cuộc trò chuyện đã chọn** nếu bạn cần người có tên.
+2. Tất cả những người khác: bí danh, loại bỏ, hoặc như đã ghi. Nội dung và tệp là các công tắc riêng; số điện thoại và email có thể được che.
+3. Case Board: không gì cả, dấu trang và lát cắt, hoặc thẻ kèm bình luận. Tên thành viên nhóm có thể đổi thành bí danh.
+4. **Tải xuống bản trích xuất bàn giao**, mở ra, xác minh, xem qua trước khi gửi.
 
 ### Một bản gốc, một bản sao để chia sẻ có chủ đích
 
@@ -54,12 +54,12 @@ Một gói riêng biệt được liên kết với ranh giới nhật ký ngu�
 
 | Kiểm soát | Ảnh hưởng đến nội dung bản dịch |
 | --- | --- |
-| Người dùng | Giữ nguyên danh tính của các đối tượng được chọn; ẩn danh hoặc loại bỏ các bên tham gia khác tùy theo lựa chọn. |
-| Văn bản | Bao gồm toàn bộ văn bản, chỉ văn bản của những người được chọn và tài khoản quan sát, hoặc loại bỏ nội dung tin nhắn cùng các trường chi tiết chứa văn bản. |
-| Tệp tin | Chọn các tệp của những người được chọn và tài khoản theo dõi, tất cả các tệp tin tin nhắn đã hiển thị, hoặc không chọn tệp nào. |
-| Case Board | Không chọn các thành phần bảng, dấu trang và các phần cắt, hoặc thẻ có thảo luận nhóm. |
+| Người dùng | Người được chọn giữ nguyên tên; những người khác nhận bí danh hoặc bị loại bỏ. |
+| Văn bản | Toàn bộ nội dung, chỉ nội dung của người được chọn và tài khoản của bạn, hoặc không gì cả. |
+| Tệp tin | Tệp của người được chọn và tài khoản của bạn, tất cả tệp đang hiển thị, hoặc không gì cả. |
+| Case Board | Không gì cả, dấu trang và lát cắt, hoặc thẻ kèm thảo luận. |
 
-Kiểm tra nội dung văn bản tự do và nội dung tệp cũng như thông tin nhận dạng: việc sử dụng biệt danh không tự động loại bỏ mọi tên được đề cập trong tin nhắn hoặc tệp đính kèm. Nếu tệp được chọn để lưu trữ không khả dụng, hãy khôi phục tệp đó hoặc loại bỏ rõ ràng các tệp đính kèm trước khi tạo bản trích xuất.
+Hãy đọc cả nội dung và tệp: bí danh không xóa những cái tên được viết bên trong tin nhắn hay tệp đính kèm. Nếu một tệp được chọn bị thiếu, hãy khôi phục nó hoặc loại tệp đính kèm ra.
 
 ## Đảm bảo nội dung có thể được kiểm tra độc lập
 
@@ -67,4 +67,4 @@ Kiểm tra nội dung văn bản tự do và nội dung tệp cũng như thông 
 python -m tgwitness.verify handover.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Giữ riêng biệt kho lưu trữ bằng chứng đã ký gốc và các điểm kiểm tra. Quá trình bàn giao ghi lại bản sao của chính nó, do đó người nhận có thể kiểm tra bản sao đã được chuyển giao mà không cần nhận toàn bộ không gian làm việc. [Report Studio](https://phishdestroy.github.io/TgWitness/vi/docs/reports/) cung cấp thiết kế hiển thị của riêng mình; [quá trình xác minh xuất khẩu](https://phishdestroy.github.io/TgWitness/vi/docs/exports/) giải thích các tham chiếu đáng tin cậy.
+Tự giữ kho lưu trữ gốc và các điểm kiểm tra. Người nhận có thể xác minh bản sao của họ mà không cần nhận cả không gian làm việc. Thiết kế: [Report studio](https://phishdestroy.github.io/TgWitness/vi/docs/reports/). Mốc tham chiếu tin cậy: [xác minh bản xuất](https://phishdestroy.github.io/TgWitness/vi/docs/exports/).

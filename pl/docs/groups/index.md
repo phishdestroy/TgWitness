@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/groups/
 
-Zarządzaj jednocześnie kilkoma kontami do gromadzenia danych, zachowując odrębność zapisów i tożsamości podpisującej dla każdego konta.
+Prowadź kilka kont razem — każde nadal z własnymi wpisami i kluczem.
 
-Grupa kont łączy w jednym widoku roboczym status połączenia, elementy sterujące obserwacją, wspólne ustawienia oraz funkcje eksportu. Jest to przydatne, gdy kilka kont dotyczy tego samego dochodzenia lub wymaga spójnej konfiguracji operacyjnej.
+Grupa zbiera na jednym ekranie stan połączeń, start/pauzę, wspólne ustawienia i eksporty. Wygodne, gdy kilka kont pracuje nad jedną sprawą.
 
 ## Otwórz przegląd grupy
 
-W sekcji „**Konta**” otwórz grupę. Każde konto pokazuje swój stan obserwacji, trasę połączenia, najnowsze zmierzone opóźnienie trasy w momencie pomyślnego zakończenia bieżącej kontroli oraz ostatnią zapisaną wiadomość. Linki **„Wymaga uwagi”** odsyłają do kont, które wymagają działania; **opcja „Napraw”** otwiera odpowiedni obszar roboczy i panel sterowania.
+Otwórz grupę w **Kontach**. Przy każdym koncie widać stan, trasę, opóźnienie i ostatnią zapisaną wiadomość. **Wymaga uwagi** wymienia te z problemami, **Napraw** prowadzi prosto do nich.
 
-**Funkcje „Uruchom wszystko”** i **„Wstrzymaj wszystko”** działają na kwalifikujących się kontach po potwierdzeniu. **Ustawienia grupowe** udostępniają wybrane ustawienia; konta z własnymi wartościami zachowują je do momentu, aż zdecydujesz się je zastąpić.
+**Uruchom wszystkie** / **Wstrzymaj wszystkie** pytają przed działaniem. **Ustawienia grupy** są wspólne, ale własne wartości konta zostają, dopóki ich nie zastąpisz.
 
 ### Sprawdź zmianę trasy w całej grupie
 
@@ -51,19 +51,19 @@ Konto referencyjne: zachowano własną ścieżkę.
 
 ## Zmiana ścieżki z uwzględnieniem etapu weryfikacji
 
-1. Wybierz opcję **„Zmień trasę grupy**”, a następnie wybierz typ połączenia i ustawienia.
-2. Wybierz **opcję „Przeglądaj wybór**”. Przejrzyj wymienione konta i ich indywidualne nadpisania tras.
-3. Wybierz opcję **„Przygotuj i sprawdź**”. Sprawdzanie wykorzystuje nowy kanał transmisji Telegram; obsługiwane trasy HTTP zgłaszają również wynik kontroli wyjściowej HTTPS.
-4. Należy wybrać opcję **„Zastosuj zaznaczone połączenia”** i sprawdzić wyniki dla każdego konta. Wcześniej uruchomiona obserwacja jest wznawiana tam, gdzie aplikacja zakończyła się powodzeniem; konta nieaktywne pozostają nieaktywne.
+1. **Zmień trasę grupy**, wybierz typ i ustawienia.
+2. **Przejrzyj wybór**: które konta się zmienią, a które mają własną trasę.
+3. **Przygotuj i sprawdź** testuje świeże połączenie z Telegramem i, gdzie się da, wyjściowy IP.
+4. **Zastosuj sprawdzone połączenie** i obejrzyj każdy wynik. Działające konta wznowią pracę, bezczynne takie zostaną.
 
-Opóźnienie opisuje zmierzoną czasowo konfigurację połączenia z Telegramem. Sprawdzenie adresu IP wyjściowego opisuje tę trasę w momencie rejestracji. Autoryzacja konta i stan obserwacji mają swoje własne wskaźniki; zmiana grupy może zakończyć się różnymi wynikami w zależności od konta.
+Opóźnienie to czas nawiązania połączenia z Telegramem, wyjściowy IP to to, co trasa pokazała podczas sprawdzenia. Wyniki mogą się różnić między kontami.
 
 ## Należy stosować nakładające się uprawnienia dostępu
 
-**W sekcji „Czat z kilkoma kontami”**wyświetlane są wspólne źródła oraz zakres obserwacji dostępny w obszarze roboczym. Kwalifikujące się kanały i supergrupy mogą korzystać z **opcji** **„Eksportuj z … kontami”**, aby podzielić proces pozyskiwania historii jednego czatu. Czat prywatny i zwykłe grupy pozostają przy koncie początkowym, ponieważ numery ich wiadomości należą do historii tego konta.
+**Czaty widziane przez kilka kont** pokazują wspólne źródła i ich pokrycie. Kanały i supergrupy można eksportować kilkoma kontami naraz przez **Eksportuj … kontami**. Czaty prywatne i zwykłe grupy nie: tam numery wiadomości są osobne dla każdego konta.
 
 ## Eksportuj grupę jako pakiet
 
-**Grupa eksportująca** tworzy jeden plik ZIP zawierający podpisany eksport każdego konta oraz podpisaną listę tych plików. Oryginalne tożsamości i odciski palców obszaru roboczego pozostają dostępne do weryfikacji. Należy stworzyć narrację obejmującą różne konta, korzystając z tych odniesień; pojedyncza, scalona oś czasu jest nadal tworzona oddzielnie.
+**Eksportuj grupę** daje jeden ZIP z podpisanym eksportem każdego konta i podpisaną ich listą. Każde zachowuje własny odcisk do weryfikacji. Wspólną chronologię nadal budujesz sam.
 
-Przejdź do [projektowania raportu](https://phishdestroy.github.io/TgWitness/pl/docs/reports/), [tablicy sprawy w obszarze roboczym](https://phishdestroy.github.io/TgWitness/pl/docs/case-board/) lub [weryfikacji eksportu](https://phishdestroy.github.io/TgWitness/pl/docs/exports/).
+Dalej: [raporty](https://phishdestroy.github.io/TgWitness/pl/docs/reports/), [Case Board](https://phishdestroy.github.io/TgWitness/pl/docs/case-board/), [weryfikacja eksportów](https://phishdestroy.github.io/TgWitness/pl/docs/exports/).

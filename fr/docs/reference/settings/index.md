@@ -62,10 +62,3 @@ La page du groupe `/groups/<id>` affiche les membres, les éléments nécessitan
 Un espace de travail comportant une session ou une configuration antérieure déjà terminée n’affiche pas l’assistant. Ses valeurs ne sont pas remplacées par un objectif lors du chargement de la page. Masquer un champ ne désactive pas la fonctionnalité ni ne supprime sa valeur.
 
 L'estimation de la taille et de la durée porte sur un maximum de trois discussions sélectionnées et jusqu’à 20 messages par discussion. Il s’agit d’une estimation : elle ne tient pas compte des limites imposées par Telegram, de la vitesse d’un serveur donné ni des fichiers présents dans chaque discussion.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

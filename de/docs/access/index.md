@@ -6,47 +6,47 @@ Teilen Sie den Fall, den jemand benötigt. Behalten Sie die Kontrolle über den 
 
 01**Wählen Sie die Beweise aus**
 
-Wählen Sie ganze Konto-Arbeitsbereiche oder einzelne aufgezeichnete Chats aus.
+Ganze Arbeitsbereiche oder einzelne Chats.
 
 02**Wählen Sie die Aktionen aus**
 
-Erteilen Sie die erforderlichen Berechtigungen zum Anzeigen, Exportieren oder für bestimmte operative Vorgänge, die die betreffende Person benötigt.
+Ansehen, exportieren oder nur die nötigen Aktionen.
 
 03**Legen Sie die Grenzen fest**
 
-Erstellen Sie ein persönliches Token mit Ablaufdatum, Sitzungsbeschränkungen und optionalen IP-Einschränkungen.
+Ein persönliches Token mit Ablaufdatum, Sitzungslimits und IP-Regeln, wenn Sie wollen.
 
 Der Erfassungsumfang bestimmt, was aufgezeichnet wird. Der Zugriffsumfang bestimmt, was eine Person sehen und tun kann.
 
 ## Jemandem Zugriff gewähren
 
-1. Melden Sie sich als Administrator an und öffnen Sie **„Access**“.
-2. Geben Sie den Namen des Zugangs an und wählen Sie Arbeitsbereiche und Chats aus.
-3. Behalten Sie **die Option „Anzeigen“** für einen Prüfer bei. Fügen Sie **die Option „Exportieren“** hinzu, falls dieser die Aufzeichnungen herunterladen soll.
+1. Als Admin **Zugriff** öffnen.
+2. Benennen, Arbeitsbereiche und Chats wählen.
+3. Ein Prüfer braucht nur **Ansehen**. Für Downloads **Exportieren** hinzufügen.
 4. Legen Sie die Einschränkungen fest und klicken Sie anschließend auf **„Zugriff erstellen**“.
-5. Kopieren Sie das einmalig angezeigte Token. Senden Sie es privat zusammen mit der Panel-Adresse.
-6. Bitte überprüfen Sie die zulässige Ansicht in einer separaten Browsersitzung, bevor Sie die Seite weitergeben.
+5. Token kopieren (wird einmal angezeigt) und privat mit der Panel-Adresse schicken.
+6. Prüfen Sie vorher in einer separaten Browser-Sitzung, was die Person sehen wird.
 
 ## Beginnen Sie mit der Aufgabe, die sie zu erledigen haben
 
 | Person | Zugriff | Ergebnis |
 | --- | --- | --- |
-| Rezensent | Ausgewählte Chats; nur zur Ansicht | Lesen Sie die erfasste Unterhaltung, ohne die Datensammlung zu verändern. |
-| Analyst | Ausgewählte Chats; anzeigen und exportieren | Prüfen und laden Sie die für den Fall erforderlichen Aufzeichnungen herunter. |
-| Betreiber | Ausgewählte vollständige Arbeitsbereiche; Quellen und Sammlung | Verwalten Sie die erfassten Daten und starten oder stoppen Sie die Erfassungsmodule. |
+| Rezensent | Ausgewählte Chats; nur zur Ansicht | Liest den Chat, kann nichts ändern. |
+| Analyst | Ausgewählte Chats; anzeigen und exportieren | Liest und lädt herunter, was der Fall braucht. |
+| Betreiber | Ausgewählte vollständige Arbeitsbereiche; Quellen und Sammlung | Entscheidet, was beobachtet wird, startet und stoppt Collectoren. |
 
-Hierbei handelt es sich um von Ihnen gewählte Konfigurationen, nicht um festgelegte Rollen. Kontoweite Einstellungen und vollständige Protokoll-Exporte bleiben für den auf Chats beschränkten Zugriff gesperrt, selbst wenn eine andere Berechtigung aktiviert ist. Der Zugriff auf den gesamten Arbeitsbereich umfasst auch zukünftige Konten.
+Das sind nur Beispiele, keine festen Rollen. Auf Chats beschränkter Zugriff bekommt nie Kontoeinstellungen oder vollständige Journal-Exporte. Zugriff auf alle Arbeitsbereiche schließt später hinzugefügte Konten ein.
 
 ## Sie können Ihre Meinung jederzeit ändern
 
-Bearbeiten Sie die Zugriffsrechte, um festzulegen, welche Aktionen bei nachfolgenden Anfragen möglich sind. Beenden Sie eine einzelne Sitzung oder widerrufen Sie den gesamten Zugriff, um alle Sitzungen zu beenden. Bereits heruntergeladene Dateien können nicht zurückgerufen werden. Das Beenden einer Panel-Sitzung stoppt die Erfassung nicht.
+Zugriff jederzeit bearbeiten, es gilt ab der nächsten Anfrage. Eine Sitzung beenden oder alles widerrufen. Bereits heruntergeladene Dateien sind weg. Die Erfassung läuft weiter.
 
 **Sitzungs- und IP-Beschränkungen**
 
-Begrenzen Sie die Anzahl paralleler Sitzungen und erfolgreicher Anmeldungen, legen Sie ein absolutes Enddatum fest, erlauben Sie bestimmte IP-Adressen oder Subnetze oder binden Sie den Zugriff an die Adresse der ersten Anmeldung. Das Ablaufen einer Sitzung wird anhand von Inaktivität gemessen; das Abrufen eines geöffneten Fensters gilt als Aktivität. Überprüfen Sie die von der Anwendung angezeigte Client-Adresse, wenn diese hinter einem Proxy oder Tunnel ausgeführt wird.
+Parallele Sitzungen und Anmeldungen begrenzen, ein Enddatum setzen, IPs oder Subnetze erlauben oder an die IP der ersten Anmeldung binden. Der Ablauf zählt Inaktivität, ein offenes Panel gilt als aktiv. Hinter einem Proxy prüfen, welche Client-IP die App sieht.
 
 **Der Hauptschlüssel und das Aktivitätsprotokoll**
 
-Der Administrator verwahrt das Token für das Hauptfenster. Mit einem erteilten Zugriffsrecht ist es nicht möglich, die Zugriffsrechte anderer Personen zu verwalten oder die Administratorkonsole zu öffnen. Die Konsole zeigt die Aktivitäten des aktuellen Prozesses über alle Arbeitsbereiche hinweg an; signierte Zugriffsprotokolle speichern Berechtigungs- und Sitzungsereignisse ohne Tokens. Die Arbeitsbereiche teilen sich den Host-Prozess und isolieren die Daten nicht vom Serveradministrator.
+Das Haupttoken bleibt beim Admin. Vergebener Zugriff kann weder fremden Zugriff verwalten noch die Admin-Konsole öffnen. Zugriffsänderungen und Sitzungen werden ins Journal signiert, ohne Tokens. Der Server-Admin sieht weiterhin alles.
 
-Verwenden Sie die [vollständige Berechtigungsreferenz](https://phishdestroy.github.io/TgWitness/de/docs/reference/access/) für alle sieben Berechtigungen, Sitzungsregeln und die Administratorgrenzen.
+Alle sieben Berechtigungen und Sitzungsregeln: [Zugriffsreferenz](https://phishdestroy.github.io/TgWitness/de/docs/reference/access/).

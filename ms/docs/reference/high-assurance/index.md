@@ -247,25 +247,11 @@ Gateway DNS merangkumi penyelesai sistem. DNS melalui HTTPS pada port 443 ke pen
 
 Cloudflare tidak dapat melihat ke dalam penyulitan Telegram, peranti lain pada akaun Telegram (senarai peranti mod bukti merekodkannya dari pihak Telegram) atau hipervisor penyedia.
 
-Pada 1 November 2026 Gateway DNS dijalankan terhadap Hetzner Cloud sebenar dan akaun Cloudflare percuma: Hetzner menerima peraturan keluar, pelayan memasang v0.7.0 dengan setiap carian melalui Gateway melalui TLS, terowong pantas berfungsi melalui firewall itu, dan `verify` membaca semula 19 nama pelayan daripada Cloudflare (cermin Ubuntu dan Hetzner, GitHub, PyPI, NTP, terowong, ntfy.sh). Panel menyalin 36 pertanyaan dalam lapan tetingkap ke dalam jurnal dan `verify.py` menyimpulkannya tanpa sebarang jurang; `destroy` mengalih keluar pelayan dan firewall dan meninggalkan lokasi kongsi.
-
 ## Apa yang tidak ditetapkan oleh ini
 
 - Penyedia dan kakitangannya mengawal hipervisor, cakera dan rangkaian.
 - Ukuran hos dilaporkan sendiri oleh pengumpul.
 - Kandungan peraturan firewall terdahulu tidak terdapat dalam setiap log penyedia; hanya Linode mengekalkan versi peraturan.
 - Ia tidak menyatakan apa-apa yang baharu mengenai keaslian mesej; lihat [Bukti](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/).
-
-## Diuji di sini
-
-Logik penyebaran, penguncian dan pengesahan dilindungi oleh ujian automatik terhadap API Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail dan Cloudflare yang disimulasi, dibina daripada rujukan API yang diterbitkan, serta penandatanganan permintaan AWS mengikut contoh yang diterbitkan oleh AWS. `tools/check_cloud_wizard.py` menjalankan wizard pelayan panel dengan cara yang sama, sama ada dengan domain dan dengan terowong pantas. `tools/check_tdx.py` memverifikasi pengesahan Intel TDX sebenar daripada dcap-qvl dan dstack sehingga ke sijil akar Intel (sumber dalam [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)); `tools/check_phala.py`menjalankan deploy, verify, the journal, destroy dan wizard panel terhadap Phala Cloud simulasi yang pengakuannya datang daripada PKI palsu yang dibentuk seperti milik Intel. Laluan Phala belum lagi dicuba pada Phala Cloud itu sendiri.
-
-Pada 1 November 2026 laluan terowong pantas dijalankan pada **Hetzner Cloud** sebenar (Nuremberg, `cpx22`, TgWitness v0.7.0), real ntfy.sh dan GitHub, daripada panel dan daripada kod:
-
-- semakan harga, kemudian penciptaan melalui butang panel: pelayan beroperasi selepas 13 saat, pernyataan yang disahkan dengan hash instans dan pemasang yang sepadan selepas kira-kira dua minit;
-- panel pelayan itu sendiri dibuka melalui alamat trycloudflare.com dan menerima token panel; tanpa token ia menjawab 401;
-- selepas reboot melalui API Hetzner, pelayan menyiarkan alamat bermassa baru, **cari alamat semasa** menemuinya, alamat lama berhenti menjawab, kunci penandatanganan kekal sama; kiriman tanpa tandatangan ke topik ntfy.sh diabaikan;
-- `verify` menentang API Hetzner: pelayan, firewall tanpa peraturan masuk, pernyataan, pengikatan, ukuran hos, but dan hash sumber keluaran v0.7.0 telah diluluskan; pemeriksaan Cloudflare tidak tersedia, seperti yang diterangkan di atas; pemasang berbeza daripada yang dibina v0.7.0 dan sama bait demi bait dengan yang dibina oleh kod versi ini;
-- pembuangan daripada panel hanya membuang pelayan dan firewall yang dilabelkan oleh penyebaran; pelayan dan firewall lain dalam projek yang sama tidak terjejas.
 
 Belum dijalankan pada akaun sebenar: satu penyebaran di bawah domain anda sendiri (tunel Cloudflare dan DNS), penyedia lain, satu penyebaran debug dan `lock`, akaun Telegram pada pelayan sedemikian, dan kemas kini langsung versi kemudian melalui terowong pantas. Semak penyebaran pertama pada setiap penyedia dengan `plan`, penyebaran debug dan `verify` sebelum menggunakannya dalam sesuatu kes.

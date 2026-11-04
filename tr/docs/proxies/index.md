@@ -2,45 +2,45 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/proxies/
 
-Hesabı bağlı tutun. Rotasının ne zaman sunucunun adresini kullanabileceğine açıkça karar verin.
+Hesabı çevrimiçi tutun ve sunucunuzun IP'sini hiç gösterip gösteremeyeceğine kendiniz karar verin.
 
 ## Önce IP modunu seçin
 
 01**Adresi gizle**
 
-Bir proxy kullanın. Hiçbiri işe yaramazsa, doğrudan Telegram bağlantısı olmadan bekleyin.
+Yalnızca proxy. Hiçbiri çalışmazsa bekler.
 
 02**Son çare olarak Direct**
 
-Yapılandırılan gecikme süresinin ardından Direct'e izin verin; biri yanıt verdiğinde çalışan bir proxy'ye geri dönün.
+Bir gecikmeden sonra doğrudan bağlanır, çalışan bir proxy bulunca ona döner.
 
 03**Tünel veya VPN arkasında bulunan sunucu**
 
-Barındırıcı ağından doğrudan bağlantı izin verin. Bu seçenek bir VPN kurmaz veya doğrulamaz.
+Doğrudan bağlantı olur. VPN'i sizin yerinize kurmaz ya da denetlemez.
 
 Yol, bağlantıyı seçer. IP modu, doğrudan bağlantıya izin verilip verilmeyeceğini belirler.
 
 ## Havuzun rotayı korumasına izin verin
 
-1. **Hesap** Aç **→ Ayarlar → Bağlantı ayarları**.
-2. IP modunu ve **Otomatik MTProxy'yi** seçin veya sabit bir rota girin.
-3. **Telegram bağlantısını** kaydedin ve **test** edin. Oturum açmadan önce de çalışır.
-4. Toplamaya başladıktan sonra, kontrol edilen mesajın günlüğe ulaştığını kontrol edin.
+1. **Hesap → Ayarlar → Bağlantı ayarları**.
+2. IP kipini ve **Otomatik MTProxy**'yi ya da sabit bir rotayı seçin.
+3. Kaydedin, **Telegram bağlantısını test et** (girişten önce de çalışır).
+4. Toplamayı başlatın ve kendinize bir test mesajı gönderin.
 
-Yeni çalışma alanları, "**Adresi Gizle"** seçeneği ile otomatik MTProxy kullanır. Havuz, dört halka açık kaynağı birleştirir, girişleri kontrol eder, çalışan rotaları korur ve arızalı proxy'leri değiştirir. Başarısız indirmeler, önceki anlık görüntüleri saklar.
+Yeni çalışma alanları otomatik MTProxy ve **Adresi gizle** ile başlar. Havuz dört herkese açık listeyi kullanır, sunucuları dener, iyileri tutar, ölüleri değiştirir.
 
 ## Kendi proxy'nizi kullanın
 
-SOCKS5 veya HTTP CONNECT bilgilerini girin, desteklenen bir Telegram proxy bağlantısını yapıştırın veya bir operatör kataloğu sağlayın. Etkin bir rotayı değiştirmeden önce gözlemi duraklatın. `ee` ile başlayan sahte TLS MTProxy gizli anahtarları hâlâ desteklenmemektedir.
+SOCKS5, HTTP CONNECT, bir Telegram proxy bağlantısı ya da operatör kataloğu. Değiştirmeden önce gözlemi duraklatın. Fake TLS sırları (`ee`…) çalışmaz.
 
 **Dönüş, paylaşım ve yeniden deneme ayarları**
 
-**Parametreler → Otomatik MTProxy** altında, hata eşiklerini, bekleme sürelerini, planlı rotasyonu ve proxy başına hesap sayısını ayarlayın. Paylaşım sınırı "bir" olarak ayarlandığında, özel giriş bulunmadığında hesap beklemeye alınır. Liste yenileme ve sondalama aralıkları, ana çalışma alanındaki değerlere göre belirlenir. Ayrı proxy'ler, ayrı çıkış IP'lerini garanti etmez.
+**Parametreler → Otomatik MTProxy**: hata eşikleri, bekleme süreleri, rotasyon, proxy başına hesap. Sınır 1, hesabın paylaşmak yerine beklemesi demektir. Farklı proxy'ler yine de aynı çıkış IP'sini paylaşabilir.
 
 ## Telegram'ı harici isteklerden ayırın
 
-MTProxy yalnızca Telegram trafiğini taşır. Zaman damgaları, bildirimler, kopyalar ve kaynak kontrolleri için ayrı bir SOCKS5/HTTP proxy'si, hesabın SOCKS5/HTTP rotası veya IP modunun izin verdiği durumlarda Direct kullanılır. Bu harici istekler devre dışı bırakılabilir.
+MTProxy yalnızca Telegram trafiğini taşır. Zaman damgaları, bildirimler, kopyalar ve kod kontrolleri ayrı bir SOCKS5/HTTP proxy'si, hesabın SOCKS5/HTTP rotası ya da kip izin veriyorsa doğrudan gider. Ya da kapatın.
 
-`TGWITNESS_PROXY_FEED_PROXY` parametresinin açıkça belirtilmesi, besleme indiricisinin yönünü belirler. [Bağımsız tanık](https://phishdestroy.github.io/TgWitness/tr/docs/witness/), kendi ayarlarını korur. Bu denetimler, bir sistem VPN'i kurmaz veya tarayıcı trafiğini yönlendirmez.
+`TGWITNESS_PROXY_FEED_PROXY` liste indirmeleri için rotayı belirler. [Tanığın](https://phishdestroy.github.io/TgWitness/tr/docs/witness/) kendi ayarları vardır. Bunların hiçbiri tarayıcınıza ya da sistem ağına dokunmaz.
 
-[Tüm modları, varsayılan ayarları ve kaynak listelerini](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/#ip-modes) görüntüleyin veya [bir hesabın yönlendirmesini kimlerin değiştirebileceğini seçin](https://phishdestroy.github.io/TgWitness/tr/docs/access/).
+Daha fazlası: [kipler ve varsayılanlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/#ip-modes), [rotaları kim değiştirebilir](https://phishdestroy.github.io/TgWitness/tr/docs/access/).

@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/case-board/
 
-Verwandeln Sie gespeicherte Telegram-Beobachtungen in einen Fall, den Ihr Team gemeinsam prüfen kann.
+Machen Sie aus gespeicherten Nachrichten einen Fall, an dem Ihr Team gemeinsam arbeitet.
 
-„Case Board“ speichert Lesezeichen, Textmarkierungen mit exaktem Wortlaut, gespeicherte Ausschnitte und Diskussionen neben den entsprechenden Quellenangaben. Eine Sammlung verleiht dem Fall eine Arbeitsstruktur; signierte Überarbeitungen dokumentieren, wie das Team ihn weiterentwickelt hat.
+Lesezeichen, exakte Zitate, Ausschnitte und Diskussionen, jeweils mit der Quelle verknüpft. Jede Änderung ist eine signierte Revision.
 
 ## Von einer Nachricht zur Fallkarte
 
-1. Öffnen Sie **„Untersuchung“ → „Case Board“** im Standard- oder Expertenmodus. Erstellen Sie eine Sammlung für den Fall und wählen Sie den Chat-Umfang aus.
-2. Wählen Sie in **„Journal“** oder einem gespeicherten Chat **„Zum Board**“ oder markieren Sie den Datensatz und drücken Sie **B**. Die Karte gelangt in den Posteingang; geben Sie ihr einen aussagekräftigen Titel und verschieben Sie sie in Ihre Sammlung.
-3. Markieren Sie eine Passage in einer gespeicherten Chat-Nachricht und wählen Sie **„Hervorheben“ → „Board“,** um das genaue Zitat und die Nachrichtenversion beizubehalten. Fügen Sie eine Notiz hinzu, in der Sie erklären, warum dies wichtig ist.
-4. Besprechen Sie die Karte, weisen Sie einen Überprüfungsstatus zu und kehren Sie zum Quellkontext zurück, sobald eine Angabe überprüft werden muss. Nutzen Sie **„Presentation“,** um die gesammelten Daten gemeinsam mit Kollegen durchzugehen.
+1. **Ermittlung → Case Board** (Modus Standard oder Experte). Legen Sie eine Sammlung für den Fall an.
+2. Im **Journal** oder in einem Chat **Aufs Board** (oder **B**) drücken. Die Karte landet im Eingang, geben Sie ihr einen Titel und verschieben Sie sie.
+3. Text in einer Nachricht markieren, **Hervorheben → Board** behält exaktes Zitat und Version. Notieren Sie, warum es wichtig ist.
+4. Diskutieren, Status setzen, bei Bedarf zur Quelle zurückspringen. **Präsentation** führt das Team durch das Material.
 
 ### Folgen Sie einem geänderten Zahlungslink
 
@@ -48,16 +48,16 @@ Die Anmerkungen und die Telegram-Beobachtungen bleiben separat identifizierbar.
 
 ## Speichern Sie einen nützlichen Bereich einmalig
 
-Wählen Sie mit Umschalt-Klick zwei Datensätze in einem Chat für **„Slice between**“ aus, wählen Sie **„Slice by time**“ oder speichern Sie die aktuellen Journal-Filter. Überprüfen Sie die Anzahl vor dem Speichern. Öffnen Sie den Ausschnitt erneut, um die gespeicherte Abfrage anzuwenden; **die Option „Seit Lesezeichen hinzugefügte Datensätze anzeigen“** zeigt spätere Ergänzungen an.
+Umschalt-Klick auf zwei Nachrichten für **Ausschnitt dazwischen**, **Ausschnitt nach Zeit** nutzen oder die aktuellen Journalfilter speichern. **Seit dem Lesezeichen hinzugekommene Einträge zeigen** zeigt, was später kam.
 
-Ein Zeitschnitt folgt der Beobachtungszeit des Collectors. Ein Nachrichten-ID-Schnitt kann den ausgewählten Nachrichten folgen, sobald spätere Änderungen eintreffen. Die gespeicherte Erstellungsgrenze ermöglicht es einem Empfänger, die ursprüngliche Auswahl mit ihrem späteren Zustand zu vergleichen.
+Zeitausschnitte nutzen die Beobachtungszeit, Ausschnitte nach Nachrichten-ID folgen diesen Nachrichten, wenn sie sich ändern.
 
 ## Weisen Sie jedem Kollegen die richtige Rolle zu
 
-**Der Prüfer** liest das Case Board; **der Analyst** fügt Karten und Kommentare hinzu; **der Operator** verwaltet zudem die Erfassungen und Prüfentscheidungen. Arbeitsbereichs- und Chat-Berechtigungen gelten für Karten, Quellenkontext und Diskussionen. Verwenden Sie benannte Zugriffsberechtigungen für eine klare Zuordnung.
+**Prüfer** liest, **Analyst** fügt Karten und Kommentare hinzu, **Operator** verwaltet zusätzlich Sammlungen und Entscheidungen. Chat-Berechtigungen gelten auch für Karten.
 
 ## Setzen Sie die Arbeit in ein lieferbares Ergebnis um
 
-Exportieren Sie einen Ausschnitt als signiertes JSON oder verwenden Sie CSV für eine Tabellenkalkulation. Die Berichtseinstellungen können Lesezeichen und Ausschnitte enthalten, bei Auswahl auch Teamkommentare. Wählen Sie diese Inhalte im [„Report Studio“](https://phishdestroy.github.io/TgWitness/de/docs/reports/) aus; ein gespeicherter Ausschnitt konfiguriert einen Bericht nicht automatisch. Verwenden Sie für einen eingeschränkten Empfänger die separaten [Übergabesteuerelemente](https://phishdestroy.github.io/TgWitness/de/docs/handover/).
+Ausschnitte werden als signiertes JSON oder CSV exportiert. Berichte können Lesezeichen, Ausschnitte und Kommentare enthalten, das stellen Sie im [Report studio](https://phishdestroy.github.io/TgWitness/de/docs/reports/) ein. Für einen eingeschränkten Empfänger nehmen Sie eine [Übergabe](https://phishdestroy.github.io/TgWitness/de/docs/handover/).
 
-Lesen Sie die [Case-Board-Referenz](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-board/) zu signierten Überarbeitungen, exakter Zitatübereinstimmung, Auswahlüberprüfung und Berechtigungen.
+Details: [Case-Board-Referenz](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-board/).

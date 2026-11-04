@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../">เอกสาร</a> <span aria-hidden="true">/</span> <span aria-current="page">ดูวิธีการทำงานของหลักฐาน</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">เอกสาร / 08</p><h1>ดูวิธีการทำงานของหลักฐาน</h1><p class="guide-outcome">ข้อความอาจเปลี่ยนแปลงได้ แต่บันทึกของสิ่งที่คุณสังเกตเห็นควรยังคงสามารถตรวจสอบได้</p>
-<p>ลองดูสองการทดลองเล็กๆ ด้านล่างนี้ ซึ่งใช้ข้อความสมมติ ทำงานภายในเบราว์เซอร์ของคุณ และไม่เชื่อมต่อกับ Telegram เลย</p>
+<article class="guide-content"><p class="eyebrow">เอกสาร / 08</p><h1>ดูวิธีการทำงานของหลักฐาน</h1><p class="guide-outcome">ข้อความเปลี่ยนได้ บันทึกของสิ่งที่คุณเห็นไม่ควรเปลี่ยน และใครก็ควรตรวจสอบได้</p>
+<p>ด้านล่างเป็นการทดลองเล็กๆ สองอย่าง ข้อความสมมติ ทุกอย่างทำงานในเบราว์เซอร์ของคุณ ไม่มีอะไรส่งไปยัง Telegram</p>
 
 <h2 id="telegram-export">จากการส่งออกบทสนทนาสู่บันทึกที่สามารถตรวจสอบได้</h2>
-<p><a href="https://telegram.org/blog/export-and-more">การส่งออกของ Telegram Desktop</a> จะบันทึกประวัติการสนทนาและสื่อที่มีอยู่เป็น HTML หรือ JSON เพื่อใช้งานแบบออฟไลน์ TgWitness เพิ่มบันทึกการเปลี่ยนแปลงที่รับมาอย่างต่อเนื่อง ลายเซ็นบนการสังเกตการณ์และการส่งออก รวมถึงจุดตรวจสอบ (checkpoints) ที่ผู้รับสามารถเปรียบเทียบได้อย่างอิสระ</p>
+<p><a href="https://telegram.org/blog/export-and-more">การส่งออกของ Telegram Desktop</a> บันทึกประวัติที่คุณเห็นอยู่ตอนนี้เป็น HTML หรือ JSON TgWitness เพิ่มบันทึกการเปลี่ยนแปลงต่อเนื่อง ลายเซ็นบนทุกรายการ และ checkpoint ที่ผู้อื่นใช้เทียบได้</p>
 <div class="table-wrap"><table><thead><tr><th scope="col">งาน</th><th scope="col">การส่งออกข้อมูลจาก Telegram Desktop</th><th scope="col">TgWitness</th></tr></thead><tbody>
 <tr><td>อ่านการสนทนาที่บันทึกไว้</td><td>HTML หรือ JSON พร้อมสื่อที่เลือกไว้</td><td>การสนทนาที่บันทึกไว้, บันทึกที่สามารถค้นหาได้ และรายงานแบบออฟไลน์</td></tr>
-<tr><td>ติดตามการเปลี่ยนแปลงตามเวลา</td><td>ประวัติข้อมูลที่มีอยู่เมื่อส่งออก</td><td>เวอร์ชันที่บันทึกไว้ก่อนหน้านี้ การแก้ไขในภายหลัง และการสังเกตการลบข้อมูล จะถูกเก็บรักษาไว้ร่วมกัน</td></tr>
-<tr><td>ตรวจสอบไฟล์หลังการส่งต่อ</td><td>ไฟล์ส่งออก HTML/JSON มาตรฐานไม่มีการลงนาม</td><td>ไฟล์ manifest ที่ลงนาม ลายเซ็นสำหรับแต่ละบันทึก และรายงาน HTML/PDF/JSON ที่ถูกปิดผนึก จะถูกตรวจสอบความถูกต้องกับกุญแจผู้เก็บรวบรวมที่เชื่อถือได้</td></tr>
+<tr><td>ติดตามการเปลี่ยนแปลงตามเวลา</td><td>ประวัติข้อมูลที่มีอยู่เมื่อส่งออก</td><td>เวอร์ชันเก่า การแก้ไขภายหลัง และการลบ เก็บไว้ทั้งหมด</td></tr>
+<tr><td>ตรวจสอบไฟล์หลังการส่งต่อ</td><td>ไฟล์ส่งออก HTML/JSON มาตรฐานไม่มีการลงนาม</td><td>แมนิเฟสต์ที่ลงนาม รายการที่ลงนาม และรายงานที่ผนึก ตรวจกับคีย์ที่เชื่อถือได้</td></tr>
 <tr><td>เปรียบเทียบกับสถานะที่เก็บไว้ก่อนหน้านี้</td><td>เก็บสำเนาอ้างอิงหรือค่าแฮชไว้แยกต่างหาก</td><td>จุดตรวจสอบที่ลงนาม, พยานแยกต่างหาก และตราเวลาภายนอกตามตัวเลือก</td></tr>
 </tbody></table></div>
-<p>การเปรียบเทียบการลงนามไฟล์นี้อิงจาก<a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">โปรแกรมส่งออกของ</a> <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">Telegram Desktop</a> ที่ได้รับการตรวจสอบเมื่อวันที่ 2 พฤศจิกายน 2026 TgWitness ลงนามด้วยกุญแจของผู้เก็บรวบรวม; การตรวจสอบด้านล่างแสดงวิธีที่ผู้รับใช้กุญแจดังกล่าว</p>
+<p>การเปรียบเทียบนี้อิงจาก <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">โค้ดการส่งออกของ Telegram Desktop</a> ณ วันที่ 2 พฤศจิกายน 2026</p>
 
 <h2 id="journey">ข้อความหนึ่ง ข้อสังเกตสามข้อ</h2>
-<p>เมื่อ Telegram ส่งข้อความใหม่ หรือการแจ้งเตือนการแก้ไขและการลบ แอปผู้รวบรวมข้อมูลจะเพิ่มบันทึกการสังเกตสามรายการที่แยกกัน การแก้ไขจะไม่แทนที่บันทึกแรก การแจ้งเตือนการลบจะไม่ลบมันออกไป</p>
+<p>ข้อความใหม่ การแก้ไข และการลบ กลายเป็นสามรายการแยกกัน การแก้ไขไม่เขียนทับรายการแรก และการลบก็ไม่ได้ลบมันทิ้ง</p>
 <figure class="lab journey-lab" data-lab="journey" aria-labelledby="journey-caption">
   <div class="lab-top"><span class="lab-kicker">01 / เส้นทางของข้อความ</span><span class="sample-tag">ลำดับภาพประกอบ</span></div>
   <svg class="journey-route" viewBox="0 0 600 92" role="img" aria-labelledby="journey-route-title"><title id="journey-route-title">Telegram delivers an update to the collector, which appends a journal record.</title>
@@ -67,10 +67,10 @@
   <p class="lab-status" data-journey-status role="status">ทั้งสามข้อสังเกตที่ได้รับยังคงอยู่ในบันทึก</p>
   <figcaption id="journey-caption">ขั้นตอนที่เรียบง่ายสำหรับแหล่งข้อมูลที่เลือกไว้แล้วหนึ่งแห่ง บันทึกการดำเนินงานยังแบ่งปันกับบันทึกจริงด้วย การบันทึกข้อมูลขึ้นอยู่กับสิ่งที่บัญชีนั้นสามารถเห็นได้และสิ่งที่ Telegram ส่งมา</figcaption>
 </figure>
-<p>การแจ้งการลบข้อความไม่ระบุทั้งเวลาการลบที่เชื่อถือได้และบุคคลที่ลบข้อความ การไม่เปิดเผยข้อมูลดังกล่าวช่วยรักษาความแตกต่างระหว่างการสังเกตและการคาดเดา</p>
+<p>Telegram ไม่บอกว่าใครลบข้อความหรือลบเมื่อใดแน่ชัด TgWitness เว้นช่องเหล่านั้นว่างไว้แทนการเดา</p>
 
 <h2 id="chain">แก้ไขบันทึก ติดตามแฮช</h2>
-<p>แต่ละบันทึกจะประกอบด้วยค่าแฮชของบันทึกก่อนหน้า ส่วนค่าแฮชของบันทึกนั้นเองจะครอบคลุมสนามข้อมูลของเหตุการณ์ รวมถึงลิงก์ดังกล่าวด้วย จุดตรวจสอบ (checkpoint) ที่เก็บไว้ภายนอกจะกำหนดความยาวของบันทึกและค่าแฮชส่วนหัว (head hash) ที่เฉพาะเจาะจง</p>
+<p>ทุกรายการมีค่าแฮชของรายการก่อนหน้า checkpoint ที่เก็บไว้ที่อื่นตรึงความยาวบันทึกและค่าแฮชสุดท้าย</p>
 <figure class="lab hash-lab" data-lab="hash" aria-labelledby="hash-caption">
   <div class="lab-top"><span class="lab-kicker">02 / HASH-CHAIN SANDBOX</span><span class="sample-tag">SHA-256 ที่แท้จริง · ตัวอย่างบันทึก</span></div>
   <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="เปลี่ยนตัวอย่างบันทึก">
@@ -88,14 +88,14 @@
 </figure>
 
 <h2 id="formulas">กฎระเบียบจริง ๆ ในไม่กี่บรรทัด</h2>
-<div class="formula-card"><span class="lab-kicker">HASH + SIGNATURE</span><div class="formula" translate="no" role="math" aria-label="h zero คือเลขศูนย์ฐานสิบหกจำนวนหกสิบสี่ตัว h i คือค่า SHA-256 ฐานสิบหกของเหตุการณ์มาตรฐาน i ลายเซ็น i คือ Ed25519 ที่คำนวณจากไบต์ดิบของ h i">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p><strong>C</strong> จัดเรียงฟิลด์เหตุการณ์ทั้งเก้าเป็น JSON แบบ UTF-8: คีย์เรียงลำดับ ไม่มีช่องว่างเพิ่มเติม ไม่มีการหลบหลีก ASCII และไม่มี NaN/infinity ค่า <code>previous_hash</code> ของเหตุการณ์คือ h<sub>i−1</sub> ค่า h0 ที่แสดงหมายถึงตัวอักษรศูนย์ 64 ตัว; ลายเซ็นครอบคลุม 32 ไบต์ของดิบของ digest</p></div>
-<p>สนามทั้งเก้าคือ <code>seq</code>, <code>observed_at</code>, <code>source_at</code>, <code>kind</code>, <code>chat_id</code>, <code>message_id</code>, <code>actor_id</code>, <code>payload</code> และ <code>previous_hash</code> นี่คือ<a href="../reference/evidence/#event-canonicalization">รูปแบบการเข้ารหัส JSON ที่ TgWitness กำหนดไว้</a>; ส่วนค่าแฮชและลายเซ็นเองไม่ใช่สนามสำหรับป้อนค่าแฮช</p>
-<div class="formula-card"><span class="lab-kicker">จุดตรวจสอบที่เก็บไว้</span><div class="formula" translate="no" role="math" aria-label="จำนวนการส่งออกต้องไม่น้อยกว่าจำนวนจุดตรวจสอบ และค่าแฮชที่ส่งออก ณ ตำแหน่งจุดตรวจสอบต้องเท่ากับค่าแฮชส่วนหัวที่เก็บไว้">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>ตรวจสอบลายเซ็นของจุดตรวจสอบภายใต้กุญแจผู้เก็บข้อมูลที่ถูกตรึงไว้ แล้วเปรียบเทียบขอบเขตของมันกับบันทึกที่ได้รับการตรวจสอบแล้ว การส่งออกข้อมูลในภายหลังอาจมีบันทึกเพิ่มเติม แต่ต้องสอดคล้องกับจุดตรวจสอบก่อนหน้านี้</p></div>
+<div class="formula-card"><span class="lab-kicker">HASH + SIGNATURE</span><div class="formula" translate="no" role="math" aria-label="h zero คือเลขศูนย์ฐานสิบหกจำนวนหกสิบสี่ตัว h i คือค่า SHA-256 ฐานสิบหกของเหตุการณ์มาตรฐาน i ลายเซ็น i คือ Ed25519 ที่คำนวณจากไบต์ดิบของ h i">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p><strong>C</strong> คือฟิลด์เหตุการณ์เก้าฟิลด์ในรูป JSON แบบ UTF-8: เรียงคีย์ ไม่มีช่องว่างเกิน ไม่ escape ASCII ไม่มี NaN/อนันต์ <code>previous_hash</code> คือ h<sub>i−1</sub>, h<sub>0</sub> คือศูนย์ 64 ตัว ลายเซ็นครอบคลุมไบต์ดิบ 32 ไบต์ของไดเจสต์</p></div>
+<p>ฟิลด์: <code>seq</code>, <code>observed_at</code>, <code>source_at</code>, <code>kind</code>, <code>chat_id</code>, <code>message_id</code>, <code>actor_id</code>, <code>payload</code>, <code>previous_hash</code> ข้อกำหนดฉบับเต็ม: <a href="../reference/evidence/#event-canonicalization">การเข้ารหัสเหตุการณ์</a></p>
+<div class="formula-card"><span class="lab-kicker">จุดตรวจสอบที่เก็บไว้</span><div class="formula" translate="no" role="math" aria-label="จำนวนการส่งออกต้องไม่น้อยกว่าจำนวนจุดตรวจสอบ และค่าแฮชที่ส่งออก ณ ตำแหน่งจุดตรวจสอบต้องเท่ากับค่าแฮชส่วนหัวที่เก็บไว้">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>ตรวจลายเซ็นของ checkpoint กับคีย์ที่ปักหมุดไว้ แล้วเทียบกับบันทึก การส่งออกภายหลังยาวกว่าได้ แต่ต้องตรงกันที่ checkpoint</p></div>
 
 <h2 id="layers">สามคำถาม สามขั้นตอนการตรวจสอบที่แตกต่างกัน</h2>
-<div class="evidence-layers"><a href="../exports/"><span>01 / ความสมบูรณ์</span><strong>บันทึกนี้มีการเปลี่ยนแปลงหรือไม่?</strong><p>ตรวจสอบค่าแฮชและลายเซ็นโดยใช้กุญแจที่เชื่อถือได้แยกต่างหาก</p></a><a href="../witness/"><span>02 / ความต่อเนื่อง</span><strong>เนื้อหาที่เก็บไว้ก่อนหน้านี้คืออะไร?</strong><p>เปรียบเทียบไฟล์ส่งออกที่ลงนามกับจุดตรวจสอบที่เก็บไว้โดยพยานอิสระ</p></a><a href="../cases/"><span>03 / การส่งมอบ</span><strong>เหตุการณ์ทดสอบเหล่านี้ได้รับแล้วหรือไม่?</strong><p>เปรียบเทียบการส่ง แก้ไข และลบที่ควบคุมไว้กับบันทึกของบัญชีแต่ละบัญชี</p></a></div>
-<p class="callout">ใช้ลายเซ็นเพื่อตรวจสอบบันทึกที่เก็บรักษาไว้ ใช้จุดตรวจสอบ (checkpoints) เพื่อเปรียบเทียบกับขอบเขตก่อนหน้า และใช้การทดสอบการส่งมอบที่ควบคุม (controlled delivery tests) เพื่อวัดผลการเก็บรวบรวม แต่ละวิธีตอบคำถามเฉพาะเจาะจง <a href="../reference/evidence/#verification-scope">อ่านขอบเขตการตรวจสอบและสมมติฐานความเชื่อถือ</a></p>
-<p>ติดตามกระบวนการ<a href="../cases/">สืบสวนบัญชีทั้งหมด</a> ตั้งแต่ขั้นตอนการรวบรวมข้อมูลจนถึงการจัดทำชุดเอกสารคดี</p>
+<div class="evidence-layers"><a href="../exports/"><span>01 / ความสมบูรณ์</span><strong>บันทึกนี้มีการเปลี่ยนแปลงหรือไม่?</strong><p>ค่าแฮชและลายเซ็นเทียบกับคีย์ที่คุณเชื่อถือ</p></a><a href="../witness/"><span>02 / ความต่อเนื่อง</span><strong>เนื้อหาที่เก็บไว้ก่อนหน้านี้คืออะไร?</strong><p>เทียบการส่งออกกับ checkpoint ที่พยานเก็บไว้</p></a><a href="../cases/"><span>03 / การส่งมอบ</span><strong>เหตุการณ์ทดสอบเหล่านี้ได้รับแล้วหรือไม่?</strong><p>ส่ง แก้ไข และลบข้อความทดสอบ แล้วดูว่าแต่ละบัญชีจับอะไรได้</p></a></div>
+<p class="callout">ลายเซ็นตอบว่า "ถูกเปลี่ยนหรือไม่" checkpoint ตอบว่า "ตรงกับที่มีก่อนหน้าหรือไม่" ข้อความทดสอบตอบว่า "เราจับได้ครบหรือไม่" <a href="../reference/evidence/#verification-scope">การตรวจสอบพิสูจน์อะไรได้และอะไรไม่ได้</a></p>
+<p>ถัดไป: <a href="../cases/">การสืบสวนทั้งบัญชี</a> ตั้งแต่ต้นจนถึงชุดเอกสารคดี</p>
 <p class="callout" lang="en" dir="ltr"><a href="../../../docs/export-clinic/">Export Clinic: watch the controlled Desktop experiment</a>. Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.</p></article>
 <footer class="guide-footer"><a class="reference" href="../reference/how-it-works/">อ้างอิงเต็ม →</a><a class="next-guide" href="../cases/"><span>ขั้นตอนต่อไป</span><strong>สืบสวนในทุกการสนทนา →</strong></a><p>คู่มือเหล่านี้อธิบายการนำไปใช้ในปัจจุบัน ผลการตรวจสอบความถูกต้องและช่องว่างที่ยังเหลืออยู่ได้รับการบันทึกไว้อย่างแยกต่างหาก <a href="../reference/verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p></footer>
 </main>

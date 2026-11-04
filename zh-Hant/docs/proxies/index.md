@@ -2,45 +2,45 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/proxies/
 
-請保持帳戶連線。明確決定何時其路由可使用伺服器的位址。
+保持帳戶上線，並由您自己決定它是否可以顯示伺服器的 IP。
 
 ## 請先選擇 IP 模式
 
 01**隱藏網址**
 
-請使用代理伺服器。若所有代理伺服器均無法連線，請在未直接連線至 Telegram 的情況下耐心等待。
+僅使用代理。如果都無法使用，就等待。
 
 02**直接作為最後手段**
 
-在設定的延遲時間過後允許直接連線；當有代理伺服器回應時，則切換回可用的代理伺服器。
+延遲後直接連線，一旦有代理可用就切回代理。
 
 03**伺服器需透過隧道或 VPN 連線**
 
-允許透過主機網路建立直接連線。此選項不會安裝或驗證 VPN。
+可以直接連線。它不會替您設定或檢查 VPN。
 
 路徑決定連線方式。IP 模式決定是否允許直接連線。
 
 ## 讓池來維護路徑
 
-1. 開啟**帳戶 → 設定 → 連線設定**。
-2. 請選擇 IP 模式與「**自動 MTProxy**」，或輸入固定路由。
-3. 儲存並執行「**測試 Telegram 連線」**。此功能在登入前亦可運作。
-4. 開始收集後，請確認一則受控訊息已成功寫入日誌。
+1. **帳戶 → 設定 → 連線設定**。
+2. 選擇 IP 模式和**自動 MTProxy**，或固定路由。
+3. 儲存，然後**測試 Telegram 連線**（登入前也能用）。
+4. 開始收集，並傳一則測試訊息給自己。
 
-新的工作區會自動使用 MTProxy 並啟用**「隱藏網址」**功能。代理伺服器池整合了四個公開來源，會檢測條目、保留可用的路徑，並替換失效的代理伺服器。下載失敗時，系統會保留先前的快照。
+新工作區預設使用自動 MTProxy 並開啟**隱藏網址**。代理池會拉取四個公開清單，檢查伺服器，保留好用的，替換失效的。
 
 ## 請使用您自己的代理伺服器
 
-請輸入 SOCKS5 或 HTTP CONNECT 設定資料、貼上受支援的 Telegram 代理伺服器連結，或提供營運商目錄。在變更現行路由前，請先暫停監測。以 `ee` 開頭的偽造 TLS MTProxy 密鑰目前仍不支援。
+SOCKS5、HTTP CONNECT、Telegram 代理連結或營運方目錄。切換前請暫停觀察。Fake TLS 密鑰（`ee`…）無法使用。
 
 **輪替、分享與重試設定**
 
-在**「參數」→「自動 MTProxy」**中，設定失敗閾值、冷卻時間、預定輪替頻率以及每個代理伺服器的帳戶數量。若共享限制設為「1」，當無專用入口可用時，該帳戶將進入等待狀態。清單刷新與探測間隔將遵循主工作區的設定值。使用獨立代理伺服器並不保證會獲得獨立的出口 IP 位址。
+**參數 → 自動 MTProxy**：失敗門檻、冷卻時間、輪替、每個代理的帳戶數。上限為 1 表示帳戶寧可等待也不共用。不同的代理仍可能共用同一個出口 IP。
 
 ## 將 Telegram 與外部請求區分開來
 
-MTProxy 僅傳輸 Telegram 流量。時間戳記、通知、副本及來源驗證則使用獨立的 SOCKS5/HTTP 代理伺服器、該帳戶的 SOCKS5/HTTP 路由，或在 IP 模式允許的情況下使用 Direct 連線。這些外部請求可被停用。
+MTProxy 只承載 Telegram 流量。時間戳記、通知、副本和程式碼檢查走另外的 SOCKS5/HTTP 代理、帳戶的 SOCKS5/HTTP 路由，或在模式允許時直接連線。也可以關閉它們。
 
-明確的 ``TGWITNESS_PROXY_FEED_PROXY`` 參數用於設定資料擷取器的路由。[獨立見證器](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/witness/)會保留其自身的設定。這些控制項不會安裝系統 VPN，也不會重定向瀏覽器流量。
+`TGWITNESS_PROXY_FEED_PROXY` 設定下載清單所用的路由。[見證人](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/witness/)有自己的設定。這些都不會影響您的瀏覽器或系統網路。
 
-查看[所有模式、預設值及來源清單](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/#ip-modes)，或[選擇哪些人可以變更帳戶的路由](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/access/)。
+更多：[模式和預設值](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/#ip-modes)，[誰可以變更路由](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/access/)。

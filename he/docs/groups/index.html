@@ -32,12 +32,12 @@
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../">תיעוד</a> <span aria-hidden="true">/</span> <span aria-current="page">ניהול קבוצת חשבונות</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">מה נבדק ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">תיעוד / 13</p><h1>ניהול קבוצת חשבונות</h1><p class="guide-outcome">נהל מספר חשבונות איסוף במקביל, תוך שמירה על הפרדה בין הרשומות של כל חשבון לבין זהות החתימה שלו.</p>
-<p>קבוצת חשבונות מאחדת את מצב החיבור, בקרות הניטור, ההגדרות המשותפות והייצוא לתצוגה עבודה אחת. הדבר שימושי כאשר מספר חשבונות עוסקים באותה חקירה או זקוקים לתצורת הפעלה אחידה.</p>
+<article class="guide-content"><p class="eyebrow">תיעוד / 13</p><h1>ניהול קבוצת חשבונות</h1><p class="guide-outcome">הריצו כמה חשבונות יחד, כל אחד עדיין עם רשומות ומפתח משלו.</p>
+<p>קבוצה מרכזת סטטוס חיבור, הפעלה/השהיה, הגדרות משותפות וייצואים במסך אחד. שימושי כשכמה חשבונות עובדים על אותו תיק.</p>
 
 <h2 id="overview">פתח את סקירת הקבוצה</h2>
-<p>ב&quot;<strong>חשבונות</strong>&quot;, פתחו את הקבוצה. כל חשבון מציג את מצב הניטור שלו, מסלול החיבור, זמן ההשהיה האחרון שנמדד במסלול כאשר בדיקה נוכחית הצליחה, וההודעה האחרונה שנשמרה. קישורי <strong>&quot;זקוק לתשומת לב&quot;</strong> מפנים לחשבונות שדורשים טיפול; <strong>&quot;תיקון&quot;</strong> פותח את סביבת העבודה והבקרה הרלוונטיות.</p>
-<p><strong>הפעולות</strong> &quot;<strong>התחל הכל</strong>&quot; ו-&quot;<strong>השהה הכל&quot;</strong> פועלות על חשבונות זכאים לאחר אישור. &quot;<strong>הגדרות קבוצתיות</strong>&quot; משתפות הגדרות נבחרות; חשבונות בעלי ערכים משלהם שומרים עליהם עד שתבחר להחליפם.</p>
+<p>פתחו את הקבוצה ב-<strong>חשבונות</strong>. כל חשבון מציג מצב, נתיב, השהיה והודעה שמורה אחרונה. <strong>דורש תשומת לב</strong> מפרט את התקולים, ו-<strong>תיקון</strong> לוקח אתכם ישר לשם.</p>
+<p><strong>הפעלת הכול</strong> / <strong>השהיית הכול</strong> שואלים לפני ביצוע. <strong>הגדרות קבוצה</strong> משותפות, אבל הערכים של החשבון עצמו נשארים עד שתחליפו אותם.</p>
 
 <section class="workflow-lab" data-workflow="groups" aria-labelledby="groups-example-title">
   <h3 id="groups-example-title">בדוק שינוי מסלול בקבוצה</h3>
@@ -59,15 +59,15 @@
 </section>
 
 <h2 id="route">שנה את המסלול על ידי הוספת שלב בדיקה</h2>
-<ol><li>בחר באפשרות &quot;<strong>שינוי מסלול הקבוצה</strong>&quot;, ולאחר מכן בחר את סוג החיבור וההגדרות.</li><li>בחר <strong>באפשרות &quot;סקירת בחירה&quot;</strong>. סקור את החשבונות המפורטים ואת העקיפות המסלוליות של כל אחד מהם.</li><li>בחר באפשרות <strong>&quot;הכנה ובדיקה&quot;</strong>. הבדיקה משתמשת בתעבורת Telegram חדשה; נתיבי HTTP נתמכים מדווחים גם על בדיקת היציאה שלהם ב-HTTPS.</li><li>בחרו באפשרות &quot;<strong>Apply checked connection</strong>&quot; ובדקו את התוצאה של כל חשבון. התצפית שהופעלה קודם לכן מתחדשת במקומות שבהם היישום מצליח; חשבונות לא פעילים נשארים במצב לא פעיל.</li></ol>
-<p>&quot;חביון&quot; מתאר את זמן ההקמה הנמדד של חיבור Telegram. בדיקת IP יציאה מתארת את המסלול באותו זמן הבדיקה שנרשם. לאישור החשבון ולמצב התצפית יש מדדים משלהם; שינוי בקבוצה עשוי להסתיים בתוצאות שונות עבור כל חשבון.</p>
+<ol><li><strong>שינוי נתיב הקבוצה</strong>, בחרו סוג והגדרות.</li><li><strong>סקירת הבחירה</strong>: ראו אילו חשבונות משתנים ולאילו יש נתיב משלהם.</li><li><strong>הכנה ובדיקה</strong> בודק חיבור Telegram חדש, ועוד את IP היציאה כשאפשר.</li><li><strong>החלת החיבור שנבדק</strong> והסתכלו על כל תוצאה. חשבונות פעילים ממשיכים, ושאינם פעילים נשארים כך.</li></ol>
+<p>השהיה היא זמן הקמת החיבור ל-Telegram, ו-IP היציאה הוא מה שהנתיב הראה בזמן הבדיקה. התוצאות יכולות להשתנות בין חשבונות.</p>
 
 <h2 id="shared-chats">יש להשתמש בגישה חופפת</h2>
-<p>הצגת <strong>צ&#x27;אטים במספר חשבונות </strong>מאפשרת <strong>לראות</strong> מקורות משותפים ואת היקף התצפית הזמין בסביבת העבודה. ערוצים וקבוצות-על זכאים יכולים להשתמש באפשרות <strong>&quot;ייצא עם... חשבונות&quot;</strong> כדי לפצל את איסוף היסטוריית הצ&#x27;אט. צ&#x27;אטים פרטיים וקבוצות רגילות נשארים בחשבון ההתחלתי, מכיוון שמספרי ההודעות שלהם שייכים להיסטוריית החשבון.</p>
+<p><strong>צ'אטים שכמה חשבונות רואים</strong> מפרט מקורות משותפים ואת הכיסוי שלהם. ערוצים וקבוצות-על אפשר לייצא בכמה חשבונות בבת אחת עם <strong>ייצוא עם … חשבונות</strong>. צ'אטים פרטיים וקבוצות בסיסיות לא, כי מספרי ההודעות שלהם הם לפי חשבון.</p>
 
 <h2 id="export-group">ייצא את הקבוצה כחבילה</h2>
-<p><strong>קבוצת הייצוא</strong> יוצרת קובץ ZIP אחד המכיל את הייצוא החתום של כל חשבון ואת הרשימה החתומה של קבצים אלה. זהויות סביבת העבודה המקוריות וטביעות האצבעות נותרות זמינות לאימות. יש לבנות נרטיב חוצה-חשבונות באמצעות הפניות אלה; ציר זמן מאוחד יחיד עדיין מורכב בנפרד.</p>
-<p>המשך <a href="../reports/">לעיצוב</a> <a href="../reports/">הדוח</a>, <a href="../case-board/">ל-Case Board בתוך סביבת העבודה</a>, או <a href="../exports/">לאימות הייצוא</a>.</p>
+<p><strong>ייצוא קבוצה</strong> נותן ZIP אחד עם הייצוא החתום של כל חשבון ורשימה חתומה שלהם. כל אחד שומר את טביעת האצבע שלו לאימות. ציר זמן ממוזג עדיין בונים בעצמכם.</p>
+<p>הבא: <a href="../reports/">דוחות</a>, <a href="../case-board/">Case Board</a>, <a href="../exports/">אימות ייצואים</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">הפניה מלאה ←</a><a class="next-guide" href="../cases/"><span>השלב הבא</span><strong>חקור בכל הצ'אטים ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../reference/verification/">מה נבדק ←</a></p></footer>
 </main>

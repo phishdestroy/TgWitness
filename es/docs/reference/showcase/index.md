@@ -54,12 +54,3 @@ La verificación de la firma y la coherencia permite detectar cambios con respec
 Utiliza **«Revocar»** en el gestor de vitrinas o en la sección **«Acceso»** existente para cerrar el enlace y finalizar todas sus sesiones. El visitante borra los registros mostrados cuando una solicitud detecta que el acceso ha finalizado. La caducidad y los permisos se comprueban en cada solicitud. Las autorizaciones de vitrina no se pueden convertir en acceso ordinario al panel in situ; crea una nueva autorización para cambiar de modo.
 
 Sirve la página a través de la dirección HTTPS existente de la instalación. Publicar un enlace no abre un nuevo puerto, ni crea un túnel, ni cambia el DNS. El HTML y la API permanecen en la instalación del usuario. Un visitante de la demostración no puede utilizar las API habituales de mensajes, perfil, archivos multimedia, exportación o gestión con este acceso.
-
-## Comprobaciones de regresión locales
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Ambos utilizan registros sintéticos y un servidor HTTP local. No se conectan a Telegram.

@@ -2,26 +2,26 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/concepts/
 
-Xabar o'zgarishi mumkin. Siz kuzatgan narsalarning yozuvi tekshirib ko'rilishi mumkin bo'lib qolishi kerak.
+Xabarlar o'zgaradi. Ko'rganingiz haqidagi yozuv o'zgarmasligi kerak, va buni istalgan kishi tekshira olishi kerak.
 
-Quyida ikkita kichik tajribani o'rganing. Ular badiiy xabarlarni ishlatadi, brauzeringizda qoladi va hech qachon Telegramga ulanmaydi.
+Quyida ikkita kichik tajriba. Soxta xabarlar, hammasi brauzeringizda ishlaydi, Telegram'ga hech narsa ketmaydi.
 
 ## Suhbat eksportidan tekshiriladigan yozuvga
 
-[Telegram Desktop](https://telegram.org/blog/export-and-more) oflayn foydalanish uchun mavjud suhbat tarixi va media fayllarini HTML yoki JSON formatida [eksport qiladi](https://telegram.org/blog/export-and-more). TgWitness qabul qilingan o'zgarishlarning uzluksiz jurnalini, kuzatuvlar va eksportlarga imzolarni hamda qabul qiluvchilar mustaqil ravishda solishtirishi mumkin bo'lgan tekshiruv nuqtalarini qo'shadi.
+[Telegram Desktop eksporti](https://telegram.org/blog/export-and-more) hozir ko'rinib turgan tarixni HTML yoki JSON sifatida saqlaydi. TgWitness o'zgarishlarning uzluksiz jurnalini, har bir yozuvdagi imzolarni va boshqalar solishtira oladigan nazorat nuqtalarini qo'shadi.
 
 | Vazifa | Telegram Desktop eksporti | TgWitness |
 | --- | --- | --- |
 | Saqlangan suhbatlarni o'qish | HTML yoki JSON tanlangan media bilan | Saqlangan suhbatlar, qidiriladigan jurnal va oflayn hisobotlar |
-| Vaqt o'tishi bilan o'zgarishni kuzating | Eksport qilganda mavjud bo'lgan tarix | Oldin ushlab olingan versiyalar, keyingi tahrirlar va o'chirish kuzatuvlari birga saqlanadi |
-| Topshiruvdan so'ng fayllarni tekshiring | Standart HTML/JSON eksport fayllari imzolangan emas | Imzolangan manifest, har bir yozuv bo'yicha imzolar va muhrlangan HTML/PDF/JSON hisobotlari ishonchli yig'uvchi kalitiga qarshi tekshiriladi |
+| Vaqt o'tishi bilan o'zgarishni kuzating | Eksport qilganda mavjud bo'lgan tarix | Eski versiyalar, keyingi tahrirlar va o'chirishlar, hammasi saqlanadi |
+| Topshiruvdan so'ng fayllarni tekshiring | Standart HTML/JSON eksport fayllari imzolangan emas | Imzolangan manifest, imzolangan yozuvlar va muhrlangan hisobotlar, ishonchli kalit bilan tekshiriladi |
 | Oldingi saqlangan holat bilan solishtiring | Alohida referens nusxa yoki xeshni saqlang | Imzolangan tekshiruv nuqtalari, alohida guvoh va ixtiyoriy tashqi vaqt belgilari |
 
-Faylni imzolash bo'yicha taqqoslash [Telegram Desktop eksporti yozuvchilari](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) tomonidan 2026-yil 2-noyabrda ko'rib chiqilgan ma'lumotlarga asoslanadi. TgWitness yig'uvchining kaliti bilan imzolaydi; quyidagi tekshiruvlar qabul qiluvchining uni qanday ishlatishini ko'rsatadi.
+Taqqoslash 2026-yil 2-noyabr holatiga ko'ra [Telegram Desktop eksport kodi](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output)ga asoslangan.
 
 ## Bir xabar, uch kuzatuv
 
-Telegram yangi xabar, tahrir va o'chirish bildirishnomasini yetkazganda, yig'uvchi uchta alohida kuzatuvni qo'shadi. Tahrir birinchi yozuvni almashtirmaydi. O'chirish bildirishnomasi uni o'chirib tashlamaydi.
+Yangi xabar, tahrir va o'chirish uchta alohida yozuvga aylanadi. Tahrir birinchisining ustidan yozmaydi, o'chirish ham uni yo'q qilmaydi.
 
 01 / XABAR SAFARIIllyustrativ ketma-ketlik
 
@@ -61,11 +61,11 @@ Uchala qabul qilingan kuzatuvlar jurnalda saqlanadi.
 
 Allaqachon tanlangan bitta manba uchun soddalashtirilgan yo'l. Operatsion yozuvlar ham haqiqiy jurnalni baham ko'radi. Qayd qilish hisob qaydnomasi nima ko'rishi va Telegram nima yetkazishiga bog'liq.
 
-O'chirish bildirishnomasi na ishonchli o'chirish vaqtini, na xabarni o'chirgan shaxsni ko'rsatmaydi. Ushbu qiymatlarni noma'lum saqlash kuzatuv bilan taxmin o'rtasidagi farqni saqlab qoladi.
+Telegram xabarni kim yoki aynan qachon o'chirganini aytmaydi. TgWitness taxmin qilish o'rniga bu maydonlarni bo'sh qoldiradi.
 
 ## Yozuvni o'zgartiring. Hashni kuzating.
 
-Har bir yozuv oldingi yozuvning hashini o'z ichiga oladi. Uning o'z hashi, shu havolani ham o'z ichiga olgan holda, voqea maydonlarini qamrab oladi. Tashqarida saqlanadigan tekshiruv nuqtasi jurnalning ma'lum uzunligi va boshlang'ich hashini belgilaydi.
+Har bir yozuvda oldingisining xeshi bor. Boshqa joyda saqlangan nazorat nuqtasi jurnal uzunligi va oxirgi xeshni mahkamlaydi.
 
 02 / HASH-ZAJIR SANDBOXHaqiqiy SHA-256 · namunaviy yozuvlar
 
@@ -105,23 +105,23 @@ h0 = 064
 hi = hex(SHA-256(C(ei)))
 σi = Ed25519.Sign(sk, unhex(hi))
 
-**C** to'qqizta voqea maydonini UTF-8 JSON shaklida serializatsiya qiladi: tartiblangan kalitlar, ortiqcha bo'shliqlar yo'q, ASCII qochirish yo'q va NaN/cheksizlik yo'q. Voqeaning `previous_hash` hi−1 ga teng. Ko'rsatilgan h0 esa 64 ta nol belgisini anglatadi; imzo esa 32 ta xom digest baytlarini qamrab oladi.
+**C** to'qqizta hodisa maydoni UTF-8 JSON ko'rinishida: kalitlar tartiblangan, ortiqcha bo'shliq yo'q, ASCII escaping yo'q, NaN/cheksizlik yo'q. `previous_hash` bu hi−1, h0 64 ta nol, imzolar digestning 32 ta xom baytini qamraydi.
 
-To'qqizta maydon: `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload` va `previous_hash`. Bu TgWitness'ning [hujjatlashtirilgan JSON kod](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#event-canonicalization)lashidir; hash va imzo o'zlari hash-kirish maydonlari emas.
+Maydonlar: `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload`, `previous_hash`. To'liq spetsifikatsiya: [hodisa kodlanishi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#event-canonicalization).
 
 SAQLANGAN NAZORAT NUQTASI
 
 Nexport ≥ Ncheckpoint
 hexport[Ncheckpoint] = Hcheckpoint
 
-Mahkamlangan yig'uvchi kalit ostidagi tekshiruv nuqtasi imzosini tasdiqlang, so'ng uning chegarasini tasdiqlangan jurnal bilan solishtiring. Keyingi eksport ko'proq yozuvlarni o'z ichiga olishi mumkin; u baribir avvalgi tekshiruv nuqtasida mos kelishi kerak.
+Nazorat nuqtasi imzosini mahkamlangan kalit bilan tekshiring, so'ng uni jurnal bilan solishtiring. Keyingi eksport uzunroq bo'lishi mumkin, lekin nazorat nuqtasida mos kelishi shart.
 
 ## Uchta savol, uch xil tekshiruv
 
-[01 / BUTUNLIK**Bu yozuv o'zgardi-mi?** Hashlar va imzolarni alohida ishonchli kalitga qarshi tekshiring.](https://phishdestroy.github.io/TgWitness/uz/docs/exports/)[02 / DAVOMI**Avval nimalar saqlangan edi?** Imzolangan eksportni alohida guvoh tomonidan saqlangan tekshiruv nuqtalari bilan solishtiring.](https://phishdestroy.github.io/TgWitness/uz/docs/witness/)[03 / ETKAZIB BERISH**Bu test voqealari yetib keldimi?** Har bir akkaunt jurnalida amalga oshirilgan jo'natish, tahrirlash va o'chirish harakatlarini mos keltiring.](https://phishdestroy.github.io/TgWitness/uz/docs/cases/)
+[01 / BUTUNLIK**Bu yozuv o'zgardi-mi?** Siz ishonadigan kalitga nisbatan xeshlar va imzolar.](https://phishdestroy.github.io/TgWitness/uz/docs/exports/)[02 / DAVOMI**Avval nimalar saqlangan edi?** Eksportni guvoh saqlagan nazorat nuqtalari bilan solishtiring.](https://phishdestroy.github.io/TgWitness/uz/docs/witness/)[03 / ETKAZIB BERISH**Bu test voqealari yetib keldimi?** Sinov xabarlarini yuboring, tahrirlang va o'chiring, har bir hisob nimani ushlaganini ko'ring.](https://phishdestroy.github.io/TgWitness/uz/docs/cases/)
 
-Saqlangan yozuvlarni tekshirish uchun imzo, oldingi chegarani solishtirish uchun tekshiruv nuqtalari va yig'ish hajmini o'lchash uchun nazoratli yetkazib berish testlaridan foydalaning. Har biri ma'lum bir savolga javob beradi. [Verifikatsiya doirasi va ishonch taxminlarini o'qing.](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope)
+Imzolar "o'zgartirilganmi" degan savolga, nazorat nuqtalari "avvalgisiga mos keladimi" degan savolga, sinov xabarlari "hammasini ushladikmi" degan savolga javob beradi. [Tekshiruv nimani isbotlaydi va nimani isbotlamaydi.](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope)
 
-[Hisobni to'liq o'rganish](https://phishdestroy.github.io/TgWitness/uz/docs/cases/)ni ma'lumotlarni olishdan ish hujjatlari paketini tayyorlashgacha kuzating.
+Keyingisi: boshidan ish paketigacha [butun hisob bo'yicha tergov](https://phishdestroy.github.io/TgWitness/uz/docs/cases/).
 
 [Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reports/
 
-Należy zapewnić czytelnikowi przejrzystą ścieżkę od pytania dotyczącego sprawy do zapisanych danych.
+Prowadź czytelnika od pytania sprawy prosto do zapisanych wpisów.
 
-Studio raportów łączy w sobie funkcję wyboru danych, czytelne historie zmian, wykresy oraz sporządzone przez użytkownika wnioski. Osiem zintegrowanych szablonów ma zastosowanie do obsługiwanych formatów wyjściowych HTML i natywnego PDF. Raporty w formatach HTML, PDF i JSON posiadają własne podpisane pieczęcie; manifest plików ZIP dodatkowo wiąże pliki w pakiecie. Pliki HTML i PDF są pieczętowane po zakończeniu ich ostatecznego formatowania.
+Report studio łączy wybrane dane, historie zmian, wykresy i Twoje wnioski. Osiem projektów, HTML i natywny PDF. Każdy raport HTML, PDF i JSON jest pieczętowany Twoim kluczem.
 
 ## Sporządź raport w trzech krokach
 
-1. Otwórz **Eksport → Konfiguruj i podgląd → Dane**. Wykorzystaj cały obszar roboczy lub wybierz czaty, autorów, daty obserwacji w strefie czasowej UTC oraz typy rekordów. Daty określają, kiedy program TgWitness zarejestrował dany rekord.
-2. W sekcji **„Projekt i treść**” wybierz gotowy szablon projektu i treści. Wybierz wykresy aktywności, etykiety uczestników, transkrypcję, zapisane zmiany oraz opcjonalne materiały z Case Board. Dodaj szczegóły sprawy i notatki z badania.
-3. Otwórz **podgląd**, aby sprawdzić liczbę rekordów, aktywność, uczestników, rekordy z próby oraz brakujące zakresy identyfikatorów. Zapisz ustawienia, a następnie pobierz potrzebny format.
+1. **Eksporty → Konfiguruj i podgląd → Dane**: cała przestrzeń albo wybrane czaty, autorzy, daty (UTC, kiedy TgWitness zobaczył wpis) i typy wpisów.
+2. **Projekt i zawartość**: wybierz projekt i co wejdzie do raportu — wykresy, uczestnicy, transkrypcja, zmiany, elementy Case Board, dane sprawy i notatki.
+3. **Podgląd**: sprawdź liczby, aktywność, próbki i zakresy brakujących ID. Zapisz i pobierz potrzebny format.
 
 ### Uporządkuj te same zapisane materiały tak, aby były przystępne dla czytelnika
 
@@ -55,16 +55,16 @@ Odbiorca sprawdza plik i zaufany odcisk cyfrowy.
 
 ## Wybierz styl czytania
 
-**Sekcje „Classic”, „Editorial”, „Briefing”, „Analytics”, „Technical”, „Overview”, „Reading series” oraz „Ledger & margin”** przedstawiają te same podstawowe zapisy w różnych układach. Zmiana układu nie wpływa na wybór danych ani na zapisane notatki. Język raportu można wybrać spośród 25 obsługiwanych języków.
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin**: te same wpisy, inny wygląd. Przy zmianie zostają wybór i notatki. Dowolny z 25 języków.
 
-Sekcja „Reading series” grupuje sprawę, zakres, ustalenia i zmiany wokół paska sekcji. Sekcja „Ledger & margin” wykorzystuje ponumerowane rozdziały i szerokie marginesy. Obie sekcje obsługują również przeglądy kont w formacie HTML oraz udostępnianie kopii. Natywne pliki PDF są generowane z dołączonymi czcionkami; komputer użytkownika nie wymaga instalacji przeglądarki ani środowiska Node do tworzenia plików PDF. Pliki PDF w językach chińskim, japońskim i koreańskim wymagają dodatkowo odpowiedniej czcionki na serwerze, takiej jak Noto Sans CJK, zainstalowanej w całym systemie lub umieszczonej w katalogu `TGWITNESS_FONT_DIR`. W przypadku jej braku plik ZIP zawiera raporty w formatach HTML i JSON.
+PDF-y powstają z dołączonymi czcionkami, bez przeglądarki. Chiński, japoński i koreański wymagają czcionki takiej jak Noto Sans CJK na serwerze (w systemie lub w `TGWITNESS_FONT_DIR`), inaczej dostaniesz tylko HTML i JSON.
 
 ## Zapoznaj się ze zmianą w jej kontekście
 
-Zapisane zmiany są wyświetlane w wersji „przed” i „po”. Powiadomieniu o usunięciu może towarzyszyć ostatnia zarejestrowana wersja. Odpowiedzi, cytaty, przekazania, reakcje, przyciski i metadane załączników zachowują dostępne odniesienia. Skróty SHA-256 plików i dzienników są oznaczone oddzielnie.
+Edycje pokazują „przed” i „po”, usunięcia — ostatnią zapisaną wersję. Odpowiedzi, przekazania, reakcje, przyciski i załączniki zachowują swoje odwołania.
 
-Podgląd projektu pokazuje elementy okładki, analizy i wykresów przy użyciu dopasowanych rekordów spośród pierwszych 50 000 rekordów źródłowych. Oddzielny podgląd danych skanuje kompletną, stabilną migawkę dziennika w celu uzyskania dokładnych liczb wybranych elementów, z oznaczonymi limitami wyświetlanych próbek. Wygeneruj plik PDF, aby sprawdzić ostateczną paginację. Pełny eksport konta zawiera przegląd w formacie HTML; poszczególne pliki PDF z czatami wykorzystują wybrany układ.
+Podgląd projektu używa pierwszych 50 000 wpisów, podgląd danych liczy wszystko dokładnie. Ostateczny układ stron pokaże dopiero wygenerowany PDF.
 
 ## Starannie dobierz wersję przeznaczoną dla odbiorcy
 
-Filtry raportów kształtują czytelny raport. Pełny plik ZIP z dowodami zachowuje oryginalny dziennik i załączniki. Należy stosować [zminimalizowane przekazywanie danych,](https://phishdestroy.github.io/TgWitness/pl/docs/handover/) gdy odbiorca ma otrzymać tylko wybrane dane. Należy sprawdzić [zawartość raportu i weryfikację](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-reports/) lub [zweryfikować gotowy eksport](https://phishdestroy.github.io/TgWitness/pl/docs/exports/).
+Filtry kształtują tylko raport, ZIP z dowodami nadal zawiera cały dziennik i pliki. Jeśli odbiorca ma dostać mniej, użyj [ograniczonego przekazania](https://phishdestroy.github.io/TgWitness/pl/docs/handover/). Więcej: [zawartość raportu](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-reports/), [weryfikacja eksportu](https://phishdestroy.github.io/TgWitness/pl/docs/exports/).

@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../">홈</a> <span aria-hidden="true">/</span> <a href="../">문서</a> <span aria-hidden="true">/</span> <span aria-current="page">보안을 유지하세요</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">문서 / 14</p><h1>보안을 유지하세요</h1><p class="guide-outcome">텔레그램의 경로, 공개 프록시 목록 및 선택적 외부 서비스에 대해 파악하십시오. 각 비밀 설정이 어떤 기능을 활성화하는지, 보호 기능이 무엇을 포함하는지, 그리고 사용자가 직접 처리해야 할 부분은 무엇인지 파악하십시오.</p>
+<article class="guide-content"><p class="eyebrow">문서 / 14</p><h1>보안을 유지하세요</h1><p class="guide-outcome">무엇이 컴퓨터 밖으로 나가는지, 각 비밀 값이 무엇을 여는지, 보호 장치가 다루는 것과 귀하가 책임질 것.</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>기본 패널 주소</span></div><div role="listitem"><strong>256비트</strong><span>무작위 패널 토큰</span></div><div role="listitem"><strong translate="no">0</strong><span>CDN, 분석 도구 또는 원격 폰트</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>모든 기록에 서명 포함</span></div></div>
 <h2 id="map">모든 정보가 모여 있는 곳</h2>
-<p>수집기, 해당 패널 및 저장된 모든 기록은 이를 실행하는 컴퓨터나 서버에 보관됩니다. 기본적으로 텔레그램만이 유일한 저장 대상이며, 그 외의 저장 대상은 각각 별도의 설정 옵션으로 지정할 수 있습니다.</p>
+<p>수집기, 패널, 모든 기록은 귀하의 컴퓨터에 남습니다. 기본적으로 텔레그램에만 연결하며, 나머지는 모두 별도의 스위치입니다.</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / 기계에서 남는 것</span><span class="sample-tag">설치 방법</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="선택적 대상 위치를 켜거나 끕니다"><button type="button" data-flow-toggle="replica" aria-pressed="false">외부 사이트용 문구</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">알림</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">타임스탬프</button><button type="button" data-flow-toggle="witness" aria-pressed="false">Witness</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>비밀</th><th>보관 위치</th><th>이 도구가 제공하는 이점</th><th>유출될 경우</th></tr></thead>
 <tbody>
-<tr><td><strong>패널 토큰</strong></td><td>데이터 디렉토리에 있는 <code>panel-token.txt</code>; 브라우저는 해당 탭에 대해서만 이를 보관합니다.</td><td>모든 워크스페이스의 모든 내용: 읽기 및 내보내기, 범위 변경, 계정 로그인</td><td>TgWitness 중지, <code>panel-token.txt</code> 삭제, 다시 시작: 새로운 토큰이 생성됩니다.</td></tr>
+<tr><td><strong>패널 토큰</strong></td><td>데이터 디렉터리의 <code>panel-token.txt</code>, 브라우저는 탭마다 보관합니다</td><td>모든 작업 공간의 모든 것</td><td>TgWitness를 멈추고, <code>panel-token.txt</code>를 지우고, 다시 시작: 새 토큰이 생깁니다</td></tr>
 <tr><td><strong>텔레그램 세션</strong></td><td>Vault, 암호화됨 (<code>credentials.enc</code>)</td><td>텔레그램 계정 자체</td><td>텔레그램에서 [<em>설정] → [기기]</em>로 이동하여 세션을 종료하세요.</td></tr>
-<tr><td><strong>서명 키</strong></td><td>Vault, 암호화됨 (<code>signing.enc</code>)</td><td>사용자의 지문으로 검증 가능한 기록에 서명</td><td>별도의 위치에 보관된 체크포인트, 증인 및 타임스탬프를 통해 이전에 존재했던 내용을 확인할 수 있습니다.</td></tr>
-<tr><td><strong>볼트 키</strong></td><td>데이터 옆에 <code>vault.key</code>가 표시되거나, 새로운 데이터 디렉터리를 위한 외부 마스터 키</td><td>금고 해독하기</td><td>세션 키와 서명 키도 유출된 것으로 간주하십시오</td></tr>
-<tr><td><strong>Witness 토큰</strong></td><td>witness 호스트에서</td><td>읽기 전용: 서명된 체크포인트 및 상태</td><td>Witness 페이지에서 삭제하고, 새 페이지를 생성하세요.</td></tr>
-<tr><td><strong>외부 사이트용 카피 키</strong></td><td>Vault; 복구를 위해 한 번만 다운로드하세요</td><td>오프사이트 사본 해독</td><td>저장된 객체를 보유한 사람은 누구나 이를 복호화할 수 있으므로, 해당 사본은 노출된 것으로 간주하십시오.</td></tr>
+<tr><td><strong>서명 키</strong></td><td>Vault, 암호화됨 (<code>signing.enc</code>)</td><td>귀하의 지문으로 기록에 서명하기</td><td>다른 곳에 보관한 체크포인트, 증인, 타임스탬프가 이전에 있던 것을 여전히 보여 줍니다</td></tr>
+<tr><td><strong>볼트 키</strong></td><td>데이터 옆의 <code>vault.key</code> 또는 외부 마스터 키</td><td>볼트</td><td>세션과 서명 키도 유출되었다고 가정하십시오</td></tr>
+<tr><td><strong>Witness 토큰</strong></td><td>witness 호스트에서</td><td>읽기 전용: 체크포인트와 상태</td><td>증인 페이지에서 삭제하고 새로 만듭니다</td></tr>
+<tr><td><strong>외부 사이트용 카피 키</strong></td><td>Vault; 복구를 위해 한 번만 다운로드하세요</td><td>오프사이트 사본</td><td>버킷까지 가진 사람은 복호화할 수 있습니다: 사본이 노출된 것으로 취급하십시오</td></tr>
 </tbody></table></div>
 <h2 id="threats">보호 대상 범위</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> 포함</h3><ul>
-<li>내보낸 기록에서 내용이 변경, 삭제 또는 순서가 재배열된 경우: 해시 체인이나 서명이 더 이상 검증되지 않습니다.</li>
-<li>체크포인트 이후에 축소되거나 재구성된 저널은 다른 곳에 보관된 체크포인트와 더 이상 일치하지 않습니다.</li>
-<li>패널 토큰 추측: 256비트의 무작위 비트로 구성되며, 상수 시간 내에 비교됩니다. 1분당 15회 실패 시 해당 주소에 대한 접근이 거부됩니다.</li>
-<li>유해한 채팅 콘텐츠: 텍스트는 HTML 형식이 아닌 일반 텍스트로 삽입되며, 첨부 파일은 파일로 다운로드됩니다. 패널은 다른 사이트에서 어떠한 콘텐츠도 불러오지 않습니다.</li>
-<li>외부 볼트 키가 포함된 복사된 데이터 디렉토리: 마스터 키가 없으면 세션 및 서명 키는 암호화된 상태로 유지됩니다.</li>
+<li>기록 변경, 삭제, 순서 바꾸기: 해시 체인이나 서명이 깨집니다.</li>
+<li>다른 곳에 체크포인트를 저장한 뒤 저널을 잘라 내거나 다시 만든 경우: 체크포인트가 더 이상 일치하지 않습니다.</li>
+<li>토큰 추측: 256비트 난수, 상수 시간 비교, 1분에 15번 실패하면 주소가 차단됩니다.</li>
+<li>악의적인 채팅 내용: 텍스트는 항상 텍스트로 남고 HTML이 되지 않으며, 첨부 파일은 파일로 다운로드되고, 패널은 다른 사이트에서 아무것도 불러오지 않습니다.</li>
+<li>외부 볼트 키를 쓰는 상태에서 데이터 디렉터리를 도난당한 경우: 세션과 키는 암호화된 채로 남습니다.</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span>, 여러분께 맡깁니다</h3><ul>
-<li>주 패널 토큰이 모든 권한을 갖습니다. 다른 사용자에게는 필요한 계정, 채팅 및 작업에 대한 범위 지정된 접근 권한을 부여하고, 주 키는 비공개로 유지하십시오.</li>
-<li>서버 관리자는 모든 내용을 열람할 수 있으며, 저널을 재작성하고 재서명할 수 있습니다. 지문(fingerprint)과 체크포인트는 별도의 시스템에 보관하십시오.</li>
-<li>TgWitness는 메시지 본문과 미디어 파일을 암호화하지 않습니다. 디스크 암호화와 엄격한 접근 권한 설정을 적용하십시오.</li>
-<li>localhost 외부의 일반 HTTP를 사용하면 네트워크에 토큰이 노출됩니다. HTTPS 또는 SSH 터널을 사용하십시오.</li>
-<li>서명과 체크포인트를 통해 저장된 기록을 확인하십시오. 사용하는 계정 및 출처에 대해 수집 범위를 검토하고 전달 기능을 테스트하십시오.</li>
+<li>메인 토큰은 무엇이든 할 수 있습니다. 다른 사람에게는 범위가 제한된 액세스를 주고, 메인 토큰은 혼자 가지십시오.</li>
+<li>컴퓨터의 관리자는 누구든 모든 것을 읽고 저널에 다시 서명할 수 있습니다. 지문과 체크포인트는 다른 곳에 보관하십시오.</li>
+<li>TgWitness는 메시지와 미디어를 암호화하지 않습니다. 디스크를 암호화하고 권한을 좁히십시오.</li>
+<li>localhost 밖에서 일반 HTTP를 쓰면 토큰이 샙니다. HTTPS나 SSH 터널을 사용하십시오.</li>
+<li>서명은 무엇을 놓쳤는지 알려 주지 않습니다. 귀하의 계정과 소스에서 범위를 확인하고 전달을 테스트하십시오.</li>
 </ul></section>
 </div>
-<p>권한, 유효 기간 및 세션 제한을 설정하여 <a href="../access/">사건에 대한 접근 권한을 공유할 수 있습니다</a>. 위트니스 토큰은 별도의 인증 정보로 유지됩니다.</p>
+<p>권한, 만료, 세션 제한을 두고 <a href="../access/">사건 액세스를 공유</a>합니다.</p>
 <h2 id="hardening">설치 환경 강화</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>8개 중 0개 완료</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>전용 텔레그램 계정을 사용하십시오</strong>. 절대 주 계정을 사용하지 마십시오. 패널 토큰과 세션을 통해 해당 계정을 완전히 제어할 수 있습니다.</span></li>
-<li><span class="check-text"><strong>패널은 127.0.0.1에 유지하십시오.</strong> 원격 접속은 HTTPS(동봉된 Caddy 구성) 또는 SSH 터널을 통해서만 허용하십시오.</span></li>
-<li><span class="check-text">데이터 디렉터리가 있는 <strong>디스크를 암호화하십시오</strong>: 메시지 본문과 미디어는 수신된 그대로 저장됩니다.</span></li>
-<li><span class="check-text"><strong>데이터 디렉터리를</strong> 서비스 계정으로 <strong>제한하십시오</strong>. 유닉스에서는 새 디렉터리에 모드 0700을 부여하고, 윈도우에서는 폴더의 권한을 설정하십시오.</span></li>
-<li><span class="check-text"><strong>볼트 마스터 키는</strong> 서버의 <strong>다른</strong> 곳에 <strong>보관하십시오</strong>: 데이터 디렉터리를 생성하기 전에 <code>TGWITNESS_VAULT_KEY_FILE</code>를 설정하십시오.</span></li>
-<li><span class="check-text"><strong>서명 키 지문과 체크포인트를</strong> 다른 시스템에 <strong>저장하고</strong>, 다른 호스트에 위트니스를 추가하십시오.</span></li>
+<li><span class="check-text"><strong>전용 텔레그램 계정을 사용하십시오</strong>. 주 계정은 절대 쓰지 마십시오.</span></li>
+<li><span class="check-text"><strong>패널은 127.0.0.1에 유지하십시오.</strong> 원격 액세스는 HTTPS(내장 Caddy)나 SSH 터널로만.</span></li>
+<li><span class="check-text"><strong>디스크를 암호화하십시오</strong>. 데이터 디렉터리가 있는 디스크이며, 메시지와 미디어는 그대로 저장됩니다.</span></li>
+<li><span class="check-text"><strong>데이터 디렉터리를 제한하십시오</strong>. 서비스 계정만 접근하도록(Unix에서는 0700, Windows에서는 폴더 권한).</span></li>
+<li><span class="check-text"><strong>서버에서는 볼트 키를 다른 곳에 두십시오</strong>: 처음 시작하기 전에 <code>TGWITNESS_VAULT_KEY_FILE</code>을 설정합니다.</span></li>
+<li><span class="check-text"><strong>지문과 체크포인트를 저장하십시오</strong>. 다른 시스템에 두고, 증인은 다른 호스트에서 실행합니다.</span></li>
 <li><span class="check-text"><code>data/</code>, 세션, <code>panel-token.txt</code> 또는 볼트 키를 GitHub이나 채팅방에 <strong>절대 업로드하지 마십시오</strong>.</span></li>
 <li><span class="check-text">리버스 프록시에서는 <code>Authorization</code> 헤더나 요청 본문을 <strong>기록하지 마십시오</strong>.</span></li>
 </ol>
 </div>
-<details><summary>데이터를 잃지 않고 패널 토큰을 변경할 수 있나요?</summary><p>네. 토큰은 패널을 열기만 합니다. TgWitness를 중지하고, 데이터 디렉터리에서 <code>panel-token.txt</code>를 삭제한 후 다시 시작하세요. 저널, 세션 및 키는 그대로 유지됩니다. <code>TGWITNESS_TOKEN</code>가 설정된 경우, 파일 대신 환경 변수 값이 사용됩니다.</p></details>
-<details><summary>저장된 메시지가 왜 암호화되지 않나요?</summary><p>수집 담당자는 검색, 버전 비교 및 내보내기를 위해 해당 기록을 읽어야 합니다. 동일한 컴퓨터에서 키를 사용하여 데이터를 암호화하더라도, 해당 컴퓨터를 열람할 수 있는 사람에게는 별다른 효과가 없습니다. 디스크 암호화는 작동이 중단되거나 도난당한 디스크를 보호하는 반면, 엄격한 접근 권한 설정은 정상적으로 작동 중인 디스크를 보호합니다.</p></details>
+<details><summary>데이터를 잃지 않고 패널 토큰을 변경할 수 있나요?</summary><p>예, 토큰은 패널만 엽니다. TgWitness를 멈추고, <code>panel-token.txt</code>를 지우고, 다시 시작하십시오. 저널, 세션, 키는 남습니다. <code>TGWITNESS_TOKEN</code>이 설정되어 있으면 파일보다 그 값이 우선합니다.</p></details>
+<details><summary>저장된 메시지가 왜 암호화되지 않나요?</summary><p>수집기는 검색, 비교, 내보내기를 위해 그것들을 읽어야 합니다. 같은 컴퓨터에 있는 키로는 어차피 그 컴퓨터를 읽을 수 있는 사람을 막지 못합니다. 디스크 암호화는 도난당한 디스크를, 권한은 실행 중인 시스템을 보호합니다.</p></details>
 <h2 id="report">취약점 신고</h2>
-<p>GitHub 저장소에서 [<strong>보안] → [취약점 신고]</strong>를 이용하십시오. 버전, 영향 범위 및 재현에 필요한 최소한의 정보를 포함하십시오. 절대로 인증 정보, 계정 디렉터리 또는 실제 증거 아카이브를 보내지 마십시오. 비공개 신고가 불가능한 경우, 취약점 세부 정보를 포함하지 않은 채 비공개 채널을 요청하는 이슈를 생성하십시오.</p>
+<p>GitHub의 <strong>Security → Report a vulnerability</strong>. 버전, 영향, 가짜 데이터로 만든 최소 재현을 포함하십시오. 자격 증명, 계정 폴더, 실제 증거는 절대 보내지 마십시오. 비공개 신고가 꺼져 있으면 익스플로잇 세부 정보 없이 비공개 채널을 요청하는 이슈를 여십시오.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">전체 참고 문헌 →</a><a class="next-guide" href="../start/"><span>다음 단계</span><strong>몇 분 만에 시작하세요 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../reference/verification/">테스트된 내용 →</a></p></footer>
 </main>

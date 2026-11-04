@@ -54,12 +54,3 @@ Signature and consistency verification can detect changes relative to a retained
 Use **Revoke** in the showcase manager or the existing **Access** section to close the link and end all its sessions. The visitor clears displayed records when a request detects that access has ended. Expiry and permissions are checked on every request. Showcase grants cannot be converted to ordinary panel access in place; create a new grant to change modes.
 
 Serve the page through the installation's existing HTTPS address. Publishing a link does not open a new port, create a tunnel or change DNS. The HTML and API remain on the user's installation. A showcase visitor cannot use the ordinary message, profile, media, export or management APIs with this access.
-
-## Local regression checks
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Both use synthetic records and a local HTTP server. They do not connect to Telegram.

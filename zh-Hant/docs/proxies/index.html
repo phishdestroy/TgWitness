@@ -32,19 +32,19 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首頁</a> <span aria-hidden="true">/</span> <a href="../">文件說明</a> <span aria-hidden="true">/</span> <span aria-current="page">選擇代理伺服器</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文件說明 / 06</p><h1>選擇代理伺服器</h1><p class="guide-outcome">請保持帳戶連線。明確決定何時其路由可使用伺服器的位址。</p>
+<article class="guide-content"><p class="eyebrow">文件說明 / 06</p><h1>選擇代理伺服器</h1><p class="guide-outcome">保持帳戶上線，並由您自己決定它是否可以顯示伺服器的 IP。</p>
 <h2 id="routes">請先選擇 IP 模式</h2>
-<figure class="network-map" aria-labelledby="network-caption"><div><span class="network-number">01</span><strong>隱藏網址</strong><p>請使用代理伺服器。若所有代理伺服器均無法連線，請在未直接連線至 Telegram 的情況下耐心等待。</p></div><div><span class="network-number">02</span><strong>直接作為最後手段</strong><p>在設定的延遲時間過後允許直接連線；當有代理伺服器回應時，則切換回可用的代理伺服器。</p></div><div><span class="network-number">03</span><strong>伺服器需透過隧道或 VPN 連線</strong><p>允許透過主機網路建立直接連線。此選項不會安裝或驗證 VPN。</p></div><figcaption id="network-caption">路徑決定連線方式。IP 模式決定是否允許直接連線。</figcaption></figure>
+<figure class="network-map" aria-labelledby="network-caption"><div><span class="network-number">01</span><strong>隱藏網址</strong><p>僅使用代理。如果都無法使用，就等待。</p></div><div><span class="network-number">02</span><strong>直接作為最後手段</strong><p>延遲後直接連線，一旦有代理可用就切回代理。</p></div><div><span class="network-number">03</span><strong>伺服器需透過隧道或 VPN 連線</strong><p>可以直接連線。它不會替您設定或檢查 VPN。</p></div><figcaption id="network-caption">路徑決定連線方式。IP 模式決定是否允許直接連線。</figcaption></figure>
 <h2 id="public">讓池來維護路徑</h2>
-<ol><li>開啟<strong>帳戶 → 設定 → 連線設定</strong>。</li><li>請選擇 IP 模式與「<strong>自動 MTProxy</strong>」，或輸入固定路由。</li><li>儲存並執行「<strong>測試 Telegram 連線」</strong>。此功能在登入前亦可運作。</li><li>開始收集後，請確認一則受控訊息已成功寫入日誌。</li></ol>
-<p>新的工作區會自動使用 MTProxy 並啟用<strong>「隱藏網址」</strong>功能。代理伺服器池整合了四個公開來源，會檢測條目、保留可用的路徑，並替換失效的代理伺服器。下載失敗時，系統會保留先前的快照。</p>
+<ol><li><strong>帳戶 → 設定 → 連線設定</strong>。</li><li>選擇 IP 模式和<strong>自動 MTProxy</strong>，或固定路由。</li><li>儲存，然後<strong>測試 Telegram 連線</strong>（登入前也能用）。</li><li>開始收集，並傳一則測試訊息給自己。</li></ol>
+<p>新工作區預設使用自動 MTProxy 並開啟<strong>隱藏網址</strong>。代理池會拉取四個公開清單，檢查伺服器，保留好用的，替換失效的。</p>
 <h2 id="own">請使用您自己的代理伺服器</h2>
-<p>請輸入 SOCKS5 或 HTTP CONNECT 設定資料、貼上受支援的 Telegram 代理伺服器連結，或提供營運商目錄。在變更現行路由前，請先暫停監測。以 <code>ee</code> 開頭的偽造 TLS MTProxy 密鑰目前仍不支援。</p>
-<details><summary>輪替、分享與重試設定</summary><p>在<strong>「參數」→「自動 MTProxy」</strong>中，設定失敗閾值、冷卻時間、預定輪替頻率以及每個代理伺服器的帳戶數量。若共享限制設為「1」，當無專用入口可用時，該帳戶將進入等待狀態。清單刷新與探測間隔將遵循主工作區的設定值。使用獨立代理伺服器並不保證會獲得獨立的出口 IP 位址。</p></details>
+<p>SOCKS5、HTTP CONNECT、Telegram 代理連結或營運方目錄。切換前請暫停觀察。Fake TLS 密鑰（<code>ee</code>…）無法使用。</p>
+<details><summary>輪替、分享與重試設定</summary><p><strong>參數 → 自動 MTProxy</strong>：失敗門檻、冷卻時間、輪替、每個代理的帳戶數。上限為 1 表示帳戶寧可等待也不共用。不同的代理仍可能共用同一個出口 IP。</p></details>
 <h2 id="separate">將 Telegram 與外部請求區分開來</h2>
-<p>MTProxy 僅傳輸 Telegram 流量。時間戳記、通知、副本及來源驗證則使用獨立的 SOCKS5/HTTP 代理伺服器、該帳戶的 SOCKS5/HTTP 路由，或在 IP 模式允許的情況下使用 Direct 連線。這些外部請求可被停用。</p>
-<p>明確的 `<code>TGWITNESS_PROXY_FEED_PROXY</code>` 參數用於設定資料擷取器的路由。<a href="../witness/">獨立見證器</a>會保留其自身的設定。這些控制項不會安裝系統 VPN，也不會重定向瀏覽器流量。</p>
-<p>查看<a href="../reference/connection/#ip-modes">所有模式、預設值及來源清單</a>，或<a href="../access/">選擇哪些人可以變更帳戶的路由</a>。</p>
+<p>MTProxy 只承載 Telegram 流量。時間戳記、通知、副本和程式碼檢查走另外的 SOCKS5/HTTP 代理、帳戶的 SOCKS5/HTTP 路由，或在模式允許時直接連線。也可以關閉它們。</p>
+<p><code>TGWITNESS_PROXY_FEED_PROXY</code> 設定下載清單所用的路由。<a href="../witness/">見證人</a>有自己的設定。這些都不會影響您的瀏覽器或系統網路。</p>
+<p>更多：<a href="../reference/connection/#ip-modes">模式和預設值</a>，<a href="../access/">誰可以變更路由</a>。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/connection/">完整參考資料 →</a><a class="next-guide" href="../accounts/"><span>下一步</span><strong>連結帳戶 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../reference/verification/">已測試的內容 →</a></p></footer>
 </main>

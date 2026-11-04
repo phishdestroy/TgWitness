@@ -247,25 +247,11 @@ Le DNS de la passerelle gère le résolveur du système. Le DNS sur HTTPS sur le
 
 Cloudflare ne peut pas accéder au contenu chiffré de Telegram, ni aux autres appareils associés au compte Telegram (la liste des appareils du mode « evidence » les recense depuis le côté de Telegram), ni à l’hyperviseur du fournisseur d’accès.
 
-Le 1er novembre 2026, Gateway DNS a été testé sur un environnement Hetzner Cloud réel et un compte Cloudflare gratuit : Hetzner a accepté les règles de sortie, le serveur a installé la version v0.7.0, chaque requête passant par Gateway via TLS, le tunnel rapide a fonctionné à travers ce pare-feu, et `verify` a lu les 19 noms du serveur en retour depuis Cloudflare (miroirs Ubuntu et Hetzner, GitHub, PyPI, NTP, le tunnel, ntfy.sh). Le panel a copié 36 requêtes dans huit fenêtres dans un journal et `verify.py` les a résumées sans omission ; `destroy` a retiré le serveur et le pare-feu, puis a quitté le lieu partagé.
-
 ## Ce que cela n'établit pas
 
 - Le fournisseur et son personnel gèrent l'hyperviseur, les disques et le réseau.
 - Les mesures relatives à l'hôte sont déclarées par le collecteur lui-même.
 - Les anciennes versions des règles de pare-feu ne figurent pas dans tous les journaux des fournisseurs ; seul Linode conserve les versions des règles.
 - Cela n’apporte rien de nouveau concernant l’authenticité des messages ; voir la section « [Preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/) ».
-
-## Testé ici
-
-La logique de déploiement, de verrouillage et de vérification est couverte par des tests automatisés effectués sur des simulations des API Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail et Cloudflare, construites à partir de leurs références API publiées, ainsi que par la signature des requêtes AWS selon les exemples publiés par AWS. `tools/check_cloud_wizard.py` exécute l’assistant de serveur du panneau de la même manière, avec un domaine et un tunnel rapide. `tools/check_tdx.py` vérifie les véritables attestations Intel TDX provenant de dcap-qvl et dstack jusqu’au certificat racine d’Intel (sources dans [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)) ; `tools/check_phala.py`exécute les commandes « deploy », « verify », « journal », « destroy » et l’assistant du panneau sur un Phala Cloud simulé dont les attestations proviennent d’une infrastructure PKI falsifiée calquée sur celle d’Intel. Le chemin Phala n’a pas encore été testé sur Phala Cloud lui-même.
-
-Le 1er novembre 2026, le chemin de tunnel rapide a fonctionné avec le véritable **Hetzner Cloud** (Nuremberg, `cpx22`, TgWitness v0.7.0), le véritable ntfy.sh et GitHub, depuis le panneau de configuration et depuis le code :
-
-- vérification du prix, puis création à partir des boutons du panneau : serveur opérationnel au bout de 13 secondes, déclaration signée avec des hachages d'instance et d'installateur correspondants au bout d'environ deux minutes ;
-- le panneau propre au serveur s'est ouvert via son adresse trycloudflare.com et a accepté le jeton du panneau ; sans ce jeton, il renvoie une réponse 401 ;
-- Après un redémarrage via l’API Hetzner, le serveur a publié une nouvelle adresse signée. **La recherche de l’ adresse actuelle** a abouti, l’ancienne adresse a cessé de répondre, la clé de signature est restée la même ; une publication non signée sur un sujet ntfy.sh a été ignorée ;
-- `verify` par rapport à l’API de Hetzner : serveur, pare-feu sans règles entrantes, déclaration, liaison, mesures de l’hôte, démarrage et hachage source d’un checkout v0.7.0 ont été validés ; les vérifications Cloudflare étaient indisponibles, comme décrit ci-dessus ; le programme d’installation différait de celui généré par la version v0.7.0 et correspondait octet pour octet à celui généré par le code de cette version ;
-- La suppression depuis le panneau a supprimé précisément le serveur et le pare-feu associés au déploiement concerné ; les autres serveurs et pare-feu du même projet n’ont pas été affectés.
 
 Pas encore testé sur de vrais comptes : un déploiement sous votre propre domaine (tunnel Cloudflare et DNS), les autres fournisseurs, un déploiement de débogage et `lock`, un compte Telegram sur un tel serveur, et les mises à jour en direct des versions ultérieures via un tunnel rapide. Vérifiez le premier déploiement sur chaque fournisseur avec `plan`, un déploiement de débogage et `verify` avant de vous en servir dans un dossier.

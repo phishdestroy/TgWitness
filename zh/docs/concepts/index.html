@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首页</a> <span aria-hidden="true">/</span> <a href="../">文档</a> <span aria-hidden="true">/</span> <span aria-current="page">了解证据如何运作</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文档 / 08</p><h1>了解证据如何运作</h1><p class="guide-outcome">消息内容可能会发生变化，但您所观察到的记录应始终可核查。</p>
-<p>请在下方探索两个小型实验。它们使用虚构的消息，完全在您的浏览器内运行，且绝不会连接到 Telegram。</p>
+<article class="guide-content"><p class="eyebrow">文档 / 08</p><h1>了解证据如何运作</h1><p class="guide-outcome">消息会变。您对所见内容的记录不应改变，而且任何人都应能核查这一点。</p>
+<p>下面是两个小实验。消息是虚构的，一切都在您的浏览器中运行，不会发送到 Telegram。</p>
 
 <h2 id="telegram-export">从聊天记录导出到可验证的记录</h2>
-<p><a href="https://telegram.org/blog/export-and-more">Telegram Desktop 的导出功能可</a>将可用的聊天记录和媒体文件保存为 HTML 或 JSON 格式，以便离线使用。TgWitness 增加了接收变更的持续日志、对观察结果和导出文件的签名，以及收件人可独立进行比对的检查点。</p>
+<p><a href="https://telegram.org/blog/export-and-more">Telegram Desktop 导出</a>将当前可见的历史保存为 HTML 或 JSON。TgWitness 增加了持续的变更日志、每条记录的签名，以及他人可以对照的检查点。</p>
 <div class="table-wrap"><table><thead><tr><th scope="col">任务</th><th scope="col">Telegram Desktop 导出</th><th scope="col">TgWitness</th></tr></thead><tbody>
 <tr><td>阅读已保存的对话</td><td>HTML 或 JSON 格式，含选定媒体文件</td><td>已保存的聊天记录、可搜索的日志和离线报告</td></tr>
-<tr><td>跟踪随时间的变化</td><td>导出时可用的历史记录</td><td>早期捕获的版本、后续编辑以及删除记录将一并保留</td></tr>
-<tr><td>移交后检查文件</td><td>标准的 HTML/JSON 导出文件未签名</td><td>已签名的清单、每条记录的签名以及经过可信采集器密钥验证的密封 HTML/PDF/JSON 报告</td></tr>
+<tr><td>跟踪随时间的变化</td><td>导出时可用的历史记录</td><td>旧版本、后续编辑和删除，全部保留</td></tr>
+<tr><td>移交后检查文件</td><td>标准的 HTML/JSON 导出文件未签名</td><td>签名清单、签名记录和封印报告，用可信密钥核查</td></tr>
 <tr><td>与先前保留的状态进行比较</td><td>请保留一份单独的参考副本或哈希值</td><td>已签名的检查点、独立的见证文件以及可选的外部时间戳</td></tr>
 </tbody></table></div>
-<p>文件签名对比基于 2026 年 11 月 2 日审核的 <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">Telegram Desktop 导出工具</a>。TgWitness 使用采集器的密钥进行签名；下文的验证步骤展示了接收方如何使用该密钥。</p>
+<p>本对比基于截至 2026 年 11 月 2 日的 <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">Telegram Desktop 导出代码</a>。</p>
 
 <h2 id="journey">一条消息，三点观察</h2>
-<p>当 Telegram 发送新消息、编辑通知或删除通知时，采集器会分别追加三条独立的记录。编辑操作不会替换最初的记录，删除通知也不会将其清除。</p>
+<p>一条新消息、一次编辑和一次删除会变成三条独立的记录。编辑不会覆盖第一条，删除也不会抹掉它。</p>
 <figure class="lab journey-lab" data-lab="journey" aria-labelledby="journey-caption">
   <div class="lab-top"><span class="lab-kicker">01 / 消息流转</span><span class="sample-tag">示例流程</span></div>
   <svg class="journey-route" viewBox="0 0 600 92" role="img" aria-labelledby="journey-route-title"><title id="journey-route-title">Telegram delivers an update to the collector, which appends a journal record.</title>
@@ -67,10 +67,10 @@
   <p class="lab-status" data-journey-status role="status">所有三条已接收的记录均保留在日志中。</p>
   <figcaption id="journey-caption">针对已选定来源的简化路径。操作记录也会同步到真实的日志中。捕获内容取决于该账户的可见范围以及 Telegram 实际发送的内容。</figcaption>
 </figure>
-<p>删除通知既不提供可靠的删除时间，也不说明是谁删除了该消息。保持这些值的未知状态，有助于区分“观察”与“猜测”。</p>
+<p>Telegram 不会告诉您是谁删除了消息，也不会告诉确切时间。TgWitness 将这些字段留空，而不是去猜测。</p>
 
 <h2 id="chain">修改一条记录。追踪哈希值。</h2>
-<p>每条记录都包含前一条记录的哈希值。其自身的哈希值涵盖了事件字段，包括该链接。一个外部保留的检查点固定了日志的特定长度和起始哈希值。</p>
+<p>每条记录都包含前一条记录的哈希。保存在别处的检查点固定了日志长度和最后一个哈希。</p>
 <figure class="lab hash-lab" data-lab="hash" aria-labelledby="hash-caption">
   <div class="lab-top"><span class="lab-kicker">02 / HASH-CHAIN SANDBOX</span><span class="sample-tag">真实的 SHA-256 · 记录示例</span></div>
   <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="修改示例日志">
@@ -88,14 +88,14 @@
 </figure>
 
 <h2 id="formulas">实际规则，简要概述如下</h2>
-<div class="formula-card"><span class="lab-kicker">哈希值 + 签名</span><div class="formula" translate="no" role="math" aria-label="h zero 表示十六进制数字 64 个零。h i 表示规范事件 i 的十六进制 SHA-256 值。签名 i 是 h i 的原始字节经 Ed25519 加密后的结果。">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p><strong>C</strong> 将九个事件字段序列化为 UTF-8 格式的 JSON：键按顺序排列，无额外空格，不进行 ASCII 转义，且不包含 NaN/无穷大值。该事件的 <code>previous_hash</code> 值为 h<sub>i−1</sub>。显示的 h0 表示 64 个零字符；签名覆盖了 32 个原始摘要字节。</p></div>
-<p>这九个字段分别为 <code>seq</code>、<code>observed_at</code>、<code>source_at</code>、<code>kind</code>、<code>chat_id</code>、<code>message_id</code>、<code>actor_id</code>、<code>payload</code> 和 <code>previous_hash</code>。这是 TgWitness <a href="../reference/evidence/#event-canonicalization">文档中记载的 JSON 编码格式</a>；哈希值和签名本身并非哈希输入字段。</p>
-<div class="formula-card"><span class="lab-kicker">保留检查点</span><div class="formula" translate="no" role="math" aria-label="导出条目数至少等于检查点数量，且检查点位置处的导出哈希值应与保留的头部哈希值相等。">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>请验证固定收集器密钥下的检查点签名，然后将其边界与已验证的日志进行比对。后续导出的文件可能包含更多记录，但其内容在较早的检查点处仍须与原日志一致。</p></div>
+<div class="formula-card"><span class="lab-kicker">哈希值 + 签名</span><div class="formula" translate="no" role="math" aria-label="h zero 表示十六进制数字 64 个零。h i 表示规范事件 i 的十六进制 SHA-256 值。签名 i 是 h i 的原始字节经 Ed25519 加密后的结果。">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p><strong>C</strong> 是以 UTF-8 JSON 表示的九个事件字段：键已排序，无多余空白，无 ASCII 转义，无 NaN/无穷大。<code>previous_hash</code> 是 h<sub>i−1</sub>，h<sub>0</sub> 是 64 个零，签名覆盖 32 字节的原始摘要。</p></div>
+<p>字段：<code>seq</code>、<code>observed_at</code>、<code>source_at</code>、<code>kind</code>、<code>chat_id</code>、<code>message_id</code>、<code>actor_id</code>、<code>payload</code>、<code>previous_hash</code>。完整规范：<a href="../reference/evidence/#event-canonicalization">事件编码</a>。</p>
+<div class="formula-card"><span class="lab-kicker">保留检查点</span><div class="formula" translate="no" role="math" aria-label="导出条目数至少等于检查点数量，且检查点位置处的导出哈希值应与保留的头部哈希值相等。">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>用固定的密钥检查检查点签名，然后将其与日志比较。之后的导出可以更长，但在检查点处必须一致。</p></div>
 
 <h2 id="layers">三个问题，三种不同的核查方式</h2>
-<div class="evidence-layers"><a href="../exports/"><span>01 / 完整性</span><strong>该记录是否发生了变化？</strong><p>使用独立的可信密钥验证哈希值和签名。</p></a><a href="../witness/"><span>02 / 连续性</span><strong>之前保留了哪些内容？</strong><p>将签名导出文件与由独立见证方保存的检查点进行比对。</p></a><a href="../cases/"><span>03 / 交付</span><strong>这些测试事件是否已到达？</strong><p>将受控的发送、编辑和删除操作与每个账户的日志进行比对。</p></a></div>
-<p class="callout">使用签名核查保留的记录，使用检查点与较早的边界进行比对，并使用受控交付测试来衡量采集效果。每项操作都旨在解答一个具体问题。<a href="../reference/evidence/#verification-scope">请阅读验证范围和信任假设。</a></p>
-<p><a href="../cases/">全程追踪从获取账户到整理案件资料包的完整调查</a>过程。</p>
+<div class="evidence-layers"><a href="../exports/"><span>01 / 完整性</span><strong>该记录是否发生了变化？</strong><p>用您信任的密钥核查哈希和签名。</p></a><a href="../witness/"><span>02 / 连续性</span><strong>之前保留了哪些内容？</strong><p>将导出与见证人保存的检查点比较。</p></a><a href="../cases/"><span>03 / 交付</span><strong>这些测试事件是否已到达？</strong><p>发送、编辑和删除测试消息，看看每个账户捕获了什么。</p></a></div>
+<p class="callout">签名回答“是否被改过”，检查点回答“是否与之前的一致”，测试消息回答“我们是否捕获了全部”。<a href="../reference/evidence/#verification-scope">验证能证明什么、不能证明什么。</a></p>
+<p>下一步：从开始到案件包的<a href="../cases/">整个账户调查</a>。</p>
 <p class="callout" lang="en" dir="ltr"><a href="../../../docs/export-clinic/">Export Clinic: watch the controlled Desktop experiment</a>. Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.</p></article>
 <footer class="guide-footer"><a class="reference" href="../reference/how-it-works/">完整引用 →</a><a class="next-guide" href="../cases/"><span>下一步</span><strong>跨所有聊天记录进行调查 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../reference/verification/">已测试的内容 →</a></p></footer>
 </main>

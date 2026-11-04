@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/case-board/
 
-Kaydedilen Telegram gözlemlerini, ekibinizin birlikte inceleyebileceği bir vaka haline getirin.
+Kaydedilen mesajları ekibinizin birlikte çalıştığı bir davaya dönüştürün.
 
-Case Board, yer imlerini, tam metin vurgulamalarını, kaydedilmiş kesitleri ve tartışmaları kaynak referanslarının yanında tutar. Bir koleksiyon, vakaya işlevsel bir yapı kazandırır; imzalı revizyonlar, ekibin vakayı nasıl geliştirdiğini korur.
+Yer imleri, birebir alıntılar, kesitler ve tartışmalar, her biri kaynağına bağlı. Her değişiklik imzalı bir revizyondur.
 
 ## Bir mesajdan vaka kartına
 
-1. Standart veya Uzman modunda **Soruşturma → Case Board'u** açın. Vaka için bir koleksiyon oluşturun ve sohbet kapsamını seçin.
-2. **Günlük** veya kaydedilmiş bir sohbette, "**Tahtaya ekle**" seçeneğini seçin ya da kayda odaklanıp **B** tuşuna basın. Kart, Gelen Kutusu'na girer; kartı anlamlı bir başlık verin ve koleksiyonunuza taşıyın.
-3. Kaydedilmiş bir sohbet mesajından bir bölüm seçin ve tam alıntıyı ve mesaj sürümünü korumak için **Vurgula → pano seçeneğini** seçin. Bunun neden önemli olduğunu açıklayan bir not ekleyin.
-4. Bir iddianın doğrulanması gerektiğinde kartı tartışın, inceleme durumu atayın ve kaynağının bağlamına geri dönün. **Presentation** **özelliğini** kullanarak koleksiyonu iş arkadaşlarınızla birlikte inceleyin.
+1. **Soruşturma → Case Board** (Standart ya da Uzman kipi). Dava için bir koleksiyon oluşturun.
+2. **Günlük**'te ya da bir sohbette **Panoya**'ya (veya **B**) basın. Kart gelen kutusuna düşer; bir başlık verin ve taşıyın.
+3. Bir mesajda metin seçin, **Vurgula → pano** birebir alıntıyı ve sürümü saklar. Neden önemli olduğunu not edin.
+4. Tartışın, bir durum belirleyin, gerektiğinde kaynağa dönün. **Sunum** ekibi malzemenin içinden geçirir.
 
 ### Değiştirilen bir ödeme bağlantısını takip edin
 
@@ -48,16 +48,16 @@ Açıklama ve Telegram gözlemi ayrı ayrı tanımlanabilir durumda kalır.
 
 ## Kullanışlı bir aralığı bir kez kaydedin
 
-Bir sohbetteki iki kaydı Shift tuşuna basarak tıklayın ve **“Arasındaki Dilimle**” seçeneğini kullanın, **“Zamana Göre Dilimle”** seçeneğini seçin veya mevcut Günlük filtrelerini kaydedin. Kaydetmeden önce sayıyı kontrol edin. Kaydedilen sorguyu uygulamak için dilimi yeniden açın; **“Yer iminden bu yana eklenenleri göster”** **seçeneği,** daha sonra eklenen **kayıtları** gösterir.
+İki mesaja Shift ile tıklayıp **Arasında kesit**, **Zamana göre kesit** kullanın ya da geçerli günlük süzgeçlerini kaydedin. **Yer iminden beri eklenen kayıtları göster** sonradan geleni gösterir.
 
-Bir zaman dilimi, toplayıcının gözlem süresini takip eder. Bir mesaj kimliği dilimi, daha sonra yapılan değişiklikler geldikçe seçilen mesajları takip edebilir. Kaydedilen oluşturma sınırı, alıcının orijinal seçimi daha sonraki durumuyla karşılaştırmasına olanak tanır.
+Zaman kesitleri gözlem zamanını kullanır; mesaj kimliği kesitleri bu mesajları değiştikçe izler.
 
 ## Her bir çalışana uygun rolü atayın
 
-**İnceleme Sorumlusu** panoyu okur; **Analist** kartlar ve yorumlar ekler; **Operatör** ayrıca toplama işlemlerini ve inceleme kararlarını yönetir. Çalışma alanı ve sohbet izinleri kartlar, kaynak bağlamı ve tartışmalar için geçerlidir. Açık bir atıf için adlandırılmış erişim izinleri kullanın.
+**İnceleyici** okur, **Analist** kart ve yorum ekler, **Operatör** ayrıca koleksiyonları ve kararları yönetir. Sohbet izinleri kartlar için de geçerlidir.
 
 ## Çalışmayı teslim edilebilir bir hale getirin
 
-Bir dilimi imzalı JSON olarak dışa aktarın veya elektronik tablo için CSV kullanın. Rapor ayarları, seçildiğinde ekip yorumlarıyla birlikte yer imlerini ve dilimleri içerebilir. Bu içerikleri [Report Studio](https://phishdestroy.github.io/TgWitness/tr/docs/reports/)'da seçin; kaydedilmiş bir dilim, raporu otomatik olarak yapılandırmaz. Kısıtlı alıcılar için ayrı [devretme kontroller](https://phishdestroy.github.io/TgWitness/tr/docs/handover/)ini kullanın.
+Kesitler imzalı JSON ya da CSV olarak dışa aktarılır. Raporlar yer imlerini, kesitleri ve yorumları içerebilir; bunu [Report studio](https://phishdestroy.github.io/TgWitness/tr/docs/reports/)'da ayarlayın. Kısıtlı bir alıcı için bir [teslim](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) kullanın.
 
-İmzalı revizyonlar, tam alıntı eşleştirme, seçim doğrulama ve izinler konusunda [Case Board referans](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/)ını okuyun.
+Ayrıntılar: [Case Board başvurusu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/).

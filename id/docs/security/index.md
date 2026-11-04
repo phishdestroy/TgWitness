@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/security/
 
-Ketahui rute-rute untuk Telegram, daftar proxy publik, dan layanan eksternal opsional. Ketahui apa yang dibuka oleh setiap rahasia, apa yang dilindungi oleh fitur-fitur tersebut, dan apa yang menjadi tanggung jawab Anda.
+Apa yang keluar dari mesin Anda, apa yang dibuka setiap rahasia, dan apa yang dilindungi versus apa yang menjadi tanggung jawab Anda.
 
 **127.0.0.1**alamat panel secara default
 
@@ -14,7 +14,7 @@ Ketahui rute-rute untuk Telegram, daftar proxy publik, dan layanan eksternal ops
 
 ## Tempat semua data disimpan
 
-Pengumpul data, panelnya, dan setiap catatan yang disimpan tetap berada di komputer atau server tempat Anda menjalankannya. Telegram adalah satu-satunya tujuan secara default; tujuan lainnya diatur melalui pengaturan terpisah.
+Kolektor, panel, dan setiap catatan tetap di mesin Anda. Secara bawaan hanya Telegram yang dihubungi; selebihnya sakelar terpisah.
 
 06 / APA YANG DITINGGALKAN MESINProses instalasi Anda
 
@@ -56,54 +56,54 @@ Tujuan penyimpanan opsional dikonfigurasi per ruang kerja. Teks pesan dan media 
 
 | Rahasia | Di mana disimpan | Apa yang dapat diakses | Jika bocor |
 | --- | --- | --- | --- |
-| **Token panel** | `panel-token.txt` di direktori data; browser menyimpannya hanya untuk tab tersebut | Semua fitur di setiap ruang kerja: membaca dan mengekspor, mengubah cakupan, masuk ke akun | Hentikan TgWitness, hapus `panel-token.txt`, jalankan kembali: token baru telah dibuat |
+| **Token panel** | `panel-token.txt` di direktori data; browser menyimpannya per tab | Semua hal di setiap ruang kerja | Hentikan TgWitness, hapus `panel-token.txt`, jalankan lagi: Anda mendapat yang baru |
 | **Sesi Telegram** | Vault, terenkripsi (`credentials.enc`) | Akun Telegram itu sendiri | Akhiri sesi di Telegram melalui *Pengaturan → Perangkat* |
-| **Kunci penandatanganan** | Vault, terenkripsi (`signing.enc`) | Catatan yang ditandatangani dan dapat diverifikasi menggunakan sidik jari Anda | Catatan pemeriksaan yang disimpan di tempat lain, beserta saksi dan cap waktu, menunjukkan apa yang ada sebelumnya |
-| **Kunci brankas** | `vault.key` di samping data, atau kunci utama eksternal untuk direktori data baru | Menguraikan isi brankas | Anggaplah sesi dan kunci penandatanganan juga telah bocor |
-| **Token Witness** | Di server TgWitness | Hanya baca: titik pemeriksaan yang ditandatangani dan status kesehatan | Hapus halaman tersebut di halaman Witness; buat yang baru |
-| **Kunci teks di luar situs** | Vault; unduh sekali untuk pemulihan | Menguraikan salinan di luar situs | Siapa pun yang juga memiliki objek yang disimpan tersebut dapat mendekripsinya: anggap salinan tersebut sebagai data yang terekspos |
+| **Kunci penandatanganan** | Vault, terenkripsi (`signing.enc`) | Menandatangani catatan dengan sidik jari Anda | Checkpoint di tempat lain, saksi, dan cap waktu tetap menunjukkan apa yang ada sebelumnya |
+| **Kunci brankas** | `vault.key` di samping data, atau kunci induk eksternal | Brankas | Anggap sesi dan kunci tanda tangan juga bocor |
+| **Token Witness** | Di server TgWitness | Baca-saja: checkpoint dan status | Hapus di halaman saksi, buat yang baru |
+| **Kunci teks di luar situs** | Vault; unduh sekali untuk pemulihan | Salinan luar | Siapa pun yang juga memegang bucket bisa mendekripsinya: anggap salinannya terbuka |
 
 ## Apa saja yang dilindungi oleh perlindungan ini
 
 ### Tercakup
 
-- Catatan yang diubah, dihapus, atau diurutkan ulang dalam ekspor: rantai hash atau tanda tangan tidak lagi dapat diverifikasi.
-- Jurnal yang dipangkas atau dibangun ulang setelah titik pemeriksaan disimpan di tempat lain: titik pemeriksaan yang disimpan tidak lagi cocok.
-- Menebak token panel: 256 bit acak, dibandingkan dalam waktu konstan; setelah 15 kegagalan dalam satu menit, alamat tersebut ditolak.
-- Konten obrolan yang bermuatan negatif: teks dimasukkan sebagai teks biasa, bukan sebagai HTML; lampiran diunduh sebagai berkas; panel tidak memuat apa pun dari situs lain.
-- Direktori data yang disalin dengan kunci brankas eksternal: sesi dan kunci penandatanganan tetap terenkripsi tanpa kunci utama.
+- Catatan yang diubah, dihapus, atau diurutkan ulang: rantai hash atau tanda tangan rusak.
+- Jurnal yang dipotong atau dibangun ulang setelah Anda menyimpan checkpoint di tempat lain: checkpoint tidak cocok lagi.
+- Menebak token: 256 bit acak, perbandingan waktu konstan; 15 kegagalan per menit dan alamatnya diblokir.
+- Konten obrolan yang berbahaya: teks tetap teks, tidak pernah HTML; lampiran diunduh sebagai berkas; panel tidak memuat apa pun dari situs lain.
+- Direktori data yang dicuri dengan kunci brankas eksternal: sesi dan kunci tetap terenkripsi.
 
 ### Terserah Anda
 
-- Token panel utama memiliki kendali penuh. Berikan akses terbatas kepada orang lain ke akun, obrolan, dan tindakan yang mereka butuhkan; jaga agar kunci utama tetap rahasia.
-- Seorang administrator sistem dapat membaca seluruh isi jurnal, serta mengedit dan menandatanganinya kembali. Simpan sidik jari dan titik pemeriksaan pada sistem lain.
-- Teks pesan dan media tidak dienkripsi oleh TgWitness. Gunakan enkripsi disk dan izin akses yang ketat.
-- Penggunaan HTTP biasa di luar localhost akan menampilkan token di jaringan. Gunakan HTTPS atau terowongan SSH.
-- Periksa catatan yang disimpan dengan tanda tangan dan titik pemeriksaan. Tinjau cakupan pengumpulan dan uji pengiriman untuk akun dan sumber yang Anda gunakan.
+- Token utama bisa melakukan apa saja. Beri orang lain akses terbatas dan simpan token utama untuk diri sendiri.
+- Siapa pun yang menjadi admin mesin bisa membaca semuanya dan menandatangani ulang jurnal. Simpan sidik jari dan checkpoint di tempat lain.
+- TgWitness tidak mengenkripsi pesan dan media. Enkripsi disknya, batasi izinnya.
+- HTTP biasa di luar localhost membocorkan token. Gunakan HTTPS atau tunnel SSH.
+- Tanda tangan tidak memberi tahu apa yang terlewat. Periksa cakupan dan uji pengiriman di akun dan sumber Anda sendiri.
 
-[Bagikan akses ke suatu kasus](https://phishdestroy.github.io/TgWitness/id/docs/access/) dengan izin, batas waktu, dan batasan sesi. Token saksi tetap merupakan kredensial terpisah.
+[Bagikan akses ke sebuah kasus](https://phishdestroy.github.io/TgWitness/id/docs/access/) dengan izin, masa berlaku, dan batas sesi.
 
 ## Memperkuat instalasi
 
 0 dari 8 selesai
 
-1. **Gunakan akun Telegram khusus** — jangan pernah menggunakan akun utama Anda. Token panel dan sesi memberikan kendali penuh atas akun tersebut.
-2. **Pertahankan panel pada alamat 127.0.0.1.** Akses secara jarak jauh hanya melalui HTTPS (konfigurasi Caddy yang disertakan) atau terowongan SSH.
-3. **Enkripsi disk** yang menyimpan direktori data: teks pesan dan media disimpan persis seperti saat diterima.
-4. **Batasi direktori data** hanya untuk akun layanan. Direktori baru akan memiliki mode 0700 di Unix; di Windows, atur izin folder tersebut.
-5. **Simpan kunci utama brankas di lokasi lain** pada server: atur ``TGWITNESS_VAULT_KEY_FILE`` sebelum membuat direktori data.
-6. **Simpan sidik jari kunci penandatanganan dan titik pemeriksaan** di sistem lain, lalu tambahkan saksi di host lain.
+1. **Gunakan akun Telegram khusus**, jangan pernah akun utama.
+2. **Biarkan panel di 127.0.0.1.** Akses jarak jauh hanya lewat HTTPS (Caddy bawaan) atau tunnel SSH.
+3. **Enkripsi disk** tempat direktori data; pesan dan media disimpan apa adanya.
+4. **Batasi direktori data** untuk akun layanan (0700 di Unix, izin folder di Windows).
+5. **Simpan kunci brankas di tempat lain** di server: atur `TGWITNESS_VAULT_KEY_FILE` sebelum start pertama.
+6. **Simpan sidik jari dan checkpoint** di sistem lain, jalankan saksi di host lain.
 7. **Jangan pernah mengunggah** kunci `data/`, sesi, `panel-token.txt`, atau vault ke GitHub atau obrolan.
 8. **Jangan mencatat** header `Authorization` atau isi permintaan di proxy terbalik.
 
 **Apakah saya dapat mengubah token panel tanpa kehilangan data?**
 
-Ya. Token tersebut hanya membuka panel. Hentikan TgWitness, hapus `panel-token.txt` dari direktori data, lalu jalankan kembali; jurnal, sesi, dan kunci tetap utuh. Jika `TGWITNESS_TOKEN` telah ditetapkan, nilai lingkungan akan digunakan sebagai pengganti berkas tersebut.
+Ya, token hanya membuka panel. Hentikan TgWitness, hapus `panel-token.txt`, jalankan lagi. Jurnal, sesi, dan kunci tetap ada. Jika `TGWITNESS_TOKEN` diatur, nilai itu yang dipakai, bukan berkasnya.
 
 **Mengapa pesan tidak dienkripsi saat disimpan?**
 
-Pengumpul data harus membaca file-file tersebut untuk melakukan pencarian, membandingkan versi, dan mengekspornya. Mengenkripsi file-file tersebut dengan kunci di mesin yang sama tidak akan banyak membantu jika ada pihak yang dapat mengakses mesin tersebut. Enkripsi disk melindungi disk yang dimatikan atau dicuri; izin akses yang ketat melindungi disk yang sedang berjalan.
+Kolektor harus membacanya untuk mencari, membandingkan, dan mengekspor. Kunci di mesin yang sama tidak akan menghentikan orang yang memang bisa membaca mesin itu. Enkripsi disk melindungi disk yang dicuri, izin melindungi sistem yang sedang berjalan.
 
 ## Laporkan kerentanan
 
-Gunakan **menu Security → Laporkan Kerentanan** di repositori GitHub. Cantumkan versi, dampak, dan reproduksi sintetis minimal. Jangan pernah mengirimkan kredensial, direktori akun, atau arsip bukti asli. Jika pelaporan pribadi tidak tersedia, buka isu untuk meminta saluran pribadi tanpa detail eksploitasi.
+**Security → Report a vulnerability** di GitHub. Versi, dampak, dan contoh minimal dengan data fiktif. Jangan pernah mengirim kredensial, folder akun, atau bukti asli. Jika pelaporan privat nonaktif, buka issue untuk meminta saluran privat, tanpa detail exploit.

@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../">Belgeler</a> <span aria-hidden="true">/</span> <span aria-current="page">Hesap bağla</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Neler test edildi →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Belgeler / 05</p><h1>Hesap bağla</h1><p class="guide-outcome">Her bir çalışma alanı, bir hesabı, o hesaba ait günlüğü ve imza anahtarını barındırır.</p>
+<article class="guide-content"><p class="eyebrow">Belgeler / 05</p><h1>Hesap bağla</h1><p class="guide-outcome">Bir çalışma alanı = bir hesap, onun günlüğü ve anahtarı.</p>
 <h2 id="sign-in">Giriş yöntemini seçin</h2>
-<p><strong>Hesaplar&#x27;ı</strong> açın, bir çalışma alanı ekleyin ve bağlantı ayarlarını açın. Gözlem için özel bir hesap kullanın.</p>
-<ul><li><strong>QR kodu:</strong> Telegram&#x27;ın cihaz ayarlarından tarayın ve yeni oturum açma işlemini onaylayın.</li><li><strong>Telefon numarası:</strong> numarayı, Telegram&#x27;ın gönderdiği kodu ve etkinleştirilmişse iki aşamalı doğrulama şifrenizi girin.</li><li><strong>Oturum içe aktarma:</strong> Desteklenen bir oturumu veya size ait Telegram Desktop verilerini içe aktarın.</li></ul>
-<p>Yerleşik bir API profili seçin veya kendi API kimliğinizi ve hash değerinizi girin. Bir API profili, istemciyi tanımlar; bir hesaba giriş yapmaz veya bağlantıyı anonim hale getirmez.</p>
+<p><strong>Hesaplar</strong> → çalışma alanı ekle → bağlantı ayarları. Bunun için ayrı bir hesap kullanın.</p>
+<ul><li><strong>QR kodu:</strong> Telegram'ın Cihazlar ekranından tarayın ve onaylayın.</li><li><strong>Telefon numarası:</strong> numara, kod, varsa 2FA parolası.</li><li><strong>Oturum içe aktarma:</strong> kendi oturum dosyanız ya da Telegram Desktop verileri.</li></ul>
+<p>Yerleşik bir API profili ya da kendi API ID ve hash'inizi kullanın. Yalnızca uygulamayı tanıtır; giriş yapmaz, hiçbir şeyi gizlemez.</p>
 <details><summary>Önce bir proxy&#x27;ye mi ihtiyacınız var?</summary><p>Giriş yapmadan önce <a href="../proxies/">bağlantı yolunu seçebilir ve test</a> edebilirsiniz. Her hesabın kendine ait bir yolu vardır.</p></details>
 <h2 id="sources">Neyi izleyeceğinizi seçin</h2>
-<ol><li>Kaynak listesini açın ve ihtiyacınız olan sohbetleri, grupları veya kanalları seçin.</li><li>Gözlem işlemine başlamadan önce, medya dosyaları da dahil olmak üzere veri toplama ayarlarını gözden geçirin.</li><li>Toplayıcıyı başlatın ve bağlantısını ve son etkinliklerini kontrol edin.</li></ol>
-<p>Hesap, kaynağa erişebilmelidir. Farklı roller, farklı olayları görebilir; kayıt defteri, o hesabın aldığı bilgileri yansıtır.</p>
-<p>Hesabın tamamını kapsayan bir vaka için <strong>Kaynaklar → Gözlem kapsamı → Soruşturma modu seçeneğini</strong> kullanın, ayarları gözden geçirin ve <strong>Kapsamı kaydet düğmesine</strong> basın. <a href="../cases/">Tam soruşturma kılavuzu</a>, görünür tüm sohbet türlerini, eski geçmişi, kişi profillerini, sohbetler arası referansları ve kanıt aktarımını kapsamaktadır.</p>
+<ol><li>İhtiyacınız olan sohbetleri, grupları ya da kanalları seçin.</li><li>Medya dahil toplama ayarlarını kontrol edin.</li><li>Başlatın, bağlantıyı ve son etkinliği kontrol edin.</li></ol>
+<p>Hesabın erişimi olmalı. Yöneticiler ve üyeler farklı şeyler görür; günlük, bu hesabın aldıklarını gösterir.</p>
+<p>Tüm hesap mı? <strong>Kaynaklar → Gözlem kapsamı → Soruşturma kipi</strong>, kontrol edin ve <strong>Kapsamı kaydet</strong>. Tam rehber: <a href="../cases/">tüm hesabı soruşturmak</a>.</p>
 <h2 id="check">Tüm yolu kontrol edin</h2>
-<p>Kontrol ettiğiniz bir test grubunda, başka bir hesaptan benzersiz bir mesaj gönderin, mesajı düzenleyin ve silin. Günlükte bu üç olayı da doğrulayın, ardından kaydı <a href="../exports/">dışa aktarın ve doğrulayın</a>.</p>
-<p class="callout">&quot;Bağlı&quot; durumu, bağlantının kurulduğunu teyit eder. Yakalanan bir test mesajı, belirli bir olayın bu çalışma alanına ulaştığını teyit eder.</p>
+<p>Test grubunuzda başka bir hesaptan mesaj gönderin, düzenleyin ve silin. Üç olayın da günlükte görünmesi gerekir. Sonra <a href="../exports/">dışa aktarın ve doğrulayın</a>.</p>
+<p class="callout">"Bağlı" bağlantının çalıştığı anlamına gelir. Yakalanan bir test mesajı ise olayların gerçekten ulaştığı anlamına gelir.</p>
 <h2 id="more">Başka bir hesap ekle</h2>
-<p><strong>Hesaplar</strong> bölümünde başka bir çalışma alanı oluşturun ve kurulum adımlarını tekrarlayın. Daha sonra dışa aktarılan verileri tanımlayabilmek için her hesabın imza anahtarı parmak izini saklayın.</p>
+<p><strong>Hesaplar</strong> bölümünde yeni çalışma alanı, aynı adımlar. Dışa aktarımları sonra ayırt edebilmek için her hesabın anahtar parmak izini not edin.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/accounts/">Tam referans →</a><a class="next-guide" href="../exports/"><span>Sonraki adım</span><strong>Dışa aktarma ve doğrulama →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="../reference/verification/">Neler test edildi →</a></p></footer>
 </main>

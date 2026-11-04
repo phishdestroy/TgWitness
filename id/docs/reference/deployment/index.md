@@ -34,17 +34,11 @@ Instalasi asli memerlukan Python 3.11 atau yang lebih baru dengan `venv` dan `en
 - **macOS:** instal distribusi Python 3.11+ terbaru; jangan berasumsi bahwa interpreter yang disediakan sistem operasi sudah memenuhi persyaratan. Gunakan `python3 start.py` dari direktori proyek.
 - **Docker:** gunakan Docker Engine/Desktop dengan Compose v2.20 atau yang lebih baru. Docker Desktop harus menggunakan kontainer Linux di Windows. Kontainer tersebut menginstal ketergantungan Python-nya sendiri; host tidak memerlukan instalasi Python terpisah.
 
-Gunakan penyimpanan lokal yang persisten untuk direktori data. Rencanakan kapasitas berdasarkan pesan, media, pertumbuhan WAL, ekspor, dan cadangan; tidak ada spesifikasi minimum disk/RAM universal berdasarkan bukti untuk setiap beban kerja. Arsitektur CPU dan versi Python yang tidak memiliki roda dependensi yang kompatibel mungkin memerlukan alat pembangunan tambahan dan kualifikasi tersendiri. "Portabel" bukanlah klaim dukungan universal terhadap sistem operasi atau perangkat keras.
-
-Windows 11/Python 3.12 telah diverifikasi secara lokal. Definisi untuk Linux/macOS/kontainer serta CI telah disediakan, namun belum dijalankan di host pengembangan ini. Lihat [berkas VERIFICATION.md](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/) untuk cakupan yang tepat.
-
 ## Komputer lokal
 
 Gunakan `Start.cmd` di Windows atau `sh start.sh` di Linux/macOS. `scripts\Setup.cmd` atau `sh start.sh --setup-only` mempersiapkan lingkungan. Peluncur akan menginstal dependensi pada penggunaan pertama; peluncuran selanjutnya akan menggunakan kembali lingkungan tersebut. Akses internet diperlukan untuk pengaturan dan pengumpulan pesan Telegram, namun penelusuran catatan yang ada dan pembuatan ekspor dapat dilakukan secara offline.
 
 Jalankan `python start.py --check` setelah pengaturan untuk memeriksa dependensi lokal, Ed25519, penyimpanan, konfigurasi kunci, dan alamat pendengar tanpa memulai pengumpul. Gunakan `--json` untuk keluaran terstruktur. Jalankan `--data-dir`, `--host`, dan `--port` sesuai kebutuhan. Pemeriksaan ini tidak menginstal paket, membuat jurnal, atau menghubungkan Telegram; ini bukan penilaian integritas atau cakupan. Proses startup memverifikasi secara terpisah jurnal yang sudah ada. `python start.py --help` juga menghindari instalasi.
-
-Opsi:
 
 Setelah menjalankan start.py, jalankan perintah tambahan dengan `.venv\Scripts\python.exe` di Windows atau `.venv/bin/python` di Linux/macOS, atau aktifkan lingkungan tersebut terlebih dahulu. Contoh `python -m ...` di bawah ini mengasumsikan bahwa lingkungan tersebut sudah aktif.
 
@@ -73,8 +67,6 @@ Buat sendiri di Windows 64-bit dengan Python 3.12:
 ```
 python tools/build_portable.py
 ```
-
-Pembangun memverifikasi checksum saat runtime, menginstal dependensi yang dibatasi ke dalam paket, menjalankan pemeriksaan kesiapan dengan interpreter tertanam, dan menulis berkas ZIP serta checksum ke `dist/`.
 
 ## Kontainer
 
@@ -121,8 +113,6 @@ docker compose logs witness                     # witness key fingerprint
 Layanan ini terhubung ke pengumpul di dalam jaringan Compose di `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` menggantikannya, misalnya `/profiles/<workspace ID>` untuk ruang kerja lain). Untuk saksi di server terpisah yang dijalankan oleh pihak lain, gunakan `deploy/compose/compose.witness.yaml` di sana dengan `TGWITNESS_WITNESS_COLLECTOR` disetel ke alamat HTTPS pengumpul; berkas tersebut hanya berisi saksi.
 
 ## Instal gambar yang telah dipublikasikan
-
-Fitur ini tersedia setelah [alur kerja rilis](https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/#automated-github-releases) berhasil diselesaikan dan konfigurasi paket GHCR publik selesai. Nama pemilik repositori tidak terkodekan secara permanen dalam pohon sumber ini. Gunakan gambar yang ditampilkan dalam ringkasan alur kerja rilis tersebut.
 
 Salin `deploy/env.example` ke `.env`. Atur `TGWITNESS_IMAGE` ke versi yang telah dipublikasikan, dengan menggunakan jalur repositori **huruf kecil**, misalnya:
 
@@ -202,18 +192,6 @@ Gunakan berkas Compose pada instalasi Anda untuk perintah stop/copy di atas juga
 
 Periksa akses panel, identitas akun, status pemantauan, dan cakupan setelah pembaruan. Memulai ulang tidak akan memulihkan pembaruan Telegram yang terlewat. Pengembalian ke versi sebelumnya mungkin memerlukan cadangan sebelum pembaruan jika versi mendatang mengubah format penyimpanan.
 
-## Rilis otomatis di GitHub
-
-[Alur kerja rilis](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) siap digunakan setelah proyek ini di-push ke repositori GitHub dengan Actions diaktifkan. Alur kerja ini berjalan saat Rilis GitHub **diterbitkan**, termasuk prarilis. Draf dan push tag saja tidak akan menerbitkan paket.
-
-1. Tentukan versi paket dan catatan perubahan, lalu terbitkan rilis yang diberi tag `v` ditambah versi `pyproject.toml` yang tepat, seperti `v0.8.0`.
-2. Alur kerja ini memvalidasi tag dan menjalankan pemeriksaan Python yang dapat digunakan di Windows/Linux/macOS, general/account-import/QR browser, paket sumber, dan Docker. Instalasi asli yang baru juga dilakukan pada ketiga sistem operasi tersebut menggunakan Python 3.12.
-3. Setelah pemeriksaan tersebut lulus, sistem akan melakukan pengujian awal (smoke test) terhadap gambar ARM64 di bawah QEMU, mempublikasikan gambar AMD64/ARM64 ke `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, serta melampirkan berkas ZIP sumber dan roda Python beserta berkas SHA-256 pendampingnya. Berkas ZIP portabel Windows adalah artefak persis yang diuji oleh alur kerja pemeriksaan; alur kerja rilis mengunduh dan mempublikasikan artefak tersebut beserta checksum-nya.
-4. Tugas terakhir mengunduh kembali ketiga paket yang telah diterbitkan dan memverifikasi checksum-nya. Selanjutnya, tugas tersebut menerbitkan `SHA256SUMS.txt` dan `RELEASE-MANIFEST.json`, dengan mencatat versi, revisi sumber, dan ukuran aset. Proses unggahan menolak untuk menimpa aset rilis yang sudah ada.
-5. Setelah publikasi pertama, buka pengaturan paket GHCR dan atur visibilitas menjadi **Publik** jika dimaksudkan untuk pengunduhan gambar secara anonim. Repositori sumber terbuka saja tidak menjamin paket kontainer yang terbuka. Kebijakan organisasi harus mengizinkan publikasi paket. Alur kerja ini menggunakan `GITHUB_TOKEN`; kata sandi registri atau kredensial VPS tidak boleh disimpan di repositori.
-
-Keberhasilan alur kerja jarak jauh belum dapat dipastikan melalui persiapan lokal ini. Emulasi ARM64 hanyalah uji coba awal, bukan kualifikasi perangkat keras asli atau Telegram yang berjalan secara langsung. Ini mengotomatiskan pengemasan rilis; memulai server masih memerlukan perintah Compose serta prasyarat domain/host-nya. Server yang sudah ada tidak akan di-upgrade atau di-restart secara otomatis saat rilis diterbitkan.
-
 ## Server jarak jauh
 
 Jaga agar layanan tetap terikat pada loopback dan gunakan terowongan SSH, atau hentikan HTTPS di proksi terbalik. Berkas Compose dasar hanya berlaku secara lokal; overlay `deploy/compose/compose.https.yaml` opsional menyediakan Caddy untuk domain yang telah dikonfigurasi. Jaga agar token bearer tidak muncul di URL dan log proxy. Proksi terbalik harus membatasi ukuran permintaan dan laju koneksi. Jangan mengekspos HTTP biasa ke Internet.
@@ -244,14 +222,6 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 Gunakan `--profile ID` dari **Ekspor → ID Ruang Kerja** untuk ruang kerja lain, `--format zip|jsonl|csv|html`, `--url https://your-server` untuk server jarak jauh, atau `--max-mib` untuk mengubah batas transfer 5 GiB. HTTP biasa hanya diizinkan untuk loopback. Token dikirim melalui header, pengalihan ditolak, file yang sudah ada tidak ditimpa, dan unduhan yang belum selesai tidak dipublikasikan sebagai file yang sudah selesai. Jika TGWITNESS_TOKEN menggantikan token yang dihasilkan, gunakan berkas yang dilindungi secara terpisah yang berisi nilai aktif tersebut: panel-token.txt tidak akan ditimpa oleh penggantian tersebut. SHA-256 perintah ini hanyalah checksum transfer; verifikasi ZIP yang ditandatangani secara independen.
 
-File ekspor server tetap berada di dalam direktori `temporary-exports/` pribadi masing-masing ruang kerja. Respons yang berhasil akan membersihkan berkas-berkasnya. Ekspor yang terputus akan dihapus pada pengaktifan ruang kerja berikutnya saat kunci instans eksklusifnya masih berlaku. Direktori ini merupakan bagian dari model ancaman/kapasitas penyimpanan; gunakan volume data terenkripsi. Transfer berskala produksi berukuran multi-gigabyte masih memerlukan pengujian pada sistem target Anda.
-
 Panel menampilkan media yang sedang dalam antrian/gagal, media tertunda tertua, ruang disk kosong, jeda permintaan Telegram, dan sumber yang aksesnya belum dikonfirmasi. Diagnostik ini bukanlah pemantau pengiriman end-to-end yang lengkap. Ruang kerja berbagi proses; akun yang aktif masih dapat memengaruhi yang lain. Proses pekerja terpisah, retensi/rotasi, pemulihan pembaruan yang tahan lama, serta kualifikasi penerapan penuh tetap berlaku. Akses panel yang dibatasi didokumentasikan dalam [bagian akses dan izin](https://phishdestroy.github.io/TgWitness/id/docs/reference/access/); titik pemeriksaan independen dijelaskan dalam [panduan saksi](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/).
-
-## Opsi koneksi dan perlindungan
-
-Rute koneksi ditentukan per ruang kerja dan harus dikonfigurasi sebelum otorisasi. SOCKS5/HTTP CONNECT menggunakan dependensi python-socks yang disematkan. MTProxy menggunakan transportasi perantara acak eksperimental dari Telethon; rahasia TLS palsu tidak didukung. Fallback langsung bergantung pada [mode IP](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/#ip-modes) yang dipilih: **“Sembunyikan alamat”** menolaknya; **“Langsung sebagai pilihan terakhir**” mengizinkannya setelah penundaan. **“Server di balik terowongan atau VPN”** mengizinkan rute langsung tetapi tidak membuat VPN. Ini bukan kebijakan jaringan sistem secara keseluruhan.
-
-Untuk instalasi baru, TGWITNESS_VAULT_KEY_FILE mengarah ke berkas kunci utama acak yang dilindungi secara terpisah. Pasang berkas tersebut dalam mode baca-saja di luar direktori /data dalam sebuah kontainer. Simpan metadata salt publik vault.external.json secara terpisah untuk setiap ruang kerja dan kunci utama. Brankas lokal yang sudah ada memerlukan migrasi terencana; pengaturan variabel ini tidak akan mengonversinya secara otomatis. Penyimpanan pesan/media serta ekspornya tidak dienkripsi oleh aplikasi. Gunakan volume terenkripsi dan penyimpanan sementara pribadi yang memadai jika diperlukan.
 
 Prosedur terperinci: [koneksi/keamanan](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/) dan [mode operasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/).

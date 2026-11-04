@@ -247,25 +247,11 @@ Gateway DNS, sistem çözümleyicisini kapsar. 443 numaralı bağlantı noktası
 
 Cloudflare, Telegram’ın şifrelemesinin içini, Telegram hesabındaki diğer cihazları (kanıt modundaki cihaz listesi bunları Telegram tarafında kaydeder) veya sağlayıcının hipervizörünü göremez.
 
-1 Kasım 2026'da Gateway DNS, gerçek bir Hetzner Cloud sunucusu ve ücretsiz bir Cloudflare hesabı üzerinde çalıştırıldı: Hetzner, giden trafik kurallarını kabul etti; sunucuya v0.7.0 sürümü yüklendi ve her arama TLS üzerinden Gateway'den geçti; hızlı tünel bu güvenlik duvarından geçebildi ve `verify` Cloudflare'den sunucunun 19 adını geri okudu (Ubuntu ve Hetzner aynaları, GitHub, PyPI, NTP, tünel, ntfy.sh). Panel, sekiz pencerede 36 sorguyu bir günlüğe kopyaladı ve `verify.py` bunları eksiksiz bir şekilde özetledi; `destroy` sunucuyu ve güvenlik duvarını kaldırdı ve paylaşılan konumu terk etti.
-
 ## Bunun neyi kanıtlamadığı
 
 - Hizmet sağlayıcı ve personeli, hipervizörü, diskleri ve ağı kontrol eder.
 - Barındırma ölçümleri, toplayıcı tarafından kendi beyanına göre bildirilir.
 - Eski güvenlik duvarı kuralı içerikleri her sağlayıcının günlüğünde bulunmaz; yalnızca Linode kural sürümlerini saklar.
 - Mesajların gerçekliği konusunda yeni bir bilgi içermez; bkz. [Kanıt](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/).
-
-## Burada test edilmiştir
-
-Dağıtım, kilitleme ve doğrulama mantığı, simüle edilmiş Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail ve Cloudflare API'lerine karşı, bunların yayınlanmış API referanslarından oluşturulan otomatik testlerle ve AWS'nin yayınlanmış örneklerine göre AWS istek imzalamasıyla kontrol edilir. `tools/check_cloud_wizard.py` Panelin sunucu sihirbazını da aynı şekilde, bir etki alanı ve hızlı bir tünel kullanarak çalıştırır. `tools/check_tdx.py` dcap-qvl ve dstack'ten gelen gerçek Intel TDX doğrulamalarını Intel'in kök sertifikasına kadar doğrular (kaynaklar [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md) dosyasında bulunur); `tools/check_phala.py`sertifikaları Intel'inkine benzeyen sahte bir PKI'dan gelen simüle edilmiş bir Phala Cloud üzerinde dağıtım, doğrulama, günlük, imha ve panel sihirbazını çalıştırır. Phala yolu henüz Phala Cloud'un kendisinde denenmemiştir.
-
-1 Kasım 2026'da hızlı tünel yolu, panelden ve koddan gerçek **Hetzner Cloud** (Nürnberg, `cpx22`, TgWitness v0.7.0), gerçek ntfy.sh ve GitHub ile çalıştı; bu işlem hem panelden hem de kod üzerinden gerçekleştirildi:
-
-- fiyat kontrolü, ardından panelin düğmelerinden oluşturma: sunucu 13 saniye sonra çalışır hale gelir, yaklaşık iki dakika sonra, örnek ve yükleyici hash değerleriyle eşleşen imzalı bildirim;
-- sunucunun kendi paneli, trycloudflare.com adresi üzerinden açıldı ve panel jetonunu kabul etti; jeton olmadan 401 yanıtı verir;
-- Hetzner API'si aracılığıyla yeniden başlatmanın ardından sunucu yeni bir imzalı adres yayınladı. **Mevcut adresi** buldum, eski adres yanıt vermemeye başladı, imzalama anahtarı aynı kaldı; ntfy.sh konusuna yapılan imzalanmamış bir gönderi göz ardı edildi;
-- `verify` Hetzner'in API'sına göre: sunucu, gelen kuralları olmayan güvenlik duvarı, bildirim, bağlama, ana bilgisayar ölçümleri, önyükleme ve v0.7.0 checkout'unun kaynak hash'i geçti; Cloudflare kontrolleri, yukarıda açıklandığı gibi kullanılamıyordu; yükleyici, v0.7.0'ın derlediği yükleyiciden farklıydı ve bu sürümün kodunun derlediği yükleyiciyle bayt bayt aynıydı;
-- panelden silme işlemi, dağıtım etiketindeki sunucuyu ve güvenlik duvarını tam olarak kaldırdı; aynı projedeki diğer sunucular ve güvenlik duvarları ise etkilenmedi.
 
 Henüz gerçek hesaplarda çalıştırılmamıştır: kendi alan adınız altında bir dağıtım (Cloudflare tüneli ve DNS), diğer sağlayıcılar, bir hata ayıklama dağıtımı ve `lock`, böyle bir sunucudaki bir Telegram hesabı, ve hızlı bir tünel aracılığıyla sonraki sürümlerin canlı güncellemeleri. Her sağlayıcıdaki ilk kurulumu şu adresle kontrol edin: `plan`bir hata ayıklama dağıtımını kontrol edin ve `verify` bir vakada buna güvenmeden önce kontrol edin.

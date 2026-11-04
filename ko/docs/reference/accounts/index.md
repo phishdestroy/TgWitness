@@ -241,20 +241,6 @@ TData는 텔레그램 데스크톱 애플리케이션(desktop.telegram.org에서
 
 **계정 → 텔레그램에서 로그아웃**(관찰 일시 중지)은 텔레그램에 세션 종료를 요청하므로, 해당 세션은 계정의 **설정 →**기기에서 사라지고, 워크스페이스 볼트에서도 제거됩니다. 기록, 소스, 설정 및 서명 키는 유지되며, 기록에는 로그아웃 내역이 남습니다. 워크스페이스는 여전히 해당 계정에 속합니다: 오직 그 계정만이 다시 연결할 수 있습니다. 텔레그램이 응답하지 않더라도 세션은 여전히 여기에서 제거되며 패널에 해당 내용이 표시됩니다. 텔레그램의 **설정 →**기기에서 세션을 종료하십시오.
 
-## 텔레톤 세션을 오프라인으로 변환
-
-이 패널은 `.session` 파일을 직접 불러옵니다. 오프라인에서 StringSession 파일로 변환하려면 프로젝트 폴더에서 다음 명령을 실행하십시오:
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-이 변환기는 Telethon SQLite 파일(최대 64 MiB)만 읽으며, 입력 데이터를 절대 수정하지 않고, 네트워크 요청을 수행하지 않으며, 기존 출력 파일을 덮어쓰지 않습니다.
-
 ## 계정 파일 안전하게 보관하기
 
 - 모든 `.session`, TData ZIP, StringSession, 인증 키 및 계정 JSON을 비밀번호처럼 취급하십시오. TgWitness는 가져온 인증 정보를 암호화된 금고에 보관하므로, 나중에 원본 파일을 삭제해도 됩니다.

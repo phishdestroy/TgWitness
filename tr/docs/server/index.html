@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../">Belgeler</a> <span aria-hidden="true">/</span> <span aria-current="page">Çalışır durumda tutun</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Neler test edildi →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Belgeler / 17</p><h1>Çalışır durumda tutun</h1><p class="guide-outcome">Toplayıcıyı her zaman çalışır durumda tutun ve yeniden başlatma işlemlerinde verilerinin bozulmamasını sağlayın.</p>
+<article class="guide-content"><p class="eyebrow">Belgeler / 17</p><h1>Çalışır durumda tutun</h1><p class="guide-outcome">Toplayıcıyı ayakta, verileri de yeniden başlatmalar boyunca güvende tutun.</p>
 <h2 id="launch">Bir başlatma yöntemi seçin</h2>
-<p>Yerel kurulum için, <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> dizinindeki <a href="../start/">başlatıcı</a>yı ve hizmet örneklerini kullanın. Docker için, Docker Compose&#x27;u kurun ve proje dizininden çalıştırın:</p>
+<p>Yerel: <a href="../start/">başlatıcı</a> ve <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> içindeki hizmet şablonları. Docker, proje klasöründen:</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>Varsayılan panel, ana bilgisayarın loopback adresinde, 8787 numaralı bağlantı noktasında dinleme yapar. Paneli yerel olarak veya bir SSH tüneli üzerinden açın. Panelin kilidini açmak için ikinci komuttaki jetonu kullanın.</p>
+<p>Panel localhost:8787'yi dinler. Yerelde ya da bir SSH tüneliyle, ikinci komuttaki belirteçle açın.</p>
 <h2 id="storage">Tüm veri dizinini koruyun</h2>
-<p>Yerel kurulumlarda <code>data/live</code> kullanılır. Docker ise kalıcı <code>tgwitness-data</code> birimini kullanır. Günlükleri, hesap oturumlarını, anahtarları ve çalışma durumunu bir arada tutun. İmzalı bir dışa aktarım, yararlı bir kanıt olmakla birlikte tam bir kurulum yedeği değildir.</p>
-<ol><li>Tutarlı bir yedekleme almadan önce veri toplama işlemini durdurun.</li><li>Özel verilerin bulunduğu dizinin tamamını, ana sunucu dışındaki korumalı bir depolama alanına kopyalayın.</li><li>Yedeklemeye güvenmeden önce, yedeklemeyi izole bir kurulumda geri yüklemeyi test edin.</li></ol>
+<p>Yerel: <code>data/live</code>. Docker: <code>tgwitness-data</code> birimi. Günlükler, oturumlar ve anahtarlar birlikte durur. İmzalı bir dışa aktarım kanıttır, yedek değildir.</p>
+<ol><li>Önce toplamayı durdurun.</li><li>Tüm veri klasörünü sunucu dışında güvenli bir yere kopyalayın.</li><li>Güvenmeden önce ayrı bir kurulumda geri yüklemeyi deneyin.</li></ol>
 <h2 id="check">Yeniden başlatmanın ardından kontrol edin</h2>
-<p>Beklenen çalışma alanı ve anahtarı, Telegram bağlantısını, seçilen kaynakları ve yeni mesaj yakalama işlemini doğrulayın. Kaydedilen MTProto durumu ve geriye dönük senkronizasyon, Telegram&#x27;ın hâlâ sakladığı güncellemeleri kurtarmaya yardımcı olur. Süresi dolmuş her güncellemeyi veya yakalama işleminden önce silinmiş bir düzenlemeyi yeniden oluşturamazlar.</p>
-<p class="callout">&quot;Konteyner durumu&quot;, web sunucusunun yanıt verdiği anlamına gelir. Toplama ve harici yayınlamayı değerlendirmek için kontrollü bir mesaj ve tanık kontrolü kullanın.</p>
+<p>Çalışma alanını ve anahtarı, bağlantıyı, kaynakları ve yeni mesajların gelip gelmediğini kontrol edin. TgWitness, Telegram'ın hâlâ tuttuğunu yakalar; kapalıyken olan her şeyi değil.</p>
+<p class="callout">"Sağlıklı" konteyner, web sunucusunun yanıt verdiği anlamına gelir. Toplamanın çalışıp çalışmadığını bir test mesajı ve tanık söyler.</p>
 <h2 id="public">Sadece yayınlamak istediğiniz içeriği yayınlayın</h2>
-<p>Kurulum kılavuzunda HTTPS örnekleri, kalıcı birim komutları, güncelleme ve geri yükleme adımları yer almaktadır. Kurulum için Docker komutları sağlanmaktadır; mevcut <a href="../reference/verification/">doğrulama kaydı</a>, fiilen test edilen ortamları belirtmektedir.</p>
+<p>HTTPS, birimler, güncellemeler ve geri yükleme dağıtım başvurusundadır. Gerçekte neyin test edildiği: <a href="../reference/verification/">doğrulama kaydı</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">Tam referans →</a><a class="next-guide" href="../troubleshooting/"><span>Sonraki adım</span><strong>Neyin yanlış gittiğini bulun →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="../reference/verification/">Neler test edildi →</a></p></footer>
 </main>

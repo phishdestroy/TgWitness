@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/case-board/
 
-Ubah pengamatan Telegram yang disimpan menjadi sebuah kasus yang dapat ditinjau bersama oleh tim Anda.
+Ubah pesan tersimpan menjadi kasus yang dikerjakan tim Anda bersama.
 
-Case Board menyimpan penanda, sorotan teks persis, potongan yang disimpan, dan diskusi di samping referensi sumbernya. Sebuah koleksi memberikan struktur kerja pada kasus; revisi yang ditandatangani melestarikan bagaimana tim mengembangkannya.
+Penanda, kutipan persis, potongan, dan diskusi, masing-masing terhubung ke sumbernya. Setiap perubahan adalah revisi bertanda tangan.
 
 ## Dari pesan ke kartu kasus
 
-1. Buka **Investigasi → Case Board** dalam mode Standar atau Ahli. Buat koleksi untuk kasus tersebut dan pilih cakupan obrolannya.
-2. Di **Journal** atau obrolan yang disimpan, pilih **"To board**", atau sorot catatan tersebut dan tekan **B**. Kartu tersebut akan masuk ke Inbox; berikan judul yang berguna dan pindahkan ke koleksi Anda.
-3. Pilih bagian dalam pesan obrolan yang disimpan, lalu pilih **Sorot → papan** untuk mempertahankan kutipan dan versi pesan yang tepat. Tambahkan catatan yang menjelaskan mengapa hal tersebut penting.
-4. Diskusikan kartu tersebut, tetapkan status tinjauan, dan kembali ke konteks asalnya setiap kali klaim perlu diverifikasi. Gunakan **fitur Presentasi** untuk memandu rekan kerja melalui proses pengumpulan data.
+1. **Investigasi → Case Board** (mode Standar atau Ahli). Buat koleksi untuk kasusnya.
+2. Di **Jurnal** atau obrolan, tekan **Ke papan** (atau **B**). Kartu masuk ke Kotak masuk; beri judul lalu pindahkan.
+3. Pilih teks di pesan, **Sorot → papan** menyimpan kutipan persis dan versinya. Catat mengapa itu penting.
+4. Diskusikan, beri status, kembali ke sumber kapan pun perlu. **Presentasi** membawa tim menelusuri materinya.
 
 ### Ikuti satu tautan pembayaran yang telah diubah
 
@@ -48,16 +48,16 @@ Anotasi dan pengamatan Telegram tetap dapat diidentifikasi secara terpisah.
 
 ## Simpan rentang yang berguna sekali saja
 
-Tekan Shift dan klik dua catatan dalam satu obrolan untuk **memotong (Slice) di antara keduanya**, pilih **"Potong berdasarkan waktu**", atau simpan filter Jurnal saat ini. Periksa jumlahnya sebelum menyimpan. Buka kembali potongan tersebut untuk menerapkan kueri yang telah disimpan; **Tampilkan catatan yang ditambahkan sejak penanda halaman** untuk melihat penambahan selanjutnya.
+Shift-klik dua pesan untuk **Potongan di antara**, gunakan **Potongan menurut waktu**, atau simpan filter Jurnal saat ini. **Tampilkan catatan sejak penanda** memperlihatkan yang datang kemudian.
 
-Potongan waktu mengikuti waktu pengamatan pengumpul. Potongan ID pesan dapat mengikuti pesan yang dipilih seiring dengan masuknya perubahan selanjutnya. Batas pembuatan yang disimpan memungkinkan penerima membandingkan pilihan asli dengan statusnya di kemudian hari.
+Potongan waktu memakai waktu pengamatan; potongan ID pesan mengikuti pesan-pesan itu saat berubah.
 
 ## Berikan peran yang tepat kepada setiap rekan kerja
 
-**Peninjau** membaca papan; **Analis** menambahkan kartu dan komentar; **Operator** juga mengelola koleksi dan keputusan peninjauan. Izin ruang kerja dan obrolan berlaku untuk kartu, konteks sumber, dan diskusi. Gunakan pemberian akses berlabel untuk atribusi yang jelas.
+**Peninjau** membaca, **Analis** menambah kartu dan komentar, **Operator** juga mengelola koleksi dan keputusan. Izin obrolan juga berlaku untuk kartu.
 
 ## Selesaikan pekerjaan ini menjadi hasil akhir yang siap diserahkan
 
-Ekspor potongan data sebagai JSON yang ditandatangani, atau gunakan CSV untuk spreadsheet. Pengaturan laporan dapat mencakup penanda dan potongan data, beserta komentar tim jika dipilih. Pilih konten-konten ini di [Report Studio](https://phishdestroy.github.io/TgWitness/id/docs/reports/); potongan data yang disimpan tidak secara otomatis mengonfigurasi laporan. Untuk penerima yang dibatasi, gunakan [kontrol penyerahan](https://phishdestroy.github.io/TgWitness/id/docs/handover/) terpisah.
+Potongan diekspor sebagai JSON bertanda tangan atau CSV. Laporan bisa memuat penanda, potongan, dan komentar; atur itu di [Report studio](https://phishdestroy.github.io/TgWitness/id/docs/reports/). Untuk penerima terbatas, gunakan [serah terima](https://phishdestroy.github.io/TgWitness/id/docs/handover/).
 
-Baca panduan [referensi Case Board](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-board/) mengenai revisi yang ditandatangani, pencocokan kutipan yang tepat, verifikasi pemilihan, dan izin.
+Detail: [referensi Case Board](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-board/).

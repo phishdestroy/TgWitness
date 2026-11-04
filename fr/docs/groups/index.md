@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/groups/
 
-Gérez simultanément plusieurs comptes de collecte tout en conservant la distinction entre les enregistrements et l’identité de signature de chaque compte.
+Gérez plusieurs comptes ensemble, chacun gardant ses entrées et sa clé.
 
-Un groupe de comptes regroupe l'état de la connexion, les contrôles de surveillance, les paramètres partagés et les exportations dans une seule vue de travail. Cela s'avère utile lorsque plusieurs comptes concernent la même enquête ou nécessitent une configuration opérationnelle cohérente.
+Un groupe réunit sur un écran l’état des connexions, démarrage/pause, les paramètres partagés et les exports. Pratique quand plusieurs comptes travaillent sur la même affaire.
 
 ## Ouvrir l'aperçu du groupe
 
-Dans **la** **section** **« Comptes »**, ouvrez le groupe. Chaque compte affiche son état de surveillance, l’itinéraire de connexion, la dernière latence mesurée sur l’itinéraire lors d’une vérification réussie et le dernier message enregistré. Les liens **« À surveiller »** renvoient vers les comptes nécessitant une intervention ; **le bouton « Corriger »** ouvre l’espace de travail et les commandes correspondants.
+Ouvrez le groupe dans **Comptes**. Chaque compte affiche son état, son itinéraire, sa latence et son dernier message enregistré. **Nécessite une attention** liste ceux qui posent problème, **Corriger** vous y emmène directement.
 
-Les commandes « **Tout démarrer »** et « **Tout mettre en pause »** s’appliquent aux comptes éligibles après confirmation. **Les paramètres de groupe** permettent de partager les paramètres sélectionnés ; les comptes disposant de leurs propres valeurs les conservent jusqu’à ce que vous choisissiez de les remplacer.
+**Tout démarrer** / **Tout mettre en pause** demandent avant d’agir. Les **Paramètres du groupe** sont partagés, mais les valeurs propres d’un compte restent jusqu’à ce que vous les remplaciez.
 
 ### Vérifier un changement d'itinéraire au sein d'un groupe
 
@@ -51,19 +51,19 @@ Compte de référence : itinéraire conservé.
 
 ## Modifier le parcours en ajoutant une étape de révision
 
-1. Sélectionnez « **Modifier l'itinéraire du groupe** », puis choisissez le type de connexion et les paramètres.
-2. Sélectionnez « **Review selection** ». Passez en revue les comptes répertoriés et leurs dérogations d’itinéraire individuelles.
-3. Sélectionnez « **Préparer et vérifier** ». La vérification utilise un nouveau transport Telegram ; les routes HTTP prises en charge signalent également leur vérification de sortie HTTPS.
-4. Sélectionnez « **Appliquer la connexion cochée »** et examinez les résultats de chaque compte. L’observation en cours reprend là où l’application a abouti ; les comptes inactifs restent inactifs.
+1. **Changer l’itinéraire du groupe**, choisissez le type et les réglages.
+2. **Vérifier la sélection** : quels comptes changent et lesquels ont leur propre itinéraire.
+3. **Préparer et vérifier** teste une nouvelle connexion à Telegram et, si possible, l’IP de sortie.
+4. **Appliquer la connexion vérifiée** et regardez chaque résultat. Les comptes actifs reprennent, les inactifs le restent.
 
-La latence décrit le temps mesuré pour l'établissement de la connexion Telegram. Une vérification de l'adresse IP de sortie décrit cet itinéraire au moment de la vérification enregistrée. L'autorisation du compte et l'état de la surveillance disposent de leurs propres indicateurs ; un changement de groupe peut aboutir à des résultats différents selon les comptes.
+La latence est le temps d’établissement de la connexion à Telegram ; l’IP de sortie est celle que l’itinéraire a montrée lors de la vérification. Les résultats peuvent varier selon le compte.
 
 ## Utiliser l’accès par chevauchement
 
-**La section « Discussions consultées par plusieurs comptes »** affiche les sources partagées et la couverture d’observation disponible dans l’espace de travail. Les canaux et supergroupes éligibles peuvent utiliser **la fonction** **« Exporter avec… comptes »** pour fractionner l’acquisition de l’historique d’une discussion. Les discussions privées et les groupes ordinaires restent associés au compte d’origine, car leurs numéros de message font partie de l’historique de ce compte.
+**Chats que voient plusieurs comptes** liste les sources partagées et leur couverture. Canaux et supergroupes peuvent être exportés par plusieurs comptes à la fois avec **Exporter avec … comptes**. Pas les chats privés ni les groupes simples : leurs numéros de message sont propres à chaque compte.
 
 ## Exporter le groupe sous forme de package
 
-**La fonction « Export group »** crée un fichier ZIP contenant l’exportation signée de chaque compte ainsi qu’une liste signée de ces fichiers. Les identités et empreintes digitales d’origine de l’espace de travail restent disponibles à des fins de vérification. Construisez un récit inter-comptes à l’aide de ces références ; une chronologie unique fusionnée est toujours assemblée séparément.
+**Exporter le groupe** fournit un ZIP avec l’export signé de chaque compte et une liste signée de ces exports. Chacun garde son empreinte pour la vérification. La chronologie fusionnée, c’est toujours à vous de la construire.
 
-Poursuivez avec [la conception du rapport](https://phishdestroy.github.io/TgWitness/fr/docs/reports/), [un « Case Board » au sein d’un espace de travail](https://phishdestroy.github.io/TgWitness/fr/docs/case-board/) ou [la vérification des exportations](https://phishdestroy.github.io/TgWitness/fr/docs/exports/).
+Ensuite : [rapports](https://phishdestroy.github.io/TgWitness/fr/docs/reports/), [Case Board](https://phishdestroy.github.io/TgWitness/fr/docs/case-board/), [vérifier les exports](https://phishdestroy.github.io/TgWitness/fr/docs/exports/).

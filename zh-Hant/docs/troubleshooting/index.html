@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首頁</a> <span aria-hidden="true">/</span> <a href="../">文件說明</a> <span aria-hidden="true">/</span> <span aria-current="page">找出問題所在</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文件說明 / 18</p><h1>找出問題所在</h1><p class="guide-outcome">從症狀著手。逐層檢查。</p>
+<article class="guide-content"><p class="eyebrow">文件說明 / 18</p><h1>找出問題所在</h1><p class="guide-outcome">從症狀著手，一次檢查一項。</p>
 <h2 id="panel">控制面板要求輸入代幣</h2>
-<p>請使用啟動器顯示的本地檔案中的面板代幣。若使用 Docker，請執行 <code>docker compose exec tgwitness cat /data/panel-token.txt</code>。Telegram 登入代碼、BotFather 代幣及唯讀見證代幣各有其用途。</p>
+<p>它要的是啟動器所印出檔案中的面板權杖。Docker：<code>docker compose exec tgwitness cat /data/panel-token.txt</code>。不是 Telegram 驗證碼，不是機器人權杖，也不是見證人權杖。</p>
 <h2 id="network">Telegram 無法連線</h2>
-<p>開啟連線設定並執行連線檢查。若使用公共代理伺服器，請嘗試其他條目並明確儲存路徑。檢查代理伺服器類型及支援的密鑰格式。刷新公共清單並不會切換帳戶的路徑。</p>
+<p>執行連線檢查。若使用公開代理，換一個並儲存。檢查代理類型和密鑰格式。重新整理清單本身不會切換路由。</p>
 <h2 id="messages">已連線，但無新訊息</h2>
-<ol><li>請確認「觀察」功能正在正確的工作區中執行。</li><li>請確認已選取該來源，且該帳戶可查看該來源。</li><li>在受控群組中發送一則內容獨特的新訊息，並搜尋該確切文字。</li><li>請檢視運作日誌，以確認是否存在中斷、作業延遲或 Telegram 錯誤。</li></ol>
-<p>歷史快照與新訊息事件有所不同。靜態來源可在不產生新訊息的情況下進行連線。當完整性至關重要時，請使用受控傳送測試。</p>
+<ol><li>觀察是否正在執行，且在正確的工作區中？</li><li>來源是否已選取，且該帳戶看得到？</li><li>在測試群組中傳送一則獨特的訊息，然後搜尋它。</li><li>在日誌中尋找中斷或 Telegram 錯誤。</li></ol>
+<p>安靜的聊天室只是沒有新內容。若完整性很重要，請執行受控的送達測試。</p>
 <h2 id="wait">重啟後出現 FloodWait 或間隔</h2>
-<p>「FloodWait」表示 Telegram 需要暫停。請等待指定時間並檢視資料收集工作量；重複重新連線並不會解除此限制。儲存的更新狀態有助於在重新啟動後補上進度，但過期的更新及某些中斷時段仍會造成限制。請記錄資料缺口，而非將日誌視為完整。</p>
+<p>FloodWait 是 Telegram 在說「慢一點」。請等它過去並減輕負載，重新連線沒有用。重新啟動後 TgWitness 會補上 Telegram 仍保留的內容；其餘的是空缺，請記錄下來。</p>
 <h2 id="bot">該機器人已設定完成，但尚未發布任何內容</h2>
-<p>請確認 Witness 程序確實正在運行，該機器人能夠在頻道中發文，且 Witness 能連接到收集器與機器人 API。檢查其日誌以確認是否有發佈失敗的情況。僅僅成功查詢收集器並不能確認頻道發文是否成功。</p>
+<p>見證人是否正在執行，機器人能否在頻道中發文，它能否連到收集器和 Bot API？在它的日誌中尋找發文失敗。收集器端出現輪詢並不代表貼文已送出。</p>
 <h2 id="github">GitHub 憑證整合功能在哪裡？</h2>
 <p><strong>規劃中。</strong>「額外資訊」部分說明了擬議的分叉與建置驗證工作流程。目前尚無 GitHub 憑證表單，亦無自動驗證機制可確認運行中的安裝環境是否與儲存庫相符。請參閱<a href="../reference/features/">當前功能狀態</a>。</p>
-<p>回報問題時，請提供版本、作業系統、操作步驟及經遮蔽處理的錯誤訊息。請勿在公開問題中透露會話、憑證、私人訊息及資料目錄等資訊。</p>
+<p>回報 bug？請提供版本、作業系統、步驟和去除個資的錯誤訊息。切勿在公開 issue 中放入工作階段、權杖、私人訊息或資料目錄。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">完整參考資料 →</a><a class="next-guide" href="../start/"><span>下一步</span><strong>幾分鐘內即可開始使用 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../reference/verification/">已測試的內容 →</a></p></footer>
 </main>

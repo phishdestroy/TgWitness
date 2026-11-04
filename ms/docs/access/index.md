@@ -6,47 +6,47 @@ Berkongsi kes yang diperlukan seseorang. Kekalkan kawalan terhadap selebihnya.
 
 01**Pilih bukti**
 
-Pilih ruang kerja akaun keseluruhan atau sembang individu yang dirakam.
+Seluruh ruang kerja atau sembang tertentu.
 
 02**Pilih tindakan**
 
-Benarkan melihat, mengeksport atau kebenaran operasi khusus yang diperlukan oleh individu tersebut.
+Lihat, eksport, atau hanya operasi yang mereka perlukan.
 
 03**Tetapkan had**
 
-Terbitkan token peribadi dengan tarikh luput, had sesi dan sekatan IP pilihan.
+Token peribadi dengan tarikh luput, had sesi dan peraturan IP jika anda mahu.
 
 Skop pengumpulan menentukan apa yang direkodkan. Skop akses menentukan apa yang boleh dilihat dan dilakukan oleh seseorang.
 
 ## Memberi seseorang akses
 
-1. Log masuk sebagai pentadbir dan buka **Akses**.
-2. Namakan akses dan pilih ruang kerja dan sembang.
-3. Simpan **Paparan** untuk pemeriksa. Tambah **Eksport** jika mereka perlu memuat turun rekod.
+1. Sebagai pentadbir, buka **Akses**.
+2. Namakannya, pilih ruang kerja dan sembang.
+3. Penyemak hanya memerlukan **Lihat**. Tambah **Eksport** untuk muat turun.
 4. Tetapkan had, kemudian tekan **Cipta Akses**.
-5. Salin token yang dipaparkan sekali sahaja. Hantarkannya secara peribadi bersama alamat panel.
-6. Semak paparan yang dibenarkan dalam sesi pelayar berasingan sebelum menyerahkannya.
+5. Salin token (dipaparkan sekali sahaja) dan hantar secara peribadi bersama alamat panel.
+6. Semak dahulu apa yang akan mereka lihat dalam sesi pelayar berasingan.
 
 ## Mulakan dengan tugas yang perlu mereka lakukan
 
 | Orang | Akses | Keputusan |
 | --- | --- | --- |
-| Penilai | Sembang terpilih; lihat sahaja | Baca perbualan yang dirakam tanpa mengubah pengumpulan. |
-| Penganalisis | Pilih sembang; lihat dan eksport | Semak dan muat turun rekod yang diperlukan untuk kes. |
-| Pengendali | Ruang kerja penuh terpilih; sumber dan koleksi | Urus apa yang diperhatikan dan mulakan atau hentikan pengumpul. |
+| Penilai | Sembang terpilih; lihat sahaja | Membaca sembang, tidak boleh mengubah apa-apa. |
+| Penganalisis | Pilih sembang; lihat dan eksport | Membaca dan memuat turun apa yang diperlukan kes. |
+| Pengendali | Ruang kerja penuh terpilih; sumber dan koleksi | Menentukan apa yang diperhatikan, memulakan dan menghentikan pengumpul. |
 
-Ini adalah konfigurasi yang anda pilih, bukan peranan tetap. Tetapan merentas akaun dan eksport jurnal penuh kekal tertutup kepada akses terhad sembang walaupun kebenaran lain diaktifkan. Akses seluruh ruang kerja merangkumi akaun masa depan.
+Ini hanya contoh, bukan peranan tetap. Akses terhad sembang tidak pernah mendapat tetapan akaun atau eksport jurnal penuh. Akses semua ruang kerja termasuk akaun yang ditambah kemudian.
 
 ## Ubah fikiran anda pada bila-bila masa
 
-Sunting akses untuk mengubah apa yang boleh dilakukan oleh permintaan seterusnya. Akhiri satu sesi atau batalkan keseluruhan akses untuk mengakhiri semua sesinya. Fail yang telah dimuat turun tidak dapat dipanggil semula. Mengakhiri sesi panel tidak menghentikan pengumpulan.
+Sunting akses pada bila-bila masa, ia berkuat kuasa dari permintaan seterusnya. Tamatkan satu sesi atau batalkan semuanya. Fail yang sudah dimuat turun tidak boleh ditarik balik. Pengumpulan terus berjalan.
 
 **Had sesi dan IP**
 
-Hadkan sesi selari dan log masuk yang berjaya, tetapkan tarikh tamat mutlak, benarkan alamat IP atau subnet, atau ikat akses kepada alamat log masuk pertama. Tamat sesi mengukur ketidakaktifan; tinjauan panel terbuka dikira sebagai aktiviti. Semak alamat klien yang dipaparkan oleh aplikasi apabila ia berjalan di sebalik proksi atau terowong.
+Hadkan sesi selari dan log masuk, tetapkan tarikh tamat, benarkan IP atau subnet, atau kunci kepada IP log masuk pertama. Tarikh luput mengira tempoh tidak aktif, panel yang terbuka dikira aktif. Di belakang proksi, semak IP klien mana yang dilihat aplikasi.
 
 **Kunci utama dan log aktiviti**
 
-Pentadbir menyimpan token panel utama. Akses yang dikeluarkan tidak boleh menguruskan akses orang lain atau membuka konsol pentadbir. Konsol memaparkan aktiviti proses semasa merentasi ruang kerja; rekod akses yang ditandatangani mengekalkan acara pemberian dan sesi tanpa token. Ruang kerja berkongsi proses hos dan tidak mengasingkan data daripada pentadbir pelayan.
+Token utama kekal dengan pentadbir. Akses yang dikeluarkan tidak boleh mengurus akses orang lain atau membuka konsol pentadbir. Perubahan akses dan sesi ditandatangani ke dalam jurnal, tanpa token. Pentadbir pelayan masih boleh melihat segala-galanya.
 
-Gunakan [rujukan kebenaran penuh](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/) untuk kesemua tujuh kebenaran, peraturan sesi dan sempadan pentadbir.
+Ketujuh-tujuh kebenaran dan peraturan sesi: [rujukan akses](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/).

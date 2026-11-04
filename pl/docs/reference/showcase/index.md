@@ -54,12 +54,3 @@ Weryfikacja podpisu i spójności pozwala wykryć zmiany w stosunku do zachowane
 Użyj **opcji „Cofnij”** w menedżerze prezentacji lub w istniejącej sekcji **„Dostęp**”, aby zamknąć link i zakończyć wszystkie związane z nim sesje. Odwiedzający usuwa wyświetlane zapisy, gdy żądanie wykryje, że dostęp został zakończony. Termin ważności i uprawnienia są sprawdzane przy każdym żądaniu. Uprawnień do prezentacji nie można przekształcić na miejscu w zwykły dostęp do panelu; aby zmienić tryb, należy utworzyć nowe uprawnienie.
 
 Strona jest udostępniana za pośrednictwem istniejącego adresu HTTPS instalacji. Opublikowanie linku nie powoduje otwarcia nowego portu, utworzenia tunelu ani zmiany DNS. Kod HTML i API pozostają na instalacji użytkownika. Odwiedzający prezentację nie może korzystać ze zwykłych interfejsów API dotyczących wiadomości, profilu, multimediów, eksportu ani zarządzania w ramach tego dostępu.
-
-## Lokalne testy regresyjne
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Oba rozwiązania wykorzystują syntetyczne zapisy oraz lokalny serwer HTTP. Nie łączą się one z serwisem Telegram.

@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reports/
 
-Berikan pembaca jalur yang jelas dari pertanyaan kasus hingga catatan yang disimpan.
+Bawa pembaca dari pertanyaan kasus langsung ke catatan yang tersimpan.
 
-Report Studio menggabungkan pemilihan data, riwayat perubahan yang mudah dibaca, bagan, dan temuan tertulis Anda. Delapan desain terintegrasi berlaku untuk keluaran HTML dan PDF asli yang didukung. Laporan HTML, PDF, dan JSON memiliki segel tanda tangan masing-masing; manifest ZIP juga mengikat file-file dalam paket tersebut. HTML dan PDF disegel setelah tata letak akhirnya selesai.
+Report studio menggabungkan data pilihan Anda, riwayat perubahan, grafik, dan temuan Anda. Delapan desain, HTML dan PDF asli. Setiap laporan HTML, PDF, dan JSON disegel dengan kunci Anda.
 
 ## Buat laporan dalam tiga langkah
 
-1. Buka **Ekspor → Konfigurasi dan pratinjau → Data**. Gunakan seluruh ruang kerja atau pilih obrolan, penulis, tanggal pengamatan UTC yang mencakup, dan jenis catatan. Tanggal-tanggal tersebut menggambarkan kapan TgWitness mengamati catatan tersebut.
-2. Di bagian **Desain & Konten**, pilih preset desain dan konten. Pilih bagan aktivitas, label peserta, transkrip, perubahan yang disimpan, dan materi Case Board opsional. Tambahkan detail kasus dan catatan pemeriksaan Anda.
-3. Buka **Pratinjau** untuk meninjau jumlah, aktivitas, peserta, catatan yang diambil sampelnya, dan rentang ID yang hilang. Simpan pengaturan, lalu unduh format yang Anda butuhkan.
+1. **Ekspor → Atur dan pratinjau → Data**: seluruh ruang kerja, atau obrolan, penulis, tanggal (UTC, saat TgWitness melihat catatan), dan jenis catatan pilihan Anda.
+2. **Desain & isi**: pilih desain dan isinya: grafik, peserta, transkrip, perubahan, item Case Board, detail kasus, dan catatan.
+3. **Pratinjau**: periksa jumlah, aktivitas, sampel, dan rentang ID yang hilang. Simpan, lalu unduh format yang Anda perlukan.
 
 ### Susun materi yang disimpan tersebut agar mudah dipahami oleh pembaca
 
@@ -55,16 +55,16 @@ Penerima memeriksa berkas dan sidik jari yang tepercaya.
 
 ## Pilih gaya penulisan
 
-**Seri Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading, serta Ledger & margin** menyajikan catatan dasar yang sama dalam komposisi yang berbeda. Perubahan desain tetap mempertahankan pemilihan data dan catatan tertulis. Bahasa laporan dapat dipilih dari 25 bahasa yang didukung.
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin**: catatan yang sama, tampilan berbeda. Saat diganti, pilihan dan catatan tetap. Bahasa apa pun dari 25 bahasa.
 
-Seri bacaan mengelompokkan kasus, ruang lingkup, temuan, dan perubahan di sekitar rel bagian. Ledger & margin menggunakan bab bernomor dan margin lebar. Keduanya juga mendukung ikhtisar HTML akun dan berbagi salinan. PDF asli dihasilkan dengan font yang disertakan; mesin pengguna tidak memerlukan browser atau instalasi Node untuk pembuatan PDF. PDF dalam bahasa Mandarin, Jepang, dan Korea juga memerlukan font yang sesuai di server, seperti Noto Sans CJK, yang diinstal secara sistem atau ditempatkan di `TGWITNESS_FONT_DIR`. Tanpa font tersebut, ZIP akan menyimpan laporan HTML dan JSON.
+PDF dibuat dengan font bawaan, tanpa browser. Bahasa Tionghoa, Jepang, dan Korea perlu font seperti Noto Sans CJK di server (di sistem atau di `TGWITNESS_FONT_DIR`); jika tidak, Anda hanya mendapat HTML dan JSON.
 
 ## Baca perubahan beserta konteksnya
 
-Perubahan yang disimpan ditampilkan dalam bentuk sebelum dan sesudah. Pemberitahuan penghapusan dapat disertai dengan versi terakhir yang terekam. Balasan, kutipan, penerusan, reaksi, tombol, dan metadata lampiran tetap mempertahankan referensi yang tersedia. SHA-256 file dan hash catatan jurnal diberi label secara terpisah.
+Suntingan menampilkan sebelum dan sesudah, penghapusan menampilkan versi tersimpan terakhir. Balasan, terusan, reaksi, tombol, dan lampiran mempertahankan rujukannya.
 
-Pratinjau desain menampilkan komponen sampul, pemeriksaan, dan bagan menggunakan catatan yang cocok di antara 50.000 catatan sumber pertama. Pratinjau data terpisah memindai snapshot jurnal stabil secara lengkap untuk menghitung jumlah pilihan yang tepat, dengan batas sampel yang ditampilkan diberi label. Buat PDF untuk memeriksa paginasi akhir. Ekspor akun lengkap dilengkapi dengan ikhtisar HTML; PDF obrolan individualnya menggunakan desain yang dipilih.
+Pratinjau desain memakai 50.000 catatan pertama, pratinjau data menghitung semuanya dengan tepat. Untuk tata letak halaman final, buat PDF-nya.
 
 ## Pilih salinan untuk penerima dengan cermat
 
-Filter laporan membentuk laporan yang mudah dibaca. File ZIP bukti lengkap mempertahankan jurnal asli dan lampirannya. Gunakan [penyerahan data](https://phishdestroy.github.io/TgWitness/id/docs/handover/) [yang](https://phishdestroy.github.io/TgWitness/id/docs/handover/) [dipersingkat](https://phishdestroy.github.io/TgWitness/id/docs/handover/) jika penerima hanya perlu menerima data yang dipilih. Lihat [isi laporan dan verifikasi,](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-reports/) atau [verifikasi ekspor yang telah selesai](https://phishdestroy.github.io/TgWitness/id/docs/exports/).
+Filter hanya membentuk laporan; ZIP bukti tetap berisi seluruh jurnal dan berkas. Jika penerima harus mendapat lebih sedikit, gunakan [serah terima ringkas](https://phishdestroy.github.io/TgWitness/id/docs/handover/). Lainnya: [isi laporan](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-reports/), [memverifikasi ekspor](https://phishdestroy.github.io/TgWitness/id/docs/exports/).

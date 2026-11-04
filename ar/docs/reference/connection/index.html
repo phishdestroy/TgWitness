@@ -120,11 +120,6 @@ VPN على مستوى المضيف.</p>
 وIPv6 كاملة، وألا تحتوي على أي هوكات أو تضمينات أو استبدالات بيئية أو
 مستمعين إضافيين. يتم تحليل عناوين النقاط النهائية العامة وتثبيتها قبل بدء التشغيل.
 استخدم شبكة VPN خارجية أو بوابة SOCKS5 لـ OpenVPN/IPsec والنقاط النهائية الخاصة.</p>
-<p>الاختبارات الاصطناعية هي <code>python tools/check_guided_connection.py</code> و
-<code>python tools/check_guided_connection_browser.py</code>. يقوم الاختبار الاختياري
-<code>python tools/check_portable_routes_runtime.py</code> بتنزيل المساعدات التي تم التحقق منها و
-اختبار دورة حياة العمليات المحلية الفعلية مقابل تجهيزات loopback. ولا
-يقوم بتسجيل جهاز Cloudflare أو استخدام حساب Telegram.</p>
 <h2 id="authentication-methods">طرق المصادقة<a class="anchor" href="#authentication-methods" aria-label="رابط لهذا القسم">#</a></h2>
 <p><strong>يُعرّف معرّف واجهة برمجة التطبيقات (API ID) وتجزئة واجهة برمجة التطبيقات (API hash) التطبيق؛ ولا يحلان محل تسجيل الدخول إلى الحساب.</strong>
 
@@ -220,12 +215,6 @@ VPN على مستوى المضيف.</p>
     الصق سلسلة النص الخاصة بها، ثم تابع.</li>
 <li>تحقق من رقم معرّف الحساب المعروض، واختر المصادر وابدأ المراقبة.</li>
 </ol>
-<p>يفتح المحول SQLite في وضع القراءة فقط، ولا يقوم بأي ترقية للمخطط أو طلب شبكة،
-ولا يقوم بطباعة الجلسة. يتحقق من إصدار المخطط، وأنواع الجداول، وصف واحد
-من الجلسة، وعنوان IP/المنفذ/مركز البيانات وطول المفتاح. يقتصر إدخال CLI على 64 ميغابايت؛ ويقتصر نص StringSession
-على 4 كيلوبايت. يقوم تحويل اللوحة بتحميل الملفات إلى خادم TgWitness
-المصادق عليه، ومعالجتها في الذاكرة، وإرجاع بيانات الاعتماد المعيارية إلى ذلك
-المتصفح دون حفظ النسخ الأصلية التي تم تحميلها. استخدم HTTPS للخادم البعيد.</p>
 <p><strong>الملف المحول هو سر وصول غير مشفر للحساب.</strong> احتفظ به في مكان تخزين محمي
 ولا تقم أبدًا بتثبيته أو إرساله إلى خدمة تحويل تابعة لطرف ثالث. يقوم TgWitness
 بحفظ الجلسة المصرح بها في خزينته المشفرة. لا يؤدي نسخ الجلسة إلى
@@ -332,17 +321,6 @@ MTProxy هو وكيل نقل Telegram؛ ويوفر كل من SOCKS5 وHTTP CONNE
 <p>أثناء تفعيل المسارات التلقائية، يتم تحديث القوائم كل ساعة، وتُجرى عمليات التحقق من النقل
 كل عشر دقائق بشكل افتراضي. هذه الفواصل الزمنية قابلة للتعديل. يتطلب <strong>تحديث القوائم العامة</strong>
 إجراء عملية تحديث؛ ولا يؤدي مجرد عرض القائمة إلى تغيير المسار اليدوي المحفوظ.</p>
-<p>يقتصر حجم كل استجابة موجز على 1 ميغابايت مع مهلة انتظار للطلب مدتها ثماني ثوانٍ و
-مهلة تنزيل إجمالية مدتها 20 ثانية؛ ويتم رفض عمليات إعادة التوجيه
-. يتم الاحتفاظ بما يصل إلى 64 إدخالًا متوافقًا لكل مصدر وإزالة التكرارات منها.
-يقبل المحلل الرموز السرية السداسية العشرية وbase64url المدعومة وموجز JSON.
-يتم تخطي TLS المزيف <code>ee</code>، والروابط غير الصالحة، وعناوين IP الخاصة/المحجوزة، وأسماء المضيفين المحلية
-. يتم تحليل أسماء المضيفين والتحقق منها قبل الاستخدام، ويتم تثبيت عنوان IP المختار
-لذلك الاتصال. تعمل عملية إعادة الاستحواذ التلقائية على تحليل اسم المضيف مرة أخرى؛ أعد تطبيق
-إدخال يدوي لتحليله مرة أخرى.</p>
-<p>تحتفظ استجابات التغذية الفاشلة أو الفارغة أو غير المتوافقة بلقطة المصدر السابقة.
-التحديثات متجانسة ومتسلسلة وتقتصر على محاولة واحدة في الدقيقة لكل مساحة عمل.
-يؤكد اختبار النقل الناجح الاتصال، وليس إخفاء الهوية أو اكتمال الالتقاط.</p>
 <p><strong>تستخدم حركة مرور Telegram وطلبات HTTPS مسارات مختلفة.</strong> تستخدم عمليات تنزيل القوائم
 اتصال HTTPS منفصل ومسار الطلب الخارجي المقدم.
 يقوم <code>TGWITNESS_PROXY_FEED_PROXY</code> بتجاوز هذا المسار صراحةً باستخدام وكيل HTTP/SOCKS5؛
@@ -355,21 +333,6 @@ MTProxy هو وكيل نقل Telegram؛ ويوفر كل من SOCKS5 وHTTP CONNE
 الطلب؛ بينما تسمح الأوضاع الأخرى بالاتصال المباشر. يمكن تعطيل الطلبات الخارجية. ويظل وكيل تنزيل الخلاصة الذي تم
 تكوينه صراحةً خيارًا منفصلاً يمكن للمشغل تجاوزه.
 تحتفظ خدمة الشاهد المستقلة بمسارها الخاص.</p>
-<p>تقوم طلبات HTTP الخارجية المخصصة للعامة فقط عبر بروكسيات SOCKS5 أو HTTP بحل
-الوجهة باستخدام Cloudflare DNS عبر HTTPS على <code>https://1.1.1.1/dns-query</code>، من خلال
-نفس البروكسي. لا يذهب إلى المحلل سوى اسم المضيف وأنواع الاستعلامات A/AAAA؛
-ولا يتم تضمين عناوين URL للخدمة وبيانات الاعتماد ومحتويات الإشعارات. يقوم TLS بالتحقق من
-شهادة المحلل لعنوان IP الخاص به. يتم فحص مجموعتي العناوين،
-وأي إجابة خاصة أو ذاتية أو محلية للرابط أو محجوزة تؤدي إلى رفض الطلب.
-تستخدم الاتصالات عنوانًا رقميًّا تم التحقق منه مع الاحتفاظ بالمضيف الأصلي
-لخدمة HTTP واسم شهادة TLS. تستخدم عمليات إعادة توجيه HTTP للإشعارات وطلبات CONNECT
-نفس فحوصات الوجهة. يؤدي فشل DNS إلى إيقاف الطلب دون
-DNS للوجهة المحلية أو بديل مباشر. يتم تخزين الإجابات الناجحة مؤقتًا في
-الذاكرة لكل مسار وكيل لمدة 30 ثانية كحد أقصى ولا تزيد عن مدة صلاحية DNS (TTL) الخاصة بها؛
-ويقتصر حجم ذاكرة التخزين المؤقت على 128 إدخالًا. قد يستخدم اسم مضيف الوكيل نفسه نظام DNS محليًّا.
-يمكن لفشل SOCKS وCONNECT محاولة عنوان آخر تم التحقق منه قبل إرسال
-نص طلب الخدمة. يقوم إعادة توجيه HTTP العادي بالإبلاغ عن الطلب الفاشل دون
-إعادة إرسال نصه تلقائيًّا عبر عنوان آخر.</p>
 <p>بالنسبة للخدمات الخاصة التي يديرها المشغل، فإن الإعداد الحالي لبيئة الخادم
 <code>TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1</code> يسمح بالوجهات الخاصة ويحافظ على
 تحليل اسم المضيف من جانب الوكيل. لا يمكن تمكينه من اللوحة. يرفض الوضع «عام فقط»
@@ -488,11 +451,6 @@ HTTP/SOCKS5، وليس MTProxy.</p>
 سر وصول، وليس كلمة مرور تشفير. يمنح حق الوصول للمسؤول؛
 ويمكن تقييد نطاق <a href="../access/">الرموز الصادرة</a> لتقتصر على الحسابات والدردشات. تشارك مساحات العمل
 العملية المضيفة وليست مستأجرين معزولين.</p>
-<p>يمكن تشغيل عرض توضيحي اصطناعي معزول تم بدء تشغيله صراحةً تلقائيًا عبر
-اتصال لوبباك مباشر. ويستخدم هذا إمكانية منفصلة مدتها مدى عمر العملية؛ فهي لا
-تكشف عن رمز اللوحة المُهيأ ولا تمنح الوصول إلى مساحات العمل الحقيقية. ولا يمكن للطلبات عن بُعد،
-أو عبر الوكيل، أو عبر الأصول المختلفة الحصول على هذه الإمكانية للدخول التلقائي أو استخدامها.
-ولا تزيل هذه الميزة حدود المصادقة الخاصة ببيانات الحسابات الحقيقية.</p>
 <p>يمكن لـ BitLocker أو LUKS أو FileVault أو وحدة التخزين المشفرة المُدارة حماية مساحة التخزين في إطار
 نماذج التهديدات الخاصة بكل منها. لا يزال بإمكان مسؤول نظام يعمل دون قفل
 قراءة البيانات. قم بتضمين SQLite WAL/SHM، والوسائط، والتصدير المؤقت، ومساحة التبادل، والنسخ الاحتياطية
@@ -523,26 +481,10 @@ KDF لكلمة المرور. لا تُقبل كلمات المرور البشر�
 <p>احتفظ بالمفتاح الحالي للتثبيتات الموجودة حتى يتم تنفيذ عملية ترحيل مدروسة
 والتحقق منها. قد يؤدي حذف <code>vault.key</code> أو استبدال المفتاح الرئيسي إلى تعطيل
 الوصول إلى الجلسات/مفاتيح التوقيع. احتفظ بالنسخ الاحتياطية المشفرة والمفاتيح بشكل منفصل و
-اختبر عملية الاستعادة في بيئة معزولة.</p>
-<h2 id="sources-and-verification-scope">المصادر ونطاق التحقق<a class="anchor" href="#sources-and-verification-scope" aria-label="رابط لهذا القسم">#</a></h2>
-<p>تمت المراجعة في 26 أكتوبر 2026:</p>
-<ul>
-<li>https://core.telegram.org/api/auth</li>
-<li>https://core.telegram.org/api/obtaining_api_id</li>
-<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
-<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
-<li>https://core.telegram.org/mtproto/mtproto-transports</li>
-<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
-<li>Telethon 1.45.0: SQLiteSession وStringSession و<code>Connection._proxy_connect</code> و
-    <code>TcpMTProxy.normalize_secret</code> وطرق التنزيل.</li>
-</ul>
-<p>تغطي الاختبارات المحلية اختبارات SOCKS5/HTTP CONNECT ذاتية التكرار، وجلسات SQLite الاصطناعية،
-وعزل المسار، واستبعاد السر، ورفض المفتاح المفقود. وهي لا تثبت
-التوافق التشغيلي الفعلي بين Telegram والبروكسي أو سلوك MTProxy في الوقت الفعلي. انظر
-<a href="../verification/">VERIFICATION.md</a> و <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a>.</p></div></article>
+اختبر عملية الاستعادة في بيئة معزولة.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">تحرير هذه الصفحة على GitHub ↗</a><a class="next-guide" href="../deployment/"><span>الخطوة التالية</span><strong>النشر ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="../verification/">ما تم اختباره ←</a></p></footer>
 </main>
-<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#guided-connection-setup">إعداد الاتصال الموجه</a><a href="#authentication-methods">طرق المصادقة</a><a href="#import-a-telethon-session-file">استيراد ملف جلسة Telethon</a><a href="#mtproto-telethon-and-proxies">MTProto وTelethon والوكلاء</a><a href="#ip-modes">أوضاع IP</a><a href="#encryption-and-signatures">التشفير والتوقيعات</a><a href="#external-master-key">مفتاح رئيسي خارجي</a><a href="#sources-and-verification-scope">المصادر ونطاق التحقق</a></aside>
+<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#guided-connection-setup">إعداد الاتصال الموجه</a><a href="#authentication-methods">طرق المصادقة</a><a href="#import-a-telethon-session-file">استيراد ملف جلسة Telethon</a><a href="#mtproto-telethon-and-proxies">MTProto وTelethon والوكلاء</a><a href="#ip-modes">أوضاع IP</a><a href="#encryption-and-signatures">التشفير والتوقيعات</a><a href="#external-master-key">مفتاح رئيسي خارجي</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>مفتوحة المصدر · تعمل على جهازك</span><a href="../../../../LICENSE">رخصة MIT</a><a href="../notice/">إشعار المشغل</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">الأمن</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "في انتظار رسالة", "Step through a fictional send, edit and delete.": "تتبع خطوات عملية إرسال وتعديل وحذف افتراضية.", "No observations yet. Start the sequence or advance one event.": "لا توجد ملاحظات حتى الآن. ابدأ التسلسل أو انتقل إلى الحدث التالي.", "Meet at 10:00": "نلتقي الساعة 10:00", "A new message is visible in the chat.": "تظهر رسالة جديدة في الدردشة.", "Record 1 appended: the collector observed the original message.": "تم إرفاق السجل رقم 1: لاحظ المجمع الرسالة الأصلية.", "Meet at 11:00": "نلتقي الساعة 11:00", "The current text changes. The earlier observation stays.": "النص الحالي قد يتغير. أما الملاحظة السابقة فتبقى كما هي.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "تم إرفاق السجل 2: التعديل يمثل ملاحظة جديدة. ولا يزال السجل 1 يحتوي على النص الأصلي.", "Message deleted": "تم حذف الرسالة", "The message has disappeared from the chat view.": "لقد اختفت الرسالة من شاشة الدردشة.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "تم إرفاق السجل رقم 3: يتم الاحتفاظ بإشعار الحذف جنبًا إلى جنب مع كلا النسختين اللتين تمت ملاحظتهما.", "0 records": "0 سجل", "1 record": "سجل واحد", "2 records": "سجلان", "3 records": "3 سجلات", "Complete / {n} of 3": "كامل / {n} من 3", "Step / {n} of 3": "الخطوة / {n} من 3", "Pause": "توقف مؤقت", "Replay sequence": "تسلسل إعادة التشغيل", "Play sequence": "تشغيل التسلسل", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "يتوفر نموذج ثابت. لحساب التجزئات (هاش) تفاعليًّا، افتح هذه الصفحة عبر HTTPS أو معاينة localhost مع دعم Web Crypto.", "No record supplied": "لم يتم تقديم أي سجل", "Tail removed": "تم حذف الجزء الأخير", "≠ saved hash": "≠ التجزئة المحفوظة", "Rebuilt · different hash": "أعيد بناؤه · هاش مختلف", "= saved hash": "= التجزئة المحفوظة", "Same length and matching head.": "نفس الطول وعنوان مطابق.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تتطابق جميع التجزئات الحسابية الثلاثة مع التجزئات المحفوظة. تتوافق هذه العينة مع الحد المحدد المتمثل في الاحتفاظ بثلاثة سجلات.", "Same saved head; the journal prefix fails verification.": "نفس العنوان المحفوظ؛ لم تجتز بادئة السجل عملية التحقق.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "لم يعد السجل رقم 2 مطابقًا لـ«هاش»ه المحفوظ. قد يفوت هذا الأمر عند التحقق من الرأس الأخير المخزن فقط؛ لذا يقوم المُحقق بفحص كل سجل.", "Head differs from the retained checkpoint.": "يختلف العنوان عن نقطة التحقق التي تم الاحتفاظ بها.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ترتبط التجزئات المعاد بناؤها ببعضها البعض، لكن الرأس النهائي قد تغير. نقطة التحقق المحتفظ بها ترفض هذا السجل. كما أن التوقيعات الأصلية ستفشل أيضًا في السجلات التي تم تغييرها.", "Too short: 2 supplied records \u003c 3 retained records.": "قصير جدًا: 2 سجلات مقدمة \u003c 3 سجلات محفوظة.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "لا يزال التوافقيان المتبقيان متطابقين. ويكشف نقطة التحقق المحتفظ بها عن الجزء المفقود في نهاية السلسلة. وبدون ذلك الحد السابق، لما كشفت هذه البادئة الأقصر وحدها عن هذا الحذف.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "حساب التجزئة غير متاح في هذا المتصفح. تظل الصيغ والتفسيرات الثابتة أدناه متاحة.", "{n} records": "{n} سجل", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "تم القبول: يزداد العدد، ويتم التحقق من التوقيع، ويتطابق المفتاح. ويحتفظ الشاهد بهذا الحد الجديد.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "التراجع: يُظهر الرد الموقّع عددًا أقل من السجلات مقارنةً بنقطة التحقق الأخيرة المقبولة. تقوم الأداة بتسجيل المشكلة والاحتفاظ بحدود النسخة السابقة المقبولة.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "التفرع (Fork): العدد لم يتغير لكن الرأس يختلف. يقوم الشاهد بتسجيل الخلاف ويحتفظ بالحدود التي تم قبولها سابقًا.", "No answer": "لا توجد إجابة", "boundary unknown": "الحدود غير معروفة", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "عدم الاستجابة: يسجل «الشهود» فشل عملية التحقق. ولا يمكنه تأكيد الحالة الحالية لـ«المجمع». إذا كان «الشهود» لا يزال قادرًا على الوصول إلى واجهة برمجة تطبيقات الروبوت (Bot API) وكانت سياسة النشر الخاصة به تسمح بذلك، فيمكنه نشر هذا الفشل.", "Send {n}": "أرسل {n}", "Edit {n}": "تحرير {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "وقد استوفى كلا الحسابين جميع الملاحظات الست المتوقعة في هذا المثال.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "لا يزال الحساب «ب» قد سجل 6 من أصل 6. استغرق تسجيل إيصالين وقتًا أطول. تعكس نسبة التسجيل وتأخير استلام الإيصالات إجابات مختلفة.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "سجل الحساب «ب» 5 من أصل 6 قبل الموعد النهائي (83.3٪). لا يوجد تأخير مقاس للتعديل المفقود. تصف هذه النتيجة فقط الإجراءات الستة الخاضعة للرقابة.", "not observed by cutoff": "لم يُلاحظ ذلك بحلول الموعد النهائي", "{s} seconds": "{s} ثانية", "Exact values follow in the table.": "ترد القيم الدقيقة في الجدول التالي.", "{s} s": "{s} s", "Not observed": "لم يُلاحظ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "تقدم أربع محادثات ملاحظات مختلفة. اتبع السجلات المصدرية لكل اتصال؛ ولا تنسب منشور القناة إلى المستخدم 71001 دون وجود مرسل محدد.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "يقدم السجلان رقم 146 ورقم 205 نفس معرّف المرسل، 71001. وهذا يربط بين المنشورات الملحوظة لحساب Telegram عبر محادثتين. ولا يحدد هوية شخص حقيقي ولا ينسب المنشور إلى القناة.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "يظهر العنوان pay.example.invalid/new في سجل المجموعة رقم 146، ولوحة مفاتيح الروبوت رقم 173، وتعديل القناة رقم 188، والرسالة الخاصة رقم 205. وجود عنوان متكرر يربط بين المواد؛ لكنه لا يثبت وجود سيطرة مشتركة على تلك الحسابات.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "تحتوي إيصالات الوسائط المكتملة رقم #151 ورقم #209 على قيم SHA-256 كاملة متطابقة في هذه الحالة الافتراضية. قارن بين البايتات الفعلية وسجلات الرسائل المرتبطة بها. لا يحدد الملف المطابق هوية منشئه ولا يثبت هوية من قام بإعادة توجيهه.", "the encrypted off-site copy": "النسخة المشفرة خارج الموقع", "notifications": "الإشعارات", "checkpoint hashes for timestamps": "تجزئات نقاط التحقق (checkpoint hashes) للطوابع الزمنية", "signed checkpoints for the witness": "نقاط تحقق موقعة لـ «TgWitness»", "Switched on in this example": "تم تفعيلها في هذا المثال", "Optional · off by default": "اختياري · معطّل افتراضيًا", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ما يُترك في هذا الجهاز: اتصال Telegram و{list}. لا شيء آخر.", "Default: only the Telegram connection leaves this machine.": "الإعداد الافتراضي: لا يغادر هذا الجهاز سوى اتصال Telegram.", "{done} of {total} done": "{done} من {total} تم إنجازها", "Mark step {n} as done": "وضع علامة «تم» على الخطوة {n}", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "نص", "Copied": "نسخ", "Command copied.": "تم نسخ الأمر.", "Selected — Ctrl/Cmd+C": "تم التحديد — Ctrl/Cmd+C", "Command selected. Copy it manually.": "تم تحديد الأمر. انسخه يدويًّا.", "Command copied to clipboard.": "تم نسخ الأمر إلى الحافظة.", "Select text": "حدد النص", "Clipboard unavailable. Command selected; copy it manually.": "الحافظة غير متاحة. تم تحديد الأمر؛ انسخه يدويًّا.", "A message arrives. The first observation is saved.": "تصل رسالة. يتم حفظ الملاحظة الأولى.", "The time changes. Both captured versions stay.": "يتغير الوقت. وتبقى النسختان المسجلتان كما هما.", "The message disappears. The captured history remains.": "تختفي الرسالة. لكن السجل المسجل يبقى.", "Pause example animation": "إيقاف الرسوم المتحركة التوضيحية مؤقتًا", "Play example animation": "تشغيل مثال للرسوم المتحركة", "Play": "تشغيل", "Full-size workspace screenshot": "لقطة شاشة لمساحة العمل بالحجم الكامل", "Workspace screenshot · fictional data": "لقطة شاشة لمساحة العمل · بيانات خيالية", "Close": "إغلاق", "Close screenshot": "إغلاق لقطة الشاشة", "Scrollable full-size screenshot": "لقطة شاشة كاملة الحجم قابلة للتمرير", "Enlarge: {name}": "تكبير: {name}", "View full size": "عرض بالحجم الكامل", "Step {n} of {total}": "الخطوة {n} من {total}"}</script>

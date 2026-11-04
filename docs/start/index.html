@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="Guides"><a href="../../">Home</a> <span aria-hidden="true">/</span> <a href="../">Documentation</a> <span aria-hidden="true">/</span> <span aria-current="page">Start in minutes</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">What has been tested →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Documentation / 04</p><h1>Start in minutes</h1><p class="guide-outcome">First, explore a working example. Then connect your own account.</p>
+<article class="guide-content"><p class="eyebrow">Documentation / 04</p><h1>Start in minutes</h1><p class="guide-outcome">Poke around the demo first, then connect your own account.</p>
 <h2 id="demo">Look around without an account</h2>
-<p>Download or clone the project, install <strong>Python 3.11 or later</strong>, and run the demo. The launcher creates a local environment and installs the pinned dependencies.</p>
+<p>Get the project, have <strong>Python 3.11 or later</strong>, run the demo. The launcher sets up everything else.</p>
 <pre><code>git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness</code></pre>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\scripts\Demo.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh --demo</code></pre></section></div>
-<p>The browser opens a workspace with fictional messages. Open a conversation, compare an edit and inspect an export. Demo mode does not connect to Telegram.</p>
+<p>A workspace with made-up messages opens in the browser. Open a chat, compare an edit, look at an export. No Telegram involved.</p>
 <figure><img src="../../assets/chats-dark.png" width="1440" height="1000" alt="TgWitness conversation view with sample messages" loading="lazy"><figcaption>A sample workspace. Your own journal starts separately.</figcaption></figure>
 <h2 id="live">Start your own workspace</h2>
-<p>Close the demo process, then use the normal launcher:</p>
+<p>Close the demo, then:</p>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\Start.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh</code></pre></section></div>
-<p>Open the local address shown by the launcher. If asked, enter the <strong>panel access token</strong> from the local file named in the terminal. This unlocks TgWitness; it is separate from Telegram sign-in.</p>
+<p>Open the address the launcher shows and paste the <strong>panel access token</strong> from the file it names. That's for TgWitness, not Telegram.</p>
 <h2 id="next">Capture your first message</h2>
-<ol><li><a href="../accounts/">Connect a dedicated Telegram account.</a></li><li>Select a group or channel the account can access, then start observation.</li><li>Send a new message in a test group you control and check that it appears in the journal.</li></ol>
+<ol><li><a href="../accounts/">Connect a dedicated Telegram account.</a></li><li>Pick a group or channel and start observation.</li><li>Send a message in your test group and watch it appear in the journal.</li></ol>
 <p class="callout">For a server installation, follow <a href="../server/">Keep it running</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/quickstart/">Full reference →</a><a class="next-guide" href="../accounts/"><span>Next step</span><strong>Connect an account →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../reference/verification/">What has been tested →</a></p></footer>

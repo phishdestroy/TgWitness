@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/setti
 सत्र या पहले से पूरा किए गए सेटअप वाले वर्कस्पेस में विज़ार्ड नहीं आता है। पेज लोड होने पर इसके मानों को किसी लक्ष्य से प्रतिस्थापित नहीं किया जाता है। किसी फ़ील्ड को छिपाने से वह फ़ीचर बंद नहीं होता है या उसका मान हटाया नहीं जाता है।
 
 आकार और समय अनुमान, तीन चयनित चैट्स और प्रत्येक से 20 संदेशों तक को पढ़ता है। यह एक अनुमान है: यह टेलीग्राम की सीमाओं, किसी दिए गए सर्वर की गति या हर चैट में मौजूद फ़ाइलों की भविष्यवाणी नहीं करता है।
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

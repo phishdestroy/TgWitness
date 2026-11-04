@@ -2,17 +2,17 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/accounts/
 
-Jedno środowisko pracy obejmuje jedno konto, jego dziennik oraz klucz podpisujący.
+Jedna przestrzeń = jedno konto, jego dziennik i jego klucz.
 
 ## Wybierz sposób logowania
 
-Proszę otworzyć **konta**, dodać obszar roboczy i otworzyć jego ustawienia połączenia. Do obserwacji należy używać dedykowanego konta.
+**Konta** → dodaj przestrzeń → ustawienia połączenia. Użyj do tego osobnego konta.
 
-- **Kod QR:** proszę zeskanować go w ustawieniach urządzenia w aplikacji Telegram i potwierdzić nowe logowanie.
-- **Numer telefonu:** proszę wprowadzić numer, kod wysłany przez Telegram oraz hasło do weryfikacji dwuetapowej, jeśli jest ona włączona.
-- **Import sesji:** proszę zaimportować obsługiwany plik sesji lub dane z aplikacji Telegram Desktop, które należą do Państwa.
+- **Kod QR:** zeskanuj go z ekranu Urządzenia w Telegramie i potwierdź.
+- **Numer telefonu:** numer, kod, a potem hasło 2FA, jeśli je masz.
+- **Import sesji:** własny plik sesji albo dane Telegram Desktop.
 
-Proszę wybrać wbudowany profil API lub wprowadzić własny identyfikator API oraz skrót. Profil API identyfikuje klienta; nie służy on do logowania się na konto ani do zapewnienia anonimowości połączenia.
+Użyj wbudowanego profilu API albo własnych API ID i hash. To tylko identyfikuje aplikację — nie loguje i niczego nie ukrywa.
 
 **Czy potrzebują Państwo najpierw serwera proxy?**
 
@@ -20,20 +20,20 @@ Przed zalogowaniem się mogą Państwo [wybrać i przetestować trasę połącze
 
 ## Wybierz, co chcesz monitorować
 
-1. Proszę otworzyć listę źródeł i wybrać potrzebne czaty, grupy lub kanały.
-2. Przed rozpoczęciem obserwacji prosimy o zapoznanie się z ustawieniami gromadzenia danych, w tym plików multimedialnych.
-3. Uruchom narzędzie do gromadzenia danych i sprawdź jego połączenie oraz ostatnią aktywność.
+1. Wybierz potrzebne czaty, grupy lub kanały.
+2. Sprawdź ustawienia zbierania, w tym media.
+3. Uruchom i sprawdź połączenie oraz ostatnią aktywność.
 
-Konto musi mieć dostęp do źródła. Różne role mogą widzieć różne zdarzenia; dziennik odzwierciedla to, co otrzymało dane konto.
+Konto musi mieć dostęp. Administratorzy i członkowie widzą co innego, dziennik pokazuje to, co dostało to konto.
 
-W przypadku sprawy obejmującej całe konto należy skorzystać z opcji **Źródła → Zakres obserwacji → Tryb dochodzeniowy**, sprawdzić ustawienia i nacisnąć **przycisk Zapisz zakres**. [Kompletny przewodnik po dochodzeniu](https://phishdestroy.github.io/TgWitness/pl/docs/cases/) obejmuje wszystkie widoczne typy czatów, starą historię, profile użytkowników, odniesienia między czatami oraz przekazywanie dowodów.
+Całe konto? **Źródła → Zakres obserwacji → Tryb dochodzenia**, sprawdź i kliknij **Zapisz zakres**. Pełny przewodnik: [dochodzenie na całym koncie](https://phishdestroy.github.io/TgWitness/pl/docs/cases/).
 
 ## Proszę sprawdzić całą ścieżkę
 
-W grupie testowej, którą Pan/Pani kontroluje, proszę wysłać unikalną wiadomość z innego konta, edytować ją, a następnie usunąć. Proszę potwierdzić wszystkie trzy zdarzenia w dzienniku, a następnie [wyeksportować i zweryfikować](https://phishdestroy.github.io/TgWitness/pl/docs/exports/) zapis.
+W grupie testowej wyślij wiadomość z innego konta, zedytuj ją i usuń. Wszystkie trzy zdarzenia powinny pojawić się w dzienniku. Potem [wyeksportuj i zweryfikuj](https://phishdestroy.github.io/TgWitness/pl/docs/exports/).
 
-Status „połączono” potwierdza nawiązanie połączenia. Zarejestrowana wiadomość testowa potwierdza, że dane zdarzenie dotarło do tego obszaru roboczego.
+„Połączono” znaczy, że łącze działa. Przechwycona wiadomość testowa znaczy, że zdarzenia naprawdę docierają.
 
 ## Dodaj kolejne konto
 
-Proszę utworzyć kolejne środowisko pracy w **sekcji „Konta”** i powtórzyć proces konfiguracji. Proszę zachować odcisk klucza podpisu każdego konta, aby móc później zidentyfikować eksportowane dane.
+Nowa przestrzeń w **Kontach**, te same kroki. Zapisz odcisk klucza każdego konta, żeby później odróżniać eksporty.

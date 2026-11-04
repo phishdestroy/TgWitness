@@ -54,12 +54,3 @@ La verifica della firma e della coerenza è in grado di rilevare modifiche rispe
 Utilizza **«Revoke»** nel gestore delle vetrine o nella sezione **«Accesso»** esistente per chiudere il collegamento e terminare tutte le relative sessioni. Il visitatore cancella i record visualizzati quando una richiesta rileva che l’accesso è terminato. La scadenza e le autorizzazioni vengono verificate ad ogni richiesta. Le autorizzazioni alle vetrine non possono essere convertite in accesso ordinario al pannello in loco; crea una nuova autorizzazione per cambiare modalità.
 
 La pagina viene servita tramite l’indirizzo HTTPS esistente dell’installazione. La pubblicazione di un link non apre una nuova porta, non crea un tunnel né modifica il DNS. L’HTML e le API rimangono sull’installazione dell’utente. Un visitatore della vetrina non può utilizzare le normali API relative a messaggi, profili, contenuti multimediali, esportazione o gestione con questo tipo di accesso.
-
-## Controlli di regressione locali
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Entrambi utilizzano registrazioni sintetiche e un server HTTP locale. Non si connettono a Telegram.

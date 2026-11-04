@@ -241,20 +241,6 @@ A'zolar guruh sozlamalarini baham ko'radi; hisob o'z qiymatlarini saqlab qolishi
 
 **Hisob → Telegramdan chiqish** (kuzatish to'xtatilgan holda) Telegramdan sessiyani yakunlashni so'raydi, shuning uchun u hisobning **Sozlamalar → Qurilmalar** bo'limidan ham yo'qoladi va ish maydoni shifri omboridan sessiyani o'chirib tashlaydi. Jurnal, manbalar, sozlamalar va imzolash kaliti saqlanib qoladi, va jurnal chiqishni qayd etadi. Ish maydoni hanuzgacha o'z hisobiga tegishli bo'lib qoladi: faqat shu hisob qayta ulanishi mumkin. Agar Telegram javob bermasa ham, sessiya bu yerda baribir o'chiriladi va panel bunga oid xabarni ko'rsatadi; Telegramda **Sozlamalar → Qurilmalar** bo'limida sessiyani yakunlang.
 
-## Telethon sessiyasini oflayn rejimga aylantiring
-
-Panel `.session` fayllarini to'g'ridan-to'g'ri import qiladi. Oflayn konvertatsiya uchun StringSession fayliga, loyiha papkasidan quyidagi buyrug'ni ishga tushiring:
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-Konverter faqat Telethon SQLite (64 MiB gacha) faylini o'qiydi, kirishni hech qachon o'zgartirmaydi, tarmoq so'rovlarini amalga oshirmaydi va mavjud chiqish faylini ustiga yozishni rad etadi.
-
 ## Hisob fayllarini xavfsiz saqlash
 
 - Har bir `.session`, TData ZIP, StringSession, Auth Key va hisob JSON faylini parol kabi muomala qiling. TgWitness import qilingan ruxsatnomalarni shifrlangan omborida saqlaydi; keyin asl fayllarni o'chirib tashlashingiz mumkin.

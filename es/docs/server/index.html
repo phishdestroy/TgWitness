@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="Guías"><a href="../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../">Documentación</a> <span aria-hidden="true">/</span> <span aria-current="page">Manténgala en funcionamiento</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Lo que se ha probado →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Documentación / 17</p><h1>Manténgala en funcionamiento</h1><p class="guide-outcome">Mantenga el colector disponible y sus datos intactos tras cada reinicio.</p>
+<article class="guide-content"><p class="eyebrow">Documentación / 17</p><h1>Manténgala en funcionamiento</h1><p class="guide-outcome">Mantenga el recolector en marcha y los datos a salvo en los reinicios.</p>
 <h2 id="launch">Elija un método de puesta en marcha</h2>
-<p>Para una instalación nativa, utilice el <a href="../start/">lanzador</a> y los ejemplos de servicio que se encuentran en <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">la carpeta «deploy/».</a> Para Docker, instale Docker con Compose y ejecútelo desde el directorio del proyecto:</p>
+<p>Nativo: el <a href="../start/">lanzador</a> más las plantillas de servicio en <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a>. Docker, desde la carpeta del proyecto:</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>El panel predeterminado escucha en la dirección de bucle invertido del servidor, en el puerto 8787. Ábralo localmente o a través de un túnel SSH. Utilice el token del segundo comando para desbloquear el panel.</p>
+<p>El panel escucha en localhost:8787. Ábralo en local o por un túnel SSH, con el token del segundo comando.</p>
 <h2 id="storage">Conserve todo el directorio de datos</h2>
-<p>Las instalaciones nativas utilizan <code>data/live</code>. Docker utiliza el volumen persistente <code>tgwitness-data</code>. Mantenga juntos los registros, las sesiones de cuenta, las claves y el estado operativo. Una exportación firmada constituye una prueba útil, pero no es una copia de seguridad completa de la instalación.</p>
-<ol><li>Detenga la recopilación antes de realizar una copia de seguridad completa.</li><li>Copie todo el directorio de datos privados a un almacenamiento protegido fuera del servidor.</li><li>Pruebe la restauración en una instalación aislada antes de confiar en la copia de seguridad.</li></ol>
+<p>Nativo: <code>data/live</code>. Docker: el volumen <code>tgwitness-data</code>. Diarios, sesiones y claves van juntos. Una exportación firmada es evidencia, no una copia de seguridad.</p>
+<ol><li>Detenga primero la recogida.</li><li>Copie el directorio de datos entero a un lugar seguro, fuera del host.</li><li>Pruebe a restaurarlo en una instalación aparte antes de fiarse.</li></ol>
 <h2 id="check">Compruébelo tras reiniciar el sistema.</h2>
-<p>Confirme el espacio de trabajo y la clave previstos, la conexión a Telegram, las fuentes seleccionadas y la captura de nuevos mensajes. El estado guardado de MTProto y la función de recuperación permiten recuperar las actualizaciones que Telegram aún conserva. No es posible reconstruir todas las actualizaciones caducadas ni las modificaciones eliminadas antes de la captura.</p>
-<p class="callout">El estado del contenedor indica que el servidor web responde. Utilice un mensaje controlado y una comprobación de validación para evaluar la recopilación y la publicación externa.</p>
+<p>Compruebe el espacio y la clave, la conexión, las fuentes y que entran mensajes nuevos. TgWitness recupera lo que Telegram todavía guarda, no todo lo que pasó mientras estaba parado.</p>
+<p class="callout">Contenedor «sano» significa que el servidor web responde. Si la recogida funciona se lo dirán un mensaje de prueba y el testigo.</p>
 <h2 id="public">Publique únicamente lo que tenga intención de publicar</h2>
-<p>La guía de implementación incluye ejemplos de HTTPS, comandos de volumen persistente, actualizaciones y pasos para la restauración. Se proporcionan comandos de Docker para la implementación; el <a href="../reference/verification/">registro de validación</a> actual identifica los entornos en los que se han realizado pruebas.</p>
+<p>HTTPS, volúmenes, actualizaciones y restauración están en la referencia de despliegue. Lo que se ha probado de verdad: <a href="../reference/verification/">registro de validación</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">Referencia completa →</a><a class="next-guide" href="../troubleshooting/"><span>Siguiente paso</span><strong>Averigüe qué ha fallado →</strong></a><p>Estas guías describen la implementación actual. Los resultados de la validación y las deficiencias pendientes se documentan por separado. <a href="../reference/verification/">Lo que se ha probado →</a></p></footer>
 </main>

@@ -32,55 +32,55 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首頁</a> <span aria-hidden="true">/</span> <a href="../">文件說明</a> <span aria-hidden="true">/</span> <span aria-current="page">匯出與驗證</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文件說明 / 07</p><h1>匯出與驗證</h1><p class="guide-outcome">提供收件者可與收集工作區及其儲存歷史紀錄進行比對的檔案。</p>
+<article class="guide-content"><p class="eyebrow">文件說明 / 07</p><h1>匯出與驗證</h1><p class="guide-outcome">交給對方能自行對照您的工作區核對的檔案。</p>
 <div class="flow-strip export-flow" aria-label="證據移交：保留可信的參考來源、匯出已簽名的 ZIP 檔案、並與接收方進行驗證"><span>保留參考資料</span><span>匯出已簽署的 ZIP 檔案</span><span>收件者驗證</span></div>
-<p>初次接觸簽名與檢查點？<a href="../concepts/#chain">試著修改一個範例記錄</a>，看看哪些檢查機制會偵測到此變更。</p>
+<p>不熟悉簽名和檢查點？<a href="../concepts/#chain">修改一筆範例紀錄</a>，看看哪項檢查會發現它。</p>
 <p>想將副本存放在收集者之外的地方嗎？請前往 <a href="#s3">S3 設定</a>、<a href="#s3-retention">Object Lock</a> 或<a href="#s3-restore">驗證式還原</a>。</p>
 <h2 id="retain">保留可信的參考資料</h2>
-<p>請將工作區的公鑰指紋儲存於收集器之外。在收集過程中，請將簽署過的檢查點存放在其他位置，或使用<a href="../witness/">獨立見證者</a>。這些參考資料可讓接收者驗證金鑰及較早的日誌邊界。</p>
+<p>請把工作區金鑰指紋記在收集器以外的地方。收集期間，也請將簽名檢查點存放在別處，或執行<a href="../witness/">獨立見證人</a>。接收方正是用這些來核對金鑰和日誌的早期狀態。</p>
 <h2 id="export">下載已簽署的 ZIP 檔案</h2>
-<p>開啟<strong>「匯出」</strong>功能並建立經簽名的證據 ZIP 檔案。該檔案包含完整的作業空間日誌及經簽名的檔案清單。可使用<a href="../reports/">「報告工作室」</a>製作易於閱讀的報告，或透過「<a href="../handover/">移交摘錄</a>」功能僅傳遞經篩選且已精簡的資料。</p>
-<p>HTML、PDF 和 JSON 報告各自附有簽名印章，可分別進行驗證。CSV 檔是方便分析的副本；請使用經驗證 ZIP 檔內的精確 CSV 檔來檢查其完整性。若收件者同時需要原始記錄和附件，請保留該簽名 ZIP 檔。</p>
+<p><strong>匯出</strong> → 簽名證據 ZIP。其中包含完整日誌和簽名檔案清單。可在 <a href="../reports/">Report studio</a> 中製作易讀的報告，或只將選定資料作為<a href="../handover/">移交擷取</a>傳送。</p>
+<p>HTML、PDF 和 JSON 報告帶有各自的封印。CSV 只是工作副本；若需完整性，請使用已驗證 ZIP 內的 CSV。</p>
 <h2 id="verify">請使用可信賴的 TgWitness 副本進行驗證</h2>
-<p>在已安裝的專案環境中，請替換範例中的指紋與檔案路徑：</p>
+<p>在專案環境中，使用您自己的指紋和路徑：</p>
 <pre><code>python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
-<p>當兩項參考值均通過驗證時，結果將顯示 <code>key_pinned: true</code> 和 <code>checkpoint_checked: true</code>。請將驗證結果與原始存檔一併保存。保留的檢查點必須位於匯出檔案的邊界處或之前。</p>
+<p>通過時會顯示 <code>key_pinned: true</code> 和 <code>checkpoint_checked: true</code>。請將該輸出與封存檔放在一起。檢查點必須位於匯出結尾或之前。</p>
 <h2 id="meaning">使用驗證結果</h2>
-<ul><li><strong>請檢查交付的檔案：</strong>清單檔案會綁定各檔案的雜湊值，而記錄簽名則會綁定已儲存的日誌。系統會偵測到檔案遭竄改或記錄鏈斷裂的情況。</li><li><strong>請檢查工作區身分：</strong>獨立保留的指紋可確認其是否為您預期的簽署金鑰。</li><li><strong>比較較早的邊界：</strong>保留的檢查點會將匯出內容與移交前儲存的日誌前綴進行比對。</li><li><strong>檢視資料蒐集範圍：</strong>缺漏處、擷取結果，以及一項受控的「傳送 → 編輯 → 刪除」測試，皆可說明此設定所擷取的事件。</li></ul>
-<p>請將這些結果保留於收件者的副本中。請參閱<a href="../reference/evidence/#verification-scope">驗證結果所確立的</a>檢查範圍，以及對來源主張與蒐集範圍的獨立評估。</p>
+<ul><li><strong>檔案：</strong>清單綁定它們的雜湊，簽名綁定日誌。任何變更都會顯現。</li><li><strong>身分：</strong>您保存的指紋證明這就是您預期的金鑰。</li><li><strong>早期狀態：</strong>檢查點將匯出與移交前保存的日誌前綴進行比較。</li><li><strong>涵蓋範圍：</strong>空缺、擷取結果以及「傳送 → 編輯 → 刪除」測試，顯示這套設定實際捕捉到什麼。</li></ul>
+<p>詳細資訊：<a href="../reference/evidence/#verification-scope">驗證能證明什麼、不能證明什麼</a>。</p>
 
 <h2 id="s3">設定 S3 異地備份</h2>
-<p>在您的運作中工作區中，開啟<strong>「匯出」→「異地備份」</strong>。此選用功能支援 AWS S3 及其他相容於 S3 的服務。它會複製日誌區段、已保存的照片與檔案、附帶時間戳記回應的檢查點，以及已完成的聊天記錄匯出檔。每個物件在上傳前，都會在收集器上透過 <code>AES-256-GCM</code> 進行加密。</p>
-<p>線上示範版本展示相同的操作介面，但已停用上傳功能。請僅在您自己正在運行的工作區中輸入儲存憑證。</p>
+<p>在工作區中開啟<strong>匯出 → 異地副本</strong>。支援 AWS S3 以及任何相容 S3 的儲存空間。它會複製日誌區段、已儲存的檔案、附時間戳記的檢查點和已完成的聊天匯出，每一項在離開收集器之前都以 <code>AES-256-GCM</code> 加密。</p>
+<p>線上展示版會顯示這些控制項，但上傳已關閉。請只在您自己的安裝中輸入真實憑證。</p>
 <figure><a href="../../../assets/off-site-copy.png"><img src="../../../assets/off-site-copy.png" width="1136" height="825" alt="完整的異地複製設定面板：終端點、區域、儲存桶、存取金鑰、排程、物件鎖定及復原金鑰控制" loading="lazy"></a><figcaption>已展開包含進階選項的完整控制面板。畫面中未顯示任何儲存憑證。</figcaption></figure>
 <div class="table-wrap"><table><caption>儲存設定位於「匯出」→「異地副本」</caption><thead><tr><th scope="col">領域</th><th scope="col">輸入內容</th></tr></thead><tbody>
-<tr><th scope="row">Endpoint</th><td>儲存服務的 URL，不含儲存桶路徑或憑證。虛構範例：<code>https://s3.example.invalid</code>。</td></tr>
-<tr><th scope="row">地區</th><td>您的服務供應商所要求的區域代碼。應用程式的預設值為 <code>us-east-1</code>。</td></tr>
-<tr><th scope="row">Bucket</th><td>一個您可存取的現有儲存桶。虛構範例：<code>example-case-backup</code>。</td></tr>
-<tr><th scope="row">儲存桶中的資料夾</th><td>物件前綴；預設值為 <code>tgwitness</code>。應用程式會附加一個由此工作區簽名金鑰指紋衍生的前綴。</td></tr>
-<tr><th scope="row">存取金鑰 ID / 秘密存取金鑰</th><td>請同時輸入兩組儲存憑證。這些憑證將儲存於工作區金庫中。後續儲存時，若要保留已儲存的憑證對，請將兩欄皆留空。</td></tr>
-<tr><th scope="row">Path 風格的網址</th><td>請根據服務供應商的設定，在啟用時使用 <code>endpoint/bucket</code>，或在停用時使用 <code>bucket.endpoint</code>。</td></tr>
-<tr><th scope="row">複製間隔</th><td>範圍為 1 至 1,440 分鐘；預設為 5 分鐘。若要執行排程備份，應用程式必須處於運行狀態。</td></tr>
-<tr><th scope="row">Object Lock 資料保留</th><td>支援 Object Lock 的儲存桶之保留天數與模式。若設定為「零天」，則該儲存桶將維持預設的保留設定。</td></tr>
+<tr><th scope="row">Endpoint</th><td>儲存空間 URL，不含 bucket 路徑或憑證。範例：<code>https://s3.example.invalid</code>。</td></tr>
+<tr><th scope="row">地區</th><td>依服務商要求填寫。預設 <code>us-east-1</code>。</td></tr>
+<tr><th scope="row">Bucket</th><td>一個您有寫入權限的現有 bucket。範例：<code>example-case-backup</code>。</td></tr>
+<tr><th scope="row">儲存桶中的資料夾</th><td>前綴，預設 <code>tgwitness</code>。其上還會加上每個工作區的前綴。</td></tr>
+<tr><th scope="row">存取金鑰 ID / 秘密存取金鑰</th><td>兩者一起填寫，儲存在金庫中。之後兩者都留空即可保留原值。</td></tr>
+<tr><th scope="row">Path 風格的網址</th><td>開啟：<code>endpoint/bucket</code>。關閉：<code>bucket.endpoint</code>。視服務商而定。</td></tr>
+<tr><th scope="row">複製間隔</th><td>1 至 1,440 分鐘，預設 5。僅在應用程式執行時有效。</td></tr>
+<tr><th scope="row">Object Lock 資料保留</th><td>天數和模式，前提是 bucket 支援 Object Lock。填 0 則保留 bucket 預設值。</td></tr>
 </tbody></table></div>
 <ol>
-<li>請先向您的服務供應商建立儲存桶，然後輸入其儲存位置及憑證。在準備階段請<strong>保持「保留異地副本</strong>」選項未勾選，之後再選取<strong>「儲存異地副本」</strong>。</li>
-<li>選擇「<strong>測試連線」</strong>。此操作會上傳一個加密的測試物件，並檢查儲存端的回應。</li>
-<li>請選擇<strong>「下載加密金鑰」</strong>。請將該檔案與資料收集器分開存放；此檔案是進行資料復原的必要條件。</li>
-<li>勾選「<strong>保留異地副本</strong>」核取方塊，然後再次儲存。選擇「<strong>立即複製」</strong>以執行手動備份，或讓排程繼續運行。</li>
+<li>建立 bucket，在不勾選<strong>保留異地副本</strong>的情況下填寫目的地和憑證，按<strong>儲存異地副本</strong>。</li>
+<li><strong>測試連線</strong>會上傳一個加密的測試物件。</li>
+<li><strong>下載加密金鑰</strong>，並存放在遠離收集器的地方。沒有金鑰就無法復原。</li>
+<li>勾選<strong>保留異地副本</strong>，儲存，然後<strong>立即複製</strong>，或讓排程執行。</li>
 </ol>
 
 <h2 id="s3-retention">檢查資料保留狀況與複製進度</h2>
-<p>在「<strong>更多選項</strong>」中，選擇保留天數，並在您的儲存桶支援「物件鎖定 (Object Lock)」時，選擇「<code>GOVERNANCE</code>」或「<code>COMPLIANCE</code>」。TgWitness 會讀取上傳物件的保留模式與截止日期。請檢視獨立的保留結果：已確認、缺少保留或檢查失敗。</p>
-<p>控制面板會顯示上一次處理的結果、物件數量、傳輸的位元組數、已複製的日誌邊界以及任何錯誤。若發現本地儲存媒體遺失或遭變更，系統會進行通報，並於下一次處理時重新嘗試。該儲存媒體之後的檔案、檢查點及排程中的匯出項目仍可照常複製。</p>
-<p>上傳時請使用工作區的 Direct、SOCKS5 或 HTTP 路徑。請從這些路徑中選擇其中一種進行 S3 複製；若僅選擇 MTProxy 路徑，複製作業將因錯誤而處於待處理狀態。</p>
+<p>在<strong>更多選項</strong>中選擇保留天數以及 <code>GOVERNANCE</code> 或 <code>COMPLIANCE</code>。TgWitness 會從已上傳的物件讀回保留設定並告訴您：已確認、缺少或檢查失敗。</p>
+<p>面板顯示上一輪、物件數量、位元組、已複製的日誌邊界和錯誤。遺失的本機檔案會被回報並在下一輪重試，其餘內容繼續複製。</p>
+<p>上傳可走直接連線、SOCKS5 或 HTTP。若路由只有 MTProxy，副本會帶著錯誤等待。</p>
 
 <h2 id="s3-key">請將恢復金鑰另行存放</h2>
-<p>下載的 JSON 檔案包含解密金鑰、目標位置設定、工作區物件前綴以及簽名金鑰指紋。進行資料復原時，需同時具備此金鑰檔案以及具備儲存桶讀取權限的獨立儲存憑證。請將這些資訊納入您的復原計畫中。</p>
-<p>若您變更了端點、儲存桶或資料夾前綴，請重新下載金鑰檔案，以確保其目標設定相符。應用程式會將本機保留的日誌、檔案及檢查點的全新副本，移至新目標位置。已完成且已從本機上傳佇列中移除的聊天記錄匯出檔，仍會保留在原有的目標位置。</p>
+<p>金鑰 JSON 包含解密金鑰、目的地、前綴和金鑰指紋。復原時需要它以及具讀取權限的儲存空間憑證。</p>
+<p>變更了端點、bucket 或前綴？請重新下載金鑰。新的副本會從新目的地開始；舊的聊天匯出留在原處。</p>
 
 <h2 id="s3-restore">在另一台機器上還原並驗證</h2>
-<p>請使用可信賴的 TgWitness 安裝版本、已下載的 JSON 金鑰、具備讀取權限的儲存空間憑證，以及一個空的輸出目錄。請替換下方虛構的憑證佔位符。</p>
+<p>您需要一個可信任的 TgWitness 安裝、金鑰 JSON、唯讀儲存空間憑證和一個空資料夾：</p>
 <h3>Windows PowerShell</h3>
 <pre><code>$env:TGWITNESS_S3_ACCESS_KEY = 'YOUR_READ_ACCESS_KEY'
 $env:TGWITNESS_S3_SECRET_KEY = 'YOUR_READ_SECRET_KEY'
@@ -89,9 +89,8 @@ python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out 
 <pre><code>export TGWITNESS_S3_ACCESS_KEY='YOUR_READ_ACCESS_KEY'
 export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence</code></pre>
-<p>在驗證整個日誌、保留的檢查點以及媒體檔案的雜湊值與大小期間，下載的檔案與解密後的物件將暫存於私有臨時儲存空間中。若發現不安全的路徑、日誌段落衝突，或日誌長度短於其檢查點，系統將予以拒絕。驗證失敗時，系統不會發布任何還原的檔案。</p>
-<p>若復原成功，系統將針對副本中的可用內容產生 <code>events.jsonl</code>、<code>media/</code>、<code>checkpoints/</code> 及 <code>exports/</code>。請將該指令的 JSON 結果與復原的內容一併保存。</p>
-<p>請將復原的資料與您獨立保留的檢查點或證人記錄進行比對，然後檢視所需期間內已記錄的蒐集範圍。</p>
+<p>所有內容會先在私人暫存資料夾中檢查：完整日誌、檢查點、檔案雜湊和大小。不安全的路徑、互相衝突的區段，或比其檢查點更短的日誌都會導致失敗，此時不會寫出任何內容。</p>
+<p>成功後您會得到 <code>events.jsonl</code>、<code>media/</code>、<code>checkpoints/</code> 和 <code>exports/</code>。請將指令的 JSON 輸出與它們放在一起，並與您自己保存的檢查點或見證紀錄比較。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/evidence/">完整參考資料 →</a><a class="next-guide" href="../reports/"><span>下一步</span><strong>設計報告 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../reference/verification/">已測試的內容 →</a></p></footer>
 </main>

@@ -2,17 +2,17 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/accounts/
 
-Ogni spazio di lavoro contiene un unico account, il relativo registro e la relativa chiave di firma.
+Uno spazio = un account, il suo diario e la sua chiave.
 
 ## Scegliete come effettuare l’accesso
 
-Apra **gli account**, aggiunga un’area di lavoro e apra le relative impostazioni di connessione. Utilizzi un account dedicato all’osservazione.
+**Account** → aggiungi spazio → impostazioni di connessione. Usi un account separato per questo.
 
-- **Codice QR:** lo scansionino dalle impostazioni del dispositivo su Telegram e confermino il nuovo accesso.
-- **Numero di telefono:** inserisca il numero, il codice inviato da Telegram e la Sua password di verifica in due passaggi, se abilitata.
-- **Importazione di una sessione:** importi una sessione supportata o i dati di Telegram Desktop di sua proprietà.
+- **Codice QR:** lo scansioni dalla schermata Dispositivi di Telegram e confermi.
+- **Numero di telefono:** numero, codice e, se c’è, la password 2FA.
+- **Importa sessione:** il Suo file di sessione o i dati di Telegram Desktop.
 
-Selezioni un profilo API predefinito oppure inserisca il proprio ID API e il proprio hash. Un profilo API identifica il cliente; non effettua l’accesso a un account né rende anonima la connessione.
+Usi un profilo API integrato o il Suo API ID con hash. Identifica solo l’app: non effettua l’accesso e non nasconde nulla.
 
 **Ha bisogno prima di un proxy?**
 
@@ -20,20 +20,20 @@ Selezioni un profilo API predefinito oppure inserisca il proprio ID API e il pro
 
 ## Scegliete cosa monitorare
 
-1. Apra l’elenco delle fonti e selezioni le chat, i gruppi o i canali di cui ha bisogno.
-2. Si prega di verificare le impostazioni di raccolta, compresi i file multimediali, prima di avviare il monitoraggio.
-3. Avviare il collettore e verificarne la connessione e l’attività recente.
+1. Scelga le chat, i gruppi o i canali che Le servono.
+2. Controlli le impostazioni di raccolta, media inclusi.
+3. Avvii e controlli la connessione e l’attività recente.
 
-L’account deve poter accedere alla fonte. Ruoli diversi possono visualizzare eventi diversi; il registro riflette ciò che tale account ha ricevuto.
+L’account deve avere accesso. Admin e membri vedono cose diverse; il diario mostra ciò che ha ricevuto questo account.
 
-Per un caso che riguarda l’intero account, utilizzi **Fonti → Ambito di osservazione → Modalità di indagine**, verifichi le impostazioni e prema **Salva ambito**. La [guida completa all’indagine](https://phishdestroy.github.io/TgWitness/it/docs/cases/) copre tutti i tipi di chat visibili, la cronologia precedente, i profili degli utenti, i riferimenti tra chat e il trasferimento delle prove.
+L’intero account? **Fonti → Ambito di osservazione → Modalità indagine**, controlli e prema **Salva ambito**. Guida completa: [indagare su un intero account](https://phishdestroy.github.io/TgWitness/it/docs/cases/).
 
 ## Verifichi l’intero percorso
 
-In un gruppo di prova da Lei controllato, invii un messaggio unico da un altro account, lo modifichi e lo elimini. Verifichi la presenza di tutti e tre gli eventi nel registro, quindi [esporti e verifichi](https://phishdestroy.github.io/TgWitness/it/docs/exports/) la registrazione.
+Nel Suo gruppo di prova invii un messaggio da un altro account, lo modifichi e lo elimini. Tutti e tre gli eventi devono comparire nel diario. Poi [esporti e verifichi](https://phishdestroy.github.io/TgWitness/it/docs/exports/).
 
-Lo stato «Connesso» conferma la connessione. Un messaggio di prova acquisito conferma che un determinato evento è pervenuto in questo spazio di lavoro.
+«Connesso» significa che la connessione funziona. Un messaggio di prova catturato significa che gli eventi arrivano davvero.
 
 ## Aggiungere un altro account
 
-Crei un altro spazio di lavoro nella sezione **«Account»** e ripeta la procedura di configurazione. Conservi l’impronta digitale della chiave di firma di ciascun account in modo da poter identificare le relative esportazioni in un secondo momento.
+Nuovo spazio in **Account**, stessi passaggi. Annoti l’impronta della chiave di ogni account per distinguere poi le esportazioni.

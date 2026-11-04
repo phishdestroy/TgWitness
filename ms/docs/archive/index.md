@@ -6,52 +6,52 @@ Cari mesej. Semak sumber. Bina kes.
 
 01**Bawa masuk sejarah**
 
-Muatkan mesej terdahulu daripada sumber yang telah diaktifkan ke dalam ruang kerja.
+Tarik mesej lama daripada sumber yang didayakan ke dalam ruang kerja.
 
 02**Ikuti sumber**
 
-Cari dalam arkib dan buka mesej yang disimpan di sebalik setiap hasil.
+Cari, kemudian buka mesej tersimpan di sebalik setiap hasil.
 
 03**Jaga agar penyerahan tetap jelas**
 
-Simpan analisis anda secara berasingan dan eksport bukti yang ditandatangani di sebelahnya.
+Analisis anda dalam satu fail, bukti bertandatangan di sebelahnya.
 
 Rekod yang dirakam, teks yang diiktiraf dan kesimpulan penganalisis kekal berasingan.
 
 ## Muat mesej terdahulu
 
-1. Buka **Sumber → Sembang dalam skop**, semak sembang yang didayakan dan mulakan pemerhatian.
-2. Pilih **Muat Sejarah Penuh**. Jalannya menggunakan senarai sumber yang dipilih pada masa itu.
-3. Gunakan **Sejarah Jeda** dan **Sejarah Teruskan** mengikut keperluan. Selepas memulakan semula, sambung secara eksplisit.
-4. Semak hasil bagi setiap sumber dan barisan menunggu lampiran. Simpan laporan kemajuan yang ditandatangani bersama eksport bukti.
+1. **Sumber → Sembang dalam skop**: semak sembang yang didayakan, mulakan pemerhatian.
+2. **Muat Sejarah Penuh**. Ia mengambil senarai sumber seperti sedia ada sekarang.
+3. **Jeda sejarah** / **Teruskan sejarah** pada bila-bila masa. Selepas mula semula, sambung secara manual.
+4. Semak hasil bagi setiap sumber dan baris gilir muat turun, simpan laporan kemajuan bertandatangan bersama eksport.
 
-Ini mengisi ruang kerja dengan mesej yang tersedia. Eksport HTML/JSON bagi setiap sembang adalah operasi berasingan. [Butiran sejarah dan pemulihan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/).
+Ini mengisi ruang kerja. Eksport HTML/JSON satu sembang ialah perkara lain. [Butiran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/).
 
 ## Cari dahulu, kemudian buat keputusan tentang AI
 
-1. Buka **Jurnal** untuk carian tempatan. Pilih ruang kerja dan gunakan penapis sumber dan masa.
-2. Cari frasa atau domain. Buka rekod yang sepadan dan versi simpanannya.
-3. Untuk analisis AI, pentadbir mendayakan dan mengkonfigurasikan penyedia dalam **Integrasi**. Buka **Tanya arkib** dan pilih sembang serta tempoh. Semak **Data dihantar ke model** dan nyahtanda petikan yang tidak diingini sebelum meluluskan permintaan.
-4. Semak petikan yang dikembalikan. Simpan jawapan sebagai laporan dan tambahkan semakan atau nota anda sendiri.
+1. **Jurnal** mencari secara setempat, tapis mengikut sumber dan masa.
+2. Cari frasa atau domain, buka rekod dan versinya.
+3. Untuk AI, pentadbir menyediakan penyedia dalam **Integrasi**. Kemudian **Tanya arkib**: pilih sembang dan tempoh, lihat **Data yang dihantar kepada model** dan nyahtanda apa yang tidak patut keluar.
+4. Semak petikan, simpan jawapan sebagai laporan, tambah nota anda.
 
-Carian dijalankan secara tempatan tanpa AI. Laporan analitik mengekalkan rujukan sumber dan sejarah semakan; ia berasingan daripada jurnal yang disahkan. [Penyediaan penyedia dan laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/).
+Carian tidak memerlukan AI. Laporan menyimpan sumber dan semakannya sendiri, berasingan daripada jurnal bertandatangan. [Persediaan penyedia](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/).
 
 ## Pilih sambungan yang anda perlukan
 
 | Tugas | Terbuka | Pemasangan |
 | --- | --- | --- |
-| Bacalah sembang terpilih daripada klien AI | **Integrasi → MCP** | [Pasang MCP extra, keluarkan token berlingkup dan sambungkan klien](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/) |
-| Kenal pasti teks dalam media yang disimpan | Rekod `media.saved` → **Kenal pasti lampiran** | [Sediakan pekerja Docker tempatan dan fail bahasa/model yang diperlukan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/media-analysis/) |
-| Hantar peristiwa ke n8n atau SIEM | **Integrasi → Webhook keluaran** | [Tambah penerima, sahkan HMAC dan deduplikasikan ID acara](https://phishdestroy.github.io/TgWitness/ms/docs/reference/webhooks/) |
+| Benarkan klien AI membaca sembang terpilih | **Integrasi → MCP** | [Pasang MCP, buat token berskop, sambungkan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/) |
+| Kenal pasti teks dalam media yang disimpan | Rekod `media.saved` → **Kenal pasti lampiran** | [Sediakan worker Docker setempat](https://phishdestroy.github.io/TgWitness/ms/docs/reference/media-analysis/) |
+| Hantar peristiwa ke n8n atau SIEM | **Integrasi → Webhook keluaran** | [Tambah penerima, semak HMAC, buang ID pendua](https://phishdestroy.github.io/TgWitness/ms/docs/reference/webhooks/) |
 
 **Token akses mana perlu diletakkan di mana?**
 
-Akses panel adalah untuk mereka yang menyemak kes. Sambungan MCP mendapat token arkib baca sahaja yang berasingan. Penerima webhook menggunakan rahsia HMAC sendiri. Tiada yang memerlukan fail sesi Telegram.
+Akses panel adalah untuk manusia. MCP mendapat token baca sahaja sendiri, webhook mendapat rahsia HMAC sendiri. Tiada satu pun memerlukan sesi Telegram.
 
 [Berkongsi akses panel](https://phishdestroy.github.io/TgWitness/ms/docs/access/) atau [menyediakan klien MCP](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/).
 
 ## Serahkan sumber dan kesimpulan
 
-Simpan laporan analitik yang telah disemak bersama fail ZIP bukti yang ditandatangani. Laporan itu menerangkan cara anda membaca sumber; ZIP membolehkan penerima menyemak rekod yang disimpan dengan cap jari dan titik pemeriksaan yang dipercayai secara bebas.
+Letakkan laporan di sebelah ZIP bertandatangan. Laporan ialah bacaan anda terhadap sumber, ZIP ialah apa yang disahkan oleh penerima.
 
 [Eksport dan sahkan](https://phishdestroy.github.io/TgWitness/ms/docs/exports/) · [Melalui satu siasatan penuh](https://phishdestroy.github.io/TgWitness/ms/docs/cases/)

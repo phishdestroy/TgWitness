@@ -2,26 +2,26 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/concepts/
 
-Bir mesaj değişebilir. Gözlemlediklerinizin kaydı, her zaman doğrulanabilir olmalıdır.
+Mesajlar değişir. Gördüklerinizin kaydı değişmemeli ve bunu herkes doğrulayabilmeli.
 
-Aşağıdaki iki küçük denemeyi inceleyin. Bu denemeler kurgusal mesajlar kullanır, tarayıcınızda kalır ve hiçbir zaman Telegram'a bağlanmaz.
+Aşağıda iki küçük deney. Kurgusal mesajlar, her şey tarayıcınızda çalışır, Telegram'a hiçbir şey gitmez.
 
 ## Sohbet dışa aktarımından doğrulanabilir bir kayda
 
-[Telegram Desktop,](https://telegram.org/blog/export-and-more) çevrimdışı kullanım için mevcut sohbet geçmişini ve medyayı HTML veya JSON olarak [dışa](https://telegram.org/blog/export-and-more) aktarır. TgWitness, alınan değişikliklerin sürekli bir günlüğünü, gözlemler ve dışa aktarımlar üzerindeki imzaları ve alıcıların bağımsız olarak karşılaştırabileceği kontrol noktalarını ekler.
+Bir [Telegram Desktop dışa aktarımı](https://telegram.org/blog/export-and-more) şu an görünen geçmişi HTML ya da JSON olarak kaydeder. TgWitness buna sürekli bir değişiklik günlüğü, her kayıtta imza ve başkalarının karşılaştırabileceği kontrol noktaları ekler.
 
 | Görev | Telegram Desktop dışa aktarma | TgWitness |
 | --- | --- | --- |
 | Kaydedilmiş sohbetleri okuyun | Seçilen medya ile birlikte HTML veya JSON | Kaydedilmiş sohbetler, aranabilir günlük ve çevrimdışı raporlar |
-| Zaman içindeki değişiklikleri takip edin | Dışa aktarıldığında erişilebilen geçmiş | Daha önce yakalanan sürümler, sonradan yapılan düzenlemeler ve silme gözlemleri bir arada tutulur |
-| Devir teslimden sonra dosyaları kontrol edin | Standart HTML/JSON dışa aktarım dosyaları imzalanmamıştır | İmzalı manifest, kayıt başına imzalar ve mühürlü HTML/PDF/JSON raporları, güvenilir bir toplayıcı anahtarıyla karşılaştırılarak kontrol edilir. |
+| Zaman içindeki değişiklikleri takip edin | Dışa aktarıldığında erişilebilen geçmiş | Eski sürümler, sonraki düzenlemeler ve silmeler, hepsi saklanır |
+| Devir teslimden sonra dosyaları kontrol edin | Standart HTML/JSON dışa aktarım dosyaları imzalanmamıştır | İmzalı manifest, imzalı kayıtlar ve mühürlü raporlar, güvenilir bir anahtarla doğrulanır |
 | Daha önceki bir saklama durumuyla karşılaştırın | Ayrı bir referans kopyası veya hash tutun | İmzalı kontrol noktaları, ayrı bir tanık ve isteğe bağlı harici zaman damgaları |
 
-Dosya imzalama karşılaştırması, 2 Kasım 2026 tarihinde incelenen [Telegram Desktop dışa aktarma yazıcı](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output)larına dayanmaktadır. TgWitness, toplayıcının anahtarıyla imza atar; aşağıdaki kontroller, alıcının bunu nasıl kullandığını gösterir.
+Karşılaştırma, 2 Kasım 2026 itibarıyla [Telegram Desktop dışa aktarma koduna](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) dayanır.
 
 ## Tek mesaj, üç gözlem
 
-Telegram yeni bir mesaj, bir düzenleme veya bir silme bildirimi gönderdiğinde, toplayıcı uygulama üç ayrı gözlem ekler. Düzenleme, ilk kaydı değiştirmez. Silme bildirimi ise onu silmez.
+Yeni bir mesaj, bir düzenleme ve bir silme üç ayrı kayıt olur. Düzenleme ilkinin üzerine yazmaz, silme de onu ortadan kaldırmaz.
 
 01 / MESAJIN YOLCULUĞUAçıklayıcı akış
 
@@ -61,11 +61,11 @@ Alınan üç gözlem de kayıt defterinde kalır.
 
 Önceden seçilmiş bir kaynak için basitleştirilmiş yol. Operasyonel kayıtlar da gerçek günlüğü paylaşır. Yakalama işlemi, hesabın görebildiklerine ve Telegram'ın sağladıklarına bağlıdır.
 
-Bir silme bildirimi, ne güvenilir bir silme zamanını ne de mesajı silen kişiyi belirtir. Bu değerlerin bilinmemesi, bir gözlem ile bir tahmin arasındaki ayrımı korur.
+Telegram bir mesajı kimin ve tam olarak ne zaman sildiğini söylemez. TgWitness tahmin etmek yerine bu alanları boş bırakır.
 
 ## Bir kaydı değiştirin. Hash değerini takip edin.
 
-Her kayıt, bir önceki kaydın hash değerini içerir. Kayıtın kendi hash değeri, bu bağlantı da dahil olmak üzere olay alanlarını kapsar. Harici olarak tutulan bir kontrol noktası, belirli bir günlük uzunluğunu ve başlangıç hash değerini sabitler.
+Her kayıt bir öncekinin karmasını içerir. Başka yerde saklanan bir kontrol noktası günlük uzunluğunu ve son karmayı sabitler.
 
 02 / HASH-CHAIN SANDBOXGerçek SHA-256 · örnek kayıtlar
 
@@ -105,23 +105,23 @@ h0 = 064
 hi = hex(SHA-256(C(ei)))
 σi = Ed25519.Sign(sk, unhex(hi))
 
-**C**, dokuz olay alanını UTF-8 JSON olarak serileştirir: sıralı anahtarlar, fazladan boşluk yok, ASCII kaçış karakterleri yok ve NaN/sonsuzluk yok. Olayın `previous_hash` değeri hi−1'dir. Görüntülenen h0, 64 sıfır karakteri anlamına gelir; imzalar 32 ham özet baytını kapsar.
+**C**, dokuz olay alanının UTF-8 JSON halidir: sıralı anahtarlar, fazla boşluk yok, ASCII kaçışı yok, NaN/sonsuz yok. `previous_hash` hi−1'dir, h0 64 sıfırdır ve imzalar özetin 32 ham baytını kapsar.
 
-Dokuz alan şunlardır: `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload` ve `previous_hash`. Bu, TgWitness’in [belgelenmiş JSON](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#event-canonicalization)kodlamasıdır; hash ve imza kendileri hash giriş alanları değildir.
+Alanlar: `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload`, `previous_hash`. Tam belirtim: [olay kodlaması](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#event-canonicalization).
 
 KORUNAN KONTROL NOKTASI
 
 Nexport ≥ Ncheckpoint
 hexport[Ncheckpoint] = Hcheckpoint
 
-Sabitlenmiş toplayıcı anahtarının altındaki kontrol noktası imzasını doğrulayın, ardından sınırını doğrulanmış günlükle karşılaştırın. Daha sonraki bir dışa aktarım daha fazla kayıt içerebilir; ancak yine de önceki kontrol noktasıyla uyumlu olmalıdır.
+Kontrol noktasının imzasını sabitlenmiş anahtarla doğrulayın, sonra günlükle karşılaştırın. Sonraki bir dışa aktarım daha uzun olabilir ama kontrol noktasında eşleşmelidir.
 
 ## Üç soru, üç farklı kontrol
 
-[01 / BÜTÜNLÜK**Bu kayıtta bir değişiklik mi oldu?** Hash değerlerini ve imzaları, ayrı bir güvenilir anahtarla karşılaştırarak doğrulayın.](https://phishdestroy.github.io/TgWitness/tr/docs/exports/)[02 / SÜREKLİLİK**Daha önce neler korunmuştu?** İmzalı bir dışa aktarım dosyasını, ayrı bir tanık tarafından tutulan kontrol noktalarıyla karşılaştırın.](https://phishdestroy.github.io/TgWitness/tr/docs/witness/)[03 / TESLİMAT**Bu test olayları geldi mi?** Her hesabın günlüğüyle, kontrollü gönderme, düzenleme ve silme işlemlerini karşılaştırın.](https://phishdestroy.github.io/TgWitness/tr/docs/cases/)
+[01 / BÜTÜNLÜK**Bu kayıtta bir değişiklik mi oldu?** Güvendiğiniz bir anahtara karşı karmalar ve imzalar.](https://phishdestroy.github.io/TgWitness/tr/docs/exports/)[02 / SÜREKLİLİK**Daha önce neler korunmuştu?** Dışa aktarımı bir tanığın sakladığı kontrol noktalarıyla karşılaştırın.](https://phishdestroy.github.io/TgWitness/tr/docs/witness/)[03 / TESLİMAT**Bu test olayları geldi mi?** Test mesajları gönderin, düzenleyin, silin ve her hesabın neyi yakaladığını görün.](https://phishdestroy.github.io/TgWitness/tr/docs/cases/)
 
-Saklanan kayıtları kontrol etmek için imzaları, önceki bir sınırı karşılaştırmak için kontrol noktalarını ve toplama işlemini ölçmek için kontrollü teslimat testlerini kullanın. Her biri belirli bir soruyu yanıtlar. [Doğrulama kapsamını ve güven varsayımlarını okuyun.](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope)
+İmzalar "değiştirildi mi?", kontrol noktaları "önceki haliyle uyuşuyor mu?", test mesajları "her şeyi yakaladık mı?" sorusunu yanıtlar. [Doğrulamanın neyi kanıtladığı ve neyi kanıtlamadığı.](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope)
 
-Vakalara ilişkin bilgilerin toplanmasından dava dosyasının hazırlanmasına kadar [tüm soruşturma](https://phishdestroy.github.io/TgWitness/tr/docs/cases/) sürecini takip edin.
+Sıradaki: baştan dava paketine kadar bir [tüm hesap soruşturması](https://phishdestroy.github.io/TgWitness/tr/docs/cases/).
 
 [Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

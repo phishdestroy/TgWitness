@@ -2,26 +2,26 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/concepts/
 
-Sebuah pesan dapat berubah. Catatan tentang apa yang Anda amati harus tetap dapat diverifikasi.
+Pesan berubah. Catatan Anda tentang apa yang Anda lihat seharusnya tidak, dan siapa pun seharusnya bisa memeriksanya.
 
-Jelajahi dua eksperimen kecil di bawah ini. Eksperimen ini menggunakan pesan fiktif, berjalan di dalam browser Anda, dan tidak pernah terhubung ke Telegram.
+Di bawah ada dua eksperimen kecil. Pesan fiktif, semuanya berjalan di browser Anda, tidak ada yang dikirim ke Telegram.
 
 ## Dari ekspor obrolan menjadi catatan yang dapat diverifikasi
 
-[Ekspor Telegram Desktop](https://telegram.org/blog/export-and-more) menyimpan riwayat obrolan dan media yang tersedia dalam format HTML atau JSON untuk penggunaan offline. TgWitness menambahkan jurnal berkelanjutan mengenai perubahan yang diterima, tanda tangan pada pengamatan dan ekspor, serta titik pemeriksaan yang dapat dibandingkan secara mandiri oleh penerima.
+[Ekspor Telegram Desktop](https://telegram.org/blog/export-and-more) menyimpan riwayat yang terlihat saat ini sebagai HTML atau JSON. TgWitness menambahkan jurnal perubahan yang terus berjalan, tanda tangan di setiap catatan, dan checkpoint yang bisa dibandingkan orang lain.
 
 | Tugas | Ekspor Telegram Desktop | TgWitness |
 | --- | --- | --- |
 | Baca percakapan yang disimpan | HTML atau JSON dengan media yang dipilih | Obrolan yang disimpan, jurnal yang dapat dicari, dan laporan offline |
-| Ikuti perubahan dari waktu ke waktu | Riwayat yang tersedia saat diekspor | Versi yang diambil sebelumnya, pengeditan selanjutnya, dan catatan penghapusan disimpan secara bersamaan |
-| Periksa berkas setelah penyerahan | Berkas ekspor HTML/JSON standar tidak ditandatangani | Manifest yang ditandatangani, tanda tangan per catatan, dan laporan HTML/PDF/JSON yang disegel diverifikasi menggunakan kunci pengumpul tepercaya |
+| Ikuti perubahan dari waktu ke waktu | Riwayat yang tersedia saat diekspor | Versi lama, suntingan berikutnya, dan penghapusan, semuanya disimpan |
+| Periksa berkas setelah penyerahan | Berkas ekspor HTML/JSON standar tidak ditandatangani | Manifes bertanda tangan, catatan bertanda tangan, dan laporan bersegel, diperiksa dengan kunci tepercaya |
 | Bandingkan dengan status yang disimpan sebelumnya | Simpan salinan referensi terpisah atau hash | Titik pemeriksaan yang ditandatangani, saksi terpisah, dan cap waktu eksternal opsional |
 
-Perbandingan penandatanganan berkas didasarkan pada [penulis ekspor Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) yang ditinjau pada tanggal 2 November 2026. TgWitness menandatangani berkas dengan kunci pengumpul; pemeriksaan di bawah ini menunjukkan bagaimana penerima menggunakannya.
+Perbandingan ini berdasarkan [kode ekspor Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) per 2 November 2026.
 
 ## Satu pesan, tiga pengamatan
 
-Ketika Telegram mengirimkan pesan baru, pemberitahuan pengeditan, dan pemberitahuan penghapusan, aplikasi pengumpul menambahkan tiga catatan terpisah. Pengeditan tidak menggantikan catatan pertama. Pemberitahuan penghapusan tidak menghapusnya.
+Pesan baru, suntingan, dan penghapusan menjadi tiga catatan terpisah. Suntingan tidak menimpa yang pertama, dan penghapusan tidak menghilangkannya.
 
 01 / PERJALANAN PESANUrutan ilustratif
 
@@ -61,11 +61,11 @@ Ketiga pengamatan yang diterima tetap tersimpan dalam jurnal tersebut.
 
 Jalur yang disederhanakan untuk satu sumber yang telah dipilih. Catatan operasional juga mencakup jurnal asli. Pencatatan bergantung pada apa yang dapat dilihat oleh akun tersebut dan apa yang disediakan oleh Telegram.
 
-Pemberitahuan penghapusan tidak memberikan waktu penghapusan yang dapat diandalkan maupun identitas orang yang menghapus pesan tersebut. Dengan tidak mengungkapkan nilai-nilai tersebut, perbedaan antara pengamatan dan dugaan tetap terjaga.
+Telegram tidak memberi tahu siapa yang menghapus pesan atau kapan tepatnya. TgWitness membiarkan kolom itu kosong alih-alih menebak.
 
 ## Ubah catatan. Ikuti hash-nya.
 
-Setiap catatan berisi hash dari catatan sebelumnya. Hash-nya sendiri mencakup bidang-bidang peristiwa, termasuk tautan tersebut. Titik pemeriksaan yang disimpan secara eksternal mengunci panjang jurnal tertentu dan hash awal.
+Setiap catatan berisi hash catatan sebelumnya. Checkpoint yang disimpan di tempat lain mengunci panjang jurnal dan hash terakhir.
 
 02 / HASH-CHAIN SANDBOXSHA-256 asli · contoh catatan
 
@@ -105,23 +105,23 @@ h0 = 064
 hi = hex(SHA-256(C(ei)))
 σi = Ed25519.Sign(sk, unhex(hi))
 
-**C** menserialisasikan sembilan bidang peristiwa sebagai JSON UTF-8: kunci yang diurutkan, tanpa spasi kosong tambahan, tanpa pengkodean ASCII, dan tanpa NaN/infinity. Nilai `previous_hash` dari peristiwa tersebut adalah hi−1. Nilai h0 yang ditampilkan berarti 64 karakter nol; tanda tangan mencakup 32 byte ringkasan mentah.
+**C** adalah sembilan kolom peristiwa sebagai JSON UTF-8: kunci terurut, tanpa spasi tambahan, tanpa escape ASCII, tanpa NaN/tak hingga. `previous_hash` adalah hi−1, h0 adalah 64 nol, dan tanda tangan mencakup 32 byte mentah digest.
 
-Sembilan bidang tersebut adalah `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload`, dan `previous_hash`. Ini adalah [pengkodean JSON TgWitness yang terdokumentasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#event-canonicalization); hash dan tanda tangan itu sendiri bukanlah bidang input hash.
+Kolomnya: `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload`, `previous_hash`. Spesifikasi lengkap: [pengodean peristiwa](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#event-canonicalization).
 
 TITIK PERIKSA YANG DISIMPAN
 
 Nexport ≥ Ncheckpoint
 hexport[Ncheckpoint] = Hcheckpoint
 
-Verifikasi tanda tangan titik pemeriksaan di bawah kunci pengumpul yang disematkan, lalu bandingkan batasnya dengan jurnal yang telah diverifikasi. Ekspor yang dilakukan kemudian mungkin berisi lebih banyak catatan; namun, ekspor tersebut tetap harus sesuai dengan titik pemeriksaan sebelumnya.
+Periksa tanda tangan checkpoint dengan kunci yang dipatok, lalu bandingkan dengan jurnal. Ekspor yang lebih baru boleh lebih panjang, tetapi harus cocok di checkpoint.
 
 ## Tiga pertanyaan, tiga pemeriksaan yang berbeda
 
-[01 / INTEGRITAS**Apakah catatan ini berubah?** Verifikasi hash dan tanda tangan menggunakan kunci tepercaya yang terpisah.](https://phishdestroy.github.io/TgWitness/id/docs/exports/)[02 / KONTINUITAS**Apa yang telah disimpan sebelumnya?** Bandingkan ekspor yang ditandatangani dengan titik pemeriksaan yang disimpan oleh saksi terpisah.](https://phishdestroy.github.io/TgWitness/id/docs/witness/)[03 / PENYAMPAIAN**Apakah peristiwa uji coba ini telah diterima?** Cocokkan tindakan pengiriman, pengeditan, dan penghapusan yang dikendalikan dengan jurnal masing-masing akun.](https://phishdestroy.github.io/TgWitness/id/docs/cases/)
+[01 / INTEGRITAS**Apakah catatan ini berubah?** Hash dan tanda tangan terhadap kunci yang Anda percayai.](https://phishdestroy.github.io/TgWitness/id/docs/exports/)[02 / KONTINUITAS**Apa yang telah disimpan sebelumnya?** Bandingkan ekspor dengan checkpoint yang disimpan saksi.](https://phishdestroy.github.io/TgWitness/id/docs/witness/)[03 / PENYAMPAIAN**Apakah peristiwa uji coba ini telah diterima?** Kirim, sunting, dan hapus pesan uji, lalu lihat apa yang ditangkap setiap akun.](https://phishdestroy.github.io/TgWitness/id/docs/cases/)
 
-Gunakan tanda tangan untuk memeriksa catatan yang disimpan, titik pemeriksaan (checkpoints) untuk membandingkan batas waktu sebelumnya, dan uji pengiriman terkontrol untuk mengukur proses pengumpulan. Masing-masing menjawab pertanyaan spesifik. [Bacalah ruang lingkup verifikasi dan asumsi kepercayaan.](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope)
+Tanda tangan menjawab "apakah diubah?", checkpoint menjawab "apakah cocok dengan yang ada sebelumnya?", pesan uji menjawab "apakah kita menangkap semuanya?". [Apa yang dibuktikan verifikasi dan apa yang tidak.](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope)
 
-Ikuti [penyelidikan akun secara menyeluruh](https://phishdestroy.github.io/TgWitness/id/docs/cases/) mulai dari pengumpulan data hingga penyusunan berkas kasus.
+Berikutnya: [investigasi seluruh akun](https://phishdestroy.github.io/TgWitness/id/docs/cases/) dari awal hingga paket kasus.
 
 [Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

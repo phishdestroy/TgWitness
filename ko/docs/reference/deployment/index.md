@@ -34,17 +34,11 @@ TgWitness를 Windows, Linux, macOS 또는 Docker 환경에서 HTTPS를 통해 �
 - **macOS:** 최신 Python 3.11 이상 배포판을 설치하십시오. OS에서 제공하는 인터프리터가 요구 사항을 충족한다고 가정하지 마십시오. 프로젝트 디렉토리에 있는 `python3 start.py`를 사용하십시오.
 - **Docker:** Compose v2.20 이상과 함께 Docker Engine/Desktop을 사용하십시오. Windows에서 Docker Desktop을 사용할 경우 Linux 컨테이너를 사용해야 합니다. 컨테이너는 자체 Python 종속성을 설치하므로, 호스트에 별도로 Python을 설치할 필요가 없습니다.
 
-데이터 디렉토리에는 영구 로컬 스토리지를 사용하십시오. 메시지, 미디어, WAL 증가량, 내보내기 및 백업을 고려하여 용량을 계획하십시오. 모든 워크로드에 적용되는 증거 기반의 보편적인 최소 디스크/RAM 사양은 존재하지 않습니다. 호환되는 의존성 휠이 없는 CPU 아키텍처 및 Python 버전의 경우 추가 빌드 도구와 별도의 검증이 필요할 수 있습니다. "이식성"은 모든 OS 또는 하드웨어를 지원한다는 주장이 아닙니다.
-
-Windows 11/Python 3.12 환경은 로컬에서 검증되었습니다. Linux/macOS/컨테이너 정의 및 CI 설정이 제공되지만, 이 개발 호스트에서는 실행되지 않았습니다. 정확한 범위는 [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/)를 참조하십시오.
-
 ## 로컬 컴퓨터
 
 Windows에서는 `Start.cmd`를, Linux/macOS에서는 `sh start.sh`를 사용하십시오. `scripts\Setup.cmd` 또는 `sh start.sh --setup-only`를 실행하면 환경이 준비됩니다. 런처는 첫 사용 시 필수 구성 요소를 설치하며, 이후 실행 시에는 기존 환경을 재사용합니다. 설정 및 텔레그램 데이터 수집에는 인터넷 연결이 필요하지만, 기존 기록 열람 및 내보내기 기능은 오프라인에서도 작동합니다.
 
 설치 후 `python start.py --check`를 실행하여 수집기를 시작하지 않은 상태에서 로컬 종속성, Ed25519, 저장소, 키 구성 및 수신 주소를 확인하십시오. 구조화된 출력을 보려면 `--json`를 사용하십시오. 의도된 `--data-dir`, `--host` 및 `--port`를 전달하십시오. 이 검사는 패키지를 설치하거나, 저널을 생성하거나, 텔레그램에 연결하지 않으며, 무결성 또는 커버리지 검증도 아닙니다. 시작 시 기존 저널을 별도로 검증합니다. `python start.py --help` 역시 설치를 수행하지 않습니다.
-
-옵션:
 
 start.py를 실행한 후, Windows에서는 `.venv\Scripts\python.exe`, Linux/macOS에서는 `.venv/bin/python`를 사용하여 보조 명령을 실행하거나, 먼저 해당 환경을 활성화하십시오. 아래의 `python -m ...` 예제는 환경이 활성화된 상태를 전제로 합니다.
 
@@ -73,8 +67,6 @@ Python 3.12를 사용하여 64비트 Windows 환경에서 직접 빌드하는 �
 ```
 python tools/build_portable.py
 ```
-
-빌더는 런타임 체크섬을 검증하고, 제한된 종속성을 패키지에 설치하며, 내장된 인터프리터를 사용하여 준비 상태 검사를 실행한 후 ZIP 파일과 체크섬을 `dist/`에 기록합니다.
 
 ## 컨테이너
 
@@ -121,8 +113,6 @@ docker compose logs witness                     # witness key fingerprint
 이 서비스는 Compose 네트워크 내의 수집기(`http://tgwitness:8787` )에 연결됩니다(`TGWITNESS_WITNESS_COLLECTOR` 가 이를 재정의하며, 예를 들어 `/profiles/<workspace ID>` 는 다른 작업 공간을 나타냅니다). 다른 사람이 운영하는 별도 서버의 위트니스(witness)를 사용하려면, 해당 서버에서 `deploy/compose/compose.witness.yaml` 를 사용하고 `TGWITNESS_WITNESS_COLLECTOR` 를 수집기의 HTTPS 주소로 설정하십시오. 해당 파일에는 위트니스만 포함되어 있습니다.
 
 ## 공개된 이미지를 설치하세요
-
-이 내용은 [릴리스 워크플로우가](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/#automated-github-releases) 성공적으로 완료되고 GHCR 패키지가 공개적으로 구성된 후에 이용 가능해집니다. 리포지토리의 소유자/이름은 이 소스 트리에 하드코딩되어 있지 않습니다. 해당 릴리스의 워크플로우 요약에 표시된 이미지를 사용하십시오.
 
 `deploy/env.example`를 `.env`로 복사하십시오. `TGWITNESS_IMAGE`를 공개된 버전으로 설정할 때는 **소문자** 리포지토리 경로를 사용하십시오. 예:
 
@@ -202,18 +192,6 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 
 업데이트 후 패널 접근 권한, 계정 신원, 관찰 상태 및 적용 범위를 확인하십시오. 재시작해도 놓친 텔레그램 업데이트는 복원되지 않습니다. 향후 버전에서 저장 형식이 변경될 경우, 롤백을 수행하려면 업데이트 전 백업이 필요할 수 있습니다.
 
-## GitHub 자동 릴리스
-
-이 프로젝트가 Actions가 활성화된 GitHub 저장소에 푸시되면 [릴리스](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml)워크플로가 바로 사용 가능해집니다. 이 워크플로는 프리릴리스를 포함하여 GitHub 릴리스가 **게시될** 때 실행됩니다. 초안이나 태그 푸시만으로는 패키지가 게시되지 않습니다.
-
-1. 패키지 버전과 변경 내역을 설정한 후, `v` 태그와 `pyproject.toml`의 정확한 버전(예: `v0.8.0`)을 함께 지정하여 릴리스를 게시하십시오.
-2. 이 워크플로는 태그를 검증하고, Windows/Linux/macOS에서 공통으로 사용되는 Python, general/account-import/QR 브라우저, 소스 패키지 및 Docker 검사를 실행합니다. 또한 Python 3.12를 사용하여 세 가지 운영 체제 모두에서 새로운 네이티브 설치도 수행됩니다.
-3. 이러한 검사가 통과되면, QEMU 환경에서 ARM64 이미지를 스모크 테스트하고, AMD64/ARM64 이미지를 `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` 에 게시하며, 소스 ZIP 파일과 Python 휠 파일, 그리고 해당 SHA-256 사이드카 파일을 첨부합니다. Windows용 포터블 ZIP 파일은 검사 워크플로우에서 테스트된 것과 정확히 동일한 아티팩트이며, 릴리스 워크플로우는 해당 아티팩트와 그 체크섬을 다운로드하여 게시합니다.
-4. 마지막 작업에서는 게시된 세 가지 패키지를 모두 다시 다운로드하여 체크섬을 확인합니다. 그런 다음 `SHA256SUMS.txt` 및 `RELEASE-MANIFEST.json` 을 게시하며, 버전, 소스 리비전 및 자산 크기를 기록합니다. 업로드 시 기존 릴리스 자산을 덮어쓰지 않습니다.
-5. 첫 게시 후, GHCR 패키지 설정을 열고 익명 이미지 가져오기를 원하는 경우 가시성을 **‘공개**(**Public)**’로 설정하십시오. 공개 소스 저장소만으로는 공개 컨테이너 패키지가 보장되지 않습니다. 조직 정책에서 패키지 게시가 허용되어야 합니다. 이 워크플로는 `GITHUB_TOKEN`를 사용하며, 레지스트리 비밀번호나 VPS 인증 정보는 저장소에 포함되어서는 안 됩니다.
-
-이 로컬 준비 과정만으로는 원격 워크플로우의 성공 여부가 확인되지 않았습니다. ARM64 에뮬레이션은 예비 테스트일 뿐, 네이티브 하드웨어나 실제 텔레그램 환경에서의 검증은 아닙니다. 이는 릴리스 패키징을 자동화하지만, 서버를 시작하려면 여전히 Compose 명령과 해당 도메인/호스트 전제 조건이 필요합니다. 릴리스가 공개될 때 기존 서버는 자동으로 업그레이드되거나 재시작되지 않습니다.
-
 ## 원격 서버
 
 서비스를 루프백에 제한하고 SSH 터널을 사용하거나, 리버스 프록시에서 HTTPS 연결을 종료하십시오. 기본 Compose 파일은 로컬 전용이며, 선택 사항인 `deploy/compose/compose.https.yaml` 오버레이는 구성된 도메인에 대해 Caddy를 제공합니다. 베어러 토큰이 URL이나 프록시 로그에 노출되지 않도록 하십시오. 리버스 프록시는 요청 크기와 연결 빈도를 제한해야 합니다. 일반 HTTP를 인터넷에 노출하지 마십시오.
@@ -244,14 +222,6 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 다른 워크스페이스의 경우 **[Exports] → [Workspace ID]**에서 `--profile ID`를, 원격 서버의 경우 `--format zip|jsonl|csv|html`, `--url https://your-server`를, 5 GiB 전송 제한을 변경하려면 `--max-mib`를 사용하십시오. 일반 HTTP는 루프백에서만 허용됩니다. 토큰은 헤더를 통해 전송되며, 리디렉션은 거부되고, 기존 파일은 덮어쓰지 않으며, 다운로드가 완료되지 않은 파일은 완료된 파일로 게시되지 않습니다. TGWITNESS_TOKEN이 생성된 토큰을 재정의하는 경우, 해당 활성 값이 포함된 별도로 보호된 파일을 사용하십시오. panel-token.txt는 재정의에 의해 재작성되지 않습니다. 명령어의 SHA-256은 전송 체크섬일 뿐입니다. 서명된 ZIP 파일은 별도로 검증하십시오.
 
-서버 내보내기 파일은 각 작업 공간의 비공개 `temporary-exports/` 내에 보관됩니다. 수출이 성공적으로 완료되면 해당 파일은 정리됩니다. 중단된 수출 파일은 다음 워크스페이스 시작 시, 해당 워크스페이스의 전용 인스턴스 잠금이 유지된 상태에서 제거됩니다. 이 디렉터리는 저장소 위협/용량 모델의 일부이므로, 암호화된 데이터 볼륨을 사용하십시오. 실제 운영 환경 규모의 수 기가바이트급 전송의 경우, 대상 시스템에서 여전히 적합성 검증이 필요합니다.
-
 이 패널에는 대기 중이거나 실패한 미디어, 가장 오래된 보류 중인 미디어, 사용 가능한 디스크 공간, 텔레그램 요청 일시 중지 상태, 그리고 액세스가 확인되지 않은 소스가 표시됩니다. 이러한 진단 정보는 완전한 종단 간 전송 모니터링 기능은 아닙니다. 워크스페이스는 하나의 프로세스를 공유하므로, 문제가 있는 계정이 다른 계정에 영향을 미칠 수 있습니다. 별도의 작업자 프로세스, 보존/교체, 내구성 있는 업데이트 복구 및 전체 배포 검증은 여전히 유지됩니다. 패널 접근 범위 제한은 [‘접근 및 권한’](https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/) 문서에 명시되어 있으며, 독립적인 체크포인트에 대해서는 [증인](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/)가이드에서 다룹니다.
-
-## 연결 및 보안 옵션
-
-연결 경로는 워크스페이스별로 설정되며, 인증 전에 구성해야 합니다. SOCKS5/HTTP CONNECT는 고정된 python-socks 종속성을 사용합니다. MTProxy는 Telethon의 실험적인 무작위 중간 전송 방식을 사용하며, 가짜 TLS ee 비밀키는 지원되지 않습니다. 직접 연결 폴백은 선택한 [IP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/#ip-modes)모드에 따라 달라집니다. **‘주소 숨기기’**모드는 이를 거부하며, **‘최후의 수단으로서의 직접 연결’ 모드는** 지연 시간 후 이를 허용합니다. **터널이나 VPN 뒤의 서버는** 직접 경로를 허용하지만 VPN을 생성하지는 않습니다. 이는 시스템 전체에 적용되는 네트워크 정책이 아닙니다.
-
-새로 설치할 경우, TGWITNESS_VAULT_KEY_FILE은 별도로 보호된 무작위 마스터 키 파일을 가리키도록 설정합니다. 컨테이너 내 /data 외부에 읽기 전용으로 마운트하십시오. 각 작업 공간과 마스터 키에 대한 vault.external.json 솔트 메타데이터를 별도로 보관하십시오. 기존의 로컬 볼트는 계획적인 마이그레이션이 필요하며, 이 변수를 설정한다고 해서 자동으로 변환되지는 않습니다. 메시지/미디어 저장 및 내보내기 기능은 애플리케이션 수준에서 암호화되지 않습니다. 필요한 경우 암호화된 볼륨과 충분한 용량의 비공개 임시 저장 공간을 사용하십시오.
 
 상세한 절차: [연결/보안](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/) 및 [운영 모드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/).

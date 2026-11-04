@@ -32,55 +32,55 @@
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <span aria-current="page">Eksport va tekshirish</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Nima sinovdan o&#x27;tkazilgan →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentatsiya / 07</p><h1>Eksport va tekshirish</h1><p class="guide-outcome">Qabul qiluvchiga yig&#x27;ish ish maydoni va uning saqlangan tarixi bilan solishtirib tekshirishi mumkin bo&#x27;lgan fayllarni taqdim eting.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentatsiya / 07</p><h1>Eksport va tekshirish</h1><p class="guide-outcome">Kimgadir ish maydoningizga solishtirib o'zi tekshira oladigan fayllarni bering.</p>
 <div class="flow-strip export-flow" aria-label="Dalillarni topshirish: ishonchli nusxani saqlab qo&#x27;ying, imzolangan ZIP-faylni eksport qiling, qabul qiluvchi bilan tekshiring"><span>Manbani saqlash</span><span>Imzolangan ZIP-ni eksport qiling</span><span>Qabul qiluvchi tasdiqlaydi</span></div>
-<p>Imzolar va tekshiruv nuqtalariga yangi boshlamoqdamisiz? <a href="../concepts/#chain">Namuna yozuvni o&#x27;zgartiring</a> va qaysi tekshiruvlar uni aniqlashini ko&#x27;ring.</p>
+<p>Imzolar va nazorat nuqtalari sizga yangimi? <a href="../concepts/#chain">Namuna yozuvni o'zgartiring</a> va qaysi tekshiruv uni ushlashini ko'ring.</p>
 <p>Nusxani yig&#x27;uvchidan uzoqda saqlashni xohlaysizmi? <a href="#s3">S3 sozlamalar</a>iga o&#x27;ting, <a href="#s3-retention">Object Lock</a> yoki <a href="#s3-restore">tasdiqlangan tiklashni tanlang</a>.</p>
 <h2 id="retain">Ishonchli manbani saqlab qo&#x27;ying</h2>
-<p>Ish maydonining jamoat kaliti barmoq izini yig&#x27;uvchidan tashqarida saqlang. Yig&#x27;ish jarayonida imzolangan tekshiruv nuqtalarini boshqa joyda saqlang yoki <a href="../witness/">mustaqil guvoh</a>dan foydalaning. Ushbu havolalar qabul qiluvchiga kalitni va avvalgi jurnal chegarasini tekshirish imkonini beradi.</p>
+<p>Ish maydoni kalitining barmoq izini kollektordan boshqa joyga yozing. Yig'ish davomida imzolangan nazorat nuqtalarini ham boshqa joyda saqlang yoki <a href="../witness/">mustaqil guvoh</a>ni ishga tushiring. Qabul qiluvchi kalitni va jurnalning oldingi holatini aynan shular bilan tekshiradi.</p>
 <h2 id="export">Imzolangan ZIP-faylni yuklab oling</h2>
-<p><strong>Exportsni</strong> oching va imzolangan dalillar ZIP-faylini yarating. U to&#x27;liq ish maydoni jurnali va imzolangan fayllar manifestini o&#x27;z ichiga oladi. <a href="../reports/">Report Studio</a>&#x27;dan foydalanib, o&#x27;qiladigan hisobotni shakllantiring yoki faqat tanlangan, minimallashtirilgan ma&#x27;lumotlarni yetkazish uchun <a href="../handover/">handover ekstrakt</a>ini yarating.</p>
-<p>HTML, PDF va JSON hisobotlari o&#x27;z imzolangan muhrlariga ega bo&#x27;lib, ularni alohida tekshirish mumkin. CSV tahlil uchun qulay nusxa bo&#x27;lib, uning yaxlitligini tekshirish uchun tasdiqlangan ZIP ichidagi aniq CSV faylidan foydalaning. Agar qabul qiluvchi manba yozuvlari va ilovalarni ham talab qilsa, imzolangan ZIP faylni saqlang.</p>
+<p><strong>Eksportlar</strong> → imzolangan dalil ZIP. Unda butun jurnal va imzolangan fayl manifesti bor. O'qilishi oson hisobotni <a href="../reports/">Report studio</a>'da shakllantiring yoki faqat tanlangan ma'lumotlarni <a href="../handover/">topshirish ekstrakti</a> sifatida yuboring.</p>
+<p>HTML, PDF va JSON hisobotlarining o'z muhrlari bor. CSV shunchaki ishchi nusxa; yaxlitlik uchun tekshirilgan ZIP ichidagi CSV'dan foydalaning.</p>
 <h2 id="verify">TgWitness&#x27;ning ishonchli nusxasi bilan tasdiqlang</h2>
-<p>O&#x27;rnatilgan loyiha muhitida namunaviy barmoq izi va fayl yo&#x27;llarini quyidagilar bilan almashtiring:</p>
+<p>Loyiha muhitida, o'z barmoq izingiz va yo'llaringiz bilan:</p>
 <pre><code>python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
-<p>Ikkala havola ham o&#x27;tganida, natija <code>key_pinned: true</code> va <code>checkpoint_checked: true</code> ni qayta hisobot beradi. Verifikatsiya natijasini asl arxiv bilan birga saqlang. Saqlangan tekshiruv nuqtasi eksport chegarasida yoki undan oldin bo&#x27;lishi kerak.</p>
+<p>Muvaffaqiyatda <code>key_pinned: true</code> va <code>checkpoint_checked: true</code> ko'rinadi. Bu natijani arxiv yonida saqlang. Nazorat nuqtasi eksport oxirida yoki undan oldin bo'lishi kerak.</p>
 <h2 id="meaning">Verifikatsiya natijasidan foydalaning</h2>
-<ul><li><strong>Yetkazib berilgan fayllarni tekshiring:</strong> manifest ularning hashlarini bog&#x27;laydi, yozuv imzolari esa saqlangan jurnalni bog&#x27;laydi. O&#x27;zgargan fayl yoki uzilgan yozuv zanjiri aniqlanadi.</li><li><strong>Ish maydoni identifikatorini tekshiring:</strong> mustaqil saqlangan barmoq izi siz kutgan imzolash kalitingizni aniqlaydi.</li><li><strong>Oldingi chegarani solishtiring:</strong> saqlangan tekshiruv nuqtasi topshirishdan oldin saqlangan jurnal prefiksi bilan eksportni tekshiradi.</li><li><strong>Ko&#x27;rib chiqish yig&#x27;indisi qamrovi:</strong> bo&#x27;shliqlar, olish natijalari va nazoratli jo&#x27;natish → tahrirlash → o&#x27;chirish testi ushbu sozlama tomonidan qayd etilgan voqealarni tasvirlaydi.</li></ul>
-<p>Ushbu natijalarni qabul qiluvchining nusxasi bilan birga saqlang. Tekshiruvlar doirasini hamda manba da&#x27;volari va yig&#x27;ish qamrovini alohida baholashni aniqlash uchun <a href="../reference/evidence/#verification-scope">qanday tasdiq o&#x27;rnatilganini</a> ko&#x27;ring.</p>
+<ul><li><strong>Fayllar:</strong> manifest ularning xeshlarini, imzolar jurnalni bog'laydi. Har qanday o'zgarish ko'rinadi.</li><li><strong>Shaxs:</strong> saqlagan barmoq izingiz bu siz kutgan kalit ekanini isbotlaydi.</li><li><strong>Oldingi holat:</strong> nazorat nuqtasi eksportni topshirishdan oldin saqlangan jurnal boshi bilan solishtiradi.</li><li><strong>Qamrov:</strong> bo'shliqlar, olish natijalari va yuborish → tahrirlash → o'chirish sinovi bu sozlama haqiqatan nimani ushlaganini ko'rsatadi.</li></ul>
+<p>Batafsil: <a href="../reference/evidence/#verification-scope">tekshiruv nimani isbotlaydi va nimani isbotlamaydi</a>.</p>
 
 <h2 id="s3">S3 tashqi nusxasini sozlash</h2>
-<p>Joriy ish maydoningizda <strong>Eksportlar → Off-sayt nusxasi</strong> bo&#x27;limini oching. Ushbu ixtiyoriy funksiya AWS S3 va boshqa S3-ga mos xizmatlar bilan ishlaydi. U jurnal segmentlarini, saqlangan fotosuratlar va fayllarni, vaqt shtampi bilan belgilangan tekshiruv nuqtalarini hamda yakunlangan suhbat eksportlarini nusxalaydi. Har bir ob&#x27;ekt yuklanishdan oldin to&#x27;plovchida<code>AES-256-GCM</code> bilan shifrlanadi.</p>
-<p>Onlayn demo yuklash funksiyasi o&#x27;chirilgan holda bir xil boshqaruv elementlarini ko&#x27;rsatadi. Saqlash ma&#x27;lumotlarini faqat o&#x27;zingizning ish muhitingizda kiriting.</p>
+<p>Ish maydoningizda <strong>Eksportlar → Off-sayt nusxasi</strong>. AWS S3 va har qanday S3-mos xizmat bilan ishlaydi. Jurnal segmentlari, saqlangan fayllar, vaqt belgilari bilan nazorat nuqtalari va tugallangan chat eksportlarini nusxalaydi, har biri kollektordan chiqishdan oldin <code>AES-256-GCM</code> bilan shifrlanadi.</p>
+<p>Onlayn demo bu boshqaruvlarni yuklash o'chirilgan holda ko'rsatadi. Haqiqiy hisob ma'lumotlarini faqat o'z o'rnatmangizda kiriting.</p>
 <figure><a href="../../../assets/off-site-copy.png"><img src="../../../assets/off-site-copy.png" width="1136" height="825" alt="To&#x27;liq Off-site nusxa paneli: oxirgi nuqta, mintaqa, bucket, kirish kalitlari, jadval, Object Lock va tiklash kaliti boshqaruvlari" loading="lazy"></a><figcaption>Kengaytirilgan ilg&#x27;or opsiyalar bilan to&#x27;liq panel. Saqlash ma&#x27;lumotlari ko&#x27;rsatilmagan.</figcaption></figure>
 <div class="table-wrap"><table><caption>Eksportlar → Off-sayt nusxasi bo&#x27;limidagi saqlash sozlamalari</caption><thead><tr><th scope="col">Maydon</th><th scope="col">Nimani kiritish</th></tr></thead><tbody>
-<tr><th scope="row">Oxirgi nuqta</th><td>Saqlash xizmati URL manzili, bucket yo&#x27;li yoki kirish ma&#x27;lumotlarisiz. Badiiy misol: <code>https://s3.example.invalid</code></td></tr>
-<tr><th scope="row">Mintaqa</th><td>Provayderingiz talab qiladigan mintaqa. Ilovaning standart qiymati <code>us-east-1</code>.</td></tr>
-<tr><th scope="row">Bucket</th><td>Kirishingiz mumkin bo&#x27;lgan mavjud bucket. Badiiy misol: <code>example-case-backup</code>.</td></tr>
-<tr><th scope="row">Chelakdagi papka</th><td>Ob&#x27;ekt prefiksi; standart qiymati <code>tgwitness</code>. Ilova ushbu ish maydonining imzolash kaliti barmoq izidan olingan prefiksni qo&#x27;shadi.</td></tr>
-<tr><th scope="row">Kirish kaliti ID / Maxfiy kirish kaliti</th><td>Saqlash ma&#x27;lumotlarini ikkitasini ham birga kiriting. Ular ish maydoni seyfida saqlanadi. Keyingi saqlashlarda ikkitasini ham bo&#x27;sh qoldiring, shunda saqlangan juftlik saqlanib qoladi.</td></tr>
-<tr><th scope="row">Yo&#x27;l-uslubidagi manzillar</th><td>Provayderga ko&#x27;ra, yoqilganda <code>endpoint/bucket</code>, o&#x27;chirib qo&#x27;yilganda <code>bucket.endpoint</code> dan foydalaning.</td></tr>
-<tr><th scope="row">Ko&#x27;chirma oraligi</th><td>1 dan 1 440 daqiqagacha; standart 5 daqiqa. Rejalashtirilgan nusxalar olinishi uchun ilova ishga tushirilgan bo&#x27;lishi kerak.</td></tr>
-<tr><th scope="row">Object Lock saqlash</th><td>Object Lock-ni qo&#x27;llab-quvvatlaydigan bucket uchun saqlash muddati va rejimi. Nol kun bucketning standart saqlash muddatini amalda qoldiradi.</td></tr>
+<tr><th scope="row">Oxirgi nuqta</th><td>Saqlash URL manzili, bucket yo'li yoki hisob ma'lumotlarisiz. Misol: <code>https://s3.example.invalid</code>.</td></tr>
+<tr><th scope="row">Mintaqa</th><td>Provayderingiz talab qilgan qiymat. Standart <code>us-east-1</code>.</td></tr>
+<tr><th scope="row">Bucket</th><td>Yozish huquqingiz bor mavjud bucket. Misol: <code>example-case-backup</code>.</td></tr>
+<tr><th scope="row">Chelakdagi papka</th><td>Prefiks, standart <code>tgwitness</code>. Uning ustiga har bir ish maydoni prefiksi qo'shiladi.</td></tr>
+<tr><th scope="row">Kirish kaliti ID / Maxfiy kirish kaliti</th><td>Ikkalasi birga, seyfda saqlanadi. Keyinroq ikkalasini bo'sh qoldirsangiz, saqlanib qoladi.</td></tr>
+<tr><th scope="row">Yo&#x27;l-uslubidagi manzillar</th><td>Yoqilgan: <code>endpoint/bucket</code>. O'chirilgan: <code>bucket.endpoint</code>. Provayderga bog'liq.</td></tr>
+<tr><th scope="row">Ko&#x27;chirma oraligi</th><td>1 dan 1,440 daqiqagacha, standart 5. Faqat ilova ishlayotganda.</td></tr>
+<tr><th scope="row">Object Lock saqlash</th><td>Kunlar va rejim, agar bucket Object Lock'ni qo'llasa. Nol bucket standartini saqlaydi.</td></tr>
 </tbody></table></div>
 <ol>
-<li>Provayderingizda bucket yarating, so&#x27;ng uning manzili va kirish ma&#x27;lumotlarini kiriting. Tayyorlanayotganda &quot;<strong>Offsayt nusxasini saqlash&quot;</strong>ni belgilamagan holda qoldiring, so&#x27;ng &quot;<strong>Offsayt nusxasini saqlash&quot;ni</strong> tanlang.</li>
-<li><strong>Ulanishni sinab ko&#x27;rishni</strong> tanlang. Bu shifrlangan test ob&#x27;ektini yuklaydi va saqlash javobini tekshiradi.</li>
-<li><strong>Yuklab olish shifrlash kalitini</strong> tanlang. Ushbu faylni kollektor (ma&#x27;lumot yig&#x27;uvchi)dan alohida saqlang; u tiklash uchun zarur.</li>
-<li><strong>Offsayt nusxasini saqlash</strong> katagini belgilang va yana saqlang. Qo&#x27;lda ijro etish uchun &quot;<strong>Nusxani hozir ko&#x27;chirish</strong>&quot;ni tanlang yoki jadvalni ishga tushirib qo&#x27;ying.</li>
+<li>Bucket yarating, <strong>Off-sayt nusxasini saqlash</strong> belgilanmagan holda manzil va hisob ma'lumotlarini to'ldiring, <strong>Off-sayt nusxasini saqlash</strong> tugmasini bosing.</li>
+<li><strong>Ulanishni sinash</strong> shifrlangan sinov obyektini yuklaydi.</li>
+<li><strong>Shifrlash kalitini yuklab olish</strong> va uni kollektordan uzoqda saqlang. Kalit yo'q, tiklash yo'q.</li>
+<li><strong>Off-sayt nusxasini saqlash</strong>ni belgilang, saqlang, so'ng <strong>Hozir nusxalash</strong> yoki jadval ishlasin.</li>
 </ol>
 
 <h2 id="s3-retention">Saqlash muddatini va nusxa ko&#x27;chirish jarayonini tekshirish</h2>
-<p><strong>Qo&#x27;shimcha sozlamalar</strong> bo&#x27;limida, baketingiz Object Lock-ni qo&#x27;llab-quvvatlaganda saqlash muddatini kunlarda belgilash va <code>GOVERNANCE</code> yoki <code>COMPLIANCE</code> ni tanlang. TgWitness yuklangan obyektning saqlash rejimi va muddatini qayta o&#x27;qiydi. Alohida saqlash natijasini ko&#x27;rib chiqing: tasdiqlangan, saqlash muddati yetishmayotgan yoki tekshiruv muvaffaqiyatsiz bo&#x27;lgan.</p>
-<p>Panel oxirgi o&#x27;tish, ob&#x27;ektlar soni, uzatilgan baytlar, nusxalangan jurnal chegarasi va har qanday xatoni ko&#x27;rsatadi. Yo&#x27;qolgan yoki o&#x27;zgartirilgan mahalliy media qayd etilib, keyingi o&#x27;tishda qayta sinovdan o&#x27;tkaziladi. O&#x27;sha media ortidagi fayllar, tekshiruv nuqtalari va navbatga qo&#x27;yilgan eksportlar hanuzgacha nusxalanishi mumkin.</p>
-<p>Yuklashlar ish maydonining Direct, SOCKS5 yoki HTTP yo&#x27;nalishidan foydalanadi. S3 nusxa ko&#x27;chirish uchun ushbu yo&#x27;nalishlardan birini tanlang; faqat MTProxy yo&#x27;nalishi nusxani xato bilan kutib turadi.</p>
+<p><strong>Boshqa variantlar</strong> ostida saqlash kunlarini va <code>GOVERNANCE</code> yoki <code>COMPLIANCE</code>ni tanlang. TgWitness saqlash sozlamasini yuklangan obyektdan qayta o'qiydi va aytadi: tasdiqlandi, yo'q yoki tekshiruv muvaffaqiyatsiz.</p>
+<p>Panel oxirgi o'tishni, obyektlar sonini, baytlarni, nusxalangan jurnal chegarasini va xatolarni ko'rsatadi. Yo'qolgan mahalliy fayl xabar qilinadi va keyingi o'tishda qayta uriniladi, qolgani nusxalanishda davom etadi.</p>
+<p>Yuklashlar to'g'ridan-to'g'ri, SOCKS5 yoki HTTP orqali o'tadi. Faqat MTProxy marshrutida nusxa xato bilan kutadi.</p>
 
 <h2 id="s3-key">Qayta tiklash kalitini alohida saqlang</h2>
-<p>Yuklab olingan JSON dekodlash kaliti, manzil sozlamalari, ish maydoni ob&#x27;ektlari prefiksi va imzolash kalitining barmoq izini o&#x27;z ichiga oladi. Tiklash uchun ushbu kalit fayli hamda bucketga o&#x27;qish huquqiga ega alohida saqlash ma&#x27;lumotlari talab etiladi. Ularni tiklash reyangizda hisobga oling.</p>
-<p>Agar endpoint, bucket yoki papka prefiksini o&#x27;zgartirsangiz, kalit faylni qayta yuklab oling, shunda uning manzil sozlamalari mos keladi. Ilova yangi manzilda mahalliy saqlangan jurnal, fayllar va tekshiruv nuqtalari nusxasini ishga tushiradi. Mahalliy yuklash navbatidan allaqachon olib tashlangan yakunlangan suhbat eksportlari avvalgi manzilida qoladi.</p>
+<p>Kalit JSON'ida shifrni ochish kaliti, manzil, prefiks va kalit barmoq izi bor. Tiklash uchun u va o'qish huquqli saqlash hisob ma'lumotlari kerak.</p>
+<p>Endpoint, bucket yoki prefiksni o'zgartirdingizmi? Kalitni qayta yuklab oling. Yangi nusxa yangi manzilda boshlanadi; eski chat eksportlari joyida qoladi.</p>
 
 <h2 id="s3-restore">Boshqa qurilmada tiklash va tekshirish</h2>
-<p>TgWitness&#x27;ning ishonchli o&#x27;rnatilgan nusxasini, yuklab olingan kalit JSON faylini, o&#x27;qish huquqiga ega saqlash ma&#x27;lumotlarini va bo&#x27;sh chiqish katalogini ishlating. Quyidagi badiiy ma&#x27;lumot o&#x27;rnini bosuvchi o&#x27;rinbosarlarni haqiqiy ma&#x27;lumotlar bilan almashtiring.</p>
+<p>Sizga ishonchli TgWitness o'rnatmasi, kalit JSON, faqat o'qish uchun saqlash hisob ma'lumotlari va bo'sh papka kerak:</p>
 <h3>Windows PowerShell</h3>
 <pre><code>$env:TGWITNESS_S3_ACCESS_KEY = 'YOUR_READ_ACCESS_KEY'
 $env:TGWITNESS_S3_SECRET_KEY = 'YOUR_READ_SECRET_KEY'
@@ -89,9 +89,8 @@ python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out 
 <pre><code>export TGWITNESS_S3_ACCESS_KEY='YOUR_READ_ACCESS_KEY'
 export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence</code></pre>
-<p>Yuklab olingan va dekriptlangan obyektlar shaxsiy vaqtinchalik saqlashda qoladi, shu vaqtda butun jurnal, saqlangan tekshiruv nuqtalari hamda saqlangan media hash va o&#x27;lchamlari tekshiriladi. Xavfsiz bo&#x27;lmagan yo&#x27;llar, to&#x27;qnashuvchi jurnal segmentlari va tekshiruv nuqtasidan qisqaroq jurnal rad etiladi. Tekshirish muvaffaqiyatsiz bo&#x27;lsa, tiklangan fayllar e&#x27;lon qilinmaydi.</p>
-<p>Muvaffaqiyatli tiklash natijasida nusxada mavjud material uchun <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> va <code>exports/</code> hosil bo&#x27;ladi. Buyruqning JSON natijasini tiklangan material bilan birga saqlang.</p>
-<p>Qayta tiklangan materiallarni mustaqil saqlangan tekshiruv nuqtangiz yoki guvoh yozuvlaringiz bilan solishtiring, so&#x27;ng kerakli davr uchun yozib olingan to&#x27;plam qamrovini ko&#x27;rib chiqing.</p>
+<p>Hammasi avval shaxsiy vaqtinchalik papkada tekshiriladi: butun jurnal, nazorat nuqtalari, fayl xeshlari va o'lchamlari. Xavfli yo'llar, ziddiyatli segmentlar yoki nazorat nuqtasidan qisqa jurnal muvaffaqiyatsiz bo'ladi va shunda hech narsa yozilmaydi.</p>
+<p>Muvaffaqiyatda <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> va <code>exports/</code> olasiz. Buyruqning JSON natijasini ular bilan saqlang va o'zingiz saqlagan nazorat nuqtalari yoki guvoh yozuvlari bilan solishtiring.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/evidence/">To'liq manba →</a><a class="next-guide" href="../reports/"><span>Keyingi qadam</span><strong>Hisobotni loyihalash →</strong></a><p>Ushbu qo&#x27;llanmalar joriy amalga oshirishni tasvirlaydi. Tasdiqlash natijalari va qolgan bo&#x27;shliqlar alohida hujjatlashtirilgan. <a href="../reference/verification/">Nima sinovdan o&#x27;tkazilgan →</a></p></footer>
 </main>

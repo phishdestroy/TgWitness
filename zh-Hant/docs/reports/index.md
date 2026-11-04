@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reports/
 
-請為讀者提供從案件問題到已保存紀錄的清晰路徑。
+讓讀者從案件問題直接到達保存的紀錄。
 
-報告工作室整合了資料篩選、易讀的變更歷史紀錄、圖表以及您撰寫的調查結果。八種整合式設計適用於受支援的 HTML 及原生 PDF 輸出格式。HTML、PDF 和 JSON 報告各自附有簽名印章；ZIP 清單亦將套件中的檔案綁定在一起。HTML 和 PDF 報告會在最終版面配置完成後加蓋印章。
+Report studio 彙整您挑選的資料、變更歷史、圖表和您的發現。八種設計，HTML 和原生 PDF。每份 HTML、PDF 和 JSON 報告都以您的金鑰封印。
 
 ## 三步驟建立報告
 
-1. 開啟**「匯出」→「設定與預覽」→「資料」**。可使用整個工作區，或選取特定聊天室、發訊者、包含 UTC 觀察日期的範圍，以及記錄類型。這些日期指明 TgWitness 觀察到該記錄的時間。
-2. 在「**設計與內容**」中，選擇設計與內容預設值。選取活動圖表、參與者標籤、對話紀錄、已儲存的變更以及可選的「案件看板」資料。新增您的案件詳情與審查筆記。
-3. 開啟**「預覽」**以檢視計數、活動、參與者、抽樣紀錄及缺失的 ID 範圍。儲存設定後，下載您所需的格式。
+1. **匯出 → 設定與預覽 → 資料**：整個工作區，或選擇聊天室、作者、日期（UTC，即 TgWitness 看到紀錄的時間）和紀錄類型。
+2. **設計與內容**：選擇設計和要放入的內容：圖表、參與者、對話紀錄、變更、Case Board 項目、您的案件細節和筆記。
+3. **預覽**：檢查數量、活動、樣本和缺少的 ID 範圍。儲存，然後下載所需格式。
 
 ### 請將相同的儲存資料以適合讀者閱讀的方式進行整理
 
@@ -55,16 +55,16 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reports/
 
 ## 選擇閱讀風格
 
-**「經典」、「編輯」、「簡報」、「分析」、「技術」、「概覽」、「閱讀系列」以及「帳本與邊註」**等模式，皆以不同編排方式呈現相同的底層記錄。變更設計時，資料選取範圍與書面註記均會保留。報告語言可從 25 種支援的語言中選擇。
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin**：相同的紀錄，不同的外觀。切換時保留您的選擇和筆記。可使用 25 種語言中的任一種。
 
-「閱讀系列」將案件、範圍、調查結果及變更內容圍繞在分節欄中進行分組。「總帳與邊欄」則採用編號章節與寬邊欄。兩者均支援帳戶 HTML 概覽及分享副本。 原生 PDF 檔案會隨附內嵌字型；使用者電腦無需安裝瀏覽器或 Node 即可建立 PDF。若要產生中文、日文及韓文的 PDF 檔案，伺服器上還需安裝合適的字型（例如 Noto Sans CJK），該字型需為系統全域安裝，或存放於 `TGWITNESS_FONT_DIR` 目錄中。若未安裝該字型，ZIP 檔案將僅保留 HTML 及 JSON 報告。
+PDF 以內建字型產生，不需要瀏覽器。中文、日文和韓文需要伺服器上有 Noto Sans CJK 之類的字型（系統層級或位於 `TGWITNESS_FONT_DIR`），否則只能得到 HTML 和 JSON。
 
 ## 請在上下文中理解變更內容
 
-已儲存的編輯內容會顯示修改前後的對比。刪除通知可附上最後擷取的版本。回覆、引用、轉發、反應、按鈕及附件的元資料均保留其可用的參考連結。檔案的 SHA-256 值與日誌記錄的雜湊值會分別標示。
+編輯會顯示前後對照，刪除會顯示最後保存的版本。回覆、轉傳、表情回應、按鈕和附件都保留其參照。
 
-設計預覽顯示封面、檢視及圖表組件，並採用前 50,000 筆來源記錄中的匹配記錄。獨立的資料預覽會掃描完整的穩定日誌快照，以獲取確切的選取數量，並標示顯示的樣本限制。產生 PDF 檔案以檢查最終的分頁編排。 完整的帳戶匯出包含 HTML 概覽；其個別聊天記錄的 PDF 檔案則採用所選的版面設計。
+設計預覽使用前 50,000 筆紀錄，資料預覽則精確計算全部。若要查看最終頁面版面，請產生 PDF。
 
 ## 請審慎選擇受眾版本
 
-報告篩選器可塑造易於閱讀的報告。完整的證據 ZIP 檔案保留原始日誌及附件。當收件者僅需接收選定的資料時，請採用[精簡版移交](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/handover/)。請檢視[報告內容與驗證資訊](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)，或[驗證已完成的匯出檔案](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/)。
+篩選只影響報告，證據 ZIP 仍包含完整日誌和檔案。若接收方應得到更少，請使用[精簡移交](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/handover/)。更多：[報告內容](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)，[驗證匯出](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/)。

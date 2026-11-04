@@ -2,17 +2,17 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/accounts/
 
-Cada espacio de trabajo alberga una cuenta, su registro y su clave de firma.
+Un espacio = una cuenta, su diario y su clave.
 
 ## Elija cómo iniciar sesión
 
-Abra **una cuenta**, añada un espacio de trabajo y acceda a su configuración de conexión. Utilice una cuenta específica para la observación.
+**Cuentas** → añadir espacio → ajustes de conexión. Use una cuenta aparte para esto.
 
-- **Código QR:** escanéelo desde los ajustes del dispositivo en Telegram y confirme el nuevo inicio de sesión.
-- **Número de teléfono:** introduzca el número, el código que envía Telegram y su contraseña de verificación en dos pasos, si está activada.
-- **Importación de sesiones:** importe una sesión compatible o datos de Telegram Desktop que le pertenezcan.
+- **Código QR:** escanéelo desde la pantalla Dispositivos de Telegram y confirme.
+- **Número de teléfono:** número, código y, si la tiene, la contraseña 2FA.
+- **Importar sesión:** su propio archivo de sesión o datos de Telegram Desktop.
 
-Elija un perfil de API integrado o introduzca su propio ID de API y hash. Un perfil de API identifica al cliente; no inicia sesión en una cuenta ni hace que la conexión sea anónima.
+Use un perfil de API integrado o su propio API ID y hash. Solo identifica la aplicación: no inicia sesión ni oculta nada.
 
 **¿Necesita primero un proxy?**
 
@@ -20,20 +20,20 @@ Puede [elegir y probar la ruta de conexión](https://phishdestroy.github.io/TgWi
 
 ## Elija qué desea supervisar
 
-1. Abra la lista de fuentes y seleccione los chats, grupos o canales que necesite.
-2. Revise la configuración de la recopilación, incluidos los archivos multimedia, antes de iniciar la observación.
-3. Inicie el recopilador y compruebe su conexión y su actividad reciente.
+1. Elija los chats, grupos o canales que necesita.
+2. Revise los ajustes de recogida, multimedia incluida.
+3. Arránquelo y compruebe la conexión y la actividad reciente.
 
-La cuenta debe poder acceder a la fuente. Los distintos roles pueden ver diferentes eventos; el registro refleja lo que recibió dicha cuenta.
+La cuenta tiene que tener acceso. Administradores y miembros ven cosas distintas; el diario muestra lo que recibió esta cuenta.
 
-Para un caso que abarque toda la cuenta, utilice **«Fuentes» → «Ámbito de observación» → «Modo de investigación**», revise la configuración y pulse **«Guardar ámbito**». La [guía completa de la investigación](https://phishdestroy.github.io/TgWitness/es/docs/cases/) abarca todos los tipos de chats visibles, el historial antiguo, los perfiles de los usuarios, las referencias entre chats y la transferencia de pruebas.
+¿La cuenta entera? **Fuentes → Alcance de observación → Modo investigación**, revíselo y pulse **Guardar alcance**. Guía completa: [investigar una cuenta entera](https://phishdestroy.github.io/TgWitness/es/docs/cases/).
 
 ## Compruebe la ruta completa
 
-En un grupo de prueba que usted controle, envíe un mensaje único desde otra cuenta, edítelo y elimínelo. Confirme los tres eventos en el registro, y a continuación [exporte y verifique](https://phishdestroy.github.io/TgWitness/es/docs/exports/) el registro.
+En su grupo de prueba, envíe un mensaje desde otra cuenta, edítelo y bórrelo. Los tres eventos deben aparecer en el diario. Después, [exporte y verifique](https://phishdestroy.github.io/TgWitness/es/docs/exports/).
 
-El estado «conectado» confirma la conexión. Un mensaje de prueba capturado confirma que un evento concreto ha llegado a este espacio de trabajo.
+«Conectado» significa que la conexión funciona. Un mensaje de prueba capturado significa que los eventos llegan de verdad.
 
 ## Añada otra cuenta
 
-Cree otro espacio de trabajo en **«Cuentas»** y repita la configuración. Conserve la huella digital de la clave de firma de cada cuenta para poder identificar sus exportaciones posteriormente.
+Nuevo espacio en **Cuentas**, mismos pasos. Apunte la huella de la clave de cada cuenta para distinguir luego las exportaciones.

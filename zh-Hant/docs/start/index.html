@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首頁</a> <span aria-hidden="true">/</span> <a href="../">文件說明</a> <span aria-hidden="true">/</span> <span aria-current="page">幾分鐘內即可開始使用</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文件說明 / 04</p><h1>幾分鐘內即可開始使用</h1><p class="guide-outcome">首先，請參閱一個實際運作範例。接著，請連結您的帳戶。</p>
+<article class="guide-content"><p class="eyebrow">文件說明 / 04</p><h1>幾分鐘內即可開始使用</h1><p class="guide-outcome">先在展示版中隨意看看，再連接您自己的帳戶。</p>
 <h2 id="demo">無需註冊即可瀏覽</h2>
-<p>下載或克隆該專案，安裝 <strong>Python 3.11 或更新版本</strong>，並執行示範程式。啟動程式會建立本地環境並安裝已標記的依賴項。</p>
+<p>取得專案，準備好 <strong>Python 3.11 或更新版本</strong>，執行展示版。其餘的由啟動器處理。</p>
 <pre><code>git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness</code></pre>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\scripts\Demo.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh --demo</code></pre></section></div>
-<p>瀏覽器將開啟一個包含虛構訊息的工作區。您可開啟對話、比對編輯內容，並檢視匯出檔案。示範模式不會連線至 Telegram。</p>
+<p>瀏覽器會開啟一個含虛構訊息的工作區。開啟聊天室，比較一次編輯，看看一份匯出。不涉及 Telegram。</p>
 <figure><img src="../../../assets/chats-dark.png" width="1440" height="1000" alt="TgWitness 對話檢視畫面及範例訊息" loading="lazy"><figcaption>一個範例工作區。您的個人日誌將另行建立。</figcaption></figure>
 <h2 id="live">建立您自己的工作區</h2>
-<p>結束示範流程後，請使用標準啟動程式：</p>
+<p>關閉展示版，然後：</p>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\Start.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh</code></pre></section></div>
-<p>開啟啟動器顯示的本地位址。若系統提示，請輸入終端機中指定之本地檔案內的<strong>面板存取憑證</strong>。此操作將解鎖 TgWitness；此程序與 Telegram 的登入程序是分開的。</p>
+<p>開啟啟動器顯示的網址，貼上它所指檔案中的<strong>面板存取權杖</strong>。這是 TgWitness 的權杖，不是 Telegram 的。</p>
 <h2 id="next">擷取您的第一則訊息</h2>
-<ol><li><a href="../accounts/">連結一個專用的 Telegram 帳號。</a></li><li>請選擇該帳號可存取的群組或頻道，然後開始監測。</li><li>在您所控制的測試群組中發送一則新訊息，並確認該訊息是否出現在日誌中。</li></ol>
+<ol><li><a href="../accounts/">連結一個專用的 Telegram 帳號。</a></li><li>選擇一個群組或頻道，開始觀察。</li><li>在測試群組中傳送一則訊息，看著它出現在日誌中。</li></ol>
 <p class="callout">若要進行伺服器安裝，請參閱「<a href="../server/">保持運作」指南</a>。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/quickstart/">完整參考資料 →</a><a class="next-guide" href="../accounts/"><span>下一步</span><strong>連結帳戶 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../reference/verification/">已測試的內容 →</a></p></footer>

@@ -2,48 +2,48 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/
 
-提供收件者可與收集工作區及其儲存歷史紀錄進行比對的檔案。
+交給對方能自行對照您的工作區核對的檔案。
 
 保留參考資料匯出已簽署的 ZIP 檔案收件者驗證
 
-初次接觸簽名與檢查點？[試著修改一個範例記錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/concepts/#chain)，看看哪些檢查機制會偵測到此變更。
+不熟悉簽名和檢查點？[修改一筆範例紀錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/concepts/#chain)，看看哪項檢查會發現它。
 
 想將副本存放在收集者之外的地方嗎？請前往 [S3 設定](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/#s3)、[Object Lock](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/#s3-retention) 或[驗證式還原](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/#s3-restore)。
 
 ## 保留可信的參考資料
 
-請將工作區的公鑰指紋儲存於收集器之外。在收集過程中，請將簽署過的檢查點存放在其他位置，或使用[獨立見證者](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/witness/)。這些參考資料可讓接收者驗證金鑰及較早的日誌邊界。
+請把工作區金鑰指紋記在收集器以外的地方。收集期間，也請將簽名檢查點存放在別處，或執行[獨立見證人](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/witness/)。接收方正是用這些來核對金鑰和日誌的早期狀態。
 
 ## 下載已簽署的 ZIP 檔案
 
-開啟**「匯出」**功能並建立經簽名的證據 ZIP 檔案。該檔案包含完整的作業空間日誌及經簽名的檔案清單。可使用[「報告工作室」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reports/)製作易於閱讀的報告，或透過「[移交摘錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/handover/)」功能僅傳遞經篩選且已精簡的資料。
+**匯出** → 簽名證據 ZIP。其中包含完整日誌和簽名檔案清單。可在 [Report studio](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reports/) 中製作易讀的報告，或只將選定資料作為[移交擷取](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/handover/)傳送。
 
-HTML、PDF 和 JSON 報告各自附有簽名印章，可分別進行驗證。CSV 檔是方便分析的副本；請使用經驗證 ZIP 檔內的精確 CSV 檔來檢查其完整性。若收件者同時需要原始記錄和附件，請保留該簽名 ZIP 檔。
+HTML、PDF 和 JSON 報告帶有各自的封印。CSV 只是工作副本；若需完整性，請使用已驗證 ZIP 內的 CSV。
 
 ## 請使用可信賴的 TgWitness 副本進行驗證
 
-在已安裝的專案環境中，請替換範例中的指紋與檔案路徑：
+在專案環境中，使用您自己的指紋和路徑：
 
 ```
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 ```
 
-當兩項參考值均通過驗證時，結果將顯示 `key_pinned: true` 和 `checkpoint_checked: true`。請將驗證結果與原始存檔一併保存。保留的檢查點必須位於匯出檔案的邊界處或之前。
+通過時會顯示 `key_pinned: true` 和 `checkpoint_checked: true`。請將該輸出與封存檔放在一起。檢查點必須位於匯出結尾或之前。
 
 ## 使用驗證結果
 
-- **請檢查交付的檔案：**清單檔案會綁定各檔案的雜湊值，而記錄簽名則會綁定已儲存的日誌。系統會偵測到檔案遭竄改或記錄鏈斷裂的情況。
-- **請檢查工作區身分：**獨立保留的指紋可確認其是否為您預期的簽署金鑰。
-- **比較較早的邊界：**保留的檢查點會將匯出內容與移交前儲存的日誌前綴進行比對。
-- **檢視資料蒐集範圍：**缺漏處、擷取結果，以及一項受控的「傳送 → 編輯 → 刪除」測試，皆可說明此設定所擷取的事件。
+- **檔案：**清單綁定它們的雜湊，簽名綁定日誌。任何變更都會顯現。
+- **身分：**您保存的指紋證明這就是您預期的金鑰。
+- **早期狀態：**檢查點將匯出與移交前保存的日誌前綴進行比較。
+- **涵蓋範圍：**空缺、擷取結果以及「傳送 → 編輯 → 刪除」測試，顯示這套設定實際捕捉到什麼。
 
-請將這些結果保留於收件者的副本中。請參閱[驗證結果所確立的](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)檢查範圍，以及對來源主張與蒐集範圍的獨立評估。
+詳細資訊：[驗證能證明什麼、不能證明什麼](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)。
 
 ## 設定 S3 異地備份
 
-在您的運作中工作區中，開啟**「匯出」→「異地備份」**。此選用功能支援 AWS S3 及其他相容於 S3 的服務。它會複製日誌區段、已保存的照片與檔案、附帶時間戳記回應的檢查點，以及已完成的聊天記錄匯出檔。每個物件在上傳前，都會在收集器上透過 `AES-256-GCM` 進行加密。
+在工作區中開啟**匯出 → 異地副本**。支援 AWS S3 以及任何相容 S3 的儲存空間。它會複製日誌區段、已儲存的檔案、附時間戳記的檢查點和已完成的聊天匯出，每一項在離開收集器之前都以 `AES-256-GCM` 加密。
 
-線上示範版本展示相同的操作介面，但已停用上傳功能。請僅在您自己正在運行的工作區中輸入儲存憑證。
+線上展示版會顯示這些控制項，但上傳已關閉。請只在您自己的安裝中輸入真實憑證。
 
 [![完整的異地複製設定面板：終端點、區域、儲存桶、存取金鑰、排程、物件鎖定及復原金鑰控制](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
@@ -51,37 +51,37 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 
 
 | 領域 | 輸入內容 |
 | --- | --- |
-| Endpoint | 儲存服務的 URL，不含儲存桶路徑或憑證。虛構範例：`https://s3.example.invalid`。 |
-| 地區 | 您的服務供應商所要求的區域代碼。應用程式的預設值為 `us-east-1`。 |
-| Bucket | 一個您可存取的現有儲存桶。虛構範例：`example-case-backup`。 |
-| 儲存桶中的資料夾 | 物件前綴；預設值為 `tgwitness`。應用程式會附加一個由此工作區簽名金鑰指紋衍生的前綴。 |
-| 存取金鑰 ID / 秘密存取金鑰 | 請同時輸入兩組儲存憑證。這些憑證將儲存於工作區金庫中。後續儲存時，若要保留已儲存的憑證對，請將兩欄皆留空。 |
-| Path 風格的網址 | 請根據服務供應商的設定，在啟用時使用 `endpoint/bucket`，或在停用時使用 `bucket.endpoint`。 |
-| 複製間隔 | 範圍為 1 至 1,440 分鐘；預設為 5 分鐘。若要執行排程備份，應用程式必須處於運行狀態。 |
-| Object Lock 資料保留 | 支援 Object Lock 的儲存桶之保留天數與模式。若設定為「零天」，則該儲存桶將維持預設的保留設定。 |
+| Endpoint | 儲存空間 URL，不含 bucket 路徑或憑證。範例：`https://s3.example.invalid`。 |
+| 地區 | 依服務商要求填寫。預設 `us-east-1`。 |
+| Bucket | 一個您有寫入權限的現有 bucket。範例：`example-case-backup`。 |
+| 儲存桶中的資料夾 | 前綴，預設 `tgwitness`。其上還會加上每個工作區的前綴。 |
+| 存取金鑰 ID / 秘密存取金鑰 | 兩者一起填寫，儲存在金庫中。之後兩者都留空即可保留原值。 |
+| Path 風格的網址 | 開啟：`endpoint/bucket`。關閉：`bucket.endpoint`。視服務商而定。 |
+| 複製間隔 | 1 至 1,440 分鐘，預設 5。僅在應用程式執行時有效。 |
+| Object Lock 資料保留 | 天數和模式，前提是 bucket 支援 Object Lock。填 0 則保留 bucket 預設值。 |
 
-1. 請先向您的服務供應商建立儲存桶，然後輸入其儲存位置及憑證。在準備階段請**保持「保留異地副本**」選項未勾選，之後再選取**「儲存異地副本」**。
-2. 選擇「**測試連線」**。此操作會上傳一個加密的測試物件，並檢查儲存端的回應。
-3. 請選擇**「下載加密金鑰」**。請將該檔案與資料收集器分開存放；此檔案是進行資料復原的必要條件。
-4. 勾選「**保留異地副本**」核取方塊，然後再次儲存。選擇「**立即複製」**以執行手動備份，或讓排程繼續運行。
+1. 建立 bucket，在不勾選**保留異地副本**的情況下填寫目的地和憑證，按**儲存異地副本**。
+2. **測試連線**會上傳一個加密的測試物件。
+3. **下載加密金鑰**，並存放在遠離收集器的地方。沒有金鑰就無法復原。
+4. 勾選**保留異地副本**，儲存，然後**立即複製**，或讓排程執行。
 
 ## 檢查資料保留狀況與複製進度
 
-在「**更多選項**」中，選擇保留天數，並在您的儲存桶支援「物件鎖定 (Object Lock)」時，選擇「`GOVERNANCE`」或「`COMPLIANCE`」。TgWitness 會讀取上傳物件的保留模式與截止日期。請檢視獨立的保留結果：已確認、缺少保留或檢查失敗。
+在**更多選項**中選擇保留天數以及 `GOVERNANCE` 或 `COMPLIANCE`。TgWitness 會從已上傳的物件讀回保留設定並告訴您：已確認、缺少或檢查失敗。
 
-控制面板會顯示上一次處理的結果、物件數量、傳輸的位元組數、已複製的日誌邊界以及任何錯誤。若發現本地儲存媒體遺失或遭變更，系統會進行通報，並於下一次處理時重新嘗試。該儲存媒體之後的檔案、檢查點及排程中的匯出項目仍可照常複製。
+面板顯示上一輪、物件數量、位元組、已複製的日誌邊界和錯誤。遺失的本機檔案會被回報並在下一輪重試，其餘內容繼續複製。
 
-上傳時請使用工作區的 Direct、SOCKS5 或 HTTP 路徑。請從這些路徑中選擇其中一種進行 S3 複製；若僅選擇 MTProxy 路徑，複製作業將因錯誤而處於待處理狀態。
+上傳可走直接連線、SOCKS5 或 HTTP。若路由只有 MTProxy，副本會帶著錯誤等待。
 
 ## 請將恢復金鑰另行存放
 
-下載的 JSON 檔案包含解密金鑰、目標位置設定、工作區物件前綴以及簽名金鑰指紋。進行資料復原時，需同時具備此金鑰檔案以及具備儲存桶讀取權限的獨立儲存憑證。請將這些資訊納入您的復原計畫中。
+金鑰 JSON 包含解密金鑰、目的地、前綴和金鑰指紋。復原時需要它以及具讀取權限的儲存空間憑證。
 
-若您變更了端點、儲存桶或資料夾前綴，請重新下載金鑰檔案，以確保其目標設定相符。應用程式會將本機保留的日誌、檔案及檢查點的全新副本，移至新目標位置。已完成且已從本機上傳佇列中移除的聊天記錄匯出檔，仍會保留在原有的目標位置。
+變更了端點、bucket 或前綴？請重新下載金鑰。新的副本會從新目的地開始；舊的聊天匯出留在原處。
 
 ## 在另一台機器上還原並驗證
 
-請使用可信賴的 TgWitness 安裝版本、已下載的 JSON 金鑰、具備讀取權限的儲存空間憑證，以及一個空的輸出目錄。請替換下方虛構的憑證佔位符。
+您需要一個可信任的 TgWitness 安裝、金鑰 JSON、唯讀儲存空間憑證和一個空資料夾：
 
 ### Windows PowerShell
 
@@ -99,8 +99,6 @@ export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence
 ```
 
-在驗證整個日誌、保留的檢查點以及媒體檔案的雜湊值與大小期間，下載的檔案與解密後的物件將暫存於私有臨時儲存空間中。若發現不安全的路徑、日誌段落衝突，或日誌長度短於其檢查點，系統將予以拒絕。驗證失敗時，系統不會發布任何還原的檔案。
+所有內容會先在私人暫存資料夾中檢查：完整日誌、檢查點、檔案雜湊和大小。不安全的路徑、互相衝突的區段，或比其檢查點更短的日誌都會導致失敗，此時不會寫出任何內容。
 
-若復原成功，系統將針對副本中的可用內容產生 `events.jsonl`、`media/`、`checkpoints/` 及 `exports/`。請將該指令的 JSON 結果與復原的內容一併保存。
-
-請將復原的資料與您獨立保留的檢查點或證人記錄進行比對，然後檢視所需期間內已記錄的蒐集範圍。
+成功後您會得到 `events.jsonl`、`media/`、`checkpoints/` 和 `exports/`。請將指令的 JSON 輸出與它們放在一起，並與您自己保存的檢查點或見證紀錄比較。

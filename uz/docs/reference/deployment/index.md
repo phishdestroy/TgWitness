@@ -34,17 +34,11 @@ Mahalliy o'rnatish uchun Python 3.11 yoki undan keyingi versiya, `venv` va `ensu
 - **macOS:** joriy Python 3.11+ tarqatmasini o'rnating; operatsion tizim taqdim etgan interpretator talabga javob beradi deb hisoblamang. Loyiha katalogidan `python3 start.py`-dan foydalaning.
 - **Docker:** Docker Engine/Desktop-ni Compose v2.20 yoki undan yangiroq versiyasi bilan ishlating. Docker Desktop Windowsda Linux konteynerlaridan foydalanishi kerak. Konteyner o'zining Python bog'liqliklarini o'rnatadi; hostda alohida Python o'rnatilishiga ehtiyoj yo'q.
 
-Ma'lumotlar katalogi uchun doimiy mahalliy saqlashdan foydalaning. Xabarlar, media, WAL o'sishi, eksport va zaxira nusxalari asosida sig'imni rejalashtiring; har bir ish yukiga mo'ljallangan universal minimal disk/RAM spetsifikatsiyasi mavjud emas. CPU arxitekturalari va Python versiyalari mos keladigan qaramlik gildiraksiz bo'lsa, qo'shimcha kompilyatsiya vositalari va ularning alohida malaka sinovlarini talab qilishi mumkin. "Portativ" universal operatsion tizim yoki apparat qo'llab-quvvatlanishini anglatmaydi.
-
-Windows 11/Python 3.12 mahalliy tarzda tasdiqlangan. Linux/macOS/konteyner ta'riflari va CI taqdim etilgan, ammo ushbu rivojlantirish muhitida ishga tushirilmagan. Aniq doirani ko'rish uchun [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/) hujjatiga murojaat qiling.
-
 ## Mahalliy kompyuter
 
 Windowsda `Start.cmd`, Linux/macOSda esa `sh start.sh` dan foydalaning. `scripts\Setup.cmd` yoki `sh start.sh --setup-only` muhitni tayyorlaydi. Launcher birinchi marta ishlatilganda zarur kutubxonalarni o'rnatadi; keyingi ishga tushirishlarda muhit qayta ishlatiladi. Sozlash va Telegram xabarlarini yig'ish uchun internetga ulanish talab etiladi, ammo mavjud yozuvlarni ko'rib chiqish va eksport yaratish oflayn rejimda amalga oshiriladi.
 
 `python start.py --check`-ni sozlamalardan so'ng ishga tushiring, kollektorni ishga tushirmay turib mahalliy bog'liqliklarni, Ed25519, saqlash joyini, kalit konfiguratsiyasini va tinglash manzilini tekshirish uchun. Tuzilgan chiqish uchun `--json` dan foydalaning. Mo'ljallangan `--data-dir`, `--host` va `--port` ni uzating. Tekshiruv paketlarni o'rnatmaydi, jurnal yaratmaydi yoki Telegramga ulanmaydi; bu yaxlitlik yoki qamrov kvalifikatsiyasi emas. Startup alohida mavjud jurnallarni tekshiradi. `python start.py --help` ham o'rnatishni oldini oladi.
-
-Imkoniyatlar:
 
 start.py-dan foydalangandan so'ng, Windowsda `.venv\Scripts\python.exe`, Linux/macOSda esa `.venv/bin/python` yordamchi buyruqlarini ishga tushiring yoki avval shu muhitni yoqing. Quyidagi `python -m ...` misollari muhit faol deb hisoblaydi.
 
@@ -73,8 +67,6 @@ Uni 64-bit Windowsda Python 3.12 bilan o'zingiz quring:
 ```
 python tools/build_portable.py
 ```
-
-Quruvchi ijro vaqtidagi tekshiruv summasini tasdiqlaydi, cheklangan bog'liqliklarni paketga o'rnatadi, o'rnatilgan interpretator bilan tayyorgarlik tekshiruvini ishga tushiradi va ZIP hamda tekshiruv summasini`dist/` ga yozadi.
 
 ## Kontener
 
@@ -121,8 +113,6 @@ docker compose logs witness                     # witness key fingerprint
 Xizmat Compose tarmog'idagi `http://tgwitness:8787` manzildagi yig'uvchiga ulanadi (`TGWITNESS_WITNESS_COLLECTOR` ustun keladi, masalan, boshqa ish maydoni uchun `/profiles/<workspace ID>` ). Alohida serverda, boshqa birov tomonidan boshqariladigan guvoh uchun `deploy/compose/compose.witness.yaml` manzilini ishlating va `TGWITNESS_WITNESS_COLLECTOR` ni yig'uvchining HTTPS manziliga o'rnating; o'sha faylda faqat guvoh bo'ladi.
 
 ## Nashr qilingan rasmni o'rnating
-
-Bu muvaffaqiyatli [reliz jarayoni](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/#automated-github-releases) va ommaviy GHCR paket konfiguratsiyasidan so'ng mavjud bo'ladi. Repozitoriy egasi/nomi ushbu manba daraxtiga qattiq kiritilmagan. Ushbu reliz jarayoni xulosasida ko'rsatilgan tasvirni ishlating.
 
 `deploy/env.example` nusxasini `.env` ga nusxalang. `TGWITNESS_IMAGE` ni e'lon qilingan versiyaga, **kichik harfli** ombor yo'lidan foydalangan holda o'rnating, masalan:
 
@@ -202,18 +192,6 @@ Oldingi stop/copy buyruqlari uchun ham o'rnatishingizning Compose fayllaridan fo
 
 Yangilanishdan so'ng panelga kirish, hisob identifikatori, kuzatuv holati va qamrovni tekshiring. Qayta ishga tushirish o'tkazib yuborilgan Telegram yangilanishlarini tiklamaydi. Agar kelajakdagi versiya saqlash formatlarini o'zgartirsa, rollback uchun oldingi yangilanishdan oldingi zaxira nusxasi talab qilinishi mumkin.
 
-## Avtomatlashtirilgan GitHub relizlari
-
-[Chiqarish ish](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) jarayoni ushbu loyiha GitHub omboriga Actions yoqilgan holda joylashtirilgach ishlashga tayyor bo'ladi. U GitHub Release **e'lon** qilinganda, jumladan prerelease ham, ishga tushadi. Faqat loyihalar (drafts) yoki tag push qilish paketlarni e'lon qilmaydi.
-
-1. Paket versiyasi va o'zgarishlar jurnalini sozlang, so'ngra `v` tegiga ega chiqarilishni nashr eting qo'shimcha ravishda aniq `pyproject.toml` versiyasini, masalan `v0.8.0`.
-2. Jarayon tegni tasdiqlaydi va Windows/Linux/macOS uchun umumiy Python, hisob-import/QR brauzer, manba paket va Docker tekshiruvlarini ishga tushiradi. Shuningdek, barcha uch operatsion tizimda Python 3.12 yordamida yangi mahalliy o'rnatish ham sinovdan o'tkaziladi.
-3. Ushbu tekshiruvlar muvaffaqiyatli o'tkazilgach, u QEMU ostida ARM64 tasvirini smoke-test qiladi, AMD64/ARM64 tasvirlarini `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` manziliga joylaydi, va manba ZIP hamda Python wheel fayllarini ularning SHA-256 sidecar fayllari bilan birga ilova qiladi. Windows uchun portativ ZIP — bu tekshiruvlar jarayoni tomonidan sinovdan o'tkazilgan aynan shu artefakt; chiqarish jarayoni ushbu artefakt va uning tekshiruv summasini yuklab oladi va e'lon qiladi.
-4. Oxirgi ish barcha uchta e'lon qilingan paketni yana yuklab oladi va ularning tekshirish yig'indilarini tekshiradi. Keyin u `SHA256SUMS.txt` va `RELEASE-MANIFEST.json` ni e'lon qiladi, versiyani, manbaa reviziyasini va aktivlar hajmlarini qayd etadi. Yuklashlar mavjud chiqarish aktivlarini ustidan yozishni rad etadi.
-5. Birinchi nashrdan so'ng, GHCR paket sozlamalarini oching va agar anonim rasm yuklab olish mo'ljallangan bo'lsa, ko'rinishni **Public** (Ommaviy) ga o'rnating. Faqat ommaviy manba ombori ommaviy konteyner paketini kafolatlamaydi. Tashkilot siyosati paket nashr etilishiga ruxsat berishi kerak. Ish jarayoni `GITHUB_TOKEN` ni ishlatadi; omborda hech qanday registr paroli yoki VPS ma'lumotlari bo'lmasligi kerak.
-
-Uzoqdan ish jarayonining muvaffaqiyati ushbu mahalliy tayyorgarlik bilan aniqlanmagan. ARM64 emulyatsiyasi — bu dastlabki tekshiruv bo'lib, u asl apparat yoki jonli Telegram uchun malaka emas. Bu chiqarilishni paketlashni avtomatlashtiradi; serverni ishga tushirish uchun hanuzgacha Compose buyrug'i va uning domen/mehmon oldindan shartlari talab etiladi. Mavjud serverlar chiqarilish e'lon qilinganda jimjit yangilanmaydi yoki qayta ishga tushirilmaydi.
-
 ## Masofaviy server
 
 Xizmatni loopback manziliga bog'lab qo'ying va SSH tunneli ishlating yoki HTTPSni teskari proxyda yakunlang. Asosiy Compose fayli faqat mahalliy; ixtiyoriy `deploy/compose/compose.https.yaml` ustki qatlami sozlangan domen uchun Caddy'ni ta'minlaydi. URL manzillari va proxy jurnallarida bearer tokenini ko'rsatmang. Revers-proxy so'rov hajmi va ulanish tezligini cheklashi kerak. Oddiy HTTP-ni Internetga ochiq qoldirmang.
@@ -244,14 +222,6 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 Boshqa ish maydoni uchun **Exports → Workspace ID** bo'limidan `--profile ID`, masofaviy server uchun `--format zip|jsonl|csv|html` va `--url https://your-server` yoki 5 GiB uzatish limitini o'zgartirish uchun `--max-mib` ni ishlating. Oddiy HTTP faqat loopback uchun ruxsat etiladi. Tokenlar sarlavhalarda uzatiladi, yo'naltirishlar rad etiladi, mavjud fayllar ustidan yozib tashlanmaydi va to'liq bo'lmagan yuklamalar yakuniy fayllar sifatida e'lon qilinmaydi. Agar TGWITNESS_TOKEN hosil qilingan tokenni bekor qilsa, alohida himoyalangan va o'sha faol qiymatni o'z ichiga olgan fayldan foydalaning: panel-token.txt ustun qo'yish orqali yozib tashlanmaydi. Buyruqning SHA-256 qiymati faqat uzatish tekshiruv yig'indisi hisoblanadi; imzolangan ZIP faylni mustaqil ravishda tekshiring.
 
-Server eksport fayllari har bir ish maydonining maxfiy `temporary-exports/` papkasida qoladi. Muvaffaqiyatli javoblar o'z fayllarini tozalaydi. To'xtab qolgan eksportlar keyingi ish maydoni ishga tushirilganda, uning eksklyuziv instantsiya qulfi ushlab turilgan holda olib tashlanadi. Ushbu katalog saqlash tahdidi/sig'im modelining bir qismi hisoblanadi; shifrlangan ma'lumot hajmini ishlating. Ishlab chiqarish miqyosidagi ko'p gigabaytli uzatmalar hanuzgacha maqsad tizimingizda malaka talab qiladi.
-
 Panel navbatga qo'yilgan/muvaffaqiyatsiz bo'lgan media, eng qadimgi kutayotgan media, bo'sh disk, Telegram so'rovlari to'xtatib turilgan vaqtlar hamda kirish tasdiqlanmagan manbalarni ko'rsatadi. Ushbu diagnostika vositalari to'liq oxirigacha yetkazib berish monitoringi emas. Ish maydonchalari jarayonni baham ko'radi; shovqinli hisob boshqalarga ham ta'sir qilishi mumkin. Alohida ishchi jarayonlar, saqlash muddati/aylantirish, barqaror yangilanishlarni tiklash va to'liq joriy etishni tasdiqlash saqlanib qoladi. Panelga cheklangan kirish huquqi [kirish va ruxsatnomalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/) hujjatlarida qayd etilgan; mustaqil tekshiruv nuqtalari [guvoh](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/)qo'llanmasida ko'rib chiqilgan.
-
-## Ulanish va himoya variantlari
-
-Ulanish yo'nalishlari har bir ish maydoni uchun alohida bo'lib, avtorizatsiyadan oldin sozlanishi kerak. SOCKS5/HTTP CONNECT pinlangan python-socks bog'liqligidan foydalanadi. MTProxy Telethonning eksperimental tasodifiy o'rta transportidan foydalanadi; Fake TLS ee sirlarini qo'llab-quvvatlamaydi. To'g'ridan-to'g'ri zaxira tanlangan [IP-rejim](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/#ip-modes) ga bog'liq: **Manishani yashirish** uni rad etadi; **Oxirgi chora sifatida to'g'ridan-to'g'ri** kechikishdan so'ng ruxsat beradi. **Tunnel yoki VPN ortidagi server** to'g'ridan-to'g'ri yo'nalishlarni ruxsat etadi, lekin VPN yaratmaydi. Bu butun tizim bo'ylab tarmoq siyosati emas.
-
-Yangi o'rnatishlar uchun TGWITNESS_VAULT_KEY_FILE alohida himoyalangan tasodifiy master-kalit faylga yo'naltiriladi. Uni konteynerda /data tashqarisida faqat o'qish uchun o'rnatish kerak. Har bir ish maydoni va master kalit uchun public vault.external.json tuz metama'lumotlarini alohida saqlang. Mavjud mahalliy omborlar rejalashtirilgan migratsiyani talab qiladi; ushbu o'zgaruvchini sozlash ularni jimjit konvertatsiya qilmaydi. Xabar/media saqlash va eksportlar ilova tomonidan shifrlanmaydi. Zarur bo'lganda shifrlangan hajmlar va yetarli shaxsiy vaqtinchalik saqlashdan foydalaning.
 
 Batafsil protseduralar: [ulanish/xavfsizlik](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/) va [ishlash rejimlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/).

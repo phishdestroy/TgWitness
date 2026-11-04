@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../">홈</a> <span aria-hidden="true">/</span> <a href="../">문서</a> <span aria-hidden="true">/</span> <span aria-current="page">문제가 발생한 원인을 파악하세요</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">문서 / 18</p><h1>문제가 발생한 원인을 파악하세요</h1><p class="guide-outcome">증상부터 파악하십시오. 한 단계씩 차례로 확인하십시오.</p>
+<article class="guide-content"><p class="eyebrow">문서 / 18</p><h1>문제가 발생한 원인을 파악하세요</h1><p class="guide-outcome">증상에서 출발해 한 번에 하나씩 확인하십시오.</p>
 <h2 id="panel">패널에서 토큰을 요청합니다</h2>
-<p>런처에 표시된 로컬 파일의 패널 토큰을 사용하십시오. Docker의 경우 <code>docker compose exec tgwitness cat /data/panel-token.txt</code>를 실행하십시오. 텔레그램 로그인 코드, BotFather 토큰 및 읽기 전용 위트니스 토큰은 각각 다른 용도로 사용됩니다.</p>
+<p>런처가 출력한 파일의 패널 토큰을 원합니다. Docker: <code>docker compose exec tgwitness cat /data/panel-token.txt</code>. 텔레그램 코드도, 봇 토큰도, 증인 토큰도 아닙니다.</p>
 <h2 id="network">텔레그램은 연결되지 않습니다</h2>
-<p>연결 설정을 열고 연결 확인을 실행하십시오. 공용 프록시를 사용하는 경우 다른 항목을 시도하고 경로를 명시적으로 저장하십시오. 프록시 유형과 지원되는 비밀 형식을 확인하십시오. 공용 목록을 새로 고침해도 계정의 경로는 변경되지 않습니다.</p>
+<p>연결 확인을 실행합니다. 공개 프록시라면 다른 것을 골라 저장합니다. 프록시 유형과 비밀 값 형식을 확인합니다. 목록을 새로 고쳐도 경로가 저절로 바뀌지는 않습니다.</p>
 <h2 id="messages">연결 상태이지만 새 메시지는 없음</h2>
-<ol><li>관찰 기능이 올바른 작업 공간에서 실행되고 있는지 확인하십시오.</li><li>해당 계정이 소스를 선택했으며 이를 볼 수 있는지 확인하십시오.</li><li>통제된 그룹에서 고유한 새 메시지를 보내고, 그 정확한 텍스트를 찾아보세요.</li><li>운영 일지를 검토하여 중단, 작업 지연 또는 텔레그램 오류 여부를 확인하십시오.</li></ol>
-<p>과거 스냅샷과 새 메시지 이벤트는 서로 다릅니다. &#x27;조용한&#x27; 소스는 새 메시지를 생성하지 않고도 연결할 수 있습니다. 데이터의 완전성이 중요한 경우에는 제어된 전송 테스트를 사용하십시오.</p>
+<ol><li>올바른 작업 공간에서 관찰이 실행 중입니까?</li><li>소스가 선택되어 있고 그 계정에 보입니까?</li><li>테스트 그룹에 고유한 메시지를 보내고 검색합니다.</li><li>저널에서 중단이나 텔레그램 오류를 찾습니다.</li></ol>
+<p>조용한 채팅은 그냥 새것이 없을 뿐입니다. 완전성이 중요하면 통제된 전달 테스트를 실행하십시오.</p>
 <h2 id="wait">재시작 후 FloodWait 또는 간격 발생</h2>
-<p>FloodWait는 텔레그램에서 일시 중지가 필요함을 의미합니다. 표시된 기간 동안 기다린 후 수집 작업량을 검토하십시오. 재연결을 반복해도 제한이 해제되지는 않습니다. 저장된 업데이트 상태는 재시작 후 작업을 따라잡는 데 도움이 되지만, 만료된 업데이트와 일부 중단 기간은 여전히 제한 사항으로 남아 있습니다. 저널을 완료된 것으로 간주하기보다는 중단된 부분을 기록하십시오.</p>
+<p>FloodWait는 텔레그램이 "천천히"라고 말하는 것입니다. 지나갈 때까지 기다리고 부하를 줄이십시오. 다시 연결해도 소용없습니다. 재시작 후 TgWitness는 텔레그램에 아직 남은 것을 따라잡으며, 나머지는 공백이므로 적어 두십시오.</p>
 <h2 id="bot">봇은 설정되어 있으나 아무것도 게시하지 않습니다.</h2>
-<p>위트니스 프로세스가 실제로 실행 중인지, 봇이 채널에 게시물을 올릴 수 있는지, 위트니스가 수집기 및 봇 API에 연결될 수 있는지 확인하십시오. 저널을 검토하여 게시 실패 내역이 있는지 확인하십시오. 수집기 폴링이 성공했다고 해서 채널 게시물이 확인된 것은 아닙니다.</p>
+<p>증인이 실행 중인지, 봇이 채널에 게시할 수 있는지, 수집기와 Bot API에 닿는지 확인하십시오. 증인 저널에서 실패한 게시물을 찾으십시오. 수집기 쪽에 폴링이 있다고 해서 게시물이 나간 것은 아닙니다.</p>
 <h2 id="github">GitHub 토큰 연동 기능은 어디에 있나요?</h2>
 <p><strong>계획 중.</strong> ‘추가 정보’ 섹션에서는 제안된 포크 및 빌드 검증 워크플로를 설명합니다. 현재 실행 중인 설치 환경이 리포지토리와 일치함을 확인하는 GitHub 토큰 양식이나 자동 인증 기능은 없습니다. <a href="../reference/features/">현재 기능 현황</a>을 참조하십시오.</p>
-<p>문제를 보고할 때는 버전, 운영 체제, 재현 단계 및 편집된 오류 내용을 포함해 주십시오. 세션, 토큰, 비공개 메시지 및 데이터 디렉터리는 공개 이슈에 포함하지 마십시오.</p>
+<p>버그를 신고하나요? 버전, OS, 단계, 개인 정보를 가린 오류를 알려 주십시오. 세션, 토큰, 개인 메시지, 데이터 디렉터리는 절대 공개 이슈에 올리지 마십시오.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">전체 참고 문헌 →</a><a class="next-guide" href="../start/"><span>다음 단계</span><strong>몇 분 만에 시작하세요 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../reference/verification/">테스트된 내용 →</a></p></footer>
 </main>

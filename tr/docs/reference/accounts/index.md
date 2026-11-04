@@ -241,20 +241,6 @@ Bir grup, oturumlarını, anahtarlarını veya kanıtlarını birleştirmeden il
 
 **Hesap → Telegram'dan çıkış yap** (gözlem duraklatılmış halde), Telegram'dan oturumu sonlandırmasını ister; böylece oturum, hesabın **Ayarlar → Cihazlar** bölümünden de kaybolur ve çalışma alanı kasasından kaldırılır. Günlük, kaynaklar, ayarlar ve imzalama anahtarı kalır ve günlük, çıkış işlemini kaydeder. Çalışma alanı hâlâ ilgili hesaba aittir: yalnızca o hesap tekrar bağlanabilir. Telegram yanıt vermezse, oturum yine de buradan kaldırılır ve panelde bu durum belirtilir; Telegram’da **Ayarlar → Cihazlar** altından oturumu sonlandırın.
 
-## Bir Telethon oturumunu çevrimdışı ortama dönüştürün
-
-Panel, `.session` dosyalarını doğrudan içe aktarır. Çevrimdışı olarak bir StringSession dosyasına dönüştürmek için proje klasöründen şu komutu çalıştırın:
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-Dönüştürücü yalnızca Telethon SQLite dosyalarını okur (en fazla 64 MiB), girdiyi asla değiştirmez, ağ isteği göndermez ve mevcut bir çıktı dosyasının üzerine yazmayı reddeder.
-
 ## Hesap dosyalarını güvende tutma
 
 - Her bir `.session`, TData ZIP, StringSession, Auth Key ve hesap JSON dosyasını bir şifre gibi ele alın. TgWitness, içe aktarılan yetkilendirme bilgilerini şifreli kasasında saklar; daha sonra orijinal dosyaları silebilirsiniz.

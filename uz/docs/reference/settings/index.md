@@ -62,10 +62,3 @@ Guruh sahifasi `/groups/<id>` a'zolarni, e'tibor talab qiladigan masalalarni va 
 Sessiya yoki ilgari yakunlangan sozlama mavjud bo'lgan ish maydoni ustuvorlik yordamchisini ko'rmaydi. Sahifa yuklanganda uning qiymatlari maqsad bilan almashtirilmaydi. Maydonni yashirish funksiyani o'chirib qo'ymaydi yoki uning qiymatini o'chirib tashlamaydi.
 
 O'lcham va vaqt baholovi uchta tanlangan suhbatni va har biridan 20 tagacha xabarni o'qiydi. Bu faqat taxmindir: u Telegram limitlarini, ma'lum bir server tezligini yoki har bir suhbatdagi fayllarni oldindan aytib bera olmaydi.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

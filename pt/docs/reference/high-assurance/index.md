@@ -247,25 +247,11 @@ O Gateway DNS abrange o resolvedor do sistema. O DNS sobre HTTPS na porta 443 pa
 
 A Cloudflare não tem acesso ao conteúdo criptografado do Telegram, a outros dispositivos na conta do Telegram (a lista de dispositivos do modo de evidência os registra a partir do lado do Telegram) nem ao hipervisor do provedor.
 
-Em 1º de novembro de 2026, o Gateway DNS foi testado com a Hetzner Cloud real e uma conta gratuita do Cloudflare: a Hetzner aceitou as regras de saída, o servidor instalou a versão v0.7.0 com todas as consultas passando pelo Gateway via TLS, o túnel rápido funcionou através desse firewall e `verify` leu os 19 nomes do servidor de volta do Cloudflare (espelhos do Ubuntu e da Hetzner, GitHub, PyPI, NTP, o túnel, ntfy.sh). O painel copiou 36 consultas em oito janelas para um diário e `verify.py` as resumiu sem omissões; `destroy` removemos o servidor e o firewall e saímos do local compartilhado.
-
 ## O que isso não estabelece
 
 - O provedor e sua equipe controlam o hipervisor, os discos e a rede.
 - As medições do servidor são auto-relatadas pelo coletor.
 - Os conteúdos das regras de firewall anteriores não constam em todos os logs dos provedores; apenas a Linode mantém as versões das regras.
 - Isso não traz nada de novo sobre a autenticidade das mensagens; consulte a seção [“Evidências](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/)”.
-
-## Testado aqui
-
-A lógica de implantação, bloqueio e verificação é coberta por testes automatizados contra APIs simuladas da Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail e Cloudflare, construídas a partir de suas referências de API publicadas, e a assinatura de solicitações da AWS de acordo com os exemplos publicados pela AWS. `tools/check_cloud_wizard.py` Executa o assistente de servidor do painel da mesma forma, com um domínio e com um túnel rápido. `tools/check_tdx.py` verifica atestados reais do Intel TDX a partir do dcap-qvl e do dstack até o certificado raiz da Intel (fontes em [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)); `tools/check_phala.py`executa as etapas de implantação, verificação, registro no diário, destruição e o assistente do painel em uma simulação da Phala Cloud cujas atestações provêm de uma PKI falsificada modelada como a da Intel. O caminho da Phala ainda não foi testado na própria Phala Cloud.
-
-Em 1º de novembro de 2026, o caminho do túnel rápido foi executado contra **a Hetzner Cloud** real (Nuremberg, `cpx22`, TgWitness v0.7.0), o ntfy.sh real e o GitHub, tanto pelo painel quanto pelo código:
-
-- verificação do preço e, em seguida, criação a partir dos botões do painel: servidor em execução após 13 segundos, declaração assinada com hashes correspondentes da instância e do instalador após cerca de dois minutos;
-- o próprio painel do servidor foi aberto por meio do endereço trycloudflare.com e aceitou o token do painel; sem o token, ele retorna o código de erro 401;
-- Após uma reinicialização por meio da API da Hetzner, o servidor publicou um novo endereço assinado. **O Find the current address** o localizou; o endereço antigo parou de responder; a chave de assinatura permaneceu a mesma; uma postagem não assinada em um tópico do ntfy.sh foi ignorada;
-- `verify` em relação à API da Hetzner: servidor, firewall sem regras de entrada, declaração, ligação, medições do host, inicialização e o hash de origem de um checkout da v0.7.0 foram aprovados; as verificações do Cloudflare estavam indisponíveis, conforme descrito acima; o instalador diferia daquele que a v0.7.0 compila e era idêntico, byte a byte, àquele que o código desta versão compila;
-- A exclusão do painel removeu exatamente o servidor e o firewall identificados na implantação; outros servidores e firewalls no mesmo projeto permaneceram inalterados.
 
 Ainda não foi testado com contas reais: uma implantação em seu próprio domínio (túnel do Cloudflare e DNS), os outros provedores, uma implantação de depuração e `lock`, uma conta do Telegram nesse servidor, e as atualizações em tempo real de versões posteriores por meio de um túnel rápido. Verifique a primeira implantação em cada provedor com `plan`, uma implantação de depuração e `verify` antes de confiar nela em um caso.

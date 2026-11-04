@@ -2,11 +2,11 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/start/
 
-Pertama, lihat contoh yang berfungsi. Kemudian, hubungkan akun Anda sendiri.
+Jelajahi demo dulu, lalu sambungkan akun Anda sendiri.
 
 ## Jelajahi situs ini tanpa perlu membuat akun
 
-Unduh atau kloning proyek ini, instal **Python 3.11 atau versi yang lebih baru**, lalu jalankan demo. Peluncur akan membuat lingkungan lokal dan menginstal dependensi yang telah ditentukan.
+Ambil proyeknya, siapkan **Python 3.11 atau lebih baru**, jalankan demo. Sisanya diurus peluncur.
 
 ```
 git clone https://github.com/phishdestroy/TgWitness.git
@@ -25,7 +25,7 @@ cd TgWitness
 sh start.sh --demo
 ```
 
-Browser akan membuka ruang kerja dengan pesan-pesan fiktif. Buka percakapan, bandingkan perubahan, dan periksa hasil ekspor. Mode demo tidak terhubung ke Telegram.
+Ruang kerja dengan pesan karangan terbuka di browser. Buka obrolan, bandingkan suntingan, lihat ekspor. Telegram tidak terlibat.
 
 ![Tampilan percakapan TgWitness dengan contoh pesan](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
@@ -33,7 +33,7 @@ Contoh ruang kerja. Jurnal Anda sendiri dimulai secara terpisah.
 
 ## Mulailah ruang kerja Anda sendiri
 
-Tutup proses demo, lalu gunakan peluncur biasa:
+Tutup demo, lalu:
 
 ### Windows
 
@@ -47,12 +47,12 @@ Tutup proses demo, lalu gunakan peluncur biasa:
 sh start.sh
 ```
 
-Buka alamat lokal yang ditampilkan oleh peluncur. Jika diminta, masukkan **token akses panel** dari berkas lokal yang disebutkan di terminal. Ini akan membuka akses ke TgWitness; proses ini terpisah dari proses masuk ke Telegram.
+Buka alamat yang ditampilkan peluncur dan tempel **token akses panel** dari berkas yang disebutkan. Itu untuk TgWitness, bukan Telegram.
 
 ## Rekam pesan pertama Anda
 
 1. [Hubungkan akun Telegram khusus.](https://phishdestroy.github.io/TgWitness/id/docs/accounts/)
-2. Pilih grup atau saluran yang dapat diakses oleh akun tersebut, lalu mulailah pemantauan.
-3. Kirim pesan baru ke grup uji coba yang Anda kendalikan dan pastikan pesan tersebut muncul di jurnal.
+2. Pilih grup atau kanal dan mulai pengamatan.
+3. Kirim pesan di grup uji Anda dan lihat pesannya muncul di jurnal.
 
 Untuk instalasi server, ikuti panduan "[Keep it running"](https://phishdestroy.github.io/TgWitness/id/docs/server/).

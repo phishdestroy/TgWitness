@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/case-board/
 
-Convierte las observaciones guardadas de Telegram en un caso que tu equipo pueda revisar conjuntamente.
+Convierta los mensajes guardados en un caso en el que trabaja todo el equipo.
 
-Case Board guarda marcadores, fragmentos de texto resaltados, secciones guardadas y comentarios junto a sus referencias de origen. Una colección proporciona al caso una estructura de trabajo; las revisiones firmadas conservan el proceso de desarrollo del equipo.
+Marcadores, citas exactas, fragmentos y debates, cada uno vinculado a su fuente. Cada cambio es una revisión firmada.
 
 ## De un mensaje a una ficha de caso
 
-1. Abre **Investigación → Case Board** en modo Estándar o Experto. Crea una recopilación para el caso y elige su ámbito de chat.
-2. En **el Diario** o en un chat guardado, selecciona **«Añadir al tablero**» o selecciona el registro y pulsa **B**. La ficha pasa a la Bandeja de entrada; asígnale un título útil y muévela a tu colección.
-3. Selecciona un fragmento de un mensaje de chat guardado y elige **«Resaltar» → «tablero»** para conservar la cita exacta y la versión del mensaje. Añade una nota explicando por qué es relevante.
-4. Comenta la ficha, asigna un estado de revisión y vuelve a su contexto de origen siempre que sea necesario comprobar una afirmación. Utiliza **«Presentación»** para repasar la recopilación con tus compañeros.
+1. **Investigación → Case Board** (modo Estándar o Experto). Cree una colección para el caso.
+2. En el **Diario** o en un chat pulse **Al tablero** (o **B**). La tarjeta llega a la bandeja de entrada; póngale un título y muévala.
+3. Seleccione texto en un mensaje: **Resaltar → tablero** guarda la cita exacta y la versión. Anote por qué importa.
+4. Debata, ponga un estado y vuelva a la fuente cuando haga falta. **Presentación** recorre el material con el equipo.
 
 ### Sigue un enlace de pago modificado
 
@@ -48,16 +48,16 @@ Las anotaciones y la observación de Telegram siguen siendo identificables por s
 
 ## Guarda un rango útil una sola vez
 
-Pulsa Mayús + clic en dos registros de un mismo chat para **«Slice between**» (**dividir entre**), elige **«Slice by time**» (dividir por **tiempo**) o guarda los filtros actuales del «Journal» (Diario). Revisa el recuento antes de guardar. Vuelve a abrir la sección para aplicar su consulta guardada; la opción **«Show records added since bookmark» (Mostrar registros añadidos desde el marcador)** revela las adiciones posteriores.
+Mayúsculas + clic en dos mensajes para **Fragmento entre**, use **Fragmento por tiempo** o guarde los filtros actuales del diario. **Mostrar registros añadidos desde el marcador** enseña lo que llegó después.
 
-Un intervalo de tiempo sigue al tiempo de observación del recopilador. Un intervalo de ID de mensaje puede seguir a los mensajes seleccionados a medida que se producen cambios posteriores. El límite de creación guardado permite al destinatario comparar la selección original con su estado posterior.
+Los fragmentos por tiempo usan la hora de observación; los fragmentos por ID siguen a esos mensajes cuando cambian.
 
 ## Asigna a cada compañero el rol adecuado
 
-**El revisor** lee el tablero; **el analista** añade fichas y comentarios; **el operador** también gestiona las recopilaciones y las decisiones de revisión. Los permisos del espacio de trabajo y del chat se aplican a las fichas, al contexto de las fuentes y a los debates. Utiliza permisos de acceso con nombre para una atribución clara.
+**Revisor** lee, **Analista** añade tarjetas y comentarios, **Operador** además gestiona colecciones y decisiones. Los permisos de chat también se aplican a las tarjetas.
 
 ## Convierte el trabajo en un producto final.
 
-Exporta una sección como JSON firmado o utiliza CSV para una hoja de cálculo. La configuración del informe puede incluir marcadores y secciones, con comentarios del equipo cuando se seleccionen. Selecciona estos contenidos en [Report Studio](https://phishdestroy.github.io/TgWitness/es/docs/reports/); una sección guardada no configura automáticamente un informe. Para un destinatario con acceso restringido, utiliza los [controles de entrega](https://phishdestroy.github.io/TgWitness/es/docs/handover/) independientes.
+Los fragmentos se exportan como JSON firmado o CSV. Los informes pueden incluir marcadores, fragmentos y comentarios; configúrelo en [Report studio](https://phishdestroy.github.io/TgWitness/es/docs/reports/). Para un destinatario limitado, use una [entrega](https://phishdestroy.github.io/TgWitness/es/docs/handover/).
 
-Consulte la guía [de referencia de](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-board/) [Case Board](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-board/) para conocer las revisiones firmadas, la coincidencia exacta de citas, la verificación de selecciones y los permisos.
+Detalles: [referencia de Case Board](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-board/).

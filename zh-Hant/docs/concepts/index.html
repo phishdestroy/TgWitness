@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首頁</a> <span aria-hidden="true">/</span> <a href="../">文件說明</a> <span aria-hidden="true">/</span> <span aria-current="page">了解證據如何運作</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文件說明 / 08</p><h1>了解證據如何運作</h1><p class="guide-outcome">訊息內容可能會變更，但您所觀察到的記錄應始終可供查證。</p>
-<p>請探索以下兩個小型實驗。它們使用虛構的訊息，全程在您的瀏覽器內運行，且絕不會連線至 Telegram。</p>
+<article class="guide-content"><p class="eyebrow">文件說明 / 08</p><h1>了解證據如何運作</h1><p class="guide-outcome">訊息會變。您對所見內容的紀錄不該改變，而且任何人都應該能核對這一點。</p>
+<p>下面是兩個小實驗。訊息是虛構的，一切都在您的瀏覽器中執行，不會傳送到 Telegram。</p>
 
 <h2 id="telegram-export">從聊天記錄匯出到可驗證的紀錄</h2>
-<p><a href="https://telegram.org/blog/export-and-more">Telegram Desktop 的匯出功能</a>會將可用的聊天紀錄和媒體檔案以 HTML 或 JSON 格式儲存，供離線使用。TgWitness 則會持續記錄收到的變更、對觀察結果及匯出檔案的簽名，並建立檢查點，供收件者獨立進行比對。</p>
+<p><a href="https://telegram.org/blog/export-and-more">Telegram Desktop 匯出</a>將目前可見的歷史儲存為 HTML 或 JSON。TgWitness 增加了持續的變更日誌、每筆紀錄的簽名，以及他人可以對照的檢查點。</p>
 <div class="table-wrap"><table><thead><tr><th scope="col">任務</th><th scope="col">Telegram 桌面版匯出</th><th scope="col">TgWitness</th></tr></thead><tbody>
 <tr><td>閱讀已儲存的對話</td><td>HTML 或 JSON 格式，並包含選定的媒體檔案</td><td>已儲存的聊天紀錄、可搜尋的日誌及離線報告</td></tr>
-<tr><td>追蹤隨時間的變化</td><td>匯出時可用的歷史紀錄</td><td>先前擷取的版本、後續編輯內容及刪除記錄將一併保留</td></tr>
-<tr><td>交接後請檢查檔案</td><td>標準的 HTML/JSON 匯出檔案均未簽名</td><td>經簽署的清單、每筆記錄的簽名，以及經過可信收集器金鑰驗證的密封 HTML/PDF/JSON 報告</td></tr>
+<tr><td>追蹤隨時間的變化</td><td>匯出時可用的歷史紀錄</td><td>舊版本、後續編輯和刪除，全部保留</td></tr>
+<tr><td>交接後請檢查檔案</td><td>標準的 HTML/JSON 匯出檔案均未簽名</td><td>簽名清單、簽名紀錄和封印報告，以可信任的金鑰核對</td></tr>
 <tr><td>與先前保留的狀態進行比對</td><td>請另行保留一份參考副本或雜湊值</td><td>已簽署的檢查點、獨立的見證者及可選的外部時間戳記</td></tr>
 </tbody></table></div>
-<p>檔案簽名比較係基於 2026 年 11 月 2 日審閱的 <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">Telegram Desktop 匯出寫入器</a>。TgWitness 會使用收集器的金鑰進行簽名；以下檢查說明了收件者如何使用該簽名。</p>
+<p>本比較依據截至 2026 年 11 月 2 日的 <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">Telegram Desktop 匯出程式碼</a>。</p>
 
 <h2 id="journey">一條訊息，三項觀察</h2>
-<p>當 Telegram 傳送新訊息、編輯通知或刪除通知時，收集器會分別追加三項獨立的記錄。編輯操作不會取代最初的記錄，刪除通知也不會將其刪除。</p>
+<p>一則新訊息、一次編輯和一次刪除會成為三筆獨立的紀錄。編輯不會覆寫第一筆，刪除也不會抹去它。</p>
 <figure class="lab journey-lab" data-lab="journey" aria-labelledby="journey-caption">
   <div class="lab-top"><span class="lab-kicker">01 / 訊息流歷程</span><span class="sample-tag">說明性流程圖</span></div>
   <svg class="journey-route" viewBox="0 0 600 92" role="img" aria-labelledby="journey-route-title"><title id="journey-route-title">Telegram delivers an update to the collector, which appends a journal record.</title>
@@ -67,10 +67,10 @@
   <p class="lab-status" data-journey-status role="status">所有三項已記錄的觀察結果均保留在日誌中。</p>
   <figcaption id="journey-caption">針對已選取來源的簡化路徑。操作記錄亦會同步至真實日誌。擷取內容取決於該帳戶的可見範圍以及 Telegram 實際傳送的內容。</figcaption>
 </figure>
-<p>刪除通知既未提供可靠的刪除時間，也未指出刪除訊息的人員。保持這些數值的未知狀態，可維持「觀察」與「推測」之間的區別。</p>
+<p>Telegram 不會告訴您是誰刪除了訊息，也不會告訴確切時間。TgWitness 將這些欄位留空，而不是去猜測。</p>
 
 <h2 id="chain">修改一則記錄。追蹤雜湊值。</h2>
-<p>每筆記錄皆包含前一筆記錄的雜湊值。其自身的雜湊值涵蓋事件欄位，包括該連結。由外部保留的檢查點會固定特定的日誌長度與起始雜湊值。</p>
+<p>每筆紀錄都包含前一筆的雜湊。存放在別處的檢查點固定了日誌長度和最後一個雜湊。</p>
 <figure class="lab hash-lab" data-lab="hash" aria-labelledby="hash-caption">
   <div class="lab-top"><span class="lab-kicker">02 / HASH-CHAIN SANDBOX</span><span class="sample-tag">真實 SHA-256 · 記錄範例</span></div>
   <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="修改範例日誌">
@@ -88,14 +88,14 @@
 </figure>
 
 <h2 id="formulas">實際規則，簡要說明如下</h2>
-<div class="formula-card"><span class="lab-kicker">雜湊值 + 簽名</span><div class="formula" translate="no" role="math" aria-label="h zero 代表十六進位數的 64 個零。h i 代表規範事件 i 的十六進位 SHA-256 值。簽名 i 是在 h i 的原始位元組上使用 Ed25519 運算所產生的結果。">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p><strong>C</strong> 將九個事件欄位序列化為 UTF-8 JSON：鍵值按順序排列、無額外空白、無 ASCII 轉義符，且不含 NaN/無限大值。該事件的 <code>previous_hash</code> 值為 h<sub>i−1</sub>。顯示的 h0 代表 64 個零字元；簽名涵蓋 32 位元組的原始摘要。</p></div>
-<p>這九個欄位分別為 <code>seq</code>、<code>observed_at</code>、<code>source_at</code>、<code>kind</code>、<code>chat_id</code>、<code>message_id</code>、<code>actor_id</code>、<code>payload</code> 及 <code>previous_hash</code>。此為 TgWitness 文件中<a href="../reference/evidence/#event-canonicalization">記載的 JSON 編碼格式</a>；雜湊值與簽名本身並非雜湊輸入欄位。</p>
-<div class="formula-card"><span class="lab-kicker">保留檢查點</span><div class="formula" translate="no" role="math" aria-label="匯出數量至少等於檢查點數量，且檢查點位置的匯出雜湊值等於保留的起始雜湊值。">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>請驗證固定收集器金鑰下的檢查點簽名，然後將其邊界與已驗證的日誌進行比對。後續的匯出檔可能包含更多記錄；但其內容仍須與較早的檢查點相符。</p></div>
+<div class="formula-card"><span class="lab-kicker">雜湊值 + 簽名</span><div class="formula" translate="no" role="math" aria-label="h zero 代表十六進位數的 64 個零。h i 代表規範事件 i 的十六進位 SHA-256 值。簽名 i 是在 h i 的原始位元組上使用 Ed25519 運算所產生的結果。">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p><strong>C</strong> 是以 UTF-8 JSON 表示的九個事件欄位：鍵已排序，無多餘空白，無 ASCII 跳脫，無 NaN/無限大。<code>previous_hash</code> 是 h<sub>i−1</sub>，h<sub>0</sub> 是 64 個零，簽名涵蓋 32 位元組的原始摘要。</p></div>
+<p>欄位：<code>seq</code>、<code>observed_at</code>、<code>source_at</code>、<code>kind</code>、<code>chat_id</code>、<code>message_id</code>、<code>actor_id</code>、<code>payload</code>、<code>previous_hash</code>。完整規格：<a href="../reference/evidence/#event-canonicalization">事件編碼</a>。</p>
+<div class="formula-card"><span class="lab-kicker">保留檢查點</span><div class="formula" translate="no" role="math" aria-label="匯出數量至少等於檢查點數量，且檢查點位置的匯出雜湊值等於保留的起始雜湊值。">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>用固定的金鑰檢查檢查點簽名，然後與日誌比較。之後的匯出可以更長，但在檢查點處必須一致。</p></div>
 
 <h2 id="layers">三個問題，三種不同的檢查方式</h2>
-<div class="evidence-layers"><a href="../exports/"><span>01 / 完整性</span><strong>這則記錄有變更嗎？</strong><p>請使用獨立的可信密鑰來驗證雜湊值與數位簽名。</p></a><a href="../witness/"><span>02 / 連續性</span><strong>先前保留了哪些內容？</strong><p>將簽名過的匯出檔與由獨立見證者保存的檢查點進行比對。</p></a><a href="../cases/"><span>03 / 交付</span><strong>這些測試事件是否已送達？</strong><p>將各帳戶的發送、編輯及刪除操作與其對應的日誌進行比對。</p></a></div>
-<p class="callout">使用簽名來核對保留的記錄、使用檢查點來比對較早的邊界，並使用受控傳輸測試來衡量資料蒐集成效。每項操作皆旨在解答特定問題。<a href="../reference/evidence/#verification-scope">請詳閱驗證範圍與信任假設。</a></p>
-<p>追蹤從帳戶取得到案件檔案編製的<a href="../cases/">完整調查</a>過程。</p>
+<div class="evidence-layers"><a href="../exports/"><span>01 / 完整性</span><strong>這則記錄有變更嗎？</strong><p>以您信任的金鑰核對雜湊和簽名。</p></a><a href="../witness/"><span>02 / 連續性</span><strong>先前保留了哪些內容？</strong><p>將匯出與見證人保存的檢查點比較。</p></a><a href="../cases/"><span>03 / 交付</span><strong>這些測試事件是否已送達？</strong><p>傳送、編輯和刪除測試訊息，看看每個帳戶捕捉到什麼。</p></a></div>
+<p class="callout">簽名回答「是否被改過」，檢查點回答「是否與先前一致」，測試訊息回答「我們是否全部捕捉到」。<a href="../reference/evidence/#verification-scope">驗證能證明什麼、不能證明什麼。</a></p>
+<p>下一步：從開始到案件包的<a href="../cases/">整個帳戶調查</a>。</p>
 <p class="callout" lang="en" dir="ltr"><a href="../../../docs/export-clinic/">Export Clinic: watch the controlled Desktop experiment</a>. Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.</p></article>
 <footer class="guide-footer"><a class="reference" href="../reference/how-it-works/">完整參考資料 →</a><a class="next-guide" href="../cases/"><span>下一步</span><strong>跨所有聊天室進行調查 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../reference/verification/">已測試的內容 →</a></p></footer>
 </main>

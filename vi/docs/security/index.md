@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/security/
 
-Hãy tìm hiểu các tuyến đường truyền cho Telegram, danh sách proxy công khai và các dịch vụ bên ngoài tùy chọn. Hãy nắm rõ mỗi tính năng bảo mật mang lại lợi ích gì, phạm vi bảo vệ của chúng bao gồm những gì và những gì người dùng cần tự đảm nhận.
+Những gì rời khỏi máy của bạn, mỗi khóa bí mật mở được gì, và các lớp bảo vệ lo phần nào, phần nào là trách nhiệm của bạn.
 
 **127.0.0.1**Địa chỉ bảng điều khiển theo mặc định
 
@@ -14,7 +14,7 @@ Hãy tìm hiểu các tuyến đường truyền cho Telegram, danh sách proxy 
 
 ## Nơi lưu trữ mọi thông tin
 
-Công cụ thu thập dữ liệu, bảng điều khiển của nó và mọi bản ghi được lưu trữ đều nằm trên máy tính hoặc máy chủ mà quý vị đang vận hành. Telegram là điểm đến duy nhất theo mặc định; mỗi điểm đến khác đều là một tùy chọn riêng biệt.
+Máy thu thập, bảng điều khiển và mọi bản ghi đều ở trên máy của bạn. Mặc định chỉ liên lạc với Telegram; mọi thứ khác là một công tắc riêng.
 
 06 / NHỮNG GÌ ĐƯỢC LƯU LẠI TỪ HỆ THỐNGQuá trình cài đặt của quý vị
 
@@ -56,54 +56,54 @@ Các đích lưu trữ tùy chọn được cấu hình riêng cho từng không
 
 | Bí mật | Nơi lưu trữ | Những lợi ích mà công cụ này mang lại | Trong trường hợp thông tin bị rò rỉ |
 | --- | --- | --- | --- |
-| **Mã thông báo bảng điều khiển** | `panel-token.txt` trong thư mục dữ liệu; trình duyệt chỉ lưu trữ tệp này cho riêng tab đó | Tất cả các tính năng trong mọi không gian làm việc: đọc và xuất dữ liệu, thay đổi phạm vi, đăng nhập vào các tài khoản | Dừng TgWitness, xóa mã `panel-token.txt`, khởi động lại: một mã thông báo mới sẽ được tạo ra |
+| **Mã thông báo bảng điều khiển** | `panel-token.txt` trong thư mục dữ liệu; trình duyệt giữ nó theo từng tab | Mọi thứ trong mọi không gian làm việc | Dừng TgWitness, xóa `panel-token.txt`, khởi động lại: bạn nhận được token mới |
 | **Phiên làm việc trên Telegram** | Kho lưu trữ, được mã hóa (`credentials.enc`) | Tài khoản Telegram này | Kết thúc phiên làm việc trên Telegram tại *mục Cài đặt → Thiết bị* |
-| **Khóa ký** | Kho lưu trữ, được mã hóa (`signing.enc`) | Các bản ghi được ký điện tử và có thể xác minh thông qua dấu vân tay của quý vị | Các điểm kiểm tra được lưu trữ tại nơi khác, cùng với chứng cứ và dấu thời gian, cho thấy những gì đã tồn tại trước đó |
-| **Khóa kho lưu trữ** | Mã `vault.key` đi kèm với dữ liệu, hoặc một khóa chính bên ngoài dành cho thư mục dữ liệu mới | Giải mã kho lưu trữ | Hãy coi phiên làm việc và khóa ký cũng như đã bị rò rỉ |
-| **Token Witness** | Trên máy chủ Witness | Chế độ chỉ đọc: các điểm kiểm tra đã được ký và trạng thái hoạt động | Xóa nội dung này trên trang Witness; tạo một nội dung mới |
-| **Nội dung chính trên trang web bên ngoài** | Vault; chỉ cần tải xuống một lần để phục hồi | Giải mã bản sao lưu ngoài trang web | Bất kỳ ai nắm giữ các đối tượng được lưu trữ đều có thể giải mã chúng: hãy coi bản sao đó như đã bị lộ |
+| **Khóa ký** | Kho lưu trữ, được mã hóa (`signing.enc`) | Ký bản ghi dưới dấu vân tay của bạn | Điểm kiểm tra lưu ở nơi khác, nhân chứng và dấu thời gian vẫn cho thấy những gì đã tồn tại trước đó |
+| **Khóa kho lưu trữ** | `vault.key` cạnh dữ liệu, hoặc một khóa chính bên ngoài | Kho bảo mật | Hãy coi như phiên và khóa ký cũng đã bị lộ |
+| **Token Witness** | Trên máy chủ Witness | Chỉ đọc: điểm kiểm tra và tình trạng | Xóa nó trên trang Nhân chứng, tạo cái mới |
+| **Nội dung chính trên trang web bên ngoài** | Vault; chỉ cần tải xuống một lần để phục hồi | Bản sao ngoài trang web | Ai có cả bucket đều giải mã được: hãy coi bản sao là đã bị lộ |
 
 ## Phạm vi bảo vệ bao gồm những gì
 
 ### Đã được đề cập
 
-- Một bản ghi bị thay đổi, xóa bỏ hoặc sắp xếp lại trong tệp xuất: chuỗi băm hoặc chữ ký sẽ không còn khả năng xác minh được nữa.
-- Một nhật ký bị cắt bớt hoặc được xây dựng lại sau khi điểm kiểm tra đã được lưu trữ ở nơi khác: điểm kiểm tra còn lưu giữ không còn khớp nữa.
-- Dự đoán mã thông báo bảng điều khiển: 256 bit ngẫu nhiên, được so sánh trong thời gian không đổi; sau 15 lần thất bại trong một phút, địa chỉ đó sẽ bị từ chối.
-- Nội dung trò chuyện có tính chất thù địch: văn bản được chèn dưới dạng văn bản thuần túy, không bao giờ dưới dạng HTML; các tệp đính kèm được tải xuống dưới dạng tệp; bảng điều khiển không tải bất kỳ nội dung nào từ các trang web khác.
-- Một thư mục dữ liệu sao chép kèm theo khóa kho lưu trữ bên ngoài: các phiên làm việc và khóa ký vẫn được mã hóa ngay cả khi không có khóa chính.
+- Bản ghi bị sửa, xóa hoặc đổi thứ tự: chuỗi băm hoặc chữ ký bị phá vỡ.
+- Sổ nhật ký bị cắt bớt hoặc dựng lại sau khi bạn đã lưu điểm kiểm tra ở nơi khác: điểm kiểm tra không còn khớp.
+- Đoán token: 256 bit ngẫu nhiên, so sánh thời gian hằng định, 15 lần thất bại trong một phút là địa chỉ bị chặn.
+- Nội dung trò chuyện độc hại: văn bản vẫn là văn bản, không bao giờ là HTML; tệp đính kèm tải xuống dưới dạng tệp; bảng điều khiển không tải gì từ trang web khác.
+- Thư mục dữ liệu bị đánh cắp khi dùng khóa kho bảo mật bên ngoài: phiên và khóa vẫn được mã hóa.
 
 ### , xin để quý vị tự quyết định
 
-- Người nắm giữ mã thông báo bảng điều khiển chính có toàn quyền kiểm soát. Hãy cấp cho những người khác quyền truy cập có giới hạn vào các tài khoản, cuộc trò chuyện và hành động mà họ cần; đồng thời bảo mật mã khóa chính.
-- Quản trị viên của hệ thống có thể xem toàn bộ nội dung cũng như chỉnh sửa và ký lại sổ nhật ký. Vui lòng lưu giữ dấu vân tay và các điểm kiểm tra trên một hệ thống khác.
-- Nội dung tin nhắn và tệp đa phương tiện không được TgWitness mã hóa. Quý vị nên sử dụng tính năng mã hóa đĩa và thiết lập quyền truy cập nghiêm ngặt.
-- Việc sử dụng HTTP thuần túy ngoài phạm vi localhost sẽ khiến mã thông báo bị lộ trên mạng. Vui lòng sử dụng HTTPS hoặc đường hầm SSH.
-- Kiểm tra các bản ghi đã lưu bằng chữ ký và điểm kiểm tra. Xem xét phạm vi thu thập và kiểm tra việc chuyển giao đối với các tài khoản và nguồn mà bạn sử dụng.
+- Token chính làm được mọi thứ. Hãy cấp cho người khác quyền truy cập giới hạn và giữ token chính cho riêng mình.
+- Bất kỳ ai là quản trị viên trên máy đều đọc được mọi thứ và ký lại sổ nhật ký. Hãy giữ dấu vân tay và điểm kiểm tra ở nơi khác.
+- TgWitness không mã hóa tin nhắn và phương tiện. Hãy mã hóa ổ đĩa, siết chặt quyền.
+- HTTP thường bên ngoài localhost làm lộ token. Hãy dùng HTTPS hoặc đường hầm SSH.
+- Chữ ký không cho bạn biết những gì đã bị bỏ lỡ. Hãy kiểm tra phạm vi và thử việc nhận tin trên chính tài khoản và nguồn của bạn.
 
-[Chia sẻ quyền truy cập vào một vụ việc](https://phishdestroy.github.io/TgWitness/vi/docs/access/) kèm theo các quyền hạn, thời hạn hiệu lực và giới hạn phiên làm việc. Mã thông báo chứng nhân vẫn là một thông tin xác thực riêng biệt.
+[Chia sẻ quyền truy cập vào một vụ việc](https://phishdestroy.github.io/TgWitness/vi/docs/access/) với quyền hạn, thời hạn và giới hạn phiên.
 
 ## Tăng cường bảo mật cho hệ thống cài đặt
 
 Đã hoàn thành 0/8
 
-1. **Hãy sử dụng một tài khoản Telegram chuyên dụng** — tuyệt đối không sử dụng tài khoản chính của quý vị. Mã thông báo bảng điều khiển và phiên làm việc sẽ cho phép quý vị kiểm soát hoàn toàn tài khoản đó.
-2. **Vui lòng duy trì máy chủ tại địa chỉ 127.0.0.1.** Chỉ truy cập từ xa thông qua HTTPS (cấu hình Caddy đi kèm) hoặc qua đường hầm SSH.
-3. **Mã hóa ổ đĩa** chứa thư mục dữ liệu: nội dung tin nhắn và tệp phương tiện được lưu trữ nguyên vẹn như khi nhận được.
-4. **Hãy giới hạn thư mục dữ liệu** trong phạm vi tài khoản dịch vụ. Trên hệ điều hành Unix, các thư mục mới sẽ được gán quyền truy cập 0700; trên Windows, hãy thiết lập quyền truy cập cho thư mục đó.
-5. **Vui lòng lưu giữ khóa chính của kho dữ liệu tại một vị trí khác** trên máy chủ: hãy thiết lập `TGWITNESS_VAULT_KEY_FILE` trước khi tạo thư mục dữ liệu.
-6. **Vui lòng lưu dấu vân tay của khóa ký và các điểm kiểm tra** trên một hệ thống khác, đồng thời thêm một nhân chứng trên một máy chủ khác.
+1. **Hãy sử dụng một tài khoản Telegram chuyên dụng**, không bao giờ dùng tài khoản chính.
+2. **Giữ bảng điều khiển trên 127.0.0.1.** Truy cập từ xa chỉ qua HTTPS (Caddy đi kèm) hoặc đường hầm SSH.
+3. **Mã hóa ổ đĩa** chứa thư mục dữ liệu, tin nhắn và phương tiện được lưu nguyên trạng.
+4. **Hãy giới hạn thư mục dữ liệu** cho tài khoản dịch vụ (0700 trên Unix, quyền thư mục trên Windows).
+5. **Giữ khóa kho bảo mật ở nơi khác** trên máy chủ: đặt `TGWITNESS_VAULT_KEY_FILE` trước lần khởi động đầu tiên.
+6. **Lưu dấu vân tay và điểm kiểm tra** trên một hệ thống khác, chạy nhân chứng trên một máy chủ khác.
 7. **Tuyệt đối không được tải lên các** khóa `data/`, phiên làm việc, `panel-token.txt` hoặc khóa kho lưu trữ lên GitHub hoặc trong các cuộc trò chuyện.
 8. **Không ghi lại** các tiêu đề `Authorization` hoặc nội dung yêu cầu tại máy chủ proxy ngược.
 
 **Tôi có thể thay đổi mã thông báo bảng điều khiển mà không làm mất dữ liệu không?**
 
-Đúng vậy. Mã thông báo này chỉ dùng để mở bảng điều khiển. Hãy dừng TgWitness, xóa `panel-token.txt` khỏi thư mục dữ liệu và khởi động lại; nhật ký, các phiên làm việc và khóa vẫn được giữ nguyên. Khi `TGWITNESS_TOKEN` được thiết lập, giá trị môi trường sẽ được sử dụng thay cho tệp tin.
+Có, nó chỉ mở bảng điều khiển. Dừng TgWitness, xóa `panel-token.txt`, khởi động lại. Sổ nhật ký, phiên và khóa vẫn còn. Nếu đã đặt `TGWITNESS_TOKEN`, giá trị đó được ưu tiên hơn tệp.
 
 **Tại sao các tin nhắn không được mã hóa khi lưu trữ?**
 
-Người thu thập dữ liệu phải đọc các bản ghi này để tìm kiếm, so sánh các phiên bản và xuất dữ liệu. Việc mã hóa chúng bằng một khóa trên chính máy tính đó sẽ không mang lại nhiều lợi ích trước những đối tượng có khả năng truy cập vào máy tính đó. Mã hóa ổ đĩa bảo vệ ổ đĩa đã ngừng hoạt động hoặc bị đánh cắp; trong khi đó, các quyền truy cập nghiêm ngặt sẽ bảo vệ ổ đĩa đang hoạt động.
+Máy thu thập phải đọc chúng để tìm kiếm, so sánh và xuất. Một khóa trên cùng máy cũng không ngăn được người vốn đã đọc được máy đó. Mã hóa ổ đĩa bảo vệ ổ bị đánh cắp, quyền truy cập bảo vệ hệ thống đang chạy.
 
 ## Báo cáo lỗ hổng bảo mật
 
-Vui lòng sử dụng **mục Bảo mật → Báo cáo lỗ hổng bảo mật** trong kho lưu trữ GitHub. Vui lòng cung cấp thông tin về phiên bản, mức độ ảnh hưởng và hướng dẫn tái hiện tối thiểu. Tuyệt đối không gửi thông tin đăng nhập, thư mục tài khoản hoặc các kho lưu trữ bằng chứng thực tế. Trong trường hợp không thể báo cáo riêng tư, xin vui lòng mở một vấn đề (issue) để yêu cầu một kênh riêng tư mà không kèm theo chi tiết về lỗ hổng.
+**Security → Report a vulnerability** trên GitHub. Phiên bản, tác động và cách tái hiện tối thiểu bằng dữ liệu giả. Không bao giờ gửi thông tin xác thực, thư mục tài khoản hay bằng chứng thật. Nếu báo cáo riêng tư bị tắt, hãy mở một issue xin kênh riêng tư, không kèm chi tiết khai thác.

@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="راهنماها"><a href="../../">خانه</a> <span aria-hidden="true">/</span> <a href="../">مستندسازی</a> <span aria-hidden="true">/</span> <span aria-current="page">آن را در حال اجرا نگه دارید</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">آنچه آزمایش شده است ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">جستجو در مستندات</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، زنجیره هش، توکن یا ویسنس را امتحان کنید…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="جستجوی واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">یک کلمه تایپ کنید تا در راهنماها و مرجع جستجو شود. جستجو در مرورگر شما باقی می‌ماند.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">مستندسازی / 17</p><h1>آن را در حال اجرا نگه دارید</h1><p class="guide-outcome">مطمئن شوید که ابزار جمع‌آوری در دسترس باقی بماند و داده‌های آن در طول راه‌اندازی مجدد دست‌نخورده باقی بماند.</p>
+<article class="guide-content"><p class="eyebrow">مستندسازی / 17</p><h1>آن را در حال اجرا نگه دارید</h1><p class="guide-outcome">جمع‌کننده را روشن و داده‌ها را در راه‌اندازی‌های مجدد امن نگه دارید.</p>
 <h2 id="launch">روش راه‌اندازی را انتخاب کنید</h2>
-<p>برای نصب بومی، از <a href="../start/">لانچر</a> و مثال‌های سرویس در <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/ استفاده کنید.</a> برای Docker، Docker را با Compose نصب کرده و از دایرکتوری پروژه اجرا کنید:</p>
+<p>نصب بومی: <a href="../start/">راه‌انداز</a> به‌علاوه قالب‌های سرویس در <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a>. Docker، از پوشه پروژه:</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>پنل پیش‌فرض روی آدرس لوپ‌بک میزبان، پورت 8787 گوش می‌دهد. آن را به‌صورت محلی یا از طریق تونل SSH باز کنید. از توکن دستور دوم برای باز کردن پنل استفاده کنید.</p>
+<p>پنل روی localhost:8787 گوش می‌دهد. آن را محلی یا از طریق تونل SSH باز کنید، با توکن فرمان دوم.</p>
 <h2 id="storage">تمام دایرکتوری داده‌ها را حفظ کنید</h2>
-<p>نصب‌های بومی از <code>data/live</code> استفاده می‌کنند. داکر از حجم پایدار <code>tgwitness-data</code> استفاده می‌کند. دفترچه‌ها، جلسات حساب کاربری، کلیدها و وضعیت عملیاتی را با هم نگه می‌دارد. یک خروجی امضا‌شده مدرک مفیدی است، اما پشتیبان کامل نصب نیست.</p>
-<ol><li>پیش از انجام یک نسخه پشتیبان یکپارچه، جمع‌آوری را متوقف کنید.</li><li>کل دایرکتوری داده‌های خصوصی را به یک فضای ذخیره‌سازی محافظت‌شده خارج از میزبان کپی کنید.</li><li>پیش از اتکا به نسخهٔ پشتیبان، بازیابی را در یک نصب ایزوله آزمایش کنید.</li></ol>
+<p>نصب بومی: <code>data/live</code>. Docker: حجم <code>tgwitness-data</code>. ژورنال‌ها، نشست‌ها و کلیدها باید کنار هم باشند. خروجی امضاشده شاهد است، نه پشتیبان.</p>
+<ol><li>اول جمع‌آوری را متوقف کنید.</li><li>کل پوشه داده را به جای امنی بیرون از میزبان کپی کنید.</li><li>پیش از اعتماد، بازیابی آن را روی یک نصب جداگانه امتحان کنید.</li></ol>
 <h2 id="check">پس از راه‌اندازی مجدد بررسی کنید</h2>
-<p>فضا و کلید مورد انتظار، اتصال تلگرام، منابع انتخاب‌شده و ضبط پیام جدید را تأیید کنید. وضعیت ذخیره‌شده‌ی MTProto و قابلیت جبران به بازیابی به‌روزرسانی‌هایی کمک می‌کند که تلگرام هنوز نگه داشته است. آن‌ها نمی‌توانند هر به‌روزرسانی منقضی‌شده یا ویرایشی را که پیش از ضبط حذف شده است بازسازی کنند.</p>
-<p class="callout">وضعیت کانتینر به معنای پاسخ‌دادن وب‌سرور است. برای ارزیابی جمع‌آوری و انتشار خارجی از یک پیام کنترل‌شده و بررسی شاهد استفاده کنید.</p>
+<p>فضای کاری و کلید، اتصال، منابع و رسیدن پیام‌های جدید را بررسی کنید. TgWitness آنچه Telegram هنوز دارد را جبران می‌کند، نه هر چیزی که هنگام خاموشی رخ داده.</p>
+<p class="callout">کانتینر «healthy» یعنی وب‌سرور پاسخ می‌دهد. اینکه جمع‌آوری کار می‌کند یا نه را پیام آزمایشی و شاهد می‌گویند.</p>
 <h2 id="public">فقط آنچه را که قصد دارید منتشر کنید</h2>
-<p>مرجع استقرار شامل مثال‌های HTTPS، دستورات حجم پایدار، مراحل به‌روزرسانی و بازیابی است. دستورات Docker برای استقرار ارائه شده‌اند؛ <a href="../reference/verification/">رکورد اعتبارسنجی</a> فعلی، محیط‌های واقعاً آزمایش‌شده را شناسایی می‌کند.</p>
+<p>HTTPS، حجم‌ها، به‌روزرسانی‌ها و بازیابی در مرجع استقرار هستند. آنچه واقعاً آزمایش شده: <a href="../reference/verification/">سابقه اعتبارسنجی</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">مرجع کامل ←</a><a class="next-guide" href="../troubleshooting/"><span>مرحله بعدی</span><strong>مشخص کنید چه چیزی اشتباه پیش رفته است ←</strong></a><p>این راهنماها پیاده‌سازی فعلی را توصیف می‌کنند. نتایج اعتبارسنجی و شکاف‌های باقی‌مانده به‌طور جداگانه مستند شده‌اند. <a href="../reference/verification/">آنچه آزمایش شده است ←</a></p></footer>
 </main>

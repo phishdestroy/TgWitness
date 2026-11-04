@@ -34,17 +34,11 @@ Việc cài đặt bản gốc yêu cầu Python 3.11 trở lên cùng với `ve
 - **macOS:** hãy cài đặt bản phân phối Python 3.11+ mới nhất; không nên cho rằng trình thông dịch do hệ điều hành cung cấp đáp ứng yêu cầu. Vui lòng sử dụng tệp `python3 start.py` từ thư mục dự án.
 - **Docker:** sử dụng Docker Engine/Desktop với Compose phiên bản 2.20 trở lên. Docker Desktop phải sử dụng các container Linux trên Windows. Container sẽ tự cài đặt các thành phần phụ thuộc Python của riêng mình; máy chủ không cần cài đặt Python riêng biệt.
 
-Vui lòng sử dụng bộ nhớ cục bộ lâu dài cho thư mục dữ liệu. Hãy lập kế hoạch dung lượng dựa trên số lượng tin nhắn, tệp đa phương tiện, tốc độ tăng trưởng của WAL, các bản xuất và bản sao lưu; không có tiêu chuẩn tối thiểu chung nào dựa trên bằng chứng về dung lượng đĩa/RAM áp dụng cho mọi khối lượng công việc. Các kiến trúc CPU và phiên bản Python không có các gói phụ thuộc tương thích có thể yêu cầu các công cụ biên dịch bổ sung cùng với quy trình kiểm định riêng. Thuật ngữ “di động” không phải là tuyên bố về khả năng hỗ trợ phổ quát cho mọi hệ điều hành hay phần cứng.
-
-Hệ điều hành Windows 11 và Python 3.12 đã được xác minh tại máy chủ cục bộ. Các định nghĩa dành cho Linux, macOS và môi trường container cùng quy trình CI đã được cung cấp nhưng chưa được thực thi trên máy chủ phát triển này. Vui lòng tham khảo [tệp VERIFICATION.md](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/) để biết phạm vi cụ thể.
-
 ## Máy tính cục bộ
 
 Vui lòng sử dụng `Start.cmd` trên Windows hoặc `sh start.sh` trên Linux/macOS. `scripts\Setup.cmd` hoặc `sh start.sh --setup-only` sẽ tiến hành chuẩn bị môi trường. Trình khởi chạy sẽ cài đặt các thành phần phụ thuộc khi sử dụng lần đầu; các lần khởi chạy sau đó sẽ tái sử dụng môi trường đã có sẵn. Cần có kết nối Internet để thiết lập và thu thập dữ liệu từ Telegram, tuy nhiên, việc duyệt qua các bản ghi hiện có và tạo tệp xuất vẫn có thể thực hiện ngoại tuyến.
 
 Vui lòng chạy lệnh ``python start.py --check`` sau khi thiết lập để kiểm tra các phụ thuộc cục bộ, Ed25519, bộ nhớ lưu trữ, cấu hình khóa và địa chỉ lắng nghe mà không cần khởi động trình thu thập dữ liệu. Sử dụng lệnh `--json` để nhận kết quả đầu ra có cấu trúc. Chuyển các lệnh `--data-dir`, `--host` và `--port` theo mục đích. Quá trình kiểm tra này không cài đặt gói phần mềm, không tạo nhật ký cũng như không kết nối với Telegram; đây không phải là quá trình đánh giá tính toàn vẹn hay phạm vi bao phủ. Quá trình khởi động sẽ xác minh riêng biệt các nhật ký hiện có. Lệnh `python start.py --help` cũng không yêu cầu cài đặt.
-
-Các tùy chọn:
 
 Sau khi chạy tệp start.py, quý vị hãy thực thi các lệnh phụ trợ bằng lệnh ``.venv\Scripts\python.exe`` trên Windows hoặc ``.venv/bin/python`` trên Linux/macOS, hoặc kích hoạt môi trường đó trước tiên. Các ví dụ ``python -m ...`` dưới đây giả định rằng môi trường đã được kích hoạt.
 
@@ -73,8 +67,6 @@ Tự xây dựng trên hệ điều hành Windows 64-bit bằng Python 3.12:
 ```
 python tools/build_portable.py
 ```
-
-Trình xây dựng sẽ xác minh tổng kiểm tra thời gian chạy, cài đặt các phụ thuộc có giới hạn vào gói phần mềm, thực hiện kiểm tra sẵn sàng bằng trình thông dịch nhúng và ghi tệp ZIP cùng tổng kiểm tra vào tệp `dist/`.
 
 ## Container
 
@@ -121,8 +113,6 @@ docker compose logs witness                     # witness key fingerprint
 Dịch vụ này kết nối với bộ thu thập (collector) trong mạng Compose tại địa chỉ `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` sẽ ghi đè lên địa chỉ này; ví dụ: `/profiles/<workspace ID>` dành cho một không gian làm việc khác). Đối với tệp chứng cứ (witness) trên một máy chủ riêng biệt do người khác quản lý, quý vị hãy sử dụng `deploy/compose/compose.witness.yaml` tại đó và thiết lập `TGWITNESS_WITNESS_COLLECTOR` thành địa chỉ HTTPS của bộ thu thập; tệp này chỉ chứa duy nhất tệp chứng cứ.
 
 ## Cài đặt hình ảnh đã được phát hành
-
-Tính năng này sẽ khả dụng sau khi [quy trình phát hành](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/#automated-github-releases) hoàn tất thành công và cấu hình gói GHCR công khai được thiết lập. Tên/chủ sở hữu của kho lưu trữ không được mã hóa cứng trong cây nguồn này. Vui lòng sử dụng hình ảnh được hiển thị trong phần tóm tắt quy trình phát hành của phiên bản đó.
 
 Sao chép `deploy/env.example` vào `.env`. Đặt `TGWITNESS_IMAGE` thành phiên bản đã được phát hành, bằng cách sử dụng đường dẫn kho lưu trữ **viết thường**, ví dụ:
 
@@ -202,18 +192,6 @@ Vui lòng sử dụng (các) tệp Compose của bản cài đặt của quý v�
 
 Vui lòng kiểm tra quyền truy cập bảng điều khiển, thông tin nhận dạng tài khoản, trạng thái quan sát và phạm vi bao phủ sau khi cập nhật. Việc khởi động lại sẽ không khôi phục các bản cập nhật Telegram bị bỏ lỡ. Việc khôi phục về phiên bản trước có thể yêu cầu bản sao lưu trước khi cập nhật nếu phiên bản trong tương lai thay đổi định dạng lưu trữ.
 
-## Các bản phát hành tự động trên GitHub
-
-[Quy trình phát hành](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) đã sẵn sàng để sử dụng sau khi dự án này được đẩy lên kho lưu trữ GitHub có bật tính năng Actions. Quy trình này sẽ được thực thi khi một bản phát hành GitHub được **công bố**, bao gồm cả bản phát hành trước. Việc đẩy bản nháp và thẻ một mình sẽ không dẫn đến việc công bố các gói phần mềm.
-
-1. Vui lòng thiết lập phiên bản gói phần mềm và nhật ký thay đổi, sau đó phát hành bản cập nhật được gắn thẻ `v` cùng với phiên bản `pyproject.toml` chính xác, chẳng hạn như `v0.8.0`.
-2. Quy trình làm việc này sẽ xác thực thẻ và thực thi các kiểm tra chung trên trình duyệt Python chia sẻ cho Windows/Linux/macOS, kiểm tra thư mục general/account-import/QR, gói nguồn và Docker. Việc cài đặt bản gốc mới cũng được thực hiện trên cả ba hệ điều hành này bằng Python 3.12.
-3. Sau khi các kiểm tra này thành công, hệ thống sẽ thực hiện kiểm tra nhanh (smoke test) hình ảnh ARM64 trên QEMU, đăng tải các hình ảnh AMD64/ARM64 lên `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, và đính kèm tệp ZIP nguồn cùng gói Python wheel kèm theo các tệp SHA-256 tương ứng. Tệp ZIP di động dành cho Windows chính là bản phát hành đã được kiểm tra bởi quy trình kiểm tra; quy trình phát hành sẽ tải xuống và đăng tải bản phát hành đó cùng với tổng kiểm tra (checksum) của nó.
-4. Một tác vụ cuối cùng sẽ tải xuống lại cả ba gói đã được phát hành và xác minh tổng kiểm tra của chúng. Sau đó, nó sẽ phát hành `SHA256SUMS.txt` và `RELEASE-MANIFEST.json`, ghi lại phiên bản, bản sửa đổi nguồn và kích thước tài nguyên. Quá trình tải lên sẽ từ chối ghi đè lên các tài nguyên phát hành hiện có.
-5. Sau lần xuất bản đầu tiên, quý vị hãy mở cài đặt gói GHCR và thiết lập quyền truy cập thành **Công khai** nếu có ý định tải xuống hình ảnh ẩn danh. Việc chỉ có kho lưu trữ nguồn công khai thôi chưa đảm bảo gói container sẽ được công khai. Chính sách của tổ chức phải cho phép việc xuất bản gói. Quy trình làm việc sử dụng `GITHUB_TOKEN`; không được lưu mật khẩu đăng ký hoặc thông tin đăng nhập VPS trong kho lưu trữ.
-
-Sự thành công của quy trình làm việc từ xa chưa được xác nhận thông qua quá trình chuẩn bị tại địa phương này. Việc mô phỏng ARM64 chỉ là bước kiểm tra sơ bộ, không phải là quá trình kiểm định trên phần cứng gốc hay kiểm định Telegram trong môi trường thực tế. Tính năng này tự động hóa quá trình đóng gói bản phát hành; việc khởi động máy chủ vẫn yêu cầu lệnh Compose cùng các điều kiện tiên quyết về tên miền/máy chủ. Các máy chủ hiện có sẽ không được nâng cấp hoặc khởi động lại tự động khi có bản phát hành mới.
-
 ## Máy chủ từ xa
 
 Hãy giữ dịch vụ kết nối với loopback và sử dụng đường hầm SSH, hoặc kết thúc kết nối HTTPS tại một proxy ngược. Tệp Compose cơ bản chỉ hoạt động cục bộ; lớp phủ `deploy/compose/compose.https.yaml` (tùy chọn) cung cấp Caddy cho tên miền đã được cấu hình. Hãy đảm bảo token bearer không xuất hiện trong các URL và nhật ký proxy. Máy chủ proxy ngược nên giới hạn kích thước yêu cầu và tần suất kết nối. Không được để HTTP thuần túy tiếp xúc với Internet.
@@ -244,14 +222,6 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 Sử dụng `--profile ID` từ **mục Xuất → ID Không gian làm việc** cho một không gian làm việc khác, `--format zip|jsonl|csv|html`, `--url https://your-server` cho máy chủ từ xa, hoặc `--max-mib` để thay đổi giới hạn truyền tải 5 GiB. Giao thức HTTP thuần túy chỉ được phép sử dụng cho loopback. Các mã thông báo được truyền qua tiêu đề, các yêu cầu chuyển hướng sẽ bị từ chối, các tệp hiện có sẽ không bị ghi đè, và các tệp tải xuống chưa hoàn tất sẽ không được công bố như các tệp đã hoàn tất. Nếu TGWITNESS_TOKEN ghi đè lên mã thông báo đã tạo, hãy sử dụng một tệp được bảo vệ riêng biệt chứa giá trị đang hoạt động đó: tệp panel-token.txt sẽ không bị ghi đè bởi giá trị này. Giá trị SHA-256 của lệnh này chỉ là tổng kiểm tra truyền tải; quý vị cần xác minh độc lập tệp ZIP đã được ký.
 
-Các tệp xuất từ máy chủ vẫn được lưu trữ bên trong thư mục riêng tư `temporary-exports/` của từng không gian làm việc. Các tác vụ xuất dữ liệu thành công sẽ tự động xóa các tệp của mình. Các tác vụ xuất bị gián đoạn sẽ bị xóa khi khởi động không gian làm việc tiếp theo, khi khóa phiên bản độc quyền của nó vẫn được duy trì. Thư mục này là một phần của mô hình đe dọa/dung lượng lưu trữ; vui lòng sử dụng một khối dữ liệu được mã hóa. Các hoạt động truyền tải với quy mô sản xuất lên đến nhiều gigabyte vẫn cần được kiểm định trên hệ thống đích của quý vị.
-
 Bảng điều khiển hiển thị các tệp đa phương tiện đang chờ xử lý/thất bại, tệp đa phương tiện đang chờ xử lý lâu nhất, dung lượng đĩa trống, các lần tạm dừng yêu cầu từ Telegram, và các nguồn chưa được xác nhận quyền truy cập. Các chẩn đoán này không phải là một công cụ giám sát việc truyền tải từ đầu đến cuối hoàn chỉnh. Các không gian làm việc chia sẻ chung một quy trình; một tài khoản gây nhiễu vẫn có thể ảnh hưởng đến những tài khoản khác. Các quy trình xử lý riêng biệt, chính sách lưu trữ/xoay vòng, khả năng phục hồi cập nhật bền vững và quy trình đánh giá triển khai đầy đủ vẫn được duy trì. Quyền truy cập bảng điều khiển theo phạm vi được ghi chép trong [phần quyền truy cập và quyền hạn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/); các điểm kiểm tra độc lập được đề cập trong [hướng dẫn dành cho nhân chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/).
-
-## Các tùy chọn kết nối và bảo vệ
-
-Các tuyến kết nối được thiết lập theo từng không gian làm việc và cần được cấu hình trước khi ủy quyền. SOCKS5/HTTP CONNECT sử dụng phụ thuộc python-socks đã được ghim. MTProxy sử dụng giao thức trung gian ngẫu nhiên thử nghiệm của Telethon; các khóa bí mật TLS giả không được hỗ trợ. Chế độ dự phòng trực tiếp phụ thuộc vào [chế độ IP](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/#ip-modes) đã chọn: Chế độ **“Ẩn địa chỉ”** từ chối kết nối này; **chế độ “Trực tiếp” (như phương án cuối cùng)** cho phép kết nối sau một khoảng thời gian trễ. **Máy chủ nằm sau đường hầm hoặc VPN** cho phép các đường dẫn trực tiếp nhưng không tạo ra VPN. Đây không phải là chính sách mạng áp dụng cho toàn hệ thống.
-
-Đối với các cài đặt mới, biến TGWITNESS_VAULT_KEY_FILE trỏ đến một tệp khóa chính ngẫu nhiên được bảo vệ riêng biệt. Hãy gắn tệp này ở chế độ chỉ đọc bên ngoài thư mục /data trong một container. Hãy bảo quản riêng biệt dữ liệu meta salt công khai trong tệp vault.external.json cho từng không gian làm việc cùng với khóa chính. Các kho lưu trữ cục bộ hiện có cần được di chuyển theo kế hoạch; việc thiết lập biến này sẽ không tự động chuyển đổi chúng. Việc lưu trữ và xuất tin nhắn/tệp đa phương tiện không được mã hóa bởi ứng dụng. Vui lòng sử dụng các phân vùng được mã hóa và không gian lưu trữ tạm thời riêng tư đủ dung lượng khi cần thiết.
 
 Các quy trình chi tiết: [kết nối/bảo mật](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/) và [các chế độ hoạt động](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/).

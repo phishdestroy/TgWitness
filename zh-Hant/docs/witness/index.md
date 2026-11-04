@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/witness/
 
-讓獨立的程序檢查該日誌，並將簽名檢查點發佈至您的頻道。
+一個獨立程序檢查您的日誌，並將簽名檢查點發布到頻道。
 
 ## 兩台主機，兩組簽名金鑰
 
@@ -36,33 +36,33 @@ Witness 會自行執行驗證。收集器的存取權限為唯讀。機器人發
 
 ## 準備一個機器人與一個頻道
 
-使用 BotFather 建立一個機器人，並允許其在您所控制的頻道中發文。為 TgWitness 選擇一台電腦或伺服器。相較於在資料收集者的伺服器上運行第二個程序，使用獨立的主機和操作員能提供更強的獨立性。
+用 BotFather 建立機器人，並允許它在您的頻道中發文。請在別處執行見證人：另一台主機，最好由其他人管理，遠比在收集器旁多跑一個程序更有價值。
 
 ## 「進階功能」中的三個步驟
 
-1. **唯讀存取權限。**開啟「**Extras」→「Independent witness」**，建立見證者代幣並儲存存取檔案。此權限僅允許讀取檢查點與系統狀態，無法存取對話內容或收集器控制項。
-2. **頻道與間隔。**選擇一個 Telegram 頻道或 Discord Webhook，並輸入可從見證節點存取的收集器地址。儲存設定檔。
-3. **啟動。**將 `witness.json`、`witness-token.txt` 以及在 Witness 主機上建立的 `bot-token.txt` 置於同一位置。在已安裝的專案環境中執行以下指令。
+1. **唯讀存取。****擴充功能 → 獨立見證人**，建立權杖並儲存檔案。它只讀取檢查點和健康狀態，別無其他。
+2. **頻道和間隔。**Telegram 頻道或 Discord webhook，以及見證人能連到的收集器網址。儲存設定檔。
+3. **啟動。**將 `witness.json`、`witness-token.txt` 和 `bot-token.txt` 一起放到見證人主機上並執行：
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
 python -m tgwitness.witness run --config witness.json
 ```
 
-下載檔案並不會啟動「witness」。請確認首則簽名貼文已出現在頻道中，然後將「witness」的公鑰指紋另行保存。
+等待頻道中出現第一則簽名貼文，然後將見證人指紋保存在安全的地方。
 
-針對 Discord，請將頻道的 webhook URL 儲存為 `discord-webhook.txt` ，而非機器人代幣。見證人會將內容發佈至單一位置（Telegram 頻道或 Discord 頻道）；長於 Discord 訊息長度的驗證結果將以附件形式傳送。
+想用 Discord？將 webhook URL 儲存為 `discord-webhook.txt`。一個見證人只發布到一個地方；較長的檢查結果在 Discord 上以檔案形式送達。
 
 ## 選擇發布頻率
 
-每次檢查結果的發布都會建立一份定期的外部記錄。以五分鐘為間隔計算，每個工作區每天約有 288 則貼文。進階設定還提供在發生變更或問題時發布通知、代理伺服器以及自訂 Bot API 位址等功能。
+每次檢查都發文可以形成穩定的外部紀錄：每五分鐘一次，約等於每個工作區每天 288 則貼文。進階設定可以只在有變化或出問題時發文，使用代理或自訂 Bot API。
 
 **該機器人實際上能證明什麼？**
 
-該「見證者」會向資料收集者索取經簽名的檢查點，並使用預期金鑰進行驗證，同時另行維護一份經簽名的日誌。它不僅記錄成功的驗證結果，亦會記錄缺失的回應與被拒絕的答案。發布與否仍取決於「見證者」是否正在運行，以及能否連線至 Telegram 的 Bot API。
+它向收集器請求簽名檢查點，以預期的金鑰核對，並保存自己的簽名日誌，包括錯過和被拒絕的回應。
 
-本工具會檢查收集器回報的日誌狀態，但不會獨立監控每則 Telegram 訊息。若需進行此類監控，請新增「受控傳送測試」。
+它檢查的是日誌狀態，本身並不監看 Telegram。為此，請執行受控的送達測試。
 
 ## 稍後查閱證據
 
-請保留證據日誌、頻道貼文以及獨立儲存的指紋資料。[完整的驗證程序](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/#verify)會將這些資料與收集者簽署的匯出檔進行比對。
+請保留見證人日誌、貼文和指紋。[如何核對它們](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/#verify)與收集器匯出是否一致。

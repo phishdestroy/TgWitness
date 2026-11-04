@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首页</a> <span aria-hidden="true">/</span> <a href="../">文档</a> <span aria-hidden="true">/</span> <span aria-current="page">几分钟内即可开始使用</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文档 / 04</p><h1>几分钟内即可开始使用</h1><p class="guide-outcome">首先，请查看一个示例。然后连接您的账户。</p>
+<article class="guide-content"><p class="eyebrow">文档 / 04</p><h1>几分钟内即可开始使用</h1><p class="guide-outcome">先在演示中随便看看，再连接您自己的账户。</p>
 <h2 id="demo">无需注册即可浏览</h2>
-<p>下载或克隆该项目，安装 <strong>Python 3.11 或更高版本</strong>，然后运行演示程序。启动器会创建本地环境并安装已标记的依赖项。</p>
+<p>获取项目，准备好 <strong>Python 3.11 或更高版本</strong>，运行演示。其余的由启动器完成。</p>
 <pre><code>git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness</code></pre>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\scripts\Demo.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh --demo</code></pre></section></div>
-<p>浏览器将打开一个包含虚构消息的工作区。您可以打开对话、比较编辑内容并检查导出文件。演示模式不会连接到 Telegram。</p>
+<p>浏览器中会打开一个包含虚构消息的工作区。打开聊天，对比一次编辑，查看一份导出。不涉及 Telegram。</p>
 <figure><img src="../../../assets/chats-dark.png" width="1440" height="1000" alt="TgWitness 对话视图及示例消息" loading="lazy"><figcaption>一个示例工作区。您的日志将单独创建。</figcaption></figure>
 <h2 id="live">创建您自己的工作区</h2>
-<p>关闭演示流程，然后使用常规启动器：</p>
+<p>关闭演示，然后：</p>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\Start.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh</code></pre></section></div>
-<p>打开启动器显示的本地地址。如果系统提示，请输入终端中指定本地文件中的<strong>面板访问令牌</strong>。这将解锁 TgWitness；该操作与 Telegram 登录是分开的。</p>
+<p>打开启动器显示的地址，粘贴它所指文件中的<strong>面板访问令牌</strong>。这是 TgWitness 的令牌，不是 Telegram 的。</p>
 <h2 id="next">捕获您的第一条消息</h2>
-<ol><li><a href="../accounts/">连接一个专用的 Telegram 账户。</a></li><li>选择该账户可访问的群组或频道，然后开始监控。</li><li>在您控制的测试群组中发送一条新消息，并确认该消息是否出现在日志中。</li></ol>
+<ol><li><a href="../accounts/">连接一个专用的 Telegram 账户。</a></li><li>选择一个群组或频道，开始观察。</li><li>在测试群组中发送一条消息，看着它出现在日志中。</li></ol>
 <p class="callout">如需进行服务器安装，请参阅《<a href="../server/">保持运行》</a>。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/quickstart/">完整引用 →</a><a class="next-guide" href="../accounts/"><span>下一步</span><strong>连接账户 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../reference/verification/">已测试的内容 →</a></p></footer>

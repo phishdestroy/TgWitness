@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/handover/
 
-Teilen Sie die relevanten Beobachtungen mit, ohne den ursprünglichen Arbeitsbereich zu verändern.
+Teilen Sie nur, was nötig ist, das Original bleibt unberührt.
 
-Eine Übergabe ist ein separater, signierter Auszug. Wählen Sie die Chats und Personen aus, reduzieren Sie Identitäten oder Text und entscheiden Sie, welche Dateien und Teamnotizen in die Kopie des Empfängers gehören. Das Manifest dokumentiert die Auswahl sowie die Anzahl der unveränderten, minimierten und ausgelassenen Datensätze.
+Eine Übergabe ist ein separater signierter Auszug: Chats und Personen wählen, Identitäten oder Text verbergen, Dateien und Teamnotizen auswählen. Das Manifest hält fest, was behalten, gekürzt und weggelassen wurde.
 
 ## Auszug für den Empfänger vorbereiten
 
-1. Öffnen Sie **„Exporte“ → „Übergabeauszug**“. Geben Sie den Zweck an, wählen Sie die Chats und optional den UTC-Zeitraum aus und wählen Sie anschließend **„Teilnehmer der ausgewählten Chats laden**“, falls Sie namentlich genannte Personen benötigen.
-2. Legen Sie fest, wie mit allen anderen Personen verfahren werden soll: Pseudonyme verwenden, deren Nachrichten weglassen oder wie aufgezeichnet anzeigen. Legen Sie Nachrichtentext und Anhänge unabhängig voneinander fest; optional können Sie Telefonnummern und E-Mail-Adressen maskieren.
-3. Entscheiden Sie, ob Sie Lesezeichen und Ausschnitte aus dem Case Board oder Karten mit Kommentaren einbeziehen möchten. In diesem Text können Aliasnamen der Ermittler die Teamnamen ersetzen.
-4. Wählen Sie **„Download-Übergabeauszug“** aus. Öffnen Sie den generierten Bericht und die ausgewählten Datensätze lokal, überprüfen Sie das Archiv und kontrollieren Sie die Kopie, bevor Sie sie versenden.
+1. **Exporte → Übergabeauszug**: Zweck eintragen, Chats und Zeitraum wählen, **Personen der gewählten Chats laden**, wenn Sie namentlich genannte Personen brauchen.
+2. Alle anderen: Pseudonyme, weggelassen oder wie aufgezeichnet. Text und Dateien sind getrennte Schalter; Telefonnummern und E-Mails lassen sich maskieren.
+3. Case Board: nichts, Lesezeichen und Ausschnitte oder Karten mit Kommentaren. Teamnamen lassen sich durch Aliasse ersetzen.
+4. **Übergabeauszug herunterladen**, öffnen, prüfen, vor dem Versenden durchsehen.
 
 ### Ein Original, eine Kopie zur Weitergabe
 
@@ -54,12 +54,12 @@ Ein separates Paket, das mit den Grenzen des zugehörigen Quellprotokolls verkn�
 
 | Kontrolle | Auswirkungen auf den Text |
 | --- | --- |
-| Personen | Ausgewählte Personen müssen identifizierbar bleiben; andere Teilnehmer sind je nach Wahl zu pseudonymisieren oder wegzulassen. |
-| Text | Beziehen Sie den gesamten Text ein, nur den Text der ausgewählten Personen und des Beobachtungskontos oder lassen Sie den Nachrichtentext und die texthaltigen Detailfelder weg. |
-| Dateien | Wählen Sie Dateien der ausgewählten Personen und des überwachten Kontos, alle Dateien der angezeigten Nachrichten oder keine Dateien aus. |
-| Case Board | Verwenden Sie kein Board-Material, keine Lesezeichen und keine Ausschnitte sowie keine Karten mit Teamdiskussionen. |
+| Personen | Ausgewählte Personen bleiben namentlich genannt, andere bekommen Pseudonyme oder werden weggelassen. |
+| Text | Der ganze Text, nur der der ausgewählten Personen und Ihres Kontos, oder keiner. |
+| Dateien | Dateien der ausgewählten Personen und Ihres Kontos, alle angezeigten Dateien oder keine. |
+| Case Board | Nichts, Lesezeichen und Ausschnitte oder Karten mit Diskussion. |
 
-Überprüfen Sie Freitext und Dateiinhalte sowie Identitäten: Ein Pseudonym entfernt nicht automatisch jeden Namen, der in einer Nachricht oder einem Anhang steht. Sollte eine ausgewählte, gesicherte Datei nicht verfügbar sein, stellen Sie diese wieder her oder lassen Sie Anhänge ausdrücklich weg, bevor Sie den Auszug erstellen.
+Lesen Sie auch Text und Dateien: Ein Pseudonym entfernt keine Namen, die in einer Nachricht oder einem Anhang stehen. Fehlt eine ausgewählte Datei, stellen Sie sie wieder her oder lassen Sie Anhänge weg.
 
 ## Der Text muss unabhängig überprüfbar bleiben.
 
@@ -67,4 +67,4 @@ Ein separates Paket, das mit den Grenzen des zugehörigen Quellprotokolls verkn�
 python -m tgwitness.verify handover.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Bewahren Sie das ursprüngliche, signierte Beweismittelarchiv und die Checkpoints separat auf. Bei der Übergabe wird eine eigene Projektion erstellt, sodass der Empfänger die gelieferte Kopie überprüfen kann, ohne den gesamten Arbeitsbereich zu erhalten. [„Report Studio“](https://phishdestroy.github.io/TgWitness/de/docs/reports/) liefert das Layout für die Anzeige; [die Exportüberprüfung](https://phishdestroy.github.io/TgWitness/de/docs/exports/) erläutert die vertrauenswürdigen Referenzen.
+Behalten Sie das Originalarchiv und die Prüfpunkte selbst. Der Empfänger kann seine Kopie prüfen, ohne den ganzen Arbeitsbereich zu bekommen. Design: [Report studio](https://phishdestroy.github.io/TgWitness/de/docs/reports/). Vertrauenswürdige Referenzen: [Exportprüfung](https://phishdestroy.github.io/TgWitness/de/docs/exports/).

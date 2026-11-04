@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/
 
 [Ochiq manba / v0.8.1](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/)
 
-Telegram xabarlarini yozib oling, ularning o'zgartirishlarini saqlang va imzolangan yozuvni eksport qiling.
+Telegram chatlarini har bir tahrir va o'chirish bilan saqlang, so'ng istalgan kishi tekshira oladigan yozuvni topshiring.
 
 [demo ochish](https://phishdestroy.github.io/TgWitness/demo/?lang=uz)[sozlash bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=uz)
 
-Demo soxta ma'lumotlardan foydalanadi. Telegramga kirish talab qilinmaydi.
+Soxta ma'lumotlar, Telegram'ga kirish shart emas.
 
  [GitHub Actions orqali yig‘ish (dastlabki versiya)](https://phishdestroy.github.io/TgWitness/uz/docs/capture/) [S3 tashqi nusxa: sozlash va tiklash](https://phishdestroy.github.io/TgWitness/uz/#s3)
 
@@ -34,31 +34,31 @@ Xabar yo'qoladi. Qayd etilgan tarix esa qoladi.
 
 ## Har bir qayd etilgan o'zgarish. Aynan kerak bo'lgan joyda.
 
-Soxta namoyish ma'lumotlari bilan interfeysni ko'rib chiqing.
+Haqiqiy interfeys, to'qima ma'lumotlar bilan.
 
 TgWitness / Saqlangan suhbatlarSIZNING KUZATISH ISH JOYINGIZ
 
 ![Qorong'i mavzusidagi Telegram suhbatlari, kontekstda saqlangan tahrirlar va o'chirilgan xabarlar bilan](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
-01 / Saqlangan suhbatlar Xabarlardan yonada tahrirlar va o'chirish bildirishnomalari bilan birga saqlangan tanish suhbat ko'rinishi.
+01 / Saqlangan chatlar Oddiy chatga o'xshaydi, tahrirlar va o'chirishlar xabarlarning yonida.
 
 TgWitness / JurnalMAHALLI ISH JOYI
 
 ![Kuzatilgan xabarlar, tahrirlar, o'chirish bildirishnomalari va qamrov hodisalarini o'z ichiga olgan jurnal](https://phishdestroy.github.io/TgWitness/assets/workspace.png)
 
-02 / Jurnal: Hisobingiz tomonidan kuzatilgan, uzilishlar hamda boshqa hodisalarni o'z ichiga olgan qidiruv mumkin bo'lgan vaqt chizig'i.
+02 / Jurnal Hisobingiz ko'rgan hamma narsa, qidirish mumkin, bo'shliqlar ham.
 
 TgWitness / Tahrir tarixiMAHALLI ISH JOYI
 
 ![Xabarni oldingi qayd etilgan va tahrirlangan versiyalarini solishtiruvchi tafsilotlar oynasi](https://phishdestroy.github.io/TgWitness/assets/detail.png)
 
-03 / Tahrir tarixi: oldingi kuzatuvni ustma-ust yozmasdan ushlangan versiyalarni solishtirish.
+03 / Tahrir tarixi Eski va yangi versiyalar yonma-yon, hech narsa ustidan yozilmaydi.
 
 TgWitness / Imzolangan eksportlarMAHALLI ISH JOYI
 
 ![Imzolangan ZIP, JSONL, CSV va oflayn HTML hisobotni taklif qiluvchi ish maydonini eksport qilish](https://phishdestroy.github.io/TgWitness/assets/exports.png)
 
-04 / Imzolangan eksportlar Jurnalni o'zingiz bilan olib yuring, manifest va mustaqil tasdiqlovchi bilan.
+04 / Imzolangan eksportlar Jurnalni imzolangan holda, o'z tekshiruvchisi bilan olib keting.
 
 [Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/case-board/), [hisobot dizayni](https://phishdestroy.github.io/TgWitness/uz/docs/reports/) va [ulashish nusxasi](https://phishdestroy.github.io/TgWitness/uz/docs/handover/) orqali saqlangan yozuvni kuzatib chiqing. [Hisob ma'lumotlari guruhlarini](https://phishdestroy.github.io/TgWitness/uz/docs/groups/) birgalikda [ko'rib chiqing](https://phishdestroy.github.io/TgWitness/uz/docs/groups/).
 
@@ -66,7 +66,7 @@ TgWitness / Imzolangan eksportlarMAHALLI ISH JOYI
 
 ### Doirani siz belgilaysiz.
 
-Tanlangan suhbatlar, Telegram papkasi yoki butun hisob. Har bir hisob uchun alohida ish maydoni.
+Bir nechta chat, bitta papka yoki butun hisob. Har bir hisobning o'z ish maydoni bor.
 
 [yig'ish rejimlarini solishtiring](https://phishdestroy.github.io/TgWitness/uz/guides/modes.html#scope)
 
@@ -74,7 +74,7 @@ Tanlangan suhbatlar, Telegram papkasi yoki butun hisob. Har bir hisob uchun aloh
 
 ### O'zgarishlar hikoyaga qo'shiladi.
 
-Qayd etilgan versiyalar, o'chirish bildirishnomalari va kuzatuv bo'shliqlari jurnalda saqlanadi.
+Versiyalar, o'chirishlar va bo'shliqlar jurnalda qoladi.
 
 [voqealar matritsasini ko'ring](https://phishdestroy.github.io/TgWitness/uz/guides/modes.html#events)
 
@@ -82,7 +82,7 @@ Qayd etilgan versiyalar, o'chirish bildirishnomalari va kuzatuv bo'shliqlari jur
 
 ### Sayohat qiluvchi yozuv.
 
-Imzolangan ZIP, saqlangan fayllar va oflayn hisobot. Ixtiyoriy parol bilan himoyalash.
+Imzolangan ZIP, fayllar va oflayn hisobot. Parol ixtiyoriy.
 
 [ni eksport qiling va tasdiqlang](https://phishdestroy.github.io/TgWitness/uz/docs/exports/)
 
@@ -103,7 +103,7 @@ Hash qilingan fayldan alohida saqlangan tekshiruv nuqtasigacha bo'lgan tekshiruv
 
 ## Yana bir juft ko'z uchun tayyor.
 
-Kuzatuvlar, fayllar va oflayn HTML hisobotni bitta imzolangan paketda topshirish.
+Xabarlar, fayllar va oflayn hisobot bitta imzolangan to'plamda.
 
 [dalillar modelini o'qing](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)
 
@@ -119,7 +119,7 @@ tgwitness-evidence.zipIMZOLANGAN TO'PLAM
 
   Mustaqil tasdiqlashImzolangan manifest + mustaqil tasdiqlovchi
 
-Qabul qiluvchilar saqlangan yozuvlar va fayllarni ishonchli yig'uvchi kalitiga muvofiq tekshiradilar. Alohida saqlangan tekshirish nuqtasi ham avvalgi jurnal bilan uzluksizlikni tekshiradi. [Tasdiqlash bosqichlarini o'rganing.](https://phishdestroy.github.io/TgWitness/uz/docs/concepts/#layers)
+Qabul qiluvchi hamma narsani kalitingiz bilan tekshiradi, boshqa joyda saqlangan nazorat nuqtasi esa o'shandan beri hech narsa qayta yozilmaganini ko'rsatadi. [Tekshiruvlar qanday ishlaydi.](https://phishdestroy.github.io/TgWitness/uz/docs/concepts/#layers)
 
 ## S3 nusxalari. Tashqi tekshiruvlar.
 
@@ -129,25 +129,25 @@ O'chirib qo'yilgan (defolt bo'yicha)
 
 ### Hammasini S3-ga mos saqlashga nusxa ko'chiring
 
-Jurnal, fayllar, vaqt belgilangan tekshiruv nuqtalari va suhbat eksportlari — AWS S3 yoki mos omborga yuklanishdan oldin shifrlangan.
+Jurnal, fayllar, nazorat nuqtalari va chat eksportlari S3'ga yuborilishidan oldin shifrlanadi.
 
 **Saqlash sozlamalari va tiklash**
 
 Klient tomonidan shifrlash
 
-`AES-256-GCM` ushbu mashinadagi obyektlarni shifrlaydi. Provayder shifrlangan obyektlarni qabul qiladi.
+`AES-256-GCM` sizning kompyuteringizda. Provayder faqat shifrlangan matnni ko'radi.
 
 Rejalashtirilgan yoki qo'lda nusxalar
 
-Hozir nusxa oling yoki 1 dan 1 440 daqiqagacha bo'lgan oralikni tanlang. Paneldagi jarayonni kuzating.
+Hozir yoki har 1 dan 1,440 daqiqada nusxa oling, jarayon panelda ko'rinadi.
 
 Object Lock
 
-Saqlash kunlari va bucket bunga qo'llab-quvvatlaydigan rejimni tanlang. Panel yuklangan ob'ekt bo'yicha saqlash tasdiqlangani yoki yo'qligini ko'rsatadi.
+Saqlash kunlari va rejimini tanlang, panel uning haqiqatan qo'llanganini tekshiradi.
 
 Tekshirilgan tiklash
 
-Shifrlash kalitini yuklab oling va alohida saqlang. Boshqa qurilmada tiklang; fayllar faqat tasdiqlangandan so'ng e'lon qilinadi.
+Kalitni alohida saqlang. Istalgan joyda tiklang, fayllar faqat tekshiruvdan keyin chiqadi.
 
 ![To'liq Off-site nusxa paneli: oxirgi nuqta, mintaqa, bucket, kirish kalitlari, jadval, Object Lock va tiklash kaliti boshqaruvlari](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
@@ -157,13 +157,13 @@ Jurnal va media`AES-256-GCM`S3 bilan mos ombor
 
 [S3 ni sozlang va nusxani tiklang](https://phishdestroy.github.io/TgWitness/uz/docs/exports/#s3)[Verifikatsiya tafsilotlarini o'qing](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**Qayta tiklash kaliti.** Eksport qilingan dekripsiya kalitini alohida saqlang, shunda shifrlangan nusxani tiklashingiz mumkin.
+**Tiklash kaliti** Alohida saqlang, usiz nusxani o'qib bo'lmaydi.
 
 ### Bildirishnomalar · Xabardor qilish
 
-Muammo bildirishnomalari, suhbat o'zgarishlari va kunlik xulosalar Apprise orqali: messenjerlar, elektron pochta yoki o'zingizning JSON webhook-ingiz orqali.
+Muammolar, chatdagi o'zgarishlar va kunlik xulosa messenjerlarga, e-pochtaga yoki o'z webhook'ingizga.
 
-**Qaysi ma'lumotni ulashishni tanlang.** Xabar parchalarini ulashish standart bo'yicha o'chirilgan; ishonadigan manzillaringiz uchun ularni yoqing.
+**Nimani ulashishni tanlang** Siz yoqmaguningizcha xabar matni yo'q.
 
  [Bildirishnoma manzillarini sozlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#notifications)
 
@@ -171,7 +171,7 @@ Muammo bildirishnomalari, suhbat o'zgarishlari va kunlik xulosalar Apprise orqal
 
 Vaqt tamg'asi tekshiruv nuqtalari hashlarini RFC 3161 va OpenTimestamps yordamida.
 
-**Natijani** tekshiring, vakolatli javobni **tasdiqlang** yoki OpenTimestamps kvitansiyasini tasdiqlangan Bitcoin isbotiga yangilang.
+**Natijani kuzating** TSA javobini tekshiring yoki OpenTimestamps kvitansiyasini Bitcoin isbotiga oshiring.
 
  [Timestamp dalillarini tekshiring](https://phishdestroy.github.io/TgWitness/uz/docs/reference/timestamp/)
 
@@ -179,7 +179,7 @@ Vaqt tamg'asi tekshiruv nuqtalari hashlarini RFC 3161 va OpenTimestamps yordamid
 
 Alohida host imzolangan kuzatuvlarni saqlaydi va`TGW1` tekshiruv nuqtalarini e'lon qilishi mumkin.
 
-**Reference bo'limini ajrating.** Witness'ni boshqa hostda ishga tushiring va uning o'z imzolash kaliti hamda jurnalini saqlang.
+**Ma'lumotnomani ajrating** Uni boshqa xostda, o'z kaliti va jurnali bilan ishga tushiring.
 
  [guvohini sozlang](https://phishdestroy.github.io/TgWitness/uz/docs/witness/)
 
@@ -187,19 +187,20 @@ Alohida host imzolangan kuzatuvlarni saqlaydi va`TGW1` tekshiruv nuqtalarini e'l
 
 Qayta ishga tushirgandan keyin davom ettiring. Qayta tekshiruvlar va `coverage.json` tiklangan xabarlar va bo'shliqlarni ko'rsatadi.
 
-**Intervallni ko'rib chiqing:** tiklangan joriy xabarlarni qayd etilgan uzilishlar bilan birga ko'ring; ilgari yozib olingan versiyalar ham mavjud bo'ladi.
+**Oraliqni ko'rib chiqing** Tiklangan xabarlar va qayd etilgan bo'shliqlar yonma-yon.
 
  [Uzluksizlik va bo'shliqlarni tekshirish](https://phishdestroy.github.io/TgWitness/uz/guides/modes.html#continuity)
 
 ## Sizning birinchi ish maydoningiz shu yerdan boshlanadi.
 
-Avvalo demo bilan tanishing. Tayyor bo'lgach, maxsus hisobingizni ulang. Windows, Linux, macOS yoki Docker.
+Avval demoni sinab ko'ring, tayyor bo'lganingizda zaxira hisobni ulang.
+Windows, Linux, macOS yoki Docker.
 
 [sozlash bo'yicha qo'llanmani o'qing](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=uz)
 
 **Bir import qilingan sessiya, bir ishlayotgan klient.**
 
-Telegram Desktop va TgWitness'da import qilingan TData/session kalitini bir vaqtda ishga tushirmang. Telegram umumiy ruxsatnomani bekor qilishi mumkin (AUTH_KEY_DUPLICATED). Paralel foydalanish uchun telefon yoki QR orqali alohida TgWitness hisobini yarating.
+Import qilingan TData yoki sessiyani Telegram Desktop va TgWitness'da bir vaqtda ishlatmang, Telegram ikkalasini ham o'chirib qo'yishi mumkin (AUTH_KEY_DUPLICATED). Ikkalasi ham kerakmi? TgWitness'ga telefon yoki QR orqali alohida kiring.
 
 [Sessiyani import qilish bo'yicha ogohlantirishni o'qing](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=uz#session-warning)
 
@@ -224,7 +225,7 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-Manba ishga tushirish uchun Python 3.11+ talab etiladi. Windows ishga tushiruvchi dastur Python yo'q bo'lsa, o'rnatishni taklif etadi.
+Python 3.11+ kerak. Windows'da ishga tushirgich uni o'rnatishni taklif qiladi.
 
 [Chiqarilishlarni ko'rib chiqing](https://github.com/phishdestroy/TgWitness/releases)
 
@@ -259,7 +260,7 @@ Ikkinchi buyruq sizning shaxsiy panel tokeningizni ko'rsatadi. Uni kompyuteringi
 
 Ishga tushirgandan so‘ng [127.0.0.1:8787](http://127.0.0.1:8787) manzilini oching.
 
-Manba kodidan o'rnatishda token `data/live/panel-token.txt` da joylashgan. Telegramga kirish uchun o'rnatilgan API sozlamalaridan yoki [my.telegram.org](https://my.telegram.org) saytidan olingan o'zingizning juft kalitingizdan foydalanishingiz mumkin. [To'liq sozlash bo'yicha qo'llanma ↗](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
+Manbadan o'rnatishda token `data/live/panel-token.txt` faylida turadi. [my.telegram.org](https://my.telegram.org) dan olingan o'z API juftligingiz ixtiyoriy. [To'liq sozlash qo'llanmasi ↗](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
 
 **TgWitness 0.8.1** [Nima yangilik →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/) · [Xususiyatlar va ma'lum cheklovlar →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
 
@@ -273,7 +274,7 @@ Manba kodidan o'rnatishda token `data/live/panel-token.txt` da joylashgan. Teleg
 
 ## Arxiv ustida ishlang.
 
-Yuklash tarixini ko'rish, sun'iy intellekt manbalarini ko'rib chiqish, MCP mijozini ulash, saqlangan media fayllarini aniqlash va imzolangan webhook'larni yuborish.
+Tarix, manbali AI, MCP, OCR va imzolangan webhook'lar.
 
 [ish jarayonini o'rganing](https://phishdestroy.github.io/TgWitness/uz/docs/archive/)
 
@@ -281,19 +282,19 @@ Yuklash tarixini ko'rish, sun'iy intellekt manbalarini ko'rib chiqish, MCP mijoz
 
 **Bu sahifa Telegram bilan bog'langanmi?**
 
-Yo'q. Bu – badiiy misollar va skrinshotlar bilan statik loyiha sahifasi. Haqiqiy ilova sizning kompyuteringizda yoki serveringizda ishlaydi; tizimga kirish o'sha yerda amalga oshiriladi.
+Yo'q. Bu soxta misollar bilan statik sahifa. Ilova o'z kompyuteringizda ishlaydi va siz o'sha yerda kirasiz.
 
 **U yozib olishdan oldin o'chirilgan xabarlarni tiklay oladimi?**
 
-Yo'q. TgWitness yig'ish jarayoni davomida hisobingiz tomonidan kuzatilgan kontentni saqlab qo'yadi. Keyingi tarixiy snapshot o'tkazib yuborilgan tahrirlar yoki o'chirilgan xabarlarni tiklay olmaydi.
+Yo'q. U ishlab turgan paytda hisobingiz ko'rgan narsani saqlaydi. Keyingi snapshot o'tkazib yuborilgan tahrirlar yoki o'chirilgan xabarlarni qayta tiklay olmaydi.
 
 **Butun jurnalim shifrlanganmi?**
 
-Hisob ma'lumotlari va imzolash sirlar shifrlangan omborda saqlanadi. Mahalliy xabarlar va ilovalar shifrlangan disk yoki hajmni talab qiladi. Eksportlar ixtiyoriy ravishda parol bilan himoyalangan AES-256 ZIP formatidan foydalanishi mumkin.
+Sessiyalar va kalitlar ha. Xabarlar va fayllar yo'q, disk shifrlashdan foydalaning. Eksportlarga AES-256 parol qo'yish mumkin.
 
 **Bu Telegram bilan bog'liqmi?**
 
-Yo'q. TgWitness Telethon'dan foydalanadigan mustaqil loyiha bo'lib, MIT litsenziyasi ostida tarqatiladi. Siz o'zingizning hisoblaringizni ichki API sozlamalari yoki o'zingizning API juftligingiz orqali ruxsatlaysiz.
+Yo'q. Bu Telethon asosida qurilgan MIT litsenziyali mustaqil loyiha. Siz o'z hisoblaringiz bilan kirasiz.
 
 PROJECT NOTICE / LICENCE
 

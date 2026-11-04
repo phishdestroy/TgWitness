@@ -32,55 +32,55 @@
 <nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../">Dokumentacja</a> <span aria-hidden="true">/</span> <span aria-current="page">Eksportowanie i weryfikacja</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Co zostało przetestowane →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentacja / 07</p><h1>Eksportowanie i weryfikacja</h1><p class="guide-outcome">Należy udostępnić odbiorcy pliki, które będzie mógł porównać z obszarem roboczym zbierania danych i jego zapisaną historią.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentacja / 07</p><h1>Eksportowanie i weryfikacja</h1><p class="guide-outcome">Przekaż pliki, które odbiorca sam porówna z Twoją przestrzenią.</p>
 <div class="flow-strip export-flow" aria-label="Przekazywanie dowodów: zachowanie wiarygodnego odniesienia, eksport podpisanego pliku ZIP, weryfikacja przez odbiorcę"><span>Zachować odniesienie</span><span>Eksportuj podpisany plik ZIP</span><span>Odbiorca weryfikuje</span></div>
-<p>Nie znają Państwo jeszcze podpisów i punktów kontrolnych? <a href="../concepts/#chain">Proszę zmienić przykładowy wpis</a> i sprawdzić, które kontrole to wykryją.</p>
+<p>Podpisy i punkty kontrolne to nowość? <a href="../concepts/#chain">Zmień przykładowy wpis</a> i zobacz, które kontrole to wychwycą.</p>
 <p>Chcą Państwo przechowywać kopię poza serwerem dostawcy? Proszę przejść do <a href="#s3">sekcji konfiguracji S3</a>, funkcji <a href="#s3-retention">Object Lock</a> lub opcji <a href="#s3-restore">zweryfikowanego odzyskiwania danych</a>.</p>
 <h2 id="retain">Zachowaj wiarygodne źródło informacji</h2>
-<p>Proszę zapisać odcisk klucza publicznego obszaru roboczego poza kolektorem. Podczas gromadzenia danych należy przechowywać podpisane punkty kontrolne w innym miejscu lub skorzystać z usług <a href="../witness/">niezależnego świadka</a>. Odniesienia te umożliwiają odbiorcy weryfikację klucza oraz granicy poprzedniego dziennika.</p>
+<p>Zapisz odcisk klucza przestrzeni gdzieś poza kolektorem. Podczas zbierania przechowuj też podpisane punkty kontrolne w innym miejscu albo uruchom <a href="../witness/">niezależnego świadka</a>. Właśnie z tym odbiorca porównuje klucz i wcześniejszy stan dziennika.</p>
 <h2 id="export">Pobierz podpisany plik ZIP</h2>
-<p>Otwórz <strong>opcję „Exports”</strong> i utwórz podpisany plik ZIP z dowodami. Zawiera on pełny dziennik obszaru roboczego oraz podpisany manifest plików. Skorzystaj z <a href="../reports/">narzędzia</a> <a href="../reports/">„Report Studio”</a>, aby stworzyć czytelny raport, lub z opcji <a href="../handover/">„Handover Extract”</a>, aby dostarczyć wyłącznie wybrane, zredukowane dane.</p>
-<p>Raporty w formatach HTML, PDF i JSON posiadają własne podpisane pieczęcie i można je weryfikować oddzielnie. Plik CSV stanowi wygodną kopię do analizy; w celu sprawdzenia jego integralności należy użyć dokładnie tego samego pliku CSV, który znajduje się w zweryfikowanym pliku ZIP. Należy zachować podpisany plik ZIP, jeśli odbiorca potrzebuje również oryginalnych zapisów i załączników.</p>
+<p><strong>Eksporty</strong> → podpisany ZIP z dowodami. Zawiera cały dziennik i podpisany manifest plików. Czytelny raport ułóż w <a href="../reports/">Report studio</a>, a jeśli trzeba oddać tylko wybrane dane — zrób <a href="../handover/">wyciąg do przekazania</a>.</p>
+<p>Raporty HTML, PDF i JSON mają własne pieczęcie. CSV to tylko kopia robocza; do sprawdzania integralności bierz CSV ze zweryfikowanego ZIP.</p>
 <h2 id="verify">Proszę zweryfikować to za pomocą zaufanej kopii TgWitness</h2>
-<p>W zainstalowanym środowisku projektowym proszę zastąpić przykładowy odcisk palca oraz ścieżki do plików:</p>
+<p>W środowisku projektu, z własnym odciskiem i ścieżkami:</p>
 <pre><code>python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
-<p>Gdy oba odniesienia zostaną zatwierdzone, w raporcie wynikowym pojawią się wartości <code>key_pinned: true</code> i <code>checkpoint_checked: true</code>. Wynik weryfikacji należy zachować wraz z oryginalnym archiwum. Zachowany punkt kontrolny musi znajdować się na granicy eksportu lub przed nią.</p>
+<p>Po pomyślnym sprawdzeniu zobaczysz <code>key_pinned: true</code> i <code>checkpoint_checked: true</code>. Zachowaj ten wynik obok archiwum. Punkt kontrolny musi być na końcu eksportu lub przed nim.</p>
 <h2 id="meaning">Wykorzystaj wynik weryfikacji</h2>
-<ul><li><strong>Należy sprawdzić dostarczone pliki:</strong> manifest wiąże ich skróty, a podpisy rekordów wiążą zapisany dziennik. Wykrywane są zmienione pliki lub przerwane łańcuchy rekordów.</li><li><strong>Sprawdź tożsamość obszaru roboczego:</strong> niezależnie przechowywany odcisk palca identyfikuje klucz podpisujący, którego oczekiwałeś.</li><li><strong>Porównaj wcześniejszy punkt graniczny:</strong> zachowany punkt kontrolny weryfikuje eksport w oparciu o prefiks dziennika zapisany przed przekazaniem.</li><li><strong>Należy sprawdzić zakres zebranych danych:</strong> luki, wyniki pozyskania oraz kontrolowany test „wyślij → edytuj → usuń” opisują zdarzenia zarejestrowane w tej konfiguracji.</li></ul>
-<p>Wyniki te należy zachować wraz z kopią przeznaczoną dla odbiorcy. Należy sprawdzić, <a href="../reference/evidence/#verification-scope">co ustala weryfikacja</a> w zakresie kontroli oraz oddzielnej oceny twierdzeń źródłowych i zakresu gromadzenia danych.</p>
+<ul><li><strong>Pliki:</strong> manifest wiąże ich skróty, podpisy wiążą dziennik. Każda zmiana wyjdzie na jaw.</li><li><strong>Tożsamość:</strong> zachowany odcisk potwierdza, że to oczekiwany klucz.</li><li><strong>Wcześniejszy stan:</strong> punkt kontrolny porównuje eksport z początkiem dziennika zapisanym przed przekazaniem.</li><li><strong>Pokrycie:</strong> luki, wyniki pozyskania i test „wyślij → edytuj → usuń” pokazują, co ta konfiguracja naprawdę złapała.</li></ul>
+<p>Szczegóły: <a href="../reference/evidence/#verification-scope">co weryfikacja dowodzi, a czego nie</a>.</p>
 
 <h2 id="s3">Skonfiguruj kopię zapasową w usłudze S3 poza siedzibą firmy</h2>
-<p>W uruchomionym środowisku roboczym proszę otworzyć <strong>opcję Eksporty → Kopia zewnętrzna</strong>. Ta opcjonalna funkcja współpracuje z usługą AWS S3 oraz innymi usługami zgodnymi ze standardem S3. Kopiuje ona segmenty dziennika, zachowane zdjęcia i pliki, punkty kontrolne wraz z odpowiedziami zawierającymi sygnatury czasowe oraz gotowe eksporty czatów. Każdy obiekt jest szyfrowany na kolektorze za pomocą algorytmu <code>AES-256-GCM</code> przed przesłaniem.</p>
-<p>Wersja demonstracyjna online przedstawia te same elementy sterujące, jednak z wyłączoną funkcją przesyłania danych. Dane uwierzytelniające do pamięci masowej należy wprowadzać wyłącznie we własnym, uruchomionym środowisku roboczym.</p>
+<p><strong>Eksporty → Kopia zewnętrzna</strong> w Twojej przestrzeni. Działa z AWS S3 i każdym magazynem zgodnym z S3. Kopiuje segmenty dziennika, zapisane pliki, punkty kontrolne ze znacznikami czasu i gotowe eksporty czatów, każdy szyfrowany <code>AES-256-GCM</code> jeszcze na kolektorze.</p>
+<p>Demo online pokazuje te ustawienia z wyłączonym wysyłaniem. Prawdziwe dane logowania wpisuj tylko we własnej instalacji.</p>
 <figure><a href="../../../assets/off-site-copy.png"><img src="../../../assets/off-site-copy.png" width="1136" height="825" alt="Pełny panel ustawień kopii poza lokalizacją: punkt końcowy, region, zasób, klucze dostępu, harmonogram, blokada obiektów oraz opcje związane z kluczem odtwarzania" loading="lazy"></a><figcaption>Pełny panel z rozwijanymi opcjami zaawansowanymi. Nie są wyświetlane żadne dane uwierzytelniające dotyczące pamięci masowej.</figcaption></figure>
 <div class="table-wrap"><table><caption>Ustawienia przechowywania w sekcji Eksporty → Kopia zewnętrzna</caption><thead><tr><th scope="col">Dziedzina</th><th scope="col">Co należy wpisać</th></tr></thead><tbody>
-<tr><th scope="row">Punkt końcowy</th><td>Adres URL usługi przechowywania danych, bez ścieżki do zasobnika ani danych uwierzytelniających. Fikcyjny przykład: <code>https://s3.example.invalid</code>.</td></tr>
-<tr><th scope="row">Region</th><td>Region wymagany przez Państwa dostawcę. Domyślnym ustawieniem aplikacji jest <code>us-east-1</code>.</td></tr>
-<tr><th scope="row">Bucket</th><td>Istniejący zasób, do którego mają Państwo dostęp. Fikcyjny przykład: <code>example-case-backup</code>.</td></tr>
-<tr><th scope="row">Folder w zasobniku</th><td>Prefiks obiektu; domyślnie <code>tgwitness</code>. Aplikacja dodaje prefiks wygenerowany na podstawie odcisku palca klucza podpisu tego obszaru roboczego.</td></tr>
-<tr><th scope="row">Identyfikator klucza dostępu / Tajny klucz dostępu</th><td>Proszę wprowadzić obie pary danych uwierzytelniających do pamięci masowej jednocześnie. Zostaną one zapisane w skarbcu obszaru roboczego. Aby zachować zapisaną parę, proszę pozostawić oba pola puste podczas kolejnych zapisów.</td></tr>
-<tr><th scope="row">Adresy w formacie ścieżki</th><td>W zależności od dostawcy należy używać kodu <code>endpoint/bucket</code>, gdy funkcja jest włączona, lub <code>bucket.endpoint</code>, gdy jest wyłączona.</td></tr>
-<tr><th scope="row">Interwał kopiowania</th><td>Od 1 do 1 440 minut; domyślnie 5 minut. Aby kopie były tworzone zgodnie z harmonogramem, aplikacja musi być uruchomiona.</td></tr>
-<tr><th scope="row">Przechowywanie danych w Object Lock</th><td>Okres przechowywania i tryb dla zasobnika obsługującego funkcję Object Lock. Ustawienie „zero dni” powoduje, że obowiązuje domyślny okres przechowywania zasobnika.</td></tr>
+<tr><th scope="row">Punkt końcowy</th><td>URL magazynu, bez ścieżki bucketu i danych logowania. Przykład: <code>https://s3.example.invalid</code>.</td></tr>
+<tr><th scope="row">Region</th><td>To, czego wymaga dostawca. Domyślnie <code>us-east-1</code>.</td></tr>
+<tr><th scope="row">Bucket</th><td>Istniejący bucket z prawem zapisu. Przykład: <code>example-case-backup</code>.</td></tr>
+<tr><th scope="row">Folder w zasobniku</th><td>Prefiks, domyślnie <code>tgwitness</code>. Dochodzi do niego prefiks przestrzeni.</td></tr>
+<tr><th scope="row">Identyfikator klucza dostępu / Tajny klucz dostępu</th><td>Oba razem, przechowywane w sejfie. Później zostaw oba puste, żeby je zachować.</td></tr>
+<tr><th scope="row">Adresy w formacie ścieżki</th><td>Wł.: <code>endpoint/bucket</code>. Wył.: <code>bucket.endpoint</code>. Zależy od dostawcy.</td></tr>
+<tr><th scope="row">Interwał kopiowania</th><td>Od 1 do 1440 minut, domyślnie 5. Tylko gdy aplikacja działa.</td></tr>
+<tr><th scope="row">Przechowywanie danych w Object Lock</th><td>Dni i tryb, jeśli bucket obsługuje Object Lock. Zero zostawia ustawienie domyślne bucketu.</td></tr>
 </tbody></table></div>
 <ol>
-<li>Utwórz zasób w swoim serwisie, a następnie wprowadź jego lokalizację docelową i dane uwierzytelniające. Podczas przygotowywania pozostaw <strong>opcję „Zachowaj kopię poza lokalizacją”</strong> niezaznaczoną, a następnie wybierz opcję <strong>„Zapisz kopię poza lokalizacją</strong>”.</li>
-<li>Proszę wybrać opcję <strong>„Test połączenia</strong>”. Spowoduje to przesłanie zaszyfrowanego obiektu testowego i sprawdzenie odpowiedzi serwera.</li>
-<li>Proszę wybrać opcję <strong>„Pobierz klucz szyfrujący</strong>”. Proszę przechowywać ten plik oddzielnie od programu zbierającego dane; będzie on niezbędny do odzyskania danych.</li>
-<li>Zaznacz pole wyboru <strong>„Zachowaj kopię poza serwerem</strong>” i zapisz ponownie. Wybierz opcję <strong>„Kopiuj teraz”</strong>, aby przeprowadzić operację ręcznie, lub pozostaw harmonogram w działaniu.</li>
+<li>Utwórz bucket, wypełnij adres i dane logowania przy odznaczonym <strong>Zachowuj kopię zewnętrzną</strong> i kliknij <strong>Zapisz kopię zewnętrzną</strong>.</li>
+<li><strong>Testuj połączenie</strong> wysyła zaszyfrowany obiekt testowy.</li>
+<li><strong>Pobierz klucz szyfrowania</strong> i trzymaj go z dala od kolektora. Bez klucza nie ma odzyskiwania.</li>
+<li>Zaznacz <strong>Zachowuj kopię zewnętrzną</strong>, zapisz, potem <strong>Kopiuj teraz</strong> albo zostaw harmonogram.</li>
 </ol>
 
 <h2 id="s3-retention">Sprawdź stan przechowywania danych i postęp kopiowania</h2>
-<p>W sekcji <strong>„More options”</strong> (<strong>Więcej opcji</strong>) wybierz liczbę dni przechowywania oraz opcję „<code>GOVERNANCE</code>” (Zarządzanie) lub „<code>COMPLIANCE</code>” (Zgodność), jeśli Twój zasób danych obsługuje funkcję Object Lock. TgWitness odczytuje tryb przechowywania i termin wygaśnięcia przesłanego obiektu. Sprawdź oddzielny wynik przechowywania: potwierdzone, brak przechowywania lub niepowodzenie sprawdzania.</p>
-<p>Panel wyświetla informacje o ostatnim przebiegu, liczbie obiektów, liczbie przesłanych bajtów, granicy skopiowanego dziennika oraz ewentualnych błędach. Brakujące lub zmienione nośniki lokalne są zgłaszane, a próba ich skopiowania jest powtarzana podczas następnego przebiegu. Pliki, punkty kontrolne oraz eksporty oczekujące w kolejce po tych nośnikach mogą nadal zostać skopiowane.</p>
-<p>Przesyłanie danych odbywa się za pośrednictwem trasy Direct, SOCKS5 lub HTTP w obszarze roboczym. Należy wybrać jedną z tych tras do kopiowania do S3; trasa wykorzystująca wyłącznie MTProxy powoduje, że kopiowanie pozostaje w stanie oczekującym z komunikatem o błędzie.</p>
+<p>W <strong>Więcej opcji</strong> wybierz dni przechowywania oraz <code>GOVERNANCE</code> lub <code>COMPLIANCE</code>. TgWitness odczytuje przechowywanie z wysłanego obiektu i podaje: potwierdzone, brak albo błąd sprawdzenia.</p>
+<p>Panel pokazuje ostatnie przejście, liczbę obiektów, bajty, skopiowaną granicę dziennika i błędy. Brakujący plik lokalny trafia do raportu i jest ponawiany przy następnym przejściu, reszta kopiuje się dalej.</p>
+<p>Wysyłanie idzie bezpośrednio, przez SOCKS5 albo HTTP. Przy trasie tylko przez MTProxy kopia czeka z błędem.</p>
 
 <h2 id="s3-key">Klucz odtwarzający należy przechowywać oddzielnie</h2>
-<p>Pobrany plik JSON zawiera klucz deszyfrujący, ustawienia miejsca docelowego, prefiks obiektu obszaru roboczego oraz odcisk palca klucza podpisu. Odzyskiwanie wymaga zarówno tego pliku klucza, jak i oddzielnych poświadczeń dostępu do pamięci masowej z uprawnieniami do odczytu w zasobniku. Należy uwzględnić je w planie odzyskiwania danych.</p>
-<p>W przypadku zmiany punktu końcowego, zasobnika lub prefiksu folderu należy ponownie pobrać plik klucza, aby ustawienia miejsca docelowego były zgodne. Aplikacja uruchamia nową kopię lokalnie przechowywanego dziennika, plików i punktów kontrolnych w nowym miejscu docelowym. Gotowe eksporty czatów, które zostały już usunięte z lokalnej kolejki przesyłania, pozostają w poprzednim miejscu docelowym.</p>
+<p>JSON klucza zawiera klucz deszyfrujący, adres, prefiks i odcisk klucza. Do odzyskania potrzebny jest on oraz dane logowania magazynu z prawem odczytu.</p>
+<p>Zmieniony endpoint, bucket albo prefiks? Pobierz klucz ponownie. W nowym miejscu ruszy świeża kopia, stare eksporty czatów zostaną tam, gdzie były.</p>
 
 <h2 id="s3-restore">Przywrócenie i weryfikacja na innym komputerze</h2>
-<p>Należy skorzystać z zaufanej instalacji TgWitness, pobranego pliku JSON z kluczem, danych uwierzytelniających do pamięci masowej z uprawnieniami do odczytu oraz pustego katalogu wyjściowego. Proszę zastąpić poniższe fikcyjne symbole zastępcze danymi uwierzytelniającymi.</p>
+<p>Potrzebna jest zaufana instalacja TgWitness, JSON klucza, dane logowania tylko do odczytu i pusty folder:</p>
 <h3>Windows PowerShell</h3>
 <pre><code>$env:TGWITNESS_S3_ACCESS_KEY = 'YOUR_READ_ACCESS_KEY'
 $env:TGWITNESS_S3_SECRET_KEY = 'YOUR_READ_SECRET_KEY'
@@ -89,9 +89,8 @@ python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out 
 <pre><code>export TGWITNESS_S3_ACCESS_KEY='YOUR_READ_ACCESS_KEY'
 export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence</code></pre>
-<p>Pobrane i odszyfrowane obiekty pozostają w prywatnej pamięci tymczasowej na czas sprawdzania całego dziennika, zachowanych punktów kontrolnych oraz hashowych i rozmiarów zachowanych plików multimedialnych. Niebezpieczne ścieżki, sprzeczne segmenty dziennika oraz dziennik krótszy niż jego punkt kontrolny są odrzucane. W przypadku nieudanej weryfikacji przywrócone pliki nie są publikowane.</p>
-<p>Pomyślne odzyskanie danych generuje wyniki <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> oraz <code>exports/</code> dla materiałów dostępnych w kopii. Proszę zachować wynik polecenia w formacie JSON wraz z odzyskanymi materiałami.</p>
-<p>Porównaj odzyskane materiały z niezależnie zachowanymi punktami kontrolnymi lub zapisami świadków, a następnie przejrzyj zakres zgromadzonych danych dla wybranego okresu.</p>
+<p>Najpierw wszystko jest sprawdzane w prywatnym folderze tymczasowym: cały dziennik, punkty kontrolne, skróty i rozmiary plików. Niebezpieczne ścieżki, sprzeczne segmenty lub dziennik krótszy niż punkt kontrolny kończą się błędem i wtedy nic nie zostaje zapisane.</p>
+<p>Po sukcesie dostajesz <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> i <code>exports/</code>. Zachowaj obok wynik JSON polecenia i porównaj z punktami kontrolnymi lub wpisami świadka, które przechowujesz sam.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/evidence/">Pełne odniesienie →</a><a class="next-guide" href="../reports/"><span>Kolejny krok</span><strong>Opracuj raport →</strong></a><p>Niniejsze wytyczne opisują aktualną implementację. Wyniki walidacji oraz pozostałe luki zostały udokumentowane oddzielnie. <a href="../reference/verification/">Co zostało przetestowane →</a></p></footer>
 </main>

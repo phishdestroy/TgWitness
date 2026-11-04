@@ -247,25 +247,11 @@ Ohne einen Zero-Trust-Plan hat ein Konto einen DNS-Standort. Wenn Cloudflare ein
 
 Cloudflare hat keinen Einblick in die Verschlüsselung von Telegram, in andere Geräte des Telegram-Kontos (die Geräteliste im „Evidence Mode“ erfasst diese von Telegram-Seite aus) oder in den Hypervisor des Anbieters.
 
-Am 1. November 2026 lief Gateway DNS gegen die echte Hetzner-Cloud und ein kostenloses Cloudflare-Konto: Hetzner akzeptierte die ausgehenden Regeln, der Server installierte v0.7.0, wobei jede Abfrage über Gateway via TLS lief, der Quick-Tunnel funktionierte durch diese Firewall hindurch, und `verify` las die 19 Namen des Servers von Cloudflare zurück (Ubuntu- und Hetzner-Mirrors, GitHub, PyPI, NTP, den Tunnel, ntfy.sh). Das Panel kopierte 36 Abfragen in acht Fenstern in ein Protokoll und `verify.py` fasste sie lückenlos zusammen; `destroy` entfernte den Server und die Firewall und verließ den gemeinsamen Standort.
-
 ## Was damit nicht festgelegt wird
 
 - Der Anbieter und seine Mitarbeiter verwalten den Hypervisor, die Festplatten und das Netzwerk.
 - Die Host-Messwerte werden vom Collector selbst gemeldet.
 - Frühere Inhalte von Firewall-Regeln sind nicht in jedem Provider-Protokoll enthalten; nur Linode speichert Regelversionen.
 - Es enthält keine neuen Informationen zur Authentizität von Nachrichten; siehe [„Evidence](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/)“.
-
-## Hier getestet
-
-Die Logik für Bereitstellung, Sperrung und Verifizierung wird durch automatisierte Tests anhand simulierter Hetzner-, DigitalOcean-, Linode-, Vultr-, EC2/CloudTrail- und Cloudflare-APIs abgedeckt, die auf der Grundlage der veröffentlichten API-Referenzen erstellt wurden, sowie durch die Signierung von AWS-Anfragen gemäß den von AWS veröffentlichten Beispielen. `tools/check_cloud_wizard.py` führt den Server-Assistenten des Panels auf dieselbe Weise aus, mit einer Domain und mit einem Schnell-Tunnel. `tools/check_tdx.py` überprüft echte Intel-TDX-Attestationen aus dcap-qvl und dstack bis hin zum Intel-Stammzertifikat (Quellen in [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)); `tools/check_phala.py`führt die Befehle „deploy“, „verify“, „journal“, „destroy“ sowie den Panel-Assistenten auf einer simulierten Phala Cloud aus, deren Zertifikate aus einer gefälschten, der von Intel nachempfundenen PKI stammen. Der Phala-Pfad wurde noch nicht auf der Phala Cloud selbst getestet.
-
-Am 1. November 2026 lief der „Quick Tunnel Path“ gegen echtes **Hetzner Cloud** (Nürnberg, `cpx22`, TgWitness v0.7.0), echtes ntfy.sh und GitHub, sowohl über das Bedienfeld als auch über den Code:
-
-- Preisüberprüfung, anschließend Erstellung über die Schaltflächen des Panels: Server läuft nach 13 Sekunden, signierte Erklärung mit übereinstimmenden Instanz- und Installer-Hashes nach etwa zwei Minuten;
-- Das servereigene Panel wurde über die Adresse trycloudflare.com geöffnet und akzeptierte das Panel-Token; ohne das Token gibt es den Status 401 zurück;
-- Nach einem Neustart über die Hetzner-API veröffentlichte der Server eine neue signierte Adresse. **Die aktuelle Adresse** wurde gefunden, die alte Adresse reagierte nicht mehr, der Signaturschlüssel blieb gleich; ein nicht signierter Beitrag zu einem ntfy.sh-Thema wurde ignoriert;
-- `verify` in Bezug auf die API von Hetzner: Server, Firewall ohne eingehende Regeln, Statement, Bindung, Host-Messungen, Boot sowie der Quell-Hash eines v0.7.0-Checkouts wurden bestanden; die Cloudflare- Prüfungen waren, wie oben beschrieben, nicht verfügbar; der Installer unterschied sich von dem, den v0.7.0 erstellt, und stimmte Byte für Byte mit dem überein, den der Code dieser Version erstellt;
-- Durch das Löschen aus dem Panel wurden genau der Server und die Firewall entfernt, die mit der Bereitstellung gekennzeichnet waren; andere Server und Firewalls im selben Projekt blieben davon unberührt.
 
 Noch nicht mit echten Konten getestet: eine Bereitstellung unter Ihrer eigenen Domain (Cloudflare-Tunnel und DNS), die anderen Anbieter, eine Debug-Bereitstellung und `lock`, ein Telegram-Konto auf einem solchen Server sowie die Live-Updates späterer Versionen über einen Quick-Tunnel. Überprüfen Sie die erste Bereitstellung bei jedem Anbieter mit `plan`, einer Debug-Bereitstellung und `verify` , bevor Sie sich in einem Fall darauf verlassen.

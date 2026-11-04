@@ -93,8 +93,6 @@ Telegram, pasif iletim ile aktif kısa sorgulamayı birbirinden ayırır. Günce
 
 FloodWait'i göz ardı eden veya ek hesaplardan gelen kapasitenin doğrusal olduğunu varsayan keyfi yüksek frekanslı sorgulama, geçerli bir boyutlandırma modeli değildir. Varsayılan sınırlar şunlardır: listelenen ilk 1.000 diyalog, geçmiş anlık görüntüsü başına en fazla 500 mesaj, türüne göre toplanan her dosya için 1–2.000 MiB ve sıkıştırılmamış imzalı ZIP içeriği için 4 GiB’dir; bunların her biri **Parametreler** altından çalışma alanı başına değiştirilebilir. Dışa aktarmalarda sabit bir olay sayısı sınırı yoktur. Tarayıcı yedeği varsayılan olarak 128 MiB ile sınırlıdır; akış CLI’sinde yapılandırılabilir bir aktarım sınırı vardır ve varsayılan değer 5 GiB’dir.
 
-`tools/check_capacity.py`, yerel sentetik veri alımı ve dışa aktarımını ölçer. Sonuçları, Telegram teslimat ölçümleri veya garantili gerçek sohbet sayısı değildir. Ölçülen sürüm ve iş yükü için [VERIFICATION.md dosyas](https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/)ına bakınız.
-
 ## Güvenilirlik ve kurtarma
 
 Uygulanan davranışlar arasında SQLite WAL/senkron işlemler; atomik mesaj ve medya işi yazma işlemleri; kalıcı işler ve yeniden deneme gecikmeleri; orijinal sürüm tanımlayıcıları; sınırlı yeniden denemeler; kalıcı medya FloodWait; metin olayının ağ bekleme süresi dışındaki medya indirmeleri; sonraki yazma işlemleri devam ederken kararlı önekli dışa aktarmalar; atomik ayarlar ve denetim kayıtları; başarısız yedek oturum açma sonrasında çalışma yetkisinin korunması; hasarlı ek çalışma alanının yalıtılması; açık yeniden bağlanma denemeleri; belirgin yetki kaybı raporlaması; ve monotonik saat kullanılarak gerçek zamanlı değişiklik algılama.

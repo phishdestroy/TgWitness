@@ -112,14 +112,6 @@ Docker จะสร้างส่วนประกอบเหล่านี�
     ต้องใช้คอนเทนเนอร์ Linux บน Windows คอนเทนเนอร์จะติดตั้ง
     ไลบรารี Python ที่จำเป็นด้วยตัวเอง; ระบบโฮสต์ไม่จำเป็นต้องติดตั้ง Python แยกต่างหาก</li>
 </ul>
-<p>ใช้พื้นที่จัดเก็บข้อมูลแบบถาวรในเครื่องสำหรับไดเรกทอรีข้อมูล วางแผนความจุจากข้อความ,
-สื่อ, การเติบโตของ WAL, การส่งออก และการสำรองข้อมูล; ไม่มีข้อกำหนดขั้นต่ำ
-สำหรับดิสก์/RAM ที่อิงจากหลักฐานและใช้ได้กับทุกภาระงาน สถาปัตยกรรม CPU และเวอร์ชัน Python
-ที่ไม่มี wheel ของ dependency ที่เข้ากันได้ อาจต้องการเครื่องมือสร้างเพิ่มเติมและ
-การรับรองความเหมาะสมของตนเอง &quot;Portable&quot; ไม่ใช่คำยืนยันถึงการสนับสนุนระบบปฏิบัติการหรือฮาร์ดแวร์แบบสากล</p>
-<p>Windows 11/Python 3.12 ได้ผ่านการตรวจสอบในเครื่องแล้ว ส่วนการกำหนดค่าสำหรับ Linux/macOS/คอนเทนเนอร์ และ CI
-ได้จัดเตรียมไว้แล้ว แต่ยังไม่ได้ดำเนินการบนเครื่องโฮสต์พัฒนาการนี้ ดู
-<a href="../verification/">VERIFICATION.md</a> เพื่อทราบขอบเขตที่แน่นอน</p>
 <h2 id="local-computer">คอมพิวเตอร์ท้องถิ่น<a class="anchor" href="#local-computer" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <p>ใช้ <code>Start.cmd</code> บน Windows หรือ <code>sh start.sh</code> บน Linux/macOS. <code>scripts\Setup.cmd</code> หรือ
 <code>sh start.sh --setup-only</code> จะเตรียม
@@ -132,7 +124,6 @@ Docker จะสร้างส่วนประกอบเหล่านี�
 <code>--port</code> ที่ต้องการ การตรวจสอบนี้ไม่ติดตั้งแพ็กเกจ ไม่สร้างบันทึก และไม่เชื่อมต่อ Telegram;
 นี่ไม่ใช่การตรวจสอบความสมบูรณ์หรือความครอบคลุม ระบบจะตรวจสอบ
 บันทึกที่มีอยู่แยกต่างหาก <code>python start.py --help</code> ยังหลีกเลี่ยงการติดตั้งด้วย</p>
-<p>ตัวเลือก:</p>
 <p>หลังจากใช้ start.py แล้ว ให้เรียกใช้คำสั่งเสริมด้วย <code>.venv\Scripts\python.exe</code> บน
 Windows หรือ <code>.venv/bin/python</code> บน Linux/macOS หรือเปิดใช้งานสภาพแวดล้อมนั้นก่อน
 ตัวอย่าง <code>python -m ...</code> ด้านล่างนี้สมมติว่าสภาพแวดล้อมดังกล่าวได้เปิดใช้งานแล้ว</p>
@@ -181,9 +172,6 @@ TGWITNESS_TOKEN หากกำหนดไว้ ต้องมีอย่า
 โฟลเดอร์ใหม่ และคัดลอกโฟลเดอร์ <code>data</code> ไปยังโฟลเดอร์เดิม</p>
 <p>ติดตั้งด้วยตัวเองบน Windows 64-bit ด้วย Python 3.12:</p>
 <pre><code class="language-sh">python tools/build_portable.py</code></pre>
-<p>ตัวสร้างจะตรวจสอบค่า checksum ขณะทำงาน ติดตั้งการพึ่งพาที่จำกัดลงใน
-แพ็กเกจ ดำเนินการตรวจสอบความพร้อมด้วยตัวแปลภาษาที่ฝังไว้ และเขียนไฟล์ ZIP
-พร้อมค่า checksum ลงใน <code>dist/</code></p>
 <h2 id="container">Container<a class="anchor" href="#container" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
 <p>สิ่งนี้สร้าง volume ที่มีชื่อและคงที่สำหรับ /data
@@ -242,9 +230,6 @@ docker compose logs witness                     # witness key fingerprint</code>
 เป็นที่อยู่ HTTPS
 ของผู้เก็บข้อมูล; ไฟล์ดังกล่าวมีเพียง witness เท่านั้น</p>
 <h2 id="install-a-published-image">ติดตั้งภาพระบบที่เผยแพร่แล้ว<a class="anchor" href="#install-a-published-image" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
-<p>ข้อมูลนี้จะพร้อมใช้งานหลังจากกระบวนการ<a href="#automated-github-releases">ปล่อย</a>
-เวอร์ชันสำเร็จและการกำหนดค่าแพ็กเกจ GHCR สาธารณะเสร็จสิ้นแล้ว ชื่อ/เจ้าของรีโพสิตอรีไม่ได้ถูกกำหนดตายตัว
-ไว้ในโครงสร้างโค้ดนี้ ให้ใช้ภาพที่แสดงในสรุปกระบวนการปล่อยเวอร์ชันนั้น</p>
 <p>คัดลอก <code>deploy/env.example</code> ไปยัง <code>.env</code> ตั้งค่า <code>TGWITNESS_IMAGE</code> เป็นเวอร์ชันที่เผยแพร่ โดยใช้
 เส้นทางรีโพสิตอรี<strong>แบบตัวพิมพ์เล็ก</strong> เช่น:</p>
 <pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
@@ -305,37 +290,6 @@ volumes ที่มีชื่อไว้; <strong><code>down -v</code> ล�
 <p>ตรวจสอบสิทธิ์การเข้าถึงแผงควบคุม, ตัวตนบัญชี, สถานะการสังเกตการณ์ และขอบเขตการครอบคลุมหลังการ
 อัปเดต การรีสตาร์ทจะไม่สร้างการอัปเดต Telegram ที่พลาดไปใหม่ การย้อนกลับอาจ
 จำเป็นต้องใช้ข้อมูลสำรองก่อนการอัปเดต หากเวอร์ชันในอนาคตเปลี่ยนแปลงรูปแบบการจัดเก็บข้อมูล</p>
-<h2 id="automated-github-releases">การปล่อยเวอร์ชันอัตโนมัติบน GitHub<a class="anchor" href="#automated-github-releases" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
-<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">กระบวนการปล่อย</a>เวอร์ชันจะพร้อมใช้งานทันทีหลังจาก
-โครงการนี้ถูกส่งไปยัง repositori GitHub ที่เปิดใช้งาน Actions แล้ว ระบบจะทำงานเมื่อ
-GitHub Release ถูก<strong>เผยแพร่</strong> รวมถึงเวอร์ชันก่อนปล่อย (prerelease) การส่งร่าง (drafts) และการส่งแท็ก (tag pushes)
-เพียงอย่างเดียวจะไม่เผยแพร่แพ็กเกจ</p>
-<ol>
-<li>กำหนดเวอร์ชันแพ็กเกจและบันทึกการเปลี่ยนแปลง (changelog) แล้วเผยแพร่เวอร์ชันที่ติดแท็กด้วย <code>v</code>
-    พร้อมทั้งเวอร์ชัน <code>pyproject.toml</code> ที่ถูกต้อง เช่น <code>v0.8.0</code>.</li>
-<li>กระบวนการทำงานนี้จะตรวจสอบความถูกต้องของแท็กและดำเนินการตรวจสอบ Python ที่ใช้ร่วมกันบน Windows/Linux/macOS,
-    general/account-import/QR browser, source-package และ Docker การติดตั้งแบบเนทีฟใหม่ยัง
-    ได้รับการทดสอบบนระบบปฏิบัติการทั้งสามโดยใช้ Python 3.12</li>
-<li>หลังจากผ่านการตรวจสอบทั้งหมดแล้ว ระบบจะทำการทดสอบเบื้องต้น (smoke test) บนภาพระบบ ARM64 ใน QEMU, เผยแพร่
-    ภาพระบบ AMD64/ARM64 ไปที่<code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>,
-    และแนบไฟล์ ZIP แหล่งที่มาและไฟล์ Python wheel พร้อมด้วย sidecars SHA-256 ของพวกมัน
-    ไฟล์ ZIP ที่สามารถใช้งานได้บน Windows คือไฟล์ที่ผ่านการทดสอบโดยกระบวนการตรวจสอบ;
-    กระบวนการเผยแพร่จะดาวน์โหลดและเผยแพร่ไฟล์ดังกล่าวพร้อมทั้งค่า checksum ของมัน</li>
-<li>งานสุดท้ายจะดาวน์โหลดแพ็กเกจทั้งสามที่เผยแพร่แล้วอีกครั้งและตรวจสอบ
-    ค่า checksum ของพวกมัน จากนั้นจะเผยแพร่<code>SHA256SUMS.txt</code> และ<code>RELEASE-MANIFEST.json</code> โดยบันทึก
-    เวอร์ชัน การแก้ไขแหล่งที่มา และขนาดของสินทรัพย์ การอัปโหลดจะไม่เขียนทับ
-    สินทรัพย์ของเวอร์ชันที่เผยแพร่แล้ว</li>
-<li>หลังการเผยแพร่ครั้งแรก ให้เปิดการตั้งค่าแพ็กเกจ GHCR และตั้งการมองเห็น
-    เป็น <strong>Public</strong> หากมีวัตถุประสงค์ที่จะดึงภาพแบบไม่ระบุตัวตน การมี repositori แหล่งที่มาแบบสาธารณะ
-    เพียงอย่างเดียวไม่รับประกันว่าแพ็กเกจคอนเทนเนอร์จะเป็นแบบสาธารณะ นโยบายขององค์กรต้อง
-    อนุญาตให้เผยแพร่แพ็กเกจได้ กระบวนการทำงานนี้ใช้ <code>GITHUB_TOKEN</code>; ไม่ควรมี
-    รหัสผ่านของ registry หรือข้อมูลรับรอง VPS ใน repositori</li>
-</ol>
-<p>ความสำเร็จของกระบวนการทำงานจากระยะไกลยังไม่ได้รับการยืนยันจากการเตรียมการในระบบท้องถิ่นนี้ การจำลอง ARM64
-เป็นการตรวจสอบเบื้องต้น (smoke check) ไม่ใช่การรับรองการทำงานบนฮาร์ดแวร์ต้นฉบับหรือการรับรอง Telegram ในสภาพแวดล้อมจริง
-สิ่งนี้ช่วยอัตโนมัติในการแพ็กเกจเวอร์ชันใหม่; การเริ่มต้นเซิร์ฟเวอร์ยังคงต้องใช้คำสั่ง Compose
-และข้อกำหนดเบื้องต้นเกี่ยวกับโดเมน/โฮสต์ เซิร์ฟเวอร์ที่มีอยู่จะไม่ถูกอัปเกรด
-หรือรีสตาร์ทโดยอัตโนมัติเมื่อมีเวอร์ชันใหม่ถูกเผยแพร่</p>
 <h2 id="remote-server">เซิร์ฟเวอร์ระยะไกล<a class="anchor" href="#remote-server" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <p>ให้บริการนี้ผูกกับ loopback และใช้ SSH tunnel หรือยุติ HTTPS ที่
 proxy กลับด้าน ไฟล์ Compose พื้นฐานใช้ได้เฉพาะในเครื่องท้องถิ่นเท่านั้น; ส่วน overlay
@@ -396,11 +350,6 @@ loopback เท่านั้น โทเค็นถูกส่งผ่า�
 หาก TGWITNESS_TOKEN เขียนทับโทเค็นที่สร้างขึ้น ให้ใช้ไฟล์ที่ได้รับการป้องกันแยกต่างหาก
 ซึ่งมีค่าที่ใช้งานอยู่: panel-token.txt จะไม่ถูกเขียนทับโดยการเขียนทับนี้
 SHA-256 ของคำสั่งนี้เป็นเพียงค่าตรวจสอบการถ่ายโอนเท่านั้น; โปรดตรวจสอบ ZIP ที่ลงนามอย่างอิสระ</p>
-<p>ไฟล์ที่ส่งออกจากเซิร์ฟเวอร์จะยังคงอยู่ภายใน<code>temporary-exports/</code>ส่วนตัวของแต่ละพื้นที่ทำงาน
-การส่งออกที่สำเร็จจะลบไฟล์ที่เกี่ยวข้องออกไป การส่งออกที่ถูกขัดจังหวะจะถูกลบออกเมื่อ
-พื้นที่ทำงานเริ่มต้นขึ้นครั้งต่อไป โดยยังคงล็อกอินสแตนซ์เฉพาะไว้ ไดเรกทอรีนี้เป็นส่วนหนึ่งของ
-โมเดลภัยคุกคาม/ความจุพื้นที่จัดเก็บ; ให้ใช้โวลุ่มข้อมูลที่เข้ารหัส การถ่ายโอนข้อมูลระดับการผลิต
-หลายกิกะไบต์ยังคงต้องผ่านการตรวจสอบความเหมาะสมบนระบบเป้าหมายของคุณ</p>
 <p>แผงควบคุมแสดงสื่อที่อยู่ในคิว/ล้มเหลว สื่อที่รอการประมวลผลที่เก่าที่สุด พื้นที่ดิสก์ว่าง การหยุดชั่วคราวของคำขอ Telegram
 และแหล่งข้อมูลที่การเข้าถึงยังไม่ได้รับการยืนยัน การวินิจฉัยเหล่านี้ไม่ใช่
 ระบบตรวจสอบการส่งข้อมูลแบบ end-to-end ที่สมบูรณ์ พื้นที่ทำงานใช้กระบวนการร่วมกัน; บัญชีที่มีกิจกรรมรบกวนอาจ
@@ -408,22 +357,11 @@ SHA-256 ของคำสั่งนี้เป็นเพียงค่า
 ที่ทนทาน และการรับรองการปรับใช้อย่างเต็มรูปแบบยังคงมีอยู่ การเข้าถึงแผงควบคุมที่จำกัดขอบเขตถูกบันทึก
 ไว้ใน<a href="../access/">ส่วนการเข้าถึงและสิทธิ์</a>; จุดตรวจสอบอิสระถูกครอบคลุมในคู่มือ
 <a href="../witness/">ผู้เป็นพยาน</a></p>
-<h2 id="connection-and-protection-options">ตัวเลือกการเชื่อมต่อและการป้องกัน<a class="anchor" href="#connection-and-protection-options" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
-<p>เส้นทางเชื่อมต่อถูกกำหนดตามพื้นที่ทำงาน (workspace) และควรตั้งค่าก่อนการอนุญาต
-SOCKS5/HTTP CONNECT ใช้การพึ่งพา python-socks ที่ถูกตรึงไว้ MTProxy ใช้
-การขนส่งขั้นกลางแบบสุ่มทดลองของ Telethon; ไม่สนับสนุน Fake TLS ee secrets
-การเปลี่ยนไปใช้เส้นทางสำรองแบบ Direct ขึ้นอยู่กับโหมด <a href="../connection/#ip-modes">IP</a> ที่เลือก: โหมด <strong>Hide the address</strong> จะปฏิเสธการเชื่อมต่อแบบ Direct; <strong>โหมด Direct ในฐานะทางเลือกสุดท้ายจะอนุญาตการเชื่อมต่อแบบ Direct</strong> หลังจากรอช่วงเวลาหนึ่ง <strong>เซิร์ฟเวอร์ที่อยู่หลังอุโมงค์หรือ VPN</strong> จะอนุญาตเส้นทาง Direct แต่ไม่สร้าง VPN นี่ไม่ใช่นโยบายเครือข่ายระดับระบบ</p>
-<p>สำหรับการติดตั้งใหม่ TGWITNESS_VAULT_KEY_FILE จะชี้ไปยังไฟล์กุญแจหลักแบบสุ่ม
-ที่ได้รับการป้องกันแยกต่างหาก ให้ติดตั้งไฟล์นี้ในโหมดอ่านอย่างเดียว (read-only) นอกโฟลเดอร์ /data ในคอนเทนเนอร์ รักษาข้อมูลเมตาดาต้า salt ของไฟล์
-vault.external.json แบบสาธารณะให้คงอยู่ โดยแยกเก็บไว้กับแต่ละพื้นที่ทำงาน (workspace) และกุญแจหลักอย่างแยกกัน
-Vault ท้องถิ่นที่มีอยู่จำเป็นต้องมีการย้ายข้อมูลตามแผน; การตั้งค่าตัวแปรนี้จะไม่
-แปลงข้อมูลเหล่านั้นโดยอัตโนมัติ การจัดเก็บและส่งออกข้อความ/สื่อไม่ได้รับการเข้ารหัสโดยแอปพลิเคชัน
-ใช้โวลุ่มที่เข้ารหัสและพื้นที่จัดเก็บชั่วคราวส่วนตัวที่เพียงพอเมื่อจำเป็น</p>
 <p>ขั้นตอนรายละเอียด: <a href="../connection/">การเชื่อมต่อ/ความปลอดภัย</a> และ
 <a href="../operations/">โหมดการทำงาน</a></p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">แก้ไขหน้านี้บน GitHub ↗</a><a class="next-guide" href="../high-assurance/"><span>ขั้นตอนต่อไป</span><strong>การปรับใช้ที่มีความมั่นใจสูง →</strong></a><p>คู่มือเหล่านี้อธิบายการนำไปใช้ในปัจจุบัน ผลการตรวจสอบความถูกต้องและช่องว่างที่ยังเหลืออยู่ได้รับการบันทึกไว้อย่างแยกต่างหาก <a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p></footer>
 </main>
-<aside class="toc" aria-label="บนหน้านี้"><p class="nav-label">บนหน้านี้</p><a href="#choose-an-installation">เลือกวิธีการติดตั้ง</a><a href="#installation-requirements">ข้อกำหนดการติดตั้ง</a><a href="#local-computer">คอมพิวเตอร์ท้องถิ่น</a><a href="#windows-portable-package">แพ็กเกจแบบพกพาสำหรับ Windows</a><a href="#container">Container</a><a href="#install-a-published-image">ติดตั้งภาพระบบที่เผยแพร่แล้ว</a><a href="#automatic-https-on-a-server">HTTPS อัตโนมัติบนเซิร์ฟเวอร์</a><a href="#updates-and-backups">การอัปเดตและการสำรองข้อมูล</a><a href="#automated-github-releases">การปล่อยเวอร์ชันอัตโนมัติบน GitHub</a><a href="#remote-server">เซิร์ฟเวอร์ระยะไกล</a><a href="#restart-and-gaps">การเริ่มต้นใหม่และช่องว่าง</a><a href="#backup-restore-and-capacity">การสำรองข้อมูล การกู้คืนข้อมูล และความจุ</a><a href="#connection-and-protection-options">ตัวเลือกการเชื่อมต่อและการป้องกัน</a></aside>
+<aside class="toc" aria-label="บนหน้านี้"><p class="nav-label">บนหน้านี้</p><a href="#choose-an-installation">เลือกวิธีการติดตั้ง</a><a href="#installation-requirements">ข้อกำหนดการติดตั้ง</a><a href="#local-computer">คอมพิวเตอร์ท้องถิ่น</a><a href="#windows-portable-package">แพ็กเกจแบบพกพาสำหรับ Windows</a><a href="#container">Container</a><a href="#install-a-published-image">ติดตั้งภาพระบบที่เผยแพร่แล้ว</a><a href="#automatic-https-on-a-server">HTTPS อัตโนมัติบนเซิร์ฟเวอร์</a><a href="#updates-and-backups">การอัปเดตและการสำรองข้อมูล</a><a href="#remote-server">เซิร์ฟเวอร์ระยะไกล</a><a href="#restart-and-gaps">การเริ่มต้นใหม่และช่องว่าง</a><a href="#backup-restore-and-capacity">การสำรองข้อมูล การกู้คืนข้อมูล และความจุ</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>โอเพนซอร์ส · ทำงานบนเครื่องของคุณ</span><a href="../../../../LICENSE">ใบอนุญาต MIT</a><a href="../notice/">ประกาศจากผู้ดำเนินการ</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">ความปลอดภัย</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "กำลังรอข้อความ", "Step through a fictional send, edit and delete.": "ลองทำตามขั้นตอนการส่ง แก้ไข และลบข้อความในสถานการณ์สมมติ", "No observations yet. Start the sequence or advance one event.": "ยังไม่มีความคิดเห็นใด ๆ เริ่มลำดับเหตุการณ์หรือเลื่อนไปหนึ่งเหตุการณ์", "Meet at 10:00": "พบกันเวลา 10:00", "A new message is visible in the chat.": "มีข้อความใหม่ปรากฏในแชท", "Record 1 appended: the collector observed the original message.": "บันทึก 1 แนบมาด้วย: ผู้เก็บข้อมูลได้สังเกตเห็นข้อความต้นฉบับ", "Meet at 11:00": "พบกันเวลา 11:00", "The current text changes. The earlier observation stays.": "ข้อความปัจจุบันมีการเปลี่ยนแปลง แต่ข้อสังเกตก่อนหน้านี้ยังคงอยู่", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "บันทึก 2 ได้ถูกเพิ่มเข้ามา: การแก้ไขนี้ถือเป็นการสังเกตการณ์ใหม่ บันทึก 1 ยังคงเก็บข้อความต้นฉบับไว้", "Message deleted": "ข้อความถูกลบ", "The message has disappeared from the chat view.": "ข้อความดังกล่าวได้หายไปแล้วจากหน้าจอสนทนา", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "บันทึก 3 ที่แนบมา: ประกาศการลบถูกรักษาไว้พร้อมกับทั้งสองเวอร์ชันที่สังเกตได้", "0 records": "0 รายการ", "1 record": "1 รายการ", "2 records": "2 รายการ", "3 records": "3 รายการ", "Complete / {n} of 3": "เสร็จสมบูรณ์ / {n} จาก 3", "Step / {n} of 3": "ขั้นตอน / {n} จาก 3", "Pause": "หยุดชั่วคราว", "Replay sequence": "ลำดับการเล่นซ้ำ", "Play sequence": "ลำดับการเล่น", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "มีตัวอย่างแบบคงที่ให้ใช้งานได้ หากต้องการคำนวณค่าแฮชแบบโต้ตอบ ให้เปิดหน้านี้ผ่าน HTTPS หรือดูตัวอย่างบน localhost ที่รองรับ Web Crypto", "No record supplied": "ไม่มีบันทึกที่ให้มา", "Tail removed": "ส่วนท้ายถูกลบ", "≠ saved hash": "≠ ค่าแฮชที่บันทึกไว้", "Rebuilt · different hash": "สร้างใหม่ · ค่าแฮชที่ต่างกัน", "= saved hash": "= hash ที่บันทึกไว้", "Same length and matching head.": "ความยาวเท่ากันและส่วนหัวที่สอดคล้องกัน", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "แฮชที่คำนวณได้ทั้งสามค่าตรงกับแฮชที่เก็บไว้ ตัวอย่างนี้สอดคล้องกับขอบเขตสามบันทึกที่เก็บไว้", "Same saved head; the journal prefix fails verification.": "ส่วนหัวที่บันทึกไว้เหมือนเดิม; ส่วนนำหน้าของบันทึกไม่ผ่านการตรวจสอบ", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "บันทึกที่ 2 ไม่ตรงกับค่าแฮชที่เก็บไว้แล้ว การตรวจสอบเพียงส่วนหัวสุดท้ายที่เก็บไว้จะไม่สามารถตรวจพบข้อผิดพลาดนี้ได้; ผู้ตรวจสอบจะตรวจสอบทุกบันทึก", "Head differs from the retained checkpoint.": "ส่วนหัวแตกต่างจากจุดตรวจสอบที่เก็บไว้", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ค่าแฮชที่สร้างใหม่เชื่อมโยงกัน แต่ส่วนหัวสุดท้ายได้เปลี่ยนแปลงไปแล้ว จุดตรวจสอบที่เก็บไว้จะปฏิเสธประวัติการเปลี่ยนแปลงนี้ ลายเซ็นต้นฉบับก็จะล้มเหลวเมื่อใช้กับบันทึกที่เปลี่ยนแปลงแล้ว", "Too short: 2 supplied records \u003c 3 retained records.": "สั้นเกินไป: 2 รายการที่ส่งมา \u003c 3 รายการที่เก็บไว้", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "แฮชสองตัวที่เหลือยังคงตรงกัน จุดตรวจสอบที่เก็บไว้เผยให้เห็นส่วนท้ายที่หายไป หากไม่มีขอบเขตก่อนหน้านี้ ส่วนนำหน้าสั้นกว่านี้เพียงอย่างเดียวจะไม่สามารถเปิดเผยการขาดหายได้", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "การคำนวณแฮชไม่สามารถใช้งานได้ในเบราว์เซอร์นี้ แต่สูตรและคำอธิบายแบบคงที่ด้านล่างยังคงใช้งานได้", "{n} records": "{n} บันทึก", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "ได้รับการยอมรับ: จำนวนเพิ่มขึ้น ลายเซ็นได้รับการยืนยัน และกุญแจตรงกัน ผู้เป็นพยานจะเก็บรักษาขอบเขตใหม่นี้ไว้", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: คำตอบที่ลงนามแสดงจำนวนบันทึกน้อยกว่าจุดตรวจสอบที่ได้รับการยอมรับล่าสุด Witness จะบันทึกปัญหาและรักษาขอบเขตที่ได้รับการยอมรับก่อนหน้านี้", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: จำนวนไม่เปลี่ยนแปลง แต่หัว (head) แตกต่างกัน ผู้เป็นพยานบันทึกความไม่เห็นพ้องและรักษาขอบเขตที่ได้รับการยอมรับก่อนหน้านี้", "No answer": "ไม่มีคำตอบ", "boundary unknown": "ขอบเขตไม่ทราบ", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "ไม่มีการตอบสนอง: TgWitness จะบันทึกการตรวจสอบที่ล้มเหลว และไม่สามารถยืนยันสถานะปัจจุบันของผู้เก็บข้อมูลได้ หาก TgWitness ยังสามารถติดต่อกับ Bot API ได้ และนโยบายการเผยแพร่ของมันอนุญาต ก็สามารถเผยแพร่การล้มเหลวนั้นได้", "Send {n}": "ส่ง {n}", "Edit {n}": "แก้ไข{n}", "Delete {n}": "ลบ{n}", "Both accounts captured all six expected observations in this example.": "ทั้งสองบัญชีได้บันทึกการสังเกตทั้งหกข้อที่คาดการณ์ไว้ในตัวอย่างนี้", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "บัญชี B ยังคงบันทึกได้ 6 จาก 6 ข้อความ สองใบเสร็จใช้เวลานานกว่า อัตราการบันทึกและความล่าช้าของใบเสร็จให้คำตอบที่ต่างกัน", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "บัญชี B ได้บันทึก 5 จาก 6 การดำเนินการก่อนถึงจุดตัด (83.3%) การแก้ไขที่ขาดหายไปไม่มีการวัดความล่าช้า ผลลัพธ์นี้อธิบายเฉพาะการดำเนินการ 6 ครั้งที่ได้รับการควบคุมเท่านั้น", "not observed by cutoff": "ไม่ถูกตัดออก", "{s} seconds": "{s} วินาที", "Exact values follow in the table.": "ค่าที่แม่นยำจะปรากฏในตารางต่อไป", "{s} s": "{s} s", "Not observed": "ไม่พบ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "สี่การสนทนาให้ข้อมูลสังเกตการณ์ที่แตกต่างกัน ให้ติดตามบันทึกต้นทางสำหรับทุกการเชื่อมต่อ; อย่ากำหนดโพสต์ในช่องให้กับผู้ใช้ 71001 โดยไม่มีผู้ส่งที่ระบุ", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "บันทึก #146 และ #205 มี ID ผู้ส่งเดียวกัน คือ 71001 ซึ่งเชื่อมโยงโพสต์ที่สังเกตได้จากบัญชี Telegram ในสองห้องสนทนา แต่ไม่ระบุตัวบุคคลจริงหรือระบุเจ้าของโพสต์ในช่องนั้น", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "ที่อยู่ปลายทาง pay.example.invalid/new ปรากฏในบันทึกกลุ่ม #146, คีย์บอร์ดบอท #173, การแก้ไขช่อง #188 และข้อความส่วนตัว #205 ที่อยู่ปลายทางที่ปรากฏซ้ำๆ นี้ช่วยเชื่อมโยงข้อมูลเข้าด้วยกัน แต่ไม่ได้เป็นหลักฐานว่าบัญชีเหล่านั้นอยู่ภายใต้การควบคุมร่วมกัน", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "ใบเสร็จสื่อที่เสร็จสมบูรณ์ #151 และ #209 มีค่า SHA-256 เต็มที่เท่ากันในคดีสมมตินี้ โปรดเปรียบเทียบไบต์จริงและบันทึกข้อความที่เกี่ยวข้อง ไฟล์ที่ตรงกันนี้ไม่ระบุผู้สร้างหรือพิสูจน์ว่าใครเป็นผู้ส่งต่อ", "the encrypted off-site copy": "สำเนาที่เข้ารหัสและเก็บไว้นอกเว็บไซต์", "notifications": "การแจ้งเตือน", "checkpoint hashes for timestamps": "ค่าแฮชจุดตรวจสอบสำหรับเวลา", "signed checkpoints for the witness": "จุดตรวจสอบที่ลงนามสำหรับ TgWitness", "Switched on in this example": "เปิดใช้งานในตัวอย่างนี้", "Optional · off by default": "เลือกได้ · ปิดตามค่าเริ่มต้น", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ข้อมูลที่ส่งออกจากเครื่องนี้: การเชื่อมต่อ Telegram และ{list} ไม่มีข้อมูลอื่นใดอีก", "Default: only the Telegram connection leaves this machine.": "ค่าเริ่มต้น: มีเพียงการเชื่อมต่อ Telegram เท่านั้นที่ออกจากเครื่องนี้", "{done} of {total} done": "{done} จาก {total} เสร็จแล้ว", "Mark step {n} as done": "ทำเครื่องหมายขั้นตอน{n} ว่าเสร็จแล้ว", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "คัดลอก", "Copied": "คัดลอก", "Command copied.": "คำสั่งถูกคัดลอกแล้ว", "Selected — Ctrl/Cmd+C": "คัดลอก — Ctrl/Cmd+C", "Command selected. Copy it manually.": "คำสั่งถูกเลือกแล้ว คัดลอกด้วยมือ", "Command copied to clipboard.": "คำสั่งได้ถูกคัดลอกไปยังคลิปบอร์ดแล้ว", "Select text": "เลือกข้อความ", "Clipboard unavailable. Command selected; copy it manually.": "คลิปบอร์ดไม่สามารถใช้งานได้ คำสั่งถูกเลือกแล้ว; คัดลอกด้วยมือ", "A message arrives. The first observation is saved.": "มีข้อความเข้ามา ข้อสังเกตแรกถูกบันทึกไว้", "The time changes. Both captured versions stay.": "เวลาเปลี่ยนแปลง แต่ทั้งสองเวอร์ชันที่บันทึกไว้ยังคงอยู่", "The message disappears. The captured history remains.": "ข้อความจะหายไป แต่ประวัติที่ถูกบันทึกไว้จะยังคงอยู่", "Pause example animation": "หยุดตัวอย่างแอนิเมชัน", "Play example animation": "ดูตัวอย่างแอนิเมชัน", "Play": "เล่น", "Full-size workspace screenshot": "ภาพหน้าจอพื้นที่ทำงานขนาดเต็ม", "Workspace screenshot · fictional data": "ภาพหน้าจอพื้นที่ทำงาน · ข้อมูลสมมติ", "Close": "ปิด", "Close screenshot": "ปิดภาพหน้าจอ", "Scrollable full-size screenshot": "ภาพหน้าจอขนาดเต็มที่สามารถเลื่อนดูได้", "Enlarge: {name}": "ขยาย: {name}", "View full size": "ดูขนาดเต็ม", "Step {n} of {total}": "ขั้นตอนที่ {n} จาก {total}"}</script>

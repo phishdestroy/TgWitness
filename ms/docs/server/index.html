@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../">Home</a> <span aria-hidden="true">/</span> <a href="../">Dokumentasi</a> <span aria-hidden="true">/</span> <span aria-current="page">Teruskan menjalankannya</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentasi / 17</p><h1>Teruskan menjalankannya</h1><p class="guide-outcome">Pastikan pengumpul sentiasa tersedia dan datanya kekal utuh selepas dimulakan semula.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentasi / 17</p><h1>Teruskan menjalankannya</h1><p class="guide-outcome">Pastikan pengumpul terus berjalan dan data selamat melalui mula semula.</p>
 <h2 id="launch">Pilih kaedah pelancaran</h2>
-<p>Untuk pemasangan asli, gunakan <a href="../start/">pelancar</a> dan contoh perkhidmatan dalam <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/.</a> Untuk Docker, pasang Docker dengan Compose dan jalankan dari direktori projek:</p>
+<p>Asli: <a href="../start/">pelancar</a> serta templat perkhidmatan dalam <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a>. Docker, dari folder projek:</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>Panel lalai mendengar pada alamat loopback hos, port 8787. Buka secara tempatan atau melalui terowong SSH. Gunakan token daripada arahan kedua untuk membuka kunci panel.</p>
+<p>Panel mendengar pada localhost:8787. Bukanya secara setempat atau melalui terowong SSH, dengan token daripada arahan kedua.</p>
 <h2 id="storage">Simpan keseluruhan direktori data</h2>
-<p>Pemasangan asli menggunakan <code>data/live</code>. Docker menggunakan volum <code>tgwitness-data</code> yang berterusan. Menyimpan jurnal, sesi akaun, kunci dan keadaan operasi bersama-sama. Eksport yang ditandatangani adalah bukti yang berguna, tetapi ia bukan sandaran penuh pemasangan.</p>
-<ol><li>Hentikan pengumpulan sebelum membuat sandaran yang konsisten.</li><li>Salin keseluruhan direktori data peribadi ke storan terlindung di luar hos.</li><li>Uji pemulihan ke dalam pemasangan terasing sebelum bergantung pada sandaran.</li></ol>
+<p>Asli: <code>data/live</code>. Docker: volum <code>tgwitness-data</code>. Jurnal, sesi dan kunci mesti bersama. Eksport bertandatangan ialah bukti, bukan sandaran.</p>
+<ol><li>Hentikan pengumpulan dahulu.</li><li>Salin seluruh direktori data ke tempat selamat, di luar hos.</li><li>Cuba pulihkannya pada pemasangan berasingan sebelum anda mempercayainya.</li></ol>
 <h2 id="check">Semak selepas memulakan semula</h2>
-<p>Sahkan ruang kerja dan kunci yang dijangka, sambungan Telegram, sumber terpilih dan tangkapan mesej baru. Status MTProto yang disimpan dan bantuan catch-up membantu memulihkan kemas kini yang masih disimpan oleh Telegram. Mereka tidak dapat membina semula setiap kemas kini yang telah tamat tempoh atau suntingan yang dipadam sebelum tangkapan.</p>
-<p class="callout">Kesihatan kontena bermaksud pelayan web memberi respons. Gunakan mesej terkawal dan pemeriksaan saksi untuk menilai pengumpulan dan penerbitan luaran.</p>
+<p>Semak ruang kerja dan kunci, sambungan, sumber dan sama ada mesej baharu masuk. TgWitness mengejar apa yang Telegram masih ada, bukan segala yang berlaku semasa ia terhenti.</p>
+<p class="callout">Bekas "healthy" bermaksud pelayan web menjawab. Sama ada pengumpulan berfungsi, mesej ujian dan saksi akan memberitahu.</p>
 <h2 id="public">Terbitkan hanya apa yang anda niatkan</h2>
-<p>Rujukan penyebaran merangkumi contoh HTTPS, arahan volum kekal, langkah kemas kini dan pemulihan. Arahan Docker disediakan untuk penyebaran; <a href="../reference/verification/">rekod pengesahan</a> semasa mengenal pasti persekitaran yang benar-benar diuji.</p>
+<p>HTTPS, volum, kemas kini dan pemulihan ada dalam rujukan pengerahan. Apa yang benar-benar telah diuji: <a href="../reference/verification/">rekod pengesahsahihan</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">Rujukan penuh →</a><a class="next-guide" href="../troubleshooting/"><span>Langkah seterusnya</span><strong>Temui apa yang salah →</strong></a><p>Panduan ini menerangkan pelaksanaan semasa. Keputusan pengesahan dan jurang yang masih ada didokumenkan secara berasingan. <a href="../reference/verification/">Apa yang telah diuji →</a></p></footer>
 </main>

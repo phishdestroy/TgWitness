@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/handover/
 
-Należy przekazać istotne spostrzeżenia, zachowując przy tym oryginalny układ obszaru roboczego.
+Udostępniaj tylko to, co potrzebne — oryginał zostaje nietknięty.
 
-Przekazanie to oddzielny, podpisany wyciąg. Należy wybrać czaty i osoby, ograniczyć tożsamości lub tekst oraz zdecydować, które pliki i notatki zespołu powinny znaleźć się w kopii odbiorcy. Manifest zawiera zapis wyboru oraz liczbę rekordów niezmienionych, zminimalizowanych i pominiętych.
+Przekazanie to osobny podpisany wyciąg: wybierz czaty i osoby, ukryj tożsamości lub tekst, wybierz pliki i notatki zespołu. Manifest zapisuje, co zostawiono, skrócono i pominięto.
 
 ## Przygotuj fragment przeznaczony dla odbiorcy
 
-1. Otwórz **menu Eksportuj → Wyciąg do przekazania**. Opisz jego cel, wybierz czaty i opcjonalny okres w formacie UTC, a następnie zaznacz opcję **„Załaduj osoby z wybranych czatów”,** jeśli potrzebujesz nazwisk osób, których dotyczą dane.
-2. Wybierz sposób postępowania z pozostałymi osobami: użyj pseudonimów, pomiń ich wiadomości lub wyświetl je zgodnie z zapisem. Tekst wiadomości i załączniki można ustawić niezależnie; opcjonalnie można zamaskować numery telefonów i adresy e-mail.
-3. Należy zdecydować, czy uwzględnić zakładki i fragmenty z Case Board, czy też karty z komentarzami. W niniejszym tekście nazwy zespołów mogą zostać zastąpione pseudonimami śledczych.
-4. Wybierz opcję **„Pobierz wyciąg z przekazania**”. Otwórz wygenerowany raport i wybrane zapisy lokalnie, zweryfikuj archiwum i sprawdź kopię przed wysłaniem.
+1. **Eksporty → Wyciąg do przekazania**: wpisz cel, wybierz czaty i okres, a jeśli potrzebujesz konkretnych osób — **Wczytaj osoby z wybranych czatów**.
+2. Wszyscy pozostali: pseudonimy, pominięci albo tak, jak zapisano. Tekst i pliki to osobne przełączniki; telefony i e-maile można zamaskować.
+3. Case Board: nic, zakładki i wycinki albo karty z komentarzami. Nazwiska zespołu można zastąpić aliasami.
+4. **Pobierz wyciąg do przekazania**, otwórz, zweryfikuj, przejrzyj przed wysłaniem.
 
 ### Jeden egzemplarz oryginalny, jedna kopia przeznaczona do udostępniania
 
@@ -54,12 +54,12 @@ Oddzielny pakiet powiązany z granicą źródłowego dziennika
 
 | Kontrola | Wpływ na tekst |
 | --- | --- |
-| Osoby | Wybrane osoby powinny pozostać rozpoznawalne; pozostałych uczestników należy pseudonimizować lub pominąć zgodnie z wytycznymi. |
-| Tekst | Należy uwzględnić cały tekst, tylko tekst wybranych osób i konta obserwującego lub pominąć treść wiadomości i pola szczegółowe zawierające tekst. |
-| Pliki | Wybierz pliki wybranych osób i konta obserwowanego, wszystkie pliki wyświetlonych wiadomości lub żadne pliki. |
-| Case Board | Nie należy wybierać materiałów z tablicy, zakładek i fragmentów ani kart z dyskusjami zespołu. |
+| Osoby | Wybrane osoby pozostają z nazwiskiem, pozostałe dostają pseudonimy albo są pomijane. |
+| Tekst | Cały tekst, tylko tekst wybranych osób i Twojego konta albo żaden. |
+| Pliki | Pliki wybranych osób i Twojego konta, wszystkie pokazane pliki albo żadne. |
+| Case Board | Nic, zakładki i wycinki albo karty z dyskusją. |
 
-Należy sprawdzić tekst swobodny i zawartość plików, a także tożsamości: pseudonim nie powoduje automatycznego usunięcia wszystkich nazwisk występujących w wiadomości lub załączniku. Jeśli wybrany plik podlegający archiwizacji jest niedostępny, należy go przywrócić lub wyraźnie pominąć załączniki przed wygenerowaniem wyciągu.
+Przeczytaj też tekst i pliki: pseudonim nie usuwa nazwisk zapisanych w treści wiadomości czy załącznika. Jeśli brakuje wybranego pliku, przywróć go albo pomiń załączniki.
 
 ## Tekst powinien dać się niezależnie zweryfikować
 
@@ -67,4 +67,4 @@ Należy sprawdzić tekst swobodny i zawartość plików, a także tożsamości: 
 python -m tgwitness.verify handover.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Oryginalne, podpisane archiwum dowodów oraz punkty kontrolne należy przechowywać oddzielnie. Proces przekazania rejestruje własną projekcję, dzięki czemu odbiorca może sprawdzić dostarczoną kopię bez konieczności otrzymywania całego obszaru roboczego. [Studio raportów](https://phishdestroy.github.io/TgWitness/pl/docs/reports/) zapewnia własny układ graficzny; [weryfikacja eksportu](https://phishdestroy.github.io/TgWitness/pl/docs/exports/) wyjaśnia zaufane odniesienia.
+Oryginalne archiwum i punkty kontrolne zachowaj u siebie. Odbiorca może zweryfikować swoją kopię bez otrzymywania całej przestrzeni. Wygląd: [Report studio](https://phishdestroy.github.io/TgWitness/pl/docs/reports/). Zaufane odniesienia: [weryfikacja eksportu](https://phishdestroy.github.io/TgWitness/pl/docs/exports/).

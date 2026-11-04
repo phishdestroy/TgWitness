@@ -54,12 +54,3 @@ python -m tgwitness.showcase_verify showcase.json --fingerprint TRUSTED_COLLECTO
 請在展示管理員中使用**「撤銷」**功能，或透過現有的「**存取權限」**區段來關閉 該連結並終止所有相關連線。當系統偵測到存取已結束時， 訪客將清除已顯示的記錄。每次 請求時都會檢查有效期限與權限。展示權限無法直接轉換為一般面板存取權； 請建立新的權限以變更模式。
 
 透過安裝環境現有的 HTTPS 網址提供此頁面。發佈 連結不會開啟新埠、建立隧道或變更 DNS。HTML 及 API 仍保留在用戶的安裝環境中。展示網站的訪客無法透過此存取權限使用一般的 訊息、個人檔案、媒體、匯出或管理 API。
-
-## 本地回歸測試
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-兩者皆使用合成記錄及本機 HTTP 伺服器，且不會連線至 Telegram。

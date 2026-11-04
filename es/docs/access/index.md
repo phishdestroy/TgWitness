@@ -6,47 +6,47 @@ Comparta el caso que alguien necesite. Mantenga el control sobre el resto.
 
 01**Seleccione las pruebas**
 
-Seleccione espacios de trabajo de cuentas completas o chats registrados individualmente.
+Espacios enteros o chats sueltos.
 
 02**Seleccione las acciones**
 
-Permita la visualización, la exportación o los permisos operativos específicos que la persona necesite.
+Ver, exportar o solo las operaciones que necesiten.
 
 03**Establezca los límites**
 
-Emitir un token personal con fecha de caducidad, límites de sesión y restricciones de IP opcionales.
+Un token personal con caducidad, límites de sesión y reglas de IP si lo desea.
 
 El ámbito de recopilación determina qué se registra. El ámbito de acceso determina lo que una persona puede ver y hacer.
 
 ## Conceder acceso a alguien
 
-1. Inicie sesión como administrador y abra **«Acceso**».
-2. Indique el nombre de acceso y seleccione los espacios de trabajo y los chats.
-3. Mantenga la opción **«Ver»** para un revisor. Añada **«Exportar»** en caso de que deban descargar los registros.
+1. Como administrador, abra **Acceso**.
+2. Póngale nombre y elija espacios y chats.
+3. A un revisor le basta con **Ver**. Añada **Exportar** para las descargas.
 4. Establezca los límites y, a continuación, pulse **«Crear acceso**».
-5. Copie el token que se muestra una sola vez. Envíelo de forma privada junto con la dirección del panel.
-6. Compruebe la vista autorizada en una sesión de navegador independiente antes de facilitarla.
+5. Copie el token (se muestra una vez) y envíelo en privado junto con la dirección del panel.
+6. Compruebe antes lo que verá en una sesión de navegador aparte.
 
 ## Comience por la tarea que deben realizar
 
 | Persona | Acceso | Resultado |
 | --- | --- | --- |
-| Revisor | Chats seleccionados; solo lectura | Lea la conversación capturada sin alterar la recopilación. |
-| Analista | Chats seleccionados; ver y exportar | Revise y descargue los registros necesarios para el caso. |
-| Operador | Espacios de trabajo completos seleccionados; fuentes y recopilación | Gestione lo que se supervisa e inicie o detenga los recopiladores. |
+| Revisor | Chats seleccionados; solo lectura | Lee el chat, no puede cambiar nada. |
+| Analista | Chats seleccionados; ver y exportar | Lee y descarga lo que el caso necesita. |
+| Operador | Espacios de trabajo completos seleccionados; fuentes y recopilación | Decide qué se observa e inicia y detiene recolectores. |
 
-Se trata de configuraciones que usted elige, no de roles fijos. La configuración general de la cuenta y las exportaciones completas del registro permanecen restringidas al acceso limitado al chat, incluso cuando se habilita otro permiso. El acceso a todo el espacio de trabajo incluye cuentas futuras.
+Son solo ejemplos, no roles fijos. El acceso limitado a chats nunca recibe ajustes de cuenta ni exportaciones completas del diario. El acceso a todos los espacios incluye las cuentas añadidas después.
 
 ## Puede cambiar de opinión en cualquier momento
 
-Modifique el acceso para determinar qué acciones pueden realizar las solicitudes posteriores. Finalice una sesión o revoque todo el acceso para poner fin a todas sus sesiones. Los archivos ya descargados no se pueden recuperar. Finalizar una sesión del panel no detiene la recopilación.
+Edite el acceso cuando quiera; se aplica desde la siguiente petición. Termine una sesión o revóquelo todo. Los archivos ya descargados no se pueden recuperar. La recogida sigue en marcha.
 
 **Límites de sesiones y direcciones IP**
 
-Limite las sesiones paralelas y los inicios de sesión válidos, establezca una fecha de finalización absoluta, permita direcciones IP o subredes, o vincule el acceso a la dirección utilizada en el primer inicio de sesión. La caducidad de la sesión se determina en función de la inactividad; la actualización de un panel abierto se considera actividad. Compruebe la dirección del cliente que muestra la aplicación cuando se ejecuta detrás de un proxy o un túnel.
+Limite sesiones paralelas e inicios de sesión, ponga una fecha de fin, permita IPs o subredes o fije el acceso a la IP del primer inicio. La caducidad cuenta la inactividad; un panel abierto cuenta como activo. Detrás de un proxy, compruebe qué IP de cliente ve la aplicación.
 
 **La clave principal y el registro de actividad**
 
-El administrador conserva el token del panel principal. Los usuarios con acceso concedido no pueden gestionar el acceso de otras personas ni abrir la consola de administración. La consola muestra la actividad de los procesos en curso en todos los espacios de trabajo; los registros de acceso firmados conservan los eventos de concesión y de sesión sin necesidad de tokens. Los espacios de trabajo comparten el proceso anfitrión y no aíslan los datos del administrador del servidor.
+El token principal se queda con el administrador. El acceso emitido no puede gestionar el acceso de otros ni abrir la consola de administración. Los cambios de acceso y las sesiones se firman en el diario, sin tokens. El administrador del servidor sigue viéndolo todo.
 
-Utilice la [referencia completa de permisos](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/) para los siete permisos, las reglas de sesión y los límites del administrador.
+Los siete permisos y las reglas de sesión: [referencia de acceso](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/).

@@ -62,10 +62,3 @@ Halaman grup `/groups/<id>` menampilkan anggota, hal-hal yang perlu diperhatikan
 Ruang kerja yang sudah memiliki sesi atau pengaturan yang telah diselesaikan sebelumnya tidak akan menampilkan wizard. Nilainya tidak diganti oleh tujuan saat halaman dimuat. Menyembunyikan bidang tidak akan menonaktifkan fitur tersebut atau menghapus nilainya.
 
 Perkiraan ukuran dan waktu mencakup hingga tiga obrolan yang dipilih dan hingga 20 pesan dari masing-masing obrolan. Ini hanyalah perkiraan: perkiraan ini tidak memprediksi batasan Telegram, kecepatan server tertentu, atau file-file dalam setiap obrolan.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

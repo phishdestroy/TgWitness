@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../">תיעוד</a> <span aria-hidden="true">/</span> <span aria-current="page">ראו כיצד הראיות פועלות</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">מה נבדק ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">תיעוד / 08</p><h1>ראו כיצד הראיות פועלות</h1><p class="guide-outcome">הודעה עשויה להשתנות. התיעוד של מה שצפית בו צריך להישאר ניתן לאימות.</p>
-<p>התנסו בשני ניסויים קטנים המוצגים להלן. הם משתמשים בהודעות פיקטיביות, פועלים בתוך הדפדפן שלכם ואינם מתחברים ל-Telegram בשום שלב.</p>
+<article class="guide-content"><p class="eyebrow">תיעוד / 08</p><h1>ראו כיצד הראיות פועלות</h1><p class="guide-outcome">הודעות משתנות. התיעוד שלכם של מה שראיתם לא אמור להשתנות, וכל אחד אמור להיות מסוגל לבדוק את זה.</p>
+<p>למטה שני ניסויים קטנים. הודעות מזויפות, הכול רץ בדפדפן, שום דבר לא נשלח ל-Telegram.</p>
 
 <h2 id="telegram-export">מייצוא צ&#x27;אט לתיעוד הניתן לאימות</h2>
-<p><a href="https://telegram.org/blog/export-and-more">הייצוא מ-Telegram Desktop</a> שומר את היסטוריית הצ&#x27;אט והמדיה הזמינה בפורמט HTML או JSON לשימוש לא מקוון. TgWitness מוסיף יומן מתמשך של שינויים שהתקבלו, חתימות על תצפיות וייצואים, וכן נקודות ביקורת שהנמענים יכולים להשוות באופן עצמאי.</p>
+<p><a href="https://telegram.org/blog/export-and-more">ייצוא של Telegram Desktop</a> שומר את ההיסטוריה שאתם רואים עכשיו כ-HTML או JSON. TgWitness מוסיף יומן שינויים רציף, חתימות על כל רשומה ונקודות ביקורת שאחרים יכולים להשוות מולן.</p>
 <div class="table-wrap"><table><thead><tr><th scope="col">המשימה</th><th scope="col">ייצוא מ-Telegram Desktop</th><th scope="col">TgWitness</th></tr></thead><tbody>
 <tr><td>קריאת שיחות שנשמרו</td><td>HTML או JSON עם מדיה נבחרת</td><td>צ&#x27;אטים שנשמרו, יומן הניתן לחיפוש ודוחות במצב לא מקוון</td></tr>
-<tr><td>עקבו אחר השינויים לאורך זמן</td><td>ההיסטוריה הזמינה בעת הייצוא</td><td>גרסאות שנלכדו קודם לכן, עריכות מאוחרות יותר ותצפיות על מחיקות נשמרות יחד</td></tr>
-<tr><td>יש לבדוק את הקבצים לאחר המסירה</td><td>קובצי ייצוא HTML/JSON סטנדרטיים אינם חתומים</td><td>רשימת תוכן חתומה, חתימות לכל רשומה ודוחות HTML/PDF/JSON חתומים, שנבדקו מול מפתח אספן מהימן</td></tr>
+<tr><td>עקבו אחר השינויים לאורך זמן</td><td>ההיסטוריה הזמינה בעת הייצוא</td><td>גרסאות ישנות, עריכות מאוחרות ומחיקות, הכול נשמר</td></tr>
+<tr><td>יש לבדוק את הקבצים לאחר המסירה</td><td>קובצי ייצוא HTML/JSON סטנדרטיים אינם חתומים</td><td>מניפסט חתום, רשומות חתומות ודוחות חתומים, נבדקים מול מפתח מהימן</td></tr>
 <tr><td>השווה למצב שנשמר קודם לכן</td><td>יש לשמור עותק התייחסות נפרד או חתימת hash</td><td>נקודות ביקורת חתומות, עד נפרד וחותמות זמן חיצוניות אופציונליות</td></tr>
 </tbody></table></div>
-<p>ההשוואה בין חתימות הקבצים מבוססת על <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">כלי הייצוא</a> של <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">Telegram Desktop</a> שנבדקו ב-2 בנובמבר 2026. TgWitness חותם באמצעות המפתח של האספן; הבדיקות שלהלן מראות כיצד הנמען משתמש בו.</p>
+<p>ההשוואה מבוססת על <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">קוד הייצוא של Telegram Desktop</a> נכון ל-2 בנובמבר 2026.</p>
 
 <h2 id="journey">הודעה אחת, שלוש תובנות</h2>
-<p>כאשר Telegram מעבירה הודעה חדשה, הודעת עריכה או הודעת מחיקה, האפליקציה האוספת מוסיפה שלוש הערות נפרדות. העריכה אינה מחליפה את הרישום הראשון. הודעת מחיקה אינה מוחקת אותו.</p>
+<p>הודעה חדשה, עריכה ומחיקה הופכות לשלוש רשומות נפרדות. העריכה לא דורסת את הראשונה, והמחיקה לא מוחקת אותה.</p>
 <figure class="lab journey-lab" data-lab="journey" aria-labelledby="journey-caption">
   <div class="lab-top"><span class="lab-kicker">01 / מסלול ההודעה</span><span class="sample-tag">רצף איורי</span></div>
   <svg class="journey-route" viewBox="0 0 600 92" role="img" aria-labelledby="journey-route-title"><title id="journey-route-title">Telegram delivers an update to the collector, which appends a journal record.</title>
@@ -67,10 +67,10 @@
   <p class="lab-status" data-journey-status role="status">כל שלושת התצפיות שהתקבלו נשמרות ביומן.</p>
   <figcaption id="journey-caption">נתיב פשוט עבור מקור אחד שכבר נבחר. גם הרישומים התפעוליים משתפים את היומן האמיתי. התיעוד תלוי במה שהחשבון יכול לראות ובמה ש-Telegram מספק.</figcaption>
 </figure>
-<p>הודעת מחיקה אינה מספקת לא את זמן המחיקה האמין ולא את זהות האדם שמחק את ההודעה. השמירת ערכים אלה כבלתי ידועים שומרת על ההבחנה בין תצפית לניחוש.</p>
+<p>Telegram לא אומר מי מחק הודעה או מתי בדיוק. TgWitness משאיר את השדות האלה ריקים במקום לנחש.</p>
 
 <h2 id="chain">שנה רשומה. עקוב אחר ה-hash.</h2>
-<p>כל רשומה מכילה את ה-hash של הרשומה הקודמת. ה-hash שלה מכסה את שדות האירוע, כולל קישור זה. נקודת ביקורת הנשמרת באופן חיצוני קובעת אורך יומן ספציפי ו-hash ראשי.</p>
+<p>כל רשומה מכילה את הגיבוב של זו שלפניה. נקודת ביקורת שנשמרה במקום אחר מקבעת את אורך היומן ואת הגיבוב האחרון.</p>
 <figure class="lab hash-lab" data-lab="hash" aria-labelledby="hash-caption">
   <div class="lab-top"><span class="lab-kicker">02 / HASH-CHAIN SANDBOX</span><span class="sample-tag">SHA-256 אמיתי · דוגמאות לרישומים</span></div>
   <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="שינוי יומן הדוגמה">
@@ -88,14 +88,14 @@
 </figure>
 
 <h2 id="formulas">הכללים עצמם, בכמה שורות</h2>
-<div class="formula-card"><span class="lab-kicker">HASH + חתימה</span><div class="formula" translate="no" role="math" aria-label="h zero הוא שישים וארבע אפסים הקסדצימליים. h i הוא ה-SHA-256 ההקסדצימלי של האירוע הקנוני i. החתימה i היא Ed25519 על הבייטים הגולמיים של h i.">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p><strong>C</strong> ממיר את תשעת שדות האירוע לפורמט JSON ב-UTF-8: מפתחות ממוינים, ללא רווחים מיותרים, ללא בריחה מ-ASCII וללא NaN/אינסוף. ה-<code>previous_hash</code> של האירוע הוא h<sub>i−1</sub>. ה-h0 המוצג פירושו 64 תווי אפס; החתימות מכסות את 32 בתים הגולמיים של התמצית.</p></div>
-<p>תשעת השדות הם <code>seq</code>, <code>observed_at</code>, <code>source_at</code>, <code>kind</code>, <code>chat_id</code>, <code>message_id</code>, <code>actor_id</code>, <code>payload</code> ו-<code>previous_hash</code>. זוהי <a href="../reference/evidence/#event-canonicalization">קידוד ה-JSON המתועד</a> של TgWitness; ההאש והחתימה עצמם אינם שדות קלט להאש.</p>
-<div class="formula-card"><span class="lab-kicker">נקודת ביקורת שנשמרה</span><div class="formula" translate="no" role="math" aria-label="מספר הייצוא הוא לפחות מספר נקודות הבדיקה, וה-hash המיוצא במיקום נקודת הבדיקה שווה ל-hash הראשי שנשמר.">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>אמתו את חתימת נקודת הבדיקה תחת מפתח האספן המוצמד, ולאחר מכן השוו את גבולותיה ליומן המאומת. ייצוא מאוחר יותר עשוי להכיל רשומות נוספות; הוא עדיין חייב להתאים לנקודת הבדיקה המוקדמת יותר.</p></div>
+<div class="formula-card"><span class="lab-kicker">HASH + חתימה</span><div class="formula" translate="no" role="math" aria-label="h zero הוא שישים וארבע אפסים הקסדצימליים. h i הוא ה-SHA-256 ההקסדצימלי של האירוע הקנוני i. החתימה i היא Ed25519 על הבייטים הגולמיים של h i.">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p><strong>C</strong> הם תשעת שדות האירוע כ-JSON ב-UTF-8: מפתחות ממוינים, בלי רווחים מיותרים, בלי escape של ASCII, בלי NaN/אינסוף. <code>previous_hash</code> הוא h<sub>i−1</sub>, h<sub>0</sub> הוא 64 אפסים, והחתימות מכסות את 32 הבתים הגולמיים של התקציר.</p></div>
+<p>השדות: <code>seq</code>, <code>observed_at</code>, <code>source_at</code>, <code>kind</code>, <code>chat_id</code>, <code>message_id</code>, <code>actor_id</code>, <code>payload</code>, <code>previous_hash</code>. מפרט מלא: <a href="../reference/evidence/#event-canonicalization">קידוד אירועים</a>.</p>
+<div class="formula-card"><span class="lab-kicker">נקודת ביקורת שנשמרה</span><div class="formula" translate="no" role="math" aria-label="מספר הייצוא הוא לפחות מספר נקודות הבדיקה, וה-hash המיוצא במיקום נקודת הבדיקה שווה ל-hash הראשי שנשמר.">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>בדקו את חתימת נקודת הביקורת מול המפתח המקובע, ואז השוו אותה ליומן. ייצוא מאוחר יותר יכול להיות ארוך יותר, אבל חייב להתאים בנקודת הביקורת.</p></div>
 
 <h2 id="layers">שלוש שאלות, שלוש בדיקות שונות</h2>
-<div class="evidence-layers"><a href="../exports/"><span>01 / שלמות</span><strong>האם תיעוד זה השתנה?</strong><p>אמת את ה-hash והחתימות מול מפתח מהימן נפרד.</p></a><a href="../witness/"><span>02 / המשכיות</span><strong>מה נשמר קודם לכן?</strong><p>השוו ייצוא חתום לנקודות ביקורת שנשמרו על ידי עד נפרד.</p></a><a href="../cases/"><span>03 / מסירה</span><strong>האם אירועי הבדיקה הללו התקבלו?</strong><p>התאמת פעולות שליחה, עריכה ומחיקה מבוקרות מול יומן כל חשבון.</p></a></div>
-<p class="callout">יש להשתמש בחתימות כדי לבדוק את הרשומות שנשמרו, בנקודות ביקורת כדי להשוות לגבול קודם, ובבדיקות מסירה מבוקרות כדי למדוד את האיסוף. כל אחת מהן עונה על שאלה ספציפית. <a href="../reference/evidence/#verification-scope">יש לקרוא את היקף האימות ואת הנחות האמון.</a></p>
-<p>עקבו אחר <a href="../cases/">חקירת החשבון במלואו,</a> החל מהשגתו ועד להרכבת תיק החקירה.</p>
+<div class="evidence-layers"><a href="../exports/"><span>01 / שלמות</span><strong>האם תיעוד זה השתנה?</strong><p>גיבובים וחתימות מול מפתח שאתם סומכים עליו.</p></a><a href="../witness/"><span>02 / המשכיות</span><strong>מה נשמר קודם לכן?</strong><p>השוו את הייצוא לנקודות ביקורת שעד שמר.</p></a><a href="../cases/"><span>03 / מסירה</span><strong>האם אירועי הבדיקה הללו התקבלו?</strong><p>שלחו, ערכו ומחקו הודעות בדיקה, וראו מה כל חשבון תפס.</p></a></div>
+<p class="callout">חתימות עונות על "האם זה שונה", נקודות ביקורת על "האם זה תואם את מה שהיה קודם", והודעות בדיקה על "האם תפסנו הכול". <a href="../reference/evidence/#verification-scope">מה האימות מוכיח ומה לא.</a></p>
+<p>הבא: <a href="../cases/">חקירת חשבון שלם</a> מההתחלה ועד חבילת התיק.</p>
 <p class="callout" lang="en" dir="ltr"><a href="../../../docs/export-clinic/">Export Clinic: watch the controlled Desktop experiment</a>. Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.</p></article>
 <footer class="guide-footer"><a class="reference" href="../reference/how-it-works/">הפניה מלאה ←</a><a class="next-guide" href="../cases/"><span>השלב הבא</span><strong>חקור בכל הצ'אטים ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../reference/verification/">מה נבדק ←</a></p></footer>
 </main>

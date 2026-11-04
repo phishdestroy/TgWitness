@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/security/
 
-Machen Sie sich mit den Routen für Telegram, öffentlichen Proxy-Listen und optionalen externen Diensten vertraut. Erfahren Sie, welche Funktionen die einzelnen Einstellungen freischalten, welchen Schutz sie bieten und welche Entscheidungen Ihnen überlassen bleiben.
+Was Ihren Rechner verlässt, was jedes Geheimnis öffnet und was die Schutzmaßnahmen abdecken und was an Ihnen hängt.
 
 **127.0.0.1**Standardmäßige Panel-Adresse
 
@@ -14,7 +14,7 @@ Machen Sie sich mit den Routen für Telegram, öffentlichen Proxy-Listen und opt
 
 ## Hier finden Sie alles
 
-Der Collector, sein Bedienfeld und alle gespeicherten Datensätze verbleiben auf dem Computer oder Server, auf dem Sie das Tool ausführen. Telegram ist standardmäßig das einzige Ziel; jedes weitere Ziel wird über einen separaten Schalter ausgewählt.
+Collector, Panel und alle Einträge bleiben auf Ihrem Rechner. Standardmäßig wird nur Telegram kontaktiert, alles andere ist ein eigener Schalter.
 
 06 / WAS DIE MASCHINE VERLÄSSTIhre Installation
 
@@ -56,54 +56,54 @@ Optionale Speicherorte werden pro Arbeitsbereich konfiguriert. Nachrichtentexte 
 
 | Geheim | Wo es aufbewahrt wird | Was es ermöglicht | Falls es bekannt wird |
 | --- | --- | --- | --- |
-| **Panel-Token** | `panel-token.txt` im Datenverzeichnis; der Browser speichert diese Datei ausschließlich für den jeweiligen Tab | Alle Funktionen in jedem Arbeitsbereich: Lesen und Exportieren, Umfang ändern, in Konten anmelden | Beenden Sie TgWitness, löschen Sie „`panel-token.txt`“ und starten Sie es erneut: Es wird ein neues Token erstellt. |
+| **Panel-Token** | `panel-token.txt` im Datenverzeichnis; der Browser behält es pro Tab | Alles in jedem Arbeitsbereich | TgWitness stoppen, `panel-token.txt` löschen, neu starten: Sie bekommen ein neues |
 | **Telegram-Sitzung** | Vault, verschlüsselt (`credentials.enc`) | Der Telegram-Account selbst | Beenden Sie die Sitzung in Telegram unter *„Einstellungen“ → „Geräte“* |
-| **Signaturschlüssel** | Vault, verschlüsselt (`signing.enc`) | Signierte Aufzeichnungen, die unter Ihrem Fingerabdruck verifiziert werden können | An anderer Stelle gespeicherte Kontrollpunkte, ein Zeuge und Zeitstempel zeigen, was zuvor vorhanden war |
-| **Tresorschlüssel** | „`vault.key`“ neben den Daten oder ein externer Hauptschlüssel für ein neues Datenverzeichnis | Entschlüsselung des Tresors | Behandeln Sie die Sitzungs- und Signaturschlüssel ebenfalls als offengelegt |
-| **Witness-Token** | Auf dem Witness-Host | Schreibgeschützt: signierte Kontrollpunkte und Integritätsprüfung | Löschen Sie diesen Eintrag auf der „Witness“-Seite; erstellen Sie einen neuen. |
-| **Schlüsseltext für externe Seiten** | Vault; einmal herunterladen, um Daten wiederherzustellen | Entschlüsselung der externen Kopie | Wer auch immer die gespeicherten Objekte besitzt, kann diese entschlüsseln: Behandeln Sie diese Kopie als offengelegt. |
+| **Signaturschlüssel** | Vault, verschlüsselt (`signing.enc`) | Einträge unter Ihrem Fingerabdruck signieren | Anderswo aufbewahrte Prüfpunkte, ein Zeuge und Zeitstempel zeigen weiterhin, was vorher existierte |
+| **Tresorschlüssel** | `vault.key` neben den Daten oder ein externer Hauptschlüssel | Den Tresor | Gehen Sie davon aus, dass Sitzung und Signaturschlüssel ebenfalls geleakt sind |
+| **Witness-Token** | Auf dem Witness-Host | Nur lesen: Prüfpunkte und Zustand | Auf der Zeugen-Seite löschen, ein neues erstellen |
+| **Schlüsseltext für externe Seiten** | Vault; einmal herunterladen, um Daten wiederherzustellen | Die externe Kopie | Wer auch den Bucket hat, kann sie entschlüsseln: betrachten Sie die Kopie als offengelegt |
 
 ## Was die Schutzmaßnahmen abdecken
 
 ### Abgedeckt
 
-- Ein geänderter, gelöschter oder neu angeordneter Eintrag in einem Export: Die Hash-Kette oder eine Signatur lässt sich nicht mehr verifizieren.
-- Ein Protokoll, das nach einem Kontrollpunkt gekürzt oder neu erstellt wurde, wurde an anderer Stelle gespeichert: Der gespeicherte Kontrollpunkt stimmt nicht mehr überein.
-- Erraten des Panel-Tokens: 256 zufällige Bits, die in konstanter Zeit verglichen werden; nach 15 Fehlversuchen pro Minute wird eine Adresse abgelehnt.
-- Inhalte aus feindlichen Chats: Text wird als reiner Text eingefügt, niemals als HTML; Anhänge werden als Dateien heruntergeladen; das Panel lädt keine Inhalte von anderen Websites.
-- Ein Verzeichnis mit kopierten Daten und einem externen Tresorschlüssel: Sitzungen und Signaturschlüssel bleiben ohne den Hauptschlüssel verschlüsselt.
+- Ein geänderter, entfernter oder umsortierter Eintrag: Die Hash-Kette oder eine Signatur bricht.
+- Ein Journal, das gekürzt oder neu aufgebaut wurde, nachdem Sie einen Prüfpunkt anderswo gespeichert haben: Der Prüfpunkt passt nicht mehr.
+- Das Token erraten: 256 Zufallsbits, Vergleich in konstanter Zeit, 15 Fehlversuche pro Minute und die Adresse wird gesperrt.
+- Feindselige Chat-Inhalte: Text bleibt Text, nie HTML; Anhänge werden als Dateien heruntergeladen; das Panel lädt nichts von anderen Seiten.
+- Ein gestohlenes Datenverzeichnis bei externem Tresorschlüssel: Sitzungen und Schlüssel bleiben verschlüsselt.
 
 ### Ich überlasse es Ihnen
 
-- Der Inhaber des Haupt-Tokens hat die volle Kontrolle. Gewähren Sie anderen Personen einen begrenzten Zugriff auf die Konten, Chats und Aktionen, die sie benötigen; halten Sie den Hauptschlüssel geheim.
-- Ein Administrator des Servers kann alle Einträge einsehen und das Protokoll überschreiben sowie neu signieren. Bewahren Sie den Fingerabdruck und die Kontrollpunkte auf einem anderen System auf.
-- Nachrichtentexte und Medien werden von TgWitness nicht verschlüsselt. Verwenden Sie Festplattenverschlüsselung und strenge Zugriffsberechtigungen.
-- Bei einer einfachen HTTP-Verbindung außerhalb von „localhost“ wird das Token im Netzwerk sichtbar. Verwenden Sie HTTPS oder einen SSH-Tunnel.
-- Überprüfen Sie gespeicherte Datensätze anhand von Signaturen und Kontrollpunkten. Überprüfen Sie den Erfassungsumfang und testen Sie die Bereitstellung für die von Ihnen verwendeten Konten und Quellen.
+- Das Haupttoken kann alles. Geben Sie anderen begrenzten Zugriff und behalten Sie das Haupttoken für sich.
+- Wer Admin auf dem Rechner ist, kann alles lesen und das Journal neu signieren. Bewahren Sie Fingerabdruck und Prüfpunkte anderswo auf.
+- Nachrichten und Medien verschlüsselt TgWitness nicht. Verschlüsseln Sie die Festplatte, schränken Sie die Rechte ein.
+- Einfaches HTTP außerhalb von localhost gibt das Token preis. Nutzen Sie HTTPS oder einen SSH-Tunnel.
+- Signaturen sagen Ihnen nicht, was verpasst wurde. Prüfen Sie Abdeckung und Zustellung auf Ihren eigenen Konten und Quellen.
 
-[Teilen Sie den Zugriff auf einen Fall](https://phishdestroy.github.io/TgWitness/de/docs/access/) mit Berechtigungen, Ablaufdaten und Sitzungsbeschränkungen. Ein Witness-Token bleibt eine separate Zugangsberechtigung.
+[Teilen Sie den Zugriff auf einen Fall](https://phishdestroy.github.io/TgWitness/de/docs/access/) mit Berechtigungen, Ablaufdatum und Sitzungslimits.
 
 ## Eine Installation absichern
 
 0 von 8 fertiggestellt
 
-1. **Verwenden Sie ein eigens dafür eingerichtetes Telegram-Konto** – niemals Ihr Hauptkonto. Das Panel-Token und die Sitzung ermöglichen die vollständige Kontrolle darüber.
-2. **Lassen Sie das Panel auf 127.0.0.1 laufen.** Greifen Sie remote nur über HTTPS (die mitgelieferte Caddy-Konfiguration) oder einen SSH-Tunnel darauf zu.
-3. **Verschlüsseln Sie die Festplatte,** auf der sich das Datenverzeichnis befindet: Nachrichtentexte und Medien werden so gespeichert, wie sie eingegangen sind.
-4. **Beschränken Sie das Datenverzeichnis** auf das Dienstkonto. Neue Verzeichnisse erhalten unter Unix die Berechtigung 0700; unter Windows legen Sie die Berechtigungen für den Ordner fest.
-5. **Bewahren Sie den Hauptschlüssel des Tresors an einem anderen Ort** auf den Servern **auf**: Legen Sie „`TGWITNESS_VAULT_KEY_FILE`“ fest, bevor Sie das Datenverzeichnis erstellen.
-6. **Speichern Sie den Fingerabdruck des Signaturschlüssels und die Kontrollpunkte** auf einem anderen System und fügen Sie einen Zeugen auf einem anderen Host hinzu.
+1. **Nutzen Sie ein eigenes Telegram-Konto**, nie Ihr Hauptkonto.
+2. **Lassen Sie das Panel auf 127.0.0.1.** Fernzugriff nur über HTTPS (mitgeliefertes Caddy) oder einen SSH-Tunnel.
+3. **Verschlüsseln Sie die Festplatte** mit dem Datenverzeichnis, Nachrichten und Medien liegen so, wie sie ankamen.
+4. **Beschränken Sie das Datenverzeichnis** auf das Dienstkonto (0700 unter Unix, Ordnerrechte unter Windows).
+5. **Bewahren Sie den Tresorschlüssel anderswo auf** auf Servern: setzen Sie `TGWITNESS_VAULT_KEY_FILE` vor dem ersten Start.
+6. **Speichern Sie Fingerabdruck und Prüfpunkte** auf einem anderen System, betreiben Sie einen Zeugen auf einem anderen Host.
 7. **Laden Sie niemals** `data/`-, Sitzungs-, `panel-token.txt`- oder Tresorschlüssel auf GitHub oder in einen Chat **hoch**.
 8. `Authorization`-Header oder Request-Bodies **dürfen** an einem Reverse-Proxy **nicht protokolliert werden**.
 
 **Kann ich das Panel-Token ändern, ohne Daten zu verlieren?**
 
-Ja. Das Token öffnet lediglich das Bedienfeld. Beenden Sie TgWitness, löschen Sie „`panel-token.txt`“ aus dem Datenverzeichnis und starten Sie das Programm erneut; das Protokoll, die Sitzungen und die Schlüssel bleiben davon unberührt. Wenn „`TGWITNESS_TOKEN`“ festgelegt ist, wird anstelle der Datei der Umgebungswert verwendet.
+Ja, es öffnet nur das Panel. TgWitness stoppen, `panel-token.txt` löschen, neu starten. Journal, Sitzungen und Schlüssel bleiben. Ist `TGWITNESS_TOKEN` gesetzt, hat dieser Wert Vorrang vor der Datei.
 
 **Warum werden Nachrichten im Ruhezustand nicht verschlüsselt?**
 
-Der Erfasser muss diese lesen, um sie zu durchsuchen, Versionen zu vergleichen und zu exportieren. Eine Verschlüsselung mit einem Schlüssel auf demselben Rechner würde nur wenig Schutz bieten gegenüber jemandem, der Zugriff auf diesen Rechner hat. Eine Festplattenverschlüsselung schützt eine ausgeschaltete oder gestohlene Festplatte; strenge Zugriffsrechte schützen eine in Betrieb befindliche Festplatte.
+Der Collector muss sie lesen, um zu suchen, zu vergleichen und zu exportieren. Ein Schlüssel auf demselben Rechner würde niemanden aufhalten, der diesen Rechner ohnehin lesen kann. Festplattenverschlüsselung schützt eine gestohlene Platte, Rechte schützen eine laufende.
 
 ## Eine Sicherheitslücke melden
 
-Nutzen Sie **„Sicherheit → Eine Sicherheitslücke melden“** im GitHub-Repository. Geben Sie dabei die Version, die Auswirkungen und eine minimale synthetische Reproduktion an. Senden Sie niemals Anmeldedaten, Kontiverzeichnisse oder echte Beweismittelarchive. Falls eine private Meldung nicht möglich ist, eröffnen Sie ein Ticket, in dem Sie um einen privaten Kanal bitten, ohne Details zum Exploit anzugeben.
+**Security → Report a vulnerability** auf GitHub. Version, Auswirkung und ein minimales Beispiel mit erfundenen Daten. Schicken Sie nie Zugangsdaten, Kontoordner oder echte Beweise. Ist die private Meldung aus, eröffnen Sie ein Issue und bitten Sie um einen privaten Kanal, ohne Exploit-Details.

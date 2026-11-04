@@ -32,23 +32,23 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首頁</a> <span aria-hidden="true">/</span> <a href="../">文件說明</a> <span aria-hidden="true">/</span> <span aria-current="page">設定 Witness 機器人</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文件說明 / 16</p><h1>設定 Witness 機器人</h1><p class="guide-outcome">讓獨立的程序檢查該日誌，並將簽名檢查點發佈至您的頻道。</p>
+<article class="guide-content"><p class="eyebrow">文件說明 / 16</p><h1>設定 Witness 機器人</h1><p class="guide-outcome">一個獨立程序檢查您的日誌，並將簽名檢查點發布到頻道。</p>
 <h2 id="topology">兩台主機，兩組簽名金鑰</h2>
 <figure class="topology" aria-labelledby="witness-topology-caption"><div class="topology-grid"><div class="host-box"><span class="lab-kicker">部署 / 資料收集器</span><strong>帳戶 + 日誌</strong><p>Telegram 會話收集器的簽名金鑰</p><span class="host-endpoint">唯讀檢查點端點</span></div><div class="topology-link"><span>← 請求簽署的回答 →</span></div><div class="host-box witness-host"><span class="lab-kicker">HOST B / WITNESS</span><strong>驗證 + 保留</strong><p>固定收集器指紋 獨立的見證簽署金鑰</p><span class="host-endpoint">專屬日誌 + 機器人代幣</span></div></div><div class="publication-path"><span>Witness → Telegram 機器人 API →</span><strong>您的頻道 · 經簽名的 TGW1 貼文</strong></div><figcaption id="witness-topology-caption">Witness 會自行執行驗證。收集器的存取權限為唯讀。機器人發佈時會使用 Witness 的連線與憑證；Witness 不會獲得任何帳戶會話權限。</figcaption></figure>
 <figure class="lab witness-lab" data-lab="witness" aria-labelledby="witness-lab-caption"><div class="lab-top"><span class="lab-kicker">03 / 檢查點決策</span><span class="sample-tag">示例答案</span></div><div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="選擇檢查點答案"><button type="button" data-witness-mode="ok" aria-pressed="true">日誌持續擴充</button><button type="button" data-witness-mode="rollback" aria-pressed="false">計數回溯</button><button type="button" data-witness-mode="fork" aria-pressed="false">字數相同，標題更新</button><button type="button" data-witness-mode="offline" aria-pressed="false">無回應</button></div><div class="checkpoint-pair"><div><span class="panel-caption">最後接受日期</span><strong>120 筆記錄</strong><code>head 9c7d…</code></div><span class="checkpoint-arrow" aria-hidden="true">→</span><div><span class="panel-caption">下一則答案</span><strong data-witness-count>128 筆記錄</strong><code data-witness-head>head a4f2…</code></div></div><p class="lab-status" data-witness-status role="status">已接受：計數持續增加，簽名經驗證無誤，且金鑰匹配。該見證者保留此新界限。</p><figcaption id="witness-lab-caption">所有解答範例均假設具備有效簽名及已釘選的金鑰。此處的雜湊值僅為簡化示意。單憑較大的計數並不能證明整個舊前綴未曾變更；請將匯出資料與保留的檢查點進行比對。</figcaption></figure>
 <h2 id="prepare">準備一個機器人與一個頻道</h2>
-<p>使用 BotFather 建立一個機器人，並允許其在您所控制的頻道中發文。為 TgWitness 選擇一台電腦或伺服器。相較於在資料收集者的伺服器上運行第二個程序，使用獨立的主機和操作員能提供更強的獨立性。</p>
+<p>用 BotFather 建立機器人，並允許它在您的頻道中發文。請在別處執行見證人：另一台主機，最好由其他人管理，遠比在收集器旁多跑一個程序更有價值。</p>
 <h2 id="setup">「進階功能」中的三個步驟</h2>
-<ol><li><strong>唯讀存取權限。</strong>開啟「<strong>Extras」→「Independent witness」</strong>，建立見證者代幣並儲存存取檔案。此權限僅允許讀取檢查點與系統狀態，無法存取對話內容或收集器控制項。</li><li><strong>頻道與間隔。</strong>選擇一個 Telegram 頻道或 Discord Webhook，並輸入可從見證節點存取的收集器地址。儲存設定檔。</li><li><strong>啟動。</strong>將 <code>witness.json</code>、<code>witness-token.txt</code> 以及在 Witness 主機上建立的 <code>bot-token.txt</code> 置於同一位置。在已安裝的專案環境中執行以下指令。</li></ol>
+<ol><li><strong>唯讀存取。</strong><strong>擴充功能 → 獨立見證人</strong>，建立權杖並儲存檔案。它只讀取檢查點和健康狀態，別無其他。</li><li><strong>頻道和間隔。</strong>Telegram 頻道或 Discord webhook，以及見證人能連到的收集器網址。儲存設定檔。</li><li><strong>啟動。</strong>將 <code>witness.json</code>、<code>witness-token.txt</code> 和 <code>bot-token.txt</code> 一起放到見證人主機上並執行：</li></ol>
 <pre><code>python -m tgwitness.witness run --config witness.json --check-config
 python -m tgwitness.witness run --config witness.json</code></pre>
-<p>下載檔案並不會啟動「witness」。請確認首則簽名貼文已出現在頻道中，然後將「witness」的公鑰指紋另行保存。</p>
-<p>針對 Discord，請將頻道的 webhook URL 儲存為 <code>discord-webhook.txt</code> ，而非機器人代幣。見證人會將內容發佈至單一位置（Telegram 頻道或 Discord 頻道）；長於 Discord 訊息長度的驗證結果將以附件形式傳送。</p>
+<p>等待頻道中出現第一則簽名貼文，然後將見證人指紋保存在安全的地方。</p>
+<p>想用 Discord？將 webhook URL 儲存為 <code>discord-webhook.txt</code>。一個見證人只發布到一個地方；較長的檢查結果在 Discord 上以檔案形式送達。</p>
 <h2 id="posts">選擇發布頻率</h2>
-<p>每次檢查結果的發布都會建立一份定期的外部記錄。以五分鐘為間隔計算，每個工作區每天約有 288 則貼文。進階設定還提供在發生變更或問題時發布通知、代理伺服器以及自訂 Bot API 位址等功能。</p>
-<details><summary>該機器人實際上能證明什麼？</summary><p>該「見證者」會向資料收集者索取經簽名的檢查點，並使用預期金鑰進行驗證，同時另行維護一份經簽名的日誌。它不僅記錄成功的驗證結果，亦會記錄缺失的回應與被拒絕的答案。發布與否仍取決於「見證者」是否正在運行，以及能否連線至 Telegram 的 Bot API。</p><p>本工具會檢查收集器回報的日誌狀態，但不會獨立監控每則 Telegram 訊息。若需進行此類監控，請新增「受控傳送測試」。</p></details>
+<p>每次檢查都發文可以形成穩定的外部紀錄：每五分鐘一次，約等於每個工作區每天 288 則貼文。進階設定可以只在有變化或出問題時發文，使用代理或自訂 Bot API。</p>
+<details><summary>該機器人實際上能證明什麼？</summary><p>它向收集器請求簽名檢查點，以預期的金鑰核對，並保存自己的簽名日誌，包括錯過和被拒絕的回應。</p><p>它檢查的是日誌狀態，本身並不監看 Telegram。為此，請執行受控的送達測試。</p></details>
 <h2 id="verify">稍後查閱證據</h2>
-<p>請保留證據日誌、頻道貼文以及獨立儲存的指紋資料。<a href="../reference/witness/#verify">完整的驗證程序</a>會將這些資料與收集者簽署的匯出檔進行比對。</p>
+<p>請保留見證人日誌、貼文和指紋。<a href="../reference/witness/#verify">如何核對它們</a>與收集器匯出是否一致。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/witness/">完整參考資料 →</a><a class="next-guide" href="../server/"><span>下一步</span><strong>讓它持續運作 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../reference/verification/">已測試的內容 →</a></p></footer>
 </main>

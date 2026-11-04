@@ -514,13 +514,6 @@ session from the workspace vault. The journal, sources, settings and signing key
 the journal records the sign-out. The workspace still belongs to its account: only that
 account can connect to it again. If Telegram does not answer, the session is still removed
 here and the panel says so; end it in Telegram under <strong>Settings → Devices</strong>.</p>
-<h2 id="convert-a-telethon-session-offline">Convert a Telethon session offline<a class="anchor" href="#convert-a-telethon-session-offline" aria-label="Link to this section">#</a></h2>
-<p>The panel imports <code>.session</code> files directly. For an offline conversion to a
-StringSession file, run from the project folder:</p>
-<pre><code class="language-powershell">.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows</code></pre>
-<pre><code class="language-sh">.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS</code></pre>
-<p>The converter reads Telethon SQLite only (up to 64 MiB), never modifies the input,
-makes no network request and refuses to overwrite an existing output file.</p>
 <h2 id="keeping-account-files-safe">Keeping account files safe<a class="anchor" href="#keeping-account-files-safe" aria-label="Link to this section">#</a></h2>
 <ul>
 <li>Treat every <code>.session</code>, TData ZIP, StringSession, Auth Key and account JSON like a
@@ -601,7 +594,7 @@ makes no network request and refuses to overwrite an existing output file.</p>
 and <a href="../collection/">how collection works</a> for what is captured after sign-in.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNTS.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../access/"><span>Next step</span><strong>Access and permissions →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
 </main>
-<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#at-a-glance">At a glance</a><a href="#before-you-start-api-id-and-api-hash">Before you start: API ID and API hash</a><a href="#phone-number">Phone number</a><a href="#qr-code">QR code</a><a href="#auth-key--dc-id">Auth Key + DC ID</a><a href="#account-files">Account files</a><a href="#identify-what-you-have">Identify what you have</a><a href="#unsupported-formats">Unsupported formats</a><a href="#multiple-accounts">Multiple accounts</a><a href="#sign-out">Sign out</a><a href="#convert-a-telethon-session-offline">Convert a Telethon session offline</a><a href="#keeping-account-files-safe">Keeping account files safe</a><a href="#troubleshooting">Troubleshooting</a></aside>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#at-a-glance">At a glance</a><a href="#before-you-start-api-id-and-api-hash">Before you start: API ID and API hash</a><a href="#phone-number">Phone number</a><a href="#qr-code">QR code</a><a href="#auth-key--dc-id">Auth Key + DC ID</a><a href="#account-files">Account files</a><a href="#identify-what-you-have">Identify what you have</a><a href="#unsupported-formats">Unsupported formats</a><a href="#multiple-accounts">Multiple accounts</a><a href="#sign-out">Sign out</a><a href="#keeping-account-files-safe">Keeping account files safe</a><a href="#troubleshooting">Troubleshooting</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
 <script id="site-dict" type="application/json">{}</script>

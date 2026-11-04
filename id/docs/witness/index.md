@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/witness/
 
-Biarkan proses terpisah memeriksa jurnal tersebut dan mempublikasikan titik pemeriksaan yang ditandatangani ke saluran Anda.
+Proses terpisah memeriksa jurnal Anda dan menerbitkan checkpoint bertanda tangan ke sebuah kanal.
 
 ## Dua server, dua kunci penandatanganan
 
@@ -36,33 +36,33 @@ Semua contoh jawaban mengasumsikan adanya tanda tangan yang valid dan kunci yang
 
 ## Siapkan bot dan saluran
 
-Buat bot menggunakan BotFather dan izinkan bot tersebut untuk memposting di saluran yang Anda kendalikan. Pilih komputer atau server untuk TgWitness. Host dan operator yang terpisah memberikan kemandirian yang lebih kuat dibandingkan dengan menjalankan proses kedua di server pengumpul data.
+Buat bot dengan BotFather dan izinkan ia memposting di kanal Anda. Jalankan saksi di tempat lain: host lain, idealnya dikelola orang lain, jauh lebih berharga daripada proses kedua di samping kolektor.
 
 ## Tiga langkah di bagian Ekstra
 
-1. **Akses hanya baca.** Buka **Extras → Independent witness**, buat token saksi, dan simpan berkas akses. Fitur ini memungkinkan pembacaan titik pemeriksaan dan status kesehatan, bukan percakapan atau pengaturan pengumpul.
-2. **Saluran dan interval.** Pilih saluran Telegram atau webhook Discord, lalu masukkan alamat pengumpul yang dapat dijangkau dari saksi. Simpan berkas pengaturan.
-3. **Peluncuran.** Gabungkan `witness.json`, `witness-token.txt`, dan `bot-token.txt` yang dibuat di host saksi. Jalankan perintah di bawah ini di lingkungan proyek yang telah diinstal.
+1. **Akses baca-saja.** **Tambahan → Saksi independen**, buat token, simpan berkasnya. Ia membaca checkpoint dan status, tidak lebih.
+2. **Kanal dan interval.** Kanal Telegram atau webhook Discord, ditambah alamat kolektor yang bisa dijangkau saksi. Simpan berkas pengaturan.
+3. **Jalankan.** Taruh `witness.json`, `witness-token.txt`, dan `bot-token.txt` bersama di host saksi lalu jalankan:
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
 python -m tgwitness.witness run --config witness.json
 ```
 
-Mengunduh berkas-berkas tersebut tidak akan memulai proses pencatatan. Pastikan posting pertama yang telah ditandatangani muncul di saluran, lalu simpan sidik jari kunci publik alat tersebut secara terpisah.
+Tunggu postingan bertanda tangan pertama di kanal, lalu simpan sidik jari saksi di tempat aman.
 
-Untuk Discord, simpan URL webhook saluran sebagai `discord-webhook.txt` bukan token bot. Seorang saksi memposting ke satu tempat, baik saluran Telegram maupun saluran Discord; verifikasi yang lebih panjang daripada pesan Discord akan dikirim sebagai lampiran.
+Lebih suka Discord? Simpan URL webhook sebagai `discord-webhook.txt`. Satu saksi memposting ke satu tempat; pemeriksaan panjang tiba di Discord sebagai berkas.
 
 ## Pilih seberapa sering ingin mempublikasikan
 
-Setiap kali pemeriksaan dipublikasikan, akan tercipta catatan eksternal yang teratur. Dengan interval lima menit, hal ini berarti sekitar 288 posting per ruang kerja per hari. Pengaturan lanjutan juga menawarkan publikasi terkait perubahan atau masalah, proxy, serta alamat Bot API khusus.
+Memposting setiap pemeriksaan memberi catatan luar yang rutin: setiap lima menit berarti sekitar 288 postingan per hari per ruang kerja. Pengaturan lanjutan bisa memposting hanya saat ada perubahan atau masalah, memakai proxy, atau Bot API khusus.
 
 **Apa sebenarnya yang dibuktikan oleh bot tersebut?**
 
-Saksi meminta titik pemeriksaan yang ditandatangani dari pengumpul, memverifikasinya dengan kunci yang diharapkan, dan menyimpan jurnal terpisah yang ditandatangani. Alat ini mencatat respons yang hilang dan jawaban yang ditolak, serta pemeriksaan yang berhasil. Publikasi masih bergantung pada apakah saksi sedang berjalan dan dapat mengakses Bot API Telegram.
+Ia meminta checkpoint bertanda tangan dari kolektor, memeriksanya dengan kunci yang diharapkan, dan menyimpan jurnal bertanda tangan sendiri, termasuk jawaban yang terlewat dan ditolak.
 
-Alat ini memeriksa status jurnal yang dilaporkan oleh pengumpul. Alat ini tidak memantau setiap pesan Telegram secara mandiri. Untuk itu, tambahkan uji pengiriman terkontrol.
+Ia memeriksa keadaan jurnal, tidak mengamati Telegram sendiri. Untuk itu, lakukan uji pengiriman terkendali.
 
 ## Periksa bukti tersebut nanti
 
-Simpan jurnal saksi, postingan saluran, dan sidik jari yang disimpan secara independen. [Prosedur verifikasi lengkap](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/#verify) membandingkan semuanya dengan ekspor yang telah ditandatangani oleh pengumpul.
+Simpan jurnal saksi, postingan, dan sidik jarinya. [Cara memeriksanya](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/#verify) terhadap ekspor kolektor.

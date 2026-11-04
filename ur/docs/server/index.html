@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="رہنما"><a href="../../">گھر</a> <span aria-hidden="true">/</span> <a href="../">دستاویزات</a> <span aria-hidden="true">/</span> <span aria-current="page">اسے چلتا رکھیں</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">کیا جانچا گیا ہے ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">دستاویزات میں تلاش کریں</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، ہیش چین، ٹوکن یا ویٹنس آزمائیں…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="خلاصہ تلاش" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">رہنما اور حوالہ جات میں تلاش کرنے کے لیے ایک لفظ ٹائپ کریں۔ تلاش آپ کے براؤزر میں ہی رہتی ہے۔</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">دستاویزات / 17</p><h1>اسے چلتا رکھیں</h1><p class="guide-outcome">جمع کنندہ کو دستیاب رکھیں اور اس کے ڈیٹا کو دوبارہ شروع کرنے پر بھی سالم رکھیں۔</p>
+<article class="guide-content"><p class="eyebrow">دستاویزات / 17</p><h1>اسے چلتا رکھیں</h1><p class="guide-outcome">کلیکٹر کو چلتا اور ڈیٹا کو ری اسٹارٹس میں محفوظ رکھیں۔</p>
 <h2 id="launch">لانچ کا طریقہ منتخب کریں</h2>
-<p>مقامی تنصیب کے لیے <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> میں موجود <a href="../start/">لانچر</a> اور سروس مثالوں کا استعمال کریں۔ Docker کے لیے Compose کے ساتھ Docker انسٹال کریں اور پروجیکٹ ڈائریکٹری سے چلائیں:</p>
+<p>مقامی: <a href="../start/">لانچر</a> اور <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> میں سروس ٹیمپلیٹس۔ Docker، پروجیکٹ فولڈر سے:</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>ڈیفالٹ پینل ہوسٹ کے لوپ بیک ایڈریس، پورٹ 8787 پر سن کرتا ہے۔ اسے مقامی طور پر یا SSH ٹنل کے ذریعے کھولیں۔ پینل کو انلاک کرنے کے لیے دوسری کمانڈ سے حاصل کردہ ٹوکن استعمال کریں۔</p>
+<p>پینل localhost:8787 پر سنتا ہے۔ اسے مقامی طور پر یا SSH ٹنل سے کھولیں، دوسری کمانڈ کے ٹوکن کے ساتھ۔</p>
 <h2 id="storage">پورے ڈیٹا ڈائریکٹری کو برقرار رکھیں</h2>
-<p>مقامی تنصیبات <code>data/live</code> استعمال کرتی ہیں۔ Docker مستقل <code>tgwitness-data</code> والیوم استعمال کرتا ہے۔ جرنلز، اکاؤنٹ سیشنز، کیز اور آپریشنل حالت کو ایک ساتھ رکھیں۔ ایک دستخط شدہ ایکسپورٹ مفید ثبوت ہے، لیکن یہ مکمل تنصیب کا بیک اپ نہیں ہے۔</p>
-<ol><li>مستقل بیک اپ لینے سے پہلے جمع کرنا بند کریں۔</li><li>پورے نجی ڈیٹا ڈائریکٹری کو ہوسٹ کے باہر محفوظ ذخیرہ میں نقل کریں۔</li><li>بیک اپ پر انحصار کرنے سے پہلے ایک الگ تنصیب میں بحالی کا ٹیسٹ کریں۔</li></ol>
+<p>مقامی: <code>data/live</code>۔ Docker: <code>tgwitness-data</code> والیوم۔ جرنلز، سیشنز اور کلیدیں ساتھ رہتی ہیں۔ دستخط شدہ ایکسپورٹ ثبوت ہے، بیک اپ نہیں۔</p>
+<ol><li>پہلے جمع کرنا روکیں۔</li><li>پوری ڈیٹا ڈائریکٹری ہوسٹ سے باہر کسی محفوظ جگہ کاپی کریں۔</li><li>بھروسہ کرنے سے پہلے الگ انسٹال پر بحالی آزمائیں۔</li></ol>
 <h2 id="check">ری اسٹارٹ کے بعد چیک کریں</h2>
-<p>متوقع ورک اسپیس اور کلید، ٹیلیگرام کنکشن، منتخب ذرائع اور نئے پیغام کی گرفتاری کی تصدیق کریں۔ محفوظ شدہ MTProto حالت اور catch-up مدد ان اپ ڈیٹس کو بازیاب کرنے میں مدد کرتی ہے جو ٹیلیگرام اب بھی برقرار رکھتا ہے۔ یہ ہر ختم شدہ اپ ڈیٹ یا گرفتاری سے پہلے حذف شدہ ترمیم کو دوبارہ تشکیل نہیں دے سکتے۔</p>
-<p class="callout">کنٹینر کی صحت کا مطلب ہے کہ ویب سرور جواب دے رہا ہے۔ جمع اور بیرونی اشاعت کا جائزہ لینے کے لیے ایک کنٹرول شدہ پیغام اور ایک ویٹنس چیک استعمال کریں۔</p>
+<p>ورک اسپیس اور کلید، کنکشن، ذرائع اور نئے پیغامات کی آمد جانچیں۔ TgWitness وہی پورا کرتا ہے جو Telegram کے پاس اب بھی ہے، وہ سب نہیں جو بند رہنے کے دوران ہوا۔</p>
+<p class="callout">"healthy" کنٹینر کا مطلب ہے ویب سرور جواب دیتا ہے۔ جمع کرنا کام کر رہا ہے یا نہیں، ٹیسٹ پیغام اور گواہ بتائیں گے۔</p>
 <h2 id="public">صرف وہی شائع کریں جو آپ کا ارادہ ہو</h2>
-<p>نفاذ کے حوالے میں HTTPS کی مثالیں، مستقل حجم کے احکامات، اپ ڈیٹ اور بحالی کے مراحل شامل ہیں۔ نفاذ کے لیے Docker کے احکامات فراہم کیے گئے ہیں؛ موجودہ <a href="../reference/verification/">توثیق ریکارڈ</a> ان ماحول کی نشاندہی کرتا ہے جو حقیقت میں آزمائے گئے ہیں۔</p>
+<p>HTTPS، والیومز، اپ ڈیٹس اور بحالی ڈیپلائمنٹ حوالے میں ہیں۔ جو واقعی ٹیسٹ ہوا: <a href="../reference/verification/">توثیقی ریکارڈ</a>۔</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">مکمل حوالہ ←</a><a class="next-guide" href="../troubleshooting/"><span>اگلا قدم</span><strong>پتہ لگائیں کہ کیا غلط ہوا ←</strong></a><p>یہ رہنما موجودہ نفاذ کو بیان کرتے ہیں۔ توثیق کے نتائج اور باقی ماندہ خلائیں علیحدہ طور پر دستاویزی شکل میں درج ہیں۔ <a href="../reference/verification/">کیا جانچا گیا ہے ←</a></p></footer>
 </main>

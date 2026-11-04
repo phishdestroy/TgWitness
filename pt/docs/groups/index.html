@@ -32,12 +32,12 @@
 <nav class="breadcrumbs" aria-label="Guias"><a href="../../">Página inicial</a> <span aria-hidden="true">/</span> <a href="../">Documentação</a> <span aria-hidden="true">/</span> <span aria-current="page">Gerenciar um grupo de contas</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">O que foi testado →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Pesquisar na documentação</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Experimente “proxy”, “cadeia de hash”, “token” ou “testemunha”…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pesquisa clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Digite uma palavra para pesquisar nos guias e na referência. A pesquisa é realizada diretamente no seu navegador.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Documentação / 13</p><h1>Gerenciar um grupo de contas</h1><p class="guide-outcome">Gerencie várias contas de coleta simultaneamente, mantendo distintos os registros e a identidade de assinatura de cada conta.</p>
-<p>Um grupo de contas reúne o status da conexão, controles de observação, configurações compartilhadas e exportações em uma única visualização de trabalho. Isso é útil quando várias contas abrangem a mesma investigação ou precisam de uma configuração operacional consistente.</p>
+<article class="guide-content"><p class="eyebrow">Documentação / 13</p><h1>Gerenciar um grupo de contas</h1><p class="guide-outcome">Use várias contas juntas, cada uma ainda com seus registros e sua chave.</p>
+<p>Um grupo reúne em uma tela o status de conexão, iniciar/pausar, configurações compartilhadas e exportações. Útil quando várias contas trabalham no mesmo caso.</p>
 
 <h2 id="overview">Abrir a visão geral do grupo</h2>
-<p>Em <strong>“Contas”</strong>, abra o grupo. Cada conta exibe seu status de observação, rota de conexão, a latência mais recente da rota medida quando uma verificação atual foi bem-sucedida e a última mensagem salva. Os links <strong>“Precisa de atenção”</strong> indicam as contas que requerem ação; <strong>“Corrigir”</strong> abre o espaço de trabalho e o controle relevantes.</p>
-<p><strong>As opções “Iniciar tudo”</strong> e <strong>“Pausar tudo”</strong> são aplicadas às contas elegíveis após a confirmação. <strong>As configurações de grupo</strong> compartilham as configurações selecionadas; as contas com valores próprios os mantêm até que você opte por substituí-los.</p>
+<p>Abra o grupo em <strong>Contas</strong>. Cada conta mostra estado, rota, latência e última mensagem salva. <strong>Precisa de atenção</strong> lista as que estão com problema e <strong>Corrigir</strong> leva direto até lá.</p>
+<p><strong>Iniciar todas</strong> / <strong>Pausar todas</strong> perguntam antes de agir. As <strong>Configurações do grupo</strong> são compartilhadas, mas os valores próprios de uma conta ficam até você substituí-los.</p>
 
 <section class="workflow-lab" data-workflow="groups" aria-labelledby="groups-example-title">
   <h3 id="groups-example-title">Revisar uma alteração de rota em um grupo</h3>
@@ -59,15 +59,15 @@
 </section>
 
 <h2 id="route">Altere o fluxo incluindo uma etapa de revisão</h2>
-<ol><li>Selecione <strong>“Alterar a rota do grupo</strong>” e, em seguida, escolha o tipo de conexão e as configurações.</li><li>Selecione <strong>a opção “Revisar</strong>”. Revise as contas listadas e suas substituições de rota individuais.</li><li>Selecione <strong>“Preparar e verificar</strong>”. A verificação utiliza um transporte novo do Telegram; as rotas HTTP compatíveis também relatam sua verificação de saída HTTPS.</li><li>Selecione <strong>“Aplicar conexão marcada”</strong> e verifique o resultado de cada conta. A observação em andamento é retomada onde o aplicativo for bem-sucedido; contas inativas permanecem inativas.</li></ol>
-<p>A latência descreve o tempo medido para o estabelecimento da conexão do Telegram. Uma verificação do IP de saída descreve essa rota no momento da verificação registrada. A autorização da conta e o estado da observação possuem seus próprios indicadores; uma alteração no grupo pode resultar em desfechos diferentes para cada conta.</p>
+<ol><li><strong>Mudar a rota do grupo</strong>, escolha o tipo e as configurações.</li><li><strong>Revisar seleção</strong>: quais contas mudam e quais têm rota própria.</li><li><strong>Preparar e verificar</strong> testa uma conexão nova com o Telegram e, quando dá, o IP de saída.</li><li><strong>Aplicar conexão verificada</strong> e veja cada resultado. Contas rodando continuam; as paradas seguem paradas.</li></ol>
+<p>Latência é o tempo para estabelecer a conexão com o Telegram; o IP de saída é o que a rota mostrou na verificação. Os resultados podem variar por conta.</p>
 
 <h2 id="shared-chats">Use acesso sobreposto</h2>
-<p><strong>A opção “Bate-papos em várias contas”</strong> exibe as fontes compartilhadas e a cobertura de observação disponível na área de trabalho. Canais e supergrupos elegíveis podem usar <strong>a opção “Exportar com … contas”</strong> para dividir a aquisição do histórico de um bate-papo. Bate-papos privados e grupos comuns permanecem na conta inicial, pois os números das mensagens pertencem ao histórico dessa conta.</p>
+<p><strong>Chats que várias contas veem</strong> lista as fontes compartilhadas e sua cobertura. Canais e supergrupos podem ser exportados por várias contas ao mesmo tempo com <strong>Exportar com … contas</strong>. Chats privados e grupos básicos não: lá os números de mensagem são por conta.</p>
 
 <h2 id="export-group">Exportar o grupo como um pacote</h2>
-<p><strong>O “Export Group”</strong> cria um arquivo ZIP contendo a exportação assinada de cada conta e uma lista assinada desses arquivos. As identidades e impressões digitais originais do espaço de trabalho permanecem disponíveis para verificação. Elabore uma narrativa entre contas utilizando essas referências; uma única linha do tempo combinada ainda é montada separadamente.</p>
-<p>Continue com <a href="../reports/">o design do relatório</a>, <a href="../case-board/">um Case Board dentro de um espaço de trabalho</a> ou <a href="../exports/">a verificação de exportação</a>.</p>
+<p><strong>Exportar grupo</strong> gera um ZIP com a exportação assinada de cada conta e uma lista assinada delas. Cada uma mantém sua impressão digital para verificação. A linha do tempo unificada você ainda monta.</p>
+<p>Próximo: <a href="../reports/">relatórios</a>, <a href="../case-board/">Case Board</a>, <a href="../exports/">verificar exportações</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">Referência completa →</a><a class="next-guide" href="../cases/"><span>Próxima etapa</span><strong>Investigue em todos os chats →</strong></a><p>Estes guias descrevem a implementação atual. Os resultados da validação e as lacunas remanescentes estão documentados separadamente. <a href="../reference/verification/">O que foi testado →</a></p></footer>
 </main>

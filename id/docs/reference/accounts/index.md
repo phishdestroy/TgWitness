@@ -241,20 +241,6 @@ Anggota berbagi pengaturan grup; sebuah akun dapat mempertahankan nilai-nilainya
 
 **Akun → Keluar dari Telegram** (dengan pemantauan ditangguhkan) meminta Telegram untuk mengakhiri sesi, sehingga sesi tersebut juga menghilang dari **Pengaturan → Perangkat** akun, dan menghapus sesi tersebut dari brankas ruang kerja. Jurnal, sumber, pengaturan, dan kunci penandatanganan tetap ada, dan jurnal mencatat proses keluar tersebut. Ruang kerja tersebut masih milik akunnya: hanya akun tersebut yang dapat terhubung kembali ke sana. Jika Telegram tidak merespons, sesi tersebut tetap dihapus di sini dan panel akan menampilkannya; akhiri sesi tersebut di Telegram melalui **Pengaturan → Perangkat**.
 
-## Mengonversi sesi Telethon secara offline
-
-Panel ini mengimpor berkas `.session` secara langsung. Untuk konversi offline ke berkas StringSession, jalankan perintah berikut dari folder proyek:
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-Konverter ini hanya membaca file Telethon SQLite (hingga 64 MiB), tidak pernah mengubah data masukan, tidak melakukan permintaan jaringan, dan menolak untuk menimpa berkas keluaran yang sudah ada.
-
 ## Menjaga keamanan berkas akun
 
 - Perlakukan setiap `.session`, TData ZIP, StringSession, Auth Key, dan JSON akun seperti kata sandi. TgWitness menyimpan otorisasi yang diimpor di dalam brankas terenkripsinya; Anda dapat menghapus file aslinya setelahnya.

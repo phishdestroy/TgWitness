@@ -138,11 +138,6 @@ tidak akan menghasilkan cap waktu.</li>
 <p>Verifikasi yang berhasil menetapkan integritas relatif terhadap kunci pengumpul tepercaya
 dan batas yang dipertahankan. Lihat <a href="#verification-scope">ruang lingkup verifikasi</a> untuk
 asumsi kepercayaan dan <a href="../verification/">hasil validasi</a> dari pemeriksaan yang dilakukan.</p>
-<p>Pemberitahuan yang dikirim melalui Apprise membantu operator memantau aktivitas ruang kerja dan obrolan.
-Pemberitahuan tersebut berisi nama dan jumlah; kutipan pesan yang dihapus dan diedit bersifat opsional
-dan dinonaktifkan secara default. Gunakan jurnal yang ditandatangani dan ekspor untuk catatan yang disimpan.
-Dengan proxy ruang kerja, pemberitahuan menggunakan rute yang sama; layanan yang tidak dapat menggunakan
-proxy tersebut, serta rute MTProxy, akan ditolak.</p>
 <h2 id="handover-extract">Cuplikan serah terima<a class="anchor" href="#handover-extract" aria-label="Tautan ke bagian ini">#</a></h2>
 <p>Sebuah berkas ZIP yang ditandatangani berisi seluruh jurnal ruang kerja. Ketika pengadilan, pengacara, atau unit penanganan pelanggaran hanya memerlukan
 beberapa obrolan, periode tertentu, atau orang-orang tertentu, <strong>menu Ekspor → Ekstrak Serah Terima</strong> akan menyiapkan salinan yang dipersempit
@@ -226,12 +221,6 @@ filter, peserta, indikator, detail rekaman, serta pilihan JSON/CSV tanpa memerlu
 --evidence ARCHIVE.zip</code> untuk membandingkannya dengan arsip yang ditandatangani.
 Verifikator memeriksa ID laporan, kunci penandatanganan, batas arsip, dan setiap item yang dipilih; item yang diedit,
 hilang, dan duplikat akan ditolak. Catatan pemilihan dan waktu pembuatan tetap menjadi metadata yang tidak ditandatangani.</p>
-<p>Ekspor arsip saat ini menyimpan potongan-potongan penampil dalam <code>viewer/*.html</code>. Setiap potongan dimuat dalam bingkai sandboxed
-dengan skrip yang diizinkan tetapi <strong> tanpa akses asal yang sama </strong>, dan memposting teks JSON-nya ke laporan.
-Laporan memeriksa sumber pesan dan SHA-256-nya terhadap deskriptor yang ditandatangani sebelum ditampilkan.
-CSP laporan itu sendiri hanya mengizinkan skrip aplikasi yang telah di-hash. Data yang hilang dapat dipulihkan dengan
-memilih ZIP yang sesuai di tab Periksa; data yang dibaca dari ZIP diurai tanpa dieksekusi.
-Laporan yang diekspor sebelumnya tetap mempertahankan penampil tertanamnya sendiri dan tetap dapat diverifikasi.</p>
 <p>Kesenjangan nomor pesan hanya ditampilkan untuk umpan obrolan yang lengkap, tidak difilter, dan disusun secara ascending. Menyembunyikan suatu
 kategori atau kegagalan memuat potongan data tidak boleh mengubah baris yang dihilangkan menjadi bukti adanya pesan yang hilang
 . Penyorotan pencarian diterapkan pada teks biasa sebelum proses escaping HTML, dengan mempertahankan markup literal.</p>
@@ -244,20 +233,6 @@ catatan format data dalam bahasa laporan, diikuti dengan panduan lengkap dalam b
 file-file yang tercantum di dalamnya, tidak termasuk file itu sendiri, <code>manifest.json</code>, dan <code>manifest.sig</code>; manifest yang ditandatangani
 juga mencakup <code>SHA256SUMS</code>. Pertahankan ZIP asli tanpa perubahan dan simpan file kerja di luar
 folder yang diekstrak. Laporan PDF mencakup penanda bagian dan identifikasi kasus/laporan pada halaman-halaman selanjutnya.</p>
-<p>Pengaturan laporan disimpan per ruang kerja. Bahasa laporan dapat mengikuti bahasa panel atau ditetapkan secara tetap;
-bahasa yang ditentukan secara eksplisit pada permintaan ekspor akan menggantikan pilihan tersebut hanya untuk ekspor tersebut. Setiap bahasa panel
-diterima, termasuk empat bahasa yang ditulis dari kanan ke kiri.</p>
-<p>Tombol peralihan transkrip jurnal mengontrol penampil HTML dan transkrip PDF. Catatan lengkap JSON merupakan
-opsi detail HTML: saat diaktifkan, penampil menampilkan catatan yang diekspor secara tepat, termasuk
-catatan yang dipersingkat dalam proses serah terima. Menonaktifkannya tidak mengubah berkas jurnal yang sah. Pratinjau
-foto berlaku untuk obrolan dan jurnal HTML. Rangkaian detak jantung yang berurutan dapat diciutkan tanpa
-menghapus catatan; memperluas rangkaian yang panjang akan memuat baris-barisnya secara bertahap.</p>
-<p><code>part_size</code> adalah jumlah item maksimum per berkas data penampil (500–100.000), dan ukuran transkrip maksimum
-yang disertakan dalam PDF. Potongan data penampil juga dibagi berdasarkan batas data 16 MiB. Transkrip PDF yang lebih panjang
-dihilangkan dengan penunjuk eksplisit ke berkas sumber yang ditandatangani dan penampil HTML. Laporan HTML yang berdiri sendiri
-menampung paling banyak 20.000 item atau 32 MiB data item; jika melebihi batas tersebut, laporan tersebut melepaskan item-item tersebut dan
-mengarahkan pembaca ke arsip. Batasan tampilan ini tidak pernah memotong berkas sumber yang ditandatangani.
-Pengaturan font PDF menggabungkan font CJK jika diperlukan: font bahasa Mandarin saja mungkin tidak memiliki karakter Hangul Korea.</p>
 <h3 id="the-chat-at-export-time">Percakapan pada saat ekspor<a class="anchor" href="#the-chat-at-export-time" aria-label="Tautan ke bagian ini">#</a></h3>
 <p>Ekspor obrolan mencatat apa yang dikatakan Telegram tentang obrolan tersebut saat ekspor dimulai: label milik Telegram
 sendiri (<code>scam</code>, <code>fake</code>, <code>restricted</code> beserta alasannya, <code>verified</code>), nama pengguna, deskripsi, jumlah
@@ -471,10 +446,6 @@ tidak akan mempublikasikan file yang dipulihkan. Pemeriksaan retensi membandingk
 yang dikembalikan dan tanggalnya dengan batas waktu yang dikirim saat pengunggahan (toleransi pembulatan satu detik). Batas waktu yang telah kedaluwarsa,
 tidak valid, atau dipersingkat tidak dianggap terverifikasi. Status tersebut melaporkan objek yang diambil sampelnya
 yang retensinya dibaca kembali untuk proses pengunggahan tersebut.</p>
-<p>Kemajuan penyalinan terbatas pada tujuan dan kunci enkripsi. Mengubah titik akhir, bucket,
-atau awalan akan memulai penyalinan lengkap jurnal, media, dan titik pemeriksaan yang disimpan secara lokal ke
-tujuan tersebut. Kemajuan lama yang tidak termasuk dalam cakupan tetap dipertahankan tetapi akan diputar ulang satu kali setelah pemutakhiran. Ekspor riwayat
-obrolan yang telah dihapus dari kotak keluar lokal tetap berada di tujuan sebelumnya.</p>
 <p>Media lokal yang hilang atau rusak dilaporkan sebagai kesalahan pada tahap tersebut dan kursor media tetap berada di
 depan media tersebut, sehingga file tersebut akan dicoba lagi pada tahap berikutnya; file, titik pemeriksaan, dan ekspor setelahnya tetap
 disalin. Pemeriksaan pemulihan
@@ -543,9 +514,6 @@ tersebut direkam serta setiap sesi baru dan yang telah berakhir. Ia hanya membac
 <p>Apa yang tidak mereka tunjukkan: drand hanya membuktikan urutan catatan berdasarkan waktu publik,
 dan daftar perangkat merupakan pernyataan Telegram melalui pengumpul, yang ditandatangani oleh pengumpul
 seperti halnya setiap catatan lainnya.</p>
-<p>Diuji pada 1 November 2026: <code>tools/check_evidence_witnesses.py --live</code> menulis putaran nyata dari
-<code>drand.cloudflare.com</code>, mengekspor jurnal, dan mengonfirmasi putaran tersebut dengan <code>drand.cloudflare.com</code>
-serta <code>api.drand.sh</code>; daftar perangkat dijalankan terhadap jawaban Telegram yang disimulasikan, bukan akun nyata.</p>
 <p><strong> Log Cloudflare Gateway </strong> (<code>cloudflare.gateway_dns</code>). Untuk server yang melakukan resolusi melalui
 Cloudflare Gateway (<a href="../high-assurance/#cloudflare-as-an-outside-witness"> Gateway DNS </a>), setiap
 salinan menyalin apa yang dicatat Gateway sejak salinan sebelumnya: satu catatan per jendela waktu maksimal tiga

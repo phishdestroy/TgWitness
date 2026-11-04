@@ -112,14 +112,6 @@
     حاويات Linux على نظام Windows. تقوم الحاوية بتثبيت
     تبعيات Python الخاصة بها؛ ولا يحتاج المضيف إلى تثبيت Python منفصل.</li>
 </ul>
-<p>استخدم تخزينًا محليًّا دائمًا لدليل البيانات. خطط للسعة بناءً على عدد الرسائل،
-والملفات الوسائطية، ونمو سجل WAL، وعمليات التصدير والنسخ الاحتياطي؛ فلا توجد مواصفات دنيا عالمية قائمة على الأدلة
-للسعة القرصية/ذاكرة الوصول العشوائي لكل حمل عمل. قد تتطلب بنى وحدة المعالجة المركزية وإصدارات Python
-التي تفتقر إلى عجلات التبعية المتوافقة أدوات بناء إضافية و
-تأهيلها الخاص. كلمة «قابل للنقل» لا تعني دعمًا شاملاً لجميع أنظمة التشغيل أو الأجهزة.</p>
-<p>تم التحقق محليًّا من Windows 11/Python 3.12. أما تعريفات Linux/macOS/الحاويات وCI
-فقد تم توفيرها ولكن لم يتم تنفيذها على مضيف التطوير هذا. انظر
-<a href="../verification/">ملف VERIFICATION.md</a> لمعرفة النطاق الدقيق.</p>
 <h2 id="local-computer">جهاز كمبيوتر محلي<a class="anchor" href="#local-computer" aria-label="رابط لهذا القسم">#</a></h2>
 <p>استخدم <code>Start.cmd</code> على نظام Windows أو <code>sh start.sh</code> على أنظمة Linux/macOS. يقوم <code>scripts\Setup.cmd</code> أو
 <code>sh start.sh --setup-only</code> بإعداد
@@ -132,7 +124,6 @@
 <code>--port</code>. لا يقوم الفحص بتثبيت الحزم، أو إنشاء سجل، أو الاتصال بـ Telegram؛
 وهو ليس تقييمًا للسلامة أو التغطية. يقوم برنامج Startup بالتحقق بشكل منفصل
 من السجلات الموجودة. كما يتجنب <code>python start.py --help</code> التثبيت.</p>
-<p>الخيارات:</p>
 <p>بعد استخدام start.py، قم بتشغيل الأوامر المساعدة باستخدام <code>.venv\Scripts\python.exe</code> في
 نظام Windows أو <code>.venv/bin/python</code> في Linux/macOS، أو قم بتنشيط تلك البيئة أولاً.
 تفترض الأمثلة <code>python -m ...</code> أدناه أن البيئة نشطة.</p>
@@ -181,9 +172,6 @@
 مجلد جديد وانسخ مجلد <code>data</code> إليه.</p>
 <p>قم بتثبيتها بنفسك على نظام Windows 64 بت باستخدام Python 3.12:</p>
 <pre><code class="language-sh">python tools/build_portable.py</code></pre>
-<p>يقوم المُنشئ بالتحقق من المجموع الاختباري لوقت التشغيل، وتثبيت التبعيات المقيدة في
-الحزمة، وتشغيل فحص الجاهزية باستخدام المُترجم المدمج، وكتابة ملف ZIP
-والمجموع الاختباري إلى <code>dist/</code>.</p>
 <h2 id="container">الحاوية<a class="anchor" href="#container" aria-label="رابط لهذا القسم">#</a></h2>
 <pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
 <p>يؤدي هذا إلى إنشاء وحدة تخزين دائمة ذات اسم لمجلد /data.
@@ -242,9 +230,6 @@ docker compose logs witness                     # witness key fingerprint</code>
 على عنوان HTTPS
 لأداة التجميع؛ لا يحتوي هذا الملف سوى على «الشاهد».</p>
 <h2 id="install-a-published-image">تثبيت صورة منشورة<a class="anchor" href="#install-a-published-image" aria-label="رابط لهذا القسم">#</a></h2>
-<p>يصبح هذا متاحًا بعد إتمام <a href="#automated-github-releases">سير عمل الإصدار</a>
-بنجاح وتكوين حزمة GHCR العامة. لا يتم ترميز اسم/مالك المستودع بشكل ثابت
-في شجرة المصدر هذه. استخدم الصورة الموضحة في ملخص سير عمل ذلك الإصدار.</p>
 <p>انسخ <code>deploy/env.example</code> إلى <code>.env</code>. اضبط <code>TGWITNESS_IMAGE</code> على الإصدار المنشور، باستخدام
 مسار المستودع <strong>بالأحرف الصغيرة</strong>، على سبيل المثال:</p>
 <pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
@@ -305,30 +290,6 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 <p>تحقق من الوصول إلى اللوحة، وهوية الحساب، وحالة المراقبة، والتغطية بعد إجراء
 تحديث. لا تؤدي إعادة التشغيل إلى استعادة تحديثات Telegram الفائتة. قد يتطلب التراجع
 النسخة الاحتياطية السابقة للتحديث إذا غيرت إصدارات مستقبلية تنسيقات التخزين.</p>
-<h2 id="automated-github-releases">إصدارات GitHub الآلية<a class="anchor" href="#automated-github-releases" aria-label="رابط لهذا القسم">#</a></h2>
-<p>يصبح <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">سير عمل الإصدار</a> جاهزًا للاستخدام بعد
-نقل هذا المشروع إلى مستودع GitHub مع تمكين ميزة Actions. ويتم تشغيله عند
-<strong>نشر</strong> إصدار GitHub، بما في ذلك الإصدارات التمهيدية. ولا تؤدي المسودات وعمليات دفع العلامات
-بحد ذاتها إلى نشر الحزم.</p>
-<ol>
-<li>قم بتعيين إصدار الحزمة وسجل التغييرات، ثم انشر إصدارًا مُعلَّمًا بـ <code>v</code>
-    بالإضافة إلى الإصدار الدقيق من <code>pyproject.toml</code>، مثل <code>v0.8.0</code>.</li>
-<li>يقوم سير العمل بالتحقق من صحة العلامة وتشغيل فحوصات Python المشتركة بين أنظمة التشغيل Windows/Linux/macOS،
-    وكذلك فحوصات general/account-import/QR browser، و source-package، و Docker. كما يتم إجراء تثبيت أصلي جديد
-    على جميع أنظمة التشغيل الثلاثة باستخدام Python 3.12.</li>
-<li>بعد اجتياز تلك الفحوصات، يتم إجراء اختبار أولي لصورة ARM64 تحت QEMU، ونشر صور AMD64/ARM64 على <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code> ، وإرفاق ملف ZIP المصدر وملف Python wheel مع ملفات SHA-256 المرفقة بهما. ملف ZIP القابل للنقل على نظام Windows هو نفس الملف الذي تم اختباره من خلال سير عمل الفحوصات؛ ويقوم سير عمل الإصدار بتنزيل ونشر ذلك الملف ومجموعه الاختباري.</li>
-<li>تقوم مهمة أخيرة بتنزيل الحزم الثلاث المنشورة مرة أخرى والتحقق من مجموعاتها الاختبارية. ثم تنشر <code>SHA256SUMS.txt</code> و <code>RELEASE-MANIFEST.json</code> ، مسجلةً الإصدار ومراجعة المصدر وأحجام الموارد. وترفض عمليات التحميل الكتابة فوق موارد الإصدار الموجودة.</li>
-<li>بعد النشر الأول، افتح إعدادات حزمة GHCR واضبط الرؤية
-    على <strong>«عام»</strong> إذا كان المقصود هو سحب الصور بشكل مجهول. لا يضمن مستودع المصدر العام
-    بمفرده أن تكون حزمة الحاوية عامة. يجب أن تسمح سياسات المؤسسة
-    بنشر الحزمة. يستخدم سير العمل <code>GITHUB_TOKEN</code>؛ ولا ينبغي أن يتضمن المستودع
-    كلمة مرور التسجيل أو بيانات اعتماد VPS.</li>
-</ol>
-<p>لم يتم إثبات نجاح سير العمل عن بُعد من خلال هذا الإعداد المحلي. محاكاة ARM64
-هي مجرد اختبار أولي، وليست تأهيلًا للأجهزة الأصلية أو لتطبيق Telegram في الوقت الفعلي.
-يؤدي هذا إلى أتمتة عملية تجميع الإصدارات؛ ولا يزال تشغيل الخادم يتطلب الأمر Compose
-ومتطلباته الأساسية المتعلقة بالمجال/المضيف. لا يتم ترقية الخوادم الحالية أو إعادة تشغيلها تلقائيًا
-عند نشر إصدار جديد.</p>
 <h2 id="remote-server">خادم بعيد<a class="anchor" href="#remote-server" aria-label="رابط لهذا القسم">#</a></h2>
 <p>حافظ على ربط الخدمة بـ loopback واستخدم نفق SSH، أو قم بإنهاء HTTPS عند
 بروكسي عكسي. ملف Compose الأساسي محلي فقط؛ بينما توفر طبقة
@@ -389,11 +350,6 @@ signing.enc و credentials.enc وقاعدة بيانات SQLite وملفات WAL
 إذا تجاوز TGWITNESS_TOKEN الرمز المميز الذي تم إنشاؤه، فاستخدم ملفًا محميًّا بشكل منفصل
 يحتوي على تلك القيمة النشطة: لا يتم إعادة كتابة ملف panel-token.txt بواسطة التجاوز.
 يُعد SHA-256 الخاص بالأمر مجرد مجموع اختباري للنقل؛ قم بالتحقق بشكل مستقل من ملف ZIP الموقّع.</p>
-<p>تظل ملفات التصدير من الخادم داخل مجلد <code>temporary-exports/</code> الخاص بكل مساحة عمل.
-تقوم العمليات الناجحة بمسح ملفاتها. أما عمليات التصدير المتوقفة فيتم إزالتها عند
-التشغيل التالي لمساحة العمل مع الاحتفاظ بقفل المثيل الحصري الخاص بها. هذا الدليل جزء
-من نموذج التهديدات/السعة التخزينية؛ استخدم وحدة تخزين بيانات مشفرة. عمليات النقل على نطاق الإنتاج
-التي تصل إلى عدة غيغابايت لا تزال تتطلب تأهيلًا على نظامك المستهدف.</p>
 <p>تعرض اللوحة الوسائط الموضوعة في قائمة الانتظار/التي فشلت، وأقدم الوسائط المعلقة، ومساحة القرص المتوفرة، و
 عمليات إيقاف طلبات Telegram مؤقتًا، والمصادر التي لم يتم تأكيد الوصول إليها. هذه التشخيصات ليست
 مراقبة كاملة للتسليم من البداية إلى النهاية. تشترك مساحات العمل في عملية واحدة؛ لذا يمكن للحساب المثير للضوضاء
@@ -401,22 +357,11 @@ signing.enc و credentials.enc وقاعدة بيانات SQLite وملفات WAL
 والتأهيل الكامل للنشر قائمة. يتم توثيق الوصول المحدود إلى اللوحة
 في <a href="../access/">قسم الوصول والأذونات؛</a> بينما يتم تغطية نقاط الفحص المستقلة في
 <a href="../witness/">دليل الشهود</a>.</p>
-<h2 id="connection-and-protection-options">خيارات الاتصال والحماية<a class="anchor" href="#connection-and-protection-options" aria-label="رابط لهذا القسم">#</a></h2>
-<p>مسارات الاتصال خاصة بكل مساحة عمل ويجب تهيئتها قبل التفويض.
-يستخدم SOCKS5/HTTP CONNECT التبعية المثبتة python-socks. MTProxy يستخدم
-نظام النقل الوسيط العشوائي التجريبي من Telethon؛ ولا يتم دعم أسرار TLS ee المزيفة.
-يعتمد التراجع المباشر على <a href="../connection/#ip-modes">وضع IP</a> المحدد: <strong>«إخفاء العنوان»</strong> يرفضه؛ <strong>أما «مباشر» كملاذ أخير</strong> فيسمح به بعد فترة تأخير. يسمح <strong>«الخادم خلف نفق أو VPN»</strong> بالمسارات المباشرة ولكنه لا ينشئ شبكة VPN. هذه ليست سياسة شبكة على مستوى النظام بأكمله.</p>
-<p>بالنسبة للتثبيتات الجديدة، يشير TGWITNESS_VAULT_KEY_FILE إلى ملف مفتاح رئيسي عشوائي محمي بشكل منفصل.
-قم بتركيبه على أنه للقراءة فقط خارج /data في حاوية. احتفظ ببيانات التعريف العامة
-لملف salt الخاص بـ vault.external.json مع كل مساحة عمل والمفتاح الرئيسي بشكل منفصل.
-تتطلب الخزائن المحلية الحالية عملية ترحيل مخطط لها؛ ولا يؤدي تعيين هذا المتغير إلى
-تحويلها تلقائيًّا. لا يتم تشفير تخزين الرسائل/الوسائط وعمليات التصدير بواسطة التطبيق.
-استخدم وحدات تخزين مشفرة ومساحة تخزين مؤقتة خاصة كافية عند الحاجة.</p>
 <p>إجراءات تفصيلية: <a href="../connection/">الاتصال/الأمان</a> و
 <a href="../operations/">أوضاع التشغيل</a>.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">تحرير هذه الصفحة على GitHub ↗</a><a class="next-guide" href="../high-assurance/"><span>الخطوة التالية</span><strong>نشر عالي الأمان ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="../verification/">ما تم اختباره ←</a></p></footer>
 </main>
-<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#choose-an-installation">اختر طريقة التثبيت</a><a href="#installation-requirements">متطلبات التثبيت</a><a href="#local-computer">جهاز كمبيوتر محلي</a><a href="#windows-portable-package">حزمة قابلة للتشغيل على نظام ويندوز</a><a href="#container">الحاوية</a><a href="#install-a-published-image">تثبيت صورة منشورة</a><a href="#automatic-https-on-a-server">تشغيل HTTPS تلقائيًا على الخادم</a><a href="#updates-and-backups">التحديثات والنسخ الاحتياطية</a><a href="#automated-github-releases">إصدارات GitHub الآلية</a><a href="#remote-server">خادم بعيد</a><a href="#restart-and-gaps">إعادة التشغيل والثغرات</a><a href="#backup-restore-and-capacity">النسخ الاحتياطي والاستعادة والسعة</a><a href="#connection-and-protection-options">خيارات الاتصال والحماية</a></aside>
+<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#choose-an-installation">اختر طريقة التثبيت</a><a href="#installation-requirements">متطلبات التثبيت</a><a href="#local-computer">جهاز كمبيوتر محلي</a><a href="#windows-portable-package">حزمة قابلة للتشغيل على نظام ويندوز</a><a href="#container">الحاوية</a><a href="#install-a-published-image">تثبيت صورة منشورة</a><a href="#automatic-https-on-a-server">تشغيل HTTPS تلقائيًا على الخادم</a><a href="#updates-and-backups">التحديثات والنسخ الاحتياطية</a><a href="#remote-server">خادم بعيد</a><a href="#restart-and-gaps">إعادة التشغيل والثغرات</a><a href="#backup-restore-and-capacity">النسخ الاحتياطي والاستعادة والسعة</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>مفتوحة المصدر · تعمل على جهازك</span><a href="../../../../LICENSE">رخصة MIT</a><a href="../notice/">إشعار المشغل</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">الأمن</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "في انتظار رسالة", "Step through a fictional send, edit and delete.": "تتبع خطوات عملية إرسال وتعديل وحذف افتراضية.", "No observations yet. Start the sequence or advance one event.": "لا توجد ملاحظات حتى الآن. ابدأ التسلسل أو انتقل إلى الحدث التالي.", "Meet at 10:00": "نلتقي الساعة 10:00", "A new message is visible in the chat.": "تظهر رسالة جديدة في الدردشة.", "Record 1 appended: the collector observed the original message.": "تم إرفاق السجل رقم 1: لاحظ المجمع الرسالة الأصلية.", "Meet at 11:00": "نلتقي الساعة 11:00", "The current text changes. The earlier observation stays.": "النص الحالي قد يتغير. أما الملاحظة السابقة فتبقى كما هي.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "تم إرفاق السجل 2: التعديل يمثل ملاحظة جديدة. ولا يزال السجل 1 يحتوي على النص الأصلي.", "Message deleted": "تم حذف الرسالة", "The message has disappeared from the chat view.": "لقد اختفت الرسالة من شاشة الدردشة.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "تم إرفاق السجل رقم 3: يتم الاحتفاظ بإشعار الحذف جنبًا إلى جنب مع كلا النسختين اللتين تمت ملاحظتهما.", "0 records": "0 سجل", "1 record": "سجل واحد", "2 records": "سجلان", "3 records": "3 سجلات", "Complete / {n} of 3": "كامل / {n} من 3", "Step / {n} of 3": "الخطوة / {n} من 3", "Pause": "توقف مؤقت", "Replay sequence": "تسلسل إعادة التشغيل", "Play sequence": "تشغيل التسلسل", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "يتوفر نموذج ثابت. لحساب التجزئات (هاش) تفاعليًّا، افتح هذه الصفحة عبر HTTPS أو معاينة localhost مع دعم Web Crypto.", "No record supplied": "لم يتم تقديم أي سجل", "Tail removed": "تم حذف الجزء الأخير", "≠ saved hash": "≠ التجزئة المحفوظة", "Rebuilt · different hash": "أعيد بناؤه · هاش مختلف", "= saved hash": "= التجزئة المحفوظة", "Same length and matching head.": "نفس الطول وعنوان مطابق.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تتطابق جميع التجزئات الحسابية الثلاثة مع التجزئات المحفوظة. تتوافق هذه العينة مع الحد المحدد المتمثل في الاحتفاظ بثلاثة سجلات.", "Same saved head; the journal prefix fails verification.": "نفس العنوان المحفوظ؛ لم تجتز بادئة السجل عملية التحقق.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "لم يعد السجل رقم 2 مطابقًا لـ«هاش»ه المحفوظ. قد يفوت هذا الأمر عند التحقق من الرأس الأخير المخزن فقط؛ لذا يقوم المُحقق بفحص كل سجل.", "Head differs from the retained checkpoint.": "يختلف العنوان عن نقطة التحقق التي تم الاحتفاظ بها.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ترتبط التجزئات المعاد بناؤها ببعضها البعض، لكن الرأس النهائي قد تغير. نقطة التحقق المحتفظ بها ترفض هذا السجل. كما أن التوقيعات الأصلية ستفشل أيضًا في السجلات التي تم تغييرها.", "Too short: 2 supplied records \u003c 3 retained records.": "قصير جدًا: 2 سجلات مقدمة \u003c 3 سجلات محفوظة.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "لا يزال التوافقيان المتبقيان متطابقين. ويكشف نقطة التحقق المحتفظ بها عن الجزء المفقود في نهاية السلسلة. وبدون ذلك الحد السابق، لما كشفت هذه البادئة الأقصر وحدها عن هذا الحذف.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "حساب التجزئة غير متاح في هذا المتصفح. تظل الصيغ والتفسيرات الثابتة أدناه متاحة.", "{n} records": "{n} سجل", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "تم القبول: يزداد العدد، ويتم التحقق من التوقيع، ويتطابق المفتاح. ويحتفظ الشاهد بهذا الحد الجديد.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "التراجع: يُظهر الرد الموقّع عددًا أقل من السجلات مقارنةً بنقطة التحقق الأخيرة المقبولة. تقوم الأداة بتسجيل المشكلة والاحتفاظ بحدود النسخة السابقة المقبولة.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "التفرع (Fork): العدد لم يتغير لكن الرأس يختلف. يقوم الشاهد بتسجيل الخلاف ويحتفظ بالحدود التي تم قبولها سابقًا.", "No answer": "لا توجد إجابة", "boundary unknown": "الحدود غير معروفة", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "عدم الاستجابة: يسجل «الشهود» فشل عملية التحقق. ولا يمكنه تأكيد الحالة الحالية لـ«المجمع». إذا كان «الشهود» لا يزال قادرًا على الوصول إلى واجهة برمجة تطبيقات الروبوت (Bot API) وكانت سياسة النشر الخاصة به تسمح بذلك، فيمكنه نشر هذا الفشل.", "Send {n}": "أرسل {n}", "Edit {n}": "تحرير {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "وقد استوفى كلا الحسابين جميع الملاحظات الست المتوقعة في هذا المثال.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "لا يزال الحساب «ب» قد سجل 6 من أصل 6. استغرق تسجيل إيصالين وقتًا أطول. تعكس نسبة التسجيل وتأخير استلام الإيصالات إجابات مختلفة.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "سجل الحساب «ب» 5 من أصل 6 قبل الموعد النهائي (83.3٪). لا يوجد تأخير مقاس للتعديل المفقود. تصف هذه النتيجة فقط الإجراءات الستة الخاضعة للرقابة.", "not observed by cutoff": "لم يُلاحظ ذلك بحلول الموعد النهائي", "{s} seconds": "{s} ثانية", "Exact values follow in the table.": "ترد القيم الدقيقة في الجدول التالي.", "{s} s": "{s} s", "Not observed": "لم يُلاحظ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "تقدم أربع محادثات ملاحظات مختلفة. اتبع السجلات المصدرية لكل اتصال؛ ولا تنسب منشور القناة إلى المستخدم 71001 دون وجود مرسل محدد.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "يقدم السجلان رقم 146 ورقم 205 نفس معرّف المرسل، 71001. وهذا يربط بين المنشورات الملحوظة لحساب Telegram عبر محادثتين. ولا يحدد هوية شخص حقيقي ولا ينسب المنشور إلى القناة.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "يظهر العنوان pay.example.invalid/new في سجل المجموعة رقم 146، ولوحة مفاتيح الروبوت رقم 173، وتعديل القناة رقم 188، والرسالة الخاصة رقم 205. وجود عنوان متكرر يربط بين المواد؛ لكنه لا يثبت وجود سيطرة مشتركة على تلك الحسابات.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "تحتوي إيصالات الوسائط المكتملة رقم #151 ورقم #209 على قيم SHA-256 كاملة متطابقة في هذه الحالة الافتراضية. قارن بين البايتات الفعلية وسجلات الرسائل المرتبطة بها. لا يحدد الملف المطابق هوية منشئه ولا يثبت هوية من قام بإعادة توجيهه.", "the encrypted off-site copy": "النسخة المشفرة خارج الموقع", "notifications": "الإشعارات", "checkpoint hashes for timestamps": "تجزئات نقاط التحقق (checkpoint hashes) للطوابع الزمنية", "signed checkpoints for the witness": "نقاط تحقق موقعة لـ «TgWitness»", "Switched on in this example": "تم تفعيلها في هذا المثال", "Optional · off by default": "اختياري · معطّل افتراضيًا", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ما يُترك في هذا الجهاز: اتصال Telegram و{list}. لا شيء آخر.", "Default: only the Telegram connection leaves this machine.": "الإعداد الافتراضي: لا يغادر هذا الجهاز سوى اتصال Telegram.", "{done} of {total} done": "{done} من {total} تم إنجازها", "Mark step {n} as done": "وضع علامة «تم» على الخطوة {n}", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "نص", "Copied": "نسخ", "Command copied.": "تم نسخ الأمر.", "Selected — Ctrl/Cmd+C": "تم التحديد — Ctrl/Cmd+C", "Command selected. Copy it manually.": "تم تحديد الأمر. انسخه يدويًّا.", "Command copied to clipboard.": "تم نسخ الأمر إلى الحافظة.", "Select text": "حدد النص", "Clipboard unavailable. Command selected; copy it manually.": "الحافظة غير متاحة. تم تحديد الأمر؛ انسخه يدويًّا.", "A message arrives. The first observation is saved.": "تصل رسالة. يتم حفظ الملاحظة الأولى.", "The time changes. Both captured versions stay.": "يتغير الوقت. وتبقى النسختان المسجلتان كما هما.", "The message disappears. The captured history remains.": "تختفي الرسالة. لكن السجل المسجل يبقى.", "Pause example animation": "إيقاف الرسوم المتحركة التوضيحية مؤقتًا", "Play example animation": "تشغيل مثال للرسوم المتحركة", "Play": "تشغيل", "Full-size workspace screenshot": "لقطة شاشة لمساحة العمل بالحجم الكامل", "Workspace screenshot · fictional data": "لقطة شاشة لمساحة العمل · بيانات خيالية", "Close": "إغلاق", "Close screenshot": "إغلاق لقطة الشاشة", "Scrollable full-size screenshot": "لقطة شاشة كاملة الحجم قابلة للتمرير", "Enlarge: {name}": "تكبير: {name}", "View full size": "عرض بالحجم الكامل", "Step {n} of {total}": "الخطوة {n} من {total}"}</script>

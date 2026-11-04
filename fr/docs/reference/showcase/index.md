@@ -54,12 +54,3 @@ La vérification de la signature et de la cohérence permet de détecter les mod
 Utilisez **« Revoke »** dans le gestionnaire de vitrines ou dans la section **« Accès »** existante pour fermer le lien et mettre fin à toutes ses sessions. Le visiteur efface les enregistrements affichés lorsqu’une requête détecte que l’accès a pris fin. L’expiration et les autorisations sont vérifiées à chaque requête. Les autorisations de vitrine ne peuvent pas être converties en accès standard au panneau sur place ; créez une nouvelle autorisation pour changer de mode.
 
 La page est servie via l’adresse HTTPS existante de l’installation. La publication d’un lien n’ouvre pas de nouveau port, ne crée pas de tunnel et ne modifie pas le DNS. Le code HTML et l’API restent sur l’installation de l’utilisateur. Un visiteur de la vitrine ne peut pas utiliser les API habituelles de message, de profil, de média, d’exportation ou de gestion avec cet accès.
-
-## Tests de régression locaux
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Ces deux fonctionnalités utilisent des enregistrements synthétiques et un serveur HTTP local. Elles ne se connectent pas à Telegram.

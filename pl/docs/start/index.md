@@ -2,11 +2,11 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/start/
 
-Najpierw zapoznaj się z działającym przykładem. Następnie podłącz swoje konto.
+Najpierw rozejrzyj się w demo, potem podłącz własne konto.
 
 ## Zapraszamy do zapoznania się z witryną bez konieczności zakładania konta
 
-Proszę pobrać lub sklonować projekt, zainstalować **Python 3.11 lub nowszą wersję** oraz uruchomić wersję demonstracyjną. Program uruchamiający tworzy środowisko lokalne i instaluje przypisane zależności.
+Pobierz projekt, miej **Pythona 3.11 lub nowszego** i uruchom demo. Resztą zajmie się launcher.
 
 ```
 git clone https://github.com/phishdestroy/TgWitness.git
@@ -25,7 +25,7 @@ cd TgWitness
 sh start.sh --demo
 ```
 
-W przeglądarce otwiera się obszar roboczy zawierający fikcyjne wiadomości. Proszę otworzyć rozmowę, porównać edycję oraz sprawdzić eksport. Tryb demonstracyjny nie łączy się z aplikacją Telegram.
+W przeglądarce otworzy się przestrzeń z wymyślonymi wiadomościami. Otwórz czat, porównaj edycję, zajrzyj do eksportu. Telegram nie bierze w tym udziału.
 
 ![Widok rozmowy w TgWitness wraz z przykładowymi wiadomościami](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
@@ -33,7 +33,7 @@ Przykładowy obszar roboczy. Państwa własny dziennik zostanie utworzony oddzie
 
 ## Załóż własną przestrzeń roboczą
 
-Zakończ proces demonstracyjny, a następnie skorzystaj ze standardowego programu uruchamiającego:
+Zamknij demo, a potem:
 
 ### Windows
 
@@ -47,12 +47,12 @@ Zakończ proces demonstracyjny, a następnie skorzystaj ze standardowego program
 sh start.sh
 ```
 
-Proszę otworzyć lokalny adres wyświetlony przez program uruchamiający. Jeśli pojawi się prośba, proszę wprowadzić **token dostępu do panelu** z lokalnego pliku o nazwie podanej w terminalu. Spowoduje to odblokowanie TgWitness; proces ten jest niezależny od logowania do aplikacji Telegram.
+Otwórz adres pokazany przez launcher i wklej **token dostępu do panelu** ze wskazanego pliku. To token do TgWitness, nie do Telegrama.
 
 ## Zapisz swoją pierwszą wiadomość
 
 1. [Proszę podłączyć dedykowane konto w serwisie Telegram.](https://phishdestroy.github.io/TgWitness/pl/docs/accounts/)
-2. Proszę wybrać grupę lub kanał, do których konto ma dostęp, a następnie rozpocząć obserwację.
-3. Wyślij nową wiadomość w grupie testowej, którą Pan/Pani kontroluje, i sprawdź, czy pojawi się ona w dzienniku.
+2. Wybierz grupę lub kanał i uruchom obserwację.
+3. Wyślij wiadomość w grupie testowej i zobacz, jak pojawia się w dzienniku.
 
 W przypadku instalacji na serwerze proszę postępować zgodnie z instrukcją [„Keep it running](https://phishdestroy.github.io/TgWitness/pl/docs/server/)”.

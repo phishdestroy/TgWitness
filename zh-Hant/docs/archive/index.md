@@ -6,52 +6,52 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/archive/
 
 01**導入歷史紀錄**
 
-將已啟用的來源中的過往訊息載入至工作區。
+將已啟用來源的過往訊息拉進工作區。
 
 02**追蹤消息來源**
 
-搜尋存檔，並開啟每個搜尋結果對應的已儲存訊息。
+搜尋，然後開啟每筆結果背後保存的訊息。
 
 03**確保交接流程清晰明確**
 
-請將您的分析結果另行儲存，並將其旁附的簽名證據一併匯出。
+您的分析放在一個檔案裡，簽名證據放在旁邊。
 
 擷取的紀錄、辨識出的文字與分析師的結論均保持獨立分明。
 
 ## 載入過往訊息
 
-1. 開啟**來源 → 範圍內的聊天室**，檢視已啟用的聊天室並開始觀察。
-2. 選擇「**載入完整歷史紀錄**」。執行時將使用當下選取的來源清單。
-3. 請視需要使用「**暫停歷史紀錄」**與「**繼續歷史紀錄」**功能。重新啟動後，請明確地恢復操作。
-4. 檢查各來源的結果及附件佇列。將已簽名的進度報告與證據匯出檔案一併儲存。
+1. **來源 → 範圍內的聊天室**：檢查已啟用的聊天室，開始觀察。
+2. **載入完整歷史紀錄**。它依照當下的來源清單執行。
+3. 隨時可以**暫停歷史紀錄** / **繼續歷史紀錄**。重新啟動後請手動繼續。
+4. 檢查每個來源的結果和下載佇列，將簽名進度報告與匯出一起保存。
 
-此操作會將可用訊息填滿工作區。按聊天室進行的 HTML/JSON 匯出則屬另一項獨立操作。[歷史紀錄與資料復原詳情](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/history/)。
+這會填滿工作區。單一聊天室的 HTML/JSON 匯出是另一回事。[詳細資訊](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/history/)。
 
 ## 先搜尋，再決定是否使用 AI
 
-1. 開啟**日誌**以進行本地搜尋。選擇工作區，並使用來源及時間篩選條件。
-2. 搜尋短語或網域。開啟符合條件的記錄及其儲存的版本。
-3. 進行 AI 分析時，管理員需在**整合功能**中啟用並設定服務供應商。開啟**查詢檔案庫**，並選擇聊天室及期間。在批准請求前，請審閱**傳送至模型的資料**，並取消勾選不需要的摘錄。
-4. 請檢查回傳的引用資料。將答案儲存為報告，並加入您自己的修訂或註解。
+1. **日誌**在本機搜尋，可依來源和時間篩選。
+2. 搜尋片語或網域，開啟紀錄及其各個版本。
+3. 使用 AI 時，由管理員在**整合功能**中設定服務商。然後**查詢檔案庫**：選擇聊天室和期間，查看**傳送至模型的資料**，取消勾選不該送出的內容。
+4. 檢查引用，將回答儲存為報告，加上您的筆記。
 
-搜尋功能在本地執行，不使用人工智慧。分析報告會保留來源參考與修訂歷史紀錄；這些報告與簽名日誌是分開儲存的。[服務提供者設定與報告](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/)。
+搜尋不需要 AI。報告保存自己的來源和修訂版本，與簽名日誌分開。[服務商設定](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/)。
 
 ## 選擇您所需的連線方式
 
 | 任務 | 開啟 | 設定 |
 | --- | --- | --- |
-| 閱讀來自 AI 客戶端的精選聊天記錄 | **整合功能 → MCP** | [安裝 MCP 擴充套件、發行範圍限定憑證，並連接客戶端](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/) |
-| 識別儲存媒體中的文字 | `media.saved` 記錄 → **識別附件** | [設定本機 Docker 工作節點及所需的語言／模型檔案](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/) |
-| 將事件傳送至 n8n 或 SIEM | **整合功能 → 外發 webhook** | [新增接收者、驗證 HMAC 並對事件 ID 進行去重](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/webhooks/) |
+| 讓 AI 用戶端讀取選定的聊天室 | **整合功能 → MCP** | [安裝 MCP、建立限定範圍的權杖並連線](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/) |
+| 識別儲存媒體中的文字 | `media.saved` 記錄 → **識別附件** | [設定本機 Docker worker](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/) |
+| 將事件傳送至 n8n 或 SIEM | **整合功能 → 外發 webhook** | [新增接收端、驗證 HMAC、去除重複 ID](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/webhooks/) |
 
 **哪些存取憑證該放在哪裡？**
 
-控制面板存取權限僅限於案件審查人員。MCP 連線者將獲得獨立的唯讀存檔憑證。Webhook 接收器使用其專屬的 HMAC 密鑰。所有使用者均無需 Telegram 會話檔案。
+面板存取是給人用的。MCP 有自己的唯讀權杖，webhook 有自己的 HMAC 密鑰。它們都不需要 Telegram 工作階段。
 
 [分享控制面板存取權限](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/access/)或[設定 MCP 客戶端](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/)。
 
 ## 提供資料來源與結論
 
-請將經審核的分析報告與簽署過的證據 ZIP 檔一併保存。該報告闡述您對來源資料的解讀；ZIP 檔則讓收件者能透過獨立可信的指紋與檢查點，核對儲存的紀錄是否正確。
+請將報告放在簽名 ZIP 旁邊。報告是您對來源的解讀，ZIP 才是接收方要驗證的內容。
 
 [匯出與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/) · [完整調查流程指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/cases/)

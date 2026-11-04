@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/
 
 [Open source / v0.8.1](https://phishdestroy.github.io/TgWitness/it/docs/reference/changelog/)
 
-Acquisite i messaggi di Telegram, conservatene le modifiche ed esportate un registro firmato.
+Salvi le chat di Telegram con ogni modifica ed eliminazione e consegni un registro che chiunque può verificare.
 
 [Aprire la demo](https://phishdestroy.github.io/TgWitness/demo/?lang=it)[Guida all’installazione](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=it)
 
-La demo utilizza dati fittizi. Non è richiesto l’accesso a Telegram.
+Dati fittizi, nessun accesso a Telegram.
 
  [Acquisizione con GitHub Actions (anteprima)](https://phishdestroy.github.io/TgWitness/it/docs/capture/) [Copia off-site su S3: configurazione e ripristino](https://phishdestroy.github.io/TgWitness/it/#s3)
 
@@ -34,31 +34,31 @@ Il messaggio scompare. La cronologia acquisita rimane.
 
 ## Ogni modifica registrata. Proprio dove ne avete bisogno.
 
-Esplori l’interfaccia con dati dimostrativi fittizi.
+La vera interfaccia, con dati inventati.
 
 TgWitness / Chat salvateIL VOSTRO SPAZIO DI LAVORO PER L’OSSERVAZIONE
 
 ![Conversazioni Telegram salvate con tema scuro, con le modifiche e i messaggi cancellati acquisiti e conservati nel loro contesto](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
-01 / Chat salvate Una visualizzazione familiare delle conversazioni, con le modifiche e le notifiche di cancellazione acquisite accanto ai messaggi.
+01 / Chat salvate Sembra una chat normale, con modifiche ed eliminazioni proprio accanto ai messaggi.
 
 TgWitness / RegistroAREA DI LAVORO LOCALE
 
 ![Registro contenente i messaggi rilevati, le modifiche, le notifiche di cancellazione e gli eventi coperti](https://phishdestroy.github.io/TgWitness/assets/workspace.png)
 
-02 / Registro: una cronologia consultabile di ciò che il Suo account ha rilevato, comprese le interruzioni.
+02 / Diario Tutto ciò che il Suo account ha visto, ricercabile, lacune comprese.
 
 TgWitness / Cronologia delle modificheAREA DI LAVORO LOCALE
 
 ![Pannello di dettaglio che mette a confronto la versione precedente e quella modificata di un messaggio](https://phishdestroy.github.io/TgWitness/assets/detail.png)
 
-03 / Cronologia delle modifiche: Confrontare le versioni acquisite senza sovrascrivere l’osservazione precedente.
+03 / Cronologia modifiche Versione vecchia e nuova affiancate, niente viene sovrascritto.
 
 TgWitness / Esportazioni firmateAREA DI LAVORO LOCALE
 
 ![Funzionalità di esportazione dell’area di lavoro che offre un file ZIP firmato, JSONL, CSV e un report HTML offline](https://phishdestroy.github.io/TgWitness/assets/exports.png)
 
-04 / Esportazioni firmate: portate con voi il registro, corredato di un manifesto e di un verificatore indipendente.
+04 / Esportazioni firmate Porti con sé il diario, firmato e con il suo verificatore.
 
 Seguire un record salvato attraverso [Case Board](https://phishdestroy.github.io/TgWitness/it/docs/case-board/), [la progettazione del report](https://phishdestroy.github.io/TgWitness/it/docs/reports/) e una [copia condivisa](https://phishdestroy.github.io/TgWitness/it/docs/handover/). [Esaminare i gruppi di account](https://phishdestroy.github.io/TgWitness/it/docs/groups/) nel loro insieme.
 
@@ -66,7 +66,7 @@ Seguire un record salvato attraverso [Case Board](https://phishdestroy.github.io
 
 ### Siete voi a scegliere l’ambito di applicazione.
 
-Chat selezionate, una cartella di Telegram o l’intero account. Uno spazio di lavoro separato per ciascun account.
+Poche chat, una cartella o l’intero account. Ogni account ha il proprio spazio.
 
 [Confronto tra le modalità di raccolta](https://phishdestroy.github.io/TgWitness/it/guides/modes.html#scope)
 
@@ -74,7 +74,7 @@ Chat selezionate, una cartella di Telegram o l’intero account. Uno spazio di l
 
 ### Le modifiche arricchiscono la narrazione.
 
-Le versioni acquisite, le notifiche di cancellazione e le lacune di osservazione rimangono nel registro.
+Versioni, eliminazioni e lacune restano tutte nel diario.
 
 [Consultare la matrice degli eventi](https://phishdestroy.github.io/TgWitness/it/guides/modes.html#events)
 
@@ -82,7 +82,7 @@ Le versioni acquisite, le notifiche di cancellazione e le lacune di osservazione
 
 ### Una registrazione che viaggia.
 
-File ZIP firmati, file conservati e un rapporto offline. Protezione con password opzionale.
+ZIP firmato, file e report offline. Password facoltativa.
 
 [Esportare e verificare](https://phishdestroy.github.io/TgWitness/it/docs/exports/)
 
@@ -103,7 +103,7 @@ Seguire i controlli dall’hash di un file a un checkpoint conservato separatame
 
 ## Pronto per una revisione.
 
-Consegna osservazioni, file e un rapporto HTML offline in un unico pacchetto firmato.
+Messaggi, file e report offline in un unico pacchetto firmato.
 
 [Legga il modello di prova](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/)
 
@@ -119,7 +119,7 @@ tgwitness-evidence.zipPACCHETTO FIRMATO
 
   Verifica indipendenteManifesto firmato + verificatore autonomo
 
-I destinatari verificano i record e i file salvati confrontandoli con una chiave di raccolta attendibile. Un punto di controllo conservato separatamente verifica inoltre la continuità con il registro precedente. [Esplora le fasi di verifica.](https://phishdestroy.github.io/TgWitness/it/docs/concepts/#layers)
+Il destinatario controlla tutto con la Sua chiave, e un punto di controllo conservato altrove mostra che da allora non è stato riscritto nulla. [Come funzionano i controlli.](https://phishdestroy.github.io/TgWitness/it/docs/concepts/#layers)
 
 ## Copie su S3. Controlli esterni.
 
@@ -129,25 +129,25 @@ Disattivato per impostazione predefinita
 
 ### Copiare tutto su un archivio compatibile con S3
 
-Registro, file, checkpoint con data e ora ed esportazioni delle chat — crittografati prima del caricamento su AWS S3 o su un sistema di archiviazione compatibile.
+Diario, file, punti di controllo ed esportazioni delle chat, cifrati prima di andare su S3.
 
 **Impostazioni di archiviazione e recupero**
 
 Crittografia lato client
 
-`AES-256-GCM` crittografa gli oggetti presenti su questa macchina. Il provider riceve gli oggetti crittografati.
+`AES-256-GCM` sulla Sua macchina. Il provider vede solo testo cifrato.
 
 Copie programmate o manuali
 
-Esegua ora la copia oppure scelga un intervallo compreso tra 1 e 1.440 minuti. Verifichi lo stato di avanzamento nel pannello.
+Copi subito oppure ogni 1–1.440 minuti, con l’avanzamento nel pannello.
 
 Object Lock
 
-Selezionare i giorni di conservazione e una modalità, qualora il bucket lo supporti. Il pannello indica se la conservazione è stata confermata per un oggetto caricato.
+Scelga giorni e modalità di conservazione: il pannello verifica che siano davvero applicati.
 
 Recupero verificato
 
-Scarichi la chiave di crittografia e la conservi separatamente. Esegua il ripristino su un altro computer; i file vengono pubblicati solo dopo la verifica.
+Tenga la chiave separata. Ripristini dove vuole: i file escono solo dopo la verifica.
 
 ![Pannello completo per il copia fuori sede: endpoint, regione, bucket, chiavi di accesso, pianificazione, Object Lock e controlli delle chiavi di ripristino](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
@@ -157,13 +157,13 @@ Giornale e media`AES-256-GCM`Archiviazione compatibile con S3
 
 [Configurare S3 e ripristinare una copia](https://phishdestroy.github.io/TgWitness/it/docs/exports/#s3)[Legga i dettagli della verifica](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**Chiave di recupero:** salvare separatamente la chiave di decrittografia esportata in modo da poter ripristinare la copia crittografata.
+**Chiave di recupero** La tenga separata: senza, la copia è illeggibile.
 
 ### Notifiche · Apprise
 
-Avvisi relativi a problemi, modifiche alle chat e riepiloghi giornalieri tramite Apprise: app di messaggistica, e-mail o il proprio webhook JSON.
+Problemi, modifiche nelle chat e un riepilogo giornaliero verso messaggistica, e-mail o il Suo webhook.
 
-**Scegli cosa condividere:** gli estratti dei messaggi sono disattivati per impostazione predefinita; abilitali per i destinatari di cui ti fidi.
+**Scelga cosa condividere** Nessun testo dei messaggi finché non lo attiva.
 
  [Configurazione delle destinazioni delle notifiche](https://phishdestroy.github.io/TgWitness/it/docs/reference/operations/#notifications)
 
@@ -171,7 +171,7 @@ Avvisi relativi a problemi, modifiche alle chat e riepiloghi giornalieri tramite
 
 Hash dei checkpoint temporali con RFC 3161 e OpenTimestamps.
 
-**Verifica il risultato:** controlla la risposta dell’autorità o aggiorna la ricevuta di OpenTimestamps a una prova Bitcoin confermata.
+**Segua il risultato** Controlli la risposta della TSA o aggiorni la ricevuta OpenTimestamps a una prova Bitcoin.
 
  [Verificare le prove con timestamp](https://phishdestroy.github.io/TgWitness/it/docs/reference/timestamp/)
 
@@ -179,7 +179,7 @@ Hash dei checkpoint temporali con RFC 3161 e OpenTimestamps.
 
 Un host separato conserva le osservazioni firmate e può pubblicare i checkpoint `TGW1`.
 
-**Separare il riferimento** «Eseguire il witness su un altro host» e mantenere la propria chiave di firma e il proprio registro.
+**Separi il riferimento** Lo esegua su un altro host, con chiave e diario propri.
 
  [Configurare un Witness](https://phishdestroy.github.io/TgWitness/it/docs/witness/)
 
@@ -187,19 +187,20 @@ Un host separato conserva le osservazioni firmate e può pubblicare i checkpoint
 
 Ripresa dopo il riavvio. Le verifiche successive e `coverage.json` mostrano i messaggi recuperati e le lacune.
 
-**Rivedere l’intervallo:** visualizzare i messaggi attuali recuperati insieme alle interruzioni registrate; le versioni precedenti rimangono disponibili una volta acquisite.
+**Esamini l’intervallo** Messaggi recuperati e lacune registrate affiancati.
 
  [Verificare la continuità e le lacune](https://phishdestroy.github.io/TgWitness/it/guides/modes.html#continuity)
 
 ## Il Suo primo spazio di lavoro inizia qui.
 
-Provi innanzitutto la demo. Quando è pronto, colleghi un account dedicato. Windows, Linux, macOS o Docker.
+Provi prima la demo e colleghi un account di riserva quando è pronto.
+Windows, Linux, macOS o Docker.
 
 [Legga la guida all’installazione](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=it)
 
 **Una sessione importata, un client in esecuzione.**
 
-Si prega di non eseguire contemporaneamente una chiave TData/sessione importata su Telegram Desktop e su TgWitness. Telegram potrebbe invalidare l’autorizzazione condivisa (AUTH_KEY_DUPLICATED). Per un utilizzo parallelo, si prega di creare un account TgWitness separato tramite numero di telefono o codice QR.
+Non usi una TData o una sessione importata contemporaneamente in Telegram Desktop e in TgWitness: Telegram può invalidarle entrambe (AUTH_KEY_DUPLICATED). Le servono tutte e due? Acceda a TgWitness separatamente, con telefono o QR.
 
 [Legga l’avviso relativo all’importazione delle sessioni](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=it#session-warning)
 
@@ -224,7 +225,7 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-Per l’esecuzione del programma è necessario Python 3.11 o versioni successive. Il programma di avvio per Windows propone l’installazione qualora Python non fosse presente.
+Richiede Python 3.11+. Su Windows il launcher propone di installarlo.
 
 [Sfogliare le versioni](https://github.com/phishdestroy/TgWitness/releases)
 
@@ -259,7 +260,7 @@ Il secondo comando mostra il Suo token privato del pannello di controllo. Lo con
 
 Aprire [127.0.0.1:8787](http://127.0.0.1:8787) dopo l’avvio.
 
-Per le installazioni dal codice sorgente, il token è `data/live/panel-token.txt`. Per l’accesso a Telegram è possibile utilizzare le impostazioni API integrate oppure la propria coppia di credenziali ottenuta da [my.telegram.org](https://my.telegram.org). [Guida completa alla configurazione ↗](https://phishdestroy.github.io/TgWitness/it/docs/reference/quickstart/)
+Nelle installazioni da sorgente il token si trova in `data/live/panel-token.txt`. Una Sua coppia API da [my.telegram.org](https://my.telegram.org) è facoltativa. [Guida completa ↗](https://phishdestroy.github.io/TgWitness/it/docs/reference/quickstart/)
 
 **TgWitness 0.8.1** [Novità →](https://phishdestroy.github.io/TgWitness/it/docs/reference/changelog/) · [Funzionalità e limiti noti →](https://phishdestroy.github.io/TgWitness/it/docs/reference/features/)
 
@@ -273,7 +274,7 @@ Per le installazioni dal codice sorgente, il token è `data/live/panel-token.txt
 
 ## Elaborare l’archivio.
 
-Carica la cronologia, esamina le fonti AI, collega un client MCP, riconosci i file multimediali salvati e invia webhook firmati.
+Cronologia, IA con fonti, MCP, OCR e webhook firmati.
 
 [Esplora il flusso di lavoro](https://phishdestroy.github.io/TgWitness/it/docs/archive/)
 
@@ -281,19 +282,19 @@ Carica la cronologia, esamina le fonti AI, collega un client MCP, riconosci i fi
 
 **Questa pagina è collegata a Telegram?**
 
-No. Questa è una pagina statica del progetto con esempi fittizi e schermate. L’applicazione vera e propria viene eseguita sul Suo computer o server; l’accesso avviene lì.
+No. È una pagina statica con esempi fittizi. L’app gira sulla Sua macchina ed è lì che si accede.
 
 **È in grado di recuperare i messaggi cancellati prima della registrazione?**
 
-No. TgWitness conserva i contenuti rilevati dal Suo account durante l’esecuzione della raccolta. Una successiva istantanea della cronologia non è in grado di ricostruire le modifiche non rilevate o i messaggi cancellati.
+No. Conserva ciò che il Suo account ha visto mentre era in funzione. Un’istantanea successiva non può ricostruire modifiche perse o messaggi eliminati.
 
 **Il mio registro è interamente crittografato?**
 
-Le credenziali degli account e le chiavi di firma sono conservate in un archivio crittografato. I messaggi locali e gli allegati richiedono un disco o un volume crittografato. Le esportazioni possono, facoltativamente, utilizzare un file ZIP AES-256 protetto da password.
+Sessioni e chiavi sì. Messaggi e file no: usi la cifratura del disco. Le esportazioni possono avere una password AES-256.
 
 **È affiliato a Telegram?**
 
-No. TgWitness è un progetto indipendente che utilizza Telethon, distribuito sotto licenza MIT. L’utente autorizza i propri account utilizzando le impostazioni API integrate o la propria coppia API.
+No. È un progetto indipendente con licenza MIT basato su Telethon. Si accede con i propri account.
 
 PROJECT NOTICE / LICENCE
 

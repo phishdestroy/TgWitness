@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="Guide"><a href="../../">Home</a> <span aria-hidden="true">/</span> <a href="../">Documentazione</a> <span aria-hidden="true">/</span> <span aria-current="page">Collegare un account</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Cosa è stato testato →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Cerca nella documentazione</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Si provi con «proxy», «catena di hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Ricerca chiara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Digiti una parola per effettuare una ricerca nelle guide e nella documentazione di riferimento. La ricerca rimane nel Suo browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Documentazione / 05</p><h1>Collegare un account</h1><p class="guide-outcome">Ogni spazio di lavoro contiene un unico account, il relativo registro e la relativa chiave di firma.</p>
+<article class="guide-content"><p class="eyebrow">Documentazione / 05</p><h1>Collegare un account</h1><p class="guide-outcome">Uno spazio = un account, il suo diario e la sua chiave.</p>
 <h2 id="sign-in">Scegliete come effettuare l’accesso</h2>
-<p>Apra <strong>gli account</strong>, aggiunga un’area di lavoro e apra le relative impostazioni di connessione. Utilizzi un account dedicato all’osservazione.</p>
-<ul><li><strong>Codice QR:</strong> lo scansionino dalle impostazioni del dispositivo su Telegram e confermino il nuovo accesso.</li><li><strong>Numero di telefono:</strong> inserisca il numero, il codice inviato da Telegram e la Sua password di verifica in due passaggi, se abilitata.</li><li><strong>Importazione di una sessione:</strong> importi una sessione supportata o i dati di Telegram Desktop di sua proprietà.</li></ul>
-<p>Selezioni un profilo API predefinito oppure inserisca il proprio ID API e il proprio hash. Un profilo API identifica il cliente; non effettua l’accesso a un account né rende anonima la connessione.</p>
+<p><strong>Account</strong> → aggiungi spazio → impostazioni di connessione. Usi un account separato per questo.</p>
+<ul><li><strong>Codice QR:</strong> lo scansioni dalla schermata Dispositivi di Telegram e confermi.</li><li><strong>Numero di telefono:</strong> numero, codice e, se c’è, la password 2FA.</li><li><strong>Importa sessione:</strong> il Suo file di sessione o i dati di Telegram Desktop.</li></ul>
+<p>Usi un profilo API integrato o il Suo API ID con hash. Identifica solo l’app: non effettua l’accesso e non nasconde nulla.</p>
 <details><summary>Ha bisogno prima di un proxy?</summary><p>È possibile <a href="../proxies/">scegliere e testare il percorso di connessione</a> prima di effettuare l’accesso. Ogni account dispone di un proprio percorso.</p></details>
 <h2 id="sources">Scegliete cosa monitorare</h2>
-<ol><li>Apra l’elenco delle fonti e selezioni le chat, i gruppi o i canali di cui ha bisogno.</li><li>Si prega di verificare le impostazioni di raccolta, compresi i file multimediali, prima di avviare il monitoraggio.</li><li>Avviare il collettore e verificarne la connessione e l’attività recente.</li></ol>
-<p>L’account deve poter accedere alla fonte. Ruoli diversi possono visualizzare eventi diversi; il registro riflette ciò che tale account ha ricevuto.</p>
-<p>Per un caso che riguarda l’intero account, utilizzi <strong>Fonti → Ambito di osservazione → Modalità di indagine</strong>, verifichi le impostazioni e prema <strong>Salva ambito</strong>. La <a href="../cases/">guida completa all’indagine</a> copre tutti i tipi di chat visibili, la cronologia precedente, i profili degli utenti, i riferimenti tra chat e il trasferimento delle prove.</p>
+<ol><li>Scelga le chat, i gruppi o i canali che Le servono.</li><li>Controlli le impostazioni di raccolta, media inclusi.</li><li>Avvii e controlli la connessione e l’attività recente.</li></ol>
+<p>L’account deve avere accesso. Admin e membri vedono cose diverse; il diario mostra ciò che ha ricevuto questo account.</p>
+<p>L’intero account? <strong>Fonti → Ambito di osservazione → Modalità indagine</strong>, controlli e prema <strong>Salva ambito</strong>. Guida completa: <a href="../cases/">indagare su un intero account</a>.</p>
 <h2 id="check">Verifichi l’intero percorso</h2>
-<p>In un gruppo di prova da Lei controllato, invii un messaggio unico da un altro account, lo modifichi e lo elimini. Verifichi la presenza di tutti e tre gli eventi nel registro, quindi <a href="../exports/">esporti e verifichi</a> la registrazione.</p>
-<p class="callout">Lo stato «Connesso» conferma la connessione. Un messaggio di prova acquisito conferma che un determinato evento è pervenuto in questo spazio di lavoro.</p>
+<p>Nel Suo gruppo di prova invii un messaggio da un altro account, lo modifichi e lo elimini. Tutti e tre gli eventi devono comparire nel diario. Poi <a href="../exports/">esporti e verifichi</a>.</p>
+<p class="callout">«Connesso» significa che la connessione funziona. Un messaggio di prova catturato significa che gli eventi arrivano davvero.</p>
 <h2 id="more">Aggiungere un altro account</h2>
-<p>Crei un altro spazio di lavoro nella sezione <strong>«Account»</strong> e ripeta la procedura di configurazione. Conservi l’impronta digitale della chiave di firma di ciascun account in modo da poter identificare le relative esportazioni in un secondo momento.</p>
+<p>Nuovo spazio in <strong>Account</strong>, stessi passaggi. Annoti l’impronta della chiave di ogni account per distinguere poi le esportazioni.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/accounts/">Riferimento completo →</a><a class="next-guide" href="../exports/"><span>Passo successivo</span><strong>Esportare e verificare →</strong></a><p>Le presenti linee guida descrivono l’attuale implementazione. I risultati della convalida e le lacune residue sono documentati separatamente. <a href="../reference/verification/">Cosa è stato testato →</a></p></footer>
 </main>

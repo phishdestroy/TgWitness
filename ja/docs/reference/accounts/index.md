@@ -241,20 +241,6 @@ TDataとは、Telegram Desktopアプリケーション（desktop.telegram.orgか
 
 「アカウント」→「Telegramからログアウト（監視を一時停止）」を選択すると、Telegramにセッションの終了が要求されます。 これにより、アカウントの「設定」→「デバイス」からもそのセッションが消え、ワークスペースの保管庫からも セッションが削除されます。ジャーナル、ソース、設定、および署名鍵は残され、 ジャーナルにはログアウトの記録が残ります。 ワークスペースは引き続きそのアカウントに属しており、 そのアカウントのみが再度接続できます。Telegramから応答がない場合でも、セッションは ここから削除され、パネルにその旨が表示されます。Telegramの「設定」→「デバイス」からセッションを終了してください。
 
-## テレソンセッションをオフラインで変換する
-
-このパネルは、`.session`ファイルを直接インポートします。オフラインで StringSessionファイルに変換するには、プロジェクトフォルダから以下のコマンドを実行してください：
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-このコンバーターは、Telethon SQLite のみ（最大 64 MiB）を読み込み、入力データを一切変更せず、 ネットワークリクエストも行わず、既存の出力ファイルの上書きも拒否します。
-
 ## アカウントファイルの安全な保管
 
 - `.session`、TData ZIP、StringSession、認証キー、およびアカウントのJSONはすべて、 パスワードと同様に扱ってください。TgWitnessは、インポートされた認証情報を暗号化された保管庫に保存します。そのため、 その後、元のファイルを削除しても問題ありません。

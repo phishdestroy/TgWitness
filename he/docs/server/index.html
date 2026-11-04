@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../">תיעוד</a> <span aria-hidden="true">/</span> <span aria-current="page">המשך להפעיל את האתר</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">מה נבדק ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">תיעוד / 17</p><h1>המשך להפעיל את האתר</h1><p class="guide-outcome">יש להקפיד שהאספן יהיה זמין ושהנתונים שבו יישמרו ללא שינוי גם לאחר הפעלה מחדש.</p>
+<article class="guide-content"><p class="eyebrow">תיעוד / 17</p><h1>המשך להפעיל את האתר</h1><p class="guide-outcome">השאירו את האוסף פועל ואת הנתונים בטוחים לאורך הפעלות מחדש.</p>
 <h2 id="launch">בחר שיטת השקה</h2>
-<p>להתקנה מקומית, השתמשו במ<a href="../start/">פעיל</a> ובדוגמאות השירות הנמצאות בתיקיית <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/.</a> עבור Docker, התקינו את Docker עם Compose והפעילו מהספרייה של הפרויקט:</p>
+<p>התקנה מקומית: <a href="../start/">המפעיל</a> ועוד תבניות שירות ב-<a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a>. Docker, מתיקיית הפרויקט:</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>לוח הבקרה המוגדר כברירת מחדל מאזין לכתובת הלופבק של המארח, יציאה 8787. פתחו אותו באופן מקומי או דרך מנהרת SSH. השתמשו באסימון מהפקודה השנייה כדי לפתוח את נעילת לוח הבקרה.</p>
+<p>הלוח מאזין ב-localhost:8787. פתחו אותו מקומית או דרך מנהרת SSH, עם הטוקן מהפקודה השנייה.</p>
 <h2 id="storage">יש לשמור את ספריית הנתונים במלואה</h2>
-<p>התקנות מקומיות משתמשות ב-<code>data/live</code>. Docker משתמש בנפח הקבוע <code>tgwitness-data</code>. שמרו יחד את היומנים, הפעלות החשבון, המפתחות ומצב התפעול. ייצוא חתום מהווה ראיה שימושית, אך אינו גיבוי מלא של ההתקנה.</p>
-<ol><li>יש להפסיק את האיסוף לפני ביצוע גיבוי קבוע.</li><li>העתיקו את ספריית הנתונים הפרטיים במלואה לאחסון מוגן מחוץ לשרת המארח.</li><li>בדקו את השחזור בסביבה מבודדת לפני שתסתמכו על הגיבוי.</li></ol>
+<p>התקנה מקומית: <code>data/live</code>. Docker: הכרך <code>tgwitness-data</code>. יומנים, סשנים ומפתחות שייכים יחד. ייצוא חתום הוא ראיה, לא גיבוי.</p>
+<ol><li>עצרו קודם את האיסוף.</li><li>העתיקו את כל תיקיית הנתונים למקום בטוח, מחוץ למארח.</li><li>נסו לשחזר אותה בהתקנה נפרדת לפני שאתם סומכים עליה.</li></ol>
 <h2 id="check">יש לבדוק לאחר הפעלה מחדש</h2>
-<p>יש לאשר את סביבת העבודה והמפתח הצפויים, את החיבור ל-Telegram, את המקורות הנבחרים ואת לכידת ההודעות החדשות. מצב MTProto שנשמר ותכונת ההשלמה מסייעים לשחזר עדכונים ש-Telegram עדיין שומר. לא ניתן לשחזר כל עדכון שפג תוקפו או עריכה שנמחקה לפני הלכידה.</p>
-<p class="callout">&quot;תקינות הקונטיינר&quot; פירושה שהשרת האינטרנטי מגיב. יש להשתמש בהודעה מבוקרת ובבדיקת עדים כדי להעריך את האיסוף והפרסום החיצוני.</p>
+<p>בדקו את סביבת העבודה והמפתח, החיבור, המקורות ושהודעות חדשות נכנסות. TgWitness משלים את מה שעדיין יש ל-Telegram, לא את כל מה שקרה בזמן שהיה כבוי.</p>
+<p class="callout">קונטיינר "healthy" אומר ששרת הווב עונה. אם האיסוף עובד, הודעת בדיקה והעד יגידו.</p>
 <h2 id="public">פרסם רק את מה שאתה מתכוון לפרסם</h2>
-<p>מדריך הפריסה כולל דוגמאות ל-HTTPS, פקודות לניהול נפח קבוע, עדכונים ושלבי שחזור. פקודות Docker מסופקות לצורך הפריסה; <a href="../reference/verification/">תיעוד האימות</a> הנוכחי מפרט את הסביבות שנבדקו בפועל.</p>
+<p>HTTPS, כרכים, עדכונים ושחזור נמצאים במדריך הפריסה. מה שבאמת נבדק: <a href="../reference/verification/">רישום האימות</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">הפניה מלאה ←</a><a class="next-guide" href="../troubleshooting/"><span>השלב הבא</span><strong>גלה מה השתבש ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../reference/verification/">מה נבדק ←</a></p></footer>
 </main>

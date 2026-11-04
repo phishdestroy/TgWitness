@@ -2,35 +2,35 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/troubleshooting/
 
-Hãy bắt đầu từ triệu chứng. Kiểm tra từng lớp một.
+Bắt đầu từ triệu chứng, kiểm tra từng thứ một.
 
 ## Ban tổ chức yêu cầu một mã xác thực
 
-Vui lòng sử dụng mã thông báo bảng điều khiển từ tệp cục bộ được trình khởi chạy hiển thị. Đối với Docker, hãy chạy lệnh ``docker compose exec tgwitness cat /data/panel-token.txt``. Mã đăng nhập Telegram, mã thông báo BotFather và mã thông báo chứng kiến chỉ đọc phục vụ các mục đích khác nhau.
+Nó cần token bảng điều khiển từ tệp mà trình khởi chạy đã in ra. Docker: `docker compose exec tgwitness cat /data/panel-token.txt`. Không phải mã Telegram, không phải token bot, không phải token nhân chứng.
 
 ## Telegram không kết nối
 
-Mở cài đặt kết nối và thực hiện kiểm tra kết nối. Nếu sử dụng proxy công cộng, hãy thử một mục khác và lưu đường dẫn một cách rõ ràng. Kiểm tra loại proxy và định dạng khóa bí mật được hỗ trợ. Việc làm mới danh sách công cộng sẽ không thay đổi đường dẫn của tài khoản.
+Chạy kiểm tra kết nối. Nếu dùng proxy công khai, hãy chọn cái khác và lưu. Kiểm tra loại proxy và định dạng khóa bí mật. Làm mới danh sách không tự đổi tuyến.
 
 ## Đang kết nối, nhưng không có tin nhắn mới
 
-1. Vui lòng kiểm tra xem quá trình quan sát có đang chạy trong không gian làm việc đúng hay không.
-2. Xác nhận rằng nguồn đã được chọn và hiển thị đối với tài khoản đó.
-3. Hãy gửi một tin nhắn mới duy nhất trong một nhóm được kiểm soát và tìm kiếm chính xác đoạn văn bản đó.
-4. Vui lòng rà soát nhật ký hoạt động để phát hiện các sự cố gián đoạn, tình trạng chậm trễ trong quá trình xử lý hoặc các lỗi phát sinh từ Telegram.
+1. Quan sát có đang chạy, đúng không gian làm việc không?
+2. Nguồn đã được chọn và tài khoản đó có thấy không?
+3. Gửi một tin nhắn duy nhất trong nhóm thử nghiệm và tìm nó.
+4. Tìm các lần gián đoạn hoặc lỗi Telegram trong sổ nhật ký.
 
-Các bản chụp lịch sử và các sự kiện tin nhắn mới là hai khái niệm khác nhau. Một nguồn im lặng có thể được kết nối mà không tạo ra tin nhắn mới. Hãy sử dụng thử nghiệm gửi tin nhắn có kiểm soát khi tính đầy đủ là yếu tố quan trọng.
+Cuộc trò chuyện im ắng chỉ là không có gì mới. Nếu độ đầy đủ quan trọng, hãy chạy một phép thử nhận tin có kiểm soát.
 
 ## FloodWait hoặc khoảng trống sau khi khởi động lại
 
-FloodWait có nghĩa là Telegram yêu cầu tạm dừng. Vui lòng chờ trong khoảng thời gian được chỉ định và rà soát khối lượng công việc thu thập; việc kết nối lại nhiều lần sẽ không loại bỏ giới hạn này. Trạng thái cập nhật đã lưu giúp khôi phục tiến độ sau khi khởi động lại, tuy nhiên các bản cập nhật đã hết hạn và một số khoảng thời gian gián đoạn vẫn là những hạn chế. Hãy ghi lại khoảng trống thay vì coi nhật ký là hoàn chỉnh.
+FloodWait là Telegram nói "chậm lại". Hãy chờ cho qua và giảm tải, kết nối lại không giúp được gì. Sau khi khởi động lại, TgWitness bắt kịp những gì Telegram vẫn còn giữ; phần còn lại là khoảng trống, nên hãy ghi lại.
 
 ## Bot đã được cấu hình nhưng chưa đăng tải bất kỳ nội dung nào
 
-Hãy đảm bảo rằng quy trình Witness đang thực sự hoạt động, bot có thể đăng bài trong kênh và Witness có thể kết nối với bộ thu thập dữ liệu cũng như Bot API. Kiểm tra nhật ký của hệ thống để phát hiện các trường hợp đăng tải không thành công. Việc bộ thu thập dữ liệu thực hiện thăm dò thành công không tự động xác nhận rằng bài đăng trên kênh đã được thực hiện.
+Nhân chứng có đang chạy không, bot có đăng được vào kênh không, nó có kết nối được tới máy thu thập và Bot API không? Tìm các bài đăng thất bại trong sổ nhật ký của nó. Có truy vấn ở phía máy thu thập không có nghĩa là bài đã được đăng.
 
 ## Tính năng tích hợp mã thông báo GitHub hiện nằm ở đâu?
 
 **Đang trong giai đoạn lập kế hoạch.** Phần “Extras” mô tả quy trình làm việc được đề xuất cho việc phân nhánh (fork) và xác minh bản dựng. Hiện tại chưa có biểu mẫu mã thông báo GitHub hay cơ chế xác nhận tự động nào để đảm bảo rằng một bản cài đặt đang hoạt động khớp với kho lưu trữ. Vui lòng tham khảo [tình trạng tính năng hiện tại](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/).
 
-Khi báo cáo sự cố, vui lòng cung cấp thông tin về phiên bản, hệ điều hành, các bước thực hiện và nội dung lỗi đã được che bớt. Xin vui lòng không công khai thông tin về phiên làm việc, mã thông báo, tin nhắn riêng tư và thư mục dữ liệu trong các vấn đề công khai.
+Báo lỗi? Phiên bản, hệ điều hành, các bước và thông báo lỗi đã che thông tin riêng. Không bao giờ đưa phiên, token, tin nhắn riêng tư hay thư mục dữ liệu vào issue công khai.

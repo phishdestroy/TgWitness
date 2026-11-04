@@ -93,8 +93,6 @@ The priority star controls these rechecks. Additional `updates.getChannelDiffere
 
 Arbitrary high-frequency polling, ignoring FloodWait or assuming linear capacity from extra accounts is not a valid sizing model. Default limits are the first 1,000 listed dialogs, up to 500 messages per history snapshot, 1–2,000 MiB per collected file by type, and 4 GiB uncompressed signed ZIP content; each is changed per workspace under **Parameters**. Exports have no fixed event-count cap. Browser fallback is bounded to 128 MiB by default; the streaming CLI has a configurable transfer limit, 5 GiB by default.
 
-`tools/check_capacity.py` measures local synthetic ingestion and export. Its results are not Telegram delivery measurements or a guaranteed real-chat count. See [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) for the measured version and workload.
-
 ## Reliability and recovery
 
 Implemented behavior includes SQLite WAL/synchronous transactions; atomic message and media-job writes; persistent jobs and retry delays; original-version descriptors; bounded retries; persisted media FloodWait; media downloads outside the text event's network wait; stable-prefix exports while later writes continue; atomic settings and audit records; preservation of working authorization after failed replacement login; isolation of a damaged additional workspace; explicit reconnect attempts; distinct authorization-loss reporting; and wall-clock change detection using a monotonic clock.

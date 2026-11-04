@@ -247,25 +247,11 @@ Gateway DNS bao gồm bộ giải quyết tên miền của hệ thống. DNS qu
 
 Cloudflare không thể xem nội dung bên trong lớp mã hóa của Telegram, các thiết bị khác trên tài khoản Telegram (danh sách thiết bị trong chế độ bằng chứng ghi lại chúng từ phía Telegram) hoặc hypervisor của nhà cung cấp.
 
-Vào ngày 1 tháng 11 năm 2026, Gateway DNS đã chạy trên Hetzner Cloud thực tế và một tài khoản Cloudflare miễn phí: Hetzner đã chấp nhận các quy tắc đi ra ngoài, máy chủ đã cài đặt phiên bản v0.7.0 với mọi lần tra cứu đều đi qua Gateway qua TLS, đường hầm nhanh đã hoạt động qua tường lửa đó, và `verify` đọc lại 19 tên miền của máy chủ từ Cloudflare (các máy chủ gương Ubuntu và Hetzner, GitHub, PyPI, NTP, đường hầm, ntfy.sh). Bảng điều khiển đã sao chép 36 truy vấn trong tám cửa sổ vào nhật ký và `verify.py` tổng hợp chúng mà không bỏ sót; `destroy` gỡ bỏ máy chủ và tường lửa, rồi rời khỏi vị trí dùng chung.
-
 ## Điều này không xác định được
 
 - Nhà cung cấp và nhân viên của họ quản lý hypervisor, đĩa cứng và mạng.
 - Các chỉ số máy chủ được báo cáo tự động bởi trình thu thập dữ liệu.
 - Nội dung các quy tắc tường lửa trước đây không có trong nhật ký của mọi nhà cung cấp; chỉ có Linode lưu giữ các phiên bản quy tắc.
 - Nó không đề cập đến bất kỳ thông tin mới nào về tính xác thực của tin nhắn; xem phần [Bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/).
-
-## Đã được thử nghiệm tại đây
-
-Các logic triển khai, khóa và xác minh được kiểm tra bằng các bài kiểm tra tự động dựa trên các API mô phỏng của Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail và Cloudflare, được xây dựng từ các tài liệu tham khảo API đã công bố của họ, cùng với việc ký yêu cầu AWS dựa trên các ví dụ đã công bố của AWS. `tools/check_cloud_wizard.py` chạy trình hướng dẫn máy chủ của bảng điều khiển theo cách tương tự, với một tên miền và với một đường hầm nhanh. `tools/check_tdx.py` xác minh các chứng nhận Intel TDX thực từ dcap-qvl và dstack lên đến chứng chỉ gốc của Intel (nguồn trong [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)); `tools/check_phala.py`chạy các lệnh deploy, verify, journal, destroy và trình hướng dẫn trên bảng điều khiển đối với một môi trường Phala Cloud mô phỏng có các chứng nhận xuất phát từ một hệ thống PKI giả mạo được thiết kế giống hệ thống của Intel. Quy trình Phala này chưa được thử nghiệm trực tiếp trên chính nền tảng Phala Cloud.
-
-Vào ngày 1 tháng 11 năm 2026, đường dẫn đường hầm nhanh đã chạy trên nền tảng **Hetzner Cloud** thực tế (Nuremberg, `cpx22`, TgWitness v0.7.0), ntfy.sh thực tế và GitHub, từ bảng điều khiển và từ mã nguồn:
-
-- kiểm tra giá, sau đó tạo từ các nút trên bảng điều khiển: máy chủ hoạt động sau 13 giây, bản ghi có chữ ký với các giá trị băm của phiên bản và trình cài đặt khớp nhau sau khoảng hai phút;
-- bảng điều khiển riêng của máy chủ được mở qua địa chỉ trycloudflare.com và chấp nhận mã thông báo bảng điều khiển; nếu không có mã thông báo, nó sẽ trả về mã trạng thái 401;
-- sau khi khởi động lại thông qua API Hetzner, máy chủ đã đăng một địa chỉ mới đã được ký; **Tìm địa chỉ hiện tại** đã tìm thấy nó, địa chỉ cũ ngừng phản hồi, khóa ký vẫn giữ nguyên; một bài đăng chưa được ký lên chủ đề ntfy.sh đã bị bỏ qua;
-- `verify` so với API của Hetzner: máy chủ, tường lửa không có quy tắc vào, tuyên bố, ràng buộc, đo lường máy chủ, quá trình khởi động và băm nguồn của bản checkout v0.7.0 đã vượt qua; các kiểm tra của Cloudflare không khả dụng, như đã mô tả ở trên; trình cài đặt khác với trình cài đặt mà phiên bản v0.7.0 tạo ra và trùng khớp từng byte với trình cài đặt mà mã của phiên bản này tạo ra;
-- Việc xóa khỏi bảng điều khiển đã loại bỏ chính xác máy chủ và tường lửa được gắn nhãn trong quá trình triển khai; các máy chủ và tường lửa khác trong cùng dự án vẫn được giữ nguyên.
 
 Chưa được chạy trên các tài khoản thực: một bản triển khai dưới tên miền riêng của bạn (đường hầm Cloudflare và DNS), các nhà cung cấp khác, một bản triển khai gỡ lỗi và `lock`, một tài khoản Telegram trên máy chủ đó, và các bản cập nhật trực tiếp của các phiên bản sau thông qua đường hầm nhanh. Kiểm tra lần triển khai đầu tiên trên mỗi nhà cung cấp với `plan`, một triển khai gỡ lỗi và `verify` trước khi sử dụng nó trong một vụ việc.

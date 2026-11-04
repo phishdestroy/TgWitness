@@ -2,33 +2,33 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/server/
 
-Yig'gichni doimiy ravishda ishlashga tayyor holda saqlang va qayta ishga tushirishlar davomida uning ma'lumotlari saqlansin.
+Kollektorni ishlab turgan va ma'lumotlarni qayta ishga tushirishlarda xavfsiz saqlang.
 
 ## Boshlash usulini tanlang
 
-Mahalliy o'rnatish uchun [deploy](https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md)/dagi [ishga tushiruvchi](https://phishdestroy.github.io/TgWitness/uz/docs/start/) fayl va xizmat misollaridan foydalaning. Docker uchun Compose yordamida Docker-ni o'rnating va loyiha katalogidan ishga tushiring:
+Mahalliy: [ishga tushirgich](https://phishdestroy.github.io/TgWitness/uz/docs/start/) va [deploy/](https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md) dagi xizmat shablonlari. Docker, loyiha papkasidan:
 
 ```
 docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt
 ```
 
-O'rnatilgan panel mezbonning loopback manzili, 8787-port orqali tinglaydi. Uni mahalliy tarmoqda yoki SSH tunneli orqali oching. Panelni ochish uchun ikkinchi buyruqdagi tokenni ishlating.
+Panel localhost:8787 da tinglaydi. Uni mahalliy yoki SSH tunneli orqali, ikkinchi buyruqdagi token bilan oching.
 
 ## Butun ma'lumotlar katalogini saqlang
 
-Mahalliy o'rnatishlar `data/live` dan foydalanadi. Docker esa doimiy `tgwitness-data` hajmdan foydalanadi. Jurnalni, hisob sessiyalarini, kalitlarni va operatsion holatni birga saqlaydi. Imzolangan eksport foydali dalildir, lekin bu to'liq o'rnatish zaxira nusxasi emas.
+Mahalliy: `data/live`. Docker: `tgwitness-data` hajmi. Jurnallar, sessiyalar va kalitlar birga bo'lishi kerak. Imzolangan eksport dalil, zaxira nusxa emas.
 
-1. Muntazam zaxira nusxasini olishdan oldin yig'ishni to'xtating.
-2. To'liq shaxsiy ma'lumotlar katalogini mezbonning tashqarisidagi himoyalangan saqlash joyiga nusxalang.
-3. Zaxira nusxaga tayanishdan oldin uni izolyatsiyalangan o'rnatishga sinov tiklash.
+1. Avval yig'ishni to'xtating.
+2. Butun ma'lumotlar katalogini xostdan tashqaridagi xavfsiz joyga nusxalang.
+3. Ishonishdan oldin uni alohida o'rnatmada tiklab ko'ring.
 
 ## Qayta ishga tushirgandan so'ng tekshiring
 
-Kutilayotgan ish maydoni va kalitni, Telegram ulanishini, tanlangan manbalarni va yangi xabarni qayd etishni tasdiqlang. Saqlangan MTProto holati va orqada qolgan yangilanishlarni tiklash yordami Telegram hali saqlab turgan yangilanishlarni qaytarib olishga yordam beradi. Ular muddati tugagan har bir yangilanishni yoki qayd etishdan oldin o'chirib tashlangan tahrirni qayta tiklay olmaydi.
+Ish maydoni va kalit, ulanish, manbalar va yangi xabarlar kelayotganini tekshiring. TgWitness Telegram'da hali bor narsani to'ldiradi, o'chiq turgan paytda sodir bo'lgan hamma narsani emas.
 
-Kontener holati veb-server javob berishini anglatadi. Yig'ish va tashqi e'lon qilishni baholash uchun nazoratli xabar va guvoh tekshiruvidan foydalaning.
+"healthy" konteyner veb-server javob berayotganini bildiradi. Yig'ish ishlayaptimi, buni sinov xabari va guvoh aytadi.
 
 ## Faqat niyat qilgan narsangizni e'lon qiling
 
-Joylashtirish bo'yicha qo'llanmada HTTPS misollari, doimiy hajmli buyruqlar, yangilash va tiklash bosqichlari keltirilgan. Joylashtirish uchun Docker buyruqlari taqdim etilgan; joriy [tasdiqlash yozuvi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/) haqiqatan sinovdan o'tkazilgan muhitlarni aniqlaydi.
+HTTPS, hajmlar, yangilanishlar va tiklash joylashtirish ma'lumotnomasida. Haqiqatan sinovdan o'tgan narsa: [tasdiqlash yozuvi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/).

@@ -62,10 +62,3 @@ La pagina del gruppo `/groups/<id>` mostra i membri, ciò che richiede attenzion
 Un'area di lavoro con una sessione attiva o una configurazione completata in precedenza non visualizza la procedura guidata. I suoi valori non vengono sostituiti da un obiettivo al caricamento della pagina. Nascondere un campo non disattiva la funzionalità né ne elimina il valore.
 
 La stima delle dimensioni e del tempo si basa sulla lettura di un massimo di tre chat selezionate e di un massimo di 20 messaggi da ciascuna. Si tratta di una stima: non tiene conto dei limiti di Telegram, della velocità di un determinato server né dei file presenti in ogni chat.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

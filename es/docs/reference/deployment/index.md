@@ -34,17 +34,11 @@ La instalación nativa requiere Python 3.11 o posterior con `venv` y `ensurepip`
 - **macOS:** instale una distribución actual de Python 3.11 o superior; no dé por sentado que un intérprete proporcionado por el sistema operativo cumple los requisitos. Utilice `python3 start.py` desde el directorio del proyecto.
 - **Docker:** utilice Docker Engine/Desktop con Compose v2.20 o una versión posterior. Docker Desktop debe utilizar contenedores de Linux en Windows. El contenedor instala sus propias dependencias de Python; el sistema anfitrión no necesita una instalación independiente de Python.
 
-Utilice almacenamiento local persistente para el directorio de datos. Planifique la capacidad teniendo en cuenta los mensajes, los archivos multimedia, el crecimiento del WAL, las exportaciones y las copias de seguridad; no existe una especificación mínima universal basada en pruebas de disco o RAM para todas las cargas de trabajo. Las arquitecturas de CPU y las versiones de Python que carezcan de ruedas de dependencias compatibles pueden requerir herramientas de compilación adicionales y su propia validación. «Portátil» no implica compatibilidad universal con todos los sistemas operativos ni con todo el hardware.
-
-Se ha verificado localmente en Windows 11/Python 3.12. Se proporcionan las definiciones para Linux, macOS y contenedores, así como la infraestructura de integración continua (CI), pero no se han ejecutado en este servidor de desarrollo. Consulte [el archivo VERIFICATION.md](https://phishdestroy.github.io/TgWitness/es/docs/reference/verification/) para conocer el alcance exacto.
-
 ## Ordenador local
 
 Utilice `Start.cmd` en Windows o `sh start.sh` en Linux/macOS. `scripts\Setup.cmd` o `sh start.sh --setup-only` prepara el entorno. El lanzador instala las dependencias la primera vez que se utiliza; los ejecuciones posteriores reutilizan el entorno. Se necesita acceso a Internet para la configuración y la recopilación de datos de Telegram, pero la consulta de registros existentes y la creación de exportaciones funcionan sin conexión.
 
 Ejecute «`python start.py --check`» tras la configuración para comprobar las dependencias locales, Ed25519, el almacenamiento, la configuración de claves y la dirección de escucha sin iniciar un colector. Utilice `--json` para obtener una salida estructurada. Introduzca los comandos `--data-dir`, `--host` y `--port` según corresponda. La comprobación no instala paquetes, no crea un registro ni se conecta a Telegram; no se trata de una verificación de integridad ni de cobertura. El inicio verifica por separado los registros existentes. `python start.py --help` también evita la instalación.
-
-Opciones:
 
 Tras ejecutar start.py, ejecute los comandos auxiliares con `.venv\Scripts\python.exe` en Windows o `.venv/bin/python` en Linux/macOS, o bien active primero dicho entorno. Los ejemplos `python -m ...` que figuran a continuación dan por hecho que el entorno está activo.
 
@@ -73,8 +67,6 @@ Compílelo usted mismo en Windows de 64 bits con Python 3.12:
 ```
 python tools/build_portable.py
 ```
-
-El generador verifica la suma de comprobación en tiempo de ejecución, instala las dependencias restringidas en el paquete, ejecuta la comprobación de preparación con el intérprete integrado y graba el archivo ZIP y la suma de comprobación en `dist/`.
 
 ## Contenedor
 
@@ -121,8 +113,6 @@ docker compose logs witness                     # witness key fingerprint
 El servicio accede al recopilador dentro de la red Compose en `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` lo anula; por ejemplo, `/profiles/<workspace ID>` para otro espacio de trabajo). Para un testigo en un servidor independiente, gestionado por otra persona, utilice `deploy/compose/compose.witness.yaml` allí, con `TGWITNESS_WITNESS_COLLECTOR` configurado en la dirección HTTPS del recopilador; dicho archivo contiene únicamente el testigo.
 
 ## Instalar una imagen publicada
-
-Esto estará disponible tras completar con éxito el [flujo de trabajo de lanzamiento](https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/#automated-github-releases) y la configuración pública del paquete GHCR. El propietario o el nombre del repositorio no están codificados de forma fija en este árbol de código fuente. Utilice la imagen que se muestra en el resumen del flujo de trabajo de dicha versión.
 
 Copie `deploy/env.example` en `.env`. Establezca `TGWITNESS_IMAGE` en la versión publicada, utilizando la ruta del repositorio **en minúsculas**; por ejemplo:
 
@@ -202,18 +192,6 @@ Utilice también los archivos «Compose» de su instalación para los comandos �
 
 Compruebe el acceso al panel, la identidad de la cuenta, el estado de observación y la cobertura tras una actualización. Al reiniciar no se recuperan las actualizaciones de Telegram que se hayan perdido. Una restauración a una versión anterior puede requerir la copia de seguridad previa a la actualización si una versión futura cambia los formatos de almacenamiento.
 
-## Publicaciones automatizadas en GitHub
-
-El [flujo de trabajo de lanzamiento](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) estará listo para su uso una vez que este proyecto se haya subido a un repositorio de GitHub con Actions habilitado. Se ejecuta cuando se **publica** un lanzamiento en GitHub, incluida una versión preliminar. Los borradores y las subidas de etiquetas por sí solos no publican paquetes.
-
-1. Establezca la versión del paquete y el registro de cambios; a continuación, publique una versión etiquetada con «`v`» más la versión exacta de «`pyproject.toml`», como por ejemplo «`v0.8.0`».
-2. El flujo de trabajo valida la etiqueta y ejecuta las comprobaciones compartidas de Python para Windows/Linux/macOS, del navegador «general/account-import/QR», del paquete fuente y de Docker. También se lleva a cabo una instalación nativa nueva en los tres sistemas operativos utilizando Python 3.12.
-3. Una vez superadas esas comprobaciones, se realiza una prueba de funcionamiento de una imagen ARM64 en QEMU, se publican las imágenes AMD64/ARM64 en `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, y se adjuntan el archivo ZIP con el código fuente y el paquete Python wheel junto con sus archivos SHA-256 adjuntos. El archivo ZIP portátil para Windows es exactamente el mismo artefacto que se ha probado en el flujo de trabajo de comprobaciones; el flujo de trabajo de lanzamiento descarga y publica ese artefacto y su suma de comprobación.
-4. Una tarea final vuelve a descargar los tres paquetes publicados y verifica sus sumas de comprobación. A continuación, publica `SHA256SUMS.txt` y `RELEASE-MANIFEST.json`, registrando la versión, la revisión del código fuente y los tamaños de los recursos. Las subidas no sobrescriben los recursos de la versión existentes.
-5. Tras la primera publicación, abra la configuración del paquete GHCR y establezca la visibilidad en **«Pública»** si se pretende realizar descargas anónimas de imágenes. Un repositorio de código fuente público por sí solo no garantiza que el paquete del contenedor sea público. Las políticas de la organización deben permitir la publicación del paquete. El flujo de trabajo utiliza `GITHUB_TOKEN`; no deben incluirse en el repositorio contraseñas de registro ni credenciales de VPS.
-
-El éxito del flujo de trabajo remoto no se ha confirmado mediante esta preparación local. La emulación de ARM64 es una prueba preliminar, no una validación en hardware nativo ni en Telegram en entorno real. Esto automatiza la creación de paquetes de lanzamiento; para iniciar un servidor sigue siendo necesario el comando «Compose» y sus requisitos previos de dominio/host. Los servidores existentes no se actualizan ni se reinician de forma silenciosa cuando se publica una versión.
-
 ## Servidor remoto
 
 Mantenga el servicio vinculado al bucle de retorno y utilice un túnel SSH, o bien termine la conexión HTTPS en un proxy inverso. El archivo Compose base es de uso exclusivamente local; la superposición opcional « `deploy/compose/compose.https.yaml`» proporciona Caddy para un dominio configurado. Mantenga el token de portador fuera de las URL y de los registros del proxy. Un proxy inverso debe limitar el tamaño de las solicitudes y la frecuencia de conexión. No exponga el protocolo HTTP sin cifrar a Internet.
@@ -244,14 +222,6 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 Utilice `--profile ID`, de **«Exportaciones» → «ID del espacio de trabajo»**, para otro espacio de trabajo; `--format zip|jsonl|csv|html` o `--url https://your-server` para un servidor remoto; o `--max-mib` para modificar el límite de transferencia de 5 GiB. Solo se permite el protocolo HTTP sin cifrar para el bucle de retorno. Los tokens se transmiten en los encabezados, se rechazan las redirecciones, los archivos existentes no se sobrescriben y las descargas incompletas no se publican como archivos finalizados. Si TGWITNESS_TOKEN anula el token generado, utilice un archivo protegido por separado que contenga ese valor activo: panel-token.txt no se reescribe con la anulación. El SHA-256 del comando es solo una suma de comprobación de la transferencia; verifique de forma independiente el archivo ZIP firmado.
 
-Los archivos de exportación del servidor permanecen dentro del directorio privado «`temporary-exports/`» de cada espacio de trabajo. Las exportaciones completadas con éxito eliminan sus archivos. Las exportaciones interrumpidas se eliminan en el siguiente inicio del espacio de trabajo, mientras se mantiene el bloqueo exclusivo de la instancia. Este directorio forma parte del modelo de amenazas y capacidad de almacenamiento; utilice un volumen de datos cifrado. Las transferencias a escala de producción de varios gigabytes siguen requiriendo una validación en su sistema de destino.
-
 El panel muestra los archivos multimedia en cola o fallidos, los archivos multimedia pendientes más antiguos, el espacio libre en disco, las pausas en las solicitudes de Telegram y las fuentes cuyo acceso no está confirmado. Estos diagnósticos no constituyen un monitor completo de entrega de extremo a extremo. Los espacios de trabajo comparten un proceso; una cuenta con mucha actividad puede seguir afectando a los demás. Se mantienen los procesos de trabajo independientes, la retención y rotación, la recuperación duradera de actualizaciones y la cualificación completa de la implementación. El acceso limitado al panel se documenta en la sección de [acceso y permisos](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/); los puntos de control independientes se tratan en la [guía del testigo](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/).
-
-## Opciones de conexión y protección
-
-Las rutas de conexión son específicas de cada espacio de trabajo y deben configurarse antes de la autorización. SOCKS5/HTTP CONNECT utilizan la dependencia fijada «python-socks». MTProxy utiliza el transporte intermedio aleatorio experimental de Telethon; no se admiten secretos TLS falsos. El recurso directo depende del [modo de IP](https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/#ip-modes) seleccionado: **«Ocultar la dirección»** lo rechaza; **«Directo como último recurso»** lo permite tras un retraso. **Un servidor detrás de un túnel o una VPN** permite rutas directas, pero no crea una VPN. No se trata de una política de red para todo el sistema.
-
-Para nuevas instalaciones, TGWITNESS_VAULT_KEY_FILE apunta a un archivo de clave maestra aleatoria protegido por separado. Móntelo en modo de solo lectura fuera de /data en un contenedor. Conserve los metadatos públicos de la sal de vault.external.json con cada espacio de trabajo y la clave maestra por separado. Las bóvedas locales existentes requieren una migración planificada; la configuración de esta variable no las convierte automáticamente. El almacenamiento y las exportaciones de mensajes y archivos multimedia no están cifrados por la aplicación. Utilice volúmenes cifrados y suficiente almacenamiento temporal privado cuando sea necesario.
 
 Procedimientos detallados: [conexión/seguridad](https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/) y [modos de funcionamiento](https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/).

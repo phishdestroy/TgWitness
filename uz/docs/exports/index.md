@@ -2,48 +2,48 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/exports/
 
-Qabul qiluvchiga yig'ish ish maydoni va uning saqlangan tarixi bilan solishtirib tekshirishi mumkin bo'lgan fayllarni taqdim eting.
+Kimgadir ish maydoningizga solishtirib o'zi tekshira oladigan fayllarni bering.
 
 Manbani saqlashImzolangan ZIP-ni eksport qilingQabul qiluvchi tasdiqlaydi
 
-Imzolar va tekshiruv nuqtalariga yangi boshlamoqdamisiz? [Namuna yozuvni o'zgartiring](https://phishdestroy.github.io/TgWitness/uz/docs/concepts/#chain) va qaysi tekshiruvlar uni aniqlashini ko'ring.
+Imzolar va nazorat nuqtalari sizga yangimi? [Namuna yozuvni o'zgartiring](https://phishdestroy.github.io/TgWitness/uz/docs/concepts/#chain) va qaysi tekshiruv uni ushlashini ko'ring.
 
 Nusxani yig'uvchidan uzoqda saqlashni xohlaysizmi? [S3 sozlamalar](https://phishdestroy.github.io/TgWitness/uz/docs/exports/#s3)iga o'ting, [Object Lock](https://phishdestroy.github.io/TgWitness/uz/docs/exports/#s3-retention) yoki [tasdiqlangan tiklashni tanlang](https://phishdestroy.github.io/TgWitness/uz/docs/exports/#s3-restore).
 
 ## Ishonchli manbani saqlab qo'ying
 
-Ish maydonining jamoat kaliti barmoq izini yig'uvchidan tashqarida saqlang. Yig'ish jarayonida imzolangan tekshiruv nuqtalarini boshqa joyda saqlang yoki [mustaqil guvoh](https://phishdestroy.github.io/TgWitness/uz/docs/witness/)dan foydalaning. Ushbu havolalar qabul qiluvchiga kalitni va avvalgi jurnal chegarasini tekshirish imkonini beradi.
+Ish maydoni kalitining barmoq izini kollektordan boshqa joyga yozing. Yig'ish davomida imzolangan nazorat nuqtalarini ham boshqa joyda saqlang yoki [mustaqil guvoh](https://phishdestroy.github.io/TgWitness/uz/docs/witness/)ni ishga tushiring. Qabul qiluvchi kalitni va jurnalning oldingi holatini aynan shular bilan tekshiradi.
 
 ## Imzolangan ZIP-faylni yuklab oling
 
-**Exportsni** oching va imzolangan dalillar ZIP-faylini yarating. U to'liq ish maydoni jurnali va imzolangan fayllar manifestini o'z ichiga oladi. [Report Studio](https://phishdestroy.github.io/TgWitness/uz/docs/reports/)'dan foydalanib, o'qiladigan hisobotni shakllantiring yoki faqat tanlangan, minimallashtirilgan ma'lumotlarni yetkazish uchun [handover ekstrakt](https://phishdestroy.github.io/TgWitness/uz/docs/handover/)ini yarating.
+**Eksportlar** → imzolangan dalil ZIP. Unda butun jurnal va imzolangan fayl manifesti bor. O'qilishi oson hisobotni [Report studio](https://phishdestroy.github.io/TgWitness/uz/docs/reports/)'da shakllantiring yoki faqat tanlangan ma'lumotlarni [topshirish ekstrakti](https://phishdestroy.github.io/TgWitness/uz/docs/handover/) sifatida yuboring.
 
-HTML, PDF va JSON hisobotlari o'z imzolangan muhrlariga ega bo'lib, ularni alohida tekshirish mumkin. CSV tahlil uchun qulay nusxa bo'lib, uning yaxlitligini tekshirish uchun tasdiqlangan ZIP ichidagi aniq CSV faylidan foydalaning. Agar qabul qiluvchi manba yozuvlari va ilovalarni ham talab qilsa, imzolangan ZIP faylni saqlang.
+HTML, PDF va JSON hisobotlarining o'z muhrlari bor. CSV shunchaki ishchi nusxa; yaxlitlik uchun tekshirilgan ZIP ichidagi CSV'dan foydalaning.
 
 ## TgWitness'ning ishonchli nusxasi bilan tasdiqlang
 
-O'rnatilgan loyiha muhitida namunaviy barmoq izi va fayl yo'llarini quyidagilar bilan almashtiring:
+Loyiha muhitida, o'z barmoq izingiz va yo'llaringiz bilan:
 
 ```
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 ```
 
-Ikkala havola ham o'tganida, natija `key_pinned: true` va `checkpoint_checked: true` ni qayta hisobot beradi. Verifikatsiya natijasini asl arxiv bilan birga saqlang. Saqlangan tekshiruv nuqtasi eksport chegarasida yoki undan oldin bo'lishi kerak.
+Muvaffaqiyatda `key_pinned: true` va `checkpoint_checked: true` ko'rinadi. Bu natijani arxiv yonida saqlang. Nazorat nuqtasi eksport oxirida yoki undan oldin bo'lishi kerak.
 
 ## Verifikatsiya natijasidan foydalaning
 
-- **Yetkazib berilgan fayllarni tekshiring:** manifest ularning hashlarini bog'laydi, yozuv imzolari esa saqlangan jurnalni bog'laydi. O'zgargan fayl yoki uzilgan yozuv zanjiri aniqlanadi.
-- **Ish maydoni identifikatorini tekshiring:** mustaqil saqlangan barmoq izi siz kutgan imzolash kalitingizni aniqlaydi.
-- **Oldingi chegarani solishtiring:** saqlangan tekshiruv nuqtasi topshirishdan oldin saqlangan jurnal prefiksi bilan eksportni tekshiradi.
-- **Ko'rib chiqish yig'indisi qamrovi:** bo'shliqlar, olish natijalari va nazoratli jo'natish → tahrirlash → o'chirish testi ushbu sozlama tomonidan qayd etilgan voqealarni tasvirlaydi.
+- **Fayllar:** manifest ularning xeshlarini, imzolar jurnalni bog'laydi. Har qanday o'zgarish ko'rinadi.
+- **Shaxs:** saqlagan barmoq izingiz bu siz kutgan kalit ekanini isbotlaydi.
+- **Oldingi holat:** nazorat nuqtasi eksportni topshirishdan oldin saqlangan jurnal boshi bilan solishtiradi.
+- **Qamrov:** bo'shliqlar, olish natijalari va yuborish → tahrirlash → o'chirish sinovi bu sozlama haqiqatan nimani ushlaganini ko'rsatadi.
 
-Ushbu natijalarni qabul qiluvchining nusxasi bilan birga saqlang. Tekshiruvlar doirasini hamda manba da'volari va yig'ish qamrovini alohida baholashni aniqlash uchun [qanday tasdiq o'rnatilganini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) ko'ring.
+Batafsil: [tekshiruv nimani isbotlaydi va nimani isbotlamaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope).
 
 ## S3 tashqi nusxasini sozlash
 
-Joriy ish maydoningizda **Eksportlar → Off-sayt nusxasi** bo'limini oching. Ushbu ixtiyoriy funksiya AWS S3 va boshqa S3-ga mos xizmatlar bilan ishlaydi. U jurnal segmentlarini, saqlangan fotosuratlar va fayllarni, vaqt shtampi bilan belgilangan tekshiruv nuqtalarini hamda yakunlangan suhbat eksportlarini nusxalaydi. Har bir ob'ekt yuklanishdan oldin to'plovchida`AES-256-GCM` bilan shifrlanadi.
+Ish maydoningizda **Eksportlar → Off-sayt nusxasi**. AWS S3 va har qanday S3-mos xizmat bilan ishlaydi. Jurnal segmentlari, saqlangan fayllar, vaqt belgilari bilan nazorat nuqtalari va tugallangan chat eksportlarini nusxalaydi, har biri kollektordan chiqishdan oldin `AES-256-GCM` bilan shifrlanadi.
 
-Onlayn demo yuklash funksiyasi o'chirilgan holda bir xil boshqaruv elementlarini ko'rsatadi. Saqlash ma'lumotlarini faqat o'zingizning ish muhitingizda kiriting.
+Onlayn demo bu boshqaruvlarni yuklash o'chirilgan holda ko'rsatadi. Haqiqiy hisob ma'lumotlarini faqat o'z o'rnatmangizda kiriting.
 
 [![To'liq Off-site nusxa paneli: oxirgi nuqta, mintaqa, bucket, kirish kalitlari, jadval, Object Lock va tiklash kaliti boshqaruvlari](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
@@ -51,37 +51,37 @@ Kengaytirilgan ilg'or opsiyalar bilan to'liq panel. Saqlash ma'lumotlari ko'rsat
 
 | Maydon | Nimani kiritish |
 | --- | --- |
-| Oxirgi nuqta | Saqlash xizmati URL manzili, bucket yo'li yoki kirish ma'lumotlarisiz. Badiiy misol: `https://s3.example.invalid` |
-| Mintaqa | Provayderingiz talab qiladigan mintaqa. Ilovaning standart qiymati `us-east-1`. |
-| Bucket | Kirishingiz mumkin bo'lgan mavjud bucket. Badiiy misol: `example-case-backup`. |
-| Chelakdagi papka | Ob'ekt prefiksi; standart qiymati `tgwitness`. Ilova ushbu ish maydonining imzolash kaliti barmoq izidan olingan prefiksni qo'shadi. |
-| Kirish kaliti ID / Maxfiy kirish kaliti | Saqlash ma'lumotlarini ikkitasini ham birga kiriting. Ular ish maydoni seyfida saqlanadi. Keyingi saqlashlarda ikkitasini ham bo'sh qoldiring, shunda saqlangan juftlik saqlanib qoladi. |
-| Yo'l-uslubidagi manzillar | Provayderga ko'ra, yoqilganda `endpoint/bucket`, o'chirib qo'yilganda `bucket.endpoint` dan foydalaning. |
-| Ko'chirma oraligi | 1 dan 1 440 daqiqagacha; standart 5 daqiqa. Rejalashtirilgan nusxalar olinishi uchun ilova ishga tushirilgan bo'lishi kerak. |
-| Object Lock saqlash | Object Lock-ni qo'llab-quvvatlaydigan bucket uchun saqlash muddati va rejimi. Nol kun bucketning standart saqlash muddatini amalda qoldiradi. |
+| Oxirgi nuqta | Saqlash URL manzili, bucket yo'li yoki hisob ma'lumotlarisiz. Misol: `https://s3.example.invalid`. |
+| Mintaqa | Provayderingiz talab qilgan qiymat. Standart `us-east-1`. |
+| Bucket | Yozish huquqingiz bor mavjud bucket. Misol: `example-case-backup`. |
+| Chelakdagi papka | Prefiks, standart `tgwitness`. Uning ustiga har bir ish maydoni prefiksi qo'shiladi. |
+| Kirish kaliti ID / Maxfiy kirish kaliti | Ikkalasi birga, seyfda saqlanadi. Keyinroq ikkalasini bo'sh qoldirsangiz, saqlanib qoladi. |
+| Yo'l-uslubidagi manzillar | Yoqilgan: `endpoint/bucket`. O'chirilgan: `bucket.endpoint`. Provayderga bog'liq. |
+| Ko'chirma oraligi | 1 dan 1,440 daqiqagacha, standart 5. Faqat ilova ishlayotganda. |
+| Object Lock saqlash | Kunlar va rejim, agar bucket Object Lock'ni qo'llasa. Nol bucket standartini saqlaydi. |
 
-1. Provayderingizda bucket yarating, so'ng uning manzili va kirish ma'lumotlarini kiriting. Tayyorlanayotganda "**Offsayt nusxasini saqlash"**ni belgilamagan holda qoldiring, so'ng "**Offsayt nusxasini saqlash"ni** tanlang.
-2. **Ulanishni sinab ko'rishni** tanlang. Bu shifrlangan test ob'ektini yuklaydi va saqlash javobini tekshiradi.
-3. **Yuklab olish shifrlash kalitini** tanlang. Ushbu faylni kollektor (ma'lumot yig'uvchi)dan alohida saqlang; u tiklash uchun zarur.
-4. **Offsayt nusxasini saqlash** katagini belgilang va yana saqlang. Qo'lda ijro etish uchun "**Nusxani hozir ko'chirish**"ni tanlang yoki jadvalni ishga tushirib qo'ying.
+1. Bucket yarating, **Off-sayt nusxasini saqlash** belgilanmagan holda manzil va hisob ma'lumotlarini to'ldiring, **Off-sayt nusxasini saqlash** tugmasini bosing.
+2. **Ulanishni sinash** shifrlangan sinov obyektini yuklaydi.
+3. **Shifrlash kalitini yuklab olish** va uni kollektordan uzoqda saqlang. Kalit yo'q, tiklash yo'q.
+4. **Off-sayt nusxasini saqlash**ni belgilang, saqlang, so'ng **Hozir nusxalash** yoki jadval ishlasin.
 
 ## Saqlash muddatini va nusxa ko'chirish jarayonini tekshirish
 
-**Qo'shimcha sozlamalar** bo'limida, baketingiz Object Lock-ni qo'llab-quvvatlaganda saqlash muddatini kunlarda belgilash va `GOVERNANCE` yoki `COMPLIANCE` ni tanlang. TgWitness yuklangan obyektning saqlash rejimi va muddatini qayta o'qiydi. Alohida saqlash natijasini ko'rib chiqing: tasdiqlangan, saqlash muddati yetishmayotgan yoki tekshiruv muvaffaqiyatsiz bo'lgan.
+**Boshqa variantlar** ostida saqlash kunlarini va `GOVERNANCE` yoki `COMPLIANCE`ni tanlang. TgWitness saqlash sozlamasini yuklangan obyektdan qayta o'qiydi va aytadi: tasdiqlandi, yo'q yoki tekshiruv muvaffaqiyatsiz.
 
-Panel oxirgi o'tish, ob'ektlar soni, uzatilgan baytlar, nusxalangan jurnal chegarasi va har qanday xatoni ko'rsatadi. Yo'qolgan yoki o'zgartirilgan mahalliy media qayd etilib, keyingi o'tishda qayta sinovdan o'tkaziladi. O'sha media ortidagi fayllar, tekshiruv nuqtalari va navbatga qo'yilgan eksportlar hanuzgacha nusxalanishi mumkin.
+Panel oxirgi o'tishni, obyektlar sonini, baytlarni, nusxalangan jurnal chegarasini va xatolarni ko'rsatadi. Yo'qolgan mahalliy fayl xabar qilinadi va keyingi o'tishda qayta uriniladi, qolgani nusxalanishda davom etadi.
 
-Yuklashlar ish maydonining Direct, SOCKS5 yoki HTTP yo'nalishidan foydalanadi. S3 nusxa ko'chirish uchun ushbu yo'nalishlardan birini tanlang; faqat MTProxy yo'nalishi nusxani xato bilan kutib turadi.
+Yuklashlar to'g'ridan-to'g'ri, SOCKS5 yoki HTTP orqali o'tadi. Faqat MTProxy marshrutida nusxa xato bilan kutadi.
 
 ## Qayta tiklash kalitini alohida saqlang
 
-Yuklab olingan JSON dekodlash kaliti, manzil sozlamalari, ish maydoni ob'ektlari prefiksi va imzolash kalitining barmoq izini o'z ichiga oladi. Tiklash uchun ushbu kalit fayli hamda bucketga o'qish huquqiga ega alohida saqlash ma'lumotlari talab etiladi. Ularni tiklash reyangizda hisobga oling.
+Kalit JSON'ida shifrni ochish kaliti, manzil, prefiks va kalit barmoq izi bor. Tiklash uchun u va o'qish huquqli saqlash hisob ma'lumotlari kerak.
 
-Agar endpoint, bucket yoki papka prefiksini o'zgartirsangiz, kalit faylni qayta yuklab oling, shunda uning manzil sozlamalari mos keladi. Ilova yangi manzilda mahalliy saqlangan jurnal, fayllar va tekshiruv nuqtalari nusxasini ishga tushiradi. Mahalliy yuklash navbatidan allaqachon olib tashlangan yakunlangan suhbat eksportlari avvalgi manzilida qoladi.
+Endpoint, bucket yoki prefiksni o'zgartirdingizmi? Kalitni qayta yuklab oling. Yangi nusxa yangi manzilda boshlanadi; eski chat eksportlari joyida qoladi.
 
 ## Boshqa qurilmada tiklash va tekshirish
 
-TgWitness'ning ishonchli o'rnatilgan nusxasini, yuklab olingan kalit JSON faylini, o'qish huquqiga ega saqlash ma'lumotlarini va bo'sh chiqish katalogini ishlating. Quyidagi badiiy ma'lumot o'rnini bosuvchi o'rinbosarlarni haqiqiy ma'lumotlar bilan almashtiring.
+Sizga ishonchli TgWitness o'rnatmasi, kalit JSON, faqat o'qish uchun saqlash hisob ma'lumotlari va bo'sh papka kerak:
 
 ### Windows PowerShell
 
@@ -99,8 +99,6 @@ export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence
 ```
 
-Yuklab olingan va dekriptlangan obyektlar shaxsiy vaqtinchalik saqlashda qoladi, shu vaqtda butun jurnal, saqlangan tekshiruv nuqtalari hamda saqlangan media hash va o'lchamlari tekshiriladi. Xavfsiz bo'lmagan yo'llar, to'qnashuvchi jurnal segmentlari va tekshiruv nuqtasidan qisqaroq jurnal rad etiladi. Tekshirish muvaffaqiyatsiz bo'lsa, tiklangan fayllar e'lon qilinmaydi.
+Hammasi avval shaxsiy vaqtinchalik papkada tekshiriladi: butun jurnal, nazorat nuqtalari, fayl xeshlari va o'lchamlari. Xavfli yo'llar, ziddiyatli segmentlar yoki nazorat nuqtasidan qisqa jurnal muvaffaqiyatsiz bo'ladi va shunda hech narsa yozilmaydi.
 
-Muvaffaqiyatli tiklash natijasida nusxada mavjud material uchun `events.jsonl`, `media/`, `checkpoints/` va `exports/` hosil bo'ladi. Buyruqning JSON natijasini tiklangan material bilan birga saqlang.
-
-Qayta tiklangan materiallarni mustaqil saqlangan tekshiruv nuqtangiz yoki guvoh yozuvlaringiz bilan solishtiring, so'ng kerakli davr uchun yozib olingan to'plam qamrovini ko'rib chiqing.
+Muvaffaqiyatda `events.jsonl`, `media/`, `checkpoints/` va `exports/` olasiz. Buyruqning JSON natijasini ular bilan saqlang va o'zingiz saqlagan nazorat nuqtalari yoki guvoh yozuvlari bilan solishtiring.

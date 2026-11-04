@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../">홈</a> <span aria-hidden="true">/</span> <a href="../">문서</a> <span aria-hidden="true">/</span> <span aria-current="page">계정 연결</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">문서 / 05</p><h1>계정 연결</h1><p class="guide-outcome">하나의 작업 공간에는 하나의 계정과 해당 계정의 기록부, 그리고 서명 키가 포함됩니다.</p>
+<article class="guide-content"><p class="eyebrow">문서 / 05</p><h1>계정 연결</h1><p class="guide-outcome">작업 공간 하나 = 계정 하나, 그 저널과 키.</p>
 <h2 id="sign-in">로그인 방법 선택</h2>
-<p><strong>계정을</strong> 개설하고, 작업 공간을 추가한 다음 연결 설정을 엽니다. 관찰을 위해 전용 계정을 사용하십시오.</p>
-<ul><li><strong>QR 코드:</strong> 텔레그램의 기기 설정에서 이 코드를 스캔하고 새 로그인을 확인하세요.</li><li><strong>전화번호:</strong> 번호를 입력하고, 텔레그램에서 전송한 인증 코드를 입력한 후, 2단계 인증이 활성화된 경우 해당 비밀번호를 입력하십시오.</li><li><strong>세션 가져오기:</strong> 지원되는 세션이나 본인 소유의 텔레그램 데스크톱 데이터를 가져옵니다.</li></ul>
-<p>내장된 API 프로필을 선택하거나 직접 API ID와 해시를 입력하세요. API 프로필은 클라이언트를 식별하는 용도로 사용되며, 계정에 로그인하거나 연결을 익명으로 만드는 기능은 제공하지 않습니다.</p>
+<p><strong>계정</strong> → 작업 공간 추가 → 연결 설정. 이 용도로는 별도의 계정을 사용하십시오.</p>
+<ul><li><strong>QR 코드:</strong> 텔레그램의 기기 화면에서 스캔하고 확인합니다.</li><li><strong>전화번호:</strong> 번호, 코드, 그리고 있다면 2단계 인증 비밀번호.</li><li><strong>세션 가져오기:</strong> 귀하의 세션 파일 또는 Telegram Desktop 데이터.</li></ul>
+<p>기본 제공 API 프로필이나 자체 API ID와 해시를 사용합니다. 앱을 식별할 뿐이며, 로그인시켜 주거나 무언가를 숨기지는 않습니다.</p>
 <details><summary>먼저 프록시가 필요하신가요?</summary><p>로그인하기 전에 <a href="../proxies/">연결 경로를 선택하고 테스트해 볼</a> 수 있습니다. 각 계정마다 고유한 경로가 있습니다.</p></details>
 <h2 id="sources">관찰 대상 선택</h2>
-<ol><li>소스 목록을 열고 필요한 채팅, 그룹 또는 채널을 선택하세요.</li><li>관찰을 시작하기 전에 미디어를 포함한 수집 설정을 검토하십시오.</li><li>수집기를 시작하고 연결 상태 및 최근 활동을 확인하십시오.</li></ol>
-<p>해당 계정은 소스에 접근할 수 있어야 합니다. 역할에 따라 볼 수 있는 이벤트가 다르며, 기록부는 해당 계정이 수신한 내용을 반영합니다.</p>
-<p>계정 전체에 걸친 사건을 조사하려면 <strong>‘소스(Sources)’ → ‘관찰 범위(Observation scope)’ → ‘조사 모드</strong>(<strong>Investigation mode</strong>)’를 선택하고, 설정을 검토한 후 <strong>‘범위 저장(Save scope)’을</strong> 누르십시오. <a href="../cases/">전체 조사 안내서는</a> 표시되는 모든 채팅 유형, 과거 기록, 사용자 프로필, 채팅 간 참조 및 증거 인계 과정을 다룹니다.</p>
+<ol><li>필요한 채팅, 그룹 또는 채널을 고릅니다.</li><li>미디어를 포함한 수집 설정을 확인합니다.</li><li>시작한 후 연결과 최근 활동을 확인합니다.</li></ol>
+<p>계정에 접근 권한이 있어야 합니다. 관리자와 멤버는 보는 것이 다르며, 저널은 이 계정이 받은 것을 보여 줍니다.</p>
+<p>계정 전체라면? <strong>소스 → 관찰 범위 → 조사 모드</strong>를 확인하고 <strong>범위 저장</strong>. 전체 안내: <a href="../cases/">계정 전체 조사하기</a>.</p>
 <h2 id="check">전체 경로 확인</h2>
-<p>사용자가 관리하는 테스트 그룹에서 다른 계정을 통해 고유한 메시지를 보내고, 이를 수정하고 삭제해 보십시오. 저널에서 이 세 가지 이벤트가 모두 기록되었는지 확인한 후, 기록을 <a href="../exports/">내보내고 검증하십시오</a>.</p>
-<p class="callout">&#x27;연결됨&#x27; 상태는 연결이 성공적으로 이루어졌음을 나타냅니다. 캡처된 테스트 메시지는 특정 이벤트가 이 작업 공간에 도달했음을 확인해 줍니다.</p>
+<p>테스트 그룹에서 다른 계정으로 메시지를 보내고, 편집하고, 삭제합니다. 세 가지 모두 저널에 나타나야 합니다. 그런 다음 <a href="../exports/">내보내고 검증</a>하십시오.</p>
+<p class="callout">"연결됨"은 연결이 작동한다는 뜻입니다. 테스트 메시지가 기록되면 이벤트가 실제로 도착한다는 뜻입니다.</p>
 <h2 id="more">계정 추가</h2>
-<p>&#x27;계정(<strong>Accounts)</strong>&#x27;에서 또 다른 작업 공간을 생성하고 설정을 반복하십시오. 나중에 내보낸 데이터를 식별할 수 있도록 각 계정의 서명 키 지문을 보관해 두십시오.</p>
+<p><strong>계정</strong>에서 새 작업 공간을 만들고 같은 단계를 따릅니다. 나중에 내보내기를 구별할 수 있도록 각 계정의 키 지문을 적어 두십시오.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/accounts/">전체 참고 문헌 →</a><a class="next-guide" href="../exports/"><span>다음 단계</span><strong>내보내기 및 검증 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../reference/verification/">테스트된 내용 →</a></p></footer>
 </main>

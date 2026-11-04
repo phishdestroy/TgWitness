@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/security/
 
-Découvrez les itinéraires pour Telegram, les listes de proxys publics et les services externes optionnels. Sachez ce que chaque secret permet d’accéder, ce que les protections couvrent et ce qu’elles vous laissent à votre charge.
+Ce qui quitte votre machine, ce que chaque secret ouvre, et ce que couvrent les protections par rapport à ce qui vous incombe.
 
 **127.0.0.1**Adresse du panneau par défaut
 
@@ -14,7 +14,7 @@ Découvrez les itinéraires pour Telegram, les listes de proxys publics et les s
 
 ## C’est ici que tout se trouve
 
-Le collecteur, son panneau de configuration et chaque enregistrement conservé restent sur l'ordinateur ou le serveur sur lequel vous l'exécutez. Telegram est la seule destination par défaut ; chaque autre destination fait l'objet d'un commutateur distinct.
+Le collecteur, le panneau et chaque entrée restent sur votre machine. Par défaut, seul Telegram est contacté ; tout le reste est un interrupteur à part.
 
 06 / CE QUI SORT DE LA MACHINEVotre installation
 
@@ -56,54 +56,54 @@ Les destinations facultatives sont configurées par espace de travail. Le texte 
 
 | Secret | Où est-il conservé ? | Ce que cela permet | En cas de fuite |
 | --- | --- | --- | --- |
-| **Jeton de panel** | `panel-token.txt` dans le répertoire de données ; le navigateur ne le conserve que pour l'onglet concerné | Toutes les fonctionnalités dans chaque espace de travail : lire et exporter, modifier la portée, se connecter à des comptes | Arrêtez TgWitness, supprimez `panel-token.txt`, relancez-le : un nouveau jeton est créé |
+| **Jeton de panel** | `panel-token.txt` dans le dossier de données ; le navigateur le garde par onglet | Tout, dans chaque espace | Arrêtez TgWitness, supprimez `panel-token.txt`, redémarrez : vous en obtenez un nouveau |
 | **Session Telegram** | Vault, chiffré (`credentials.enc`) | Le compte Telegram lui-même | Mettez fin à la session dans Telegram via *Paramètres → Appareils* |
-| **Clé de signature** | Vault, chiffré (`signing.enc`) | Signature des enregistrements vérifiables à l’aide de votre empreinte numérique | Des points de contrôle conservés séparément, un témoin et des horodatages indiquent ce qui existait auparavant |
-| **Clé de coffre-fort** | `vault.key` à côté des données, ou une clé principale externe pour un nouveau répertoire de données | Décrypter le coffre-fort | Considérez que la clé de session et la clé de signature ont également fait l’objet d’une fuite |
-| **Jeton Witness** | Sur l’hébergeur Witness | En lecture seule : points de contrôle signés et état de santé | Supprimez-le sur la page Witness ; créez-en un nouveau |
-| **Texte à utiliser hors site** | Vault ; téléchargez-le une seule fois pour pouvoir le récupérer | Décryptage de la copie hors site | Toute personne détenant également les objets stockés peut les déchiffrer : considérez cette copie comme exposée |
+| **Clé de signature** | Vault, chiffré (`signing.enc`) | Signer des entrées sous votre empreinte | Les points de contrôle conservés ailleurs, un témoin et les horodatages montrent toujours ce qui existait avant |
+| **Clé de coffre-fort** | `vault.key` à côté des données, ou une clé maîtresse externe | Le coffre | Considérez que la session et la clé de signature ont aussi fuité |
+| **Jeton Witness** | Sur l’hébergeur Witness | Lecture seule : points de contrôle et état | Supprimez-le sur la page du témoin et créez-en un nouveau |
+| **Texte à utiliser hors site** | Vault ; téléchargez-le une seule fois pour pouvoir le récupérer | La copie externe | Quiconque a aussi le bucket peut la déchiffrer : considérez la copie comme exposée |
 
 ## Ce que couvrent les mesures de protection
 
 ### Couverts
 
-- Une entrée modifiée, supprimée ou réorganisée dans une exportation : la chaîne de hachage ou la signature n'est plus valide.
-- Un journal raccourci ou reconstitué après qu’un point de contrôle a été conservé ailleurs : le point de contrôle conservé ne correspond plus.
-- Deviner le jeton du panneau : 256 bits aléatoires, comparés en temps constant ; après 15 échecs par minute, l'adresse est refusée.
-- Contenu de discussion hostile : le texte est inséré sous forme de texte, jamais en HTML ; les pièces jointes sont téléchargées sous forme de fichiers ; le panneau ne charge aucun élément provenant d’autres sites.
-- Un répertoire de données copiées avec une clé de coffre-fort externe : les sessions et les clés de signature restent chiffrées sans la clé principale.
+- Une entrée modifiée, supprimée ou réordonnée : la chaîne de hachages ou une signature se rompt.
+- Un journal raccourci ou reconstruit après que vous avez conservé un point de contrôle ailleurs : le point de contrôle ne correspond plus.
+- Deviner le jeton : 256 bits aléatoires, comparaison en temps constant ; 15 échecs par minute et l’adresse est bloquée.
+- Contenu hostile dans les chats : le texte reste du texte, jamais du HTML ; les pièces jointes se téléchargent comme fichiers ; le panneau ne charge rien depuis d’autres sites.
+- Un dossier de données volé avec une clé de coffre externe : sessions et clés restent chiffrées.
 
 ### À vous de jouer
 
-- Le détenteur du jeton principal dispose d’un contrôle total. Accordez aux autres utilisateurs un accès limité aux comptes, discussions et actions dont ils ont besoin ; veillez à ce que la clé principale reste confidentielle.
-- Un administrateur de la machine peut tout lire, réécrire et resigner le journal. Conservez l’empreinte numérique et les points de contrôle sur un autre système.
-- Le texte des messages et les fichiers multimédias ne sont pas chiffrés par TgWitness. Veuillez utiliser un chiffrement de disque et définir des autorisations strictes.
-- Une connexion HTTP standard en dehors de localhost expose le jeton sur le réseau. Utilisez le protocole HTTPS ou un tunnel SSH.
-- Vérifiez les enregistrements sauvegardés à l’aide des signatures et des points de contrôle. Vérifiez l’exhaustivité de la collecte et testez la livraison pour les comptes et les sources que vous utilisez.
+- Le jeton principal peut tout faire. Donnez aux autres un accès limité et gardez le principal pour vous.
+- Qui est administrateur de la machine peut tout lire et re-signer le journal. Conservez l’empreinte et les points de contrôle ailleurs.
+- TgWitness ne chiffre ni les messages ni les médias. Chiffrez le disque et restreignez les droits.
+- Le HTTP simple hors de localhost fait fuiter le jeton. Utilisez HTTPS ou un tunnel SSH.
+- Les signatures ne vous disent pas ce qui a été manqué. Vérifiez la couverture et testez la livraison sur vos propres comptes et sources.
 
-[Partagez l’accès à un dossier](https://phishdestroy.github.io/TgWitness/fr/docs/access/) en définissant des autorisations, une date d’expiration et des limites de session. Un jeton « witness » reste un identifiant distinct.
+[Partagez l’accès à une affaire](https://phishdestroy.github.io/TgWitness/fr/docs/access/) avec des droits, une expiration et des limites de session.
 
 ## Renforcer la sécurité d’une installation
 
 0 sur 8 terminé
 
-1. **Utilisez un compte Telegram dédié** — jamais votre compte principal. Le jeton du panneau et la session vous permettent d’en avoir le contrôle total.
-2. **Conservez le panneau sur 127.0.0.1.** Accédez-y à distance uniquement via HTTPS (la configuration Caddy fournie) ou un tunnel SSH.
-3. **Chiffrez le disque** contenant le répertoire de données : le texte des messages et les fichiers multimédias sont stockés tels qu’ils ont été reçus.
-4. **Limitez le répertoire de données** au compte de service. Sous Unix, les nouveaux répertoires se voient attribuer le mode 0700 ; sous Windows, définissez les droits d'accès du dossier.
-5. **Conservez la clé principale du coffre-fort** sur un **autre** serveur : définissez « `TGWITNESS_VAULT_KEY_FILE` » avant de créer le répertoire de données.
-6. **Enregistrez l’empreinte de la clé de signature et les points de contrôle** sur un autre système, puis ajoutez un témoin sur un autre serveur.
+1. **Utilisez un compte Telegram dédié**, jamais le principal.
+2. **Laissez le panneau sur 127.0.0.1.** Accès distant uniquement via HTTPS (Caddy fourni) ou un tunnel SSH.
+3. **Chiffrez le disque** qui contient le dossier de données : messages et médias sont stockés tels quels.
+4. **Restreignez le dossier de données** au compte de service (0700 sous Unix, droits du dossier sous Windows).
+5. **Gardez la clé du coffre ailleurs** sur les serveurs : définissez `TGWITNESS_VAULT_KEY_FILE` avant le premier démarrage.
+6. **Conservez l’empreinte et les points de contrôle** sur un autre système, faites tourner un témoin sur un autre hôte.
 7. **Ne téléversez jamais** les clés « `data/` », de session, « `panel-token.txt` » ou de coffre-fort sur GitHub ou dans une conversation.
 8. **Ne consignez pas** les en-têtes « `Authorization` » ni le corps des requêtes au niveau d’un proxy inverse.
 
 **Puis-je modifier le jeton du panneau sans perdre de données ?**
 
-Oui. Le jeton sert uniquement à ouvrir le panneau. Arrêtez TgWitness, supprimez `panel-token.txt` du répertoire de données, puis relancez-le ; le journal, les sessions et les clés restent intacts. Lorsque `TGWITNESS_TOKEN` est défini, la valeur d’environnement est utilisée à la place du fichier.
+Oui, il ouvre seulement le panneau. Arrêtez TgWitness, supprimez `panel-token.txt`, redémarrez. Journal, sessions et clés restent. Si `TGWITNESS_TOKEN` est défini, cette valeur prime sur le fichier.
 
 **Pourquoi les messages ne sont-ils pas chiffrés au repos ?**
 
-L’utilisateur doit les lire pour effectuer des recherches, comparer les versions et exporter les données. Les chiffrer à l’aide d’une clé sur la même machine n’apporterait guère de protection face à une personne capable d’accéder à cette machine. Le chiffrement du disque protège un disque hors service ou volé ; des autorisations strictes protègent un disque en fonctionnement.
+Le collecteur doit les lire pour chercher, comparer et exporter. Une clé sur la même machine n’arrêterait pas quelqu’un qui peut déjà lire cette machine. Le chiffrement du disque couvre un disque volé, les droits couvrent un système en marche.
 
 ## Signaler une vulnérabilité
 
-Utilisez **la rubrique « Sécurité → Signaler une vulnérabilité** » dans le dépôt GitHub. Indiquez la version, l’impact et un exemple minimal permettant de reproduire le problème. N’envoyez jamais d’identifiants, de répertoires de compte ni d’archives de preuves réelles. Si le signalement privé n’est pas disponible, ouvrez un ticket demandant la création d’un canal privé sans fournir de détails sur l’exploit.
+**Security → Report a vulnerability** sur GitHub. Version, impact et une reproduction minimale avec des données fictives. N’envoyez jamais d’identifiants, de dossiers de compte ni de vraies preuves. Si le signalement privé est désactivé, ouvrez une issue pour demander un canal privé, sans détails d’exploit.

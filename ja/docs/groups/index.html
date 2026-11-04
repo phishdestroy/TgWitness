@@ -32,12 +32,12 @@
 <nav class="breadcrumbs" aria-label="ガイド"><a href="../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../">ドキュメント</a> <span aria-hidden="true">/</span> <span aria-current="page">アカウントグループの管理</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">テスト済みの内容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">ドキュメント / 13</p><h1>アカウントグループの管理</h1><p class="guide-outcome">複数の収集アカウントをまとめて管理しつつ、各アカウントの記録と署名IDを明確に区別してください。</p>
-<p>アカウントグループを使用すると、接続状況、監視制御、共有設定、およびエクスポート機能を 1 つの作業画面に集約できます。これは、複数のアカウントで同じ調査を担当する場合や、一貫した運用設定が必要な場合に役立ちます。</p>
+<article class="guide-content"><p class="eyebrow">ドキュメント / 13</p><h1>アカウントグループの管理</h1><p class="guide-outcome">複数のアカウントをまとめて動かし、それぞれが自分の記録と鍵を持ち続けます。</p>
+<p>グループは、接続状態、開始/一時停止、共有設定、エクスポートを 1 つの画面にまとめます。複数のアカウントで同じケースに取り組むときに便利です。</p>
 
 <h2 id="overview">グループの概要を開く</h2>
-<p>「<strong>アカウント</strong>」でグループを開きます。各アカウントには、監視状態、接続経路、直近のチェックが成功した際の測定された経路遅延、および最後に保存されたメッセージが表示されます。「<strong>注意が必要</strong>」リンクは対応が必要なアカウントを示し、<strong>「修正」</strong>をクリックすると、関連するワークスペースとコントロール画面が開きます。</p>
-<p><strong>「すべて開始」</strong>および「<strong>すべて一時停止」</strong>は、確認後に対象となるアカウントに対して実行されます。<strong>「グループ設定」</strong>では選択した設定が共有されます。独自の値が設定されているアカウントは、上書きするまでその値を維持します。</p>
+<p><strong>アカウント</strong>でグループを開きます。各アカウントの状態、ルート、遅延、最後に保存したメッセージが表示されます。<strong>注意が必要</strong>には問題のあるものが並び、<strong>修正</strong>でそこへ直接移動できます。</p>
+<p><strong>すべて開始</strong> / <strong>すべて一時停止</strong>は実行前に確認します。<strong>グループ設定</strong>は共有されますが、アカウント独自の値は置き換えるまで残ります。</p>
 
 <section class="workflow-lab" data-workflow="groups" aria-labelledby="groups-example-title">
   <h3 id="groups-example-title">グループ全体での経路変更を確認する</h3>
@@ -59,15 +59,15 @@
 </section>
 
 <h2 id="route">レビュー工程を追加してプロセスを変更する</h2>
-<ol><li><strong>「グループルートの変更</strong>」を選択し、接続タイプと設定を選択してください。</li><li><strong>「Review selection」</strong>を選択してください。一覧表示されたアカウントと、それぞれのルートオーバーライドを確認してください。</li><li><strong>「準備」</strong>を選択し<strong>、「チェック」を実行してください</strong>。チェックでは新しいTelegramトランスポートが使用されます。サポートされているHTTPルートについては、HTTPS出口チェックの結果も報告されます。</li><li><strong>「Apply checked connection」</strong>を選択し、各アカウントの結果を確認してください。以前に実行されていた監視は、アプリケーションが正常に動作した箇所から再開されます。非アクティブなアカウントは非アクティブなままとなります。</li></ol>
-<p>「レイテンシー」とは、測定されたTelegramの接続確立時間を指します。「出口IPチェック」とは、記録されたチェック時点におけるその経路の状態を指します。アカウントの認証および監視状態にはそれぞれ独自の指標があり、グループの変更はアカウントごとに異なる結果をもたらす可能性があります。</p>
+<ol><li><strong>グループルートの変更</strong>で種類と設定を選びます。</li><li><strong>選択内容の確認</strong>：どのアカウントが変わり、どれが独自のルートを持つかを確認します。</li><li><strong>準備して確認</strong>で新しい Telegram 接続をテストし、可能なら出口 IP も確認します。</li><li><strong>確認済みの接続を適用</strong>し、それぞれの結果を見ます。動作中のアカウントは再開し、停止中のものは停止したままです。</li></ol>
+<p>遅延は Telegram 接続の確立にかかった時間で、出口 IP は確認時にルートが示したものです。結果はアカウントごとに異なることがあります。</p>
 
 <h2 id="shared-chats">重複するアクセス権を使用する</h2>
-<p><strong>「複数のアカウントが閲覧できるチャット」</strong>では、共有されたソースと、ワークスペースの監視範囲が表示されます。対象となるチャンネルおよびスーパーグループでは、<strong>「…アカウントでエクスポート」</strong>機能を使用して、1つのチャットの履歴取得を分割することができます。プライベートチャットおよび通常のグループは、メッセージ番号がアカウントの履歴に属するため、開始アカウントに留まります。</p>
+<p><strong>複数のアカウントが閲覧できるチャット</strong>には、共有のソースとそのカバレッジが並びます。チャンネルとスーパーグループは<strong>… アカウントでエクスポート</strong>で複数のアカウントから同時にエクスポートできます。個人チャットと通常のグループはできません。メッセージ番号がアカウントごとだからです。</p>
 
 <h2 id="export-group">グループをパッケージとしてエクスポートする</h2>
-<p><strong>エクスポート機能では、</strong>各アカウントの署名付きエクスポートデータと、それらのファイルの署名付きリストを1つのZIPファイルにまとめて作成します。検証用に、元のワークスペースのIDおよびフィンガープリントは引き続き利用可能です。これらの参照情報を用いてアカウント横断的な経緯を構築してください。単一の統合タイムラインは、引き続き別途作成されます。</p>
-<p><a href="../reports/">レポートの設計</a>、<a href="../case-board/">ワークスペース内の「Case Board」</a>、または<a href="../exports/">エクスポートの検証</a>に進んでください。</p>
+<p><strong>グループのエクスポート</strong>では、各アカウントの署名付きエクスポートとその署名付き一覧を 1 つの ZIP にまとめます。それぞれが検証用に自分のフィンガープリントを保ちます。統合した時系列は自分で組み立てます。</p>
+<p>次は：<a href="../reports/">レポート</a>、<a href="../case-board/">Case Board</a>、<a href="../exports/">エクスポートの検証</a>。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">完全な参照情報 →</a><a class="next-guide" href="../cases/"><span>次のステップ</span><strong>すべてのチャットを横断的に調査する →</strong></a><p>これらのガイドは、現在の実装について説明しています。検証結果および残された課題については、別途文書化されています。 <a href="../reference/verification/">テスト済みの内容 →</a></p></footer>
 </main>

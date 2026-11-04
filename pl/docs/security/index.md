@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/security/
 
-Zapoznaj się z trasami komunikacji w Telegramie, publicznymi listami serwerów proxy oraz opcjonalnymi usługami zewnętrznymi. Dowiedz się, co odblokowuje każda opcja, jaki zakres ochrony zapewniają poszczególne zabezpieczenia oraz jakie kwestie pozostawiają one do Państwa decyzji.
+Co opuszcza Twoją maszynę, co otwiera każdy sekret i co chronią zabezpieczenia, a co zostaje po Twojej stronie.
 
 **127.0.0.1**domyślny adres panelu
 
@@ -14,7 +14,7 @@ Zapoznaj się z trasami komunikacji w Telegramie, publicznymi listami serwerów 
 
 ## Miejsce, w którym wszystko się znajduje
 
-Narzędzie do gromadzenia danych, jego panel oraz wszystkie zapisane rekordy pozostają na komputerze lub serwerze, na którym jest ono uruchomione. Telegram jest domyślnym miejscem docelowym; każda inna opcja wymaga osobnego przełączenia.
+Kolektor, panel i wszystkie wpisy zostają na Twojej maszynie. Domyślnie łączy się tylko z Telegramem, wszystko inne to osobny przełącznik.
 
 06 / CO WYCHODZI Z URZĄDZENIAInstalacja
 
@@ -56,54 +56,54 @@ Opcjonalne lokalizacje docelowe konfiguruje się dla poszczególnych obszarów r
 
 | Tajne | Gdzie jest przechowywany | Jakie możliwości to stwarza | W przypadku wycieku |
 | --- | --- | --- | --- |
-| **Token panelu** | Plik `panel-token.txt` w katalogu danych; przeglądarka przechowuje go wyłącznie dla danej karty | Wszystkie funkcje w każdym obszarze roboczym: przeglądanie i eksportowanie, zmiana zakresu, logowanie się na konta | Zatrzymaj TgWitness, usuń `panel-token.txt`, uruchom ponownie: zostanie utworzony nowy token |
+| **Token panelu** | `panel-token.txt` w katalogu danych; przeglądarka trzyma go dla karty | Wszystko we wszystkich przestrzeniach | Zatrzymaj TgWitness, usuń `panel-token.txt`, uruchom ponownie — dostaniesz nowy |
 | **Sesja w Telegramie** | Vault, zaszyfrowany (`credentials.enc`) | Samo konto w serwisie Telegram | Zakończ sesję w aplikacji Telegram, wybierając opcję *Ustawienia → Urządzenia* |
-| **Klucz podpisujący** | Vault, zaszyfrowany (`signing.enc`) | Zapisy opatrzone podpisem, których autentyczność można zweryfikować na podstawie Państwa podpisu cyfrowego | Punkty kontrolne przechowywane w innym miejscu, świadek oraz znaczniki czasu wskazują, co istniało wcześniej |
-| **Klucz do skarbca** | `vault.key` obok danych lub zewnętrzny klucz główny dla nowego katalogu danych | Odszyfrowanie skarbca | Należy traktować klucz sesji i klucz podpisujący jako również ujawnione |
-| **Token Witness** | Na serwerze Witness | Tryb tylko do odczytu: podpisane punkty kontrolne i stan działania | Proszę usunąć tę stronę z sekcji „Witness” i utworzyć nową |
-| **Klucz treści poza witryną** | Vault; wystarczy pobrać go raz, aby móc odzyskać dane | Odszyfrowywanie kopii przechowywanej poza serwerem | Każdy, kto posiada przechowywane obiekty, może je odszyfrować: proszę traktować tę kopię jako ujawnioną |
+| **Klucz podpisujący** | Vault, zaszyfrowany (`signing.enc`) | Podpisywanie wpisów Twoim odciskiem | Punkty kontrolne przechowywane gdzie indziej, świadek i znaczniki czasu nadal pokazują, co istniało wcześniej |
+| **Klucz do skarbca** | `vault.key` obok danych albo zewnętrzny klucz główny | Sejf | Załóż, że sesja i klucz podpisu też wyciekły |
+| **Token Witness** | Na serwerze Witness | Tylko odczyt: punkty kontrolne i stan | Usuń go na stronie świadka i utwórz nowy |
+| **Klucz treści poza witryną** | Vault; wystarczy pobrać go raz, aby móc odzyskać dane | Kopię zewnętrzną | Kto ma też bucket, może ją odszyfrować — traktuj kopię jako ujawnioną |
 
 ## Zakres ochrony
 
 ### – omówiono
 
-- Zmieniony, usunięty lub zmieniony w kolejności wpis w eksporcie: łańcuch skrótów lub podpis nie są już weryfikowalne.
-- Dziennik, który został skrócony lub odtworzony po tym, jak punkt kontrolny został zapisany w innym miejscu: zachowany punkt kontrolny nie jest już zgodny.
-- Odgadywanie tokenu panelu: 256 losowych bitów, porównywanych w stałym czasie; po 15 nieudanych próbach w ciągu minuty adres zostaje odrzucony.
-- Treści o charakterze wrogim w czacie: tekst jest wstawiany jako zwykły tekst, nigdy jako kod HTML; załączniki są pobierane jako pliki; panel nie ładuje żadnych treści z innych stron.
-- Skopiowany katalog danych z zewnętrznym kluczem do skarbca: sesje i klucze podpisujące pozostają zaszyfrowane bez klucza głównego.
+- Zmieniony, usunięty lub przestawiony wpis: pęka łańcuch skrótów albo podpis.
+- Dziennik przycięty lub odbudowany po tym, jak zapisałeś punkt kontrolny gdzie indziej: punkt przestaje się zgadzać.
+- Zgadywanie tokenu: 256 losowych bitów, porównanie w stałym czasie; 15 błędów na minutę i adres zostaje zablokowany.
+- Wroga treść czatów: tekst zostaje tekstem, nigdy HTML; załączniki pobierają się jako pliki; panel nie ładuje niczego z innych stron.
+- Skradziony katalog danych przy zewnętrznym kluczu sejfu: sesje i klucze pozostają zaszyfrowane.
 
 ### Pozostawiamy to Państwu
 
-- Użytkownik posiadający token panelu głównego ma pełną kontrolę. Proszę przyznawać innym osobom ograniczony dostęp do kont, czatów i działań, których potrzebują; klucz główny należy zachować w tajemnicy.
-- Administrator urządzenia może odczytać całą zawartość dziennika, a także go przeredagować i ponownie podpisać. Odciski palców i punkty kontrolne należy przechowywać na innym systemie.
-- Treść wiadomości i pliki multimedialne nie są szyfrowane przez TgWitness. Należy stosować szyfrowanie dysku oraz rygorystyczne uprawnienia.
-- Korzystanie z protokołu HTTP poza lokalnym hostem (localhost) powoduje ujawnienie tokenu w sieci. Prosimy o korzystanie z protokołu HTTPS lub tunelu SSH.
-- Należy sprawdzić zapisane dane pod kątem obecności podpisów i punktów kontrolnych. Należy zweryfikować zakres gromadzonych danych oraz przetestować proces dostarczania danych dla wykorzystywanych kont i źródeł.
+- Główny token może wszystko. Innym dawaj ograniczony dostęp, a główny trzymaj dla siebie.
+- Administrator maszyny może przeczytać wszystko i ponownie podpisać dziennik. Odcisk i punkty kontrolne trzymaj gdzie indziej.
+- TgWitness nie szyfruje wiadomości i mediów. Szyfruj dysk i ogranicz uprawnienia.
+- Zwykły HTTP poza localhost ujawnia token. Używaj HTTPS albo tunelu SSH.
+- Podpisy nie powiedzą, co zostało pominięte. Sprawdzaj pokrycie i testuj dostarczanie na własnych kontach i źródłach.
 
-[Udostępnianie dostępu do sprawy](https://phishdestroy.github.io/TgWitness/pl/docs/access/) z uwzględnieniem uprawnień, terminów ważności i limitów sesji. Token świadka pozostaje odrębnym poświadczeniem.
+[Udostępnij dostęp do sprawy](https://phishdestroy.github.io/TgWitness/pl/docs/access/) z uprawnieniami, terminem ważności i limitem sesji.
 
 ## Zabezpieczenie instalacji
 
 Zrobiono 0 z 8
 
-1. **Proszę korzystać z dedykowanego konta w Telegramie** — nigdy z konta głównego. Token panelu oraz sesja zapewniają pełną kontrolę nad nim.
-2. **Proszę utrzymać panel pod adresem 127.0.0.1.** Dostęp zdalny powinien odbywać się wyłącznie za pośrednictwem protokołu HTTPS (wbudowana konfiguracja Caddy) lub tunelu SSH.
-3. **Należy zaszyfrować dysk,** na którym znajduje się katalog danych: treści wiadomości i pliki multimedialne są przechowywane w postaci, w jakiej zostały otrzymane.
-4. **Proszę ograniczyć dostęp do katalogu danych** wyłącznie do konta serwisowego. Nowe katalogi otrzymują uprawnienia 0700 w systemie Unix; w systemie Windows należy ustawić uprawnienia folderu.
-5. **Klucz główny do skarbca należy przechowywać w innym miejscu** na serwerach: przed utworzeniem katalogu danych należy ustawić parametr `TGWITNESS_VAULT_KEY_FILE`.
-6. **Proszę zapisać odcisk klucza podpisującego oraz punkty kontrolne** na innym systemie, a także dodać świadka na innym serwerze.
+1. **Używaj osobnego konta Telegram**, nigdy głównego.
+2. **Trzymaj panel na 127.0.0.1.** Zdalnie tylko przez HTTPS (dołączony Caddy) albo tunel SSH.
+3. **Zaszyfruj dysk** z katalogiem danych — wiadomości i media są zapisywane tak, jak przyszły.
+4. **Ogranicz katalog danych** do konta usługi (0700 w Unix, uprawnienia folderu w Windows).
+5. **Trzymaj klucz sejfu osobno** na serwerach: ustaw `TGWITNESS_VAULT_KEY_FILE` przed pierwszym uruchomieniem.
+6. **Zapisuj odcisk i punkty kontrolne** w innym systemie, uruchom świadka na innym hoście.
 7. **Nigdy nie należy przesyłać** kluczy typu „`data/`”, kluczy sesji, kluczy typu „`panel-token.txt`” ani kluczy do skarbca na GitHub ani w czacie.
 8. **Proszę nie rejestrować** nagłówków `Authorization` ani treści żądań na serwerze proxy odwrotnym.
 
 **Czy mogę zmienić token panelu bez utraty danych?**
 
-Tak. Token służy wyłącznie do otwarcia panelu. Proszę zatrzymać TgWitness, usunąć plik „`panel-token.txt`” z katalogu danych i uruchomić program ponownie; dziennik, sesje i klucze pozostaną nienaruszone. Po ustawieniu wartości „`TGWITNESS_TOKEN`” zamiast pliku wykorzystywana jest wartość środowiskowa.
+Tak, on tylko otwiera panel. Zatrzymaj TgWitness, usuń `panel-token.txt`, uruchom ponownie. Dziennik, sesje i klucze zostają. Jeśli ustawiono `TGWITNESS_TOKEN`, ta wartość ma pierwszeństwo przed plikiem.
 
 **Dlaczego wiadomości nie są szyfrowane w stanie spoczynku?**
 
-Osoba odpowiedzialna za gromadzenie danych musi je przeczytać, aby przeprowadzić wyszukiwanie, porównać wersje i wyeksportować dane. Szyfrowanie ich za pomocą klucza na tym samym urządzeniu nie zapewniłoby znaczącej ochrony przed osobą, która ma dostęp do tego urządzenia. Szyfrowanie dysku chroni dysk wyłączony lub skradziony; ścisłe uprawnienia chronią dysk, na którym toczy się praca.
+Kolektor musi je czytać, żeby wyszukiwać, porównywać i eksportować. Klucz na tej samej maszynie nie zatrzyma kogoś, kto i tak może czytać tę maszynę. Szyfrowanie dysku chroni skradziony dysk, uprawnienia — działający.
 
 ## Zgłoś lukę w zabezpieczeniach
 
-Prosimy skorzystać z opcji **„Security → Report a vulnerability”** w repozytorium GitHub. Należy podać wersję, skutki oraz minimalny syntetyczny przykład pozwalający na odtworzenie błędu. Prosimy nigdy nie przesyłać danych uwierzytelniających, katalogów kont ani archiwów zawierających rzeczywiste dowody. Jeśli zgłoszenie prywatne jest niedostępne, prosimy otworzyć zgłoszenie z prośbą o utworzenie prywatnego kanału, nie podając szczegółów dotyczących luki.
+**Security → Report a vulnerability** na GitHubie. Wersja, skutki i minimalny przykład na fikcyjnych danych. Nigdy nie wysyłaj danych logowania, folderów kont ani prawdziwych dowodów. Jeśli prywatne zgłoszenia są wyłączone, otwórz issue z prośbą o prywatny kanał, bez szczegółów exploita.

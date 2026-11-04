@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/security/
 
-Know the routes for Telegram, public proxy lists and optional external services. Know what each secret unlocks, what the protections cover and what they leave to you.
+What leaves your machine, what each secret opens, and what the protections cover versus what's on you.
 
 **127.0.0.1**panel address by default
 
@@ -14,7 +14,7 @@ Know the routes for Telegram, public proxy lists and optional external services.
 
 ## Where everything lives
 
-The collector, its panel and every saved record stay on the computer or server you run it on. Telegram is the only destination by default; each other one is a separate switch.
+The collector, the panel and every record stay on your machine. By default only Telegram is contacted; everything else is a separate switch.
 
 06 / WHAT LEAVES THE MACHINEYour installation
 
@@ -56,54 +56,54 @@ Optional destinations are configured per workspace. Message text and media are s
 
 | Secret | Where it is kept | What it unlocks | If it leaks |
 | --- | --- | --- | --- |
-| **Panel token** | `panel-token.txt` in the data directory; the browser keeps it for the tab only | Everything in every workspace: read and export, change scope, sign in accounts | Stop TgWitness, delete `panel-token.txt`, start it again: a new token is created |
+| **Panel token** | `panel-token.txt` in the data directory; the browser keeps it per tab | Everything in every workspace | Stop TgWitness, delete `panel-token.txt`, start again: you get a new one |
 | **Telegram session** | Vault, encrypted (`credentials.enc`) | The Telegram account itself | End the session in Telegram under *Settings → Devices* |
-| **Signing key** | Vault, encrypted (`signing.enc`) | Signing records that verify under your fingerprint | Checkpoints kept elsewhere, a witness and timestamps show what existed before |
-| **Vault key** | `vault.key` beside the data, or an external master key for a new data directory | Decrypting the vault | Treat the session and signing key as leaked too |
-| **Witness token** | On the witness host | Read-only: signed checkpoints and health | Delete it on the Witness page; create a new one |
-| **Off-site copy key** | Vault; download it once for recovery | Decrypting the off-site copy | Whoever also holds the stored objects can decrypt them: treat that copy as exposed |
+| **Signing key** | Vault, encrypted (`signing.enc`) | Signing records under your fingerprint | Checkpoints kept elsewhere, a witness and timestamps still show what existed before |
+| **Vault key** | `vault.key` next to the data, or an external master key | The vault | Assume the session and signing key leaked too |
+| **Witness token** | On the witness host | Read-only: checkpoints and health | Delete it on the Witness page, make a new one |
+| **Off-site copy key** | Vault; download it once for recovery | The off-site copy | Anyone who also has the bucket can decrypt it: treat the copy as exposed |
 
 ## What the protections cover
 
 ### Covered
 
-- A changed, removed or reordered record in an export: the hash chain or a signature no longer verifies.
-- A journal cut back or rebuilt after a checkpoint was kept elsewhere: the retained checkpoint no longer matches.
-- Guessing the panel token: 256 random bits, compared in constant time; after 15 failures a minute an address is refused.
-- Hostile chat content: text is inserted as text, never as HTML; attachments download as files; the panel loads nothing from other sites.
-- A copied data directory with an external vault key: sessions and signing keys stay encrypted without the master key.
+- A changed, removed or reordered record: the hash chain or a signature breaks.
+- A journal cut back or rebuilt after you saved a checkpoint elsewhere: the checkpoint stops matching.
+- Guessing the token: 256 random bits, constant-time compare, 15 failures a minute and the address is blocked.
+- Hostile chat content: text stays text, never HTML; attachments download as files; the panel loads nothing from other sites.
+- A stolen data directory with an external vault key: sessions and keys stay encrypted.
 
 ### Left to you
 
-- The main panel token has full control. Give other people scoped access to the accounts, chats and actions they need; keep the main key private.
-- An administrator of the machine can read everything and rewrite and re-sign the journal. Keep the fingerprint and checkpoints on another system.
-- Message text and media are not encrypted by TgWitness. Use disk encryption and strict permissions.
-- Plain HTTP beyond localhost shows the token on the network. Use HTTPS or an SSH tunnel.
-- Check saved records with signatures and checkpoints. Review collection coverage and test delivery for the accounts and sources you use.
+- The main token can do everything. Give others scoped access and keep the main one to yourself.
+- Whoever is admin on the machine can read everything and re-sign the journal. Keep the fingerprint and checkpoints elsewhere.
+- Messages and media aren't encrypted by TgWitness. Encrypt the disk, lock down permissions.
+- Plain HTTP outside localhost leaks the token. Use HTTPS or an SSH tunnel.
+- Signatures don't tell you what was missed. Check coverage and test delivery on your own accounts and sources.
 
-[Share access to a case](https://phishdestroy.github.io/TgWitness/docs/access/) with permissions, expiry and session limits. A witness token remains a separate credential.
+[Share access to a case](https://phishdestroy.github.io/TgWitness/docs/access/) with permissions, expiry and session limits.
 
 ## Harden an installation
 
 0 of 8 done
 
-1. **Use a dedicated Telegram account** — never your main one. The panel token and the session give full control of it.
-2. **Keep the panel on 127.0.0.1.** Reach it remotely only through HTTPS (the bundled Caddy configuration) or an SSH tunnel.
-3. **Encrypt the disk** that holds the data directory: message text and media are stored as they arrived.
-4. **Restrict the data directory** to the service account. New directories get mode 0700 on Unix; on Windows, set the folder's permissions.
-5. **Keep the vault master key elsewhere** on servers: set `TGWITNESS_VAULT_KEY_FILE` before creating the data directory.
-6. **Save the signing-key fingerprint and checkpoints** on another system, and add a witness on another host.
+1. **Use a dedicated Telegram account**, never your main one.
+2. **Keep the panel on 127.0.0.1.** Remote access only via HTTPS (bundled Caddy) or an SSH tunnel.
+3. **Encrypt the disk** with the data directory, messages and media are stored as is.
+4. **Restrict the data directory** to the service account (0700 on Unix, folder permissions on Windows).
+5. **Keep the vault key elsewhere** on servers: set `TGWITNESS_VAULT_KEY_FILE` before the first start.
+6. **Save the fingerprint and checkpoints** on another system, run a witness on another host.
 7. **Never upload** `data/`, sessions, `panel-token.txt` or vault keys to GitHub or a chat.
 8. **Do not log** `Authorization` headers or request bodies at a reverse proxy.
 
 **Can I change the panel token without losing data?**
 
-Yes. The token only opens the panel. Stop TgWitness, delete `panel-token.txt` from the data directory and start it again; the journal, sessions and keys are untouched. With `TGWITNESS_TOKEN` set, the environment value is used instead of the file.
+Yes, it only opens the panel. Stop TgWitness, delete `panel-token.txt`, start again. Journal, sessions and keys stay. If `TGWITNESS_TOKEN` is set, that value wins over the file.
 
 **Why are messages not encrypted at rest?**
 
-The collector must read them to search, compare versions and export. Encrypting them with a key on the same machine would add little against someone who can read that machine. Disk encryption protects a stopped or stolen disk; strict permissions protect a running one.
+The collector has to read them to search, compare and export. A key on the same machine wouldn't stop someone who can read that machine anyway. Disk encryption covers a stolen disk, permissions cover a running one.
 
 ## Report a vulnerability
 
-Use **Security → Report a vulnerability** in the GitHub repository. Include the version, the impact and a minimal synthetic reproduction. Never send credentials, account directories or real evidence archives. If private reporting is unavailable, open an issue asking for a private channel without exploit details.
+**Security → Report a vulnerability** on GitHub. Version, impact and a minimal repro with fake data. Never send credentials, account folders or real evidence. If private reporting is off, open an issue asking for a private channel, no exploit details.

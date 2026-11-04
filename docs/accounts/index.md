@@ -2,17 +2,17 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/accounts/
 
-One workspace holds one account, its journal and its signing key.
+One workspace = one account, its journal and its key.
 
 ## Choose how to sign in
 
-Open **Accounts**, add a workspace and open its connection settings. Use a dedicated account for observation.
+**Accounts** → add a workspace → connection settings. Use a separate account for this.
 
-- **QR code:** scan it from Telegram’s device settings and confirm the new login.
-- **Phone number:** enter the number, the code Telegram sends and your two-step verification password if enabled.
-- **Session import:** import a supported session or Telegram Desktop data belonging to you.
+- **QR code:** scan it from Telegram's Devices screen and confirm.
+- **Phone number:** number, code, then 2FA password if you have one.
+- **Session import:** your own session file or Telegram Desktop data.
 
-Choose a built-in API profile or enter your own API ID and hash. An API profile identifies the client; it does not sign in to an account or make the connection anonymous.
+Use a built-in API profile or your own API ID and hash. It only identifies the app, it doesn't log you in or hide anything.
 
 **Need a proxy first?**
 
@@ -20,20 +20,20 @@ You can [choose and test the connection route](https://phishdestroy.github.io/Tg
 
 ## Choose what to observe
 
-1. Open the source list and select the chats, groups or channels you need.
-2. Review collection settings, including media, before starting observation.
-3. Start the collector and check its connection and recent activity.
+1. Pick the chats, groups or channels you need.
+2. Check collection settings, media included.
+3. Start it and check the connection and recent activity.
 
-The account must be able to access the source. Different roles can see different events; the journal reflects what that account received.
+The account has to have access. Admins and members see different things, the journal shows what this account got.
 
-For a case spanning the entire account, use **Sources → Observation scope → Investigation mode**, review the settings and press **Save scope**. The [complete investigation walkthrough](https://phishdestroy.github.io/TgWitness/docs/cases/) covers all visible chat types, old history, people profiles, cross-chat references and evidence handoff.
+Whole account? **Sources → Observation scope → Investigation mode**, check it, **Save scope**. Full walkthrough: [investigating a whole account](https://phishdestroy.github.io/TgWitness/docs/cases/).
 
 ## Check the whole path
 
-In a test group you control, send a unique message from another account, edit it and delete it. Confirm all three events in the journal, then [export and verify](https://phishdestroy.github.io/TgWitness/docs/exports/) the record.
+In your test group, send a message from another account, edit it, delete it. All three should show up in the journal. Then [export and verify](https://phishdestroy.github.io/TgWitness/docs/exports/).
 
-A connected status confirms the connection. A captured test message confirms that a particular event reached this workspace.
+"Connected" means the connection works. A captured test message means events actually arrive.
 
 ## Add another account
 
-Create another workspace in **Accounts** and repeat the setup. Keep each account’s signing-key fingerprint so you can identify its exports later.
+New workspace in **Accounts**, same steps. Note each account's key fingerprint so you can tell exports apart later.

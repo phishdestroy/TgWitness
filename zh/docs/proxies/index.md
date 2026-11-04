@@ -2,45 +2,45 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/proxies/
 
-保持账户连接。明确决定何时其路由可使用服务器的地址。
+保持账户在线，并由您自己决定它是否可以暴露服务器的 IP。
 
 ## 请先选择 IP 模式
 
 01**隐藏地址**
 
-请使用代理。若所有代理均无法连接，请在断开与 Telegram 的直接连接状态下等待。
+仅使用代理。如果都不可用，就等待。
 
 02**直接操作作为最后手段**
 
-在配置的延迟时间过后允许直接连接；当有代理响应时，切换回可用的代理。
+延迟后直连，一旦有代理可用就切回代理。
 
 03**服务器需位于隧道或 VPN 之后**
 
-允许通过主机的网络建立直连路径。此选项不会安装或验证 VPN。
+可以直连。它不会替您设置或检查 VPN。
 
 路由决定连接方式。IP 模式决定是否允许直接连接。
 
 ## 让池来维护路由
 
-1. 登录**账户 → 设置 → 连接设置**。
-2. 选择 IP 模式和**自动 MTProxy**，或输入固定路由。
-3. 保存并运行**“测试 Telegram 连接”功能**。该功能在登录前同样有效。
-4. 开始收集后，请确认一条受控消息已成功写入日志。
+1. **账户 → 设置 → 连接设置**。
+2. 选择 IP 模式和**自动 MTProxy**，或固定路由。
+3. 保存，然后**测试 Telegram 连接**（登录前也可用）。
+4. 开始采集，并给自己发送一条测试消息。
 
-新工作区会自动使用带有**“隐藏地址”选项**的 MTProxy。代理池整合了四个公共来源，会检测条目、保留可用的路径并替换失效的代理。下载失败时会保留之前的快照。
+新工作区默认使用自动 MTProxy 并开启**隐藏地址**。代理池拉取四个公共列表，检查服务器，保留好用的，替换失效的。
 
 ## 请使用您自己的代理服务器
 
-请输入 SOCKS5 或 HTTP CONNECT 详细信息，粘贴受支持的 Telegram 代理链接，或提供运营商目录。在更改当前活动路由前，请暂停监控。以 `ee` 开头的伪 TLS MTProxy 密钥目前仍不支持。
+SOCKS5、HTTP CONNECT、Telegram 代理链接或运营方目录。切换前请暂停观察。Fake TLS 密钥（`ee`…）不可用。
 
 **轮换、共享和重试设置**
 
-**在“参数”→“自动 MTProxy”下**，可设置失败阈值、冷却时间、计划轮换以及每个代理对应的账户数量。当共享限制设为“1”时，若无可用专属入口，账户将进入等待状态。列表刷新和探测间隔遵循主工作区的设置值。独立代理并不保证拥有独立的出口 IP 地址。
+**参数 → 自动 MTProxy**：失败阈值、冷却时间、轮换、每个代理的账户数。上限为 1 表示账户宁可等待也不共享。不同的代理仍可能共用同一个出口 IP。
 
 ## 将 Telegram 与外部请求区分开来
 
-MTProxy 仅传输 Telegram 流量。时间戳、通知、副本和来源验证则使用独立的 SOCKS5/HTTP 代理、该账户的 SOCKS5/HTTP 路由，或在 IP 模式允许的情况下使用 Direct 协议。这些外部请求可以被禁用。
+MTProxy 只承载 Telegram 流量。时间戳、通知、副本和代码检查走单独的 SOCKS5/HTTP 代理、账户的 SOCKS5/HTTP 路由，或在模式允许时直连。也可以关闭它们。
 
-明确的 `TGWITNESS_PROXY_FEED_PROXY` 配置了数据源下载器的路由。[独立见证](https://phishdestroy.github.io/TgWitness/zh/docs/witness/)器保留其自身的设置。这些控制措施不会安装系统 VPN，也不会重定向浏览器流量。
+`TGWITNESS_PROXY_FEED_PROXY` 设置下载列表所用的路由。[见证人](https://phishdestroy.github.io/TgWitness/zh/docs/witness/)有自己的设置。这些都不会影响您的浏览器或系统网络。
 
-查看[所有模式、默认设置和来源列表](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/#ip-modes)，或[选择谁可以更改账户的路由](https://phishdestroy.github.io/TgWitness/zh/docs/access/)。
+更多：[模式和默认值](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/#ip-modes)，[谁可以更改路由](https://phishdestroy.github.io/TgWitness/zh/docs/access/)。

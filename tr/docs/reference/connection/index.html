@@ -120,11 +120,6 @@ tüneli başlatır; hazır olduğunda gözlemi ayrı olarak devam ettirin.</p>
 ve IPv6 rotaları içermeli; kanca, dahil etme, ortam değiştirme veya fazladan
 dinleyici içermemelidir. Genel uç nokta adresleri, başlatma öncesinde çözümlenir ve sabitlenir.
 OpenVPN/IPsec ve özel uç noktalar için harici bir VPN veya SOCKS5 ağ geçidi kullanın.</p>
-<p>Sentetik kontroller <code>python tools/check_guided_connection.py</code> ve
-<code>python tools/check_guided_connection_browser.py</code>'dir. İsteğe bağlı
-<code>python tools/check_portable_routes_runtime.py</code>, doğrulanmış yardımcı programları indirir ve
-bunların gerçek yerel işlem yaşam döngüsünü loopback fikstürlerine karşı test eder. Bu işlem,
-bir Cloudflare cihazını kaydetmez veya bir Telegram hesabı kullanmaz.</p>
 <h2 id="authentication-methods">Kimlik doğrulama yöntemleri<a class="anchor" href="#authentication-methods" aria-label="Bu bölüme bağlantı">#</a></h2>
 <p><strong>API Kimliği ve API hash&#x27;i bir uygulamayı tanımlar; hesap girişinin yerini almazlar.</strong>
 
@@ -220,12 +215,6 @@ toplam 8 MiB kabul edilir. TData/JSON ayrıntıları için <a href="../accounts/
     dizesini yapıştırın ve devam edin.</li>
 <li>Ekranda görüntülenen sayısal hesap kimliğini kontrol edin, kaynakları seçin ve gözlemi başlatın.</li>
 </ol>
-<p>Dönüştürücü, SQLite&#x27;ı salt okunur olarak açar, şema yükseltmesi veya ağ isteği gerçekleştirmez
-ve oturumu yazdırmaz. Şema sürümünü, tablo türlerini, tek bir
-oturum satırını, IP/bağlantı noktası/veri merkezi ve anahtar uzunluğunu kontrol eder. CLI girişi 64 MiB ile sınırlıdır; StringSession
-metni 4 KiB ile sınırlıdır. Panel dönüştürme, dosyaları kimliği doğrulanmış TgWitness
-sunucusuna yükler, bunları bellekte işler ve yüklenen orijinalleri kaydetmeden normalleştirilmiş kimlik bilgilerini o
-tarayıcıya geri gönderir. Uzak sunucu için HTTPS kullanın.</p>
 <p><strong>Dönüştürülen dosya, şifrelenmemiş bir hesap erişim şifresidir.</strong> Bunu güvenli bir
 depolama alanında saklayın ve asla bir üçüncü taraf dönüştürme hizmetine aktarmayın veya göndermeyin. TgWitness,
 yetkilendirilmiş oturumu şifreli kasasında saklar. Bir oturumu kopyalamak,
@@ -332,17 +321,6 @@ değiştirmez veya günlüğünü silmez. Rota seçimleri ve değişiklikler, im
 <p>Otomatik rotalar etkinken, listeler saat başı yenilenir ve aktarım kontrolleri
 varsayılan olarak her on dakikada bir çalıştırılır. Bu aralıklar yapılandırılabilir. <strong>Genel listeleri güncellemek</strong>
 bir yenileme gerektirir; listeyi yalnızca görüntülemek, kaydedilmiş bir manuel rotayı değiştirmez.</p>
-<p>Her besleme yanıtı 1 MiB ile sınırlıdır; istek zaman aşımı sekiz saniye ve
-toplam indirme süresi 20 saniyedir; yönlendirmeler
-reddedilir. Kaynak başına en fazla 64 uyumlu giriş saklanır ve tekilleştirilir.
-Ayrıştırıcı, desteklenen onaltılık ve base64url gizli anahtarlarını ve JSON beslemesini kabul eder.
-Sahte TLS <code>ee</code>&#x27;leri, geçersiz bağlantılar, özel/ayrılmış IP sabitleri ve yerel ana bilgisayar adları
-atlanır. Ana bilgisayar adları kullanılmadan önce çözümlenir ve kontrol edilir; seçilen IP,
-o bağlantı için sabitlenir. Otomatik yeniden edinme işlemi, ana bilgisayar adını tekrar çözümler; yeniden çözümlemek için
-manuel bir girişi tekrar uygulayın.</p>
-<p>Başarısız, boş veya uyumsuz besleme yanıtlarında önceki kaynak anlık görüntüsü korunur.
-Güncellemeler atomiktir, serileştirilmiştir ve çalışma alanı başına dakikada bir denemeyle sınırlıdır.
-Başarılı bir aktarım denemesi, anonimlik veya yakalama tamlığını değil, bağlantı kurulduğunu gösterir.</p>
 <p><strong>Telegram trafiği ve HTTPS istekleri farklı yollar kullanır.</strong> Liste indirmeleri,
 ayrı bir HTTPS bağlantısı ve sağlanan harici istek yolunu kullanır.
 <code>TGWITNESS_PROXY_FEED_PROXY</code>, bu yolu bir HTTP/SOCKS5 proxy ile açıkça geçersiz kılar;
@@ -355,21 +333,6 @@ yapılandırıldığında ayrı bir SOCKS5/HTTP proxy&#x27;si kullanır, ardınd
 isteği reddeder; diğer modlar &quot;Doğrudan&quot; seçeneğine izin verir. Harici istekler devre dışı bırakılabilir. Açıkça
 yapılandırılmış bir besleme indirme proxy&#x27;si, ayrı bir operatör geçersiz kılma seçeneği olarak kalır.
 Bağımsız tanık hizmeti kendi yolunu korur.</p>
-<p>SOCKS5 veya HTTP proxy&#x27;leri aracılığıyla yapılan, yalnızca genel erişime açık harici HTTP istekleri,
-<code>https://1.1.1.1/dns-query</code> adresindeki Cloudflare DNS over HTTPS ile
-aynı proxy üzerinden hedefi çözümler. Yalnızca ana bilgisayar adı ve A/AAAA sorgu türleri çözümleyiciye gönderilir;
-hizmet URL&#x27;leri, kimlik bilgileri ve bildirim içerikleri dahil edilmez. TLS,
-çözümleyicinin IP adresi için sertifikasını doğrular. Her iki adres ailesi de kontrol edilir
-ve özel, geri döngü, bağlantı-yerel veya ayrılmış yanıtlar isteği reddeder.
-Bağlantılar, hizmetin orijinal
-HTTP Ana Bilgisayarı ve TLS sertifika adını korurken, doğrulanmış sayısal bir adres kullanır. Bildirim HTTP yönlendirmesi ve CONNECT
-istekleri aynı hedef denetimlerini kullanır. DNS hatası, yerel hedef DNS veya doğrudan
-yedekleme olmadan isteği durdurur. Başarılı yanıtlar, proxy rotası başına en fazla 30 saniye
-ve DNS TTL&#x27;lerinden daha uzun olmamak kaydıyla bellekte önbelleğe alınır;
-önbellek 128 girdiyle sınırlıdır. Proxy ana bilgisayar adı kendisi yerel DNS kullanabilir.
-SOCKS ve CONNECT hataları,
-hizmet isteği gövdesini göndermeden önce başka bir doğrulanmış adresi deneyebilir. Düz HTTP yönlendirmesi, isteğin başarısız olduğunu bildirir ve
-gövdesini başka bir adres üzerinden otomatik olarak tekrar göndermez.</p>
 <p>Operatör tarafından yönetilen özel hizmetler için, mevcut sunucu ortamı ayarı
 <code>TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1</code>, özel hedefleri izin verir ve
 proxy tarafında ana bilgisayar adı çözümlemesini korur. Bu ayar panelden etkinleştirilemez. Yalnızca genel
@@ -487,11 +450,6 @@ bulut sohbetleridir; MTProto bunları uçtan uca şifrelenmiş Gizli Sohbetlere 
 erişim gizli anahtarıdır, şifreleme parolası değildir. Yönetici erişimi sağlar;
 <a href="../access/">düzenlenen jetonların</a> kapsamı hesaplar ve sohbetlerle sınırlandırılabilir. Çalışma alanları
 ana süreci paylaşır ve izole edilmiş kiracılar değildir.</p>
-<p>Açıkça başlatılmış, izole edilmiş sentetik bir demo, doğrudan bir
-loopback bağlantısı üzerinden otomatik olarak açılabilir. Bu, ayrı bir işlem ömrü özelliğini kullanır; ne
-yapılandırılmış panel jetonunu açığa çıkarır ne de gerçek çalışma alanlarına erişim izni verir. Uzak,
-proxy üzerinden veya kaynaklar arası istekler bu otomatik giriş özelliğini elde edemez/kullanamaz.
-Bu kolaylık, gerçek hesap verileri için kimlik doğrulama sınırını ortadan kaldırmaz.</p>
 <p>BitLocker, LUKS, FileVault veya yönetilen şifreli bir birim,
 kendi tehdit modelleri kapsamında depolama alanını koruyabilir. Kilidi açılmış ve çalışır durumdaki bir makinenin yöneticisi
 yine de verileri okuyabilir. Depolama planlamasına SQLite WAL/SHM, medya, geçici dışa aktarımlar, takas alanı, yedeklemeler
@@ -522,26 +480,10 @@ parola KDF değildir. Rastgele bir anahtarın yerine keyfi insan parolaları kab
 <p>Kasıtlı bir geçiş gerçekleştirilip doğrulanana kadar mevcut kurulumlar için mevcut anahtarı
 kullanmaya devam edin. <code>vault.key</code>&#x27;yi silmek veya ana anahtarı değiştirmek,
 oturumlara/imza anahtarlarına erişimi engelleyebilir. Şifrelenmiş yedekleri ve anahtarları ayrı tutun ve
-kurtarma işlemini izole bir ortamda test edin.</p>
-<h2 id="sources-and-verification-scope">Kaynaklar ve doğrulama kapsamı<a class="anchor" href="#sources-and-verification-scope" aria-label="Bu bölüme bağlantı">#</a></h2>
-<p>26 Ekim 2026 tarihinde gözden geçirilmiştir:</p>
-<ul>
-<li>https://core.telegram.org/api/auth</li>
-<li>https://core.telegram.org/api/obtaining_api_id</li>
-<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
-<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
-<li>https://core.telegram.org/mtproto/mtproto-transports</li>
-<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
-<li>Telethon 1.45.0: SQLiteSession, StringSession, <code>Connection._proxy_connect</code>,
-    <code>TcpMTProxy.normalize_secret</code> ve indirme yöntemleri.</li>
-</ul>
-<p>Yerel testler, loopback SOCKS5/HTTP CONNECT test senaryolarını, sentetik SQLite oturumlarını,
-yol izolasyonunu, gizli bilgilerin hariç tutulmasını ve eksik anahtar reddetmesini kapsar. Bu testler,
-gerçek Telegram/proxy birlikte çalışabilirliğini veya canlı MTProxy davranışını doğrulamaz.
-<a href="../verification/">VERIFICATION.md</a> ve <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> dosyalarına bakınız.</p></div></article>
+kurtarma işlemini izole bir ortamda test edin.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">Bu sayfayı GitHub'da düzenle ↗</a><a class="next-guide" href="../deployment/"><span>Sonraki adım</span><strong>Uygulama →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="../verification/">Neler test edildi →</a></p></footer>
 </main>
-<aside class="toc" aria-label="Bu sayfada"><p class="nav-label">Bu sayfada</p><a href="#guided-connection-setup">Kılavuzlu bağlantı kurulumu</a><a href="#authentication-methods">Kimlik doğrulama yöntemleri</a><a href="#import-a-telethon-session-file">Bir Telethon oturum dosyasını içe aktarın</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon ve proxy'ler</a><a href="#ip-modes">IP modları</a><a href="#encryption-and-signatures">Şifreleme ve imzalar</a><a href="#external-master-key">Harici ana anahtar</a><a href="#sources-and-verification-scope">Kaynaklar ve doğrulama kapsamı</a></aside>
+<aside class="toc" aria-label="Bu sayfada"><p class="nav-label">Bu sayfada</p><a href="#guided-connection-setup">Kılavuzlu bağlantı kurulumu</a><a href="#authentication-methods">Kimlik doğrulama yöntemleri</a><a href="#import-a-telethon-session-file">Bir Telethon oturum dosyasını içe aktarın</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon ve proxy'ler</a><a href="#ip-modes">IP modları</a><a href="#encryption-and-signatures">Şifreleme ve imzalar</a><a href="#external-master-key">Harici ana anahtar</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Açık kaynak · Kendi makinenizde çalışır</span><a href="../../../../LICENSE">MIT lisansı</a><a href="../notice/">Operatör bildirimi</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Güvenlik</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "Mesaj bekleniyor", "Step through a fictional send, edit and delete.": "Kurgusal bir gönderme, düzenleme ve silme işlemini adım adım inceleyin.", "No observations yet. Start the sequence or advance one event.": "Henüz herhangi bir gözlem yok. Diziyi başlatın veya bir olay ilerletin.", "Meet at 10:00": "Saat 10:00'da buluşalım", "A new message is visible in the chat.": "Sohbette yeni bir mesaj görünüyor.", "Record 1 appended: the collector observed the original message.": "1 kayıt eklendi: toplayıcı, orijinal mesajı gözlemledi.", "Meet at 11:00": "Saat 11:00'da buluşalım", "The current text changes. The earlier observation stays.": "Mevcut metin değiştirilmiştir. Önceki gözlem geçerliliğini korumaktadır.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Kayıt 2 eklendi: düzenleme yeni bir gözlemdir. Kayıt 1'de hâlâ orijinal metin yer almaktadır.", "Message deleted": "Mesaj silindi", "The message has disappeared from the chat view.": "Mesaj, sohbet ekranından kayboldu.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 eklenmiştir: silme bildirimi, gözlemlenen her iki sürümün yanında da saklanmaktadır.", "0 records": "0 kayıt", "1 record": "1 kayıt", "2 records": "2 kayıt", "3 records": "3 kayıt", "Complete / {n} of 3": "Tamam / 3'ün {n}'si", "Step / {n} of 3": "Adım / 3'ün {n}'si", "Pause": "Duraklat", "Replay sequence": "Tekrar oynatma dizisi", "Play sequence": "Çalma sırası", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Statik örnek mevcuttur. Hash değerlerini etkileşimli olarak hesaplamak için bu sayfayı HTTPS üzerinden veya Web Crypto desteğine sahip bir localhost önizlemesinde açın.", "No record supplied": "Kayıt sağlanmadı", "Tail removed": "Son kısım kaldırıldı", "≠ saved hash": "≠ kaydedilmiş hash", "Rebuilt · different hash": "Yeniden oluşturuldu · farklı hash", "= saved hash": "= kaydedilen hash", "Same length and matching head.": "Aynı uzunlukta ve başlığıyla uyumlu.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Hesaplanan üç hash değeri de kaydedilen hash değerleriyle eşleşmektedir. Bu örnek, korunan üç kayıtlık sınırla uyumludur.", "Same saved head; the journal prefix fails verification.": "Aynı başlık kaydedildi; günlük ön eki doğrulamadan geçemedi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Kayıt 2, kaydedilmiş hash değeriyle artık eşleşmiyor. Yalnızca son saklanan başlık kontrol edilseydi bu durum gözden kaçardı; doğrulayıcı her kaydı tek tek kontrol eder.", "Head differs from the retained checkpoint.": "Başlık, saklanan kontrol noktası ile farklılık göstermektedir.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Yeniden oluşturulan hash değerleri birbiriyle bağlantılıdır, ancak son başlık değişmiştir. Saklanan kontrol noktası bu geçmişi reddediyor. Değiştirilen kayıtlarda orijinal imzalar da geçersiz sayılır.", "Too short: 2 supplied records \u003c 3 retained records.": "Çok kısa: Sağlanan kayıt sayısı 2, saklanan kayıt sayısı 3'ten az.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kalan iki hash değeri hâlâ eşleşiyor. Saklanan kontrol noktası, eksik olan son kısmı ortaya çıkarıyor. O önceki sınır olmasaydı, bu daha kısa önek tek başına eksikliği ortaya çıkarmazdı.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Bu tarayıcıda hash hesaplaması yapılamamaktadır. Aşağıdaki formüller ve statik açıklamalar yine de kullanılabilir durumdadır.", "{n} records": "{n} kayıt", "head {hash}": "başlık {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Kabul edildi: sayı artıyor, imza doğrulanıyor ve anahtar eşleşiyor. Tanık bu yeni sınırı koruyor.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Geri alma: İmzalı yanıt, en son kabul edilen kontrol noktasına göre daha az kayıt bildiriyor. Witness, sorunu kaydeder ve daha önce kabul edilen sınırı korur.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: sayım değişmez ancak başlık farklıdır. Tanık, bu uyuşmazlığı kaydeder ve daha önce kabul edilen sınırı korur.", "No answer": "Cevap yok", "boundary unknown": "sınır bilinmiyor", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Yanıt yok: tanık, başarısız kontrolü kaydeder. Toplayıcının mevcut durumunu belirleyemez. Tanık, Bot API’sine hâlâ erişebiliyorsa ve yayın politikası izin veriyorsa, bu başarısızlığı yayınlayabilir.", "Send {n}": "{n} gönder", "Edit {n}": "Düzenle {n}", "Delete {n}": "{n}'yi sil", "Both accounts captured all six expected observations in this example.": "Bu örnekte her iki hesap da beklenen altı gözlemin tamamını kaydetmiştir.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "B hesabı yine 6 mesajın 6'sını da yakaladı. İki makbuzun alınması daha uzun sürdü. Yakalama oranı ve makbuz gecikmesi farklı sorulara cevap verir.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Hesap B, son tarihe kadar 6 eylemden 5'ini yakaladı (%83,3). Eksik olan düzenleme için ölçülen bir gecikme yoktur. Bu sonuç yalnızca altı kontrollü eylemi açıklamaktadır.", "not observed by cutoff": "kesme tarihine kadar gözlemlenmemiştir", "{s} seconds": "{s} saniye", "Exact values follow in the table.": "Kesin değerler tabloda yer almaktadır.", "{s} s": "{s} s", "Not observed": "Gözlemlenmedi", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Dört sohbet, farklı gözlemler sunmaktadır. Her bağlantı için kaynak kayıtlarını takip edin; göndereni belirtilmemiş kanal gönderisini 71001 numaralı kullanıcıya atamayın.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "#146 ve #205 numaralı kayıtlar aynı gönderen kimliğini (71001) göstermektedir. Bu, iki sohbet üzerinden bir Telegram hesabının gözlemlenen gönderilerini birbirine bağlamaktadır. Bu bilgi, gerçek hayattaki bir kişiyi tanımlamaz veya kanal gönderisini bir kişiye atfetmez.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new adresi, grup kaydı #146, bot klavyesi #173, kanal düzenlemesi #188 ve özel mesaj #205'te geçmektedir. Tekrarlanan bir hedef, materyalleri birbirine bağlar; ancak bu, söz konusu hesapların ortak kontrol altında olduğunu kanıtlamaz.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Bu hayali vakada, tamamlanmış medya makbuzları #151 ve #209'un SHA-256 değerleri tamamen aynıdır. Gerçek baytları ve bunlara ait mesaj kayıtlarını karşılaştırın. Eşleşen dosya, yaratıcısını tanımlamaz veya kimin ilettiğini kanıtlamaz.", "the encrypted off-site copy": "şifrelenmiş, sunucu dışında tutulan kopya", "notifications": "bildirimler", "checkpoint hashes for timestamps": "zaman damgaları için kontrol noktası hash değerleri", "signed checkpoints for the witness": "tanık için imzalı kontrol noktaları", "Switched on in this example": "Bu örnekte etkinleştirilmiştir", "Optional · off by default": "İsteğe bağlı · varsayılan olarak kapalı", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Bu makineden ayrılırken: Telegram bağlantısı ve {list}. Başka hiçbir şey yok.", "Default: only the Telegram connection leaves this machine.": "Varsayılan ayar: Bu makineden yalnızca Telegram bağlantısı dışarıya çıkar.", "{done} of {total} done": "{done}/{total} tamamlandı", "Mark step {n} as done": "{n} numaralı adımı tamamlanmış olarak işaretle", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Metin", "Copied": "Kopyalandı", "Command copied.": "Komut kopyalandı.", "Selected — Ctrl/Cmd+C": "Seçildi — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Komut seçildi. Elle kopyalayın.", "Command copied to clipboard.": "Komut panoya kopyalandı.", "Select text": "Metni seç", "Clipboard unavailable. Command selected; copy it manually.": "Pano kullanılamıyor. Komut seçildi; manuel olarak kopyalayın.", "A message arrives. The first observation is saved.": "Bir mesaj gelir. İlk gözlem kaydedilir.", "The time changes. Both captured versions stay.": "Zaman değişir. Yakalanan her iki sürüm de kalır.", "The message disappears. The captured history remains.": "Mesaj kaybolur. Kaydedilen geçmiş kalır.", "Pause example animation": "Örnek animasyonu duraklat", "Play example animation": "Örnek animasyonu oynat", "Play": "Oynat", "Full-size workspace screenshot": "Çalışma alanının tam boyutlu ekran görüntüsü", "Workspace screenshot · fictional data": "Çalışma alanı ekran görüntüsü · hayali veriler", "Close": "Kapat", "Close screenshot": "Ekran görüntüsünü kapat", "Scrollable full-size screenshot": "Kaydırılabilir tam boyutlu ekran görüntüsü", "Enlarge: {name}": "Büyüt: {name}", "View full size": "Tam boyutta görüntüle", "Step {n} of {total}": "{n}. adım / {total}"}</script>

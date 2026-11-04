@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 若工作區中已有會話或先前已完成的設定，則不會顯示設定精靈。 頁面載入時，其值不會被目標所取代。隱藏欄位並不會 停用該功能或刪除其值。
 
 大小與時間估算值基於最多三組選定的聊天室，以及每組聊天室中最多 20 則訊息。 此為估算值：無法預測 Telegram 的限制、特定 伺服器的速度，或每組聊天室中的檔案內容。
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

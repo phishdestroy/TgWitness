@@ -2,26 +2,26 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/concepts/
 
-הודעה עשויה להשתנות. התיעוד של מה שצפית בו צריך להישאר ניתן לאימות.
+הודעות משתנות. התיעוד שלכם של מה שראיתם לא אמור להשתנות, וכל אחד אמור להיות מסוגל לבדוק את זה.
 
-התנסו בשני ניסויים קטנים המוצגים להלן. הם משתמשים בהודעות פיקטיביות, פועלים בתוך הדפדפן שלכם ואינם מתחברים ל-Telegram בשום שלב.
+למטה שני ניסויים קטנים. הודעות מזויפות, הכול רץ בדפדפן, שום דבר לא נשלח ל-Telegram.
 
 ## מייצוא צ'אט לתיעוד הניתן לאימות
 
-[הייצוא מ-Telegram Desktop](https://telegram.org/blog/export-and-more) שומר את היסטוריית הצ'אט והמדיה הזמינה בפורמט HTML או JSON לשימוש לא מקוון. TgWitness מוסיף יומן מתמשך של שינויים שהתקבלו, חתימות על תצפיות וייצואים, וכן נקודות ביקורת שהנמענים יכולים להשוות באופן עצמאי.
+[ייצוא של Telegram Desktop](https://telegram.org/blog/export-and-more) שומר את ההיסטוריה שאתם רואים עכשיו כ-HTML או JSON. TgWitness מוסיף יומן שינויים רציף, חתימות על כל רשומה ונקודות ביקורת שאחרים יכולים להשוות מולן.
 
 | המשימה | ייצוא מ-Telegram Desktop | TgWitness |
 | --- | --- | --- |
 | קריאת שיחות שנשמרו | HTML או JSON עם מדיה נבחרת | צ'אטים שנשמרו, יומן הניתן לחיפוש ודוחות במצב לא מקוון |
-| עקבו אחר השינויים לאורך זמן | ההיסטוריה הזמינה בעת הייצוא | גרסאות שנלכדו קודם לכן, עריכות מאוחרות יותר ותצפיות על מחיקות נשמרות יחד |
-| יש לבדוק את הקבצים לאחר המסירה | קובצי ייצוא HTML/JSON סטנדרטיים אינם חתומים | רשימת תוכן חתומה, חתימות לכל רשומה ודוחות HTML/PDF/JSON חתומים, שנבדקו מול מפתח אספן מהימן |
+| עקבו אחר השינויים לאורך זמן | ההיסטוריה הזמינה בעת הייצוא | גרסאות ישנות, עריכות מאוחרות ומחיקות, הכול נשמר |
+| יש לבדוק את הקבצים לאחר המסירה | קובצי ייצוא HTML/JSON סטנדרטיים אינם חתומים | מניפסט חתום, רשומות חתומות ודוחות חתומים, נבדקים מול מפתח מהימן |
 | השווה למצב שנשמר קודם לכן | יש לשמור עותק התייחסות נפרד או חתימת hash | נקודות ביקורת חתומות, עד נפרד וחותמות זמן חיצוניות אופציונליות |
 
-ההשוואה בין חתימות הקבצים מבוססת על [כלי הייצוא](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) של [Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) שנבדקו ב-2 בנובמבר 2026. TgWitness חותם באמצעות המפתח של האספן; הבדיקות שלהלן מראות כיצד הנמען משתמש בו.
+ההשוואה מבוססת על [קוד הייצוא של Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) נכון ל-2 בנובמבר 2026.
 
 ## הודעה אחת, שלוש תובנות
 
-כאשר Telegram מעבירה הודעה חדשה, הודעת עריכה או הודעת מחיקה, האפליקציה האוספת מוסיפה שלוש הערות נפרדות. העריכה אינה מחליפה את הרישום הראשון. הודעת מחיקה אינה מוחקת אותו.
+הודעה חדשה, עריכה ומחיקה הופכות לשלוש רשומות נפרדות. העריכה לא דורסת את הראשונה, והמחיקה לא מוחקת אותה.
 
 01 / מסלול ההודעהרצף איורי
 
@@ -61,11 +61,11 @@ Telegram delivers an update to the collector, which appends a journal record. ·
 
 נתיב פשוט עבור מקור אחד שכבר נבחר. גם הרישומים התפעוליים משתפים את היומן האמיתי. התיעוד תלוי במה שהחשבון יכול לראות ובמה ש-Telegram מספק.
 
-הודעת מחיקה אינה מספקת לא את זמן המחיקה האמין ולא את זהות האדם שמחק את ההודעה. השמירת ערכים אלה כבלתי ידועים שומרת על ההבחנה בין תצפית לניחוש.
+Telegram לא אומר מי מחק הודעה או מתי בדיוק. TgWitness משאיר את השדות האלה ריקים במקום לנחש.
 
 ## שנה רשומה. עקוב אחר ה-hash.
 
-כל רשומה מכילה את ה-hash של הרשומה הקודמת. ה-hash שלה מכסה את שדות האירוע, כולל קישור זה. נקודת ביקורת הנשמרת באופן חיצוני קובעת אורך יומן ספציפי ו-hash ראשי.
+כל רשומה מכילה את הגיבוב של זו שלפניה. נקודת ביקורת שנשמרה במקום אחר מקבעת את אורך היומן ואת הגיבוב האחרון.
 
 02 / HASH-CHAIN SANDBOXSHA-256 אמיתי · דוגמאות לרישומים
 
@@ -105,23 +105,23 @@ h0 = 064
 hi = hex(SHA-256(C(ei)))
 σi = Ed25519.Sign(sk, unhex(hi))
 
-**C** ממיר את תשעת שדות האירוע לפורמט JSON ב-UTF-8: מפתחות ממוינים, ללא רווחים מיותרים, ללא בריחה מ-ASCII וללא NaN/אינסוף. ה-`previous_hash` של האירוע הוא hi−1. ה-h0 המוצג פירושו 64 תווי אפס; החתימות מכסות את 32 בתים הגולמיים של התמצית.
+**C** הם תשעת שדות האירוע כ-JSON ב-UTF-8: מפתחות ממוינים, בלי רווחים מיותרים, בלי escape של ASCII, בלי NaN/אינסוף. `previous_hash` הוא hi−1, h0 הוא 64 אפסים, והחתימות מכסות את 32 הבתים הגולמיים של התקציר.
 
-תשעת השדות הם `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload` ו-`previous_hash`. זוהי [קידוד ה-JSON המתועד](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#event-canonicalization) של TgWitness; ההאש והחתימה עצמם אינם שדות קלט להאש.
+השדות: `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload`, `previous_hash`. מפרט מלא: [קידוד אירועים](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#event-canonicalization).
 
 נקודת ביקורת שנשמרה
 
 Nexport ≥ Ncheckpoint
 hexport[Ncheckpoint] = Hcheckpoint
 
-אמתו את חתימת נקודת הבדיקה תחת מפתח האספן המוצמד, ולאחר מכן השוו את גבולותיה ליומן המאומת. ייצוא מאוחר יותר עשוי להכיל רשומות נוספות; הוא עדיין חייב להתאים לנקודת הבדיקה המוקדמת יותר.
+בדקו את חתימת נקודת הביקורת מול המפתח המקובע, ואז השוו אותה ליומן. ייצוא מאוחר יותר יכול להיות ארוך יותר, אבל חייב להתאים בנקודת הביקורת.
 
 ## שלוש שאלות, שלוש בדיקות שונות
 
-[01 / שלמות**האם תיעוד זה השתנה?** אמת את ה-hash והחתימות מול מפתח מהימן נפרד.](https://phishdestroy.github.io/TgWitness/he/docs/exports/)[02 / המשכיות**מה נשמר קודם לכן?** השוו ייצוא חתום לנקודות ביקורת שנשמרו על ידי עד נפרד.](https://phishdestroy.github.io/TgWitness/he/docs/witness/)[03 / מסירה**האם אירועי הבדיקה הללו התקבלו?** התאמת פעולות שליחה, עריכה ומחיקה מבוקרות מול יומן כל חשבון.](https://phishdestroy.github.io/TgWitness/he/docs/cases/)
+[01 / שלמות**האם תיעוד זה השתנה?** גיבובים וחתימות מול מפתח שאתם סומכים עליו.](https://phishdestroy.github.io/TgWitness/he/docs/exports/)[02 / המשכיות**מה נשמר קודם לכן?** השוו את הייצוא לנקודות ביקורת שעד שמר.](https://phishdestroy.github.io/TgWitness/he/docs/witness/)[03 / מסירה**האם אירועי הבדיקה הללו התקבלו?** שלחו, ערכו ומחקו הודעות בדיקה, וראו מה כל חשבון תפס.](https://phishdestroy.github.io/TgWitness/he/docs/cases/)
 
-יש להשתמש בחתימות כדי לבדוק את הרשומות שנשמרו, בנקודות ביקורת כדי להשוות לגבול קודם, ובבדיקות מסירה מבוקרות כדי למדוד את האיסוף. כל אחת מהן עונה על שאלה ספציפית. [יש לקרוא את היקף האימות ואת הנחות האמון.](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope)
+חתימות עונות על "האם זה שונה", נקודות ביקורת על "האם זה תואם את מה שהיה קודם", והודעות בדיקה על "האם תפסנו הכול". [מה האימות מוכיח ומה לא.](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope)
 
-עקבו אחר [חקירת החשבון במלואו,](https://phishdestroy.github.io/TgWitness/he/docs/cases/) החל מהשגתו ועד להרכבת תיק החקירה.
+הבא: [חקירת חשבון שלם](https://phishdestroy.github.io/TgWitness/he/docs/cases/) מההתחלה ועד חבילת התיק.
 
 [Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

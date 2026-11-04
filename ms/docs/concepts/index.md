@@ -2,26 +2,26 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/concepts/
 
-Satu mesej boleh berubah. Rekod apa yang anda perhatikan harus kekal boleh disemak.
+Mesej berubah. Rekod anda tentang apa yang anda lihat tidak sepatutnya berubah, dan sesiapa sahaja sepatutnya boleh menyemaknya.
 
-Terokai dua eksperimen kecil di bawah. Mereka menggunakan mesej rekaan, kekal di pelayar anda dan tidak pernah menyambung ke Telegram.
+Dua eksperimen kecil di bawah. Mesej palsu, semuanya berjalan dalam pelayar anda, tiada apa yang dihantar ke Telegram.
 
 ## Dari eksport sembang ke rekod yang boleh disahkan
 
-[Telegram Desktop mengeksport](https://telegram.org/blog/export-and-more) sejarah sembang dan media yang tersedia sebagai HTML atau JSON untuk kegunaan luar talian. TgWitness menambah jurnal berterusan perubahan yang diterima, tandatangan pada pemerhatian dan eksport, serta titik pemeriksaan yang boleh dibandingkan secara bebas oleh penerima.
+[Eksport Telegram Desktop](https://telegram.org/blog/export-and-more) menyimpan sejarah yang boleh anda lihat sekarang sebagai HTML atau JSON. TgWitness menambah jurnal perubahan yang berterusan, tandatangan pada setiap rekod dan checkpoint yang boleh dibandingkan oleh orang lain.
 
 | Tugas | Eksport Telegram Desktop | TgWitness |
 | --- | --- | --- |
 | Baca perbualan yang disimpan | HTML atau JSON dengan media terpilih | Perbualan yang disimpan, jurnal boleh dicari dan laporan luar talian |
-| Ikuti perubahan dari masa ke masa | Sejarah yang tersedia apabila dieksport | Versi yang dirakam lebih awal, suntingan kemudian dan pemerhatian pemadaman disimpan bersama |
-| Semak fail selepas penyerahan | Fail eksport HTML/JSON standard tidak ditandatangani | Manifest yang ditandatangani, tandatangan bagi setiap rekod dan laporan HTML/PDF/JSON yang disegel disemak menentang kunci pengumpul yang dipercayai |
+| Ikuti perubahan dari masa ke masa | Sejarah yang tersedia apabila dieksport | Versi lama, suntingan kemudian dan pemadaman, semuanya disimpan |
+| Semak fail selepas penyerahan | Fail eksport HTML/JSON standard tidak ditandatangani | Manifes bertandatangan, rekod bertandatangan dan laporan bermeterai, disemak dengan kunci yang dipercayai |
 | Bandingkan dengan keadaan terdahulu yang disimpan | Simpan salinan rujukan berasingan atau hash | Pemeriksaan bermasa yang ditandatangani, saksi berasingan dan cap masa luaran pilihan |
 
-Perbandingan penandatanganan fail adalah berdasarkan [penulis eksport Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) yang disemak pada 2 November 2026. TgWitness menandatangani dengan kunci pengumpul; pemeriksaan di bawah menunjukkan bagaimana penerima menggunakannya.
+Perbandingan ini berdasarkan [kod eksport Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) setakat 2 November 2026.
 
 ## Satu mesej, tiga pemerhatian
 
-Apabila Telegram menghantar mesej baru, suntingan dan pemberitahuan pemadaman, pengumpul menambah tiga pemerhatian berasingan. Suntingan tidak menggantikan rekod pertama. Pemberitahuan pemadaman tidak memadamkannya.
+Mesej baharu, suntingan dan pemadaman menjadi tiga rekod berasingan. Suntingan tidak menimpa yang pertama, dan pemadaman tidak menghapuskannya.
 
 01 / PERJALANAN PESANANUrutan ilustratif
 
@@ -61,11 +61,11 @@ Ketiga-tiga pemerhatian yang diterima kekal dalam jurnal.
 
 Laluan ringkas untuk satu sumber yang telah dipilih. Rekod operasi juga berkongsi jurnal sebenar. Rakaman bergantung pada apa yang akaun boleh lihat dan apa yang Telegram sampaikan.
 
-Notis pemadaman tidak memberikan masa pemadaman yang boleh dipercayai mahupun individu yang memadam mesej. Menjaga nilai-nilai tersebut tidak diketahui mengekalkan perbezaan antara pemerhatian dan andaian.
+Telegram tidak memberitahu siapa yang memadam mesej atau bila tepatnya. TgWitness membiarkan medan itu kosong dan bukannya meneka.
 
 ## Ubah rekod. Ikuti hash.
 
-Setiap rekod mengandungi hash rekod sebelumnya. Hashnya sendiri merangkumi medan peristiwa, termasuk pautan tersebut. Titik pemeriksaan yang disimpan secara luaran menetapkan panjang jurnal tertentu dan hash kepala.
+Setiap rekod mengandungi hash rekod sebelumnya. Checkpoint yang disimpan di tempat lain mengunci panjang jurnal dan hash terakhir.
 
 02 / HASH-CHAIN SANDBOXSHA-256 sebenar · rekod sampel
 
@@ -105,23 +105,23 @@ h0 = 064
 hi = hex(SHA-256(C(ei)))
 σi = Ed25519.Sign(sk, unhex(hi))
 
-**C** menyirialisasikan sembilan medan peristiwa sebagai JSON UTF-8: kunci disusun, tiada ruang tambahan, tiada pelarian ASCII dan tiada NaN/infinity. `previous_hash` bagi peristiwa ialah hi−1. h0 yang dipaparkan bermaksud 64 aksara sifar; tandatangan merangkumi 32 bait digest mentah.
+**C** ialah sembilan medan peristiwa sebagai JSON UTF-8: kunci diisih, tiada ruang kosong tambahan, tiada escape ASCII, tiada NaN/infiniti. `previous_hash` ialah hi−1, h0 ialah 64 sifar, tandatangan meliputi 32 bait mentah digest.
 
-Kesembilan medan ialah `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload` dan `previous_hash`. Ini ialah [pengekodan JSON yang didokumenkan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#event-canonicalization) oleh TgWitness; hash dan tandatangan itu sendiri bukan medan input hash.
+Medan: `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload`, `previous_hash`. Spesifikasi penuh: [pengekodan peristiwa](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#event-canonicalization).
 
 Pemeriksa Disimpan
 
 Nexport ≥ Ncheckpoint
 hexport[Ncheckpoint] = Hcheckpoint
 
-Sahkan tandatangan checkpoint di bawah kunci pengumpul yang dipin, kemudian bandingkan sempadannya dengan jurnal yang disahkan. Eksport kemudian mungkin mengandungi lebih banyak rekod; ia masih mesti sepadan dengan checkpoint terdahulu.
+Semak tandatangan checkpoint dengan kunci yang dipin, kemudian bandingkan dengan jurnal. Eksport kemudian boleh lebih panjang, tetapi mesti sepadan pada checkpoint.
 
 ## Tiga soalan, tiga pemeriksaan berbeza
 
-[01 / INTEGRITI**Adakah rekod ini berubah?** Sahkan hash dan tandatangan terhadap kunci yang dipercayai secara berasingan.](https://phishdestroy.github.io/TgWitness/ms/docs/exports/)[02 / KELANJUTAN**Apa yang telah disimpan sebelum ini?** Bandingkan eksport yang disahkan dengan titik pemeriksaan yang disimpan oleh saksi berasingan.](https://phishdestroy.github.io/TgWitness/ms/docs/witness/)[03 / PENYAMPAIAN**Adakah acara ujian ini tiba?** Padankan tindakan hantar terkawal, sunting dan padam dengan jurnal setiap akaun.](https://phishdestroy.github.io/TgWitness/ms/docs/cases/)
+[01 / INTEGRITI**Adakah rekod ini berubah?** Hash dan tandatangan terhadap kunci yang anda percayai.](https://phishdestroy.github.io/TgWitness/ms/docs/exports/)[02 / KELANJUTAN**Apa yang telah disimpan sebelum ini?** Bandingkan eksport dengan checkpoint yang disimpan saksi.](https://phishdestroy.github.io/TgWitness/ms/docs/witness/)[03 / PENYAMPAIAN**Adakah acara ujian ini tiba?** Hantar, sunting dan padam mesej ujian, dan lihat apa yang ditangkap setiap akaun.](https://phishdestroy.github.io/TgWitness/ms/docs/cases/)
 
-Gunakan tandatangan untuk memeriksa rekod yang disimpan, titik pemeriksaan untuk membandingkan sempadan terdahulu, dan ujian penghantaran terkawal untuk mengukur pengumpulan. Setiap satu menjawab soalan tertentu. [Baca skop pengesahan dan andaian kepercayaan.](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope)
+Tandatangan menjawab "adakah ia diubah", checkpoint menjawab "adakah ia sepadan dengan yang ada sebelum ini", mesej ujian menjawab "adakah kita menangkap semuanya". [Apa yang dibuktikan oleh pengesahan dan apa yang tidak.](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope)
 
-Ikuti [siasatan keseluruhan akaun](https://phishdestroy.github.io/TgWitness/ms/docs/cases/) dari pemerolehan hingga pakej kes.
+Seterusnya: [siasatan seluruh akaun](https://phishdestroy.github.io/TgWitness/ms/docs/cases/) dari mula hingga pakej kes.
 
 [Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

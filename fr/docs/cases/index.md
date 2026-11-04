@@ -2,28 +2,28 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/cases/
 
-Traitez une affaire dans son intégralité, qu’il s’agisse de canaux, de groupes, de discussions privées ou de bots : collectez, reliez, reconstituez et transmettez les preuves.
+Une affaire complète à travers canaux, groupes, chats privés et bots : collecter, relier les éléments, reconstituer la chronologie, transmettre.
 
-Ce guide pratique suit le déroulement d’un incident fictif tout au long d’un dossier complet. Utilisez les fonctionnalités de collecte, de recherche et les profils de personnes pour trouver les enregistrements sources, [le « Case Board »](https://phishdestroy.github.io/TgWitness/fr/docs/case-board/) pour les organiser et en discuter, et [le « Report Studio »](https://phishdestroy.github.io/TgWitness/fr/docs/reports/) pour présenter les conclusions. La carte illustrée ci-dessous explique les liens entre les différentes étapes de cet exemple.
+Un incident inventé, du début à la fin. La collecte, la recherche et les profils de personnes trouvent les entrées, [Case Board](https://phishdestroy.github.io/TgWitness/fr/docs/case-board/) les organise, [Report studio](https://phishdestroy.github.io/TgWitness/fr/docs/reports/) les présente.
 
 CAS TRAITÉ / MODIFICATION DE LA DESTINATION D'UN PAIEMENT
 
 ### Un incident. Quatre conversations. Une piste à reconstituer.
 
-Une annonce sur un canal renvoie vers un bot. Un groupe opérationnel discute d’un nouveau lien de paiement, et le bot l’affiche. L’annonce est modifiée, un message privé de suivi répète la destination, et un message de groupe disparaît.
+Une publication de canal renvoie vers un bot. Un groupe parle d’un nouveau lien de paiement et le bot l’affiche. La publication est modifiée, un chat privé répète le lien, un message du groupe disparaît.
 
 Qui a publié chaque version ?Où ce lien est-il apparu ?Quel fichier a été conservé ?Quels changements ont eu lieu, et quand ?
 
-Pour le chargement de l'historique, la vérification facultative des sources par IA, le MCP, l'OCR et les webhooks sortants, consultez la section « [Utiliser les archives](https://phishdestroy.github.io/TgWitness/fr/docs/archive/) ».
+Chargement de l’historique, IA, MCP, OCR et webhooks : [Travailler l’archive](https://phishdestroy.github.io/TgWitness/fr/docs/archive/).
 
 ## 1. Assurer une couverture complète de l’ensemble du compte
 
-Utilisez un compte de collecte dédié pour une collecte portant sur l’intégralité du compte. Les comptes principaux peuvent collecter des discussions sélectionnées ou un dossier Telegram.
+Périmètre « compte entier » uniquement sur un compte dédié. Un compte principal se limite à des chats choisis ou à un dossier.
 
-1. [Connectez le compte de collecte](https://phishdestroy.github.io/TgWitness/fr/docs/accounts/) dans son propre espace de travail. Notez la référence du dossier, l’identifiant du compte, le nom de l’espace de travail et l’empreinte de la clé de signature dans vos notes de dossier.
-2. Sources ouvertes → Portée d’observation → Mode d’enquête. Passez en revue l’ensemble du compte, les quatre types de sources et vos propres actions. Ce préréglage permet d’enregistrer le profil d’une nouvelle source ainsi que ses 200 derniers messages visibles. Cliquez sur « Enregistrer la portée » et validez la portée.
-3. Cliquez sur « **Charger les discussions** ». Comparez les sources avec la liste des conversations du compte et vérifiez les exclusions. Sous « **Paramètres » → « Discussions lues à partir de la liste du compte** », ajustez la limite initiale de la liste si nécessaire : la valeur par défaut est de 1 000 conversations, configurable jusqu’à 20 000. Les conversations dépassant cette limite sont détectées dès qu’elles deviennent actives.
-4. Dans **les paramètres d’enregistrement**, sélectionnez et enregistrez « **Toutes les activités visibles** ». Vérifiez les types de pièces jointes, les limites de taille et l’espace disque disponible. Lancez l’observation et validez un message, une modification et une suppression contrôlés avant de vous fier à la configuration.
+1. [Connectez le compte](https://phishdestroy.github.io/TgWitness/fr/docs/accounts/) dans son propre espace. Notez la référence de l’affaire, l’ID du compte, l’espace et l’empreinte de clé.
+2. **Sources → Périmètre d’observation → Mode enquête** : **Compte entier**, les quatre types de sources, **Actions propres**. Chaque nouveau chat voit son profil et ses **200 derniers messages visibles** enregistrés. **Enregistrer le périmètre** et confirmez.
+3. **Charger les chats** et comparez avec la liste des chats du compte. La limite est de 1 000 dialogues (jusqu’à 20 000 dans **Paramètres → Chats lus depuis la liste du compte**) ; ceux au-delà apparaissent dès qu’ils deviennent actifs.
+4. **Paramètres d’enregistrement** → **Toute l’activité visible**, vérifiez les limites de pièces jointes et l’espace disque. Démarrez, puis testez avec un message, une modification et une suppression.
 
 ChaînesGroupesConversations privéesBots
 
@@ -31,44 +31,44 @@ UN COMPTE / UNE CLÉ DE SIGNATURE**Toutes les activités visibles sur le compte 
 
 Messages · modifications · notifications de suppression · réactions visibles · événements liés à l'adhésion · actions personnelles
 
-Le terme « compte complet » désigne les discussions auxquelles ce compte a accès, avec les types de sources et les exclusions configurés. Les discussions secrètes ne sont pas disponibles. De nouvelles discussions sont ajoutées au fur et à mesure des mises à jour ; l’activation de ce mode n’entraîne pas le téléchargement automatique de l’historique complet de toutes les discussions existantes.
+« Compte entier » signifie tous les chats que ce compte peut ouvrir, moins les exclusions. Pas de chats secrets. Les nouveaux chats s’ajoutent à mesure qu’ils apparaissent ; l’ancien historique n’est pas téléchargé automatiquement.
 
 ## 2. Récupérer l'historique et conserver les fichiers
 
-Créez une collection « Case Board » pour l’enquête et ajoutez les enregistrements sauvegardés pertinents à vos favoris. Tenez à jour un registre des sources parallèlement au dossier : identifiant numérique de chaque conversation, titre, compte de collecte, accès/rôle, date de début de la collecte en direct, historique de l’acquisition, résultat multimédia et lacunes connues. Marquez une source comme « acquise » après avoir vérifié le résultat correspondant.
+Créez une collection Case Board et marquez ce qui compte. Tenez un registre des sources : ID du chat, titre, compte, rôle, début de la capture en direct, résultat de l’historique, résultat des médias, lacunes.
 
 | Besoin | Action dans le panneau | Ce qu’il propose |
 | --- | --- | --- |
 | Historique des discussions activées | Sources → Charger l'historique complet | Les messages antérieurs disponibles sont enregistrés dans le journal de l’espace de travail, avec des fonctions de pause/reprise et un rapport d’avancement signé. [Guide de l’historique](https://phishdestroy.github.io/TgWitness/fr/docs/reference/history/). |
-| Contexte de conversation existant dans le journal | Sources → Paramètres d’enregistrement → Instantané de l’historique | Les messages récents visibles sont présentés sous forme d’observations signées. Limite maximale par défaut : 500 ; **Paramètres → « Largest history snapshot »** permet d’augmenter cette limite jusqu’à 10 000. |
-| Historique complet, tel qu'il est actuellement visible, d'une conversation | Exportation de l'intégralité d'une conversation → Exporter l'intégralité d'une conversation, ou Conversations → Exporter une conversation | Un ensemble signé distinct contenant les clés « `chat.json` » et « `chat.html` ». Répétez l'opération pour chaque source ; conservez les résultats indiquant la réussite ou l'échec. |
-| Contexte : lorsqu’une nouvelle conversation apparaît | Périmètre d’observation → Lorsqu’une nouvelle conversation ou un nouveau bot apparaît | Un profil de source et jusqu’à 1 000 messages récents visibles ; le mode « Enquête » en sélectionne 200. Les discussions existantes ne bénéficient pas de cette fonctionnalité de manière rétroactive. |
-| Nombre d'octets de la pièce jointe | Téléchargement des pièces jointes visibles + limites par type | Vérifiez la présence de `media.saved`, sa valeur SHA-256 et le nombre d’octets. Un téléchargement mis en file d’attente, ignoré ou ayant échoué ne constitue pas un fichier conservé. |
+| Contexte de conversation existant dans le journal | Sources → Paramètres d’enregistrement → Instantané de l’historique | Messages récents sous forme d’entrées signées. 500 par défaut, jusqu’à 10 000 dans **Paramètres → Plus grand instantané d’historique**. |
+| Historique complet, tel qu'il est actuellement visible, d'une conversation | Exportation de l'intégralité d'une conversation → Exporter l'intégralité d'une conversation, ou Conversations → Exporter une conversation | Un paquet signé séparé avec `chat.json` et `chat.html`, un par chat. |
+| Contexte : lorsqu’une nouvelle conversation apparaît | Périmètre d’observation → Lorsqu’une nouvelle conversation ou un nouveau bot apparaît | Son profil et jusqu’à 1 000 messages récents (200 en mode enquête). Ne s’applique pas aux chats existants. |
+| Nombre d'octets de la pièce jointe | Téléchargement des pièces jointes visibles + limites par type | Cherchez `media.saved` avec SHA-256 et taille. En file d’attente, ignoré ou en échec signifie non enregistré. |
 
-L'exportation complète d'une conversation correspond à un instantané distinct ; elle n'importe pas l'intégralité de l'historique dans le journal ni dans les profils des utilisateurs. Utilisez l'option « **Charger l'historique complet** de toutes les sources activées » ou des instantanés de journal délimités pour les données historiques que vous devez rechercher dans TgWitness. Vérifiez la liste des sources avant de lancer l'opération.
+Un export de chat n’entre ni dans le journal ni dans les profils de personnes. Pour chercher dans l’ancien historique à l’intérieur de TgWitness, utilisez **Charger tout l’historique** ou des instantanés.
 
-Dans le cas étudié, récupérez le canal d’annonce, le groupe d’opérations, la conversation avec le bot et le suivi privé. Conservez les octets et le hachage de la pièce jointe de la facture. L’historique disponible à ce jour ne permet pas de reconstituer un message supprimé avant sa capture ni une modification intermédiaire que Telegram ne renvoie plus.
+Ici : le canal, le groupe, le chat avec le bot et le chat privé, plus le fichier de la facture et son hachage. Ce qui a été supprimé avant la capture est perdu.
 
 ## 3. Suivez l’évolution de la conversation et vos propres actions
 
-Maintenez la surveillance active à mesure que l’affaire évolue. Marquez d’une étoile les discussions en cours liées à l’affaire comme sources prioritaires ; configurez les vérifications prioritaires et celles provenant d’autres sources dans **les paramètres d’enregistrement → « Recheck** ». Vérifiez les résultats relatifs à « `recheck.completed` », au rattrapage continu, à « FloodWait » et aux médias au fur et à mesure de l’avancement des travaux.
+Laissez tourner. Marquez d’une étoile les chats chauds comme prioritaires, réglez les revérifications dans **Paramètres d’enregistrement → Revérification** et surveillez `recheck.completed`, FloodWait et les résultats des médias.
 
-Utilisez **« Chats » → « Profil » → « Enregistrer le profil maintenant »** pour conserver les descriptions de source actuelles, les commandes du bot et les autres métadonnées fournies par Telegram. Ce profil de source est distinct des profils de personnes créés à partir des messages du journal.
+**Chats → Profil → Enregistrer le profil maintenant** enregistre la description du chat, les commandes du bot et d’autres métadonnées.
 
 **Suivi d’un bot ou d’une invitation dans le cadre de l’affaire**
 
-1. Dans **« Chats » → « Ouvrir le lien Telegram »**, enregistrez d’abord l’aperçu. Le lien d’origine et l’aperçu généré deviennent des enregistrements signés.
-2. Si l’enquête l’exige, la commande « **Join / open » permet**d’accéder à la source et de lancer un bot à l’aide du paramètre de démarrage fourni. Une demande de connexion en attente reste en attente dans l’historique.
-3. Pour toute action que vous souhaitez documenter, utilisez la réponse textuelle du panneau ou la commande **« Appuyer sur le bouton »** prise en charge. Le journal conserve les codes « `interaction.requested` » et « `interaction.result` », y compris le texte ou l’URL renvoyés par la fonction de rappel.
+1. **Chats → Ouvrir un lien Telegram**, enregistrez d’abord l’aperçu. Le lien et l’aperçu deviennent des entrées signées.
+2. Si besoin, **Rejoindre / ouvrir et observer** rejoint le chat ou démarre le bot avec son paramètre de démarrage.
+3. Pour documenter une action, répondez ou utilisez **Appuyer sur le bouton** depuis le panneau. Vous obtenez `interaction.requested` et `interaction.result` avec la réponse du bot.
 
-Ces commandes effectuent des actions réelles sur Telegram. Un rappel déclenché dans une autre application Telegram n’est pas visible par le collecteur ; le message ou la modification ultérieure du bot peut l’être. Les applications Web, les paiements et les demandes relatives au téléphone ou à la localisation ne relèvent pas du mini-client.
+Ce sont de vraies actions. Les boutons pressés dans une autre application ne sont pas visibles, seulement la réponse du bot. Pas d’applications web, de paiements ni de téléphone/localisation.
 
 ## 4. Suivez les personnes, les liens et les fichiers dans les discussions
 
-1. Ouvrez **le Journal**, laissez le filtre de source sur « **Toutes les sources »** et recherchez une expression distinctive, un domaine, un nom d’utilisateur ou un identifiant enregistré. Ouvrez chaque enregistrement correspondant, puis sélectionnez **« Ajouter au dossier »** pour conserver son historique de discussion, son ID de message et sa référence de journal dans le dossier.
-2. Pour consulter une conversation, ouvrez « **Conversations » → « Contacts » → « Afficher les profils »**, puis sélectionnez une personne. Consultez l’historique des noms/noms d’utilisateur, les relations de réponse, l’activité, ainsi que**les rubriques « Également dans… » :** autres conversations observées, liens extraits, portefeuilles ou numéros de téléphone. Ouvrez les entrées du journal citées.
-3. Suivez le même identifiant utilisateur numérique Telegram dans les autres discussions de cet espace de travail. Considérez un nom correspondant, une mention de portefeuille ou un avatar similaire comme une piste à vérifier ; conservez les références sources et toute attribution à l’appui.
-4. Comparez les valeurs SHA-256 des pièces jointes conservées d’un enregistrement à l’autre. La concordance des hachages garantit l’identité au niveau des octets des fichiers enregistrés. Examinez les enregistrements associés aux messages et aux expéditeurs avant de tirer une conclusion quant à l’identité de la personne qui les a partagés.
+1. **Journal**, **Toutes les sources**, cherchez une phrase, un domaine ou un nom d’utilisateur. Ouvrez les résultats et envoyez-les **Vers le tableau**.
+2. **Chats → Personnes → Activer les profils**, choisissez une personne : historique des noms, réponses, activité, **Aussi dans…**, liens, portefeuilles, téléphones. Ouvrez les entrées citées.
+3. Suivez le même ID numérique d’utilisateur dans d’autres chats. Un nom, un portefeuille ou un avatar identique est une piste, pas une preuve.
+4. Comparez les hachages de fichiers. Même SHA-256 = mêmes octets. Qui les a partagés est une autre question.
 
 CARTE DU DOSSIER / SUIVRE LES RÉFÉRENCESCas fictif · ce graphique n'est pas en temps réel
 
@@ -94,15 +94,15 @@ Les identifiants numériques et les références d’enregistrements ont été i
 
 | Connexion | Remarque complémentaire | Conclusion à conserver |
 | --- | --- | --- |
-| Même compte Telegram | Identifiant utilisateur 71001 dans le groupe n° 146 et la discussion privée n° 205 | Le même identifiant d’expéditeur a été publié dans les deux discussions. La question de l’identité réelle reste distincte. |
-| Destination répétée | `pay.example.invalid/new` dans le n° 146, métadonnées du bouton n° 173, message modifié n° 188 et n° 205 | La même destination apparaît dans quatre contextes observés. Précisez son contrôle à l’aide de sources supplémentaires. |
-| Même nombre d’octets dans le fichier | Valeurs SHA-256 identiques dans les reçus multimédias finalisés n° 151 et n° 209 | Les deux pièces jointes conservées sont identiques au niveau des octets. Les hachages complets des fichiers permettent d'effectuer la comparaison. |
+| Même compte Telegram | Identifiant utilisateur 71001 dans le groupe n° 146 et la discussion privée n° 205 | Le même ID d’expéditeur dans les deux chats. Qui c’est dans la vraie vie est une autre question. |
+| Destination répétée | `pay.example.invalid/new` dans le n° 146, métadonnées du bouton n° 173, message modifié n° 188 et n° 205 | Le même lien à quatre endroits. Qui le contrôle nécessite d’autres sources. |
+| Même nombre d’octets dans le fichier | Valeurs SHA-256 identiques dans les reçus multimédias finalisés n° 151 et n° 209 | Les deux fichiers sont identiques à l’octet près. |
 
-Les profils des personnes décrivent les auteurs observés et leur activité dans le *journal du* *même espace de travail*, au sein des discussions autorisées pour l’utilisateur. Il s’agit d’une vue des auteurs observés, et non d’un répertoire complet des membres. Ajustez le nombre de citations à l’appui sous **Paramètres → Enregistrements cités par fait**.
+Les profils ne couvrent que les personnes qui ont écrit quelque chose dans *cet espace*, ce n’est pas une liste de membres. Citations par fait : **Paramètres → Entrées citées par fait**.
 
 ## 5. Reconstituez la séquence et signalez les lacunes
 
-Dans **la rubrique « Chats »**, examinez les versions enregistrées et leurs liens **vers l’entrée n°… du journal**. Dans **la rubrique « Journal »**, utilisez les options **« Toutes les sources »** ainsi que **« Modifications »**, « **Suppressions** » et « **Couverture** ». Établissez une chronologie de l’affaire en tenant compte à la fois de la date fournie par Telegram et de l’heure d’observation indiquée par le collecteur.
+Versions dans **Chats**, puis **Journal** avec **Toutes les sources** + **Modifications**, **Suppressions**, **Couverture**. Mettez les deux heures dans la chronologie : la date Telegram et le moment de l’observation.
 
 1. 09:00 · #101**Message de la chaîne capturé**
 
@@ -125,19 +125,19 @@ Dans **la rubrique « Chats »**, examinez les versions enregistrées et leurs l
 
 Exemples de durées d’observation et de références. D’autres entrées du journal s’intercalent entre celles-ci.
 
-L’ordre des entrées dans le journal suit l’ordre de réception, et non nécessairement celui des actions initiales sur Telegram. Un instantané plus ancien peut apparaître après un message en temps réel plus récent. Veillez à bien distinguer les observations en temps réel, les instantanés, les messages récupérés, les notifications de suppression et les éléments « manquants lors de la vérification ultérieure ». Ajoutez explicitement la mention « intervalle inconnu » chaque fois que la couverture présente une lacune ; un instantané ultérieur n’efface pas cette lacune.
+L’ordre du journal est l’ordre d’arrivée, pas forcément l’ordre des événements. Gardez séparés les entrées en direct, instantanés, messages récupérés, suppressions et « introuvable à la revérification », et marquez chaque lacune comme inconnue.
 
 ## 6. Étendre le cas à d’autres comptes de collecte
 
-Créez un espace de travail pour chaque compte distinct et répétez l’inventaire du champ d’application et de l’historique. Enregistrez l’appartenance/le rôle et l’empreinte de la clé de signature pour chacun d’entre eux. Veillez à ce que les identifiants soient qualifiés par espace de travail et par discussion : un même numéro de message ne constitue pas un identifiant global valable pour tous les comptes.
+Un espace par compte, mêmes étapes. Notez le rôle et l’empreinte de chacun. Les numéros de message sont propres à chaque compte, alors indiquez toujours l’espace et le chat.
 
-Utilisez un [groupe de comptes](https://phishdestroy.github.io/TgWitness/fr/docs/groups/) pour vérifier l’état de fonctionnement, partager des paramètres sélectionnés et exporter les comptes ensemble. Le package de groupe conserve le journal signé et l’identité de chaque espace de travail. Pour un canal ou un supergroupe, les comptes éligibles peuvent également se partager l’exportation de l’historique complet. Créez une chronologie inter-comptes dans vos notes d’enquête ou vos outils d’analyse, en conservant la référence à l’espace de travail et au journal pour chaque ligne.
+Un [groupe de comptes](https://phishdestroy.github.io/TgWitness/fr/docs/groups/) affiche l’état, partage les paramètres et exporte tout le monde ensemble, chacun avec son journal et sa clé. La chronologie entre comptes, c’est vous qui la construisez dans vos notes.
 
-Lors de travaux de longue durée, faites appel à un [témoin indépendant](https://phishdestroy.github.io/TgWitness/fr/docs/witness/) afin de préserver les limites initialement fixées. Utilisez le projet pilote de transmission contrôlée pour valider les chemins de capture et la visibilité des comptes.
+Affaire longue ? Ajoutez un [témoin indépendant](https://phishdestroy.github.io/TgWitness/fr/docs/witness/) et testez ce que chaque compte capte vraiment.
 
 ## 7. Fournir un dossier d’affaire vérifiable
 
-Exportez un fichier ZIP contenant le journal signé depuis chaque espace de travail. Il contient l’intégralité du journal enregistré, indépendamment des filtres de recherche du panneau. Exportez séparément les profils des personnes concernées, conservez l’intégralité de chaque historique de discussion et préservez l’intégralité des pièces jointes à titre de preuve.
+Un ZIP signé de chaque espace (toujours le journal entier, les filtres n’y changent rien), plus les profils de personnes, les exports de chats et les fichiers.
 
 ```
 CASE-001/                         # assembled by the analyst
@@ -156,7 +156,7 @@ CASE-001/                         # assembled by the analyst
   SHA256SUMS                      # hashes of the delivered files
 ```
 
-Conservez les empreintes de confiance via un canal distinct. À partir d’une installation de confiance, vérifiez chaque élément par rapport à l’identité de son propre espace de travail :
+Envoyez les empreintes séparément. Vérifiez chaque élément face à son propre espace :
 
 ```
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
@@ -164,30 +164,4 @@ python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Vérifiez les résultats du vérificateur, conservez les originaux et archivez le rapport de couverture, les résultats de l’acquisition et le relevé de transfert avec vos conclusions. Rédigez vos conclusions dans Report Studio et choisissez si le rapport doit inclure le contenu du Case Board. L’exemple de dossier de niveau supérieur regroupe les artefacts signés séparés. Pour un destinataire qui n’a besoin que d’une partie du contenu, préparez un [transfert allégé](https://phishdestroy.github.io/TgWitness/fr/docs/handover/).
-
-## Utilisez la même méthode pour d’autres enquêtes
-
-**Litige lié à une commande ou à un paiement géré par un bot**
-
-**Question :** qu’a promis le bot, quelle destination était associée au bouton, et qu’est-ce qui a changé par la suite ?
-
-**Traçage :** publication sur la chaîne → aperçu du lien du bot enregistré → paramètre de démarrage du bot → messages et versions saisies au clavier → tout accusé de réception de rappel émis par le panneau → suivi en groupe ou en privé. Associez chaque destination à son enregistrement source ; conservez les descriptions de profil et les médias complets.
-
-**Fournir :** une chronologie de l’offre observée et des réponses, les références des sources et les exportations vérifiées. Étayer toute affirmation concernant un paiement effectué à l’aide de ses propres enregistrements de transaction.
-
-**Messages supprimés à la suite d’un incident impliquant plusieurs discussions**
-
-**Question :** qu’avait-on déjà observé avant la disparition des messages concernés ?
-
-**Traçabilité :** toutes les discussions concernées → messages d’origine → modifications transmises → notifications de suppression ou résultats ultérieurs indiquant une disparition lors d’une nouvelle vérification → pièces jointes conservées → couverture médiatique autour de l’incident. Comparez les observations issues de comptes indépendants avec leur niveau de visibilité indiqué.
-
-**À fournir :** une séquence de versions conservées et des intervalles d’inconnues explicites. Veiller à ce que les avis de suppression, les vérifications infructueuses et toute attribution à une personne soient pris en charge séparément.
-
-**Un participant change de nom au cours de plusieurs discussions**
-
-**Question :** quelle activité observée appartient au même compte Telegram malgré un changement de nom ?
-
-**Piste :** identifiant numérique de l’expéditeur → historique des noms/noms d’utilisateur enregistrés → réponses → autres discussions dans l’espace de travail → destinataires mentionnés et fichiers enregistrés. Vérifiez les enregistrements sources pour chaque connexion signalée ; distinguez les comptes similaires.
-
-**Fournir :** une chronologie citée de l’activité du compte et des hypothèses distinctes concernant les relations. Utiliser la similitude des noms et le pHash des avatars pour sélectionner les pistes à approfondir lors de l’examen des sources.
+Gardez la sortie du vérificateur, les originaux, la couverture et la trace de transmission avec vos conclusions. Rédigez le tout dans Report studio. Si le destinataire a besoin de moins, préparez une [transmission minimisée](https://phishdestroy.github.io/TgWitness/fr/docs/handover/).

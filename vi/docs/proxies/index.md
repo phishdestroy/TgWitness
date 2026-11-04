@@ -2,45 +2,45 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/proxies/
 
-Vui lòng duy trì kết nối tài khoản. Hãy quyết định rõ ràng khi nào đường dẫn của tài khoản đó có thể sử dụng địa chỉ máy chủ.
+Giữ tài khoản trực tuyến, và tự bạn quyết định nó có được để lộ IP máy chủ hay không.
 
 ## Vui lòng chọn chế độ IP trước tiên
 
 01**Ẩn địa chỉ**
 
-Vui lòng sử dụng máy chủ trung gian (proxy). Trong trường hợp không có máy chủ trung gian nào hoạt động, xin vui lòng chờ đợi mà không cần kết nối trực tiếp với Telegram.
+Chỉ dùng proxy. Nếu không cái nào hoạt động, nó chờ.
 
 02**Chỉ sử dụng phương án này khi không còn lựa chọn nào khác**
 
-Cho phép kết nối trực tiếp sau khoảng thời gian trễ đã được cấu hình; quay trở lại sử dụng máy chủ proxy đang hoạt động khi có máy chủ nào đó phản hồi.
+Kết nối trực tiếp sau một khoảng chờ, quay lại proxy khi có cái hoạt động.
 
 03**Máy chủ nằm sau một đường hầm hoặc VPN**
 
-Cho phép các kết nối trực tiếp qua mạng của nhà cung cấp dịch vụ. Tùy chọn này không cài đặt hoặc xác minh VPN.
+Kết nối trực tiếp cũng được. Nó không thiết lập hay kiểm tra VPN giúp bạn.
 
 Tuyến đường sẽ quyết định loại kết nối. Chế độ IP sẽ xác định liệu kết nối trực tiếp có được phép hay không.
 
 ## Hãy để nhóm duy trì lộ trình
 
-1. Mở **Tài khoản → Cài đặt → Cài đặt kết nối**.
-2. Vui lòng chọn chế độ IP và **MTProxy Tự động**, hoặc nhập một tuyến đường cố định.
-3. Lưu lại và thực hiện **kiểm tra kết nối Telegram**. Tính năng này cũng hoạt động ngay cả trước khi đăng nhập.
-4. Sau khi bắt đầu quá trình thu thập, vui lòng kiểm tra xem tin nhắn đã được kiểm soát có được ghi vào sổ chứng cứ hay không.
+1. **Tài khoản → Cài đặt → Cài đặt kết nối**.
+2. Chọn chế độ IP và **MTProxy tự động**, hoặc một tuyến cố định.
+3. Lưu, rồi **Kiểm tra kết nối Telegram** (dùng được cả trước khi đăng nhập).
+4. Bắt đầu thu thập và tự gửi cho mình một tin nhắn thử.
 
-Các không gian làm việc mới sử dụng tính năng tự động MTProxy với tùy chọn **“Ẩn địa chỉ**”. Hệ thống kết hợp bốn nguồn công khai, kiểm tra các mục, duy trì các đường dẫn hoạt động và thay thế các proxy không hoạt động. Các lần tải xuống không thành công sẽ giữ lại các bản chụp nhanh trước đó.
+Không gian làm việc mới khởi đầu với MTProxy tự động và **Ẩn địa chỉ**. Nhóm proxy lấy bốn danh sách công khai, kiểm tra máy chủ, giữ cái tốt và thay cái đã chết.
 
 ## Vui lòng sử dụng máy chủ proxy của riêng quý vị
 
-Vui lòng nhập thông tin SOCKS5 hoặc HTTP CONNECT, dán liên kết proxy Telegram được hỗ trợ hoặc cung cấp danh mục nhà cung cấp dịch vụ. Hãy tạm dừng quá trình giám sát trước khi thay đổi tuyến đường đang hoạt động. Các khóa bí mật TLS MTProxy giả mạo bắt đầu bằng `ee` vẫn chưa được hỗ trợ.
+SOCKS5, HTTP CONNECT, liên kết proxy Telegram hoặc danh mục của nhà vận hành. Hãy tạm dừng quan sát trước khi chuyển. Khóa bí mật Fake TLS (`ee`…) không hoạt động.
 
 **Cài đặt xoay vòng, chia sẻ và thử lại**
 
-Trong **phần Cài đặt → MTProxy Tự động**, quý vị hãy thiết lập ngưỡng lỗi, thời gian chờ, lịch luân phiên dự kiến và số lượng tài khoản cho mỗi proxy. Giới hạn chia sẻ là một sẽ khiến tài khoản phải chờ khi không có kết nối độc quyền nào khả dụng. Khoảng thời gian làm mới danh sách và khoảng thời gian kiểm tra sẽ tuân theo các giá trị của không gian làm việc chính. Việc sử dụng các proxy riêng biệt không đảm bảo các địa chỉ IP đầu ra riêng biệt.
+**Tham số → MTProxy tự động**: ngưỡng lỗi, thời gian nghỉ, xoay vòng, số tài khoản mỗi proxy. Giới hạn 1 nghĩa là tài khoản sẽ chờ thay vì dùng chung. Các proxy khác nhau vẫn có thể dùng chung một IP thoát.
 
 ## Tách biệt Telegram khỏi các yêu cầu từ bên ngoài
 
-MTProxy chỉ truyền tải lưu lượng Telegram. Dấu thời gian, thông báo, bản sao và việc kiểm tra nguồn sử dụng một proxy SOCKS5/HTTP riêng biệt, tuyến SOCKS5/HTTP của tài khoản, hoặc chế độ Trực tiếp (Direct) khi chế độ IP cho phép. Các yêu cầu bên ngoài này có thể bị vô hiệu hóa.
+MTProxy chỉ mang lưu lượng Telegram. Dấu thời gian, thông báo, bản sao và kiểm tra mã đi qua một proxy SOCKS5/HTTP riêng, tuyến SOCKS5/HTTP của tài khoản, hoặc trực tiếp nếu chế độ cho phép. Hoặc tắt chúng đi.
 
-Một cấu hình `TGWITNESS_PROXY_FEED_PROXY` rõ ràng sẽ xác định lộ trình của trình tải xuống nguồn cấp dữ liệu. Công cụ [chứng thực độc lập](https://phishdestroy.github.io/TgWitness/vi/docs/witness/) này duy trì các thiết lập riêng của mình. Các thiết lập này không cài đặt VPN hệ thống cũng như không định tuyến lưu lượng truy cập trình duyệt.
+`TGWITNESS_PROXY_FEED_PROXY` đặt tuyến dùng để tải danh sách. [Nhân chứng](https://phishdestroy.github.io/TgWitness/vi/docs/witness/) có cài đặt riêng. Không cái nào đụng tới trình duyệt hay mạng hệ thống của bạn.
 
-Xem [tất cả các chế độ, cài đặt mặc định và danh sách nguồn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/#ip-modes), hoặc [chọn những người được phép thay đổi lộ trình của tài khoản](https://phishdestroy.github.io/TgWitness/vi/docs/access/).
+Thêm: [các chế độ và giá trị mặc định](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/#ip-modes), [ai được đổi tuyến](https://phishdestroy.github.io/TgWitness/vi/docs/access/).

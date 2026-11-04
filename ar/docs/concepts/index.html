@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../">التوثيق</a> <span aria-hidden="true">/</span> <span aria-current="page">تعرف على كيفية عمل الأدلة</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">ما تم اختباره ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">التوثيق / 08</p><h1>تعرف على كيفية عمل الأدلة</h1><p class="guide-outcome">قد تتغير الرسالة. لكن يجب أن يظل سجل ما لاحظته قابلاً للتحقق.</p>
-<p>استكشف تجربتين صغيرتين أدناه. تستخدمان رسائل خيالية، وتبقيان داخل متصفحك ولا تتصلان أبدًا بـ Telegram.</p>
+<article class="guide-content"><p class="eyebrow">التوثيق / 08</p><h1>تعرف على كيفية عمل الأدلة</h1><p class="guide-outcome">الرسائل تتغيّر. أما سجلك لما رأيته فلا ينبغي أن يتغيّر، ويجب أن يتمكن أي شخص من التحقق من ذلك.</p>
+<p>فيما يلي تجربتان صغيرتان. رسائل وهمية، وكل شيء يعمل في متصفحك، ولا يُرسل شيء إلى Telegram.</p>
 
 <h2 id="telegram-export">من تصدير محادثة إلى سجل قابل للتحقق</h2>
-<p>تقوم <a href="https://telegram.org/blog/export-and-more">ميزة التصدير في Telegram Desktop</a> بحفظ سجل المحادثات والوسائط المتاحة بتنسيق HTML أو JSON للاستخدام دون اتصال بالإنترنت. ويضيف TgWitness سجلاً مستمراً للتغييرات المستلمة، والتوقيعات على الملاحظات وعمليات التصدير، ونقاط التحقق التي يمكن للمستلمين مقارنتها بشكل مستقل.</p>
+<p><a href="https://telegram.org/blog/export-and-more">تصدير Telegram Desktop</a> يحفظ السجل الذي تراه الآن بصيغة HTML أو JSON. ويضيف TgWitness سجلاً متواصلاً للتغييرات، وتوقيعات على كل سجل، ونقاط تحقق يمكن للآخرين المقارنة بها.</p>
 <div class="table-wrap"><table><thead><tr><th scope="col">المهمة</th><th scope="col">تصدير Telegram Desktop</th><th scope="col">TgWitness</th></tr></thead><tbody>
 <tr><td>قراءة المحادثات المحفوظة</td><td>HTML أو JSON مع الوسائط المحددة</td><td>المحادثات المحفوظة، والسجل القابل للبحث، والتقارير المتاحة دون اتصال بالإنترنت</td></tr>
-<tr><td>تتبع التغييرات بمرور الوقت</td><td>السجل المتاح عند التصدير</td><td>يتم الاحتفاظ معًا بالإصدارات التي تم التقاطها سابقًا، والتعديلات اللاحقة، وملاحظات الحذف</td></tr>
-<tr><td>تحقق من الملفات بعد التسليم</td><td>ملفات التصدير القياسية بتنسيقات HTML/JSON غير موقعة</td><td>يتم التحقق من صحة قائمة البيانات الموقعة، والتوقيعات لكل سجل، والتقارير المختومة بتنسيقات HTML/PDF/JSON، بمقارنتها بمفتاح جامع موثوق به</td></tr>
+<tr><td>تتبع التغييرات بمرور الوقت</td><td>السجل المتاح عند التصدير</td><td>النسخ القديمة والتعديلات اللاحقة والحذف، كلها محفوظة</td></tr>
+<tr><td>تحقق من الملفات بعد التسليم</td><td>ملفات التصدير القياسية بتنسيقات HTML/JSON غير موقعة</td><td>بيان موقّع وسجلات موقّعة وتقارير مختومة، يُتحقق منها بمفتاح موثوق</td></tr>
 <tr><td>قارن مع حالة سابقة محفوظة</td><td>احتفظ بنسخة مرجعية منفصلة أو هاش</td><td>نقاط التحقق الموقعة، وشاهد منفصل، وطوابع زمنية خارجية اختيارية</td></tr>
 </tbody></table></div>
-<p>تستند مقارنة توقيع الملفات إلى <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">أدوات التصدير</a> في <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">Telegram Desktop</a> التي تمت مراجعتها في 2 نوفمبر 2026. يقوم TgWitness بالتوقيع باستخدام مفتاح «Collector»؛ وتوضح الفحوصات أدناه كيفية استخدام المستلم له.</p>
+<p>تستند المقارنة إلى <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">شيفرة التصدير في Telegram Desktop</a> كما في 2 نوفمبر 2026.</p>
 
 <h2 id="journey">رسالة واحدة، ثلاث ملاحظات</h2>
-<p>عندما يرسل Telegram رسالة جديدة أو إشعارًا بالتعديل أو الحذف، يقوم برنامج التجميع بإضافة ثلاث ملاحظات منفصلة. لا يحل التعديل محل السجل الأول، كما أن إشعار الحذف لا يمحوه.</p>
+<p>رسالة جديدة وتعديل وحذف تصبح ثلاثة سجلات منفصلة. التعديل لا يكتب فوق الأول، والحذف لا يمحوه.</p>
 <figure class="lab journey-lab" data-lab="journey" aria-labelledby="journey-caption">
   <div class="lab-top"><span class="lab-kicker">01 / مسار الرسالة</span><span class="sample-tag">تسلسل توضيحي</span></div>
   <svg class="journey-route" viewBox="0 0 600 92" role="img" aria-labelledby="journey-route-title"><title id="journey-route-title">Telegram delivers an update to the collector, which appends a journal record.</title>
@@ -67,10 +67,10 @@
   <p class="lab-status" data-journey-status role="status">تُحتفظ بجميع الملاحظات الثلاث التي تم تلقيها في السجل.</p>
   <figcaption id="journey-caption">مسار مبسط لمصدر واحد تم اختياره مسبقًا. كما تشارك السجلات التشغيلية السجل الفعلي. يعتمد التسجيل على ما يمكن للحساب رؤيته وما يقدمه Telegram.</figcaption>
 </figure>
-<p>لا يوفر إشعار الحذف وقتًا موثوقًا للحذف ولا هوية الشخص الذي حذف الرسالة. والحفاظ على عدم معرفة هذه القيم يحافظ على التمييز بين الملاحظة والتخمين.</p>
+<p>لا يخبر Telegram بمن حذف الرسالة أو متى بالضبط. يترك TgWitness هذه الحقول فارغة بدل التخمين.</p>
 
 <h2 id="chain">تعديل سجل. تتبع الهاش.</h2>
-<p>يحتوي كل سجل على التجزئة (هاش) للسجل السابق. وتغطي التجزئة الخاصة به حقول الحدث، بما في ذلك ذلك الرابط. وتقوم نقطة تفتيش محفوظة خارجيًا بتثبيت طول محدد للسجل وتجزئة الرأس.</p>
+<p>يحتوي كل سجل على تجزئة السجل الذي قبله. ونقطة تحقق محفوظة في مكان آخر تثبّت طول السجل وآخر تجزئة.</p>
 <figure class="lab hash-lab" data-lab="hash" aria-labelledby="hash-caption">
   <div class="lab-top"><span class="lab-kicker">02 / HASH-CHAIN SANDBOX</span><span class="sample-tag">SHA-256 حقيقي · نماذج من السجلات</span></div>
   <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="تغيير نموذج السجل">
@@ -88,14 +88,14 @@
 </figure>
 
 <h2 id="formulas">القواعد الفعلية، في بضع أسطر</h2>
-<div class="formula-card"><span class="lab-kicker">HASH + SIGNATURE</span><div class="formula" translate="no" role="math" aria-label="h zero هو أربعة وستون صفرًا سداسي عشري. h i هو قيمة SHA-256 السداسية العشرية للحدث القياسي i. التوقيع i هو Ed25519 على البايتات الأولية لـ h i.">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p>يقوم <strong>C</strong> بتسلسل حقول الأحداث التسعة بتنسيق JSON UTF-8: مفاتيح مرتبة، بدون مسافات بيضاء إضافية، بدون هروب ASCII وبدون NaN/اللانهاية. قيمة <code>previous_hash</code> للحدث هي h<sub>i−1</sub>. تعني القيمة h0 المعروضة 64 حرفًا صفرًا؛ وتغطي التوقيعات 32 بايتًا من الملخص الخام.</p></div>
-<p>الحقول التسعة هي <code>seq</code> و<code>observed_at</code> و<code>source_at</code> و<code>kind</code> و<code>chat_id</code> و<code>message_id</code> و<code>actor_id</code> و<code>payload</code> و<code>previous_hash</code>. هذا هو <a href="../reference/evidence/#event-canonicalization">ترميز JSON الموثق</a> لـ TgWitness؛ ولا يُعد التجزئة والتوقيع في حد ذاتهما حقول إدخال للتجزئة.</p>
-<div class="formula-card"><span class="lab-kicker">نقطة تفتيش محفوظة</span><div class="formula" translate="no" role="math" aria-label="عدد عمليات التصدير يساوي على الأقل عدد نقاط التحقق، كما أن التجزئة (هاش) المصدرة عند موضع نقطة التحقق تساوي التجزئة (هاش) الأولية المحتفظ بها.">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>تحقق من توقيع نقطة الفحص الموجود أسفل مفتاح المجمع المثبت، ثم قارن حدوده مع السجل الذي تم التحقق منه. قد يحتوي التصدير اللاحق على المزيد من السجلات؛ لكن يجب أن يتطابق مع نقطة الفحص السابقة.</p></div>
+<div class="formula-card"><span class="lab-kicker">HASH + SIGNATURE</span><div class="formula" translate="no" role="math" aria-label="h zero هو أربعة وستون صفرًا سداسي عشري. h i هو قيمة SHA-256 السداسية العشرية للحدث القياسي i. التوقيع i هو Ed25519 على البايتات الأولية لـ h i.">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p><strong>C</strong> هي حقول الحدث التسعة بصيغة JSON بترميز UTF-8: مفاتيح مرتبة، دون مسافات زائدة، دون تهريب ASCII، دون NaN/لانهاية. <code>previous_hash</code> هو h<sub>i−1</sub>، وh<sub>0</sub> هو 64 صفرًا، والتوقيعات تغطي 32 بايت خامًا من الملخص.</p></div>
+<p>الحقول: <code>seq</code>، <code>observed_at</code>، <code>source_at</code>، <code>kind</code>، <code>chat_id</code>، <code>message_id</code>، <code>actor_id</code>، <code>payload</code>، <code>previous_hash</code>. المواصفة الكاملة: <a href="../reference/evidence/#event-canonicalization">ترميز الأحداث</a>.</p>
+<div class="formula-card"><span class="lab-kicker">نقطة تفتيش محفوظة</span><div class="formula" translate="no" role="math" aria-label="عدد عمليات التصدير يساوي على الأقل عدد نقاط التحقق، كما أن التجزئة (هاش) المصدرة عند موضع نقطة التحقق تساوي التجزئة (هاش) الأولية المحتفظ بها.">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>تحقق من توقيع نقطة التحقق مقابل المفتاح المثبّت، ثم قارنها بالسجل. يمكن أن يكون التصدير اللاحق أطول، لكن يجب أن يطابق عند نقطة التحقق.</p></div>
 
 <h2 id="layers">ثلاثة أسئلة، ثلاث عمليات تحقق مختلفة</h2>
-<div class="evidence-layers"><a href="../exports/"><span>01 / النزاهة</span><strong>هل تغير هذا السجل؟</strong><p>تحقق من التجزئات والتوقيعات باستخدام مفتاح موثوق به منفصل.</p></a><a href="../witness/"><span>02 / الاستمرارية</span><strong>ما الذي تم الاحتفاظ به سابقًا؟</strong><p>قارن بين ملف التصدير الموقّع ونقاط التحقق التي يحتفظ بها شاهد آخر.</p></a><a href="../cases/"><span>03 / التسليم</span><strong>هل وصلت هذه الأحداث التجريبية؟</strong><p>مطابقة إجراءات الإرسال والتعديل والحذف الخاضعة للرقابة مع سجل كل حساب.</p></a></div>
-<p class="callout">استخدم التوقيعات للتحقق من السجلات المحتفظ بها، ونقاط الفحص لمقارنة حدود سابقة، واختبارات التسليم الخاضعة للرقابة لقياس عملية التجميع. كل منها يجيب على سؤال محدد. <a href="../reference/evidence/#verification-scope">اقرأ نطاق التحقق وافتراضات الثقة.</a></p>
-<p>تابع <a href="../cases/">التحقيق الكامل للحساب</a> بدءًا من الحصول على البيانات وحتى إعداد ملف القضية.</p>
+<div class="evidence-layers"><a href="../exports/"><span>01 / النزاهة</span><strong>هل تغير هذا السجل؟</strong><p>التجزئات والتوقيعات مقابل مفتاح تثق به.</p></a><a href="../witness/"><span>02 / الاستمرارية</span><strong>ما الذي تم الاحتفاظ به سابقًا؟</strong><p>قارن التصدير بنقاط التحقق التي احتفظ بها الشاهد.</p></a><a href="../cases/"><span>03 / التسليم</span><strong>هل وصلت هذه الأحداث التجريبية؟</strong><p>أرسل رسائل اختبار وعدّلها واحذفها، وانظر ماذا التقط كل حساب.</p></a></div>
+<p class="callout">التوقيعات تجيب عن "هل تغيّر؟"، ونقاط التحقق عن "هل يطابق ما كان موجودًا من قبل؟"، ورسائل الاختبار عن "هل التقطنا كل شيء؟". <a href="../reference/evidence/#verification-scope">ما يثبته التحقق وما لا يثبته.</a></p>
+<p>التالي: <a href="../cases/">تحقيق في حساب كامل</a> من البداية حتى حزمة القضية.</p>
 <p class="callout" lang="en" dir="ltr"><a href="../../../docs/export-clinic/">Export Clinic: watch the controlled Desktop experiment</a>. Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.</p></article>
 <footer class="guide-footer"><a class="reference" href="../reference/how-it-works/">المرجع الكامل ←</a><a class="next-guide" href="../cases/"><span>الخطوة التالية</span><strong>التحقيق في جميع الدردشات ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="../reference/verification/">ما تم اختباره ←</a></p></footer>
 </main>

@@ -93,8 +93,6 @@ Bintang keutamaan mengawal semakan semula ini. Pemanggilan pantas tambahan `upda
 
 Pemeriksaan kekerapan tinggi sewenang-wenangnya, mengabaikan FloodWait atau menganggap kapasiti linear daripada akaun tambahan bukanlah model saiz yang sah. Had lalai ialah 1,000 dialog yang disenaraikan pertama, sehingga 500 mesej setiap potret sejarah, 1–2,000 MiB bagi setiap fail yang dikumpul mengikut jenis, dan 4 GiB kandungan ZIP yang ditandatangani tanpa pemampatan; setiap satu diubah mengikut ruang kerja di bawah **Parameter**. Eksport tiada had tetap bilangan acara. Fallback pelayar terhad kepada 128 MiB secara lalai; CLI penstriman mempunyai had pemindahan yang boleh dikonfigurasi, iaitu 5 GiB secara lalai.
 
-`tools/check_capacity.py` mengukur pengambilan dan eksport sintetik tempatan. Keputusannya bukan ukuran penghantaran Telegram atau kiraan sembang sebenar yang dijamin. Lihat [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/) untuk versi yang diukur dan beban kerja.
-
 ## Kebolehpercayaan dan pemulihan
 
 Perilaku yang dilaksanakan merangkumi transaksi SQLite WAL/sinkron; penulisan atomik mesej dan tugas media; tugas berterusan dan kelewatan percubaan semula; deskriptor versi asal; cubaan semula terhad; FloodWait media yang disimpan; muat turun media di luar masa tunggu rangkaian acara teks; eksport awalan-tetap sementara penulisan kemudian diteruskan; tetapan atom dan rekod audit; pemeliharaan kebenaran bekerja selepas log masuk penggantian yang gagal; penyusunan ruang kerja tambahan yang rosak; percubaan penyambungan semula secara eksplisit; pelaporan kehilangan kebenaran yang berasingan; dan pengesanan perubahan masa dinding menggunakan jam monotonik.

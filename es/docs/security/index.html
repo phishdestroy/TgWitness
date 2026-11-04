@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="Guías"><a href="../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../">Documentación</a> <span aria-hidden="true">/</span> <span aria-current="page">Mantenga la seguridad</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Lo que se ha probado →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Documentación / 14</p><h1>Mantenga la seguridad</h1><p class="guide-outcome">Conozca las rutas de Telegram, las listas de proxies públicos y los servicios externos opcionales. Sepa qué ofrece cada opción, qué protegen y qué aspectos quedan en sus manos.</p>
+<article class="guide-content"><p class="eyebrow">Documentación / 14</p><h1>Mantenga la seguridad</h1><p class="guide-outcome">Qué sale de su máquina, qué abre cada secreto y qué cubren las protecciones frente a lo que le toca a usted.</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>Dirección del panel por defecto</span></div><div role="listitem"><strong>256 bits</strong><span>token de panel aleatorio</span></div><div role="listitem"><strong translate="no">0</strong><span>CDN, herramientas de análisis o fuentes remotas</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>Firma en cada registro</span></div></div>
 <h2 id="map">Donde se encuentra todo</h2>
-<p>El recopilador, su panel y todos los registros guardados permanecen en el ordenador o servidor en el que se ejecuta. Telegram es el único destino por defecto; cada uno de los demás es una opción independiente.</p>
+<p>El recolector, el panel y cada registro se quedan en su máquina. Por defecto solo se contacta con Telegram; todo lo demás es un interruptor aparte.</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / LO QUE SALE DE LA MÁQUINA</span><span class="sample-tag">Su instalación</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="Activar o desactivar destinos opcionales"><button type="button" data-flow-toggle="replica" aria-pressed="false">Texto externo</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">Notificaciones</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">Marcas de tiempo</button><button type="button" data-flow-toggle="witness" aria-pressed="false">Witness</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>Secreto</th><th>Dónde se almacena</th><th>Qué posibilidades ofrece</th><th>En caso de filtración</th></tr></thead>
 <tbody>
-<tr><td><strong>Token de panel</strong></td><td><code>panel-token.txt</code> en el directorio de datos; el navegador lo conserva únicamente para la pestaña correspondiente</td><td>Todo lo que ofrece cada espacio de trabajo: leer y exportar, modificar el alcance, iniciar sesión en cuentas</td><td>Detenga TgWitness, elimine <code>panel-token.txt</code> y vuelva a iniciarlo: se creará un nuevo token</td></tr>
+<tr><td><strong>Token de panel</strong></td><td><code>panel-token.txt</code> en el directorio de datos; el navegador lo guarda por pestaña</td><td>Todo en todos los espacios</td><td>Detenga TgWitness, borre <code>panel-token.txt</code> y arranque de nuevo: obtiene uno nuevo</td></tr>
 <tr><td><strong>Sesión de Telegram</strong></td><td>Almacén cifrado (<code>credentials.enc</code>)</td><td>La propia cuenta de Telegram</td><td>Finalice la sesión en Telegram en <em>Ajustes → Dispositivos</em></td></tr>
-<tr><td><strong>Clave de firma</strong></td><td>Almacén cifrado (<code>signing.enc</code>)</td><td>Registros firmados que se verifican mediante su huella digital</td><td>Los puntos de control almacenados en otro lugar, un registro de testigos y las marcas de tiempo muestran lo que existía anteriormente.</td></tr>
-<tr><td><strong>Clave de la bóveda</strong></td><td><code>vault.key</code> junto a los datos, o una clave maestra externa para un nuevo directorio de datos</td><td>Descifrando la caja fuerte</td><td>Considere que la clave de sesión y la clave de firma también se han filtrado</td></tr>
-<tr><td><strong>Token de Witness</strong></td><td>En el servidor de TgWitness</td><td>Solo lectura: puntos de control firmados y estado del sistema</td><td>Elimínelo de la página «Witness»; cree uno nuevo</td></tr>
-<tr><td><strong>Texto clave para uso externo</strong></td><td>Vault; descárguelo una sola vez para poder recuperarlo</td><td>Descifrado de la copia externa</td><td>Cualquiera que también posea los objetos almacenados puede descifrarlos: considere esa copia como expuesta</td></tr>
+<tr><td><strong>Clave de firma</strong></td><td>Almacén cifrado (<code>signing.enc</code>)</td><td>Firmar registros con su huella</td><td>Los puntos de control guardados en otro sitio, un testigo y las marcas de tiempo siguen mostrando lo que existía antes</td></tr>
+<tr><td><strong>Clave de la bóveda</strong></td><td><code>vault.key</code> junto a los datos o una clave maestra externa</td><td>La bóveda</td><td>Dé por filtradas también la sesión y la clave de firma</td></tr>
+<tr><td><strong>Token de Witness</strong></td><td>En el servidor de TgWitness</td><td>Solo lectura: puntos de control y estado</td><td>Bórrelo en la página del testigo y cree uno nuevo</td></tr>
+<tr><td><strong>Texto clave para uso externo</strong></td><td>Vault; descárguelo una sola vez para poder recuperarlo</td><td>La copia externa</td><td>Quien tenga además el bucket puede descifrarla: considere la copia expuesta</td></tr>
 </tbody></table></div>
 <h2 id="threats">Qué cubren las medidas de protección</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> Cubierto</h3><ul>
-<li>Un registro modificado, eliminado o reordenado en una exportación: la cadena de hash o la firma ya no se verifican.</li>
-<li>Un registro recortado o reconstruido tras un punto de control que se conservaba en otro lugar: el punto de control conservado ya no coincide.</li>
-<li>Adivinación del token del panel: 256 bits aleatorios, comparados en tiempo constante; tras 15 intentos fallidos por minuto, se rechaza la dirección.</li>
-<li>Contenido de chat hostil: el texto se inserta como texto, nunca como HTML; los archivos adjuntos se descargan como archivos; el panel no carga nada de otros sitios web.</li>
-<li>Un directorio de datos copiados con una clave de almacén externa: las sesiones y las claves de firma permanecen cifradas sin la clave maestra.</li>
+<li>Un registro cambiado, eliminado o reordenado: se rompe la cadena de hashes o una firma.</li>
+<li>Un diario recortado o reconstruido después de guardar un punto de control en otro sitio: el punto de control deja de coincidir.</li>
+<li>Adivinar el token: 256 bits aleatorios, comparación en tiempo constante; 15 fallos por minuto y la dirección queda bloqueada.</li>
+<li>Contenido hostil en chats: el texto sigue siendo texto, nunca HTML; los adjuntos se descargan como archivos; el panel no carga nada de otros sitios.</li>
+<li>Un directorio de datos robado con clave de bóveda externa: sesiones y claves siguen cifradas.</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> A su criterio</h3><ul>
-<li>El titular de la clave principal tiene control total. Conceda a otras personas acceso limitado a las cuentas, los chats y las acciones que necesiten; mantenga la clave principal en la más estricta confidencialidad.</li>
-<li>Un administrador del servidor puede leer todo el contenido, así como reescribir y volver a firmar el registro. Guarde la huella digital y los puntos de control en otro sistema.</li>
-<li>TgWitness no cifra el texto de los mensajes ni los archivos multimedia. Utilice el cifrado de disco y establezca permisos estrictos.</li>
-<li>El protocolo HTTP sin cifrar fuera de localhost expone el token en la red. Utilice HTTPS o un túnel SSH.</li>
-<li>Comprueba los registros guardados con firmas y puntos de control. Revisa la cobertura de la recopilación y prueba la entrega para las cuentas y fuentes que utilices.</li>
+<li>El token principal lo puede todo. Dé a otros acceso limitado y guárdese el principal.</li>
+<li>Quien sea administrador de la máquina puede leerlo todo y volver a firmar el diario. Guarde la huella y los puntos de control en otro sitio.</li>
+<li>TgWitness no cifra mensajes ni multimedia. Cifre el disco y restrinja los permisos.</li>
+<li>HTTP plano fuera de localhost filtra el token. Use HTTPS o un túnel SSH.</li>
+<li>Las firmas no le dicen qué se perdió. Compruebe la cobertura y pruebe la entrega en sus propias cuentas y fuentes.</li>
 </ul></section>
 </div>
-<p><a href="../access/">Comparta el acceso a un caso</a> con permisos, plazos de caducidad y límites de sesión. El token de testigo sigue siendo una credencial independiente.</p>
+<p><a href="../access/">Comparta el acceso a un caso</a> con permisos, caducidad y límites de sesión.</p>
 <h2 id="hardening">Reforzar una instalación</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>0 de 8 completado</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>Utilice una cuenta de Telegram específica</strong>; nunca su cuenta principal. El token del panel y la sesión le proporcionan un control total sobre ella.</span></li>
-<li><span class="check-text"><strong>Mantenga el panel en 127.0.0.1.</strong> Acceda a él de forma remota únicamente a través de HTTPS (la configuración de Caddy incluida) o de un túnel SSH.</span></li>
-<li><span class="check-text"><strong>Cifre el disco</strong> que contiene el directorio de datos: el texto de los mensajes y los archivos multimedia se almacenan tal y como se recibieron.</span></li>
-<li><span class="check-text"><strong>Limite el directorio de datos</strong> a la cuenta de servicio. Los nuevos directorios se configuran con el modo 0700 en Unix; en Windows, establezca los permisos de la carpeta.</span></li>
-<li><span class="check-text"><strong>Guarde la clave maestra del almacén en otro lugar</strong> de los servidores: configure «<code>TGWITNESS_VAULT_KEY_FILE</code>» antes de crear el directorio de datos.</span></li>
-<li><span class="check-text"><strong>Guarde la huella digital de la clave de firma y los puntos de control</strong> en otro sistema, y añada un testigo en otro servidor.</span></li>
+<li><span class="check-text"><strong>Use una cuenta de Telegram dedicada</strong>, nunca la principal.</span></li>
+<li><span class="check-text"><strong>Mantenga el panel en 127.0.0.1.</strong> Acceso remoto solo por HTTPS (Caddy incluido) o túnel SSH.</span></li>
+<li><span class="check-text"><strong>Cifre el disco</strong> con el directorio de datos: mensajes y multimedia se guardan tal cual.</span></li>
+<li><span class="check-text"><strong>Restrinja el directorio de datos</strong> a la cuenta de servicio (0700 en Unix, permisos de carpeta en Windows).</span></li>
+<li><span class="check-text"><strong>Guarde la clave de la bóveda aparte</strong> en servidores: defina <code>TGWITNESS_VAULT_KEY_FILE</code> antes del primer arranque.</span></li>
+<li><span class="check-text"><strong>Guarde la huella y los puntos de control</strong> en otro sistema y ejecute un testigo en otro host.</span></li>
 <li><span class="check-text"><strong>Nunca suba</strong> claves <code>data/</code>, de sesión, <code>panel-token.txt</code> o de bóveda a GitHub ni a un chat.</span></li>
 <li><span class="check-text"><strong>No registre</strong> los encabezados «<code>Authorization</code>» ni los cuerpos de las solicitudes en un proxy inverso.</span></li>
 </ol>
 </div>
-<details><summary>¿Puedo cambiar el token del panel sin perder datos?</summary><p>Sí. El token solo abre el panel. Detenga TgWitness, elimine «<code>panel-token.txt</code>» del directorio de datos y vuelva a iniciarlo; el registro, las sesiones y las claves permanecen intactos. Con «<code>TGWITNESS_TOKEN</code>» configurado, se utiliza el valor de entorno en lugar del archivo.</p></details>
-<details><summary>¿Por qué los mensajes no están cifrados en reposo?</summary><p>El recopilador debe leerlos para realizar búsquedas, comparar versiones y exportarlos. Cifrarlos con una clave en el mismo equipo aportaría poco frente a alguien que pueda acceder a dicho equipo. El cifrado del disco protege un disco inactivo o robado; los permisos estrictos protegen uno que está en funcionamiento.</p></details>
+<details><summary>¿Puedo cambiar el token del panel sin perder datos?</summary><p>Sí, solo abre el panel. Detenga TgWitness, borre <code>panel-token.txt</code> y arranque de nuevo. Diario, sesiones y claves se mantienen. Si <code>TGWITNESS_TOKEN</code> está definido, ese valor manda sobre el archivo.</p></details>
+<details><summary>¿Por qué los mensajes no están cifrados en reposo?</summary><p>El recolector tiene que leerlos para buscar, comparar y exportar. Una clave en la misma máquina no detendría a quien ya puede leer esa máquina. El cifrado de disco cubre un disco robado; los permisos, uno en marcha.</p></details>
 <h2 id="report">Informar de una vulnerabilidad</h2>
-<p>Utilice <strong>«Seguridad → Informar de una vulnerabilidad»</strong> en el repositorio de GitHub. Incluya la versión, el impacto y una reproducción sintética mínima. No envíe nunca credenciales, directorios de cuentas ni archivos de pruebas reales. Si no es posible realizar un informe privado, abra una incidencia solicitando un canal privado sin detalles sobre el exploit.</p>
+<p><strong>Security → Report a vulnerability</strong> en GitHub. Versión, impacto y una reproducción mínima con datos ficticios. Nunca envíe credenciales, carpetas de cuentas ni evidencia real. Si el informe privado está desactivado, abra un issue pidiendo un canal privado, sin detalles del exploit.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">Referencia completa →</a><a class="next-guide" href="../start/"><span>Siguiente paso</span><strong>Empiece en cuestión de minutos →</strong></a><p>Estas guías describen la implementación actual. Los resultados de la validación y las deficiencias pendientes se documentan por separado. <a href="../reference/verification/">Lo que se ha probado →</a></p></footer>
 </main>

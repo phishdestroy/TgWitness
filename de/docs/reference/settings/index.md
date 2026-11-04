@@ -62,10 +62,3 @@ Die Gruppenseite `/groups/<id>` zeigt die Mitglieder, was Aufmerksamkeit erforde
 Ein Arbeitsbereich mit einer laufenden Sitzung oder einer zuvor abgeschlossenen Einrichtung zeigt den Assistenten nicht an. Seine Werte werden beim Laden der Seite nicht durch ein Ziel ersetzt. Das Ausblenden eines Feldes deaktiviert die Funktion nicht und löscht auch nicht deren Wert.
 
 Die Schätzung von Umfang und Zeitaufwand basiert auf bis zu drei ausgewählten Chats und bis zu 20 Nachrichten aus jedem Chat. Es handelt sich um eine Schätzung: Sie berücksichtigt weder die Telegram-Limits noch die Geschwindigkeit eines bestimmten Servers oder die Dateien in jedem Chat.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

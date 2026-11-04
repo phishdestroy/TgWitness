@@ -2,26 +2,26 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/concepts/
 
-Uma mensagem pode ser alterada. O registro do que o senhor observou deve permanecer verificável.
+Mensagens mudam. O seu registro do que você viu não deveria, e qualquer pessoa deveria poder conferir isso.
 
-Explore dois pequenos experimentos a seguir. Eles utilizam mensagens fictícias, permanecem no seu navegador e nunca se conectam ao Telegram.
+Dois pequenos experimentos abaixo. Mensagens fictícias, tudo roda no seu navegador, nada vai para o Telegram.
 
 ## De uma exportação de bate-papo a um registro verificável
 
-[As exportações do Telegram Desktop](https://telegram.org/blog/export-and-more) salvam o histórico de bate-papo e as mídias disponíveis como HTML ou JSON para uso offline. O TgWitness adiciona um registro contínuo das alterações recebidas, assinaturas nas observações e exportações, além de pontos de verificação que os destinatários podem comparar de forma independente.
+Uma [exportação do Telegram Desktop](https://telegram.org/blog/export-and-more) salva o histórico que você vê agora em HTML ou JSON. O TgWitness acrescenta um diário contínuo de mudanças, assinaturas em cada registro e pontos de verificação com os quais outros podem comparar.
 
 | Tarefa | Exportação do Telegram Desktop | TgWitness |
 | --- | --- | --- |
 | Ler conversas salvas | HTML ou JSON com mídia selecionada | Bate-papos salvos, diário pesquisável e relatórios offline |
-| Acompanhe as mudanças ao longo do tempo | O histórico disponível ao ser exportado | Versões capturadas anteriormente, edições posteriores e observações de exclusão são mantidas juntas |
-| Verifique os arquivos após a entrega | Os arquivos de exportação padrão em HTML/JSON não são assinados | Manifesto assinado, assinaturas por registro e relatórios HTML/PDF/JSON selados, verificados em relação a uma chave de coletor confiável |
+| Acompanhe as mudanças ao longo do tempo | O histórico disponível ao ser exportado | Versões antigas, edições posteriores e exclusões, tudo guardado |
+| Verifique os arquivos após a entrega | Os arquivos de exportação padrão em HTML/JSON não são assinados | Manifesto assinado, registros assinados e relatórios selados, conferidos com uma chave confiável |
 | Compare com um estado anterior mantido | Mantenha uma cópia de referência separada ou um hash | Pontos de verificação assinados, uma testemunha separada e carimbos de data/hora externos opcionais |
 
-A comparação de assinatura de arquivos baseia-se nos [geradores de exportação](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) do [Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) revisados em 2 de novembro de 2026. O TgWitness assina com a chave do coletor; as verificações abaixo mostram como um destinatário a utiliza.
+A comparação se baseia no [código de exportação do Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) em 2 de novembro de 2026.
 
 ## Uma mensagem, três observações
 
-Quando o Telegram entrega uma nova mensagem, uma edição ou um aviso de exclusão, o coletor acrescenta três observações distintas. A edição não substitui o registro original. Um aviso de exclusão não o apaga.
+Uma mensagem nova, uma edição e uma exclusão viram três registros separados. A edição não sobrescreve o primeiro e a exclusão não o apaga.
 
 01 / PERCURSO DA MENSAGEMSequência ilustrativa
 
@@ -61,11 +61,11 @@ Todas as três observações recebidas permanecem no registro.
 
 Caminho simplificado para uma fonte já selecionada. Os registros operacionais também compartilham o diário real. A captura depende do que a conta pode visualizar e do que o Telegram disponibiliza.
 
-Uma notificação de exclusão não fornece nem a hora confiável da exclusão nem a identidade da pessoa que excluiu a mensagem. Manter esses valores desconhecidos preserva a distinção entre uma observação e uma suposição.
+O Telegram não diz quem excluiu uma mensagem nem quando exatamente. O TgWitness deixa esses campos vazios em vez de chutar.
 
 ## Altere um registro. Siga o hash.
 
-Cada registro contém o hash do registro anterior. Seu próprio hash abrange os campos do evento, incluindo esse link. Um ponto de verificação mantido externamente fixa um comprimento específico do diário e o hash inicial.
+Cada registro contém o hash do anterior. Um ponto de verificação guardado em outro lugar fixa o tamanho do diário e o último hash.
 
 02 / HASH-CHAIN SANDBOXSHA-256 real · registros de amostra
 
@@ -105,23 +105,23 @@ h0 = 064
 hi = hex(SHA-256(C(ei)))
 σi = Ed25519.Sign(sk, unhex(hi))
 
-**C** serializa os nove campos do evento como JSON em UTF-8: chaves ordenadas, sem espaços em branco extras, sem escape ASCII e sem NaN/infinito. O `previous_hash` do evento é hi−1. O h0 exibido significa 64 caracteres zero; as assinaturas abrangem os 32 bytes brutos do resumo.
+**C** são os nove campos do evento como JSON UTF-8: chaves ordenadas, sem espaços extras, sem escape ASCII, sem NaN/infinito. `previous_hash` é hi−1, h0 são 64 zeros e as assinaturas cobrem os 32 bytes brutos do resumo.
 
-Os nove campos são `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload` e `previous_hash`. Esta é [a codificação JSON documentada](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#event-canonicalization) do TgWitness; o hash e a assinatura em si não são campos de entrada de hash.
+Os campos: `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload`, `previous_hash`. Especificação completa: [codificação de eventos](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#event-canonicalization).
 
 PONTO DE VERIFICAÇÃO RETIDO
 
 Nexport ≥ Ncheckpoint
 hexport[Ncheckpoint] = Hcheckpoint
 
-Verifique a assinatura do ponto de verificação sob a chave do coletor fixada e, em seguida, compare seus limites com os do registro verificado. Uma exportação posterior pode conter mais registros; mesmo assim, deve estar em conformidade com o ponto de verificação anterior.
+Confira a assinatura do ponto de verificação com a chave fixada e depois compare com o diário. Uma exportação posterior pode ser maior, mas tem de bater no ponto de verificação.
 
 ## Três perguntas, três verificações diferentes
 
-[01 / INTEGRIDADE**Este registro sofreu alguma alteração?** Verifique os hashes e as assinaturas em relação a uma chave confiável separada.](https://phishdestroy.github.io/TgWitness/pt/docs/exports/)[02 / CONTINUIDADE**O que foi mantido anteriormente?** Compare uma exportação assinada com os pontos de verificação mantidos por uma testemunha independente.](https://phishdestroy.github.io/TgWitness/pt/docs/witness/)[03 / ENTREGA**Esses eventos de teste chegaram?** Compare as ações controladas de envio, edição e exclusão com o registro de cada conta.](https://phishdestroy.github.io/TgWitness/pt/docs/cases/)
+[01 / INTEGRIDADE**Este registro sofreu alguma alteração?** Hashes e assinaturas contra uma chave confiável.](https://phishdestroy.github.io/TgWitness/pt/docs/exports/)[02 / CONTINUIDADE**O que foi mantido anteriormente?** Compare a exportação com os pontos de verificação que uma testemunha guardou.](https://phishdestroy.github.io/TgWitness/pt/docs/witness/)[03 / ENTREGA**Esses eventos de teste chegaram?** Envie, edite e exclua mensagens de teste e veja o que cada conta capturou.](https://phishdestroy.github.io/TgWitness/pt/docs/cases/)
 
-Use assinaturas para verificar os registros retidos, pontos de verificação para comparar um limite anterior e testes de entrega controlada para avaliar a coleta. Cada um responde a uma pergunta específica. [Leia o escopo da verificação e as premissas de confiança.](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope)
+Assinaturas respondem "foi alterado?", pontos de verificação respondem "bate com o que havia antes?" e mensagens de teste respondem "capturamos tudo?". [O que a verificação prova e o que não prova.](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope)
 
-Acompanhe toda a [investigação da conta,](https://phishdestroy.github.io/TgWitness/pt/docs/cases/) desde a aquisição até o pacote do caso.
+Próximo: uma [investigação de conta inteira](https://phishdestroy.github.io/TgWitness/pt/docs/cases/) do começo ao pacote do caso.
 
 [Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

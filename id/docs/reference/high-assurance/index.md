@@ -247,25 +247,11 @@ Gateway DNS mencakup resolver sistem. DNS melalui HTTPS pada port 443 ke resolve
 
 Cloudflare tidak dapat melihat isi enkripsi Telegram, perangkat lain pada akun Telegram (daftar perangkat dalam mode bukti mencatatnya dari sisi Telegram) atau hypervisor penyedia layanan.
 
-Pada 1 November 2026, Gateway DNS dijalankan pada Hetzner Cloud yang sebenarnya dan akun Cloudflare gratis: Hetzner menerima aturan keluar, server menginstal v0.7.0 dengan setiap pencarian dilakukan melalui Gateway via TLS, terowongan cepat berfungsi melalui firewall tersebut, dan `verify` membaca 19 nama server tersebut kembali dari Cloudflare (mirror Ubuntu dan Hetzner, GitHub, PyPI, NTP, terowongan, ntfy.sh). Panel tersebut menyalin 36 kueri di delapan jendela ke dalam jurnal dan `verify.py` merangkumnya tanpa ada yang terlewat; `destroy` melepas server dan firewall, serta meninggalkan lokasi bersama tersebut.
-
 ## Apa yang tidak ditetapkan di sini
 
 - Penyedia layanan dan stafnya mengelola hypervisor, disk, dan jaringan.
 - Pengukuran host dilaporkan sendiri oleh pengumpul data.
 - Isi aturan firewall sebelumnya tidak tercatat di setiap log penyedia layanan; hanya Linode yang menyimpan versi aturan tersebut.
 - Hal ini tidak memberikan informasi baru mengenai keaslian pesan; lihat [bagian Bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/).
-
-## Telah diuji di sini
-
-Logika penyebaran, penguncian, dan verifikasi dicakup oleh pengujian otomatis terhadap simulasi API Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail, dan Cloudflare yang dibangun berdasarkan referensi API yang dipublikasikan, serta penandatanganan permintaan AWS berdasarkan contoh yang dipublikasikan oleh AWS. `tools/check_cloud_wizard.py` menjalankan wizard server panel dengan cara yang sama, dengan domain dan dengan terowongan cepat. `tools/check_tdx.py` memverifikasi attestasi Intel TDX asli dari dcap-qvl dan dstack hingga sertifikat akar Intel (sumbernya ada di [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)); `tools/check_phala.py`menjalankan perintah deploy, verify, journal, destroy, dan wizard panel terhadap Phala Cloud simulasi yang atestasi-nya berasal dari PKI palsu yang menyerupai milik Intel. Jalur Phala ini belum dicoba pada Phala Cloud itu sendiri.
-
-Pada 1 November 2026, jalur terowongan cepat dijalankan melalui **Hetzner Cloud** yang sebenarnya (Nuremberg, `cpx22`, TgWitness v0.7.0), ntfy.sh asli, dan GitHub, baik dari panel maupun dari kode:
-
-- pemeriksaan harga, kemudian pembuatan melalui tombol-tombol di panel: server mulai berjalan setelah 13 detik, pernyataan yang ditandatangani dengan hash instance dan installer yang cocok setelah sekitar dua menit;
-- panel server itu sendiri dibuka melalui alamat trycloudflare.com dan menerima token panel; tanpa token tersebut, server akan merespons dengan kode 401;
-- setelah reboot melalui API Hetzner, server memposting alamat baru yang telah ditandatangani; **temukan alamat saat ini**, alamat lama tidak merespons lagi, kunci penandatanganan tetap sama; sebuah postingan yang tidak ditandatangani ke topik ntfy.sh diabaikan;
-- `verify` terhadap API Hetzner: server, firewall tanpa aturan masuk, pernyataan, pengikatan, pengukuran host, proses boot, dan hash sumber dari checkout v0.7.0 telah lulus; pemeriksaan Cloudflare tidak tersedia, seperti yang dijelaskan di atas; penginstal berbeda dari yang digunakan v0.7.0 dan identik byte demi byte dengan yang dihasilkan oleh kode versi ini;
-- Penghapusan dari panel tersebut secara tepat menghapus server dan firewall yang diberi label pada penyebaran tersebut; server dan firewall lain dalam proyek yang sama tetap tidak terpengaruh.
 
 Belum dijalankan pada akun asli: penyebaran di bawah domain Anda sendiri (terowongan Cloudflare dan DNS), penyedia lain, penyebaran debug, dan `lock`, akun Telegram di server tersebut, serta pembaruan langsung versi-versi selanjutnya melalui terowongan cepat. Periksa penerapan pertama di setiap penyedia dengan `plan`, deployment debug, dan `verify` sebelum mengandalkannya dalam sebuah kasus.

@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../">Belgeler</a> <span aria-hidden="true">/</span> <span aria-current="page">Birkaç dakika içinde başlayın</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Neler test edildi →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Belgeler / 04</p><h1>Birkaç dakika içinde başlayın</h1><p class="guide-outcome">Öncelikle, çalışan bir örneği inceleyin. Ardından kendi hesabınızı bağlayın.</p>
+<article class="guide-content"><p class="eyebrow">Belgeler / 04</p><h1>Birkaç dakika içinde başlayın</h1><p class="guide-outcome">Önce demoda dolaşın, sonra kendi hesabınızı bağlayın.</p>
 <h2 id="demo">Hesap oluşturmadan siteyi inceleyin</h2>
-<p>Projeyi indirin veya klonlayın, <strong>Python 3.11 veya daha yeni bir sürümünü</strong> kurun ve demoyu çalıştırın. Başlatıcı, yerel bir ortam oluşturur ve sabitlenmiş bağımlılıkları yükler.</p>
+<p>Projeyi indirin, <strong>Python 3.11 veya üstü</strong> olsun ve demoyu çalıştırın. Gerisini başlatıcı halleder.</p>
 <pre><code>git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness</code></pre>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\scripts\Demo.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh --demo</code></pre></section></div>
-<p>Tarayıcı, kurgusal mesajların bulunduğu bir çalışma alanı açar. Bir sohbeti açın, bir düzenlemeyi karşılaştırın ve bir dışa aktarımı inceleyin. Demo modu Telegram&#x27;a bağlanmaz.</p>
+<p>Tarayıcıda uydurma mesajlarla bir çalışma alanı açılır. Bir sohbet açın, bir düzenlemeyi karşılaştırın, bir dışa aktarıma göz atın. Telegram işin içinde değil.</p>
 <figure><img src="../../../assets/chats-dark.png" width="1440" height="1000" alt="Örnek mesajların yer aldığı TgWitness sohbet görünümü" loading="lazy"><figcaption>Örnek bir çalışma alanı. Kendi günlüğünüz ayrı olarak başlar.</figcaption></figure>
 <h2 id="live">Kendi çalışma alanınızı oluşturun</h2>
-<p>Demo sürecini kapatın, ardından normal başlatıcıyı kullanın:</p>
+<p>Demoyu kapatın, ardından:</p>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\Start.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh</code></pre></section></div>
-<p>Başlatıcıda gösterilen yerel adresi açın. İstenirse, terminalde belirtilen yerel dosyadan <strong>panel erişim jeton</strong>unu girin. Bu işlem TgWitness&#x27;in kilidini açar; bu işlem, Telegram oturum açma işleminden ayrıdır.</p>
+<p>Başlatıcının gösterdiği adresi açın ve belirttiği dosyadaki <strong>panel erişim belirtecini</strong> yapıştırın. Bu, TgWitness içindir, Telegram için değil.</p>
 <h2 id="next">İlk mesajınızı kaydedin</h2>
-<ol><li><a href="../accounts/">Özel bir Telegram hesabı bağlayın.</a></li><li>Hesabın erişebileceği bir grup veya kanal seçin, ardından gözlemi başlatın.</li><li>Kontrolünüz altındaki bir test grubuna yeni bir mesaj gönderin ve mesajın günlüğünde göründüğünü kontrol edin.</li></ol>
+<ol><li><a href="../accounts/">Özel bir Telegram hesabı bağlayın.</a></li><li>Bir grup ya da kanal seçin ve gözlemi başlatın.</li><li>Test grubunuza bir mesaj gönderin ve günlükte belirişini izleyin.</li></ol>
 <p class="callout">Sunucu kurulumu için &quot;<a href="../server/">Keep it running</a>&quot; kılavuzunu izleyin.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/quickstart/">Tam referans →</a><a class="next-guide" href="../accounts/"><span>Sonraki adım</span><strong>Hesap bağla →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="../reference/verification/">Neler test edildi →</a></p></footer>

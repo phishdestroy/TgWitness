@@ -32,8 +32,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/conne
 
 上传的 WireGuard 配置文件必须包含一个接口和一个对等节点、完整的 IPv4 和 IPv6 路由，且不得包含钩子、包含语句、环境变量替换或额外的 监听器。公共端点地址将在启动前解析并固定。 请使用外部 VPN 或 SOCKS5 网关来连接 OpenVPN/IPsec 及私有端点。
 
-合成检查项为 `python tools/check_guided_connection.py` 和 `python tools/check_guided_connection_browser.py`。可选的 `python tools/check_portable_routes_runtime.py` 会下载经过验证的辅助程序，并 通过回环测试环境测试其实际本地进程生命周期。该操作 不会注册 Cloudflare 设备，也不会使用 Telegram 账户。
-
 ## 认证方法
 
 **API ID 和 API 哈希用于标识应用程序；它们不能替代账户登录。** 在 TgWitness 中，它们是可选的。优先级顺序为：表单中输入的一组，然后是来自 导入的账户 JSON 文件中的一组，接着是保存在工作区中的一组，最后是内置的 50 个 对，当Telegram拒绝某组时，系统将按随机顺序尝试并自动轮换。只有 Telegram Desktop密钥对（2040）会随匹配的Telegram Desktop客户端描述一同发送。 您可在[my.telegram.](https://my.telegram.org) org的API开发工具中生成的自有密钥对可用于所有账户；每个账户仍拥有独立的授权。
@@ -70,8 +68,6 @@ python -m tgwitness.sessions account.session --out account.tgwitness-session
 
 1. 在**“添加账户”→“文件**”下，加载结果或 粘贴其字符串，然后继续。
 2. 请核对显示的数字账户 ID，选择数据源并开始监控。
-
-该转换器以只读模式打开 SQLite，不执行任何模式升级或网络请求， 也不会打印会话内容。它会检查模式版本、表类型、单个 会话行、IP/端口/数据中心以及密钥长度。CLI 输入限制为 64 MiB；StringSession 文本限制为 4 KiB。 面板转换会将文件上传至经过身份验证的 TgWitness 服务器，在内存中进行处理，并将规范化的凭据返回至该 浏览器，且不会保存上传的原始文件。连接远程服务器时请使用 HTTPS。
 
 **转换后的文件是一个未加密的账户访问密钥。** 请将其保存在受保护的 存储位置，切勿将其提交或发送给第三方转换服务。TgWitness 会将其授权会话保存在加密保险库中。复制会话不会 创建单独的授权：请勿使用克隆的授权密钥运行多个客户端， 并假设它们能独立接收更新。
 
@@ -115,15 +111,9 @@ MTProto 是 Telegram 的协议。Telethon 是 TgWitness 使用的 Python 客户�
 
 当自动路由处于活动状态时，列表每小时刷新一次，传输检查默认 每十分钟运行一次。这些间隔时间均可配置。**更新公共列表** 会触发刷新；仅查看列表不会更改已保存的手动路由。
 
-每个数据流响应限制为 1 MiB，请求超时为 8 秒， 总下载时限为 20 秒；重定向 请求将被拒绝。每个来源最多保留 64 条兼容条目，并进行去重处理。 解析器支持十六进制和 base64url 格式的密钥，以及 JSON 数据流。 伪造的 TLS `ee`、无效链接、私有/保留的 IP 字面量以及本地主机名将被 跳过。主机名在使用前会进行解析和验证，并为该连接固定所选的 IP 地址。自动重新获取会再次解析主机名；若要再次解析，请重新应用 手动条目。
-
-若数据源响应失败、为空或不兼容，将保留之前的源快照。 更新操作具有原子性，采用序列化处理，且每个工作区每分钟仅限尝试一次。 传输探测成功仅表示已建立连接，并不意味着匿名性或捕获的完整性。
-
 **Telegram 流量和 HTTPS 请求使用不同的路由。**列表下载使用 独立的 HTTPS 连接以及提供的外部请求路由。 `TGWITNESS_PROXY_FEED_PROXY` 会通过 HTTP/SOCKS5 代理显式覆盖该路由； 两种 Compose 收集器变体均会转发该路由。后台池遵循主工作区。 不会向数据源提供商发送任何 Telegram 会话、API 凭据、控制面板令牌或机器人令牌。 提供商名称、快照日期和下载路径会显示在**“列表来源”部分**。
 
 MTProxy仅承载Telegram流量。工作区的HTTP操作（如时间戳、 通知、站外副本和源代码验证）在 已配置时会使用独立的SOCKS5/HTTP代理，否则则使用该账户的SOCKS5/HTTP路由。若两者均未配置，"隐藏地址"功能将拒绝 该请求；其他模式则允许"直接"连接。外部请求可被禁用。显式 配置的订阅源下载代理仍由操作员单独覆盖。 独立的见证服务保持其自身的路由。
-
-通过 SOCKS5 或 HTTP 代理发出的仅限公开的外部 HTTP 请求，将通过 同一代理，使用 Cloudflare DNS over HTTPS（`https://1.1.1.1/dns-query`）解析 目标地址。仅主机名和 A/AAAA 查询类型会发送至解析器； 服务 URL、凭据和通知内容均不包含在内。 TLS 会验证 解析器证书与其 IP 地址是否匹配。系统会检查两种地址族， 若返回私有、回环、链路本地或保留地址，则拒绝该请求。 连接使用经过验证的数值地址，同时保留服务原始的 HTTP Host 和 TLS 证书名称。 通知 HTTP 转发和 CONNECT 请求采用相同的目标检查机制。若 DNS 查询失败且 无本地目标 DNS 或直接备用方案，则停止该请求。成功的响应将按 代理路由在内存中缓存，最长 30 秒且不超过其 DNS TTL； 缓存上限为 128 条记录。 代理主机名本身可以使用本地 DNS。 SOCKS 和 CONNECT 请求失败时，可在发送 服务请求正文之前尝试另一个经过验证的地址。纯 HTTP 转发会在请求失败时报告错误，而不会 自动通过另一个地址重发其请求正文。
 
 对于由操作员管理的私有服务，现有的服务器环境设置 `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` 允许私有目标，并保持 代理端的主机名解析。该设置无法通过控制面板启用。仅限公共 模式会在查询公共解析器之前拒绝 `.onion` 目标；Tor 洋葱 服务需要明确的私有目标设置以及合适的代理。 此 DNS 行为适用于外部 HTTP 操作，不适用于 Telegram 的传输协议。 Cloudflare 提供了关于 [JSON DNS 端点的](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/)文档。
 
@@ -174,8 +164,6 @@ SOCKS5 和普通 HTTP CONNECT 本身不会对代理凭据或 客户端到代理�
 
 “账户”中的**存储保护功能**会显示这些状态。面板令牌是一种 访问密钥，而非加密密码。它授予管理员访问权限； [已签发的令牌](https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/)可限定在特定账户和聊天群组范围内。工作区共享 主机进程，并非独立的租户。
 
-一个显式启动的、隔离的合成演示实例可通过直接 回环连接自动打开。此功能使用独立于进程生命周期的机制；既不会 泄露配置的面板令牌，也不会授予对真实工作区的访问权限。远程、 代理或跨源请求均无法获取或使用此自动进入功能。 此便利功能不会消除针对真实账户数据的身份验证边界。
-
 BitLocker、LUKS、FileVault 或受管加密卷可在 各自的威胁模型下保护存储数据。 已解锁且正在运行的机器的管理员 仍然可以读取数据。在存储规划中应将 SQLite WAL/SHM、媒体文件、临时导出文件、交换文件、备份 以及浏览器下载内容纳入考虑范围。Docker 卷仅因其 是卷这一事实，并不意味着它已被加密。TgWitness 不实现 SQLCipher 或对象加密。
 
 ## 外部主密钥
@@ -203,17 +191,3 @@ python -m tgwitness --data-dir E:\PrivateData\new-case
 所有工作区均源自同一主密钥；若主密钥遭泄露，将影响整个 安装环境。运行中的进程可解密机密信息。本工具并非硬件安全模块（HSM）或 密码密钥派生函数（KDF）。不接受使用任意人工设置的密码代替随机密钥。
 
 在有计划的迁移 实施并验证之前，请保留现有安装中的现有密钥。删除 `vault.key` 或替换主密钥可能会导致 无法访问会话/签名密钥。请将加密备份与密钥分开存放，并 在隔离的环境中测试恢复功能。
-
-## 来源与验证范围
-
-2026年10月26日审核：
-
-- https://core.telegram.org/api/auth
-- https://core.telegram.org/api/obtaining_api_id
-- https://docs.telethon.dev/en/stable/basic/signing-in.html
-- https://docs.telethon.dev/en/stable/concepts/sessions.html
-- https://core.telegram.org/mtproto/mtproto-transports
-- https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp
-- Telethon 1.45.0：SQLiteSession、StringSession、`Connection._proxy_connect`、 `TcpMTProxy.normalize_secret` 及下载方法。
-
-本地测试涵盖回环 SOCKS5/HTTP CONNECT 测试用例、合成 SQLite 会话、 路由隔离、密钥排除以及密钥缺失时的拒绝处理。这些测试并未验证 真实的 Telegram/代理互操作性或 MTProxy 的实际运行行为。请参阅 [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/) 和 [LIVE_ACCEPTANCE.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md)。

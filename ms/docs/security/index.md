@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/security/
 
-Ketahuilah laluan untuk Telegram, senarai proksi awam dan perkhidmatan luaran pilihan. Ketahuilah apa yang dibuka oleh setiap rahsia, apa yang dilindungi dan apa yang diserahkan kepada anda.
+Apa yang meninggalkan mesin anda, apa yang dibuka oleh setiap rahsia, dan apa yang dilindungi berbanding apa yang menjadi tanggungjawab anda.
 
 **127.0.0.1**alamat panel secara lalai
 
@@ -14,7 +14,7 @@ Ketahuilah laluan untuk Telegram, senarai proksi awam dan perkhidmatan luaran pi
 
 ## Tempat segala-galanya wujud
 
-Pengumpul, panelnya dan setiap rekod yang disimpan kekal pada komputer atau pelayan yang anda jalankannya. Telegram adalah satu-satunya destinasi secara lalai; setiap destinasi lain adalah suis berasingan.
+Pengumpul, panel dan setiap rekod kekal pada mesin anda. Secara lalai hanya Telegram yang dihubungi; selebihnya suis berasingan.
 
 06 / APA YANG KELUAR DARI MESINPemasangan anda
 
@@ -56,54 +56,54 @@ Tujuan pilihan dikonfigurasikan mengikut ruang kerja. Teks mesej dan media disim
 
 | Rahsia | Di mana ia disimpan | Apa yang dibukanya | Jika bocor |
 | --- | --- | --- | --- |
-| **Panel token** | `panel-token.txt` dalam direktori data; pelayar menyimpannya hanya untuk tab tersebut | Segala-galanya dalam setiap ruang kerja: baca dan eksport, ubah skop, log masuk ke akaun | Hentikan TgWitness, padamkan `panel-token.txt`, mulakan semula: token baru telah dicipta |
+| **Panel token** | `panel-token.txt` dalam direktori data; pelayar menyimpannya bagi setiap tab | Segala-galanya dalam setiap ruang kerja | Hentikan TgWitness, padam `panel-token.txt`, mulakan semula: anda mendapat yang baharu |
 | **Sesi Telegram** | Vault, disulitkan (`credentials.enc`) | Akaun Telegram itu sendiri | Batalkan sesi di Telegram di bawah *Tetapan → Peranti* |
-| **Kunci penandatangan** | Vault, disulitkan (`signing.enc`) | Menandatangani rekod yang disahkan di bawah cap jari anda | Titik pemeriksaan disimpan di tempat lain, seorang saksi dan cap masa menunjukkan apa yang wujud sebelum |
-| **Kunci peti besi** | `vault.key`di sebelah data, atau kunci induk luaran untuk direktori data baru | Mengekodekan semula peti besi | Anggap juga sesi dan kunci tandatangan telah bocor |
-| **Token saksi** | Pada hos saksi | Hanya baca: checkpoint ber tandatangan dan kesihatan | Padamkannya di halaman Witness; buat yang baru |
-| **Salinan kunci luar tapak** | Vault; muat turun sekali untuk pemulihan | Mengekodekan semula salinan luar tapak | Sesiapa yang juga memegang objek yang disimpan boleh menyahsulitkannya: anggap salinan itu telah terdedah |
+| **Kunci penandatangan** | Vault, disulitkan (`signing.enc`) | Menandatangani rekod di bawah cap jari anda | Checkpoint di tempat lain, saksi dan cap masa masih menunjukkan apa yang wujud sebelum ini |
+| **Kunci peti besi** | `vault.key` di sebelah data, atau kunci induk luaran | Peti besi | Anggap sesi dan kunci tandatangan juga bocor |
+| **Token saksi** | Pada hos saksi | Baca sahaja: checkpoint dan kesihatan | Padamkannya di halaman Saksi, buat yang baharu |
+| **Salinan kunci luar tapak** | Vault; muat turun sekali untuk pemulihan | Salinan luar tapak | Sesiapa yang juga memegang bucket boleh menyahsulitnya: anggap salinan itu terdedah |
 
 ## Apa yang dilindungi oleh perlindungan
 
 ### Diliputi
 
-- Rekod yang diubah, dipadam atau disusun semula dalam eksport: rantaian hash atau tandatangan tidak lagi dapat disahkan.
-- Jurnal dipulihkan atau dibina semula selepas titik pemeriksaan disimpan di tempat lain: titik pemeriksaan yang disimpan tidak lagi sepadan.
-- Meneka token panel: 256 bit rawak, dibandingkan dalam masa tetap; selepas 15 kegagalan seminit, alamat ditolak.
-- Kandungan sembang bermusuhan: teks dimasukkan sebagai teks, bukan sebagai HTML; lampiran dimuat turun sebagai fail; panel tidak memuat apa-apa daripada laman lain.
-- Direktori data salinan dengan kunci peti besi luaran: sesi dan kunci penandatanganan kekal disulitkan tanpa kunci induk.
+- Rekod yang diubah, dibuang atau disusun semula: rantaian hash atau tandatangan rosak.
+- Jurnal yang dipotong atau dibina semula selepas anda menyimpan checkpoint di tempat lain: checkpoint tidak lagi sepadan.
+- Meneka token: 256 bit rawak, perbandingan masa malar, 15 kegagalan seminit dan alamat itu disekat.
+- Kandungan sembang berniat jahat: teks kekal teks, tidak pernah HTML; lampiran dimuat turun sebagai fail; panel tidak memuatkan apa-apa daripada laman lain.
+- Direktori data yang dicuri dengan kunci peti besi luaran: sesi dan kunci kekal disulitkan.
 
 ### Dibiarkan kepada anda
 
-- Token panel utama mempunyai kawalan penuh. Berikan orang lain akses terhad kepada akaun, sembang dan tindakan yang mereka perlukan; jaga kunci utama agar kekal peribadi.
-- Pentadbir mesin boleh membaca semuanya dan menulis semula serta menandatangani semula jurnal tersebut. Simpan cap jari dan titik pemeriksaan pada sistem lain.
-- Teks mesej dan media tidak disulitkan oleh TgWitness. Gunakan penyulitan cakera dan kebenaran yang ketat.
-- HTTP biasa di luar localhost mendedahkan token di rangkaian. Gunakan HTTPS atau terowong SSH.
-- Semak rekod yang disimpan dengan tandatangan dan titik pemeriksaan. Semak liputan pengumpulan dan uji penghantaran untuk akaun dan sumber yang anda gunakan.
+- Token utama boleh melakukan apa sahaja. Beri orang lain akses berskop dan simpan token utama untuk diri sendiri.
+- Sesiapa yang menjadi pentadbir pada mesin boleh membaca segala-galanya dan menandatangani semula jurnal. Simpan cap jari dan checkpoint di tempat lain.
+- TgWitness tidak menyulitkan mesej dan media. Sulitkan cakera, ketatkan kebenaran.
+- HTTP biasa di luar localhost membocorkan token. Gunakan HTTPS atau terowong SSH.
+- Tandatangan tidak memberitahu apa yang terlepas. Semak liputan dan uji penghantaran pada akaun dan sumber anda sendiri.
 
-[Berkongsi akses kepada satu kes](https://phishdestroy.github.io/TgWitness/ms/docs/access/) dengan kebenaran, tarikh luput dan had sesi. Token saksi kekal sebagai kelayakan berasingan.
+[Kongsi akses kepada kes](https://phishdestroy.github.io/TgWitness/ms/docs/access/) dengan kebenaran, tarikh luput dan had sesi.
 
 ## Mengukuhkan pemasangan
 
 0 daripada 8 telah selesai
 
-1. **Gunakan akaun Telegram khusus** — jangan sekali-kali akaun utama anda. Token panel dan sesi memberikan kawalan penuh ke atasnya.
-2. **Biarkan panel pada 127.0.0.1.** Aksesnya secara jauh hanya melalui HTTPS (konfigurasi Caddy yang disertakan) atau terowong SSH.
-3. **Sulitkan cakera** yang mengandungi direktori data: teks mesej dan media disimpan seperti mana ia diterima.
-4. **Hadkan direktori data** kepada akaun perkhidmatan. Direktori baru mendapat mod 0700 pada Unix; pada Windows, tetapkan kebenaran folder.
-5. **Simpan kunci induk peti di lokasi lain** pada pelayan: tetapkan `TGWITNESS_VAULT_KEY_FILE` sebelum mencipta direktori data.
-6. **Simpan cap jari kunci penandatanganan dan titik pemeriksaan** pada sistem lain, dan tambahkan saksi pada hos lain.
+1. **Gunakan akaun Telegram khusus**, jangan sekali-kali akaun utama anda.
+2. **Kekalkan panel pada 127.0.0.1.** Akses jauh hanya melalui HTTPS (Caddy yang disertakan) atau terowong SSH.
+3. **Sulitkan cakera** yang menyimpan direktori data, mesej dan media disimpan seadanya.
+4. **Hadkan direktori data** kepada akaun perkhidmatan (0700 pada Unix, kebenaran folder pada Windows).
+5. **Simpan kunci peti besi di tempat lain** pada pelayan: tetapkan `TGWITNESS_VAULT_KEY_FILE` sebelum mula pertama.
+6. **Simpan cap jari dan checkpoint** pada sistem lain, jalankan saksi pada hos lain.
 7. **Jangan muat naik** `data/`, sesi, `panel-token.txt` atau kunci vault ke GitHub atau sembang.
 8. **Jangan log** penanda aras `Authorization` atau badan permintaan di proksi terbalik.
 
 **Bolehkah saya menukar token panel tanpa kehilangan data?**
 
-Ya. Token hanya membuka panel. Hentikan TgWitness, padamkan `panel-token.txt` daripada direktori data dan mulakan semula; jurnal, sesi dan kunci tidak terjejas. Apabila `TGWITNESS_TOKEN` ditetapkan, nilai persekitaran digunakan sebaliknya fail.
+Ya, ia hanya membuka panel. Hentikan TgWitness, padam `panel-token.txt`, mulakan semula. Jurnal, sesi dan kunci kekal. Jika `TGWITNESS_TOKEN` ditetapkan, nilai itu mengatasi fail.
 
 **Mengapa mesej tidak disulitkan semasa disimpan?**
 
-Pengumpul mesti membacanya untuk mencari, membandingkan versi dan mengeksport. Mengkripsi dengan kunci pada mesin yang sama hanya menambah sedikit perlindungan terhadap seseorang yang boleh membaca mesin tersebut. Penyulitan cakera melindungi cakera yang dimatikan atau dicuri; kebenaran ketat melindungi cakera yang sedang berjalan.
+Pengumpul perlu membacanya untuk mencari, membandingkan dan mengeksport. Kunci pada mesin yang sama tidak akan menghalang seseorang yang memang boleh membaca mesin itu. Penyulitan cakera melindungi cakera yang dicuri, kebenaran melindungi sistem yang sedang berjalan.
 
 ## Laporkan kerentanan
 
-Gunakan **Security → Laporkan kerentanan** di repositori GitHub. Sertakan versi, impak dan reproduksi sintetik minimum. Jangan sekali-kali menghantar maklumat log masuk, direktori akaun atau arkib bukti sebenar. Jika pelaporan peribadi tidak tersedia, buka isu untuk meminta saluran peribadi tanpa butiran eksploitasi.
+**Security → Report a vulnerability** di GitHub. Versi, kesan dan penghasilan semula minimum dengan data palsu. Jangan sekali-kali hantar kelayakan, folder akaun atau bukti sebenar. Jika pelaporan peribadi dimatikan, buka issue untuk meminta saluran peribadi, tanpa butiran eksploit.

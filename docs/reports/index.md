@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reports/
 
-Give a reader a clear route from the case question to the saved records.
+Take the reader from the case question straight to the saved records.
 
-Report studio combines a data selection, readable change histories, charts and your written findings. Eight integrated designs apply to supported HTML and native PDF outputs. HTML, PDF and JSON reports carry their own signed seals; the ZIP manifest also binds the files in the package. HTML and PDF are sealed after their final layout is complete.
+Report studio puts together the data you pick, change histories, charts and your findings. Eight designs, HTML and native PDF. Every HTML, PDF and JSON report is sealed with your key.
 
 ## Build a report in three steps
 
-1. Open **Exports → Configure and preview → Data**. Use the whole workspace or select chats, authors, inclusive UTC observation dates and record types. The dates describe when TgWitness observed the record.
-2. In **Design & contents**, choose a design and contents preset. Select activity charts, participant labels, the transcript, saved changes and optional Case Board material. Add your case details and examination notes.
-3. Open **Preview** to review counts, activity, participants, sampled records and missing ID ranges. Save the settings, then download the format you need.
+1. **Exports → Configure and preview → Data**: whole workspace, or pick chats, authors, dates (UTC, when TgWitness saw the record) and record types.
+2. **Design & contents**: pick a design and what goes in: charts, participants, transcript, changes, Case Board items, your case details and notes.
+3. **Preview**: check counts, activity, samples and missing ID ranges. Save, then download the format you need.
 
 ### Arrange the same saved material for a reader
 
@@ -55,16 +55,16 @@ Recipient checks the file and trusted fingerprint.
 
 ## Choose a reading style
 
-**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin** present the same underlying records in different compositions. Changing the design keeps the data selection and written notes. Report language can be chosen from the 25 supported languages.
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin**: same records, different look. Switching keeps your selection and notes. Any of the 25 languages.
 
-Reading series groups the case, scope, findings and changes around a section rail. Ledger & margin uses numbered chapters and a wide margin. Both also support account HTML overviews and sharing copies. Native PDFs are generated with bundled fonts; the user's machine needs no browser or Node installation for PDF creation. Chinese, Japanese and Korean PDFs additionally require a suitable font on the server, such as Noto Sans CJK, installed system-wide or placed in `TGWITNESS_FONT_DIR`. Without it, the ZIP keeps the HTML and JSON reports.
+PDFs are built with bundled fonts, no browser needed. Chinese, Japanese and Korean need a font like Noto Sans CJK on the server (system-wide or in `TGWITNESS_FONT_DIR`), otherwise you get HTML and JSON only.
 
 ## Read a change with its context
 
-Saved edits show before and after. A deletion notice can be accompanied by the last captured version. Replies, quotes, forwards, reactions, buttons and attachment metadata retain their available references. File SHA-256 and journal-record hashes are labelled separately.
+Edits show before and after, deletions show the last saved version. Replies, forwards, reactions, buttons and attachments keep their references.
 
-The design preview shows cover, examination and chart components using matching records among the first 50,000 source records. The separate data preview scans the complete stable journal snapshot for exact selection counts, with displayed sample limits labelled. Generate a PDF to inspect final pagination. A full account export has an HTML overview; its individual chat PDFs use the chosen design.
+The design preview uses the first 50,000 records, the data preview counts everything exactly. For final page layout, generate the PDF.
 
 ## Choose the recipient's copy deliberately
 
-Report filters shape the readable report. The full evidence ZIP retains the original journal and attachments. Use a [minimized handover](https://phishdestroy.github.io/TgWitness/docs/handover/) when the recipient should receive only selected data. See [report contents and verification](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/) or [verify the finished export](https://phishdestroy.github.io/TgWitness/docs/exports/).
+Filters only shape the report, the evidence ZIP still has the full journal and files. If the recipient should get less, use a [minimized handover](https://phishdestroy.github.io/TgWitness/docs/handover/). More: [report contents](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/), [verifying the export](https://phishdestroy.github.io/TgWitness/docs/exports/).

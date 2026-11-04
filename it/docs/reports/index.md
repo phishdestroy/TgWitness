@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reports/
 
-Fornire al lettore un percorso chiaro dalla domanda relativa al caso ai record salvati.
+Porti il lettore dalla domanda del caso direttamente alle voci salvate.
 
-Report Studio combina la selezione dei dati, cronologie delle modifiche leggibili, grafici e le conclusioni scritte dall’utente. Otto modelli integrati sono applicabili agli output supportati in formato HTML e PDF nativo. I report in formato HTML, PDF e JSON recano i propri sigilli firmati; il manifesto ZIP raggruppa inoltre i file nel pacchetto. I file HTML e PDF vengono sigillati una volta completato il loro layout finale.
+Report studio mette insieme i dati scelti, le cronologie delle modifiche, i grafici e le Sue conclusioni. Otto design, HTML e PDF nativo. Ogni report HTML, PDF e JSON viene sigillato con la Sua chiave.
 
 ## Creare un rapporto in tre passaggi
 
-1. Aprire **Esportazioni → Configura e visualizza anteprima → Dati**. Utilizzare l’intero spazio di lavoro oppure selezionare chat, autori, date di osservazione UTC incluse e tipi di record. Le date indicano quando TgWitness ha rilevato il record.
-2. Nella sezione **“Design e contenuti**”, scegliere un’impostazione predefinita per il design e i contenuti. Selezionare i grafici delle attività, le etichette dei partecipanti, la trascrizione, le modifiche salvate e il materiale opzionale della Case Board. Aggiungere i dettagli del caso e le note relative all’esame.
-3. Apri **“Anteprima”** per verificare conteggi, attività, partecipanti, record campionati e intervalli di ID mancanti. Salva le impostazioni, quindi scarica il formato che ti serve.
+1. **Esportazioni → Configura e anteprima → Dati**: l’intero spazio oppure chat, autori, date (UTC, quando TgWitness ha visto la voce) e tipi di voce scelti.
+2. **Design e contenuti**: scelga un design e cosa entra: grafici, partecipanti, trascrizione, modifiche, elementi Case Board, dati del caso e note.
+3. **Anteprima**: controlli conteggi, attività, campioni e intervalli di ID mancanti. Salvi, poi scarichi il formato che Le serve.
 
 ### Organizzare lo stesso materiale salvato in modo che risulti comprensibile per il lettore
 
@@ -55,16 +55,16 @@ Il destinatario verifica il file e l’impronta digitale attendibile.
 
 ## Scegli uno stile di lettura
 
-**Le sezioni Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series e Ledger & margin** presentano gli stessi record sottostanti in composizioni diverse. Modificando il layout si mantengono la selezione dei dati e le note scritte. La lingua del report può essere scelta tra le 25 lingue supportate.
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin**: le stesse voci, un aspetto diverso. Cambiando si mantengono selezione e note. Qualsiasi delle 25 lingue.
 
-La serie "Lettura" raggruppa il caso, l’ambito, i risultati e le modifiche attorno a una barra laterale. "Ledger & margin" utilizza capitoli numerati e un ampio margine. Entrambe supportano anche le panoramiche HTML degli account e la condivisione delle copie. I PDF nativi vengono generati con i font inclusi nel pacchetto; il computer dell’utente non necessita dell’installazione di un browser o di Node per la creazione dei PDF. I PDF in cinese, giapponese e coreano richiedono inoltre un font adeguato sul server, come Noto Sans CJK, installato a livello di sistema o collocato nella directory `TGWITNESS_FONT_DIR`. In sua assenza, il file ZIP conserva i report in formato HTML e JSON.
+I PDF si generano con font inclusi, senza browser. Cinese, giapponese e coreano richiedono un font come Noto Sans CJK sul server (di sistema o in `TGWITNESS_FONT_DIR`), altrimenti ottiene solo HTML e JSON.
 
 ## Leggere una modifica nel suo contesto
 
-Le modifiche salvate vengono mostrate prima e dopo. Un avviso di cancellazione può essere accompagnato dall’ultima versione acquisita. Risposte, citazioni, inoltri, reazioni, pulsanti e metadati degli allegati mantengono i riferimenti disponibili. Gli hash SHA-256 dei file e quelli dei record di registro sono etichettati separatamente.
+Le modifiche mostrano prima e dopo, le eliminazioni l’ultima versione salvata. Risposte, inoltri, reazioni, pulsanti e allegati conservano i loro riferimenti.
 
-L’anteprima del layout mostra la copertina, la sezione di analisi e i grafici utilizzando record corrispondenti tra i primi 50.000 record di origine. L’anteprima separata dei dati esamina l’istantanea completa e stabile del registro per ottenere il conteggio esatto delle selezioni, con i limiti del campione visualizzati e contrassegnati. Generare un PDF per verificare l’impaginazione finale. L’esportazione completa dell’account include una panoramica in formato HTML; i singoli PDF delle chat utilizzano il layout scelto.
+L’anteprima del design usa le prime 50.000 voci, quella dei dati conta tutto esattamente. Per l’impaginazione finale generi il PDF.
 
 ## Scegli con cura la versione destinata al destinatario
 
-I filtri dei report ne determinano la leggibilità. Il file ZIP contenente tutte le prove conserva il registro originale e gli allegati. Utilizzare una [procedura di consegna ridotta al minimo](https://phishdestroy.github.io/TgWitness/it/docs/handover/) quando il destinatario deve ricevere solo i dati selezionati. Visualizzare [il contenuto del report e la verifica](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-reports/) oppure [verificare l’esportazione completata](https://phishdestroy.github.io/TgWitness/it/docs/exports/).
+I filtri danno forma solo al report; lo ZIP delle prove contiene sempre il diario e i file completi. Se il destinatario deve ricevere meno, usi una [consegna ridotta](https://phishdestroy.github.io/TgWitness/it/docs/handover/). Altro: [contenuto del report](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-reports/), [verificare l’esportazione](https://phishdestroy.github.io/TgWitness/it/docs/exports/).

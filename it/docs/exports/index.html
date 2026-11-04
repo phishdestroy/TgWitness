@@ -32,55 +32,55 @@
 <nav class="breadcrumbs" aria-label="Guide"><a href="../../">Home</a> <span aria-hidden="true">/</span> <a href="../">Documentazione</a> <span aria-hidden="true">/</span> <span aria-current="page">Esportare e verificare</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Cosa è stato testato →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Cerca nella documentazione</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Si provi con «proxy», «catena di hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Ricerca chiara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Digiti una parola per effettuare una ricerca nelle guide e nella documentazione di riferimento. La ricerca rimane nel Suo browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Documentazione / 07</p><h1>Esportare e verificare</h1><p class="guide-outcome">Fornire ai destinatari i file che possano verificare confrontandoli con l’area di lavoro di raccolta e la relativa cronologia salvata.</p>
+<article class="guide-content"><p class="eyebrow">Documentazione / 07</p><h1>Esportare e verificare</h1><p class="guide-outcome">Consegni file che il destinatario può verificare da solo rispetto al Suo spazio.</p>
 <div class="flow-strip export-flow" aria-label="Trasferimento delle prove: conservare un riferimento attendibile, esportare il file ZIP firmato, verificare con il destinatario"><span>Conservare un riferimento</span><span>Esporta ZIP firmato</span><span>Il destinatario verifica</span></div>
-<p>Non ha familiarità con le firme e i punti di controllo? <a href="../concepts/#chain">Modifichi un record di esempio</a> e verifichi quali controlli lo rilevano.</p>
+<p>Nuovo a firme e punti di controllo? <a href="../concepts/#chain">Modifichi una voce di esempio</a> e veda quali controlli se ne accorgono.</p>
 <p>Desidera conservare una copia al di fuori del sistema di raccolta? Si rechi alla <a href="#s3">configurazione di S3</a>, alla funzione <a href="#s3-retention">«Object Lock»</a> o <a href="#s3-restore">al recupero verificato</a>.</p>
 <h2 id="retain">Conservare un riferimento affidabile</h2>
-<p>Salvi l’impronta digitale della chiave pubblica dell’area di lavoro al di fuori del collettore. Durante la raccolta, conservi i checkpoint firmati in un luogo separato oppure ricorra a un <a href="../witness/">testimone indipendente</a>. Tali riferimenti consentono al destinatario di verificare la chiave e i confini di un registro precedente.</p>
+<p>Annoti l’impronta della chiave dello spazio da qualche parte che non sia il collector. Durante la raccolta conservi altrove anche i punti di controllo firmati, oppure usi un <a href="../witness/">testimone indipendente</a>. È con questo che il destinatario verifica la chiave e uno stato precedente del diario.</p>
 <h2 id="export">Scarichi il file ZIP firmato</h2>
-<p>Aprire <strong>&quot;Exports&quot;</strong> e creare un file ZIP di prove firmato. Esso include il registro completo dell’area di lavoro e un manifesto dei file firmato. Utilizzare <a href="../reports/">&quot;Report Studio&quot;</a> per creare un report di facile lettura, oppure un <a href="../handover/">estratto di consegna</a> per fornire solo i dati selezionati e ridotti al minimo.</p>
-<p>I report in formato HTML, PDF e JSON recano i propri sigilli firmati e possono essere verificati separatamente. Il file CSV è una comoda copia di analisi; utilizzare il file CSV esatto contenuto all’interno del file ZIP verificato per controllarne l’integrità. Conservare il file ZIP firmato quando il destinatario necessita anche dei record di origine e degli allegati.</p>
+<p><strong>Esportazioni</strong> → ZIP di prove firmato. Contiene tutto il diario e un manifest dei file firmato. Dia forma al report leggibile in <a href="../reports/">Report studio</a>, oppure invii solo dati selezionati come <a href="../handover/">estratto di consegna</a>.</p>
+<p>I report HTML, PDF e JSON hanno i propri sigilli. Il CSV è solo una copia di lavoro; per l’integrità usi il CSV dentro lo ZIP verificato.</p>
 <h2 id="verify">Verifichi utilizzando una copia affidabile di TgWitness</h2>
-<p>Nell’ambiente di progetto installato, sostituisca l’impronta digitale di esempio e i percorsi dei file:</p>
+<p>Nell’ambiente del progetto, con la Sua impronta e i Suoi percorsi:</p>
 <pre><code>python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
-<p>Quando entrambi i riferimenti superano la verifica, il risultato riporta <code>key_pinned: true</code> e <code>checkpoint_checked: true</code>. Conservi il risultato della verifica insieme all’archivio originale. Il punto di controllo conservato deve trovarsi al limite dell’esportazione o prima di esso.</p>
+<p>Se va a buon fine vedrà <code>key_pinned: true</code> e <code>checkpoint_checked: true</code>. Conservi quell’output accanto all’archivio. Il punto di controllo deve trovarsi alla fine dell’esportazione o prima.</p>
 <h2 id="meaning">Utilizzare il risultato della verifica</h2>
-<ul><li><strong>Verificare i file consegnati:</strong> il manifesto associa i relativi hash, mentre le firme dei record associano il registro salvato. Viene rilevata la presenza di file modificati o di catene di record interrotte.</li><li><strong>Verificare l’identità dell’area di lavoro:</strong> l’impronta digitale conservata in modo indipendente identifica la chiave di firma prevista.</li><li><strong>Confronta un limite precedente:</strong> un checkpoint conservato verifica l’esportazione rispetto a un prefisso di registro salvato prima del trasferimento.</li><li><strong>Verificare la copertura della raccolta:</strong> lacune, risultati dell’acquisizione e un test controllato di invio → modifica → eliminazione descrivono gli eventi acquisiti da questa configurazione.</li></ul>
-<p>Conservare questi risultati insieme alla copia destinata al destinatario. Verificare <a href="../reference/evidence/#verification-scope">cosa stabilisce la verifica</a> in merito all’ambito dei controlli e alla valutazione separata delle affermazioni delle fonti e della copertura della raccolta.</p>
+<ul><li><strong>File:</strong> il manifest lega i loro hash, le firme legano il diario. Qualsiasi modifica si nota.</li><li><strong>Identità:</strong> l’impronta che ha conservato dimostra che è la chiave attesa.</li><li><strong>Stato precedente:</strong> un punto di controllo confronta l’esportazione con un inizio di diario salvato prima della consegna.</li><li><strong>Copertura:</strong> lacune, risultati di acquisizione e un test invia → modifica → elimina mostrano cosa ha davvero catturato questa configurazione.</li></ul>
+<p>Dettagli: <a href="../reference/evidence/#verification-scope">cosa dimostra la verifica e cosa no</a>.</p>
 
 <h2 id="s3">Configurare la copia off-site su S3</h2>
-<p>Nell’area di lavoro attiva, apra <strong>Esportazioni → Copia esterna</strong>. Questa funzionalità opzionale è compatibile con AWS S3 e altri servizi compatibili con S3. Copia segmenti del registro, foto e file conservati, punti di controllo con le relative risposte con timestamp e esportazioni di chat completate. Ogni oggetto viene crittografato sul collettore con l’algoritmo <code>AES-256-GCM</code> prima del caricamento.</p>
-<p>La demo online mostra gli stessi comandi con la funzione di caricamento disabilitata. Inserisca le credenziali di accesso all’archivio solo nel proprio spazio di lavoro attivo.</p>
+<p><strong>Esportazioni → Copia esterna</strong> nel Suo spazio. Funziona con AWS S3 e qualunque servizio compatibile S3. Copia segmenti del diario, file salvati, punti di controllo con le loro marche temporali ed esportazioni di chat completate, ognuno cifrato con <code>AES-256-GCM</code> prima di lasciare il collector.</p>
+<p>La demo online mostra questi controlli con il caricamento disattivato. Inserisca credenziali reali solo nella Sua installazione.</p>
 <figure><a href="../../../assets/off-site-copy.png"><img src="../../../assets/off-site-copy.png" width="1136" height="825" alt="Pannello completo per il copia fuori sede: endpoint, regione, bucket, chiavi di accesso, pianificazione, Object Lock e controlli delle chiavi di ripristino" loading="lazy"></a><figcaption>Il pannello completo con le opzioni avanzate è espanso. Non vengono visualizzate credenziali di accesso all’archivio.</figcaption></figure>
 <div class="table-wrap"><table><caption>Impostazioni di archiviazione in Esportazioni → Copia esterna</caption><thead><tr><th scope="col">Settore</th><th scope="col">Cosa inserire</th></tr></thead><tbody>
-<tr><th scope="row">Endpoint</th><td>L’URL del servizio di archiviazione, senza percorso del bucket né credenziali. Esempio fittizio: <code>https://s3.example.invalid</code>.</td></tr>
-<tr><th scope="row">Regione</th><td>La regione richiesta dal Suo provider. L’impostazione predefinita dell’applicazione è <code>us-east-1</code>.</td></tr>
-<tr><th scope="row">Bucket</th><td>Un bucket esistente a cui è possibile accedere. Esempio fittizio: <code>example-case-backup</code>.</td></tr>
-<tr><th scope="row">Cartella nel bucket</th><td>Il prefisso dell’oggetto; valore predefinito <code>tgwitness</code>. L’applicazione aggiunge un prefisso derivato dall’impronta digitale della chiave di firma di questo spazio di lavoro.</td></tr>
-<tr><th scope="row">ID chiave di accesso / Chiave di accesso segreta</th><td>Inserisca entrambe le credenziali di archiviazione contemporaneamente. Esse vengono salvate nel vault dell’area di lavoro. Lasci entrambi i campi vuoti nei salvataggi successivi per mantenere la coppia salvata.</td></tr>
-<tr><th scope="row">Indirizzi in formato «path»</th><td>Utilizzi <code>endpoint/bucket</code> se abilitato, oppure <code>bucket.endpoint</code> se disabilitato, a seconda del provider.</td></tr>
-<tr><th scope="row">Intervallo di copia</th><td>Da 1 a 1.440 minuti; impostazione predefinita: 5 minuti. Per le copie programmate, l’applicazione deve essere in esecuzione.</td></tr>
-<tr><th scope="row">Conservazione dei dati con Object Lock</th><td>Giorni di conservazione e modalità per un bucket che supporta Object Lock. L’impostazione “zero giorni” mantiene in vigore la conservazione predefinita del bucket.</td></tr>
+<tr><th scope="row">Endpoint</th><td>URL dello storage, senza percorso del bucket né credenziali. Esempio: <code>https://s3.example.invalid</code>.</td></tr>
+<tr><th scope="row">Regione</th><td>Quella richiesta dal Suo provider. Predefinita <code>us-east-1</code>.</td></tr>
+<tr><th scope="row">Bucket</th><td>Un bucket esistente su cui può scrivere. Esempio: <code>example-case-backup</code>.</td></tr>
+<tr><th scope="row">Cartella nel bucket</th><td>Prefisso, predefinito <code>tgwitness</code>. Si aggiunge un prefisso per spazio.</td></tr>
+<tr><th scope="row">ID chiave di accesso / Chiave di accesso segreta</th><td>Entrambe insieme, salvate nel vault. Le lasci vuote in seguito per mantenerle.</td></tr>
+<tr><th scope="row">Indirizzi in formato «path»</th><td>Attivo: <code>endpoint/bucket</code>. Disattivo: <code>bucket.endpoint</code>. Dipende dal provider.</td></tr>
+<tr><th scope="row">Intervallo di copia</th><td>Da 1 a 1.440 minuti, predefinito 5. Solo mentre l’app è in funzione.</td></tr>
+<tr><th scope="row">Conservazione dei dati con Object Lock</th><td>Giorni e modalità, se il bucket supporta Object Lock. Zero mantiene l’impostazione predefinita del bucket.</td></tr>
 </tbody></table></div>
 <ol>
-<li>Crea il bucket con il tuo provider, quindi inserisci la destinazione e le credenziali. Lascia deselezionata l’opzione <strong>“Conserva una copia fuori sede”</strong> durante la preparazione, quindi seleziona <strong>“Salva copia fuori sede</strong>”.</li>
-<li>Selezionare <strong>«Verifica connessione</strong>». In questo modo verrà caricato un oggetto di prova crittografato e verrà verificata la risposta del sistema di archiviazione.</li>
-<li>Selezionare <strong>«Scarica chiave di crittografia</strong>». Conservare tale file separatamente dal programma di raccolta; è necessario per il ripristino.</li>
-<li>Attivi la casella di controllo <strong>«Conserva una copia fuori sede»</strong> e salvi nuovamente. Selezioni <strong>«Copia ora»</strong> per un’operazione manuale, oppure lasci che la pianificazione proceda automaticamente.</li>
+<li>Crei il bucket, compili destinazione e credenziali con <strong>Mantieni una copia esterna</strong> non selezionato e prema <strong>Salva copia esterna</strong>.</li>
+<li><strong>Testa connessione</strong> carica un oggetto di prova cifrato.</li>
+<li><strong>Scarica chiave di cifratura</strong> e la conservi lontano dal collector. Niente chiave, niente recupero.</li>
+<li>Selezioni <strong>Mantieni una copia esterna</strong>, salvi, poi <strong>Copia ora</strong> oppure lasci girare la pianificazione.</li>
 </ol>
 
 <h2 id="s3-retention">Verifica lo stato di conservazione e l’avanzamento della copia</h2>
-<p>In <strong>“Altre opzioni”</strong>, selezionare i giorni di conservazione e “<code>GOVERNANCE</code>” o “<code>COMPLIANCE</code>” se il proprio bucket supporta Object Lock. TgWitness rileva la modalità di conservazione e la scadenza di un oggetto caricato. Verificare il risultato della conservazione indicato separatamente: confermata, conservazione mancante o verifica non riuscita.</p>
-<p>Il pannello riporta l’ultimo ciclo di elaborazione, il numero di oggetti, i byte trasferiti, il limite del registro copiato ed eventuali errori. La mancanza o la modifica di supporti locali viene segnalata e si procede a un nuovo tentativo nel ciclo successivo. I file, i checkpoint e le esportazioni in coda successivi a tale supporto possono comunque essere copiati.</p>
-<p>I caricamenti utilizzano il percorso Direct, SOCKS5 o HTTP dell’area di lavoro. Scegliere uno di questi percorsi per la copia su S3; un percorso che utilizza esclusivamente MTProxy lascia la copia in sospeso con un errore.</p>
+<p>In <strong>Altre opzioni</strong> scelga i giorni di conservazione e <code>GOVERNANCE</code> o <code>COMPLIANCE</code>. TgWitness rilegge la conservazione da un oggetto caricato e Le indica: confermata, assente o verifica non riuscita.</p>
+<p>Il pannello mostra l’ultimo passaggio, il numero di oggetti, i byte, il limite del diario copiato e gli errori. Un file locale mancante viene segnalato e ritentato al passaggio successivo; il resto continua a essere copiato.</p>
+<p>I caricamenti passano in diretto, via SOCKS5 o HTTP. Con un percorso solo MTProxy la copia resta in attesa con un errore.</p>
 
 <h2 id="s3-key">Conservare la chiave di ripristino in un luogo separato</h2>
-<p>Il file JSON scaricato contiene la chiave di decrittografia, le impostazioni di destinazione, il prefisso dell’oggetto dell’area di lavoro e l’impronta digitale della chiave di firma. Il ripristino richiede sia questo file di chiave sia credenziali di accesso separate con autorizzazione di lettura al bucket. Includerle nel piano di ripristino.</p>
-<p>Se modifica l’endpoint, il bucket o il prefisso della cartella, scarichi nuovamente il file della chiave in modo che le impostazioni di destinazione corrispondano. L’applicazione avvia una nuova copia del registro, dei file e dei checkpoint conservati localmente nella nuova destinazione. Le esportazioni delle chat completate già rimosse dalla coda di caricamento locale rimangono nella loro destinazione precedente.</p>
+<p>Il JSON della chiave contiene la chiave di decifratura, la destinazione, il prefisso e l’impronta della chiave. Per il recupero Le servono questo più credenziali di storage con accesso in lettura.</p>
+<p>Ha cambiato endpoint, bucket o prefisso? Riscarichi la chiave. Nella nuova destinazione parte una copia nuova; le vecchie esportazioni restano dov’erano.</p>
 
 <h2 id="s3-restore">Ripristino e verifica su un altro computer</h2>
-<p>Si utilizzi un’installazione affidabile di TgWitness, il file JSON della chiave scaricato, credenziali di accesso all’archivio con autorizzazione in lettura e una directory di output vuota. Sostituiscano i segnaposto fittizi delle credenziali riportati di seguito.</p>
+<p>Le servono un’installazione di TgWitness affidabile, il JSON della chiave, credenziali di sola lettura e una cartella vuota:</p>
 <h3>Windows PowerShell</h3>
 <pre><code>$env:TGWITNESS_S3_ACCESS_KEY = 'YOUR_READ_ACCESS_KEY'
 $env:TGWITNESS_S3_SECRET_KEY = 'YOUR_READ_SECRET_KEY'
@@ -89,9 +89,8 @@ python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out 
 <pre><code>export TGWITNESS_S3_ACCESS_KEY='YOUR_READ_ACCESS_KEY'
 export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence</code></pre>
-<p>I file scaricati e gli oggetti decriptati rimangono in un archivio temporaneo privato mentre vengono verificati l’intero registro, i checkpoint conservati, nonché gli hash e le dimensioni dei file multimediali preservati. Vengono scartati i percorsi non sicuri, i segmenti di registro in conflitto e i registri più brevi del proprio checkpoint. In caso di verifica fallita, non viene pubblicato alcun file ripristinato.</p>
-<p>Il recupero riuscito produce <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> e <code>exports/</code> per il materiale disponibile nella copia. Conservi il risultato JSON del comando insieme al materiale recuperato.</p>
-<p>Confronta il materiale recuperato con i tuoi checkpoint o registrazioni di testimoni conservati in modo indipendente, quindi esamina la copertura della raccolta registrata per il periodo di cui hai bisogno.</p>
+<p>Prima tutto viene verificato in una cartella temporanea privata: l’intero diario, i punti di controllo, hash e dimensioni dei file. Percorsi non sicuri, segmenti in conflitto o un diario più corto del suo punto di controllo falliscono, e allora non viene scritto nulla.</p>
+<p>Se va bene ottiene <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> ed <code>exports/</code>. Conservi con essi l’output JSON del comando e confronti con i punti di controllo o le voci del testimone che conserva Lei.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/evidence/">Riferimento completo →</a><a class="next-guide" href="../reports/"><span>Passo successivo</span><strong>Progettare un report →</strong></a><p>Le presenti linee guida descrivono l’attuale implementazione. I risultati della convalida e le lacune residue sono documentati separatamente. <a href="../reference/verification/">Cosa è stato testato →</a></p></footer>
 </main>

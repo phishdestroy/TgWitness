@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/case-board/
 
-Transformez les observations Telegram enregistrées en un dossier que votre équipe pourra examiner ensemble.
+Transformez des messages enregistrés en une affaire sur laquelle toute l’équipe travaille.
 
-Case Board conserve les signets, les passages surlignés en texte exact, les extraits enregistrés et les discussions à côté de leurs références sources. Une collection donne à l’affaire une structure de travail ; les révisions signées permettent de retracer l’évolution du dossier au sein de l’équipe.
+Signets, citations exactes, extraits et discussions, chacun relié à sa source. Chaque changement est une révision signée.
 
 ## D’un message à une fiche d’affaire
 
-1. Ouvrez « **Investigation » → « Case Board »** en mode « Standard » ou « Expert ». Créez une collecte pour l'affaire et choisissez la portée de la discussion.
-2. Dans **le Journal** ou une conversation enregistrée, choisissez **« Ajouter au tableau** » ou sélectionnez l’enregistrement puis appuyez sur **B**. La fiche est ajoutée à la Boîte de réception ; donnez-lui un titre pertinent et déplacez-la vers votre collection.
-3. Sélectionnez un passage dans un message de discussion enregistré, puis choisissez **« Mettre en surbrillance » → « Tableau »** pour conserver la citation exacte et la version originale du message. Ajoutez une note expliquant en quoi cela est important.
-4. Discutez de la fiche, attribuez-lui un statut de révision et revenez à son contexte d’origine chaque fois qu’une affirmation doit être vérifiée. Utilisez **la fonction « Présentation »** pour parcourir la collecte avec vos collègues.
+1. **Enquête → Case Board** (mode Standard ou Expert). Créez une collection pour l’affaire.
+2. Dans le **Journal** ou un chat, cliquez sur **Vers le tableau** (ou **B**). La carte arrive dans la boîte de réception : donnez-lui un titre et déplacez-la.
+3. Sélectionnez un texte dans un message : **Surligner → tableau** garde la citation exacte et la version. Notez pourquoi c’est important.
+4. Discutez, donnez un statut et revenez à la source quand il le faut. **Présentation** fait parcourir le tout à l’équipe.
 
 ### Suivre un lien de paiement modifié
 
@@ -48,16 +48,16 @@ Les annotations et l’observation des messages Telegram restent identifiables s
 
 ## Enregistrer une plage utile une seule fois
 
-Cliquez en maintenant la touche Maj enfoncée sur deux enregistrements dans une même conversation pour **effectuer** **une « Slice » entre eux**, choisissez **«** **Slice by time** » (Découper **par heure**) ou enregistrez les filtres actuels du Journal. Vérifiez le nombre d’enregistrements avant d’enregistrer. Rouvrez la « Slice » pour appliquer la requête enregistrée ; l’option **« Show records added since bookmark » (**Afficher les enregistrements **ajoutés depuis le signet)** permet de visualiser les ajouts ultérieurs.
+Maj-clic sur deux messages pour **Extrait entre**, utilisez **Extrait par période** ou enregistrez les filtres actuels du journal. **Afficher les entrées ajoutées depuis le signet** montre ce qui est arrivé ensuite.
 
-Une tranche temporelle suit l’heure d’observation du collecteur. Une tranche d’identifiants de messages peut suivre les messages sélectionnés à mesure que des modifications ultérieures surviennent. La limite de création enregistrée permet à un destinataire de comparer la sélection d’origine avec son état ultérieur.
+Les extraits par période utilisent l’heure d’observation ; les extraits par ID suivent ces messages quand ils changent.
 
 ## Attribuez à chaque collègue le rôle qui lui correspond
 
-**Le réviseur** consulte le tableau ; **l’analyste** ajoute des fiches et des commentaires ; **l’opérateur** gère également les collectes et les décisions de révision. Les autorisations d’accès à l’espace de travail et au chat s’appliquent aux fiches, au contexte des sources et aux discussions. Utilisez des autorisations d’accès nommées pour une attribution claire.
+**Relecteur** lit, **Analyste** ajoute des cartes et des commentaires, **Opérateur** gère en plus les collections et les décisions. Les droits sur les chats s’appliquent aussi aux cartes.
 
 ## Transposer ce travail en un livrable
 
-Exportez une tranche au format JSON signé, ou utilisez le format CSV pour une feuille de calcul. Les paramètres du rapport peuvent inclure des signets et des tranches, ainsi que des commentaires de l’équipe si cette option est sélectionnée. Sélectionnez ces éléments dans [Report Studio](https://phishdestroy.github.io/TgWitness/fr/docs/reports/) ; une tranche enregistrée ne configure pas automatiquement un rapport. Pour un destinataire soumis à des restrictions d’accès, utilisez les [commandes de transfert](https://phishdestroy.github.io/TgWitness/fr/docs/handover/) dédiées.
+Les extraits s’exportent en JSON signé ou en CSV. Les rapports peuvent inclure signets, extraits et commentaires : réglez cela dans [Report studio](https://phishdestroy.github.io/TgWitness/fr/docs/reports/). Pour un destinataire limité, utilisez une [transmission](https://phishdestroy.github.io/TgWitness/fr/docs/handover/).
 
-Consultez la [référence relative au « Case Board »](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/) pour les révisions signées, la correspondance exacte des citations, la vérification des sélections et les autorisations.
+Détails : [référence Case Board](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/).

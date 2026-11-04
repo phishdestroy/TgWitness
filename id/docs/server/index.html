@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../">Dokumentasi</a> <span aria-hidden="true">/</span> <span aria-current="page">Jaga agar tetap berjalan</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentasi / 17</p><h1>Jaga agar tetap berjalan</h1><p class="guide-outcome">Pastikan pengumpul tetap tersedia dan datanya tetap utuh meskipun sistem di-restart.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentasi / 17</p><h1>Jaga agar tetap berjalan</h1><p class="guide-outcome">Jaga kolektor tetap berjalan dan data aman melewati restart.</p>
 <h2 id="launch">Pilih metode peluncuran</h2>
-<p>Untuk instalasi lokal, gunakan <a href="../start/">peluncur</a> dan contoh layanan yang terdapat di <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">folder `deploy/`.</a> Untuk Docker, instal Docker dengan Compose dan jalankan dari direktori proyek:</p>
+<p>Native: <a href="../start/">peluncur</a> ditambah templat layanan di <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a>. Docker, dari folder proyek:</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>Panel default mendengarkan pada alamat loopback host, port 8787. Buka panel tersebut secara lokal atau melalui terowongan SSH. Gunakan token dari perintah kedua untuk membuka kunci panel.</p>
+<p>Panel mendengarkan di localhost:8787. Buka secara lokal atau lewat tunnel SSH, dengan token dari perintah kedua.</p>
 <h2 id="storage">Pertahankan seluruh direktori data</h2>
-<p>Instalasi lokal menggunakan <code>data/live</code>. Docker menggunakan volume <code>tgwitness-data</code> yang persisten. Simpan jurnal, sesi akun, kunci, dan status operasional secara bersamaan. Ekspor yang ditandatangani merupakan bukti yang berguna, tetapi bukan cadangan instalasi lengkap.</p>
-<ol><li>Hentikan pengumpulan data sebelum membuat cadangan yang konsisten.</li><li>Salin seluruh direktori data pribadi ke penyimpanan yang terlindungi di luar host.</li><li>Uji pemulihan pada instalasi terisolasi sebelum mengandalkan cadangan tersebut.</li></ol>
+<p>Native: <code>data/live</code>. Docker: volume <code>tgwitness-data</code>. Jurnal, sesi, dan kunci harus bersama. Ekspor bertanda tangan adalah bukti, bukan cadangan.</p>
+<ol><li>Hentikan pengumpulan dulu.</li><li>Salin seluruh direktori data ke tempat aman di luar host.</li><li>Coba pulihkan di instalasi terpisah sebelum Anda mempercayainya.</li></ol>
 <h2 id="check">Periksa kembali setelah restart</h2>
-<p>Pastikan ruang kerja dan kunci yang diharapkan, koneksi Telegram, sumber yang dipilih, serta penangkapan pesan baru. Status MTProto yang disimpan dan fitur penyesuaian membantu memulihkan pembaruan yang masih disimpan oleh Telegram. Alat ini tidak dapat merekonstruksi setiap pembaruan yang telah kedaluwarsa atau pengeditan yang dihapus sebelum penangkapan.</p>
-<p class="callout">Kondisi kontainer yang baik berarti server web merespons. Gunakan pesan terkontrol dan pemeriksaan saksi untuk mengevaluasi pengumpulan data dan publikasi eksternal.</p>
+<p>Periksa ruang kerja dan kunci, koneksi, sumber, dan apakah pesan baru masuk. TgWitness mengejar apa yang masih dimiliki Telegram, bukan semua yang terjadi selama ia mati.</p>
+<p class="callout">Kontainer "sehat" berarti server web menjawab. Apakah pengumpulan berjalan, pesan uji dan saksi yang akan memberi tahu.</p>
 <h2 id="public">Hanya publikasikan apa yang Anda maksudkan</h2>
-<p>Referensi penerapan mencakup contoh HTTPS, perintah volume persisten, pembaruan, dan langkah-langkah pemulihan. Perintah Docker disediakan untuk penerapan; <a href="../reference/verification/">catatan validasi</a> saat ini mengidentifikasi lingkungan yang benar-benar telah diuji.</p>
+<p>HTTPS, volume, pembaruan, dan pemulihan ada di referensi deployment. Yang benar-benar diuji: <a href="../reference/verification/">catatan validasi</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">Referensi lengkap →</a><a class="next-guide" href="../troubleshooting/"><span>Langkah selanjutnya</span><strong>Temukan apa yang salah →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../reference/verification/">Apa yang telah diuji →</a></p></footer>
 </main>

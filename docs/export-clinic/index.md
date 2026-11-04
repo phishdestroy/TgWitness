@@ -73,6 +73,76 @@ A console could calculate hashes, sign data and report successful verification e
 
 The acquisition environment, collector key, observation coverage and independent checkpoints matter. TgWitness signatures are collector attestations. Direct API collection does not remove these trust assumptions. [Explore the evidence model](https://phishdestroy.github.io/TgWitness/docs/concepts/).
 
+## What Forensic Tools Actually Certify
+
+Export Clinic demonstrates one specific case. The pattern it reveals is not specific to Telegram.
+
+In the overwhelming majority of proceedings we have reviewed — across court filings, case discussions, and published analyses — "digital evidence" follows a consistent format: a Telegram export (HTML or JSON file, sometimes a screen recording of a monitor, sometimes a video from an iPhone navigating through profile pages) paired with an expert signature. That is typically the entire evidentiary chain.
+
+Telegram does not cryptographically sign its export output. It has never claimed to. The export feature exists for personal data portability. Somewhere along the way, someone decided these files carry evidentiary weight in court — and that assumption has rarely been challenged at the technical level. In our assessment, this is one of the most significant open gaps in digital forensics practice today.
+
+### The Tools Are Honest. The Problem Is What People Assume They Prove.
+
+We have worked with UFED Cellebrite directly. It is excellent software. When it extracts data from a device, calculates SHA-256 hashes, and produces a signed report, it is accurately certifying exactly one thing: *these bytes were on this device at the time of extraction, and nothing changed in transit.*
+
+That is real. That is useful. That is the complete extent of what it proves.
+
+It says nothing about what was on the device before law enforcement touched it. It says nothing about whether the data reflects historical reality. The tool is correct. The tool is not a witness.
+
+We could take tools specifically built to handle Telegram chat exports — viewers, archivers, court-presentation wrappers — test each one against prepared export files, and produce a comparison table. We won't. The point isn't which tool catches what. None of them can. They process what the export contains. If the export was constructed before it reached them, they report the construction faithfully.
+
+A cryptographic signature certifies the integrity of data *from the moment of signing forward*. It makes no claim about what happened before. If the input was constructed before extraction, the report is cryptographically perfect and factually false. The tool reports both outcomes identically.
+
+### The Accountability Gap
+
+Imagine a jurisdiction where forensic equipment is procured through public tenders — versions, configurations, and acquisition timelines available in public records. Where no law requires devices to carry current firmware. Where expert witnesses bear no personal criminal liability before a court for their conclusions.
+
+In the United States and United Kingdom, a forensic examiner faces individual legal accountability for every action they take with evidence. That accountability — not the software — is what makes the evidence chain function. Remove it, and the same tool that serves justice becomes available to serve whatever purpose the license holder finds convenient.
+
+**Technical construction of pre-seizure device state**
+
+If a subject learns of an impending seizure with sufficient lead time — seven days is more than enough — panic responses are both counterproductive and, in some jurisdictions, separately criminal. A prepared subject with technical access and resources does something different: they construct a device state.
+
+**The firmware window.** Top-tier Samsung Galaxy S Ultra, Z Fold — Knox protection, locked bootloader. The gap between a security patch release and its availability for a specific regional device routinely reaches a month. For newly launched models the window in the first three to four months is considerably wider. No jurisdiction we are aware of legally requires current firmware on a personal device.
+
+**Service-level tools.** Commercial servicing software provides low-level device access during this window without triggering the Knox tamper indicators a forensic examiner would look for.
+
+**Timeline construction.** A full device backup deployed to an emulator, script-driven time manipulation and network isolation, allow construction of a desired event timeline: calls, messages, application activity, GPS coordinates.
+
+**Location without cellular exposure.** Cellular tower billing records are independently verifiable — don't touch them. Instead, connections to public Wi-Fi access points are logged. The MAC addresses of public infrastructure are systematically collected and distributed by major technology corporations. A continuous geographic chain covering any desired period can be assembled from publicly available data.
+
+**Account rotation.** Samsung account deletion takes approximately seven days for complete removal. A new account is created, the prepared backup is restored. No system integrity conflicts, bootloader untouched, no tamper flag triggered.
+
+**Telegram specifically.** On certain device families, the application database and cache — conversations, media, notification metadata, activity patterns — can be replaced at the OS capability level without classical root access. Deep analysis by specialists examining a full raw dump could potentially detect anomalies. That analysis is expensive, slow, and in our experience essentially never requested in standard proceedings.
+
+### Garbage In, Garbage Out
+
+The signed report is accurate. It proves nothing about what preceded the extraction.
+
+The chain that follows — expert witnesses reading the tool output, writing analyses, signing conclusions — is similarly accurate at each individual step. No one in the chain is lying. No one in the chain is proving historical truth. Each participant accurately reports what they received from the previous step.
+
+A doctoral degree is a record of completed past research. It is not a current competence certification, and it cannot make a mathematically unverifiable claim true. We propose a different standard: **trust the math, not the title.**
+
+### Zero Trust for Evidence
+
+In information security, "Zero Trust" means no actor is trusted by default regardless of position or credentials — every claim must be independently verified. We propose applying the same principle to digital evidence. Trust is a vulnerability. If a claim cannot be verified independently and mathematically, it is a trust claim — and trust can be misplaced, purchased, or coerced.
+
+For Telegram export evidence specifically: do not trust us, do not trust Telegram, do not trust the analyst, do not trust the expert witness. Verify the math.
+
+What that looks like in practice: TgWitness attestations reference the SLSA v1 Level 3 model — build provenance signed by GitHub Actions infrastructure, bound to a specific commit hash and workflow run. The attestation can be verified independently, without trusting any individual involved in the collection. It does not remove all trust assumptions — it documents exactly which assumptions remain, and what they are.
+
+**On expert witnesses and financial incentives**
+
+A lawyer representing one party in a dispute, presenting themselves simultaneously as a neutral third-party expert in the same proceeding, with compensation tied to their client's outcome: this is a structural contradiction. We are not making accusations about any individual. We are asking why this structure is considered acceptable, and why it is so rarely examined.
+
+The standard counter-argument: *how much would lying cost them?* In jurisdictions with right to erasure and right to be forgotten, the practical cost of pursuing expert perjury is frequently: very little. Those who raise concerns about an incorrect expert conclusion tend to receive legal correspondence requesting the concerns stop. That process is expensive for the person raising concerns. It is not expensive for the expert.
+
+We are not suggesting all expert witnesses are dishonest. We are suggesting that "it would cost them too much to lie" is not a proof standard. It is a trust standard. And trust is a vulnerability.
+
+A subject who wishes to challenge a TgWitness attestation would need to compromise the cryptographic signature, convince GitHub's signing infrastructure to retroactively attest something it never ran, and do so against an immutable commit history — with a witness present. If those capabilities exist and have merely been concealed beneath difficulty operating PDF software, we would genuinely welcome the demonstration.
+
+We are not claiming our tools are better — we do not have a commercial product and have no interest in one. We observed a problem: the widespread assumption that forensic software output equals historical truth, and that expert signatures equal proof. That assumption is rarely challenged at the technical level in the proceedings where it matters most. This experiment is one controlled data point. The math has no opinion about titles.
+
 No signing-console demonstration is claimed to appear in this recording.
 
 ## Download the materials

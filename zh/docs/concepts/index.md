@@ -2,26 +2,26 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/concepts/
 
-消息内容可能会发生变化，但您所观察到的记录应始终可核查。
+消息会变。您对所见内容的记录不应改变，而且任何人都应能核查这一点。
 
-请在下方探索两个小型实验。它们使用虚构的消息，完全在您的浏览器内运行，且绝不会连接到 Telegram。
+下面是两个小实验。消息是虚构的，一切都在您的浏览器中运行，不会发送到 Telegram。
 
 ## 从聊天记录导出到可验证的记录
 
-[Telegram Desktop 的导出功能可](https://telegram.org/blog/export-and-more)将可用的聊天记录和媒体文件保存为 HTML 或 JSON 格式，以便离线使用。TgWitness 增加了接收变更的持续日志、对观察结果和导出文件的签名，以及收件人可独立进行比对的检查点。
+[Telegram Desktop 导出](https://telegram.org/blog/export-and-more)将当前可见的历史保存为 HTML 或 JSON。TgWitness 增加了持续的变更日志、每条记录的签名，以及他人可以对照的检查点。
 
 | 任务 | Telegram Desktop 导出 | TgWitness |
 | --- | --- | --- |
 | 阅读已保存的对话 | HTML 或 JSON 格式，含选定媒体文件 | 已保存的聊天记录、可搜索的日志和离线报告 |
-| 跟踪随时间的变化 | 导出时可用的历史记录 | 早期捕获的版本、后续编辑以及删除记录将一并保留 |
-| 移交后检查文件 | 标准的 HTML/JSON 导出文件未签名 | 已签名的清单、每条记录的签名以及经过可信采集器密钥验证的密封 HTML/PDF/JSON 报告 |
+| 跟踪随时间的变化 | 导出时可用的历史记录 | 旧版本、后续编辑和删除，全部保留 |
+| 移交后检查文件 | 标准的 HTML/JSON 导出文件未签名 | 签名清单、签名记录和封印报告，用可信密钥核查 |
 | 与先前保留的状态进行比较 | 请保留一份单独的参考副本或哈希值 | 已签名的检查点、独立的见证文件以及可选的外部时间戳 |
 
-文件签名对比基于 2026 年 11 月 2 日审核的 [Telegram Desktop 导出工具](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output)。TgWitness 使用采集器的密钥进行签名；下文的验证步骤展示了接收方如何使用该密钥。
+本对比基于截至 2026 年 11 月 2 日的 [Telegram Desktop 导出代码](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output)。
 
 ## 一条消息，三点观察
 
-当 Telegram 发送新消息、编辑通知或删除通知时，采集器会分别追加三条独立的记录。编辑操作不会替换最初的记录，删除通知也不会将其清除。
+一条新消息、一次编辑和一次删除会变成三条独立的记录。编辑不会覆盖第一条，删除也不会抹掉它。
 
 01 / 消息流转示例流程
 
@@ -61,11 +61,11 @@ Telegram delivers an update to the collector, which appends a journal record. ·
 
 针对已选定来源的简化路径。操作记录也会同步到真实的日志中。捕获内容取决于该账户的可见范围以及 Telegram 实际发送的内容。
 
-删除通知既不提供可靠的删除时间，也不说明是谁删除了该消息。保持这些值的未知状态，有助于区分“观察”与“猜测”。
+Telegram 不会告诉您是谁删除了消息，也不会告诉确切时间。TgWitness 将这些字段留空，而不是去猜测。
 
 ## 修改一条记录。追踪哈希值。
 
-每条记录都包含前一条记录的哈希值。其自身的哈希值涵盖了事件字段，包括该链接。一个外部保留的检查点固定了日志的特定长度和起始哈希值。
+每条记录都包含前一条记录的哈希。保存在别处的检查点固定了日志长度和最后一个哈希。
 
 02 / HASH-CHAIN SANDBOX真实的 SHA-256 · 记录示例
 
@@ -105,23 +105,23 @@ h0 = 064
 hi = hex(SHA-256(C(ei)))
 σi = Ed25519.Sign(sk, unhex(hi))
 
-**C** 将九个事件字段序列化为 UTF-8 格式的 JSON：键按顺序排列，无额外空格，不进行 ASCII 转义，且不包含 NaN/无穷大值。该事件的 `previous_hash` 值为 hi−1。显示的 h0 表示 64 个零字符；签名覆盖了 32 个原始摘要字节。
+**C** 是以 UTF-8 JSON 表示的九个事件字段：键已排序，无多余空白，无 ASCII 转义，无 NaN/无穷大。`previous_hash` 是 hi−1，h0 是 64 个零，签名覆盖 32 字节的原始摘要。
 
-这九个字段分别为 `seq`、`observed_at`、`source_at`、`kind`、`chat_id`、`message_id`、`actor_id`、`payload` 和 `previous_hash`。这是 TgWitness [文档中记载的 JSON 编码格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#event-canonicalization)；哈希值和签名本身并非哈希输入字段。
+字段：`seq`、`observed_at`、`source_at`、`kind`、`chat_id`、`message_id`、`actor_id`、`payload`、`previous_hash`。完整规范：[事件编码](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#event-canonicalization)。
 
 保留检查点
 
 Nexport ≥ Ncheckpoint
 hexport[Ncheckpoint] = Hcheckpoint
 
-请验证固定收集器密钥下的检查点签名，然后将其边界与已验证的日志进行比对。后续导出的文件可能包含更多记录，但其内容在较早的检查点处仍须与原日志一致。
+用固定的密钥检查检查点签名，然后将其与日志比较。之后的导出可以更长，但在检查点处必须一致。
 
 ## 三个问题，三种不同的核查方式
 
-[01 / 完整性**该记录是否发生了变化？** 使用独立的可信密钥验证哈希值和签名。](https://phishdestroy.github.io/TgWitness/zh/docs/exports/)[02 / 连续性**之前保留了哪些内容？** 将签名导出文件与由独立见证方保存的检查点进行比对。](https://phishdestroy.github.io/TgWitness/zh/docs/witness/)[03 / 交付**这些测试事件是否已到达？** 将受控的发送、编辑和删除操作与每个账户的日志进行比对。](https://phishdestroy.github.io/TgWitness/zh/docs/cases/)
+[01 / 完整性**该记录是否发生了变化？** 用您信任的密钥核查哈希和签名。](https://phishdestroy.github.io/TgWitness/zh/docs/exports/)[02 / 连续性**之前保留了哪些内容？** 将导出与见证人保存的检查点比较。](https://phishdestroy.github.io/TgWitness/zh/docs/witness/)[03 / 交付**这些测试事件是否已到达？** 发送、编辑和删除测试消息，看看每个账户捕获了什么。](https://phishdestroy.github.io/TgWitness/zh/docs/cases/)
 
-使用签名核查保留的记录，使用检查点与较早的边界进行比对，并使用受控交付测试来衡量采集效果。每项操作都旨在解答一个具体问题。[请阅读验证范围和信任假设。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)
+签名回答“是否被改过”，检查点回答“是否与之前的一致”，测试消息回答“我们是否捕获了全部”。[验证能证明什么、不能证明什么。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)
 
-[全程追踪从获取账户到整理案件资料包的完整调查](https://phishdestroy.github.io/TgWitness/zh/docs/cases/)过程。
+下一步：从开始到案件包的[整个账户调查](https://phishdestroy.github.io/TgWitness/zh/docs/cases/)。
 
 [Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../">التوثيق</a> <span aria-hidden="true">/</span> <span aria-current="page">حافظ على أمانها</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">ما تم اختباره ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">التوثيق / 14</p><h1>حافظ على أمانها</h1><p class="guide-outcome">تعرف على مسارات Telegram وقوائم البروكسيات العامة والخدمات الخارجية الاختيارية. اعرف ما يتيحه كل سر، وما تغطيه وسائل الحماية، وما تتركه لك.</p>
+<article class="guide-content"><p class="eyebrow">التوثيق / 14</p><h1>حافظ على أمانها</h1><p class="guide-outcome">ما الذي يغادر جهازك، وما الذي يفتحه كل سر، وما الذي تغطيه الحمايات مقابل ما يقع على عاتقك.</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>عنوان اللوحة افتراضيًّا</span></div><div role="listitem"><strong>256 بت</strong><span>رمز لوحة عشوائي</span></div><div role="listitem"><strong translate="no">0</strong><span>شبكات توزيع المحتوى (CDNs)، أو أدوات التحليل، أو الخطوط عن بُعد</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>توقيع على كل سجل</span></div></div>
 <h2 id="map">المكان الذي يُحفظ فيه كل شيء</h2>
-<p>يظل برنامج التجميع ولوحته وكل سجل محفوظ على الكمبيوتر أو الخادم الذي تقوم بتشغيله عليه. Telegram هو الوجهة الوحيدة بشكل افتراضي؛ أما كل وجهة أخرى فهي خيار منفصل.</p>
+<p>المُجمِّع واللوحة وكل سجل تبقى على جهازك. افتراضيًا لا يُتصل إلا بـ Telegram، وكل ما عداه مفتاح منفصل.</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / ما يخرج من الجهاز</span><span class="sample-tag">التثبيت</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="تشغيل أو إيقاف تشغيل الوجهات الاختيارية"><button type="button" data-flow-toggle="replica" aria-pressed="false">نص خارج الموقع</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">الإشعارات</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">الطوابع الزمنية</button><button type="button" data-flow-toggle="witness" aria-pressed="false">Witness</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>سري</th><th>مكان حفظها</th><th>ما يتيحه هذا الموقع</th><th>في حالة التسريب</th></tr></thead>
 <tbody>
-<tr><td><strong>رمز اللوحة</strong></td><td><code>panel-token.txt</code> في دليل البيانات؛ ويحتفظ المتصفح به لعلامة التبويب فقط</td><td>كل شيء في كل مساحة عمل: القراءة والتصدير، وتغيير النطاق، وتسجيل الدخول إلى الحسابات</td><td>أوقف TgWitness، واحذف الرمز <code>panel-token.txt</code>، ثم أعد تشغيله: يتم إنشاء رمز جديد</td></tr>
+<tr><td><strong>رمز اللوحة</strong></td><td><code>panel-token.txt</code> في دليل البيانات، ويحتفظ به المتصفح لكل علامة تبويب</td><td>كل شيء في كل مساحة عمل</td><td>أوقف TgWitness، واحذف <code>panel-token.txt</code>، وشغّله من جديد: تحصل على رمز جديد</td></tr>
 <tr><td><strong>جلسة Telegram</strong></td><td>خزينة مشفرة (<code>credentials.enc</code>)</td><td>حساب Telegram نفسه</td><td>أنهِ الجلسة في Telegram من خلال <em>«الإعدادات» → «الأجهزة»</em></td></tr>
-<tr><td><strong>مفتاح التوقيع</strong></td><td>خزينة مشفرة (<code>signing.enc</code>)</td><td>توقيع السجلات التي يمكن التحقق منها باستخدام بصمتك الرقمية</td><td>يُحتفظ بنقاط التحقق في مكان آخر، ويُظهر الشاهد والطوابع الزمنية ما كان موجودًا من قبل</td></tr>
-<tr><td><strong>مفتاح الخزنة</strong></td><td><code>vault.key</code> بجانب البيانات، أو مفتاح رئيسي خارجي لدليل بيانات جديد</td><td>فك تشفير الخزنة</td><td>اعتبر الجلسة ومفتاح التوقيع على أنهما قد تسربا أيضًا</td></tr>
-<tr><td><strong>رمز Witness</strong></td><td>على مضيف Witness</td><td>للقراءة فقط: نقاط التحقق الموقعة وحالة السلامة</td><td>احذفها من صفحة Witness؛ وأنشئ واحدة جديدة</td></tr>
-<tr><td><strong>نص خارج الموقع</strong></td><td>Vault؛ قم بتنزيله مرة واحدة لاستعادة البيانات</td><td>فك تشفير النسخة الخارجية</td><td>ويمكن لأي شخص يمتلك النسخ المخزنة فك تشفيرها: تعامل مع تلك النسخة على أنها مكشوفة</td></tr>
+<tr><td><strong>مفتاح التوقيع</strong></td><td>خزينة مشفرة (<code>signing.enc</code>)</td><td>توقيع السجلات تحت بصمتك</td><td>نقاط التحقق المحفوظة في مكان آخر والشاهد والطوابع الزمنية تظل تُظهر ما كان موجودًا من قبل</td></tr>
+<tr><td><strong>مفتاح الخزنة</strong></td><td><code>vault.key</code> بجانب البيانات، أو مفتاح رئيسي خارجي</td><td>الخزنة</td><td>افترض أن الجلسة ومفتاح التوقيع قد تسرّبا أيضًا</td></tr>
+<tr><td><strong>رمز Witness</strong></td><td>على مضيف Witness</td><td>للقراءة فقط: نقاط التحقق والحالة</td><td>احذفه في صفحة الشاهد، وأنشئ واحدًا جديدًا</td></tr>
+<tr><td><strong>نص خارج الموقع</strong></td><td>Vault؛ قم بتنزيله مرة واحدة لاستعادة البيانات</td><td>النسخة خارج الموقع</td><td>من يملك الحاوية أيضًا يستطيع فك تشفيرها: اعتبر النسخة مكشوفة</td></tr>
 </tbody></table></div>
 <h2 id="threats">ما تغطيه إجراءات الحماية</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> تم تغطيته</h3><ul>
-<li>أي سجل تم تغييره أو حذفه أو إعادة ترتيبه في عملية التصدير: لن يكون من الممكن التحقق من سلسلة التجزئة أو التوقيع بعد ذلك.</li>
-<li>يتم تقليص السجل أو إعادة بنائه بعد الاحتفاظ بنقطة فحص في مكان آخر: لم تعد نقطة الفحص المحتفظ بها متطابقة.</li>
-<li>تخمين رمز اللوحة: 256 بت عشوائي، تتم مقارنتها في وقت ثابت؛ وبعد 15 محاولة فاشلة في الدقيقة، يتم رفض العنوان.</li>
-<li>محتوى الدردشة العدائية: يتم إدراج النص كنص عادي، وليس أبدًا بتنسيق HTML؛ ويتم تنزيل المرفقات كملفات؛ ولا يقوم اللوحة بتحميل أي شيء من مواقع أخرى.</li>
-<li>دليل بيانات منسوخ مزود بمفتاح خزينة خارجي: تظل الجلسات ومفاتيح التوقيع مشفرة بدون المفتاح الرئيسي.</li>
+<li>سجل مُغيَّر أو محذوف أو مُعاد ترتيبه: تنكسر سلسلة التجزئة أو أحد التوقيعات.</li>
+<li>سجل مقصوص أو مُعاد بناؤه بعد أن حفظت نقطة تحقق في مكان آخر: تتوقف نقطة التحقق عن المطابقة.</li>
+<li>تخمين الرمز: 256 بت عشوائية، ومقارنة بزمن ثابت، و15 محاولة فاشلة في الدقيقة تحظر العنوان.</li>
+<li>محتوى محادثات عدائي: النص يبقى نصًا ولا يصير HTML أبدًا، والمرفقات تُنزَّل كملفات، واللوحة لا تحمّل شيئًا من مواقع أخرى.</li>
+<li>دليل بيانات مسروق مع مفتاح خزنة خارجي: الجلسات والمفاتيح تبقى مشفّرة.</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> الأمر متروك لك</h3><ul>
-<li>يتمتع رمز اللوحة الرئيسية بالسيطرة الكاملة. امنح الآخرين وصولاً محدوداً إلى الحسابات والمحادثات والإجراءات التي يحتاجون إليها؛ واحتفظ بسرية المفتاح الرئيسي.</li>
-<li>يمكن لمسؤول الجهاز قراءة كل شيء وإعادة كتابة السجل وتوقيعه من جديد. احتفظ بالبصمة ونقاط التحقق على نظام آخر.</li>
-<li>لا تقوم TgWitness بتشفير نص الرسائل أو الوسائط المرفقة. استخدم تشفير القرص وأذونات الوصول الصارمة.</li>
-<li>يؤدي استخدام بروتوكول HTTP العادي خارج نطاق localhost إلى إظهار الرمز المميز على الشبكة. استخدم بروتوكول HTTPS أو نفق SSH.</li>
-<li>تحقق من السجلات المحفوظة باستخدام التوقيعات ونقاط التحقق. راجع نطاق التجميع واختبر عملية التسليم للحسابات والمصادر التي تستخدمها.</li>
+<li>الرمز الرئيسي يفعل كل شيء. امنح الآخرين وصولاً محدود النطاق واحتفظ بالرئيسي لنفسك.</li>
+<li>من يكون مسؤولاً على الجهاز يستطيع قراءة كل شيء وإعادة توقيع السجل. احفظ البصمة ونقاط التحقق في مكان آخر.</li>
+<li>لا يشفّر TgWitness الرسائل والوسائط. شفّر القرص، وشدّد الصلاحيات.</li>
+<li>HTTP العادي خارج localhost يسرّب الرمز. استخدم HTTPS أو نفق SSH.</li>
+<li>التوقيعات لا تخبرك بما فاتك. راجع التغطية واختبر التسليم على حساباتك ومصادرك.</li>
 </ul></section>
 </div>
-<p><a href="../access/">مشاركة الوصول إلى قضية ما</a> مع أذونات، وتواريخ انتهاء الصلاحية، وحدود الجلسة. ويظل رمز «Witness» بمثابة بيانات اعتماد منفصلة.</p>
+<p><a href="../access/">شارك الوصول إلى قضية</a> مع صلاحيات وانتهاء صلاحية وحدود للجلسات.</p>
 <h2 id="hardening">تعزيز أمان التثبيت</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>تم إنجاز 0 من 8</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>استخدم حساب Telegram مخصصًا</strong> — ولا تستخدم حسابك الرئيسي أبدًا. يمنحك رمز اللوحة وجلسة العمل السيطرة الكاملة عليه.</span></li>
-<li><span class="check-text"><strong>احتفظ باللوحة على العنوان 127.0.0.1.</strong> ولا تصل إليها عن بُعد إلا عبر HTTPS (تكوين Caddy المدمج) أو نفق SSH.</span></li>
-<li><span class="check-text"><strong>تشفير القرص</strong> الذي يحتوي على دليل البيانات: يتم تخزين نص الرسائل والملفات الوسائطية كما وصلت.</span></li>
-<li><span class="check-text"><strong>قصر دليل البيانات</strong> على حساب الخدمة. تُمنح الدلائل الجديدة الوضع 0700 في نظام Unix؛ أما في نظام Windows، فقم بتعيين أذونات المجلد.</span></li>
-<li><span class="check-text"><strong>احتفظ بالمفتاح الرئيسي للخزينة في مكان آخر</strong> على الخوادم: قم بتعيين <code>TGWITNESS_VAULT_KEY_FILE</code> قبل إنشاء دليل البيانات.</span></li>
-<li><span class="check-text"><strong>احفظ بصمة مفتاح التوقيع ونقاط التحقق</strong> على نظام آخر، وأضف شاهدًا على مضيف آخر.</span></li>
+<li><span class="check-text"><strong>استخدم حساب Telegram مخصصًا</strong>، ولا تستخدم حسابك الرئيسي أبدًا.</span></li>
+<li><span class="check-text"><strong>أبقِ اللوحة على 127.0.0.1.</strong> الوصول عن بُعد فقط عبر HTTPS (Caddy المرفق) أو نفق SSH.</span></li>
+<li><span class="check-text"><strong>شفّر القرص</strong> الذي يضم دليل البيانات، فالرسائل والوسائط تُخزَّن كما هي.</span></li>
+<li><span class="check-text"><strong>قيّد دليل البيانات</strong> بحساب الخدمة (0700 على Unix، وصلاحيات المجلد على Windows).</span></li>
+<li><span class="check-text"><strong>احفظ مفتاح الخزنة في مكان آخر</strong> على الخوادم: عيّن <code>TGWITNESS_VAULT_KEY_FILE</code> قبل التشغيل الأول.</span></li>
+<li><span class="check-text"><strong>احفظ البصمة ونقاط التحقق</strong> على نظام آخر، وشغّل الشاهد على مضيف آخر.</span></li>
 <li><span class="check-text"><strong>لا تقم أبدًا بتحميل</strong> مفاتيح <code>data/</code> أو الجلسات أو <code>panel-token.txt</code> أو مفاتيح الخزينة إلى GitHub أو في أي محادثة.</span></li>
 <li><span class="check-text"><strong>لا تقم بتسجيل</strong> رؤوس الرسائل <code>Authorization</code> أو نصوص الطلبات في الوكيل العكسي.</span></li>
 </ol>
 </div>
-<details><summary>هل يمكنني تغيير رمز اللوحة دون فقدان البيانات؟</summary><p>نعم. الرمز المميز يفتح اللوحة فقط. أوقف تشغيل TgWitness، واحذف <code>panel-token.txt</code> من دليل البيانات، ثم أعد تشغيله؛ حيث تظل السجلات والجلسات والمفاتيح كما هي دون تغيير. عند تعيين <code>TGWITNESS_TOKEN</code>، يتم استخدام قيمة البيئة بدلاً من الملف.</p></details>
-<details><summary>لماذا لا يتم تشفير الرسائل أثناء تخزينها؟</summary><p>يجب على المسؤول عن جمع البيانات قراءة هذه الرسائل للبحث فيها ومقارنة الإصدارات وتصديرها. إن تشفيرها بمفتاح على الجهاز نفسه لن يضيف سوى القليل من الحماية في مواجهة شخص قادر على قراءة محتويات ذلك الجهاز. فالتشفير على مستوى القرص يحمي القرص المعطل أو المسروق؛ بينما تحمي الأذونات الصارمة القرص الذي يعمل.</p></details>
+<details><summary>هل يمكنني تغيير رمز اللوحة دون فقدان البيانات؟</summary><p>نعم، فهو لا يفتح سوى اللوحة. أوقف TgWitness، واحذف <code>panel-token.txt</code>، وشغّله من جديد. يبقى السجل والجلسات والمفاتيح. إذا كان <code>TGWITNESS_TOKEN</code> معيّنًا، فقيمته تتقدم على الملف.</p></details>
+<details><summary>لماذا لا يتم تشفير الرسائل أثناء تخزينها؟</summary><p>يجب على المُجمِّع قراءتها ليبحث ويقارن ويصدّر. ومفتاح على الجهاز نفسه لن يوقف من يستطيع قراءة ذلك الجهاز أصلاً. تشفير القرص يحمي القرص المسروق، والصلاحيات تحمي النظام العامل.</p></details>
 <h2 id="report">الإبلاغ عن ثغرة أمنية</h2>
-<p>استخدم <strong>«الأمان» → «الإبلاغ عن ثغرة أمنية»</strong> في مستودع GitHub. اذكر الإصدار والتأثير وأدنى حد من الخطوات اللازمة لتكرار المشكلة. لا ترسل أبدًا بيانات الاعتماد أو دلائل الحسابات أو أرشيفات الأدلة الحقيقية. إذا لم يكن الإبلاغ الخاص متاحًا، فافتح تذكرة تطلب فيها إنشاء قناة خاصة دون ذكر تفاصيل الاستغلال.</p>
+<p><strong>Security → Report a vulnerability</strong> على GitHub. الإصدار، والأثر، ومثال إعادة إنتاج مصغّر ببيانات وهمية. لا ترسل أبدًا بيانات اعتماد أو مجلدات حسابات أو أدلة حقيقية. إذا كان الإبلاغ الخاص معطّلاً، فافتح issue تطلب فيه قناة خاصة، دون تفاصيل الاستغلال.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">المرجع الكامل ←</a><a class="next-guide" href="../start/"><span>الخطوة التالية</span><strong>ابدأ في غضون دقائق ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="../reference/verification/">ما تم اختباره ←</a></p></footer>
 </main>

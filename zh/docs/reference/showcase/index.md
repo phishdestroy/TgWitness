@@ -54,12 +54,3 @@ python -m tgwitness.showcase_verify showcase.json --fingerprint TRUSTED_COLLECTO
 在展示管理器或现有的**“访问**”部分中使用**“撤销”功能**，可关闭 链接并终止其所有会话。当请求检测到访问已结束时， 访客将清除显示的记录。每次 请求都会检查有效期和权限。展示权限无法直接转换为普通面板访问权限； 请创建新的权限以切换模式。
 
 通过安装环境现有的 HTTPS 地址提供页面服务。发布 链接不会打开新端口、创建隧道或更改 DNS。HTML 和 API 仍保留在用户的安装环境中。展示页面的访问者无法通过此访问权限使用常规的 消息、个人资料、媒体、导出或管理 API。
-
-## 本地回归测试
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-两者均使用合成记录和本地 HTTP 服务器，不会连接到 Telegram。

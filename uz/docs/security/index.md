@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/security/
 
-Telegram yo'llarini, ommaviy proksi ro'yxatlarini va ixtiyoriy tashqi xizmatlarni bilib oling. Har bir sir nimani ochishini, qaysi himoyalar nima qamrab olishini va nimalarni sizga qoldirishini bilib oling.
+Kompyuteringizdan nima chiqadi, har bir sir nimani ochadi va himoyalar nimani qamraydi, nima esa sizning zimmangizda.
 
 **127.0.0.1**paneldagi manzil bo'yicha
 
@@ -14,7 +14,7 @@ Telegram yo'llarini, ommaviy proksi ro'yxatlarini va ixtiyoriy tashqi xizmatlarn
 
 ## Hammasi shu yerda
 
-Yig'uvchi, uning paneli va har bir saqlangan yozuv uni ishga tushirgan kompyuterda yoki serverda qoladi. Telegram standart bo'yicha yagona manzil; boshqa har biri alohida kalitdir.
+Kollektor, panel va har bir yozuv kompyuteringizda qoladi. Standart holatda faqat Telegram bilan bog'laniladi; qolgan hammasi alohida kalit.
 
 06 / NIMA MASHINADAN CHIQADISizning o'rnatishingiz
 
@@ -56,54 +56,54 @@ Ixtiyoriy manzillar har bir ish maydoni bo'yicha sozlanadi. Xabar matni va media
 
 | Maxfiy | Qayerda saqlanadi | Nimani ochadi | Agar u oshkor bo'lsa |
 | --- | --- | --- | --- |
-| **Panel tokeni** | `panel-token.txt` ma'lumotlar katalogida; brauzer uni faqat teg uchun saqlaydi | Har bir ish maydonidagi hamma narsa: o'qish va eksport qilish, doirani o'zgartirish, hisoblarga kirish | TgWitnessni to'xtating, `panel-token.txt`ni o'chiring, qayta ishga tushiring: yangi token yaratiladi |
+| **Panel tokeni** | Ma'lumotlar katalogidagi `panel-token.txt`; brauzer uni har bir yorliq uchun saqlaydi | Har bir ish maydonidagi hamma narsa | TgWitness'ni to'xtating, `panel-token.txt` ni o'chiring, qayta ishga tushiring: yangisini olasiz |
 | **Telegram sessiyasi** | Vault, shifrlangan (`credentials.enc`) | Telegram akkaunti o'zi | Telegramda Sessiyani tugatish → *Sozlamalar → Qurilmalar* |
-| **Imzolash kaliti** | Vault, shifrlangan (`signing.enc`) | Imzolash yozuvlari sizning barmoq izingiz ostida tasdiqlanadi | Boshqa joyda saqlangan tekshiruv nuqtalari, guvoh va vaqt tamg'alari oldin nima mavjud bo'lganini ko'rsatadi |
-| **Ombor kaliti** | Ma'lumotlar yonidagi `vault.key` yoki yangi ma'lumotlar katalogi uchun tashqi bosh kalit | Seifni dekriptirovka qilish | Sessiya va imzolash kalitini ham oshkor bo'lgan deb hisoblang |
-| **Witness tokeni** | Witness hostida | Faqat o'qish uchun: imzolangan tekshiruv nuqtalari va holat | Uni Witness sahifasida o'chirib tashlang; yangi birini yarating |
-| **Off-site nusxa kaliti** | Ombor; tiklash uchun bir marta yuklab oling | Sirtdagi nusxani dekriptaj qilish | Saqlangan ob'ektlarga egalik qiluvchi har kim ularni dekript qila oladi: o'sha nusxani oshkor deb hisoblang |
+| **Imzolash kaliti** | Vault, shifrlangan (`signing.enc`) | Yozuvlarni sizning barmoq izingiz ostida imzolash | Boshqa joyda saqlangan nazorat nuqtalari, guvoh va vaqt belgilari avval nima bo'lganini baribir ko'rsatadi |
+| **Ombor kaliti** | Ma'lumotlar yonidagi `vault.key` yoki tashqi asosiy kalit | Seyf | Sessiya va imzolash kaliti ham sizib chiqqan deb hisoblang |
+| **Witness tokeni** | Witness hostida | Faqat o'qish: nazorat nuqtalari va holat | Uni Guvoh sahifasida o'chiring, yangisini yarating |
+| **Off-site nusxa kaliti** | Ombor; tiklash uchun bir marta yuklab oling | Off-sayt nusxasi | Bucket'ga ham ega bo'lgan kishi uni ocha oladi: nusxani oshkor bo'lgan deb hisoblang |
 
 ## Qanday himoyalar qamrab olinadi
 
 ### qamrab olindi
 
-- Eksportda o'zgartirilgan, olib tashlangan yoki tartibi o'zgartirilgan yozuv: xesh zanjiri yoki imzo endi tasdiqlanmaydi.
-- Jurnal tekshiruv nuqtasidan keyin qayta tiklangan yoki qayta qurilgan, lekin tekshiruv nuqtasi boshqa joyda saqlangan: saqlangan tekshiruv nuqtasi endi mos kelmaydi.
-- Panel tokenini taxmin qilish: 256 tasodifiy bit, doimiy vaqt ichida solishtiriladi; 15 marta xato qilgandan so'ng manzil rad etiladi.
-- Dushmanona chat kontenti: matn xuddi matn sifatida kiritiladi, hech qachon HTML sifatida emas; ilovalar fayllar sifatida yuklanadi; panel boshqa saytlardan hech narsa yuklamaydi.
-- Tashqi ombor kaliti bilan nusxalangan ma'lumotlar katalogi: sessiyalar va imzolash kalitlari bosh kalitsiz shifrlangan holda qoladi.
+- O'zgartirilgan, olib tashlangan yoki tartibi buzilgan yozuv: xesh zanjiri yoki imzo buziladi.
+- Nazorat nuqtasini boshqa joyga saqlaganingizdan keyin qisqartirilgan yoki qayta qurilgan jurnal: nazorat nuqtasi mos kelmay qoladi.
+- Tokenni taxmin qilish: 256 tasodifiy bit, doimiy vaqtli solishtirish, daqiqasiga 15 ta xato va manzil bloklanadi.
+- Dushmanona chat mazmuni: matn matnligicha qoladi, hech qachon HTML emas; ilovalar fayl sifatida yuklab olinadi; panel boshqa saytlardan hech narsa yuklamaydi.
+- Tashqi seyf kaliti bilan o'g'irlangan ma'lumotlar katalogi: sessiyalar va kalitlar shifrlangan qoladi.
 
 ### Sizga qoldirildi
 
-- Asosiy panel tokeni to'liq nazoratga ega. Boshqa odamlarga kerakli hisoblar, suhbatlar va harakatlarga chegaralangan kirish huquqini bering; asosiy kalitni maxfiy saqlang.
-- Uskunaning administratori hamma narsani o'qishi, jurnalni qayta yozishi va qayta imzolashi mumkin. Barmoq izi va tekshiruv nuqtalarini boshqa tizimda saqlang.
-- TgWitness xabar matni va media fayllarini shifrlamaydi. Diskni shifrlash va qat'iy ruxsatnomalarni qo'llang.
-- Localhostdan tashqaridagi oddiy HTTP tarmoqda tokenni ko'rsatadi. HTTPS yoki SSH tunneli ishlating.
-- Imzolar va tekshiruv nuqtalari bilan saqlangan yozuvlarni tekshiring. Ishlatadigan hisoblar va manbalar bo'yicha to'plam qamrovini ko'rib chiqing va yetkazib berishni sinab ko'ring.
+- Asosiy token hamma narsani qila oladi. Boshqalarga cheklangan kirish bering va asosiysini o'zingizda saqlang.
+- Kompyuterda administrator bo'lgan kishi hamma narsani o'qiy oladi va jurnalni qayta imzolay oladi. Barmoq izi va nazorat nuqtalarini boshqa joyda saqlang.
+- TgWitness xabarlar va mediani shifrlamaydi. Diskni shifrlang, ruxsatlarni qattiqlashtiring.
+- localhost'dan tashqarida oddiy HTTP tokenni sizdiradi. HTTPS yoki SSH tunnelidan foydalaning.
+- Imzolar nima o'tkazib yuborilganini aytmaydi. O'z hisoblaringiz va manbalaringizda qamrovni tekshiring va yetkazishni sinang.
 
-Ruxsatlar, amal qilish muddati va sessiya cheklovlari bilan [ishga kirish huquqini ulashing](https://phishdestroy.github.io/TgWitness/uz/docs/access/). Guvoh tokeni alohida kirish vositasi bo‘lib qoladi.
+Ruxsatlar, amal qilish muddati va sessiya cheklovlari bilan [ishga kirishni ulashing](https://phishdestroy.github.io/TgWitness/uz/docs/access/).
 
 ## O'rnatishni mustahkamlash
 
 8 dan 0 tasi bajarildi
 
-1. **Maxsus Telegram hisobidan foydalaning** — hech qachon asosiy hisobingizni ishlatmang. Panel tokeni va sessiya unga to'liq nazorat beradi.
-2. **Paneldagi manzilni 127.0.0.1 da saqlang.** Unga faqat HTTPS (biriktirilgan Caddy konfiguratsiyasi) yoki SSH tunneli orqali masofadan ulanish mumkin.
-3. Ma'lumotlar katalogi saqlangan **diskni shifrlang**: xabar matni va media fayllari kelganidek saqlanadi.
-4. **Ma'lumotlar katalogini** faqat xizmat akkaunti uchun **cheklang**. Unixda yangi kataloglarga 0700 rejimi beriladi; Windowsda papkaning ruxsatlarini sozlang.
-5. **Saqlash omborining bosh kalitini** serverlarda **boshqa joyda saqlang**: ma'lumotlar katalogini yaratishdan oldin `TGWITNESS_VAULT_KEY_FILE` ni o'rnating.
-6. **Imzolash kalitining barmoq izi va tekshiruv nuqtalarini** boshqa tizimda **saqlang** va guvohni boshqa mezbon tizimiga qo'shing.
+1. **Maxsus Telegram hisobidan foydalaning**, hech qachon asosiysidan emas.
+2. **Panelni 127.0.0.1 da saqlang.** Masofaviy kirish faqat HTTPS (birga keladigan Caddy) yoki SSH tunneli orqali.
+3. **Diskni shifrlang**, unda ma'lumotlar katalogi bor, xabarlar va media boricha saqlanadi.
+4. **Ma'lumotlar katalogini cheklang** xizmat hisobiga (Unix'da 0700, Windows'da papka ruxsatlari).
+5. **Serverlarda seyf kalitini boshqa joyda saqlang**: birinchi ishga tushirishdan oldin `TGWITNESS_VAULT_KEY_FILE` ni o'rnating.
+6. **Barmoq izi va nazorat nuqtalarini saqlang** boshqa tizimda, guvohni boshqa xostda ishga tushiring.
 7. `data/`, sessions, `panel-token.txt` yoki vault kalitlarini GitHubga yoki chatga **hech qachon yuklamang**.
 8. `Authorization` sarlavhalarini yoki reverse proxy orqali keladigan so'rov tanalarini **qayd etmang**.
 
 **Panel tokenini ma'lumotlarni yo'qotmasdan o'zgartira olamanmi?**
 
-Ha. Token faqat panelni ochadi. TgWitness'ni to'xtating, ma'lumotlar katalogidan `panel-token.txt`ni o'chiring va uni qayta ishga tushiring; jurnal, sessiyalar va kalitlar o'zgarmagan holda qoladi. `TGWITNESS_TOKEN` o'rnatilganda, fayl o'rniga muhit qiymati ishlatiladi.
+Ha, u faqat panelni ochadi. TgWitness'ni to'xtating, `panel-token.txt` ni o'chiring, qayta ishga tushiring. Jurnal, sessiyalar va kalitlar qoladi. Agar `TGWITNESS_TOKEN` o'rnatilgan bo'lsa, uning qiymati fayldan ustun turadi.
 
 **Nega xabarlar saqlash vaqtida shifrlanmaydi?**
 
-Yig'uvchi ularni o'qishi, qidirishi, versiyalarni solishtirishi va eksport qilishi kerak. Ularni shu kompyuterdagi kalit bilan shifrlash, kompyuterni o'qiy oladigan kishi uchun deyarli hech qanday himoya qo'shmaydi. Diskni shifrlash to'xtatilgan yoki o'g'irlangan diskni himoya qiladi; qat'iy ruxsatnomalar esa ishlayotgan diskni himoya qiladi.
+Kollektor qidirish, solishtirish va eksport qilish uchun ularni o'qishi kerak. Xuddi shu kompyuterdagi kalit o'sha kompyuterni baribir o'qiy oladigan odamni to'xtatmaydi. Disk shifrlash o'g'irlangan diskni, ruxsatlar ishlab turgan tizimni himoya qiladi.
 
 ## Zaiflikni xabar qiling
 
-GitHub omborida **xavfsizlik → zaiflikni xabar qilish**bo'limidan foydalaning. Versiyani, ta'sir darajasini va minimal sun'iy qayta yaratishni kiritishni unutmang. Hech qachon kirish ma'lumotlari, akkaunt papkalarini yoki haqiqiy dalillar arxivlarini yubormang. Agar shaxsiy xabar berish imkoni bo'lmasa, ekspluatatsiya tafsilotlarisiz shaxsiy kanal so'rab issue oching.
+GitHub'da **Security → Report a vulnerability**. Versiya, ta'sir va soxta ma'lumotlar bilan minimal qayta ishlab chiqarish. Hech qachon hisob ma'lumotlari, hisob papkalari yoki haqiqiy dalillarni yubormang. Maxfiy xabar berish o'chirilgan bo'lsa, ekspluatatsiya tafsilotlarisiz maxfiy kanal so'rab issue oching.

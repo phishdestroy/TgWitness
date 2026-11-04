@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/groups/
 
-Bir nechta yig'ish hisoblarini birgalikda boshqaring, har bir hisobning yozuvlari va imzolash identifikatorini alohida saqlang.
+Bir nechta hisobni birga ishlating, har biri o'z yozuvlari va kaliti bilan.
 
-Hisoblar guruhi ulanish holati, kuzatuv boshqaruvlari, umumiy sozlamalar va eksportlarni bitta ishchi ko'rinishga birlashtiradi. Bu bir nechta hisoblar bir xil tergovni qamrab olganda yoki bir xil ishlash sozlamalariga ehtiyoj bo'lganda foydalidir.
+Guruh ulanish holati, boshlash/to'xtatish, umumiy sozlamalar va eksportlarni bitta ekranga jamlaydi. Bir nechta hisob bitta ish ustida ishlaganda qulay.
 
 ## Guruh ko'rinishini oching
 
-**Hisoblar** bo'limida guruhni oching. Har bir hisob o'z kuzatuv holatini, ulanish yo'lini, joriy tekshiruv muvaffaqiyatli bo'lganda o'lchangan eng so'nggi yo'l kechikishini va oxirgi saqlangan xabarni ko'rsatadi. **E'tibor** talab qiladigan hisoblarga havolalar; **"Tuzatish"** tegishli ish maydonini va boshqaruvni ochadi.
+Guruhni **Hisoblar**da oching. Har bir hisob holati, marshruti, kechikishi va oxirgi saqlangan xabarini ko'rsatadi. **E'tibor kerak** buzilganlarini sanaydi, **Tuzatish** sizni to'g'ri u yerga olib boradi.
 
-**"Barchasini boshlash**" va **"Barchasini to'xtatish"** tasdiqlangandan so'ng mos keladigan hisoblarga ta'sir qiladi. **Guruh sozlamalari** tanlangan sozlamalarni baham ko'radi; o'z qiymatlariga ega hisoblar esa ularni almashtirishni tanlaguningizcha saqlab qoladi.
+**Hammasini boshlash** / **Hammasini to'xtatish** amalga oshirishdan oldin so'raydi. **Guruh sozlamalari** umumiy, lekin hisobning o'z qiymatlari siz almashtirguningizcha qoladi.
 
 ### Guruh bo'ylab yo'nalish o'zgarishini ko'rib chiqing
 
@@ -51,19 +51,19 @@ Reference hisob: o'z yo'li saqlangan.
 
 ## Yo'nalishni ko'rib chiqish bosqichi bilan o'zgartiring
 
-1. **Guruh marshrutini o'zgartiring**, so'ng ulanish turini va sozlamalarni tanlang.
-2. **Ko'rib chiqish tanlovini** tanlang. Ro'yxatda keltirilgan hisoblarni va ularning alohida yo'l ustunliklarini ko'rib chiqing.
-3. **Tayyorlash va tekshirishni** tanlang. Tekshiruv yangi Telegram transportidan foydalanadi; qo'llab-quvvatlanadigan HTTP yo'nalishlari ham o'zlarining HTTPS chiqish tekshiruvini hisobot qiladi.
-4. **Belgilangan ulanishni qo'llashni** tanlang va har bir hisobning natijasini tekshiring. Ilgari bajarilgan kuzatuv, ilova muvaffaqiyatli ish boshlagan joydan davom ettiriladi; faol bo'lmagan hisoblar esa o'z holicha qoladi.
+1. **Guruh marshrutini o'zgartirish**, tur va sozlamalarni tanlang.
+2. **Tanlovni ko'rib chiqish**: qaysi hisoblar o'zgarishini va qaysilarining o'z marshruti borligini ko'ring.
+3. **Tayyorlash va tekshirish** yangi Telegram ulanishini sinaydi, imkon bo'lsa chiqish IP'sini ham.
+4. **Tekshirilgan ulanishni qo'llash** va har bir natijani ko'ring. Ishlayotgan hisoblar davom etadi, bo'sh turganlari bo'sh qoladi.
 
-Latency Telegram ulanishini o'rnatishda o'lchangan kechikishni ifodalaydi. Exit-IP tekshiruvi qayd etilgan tekshirish vaqtidagi marshrutni tasvirlaydi. Hisobni avtorizatsiya qilish va kuzatuv holatining o'z ko'rsatkichlari mavjud; guruhni o'zgartirish har bir hisob uchun turli natijalar bilan yakunlanishi mumkin.
+Kechikish Telegram ulanishini o'rnatish vaqti, chiqish IP'si esa tekshiruv paytida marshrut ko'rsatgan manzil. Natijalar hisoblar bo'yicha farq qilishi mumkin.
 
 ## Kesishgan kirishdan foydalaning
 
-**Bir nechta hisoblarga ega chatlarda** umumiy manbalar va mavjud ish maydoni kuzatuvi ko'rsatiladi. Mos kanallar va superguruhlar **"Export with …"**funksiyasidan foydalanib, bitta chat tarixini bir nechta hisoblarga bo'lishlari mumkin. Xususiy chatlar va oddiy guruhlar boshlang'ich hisobda qoladi, chunki ularning xabar raqamlari aynan shu hisob tarixiga tegishli.
+**Bir nechta hisob ko'radigan chatlar** umumiy manbalar va ularning qamrovini sanaydi. Kanallar va superguruhlarni **… hisob bilan eksport** orqali bir nechta hisob birdaniga eksport qilishi mumkin. Shaxsiy chatlar va oddiy guruhlar yo'q, ularning xabar raqamlari hisobga bog'liq.
 
 ## Guruhni paket sifatida eksport qiling
 
-**Eksport guruhi** har bir akkauntning imzolangan eksporti va ushbu fayllarning imzolangan ro'yxatini o'z ichiga olgan bitta ZIP fayl yaratadi. Asl ish maydoni identifikatorlari va barmoq izlari tasdiqlash uchun mavjud bo'lib qoladi. Ushbu ma'lumotlarga tayangan holda akkauntlararo hikoyani tuzing; bitta birlashtirilgan vaqt chizig'i esa alohida tuziladi.
+**Guruhni eksport qilish** har bir hisobning imzolangan eksporti va ularning imzolangan ro'yxati bilan bitta ZIP beradi. Har biri tekshiruv uchun o'z barmoq izini saqlaydi. Birlashgan xronologiyani baribir o'zingiz tuzasiz.
 
-[Hisobot dizayni](https://phishdestroy.github.io/TgWitness/uz/docs/reports/), [ish maydonidagi Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/case-board/) yoki [eksportni tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/exports/) bilan davom eting.
+Keyingisi: [hisobotlar](https://phishdestroy.github.io/TgWitness/uz/docs/reports/), [Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/case-board/), [eksportlarni tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/exports/).

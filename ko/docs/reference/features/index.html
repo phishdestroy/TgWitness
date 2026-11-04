@@ -224,9 +224,6 @@ RPC, 활성 계정 수, 디스크 지연 시간/여유 공간, 네트워크 상�
 <strong>한도는 ‘매개변수’에서</strong> 작업 공간별로 변경할 수 있습니다. 내보내기에는 고정된 이벤트 수 제한이 없습니다.
 브라우저 폴백은 기본적으로 128 MiB로 제한되며, 스트리밍 CLI는 구성 가능한
 전송 제한을 가지며, 기본값은 5 GiB입니다.</p>
-<p><code>tools/check_capacity.py</code>는 로컬 합성 데이터의 수집 및 내보내기를 측정합니다. 이 결과는
-텔레그램 전송량 측정값이나 실제 채팅 횟수를 보장하는 것이 아닙니다. 측정된 버전 및 워크로드는
-<a href="../verification/">VERIFICATION.md를</a> 참조하십시오.</p>
 <h2 id="reliability-and-recovery">신뢰성 및 복구<a class="anchor" href="#reliability-and-recovery" aria-label="이 섹션으로 이동">#</a></h2>
 <p>구현된 기능으로는 SQLite WAL/동기식 트랜잭션, 원자적 메시지
 및 미디어 작업 쓰기, 지속적 작업 및 재시도 지연, 원본 버전 설명자,

@@ -34,26 +34,26 @@
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="eyebrow">文档 / 01</p><h1>浏览存档</h1><p class="guide-outcome">查找消息。核查来源。构建案情。</p>
 <figure class="network-map archive-route" aria-labelledby="archive-caption">
-<div><span class="network-number">01</span><strong>引入历史记录</strong><p>将已启用的消息源中的历史消息加载到工作区中。</p></div>
-<div><span class="network-number">02</span><strong>追踪消息来源</strong><p>搜索存档，并打开每个搜索结果对应的已保存消息。</p></div>
-<div><span class="network-number">03</span><strong>确保交接清晰明了</strong><p>请将您的分析结果另行保存，并导出其旁边的签名证据。</p></div>
+<div><span class="network-number">01</span><strong>引入历史记录</strong><p>将已启用来源的过往消息拉取到工作区。</p></div>
+<div><span class="network-number">02</span><strong>追踪消息来源</strong><p>搜索，然后打开每条结果背后保存的消息。</p></div>
+<div><span class="network-number">03</span><strong>确保交接清晰明了</strong><p>您的分析放在一个文件里，签名证据放在旁边。</p></div>
 <figcaption id="archive-caption">捕获的记录、识别出的文本以及分析人员的结论均保持独立。</figcaption>
 </figure>
 <h2 id="history">加载历史消息</h2>
-<ol><li>打开<strong>来源 → 范围内的会话</strong>，检查已启用的会话，然后开始观察。</li><li>选择<strong>“加载完整历史记录</strong>”。运行时将使用当时选定的来源列表。</li><li>根据需要使用<strong>“暂停历史</strong>记录”和<strong>“继续历史记录</strong>”功能。重启后，请明确恢复操作。</li><li>查看各消息源的处理结果及附件队列。随证据导出文件一同保存经签名的进度报告。</li></ol>
-<p>此操作会将可用消息填满工作区。按聊天记录导出 HTML/JSON 文件是一项独立的操作。<a href="../reference/history/">历史记录和恢复详情</a>。</p>
+<ol><li><strong>来源 → 范围内的聊天</strong>：检查已启用的聊天，开始观察。</li><li><strong>加载完整历史记录</strong>。它按当前的来源列表执行。</li><li>随时可以<strong>暂停历史</strong> / <strong>继续历史记录</strong>。重启后请手动继续。</li><li>检查每个来源的结果和下载队列，将签名进度报告与导出一起保存。</li></ol>
+<p>这会填充工作区。单个聊天的 HTML/JSON 导出是另一回事。<a href="../reference/history/">详情</a>。</p>
 <h2 id="search">先搜索，再决定是否使用 AI</h2>
-<ol><li>打开<strong>日志</strong>进行本地搜索。选择工作区，并使用来源和时间筛选条件。</li><li>搜索短语或域名。打开匹配的记录及其已保存的版本。</li><li>如需进行 AI 分析，管理员需在<strong>集成</strong>中启用并配置服务提供商。打开<strong>查询存档</strong>，选择会话和时间段。在批准请求前，请查看<strong>发送到模型的数据</strong>，并取消勾选不需要的摘录。</li><li>请核对返回的引用。将答案保存为报告，并添加您自己的修订或注释。</li></ol>
-<p>搜索在本地运行，不涉及人工智能。分析报告保留来源引用和修订历史；这些报告与签名日志是分开的。<a href="../reference/analysis/">服务提供商设置和报告</a>。</p>
+<ol><li><strong>日志</strong>在本地搜索，可按来源和时间筛选。</li><li>搜索短语或域名，打开记录及其各个版本。</li><li>使用 AI 时，由管理员在<strong>集成</strong>中设置服务商。然后<strong>查询存档</strong>：选择聊天和时间段，查看<strong>发送到模型的数据</strong>，取消勾选不应发出的内容。</li><li>检查引用，将回答保存为报告，添加您的笔记。</li></ol>
+<p>搜索不需要 AI。报告保存自己的来源和修订版本，与签名日志分开。<a href="../reference/analysis/">服务商设置</a>。</p>
 <h2 id="tools">选择您需要的连接方式</h2>
 <div class="table-wrap"><table><thead><tr><th>任务</th><th>打开</th><th>设置</th></tr></thead><tbody>
-<tr><td>阅读来自 AI 客户端的精选聊天记录</td><td><strong>集成 → MCP</strong></td><td><a href="../reference/mcp/">安装 MCP 扩展组件，申请范围限定令牌，并连接客户端</a></td></tr>
-<tr><td>识别保存媒体中的文本</td><td><code>media.saved</code>记录 → <strong>识别附件</strong></td><td><a href="../reference/media-analysis/">配置本地 Docker 工作节点及所需的语言/模型文件</a></td></tr>
-<tr><td>将事件发送至 n8n 或 SIEM</td><td><strong>集成 → 外发 webhook</strong></td><td><a href="../reference/webhooks/">添加接收方、验证 HMAC 并去除事件 ID 的重复项</a></td></tr>
+<tr><td>让 AI 客户端读取选定的聊天</td><td><strong>集成 → MCP</strong></td><td><a href="../reference/mcp/">安装 MCP、创建限定范围的令牌并连接</a></td></tr>
+<tr><td>识别保存媒体中的文本</td><td><code>media.saved</code>记录 → <strong>识别附件</strong></td><td><a href="../reference/media-analysis/">设置本地 Docker worker</a></td></tr>
+<tr><td>将事件发送至 n8n 或 SIEM</td><td><strong>集成 → 外发 webhook</strong></td><td><a href="../reference/webhooks/">添加接收端、校验 HMAC、去重 ID</a></td></tr>
 </tbody></table></div>
-<details><summary>哪个访问令牌该填在哪里？</summary><p>控制面板访问权限仅限案件审查人员使用。MCP 连接将获得独立的只读存档令牌。Webhook 接收器使用其自身的 HMAC 密钥。所有操作均无需 Telegram 会话文件。</p><p><a href="../access/">共享控制面板访问</a>权限或<a href="../reference/mcp/">配置 MCP 客户端</a>。</p></details>
+<details><summary>哪个访问令牌该填在哪里？</summary><p>面板访问是给人用的。MCP 有自己的只读令牌，webhook 有自己的 HMAC 密钥。它们都不需要 Telegram 会话。</p><p><a href="../access/">共享控制面板访问</a>权限或<a href="../reference/mcp/">配置 MCP 客户端</a>。</p></details>
 <h2 id="handoff">提供数据来源和结论</h2>
-<p>请将经审核的分析报告与带签名的证据 ZIP 文件一同保存。该报告阐述了您对来源信息的解读；ZIP 文件则允许接收方通过独立可信的指纹和检查点，对保存的记录进行核对。</p>
+<p>请将报告放在签名 ZIP 旁边。报告是您对来源的解读，ZIP 才是接收方要验证的内容。</p>
 <p><a href="../exports/">导出与验证</a> · <a href="../cases/">完整调查流程</a></p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/analysis/">完整引用 →</a><a class="next-guide" href="../case-board/"><span>下一步</span><strong>创建案件看板 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../reference/verification/">已测试的内容 →</a></p></footer>

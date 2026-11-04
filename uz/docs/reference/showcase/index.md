@@ -54,12 +54,3 @@ Imzo va izchillikni tekshirish saqlangan chegaraga nisbatan o'zgarishlarni aniql
 Showcase menejerida yoki mavjud **Access** bo'limida **Revoke'dan** foydalanib havolani yoping va barcha sessiyalarni yakunlang. Kiruvchi, kirish tugaganini aniqlagan so'rov orqali ko'rsatilgan yozuvlarni o'chiradi. Har bir so'rovda muddat va ruxsatlar tekshiriladi. Showcase grantlarini oddiy panelga kirishga aylantirib bo'lmaydi; rejimni o'zgartirish uchun yangi grant yarating.
 
 Sahifani o'rnatishning mavjud HTTPS manzili orqali yetkazib bering. Havola chop etish yangi port ochmaydi, tunnel yaratmaydi yoki DNSni o'zgartirmaydi. HTML va API foydalanuvchining o'rnatmasida qoladi. Showcase tashrifchisi ushbu kirish bilan oddiy xabar, profil, media, eksport yoki boshqaruv APIlaridan foydalana olmaydi.
-
-## Mahalliy regressiya tekshiruvlari
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Ikkalasi ham sintetik yozuvlar va mahalliy HTTP-serverdan foydalanadi. Ular Telegramga ulanmaydi.

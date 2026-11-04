@@ -138,11 +138,6 @@ não garante a obtenção de um carimbo de data e hora.</li>
 <p>A verificação bem-sucedida estabelece a integridade em relação à chave do coletor confiável
 e ao limite retido. Consulte <a href="#verification-scope">o escopo da verificação</a> para conhecer as
 suposições de confiança e <a href="../verification/">os resultados da validação</a> das verificações realizadas.</p>
-<p>As notificações enviadas pelo Apprise ajudam os operadores a acompanhar a atividade no espaço de trabalho e nos chats.
-Elas contêm nomes e contagens; trechos de mensagens excluídas e editadas são opcionais
-e estão desativados por padrão. Use o diário assinado e as exportações para o registro retido.
-Com um proxy do espaço de trabalho, as notificações utilizam a mesma rota; serviços que não podem utilizá-lo
-e as rotas do MTProxy são recusados.</p>
 <h2 id="handover-extract">Trecho da transferência<a class="anchor" href="#handover-extract" aria-label="Link para esta seção">#</a></h2>
 <p>Um arquivo ZIP assinado contém todo o registro do espaço de trabalho. Quando um tribunal, um advogado ou uma unidade de combate a abusos precisa
 apenas de algumas conversas, de um período específico ou de determinadas pessoas, a opção <strong>“Exportações → Extrato de transferência”</strong> prepara uma cópia reduzida
@@ -226,12 +221,6 @@ filtros, participantes, indicadores, detalhes do registro e seleções de JSON/C
 --evidence ARCHIVE.zip</code> para compará-las com o arquivo assinado.
 O verificador verifica o ID do relatório, a chave de assinatura, o limite do arquivo e cada item selecionado; itens editados,
 ausentes e duplicados são rejeitados. As notas de seleção e a hora de criação permanecem como metadados não assinados.</p>
-<p>As exportações de arquivo atuais armazenam fragmentos do visualizador em <code>viewer/*.html</code>. Cada fragmento é carregado em um quadro em sandbox
-com scripts permitidos, mas <strong> sem acesso de mesma origem </strong>, e publica seu texto JSON no relatório.
-O relatório verifica a origem da mensagem e seu SHA-256 em relação ao descritor assinado antes da exibição.
-A própria CSP do relatório permite apenas seu script de aplicativo com hash. Dados ausentes podem ser recuperados
-escolhendo-se o ZIP correspondente na guia “Verificar”; os dados lidos do ZIP são analisados sem execução.
-Relatórios exportados anteriormente mantêm seu próprio visualizador incorporado e permanecem verificáveis.</p>
 <p>Lacunas no número de mensagens são exibidas apenas para um feed de bate-papo completo, não filtrado e em ordem crescente. Ocultar uma
 categoria ou não conseguir carregar um bloco de dados não deve transformar uma linha omitida em evidência de uma mensagem ausente
 . Os destaques de pesquisa operam em texto simples antes do escape “HTML”, preservando a marcação literal.</p>
@@ -244,20 +233,6 @@ notas sobre o formato dos dados no idioma do relatório, seguidas por um guia co
 arquivos listados nele, excluindo o próprio, o <code>manifest.json</code> e o <code>manifest.sig</code>; o manifesto assinado
 também abrange o <code>SHA256SUMS</code>. Mantenha o ZIP original inalterado e salve os arquivos de trabalho fora da
 pasta extraída. Os relatórios do PDF incluem marcadores de seção e identificação do caso/relatório nas páginas seguintes.</p>
-<p>As configurações de relatório são salvas por espaço de trabalho. O idioma do relatório pode seguir o idioma do painel ou ser fixo;
-um idioma explicitado em uma solicitação de exportação substitui essa escolha apenas para essa exportação específica. Todos os idiomas
-do painel são aceitos, incluindo os quatro idiomas escritos da direita para a esquerda.</p>
-<p>O botão de transcrição do diário controla seu visualizador HTML e a transcrição PDF. O registro completo JSON é
-uma opção de detalhamento HTML: quando ativada, o visualizador exibe o registro exportado exatamente como está, incluindo um
-registro minimizado em uma transferência. Desativá-la não altera o arquivo oficial do diário. As
-visualizações de fotos se aplicam tanto ao chat quanto ao diário HTML. Séries consecutivas de batimentos podem ser recolhidas sem
-remover registros; expandir séries longas carrega suas linhas de forma incremental.</p>
-<p><code>part_size</code> é a contagem máxima de itens por arquivo de dados do visualizador (500–100.000) e o tamanho máximo da transcrição
-incluída em um PDF. Os blocos do visualizador também são divididos com um limite de 16 MiB de dados. Transcrições PDF mais longas
-são omitidas com um indicador explícito para os arquivos-fonte assinados e para o visualizador HTML. Um relatório independente HTML
-incorpora no máximo 20.000 itens ou 32 MiB de dados de itens; uma vez excedido esse limite, ele libera esses itens e
-direciona o leitor ao arquivo. Esses limites de exibição nunca truncam os arquivos-fonte assinados.
-A configuração de fontes PDF combina fontes CJK quando necessário: uma fonte chinesa por si só pode não conter o Hangul coreano.</p>
 <h3 id="the-chat-at-export-time">O chat no momento da exportação<a class="anchor" href="#the-chat-at-export-time" aria-label="Link para esta seção">#</a></h3>
 <p>A exportação de um chat registra o que Telegram informou sobre o chat no momento em que a exportação foi iniciada: as próprias
 etiquetas de Telegram (<code>scam</code>, <code>fake</code>, <code>restricted</code> com seus motivos, <code>verified</code>), nomes de usuário, descrição, número de
@@ -472,10 +447,6 @@ na verificação, nenhum arquivo restaurado é publicado. As verificações de r
 e a data retornados com o prazo enviado no momento do upload (tolerância de arredondamento de um segundo). Um prazo expirado,
 inválido ou reduzido não é considerado como verificado. O status informa o objeto amostrado
 cuja retenção foi lida para aquela passagem de upload.</p>
-<p>O progresso da cópia está restrito ao destino e à chave de criptografia. A alteração do endpoint, do bucket
-ou do prefixo inicia uma cópia completa do registro, das mídias e dos pontos de verificação retidos localmente para
-esse destino. O progresso antigo não restrito é preservado, mas reproduzido uma única vez após a atualização. As exportações históricas
-de bate-papos já removidas da caixa de saída local permanecem em seu destino anterior.</p>
 <p>Mídias locais ausentes ou corrompidas são relatadas como erro da passagem e mantêm o cursor de mídia antes
 delas, de modo que o arquivo seja tentado novamente na próxima passagem; os arquivos, pontos de verificação e exportações posteriores a elas ainda são
 copiados. A restauração verifica
@@ -544,9 +515,6 @@ foi registrada e cada sessão nova e encerrada. Ele lê a lista apenas enquanto 
 <p>O que eles não mostram: o drand comprova apenas a ordem dos registros em relação ao tempo público,
 e a lista de dispositivos é a declaração do Telegram por meio do coletor, assinada pelo coletor
 como qualquer outro registro.</p>
-<p>Testado em 1º de novembro de 2026: <code>tools/check_evidence_witnesses.py --live</code> escreveu uma rodada real a partir de
-<code>drand.cloudflare.com</code>, exportou o diário e confirmou a rodada com <code>drand.cloudflare.com</code>
-e <code>api.drand.sh</code>; a lista de dispositivos foi executada contra respostas simuladas de Telegram, e não contra uma conta real.</p>
 <p><strong> Log do Cloudflare Gateway </strong> (<code>cloudflare.gateway_dns</code>). Para um servidor que realiza a resolução por meio do
 Cloudflare Gateway (<a href="../high-assurance/#cloudflare-as-an-outside-witness"> Gateway DNS </a>), cada
 passagem copia o que o Gateway registrou desde a cópia anterior: um registro por janela de no máximo três

@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/handover/
 
-Bagikan pengamatan yang relevan sambil menjaga ruang kerja asli tetap utuh.
+Bagikan hanya yang perlu, berkas asli tetap utuh.
 
-Serah terima adalah ekstrak terpisah yang telah ditandatangani. Pilih obrolan dan orang-orang yang relevan, kurangi identitas atau teks, dan tentukan file serta catatan tim mana yang harus dimasukkan ke dalam salinan penerima. Manifesnya mencatat pilihan tersebut serta jumlah catatan yang tidak diubah, dipersingkat, dan dihilangkan.
+Serah terima adalah ekstrak bertanda tangan terpisah: pilih obrolan dan orang, sembunyikan identitas atau teks, tentukan berkas dan catatan tim yang ikut. Manifes mencatat apa yang dipertahankan, diringkas, dan dikeluarkan.
 
 ## Siapkan ekstrak untuk penerima
 
-1. Buka **Ekspor → Ekstrak Serah Terima**. Tulis tujuannya, pilih obrolan dan periode UTC (opsional), lalu pilih "**Muat orang-orang dari obrolan yang dipilih"** jika Anda memerlukan subjek yang disebutkan namanya.
-2. Pilih cara menangani pengguna lain: gunakan nama samaran, hilangkan pesan mereka, atau tampilkan sebagaimana tercatat. Atur teks pesan dan lampiran secara terpisah; secara opsional, sembunyikan nomor telepon dan alamat email.
-3. Pilih apakah akan menyertakan bookmark dan potongan Case Board, atau kartu dengan komentar. Alias penyelidik dapat menggantikan nama tim dalam teks ini.
-4. Pilih **"Unduh Ekstrak Serah Terima**". Buka laporan yang dihasilkan dan catatan yang dipilih secara lokal, verifikasi arsip, dan periksa salinannya sebelum mengirimkannya.
+1. **Ekspor → Ekstrak serah terima**: tulis tujuannya, pilih obrolan dan periode, lalu **Muat orang dari obrolan pilihan** jika Anda butuh orang bernama.
+2. Semua orang lain: nama samaran, dikeluarkan, atau sesuai rekaman. Teks dan berkas adalah sakelar terpisah; telepon dan email bisa disamarkan.
+3. Case Board: tidak ada, penanda dan potongan, atau kartu dengan komentar. Nama tim bisa diganti alias.
+4. **Unduh ekstrak serah terima**, buka, verifikasi, dan periksa sebelum dikirim.
 
 ### Satu salinan asli, satu salinan untuk dibagikan
 
@@ -54,12 +54,12 @@ Sebuah paket terpisah yang terhubung dengan batas jurnal sumbernya
 
 | Kontrol | Dampak terhadap teks |
 | --- | --- |
-| Orang | Pastikan subjek yang dipilih tetap dapat diidentifikasi; gunakan nama samaran atau hilangkan peserta lain sesuai pilihan. |
-| Teks | Sertakan semua teks, hanya teks dari orang-orang yang dipilih dan akun pengamat, atau hilangkan teks pesan beserta bidang detail yang berisi teks tersebut. |
-| Berkas | Pilih berkas dari orang-orang yang dipilih dan akun yang diawasi, semua berkas pesan yang ditampilkan, atau tidak ada berkas. |
-| Case Board | Pilih opsi tanpa materi papan, penanda, dan potongan, atau kartu dengan diskusi tim. |
+| Orang | Orang yang dipilih tetap bernama; yang lain mendapat nama samaran atau dikeluarkan. |
+| Teks | Semua teks, hanya teks orang yang dipilih dan akun Anda, atau tidak ada. |
+| Berkas | Berkas orang yang dipilih dan akun Anda, semua berkas yang ditampilkan, atau tidak ada. |
+| Case Board | Tidak ada, penanda dan potongan, atau kartu dengan diskusi. |
 
-Periksa teks bebas dan isi berkas serta identitas: nama samaran tidak secara otomatis menghapus setiap nama yang tertulis dalam pesan atau lampiran. Jika berkas yang dipilih dan telah diarsipkan tidak tersedia, pulihkan berkas tersebut atau hilangkan lampiran secara eksplisit sebelum menghasilkan ekstrak.
+Baca juga teks dan berkasnya: nama samaran tidak menghapus nama yang tertulis di dalam pesan atau lampiran. Jika berkas yang dipilih hilang, pulihkan atau keluarkan lampirannya.
 
 ## Pastikan teks dapat diverifikasi secara independen
 
@@ -67,4 +67,4 @@ Periksa teks bebas dan isi berkas serta identitas: nama samaran tidak secara oto
 python -m tgwitness.verify handover.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Simpan arsip bukti asli yang telah ditandatangani dan titik pemeriksaan secara terpisah. Proses penyerahan mencatat proyeksinya sendiri, sehingga penerima dapat memeriksa salinan yang dikirimkan tanpa perlu menerima seluruh ruang kerja. [Studio Laporan](https://phishdestroy.github.io/TgWitness/id/docs/reports/) menyediakan desain pembacaannya; [verifikasi ekspor](https://phishdestroy.github.io/TgWitness/id/docs/exports/) menjelaskan referensi tepercaya.
+Simpan sendiri arsip asli dan checkpoint-nya. Penerima bisa memverifikasi salinannya tanpa menerima seluruh ruang kerja. Desain: [Report studio](https://phishdestroy.github.io/TgWitness/id/docs/reports/). Rujukan tepercaya: [verifikasi ekspor](https://phishdestroy.github.io/TgWitness/id/docs/exports/).

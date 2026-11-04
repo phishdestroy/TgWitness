@@ -54,12 +54,3 @@ A verificação de assinatura e consistência pode detectar alterações em rela
 Use **a opção “Revogar”** no gerenciador de vitrines ou na seção **“Acesso”** existente para encerrar o link e encerrar todas as suas sessões. O visitante limpa os registros exibidos quando uma solicitação detecta que o acesso foi encerrado. A validade e as permissões são verificadas a cada solicitação. As autorizações de vitrine não podem ser convertidas em acesso comum ao painel no local; crie uma nova autorização para alterar os modos.
 
 Hospede a página por meio do endereço HTTPS existente na instalação. A publicação de um link não abre uma nova porta, não cria um túnel nem altera o DNS. O HTML e a API permanecem na instalação do usuário. Um visitante da vitrine não pode usar as APIs comuns de mensagem, perfil, mídia, exportação ou gerenciamento com esse acesso.
-
-## Testes de regressão locais
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Ambos utilizam registros sintéticos e um servidor HTTP local. Eles não se conectam ao Telegram.

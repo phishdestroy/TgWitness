@@ -247,25 +247,11 @@ Gateway DNS tizim resolverini qamrab oladi. 443-port orqali HTTPS orqali boshqa 
 
 Cloudflare Telegramning shifrlash ichki qismiga, Telegram hisobidagi boshqa qurilmalarga (evidence mode'ning qurilmalar ro'yxati ularni Telegram tomonidan qayd etadi) yoki provayderning gipervizoriga kira olmaydi.
 
-2026-yil 1-noyabrda Gateway DNS haqiqiy Hetzner Cloud va bepul Cloudflare hisobiga qarshi ishga tushirildi: Hetzner chiqish qoidalarini qabul qildi, server v0.7.0 versiyasini o'rnatdi va har bir so'rov TLS orqali Gateway orqali amalga oshirildi, tezkor tunnel shu firewall orqali ishladi va `verify` serverning 19 ta nomini Cloudflare'dan qayta o'qidi (Ubuntu va Hetzner oynalari, GitHub, PyPI, NTP, tunnel, ntfy.sh). Panel sakkizta oynada 36 ta so'rovni jurnalga nusxa ko'chirdi va `verify.py` ularni bo'shliqlarsiz qisqartirdi; `destroy` server va firewall o'chirib tashlandi va umumiy joy qoldirildi.
-
 ## Bu nima tasdiqlamaydi
 
 - Provayder va uning xodimlari gipervizor, disklar va tarmoqni boshqaradi.
 - Mehmon o'lchovlari kollektor tomonidan o'z-o'zini hisobot qiladi.
 - Avvalgi firewall qoida mazmuni har bir provayder logida mavjud emas; faqat Linode qoida versiyalarini saqlaydi.
 - Bu xabar haqiqiyligi haqida hech qanday yangilik keltirmaydi; qarang [Dalil](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/).
-
-## Bu yerda sinovdan o'tkazilgan
-
-Joylashtirish, qulflash va tekshirish mantiqi ularning e'lon qilingan API ma'lumotlariga asoslanib yaratilgan simulyatsiya qilingan Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail va Cloudflare APIlariga qarshi avtomatlashtirilgan testlar hamda AWS'ning e'lon qilingan misollariga muvofiq AWS so'rovlarini imzolash orqali qamrab olinadi. `tools/check_cloud_wizard.py` panelning server ustasini ham xuddi shunday ishga tushiradi: domen bilan va tezkor tunnel orqali. `tools/check_tdx.py` dcap-qvl va dstack'dan olingan haqiqiy Intel TDX tasdiqnomalarini Intel'ning ildiz sertifikatigacha tekshiradi (manbalar [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)'da); `tools/check_phala.py`simulyatsiya qilingan Phala Cloudga qarshi deploy, verify, journal, destroy va panel wizardni ishga tushiradi, uning attestatlari Intel uslubidagi soxta PKIdan olinadi. Phala yo'li hali Phala Cloudda sinab ko'rilmagan.
-
-2026-yil 1-noyabrda tezkor tunnel yo'li real **Hetzner Cloud** (Nürnberg, `cpx22`, TgWitness v0.7.0), real ntfy.sh va GitHub, paneldan va koddan:
-
-- narxni tekshirish, so'ngra panel tugmalari orqali yaratish: server 13 soniyadan so'ng ishga tushadi, taxminan ikki daqiqadan so'ng instantsiya va o'rnatuvchi hashlariga mos keladigan imzolangan bayonot;
-- serverning o'z paneli trycloudflare.com manzili orqali ochilib, panel tokenini qabul qiladi; token bo'lmasa 401 javob beradi;
-- Hetzner API orqali qayta ishga tushirilgach, server yangi imzolangan manzilni joyladi, **joriy manzilni** topdi, eski manzil javob berishni to'xtatdi, imzolash kaliti o'zgarmadi; ntfy.sh mavzusiga imzolanmagan post e'tiborsiz qoldirildi;
-- `verify` Hetzner API ga qarshi: server, kiruvchi qoidalarisiz firewall, bayonot, bog'lash, mehmondo'st o'lchovlari, yuklash va v0.7.0 versiyasini yuklab olishning manba xeshidan o'tdi; Cloudflare tekshiruvlari yuqorida ta'riflanganidek mavjud emas edi; o'rnatuvchi v0.7.0 versiyasidagidan farq qilardi va bu versiyaning kodi tomonidan yaratilganiga baytma-bayt mos kelardi;
-- paneldan o'chirish aynan joylashtirish belgilagan server va firewallni olib tashladi; bir xil loyihadagi boshqa serverlar va firewalllar o'zgarmagan holda qoldi.
 
 Hali haqiqiy hisoblarga qarshi ishga tushirilmagan: o'zingizning domeningiz ostida joylashtirish (Cloudflare tunneli va DNS), boshqa provayderlar, xatoliklarni tuzatish bo'yicha joylashtirish va `lock`, bunday serverda Telegram akkaunti, va keyingi versiyalarning jonli yangilanishlari tezkor tunnel orqali. Har bir provayderda birinchi joylashtirishni tekshiring orqali `plan`, xatoliklarni tuzatish uchun joylashtirish va `verify` ishonishdan oldin, debug-deployment va har bir provayderda birinchi joylashtirishni tekshiring.

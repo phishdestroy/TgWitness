@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="ガイド"><a href="../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../">ドキュメント</a> <span aria-hidden="true">/</span> <span aria-current="page">証拠の仕組みをご覧ください</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">テスト済みの内容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">ドキュメント / 08</p><h1>証拠の仕組みをご覧ください</h1><p class="guide-outcome">メッセージは変更される可能性があります。しかし、あなたが確認した内容の記録は、いつでも検証可能な状態で残しておく必要があります。</p>
-<p>以下の2つの小規模な実験をご覧ください。これらは架空のメッセージを使用しており、ブラウザ上で動作し、Telegramには一切接続しません。</p>
+<article class="guide-content"><p class="eyebrow">ドキュメント / 08</p><h1>証拠の仕組みをご覧ください</h1><p class="guide-outcome">メッセージは変わります。あなたが見たものの記録は変わるべきではなく、誰でもそれを確認できるべきです。</p>
+<p>以下は小さな実験が 2 つです。メッセージは架空で、すべてブラウザー内で動き、Telegram には何も送られません。</p>
 
 <h2 id="telegram-export">チャットのエクスポートから検証可能な記録へ</h2>
-<p><a href="https://telegram.org/blog/export-and-more">Telegram Desktopのエクスポート機能は、</a>利用可能なチャット履歴やメディアをHTMLまたはJSON形式で保存し、オフラインでの利用を可能にします。TgWitnessは、受信した変更の継続的な記録、観察結果やエクスポートに対する署名、および受信者が独自に照合できるチェックポイントを追加します。</p>
+<p><a href="https://telegram.org/blog/export-and-more">Telegram Desktop のエクスポート</a>は、今見えている履歴を HTML または JSON で保存します。TgWitness はそこに、変更を記録し続けるジャーナル、すべての記録への署名、他の人が照合できるチェックポイントを加えます。</p>
 <div class="table-wrap"><table><thead><tr><th scope="col">タスク</th><th scope="col">Telegram Desktopからのエクスポート</th><th scope="col">TgWitness</th></tr></thead><tbody>
 <tr><td>保存された会話を読む</td><td>HTML または JSON（選択されたメディアを含む）</td><td>保存されたチャット、検索可能なログ、オフラインレポート</td></tr>
-<tr><td>経時的な変化を追跡する</td><td>エクスポート時に利用可能な履歴</td><td>以前にキャプチャされたバージョン、その後の編集内容、および削除の記録がまとめて保持されます</td></tr>
-<tr><td>引き渡し後のファイルを確認してください</td><td>標準の HTML/JSON エクスポートファイルには署名がありません</td><td>署名付きマニフェスト、レコードごとの署名、および信頼できるコレクターキーと照合された封印済みのHTML/PDF/JSONレポート</td></tr>
+<tr><td>経時的な変化を追跡する</td><td>エクスポート時に利用可能な履歴</td><td>旧版、後の編集、削除をすべて保持</td></tr>
+<tr><td>引き渡し後のファイルを確認してください</td><td>標準の HTML/JSON エクスポートファイルには署名がありません</td><td>署名付きマニフェスト、署名付き記録、封印されたレポートを、信頼できる鍵で確認</td></tr>
 <tr><td>以前の保存状態と比較する</td><td>参照用コピーまたはハッシュ値を別途保管してください</td><td>署名付きチェックポイント、独立したウィットネス、およびオプションの外部タイムスタンプ</td></tr>
 </tbody></table></div>
-<p>ファイル署名の比較は、2026年11月2日に確認された<a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">Telegram Desktop</a>の<a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">エクスポート</a>ライターに基づいています。TgWitnessはコレクターの鍵を使用して署名を行います。以下のチェックでは、受信者がそれをどのように使用するかを示しています。</p>
+<p>この比較は 2026 年 11 月 2 日時点の <a href="https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output">Telegram Desktop のエクスポートコード</a>に基づいています。</p>
 
 <h2 id="journey">1つのメッセージ、3つの観察点</h2>
-<p>Telegramから新しいメッセージ、編集通知、削除通知が届くと、コレクターはこれら3つの観測結果を個別に追加します。編集が行われても、最初の記録は上書きされません。削除通知があっても、その記録は消去されません。</p>
+<p>新しいメッセージ、編集、削除は 3 つの別々の記録になります。編集は最初の記録を上書きせず、削除も消しません。</p>
 <figure class="lab journey-lab" data-lab="journey" aria-labelledby="journey-caption">
   <div class="lab-top"><span class="lab-kicker">01 / メッセージの経路</span><span class="sample-tag">説明用のシーケンス</span></div>
   <svg class="journey-route" viewBox="0 0 600 92" role="img" aria-labelledby="journey-route-title"><title id="journey-route-title">Telegram delivers an update to the collector, which appends a journal record.</title>
@@ -67,10 +67,10 @@
   <p class="lab-status" data-journey-status role="status">記録された3つの観察事項はすべて、ジャーナルに残ります。</p>
   <figcaption id="journey-caption">すでに選択済みのソースに対する簡略化された手順です。運用記録も実際のジャーナルと共有されます。記録内容は、アカウントが閲覧できる範囲およびTelegramが配信する内容によって異なります。</figcaption>
 </figure>
-<p>削除通知には、信頼できる削除時刻も、メッセージを削除した人物も記載されていません。これらの情報を不明なままにしておくことで、観察と推測との区別が保たれます。</p>
+<p>Telegram は、誰がいつメッセージを削除したかを正確には伝えません。TgWitness は推測せず、その欄を空のままにします。</p>
 
 <h2 id="chain">記録を変更する。ハッシュを追跡する。</h2>
-<p>各レコードには、前のレコードのハッシュが含まれています。そのレコード自身のハッシュは、そのリンクを含むイベントフィールド全体をカバーしています。外部に保持されたチェックポイントは、特定のジャーナルの長さと先頭ハッシュを固定します。</p>
+<p>どの記録にも直前の記録のハッシュが入っています。別の場所に保管したチェックポイントが、ジャーナルの長さと最後のハッシュを固定します。</p>
 <figure class="lab hash-lab" data-lab="hash" aria-labelledby="hash-caption">
   <div class="lab-top"><span class="lab-kicker">02 / HASH-CHAIN SANDBOX</span><span class="sample-tag">実際の SHA-256 · 記録例</span></div>
   <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="サンプルジャーナルを変更する">
@@ -88,14 +88,14 @@
 </figure>
 
 <h2 id="formulas">実際のルールを数行でまとめると</h2>
-<div class="formula-card"><span class="lab-kicker">HASH + 署名</span><div class="formula" translate="no" role="math" aria-label="h zero は、16進数の 0 が 64 個並んだものです。h i は、正規化されたイベント i の 16進数表記の SHA-256 ハッシュ値です。署名 i は、h i の生バイト列に対して Ed25519 を用いて生成されたものです。">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p><strong>C</strong>は、9つのイベントフィールドをUTF-8形式のJSONとしてシリアライズします。キーはソート済みで、余分な空白はなく、ASCIIエスケープもNaN/無限大も含まれません。イベントの<code>previous_hash</code>はh<sub>i−1です</sub>。表示されているh0は64個のゼロ文字を意味し、署名は32バイトの生のダイジェストをカバーしています。</p></div>
-<p>9つのフィールドは、<code>seq</code>、<code>observed_at</code>、<code>source_at</code>、<code>kind</code>、<code>chat_id</code>、<code>message_id</code>、<code>actor_id</code>、<code>payload</code>、<code>previous_hash</code>です。これはTgWitnessで<a href="../reference/evidence/#event-canonicalization">規定されているJSONエンコーディング</a>です。ハッシュおよび署名自体は、ハッシュ入力フィールドではありません。</p>
-<div class="formula-card"><span class="lab-kicker">保持されたチェックポイント</span><div class="formula" translate="no" role="math" aria-label="エクスポート数は少なくともチェックポイント数以上であり、チェックポイントの位置でエクスポートされたハッシュは、保持されている先頭ハッシュと一致します。">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>固定されたコレクターキーの下にあるチェックポイントの署名を検証し、その境界を検証済みのジャーナルと比較してください。後のエクスポートにはより多くのレコードが含まれている可能性がありますが、それらは依然として以前のチェックポイントで一致している必要があります。</p></div>
+<div class="formula-card"><span class="lab-kicker">HASH + 署名</span><div class="formula" translate="no" role="math" aria-label="h zero は、16進数の 0 が 64 個並んだものです。h i は、正規化されたイベント i の 16進数表記の SHA-256 ハッシュ値です。署名 i は、h i の生バイト列に対して Ed25519 を用いて生成されたものです。">h<sub>0</sub> = 0<sup>64</sup><br>h<sub>i</sub> = hex(SHA-256(C(e<sub>i</sub>)))<br>σ<sub>i</sub> = Ed25519.Sign(sk, unhex(h<sub>i</sub>))</div><p><strong>C</strong> は 9 つのイベント項目を UTF-8 JSON にしたものです：キーはソート済み、余分な空白なし、ASCII エスケープなし、NaN/無限大なし。<code>previous_hash</code> は h<sub>i−1</sub>、h<sub>0</sub> は 64 個のゼロで、署名はダイジェストの生の 32 バイトを対象とします。</p></div>
+<p>項目：<code>seq</code>、<code>observed_at</code>、<code>source_at</code>、<code>kind</code>、<code>chat_id</code>、<code>message_id</code>、<code>actor_id</code>、<code>payload</code>、<code>previous_hash</code>。完全な仕様：<a href="../reference/evidence/#event-canonicalization">イベントのエンコード</a>。</p>
+<div class="formula-card"><span class="lab-kicker">保持されたチェックポイント</span><div class="formula" translate="no" role="math" aria-label="エクスポート数は少なくともチェックポイント数以上であり、チェックポイントの位置でエクスポートされたハッシュは、保持されている先頭ハッシュと一致します。">N<sub>export</sub> ≥ N<sub>checkpoint</sub><br>h<sub>export</sub>[N<sub>checkpoint</sub>] = H<sub>checkpoint</sub></div><p>固定した鍵でチェックポイントの署名を確認し、それからジャーナルと比べます。後のエクスポートは長くなってもかまいませんが、チェックポイントの位置で一致していなければなりません。</p></div>
 
 <h2 id="layers">3つの質問、3つの異なる確認手順</h2>
-<div class="evidence-layers"><a href="../exports/"><span>01 / 完全性</span><strong>この記録は変更されましたか？</strong><p>ハッシュ値と署名は、別途信頼された鍵を用いて検証してください。</p></a><a href="../witness/"><span>02 / 継続性</span><strong>以前にはどのような内容が記載されていましたか？</strong><p>署名付きエクスポートデータを、別の証人が保持しているチェックポイントと比較してください。</p></a><a href="../cases/"><span>03 / 提供</span><strong>これらのテストイベントは届きましたか？</strong><p>各アカウントのジャーナルと照合し、送信、編集、削除の操作を管理します。</p></a></div>
-<p class="callout">署名を使用して保存された記録を確認し、チェックポイントを使用して以前の境界と比較し、制御された配信テストを使用して収集状況を測定してください。それぞれが特定の疑問に答えるものです。<a href="../reference/evidence/#verification-scope">検証範囲と信頼の前提条件をよくお読みください。</a></p>
-<p><a href="../cases/">アカウント全体の調査</a>を、取得から事件資料のまとめまで追跡します。</p>
+<div class="evidence-layers"><a href="../exports/"><span>01 / 完全性</span><strong>この記録は変更されましたか？</strong><p>信頼できる鍵でハッシュと署名を確認します。</p></a><a href="../witness/"><span>02 / 継続性</span><strong>以前にはどのような内容が記載されていましたか？</strong><p>エクスポートを、証人が保管したチェックポイントと比べます。</p></a><a href="../cases/"><span>03 / 提供</span><strong>これらのテストイベントは届きましたか？</strong><p>テストメッセージを送信・編集・削除し、各アカウントが何を記録したかを見ます。</p></a></div>
+<p class="callout">署名は「変更されたか」、チェックポイントは「以前のものと一致するか」、テストメッセージは「すべて記録できたか」に答えます。<a href="../reference/evidence/#verification-scope">検証で証明できること、できないこと。</a></p>
+<p>次は：開始からケースパッケージまでの<a href="../cases/">アカウント全体の調査</a>。</p>
 <p class="callout" lang="en" dir="ltr"><a href="../../../docs/export-clinic/">Export Clinic: watch the controlled Desktop experiment</a>. Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.</p></article>
 <footer class="guide-footer"><a class="reference" href="../reference/how-it-works/">完全な参照情報 →</a><a class="next-guide" href="../cases/"><span>次のステップ</span><strong>すべてのチャットを横断的に調査する →</strong></a><p>これらのガイドは、現在の実装について説明しています。検証結果および残された課題については、別途文書化されています。 <a href="../reference/verification/">テスト済みの内容 →</a></p></footer>
 </main>

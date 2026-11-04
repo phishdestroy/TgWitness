@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/groups/
 
-Her hesabın kayıtlarını ve imza kimliğini ayrı tutarken, birden fazla toplama hesabını bir arada yönetin.
+Birden çok hesabı birlikte yürütün, her biri yine kendi kayıtları ve anahtarıyla.
 
-Bir hesap grubu, bağlantı durumunu, gözlem kontrollerini, paylaşılan ayarları ve dışa aktarmaları tek bir çalışma görünümünde bir araya getirir. Bu özellik, aynı soruşturmayı kapsayan veya tutarlı bir çalışma düzenine ihtiyaç duyan birden fazla hesap olduğunda kullanışlıdır.
+Bir grup bağlantı durumunu, başlat/duraklat'ı, paylaşılan ayarları ve dışa aktarımları tek ekranda toplar. Birden çok hesap aynı dava üzerinde çalışırken kullanışlıdır.
 
 ## Grup genel bakışını açın
 
-**Hesaplar** bölümünde grubu açın. Her hesap, gözlem durumunu, bağlantı yolunu, son kontrolün başarılı olduğu zamanki en son ölçülen yol gecikmesini ve en son kaydedilen mesajı gösterir. **Dikkat gerektiren** bağlantılar, üzerinde çalışılması gereken hesaplara yönlendirir; **Düzelt seçeneği,** ilgili çalışma alanını ve kontrol panelini açar.
+Grubu **Hesaplar**'da açın. Her hesap durumunu, rotasını, gecikmesini ve son kaydedilen mesajını gösterir. **İlgi gerekiyor** sorunluları listeler, **Düzelt** sizi doğrudan oraya götürür.
 
-**"Tümünü Başlat**" ve **"Tümünü Duraklat" seçenekleri,** onaylandıktan sonra uygun hesaplar üzerinde işlem yapar. **Grup ayarları,** seçilen ayarları paylaşır; kendi değerlerine sahip hesaplar, siz bunları değiştirmeyi seçene kadar bu değerleri korur.
+**Tümünü başlat** / **Tümünü duraklat** harekete geçmeden önce sorar. **Grup ayarları** paylaşılır, ama bir hesabın kendi değerleri siz değiştirene kadar kalır.
 
 ### Bir grup genelinde yapılan rota değişikliğini gözden geçirin
 
@@ -51,19 +51,19 @@ Referans hesap: mevcut yol korunmuştur.
 
 ## Bir inceleme adımı ekleyerek süreci değiştirin
 
-1. **"Grup rotasını değiştir**" seçeneğini seçin, ardından bağlantı türünü ve ayarları belirleyin.
-2. **"Seçimi Gözden Geç" seçeneğini** seçin. Listelenen hesapları ve her birinin rota geçersiz kılma ayarlarını inceleyin.
-3. **"Hazırla ve kontrol et"** seçeneğini seçin. Kontrol işlemi yeni bir Telegram aktarımını kullanır; desteklenen HTTP rotaları ayrıca HTTPS çıkış kontrolünü de bildirir.
-4. **"İşaretli bağlantıyı uygula"** seçeneğini seçin ve her hesabın sonucunu inceleyin. Daha önce yürütülmekte olan gözlem, uygulamanın başarılı olduğu yerden devam eder; etkin olmayan hesaplar ise etkin olmayan durumda kalır.
+1. **Grup rotasını değiştir**, türü ve ayarları seçin.
+2. **Seçimi gözden geçir**: hangi hesaplar değişiyor, hangilerinin kendi rotası var.
+3. **Hazırla ve kontrol et** taze bir Telegram bağlantısını ve mümkünse çıkış IP'sini test eder.
+4. **Kontrol edilen bağlantıyı uygula** ve her sonuca bakın. Çalışan hesaplar devam eder, boşta olanlar boşta kalır.
 
-Gecikme, ölçülen Telegram bağlantı kurulumunu tanımlar. Çıkış IP kontrolü, kaydedilen kontrol zamanındaki o rotayı tanımlar. Hesap yetkilendirme ve gözlem durumunun kendi göstergeleri vardır; bir grup değişikliği, hesap başına farklı sonuçlarla sonuçlanabilir.
+Gecikme Telegram bağlantısının kurulma süresidir; çıkış IP'si, rotanın kontrol anında gösterdiğidir. Sonuçlar hesaba göre değişebilir.
 
 ## Çakışan erişim kullanın
 
-**"Birkaç hesap tarafından görülen sohbetler" seçeneği,** paylaşılan kaynakları ve mevcut çalışma alanı gözlem kapsamını gösterir. Uygun kanallar ve süper gruplar, bir sohbetin geçmişini bölmek için **"… hesaplarıyla dışa aktar"** seçeneğini kullanabilir. Özel sohbetler ve normal gruplar, mesaj numaraları bir hesabın geçmişine ait olduğu için başlangıç hesabında kalır.
+**Birden çok hesabın gördüğü sohbetler** paylaşılan kaynakları ve kapsamlarını listeler. Kanallar ve süper gruplar **… hesapla dışa aktar** ile birden çok hesapla aynı anda dışa aktarılabilir. Özel sohbetler ve basit gruplar olmaz; oradaki mesaj numaraları hesaba özgüdür.
 
 ## Grubu bir paket olarak dışa aktarın
 
-**Dışa aktarma grubu,** her hesabın imzalanmış dışa aktarımını ve bu dosyaların imzalanmış bir listesini içeren tek bir ZIP dosyası oluşturur. Orijinal çalışma alanı kimlikleri ve parmak izleri, doğrulama amacıyla kullanılabilir durumda kalır. Bu referansları kullanarak hesaplar arası bir anlatı oluşturun; tek bir birleştirilmiş zaman çizelgesi yine de ayrı olarak derlenir.
+**Grubu dışa aktar**, her hesabın imzalı dışa aktarımını ve bunların imzalı listesini içeren tek bir ZIP verir. Her biri doğrulama için kendi parmak izini korur. Birleşik zaman çizelgesini yine siz kurarsınız.
 
-[Rapor tasarımı](https://phishdestroy.github.io/TgWitness/tr/docs/reports/), [çalışma alanı içindeki bir Case Board](https://phishdestroy.github.io/TgWitness/tr/docs/case-board/) veya [dışa aktarma doğrulaması](https://phishdestroy.github.io/TgWitness/tr/docs/exports/) ile devam edin.
+Sıradaki: [raporlar](https://phishdestroy.github.io/TgWitness/tr/docs/reports/), [Case Board](https://phishdestroy.github.io/TgWitness/tr/docs/case-board/), [dışa aktarımları doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/exports/).

@@ -241,20 +241,6 @@ Os membros compartilham as configurações do grupo; uma conta pode manter seus 
 
 **Conta → Sair do Telegram** (com a observação pausada) solicita ao Telegram que encerre a sessão, de modo que ela também desapareça da seção **Configurações → Dispositivos** da conta e remova a sessão do cofre do espaço de trabalho. O registro, as fontes, as configurações e a chave de assinatura permanecem, e o registro registra o encerramento da sessão. O espaço de trabalho ainda pertence à sua conta: somente essa conta poderá se conectar a ele novamente. Se o Telegram não responder, a sessão ainda será removida aqui e o painel indicará isso; encerre-a no Telegram em **Configurações → Dispositivos**.
 
-## Converta uma sessão do Telethon para o modo offline
-
-O painel importa arquivos `.session` diretamente. Para uma conversão offline para um arquivo StringSession, execute a partir da pasta do projeto:
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-O conversor lê apenas arquivos SQLite do Telethon (até 64 MiB), nunca modifica os dados de entrada, não realiza solicitações de rede e se recusa a sobrescrever um arquivo de saída já existente.
-
 ## Mantendo os arquivos de contas em segurança
 
 - Trate cada `.session`, TData ZIP, StringSession, chave de autenticação e JSON de conta como uma senha. O TgWitness mantém a autorização importada em seu cofre criptografado; o(a) senhor(a) pode remover os arquivos originais posteriormente.

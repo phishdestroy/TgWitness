@@ -62,10 +62,3 @@ La página del grupo `/groups/<id>` muestra a los miembros, lo que requiere aten
 Un espacio de trabajo con una sesión o una configuración anterior ya completada no muestra el asistente. Sus valores no se sustituyen por un objetivo cuando se carga la página. Ocultar un campo no desactiva la función ni elimina su valor.
 
 La estimación de tamaño y tiempo se basa en hasta tres chats seleccionados y hasta 20 mensajes de cada uno. Se trata de una estimación: no tiene en cuenta los límites de Telegram, la velocidad de un servidor concreto ni los archivos de cada chat.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

@@ -2,11 +2,11 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/start/
 
-首先，請參閱一個實際運作範例。接著，請連結您的帳戶。
+先在展示版中隨意看看，再連接您自己的帳戶。
 
 ## 無需註冊即可瀏覽
 
-下載或克隆該專案，安裝 **Python 3.11 或更新版本**，並執行示範程式。啟動程式會建立本地環境並安裝已標記的依賴項。
+取得專案，準備好 **Python 3.11 或更新版本**，執行展示版。其餘的由啟動器處理。
 
 ```
 git clone https://github.com/phishdestroy/TgWitness.git
@@ -25,7 +25,7 @@ cd TgWitness
 sh start.sh --demo
 ```
 
-瀏覽器將開啟一個包含虛構訊息的工作區。您可開啟對話、比對編輯內容，並檢視匯出檔案。示範模式不會連線至 Telegram。
+瀏覽器會開啟一個含虛構訊息的工作區。開啟聊天室，比較一次編輯，看看一份匯出。不涉及 Telegram。
 
 ![TgWitness 對話檢視畫面及範例訊息](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
@@ -33,7 +33,7 @@ sh start.sh --demo
 
 ## 建立您自己的工作區
 
-結束示範流程後，請使用標準啟動程式：
+關閉展示版，然後：
 
 ### Windows
 
@@ -47,12 +47,12 @@ sh start.sh --demo
 sh start.sh
 ```
 
-開啟啟動器顯示的本地位址。若系統提示，請輸入終端機中指定之本地檔案內的**面板存取憑證**。此操作將解鎖 TgWitness；此程序與 Telegram 的登入程序是分開的。
+開啟啟動器顯示的網址，貼上它所指檔案中的**面板存取權杖**。這是 TgWitness 的權杖，不是 Telegram 的。
 
 ## 擷取您的第一則訊息
 
 1. [連結一個專用的 Telegram 帳號。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/accounts/)
-2. 請選擇該帳號可存取的群組或頻道，然後開始監測。
-3. 在您所控制的測試群組中發送一則新訊息，並確認該訊息是否出現在日誌中。
+2. 選擇一個群組或頻道，開始觀察。
+3. 在測試群組中傳送一則訊息，看著它出現在日誌中。
 
 若要進行伺服器安裝，請參閱「[保持運作」指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/server/)。

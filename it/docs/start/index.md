@@ -2,11 +2,11 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/start/
 
-In primo luogo, esamini un esempio pratico. Successivamente, colleghi il proprio account.
+Esplori prima la demo, poi colleghi il Suo account.
 
 ## Date un’occhiata al sito senza creare un account
 
-Scarichi o cloni il progetto, installi **Python 3.11 o versioni successive** ed esegua la demo. Il programma di avvio crea un ambiente locale e installa le dipendenze indicate.
+Scarichi il progetto, abbia **Python 3.11 o successivo** e avvii la demo. Al resto pensa il launcher.
 
 ```
 git clone https://github.com/phishdestroy/TgWitness.git
@@ -25,7 +25,7 @@ cd TgWitness
 sh start.sh --demo
 ```
 
-Il browser apre un’area di lavoro con messaggi fittizi. È possibile aprire una conversazione, confrontare una modifica e esaminare un file esportato. La modalità demo non si connette a Telegram.
+Nel browser si apre uno spazio con messaggi inventati. Apra una chat, confronti una modifica, guardi un’esportazione. Telegram non è coinvolto.
 
 ![Visualizzazione delle conversazioni in TgWitness con messaggi di esempio](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
@@ -33,7 +33,7 @@ Un esempio di area di lavoro. Il Suo registro personale verrà avviato separatam
 
 ## Crea il vostro spazio di lavoro
 
-Chiuda la procedura di dimostrazione, quindi utilizzi il normale programma di avvio:
+Chiuda la demo, poi:
 
 ### Windows
 
@@ -47,12 +47,12 @@ Chiuda la procedura di dimostrazione, quindi utilizzi il normale programma di av
 sh start.sh
 ```
 
-Apra l’indirizzo locale indicato dal programma di avvio. Se richiesto, inserisca il **token di accesso al pannello** dal file locale indicato nel terminale. Ciò sblocca TgWitness; si tratta di una procedura distinta dall’accesso a Telegram.
+Apra l’indirizzo mostrato dal launcher e incolli il **token di accesso al pannello** dal file indicato. Serve a TgWitness, non a Telegram.
 
 ## Acquisite il vostro primo messaggio
 
 1. [Collegare un account Telegram dedicato.](https://phishdestroy.github.io/TgWitness/it/docs/accounts/)
-2. Selezionare un gruppo o un canale a cui l’account ha accesso, quindi avviare il monitoraggio.
-3. Invii un nuovo messaggio in un gruppo di prova da Lei controllato e verifichi che compaia nel registro.
+2. Scelga un gruppo o un canale e avvii l’osservazione.
+3. Invii un messaggio nel Suo gruppo di prova e lo guardi comparire nel diario.
 
 Per l’installazione su server, segua le istruzioni riportate nella sezione [«Keep it running](https://phishdestroy.github.io/TgWitness/it/docs/server/)».

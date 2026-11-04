@@ -2,17 +2,17 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/accounts/
 
-Bir ish maydoni bitta akkaunt, uning jurnali va imzolash kalitini o'z ichiga oladi.
+Bitta ish maydoni = bitta hisob, uning jurnali va kaliti.
 
 ## Imzolash usulini tanlang
 
-**Hisoblarni** oching, ish maydonini qo'shing va uning ulanish sozlamalarini oching. Kuzatuv uchun maxsus hisobdan foydalaning.
+**Hisoblar** → ish maydoni qo'shish → ulanish sozlamalari. Buning uchun alohida hisobdan foydalaning.
 
-- **QR kod:** uni Telegram qurilma sozlamalaridan skanerlang va yangi kirishni tasdiqlang.
-- **Telefon raqami:** raqamni, Telegram yuboradigan kodni va agar ikki bosqichli tasdiq yoqilgan bo'lsa, parolingizni kiriting.
-- **Sessiya importi:** qo'llab-quvvatlanadigan sessiyani yoki sizga tegishli Telegram Desktop ma'lumotlarini import qiling.
+- **QR kod:** Telegram'ning Qurilmalar ekranidan skanerlang va tasdiqlang.
+- **Telefon raqami:** raqam, kod, so'ng bo'lsa 2FA paroli.
+- **Sessiya importi:** o'z sessiya faylingiz yoki Telegram Desktop ma'lumotlari.
 
-O'rnatilgan API profilini tanlang yoki o'zingizning API ID va xeshingizni kiriting. API profili mijozni aniqlaydi; u hisobga kirishni amalga oshirmaydi yoki ulanishni anonim qilmaydi.
+O'rnatilgan API profilidan yoki o'z API ID va hash'ingizdan foydalaning. U faqat ilovani aniqlaydi, sizni kiritmaydi va hech narsani yashirmaydi.
 
 **Avval proksi kerakmi?**
 
@@ -20,20 +20,20 @@ Kirishdan oldin [ulanish yo'nalishini tanlab, sinab](https://phishdestroy.github
 
 ## Kuzatiladigan narsani tanlang
 
-1. Manba ro'yxatini oching va kerakli suhbatlar, guruhlar yoki kanallarni tanlang.
-2. Kuzatuvni boshlashdan oldin, jumladan media fayllar bo'yicha ham, yig'ish sozlamalarini ko'rib chiqing.
-3. Yig'gichni ishga tushiring va uning ulanishini hamda so'nggi faoliyatini tekshiring.
+1. Kerakli chatlar, guruhlar yoki kanallarni tanlang.
+2. Yig'ish sozlamalarini, media bilan birga, tekshiring.
+3. Ishga tushiring va ulanish hamda so'nggi faollikni tekshiring.
 
-Hisob manbaga kirish huquqiga ega bo'lishi kerak. Turli rollar turli voqealarni ko'rishi mumkin; jurnal esa o'sha hisob qanday ma'lumot olganini aks ettiradi.
+Hisobning kirish huquqi bo'lishi kerak. Administratorlar va a'zolar turli narsalarni ko'radi, jurnal bu hisob nima olganini ko'rsatadi.
 
-Butun akkauntni qamrab oladigan ish yuzasidan **Manbalar → Kuzatuv doirasi → Tergov rejimini** ishlating, sozlamalarni ko'rib chiqing va **Doirani saqlash tugmasini** bosing. [To'liq tergov bo'yicha bosqichma-bosqich ko'rsatma](https://phishdestroy.github.io/TgWitness/uz/docs/cases/) barcha ko'rinadigan suhbat turlari, eski tarix, odamlar profillari, suhbatlararo havolalar va dalillarni topshirishni o'z ichiga oladi.
+Butun hisobmi? **Manbalar → Kuzatuv doirasi → Tergov rejimi**, tekshiring, **Doirani saqlash**. To'liq qo'llanma: [butun hisobni tergov qilish](https://phishdestroy.github.io/TgWitness/uz/docs/cases/).
 
 ## Butun yo'lni tekshiring
 
-Siz nazorat qiladigan test guruhida boshqa akkauntdan noyob xabar yuboring, uni tahrirlang va o'chiring. Jurnalga bu uchta voqeani tasdiqlang, so'ng yozuvni [eksport qiling va tekshiring](https://phishdestroy.github.io/TgWitness/uz/docs/exports/).
+Sinov guruhingizda boshqa hisobdan xabar yuboring, tahrirlang, o'chiring. Uchalasi ham jurnalda ko'rinishi kerak. So'ng [eksport qiling va tekshiring](https://phishdestroy.github.io/TgWitness/uz/docs/exports/).
 
-Ulanish holati ulanishni tasdiqlaydi. Qabul qilingan sinov xabari ma'lum bir voqeaning ushbu ish maydoniga yetib kelganini tasdiqlaydi.
+"Ulangan" ulanish ishlayotganini bildiradi. Ushlangan sinov xabari esa hodisalar haqiqatan yetib kelayotganini bildiradi.
 
 ## Yana bir akkaunt qo'shing
 
-**Hisoblar** bo'limida yana bir ish maydonini yarating va sozlamalarni takrorlang. Har bir hisobning imzolash kaliti barmoq izini saqlab qo'ying, shunda keyinchalik uning eksportlarini aniqlashingiz mumkin.
+**Hisoblar** bo'limida yangi ish maydoni, xuddi shu qadamlar. Keyinroq eksportlarni ajrata olish uchun har bir hisob kalitining barmoq izini yozib qo'ying.

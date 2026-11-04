@@ -139,11 +139,6 @@ nie zapewnia uzyskania sygnatury czasowej.</li>
 <p>Pomyślna weryfikacja potwierdza integralność w odniesieniu do zaufanego klucza kolektora
 i zachowanego zakresu. Zobacz <a href="#verification-scope">zakres weryfikacji</a>, aby zapoznać się z
 założeniami dotyczącymi zaufania oraz <a href="../verification/">wynikami walidacji</a> przeprowadzonych kontroli.</p>
-<p>Powiadomienia wysyłane za pośrednictwem Apprise pomagają operatorom śledzić aktywność w obszarze roboczym i na czacie.
-Zawierają one nazwy i liczby; fragmenty usuniętych i edytowanych wiadomości są opcjonalne
-i domyślnie wyłączone. Do zachowanych zapisów należy używać podpisanego dziennika i eksportów.
-W przypadku proxy obszaru roboczego powiadomienia korzystają z tej samej trasy; usługi, które nie mogą z niej korzystać,
-oraz trasy MTProxy są odrzucane.</p>
 <h2 id="handover-extract">Fragment protokołu przekazania<a class="anchor" href="#handover-extract" aria-label="Link do tej sekcji">#</a></h2>
 <p>Podpisany plik ZIP zawiera cały dziennik obszaru roboczego. Gdy sąd, prawnik lub biuro ds. nadużyć potrzebuje
 tylko niektórych czatów, określonego okresu lub konkretnych osób, <strong>opcja Eksporty → Wyciąg do przekazania</strong> przygotowuje zredukowaną
@@ -227,12 +222,6 @@ trzymać pliki <code>viewer/</code> i <code>media/</code> obok raportu. Wybrane 
 --evidence ARCHIVE.zip</code>, aby porównać je z podpisanym archiwum.
 Narzędzie weryfikujące sprawdza identyfikator raportu, klucz podpisu, granice archiwum oraz każdą wybraną pozycję; pozycje edytowane,
 brakujące i zduplikowane nie przechodzą weryfikacji. Uwagi dotyczące wyboru oraz czas utworzenia pozostają niepodpisanymi metadanymi.</p>
-<p>Obecne eksporty archiwów przechowują fragmenty przeglądarki w formacie <code>viewer/*.html</code>. Każdy fragment jest ładowany w ramce typu sandbox
-z dozwolonymi skryptami, ale <strong> bez dostępu do tego samego źródła </strong>, i wysyła swój tekst JSON do raportu.
-Raport sprawdza źródło wiadomości i jej SHA-256 względem podpisanego deskryptora przed wyświetleniem.
-Własna polityka CSP raportu zezwala wyłącznie na skrypt aplikacji z hashowaniem. Brakujące dane można odzyskać,
-wybierając pasujący plik ZIP w zakładce „Sprawdź”; dane odczytane z pliku ZIP są analizowane bez ich wykonywania.
-Wcześniej wyeksportowane raporty zachowują własną wbudowaną przeglądarkę i pozostają weryfikowalne.</p>
 <p>Luki w numeracji wiadomości są wyświetlane wyłącznie w przypadku kompletnego, niefiltrowanego strumienia czatu w porządku rosnącym. Ukrycie
 kategorii lub niepowodzenie w załadowaniu fragmentu danych nie może sprawić, że pominięty wiersz stanie się dowodem na brak
 wiadomości. Podświetlanie wyników wyszukiwania działa na tekście zwykłym przed zastosowaniem sekwencjiHTML, zachowując dosłowne znaczniki.</p>
@@ -245,20 +234,6 @@ uwagi dotyczące formatu danych w języku raportu, a po nim znajduje się komple
 wymienione w nim pliki, z wyłączeniem samego siebie, plików <code>manifest.json</code> i <code>manifest.sig</code>; podpisany manifest
 obejmuje również plik <code>SHA256SUMS</code>. Należy pozostawić oryginalny plik ZIP bez zmian, a pliki robocze zapisać poza
 rozpakowanym folderem. Raporty PDF zawierają zakładki sekcji oraz identyfikatory sprawy/raportu na kolejnych stronach.</p>
-<p>Ustawienia raportów są zapisywane dla poszczególnych obszarów roboczych. Język raportu może być zgodny z językiem panelu lub stały;
-wyraźnie określony język w żądaniu eksportu zastępuje ten wybór wyłącznie dla tego eksportu. Akceptowane są wszystkie języki
-panelu, w tym cztery języki pisane od prawej do lewej.</p>
-<p>Przełącznik transkrypcji dziennika steruje przeglądarką HTML oraz transkrypcją PDF. Pełny zapis JSON jest
-opcją szczegółową HTML: po włączeniu przeglądarka zawiera dokładny wyeksportowany zapis, w tym
-zminimalizowany zapis w ramach przekazania. Wyłączenie tej opcji nie zmienia autorytatywnego pliku dziennika. Podglądy
-zdjęć dotyczą zarówno czatu, jak i dziennika HTML. Kolejne serie sygnałów kontrolnych można zwinąć bez
-usuwania rekordów; rozwinięcie długich serii powoduje stopniowe ładowanie ich wierszy.</p>
-<p><code>part_size</code> to maksymalna liczba pozycji w pliku danych przeglądarki (500–100 000) oraz maksymalny rozmiar transkrypcji
-zawartej w pliku PDF. Fragmenty plików przeglądarki są również dzielone przy limicie danych wynoszącym 16 MiB. Dłuższe transkrypcje PDF
-są pomijane wraz z wyraźnym odnośnikiem do podpisanych plików źródłowych i przeglądarki HTML. Samodzielny raport HTML
-zawiera maksymalnie 20 000 elementów lub 32 MiB danych elementów; po przekroczeniu tego limitu elementy te są zwalniane, a
-czytelnik jest kierowany do archiwum. Te ograniczenia wyświetlania nigdy nie powodują obcięcia podpisanych plików źródłowych.
-Konfiguracja czcionek PDF łączy czcionki CJK tam, gdzie jest to konieczne: sama czcionka chińska może nie zawierać koreańskiego hangulu.</p>
 <h3 id="the-chat-at-export-time">Czat w momencie eksportu<a class="anchor" href="#the-chat-at-export-time" aria-label="Link do tej sekcji">#</a></h3>
 <p>Eksport czatu rejestruje informacje podane przez Telegram na temat czatu w momencie rozpoczęcia eksportu: własne
 etykiety Telegram (<code>scam</code>, <code>fake</code>, <code>restricted</code> wraz z uzasadnieniami, <code>verified</code>), nazwy użytkowników, opis, liczbę
@@ -473,10 +448,6 @@ weryfikacji przywrócone pliki nie są publikowane. Kontrole retencji porównuj�
 oraz datę z terminem wysłanym podczas przesyłania (z tolerancją zaokrąglenia wynoszącą jedną sekundę). Wygasły,
 nieważny lub skrócony termin nie jest uznawany za zweryfikowany. Status informuje o losowo wybranym obiekcie,
 którego retencja została odczytana dla danej operacji przesyłania.</p>
-<p>Postęp kopiowania jest ograniczony do miejsca docelowego i klucza szyfrującego. Zmiana punktu końcowego, zasobnika
-lub prefiksu powoduje rozpoczęcie pełnego kopiowania lokalnie przechowywanego dziennika, plików multimedialnych i punktów kontrolnych do
-tego miejsca docelowego. Stary postęp nieobjęty zakresem zostaje zachowany, ale po aktualizacji jest odtwarzany jednokrotnie. Historyczne
-eksporty czatów, które zostały już usunięte z lokalnej skrzynki nadawczej, pozostają w poprzednim miejscu docelowym.</p>
 <p>Brakujące lub uszkodzone pliki lokalne są zgłaszane jako błąd danego przebiegu i kursor pozostaje przed
 tym miejscem, dzięki czemu plik zostanie ponownie przetworzony podczas następnego przebiegu; pliki, punkty kontrolne i eksporty znajdujące się za nim są nadal
 kopiowane. Funkcja przywracania
@@ -545,9 +516,6 @@ została zarejestrowana, a także każdą nową i zakończoną sesję. Odczytuje
 <p>Czego nie pokazują: drand potwierdza jedynie kolejność zapisów względem czasu publicznego,
 a lista urządzeń stanowi oświadczenie Telegram przekazane za pośrednictwem kolektora, podpisane przez kolektora
 tak jak każdy inny zapis.</p>
-<p>Przetestowano 1 listopada 2026 r.: <code>tools/check_evidence_witnesses.py --live</code> wysłał prawdziwą rundę od
-<code>drand.cloudflare.com</code>, wyeksportował dziennik i potwierdził rundę za pomocą <code>drand.cloudflare.com</code>
-oraz <code>api.drand.sh</code>; lista urządzeń została przetestowana przy użyciu symulowanych odpowiedzi Telegram, a nie prawdziwego konta.</p>
 <p><strong> Dziennik Cloudflare Gateway </strong> (<code>cloudflare.gateway_dns</code>). W przypadku serwera, który korzysta z
 bramy Cloudflare Gateway (<a href="../high-assurance/#cloudflare-as-an-outside-witness"> – Gateway DNS </a>), każda
 kopia zawiera dane zarejestrowane przez bramę od momentu poprzedniej kopii: jeden wpis na okno trwające maksymalnie trzy

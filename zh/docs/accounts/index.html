@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首页</a> <span aria-hidden="true">/</span> <a href="../">文档</a> <span aria-hidden="true">/</span> <span aria-current="page">连接账户</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文档 / 05</p><h1>连接账户</h1><p class="guide-outcome">一个工作区包含一个账户、其日志及其签名密钥。</p>
+<article class="guide-content"><p class="eyebrow">文档 / 05</p><h1>连接账户</h1><p class="guide-outcome">一个工作区 = 一个账户、它的日志和它的密钥。</p>
 <h2 id="sign-in">选择登录方式</h2>
-<p>登录账户，添加工作区并打开其连接设置。请使用专用的账户进行监控。</p>
-<ul><li><strong>二维码：</strong>请通过 Telegram 的设备设置扫描该二维码，并确认新登录。</li><li><strong>电话号码：</strong>请输入号码、Telegram发送的验证码，以及（若已启用）您的两步验证密码。</li><li><strong>会话导入：</strong>导入您拥有的受支持会话或 Telegram Desktop 数据。</li></ul>
-<p>选择一个内置的 API 配置文件，或输入您自己的 API ID 和哈希值。API 配置文件用于识别客户端；它不会登录任何账户，也不会使连接匿名化。</p>
+<p><strong>账户</strong> → 添加工作区 → 连接设置。请为此使用单独的账户。</p>
+<ul><li><strong>二维码：</strong>在 Telegram 的“设备”页面扫描并确认。</li><li><strong>电话号码：</strong>号码、验证码，如有两步验证再输入密码。</li><li><strong>会话导入：</strong>您自己的会话文件或 Telegram Desktop 数据。</li></ul>
+<p>使用内置 API 配置或您自己的 API ID 和 hash。它只用于标识应用，不会让您登录，也不会隐藏任何东西。</p>
 <details><summary>需要先设置代理吗？</summary><p>您可以在登录前<a href="../proxies/">选择并测试连接路径</a>。每个账户都有其专属的连接路径。</p></details>
 <h2 id="sources">选择监控内容</h2>
-<ol><li>打开源列表，选择您需要的聊天、群组或频道。</li><li>在开始监控之前，请检查数据采集设置，包括媒体文件。</li><li>启动采集器，并检查其连接状态及近期活动。</li></ol>
-<p>该账户必须能够访问源数据。不同角色的用户可见不同的事件；日志反映的是该账户收到的内容。</p>
-<p>若需针对整个账户展开调查，请使用<strong>“来源”→“观察范围”→“调查模式</strong>”，检查设置后点击<strong>“保存范围</strong>”。<a href="../cases/">完整的调查指南</a>涵盖所有可见的聊天类型、历史记录、用户资料、跨聊天引用以及证据移交流程。</p>
+<ol><li>选择您需要的聊天、群组或频道。</li><li>检查采集设置，包括媒体。</li><li>启动后检查连接和最近活动。</li></ol>
+<p>账户必须有访问权限。管理员和成员看到的内容不同，日志显示的是这个账户收到的内容。</p>
+<p>整个账户？<strong>来源 → 观察范围 → 调查模式</strong>，检查后点击<strong>保存范围</strong>。完整步骤：<a href="../cases/">调查整个账户</a>。</p>
 <h2 id="check">检查完整路径</h2>
-<p>在您控制的测试群组中，使用另一个账号发送一条唯一消息，对其进行编辑并删除。确认日志中记录了这三项操作，然后<a href="../exports/">导出并验证</a>该记录。</p>
-<p class="callout">“已连接”状态表明连接成功。“捕获的测试消息”则证实特定事件已到达此工作区。</p>
+<p>在测试群组中，用另一个账户发送一条消息，编辑它，再删除它。这三个事件都应出现在日志中。然后<a href="../exports/">导出并验证</a>。</p>
+<p class="callout">“已连接”表示连接正常。捕获到测试消息才说明事件确实送达。</p>
 <h2 id="more">添加另一个账户</h2>
-<p>在<strong>“账户</strong>”中创建另一个工作区，并重复上述设置。请保留每个账户的签名密钥指纹，以便日后识别其导出数据。</p>
+<p>在<strong>账户</strong>中新建工作区，步骤相同。请记下每个账户的密钥指纹，以便日后区分导出。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/accounts/">完整引用 →</a><a class="next-guide" href="../exports/"><span>下一步</span><strong>导出与验证 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../reference/verification/">已测试的内容 →</a></p></footer>
 </main>

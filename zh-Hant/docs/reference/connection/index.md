@@ -32,8 +32,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 上傳的 WireGuard 設定檔必須包含一個介面（Interface）和一個對等端（Peer）、完整的 IPv4 及 IPv6 路由，且不得包含鉤子（hooks）、包含（includes）、環境變數替換或額外的 監聽器（listeners）。公開端點位址會在啟動前進行解析並固定。 請使用外部 VPN 或 SOCKS5 閘道，以支援 OpenVPN/IPsec 及私有端點。
 
-合成檢查項目為 `python tools/check_guided_connection.py` 和 `python tools/check_guided_connection_browser.py`。可選的 `python tools/check_portable_routes_runtime.py` 會下載經過驗證的輔助程式，並 透過迴路測試裝置，測試其實際的本地進程生命週期。此操作 不會註冊 Cloudflare 裝置，亦不會使用 Telegram 帳戶。
-
 ## 驗證方法
 
 **API ID 和 API 雜湊值用於識別應用程式；它們並不能取代帳戶登入。** 在 TgWitness 中，這些資訊為選用項目。優先順序如下：首先是表單中輸入的一組值，其次是來自 匯入帳戶 JSON 檔案的一組值，接著是儲存於工作區的一組值，最後是內建的 50 組 公開配對組，當 Telegram 拒絕某組時，系統會以隨機順序嘗試並自動輪替。僅 Telegram Desktop 配對組 (2040) 會隨附相應的 Telegram Desktop 客戶端描述一併傳送。 您可將從 [my.telegram.org](https://my.telegram.org) 的 API 開發工具取得的專屬配對組用於所有帳戶；每個帳戶仍保有各自的授權。
@@ -70,8 +68,6 @@ python -m tgwitness.sessions account.session --out account.tgwitness-session
 
 1. 在「**新增帳戶」→「檔案**」下，載入結果或 貼上其字串，然後繼續。
 2. 請確認顯示的數字帳號 ID，選擇來源並開始監測。
-
-此轉換器以唯讀模式開啟 SQLite，不會執行任何資料結構升級或網路請求， 也不會輸出該會話內容。它會檢查資料結構版本、資料表類型、單一 會話列、IP/埠/資料中心以及金鑰長度。命令列介面 (CLI) 輸入限制為 64 MiB；StringSession 文字限制為 4 KiB。 面板轉換會將檔案上傳至已驗證的 TgWitness 伺服器，在記憶體中進行處理，並將標準化的憑證傳回該 瀏覽器，且不會儲存上傳的原始檔案。若使用遠端伺服器，請採用 HTTPS。
 
 **轉換後的檔案為未加密的帳戶存取密鑰。** 請將其存放在受保護的 儲存空間中，切勿將其提交至版本控制系統或傳送給第三方轉換服務。TgWitness 會將授權會話儲存於其加密金庫中。複製會話並不會 建立獨立的授權：請勿同時執行使用克隆授權金鑰的 客戶端，並假設其能獨立接收更新。
 
@@ -115,15 +111,9 @@ MTProto 是 Telegram 的通訊協定。Telethon 是 TgWitness 所使用的 Pytho
 
 當自動路由處於啟用狀態時，清單預設每小時刷新一次，傳輸檢查則 每十分鐘執行一次。這些間隔時間均可自行設定。**更新公開清單** 會觸發刷新；僅瀏覽清單並不會變更已儲存的手動路由。
 
-每個資料源的回應限制為 1 MiB，請求超時為 8 秒， 整體下載時限為 20 秒；重定向 將被拒絕。每個來源最多保留 64 筆相容的條目，並進行去重處理。 解析器支援十六進位數、base64url 密鑰以及 JSON 資料源。 偽造的 TLS `ee`、無效連結、私有／保留的 IP 字面量以及本機主機名稱將被 跳過。主機名稱會在使用前進行解析與檢查，且所選的 IP 地址將被 固定用於該連線。自動重新取得會再次解析主機名稱；若要再次解析，請重新套用 手動輸入的項目。
-
-若饋送回應失敗、為空或不相容，系統將保留先前的來源快照。 更新操作具有原子性與序列化特性，且每分鐘每個工作區僅限嘗試一次。 成功的傳輸探測僅代表連線已建立，並不代表匿名性或擷取完整性。
-
 **Telegram 流量與 HTTPS 請求使用不同的路由。**清單下載會使用 獨立的 HTTPS 連線，並透過提供的外部請求路由進行。 `TGWITNESS_PROXY_FEED_PROXY` 會明確地以 HTTP/SOCKS5 代理伺服器覆寫該路由； 兩種 Compose 版本的收集器皆會轉發該路由。背景池會跟隨主要工作區。 不會將任何 Telegram 會話、API 憑證、控制面板代幣或機器人代幣傳送給資料來源提供者。 提供者名稱、快照日期及下載路徑會顯示於**「清單來源」**欄位下。
 
 MTProxy 僅傳輸 Telegram 流量。工作區的 HTTP 操作（例如時間戳記、 通知、站外副本及來源檢查）在 已設定的情況下會使用獨立的 SOCKS5/HTTP 代理伺服器，之後則使用該帳戶的 SOCKS5/HTTP 路由。若未設定任一項，則「隱藏地址」功能會拒絕 該請求；其他模式則允許「直接」傳輸。外部請求可被停用。明確 設定的資訊流下載代理伺服器仍屬獨立的操作員覆寫選項。 獨立的見證服務則維持其專屬的路徑。
-
-透過 SOCKS5 或 HTTP 代理伺服器發送的僅限公開外部 HTTP 請求，會透過 同一代理伺服器，使用 Cloudflare DNS over HTTPS `https://1.1.1.1/dns-query` 解析 目標位址。僅主機名稱及 A/AAAA 查詢類型會傳送至解析器； 服務 URL、憑證及通知內容均不包含在內。 TLS 會驗證 解析器憑證以確認其 IP 位址。系統會檢查兩種位址家族， 若收到任何私有、迴圈、鏈路本位或保留的回應，則會拒絕該請求。 連線會使用經驗證的數值位址，同時保留服務原始的 HTTP Host 及 TLS 憑證名稱。 通知 HTTP 轉發與 CONNECT 請求均採用相同的目標檢查機制。若 DNS 查詢失敗，且無 本地目標 DNS 或直接備用方案，則會中止該請求。成功的回應會依 代理路由分別儲存在記憶體中，最長 30 秒且不超過其 DNS TTL； 快取上限為 128 筆條目。 代理主機名稱本身可使用本機 DNS。 SOCKS 和 CONNECT 失敗時，可在傳送 服務請求正文之前嘗試另一個經過驗證的位址。純 HTTP 轉發會在請求失敗時回報錯誤， 而不會自動透過另一個位址重傳其正文。
 
 對於由營運商管理的私有服務，現有的伺服器環境設定 `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` 可允許私有目的地，並維持 代理端的主機名稱解析。此設定無法透過控制面板啟用。僅限公開 模式會在查詢公開解析器之前拒絕 `.onion` 目的地；Tor 洋蔥 服務需要明確的私有目的地設定以及合適的代理。 此 DNS 行為適用於外部 HTTP 操作，不適用於 Telegram 的傳輸層。 Cloudflare 已針對 [JSON DNS 端點](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/)提供相關文件說明。
 
@@ -174,8 +164,6 @@ SOCKS5 和純 HTTP CONNECT 本身並不會加密代理憑證或 客戶端至代�
 
 「帳戶」中的**儲存保護功能**會顯示這些狀態。面板憑證是一種 存取密鑰，而非加密密碼。它授予管理員存取權限； [已發行的憑證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)可限定於特定帳戶和聊天室。工作區共享 主進程，並非獨立的租戶。
 
-一個明確啟動且隔離的合成示範環境，可透過直接 迴路連接自動開啟。此功能採用獨立的進程生命週期機制；既不會 洩露已設定的面板憑證，也不會授予存取真實工作區的權限。遠端、 代理或跨來源的請求均無法取得或使用此自動進入功能。 此便利功能並不會消除針對真實帳戶資料的驗證邊界。
-
 BitLocker、LUKS、FileVault 或受管加密卷宗皆可在 各自的威脅模型下保護儲存裝置。 已解鎖且正在運行的機器之管理員 仍可讀取資料。在儲存規劃中，應納入 SQLite WAL/SHM、媒體檔案、臨時匯出檔案、交換檔、備份 以及瀏覽器下載檔案。Docker 卷宗並非僅因 其為卷宗而自動加密。TgWitness 未實作 SQLCipher 或物件加密功能。
 
 ## 外部主金鑰
@@ -203,17 +191,3 @@ python -m tgwitness --data-dir E:\PrivateData\new-case
 所有工作區均源自同一主金鑰；若主金鑰遭洩露，將影響整個 安裝環境。正在執行的程序可解密機密資料。此工具並非 HSM 或 密碼 KDF。不接受以任意人為設定的密碼取代隨機金鑰。
 
 在刻意規劃的遷移方案 實施並驗證完成之前，請保留現有安裝環境中的現有金鑰。刪除 `vault.key` 或更換主金鑰可能會導致 無法存取會話／簽署金鑰。請將加密備份與金鑰分開存放，並 在隔離的實例中測試還原功能。
-
-## 資料來源與驗證範圍
-
-審閱日期：2026年10月26日：
-
-- https://core.telegram.org/api/auth
-- https://core.telegram.org/api/obtaining_api_id
-- https://docs.telethon.dev/en/stable/basic/signing-in.html
-- https://docs.telethon.dev/en/stable/concepts/sessions.html
-- https://core.telegram.org/mtproto/mtproto-transports
-- https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp
-- Telethon 1.45.0：SQLiteSession、StringSession、`Connection._proxy_connect`、 `TcpMTProxy.normalize_secret` 及下載方法。
-
-本地測試涵蓋迴路 SOCKS5/HTTP CONNECT 測試案例、模擬的 SQLite 會話、 路由隔離、機密資料排除以及缺失金鑰時的拒絕機制。這些測試並未建立 真實的 Telegram/代理伺服器互通性，亦未模擬 MTProxy 的實際運作行為。請參閱 [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/) 及 [LIVE_ACCEPTANCE.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md)。

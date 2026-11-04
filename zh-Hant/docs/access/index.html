@@ -33,17 +33,17 @@
 <p class="verification-shortcut"><a href="../reference/verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="eyebrow">文件說明 / 15</p><h1>分享案例</h1><p class="guide-outcome">分享他人所需的案例。其餘部分則由您掌控。</p>
-<figure class="network-map" aria-labelledby="access-caption"><div><span class="network-number">01</span><strong>選擇證據</strong><p>可選擇整個帳戶的工作區，或個別已記錄的聊天紀錄。</p></div><div><span class="network-number">02</span><strong>選擇操作</strong><p>允許查看、匯出，或授予該人員所需的特定操作權限。</p></div><div><span class="network-number">03</span><strong>設定限制</strong><p>發行一個帶有有效期限、會話限制及可選 IP 限制的個人令牌。</p></div><figcaption id="access-caption">收集範圍決定了記錄的內容；存取範圍則決定了使用者能查看和執行的操作。</figcaption></figure>
+<figure class="network-map" aria-labelledby="access-caption"><div><span class="network-number">01</span><strong>選擇證據</strong><p>整個工作區或單一聊天室。</p></div><div><span class="network-number">02</span><strong>選擇操作</strong><p>檢視、匯出，或只限他們需要的操作。</p></div><div><span class="network-number">03</span><strong>設定限制</strong><p>個人權杖，可依需要設定到期時間、工作階段限制和 IP 規則。</p></div><figcaption id="access-caption">收集範圍決定了記錄的內容；存取範圍則決定了使用者能查看和執行的操作。</figcaption></figure>
 <h2 id="create">授予某人存取權限</h2>
-<ol><li>請以管理員身分登入，並開啟「<strong>存取」頁面</strong>。</li><li>請指定存取權限，並選擇工作區及聊天室。</li><li>保留<strong>「檢視」</strong>功能供審閱者使用。若審閱者需下載紀錄，則新增「<strong>匯出」功能</strong>。</li><li>設定權限限制後，請按下「<strong>建立存取權限」</strong>。</li><li>請複製畫面中顯示的代碼一次，並將其與面板地址一併以私訊方式傳送。</li><li>在移交前，請先於另一個瀏覽器視窗中確認允許的檢視範圍。</li></ol>
+<ol><li>以管理員身分開啟<strong>存取</strong>。</li><li>命名，選擇工作區和聊天室。</li><li>審閱者只需要<strong>檢視</strong>。若要下載請加上<strong>匯出</strong>。</li><li>設定權限限制後，請按下「<strong>建立存取權限」</strong>。</li><li>複製權杖（只顯示一次），連同面板網址私下傳送。</li><li>先在另一個瀏覽器工作階段中檢查他們會看到什麼。</li></ol>
 <h2 id="examples">從他們需要完成的工作開始</h2>
-<div class="table-wrap"><table><thead><tr><th>人物</th><th>存取</th><th>結果</th></tr></thead><tbody><tr><td>審閱者</td><td>精選對話；僅限檢視</td><td>閱讀已擷取的對話內容，且不改變原始資料集。</td></tr><tr><td>分析師</td><td>精選對話；檢視與匯出</td><td>檢視並下載本案所需的紀錄。</td></tr><tr><td>操作員</td><td>精選完整工作區；來源與蒐集</td><td>管理監測內容，並啟動或停止資料收集器。</td></tr></tbody></table></div>
-<p>這些是您自行選擇的設定，而非固定的角色。即使啟用了其他權限，全帳戶設定及完整日誌匯出功能仍會對「僅限聊天室」的存取權限保持關閉狀態。「所有工作區」存取權限包含未來的帳戶。</p>
+<div class="table-wrap"><table><thead><tr><th>人物</th><th>存取</th><th>結果</th></tr></thead><tbody><tr><td>審閱者</td><td>精選對話；僅限檢視</td><td>閱讀聊天室，不能變更任何內容。</td></tr><tr><td>分析師</td><td>精選對話；檢視與匯出</td><td>閱讀並下載案件所需內容。</td></tr><tr><td>操作員</td><td>精選完整工作區；來源與蒐集</td><td>決定觀察哪些內容，啟動和停止收集器。</td></tr></tbody></table></div>
+<p>這些只是範例，不是固定角色。限於聊天室的存取權永遠不會取得帳戶設定或完整日誌匯出。所有工作區的存取權包括之後新增的帳戶。</p>
 <h2 id="withdraw">您可隨時改變主意</h2>
-<p>編輯存取權限以變更後續請求可執行的操作。終止單一會話，或撤銷全部存取權限以終止所有會話。已下載的檔案無法收回。終止面板會話不會停止資料收集。</p>
-<details><summary>會話與 IP 限制</summary><p>可限制並行連線數與成功登入次數、設定絕對截止日期、允許特定 IP 位址或子網，或將存取權限綁定至首次登入的 IP 位址。連線過期機制以閒置時間為準；開啟的面板若持續進行輪詢，則視為有活動。當應用程式透過代理伺服器或隧道運行時，請檢查應用程式顯示的客戶端位址。</p></details>
-<details><summary>主金鑰與活動日誌</summary><p>管理員持有主面板的存取憑證。已授予的存取權限無法管理他人的存取權限，亦無法開啟管理員控制台。控制台會顯示跨工作區的當前進程活動；簽署過的存取記錄會保留授權與連線事件，且不包含存取憑證。各工作區共用主進程，其資料不會與伺服器管理員的資料隔離。</p></details>
-<p>請參閱<a href="../reference/access/">完整的權限參考</a>資料，以了解所有七項權限、會話規則及管理員權限範圍。</p>
+<p>可隨時編輯存取權，從下一次請求起生效。可結束單一工作階段或全部撤銷。已下載的檔案無法收回。收集會繼續執行。</p>
+<details><summary>會話與 IP 限制</summary><p>限制並行工作階段和登入次數，設定結束日期，允許特定 IP 或子網路，或鎖定為首次登入的 IP。到期時間依閒置時間計算，開著的面板算作活動。在代理之後時，請檢查應用程式看到的是哪個用戶端 IP。</p></details>
+<details><summary>主金鑰與活動日誌</summary><p>主權杖留在管理員手上。發出的存取權不能管理他人的存取，也不能開啟管理主控台。存取變更和工作階段會簽名寫入日誌，不含權杖。伺服器管理員仍然看得到一切。</p></details>
+<p>全部七項權限和工作階段規則：<a href="../reference/access/">存取參考</a>。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/access/">完整參考資料 →</a><a class="next-guide" href="../security/"><span>下一步</span><strong>確保安全 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../reference/verification/">已測試的內容 →</a></p></footer>
 </main>

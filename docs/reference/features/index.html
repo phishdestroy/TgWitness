@@ -227,9 +227,6 @@ first 1,000 listed dialogs, up to 500 messages per history snapshot,
 is changed per workspace under <strong>Parameters</strong>. Exports have no fixed event-count cap.
 Browser fallback is bounded to 128 MiB by default; the streaming CLI has a configurable
 transfer limit, 5 GiB by default.</p>
-<p><code>tools/check_capacity.py</code> measures local synthetic ingestion and export. Its results
-are not Telegram delivery measurements or a guaranteed real-chat count. See
-<a href="../verification/">VERIFICATION.md</a> for the measured version and workload.</p>
 <h2 id="reliability-and-recovery">Reliability and recovery<a class="anchor" href="#reliability-and-recovery" aria-label="Link to this section">#</a></h2>
 <p>Implemented behavior includes SQLite WAL/synchronous transactions; atomic message
 and media-job writes; persistent jobs and retry delays; original-version descriptors;

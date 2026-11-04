@@ -241,20 +241,6 @@ Członkowie korzystają z wspólnych ustawień grupy; każde konto może zachowa
 
 **Konto → Wyloguj się z Telegrama** (z wstrzymanym monitorowaniem) powoduje, że Telegram kończy sesję, w związku z czym znika ona również z sekcji **Ustawienia → Urządzenia** danego konta oraz jest usuwana z magazynu obszaru roboczego. Dziennik, źródła, ustawienia i klucz podpisujący pozostają, a dziennik rejestruje fakt wylogowania. Obszar roboczy nadal należy do danego konta: tylko to konto może ponownie nawiązać z nim połączenie. Jeśli aplikacja Telegram nie odpowiada, sesja i tak zostanie usunięta w tym miejscu, a panel wyświetli odpowiedni komunikat; należy ją zakończyć w aplikacji Telegram w sekcji **Ustawienia → Urządzenia**.
 
-## Konwersja sesji Telethon w trybie offline
-
-Panel importuje bezpośrednio pliki `.session`. Aby przeprowadzić konwersję w trybie offline do pliku StringSession, należy uruchomić z folderu projektu:
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-Konwerter odczytuje wyłącznie pliki Telethon SQLite (o rozmiarze do 64 MiB), nigdy nie modyfikuje danych wejściowych, nie wysyła żadnych żądań sieciowych i nie nadpisuje istniejących plików wyjściowych.
-
 ## Zapewnienie bezpieczeństwa plików kont
 
 - Każdy plik `.session`, TData ZIP, StringSession, klucz autoryzacyjny oraz plik JSON konta należy traktować jak hasło. TgWitness przechowuje zaimportowane dane autoryzacyjne w zaszyfrowanym sejfie; po zakończeniu można usunąć oryginalne pliki.

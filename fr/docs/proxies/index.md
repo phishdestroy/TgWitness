@@ -2,45 +2,45 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/proxies/
 
-Veillez à ce que le compte reste connecté. Déterminez explicitement à quel moment son itinéraire peut utiliser l’adresse du serveur.
+Gardez le compte en ligne et décidez vous-même s’il peut un jour montrer l’IP de votre serveur.
 
 ## Choisissez d'abord le mode IP
 
 01**Masquer l'adresse**
 
-Utilisez un proxy. Si aucun ne fonctionne, patientez sans connexion directe à Telegram.
+Proxy uniquement. Si aucun ne marche, il attend.
 
 02**Recourir à Direct en dernier recours**
 
-Autoriser l'accès direct une fois le délai configuré écoulé ; revenir à un proxy opérationnel dès qu'un proxy répond.
+Passe en direct après un délai, revient à un proxy dès qu’un fonctionne.
 
 03**Serveur derrière un tunnel ou un VPN**
 
-Autorisez les connexions directes via le réseau de l’hébergeur. Cette option n’installe ni ne vérifie aucun VPN.
+Le direct est permis. Ce mode ne configure ni ne vérifie le VPN à votre place.
 
 L'itinéraire détermine la connexion. Le mode IP détermine si une connexion directe est autorisée.
 
 ## Laissez le pool gérer l'itinéraire
 
-1. Ouvrez **votre compte → Paramètres → Paramètres de connexion**.
-2. Sélectionnez le mode IP et **MTProxy automatique**, ou saisissez un itinéraire fixe.
-3. Enregistrez et lancez **le test de connexion à Telegram**. Cela fonctionne également avant la connexion.
-4. Une fois la collecte lancée, vérifiez qu’un message de contrôle parvient bien au journal.
+1. **Compte → Paramètres → Paramètres de connexion**.
+2. Choisissez le mode IP et **MTProxy automatique**, ou un itinéraire fixe.
+3. Enregistrez, puis **Tester la connexion Telegram** (fonctionne aussi avant la connexion).
+4. Lancez la collecte et envoyez-vous un message de test.
 
-Les nouveaux espaces de travail utilisent automatiquement la balise MTProxy avec l'option « **Masquer l'adresse** ». Le pool combine quatre sources publiques, vérifie les entrées, conserve les routes opérationnelles et remplace les proxys défaillants. Les téléchargements ayant échoué conservent les instantanés précédents.
+Les nouveaux espaces démarrent en MTProxy automatique avec **Masquer l’adresse**. Le pool utilise quatre listes publiques, teste les serveurs, garde les bons et remplace ceux qui sont tombés.
 
 ## Utilisez votre propre proxy
 
-Saisissez les paramètres SOCKS5 ou HTTP CONNECT, collez un lien de proxy Telegram pris en charge ou fournissez un catalogue d’opérateurs. Mettez l’observation en pause avant de modifier un itinéraire actif. Les faux secrets TLS MTProxy commençant par `ee` ne sont toujours pas pris en charge.
+SOCKS5, HTTP CONNECT, un lien de proxy Telegram ou un catalogue d’opérateur. Mettez l’observation en pause avant de changer. Les secrets Fake TLS (`ee`…) ne fonctionnent pas.
 
 **Paramètres de rotation, de partage et de nouvelle tentative**
 
-Sous **Paramètres → MTProxy automatique**, définissez les seuils d’échec, les délais d’attente, la rotation planifiée et le nombre de comptes par proxy. Une limite de partage fixée à un oblige un compte à patienter lorsqu’aucune entrée exclusive n’est disponible. Les intervalles de rafraîchissement de la liste et de sondage suivent les valeurs de l’espace de travail principal. Des proxys distincts ne garantissent pas des adresses IP de sortie distinctes.
+**Paramètres → MTProxy automatique** : seuils d’échec, temps de pause, rotation, comptes par proxy. Une limite de 1 signifie qu’un compte attend plutôt que de partager. Des proxys différents peuvent quand même partager la même IP de sortie.
 
 ## Dissocier Telegram des demandes externes
 
-MTProxy achemine uniquement le trafic Telegram. Les horodatages, les notifications, les copies et les vérifications à la source utilisent un proxy SOCKS5/HTTP distinct, la route SOCKS5/HTTP du compte, ou le mode Direct lorsque le mode IP le permet. Ces requêtes externes peuvent être désactivées.
+MTProxy ne transporte que Telegram. Horodatages, notifications, copies et vérifications de code passent par un proxy SOCKS5/HTTP séparé, l’itinéraire SOCKS5/HTTP du compte ou en direct si le mode le permet. Ou désactivez-les.
 
-Une configuration explicite « `TGWITNESS_PROXY_FEED_PROXY` » définit l’itinéraire du téléchargeur de flux. Le [témoin indépendant](https://phishdestroy.github.io/TgWitness/fr/docs/witness/) conserve ses propres paramètres. Ces commandes n’installent pas de VPN système et ne redirigent pas le trafic du navigateur.
+`TGWITNESS_PROXY_FEED_PROXY` définit l’itinéraire de téléchargement des listes. Le [témoin](https://phishdestroy.github.io/TgWitness/fr/docs/witness/) a ses propres paramètres. Rien de tout cela ne touche votre navigateur ni le réseau du système.
 
-Consultez [tous les modes, paramètres par défaut et listes de sources](https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/#ip-modes), ou [choisissez qui est autorisé à modifier l'acheminement d'un compte](https://phishdestroy.github.io/TgWitness/fr/docs/access/).
+Plus : [modes et valeurs par défaut](https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/#ip-modes), [qui peut changer les itinéraires](https://phishdestroy.github.io/TgWitness/fr/docs/access/).

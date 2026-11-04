@@ -2,48 +2,48 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/exports/
 
-Cung cấp cho người nhận các tệp để họ có thể đối chiếu với không gian làm việc thu thập và lịch sử đã lưu của nó.
+Trao cho người khác những tệp họ có thể tự đối chiếu với không gian làm việc của bạn.
 
 Giữ lại tham chiếuXuất tệp ZIP đã được ký điện tửNgười nhận xác minh
 
-Quý vị mới làm quen với các chữ ký và điểm kiểm tra? Hãy [thử thay đổi một bản ghi mẫu](https://phishdestroy.github.io/TgWitness/vi/docs/concepts/#chain) và xem các kiểm tra nào sẽ phát hiện ra sự thay đổi đó.
+Mới làm quen với chữ ký và điểm kiểm tra? [Thay đổi một bản ghi mẫu](https://phishdestroy.github.io/TgWitness/vi/docs/concepts/#chain) và xem bước kiểm tra nào phát hiện ra.
 
 Muốn lưu giữ một bản sao ngoài phạm vi của người thu thập dữ liệu? Vui lòng truy cập [phần Cài đặt S3](https://phishdestroy.github.io/TgWitness/vi/docs/exports/#s3), [tính năng Khóa đối tượng](https://phishdestroy.github.io/TgWitness/vi/docs/exports/#s3-retention) hoặc [tính năng khôi phục đã được xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/exports/#s3-restore).
 
 ## Lưu giữ một nguồn tham khảo đáng tin cậy
 
-Vui lòng lưu dấu vân tay khóa công khai của không gian làm việc bên ngoài bộ thu thập dữ liệu. Trong quá trình thu thập, hãy lưu trữ các điểm kiểm tra đã được ký kết tại một vị trí khác hoặc sử dụng một [bên chứng kiến độc lập](https://phishdestroy.github.io/TgWitness/vi/docs/witness/). Các tham chiếu này cho phép người nhận kiểm tra khóa cũng như ranh giới của sổ nhật ký trước đó.
+Ghi dấu vân tay khóa của không gian làm việc ở đâu đó ngoài máy thu thập. Trong khi thu thập, cũng hãy lưu điểm kiểm tra có chữ ký ở nơi khác, hoặc chạy một [nhân chứng độc lập](https://phishdestroy.github.io/TgWitness/vi/docs/witness/). Đó là thứ người nhận dùng để kiểm tra khóa và trạng thái trước đó của sổ nhật ký.
 
 ## Tải xuống tệp ZIP đã được ký số
 
-Mở **tính năng Xuất (Exports)** và tạo tệp ZIP bằng chứng đã ký. Tệp này bao gồm nhật ký không gian làm việc đầy đủ và bản kê khai tệp đã ký. Sử dụng [Report Studio](https://phishdestroy.github.io/TgWitness/vi/docs/reports/) để tạo báo cáo dễ đọc, hoặc [trích xuất](https://phishdestroy.github.io/TgWitness/vi/docs/handover/) [bản](https://phishdestroy.github.io/TgWitness/vi/docs/handover/) [bàn giao](https://phishdestroy.github.io/TgWitness/vi/docs/handover/) để chỉ cung cấp dữ liệu đã chọn và được tối ưu hóa.
+**Xuất** → ZIP bằng chứng có chữ ký. Bên trong có toàn bộ sổ nhật ký và bản kê tệp có chữ ký. Định hình báo cáo dễ đọc trong [Report studio](https://phishdestroy.github.io/TgWitness/vi/docs/reports/), hoặc chỉ gửi dữ liệu đã chọn dưới dạng [bản trích xuất bàn giao](https://phishdestroy.github.io/TgWitness/vi/docs/handover/).
 
-Các báo cáo định dạng HTML, PDF và JSON đều có con dấu đã ký riêng và có thể được kiểm tra độc lập. Tệp CSV là bản sao thuận tiện cho việc phân tích; hãy sử dụng chính tệp CSV bên trong tệp ZIP đã được xác minh để kiểm tra tính toàn vẹn của nó. Giữ lại tệp ZIP đã ký khi người nhận cũng cần các bản ghi nguồn và tệp đính kèm.
+Báo cáo HTML, PDF và JSON có dấu niêm phong riêng. CSV chỉ là bản sao làm việc; để đảm bảo toàn vẹn, hãy dùng CSV bên trong ZIP đã xác minh.
 
 ## Vui lòng xác minh bằng một bản sao đáng tin cậy của TgWitness
 
-Trong môi trường dự án đã cài đặt, vui lòng thay thế dấu vân tay và đường dẫn tệp trong ví dụ:
+Trong môi trường của dự án, với dấu vân tay và đường dẫn của bạn:
 
 ```
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 ```
 
-Khi cả hai tham chiếu đều hợp lệ, kết quả sẽ báo cáo `key_pinned: true` và `checkpoint_checked: true`. Vui lòng lưu giữ kết quả xác minh cùng với tệp lưu trữ gốc. Điểm kiểm tra được lưu giữ phải nằm tại hoặc trước ranh giới của tệp xuất.
+Khi đạt, bạn thấy `key_pinned: true` và `checkpoint_checked: true`. Giữ kết quả đó cạnh kho lưu trữ. Điểm kiểm tra phải nằm ở cuối bản xuất hoặc trước đó.
 
 ## Sử dụng kết quả xác minh
 
-- **Kiểm tra các tệp đã được giao:** tệp manifest liên kết các giá trị băm của chúng, và chữ ký bản ghi liên kết với nhật ký đã lưu. Hệ thống sẽ phát hiện các tệp bị thay đổi hoặc chuỗi bản ghi bị gián đoạn.
-- **Kiểm tra danh tính không gian làm việc:** dấu vân tay được lưu giữ độc lập xác định khóa ký mà bạn mong đợi.
-- **So sánh với ranh giới trước đó:** một điểm kiểm tra được lưu giữ sẽ đối chiếu dữ liệu xuất ra với tiền tố nhật ký được lưu trước khi bàn giao.
-- **Kiểm tra phạm vi thu thập:** các lỗ hổng, kết quả thu thập và thử nghiệm có kiểm soát theo trình tự “gửi → chỉnh sửa → xóa” mô tả các sự kiện mà cấu hình này đã ghi lại.
+- **Tệp:** bản kê ràng buộc mã băm của chúng, chữ ký ràng buộc sổ nhật ký. Mọi thay đổi đều lộ ra.
+- **Danh tính:** dấu vân tay bạn đã giữ chứng minh đó là khóa bạn mong đợi.
+- **Trạng thái trước đó:** điểm kiểm tra so sánh bản xuất với phần đầu sổ nhật ký đã lưu trước khi bàn giao.
+- **Phạm vi:** khoảng trống, kết quả thu nhận và phép thử gửi → sửa → xóa cho thấy cấu hình này thực sự bắt được gì.
 
-Lưu giữ các kết quả này cùng với bản sao của người nhận. Xem xét [những gì quá trình xác minh xác định được](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) về phạm vi kiểm tra cũng như việc đánh giá riêng biệt các tuyên bố từ nguồn và phạm vi thu thập dữ liệu.
+Chi tiết: [xác minh chứng minh được gì và không chứng minh được gì](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope).
 
 ## Thiết lập bản sao lưu ngoài trang web trên S3
 
-Trong không gian làm việc hiện tại của quý vị, hãy mở **mục Xuất → Bản sao ngoài trang web**. Tính năng tùy chọn này tương thích với AWS S3 và các dịch vụ tương thích S3 khác. Tính năng này sao chép các phân đoạn nhật ký, ảnh và tệp tin được lưu giữ, các điểm kiểm tra kèm theo phản hồi dấu thời gian, cũng như các bản xuất cuộc trò chuyện đã hoàn tất. Mọi đối tượng đều được mã hóa trên bộ thu thập bằng thuật toán `AES-256-GCM` trước khi tải lên.
+**Xuất → Bản sao ngoài trang web** trong không gian làm việc của bạn. Hoạt động với AWS S3 và mọi dịch vụ tương thích S3. Nó sao chép các đoạn sổ nhật ký, tệp đã lưu, điểm kiểm tra kèm dấu thời gian và bản xuất trò chuyện đã hoàn tất, mỗi thứ được mã hóa bằng `AES-256-GCM` trước khi rời máy thu thập.
 
-Bản demo trực tuyến hiển thị các chức năng điều khiển tương tự nhưng tính năng tải lên đã bị vô hiệu hóa. Quý vị chỉ nên nhập thông tin đăng nhập lưu trữ trong không gian làm việc đang hoạt động của riêng mình.
+Bản demo trực tuyến hiển thị các điều khiển này nhưng tắt tải lên. Chỉ nhập thông tin xác thực thật trong bản cài đặt của riêng bạn.
 
 [![Bảng điều khiển sao lưu ngoài trang web đầy đủ: điểm cuối, khu vực, thùng lưu trữ, khóa truy cập, lịch trình, các thiết lập kiểm soát Object Lock và khóa khôi phục](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
@@ -51,37 +51,37 @@ Bảng điều khiển đầy đủ với các tùy chọn nâng cao đã đư�
 
 | Lĩnh vực | Nội dung cần nhập |
 | --- | --- |
-| Điểm cuối | URL của dịch vụ lưu trữ, không bao gồm đường dẫn đến bucket hoặc thông tin đăng nhập. Ví dụ giả định: `https://s3.example.invalid`. |
-| Khu vực | Khu vực do nhà cung cấp của quý vị yêu cầu. Giá trị mặc định của ứng dụng là `us-east-1`. |
-| Bucket | Một bucket hiện có mà quý vị có thể truy cập. Ví dụ giả định: `example-case-backup`. |
-| Thư mục trong bucket | Tiền tố đối tượng; mặc định là `tgwitness`. Ứng dụng sẽ thêm vào một tiền tố được tạo ra từ dấu vân tay khóa ký của không gian làm việc này. |
-| ID khóa truy cập / Khóa truy cập bí mật | Vui lòng nhập cả hai thông tin đăng nhập lưu trữ cùng lúc. Các thông tin này sẽ được lưu trữ trong kho dữ liệu của không gian làm việc. Khi lưu lại sau này, quý vị hãy để trống cả hai trường này để giữ nguyên cặp thông tin đã lưu. |
-| Địa chỉ theo kiểu đường dẫn | Vui lòng sử dụng mã `endpoint/bucket` khi tính năng được kích hoạt, hoặc mã `bucket.endpoint` khi tính năng bị vô hiệu hóa, tùy theo nhà cung cấp. |
-| Khoảng thời gian sao chép | Từ 1 đến 1.440 phút; mặc định là 5 phút. Ứng dụng phải đang chạy để thực hiện việc sao chép theo lịch trình. |
-| Chính sách lưu trữ Object Lock | Thời gian lưu trữ và chế độ lưu trữ đối với một bucket hỗ trợ tính năng Object Lock. Giá trị “Zero days” sẽ giữ nguyên cài đặt lưu trữ mặc định của bucket. |
+| Điểm cuối | URL lưu trữ, không kèm đường dẫn bucket hay thông tin xác thực. Ví dụ: `https://s3.example.invalid`. |
+| Khu vực | Theo yêu cầu của nhà cung cấp. Mặc định `us-east-1`. |
+| Bucket | Một bucket có sẵn mà bạn ghi được. Ví dụ: `example-case-backup`. |
+| Thư mục trong bucket | Tiền tố, mặc định `tgwitness`. Một tiền tố riêng cho mỗi không gian làm việc được thêm vào phía sau. |
+| ID khóa truy cập / Khóa truy cập bí mật | Cả hai cùng nhau, lưu trong kho bảo mật. Sau này để trống cả hai thì giá trị cũ được giữ. |
+| Địa chỉ theo kiểu đường dẫn | Bật: `endpoint/bucket`. Tắt: `bucket.endpoint`. Tùy nhà cung cấp. |
+| Khoảng thời gian sao chép | 1 đến 1.440 phút, mặc định 5. Chỉ khi ứng dụng đang chạy. |
+| Chính sách lưu trữ Object Lock | Số ngày và chế độ, nếu bucket hỗ trợ Object Lock. Số 0 giữ mặc định của bucket. |
 
-1. Tạo bucket với nhà cung cấp của bạn, sau đó nhập đích đến và thông tin đăng nhập. Để tùy chọn **“Giữ bản sao ngoài trang web”** ở trạng thái không được chọn trong quá trình chuẩn bị, sau đó chọn **“Lưu bản sao ngoài trang web**”.
-2. Chọn **“Kiểm tra kết nối**”. Thao tác này sẽ tải lên một đối tượng thử nghiệm được mã hóa và kiểm tra phản hồi từ bộ lưu trữ.
-3. Vui lòng chọn **“Tải xuống khóa mã hóa**”. Hãy lưu giữ tệp này riêng biệt với công cụ thu thập dữ liệu; tệp này là cần thiết cho quá trình khôi phục dữ liệu.
-4. Vui lòng chọn hộp kiểm **“Lưu bản sao ngoài trang web**” và lưu lại. Chọn **“Sao chép ngay”** để thực hiện thủ công, hoặc để lịch trình tiếp tục chạy.
+1. Tạo bucket, điền đích đến và thông tin xác thực trong khi **Giữ bản sao ngoài trang web** chưa được chọn, rồi bấm **Lưu bản sao ngoài trang web**.
+2. **Kiểm tra kết nối** tải lên một đối tượng thử đã mã hóa.
+3. **Tải xuống khóa mã hóa** và cất xa máy thu thập. Không có khóa thì không khôi phục được.
+4. Chọn **Giữ bản sao ngoài trang web**, lưu, rồi **Sao chép ngay** hoặc để lịch chạy.
 
 ## Kiểm tra tiến độ lưu trữ và sao chép
 
-Trong phần **“More options” (Tùy chọn khác**), hãy chọn số ngày lưu trữ và “`GOVERNANCE`” (Quản trị) hoặc “`COMPLIANCE`” (Tuân thủ) khi bucket của bạn hỗ trợ tính năng Object Lock. TgWitness sẽ đọc lại chế độ lưu trữ và thời hạn của một đối tượng đã tải lên. Kiểm tra kết quả lưu trữ riêng biệt: đã xác nhận, thiếu lưu trữ hoặc kiểm tra không thành công.
+Trong **Tùy chọn khác**, chọn số ngày lưu giữ và `GOVERNANCE` hoặc `COMPLIANCE`. TgWitness đọc lại cài đặt lưu giữ từ một đối tượng đã tải lên và báo cho bạn: đã xác nhận, thiếu hoặc kiểm tra thất bại.
 
-Bảng điều khiển hiển thị thông tin về lần quét gần nhất, số lượng đối tượng, dung lượng dữ liệu đã truyền, ranh giới của nhật ký đã sao chép cùng bất kỳ lỗi nào phát sinh. Các phương tiện lưu trữ cục bộ bị thiếu hoặc đã thay đổi sẽ được báo cáo và hệ thống sẽ thử lại trong lần quét tiếp theo. Các tệp tin, điểm kiểm tra và các tác vụ xuất dữ liệu đang chờ xử lý sau phương tiện lưu trữ đó vẫn có thể được sao chép.
+Bảng điều khiển hiển thị lượt chạy gần nhất, số đối tượng, số byte, ranh giới sổ nhật ký đã sao chép và lỗi. Tệp cục bộ bị thiếu sẽ được báo và thử lại ở lượt sau, phần còn lại vẫn tiếp tục sao chép.
 
-Việc tải lên sử dụng các đường dẫn Direct, SOCKS5 hoặc HTTP của không gian làm việc. Chọn một trong các đường dẫn này để sao chép lên S3; đường dẫn chỉ sử dụng MTProxy sẽ khiến bản sao bị treo với thông báo lỗi.
+Tải lên đi qua kết nối trực tiếp, SOCKS5 hoặc HTTP. Với tuyến chỉ có MTProxy, bản sao sẽ chờ kèm lỗi.
 
 ## Hãy lưu giữ khóa khôi phục ở một nơi riêng biệt
 
-Tệp JSON đã tải xuống chứa khóa giải mã, cài đặt đích, tiền tố đối tượng không gian làm việc và dấu vân tay khóa ký. Quá trình khôi phục cần cả tệp khóa này và thông tin đăng nhập lưu trữ riêng biệt có quyền truy cập đọc vào bucket. Hãy lưu giữ chúng trong kế hoạch khôi phục của bạn.
+Tệp JSON khóa chứa khóa giải mã, đích đến, tiền tố và dấu vân tay khóa. Để khôi phục, bạn cần nó cùng thông tin xác thực lưu trữ có quyền đọc.
 
-Nếu quý vị thay đổi điểm cuối (endpoint), bucket hoặc tiền tố thư mục, vui lòng tải lại tệp khóa để các cài đặt đích của tệp này khớp với thay đổi. Ứng dụng sẽ khởi tạo một bản sao mới của nhật ký, tệp tin và các điểm kiểm tra được lưu trữ cục bộ tại đích mới. Các bản xuất cuộc trò chuyện đã hoàn tất nhưng đã bị xóa khỏi hàng đợi tải lên cục bộ sẽ vẫn được giữ nguyên tại đích cũ.
+Đã đổi endpoint, bucket hoặc tiền tố? Hãy tải lại khóa. Một bản sao mới bắt đầu ở đích mới; các bản xuất trò chuyện cũ vẫn ở chỗ cũ.
 
 ## Khôi phục và xác minh trên một máy tính khác
 
-Vui lòng sử dụng bản cài đặt đáng tin cậy của TgWitness, tệp JSON chứa khóa đã tải xuống, thông tin đăng nhập vào bộ lưu trữ có quyền truy cập đọc, cùng với một thư mục đầu ra trống. Hãy thay thế các thông tin đăng nhập giả định được ghi dưới đây.
+Bạn cần một bản cài TgWitness đáng tin cậy, tệp JSON khóa, thông tin xác thực lưu trữ chỉ đọc và một thư mục trống:
 
 ### Windows PowerShell
 
@@ -99,8 +99,6 @@ export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence
 ```
 
-Các tệp tải xuống và các đối tượng đã được giải mã sẽ được lưu trữ tạm thời trong kho lưu trữ riêng tư trong khi toàn bộ nhật ký, các điểm kiểm tra được lưu giữ cùng các giá trị băm và kích thước của phương tiện được bảo toàn sẽ được kiểm tra. Các đường dẫn không an toàn, các phân đoạn nhật ký mâu thuẫn và nhật ký có độ dài ngắn hơn điểm kiểm tra tương ứng sẽ bị từ chối. Trong trường hợp xác minh thất bại, hệ thống sẽ không công bố bất kỳ tệp nào đã được khôi phục.
+Mọi thứ được kiểm tra trước trong một thư mục tạm riêng tư: toàn bộ sổ nhật ký, điểm kiểm tra, mã băm và kích thước tệp. Đường dẫn không an toàn, các đoạn mâu thuẫn hoặc sổ nhật ký ngắn hơn điểm kiểm tra của nó sẽ thất bại, và khi đó không có gì được ghi ra.
 
-Quá trình khôi phục thành công sẽ tạo ra các mã `events.jsonl`, `media/`, `checkpoints/` và `exports/` tương ứng với nội dung có sẵn trong bản sao. Vui lòng lưu giữ kết quả JSON của lệnh cùng với nội dung đã được khôi phục.
-
-So sánh tài liệu đã khôi phục với các điểm kiểm tra hoặc bản ghi chứng cứ mà bạn đã lưu giữ độc lập, sau đó xem xét phạm vi thu thập đã ghi lại cho khoảng thời gian bạn cần.
+Khi thành công, bạn nhận được `events.jsonl`, `media/`, `checkpoints/` và `exports/`. Giữ kết quả JSON của lệnh cùng chúng, và so sánh với các điểm kiểm tra hoặc bản ghi nhân chứng bạn tự lưu.

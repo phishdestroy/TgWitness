@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reports/
 
-Bieten Sie dem Leser einen klaren Weg von der Fallfrage zu den gespeicherten Datensätzen.
+Führen Sie den Leser von der Fallfrage direkt zu den gespeicherten Einträgen.
 
-Das „Report Studio“ kombiniert eine Datenauswahl, lesbare Änderungsprotokolle, Diagramme und Ihre schriftlichen Erkenntnisse. Acht integrierte Designs gelten für unterstützte HTML- und native PDF-Ausgaben. HTML-, PDF- und JSON-Berichte tragen ihre eigenen signierten Siegel; das ZIP-Manifest bündelt zudem die Dateien im Paket. HTML- und PDF-Dateien werden nach Fertigstellung ihres endgültigen Layouts versiegelt.
+Report studio stellt Ihre ausgewählten Daten, Änderungsverläufe, Diagramme und Ergebnisse zusammen. Acht Designs, HTML und natives PDF. Jeder HTML-, PDF- und JSON-Bericht wird mit Ihrem Schlüssel versiegelt.
 
 ## Erstellen Sie einen Bericht in drei Schritten
 
-1. Öffnen Sie **„Exporte“ → „Konfigurieren und Vorschau“ → „Daten**“. Verwenden Sie den gesamten Arbeitsbereich oder wählen Sie Chats, Autoren, einschließlich UTC-Beobachtungsdaten und Datensatztypen aus. Die Daten geben an, wann TgWitness den Datensatz erfasst hat.
-2. Wählen Sie unter **„Design & Inhalte**“ eine Voreinstellung für Design und Inhalte aus. Wählen Sie Aktivitätsdiagramme, Teilnehmerbezeichnungen, das Protokoll, gespeicherte Änderungen und optionales „Case Board“-Material aus. Fügen Sie Ihre Falldetails und Untersuchungsnotizen hinzu.
-3. Öffnen Sie **die Vorschau**, um Anzahl, Aktivitäten, Teilnehmer, stichprobenartig ausgewählte Datensätze und fehlende ID-Bereiche zu überprüfen. Speichern Sie die Einstellungen und laden Sie anschließend das gewünschte Format herunter.
+1. **Exporte → Konfigurieren und Vorschau → Daten**: der ganze Arbeitsbereich oder ausgewählte Chats, Autoren, Daten (UTC, wann TgWitness den Eintrag gesehen hat) und Eintragstypen.
+2. **Design & Inhalt**: Design wählen und was hineinkommt: Diagramme, Teilnehmer, Transkript, Änderungen, Case-Board-Elemente, Falldaten und Notizen.
+3. **Vorschau**: Zahlen, Aktivität, Stichproben und fehlende ID-Bereiche prüfen. Speichern, dann das benötigte Format herunterladen.
 
 ### Ordnen Sie das gespeicherte Material für den Leser entsprechend an
 
@@ -55,16 +55,16 @@ Der Empfänger überprüft die Datei und den vertrauenswürdigen Fingerabdruck.
 
 ## Wählen Sie einen Lesestil
 
-**Die Bereiche „Classic“, „Editorial“, „Briefing“, „Analytics“, „Technical“, „Overview“, „Reading Series“ sowie „Ledger & Margin“** präsentieren dieselben zugrunde liegenden Datensätze in unterschiedlichen Zusammenstellungen. Bei einer Änderung des Designs bleiben die Datenauswahl und die schriftlichen Notizen erhalten. Die Berichts-Sprache kann aus den 25 unterstützten Sprachen ausgewählt werden.
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin**: gleiche Einträge, anderes Aussehen. Beim Wechsel bleiben Auswahl und Notizen. Jede der 25 Sprachen.
 
-Die „Reading Series“ gruppiert Fall, Umfang, Ergebnisse und Änderungen entlang einer Abschnittsleiste. „Ledger & Margin“ verwendet nummerierte Kapitel und einen breiten Rand. Beide unterstützen zudem HTML-Übersichten zu Konten und das Teilen von Kopien. Native PDF-Dateien werden mit den mitgelieferten Schriftarten erstellt; auf dem Rechner des Benutzers ist für die PDF-Erstellung weder ein Browser noch eine Node-Installation erforderlich. Für PDF-Dateien in Chinesisch, Japanisch und Koreanisch ist zusätzlich eine geeignete Schriftart auf dem Server erforderlich, beispielsweise „Noto Sans CJK“, die systemweit installiert oder im Verzeichnis „`TGWITNESS_FONT_DIR`“ abgelegt sein muss. Fehlt diese, enthält die ZIP-Datei lediglich die HTML- und JSON-Berichte.
+PDFs werden mit mitgelieferten Schriften erzeugt, kein Browser nötig. Chinesisch, Japanisch und Koreanisch brauchen eine Schrift wie Noto Sans CJK auf dem Server (systemweit oder in `TGWITNESS_FONT_DIR`), sonst gibt es nur HTML und JSON.
 
 ## Lesen Sie eine Änderung im Kontext
 
-Gespeicherte Bearbeitungen werden im Vorher-Nachher-Vergleich angezeigt. Ein Löschhinweis kann mit der zuletzt erfassten Version ergänzt werden. Antworten, Zitate, Weiterleitungen, Reaktionen, Schaltflächen und Metadaten von Anhängen behalten ihre verfügbaren Verweise bei. SHA-256-Hashes von Dateien und Journal-Einträgen werden separat gekennzeichnet.
+Bearbeitungen zeigen vorher und nachher, Löschungen die letzte gespeicherte Version. Antworten, Weiterleitungen, Reaktionen, Buttons und Anhänge behalten ihre Verweise.
 
-Die Designvorschau zeigt Komponenten für Deckblatt, Auswertung und Diagramme anhand passender Datensätze aus den ersten 50.000 Quelldatensätzen. Die separate Datenvorschau durchsucht den vollständigen, stabilen Journal-Snapshot nach exakten Auswahlzahlen, wobei die angezeigten Stichprobengrenzen gekennzeichnet sind. Erstellen Sie ein PDF, um die endgültige Paginierung zu überprüfen. Ein vollständiger Kontoexport enthält eine HTML-Übersicht; die einzelnen Chat-PDFs verwenden das gewählte Design.
+Die Design-Vorschau nutzt die ersten 50.000 Einträge, die Datenvorschau zählt alles exakt. Für das endgültige Seitenlayout erzeugen Sie das PDF.
 
 ## Wählen Sie die Empfängerfassung sorgfältig aus
 
-Berichtsfilter gestalten den übersichtlichen Bericht. Die ZIP-Datei mit den vollständigen Beweismitteln enthält das Originalprotokoll und die Anhänge. Verwenden Sie eine [minimierte Übergabe,](https://phishdestroy.github.io/TgWitness/de/docs/handover/) wenn der Empfänger nur ausgewählte Daten erhalten soll. Sehen Sie sich [den Berichtsinhalt und die Überprüfung](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-reports/) an oder [überprüfen Sie den fertigen Export](https://phishdestroy.github.io/TgWitness/de/docs/exports/).
+Filter formen nur den Bericht, das Beweis-ZIP enthält weiter das ganze Journal und alle Dateien. Soll der Empfänger weniger bekommen, nutzen Sie eine [minimierte Übergabe](https://phishdestroy.github.io/TgWitness/de/docs/handover/). Mehr: [Berichtsinhalte](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-reports/), [den Export prüfen](https://phishdestroy.github.io/TgWitness/de/docs/exports/).

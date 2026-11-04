@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reports/
 
-Ofrece al lector una ruta clara desde la cuestión del caso hasta los registros guardados.
+Lleve al lector de la pregunta del caso directamente a los registros guardados.
 
-Report Studio combina la selección de datos, historiales de cambios legibles, gráficos y tus conclusiones por escrito. Los ocho diseños integrados se aplican a los formatos de salida compatibles: HTML y PDF nativo. Los informes en HTML, PDF y JSON llevan sus propios sellos firmados; el manifiesto ZIP también agrupa los archivos del paquete. Los archivos HTML y PDF se sellan una vez completado su diseño final.
+Report studio junta los datos que elige, los historiales de cambios, los gráficos y sus conclusiones. Ocho diseños, HTML y PDF nativo. Cada informe HTML, PDF y JSON se sella con su clave.
 
 ## Elabora un informe en tres pasos
 
-1. Ve a **Exportaciones → Configurar y vista previa → Datos**. Utiliza todo el espacio de trabajo o selecciona chats, autores, fechas de observación en UTC y tipos de registros. Las fechas indican cuándo TgWitness observó el registro.
-2. En **«Diseño y contenidos**», elige una plantilla de diseño y contenidos. Selecciona los gráficos de actividad, las etiquetas de los participantes, la transcripción, los cambios guardados y el material opcional del «Case Board». Añade los detalles de tu caso y las notas de la investigación.
-3. Abre **«Vista previa»** para revisar recuentos, actividad, participantes, registros muestreados y rangos de ID que faltan. Guarda la configuración y, a continuación, descarga el formato que necesites.
+1. **Exportaciones → Configurar y previsualizar → Datos**: el espacio entero o los chats, autores, fechas (UTC, cuando TgWitness vio el registro) y tipos de registro que elija.
+2. **Diseño y contenido**: elija un diseño y qué entra: gráficos, participantes, transcripción, cambios, elementos de Case Board, datos del caso y notas.
+3. **Vista previa**: revise recuentos, actividad, muestras y rangos de IDs que faltan. Guarde y descargue el formato que necesite.
 
 ### Organiza el mismo material guardado para que resulte comprensible al lector.
 
@@ -55,16 +55,16 @@ El destinatario comprueba el archivo y la huella digital de confianza.
 
 ## Elige un estilo de lectura
 
-**Las secciones «Clásico», «Editorial», «Resumen», «Análisis», «Técnico», «Visión general», «Serie de lecturas» y «Libro mayor y margen»** presentan los mismos registros subyacentes en diferentes composiciones. Al cambiar el diseño, se mantienen la selección de datos y las notas escritas. El idioma del informe se puede elegir entre los 25 idiomas admitidos.
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin**: los mismos registros, otro aspecto. Al cambiar se conservan la selección y las notas. Cualquiera de los 25 idiomas.
 
-La «Reading series» agrupa el caso, el alcance, las conclusiones y los cambios en torno a una barra lateral. «Ledger & margin» utiliza capítulos numerados y un margen amplio. Ambas opciones admiten también resúmenes HTML de cuentas y el intercambio de copias. Los PDF nativos se generan con fuentes incluidas; el equipo del usuario no necesita tener instalado ningún navegador ni Node para la creación de PDF. Los PDF en chino, japonés y coreano requieren además una fuente adecuada en el servidor, como Noto Sans CJK, instalada en todo el sistema o ubicada en `TGWITNESS_FONT_DIR`. Sin ella, el archivo ZIP conserva los informes HTML y JSON.
+Los PDF se generan con fuentes incluidas, sin navegador. Chino, japonés y coreano necesitan una fuente como Noto Sans CJK en el servidor (en el sistema o en `TGWITNESS_FONT_DIR`); si no, solo obtiene HTML y JSON.
 
 ## Lee cada cambio en su contexto
 
-Las modificaciones guardadas se muestran «antes» y «después». Un aviso de eliminación puede ir acompañado de la última versión capturada. Las respuestas, citas, reenvíos, reacciones, botones y metadatos de los archivos adjuntos conservan sus referencias disponibles. Los hash SHA-256 de los archivos y los de los registros del diario se etiquetan por separado.
+Las ediciones muestran antes y después; los borrados, la última versión guardada. Respuestas, reenvíos, reacciones, botones y adjuntos conservan sus referencias.
 
-La vista previa del diseño muestra los componentes de portada, examen y gráficos utilizando registros coincidentes entre los primeros 50 000 registros de origen. La vista previa de datos independiente analiza la instantánea completa y estable del diario para obtener recuentos exactos de la selección, con los límites de la muestra mostrados y etiquetados. Genera un PDF para revisar la paginación final. La exportación completa de la cuenta incluye una vista general en HTML; los archivos PDF individuales de los chats utilizan el diseño elegido.
+La vista previa del diseño usa los primeros 50 000 registros; la de datos lo cuenta todo con exactitud. Para la maquetación final, genere el PDF.
 
 ## Elige cuidadosamente la versión destinada al destinatario.
 
-Los filtros de informe dan forma al informe legible. El archivo ZIP con todas las pruebas conserva el diario original y los archivos adjuntos. Utiliza una [entrega minimizada](https://phishdestroy.github.io/TgWitness/es/docs/handover/) cuando el destinatario solo deba recibir datos seleccionados. Consulta [el contenido del informe y la verificación,](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-reports/) o [verifica la exportación finalizada](https://phishdestroy.github.io/TgWitness/es/docs/exports/).
+Los filtros solo dan forma al informe; el ZIP de evidencia sigue teniendo el diario y los archivos completos. Si el destinatario debe recibir menos, use una [entrega minimizada](https://phishdestroy.github.io/TgWitness/es/docs/handover/). Más: [contenido del informe](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-reports/), [verificar la exportación](https://phishdestroy.github.io/TgWitness/es/docs/exports/).

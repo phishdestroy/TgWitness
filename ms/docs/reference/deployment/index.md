@@ -34,17 +34,11 @@ Pemasangan asli memerlukan Python 3.11 atau yang lebih baru dengan `venv` dan `e
 - **macOS:** pasang pengedaran Python 3.11+ terkini; jangan anggap penyahkod yang disediakan oleh OS memenuhi keperluan. Gunakan `python3 start.py` daripada direktori projek.
 - **Docker:** gunakan Docker Engine/Desktop dengan Compose v2.20 atau lebih baru. Docker Desktop mesti menggunakan kontena Linux pada Windows. Kontena ini memasang kebergantungan Pythonnya sendiri; hos tidak memerlukan pemasangan Python berasingan.
 
-Gunakan storan tempatan berterusan untuk direktori data. Rancang kapasiti berdasarkan mesej, media, pertumbuhan WAL, eksport dan sandaran; tiada spesifikasi minimum universal berasaskan bukti untuk cakera/RAM bagi setiap beban kerja. Seni bina CPU dan versi Python tanpa roda kebergantungan yang serasi mungkin memerlukan alat pembinaan tambahan dan kelayakan tersendiri. "Portable" bukan tuntutan sokongan OS atau perkakasan sejagat.
-
-Windows 11/Python 3.12 telah disahkan secara tempatan. Definisi Linux/macOS/kontena dan CI disediakan tetapi belum dijalankan pada hos pembangunan ini. Lihat [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/) untuk skop yang tepat.
-
 ## Komputer tempatan
 
 Gunakan `Start.cmd` pada Windows atau `sh start.sh` pada Linux/macOS. `scripts\Setup.cmd` atau `sh start.sh --setup-only` menyediakan persekitaran. Pelancar memasang kebergantungan pada penggunaan pertama; pelancaran kemudian menggunakan semula persekitaran tersebut. Akses internet diperlukan untuk penyediaan dan pengumpulan Telegram, tetapi melayari rekod sedia ada dan mencipta eksport berfungsi secara luar talian.
 
 Jalankan `python start.py --check` selepas pemasangan untuk memeriksa kebergantungan tempatan, Ed25519, penyimpanan, konfigurasi kunci dan alamat pendengar tanpa memulakan pengumpul. Gunakan `--json` untuk keluaran berstruktur. Jalankan `--data-dir`, `--host` dan `--port` yang dimaksudkan. Semakan ini tidak memasang pakej, mencipta jurnal atau menyambung ke Telegram; ia bukan kelayakan integriti atau liputan. Permulaan secara berasingan mengesahkan jurnal sedia ada. `python start.py --help` juga mengelakkan pemasangan.
-
-Pilihan:
 
 Selepas menggunakan start.py, jalankan arahan sampingan dengan `.venv\Scripts\python.exe` pada Windows atau `.venv/bin/python` pada Linux/macOS, atau aktifkan persekitaran tersebut terlebih dahulu. Contoh `python -m ...` di bawah menganggap persekitaran tersebut sudah aktif.
 
@@ -73,8 +67,6 @@ Bina sendiri pada Windows 64-bit dengan Python 3.12:
 ```
 python tools/build_portable.py
 ```
-
-Pembina mengesahkan checksum masa larian, memasang kebergantungan terhad ke dalam pakej, menjalankan pemeriksaan kesiapsiagaan dengan penafsir terbina dalam dan menulis fail ZIP serta checksum ke dalam `dist/`.
 
 ## Kontena
 
@@ -121,8 +113,6 @@ docker compose logs witness                     # witness key fingerprint
 Perkhidmatan ini mencapai pengumpul di dalam rangkaian Compose di `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` mengutamakannya, contohnya `/profiles/<workspace ID>` untuk ruang kerja lain). Untuk saksi di pelayan berasingan yang diuruskan oleh orang lain, gunakan `deploy/compose/compose.witness.yaml` di sana dengan `TGWITNESS_WITNESS_COLLECTOR` ditetapkan kepada alamat HTTPS pengumpul; fail itu mengandungi saksi sahaja.
 
 ## Pasang imej yang diterbitkan
-
-Ini akan tersedia selepas [aliran kerja pelepasan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/#automated-github-releases) berjaya dan konfigurasi pakej GHCR awam. Pemilik/nama repositori tidak di-hardcode ke dalam pokok sumber ini. Gunakan imej yang ditunjukkan dalam ringkasan aliran kerja pelepasan tersebut.
 
 Salin `deploy/env.example` ke `.env`. Tetapkan `TGWITNESS_IMAGE` ke versi terbitan, menggunakan laluan repositori **huruf kecil**, contohnya:
 
@@ -202,18 +192,6 @@ Gunakan fail Compose pemasangan anda juga untuk arahan stop/copy sebelumnya. Pas
 
 Semak akses panel, identiti akaun, status pemerhatian, dan liputan selepas kemas kini. Memulakan semula tidak akan membina semula kemas kini Telegram yang terlepas. Rollback mungkin memerlukan sandaran pra-kemas kini jika versi akan datang mengubah format storan.
 
-## Pelepasan GitHub automatik
-
-[Aliran kerja pelepasan](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) sedia untuk digunakan selepas projek ini dihantar ke repositori GitHub dengan Actions diaktifkan. Ia berjalan apabila GitHub Release **diterbitkan**, termasuk prapelepasan. Draf dan penghantaran tag sahaja tidak menerbitkan pakej.
-
-1. Aturkan versi pakej dan log perubahan, kemudian terbitkan rilisan yang ditandakan dengan `v` ditambah versi `pyproject.toml` yang tepat, seperti `v0.8.0`.
-2. Aliran kerja mengesahkan tag dan menjalankan pemeriksaan Python yang dikongsi untuk Windows/Linux/macOS, pelayar umum/import akaun/QR, pakej sumber, dan Docker. Pemasangan asli baharu juga dijalankan pada ketiga-tiga sistem pengendalian menggunakan Python 3.12.
-3. Selepas pemeriksaan tersebut lulus, ia menjalankan ujian asap pada imej ARM64 di bawah QEMU, menerbitkan imej AMD64/ARM64 ke `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, dan melampirkan fail ZIP sumber serta roda Python dengan fail sampingan SHA-256 mereka. ZIP mudah alih Windows adalah artifak tepat yang diuji oleh aliran kerja pemeriksaan; aliran kerja pelepasan memuat turun dan menerbitkan artifak tersebut serta jumlah semaknya.
-4. Satu tugas akhir memuat turun semula ketiga-tiga pakej yang diterbitkan dan mengesahkan checksum mereka. Ia kemudian menerbitkan `SHA256SUMS.txt` dan `RELEASE-MANIFEST.json`, merekodkan versi, revisi sumber dan saiz aset. Pemunggahan menolak untuk menimpa aset keluaran sedia ada.
-5. Selepas penerbitan pertama, buka tetapan pakej GHCR dan tetapkan keterlihatan kepada **Awam** jika muat turun imej tanpa nama dimaksudkan. Repositori sumber awam sahaja tidak menjamin pakej kontena awam. Dasar organisasi mesti membenarkan penerbitan pakej. Aliran kerja ini menggunakan `GITHUB_TOKEN`; tiada kata laluan pendaftaran atau kelayakan VPS yang perlu dimasukkan ke dalam repositori.
-
-Kejayaan aliran kerja jauh tidak dapat dipastikan melalui penyediaan tempatan ini. Emulasi ARM64 adalah pemeriksaan asap, bukan kelayakan perkakasan asli atau Telegram secara langsung. Ini mengautomasikan pembungkusan keluaran; memulakan pelayan masih memerlukan arahan Compose dan prasyarat domain/hosnya. Pelayan sedia ada tidak dinaik taraf atau dihidupkan semula secara senyap apabila keluaran diterbitkan.
-
 ## Pelayan jauh
 
 Pastikan perkhidmatan terikat pada loopback dan gunakan terowong SSH, atau akhiri HTTPS pada proksi songsang. Fail Compose asas hanya untuk tempatan; lapisan tambahan pilihan `deploy/compose/compose.https.yaml` menyediakan Caddy untuk domain yang dikonfigurasikan. Pastikan token pembawa tidak termasuk dalam URL dan log proksi. Proksi songsang harus mengehadkan saiz permintaan dan kadar sambungan. Jangan dedahkan HTTP biasa kepada Internet.
@@ -244,14 +222,6 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 Gunakan `--profile ID` daripada **Eksport → ID Ruang Kerja** untuk ruang kerja lain, `--format zip|jsonl|csv|html`, `--url https://your-server` untuk pelayan jauh, atau `--max-mib` untuk menukar had pemindahan 5 GiB. HTTP Biasa dibenarkan hanya untuk loopback. Token dihantar dalam pengepala, penalaan semula ditolak, fail sedia ada tidak ditimpa, dan muat turun yang tidak lengkap tidak diterbitkan sebagai fail siap. Jika TGWITNESS_TOKEN menimpa token yang dijana, gunakan fail yang dilindungi berasingan yang mengandungi nilai aktif tersebut: panel-token.txt tidak diubah semula oleh penimpaan. SHA-256 arahan hanyalah checksum pemindahan; sahkan sendiri ZIP yang ditandatangani.
 
-Fail eksport pelayan kekal di dalam `temporary-exports/` peribadi setiap ruang kerja. Tindak balas yang berjaya akan membersihkan fail mereka. Eksport yang terhenti akan dialih keluar pada permulaan ruang kerja seterusnya dengan kunci instans eksklusifnya dipegang. Direktori ini adalah sebahagian daripada model ancaman/kapasiti penyimpanan; gunakan volum data yang disulitkan. Pemindahan berskala pengeluaran berbilang gigabait masih memerlukan kelayakan pada sistem sasaran anda.
-
 Panel memaparkan media yang sedang menunggu/gagal, media tertua yang menunggu, ruang cakera kosong, jeda permintaan Telegram, dan sumber yang aksesnya belum disahkan. Diagnostik ini bukan pemantau penghantaran hujung-ke-hujung yang lengkap. Ruang kerja berkongsi proses; akaun yang bising masih boleh menjejaskan yang lain. Proses pekerja berasingan, pengekalan/pusingan, pemulihan kemas kini tahan lama dan kelayakan penyebaran penuh kekal. Akses panel terhad didokumenkan dalam [akses dan kebenaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/); checkpoint bebas dilindungi oleh [panduan saksi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/).
-
-## Pilihan sambungan dan perlindungan
-
-Rute sambungan adalah bagi setiap ruang kerja dan perlu dikonfigurasikan sebelum kebenaran. SOCKS5/HTTP CONNECT menggunakan kebergantungan python-socks yang dipasang. MTProxy menggunakan pengangkutan perantaraan rawak eksperimental Telethon; rahsia TLS palsu tidak disokong. Fallback terus bergantung pada [mod IP](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/#ip-modes) yang dipilih: **Sembunyikan alamat** menolak sambungan; **Direct sebagai pilihan terakhir** membenarkannya selepas kelewatan. **Pelayan di belakang terowong atau VPN** membenarkan laluan terus tetapi tidak mewujudkan VPN. Ini bukan dasar rangkaian untuk seluruh sistem.
-
-Untuk pemasangan baharu, TGWITNESS_VAULT_KEY_FILE menunjuk kepada fail kunci induk rawak yang dilindungi secara berasingan. Pasangkannya secara baca sahaja di luar /data dalam sebuah kontena. Peliharalah metadata garam vault.external.json awam bersama setiap ruang kerja dan kunci induk secara berasingan. Vault tempatan sedia ada memerlukan migrasi yang dirancang; menetapkan pembolehubah ini tidak akan menukarnya secara senyap. Penyimpanan dan eksport mesej/media tidak disulitkan oleh aplikasi. Gunakan volum yang disulitkan dan storan sementara peribadi yang mencukupi di mana diperlukan.
 
 Prosedur terperinci: [sambungan/keselamatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/) dan [mod operasi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/).

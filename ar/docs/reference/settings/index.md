@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/setti
 لا يظهر المعالج في مساحة العمل التي تحتوي على جلسة عمل أو إعداد مكتمل سابقًا. لا يتم استبدال قيمها بهدف عند تحميل الصفحة. ولا يؤدي إخفاء حقل ما إلى إيقاف تشغيل الميزة أو حذف قيمتها.
 
 يُقدَّر الحجم والوقت المطلوبان على أساس ما يصل إلى ثلاث محادثات مختارة وما يصل إلى 20 رسالة من كل منها. وهذا تقدير: فهو لا يتنبأ بحدود Telegram، أو سرعة خادم معين، أو الملفات الموجودة في كل محادثة.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

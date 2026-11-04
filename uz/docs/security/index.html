@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <span aria-current="page">Xavfsiz saqlang</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Nima sinovdan o&#x27;tkazilgan →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentatsiya / 14</p><h1>Xavfsiz saqlang</h1><p class="guide-outcome">Telegram yo&#x27;llarini, ommaviy proksi ro&#x27;yxatlarini va ixtiyoriy tashqi xizmatlarni bilib oling. Har bir sir nimani ochishini, qaysi himoyalar nima qamrab olishini va nimalarni sizga qoldirishini bilib oling.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentatsiya / 14</p><h1>Xavfsiz saqlang</h1><p class="guide-outcome">Kompyuteringizdan nima chiqadi, har bir sir nimani ochadi va himoyalar nimani qamraydi, nima esa sizning zimmangizda.</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>paneldagi manzil bo&#x27;yicha</span></div><div role="listitem"><strong>256-bit</strong><span>tasodifiy panel tokeni</span></div><div role="listitem"><strong translate="no">0</strong><span>CDNlar, analitika yoki masofaviy shriftlar</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>har bir yozuvda imzo</span></div></div>
 <h2 id="map">Hammasi shu yerda</h2>
-<p>Yig&#x27;uvchi, uning paneli va har bir saqlangan yozuv uni ishga tushirgan kompyuterda yoki serverda qoladi. Telegram standart bo&#x27;yicha yagona manzil; boshqa har biri alohida kalitdir.</p>
+<p>Kollektor, panel va har bir yozuv kompyuteringizda qoladi. Standart holatda faqat Telegram bilan bog'laniladi; qolgan hammasi alohida kalit.</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / NIMA MASHINADAN CHIQADI</span><span class="sample-tag">Sizning o&#x27;rnatishingiz</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="Ixtiyoriy manzillarni yoqish yoki o&#x27;chirish"><button type="button" data-flow-toggle="replica" aria-pressed="false">Sayt tashqarisidagi nusxa</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">Bildirishnomalar</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">Vaqt tamg&#x27;alari</button><button type="button" data-flow-toggle="witness" aria-pressed="false">Guvoh</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>Maxfiy</th><th>Qayerda saqlanadi</th><th>Nimani ochadi</th><th>Agar u oshkor bo&#x27;lsa</th></tr></thead>
 <tbody>
-<tr><td><strong>Panel tokeni</strong></td><td><code>panel-token.txt</code> ma&#x27;lumotlar katalogida; brauzer uni faqat teg uchun saqlaydi</td><td>Har bir ish maydonidagi hamma narsa: o&#x27;qish va eksport qilish, doirani o&#x27;zgartirish, hisoblarga kirish</td><td>TgWitnessni to&#x27;xtating, <code>panel-token.txt</code>ni o&#x27;chiring, qayta ishga tushiring: yangi token yaratiladi</td></tr>
+<tr><td><strong>Panel tokeni</strong></td><td>Ma'lumotlar katalogidagi <code>panel-token.txt</code>; brauzer uni har bir yorliq uchun saqlaydi</td><td>Har bir ish maydonidagi hamma narsa</td><td>TgWitness'ni to'xtating, <code>panel-token.txt</code> ni o'chiring, qayta ishga tushiring: yangisini olasiz</td></tr>
 <tr><td><strong>Telegram sessiyasi</strong></td><td>Vault, shifrlangan (<code>credentials.enc</code>)</td><td>Telegram akkaunti o&#x27;zi</td><td>Telegramda Sessiyani tugatish → <em>Sozlamalar → Qurilmalar</em></td></tr>
-<tr><td><strong>Imzolash kaliti</strong></td><td>Vault, shifrlangan (<code>signing.enc</code>)</td><td>Imzolash yozuvlari sizning barmoq izingiz ostida tasdiqlanadi</td><td>Boshqa joyda saqlangan tekshiruv nuqtalari, guvoh va vaqt tamg&#x27;alari oldin nima mavjud bo&#x27;lganini ko&#x27;rsatadi</td></tr>
-<tr><td><strong>Ombor kaliti</strong></td><td>Ma&#x27;lumotlar yonidagi <code>vault.key</code> yoki yangi ma&#x27;lumotlar katalogi uchun tashqi bosh kalit</td><td>Seifni dekriptirovka qilish</td><td>Sessiya va imzolash kalitini ham oshkor bo&#x27;lgan deb hisoblang</td></tr>
-<tr><td><strong>Witness tokeni</strong></td><td>Witness hostida</td><td>Faqat o&#x27;qish uchun: imzolangan tekshiruv nuqtalari va holat</td><td>Uni Witness sahifasida o&#x27;chirib tashlang; yangi birini yarating</td></tr>
-<tr><td><strong>Off-site nusxa kaliti</strong></td><td>Ombor; tiklash uchun bir marta yuklab oling</td><td>Sirtdagi nusxani dekriptaj qilish</td><td>Saqlangan ob&#x27;ektlarga egalik qiluvchi har kim ularni dekript qila oladi: o&#x27;sha nusxani oshkor deb hisoblang</td></tr>
+<tr><td><strong>Imzolash kaliti</strong></td><td>Vault, shifrlangan (<code>signing.enc</code>)</td><td>Yozuvlarni sizning barmoq izingiz ostida imzolash</td><td>Boshqa joyda saqlangan nazorat nuqtalari, guvoh va vaqt belgilari avval nima bo'lganini baribir ko'rsatadi</td></tr>
+<tr><td><strong>Ombor kaliti</strong></td><td>Ma'lumotlar yonidagi <code>vault.key</code> yoki tashqi asosiy kalit</td><td>Seyf</td><td>Sessiya va imzolash kaliti ham sizib chiqqan deb hisoblang</td></tr>
+<tr><td><strong>Witness tokeni</strong></td><td>Witness hostida</td><td>Faqat o'qish: nazorat nuqtalari va holat</td><td>Uni Guvoh sahifasida o'chiring, yangisini yarating</td></tr>
+<tr><td><strong>Off-site nusxa kaliti</strong></td><td>Ombor; tiklash uchun bir marta yuklab oling</td><td>Off-sayt nusxasi</td><td>Bucket'ga ham ega bo'lgan kishi uni ocha oladi: nusxani oshkor bo'lgan deb hisoblang</td></tr>
 </tbody></table></div>
 <h2 id="threats">Qanday himoyalar qamrab olinadi</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> qamrab olindi</h3><ul>
-<li>Eksportda o&#x27;zgartirilgan, olib tashlangan yoki tartibi o&#x27;zgartirilgan yozuv: xesh zanjiri yoki imzo endi tasdiqlanmaydi.</li>
-<li>Jurnal tekshiruv nuqtasidan keyin qayta tiklangan yoki qayta qurilgan, lekin tekshiruv nuqtasi boshqa joyda saqlangan: saqlangan tekshiruv nuqtasi endi mos kelmaydi.</li>
-<li>Panel tokenini taxmin qilish: 256 tasodifiy bit, doimiy vaqt ichida solishtiriladi; 15 marta xato qilgandan so&#x27;ng manzil rad etiladi.</li>
-<li>Dushmanona chat kontenti: matn xuddi matn sifatida kiritiladi, hech qachon HTML sifatida emas; ilovalar fayllar sifatida yuklanadi; panel boshqa saytlardan hech narsa yuklamaydi.</li>
-<li>Tashqi ombor kaliti bilan nusxalangan ma&#x27;lumotlar katalogi: sessiyalar va imzolash kalitlari bosh kalitsiz shifrlangan holda qoladi.</li>
+<li>O'zgartirilgan, olib tashlangan yoki tartibi buzilgan yozuv: xesh zanjiri yoki imzo buziladi.</li>
+<li>Nazorat nuqtasini boshqa joyga saqlaganingizdan keyin qisqartirilgan yoki qayta qurilgan jurnal: nazorat nuqtasi mos kelmay qoladi.</li>
+<li>Tokenni taxmin qilish: 256 tasodifiy bit, doimiy vaqtli solishtirish, daqiqasiga 15 ta xato va manzil bloklanadi.</li>
+<li>Dushmanona chat mazmuni: matn matnligicha qoladi, hech qachon HTML emas; ilovalar fayl sifatida yuklab olinadi; panel boshqa saytlardan hech narsa yuklamaydi.</li>
+<li>Tashqi seyf kaliti bilan o'g'irlangan ma'lumotlar katalogi: sessiyalar va kalitlar shifrlangan qoladi.</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> Sizga qoldirildi</h3><ul>
-<li>Asosiy panel tokeni to&#x27;liq nazoratga ega. Boshqa odamlarga kerakli hisoblar, suhbatlar va harakatlarga chegaralangan kirish huquqini bering; asosiy kalitni maxfiy saqlang.</li>
-<li>Uskunaning administratori hamma narsani o&#x27;qishi, jurnalni qayta yozishi va qayta imzolashi mumkin. Barmoq izi va tekshiruv nuqtalarini boshqa tizimda saqlang.</li>
-<li>TgWitness xabar matni va media fayllarini shifrlamaydi. Diskni shifrlash va qat&#x27;iy ruxsatnomalarni qo&#x27;llang.</li>
-<li>Localhostdan tashqaridagi oddiy HTTP tarmoqda tokenni ko&#x27;rsatadi. HTTPS yoki SSH tunneli ishlating.</li>
-<li>Imzolar va tekshiruv nuqtalari bilan saqlangan yozuvlarni tekshiring. Ishlatadigan hisoblar va manbalar bo&#x27;yicha to&#x27;plam qamrovini ko&#x27;rib chiqing va yetkazib berishni sinab ko&#x27;ring.</li>
+<li>Asosiy token hamma narsani qila oladi. Boshqalarga cheklangan kirish bering va asosiysini o'zingizda saqlang.</li>
+<li>Kompyuterda administrator bo'lgan kishi hamma narsani o'qiy oladi va jurnalni qayta imzolay oladi. Barmoq izi va nazorat nuqtalarini boshqa joyda saqlang.</li>
+<li>TgWitness xabarlar va mediani shifrlamaydi. Diskni shifrlang, ruxsatlarni qattiqlashtiring.</li>
+<li>localhost'dan tashqarida oddiy HTTP tokenni sizdiradi. HTTPS yoki SSH tunnelidan foydalaning.</li>
+<li>Imzolar nima o'tkazib yuborilganini aytmaydi. O'z hisoblaringiz va manbalaringizda qamrovni tekshiring va yetkazishni sinang.</li>
 </ul></section>
 </div>
-<p>Ruxsatlar, amal qilish muddati va sessiya cheklovlari bilan <a href="../access/">ishga kirish huquqini ulashing</a>. Guvoh tokeni alohida kirish vositasi bo‘lib qoladi.</p>
+<p>Ruxsatlar, amal qilish muddati va sessiya cheklovlari bilan <a href="../access/">ishga kirishni ulashing</a>.</p>
 <h2 id="hardening">O&#x27;rnatishni mustahkamlash</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>8 dan 0 tasi bajarildi</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>Maxsus Telegram hisobidan foydalaning</strong> — hech qachon asosiy hisobingizni ishlatmang. Panel tokeni va sessiya unga to&#x27;liq nazorat beradi.</span></li>
-<li><span class="check-text"><strong>Paneldagi manzilni 127.0.0.1 da saqlang.</strong> Unga faqat HTTPS (biriktirilgan Caddy konfiguratsiyasi) yoki SSH tunneli orqali masofadan ulanish mumkin.</span></li>
-<li><span class="check-text">Ma&#x27;lumotlar katalogi saqlangan <strong>diskni shifrlang</strong>: xabar matni va media fayllari kelganidek saqlanadi.</span></li>
-<li><span class="check-text"><strong>Ma&#x27;lumotlar katalogini</strong> faqat xizmat akkaunti uchun <strong>cheklang</strong>. Unixda yangi kataloglarga 0700 rejimi beriladi; Windowsda papkaning ruxsatlarini sozlang.</span></li>
-<li><span class="check-text"><strong>Saqlash omborining bosh kalitini</strong> serverlarda <strong>boshqa joyda saqlang</strong>: ma&#x27;lumotlar katalogini yaratishdan oldin <code>TGWITNESS_VAULT_KEY_FILE</code> ni o&#x27;rnating.</span></li>
-<li><span class="check-text"><strong>Imzolash kalitining barmoq izi va tekshiruv nuqtalarini</strong> boshqa tizimda <strong>saqlang</strong> va guvohni boshqa mezbon tizimiga qo&#x27;shing.</span></li>
+<li><span class="check-text"><strong>Maxsus Telegram hisobidan foydalaning</strong>, hech qachon asosiysidan emas.</span></li>
+<li><span class="check-text"><strong>Panelni 127.0.0.1 da saqlang.</strong> Masofaviy kirish faqat HTTPS (birga keladigan Caddy) yoki SSH tunneli orqali.</span></li>
+<li><span class="check-text"><strong>Diskni shifrlang</strong>, unda ma'lumotlar katalogi bor, xabarlar va media boricha saqlanadi.</span></li>
+<li><span class="check-text"><strong>Ma'lumotlar katalogini cheklang</strong> xizmat hisobiga (Unix'da 0700, Windows'da papka ruxsatlari).</span></li>
+<li><span class="check-text"><strong>Serverlarda seyf kalitini boshqa joyda saqlang</strong>: birinchi ishga tushirishdan oldin <code>TGWITNESS_VAULT_KEY_FILE</code> ni o'rnating.</span></li>
+<li><span class="check-text"><strong>Barmoq izi va nazorat nuqtalarini saqlang</strong> boshqa tizimda, guvohni boshqa xostda ishga tushiring.</span></li>
 <li><span class="check-text"><code>data/</code>, sessions, <code>panel-token.txt</code> yoki vault kalitlarini GitHubga yoki chatga <strong>hech qachon yuklamang</strong>.</span></li>
 <li><span class="check-text"><code>Authorization</code> sarlavhalarini yoki reverse proxy orqali keladigan so&#x27;rov tanalarini <strong>qayd etmang</strong>.</span></li>
 </ol>
 </div>
-<details><summary>Panel tokenini ma&#x27;lumotlarni yo&#x27;qotmasdan o&#x27;zgartira olamanmi?</summary><p>Ha. Token faqat panelni ochadi. TgWitness&#x27;ni to&#x27;xtating, ma&#x27;lumotlar katalogidan <code>panel-token.txt</code>ni o&#x27;chiring va uni qayta ishga tushiring; jurnal, sessiyalar va kalitlar o&#x27;zgarmagan holda qoladi. <code>TGWITNESS_TOKEN</code> o&#x27;rnatilganda, fayl o&#x27;rniga muhit qiymati ishlatiladi.</p></details>
-<details><summary>Nega xabarlar saqlash vaqtida shifrlanmaydi?</summary><p>Yig&#x27;uvchi ularni o&#x27;qishi, qidirishi, versiyalarni solishtirishi va eksport qilishi kerak. Ularni shu kompyuterdagi kalit bilan shifrlash, kompyuterni o&#x27;qiy oladigan kishi uchun deyarli hech qanday himoya qo&#x27;shmaydi. Diskni shifrlash to&#x27;xtatilgan yoki o&#x27;g&#x27;irlangan diskni himoya qiladi; qat&#x27;iy ruxsatnomalar esa ishlayotgan diskni himoya qiladi.</p></details>
+<details><summary>Panel tokenini ma&#x27;lumotlarni yo&#x27;qotmasdan o&#x27;zgartira olamanmi?</summary><p>Ha, u faqat panelni ochadi. TgWitness'ni to'xtating, <code>panel-token.txt</code> ni o'chiring, qayta ishga tushiring. Jurnal, sessiyalar va kalitlar qoladi. Agar <code>TGWITNESS_TOKEN</code> o'rnatilgan bo'lsa, uning qiymati fayldan ustun turadi.</p></details>
+<details><summary>Nega xabarlar saqlash vaqtida shifrlanmaydi?</summary><p>Kollektor qidirish, solishtirish va eksport qilish uchun ularni o'qishi kerak. Xuddi shu kompyuterdagi kalit o'sha kompyuterni baribir o'qiy oladigan odamni to'xtatmaydi. Disk shifrlash o'g'irlangan diskni, ruxsatlar ishlab turgan tizimni himoya qiladi.</p></details>
 <h2 id="report">Zaiflikni xabar qiling</h2>
-<p>GitHub omborida <strong>xavfsizlik → zaiflikni xabar qilish </strong>bo&#x27;limidan foydalaning. Versiyani, ta&#x27;sir darajasini va minimal sun&#x27;iy qayta yaratishni kiritishni unutmang. Hech qachon kirish ma&#x27;lumotlari, akkaunt papkalarini yoki haqiqiy dalillar arxivlarini yubormang. Agar shaxsiy xabar berish imkoni bo&#x27;lmasa, ekspluatatsiya tafsilotlarisiz shaxsiy kanal so&#x27;rab issue oching.</p>
+<p>GitHub'da <strong>Security → Report a vulnerability</strong>. Versiya, ta'sir va soxta ma'lumotlar bilan minimal qayta ishlab chiqarish. Hech qachon hisob ma'lumotlari, hisob papkalari yoki haqiqiy dalillarni yubormang. Maxfiy xabar berish o'chirilgan bo'lsa, ekspluatatsiya tafsilotlarisiz maxfiy kanal so'rab issue oching.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">To'liq manba →</a><a class="next-guide" href="../start/"><span>Keyingi qadam</span><strong>Bir necha daqiqada boshlang →</strong></a><p>Ushbu qo&#x27;llanmalar joriy amalga oshirishni tasvirlaydi. Tasdiqlash natijalari va qolgan bo&#x27;shliqlar alohida hujjatlashtirilgan. <a href="../reference/verification/">Nima sinovdan o&#x27;tkazilgan →</a></p></footer>
 </main>

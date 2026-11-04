@@ -32,55 +32,55 @@
 <nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../">Belgeler</a> <span aria-hidden="true">/</span> <span aria-current="page">Dışa aktarma ve doğrulama</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Neler test edildi →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Belgeler / 07</p><h1>Dışa aktarma ve doğrulama</h1><p class="guide-outcome">Alıcıya, toplama çalışma alanı ve kaydedilmiş geçmişiyle karşılaştırarak kontrol edebileceği dosyalar sağlayın.</p>
+<article class="guide-content"><p class="eyebrow">Belgeler / 07</p><h1>Dışa aktarma ve doğrulama</h1><p class="guide-outcome">Birine, çalışma alanınıza karşı kendisinin doğrulayabileceği dosyalar verin.</p>
 <div class="flow-strip export-flow" aria-label="Kanıt aktarımı: güvenilir bir referans saklayın, imzalı ZIP dosyasını dışa aktarın, alıcıyla doğrulayın"><span>Referansı saklayın</span><span>İmzalı ZIP dosyasını dışa aktar</span><span>Alıcı doğrular</span></div>
-<p>İmzalar ve kontrol noktaları konusunda yeni misiniz? <a href="../concepts/#chain">Örnek bir kaydı değiştirin</a> ve hangi kontroller tarafından tespit edildiğini görün.</p>
+<p>İmzalar ve kontrol noktaları sizin için yeni mi? <a href="../concepts/#chain">Örnek bir kaydı değiştirin</a> ve hangi kontrollerin yakaladığını görün.</p>
 <p>Bir kopyayı veri toplayıcıdan uzak tutmak mı istiyorsunuz? <a href="#s3">S3 kurulumu</a>, <a href="#s3-retention">Nesne Kilidi</a> veya <a href="#s3-restore">doğrulanmış kurtarma</a> bölümlerine gidin.</p>
 <h2 id="retain">Güvenilir bir kaynak olarak kalın</h2>
-<p>Çalışma alanının açık anahtar parmak izini toplayıcı dışında saklayın. Toplama işlemi sırasında, imzalı kontrol noktalarını başka bir yerde tutun veya <a href="../witness/">bağımsız bir tanık</a> kullanın. Bu referanslar, alıcının anahtarı ve önceki günlük sınırını kontrol etmesini sağlar.</p>
+<p>Çalışma alanının anahtar parmak izini toplayıcı dışında bir yere yazın. Toplama sırasında imzalı kontrol noktalarını da başka yerde saklayın ya da <a href="../witness/">bağımsız bir tanık</a> çalıştırın. Alıcı anahtarı ve önceki bir günlük durumunu bununla karşılaştırır.</p>
 <h2 id="export">İmzalı ZIP dosyasını indirin</h2>
-<p><strong>&quot;Exports&quot; bölümünü</strong> açın ve imzalı bir delil ZIP dosyası oluşturun. Bu dosya, çalışma alanının tam günlüğünü ve imzalı bir dosya manifestosunu içerir. Okunabilir bir rapor oluşturmak için <a href="../reports/">Report Studio&#x27;yu</a> kullanın veya yalnızca seçilen, en aza indirgenmiş verileri sunmak için bir <a href="../handover/">devir özetini</a> kullanın.</p>
-<p>HTML, PDF ve JSON raporları kendi imzalı mühürlerini taşır ve ayrı ayrı kontrol edilebilir. CSV, analiz için kullanışlı bir kopyadır; bütünlüğünü kontrol etmek için doğrulanmış ZIP dosyasının içindeki tam CSV dosyasını kullanın. Alıcının kaynak kayıtlara ve ek dosyalara da ihtiyacı varsa, imzalı ZIP dosyasını saklayın.</p>
+<p><strong>Dışa aktarımlar</strong> → imzalı kanıt ZIP'i. Tüm günlüğü ve imzalı bir dosya manifestini içerir. Okunabilir raporu <a href="../reports/">Report studio</a>'da biçimlendirin ya da yalnızca seçili verileri <a href="../handover/">teslim özeti</a> olarak gönderin.</p>
+<p>HTML, PDF ve JSON raporların kendi mühürleri vardır. CSV yalnızca çalışma kopyasıdır; bütünlük için doğrulanmış ZIP'teki CSV'yi kullanın.</p>
 <h2 id="verify">TgWitness&#x27;in güvenilir bir kopyasıyla doğrulayın</h2>
-<p>Yüklü proje ortamında, örnek parmak izini ve dosya yollarını değiştirin:</p>
+<p>Proje ortamında, kendi parmak iziniz ve yollarınızla:</p>
 <pre><code>python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
-<p>Her iki referans da geçerli olduğunda, sonuçta <code>key_pinned: true</code> ve <code>checkpoint_checked: true</code> raporlanır. Doğrulama sonucunu orijinal arşivle birlikte saklayın. Saklanan kontrol noktası, dışa aktarım sınırında veya öncesinde olmalıdır.</p>
+<p>Başarılı olursa <code>key_pinned: true</code> ve <code>checkpoint_checked: true</code> görürsünüz. Bu çıktıyı arşivin yanında saklayın. Kontrol noktası dışa aktarımın sonunda ya da öncesinde olmalı.</p>
 <h2 id="meaning">Doğrulama sonucunu kullanın</h2>
-<ul><li><strong>Teslim edilen dosyaları kontrol edin:</strong> manifest, dosyaların hash değerlerini birbirine bağlar; kayıt imzaları ise kaydedilen günlüğü birbirine bağlar. Değiştirilmiş bir dosya veya bozuk bir kayıt zinciri tespit edilir.</li><li><strong>Çalışma alanı kimliğini kontrol edin:</strong> bağımsız olarak saklanan parmak izi, beklediğiniz imza anahtarını doğrular.</li><li><strong>Daha önceki bir sınırlamayı karşılaştırın:</strong> saklanan bir kontrol noktası, aktarımdan önce kaydedilen bir günlük önekiyle karşılaştırarak dışa aktarımı kontrol eder.</li><li><strong>Toplama kapsamını gözden geçirin:</strong> eksiklikler, toplama sonuçları ve kontrollü bir &quot;gönder → düzenle → sil&quot; testi, bu kurulumun yakaladığı olayları açıklar.</li></ul>
-<p>Bu sonuçları alıcının kopyasıyla birlikte saklayın. <a href="../reference/evidence/#verification-scope">Doğrulamanın</a>, kontrollerinin kapsamı ile kaynak iddialarının ve toplama kapsamının ayrı ayrı değerlendirilmesi açısından <a href="../reference/evidence/#verification-scope">neyi belirlediğine</a> bakın.</p>
+<ul><li><strong>Dosyalar:</strong> manifest karmalarını, imzalar günlüğü bağlar. Her değişiklik ortaya çıkar.</li><li><strong>Kimlik:</strong> sakladığınız parmak izi bunun beklenen anahtar olduğunu kanıtlar.</li><li><strong>Önceki durum:</strong> bir kontrol noktası dışa aktarımı teslimden önce kaydedilen bir günlük başıyla karşılaştırır.</li><li><strong>Kapsam:</strong> boşluklar, edinim sonuçları ve gönder → düzenle → sil testi bu kurulumun gerçekte neyi yakaladığını gösterir.</li></ul>
+<p>Ayrıntılar: <a href="../reference/evidence/#verification-scope">doğrulamanın neyi kanıtladığı ve neyi kanıtlamadığı</a>.</p>
 
 <h2 id="s3">S3 dış sunucu kopyasını kurun</h2>
-<p>Çalışma alanınızda, <strong>Dışa Aktarımlar → Site dışı kopya seçeneğini</strong> açın. Bu isteğe bağlı özellik, AWS S3 ve diğer S3 uyumlu hizmetlerle çalışır. Günlük bölümlerini, saklanan fotoğrafları ve dosyaları, zaman damgası yanıtlarıyla birlikte kontrol noktalarını ve tamamlanmış sohbet dışa aktarımlarını kopyalar. Her nesne, yüklenmeden önce toplayıcıda <code>AES-256-GCM</code> ile şifrelenir.</p>
-<p>Çevrimiçi demoda, dosya yükleme özelliği devre dışı bırakılmış halde aynı kontrol öğeleri gösterilmektedir. Depolama kimlik bilgilerinizi yalnızca kendi çalışmakta olan çalışma alanınızda girin.</p>
+<p>Çalışma alanınızda <strong>Dışa aktarımlar → Harici kopya</strong>. AWS S3 ve S3 uyumlu her şeyle çalışır. Günlük segmentlerini, kaydedilen dosyaları, zaman damgalarıyla kontrol noktalarını ve bitmiş sohbet dışa aktarımlarını kopyalar; her biri toplayıcıdan çıkmadan önce <code>AES-256-GCM</code> ile şifrelenir.</p>
+<p>Çevrimiçi demo bu ayarları yükleme kapalıyken gösterir. Gerçek kimlik bilgilerini yalnızca kendi kurulumunuza girin.</p>
 <figure><a href="../../../assets/off-site-copy.png"><img src="../../../assets/off-site-copy.png" width="1136" height="825" alt="Tam kapsamlı site dışı kopyalama paneli: uç nokta, bölge, depo, erişim anahtarları, zamanlama, Nesne Kilidi ve kurtarma anahtarı denetimleri" loading="lazy"></a><figcaption>Gelişmiş seçeneklerin de yer aldığı tam panel açılmış haldedir. Depolama kimlik bilgileri gösterilmemektedir.</figcaption></figure>
 <div class="table-wrap"><table><caption>Dışa Aktarma → Site dışı kopya bölümündeki depolama ayarları</caption><thead><tr><th scope="col">Alan</th><th scope="col">Ne yazılmalı</th></tr></thead><tbody>
-<tr><th scope="row">Uç nokta</th><td>Depolama hizmetinin URL&#x27;si; kova yolu veya kimlik bilgileri içermez. Kurgusal örnek: <code>https://s3.example.invalid</code>.</td></tr>
-<tr><th scope="row">Bölge</th><td>İstifacınızın gerektirdiği bölge. Uygulamanın varsayılan ayarı <code>us-east-1</code>&#x27;dir.</td></tr>
-<tr><th scope="row">Bucket</th><td>Erişebileceğiniz mevcut bir depo. Kurgusal örnek: <code>example-case-backup</code>.</td></tr>
-<tr><th scope="row">Bucket içindeki klasör</th><td>Nesne öneki; varsayılan değer <code>tgwitness</code>. Uygulama, bu çalışma alanının imza anahtarı parmak izinden türetilen bir öneki ekler.</td></tr>
-<tr><th scope="row">Erişim anahtarı kimliği / Gizli erişim anahtarı</th><td>Her iki depolama kimlik bilgisini de birlikte girin. Bu bilgiler çalışma alanı kasasına kaydedilir. Kaydedilen çifti korumak için sonraki kaydetme işlemlerinde her ikisini de boş bırakın.</td></tr>
-<tr><th scope="row">Yol biçimli adresler</th><td>Sağlayıcıya göre, etkinleştirildiğinde <code>endpoint/bucket</code>&#x27;yi, devre dışı bırakıldığında ise <code>bucket.endpoint</code>&#x27;yi kullanın.</td></tr>
-<tr><th scope="row">Kopyalama aralığı</th><td>1 ila 1.440 dakika arasında; varsayılan ayar 5 dakikadır. Zamanlanmış kopyalama işlemleri için uygulamanın çalışır durumda olması gerekir.</td></tr>
-<tr><th scope="row">Object Lock saklama süresi</th><td>Object Lock özelliğini destekleyen bir depolama kutusu için saklama süresi ve modu. Sıfır gün seçeneği, depolama kutusunun varsayılan saklama süresinin geçerli kalmasını sağlar.</td></tr>
+<tr><th scope="row">Uç nokta</th><td>Depolama URL'si, bucket yolu ya da kimlik bilgisi olmadan. Örnek: <code>https://s3.example.invalid</code>.</td></tr>
+<tr><th scope="row">Bölge</th><td>Sağlayıcınızın istediği. Varsayılan <code>us-east-1</code>.</td></tr>
+<tr><th scope="row">Bucket</th><td>Yazabildiğiniz mevcut bir bucket. Örnek: <code>example-case-backup</code>.</td></tr>
+<tr><th scope="row">Bucket içindeki klasör</th><td>Önek, varsayılan <code>tgwitness</code>. Üstüne çalışma alanı başına bir önek eklenir.</td></tr>
+<tr><th scope="row">Erişim anahtarı kimliği / Gizli erişim anahtarı</th><td>İkisi birlikte, kasada saklanır. Korumak için sonradan ikisini de boş bırakın.</td></tr>
+<tr><th scope="row">Yol biçimli adresler</th><td>Açık: <code>endpoint/bucket</code>. Kapalı: <code>bucket.endpoint</code>. Sağlayıcıya bağlı.</td></tr>
+<tr><th scope="row">Kopyalama aralığı</th><td>1–1.440 dakika, varsayılan 5. Yalnızca uygulama çalışırken.</td></tr>
+<tr><th scope="row">Object Lock saklama süresi</th><td>Bucket Object Lock destekliyorsa gün ve kip. Sıfır, bucket varsayılanını korur.</td></tr>
 </tbody></table></div>
 <ol>
-<li>Sağlayıcınızla bir depo oluşturun, ardından hedefini ve kimlik bilgilerini girin. Hazırlık aşamasında <strong>“Tesis dışında bir kopya</strong> <strong>sakla”</strong> seçeneğinin işaretini kaldırın, ardından <strong>“Tesis dışında bir kopya kaydet”</strong> seçeneğini seçin.</li>
-<li><strong>&quot;Bağlantıyı Test Et&quot;</strong> seçeneğini seçin. Bu işlem, şifrelenmiş bir test nesnesini yükler ve depolama yanıtını kontrol eder.</li>
-<li><strong>&quot;Şifreleme anahtarını indir</strong>&quot; seçeneğini seçin. Bu dosyayı toplayıcıdan ayrı bir yerde saklayın; kurtarma işlemi için gereklidir.</li>
-<li>&quot;<strong>Dışarıda bir kopya sakla</strong>&quot; onay kutusunu işaretleyin ve tekrar kaydedin. Manuel bir işlem için &quot;<strong>Şimdi kopyala</strong>&quot;yı seçin veya zamanlamayı çalışır durumda bırakın.</li>
+<li>Bucket'ı oluşturun, <strong>Harici kopya tut</strong> işaretsizken hedefi ve kimlik bilgilerini doldurun, <strong>Harici kopyayı kaydet</strong>'e basın.</li>
+<li><strong>Bağlantıyı test et</strong> şifreli bir test nesnesi yükler.</li>
+<li><strong>Şifreleme anahtarını indir</strong> ve toplayıcıdan uzakta saklayın. Anahtar yoksa kurtarma da yok.</li>
+<li><strong>Harici kopya tut</strong>'u işaretleyin, kaydedin, sonra <strong>Şimdi kopyala</strong> ya da zamanlamayı çalışmaya bırakın.</li>
 </ol>
 
 <h2 id="s3-retention">Saklama süresini ve kopyalama sürecini kontrol edin</h2>
-<p><strong>&quot;Diğer seçenekler</strong>&quot; altında, saklama süresini seçin ve depolama alanınız Object Lock&#x27;u destekliyorsa &quot;<code>GOVERNANCE</code>&quot; veya &quot;<code>COMPLIANCE</code>&quot; seçeneğini seçin. TgWitness, yüklenen bir nesnenin saklama modunu ve son tarihini geri okur. Ayrı saklama sonucunu inceleyin: onaylandı, saklama eksik veya kontrol başarısız.</p>
-<p>Panel, son geçişi, nesne sayısını, aktarılan bayt sayısını, kopyalanan günlük sınırını ve varsa hataları bildirir. Eksik veya değiştirilmiş yerel ortamlar bildirilir ve bir sonraki geçişte yeniden denenir. Bu ortamdan sonraki dosyalar, kontrol noktaları ve kuyrukta bekleyen dışa aktarımlar yine de kopyalanabilir.</p>
-<p>Yüklemeler için çalışma alanının Direct, SOCKS5 veya HTTP yolunu kullanın; S3 kopyalama için bu yollardan birini seçin; yalnızca MTProxy yolunun seçilmesi durumunda kopyalama işlemi bir hata mesajıyla beklemede kalır.</p>
+<p><strong>Diğer seçenekler</strong> altında saklama günlerini ve <code>GOVERNANCE</code> ya da <code>COMPLIANCE</code> seçin. TgWitness saklamayı yüklenen bir nesneden geri okur ve size söyler: onaylandı, eksik ya da kontrol başarısız.</p>
+<p>Panel son geçişi, nesne sayısını, baytları, kopyalanan günlük sınırını ve hataları gösterir. Eksik bir yerel dosya bildirilir ve sonraki geçişte yeniden denenir, gerisi kopyalanmaya devam eder.</p>
+<p>Yüklemeler doğrudan, SOCKS5 ya da HTTP üzerinden gider. Yalnızca MTProxy rotasıyla kopya bir hatayla bekler.</p>
 
 <h2 id="s3-key">Geri yükleme anahtarını ayrı bir yerde saklayın</h2>
-<p>İndirilen JSON dosyası, şifre çözme anahtarını, hedef ayarlarını, çalışma alanı nesnesi önekini ve imza anahtarı parmak izini içerir. Kurtarma işlemi için hem bu anahtar dosyasına hem de depolama kovasına okuma erişimi sağlayan ayrı depolama kimlik bilgilerine ihtiyaç vardır. Bunları kurtarma planınızda saklayın.</p>
-<p>Uç noktayı, depolama kovasını veya klasör önekini değiştirirseniz, hedef ayarlarının uyumlu olması için anahtar dosyasını yeniden indirin. Uygulama, yerel olarak saklanan günlüğün, dosyaların ve kontrol noktalarının yeni bir kopyasını yeni hedefte başlatır. Tamamlanmış sohbet dışa aktarımları, yerel yükleme kuyruğundan zaten kaldırılmış olsa bile önceki hedeflerinde kalır.</p>
+<p>Anahtar JSON'u şifre çözme anahtarını, hedefi, öneki ve anahtar parmak izini içerir. Kurtarma için bu ve okuma erişimli depolama kimlik bilgileri gerekir.</p>
+<p>Uç nokta, bucket ya da önek mi değişti? Anahtarı yeniden indirin. Yeni hedefte taze bir kopya başlar; eski sohbet dışa aktarımları olduğu yerde kalır.</p>
 
 <h2 id="s3-restore">Başka bir makinede geri yükleme ve doğrulama</h2>
-<p>Güvenilir bir TgWitness kurulumu, indirilen anahtar JSON dosyası, okuma erişimine sahip depolama kimlik bilgileri ve boş bir çıktı dizini kullanın. Aşağıdaki hayali kimlik bilgisi yer tutucularını değiştirin.</p>
+<p>Güvendiğiniz bir TgWitness kurulumu, anahtar JSON'u, salt okunur kimlik bilgileri ve boş bir klasör gerekir:</p>
 <h3>Windows PowerShell</h3>
 <pre><code>$env:TGWITNESS_S3_ACCESS_KEY = 'YOUR_READ_ACCESS_KEY'
 $env:TGWITNESS_S3_SECRET_KEY = 'YOUR_READ_SECRET_KEY'
@@ -89,9 +89,8 @@ python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out 
 <pre><code>export TGWITNESS_S3_ACCESS_KEY='YOUR_READ_ACCESS_KEY'
 export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence</code></pre>
-<p>İndirilen dosyalar ve şifresi çözülmüş nesneler, tüm günlük, saklanan kontrol noktaları ile korunmuş medya hash değerleri ve boyutları kontrol edilirken özel geçici depolama alanında tutulur. Güvenli olmayan yollar, çakışan günlük segmentleri ve kontrol noktasından daha kısa olan günlükler reddedilir. Doğrulama başarısız olursa, geri yüklenen dosyalar yayınlanmaz.</p>
-<p>Kurtarma işlemi başarılı olursa, kopyada bulunan içerik için <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> ve <code>exports/</code> değerleri elde edilir. Kurtarılan içerikle birlikte komutun JSON sonucunu da saklayın.</p>
-<p>Kurtarılan materyali, bağımsız olarak sakladığınız kontrol noktaları veya tanık kayıtlarıyla karşılaştırın, ardından ihtiyacınız olan dönem için kaydedilen toplama kapsamını inceleyin.</p>
+<p>Önce her şey özel bir geçici klasörde denetlenir: tüm günlük, kontrol noktaları, dosya karmaları ve boyutları. Güvensiz yollar, çelişen segmentler ya da kontrol noktasından kısa bir günlük başarısız olur ve o zaman hiçbir şey yazılmaz.</p>
+<p>Başarılı olursa <code>events.jsonl</code>, <code>media/</code>, <code>checkpoints/</code> ve <code>exports/</code> elde edersiniz. Komutun JSON çıktısını yanlarında saklayın ve kendi sakladığınız kontrol noktaları ya da tanık kayıtlarıyla karşılaştırın.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/evidence/">Tam referans →</a><a class="next-guide" href="../reports/"><span>Sonraki adım</span><strong>Bir rapor tasarlayın →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="../reference/verification/">Neler test edildi →</a></p></footer>
 </main>

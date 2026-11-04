@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/witness/
 
-Permita que un proceso independiente compruebe el registro y publique puntos de control firmados en su canal.
+Un proceso aparte comprueba su diario y publica puntos de control firmados en un canal.
 
 ## Dos servidores, dos claves de firma
 
@@ -36,33 +36,33 @@ Todos los ejemplos de respuesta dan por supuesta una firma válida y la clave fi
 
 ## Prepare un bot y un canal
 
-Cree un bot con BotFather y permítale publicar en un canal que usted controle. Elija un ordenador o un servidor para el «witness». Un host y un operador independientes proporcionan una mayor independencia que un segundo proceso en el servidor del recopilador.
+Cree un bot con BotFather y deje que publique en su canal. Ejecute el testigo en otro sitio: otro host, idealmente gestionado por otra persona, vale mucho más que un segundo proceso junto al recolector.
 
 ## Tres pasos en «Extras»
 
-1. **Acceso de solo lectura.** Abre **«Extras» → «Testigo independiente**», crea un token de testigo y guarda el archivo de acceso. Permite leer los puntos de control y el estado del sistema, pero no las conversaciones ni los controles del recopilador.
-2. **Canal e intervalo.** Elige un canal de Telegram o un webhook de Discord e introduce una dirección de recopilador a la que pueda acceder el testigo. Guarda el archivo de configuración.
-3. **Puesta en marcha.** Coloque juntos los archivos «`witness.json`», «`witness-token.txt`» y «`bot-token.txt`» creados en el servidor de Witness. Ejecute los siguientes comandos en el entorno del proyecto instalado.
+1. **Acceso de solo lectura.** **Extras → Testigo independiente**, cree un token y guarde el archivo. Lee puntos de control y estado, nada más.
+2. **Canal e intervalo.** Canal de Telegram o webhook de Discord, más una dirección del recolector accesible para el testigo. Guarde el archivo de ajustes.
+3. **Lanzar.** Ponga `witness.json`, `witness-token.txt` y `bot-token.txt` juntos en el host del testigo y ejecute:
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
 python -m tgwitness.witness run --config witness.json
 ```
 
-La descarga de los archivos no inicia el proceso de «witness». Compruebe que la primera publicación firmada aparece en el canal y, a continuación, guarde por separado la huella digital de la clave pública del «witness».
+Espere a la primera publicación firmada en el canal y guarde la huella del testigo en un lugar seguro.
 
-En Discord, guarda la URL del webhook del canal como `discord-webhook.txt` en lugar del token del bot. Un testigo publica en un único lugar, ya sea un canal de Telegram o un canal de Discord; las comprobaciones más largas que un mensaje de Discord se envían como archivo adjunto.
+¿Prefiere Discord? Guarde la URL del webhook como `discord-webhook.txt`. Un testigo publica en un solo sitio; en Discord las comprobaciones largas llegan como archivo.
 
 ## Elija la frecuencia de publicación
 
-La publicación de cada comprobación genera un registro externo periódico. A intervalos de cinco minutos, esto supone unas 288 entradas por espacio de trabajo al día. La configuración avanzada también ofrece la posibilidad de publicar cambios o problemas, un proxy y una dirección API de bot personalizada.
+Publicar cada comprobación deja un registro externo constante: cada cinco minutos son unas 288 publicaciones al día por espacio. Los ajustes avanzados permiten publicar solo con cambios o problemas, usar un proxy o un Bot API propio.
 
 **¿Qué es lo que certifica realmente el bot?**
 
-El testigo solicita al recopilador un punto de control firmado, lo verifica con la clave esperada y mantiene un registro firmado independiente. Registra tanto las respuestas que faltan y las rechazadas como las comprobaciones realizadas con éxito. La publicación sigue dependiendo de que el testigo esté en funcionamiento y pueda acceder a la API de bots de Telegram.
+Pide al recolector un punto de control firmado, lo comprueba con la clave esperada y lleva su propio diario firmado, incluidas las respuestas perdidas y rechazadas.
 
-Comprueba el estado del registro notificado por el recopilador. No supervisa de forma independiente cada mensaje de Telegram. Para ello, añada la prueba de entrega controlada.
+Comprueba el estado del diario; no vigila Telegram por sí mismo. Para eso, haga una prueba de entrega controlada.
 
 ## Compruebe las pruebas más adelante
 
-Conserve el registro de pruebas, las publicaciones del canal y las huellas digitales guardadas de forma independiente. El [procedimiento de verificación completo](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#verify) las compara con la exportación firmada por el recopilador.
+Guarde el diario del testigo, las publicaciones y las huellas. [Cómo comprobarlos](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#verify) frente a la exportación del recolector.

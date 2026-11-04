@@ -137,11 +137,6 @@ does not obtain a timestamp.</li>
 <p>Successful verification establishes integrity relative to the trusted collector
 key and retained boundary. See <a href="#verification-scope">verification scope</a> for the
 trust assumptions and <a href="../verification/">validation results</a> for the checks performed.</p>
-<p>Notifications sent through Apprise help operators follow workspace and chat activity.
-They contain names and counts; excerpts of deleted and edited messages are optional
-and off by default. Use the signed journal and exports for the retained record.
-With a workspace proxy, notifications use the same route; services that cannot use
-it, and MTProxy routes, are refused.</p>
 <h2 id="handover-extract">Handover extract<a class="anchor" href="#handover-extract" aria-label="Link to this section">#</a></h2>
 <p>A signed ZIP carries the whole workspace journal. When a court, a lawyer or an abuse desk needs
 only some chats, a period or certain people, <strong>Exports → Handover extract</strong> prepares a minimised
@@ -220,12 +215,6 @@ filters, participants, indicators, record details and JSON/CSV selections withou
 --evidence ARCHIVE.zip</code> to compare them with the signed archive.
 The verifier checks the report ID, signing key, archive boundary and every selected item; edited,
 missing and duplicate items fail. Selection notes and creation time remain unsigned metadata.</p>
-<p>Current archive exports store viewer chunks in <code>viewer/*.html</code>. Each chunk is loaded in a sandboxed
-frame with scripts allowed but <strong>without</strong> same-origin access, and posts its JSON text to the report.
-The report checks the message source and its SHA-256 against the signed descriptor before display.
-The report's own CSP permits only its hashed application script. Missing data can be recovered by
-choosing the matching ZIP in the Check tab; data read from the ZIP is parsed without execution.
-Earlier exported reports keep their own embedded viewer and remain verifiable.</p>
 <p>Message-number gaps are shown only for a complete, unfiltered ascending chat feed. Hiding a
 category or failing to load a data chunk must not turn an omitted row into evidence of a missing
 message. Search highlights operate on plain text before HTML escaping, preserving literal markup.</p>
@@ -238,20 +227,6 @@ format notes in the report language, followed by a complete English guide. <code
 files listed within it, excluding itself, <code>manifest.json</code> and <code>manifest.sig</code>; the signed manifest
 also covers <code>SHA256SUMS</code>. Keep the original ZIP unchanged and save working files outside the
 extracted folder. PDF reports include section bookmarks and case/report identification on later pages.</p>
-<p>Report settings are saved per workspace. The report language can follow the panel or be fixed;
-an explicit language on an export request overrides that choice for that export only. Every panel
-language is accepted, including the four right-to-left languages.</p>
-<p>The journal transcript switch controls its HTML viewer and PDF transcript. Full record JSON is
-an HTML detail option: when enabled, the viewer carries the exact exported record, including a
-minimised record in a handover. Disabling it does not alter the authoritative journal file. Photo
-previews apply to both chat and journal HTML. Consecutive heartbeat runs can be collapsed without
-removing records; expanding long runs loads their rows incrementally.</p>
-<p><code>part_size</code> is the maximum item count per viewer data file (500–100000), and the maximum transcript
-size included in a PDF. Viewer chunks also split at a 16 MiB data budget. Longer PDF transcripts
-are omitted with an explicit pointer to the signed source files and HTML viewer. A standalone HTML
-report embeds at most 20000 items or 32 MiB of item data; once exceeded, it releases those items and
-directs the reader to the archive. These display limits never truncate the signed source files.
-The PDF font setup combines CJK fonts where needed: a Chinese font alone may lack Korean Hangul.</p>
 <h3 id="the-chat-at-export-time">The chat at export time<a class="anchor" href="#the-chat-at-export-time" aria-label="Link to this section">#</a></h3>
 <p>A chat export records what Telegram said about the chat when the export began: Telegram's own
 labels (<code>scam</code>, <code>fake</code>, <code>restricted</code> with its reasons, <code>verified</code>), usernames, description, member
@@ -453,10 +428,6 @@ verification publishes no restored files. Retention checks compare the returned 
 mode and date with the deadline sent at upload (one second of rounding tolerance). An expired,
 invalid or shortened deadline does not count as verified. The status reports the sampled object
 whose retention was read back for that upload pass.</p>
-<p>Copy progress is scoped to the destination and encryption key. Changing the endpoint, bucket
-or prefix starts a complete copy of the locally retained journal, media and checkpoints to
-that destination. Old unscoped progress is preserved but replayed once after upgrade. Historical
-chat exports already removed from the local outbox remain at their previous destination.</p>
 <p>Missing or corrupt local media is reported as the pass's error and keeps the media cursor before
 it, so the file is tried again next pass; the files, checkpoints and exports after it are still
 copied. Restore checks
@@ -515,9 +486,6 @@ was recorded and each new and ended session. It reads the list only while observ
 <p>What they do not show: drand proves no more than the order of records against public time,
 and the device list is Telegram's statement through the collector, signed by the collector
 like every other record.</p>
-<p>Tested on 1 November 2026: <code>tools/check_evidence_witnesses.py --live</code> wrote a real round from
-<code>drand.cloudflare.com</code>, exported the journal and confirmed the round with <code>drand.cloudflare.com</code>
-and <code>api.drand.sh</code>; the device list ran against simulated Telegram answers, not a real account.</p>
 <p><strong>Cloudflare Gateway log</strong> (<code>cloudflare.gateway_dns</code>). For a server that resolves through
 Cloudflare Gateway (<a href="../high-assurance/#cloudflare-as-an-outside-witness">Gateway DNS</a>), each
 pass copies what Gateway logged since the previous copy: one record per window of at most three

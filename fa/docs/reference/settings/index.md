@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/setti
 یک فضای کاری که یک جلسه یا یک راه‌اندازی قبلی را دارد، ویزارد را دریافت نمی‌کند. مقادیر آن هنگام بارگذاری صفحه با یک هدف جایگزین نمی‌شوند. پنهان کردن یک فیلد، این ویژگی را غیرفعال نمی‌کند یا مقدار آن را حذف نمی‌کند.
 
 اندازه و برآورد زمانی، تا سه چت انتخاب‌شده و تا ۲۰ پیام از هر یک را می‌خواند. این یک برآورد است: این ابزار محدودیت‌های تلگرام، سرعت یک سرور مشخص یا فایل‌های موجود در هر چت را پیش‌بینی نمی‌کند.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

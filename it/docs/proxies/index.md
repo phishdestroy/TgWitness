@@ -2,45 +2,45 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/proxies/
 
-Mantenere l’account connesso. Stabilire esplicitamente quando il suo percorso possa utilizzare l’indirizzo del server.
+Tenga l’account online e decida Lei se potrà mai mostrare l’IP del Suo server.
 
 ## Selezionare innanzitutto la modalità IP
 
 01**Nascondi l’indirizzo**
 
-Utilizzi un proxy. Qualora nessuno funzionasse, attenda senza una connessione diretta a Telegram.
+Solo proxy. Se nessuno funziona, aspetta.
 
 02**Direct come ultima risorsa**
 
-Consentire l’accesso diretto trascorso il ritardo configurato; tornare a un proxy funzionante quando uno di essi risponde.
+Passa al diretto dopo un ritardo e torna a un proxy appena uno funziona.
 
 03**Server protetto da un tunnel o da una VPN**
 
-Consentire percorsi diretti attraverso la rete dell’host. Questa opzione non installa né verifica una VPN.
+Il diretto va bene. Non configura né verifica la VPN al posto Suo.
 
 Il percorso determina il tipo di connessione. La modalità IP stabilisce se è consentita una connessione diretta.
 
 ## Lasciate che il pool gestisca il percorso
 
-1. Aprire **l’account → Impostazioni → Impostazioni di connessione**.
-2. Selezionare la modalità IP e **MTProxy automatico**, oppure inserire un percorso fisso.
-3. Salvi ed esegua **il test di connessione a Telegram**. Funziona anche prima dell’accesso.
-4. Dopo aver avviato la raccolta, si verifichi che un messaggio di controllo venga inserito nel registro.
+1. **Account → Impostazioni → Impostazioni di connessione**.
+2. Scelga la modalità IP e **MTProxy automatico**, oppure un percorso fisso.
+3. Salvi, poi **Testa connessione a Telegram** (funziona anche prima dell’accesso).
+4. Avvii la raccolta e si invii un messaggio di prova.
 
-I nuovi spazi di lavoro utilizzano automaticamente MTProxy con l’opzione **“Nascondi l’indirizzo**”. Il pool combina quattro fonti pubbliche, verifica le voci, mantiene i percorsi funzionanti e sostituisce i proxy non funzionanti. I download non riusciti conservano le istantanee precedenti.
+I nuovi spazi partono con MTProxy automatico e **Nascondi l’indirizzo**. Il pool usa quattro elenchi pubblici, prova i server, tiene quelli buoni e sostituisce quelli caduti.
 
 ## Utilizzi il proprio proxy
 
-Inserisca i dettagli SOCKS5 o HTTP CONNECT, incolli un link proxy Telegram supportato oppure fornisca un catalogo di operatori. Metta in pausa il monitoraggio prima di modificare un percorso attivo. I segreti TLS MTProxy falsi che iniziano con `ee` non sono ancora supportati.
+SOCKS5, HTTP CONNECT, un link proxy di Telegram o un catalogo dell’operatore. Metta in pausa l’osservazione prima di cambiare. I segreti Fake TLS (`ee`…) non funzionano.
 
 **Impostazioni di rotazione, condivisione e riprova**
 
-In **Parametri → MTProxy automatico**, impostare le soglie di errore, i tempi di attesa, la rotazione pianificata e il numero di account per proxy. Un limite di condivisione pari a uno comporta l’attesa da parte di un account qualora non sia disponibile alcun accesso esclusivo. Gli intervalli di aggiornamento dell’elenco e di sondaggio seguono i valori dell’area di lavoro principale. I proxy separati non garantiscono indirizzi IP di uscita distinti.
+**Parametri → MTProxy automatico**: soglie di errore, attese, rotazione, account per proxy. Limite 1 significa che un account aspetta invece di condividere. Proxy diversi possono comunque avere lo stesso IP di uscita.
 
 ## Separare Telegram dalle richieste esterne
 
-MTProxy gestisce esclusivamente il traffico di Telegram. I timestamp, le notifiche, le copie e le verifiche delle fonti utilizzano un proxy SOCKS5/HTTP separato, il percorso SOCKS5/HTTP dell’account oppure la modalità Direct, laddove la modalità IP lo consenta. Tali richieste esterne possono essere disattivate.
+MTProxy trasporta solo Telegram. Marche temporali, notifiche, copie e verifiche del codice passano da un proxy SOCKS5/HTTP separato, dal percorso SOCKS5/HTTP dell’account o in diretto se la modalità lo consente. Oppure le disattivi.
 
-Un codice `TGWITNESS_PROXY_FEED_PROXY` esplicito configura il percorso del downloader del feed. Il [witness indipendente](https://phishdestroy.github.io/TgWitness/it/docs/witness/) mantiene le proprie impostazioni. Questi controlli non installano una VPN di sistema né reindirizzano il traffico del browser.
+`TGWITNESS_PROXY_FEED_PROXY` imposta il percorso per scaricare gli elenchi. Il [testimone](https://phishdestroy.github.io/TgWitness/it/docs/witness/) ha impostazioni proprie. Niente di tutto questo tocca il Suo browser o la rete di sistema.
 
-Visualizzi [tutte le modalità, le impostazioni predefinite e gli elenchi delle fonti](https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/#ip-modes), oppure [scelga chi può modificare il percorso di un account](https://phishdestroy.github.io/TgWitness/it/docs/access/).
+Altro: [modalità e valori predefiniti](https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/#ip-modes), [chi può cambiare i percorsi](https://phishdestroy.github.io/TgWitness/it/docs/access/).

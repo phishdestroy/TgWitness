@@ -247,25 +247,11 @@ Gateway DNS 负责系统解析器。通过 443 端口以 DNS over HTTPS 方式�
 
 Cloudflare 无法查看 Telegram 的加密内容、该 Telegram 账户下的其他设备 （“证据模式”的设备列表是从 Telegram 端记录的）或服务提供商的虚拟机管理程序。
 
-2026年11月1日，Gateway DNS 针对真实的 Hetzner Cloud 及一个免费的 Cloudflare 账户进行了测试： Hetzner 接受了出站规则，服务器安装了 v0.7.0 版本，所有查询均 通过 TLS 经由 Gateway 进行，快速隧道能够穿透该防火墙，并且 `verify` 从Cloudflare读取 到了该服务器的19个域名（Ubuntu和Hetzner镜像、GitHub、PyPI、NTP、 隧道、ntfy.sh）。测试小组将八个窗口中的36条查询复制到日志中，并 `verify.py` 并完整地汇总了这些查询； `destroy` 移除了服务器和防火墙，并离开了 该共享位置。
-
 ## 这并未说明以下内容
 
 - 服务提供商及其员工负责管理虚拟机管理程序、磁盘和网络。
 - 主机指标由收集器自行报告。
 - 早期防火墙规则的内容并非在每个服务商的日志中都有记录；只有 Linode 会保留规则版本信息。
 - 该工具并未提供有关消息真实性的新信息；请参阅[“证据”部分](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)。
-
-## 在此处进行了测试
-
-部署、锁定和验证逻辑通过针对模拟的 Hetzner、DigitalOcean、Linode、Vultr、EC2/CloudTrail 和 Cloudflare API 的自动化测试进行验证，这些模拟 API 是根据其 已发布的 API 参考文档构建的；此外，AWS 请求签名也依据 AWS 发布的示例进行验证。 `tools/check_cloud_wizard.py` 以相同方式运行面板的服务器向导，支持域名配置和 快速隧道功能。 `tools/check_tdx.py` 验证来自 dcap-qvl 和 dstack 的真实英特尔 TDX 证明， 直至英特尔的根证书（源代码位于 [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)）； `tools/check_phala.py`针对一个模拟的 Phala Cloud 运行部署、验证、日志记录、销毁以及面板向导， 该 Phala Cloud 的认证信息来自一个模仿英特尔 PKI 结构的伪造 PKI。Phala 路径尚未 在 Phala Cloud 本身上进行过测试。
-
-2026年11月1日，快速隧道路径在真实的 **Hetzner Cloud**（纽伦堡， `cpx22`， TgWitness v0.7.0）、真实的 ntfy.sh 以及 GitHub 进行了测试，测试方式包括通过控制面板和代码执行：
-
-- 价格核对后，通过面板上的按钮进行创建：服务器在 13 秒后开始运行， 大约两分钟后，生成包含与实例和安装程序哈希值匹配的签名声明；
-- 通过其 trycloudflare.com 地址打开的服务器自有控制面板，并接受了 控制面板令牌；若无该令牌，则返回 401 状态码；
-- 通过 Hetzner API 重启后，服务器发布了一个新的签名地址，**查找 当前地址**后已找到，旧地址不再响应，签名密钥保持 不变；发送到 ntfy.sh 主题的一条未签名帖子被忽略；
-- `verify` 针对 Hetzner 的 API：服务器、无入站规则的防火墙、声明、绑定、 主机测量、启动以及 v0.7.0 检出版本的源代码哈希均通过测试；如上所述，Cloudflare 的检测不可用；安装程序与 v0.7.0 构建的版本不同， 但与本版本代码构建的安装程序字节对字节完全一致；
-- 从面板中删除操作会精确移除该部署所标记的特定服务器和防火墙； 同一项目中的其他服务器和防火墙则不受影响。
 
 尚未在真实账户上运行：包括在您自己的域名下部署（Cloudflare 隧道和 DNS）、其他服务商、调试部署以及 `lock`，该服务器上的 Telegram 账户， 以及通过快速隧道获取后续版本的实时更新。请通过 以下链接查看各服务商的首个部署： `plan`，以及调试部署， `verify` ，以及，再将其应用于具体案例。

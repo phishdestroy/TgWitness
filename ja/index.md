@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/
 
 [オープンソース / v0.8.1](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/)
 
-Telegramのメッセージをキャプチャし、その変更履歴を保存して、署名付きの記録をエクスポートします。
+Telegram のチャットをすべての編集・削除ごと保存し、誰でも確認できる記録として渡せます。
 
 [デモ版を開く](https://phishdestroy.github.io/TgWitness/demo/?lang=ja)[セットアップガイド](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=ja)
 
-デモでは架空のデータを使用しています。Telegramへのログインは不要です。
+架空のデータで、Telegram へのログインは不要です。
 
  [GitHub Actions で収集（プレビュー）](https://phishdestroy.github.io/TgWitness/ja/docs/capture/) [S3オフサイトコピー：セットアップと復旧](https://phishdestroy.github.io/TgWitness/ja/#s3)
 
@@ -34,31 +34,31 @@ Northstar · リサーチ架空の情報源／メッセージ 42
 
 ## 記録されたすべての変更。必要な場所に、すぐに。
 
-架空のデモデータを使用して、インターフェースをご覧ください。
+本物の画面に、架空のデータを入れています。
 
 TgWitness / 保存されたチャットあなたの監視作業スペース
 
 ![ダークテーマで保存されたTelegramの会話履歴。編集履歴や削除されたメッセージも、文脈を損なうことなく記録されます。](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
-01 / 保存されたチャット メッセージの横に編集履歴や削除通知が表示される、見慣れた会話画面です。
+01 / 保存したチャット 普通のチャットと同じ見た目で、編集と削除がメッセージのすぐ横に表示されます。
 
 TgWitness / ジャーナルローカルワークスペース
 
 ![観測されたメッセージ、編集、削除通知、およびカバレッジイベントを記録したジャーナル](https://phishdestroy.github.io/TgWitness/assets/workspace.png)
 
-02 / ジャーナル アカウントで観測された内容（中断を含む）を検索可能なタイムラインとして表示します。
+02 / ジャーナル アカウントが見たものすべてを検索でき、欠落も記録されます。
 
 TgWitness / 編集履歴ローカルワークスペース
 
 ![メッセージのキャプチャされた以前のバージョンと編集後のバージョンを比較する詳細表示パネル](https://phishdestroy.github.io/TgWitness/assets/detail.png)
 
-03 / 編集履歴 以前の記録を上書きすることなく、キャプチャされたバージョンを比較できます。
+03 / 編集履歴 旧版と新版を並べて表示し、何も上書きしません。
 
 TgWitness / 署名付きエクスポートローカルワークスペース
 
 ![ワークスペースのエクスポート機能により、署名付きのZIP、JSONL、CSV、およびオフライン用HTMLレポートを提供します。](https://phishdestroy.github.io/TgWitness/assets/exports.png)
 
-04 / 署名付きエクスポート マニフェストと独立した検証機関を伴うジャーナルを、いつでも持ち運べます。
+04 / 署名付きエクスポート ジャーナルを署名付きで持ち出せ、専用の検証ツールも付いています。
 
 [「Case Board](https://phishdestroy.github.io/TgWitness/ja/docs/case-board/)」、[レポート作成](https://phishdestroy.github.io/TgWitness/ja/docs/reports/)、[共有用コピー](https://phishdestroy.github.io/TgWitness/ja/docs/handover/)を通じて、保存された記録を追跡してください。[アカウントグループを](https://phishdestroy.github.io/TgWitness/ja/docs/groups/)まとめて[確認してください](https://phishdestroy.github.io/TgWitness/ja/docs/groups/)。
 
@@ -66,7 +66,7 @@ TgWitness / 署名付きエクスポートローカルワークスペース
 
 ### 範囲はお客様ご自身でお選びいただけます。
 
-選択したチャット、Telegramのフォルダ、またはアカウント全体を対象とします。アカウントごとに独立したワークスペースが用意されています。
+いくつかのチャット、フォルダー、またはアカウント全体。アカウントごとに専用のワークスペースがあります。
 
 [収集モードの比較](https://phishdestroy.github.io/TgWitness/ja/guides/modes.html#scope)
 
@@ -74,7 +74,7 @@ TgWitness / 署名付きエクスポートローカルワークスペース
 
 ### 変更点は記事に追加されます。
 
-キャプチャされたバージョン、削除通知、および観測の欠落部分は、ジャーナルに残ります。
+版、削除、欠落はすべてジャーナルに残ります。
 
 [イベントマトリックス「」をご覧ください。](https://phishdestroy.github.io/TgWitness/ja/guides/modes.html#events)
 
@@ -82,7 +82,7 @@ TgWitness / 署名付きエクスポートローカルワークスペース
 
 ### 移動する記録。
 
-署名付きZIPファイル、保存されたファイル、およびオフラインレポート。オプションでパスワード保護も可能です。
+署名付き ZIP、ファイル、オフラインレポート。パスワードは任意です。
 
 [のエクスポートと検証](https://phishdestroy.github.io/TgWitness/ja/docs/exports/)
 
@@ -103,7 +103,7 @@ TgWitness / 署名付きエクスポートローカルワークスペース
 
 ## 別の目によるチェックをお待ちしております。
 
-観察結果、ファイル、およびオフラインのHTMLレポートを、1つの署名付きバンドルとして引き渡します。
+メッセージ、ファイル、オフラインレポートを 1 つの署名付きバンドルにまとめます。
 
 [証拠モデル「」をご覧ください。](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)
 
@@ -119,7 +119,7 @@ tgwitness-evidence.zip署名付きバンドル
 
   独立した検証署名付きマニフェスト + スタンドアロン型検証ツール
 
-受信者は、信頼できるコレクターキーを用いて、保存された記録やファイルを確認します。別途保持されているチェックポイントも、以前のジャーナルとの連続性を確認します。[検証手順について詳しくご覧ください。](https://phishdestroy.github.io/TgWitness/ja/docs/concepts/#layers)
+受け取った人はあなたの鍵ですべてを確認でき、別の場所に保管したチェックポイントがその後の書き換えがないことを示します。[確認の仕組み。](https://phishdestroy.github.io/TgWitness/ja/docs/concepts/#layers)
 
 ## S3へのコピー。外部による検証。
 
@@ -129,25 +129,25 @@ tgwitness-evidence.zip署名付きバンドル
 
 ### すべてをS3互換のストレージにコピーします
 
-ジャーナル、ファイル、タイムスタンプ付きのチェックポイント、およびチャットのエクスポートデータは、AWS S3または互換性のあるストレージにアップロードされる前に暗号化されます。
+ジャーナル、ファイル、チェックポイント、チャットのエクスポートを、S3 へ送る前に暗号化します。
 
 **保存設定と復元**
 
 クライアント側暗号化
 
-`AES-256-GCM`は、このマシン上のオブジェクトを暗号化します。プロバイダーは暗号化されたオブジェクトを受信します。
+`AES-256-GCM` はあなたのマシン上で動きます。プロバイダーが見るのは暗号文だけです。
 
 定期的または手動でのコピー
 
-今すぐコピーするか、1分から1,440分の間隔を選択してください。パネルで進行状況をご確認ください。
+今すぐ、または 1〜1,440 分ごとにコピーし、進行状況はパネルに表示されます。
 
 Object Lock
 
-バケットが対応している場合は、保存期間とモードを選択してください。このパネルでは、アップロードされたオブジェクトについて保存が確認されたかどうかが表示されます。
+保持日数とモードを選ぶと、実際に適用されたかをパネルが確認します。
 
 検証済みの復元
 
-暗号化キーをダウンロードし、別の場所に保管してください。別のマシンで復元してください。ファイルは検証が完了した後にのみ公開されます。
+鍵は別に保管してください。どこでも復元でき、ファイルは検証に通ってから出力されます。
 
 ![オフサイトコピーに関する完全な説明パネル：エンドポイント、リージョン、バケット、アクセスキー、スケジュール、オブジェクトロック、および復旧キーの設定](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
@@ -157,13 +157,13 @@ Object Lock
 
 [S3の設定とコピーの復元](https://phishdestroy.github.io/TgWitness/ja/docs/exports/#s3)[検証の詳細はこちらをご覧ください](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**復元キー：**暗号化されたコピーを復元できるよう、エクスポートした復号キーは別途保存してください。
+**復元キー** 別に保管してください。これがないとコピーは読めません。
 
 ### 通知 · Apprise
 
-Appriseを介して、問題の通知、チャットの変更、および日次サマリーを、メッセンジャー、メール、またはご自身のJSON Webhookでお受け取りいただけます。
+問題、チャットの変化、日次サマリーをメッセンジャー、メール、または独自の webhook に送ります。
 
-**共有する内容を選択してください**。メッセージの抜粋表示はデフォルトでオフになっています。信頼できる宛先に対しては、これを有効にしてください。
+**共有する内容を選ぶ** オンにしない限り、メッセージ本文は含まれません。
 
  [通知先の設定](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#notifications)
 
@@ -171,7 +171,7 @@ Appriseを介して、問題の通知、チャットの変更、および日次�
 
 RFC 3161 および OpenTimestamps に基づくタイムスタンプ・チェックポイント・ハッシュ。
 
-**結果を確認し**、当局からの回答を確認するか、OpenTimestampsの受領証を確定済みのビットコイン証明にアップグレードしてください。
+**結果を追う** TSA の応答を確認するか、OpenTimestamps の受領証を Bitcoin の証明にアップグレードします。
 
  [タイムスタンプの証明を確認する](https://phishdestroy.github.io/TgWitness/ja/docs/reference/timestamp/)
 
@@ -179,7 +179,7 @@ RFC 3161 および OpenTimestamps に基づくタイムスタンプ・チェッ�
 
 別のホストが署名付きの観測データを保管し、`TGW1`チェックポイントを公開することができます。
 
-「別のホストでWitnessを実行し、独自の署名キーとジャーナルを保持する」**という記述は、別項として扱ってください**。
+**参照を分ける** 別のホストで、専用の鍵とジャーナルを使って実行します。
 
  [Witnessのセットアップ](https://phishdestroy.github.io/TgWitness/ja/docs/witness/)
 
@@ -187,19 +187,20 @@ RFC 3161 および OpenTimestamps に基づくタイムスタンプ・チェッ�
 
 再起動後に再開します。再確認と`coverage.json`により、復元されたメッセージと欠落箇所が表示されます。
 
-**「間隔」を確認してください**。復元された現在のメッセージと記録された中断箇所を併せて確認できます。キャプチャされた時点の以前のバージョンも引き続き利用可能です。
+**区間を確認する** 復元したメッセージと記録された欠落を並べて表示します。
 
  [連続性と欠落を確認する](https://phishdestroy.github.io/TgWitness/ja/guides/modes.html#continuity)
 
 ## 最初のワークスペースはここから始まります。
 
-まずはデモをご覧ください。準備が整いましたら、専用のアカウントを接続してください。Windows、Linux、macOS、またはDockerに対応しています。
+まずデモを試し、準備ができたら予備のアカウントを接続してください。
+Windows、Linux、macOS、Docker に対応。
 
 [セットアップガイド「」をご覧ください。](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=ja)
 
 **インポートされたセッションは1つ、実行中のクライアントは1つです。**
 
-インポートした TData/セッションキーを、Telegram Desktop と TgWitness で同時に実行しないでください。Telegram によって共有認証が無効化される可能性があります（AUTH_KEY_DUPLICATED）。並行して使用する場合は、電話番号または QR コードを使用して、別の TgWitness ログインを作成してください。
+インポートした TData やセッションを Telegram Desktop と TgWitness で同時に動かさないでください。Telegram が両方を無効にすることがあります（AUTH_KEY_DUPLICATED）。両方必要な場合は、電話番号か QR で TgWitness に別途ログインしてください。
 
 [セッションのインポートに関する警告をお読みください](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=ja#session-warning)
 
@@ -224,7 +225,7 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-ソースの起動には Python 3.11 以上が必要です。Windows ランチャーでは、Python がインストールされていない場合、インストールを行うことができます。
+Python 3.11 以上が必要です。Windows ではランチャーがインストールを提案します。
 
 [リリースを閲覧する](https://github.com/phishdestroy/TgWitness/releases)
 
@@ -259,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 起動後、[127.0.0.1:8787](http://127.0.0.1:8787) にアクセスしてください。
 
-ソースからのインストールの場合、トークンは「`data/live/panel-token.txt`」です。Telegramでのログインには、組み込みのAPI設定、[またはmy.telegram.](https://my.telegram.org)orgから取得した独自のペアを使用できます。[完全なセットアップガイド ↗](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)
+ソースからインストールした場合、トークンは `data/live/panel-token.txt` にあります。[my.telegram.org](https://my.telegram.org) で取得する独自の API ペアは任意です。[詳しいセットアップガイド ↗](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)
 
 **TgWitness 0.8.1** [新着情報 →](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/) · [機能と既知の制限事項 →](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/)
 
@@ -273,7 +274,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ## アーカイブを処理する。
 
-履歴の読み込み、AIソースの確認、MCPクライアントの接続、保存されたメディアの認識、および署名付きWebhookの送信。
+履歴、出典付き AI、MCP、OCR、署名付き webhook。
 
 [ワークフローの詳細はこちら](https://phishdestroy.github.io/TgWitness/ja/docs/archive/)
 
@@ -281,19 +282,19 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 **このページはTelegramにリンクしていますか？**
 
-いいえ。これは架空の例やスクリーンショットを含む静的なプロジェクトページです。実際のアプリケーションは、お使いのコンピュータまたはサーバー上で動作し、ログインもそこで行われます。
+いいえ。架空の例を載せた静的ページです。アプリはあなた自身のマシンで動き、ログインもそこで行います。
 
 **キャプチャ前に削除されたメッセージは復元できますか？**
 
-いいえ。TgWitnessは、収集が実行されていた間にアカウントで確認されたコンテンツを保持します。後の履歴スナップショットでは、見逃された編集や削除されたメッセージを復元することはできません。
+いいえ。動作中にアカウントが見たものを保存します。後から撮ったスナップショットでは、見逃した編集や削除されたメッセージは再構成できません。
 
 **ジャーナル全体は暗号化されていますか？**
 
-アカウントの認証情報および署名用秘密鍵は、暗号化された保管庫に保存されます。ローカルのメッセージや添付ファイルを保存するには、暗号化されたディスクまたはボリュームが必要です。エクスポート時には、オプションでパスワード保護されたAES-256 ZIP形式を使用することができます。
+セッションと鍵は暗号化されます。メッセージとファイルはされないので、ディスク暗号化を使ってください。エクスポートには AES-256 のパスワードを設定できます。
 
 **これはTelegramと提携しているのでしょうか？**
 
-いいえ。TgWitnessは、MITライセンスの下で配布されているTelethonを利用する独立したプロジェクトです。組み込みのAPI設定、またはご自身のAPIペアを使用して、ご自身のアカウントを認証していただきます。
+いいえ。Telethon 上に作られた MIT ライセンスの独立プロジェクトです。ログインには自分のアカウントを使います。
 
 PROJECT NOTICE / LICENCE
 

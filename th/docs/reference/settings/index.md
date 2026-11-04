@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/setti
 พื้นที่ทำงานที่มีเซสชันหรือการตั้งค่าที่เสร็จสิ้นไปแล้วจะไม่แสดงตัวช่วยตั้งค่า ค่าของมันจะไม่ถูกแทนที่ด้วยเป้าหมายเมื่อหน้าเว็บโหลดขึ้น การซ่อนฟิลด์จะไม่ ปิดใช้งานฟีเจอร์หรือลบค่าของมัน
 
 การประมาณขนาดและเวลาจะอ่านสูงสุด 3 ห้องสนทนาที่เลือกไว้ และสูงสุด 20 ข้อความจาก แต่ละห้องสนทนา นี่เป็นการประมาณเท่านั้น: ไม่คาดการณ์ขีดจำกัดของ Telegram ความเร็วของ เซิร์ฟเวอร์เฉพาะ หรือไฟล์ในทุกห้องสนทนา
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

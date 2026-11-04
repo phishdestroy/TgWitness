@@ -114,11 +114,11 @@ The connection reference explains IP modes, fallback and external-request routin
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/start/
 
-First, explore a working example. Then connect your own account.
+Poke around the demo first, then connect your own account.
 
 ## Look around without an account
 
-Download or clone the project, install **Python 3.11 or later**, and run the demo. The launcher creates a local environment and installs the pinned dependencies.
+Get the project, have **Python 3.11 or later**, run the demo. The launcher sets up everything else.
 
 ```
 git clone https://github.com/phishdestroy/TgWitness.git
@@ -137,7 +137,7 @@ cd TgWitness
 sh start.sh --demo
 ```
 
-The browser opens a workspace with fictional messages. Open a conversation, compare an edit and inspect an export. Demo mode does not connect to Telegram.
+A workspace with made-up messages opens in the browser. Open a chat, compare an edit, look at an export. No Telegram involved.
 
 ![TgWitness conversation view with sample messages](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
@@ -145,7 +145,7 @@ A sample workspace. Your own journal starts separately.
 
 ## Start your own workspace
 
-Close the demo process, then use the normal launcher:
+Close the demo, then:
 
 ### Windows
 
@@ -159,13 +159,13 @@ Close the demo process, then use the normal launcher:
 sh start.sh
 ```
 
-Open the local address shown by the launcher. If asked, enter the **panel access token** from the local file named in the terminal. This unlocks TgWitness; it is separate from Telegram sign-in.
+Open the address the launcher shows and paste the **panel access token** from the file it names. That's for TgWitness, not Telegram.
 
 ## Capture your first message
 
 1. [Connect a dedicated Telegram account.](https://phishdestroy.github.io/TgWitness/docs/accounts/)
-2. Select a group or channel the account can access, then start observation.
-3. Send a new message in a test group you control and check that it appears in the journal.
+2. Pick a group or channel and start observation.
+3. Send a message in your test group and watch it appear in the journal.
 
 For a server installation, follow [Keep it running](https://phishdestroy.github.io/TgWitness/docs/server/).
 
@@ -678,17 +678,17 @@ Rental keeps a number for weeks or months. A one-time activation gives a single 
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/accounts/
 
-One workspace holds one account, its journal and its signing key.
+One workspace = one account, its journal and its key.
 
 ## Choose how to sign in
 
-Open **Accounts**, add a workspace and open its connection settings. Use a dedicated account for observation.
+**Accounts** → add a workspace → connection settings. Use a separate account for this.
 
-- **QR code:** scan it from Telegram’s device settings and confirm the new login.
-- **Phone number:** enter the number, the code Telegram sends and your two-step verification password if enabled.
-- **Session import:** import a supported session or Telegram Desktop data belonging to you.
+- **QR code:** scan it from Telegram's Devices screen and confirm.
+- **Phone number:** number, code, then 2FA password if you have one.
+- **Session import:** your own session file or Telegram Desktop data.
 
-Choose a built-in API profile or enter your own API ID and hash. An API profile identifies the client; it does not sign in to an account or make the connection anonymous.
+Use a built-in API profile or your own API ID and hash. It only identifies the app, it doesn't log you in or hide anything.
 
 **Need a proxy first?**
 
@@ -696,23 +696,23 @@ You can [choose and test the connection route](https://phishdestroy.github.io/Tg
 
 ## Choose what to observe
 
-1. Open the source list and select the chats, groups or channels you need.
-2. Review collection settings, including media, before starting observation.
-3. Start the collector and check its connection and recent activity.
+1. Pick the chats, groups or channels you need.
+2. Check collection settings, media included.
+3. Start it and check the connection and recent activity.
 
-The account must be able to access the source. Different roles can see different events; the journal reflects what that account received.
+The account has to have access. Admins and members see different things, the journal shows what this account got.
 
-For a case spanning the entire account, use **Sources → Observation scope → Investigation mode**, review the settings and press **Save scope**. The [complete investigation walkthrough](https://phishdestroy.github.io/TgWitness/docs/cases/) covers all visible chat types, old history, people profiles, cross-chat references and evidence handoff.
+Whole account? **Sources → Observation scope → Investigation mode**, check it, **Save scope**. Full walkthrough: [investigating a whole account](https://phishdestroy.github.io/TgWitness/docs/cases/).
 
 ## Check the whole path
 
-In a test group you control, send a unique message from another account, edit it and delete it. Confirm all three events in the journal, then [export and verify](https://phishdestroy.github.io/TgWitness/docs/exports/) the record.
+In your test group, send a message from another account, edit it, delete it. All three should show up in the journal. Then [export and verify](https://phishdestroy.github.io/TgWitness/docs/exports/).
 
-A connected status confirms the connection. A captured test message confirms that a particular event reached this workspace.
+"Connected" means the connection works. A captured test message means events actually arrive.
 
 ## Add another account
 
-Create another workspace in **Accounts** and repeat the setup. Keep each account’s signing-key fingerprint so you can identify its exports later.
+New workspace in **Accounts**, same steps. Note each account's key fingerprint so you can tell exports apart later.
 
 
 ---
@@ -721,48 +721,48 @@ Create another workspace in **Accounts** and repeat the setup. Keep each account
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/proxies/
 
-Keep the account connected. Decide explicitly when its route may use the server's address.
+Keep the account online, and decide yourself whether it may ever show your server's IP.
 
 ## Choose the IP mode first
 
 01**Hide the address**
 
-Use a proxy. When none works, wait without a direct Telegram connection.
+Proxy only. If none works, it waits.
 
 02**Direct as a last resort**
 
-Permit Direct after the configured delay; return to a working proxy when one answers.
+Goes direct after a delay, back to a proxy once one works.
 
 03**Server behind a tunnel or VPN**
 
-Allow direct routes through the host's network. This option does not install or verify a VPN.
+Direct is fine. It doesn't set up or check the VPN for you.
 
 The route chooses the connection. The IP mode determines whether a direct connection is permitted.
 
 ## Let the pool maintain the route
 
-1. Open **Account → Settings → Connection settings**.
-2. Choose the IP mode and **Automatic MTProxy**, or enter a fixed route.
-3. Save and run **Test Telegram connection**. It also works before sign-in.
-4. After starting collection, check that a controlled message reaches the journal.
+1. **Account → Settings → Connection settings**.
+2. Pick the IP mode and **Automatic MTProxy**, or a fixed route.
+3. Save, **Test Telegram connection** (works before sign-in too).
+4. Start collecting and send yourself a test message.
 
-New workspaces use automatic MTProxy with **Hide the address**. The pool combines four public sources, probes entries, retains working routes and replaces failing proxies. Failed downloads retain the previous snapshots.
+New workspaces start on automatic MTProxy with **Hide the address**. The pool pulls four public lists, checks servers, keeps the good ones and swaps out dead ones.
 
 ## Use your own proxy
 
-Enter SOCKS5 or HTTP CONNECT details, paste a supported Telegram proxy link, or provide an operator catalog. Pause observation before changing an active route. Fake TLS MTProxy secrets beginning with `ee` remain unsupported.
+SOCKS5, HTTP CONNECT, a Telegram proxy link or an operator catalog. Pause observation before switching. Fake TLS secrets (`ee`…) don't work.
 
 **Rotation, sharing and retry settings**
 
-Under **Parameters → Automatic MTProxy**, set failure thresholds, cooldowns, planned rotation and accounts per proxy. A sharing limit of one makes an account wait when no exclusive entry is available. List refresh and probe intervals follow the main workspace's values. Separate proxies do not guarantee separate exit IPs.
+**Parameters → Automatic MTProxy**: failure thresholds, cooldowns, rotation, accounts per proxy. Limit 1 means an account waits rather than share. Different proxies can still share an exit IP.
 
 ## Separate Telegram from external requests
 
-MTProxy carries Telegram traffic only. Timestamps, notifications, copies and source checks use a separate SOCKS5/HTTP proxy, the account's SOCKS5/HTTP route, or Direct where the IP mode permits it. Those external requests can be disabled.
+MTProxy only carries Telegram. Timestamps, notifications, copies and code checks go through a separate SOCKS5/HTTP proxy, the account's SOCKS5/HTTP route, or direct if the mode allows. Or turn them off.
 
-An explicit `TGWITNESS_PROXY_FEED_PROXY` configures the feed downloader's route. The [independent witness](https://phishdestroy.github.io/TgWitness/docs/witness/) keeps its own settings. These controls do not install a system VPN or route browser traffic.
+`TGWITNESS_PROXY_FEED_PROXY` sets the route for list downloads. The [witness](https://phishdestroy.github.io/TgWitness/docs/witness/) has its own settings. None of this touches your browser or system network.
 
-See [all modes, defaults and source lists](https://phishdestroy.github.io/TgWitness/docs/reference/connection/#ip-modes), or [choose who may change an account's route](https://phishdestroy.github.io/TgWitness/docs/access/).
+More: [modes and defaults](https://phishdestroy.github.io/TgWitness/docs/reference/connection/#ip-modes), [who may change routes](https://phishdestroy.github.io/TgWitness/docs/access/).
 
 
 ---
@@ -771,48 +771,48 @@ See [all modes, defaults and source lists](https://phishdestroy.github.io/TgWitn
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/exports/
 
-Give a recipient files they can check against the collecting workspace and its saved history.
+Hand someone files they can check themselves against your workspace.
 
 Retain a referenceExport signed ZIPRecipient verifies
 
-New to signatures and checkpoints? [Change a sample record](https://phishdestroy.github.io/TgWitness/docs/concepts/#chain) and see which checks detect it.
+New to signatures and checkpoints? [Change a sample record](https://phishdestroy.github.io/TgWitness/docs/concepts/#chain) and see which checks catch it.
 
 Keeping a copy away from the collector? Go to [S3 setup](https://phishdestroy.github.io/TgWitness/docs/exports/#s3), [Object Lock](https://phishdestroy.github.io/TgWitness/docs/exports/#s3-retention) or [verified recovery](https://phishdestroy.github.io/TgWitness/docs/exports/#s3-restore).
 
 ## Retain a trusted reference
 
-Save the workspace’s public-key fingerprint outside the collector. During collection, keep signed checkpoints elsewhere or use an [independent witness](https://phishdestroy.github.io/TgWitness/docs/witness/). These references let a recipient check the key and an earlier journal boundary.
+Write down the workspace key fingerprint somewhere other than the collector. While collecting, keep signed checkpoints elsewhere too, or run an [independent witness](https://phishdestroy.github.io/TgWitness/docs/witness/). That's what the recipient checks the key and an earlier journal state against.
 
 ## Download the signed ZIP
 
-Open **Exports** and create a signed evidence ZIP. It includes the full workspace journal and a signed file manifest. Use [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/) to shape its readable report, or a [handover extract](https://phishdestroy.github.io/TgWitness/docs/handover/) to deliver only selected, minimized data.
+**Exports** → signed evidence ZIP. It has the whole journal and a signed file manifest. Shape the readable report in [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/), or send only selected data as a [handover extract](https://phishdestroy.github.io/TgWitness/docs/handover/).
 
-HTML, PDF and JSON reports carry their own signed seals and can be checked separately. CSV is a convenient analysis copy; use the exact CSV inside the verified ZIP to check its integrity. Keep the signed ZIP when the recipient also needs the source records and attachments.
+HTML, PDF and JSON reports carry their own seals. CSV is just a working copy; for integrity use the CSV inside the verified ZIP.
 
 ## Verify with a trusted copy of TgWitness
 
-In the installed project environment, replace the example fingerprint and file paths:
+In the project environment, with your own fingerprint and paths:
 
 ```
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 ```
 
-When both references pass, the result reports `key_pinned: true` and `checkpoint_checked: true`. Keep the verification result with the original archive. The retained checkpoint must be at or before the export’s boundary.
+A pass shows `key_pinned: true` and `checkpoint_checked: true`. Keep that output next to the archive. The checkpoint has to be at or before the end of the export.
 
 ## Use the verification result
 
-- **Check the delivered files:** the manifest binds their hashes, and record signatures bind the saved journal. A changed file or broken record chain is detected.
-- **Check the workspace identity:** the independently retained fingerprint identifies the signing key you expected.
-- **Compare an earlier boundary:** a retained checkpoint checks the export against a journal prefix saved before the handoff.
-- **Review collection coverage:** gaps, acquisition results and a controlled send → edit → delete test describe the events this setup captured.
+- **Files:** the manifest binds their hashes, the signatures bind the journal. Any change shows up.
+- **Identity:** the fingerprint you kept proves it's the key you expected.
+- **Earlier state:** a checkpoint compares the export with a journal prefix saved before the handoff.
+- **Coverage:** gaps, acquisition results and a send → edit → delete test show what this setup actually caught.
 
-Keep these results with the recipient's copy. See [what verification establishes](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) for the scope of the checks and the separate assessment of source claims and collection coverage.
+Details: [what verification proves and what it doesn't](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope).
 
 ## Set up the S3 off-site copy
 
-In your running workspace, open **Exports → Off-site copy**. This optional feature works with AWS S3 and other S3-compatible services. It copies journal segments, preserved photos and files, checkpoints with their timestamp responses, and finished chat exports. Every object is encrypted on the collector with `AES-256-GCM` before upload.
+**Exports → Off-site copy** in your workspace. Works with AWS S3 and anything S3-compatible. It copies journal segments, saved files, checkpoints with their timestamps and finished chat exports, each encrypted with `AES-256-GCM` before it leaves the collector.
 
-The online demo shows the same controls with uploads disabled. Enter storage credentials only in your own running workspace.
+The online demo shows these controls with uploads off. Only enter real credentials in your own install.
 
 [![Complete Off-site copy panel: endpoint, region, bucket, access keys, schedule, Object Lock and recovery key controls](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
@@ -820,37 +820,37 @@ The complete panel with advanced options expanded. No storage credentials are sh
 
 | Field | What to enter |
 | --- | --- |
-| Endpoint | The storage service URL, without a bucket path or credentials. Fictional example: `https://s3.example.invalid`. |
-| Region | The region required by your provider. The application default is `us-east-1`. |
-| Bucket | An existing bucket you can access. Fictional example: `example-case-backup`. |
-| Folder in the bucket | The object prefix; default `tgwitness`. The application appends a prefix derived from this workspace’s signing-key fingerprint. |
-| Access key ID / Secret access key | Enter both storage credentials together. They are saved in the workspace vault. Leave both empty on later saves to keep the saved pair. |
-| Path-style addresses | Use `endpoint/bucket` when enabled, or `bucket.endpoint` when disabled, according to the provider. |
-| Copy interval | From 1 to 1,440 minutes; default 5 minutes. The application must be running for scheduled copies. |
-| Object Lock retention | Retention days and mode for a bucket that supports Object Lock. Zero days leaves the bucket’s default retention in effect. |
+| Endpoint | Storage URL, no bucket path or credentials. Example: `https://s3.example.invalid`. |
+| Region | Whatever your provider needs. Default `us-east-1`. |
+| Bucket | An existing bucket you can write to. Example: `example-case-backup`. |
+| Folder in the bucket | Prefix, default `tgwitness`. A per-workspace prefix is added on top. |
+| Access key ID / Secret access key | Both together, stored in the vault. Leave both empty later to keep them. |
+| Path-style addresses | On: `endpoint/bucket`. Off: `bucket.endpoint`. Depends on the provider. |
+| Copy interval | 1 to 1,440 minutes, default 5. Only while the app runs. |
+| Object Lock retention | Days and mode, if the bucket supports Object Lock. Zero keeps the bucket default. |
 
-1. Create the bucket with your provider, then enter its destination and credentials. Leave **Keep an off-site copy** unchecked while preparing, then select **Save off-site copy**.
-2. Select **Test connection**. This uploads an encrypted test object and checks the storage response.
-3. Select **Download encryption key**. Keep that file separately from the collector; it is required for recovery.
-4. Enable the **Keep an off-site copy** checkbox and save again. Select **Copy now** for a manual pass, or leave the schedule running.
+1. Create the bucket, fill in destination and credentials with **Keep an off-site copy** unticked, hit **Save off-site copy**.
+2. **Test connection** uploads an encrypted test object.
+3. **Download encryption key** and keep it away from the collector. No key, no recovery.
+4. Tick **Keep an off-site copy**, save, then **Copy now** or let the schedule run.
 
 ## Check retention and copy progress
 
-Under **More options**, choose retention days and `GOVERNANCE` or `COMPLIANCE` when your bucket supports Object Lock. TgWitness reads back the retention mode and deadline of an uploaded object. Review the separate retention result: confirmed, missing retention or check failed.
+Under **More options** pick retention days and `GOVERNANCE` or `COMPLIANCE`. TgWitness reads the retention back from an uploaded object and tells you: confirmed, missing or check failed.
 
-The panel reports the last pass, object count, transferred bytes, the copied journal boundary and any error. Missing or changed local media is reported and retried on the next pass. Files, checkpoints and queued exports after that media can still be copied.
+The panel shows the last pass, object count, bytes, copied journal boundary and errors. A missing local file is reported and retried next pass, the rest keeps copying.
 
-Uploads use the workspace’s Direct, SOCKS5 or HTTP route. Choose one of these routes for S3 copying; an MTProxy-only route leaves the copy pending with an error.
+Uploads go over Direct, SOCKS5 or HTTP. With an MTProxy-only route the copy waits with an error.
 
 ## Keep the recovery key separately
 
-The downloaded JSON contains the decryption key, destination settings, workspace object prefix and signing-key fingerprint. Recovery needs both this key file and separate storage credentials with read access to the bucket. Keep them in your recovery plan.
+The key JSON has the decryption key, destination, prefix and key fingerprint. For recovery you need it plus storage credentials with read access.
 
-If you change the endpoint, bucket or folder prefix, download the key file again so its destination settings match. The application starts a new copy of the locally retained journal, files and checkpoints at the new destination. Finished chat exports already removed from the local upload queue remain at their previous destination.
+Changed endpoint, bucket or prefix? Download the key again. A fresh copy starts at the new destination; old chat exports stay where they were.
 
 ## Restore and verify on another machine
 
-Use a trusted installation of TgWitness, the downloaded key JSON, storage credentials with read access, and an empty output directory. Replace the fictional credential placeholders below.
+You need a TgWitness install you trust, the key JSON, read-only storage credentials and an empty folder:
 
 ### Windows PowerShell
 
@@ -868,11 +868,9 @@ export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence
 ```
 
-Downloads and decrypted objects stay in private temporary storage while the entire journal, retained checkpoints and preserved-media hashes and sizes are checked. Unsafe paths, conflicting journal segments and a journal shorter than its checkpoint are rejected. A failed verification publishes no restored files.
+Everything is checked in a private temp folder first: the whole journal, checkpoints, file hashes and sizes. Unsafe paths, conflicting segments or a journal shorter than its checkpoint fail, and then nothing is written out.
 
-Successful recovery produces `events.jsonl`, `media/`, `checkpoints/` and `exports/` for the material available in the copy. Keep the command’s JSON result with the recovered material.
-
-Compare recovered material with your independently retained checkpoints or witness records, then review the recorded collection coverage for the period you need.
+On success you get `events.jsonl`, `media/`, `checkpoints/` and `exports/`. Keep the command's JSON output with them, and compare against checkpoints or witness records you kept yourself.
 
 
 ---
@@ -1008,28 +1006,28 @@ See [reusable workflows and attestations](https://docs.github.com/en/actions/how
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/cases/
 
-Work an entire case across channels, groups, private chats and bots: collect, connect, reconstruct and hand over the evidence.
+A whole case across channels, groups, private chats and bots: collect, connect the dots, rebuild the timeline, hand it over.
 
-This walkthrough follows one fictional incident through a whole account. Use collection, search and people profiles to find the source records, [Case Board](https://phishdestroy.github.io/TgWitness/docs/case-board/) to organize and discuss them, and [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/) to present the findings. The illustrated map below explains the connections in this example.
+One made-up incident, start to finish. Collection, search and people profiles find the records, [Case Board](https://phishdestroy.github.io/TgWitness/docs/case-board/) organizes them, [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/) presents them.
 
 WORKED CASE / A CHANGED PAYMENT DESTINATION
 
 ### One incident. Four conversations. A trail to reconstruct.
 
-A channel announcement points to a bot. An operations group discusses a new payment link, and the bot displays it. The announcement is edited, a private follow-up repeats the destination, and a group message disappears.
+A channel post points to a bot. A group talks about a new payment link and the bot shows it. The post gets edited, a private chat repeats the link, a group message vanishes.
 
 Who posted each version?Where did the link appear?Which file was preserved?What changed, and when?
 
-For history loading, optional AI source review, MCP, OCR and outgoing webhooks, see [Work the archive](https://phishdestroy.github.io/TgWitness/docs/archive/).
+History loading, AI, MCP, OCR and webhooks: [Work the archive](https://phishdestroy.github.io/TgWitness/docs/archive/).
 
 ## 1. Establish coverage across the whole account
 
-Use a dedicated collecting account for whole-account scope. Main accounts can collect selected chats or a Telegram folder.
+Whole-account scope only on a dedicated account. A main account gets chosen chats or a folder.
 
-1. [Connect the collecting account](https://phishdestroy.github.io/TgWitness/docs/accounts/) in its own workspace. Record the case reference, account ID, workspace name and signing-key fingerprint in your case notes.
-2. Open **Sources → Observation scope → Investigation mode**. Review **Whole account**, all four source types and **Own actions**. This preset enables saving a new source’s profile and its latest **200 visible messages**. Press **Save scope** and complete the scope confirmation.
-3. Press **Load chats**. Compare the sources with the account’s dialog list and review exclusions. Under **Parameters → Chats read from the account’s list**, adjust the initial list limit if needed: the default is 1,000 dialogs, configurable up to 20,000. Chats beyond the limit are discovered when they become active.
-4. In **Recording settings**, select and save **All visible activity**. Review attachment types, size limits and free disk space. Start observation and validate a controlled message, edit and deletion before relying on the setup.
+1. [Connect the account](https://phishdestroy.github.io/TgWitness/docs/accounts/) in its own workspace. Note the case reference, account ID, workspace and key fingerprint.
+2. **Sources → Observation scope → Investigation mode**: **Whole account**, all four source types, **Own actions**. Every new chat gets its profile and last **200 visible messages** saved. **Save scope** and confirm.
+3. **Load chats** and compare with the account's chat list. The limit is 1,000 dialogs (up to 20,000 in **Parameters → Chats read from the account's list**); chats beyond it show up once they get active.
+4. **Recording settings** → **All visible activity**, check attachment limits and disk space. Start, then test with a message, an edit and a deletion.
 
 ChannelsGroupsPrivate chatsBots
 
@@ -1037,44 +1035,44 @@ ONE ACCOUNT / ONE SIGNING KEY**All selected account-visible activity → one jou
 
 Messages · edits · deletion notices · visible reactions · membership events · own actions
 
-“Whole account” covers the chats this account can access, with the configured source types and exclusions. Secret chats are unavailable. New dialogs are added as updates arrive; enabling this mode does not automatically download the complete old history of every existing chat.
+"Whole account" means every chat this account can open, minus exclusions. No secret chats. New chats join as they appear; old history isn't downloaded automatically.
 
 ## 2. Acquire history and preserve the files
 
-Create a Case Board collection for the investigation and bookmark the relevant saved records. Keep a source register alongside the case: each chat's numeric ID, title, collecting account, access/role, live start, history acquisition, media result and known gaps. Mark a source as acquired after checking the relevant result.
+Make a Case Board collection and bookmark what matters. Keep a source register: chat ID, title, account, role, start of live capture, history result, media result, gaps.
 
 | Need | Action in the panel | What it provides |
 | --- | --- | --- |
 | History across enabled chats | Sources → Load full history | Available past messages enter the workspace journal, with pause/resume and a signed progress report. [History guide](https://phishdestroy.github.io/TgWitness/docs/reference/history/). |
-| Existing chat context in the journal | Sources → Recording settings → History snapshot | Recent visible messages as signed observations. Default maximum 500; **Parameters → Largest history snapshot** can raise it up to 10,000. |
-| Complete currently visible history of one chat | Full chat export → Export full chat, or Chats → Export chat | A separate signed bundle with `chat.json` and `chat.html`. Repeat per source; retain completion/failure results. |
-| Context when a new chat appears | Observation scope → When a new chat or bot appears | A source profile and up to 1,000 recent visible messages; Investigation mode selects 200. Existing chats do not receive this intake retroactively. |
-| Attachment bytes | Download visible attachments + per-type limits | Check for `media.saved`, its SHA-256 and byte count. A queued, skipped or failed download is not a preserved file. |
+| Existing chat context in the journal | Sources → Recording settings → History snapshot | Recent messages as signed records. 500 by default, up to 10,000 in **Parameters → Largest history snapshot**. |
+| Complete currently visible history of one chat | Full chat export → Export full chat, or Chats → Export chat | A separate signed bundle with `chat.json` and `chat.html`, one per chat. |
+| Context when a new chat appears | Observation scope → When a new chat or bot appears | Its profile and up to 1,000 recent messages (200 in Investigation mode). Not applied to existing chats. |
+| Attachment bytes | Download visible attachments + per-type limits | Look for `media.saved` with SHA-256 and size. Queued, skipped or failed means not saved. |
 
-A full chat export is a separate snapshot; it does not import its entire history into the journal or people profiles. Use **Load full history** across enabled sources, or bounded journal snapshots, for historical material you need to search inside TgWitness. Review the source list before starting the run.
+A chat export doesn't go into the journal or people profiles. To search old history inside TgWitness, use **Load full history** or snapshots.
 
-In the worked case, acquire the announcement channel, operations group, bot conversation and private follow-up. Preserve the invoice attachment’s bytes and hash. History available today cannot reconstruct a message deleted before capture or an intermediate edit Telegram no longer returns.
+Here: the channel, the group, the bot chat and the private chat, plus the invoice file and its hash. What was deleted before capture is gone.
 
 ## 3. Keep the evolving conversation and your own actions
 
-Keep observation running as the case develops. Star the active case chats as priority sources; configure priority and other-source rechecks under **Recording settings → Recheck**. Review `recheck.completed`, continued catch-up, FloodWait and media outcomes as work progresses.
+Keep it running. Star the hot chats as priority, tune rechecks in **Recording settings → Recheck**, and keep an eye on `recheck.completed`, FloodWait and media results.
 
-Use **Chats → Profile → Save profile now** to retain current source descriptions, bot commands and other metadata Telegram returns. This source profile is separate from the people profiles built from journal messages.
+**Chats → Profile → Save profile now** saves the chat's description, bot commands and other metadata.
 
 **Following a bot or invitation as part of the case**
 
-1. In **Chats → Open Telegram link**, save the preview first. The original link and returned preview become signed records.
-2. If the investigation calls for it, **Join / open and observe** joins or opens the source and starts a bot with its supplied start parameter. A pending join request remains pending in the record.
-3. For an action you need to document, use the panel’s text reply or supported **Press button** control. The journal retains `interaction.requested` and `interaction.result`, including returned callback text or URL.
+1. **Chats → Open Telegram link**, save the preview first. Link and preview become signed records.
+2. If needed, **Join / open and observe** joins the chat or starts the bot with its start parameter.
+3. To document an action, reply or **Press button** from the panel. You get `interaction.requested` and `interaction.result` with the bot's answer.
 
-These controls perform real Telegram actions. A callback pressed in a different Telegram app is not visible to the collector; the bot’s subsequent message or edit may be. Web apps, payments and phone/location requests are outside the mini-client.
+These are real actions. Buttons pressed in another app aren't visible, only the bot's reply. No web apps, payments or phone/location.
 
 ## 4. Follow people, links and files across chats
 
-1. Open **Journal**, leave the source filter at **All sources** and search a distinctive phrase, domain, username or saved identifier. Open each matching record, then choose **To board** to keep its chat, message ID and journal reference in the case.
-2. For a relevant chat, open **Chats → People → Turn on profiles**, then select a person. Review name/username history, reply relationships, activity, **Also in…** other observed chats and extracted links, wallets or phone numbers. Open the cited journal records.
-3. Follow the same numeric Telegram user ID into other chats in this workspace. Treat a matching name, wallet mention or similar avatar as a lead to check; retain the source references and any supporting attribution.
-4. Compare preserved attachment SHA-256 values across records. Equal hashes support byte identity of the saved files. Inspect the associated message and sender records before drawing a conclusion about who shared them.
+1. **Journal**, **All sources**, search a phrase, domain or username. Open hits and send them **To board**.
+2. **Chats → People → Turn on profiles**, pick a person: name history, replies, activity, **Also in…**, links, wallets, phones. Open the cited records.
+3. Follow the same numeric user ID into other chats. A matching name, wallet or avatar is a lead, not proof.
+4. Compare file hashes. Same SHA-256 = same bytes. Who shared them is a separate question.
 
 CASE MAP / FOLLOW THE REFERENCESFictional case · not a live graph
 
@@ -1104,15 +1102,15 @@ The numeric IDs and record references are invented for this walkthrough. This ex
 
 | Connection | Supporting observation | Conclusion to retain |
 | --- | --- | --- |
-| Same Telegram account | User ID 71001 in group #146 and private-chat #205 | The same supplied sender ID posted in both chats. Real-world identity remains a separate question. |
-| Repeated destination | `pay.example.invalid/new` in #146, button metadata #173, edited post #188 and #205 | The same destination appears in four observed contexts. Attribute its control using additional sources. |
-| Same file bytes | Equal full SHA-256 values in completed media receipts #151 and #209 | The two preserved attachments are byte-identical. The full file hashes provide the comparison. |
+| Same Telegram account | User ID 71001 in group #146 and private-chat #205 | Same sender ID in both chats. Who that is in real life is another question. |
+| Repeated destination | `pay.example.invalid/new` in #146, button metadata #173, edited post #188 and #205 | Same link in four places. Who controls it needs other sources. |
+| Same file bytes | Equal full SHA-256 values in completed media receipts #151 and #209 | Both files are byte-identical. |
 
-People profiles describe observed authors and their activity in the *same workspace journal*, within the viewer's permitted chats. This is an observed-author view, rather than a complete membership directory. Adjust the number of supporting citations under **Parameters → Records cited per fact**.
+Profiles only cover people who wrote something in *this workspace*, not a member list. Citations per fact: **Parameters → Records cited per fact**.
 
 ## 5. Reconstruct the sequence and mark the gaps
 
-In **Chats**, inspect the saved versions and their **Journal record #…** links. In **Journal**, use **All sources** plus **Edits**, **Deletions** and **Coverage**. Build a case timeline with both the supplied Telegram date and the collector’s observation time.
+Versions in **Chats**, then **Journal** with **All sources** + **Edits**, **Deletions**, **Coverage**. Put both times in the timeline: Telegram's date and when it was observed.
 
 1. 09:00 · #101**Channel post captured**
 
@@ -1135,19 +1133,19 @@ In **Chats**, inspect the saved versions and their **Journal record #…** links
 
 Illustrative observation times and references. Other journal records occur between these entries.
 
-Journal sequence orders receipt, not necessarily the original Telegram actions. An older history snapshot can arrive after a newer live message. Keep live observations, snapshots, recovered messages, deletion notices and “missing on recheck” distinct. Add an explicit unknown interval wherever coverage shows a gap; a later snapshot does not erase that gap.
+Journal order is the order things arrived, not necessarily the order they happened. Keep live records, snapshots, recovered messages, deletions and "missing on recheck" apart, and mark every gap as unknown.
 
 ## 6. Extend the case to other collecting accounts
 
-Add a workspace for each distinct account and repeat the scope and history inventory. Record the membership/role and signing-key fingerprint for each. Keep identifiers qualified by workspace and chat: the same message number is not a global cross-account identifier.
+One workspace per account, same steps. Note each one's role and fingerprint. Message numbers are per account, so always say which workspace and chat.
 
-Use an [account group](https://phishdestroy.github.io/TgWitness/docs/groups/) to review operating status, share selected settings and export the accounts together. The group package keeps each workspace's signed journal and identity. For one channel or supergroup, eligible accounts can also divide a full history export. Assemble a cross-account timeline in your case notes or analysis tools, retaining the workspace and journal reference for each row.
+An [account group](https://phishdestroy.github.io/TgWitness/docs/groups/) shows status, shares settings and exports everyone together, each with its own journal and key. A cross-account timeline you build in your notes.
 
-During longer work, add an [independent witness](https://phishdestroy.github.io/TgWitness/docs/witness/) to retain earlier boundaries. Use the controlled delivery pilot to qualify the accounts’ capture paths and visibility.
+Long case? Add an [independent witness](https://phishdestroy.github.io/TgWitness/docs/witness/), and test what each account actually catches.
 
 ## 7. Deliver a checkable case package
 
-Export a signed journal ZIP from each workspace. It contains the full recorded journal regardless of panel search filters. Export relevant people profiles separately, retain each full chat-history bundle, and preserve the completed attachment evidence.
+A signed ZIP from every workspace (always the full journal, filters don't matter), plus people profiles, chat exports and files.
 
 ```
 CASE-001/                         # assembled by the analyst
@@ -1166,7 +1164,7 @@ CASE-001/                         # assembled by the analyst
   SHA256SUMS                      # hashes of the delivered files
 ```
 
-Keep trusted fingerprints through a separate channel. From a trusted installation, verify each artifact against its own workspace identity:
+Send fingerprints separately. Verify everything against its own workspace:
 
 ```
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
@@ -1174,33 +1172,7 @@ python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Check the verifier results, preserve the originals, and retain the coverage report, acquisition outcomes and transfer record with your findings. Write findings in Report studio and choose whether its report includes Case Board material. The example top-level folder combines the separate signed artifacts. For a recipient who needs only selected material, prepare a [minimized handover](https://phishdestroy.github.io/TgWitness/docs/handover/).
-
-## Use the same method for other investigations
-
-**A bot-driven order or payment dispute**
-
-**Question:** what did the bot promise, which button destination was supplied, and what changed afterwards?
-
-**Trace:** channel entry post → saved bot-link preview → bot start parameter → messages and keyboard versions → any panel-issued callback receipt → group/private follow-up. Match each destination to its source record; retain profile descriptions and completed media.
-
-**Deliver:** a timeline of the observed offer and responses, the source references and verified exports. Support any claim about a completed payment with its own transaction records.
-
-**Messages removed after a cross-chat incident**
-
-**Question:** what had already been observed before relevant messages disappeared?
-
-**Trace:** all affected chats → original messages → delivered edits → deletion notices or later missing-on-recheck results → preserved attachments → coverage around the incident. Compare independent account observations with their visibility stated.
-
-**Deliver:** a sequence of preserved versions and explicit unknown intervals. Keep deletion notices, unsuccessful rechecks and any attribution to a person separately supported.
-
-**A participant changes names across several chats**
-
-**Question:** which observed activity belongs to the same Telegram account despite changing names?
-
-**Trace:** numeric sender ID → saved name/username history → replies → other chats in the workspace → mentioned destinations and saved files. Check source records for every asserted connection; keep look-alike accounts separate.
-
-**Deliver:** a cited account-activity timeline and separate hypotheses about relationships. Use name similarity and avatar pHash to choose leads for further source review.
+Keep the verifier output, originals, coverage and transfer record with your findings. Write it up in Report studio. If the recipient needs less, make a [minimized handover](https://phishdestroy.github.io/TgWitness/docs/handover/).
 
 
 ---
@@ -1209,16 +1181,16 @@ Check the verifier results, preserve the originals, and retain the coverage repo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/case-board/
 
-Turn saved Telegram observations into a case your team can review together.
+Turn saved messages into a case your team works on together.
 
-Case Board keeps bookmarks, exact-text highlights, saved slices and discussion beside their source references. A collection gives the case a working structure; signed revisions preserve how the team developed it.
+Bookmarks, exact quotes, slices and discussion, each linked to its source. Every change is a signed revision.
 
 ## From a message to a case card
 
-1. Open **Investigation → Case Board** in Standard or Expert mode. Create a collection for the case and choose its chat scope.
-2. In **Journal** or a saved chat, choose **To board**, or focus the record and press **B**. The card enters Inbox; give it a useful title and move it to your collection.
-3. Select a passage in a saved chat message and choose **Highlight → board** to retain the exact quote and message version. Add a note explaining why it matters.
-4. Discuss the card, assign a review status, and return to its source context whenever a claim needs checking. Use **Presentation** to walk through the collection with colleagues.
+1. **Investigation → Case Board** (Standard or Expert mode). Make a collection for the case.
+2. In **Journal** or a chat hit **To board** (or **B**). The card lands in Inbox, give it a title and move it.
+3. Select text in a message, **Highlight → board** keeps the exact quote and version. Note why it matters.
+4. Discuss, set a status, jump back to the source whenever needed. **Presentation** walks the team through it.
 
 ### Follow one changed payment link
 
@@ -1255,19 +1227,19 @@ The annotation and the Telegram observation remain separately identifiable.
 
 ## Save a useful range once
 
-Shift-click two records in one chat for **Slice between**, choose **Slice by time**, or save the current Journal filters. Review the count before saving. Reopen the slice to apply its saved query; **Show records added since bookmark** reveals later additions.
+Shift-click two messages for **Slice between**, use **Slice by time**, or save the current Journal filters. **Show records added since bookmark** shows what came in later.
 
-A time slice follows collector observation time. A message-ID slice can follow the selected messages as later changes arrive. The saved creation boundary lets a recipient compare the original selection with its later state.
+Time slices use observation time; message-ID slices follow those messages as they change.
 
 ## Give each colleague the right role
 
-**Reviewer** reads the board; **Analyst** adds cards and comments; **Operator** also manages collections and review decisions. Workspace and chat permissions apply to cards, source context and discussions. Use named access grants for clear attribution.
+**Reviewer** reads, **Analyst** adds cards and comments, **Operator** also manages collections and decisions. Chat permissions apply to cards too.
 
 ## Carry the work into a deliverable
 
-Export a slice as signed JSON, or use CSV for a spreadsheet. Report settings can include bookmarks and slices, with team comments when selected. Choose these contents in [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/); a saved slice does not automatically configure a report. For a restricted recipient, use the separate [handover controls](https://phishdestroy.github.io/TgWitness/docs/handover/).
+Slices export as signed JSON or CSV. Reports can include bookmarks, slices and comments, set that in [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/). For a limited recipient, use a [handover](https://phishdestroy.github.io/TgWitness/docs/handover/).
 
-Read the [Case Board reference](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/) for signed revisions, exact quote matching, selection verification and permissions.
+Details: [Case Board reference](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/).
 
 
 ---
@@ -1276,15 +1248,15 @@ Read the [Case Board reference](https://phishdestroy.github.io/TgWitness/docs/re
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reports/
 
-Give a reader a clear route from the case question to the saved records.
+Take the reader from the case question straight to the saved records.
 
-Report studio combines a data selection, readable change histories, charts and your written findings. Eight integrated designs apply to supported HTML and native PDF outputs. HTML, PDF and JSON reports carry their own signed seals; the ZIP manifest also binds the files in the package. HTML and PDF are sealed after their final layout is complete.
+Report studio puts together the data you pick, change histories, charts and your findings. Eight designs, HTML and native PDF. Every HTML, PDF and JSON report is sealed with your key.
 
 ## Build a report in three steps
 
-1. Open **Exports → Configure and preview → Data**. Use the whole workspace or select chats, authors, inclusive UTC observation dates and record types. The dates describe when TgWitness observed the record.
-2. In **Design & contents**, choose a design and contents preset. Select activity charts, participant labels, the transcript, saved changes and optional Case Board material. Add your case details and examination notes.
-3. Open **Preview** to review counts, activity, participants, sampled records and missing ID ranges. Save the settings, then download the format you need.
+1. **Exports → Configure and preview → Data**: whole workspace, or pick chats, authors, dates (UTC, when TgWitness saw the record) and record types.
+2. **Design & contents**: pick a design and what goes in: charts, participants, transcript, changes, Case Board items, your case details and notes.
+3. **Preview**: check counts, activity, samples and missing ID ranges. Save, then download the format you need.
 
 ### Arrange the same saved material for a reader
 
@@ -1329,19 +1301,19 @@ Recipient checks the file and trusted fingerprint.
 
 ## Choose a reading style
 
-**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin** present the same underlying records in different compositions. Changing the design keeps the data selection and written notes. Report language can be chosen from the 25 supported languages.
+**Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger & margin**: same records, different look. Switching keeps your selection and notes. Any of the 25 languages.
 
-Reading series groups the case, scope, findings and changes around a section rail. Ledger & margin uses numbered chapters and a wide margin. Both also support account HTML overviews and sharing copies. Native PDFs are generated with bundled fonts; the user's machine needs no browser or Node installation for PDF creation. Chinese, Japanese and Korean PDFs additionally require a suitable font on the server, such as Noto Sans CJK, installed system-wide or placed in `TGWITNESS_FONT_DIR`. Without it, the ZIP keeps the HTML and JSON reports.
+PDFs are built with bundled fonts, no browser needed. Chinese, Japanese and Korean need a font like Noto Sans CJK on the server (system-wide or in `TGWITNESS_FONT_DIR`), otherwise you get HTML and JSON only.
 
 ## Read a change with its context
 
-Saved edits show before and after. A deletion notice can be accompanied by the last captured version. Replies, quotes, forwards, reactions, buttons and attachment metadata retain their available references. File SHA-256 and journal-record hashes are labelled separately.
+Edits show before and after, deletions show the last saved version. Replies, forwards, reactions, buttons and attachments keep their references.
 
-The design preview shows cover, examination and chart components using matching records among the first 50,000 source records. The separate data preview scans the complete stable journal snapshot for exact selection counts, with displayed sample limits labelled. Generate a PDF to inspect final pagination. A full account export has an HTML overview; its individual chat PDFs use the chosen design.
+The design preview uses the first 50,000 records, the data preview counts everything exactly. For final page layout, generate the PDF.
 
 ## Choose the recipient's copy deliberately
 
-Report filters shape the readable report. The full evidence ZIP retains the original journal and attachments. Use a [minimized handover](https://phishdestroy.github.io/TgWitness/docs/handover/) when the recipient should receive only selected data. See [report contents and verification](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/) or [verify the finished export](https://phishdestroy.github.io/TgWitness/docs/exports/).
+Filters only shape the report, the evidence ZIP still has the full journal and files. If the recipient should get less, use a [minimized handover](https://phishdestroy.github.io/TgWitness/docs/handover/). More: [report contents](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/), [verifying the export](https://phishdestroy.github.io/TgWitness/docs/exports/).
 
 
 ---
@@ -1350,16 +1322,16 @@ Report filters shape the readable report. The full evidence ZIP retains the orig
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/handover/
 
-Share the relevant observations while keeping the original workspace intact.
+Share only what's needed, the original stays untouched.
 
-A handover is a separate signed extract. Choose the chats and people, reduce identities or text, and decide which files and team notes belong in the recipient's copy. Its manifest records the selection and the number of unchanged, minimized and omitted records.
+A handover is a separate signed extract: pick chats and people, hide identities or text, choose files and team notes. The manifest records what was kept, trimmed and left out.
 
 ## Prepare the recipient's extract
 
-1. Open **Exports → Handover extract**. Write its purpose, choose the chats and optional UTC period, then select **Load people of the chosen chats** if you need named subjects.
-2. Choose how to handle everyone else: pseudonyms, omit their messages, or show as recorded. Set message text and attachments independently; optionally mask phone numbers and email addresses.
-3. Choose whether to include Case Board bookmarks and slices, or cards with comments. Investigator aliases can replace team names in this copy.
-4. Select **Download handover extract**. Open the generated report and selected records locally, verify the archive, and inspect the copy before sending it.
+1. **Exports → Handover extract**: write the purpose, pick chats and a period, **Load people of the chosen chats** if you need named people.
+2. Everyone else: pseudonyms, left out, or as recorded. Text and files are separate switches; phones and emails can be masked.
+3. Case Board: nothing, bookmarks and slices, or cards with comments. Team names can be swapped for aliases.
+4. **Download handover extract**, open it, verify it, look through it before sending.
 
 ### One original, a deliberate sharing copy
 
@@ -1402,12 +1374,12 @@ A separate package linked to its source journal boundary
 
 | Control | Effect on the copy |
 | --- | --- |
-| People | Keep selected subjects identifiable; pseudonymize or omit other participants as chosen. |
-| Text | Include all text, only the selected people's and observing account's text, or omit message text and its text-bearing detail fields. |
-| Files | Choose files of the selected people and observing account, all shown messages' files, or no files. |
-| Case Board | Choose no board material, bookmarks and slices, or cards with team discussion. |
+| People | Selected people stay named; others get pseudonyms or are left out. |
+| Text | All text, only the selected people's and your account's, or none. |
+| Files | Files of the selected people and your account, all shown files, or none. |
+| Case Board | Nothing, bookmarks and slices, or cards with discussion. |
 
-Review free-form text and file contents as well as identities: a pseudonym does not automatically remove every name written in a message or attachment. If a selected preserved file is unavailable, restore it or explicitly omit attachments before generating the extract.
+Read the text and files too: a pseudonym doesn't remove names written inside a message or attachment. If a selected file is missing, restore it or leave attachments out.
 
 ## Keep the copy independently checkable
 
@@ -1415,7 +1387,7 @@ Review free-form text and file contents as well as identities: a pseudonym does 
 python -m tgwitness.verify handover.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Retain the original signed evidence archive and checkpoints separately. The handover records its own projection, so a recipient can check the delivered copy without receiving the entire workspace. [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/) supplies its reading design; [export verification](https://phishdestroy.github.io/TgWitness/docs/exports/) explains the trusted references.
+Keep the original archive and checkpoints yourself. The recipient can verify their copy without getting the whole workspace. Design: [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/). Trusted references: [export verification](https://phishdestroy.github.io/TgWitness/docs/exports/).
 
 
 ---
@@ -1424,15 +1396,15 @@ Retain the original signed evidence archive and checkpoints separately. The hand
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/groups/
 
-Manage several collecting accounts together while keeping each account's records and signing identity distinct.
+Run several accounts together, each still with its own records and key.
 
-An account group brings connection status, observation controls, shared settings and exports into one working view. It is useful when several accounts cover the same investigation or need a consistent operating setup.
+A group puts connection status, start/pause, shared settings and exports on one screen. Handy when several accounts work the same case.
 
 ## Open the group overview
 
-In **Accounts**, open the group. Each account shows its observation state, connection route, latest measured route latency when a current check succeeded, and last saved message. **Needs attention** links to the accounts that need work; **Fix** opens the relevant workspace and control.
+Open the group in **Accounts**. Each account shows its state, route, latency and last saved message. **Needs attention** lists the broken ones, **Fix** takes you straight there.
 
-**Start all** and **Pause all** act on eligible accounts after confirmation. **Group settings** shares selected settings; accounts with their own values keep them until you choose to replace them.
+**Start all** / **Pause all** ask before acting. **Group settings** are shared, but an account's own values stay until you replace them.
 
 ### Review a route change across a group
 
@@ -1473,22 +1445,22 @@ Reference account: own route retained.
 
 ## Change the route with a review step
 
-1. Select **Change the group route**, then choose the connection type and settings.
-2. Choose **Review selection**. Review the listed accounts and their individual route overrides.
-3. Select **Prepare and check**. The check uses a fresh Telegram transport; supported HTTP routes also report their HTTPS exit check.
-4. Select **Apply checked connection** and inspect each account's result. Previously running observation resumes where application succeeds; idle accounts remain idle.
+1. **Change the group route**, pick the type and settings.
+2. **Review selection**: see which accounts change and which have their own route.
+3. **Prepare and check** tests a fresh Telegram connection, plus the exit IP where possible.
+4. **Apply checked connection** and look at each result. Running accounts resume, idle ones stay idle.
 
-Latency describes the measured Telegram connection setup. An exit-IP check describes that route at the recorded check time. Account authorization and observation health have their own indicators; a group change can finish with different outcomes per account.
+Latency is the Telegram connection setup time, the exit IP is what the route showed at check time. Results can differ per account.
 
 ## Use overlapping access
 
-**Chats several accounts see** shows shared sources and the available workspace-observation coverage. Eligible channels and supergroups can use **Export with … accounts** to divide one chat's history acquisition. Private chats and ordinary groups stay with the starting account because their message numbers belong to an account's history.
+**Chats several accounts see** lists shared sources and their coverage. Channels and supergroups can be exported by several accounts at once with **Export with … accounts**. Private chats and basic groups can't, their message numbers are per account.
 
 ## Export the group as a package
 
-**Export group** creates one ZIP containing each account's signed export and a signed list of those files. The original workspace identities and fingerprints remain available for verification. Build a cross-account narrative using those references; a single merged timeline is still assembled separately.
+**Export group** gives one ZIP with every account's signed export and a signed list of them. Each keeps its own fingerprint for verification. A merged timeline you still build yourself.
 
-Continue with [report design](https://phishdestroy.github.io/TgWitness/docs/reports/), [a Case Board within a workspace](https://phishdestroy.github.io/TgWitness/docs/case-board/), or [export verification](https://phishdestroy.github.io/TgWitness/docs/exports/).
+Next: [reports](https://phishdestroy.github.io/TgWitness/docs/reports/), [Case Board](https://phishdestroy.github.io/TgWitness/docs/case-board/), [verifying exports](https://phishdestroy.github.io/TgWitness/docs/exports/).
 
 
 ---
@@ -1497,26 +1469,26 @@ Continue with [report design](https://phishdestroy.github.io/TgWitness/docs/repo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/concepts/
 
-A message can change. The record of what you observed should remain checkable.
+Messages change. Your record of what you saw shouldn't, and anyone should be able to check that.
 
-Explore two small experiments below. They use fictional messages, stay in your browser and never connect to Telegram.
+Two small experiments below. Fake messages, everything runs in your browser, nothing goes to Telegram.
 
 ## From a chat export to a verifiable record
 
-[Telegram Desktop exports](https://telegram.org/blog/export-and-more) save available chat history and media as HTML or JSON for offline use. TgWitness adds an ongoing journal of received changes, signatures on observations and exports, and checkpoints that recipients can compare independently.
+A [Telegram Desktop export](https://telegram.org/blog/export-and-more) saves the history you can see right now as HTML or JSON. TgWitness adds a running journal of changes, signatures on every record and checkpoints others can compare against.
 
 | Task | Telegram Desktop export | TgWitness |
 | --- | --- | --- |
 | Read saved conversations | HTML or JSON with selected media | Saved chats, searchable journal and offline reports |
-| Follow a change over time | The history available when exported | Earlier captured versions, later edits and deletion observations retained together |
-| Check files after handover | Standard HTML/JSON export files are unsigned | Signed manifest, per-record signatures and sealed HTML/PDF/JSON reports checked against a trusted collector key |
+| Follow a change over time | The history available when exported | Old versions, later edits and deletions, all kept |
+| Check files after handover | Standard HTML/JSON export files are unsigned | Signed manifest, signed records and sealed reports, checked against a trusted key |
 | Compare with an earlier retained state | Keep a separate reference copy or hash | Signed checkpoints, a separate witness and optional external timestamps |
 
-The file-signing comparison is based on the [Telegram Desktop export writers](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) reviewed on 2 November 2026. TgWitness signs with the collector’s key; the checks below show how a recipient uses it.
+The comparison is based on the [Telegram Desktop export code](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) as of 2 November 2026.
 
 ## One message, three observations
 
-When Telegram delivers a new message, an edit and a deletion notice, the collector appends three separate observations. The edit does not replace the first record. A deletion notice does not erase it.
+A new message, an edit and a deletion become three separate records. The edit doesn't overwrite the first one, and the deletion doesn't erase it.
 
 01 / MESSAGE JOURNEYIllustrative sequence
 
@@ -1556,11 +1528,11 @@ All three received observations remain in the journal.
 
 Simplified path for one already selected source. Operational records also share the real journal. Capture depends on what the account can see and what Telegram delivers.
 
-A deletion notice supplies neither a reliable deletion time nor the person who deleted the message. Keeping those values unknown preserves the distinction between an observation and a guess.
+Telegram doesn't say who deleted a message or exactly when. TgWitness leaves those fields empty instead of guessing.
 
 ## Change a record. Follow the hash.
 
-Each record contains the previous record’s hash. Its own hash covers the event fields, including that link. An externally retained checkpoint pins a specific journal length and head hash.
+Every record contains the hash of the one before it. A checkpoint kept somewhere else pins the journal length and the last hash.
 
 02 / HASH-CHAIN SANDBOXReal SHA-256 · sample records
 
@@ -1600,24 +1572,24 @@ h0 = 064
 hi = hex(SHA-256(C(ei)))
 σi = Ed25519.Sign(sk, unhex(hi))
 
-**C** serializes the nine event fields as UTF-8 JSON: sorted keys, no extra whitespace, no ASCII escaping and no NaN/infinity. The event’s `previous_hash` is hi−1. The displayed h0 means 64 zero characters; signatures cover the 32 raw digest bytes.
+**C** is the nine event fields as UTF-8 JSON: sorted keys, no extra whitespace, no ASCII escaping, no NaN/infinity. `previous_hash` is hi−1, h0 is 64 zeros, signatures cover the 32 raw digest bytes.
 
-The nine fields are `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload` and `previous_hash`. This is TgWitness’s [documented JSON encoding](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#event-canonicalization); the hash and signature themselves are not hash-input fields.
+The fields: `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload`, `previous_hash`. Full spec: [event encoding](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#event-canonicalization).
 
 RETAINED CHECKPOINT
 
 Nexport ≥ Ncheckpoint
 hexport[Ncheckpoint] = Hcheckpoint
 
-Verify the checkpoint signature under the pinned collector key, then compare its boundary with the verified journal. A later export may contain more records; it must still agree at the earlier checkpoint.
+Check the checkpoint signature against the pinned key, then compare it with the journal. A later export can be longer, but it has to match at the checkpoint.
 
 ## Three questions, three different checks
 
-[01 / INTEGRITY**Did this record change?** Verify hashes and signatures against a separately trusted key.](https://phishdestroy.github.io/TgWitness/docs/exports/)[02 / CONTINUITY**What was retained earlier?** Compare a signed export with checkpoints kept by a separate witness.](https://phishdestroy.github.io/TgWitness/docs/witness/)[03 / DELIVERY**Did these test events arrive?** Match controlled send, edit and delete actions against each account’s journal.](https://phishdestroy.github.io/TgWitness/docs/cases/)
+[01 / INTEGRITY**Did this record change?** Hashes and signatures against a key you trust.](https://phishdestroy.github.io/TgWitness/docs/exports/)[02 / CONTINUITY**What was retained earlier?** Compare the export with checkpoints a witness kept.](https://phishdestroy.github.io/TgWitness/docs/witness/)[03 / DELIVERY**Did these test events arrive?** Send, edit and delete test messages and see what each account caught.](https://phishdestroy.github.io/TgWitness/docs/cases/)
 
-Use signatures to check the retained records, checkpoints to compare an earlier boundary, and controlled delivery tests to measure collection. Each answers a specific question. [Read the verification scope and trust assumptions.](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope)
+Signatures answer "was it changed", checkpoints answer "does it match what was there before", test messages answer "did we catch everything". [What verification proves and what it doesn't.](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope)
 
-Follow the [whole-account investigation](https://phishdestroy.github.io/TgWitness/docs/cases/) from acquisition to case package.
+Next: a [whole-account investigation](https://phishdestroy.github.io/TgWitness/docs/cases/) from start to case package.
 
 [Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.
 
@@ -1628,7 +1600,7 @@ Follow the [whole-account investigation](https://phishdestroy.github.io/TgWitnes
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/security/
 
-Know the routes for Telegram, public proxy lists and optional external services. Know what each secret unlocks, what the protections cover and what they leave to you.
+What leaves your machine, what each secret opens, and what the protections cover versus what's on you.
 
 **127.0.0.1**panel address by default
 
@@ -1640,7 +1612,7 @@ Know the routes for Telegram, public proxy lists and optional external services.
 
 ## Where everything lives
 
-The collector, its panel and every saved record stay on the computer or server you run it on. Telegram is the only destination by default; each other one is a separate switch.
+The collector, the panel and every record stay on your machine. By default only Telegram is contacted; everything else is a separate switch.
 
 06 / WHAT LEAVES THE MACHINEYour installation
 
@@ -1682,57 +1654,57 @@ Optional destinations are configured per workspace. Message text and media are s
 
 | Secret | Where it is kept | What it unlocks | If it leaks |
 | --- | --- | --- | --- |
-| **Panel token** | `panel-token.txt` in the data directory; the browser keeps it for the tab only | Everything in every workspace: read and export, change scope, sign in accounts | Stop TgWitness, delete `panel-token.txt`, start it again: a new token is created |
+| **Panel token** | `panel-token.txt` in the data directory; the browser keeps it per tab | Everything in every workspace | Stop TgWitness, delete `panel-token.txt`, start again: you get a new one |
 | **Telegram session** | Vault, encrypted (`credentials.enc`) | The Telegram account itself | End the session in Telegram under *Settings → Devices* |
-| **Signing key** | Vault, encrypted (`signing.enc`) | Signing records that verify under your fingerprint | Checkpoints kept elsewhere, a witness and timestamps show what existed before |
-| **Vault key** | `vault.key` beside the data, or an external master key for a new data directory | Decrypting the vault | Treat the session and signing key as leaked too |
-| **Witness token** | On the witness host | Read-only: signed checkpoints and health | Delete it on the Witness page; create a new one |
-| **Off-site copy key** | Vault; download it once for recovery | Decrypting the off-site copy | Whoever also holds the stored objects can decrypt them: treat that copy as exposed |
+| **Signing key** | Vault, encrypted (`signing.enc`) | Signing records under your fingerprint | Checkpoints kept elsewhere, a witness and timestamps still show what existed before |
+| **Vault key** | `vault.key` next to the data, or an external master key | The vault | Assume the session and signing key leaked too |
+| **Witness token** | On the witness host | Read-only: checkpoints and health | Delete it on the Witness page, make a new one |
+| **Off-site copy key** | Vault; download it once for recovery | The off-site copy | Anyone who also has the bucket can decrypt it: treat the copy as exposed |
 
 ## What the protections cover
 
 ### Covered
 
-- A changed, removed or reordered record in an export: the hash chain or a signature no longer verifies.
-- A journal cut back or rebuilt after a checkpoint was kept elsewhere: the retained checkpoint no longer matches.
-- Guessing the panel token: 256 random bits, compared in constant time; after 15 failures a minute an address is refused.
-- Hostile chat content: text is inserted as text, never as HTML; attachments download as files; the panel loads nothing from other sites.
-- A copied data directory with an external vault key: sessions and signing keys stay encrypted without the master key.
+- A changed, removed or reordered record: the hash chain or a signature breaks.
+- A journal cut back or rebuilt after you saved a checkpoint elsewhere: the checkpoint stops matching.
+- Guessing the token: 256 random bits, constant-time compare, 15 failures a minute and the address is blocked.
+- Hostile chat content: text stays text, never HTML; attachments download as files; the panel loads nothing from other sites.
+- A stolen data directory with an external vault key: sessions and keys stay encrypted.
 
 ### Left to you
 
-- The main panel token has full control. Give other people scoped access to the accounts, chats and actions they need; keep the main key private.
-- An administrator of the machine can read everything and rewrite and re-sign the journal. Keep the fingerprint and checkpoints on another system.
-- Message text and media are not encrypted by TgWitness. Use disk encryption and strict permissions.
-- Plain HTTP beyond localhost shows the token on the network. Use HTTPS or an SSH tunnel.
-- Check saved records with signatures and checkpoints. Review collection coverage and test delivery for the accounts and sources you use.
+- The main token can do everything. Give others scoped access and keep the main one to yourself.
+- Whoever is admin on the machine can read everything and re-sign the journal. Keep the fingerprint and checkpoints elsewhere.
+- Messages and media aren't encrypted by TgWitness. Encrypt the disk, lock down permissions.
+- Plain HTTP outside localhost leaks the token. Use HTTPS or an SSH tunnel.
+- Signatures don't tell you what was missed. Check coverage and test delivery on your own accounts and sources.
 
-[Share access to a case](https://phishdestroy.github.io/TgWitness/docs/access/) with permissions, expiry and session limits. A witness token remains a separate credential.
+[Share access to a case](https://phishdestroy.github.io/TgWitness/docs/access/) with permissions, expiry and session limits.
 
 ## Harden an installation
 
 0 of 8 done
 
-1. **Use a dedicated Telegram account** — never your main one. The panel token and the session give full control of it.
-2. **Keep the panel on 127.0.0.1.** Reach it remotely only through HTTPS (the bundled Caddy configuration) or an SSH tunnel.
-3. **Encrypt the disk** that holds the data directory: message text and media are stored as they arrived.
-4. **Restrict the data directory** to the service account. New directories get mode 0700 on Unix; on Windows, set the folder's permissions.
-5. **Keep the vault master key elsewhere** on servers: set `TGWITNESS_VAULT_KEY_FILE` before creating the data directory.
-6. **Save the signing-key fingerprint and checkpoints** on another system, and add a witness on another host.
+1. **Use a dedicated Telegram account**, never your main one.
+2. **Keep the panel on 127.0.0.1.** Remote access only via HTTPS (bundled Caddy) or an SSH tunnel.
+3. **Encrypt the disk** with the data directory, messages and media are stored as is.
+4. **Restrict the data directory** to the service account (0700 on Unix, folder permissions on Windows).
+5. **Keep the vault key elsewhere** on servers: set `TGWITNESS_VAULT_KEY_FILE` before the first start.
+6. **Save the fingerprint and checkpoints** on another system, run a witness on another host.
 7. **Never upload** `data/`, sessions, `panel-token.txt` or vault keys to GitHub or a chat.
 8. **Do not log** `Authorization` headers or request bodies at a reverse proxy.
 
 **Can I change the panel token without losing data?**
 
-Yes. The token only opens the panel. Stop TgWitness, delete `panel-token.txt` from the data directory and start it again; the journal, sessions and keys are untouched. With `TGWITNESS_TOKEN` set, the environment value is used instead of the file.
+Yes, it only opens the panel. Stop TgWitness, delete `panel-token.txt`, start again. Journal, sessions and keys stay. If `TGWITNESS_TOKEN` is set, that value wins over the file.
 
 **Why are messages not encrypted at rest?**
 
-The collector must read them to search, compare versions and export. Encrypting them with a key on the same machine would add little against someone who can read that machine. Disk encryption protects a stopped or stolen disk; strict permissions protect a running one.
+The collector has to read them to search, compare and export. A key on the same machine wouldn't stop someone who can read that machine anyway. Disk encryption covers a stolen disk, permissions cover a running one.
 
 ## Report a vulnerability
 
-Use **Security → Report a vulnerability** in the GitHub repository. Include the version, the impact and a minimal synthetic reproduction. Never send credentials, account directories or real evidence archives. If private reporting is unavailable, open an issue asking for a private channel without exploit details.
+**Security → Report a vulnerability** on GitHub. Version, impact and a minimal repro with fake data. Never send credentials, account folders or real evidence. If private reporting is off, open an issue asking for a private channel, no exploit details.
 
 
 ---
@@ -1741,7 +1713,7 @@ Use **Security → Report a vulnerability** in the GitHub repository. Include th
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/witness/
 
-Let a separate process check the journal and publish signed checkpoints to your channel.
+A separate process checks your journal and posts signed checkpoints to a channel.
 
 ## Two hosts, two signing keys
 
@@ -1778,36 +1750,36 @@ All answering examples assume a valid signature and the pinned key. Hashes here 
 
 ## Prepare a bot and a channel
 
-Create a bot with BotFather and allow it to post in a channel you control. Choose a computer or server for the witness. A separate host and operator provide stronger independence than a second process on the collector’s server.
+Make a bot with BotFather and let it post in your channel. Run the witness somewhere else: another host, ideally run by someone else, is worth much more than a second process next to the collector.
 
 ## Three steps in Extras
 
-1. **Read-only access.** Open **Extras → Independent witness**, create a witness token and save the access file. It allows reading checkpoints and health, not conversations or collector controls.
-2. **Channel and interval.** Choose a Telegram channel or a Discord webhook and enter a collector address reachable from the witness. Save the settings file.
-3. **Launch.** Put `witness.json`, `witness-token.txt` and a `bot-token.txt` created on the witness host together. Run the commands below in the installed project environment.
+1. **Read-only access.** **Extras → Independent witness**, create a token, save the file. It reads checkpoints and health, nothing else.
+2. **Channel and interval.** Telegram channel or Discord webhook, plus a collector address the witness can reach. Save the settings file.
+3. **Launch.** Put `witness.json`, `witness-token.txt` and `bot-token.txt` together on the witness host and run:
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
 python -m tgwitness.witness run --config witness.json
 ```
 
-Downloading the files does not start the witness. Check that the first signed post appears in the channel, then retain the witness’s public-key fingerprint separately.
+Wait for the first signed post in the channel, then save the witness fingerprint somewhere safe.
 
-For Discord, save the channel’s webhook URL as `discord-webhook.txt` instead of the bot token. A witness posts to one place, a Telegram channel or a Discord channel; checks longer than a Discord message arrive as an attached file.
+Discord instead? Save the webhook URL as `discord-webhook.txt`. One witness posts to one place; long checks arrive as a file on Discord.
 
 ## Choose how often to publish
 
-Publishing every check creates a regular external record. At five-minute intervals, that is about 288 posts per workspace per day. The advanced settings also offer publication on changes or problems, a proxy and a custom Bot API address.
+Posting every check gives a steady outside record: every five minutes is about 288 posts a day per workspace. Advanced settings can post only on changes or problems, use a proxy or a custom Bot API.
 
 **What does the bot actually attest to?**
 
-The witness asks the collector for a signed checkpoint, verifies it against the expected key and keeps a separate signed journal. It records missing responses and rejected answers as well as successful checks. Publication still depends on the witness running and reaching Telegram’s Bot API.
+It asks the collector for a signed checkpoint, checks it against the expected key and keeps its own signed journal, including missed and rejected answers.
 
-It checks the collector’s reported journal state. It does not independently observe every Telegram message. For that, add the controlled delivery test.
+It checks the journal state, it doesn't watch Telegram itself. For that, run a controlled delivery test.
 
 ## Check the evidence later
 
-Keep the witness journal, channel posts and independently saved fingerprints. The [full verification procedure](https://phishdestroy.github.io/TgWitness/docs/reference/witness/#verify) compares them with the collector’s signed export.
+Keep the witness journal, the posts and the fingerprints. [How to check them](https://phishdestroy.github.io/TgWitness/docs/reference/witness/#verify) against the collector's export.
 
 
 ---
@@ -1820,53 +1792,53 @@ Find the message. Check the source. Build the case.
 
 01**Bring in the history**
 
-Load past messages from your enabled sources into the workspace.
+Pull past messages of your enabled sources into the workspace.
 
 02**Follow the sources**
 
-Search the archive and open the saved message behind each result.
+Search, then open the saved message behind every hit.
 
 03**Keep the handoff clear**
 
-Save your analysis separately and export the signed evidence beside it.
+Your analysis in one file, the signed evidence next to it.
 
 Captured records, recognized text and analyst conclusions stay distinct.
 
 ## Load past messages
 
-1. Open **Sources → Chats in scope**, review the enabled chats and start observation.
-2. Choose **Load full history**. The run uses the source list selected at that moment.
-3. Use **Pause history** and **Continue history** as needed. After a restart, resume explicitly.
-4. Check the per-source result and attachment queue. Save the signed progress report with the evidence export.
+1. **Sources → Chats in scope**: check the enabled chats, start observation.
+2. **Load full history**. It takes the source list as it is right now.
+3. **Pause history** / **Continue history** any time. After a restart, resume by hand.
+4. Check results per source and the download queue, keep the signed progress report with the export.
 
-This fills the workspace with available messages. A per-chat HTML/JSON export is a separate operation. [History and recovery details](https://phishdestroy.github.io/TgWitness/docs/reference/history/).
+This fills the workspace. A single-chat HTML/JSON export is a different thing. [Details](https://phishdestroy.github.io/TgWitness/docs/reference/history/).
 
 ## Search first, then decide about AI
 
-1. Open **Journal** for local search. Choose a workspace and use the source and time filters.
-2. Search a phrase or domain. Open the matching record and its saved versions.
-3. For AI analysis, the administrator enables and configures a provider in **Integrations**. Open **Ask the archive** and choose chats and a period. Review **Data sent to the model** and uncheck unwanted excerpts before approving the request.
-4. Check the returned citations. Save the answer as a report and add your own revision or notes.
+1. **Journal** searches locally, filter by source and time.
+2. Search a phrase or domain, open the record and its versions.
+3. For AI, the admin sets up a provider in **Integrations**. Then **Ask the archive**, pick chats and a period, look at **Data sent to the model** and untick what shouldn't go out.
+4. Check the citations, save the answer as a report, add your notes.
 
-Search runs locally without AI. Analytical reports keep source references and revision history; they are separate from the signed journal. [Provider setup and reports](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/).
+Search needs no AI. Reports keep their sources and revisions, apart from the signed journal. [Provider setup](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/).
 
 ## Choose the connection you need
 
 | Task | Open | Setup |
 | --- | --- | --- |
-| Read selected chats from an AI client | **Integrations → MCP** | [Install the MCP extra, issue a scoped token and connect the client](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/) |
-| Recognize text in saved media | A `media.saved` record → **Recognize attachment** | [Set up the local Docker worker and required language/model files](https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/) |
-| Send events to n8n or a SIEM | **Integrations → Outgoing webhooks** | [Add a receiver, verify HMAC and deduplicate event IDs](https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/) |
+| Let an AI client read chosen chats | **Integrations → MCP** | [Install MCP, make a scoped token, connect](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/) |
+| Recognize text in saved media | A `media.saved` record → **Recognize attachment** | [Set up the local Docker worker](https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/) |
+| Send events to n8n or a SIEM | **Integrations → Outgoing webhooks** | [Add a receiver, check HMAC, dedupe IDs](https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/) |
 
 **Which access token goes where?**
 
-Panel access is for people reviewing the case. MCP connections get separate read-only archive tokens. A webhook receiver uses its own HMAC secret. None needs a Telegram session file.
+Panel access is for people. MCP gets its own read-only tokens, webhooks their own HMAC secret. None of them needs a Telegram session.
 
 [Share panel access](https://phishdestroy.github.io/TgWitness/docs/access/) or [configure an MCP client](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/).
 
 ## Hand over sources and conclusions
 
-Keep the reviewed analytical report alongside the signed evidence ZIP. The report explains your reading of the sources; the ZIP lets a recipient check the saved record against an independently trusted fingerprint and checkpoint.
+Put the report next to the signed ZIP. The report is your reading of the sources, the ZIP is what the recipient verifies.
 
 [Export and verify](https://phishdestroy.github.io/TgWitness/docs/exports/) · [Work through a full investigation](https://phishdestroy.github.io/TgWitness/docs/cases/)
 
@@ -1881,50 +1853,50 @@ Share the case someone needs. Keep control of the rest.
 
 01**Choose the evidence**
 
-Select whole account workspaces or individual recorded chats.
+Whole workspaces or single chats.
 
 02**Choose the actions**
 
-Allow viewing, export or the specific operational permissions the person needs.
+View, export, or just the operations they need.
 
 03**Set the limits**
 
-Issue a personal token with an expiry, session limits and optional IP restrictions.
+A personal token with expiry, session limits and IP rules if you want.
 
 Collection scope decides what is recorded. Access scope decides what a person can see and do.
 
 ## Give someone access
 
-1. Sign in as the administrator and open **Access**.
-2. Name the access and select workspaces and chats.
-3. Keep **View** for a reviewer. Add **Export** if they should download records.
+1. As admin, open **Access**.
+2. Name it, pick workspaces and chats.
+3. A reviewer needs only **View**. Add **Export** for downloads.
 4. Set limits, then press **Create access**.
-5. Copy the token shown once. Send it privately with the panel address.
-6. Check the allowed view in a separate browser session before handing it over.
+5. Copy the token (shown once) and send it privately with the panel address.
+6. Check what they'll see in a separate browser session first.
 
 ## Start with the job they need to do
 
 | Person | Access | Result |
 | --- | --- | --- |
-| Reviewer | Selected chats; view only | Read the captured conversation without changing collection. |
-| Analyst | Selected chats; view and export | Review and download the records needed for the case. |
-| Operator | Selected whole workspaces; sources and collection | Manage what is observed and start or stop collectors. |
+| Reviewer | Selected chats; view only | Reads the chat, can't change anything. |
+| Analyst | Selected chats; view and export | Reads and downloads what the case needs. |
+| Operator | Selected whole workspaces; sources and collection | Decides what's observed, starts and stops collectors. |
 
-These are configurations you choose, not fixed roles. Account-wide settings and full journal exports stay closed to chat-limited access even when another permission is enabled. All-workspace access includes future accounts.
+These are just examples, not fixed roles. Chat-limited access never gets account settings or full journal exports. All-workspace access includes accounts added later.
 
 ## Change your mind at any time
 
-Edit the access to change what subsequent requests can do. End one session or revoke the whole access to end all its sessions. Files already downloaded cannot be recalled. Ending a panel session does not stop collection.
+Edit access any time, it applies from the next request. End one session or revoke everything. Already downloaded files are gone for good. Collection keeps running.
 
 **Session and IP limits**
 
-Limit parallel sessions and successful sign-ins, set an absolute end date, allow IP addresses or subnets, or bind access to its first sign-in address. Session expiry measures inactivity; an open panel's polling counts as activity. Check the client address shown by the application when it runs behind a proxy or tunnel.
+Limit parallel sessions and sign-ins, set an end date, allow IPs or subnets, or lock to the first sign-in IP. Expiry counts inactivity, an open panel counts as active. Behind a proxy, check which client IP the app sees.
 
 **The main key and the activity log**
 
-The administrator keeps the main panel token. Issued access cannot manage other people's access or open the administrator console. The console shows current-process activity across workspaces; signed access records retain grant and session events without tokens. Workspaces share the host process and do not isolate data from the server administrator.
+The main token stays with the admin. Issued access can't manage other people's access or open the admin console. Access changes and sessions are signed into the journal, without tokens. The server admin can still see everything.
 
-Use the [full permission reference](https://phishdestroy.github.io/TgWitness/docs/reference/access/) for all seven permissions, session rules and the administrator boundary.
+All seven permissions and session rules: [access reference](https://phishdestroy.github.io/TgWitness/docs/reference/access/).
 
 
 ---
@@ -1933,36 +1905,36 @@ Use the [full permission reference](https://phishdestroy.github.io/TgWitness/doc
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/server/
 
-Keep the collector available and its data intact across restarts.
+Keep the collector up and the data safe through restarts.
 
 ## Choose a launch method
 
-For a native installation, use the [launcher](https://phishdestroy.github.io/TgWitness/docs/start/) and the service examples in [deploy/](https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md). For Docker, install Docker with Compose and run from the project directory:
+Native: the [launcher](https://phishdestroy.github.io/TgWitness/docs/start/) plus service templates in [deploy/](https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md). Docker, from the project folder:
 
 ```
 docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt
 ```
 
-The default panel listens on the host’s loopback address, port 8787. Open it locally or through an SSH tunnel. Use the token from the second command to unlock the panel.
+The panel listens on localhost:8787. Open it locally or through an SSH tunnel, with the token from the second command.
 
 ## Keep the whole data directory
 
-Native installations use `data/live`. Docker uses the persistent `tgwitness-data` volume. Keep journals, account sessions, keys and operational state together. A signed export is useful evidence, but it is not a full installation backup.
+Native: `data/live`. Docker: the `tgwitness-data` volume. Journals, sessions and keys belong together. A signed export is evidence, not a backup.
 
-1. Stop collection before taking a consistent backup.
-2. Copy the full private data directory to protected storage outside the host.
-3. Test restoration into an isolated installation before relying on the backup.
+1. Stop collecting first.
+2. Copy the whole data directory somewhere safe, off the host.
+3. Try restoring it on a separate install before you trust it.
 
 ## Check after a restart
 
-Confirm the expected workspace and key, Telegram connection, selected sources and new message capture. Saved MTProto state and catch-up help recover updates that Telegram still retains. They cannot reconstruct every expired update or an edit deleted before capture.
+Check the workspace and key, the connection, sources and that new messages come in. TgWitness catches up what Telegram still has, not everything that happened while it was down.
 
-Container health means the web server responds. Use a controlled message and a witness check to assess collection and external publication.
+"Healthy" container means the web server answers. Whether collection works, a test message and the witness will tell.
 
 ## Publish only what you intend
 
-The deployment reference includes HTTPS examples, persistent-volume commands, updates and restore steps. Docker commands are provided for deployment; the current [validation record](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) identifies the environments actually tested.
+HTTPS, volumes, updates and restore are in the deployment reference. What's actually been tested: [validation record](https://phishdestroy.github.io/TgWitness/docs/reference/verification/).
 
 
 ---
@@ -1971,38 +1943,38 @@ The deployment reference includes HTTPS examples, persistent-volume commands, up
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/troubleshooting/
 
-Start with the symptom. Check one layer at a time.
+Start from the symptom, check one thing at a time.
 
 ## The panel asks for a token
 
-Use the panel token from the local file shown by the launcher. For Docker, run `docker compose exec tgwitness cat /data/panel-token.txt`. A Telegram login code, BotFather token and read-only witness token serve different purposes.
+It wants the panel token from the file the launcher printed. Docker: `docker compose exec tgwitness cat /data/panel-token.txt`. Not a Telegram code, not a bot token, not the witness token.
 
 ## Telegram does not connect
 
-Open connection settings and run the connection check. If using a public proxy, try another entry and save the route explicitly. Check the proxy type and supported secret format. Refreshing a public list does not switch the account’s route.
+Run the connection check. On a public proxy, pick another one and save. Check the proxy type and secret format. Refreshing lists doesn't switch the route by itself.
 
 ## Connected, but no new messages
 
-1. Check that observation is running in the right workspace.
-2. Confirm the source is selected and visible to that account.
-3. Send a unique new message in a controlled group and look for that exact text.
-4. Review the operational journal for interruptions, delayed work or Telegram errors.
+1. Is observation running, in the right workspace?
+2. Is the source selected and visible to that account?
+3. Send a unique message in your test group and search for it.
+4. Look for interruptions or Telegram errors in the journal.
 
-Historical snapshots and new-message events are different. A quiet source can be connected without producing new messages. Use a controlled delivery test when completeness matters.
+A quiet chat just has nothing new. If completeness matters, run a controlled delivery test.
 
 ## FloodWait or a gap after a restart
 
-FloodWait means Telegram requires a pause. Wait for the indicated period and review collection workload; repeated reconnects do not remove the limit. Saved update state helps catch up after a restart, but expired updates and some interruption windows remain limitations. Record the gap rather than treating the journal as complete.
+FloodWait is Telegram saying "slow down". Wait it out and lighten the load, reconnecting won't help. After a restart TgWitness catches up what Telegram still has; the rest is a gap, so write it down.
 
 ## The bot is configured but posts nothing
 
-Make sure the witness process is actually running, the bot can post in the channel and the witness can reach the collector and Bot API. Inspect its journal for failed publications. A successful collector poll alone does not confirm a channel post.
+Is the witness running, can the bot post in the channel, can it reach the collector and Bot API? Look in its journal for failed posts. A poll on the collector side doesn't mean a post went out.
 
 ## Where is GitHub token integration?
 
 **Planned.** Extras describes the proposed fork and build verification workflow. There is currently no GitHub token form or automated attestation that a running installation matches a repository. See the [current feature status](https://phishdestroy.github.io/TgWitness/docs/reference/features/).
 
-When reporting a problem, include the version, operating system, steps and a redacted error. Keep sessions, tokens, private messages and the data directory out of public issues.
+Reporting a bug? Version, OS, steps and a redacted error. Never put sessions, tokens, private messages or the data directory in a public issue.
 
 
 ---
@@ -2081,6 +2053,76 @@ Telegram's [normal export feature](https://telegram.org/blog/export-and-more) sa
 A console could calculate hashes, sign data and report successful verification even when the input had already been altered. A hash identifies bytes; a signature binds bytes to a key. Neither establishes whether a person actually sent the statement represented by those bytes. See [Ed25519 verification](https://www.rfc-editor.org/rfc/rfc8032.html#section-5.1.7).
 
 The acquisition environment, collector key, observation coverage and independent checkpoints matter. TgWitness signatures are collector attestations. Direct API collection does not remove these trust assumptions. [Explore the evidence model](https://phishdestroy.github.io/TgWitness/docs/concepts/).
+
+## What Forensic Tools Actually Certify
+
+Export Clinic demonstrates one specific case. The pattern it reveals is not specific to Telegram.
+
+In the overwhelming majority of proceedings we have reviewed — across court filings, case discussions, and published analyses — "digital evidence" follows a consistent format: a Telegram export (HTML or JSON file, sometimes a screen recording of a monitor, sometimes a video from an iPhone navigating through profile pages) paired with an expert signature. That is typically the entire evidentiary chain.
+
+Telegram does not cryptographically sign its export output. It has never claimed to. The export feature exists for personal data portability. Somewhere along the way, someone decided these files carry evidentiary weight in court — and that assumption has rarely been challenged at the technical level. In our assessment, this is one of the most significant open gaps in digital forensics practice today.
+
+### The Tools Are Honest. The Problem Is What People Assume They Prove.
+
+We have worked with UFED Cellebrite directly. It is excellent software. When it extracts data from a device, calculates SHA-256 hashes, and produces a signed report, it is accurately certifying exactly one thing: *these bytes were on this device at the time of extraction, and nothing changed in transit.*
+
+That is real. That is useful. That is the complete extent of what it proves.
+
+It says nothing about what was on the device before law enforcement touched it. It says nothing about whether the data reflects historical reality. The tool is correct. The tool is not a witness.
+
+We could take tools specifically built to handle Telegram chat exports — viewers, archivers, court-presentation wrappers — test each one against prepared export files, and produce a comparison table. We won't. The point isn't which tool catches what. None of them can. They process what the export contains. If the export was constructed before it reached them, they report the construction faithfully.
+
+A cryptographic signature certifies the integrity of data *from the moment of signing forward*. It makes no claim about what happened before. If the input was constructed before extraction, the report is cryptographically perfect and factually false. The tool reports both outcomes identically.
+
+### The Accountability Gap
+
+Imagine a jurisdiction where forensic equipment is procured through public tenders — versions, configurations, and acquisition timelines available in public records. Where no law requires devices to carry current firmware. Where expert witnesses bear no personal criminal liability before a court for their conclusions.
+
+In the United States and United Kingdom, a forensic examiner faces individual legal accountability for every action they take with evidence. That accountability — not the software — is what makes the evidence chain function. Remove it, and the same tool that serves justice becomes available to serve whatever purpose the license holder finds convenient.
+
+**Technical construction of pre-seizure device state**
+
+If a subject learns of an impending seizure with sufficient lead time — seven days is more than enough — panic responses are both counterproductive and, in some jurisdictions, separately criminal. A prepared subject with technical access and resources does something different: they construct a device state.
+
+**The firmware window.** Top-tier Samsung Galaxy S Ultra, Z Fold — Knox protection, locked bootloader. The gap between a security patch release and its availability for a specific regional device routinely reaches a month. For newly launched models the window in the first three to four months is considerably wider. No jurisdiction we are aware of legally requires current firmware on a personal device.
+
+**Service-level tools.** Commercial servicing software provides low-level device access during this window without triggering the Knox tamper indicators a forensic examiner would look for.
+
+**Timeline construction.** A full device backup deployed to an emulator, script-driven time manipulation and network isolation, allow construction of a desired event timeline: calls, messages, application activity, GPS coordinates.
+
+**Location without cellular exposure.** Cellular tower billing records are independently verifiable — don't touch them. Instead, connections to public Wi-Fi access points are logged. The MAC addresses of public infrastructure are systematically collected and distributed by major technology corporations. A continuous geographic chain covering any desired period can be assembled from publicly available data.
+
+**Account rotation.** Samsung account deletion takes approximately seven days for complete removal. A new account is created, the prepared backup is restored. No system integrity conflicts, bootloader untouched, no tamper flag triggered.
+
+**Telegram specifically.** On certain device families, the application database and cache — conversations, media, notification metadata, activity patterns — can be replaced at the OS capability level without classical root access. Deep analysis by specialists examining a full raw dump could potentially detect anomalies. That analysis is expensive, slow, and in our experience essentially never requested in standard proceedings.
+
+### Garbage In, Garbage Out
+
+The signed report is accurate. It proves nothing about what preceded the extraction.
+
+The chain that follows — expert witnesses reading the tool output, writing analyses, signing conclusions — is similarly accurate at each individual step. No one in the chain is lying. No one in the chain is proving historical truth. Each participant accurately reports what they received from the previous step.
+
+A doctoral degree is a record of completed past research. It is not a current competence certification, and it cannot make a mathematically unverifiable claim true. We propose a different standard: **trust the math, not the title.**
+
+### Zero Trust for Evidence
+
+In information security, "Zero Trust" means no actor is trusted by default regardless of position or credentials — every claim must be independently verified. We propose applying the same principle to digital evidence. Trust is a vulnerability. If a claim cannot be verified independently and mathematically, it is a trust claim — and trust can be misplaced, purchased, or coerced.
+
+For Telegram export evidence specifically: do not trust us, do not trust Telegram, do not trust the analyst, do not trust the expert witness. Verify the math.
+
+What that looks like in practice: TgWitness attestations reference the SLSA v1 Level 3 model — build provenance signed by GitHub Actions infrastructure, bound to a specific commit hash and workflow run. The attestation can be verified independently, without trusting any individual involved in the collection. It does not remove all trust assumptions — it documents exactly which assumptions remain, and what they are.
+
+**On expert witnesses and financial incentives**
+
+A lawyer representing one party in a dispute, presenting themselves simultaneously as a neutral third-party expert in the same proceeding, with compensation tied to their client's outcome: this is a structural contradiction. We are not making accusations about any individual. We are asking why this structure is considered acceptable, and why it is so rarely examined.
+
+The standard counter-argument: *how much would lying cost them?* In jurisdictions with right to erasure and right to be forgotten, the practical cost of pursuing expert perjury is frequently: very little. Those who raise concerns about an incorrect expert conclusion tend to receive legal correspondence requesting the concerns stop. That process is expensive for the person raising concerns. It is not expensive for the expert.
+
+We are not suggesting all expert witnesses are dishonest. We are suggesting that "it would cost them too much to lie" is not a proof standard. It is a trust standard. And trust is a vulnerability.
+
+A subject who wishes to challenge a TgWitness attestation would need to compromise the cryptographic signature, convince GitHub's signing infrastructure to retroactively attest something it never ran, and do so against an immutable commit history — with a witness present. If those capabilities exist and have merely been concealed beneath difficulty operating PDF software, we would genuinely welcome the demonstration.
+
+We are not claiming our tools are better — we do not have a commercial product and have no interest in one. We observed a problem: the widespread assumption that forensic software output equals historical truth, and that expert signatures equal proof. That assumption is rarely challenged at the technical level in the proceedings where it matters most. This experiment is one controlled data point. The math has no opinion about titles.
 
 No signing-console demonstration is claimed to appear in this recording.
 
@@ -2514,13 +2556,6 @@ A workspace with a session or an earlier completed setup does not get the wizard
 
 The size and time estimate reads up to three selected chats and up to 20 messages from each. It is an estimate: it does not predict Telegram limits, the speed of a given server or the files in every chat.
 
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```
-
 
 ---
 
@@ -2767,20 +2802,6 @@ Members share the group's settings; an account can keep its own values. See [sha
 
 **Account → Sign out of Telegram** (with observation paused) asks Telegram to end the session, so it also disappears from the account's **Settings → Devices**, and removes the session from the workspace vault. The journal, sources, settings and signing key stay, and the journal records the sign-out. The workspace still belongs to its account: only that account can connect to it again. If Telegram does not answer, the session is still removed here and the panel says so; end it in Telegram under **Settings → Devices**.
 
-## Convert a Telethon session offline
-
-The panel imports `.session` files directly. For an offline conversion to a StringSession file, run from the project folder:
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-The converter reads Telethon SQLite only (up to 64 MiB), never modifies the input, makes no network request and refuses to overwrite an existing output file.
-
 ## Keeping account files safe
 
 - Treat every `.session`, TData ZIP, StringSession, Auth Key and account JSON like a password. TgWitness keeps the imported authorization in its encrypted vault; you can remove the original files afterwards.
@@ -2956,8 +2977,6 @@ Private profiles and WARP account credentials are encrypted with the existing wo
 
 Uploaded WireGuard profiles must contain one Interface and one Peer, full IPv4 and IPv6 routes, and no hooks, includes, environment substitutions or extra listeners. Public endpoint addresses are resolved and pinned before startup. Use an external VPN or SOCKS5 gateway for OpenVPN/IPsec and private endpoints.
 
-The synthetic checks are `python tools/check_guided_connection.py` and `python tools/check_guided_connection_browser.py`. The optional `python tools/check_portable_routes_runtime.py` downloads verified helpers and tests their actual local process lifecycle against loopback fixtures. It does not register a Cloudflare device or use a Telegram account.
-
 ## Authentication methods
 
 **API ID and API hash identify an application; they do not replace account login.** They are optional in TgWitness. Precedence: a pair entered in the form, then one from an imported account JSON, then the pair saved in the workspace, then the built-in pool of 50 public pairs, tried in random order with automatic rotation when Telegram refuses one. Only the Telegram Desktop pair (2040) is sent with a matching Telegram Desktop client description. Your own pair from API Development Tools at [my.telegram.org](https://my.telegram.org) can be used with all of your accounts; each account still has its own authorization.
@@ -2994,8 +3013,6 @@ python -m tgwitness.sessions account.session --out account.tgwitness-session
 
 1. Under **Add account → Files**, load the result or paste its string, and continue.
 2. Check the displayed numeric account ID, select sources and start observation.
-
-The converter opens SQLite read-only, performs no schema upgrade or network request, and does not print the session. It checks schema version, table types, a single session row, IP/port/DC and key length. CLI input is limited to 64 MiB; StringSession text is limited to 4 KiB. Panel conversion uploads files to the authenticated TgWitness server, processes them in memory, and returns the normalized credentials to that browser without saving the uploaded originals. Use HTTPS for a remote server.
 
 **The converted file is an unencrypted account-access secret.** Keep it in protected storage and never commit it or send it to a third-party conversion service. TgWitness saves the authorized session in its encrypted vault. Copying a session does not create a separate authorization: do not run concurrent clients with cloned auth keys and assume independent update delivery.
 
@@ -3039,15 +3056,9 @@ The built-in list combines four sources: [SoliSpirit/mtproto](https://github.com
 
 While automatic routes are active, lists refresh hourly and transport checks run every ten minutes by default. These intervals are configurable. **Update public lists** requests a refresh; viewing the list alone does not change a saved manual route.
 
-Each feed response is limited to 1 MiB with an eight-second request timeout and a 20-second overall download deadline; redirects are rejected. Up to 64 compatible entries per source are retained and deduplicated. The parser accepts supported hexadecimal and base64url secrets and the JSON feed. Fake TLS `ee`, invalid links, private/reserved IP literals and local hostnames are skipped. Hostnames are resolved and checked before use, and the chosen IP is pinned for that connection. Automatic reacquisition resolves a hostname again; reapply a manual entry to resolve it again.
-
-Failed, empty or incompatible feed responses retain the previous source snapshot. Updates are atomic, serialized and limited to one attempt per minute per workspace. A successful transport probe establishes connectivity, not anonymity or capture completeness.
-
 **Telegram traffic and HTTPS requests use different routes.** List downloads use a separate HTTPS connection and the supplied external-request route. `TGWITNESS_PROXY_FEED_PROXY` explicitly overrides that route with an HTTP/SOCKS5 proxy; both collector Compose variants forward it. The background pool follows the main workspace. No Telegram session, API credentials, panel token or bot token is sent to feed providers. Provider names, snapshot dates and the download route appear under **Where the list comes from**.
 
 An MTProxy carries Telegram traffic only. Workspace HTTP operations such as timestamps, notifications, off-site copies and source checks use a separate SOCKS5/HTTP proxy when configured, then the account's SOCKS5/HTTP route. Without either, Hide the address refuses the request; the other modes permit Direct. External requests can be disabled. An explicitly configured feed-download proxy remains a separate operator override. The independent witness service keeps its own route.
-
-Public-only external HTTP requests through SOCKS5 or HTTP proxies resolve the destination with Cloudflare DNS over HTTPS at `https://1.1.1.1/dns-query`, through that same proxy. Only the hostname and A/AAAA query types go to the resolver; service URLs, credentials and notification contents are not included. TLS verifies the resolver certificate for its IP address. Both address families are checked, and any private, loopback, link-local or reserved answer rejects the request. Connections use a checked numeric address while retaining the service's original HTTP Host and TLS certificate name. Notification HTTP forwarding and CONNECT requests use the same destination checks. DNS failure stops the request without local destination DNS or a direct fallback. Successful answers are cached in memory per proxy route for at most 30 seconds and no longer than their DNS TTL; the cache is limited to 128 entries. The proxy hostname itself may use local DNS. SOCKS and CONNECT failures can try another checked address before sending the service request body. Plain HTTP forwarding reports a failed request without automatically replaying its body through another address.
 
 For operator-managed private services, the existing server environment setting `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` permits private destinations and keeps proxy-side hostname resolution. It cannot be enabled from the panel. Public-only mode rejects `.onion` destinations before querying the public resolver; Tor onion services require that explicit private-destination setting and a suitable proxy. This DNS behavior applies to external HTTP operations, not Telegram's transport. Cloudflare documents the [JSON DNS endpoint](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
@@ -3098,8 +3109,6 @@ SOCKS5 and plain HTTP CONNECT do not themselves encrypt proxy credentials or the
 
 **Storage protection** in Account shows these states. The panel token is an access secret, not an encryption password. It grants administrator access; [issued tokens](https://phishdestroy.github.io/TgWitness/docs/reference/access/) can be scoped to accounts and chats. Workspaces share the host process and are not isolated tenants.
 
-An explicitly started, isolated synthetic demo can open automatically over a direct loopback connection. This uses a separate process-lifetime capability; it neither reveals the configured panel token nor grants access to real workspaces. Remote, proxied or cross-origin requests cannot obtain/use this automatic-entry capability. This convenience does not remove the authentication boundary for real account data.
-
 BitLocker, LUKS, FileVault or a managed encrypted volume can protect storage under their respective threat models. An administrator of an unlocked running machine can still read data. Include SQLite WAL/SHM, media, temporary exports, swap, backups and browser downloads in storage planning. A Docker volume is not encrypted merely because it is a volume. TgWitness does not implement SQLCipher or object encryption.
 
 ## External master key
@@ -3127,20 +3136,6 @@ Each workspace receives a random public salt and its own Fernet key derived thro
 All workspaces derive from the same master key; its compromise affects the entire installation. The running process can decrypt secrets. This is not an HSM or password KDF. Arbitrary human passwords are not accepted in place of a random key.
 
 Keep the existing key for existing installations until a deliberate migration is implemented and verified. Deleting `vault.key` or replacing a master key can destroy access to sessions/signing keys. Keep encrypted backups and keys separately and test recovery in an isolated instance.
-
-## Sources and verification scope
-
-Reviewed on 26 October 2026:
-
-- https://core.telegram.org/api/auth
-- https://core.telegram.org/api/obtaining_api_id
-- https://docs.telethon.dev/en/stable/basic/signing-in.html
-- https://docs.telethon.dev/en/stable/concepts/sessions.html
-- https://core.telegram.org/mtproto/mtproto-transports
-- https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp
-- Telethon 1.45.0: SQLiteSession, StringSession, `Connection._proxy_connect`, `TcpMTProxy.normalize_secret` and download methods.
-
-Local tests cover loopback SOCKS5/HTTP CONNECT fixtures, synthetic SQLite sessions, route isolation, secret exclusion and missing-key refusal. They do not establish real Telegram/proxy interoperability or live MTProxy behavior. See [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) and [LIVE_ACCEPTANCE.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md).
 
 
 ---
@@ -3181,17 +3176,11 @@ Native installation needs Python 3.11 or later with `venv` and `ensurepip`, Inte
 - **macOS:** install a current Python 3.11+ distribution; do not assume an OS-provided interpreter meets the requirement. Use `python3 start.py` from the project directory.
 - **Docker:** use Docker Engine/Desktop with Compose v2.20 or newer. Docker Desktop must use Linux containers on Windows. The container installs its own Python dependencies; the host does not need a separate Python installation.
 
-Use persistent local storage for the data directory. Plan capacity from messages, media, WAL growth, exports and backups; there is no evidence-based universal minimum disk/RAM specification for every workload. CPU architectures and Python versions without compatible dependency wheels may require additional build tools and their own qualification. "Portable" is not a claim of universal OS or hardware support.
-
-Windows 11/Python 3.12 is locally verified. Linux/macOS/container definitions and CI are supplied but have not been executed on this development host. See [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) for the exact scope.
-
 ## Local computer
 
 Use `Start.cmd` on Windows or `sh start.sh` on Linux/macOS. `scripts\Setup.cmd` or `sh start.sh --setup-only` prepares the environment. The launcher installs dependencies on first use; later launches reuse the environment. Internet access is needed for setup and Telegram collection, but browsing existing records and creating exports work offline.
 
 Run `python start.py --check` after setup to inspect local dependencies, Ed25519, storage, key configuration and the listening address without starting a collector. Use `--json` for structured output. Pass the intended `--data-dir`, `--host` and `--port`. The check does not install packages, create a journal or connect Telegram; it is not an integrity or coverage qualification. Startup separately verifies existing journals. `python start.py --help` also avoids installation.
-
-Options:
 
 After using start.py, run auxiliary commands with `.venv\Scripts\python.exe` on Windows or `.venv/bin/python` on Linux/macOS, or activate that environment first. The `python -m ...` examples below assume the environment is active.
 
@@ -3220,8 +3209,6 @@ Build it yourself on 64-bit Windows with Python 3.12:
 ```
 python tools/build_portable.py
 ```
-
-The builder verifies the runtime checksum, installs the constrained dependencies into the package, runs the readiness check with the embedded interpreter and writes the ZIP and checksum to `dist/`.
 
 ## Container
 
@@ -3268,8 +3255,6 @@ docker compose logs witness                     # witness key fingerprint
 The service reaches the collector inside the Compose network at `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` overrides it, for example `/profiles/<workspace ID>` for another workspace). For a witness on a separate server, run by someone else, use `deploy/compose/compose.witness.yaml` there with `TGWITNESS_WITNESS_COLLECTOR` set to the collector's HTTPS address; that file contains only the witness.
 
 ## Install a published image
-
-This becomes available after a successful [release workflow](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/#automated-github-releases) and public GHCR package configuration. The repository's owner/name is not hardcoded into this source tree. Use the image shown in that release's workflow summary.
 
 Copy `deploy/env.example` to `.env`. Set `TGWITNESS_IMAGE` to the published version, using the **lowercase** repository path, for example:
 
@@ -3349,18 +3334,6 @@ Use your installation's Compose file(s) for the preceding stop/copy commands too
 
 Check panel access, account identity, observation state, and coverage after an update. Restarting does not reconstruct missed Telegram updates. A rollback may require the pre-update backup if a future version changes storage formats.
 
-## Automated GitHub releases
-
-The [release workflow](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) is ready to use after this project is pushed to a GitHub repository with Actions enabled. It runs when a GitHub Release is **published**, including a prerelease. Drafts and tag pushes alone do not publish packages.
-
-1. Set the package version and changelog, then publish a release tagged with `v` plus the exact `pyproject.toml` version, such as `v0.8.0`.
-2. The workflow validates the tag and runs the shared Windows/Linux/macOS Python, general/account-import/QR browser, source-package, and Docker checks. Fresh native installation is also exercised on all three operating systems using Python 3.12.
-3. After those checks pass, it smoke-tests an ARM64 image under QEMU, publishes AMD64/ARM64 images to `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, and attaches the source ZIP and Python wheel with their SHA-256 sidecars. The Windows portable ZIP is the exact artifact tested by the checks workflow; the release workflow downloads and publishes that artifact and its checksum.
-4. A final job downloads all three published packages again and verifies their checksums. It then publishes `SHA256SUMS.txt` and `RELEASE-MANIFEST.json`, recording the version, source revision and asset sizes. Uploads refuse to overwrite existing release assets.
-5. After the first publication, open the GHCR package settings and set visibility to **Public** if anonymous image pulls are intended. A public source repository alone does not guarantee a public container package. Organization policies must permit package publication. The workflow uses `GITHUB_TOKEN`; no registry password or VPS credentials belong in the repository.
-
-Remote workflow success has not been established by this local preparation. ARM64 emulation is a smoke check, not native-hardware or live Telegram qualification. This automates release packaging; starting a server still requires the Compose command and its domain/host prerequisites. Existing servers are not silently upgraded or restarted when a release is published.
-
 ## Remote server
 
 Keep the service bound to loopback and use an SSH tunnel, or terminate HTTPS at a reverse proxy. The base Compose file is local-only; the optional `deploy/compose/compose.https.yaml` overlay supplies Caddy for a configured domain. Keep the bearer token out of URLs and proxy logs. A reverse proxy should limit request size and connection rates. Do not expose plain HTTP to the Internet.
@@ -3391,15 +3364,7 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 Use `--profile ID` from **Exports → Workspace ID** for another workspace, `--format zip|jsonl|csv|html`, `--url https://your-server` for a remote server, or `--max-mib` to change the 5 GiB transfer limit. Plain HTTP is allowed only for loopback. Tokens travel in headers, redirects are refused, existing files are not overwritten, and incomplete downloads are not published as finished files. If TGWITNESS_TOKEN overrides the generated token, use a separately protected file containing that active value: panel-token.txt is not rewritten by the override. The command's SHA-256 is only a transfer checksum; independently verify the signed ZIP.
 
-Server export files remain inside each workspace's private `temporary-exports/`. Successful responses clean up their files. Interrupted exports are removed at the next workspace startup with its exclusive instance lock held. This directory is part of the storage threat/capacity model; use an encrypted data volume. Production-scale multi-gigabyte transfers still require qualification on your target system.
-
 The panel displays queued/failed media, oldest pending media, free disk, Telegram request pauses, and sources whose access is unconfirmed. These diagnostics are not a complete end-to-end delivery monitor. Workspaces share a process; a noisy account can still affect others. Separate worker processes, retention/rotation, durable update recovery and full deployment qualification remain. Scoped panel access is documented in [access and permissions](https://phishdestroy.github.io/TgWitness/docs/reference/access/); independent checkpoints are covered by the [witness guide](https://phishdestroy.github.io/TgWitness/docs/reference/witness/).
-
-## Connection and protection options
-
-Connection routes are per workspace and should be configured before authorization. SOCKS5/HTTP CONNECT use the pinned python-socks dependency. MTProxy uses Telethon's experimental randomized intermediate transport; Fake TLS ee secrets are unsupported. Direct fallback depends on the selected [IP mode](https://phishdestroy.github.io/TgWitness/docs/reference/connection/#ip-modes): **Hide the address** refuses it; **Direct as a last resort** permits it after a delay. **Server behind a tunnel or VPN** permits direct routes but does not create a VPN. This is not a system-wide network policy.
-
-For new installations, TGWITNESS_VAULT_KEY_FILE points to a separately protected random master-key file. Mount it read-only outside /data in a container. Preserve the public vault.external.json salt metadata with each workspace and the master key separately. Existing local vaults require a planned migration; setting this variable does not silently convert them. Message/media storage and exports are not application-encrypted. Use encrypted volumes and sufficient private temporary storage where needed.
 
 Detailed procedures: [connection/security](https://phishdestroy.github.io/TgWitness/docs/reference/connection/) and [operating modes](https://phishdestroy.github.io/TgWitness/docs/reference/operations/).
 
@@ -3655,26 +3620,12 @@ Gateway DNS covers the system resolver. DNS over HTTPS on port 443 to another re
 
 Cloudflare cannot see inside Telegram's encryption, other devices on the Telegram account (evidence mode's device list records them from Telegram's side) or the provider's hypervisor.
 
-On 1 November 2026 Gateway DNS ran against real Hetzner Cloud and a free Cloudflare account: Hetzner accepted the outbound rules, the server installed v0.7.0 with every lookup going through Gateway over TLS, the quick tunnel worked through that firewall, and `verify` read the server's 19 names back from Cloudflare (Ubuntu and Hetzner mirrors, GitHub, PyPI, NTP, the tunnel, ntfy.sh). The panel copied 36 queries in eight windows into a journal and `verify.py` summarised them without gaps; `destroy` removed the server and firewall and left the shared location.
-
 ## What this does not establish
 
 - The provider and its staff control the hypervisor, disks and network.
 - Host measurements are self-reported by the collector.
 - Earlier firewall rule contents are not in every provider log; only Linode keeps rule versions.
 - It says nothing new about message authenticity; see [Evidence](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/).
-
-## Tested here
-
-The deployment, lock and verification logic is covered by automated tests against simulated Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail and Cloudflare APIs built from their published API references, and the AWS request signing against AWS's published examples. `tools/check_cloud_wizard.py` runs the panel's server wizard the same way, with a domain and with a quick tunnel. `tools/check_tdx.py` verifies real Intel TDX attestations from dcap-qvl and dstack up to Intel's root certificate (sources in [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)); `tools/check_phala.py` runs deploy, verify, the journal, destroy and the panel wizard against a simulated Phala Cloud whose attestations come from a forged PKI shaped like Intel's. The Phala path has not yet been tried on Phala Cloud itself.
-
-On 1 November 2026 the quick tunnel path ran against real **Hetzner Cloud** (Nuremberg, `cpx22`, TgWitness v0.7.0), real ntfy.sh and GitHub, from the panel and from code:
-
-- the price check, then creation from the panel's buttons: server running after 13 seconds, signed statement with matching instance and installer hashes after about two minutes;
-- the server's own panel opened through its trycloudflare.com address and accepted the panel token; without the token it answers 401;
-- after a reboot through the Hetzner API the server posted a new signed address, **Find the current address** found it, the old address stopped answering, the signing key stayed the same; an unsigned post to an ntfy.sh topic was ignored;
-- `verify` against Hetzner's API: server, firewall without inbound rules, statement, binding, host measurements, boot and the source hash of a v0.7.0 checkout passed; the Cloudflare checks were unavailable, as described above; the installer differed from the one v0.7.0 builds and equalled byte for byte the one this version's code builds;
-- deletion from the panel removed exactly the server and firewall the deployment labelled; other servers and firewalls in the same project were untouched.
 
 Not yet run against real accounts: a deployment under your own domain (Cloudflare tunnel and DNS), the other providers, a debug deployment and `lock`, a Telegram account on such a server, and the live updates of later versions through a quick tunnel. Check the first deployment on each provider with `plan`, a debug deployment and `verify` before relying on it in a case.
 
@@ -4524,8 +4475,6 @@ The priority star controls these rechecks. Additional `updates.getChannelDiffere
 
 Arbitrary high-frequency polling, ignoring FloodWait or assuming linear capacity from extra accounts is not a valid sizing model. Default limits are the first 1,000 listed dialogs, up to 500 messages per history snapshot, 1–2,000 MiB per collected file by type, and 4 GiB uncompressed signed ZIP content; each is changed per workspace under **Parameters**. Exports have no fixed event-count cap. Browser fallback is bounded to 128 MiB by default; the streaming CLI has a configurable transfer limit, 5 GiB by default.
 
-`tools/check_capacity.py` measures local synthetic ingestion and export. Its results are not Telegram delivery measurements or a guaranteed real-chat count. See [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) for the measured version and workload.
-
 ## Reliability and recovery
 
 Implemented behavior includes SQLite WAL/synchronous transactions; atomic message and media-job writes; persistent jobs and retry delays; original-version descriptors; bounded retries; persisted media FloodWait; media downloads outside the text event's network wait; stable-prefix exports while later writes continue; atomic settings and audit records; preservation of working authorization after failed replacement login; isolation of a damaged additional workspace; explicit reconnect attempts; distinct authorization-loss reporting; and wall-clock change detection using a monotonic clock.
@@ -4944,15 +4893,6 @@ Signature and consistency verification can detect changes relative to a retained
 Use **Revoke** in the showcase manager or the existing **Access** section to close the link and end all its sessions. The visitor clears displayed records when a request detects that access has ended. Expiry and permissions are checked on every request. Showcase grants cannot be converted to ordinary panel access in place; create a new grant to change modes.
 
 Serve the page through the installation's existing HTTPS address. Publishing a link does not open a new port, create a tunnel or change DNS. The HTML and API remain on the user's installation. A showcase visitor cannot use the ordinary message, profile, media, export or management APIs with this access.
-
-## Local regression checks
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Both use synthetic records and a local HTTP server. They do not connect to Telegram.
 
 
 ---
@@ -5374,8 +5314,6 @@ The collector verifies journal signatures before generating every export format.
 
 Successful verification establishes integrity relative to the trusted collector key and retained boundary. See [verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) for the trust assumptions and [validation results](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) for the checks performed.
 
-Notifications sent through Apprise help operators follow workspace and chat activity. They contain names and counts; excerpts of deleted and edited messages are optional and off by default. Use the signed journal and exports for the retained record. With a workspace proxy, notifications use the same route; services that cannot use it, and MTProxy routes, are refused.
-
 ## Handover extract
 
 A signed ZIP carries the whole workspace journal. When a court, a lawyer or an abuse desk needs only some chats, a period or certain people, **Exports → Handover extract** prepares a minimised copy (`tgwitness-handover-v1`) according to the selected disclosure rules. The operator states the purpose and chooses the chats, an optional period (UTC), the people the extract is about, what happens to everyone else (shown, replaced by pseudonyms P01, P02… or left out), which message texts stay, which attachments and profile photos are included, and whether phone numbers and e-mail addresses in texts are masked. The purpose and these rules are in the signed manifest and in the report; the journal records `handover.exported` with the access that prepared it and the file's SHA-256, not the contents.
@@ -5403,19 +5341,11 @@ Each report names the program exactly: the git commit when the collector runs fr
 Extract the complete ZIP before opening `chat.html` or `report.html`. The viewer provides search, filters, participants, indicators, record details and JSON/CSV selections without a server. Keep `viewer/` and `media/` next to the report. Selections are derivatives: use `verify.py SELECTION.json
 --evidence ARCHIVE.zip` to compare them with the signed archive. The verifier checks the report ID, signing key, archive boundary and every selected item; edited, missing and duplicate items fail. Selection notes and creation time remain unsigned metadata.
 
-Current archive exports store viewer chunks in `viewer/*.html`. Each chunk is loaded in a sandboxed frame with scripts allowed but **without** same-origin access, and posts its JSON text to the report. The report checks the message source and its SHA-256 against the signed descriptor before display. The report's own CSP permits only its hashed application script. Missing data can be recovered by choosing the matching ZIP in the Check tab; data read from the ZIP is parsed without execution. Earlier exported reports keep their own embedded viewer and remain verifiable.
-
 Message-number gaps are shown only for a complete, unfiltered ascending chat feed. Hiding a category or failing to load a data chunk must not turn an omitted row into evidence of a missing message. Search highlights operate on plain text before HTML escaping, preserving literal markup.
 
 The browser checks manifest signatures, the report ID and key, and all listed file hashes. It rejects ambiguous or malformed ZIP structures, duplicate names and unsafe paths, and caps files at 256 MiB and declared total contents at 4 GiB. Use the standalone verifier for larger archives. This browser check complements the verifier's checks of journal chains and data semantics.
 
 `README.txt` contains a start guide, an aligned file inventory, verification instructions and data format notes in the report language, followed by a complete English guide. `SHA256SUMS` covers the files listed within it, excluding itself, `manifest.json` and `manifest.sig`; the signed manifest also covers `SHA256SUMS`. Keep the original ZIP unchanged and save working files outside the extracted folder. PDF reports include section bookmarks and case/report identification on later pages.
-
-Report settings are saved per workspace. The report language can follow the panel or be fixed; an explicit language on an export request overrides that choice for that export only. Every panel language is accepted, including the four right-to-left languages.
-
-The journal transcript switch controls its HTML viewer and PDF transcript. Full record JSON is an HTML detail option: when enabled, the viewer carries the exact exported record, including a minimised record in a handover. Disabling it does not alter the authoritative journal file. Photo previews apply to both chat and journal HTML. Consecutive heartbeat runs can be collapsed without removing records; expanding long runs loads their rows incrementally.
-
-`part_size` is the maximum item count per viewer data file (500–100000), and the maximum transcript size included in a PDF. Viewer chunks also split at a 16 MiB data budget. Longer PDF transcripts are omitted with an explicit pointer to the signed source files and HTML viewer. A standalone HTML report embeds at most 20000 items or 32 MiB of item data; once exceeded, it releases those items and directs the reader to the archive. These display limits never truncate the signed source files. The PDF font setup combines CJK fonts where needed: a Chinese font alone may lack Korean Hangul.
 
 ### The chat at export time
 
@@ -5531,8 +5461,6 @@ The off-site copy (Exports, off by default) uploads journal segments, preserved 
 
 Restore requires an empty ordinary directory. Downloads and decrypted objects stay in private temporary storage until the entire journal and every retained checkpoint verify. Unsafe object paths, inconsistent segment ranges and journals shorter than a checkpoint are rejected; failed verification publishes no restored files. Retention checks compare the returned Object Lock mode and date with the deadline sent at upload (one second of rounding tolerance). An expired, invalid or shortened deadline does not count as verified. The status reports the sampled object whose retention was read back for that upload pass.
 
-Copy progress is scoped to the destination and encryption key. Changing the endpoint, bucket or prefix starts a complete copy of the locally retained journal, media and checkpoints to that destination. Old unscoped progress is preserved but replayed once after upgrade. Historical chat exports already removed from the local outbox remain at their previous destination.
-
 Missing or corrupt local media is reported as the pass's error and keeps the media cursor before it, so the file is tried again next pass; the files, checkpoints and exports after it are still copied. Restore checks all preserved-media references against decrypted hashes and recorded sizes. Identical overlapping journal segments from interrupted uploads are deduplicated; conflicting overlaps are rejected. Checkpoints created during an upload are deferred until their covered journal records have been copied, so a completed pass does not publish a checkpoint ahead of its journal.
 
 ### Streaming export snapshots
@@ -5560,8 +5488,6 @@ Two more records can run on the same passes as the timestamps. Both are off by d
 **Telegram devices** (`account.devices`). Each pass reads the account's sessions with `account.getAuthorizations`, the list Telegram shows in Settings → Devices, and records it: in full when it changed since the previous pass, with the `added` and `removed` session hashes, otherwise only its count and SHA-256. Device model, platform, app and version, creation and last activity, country and region are kept; IP addresses are not, because evidence exports leave your hands. The collector's own session is active all the time, so only other sessions' activity counts as a change. `verify.py` reports how often the list was recorded and each new and ended session. It reads the list only while observation runs.
 
 What they do not show: drand proves no more than the order of records against public time, and the device list is Telegram's statement through the collector, signed by the collector like every other record.
-
-Tested on 1 November 2026: `tools/check_evidence_witnesses.py --live` wrote a real round from `drand.cloudflare.com`, exported the journal and confirmed the round with `drand.cloudflare.com` and `api.drand.sh`; the device list ran against simulated Telegram answers, not a real account.
 
 **Cloudflare Gateway log** (`cloudflare.gateway_dns`). For a server that resolves through Cloudflare Gateway ([Gateway DNS](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)), each pass copies what Gateway logged since the previous copy: one record per window of at most three hours with `from`, `until`, the `location_id`, the server's `address` when one is set, and the `queries` as `[at, name, type, rcode, decision, colo]`, also when there were none. Set it under **Cloudflare Gateway log**: account, location, optional address and a read-only token (Account Analytics Read; Zero Trust PII Read to keep one address of a shared location). The panel checks them with one request before saving; the token stays encrypted and never enters the journal. `verify.py` lists the windows, the names looked up most and any time no copy covers; a record whose count does not match its queries fails. A window that holds more than one page of queries in a single second keeps that page and says the rest is missing. The copy is Cloudflare's answer through the collector, signed by the collector; within 24 hours anyone with a read-only token can compare it with Cloudflare.
 
@@ -6148,225 +6074,6 @@ One real Telegram account, signed in through the built-in API pair pool, recorde
 
 Not covered by this test: several accounts at once, administrator roles, proxies, outages longer than a few hours and the full [live acceptance procedure](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md). Public files contain only these counts: no account or chat identifiers, messages or credentials.
 
-Older entries below describe their own runs; most of them used synthetic test clients. The latest automated results are below.
-
-## Built-in public MTProxy lists · 29 October 2026
-
-This is the historical test record of the original manual-selection build. For the current automatic pool and IP modes, see [connection settings](https://phishdestroy.github.io/TgWitness/docs/reference/connection/#ip-modes). Counts and unsupported features below belong to that tested revision.
-
-Added a bundled public snapshot and explicit HTTPS refresh from SoliSpirit/mtproto and zakky8/mtproto-proxy-pro. On this host, the application downloader fetched both feeds successfully on 29 October 2026 at 12:58 UTC: **118 unique compatible endpoints** after filtering, deduplication and the 64-entry limit per source. This verifies list retrieval, not connectivity or message delivery through those endpoints. No real account was connected to a listed proxy during this work. [Operator and user guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md).
-
-Failed/empty/incompatible source responses retain previous entries and dates. Updates do not alter the selected route. Public addresses are validated and resolved IPs pinned on selection; operator/manual routes remain separate. The connection probe is now available in the panel before account login. Fake TLS ee and automatic proxy selection remain unsupported. The operator's catalog overrides subscriptions completely.
-
-- Full suite: **366 passed, 3 skipped**, 287.94 seconds. Existing dependency warnings and platform skips remain. Final public-list/localization regression: **36 passed**, including rejection of invalid download-proxy ports; this overlaps the full suite.
-- Browser acceptance passed in English/Russian, light/dark at 390/1440 pixels: bundled choices, no external fetch on opening settings, explicit refresh, retained routes and cache during failures, pre-login probe, late-response workspace isolation, source details and layout/contrast. No JavaScript errors or external browser requests.
-- Final static translation coverage passed for all 13 locales; new copy is translated into Russian with explicit English fallbacks elsewhere. The updated built-in guide passed layout/contrast checks in both themes.
-- Ruff and publication checks passed (259 public files, 1,354 local links); updated Compose and CI YAML parsed. Docker and remote CI were not executed here.
-- The rebuilt wheel passed isolated installation, bundled-list loading and signed-export verification. All 69 package resources matched the workspace; source hashes were checked.
-
-Receipts: `test-results/public-proxy-research/download-receipt.json`, `test-results/public-proxy-research/copy-receipt.json`, `test-results/public-proxies-full-suite.log`, `test-results/public-proxies-final-focused.log`, `test-results/public-proxies-browser/receipt.json` and `test-results/public-proxies-package.log`. Browser/account/transport fixtures are synthetic; the two feed downloads above are real HTTPS requests.
-
-## Optional extras presentation · 29 October 2026
-
-The former Proof bot destination is now **Extras**: a short overview followed by a separate setup page for the selected option. The witness form has three steps, with connection management, network options and deployment details folded away. GitHub is explicitly planned and has no credential form. [Overview of Extras](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#extras).
-
-- 30 focused tests passed for localization, witness setup and publication checks.
-- Chromium setup acceptance passed in English/Russian, light/dark, at 390/1440 pixels: keyboard focus and return, no implicit connections when selecting extras, draft retention, pinned configuration/token downloads, token clearing on lock, and working local guide anchors. Layout and solid-background text contrast checks passed.
-- Workspace-switch acceptance passed, including a delayed token response arriving after a switch. Quick navigation finds the extras through bot, proof and GitHub terms; its existing 320/390/1440-pixel and Russian/RTL checks also passed.
-- No JavaScript errors or external browser requests were observed in the setup run. These are synthetic UI checks, not new live Telegram or bot publication evidence.
-- Final language loading and dictionary coverage passed for all 13 locales, preserving explicit English fallbacks outside Russian. The expanded Proof guide also passed layout/contrast checks at 320/768/1440 pixels in both themes.
-- The rebuilt wheel passed isolated installation and signed-export verification. All 67 packaged resources matched the workspace; the source archive contains 253 public files. Source/link checking passed for 1,346 local documentation links.
-
-Receipts: `test-results/setup-browser/receipt.json`, `test-results/quick-navigation/receipt.json`, `test-results/extras-final.json`, `test-results/extras-package.log` and `test-results/extras-artifacts.json`. Screenshot assets use synthetic workspaces.
-
-## Witness bot and proxy setup audit · 29 October 2026
-
-The witness setup (now **Extras → Independent witness**) prepares an independently deployed witness: pinned collector key, scoped token download, own channel, publication policy, HTTP/SOCKS5 route and custom Bot API. The bot token remains on the witness host. Its new `--check-config` validates configuration and files without opening a network connection or creating a key. JSON file paths resolve beside the configuration. All Compose witness variants now forward the HTTP proxy and Bot API settings.
-
-Account settings support an operator-managed public MTProxy catalog, custom Telegram proxy-link preview and the existing manual fields. Catalog responses omit secrets; selection stores the route in the workspace vault. Missing/malformed catalogs leave manual routes available. No project proxy addresses or hosted witness service are invented or enabled by default. A Caddy example exposes only the scoped head endpoint when an external witness must reach a collector whose panel stays private.
-
-Validation:
-
-- Full suite: **348 passed, 3 skipped**, 195.81 seconds. Windows limitations account for the skips; the two existing dependency deprecation warnings remain.
-- Final witness/configuration/release regression run: **11 passed, 1 skipped**. This overlaps the full suite. Tests include path resolution, offline preflight, signing/publishing through an actual loopback HTTP Bot API fixture, recorded delivery failure, channel-token verification and proxy-secret exclusion.
-- Chromium setup acceptance passed in English/Russian at 390/1440 pixels: pinned config and token downloads, token clearing on lock, catalog selection, custom-link preview followed by explicit save, layout/contrast and no JavaScript errors or external browser requests. Corrected narrow Russian account-heading and login-tab overflow.
-- Ruff, source/link checks and Compose/workflow YAML parsing passed.
-- The rebuilt wheel passed isolated installation, panel/static resource and API-auth checks, plus independent verification of direct and streamed 32-event synthetic exports.
-
-Receipts: `test-results/setup-full-suite.log`, `setup-final-focused.log`, `setup-browser/receipt.json`, `setup-browser-final.log` and `setup-package.log`. These checks use synthetic accounts/proxies and a local Bot API fixture. They do not claim a real bot publication, working public MTProxy server, remote CI run or Docker deployment. The retained real Telegram observation history above remains a separate piece of evidence. [Setup instructions](https://phishdestroy.github.io/TgWitness/docs/reference/witness/#run-a-witness).
-
-## Presentation and documentation review · 29 October 2026
-
-The product page, access screen, English/Russian READMEs and presentation images now share one visual style. Public screenshots use fictional demo data. The review also corrected the outdated live-validation and recovery descriptions above.
-
-- Focused localization, site and publication tests: **33 passed, 1 skipped**. The skipped test requires symlink creation unavailable on this host.
-- General Chromium panel acceptance passed, including all language catalogs, RTL layout, light/dark themes, solid text contrast and workspace switching. The profile-creation check now waits for its actual HTTP response before checking the selected workspace.
-- English/Russian access screens passed layout and contrast checks in both themes at 320, 390, 768, 850 and 1440 pixels; the submit button stays in the initial viewport.
-- Public-site acceptance passed at 320, 390, 768, 1024 and 1440 pixels, including message history controls, screenshot enlargement/Escape/focus return, keyboard tabs, clipboard refusal, project subpaths, reduced motion and the no-JavaScript fallback. No failed asset requests, external requests or JavaScript errors were observed.
-- The rebuilt wheel passed an isolated installation check: panel resources and locales load, API access requires authentication, and direct/streamed exports independently verify all 32 synthetic events. Ruff and public-source/link checks passed.
-
-Local receipts: `test-results/design-tests.log`, `design-panel-final.log`, `design-review-final.log`, `design-site.log`, and `design-package/install-receipt.json`. The full backend suite was not rerun for this presentation/documentation change; its preceding result remains in the pre-publication audit.
-
-## Version 0.6.1
-
-0.6.1 changes the panel presentation, launchers, packaging and documentation; collection, storage, signing and export code is unchanged. On Windows 11 / Python 3.12.10 with the pinned runtime:
-
-- The full suite passed **137 tests** with **2 skips** and the existing Starlette warning. New tests cover the launcher's Ctrl+C handling (the server gets 30 seconds for an orderly stop) and actionable setup-step failures.
-- Chromium (headless shell 156) passed all **45 general scenarios** and **35 account-import/QR/Auth Key scenarios**, including the solid-text contrast check, no horizontal overflow at 320–1440 px and visible first login fields at 320/390 px. No page JavaScript errors or external requests were observed.
-- `python start.py --setup-only` reinstalled the package as 0.6.1 and `python start.py --check` reported ready. A real `python -m tgwitness --demo` server returned the panel, stylesheet, script, logo, guide and `/api/status` version 0.6.1; the removed `workspace.css` returned 404.
-- `Start.cmd` found a Python installation outside PATH. With no Python available it showed the installation offer; declining printed manual instructions and exited 1. The python.org download step fetched the 3.12.10 installer and passed the Python Software Foundation Authenticode check; the installer itself was not run on this host.
-- `start.sh` without any Python printed the install hint and exited 1. `scripts\Docker.cmd` and `scripts/docker-start.sh` were exercised against fake `docker` executables: correct call sequence, panel address and token output, and no success message after a failure.
-- `python tools/build_portable.py` built an 18.8 MiB Windows package after verifying the pinned embeddable-runtime checksum. Extracted to a path with spaces and started with only `C:\Windows` directories on PATH, its embedded Python passed `TgWitness-Check.cmd`, served the demo (32 events) and a live workspace, and Chromium rendered the journal and detail drawer without JavaScript errors. Data was written to the package's `data` folder.
-- `python tools/build_preview.py` produced a 110-file source archive. A dry-run of `git add` listed the same 110 files with no session, key, database, token, log or export files, no local absolute paths and no secret-shaped strings.
-
-Not executed in this particular 27 October packaging run: the automatic Python installation itself, Docker build/Compose checks, Linux/macOS runs or a new live-account exercise. Real Telegram evidence is recorded above and in the earlier account checks below. CI definitions alone do not qualify platform execution.
-
-## Version 0.6.0
-
-The latest full pinned-runtime suite on Windows 11 / Python 3.12.10 passed **135 tests**, with **1 skip**, in 26.53 seconds and the existing Starlette warning. The skip requires POSIX permissions. After adding the QR renderer to readiness checks and process measurements, 8 affected readiness/workspace checks also passed.
-
-New coverage includes Telethon schemas 7/8, Pyrogram schemas 2/3, complete JSON keys and metadata-only JSON, matching/conflicting account files, TData passcodes, checksum tampering and unsafe paths, offline/authenticated in-memory conversion, online account-ID checks, QR success/2FA/expiry, stale cancellation, and account isolation. TData fixtures use a separate AES-IGE implementation for encryption.
-
-Chromium passed **45 general scenarios** and **35 account-import/QR/Auth Key scenarios**, with no page JavaScript errors or external requests observed. New browser checks cover all four input formats together, protected TData, API metadata, QR rendering, expiry/retry, 2FA, wrong-account rejection, lock/workspace cancellation, responsive layout, and late conversion responses after a newer file selection.
-
-Both browser suites passed again after the account-entry changes. Live setup opens the account form; demo mode opens its sample journal. The demo Account page shows live startup instructions and hides credential inputs. Focused checks at 320, 390, and 1440 pixels confirmed the number field and primary button fit without scrolling and API fields are initially collapsed, and text contrast remains readable. Capture and verification controls remain covered after opening their new expandable sections.
-
-The direct Auth Key flow was exercised with synthetic credentials through the real import and authorization endpoints. Checks cover incomplete keys, missing DC, imprecise User IDs, mismatched account identity, saved API credentials, visible request progress, secret clearing, and late responses after edits or method changes. All four sign-in methods were checked at 320, 390, and 1440 pixels. The file picker precedes format guidance, and the Connect button fits the initial 844-pixel viewport with API settings collapsed. No real Auth Key authorization was attempted in this UI acceptance run.
-
-The panel refresh was checked again with both browser suites: no page JavaScript errors or external requests were observed. The account suite now covers pasting one API ID/hash pair, rejecting malformed or multiple pairs without replacing fields, metadata-only guidance, and ignoring stale import responses after a sign-in method change or manual credential edit. Six additional focused checks passed for the setup guide, explicit start/pause, empty-search recovery, and final connection/local-guide layout and solid text contrast at 320, 390, and 1440 pixels. The direct-login update adds a single phone/code-request operation and reuses the current workspace's saved API pair for phone, QR, and session login. The full Python suite above includes new persistence, partial-credential rejection, and workspace isolation tests. Browser checks cover direct phone entry, saved-credential reuse, metadata-only routing, one-button file authorization, and duplicate-account rejection. The simplified panel-token and phone forms were also checked without initial scrolling at 320, 390, and 1440 pixels. A compatibility check confirmed the direct phone form can use the earlier configure/code endpoints while an older process is still running.
-
-One user-supplied account was checked separately, outside public test fixtures. Its Telethon, Pyrogram, and TData inputs resolved to the same authorization; the companion JSON supplied API credentials. All four files were loaded through the 0.6.0 panel and Telegram confirmed the expected numeric account ID. Source files remained unchanged. No sources were selected and observation remained off. This qualifies one import/login example, not live collection, recovery, or capacity.
-
-Telegram also issued a real QR token, which was cancelled without scanning. The full QR confirmation and 2FA flows were exercised with synthetic clients; mobile confirmation against a real Telegram app remains a separate acceptance step. No real account identifiers, secrets, or screenshots are included in public files.
-
-The launcher upgrade completed; source, installed metadata, and readiness marker report 0.6.0, with qrcode 8.2 and a passing `pip check`. The installed wheel served the panel and guide, rejected unauthenticated API requests, and independently verified direct and streamed 32-event synthetic exports. The updated offline guide was checked at 320, 390, and 1440 pixels. Public screenshots remain synthetic.
-
-The source release contains 107 allowlisted files. Local documentation links resolve. Docker/Caddy execution, remote CI/package publication, ARM64 runtime, sustained collection, and the full live Telegram acceptance matrix remain unqualified here.
-
-## Version 0.5.1
-
-On Windows 11 / Python 3.12.10, the full project-environment suite passed: **94 passed, 2 skipped**, in 31.21 seconds, with the existing Starlette warning. The skips require POSIX permissions and symlink creation unavailable on this host. The download HTTP fixture printed a request-thread diagnostic; all assertions passed. This run does not establish absence of host transport issues.
-
-New regression coverage exercises rejected StringSession, code and 2FA account changes, cancelled identity lookup, pending login cancellation, and updates through registered handlers on active, rejected, superseded and probe clients. Only the active collector contributes events; saved credentials and signed history remain intact. Other new checks cover Unicode search after reopening a database, inclusion of monitoring-policy boundaries in Coverage, and public-source packaging exclusions.
-
-The actual project `pythonw.exe` launched an isolated synthetic panel, returned HTTP 200 and retained startup diagnostics in `logs/server.log`. The log did not contain the generated panel token or HTTP access records. The test terminated only its own synthetic process. No Task Scheduler task was registered; logon/sign-out, sleep and service recovery remain separate qualifications.
-
-Chromium acceptance passed **45 scenarios**, with no page JavaScript errors and no external requests observed. New checks cover 601/768/850-pixel timeline dates and times, attachment drafts across status refresh, newer edits made while saving, cleared verification results on account switch, late verification responses after switching away and back, and explicit verification boundaries when new events arrive. The search icon/text spacing was also corrected and the browser suite rerun.
-
-The browser run used the pinned runtime in `.venv` and the existing system-provided Playwright 1.62.0/Chromium, appended after the project environment on the import path. An optional development-dependency install was stopped during a slow Playwright download; no new browser-tool version was qualified. A normal `python start.py --setup-only` completed the application upgrade. Source, installed metadata and the launcher's marker report 0.5.1; `pip check` passed. Readiness checks passed on a fresh unused path, retaining the expected local-vault-key warning.
-
-The 0.5.1 wheel was separately installed and smoke-tested: all panel/guide assets were served, unauthenticated API access was rejected, and both direct and streamed 32-event evidence ZIPs passed independent verification. The application files in the installed package were compared against source. The public source archive uses an explicit file-type allowlist and refuses linked source files; runtime material placed inside source directories is excluded by regression tests.
-
-During the code-fix run, the public-source selection and Git candidate set contained 86 files, with no runtime data directories included. A scan for recognizable private-key, GitHub token, Telegram bot-token and StringSession patterns found no matches. This is a bounded pattern check, not a comprehensive secret audit. Ignore-rule probes cover twelve common account/data/export artifacts. Workflow/issue/Compose YAML and the Windows task script parsed successfully. Local documentation links resolve.
-
-All seven findings from the 27 October review are addressed. GitHub workflow execution, Linux/macOS/Docker runtime, real Telegram, outside proxy/TSA interoperability and sustained-load qualification remain outside this local run. No repository publication, service registration or real-account collection was performed.
-
-### English documentation update
-
-The README, account/session reference, collection workflow, and bundled guide now describe supported inputs, workspace behavior, event policies, and export formats in English. The three public screenshots were refreshed using synthetic data. At that point, the public-source selection contained 88 files, including the two new guides. All 131 local links across 23 Markdown documents resolve.
-
-After the interface and guide edits, Chromium acceptance again passed all 45 scenarios, with no page JavaScript errors or external requests observed. The full Python suite was not rerun for this documentation and presentation update; the 94-pass result above belongs to the preceding code-fix run.
-
-The rebuilt wheel was installed into a fresh isolated target. Its panel and guide assets served successfully, unauthenticated API access was rejected, and both direct and streamed exports passed independent verification of 32 synthetic events.
-
-### Installation and deployment update
-
-The focused installer, packaging, and readiness checks passed **14 tests**, with one skip for unavailable symlink creation. Native wrapper checks cover paths with spaces, argument forwarding, setup/demo modes, and nonzero exit propagation. Git Bash checks exercise the Docker shell helper with a simulated daemon, including missing Docker, missing Compose, failed health wait, and a successful alternate-port startup. These simulated checks do not establish Docker runtime compatibility.
-
-A complete public-source copy was installed into a new Windows directory whose path contains spaces. `scripts\Setup.cmd` created a fresh environment and installed the pinned runtime; `Start.cmd --check --json` reported ready without creating its target data directory. `pip check` passed. The rebuilt wheel also passed the installed-package check, including direct and streamed 32-event exports.
-
-Shell syntax and five workflow/Compose YAML files parsed. Source and image Compose configurations agree on storage and runtime settings. At that stage, all 139 local links across 23 Markdown documents resolved. The public-source selection contains 99 files.
-
-The CI definitions now exercise fresh native setup on Windows/Linux/macOS, Compose health/access control/persistence across container recreation, and Caddy configuration. The release workflow gates publication on those checks and adds an emulated ARM64 smoke check. Docker is unavailable on this host: actual Compose/Caddy execution, certificate issuance, ARM64 execution, and remote workflow/package publication remain unqualified locally. The application/UI code was unchanged by this update; the earlier full Python and browser results were not rerun.
-
-## Version 0.5.0
-
-The full pinned-runtime suite passed: **81 passed, 1 skipped**, in 22.00 seconds, with the existing Starlette warning. The POSIX permissions check is skipped on Windows. The new handler tests send messages, edits, scoped/unscoped deletions, reactions, participant updates and membership service messages through different policies. Disabled categories produce no corresponding live observations; coverage diagnostics and explicit snapshots remain available. Tests verify persisted policy, workspace separation, signed before/after audit records, unchanged-policy behavior, strict validation and inclusion in the next process receipt.
-
-Demo entry tests verify that its capability differs from the configured panel token, cannot authorize a live workspace, cannot change collection settings, and is not issued or accepted for remote, forwarded, cross-origin or invalid-Host requests. Opening a stored demo without the explicit demo flag does not enable automatic entry.
-
-Chromium acceptance passed **39 scenarios**, including local demo entry without token input, monitoring presets, the transition from source selection to policy, per-account independence and desktop/320/390-pixel layout and text contrast checks. There were no page JavaScript errors. The host's AdGuard-injected requests remain in the receipt. The download HTTP fixture logged a connection reset after a client closed its connection; assertions still passed. This is not a live-service result.
-
-The normal launcher upgraded the isolated environment to 0.5.0; source and installed versions match and pip check passed. Existing secret-vault encryption, wrong/missing key refusal and signature/media tamper checks passed in the full suite. No new application encryption of message content or attachments is claimed.
-
-The local demo is restarted to make the updated UI available. Existing synthetic records are retained; stopping the old background demo process creates an offline boundary on the next startup. No real Telegram session is used for these checks.
-
-The running localhost:8787 panel returned version 0.5.0, automatic demo access, the five monitoring controls and 33 retained synthetic journal events. The separate installed 0.5.0 wheel served all panel/guide assets, rejected unauthenticated API access, and produced a verified 32-event ZIP both directly and through the streaming download helper. Runtime package versions remain pinned as recorded for 0.4.
-
-## Version 0.4.0
-
-The full pinned-runtime suite passed: **78 passed, 1 skipped**, in 19.77 seconds. The skipped check requires POSIX permissions; the upstream Starlette TestClient deprecation warning remains. New tests cover streamed download/workspace routing, authorization headers, refusal to overwrite, redirects, truncated responses, advertised/actual size limits, bounded reads, cleanup, filesystems without hard links, readiness failures and launcher modes that must not install packages. Export tests confirm workspace-local temporary files and selective orphan cleanup.
-
-Chromium acceptance passed all 36 listed scenarios with no page JavaScript errors. It exercises mock phone/code/2FA login, converted sessions, two workspaces and separate routes/states, observations, signatures, checkpoints and timestamp requests, plus:
-
-- Desktop and 320/390-pixel layouts, no horizontal overflow, visible navigation, and the first login field within the initial 844-pixel viewport.
-- Solid-background text contrast at WCAG AA text thresholds. Disabled controls, opacity and image/gradient backgrounds are excluded; this is not a full WCAG audit.
-- A real local export response written through a mocked OS file picker/writable, followed by independent ZIP verification; cancellation sends no export request.
-- Writable failure aborts the destination; the 128 MiB fallback rejects an oversized advertised response without allocating a matching payload.
-- The English local guide on desktop and both narrow widths.
-
-The OS save dialog and actual multi-gigabyte browser writes were not automated or qualified. Python download tests use bounded chunks and loopback fixtures. Full deployment acceptance with real Telegram remains separate.
-
-The normal installer upgraded `.venv` to 0.4.0. Source and installed metadata agree; `pip check` passed. `python start.py --check --json` reported ready on a fresh synthetic path without creating the data directory. Its local-key storage warning correctly remains: journals/media are not encrypted by the application.
-
-The 0.4.0 wheel was built and installed into a separate directory. All 23 application files match the source byte-for-byte. The installed package served the panel and English guide/assets, rejected unauthenticated API access, and exported a synthetic 32-event ZIP that passed verification. Its streaming download command also fetched an independently verified ZIP from the running installed application.
-
-Public documentation and the local guide are English; local documentation links resolve. PowerShell parsed the Windows task template and Python parsed the macOS plist. These are syntax checks, not service execution. No task/service was registered. The CI configuration now includes readiness checks but remote CI has not run here.
-
-The 0.4 browser run again observed host AdGuard injection and Windows asyncio socket-cleanup OSError 10022. Browser assertions passed; these environmental observations are retained rather than treated as fixed application behavior. Initial OpenSSL/browser/pip sandbox attempts failed; the successful qualifying runs used approved execution outside the sandbox.
-
-## Version 0.3.1 focused readiness fixes
-
-The affected launcher, evidence/storage and API checks passed: **31 passed, 1 skipped**, one upstream Starlette warning. The skipped check asserts POSIX directory permissions and cannot establish those permissions on this Windows host. The old-Python test simulates the version/import boundary; no Python 3.10 interpreter was installed or qualified. The previously passing 0.3 suite is recorded below; the entire suite and browser scenarios were not rerun for these focused changes.
-
-The normal launcher upgraded the local environment to 0.3.1; source and installed metadata agree, and pip check passed. A separately installed 0.3.1 wheel served the panel/assets, rejected unauthenticated API access and produced a verified 32-event synthetic export. Workflow YAML parsed, but the new container runtime check was not executed: no usable local Docker/Podman/Linux runtime was available.
-
-See [readiness findings](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md) for remaining usability, live-service and platform gaps. This patch does not qualify additional operating systems.
-
-## Version 0.3.0
-
-The full pinned-runtime suite passed: **61 tests**, with one upstream Starlette TestClient deprecation warning. Runtime metadata reports TgWitness 0.3.0 and python-socks 2.8.2; pip check passed. The browser acceptance run passed with no page JavaScript errors.
-
-The 0.3.0 wheel was built and installed into a separate package directory. It served the panel and assets, rejected an unauthenticated API request, and exported a 32-event synthetic journal that passed independent verification. Local documentation links resolve. After the MTProxy bare-key normalization correction, all nine connection/security tests were rerun successfully.
-
-New coverage includes:
-
-- SOCKS5 username/password and HTTP CONNECT through actual loopback test servers; a dead configured proxy fails rather than falling back to the destination.
-- Proxy validation, MTProxy transport selection, rejection of Fake TLS ee secrets, persistence, workspace isolation, rejection of changes while observing, and secret exclusion from API status and signed events.
-- Read-only conversion of synthetic Telethon SQLite schemas 7 and 8; unchanged source hash; rejection of other formats, SQL views, and an outstanding WAL file.
-- External vault master key: different derived workspace keys, successful reopen, wrong/missing key rejection, and no implicit migration of existing local vaults.
-- Browser proxy settings, credential clearing, storage-protection disclosure, mobile connection page, converted-session file authorization, separate routes, and all previously covered collection/export scenarios with a fake Telegram client.
-
-During development a loopback test waited indefinitely for peer shutdown; another run observed a Windows connection reset after the handshake. The fixture now bounds the entire exchange and treats EOF/reset after a completed handshake as connection closure. Handshake/authentication assertions remain required. This does not qualify real proxy providers or imply a fixed Telegram transport defect.
-
-The host AdGuard request observation described below still applies. No real Telegram account, outside SOCKS/HTTP proxy, or live MTProxy server was used. MTProxy is experimental and its selected options/secret validation have been checked, not live interoperability. New external-key and session conversion commands were tested with synthetic secrets only. Linux/macOS/Docker remain unqualified here.
-
-The 0.2 throughput measurement below was not repeated and must not be presented as a new multi-account/proxy benchmark for 0.3.
-
-## Version 0.2.0 baseline
-
-Checked on Windows with Python 3.12.10. No real Telegram account was connected.
-
-| Check | Result |
-| --- | --- |
-| Python suite | 52 passed in the development environment and 52 passed with the pinned runtime; one upstream Starlette TestClient deprecation warning in each run |
-| JavaScript syntax | Passed with Node.js |
-| Chromium acceptance | Passed; no page JavaScript errors |
-| Desktop/mobile layout | Checked at 1440 × 1060 and 390 × 844; no horizontal document overflow |
-| HTML-shaped message content | Rendered as text; injected script did not execute |
-| Mock account flow | API credentials → phone → code → 2FA → select group → start → snapshot → pause → reload |
-| Evidence in browser | Edit comparison, prior content after deletion, filters, ZIP download, checkpoint, signed process receipt, RFC 3161 request download and checkpoint binding |
-| Multi-account | Separate journals, keys, sources and live states; browser switch leaves the other collector running; workspaces reopen after restart; duplicate account and account reassignment rejected |
-| Cryptographic failures | Changed signed fields, added unsigned fields, wrong key, corrupt archive member, changed/missing media, checkpoint-detected truncation rejected |
-| Storage | Concurrent appends verify; update/delete triggers reject; startup refuses a changed journal without appending and releases its lock |
-| Media durability | Atomic message/job writes; restart recovery; original version descriptors retained; queue substitution and existing-file corruption rejected; FloodWait persisted; source failures isolated |
-| Streaming | Stable prefix exported while new records append; retained checkpoint detects truncated journal; export does not materialize the entire event stream |
-| RFC 3161 | OpenSSL 3.5.9 reads generated requests; locally generated synthetic CA/TSA response accepted; altered data, nonce and wrong CA rejected; ambient CA environment does not override explicit trust |
-| Local setup | start.py --setup-only upgraded the isolated .venv to 0.2.0; source and installed metadata agree; pip check passed |
-| Wheel | 0.2.0 built and separately installed under test-results; served panel/assets, rejected unauthenticated API, exported and verified a 32-event synthetic archive |
-
-The source tests used FastAPI 0.159.1, Uvicorn 0.54.0, Telethon 1.45.0, cryptography 50.0.2, pytest 9.1.1, and Playwright 1.62.0. The pinned runtime uses FastAPI 0.162.0, Starlette 1.10.0, Uvicorn 0.54.0, Telethon 1.45.0, and cryptography 50.0.2. deploy/constraints.txt records runtime version pins; deploy/requirements.lock and deploy/build.lock add the SHA-256 of every package file, and Docker and high-assurance servers install only from them (pip --require-hashes). Neither is evidence of compatibility on every configured CI platform. Remote CI has not run.
-
 ## Synthetic local capacity measurement
 
 Command: `python tools/check_capacity.py --events 10000 --chats 100`
@@ -6384,16 +6091,6 @@ Command: `python tools/check_capacity.py --events 10000 --chats 100`
 
 This measures the local serial recording/export path on this Windows host. It does not measure MTProto delivery, concurrent accounts, Telegram throttling, media, a long-running workload, or a guaranteed number of real chats. The measurement predates the final offline timestamp tooling, which does not change the measured message path.
 
-## Environmental observations
-
-Windows sandbox restrictions blocked the default pytest/pip temporary directories and the Playwright subprocess. Pytest used a new temporary directory inside the project; installation and browser processes required approved execution outside the sandbox.
-
-The machine's AdGuard injected requests to local.adguard.org into the browser. The browser receipt retains those requests. This run is **not** evidence of zero outbound requests in an unmodified browser environment; the app source itself contains no external asset/CDN/analytics requests. AdGuard settings were not changed.
-
-The final browser run also logged a Windows asyncio socket-cleanup OSError 10022. All browser assertions passed and no page JavaScript errors occurred. Its cause was not established and this run does not demonstrate absence of host transport issues.
-
-The first installed-package HTTP probe using urllib's connection-close requests encountered connection resets, both inside and outside the sandbox and with both dependency sets. The final probe used standard HTTP/1.1 persistent connections via http.client and passed. Browser requests also passed. The precise origin of the resets was not established; they were not labeled a fixed application defect.
-
 ## Remaining qualification
 
 The retained live journal establishes real collection, edits, deletion notices, attachments, rechecks and rate-limit handling. It does not establish exhaustive delivery or a controlled matrix of role visibility, reaction actors, prolonged FloodWait, account bans and network/process interruption recovery. QR-token issuance remains distinct from completed mobile QR confirmation.
@@ -6401,34 +6098,6 @@ The retained live journal establishes real collection, edits, deletion notices, 
 Docker build/run, Linux/macOS installation, sustained high load, independent security review, a real independent TSA response, certificate revocation/archival validation and forensic certification remain outside the recorded qualification. Saved MTProto state and catch-up are implemented; atomic durable replay remains unestablished. Admin-log collection, extra reactor lists and priority short polling remain separate features. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
 
 Local detailed receipts and screenshots are under test-results/ (Git-ignored). The public screenshot in docs/assets/ contains only fictional demonstration data.
-
-## Public website and publication preparation · 27 October 2026
-
-The separate `website/` presentation and Pages build were added after the panel checks above. No live account configuration or collection logic was changed.
-
-- The existing application suite passed: 138 passed, 1 POSIX-only skip, and one upstream Starlette/httpx deprecation warning. The 11 added site build tests passed independently, including unexpected-output rejection and linked-input rejection.
-- Both application browser scripts passed using project-venv Playwright and Chromium headless shell 156. No page JavaScript errors or external requests were recorded. All account scenarios used fake transport and fictional data.
-- `tools/check_site.py` passed at widths 320, 390, 768, 1024, and 1440, with a project URL subpath, keyboard tabs, successful/denied clipboard access, reduced motion, and disabled JavaScript. No failed asset requests or external requests occurred.
-- `tools/build_site.py` produced 10 allowlisted public files, about 460 KB total. Browser screenshots and a receipt are in ignored `test-results/site/`.
-- The wheel built successfully after installing the build-only setuptools/wheel tools in the project environment. Installing it into an isolated target and running `tools/check_install.py` passed: static assets, access control, a signed 32-event synthetic export, and independently verified streaming download.
-- `pip check` passed. A pattern scan of Git-selected public candidates found no recognizable private-key blocks, GitHub/bot/AWS tokens, long literal secret assignments, or merge-conflict markers. This is not proof that every possible secret format is absent. Runtime-data/session/key probes were Git-ignored.
-- GitHub CLI authentication was invalid; no remote was configured and no initial commit existed. No push, hosted workflow, Pages deployment, or release was performed. Docker and live Telegram/platform qualification remain outside this check.
-
-On this host the Playwright download lock failed on the E: workspace filesystem. Installing Chromium under `%LOCALAPPDATA%/tgwitness-playwright` and using that same `PLAYWRIGHT_BROWSERS_PATH` for the checks succeeded. This is an environment workaround, not a change to the application's runtime dependencies.
-
-## Interactive documentation and website metadata · 29 October 2026
-
-The public site builds 12 English HTML pages: a homepage, a guide index and ten guides. The artifact contains 28 explicitly listed presentation files, approximately 1.85 MB, and no collector data. The public website is English; application translations and translated repository guides are separate.
-
-- Site, source-publication and release-boundary tests: **18 passed, 2 skipped**. The skips concern symlink creation on this Windows filesystem. Tests check unique page metadata, English-only public pages, canonical URLs, all sitemap entries, local assets/anchors, structured navigation and private-file exclusion.
-- Both `tools/check_site.py` and `tools/check_docs_site.py` passed in Chromium at 320, 390, 768, 1024 and 1440 pixels under a project URL subpath. The guide checks cover all 11 documentation pages, search and keyboard navigation, clipboard success/refusal and readable content without JavaScript.
-- Five interactive examples passed: message playback/step/pause/reset with reduced motion and off-screen suspension; original/altered/rebuilt/truncated hash chains; witness acceptance/rollback/fork/no-response decisions; and complete/delayed/missing delivery scenarios; and an investigation map linking fictional cross-chat observations by sender ID, destination and attachment hash. The investigation controls passed keyboard navigation and no-JavaScript fallback checks. Browser SHA-256 results were independently compared with Python's `hashlib` and canonical JSON. The hash example also retained its readable fallback when Web Crypto was unavailable.
-- Delivery ratios and chart markers matched the accessible table. Mobile axis labels were enlarged after visual review. Every example is labeled as illustrative or synthetic, and no browser example contacts Telegram.
-- No external requests, failed HTTP requests or JavaScript errors were recorded. Desktop/mobile screenshots and receipts are under ignored `test-results/site/` and `test-results/docs-site/`. The documentation index, message/hash examples, witness layout, delivery chart and investigation map were inspected at desktop/mobile sizes.
-- The publication scan passed for 282 public source files and 1,426 local documentation links. Ruff passed for the modified Python site tools and tests.
-- `docs/HOW-IT-WORKS.md` provides a GitHub Markdown companion with Mermaid diagrams and formulas. `docs/INVESTIGATION.md` covers whole-account scope, per-chat history acquisition, people profiles, cross-chat references, timelines and a verified case handoff. Its steps and limits were checked against the current scope, collection, dossier, export, verifier and panel code. Hosted GitHub rendering was not checked.
-
-This is a local website/documentation check. It does not add live Telegram qualification or establish hosted Pages deployment, remote CI success or search engine indexing. See [the publishing procedure](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md) and [the website metadata notes](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/SEO.md).
 
 
 ---
@@ -6514,294 +6183,147 @@ Every change by version, including the changes not yet released.
 
 ## 0.8.1 preview · 2 November 2026
 
-- Build the runtime, sealed and media containers on a pinned Wolfi/glibc base with Python 3.12 and hash-locked system packages for AMD64 and ARM64, authenticated through signed repository indexes.
-- Build Tesseract 5.5.4 from verified source and pin its English and Russian recognition data. Preserve the existing Python dependency locks.
-- Check real OCR and offline transcription, signed multilingual PDFs, installed source measurements and container restrictions. Include all container build inputs in the source archive and scan the ARM64 runtime before publication.
-- Integrate **Extras → Independent capture** into the English main panel: separate browser/AyuGram connections, encrypted control tokens, pinned identity checks, tab selection, start/pause, capture options, snapshots, checkpoints and verified original ZIP downloads. Add optional Docker control-network wiring; keep recorders independently runnable and all connections disabled by default.
-- Add the optional, independent `tgwitness-capture` preview: selected-tab Chromium PNG/MHTML, consistent AyuGram SQLite snapshots, separately enabled silent video, Ed25519 event chains, signed ZIP/HTML reports and standalone verification. Each recorder starts disabled and keeps its own key and storage. Optional Compose profiles are separate from ordinary startup. A read-only, separately operated witness can retain challenge-bound checkpoints and sign receipts.
-- Include the independent capture package in Phala source bundles and their manifests, so the panel can import the capture integration after installation.
+- Runtime, sealed and media containers moved to pinned Wolfi/glibc with Python 3.12 and hash-locked system packages (AMD64 + ARM64). Image scans are clean of HIGH/CRITICAL.
+- Tesseract 5.5.4 built from verified source, English and Russian data pinned.
+- Release checks now cover real OCR, offline transcription, signed multilingual PDFs and container restrictions. The source archive includes all container build inputs.
+- **Extras → Independent capture** in the English panel: browser/AyuGram recorders with encrypted tokens, pinned keys, tab selection, start/pause, snapshots, checkpoints and verified ZIP downloads. Everything is off by default.
+- New optional `tgwitness-capture` package: Chromium PNG/MHTML snapshots, AyuGram SQLite copies, optional silent video, Ed25519 event chains, signed ZIP/HTML reports and a standalone verifier. Each recorder has its own key and storage.
+- Fixed Phala installs: source bundles were missing the capture package.
 
 ## 0.8.0 preview · 2 November 2026
 
-- Apply sharing-copy text and contact controls to interaction records, and include chat metadata only for the selected chats.
-- Keep pending confirmations bound to their original workspace, group and session. Mask detected secrets in Case Board source context until an explicit reveal.
-- Keep the new panel session active after rotating its access token. Events from the old connection cannot sign out the replacement session.
-- Preserve the collecting account's attribution when recovering missing messages in multi-account exports, and verify the completed archive before marking it ready.
-- Show the AI endpoint and outside route in the data preview. Server-local AI requires an explicitly selected Direct outside route; a route change requires a new preview.
-- Documentation: a [panel guide](https://phishdestroy.github.io/TgWitness/docs/reference/panel/) for every screen, protection modes and the code check; Discord publication and the public proof page in [witness](https://phishdestroy.github.io/TgWitness/docs/reference/witness/); removing an installation; current panel labels throughout.
-- Group screen at `/groups/<id>`: accounts, problems, shared chats with coverage, group export.
-- Add Reading series and Ledger & margin to the report builder, with distinct HTML and native signed PDF chapters, live preview, account and sharing layouts, and DeepL translations. Preserve selected scope and minimized data across designs.
-- Add Classic, Editorial, Briefing, Analytics, Technical and Overview report designs with independent covers and typography; changing a design keeps filters, charts and written notes.
-- Show separate send, edit and observation times, reply/thread references and permitted message metadata in reports and the viewer.
-- Add a private Case Board with signed, append-only bookmarks, exact-version Unicode highlights, complete action slices, scoped collections, threaded comments and team statuses. Chats/Journal shortcuts, live updates, source navigation, presentation and UI in all 25 panel languages keep team interpretation separate from observed evidence. Signed ZIPs bind the annotations head and recomputed slices; the standalone verifier checks replay, references, query excerpts and retained checkpoints. Reports have independent board/comment controls; minimized handovers require explicit inclusion and support investigator aliases. New board rights do not expand existing grants, and export permission alone does not disclose team notes.
-- Account groups now share settings. The group page sets the goal, collection, protection and notification rules, recording, recheck schedule, report settings, parameters and connection route; members follow it, and an account with its own value keeps it until it is returned to the group's. Settings marks each value 🔗 (from the group) or ✏️ (own). A change previews which accounts it reaches and asks per account before overwriting an own value; accounts added later start with the group's values. Notification destinations, proxies and sign-in stay per account, as does starting and pausing collection. Access can be granted to a whole group, including accounts added to it later; showcase links still list their channels. Every change is recorded in the signed journal of the main workspace and of each member it reaches; existing template groups are migrated.
-- Add Report studio with independent document designs, live unsigned cover/chart preview, selectable activity, weekday/hour, participant, chat and composition charts, and journal history/indicator controls. Saved choices reach HTML, signed PDF/JSON and new account/disclosure jobs. Analytics use only included/minimized records, retain unknowns and bounded-grouping counts, and ship as manifest-protected `analytics.json`. Designs are independent of content presets. Author-written examination notes and source-linked journal statistics retain the published privacy defaults; minimized journal handovers exclude that private analysis. Existing signed exports remain unchanged.
-- Configure report data by chat, author, UTC observation dates and event type. Preview real activity, participants, messages and missing-ID ranges before saving. HTML, PDF and JSON apply the same scope while preserving the original signed journal. Edits show Before/After text; deletions show previously saved content, with out-of-selection history explicitly marked as context.
-- Preserve workspace-specific deep links through first setup, keep the shared account form current in Settings, and expose file import when adding an account. Compact mobile connection controls keep the account identity visible.
-- Cancel pending Settings confirmations and setup continuations when their workspace changes, including accounts with identical configuration revisions.
-- Keep a valid panel session through temporary startup/network failures and offer Retry. Expired or revoked access still returns the browser to sign-in.
-- Run both panel regression suites on pull requests, including download checks in Firefox and WebKit. Release packages now wait for the exact revision's dependency, CodeQL and container audits; HIGH/CRITICAL container findings block publication.
-- Renew an imported session in its existing workspace, expire history retries when leaving a chat, and keep bot controls disabled until the previous action finishes. Analysis previews use audited secret masking without changing model input or exports.
-- Stream large account archives and sharing copies through one-use browser downloads; block job deletion until active transfers finish. Reject stale commands after changing the operator bot and serialize its start/stop commands with panel operations.
-- Validate local originals before changing storage destinations or importing older recovery metadata, including native S3 settings. Recovery files cannot mix incompatible destinations.
-- Inspect account files before connecting: settings-only JSON cannot be imported as a session, paired files are checked together, and additional accounts get their own workspace. Connected accounts and typed-name deletion are visible on Account.
-- Keep URL, workspace selector and loaded account in agreement. A mismatch blocks actions. Exports and Telegram actions name the account in their confirmation. Chats open read-only, mask detected secrets without rewriting originals, and journal reveals. Empty chats can load history with a result or a retry.
-- Fall back to ordinary downloads when the browser refuses its file picker or writer. Prepared journal exports retain their size, SHA-256 and a download-again action. Journal numbering, missing-time text and chat date spacing are clearer.
-- Add a searchable notification-service catalog, service icons, an optional operator-owned control bot and Discord witness publication. Storage separates backups, verified attachment offloading and evidence retention. Recovery checks signatures and file hashes; exports require selected offloaded files to be restored. Investigation sources can be handed off as Markdown and JSONL.
-- Reports now use a coordinated dossier design: case cover, prominent figures, linked evidence map, numbered findings and an observation/gap timeline. Signed PDFs have an A4 cover with identifying QR, a summary, bookmarks and page references; HTML remains offline, responsive and printable. Account and sharing copies use the same visual design. A fresh signed fictional example can be built with `tools/build_dossier_example.py`; see [case reports](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/).
-- Signed reports now explain the trust basis for the specific archive, with separate export-time checks, recorded observations, missing material and independent review steps. HTML, PDF and signed JSON/manifest assessments share the same facts; English, Russian and German wording is available. Timestamp conclusions require a trusted certificate signature and a checkpoint bound to the exact journal prefix. See [case reports](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/).
-- Added six-step first setup and a unified Settings page with simple, standard and expert presentation levels. Language, device time zone, theme and progress are saved per operator and workspace; language changes preserve the panel session.
-- Copy, monitoring and evidence presets show a diff before changes, preserve optional manual overrides and expose hidden settings through search. External-service permissions are checked when enabling timestamps, notifications and off-site copies.
-- Automatic connection tries public MTProxy, portable WARP, then an explicitly allowed direct route. Checks, a persistent status indicator and recovery actions replace silent proxy failures. HTTPS CONNECT verifies the proxy certificate.
-- File policies can limit video duration; capture and account export enforce the configured size and duration. Existing journals and stored configurations stay intact. See [first setup and settings](https://phishdestroy.github.io/TgWitness/docs/reference/settings/).
-- The first setup and Settings are translated into all 25 panel languages. Each step has its own address and browser Back moves between steps. The Telegram step asks whether the account is separate; a main account records only chosen chats, also when Settings change the chats later. Start stays on the setup and shows that the connection, event intake, sources and attachments work before offering what to do next. A change of IP protection through Settings is a signed journal record, and the journal names the new connection and settings records.
-- Fixed Windows portable packaging of fpdf2's public colour profile and licence; private workspace files and generated caches remain excluded.
-- Translated the guided connection controls and documentation into 24 additional languages.
-- Added a guided Connection screen: choose accounts, prepare and check a route, then review and apply it. Direct, own proxies, the public MTProto pool, imported WireGuard profiles and portable WARP are available. Group changes preserve custom routes by default, check again before switching, pause active observation and report failures per account. WARP/WireGuard helpers stay in the data folder, use pinned SHA-256 downloads and stop when the owning panel exits.
-- Long labels no longer spill on phones: the Sources tabs wrap their text, and the journal's period buttons wrap to a second row instead of five fixed columns. Russian gains the missing route, IP protection and administrator key confirmations; a working part of the status strip reads "Работает" and the custom period "Другое".
-- Added signed HTML, JSON and PDF reports with an offline viewer, verified selections, archive sidecars and configurable report contents in all 25 panel languages.
-- Added minimised journal handovers, message details, indicators, collection clock/profile receipts, absent-ID rechecks and admin-log context. Existing signed records remain verifiable.
-- Added workspace protection modes and clearer account-loss reasons; packaged report fonts and assets for wheel and source installations.
-- No consequential action on a single stray click. In Sources the status badge only shows the state; pausing, resuming, excluding and removing are in the row menu, each with what it does, pausing and excluding are confirmed (also in bulk), and removing a source asks for its name. Sending from a chat is closed until "Write as @account" is chosen, warns that chat members see the message and that the action is journaled, and is refused by the panel and the API for the Evidence for a case goal. Changing the connection route while observing shows a warning with one button that pauses and opens the route settings. The sticky chat date now sits on a full-width band.
-- One set of numbers and statuses across the panel. Chat counters separate messages deleted with their text kept, deleted before any text was saved, and not found on recheck; the chat list, chat header and notifications use the same definitions (the notification states that it covers one hour). The journal's read index is rebuilt once to add this split. A source that keeps delivering records is "receiving updates" rather than unconfirmed when the account's chat list does not show it, and an unconfirmed source says why. The chat header lists attachment limits per type instead of the largest one. The priority star has one name and explains the recheck interval. Investigation mode saves what it describes after the whole-account confirmation. Hide-address mode with outside requests but no proxy for them says that timestamps, notifications, off-site copies and proxy-list updates are blocked, with buttons to set a proxy or turn those requests off. Without a chosen goal, the setup card says what the configuration already amounts to.
-- Access can publish a separate public-channel showcase: captured text, saved edits/deletions and signed collection snapshots. Author fields are redacted; attachments and ordinary panel APIs stay closed. Links expire and can be revoked. The original journal is unchanged. Includes an offline snapshot/continuity verifier and synthetic API/browser regressions. See [Showcase](https://phishdestroy.github.io/TgWitness/docs/reference/showcase/).
-- Panel fixes. The journal no longer stops at a skipped-attachment record ("mediaTypes is not defined"), so its record count and Newer/Older paging stay correct. Confirmations and name prompts are panel dialogs instead of `window.confirm`/`prompt`, which embedded and some mobile browsers refuse; deleting a workspace asks for its name. A direct `/chats/<id>` link no longer shows the previously open chat first. The live status reads "Page updates" so it is not mistaken for the Telegram connection. Chat filters no longer overflow in longer translations, the sticky chat date keeps clear of message text, the report settings link focuses the report language, hints no longer cover an open notification panel, an empty journal overview and an empty group list say what to do next, and the system log keeps each uvicorn line once.
-- Preserve an active Telegram sign-in when workflow navigation finishes late. Returning through account export or investigation keeps the pending code, password or QR step instead of resetting the form.
-- Added a guided 24/7 server in Extras → Server 24/7: on the local panel, a region and a Hetzner token are enough to review the type, monthly price and version from Hetzner's API, then run `deploy` with live progress. Without a domain the server gets a quick tunnel (`--quick-tunnel`): a random trycloudflare.com address that it posts, signed with a key kept by the deployment, to ntfy.sh, where the panel finds it again after a restart. A Cloudflare token adds an address under your own domain. Tokens are never stored and never accepted by a panel reached over a network. New `python -m tgwitness.cloud destroy` removes a deployment's server, firewall, DNS records and tunnel, including what a failed deployment left behind. `tools/check_cloud_wizard.py` covers it offline; the quick tunnel path was also run against real Hetzner Cloud. See [high assurance](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#from-the-panel).
-- Evidence mode has two optional records under **More witnesses**, both off by default: the newest drand round (League of Entropy, first from Cloudflare's relay), which shows the records after it are newer, and Telegram's list of the account's signed-in devices without IP addresses. `verify.py` reports both; `--check-drand` compares the rounds with Cloudflare and Protocol Labs relays. The drand path ran against the real relays. See [evidence](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices).
-- Added Gateway DNS for a 24/7 server (`--gateway-dns`, **Cloudflare Gateway DNS** in the wizard): the server resolves only through a Cloudflare Gateway location over TLS, Hetzner's firewall blocks DNS to anything else, and `verify` checks that firewall, the location, logging, Gateway policies that could rewrite answers, the server's queries and the audit log. Evidence mode can copy the location's log into the journal (`cloudflare.gateway_dns`) and `verify.py` summarises it. Free accounts share their one location, told apart by address. Ran against real Hetzner Cloud and Cloudflare; `tools/check_gateway_dns.py` covers it offline.
-- Added setup by goal in Extras → Goal & protection level, offered on Start here until it is answered or skipped: four questions (what for, how much, photos and files, where it runs) lead to suggested settings, each with one line on what it adds, and two scales, credibility and reliability, computed from what is actually set. Apply changes only timestamps, drand, the device list, the attachment policy and two parameters, each recorded in the journal as usual plus `setup.applied`; notifications, an off-site copy, a server, the code check and a witness bot are offered as next steps with their own forms.
-- Added Phala Cloud for a 24/7 server (`--provider phala`, **Confidential virtual machine · Phala Cloud** in the wizard): the collector runs in an Intel TDX confidential virtual machine whose compose pins the commit's source files and both images by hash. `verify` checks each Intel attestation up to Intel's root itself (`tgwitness.tdx`), the measured compose, the instance and, with `--tdx-measurements`, the OS image; every start in the journal carries an attestation too. Works with the quick tunnel; `destroy` removes the machine. `tools/check_tdx.py` and `tools/check_phala.py` cover it offline; not yet tried on Phala Cloud itself. See [high assurance](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx).
+**Reports**
+
+- Report studio: eight designs (Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, Ledger & margin), live preview, HTML and native signed PDF. Switching designs keeps filters, charts and notes.
+- Pick report data by chat, author, date and event type and preview it before saving. Edits show before/after, deletions show what was saved earlier.
+- Reports look like proper dossiers now: cover, key figures, evidence map, numbered findings, timeline. PDFs get an A4 cover with QR, bookmarks and page refs.
+- Each report explains what its conclusions rest on: export-time checks, observations, missing material, how to check it independently (EN/RU/DE wording).
+- Send, edit and observed times are shown separately, plus replies, threads and metadata.
+
+**Case Board and groups**
+
+- Private Case Board: signed bookmarks, exact-version highlights, action slices, collections, threaded comments and statuses. Team notes stay apart from observations; the verifier checks board exports too. Export permission alone doesn't reveal team notes.
+- Account groups share settings. Members follow the group, an account's own value wins until reset. Changes show which accounts they hit and ask before overwriting. Access can be granted to a whole group.
+- Group screen at `/groups/<id>`: accounts, problems, shared chats, group export.
+
+**Setup and connection**
+
+- Six-step first setup and one Settings page with simple/standard/expert levels, in all 25 languages. Each step has its own URL, Back works.
+- The setup asks whether the account is a separate one; a main account only records chosen chats. After Start it shows that connection, events, sources and files work.
+- Guided Connection screen: pick accounts, prepare and check a route, then apply. Direct, own proxies, public MTProto pool, WireGuard profiles and portable WARP.
+- Automatic connection tries public MTProxy, then WARP, then direct (if allowed) and shows a status indicator instead of failing silently.
+- Video duration limits in file policies.
+
+**Panel and safety**
+
+- No more one-click accidents: pausing, excluding and removing sources are confirmed, sending from a chat needs "Write as @account" first, route changes while observing offer to pause.
+- One set of counters everywhere (deleted with text, deleted before saving, missing on recheck).
+- Account files are inspected before connecting. URL, workspace and account always agree, a mismatch blocks actions. Chats open read-only and mask detected secrets.
+- Downloads fall back to normal browser downloads, big archives stream through one-time cookies. Prepared exports keep size, SHA-256 and "Download again".
+- Panel token rotation keeps the new session alive. Temporary network failures offer Retry.
+- Panel dialogs instead of `window.confirm`, journal paging fixed, lots of small UI fixes.
+- Public-channel showcase: expiring read-only links with redacted authors and signed snapshots.
+
+**Servers and evidence**
+
+- Extras → Server 24/7: a Hetzner server from the panel with a quick tunnel or your own domain. `python -m tgwitness.cloud destroy` cleans everything up.
+- Phala Cloud option: the collector runs in an Intel TDX confidential VM, `verify` checks the attestation up to Intel's root.
+- Gateway DNS (`--gateway-dns`): the server only resolves through Cloudflare Gateway.
+- Optional drand rounds and Telegram device lists in evidence mode.
+- Setup by goal: four questions, suggested settings, credibility and reliability scales.
+
+**Other**
+
+- Notification service catalog with icons, optional operator control bot, Discord witness posts.
+- Storage separates backups, verified file offloading and evidence retention.
+- AI previews show the endpoint and outside route.
+- Pull requests run both panel suites, including Firefox and WebKit downloads. Release packages wait for dependency, CodeQL and container audits.
+- Docs: a [panel guide](https://phishdestroy.github.io/TgWitness/docs/reference/panel/) for every screen.
 
 ## 0.7.1 preview · 1 November 2026
 
-- Fixed chat profiles getting stuck after navigating away while a request was loading. Reopening the view can retry, and an outdated request cannot overwrite the current chat's profile state.
-- Added a clear handoff after download: distinguish the original archive from sharing copies, review the report, and copy plain instructions for the recipient. Polling preserves the selected copy and focus; unavailable clipboard access leaves the instructions selectable.
-- Added recipient guidance and stable record references to readable account and sharing reports, including print layouts. References describe the archived document; they do not turn printouts or screenshots into signed evidence.
-- Added a browsable fictional report with the matching signed ZIP. Its preview is byte-identical to the archived HTML; previous signed demo samples are retained.
-- Added missing translations for export controls, sharing copies and recipient reports in all 25 interface languages. Message text and content entered by the operator keep their original wording.
-- Added **Start here** with separate personal-export and investigation journeys. Account snapshots and saved observations now have distinct export controls; secondary formats, account metadata and connection options are progressively disclosed. Navigation preserves drafts and never starts collection implicitly.
-- Replaced disclosure JSON previews with readable transformed-message cards, exact included-record counts and explicit sample limits. Original archives remain separate from sharing copies, and privacy warnings remain visible.
-- Added printable offline reports for account exports and sharing copies, with scope, coverage, readable messages and verification instructions. Choose the report language separately from the panel; original message text stays intact. New labels use explicit English fallbacks where translations are unavailable. Existing signed jobs and already published archives retain their original bytes.
-- Distinguished rejected Telegram authorization from paused accounts and network failures. Account counters filter the list; **Sign in again** returns to the existing workspace without discarding its journal, sources or signing key. This state follows actual authorization checks; simply opening the panel does not probe every saved session.
-- Made large account-export progress and HTML preparation use linear task/page scans. Interrupted ZIP writes leave no downloadable partial archive; regression checks resume from byte-identical signed receipts and retain coverage gaps.
-- Strengthened disclosure masking for Unicode names, alternate usernames, direct-chat names and whole-token sender IDs, including the public purpose. Unknown senders no longer receive a shared identity alias. Exceeding the masking limit now stops preparation rather than silently skipping identities.
-- Bound transcription by actual decoded audio samples, decode only once, and reject playlist formats and secondary file/URL references inside the isolated media worker. Native decoder checks cover generated common Telegram formats and malformed input without downloading a transcription model.
-- Made source ZIP metadata repeatable and preserved the previous archive when a new build fails before publication. Input bytes, including signed demo files, remain unchanged; reproducibility requires matching inputs and compression tools.
-- Capture now displays English text when a translation is missing and respects the user's language choice.
-- Hardened Capture language selection and encoded its HTML/URL output, pinned release actions, and documented the dated security scan results, including unresolved Debian package findings in the container images.
-- Updated Russian wording in the panel and Capture wizard, including privacy and evidence terms. Placeholders and command examples are preserved.
-- Raised dependency security floors and regenerated the hash-locked build tools. Notification services now refuse HTTP redirects, including URL-level redirect overrides, so credentials cannot be forwarded to a different endpoint. Configure the final notification endpoint directly; HTTP 3xx responses fail delivery.
-- Added weekly Dependabot updates, checks for pull requests on hosted runners, and nightly dependency, CodeQL and container vulnerability scans. Custom dependency locks remain reviewed and regenerated together with version changes.
-- Fixed quick search after rapid close/reopen and temporary parameter API errors. Browser checks run two at a time with individual logs and a complete result summary, including checks after a failure.
-- Corrected archive-search date defaults across daylight-saving transitions so recently captured records remain inside the selected period.
-- Added configurable account export through Telegram Takeout or the explicitly selected regular API. Jobs retain signed progress, support pause/resume and produce a reusable ZIP with coverage and omission records.
-- Added separate signed disclosure copies with purpose, sender/date/text filters, participant pseudonyms and optional text/file exclusions. Preview is bound to the administrator session and source archive. Signatures establish integrity; they do not establish Telegram authorship, completeness or legal admissibility. See [account export](https://phishdestroy.github.io/TgWitness/docs/reference/account-export/) and the [Russian guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/ACCOUNT-EXPORT.md).
-- Added fictional account-export and disclosure downloads to the online demo.
-- Added workspace-aware panel URLs, Back/Forward navigation and an active-view lifecycle. Background updates preserve form drafts and focus; settings can be saved with Ctrl/Cmd+S. Submitted secrets never become a Discard baseline.
-- Reorganized Sources into Scope, Chats and Recording with one recording save; Parameters now have search, section links, inline validation and a reset preview.
-- Kept chat navigation and messages in separate scrolling columns, with compact actions, source filters, priority and distinct conversation views/message filters.
-- Added combined journal filters, cursor windows and a desktop record inspector. Routine system events are hidden by default and remain available with a toggle.
-- Added grouped notifications, focused health actions, workspace summaries and access presets. Export preparation history records byte counts and hashes without changing signed evidence. See [panel development](https://github.com/phishdestroy/TgWitness/blob/main/docs/FRONTEND.md) for module ownership and the remaining extraction plan.
-- Serve read-only MCP at the panel's `/mcp` endpoint. Connections select their tools and scope, support token rotation and report recent use. Client setup uses `tgwitness.mcp_server` and `TGWITNESS_MCP_TOKEN`; the runtime check provides an installation command when the optional SDK is absent. Setup forms keep their drafts, and protocol checks list tools without reading messages.
-- Keep report settings separate when switching workspaces. Cancelled exports finish their file worker before releasing the lock and remove temporary data; failed downloads clean up too. Scoped source actions return only allowed chats.
-- Refuse account/connection replacement during exports; roll back interrupted collector startup and bound TLS shutdown. Local export write failures stop immediately instead of skipping records. Verify signed attachment and avatar references during export checks and backup restore, and reject invalid TSA certificate constraints and broken storage pagination.
-- Kept disabled AI out of the sidebar and attachment actions. Provider setup lives in Integrations; local recognition appears only when its worker is configured. Connection settings now show the fields for the selected route, with the automatic MTProxy catalog available on demand.
-- Added inline and side-by-side edit comparisons, separate changes to hidden links and bot buttons, attachment previews and image zoom. The preserved original stays downloadable. Preview reads stop at 32 MiB; the browser cache holds at most 40 previews and 64 MiB, with three concurrent reads, and is cleared on lock or workspace switch.
-- Added live journal/chat updates with a pause control for the view, batch source selection and actions, and journal search from Ctrl/Cmd+K. Live updates recheck access and chat scope; pausing the view does not pause collection.
-- Indexed saved message state and source summaries. Existing journals build these derived indexes once during their first startup after the update; signed records and their hashes stay unchanged. Small and expiring attachments have a separate download lane so a large file does not hold them up.
-- Preserved observed avatar changes as signed records with content-addressed files, including removal and reuse of an earlier photo. People profiles show scoped history and similarity leads; saved photos travel in evidence ZIPs.
-- Added automatic upgrades for OpenTimestamps receipts older than one hour, with bounded requests through the configured route and the original receipt retained. A Bitcoin attestation remains explicitly unverified until checked independently.
-- Reworked the workspace navigation and chat layout, added chat search and kept collection warnings visible. The desktop conversation fits the viewport.
-- Rebuilt the online demo around a fictional investigation with named participants, edit comparisons and real signed sample downloads. Verification results now stay visible; unavailable online-only actions no longer look usable.
-- Added batch session import and account groups with template settings. Failed imports leave no empty workspace; locking or switching stops the remaining queue.
-- Added the MTProxy dashboard: ping, status, countries, filters, shared custom lists and optional GitHub search. Routes remain separate for each account.
-- Added a country choice for the automatic MTProxy route (preferred, avoided, only preferred) and the list download and check intervals to the dashboard. Panel strings of groups, import and the dashboard are translated with their screen as context and with plural forms; context-dependent report labels are corrected in 23 languages.
-- MTProxy traffic is deciphered through OpenSSL instead of Telethon's pure-Python AES (about 0.3 MB/s on a small server): a busy MTProxy route no longer holds a whole CPU core and delays every panel answer by seconds. The chats list shows that it is loading, and journal rows explain skipped and failed attachments in the panel language.
-- The panel, proof, sealed and MCP servers keep idle connections for 150 seconds instead of 5: Caddy and cloudflared reused connections the server had already closed, and the browser received sporadic 502 answers.
-- GIFs and stickers are no longer downloaded unless turned on. Turning downloads off now pauses the files already waiting, and turning a type off or lowering its limit skips the waiting files it excludes; before, the queue kept downloading under the old settings.
-- Public proxy lists are parsed once, and again only after a list, a source setting or the GitHub token changes. Every status read of every workspace parsed them on the event loop that also carries Telegram traffic; with 10 workspaces the account list took 690 ms, now 7 ms.
-- Bulk import refuses a session another workspace already holds before it connects: the same key from a second proxy address can make Telegram revoke it. An imported workspace disconnects until its sources are chosen, imports no longer hold the other workspaces' operations, an import can be stopped after the current account, files that are not account files are shown as such, and import errors appear in the panel language. Account groups can start or pause all their workspaces at once.
-- Unanswered servers in preferred countries no longer hide working servers in other countries; servers identified as being in avoided countries are excluded, including from checks. Servers with unknown country remain eligible unless only preferred countries are allowed. Country lookups move past hosts without an answer, the saved lists stay readable at their size limits, the last list update shows when lists were actually downloaded, and a blocked list download disables the update button and offers the proxy setting. Own lists say how many links were left out and why. One server listed with several secrets counts as one address, so two workspaces are no longer put on the same server.
-- People and chats without a photo no longer fill the browser console with 404 errors, and the panel asks for the high-assurance statement only where it exists. Sign-in tabs wrap long labels instead of cutting them; the offline-gap note, size units and the reason of attachments dropped with a removed source are shown in the panel language.
-- Added scoped, read-only MCP connections and local archive search with optional AI source review and separate analytical reports.
-- Added local OCR/transcription for saved attachments and signed outgoing webhooks with delivery status, retries and an n8n example.
-- Connected the new workflows across README, Wiki and translated site reference.
-- Sealed, localized reports. `report.html` and `chat.html` are rebuilt as self-contained case documents in any of the 25 panel languages: case details, integrity and key fingerprint, timestamps with their check commands, coverage, chain of custody with a printable transfer table, verification steps, standards and limitations. Each ends with an Ed25519 seal over its own bytes, checked in the browser or by `verify.py report.html --fingerprint … --evidence …`. Reports carry Dublin Core and schema.org metadata and a Content-Security-Policy that blocks network loads; the chat report shows the history oldest first.
-- Signed archives add `custody.json` and `SHA256SUMS`; README.txt is written in the report language and in English. Case details from **Exports → Report settings** are signed into the manifest. `verify.py` checks the seal and the sums, prints a coloured summary at a terminal (`--lang en|ru|uk`) and offers `--json`.
-- Added a five-stage capture animation and examples of message/collector substitution to the helper and Exports.
-- Replaced the separate capture form with a four-step wizard shared by Exports and the standalone page. It uses workspace themes and controls, explains each file handoff, confirms key saving and clears its key when the workspace locks. The temporary Telegram panel also uses workspace styling and readable progress.
-- Added entry points for the GitHub Actions capture preview on the workspace login screen, in Exports, on the project homepage and in the documentation. Entry labels are translated; the English/Russian helper preserves the chosen language. Expanded setup, privacy boundaries, mode selection and troubleshooting.
-- Added a fork-launched sealed capture preview: restricted fresh-session login, one-chat history and media collection, encrypted connection/result artifacts, pinned reusable-workflow provenance and a fail-closed verifier. English/Russian browser helper keeps the private decryption key local. This uses ordinary GitHub infrastructure, not confidential hardware or Telegram-signed evidence. See [sealed capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) for setup, policy and deployment limits.
-- Sources can load the available history of every currently enabled source into Chats and the signed journal. The persistent queue supports pause, resume and explicit continuation after restart, with separate per-source failures and media outcomes. It does not enumerate every account dialog or recover unseen deletions.
-- A signed history progress report can be checked with `verify.py --evidence`: verify the journal prefix, source plan, account and message counters. Other report fields remain signed collector statements; this does not authenticate Telegram origin. See [history acquisition](https://phishdestroy.github.io/TgWitness/docs/reference/history/) for operation and limits.
+- **Start here** with two paths: export my account, or follow an investigation.
+- Account export through Telegram Takeout or the regular API, resumable, with signed progress and coverage records ([account export](https://phishdestroy.github.io/TgWitness/docs/reference/account-export/)).
+- Separate signed sharing copies with filters, pseudonyms and optional text/file removal. Signatures prove integrity, not authorship or admissibility.
+- Readable offline reports for account exports and sharing copies, printable, with record links and instructions for the recipient.
+- Clear handoff after download: original vs sharing copy, report preview, instructions to copy.
+- Rejected Telegram logins are told apart from paused accounts and network errors. **Sign in again** keeps the workspace.
+- Load the history of enabled sources with pause/resume, plus a signed progress report ([history](https://phishdestroy.github.io/TgWitness/docs/reference/history/)).
+- Read-only MCP at `/mcp`, local archive search with optional AI, local OCR/transcription, signed webhooks with retries.
+- GitHub Actions capture preview: one chat on a temporary runner, encrypted result, pinned provenance ([sealed capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md)).
+- Self-contained signed reports in 25 languages with chain of custody; archives add `custody.json` and `SHA256SUMS`.
+- Panel rework: workspace URLs, Back/Forward, drafts survive updates, Ctrl/Cmd+S, Sources split into tabs, Parameters search, journal filters and inspector, live updates.
+- Batch session import, account groups, MTProxy dashboard with ping, countries and own lists.
+- MTProxy decryption through OpenSSL (it used to eat a whole CPU core).
+- Stronger masking in sharing copies, bounded media decoding, repeatable source ZIPs.
+- Notification services refuse redirects. Weekly Dependabot, nightly CodeQL and container scans.
+- Lots of fixes: stuck chat profiles, quick search, DST in search dates, 502s behind Caddy, GIF/sticker downloads, slow proxy list parsing, duplicate sessions on import.
 
 ## 0.7.0 preview · 31 October 2026
 
-- OpenTimestamps summaries now parse bounded operation trees and attestation payloads, rejecting truncated, malformed and excessive proofs. Marker bytes in arguments or opaque payloads cannot produce a Bitcoin status. Parsed Bitcoin attestations are explicitly `bitcoin-unverified`; run `ots verify` for validation.
-- Source releases include the exact public TSA fixtures used by the evidence tests. The synthetic calendar fixture now carries correct serialized URI lengths.
-- Added the [delivery roadmap](https://github.com/phishdestroy/TgWitness/blob/main/docs/ROADMAP.md), separating release acceptance, the external controller prototype and future independent-observer integrations.
-- Evidence verification now reports the exact prefix covered by witness checkpoints and any unwitnessed tail. `--require-witness` requires a pinned witness and a matching final exported record; requested channel checks also reject missing claimed posts.
-- Cloud journal checks reject missing startup records or expected collector keys and report unavailable host measurements. Deployment reports distinguish configuration checks from independent runtime attestation; supplied channel dates are not authenticated by witness signatures.
-- Added access and permissions guides with reviewer/analyst examples, session limits, IP restrictions and revocation. Updated routing guides for automatic MTProxy, IP modes and external requests; connected the README, Wiki, website and bundled guide.
-- Expanded the panel and complete documentation site to 25 languages, including German, French, Italian, Japanese, Korean and Hebrew. Language switches preserve the current documentation page; the static demo includes the new panel dictionaries. Existing Amharic guides and notices remain available separately.
-- Site publication now rejects missing translations in a full-site language.
+- OpenTimestamps proofs are parsed strictly; Bitcoin attestations show as `bitcoin-unverified` until you run `ots verify`.
+- Verification reports which part of the journal witness checkpoints cover; `--require-witness` demands a pinned witness and matching final record.
+- Access and permissions guides, updated proxy and IP mode guides.
+- Panel and docs site in 25 languages. Site publishing fails on missing translations.
+- Added the [roadmap](https://github.com/phishdestroy/TgWitness/blob/main/docs/ROADMAP.md).
 
 ### Initial preview contents · 30 October 2026
 
-- First GitHub release, with the Windows portable package, the wheel and the source archive. README and the website link the portable package directly: extract, double-click `TgWitness.cmd`.
+- First GitHub release: Windows portable, wheel, source archive.
 - The setup guide has an "Open to everyone" section: no country or sanctions blocks, and Taylor Wessing as the only incompatibility we name. It is our position, not a licence condition.
-- The website's changelog links point to `docs/CHANGELOG.md`.
 - The README and Wiki now present the authors' Ethical Notice & Historical Continuity statement, with document references, historical context and an explicit explanation that MIT permission applies to everyone.
-- Repository identity: a larger wordmark and investigation scene, three direct navigation choices, a dedicated handbook cover and a shorter README. Source connections, travelling records and the signature animate inline; phone layouts and reduced-motion alternatives retain the same visual hierarchy.
-- Investigation presentation: the illustrated source-to-dossier animation now leads the README and Wiki. A clearer case route, direct evidence-model navigation and a vertical phone diagram keep the workflow and verification formulas readable; all moving illustrations have reduced-motion alternatives.
-- High-assurance deployment (`python -m tgwitness.cloud`, [guide](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/)). It creates the collector through the API of Hetzner Cloud, DigitalOcean, Linode, Vultr or Amazon EC2: no SSH key, a provider firewall without inbound rules, SSH masked from the first boot, one fixed commit, and a panel reachable only through a Cloudflare Tunnel. The `verify` command lets a third party compare the provider's own log and firewall, the tunnel connector's address and the collector's signed `/api/assurance` statement. It writes a Markdown/JSON report for evidence handover. `generic` installs on any server with `install.sh` and is never reported as more than self-attested. With `TGWITNESS_ASSURANCE` set, the collector signs host measurements (SSH, logins, boot, metadata) into every process start and into `host.state` records whenever they change. Ordinary installations are unchanged.
-- Two clicks to start: a local start (TgWitness.cmd, Start.cmd, start.sh, the demo launchers and the Docker helpers) opens the panel in the browser once it answers, and a real workspace shows its panel token in the console instead of in the address bar. Services, containers, scheduled and windowless starts never open a browser; `--no-browser` or `TGWITNESS_NO_BROWSER` turns it off.
 - The operator notice and the Taylor Wessing page speak in our own voice.
 - Returned to the MIT License. A tool whose output third parties must be able to check should not stumble over its licence. `LICENSE` is the standard MIT text again, the package declares MIT with the OSI classifier, and the container, portable package, website, Wiki and translated README labels say so. Our statement stays in NOTICE and on the Taylor Wessing page as our position; it adds no licence condition. The presentation artwork reads "open source" again.
 - Added our Operator Incompatibility NOTICE to README, SECURITY, the documentation, Wiki and website. A single source keeps the complete statement consistent across those pages; source, Python and portable distributions include NOTICE alongside the licence.
-- The documentation website gains a read-only online demo: the real panel, answered from recorded records of the fictional demo, in all 13 interface languages. Every change is refused in the browser, nothing is sent anywhere, and `tools/capture_demo.py` regenerates the recording. The home page and README link to it.
-- Put the workspace preview near the top of the repository landing page, simplified wiki entry links and connected the issue chooser to the live handbook. GitHub and website sharing images now have reproducible PNGs in the investigation style. README and wiki now include video players for the illustrated investigation and message-history films. The gallery includes all three 12-second films; their MP4s and the two original GIFs are included in the source archive. Animated evidence explanations retain static alternatives for reduced-motion preferences.
-- Fixed all eleven audit findings, each with a regression test. The portable builder no longer reuses an earlier build directory and refuses private or unexpected files. The verifier applies its archive limits at every entry point, including format detection and witness journals. The HTTP client bounds chunked reads. Individual and multi-account exports share one reservation per account; a workspace in a running multi-account export cannot be deleted; setup failures end an export as failed. People profiles count distinct replies and messages. Reference pages link to the GitHub editor, translated README sections collapse again, and the operations guide describes password-protected exports and priority rechecks correctly.
-- The additional launchers moved to `scripts/`: `scripts\Demo.cmd`, `scripts\Setup.cmd`, `scripts\Docker.cmd` and `sh scripts/docker-start.sh`. They still run from the project root; `Start.cmd`, `start.sh` and `start.py` stay where they were.
-- Redesigned the repository presentation with a message-history cover, GitHub and website preview images, and an illustrated observation-to-verification workflow. The English README now leads with the workspace, feature cards and a demo; detailed instructions remain in expandable sections. Wiki and documentation entry pages share the presentation, with an editable, reproducible artwork kit.
-- Added an English project wiki with 13 user guides, a sidebar and footer, plus support guidance and a documentation issue template. A checked builder prepares GitHub Wiki links and a ZIP with hashes; CI publishes the bundle as a downloadable artifact. The wiki's separate publication procedure is documented.
-- The documentation website gained a reference section: 17 repository documents rendered with search, contents and links that stay on the site, and their Mermaid diagrams drawn as SVG that animate into view (with a text version, and still when reduced motion is asked for). A new **Keep it secure** guide shows what leaves the machine, what each secret unlocks, what the protections cover and a hardening checklist. Pages gained a reading-progress bar, the current section in the contents, `/` and Ctrl/Cmd+K for search and content that eases in. SECURITY.md is split into sections with a summary table. Internal reviews and release notes moved to `docs/internal/`.
-- The website is available in 13 languages (English, Russian, Ukrainian, Spanish, Brazilian Portuguese, Turkish, Arabic, Persian, Urdu, Hindi, Indonesian, Vietnamese, Simplified Chinese): home page, guides, interactive examples, diagrams and the reference, with a language menu, `hreflang` links, a multilingual sitemap and right-to-left layout for Arabic, Persian and Urdu. A changed English passage shows in English with a notice until it is translated again; the changelog stays in English. Added a light/dark theme button that follows the system until chosen, and rendered the reference's formulas.
-- The Account page shows the current connection route with a **Proxy settings** link that opens the public MTProxy lists, your own proxy link and SOCKS5/HTTP fields at once; quick navigation finds it by "proxy". While observation runs, the route form says why it cannot be saved instead of only disabling the button.
-- The README and its 12 translations gained a **What has been tested** table (real account, synthetic clients, local test servers, not tested yet) and mark untested integrations in place: notification services, MTProxy and public proxies, the witness bot, timestamp services, Docker/Caddy and the release workflow. The live test record now covers the whole-account run (9,968 verified records). Translations were regenerated from the current English README; the Russian one was corrected by hand.
-- **Sign out of Telegram** on the Account page (`POST /api/auth/logout`): with observation paused, Telegram is asked to end the session (`auth.logOut`) and the session is removed from the vault; the journal, sources and keys stay and an `account.signed_out` record notes whether Telegram confirmed. Previously a connected account could not be removed from the panel at all. ACCOUNTS.md no longer claims that workspaces cannot be renamed or deleted.
-- The panel's Russian was reviewed by hand: about 940 strings corrected (wrong machine translations such as "Anchor now" as "go to this page", inverted error messages, mixed terms) and the mini-client, dedicated-account guide and other English leftovers translated. In folder and whole-account modes the Sources page is titled "Observed chats" instead of "Choose chats", and the main workspace's default name follows the panel language.
-- Publication checks now scan staged text, reject unresolved merges and require the full reviewed source in the Git index. A clean working file no longer hides a staged secret, and missing new modules or stale staged versions can no longer pass the release check.
-- Account deletion reports filesystem failures, keeps incomplete deletions visible for retry, and preserves that state across restarts without reopening a half-erased vault. Successful deletion is recorded only after local files are removed.
-- Valid panel and witness tokens remain usable after invalid requests from the same client address reach the rate limit. Witness failures share the bounded address cache.
-- Fixed message loss after a long stop: the recheck recovered at most 1,000 missed messages and then continued above the newest saved one, so the rest of the gap below live messages was never fetched. It now continues from where the previous pass stopped, and a chat still catching up is rechecked on the next minute instead of after its 15-minute or 6-hour interval.
-- The panel's notification list groups changes per chat and hour and keeps problems in it: on a live chat deleting a message every two minutes, all 60 entries were single deletions covering about one hour, so a sign-out or a full disk dropped out of the list within an hour.
-- Rewrote the live-test record in plain terms: one real account, one supergroup, 27 to 29 October 2026, 1,291 messages, 472 deletions (347 saved before deletion), 12 edits, all 2,385 record signatures verified. The translated READMEs no longer claim that only a fake Telegram transport was tested.
-- Review fixes. A link preview that Telegram fills in later, story views, paid media unlocked by this account and paid invoices are no longer recorded as edits. A link preview saves the file whose type and size were checked (its photo) instead of failing on its video. Reply keyboard presses are recognised only on newly sent messages after the keyboard, not on snapshots, recovered messages or edits. People profiles of private chats and bots include the other person.
-- Scope fixes: a chat Telegram could not describe is no longer declined until the next scope refresh; a chat that left the folder stays paused when it falls outside the dialogs read; adding a removed chat again lifts its exclusion; folder mode starts with the folders read last time when Telegram does not answer; removing a chat with 5,000 exclusions is refused instead of breaking the scope settings; files still waiting for a removed source are recorded as failed.
-- verify.py: a profile checked with `--evidence` also verifies that archive's signature, hash chain and files; with `--witness`, only answers signed by the export's own key count as witnessed, and a key the witness never saw stays "unpinned". Raising the heartbeat interval while observing no longer shows a coverage gap.
-- Off-site copy: a missing or damaged preserved file is reported and retried next pass without stopping the other files, checkpoints and exports. Notifications also work with Apprise 1.x. The panel summary names the largest per-type attachment limit.
-- Made independent bot setup visible in the panel with pinned configuration downloads, separate token files, publishing cadence and custom Bot API / HTTP proxy settings. Added operator-managed public MTProxy catalogs and preview/import of Telegram proxy links alongside manual routes. Added offline witness configuration checks and documented where continuity requires a full archive comparison rather than a growing counter.
-- Corrected stale validation summaries using a read-only review of 2,385 retained live Telegram events with verified signatures and hash-chain continuity. Documented the existing saved update-state/catch-up implementation and its remaining replay limits.
-- Refreshed the product page with a dark hero, an interactive message history, four screenshot views and a demo-first introduction. Redesigned the desktop access screen, refined Russian labels and reorganized the English/Russian READMEs around features and getting started. Added matching English/Russian covers and social artwork.
-- Require Pillow 13.0.0 or newer (below 14) and pin 13.0.0: the dependency audit reported 39 advisories against 12.3.0, with fixes in 13.0.0. The minimum Python version remains 3.11. See the [upstream security fixes](https://pillow.readthedocs.io/en/stable/releasenotes/13.0.0.html#security).
-- Pre-publication checks: source ZIPs allow only known locale JSON resources; wheels use explicit asset types and locale files, excluding arbitrary static files and namespace data directories. Git/Docker ignore common account JSON files. A publication check validates local documentation links, recognized secret patterns and the Git file list; CI now runs it and audits pinned runtime dependencies with pip-audit.
-- Added a searchable **Go to…** menu (Ctrl/Cmd+K), keyboard navigation, focus restoration, current-page announcements, Russian labels and responsive light/dark styling. Closing the workspace also closes the menu. Added browser checks at 320, 390 and 1440 pixels.
-- Fixed two broken documentation links and refreshed release documentation. Synthetic attachment fixtures use a fixed document date so comparison tests do not depend on timing.
-- Whole-tool review: reject attachment downloads with the wrong byte count; scope replica progress to its destination/key; report missing or corrupt preserved files; verify restored media; reconcile identical overlapping journal segments and defer checkpoints beyond the copied journal boundary. Old unscoped replica progress triggers one complete local-data replay.
-- Workspace switches and panel locking discard late API responses, including records, dossier caches, witness tokens and export dialogs. Actions wait for the selected workspace to load. Cancelling the file picker leaves a finished chat export available to download.
-- Dossier builds cannot recreate a cache after it has been disabled or removed. Export cancellation waits for its file worker before removing temporary files. Added backend and workspace-browser regression coverage; existing English controls and translations are preserved.
-- Corrected chat-switch routing, preserved successful action receipts through refresh failures, and disabled automatic RPC retries for callback and join actions. Added browser regressions for delayed chat responses and interrupted refreshes; included the mini-client check in CI.
-- Rechecks and live edits compare attachment identity, entities and keyboard removal; temporary file-access metadata does not create versions. Background recovery respects own-action scope.
-- Restore validates object paths in private staging, verifies every checkpoint and journal range, and publishes only a fully verified archive into an empty directory. Object Lock verification checks the actual requested deadline. Added regression coverage for each reviewed failure.
-- Declared English fallbacks for untranslated interface sections while retaining existing translations and strict dictionary coverage checks.
-- Panel mini-client in Chats: plain-text messages and replies, callback/text button presses with saved bot answers, and Telegram invite/username/bot-start previews followed by explicit join/open actions. Signed request/result receipts, persistent request deduplication, stale keyboard checks, FloodWait handling, and separate pending/unknown outcomes. The new controls use English text.
-- Observation scope: chosen chats, one Telegram folder or the whole account, with channels, groups, private chats and bots as switchable types. New chats are added the moment they appear; excluded chats are never recorded. Switching to a folder or the whole account asks for confirmation, which the signed journal records.
-- Own actions: outgoing messages and edits are labeled, reply-keyboard button presses are recognised, and they can be left out.
-- Deletions in private chats and ordinary groups are recorded in their chat when a message with that ID was saved before, instead of staying unscoped.
-- Rechecks in two tiers: priority sources every 15 minutes, others every 6 hours, at most 30 per pass, so accounts stay clear of FloodWait.
-- Attachment limits per type (photos, videos, GIFs, round videos, voice, audio, stickers, files), up to 2,000 MiB.
-- Sources can be removed (their people profiles are deleted; saved records stay in the journal) and starred as priority.
-- People profiles per chat, opt-in: name and username history, Telegram flags, avatar SHA-256 and pHash with similar avatars, activity, replies, other observed chats and mentioned wallets, phones, usernames and links. Built only from saved records, each fact citing its record; exported as a separate signed file, optionally as an AES-256 ZIP; verify.py checks it against an evidence export.
-- Independent witness: a separate process or container with its own key, journal and bot fetches the signed journal head with a read-only token, posts it to a channel and records when the collector does not answer. Witness page in the panel, Docker profile, deploy/compose/compose.witness.yaml for another server; verify.py checks evidence exports against the witness journal and channel posts.
-- Reports and verify.py state continuous observation periods, gaps with their reason and message IDs that were never observed (not presented as deleted); signed ZIPs include coverage.json.
-- Evidence manifests, chat exports, witness journals and profile files name their producer (TgWitness, PhishDestroy) in the signed part; the report and verify.py show it.
-- Notifications: optional excerpts of deleted and edited messages (off by default), newly added chats, and a notification list in the panel.
-- Off-site copy: the bucket's Object Lock and each pass's retention are read back, so storage that ignores Object Lock is reported.
-- Parameters page: every limit and pace that was fixed in code is set per workspace in the panel, with its range and default, and each change is recorded in the signed journal. Covers the chat list size and refresh, heartbeat and checkpoint intervals, the startup buffer, how rechecks spread requests, disk reserve, download timeouts and retries, people-profile options including your own regular expressions, notification size and pace, snapshot, ZIP and browser-download limits, panel action timeout and Telegram client timeouts and retries.
-- Recheck, attachment size, evidence and off-site copy intervals and the history snapshot size take any number in their range instead of a few presets; the default attachment limit goes up to 2,000 MiB.
-- Coverage follows the heartbeat interval recorded in each heartbeat; verify.py takes `--max-gib` for archives above 4 GiB.
-- Witness: `--timeout`, `--post all|changes|problems`, `--title`, a JSON config file (`--config`) and replaceable post wording; unknown options are refused.
-- Investigation mode: one button sets the scope for an account that joins teams and talks to bots. Buttons under messages (links, web apps, texts to copy, callback data) are kept and shown in Chats, button-only edits become new versions live and at recheck, and every new chat or bot gets its profile (description, bot commands, members, invite link) and up to 1,000 earlier visible messages saved at once. Chats → Profile saves a source's profile on request.
-- Dedicated account guide, linked from the sidebar, Account, Investigation mode and the setup guide: why the main account must not be used, why TgWitness works through public app hash/app ID pairs and why nobody can see anything of yours through them (with links to Telegram's documentation and to programs that use the same pairs), ways to create an extra account, and services for getting a number. The setup guide shares its new look.
-- New dependency: Pillow, for avatar perceptual hashes.
-- Light and dark theme, following the system by default; Telegram-style chat view and interface motion, which an "Animations always on" switch keeps when the system asks for less.
+- High-assurance deployment (`python -m tgwitness.cloud`, [guide](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/)) on Hetzner, DigitalOcean, Linode, Vultr or EC2: no SSH key, no inbound ports, panel only through a Cloudflare Tunnel, and a `verify` command for third parties.
+- Local launchers open the panel in the browser once it's up.
+- Read-only online demo of the real panel with fictional data.
+- Wiki with 13 guides, docs website with a reference section, search, diagrams and 13 languages.
+- **Sign out of Telegram** on the Account page.
+- About 940 Russian panel strings fixed by hand.
+- Observation scope: chosen chats, a folder or the whole account, by type. New chats are picked up immediately.
+- Investigation mode for accounts that join groups and talk to bots.
+- People profiles (opt-in per chat), independent witness bot, notification excerpts, Parameters page, light/dark theme.
+- Panel mini-client: send messages, press bot buttons, preview and join invites.
+- Fixed message loss after a long stop (rechecks used to stop after 1,000 messages).
+- Many fixes from a full review: attachment byte counts, restore checks, scope edge cases, verify.py witness handling, off-site copy retries.
+- Pillow 13 (39 advisories against 12.3).
 
 ## 0.6.1 · 27 October 2026
 
-- Renamed TgWatch to TgWitness; archives and checkpoints made under the old name still verify.
-- Evidence mode: checkpoints are timestamped automatically by RFC 3161 authorities and OpenTimestamps, and verify.py checks the answers.
-- The UI and docs say "workspace" throughout.
-- Exports can be saved as a password-protected AES-256 ZIP that 7-Zip and WinRAR open.
-- Notifications through Apprise: problems, changes in observed chats and a daily summary.
-- Added 13 interface languages and translated the README, Quick start and Deployment guide into 12 languages.
-- Off-site copy: everything goes encrypted to any S3-compatible storage, with Object Lock where available and a verified restore command.
-- After a restart, observation catches up on Telegram updates missed while it was off.
-- Observed chats are rechecked every 15 minutes for missed messages, edits and messages Telegram no longer returns.
-- Photos and files are saved by default; downloads pause below 1 GiB of free disk.
-- Sign in without your own API ID/hash using a built-in pool of public API pairs.
-- The chat list loads on its own in Sources, and every journal record type has a readable title.
-- New Chats view as the start screen, with deleted and edited messages highlighted.
-- Export one chat with several accounts at once; each account signs the ranges it fetched.
-- Observation keeps running during chat exports.
-- No fixed limit on workspaces.
-- Full chat export shows the expected time and progress.
-- Chat exports list every author; People shows each person's saved, deleted and edited counts.
-- New Accounts view to manage, rename and delete workspaces.
-- Full chat export as a signed ZIP.
-- Portable package checks run on a temporary port.
-- Public project website.
-- GitHub Pages build and deployment workflow.
-- Windows portable package with an embedded Python runtime.
-- Start.cmd finds or offers to install Python 3.12.
-- start.sh finds more Python versions and prints the install command.
-- start.py explains a missing venv package or failed dependency download.
-- Ctrl+C in the launcher stops the server in order.
-- Docker helpers print the panel address and token once the container is healthy.
-- Rewritten accounts guide.
-- Redesigned panel on one stylesheet.
-- Bundled SVG icon set and a new logo.
-- Easier-to-scan journal.
-- Version in the sidebar; `--host`, `--port` and `--data-dir` in `--help`.
-- Offline setup guide restyled to match the panel.
-- Rewritten README with current screenshots.
-- tools/capture_screenshots.py regenerates README images; browser checks can use installed Chrome or Edge.
-- Cleaner download test output.
-- Local Playwright browsers excluded from git and Docker builds.
+- Renamed TgWatch to TgWitness, old archives still verify.
+- Evidence mode timestamps checkpoints with RFC 3161 and OpenTimestamps.
+- Password-protected AES-256 ZIP exports.
+- Notifications through Apprise.
+- 13 interface languages; README, Quick start and Deployment in 12 languages.
+- Encrypted off-site copy to S3-compatible storage with Object Lock.
+- Catch-up after restart and rechecks every 15 minutes.
+- Built-in pool of public API pairs, no own API ID needed.
+- New Chats view, Accounts view, multi-account chat export, signed full chat export.
+- Windows portable package, public website, GitHub Pages workflow.
+- Better launchers on all platforms, redesigned panel, new logo.
 
 ## 0.6.0 · 27 October 2026
 
-- Start live setup on a focused account form with Phone, QR code, Files, and Auth key tabs. Make API ID + Hash directly accessible and explain each supported file beside the picker, including companion JSON and the difference from an Auth Key.
-- Accept Auth Key HEX and DC ID directly, with optional online User ID verification. Reject incomplete keys locally and discard conversions after inputs change.
-- Put file selection before format guidance and show progress while reading files, requesting login codes, generating QR codes, or connecting to Telegram.
-- Open demo mode on its sample journal. Show live startup instructions on its Account page instead of a login form that cannot authorize accounts.
-- Start connected, unconfigured workspaces on source selection. Move journal counts, capture settings, and detailed verification into expandable sections.
-- Put phone entry first and request the code directly, with API settings revealed only when missing. Reuse the current workspace's saved API pair for phone, QR, and session login without exposing saved secrets to the browser.
-- Connect selected account files with one action; metadata-only JSON leads to phone entry. Collapse connection/storage settings and simplify the panel-token gate.
-- Refresh the panel with a light workspace, dark navigation, larger journal text, and a next-step guide for account connection, source selection, and observation.
-- Separate phone, QR, and file sign-in. Paste one `API ID:API Hash` pair to fill both fields; reject malformed pairs locally and discard stale imports when changing sign-in methods. No shared API credentials are bundled.
-- Import Telethon and Pyrogram SQLite sessions, modern single-account TData ZIPs, Telethon StringSession text, and documented account JSON fields in Connection.
-- Read up to four matching files together; companion JSON can supply API metadata. Conversion stays in server memory, with bounded input and no ZIP extraction.
-- Support Desktop local passcodes and complete Auth Key HEX + DC ID JSON. Check imported user IDs against Telegram before retaining account authorization.
-- Add locally rendered QR login, Telegram 2FA, expiry/retry, and cancellation on lock, workspace switch, route change, and replacement login.
-- Add synthetic parser, isolation, QR lifecycle, and browser acceptance coverage; update English format, deployment, security, and offline documentation.
+- New account form with Phone, QR code, Files and Auth key tabs.
+- Auth Key + DC ID sign-in, Telethon/Pyrogram sessions, TData ZIPs, StringSession, account JSON.
+- QR login with 2FA, Desktop local passcodes.
+- Demo opens on its sample journal; refreshed panel look.
 
 ## 0.5.1 · 27 October 2026
 
-- Disconnect rejected authorization clients and accept live updates only from the active account client. Resuming observation cancels unfinished login.
-- Support windowless Windows launches with rotating startup/server diagnostics in the data directory's `logs/server.log`; HTTP access logging remains disabled.
-- Clear journal verification results on workspace changes, discard late responses, and identify the verified journal boundary when new records arrive.
-- Search Unicode text without case differences, preserving original signed records.
-- Keep unsaved attachment settings during status refresh and edits made during saving.
-- Show full UTC event dates/times at phone and tablet widths.
-- Keep the search icon clear of the input text at every layout width.
-- Include monitoring-policy changes in the Coverage filter.
-- Add regression coverage, contribution/issue guidance and stricter public-source packaging exclusions.
-- Expand English account-format and collection guides, add workflow diagrams and export tables, and align the README, quick start, and offline setup guide.
-- Add Linux/macOS launch scripts, Python discovery on Windows, and Docker startup helpers that wait for web-server health. Document one-command installation.
-- Add optional automatic HTTPS with Caddy, image-only Compose deployment, and versioned AMD64/ARM64 GHCR builds triggered by a GitHub Release after CI passes.
-- Check first-run installation across CI platforms and Compose persistence after container recreation; document updates, reboot behavior, and data migration.
-- Explain signature coverage for each export format and the investigation handoff workflow, including independently retained fingerprints and checkpoints.
-
-See [verification](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) for executed checks and [readiness](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md) for remaining live-service and deployment work.
+- Only the active account client is accepted; rejected logins are disconnected.
+- Windowless Windows launches with logs in `logs/server.log`.
+- Case-insensitive Unicode search, full UTC dates on phones.
+- Linux/macOS launch scripts, Docker helpers, optional HTTPS with Caddy, GHCR images.
+- Docs on export signatures and investigation handoff.
 
 ## 0.5.0 · 26 October 2026
 
-- Add per-account monitoring categories, presets and signed policy changes.
-- Allow direct local entry to isolated synthetic demos without copying a token.
+- Per-account monitoring categories, presets and signed policy changes.
+- Direct local entry to synthetic demos.
 
-Earlier preview capabilities and qualification history are described in [release status](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RELEASE.md) and [verification](https://phishdestroy.github.io/TgWitness/docs/reference/verification/).
+Older history: [release status](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RELEASE.md) and [verification](https://phishdestroy.github.io/TgWitness/docs/reference/verification/).
 
 
 ---

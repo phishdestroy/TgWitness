@@ -138,11 +138,6 @@ non garantisce l’ottenimento di un timestamp.</li>
 <p>Una verifica riuscita attesta l’integrità rispetto alla chiave del collector
 affidabile e ai confini definiti. Consultare <a href="#verification-scope">l’ambito di verifica</a> per le
 ipotesi di affidabilità e <a href="../verification/">i risultati di convalida</a> relativi ai controlli effettuati.</p>
-<p>Le notifiche inviate tramite Apprise aiutano gli operatori a monitorare l’attività nell’area di lavoro e nelle chat.
-Contengono nomi e conteggi; gli estratti dei messaggi eliminati e modificati sono opzionali
-e disattivati per impostazione predefinita. Utilizzare il registro firmato e le esportazioni per il record conservato.
-Con un proxy dell’area di lavoro, le notifiche utilizzano lo stesso percorso; i servizi che non possono utilizzarlo
-e i percorsi MTProxy vengono rifiutati.</p>
 <h2 id="handover-extract">Estratto del passaggio di consegne<a class="anchor" href="#handover-extract" aria-label="Collegamento a questa sezione">#</a></h2>
 <p>Un file ZIP firmato contiene l’intero registro dell’area di lavoro. Quando un tribunale, un avvocato o un ufficio preposto alla segnalazione di abusi necessita
 solo di alcune chat, di un determinato periodo o di determinate persone, <strong>la funzione Esportazioni → Estratto di consegna</strong> prepara una copia ridotta
@@ -226,12 +221,6 @@ filtri, partecipanti, indicatori, dettagli dei record e selezioni di JSON/CSV se
 --evidence ARCHIVE.zip</code> per confrontarle con l’archivio firmato.
 Il verificatore controlla l’ID del report, la chiave di firma, i limiti dell’archivio e ogni voce selezionata; le voci modificate,
 mancanti o duplicate vengono scartate. Le note di selezione e l’ora di creazione rimangono metadati non firmati.</p>
-<p>Le attuali esportazioni di archivio memorizzano i blocchi di visualizzazione in <code>viewer/*.html</code>. Ogni blocco viene caricato in un
-frame in modalità sandbox in cui gli script sono consentiti, ma <strong> senza accesso </strong> alla stessa origine, e invia il proprio testo JSON al report.
-Il report verifica l’origine del messaggio e il relativo SHA-256 rispetto al descrittore firmato prima della visualizzazione.
-Il CSP del report stesso consente solo lo script dell’applicazione sottoposto a hash. I dati mancanti possono essere recuperati
-selezionando il file ZIP corrispondente nella scheda «Verifica»; i dati letti dal file ZIP vengono analizzati senza essere eseguiti.
-I report esportati in precedenza mantengono il proprio visualizzatore incorporato e rimangono verificabili.</p>
 <p>Le lacune nei numeri dei messaggi vengono mostrate solo per un flusso di chat completo, non filtrato e in ordine crescente. Nascondere una
 categoria o non riuscire a caricare un blocco di dati non deve trasformare una riga omessa in prova della mancanza di un
 messaggio. L'evidenziazione dei risultati di ricerca opera sul testo in chiaro prima dell'escape «HTML», preservando il markup letterale.</p>
@@ -244,20 +233,6 @@ nella lingua del report, seguite da una guida completa in inglese. <code>SHA256S
 file elencati al suo interno, esclusi se stesso, <code>manifest.json</code> e <code>manifest.sig</code>; il manifesto firmato
 copre anche <code>SHA256SUMS</code>. Mantenere inalterato il file ZIP originale e salvare i file di lavoro al di fuori della
 cartella estratta. I rapporti PDF includono segnalibri di sezione e l’identificazione del caso/rapporto nelle pagine successive.</p>
-<p>Le impostazioni dei report vengono salvate per ogni area di lavoro. La lingua del report può seguire quella del pannello oppure essere fissa;
-una lingua specificata esplicitamente in una richiesta di esportazione sovrascrive tale scelta solo per quell’esportazione. Sono accettate tutte le lingue
-del pannello, comprese le quattro lingue con scrittura da destra a sinistra.</p>
-<p>L'opzione di transcrizione del diario controlla il visualizzatore HTML e la trascrizione PDF. Il record completo JSON è
-un'opzione di dettaglio HTML: quando è abilitata, il visualizzatore riporta il record esportato esatto, compreso un
-record ridotto in un passaggio di consegne. Disabilitarla non altera il file di diario ufficiale. Le
-anteprime delle foto si applicano sia alla chat che al registro HTML. Le sequenze consecutive di heartbeat possono essere compresse senza
-rimuovere i record; l’espansione di sequenze lunghe carica le relative righe in modo incrementale.</p>
-<p><code>part_size</code> indica il numero massimo di voci per file di dati del visualizzatore (500–100.000) e la dimensione massima della trascrizione
-inclusa in un PDF. I blocchi del visualizzatore vengono inoltre suddivisi con un limite di 16 MiB di dati. Le trascrizioni PDF più lunghe
-vengono omesse con un riferimento esplicito ai file sorgente firmati e al visualizzatore HTML. Un report autonomo HTML
-incorpora al massimo 20.000 elementi o 32 MiB di dati relativi agli elementi; una volta superati tali limiti, rilascia tali elementi e
-indirizza il lettore all’archivio. Questi limiti di visualizzazione non troncano mai i file sorgente firmati.
-La configurazione dei caratteri PDF combina i caratteri CJK dove necessario: un carattere cinese da solo potrebbe non includere l’Hangul coreano.</p>
 <h3 id="the-chat-at-export-time">La chat al momento dell’esportazione<a class="anchor" href="#the-chat-at-export-time" aria-label="Collegamento a questa sezione">#</a></h3>
 <p>Un’esportazione della chat registra ciò che Telegram ha indicato riguardo alla chat all’inizio dell’esportazione: le etichette di Telegram
 (<code>scam</code>, <code>fake</code>, <code>restricted</code> con le relative motivazioni, <code>verified</code>), i nomi utente, la descrizione, il numero
@@ -471,10 +446,6 @@ verifica fallita, non viene pubblicato alcun file ripristinato. I controlli di c
 e la data restituite con la scadenza inviata al momento del caricamento (con una tolleranza di arrotondamento di un secondo). Una scadenza scaduta,
 non valida o abbreviata non viene considerata verificata. Lo stato riporta l’oggetto campionato
 di cui è stata riletta la conservazione per quel ciclo di caricamento.</p>
-<p>Lo stato di avanzamento della copia è limitato alla destinazione e alla chiave di crittografia specificate. La modifica dell’endpoint, del bucket
-o del prefisso avvia una copia completa del registro, dei file multimediali e dei checkpoint conservati localmente verso
-tale destinazione. Lo stato di avanzamento precedente non ancora coperto viene conservato, ma riprodotto una sola volta dopo l’aggiornamento. Le esportazioni storiche
-delle chat già rimosse dalla cartella “Posta in uscita” locale rimangono nella loro destinazione precedente.</p>
 <p>I file multimediali locali mancanti o danneggiati vengono segnalati come errore del ciclo e il cursore multimediale rimane posizionato prima
 di essi, in modo che il file venga riprovato nel ciclo successivo; i file, i checkpoint e le esportazioni successivi vengono comunque
 copiati. Il ripristino verifica
@@ -543,9 +514,6 @@ solo l’attività delle altre sessioni viene considerata come una modifica. <co
 <p>Ciò che non viene mostrato: drand dimostra solo l’ordine dei record rispetto al tempo pubblico,
 e l’elenco dei dispositivi è una dichiarazione di Telegram tramite il collettore, firmata dal collettore
 come ogni altro record.</p>
-<p>Testato il 1° novembre 2026: <code>tools/check_evidence_witnesses.py --live</code> ha scritto un round reale da
-<code>drand.cloudflare.com</code>, ha esportato il registro e ha confermato il round con <code>drand.cloudflare.com</code>
-e <code>api.drand.sh</code>; l’elenco dei dispositivi è stato eseguito con risposte simulate di Telegram, non con un account reale.</p>
 <p><strong> Log di Cloudflare Gateway </strong> (<code>cloudflare.gateway_dns</code>). Per un server che effettua la risoluzione tramite
 Cloudflare Gateway (<a href="../high-assurance/#cloudflare-as-an-outside-witness"> Gateway DNS </a>), ogni
 passaggio copia ciò che il Gateway ha registrato dall’ultima copia: un record per finestra di al massimo tre

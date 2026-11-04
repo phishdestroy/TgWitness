@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/setti
 세션이 진행 중이거나 이전에 설정이 완료된 워크스페이스에는 마법사가 표시되지 않습니다. 페이지가 로드될 때 해당 값이 목표(goal)로 대체되지 않습니다. 필드를 숨겨도 해당 기능이 비활성화되거나 값이 삭제되지는 않습니다.
 
 예상 처리 규모 및 소요 시간은 선택한 채팅 3개와 각 채팅에서 최대 20개의 메시지를 읽는 것을 기준으로 합니다. 이는 추정치일 뿐이며, 텔레그램의 제한 사항, 특정 서버의 속도 또는 모든 채팅에 포함된 파일을 예측하지는 않습니다.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

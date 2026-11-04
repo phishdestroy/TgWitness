@@ -32,11 +32,11 @@
 <nav class="breadcrumbs" aria-label="ガイド"><a href="../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../">ドキュメント</a> <span aria-hidden="true">/</span> <span aria-current="page">レポートの作成</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">テスト済みの内容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">ドキュメント / 11</p><h1>レポートの作成</h1><p class="guide-outcome">読者が、事案の課題から保存された記録へと明確にたどり着けるようにしてください。</p>
-<p>Report Studioは、データ選択機能、読みやすい変更履歴、グラフ、および作成者が記述した調査結果を統合します。8つの統合デザインが、サポートされているHTMLおよびネイティブPDF出力に適用されます。HTML、PDF、JSONレポートにはそれぞれ独自の署名付きシールが付与され、ZIPマニフェストもパッケージ内のファイルを結合します。HTMLおよびPDFは、最終的なレイアウトが完了した後にシールが適用されます。</p>
+<article class="guide-content"><p class="eyebrow">ドキュメント / 11</p><h1>レポートの作成</h1><p class="guide-outcome">読み手をケースの問いから保存された記録へまっすぐ導きます。</p>
+<p>Report studio は、選んだデータ、変更履歴、グラフ、あなたの調査結果をまとめます。8 つのデザイン、HTML とネイティブ PDF。HTML、PDF、JSON のレポートはすべてあなたの鍵で封印されます。</p>
 
 <h2 id="build">3つのステップでレポートを作成する</h2>
-<ol><li><strong>[エクスポート] → [設定とプレビュー] → [データ]</strong> を開きます。ワークスペース全体を使用するか、チャット、作成者、UTC 観測日（期間を含む）、およびレコードタイプを選択します。日付は、TgWitness がそのレコードを観測した日時を表しています。</li><li>「<strong>デザインとコンテンツ</strong>」で、デザインとコンテンツのプリセットを選択してください。アクティビティチャート、参加者ラベル、トランスクリプト、保存された変更点、およびオプションのケースボード資料を選択します。事件の詳細と調査メモを追加してください。</li><li><strong>「プレビュー」</strong>を開き、件数、アクティビティ、参加者、サンプリングされた記録、および欠落しているID範囲を確認してください。設定を保存してから、必要な形式でダウンロードしてください。</li></ol>
+<ol><li><strong>エクスポート → 設定とプレビュー → データ</strong>：ワークスペース全体、またはチャット、作成者、日付（UTC、TgWitness が記録を見た時刻）、記録の種類を選びます。</li><li><strong>デザインとコンテンツ</strong>：デザインと中身を選びます：グラフ、参加者、トランスクリプト、変更、Case Board の項目、ケースの詳細、メモ。</li><li><strong>プレビュー</strong>：件数、アクティビティ、サンプル、欠けている ID の範囲を確認します。保存してから、必要な形式をダウンロードします。</li></ol>
 
 <section class="workflow-lab" data-workflow="report" aria-labelledby="report-example-title">
   <h3 id="report-example-title">保存された資料を、読者が理解しやすいように整理してください</h3>
@@ -60,15 +60,15 @@
 </section>
 
 <h2 id="designs">読み方のスタイルを選択してください</h2>
-<p><strong>「Classic」、「Editorial」、「Briefing」、「Analytics」、「Technical」、「Overview」、「Reading series」、および「Ledger &amp; margin」</strong>は、同じ基礎となる記録を異なる構成で提示します。デザインを変更しても、データの選択内容や記述されたメモは保持されます。レポートの言語は、サポートされている 25 言語から選択可能です。</p>
-<p>「Reading」シリーズでは、セクションレールを軸に、ケース、範囲、調査結果、変更点をまとめています。「Ledger &amp; margin」では、番号付き章と広い余白を採用しています。どちらの形式も、アカウントのHTML概要表示やコピーの共有に対応しています。 ネイティブPDFはバンドルされたフォントを使用して生成されます。PDF作成のために、ユーザーのマシンにブラウザやNodeのインストールは必要ありません。中国語、日本語、韓国語のPDFについては、さらにサーバー上にNoto Sans CJKなどの適切なフォントが、システム全体にインストールされているか、<code>TGWITNESS_FONT_DIR</code>に配置されている必要があります。それがない場合、ZIPファイルにはHTMLおよびJSONレポートのみが含まれます。</p>
+<p><strong>Classic, Editorial, Briefing, Analytics, Technical, Overview, Reading series, and Ledger &amp; margin</strong>：同じ記録で、見た目が違います。切り替えても選択とメモは保持されます。25 言語のどれでも使えます。</p>
+<p>PDF は同梱のフォントで作成され、ブラウザーは不要です。中国語、日本語、韓国語にはサーバー上に Noto Sans CJK などのフォント（システム全体または <code>TGWITNESS_FONT_DIR</code>）が必要で、ない場合は HTML と JSON のみになります。</p>
 
 <h2 id="read">変更内容をその文脈とともに読み取る</h2>
-<p>保存された編集内容は「変更前」と「変更後」の両方が表示されます。削除通知には、最後にキャプチャされたバージョンが併記される場合があります。返信、引用、転送、リアクション、ボタン、および添付ファイルのメタデータについては、利用可能な参照情報が保持されます。ファイルの SHA-256 ハッシュとジャーナルレコードのハッシュは、個別にラベル付けされています。</p>
-<p>デザインプレビューでは、最初の 50,000 件のソースレコードの中から一致するレコードを使用した、表紙、調査、およびチャートの各コンポーネントが表示されています。別のデータプレビューでは、安定版のジャーナルスナップショット全体をスキャンして正確な選択件数を算出し、表示されるサンプル数の上限にはラベルが付いています。PDF を生成して、最終的なページ構成を確認してください。 アカウント全体のエクスポートにはHTML形式の概要が含まれ、個々のチャットPDFには選択したデザインが適用されます。</p>
+<p>編集は前後を、削除は最後に保存された版を表示します。返信、転送、リアクション、ボタン、添付ファイルは参照を保ちます。</p>
+<p>デザインのプレビューは最初の 50,000 件の記録を使い、データのプレビューはすべてを正確に数えます。最終的なページレイアウトは PDF を作成して確認してください。</p>
 
 <h2 id="sharing">受信者向けの文言は慎重に選定してください</h2>
-<p>レポートフィルターにより、読みやすいレポートが生成されます。完全な証拠用ZIPファイルには、元のジャーナルと添付ファイルがそのまま保持されます。受信者が選択されたデータのみを受け取る必要がある場合は、<a href="../handover/">最小限の引き渡し</a>を行ってください。<a href="../reference/case-reports/">レポートの内容と検証</a>を確認するか、<a href="../exports/">完成したエクスポートファイルを検証してください</a>。</p>
+<p>フィルターはレポートの形を決めるだけで、証拠 ZIP には引き続きジャーナル全体とファイルが入ります。相手に渡す量を減らすなら、<a href="../handover/">最小化した引き渡し</a>を使ってください。詳しくは：<a href="../reference/case-reports/">レポートの内容</a>、<a href="../exports/">エクスポートの検証</a>。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/case-reports/">完全な参照情報 →</a><a class="next-guide" href="../handover/"><span>次のステップ</span><strong>共有用コピーを作成してください →</strong></a><p>これらのガイドは、現在の実装について説明しています。検証結果および残された課題については、別途文書化されています。 <a href="../reference/verification/">テスト済みの内容 →</a></p></footer>
 </main>

@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/
 
 [开源 / v0.8.1](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/)
 
-捕获 Telegram 消息，保留其变更记录，并导出经签名的记录。
+保存 Telegram 聊天及其每一次编辑和删除，然后交出任何人都能核查的记录。
 
 [打开演示](https://phishdestroy.github.io/TgWitness/demo/?lang=zh)[安装指南](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=zh)
 
-演示中使用的是虚构数据。无需登录 Telegram 账号。
+虚构数据，无需登录 Telegram。
 
  [通过 GitHub Actions 采集（预览版）](https://phishdestroy.github.io/TgWitness/zh/docs/capture/) [S3 异地备份：设置与恢复](https://phishdestroy.github.io/TgWitness/zh/#s3)
 
@@ -34,31 +34,31 @@ Northstar · 研究虚构来源 / 消息 42
 
 ## 每一处变更都清晰记录。随时随地触手可及。
 
-通过虚构的演示数据浏览界面。
+真实界面，虚构数据。
 
 TgWitness / 已保存的聊天记录您的观察工作区
 
 ![以深色主题保存 Telegram 对话记录，并完整保留编辑和已删除消息的上下文信息](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
-01 / 已保存的聊天记录 熟悉的对话视图，消息旁会显示已捕获的编辑记录和删除通知。
+01 / 已保存的聊天 看起来就像普通聊天，编辑和删除就显示在消息旁边。
 
 TgWitness / 日志本地工作区
 
 ![包含已观察到的消息、编辑记录、删除通知及覆盖事件的日志](https://phishdestroy.github.io/TgWitness/assets/workspace.png)
 
-02 / 日志 一个可搜索的时间线，记录您的账户所观察到的内容，包括中断情况。
+02 / 日志 您的账户看到的一切，可搜索，空缺也会记录。
 
 TgWitness / 编辑历史本地工作区
 
 ![详细信息抽屉，用于对比消息的原始版本与编辑后的版本](https://phishdestroy.github.io/TgWitness/assets/detail.png)
 
-03 / 编辑历史记录：在不覆盖先前记录的情况下，比较捕获的不同版本。
+03 / 编辑历史 新旧版本并排显示，不会覆盖任何内容。
 
 TgWitness / 签名导出文件本地工作区
 
 ![导出功能支持生成带签名的 ZIP、JSONL、CSV 文件以及离线 HTML 报告](https://phishdestroy.github.io/TgWitness/assets/exports.png)
 
-04 / 带签名的导出文件 将日志随身携带，附带清单和独立验证器。
+04 / 签名导出 带走日志，已签名，并附带自己的验证工具。
 
 通过[“案件看板](https://phishdestroy.github.io/TgWitness/zh/docs/case-board/)”、[报告设计](https://phishdestroy.github.io/TgWitness/zh/docs/reports/)和[共享副本](https://phishdestroy.github.io/TgWitness/zh/docs/handover/)追踪已保存的记录。集中[审查账户组](https://phishdestroy.github.io/TgWitness/zh/docs/groups/)。
 
@@ -66,7 +66,7 @@ TgWitness / 签名导出文件本地工作区
 
 ### 范围由您决定。
 
-可选择特定聊天、Telegram 文件夹或整个账户。每个账户均拥有独立的工作区。
+几个聊天、一个文件夹或整个账户。每个账户都有自己的工作区。
 
 [比较采集模式](https://phishdestroy.github.io/TgWitness/zh/guides/modes.html#scope)
 
@@ -74,7 +74,7 @@ TgWitness / 签名导出文件本地工作区
 
 ### 变更内容丰富了故事。
 
-已捕获的版本、删除通知和观察缺口将保留在日志中。
+版本、删除和空缺都保留在日志中。
 
 [查看事件矩阵](https://phishdestroy.github.io/TgWitness/zh/guides/modes.html#events)
 
@@ -82,7 +82,7 @@ TgWitness / 签名导出文件本地工作区
 
 ### 一份随行记录。
 
-包含签名 ZIP 文件、完整保留的文件以及离线报告。可选密码保护。
+签名 ZIP、文件和离线报告。密码可选。
 
 [导出并验证](https://phishdestroy.github.io/TgWitness/zh/docs/exports/)
 
@@ -103,7 +103,7 @@ TgWitness / 签名导出文件本地工作区
 
 ## 欢迎其他审阅者提供意见。
 
-将观察记录、文件和离线 HTML 报告整合为一个签名包进行交付。
+消息、文件和离线报告打包在一个签名包中。
 
 [阅读证据模型](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)
 
@@ -119,7 +119,7 @@ tgwitness-evidence.zip带签名的软件包
 
   独立验证带签名的清单 + 独立验证器
 
-接收方需使用可信的采集器密钥对保存的记录和文件进行验证。此外，另行保留的检查点还会核对与先前日志的连续性。[了解验证步骤。](https://phishdestroy.github.io/TgWitness/zh/docs/concepts/#layers)
+接收方用您的密钥核查所有内容，而保存在别处的检查点表明此后没有任何内容被改写。[检查的工作原理。](https://phishdestroy.github.io/TgWitness/zh/docs/concepts/#layers)
 
 ## S3备份。外部验证。
 
@@ -129,25 +129,25 @@ tgwitness-evidence.zip带签名的软件包
 
 ### 将所有内容复制到兼容 S3 的存储中
 
-日志、文件、带时间戳的检查点和聊天记录导出——在上传至 AWS S3 或兼容存储之前均已加密。
+日志、文件、检查点和聊天导出，在发送到 S3 之前加密。
 
 **存储设置与恢复**
 
 客户端加密
 
-`AES-256-GCM`对本机上的对象进行加密。服务提供商接收加密后的对象。
+在您的机器上使用 `AES-256-GCM`。服务商只能看到密文。
 
 定时或手动备份
 
-立即复制，或选择 1 至 1,440 分钟之间的间隔。在面板中查看进度。
+立即复制，或每 1 至 1,440 分钟复制一次，进度显示在面板中。
 
 Object Lock
 
-在存储桶支持的情况下，选择保留天数和模式。该面板会报告已上传对象的保留状态是否已确认。
+选择保留天数和模式，面板会检查设置是否真正生效。
 
 经过验证的恢复
 
-请下载加密密钥并单独保存。在另一台机器上进行恢复；文件仅在验证通过后才会发布。
+请单独保存密钥。可在任何地方恢复，文件仅在验证通过后才会输出。
 
 ![完整的异地备份配置面板：端点、区域、存储桶、访问密钥、计划任务、对象锁定及恢复密钥控制](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
@@ -157,13 +157,13 @@ Object Lock
 
 [配置 S3 并恢复副本](https://phishdestroy.github.io/TgWitness/zh/docs/exports/#s3)[阅读验证详情](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**恢复密钥：**请将导出的解密密钥单独保存，以便您能够恢复加密副本。
+**恢复密钥** 请单独保存，没有它副本将无法读取。
 
 ### 通知 · Apprise
 
-通过 Apprise 接收问题警报、聊天变更和每日摘要：支持即时通讯软件、电子邮件或您自己的 JSON Webhook。
+问题、聊天变化和每日摘要，发送到即时通讯工具、电子邮件或您自己的 webhook。
 
-**选择共享内容**消息摘录默认处于关闭状态；请仅对您信任的接收方启用此功能。
+**选择共享内容** 除非您开启，否则不包含消息文本。
 
  [配置通知接收端](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#notifications)
 
@@ -171,7 +171,7 @@ Object Lock
 
 使用 RFC 3161 和 OpenTimestamps 对时间戳检查点进行哈希计算。
 
-**根据结果采取相应措施：**核查主管部门的回复，或将 OpenTimestamps 收据升级为已确认的比特币证明。
+**跟进结果** 检查 TSA 应答，或将 OpenTimestamps 回执升级为比特币证明。
 
  [查看时间戳证明](https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/)
 
@@ -179,7 +179,7 @@ Object Lock
 
 一个独立的主机用于存储已签名的观察记录，并可发布 `TGW1` 检查点。
 
-**请将参考内容**“在另一台主机上运行见证程序，并保留其自身的签名密钥和日志**”单独列出**。
+**分离参照** 在另一台主机上运行，使用独立的密钥和日志。
 
  [设置见证器](https://phishdestroy.github.io/TgWitness/zh/docs/witness/)
 
@@ -187,19 +187,20 @@ Object Lock
 
 重启后可继续操作。重新检查并 `coverage.json` 显示已恢复的消息及缺失部分。
 
-**查看时间间隔：**可同时查看已恢复的当前消息及记录的中断情况；捕获时，早期版本仍可访问。
+**查看时间区间** 恢复的消息和记录的空缺并排显示。
 
  [检查连续性和缺失部分](https://phishdestroy.github.io/TgWitness/zh/guides/modes.html#continuity)
 
 ## 您的首个工作区从这里开始。
 
-请先体验演示版。准备就绪后，连接专用账户。支持 Windows、Linux、macOS 或 Docker。
+先试用演示，准备好后再连接备用账户。
+Windows、Linux、macOS 或 Docker。
 
 [阅读安装指南](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=zh)
 
 **一个导入的会话，一个正在运行的客户端。**
 
-请勿在 Telegram Desktop 和 TgWitness 中同时运行同一组导入的 TData/会话密钥。Telegram 可能会使共享授权失效（AUTH_KEY_DUPLICATED）。如需并行使用，请通过手机或二维码创建一个独立的 TgWitness 登录账号。
+请勿在 Telegram Desktop 和 TgWitness 中同时运行导入的 TData 或会话，Telegram 可能会让两者都失效（AUTH_KEY_DUPLICATED）。两者都需要？请通过手机号或二维码单独登录 TgWitness。
 
 [请阅读会话导入警告](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=zh#session-warning)
 
@@ -224,7 +225,7 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-运行该程序需要 Python 3.11 或更高版本。如果系统中缺少 Python，Windows 启动程序会提供安装选项。
+需要 Python 3.11+。在 Windows 上，启动器会提示为您安装。
 
 [浏览版本](https://github.com/phishdestroy/TgWitness/releases)
 
@@ -259,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 启动后，请访问 [127.0.0.1:8787 并输入](http://127.0.0.1:8787)。
 
-对于源代码安装，令牌位于 `data/live/panel-token.txt`。Telegram 登录可使用内置的 API 设置，或使用您在 [my.telegram.org](https://my.telegram.org) 上生成的密钥对。[完整设置指南 ↗](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
+源码安装时，令牌位于 `data/live/panel-token.txt`。您自己的 API 凭据（来自 [my.telegram.org](https://my.telegram.org)）是可选的。[完整安装指南 ↗](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
 
 **TgWitness 0.8.1** [最新动态 →](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/) · [功能与已知限制 →](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/)
 
@@ -273,7 +274,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ## 查阅存档。
 
-加载历史记录、审查 AI 来源、连接 MCP 客户端、识别已保存的媒体文件并发送带签名的 webhook。
+历史记录、带来源的 AI、MCP、OCR 和签名 webhook。
 
 [探索工作流](https://phishdestroy.github.io/TgWitness/zh/docs/archive/)
 
@@ -281,19 +282,19 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 **本页面是否与 Telegram 相关？**
 
-不，这是一个包含虚构示例和截图的静态项目页面。实际应用程序运行在您的计算机或服务器上；登录操作也在那里进行。
+不需要。这是一个带虚构示例的静态页面。应用运行在您自己的机器上，您在那里登录。
 
 **它能恢复在捕获前已被删除的消息吗？**
 
-不。TgWitness 仅保留数据采集运行期间您的账户所观察到的内容。后续的历史快照无法还原未捕获的编辑操作或已删除的消息。
+不能。它只保存运行期间您的账户看到的内容。之后的快照无法重建错过的编辑或已删除的消息。
 
 **我的整个日志是否都经过加密？**
 
-账户凭据和签名密钥存储在加密保险库中。本地消息和附件需要存储在加密磁盘或卷中。导出文件可选配密码保护的 AES-256 ZIP 格式。
+会话和密钥是加密的。消息和文件不是，请使用磁盘加密。导出可以设置 AES-256 密码。
 
 **该网站与 Telegram 有关联吗？**
 
-不。TgWitness 是一个独立项目，基于 Telethon 构建，并根据 MIT 许可证发布。您可通过内置的 API 设置或您自己的 API 密钥对来授权您的账户。
+不是。这是一个基于 Telethon 构建、采用 MIT 许可的独立项目。您使用自己的账户登录。
 
 PROJECT NOTICE / LICENCE
 

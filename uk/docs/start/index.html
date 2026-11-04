@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="Посібники"><a href="../../">Головна</a> <span aria-hidden="true">/</span> <a href="../">Документація</a> <span aria-hidden="true">/</span> <span aria-current="page">Почніть за лічені хвилини</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Що було протестовано →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Пошук у документації</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Спробуйте «проксі», «хеш-ланцюг», «токен» або «свідок»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Зручний пошук" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введіть слово, щоб здійснити пошук у посібниках та довідковій інформації. Результати пошуку залишаються у вашому браузері.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Документація / 04</p><h1>Почніть за лічені хвилини</h1><p class="guide-outcome">Спочатку ознайомтеся з прикладом роботи. Потім підключіть свій обліковий запис.</p>
+<article class="guide-content"><p class="eyebrow">Документація / 04</p><h1>Почніть за лічені хвилини</h1><p class="guide-outcome">Спершу роздивіться демо, потім підключіть свій акаунт.</p>
 <h2 id="demo">Ознайомтеся з сайтом без реєстрації</h2>
-<p>Завантажте або клонуйте проєкт, встановіть <strong>Python 3.11 або новішу версію</strong> та запустіть демоверсію. Програма запуску створює локальне середовище та встановлює закріплені залежності.</p>
+<p>Завантажте проєкт, встановіть <strong>Python 3.11 або новіший</strong> і запустіть демо. Решту лаунчер зробить сам.</p>
 <pre><code>git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness</code></pre>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\scripts\Demo.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh --demo</code></pre></section></div>
-<p>У браузері відкривається робоча область із вигаданими повідомленнями. Відкрийте чат, порівняйте редагування та перегляньте експорт. У демо-режимі з’єднання з Telegram не встановлюється.</p>
+<p>У браузері відкриється простір з вигаданими повідомленнями. Відкрийте чат, порівняйте правку, загляньте в експорт. Telegram не задіяний.</p>
 <figure><img src="../../../assets/chats-dark.png" width="1440" height="1000" alt="Вигляд діалогу в TgWitness із прикладами повідомлень" loading="lazy"><figcaption>Приклад робочого простору. Ваш власний журнал створюється окремо.</figcaption></figure>
 <h2 id="live">Створіть власний робочий простір</h2>
-<p>Закрийте демо-версію, а потім скористайтеся звичайним запускачем:</p>
+<p>Закрийте демо, потім:</p>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\Start.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh</code></pre></section></div>
-<p>Відкрийте локальну адресу, вказану запускачем. Якщо з’явиться запит, введіть <strong>токен доступу</strong> до <strong>панелі</strong> з локального файлу, назва якого вказано в терміналі. Це розблокує TgWitness; цей процес не пов’язаний із входом у Telegram.</p>
+<p>Відкрийте адресу, яку покаже лаунчер, і вставте <strong>токен доступу до панелі</strong> з указаного файлу. Це токен для TgWitness, а не для Telegram.</p>
 <h2 id="next">Збережіть своє перше повідомлення</h2>
-<ol><li><a href="../accounts/">Підключіть спеціальний обліковий запис Telegram.</a></li><li>Виберіть групу або канал, до яких має доступ обліковий запис, а потім розпочніть спостереження.</li><li>Надішліть нове повідомлення у тестовій групі, яку ви контролюєте, і переконайтеся, що воно з’явилося у журналі.</li></ol>
+<ol><li><a href="../accounts/">Підключіть спеціальний обліковий запис Telegram.</a></li><li>Оберіть групу чи канал і запустіть спостереження.</li><li>Надішліть повідомлення в тестову групу й подивіться, як воно з'явиться в журналі.</li></ol>
 <p class="callout">Для встановлення на сервер дотримуйтесь інструкцій у розділі <a href="../server/">«Keep it running</a>».</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/quickstart/">Повне посилання →</a><a class="next-guide" href="../accounts/"><span>Наступний крок</span><strong>Підключити обліковий запис →</strong></a><p>Ці посібники описують поточну реалізацію. Результати перевірки та існуючі прогалини задокументовані окремо. <a href="../reference/verification/">Що було протестовано →</a></p></footer>

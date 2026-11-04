@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/setti
 В рабочей области, содержащей сессию или ранее завершённую настройку, мастер не отображается. Её значения не заменяются целью при загрузке страницы. Скрытие поля не отключает эту функцию и не удаляет её значение.
 
 Оценка объёма и времени учитывает до трёх выбранных чатов и до 20 сообщений из каждого. Это приблизительная оценка: она не учитывает ограничения Telegram, скорость конкретного сервера или файлы в каждом чате.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

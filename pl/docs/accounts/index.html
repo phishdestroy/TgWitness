@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../">Dokumentacja</a> <span aria-hidden="true">/</span> <span aria-current="page">Podłącz konto</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Co zostało przetestowane →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentacja / 05</p><h1>Podłącz konto</h1><p class="guide-outcome">Jedno środowisko pracy obejmuje jedno konto, jego dziennik oraz klucz podpisujący.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentacja / 05</p><h1>Podłącz konto</h1><p class="guide-outcome">Jedna przestrzeń = jedno konto, jego dziennik i jego klucz.</p>
 <h2 id="sign-in">Wybierz sposób logowania</h2>
-<p>Proszę otworzyć <strong>konta</strong>, dodać obszar roboczy i otworzyć jego ustawienia połączenia. Do obserwacji należy używać dedykowanego konta.</p>
-<ul><li><strong>Kod QR:</strong> proszę zeskanować go w ustawieniach urządzenia w aplikacji Telegram i potwierdzić nowe logowanie.</li><li><strong>Numer telefonu:</strong> proszę wprowadzić numer, kod wysłany przez Telegram oraz hasło do weryfikacji dwuetapowej, jeśli jest ona włączona.</li><li><strong>Import sesji:</strong> proszę zaimportować obsługiwany plik sesji lub dane z aplikacji Telegram Desktop, które należą do Państwa.</li></ul>
-<p>Proszę wybrać wbudowany profil API lub wprowadzić własny identyfikator API oraz skrót. Profil API identyfikuje klienta; nie służy on do logowania się na konto ani do zapewnienia anonimowości połączenia.</p>
+<p><strong>Konta</strong> → dodaj przestrzeń → ustawienia połączenia. Użyj do tego osobnego konta.</p>
+<ul><li><strong>Kod QR:</strong> zeskanuj go z ekranu Urządzenia w Telegramie i potwierdź.</li><li><strong>Numer telefonu:</strong> numer, kod, a potem hasło 2FA, jeśli je masz.</li><li><strong>Import sesji:</strong> własny plik sesji albo dane Telegram Desktop.</li></ul>
+<p>Użyj wbudowanego profilu API albo własnych API ID i hash. To tylko identyfikuje aplikację — nie loguje i niczego nie ukrywa.</p>
 <details><summary>Czy potrzebują Państwo najpierw serwera proxy?</summary><p>Przed zalogowaniem się mogą Państwo <a href="../proxies/">wybrać i przetestować trasę połączenia</a>. Każde konto ma swoją własną trasę.</p></details>
 <h2 id="sources">Wybierz, co chcesz monitorować</h2>
-<ol><li>Proszę otworzyć listę źródeł i wybrać potrzebne czaty, grupy lub kanały.</li><li>Przed rozpoczęciem obserwacji prosimy o zapoznanie się z ustawieniami gromadzenia danych, w tym plików multimedialnych.</li><li>Uruchom narzędzie do gromadzenia danych i sprawdź jego połączenie oraz ostatnią aktywność.</li></ol>
-<p>Konto musi mieć dostęp do źródła. Różne role mogą widzieć różne zdarzenia; dziennik odzwierciedla to, co otrzymało dane konto.</p>
-<p>W przypadku sprawy obejmującej całe konto należy skorzystać z opcji <strong>Źródła → Zakres obserwacji → Tryb dochodzeniowy</strong>, sprawdzić ustawienia i nacisnąć <strong>przycisk Zapisz zakres</strong>. <a href="../cases/">Kompletny przewodnik po dochodzeniu</a> obejmuje wszystkie widoczne typy czatów, starą historię, profile użytkowników, odniesienia między czatami oraz przekazywanie dowodów.</p>
+<ol><li>Wybierz potrzebne czaty, grupy lub kanały.</li><li>Sprawdź ustawienia zbierania, w tym media.</li><li>Uruchom i sprawdź połączenie oraz ostatnią aktywność.</li></ol>
+<p>Konto musi mieć dostęp. Administratorzy i członkowie widzą co innego, dziennik pokazuje to, co dostało to konto.</p>
+<p>Całe konto? <strong>Źródła → Zakres obserwacji → Tryb dochodzenia</strong>, sprawdź i kliknij <strong>Zapisz zakres</strong>. Pełny przewodnik: <a href="../cases/">dochodzenie na całym koncie</a>.</p>
 <h2 id="check">Proszę sprawdzić całą ścieżkę</h2>
-<p>W grupie testowej, którą Pan/Pani kontroluje, proszę wysłać unikalną wiadomość z innego konta, edytować ją, a następnie usunąć. Proszę potwierdzić wszystkie trzy zdarzenia w dzienniku, a następnie <a href="../exports/">wyeksportować i zweryfikować</a> zapis.</p>
-<p class="callout">Status „połączono” potwierdza nawiązanie połączenia. Zarejestrowana wiadomość testowa potwierdza, że dane zdarzenie dotarło do tego obszaru roboczego.</p>
+<p>W grupie testowej wyślij wiadomość z innego konta, zedytuj ją i usuń. Wszystkie trzy zdarzenia powinny pojawić się w dzienniku. Potem <a href="../exports/">wyeksportuj i zweryfikuj</a>.</p>
+<p class="callout">„Połączono” znaczy, że łącze działa. Przechwycona wiadomość testowa znaczy, że zdarzenia naprawdę docierają.</p>
 <h2 id="more">Dodaj kolejne konto</h2>
-<p>Proszę utworzyć kolejne środowisko pracy w <strong>sekcji „Konta”</strong> i powtórzyć proces konfiguracji. Proszę zachować odcisk klucza podpisu każdego konta, aby móc później zidentyfikować eksportowane dane.</p>
+<p>Nowa przestrzeń w <strong>Kontach</strong>, te same kroki. Zapisz odcisk klucza każdego konta, żeby później odróżniać eksporty.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/accounts/">Pełne odniesienie →</a><a class="next-guide" href="../exports/"><span>Kolejny krok</span><strong>Eksportowanie i weryfikacja →</strong></a><p>Niniejsze wytyczne opisują aktualną implementację. Wyniki walidacji oraz pozostałe luki zostały udokumentowane oddzielnie. <a href="../reference/verification/">Co zostało przetestowane →</a></p></footer>
 </main>

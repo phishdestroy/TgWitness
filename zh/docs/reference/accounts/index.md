@@ -241,20 +241,6 @@ TData 是 Telegram Desktop 应用程序（来自 desktop.telegram.org 的跨平�
 
 **“账户 → 退出 Telegram**（暂停监控）”会要求 Telegram 结束该 会话，因此该会话也会从账户的“**设置 → 设备**”中消失，并从 工作区保险库中移除。日志、来源、设置和签名密钥将保留，且 日志会记录此次退出操作。 该工作区仍归属于其账户：只有该 账户才能再次连接到它。如果 Telegram 没有响应，该会话仍会在此处被移除， 面板上也会显示相应提示；请在 Telegram 的**“设置”→“设备**”中结束该会话。
 
-## 将 Telethon 会话转换为离线格式
-
-该面板可直接导入 `.session` 文件。若需离线转换为 StringSession 文件，请在项目文件夹中运行：
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-该转换器仅读取 Telethon SQLite 文件（最大 64 MiB），绝不修改输入内容， 不进行任何网络请求，且拒绝覆盖现有的输出文件。
-
 ## 确保账户文件的安全
 
 - 请将每个 `.session`、TData ZIP、StringSession、Auth Key 和账户 JSON 视为 密码。TgWitness 会将导入的授权信息保存在其加密保险库中；您可以在 之后删除原始文件。

@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/case-board/
 
-Trasforma le osservazioni salvate su Telegram in un caso che il tuo team possa esaminare insieme.
+Trasformi i messaggi salvati in un caso su cui lavora tutta la squadra.
 
-Case Board conserva segnalibri, evidenziazioni di testo esatte, sezioni salvate e discussioni accanto ai relativi riferimenti alle fonti. Una raccolta conferisce al caso una struttura operativa; le revisioni firmate documentano come il team lo ha sviluppato.
+Segnalibri, citazioni esatte, porzioni e discussioni, ognuno legato alla sua fonte. Ogni modifica è una revisione firmata.
 
 ## Da un messaggio a una scheda del caso
 
-1. Aprire **Indagine → Case Board** in modalità Standard o Esperto. Creare una raccolta per il caso e scegliere l’ambito delle chat.
-2. Nel **Journal** o in una chat salvata, selezionare **“Aggiungi alla bacheca**” oppure evidenziare il record e premere **B**. La scheda viene inserita nella Posta in arrivo; assegnarle un titolo significativo e spostarla nella propria raccolta.
-3. Selezionare un passaggio in un messaggio di chat salvato e scegliere **Evidenzia → bacheca** per conservare la citazione esatta e la versione del messaggio. Aggiungere una nota che spieghi perché è importante.
-4. Discutere la scheda, assegnare uno stato di revisione e tornare al contesto di origine ogni volta che è necessario verificare un'affermazione. Utilizzare **Presentation** per esaminare la raccolta insieme ai colleghi.
+1. **Indagine → Case Board** (modalità Standard o Esperto). Crei una raccolta per il caso.
+2. Nel **Diario** o in una chat prema **Alla bacheca** (o **B**). La scheda arriva nella posta in arrivo: le dia un titolo e la sposti.
+3. Selezioni un testo in un messaggio: **Evidenzia → bacheca** conserva la citazione esatta e la versione. Annoti perché conta.
+4. Discuta, imposti uno stato e torni alla fonte quando serve. **Presentazione** accompagna la squadra nel materiale.
 
 ### Seguire un link di pagamento modificato
 
@@ -48,16 +48,16 @@ Le annotazioni e l’osservazione di Telegram rimangono identificabili separatam
 
 ## Salvare una volta un intervallo utile
 
-Fare clic tenendo premuto il tasto Maiusc su due record in una chat per **selezionare “Slice between**”, scegliere **“Slice by time**” oppure salvare i filtri attuali del “Journal”. Verificare il conteggio prima di salvare. Riaprire lo “slice” per applicare la query salvata; l’opzione **“Show records added since bookmark”** mostra le aggiunte successive.
+Maiusc-clic su due messaggi per **Porzione tra**, usi **Porzione per tempo** oppure salvi i filtri attuali del diario. **Mostra voci aggiunte dal segnalibro** fa vedere cosa è arrivato dopo.
 
-Un intervallo temporale segue l’ora di osservazione del Collector. Un intervallo relativo all’ID del messaggio può seguire i messaggi selezionati man mano che arrivano modifiche successive. Il limite di creazione salvato consente a un destinatario di confrontare la selezione originale con il suo stato successivo.
+Le porzioni per tempo usano l’orario di osservazione; quelle per ID seguono quei messaggi quando cambiano.
 
 ## Assegnare a ciascun collega il ruolo corretto
 
-**Il revisore** legge la bacheca; **l’analista** aggiunge schede e commenti; **l’operatore** gestisce anche le raccolte e le decisioni relative alla revisione. Le autorizzazioni relative all’area di lavoro e alla chat si applicano alle schede, al contesto delle fonti e alle discussioni. Utilizzare autorizzazioni di accesso denominate per una chiara attribuzione.
+**Revisore** legge, **Analista** aggiunge schede e commenti, **Operatore** gestisce anche raccolte e decisioni. I permessi sulle chat valgono anche per le schede.
 
 ## Trasformare il lavoro in un prodotto finale
 
-Esportare una sezione come JSON firmato oppure utilizzare il formato CSV per un foglio di calcolo. Le impostazioni del report possono includere segnalibri e sezioni, con commenti del team se selezionati. Scegliere questi contenuti in [Report Studio](https://phishdestroy.github.io/TgWitness/it/docs/reports/); una sezione salvata non configura automaticamente un report. Per un destinatario con autorizzazioni limitate, utilizzare i [controlli di consegna](https://phishdestroy.github.io/TgWitness/it/docs/handover/) separati.
+Le porzioni si esportano come JSON firmato o CSV. I report possono includere segnalibri, porzioni e commenti: lo imposti in [Report studio](https://phishdestroy.github.io/TgWitness/it/docs/reports/). Per un destinatario limitato usi una [consegna](https://phishdestroy.github.io/TgWitness/it/docs/handover/).
 
-Consultare la guida [di riferimento di Case Board](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-board/) per le revisioni firmate, la corrispondenza esatta delle citazioni, la verifica delle selezioni e le autorizzazioni.
+Dettagli: [riferimento Case Board](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-board/).

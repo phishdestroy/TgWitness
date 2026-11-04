@@ -247,25 +247,11 @@ DNS bramy obejmuje systemowy serwer nazw. DNS przez HTTPS na porcie 443 do inneg
 
 Cloudflare nie ma wglądu w szyfrowanie Telegrama, inne urządzenia powiązane z kontem Telegram (lista urządzeń w trybie dowodowym rejestruje je po stronie Telegrama) ani hiperwizor dostawcy.
 
-1 listopada 2026 r. usługa Gateway DNS działała w połączeniu z rzeczywistą chmurą Hetzner Cloud oraz darmowym kontem Cloudflare: Hetzner zaakceptował reguły ruchu wychodzącego, na serwerze zainstalowano wersję v0.7.0, przy czym każde wyszukiwanie przechodziło przez Gateway za pośrednictwem protokołu TLS, szybki tunel działał pomimo tej zapory sieciowej, a `verify` odczytał 19 nazw serwera z Cloudflare (serwery lustrzane Ubuntu i Hetzner, GitHub, PyPI, NTP, tunel, ntfy.sh). Panel skopiował 36 zapytań z ośmiu okien do dziennika i `verify.py` podsumował je bez żadnych luk; `destroy` usunął serwer i zaporę sieciową oraz opuścił wspólną lokalizację.
-
 ## Czego to nie potwierdza
 
 - Dostawca i jego pracownicy zarządzają hiperwizorem, dyskami i siecią.
 - Wyniki pomiarów serwera są zgłaszane samodzielnie przez moduł zbierający dane.
 - Wcześniejsze wersje reguł zapory sieciowej nie znajdują się we wszystkich logach dostawców; jedynie Linode przechowuje wersje reguł.
 - Nie zawiera żadnych nowych informacji na temat autentyczności wiadomości; zobacz sekcję [„Dowody](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/)”.
-
-## Przetestowano tutaj
-
-Logika wdrażania, blokowania i weryfikacji jest objęta automatycznymi testami przeprowadzanymi na symulowanych interfejsach API Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail i Cloudflare, zbudowanych na podstawie ich opublikowanych dokumentacji API, a także podpisywanie żądań AWS zgodnie z opublikowanymi przykładami AWS. `tools/check_cloud_wizard.py` uruchamia kreatora serwera panelu w ten sam sposób, z domeną oraz z szybkim tunelem. `tools/check_tdx.py` weryfikuje prawdziwe poświadczenia Intel TDX z dcap-qvl i dstack aż do certyfikatu głównego firmy Intel (źródła w [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)); `tools/check_phala.py`uruchamia wdrożenie, weryfikację, dziennik, niszczenie oraz kreatora panelu w symulowanym środowisku Phala Cloud, którego poświadczenia pochodzą z sfałszowanej infrastruktury PKI wzorowanej na infrastrukturze firmy Intel. Ścieżka Phala nie została jeszcze przetestowana w samym środowisku Phala Cloud.
-
-1 listopada 2026 r. szybka ścieżka tunelowa działała w oparciu o prawdziwą **chmurę Hetzner** (Norymberga, `cpx22`, TgWitness v0.7.0), prawdziwym serwisem ntfy.sh oraz serwisem GitHub, zarówno z poziomu panelu, jak i kodu:
-
-- sprawdzenie ceny, a następnie utworzenie za pomocą przycisków na panelu: serwer uruchamia się po 13 sekundach, podpisane oświadczenie z pasującymi skrótami instancji i instalatora pojawia się po około dwóch minutach;
-- własny panel serwera otwarty pod adresem trycloudflare.com, który zaakceptował token panelu; bez tokenu zwraca kod 401;
-- po ponownym uruchomieniu za pośrednictwem API Hetznera serwer opublikował nowy podpisany adres; **funkcja „Find the current address”** znalazła go, stary adres przestał odpowiadać, klucz podpisujący pozostał bez zmian; niepodpisany wpis w temacie ntfy.sh został zignorowany;
-- `verify` w odniesieniu do API Hetznera: serwer, zapora sieciowa bez reguł przychodzących, oświadczenie, powiązanie, pomiary hosta, uruchamianie oraz hash źródłowy wydania v0.7.0 przeszły pomyślnie; testy Cloudflare były niedostępne, jak opisano powyżej; instalator różnił się od tego, który kompiluje wersję v0.7.0, i był identyczny bajt po bajcie z tym, który kompiluje kod tej wersji;
-- Usunięcie z panelu spowodowało usunięcie dokładnie tego serwera i zapory sieciowej, które były oznaczone w ramach wdrożenia; inne serwery i zapory sieciowe w tym samym projekcie pozostały nienaruszone.
 
 Nie testowano jeszcze na prawdziwych kontach: wdrożenie pod własną domeną (tunel Cloudflare i DNS), u innych dostawców, wdrożenie debugujące oraz `lock`, konto Telegram na takim serwerze, oraz aktualizacje na żywo późniejszych wersji poprzez szybki tunel. Sprawdź pierwsze wdrożenie u każdego dostawcy za pomocą `plan`, wdrożenie debugujące oraz `verify` zanim zaczniesz na nim polegać w konkretnej sprawie.

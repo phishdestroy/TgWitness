@@ -32,8 +32,6 @@ Hồ sơ cá nhân và thông tin đăng nhập tài khoản WARP được mã h
 
 Các cấu hình WireGuard được tải lên phải chứa một Giao diện (Interface) và một Nút kết nối (Peer), các tuyến đường IPv4 và IPv6 đầy đủ, và không được chứa các hook, include, thay thế biến môi trường hoặc các trình nghe (listener) bổ sung. Các địa chỉ điểm cuối công khai được giải quyết và cố định trước khi khởi động. Sử dụng VPN bên ngoài hoặc cổng SOCKS5 cho OpenVPN/IPsec và các điểm cuối riêng tư.
 
-Các kiểm tra tổng hợp là `python tools/check_guided_connection.py` và `python tools/check_guided_connection_browser.py`. Tùy chọn `python tools/check_portable_routes_runtime.py` tải xuống các trình hỗ trợ đã được xác minh và kiểm tra vòng đời thực tế của quy trình cục bộ so với các thiết bị mô phỏng loopback. Nó không đăng ký thiết bị Cloudflare hoặc sử dụng tài khoản Telegram.
-
 ## Các phương thức xác thực
 
 **ID API và mã băm API dùng để xác định một ứng dụng; chúng không thay thế cho thông tin đăng nhập tài khoản.** Chúng là tùy chọn trong TgWitness. Thứ tự ưu tiên: cặp được nhập vào biểu mẫu, tiếp theo là cặp từ tệp JSON tài khoản đã nhập, sau đó là cặp được lưu trong không gian làm việc, và cuối cùng là nhóm 50 cặp công khai, được thử theo thứ tự ngẫu nhiên với cơ chế luân phiên tự động khi Telegram từ chối một cặp. Chỉ có cặp Telegram Desktop (2040) mới được gửi kèm theo mô tả ứng dụng Telegram Desktop tương ứng. Cặp thông tin của riêng quý vị từ Công cụ Phát triển API tại [my.telegram.org](https://my.telegram.org) có thể được sử dụng cho tất cả các tài khoản của quý vị; mỗi tài khoản vẫn có quyền ủy quyền riêng.
@@ -70,8 +68,6 @@ python -m tgwitness.sessions account.session --out account.tgwitness-session
 
 1. Tại mục **Thêm tài khoản → Tệp**, hãy tải lên kết quả hoặc dán chuỗi ký tự của nó, sau đó tiếp tục.
 2. Vui lòng kiểm tra ID tài khoản số được hiển thị, chọn các nguồn và bắt đầu quá trình theo dõi.
-
-Trình chuyển đổi mở SQLite ở chế độ chỉ đọc, không thực hiện nâng cấp lược đồ hay yêu cầu mạng, và không in ra phiên làm việc. Trình này kiểm tra phiên bản lược đồ, các loại bảng, một hàng phiên làm việc, IP/cổng/DC và độ dài khóa. Dữ liệu đầu vào CLI bị giới hạn ở 64 MiB; văn bản StringSession bị giới hạn ở 4 KiB. Quá trình chuyển đổi trên bảng điều khiển sẽ tải các tệp lên máy chủ TgWitness đã được xác thực, xử lý chúng trong bộ nhớ và trả về thông tin xác thực đã được chuẩn hóa cho trình duyệt đó mà không lưu lại các tệp gốc đã tải lên. Vui lòng sử dụng HTTPS khi kết nối với máy chủ từ xa.
 
 **Tệp đã chuyển đổi là một khóa truy cập tài khoản chưa được mã hóa.** Hãy lưu giữ nó trong kho lưu trữ được bảo vệ và tuyệt đối không được đưa vào kho lưu trữ chung hay gửi cho bất kỳ dịch vụ chuyển đổi bên thứ ba nào. TgWitness lưu trữ phiên đăng nhập được ủy quyền trong kho lưu trữ được mã hóa của mình. Việc sao chép một phiên đăng nhập sẽ không tạo ra một ủy quyền riêng biệt: xin đừng chạy các ứng dụng khách đồng thời với các khóa xác thực đã được sao chép và cho rằng các bản cập nhật sẽ được phân phối độc lập.
 
@@ -115,15 +111,9 @@ Danh sách tích hợp sẵn kết hợp bốn nguồn: [SoliSpirit/mtproto](htt
 
 Khi các tuyến tự động đang hoạt động, danh sách sẽ được làm mới mỗi giờ và các kiểm tra truyền tải được thực hiện mỗi mười phút theo mặc định. Các khoảng thời gian này có thể tùy chỉnh. **Việc cập nhật danh sách công khai** sẽ yêu cầu làm mới; chỉ xem danh sách sẽ không thay đổi tuyến thủ công đã lưu.
 
-Mỗi phản hồi nguồn cấp dữ liệu bị giới hạn ở mức 1 MiB với thời gian chờ yêu cầu là tám giây và thời hạn tải xuống tổng cộng là 20 giây; các liên kết chuyển hướng sẽ bị từ chối. Tối đa 64 mục tương thích từ mỗi nguồn sẽ được lưu giữ và loại bỏ trùng lặp. Trình phân tích cú pháp chấp nhận các khóa bí mật dạng thập lục phân và base64url được hỗ trợ cũng như nguồn cấp dữ liệu JSON. Các TLS giả mạo `ee`, liên kết không hợp lệ, các địa chỉ IP riêng/dành riêng dưới dạng văn bản và tên máy chủ cục bộ sẽ bị bỏ qua. Tên máy chủ được giải quyết và kiểm tra trước khi sử dụng, đồng thời địa chỉ IP đã chọn sẽ được cố định cho kết nối đó. Quá trình thu thập lại tự động sẽ giải quyết lại tên máy chủ; hãy áp dụng lại một mục nhập thủ công để giải quyết lại tên máy chủ đó.
-
-Các phản hồi nguồn cấp dữ liệu không thành công, trống hoặc không tương thích sẽ vẫn giữ lại bản chụp nhanh nguồn trước đó. Các bản cập nhật là nguyên tử, được tuần tự hóa và giới hạn ở một lần thử mỗi phút cho mỗi không gian làm việc. Một lần kiểm tra truyền tải thành công chỉ xác nhận kết nối, chứ không đảm bảo tính ẩn danh hay tính đầy đủ của dữ liệu được thu thập.
-
 **Lưu lượng Telegram và các yêu cầu HTTPS sử dụng các tuyến đường khác nhau.** Việc tải xuống danh sách sử dụng một kết nối HTTPS riêng biệt và tuyến đường yêu cầu bên ngoài được cung cấp. Phiên bản `TGWITNESS_PROXY_FEED_PROXY` sẽ ghi đè rõ ràng tuyến đường đó bằng một proxy HTTP/SOCKS5; cả hai biến thể Compose của trình thu thập dữ liệu đều chuyển tiếp tuyến đường này. Nhóm nền sẽ tuân theo không gian làm việc chính. Không có phiên Telegram, thông tin đăng nhập API, mã thông báo bảng điều khiển hay mã thông báo bot nào được gửi đến các nhà cung cấp nguồn cấp dữ liệu. Tên nhà cung cấp, ngày chụp nhanh và tuyến đường tải xuống được hiển thị trong phần **“Nguồn gốc của danh sách**”.
 
 Một MTProxy chỉ truyền tải lưu lượng Telegram. Các thao tác HTTP của không gian làm việc như dấu thời gian, thông báo, bản sao ngoài trang web và kiểm tra nguồn sử dụng một proxy SOCKS5/HTTP riêng biệt khi được cấu hình, sau đó là tuyến SOCKS5/HTTP của tài khoản. Nếu không có cả hai, tính năng Ẩn địa chỉ sẽ từ chối yêu cầu; các chế độ khác cho phép Trực tiếp. Các yêu cầu bên ngoài có thể bị vô hiệu hóa. Một proxy tải xuống nguồn cấp dữ liệu được cấu hình rõ ràng vẫn là một quyền ưu tiên riêng biệt của người vận hành. Dịch vụ chứng kiến độc lập duy trì đường dẫn riêng của mình.
-
-Các yêu cầu HTTP bên ngoài chỉ dành cho công khai thông qua SOCKS5 hoặc proxy HTTP sẽ giải quyết điểm đến bằng Cloudflare DNS qua HTTPS tại `https://1.1.1.1/dns-query`, thông qua chính proxy đó. Chỉ tên máy chủ và các loại truy vấn A/AAAA mới được gửi đến bộ giải quyết; URL dịch vụ, thông tin đăng nhập và nội dung thông báo không được bao gồm. TLS xác minh chứng chỉ máy chủ giải quyết dựa trên địa chỉ IP của nó. Cả hai nhóm địa chỉ đều được kiểm tra, và bất kỳ câu trả lời nào thuộc loại riêng tư, loopback, link-local hoặc được dành riêng đều từ chối yêu cầu. Các kết nối sử dụng địa chỉ số đã được kiểm tra trong khi vẫn giữ nguyên HTTP Host và tên chứng chỉ TLS ban đầu của dịch vụ. Việc chuyển tiếp HTTP thông báo và các yêu cầu CONNECT sử dụng các kiểm tra đích tương tự. Lỗi DNS sẽ dừng yêu cầu nếu không có DNS đích cục bộ hoặc phương án dự phòng trực tiếp. Các phản hồi thành công được lưu vào bộ nhớ đệm theo từng tuyến proxy trong tối đa 30 giây và không quá thời hạn TTL của DNS; bộ nhớ đệm bị giới hạn ở 128 mục. Tên máy chủ proxy có thể sử dụng DNS cục bộ. Các trường hợp lỗi SOCKS và CONNECT có thể thử một địa chỉ đã được kiểm tra khác trước khi gửi nội dung yêu cầu dịch vụ. Chuyển tiếp HTTP thuần túy báo cáo yêu cầu thất bại mà không tự động gửi lại nội dung yêu cầu qua một địa chỉ khác.
 
 Đối với các dịch vụ riêng tư do nhà điều hành quản lý, cài đặt môi trường máy chủ hiện có `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` cho phép các đích đến riêng tư và duy trì việc giải quyết tên máy chủ phía proxy. Tính năng này không thể được kích hoạt từ bảng điều khiển. Chế độ chỉ công khai sẽ từ chối các đích đến `.onion` trước khi truy vấn trình giải quyết công khai; các dịch vụ Tor onion yêu cầu cài đặt đích đến riêng tư rõ ràng và một proxy phù hợp. Hành vi DNS này áp dụng cho các hoạt động HTTP bên ngoài, không áp dụng cho giao thức truyền tải của Telegram. Cloudflare cung cấp tài liệu về [điểm cuối DNS JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
@@ -174,8 +164,6 @@ SOCKS5 và HTTP CONNECT thuần túy bản thân chúng không mã hóa thông t
 
 **Tính năng bảo vệ lưu trữ** trong phần Tài khoản hiển thị các trạng thái này. Mã thông báo bảng điều khiển là một mã truy cập bí mật, không phải mật khẩu mã hóa. Mã này cấp quyền truy cập cho quản trị viên; [các mã thông báo được cấp](https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/) có thể được giới hạn phạm vi cho các tài khoản và cuộc trò chuyện. Các không gian làm việc chia sẻ quá trình máy chủ và không phải là các đơn vị thuê riêng biệt.
 
-Một bản demo tổng hợp được khởi chạy rõ ràng và cách ly có thể tự động mở qua một kết nối loopback trực tiếp. Tính năng này sử dụng khả năng tồn tại trong một quy trình riêng biệt; nó không tiết lộ mã thông báo bảng điều khiển đã được cấu hình cũng như không cấp quyền truy cập vào các không gian làm việc thực tế. Các yêu cầu từ xa, qua proxy hoặc giữa các nguồn gốc khác nhau không thể truy cập hoặc sử dụng khả năng truy cập tự động này. Tính năng tiện lợi này không loại bỏ rào cản xác thực đối với dữ liệu tài khoản thực.
-
 BitLocker, LUKS, FileVault hoặc một phân vùng được mã hóa và quản lý có thể bảo vệ bộ nhớ lưu trữ theo các mô hình đe dọa tương ứng của chúng. Quản trị viên của một máy tính đang hoạt động và không bị khóa vẫn có thể đọc được dữ liệu. Hãy bao gồm SQLite WAL/SHM, tệp đa phương tiện, tệp xuất tạm thời, vùng hoán đổi, bản sao lưu và các tệp tải xuống từ trình duyệt vào kế hoạch lưu trữ. Một phân vùng Docker không được mã hóa chỉ đơn thuần vì nó là một phân vùng. TgWitness không triển khai SQLCipher hay mã hóa đối tượng.
 
 ## Khóa chính bên ngoài
@@ -203,17 +191,3 @@ Mỗi không gian làm việc sẽ nhận được một giá trị salt công k
 Tất cả các không gian làm việc đều được tạo ra từ cùng một khóa chính; việc khóa này bị xâm phạm sẽ ảnh hưởng đến toàn bộ hệ thống cài đặt. Quá trình đang chạy có thể giải mã các thông tin bí mật. Đây không phải là HSM hay KDF mật khẩu. Không chấp nhận sử dụng mật khẩu do người dùng tự đặt thay thế cho khóa ngẫu nhiên.
 
 Vui lòng giữ lại khóa hiện có cho các bản cài đặt hiện tại cho đến khi quá trình di chuyển có chủ đích được triển khai và xác minh. Việc xóa `vault.key` hoặc thay thế khóa chính có thể làm mất quyền truy cập vào các phiên làm việc/khóa ký. Hãy lưu trữ các bản sao lưu được mã hóa và các khóa riêng biệt, đồng thời thử nghiệm quá trình khôi phục trong một môi trường cách ly.
-
-## Nguồn thông tin và phạm vi xác minh
-
-Được rà soát vào ngày 26 tháng 10 năm 2026:
-
-- https://core.telegram.org/api/auth
-- https://core.telegram.org/api/obtaining_api_id
-- https://docs.telethon.dev/en/stable/basic/signing-in.html
-- https://docs.telethon.dev/en/stable/concepts/sessions.html
-- https://core.telegram.org/mtproto/mtproto-transports
-- https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp
-- Telethon 1.45.0: SQLiteSession, StringSession, `Connection._proxy_connect`, `TcpMTProxy.normalize_secret` và các phương thức tải xuống.
-
-Các thử nghiệm cục bộ bao gồm các thiết bị mô phỏng SOCKS5/HTTP CONNECT vòng lặp, các phiên SQLite tổng hợp, cách ly tuyến đường, loại trừ thông tin bí mật và từ chối khi thiếu khóa. Các thử nghiệm này không xác định khả năng tương tác thực tế giữa Telegram và proxy cũng như hành vi hoạt động thực tế của MTProxy. Vui lòng tham khảo [các tệp VERIFICATION.md](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/) và [LIVE_ACCEPTANCE.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md).

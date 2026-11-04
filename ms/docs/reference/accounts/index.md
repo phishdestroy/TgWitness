@@ -241,20 +241,6 @@ Ahli berkongsi tetapan kumpulan; akaun boleh mengekalkan nilai tersendiri. Lihat
 
 **Akaun → Log keluar daripada Telegram** (dengan pemerhatian dihentikan) meminta Telegram menamatkan sesi, jadi ia juga akan hilang daripada **Tetapan → Peranti** akaun, dan memadam sesi daripada peti keselamatan ruang kerja. Jurnal, sumber, tetapan dan kunci tandatangan kekal, dan jurnal merekodkan log keluar tersebut. Ruang kerja masih milik akaunnya: hanya akaun itu sahaja yang boleh menyambung semula kepadanya. Jika Telegram tidak menjawab, sesi masih dipadamkan di sini dan panel akan memberitahu demikian; tamatkan sesi itu di Telegram di bawah **Tetapan → Peranti**.
 
-## Menukar sesi Telethon ke luar talian
-
-Panel mengimport fail `.session` secara langsung. Untuk penukaran luar talian kepada fail StringSession, jalankan dari folder projek:
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-Pengubah hanya membaca Telethon SQLite (sehingga 64 MiB), tidak pernah mengubah input, tidak membuat sebarang permintaan rangkaian dan enggan menimpa fail keluaran sedia ada.
-
 ## Menjaga keselamatan fail akaun
 
 - Layan setiap `.session`, TData ZIP, StringSession, Auth Key dan JSON akaun seperti kata laluan. TgWitness menyimpan kebenaran yang diimport dalam peti keselamatan yang disulitkan; anda boleh memadam fail asal selepas itu.

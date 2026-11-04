@@ -139,11 +139,6 @@ führt nicht zur Erlangung eines Zeitstempels.</li>
 <p>Eine erfolgreiche Verifizierung stellt die Integrität in Bezug auf den vertrauenswürdigen Collector-Schlüssel
 und die beibehaltene Grenze sicher. Siehe <a href="#verification-scope">Verifizierungsumfang</a> für die
 Vertrauensannahmen und <a href="../verification/">Validierungsergebnisse</a> der durchgeführten Prüfungen.</p>
-<p>Über Apprise gesendete Benachrichtigungen helfen den Bedienern dabei, die Aktivitäten im Arbeitsbereich und in Chats zu verfolgen.
-Sie enthalten Namen und Anzahlangaben; Auszüge aus gelöschten und bearbeiteten Nachrichten sind optional
-und standardmäßig deaktiviert. Verwenden Sie das signierte Protokoll und die Exporte für die aufbewahrten Datensätze.
-Bei einem Arbeitsbereichs-Proxy nutzen Benachrichtigungen denselben Weg; Dienste, die diesen nicht nutzen können,
-sowie MTProxy-Routen werden abgelehnt.</p>
 <h2 id="handover-extract">Auszug aus der Übergabe<a class="anchor" href="#handover-extract" aria-label="Link zu diesem Abschnitt">#</a></h2>
 <p>Eine signierte ZIP-Datei enthält das gesamte Arbeitsbereichsprotokoll. Wenn ein Gericht, ein Anwalt oder eine Meldestelle für Missbrauch
 nur bestimmte Chats, einen Zeitraum oder bestimmte Personen benötigt, erstellt <strong>„Exporte → Übergabeauszug“</strong> eine minimierte
@@ -227,12 +222,6 @@ Filter, Teilnehmer, Indikatoren, Datensatzdetails sowie die Auswahl von JSON und
 --evidence ARCHIVE.zip</code>, um sie mit dem signierten Archiv zu vergleichen.
 Der Verifizierer prüft die Berichts-ID, den Signaturschlüssel, die Archivgrenze und jeden ausgewählten Eintrag; bearbeitete,
 fehlende und doppelte Einträge führen zu einem Fehler. Auswahlhinweise und Erstellungszeitpunkt bleiben unsignierte Metadaten.</p>
-<p>Aktuelle Archiv-Exporte speichern Viewer-Chunks in <code>viewer/*.html</code>. Jeder Chunk wird in einem Sandbox-Frame geladen,
-in dem Skripte erlaubt sind, jedoch <strong> ohne </strong>-Zugriff aus derselben Quelle, und übermittelt seinen JSON-Text an den Bericht.
-Der Bericht überprüft vor der Anzeige die Nachrichtenquelle und deren SHA-256 anhand des signierten Deskriptors.
-Die CSP des Berichts selbst lässt nur sein gehashtes Anwendungsskript zu. Fehlende Daten können wiederhergestellt werden, indem
-auf der Registerkarte „Prüfen“ die passende ZIP-Datei ausgewählt wird; aus der ZIP-Datei gelesene Daten werden ohne Ausführung geparst.
-Früher exportierte Berichte behalten ihren eigenen eingebetteten Viewer und bleiben verifizierbar.</p>
 <p>Lücken bei den Nachrichtennummern werden nur bei einem vollständigen, ungefilterten, aufsteigend sortierten Chat-Feed angezeigt. Das Ausblenden einer
 Kategorie oder das Nichtladen eines Datenblocks darf eine ausgelassene Zeile nicht als Hinweis auf eine fehlende
 Nachricht interpretieren. Suchmarkierungen werden auf Klartext vor der HTML-Escape-Verarbeitung angewendet, wobei literale Markups beibehalten werden.</p>
@@ -245,20 +234,6 @@ in der Berichts-Sprache, gefolgt von einer vollständigen englischen Anleitung. 
 darin aufgeführten Dateien, mit Ausnahme der Datei selbst, von <code>manifest.json</code> und <code>manifest.sig</code>; das signierte Manifest
 umfasst zudem <code>SHA256SUMS</code>. Behalten Sie die ursprüngliche ZIP-Datei unverändert bei und speichern Sie Arbeitsdateien außerhalb des
 entpackten Ordners. PDF-Berichte enthalten Abschnitts-Lesezeichen sowie Fall-/Berichts-Identifikationen auf den folgenden Seiten.</p>
-<p>Die Berichtseinstellungen werden pro Arbeitsbereich gespeichert. Die Berichts-Sprache kann der Sprache des Bedienfelds entsprechen oder fest vorgegeben werden;
-eine explizit in einer Exportanforderung angegebene Sprache überschreibt diese Auswahl jedoch nur für diesen einen Export. Jede Sprache des Bedienfelds
-wird akzeptiert, einschließlich der vier Sprachen, die von rechts nach links geschrieben werden.</p>
-<p>Der Schalter für die Journal-Transkripte steuert den Viewer „HTML“ und das Transkript „PDF“. Der vollständige Datensatz „JSON“ ist
-eine Detailoption von „HTML“: Wenn diese aktiviert ist, enthält der Viewer den exakt exportierten Datensatz, einschließlich eines
-minimierten Datensatzes bei einer Übergabe. Das Deaktivieren dieser Option hat keine Auswirkungen auf die maßgebliche Journal-Datei. Foto-
-Vorschauen gelten sowohl für den Chat als auch für das Journal HTML. Aufeinanderfolgende Heartbeat-Läufe können zusammengeklappt werden, ohne dass
-Datensätze entfernt werden; beim Aufklappen langer Läufe werden deren Zeilen schrittweise geladen.</p>
-<p><code>part_size</code> ist die maximale Anzahl von Einträgen pro Viewer-Datendatei (500–100.000) und die maximale Transkriptgröße,
-die in einer PDF enthalten ist. Viewer-Chunks werden zudem bei einem Datenbudget von 16 MiB aufgeteilt. Längere PDF-Transkripte
-werden weggelassen, wobei ein expliziter Verweis auf die signierten Quelldateien und den HTML-Viewer erfolgt. Ein eigenständiger HTML-
-Bericht bettet höchstens 20.000 Elemente oder 32 MiB an Elementdaten ein; sobald diese Grenze überschritten wird, werden diese Elemente freigegeben und
-der Leser zum Archiv weitergeleitet. Diese Anzeigebeschränkungen führen niemals zu einer Verkürzung der signierten Quelldateien.
-Die Schriftartkonfiguration „PDF“ kombiniert bei Bedarf CJK-Schriftarten: Einer chinesischen Schriftart allein fehlt möglicherweise das koreanische Hangul.</p>
 <h3 id="the-chat-at-export-time">Der Chat zum Zeitpunkt des Exports<a class="anchor" href="#the-chat-at-export-time" aria-label="Link zu diesem Abschnitt">#</a></h3>
 <p>Ein Chat-Export erfasst, was Telegram zu Beginn des Exports über den Chat angegeben hat: Telegrams eigene
 Bezeichnungen (<code>scam</code>, <code>fake</code>, <code>restricted</code> mit den jeweiligen Begründungen, <code>verified</code>), Benutzernamen, Beschreibung, Anzahl der
@@ -473,10 +448,6 @@ Verifizierung werden keine wiederhergestellten Dateien veröffentlicht. Bei Aufb
 und das Datum mit der beim Upload übermittelten Frist verglichen (mit einer Rundungstoleranz von einer Sekunde). Eine abgelaufene,
 ungültige oder verkürzte Frist gilt nicht als verifiziert. Der Status gibt das Stichprobenobjekt an,
 dessen Aufbewahrungsstatus für diesen Upload-Durchlauf zurückgelesen wurde.</p>
-<p>Der Kopierfortschritt ist auf das Ziel und den Verschlüsselungsschlüssel beschränkt. Durch Ändern des Endpunkts, des Buckets
-oder des Präfixes wird eine vollständige Kopie des lokal gespeicherten Protokolls, der Medien und der Checkpoints an
-dieses Ziel gestartet. Alter, nicht in den Umfang fallender Fortschritt bleibt erhalten, wird jedoch nach dem Upgrade einmalig erneut ausgeführt. Historische
-Chat-Exporte, die bereits aus dem lokalen Ausgangsordner entfernt wurden, verbleiben an ihrem bisherigen Zielort.</p>
 <p>Fehlende oder beschädigte lokale Medien werden als Fehler des Durchlaufs gemeldet, und der Mediencursor bleibt vor
 diesem stehen, sodass die Datei im nächsten Durchlauf erneut versucht wird; die darauf folgenden Dateien, Checkpoints und Exporte werden weiterhin
 kopiert. Die Wiederherstellungsprüfung
@@ -545,9 +516,6 @@ aufgezeichnet wurde sowie jede neue und beendete Sitzung. Die Liste wird nur gel
 <p>Was sie nicht zeigen: drand beweist lediglich die Reihenfolge der Datensätze im Verhältnis zur öffentlichen Zeit,
 und die Geräteliste ist die Aussage von „Telegram“ über den Collector, die –
 wie jeder andere Datensatz auch – vom Collector signiert wurde.</p>
-<p>Getestet am 1. November 2026: <code>tools/check_evidence_witnesses.py --live</code> hat eine echte Runde von
-<code>drand.cloudflare.com</code> geschrieben, das Protokoll exportiert und die Runde mit <code>drand.cloudflare.com</code>
-und <code>api.drand.sh</code> bestätigt; die Geräteliste wurde mit simulierten Telegram-Antworten abgeglichen, nicht mit einem echten Konto.</p>
 <p><strong> Cloudflare Gateway-Protokoll </strong> (<code>cloudflare.gateway_dns</code>). Für einen Server, der über das
 Cloudflare-Gateway (<a href="../high-assurance/#cloudflare-as-an-outside-witness">Gateway-DNS</a>) auflöst, kopiert jeder
 Durchlauf die seit der letzten Kopie vom Gateway protokollierten Daten: ein Eintrag pro Zeitfenster von maximal drei

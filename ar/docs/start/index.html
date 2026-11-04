@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../">التوثيق</a> <span aria-hidden="true">/</span> <span aria-current="page">ابدأ في غضون دقائق</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">ما تم اختباره ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">التوثيق / 04</p><h1>ابدأ في غضون دقائق</h1><p class="guide-outcome">ابدأ أولاً باستكشاف مثال عملي. ثم قم بربط حسابك الخاص.</p>
+<article class="guide-content"><p class="eyebrow">التوثيق / 04</p><h1>ابدأ في غضون دقائق</h1><p class="guide-outcome">تجوّل في العرض التوضيحي أولاً، ثم اربط حسابك.</p>
 <h2 id="demo">تصفح الموقع دون الحاجة إلى إنشاء حساب</h2>
-<p>قم بتنزيل المشروع أو نسخه، وتثبيت <strong>Python 3.11 أو إصدار</strong> أحدث، ثم قم بتشغيل العرض التوضيحي. يقوم المشغل بإنشاء بيئة محلية وتثبيت التبعيات المثبتة.</p>
+<p>احصل على المشروع، وجهّز <strong>Python 3.11 أو أحدث</strong>، وشغّل العرض التوضيحي. يتولى المشغّل الباقي.</p>
 <pre><code>git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness</code></pre>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\scripts\Demo.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh --demo</code></pre></section></div>
-<p>يفتح المتصفح مساحة عمل تحتوي على رسائل خيالية. افتح محادثة، وقارن تعديلاً، وافحص ملفاً تم تصديره. لا يتصل وضع العرض التوضيحي بـ Telegram.</p>
+<p>تُفتح في المتصفح مساحة عمل برسائل مختلقة. افتح محادثة، وقارن تعديلاً، وألقِ نظرة على تصدير. لا علاقة لـ Telegram بذلك.</p>
 <figure><img src="../../../assets/chats-dark.png" width="1440" height="1000" alt="عرض محادثة TgWitness مع أمثلة على الرسائل" loading="lazy"><figcaption>نموذج لمساحة العمل. يبدأ سجل الأدلة الخاص بك بشكل منفصل.</figcaption></figure>
 <h2 id="live">ابدأ مساحة العمل الخاصة بك</h2>
-<p>أغلق عملية العرض التوضيحي، ثم استخدم المشغل العادي:</p>
+<p>أغلق العرض التوضيحي، ثم:</p>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\Start.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh</code></pre></section></div>
-<p>افتح العنوان المحلي الذي يعرضه المشغل. إذا طُلب منك ذلك، أدخل <strong>رمز الوصول إلى اللوحة</strong> من الملف المحلي المسمى في المحطة الطرفية. يؤدي ذلك إلى فتح TgWitness؛ وهو أمر منفصل عن تسجيل الدخول إلى Telegram.</p>
+<p>افتح العنوان الذي يعرضه المشغّل والصق <strong>رمز الوصول إلى اللوحة</strong> من الملف الذي يذكره. هذا الرمز لـ TgWitness وليس لـ Telegram.</p>
 <h2 id="next">التقط رسالتك الأولى</h2>
-<ol><li><a href="../accounts/">قم بربط حساب Telegram مخصص.</a></li><li>اختر مجموعة أو قناة يمكن للحساب الوصول إليها، ثم ابدأ المراقبة.</li><li>أرسل رسالة جديدة في مجموعة تجريبية تديرها أنت وتأكد من ظهورها في السجل.</li></ol>
+<ol><li><a href="../accounts/">قم بربط حساب Telegram مخصص.</a></li><li>اختر مجموعة أو قناة وابدأ المراقبة.</li><li>أرسل رسالة في مجموعة الاختبار وشاهدها تظهر في السجل.</li></ol>
 <p class="callout">لتثبيت الخادم، اتبع إرشادات <a href="../server/">«Keep it running</a>».</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/quickstart/">المرجع الكامل ←</a><a class="next-guide" href="../accounts/"><span>الخطوة التالية</span><strong>ربط حساب ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="../reference/verification/">ما تم اختباره ←</a></p></footer>

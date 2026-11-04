@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首頁</a> <span aria-hidden="true">/</span> <a href="../">文件說明</a> <span aria-hidden="true">/</span> <span aria-current="page">連結帳戶</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文件說明 / 05</p><h1>連結帳戶</h1><p class="guide-outcome">每個工作區僅包含一個帳戶、其日誌及簽署金鑰。</p>
+<article class="guide-content"><p class="eyebrow">文件說明 / 05</p><h1>連結帳戶</h1><p class="guide-outcome">一個工作區 = 一個帳戶、它的日誌和它的金鑰。</p>
 <h2 id="sign-in">選擇登入方式</h2>
-<p>開啟<strong>帳戶</strong>、新增工作區，並開啟其連線設定。請使用專用的帳戶進行監測。</p>
-<ul><li><strong>QR 碼：</strong>請透過 Telegram 的裝置設定掃描此 QR 碼，並確認新登入帳戶。</li><li><strong>電話號碼：</strong>請輸入號碼、Telegram 發送的驗證碼，以及您的兩步驟驗證密碼（若已啟用）。</li><li><strong>會話匯入：</strong>匯入您擁有的受支援會話或 Telegram Desktop 資料。</li></ul>
-<p>請選擇內建的 API 設定檔，或輸入您自己的 API ID 和雜湊值。API 設定檔用於識別客戶端；它不會用於登入帳戶，也不會使連線變得匿名。</p>
+<p><strong>帳戶</strong> → 新增工作區 → 連線設定。請為此使用另一個帳戶。</p>
+<ul><li><strong>QR 碼：</strong>在 Telegram 的「裝置」畫面掃描並確認。</li><li><strong>電話號碼：</strong>號碼、驗證碼，若有兩步驟驗證再輸入密碼。</li><li><strong>匯入工作階段：</strong>您自己的工作階段檔案或 Telegram Desktop 資料。</li></ul>
+<p>使用內建 API 設定檔或您自己的 API ID 和 hash。它只用來識別應用程式，不會讓您登入，也不會隱藏任何東西。</p>
 <details><summary>需要先設定代理伺服器嗎？</summary><p>您可以在登入前<a href="../proxies/">選擇並測試連線路徑</a>。每個帳戶皆有其專屬的路徑。</p></details>
 <h2 id="sources">選擇監測對象</h2>
-<ol><li>開啟來源清單，並選取您所需的聊天室、群組或頻道。</li><li>在開始監測前，請檢視資料蒐集設定，包括媒體檔案。</li><li>啟動收集器，並檢查其連線狀態及近期活動。</li></ol>
-<p>該帳戶必須能夠存取來源。不同角色可查看不同的事件；日誌反映該帳戶所接收的內容。</p>
-<p>若要針對整個帳戶進行調查，請使用<strong>「來源」→「觀察範圍」→「調查模式</strong>」，檢視設定後按下「<strong>儲存範圍</strong>」。<a href="../cases/">完整的調查指南</a>涵蓋所有可見的聊天類型、歷史紀錄、使用者個人資料、跨聊天室參考資訊以及證據移交流程。</p>
+<ol><li>選擇您需要的聊天室、群組或頻道。</li><li>檢查收集設定，包括媒體。</li><li>啟動後檢查連線和最近活動。</li></ol>
+<p>帳戶必須有存取權。管理員和成員看到的內容不同，日誌顯示的是這個帳戶收到的內容。</p>
+<p>整個帳戶？<strong>來源 → 觀察範圍 → 調查模式</strong>，檢查後按<strong>儲存範圍</strong>。完整步驟：<a href="../cases/">調查整個帳戶</a>。</p>
 <h2 id="check">檢查完整路徑</h2>
-<p>在您所控制的測試群組中，從另一個帳號發送一條獨特的訊息，對其進行編輯並刪除。確認日誌中記錄了這三項事件後，即可<a href="../exports/">匯出並驗證</a>該紀錄。</p>
-<p class="callout">「已連線」狀態表示連線成功。「已擷取的測試訊息」則確認特定事件已傳送至此工作區。</p>
+<p>在測試群組中，用另一個帳戶傳送一則訊息，編輯它，再刪除它。這三個事件都應出現在日誌中。然後<a href="../exports/">匯出並驗證</a>。</p>
+<p class="callout">「已連線」表示連線正常。捕捉到測試訊息才代表事件確實送達。</p>
 <h2 id="more">新增另一個帳戶</h2>
-<p>請在<strong>「帳戶」</strong>中建立另一個工作區，並重複上述設定步驟。請保留每個帳戶的簽名金鑰指紋，以便日後辨識其匯出檔案。</p>
+<p>在<strong>帳戶</strong>中新增工作區，步驟相同。請記下每個帳戶的金鑰指紋，以便日後區分匯出。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/accounts/">完整參考資料 →</a><a class="next-guide" href="../exports/"><span>下一步</span><strong>匯出與驗證 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../reference/verification/">已測試的內容 →</a></p></footer>
 </main>

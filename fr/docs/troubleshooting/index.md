@@ -2,35 +2,35 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/troubleshooting/
 
-Commencez par le symptôme. Vérifiez une couche à la fois.
+Partez du symptôme, vérifiez une chose à la fois.
 
 ## Le panel demande un jeton
 
-Utilisez le jeton du panneau figurant dans le fichier local affiché par le lanceur. Pour Docker, exécutez « `docker compose exec tgwitness cat /data/panel-token.txt` ». Un code de connexion Telegram, un jeton BotFather et un jeton « witness » en lecture seule ont des finalités différentes.
+Il demande le jeton du panneau depuis le fichier indiqué par le lanceur. Docker : `docker compose exec tgwitness cat /data/panel-token.txt`. Ce n’est ni un code Telegram, ni un jeton de bot, ni celui du témoin.
 
 ## Telegram ne se connecte pas
 
-Ouvrez les paramètres de connexion et lancez le test de connexion. Si vous utilisez un proxy public, essayez une autre entrée et enregistrez explicitement le chemin d’accès. Vérifiez le type de proxy et le format de clé pris en charge. L’actualisation d’une liste publique ne modifie pas le chemin d’accès du compte.
+Lancez la vérification de connexion. Avec un proxy public, choisissez-en un autre et enregistrez. Vérifiez le type de proxy et le format du secret. Actualiser les listes ne change pas l’itinéraire tout seul.
 
 ## Connecté, mais aucun nouveau message
 
-1. Vérifiez que l’observation s’exécute dans l’espace de travail approprié.
-2. Vérifiez que la source est sélectionnée et visible pour ce compte.
-3. Envoyez un nouveau message unique dans un groupe contrôlé et recherchez ce texte exact.
-4. Consultez le journal opérationnel pour identifier les interruptions, les retards de traitement ou les erreurs de Telegram.
+1. L’observation tourne-t-elle, dans le bon espace ?
+2. La source est-elle sélectionnée et visible pour ce compte ?
+3. Envoyez un message unique dans votre groupe de test et cherchez-le.
+4. Cherchez des interruptions ou des erreurs Telegram dans le journal.
 
-Les instantanés historiques et les événements liés à l’arrivée de nouveaux messages sont deux choses distinctes. Une source silencieuse peut être connectée sans générer de nouveaux messages. Recourez à un test de livraison contrôlée lorsque l’exhaustivité est primordiale.
+Un chat calme n’a simplement rien de nouveau. Si l’exhaustivité compte, faites un test de livraison contrôlé.
 
 ## FloodWait ou un délai après un redémarrage
 
-« FloodWait » signifie que Telegram nécessite une pause. Attendez la durée indiquée et vérifiez la charge de travail liée à la collecte ; les reconnexions répétées ne suppriment pas la limite. L’état des mises à jour enregistrées permet de rattraper le retard après un redémarrage, mais les mises à jour périmées et certaines fenêtres d’interruption restent des contraintes. Enregistrez l’intervalle manquant plutôt que de considérer le journal comme complet.
+FloodWait, c’est Telegram qui dit « plus doucement ». Attendez que ça passe et allégez la charge, se reconnecter n’aide pas. Après un redémarrage, TgWitness rattrape ce que Telegram a encore ; le reste est une lacune, notez-la.
 
 ## Le bot est configuré mais ne publie rien
 
-Assurez-vous que le processus « witness » est bien en cours d’exécution, que le bot peut publier dans le canal et que le « witness » peut accéder au collecteur et à l’API du bot. Vérifiez son journal pour détecter d’éventuelles publications ayant échoué. Une interrogation réussie du collecteur ne suffit pas à elle seule à confirmer la publication d’un message dans le canal.
+Le témoin tourne-t-il, le bot peut-il publier dans le canal, joint-il le collecteur et la Bot API ? Cherchez les publications échouées dans son journal. Une interrogation côté collecteur ne veut pas dire qu’une publication est partie.
 
 ## Où se trouve l'intégration du jeton GitHub ?
 
 **En projet.** La section « Extras » décrit le workflow proposé pour la vérification des forks et des builds. Il n’existe actuellement ni formulaire de jeton GitHub ni attestation automatisée garantissant qu’une installation en cours de fonctionnement correspond bien à un dépôt. Consultez l’[état actuel des fonctionnalités](https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/).
 
-Lorsque vous signalez un problème, veuillez indiquer la version, le système d'exploitation, la marche à suivre et une description expurgée de l'erreur. Ne mentionnez pas les sessions, les jetons, les messages privés ni le répertoire de données dans les tickets publics.
+Vous signalez un bug ? Version, système, étapes et une erreur sans données personnelles. Ne mettez jamais de sessions, jetons, messages privés ni le dossier de données dans une issue publique.

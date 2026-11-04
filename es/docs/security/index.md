@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/security/
 
-Conozca las rutas de Telegram, las listas de proxies públicos y los servicios externos opcionales. Sepa qué ofrece cada opción, qué protegen y qué aspectos quedan en sus manos.
+Qué sale de su máquina, qué abre cada secreto y qué cubren las protecciones frente a lo que le toca a usted.
 
 **127.0.0.1**Dirección del panel por defecto
 
@@ -14,7 +14,7 @@ Conozca las rutas de Telegram, las listas de proxies públicos y los servicios e
 
 ## Donde se encuentra todo
 
-El recopilador, su panel y todos los registros guardados permanecen en el ordenador o servidor en el que se ejecuta. Telegram es el único destino por defecto; cada uno de los demás es una opción independiente.
+El recolector, el panel y cada registro se quedan en su máquina. Por defecto solo se contacta con Telegram; todo lo demás es un interruptor aparte.
 
 06 / LO QUE SALE DE LA MÁQUINASu instalación
 
@@ -56,54 +56,54 @@ Los destinos opcionales se configuran por espacio de trabajo. El texto de los me
 
 | Secreto | Dónde se almacena | Qué posibilidades ofrece | En caso de filtración |
 | --- | --- | --- | --- |
-| **Token de panel** | `panel-token.txt` en el directorio de datos; el navegador lo conserva únicamente para la pestaña correspondiente | Todo lo que ofrece cada espacio de trabajo: leer y exportar, modificar el alcance, iniciar sesión en cuentas | Detenga TgWitness, elimine `panel-token.txt` y vuelva a iniciarlo: se creará un nuevo token |
+| **Token de panel** | `panel-token.txt` en el directorio de datos; el navegador lo guarda por pestaña | Todo en todos los espacios | Detenga TgWitness, borre `panel-token.txt` y arranque de nuevo: obtiene uno nuevo |
 | **Sesión de Telegram** | Almacén cifrado (`credentials.enc`) | La propia cuenta de Telegram | Finalice la sesión en Telegram en *Ajustes → Dispositivos* |
-| **Clave de firma** | Almacén cifrado (`signing.enc`) | Registros firmados que se verifican mediante su huella digital | Los puntos de control almacenados en otro lugar, un registro de testigos y las marcas de tiempo muestran lo que existía anteriormente. |
-| **Clave de la bóveda** | `vault.key` junto a los datos, o una clave maestra externa para un nuevo directorio de datos | Descifrando la caja fuerte | Considere que la clave de sesión y la clave de firma también se han filtrado |
-| **Token de Witness** | En el servidor de TgWitness | Solo lectura: puntos de control firmados y estado del sistema | Elimínelo de la página «Witness»; cree uno nuevo |
-| **Texto clave para uso externo** | Vault; descárguelo una sola vez para poder recuperarlo | Descifrado de la copia externa | Cualquiera que también posea los objetos almacenados puede descifrarlos: considere esa copia como expuesta |
+| **Clave de firma** | Almacén cifrado (`signing.enc`) | Firmar registros con su huella | Los puntos de control guardados en otro sitio, un testigo y las marcas de tiempo siguen mostrando lo que existía antes |
+| **Clave de la bóveda** | `vault.key` junto a los datos o una clave maestra externa | La bóveda | Dé por filtradas también la sesión y la clave de firma |
+| **Token de Witness** | En el servidor de TgWitness | Solo lectura: puntos de control y estado | Bórrelo en la página del testigo y cree uno nuevo |
+| **Texto clave para uso externo** | Vault; descárguelo una sola vez para poder recuperarlo | La copia externa | Quien tenga además el bucket puede descifrarla: considere la copia expuesta |
 
 ## Qué cubren las medidas de protección
 
 ### Cubierto
 
-- Un registro modificado, eliminado o reordenado en una exportación: la cadena de hash o la firma ya no se verifican.
-- Un registro recortado o reconstruido tras un punto de control que se conservaba en otro lugar: el punto de control conservado ya no coincide.
-- Adivinación del token del panel: 256 bits aleatorios, comparados en tiempo constante; tras 15 intentos fallidos por minuto, se rechaza la dirección.
-- Contenido de chat hostil: el texto se inserta como texto, nunca como HTML; los archivos adjuntos se descargan como archivos; el panel no carga nada de otros sitios web.
-- Un directorio de datos copiados con una clave de almacén externa: las sesiones y las claves de firma permanecen cifradas sin la clave maestra.
+- Un registro cambiado, eliminado o reordenado: se rompe la cadena de hashes o una firma.
+- Un diario recortado o reconstruido después de guardar un punto de control en otro sitio: el punto de control deja de coincidir.
+- Adivinar el token: 256 bits aleatorios, comparación en tiempo constante; 15 fallos por minuto y la dirección queda bloqueada.
+- Contenido hostil en chats: el texto sigue siendo texto, nunca HTML; los adjuntos se descargan como archivos; el panel no carga nada de otros sitios.
+- Un directorio de datos robado con clave de bóveda externa: sesiones y claves siguen cifradas.
 
 ### A su criterio
 
-- El titular de la clave principal tiene control total. Conceda a otras personas acceso limitado a las cuentas, los chats y las acciones que necesiten; mantenga la clave principal en la más estricta confidencialidad.
-- Un administrador del servidor puede leer todo el contenido, así como reescribir y volver a firmar el registro. Guarde la huella digital y los puntos de control en otro sistema.
-- TgWitness no cifra el texto de los mensajes ni los archivos multimedia. Utilice el cifrado de disco y establezca permisos estrictos.
-- El protocolo HTTP sin cifrar fuera de localhost expone el token en la red. Utilice HTTPS o un túnel SSH.
-- Comprueba los registros guardados con firmas y puntos de control. Revisa la cobertura de la recopilación y prueba la entrega para las cuentas y fuentes que utilices.
+- El token principal lo puede todo. Dé a otros acceso limitado y guárdese el principal.
+- Quien sea administrador de la máquina puede leerlo todo y volver a firmar el diario. Guarde la huella y los puntos de control en otro sitio.
+- TgWitness no cifra mensajes ni multimedia. Cifre el disco y restrinja los permisos.
+- HTTP plano fuera de localhost filtra el token. Use HTTPS o un túnel SSH.
+- Las firmas no le dicen qué se perdió. Compruebe la cobertura y pruebe la entrega en sus propias cuentas y fuentes.
 
-[Comparta el acceso a un caso](https://phishdestroy.github.io/TgWitness/es/docs/access/) con permisos, plazos de caducidad y límites de sesión. El token de testigo sigue siendo una credencial independiente.
+[Comparta el acceso a un caso](https://phishdestroy.github.io/TgWitness/es/docs/access/) con permisos, caducidad y límites de sesión.
 
 ## Reforzar una instalación
 
 0 de 8 completado
 
-1. **Utilice una cuenta de Telegram específica**; nunca su cuenta principal. El token del panel y la sesión le proporcionan un control total sobre ella.
-2. **Mantenga el panel en 127.0.0.1.** Acceda a él de forma remota únicamente a través de HTTPS (la configuración de Caddy incluida) o de un túnel SSH.
-3. **Cifre el disco** que contiene el directorio de datos: el texto de los mensajes y los archivos multimedia se almacenan tal y como se recibieron.
-4. **Limite el directorio de datos** a la cuenta de servicio. Los nuevos directorios se configuran con el modo 0700 en Unix; en Windows, establezca los permisos de la carpeta.
-5. **Guarde la clave maestra del almacén en otro lugar** de los servidores: configure «`TGWITNESS_VAULT_KEY_FILE`» antes de crear el directorio de datos.
-6. **Guarde la huella digital de la clave de firma y los puntos de control** en otro sistema, y añada un testigo en otro servidor.
+1. **Use una cuenta de Telegram dedicada**, nunca la principal.
+2. **Mantenga el panel en 127.0.0.1.** Acceso remoto solo por HTTPS (Caddy incluido) o túnel SSH.
+3. **Cifre el disco** con el directorio de datos: mensajes y multimedia se guardan tal cual.
+4. **Restrinja el directorio de datos** a la cuenta de servicio (0700 en Unix, permisos de carpeta en Windows).
+5. **Guarde la clave de la bóveda aparte** en servidores: defina `TGWITNESS_VAULT_KEY_FILE` antes del primer arranque.
+6. **Guarde la huella y los puntos de control** en otro sistema y ejecute un testigo en otro host.
 7. **Nunca suba** claves `data/`, de sesión, `panel-token.txt` o de bóveda a GitHub ni a un chat.
 8. **No registre** los encabezados «`Authorization`» ni los cuerpos de las solicitudes en un proxy inverso.
 
 **¿Puedo cambiar el token del panel sin perder datos?**
 
-Sí. El token solo abre el panel. Detenga TgWitness, elimine «`panel-token.txt`» del directorio de datos y vuelva a iniciarlo; el registro, las sesiones y las claves permanecen intactos. Con «`TGWITNESS_TOKEN`» configurado, se utiliza el valor de entorno en lugar del archivo.
+Sí, solo abre el panel. Detenga TgWitness, borre `panel-token.txt` y arranque de nuevo. Diario, sesiones y claves se mantienen. Si `TGWITNESS_TOKEN` está definido, ese valor manda sobre el archivo.
 
 **¿Por qué los mensajes no están cifrados en reposo?**
 
-El recopilador debe leerlos para realizar búsquedas, comparar versiones y exportarlos. Cifrarlos con una clave en el mismo equipo aportaría poco frente a alguien que pueda acceder a dicho equipo. El cifrado del disco protege un disco inactivo o robado; los permisos estrictos protegen uno que está en funcionamiento.
+El recolector tiene que leerlos para buscar, comparar y exportar. Una clave en la misma máquina no detendría a quien ya puede leer esa máquina. El cifrado de disco cubre un disco robado; los permisos, uno en marcha.
 
 ## Informar de una vulnerabilidad
 
-Utilice **«Seguridad → Informar de una vulnerabilidad»** en el repositorio de GitHub. Incluya la versión, el impacto y una reproducción sintética mínima. No envíe nunca credenciales, directorios de cuentas ni archivos de pruebas reales. Si no es posible realizar un informe privado, abra una incidencia solicitando un canal privado sin detalles sobre el exploit.
+**Security → Report a vulnerability** en GitHub. Versión, impacto y una reproducción mínima con datos ficticios. Nunca envíe credenciales, carpetas de cuentas ni evidencia real. Si el informe privado está desactivado, abra un issue pidiendo un canal privado, sin detalles del exploit.

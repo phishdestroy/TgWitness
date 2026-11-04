@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/witness/
 
-Günlüğü ayrı bir işlemle kontrol ettirin ve imzalı kontrol noktalarını kanalınızda yayınlayın.
+Ayrı bir süreç günlüğünüzü kontrol eder ve imzalı kontrol noktalarını bir kanalda yayınlar.
 
 ## İki sunucu, iki imzalama anahtarı
 
@@ -36,33 +36,33 @@ Tüm cevap örnekleri, geçerli bir imza ve sabitlenmiş anahtarın mevcut oldu�
 
 ## Bir bot ve bir kanal hazırlayın
 
-BotFather ile bir bot oluşturun ve bu botun sizin kontrolünüz altındaki bir kanalda paylaşım yapmasına izin verin. Tanık için bir bilgisayar veya sunucu seçin. Ayrı bir barındırma sunucusu ve operatör, toplayıcının sunucusundaki ikinci bir işlemden daha fazla bağımsızlık sağlar.
+BotFather ile bir bot oluşturun ve kanalınızda yazmasına izin verin. Tanığı başka bir yerde çalıştırın: başka bir sunucu, tercihen başka biri tarafından işletilen, toplayıcının yanındaki ikinci bir süreçten çok daha değerlidir.
 
 ## Ekstra bölümündeki üç adım
 
-1. **Salt okunur erişim.** **Ekstralar → Bağımsız tanık** dosyasını açın, bir tanık jetonu oluşturun ve erişim dosyasını kaydedin. Bu, sohbetleri veya toplayıcı kontrollerini değil, kontrol noktalarını ve durum bilgilerini okumanıza olanak tanır.
-2. **Kanal ve aralık.** Bir Telegram kanalı veya Discord webhook'u seçin ve tanık tarafından erişilebilir bir toplayıcı adresi girin. Ayar dosyasını kaydedin.
-3. **Başlatma.** Witness sunucusunda oluşturulan `witness.json`, `witness-token.txt` ve `bot-token.txt` dosyalarını bir araya getirin. Yüklü proje ortamında aşağıdaki komutları çalıştırın.
+1. **Salt okunur erişim.** **Ekler → Bağımsız tanık**, bir belirteç oluşturun, dosyayı kaydedin. Kontrol noktalarını ve durumu okur, başka bir şey değil.
+2. **Kanal ve aralık.** Telegram kanalı ya da Discord webhook'u, artı tanığın ulaşabileceği bir toplayıcı adresi. Ayar dosyasını kaydedin.
+3. **Başlatma.** `witness.json`, `witness-token.txt` ve `bot-token.txt`'yi tanık sunucusunda bir araya koyun ve çalıştırın:
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
 python -m tgwitness.witness run --config witness.json
 ```
 
-Dosyaları indirmek, tanık aracını başlatmaz. İlk imzalı gönderinin kanalda göründüğünü kontrol edin, ardından tanık aracının açık anahtar parmak izini ayrı bir yerde saklayın.
+Kanalda ilk imzalı gönderiyi bekleyin, sonra tanığın parmak izini güvenli bir yere kaydedin.
 
-Discord için, kanalın webhook URL'sini bot jetonu yerine `discord-webhook.txt` şeklinde kaydedin. Bir tanık, Telegram kanalı veya Discord kanalı gibi tek bir yere gönderi yapar; Discord mesajından daha uzun kontroller ekli dosya olarak gelir.
+Discord mu tercih ediyorsunuz? Webhook URL'sini `discord-webhook.txt` olarak kaydedin. Bir tanık tek bir yere yazar; uzun kontroller Discord'a dosya olarak gelir.
 
 ## Yayın sıklığını seçin
 
-Her kontrolün yayınlanması, düzenli bir harici kayıt oluşturur. Beş dakikalık aralıklarla bu, çalışma alanı başına günde yaklaşık 288 gönderi anlamına gelir. Gelişmiş ayarlar ayrıca değişiklikler veya sorunlar hakkında yayın yapma, bir proxy ve özel bir Bot API adresi seçenekleri sunar.
+Her kontrolü yayınlamak düzenli bir dış kayıt oluşturur: beş dakikada bir, çalışma alanı başına günde yaklaşık 288 gönderi demektir. Gelişmiş ayarlar yalnızca değişiklik ya da sorunlarda yayın yapmaya, bir proxy ya da özel bir Bot API kullanmaya izin verir.
 
 **Bot aslında neyi doğruluyor?**
 
-Tanık, toplayıcıdan imzalı bir kontrol noktası ister, bunu beklenen anahtarla karşılaştırarak doğrular ve ayrı bir imzalı günlük tutar. Başarılı kontrollerle birlikte eksik yanıtları ve reddedilen cevapları da kaydeder. Yayınlama, tanığın çalışır durumda olmasına ve Telegram’ın Bot API’sine erişebilmesine bağlıdır.
+Toplayıcıdan imzalı bir kontrol noktası ister, beklenen anahtarla doğrular ve kaçırılan ve reddedilen yanıtlar dahil kendi imzalı günlüğünü tutar.
 
-Toplayıcının bildirdiği günlük durumunu kontrol eder. Her Telegram mesajını bağımsız olarak gözlemlemez. Bunun için kontrollü teslimat testini ekleyin.
+Günlük durumunu kontrol eder, Telegram'ı kendisi izlemez. Bunun için kontrollü bir teslim testi yapın.
 
 ## Kanıtları daha sonra kontrol edin
 
-Tanık günlüğünü, kanal gönderilerini ve bağımsız olarak kaydedilmiş parmak izlerini saklayın. [Tam doğrulama prosedürü,](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#verify) bunları toplayıcının imzalı dışa aktarım dosyasıyla karşılaştırır.
+Tanık günlüğünü, gönderileri ve parmak izlerini saklayın. Bunları toplayıcının dışa aktarımına karşı [nasıl kontrol edeceğiniz](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#verify).

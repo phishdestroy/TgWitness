@@ -6,47 +6,47 @@ Condivida il caso di cui qualcuno ha bisogno. Mantenga il controllo sul resto.
 
 01**Scegliere le prove**
 
-È possibile selezionare interi spazi di lavoro dell’account o singole chat registrate.
+Spazi interi o singole chat.
 
 02**Selezionare le azioni**
 
-Consentire la visualizzazione, l’esportazione o le autorizzazioni operative specifiche di cui la persona ha bisogno.
+Vedere, esportare o solo le operazioni necessarie.
 
 03**Stabilire i limiti**
 
-Emittete un token personale con scadenza, limiti di sessione e restrizioni IP opzionali.
+Un token personale con scadenza, limiti di sessione e regole IP, se vuole.
 
 L’ambito di raccolta determina ciò che viene registrato. L’ambito di accesso determina ciò che una persona può vedere e fare.
 
 ## Concedere l’accesso a qualcuno
 
-1. Acceda come amministratore e apra la sezione **«Accesso**».
-2. Indicare l’accesso e selezionare gli spazi di lavoro e le chat.
-3. Mantenere la voce **«Visualizza»** per il revisore. Aggiungere **«Esporta»** qualora fosse necessario scaricare i registri.
+1. Come amministratore apra **Accesso**.
+2. Gli dia un nome, scelga spazi e chat.
+3. A un revisore basta **Visualizza**. Per i download aggiunga **Esporta**.
 4. Impostare i limiti, quindi premere **«Crea accesso**».
-5. Copi una volta il token visualizzato. Lo invii in privato insieme all’indirizzo del pannello.
-6. Verifichi la visualizzazione consentita in una sessione separata del browser prima di consegnarlo.
+5. Copi il token (mostrato una sola volta) e lo invii in privato insieme all’indirizzo del pannello.
+6. Controlli prima cosa vedrà la persona, in una sessione del browser separata.
 
 ## Si parta dal lavoro che devono svolgere
 
 | Persona | Accesso | Risultato |
 | --- | --- | --- |
-| Revisore | Chat selezionate; solo visualizzazione | Legga la conversazione acquisita senza modificare la raccolta. |
-| Analista | Chat selezionate; visualizzazione ed esportazione | Esaminare e scaricare i registri necessari per il caso. |
-| Operatore | Spazi di lavoro interi selezionati; fonti e raccolta | Gestire ciò che viene monitorato e avviare o arrestare i collettori. |
+| Revisore | Chat selezionate; solo visualizzazione | Legge la chat, non può cambiare nulla. |
+| Analista | Chat selezionate; visualizzazione ed esportazione | Legge e scarica ciò che serve al caso. |
+| Operatore | Spazi di lavoro interi selezionati; fonti e raccolta | Decide cosa osservare, avvia e ferma i collector. |
 
-Si tratta di configurazioni che potete scegliere, non di ruoli fissi. Le impostazioni a livello di account e le esportazioni complete del registro rimangono inaccessibili alle chat con accesso limitato anche quando è abilitata un’altra autorizzazione. L’accesso a tutti gli spazi di lavoro include gli account futuri.
+Sono solo esempi, non ruoli fissi. Un accesso limitato alle chat non ottiene mai impostazioni dell’account né esportazioni complete del diario. L’accesso a tutti gli spazi include gli account aggiunti dopo.
 
 ## Potete cambiare idea in qualsiasi momento
 
-Modifichi le impostazioni di accesso per determinare le operazioni consentite nelle richieste successive. Chiuda una singola sessione oppure revochi l’intero accesso per terminare tutte le sessioni in corso. I file già scaricati non possono essere recuperati. La chiusura di una sessione del pannello non interrompe la raccolta dei dati.
+Modifichi l’accesso quando vuole, vale dalla richiesta successiva. Chiuda una sessione o revochi tutto. I file già scaricati non tornano indietro. La raccolta continua.
 
 **Limiti relativi alle sessioni e agli indirizzi IP**
 
-Limitare le sessioni parallele e gli accessi riusciti, impostare una data di scadenza assoluta, consentire indirizzi IP o sottoreti, oppure vincolare l’accesso all’indirizzo utilizzato per il primo accesso. La scadenza della sessione viene determinata in base all’inattività; il polling di un pannello aperto viene considerato come attività. Verificare l’indirizzo del client visualizzato dall’applicazione quando questa viene eseguita dietro un proxy o un tunnel.
+Limiti sessioni parallele e accessi, imposti una data di fine, consenta IP o sottoreti o leghi l’accesso all’IP del primo login. La scadenza conta l’inattività; un pannello aperto conta come attivo. Dietro un proxy controlli quale IP client vede l’app.
 
 **La chiave principale e il registro delle attività**
 
-L’amministratore conserva il token del pannello principale. Gli utenti con autorizzazione di accesso non possono gestire l’accesso di altre persone né aprire la console di amministrazione. La console mostra l’attività dei processi in corso in tutti gli spazi di lavoro; i registri di accesso firmati conservano gli eventi relativi alle autorizzazioni e alle sessioni senza l’utilizzo di token. Gli spazi di lavoro condividono il processo host e non isolano i dati dall’amministratore del server.
+Il token principale resta all’amministratore. Un accesso rilasciato non può gestire l’accesso altrui né aprire la console di amministrazione. Modifiche di accesso e sessioni vengono firmate nel diario, senza token. L’amministratore del server continua a vedere tutto.
 
-Si prega di utilizzare il [riferimento completo alle autorizzazioni](https://phishdestroy.github.io/TgWitness/it/docs/reference/access/) per tutte e sette le autorizzazioni, le regole di sessione e i limiti dell’amministratore.
+I sette permessi e le regole di sessione: [riferimento accessi](https://phishdestroy.github.io/TgWitness/it/docs/reference/access/).

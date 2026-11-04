@@ -224,9 +224,6 @@ RPC 請求、活躍帳戶數量、磁碟延遲／可用空間、網路狀況、T
 限制皆可於<strong>「參數」</strong>中針對各工作區進行調整。匯出資料無固定事件數上限。
 瀏覽器備用模式預設上限為 128 MiB；串流 CLI 具有可配置的
 傳輸限制，預設為 5 GiB。</p>
-<p><code>tools/check_capacity.py</code> 用於測量本地合成資料的匯入與匯出。其結果
-並非 Telegram 訊息傳送量的測量數據，亦非保證真實的聊天次數。請參閱
-<a href="../verification/">VERIFICATION.md</a> 以了解測量版本與工作負載。</p>
 <h2 id="reliability-and-recovery">可靠性與資料復原<a class="anchor" href="#reliability-and-recovery" aria-label="此節的連結">#</a></h2>
 <p>已實作的功能包括 SQLite WAL／同步交易；原子性訊息
 與媒體處理任務寫入；持久化任務與重試延遲；原始版本描述符；

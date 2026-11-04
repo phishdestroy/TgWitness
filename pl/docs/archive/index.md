@@ -6,52 +6,52 @@ Znajdź wiadomość. Sprawdź źródło. Zbuduj sprawę.
 
 01**Przedstaw historię**
 
-Załaduj poprzednie wiadomości z włączonych źródeł do obszaru roboczego.
+Pobierz do przestrzeni dawne wiadomości z włączonych źródeł.
 
 02**Śledź źródła**
 
-Przeszukaj archiwum i otwórz zapisaną wiadomość powiązaną z każdym wynikiem.
+Szukaj, a potem otwieraj zapisaną wiadomość za każdym wynikiem.
 
 03**Zadbaj o jasność przekazania informacji**
 
-Zapisz swoją analizę osobno i wyeksportuj obok niej podpisane dowody.
+Twoja analiza w jednym pliku, podpisane dowody obok.
 
 Zarejestrowane dane, rozpoznany tekst oraz wnioski analityków pozostają wyraźnie rozdzielone.
 
 ## Wczytaj poprzednie wiadomości
 
-1. Otwórz **Źródła → Czaty w zakresie**, przejrzyj włączone czaty i rozpocznij obserwację.
-2. Wybierz opcję **„Załaduj pełną historię**”. Proces wykorzystuje listę źródeł wybraną w danym momencie.
-3. W razie potrzeby należy korzystać z funkcji **„Wstrzymaj historię”** i **„Wznów historię**”. Po ponownym uruchomieniu należy wyraźnie wznowić działanie.
-4. Sprawdź wyniki dla poszczególnych źródeł oraz kolejkę załączników. Zapisz podpisany raport z postępów wraz z eksportem dowodów.
+1. **Źródła → Czaty w zakresie**: sprawdź włączone czaty i uruchom obserwację.
+2. **Wczytaj całą historię**. Bierze listę źródeł w obecnym stanie.
+3. **Wstrzymaj historię** / **Wznów historię** w dowolnej chwili. Po restarcie wznów ręcznie.
+4. Sprawdź wynik dla każdego źródła i kolejkę pobierania, a podpisany raport postępu zachowaj razem z eksportem.
 
-Spowoduje to wypełnienie obszaru roboczego dostępnymi wiadomościami. Eksport w formacie HTML/JSON dla poszczególnych czatów jest odrębną operacją. [Historia i szczegóły dotyczące odzyskiwania danych](https://phishdestroy.github.io/TgWitness/pl/docs/reference/history/).
+Tak wypełnia się przestrzeń. Eksport pojedynczego czatu do HTML/JSON to osobna sprawa. [Szczegóły](https://phishdestroy.github.io/TgWitness/pl/docs/reference/history/).
 
 ## Najpierw wyszukaj, a potem zdecyduj o wykorzystaniu sztucznej inteligencji
 
-1. Aby wyszukiwać lokalnie, otwórz widok **Dziennik**. Wybierz obszar roboczy i użyj filtrów źródła oraz czasu.
-2. Wyszukaj frazę lub domenę. Otwórz pasujący wpis wraz z jego zapisanymi wersjami.
-3. Aby korzystać z analizy AI, administrator musi włączyć i skonfigurować dostawcę w sekcji **Integracje**. Otwórz **Zapytaj archiwum** i wybierz czaty oraz okres. Przed zatwierdzeniem żądania przejrzyj sekcję **Dane przesłane do modelu** i odznacz niepożądane fragmenty.
-4. Sprawdź zwrócone cytaty. Zapisz odpowiedź jako raport i dodaj własne poprawki lub uwagi.
+1. **Dziennik** szuka lokalnie, z filtrami źródła i czasu.
+2. Wyszukaj frazę lub domenę, otwórz wpis i jego wersje.
+3. Do AI administrator ustawia dostawcę w **Integracjach**. Potem **Zapytaj archiwum**: wybierz czaty i okres, obejrzyj **Dane wysyłane do modelu** i odznacz to, co nie powinno wyjść.
+4. Sprawdź cytaty, zapisz odpowiedź jako raport i dodaj swoje notatki.
 
-Wyszukiwanie odbywa się lokalnie, bez wykorzystania sztucznej inteligencji. Raporty analityczne zawierają odniesienia do źródeł oraz historię zmian; są one oddzielone od podpisanego dziennika. [Konfiguracja dostawcy i raporty](https://phishdestroy.github.io/TgWitness/pl/docs/reference/analysis/).
+Wyszukiwanie nie potrzebuje AI. Raporty trzymają źródła i poprawki osobno od podpisanego dziennika. [Konfiguracja dostawcy](https://phishdestroy.github.io/TgWitness/pl/docs/reference/analysis/).
 
 ## Wybierz odpowiednie połączenie
 
 | Zadanie | Otwórz | Konfiguracja |
 | --- | --- | --- |
-| Przeczytaj wybrane rozmowy z klienta opartego na sztucznej inteligencji | **Integracje → MCP** | [Zainstaluj dodatek MCP, wygeneruj token o ograniczonym zakresie i połącz klienta](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/) |
-| Rozpoznawanie tekstu w zapisanych plikach multimedialnych | Rekord `media.saved` → **Rozpoznaj załącznik** | [Skonfiguruj lokalny proces roboczy Docker oraz wymagane pliki językowe i modelowe](https://phishdestroy.github.io/TgWitness/pl/docs/reference/media-analysis/) |
-| Wysyłaj zdarzenia do n8n lub systemu SIEM | **Integracje → Webhooki wychodzące** | [Dodaj odbiorcę, zweryfikuj HMAC i usuń duplikaty identyfikatorów zdarzeń](https://phishdestroy.github.io/TgWitness/pl/docs/reference/webhooks/) |
+| Pozwolić klientowi AI czytać wybrane czaty | **Integracje → MCP** | [Zainstaluj MCP, utwórz ograniczony token, połącz](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/) |
+| Rozpoznawanie tekstu w zapisanych plikach multimedialnych | Rekord `media.saved` → **Rozpoznaj załącznik** | [Skonfiguruj lokalny worker Dockera](https://phishdestroy.github.io/TgWitness/pl/docs/reference/media-analysis/) |
+| Wysyłaj zdarzenia do n8n lub systemu SIEM | **Integracje → Webhooki wychodzące** | [Dodaj odbiorcę, sprawdzaj HMAC, odrzucaj zduplikowane ID](https://phishdestroy.github.io/TgWitness/pl/docs/reference/webhooks/) |
 
 **Który token dostępu należy umieścić w którym miejscu?**
 
-Dostęp do panelu jest przeznaczony dla osób analizujących sprawę. Użytkownicy z połączeniami MCP otrzymują oddzielne tokeny archiwum tylko do odczytu. Odbiornik webhooków korzysta z własnego klucza tajnego HMAC. Żadna z tych opcji nie wymaga pliku sesji Telegramu.
+Dostęp do panelu jest dla ludzi. MCP ma własne tokeny tylko do odczytu, webhooki własny sekret HMAC. Żaden z nich nie potrzebuje sesji Telegrama.
 
 [Udostępnij dostęp do panelu](https://phishdestroy.github.io/TgWitness/pl/docs/access/) lub [skonfiguruj klienta MCP](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/).
 
 ## Przedstawienie źródeł i wniosków
 
-Przechowuj zweryfikowany raport analityczny wraz z podpisanym plikiem ZIP zawierającym dowody. Raport wyjaśnia Twoją interpretację źródeł; plik ZIP pozwala odbiorcy zweryfikować zapisany zapis w oparciu o niezależny, zaufany odcisk cyfrowy i punkt kontrolny.
+Połóż raport obok podpisanego ZIP. Raport to Twoje odczytanie źródeł, ZIP to to, co sprawdza odbiorca.
 
 [Eksportowanie i weryfikacja](https://phishdestroy.github.io/TgWitness/pl/docs/exports/) · [Przeprowadź kompleksowe dochodzenie](https://phishdestroy.github.io/TgWitness/pl/docs/cases/)

@@ -2,15 +2,15 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/groups/
 
-Quản lý nhiều tài khoản thu thập cùng lúc đồng thời đảm bảo tính riêng biệt của các bản ghi và danh tính ký tên của từng tài khoản.
+Chạy nhiều tài khoản cùng nhau, mỗi tài khoản vẫn có bản ghi và khóa riêng.
 
-Nhóm tài khoản tập hợp trạng thái kết nối, các điều khiển quan sát, cài đặt chung và tính năng xuất dữ liệu vào một giao diện làm việc duy nhất. Tính năng này hữu ích khi nhiều tài khoản liên quan đến cùng một cuộc điều tra hoặc cần một cấu hình hoạt động nhất quán.
+Nhóm đặt trạng thái kết nối, bắt đầu/tạm dừng, cài đặt dùng chung và bản xuất trên một màn hình. Tiện khi nhiều tài khoản cùng làm một vụ việc.
 
 ## Mở tổng quan về nhóm
 
-Trong phần **Tài khoản**, hãy mở nhóm. Mỗi tài khoản hiển thị trạng thái quan sát, đường dẫn kết nối, độ trễ đường dẫn được đo gần nhất khi kiểm tra hiện tại thành công và tin nhắn được lưu gần nhất. Các liên kết **“Cần chú ý”** dẫn đến các tài khoản cần xử lý; **nút “Sửa”** mở không gian làm việc và bảng điều khiển liên quan.
+Mở nhóm trong **Tài khoản**. Mỗi tài khoản hiển thị trạng thái, tuyến, độ trễ và tin nhắn được lưu gần nhất. **Cần chú ý** liệt kê những cái đang lỗi, **Sửa** đưa bạn thẳng tới đó.
 
-**Các tùy chọn “Bắt đầu tất cả”** và **“Tạm dừng tất cả”** sẽ áp dụng cho các tài khoản đủ điều kiện sau khi xác nhận. **Cài đặt nhóm** chia sẻ các thiết lập đã chọn; các tài khoản có giá trị riêng sẽ giữ nguyên các thiết lập đó cho đến khi bạn quyết định thay thế chúng.
+**Bắt đầu tất cả** / **Tạm dừng tất cả** sẽ hỏi trước khi thực hiện. **Cài đặt nhóm** được dùng chung, nhưng giá trị riêng của tài khoản vẫn giữ cho đến khi bạn thay.
 
 ### Kiểm tra thay đổi lộ trình trong một nhóm
 
@@ -51,19 +51,19 @@ Tài khoản tham chiếu: giữ nguyên đường dẫn hiện tại.
 
 ## Thay đổi quy trình bằng cách thêm bước xem xét
 
-1. Chọn **“Thay đổi lộ trình nhóm”**, sau đó chọn loại kết nối và cài đặt.
-2. Chọn **tùy chọn “Review**”. Kiểm tra các tài khoản được liệt kê và các thiết lập đường dẫn tùy chỉnh riêng lẻ của từng tài khoản.
-3. Chọn **“Chuẩn bị và kiểm tra**”. Quá trình kiểm tra sử dụng kênh truyền tải Telegram mới; các tuyến HTTP được hỗ trợ cũng báo cáo kết quả kiểm tra cổng ra HTTPS của chúng.
-4. Chọn **“Áp dụng kết nối đã chọn”** và kiểm tra kết quả của từng tài khoản. Quá trình quan sát đang chạy trước đó sẽ tiếp tục từ điểm ứng dụng thành công; các tài khoản không hoạt động sẽ vẫn ở trạng thái không hoạt động.
+1. **Thay đổi lộ trình nhóm**, chọn loại và cài đặt.
+2. **Xem lại lựa chọn**: xem tài khoản nào thay đổi và tài khoản nào có tuyến riêng.
+3. **Chuẩn bị và kiểm tra** thử một kết nối Telegram mới, cùng IP thoát nếu có thể.
+4. **Áp dụng kết nối đã kiểm tra** và xem từng kết quả. Tài khoản đang chạy tiếp tục, tài khoản đang nghỉ vẫn nghỉ.
 
-Độ trễ mô tả quá trình thiết lập kết nối Telegram đã được đo lường. Kiểm tra địa chỉ IP đầu ra mô tả tuyến đường đó tại thời điểm kiểm tra được ghi lại. Tình trạng ủy quyền tài khoản và tình trạng hoạt động giám sát có các chỉ số riêng; việc thay đổi nhóm có thể dẫn đến các kết quả khác nhau tùy theo từng tài khoản.
+Độ trễ là thời gian thiết lập kết nối Telegram, IP thoát là IP mà tuyến hiển thị lúc kiểm tra. Kết quả có thể khác nhau giữa các tài khoản.
 
 ## Sử dụng quyền truy cập chồng chéo
 
-**Tính năng “Chats several accounts see”** hiển thị các nguồn được chia sẻ và phạm vi quan sát không gian làm việc hiện có. Các kênh và siêu nhóm đủ điều kiện có thể sử dụng **tính** **năng** **“Export with … accounts”** để chia nhỏ quá trình thu thập lịch sử của một cuộc trò chuyện. Các cuộc trò chuyện riêng tư và nhóm thông thường vẫn thuộc về tài khoản ban đầu vì số tin nhắn của chúng thuộc về lịch sử của tài khoản đó.
+**Trò chuyện mà nhiều tài khoản thấy** liệt kê các nguồn chung và phạm vi của chúng. Kênh và siêu nhóm có thể được nhiều tài khoản xuất cùng lúc bằng **Xuất với … tài khoản**. Trò chuyện riêng và nhóm thường thì không, vì số tin nhắn của chúng tính theo từng tài khoản.
 
 ## Xuất nhóm dưới dạng gói
 
-**Tính năng xuất nhóm** tạo ra một tệp ZIP chứa bản xuất đã được ký của từng tài khoản và danh sách các tệp đó cũng đã được ký. Danh tính và dấu vân tay của không gian làm việc gốc vẫn có sẵn để xác minh. Xây dựng một câu chuyện xuyên suốt các tài khoản bằng cách sử dụng các tham chiếu đó; một dòng thời gian hợp nhất duy nhất vẫn được lập riêng biệt.
+**Xuất nhóm** cho một ZIP chứa bản xuất có chữ ký của mọi tài khoản và danh sách có chữ ký của chúng. Mỗi bản giữ dấu vân tay riêng để xác minh. Dòng thời gian gộp thì bạn vẫn phải tự dựng.
 
-Tiếp tục với [thiết kế báo cáo](https://phishdestroy.github.io/TgWitness/vi/docs/reports/), [Case Board trong không gian làm việc](https://phishdestroy.github.io/TgWitness/vi/docs/case-board/) hoặc [xuất dữ liệu để xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/exports/).
+Tiếp theo: [báo cáo](https://phishdestroy.github.io/TgWitness/vi/docs/reports/), [Case Board](https://phishdestroy.github.io/TgWitness/vi/docs/case-board/), [xác minh bản xuất](https://phishdestroy.github.io/TgWitness/vi/docs/exports/).

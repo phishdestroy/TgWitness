@@ -2,48 +2,48 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/exports/
 
-Należy udostępnić odbiorcy pliki, które będzie mógł porównać z obszarem roboczym zbierania danych i jego zapisaną historią.
+Przekaż pliki, które odbiorca sam porówna z Twoją przestrzenią.
 
 Zachować odniesienieEksportuj podpisany plik ZIPOdbiorca weryfikuje
 
-Nie znają Państwo jeszcze podpisów i punktów kontrolnych? [Proszę zmienić przykładowy wpis](https://phishdestroy.github.io/TgWitness/pl/docs/concepts/#chain) i sprawdzić, które kontrole to wykryją.
+Podpisy i punkty kontrolne to nowość? [Zmień przykładowy wpis](https://phishdestroy.github.io/TgWitness/pl/docs/concepts/#chain) i zobacz, które kontrole to wychwycą.
 
 Chcą Państwo przechowywać kopię poza serwerem dostawcy? Proszę przejść do [sekcji konfiguracji S3](https://phishdestroy.github.io/TgWitness/pl/docs/exports/#s3), funkcji [Object Lock](https://phishdestroy.github.io/TgWitness/pl/docs/exports/#s3-retention) lub opcji [zweryfikowanego odzyskiwania danych](https://phishdestroy.github.io/TgWitness/pl/docs/exports/#s3-restore).
 
 ## Zachowaj wiarygodne źródło informacji
 
-Proszę zapisać odcisk klucza publicznego obszaru roboczego poza kolektorem. Podczas gromadzenia danych należy przechowywać podpisane punkty kontrolne w innym miejscu lub skorzystać z usług [niezależnego świadka](https://phishdestroy.github.io/TgWitness/pl/docs/witness/). Odniesienia te umożliwiają odbiorcy weryfikację klucza oraz granicy poprzedniego dziennika.
+Zapisz odcisk klucza przestrzeni gdzieś poza kolektorem. Podczas zbierania przechowuj też podpisane punkty kontrolne w innym miejscu albo uruchom [niezależnego świadka](https://phishdestroy.github.io/TgWitness/pl/docs/witness/). Właśnie z tym odbiorca porównuje klucz i wcześniejszy stan dziennika.
 
 ## Pobierz podpisany plik ZIP
 
-Otwórz **opcję „Exports”** i utwórz podpisany plik ZIP z dowodami. Zawiera on pełny dziennik obszaru roboczego oraz podpisany manifest plików. Skorzystaj z [narzędzia](https://phishdestroy.github.io/TgWitness/pl/docs/reports/) [„Report Studio”](https://phishdestroy.github.io/TgWitness/pl/docs/reports/), aby stworzyć czytelny raport, lub z opcji [„Handover Extract”](https://phishdestroy.github.io/TgWitness/pl/docs/handover/), aby dostarczyć wyłącznie wybrane, zredukowane dane.
+**Eksporty** → podpisany ZIP z dowodami. Zawiera cały dziennik i podpisany manifest plików. Czytelny raport ułóż w [Report studio](https://phishdestroy.github.io/TgWitness/pl/docs/reports/), a jeśli trzeba oddać tylko wybrane dane — zrób [wyciąg do przekazania](https://phishdestroy.github.io/TgWitness/pl/docs/handover/).
 
-Raporty w formatach HTML, PDF i JSON posiadają własne podpisane pieczęcie i można je weryfikować oddzielnie. Plik CSV stanowi wygodną kopię do analizy; w celu sprawdzenia jego integralności należy użyć dokładnie tego samego pliku CSV, który znajduje się w zweryfikowanym pliku ZIP. Należy zachować podpisany plik ZIP, jeśli odbiorca potrzebuje również oryginalnych zapisów i załączników.
+Raporty HTML, PDF i JSON mają własne pieczęcie. CSV to tylko kopia robocza; do sprawdzania integralności bierz CSV ze zweryfikowanego ZIP.
 
 ## Proszę zweryfikować to za pomocą zaufanej kopii TgWitness
 
-W zainstalowanym środowisku projektowym proszę zastąpić przykładowy odcisk palca oraz ścieżki do plików:
+W środowisku projektu, z własnym odciskiem i ścieżkami:
 
 ```
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 ```
 
-Gdy oba odniesienia zostaną zatwierdzone, w raporcie wynikowym pojawią się wartości `key_pinned: true` i `checkpoint_checked: true`. Wynik weryfikacji należy zachować wraz z oryginalnym archiwum. Zachowany punkt kontrolny musi znajdować się na granicy eksportu lub przed nią.
+Po pomyślnym sprawdzeniu zobaczysz `key_pinned: true` i `checkpoint_checked: true`. Zachowaj ten wynik obok archiwum. Punkt kontrolny musi być na końcu eksportu lub przed nim.
 
 ## Wykorzystaj wynik weryfikacji
 
-- **Należy sprawdzić dostarczone pliki:** manifest wiąże ich skróty, a podpisy rekordów wiążą zapisany dziennik. Wykrywane są zmienione pliki lub przerwane łańcuchy rekordów.
-- **Sprawdź tożsamość obszaru roboczego:** niezależnie przechowywany odcisk palca identyfikuje klucz podpisujący, którego oczekiwałeś.
-- **Porównaj wcześniejszy punkt graniczny:** zachowany punkt kontrolny weryfikuje eksport w oparciu o prefiks dziennika zapisany przed przekazaniem.
-- **Należy sprawdzić zakres zebranych danych:** luki, wyniki pozyskania oraz kontrolowany test „wyślij → edytuj → usuń” opisują zdarzenia zarejestrowane w tej konfiguracji.
+- **Pliki:** manifest wiąże ich skróty, podpisy wiążą dziennik. Każda zmiana wyjdzie na jaw.
+- **Tożsamość:** zachowany odcisk potwierdza, że to oczekiwany klucz.
+- **Wcześniejszy stan:** punkt kontrolny porównuje eksport z początkiem dziennika zapisanym przed przekazaniem.
+- **Pokrycie:** luki, wyniki pozyskania i test „wyślij → edytuj → usuń” pokazują, co ta konfiguracja naprawdę złapała.
 
-Wyniki te należy zachować wraz z kopią przeznaczoną dla odbiorcy. Należy sprawdzić, [co ustala weryfikacja](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) w zakresie kontroli oraz oddzielnej oceny twierdzeń źródłowych i zakresu gromadzenia danych.
+Szczegóły: [co weryfikacja dowodzi, a czego nie](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope).
 
 ## Skonfiguruj kopię zapasową w usłudze S3 poza siedzibą firmy
 
-W uruchomionym środowisku roboczym proszę otworzyć **opcję Eksporty → Kopia zewnętrzna**. Ta opcjonalna funkcja współpracuje z usługą AWS S3 oraz innymi usługami zgodnymi ze standardem S3. Kopiuje ona segmenty dziennika, zachowane zdjęcia i pliki, punkty kontrolne wraz z odpowiedziami zawierającymi sygnatury czasowe oraz gotowe eksporty czatów. Każdy obiekt jest szyfrowany na kolektorze za pomocą algorytmu `AES-256-GCM` przed przesłaniem.
+**Eksporty → Kopia zewnętrzna** w Twojej przestrzeni. Działa z AWS S3 i każdym magazynem zgodnym z S3. Kopiuje segmenty dziennika, zapisane pliki, punkty kontrolne ze znacznikami czasu i gotowe eksporty czatów, każdy szyfrowany `AES-256-GCM` jeszcze na kolektorze.
 
-Wersja demonstracyjna online przedstawia te same elementy sterujące, jednak z wyłączoną funkcją przesyłania danych. Dane uwierzytelniające do pamięci masowej należy wprowadzać wyłącznie we własnym, uruchomionym środowisku roboczym.
+Demo online pokazuje te ustawienia z wyłączonym wysyłaniem. Prawdziwe dane logowania wpisuj tylko we własnej instalacji.
 
 [![Pełny panel ustawień kopii poza lokalizacją: punkt końcowy, region, zasób, klucze dostępu, harmonogram, blokada obiektów oraz opcje związane z kluczem odtwarzania](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
@@ -51,37 +51,37 @@ Pełny panel z rozwijanymi opcjami zaawansowanymi. Nie są wyświetlane żadne d
 
 | Dziedzina | Co należy wpisać |
 | --- | --- |
-| Punkt końcowy | Adres URL usługi przechowywania danych, bez ścieżki do zasobnika ani danych uwierzytelniających. Fikcyjny przykład: `https://s3.example.invalid`. |
-| Region | Region wymagany przez Państwa dostawcę. Domyślnym ustawieniem aplikacji jest `us-east-1`. |
-| Bucket | Istniejący zasób, do którego mają Państwo dostęp. Fikcyjny przykład: `example-case-backup`. |
-| Folder w zasobniku | Prefiks obiektu; domyślnie `tgwitness`. Aplikacja dodaje prefiks wygenerowany na podstawie odcisku palca klucza podpisu tego obszaru roboczego. |
-| Identyfikator klucza dostępu / Tajny klucz dostępu | Proszę wprowadzić obie pary danych uwierzytelniających do pamięci masowej jednocześnie. Zostaną one zapisane w skarbcu obszaru roboczego. Aby zachować zapisaną parę, proszę pozostawić oba pola puste podczas kolejnych zapisów. |
-| Adresy w formacie ścieżki | W zależności od dostawcy należy używać kodu `endpoint/bucket`, gdy funkcja jest włączona, lub `bucket.endpoint`, gdy jest wyłączona. |
-| Interwał kopiowania | Od 1 do 1 440 minut; domyślnie 5 minut. Aby kopie były tworzone zgodnie z harmonogramem, aplikacja musi być uruchomiona. |
-| Przechowywanie danych w Object Lock | Okres przechowywania i tryb dla zasobnika obsługującego funkcję Object Lock. Ustawienie „zero dni” powoduje, że obowiązuje domyślny okres przechowywania zasobnika. |
+| Punkt końcowy | URL magazynu, bez ścieżki bucketu i danych logowania. Przykład: `https://s3.example.invalid`. |
+| Region | To, czego wymaga dostawca. Domyślnie `us-east-1`. |
+| Bucket | Istniejący bucket z prawem zapisu. Przykład: `example-case-backup`. |
+| Folder w zasobniku | Prefiks, domyślnie `tgwitness`. Dochodzi do niego prefiks przestrzeni. |
+| Identyfikator klucza dostępu / Tajny klucz dostępu | Oba razem, przechowywane w sejfie. Później zostaw oba puste, żeby je zachować. |
+| Adresy w formacie ścieżki | Wł.: `endpoint/bucket`. Wył.: `bucket.endpoint`. Zależy od dostawcy. |
+| Interwał kopiowania | Od 1 do 1440 minut, domyślnie 5. Tylko gdy aplikacja działa. |
+| Przechowywanie danych w Object Lock | Dni i tryb, jeśli bucket obsługuje Object Lock. Zero zostawia ustawienie domyślne bucketu. |
 
-1. Utwórz zasób w swoim serwisie, a następnie wprowadź jego lokalizację docelową i dane uwierzytelniające. Podczas przygotowywania pozostaw **opcję „Zachowaj kopię poza lokalizacją”** niezaznaczoną, a następnie wybierz opcję **„Zapisz kopię poza lokalizacją**”.
-2. Proszę wybrać opcję **„Test połączenia**”. Spowoduje to przesłanie zaszyfrowanego obiektu testowego i sprawdzenie odpowiedzi serwera.
-3. Proszę wybrać opcję **„Pobierz klucz szyfrujący**”. Proszę przechowywać ten plik oddzielnie od programu zbierającego dane; będzie on niezbędny do odzyskania danych.
-4. Zaznacz pole wyboru **„Zachowaj kopię poza serwerem**” i zapisz ponownie. Wybierz opcję **„Kopiuj teraz”**, aby przeprowadzić operację ręcznie, lub pozostaw harmonogram w działaniu.
+1. Utwórz bucket, wypełnij adres i dane logowania przy odznaczonym **Zachowuj kopię zewnętrzną** i kliknij **Zapisz kopię zewnętrzną**.
+2. **Testuj połączenie** wysyła zaszyfrowany obiekt testowy.
+3. **Pobierz klucz szyfrowania** i trzymaj go z dala od kolektora. Bez klucza nie ma odzyskiwania.
+4. Zaznacz **Zachowuj kopię zewnętrzną**, zapisz, potem **Kopiuj teraz** albo zostaw harmonogram.
 
 ## Sprawdź stan przechowywania danych i postęp kopiowania
 
-W sekcji **„More options”** (**Więcej opcji**) wybierz liczbę dni przechowywania oraz opcję „`GOVERNANCE`” (Zarządzanie) lub „`COMPLIANCE`” (Zgodność), jeśli Twój zasób danych obsługuje funkcję Object Lock. TgWitness odczytuje tryb przechowywania i termin wygaśnięcia przesłanego obiektu. Sprawdź oddzielny wynik przechowywania: potwierdzone, brak przechowywania lub niepowodzenie sprawdzania.
+W **Więcej opcji** wybierz dni przechowywania oraz `GOVERNANCE` lub `COMPLIANCE`. TgWitness odczytuje przechowywanie z wysłanego obiektu i podaje: potwierdzone, brak albo błąd sprawdzenia.
 
-Panel wyświetla informacje o ostatnim przebiegu, liczbie obiektów, liczbie przesłanych bajtów, granicy skopiowanego dziennika oraz ewentualnych błędach. Brakujące lub zmienione nośniki lokalne są zgłaszane, a próba ich skopiowania jest powtarzana podczas następnego przebiegu. Pliki, punkty kontrolne oraz eksporty oczekujące w kolejce po tych nośnikach mogą nadal zostać skopiowane.
+Panel pokazuje ostatnie przejście, liczbę obiektów, bajty, skopiowaną granicę dziennika i błędy. Brakujący plik lokalny trafia do raportu i jest ponawiany przy następnym przejściu, reszta kopiuje się dalej.
 
-Przesyłanie danych odbywa się za pośrednictwem trasy Direct, SOCKS5 lub HTTP w obszarze roboczym. Należy wybrać jedną z tych tras do kopiowania do S3; trasa wykorzystująca wyłącznie MTProxy powoduje, że kopiowanie pozostaje w stanie oczekującym z komunikatem o błędzie.
+Wysyłanie idzie bezpośrednio, przez SOCKS5 albo HTTP. Przy trasie tylko przez MTProxy kopia czeka z błędem.
 
 ## Klucz odtwarzający należy przechowywać oddzielnie
 
-Pobrany plik JSON zawiera klucz deszyfrujący, ustawienia miejsca docelowego, prefiks obiektu obszaru roboczego oraz odcisk palca klucza podpisu. Odzyskiwanie wymaga zarówno tego pliku klucza, jak i oddzielnych poświadczeń dostępu do pamięci masowej z uprawnieniami do odczytu w zasobniku. Należy uwzględnić je w planie odzyskiwania danych.
+JSON klucza zawiera klucz deszyfrujący, adres, prefiks i odcisk klucza. Do odzyskania potrzebny jest on oraz dane logowania magazynu z prawem odczytu.
 
-W przypadku zmiany punktu końcowego, zasobnika lub prefiksu folderu należy ponownie pobrać plik klucza, aby ustawienia miejsca docelowego były zgodne. Aplikacja uruchamia nową kopię lokalnie przechowywanego dziennika, plików i punktów kontrolnych w nowym miejscu docelowym. Gotowe eksporty czatów, które zostały już usunięte z lokalnej kolejki przesyłania, pozostają w poprzednim miejscu docelowym.
+Zmieniony endpoint, bucket albo prefiks? Pobierz klucz ponownie. W nowym miejscu ruszy świeża kopia, stare eksporty czatów zostaną tam, gdzie były.
 
 ## Przywrócenie i weryfikacja na innym komputerze
 
-Należy skorzystać z zaufanej instalacji TgWitness, pobranego pliku JSON z kluczem, danych uwierzytelniających do pamięci masowej z uprawnieniami do odczytu oraz pustego katalogu wyjściowego. Proszę zastąpić poniższe fikcyjne symbole zastępcze danymi uwierzytelniającymi.
+Potrzebna jest zaufana instalacja TgWitness, JSON klucza, dane logowania tylko do odczytu i pusty folder:
 
 ### Windows PowerShell
 
@@ -99,8 +99,6 @@ export TGWITNESS_S3_SECRET_KEY='YOUR_READ_SECRET_KEY'
 python -m tgwitness.replica restore --key-file tgwitness-replica-key.json --out restored-evidence
 ```
 
-Pobrane i odszyfrowane obiekty pozostają w prywatnej pamięci tymczasowej na czas sprawdzania całego dziennika, zachowanych punktów kontrolnych oraz hashowych i rozmiarów zachowanych plików multimedialnych. Niebezpieczne ścieżki, sprzeczne segmenty dziennika oraz dziennik krótszy niż jego punkt kontrolny są odrzucane. W przypadku nieudanej weryfikacji przywrócone pliki nie są publikowane.
+Najpierw wszystko jest sprawdzane w prywatnym folderze tymczasowym: cały dziennik, punkty kontrolne, skróty i rozmiary plików. Niebezpieczne ścieżki, sprzeczne segmenty lub dziennik krótszy niż punkt kontrolny kończą się błędem i wtedy nic nie zostaje zapisane.
 
-Pomyślne odzyskanie danych generuje wyniki `events.jsonl`, `media/`, `checkpoints/` oraz `exports/` dla materiałów dostępnych w kopii. Proszę zachować wynik polecenia w formacie JSON wraz z odzyskanymi materiałami.
-
-Porównaj odzyskane materiały z niezależnie zachowanymi punktami kontrolnymi lub zapisami świadków, a następnie przejrzyj zakres zgromadzonych danych dla wybranego okresu.
+Po sukcesie dostajesz `events.jsonl`, `media/`, `checkpoints/` i `exports/`. Zachowaj obok wynik JSON polecenia i porównaj z punktami kontrolnymi lub wpisami świadka, które przechowujesz sam.

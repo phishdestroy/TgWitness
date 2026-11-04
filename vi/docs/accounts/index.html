@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <span aria-current="page">Kết nối tài khoản</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Những nội dung đã được kiểm thử →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Tài liệu hướng dẫn / 05</p><h1>Kết nối tài khoản</h1><p class="guide-outcome">Mỗi không gian làm việc chứa một tài khoản, sổ nhật ký của tài khoản đó và khóa ký của tài khoản đó.</p>
+<article class="guide-content"><p class="eyebrow">Tài liệu hướng dẫn / 05</p><h1>Kết nối tài khoản</h1><p class="guide-outcome">Một không gian làm việc = một tài khoản, sổ nhật ký và khóa của nó.</p>
 <h2 id="sign-in">Chọn cách đăng nhập</h2>
-<p>Mở <strong>Tài khoản</strong>, thêm không gian làm việc và mở cài đặt kết nối của không gian đó. Hãy sử dụng một tài khoản chuyên dụng dành cho việc quan sát.</p>
-<ul><li><strong>Mã QR: quý vị</strong> hãy quét mã này từ phần cài đặt thiết bị trên Telegram và xác nhận thông tin đăng nhập mới.</li><li><strong>Số điện thoại:</strong> vui lòng nhập số điện thoại, mã xác minh mà Telegram gửi đến và mật khẩu xác thực hai bước (nếu tính năng này đã được kích hoạt).</li><li><strong>Nhập phiên làm việc:</strong> nhập một phiên làm việc được hỗ trợ hoặc dữ liệu Telegram Desktop thuộc sở hữu của quý vị.</li></ul>
-<p>Quý vị có thể chọn một cấu hình API có sẵn hoặc nhập ID API và mã băm của riêng mình. Cấu hình API dùng để xác định danh tính của khách hàng; nó không dùng để đăng nhập vào tài khoản hay làm cho kết nối trở nên ẩn danh.</p>
+<p><strong>Tài khoản</strong> → thêm không gian làm việc → cài đặt kết nối. Hãy dùng một tài khoản riêng cho việc này.</p>
+<ul><li><strong>Mã QR:</strong> quét từ màn hình Thiết bị trong Telegram và xác nhận.</li><li><strong>Số điện thoại:</strong> số, mã, rồi mật khẩu 2FA nếu có.</li><li><strong>Nhập phiên:</strong> tệp phiên của riêng bạn hoặc dữ liệu Telegram Desktop.</li></ul>
+<p>Dùng hồ sơ API có sẵn hoặc API ID và hash của riêng bạn. Nó chỉ nhận diện ứng dụng, không đăng nhập giúp bạn và không che giấu gì cả.</p>
 <details><summary>Quý vị có cần sử dụng máy chủ proxy trước không?</summary><p>Quý vị có thể <a href="../proxies/">lựa chọn và kiểm tra lộ trình kết nối</a> trước khi đăng nhập. Mỗi tài khoản đều có lộ trình riêng.</p></details>
 <h2 id="sources">Chọn nội dung cần theo dõi</h2>
-<ol><li>Vui lòng mở danh sách nguồn và chọn các cuộc trò chuyện, nhóm hoặc kênh mà quý vị cần.</li><li>Vui lòng kiểm tra các cài đặt thu thập dữ liệu, bao gồm cả tệp đa phương tiện, trước khi bắt đầu quá trình quan sát.</li><li>Khởi động trình thu thập dữ liệu và kiểm tra kết nối cũng như các hoạt động gần đây của nó.</li></ol>
-<p>Tài khoản phải có quyền truy cập vào nguồn dữ liệu. Các vai trò khác nhau có thể xem các sự kiện khác nhau; sổ nhật ký phản ánh chính xác những gì tài khoản đó đã nhận được.</p>
-<p>Đối với một vụ việc liên quan đến toàn bộ tài khoản, vui lòng chọn <strong>Nguồn → Phạm vi quan sát → Chế độ điều tra</strong>, xem lại các cài đặt và nhấn <strong>Lưu phạm vi</strong>. <a href="../cases/">Hướng dẫn điều tra chi tiết</a> bao quát tất cả các loại cuộc trò chuyện hiển thị, lịch sử cũ, hồ sơ cá nhân, các tham chiếu chéo giữa các cuộc trò chuyện và việc chuyển giao bằng chứng.</p>
+<ol><li>Chọn các cuộc trò chuyện, nhóm hoặc kênh bạn cần.</li><li>Kiểm tra cài đặt thu thập, kể cả phương tiện.</li><li>Khởi động rồi kiểm tra kết nối và hoạt động gần đây.</li></ol>
+<p>Tài khoản phải có quyền truy cập. Quản trị viên và thành viên thấy những thứ khác nhau, sổ nhật ký cho thấy tài khoản này đã nhận được gì.</p>
+<p>Cả tài khoản? <strong>Nguồn → Phạm vi quan sát → Chế độ điều tra</strong>, kiểm tra, rồi <strong>Lưu phạm vi</strong>. Hướng dẫn đầy đủ: <a href="../cases/">điều tra toàn bộ tài khoản</a>.</p>
 <h2 id="check">Kiểm tra toàn bộ đường dẫn</h2>
-<p>Trong một nhóm thử nghiệm do quý vị quản lý, hãy gửi một tin nhắn duy nhất từ một tài khoản khác, chỉnh sửa và xóa tin nhắn đó. Xác nhận cả ba sự kiện trong sổ ghi chép, sau đó <a href="../exports/">xuất và xác minh</a> bản ghi.</p>
-<p class="callout">Trạng thái “Đã kết nối” xác nhận rằng kết nối đã được thiết lập. Một tin nhắn thử nghiệm được ghi lại xác nhận rằng một sự kiện cụ thể đã được truyền đến không gian làm việc này.</p>
+<p>Trong nhóm thử nghiệm, gửi một tin nhắn từ tài khoản khác, sửa nó, rồi xóa nó. Cả ba sự kiện đều phải hiện trong sổ nhật ký. Sau đó <a href="../exports/">xuất và xác minh</a>.</p>
+<p class="callout">"Đã kết nối" nghĩa là kết nối hoạt động. Tin nhắn thử được ghi lại nghĩa là sự kiện thực sự đến nơi.</p>
 <h2 id="more">Thêm một tài khoản khác</h2>
-<p>Vui lòng tạo một không gian làm việc khác trong <strong>phần Tài khoản</strong> và lặp lại quy trình thiết lập. Hãy lưu giữ dấu vân tay khóa ký của từng tài khoản để quý vị có thể nhận diện các tệp xuất từ tài khoản đó sau này.</p>
+<p>Không gian làm việc mới trong <strong>Tài khoản</strong>, các bước như cũ. Ghi lại dấu vân tay khóa của từng tài khoản để sau này phân biệt các bản xuất.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/accounts/">Tham khảo đầy đủ →</a><a class="next-guide" href="../exports/"><span>Bước tiếp theo</span><strong>Xuất và xác minh →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../reference/verification/">Những nội dung đã được kiểm thử →</a></p></footer>
 </main>

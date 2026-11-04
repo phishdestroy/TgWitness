@@ -34,17 +34,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/deplo
 - **macOS：**请安装最新的 Python 3.11+ 发行版；请勿假设操作系统自带的 解释器符合要求。请使用项目目录中的 `python3 start.py`。
 - **Docker：**请使用搭载 Compose v2.20 或更高版本的 Docker Engine/Desktop。在 Windows 系统上，Docker Desktop 必须使用 Linux 容器。该容器会自行安装 所需的 Python 依赖项；主机无需单独安装 Python。
 
-请使用持久性本地存储作为数据目录。根据消息、 媒体文件、WAL 增长、导出和备份来规划存储容量；目前尚无基于证据的、适用于所有工作负载的通用最低 磁盘/内存规格。对于没有兼容依赖项轮（wheel）的 CPU 架构和 Python 版本， 可能需要额外的构建工具及其 相应的验证。 “可移植”并不意味着支持所有操作系统或硬件。
-
-已在本机验证 Windows 11/Python 3.12 环境。Linux/macOS/容器配置文件及持续集成（CI） 虽已提供，但尚未在此开发主机上执行。具体范围请参阅 [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/) 文件。
-
 ## 本地计算机
 
 在 Windows 系统上使用 `Start.cmd`，在 Linux/macOS 系统上使用 `sh start.sh`。`scripts\Setup.cmd` 或 `sh start.sh --setup-only` 可用于 准备运行环境。启动程序在首次使用时会安装依赖项；后续启动 将复用该环境。设置和 Telegram 消息采集需要互联网连接， 但浏览现有记录和生成导出文件可在离线状态下进行。
 
 设置完成后运行 `python start.py --check`，可在不启动收集器的情况下检查本地依赖项、Ed25519、 存储、密钥配置及监听地址。 使用 `--json` 获取结构化输出。传入预期的 `--data-dir`、`--host` 和 `--port`。此检查不会安装软件包、创建日志或连接 Telegram； 它并非完整性或覆盖范围的资格认证。启动时会单独验证 现有日志。`python start.py --help` 同样无需安装。
-
-选项：
 
 运行 start.py 后，请在 Windows 系统上使用 `.venv\Scripts\python.exe`，在 Linux/macOS 系统上使用 `.venv/bin/python` 执行辅助命令，或者先激活该环境。 下文中的 `python -m ...` 示例假设该环境已处于活动状态。
 
@@ -73,8 +67,6 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 ```
 python tools/build_portable.py
 ```
-
-构建程序会验证运行时校验和，将受限依赖项安装到 软件包中，使用嵌入式解释器运行就绪性检查，并将 ZIP 文件和校验和写入 `dist/`。
 
 ## 容器
 
@@ -121,8 +113,6 @@ docker compose logs witness                     # witness key fingerprint
 该服务通过 Compose 网络内的收集器访问，地址为 `http://tgwitness:8787` （`TGWITNESS_WITNESS_COLLECTOR` 会覆盖该地址，例如 `/profiles/<workspace ID>` 用于 另一个工作区）。若要使用由他人运行的独立服务器上的见证文件，请在该服务器上使用 `deploy/compose/compose.witness.yaml` ，并将 `TGWITNESS_WITNESS_COLLECTOR` 设置为收集器的 HTTPS 地址；该文件仅包含见证文件。
 
 ## 安装已发布的镜像
-
-该网站将在[发布工作流](https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/#automated-github-releases) 成功完成且 GHCR 包配置公开后上线。存储库的所有者/名称并未硬编码 到此源代码树中。请使用该发布版工作流摘要中显示的图片。
 
 将 `deploy/env.example` 复制到 `.env`。将 `TGWITNESS_IMAGE` 设置为发布版本，使用 **小写形式的**仓库路径，例如：
 
@@ -202,18 +192,6 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 
 更新后，请检查控制面板访问权限、账户身份、监控状态及覆盖范围。 重启不会恢复遗漏的 Telegram 更新。如果未来版本更改了存储格式， 回滚可能需要使用更新前的备份。
 
-## GitHub 自动发布
-
-将该项目推送到已启用 Actions 的 GitHub 仓库后，[发布工作流](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml)即可投入使用。当**发布** GitHub Release（包括预发布版本）时，该工作流会自动运行。仅推送草稿或标签 不会发布软件包。
-
-1. 设置软件包版本和变更日志，然后发布一个标记为 `v` 加上确切的 `pyproject.toml` 版本（例如 `v0.8.0`）的发布版本。
-2. 该工作流会验证标签，并运行适用于 Windows/Linux/macOS 的通用 Python、 general/account-import/QR 浏览器、源代码包以及 Docker 检查。此外，还会在 这三种操作系统上使用 Python 3.12 进行全新的原生安装测试。
-3. 在通过上述检查后，系统会在 QEMU 环境下对 ARM64 镜像进行烟雾测试，将 AMD64/ARM64 镜像发布至`ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` ， 并附上源代码 ZIP 包和 Python wheel 包及其 SHA-256 校验文件。 Windows 可移植 ZIP 包正是检查工作流所测试的精确构建产物； 发布工作流会下载并发布该构建产物及其校验和。
-4. 最后一个任务会再次下载所有三个已发布的软件包，并验证其校验和。随后发布`SHA256SUMS.txt` 和`RELEASE-MANIFEST.json` ，记录版本号、源代码修订号及资源大小。上传操作不会覆盖现有的发布资源。
-5. 首次发布后，请打开 GHCR 包设置，并将可见性 设为“公开”（**Public**），以便匿名拉取图像。仅拥有公开的源代码仓库 并不能保证容器包也会公开。组织政策必须 允许发布包。该工作流使用 `GITHUB_TOKEN`；注册表 密码或 VPS 凭据不应存放在仓库中。
-
-仅通过本地准备工作尚无法确保远程工作流的成功。ARM64 仿真仅为初步验证，并非原生硬件或实时 Telegram 环境的认证。 此功能可自动完成版本打包；启动服务器仍需使用 Compose 命令及其域名/主机先决条件。当新版本发布时，现有服务器不会被 自动升级或重启。
-
 ## 远程服务器
 
 请将服务限制在回环接口内并使用 SSH 隧道，或在 反向代理处终止 HTTPS 连接。基础 Compose 文件仅限本地使用；可选的 `deploy/compose/compose.https.yaml` 覆盖层提供 Caddy 以支持配置好的域名。 请勿在 URL 和代理日志中暴露承载令牌。反向代理应限制 请求大小和连接速率。请勿将明文 HTTP 暴露到互联网上。
@@ -244,14 +222,6 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 若要使用其他工作区，请从**“导出”→“工作区 ID**”中选用 `--profile ID`； 若要连接远程服务器，请选用 `--format zip|jsonl|csv|html` 或 `--url https://your-server`； 若要更改 5 GiB 的传输限制，请选用 `--max-mib`。仅允许在 回环连接中使用纯文本 HTTP。令牌通过请求头传输，拒绝重定向，现有文件 不会被覆盖，且未完成的下载不会作为已完成文件发布。 如果 TGWITNESS_TOKEN 覆盖了生成的令牌，请使用一个单独受保护的文件 来存储该有效值：panel-token.txt 不会被覆盖操作重写。 该命令的 SHA-256 仅作为传输校验和；请独立验证已签名的 ZIP 文件。
 
-服务器导出文件仍保存在每个工作区的私有`temporary-exports/`中。 成功导出的文件将被清理。中断的导出文件将在 下次工作区启动时被移除，届时该工作区将保持其专属实例锁定状态。该目录属于 存储威胁/容量模型的一部分；请使用加密数据卷。生产级 的数吉字节级数据传输仍需在目标系统上进行兼容性测试。
-
 该面板显示队列中/失败的媒体文件、最旧的待处理媒体文件、可用磁盘空间、Telegram 请求暂停情况，以及访问状态未确认的来源。这些诊断信息并非 完整的端到端交付监控。工作区共享一个进程；一个活动频繁的账户仍可能 影响其他工作区。 独立的工作进程、数据保留/轮换、持久化更新 恢复以及完整的部署认证功能依然存在。控制面板的范围访问权限已在 [“访问与权限](https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/)”部分中记录；独立检查点相关内容详见《 [见证指南](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/)》。
-
-## 连接与保护选项
-
-连接路径按工作区划分，应在授权前进行配置。 SOCKS5/HTTP CONNECT 使用固定的 python-socks 依赖项。MTProxy 使用 Telethon 的 实验性随机化中间传输；不支持伪 TLS ee 密钥。 直接回退取决于所选的 [IP 模式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/#ip-modes)：**“隐藏地址**”模式会拒绝直接连接；**“直接连接（作为最后手段）**”模式则会在延迟后允许直接连接。**位于隧道或 VPN 后的服务器**允许直接连接，但不会建立 VPN。这并非全系统的网络策略。
-
-对于新安装，TGWITNESS_VAULT_KEY_FILE 应指向一个单独受保护的随机 主密钥文件。请在容器外的 /data 目录下以只读方式挂载该文件。请将每个工作区的 vault.external.json 公开盐元数据与主密钥分别妥善保存。 现有本地保险库需要进行有计划的迁移；设置此变量不会 自动将其转换。消息/媒体存储和导出内容未经过应用程序加密。 请根据需要使用加密卷和足够的私有临时存储空间。
 
 详细操作流程：[连接/安全](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/)设置及 [运行模式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/)。

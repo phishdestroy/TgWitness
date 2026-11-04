@@ -493,13 +493,6 @@ connections to an address looked up nowhere (Telegram's data centres, for one), 
 its log.</p>
 <p>Cloudflare cannot see inside Telegram's encryption, other devices on the Telegram account
 (evidence mode's device list records them from Telegram's side) or the provider's hypervisor.</p>
-<p>On 1 November 2026 Gateway DNS ran against real Hetzner Cloud and a free Cloudflare account:
-Hetzner accepted the outbound rules, the server installed v0.7.0 with every lookup going
-through Gateway over TLS, the quick tunnel worked through that firewall, and <code>verify</code> read
-the server's 19 names back from Cloudflare (Ubuntu and Hetzner mirrors, GitHub, PyPI, NTP,
-the tunnel, ntfy.sh). The panel copied 36 queries in eight windows into a journal and
-<code>verify.py</code> summarised them without gaps; <code>destroy</code> removed the server and firewall and left
-the shared location.</p>
 <h2 id="what-this-does-not-establish">What this does not establish<a class="anchor" href="#what-this-does-not-establish" aria-label="Link to this section">#</a></h2>
 <ul>
 <li>The provider and its staff control the hypervisor, disks and network.</li>
@@ -507,40 +500,13 @@ the shared location.</p>
 <li>Earlier firewall rule contents are not in every provider log; only Linode keeps rule versions.</li>
 <li>It says nothing new about message authenticity; see <a href="../evidence/">Evidence</a>.</li>
 </ul>
-<h2 id="tested-here">Tested here<a class="anchor" href="#tested-here" aria-label="Link to this section">#</a></h2>
-<p>The deployment, lock and verification logic is covered by automated tests against simulated
-Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail and Cloudflare APIs built from their
-published API references, and the AWS request signing against AWS's published examples.
-<code>tools/check_cloud_wizard.py</code> runs the panel's server wizard the same way, with a domain and
-with a quick tunnel. <code>tools/check_tdx.py</code> verifies real Intel TDX attestations from dcap-qvl and dstack
-up to Intel's root certificate (sources in <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md">tools/tdx/README.md</a>); <code>tools/check_phala.py</code>
-runs deploy, verify, the journal, destroy and the panel wizard against a simulated Phala Cloud
-whose attestations come from a forged PKI shaped like Intel's. The Phala path has not yet been
-tried on Phala Cloud itself.</p>
-<p>On 1 November 2026 the quick tunnel path ran against real <strong>Hetzner Cloud</strong> (Nuremberg, <code>cpx22</code>,
-TgWitness v0.7.0), real ntfy.sh and GitHub, from the panel and from code:</p>
-<ul>
-<li>the price check, then creation from the panel's buttons: server running after 13 seconds,
-    signed statement with matching instance and installer hashes after about two minutes;</li>
-<li>the server's own panel opened through its trycloudflare.com address and accepted the
-    panel token; without the token it answers 401;</li>
-<li>after a reboot through the Hetzner API the server posted a new signed address, <strong>Find the
-    current address</strong> found it, the old address stopped answering, the signing key stayed the
-    same; an unsigned post to an ntfy.sh topic was ignored;</li>
-<li><code>verify</code> against Hetzner's API: server, firewall without inbound rules, statement, binding,
-    host measurements, boot and the source hash of a v0.7.0 checkout passed; the Cloudflare
-    checks were unavailable, as described above; the installer differed from the one v0.7.0
-    builds and equalled byte for byte the one this version's code builds;</li>
-<li>deletion from the panel removed exactly the server and firewall the deployment labelled;
-    other servers and firewalls in the same project were untouched.</li>
-</ul>
 <p>Not yet run against real accounts: a deployment under your own domain (Cloudflare tunnel and
 DNS), the other providers, a debug deployment and <code>lock</code>, a Telegram account on such a server,
 and the live updates of later versions through a quick tunnel. Check the first deployment on
 each provider with <code>plan</code>, a debug deployment and <code>verify</code> before relying on it in a case.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/HIGH-ASSURANCE.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../panel/"><span>Next step</span><strong>Panel guide →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
 </main>
-<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#what-a-verifier-can-check">What a verifier can check</a><a href="#providers">Providers</a><a href="#confidential-vm-on-phala-cloud-intel-tdx">Confidential VM on Phala Cloud (Intel TDX)</a><a href="#before-you-start">Before you start</a><a href="#from-the-panel">From the panel</a><a href="#quick-tunnel-without-a-domain">Quick tunnel without a domain</a><a href="#deploy">Deploy</a><a href="#debug-deployment-and-lock">Debug deployment and lock</a><a href="#remove-a-deployment">Remove a deployment</a><a href="#any-server-self-attested">Any server (self-attested)</a><a href="#verify">Verify</a><a href="#report-for-evidence-handover">Report for evidence handover</a><a href="#cloudflare-as-an-outside-witness">Cloudflare as an outside witness</a><a href="#what-this-does-not-establish">What this does not establish</a><a href="#tested-here">Tested here</a></aside>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#what-a-verifier-can-check">What a verifier can check</a><a href="#providers">Providers</a><a href="#confidential-vm-on-phala-cloud-intel-tdx">Confidential VM on Phala Cloud (Intel TDX)</a><a href="#before-you-start">Before you start</a><a href="#from-the-panel">From the panel</a><a href="#quick-tunnel-without-a-domain">Quick tunnel without a domain</a><a href="#deploy">Deploy</a><a href="#debug-deployment-and-lock">Debug deployment and lock</a><a href="#remove-a-deployment">Remove a deployment</a><a href="#any-server-self-attested">Any server (self-attested)</a><a href="#verify">Verify</a><a href="#report-for-evidence-handover">Report for evidence handover</a><a href="#cloudflare-as-an-outside-witness">Cloudflare as an outside witness</a><a href="#what-this-does-not-establish">What this does not establish</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
 <script id="site-dict" type="application/json">{}</script>

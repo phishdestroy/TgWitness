@@ -2,26 +2,26 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/concepts/
 
-Eine Nachricht kann sich ändern. Die Aufzeichnung dessen, was Sie beobachtet haben, sollte überprüfbar bleiben.
+Nachrichten ändern sich. Ihre Aufzeichnung dessen, was Sie gesehen haben, sollte das nicht, und jeder sollte das prüfen können.
 
-Entdecken Sie unten zwei kleine Experimente. Diese verwenden fiktive Nachrichten, laufen direkt in Ihrem Browser und stellen zu keinem Zeitpunkt eine Verbindung zu Telegram her.
+Unten zwei kleine Experimente. Erfundene Nachrichten, alles läuft im Browser, nichts geht an Telegram.
 
 ## Vom Chat-Export zum überprüfbaren Datensatz
 
-[Telegram Desktop exportiert](https://telegram.org/blog/export-and-more) den verfügbaren Chatverlauf und die Medien als HTML oder JSON zur Offline-Nutzung. TgWitness fügt ein fortlaufendes Protokoll der empfangenen Änderungen, Signaturen für Beobachtungen und Exporte sowie Kontrollpunkte hinzu, die Empfänger unabhängig voneinander vergleichen können.
+Ein [Telegram-Desktop-Export](https://telegram.org/blog/export-and-more) speichert den gerade sichtbaren Verlauf als HTML oder JSON. TgWitness ergänzt ein laufendes Änderungsjournal, Signaturen auf jedem Eintrag und Prüfpunkte, mit denen andere vergleichen können.
 
 | Aufgabe | Export aus Telegram Desktop | TgWitness |
 | --- | --- | --- |
 | Gespeicherte Unterhaltungen lesen | HTML oder JSON mit ausgewählten Medien | Gespeicherte Chats, durchsuchbares Protokoll und Offline-Berichte |
-| Verfolgen Sie eine Veränderung im Zeitverlauf | Der beim Export verfügbare Verlauf | Früher erfasste Versionen, spätere Bearbeitungen und Feststellungen zu Löschungen werden gemeinsam gespeichert |
-| Dateien nach der Übergabe überprüfen | Standardmäßige HTML-/JSON-Exportdateien sind nicht signiert. | Signiertes Manifest, Signaturen pro Datensatz und versiegelte HTML-/PDF-/JSON-Berichte, die anhand eines vertrauenswürdigen Collector-Schlüssels überprüft werden |
+| Verfolgen Sie eine Veränderung im Zeitverlauf | Der beim Export verfügbare Verlauf | Alte Versionen, spätere Bearbeitungen und Löschungen, alles behalten |
+| Dateien nach der Übergabe überprüfen | Standardmäßige HTML-/JSON-Exportdateien sind nicht signiert. | Signiertes Manifest, signierte Einträge und versiegelte Berichte, geprüft gegen einen vertrauenswürdigen Schlüssel |
 | Vergleichen Sie mit einem früheren gespeicherten Zustand | Bewahren Sie eine separate Referenzkopie oder einen Hash auf | Signierte Kontrollpunkte, ein separater Zeuge und optionale externe Zeitstempel |
 
-Der Vergleich der Dateisignaturen basiert auf den am 2. November 2026 überprüften [Export-Writern von Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output). TgWitness signiert mit dem Schlüssel des Erfassers; die folgenden Überprüfungen zeigen, wie ein Empfänger diesen verwendet.
+Der Vergleich beruht auf dem [Exportcode von Telegram Desktop](https://github.com/telegramdesktop/tdesktop/tree/768d47cda6c7f447c10a25d1f363279493a90ed7/Telegram/SourceFiles/export/output) mit Stand 2. November 2026.
 
 ## Eine Nachricht, drei Beobachtungen
 
-Wenn Telegram eine neue Nachricht, eine Bearbeitungs- oder eine Löschbenachrichtigung übermittelt, fügt der Collector drei separate Einträge hinzu. Die Bearbeitung ersetzt den ersten Eintrag nicht. Eine Löschbenachrichtigung löscht ihn nicht.
+Eine neue Nachricht, eine Bearbeitung und eine Löschung werden drei getrennte Einträge. Die Bearbeitung überschreibt den ersten nicht, die Löschung entfernt ihn nicht.
 
 01 / DER WEG DER NACHRICHTBeispielablauf
 
@@ -61,11 +61,11 @@ Alle drei erfassten Beobachtungen verbleiben im Protokoll.
 
 Vereinfachter Pfad für eine bereits ausgewählte Quelle. Operative Aufzeichnungen greifen ebenfalls auf das tatsächliche Protokoll zurück. Die Erfassung hängt davon ab, was das Konto einsehen kann und was Telegram bereitstellt.
 
-Eine Löschmeldung liefert weder einen verlässlichen Zeitpunkt der Löschung noch den Namen der Person, die die Nachricht gelöscht hat. Indem diese Werte unbekannt bleiben, wird die Unterscheidung zwischen einer Beobachtung und einer Vermutung gewahrt.
+Telegram sagt nicht, wer eine Nachricht gelöscht hat oder wann genau. TgWitness lässt diese Felder leer, statt zu raten.
 
 ## Ändern Sie einen Datensatz. Folgen Sie dem Hash.
 
-Jeder Datensatz enthält den Hash des vorherigen Datensatzes. Sein eigener Hash umfasst die Ereignisfelder, einschließlich dieses Links. Ein extern gespeicherter Checkpoint fixiert eine bestimmte Protokollänge und den Kopf-Hash.
+Jeder Eintrag enthält den Hash des vorherigen. Ein anderswo aufbewahrter Prüfpunkt hält Journallänge und letzten Hash fest.
 
 02 / HASH-CHAIN SANDBOXEchtes SHA-256 · Beispieldatensätze
 
@@ -105,23 +105,23 @@ h0 = 064
 hi = hex(SHA-256(C(ei)))
 σi = Ed25519.Sign(sk, unhex(hi))
 
-**C** serialisiert die neun Ereignisfelder als UTF-8-JSON: sortierte Schlüssel, keine zusätzlichen Leerzeichen, keine ASCII-Escape-Zeichen und keine NaN-/Unendlich-Werte. Der Wert `previous_hash` des Ereignisses beträgt hi−1. Der angezeigte Wert h0 steht für 64 Nullzeichen; die Signaturen decken die 32 Rohdaten-Byte des Digests ab.
+**C** sind die neun Ereignisfelder als UTF-8-JSON: sortierte Schlüssel, kein zusätzlicher Leerraum, kein ASCII-Escaping, kein NaN/Unendlich. `previous_hash` ist hi−1, h0 sind 64 Nullen, Signaturen decken die 32 Rohbytes des Digests ab.
 
-Die neun Felder lauten `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload` und `previous_hash`. Dies ist [die dokumentierte JSON-Kodierung](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#event-canonicalization) von TgWitness; der Hash und die Signatur selbst sind keine Hash-Eingabefelder.
+Die Felder: `seq`, `observed_at`, `source_at`, `kind`, `chat_id`, `message_id`, `actor_id`, `payload`, `previous_hash`. Vollständige Spezifikation: [Ereigniskodierung](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#event-canonicalization).
 
 BEIBEHALTENER PRÜFPUNKT
 
 Nexport ≥ Ncheckpoint
 hexport[Ncheckpoint] = Hcheckpoint
 
-Überprüfen Sie die Signatur des Checkpoints unter dem angehefteten Collector-Schlüssel und vergleichen Sie anschließend dessen Grenzen mit dem verifizierten Protokoll. Ein späterer Export kann weitere Datensätze enthalten; er muss jedoch weiterhin mit dem früheren Checkpoint übereinstimmen.
+Prüfen Sie die Signatur des Prüfpunkts gegen den festgelegten Schlüssel und vergleichen Sie ihn dann mit dem Journal. Ein späterer Export darf länger sein, muss aber am Prüfpunkt übereinstimmen.
 
 ## Drei Fragen, drei verschiedene Überprüfungen
 
-[01 / INTEGRITÄT**Hat sich dieser Eintrag geändert?** Überprüfen Sie Hashes und Signaturen anhand eines separat vertrauenswürdigen Schlüssels.](https://phishdestroy.github.io/TgWitness/de/docs/exports/)[02 / KONTINUITÄT**Was wurde zuvor beibehalten?** Vergleichen Sie einen signierten Export mit Kontrollpunkten, die von einem separaten Zeugen geführt werden.](https://phishdestroy.github.io/TgWitness/de/docs/witness/)[03 / LIEFERUNG**Sind diese Testereignisse eingegangen?** Abgleichen von kontrollierten Sende-, Bearbeitungs- und Löschvorgängen mit dem Protokoll des jeweiligen Kontos.](https://phishdestroy.github.io/TgWitness/de/docs/cases/)
+[01 / INTEGRITÄT**Hat sich dieser Eintrag geändert?** Hashes und Signaturen gegen einen Schlüssel, dem Sie vertrauen.](https://phishdestroy.github.io/TgWitness/de/docs/exports/)[02 / KONTINUITÄT**Was wurde zuvor beibehalten?** Vergleichen Sie den Export mit Prüfpunkten, die ein Zeuge aufbewahrt hat.](https://phishdestroy.github.io/TgWitness/de/docs/witness/)[03 / LIEFERUNG**Sind diese Testereignisse eingegangen?** Senden, bearbeiten und löschen Sie Testnachrichten und sehen Sie, was jedes Konto erfasst hat.](https://phishdestroy.github.io/TgWitness/de/docs/cases/)
 
-Verwenden Sie Signaturen, um die aufbewahrten Datensätze zu überprüfen, Checkpoints, um einen früheren Stichtag zu vergleichen, und kontrollierte Zustellungstests, um die Erfassung zu messen. Jedes dieser Verfahren beantwortet eine bestimmte Frage. [Lesen Sie den Überprüfungsumfang und die Vertrauensannahmen.](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope)
+Signaturen beantworten „wurde es geändert?“, Prüfpunkte „passt es zu dem, was vorher da war?“, Testnachrichten „haben wir alles erfasst?“. [Was die Prüfung beweist und was nicht.](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope)
 
-Verfolgen Sie die [gesamte Untersuchung eines Kontos](https://phishdestroy.github.io/TgWitness/de/docs/cases/) von der Erfassung bis zur Fallakte.
+Weiter: eine [Untersuchung des ganzen Kontos](https://phishdestroy.github.io/TgWitness/de/docs/cases/) vom Start bis zum Fallpaket.
 
 [Export Clinic: watch the controlled Desktop experiment](https://phishdestroy.github.io/TgWitness/docs/export-clinic/). Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.

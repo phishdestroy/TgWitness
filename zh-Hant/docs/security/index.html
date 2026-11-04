@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首頁</a> <span aria-hidden="true">/</span> <a href="../">文件說明</a> <span aria-hidden="true">/</span> <span aria-current="page">確保安全</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文件說明 / 14</p><h1>確保安全</h1><p class="guide-outcome">了解 Telegram 的傳輸路徑、公開代理伺服器清單以及可選的外部服務。了解每項密鑰能解鎖哪些功能、防護措施涵蓋哪些範圍，以及哪些部分需要您自行處理。</p>
+<article class="guide-content"><p class="eyebrow">文件說明 / 14</p><h1>確保安全</h1><p class="guide-outcome">什麼會離開您的電腦，每個密鑰能打開什麼，哪些由保護措施涵蓋、哪些由您負責。</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>預設為面板位址</span></div><div role="listitem"><strong>256 位元</strong><span>隨機面板代碼</span></div><div role="listitem"><strong translate="no">0</strong><span>內容分發網路（CDN）、分析工具或遠端字型</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>每筆記錄均附有簽名</span></div></div>
 <h2 id="map">所有內容的匯集之處</h2>
-<p>該收集器、其控制面板以及所有儲存的記錄，均保留在您運行該工具的電腦或伺服器上。預設情況下，Telegram 是唯一的輸出目的地；其他每個目的地皆需透過獨立開關設定。</p>
+<p>收集器、面板和每筆紀錄都留在您的電腦上。預設只連線 Telegram；其他一切都是另外的開關。</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / 機器留下的痕跡</span><span class="sample-tag">您的安裝</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="開啟或關閉可選的目標位置"><button type="button" data-flow-toggle="replica" aria-pressed="false">站外文案</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">通知</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">時間戳記</button><button type="button" data-flow-toggle="witness" aria-pressed="false">Witness</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>機密</th><th>儲存位置</th><th>它能帶來什麼</th><th>若發生洩漏</th></tr></thead>
 <tbody>
-<tr><td><strong>面板代幣</strong></td><td>資料目錄中的 <code>panel-token.txt</code>；瀏覽器僅將其保留於該分頁中</td><td>每個工作區中的所有內容：閱讀與匯出、變更範圍、登入帳戶</td><td>停止 TgWitness、刪除 <code>panel-token.txt</code>，然後重新啟動：將建立一個新的代幣</td></tr>
+<tr><td><strong>面板代幣</strong></td><td>資料目錄中的 <code>panel-token.txt</code>；瀏覽器依分頁保存</td><td>每個工作區中的一切</td><td>停止 TgWitness，刪除 <code>panel-token.txt</code>，重新啟動：會產生新的權杖</td></tr>
 <tr><td><strong>Telegram 會話</strong></td><td>Vault，加密版（<code>credentials.enc</code>）</td><td>Telegram 帳號本身</td><td>請在 Telegram 的<em>「設定」→「裝置」</em>中結束該會話</td></tr>
-<tr><td><strong>簽名金鑰</strong></td><td>Vault，加密版（<code>signing.enc</code>）</td><td>透過您的數位指紋進行驗證的簽名記錄</td><td>檢查點儲存於其他位置，透過「見證」與時間戳記，可顯示先前存在的內容</td></tr>
-<tr><td><strong>金庫金鑰</strong></td><td>資料旁標示的 <code>vault.key</code>，或用於新資料目錄的外部主金鑰</td><td>解密金庫</td><td>請將會話金鑰與簽署金鑰也視為已外洩</td></tr>
-<tr><td><strong>Witness 代幣</strong></td><td>關於 Witness 主機</td><td>唯讀：簽名檢查點與系統狀態</td><td>請在「Witness」頁面中刪除該內容；並建立一個新的頁面</td></tr>
-<tr><td><strong>站外文案關鍵詞</strong></td><td>Vault；只需下載一次即可進行資料恢復</td><td>解密離線副本</td><td>凡持有儲存物件者皆可解密該物件：請將該副本視為已外洩</td></tr>
+<tr><td><strong>簽名金鑰</strong></td><td>Vault，加密版（<code>signing.enc</code>）</td><td>以您的指紋簽署紀錄</td><td>存放在別處的檢查點、見證人和時間戳記仍能顯示先前存在的內容</td></tr>
+<tr><td><strong>金庫金鑰</strong></td><td>資料旁的 <code>vault.key</code>，或外部主金鑰</td><td>金庫</td><td>請假定工作階段和簽名金鑰也已外洩</td></tr>
+<tr><td><strong>Witness 代幣</strong></td><td>關於 Witness 主機</td><td>唯讀：檢查點和健康狀態</td><td>在見證人頁面刪除它，再建立新的</td></tr>
+<tr><td><strong>站外文案關鍵詞</strong></td><td>Vault；只需下載一次即可進行資料恢復</td><td>異地副本</td><td>同時取得 bucket 的人可以解密它：請將副本視為已外洩</td></tr>
 </tbody></table></div>
 <h2 id="threats">保護範圍涵蓋哪些內容</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> 已涵蓋</h3><ul>
-<li>若匯出紀錄中出現遭變更、刪除或重新排序的項目：雜湊鏈或簽名將無法通過驗證。</li>
-<li>若日誌在檢查點之後被刪減或重建，且該檢查點已儲存於其他位置：則保留的檢查點將不再與當前日誌內容相符。</li>
-<li>面板代幣猜測機制：256 位元隨機位元組，以恆定時間進行比對；若每分鐘失敗 15 次，該位址將被拒絕。</li>
-<li>具敵意之聊天內容：文字以純文字形式插入，絕不以 HTML 格式呈現；附件將以檔案形式下載；該面板不會從其他網站載入任何內容。</li>
-<li>一個包含外部金庫金鑰的複製資料目錄：若無主金鑰，會話與簽名金鑰將保持加密狀態。</li>
+<li>紀錄被修改、刪除或重新排序：雜湊鏈或簽名會斷裂。</li>
+<li>在您將檢查點存到別處之後，日誌被截短或重建：檢查點就不再相符。</li>
+<li>猜測權杖：256 位元隨機值，固定時間比較，每分鐘失敗 15 次即封鎖該位址。</li>
+<li>惡意聊天內容：文字一律是文字，絕不當作 HTML；附件以檔案形式下載；面板不從其他網站載入任何內容。</li>
+<li>資料目錄被竊但金庫金鑰在外部：工作階段和金鑰仍維持加密。</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> 交由您決定</h3><ul>
-<li>主控制面板的代幣擁有完全控制權。可授予他人有限度的存取權限，使其僅能存取所需的帳戶、聊天室及操作；請務必將主金鑰保密。</li>
-<li>該伺服器的管理員可讀取所有內容，並能重寫及重新簽署該日誌。請將指紋與檢查點儲存於另一套系統中。</li>
-<li>TgWitness 不會對訊息內容及媒體檔案進行加密。請使用磁碟加密並設定嚴格的存取權限。</li>
-<li>若透過 localhost 以外的純 HTTP 連線，網路將暴露該存取憑證。請使用 HTTPS 或 SSH 隧道。</li>
-<li>請透過簽名與檢查點核對已儲存的紀錄。檢視資料蒐集範圍，並針對您使用的帳戶與來源測試資料傳遞功能。</li>
+<li>主權杖可以做任何事。請給他人限定範圍的存取權，主權杖留給自己。</li>
+<li>電腦上的管理員可以讀取一切並重新簽署日誌。請將指紋和檢查點存放在別處。</li>
+<li>TgWitness 不會加密訊息和媒體。請加密磁碟，收緊權限。</li>
+<li>在 localhost 以外使用一般 HTTP 會洩漏權杖。請使用 HTTPS 或 SSH 通道。</li>
+<li>簽名不會告訴您遺漏了什麼。請在您自己的帳戶和來源上檢查涵蓋範圍並測試送達。</li>
 </ul></section>
 </div>
-<p>可透過權限設定、有效期限及會話限制，<a href="../access/">分享案件存取權限</a>。證人代幣仍為獨立的憑證。</p>
+<p><a href="../access/">分享案件的存取權</a>，可設定權限、到期時間和工作階段限制。</p>
 <h2 id="hardening">強化安裝安全性</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>已完成 0 / 8</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>請使用專用的 Telegram 帳號</strong>——切勿使用您的主要帳號。控制面板代幣與會話可讓您完全掌控該帳號。</span></li>
-<li><span class="check-text"><strong>請將控制面板維持在 127.0.0.1。</strong>僅可透過 HTTPS（內建的 Caddy 設定）或 SSH 隧道進行遠端存取。</span></li>
-<li><span class="check-text">對存放資料目錄的磁碟進行加密：訊息內容與媒體檔案均以原始接收狀態儲存。</span></li>
-<li><span class="check-text"><strong>將資料目錄限制</strong>在服務帳戶內。在 Unix 系統上，新建立的目錄預設權限為 0700；在 Windows 系統上，請設定該資料夾的權限。</span></li>
-<li><span class="check-text"><strong>請將金庫主金鑰存放於其他</strong>伺服器上：在建立資料目錄之前，請先設定 <code>TGWITNESS_VAULT_KEY_FILE</code>。</span></li>
-<li><span class="check-text"><strong>請將簽名金鑰的指紋和檢查點儲存</strong>於另一套系統中，並在另一台主機上新增一名見證者。</span></li>
+<li><span class="check-text"><strong>請使用專用的 Telegram 帳號</strong>，絕不要用主帳號。</span></li>
+<li><span class="check-text"><strong>請將控制面板維持在 127.0.0.1。</strong>遠端存取只透過 HTTPS（內建 Caddy）或 SSH 通道。</span></li>
+<li><span class="check-text"><strong>請加密存放資料目錄的磁碟</strong>，訊息和媒體以原樣儲存。</span></li>
+<li><span class="check-text"><strong>將資料目錄限制</strong>為只有服務帳戶可存取（Unix 上為 0700，Windows 上為資料夾權限）。</span></li>
+<li><span class="check-text"><strong>在伺服器上將金庫金鑰存放在別處</strong>：首次啟動前設定 <code>TGWITNESS_VAULT_KEY_FILE</code>。</span></li>
+<li><span class="check-text"><strong>將指紋和檢查點儲存</strong>在另一個系統上，在另一台主機上執行見證人。</span></li>
 <li><span class="check-text"><strong>切勿將</strong> <code>data/</code>、會話金鑰、<code>panel-token.txt</code> 或金庫金鑰<strong>上傳</strong>至 GitHub 或聊天室。</span></li>
 <li><span class="check-text">請勿在反向代理伺服器上記錄 <code>Authorization</code> 標頭或請求正文。</span></li>
 </ol>
 </div>
-<details><summary>我可以在不丟失資料的情況下變更面板代幣嗎？</summary><p>是的。該代幣僅用於開啟控制面板。停止 TgWitness 運作，從資料目錄中刪除 <code>panel-token.txt</code>，然後重新啟動；日誌、會話及金鑰均保持不變。若設定為 <code>TGWITNESS_TOKEN</code>，則會使用環境變數值而非檔案內容。</p></details>
-<details><summary>為何訊息在靜止狀態下未經加密？</summary><p>收集者必須讀取這些記錄，才能進行搜尋、比對版本及匯出。若僅在同一台機器上使用金鑰進行加密，對於能夠讀取該機器的人而言，幾乎起不到任何防護作用。磁碟加密能保護已停用或遭竊的磁碟；嚴格的權限設定則能保護正在運行的磁碟。</p></details>
+<details><summary>我可以在不丟失資料的情況下變更面板代幣嗎？</summary><p>可以，它只能打開面板。停止 TgWitness，刪除 <code>panel-token.txt</code>，重新啟動。日誌、工作階段和金鑰都會保留。若設定了 <code>TGWITNESS_TOKEN</code>，則以該值為準，而非檔案。</p></details>
+<details><summary>為何訊息在靜止狀態下未經加密？</summary><p>收集器必須讀取它們才能搜尋、比較和匯出。放在同一台電腦上的金鑰擋不住原本就能讀取這台電腦的人。磁碟加密防的是磁碟遭竊，權限防的是執行中的系統。</p></details>
 <h2 id="report">回報漏洞</h2>
-<p>請透過 GitHub 儲存庫中的<strong>「安全性」→「回報漏洞」</strong>功能進行回報。請包含版本資訊、影響範圍以及最簡化的重現步驟。切勿傳送憑證、帳戶目錄或真實證據檔案。若無法進行私下回報，請開啟一個問題，請求開設私人頻道，並避免在其中提及漏洞利用細節。</p>
+<p>在 GitHub 上使用 <strong>Security → Report a vulnerability</strong>。提供版本、影響以及使用虛構資料的最小重現。切勿傳送憑證、帳戶資料夾或真實證據。若私人回報已關閉，請開一個 issue 要求私人管道，不要寫漏洞利用細節。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">完整參考資料 →</a><a class="next-guide" href="../start/"><span>下一步</span><strong>幾分鐘內即可開始使用 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../reference/verification/">已測試的內容 →</a></p></footer>
 </main>

@@ -112,14 +112,6 @@ Docker בונה אותן בתוך התמונה, ללא צורך ב-Python במא
     חייב להשתמש במכולות לינוקס ב-Windows. המכולה מתקינה את
     תלותי ה-Python שלה; המארח אינו זקוק להתקנה נפרדת של Python.</li>
 </ul>
-<p>השתמש באחסון מקומי קבוע עבור ספריית הנתונים. תכנן את הקיבולת בהתאם להודעות,
-קובצי מדיה, צמיחת WAL, ייצוא וגיבויים; אין מפרט מינימום אוניברסלי מבוסס ראיות
-לדיסק/RAM עבור כל עומס עבודה. ארכיטקטורות מעבד וגרסאות Python
-ללא גלגלי תלות תואמים עשויות לדרוש כלי בנייה נוספים והסמכה
-משלהן. &quot;נייד&quot; אינו מהווה טענה לתמיכה אוניברסלית במערכות הפעלה או בחומרה.</p>
-<p>Windows 11/Python 3.12 אומתו באופן מקומי. הגדרות עבור Linux/macOS/קונטיינרים ו-CI
-מסופקות, אך לא הוצאו לפועל במארח הפיתוח הזה. ראו את
-<a href="../verification/">הקובץ VERIFICATION.md</a> לקבלת ההיקף המדויק.</p>
 <h2 id="local-computer">מחשב מקומי<a class="anchor" href="#local-computer" aria-label="קישור לסעיף זה">#</a></h2>
 <p>השתמש ב-<code>Start.cmd</code> ב-Windows או ב-<code>sh start.sh</code> ב-Linux/macOS. <code>scripts\Setup.cmd</code> או
 <code>sh start.sh --setup-only</code> מכינים
@@ -132,7 +124,6 @@ Docker בונה אותן בתוך התמונה, ללא צורך ב-Python במא
 <code>--port</code>. הבדיקה אינה מתקינה חבילות, אינה יוצרת יומן ואינה מתחברת ל-Telegram;
 היא אינה מהווה אימות של תקינות או כיסוי. בעת ההפעלה מתבצעת אימות נפרד של
 יומנים קיימים. גם <code>python start.py --help</code> נמנע מהתקנה.</p>
-<p>אפשרויות:</p>
 <p>לאחר השימוש ב-start.py, הפעל פקודות עזר באמצעות <code>.venv\Scripts\python.exe</code> ב-
 Windows או <code>.venv/bin/python</code> ב-Linux/macOS, או הפעל תחילה את הסביבה הזו.
 הדוגמאות ל-<code>python -m ...</code> המופיעות להלן מניחות שהסביבה פעילה.</p>
@@ -181,9 +172,6 @@ TGWITNESS_TOKEN, אם צוין, חייב להכיל לפחות 24 תווים; י
 והעתיקו את תיקיית <code>data</code> אליה.</p>
 <p>הקימו אותו בעצמכם ב-Windows 64 סיביות עם Python 3.12:</p>
 <pre><code class="language-sh">python tools/build_portable.py</code></pre>
-<p>הבונה מאמת את בדיקת הסיכום בזמן ריצה, מתקין את התלות המוגבלות בתוך
-החבילה, מבצע בדיקת מוכנות באמצעות המתורגמן המובנה וכותב את קובץ ה-ZIP
-ואת בדיקת הסיכום ל-<code>dist/</code>.</p>
 <h2 id="container">קונטיינר<a class="anchor" href="#container" aria-label="קישור לסעיף זה">#</a></h2>
 <pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
 <p>פעולה זו יוצרת אמצעי אחסון קבוע בעל שם עבור /data.
@@ -242,9 +230,6 @@ docker compose logs witness                     # witness key fingerprint</code>
 מוגדר לכתובת ה-HTTPS
 של האספן; קובץ זה מכיל רק את העד.</p>
 <h2 id="install-a-published-image">התקן תמונה שפורסמה<a class="anchor" href="#install-a-published-image" aria-label="קישור לסעיף זה">#</a></h2>
-<p>האתר יהיה זמין לאחר השלמת <a href="#automated-github-releases">תהליך השחרור</a>
-בהצלחה ותצורת חבילת GHCR ציבורית. שם/בעל המאגר אינו מקודד באופן קבוע
-בעץ המקור הזה. יש להשתמש בתמונה המוצגת בסיכום תהליך השחרור של אותה גרסה.</p>
 <p>העתיקו את <code>deploy/env.example</code> ל-<code>.env</code>. הגדירו את <code>TGWITNESS_IMAGE</code> לגרסה שפורסמה, תוך שימוש
 בנתיב המאגר <strong>באותיות קטנות</strong>, לדוגמה:</p>
 <pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
@@ -305,30 +290,6 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 <p>יש לבדוק את הגישה ללוח הבקרה, זהות החשבון, מצב הניטור והיקף הכיסוי לאחר
 עדכון. הפעלה מחדש אינה משחזרת עדכוני Telegram שהוחמצו. ביצוע החזרה לגרסה קודמת עשוי
 לדרוש את הגיבוי מלפני העדכון, אם גרסה עתידית תשנה את פורמטי האחסון.</p>
-<h2 id="automated-github-releases">מהדורות אוטומטיות ב-GitHub<a class="anchor" href="#automated-github-releases" aria-label="קישור לסעיף זה">#</a></h2>
-<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">תהליך שחרור </a>הגרסאות מוכן לשימוש לאחר
-שהפרויקט יועלה למאגר GitHub עם Actions מופעל. הוא פועל כאשר
-<strong>מתפרסמת</strong> גרסה ב-GitHub, כולל גרסת טרום-שחרור. טיוטות ודחיפות תגיות
-לבדן אינן מפרסמות חבילות.</p>
-<ol>
-<li>הגדר את גרסת החבילה ואת יומן השינויים, ולאחר מכן פרסם גרסה המתויגת ב-<code>v</code>
-    בתוספת הגרסה המדויקת של <code>pyproject.toml</code>, כגון <code>v0.8.0</code>.</li>
-<li>תהליך העבודה מאמת את התג ומריץ את בדיקות Python המשותפות ל-Windows/Linux/macOS,
-    בדיקות דפדפן כלליות/ייבוא חשבונות/QR, חבילת המקור ו-Docker. כמו כן, מתבצעת התקנה מקורית חדשה
-    בכל שלושת מערכות ההפעלה באמצעות Python 3.12.</li>
-<li>לאחר שעברו בדיקות אלה, מתבצע מבחן עישון לתמונת ARM64 תחת QEMU, מתפרסמות תמונות AMD64/ARM64 ב- <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>, ומצורפים קובץ ה-ZIP המקורי ו-Python wheel עם קבצי ה-SHA-256 הנלווים. קובץ ה-ZIP הנייד של Windows הוא אותו ארטפקט שנבדק על ידי תהליך הבדיקות; תהליך השחרור מוריד ומפרסם ארטפקט זה ואת בדיקת הסיכום שלו.</li>
-<li>משימה סופית מורידה שוב את שלושת החבילות שפורסמו ומאמתת את סכומי הבקרה שלהן. לאחר מכן היא מפרסמת את <code>SHA256SUMS.txt</code> ו- <code>RELEASE-MANIFEST.json</code>, תוך תיעוד הגרסה, גרסת המקור וגודל הנכסים. ההעלאות מסרבות להחליף נכסי גרסה קיימים.</li>
-<li>לאחר הפרסום הראשון, יש לפתוח את הגדרות חבילת ה-GHCR ולהגדיר את הנראות
-    ל<strong>&quot;ציבורי&quot;</strong> אם הכוונה היא לאפשר הורדת תמונות באופן אנונימי. מאגר קוד פתוח ציבורי
-    לבדו אינו מבטיח חבילת קונטיינר ציבורית. מדיניות הארגון חייבת
-    לאפשר פרסום החבילה. זרימת העבודה משתמשת ב-<code>GITHUB_TOKEN</code>; אין להכניס למאגר
-    סיסמאות רישום או פרטי התחברות ל-VPS.</li>
-</ol>
-<p>הצלחת זרימת העבודה מרחוק לא הוכחה על ידי הכנה מקומית זו. אמולציית ARM64
-היא בדיקת תפקוד בסיסית בלבד, ואינה מהווה הסמכה לחומרה מקורית או לשימוש ב-Telegram בסביבה חיה.
-תהליך זה אוטומטי את אריזת הגרסה; הפעלת שרת עדיין דורשת את הפקודה Compose
-ואת תנאי הקדם של הדומיין/המארח. שרתים קיימים אינם
-משודרגים או מופעלים מחדש באופן אוטומטי עם פרסום גרסה חדשה.</p>
 <h2 id="remote-server">שרת מרוחק<a class="anchor" href="#remote-server" aria-label="קישור לסעיף זה">#</a></h2>
 <p>יש להגביל את השירות ל-loopback ולהשתמש במנהרת SSH, או לסיים את HTTPS ב-
 פרוקסי הפוך. קובץ ה-Compose הבסיסי מיועד לשימוש מקומי בלבד; שכבת-העל האופציונלית
@@ -389,11 +350,6 @@ loopback. האסימונים מועברים בכותרות, הפניות נדח�
 אם TGWITNESS_TOKEN מבטל את האסימון שנוצר, השתמש בקובץ מוגן בנפרד
 המכיל את הערך הפעיל: panel-token.txt אינו נכתב מחדש על ידי הביטול.
 ה-SHA-256 של הפקודה הוא רק בדיקת סיכום העברה; אמת באופן עצמאי את קובץ ה-ZIP החתום.</p>
-<p>קובצי הייצוא מהשרת נשמרים בתוך ה-<code>temporary-exports/</code> הפרטי של כל סביבת עבודה.
-תגובות מוצלחות מנקות את הקבצים שלהן. ייצואים שנקטעו מוסרים בעת
-ההפעלה הבאה של סביבת העבודה, תוך שמירה על נעילת המופע הבלעדי שלה. ספרייה זו היא חלק
-ממודל האיומים/קיבולת האחסון; יש להשתמש בנפח נתונים מוצפן. העברות בהיקף של
-מספר ג&#x27;יגה-בייט בקנה מידה תעשייתי עדיין דורשות אימות במערכת היעד שלכם.</p>
 <p>הלוח מציג מדיה בתור/שנכשלה, המדיה הוותיקה ביותר הממתינה, שטח דיסק פנוי,
 הפסקות בבקשות טלגרם, ומקורות שגישתם לא אושרה. אבחונים אלה אינם
 מהווים ניטור משלוח מלא מקצה לקצה. סביבות העבודה חולקות תהליך; חשבון רועש יכול
@@ -401,22 +357,11 @@ loopback. האסימונים מועברים בכותרות, הפניות נדח�
 והסמכת פריסה מלאה נותרים על כנם. הגישה המוגבלת ללוח המחוונים מתועדת
 במסמך <a href="../access/">הגישה וההרשאות</a>; נקודות ביקורת עצמאיות מכוסות במדריך
 <a href="../witness/">העדים</a>.</p>
-<h2 id="connection-and-protection-options">אפשרויות חיבור והגנה<a class="anchor" href="#connection-and-protection-options" aria-label="קישור לסעיף זה">#</a></h2>
-<p>נתיבי החיבור הם לכל סביבת עבודה ויש להגדירם לפני ההרשאה.
-SOCKS5/HTTP CONNECT משתמשים בתלות המוצמדת python-socks. MTProxy משתמש ב-
-תחבורה ביניים אקראית ניסיונית של Telethon; סודות TLS מזויפים אינם נתמכים.
-המעבר הישיר תלוי במצב <a href="../connection/#ip-modes">ה-IP</a> הנבחר: <strong>&quot;הסתר את הכתובת</strong>&quot; מסרב לכך; <strong>&quot;ישיר&quot; כאמצעי אחרון</strong> מאפשר זאת לאחר עיכוב. <strong>שרת שמאחורי מנהרה או VPN</strong> מאפשר נתיבים ישירים אך אינו יוצר VPN. זו אינה מדיניות רשת מערכתית.</p>
-<p>בהתקנות חדשות, TGWITNESS_VAULT_KEY_FILE מצביע על קובץ מפתח ראשי אקראי
-המוגן בנפרד. יש לעגן אותו לקריאה בלבד מחוץ ל-/data בתוך קונטיינר. יש לשמור את
-מטא-הנתונים הציבוריים של salt בקובץ vault.external.json בנפרד עבור כל סביבת עבודה והמפתח הראשי.
-כספות מקומיות קיימות דורשות הגירה מתוכננת; הגדרת משתנה זה אינה
-ממירה אותן באופן אוטומטי. אחסון וייצוא של הודעות/מדיה אינם מוצפנים על ידי היישום.
-יש להשתמש בנפחים מוצפנים ובאחסון זמני פרטי מספיק במידת הצורך.</p>
 <p>נהלים מפורטים: <a href="../connection/">חיבור/אבטחה</a> ו
 <a href="../operations/">מצבי הפעלה</a>.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">ערוך דף זה ב-GitHub ↗</a><a class="next-guide" href="../high-assurance/"><span>השלב הבא</span><strong>פריסה ברמת אבטחה גבוהה ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../verification/">מה נבדק ←</a></p></footer>
 </main>
-<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#choose-an-installation">בחר התקנה</a><a href="#installation-requirements">דרישות התקנה</a><a href="#local-computer">מחשב מקומי</a><a href="#windows-portable-package">חבילת תוכנה ניידת ל-Windows</a><a href="#container">קונטיינר</a><a href="#install-a-published-image">התקן תמונה שפורסמה</a><a href="#automatic-https-on-a-server">HTTPS אוטומטי בשרת</a><a href="#updates-and-backups">עדכונים וגיבויים</a><a href="#automated-github-releases">מהדורות אוטומטיות ב-GitHub</a><a href="#remote-server">שרת מרוחק</a><a href="#restart-and-gaps">הפעלה מחדש ופערים</a><a href="#backup-restore-and-capacity">גיבוי, שחזור וקיבולת</a><a href="#connection-and-protection-options">אפשרויות חיבור והגנה</a></aside>
+<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#choose-an-installation">בחר התקנה</a><a href="#installation-requirements">דרישות התקנה</a><a href="#local-computer">מחשב מקומי</a><a href="#windows-portable-package">חבילת תוכנה ניידת ל-Windows</a><a href="#container">קונטיינר</a><a href="#install-a-published-image">התקן תמונה שפורסמה</a><a href="#automatic-https-on-a-server">HTTPS אוטומטי בשרת</a><a href="#updates-and-backups">עדכונים וגיבויים</a><a href="#remote-server">שרת מרוחק</a><a href="#restart-and-gaps">הפעלה מחדש ופערים</a><a href="#backup-restore-and-capacity">גיבוי, שחזור וקיבולת</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>קוד פתוח · פועל על המחשב שלכם</span><a href="../../../../LICENSE">רישיון MIT</a><a href="../notice/">הודעת המפעיל</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">אבטחה</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "ממתין להודעה", "Step through a fictional send, edit and delete.": "עקבו אחר תהליך דמיוני של שליחה, עריכה ומחיקה.", "No observations yet. Start the sequence or advance one event.": "אין עדיין הערות. התחל את הרצף או עבור לאירוע הבא.", "Meet at 10:00": "נפגש בשעה 10:00", "A new message is visible in the chat.": "הודעה חדשה נראית בצ'אט.", "Record 1 appended: the collector observed the original message.": "הודעה מס' 1 מצורפת: האספן הבחין בהודעה המקורית.", "Meet at 11:00": "נפגש בשעה 11:00", "The current text changes. The earlier observation stays.": "הטקסט הנוכחי משתנה. ההערה הקודמת נשארת.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "רשומה 2 צורפה: העריכה מהווה תצפית חדשה. ברשומה 1 עדיין מופיע הטקסט המקורי.", "Message deleted": "ההודעה נמחקה", "The message has disappeared from the chat view.": "ההודעה נעלמה מתצוגת הצ'אט.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "הוספה של תיעוד 3: הודעת המחיקה נשמרת לצד שתי הגרסאות שנצפו.", "0 records": "0 רשומות", "1 record": "1 רשומה", "2 records": "2 רשומות", "3 records": "3 רשומות", "Complete / {n} of 3": "השלם / {n} מתוך 3", "Step / {n} of 3": "שלב / {n} מתוך 3", "Pause": "הפסקה", "Replay sequence": "רצף השמעה", "Play sequence": "רצף הפעלה", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "דוגמה סטטית זמינה. כדי לחשב חתימות hash באופן אינטראקטיבי, פתחו דף זה ב-HTTPS או בתצוגה מקדימה ב-localhost עם תמיכה ב-Web Crypto.", "No record supplied": "לא נמסר תיעוד", "Tail removed": "הזנב הוסר", "≠ saved hash": "≠ חתימת hash שנשמרה", "Rebuilt · different hash": "נבנה מחדש · חתימה שונה", "= saved hash": "= חתימת hash שנשמרה", "Same length and matching head.": "אורך זהה וכותרת תואמת.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "שלושת ההאשים שחושבו תואמים להאשים שנשמרו. דוגמה זו תואמת את הגבול של שלוש רשומות שנשמר.", "Same saved head; the journal prefix fails verification.": "אותו כותרת שמורה; קידומת היומן נכשלה באימות.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "הרשומה 2 כבר אינה תואמת את ה-hash השמור שלה. בדיקה של ה-head האחרון שנשמר בלבד עלולה לפספס זאת; המאמת בודק כל רשומה.", "Head differs from the retained checkpoint.": "הכותרת שונה מנקודת הבדיקה שנשמרה.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ה-hash המשוחזרים מקושרים זה לזה, אך ה-head הסופי השתנה. נקודת הבדיקה שנשמרה דוחה היסטוריה זו. חתימות מקוריות גם הן לא יאושרו על רשומות ששונו.", "Too short: 2 supplied records \u003c 3 retained records.": "קצר מדי: 2 רשומות שסופקו \u003c 3 רשומות שנשמרו.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "שני ה-hash הנותרים עדיין תואמים. נקודת הבדיקה שנשמרה חושפת את החלק החסר. ללא הגבול הקודם הזה, הקידומת הקצרה הזו לבדה לא הייתה חושפת את ההשמטה.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "חישוב ה-Hash אינו זמין בדפדפן זה. הנוסחאות וההסבר הסטטי המופיעים להלן נותרים זמינים.", "{n} records": "{n} רשומות", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "התקבל: הספירה גדלה, החתימה מאומתת והמפתח תואם. העד שומר על הגבול החדש הזה.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "חזרה לאחור: התשובה החתומה מדווחת על פחות רשומות מאשר נקודת הבדיקה האחרונה שאושרה. ה-Witness מתעד את הבעיה ושומר על הגבול שאושר קודם לכן.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: הספירה נותרה ללא שינוי, אך הראש שונה. ה-witness מתעד את חילוקי הדעות ושומר על הגבול שהתקבל קודם לכן.", "No answer": "אין תשובה", "boundary unknown": "גבול לא ידוע", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "אין תגובה: ה-Witness מתעד את הבדיקה שנכשלה. הוא אינו יכול לקבוע את מצבו הנוכחי של האספן. אם ה-Witness עדיין יכול להגיע ל-Bot API ומדיניות הפרסום שלו מאפשרת זאת, הוא יכול לפרסם את הכישלון הזה.", "Send {n}": "שלח {n}", "Edit {n}": "ערוך {n}", "Delete {n}": "מחק {n}", "Both accounts captured all six expected observations in this example.": "שני החשבונות תיעדו את כל ששת הממצאים הצפויים בדוגמה זו.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "חשבון B עדיין תפס 6 מתוך 6. שתי קבלות לקחו יותר זמן. יחס הלכידה ועיכוב קבלת ההודעות עונים על שאלות שונות.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "חשבון B תפס 5 מתוך 6 עד למועד הסיום (83.3%). לעריכה החסרה אין עיכוב נמדד. תוצאה זו מתארת רק את שש הפעולות המבוקרות.", "not observed by cutoff": "לא נצפה עד למועד הסגירה", "{s} seconds": "{s} שניות", "Exact values follow in the table.": "הערכים המדויקים מופיעים בטבלה.", "{s} s": "{s} s", "Not observed": "לא נצפה", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "ארבעה צ'אטים מספקים תצפיות שונות. יש לעקוב אחר רשומות המקור עבור כל חיבור; אין לייחס את ההודעה בערוץ למשתמש 71001 ללא ציון השולח.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "הרשומות מס' 146 ו-205 מציגות את אותו מזהה שולח, 71001. דבר זה מקשר בין הפוסטים שנצפו בחשבון טלגרם בשני צ'אטים שונים. הוא אינו מזהה אדם אמיתי ואינו מייחס את הפוסט לערוץ.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "כתובת היעד pay.example.invalid/new מופיעה ברישום הקבוצה מס' 146, במקלדת הבוט מס' 173, בעריכת הערוץ מס' 188 ובהודעה פרטית מס' 205. כתובת יעד חוזרת מקשרת בין החומרים; היא אינה מהווה הוכחה לשליטה משותפת בחשבונות אלה.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "בקבלות המדיה המושלמות מס' 151 ו-209 יש ערכי SHA-256 מלאים זהים במקרה הבדיוני הזה. השוו את הבתים בפועל ואת רשומות ההודעות הקשורות אליהם. הקובץ התואם אינו מזהה את יוצרו ואינו מוכיח מי העביר אותו.", "the encrypted off-site copy": "העותק המוצפן מחוץ לאתר", "notifications": "התראות", "checkpoint hashes for timestamps": "חשישי checkpoint עבור חותמות זמן", "signed checkpoints for the witness": "נקודות ביקורת חתומות עבור ה-Witness", "Switched on in this example": "מופעל בדוגמה זו", "Optional · off by default": "אופציונלי · כבוי כברירת מחדל", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "יוצא מהמכשיר הזה: החיבור ל-Telegram ו-{list}. שום דבר אחר.", "Default: only the Telegram connection leaves this machine.": "ברירת מחדל: רק החיבור ל-Telegram יוצא ממחשב זה.", "{done} of {total} done": "{done} מתוך {total} הושלמו", "Mark step {n} as done": "סמן את השלב {n} כ\"בוצע\"", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "העתק", "Copied": "הועתק", "Command copied.": "הפקודה הועתקה.", "Selected — Ctrl/Cmd+C": "נבחר — Ctrl/Cmd+C", "Command selected. Copy it manually.": "הפקודה נבחרה. העתיקו אותה ידנית.", "Command copied to clipboard.": "הפקודה הועתקה ללוח.", "Select text": "בחר טקסט", "Clipboard unavailable. Command selected; copy it manually.": "הלוח אינו זמין. הפקודה נבחרה; העתק אותה ידנית.", "A message arrives. The first observation is saved.": "הודעה נכנסת. התצפית הראשונה נשמרת.", "The time changes. Both captured versions stay.": "הזמן משתנה. שתי הגרסאות שנשמרו נשארות.", "The message disappears. The captured history remains.": "ההודעה נעלמת. ההיסטוריה שנשמרה נשארת.", "Pause example animation": "השהה את האנימציה לדוגמה", "Play example animation": "הפעל אנימציה לדוגמה", "Play": "הפעל", "Full-size workspace screenshot": "צילום מסך של סביבת העבודה בגודל מלא", "Workspace screenshot · fictional data": "צילום מסך של סביבת העבודה · נתונים פיקטיביים", "Close": "סגור", "Close screenshot": "סגור צילום מסך", "Scrollable full-size screenshot": "צילום מסך בגודל מלא הניתן לגלילה", "Enlarge: {name}": "הגדל: {name}", "View full size": "הצג בגודל מלא", "Step {n} of {total}": "שלב {n} מתוך {total}"}</script>

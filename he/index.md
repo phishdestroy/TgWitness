@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/
 
 [קוד פתוח / v0.8.1](https://phishdestroy.github.io/TgWitness/he/docs/reference/changelog/)
 
-תיעוד הודעות טלגרם, שימור השינויים בהן וייצוא תיעוד חתום.
+שמרו צ'אטים של Telegram עם כל עריכה ומחיקה, ואז מסרו תיעוד שכל אחד יכול לבדוק.
 
 [הדגמה פתוחה](https://phishdestroy.github.io/TgWitness/demo/?lang=he)[מדריך התקנה](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=he)
 
-ההדגמה משתמשת בנתונים פיקטיביים. אין צורך בהתחברות ל-Telegram.
+נתונים מזויפים, בלי התחברות ל-Telegram.
 
  [איסוף באמצעות GitHub Actions (גרסה מקדימה)](https://phishdestroy.github.io/TgWitness/he/docs/capture/) [עותק חיצוני ב-S3: הגדרה ושחזור](https://phishdestroy.github.io/TgWitness/he/#s3)
 
@@ -34,31 +34,31 @@ Northstar · מחקרמקור/הודעה בדיונית 42
 
 ## כל שינוי שנלכד. בדיוק במקום שבו אתה צריך אותו.
 
-עיינו בממשק באמצעות נתוני הדגמה פיקטיביים.
+הממשק האמיתי, עם נתונים מומצאים.
 
 TgWitness / צ'אטים שנשמרוסביבת העבודה שלך לתיעוד תצפיות
 
 ![שיחות טלגרם שנשמרו בעיצוב כהה, עם עריכות והודעות שנמחקו שנלכדו ונשמרו בהקשרן](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
-01 / צ'אטים שנשמרו תצוגת שיחה מוכרת, עם עריכות והודעות מחיקה שנלכדו לצד ההודעות.
+01 / צ'אטים שמורים נראה כמו צ'אט רגיל, עם עריכות ומחיקות ממש ליד ההודעות.
 
 TgWitness / יומןסביבת עבודה מקומית
 
 ![יומן הכולל הודעות שנצפו, עריכות, הודעות על מחיקה ואירועים שנכללו בכיסוי](https://phishdestroy.github.io/TgWitness/assets/workspace.png)
 
-02 / יומן ציר זמן הניתן לחיפוש של כל מה שנצפה בחשבונך, כולל הפרעות.
+02 / יומן כל מה שהחשבון שלכם ראה, ניתן לחיפוש, כולל פערים.
 
 TgWitness / היסטוריית עריכותסביבת עבודה מקומית
 
 ![מגירת פרטים המציגה השוואה בין הגרסה הקודמת של ההודעה שנטמעה לבין הגרסה הערוכה שלה](https://phishdestroy.github.io/TgWitness/assets/detail.png)
 
-03 / היסטוריית עריכות השוואת גרסאות שנלכדו מבלי לדרוס את התצפית הקודמת.
+03 / היסטוריית עריכות גרסאות ישנות וחדשות זו לצד זו, שום דבר לא נדרס.
 
 TgWitness / ייצוא חתוםסביבת עבודה מקומית
 
 ![ייצוא סביבת העבודה המציע קבצי ZIP, JSONL ו-CSV חתומים, וכן דוח HTML למשתמש לא מקוון](https://phishdestroy.github.io/TgWitness/assets/exports.png)
 
-04 / ייצוא חתום קחו את היומן אתכם, עם רשימת תוכן ומאמת עצמאי.
+04 / ייצואים חתומים קחו את היומן איתכם, חתום, עם כלי האימות שלו.
 
 עקבו אחר רשומה שנשמרה באמצעות [Case Board](https://phishdestroy.github.io/TgWitness/he/docs/case-board/), [עיצוב הדוח](https://phishdestroy.github.io/TgWitness/he/docs/reports/) וה[עתק](https://phishdestroy.github.io/TgWitness/he/docs/handover/) [לשיתוף](https://phishdestroy.github.io/TgWitness/he/docs/handover/). [סקרו קבוצות חשבונות](https://phishdestroy.github.io/TgWitness/he/docs/groups/) יחד.
 
@@ -66,7 +66,7 @@ TgWitness / ייצוא חתוםסביבת עבודה מקומית
 
 ### אתם בוחרים את היקף הפעילות.
 
-צ'אטים נבחרים, תיקיית טלגרם או החשבון כולו. סביבת עבודה נפרדת לכל חשבון.
+כמה צ'אטים, תיקייה או החשבון כולו. לכל חשבון יש סביבת עבודה משלו.
 
 [השוואת מצבי איסוף](https://phishdestroy.github.io/TgWitness/he/guides/modes.html#scope)
 
@@ -74,7 +74,7 @@ TgWitness / ייצוא חתוםסביבת עבודה מקומית
 
 ### השינויים תורמים לסיפור.
 
-גרסאות שנלכדו, הודעות על מחיקה ופערים בתצפית נשמרים ביומן.
+גרסאות, מחיקות ופערים נשארים כולם ביומן.
 
 [ראו את מטריצת האירועים](https://phishdestroy.github.io/TgWitness/he/guides/modes.html#events)
 
@@ -82,7 +82,7 @@ TgWitness / ייצוא חתוםסביבת עבודה מקומית
 
 ### תיעוד שנשמר לאורך זמן.
 
-קובץ ZIP חתום, קבצים משומרים ודוח לא מקוון. הגנה באמצעות סיסמה אופציונלית.
+ZIP חתום, קבצים ודוח לא מקוון. סיסמה אופציונלית.
 
 [ייצא ואמת את](https://phishdestroy.github.io/TgWitness/he/docs/exports/)
 
@@ -103,7 +103,7 @@ TgWitness / ייצוא חתוםסביבת עבודה מקומית
 
 ## מוכן לעיון נוסף.
 
-העבר תצפיות, קבצים ודוח HTML לא מקוון בחבילה אחת חתומה.
+הודעות, קבצים ודוח לא מקוון בחבילה חתומה אחת.
 
 [קראו את מודל הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)
 
@@ -119,7 +119,7 @@ tgwitness-evidence.zipחבילה חתומה
 
   אימות עצמאירשימת תוכן חתומה + בודק עצמאי
 
-הנמענים בודקים את הרשומות והקבצים שנשמרו מול מפתח אוסף מהימן. נקודת ביקורת הנשמרת בנפרד בודקת גם את הרציפות ביחס ליומן הקודם. [עיינו בשלבי האימות.](https://phishdestroy.github.io/TgWitness/he/docs/concepts/#layers)
+הנמען בודק הכול מול המפתח שלכם, ונקודת ביקורת שנשמרה במקום אחר מראה ששום דבר לא נכתב מחדש מאז. [איך הבדיקות עובדות.](https://phishdestroy.github.io/TgWitness/he/docs/concepts/#layers)
 
 ## עותקים ב-S3. בדיקות חיצוניות.
 
@@ -129,25 +129,25 @@ tgwitness-evidence.zipחבילה חתומה
 
 ### העתק הכל לאחסון תואם S3
 
-יומן, קבצים, נקודות ביקורת עם חותמת זמן וייצוא צ'אטים — מוצפנים לפני ההעלאה ל-AWS S3 או לאחסון תואם.
+יומן, קבצים, נקודות ביקורת וייצואי צ'אטים, מוצפנים לפני שהם נשלחים ל-S3.
 
 **הגדרות אחסון ושחזור**
 
 הצפנה בצד הלקוח
 
-`AES-256-GCM` מצפין אובייקטים במחשב זה. הספק מקבל אובייקטים מוצפנים.
+`AES-256-GCM` על המחשב שלכם. הספק רואה רק טקסט מוצפן.
 
 העתקות מתוזמנות או ידניות
 
-העתק כעת, או בחר פרק זמן בין 1 ל-1,440 דקות. בדוק את ההתקדמות בלוח הבקרה.
+העתיקו עכשיו או כל 1 עד 1,440 דקות, ההתקדמות מוצגת בלוח.
 
 Object Lock
 
-בחרו את מספר ימי השמירה ואת המצב, כאשר המאגר תומך בכך. הלוח מדווח אם השמירה אושרה עבור אובייקט שהועלה.
+בחרו ימי שמירה ומצב, והלוח בודק שזה באמת נקלט.
 
 שחזור מאומת
 
-הורידו את מפתח ההצפנה ושמרו אותו בנפרד. שחזרו את הקבצים במחשב אחר; הקבצים מתפרסמים רק לאחר אימות.
+שמרו את המפתח בנפרד. שחזרו בכל מקום, הקבצים יוצאים רק אחרי אימות.
 
 ![לוח בקרות מלא מחוץ לאתר: נקודת קצה, אזור, דלי, מפתחות גישה, לוח זמנים, נעילת אובייקטים ובקרות מפתחות שחזור](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
@@ -157,13 +157,13 @@ Object Lock
 
 [הגדר את S3 ושחזר עותק](https://phishdestroy.github.io/TgWitness/he/docs/exports/#s3)[קראו את פרטי האימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**מפתח שחזור:** שמור את מפתח הפענוח שיוצא בנפרד, כדי שתוכל לשחזר את העותק המוצפן.
+**מפתח שחזור** שמרו אותו בנפרד, בלעדיו העותק לא קריא.
 
 ### התראות · Apprise
 
-התראות על בעיות, שינויים בצ'אט וסיכומים יומיים באמצעות Apprise: אפליקציות מסרים מיידיים, דוא"ל או webhook JSON משלכם.
+בעיות, שינויים בצ'אטים וסיכום יומי לאפליקציות מסרים, לדוא"ל או ל-webhook משלכם.
 
-**בחרו מה לשתף:** קטעי הודעות מוסתרים כברירת מחדל; הפכו אותם לזמינים עבור נמענים שאתם סומכים עליהם.
+**בחרו מה לשתף** בלי טקסט ההודעות, אלא אם תפעילו אותו.
 
  [הגדרת יעדי ההתראות](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#notifications)
 
@@ -171,7 +171,7 @@ Object Lock
 
 חשיפת חתימות זמן (timestamp) באמצעות RFC 3161 ו-OpenTimestamps.
 
-**עקבו אחר התוצאה:** בדקו את תגובת הרשות או שדרגו את הקבלה של OpenTimestamps להוכחת ביטקוין מאושרת.
+**עקבו אחרי התוצאה** בדקו את תשובת ה-TSA או שדרגו את קבלת OpenTimestamps להוכחת Bitcoin.
 
  [בדקו את הוכחות חותמות הזמן](https://phishdestroy.github.io/TgWitness/he/docs/reference/timestamp/)
 
@@ -179,7 +179,7 @@ Object Lock
 
 שרת נפרד שומר את התצפיות החתומות ויכול לפרסם נקודות ביקורת מסוג `TGW1`.
 
-**יש להפריד בין ההפניה** "הפעל את ה-Witness במארח אחר" ולשמור על מפתח החתימה והיומן הייחודיים לו.
+**הפרידו את נקודת הייחוס** הריצו על מארח אחר, עם מפתח ויומן משלו.
 
  [הגדר עד](https://phishdestroy.github.io/TgWitness/he/docs/witness/)
 
@@ -187,19 +187,20 @@ Object Lock
 
 המשך לאחר הפעלה מחדש. בדיקות חוזרות ו-`coverage.json` מציגות הודעות ששוחזרו ופערים.
 
-**סקור את פרק הזמן:** צפה בהודעות הנוכחיות ששוחזרו לצד ההפרעות שתועדו; גרסאות קודמות נותרות זמינות לאחר תיעודן.
+**סקרו את המרווח** הודעות ששוחזרו ופערים שתועדו זה לצד זה.
 
  [בדקו את הרצף והפערים](https://phishdestroy.github.io/TgWitness/he/guides/modes.html#continuity)
 
 ## סביבת העבודה הראשונה שלכם מתחילה כאן.
 
-התנסו תחילה בגרסת ההדגמה. חברו חשבון ייעודי כשתהיו מוכנים. Windows, Linux, macOS או Docker.
+נסו קודם את ההדגמה, וחברו חשבון רזרבי כשתהיו מוכנים.
+Windows, Linux, macOS או Docker.
 
 [קרא את מדריך ההתקנה](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=he)
 
 **פעולה אחת מיובאת, לקוח אחד פועל.**
 
-אין להפעיל מפתח TData/session מיובא ב-Telegram Desktop וב-TgWitness בו-זמנית. Telegram עלול לבטל את האישור המשותף (AUTH_KEY_DUPLICATED). לשימוש מקביל, צרו התחברות נפרדת ל-TgWitness באמצעות טלפון או QR.
+אל תריצו TData או סשן מיובא ב-Telegram Desktop וב-TgWitness בו-זמנית, Telegram עלול לנתק את שניהם (AUTH_KEY_DUPLICATED). צריכים את שניהם? התחברו ל-TgWitness בנפרד בטלפון או ב-QR.
 
 [קרא את אזהרת הייבוא של ההפעלה](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=he#session-warning)
 
@@ -224,7 +225,7 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-הפעלת המקור דורשת Python 3.11 ומעלה. תוכנת ההפעלה של Windows מציעה התקנה אם Python אינו מותקן.
+נדרש Python 3.11 ומעלה. ב-Windows המפעיל מציע להתקין אותו.
 
 [עיין במהדורות](https://github.com/phishdestroy/TgWitness/releases)
 
@@ -259,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 לאחר ההשקה, יש לפתוח את הכתובת [127.0.0.1:8787](http://127.0.0.1:8787).
 
-להתקנות מהמקור, האסימון הוא `data/live/panel-token.txt`. ניתן להשתמש בהגדרות ה-API המובנות לצורך כניסה ל-Telegram, או בזוג המפתחות האישי שלכם מ[-my.telegram.org](https://my.telegram.org). [מדריך התקנה מלא ↗](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
+בהתקנה מקוד המקור הטוקן נמצא ב-`data/live/panel-token.txt`. צמד API משלכם מ-[my.telegram.org](https://my.telegram.org) הוא אופציונלי. [מדריך התקנה מלא ↗](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
 
 **TgWitness 0.8.1** [מה חדש →](https://phishdestroy.github.io/TgWitness/he/docs/reference/changelog/) · [תכונות ומגבלות ידועות →](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/)
 
@@ -273,7 +274,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ## עבוד עם הארכיון.
 
-טעינת היסטוריה, סקירת מקורות AI, חיבור לקליינט MCP, זיהוי מדיה שנשמרה ושליחת webhooks חתומים.
+היסטוריה, AI עם מקורות, MCP, OCR ו-webhooks חתומים.
 
 [גלו את תהליך העבודה](https://phishdestroy.github.io/TgWitness/he/docs/archive/)
 
@@ -281,19 +282,19 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 **האם דף זה מקושר ל-Telegram?**
 
-לא. זוהי דף פרויקט סטטי הכולל דוגמאות וצילומי מסך פיקטיביים. היישום האמיתי פועל במחשב או בשרת שלכם; הכניסה מתבצעת שם.
+לא. זה דף סטטי עם דוגמאות מזויפות. האפליקציה רצה על המחשב שלכם ושם אתם מתחברים.
 
 **האם הוא יכול לשחזר הודעות שנמחקו לפני תיעודן?**
 
-לא. TgWitness שומר את התוכן שנצפה בחשבונך בזמן שהאיסוף היה פעיל. תמונת מצב מאוחרת יותר של ההיסטוריה אינה יכולה לשחזר עריכות שהוחמצו או הודעות שנמחקו.
+לא. הוא שומר את מה שהחשבון שלכם ראה בזמן שרץ. תמונת מצב מאוחרת יותר לא יכולה לשחזר עריכות שהוחמצו או הודעות שנמחקו.
 
 **האם כל היומן שלי מוצפן?**
 
-פרטי הזדהות החשבון וסודות החתימה מאוחסנים בכספת מוצפנת. הודעות וקבצים מצורפים מקומיים דורשים דיסק או אמצעי אחסון מוצפן. ייצוא הנתונים יכול להתבצע, לפי בחירה, באמצעות קובץ ZIP מוצפן ב-AES-256 ומוגן בסיסמה.
+סשנים ומפתחות כן. הודעות וקבצים לא, השתמשו בהצפנת דיסק. לייצואים אפשר להגדיר סיסמת AES-256.
 
 **האם האתר קשור ל-Telegram?**
 
-לא. TgWitness הוא פרויקט עצמאי המשתמש ב-Telethon, המופץ תחת רישיון MIT. אתה מאשר את החשבונות שלך בעצמך, באמצעות הגדרות ה-API המובנות או זוג ה-API שלך.
+לא. זה פרויקט עצמאי ברישיון MIT שבנוי על Telethon. אתם מתחברים עם החשבונות שלכם.
 
 PROJECT NOTICE / LICENCE
 

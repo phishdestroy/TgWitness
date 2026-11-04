@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../">Dokumentacja</a> <span aria-hidden="true">/</span> <span aria-current="page">Dbaj o bezpieczeństwo</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Co zostało przetestowane →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentacja / 14</p><h1>Dbaj o bezpieczeństwo</h1><p class="guide-outcome">Zapoznaj się z trasami komunikacji w Telegramie, publicznymi listami serwerów proxy oraz opcjonalnymi usługami zewnętrznymi. Dowiedz się, co odblokowuje każda opcja, jaki zakres ochrony zapewniają poszczególne zabezpieczenia oraz jakie kwestie pozostawiają one do Państwa decyzji.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentacja / 14</p><h1>Dbaj o bezpieczeństwo</h1><p class="guide-outcome">Co opuszcza Twoją maszynę, co otwiera każdy sekret i co chronią zabezpieczenia, a co zostaje po Twojej stronie.</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>domyślny adres panelu</span></div><div role="listitem"><strong>256-bitowy</strong><span>losowy token panelu</span></div><div role="listitem"><strong translate="no">0</strong><span>Sieci CDN, narzędzia analityczne lub czcionki zdalne</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>podpis na każdym wpisie</span></div></div>
 <h2 id="map">Miejsce, w którym wszystko się znajduje</h2>
-<p>Narzędzie do gromadzenia danych, jego panel oraz wszystkie zapisane rekordy pozostają na komputerze lub serwerze, na którym jest ono uruchomione. Telegram jest domyślnym miejscem docelowym; każda inna opcja wymaga osobnego przełączenia.</p>
+<p>Kolektor, panel i wszystkie wpisy zostają na Twojej maszynie. Domyślnie łączy się tylko z Telegramem, wszystko inne to osobny przełącznik.</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / CO WYCHODZI Z URZĄDZENIA</span><span class="sample-tag">Instalacja</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="Włączanie lub wyłączanie opcjonalnych miejsc docelowych"><button type="button" data-flow-toggle="replica" aria-pressed="false">Tekst poza witryną</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">Powiadomienia</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">Sygnatury czasowe</button><button type="button" data-flow-toggle="witness" aria-pressed="false">Witness</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>Tajne</th><th>Gdzie jest przechowywany</th><th>Jakie możliwości to stwarza</th><th>W przypadku wycieku</th></tr></thead>
 <tbody>
-<tr><td><strong>Token panelu</strong></td><td>Plik <code>panel-token.txt</code> w katalogu danych; przeglądarka przechowuje go wyłącznie dla danej karty</td><td>Wszystkie funkcje w każdym obszarze roboczym: przeglądanie i eksportowanie, zmiana zakresu, logowanie się na konta</td><td>Zatrzymaj TgWitness, usuń <code>panel-token.txt</code>, uruchom ponownie: zostanie utworzony nowy token</td></tr>
+<tr><td><strong>Token panelu</strong></td><td><code>panel-token.txt</code> w katalogu danych; przeglądarka trzyma go dla karty</td><td>Wszystko we wszystkich przestrzeniach</td><td>Zatrzymaj TgWitness, usuń <code>panel-token.txt</code>, uruchom ponownie — dostaniesz nowy</td></tr>
 <tr><td><strong>Sesja w Telegramie</strong></td><td>Vault, zaszyfrowany (<code>credentials.enc</code>)</td><td>Samo konto w serwisie Telegram</td><td>Zakończ sesję w aplikacji Telegram, wybierając opcję <em>Ustawienia → Urządzenia</em></td></tr>
-<tr><td><strong>Klucz podpisujący</strong></td><td>Vault, zaszyfrowany (<code>signing.enc</code>)</td><td>Zapisy opatrzone podpisem, których autentyczność można zweryfikować na podstawie Państwa podpisu cyfrowego</td><td>Punkty kontrolne przechowywane w innym miejscu, świadek oraz znaczniki czasu wskazują, co istniało wcześniej</td></tr>
-<tr><td><strong>Klucz do skarbca</strong></td><td><code>vault.key</code> obok danych lub zewnętrzny klucz główny dla nowego katalogu danych</td><td>Odszyfrowanie skarbca</td><td>Należy traktować klucz sesji i klucz podpisujący jako również ujawnione</td></tr>
-<tr><td><strong>Token Witness</strong></td><td>Na serwerze Witness</td><td>Tryb tylko do odczytu: podpisane punkty kontrolne i stan działania</td><td>Proszę usunąć tę stronę z sekcji „Witness” i utworzyć nową</td></tr>
-<tr><td><strong>Klucz treści poza witryną</strong></td><td>Vault; wystarczy pobrać go raz, aby móc odzyskać dane</td><td>Odszyfrowywanie kopii przechowywanej poza serwerem</td><td>Każdy, kto posiada przechowywane obiekty, może je odszyfrować: proszę traktować tę kopię jako ujawnioną</td></tr>
+<tr><td><strong>Klucz podpisujący</strong></td><td>Vault, zaszyfrowany (<code>signing.enc</code>)</td><td>Podpisywanie wpisów Twoim odciskiem</td><td>Punkty kontrolne przechowywane gdzie indziej, świadek i znaczniki czasu nadal pokazują, co istniało wcześniej</td></tr>
+<tr><td><strong>Klucz do skarbca</strong></td><td><code>vault.key</code> obok danych albo zewnętrzny klucz główny</td><td>Sejf</td><td>Załóż, że sesja i klucz podpisu też wyciekły</td></tr>
+<tr><td><strong>Token Witness</strong></td><td>Na serwerze Witness</td><td>Tylko odczyt: punkty kontrolne i stan</td><td>Usuń go na stronie świadka i utwórz nowy</td></tr>
+<tr><td><strong>Klucz treści poza witryną</strong></td><td>Vault; wystarczy pobrać go raz, aby móc odzyskać dane</td><td>Kopię zewnętrzną</td><td>Kto ma też bucket, może ją odszyfrować — traktuj kopię jako ujawnioną</td></tr>
 </tbody></table></div>
 <h2 id="threats">Zakres ochrony</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> – omówiono</h3><ul>
-<li>Zmieniony, usunięty lub zmieniony w kolejności wpis w eksporcie: łańcuch skrótów lub podpis nie są już weryfikowalne.</li>
-<li>Dziennik, który został skrócony lub odtworzony po tym, jak punkt kontrolny został zapisany w innym miejscu: zachowany punkt kontrolny nie jest już zgodny.</li>
-<li>Odgadywanie tokenu panelu: 256 losowych bitów, porównywanych w stałym czasie; po 15 nieudanych próbach w ciągu minuty adres zostaje odrzucony.</li>
-<li>Treści o charakterze wrogim w czacie: tekst jest wstawiany jako zwykły tekst, nigdy jako kod HTML; załączniki są pobierane jako pliki; panel nie ładuje żadnych treści z innych stron.</li>
-<li>Skopiowany katalog danych z zewnętrznym kluczem do skarbca: sesje i klucze podpisujące pozostają zaszyfrowane bez klucza głównego.</li>
+<li>Zmieniony, usunięty lub przestawiony wpis: pęka łańcuch skrótów albo podpis.</li>
+<li>Dziennik przycięty lub odbudowany po tym, jak zapisałeś punkt kontrolny gdzie indziej: punkt przestaje się zgadzać.</li>
+<li>Zgadywanie tokenu: 256 losowych bitów, porównanie w stałym czasie; 15 błędów na minutę i adres zostaje zablokowany.</li>
+<li>Wroga treść czatów: tekst zostaje tekstem, nigdy HTML; załączniki pobierają się jako pliki; panel nie ładuje niczego z innych stron.</li>
+<li>Skradziony katalog danych przy zewnętrznym kluczu sejfu: sesje i klucze pozostają zaszyfrowane.</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> Pozostawiamy to Państwu</h3><ul>
-<li>Użytkownik posiadający token panelu głównego ma pełną kontrolę. Proszę przyznawać innym osobom ograniczony dostęp do kont, czatów i działań, których potrzebują; klucz główny należy zachować w tajemnicy.</li>
-<li>Administrator urządzenia może odczytać całą zawartość dziennika, a także go przeredagować i ponownie podpisać. Odciski palców i punkty kontrolne należy przechowywać na innym systemie.</li>
-<li>Treść wiadomości i pliki multimedialne nie są szyfrowane przez TgWitness. Należy stosować szyfrowanie dysku oraz rygorystyczne uprawnienia.</li>
-<li>Korzystanie z protokołu HTTP poza lokalnym hostem (localhost) powoduje ujawnienie tokenu w sieci. Prosimy o korzystanie z protokołu HTTPS lub tunelu SSH.</li>
-<li>Należy sprawdzić zapisane dane pod kątem obecności podpisów i punktów kontrolnych. Należy zweryfikować zakres gromadzonych danych oraz przetestować proces dostarczania danych dla wykorzystywanych kont i źródeł.</li>
+<li>Główny token może wszystko. Innym dawaj ograniczony dostęp, a główny trzymaj dla siebie.</li>
+<li>Administrator maszyny może przeczytać wszystko i ponownie podpisać dziennik. Odcisk i punkty kontrolne trzymaj gdzie indziej.</li>
+<li>TgWitness nie szyfruje wiadomości i mediów. Szyfruj dysk i ogranicz uprawnienia.</li>
+<li>Zwykły HTTP poza localhost ujawnia token. Używaj HTTPS albo tunelu SSH.</li>
+<li>Podpisy nie powiedzą, co zostało pominięte. Sprawdzaj pokrycie i testuj dostarczanie na własnych kontach i źródłach.</li>
 </ul></section>
 </div>
-<p><a href="../access/">Udostępnianie dostępu do sprawy</a> z uwzględnieniem uprawnień, terminów ważności i limitów sesji. Token świadka pozostaje odrębnym poświadczeniem.</p>
+<p><a href="../access/">Udostępnij dostęp do sprawy</a> z uprawnieniami, terminem ważności i limitem sesji.</p>
 <h2 id="hardening">Zabezpieczenie instalacji</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>Zrobiono 0 z 8</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>Proszę korzystać z dedykowanego konta w Telegramie</strong> — nigdy z konta głównego. Token panelu oraz sesja zapewniają pełną kontrolę nad nim.</span></li>
-<li><span class="check-text"><strong>Proszę utrzymać panel pod adresem 127.0.0.1.</strong> Dostęp zdalny powinien odbywać się wyłącznie za pośrednictwem protokołu HTTPS (wbudowana konfiguracja Caddy) lub tunelu SSH.</span></li>
-<li><span class="check-text"><strong>Należy zaszyfrować dysk,</strong> na którym znajduje się katalog danych: treści wiadomości i pliki multimedialne są przechowywane w postaci, w jakiej zostały otrzymane.</span></li>
-<li><span class="check-text"><strong>Proszę ograniczyć dostęp do katalogu danych</strong> wyłącznie do konta serwisowego. Nowe katalogi otrzymują uprawnienia 0700 w systemie Unix; w systemie Windows należy ustawić uprawnienia folderu.</span></li>
-<li><span class="check-text"><strong>Klucz główny do skarbca należy przechowywać w innym miejscu</strong> na serwerach: przed utworzeniem katalogu danych należy ustawić parametr <code>TGWITNESS_VAULT_KEY_FILE</code>.</span></li>
-<li><span class="check-text"><strong>Proszę zapisać odcisk klucza podpisującego oraz punkty kontrolne</strong> na innym systemie, a także dodać świadka na innym serwerze.</span></li>
+<li><span class="check-text"><strong>Używaj osobnego konta Telegram</strong>, nigdy głównego.</span></li>
+<li><span class="check-text"><strong>Trzymaj panel na 127.0.0.1.</strong> Zdalnie tylko przez HTTPS (dołączony Caddy) albo tunel SSH.</span></li>
+<li><span class="check-text"><strong>Zaszyfruj dysk</strong> z katalogiem danych — wiadomości i media są zapisywane tak, jak przyszły.</span></li>
+<li><span class="check-text"><strong>Ogranicz katalog danych</strong> do konta usługi (0700 w Unix, uprawnienia folderu w Windows).</span></li>
+<li><span class="check-text"><strong>Trzymaj klucz sejfu osobno</strong> na serwerach: ustaw <code>TGWITNESS_VAULT_KEY_FILE</code> przed pierwszym uruchomieniem.</span></li>
+<li><span class="check-text"><strong>Zapisuj odcisk i punkty kontrolne</strong> w innym systemie, uruchom świadka na innym hoście.</span></li>
 <li><span class="check-text"><strong>Nigdy nie należy przesyłać</strong> kluczy typu „<code>data/</code>”, kluczy sesji, kluczy typu „<code>panel-token.txt</code>” ani kluczy do skarbca na GitHub ani w czacie.</span></li>
 <li><span class="check-text"><strong>Proszę nie rejestrować</strong> nagłówków <code>Authorization</code> ani treści żądań na serwerze proxy odwrotnym.</span></li>
 </ol>
 </div>
-<details><summary>Czy mogę zmienić token panelu bez utraty danych?</summary><p>Tak. Token służy wyłącznie do otwarcia panelu. Proszę zatrzymać TgWitness, usunąć plik „<code>panel-token.txt</code>” z katalogu danych i uruchomić program ponownie; dziennik, sesje i klucze pozostaną nienaruszone. Po ustawieniu wartości „<code>TGWITNESS_TOKEN</code>” zamiast pliku wykorzystywana jest wartość środowiskowa.</p></details>
-<details><summary>Dlaczego wiadomości nie są szyfrowane w stanie spoczynku?</summary><p>Osoba odpowiedzialna za gromadzenie danych musi je przeczytać, aby przeprowadzić wyszukiwanie, porównać wersje i wyeksportować dane. Szyfrowanie ich za pomocą klucza na tym samym urządzeniu nie zapewniłoby znaczącej ochrony przed osobą, która ma dostęp do tego urządzenia. Szyfrowanie dysku chroni dysk wyłączony lub skradziony; ścisłe uprawnienia chronią dysk, na którym toczy się praca.</p></details>
+<details><summary>Czy mogę zmienić token panelu bez utraty danych?</summary><p>Tak, on tylko otwiera panel. Zatrzymaj TgWitness, usuń <code>panel-token.txt</code>, uruchom ponownie. Dziennik, sesje i klucze zostają. Jeśli ustawiono <code>TGWITNESS_TOKEN</code>, ta wartość ma pierwszeństwo przed plikiem.</p></details>
+<details><summary>Dlaczego wiadomości nie są szyfrowane w stanie spoczynku?</summary><p>Kolektor musi je czytać, żeby wyszukiwać, porównywać i eksportować. Klucz na tej samej maszynie nie zatrzyma kogoś, kto i tak może czytać tę maszynę. Szyfrowanie dysku chroni skradziony dysk, uprawnienia — działający.</p></details>
 <h2 id="report">Zgłoś lukę w zabezpieczeniach</h2>
-<p>Prosimy skorzystać z opcji <strong>„Security → Report a vulnerability”</strong> w repozytorium GitHub. Należy podać wersję, skutki oraz minimalny syntetyczny przykład pozwalający na odtworzenie błędu. Prosimy nigdy nie przesyłać danych uwierzytelniających, katalogów kont ani archiwów zawierających rzeczywiste dowody. Jeśli zgłoszenie prywatne jest niedostępne, prosimy otworzyć zgłoszenie z prośbą o utworzenie prywatnego kanału, nie podając szczegółów dotyczących luki.</p>
+<p><strong>Security → Report a vulnerability</strong> na GitHubie. Wersja, skutki i minimalny przykład na fikcyjnych danych. Nigdy nie wysyłaj danych logowania, folderów kont ani prawdziwych dowodów. Jeśli prywatne zgłoszenia są wyłączone, otwórz issue z prośbą o prywatny kanał, bez szczegółów exploita.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">Pełne odniesienie →</a><a class="next-guide" href="../start/"><span>Kolejny krok</span><strong>Rozpocznij w ciągu kilku minut →</strong></a><p>Niniejsze wytyczne opisują aktualną implementację. Wyniki walidacji oraz pozostałe luki zostały udokumentowane oddzielnie. <a href="../reference/verification/">Co zostało przetestowane →</a></p></footer>
 </main>

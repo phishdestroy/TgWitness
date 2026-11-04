@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="Anleitungen"><a href="../../">Startseite</a> <span aria-hidden="true">/</span> <a href="../">Dokumentation</a> <span aria-hidden="true">/</span> <span aria-current="page">Sorgen Sie für Sicherheit</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Was wurde getestet? →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Durchsuchen Sie die Dokumentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Versuchen Sie es mit „Proxy“, „Hash-Kette“, „Token“ oder „Witness“ …" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Klare Suche" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Geben Sie ein Wort ein, um die Anleitungen und das Nachschlagewerk zu durchsuchen. Die Suche erfolgt in Ihrem Browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentation / 14</p><h1>Sorgen Sie für Sicherheit</h1><p class="guide-outcome">Machen Sie sich mit den Routen für Telegram, öffentlichen Proxy-Listen und optionalen externen Diensten vertraut. Erfahren Sie, welche Funktionen die einzelnen Einstellungen freischalten, welchen Schutz sie bieten und welche Entscheidungen Ihnen überlassen bleiben.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentation / 14</p><h1>Sorgen Sie für Sicherheit</h1><p class="guide-outcome">Was Ihren Rechner verlässt, was jedes Geheimnis öffnet und was die Schutzmaßnahmen abdecken und was an Ihnen hängt.</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>Standardmäßige Panel-Adresse</span></div><div role="listitem"><strong>256-Bit</strong><span>Zufälliges Panel-Token</span></div><div role="listitem"><strong translate="no">0</strong><span>CDNs, Analysetools oder Remote-Schriftarten</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>Signatur auf jedem Datensatz</span></div></div>
 <h2 id="map">Hier finden Sie alles</h2>
-<p>Der Collector, sein Bedienfeld und alle gespeicherten Datensätze verbleiben auf dem Computer oder Server, auf dem Sie das Tool ausführen. Telegram ist standardmäßig das einzige Ziel; jedes weitere Ziel wird über einen separaten Schalter ausgewählt.</p>
+<p>Collector, Panel und alle Einträge bleiben auf Ihrem Rechner. Standardmäßig wird nur Telegram kontaktiert, alles andere ist ein eigener Schalter.</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / WAS DIE MASCHINE VERLÄSST</span><span class="sample-tag">Ihre Installation</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="Optionale Ziele aktivieren oder deaktivieren"><button type="button" data-flow-toggle="replica" aria-pressed="false">Text für externe Seiten</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">Benachrichtigungen</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">Zeitstempel</button><button type="button" data-flow-toggle="witness" aria-pressed="false">Witness</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>Geheim</th><th>Wo es aufbewahrt wird</th><th>Was es ermöglicht</th><th>Falls es bekannt wird</th></tr></thead>
 <tbody>
-<tr><td><strong>Panel-Token</strong></td><td><code>panel-token.txt</code> im Datenverzeichnis; der Browser speichert diese Datei ausschließlich für den jeweiligen Tab</td><td>Alle Funktionen in jedem Arbeitsbereich: Lesen und Exportieren, Umfang ändern, in Konten anmelden</td><td>Beenden Sie TgWitness, löschen Sie „<code>panel-token.txt</code>“ und starten Sie es erneut: Es wird ein neues Token erstellt.</td></tr>
+<tr><td><strong>Panel-Token</strong></td><td><code>panel-token.txt</code> im Datenverzeichnis; der Browser behält es pro Tab</td><td>Alles in jedem Arbeitsbereich</td><td>TgWitness stoppen, <code>panel-token.txt</code> löschen, neu starten: Sie bekommen ein neues</td></tr>
 <tr><td><strong>Telegram-Sitzung</strong></td><td>Vault, verschlüsselt (<code>credentials.enc</code>)</td><td>Der Telegram-Account selbst</td><td>Beenden Sie die Sitzung in Telegram unter <em>„Einstellungen“ → „Geräte“</em></td></tr>
-<tr><td><strong>Signaturschlüssel</strong></td><td>Vault, verschlüsselt (<code>signing.enc</code>)</td><td>Signierte Aufzeichnungen, die unter Ihrem Fingerabdruck verifiziert werden können</td><td>An anderer Stelle gespeicherte Kontrollpunkte, ein Zeuge und Zeitstempel zeigen, was zuvor vorhanden war</td></tr>
-<tr><td><strong>Tresorschlüssel</strong></td><td>„<code>vault.key</code>“ neben den Daten oder ein externer Hauptschlüssel für ein neues Datenverzeichnis</td><td>Entschlüsselung des Tresors</td><td>Behandeln Sie die Sitzungs- und Signaturschlüssel ebenfalls als offengelegt</td></tr>
-<tr><td><strong>Witness-Token</strong></td><td>Auf dem Witness-Host</td><td>Schreibgeschützt: signierte Kontrollpunkte und Integritätsprüfung</td><td>Löschen Sie diesen Eintrag auf der „Witness“-Seite; erstellen Sie einen neuen.</td></tr>
-<tr><td><strong>Schlüsseltext für externe Seiten</strong></td><td>Vault; einmal herunterladen, um Daten wiederherzustellen</td><td>Entschlüsselung der externen Kopie</td><td>Wer auch immer die gespeicherten Objekte besitzt, kann diese entschlüsseln: Behandeln Sie diese Kopie als offengelegt.</td></tr>
+<tr><td><strong>Signaturschlüssel</strong></td><td>Vault, verschlüsselt (<code>signing.enc</code>)</td><td>Einträge unter Ihrem Fingerabdruck signieren</td><td>Anderswo aufbewahrte Prüfpunkte, ein Zeuge und Zeitstempel zeigen weiterhin, was vorher existierte</td></tr>
+<tr><td><strong>Tresorschlüssel</strong></td><td><code>vault.key</code> neben den Daten oder ein externer Hauptschlüssel</td><td>Den Tresor</td><td>Gehen Sie davon aus, dass Sitzung und Signaturschlüssel ebenfalls geleakt sind</td></tr>
+<tr><td><strong>Witness-Token</strong></td><td>Auf dem Witness-Host</td><td>Nur lesen: Prüfpunkte und Zustand</td><td>Auf der Zeugen-Seite löschen, ein neues erstellen</td></tr>
+<tr><td><strong>Schlüsseltext für externe Seiten</strong></td><td>Vault; einmal herunterladen, um Daten wiederherzustellen</td><td>Die externe Kopie</td><td>Wer auch den Bucket hat, kann sie entschlüsseln: betrachten Sie die Kopie als offengelegt</td></tr>
 </tbody></table></div>
 <h2 id="threats">Was die Schutzmaßnahmen abdecken</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> Abgedeckt</h3><ul>
-<li>Ein geänderter, gelöschter oder neu angeordneter Eintrag in einem Export: Die Hash-Kette oder eine Signatur lässt sich nicht mehr verifizieren.</li>
-<li>Ein Protokoll, das nach einem Kontrollpunkt gekürzt oder neu erstellt wurde, wurde an anderer Stelle gespeichert: Der gespeicherte Kontrollpunkt stimmt nicht mehr überein.</li>
-<li>Erraten des Panel-Tokens: 256 zufällige Bits, die in konstanter Zeit verglichen werden; nach 15 Fehlversuchen pro Minute wird eine Adresse abgelehnt.</li>
-<li>Inhalte aus feindlichen Chats: Text wird als reiner Text eingefügt, niemals als HTML; Anhänge werden als Dateien heruntergeladen; das Panel lädt keine Inhalte von anderen Websites.</li>
-<li>Ein Verzeichnis mit kopierten Daten und einem externen Tresorschlüssel: Sitzungen und Signaturschlüssel bleiben ohne den Hauptschlüssel verschlüsselt.</li>
+<li>Ein geänderter, entfernter oder umsortierter Eintrag: Die Hash-Kette oder eine Signatur bricht.</li>
+<li>Ein Journal, das gekürzt oder neu aufgebaut wurde, nachdem Sie einen Prüfpunkt anderswo gespeichert haben: Der Prüfpunkt passt nicht mehr.</li>
+<li>Das Token erraten: 256 Zufallsbits, Vergleich in konstanter Zeit, 15 Fehlversuche pro Minute und die Adresse wird gesperrt.</li>
+<li>Feindselige Chat-Inhalte: Text bleibt Text, nie HTML; Anhänge werden als Dateien heruntergeladen; das Panel lädt nichts von anderen Seiten.</li>
+<li>Ein gestohlenes Datenverzeichnis bei externem Tresorschlüssel: Sitzungen und Schlüssel bleiben verschlüsselt.</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> Ich überlasse es Ihnen</h3><ul>
-<li>Der Inhaber des Haupt-Tokens hat die volle Kontrolle. Gewähren Sie anderen Personen einen begrenzten Zugriff auf die Konten, Chats und Aktionen, die sie benötigen; halten Sie den Hauptschlüssel geheim.</li>
-<li>Ein Administrator des Servers kann alle Einträge einsehen und das Protokoll überschreiben sowie neu signieren. Bewahren Sie den Fingerabdruck und die Kontrollpunkte auf einem anderen System auf.</li>
-<li>Nachrichtentexte und Medien werden von TgWitness nicht verschlüsselt. Verwenden Sie Festplattenverschlüsselung und strenge Zugriffsberechtigungen.</li>
-<li>Bei einer einfachen HTTP-Verbindung außerhalb von „localhost“ wird das Token im Netzwerk sichtbar. Verwenden Sie HTTPS oder einen SSH-Tunnel.</li>
-<li>Überprüfen Sie gespeicherte Datensätze anhand von Signaturen und Kontrollpunkten. Überprüfen Sie den Erfassungsumfang und testen Sie die Bereitstellung für die von Ihnen verwendeten Konten und Quellen.</li>
+<li>Das Haupttoken kann alles. Geben Sie anderen begrenzten Zugriff und behalten Sie das Haupttoken für sich.</li>
+<li>Wer Admin auf dem Rechner ist, kann alles lesen und das Journal neu signieren. Bewahren Sie Fingerabdruck und Prüfpunkte anderswo auf.</li>
+<li>Nachrichten und Medien verschlüsselt TgWitness nicht. Verschlüsseln Sie die Festplatte, schränken Sie die Rechte ein.</li>
+<li>Einfaches HTTP außerhalb von localhost gibt das Token preis. Nutzen Sie HTTPS oder einen SSH-Tunnel.</li>
+<li>Signaturen sagen Ihnen nicht, was verpasst wurde. Prüfen Sie Abdeckung und Zustellung auf Ihren eigenen Konten und Quellen.</li>
 </ul></section>
 </div>
-<p><a href="../access/">Teilen Sie den Zugriff auf einen Fall</a> mit Berechtigungen, Ablaufdaten und Sitzungsbeschränkungen. Ein Witness-Token bleibt eine separate Zugangsberechtigung.</p>
+<p><a href="../access/">Teilen Sie den Zugriff auf einen Fall</a> mit Berechtigungen, Ablaufdatum und Sitzungslimits.</p>
 <h2 id="hardening">Eine Installation absichern</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>0 von 8 fertiggestellt</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>Verwenden Sie ein eigens dafür eingerichtetes Telegram-Konto</strong> – niemals Ihr Hauptkonto. Das Panel-Token und die Sitzung ermöglichen die vollständige Kontrolle darüber.</span></li>
-<li><span class="check-text"><strong>Lassen Sie das Panel auf 127.0.0.1 laufen.</strong> Greifen Sie remote nur über HTTPS (die mitgelieferte Caddy-Konfiguration) oder einen SSH-Tunnel darauf zu.</span></li>
-<li><span class="check-text"><strong>Verschlüsseln Sie die Festplatte,</strong> auf der sich das Datenverzeichnis befindet: Nachrichtentexte und Medien werden so gespeichert, wie sie eingegangen sind.</span></li>
-<li><span class="check-text"><strong>Beschränken Sie das Datenverzeichnis</strong> auf das Dienstkonto. Neue Verzeichnisse erhalten unter Unix die Berechtigung 0700; unter Windows legen Sie die Berechtigungen für den Ordner fest.</span></li>
-<li><span class="check-text"><strong>Bewahren Sie den Hauptschlüssel des Tresors an einem anderen Ort</strong> auf den Servern <strong>auf</strong>: Legen Sie „<code>TGWITNESS_VAULT_KEY_FILE</code>“ fest, bevor Sie das Datenverzeichnis erstellen.</span></li>
-<li><span class="check-text"><strong>Speichern Sie den Fingerabdruck des Signaturschlüssels und die Kontrollpunkte</strong> auf einem anderen System und fügen Sie einen Zeugen auf einem anderen Host hinzu.</span></li>
+<li><span class="check-text"><strong>Nutzen Sie ein eigenes Telegram-Konto</strong>, nie Ihr Hauptkonto.</span></li>
+<li><span class="check-text"><strong>Lassen Sie das Panel auf 127.0.0.1.</strong> Fernzugriff nur über HTTPS (mitgeliefertes Caddy) oder einen SSH-Tunnel.</span></li>
+<li><span class="check-text"><strong>Verschlüsseln Sie die Festplatte</strong> mit dem Datenverzeichnis, Nachrichten und Medien liegen so, wie sie ankamen.</span></li>
+<li><span class="check-text"><strong>Beschränken Sie das Datenverzeichnis</strong> auf das Dienstkonto (0700 unter Unix, Ordnerrechte unter Windows).</span></li>
+<li><span class="check-text"><strong>Bewahren Sie den Tresorschlüssel anderswo auf</strong> auf Servern: setzen Sie <code>TGWITNESS_VAULT_KEY_FILE</code> vor dem ersten Start.</span></li>
+<li><span class="check-text"><strong>Speichern Sie Fingerabdruck und Prüfpunkte</strong> auf einem anderen System, betreiben Sie einen Zeugen auf einem anderen Host.</span></li>
 <li><span class="check-text"><strong>Laden Sie niemals</strong> <code>data/</code>-, Sitzungs-, <code>panel-token.txt</code>- oder Tresorschlüssel auf GitHub oder in einen Chat <strong>hoch</strong>.</span></li>
 <li><span class="check-text"><code>Authorization</code>-Header oder Request-Bodies <strong>dürfen</strong> an einem Reverse-Proxy <strong>nicht protokolliert werden</strong>.</span></li>
 </ol>
 </div>
-<details><summary>Kann ich das Panel-Token ändern, ohne Daten zu verlieren?</summary><p>Ja. Das Token öffnet lediglich das Bedienfeld. Beenden Sie TgWitness, löschen Sie „<code>panel-token.txt</code>“ aus dem Datenverzeichnis und starten Sie das Programm erneut; das Protokoll, die Sitzungen und die Schlüssel bleiben davon unberührt. Wenn „<code>TGWITNESS_TOKEN</code>“ festgelegt ist, wird anstelle der Datei der Umgebungswert verwendet.</p></details>
-<details><summary>Warum werden Nachrichten im Ruhezustand nicht verschlüsselt?</summary><p>Der Erfasser muss diese lesen, um sie zu durchsuchen, Versionen zu vergleichen und zu exportieren. Eine Verschlüsselung mit einem Schlüssel auf demselben Rechner würde nur wenig Schutz bieten gegenüber jemandem, der Zugriff auf diesen Rechner hat. Eine Festplattenverschlüsselung schützt eine ausgeschaltete oder gestohlene Festplatte; strenge Zugriffsrechte schützen eine in Betrieb befindliche Festplatte.</p></details>
+<details><summary>Kann ich das Panel-Token ändern, ohne Daten zu verlieren?</summary><p>Ja, es öffnet nur das Panel. TgWitness stoppen, <code>panel-token.txt</code> löschen, neu starten. Journal, Sitzungen und Schlüssel bleiben. Ist <code>TGWITNESS_TOKEN</code> gesetzt, hat dieser Wert Vorrang vor der Datei.</p></details>
+<details><summary>Warum werden Nachrichten im Ruhezustand nicht verschlüsselt?</summary><p>Der Collector muss sie lesen, um zu suchen, zu vergleichen und zu exportieren. Ein Schlüssel auf demselben Rechner würde niemanden aufhalten, der diesen Rechner ohnehin lesen kann. Festplattenverschlüsselung schützt eine gestohlene Platte, Rechte schützen eine laufende.</p></details>
 <h2 id="report">Eine Sicherheitslücke melden</h2>
-<p>Nutzen Sie <strong>„Sicherheit → Eine Sicherheitslücke melden“</strong> im GitHub-Repository. Geben Sie dabei die Version, die Auswirkungen und eine minimale synthetische Reproduktion an. Senden Sie niemals Anmeldedaten, Kontiverzeichnisse oder echte Beweismittelarchive. Falls eine private Meldung nicht möglich ist, eröffnen Sie ein Ticket, in dem Sie um einen privaten Kanal bitten, ohne Details zum Exploit anzugeben.</p>
+<p><strong>Security → Report a vulnerability</strong> auf GitHub. Version, Auswirkung und ein minimales Beispiel mit erfundenen Daten. Schicken Sie nie Zugangsdaten, Kontoordner oder echte Beweise. Ist die private Meldung aus, eröffnen Sie ein Issue und bitten Sie um einen privaten Kanal, ohne Exploit-Details.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">Vollständige Quellenangabe →</a><a class="next-guide" href="../start/"><span>Nächster Schritt</span><strong>In wenigen Minuten loslegen →</strong></a><p>Diese Leitfäden beschreiben die aktuelle Implementierung. Validierungsergebnisse und verbleibende Lücken werden separat dokumentiert. <a href="../reference/verification/">Was wurde getestet? →</a></p></footer>
 </main>

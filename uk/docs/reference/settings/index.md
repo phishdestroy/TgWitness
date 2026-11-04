@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/setti
 У робочій області, де вже відкрито сеанс або раніше було завершено налаштування, майстер не відображається. Його значення не замінюються ціллю під час завантаження сторінки. Приховування поля не відключає цю функцію та не видаляє його значення.
 
 Оцінка розміру та часу охоплює до трьох вибраних чатів і до 20 повідомлень з кожного. Це лише приблизні дані: вони не враховують обмеження Telegram, швидкість конкретного сервера або файли в кожному чаті.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

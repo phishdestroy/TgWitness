@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../">التوثيق</a> <span aria-hidden="true">/</span> <span aria-current="page">حافظ على استمرار عملها</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">ما تم اختباره ←</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">التوثيق / 17</p><h1>حافظ على استمرار عملها</h1><p class="guide-outcome">الحفاظ على توفر أداة التجميع وسلامة بياناتها حتى بعد إعادة تشغيل النظام.</p>
+<article class="guide-content"><p class="eyebrow">التوثيق / 17</p><h1>حافظ على استمرار عملها</h1><p class="guide-outcome">أبقِ المُجمِّع يعمل والبيانات آمنة عبر إعادات التشغيل.</p>
 <h2 id="launch">اختر طريقة الإطلاق</h2>
-<p>للتثبيت المحلي، استخدم <a href="../start/">المشغل</a> وأمثلة الخدمة الموجودة في <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">مجلد deploy/.</a> بالنسبة لـ Docker، قم بتثبيت Docker مع Compose وقم بتشغيله من دليل المشروع:</p>
+<p>التثبيت الأصلي: <a href="../start/">المشغّل</a> مع قوالب الخدمة في <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a>. Docker، من مجلد المشروع:</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>تستمع اللوحة الافتراضية إلى عنوان loopback الخاص بالمضيف، على المنفذ 8787. افتحها محليًّا أو عبر نفق SSH. استخدم الرمز المميز من الأمر الثاني لفتح اللوحة.</p>
+<p>تستمع اللوحة على localhost:8787. افتحها محليًا أو عبر نفق SSH، بالرمز الناتج عن الأمر الثاني.</p>
 <h2 id="storage">احتفظ بدليل البيانات بالكامل</h2>
-<p>تستخدم التثبيتات الأصلية وحدة التخزين <code>data/live</code>. بينما يستخدم Docker وحدة التخزين الدائمة <code>tgwitness-data</code>. احتفظ بالسجلات وجلسات الحسابات والمفاتيح وحالة التشغيل معًا. يُعد التصدير الموقّع دليلًا مفيدًا، لكنه ليس نسخة احتياطية كاملة للتثبيت.</p>
-<ol><li>أوقف عملية التجميع قبل إجراء نسخ احتياطي متسق.</li><li>انسخ دليل البيانات الخاصة بالكامل إلى مساحة تخزين محمية خارج المضيف.</li><li>اختبر عملية الاستعادة في بيئة معزولة قبل الاعتماد على النسخة الاحتياطية.</li></ol>
+<p>التثبيت الأصلي: <code>data/live</code>. Docker: وحدة التخزين <code>tgwitness-data</code>. السجلات والجلسات والمفاتيح يجب أن تبقى معًا. التصدير الموقّع دليل، وليس نسخة احتياطية.</p>
+<ol><li>أوقف الجمع أولاً.</li><li>انسخ دليل البيانات كاملاً إلى مكان آمن خارج المضيف.</li><li>جرّب استعادته على تثبيت منفصل قبل أن تثق به.</li></ol>
 <h2 id="check">يرجى التحقق بعد إعادة التشغيل</h2>
-<p>تأكيد مساحة العمل والمفتاح المتوقعين، والاتصال بـ Telegram، والمصادر المحددة، والتقاط الرسائل الجديدة. تساعد حالة MTProto المحفوظة ووظيفة «اللحاق بالركب» في استعادة التحديثات التي لا تزال Telegram تحتفظ بها. ولا يمكنها إعادة بناء كل تحديث منتهي الصلاحية أو تعديل تم حذفه قبل التقاطه.</p>
-<p class="callout">تشير «صحة الحاوية» إلى استجابة خادم الويب. استخدم رسالة خاضعة للرقابة وفحصًا تثبتيًّا لتقييم عملية التجميع والنشر الخارجي.</p>
+<p>تحقق من مساحة العمل والمفتاح والاتصال والمصادر ومن وصول رسائل جديدة. يلحق TgWitness بما لا يزال لدى Telegram، لا بكل ما حدث أثناء توقفه.</p>
+<p class="callout">الحاوية "healthy" تعني أن خادم الويب يجيب. أما هل يعمل الجمع، فرسالة الاختبار والشاهد يخبرانك.</p>
 <h2 id="public">انشر فقط ما تنوي نشره</h2>
-<p>تتضمن مرجع النشر أمثلة على بروتوكول HTTPS، وأوامر وحدة التخزين الدائمة (persistent-volume)، والتحديثات، وخطوات الاستعادة. يتم توفير أوامر Docker للنشر؛ ويحدد <a href="../reference/verification/">سجل التحقق</a> الحالي البيئات التي تم اختبارها فعليًّا.</p>
+<p>HTTPS ووحدات التخزين والتحديثات والاستعادة موجودة في مرجع النشر. ما تم اختباره فعلاً: <a href="../reference/verification/">سجل التحقق</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">المرجع الكامل ←</a><a class="next-guide" href="../troubleshooting/"><span>الخطوة التالية</span><strong>اكتشف ما الذي حدث ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="../reference/verification/">ما تم اختباره ←</a></p></footer>
 </main>

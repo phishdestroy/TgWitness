@@ -62,10 +62,3 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/setti
 סביבת עבודה עם הפעלה או עם הגדרה שהושלמה קודם לכן אינה מציגה את האשף. ערכיה אינם מוחלפים ביעד בעת טעינת הדף. הסתרת שדה אינה מכבה את התכונה ואינה מוחקת את ערכו.
 
 אומדן הגודל והזמן מתייחס לקריאת עד שלושה צ'אטים נבחרים ועד 20 הודעות מכל אחד מהם. זהו אומדן בלבד: הוא אינו חוזה את מגבלות Telegram, את מהירותו של שרת מסוים או את הקבצים בכל צ'אט.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

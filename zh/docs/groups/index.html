@@ -32,12 +32,12 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首页</a> <span aria-hidden="true">/</span> <a href="../">文档</a> <span aria-hidden="true">/</span> <span aria-current="page">管理一组账户</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文档 / 13</p><h1>管理一组账户</h1><p class="guide-outcome">可同时管理多个采集账户，同时确保每个账户的记录和签名身份保持独立。</p>
-<p>账户组将连接状态、监控控制、共享设置和导出功能整合到一个工作视图中。当多个账户涉及同一项调查或需要保持一致的操作设置时，此功能非常有用。</p>
+<article class="guide-content"><p class="eyebrow">文档 / 13</p><h1>管理一组账户</h1><p class="guide-outcome">同时运行多个账户，每个账户仍有自己的记录和密钥。</p>
+<p>账户组将连接状态、启动/暂停、共享设置和导出放在同一个界面上。多个账户处理同一案件时很方便。</p>
 
 <h2 id="overview">打开群组概览</h2>
-<p>在<strong>“账户</strong>”中，打开群组。每个账户会显示其监控状态、连接路径、最近一次检查成功时测得的路径延迟，以及最后保存的消息。<strong>需关注</strong>链接指向需要处理的账户；<strong>点击“修复</strong>”可打开相关工作区和控制界面。</p>
-<p><strong>“全部开始</strong>”和<strong>“全部暂停</strong>”操作将在确认后对符合条件的账户生效。<strong>“组设置</strong>”可共享选定的设置；具有独立设置值的账户将保留其原有设置，直至您选择替换。</p>
+<p>在<strong>账户</strong>中打开账户组。每个账户显示其状态、路由、延迟和最后保存的消息。<strong>需关注</strong>列出出问题的账户，<strong>修复</strong>直接带您过去。</p>
+<p><strong>全部开始</strong> / <strong>全部暂停</strong>会先询问再执行。<strong>组设置</strong>是共享的，但账户自己的值会一直保留，直到您替换它们。</p>
 
 <section class="workflow-lab" data-workflow="groups" aria-labelledby="groups-example-title">
   <h3 id="groups-example-title">审查群组内的路线变更</h3>
@@ -59,15 +59,15 @@
 </section>
 
 <h2 id="route">在流程中增加一个审核步骤</h2>
-<ol><li>选择<strong>“更改群组路由</strong>”，然后选择连接类型和设置。</li><li>选择<strong>“审查”选项</strong>。审查列出的账户及其各自的路由覆盖设置。</li><li>选择<strong>“准备”并执行检查</strong>。该检查使用全新的 Telegram 传输通道；受支持的 HTTP 路由也会报告其 HTTPS 出口检查结果。</li><li>选择<strong>“应用已选中的连接</strong>”，并检查每个账户的结果。先前正在运行的监控将在应用成功处继续；处于空闲状态的账户仍保持空闲。</li></ol>
-<p>延迟描述了测得的 Telegram 连接建立情况。出口 IP 检查描述了在记录的检查时间点该路由的状态。账户授权和监控状态各有相应的指标；群组变更可能导致不同账户产生不同的结果。</p>
+<ol><li><strong>更改群组路由</strong>，选择类型和设置。</li><li><strong>审查选择</strong>：查看哪些账户会变更，哪些有自己的路由。</li><li><strong>准备并检查</strong>会测试新的 Telegram 连接，并在可能时测试出口 IP。</li><li><strong>应用已检查的连接</strong>，并查看每个结果。正在运行的账户继续运行，空闲的保持空闲。</li></ol>
+<p>延迟是建立 Telegram 连接的时间，出口 IP 是检查时路由显示的地址。结果可能因账户而异。</p>
 
 <h2 id="shared-chats">使用重叠访问权限</h2>
-<p><strong>“多个账户可见的聊天”</strong>功能显示共享来源及可用工作区观察范围。符合条件的频道和超级群组可使用<strong>“与…账户导出”功能，</strong>将单个聊天的历史记录采集任务分配给多个账户。私人聊天和普通群组仍保留在起始账户下，因为其消息编号属于该账户的历史记录。</p>
+<p><strong>多个账户可见的聊天</strong>列出共享来源及其覆盖范围。频道和超级群组可以通过<strong>用 … 个账户导出</strong>由多个账户同时导出。私聊和普通群组不行，它们的消息编号按账户计算。</p>
 
 <h2 id="export-group">将群组导出为包</h2>
-<p><strong>导出组</strong>会生成一个 ZIP 文件，其中包含每个账户的已签名导出文件以及这些文件的已签名列表。原始工作区的身份信息和指纹仍可供验证。利用这些参考信息构建跨账户的叙事；单一的合并时间线仍需单独组装。</p>
-<p>继续进行<a href="../reports/">报告设计</a>、<a href="../case-board/">工作区内的“案件看板”操作</a>，或<a href="../exports/">进行导出验证</a>。</p>
+<p><strong>导出组</strong>会生成一个 ZIP，包含每个账户的签名导出及其签名列表。每份导出都保留自己的指纹用于验证。合并的时间线仍需您自己整理。</p>
+<p>下一步：<a href="../reports/">报告</a>，<a href="../case-board/">Case Board</a>，<a href="../exports/">验证导出</a>。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">完整引用 →</a><a class="next-guide" href="../cases/"><span>下一步</span><strong>跨所有聊天记录进行调查 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../reference/verification/">已测试的内容 →</a></p></footer>
 </main>

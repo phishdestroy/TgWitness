@@ -139,11 +139,6 @@ sẽ không giúp thu được dấu thời gian.</li>
 <p>Việc xác minh thành công chứng minh tính toàn vẹn so với khóa thu thập dữ liệu đáng tin cậy
 và ranh giới được duy trì. Xem <a href="#verification-scope">phạm vi xác minh</a> để biết
 các giả định về độ tin cậy và <a href="../verification/">kết quả xác thực</a> cho các kiểm tra đã thực hiện.</p>
-<p>Các thông báo được gửi qua Apprise giúp người vận hành theo dõi hoạt động trên không gian làm việc và cuộc trò chuyện.
-Chúng chứa tên và số lượng; các đoạn trích từ tin nhắn đã xóa và đã chỉnh sửa là tùy chọn
-và bị tắt theo mặc định. Sử dụng nhật ký đã ký và các tệp xuất để lưu giữ bản ghi.
-Với proxy không gian làm việc, các thông báo sử dụng cùng một đường dẫn; các dịch vụ không thể sử dụng
-nó, cũng như các đường dẫn MTProxy, sẽ bị từ chối.</p>
 <h2 id="handover-extract">Trích đoạn bàn giao<a class="anchor" href="#handover-extract" aria-label="Liên kết đến phần này">#</a></h2>
 <p>Một tệp ZIP đã ký chứa toàn bộ nhật ký không gian làm việc. Khi tòa án, luật sư hoặc bộ phận xử lý lạm dụng chỉ cần
 một số cuộc trò chuyện, một khoảng thời gian hoặc những người cụ thể, tùy chọn <strong>Xuất → Trích xuất bàn giao</strong> sẽ chuẩn bị một bản sao
@@ -227,12 +222,6 @@ bộ lọc, danh sách người tham gia, chỉ báo, chi tiết bản ghi và l
 --evidence ARCHIVE.zip</code> để so sánh chúng với kho lưu trữ đã ký.
 Trình xác minh kiểm tra ID báo cáo, khóa ký, ranh giới tệp lưu trữ và mọi mục đã chọn; các mục bị chỉnh sửa,
 thiếu hoặc trùng lặp sẽ bị từ chối. Ghi chú lựa chọn và thời gian tạo vẫn là siêu dữ liệu chưa được ký.</p>
-<p>Các bản xuất lưu trữ hiện tại lưu trữ các khối dữ liệu người xem trong <code>viewer/*.html</code>. Mỗi khối được tải trong một khung
-chế độ sandbox, cho phép chạy skript nhưng <strong> không có quyền truy cập cùng nguồn với </strong>, và đăng nội dung văn bản JSON của nó vào báo cáo.
-Báo cáo kiểm tra nguồn tin nhắn và SHA-256 của nó so với mô tả có chữ ký trước khi hiển thị.
-CSP của chính báo cáo chỉ cho phép tập lệnh ứng dụng đã được băm của nó. Dữ liệu bị thiếu có thể được khôi phục bằng cách
-chọn tệp ZIP phù hợp trong tab Kiểm tra; dữ liệu được đọc từ tệp ZIP sẽ được phân tích cú pháp mà không được thực thi.
-Các báo cáo được xuất trước đó vẫn giữ trình xem nhúng riêng và vẫn có thể xác minh được.</p>
 <p>Khoảng trống giữa các số tin nhắn chỉ được hiển thị đối với luồng trò chuyện đầy đủ, chưa qua lọc và theo thứ tự tăng dần. Việc ẩn một
 danh mục hoặc không tải được một khối dữ liệu không được coi là bằng chứng cho việc thiếu
 tin nhắn. Tính năng đánh dấu tìm kiếm hoạt động trên văn bản thuần túy trước khi thực hiện mã hóa HTML, đồng thời giữ nguyên các thẻ đánh dấu nguyên văn.</p>
@@ -245,20 +234,6 @@ bằng ngôn ngữ của báo cáo, tiếp theo là hướng dẫn đầy đủ 
 tệp được liệt kê trong đó, không bao gồm chính tệp này, <code>manifest.json</code> và <code>manifest.sig</code>; bản kê khai có chữ ký
 cũng bao gồm <code>SHA256SUMS</code>. Giữ nguyên tệp ZIP gốc và lưu các tệp làm việc bên ngoài
 thư mục đã giải nén. Các báo cáo PDF bao gồm các dấu trang phần và mã nhận dạng vụ việc/báo cáo ở các trang sau.</p>
-<p>Cài đặt báo cáo được lưu theo từng không gian làm việc. Ngôn ngữ báo cáo có thể theo ngôn ngữ của bảng điều khiển hoặc được cố định;
-việc chỉ định ngôn ngữ cụ thể trong yêu cầu xuất dữ liệu sẽ ghi đè lựa chọn đó chỉ cho lần xuất đó. Mọi ngôn ngữ
-của bảng điều khiển đều được chấp nhận, bao gồm cả bốn ngôn ngữ viết từ phải sang trái.</p>
-<p>Công tắc bản ghi nhật ký điều khiển trình xem HTML và bản ghi PDF. Bản ghi đầy đủ JSON là
-một tùy chọn chi tiết HTML: khi được bật, trình xem sẽ chứa bản ghi đã xuất chính xác, bao gồm cả
-bản ghi được thu gọn trong quá trình chuyển giao. Việc tắt tùy chọn này không làm thay đổi tệp nhật ký chính thức. Chức năng
-xem trước ảnh áp dụng cho cả nhật ký trò chuyện và nhật ký HTML. Các chuỗi hoạt động liên tiếp có thể được thu gọn mà không
-cần xóa bản ghi; việc mở rộng các chuỗi dài sẽ tải các hàng của chúng theo từng phần.</p>
-<p><code>part_size</code> là số lượng mục tối đa cho mỗi tệp dữ liệu trình xem (500–100.000), và kích thước bản ghi
-tối đa được bao gồm trong một tệp PDF. Các khối dữ liệu của trình xem cũng được chia nhỏ tại giới hạn 16 MiB. Các bản ghi PDF dài hơn
-sẽ bị loại bỏ kèm theo liên kết rõ ràng đến các tệp nguồn có chữ ký và trình xem HTML. Một báo cáo HTML độc lập
-chứa tối đa 20.000 mục hoặc 32 MiB dữ liệu mục; khi vượt quá giới hạn này, nó sẽ loại bỏ các mục đó và
-hướng người đọc đến kho lưu trữ. Các giới hạn hiển thị này không bao giờ cắt bớt các tệp nguồn đã ký.
-Cài đặt phông chữ PDF kết hợp các phông chữ CJK khi cần thiết: một phông chữ tiếng Trung đơn lẻ có thể thiếu chữ Hangul của Hàn Quốc.</p>
 <h3 id="the-chat-at-export-time">Cuộc trò chuyện tại thời điểm xuất<a class="anchor" href="#the-chat-at-export-time" aria-label="Liên kết đến phần này">#</a></h3>
 <p>Một bản xuất cuộc trò chuyện ghi lại những gì Telegram đã nêu về cuộc trò chuyện khi quá trình xuất bắt đầu: các nhãn riêng của Telegram
 (<code>scam</code>, <code>fake</code>, <code>restricted</code> kèm lý do, <code>verified</code>), tên người dùng, mô tả, số lượng
@@ -473,10 +448,6 @@ xác minh thất bại, hệ thống sẽ không công bố bất kỳ tệp nà
 và ngày tháng được trả về với thời hạn được gửi khi tải lên (dung sai làm tròn là một giây). Thời hạn đã hết hạn,
 không hợp lệ hoặc bị rút ngắn sẽ không được coi là đã được xác minh. Trạng thái báo cáo đối tượng được lấy mẫu
 mà thời hạn lưu giữ của nó đã được đọc lại cho lần tải lên đó.</p>
-<p>Tiến trình sao chép được giới hạn trong phạm vi đích và khóa mã hóa. Việc thay đổi điểm cuối, thùng lưu trữ
-hoặc tiền tố sẽ khởi động quá trình sao chép hoàn toàn nhật ký, tệp phương tiện và các điểm kiểm tra được lưu giữ cục bộ sang
-đích đó. Tiến trình cũ chưa được giới hạn phạm vi sẽ được bảo toàn nhưng chỉ được tái thực thi một lần sau khi nâng cấp. Các bản xuất
-lịch sử trò chuyện đã bị xóa khỏi hộp thư đi cục bộ vẫn được giữ nguyên tại đích ban đầu của chúng.</p>
 <p>Các tệp phương tiện cục bộ bị thiếu hoặc bị hỏng sẽ được báo cáo là lỗi của lần xử lý và con trỏ phương tiện sẽ được giữ lại trước
 vị trí đó, để tệp này được thử lại trong lần xử lý tiếp theo; các tệp, điểm kiểm tra và tệp xuất sau đó vẫn
 được sao chép. Quá trình khôi phục sẽ kiểm tra
@@ -545,9 +516,6 @@ chỉ hoạt động của các phiên khác mới được tính là sự thay 
 <p>Những gì họ không thể hiện: drand chỉ chứng minh thứ tự của các bản ghi so với thời gian công khai,
 và danh sách thiết bị là tuyên bố của Telegram thông qua bộ thu thập, được bộ thu thập ký tên
 giống như mọi bản ghi khác.</p>
-<p>Đã thử nghiệm vào ngày 1 tháng 11 năm 2026: <code>tools/check_evidence_witnesses.py --live</code> đã tạo một vòng giao dịch thực tế từ
-<code>drand.cloudflare.com</code>, xuất nhật ký và xác nhận vòng giao dịch với <code>drand.cloudflare.com</code>
-và <code>api.drand.sh</code>; danh sách thiết bị đã được chạy với các phản hồi mô phỏng từ Telegram, không phải tài khoản thực.</p>
 <p><strong> Nhật ký Cloudflare Gateway </strong> (<code>cloudflare.gateway_dns</code>). Đối với máy chủ giải quyết qua
 Cloudflare Gateway (<a href="../high-assurance/#cloudflare-as-an-outside-witness"> Gateway DNS </a>), mỗi
 lần sao chép sẽ sao chép những gì Gateway đã ghi lại kể từ lần sao chép trước: một bản ghi cho mỗi khoảng thời gian tối đa ba

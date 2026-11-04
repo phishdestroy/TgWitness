@@ -62,10 +62,3 @@ Grup sayfası `/groups/<id>` üyeleri, dikkat edilmesi gerekenleri ve birkaç he
 Bir oturum içeren veya daha önce kurulumu tamamlanmış bir çalışma alanı, sihirbazı göstermez. Sayfa yüklendiğinde bu alanların değerleri bir hedefle değiştirilmez. Bir alanı gizlemek, özelliği devre dışı bırakmaz veya değerini silmez.
 
 Boyut ve süre tahmini, seçilen en fazla üç sohbeti ve her birinden en fazla 20 mesajı okur. Bu bir tahmindir: Telegram sınırlarını, belirli bir sunucunun hızını veya her sohbetteki dosyaları öngörmez.
-
-```
-python tools/test_settings_hub.py
-python tools/test_group_settings.py
-python tools/check_group_settings_browser.py
-python tools/check_first_run.py
-```

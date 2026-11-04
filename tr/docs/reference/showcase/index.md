@@ -54,12 +54,3 @@ Parmak izi, ayrı olarak güvenilir bir kaynaktan gelmelidir. Kendi elinizde sak
 Vitrin yöneticisindeki **Revoke (İptal Et)** seçeneğini veya mevcut **Access (Erişim)** bölümünü kullanarak bağlantıyı kapatın ve tüm oturumlarını sonlandırın. Bir istek, erişimin sona erdiğini algıladığında ziyaretçi, görüntülenen kayıtları siler. Her istek sırasında son kullanma tarihi ve izinler kontrol edilir. Vitrin izinleri, yerinde sıradan panel erişimine dönüştürülemez; modları değiştirmek için yeni bir izin oluşturun.
 
 Sayfayı, kurulumun mevcut HTTPS adresi üzerinden sunun. Bir bağlantının yayınlanması yeni bir bağlantı noktası açmaz, tünel oluşturmaz veya DNS'yi değiştirmez. HTML ve API kullanıcının kurulumunda kalır. Vitrin ziyaretçisi, bu erişimle normal mesaj, profil, medya, dışa aktarma veya yönetim API'lerini kullanamaz.
-
-## Yerel regresyon kontrolleri
-
-```
-python tools/check_showcase.py
-python tools/check_showcase_browser.py
-```
-
-Her ikisi de sentetik kayıtlar ve yerel bir HTTP sunucusu kullanır. Telegram'a bağlanmazlar.

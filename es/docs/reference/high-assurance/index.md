@@ -247,25 +247,11 @@ El DNS de la puerta de enlace se encarga del resolutor del sistema. El DNS sobre
 
 Cloudflare no puede ver el interior del cifrado de Telegram, otros dispositivos de la cuenta de Telegram (la lista de dispositivos del modo «evidence» los registra desde el lado de Telegram) ni el hipervisor del proveedor.
 
-El 1 de noviembre de 2026, el DNS de Gateway se ejecutó contra la nube real de Hetzner y una cuenta gratuita de Cloudflare: Hetzner aceptó las reglas de salida, el servidor instaló la versión v0.7.0 y todas las consultas pasaron por Gateway a través de TLS, el túnel rápido funcionó a través de ese cortafuegos y `verify` leyó los 19 nombres del servidor desde Cloudflare (espejos de Ubuntu y Hetzner, GitHub, PyPI, NTP, el túnel, ntfy.sh). El panel copió 36 consultas en ocho ventanas a un diario y `verify.py` las resumió sin omisiones; `destroy` retiró el servidor y el cortafuegos y abandonó la ubicación compartida.
-
 ## Lo que esto no establece
 
 - El proveedor y su personal controlan el hipervisor, los discos y la red.
 - Las mediciones del servidor son facilitadas por el propio recopilador.
 - El contenido de las reglas de cortafuegos anteriores no figura en todos los registros de los proveedores; solo Linode conserva las versiones de las reglas.
 - No aporta nada nuevo sobre la autenticidad de los mensajes; véase [«Evidencia](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/)».
-
-## Probado aquí
-
-La lógica de implementación, bloqueo y verificación se comprueba mediante pruebas automatizadas con simulaciones de las API de Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail y Cloudflare, creadas a partir de sus referencias de API publicadas, y la firma de solicitudes de AWS según los ejemplos publicados por AWS. `tools/check_cloud_wizard.py` Ejecuta el asistente de servidor del panel de la misma manera, con un dominio y con un túnel rápido. `tools/check_tdx.py` verifica las certificaciones TDX reales de Intel procedentes de dcap-qvl y dstack hasta el certificado raíz de Intel (códigos fuente en [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)); `tools/check_phala.py`ejecuta las operaciones de despliegue, verificación, registro, destrucción y el asistente del panel en una Phala Cloud simulada cuyas certificaciones proceden de una PKI falsificada con la estructura de la de Intel. La ruta de Phala aún no se ha probado en la propia Phala Cloud.
-
-El 1 de noviembre de 2026, la ruta del túnel rápido se ejecutó contra el **Hetzner Cloud** real (Núremberg, `cpx22`, TgWitness v0.7.0), ntfy.sh real y GitHub, tanto desde el panel como desde el código:
-
-- Comprobación del precio y, a continuación, creación mediante los botones del panel: el servidor se pone en marcha tras 13 segundos, declaración firmada con los hash de la instancia y del instalador coincidentes tras unos dos minutos;
-- el propio panel del servidor se abrió a través de su dirección trycloudflare.com y aceptó el token del panel; sin el token, devuelve un código de error 401;
-- Tras un reinicio a través de la API de Hetzner, el servidor publicó una nueva dirección firmada; **«Find the current address»** la encontró, la dirección antigua dejó de responder y la clave de firma se mantuvo igual; se ignoró una publicación sin firmar en un tema de ntfy.sh;
-- `verify` respecto a la API de Hetzner: servidor, cortafuegos sin reglas de entrada, declaración, enlace, mediciones del host, arranque y el hash de origen de una copia de la versión v0.7.0 superaron las pruebas; las comprobaciones de Cloudflare no estaban disponibles, tal y como se ha descrito anteriormente; el instalador difería del que utiliza la versión v0.7.0 y coincidía byte a byte con el que compila el código de esta versión;
-- Al eliminarla del panel, se eliminaron exactamente el servidor y el cortafuegos etiquetados en la implementación; los demás servidores y cortafuegos del mismo proyecto no se vieron afectados.
 
 Aún no se ha probado con cuentas reales: una implementación bajo tu propio dominio (túnel de Cloudflare y DNS), los demás proveedores, una implementación de depuración y `lock`, una cuenta de Telegram en dicho servidor, y las actualizaciones en tiempo real de versiones posteriores a través de un túnel rápido. Comprueba la primera implementación en cada proveedor con `plan`, una implementación de depuración y `verify` antes de utilizarlo en un caso.

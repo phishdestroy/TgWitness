@@ -32,8 +32,6 @@ Perfis privados e credenciais de conta WARP são criptografados com o cofre do e
 
 Os perfis do WireGuard enviados devem conter uma interface e um par, rotas IPv4 e IPv6 completas, e não devem conter hooks, includes, substituições de ambiente ou listeners adicionais. Os endereços de endpoints públicos são resolvidos e fixados antes da inicialização. Utilize uma VPN externa ou o gateway SOCKS5 para OpenVPN/IPsec e endpoints privados.
 
-As verificações sintéticas são `python tools/check_guided_connection.py` e `python tools/check_guided_connection_browser.py`. O `python tools/check_portable_routes_runtime.py` opcional baixa auxiliares verificados e testa seu ciclo de vida real do processo local em relação a dispositivos de loopback. Ele não registra um dispositivo Cloudflare nem usa uma conta Telegram.
-
 ## Métodos de autenticação
 
 **O ID da API e o hash da API identificam um aplicativo; eles não substituem o login da conta.** Eles são opcionais no TgWitness. Prioridade: um par inserido no formulário, em seguida, um proveniente de um arquivo JSON de conta importado, depois o par salvo no espaço de trabalho e, por fim, o conjunto integrado de 50 pares públicos, testados em ordem aleatória com rotação automática quando o Telegram recusa um. Apenas o par do Telegram Desktop (2040) é enviado com uma descrição correspondente do cliente Telegram Desktop. Seu próprio par, obtido nas Ferramentas de Desenvolvimento de API em [my.telegram.org,](https://my.telegram.org) pode ser usado com todas as suas contas; cada conta continua tendo sua própria autorização.
@@ -70,8 +68,6 @@ python -m tgwitness.sessions account.session --out account.tgwitness-session
 
 1. Em **“Adicionar conta” → “Arquivos”**, carregue o resultado ou cole sua sequência de caracteres e continue.
 2. Verifique o ID numérico da conta exibido, selecione as fontes e inicie a observação.
-
-O conversor abre o SQLite em modo somente leitura, não realiza nenhuma atualização de esquema nem solicitação de rede, e não imprime a sessão. Ele verifica a versão do esquema, os tipos de tabela, uma única linha da sessão, IP/porta/DC e comprimento da chave. A entrada via CLI é limitada a 64 MiB; o texto da StringSession é limitado a 4 KiB. A conversão no painel envia arquivos para o servidor TgWitness autenticado, processa-os na memória e retorna as credenciais normalizadas para aquele navegador sem salvar os originais enviados. Utilize HTTPS para um servidor remoto.
 
 **O arquivo convertido é uma senha de acesso à conta não criptografada.** Mantenha-o em um armazenamento protegido e nunca o envie para um serviço de conversão de terceiros. O TgWitness armazena a sessão autorizada em seu cofre criptografado. Copiar uma sessão não cria uma autorização separada: não execute clientes simultâneos com chaves de autenticação clonadas e não presuma que as atualizações sejam entregues de forma independente.
 
@@ -115,15 +111,9 @@ A lista integrada combina quatro fontes: [SoliSpirit/mtproto](https://github.com
 
 Enquanto as rotas automáticas estiverem ativas, as listas são atualizadas a cada hora e as verificações de transporte são executadas a cada dez minutos por padrão. Esses intervalos são configuráveis. **A atualização de listas públicas** solicita uma atualização; a simples visualização da lista não altera uma rota manual salva.
 
-Cada resposta do feed é limitada a 1 MiB, com um tempo limite de solicitação de oito segundos e um prazo total de download de 20 segundos; redirecionamentos são rejeitados. São retidas e desduplicadas até 64 entradas compatíveis por fonte. O analisador aceita segredos hexadecimais e base64url compatíveis, bem como o feed JSON. TLS falso `ee`, links inválidos, literais de IP privados/reservados e nomes de host locais são ignorados. Os nomes de host são resolvidos e verificados antes do uso, e o IP escolhido é fixado para essa conexão. A reaquisição automática resolve um nome de host novamente; reaplique uma entrada manual para resolvê-lo novamente.
-
-Respostas de feed com falha, vazias ou incompatíveis mantêm o instantâneo anterior da fonte. As atualizações são atômicas, serializadas e limitadas a uma tentativa por minuto por espaço de trabalho. Um teste de transporte bem-sucedido estabelece conectividade, não anonimato nem a integridade da captura.
-
 **O tráfego do Telegram e as solicitações HTTPS utilizam rotas diferentes.** Os downloads de listas utilizam uma conexão HTTPS separada e a rota de solicitação externa fornecida. O `TGWITNESS_PROXY_FEED_PROXY` substitui explicitamente essa rota por um proxy HTTP/SOCKS5; ambas as variantes do coletor Compose a encaminham. O pool em segundo plano segue o espaço de trabalho principal. Nenhuma sessão do Telegram, credenciais de API, token de painel ou token de bot é enviada aos provedores de feed. Os nomes dos provedores, as datas dos instantâneos e a rota de download aparecem na seção **“De onde vem a lista**”.
 
 Um MTProxy transporta apenas tráfego do Telegram. Operações HTTP do espaço de trabalho, como registros de data e hora, notificações, cópias externas e verificações de fonte, utilizam um proxy SOCKS5/HTTP separado quando configurado; caso contrário, utilizam a rota SOCKS5/HTTP da conta. Na ausência de ambos, a opção “Ocultar endereço” recusa a solicitação; os outros modos permitem a conexão direta. Solicitações externas podem ser desativadas. Um proxy de download de feed explicitamente configurado permanece como uma substituição separada do operador. O serviço de testemunha independente mantém sua própria rota.
-
-Solicitações HTTP externas exclusivamente públicas por meio de proxies SOCKS5 ou HTTP resolvem o destino com o DNS do Cloudflare sobre HTTPS em `https://1.1.1.1/dns-query`, por meio desse mesmo proxy. Apenas o nome do host e os tipos de consulta A/AAAA são encaminhados ao resolvedor; URLs de serviço, credenciais e conteúdos de notificação não são incluídos. O TLS verifica o certificado do resolvedor para seu endereço IP. Ambas as famílias de endereços são verificadas, e qualquer resposta privada, de loopback, link-local ou reservada rejeita a solicitação. As conexões utilizam um endereço numérico verificado, mantendo o HTTP Host original do serviço e o nome do certificado TLS. O encaminhamento HTTP de notificações e as solicitações CONNECT utilizam as mesmas verificações de destino. Uma falha no DNS interrompe a solicitação sem DNS de destino local ou um fallback direto. Respostas bem-sucedidas são armazenadas em cache na memória por rota de proxy por no máximo 30 segundos e não além de seu TTL de DNS; o cache é limitado a 128 entradas. O próprio nome de host do proxy pode utilizar DNS local. Falhas em SOCKS e CONNECT podem tentar outro endereço verificado antes de enviar o corpo da solicitação de serviço. O encaminhamento HTTP simples relata uma solicitação com falha sem repetir automaticamente seu corpo por meio de outro endereço.
 
 Para serviços privados gerenciados por operadores, a configuração existente do ambiente de servidor `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` permite destinos privados e mantém a resolução do nome de host no lado do proxy. Ela não pode ser ativada a partir do painel. O modo somente público rejeita destinos `.onion` antes de consultar o resolvedor público; os serviços onion do Tor exigem essa configuração explícita de destino privado e um proxy adequado. Esse comportamento do DNS se aplica a operações HTTP externas, não ao transporte do Telegram. A Cloudflare documenta o [endpoint JSON do DNS](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
@@ -174,8 +164,6 @@ O SOCKS5 e o HTTP CONNECT simples, por si só, não criptografam as credenciais 
 
 **A proteção de armazenamento** na seção “Conta” exibe esses estados. O token do painel é um segredo de acesso, não uma senha de criptografia. Ele concede acesso de administrador; [os tokens emitidos](https://phishdestroy.github.io/TgWitness/pt/docs/reference/access/) podem ter seu escopo restrito a contas e chats. Os espaços de trabalho compartilham o processo anfitrião e não são locatários isolados.
 
-Uma demonstração sintética isolada, iniciada explicitamente, pode ser aberta automaticamente por meio de uma conexão de loopback direta. Isso utiliza um recurso com duração de vida do processo separada; tal recurso não revela o token do painel configurado nem concede acesso a espaços de trabalho reais. Solicitações remotas, por proxy ou de origem cruzada não podem obter/utilizar esse recurso de entrada automática. Essa conveniência não elimina a barreira de autenticação para dados reais de contas.
-
 O BitLocker, o LUKS, o FileVault ou um volume criptografado gerenciado podem proteger o armazenamento de acordo com seus respectivos modelos de ameaças. Um administrador de uma máquina em execução e desbloqueada ainda pode ler os dados. Inclua SQLite WAL/SHM, mídia, exportações temporárias, swap, backups e downloads do navegador no planejamento de armazenamento. Um volume do Docker não é criptografado simplesmente por ser um volume. O TgWitness não implementa o SQLCipher nem a criptografia de objetos.
 
 ## Chave mestra externa
@@ -203,17 +191,3 @@ Cada espaço de trabalho recebe um “salt” público aleatório e sua própria
 Todos os espaços de trabalho derivam da mesma chave mestra; seu comprometimento afeta toda a instalação. O processo em execução pode descriptografar segredos. Trata-se de um HSM ou KDF de senha. Senhas definidas arbitrariamente por usuários não são aceitas no lugar de uma chave aleatória.
 
 Mantenha a chave existente para instalações já em uso até que uma migração planejada seja implementada e verificada. A exclusão de `vault.key` ou a substituição de uma chave mestra pode comprometer o acesso a sessões/chaves de assinatura. Mantenha backups criptografados e chaves separadamente e teste a recuperação em uma instância isolada.
-
-## Fontes e escopo da verificação
-
-Revisado em 26 de outubro de 2026:
-
-- https://core.telegram.org/api/auth
-- https://core.telegram.org/api/obtaining_api_id
-- https://docs.telethon.dev/en/stable/basic/signing-in.html
-- https://docs.telethon.dev/en/stable/concepts/sessions.html
-- https://core.telegram.org/mtproto/mtproto-transports
-- https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp
-- Telethon 1.45.0: SQLiteSession, StringSession, `Connection._proxy_connect`, `TcpMTProxy.normalize_secret` e métodos de download.
-
-Os testes locais abrangem cenários de loopback SOCKS5/HTTP CONNECT, sessões sintéticas do SQLite, isolamento de rota, exclusão de segredos e recusa em caso de chave ausente. Eles não estabelecem a interoperabilidade real entre o Telegram e o proxy nem o comportamento do MTProxy em tempo real. Consulte [os arquivos VERIFICATION.md](https://phishdestroy.github.io/TgWitness/pt/docs/reference/verification/) e [LIVE_ACCEPTANCE.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md).

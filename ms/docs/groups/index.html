@@ -32,12 +32,12 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../">Home</a> <span aria-hidden="true">/</span> <a href="../">Dokumentasi</a> <span aria-hidden="true">/</span> <span aria-current="page">Kelola sekumpulan akaun</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentasi / 13</p><h1>Kelola sekumpulan akaun</h1><p class="guide-outcome">Kelola beberapa akaun pengumpulan sekaligus sambil memastikan rekod setiap akaun dan identiti tandatangan masing-masing berasingan.</p>
-<p>Kumpulan akaun menggabungkan status sambungan, kawalan pemerhatian, tetapan kongsi dan eksport ke dalam satu paparan kerja. Ia berguna apabila beberapa akaun merangkumi siasatan yang sama atau memerlukan tetapan operasi yang konsisten.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentasi / 13</p><h1>Kelola sekumpulan akaun</h1><p class="guide-outcome">Jalankan beberapa akaun bersama, setiap satu masih dengan rekod dan kuncinya sendiri.</p>
+<p>Kumpulan meletakkan status sambungan, mula/jeda, tetapan dikongsi dan eksport pada satu skrin. Berguna apabila beberapa akaun mengusahakan kes yang sama.</p>
 
 <h2 id="overview">Buka gambaran keseluruhan kumpulan</h2>
-<p>Dalam <strong>Akaun</strong>, buka kumpulan. Setiap akaun memaparkan status pemerhatiannya, laluan sambungan, kelewatan laluan terkini yang diukur apabila pemeriksaan semasa berjaya, dan mesej terakhir disimpan. Pautan <strong>&#x27;Perlukan Perhatian&#x27;</strong> ke akaun yang memerlukan kerja; <strong>&#x27;Betulkan&#x27;</strong> membuka ruang kerja dan kawalan berkaitan.</p>
-<p><strong>Mulakan Semua</strong> dan <strong>Tunda Semua</strong> bertindak pada akaun yang layak selepas pengesahan. <strong>Tetapan kumpulan</strong> berkongsi tetapan terpilih; akaun dengan nilai tersendiri mengekalkan nilai tersebut sehingga anda memilih untuk menggantikannya.</p>
+<p>Buka kumpulan dalam <strong>Akaun</strong>. Setiap akaun menunjukkan keadaan, laluan, kependaman dan mesej tersimpan terakhir. <strong>Perlukan Perhatian</strong> menyenaraikan yang rosak, <strong>Baiki</strong> membawa anda terus ke sana.</p>
+<p><strong>Mulakan semua</strong> / <strong>Jeda semua</strong> bertanya sebelum bertindak. <strong>Tetapan kumpulan</strong> dikongsi, tetapi nilai akaun sendiri kekal sehingga anda menggantikannya.</p>
 
 <section class="workflow-lab" data-workflow="groups" aria-labelledby="groups-example-title">
   <h3 id="groups-example-title">Melihat semula perubahan laluan dalam kumpulan</h3>
@@ -59,15 +59,15 @@
 </section>
 
 <h2 id="route">Ubah laluan dengan langkah semakan</h2>
-<ol><li>Pilih <strong>Ubah laluan kumpulan</strong>, kemudian pilih jenis sambungan dan tetapan.</li><li>Pilih <strong>Pilihan Semakan</strong>. Semak akaun yang disenaraikan dan penafian laluan individu mereka.</li><li>Pilih <strong>Sediakan dan semak</strong>. Semakan menggunakan saluran Telegram baharu; laluan HTTP yang disokong juga melaporkan pemeriksaan keluar HTTPS mereka.</li><li>Pilih <strong>Terapkan sambungan yang diperiksa</strong> dan periksa keputusan setiap akaun. Pengawasan yang sedang dijalankan sebelum ini disambung apabila aplikasi berjaya; akaun tidak aktif kekal tidak aktif.</li></ol>
-<p>Latensi menerangkan penyediaan sambungan Telegram yang diukur. Semakan IP keluar menerangkan laluan tersebut pada masa semakan yang direkodkan. Pengesahan akaun dan kesihatan pemantauan mempunyai penunjuk masing-masing; perubahan kumpulan boleh berakhir dengan hasil yang berbeza bagi setiap akaun.</p>
+<ol><li><strong>Tukar laluan kumpulan</strong>, pilih jenis dan tetapan.</li><li><strong>Semak pilihan</strong>: lihat akaun mana yang berubah dan mana yang mempunyai laluan sendiri.</li><li><strong>Sedia dan semak</strong> menguji sambungan Telegram baharu, serta IP keluar jika boleh.</li><li><strong>Guna sambungan yang disemak</strong> dan lihat setiap hasil. Akaun yang berjalan menyambung semula, yang terbiar kekal terbiar.</li></ol>
+<p>Kependaman ialah masa persediaan sambungan Telegram, IP keluar ialah apa yang ditunjukkan laluan semasa semakan. Hasil boleh berbeza bagi setiap akaun.</p>
 
 <h2 id="shared-chats">Gunakan akses bertindih</h2>
-<p><strong>Perbualan beberapa akaun </strong>memaparkan sumber yang dikongsi dan liputan pemerhatian ruang kerja yang tersedia. Saluran dan superkumpulan yang layak boleh menggunakan <strong>Eksport dengan … akaun</strong> untuk membahagikan pemerolehan sejarah satu perbualan. Perbualan peribadi dan kumpulan biasa kekal dengan akaun asal kerana nombor mesej mereka tergolong dalam sejarah akaun tersebut.</p>
+<p><strong>Sembang yang dilihat beberapa akaun</strong> menyenaraikan sumber dikongsi dan liputannya. Saluran dan superkumpulan boleh dieksport oleh beberapa akaun sekali gus dengan <strong>Eksport dengan … akaun</strong>. Sembang peribadi dan kumpulan asas tidak boleh, nombor mesejnya adalah mengikut akaun.</p>
 
 <h2 id="export-group">Eksport kumpulan sebagai pakej</h2>
-<p><strong>Kumpulan eksport</strong> mencipta satu fail ZIP yang mengandungi eksport berasingan setiap akaun yang ditandatangani dan satu senarai berasingan fail tersebut yang ditandatangani. Identiti dan cap jari ruang kerja asal kekal tersedia untuk pengesahan. Bina naratif merentas akaun menggunakan rujukan tersebut; satu garisan masa gabungan tunggal masih disusun secara berasingan.</p>
-<p>Teruskan dengan <a href="../reports/">reka bentuk laporan</a>, <a href="../case-board/">papan kes dalam ruang kerja</a>, atau <a href="../exports/">pengesahan eksport</a>.</p>
+<p><strong>Eksport kumpulan</strong> memberikan satu ZIP dengan eksport bertandatangan setiap akaun dan senarai bertandatangannya. Setiap satu mengekalkan cap jarinya sendiri untuk pengesahan. Garis masa gabungan masih anda bina sendiri.</p>
+<p>Seterusnya: <a href="../reports/">laporan</a>, <a href="../case-board/">Case Board</a>, <a href="../exports/">mengesahkan eksport</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/operations/">Rujukan penuh →</a><a class="next-guide" href="../cases/"><span>Langkah seterusnya</span><strong>Siasat di semua sembang →</strong></a><p>Panduan ini menerangkan pelaksanaan semasa. Keputusan pengesahan dan jurang yang masih ada didokumenkan secara berasingan. <a href="../reference/verification/">Apa yang telah diuji →</a></p></footer>
 </main>

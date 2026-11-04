@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../">Dokumentasi</a> <span aria-hidden="true">/</span> <span aria-current="page">Hubungkan akun</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentasi / 05</p><h1>Hubungkan akun</h1><p class="guide-outcome">Satu ruang kerja menampung satu akun, jurnalnya, dan kunci penandatanganannya.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentasi / 05</p><h1>Hubungkan akun</h1><p class="guide-outcome">Satu ruang kerja = satu akun, jurnalnya, dan kuncinya.</p>
 <h2 id="sign-in">Pilih cara masuk</h2>
-<p>Buka <strong>Akun</strong>, tambahkan ruang kerja, dan buka pengaturan koneksinya. Gunakan akun khusus untuk pengamatan.</p>
-<ul><li><strong>Kode QR:</strong> pindai kode ini dari pengaturan perangkat Telegram dan konfirmasi login baru.</li><li><strong>Nomor telepon:</strong> masukkan nomor telepon, kode yang dikirimkan oleh Telegram, dan kata sandi verifikasi dua langkah Anda jika fitur tersebut diaktifkan.</li><li><strong>Impor sesi:</strong> impor sesi yang didukung atau data Telegram Desktop milik Anda.</li></ul>
-<p>Pilih profil API bawaan atau masukkan ID API dan hash Anda sendiri. Profil API mengidentifikasi klien; profil ini tidak digunakan untuk masuk ke akun atau membuat koneksi menjadi anonim.</p>
+<p><strong>Akun</strong> → tambah ruang kerja → pengaturan koneksi. Gunakan akun terpisah untuk ini.</p>
+<ul><li><strong>Kode QR:</strong> pindai dari layar Perangkat di Telegram lalu konfirmasi.</li><li><strong>Nomor telepon:</strong> nomor, kode, lalu kata sandi 2FA jika ada.</li><li><strong>Impor sesi:</strong> berkas sesi Anda sendiri atau data Telegram Desktop.</li></ul>
+<p>Gunakan profil API bawaan atau API ID dan hash Anda sendiri. Itu hanya mengenali aplikasinya, tidak memasukkan Anda dan tidak menyembunyikan apa pun.</p>
 <details><summary>Perlu proxy terlebih dahulu?</summary><p>Anda dapat <a href="../proxies/">memilih dan menguji rute koneksi</a> sebelum masuk. Setiap akun memiliki rute tersendiri.</p></details>
 <h2 id="sources">Pilih apa yang ingin diamati</h2>
-<ol><li>Buka daftar sumber dan pilih obrolan, grup, atau saluran yang Anda butuhkan.</li><li>Periksa pengaturan pengumpulan data, termasuk media, sebelum memulai pemantauan.</li><li>Jalankan pengumpul data dan periksa koneksinya serta aktivitas terbarunya.</li></ol>
-<p>Akun tersebut harus dapat mengakses sumbernya. Peran yang berbeda dapat melihat peristiwa yang berbeda; jurnal tersebut mencerminkan apa yang diterima oleh akun tersebut.</p>
-<p>Untuk kasus yang mencakup seluruh akun, gunakan <strong>Sources → Observation scope → Investigation mode</strong>, tinjau pengaturannya, lalu tekan <strong>Save scope</strong>. <a href="../cases/">Panduan penyelidikan lengkap</a> ini mencakup semua jenis obrolan yang terlihat, riwayat lama, profil pengguna, referensi lintas obrolan, dan penyerahan bukti.</p>
+<ol><li>Pilih obrolan, grup, atau kanal yang Anda perlukan.</li><li>Periksa pengaturan pengumpulan, termasuk media.</li><li>Jalankan lalu periksa koneksi dan aktivitas terbaru.</li></ol>
+<p>Akun harus punya akses. Admin dan anggota melihat hal yang berbeda; jurnal menunjukkan apa yang diterima akun ini.</p>
+<p>Seluruh akun? <strong>Sumber → Cakupan pengamatan → Mode investigasi</strong>, periksa, lalu <strong>Simpan cakupan</strong>. Panduan lengkap: <a href="../cases/">menyelidiki seluruh akun</a>.</p>
 <h2 id="check">Periksa jalur lengkapnya</h2>
-<p>Di grup uji coba yang Anda kendalikan, kirimkan pesan unik dari akun lain, edit pesan tersebut, lalu hapus. Pastikan ketiga peristiwa tersebut tercatat dalam jurnal, kemudian <a href="../exports/">ekspor dan verifikasi</a> catatan tersebut.</p>
-<p class="callout">Status &quot;terhubung&quot; menandakan bahwa koneksi telah terjalin. Pesan uji yang terekam menandakan bahwa peristiwa tertentu telah sampai ke ruang kerja ini.</p>
+<p>Di grup uji Anda, kirim pesan dari akun lain, sunting, lalu hapus. Ketiga peristiwa harus muncul di jurnal. Lalu <a href="../exports/">ekspor dan verifikasi</a>.</p>
+<p class="callout">"Terhubung" berarti koneksinya berfungsi. Pesan uji yang tertangkap berarti peristiwa benar-benar sampai.</p>
 <h2 id="more">Tambahkan akun lain</h2>
-<p>Buat ruang kerja lain di <strong>bagian Akun</strong> dan ulangi proses penyiapan. Simpan sidik jari kunci penandatanganan setiap akun agar Anda dapat mengidentifikasi ekspornya nanti.</p>
+<p>Ruang kerja baru di <strong>Akun</strong>, langkah yang sama. Catat sidik jari kunci setiap akun supaya ekspornya bisa dibedakan nanti.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/accounts/">Referensi lengkap →</a><a class="next-guide" href="../exports/"><span>Langkah selanjutnya</span><strong>Ekspor dan verifikasi →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../reference/verification/">Apa yang telah diuji →</a></p></footer>
 </main>

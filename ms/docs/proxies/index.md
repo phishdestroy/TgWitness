@@ -2,45 +2,45 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/proxies/
 
-Pastikan akaun kekal disambungkan. Tetapkan secara eksplisit bila laluannya boleh menggunakan alamat pelayan.
+Pastikan akaun kekal dalam talian, dan tentukan sendiri sama ada ia boleh menunjukkan IP pelayan anda.
 
 ## Pilih mod IP terlebih dahulu
 
 01**Sembunyikan alamat**
 
-Gunakan proksi. Apabila tiada yang berfungsi, tunggu tanpa sambungan Telegram terus.
+Proksi sahaja. Jika tiada yang berfungsi, ia menunggu.
 
 02**Direktori sebagai pilihan terakhir**
 
-Benarkan Direct selepas kelewatan yang telah ditetapkan; kembali ke proksi kerja apabila seseorang menjawab.
+Bersambung terus selepas tempoh tertangguh, kembali ke proksi sebaik ada yang berfungsi.
 
 03**Pelayan di sebalik terowong atau VPN**
 
-Benarkan laluan terus melalui rangkaian hos. Pilihan ini tidak memasang atau mengesahkan VPN.
+Sambungan terus tidak mengapa. Ia tidak menyediakan atau menyemak VPN untuk anda.
 
 Rute memilih sambungan. Mod IP menentukan sama ada sambungan terus dibenarkan.
 
 ## Biarkan kolam mengekalkan laluan
 
-1. Buka **Akaun → Tetapan → Tetapan sambungan**.
-2. Pilih mod IP dan **MTProxy Automatik**, atau masukkan laluan tetap.
-3. Simpan dan jalankan **ujian sambungan Telegram**. Ia juga berfungsi sebelum log masuk.
-4. Selepas memulakan pengumpulan, semak bahawa mesej terkawal sampai ke jurnal.
+1. **Akaun → Tetapan → Tetapan sambungan**.
+2. Pilih mod IP dan **MTProxy Automatik**, atau laluan tetap.
+3. Simpan, **Uji sambungan Telegram** (berfungsi sebelum log masuk juga).
+4. Mulakan pengumpulan dan hantar mesej ujian kepada diri sendiri.
 
-Ruang kerja baru menggunakan MTProxy automatik dengan **Sembunyikan alamat**. Kolam menggabungkan empat sumber awam, menyiasat entri, mengekalkan laluan kerja dan menggantikan proksi yang gagal. Muat turun yang gagal mengekalkan snapshot sebelumnya.
+Ruang kerja baharu bermula dengan MTProxy automatik dan **Sembunyikan alamat**. Kolam menarik empat senarai awam, menyemak pelayan, menyimpan yang baik dan menukar yang mati.
 
 ## Gunakan proksi anda sendiri
 
-Masukkan butiran SOCKS5 atau HTTP CONNECT, tampal pautan proksi Telegram yang disokong, atau sediakan katalog pengendali. Jeda pemantauan sebelum menukar laluan aktif. Rahsia TLS MTProxy palsu yang bermula dengan `ee` tidak disokong.
+SOCKS5, HTTP CONNECT, pautan proksi Telegram atau katalog pengendali. Jeda pemerhatian sebelum menukar. Rahsia Fake TLS (`ee`…) tidak berfungsi.
 
 **Tetapan putar, kongsi dan cuba semula**
 
-Di bawah **Parameter → Automatic MTProxy**, tetapkan ambang kegagalan, tempoh penyejukan, pusing ganti yang dirancang dan akaun setiap proksi. Had perkongsian satu menyebabkan akaun menunggu apabila tiada entri eksklusif tersedia. Jeda penyegaran senarai dan jeda prob diikuti nilai ruang kerja utama. Proksi berasingan tidak menjamin IP keluar yang berasingan.
+**Parameter → MTProxy Automatik**: ambang kegagalan, tempoh bertenang, putaran, akaun bagi setiap proksi. Had 1 bermaksud akaun menunggu dan bukannya berkongsi. Proksi berbeza masih boleh berkongsi IP keluar yang sama.
 
 ## Memisahkan Telegram daripada permintaan luaran
 
-MTProxy hanya membawa trafik Telegram. Cap masa, pemberitahuan, salinan dan semakan sumber menggunakan proksi SOCKS5/HTTP berasingan, laluan SOCKS5/HTTP akaun, atau Direct apabila mod IP membenarkannya. Permintaan luaran tersebut boleh dilumpuhkan.
+MTProxy hanya membawa Telegram. Cap masa, pemberitahuan, salinan dan semakan kod melalui proksi SOCKS5/HTTP berasingan, laluan SOCKS5/HTTP akaun, atau terus jika mod membenarkan. Atau matikan sahaja.
 
-`TGWITNESS_PROXY_FEED_PROXY` yang eksplisit mengkonfigurasi laluan pemuat turun suapan. [Saksi bebas](https://phishdestroy.github.io/TgWitness/ms/docs/witness/) mengekalkan tetapan sendiri. Kawalan ini tidak memasang VPN sistem atau mengalihkan trafik pelayar.
+`TGWITNESS_PROXY_FEED_PROXY` menetapkan laluan untuk muat turun senarai. [Saksi](https://phishdestroy.github.io/TgWitness/ms/docs/witness/) mempunyai tetapannya sendiri. Semua ini tidak menyentuh pelayar atau rangkaian sistem anda.
 
-Lihat [semua mod, lalai dan senarai sumber](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/#ip-modes), atau [pilih siapa yang boleh menukar laluan akaun](https://phishdestroy.github.io/TgWitness/ms/docs/access/).
+Lagi: [mod dan nilai lalai](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/#ip-modes), [siapa yang boleh menukar laluan](https://phishdestroy.github.io/TgWitness/ms/docs/access/).

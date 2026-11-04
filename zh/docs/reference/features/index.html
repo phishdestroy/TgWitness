@@ -224,9 +224,6 @@ RPC调用、活跃账户数、磁盘延迟/可用空间、网络状况、Telegra
 各项均可在<strong>“参数</strong>”中针对每个工作区进行调整。导出操作没有固定的事件数量上限。
 浏览器回退模式默认限制为 128 MiB；流式 CLI 具有可配置的
 传输限制，默认值为 5 GiB。</p>
-<p><code>tools/check_capacity.py</code> 用于测量本地合成数据的摄入和导出。其结果
-并非 Telegram 消息送达量的测量数据，也并非对真实聊天数量的保证。有关
-测量版本和工作负载的详细信息，请参阅 <a href="../verification/">VERIFICATION.md</a>。</p>
 <h2 id="reliability-and-recovery">可靠性和数据恢复<a class="anchor" href="#reliability-and-recovery" aria-label="本节链接">#</a></h2>
 <p>已实现的功能包括 SQLite WAL/同步事务；原子性消息
 和媒体任务写入；持久化任务和重试延迟；原始版本描述符；

@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/handover/
 
-Share the relevant observations while keeping the original workspace intact.
+Share only what's needed, the original stays untouched.
 
-A handover is a separate signed extract. Choose the chats and people, reduce identities or text, and decide which files and team notes belong in the recipient's copy. Its manifest records the selection and the number of unchanged, minimized and omitted records.
+A handover is a separate signed extract: pick chats and people, hide identities or text, choose files and team notes. The manifest records what was kept, trimmed and left out.
 
 ## Prepare the recipient's extract
 
-1. Open **Exports → Handover extract**. Write its purpose, choose the chats and optional UTC period, then select **Load people of the chosen chats** if you need named subjects.
-2. Choose how to handle everyone else: pseudonyms, omit their messages, or show as recorded. Set message text and attachments independently; optionally mask phone numbers and email addresses.
-3. Choose whether to include Case Board bookmarks and slices, or cards with comments. Investigator aliases can replace team names in this copy.
-4. Select **Download handover extract**. Open the generated report and selected records locally, verify the archive, and inspect the copy before sending it.
+1. **Exports → Handover extract**: write the purpose, pick chats and a period, **Load people of the chosen chats** if you need named people.
+2. Everyone else: pseudonyms, left out, or as recorded. Text and files are separate switches; phones and emails can be masked.
+3. Case Board: nothing, bookmarks and slices, or cards with comments. Team names can be swapped for aliases.
+4. **Download handover extract**, open it, verify it, look through it before sending.
 
 ### One original, a deliberate sharing copy
 
@@ -54,12 +54,12 @@ A separate package linked to its source journal boundary
 
 | Control | Effect on the copy |
 | --- | --- |
-| People | Keep selected subjects identifiable; pseudonymize or omit other participants as chosen. |
-| Text | Include all text, only the selected people's and observing account's text, or omit message text and its text-bearing detail fields. |
-| Files | Choose files of the selected people and observing account, all shown messages' files, or no files. |
-| Case Board | Choose no board material, bookmarks and slices, or cards with team discussion. |
+| People | Selected people stay named; others get pseudonyms or are left out. |
+| Text | All text, only the selected people's and your account's, or none. |
+| Files | Files of the selected people and your account, all shown files, or none. |
+| Case Board | Nothing, bookmarks and slices, or cards with discussion. |
 
-Review free-form text and file contents as well as identities: a pseudonym does not automatically remove every name written in a message or attachment. If a selected preserved file is unavailable, restore it or explicitly omit attachments before generating the extract.
+Read the text and files too: a pseudonym doesn't remove names written inside a message or attachment. If a selected file is missing, restore it or leave attachments out.
 
 ## Keep the copy independently checkable
 
@@ -67,4 +67,4 @@ Review free-form text and file contents as well as identities: a pseudonym does 
 python -m tgwitness.verify handover.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Retain the original signed evidence archive and checkpoints separately. The handover records its own projection, so a recipient can check the delivered copy without receiving the entire workspace. [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/) supplies its reading design; [export verification](https://phishdestroy.github.io/TgWitness/docs/exports/) explains the trusted references.
+Keep the original archive and checkpoints yourself. The recipient can verify their copy without getting the whole workspace. Design: [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/). Trusted references: [export verification](https://phishdestroy.github.io/TgWitness/docs/exports/).

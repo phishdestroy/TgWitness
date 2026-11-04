@@ -224,9 +224,6 @@ entre 1 y 2.000 MiB por archivo recopilado según el tipo, y 4 GiB de contenido 
 de estos valores se modifica por espacio de trabajo en <strong>«Parámetros</strong>». Las exportaciones no tienen un límite fijo de recuento de eventos.
 El modo alternativo del navegador está limitado a 128 MiB de forma predeterminada; la CLI de transmisión tiene un
 límite de transferencia configurable, de 5 GiB de forma predeterminada.</p>
-<p><code>tools/check_capacity.py</code> mide la ingesta y exportación sintéticas a nivel local. Sus resultados
-no constituyen mediciones de entrega de Telegram ni un recuento garantizado de conversaciones reales. Consulte
-<a href="../verification/">VERIFICATION.md</a> para conocer la versión medida y la carga de trabajo.</p>
 <h2 id="reliability-and-recovery">Fiabilidad y recuperación<a class="anchor" href="#reliability-and-recovery" aria-label="Enlace a esta sección">#</a></h2>
 <p>Entre los comportamientos implementados se incluyen transacciones WAL/sincrónicas de SQLite;
 escrituras atómicas de mensajes y tareas multimedia; tareas persistentes y retrasos en los reintentos; descriptores de la versión original;

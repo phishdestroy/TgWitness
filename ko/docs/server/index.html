@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../">홈</a> <span aria-hidden="true">/</span> <a href="../">문서</a> <span aria-hidden="true">/</span> <span aria-current="page">계속 운영해 주세요</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">문서 / 17</p><h1>계속 운영해 주세요</h1><p class="guide-outcome">시스템 재시작 시에도 수집기를 계속 가동하고 데이터를 온전하게 유지합니다.</p>
+<article class="guide-content"><p class="eyebrow">문서 / 17</p><h1>계속 운영해 주세요</h1><p class="guide-outcome">수집기를 계속 실행하고, 재시작을 거쳐도 데이터를 안전하게 지킵니다.</p>
 <h2 id="launch">실행 방법 선택</h2>
-<p>로컬 설치의 경우, <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> 디렉토리에 있는 <a href="../start/">런처</a> 및 서비스 예제를 사용하십시오. Docker를 사용하는 경우, Docker Compose를 설치한 후 프로젝트 디렉토리에서 다음 명령을 실행하십시오:</p>
+<p>네이티브: <a href="../start/">런처</a>와 <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a>의 서비스 템플릿. Docker는 프로젝트 폴더에서:</p>
 <pre><code>docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
-<p>기본 패널은 호스트의 루프백 주소, 포트 8787에서 연결을 수신 대기합니다. 로컬에서 또는 SSH 터널을 통해 패널을 열어주세요. 두 번째 명령어에서 생성된 토큰을 사용하여 패널 잠금을 해제하세요.</p>
+<p>패널은 localhost:8787에서 대기합니다. 로컬이나 SSH 터널로 열고, 두 번째 명령에서 나온 토큰을 사용합니다.</p>
 <h2 id="storage">전체 데이터 디렉터리를 유지하십시오.</h2>
-<p>네이티브 설치 환경에서는 <code>data/live</code>를 사용합니다. Docker는 영구 저장소인 <code>tgwitness-data</code> 볼륨을 사용합니다. 저널, 계정 세션, 키 및 운영 상태를 함께 보관하십시오. 서명된 내보내기 파일은 유용한 증거 자료이지만, 전체 설치 백업은 아닙니다.</p>
-<ol><li>일관된 백업을 수행하기 전에 데이터 수집을 중지하십시오.</li><li>전체 비공개 데이터 디렉터리를 호스트 외부의 보호된 저장소로 복사하십시오.</li><li>백업에 의존하기 전에 격리된 설치 환경에서 복원 테스트를 수행하십시오.</li></ol>
+<p>네이티브: <code>data/live</code>. Docker: <code>tgwitness-data</code> 볼륨. 저널, 세션, 키는 함께 있어야 합니다. 서명된 내보내기는 증거이지 백업이 아닙니다.</p>
+<ol><li>먼저 수집을 멈춥니다.</li><li>데이터 디렉터리 전체를 호스트 밖 안전한 곳에 복사합니다.</li><li>믿기 전에 별도의 설치에서 복원해 보십시오.</li></ol>
 <h2 id="check">재시작 후 확인하세요</h2>
-<p>예상 작업 공간 및 키, 텔레그램 연결, 선택된 소스, 새 메시지 캡처 설정을 확인하십시오. 저장된 MTProto 상태와 캐치업 기능을 통해 텔레그램에 여전히 남아 있는 업데이트를 복구할 수 있습니다. 그러나 만료된 모든 업데이트나 캡처 전에 삭제된 수정 내역은 복원할 수 없습니다.</p>
-<p class="callout">컨테이너 상태란 웹 서버가 응답함을 의미합니다. 제어된 메시지와 검증 절차를 통해 데이터 수집 및 외부 공개 여부를 평가하십시오.</p>
+<p>작업 공간과 키, 연결, 소스, 새 메시지가 들어오는지 확인합니다. TgWitness는 텔레그램에 아직 남아 있는 것을 따라잡을 뿐, 꺼져 있는 동안 일어난 모든 일을 따라잡지는 못합니다.</p>
+<p class="callout">컨테이너가 "healthy"라는 것은 웹 서버가 응답한다는 뜻입니다. 수집이 작동하는지는 테스트 메시지와 증인이 알려 줍니다.</p>
 <h2 id="public">의도한 내용만 게시하십시오</h2>
-<p>배포 안내서에는 HTTPS 예시, 영구 볼륨 명령어, 업데이트 및 복원 단계가 포함되어 있습니다. 배포를 위한 Docker 명령어가 제공되며, 현재 <a href="../reference/verification/">검증 기록</a>에는 실제로 테스트된 환경이 명시되어 있습니다.</p>
+<p>HTTPS, 볼륨, 업데이트, 복원은 배포 참조에 있습니다. 실제로 테스트된 것: <a href="../reference/verification/">검증 기록</a>.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/deployment/">전체 참고 문헌 →</a><a class="next-guide" href="../troubleshooting/"><span>다음 단계</span><strong>문제가 발생한 원인을 파악하세요 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../reference/verification/">테스트된 내용 →</a></p></footer>
 </main>

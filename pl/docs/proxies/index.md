@@ -2,45 +2,45 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/proxies/
 
-Należy utrzymać połączenie z kontem. Należy wyraźnie określić, w jakich przypadkach trasa połączenia może korzystać z adresu serwera.
+Trzymaj konto online i sam zdecyduj, czy kiedykolwiek może pokazać IP Twojego serwera.
 
 ## Proszę najpierw wybrać tryb IP
 
 01**Ukryj adres**
 
-Proszę skorzystać z serwera proxy. Jeśli żaden z nich nie działa, proszę poczekać bez bezpośredniego połączenia z Telegramem.
+Tylko proxy. Jeśli żadne nie działa, czeka.
 
 02**Direct jako ostateczność**
 
-Po upływie skonfigurowanego opóźnienia zezwól na bezpośrednie połączenie; w przypadku uzyskania odpowiedzi należy powrócić do działającego serwera proxy.
+Po opóźnieniu łączy się bezpośrednio, a gdy proxy zadziała, wraca do niego.
 
 03**Serwer za tunelem lub VPN**
 
-Zezwól na bezpośrednie połączenia przez sieć dostawcy usług. Ta opcja nie powoduje instalacji ani weryfikacji sieci VPN.
+Bezpośrednio można. Ten tryb nie konfiguruje ani nie sprawdza VPN.
 
 Trasa wybiera połączenie. Tryb IP określa, czy dozwolone jest połączenie bezpośrednie.
 
 ## Niech grupa zadba o trasę
 
-1. Otwórz **konto → Ustawienia → Ustawienia połączenia**.
-2. Proszę wybrać tryb IP i opcję **„Automatic MTProxy**” lub wprowadzić stałą trasę.
-3. Zapisz i uruchom **test połączenia z Telegramem**. Działa to również przed zalogowaniem się.
-4. Po rozpoczęciu gromadzenia danych proszę sprawdzić, czy kontrolowana wiadomość trafiła do dziennika.
+1. **Konto → Ustawienia → Ustawienia połączenia**.
+2. Wybierz tryb IP i **Automatyczny MTProxy** albo stałą trasę.
+3. Zapisz, potem **Testuj połączenie z Telegramem** (działa też przed zalogowaniem).
+4. Uruchom zbieranie i wyślij sobie wiadomość testową.
 
-Nowe obszary robocze korzystają z automatycznego tagu MTProxy z opcją **„Ukryj adres**”. Pula łączy cztery publiczne źródła, sprawdza wpisy, zachowuje działające trasy i zastępuje nieprawidłowo działające serwery proxy. W przypadku nieudanych pobrań zachowywane są poprzednie migawki.
+Nowe przestrzenie startują na automatycznym MTProxy z trybem **Ukryj adres**. Pula korzysta z czterech publicznych list, sprawdza serwery, zostawia działające i wymienia martwe.
 
 ## Proszę skorzystać z własnego serwera proxy
 
-Proszę wprowadzić dane SOCKS5 lub HTTP CONNECT, wkleić obsługiwany link do serwera proxy Telegramu lub podać katalog operatora. Przed zmianą aktywnej trasy należy wstrzymać monitorowanie. Fałszywe klucze tajne TLS MTProxy zaczynające się od `ee` nadal nie są obsługiwane.
+SOCKS5, HTTP CONNECT, link do proxy Telegrama albo katalog operatora. Przed zmianą wstrzymaj obserwację. Sekrety Fake TLS (`ee`…) nie działają.
 
 **Ustawienia rotacji, udostępniania i ponownych prób**
 
-W sekcji **Parametry → Automatyczny MTProxy** należy ustawić progi awarii, czasy oczekiwania, planowaną rotację oraz liczbę kont na jeden serwer proxy. Limit współdzielenia wynoszący jeden powoduje, że konto oczekuje, gdy nie jest dostępny żaden wyłączny dostęp. Interwały odświeżania listy i sondowania są zgodne z wartościami głównego obszaru roboczego. Oddzielne serwery proxy nie gwarantują oddzielnych adresów IP wyjściowych.
+**Parametry → Automatyczny MTProxy**: progi błędów, przerwy, rotacja, kont na proxy. Limit 1 oznacza, że konto poczeka zamiast współdzielić. Różne proxy mogą mieć ten sam wyjściowy IP.
 
 ## Oddzielenie serwisu Telegram od zewnętrznych zapytań
 
-MTProxy obsługuje wyłącznie ruch z aplikacji Telegram. Sygnatury czasowe, powiadomienia, kopie oraz weryfikacja źródeł wykorzystują oddzielny serwer proxy SOCKS5/HTTP, trasę SOCKS5/HTTP danego konta lub połączenie bezpośrednie (Direct), o ile pozwala na to tryb IP. Te zewnętrzne żądania można wyłączyć.
+MTProxy przenosi tylko Telegram. Znaczniki czasu, powiadomienia, kopie i sprawdzanie kodu idą przez osobne proxy SOCKS5/HTTP, trasę SOCKS5/HTTP konta albo bezpośrednio, jeśli tryb na to pozwala. Albo je wyłącz.
 
-Wyraźna konfiguracja `TGWITNESS_PROXY_FEED_PROXY` określa trasę działania programu pobierającego kanały. [Niezależny moduł „witness”](https://phishdestroy.github.io/TgWitness/pl/docs/witness/) zachowuje własne ustawienia. Te opcje nie powodują instalacji systemowej sieci VPN ani przekierowywania ruchu przeglądarki.
+`TGWITNESS_PROXY_FEED_PROXY` ustawia trasę pobierania list. [Świadek](https://phishdestroy.github.io/TgWitness/pl/docs/witness/) ma własne ustawienia. Nic z tego nie dotyka przeglądarki ani sieci systemu.
 
-Zapoznaj się ze [wszystkimi trybami działania, ustawieniami domyślnymi i listami źródeł](https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/#ip-modes) lub [wybierz osoby uprawnione do zmiany trasy konta](https://phishdestroy.github.io/TgWitness/pl/docs/access/).
+Więcej: [tryby i wartości domyślne](https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/#ip-modes), [kto może zmieniać trasy](https://phishdestroy.github.io/TgWitness/pl/docs/access/).

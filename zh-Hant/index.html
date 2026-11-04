@@ -40,9 +40,9 @@
       <div class="hero-copy">
         <a class="release-label" href="docs/reference/changelog/"><span class="status-dot"></span> 開源 <span class="label-divider">/</span> v0.8.1 <span aria-hidden="true">→</span></a>
         <h1 id="hero-title">訊息會改變。<span>保留您所見的內容。</span></h1>
-        <p class="hero-description">擷取 Telegram 訊息、保存其變更紀錄，並匯出經簽署的紀錄。</p>
+        <p class="hero-description">保存 Telegram 聊天室及每一次編輯和刪除，然後交出任何人都能核對的紀錄。</p>
         <div class="actions"><a class="button primary" data-home-action="demo" href="../demo/?lang=zh-Hant">開啟示範版 <span aria-hidden="true">→</span></a><a class="button secondary" data-home-action="setup" href="../demo/guide.html?lang=zh-Hant">設定指南 <span aria-hidden="true">↗</span></a></div>
-        <p class="hero-footnote">此示範使用虛構資料。無需登入 Telegram 帳戶。</p>
+        <p class="hero-footnote">虛構資料，不需登入 Telegram。</p>
         <a class="hero-capture-link" data-home-action="sealed" href="docs/capture/">透過 GitHub Actions 擷取（預覽版）</a>
         <a class="hero-retention-link" href="#s3">S3 異地備份：設定與還原 <span aria-hidden="true">↓</span></a>
       </div>
@@ -72,7 +72,7 @@
     </div>
 
     <section class="workspace wrap" id="workspace" aria-labelledby="workspace-title">
-      <div class="section-heading"><div><p class="eyebrow"><span class="section-index">01</span> 工作區</p><h2 id="workspace-title">每項被擷取的變更。就在您需要的地方。</h2></div><p>透過虛構的示範資料瀏覽介面。</p></div>
+      <div class="section-heading"><div><p class="eyebrow"><span class="section-index">01</span> 工作區</p><h2 id="workspace-title">每項被擷取的變更。就在您需要的地方。</h2></div><p>真實介面，虛構資料。</p></div>
       <div class="switcher" data-tabs aria-label="工作區螢幕截圖">
         <div class="tab-buttons" data-tab-buttons>
           <button type="button" id="tour-chats" aria-controls="panel-chats">01 <span>已儲存的聊天紀錄</span></button>
@@ -80,18 +80,18 @@
           <button type="button" id="tour-edits" aria-controls="panel-edits">03 <span>編輯歷史</span></button>
           <button type="button" id="tour-exports" aria-controls="panel-exports">04 <span>匯出與 S3</span></button>
         </div>
-        <figure id="panel-chats" aria-labelledby="tour-chats" data-tab-panel><div class="screen-frame screen-dark"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 已儲存的聊天記錄</span><span class="screen-mode">您的觀察工作區</span></div><img src="../assets/chats-dark.png" width="1440" height="900" alt="以深色主題儲存 Telegram 對話，並將擷取的編輯內容與已刪除訊息完整保留於對話脈絡中" loading="lazy"></div><figcaption><span>01 / 已儲存的聊天記錄</span> 熟悉的對話檢視介面，訊息旁會顯示已擷取的編輯紀錄及刪除通知。</figcaption></figure>
-        <figure id="panel-journal" aria-labelledby="tour-journal" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 日誌</span><span class="screen-mode">本地工作區</span></div><img src="../assets/workspace.png" width="1440" height="900" alt="包含已觀察到的訊息、編輯紀錄、刪除通知及涵蓋事件的日誌" fetchpriority="high"></div><figcaption><span>02 / 日誌</span>：您帳戶所記錄內容的可搜尋時間軸，包含中斷情況。</figcaption></figure>
-        <figure id="panel-edits" aria-labelledby="tour-edits" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 編輯歷史</span><span class="screen-mode">本地工作區</span></div><img src="../assets/detail.png" width="1440" height="900" alt="透過詳細抽屜介面，比較訊息的原始版本與編輯後版本" loading="lazy"></div><figcaption><span>03 / 編輯歷史</span> 比較已擷取的版本，同時不會覆寫先前的記錄。</figcaption></figure>
-        <figure id="panel-exports" aria-labelledby="tour-exports" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 簽名輸出檔</span><span class="screen-mode">本地工作區</span></div><img src="../assets/exports.png" width="1440" height="900" alt="工作區匯出功能提供簽名過的 ZIP、JSONL、CSV 檔案，以及離線 HTML 報告" loading="lazy"></div><figcaption><span>04 / 簽名輸出</span> 將日誌隨身攜帶，附有清單及獨立驗證者。</figcaption></figure>
+        <figure id="panel-chats" aria-labelledby="tour-chats" data-tab-panel><div class="screen-frame screen-dark"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 已儲存的聊天記錄</span><span class="screen-mode">您的觀察工作區</span></div><img src="../assets/chats-dark.png" width="1440" height="900" alt="以深色主題儲存 Telegram 對話，並將擷取的編輯內容與已刪除訊息完整保留於對話脈絡中" loading="lazy"></div><figcaption><span>01 / 已保存的聊天室</span> 看起來就像一般聊天，編輯和刪除就顯示在訊息旁邊。</figcaption></figure>
+        <figure id="panel-journal" aria-labelledby="tour-journal" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 日誌</span><span class="screen-mode">本地工作區</span></div><img src="../assets/workspace.png" width="1440" height="900" alt="包含已觀察到的訊息、編輯紀錄、刪除通知及涵蓋事件的日誌" fetchpriority="high"></div><figcaption><span>02 / 日誌</span> 您的帳戶看到的一切，可搜尋，空缺也會記錄。</figcaption></figure>
+        <figure id="panel-edits" aria-labelledby="tour-edits" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 編輯歷史</span><span class="screen-mode">本地工作區</span></div><img src="../assets/detail.png" width="1440" height="900" alt="透過詳細抽屜介面，比較訊息的原始版本與編輯後版本" loading="lazy"></div><figcaption><span>03 / 編輯歷史</span> 新舊版本並排顯示，不會覆寫任何內容。</figcaption></figure>
+        <figure id="panel-exports" aria-labelledby="tour-exports" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 簽名輸出檔</span><span class="screen-mode">本地工作區</span></div><img src="../assets/exports.png" width="1440" height="900" alt="工作區匯出功能提供簽名過的 ZIP、JSONL、CSV 檔案，以及離線 HTML 報告" loading="lazy"></div><figcaption><span>04 / 簽名匯出</span> 帶走日誌，已簽名，並附帶自己的驗證工具。</figcaption></figure>
       </div>
       <div class="section-actions"><p>透過「<a href="docs/case-board/">案件看板</a>」、「<a href="docs/reports/">報告設計」</a>及「<a href="docs/handover/">分享副本」</a>追蹤已儲存的紀錄。一併<a href="docs/groups/">檢視帳戶群組</a>。</p></div>
     </section>
 
     <section class="principles wrap" aria-label="以您的觀察為設計核心">
-      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><path d="M69 29h62l32 27h66M69 83h62l32-27" stroke="#b5c7e5" stroke-width="2"/><rect x="19" y="11" width="52" height="36" rx="9" fill="#edf3ff" stroke="#acc2ee"/><rect x="19" y="65" width="52" height="36" rx="9" fill="#edf3ff" stroke="#acc2ee"/><path d="M33 24h24M33 32h16M33 78h24M33 86h16" stroke="#5b7fbe" stroke-width="2" stroke-linecap="round"/><rect x="173" y="22" width="105" height="68" rx="12" fill="#fff" stroke="#b5c7e5"/><circle cx="193" cy="45" r="5" fill="#2563eb"/><path d="M207 44h48M207 53h33M188 71h67" stroke="#adc0df" stroke-width="3" stroke-linecap="round"/><circle class="route-signal" cx="145" cy="41" r="4" fill="#2563eb"/></svg><span class="feature-number">01 / 擷取</span><h3>範圍由您決定。</h3><p>可選擇特定聊天室、Telegram 資料夾或整個帳戶。每個帳戶皆設有獨立的工作區。</p><a class="text-link" href="guides/modes.html#scope">比較資料蒐集模式 <span aria-hidden="true">→</span></a></article>
-      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><rect x="31" y="10" width="168" height="78" rx="10" fill="#eff2f7" stroke="#c8d3e3"/><path d="M47 28h89M47 41h124M47 54h76" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/><rect class="version-layer" x="77" y="30" width="190" height="74" rx="10" fill="#fff" stroke="#adc3ea"/><path d="M94 48h103" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/><rect x="94" y="60" width="63" height="12" rx="3" fill="#f6e9e8"/><path d="M100 66h51" stroke="#b97770"/><rect x="164" y="60" width="77" height="12" rx="3" fill="#dcefe5"/><path d="M170 66h65" stroke="#2c7c56"/><path d="M94 86h92" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/></svg><span class="feature-number">02 / 保存</span><h3>變更內容將豐富這則報導。</h3><p>擷取的訊息版本、刪除通知及監測缺口均會保留在日誌中。</p><a class="text-link" href="guides/modes.html#events">請參閱事件矩陣 <span aria-hidden="true">→</span></a></article>
-      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><rect x="35" y="19" width="59" height="75" rx="8" fill="#fff" stroke="#c1cde0"/><path d="M49 36h30M49 46h23M49 56h30" stroke="#afbed5" stroke-width="3" stroke-linecap="round"/><path d="M106 57h60m-8-8 8 8-8 8" stroke="#7896c8" stroke-width="2" stroke-linecap="round"/><rect x="178" y="15" width="88" height="82" rx="12" fill="#edf3ff" stroke="#acc2ee"/><path d="M222 31v28m-7-5 7 7 7-7M206 72h32" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="259" cy="85" r="14" fill="#e0f1e8" stroke="#98c5ae"/><path class="verified-tick" d="m252 85 5 5 9-10" stroke="#23734b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="feature-number">03 / 移交</span><h3>一份隨行而行的紀錄。</h3><p>簽名 ZIP 檔案、完整保留的檔案以及離線報告。可選配密碼保護功能。</p><a class="text-link" href="docs/exports/">匯出並驗證 <span aria-hidden="true">→</span></a></article>
+      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><path d="M69 29h62l32 27h66M69 83h62l32-27" stroke="#b5c7e5" stroke-width="2"/><rect x="19" y="11" width="52" height="36" rx="9" fill="#edf3ff" stroke="#acc2ee"/><rect x="19" y="65" width="52" height="36" rx="9" fill="#edf3ff" stroke="#acc2ee"/><path d="M33 24h24M33 32h16M33 78h24M33 86h16" stroke="#5b7fbe" stroke-width="2" stroke-linecap="round"/><rect x="173" y="22" width="105" height="68" rx="12" fill="#fff" stroke="#b5c7e5"/><circle cx="193" cy="45" r="5" fill="#2563eb"/><path d="M207 44h48M207 53h33M188 71h67" stroke="#adc0df" stroke-width="3" stroke-linecap="round"/><circle class="route-signal" cx="145" cy="41" r="4" fill="#2563eb"/></svg><span class="feature-number">01 / 擷取</span><h3>範圍由您決定。</h3><p>幾個聊天室、一個資料夾或整個帳戶。每個帳戶都有自己的工作區。</p><a class="text-link" href="guides/modes.html#scope">比較資料蒐集模式 <span aria-hidden="true">→</span></a></article>
+      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><rect x="31" y="10" width="168" height="78" rx="10" fill="#eff2f7" stroke="#c8d3e3"/><path d="M47 28h89M47 41h124M47 54h76" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/><rect class="version-layer" x="77" y="30" width="190" height="74" rx="10" fill="#fff" stroke="#adc3ea"/><path d="M94 48h103" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/><rect x="94" y="60" width="63" height="12" rx="3" fill="#f6e9e8"/><path d="M100 66h51" stroke="#b97770"/><rect x="164" y="60" width="77" height="12" rx="3" fill="#dcefe5"/><path d="M170 66h65" stroke="#2c7c56"/><path d="M94 86h92" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/></svg><span class="feature-number">02 / 保存</span><h3>變更內容將豐富這則報導。</h3><p>版本、刪除和空缺都保留在日誌中。</p><a class="text-link" href="guides/modes.html#events">請參閱事件矩陣 <span aria-hidden="true">→</span></a></article>
+      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><rect x="35" y="19" width="59" height="75" rx="8" fill="#fff" stroke="#c1cde0"/><path d="M49 36h30M49 46h23M49 56h30" stroke="#afbed5" stroke-width="3" stroke-linecap="round"/><path d="M106 57h60m-8-8 8 8-8 8" stroke="#7896c8" stroke-width="2" stroke-linecap="round"/><rect x="178" y="15" width="88" height="82" rx="12" fill="#edf3ff" stroke="#acc2ee"/><path d="M222 31v28m-7-5 7 7 7-7M206 72h32" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="259" cy="85" r="14" fill="#e0f1e8" stroke="#98c5ae"/><path class="verified-tick" d="m252 85 5 5 9-10" stroke="#23734b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="feature-number">03 / 移交</span><h3>一份隨行而行的紀錄。</h3><p>簽名 ZIP、檔案和離線報告。密碼可選。</p><a class="text-link" href="docs/exports/">匯出並驗證 <span aria-hidden="true">→</span></a></article>
     </section>
 
     <section class="proof wrap" id="proof" aria-labelledby="proof-title">
@@ -110,8 +110,8 @@
     </section>
 
     <section class="integrity" aria-labelledby="integrity-title"><div class="wrap integrity-layout">
-      <div><p class="eyebrow">專為審閱而建</p><h2 id="integrity-title">歡迎其他同儕<span>審閱。</span></h2><p>將觀察結果、檔案及離線 HTML 報告整合為單一簽名封包一併交付。</p><a class="text-link" href="docs/reference/evidence/">閱讀證據模型 <span aria-hidden="true">↗</span></a></div>
-      <div class="bundle"><div class="bundle-heading"><span class="mono">tgwitness-evidence.zip</span><span class="bundle-tag">簽名套件</span></div><ul><li><span>01</span><div>原始觀察結果<small>JSONL 記錄 + CSV 表格</small></div></li><li><span>02</span><div>易讀的背景說明<small>離線 HTML 報告 + 完整保留的媒體檔案</small></div></li><li><span>03</span><div>獨立驗證<small>簽名清單 + 獨立驗證器</small></div></li></ul><p class="bundle-note">接收方會使用可信的收集器金鑰，對已儲存的記錄和檔案進行驗證。另行保留的檢查點亦會核對其與先前日誌的連續性。<a href="docs/concepts/#layers">請參閱驗證步驟。</a></p></div>
+      <div><p class="eyebrow">專為審閱而建</p><h2 id="integrity-title">歡迎其他同儕<span>審閱。</span></h2><p>訊息、檔案和離線報告打包成一個簽名包。</p><a class="text-link" href="docs/reference/evidence/">閱讀證據模型 <span aria-hidden="true">↗</span></a></div>
+      <div class="bundle"><div class="bundle-heading"><span class="mono">tgwitness-evidence.zip</span><span class="bundle-tag">簽名套件</span></div><ul><li><span>01</span><div>原始觀察結果<small>JSONL 記錄 + CSV 表格</small></div></li><li><span>02</span><div>易讀的背景說明<small>離線 HTML 報告 + 完整保留的媒體檔案</small></div></li><li><span>03</span><div>獨立驗證<small>簽名清單 + 獨立驗證器</small></div></li></ul><p class="bundle-note">接收方用您的金鑰核對所有內容，而存放在別處的檢查點表明此後沒有任何內容被改寫。<a href="docs/concepts/#layers">檢查的運作方式。</a></p></div>
     </div></section>
 
     <section class="retention wrap" id="retention" aria-labelledby="retention-title">
@@ -121,13 +121,13 @@
         <h3 id="s3-title">將所有內容複製到 S3 相容儲存空間</h3>
         <div class="s3-layout">
           <div class="s3-copy">
-            <p>日誌、檔案、帶時間戳記的檢查點及聊天記錄匯出檔——在上傳至 AWS S3 或相容儲存空間前均已加密。</p>
+            <p>日誌、檔案、檢查點和聊天匯出，在傳送到 S3 之前加密。</p>
             <details class="presentation-details"><summary>儲存設定與資料復原</summary>
             <dl class="s3-features">
-              <div><dt>客戶端加密</dt><dd><code>AES-256-GCM</code> 會對本機器上的物件進行加密。服務提供者會接收這些加密物件。</dd></div>
-              <div><dt>排程或手動備份</dt><dd>立即複製，或選擇 1 至 1,440 分鐘之間的間隔。請在面板中查看進度。</dd></div>
-              <div><dt>Object Lock</dt><dd>若儲存桶支援此功能，請選擇保留天數及模式。該面板會顯示上傳物件的保留狀態是否已確認。</dd></div>
-              <div><dt>經驗證的資料復原</dt><dd>請下載加密金鑰並另行保存。請在另一台機器上進行還原；檔案僅在驗證通過後才會發布。</dd></div>
+              <div><dt>客戶端加密</dt><dd>在您的電腦上使用 <code>AES-256-GCM</code>。服務商只看得到密文。</dd></div>
+              <div><dt>排程或手動備份</dt><dd>立即複製，或每 1 至 1,440 分鐘複製一次，進度顯示在面板中。</dd></div>
+              <div><dt>Object Lock</dt><dd>選擇保留天數和模式，面板會檢查設定是否真正生效。</dd></div>
+              <div><dt>經驗證的資料復原</dt><dd>請另外保存金鑰。可在任何地方還原，檔案只有在驗證通過後才會輸出。</dd></div>
             </dl>
             </details>
           </div>
@@ -135,55 +135,55 @@
         </div>
         <div class="replica-flow" aria-label="資料在上傳前會進行加密"><span>期刊與媒體</span><span aria-hidden="true">→</span><code translate="no">AES-256-GCM</code><span aria-hidden="true">→</span><span>相容於 S3 的儲存空間</span></div>
         <div class="s3-actions"><a class="button primary" href="docs/exports/#s3">設定 S3 並還原副本 <span aria-hidden="true">→</span></a><a class="text-link" href="docs/reference/evidence/#off-site-copy-and-restore-s3">閱讀驗證詳情 <span aria-hidden="true">↗</span></a></div>
-        <p class="retention-limit"><strong>復原金鑰</strong> 請將匯出的解密金鑰另行儲存，以便您能還原加密副本。</p>
+        <p class="retention-limit"><strong>復原金鑰</strong> 請另外保存，沒有它副本將無法讀取。</p>
       </article>
       <div class="retention-grid">
         <article class="retention-card notification-overview" id="notifications" aria-labelledby="notifications-title">
           <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3 id="notifications-title">通知 · Apprise</h3>
-          <p>透過 Apprise 接收問題警示、聊天記錄變更及每日摘要：可透過即時通訊軟體、電子郵件或您自訂的 JSON Webhook 接收。</p>
-          <p class="retention-limit"><strong>選擇要分享的內容</strong> 訊息摘錄預設為關閉狀態；請僅對您信任的接收方啟用此功能。</p>
+          <p>問題、聊天室變化和每日摘要，傳送到通訊軟體、電子郵件或您自己的 webhook。</p>
+          <p class="retention-limit"><strong>選擇要分享的內容</strong> 除非您開啟，否則不含訊息文字。</p>
           <a class="text-link" href="docs/reference/operations/#notifications">設定通知接收端點 <span aria-hidden="true">→</span></a>
         </article>
         <article class="retention-card">
           <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3" stroke-linecap="round"/></svg></div>
           <h3>外部時間戳記</h3>
           <p>採用 RFC 3161 及 OpenTimestamps 進行時間戳記檢查點雜湊運算。</p>
-          <p class="retention-limit"><strong>根據結果採取後續行動：</strong>查核主管機關的回覆，或將 OpenTimestamps 收據升級為經確認的比特幣證明。</p>
+          <p class="retention-limit"><strong>追蹤結果</strong> 檢查 TSA 回應，或將 OpenTimestamps 收據升級為比特幣證明。</p>
           <a class="text-link" href="docs/reference/timestamp/">查看時間戳記證明 <span aria-hidden="true">→</span></a>
         </article>
         <article class="retention-card">
           <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3>獨立見證人</h3>
           <p>另有一台獨立伺服器負責儲存經簽名的觀察記錄，並可發布 <code>TGW1</code> 檢查點。</p>
-          <p class="retention-limit"><strong>請將參考內容「</strong>在另一台主機上執行 TgWitness，並保留其專屬的簽名金鑰和日誌」<strong>獨立列出</strong>。</p>
+          <p class="retention-limit"><strong>分離參照</strong> 在另一台主機上執行，使用獨立的金鑰和日誌。</p>
           <a class="text-link" href="docs/witness/">設定一個 Witness <span aria-hidden="true">→</span></a>
         </article>
         <article class="retention-card">
           <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h6m6 0h6M12 7v3m0 4v3" stroke-linecap="round"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></div>
           <h3>資料復原與可見的缺口</h3>
           <p>重新啟動後恢復運作。重新檢查及 <code>coverage.json</code> 顯示已恢復的訊息與遺漏部分。</p>
-          <p class="retention-limit"><strong>檢視時間區間：</strong>可同時查看已恢復的當前訊息與記錄的中斷情況；一旦擷取，較早的版本仍可取得。</p>
+          <p class="retention-limit"><strong>檢視時間區間</strong> 復原的訊息和記錄的空缺並排顯示。</p>
           <a class="text-link" href="guides/modes.html#continuity">檢查連續性與缺口 <span aria-hidden="true">→</span></a>
         </article>
       </div>
     </section>
 
     <section class="start wrap" id="start" aria-labelledby="start-title">
-      <div class="section-heading"><div><p class="eyebrow">在您的電腦上</p><h2 id="start-title">您的第一個工作區就從這裡開始。</h2></div><div class="section-intro"><p>請先瀏覽示範版本。準備就緒後，請連結專用帳戶。支援 Windows、Linux、macOS 或 Docker。</p><a class="text-link" href="../demo/guide.html?lang=zh-Hant">閱讀設定指南 <span aria-hidden="true">→</span></a></div></div>
-      <aside class="session-warning" id="session-warning" aria-labelledby="session-warning-title"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4M12 17h.01"/></svg><div><strong id="session-warning-title">一個已匯入的會話，一個正在運行的客戶端。</strong><p>請勿同時在 Telegram Desktop 和 TgWitness 中執行已匯入的 TData／會話金鑰。Telegram 可能會使共享授權失效（AUTH_KEY_DUPLICATED）。若需並行使用，請透過手機號碼或 QR 碼建立獨立的 TgWitness 登入帳號。</p><a href="../demo/guide.html?lang=zh-Hant#session-warning">閱讀會話匯入警告</a></div></aside>
+      <div class="section-heading"><div><p class="eyebrow">在您的電腦上</p><h2 id="start-title">您的第一個工作區就從這裡開始。</h2></div><div class="section-intro"><p>先試用展示版，準備好後再連接備用帳戶。<br>Windows、Linux、macOS 或 Docker。</p><a class="text-link" href="../demo/guide.html?lang=zh-Hant">閱讀設定指南 <span aria-hidden="true">→</span></a></div></div>
+      <aside class="session-warning" id="session-warning" aria-labelledby="session-warning-title"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4M12 17h.01"/></svg><div><strong id="session-warning-title">一個已匯入的會話，一個正在運行的客戶端。</strong><p>請勿在 Telegram Desktop 和 TgWitness 中同時執行匯入的 TData 或工作階段，Telegram 可能會讓兩者都失效（AUTH_KEY_DUPLICATED）。兩者都需要？請透過手機號碼或 QR 碼另外登入 TgWitness。</p><a href="../demo/guide.html?lang=zh-Hant#session-warning">閱讀會話匯入警告</a></div></aside>
       <div class="demo-callout"><span class="demo-symbol" aria-hidden="true">↗</span><div><strong>連線前請先瀏覽此網站。</strong><p>無需 Telegram 帳號，即可試用此虛構工作區。</p><p><a class="demo-link" href="../demo/?lang=zh-Hant">開啟線上示範 →</a></p></div><div class="demo-commands"><span>Windows <code>scripts\Demo.cmd</code></span><span>Linux / macOS <code>sh start.sh --demo</code></span></div></div>
       <details class="presentation-details installation-details"><summary>本地安裝指令</summary>
       <div class="start-layout">
         <div class="start-intro"><span class="step-label">步驟 01</span><h3>取得原始碼。</h3><p><a class="download-link" href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">請下載原始碼 ZIP</a> 檔案並解壓縮，或克隆此儲存庫：</p><div class="code-block"><pre><code id="clone-command">git clone https://github.com/phishdestroy/TgWitness.git
-cd TgWitness</code></pre><button class="copy-button" type="button" data-copy="clone-command" hidden>文案</button></div><p class="small-note">執行原始程式需 Python 3.11 以上版本。若系統未安裝 Python，Windows 啟動程式將提供安裝選項。</p><a class="text-link" href="https://github.com/phishdestroy/TgWitness/releases">瀏覽版本 <span aria-hidden="true">↗</span></a></div>
+cd TgWitness</code></pre><button class="copy-button" type="button" data-copy="clone-command" hidden>文案</button></div><p class="small-note">需要 Python 3.11+。在 Windows 上，啟動器會提議為您安裝。</p><a class="text-link" href="https://github.com/phishdestroy/TgWitness/releases">瀏覽版本 <span aria-hidden="true">↗</span></a></div>
         <div class="start-run"><span class="step-label">步驟 02</span><h3>選擇運行方式。</h3><div data-tabs aria-label="安裝平台">
           <div class="tab-buttons platform-tabs" data-tab-buttons><button type="button" id="tab-windows" aria-controls="setup-windows">Windows</button><button type="button" id="tab-unix" aria-controls="setup-unix">Linux / macOS</button><button type="button" id="tab-docker" aria-controls="setup-docker">Docker</button></div>
           <div id="setup-windows" aria-labelledby="tab-windows" data-tab-panel><p>雙擊 <code>Start.cmd</code>，或在 PowerShell 中執行：</p><div class="code-block"><pre><code id="windows-command">.\Start.cmd</code></pre><button class="copy-button" type="button" data-copy="windows-command" hidden>文案</button></div><p>只是想試試看嗎？雙擊 <code>scripts\Demo.cmd</code> 即可體驗獨立演示版本。無需登入 Telegram。</p></div>
           <div id="setup-unix" aria-labelledby="tab-unix" data-tab-panel><p>若已安裝 Python 3.11 以上版本及 <code>venv</code>：</p><div class="code-block"><pre><code id="unix-command">sh start.sh</code></pre><button class="copy-button" type="button" data-copy="unix-command" hidden>文案</button></div><p>若要開啟虛構的日誌，請執行 <code>sh start.sh --demo</code>。</p></div>
           <div id="setup-docker" aria-labelledby="tab-docker" data-tab-panel><p>在已運行 Docker 並安裝 Compose 2.20+ 的情況下：</p><div class="code-block"><pre><code id="docker-command">docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre><button class="copy-button" type="button" data-copy="docker-command" hidden>文案</button></div><p>第二條指令會顯示您的私人面板代幣。請將其保留在您的裝置上。</p></div>
-        </div><p class="panel-address">啟動後，請開啟 <a href="http://127.0.0.1:8787">127.0.0.1:8787 並輸入 <span aria-hidden="true">↗</span></a>。</p><p class="small-note">若透過原始碼安裝，代幣位於 <code>data/live/panel-token.txt</code>。Telegram 登入可使用內建的 API 設定，或您從 <a href="https://my.telegram.org">my.telegram.org</a> 取得的專屬金鑰對。<a href="docs/reference/quickstart/">完整設定指南 ↗</a></p></div>
+        </div><p class="panel-address">啟動後，請開啟 <a href="http://127.0.0.1:8787">127.0.0.1:8787 並輸入 <span aria-hidden="true">↗</span></a>。</p><p class="small-note">從原始碼安裝時，權杖位於 <code>data/live/panel-token.txt</code>。您自己的 API 憑證（來自 <a href="https://my.telegram.org">my.telegram.org</a>）為選用。<a href="docs/reference/quickstart/">完整安裝指南 ↗</a></p></div>
       </div>
       </details>
       <p class="release-note"><strong>TgWitness 0.8.1</strong> <a href="docs/reference/changelog/">最新動態 →</a> · <a href="docs/reference/features/">功能與已知限制 →</a></p>
@@ -191,9 +191,9 @@ docker compose exec tgwitness cat /data/panel-token.txt</code></pre><button clas
 
     <section class="docs wrap" id="docs" aria-labelledby="docs-title"><div class="section-heading"><div><p class="eyebrow">一次只處理一項任務</p><h2 id="docs-title">清晰的操作指引。實用的下一步建議。</h2></div><a class="text-link" href="docs/">探索指南 ↗</a></div><a class="capability-link" href="guides/modes.html"><svg viewBox="0 0 32 32" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2"/><rect x="19" y="3" width="10" height="10" rx="2"/><rect x="3" y="19" width="10" height="10" rx="2"/><path d="m19 25 4 4 7-10" stroke-linecap="round" stroke-linejoin="round"/></svg><div><h3>模式、情境與證據等級</h3><p>四種蒐集模式。八種驗證等級。為您的案件找到合適的工作流程。</p></div><span aria-hidden="true">↗</span></a><div class="doc-links"><a href="docs/accounts/"><span>01</span><div><h3>連結帳戶</h3><p>支援透過手機、QR 碼及相容的會話進行資料匯入。</p></div><span aria-hidden="true">↗</span></a><a href="docs/proxies/"><span>02</span><div><h3>選擇代理伺服器</h3><p>公開的 MTProxy 清單或您自訂的路由。</p></div><span aria-hidden="true">↗</span></a><a href="docs/witness/"><span>03</span><div><h3>設定 Witness 機器人</h3><p>您 Telegram 頻道中的簽名檢查點。</p></div><span aria-hidden="true">↗</span></a><a href="docs/exports/"><span>04</span><div><h3>匯出與驗證</h3><p>分享擷取的歷史紀錄並驗證其完整性。</p></div><span aria-hidden="true">↗</span></a></div></section>
 
-    <section class="archive-tools wrap" aria-labelledby="archive-tools-title"><h2 id="archive-tools-title">查閱存檔。</h2><p>載入歷史紀錄、檢視 AI 來源、連接 MCP 客戶端、識別已儲存的媒體檔案，並發送經簽名的 webhook。</p><p><a class="text-link" href="docs/archive/">探索工作流程 <span aria-hidden="true">↗</span></a></p></section>
+    <section class="archive-tools wrap" aria-labelledby="archive-tools-title"><h2 id="archive-tools-title">查閱存檔。</h2><p>歷史紀錄、附來源的 AI、MCP、OCR 和簽名 webhook。</p><p><a class="text-link" href="docs/archive/">探索工作流程 <span aria-hidden="true">↗</span></a></p></section>
 
-    <section class="faq wrap" aria-labelledby="faq-title"><h2 id="faq-title">開始之前。</h2><div><details><summary>此頁面是否與 Telegram 相關？</summary><p>不，這是一個包含虛構範例與螢幕截圖的靜態專案頁面。實際應用程式運行於您的電腦或伺服器上；登入程序亦在該處進行。</p></details><details><summary>它能否恢復在擷取前已被刪除的訊息？</summary><p>不。TgWitness 僅保留您的帳戶在資料收集執行期間所觀察到的內容。後續的歷史快照無法還原未被記錄的編輯或已刪除的訊息。</p></details><details><summary>我的整個日誌是否都經過加密？</summary><p>帳戶憑證與簽名密鑰均儲存於加密金庫中。本機訊息與附件需存放於加密磁碟或磁碟區。匯出檔案可選擇使用受密碼保護的 AES-256 ZIP 檔案。</p></details><details><summary>這與 Telegram 有任何關聯嗎？</summary><p>不。TgWitness 是一個獨立專案，採用 Telethon 開發，並依據 MIT 授權條款發佈。您可透過內建的 API 設定或您自己的 API 對來授權您的帳戶。</p></details></div></section>
+    <section class="faq wrap" aria-labelledby="faq-title"><h2 id="faq-title">開始之前。</h2><div><details><summary>此頁面是否與 Telegram 相關？</summary><p>不需要。這是一個附虛構範例的靜態頁面。應用程式在您自己的電腦上執行，您在那裡登入。</p></details><details><summary>它能否恢復在擷取前已被刪除的訊息？</summary><p>不能。它只保存執行期間您的帳戶看到的內容。之後的快照無法重建錯過的編輯或已刪除的訊息。</p></details><details><summary>我的整個日誌是否都經過加密？</summary><p>工作階段和金鑰會加密。訊息和檔案不會，請使用磁碟加密。匯出可以設定 AES-256 密碼。</p></details><details><summary>這與 Telegram 有任何關聯嗎？</summary><p>不是。這是一個以 Telethon 為基礎、採用 MIT 授權的獨立專案。您使用自己的帳戶登入。</p></details></div></section>
     <section class="operator-notice wrap" aria-labelledby="operator-notice-title" lang="en" dir="ltr" translate="no">
       <div class="operator-notice-copy">
         <p class="operator-notice-label">PROJECT NOTICE / LICENCE</p>

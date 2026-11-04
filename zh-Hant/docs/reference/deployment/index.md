@@ -34,17 +34,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 - **macOS：**請安裝最新的 Python 3.11+ 發行版；請勿假設作業系統預設提供的 解釋器符合要求。請使用專案目錄中的 `python3 start.py`。
 - **Docker：**請使用搭配 Compose v2.20 或更新版本的 Docker Engine／Desktop。在 Windows 系統上，Docker Desktop 必須使用 Linux 容器。該容器會自行安裝 所需的 Python 依賴項；主機無需另行安裝 Python。
 
-請使用持久性本地儲存空間作為資料目錄。規劃容量時需考量訊息、 媒體檔案、WAL 增長、匯出及備份等因素；目前尚無基於實證的通用最低 磁碟／記憶體規格適用於所有工作負載。若 CPU 架構與 Python 版本 缺乏相容的依賴項輪（wheel），可能需要額外的建置工具及其 專屬的驗證程序。 「可攜式」並非指聲稱支援所有作業系統或硬體。
-
-已於本地端驗證 Windows 11/Python 3.12 環境。Linux/macOS/容器設定檔及持續整合 (CI) 雖已提供，但尚未在此開發主機上執行。具體範圍請參閱 [VERIFICATION.md](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/) 檔案。
-
 ## 本地電腦
 
 請在 Windows 系統上使用 `Start.cmd`，或在 Linux/macOS 系統上使用 `sh start.sh`。`scripts\Setup.cmd` 或 `sh start.sh --setup-only` 會預先 設定環境。啟動程式在首次使用時會安裝所需依賴項；後續啟動時 則會重複使用該環境。設定及 Telegram 訊息收集過程需要網路連線， 但瀏覽現有記錄及建立匯出檔則可在離線狀態下進行。
 
 設定完成後執行 `python start.py --check`，以檢查本機依賴項、Ed25519、 儲存空間、金鑰設定及監聽位址，此過程不會啟動資料收集器。 若需結構化輸出，請使用 `--json`。傳入預期的 `--data-dir`、`--host` 及 `--port`。此檢查不會安裝套件、建立日誌或連線至 Telegram； 亦非完整性或覆蓋範圍的驗證。啟動時會另行驗證 現有日誌。`python start.py --help` 亦會跳過安裝步驟。
-
-選項：
 
 執行 start.py 後，請在 Windows 系統上使用 `.venv\Scripts\python.exe`，或在 Linux/macOS 系統上使用 `.venv/bin/python` 來執行輔助指令，亦可先啟用該環境。 以下 `python -m ...` 範例假設該環境已啟用。
 
@@ -73,8 +67,6 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 ```
 python tools/build_portable.py
 ```
-
-建置程式會驗證執行時校驗和，將受限的依賴項安裝至 套件中，使用內嵌的解釋器執行就緒檢查，並將 ZIP 檔案 與校驗和寫入 `dist/`。
 
 ## 容器
 
@@ -121,8 +113,6 @@ docker compose logs witness                     # witness key fingerprint
 此服務可透過 Compose 網路內的收集器存取，網址為 `http://tgwitness:8787` （`TGWITNESS_WITNESS_COLLECTOR` 會覆寫此設定，例如 `/profiles/<workspace ID>` 適用於 另一個工作區）。若要使用由他人運作的獨立伺服器上的證據日誌，請在該處使用 `deploy/compose/compose.witness.yaml` ，並將 `TGWITNESS_WITNESS_COLLECTOR` 設定為收集器的 HTTPS 位址；該檔案僅包含證據日誌。
 
 ## 安裝已發佈的映像檔
-
-此網站將於[發布工作流程](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/#automated-github-releases) 成功完成，且 GHCR 套件配置公開後正式上線。儲存庫的所有者／名稱並未硬編碼 於此原始碼樹中。請使用該次發布工作流程摘要中顯示的圖片。
 
 將 `deploy/env.example` 複製到 `.env`。將 `TGWITNESS_IMAGE` 設定為已發布的版本，並使用 **小寫的**儲存庫路徑，例如：
 
@@ -202,18 +192,6 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 
 更新後，請檢查控制面板存取權限、帳戶身分、監測狀態及覆蓋範圍。 重新啟動並不會重建遺漏的 Telegram 更新。若未來版本變更儲存格式， 回滾操作可能需要使用更新前的備份。
 
-## GitHub 自動發佈
-
-當此 專案推送至已啟用 Actions 的 GitHub 儲存庫後，[發布工作流程](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml)即已就緒。該流程會在 **發布** GitHub Release 時執行，包含預發布版本。僅推送草稿或標籤 並不會發布套件。
-
-1. 設定套件版本與變更紀錄，然後發布一個標記為 `v` 加上確切 `pyproject.toml` 版本（例如 `v0.8.0`）的發行版本。
-2. 此工作流程會驗證標籤，並執行適用於 Windows/Linux/macOS 的共用 Python、 general/account-import/QR 瀏覽器、原始碼套件及 Docker 檢查。此外，亦會在 這三種作業系統上，使用 Python 3.12 進行全新的原生安裝測試。
-3. 在通過上述檢查後，系統會於 QEMU 環境下對 ARM64 映像進行煙霧測試，並將 AMD64/ARM64 映像發佈至`ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` ， 同時附上原始碼 ZIP 檔與 Python wheel 檔案及其 SHA-256 校驗檔。 Windows 便攜版 ZIP 檔即為檢查工作流程所測試的精確產出物； 發佈工作流程會下載並發佈該產出物及其校驗和。
-4. 最後一個工作流程會再次下載所有三個已發佈的套件，並驗證其 校驗和。接著發佈`SHA256SUMS.txt` 和`RELEASE-MANIFEST.json` ，並記錄 版本、原始碼修訂版本及資產大小。上傳時不會覆寫 現有的發佈資產。
-5. 首次發佈後，請開啟 GHCR 套件設定，並將可見性 設為「**公開」**，若需進行匿名影像擷取。僅有公開的原始碼儲存庫 並不能保證套件會以公開容器形式發佈。組織政策必須 允許套件發佈。此工作流程使用 `GITHUB_TOKEN`；儲存庫中 不得包含任何註冊表密碼或 VPS 憑證。
-
-此本地準備工作尚未證實遠端工作流程能順利運作。ARM64 模擬僅為初步測試，並非原生硬體或實際 Telegram 環境的驗證。 此功能可自動化版本發佈封裝；啟動伺服器仍需使用 Compose 指令及其網域／主機的先決條件。當新版本發佈時，現有伺服器不會自動 進行升級或重新啟動。
-
 ## 遠端伺服器
 
 請將服務限制在迴路連接並使用 SSH 隧道，或讓 HTTPS 連線在 反向代理伺服器處終止。基礎 Compose 檔案僅限本地使用；可選的 `deploy/compose/compose.https.yaml` 覆蓋層會提供 Caddy 以支援已設定的網域。 請勿讓承載者憑證出現在 URL 及代理伺服器日誌中。反向代理伺服器應限制 請求大小與連線頻率。請勿將明文 HTTP 暴露於網際網路。
@@ -244,14 +222,6 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 若要使用其他工作區，請從「**Exports → Workspace ID**」中選用 `--profile ID`； 若要使用遠端伺服器，請選用 `--format zip|jsonl|csv|html` 或 `--url https://your-server`； 若要變更 5 GiB 的傳輸限制，請選用 `--max-mib`。僅允許在 迴圈連接（loopback）中使用純 HTTP。憑證透過標頭傳輸，拒絕重定向，現有檔案 不會被覆寫，且未完成的下載不會被發布為已完成檔案。 若 TGWITNESS_TOKEN 覆寫了生成的憑證，請使用一個獨立受保護的檔案 來存放該有效值：panel-token.txt 不會因覆寫而被改寫。 該指令的 SHA-256 僅為傳輸校驗和；請獨立驗證已簽名的 ZIP 檔案。
 
-伺服器匯出檔案將保留於各工作區的私有 `temporary-exports/` 目錄中。 成功執行的匯出作業會清理其檔案。中斷的匯出作業將於 下次工作區啟動時移除，屆時該工作區將保持其專屬實例鎖定狀態。此目錄屬於 儲存威脅／容量模型的一部分；請使用加密資料卷。生產級別的 數吉字節級傳輸仍需在您的目標系統上進行驗證。
-
 該面板顯示排隊中／失敗的媒體檔案、最舊的待處理媒體檔案、可用磁碟空間、Telegram 請求暫停狀態，以及存取權限未經確認的來源。這些診斷資訊並非 完整的端對端傳輸監控。工作區共用同一個程序；若某個帳戶活動頻繁， 仍可能影響其他帳戶。 獨立的工作程序、資料保留／輪替、持久性更新 恢復以及完整的部署認證仍維持不變。控制面板的範圍式存取權限已記錄於 [「存取與權限」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)文件中；獨立檢查點則由「 [見證指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/)」涵蓋。
-
-## 連線與保護選項
-
-連線路徑依工作區而定，應在授權前完成設定。 SOCKS5/HTTP CONNECT 會使用已固定（pinned）的 python-socks 依賴項。MTProxy 採用 Telethon 的 實驗性隨機化中間傳輸；不支援偽 TLS ee 密鑰。 直接備用模式取決於所選的 [IP 模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/#ip-modes)：「**隱藏位址」**會拒絕此模式；**「直接作為最後手段」**則會在延遲後允許此模式。**位於隧道或 VPN 後方的伺服器允許**直接路由，但不會建立 VPN。這並非系統層級的網路政策。
-
-對於新安裝，TGWITNESS_VAULT_KEY_FILE 應指向一個獨立受保護的隨機 主金鑰檔案。請在容器中將其以唯讀方式掛載至 /data 目錄之外。請分別將每個工作區的公開 vault.external.json 鹽值元資料與主金鑰妥善保存。 現有的本地金庫需要進行有計畫的遷移；設定此變數並不會 自動將其轉換。訊息／媒體儲存及匯出內容均未經應用程式加密。 請視需要使用加密卷宗及足夠的私人臨時儲存空間。
 
 詳細操作流程：[連線／安全性](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/)及 [運作模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/operations/)。

@@ -32,20 +32,20 @@
 <nav class="breadcrumbs" aria-label="Anleitungen"><a href="../../">Startseite</a> <span aria-hidden="true">/</span> <a href="../">Dokumentation</a> <span aria-hidden="true">/</span> <span aria-current="page">In wenigen Minuten loslegen</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Was wurde getestet? →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Durchsuchen Sie die Dokumentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Versuchen Sie es mit „Proxy“, „Hash-Kette“, „Token“ oder „Witness“ …" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Klare Suche" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Geben Sie ein Wort ein, um die Anleitungen und das Nachschlagewerk zu durchsuchen. Die Suche erfolgt in Ihrem Browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Dokumentation / 04</p><h1>In wenigen Minuten loslegen</h1><p class="guide-outcome">Sehen Sie sich zunächst ein Beispiel an. Verbinden Sie anschließend Ihr eigenes Konto.</p>
+<article class="guide-content"><p class="eyebrow">Dokumentation / 04</p><h1>In wenigen Minuten loslegen</h1><p class="guide-outcome">Sehen Sie sich zuerst die Demo an, dann verbinden Sie Ihr eigenes Konto.</p>
 <h2 id="demo">Schauen Sie sich ohne Konto um</h2>
-<p>Laden Sie das Projekt herunter oder klonen Sie es, installieren Sie <strong>Python 3.11 oder höher</strong> und führen Sie die Demo aus. Der Launcher erstellt eine lokale Umgebung und installiert die festgelegten Abhängigkeiten.</p>
+<p>Holen Sie sich das Projekt, sorgen Sie für <strong>Python 3.11 oder neuer</strong> und starten Sie die Demo. Den Rest erledigt der Starter.</p>
 <pre><code>git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness</code></pre>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\scripts\Demo.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh --demo</code></pre></section></div>
-<p>Der Browser öffnet einen Arbeitsbereich mit fiktiven Nachrichten. Öffnen Sie eine Unterhaltung, vergleichen Sie eine Bearbeitung und überprüfen Sie einen Export. Der Demo-Modus stellt keine Verbindung zu Telegram her.</p>
+<p>Im Browser öffnet sich ein Arbeitsbereich mit erfundenen Nachrichten. Öffnen Sie einen Chat, vergleichen Sie eine Bearbeitung, schauen Sie sich einen Export an. Telegram ist nicht beteiligt.</p>
 <figure><img src="../../../assets/chats-dark.png" width="1440" height="1000" alt="TgWitness-Konversationsansicht mit Beispielnachrichten" loading="lazy"><figcaption>Ein Beispiel-Arbeitsbereich. Ihr eigenes Protokoll beginnt separat.</figcaption></figure>
 <h2 id="live">Richten Sie Ihren eigenen Arbeitsbereich ein</h2>
-<p>Beenden Sie den Demo-Vorgang und verwenden Sie anschließend den normalen Launcher:</p>
+<p>Schließen Sie die Demo, dann:</p>
 <div class="platforms"><section><h3>Windows</h3><pre><code>.\Start.cmd</code></pre></section><section><h3>Linux / macOS</h3><pre><code>sh start.sh</code></pre></section></div>
-<p>Öffnen Sie die vom Launcher angezeigte lokale Adresse. Geben Sie, falls dazu aufgefordert, den <strong>Panel-Zugriffstoken</strong> aus der im Terminal genannten lokalen Datei ein. Dadurch wird TgWitness freigeschaltet; dies ist unabhängig von der Anmeldung bei Telegram.</p>
+<p>Öffnen Sie die Adresse, die der Starter zeigt, und fügen Sie das <strong>Panel-Zugangstoken</strong> aus der genannten Datei ein. Das ist für TgWitness, nicht für Telegram.</p>
 <h2 id="next">Erfassen Sie Ihre erste Nachricht</h2>
-<ol><li><a href="../accounts/">Verbinden Sie ein eigens dafür vorgesehenes Telegram-Konto.</a></li><li>Wählen Sie eine Gruppe oder einen Kanal aus, auf den das Konto Zugriff hat, und starten Sie anschließend die Überwachung.</li><li>Senden Sie eine neue Nachricht in einer Testgruppe, die Sie verwalten, und überprüfen Sie, ob diese im Protokoll erscheint.</li></ol>
+<ol><li><a href="../accounts/">Verbinden Sie ein eigens dafür vorgesehenes Telegram-Konto.</a></li><li>Wählen Sie eine Gruppe oder einen Kanal und starten Sie die Beobachtung.</li><li>Schicken Sie eine Nachricht in Ihre Testgruppe und sehen Sie zu, wie sie im Journal auftaucht.</li></ol>
 <p class="callout">Befolgen Sie für eine Serverinstallation die Anweisungen unter <a href="../server/">„Keep it running</a>“.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/quickstart/">Vollständige Quellenangabe →</a><a class="next-guide" href="../accounts/"><span>Nächster Schritt</span><strong>Ein Konto verbinden →</strong></a><p>Diese Leitfäden beschreiben die aktuelle Implementierung. Validierungsergebnisse und verbleibende Lücken werden separat dokumentiert. <a href="../reference/verification/">Was wurde getestet? →</a></p></footer>

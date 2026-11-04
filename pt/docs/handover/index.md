@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/handover/
 
-Compartilhe as observações relevantes, mantendo o espaço de trabalho original intacto.
+Compartilhe só o necessário; o original fica intacto.
 
-Uma transferência é um extrato separado e assinado. Escolha os chats e as pessoas, reduza identidades ou texto e decida quais arquivos e notas da equipe devem constar na cópia do destinatário. Seu manifesto registra a seleção e o número de registros inalterados, minimizados e omitidos.
+Uma entrega é um extrato assinado à parte: escolha chats e pessoas, oculte identidades ou texto e decida quais arquivos e notas da equipe entram. O manifesto registra o que foi mantido, reduzido e deixado de fora.
 
 ## Prepare o extrato do destinatário
 
-1. Abra **Exportações → Extrato de transferência**. Descreva sua finalidade, escolha os chats e o período UTC opcional e, em seguida, selecione **“Carregar participantes dos chats escolhidos”** se precisar dos nomes dos envolvidos.
-2. Escolha como lidar com os demais participantes: use pseudônimos, omita suas mensagens ou exiba-as conforme registradas. Defina o texto das mensagens e os anexos de forma independente; opcionalmente, oculte números de telefone e endereços de e-mail.
-3. Decida se deseja incluir marcadores e seções do Case Board ou cartões com comentários. Os pseudônimos dos investigadores podem substituir os nomes das equipes neste texto.
-4. Selecione **“Baixar extrato de transferência**”. Abra localmente o relatório gerado e os registros selecionados, verifique o arquivo e inspecione a cópia antes de enviá-la.
+1. **Exportações → Extrato de entrega**: escreva o propósito, escolha chats e um período e use **Carregar pessoas dos chats escolhidos** se precisar de pessoas nomeadas.
+2. Os demais: pseudônimos, fora ou como registrado. Texto e arquivos são chaves separadas; telefones e e-mails podem ser mascarados.
+3. Case Board: nada, favoritos e recortes, ou cartões com comentários. Os nomes da equipe podem virar apelidos.
+4. **Baixar extrato de entrega**, abra, verifique e revise antes de enviar.
 
 ### Um original, uma cópia para compartilhamento deliberado
 
@@ -54,12 +54,12 @@ Um pacote separado vinculado ao limite do diário de origem
 
 | Controle | Impacto no texto |
 | --- | --- |
-| Pessoas | Mantenha os sujeitos selecionados identificáveis; pseudonimize ou omita outros participantes, conforme for escolhido. |
-| Texto | Inclua todo o texto, apenas o texto das pessoas selecionadas e da conta observadora, ou omita o texto da mensagem e seus campos de detalhes que contenham texto. |
-| Arquivos | Escolha os arquivos das pessoas selecionadas e da conta em observação, todos os arquivos das mensagens exibidas ou nenhum arquivo. |
-| Case Board | Não inclua materiais do quadro, marcadores e fatias, nem cartões com discussões da equipe. |
+| Pessoas | As pessoas selecionadas continuam nomeadas; as demais recebem pseudônimos ou ficam de fora. |
+| Texto | Todo o texto, só o das pessoas selecionadas e da sua conta, ou nenhum. |
+| Arquivos | Arquivos das pessoas selecionadas e da sua conta, todos os arquivos mostrados ou nenhum. |
+| Case Board | Nada, favoritos e recortes, ou cartões com discussão. |
 
-Revise textos em formato livre e o conteúdo dos arquivos, bem como as identidades: um pseudônimo não remove automaticamente todos os nomes escritos em uma mensagem ou anexo. Se um arquivo preservado selecionado estiver indisponível, restaure-o ou omita explicitamente os anexos antes de gerar o extrato.
+Leia também o texto e os arquivos: um pseudônimo não remove nomes escritos dentro de uma mensagem ou anexo. Se faltar um arquivo selecionado, restaure-o ou deixe os anexos de fora.
 
 ## Mantenha o texto de forma que possa ser verificado de maneira independente
 
@@ -67,4 +67,4 @@ Revise textos em formato livre e o conteúdo dos arquivos, bem como as identidad
 python -m tgwitness.verify handover.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Mantenha o arquivo original de evidências assinadas e os pontos de verificação separadamente. A transferência registra sua própria projeção, de modo que o destinatário possa verificar a cópia entregue sem receber todo o espaço de trabalho. [O Report Studio](https://phishdestroy.github.io/TgWitness/pt/docs/reports/) fornece seu layout de leitura; [a verificação de exportação](https://phishdestroy.github.io/TgWitness/pt/docs/exports/) explica as referências confiáveis.
+Guarde você mesmo o arquivo original e os pontos de verificação. O destinatário pode verificar a cópia dele sem receber o espaço inteiro. Design: [Report studio](https://phishdestroy.github.io/TgWitness/pt/docs/reports/). Referências confiáveis: [verificação da exportação](https://phishdestroy.github.io/TgWitness/pt/docs/exports/).

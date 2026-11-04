@@ -241,20 +241,6 @@ Les membres partagent les paramètres du groupe ; un compte peut conserver ses p
 
 **Compte → Se déconnecter de Telegram** (avec la surveillance en pause) demande à Telegram de mettre fin à la session ; celle-ci disparaît donc également de la rubrique **Paramètres → Appareils** du compte, et la session est supprimée du coffre-fort de l’espace de travail. Le journal, les sources, les paramètres et la clé de signature sont conservés, et le journal enregistre la déconnexion. L’espace de travail appartient toujours à son compte : seul ce compte peut s’y reconnecter. Si Telegram ne répond pas, la session est tout de même supprimée ici et le panneau l’indique ; mettez-y fin dans Telegram sous **Paramètres → Appareils**.
 
-## Convertir une session Telethon hors ligne
-
-Le panneau importe directement les fichiers `.session`. Pour une conversion hors ligne vers un fichier StringSession, exécutez depuis le dossier du projet :
-
-```
-.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows
-```
-
-```
-.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS
-```
-
-Le convertisseur lit uniquement les fichiers SQLite de Telethon (jusqu’à 64 Mio), ne modifie jamais les données d’entrée, n’effectue aucune requête réseau et refuse de remplacer un fichier de sortie existant.
-
 ## Assurer la sécurité des fichiers de compte
 
 - Traitez chaque `.session`, fichier ZIP TData, StringSession, clé d’authentification et fichier JSON de compte comme un mot de passe. TgWitness conserve les informations d’autorisation importées dans son coffre-fort chiffré ; vous pouvez supprimer les fichiers d’origine par la suite.

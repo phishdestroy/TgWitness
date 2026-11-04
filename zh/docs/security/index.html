@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../">首页</a> <span aria-hidden="true">/</span> <a href="../">文档</a> <span aria-hidden="true">/</span> <span aria-current="page">确保安全</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">文档 / 14</p><h1>确保安全</h1><p class="guide-outcome">了解 Telegram 的传输路径、公共代理列表以及可选的外部服务。了解每项加密功能能解锁什么、保护措施涵盖哪些内容，以及哪些方面需要您自行处理。</p>
+<article class="guide-content"><p class="eyebrow">文档 / 14</p><h1>确保安全</h1><p class="guide-outcome">什么会离开您的机器，每个密钥能打开什么，哪些由保护措施覆盖、哪些由您负责。</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>默认面板地址</span></div><div role="listitem"><strong>256 位</strong><span>随机面板令牌</span></div><div role="listitem"><strong translate="no">0</strong><span>内容分发网络（CDN）、分析工具或远程字体</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>每条记录均附有签名</span></div></div>
 <h2 id="map">所有内容的归宿</h2>
-<p>该采集器、其控制面板以及所有保存的记录均存储在您运行该工具的计算机或服务器上。默认情况下，Telegram 是唯一的输出目标；其他目标均需通过单独的开关进行设置。</p>
+<p>采集器、面板和每条记录都留在您的机器上。默认只连接 Telegram；其他一切都是单独的开关。</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / 机器留下的痕迹</span><span class="sample-tag">您的安装</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="开启或关闭可选目标"><button type="button" data-flow-toggle="replica" aria-pressed="false">站外文案</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">通知</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">时间戳</button><button type="button" data-flow-toggle="witness" aria-pressed="false">Witness</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>秘密</th><th>存储位置</th><th>它能带来什么</th><th>若发生泄露</th></tr></thead>
 <tbody>
-<tr><td><strong>面板令牌</strong></td><td>数据目录中的 <code>panel-token.txt</code>；浏览器仅将其保留在当前标签页中</td><td>所有工作区中的所有内容：阅读和导出、更改范围、登录账户</td><td>停止 TgWitness，删除 <code>panel-token.txt</code>，然后重新启动：将生成一个新令牌</td></tr>
+<tr><td><strong>面板令牌</strong></td><td>数据目录中的 <code>panel-token.txt</code>；浏览器按标签页保存</td><td>每个工作区中的一切</td><td>停止 TgWitness，删除 <code>panel-token.txt</code>，重新启动：会生成新的令牌</td></tr>
 <tr><td><strong>Telegram 会话</strong></td><td>Vault，加密版（<code>credentials.enc</code>）</td><td>Telegram 账号本身</td><td>在 Telegram 中通过<em>“设置”→“设备</em>”结束当前会话</td></tr>
-<tr><td><strong>签名密钥</strong></td><td>Vault，加密版（<code>signing.enc</code>）</td><td>通过您的数字指纹进行验证的签名记录</td><td>检查点存储在其他位置，见证记录和时间戳可显示此前存在的内容</td></tr>
-<tr><td><strong>保险库密钥</strong></td><td>数据旁标注 <code>vault.key</code>，或为新数据目录使用外部主密钥</td><td>解密保险库</td><td>请将会话密钥和签名密钥也视为已泄露</td></tr>
-<tr><td><strong>Witness 代币</strong></td><td>关于 Witness 主机</td><td>只读：带签名的检查点和健康状态</td><td>在“Witness”页面上将其删除；创建一个新的</td></tr>
-<tr><td><strong>站外文案关键点</strong></td><td>Vault；只需下载一次即可进行数据恢复</td><td>解析异地副本</td><td>任何持有存储对象的人均可对其进行解密：请将该副本视为已泄露</td></tr>
+<tr><td><strong>签名密钥</strong></td><td>Vault，加密版（<code>signing.enc</code>）</td><td>以您的指纹签署记录</td><td>保存在别处的检查点、见证人和时间戳仍能显示之前存在的内容</td></tr>
+<tr><td><strong>保险库密钥</strong></td><td>数据旁边的 <code>vault.key</code>，或外部主密钥</td><td>保险库</td><td>请假定会话和签名密钥也已泄露</td></tr>
+<tr><td><strong>Witness 代币</strong></td><td>关于 Witness 主机</td><td>只读：检查点和健康状态</td><td>在见证人页面删除它，再新建一个</td></tr>
+<tr><td><strong>站外文案关键点</strong></td><td>Vault；只需下载一次即可进行数据恢复</td><td>异地副本</td><td>同时拿到存储桶的人可以解密它：请将副本视为已暴露</td></tr>
 </tbody></table></div>
 <h2 id="threats">保护范围</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> 已收录</h3><ul>
-<li>导出记录中若存在被修改、删除或重新排序的条目：哈希链或签名将无法通过验证。</li>
-<li>在检查点之后被截短或重建的日志：保留的检查点已不再匹配。</li>
-<li>面板令牌猜测：256 位随机位，在常数时间内进行比对；每分钟失败 15 次后，该地址将被拒绝。</li>
-<li>恶意聊天内容：文本以纯文本形式插入，绝不以 HTML 形式呈现；附件以文件形式下载；该面板不会从其他网站加载任何内容。</li>
-<li>一个包含外部保险库密钥的复制数据目录：若无主密钥，会话和签名密钥将保持加密状态。</li>
+<li>记录被修改、删除或重新排序：哈希链或签名会断裂。</li>
+<li>在您将检查点保存到别处之后，日志被截短或重建：检查点不再匹配。</li>
+<li>猜测令牌：256 位随机数，常量时间比较，每分钟失败 15 次即封锁该地址。</li>
+<li>恶意聊天内容：文本始终是文本，绝不作为 HTML；附件以文件形式下载；面板不从其他网站加载任何内容。</li>
+<li>数据目录被盗但保险库密钥在外部：会话和密钥仍是加密的。</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> 由您决定</h3><ul>
-<li>主控制面板的令牌拥有完全控制权。可向其他人授予其所需的、针对特定范围的账户、聊天和操作访问权限；请务必将主密钥保密。</li>
-<li>服务器管理员可以读取所有内容，并可重写和重新签署日志。请将指纹和检查点保存在另一台系统上。</li>
-<li>TgWitness 不会对消息文本和媒体文件进行加密。请使用磁盘加密并设置严格的权限。</li>
-<li>若通过 localhost 以外的普通 HTTP 连接，网络上将暴露令牌。请使用 HTTPS 或 SSH 隧道。</li>
-<li>通过签名和检查点核对已保存的记录。审查数据采集的覆盖范围，并针对您使用的账户和来源测试数据交付情况。</li>
+<li>主令牌可以做任何事。请给他人限定范围的访问权限，主令牌留给自己。</li>
+<li>机器上的管理员可以读取一切并重新签署日志。请将指纹和检查点保存在别处。</li>
+<li>TgWitness 不加密消息和媒体。请加密磁盘，收紧权限。</li>
+<li>在 localhost 之外使用普通 HTTP 会泄露令牌。请使用 HTTPS 或 SSH 隧道。</li>
+<li>签名不会告诉您遗漏了什么。请在您自己的账户和来源上检查覆盖范围并测试送达。</li>
 </ul></section>
 </div>
-<p>可通过设置权限、有效期和会话限制<a href="../access/">来共享案件访问权限</a>。Witness 令牌仍作为独立的凭证存在。</p>
+<p><a href="../access/">共享案件的访问权限</a>，可设置权限、有效期和会话限制。</p>
 <h2 id="hardening">强化安装安全性</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>已完成 0/8</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>请使用专用的 Telegram 账号</strong>——切勿使用您的主账号。控制面板令牌和会话可让您对其拥有完全控制权。</span></li>
-<li><span class="check-text"><strong>请将控制面板保留在 127.0.0.1 上。</strong>仅可通过 HTTPS（随附的 Caddy 配置）或 SSH 隧道进行远程访问。</span></li>
-<li><span class="check-text">对存放数据目录的磁盘进行加密：消息正文和媒体文件均按接收时的原始状态存储。</span></li>
-<li><span class="check-text"><strong>将数据目录限制</strong>在服务账户内。在 Unix 系统中，新建目录的权限应设为 0700；在 Windows 系统中，请设置文件夹的权限。</span></li>
-<li><span class="check-text"><strong>请将保险库主密钥保存在其他</strong>服务器上：在创建数据目录之前，请设置 <code>TGWITNESS_VAULT_KEY_FILE</code>。</span></li>
-<li><span class="check-text"><strong>请将签名密钥指纹和检查点保存在</strong>另一台系统上，并在另一台主机上添加一个见证节点。</span></li>
+<li><span class="check-text"><strong>请使用专用的 Telegram 账号</strong>，绝不要用主账号。</span></li>
+<li><span class="check-text"><strong>请将控制面板保留在 127.0.0.1 上。</strong>远程访问只通过 HTTPS（内置 Caddy）或 SSH 隧道。</span></li>
+<li><span class="check-text"><strong>请加密存放数据目录的磁盘</strong>，消息和媒体按原样存储。</span></li>
+<li><span class="check-text"><strong>将数据目录限制</strong>为仅服务账户可访问（Unix 上为 0700，Windows 上为文件夹权限）。</span></li>
+<li><span class="check-text"><strong>在服务器上将保险库密钥保存在别处</strong>：首次启动前设置 <code>TGWITNESS_VAULT_KEY_FILE</code>。</span></li>
+<li><span class="check-text"><strong>将指纹和检查点保存在</strong>另一个系统上，在另一台主机上运行见证人。</span></li>
 <li><span class="check-text"><strong>切勿将</strong> <code>data/</code>、会话密钥、<code>panel-token.txt</code> 或保险库密钥<strong>上传</strong>至 GitHub 或聊天群组。</span></li>
 <li><span class="check-text"><strong>请勿</strong>在反向代理服务器上<strong>记录</strong> <code>Authorization</code> 标头或请求正文。</span></li>
 </ol>
 </div>
-<details><summary>我可以更改面板令牌而不丢失数据吗？</summary><p>是的。该令牌仅用于打开控制面板。停止 TgWitness，从数据目录中删除 <code>panel-token.txt</code>，然后重新启动；日志、会话和密钥均保持不变。设置 <code>TGWITNESS_TOKEN</code> 后，将使用环境变量值代替文件。</p></details>
-<details><summary>为什么消息在静止状态下不进行加密？</summary><p>采集者必须读取这些日志才能进行搜索、版本比对和导出。若仅在同一台机器上使用密钥对日志进行加密，对于能够读取该机器的人来说，这种加密措施几乎起不到什么作用。磁盘加密可保护已停止运行或被盗的磁盘；而严格的权限设置则可保护正在运行的磁盘。</p></details>
+<details><summary>我可以更改面板令牌而不丢失数据吗？</summary><p>可以，它只能打开面板。停止 TgWitness，删除 <code>panel-token.txt</code>，重新启动。日志、会话和密钥都会保留。如果设置了 <code>TGWITNESS_TOKEN</code>，则以该值为准，而不是文件。</p></details>
+<details><summary>为什么消息在静止状态下不进行加密？</summary><p>采集器必须读取它们才能搜索、比较和导出。放在同一台机器上的密钥挡不住本来就能读取这台机器的人。磁盘加密防的是磁盘被盗，权限防的是运行中的系统。</p></details>
 <h2 id="report">报告漏洞</h2>
-<p>请在 GitHub 仓库中使用<strong>“Security”→“Report a vulnerability”（安全 → 报告漏洞）</strong>功能。请包含版本号、影响范围以及最简复现步骤。切勿发送凭据、账户目录或真实证据存档。如果无法进行私下报告，请提交一个问题，请求开通一个不包含漏洞细节的私有频道。</p>
+<p>在 GitHub 上使用 <strong>Security → Report a vulnerability</strong>。提供版本、影响以及使用虚构数据的最小复现。切勿发送凭据、账户文件夹或真实证据。如果私密报告已关闭，请开一个 issue 申请私密渠道，不要写漏洞利用细节。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">完整引用 →</a><a class="next-guide" href="../start/"><span>下一步</span><strong>几分钟内即可开始使用 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../reference/verification/">已测试的内容 →</a></p></footer>
 </main>

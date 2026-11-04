@@ -2,28 +2,28 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/cases/
 
-Work an entire case across channels, groups, private chats and bots: collect, connect, reconstruct and hand over the evidence.
+A whole case across channels, groups, private chats and bots: collect, connect the dots, rebuild the timeline, hand it over.
 
-This walkthrough follows one fictional incident through a whole account. Use collection, search and people profiles to find the source records, [Case Board](https://phishdestroy.github.io/TgWitness/docs/case-board/) to organize and discuss them, and [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/) to present the findings. The illustrated map below explains the connections in this example.
+One made-up incident, start to finish. Collection, search and people profiles find the records, [Case Board](https://phishdestroy.github.io/TgWitness/docs/case-board/) organizes them, [Report studio](https://phishdestroy.github.io/TgWitness/docs/reports/) presents them.
 
 WORKED CASE / A CHANGED PAYMENT DESTINATION
 
 ### One incident. Four conversations. A trail to reconstruct.
 
-A channel announcement points to a bot. An operations group discusses a new payment link, and the bot displays it. The announcement is edited, a private follow-up repeats the destination, and a group message disappears.
+A channel post points to a bot. A group talks about a new payment link and the bot shows it. The post gets edited, a private chat repeats the link, a group message vanishes.
 
 Who posted each version?Where did the link appear?Which file was preserved?What changed, and when?
 
-For history loading, optional AI source review, MCP, OCR and outgoing webhooks, see [Work the archive](https://phishdestroy.github.io/TgWitness/docs/archive/).
+History loading, AI, MCP, OCR and webhooks: [Work the archive](https://phishdestroy.github.io/TgWitness/docs/archive/).
 
 ## 1. Establish coverage across the whole account
 
-Use a dedicated collecting account for whole-account scope. Main accounts can collect selected chats or a Telegram folder.
+Whole-account scope only on a dedicated account. A main account gets chosen chats or a folder.
 
-1. [Connect the collecting account](https://phishdestroy.github.io/TgWitness/docs/accounts/) in its own workspace. Record the case reference, account ID, workspace name and signing-key fingerprint in your case notes.
-2. Open **Sources → Observation scope → Investigation mode**. Review **Whole account**, all four source types and **Own actions**. This preset enables saving a new source’s profile and its latest **200 visible messages**. Press **Save scope** and complete the scope confirmation.
-3. Press **Load chats**. Compare the sources with the account’s dialog list and review exclusions. Under **Parameters → Chats read from the account’s list**, adjust the initial list limit if needed: the default is 1,000 dialogs, configurable up to 20,000. Chats beyond the limit are discovered when they become active.
-4. In **Recording settings**, select and save **All visible activity**. Review attachment types, size limits and free disk space. Start observation and validate a controlled message, edit and deletion before relying on the setup.
+1. [Connect the account](https://phishdestroy.github.io/TgWitness/docs/accounts/) in its own workspace. Note the case reference, account ID, workspace and key fingerprint.
+2. **Sources → Observation scope → Investigation mode**: **Whole account**, all four source types, **Own actions**. Every new chat gets its profile and last **200 visible messages** saved. **Save scope** and confirm.
+3. **Load chats** and compare with the account's chat list. The limit is 1,000 dialogs (up to 20,000 in **Parameters → Chats read from the account's list**); chats beyond it show up once they get active.
+4. **Recording settings** → **All visible activity**, check attachment limits and disk space. Start, then test with a message, an edit and a deletion.
 
 ChannelsGroupsPrivate chatsBots
 
@@ -31,44 +31,44 @@ ONE ACCOUNT / ONE SIGNING KEY**All selected account-visible activity → one jou
 
 Messages · edits · deletion notices · visible reactions · membership events · own actions
 
-“Whole account” covers the chats this account can access, with the configured source types and exclusions. Secret chats are unavailable. New dialogs are added as updates arrive; enabling this mode does not automatically download the complete old history of every existing chat.
+"Whole account" means every chat this account can open, minus exclusions. No secret chats. New chats join as they appear; old history isn't downloaded automatically.
 
 ## 2. Acquire history and preserve the files
 
-Create a Case Board collection for the investigation and bookmark the relevant saved records. Keep a source register alongside the case: each chat's numeric ID, title, collecting account, access/role, live start, history acquisition, media result and known gaps. Mark a source as acquired after checking the relevant result.
+Make a Case Board collection and bookmark what matters. Keep a source register: chat ID, title, account, role, start of live capture, history result, media result, gaps.
 
 | Need | Action in the panel | What it provides |
 | --- | --- | --- |
 | History across enabled chats | Sources → Load full history | Available past messages enter the workspace journal, with pause/resume and a signed progress report. [History guide](https://phishdestroy.github.io/TgWitness/docs/reference/history/). |
-| Existing chat context in the journal | Sources → Recording settings → History snapshot | Recent visible messages as signed observations. Default maximum 500; **Parameters → Largest history snapshot** can raise it up to 10,000. |
-| Complete currently visible history of one chat | Full chat export → Export full chat, or Chats → Export chat | A separate signed bundle with `chat.json` and `chat.html`. Repeat per source; retain completion/failure results. |
-| Context when a new chat appears | Observation scope → When a new chat or bot appears | A source profile and up to 1,000 recent visible messages; Investigation mode selects 200. Existing chats do not receive this intake retroactively. |
-| Attachment bytes | Download visible attachments + per-type limits | Check for `media.saved`, its SHA-256 and byte count. A queued, skipped or failed download is not a preserved file. |
+| Existing chat context in the journal | Sources → Recording settings → History snapshot | Recent messages as signed records. 500 by default, up to 10,000 in **Parameters → Largest history snapshot**. |
+| Complete currently visible history of one chat | Full chat export → Export full chat, or Chats → Export chat | A separate signed bundle with `chat.json` and `chat.html`, one per chat. |
+| Context when a new chat appears | Observation scope → When a new chat or bot appears | Its profile and up to 1,000 recent messages (200 in Investigation mode). Not applied to existing chats. |
+| Attachment bytes | Download visible attachments + per-type limits | Look for `media.saved` with SHA-256 and size. Queued, skipped or failed means not saved. |
 
-A full chat export is a separate snapshot; it does not import its entire history into the journal or people profiles. Use **Load full history** across enabled sources, or bounded journal snapshots, for historical material you need to search inside TgWitness. Review the source list before starting the run.
+A chat export doesn't go into the journal or people profiles. To search old history inside TgWitness, use **Load full history** or snapshots.
 
-In the worked case, acquire the announcement channel, operations group, bot conversation and private follow-up. Preserve the invoice attachment’s bytes and hash. History available today cannot reconstruct a message deleted before capture or an intermediate edit Telegram no longer returns.
+Here: the channel, the group, the bot chat and the private chat, plus the invoice file and its hash. What was deleted before capture is gone.
 
 ## 3. Keep the evolving conversation and your own actions
 
-Keep observation running as the case develops. Star the active case chats as priority sources; configure priority and other-source rechecks under **Recording settings → Recheck**. Review `recheck.completed`, continued catch-up, FloodWait and media outcomes as work progresses.
+Keep it running. Star the hot chats as priority, tune rechecks in **Recording settings → Recheck**, and keep an eye on `recheck.completed`, FloodWait and media results.
 
-Use **Chats → Profile → Save profile now** to retain current source descriptions, bot commands and other metadata Telegram returns. This source profile is separate from the people profiles built from journal messages.
+**Chats → Profile → Save profile now** saves the chat's description, bot commands and other metadata.
 
 **Following a bot or invitation as part of the case**
 
-1. In **Chats → Open Telegram link**, save the preview first. The original link and returned preview become signed records.
-2. If the investigation calls for it, **Join / open and observe** joins or opens the source and starts a bot with its supplied start parameter. A pending join request remains pending in the record.
-3. For an action you need to document, use the panel’s text reply or supported **Press button** control. The journal retains `interaction.requested` and `interaction.result`, including returned callback text or URL.
+1. **Chats → Open Telegram link**, save the preview first. Link and preview become signed records.
+2. If needed, **Join / open and observe** joins the chat or starts the bot with its start parameter.
+3. To document an action, reply or **Press button** from the panel. You get `interaction.requested` and `interaction.result` with the bot's answer.
 
-These controls perform real Telegram actions. A callback pressed in a different Telegram app is not visible to the collector; the bot’s subsequent message or edit may be. Web apps, payments and phone/location requests are outside the mini-client.
+These are real actions. Buttons pressed in another app aren't visible, only the bot's reply. No web apps, payments or phone/location.
 
 ## 4. Follow people, links and files across chats
 
-1. Open **Journal**, leave the source filter at **All sources** and search a distinctive phrase, domain, username or saved identifier. Open each matching record, then choose **To board** to keep its chat, message ID and journal reference in the case.
-2. For a relevant chat, open **Chats → People → Turn on profiles**, then select a person. Review name/username history, reply relationships, activity, **Also in…** other observed chats and extracted links, wallets or phone numbers. Open the cited journal records.
-3. Follow the same numeric Telegram user ID into other chats in this workspace. Treat a matching name, wallet mention or similar avatar as a lead to check; retain the source references and any supporting attribution.
-4. Compare preserved attachment SHA-256 values across records. Equal hashes support byte identity of the saved files. Inspect the associated message and sender records before drawing a conclusion about who shared them.
+1. **Journal**, **All sources**, search a phrase, domain or username. Open hits and send them **To board**.
+2. **Chats → People → Turn on profiles**, pick a person: name history, replies, activity, **Also in…**, links, wallets, phones. Open the cited records.
+3. Follow the same numeric user ID into other chats. A matching name, wallet or avatar is a lead, not proof.
+4. Compare file hashes. Same SHA-256 = same bytes. Who shared them is a separate question.
 
 CASE MAP / FOLLOW THE REFERENCESFictional case · not a live graph
 
@@ -98,15 +98,15 @@ The numeric IDs and record references are invented for this walkthrough. This ex
 
 | Connection | Supporting observation | Conclusion to retain |
 | --- | --- | --- |
-| Same Telegram account | User ID 71001 in group #146 and private-chat #205 | The same supplied sender ID posted in both chats. Real-world identity remains a separate question. |
-| Repeated destination | `pay.example.invalid/new` in #146, button metadata #173, edited post #188 and #205 | The same destination appears in four observed contexts. Attribute its control using additional sources. |
-| Same file bytes | Equal full SHA-256 values in completed media receipts #151 and #209 | The two preserved attachments are byte-identical. The full file hashes provide the comparison. |
+| Same Telegram account | User ID 71001 in group #146 and private-chat #205 | Same sender ID in both chats. Who that is in real life is another question. |
+| Repeated destination | `pay.example.invalid/new` in #146, button metadata #173, edited post #188 and #205 | Same link in four places. Who controls it needs other sources. |
+| Same file bytes | Equal full SHA-256 values in completed media receipts #151 and #209 | Both files are byte-identical. |
 
-People profiles describe observed authors and their activity in the *same workspace journal*, within the viewer's permitted chats. This is an observed-author view, rather than a complete membership directory. Adjust the number of supporting citations under **Parameters → Records cited per fact**.
+Profiles only cover people who wrote something in *this workspace*, not a member list. Citations per fact: **Parameters → Records cited per fact**.
 
 ## 5. Reconstruct the sequence and mark the gaps
 
-In **Chats**, inspect the saved versions and their **Journal record #…** links. In **Journal**, use **All sources** plus **Edits**, **Deletions** and **Coverage**. Build a case timeline with both the supplied Telegram date and the collector’s observation time.
+Versions in **Chats**, then **Journal** with **All sources** + **Edits**, **Deletions**, **Coverage**. Put both times in the timeline: Telegram's date and when it was observed.
 
 1. 09:00 · #101**Channel post captured**
 
@@ -129,19 +129,19 @@ In **Chats**, inspect the saved versions and their **Journal record #…** links
 
 Illustrative observation times and references. Other journal records occur between these entries.
 
-Journal sequence orders receipt, not necessarily the original Telegram actions. An older history snapshot can arrive after a newer live message. Keep live observations, snapshots, recovered messages, deletion notices and “missing on recheck” distinct. Add an explicit unknown interval wherever coverage shows a gap; a later snapshot does not erase that gap.
+Journal order is the order things arrived, not necessarily the order they happened. Keep live records, snapshots, recovered messages, deletions and "missing on recheck" apart, and mark every gap as unknown.
 
 ## 6. Extend the case to other collecting accounts
 
-Add a workspace for each distinct account and repeat the scope and history inventory. Record the membership/role and signing-key fingerprint for each. Keep identifiers qualified by workspace and chat: the same message number is not a global cross-account identifier.
+One workspace per account, same steps. Note each one's role and fingerprint. Message numbers are per account, so always say which workspace and chat.
 
-Use an [account group](https://phishdestroy.github.io/TgWitness/docs/groups/) to review operating status, share selected settings and export the accounts together. The group package keeps each workspace's signed journal and identity. For one channel or supergroup, eligible accounts can also divide a full history export. Assemble a cross-account timeline in your case notes or analysis tools, retaining the workspace and journal reference for each row.
+An [account group](https://phishdestroy.github.io/TgWitness/docs/groups/) shows status, shares settings and exports everyone together, each with its own journal and key. A cross-account timeline you build in your notes.
 
-During longer work, add an [independent witness](https://phishdestroy.github.io/TgWitness/docs/witness/) to retain earlier boundaries. Use the controlled delivery pilot to qualify the accounts’ capture paths and visibility.
+Long case? Add an [independent witness](https://phishdestroy.github.io/TgWitness/docs/witness/), and test what each account actually catches.
 
 ## 7. Deliver a checkable case package
 
-Export a signed journal ZIP from each workspace. It contains the full recorded journal regardless of panel search filters. Export relevant people profiles separately, retain each full chat-history bundle, and preserve the completed attachment evidence.
+A signed ZIP from every workspace (always the full journal, filters don't matter), plus people profiles, chat exports and files.
 
 ```
 CASE-001/                         # assembled by the analyst
@@ -160,7 +160,7 @@ CASE-001/                         # assembled by the analyst
   SHA256SUMS                      # hashes of the delivered files
 ```
 
-Keep trusted fingerprints through a separate channel. From a trusted installation, verify each artifact against its own workspace identity:
+Send fingerprints separately. Verify everything against its own workspace:
 
 ```
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
@@ -168,30 +168,4 @@ python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Check the verifier results, preserve the originals, and retain the coverage report, acquisition outcomes and transfer record with your findings. Write findings in Report studio and choose whether its report includes Case Board material. The example top-level folder combines the separate signed artifacts. For a recipient who needs only selected material, prepare a [minimized handover](https://phishdestroy.github.io/TgWitness/docs/handover/).
-
-## Use the same method for other investigations
-
-**A bot-driven order or payment dispute**
-
-**Question:** what did the bot promise, which button destination was supplied, and what changed afterwards?
-
-**Trace:** channel entry post → saved bot-link preview → bot start parameter → messages and keyboard versions → any panel-issued callback receipt → group/private follow-up. Match each destination to its source record; retain profile descriptions and completed media.
-
-**Deliver:** a timeline of the observed offer and responses, the source references and verified exports. Support any claim about a completed payment with its own transaction records.
-
-**Messages removed after a cross-chat incident**
-
-**Question:** what had already been observed before relevant messages disappeared?
-
-**Trace:** all affected chats → original messages → delivered edits → deletion notices or later missing-on-recheck results → preserved attachments → coverage around the incident. Compare independent account observations with their visibility stated.
-
-**Deliver:** a sequence of preserved versions and explicit unknown intervals. Keep deletion notices, unsuccessful rechecks and any attribution to a person separately supported.
-
-**A participant changes names across several chats**
-
-**Question:** which observed activity belongs to the same Telegram account despite changing names?
-
-**Trace:** numeric sender ID → saved name/username history → replies → other chats in the workspace → mentioned destinations and saved files. Check source records for every asserted connection; keep look-alike accounts separate.
-
-**Deliver:** a cited account-activity timeline and separate hypotheses about relationships. Use name similarity and avatar pHash to choose leads for further source review.
+Keep the verifier output, originals, coverage and transfer record with your findings. Write it up in Report studio. If the recipient needs less, make a [minimized handover](https://phishdestroy.github.io/TgWitness/docs/handover/).

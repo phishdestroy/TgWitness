@@ -2,28 +2,28 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/cases/
 
-Kerjakan keseluruhan kes merentasi saluran, kumpulan, sembang peribadi dan bot: kumpulkan, hubungkan, rekonstruksi dan serahkan bukti.
+Satu kes penuh merentas saluran, kumpulan, sembang peribadi dan bot: kumpul, hubungkan titik-titik, bina semula garis masa, serahkan.
 
-Panduan langkah demi langkah ini mengikuti satu insiden rekaan melalui keseluruhan penceritaan. Gunakan pengumpulan, carian dan profil orang untuk mencari rekod sumber, [Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/case-board/) untuk menyusun dan membincangkannya, dan [Report Studio](https://phishdestroy.github.io/TgWitness/ms/docs/reports/) untuk mempersembahkan penemuan. Peta berilustrasi di bawah menerangkan hubungan dalam contoh ini.
+Satu insiden rekaan, dari mula hingga akhir. Pengumpulan, carian dan profil orang menemui rekod, [Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/case-board/) menyusunnya, [Report studio](https://phishdestroy.github.io/TgWitness/ms/docs/reports/) membentangkannya.
 
 KES YANG DIKENDALIKAN / DESTINASI PEMBAYARAN YANG DIUBAH
 
 ### Satu insiden. Empat perbualan. Satu jejak untuk dibina semula.
 
-Pengumuman saluran merujuk kepada bot. Kumpulan operasi membincangkan pautan pembayaran baru, dan bot memaparkannya. Pengumuman itu disunting, susulan peribadi mengulangi destinasi, dan mesej kumpulan hilang.
+Satu hantaran saluran menunjuk ke sebuah bot. Satu kumpulan bercakap tentang pautan pembayaran baharu dan bot memaparkannya. Hantaran itu disunting, sembang peribadi mengulangi pautan, satu mesej kumpulan hilang.
 
 Siapa yang menyiarkan setiap versi?Di manakah pautan itu muncul?Fail mana yang telah dipelihara?Apa yang berubah, dan bila?
 
-Untuk memuatkan sejarah, semakan sumber AI pilihan, MCP, OCR dan webhook keluar, lihat [Work the archive](https://phishdestroy.github.io/TgWitness/ms/docs/archive/).
+Memuat sejarah, AI, MCP, OCR dan webhook: [Mengusahakan arkib](https://phishdestroy.github.io/TgWitness/ms/docs/archive/).
 
 ## 1. Menetapkan liputan merentasi keseluruhan akaun
 
-Gunakan akaun pengumpulan khusus untuk skop keseluruhan akaun. Akaun utama boleh mengumpul sembang terpilih atau folder Telegram.
+Skop seluruh akaun hanya pada akaun khusus. Akaun utama menggunakan sembang terpilih atau satu folder.
 
-1. [Sambungkan akaun pengumpulan](https://phishdestroy.github.io/TgWitness/ms/docs/accounts/) ke ruang kerja sendiri. Catatkan rujukan kes, ID akaun, nama ruang kerja dan cap jari kunci tandatangan dalam nota kes anda.
-2. **Sumber** Terbuka **→ Skop Pengamatan → Mod Siasatan**. Semak **keseluruhan akaun**, keempat-empat jenis sumber dan **tindakan sendiri**. Preset ini membolehkan menyimpan profil sumber baru dan **200 mesej** teratas yang **boleh dilihat**. Tekan **Simpan skop** dan lengkapkan pengesahan skop.
-3. Tekan **Muatkan sembang**. Bandingkan sumber dengan senarai dialog akaun dan pengecualian semakan. Di bawah **Parameter → Sembang yang dibaca daripada senarai akaun**, laras had senarai awal jika perlu: lalai ialah 1,000 dialog, boleh disesuaikan sehingga 20,000. Perbualan yang melebihi had akan dikesan apabila ia menjadi aktif.
-4. Dalam **tetapan Rakaman**, pilih dan simpan **Semua aktiviti yang kelihatan**. Semak jenis lampiran, had saiz dan ruang cakera kosong. Mulakan pemerhatian dan sahkan mesej terkawal, suntingan dan pemadaman sebelum bergantung pada tetapan tersebut.
+1. [Sambungkan akaun](https://phishdestroy.github.io/TgWitness/ms/docs/accounts/) dalam ruang kerjanya sendiri. Catat rujukan kes, ID akaun, ruang kerja dan cap jari kunci.
+2. **Sumber → Skop pemerhatian → Mod siasatan**: **Seluruh akaun**, keempat-empat jenis sumber, **Tindakan sendiri**. Setiap sembang baharu disimpan profilnya dan **200 mesej kelihatan** terakhir. **Simpan skop** dan sahkan.
+3. **Muat sembang** dan bandingkan dengan senarai sembang akaun. Hadnya 1,000 dialog (sehingga 20,000 dalam **Parameter → Sembang yang dibaca daripada senarai akaun**); sembang melebihi had muncul apabila ia aktif.
+4. **Tetapan Rakaman** → **Semua aktiviti kelihatan**, semak had lampiran dan ruang cakera. Mulakan, kemudian uji dengan satu mesej, satu suntingan dan satu pemadaman.
 
 SaluranKumpulanPerbualan peribadiBot
 
@@ -31,44 +31,44 @@ SATU AKAUN / SATU KUNCI PENANDATANGAN**Semua aktiviti yang boleh dilihat oleh ak
 
 Mesej · suntingan · notis pemadaman · reaksi yang kelihatan · acara keahlian · tindakan sendiri
 
-"Akaun keseluruhan" merangkumi sembang yang boleh diakses oleh akaun ini, dengan jenis sumber dan pengecualian yang dikonfigurasikan. Sembang rahsia tidak tersedia. Dialog baharu ditambah apabila kemas kini diterima; mengaktifkan mod ini tidak secara automatik memuat turun keseluruhan sejarah lama bagi setiap sembang sedia ada.
+"Seluruh akaun" bermaksud setiap sembang yang boleh dibuka akaun ini, tolak pengecualian. Tiada sembang rahsia. Sembang baharu menyertai apabila muncul; sejarah lama tidak dimuat turun secara automatik.
 
 ## 2. Dapatkan sejarah dan memelihara fail
 
-Buat koleksi Papan Kes untuk siasatan dan tandakan halaman rekod yang disimpan yang berkaitan. Simpan daftar sumber bersama kes: ID numerik setiap sembang, tajuk, akaun pengumpul, capaian/peranan, permulaan langsung, pemerolehan sejarah, keputusan media dan jurang yang diketahui. Tandakan sumber sebagai diperoleh selepas menyemak keputusan yang berkaitan.
+Buat koleksi Case Board dan tanda buku apa yang penting. Simpan daftar sumber: ID sembang, tajuk, akaun, peranan, permulaan tangkapan langsung, hasil sejarah, hasil media, jurang.
 
 | Perlu | Tindakan dalam panel | Apa yang disediakan |
 | --- | --- | --- |
 | Sejarah merentas sembang yang diaktifkan | Sumber → Muat sejarah penuh | Mesej yang tersedia sebelum ini dimasukkan ke dalam jurnal ruang kerja, dengan henti/lanjutan dan laporan kemajuan yang ditandatangani. [Panduan sejarah](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/). |
-| Kontext sembang sedia ada dalam jurnal | Sumber → Tetapan rakaman → Gambar rajah sejarah | Mesej terkini yang kelihatan sebagai pemerhatian yang ditandatangani. Lalai maksimum 500; **Parameter → Snapshot sejarah terbesar** boleh meningkatkannya sehingga 10,000. |
-| Sejarah lengkap yang kini boleh dilihat bagi satu sembang | Eksport sembang penuh → Eksport sembang penuh, atau Sembang → Eksport sembang | Bungkusan berasingan yang ditandatangani dengan `chat.json` dan `chat.html`. Ulang bagi setiap sumber; simpan keputusan kejayaan/kegagalan. |
-| Kontext apabila sembang baru muncul | Skop pemerhatian → Apabila sembang atau bot baru muncul | Profil sumber dan sehingga 1,000 mesej terkini yang kelihatan; mod siasatan memilih 200. Perbualan sedia ada tidak menerima pengambilan ini secara retrospektif. |
-| Bait lampiran | Muat turun lampiran yang boleh dilihat + had bagi setiap jenis | Semak `media.saved`, SHA-256 dan kiraan baitnya. Muat turun yang diletakkan dalam barisan, dilangkau atau gagal bukanlah fail yang terpelihara. |
+| Kontext sembang sedia ada dalam jurnal | Sumber → Tetapan rakaman → Gambar rajah sejarah | Mesej terkini sebagai rekod bertandatangan. 500 secara lalai, sehingga 10,000 dalam **Parameter → Snapshot sejarah terbesar**. |
+| Sejarah lengkap yang kini boleh dilihat bagi satu sembang | Eksport sembang penuh → Eksport sembang penuh, atau Sembang → Eksport sembang | Berkas bertandatangan berasingan dengan `chat.json` dan `chat.html`, satu bagi setiap sembang. |
+| Kontext apabila sembang baru muncul | Skop pemerhatian → Apabila sembang atau bot baru muncul | Profilnya dan sehingga 1,000 mesej terkini (200 dalam Mod siasatan). Tidak digunakan pada sembang sedia ada. |
+| Bait lampiran | Muat turun lampiran yang boleh dilihat + had bagi setiap jenis | Cari `media.saved` dengan SHA-256 dan saiz. Dalam baris gilir, dilangkau atau gagal bermaksud tidak disimpan. |
 
-Eksport sembang penuh adalah snapshot berasingan; ia tidak mengimport keseluruhan sejarahnya ke dalam jurnal atau profil orang. Gunakan **Muatkan sejarah penuh** merentas sumber yang diaktifkan, atau snapshot jurnal terhad, untuk bahan sejarah yang anda perlu cari dalam TgWitness. Semak senarai sumber sebelum memulakan pelaksanaan.
+Eksport sembang tidak masuk ke dalam jurnal atau profil orang. Untuk mencari sejarah lama di dalam TgWitness, gunakan **Muat Sejarah Penuh** atau snapshot.
 
-Dalam kes yang dikerjakan, peroleh saluran pengumuman, kumpulan operasi, perbualan bot dan susulan peribadi. Pelihara bait dan hash lampiran invois. Sejarah yang tersedia hari ini tidak dapat membina semula mesej yang dipadam sebelum tangkapan atau suntingan pertengahan yang tidak lagi dikembalikan oleh Telegram.
+Di sini: saluran, kumpulan, sembang bot dan sembang peribadi, serta fail invois dan hashnya. Apa yang dipadam sebelum tangkapan sudah hilang.
 
 ## 3. Kekalkan perbualan yang sedang berkembang dan tindakan anda sendiri
 
-Teruskan pemantauan sepanjang kes berkembang. Tandakan sembang kes aktif sebagai sumber keutamaan; konfigurasi semakan semula keutamaan dan sumber lain di bawah **Tetapan Rakaman → Semakan Semula**. Semak semula `recheck.completed`, sambungan catch-up, FloodWait dan hasil media seiring kemajuan kerja.
+Biarkan ia berjalan. Bintangkan sembang panas sebagai keutamaan, laraskan semakan semula dalam **Tetapan Rakaman → Semakan Semula**, dan perhatikan `recheck.completed`, FloodWait dan hasil media.
 
-Gunakan **Chats → Profile → Save profile now** untuk mengekalkan deskripsi sumber semasa, arahan bot dan metadata lain yang dikembalikan oleh Telegram. Profil sumber ini berasingan daripada profil orang yang dibina daripada mesej jurnal.
+**Sembang → Profil → Simpan profil sekarang** menyimpan penerangan sembang, arahan bot dan metadata lain.
 
 **Mengikuti bot atau jemputan sebagai sebahagian daripada kes**
 
-1. Dalam **Chats → Buka pautan Telegram**, simpan pratonton terlebih dahulu. Pautan asal dan pratonton yang dikembalikan menjadi rekod yang disahkan.
-2. Jika siasatan memerlukannya, **Join / Open dan perhatikan** sambungan atau pembukaan sumber dan mulakan bot dengan parameter permulaan yang disediakan. Permintaan sambungan yang belum diselesaikan kekal dalam rekod.
-3. Untuk tindakan yang perlu didokumenkan, gunakan balasan teks panel atau kawalan **butang Tekan** yang disokong. Jurnal mengekalkan `interaction.requested` dan `interaction.result`, termasuk teks callback atau URL yang dikembalikan.
+1. **Sembang → Buka pautan Telegram**, simpan pratonton dahulu. Pautan dan pratonton menjadi rekod bertandatangan.
+2. Jika perlu, **Sertai / buka dan perhati** menyertai sembang atau memulakan bot dengan parameter mulanya.
+3. Untuk mendokumentasikan tindakan, balas atau gunakan **Tekan butang** dari panel. Anda mendapat `interaction.requested` dan `interaction.result` bersama jawapan bot.
 
-Kawalan ini melaksanakan tindakan Telegram sebenar. Callback yang ditekan dalam aplikasi Telegram lain tidak kelihatan kepada pengumpul; mesej atau suntingan seterusnya oleh bot mungkin kelihatan. Aplikasi web, pembayaran dan permintaan telefon/lokasi berada di luar mini-klien.
+Ini tindakan sebenar. Butang yang ditekan dalam aplikasi lain tidak kelihatan, hanya balasan bot. Tiada aplikasi web, pembayaran atau telefon/lokasi.
 
 ## 4. Ikuti orang, pautan dan fail merentas sembang
 
-1. Buka **Jurnal**, biarkan penapis sumber pada **Semua sumber** dan cari frasa, domain, nama pengguna atau pengecam yang disimpan. Buka setiap rekod yang sepadan, kemudian pilih **ke papan** untuk mengekalkan sembang, ID mesej dan rujukan jurnal dalam kes.
-2. Untuk sembang yang berkaitan, buka **Sembang → Orang → Hidupkan profil**, kemudian pilih seseorang. Semak sejarah nama/nama pengguna, hubungan balasan, aktiviti, **juga dalam…** sembang lain yang diperhatikan dan pautan yang diekstrak, dompet atau nombor telefon. Buka rekod jurnal yang dirujuk.
-3. Ikuti ID pengguna Telegram numerik yang sama ke dalam sembang lain dalam ruang kerja ini. Anggap nama yang sepadan, sebutan dompet atau avatar serupa sebagai petunjuk untuk disemak; kekalkan rujukan sumber dan sebarang atribusi sokongan.
-4. Bandingkan nilai SHA-256 lampiran yang dipelihara merentas rekod. Hashes yang sama menyokong identiti bait fail yang disimpan. Periksa rekod mesej dan penghantar yang berkaitan sebelum membuat kesimpulan tentang siapa yang berkongsi lampiran tersebut.
+1. **Jurnal**, **Semua sumber**, cari frasa, domain atau nama pengguna. Buka hasil dan hantar **Ke papan**.
+2. **Sembang → Orang → Hidupkan profil**, pilih seseorang: sejarah nama, balasan, aktiviti, **Juga dalam…**, pautan, dompet, telefon. Buka rekod yang dipetik.
+3. Ikuti ID pengguna berangka yang sama ke sembang lain. Nama, dompet atau avatar yang sepadan ialah petunjuk, bukan bukti.
+4. Bandingkan hash fail. SHA-256 sama = bait sama. Siapa yang berkongsinya ialah soalan lain.
 
 PETA KES / IKUT RUJUKANKes fiksyen · bukan graf langsung
 
@@ -94,15 +94,15 @@ ID numerik dan rujukan rekod dicipta untuk panduan ini. Peta penjelasan ini menu
 
 | Sambungan | Mendukung pemerhatian | Kesimpulan untuk disimpan |
 | --- | --- | --- |
-| Akaun Telegram yang sama | ID Pengguna 71001 dalam kumpulan #146 dan sembang peribadi #205 | ID penghantar yang sama disediakan dan dipaparkan dalam kedua-dua sembang. Identiti sebenar kekal sebagai persoalan berasingan. |
-| Tujuan berulang | `pay.example.invalid/new` dalam #146, metadata butang #173, pos yang disunting #188 dan #205 | Tujuan yang sama muncul dalam empat konteks yang diperhatikan. Atribut kawamatannya menggunakan sumber tambahan. |
-| Bait fail yang sama | Nilai SHA-256 penuh yang sama dalam resit media yang diselesaikan #151 dan #209 | Kedua-dua lampiran yang disimpan adalah identik pada peringkat bait. Hash fail penuh menyediakan perbandingan. |
+| Akaun Telegram yang sama | ID Pengguna 71001 dalam kumpulan #146 dan sembang peribadi #205 | ID pengirim yang sama dalam kedua-dua sembang. Siapa orang itu di dunia nyata ialah soalan lain. |
+| Tujuan berulang | `pay.example.invalid/new` dalam #146, metadata butang #173, pos yang disunting #188 dan #205 | Pautan yang sama di empat tempat. Siapa yang mengawalnya memerlukan sumber lain. |
+| Bait fail yang sama | Nilai SHA-256 penuh yang sama dalam resit media yang diselesaikan #151 dan #209 | Kedua-dua fail serupa bait demi bait. |
 
-Profil orang menerangkan pengarang yang diperhatikan dan aktiviti mereka dalam *jurnal ruang kerja* *yang* *sama*, dalam sembang yang dibenarkan oleh pengguna. Ini adalah pandangan pengarang yang diperhatikan, bukannya direktori keahlian lengkap. Laras bilangan sitasi sokongan di bawah **Parameter → Rekod yang disitir bagi setiap fakta**.
+Profil hanya meliputi orang yang menulis sesuatu dalam *ruang kerja ini*, bukan senarai ahli. Petikan bagi setiap fakta: **Parameter → Rekod dipetik bagi setiap fakta**.
 
 ## 5. Rekonstrui urutan dan tandakan kekosongan
 
-Dalam Chats, periksa versi yang disimpan dan pautan rekod Jurnal #… Mereka dalam Jurnal, gunakan Semua sumber serta Suntingan, Pemadaman dan Liputan. Bina garis masa kes dengan tarikh Telegram yang disediakan dan masa pemerhatian pengumpul.
+Versi dalam **Sembang**, kemudian **Jurnal** dengan **Semua sumber** + **Suntingan**, **Pemadaman**, **Liputan**. Masukkan kedua-dua masa dalam garis masa: tarikh Telegram dan bila ia diperhatikan.
 
 1. 09:00 · #101**Pos saluran dirakam**
 
@@ -125,19 +125,19 @@ Dalam Chats, periksa versi yang disimpan dan pautan rekod Jurnal #… Mereka dal
 
 Masa pemerhatian dan rujukan ilustratif. Rekod jurnal lain berlaku di antara entri ini.
 
-Susunan urutan jurnal menyusun mengikut urutan penerimaan, bukan semestinya tindakan asal Telegram. Sisipan sejarah lama boleh tiba selepas mesej langsung yang lebih baru. Pastikan pemerhatian langsung, snapshot, mesej yang dipulihkan, notis pemadaman dan "hilang semasa semakan semula" dipisahkan. Tambahkan selang masa tidak diketahui secara eksplisit di mana-mana liputan menunjukkan jurang; snapshot kemudian tidak menghapuskan jurang tersebut.
+Susunan jurnal ialah susunan ketibaan, tidak semestinya susunan kejadian. Asingkan rekod langsung, snapshot, mesej yang dipulihkan, pemadaman dan "tiada semasa semakan semula", dan tandakan setiap jurang sebagai tidak diketahui.
 
 ## 6. Melanjutkan kes ke akaun pengumpul lain
 
-Tambah ruang kerja untuk setiap akaun berasingan dan ulangi inventori skop dan sejarah. Rekodkan keahlian/peranan dan cap jari kunci tandatangan untuk setiap satu. Pastikan pengecam diklasifikasikan mengikut ruang kerja dan sembang: nombor mesej yang sama bukan pengecam merentas akaun secara global.
+Satu ruang kerja bagi setiap akaun, langkah yang sama. Catat peranan dan cap jari masing-masing. Nombor mesej adalah mengikut akaun, jadi sentiasa nyatakan ruang kerja dan sembang mana.
 
-Gunakan [kumpulan](https://phishdestroy.github.io/TgWitness/ms/docs/groups/) [akaun](https://phishdestroy.github.io/TgWitness/ms/docs/groups/) untuk menyemak status operasi, berkongsi tetapan terpilih dan mengeksport akaun secara serentak. Pakej kumpulan mengekalkan jurnal yang ditandatangani dan identiti setiap ruang kerja. Bagi satu saluran atau superkumpulan, akaun yang layak juga boleh membahagikan eksport sejarah penuh. Susun garis masa merentas akaun dalam nota kes atau alat analisis anda, sambil mengekalkan rujukan ruang kerja dan jurnal bagi setiap baris.
+[Kumpulan akaun](https://phishdestroy.github.io/TgWitness/ms/docs/groups/) menunjukkan status, berkongsi tetapan dan mengeksport semua sekali gus, setiap satu dengan jurnal dan kuncinya sendiri. Garis masa merentas akaun anda bina dalam nota anda.
 
-Semasa kerja yang lebih panjang, tambahkan [saksi bebas](https://phishdestroy.github.io/TgWitness/ms/docs/witness/) untuk mengekalkan sempadan awal. Gunakan pilot penghantaran terkawal untuk menentukan laluan tangkapan dan keterlihatan akaun.
+Kes panjang? Tambah [saksi bebas](https://phishdestroy.github.io/TgWitness/ms/docs/witness/), dan uji apa yang benar-benar ditangkap setiap akaun.
 
 ## 7. Sampaikan pakej kes yang boleh disemak
 
-Eksport fail ZIP jurnal yang ditandatangani dari setiap ruang kerja. Ia mengandungi keseluruhan jurnal yang dirakam tanpa mengira penapis carian panel. Eksport profil orang yang berkaitan secara berasingan, simpan setiap bundel sejarah sembang penuh, dan pelihara bukti lampiran yang lengkap.
+ZIP bertandatangan daripada setiap ruang kerja (sentiasa seluruh jurnal, penapis tidak berkesan), serta profil orang, eksport sembang dan fail.
 
 ```
 CASE-001/                         # assembled by the analyst
@@ -156,7 +156,7 @@ CASE-001/                         # assembled by the analyst
   SHA256SUMS                      # hashes of the delivered files
 ```
 
-Simpan cap jari yang dipercayai melalui saluran berasingan. Daripada pemasangan yang dipercayai, sahkan setiap artifak terhadap identiti ruang kerja masing-masing:
+Hantar cap jari secara berasingan. Sahkan semuanya terhadap ruang kerjanya sendiri:
 
 ```
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
@@ -164,30 +164,4 @@ python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Semak keputusan pengesah, pelihara bahan asal, dan simpan laporan liputan, hasil pemerolehan dan rekod pemindahan beserta penemuan anda. Tulis penemuan di Report Studio dan pilih sama ada laporannya merangkumi bahan Case Board. Folder aras atas contoh menggabungkan artifak berasingan yang ditandatangani. Untuk penerima yang hanya memerlukan bahan terpilih, sediakan [penyerahan](https://phishdestroy.github.io/TgWitness/ms/docs/handover/) [minimum](https://phishdestroy.github.io/TgWitness/ms/docs/handover/).
-
-## Gunakan kaedah yang sama untuk siasatan lain
-
-**Pertikaian pesanan atau pembayaran yang dikendalikan oleh bot**
-
-**Soalan:** apa yang dijanjikan oleh bot, destinasi butang mana yang dibekalkan, dan apa yang berubah selepas itu?
-
-**Jejak:** kiriman kemasukan saluran → pratonton pautan bot yang disimpan → parameter permulaan bot → versi mesej dan papan kekunci → sebarang resit callback yang dikeluarkan oleh panel → susulan kumpulan/peribadi. Padankan setiap destinasi dengan rekod sumbernya; simpan deskripsi profil dan media yang diselesaikan.
-
-**Sampaikan:** garis masa tawaran dan respons yang diperhatikan, rujukan sumber dan eksport yang disahkan. Sokong sebarang tuntutan mengenai pembayaran yang diselesaikan dengan rekod transaksi masing-masing.
-
-**Mesej yang dipadam selepas insiden merentas sembang**
-
-**Soalan:** apa yang telah diperhatikan sebelum mesej berkaitan hilang?
-
-**Jejak:** semua sembang terjejas → mesej asal → suntingan dihantar → notis pemadaman atau keputusan tiada pada semakan semula kemudian → lampiran yang disimpan → liputan sekitar insiden. Bandingkan pemerhatian akaun bebas dengan keterlihatan yang dinyatakan.
-
-**Sampaikan:** satu urutan versi yang dipelihara dan selang tidak diketahui secara eksplisit. Kekalkan notis pemadaman, semakan semula yang tidak berjaya dan sebarang atribusi kepada individu secara berasingan.
-
-**Seorang peserta menukar nama di beberapa sembang**
-
-**Soalan:** aktiviti mana yang diperhatikan milik akaun Telegram yang sama walaupun nama berubah?
-
-**Jejak:** ID penghantar numerik → sejarah nama/nama pengguna yang disimpan → balasan → sembang lain dalam ruang kerja → destinasi yang disebut dan fail yang disimpan. Semak rekod sumber untuk setiap sambungan yang didakwa; pisahkan akaun serupa.
-
-**Hasilkan:** garis masa aktiviti akaun yang dirujuk dan hipotesis berasingan mengenai hubungan. Gunakan keserupaan nama dan pHash avatar untuk memilih petunjuk bagi semakan sumber selanjutnya.
+Simpan output pengesah, fail asal, liputan dan rekod pemindahan bersama dapatan anda. Tulis semuanya dalam Report studio. Jika penerima memerlukan kurang, buat [serahan diminimumkan](https://phishdestroy.github.io/TgWitness/ms/docs/handover/).

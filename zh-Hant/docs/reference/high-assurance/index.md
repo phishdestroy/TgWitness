@@ -247,25 +247,11 @@ Gateway DNS 涵蓋系統解析器。透過 443 埠的 HTTPS DNS 連線至其他�
 
 Cloudflare 無法窺見 Telegram 的加密內容、該 Telegram 帳戶上的其他裝置 （「證據模式」的裝置清單是從 Telegram 端記錄下來的），亦無法窺見服務供應商的虛擬化平台。
 
-2026 年 11 月 1 日，Gateway DNS 針對真實的 Hetzner Cloud 及一個免費的 Cloudflare 帳戶進行了測試： Hetzner 接受了外發規則，伺服器安裝了 v0.7.0 版本，所有查詢皆 透過 TLS 經由 Gateway 進行，快速隧道能穿透該防火牆，且 `verify` 從 Cloudflare 讀取 該伺服器的 19 個名稱（Ubuntu 與 Hetzner 鏡像站、GitHub、PyPI、NTP、 隧道、ntfy.sh）。測試小組將八個視窗中的 36 筆查詢複製至日誌，並 `verify.py` 並將其完整無遺地彙整； `destroy` 移除了伺服器與防火牆，並離開 該共享位置。
-
 ## 這並未確立什麼
 
 - 服務提供者及其員工負責管理虛擬化平台、磁碟及網路。
 - 主機測量數據由資料收集器自行回報。
 - 並非所有服務供應商的日誌中都包含較早的防火牆規則內容；僅有 Linode 會保留規則版本。
 - 關於訊息真實性並無新論述；請參閱「[證據」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)。
-
-## 此處已進行測試
-
-部署、鎖定與驗證邏輯均透過自動化測試進行驗證，這些測試針對模擬的 Hetzner、DigitalOcean、Linode、Vultr、EC2/CloudTrail 及 Cloudflare API 進行，這些 API 是根據其 公開的 API 參考文件建構而成；此外，AWS 請求簽名亦依據 AWS 公開的範例進行驗證。 `tools/check_cloud_wizard.py` 以相同方式執行面板的伺服器精靈，包含網域設定 以及快速隧道功能。 `tools/check_tdx.py` 驗證來自 dcap-qvl 和 dstack 的真實 Intel TDX 證明， 一直追溯至 Intel 的根憑證（原始碼位於 [tools/tdx/README.md](https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md)）； `tools/check_phala.py`針對模擬的 Phala Cloud 執行部署、驗證、日誌記錄、銷毀及面板精靈， 該雲端的憑證來自一個模仿 Intel 結構的偽造 PKI。Phala 相關流程尚未 在 Phala Cloud 本身進行測試。
-
-2026 年 11 月 1 日，快速隧道路徑成功連線至真實的 **Hetzner Cloud**（紐倫堡， `cpx22`， TgWitness v0.7.0）、真實的 ntfy.sh 及 GitHub 進行了測試，測試方式包括透過控制面板及程式碼執行：
-
-- 先確認價格，再透過面板上的按鈕進行建立：伺服器於 13 秒後開始運作， 約兩分鐘後即可取得經簽署的聲明，其中包含與實例及安裝程式相符的雜湊值；
-- 透過其 trycloudflare.com 網址開啟的伺服器專屬控制面板，並接受了 控制面板憑證；若未提供憑證，則會回傳 401 錯誤；
-- 透過 Hetzner API 重新啟動後，伺服器發布了一個新的簽名位址，**搜尋 當前位址**並成功找到，舊位址已停止回應，簽名金鑰則維持 不變；發送至 ntfy.sh 主題的一則未簽名貼文被忽略；
-- `verify` 針對 Hetzner 的 API：伺服器、未設定進站規則的防火牆、陳述、綁定、 主機測量、開機，以及 v0.7.0 版本的原始碼哈希值均通過測試；如上所述，Cloudflare 的檢查功能無法使用；安裝程式與 v0.7.0 版本所建構的安裝程式不同， 但與本版本程式碼所建構的安裝程式完全字節對字節一致；
-- 從面板中刪除時，僅精確移除了部署標籤所對應的伺服器與防火牆； 同一專案中的其他伺服器與防火牆則未受影響。
 
 尚未在真實帳戶上運行：包含您自有網域下的部署（Cloudflare 隧道與 DNS）、其他服務供應商、除錯部署，以及 `lock`，該伺服器上的 Telegram 帳號， 以及透過快速隧道接收後續版本的即時更新。請透過 各服務供應商的首個部署環境，使用 `plan`，以及除錯部署， `verify` ，以及，再於個案中實際使用。

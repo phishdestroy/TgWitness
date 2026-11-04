@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="ガイド"><a href="../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../">ドキュメント</a> <span aria-hidden="true">/</span> <span aria-current="page">セキュリティを確保してください</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">テスト済みの内容 →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">ドキュメント / 14</p><h1>セキュリティを確保してください</h1><p class="guide-outcome">Telegramの通信経路、公開プロキシリスト、およびオプションの外部サービスについてご確認ください。各設定がどのような機能をもたらすか、どのような保護機能が適用されるか、そしてどのような点はユーザー自身に委ねられているかをご理解ください。</p>
+<article class="guide-content"><p class="eyebrow">ドキュメント / 14</p><h1>セキュリティを確保してください</h1><p class="guide-outcome">何があなたのマシンから出ていくか、各シークレットで何が開けられるか、保護が及ぶ範囲とあなたの責任の範囲。</p>
 <div class="fact-strip" role="list"><div role="listitem"><strong translate="no">127.0.0.1</strong><span>デフォルトのパネルアドレス</span></div><div role="listitem"><strong>256ビット</strong><span>ランダムなパネルトークン</span></div><div role="listitem"><strong translate="no">0</strong><span>CDN、アナリティクス、またはリモートフォント</span></div><div role="listitem"><strong translate="no">Ed25519</strong><span>すべての記録に署名が付与されます</span></div></div>
 <h2 id="map">すべての情報が集約されている場所</h2>
-<p>コレクター、その操作パネル、および保存されたすべての記録は、実行しているコンピュータまたはサーバー上に残ります。デフォルトではTelegramのみが保存先となりますが、その他の保存先は個別の設定スイッチで指定可能です。</p>
+<p>コレクター、パネル、すべての記録はあなたのマシンに留まります。既定で接続するのは Telegram だけで、それ以外はすべて個別のスイッチです。</p>
 <figure class="lab security-lab" data-lab="security" data-flows="" aria-labelledby="security-lab-caption">
 <div class="lab-top"><span class="lab-kicker">06 / マシンから何が残るのか</span><span class="sample-tag">インストール方法</span></div>
 <div class="lab-controls scenario-controls" data-enhanced hidden role="group" aria-label="オプションの保存先を有効または無効にする"><button type="button" data-flow-toggle="replica" aria-pressed="false">外部サイト用コピー</button><button type="button" data-flow-toggle="alerts" aria-pressed="false">通知</button><button type="button" data-flow-toggle="timestamp" aria-pressed="false">タイムスタンプ</button><button type="button" data-flow-toggle="witness" aria-pressed="false">Witness</button></div>
@@ -63,49 +63,49 @@
 <div class="table-wrap" tabindex="0"><table class="secret-table">
 <thead><tr><th>Secret</th><th>保存場所</th><th>このツールがもたらす可能性</th><th>万が一情報が漏洩した場合</th></tr></thead>
 <tbody>
-<tr><td><strong>パネルトークン</strong></td><td>データディレクトリ内の<code>panel-token.txt</code>；ブラウザはこれをそのタブのみのために保持します</td><td>すべてのワークスペース内のあらゆる内容：閲覧・エクスポート、範囲の変更、アカウントへのログイン</td><td>TgWitnessを停止し、<code>panel-token.txt</code>を削除してから再起動してください：新しいトークンが作成されます</td></tr>
+<tr><td><strong>パネルトークン</strong></td><td>データディレクトリの <code>panel-token.txt</code>。ブラウザーはタブごとに保持します</td><td>すべてのワークスペースのすべて</td><td>TgWitness を停止し、<code>panel-token.txt</code> を削除して、再起動します：新しいものが作られます</td></tr>
 <tr><td><strong>Telegramのセッション</strong></td><td>Vault、暗号化済み（<code>credentials.enc</code>）</td><td>Telegramアカウント自体</td><td>Telegramの「<em>設定」→「デバイス」</em>からセッションを終了してください。</td></tr>
-<tr><td><strong>署名鍵</strong></td><td>Vault、暗号化済み（<code>signing.enc</code>）</td><td>ご自身のフィンガープリントで検証可能な署名付き記録</td><td>チェックポイントは別の場所に保存されており、証人およびタイムスタンプにより、以前の状態が確認できます。</td></tr>
-<tr><td><strong>Vaultキー</strong></td><td>データの横に<code>vault.key</code>を記載するか、新しいデータディレクトリ用の外部マスターキーを指定してください。</td><td>「Vault」の解読</td><td>セッションキーおよび署名キーも漏洩したものとして扱ってください</td></tr>
-<tr><td><strong>Witnessトークン</strong></td><td>witnessホストについて</td><td>読み取り専用：署名付きチェックポイントおよび健全性</td><td>「Witness」ページでこれを削除し、新しいページを作成してください。</td></tr>
-<tr><td><strong>外部サイト用コピー用キー</strong></td><td>Vault：復元のために一度ダウンロードしてください</td><td>オフサイトコピーの解読</td><td>保存されたオブジェクトを保持している者であれば誰でも復号可能です。そのコピーは公開されているものとみなしてください。</td></tr>
+<tr><td><strong>署名鍵</strong></td><td>Vault、暗号化済み（<code>signing.enc</code>）</td><td>あなたのフィンガープリントで記録に署名すること</td><td>別の場所に保管したチェックポイント、証人、タイムスタンプが、以前に存在したものを引き続き示します</td></tr>
+<tr><td><strong>Vaultキー</strong></td><td>データの隣にある <code>vault.key</code>、または外部のマスターキー</td><td>Vault</td><td>セッションと署名鍵も漏れたと考えてください</td></tr>
+<tr><td><strong>Witnessトークン</strong></td><td>witnessホストについて</td><td>読み取り専用：チェックポイントと稼働状態</td><td>証人のページで削除し、新しく作ります</td></tr>
+<tr><td><strong>外部サイト用コピー用キー</strong></td><td>Vault：復元のために一度ダウンロードしてください</td><td>オフサイトコピー</td><td>バケットも手に入れた人は復号できます：コピーは漏えいしたものとして扱ってください</td></tr>
 </tbody></table></div>
 <h2 id="threats">保護の対象となる範囲</h2>
 <div class="threat-grid">
 <section class="threat-card is-covered" aria-labelledby="covered-title"><h3 id="covered-title"><span aria-hidden="true">✓</span> 掲載済み</h3><ul>
-<li>エクスポートされた記録が変更、削除、または順序が入れ替えられた場合、ハッシュチェーンまたは署名が検証できなくなります。</li>
-<li>チェックポイント後にジャーナルが切り詰められたり再構築されたりした場合、そのジャーナルは別の場所に保存されていたチェックポイントと一致しなくなります。</li>
-<li>パネルトークンの推測：256ビットのランダムなビット列を定数時間で照合します。1分間に15回失敗すると、そのアドレスへのアクセスが拒否されます。</li>
-<li>有害なチャットコンテンツ：テキストはテキストとして挿入され、HTMLとして挿入されることはありません。添付ファイルはファイルとしてダウンロードされ、パネルは他のサイトから何も読み込みません。</li>
-<li>外部の保管庫キーが設定されたコピーデータディレクトリ：マスターキーがなければ、セッションおよび署名キーは暗号化されたままとなります。</li>
+<li>記録の変更、削除、並べ替え：ハッシュチェーンか署名が壊れます。</li>
+<li>別の場所にチェックポイントを保管した後で、ジャーナルが切り詰められたり作り直されたりした場合：チェックポイントが一致しなくなります。</li>
+<li>トークンの推測：256 ビットの乱数、定数時間の比較、1 分間に 15 回失敗するとそのアドレスはブロックされます。</li>
+<li>悪意のあるチャット内容：本文は常にテキストのままで HTML にはなりません。添付ファイルはファイルとしてダウンロードされ、パネルは他のサイトから何も読み込みません。</li>
+<li>外部の Vault キーを使っている状態でデータディレクトリが盗まれた場合：セッションと鍵は暗号化されたままです。</li>
 </ul></section>
 <section class="threat-card is-open" aria-labelledby="open-title"><h3 id="open-title"><span aria-hidden="true">!</span> ご判断にお任せいたします</h3><ul>
-<li>メインパネルのトークンが完全な制御権を持ちます。他のユーザーには、必要なアカウント、チャット、操作に対して範囲を限定したアクセス権を付与し、メインキーは非公開にしてください。</li>
-<li>システムの管理者は、すべての内容を閲覧し、ジャーナルを書き換え、再署名することができます。フィンガープリントとチェックポイントは別のシステムで保管してください。</li>
-<li>TgWitness では、メッセージ本文やメディアは暗号化されません。ディスクの暗号化と厳格なアクセス権限の設定を行ってください。</li>
-<li>localhost 以外の通常の HTTP 接続では、ネットワーク上でトークンが公開されてしまいます。HTTPS または SSH トンネルをご利用ください。</li>
-<li>署名とチェックポイントを用いて保存された記録を確認してください。使用するアカウントおよびソースについて、収集範囲を確認し、配信テストを行ってください。</li>
+<li>メインのトークンは何でもできます。他の人には範囲を限ったアクセスを渡し、メインのトークンは自分だけで持ってください。</li>
+<li>マシンの管理者は誰でも、すべてを読み、ジャーナルに署名し直せます。フィンガープリントとチェックポイントは別の場所に保管してください。</li>
+<li>TgWitness はメッセージとメディアを暗号化しません。ディスクを暗号化し、権限を絞ってください。</li>
+<li>localhost 以外での平文の HTTP はトークンを漏らします。HTTPS か SSH トンネルを使ってください。</li>
+<li>署名は何を見逃したかを教えてくれません。自分のアカウントとソースでカバレッジを確認し、配信をテストしてください。</li>
 </ul></section>
 </div>
-<p>権限設定、有効期限、セッション制限を設定して、<a href="../access/">案件へのアクセス権を共有できます</a>。ウィットネストークンは、独立した認証情報として保持されます。</p>
+<p>権限、有効期限、セッション制限を付けて<a href="../access/">ケースへのアクセスを共有</a>します。</p>
 <h2 id="hardening">インストールのセキュリティ強化</h2>
 <div class="checklist" data-lab="hardening">
 <div class="checklist-meter" data-enhanced hidden><span data-checklist-count>8件中0件完了</span><span class="meter" aria-hidden="true" translate="no"><i></i></span></div>
 <ol class="checklist-items">
-<li><span class="check-text"><strong>専用のTelegramアカウントを使用してください</strong>。メインのアカウントは絶対に使用しないでください。パネルトークンとセッションにより、そのアカウントを完全に制御できます。</span></li>
-<li><span class="check-text"><strong>パネルは 127.0.0.1 に固定してください。</strong>リモートからのアクセスは、HTTPS（同梱の Caddy 設定）または SSH トンネルを通じてのみ行ってください。</span></li>
-<li><span class="check-text">データディレクトリが格納されている<strong>ディスクを暗号化してください</strong>。メッセージ本文やメディアは、受信時のまま保存されます。</span></li>
-<li><span class="check-text"><strong>データディレクトリを</strong>サービスアカウントに<strong>限定してください</strong>。Unix では、新しいディレクトリにモード 0700 が設定されます。Windows では、フォルダのアクセス権を設定してください。</span></li>
-<li><span class="check-text"><strong>Vaultのマスターキーは</strong>サーバー上の<strong>別の場所に保管してください</strong>。データディレクトリを作成する前に、<code>TGWITNESS_VAULT_KEY_FILE</code>を設定してください。</span></li>
-<li><span class="check-text"><strong>署名鍵のフィンガープリントとチェックポイントを</strong>別のシステムに<strong>保存し</strong>、別のホストにウィットネスを追加してください。</span></li>
+<li><span class="check-text"><strong>専用の Telegram アカウントを使ってください</strong>。メインのアカウントは使わないでください。</span></li>
+<li><span class="check-text"><strong>パネルは 127.0.0.1 に固定してください。</strong>リモートアクセスは HTTPS（同梱の Caddy）か SSH トンネルだけにします。</span></li>
+<li><span class="check-text"><strong>データディレクトリのあるディスクを暗号化してください</strong>。メッセージとメディアはそのまま保存されます。</span></li>
+<li><span class="check-text"><strong>データディレクトリへのアクセスを</strong>サービスアカウントに限定してください（Unix では 0700、Windows ではフォルダーの権限）。</span></li>
+<li><span class="check-text"><strong>サーバーでは Vault キーを別の場所に置いてください</strong>：初回起動前に <code>TGWITNESS_VAULT_KEY_FILE</code> を設定します。</span></li>
+<li><span class="check-text"><strong>フィンガープリントとチェックポイントを保存してください</strong>。保存先は別のシステムにし、証人は別のホストで動かします。</span></li>
 <li><span class="check-text"><code>data/</code>、セッション、<code>panel-token.txt</code>、またはVaultキーをGitHubやチャットに<strong>アップロードしないでください</strong>。</span></li>
 <li><span class="check-text">リバースプロキシでは、<code>Authorization</code>ヘッダーやリクエスト本文を<strong>ログに記録しないでください</strong>。</span></li>
 </ol>
 </div>
-<details><summary>データを失うことなく、パネルトークンを変更することはできますか？</summary><p>はい。このトークンはパネルを開くだけのものです。TgWitnessを停止し、データディレクトリから<code>panel-token.txt</code>を削除してから、再度起動してください。ジャーナル、セッション、および鍵は変更されません。<code>TGWITNESS_TOKEN</code>が設定されている場合、ファイルの代わりに環境変数の値が使用されます。</p></details>
-<details><summary>なぜメッセージは保存時に暗号化されないのですか？</summary><p>収集担当者は、検索、バージョンの比較、およびエクスポートを行うために、これらのデータを閲覧する必要があります。同じマシン上の鍵でデータを暗号化しても、そのマシンを読み取ることができる相手に対しては、ほとんど効果はありません。ディスク暗号化は、停止中または盗難に遭ったディスクを保護しますが、厳格なアクセス権限設定は、稼働中のディスクを保護します。</p></details>
+<details><summary>データを失うことなく、パネルトークンを変更することはできますか？</summary><p>はい、トークンで開けるのはパネルだけです。TgWitness を停止し、<code>panel-token.txt</code> を削除して、再起動します。ジャーナル、セッション、鍵は残ります。<code>TGWITNESS_TOKEN</code> が設定されている場合は、ファイルよりその値が優先されます。</p></details>
+<details><summary>なぜメッセージは保存時に暗号化されないのですか？</summary><p>コレクターは検索、比較、エクスポートのためにそれらを読む必要があります。同じマシンにある鍵では、そのマシンをもともと読める人は止められません。ディスク暗号化は盗まれたディスクを、権限は動作中のシステムを守ります。</p></details>
 <h2 id="report">脆弱性を報告する</h2>
-<p>GitHubリポジトリの<strong>「Security」→「Report a vulnerability」</strong>をご利用ください。バージョン、影響範囲、および再現に必要な最小限の情報を記載してください。認証情報、アカウントディレクトリ、実際の証拠アーカイブは絶対に送信しないでください。非公開での報告が利用できない場合は、エクスプロイトの詳細を記載せずに、非公開チャネルの開設を依頼するイシューを作成してください。</p>
+<p>GitHub の <strong>Security → Report a vulnerability</strong> を使ってください。バージョン、影響、架空のデータでの最小の再現手順を添えます。認証情報、アカウントのフォルダー、本物の証拠は絶対に送らないでください。非公開の報告が無効なら、エクスプロイトの詳細は書かずに、非公開の連絡手段を求める issue を開いてください。</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/security/">完全な参照情報 →</a><a class="next-guide" href="../start/"><span>次のステップ</span><strong>数分で始められます →</strong></a><p>これらのガイドは、現在の実装について説明しています。検証結果および残された課題については、別途文書化されています。 <a href="../reference/verification/">テスト済みの内容 →</a></p></footer>
 </main>

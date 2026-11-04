@@ -32,21 +32,21 @@
 <nav class="breadcrumbs" aria-label="Guías"><a href="../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../">Documentación</a> <span aria-hidden="true">/</span> <span aria-current="page">Conecte una cuenta</span></nav>
 <p class="verification-shortcut"><a href="../reference/verification/">Lo que se ha probado →</a></p>
 <div class="search" data-index="../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Documentación / 05</p><h1>Conecte una cuenta</h1><p class="guide-outcome">Cada espacio de trabajo alberga una cuenta, su registro y su clave de firma.</p>
+<article class="guide-content"><p class="eyebrow">Documentación / 05</p><h1>Conecte una cuenta</h1><p class="guide-outcome">Un espacio = una cuenta, su diario y su clave.</p>
 <h2 id="sign-in">Elija cómo iniciar sesión</h2>
-<p>Abra <strong>una cuenta</strong>, añada un espacio de trabajo y acceda a su configuración de conexión. Utilice una cuenta específica para la observación.</p>
-<ul><li><strong>Código QR:</strong> escanéelo desde los ajustes del dispositivo en Telegram y confirme el nuevo inicio de sesión.</li><li><strong>Número de teléfono:</strong> introduzca el número, el código que envía Telegram y su contraseña de verificación en dos pasos, si está activada.</li><li><strong>Importación de sesiones:</strong> importe una sesión compatible o datos de Telegram Desktop que le pertenezcan.</li></ul>
-<p>Elija un perfil de API integrado o introduzca su propio ID de API y hash. Un perfil de API identifica al cliente; no inicia sesión en una cuenta ni hace que la conexión sea anónima.</p>
+<p><strong>Cuentas</strong> → añadir espacio → ajustes de conexión. Use una cuenta aparte para esto.</p>
+<ul><li><strong>Código QR:</strong> escanéelo desde la pantalla Dispositivos de Telegram y confirme.</li><li><strong>Número de teléfono:</strong> número, código y, si la tiene, la contraseña 2FA.</li><li><strong>Importar sesión:</strong> su propio archivo de sesión o datos de Telegram Desktop.</li></ul>
+<p>Use un perfil de API integrado o su propio API ID y hash. Solo identifica la aplicación: no inicia sesión ni oculta nada.</p>
 <details><summary>¿Necesita primero un proxy?</summary><p>Puede <a href="../proxies/">elegir y probar la ruta de conexión</a> antes de iniciar sesión. Cada cuenta tiene su propia ruta.</p></details>
 <h2 id="sources">Elija qué desea supervisar</h2>
-<ol><li>Abra la lista de fuentes y seleccione los chats, grupos o canales que necesite.</li><li>Revise la configuración de la recopilación, incluidos los archivos multimedia, antes de iniciar la observación.</li><li>Inicie el recopilador y compruebe su conexión y su actividad reciente.</li></ol>
-<p>La cuenta debe poder acceder a la fuente. Los distintos roles pueden ver diferentes eventos; el registro refleja lo que recibió dicha cuenta.</p>
-<p>Para un caso que abarque toda la cuenta, utilice <strong>«Fuentes» → «Ámbito de observación» → «Modo de investigación</strong>», revise la configuración y pulse <strong>«Guardar ámbito</strong>». La <a href="../cases/">guía completa de la investigación</a> abarca todos los tipos de chats visibles, el historial antiguo, los perfiles de los usuarios, las referencias entre chats y la transferencia de pruebas.</p>
+<ol><li>Elija los chats, grupos o canales que necesita.</li><li>Revise los ajustes de recogida, multimedia incluida.</li><li>Arránquelo y compruebe la conexión y la actividad reciente.</li></ol>
+<p>La cuenta tiene que tener acceso. Administradores y miembros ven cosas distintas; el diario muestra lo que recibió esta cuenta.</p>
+<p>¿La cuenta entera? <strong>Fuentes → Alcance de observación → Modo investigación</strong>, revíselo y pulse <strong>Guardar alcance</strong>. Guía completa: <a href="../cases/">investigar una cuenta entera</a>.</p>
 <h2 id="check">Compruebe la ruta completa</h2>
-<p>En un grupo de prueba que usted controle, envíe un mensaje único desde otra cuenta, edítelo y elimínelo. Confirme los tres eventos en el registro, y a continuación <a href="../exports/">exporte y verifique</a> el registro.</p>
-<p class="callout">El estado «conectado» confirma la conexión. Un mensaje de prueba capturado confirma que un evento concreto ha llegado a este espacio de trabajo.</p>
+<p>En su grupo de prueba, envíe un mensaje desde otra cuenta, edítelo y bórrelo. Los tres eventos deben aparecer en el diario. Después, <a href="../exports/">exporte y verifique</a>.</p>
+<p class="callout">«Conectado» significa que la conexión funciona. Un mensaje de prueba capturado significa que los eventos llegan de verdad.</p>
 <h2 id="more">Añada otra cuenta</h2>
-<p>Cree otro espacio de trabajo en <strong>«Cuentas»</strong> y repita la configuración. Conserve la huella digital de la clave de firma de cada cuenta para poder identificar sus exportaciones posteriormente.</p>
+<p>Nuevo espacio en <strong>Cuentas</strong>, mismos pasos. Apunte la huella de la clave de cada cuenta para distinguir luego las exportaciones.</p>
 </article>
 <footer class="guide-footer"><a class="reference" href="../reference/accounts/">Referencia completa →</a><a class="next-guide" href="../exports/"><span>Siguiente paso</span><strong>Exportar y verificar →</strong></a><p>Estas guías describen la implementación actual. Los resultados de la validación y las deficiencias pendientes se documentan por separado. <a href="../reference/verification/">Lo que se ha probado →</a></p></footer>
 </main>

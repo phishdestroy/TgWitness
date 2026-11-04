@@ -2,17 +2,17 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/accounts/
 
-Satu ruang kerja menampung satu akun, jurnalnya, dan kunci penandatanganannya.
+Satu ruang kerja = satu akun, jurnalnya, dan kuncinya.
 
 ## Pilih cara masuk
 
-Buka **Akun**, tambahkan ruang kerja, dan buka pengaturan koneksinya. Gunakan akun khusus untuk pengamatan.
+**Akun** → tambah ruang kerja → pengaturan koneksi. Gunakan akun terpisah untuk ini.
 
-- **Kode QR:** pindai kode ini dari pengaturan perangkat Telegram dan konfirmasi login baru.
-- **Nomor telepon:** masukkan nomor telepon, kode yang dikirimkan oleh Telegram, dan kata sandi verifikasi dua langkah Anda jika fitur tersebut diaktifkan.
-- **Impor sesi:** impor sesi yang didukung atau data Telegram Desktop milik Anda.
+- **Kode QR:** pindai dari layar Perangkat di Telegram lalu konfirmasi.
+- **Nomor telepon:** nomor, kode, lalu kata sandi 2FA jika ada.
+- **Impor sesi:** berkas sesi Anda sendiri atau data Telegram Desktop.
 
-Pilih profil API bawaan atau masukkan ID API dan hash Anda sendiri. Profil API mengidentifikasi klien; profil ini tidak digunakan untuk masuk ke akun atau membuat koneksi menjadi anonim.
+Gunakan profil API bawaan atau API ID dan hash Anda sendiri. Itu hanya mengenali aplikasinya, tidak memasukkan Anda dan tidak menyembunyikan apa pun.
 
 **Perlu proxy terlebih dahulu?**
 
@@ -20,20 +20,20 @@ Anda dapat [memilih dan menguji rute koneksi](https://phishdestroy.github.io/TgW
 
 ## Pilih apa yang ingin diamati
 
-1. Buka daftar sumber dan pilih obrolan, grup, atau saluran yang Anda butuhkan.
-2. Periksa pengaturan pengumpulan data, termasuk media, sebelum memulai pemantauan.
-3. Jalankan pengumpul data dan periksa koneksinya serta aktivitas terbarunya.
+1. Pilih obrolan, grup, atau kanal yang Anda perlukan.
+2. Periksa pengaturan pengumpulan, termasuk media.
+3. Jalankan lalu periksa koneksi dan aktivitas terbaru.
 
-Akun tersebut harus dapat mengakses sumbernya. Peran yang berbeda dapat melihat peristiwa yang berbeda; jurnal tersebut mencerminkan apa yang diterima oleh akun tersebut.
+Akun harus punya akses. Admin dan anggota melihat hal yang berbeda; jurnal menunjukkan apa yang diterima akun ini.
 
-Untuk kasus yang mencakup seluruh akun, gunakan **Sources → Observation scope → Investigation mode**, tinjau pengaturannya, lalu tekan **Save scope**. [Panduan penyelidikan lengkap](https://phishdestroy.github.io/TgWitness/id/docs/cases/) ini mencakup semua jenis obrolan yang terlihat, riwayat lama, profil pengguna, referensi lintas obrolan, dan penyerahan bukti.
+Seluruh akun? **Sumber → Cakupan pengamatan → Mode investigasi**, periksa, lalu **Simpan cakupan**. Panduan lengkap: [menyelidiki seluruh akun](https://phishdestroy.github.io/TgWitness/id/docs/cases/).
 
 ## Periksa jalur lengkapnya
 
-Di grup uji coba yang Anda kendalikan, kirimkan pesan unik dari akun lain, edit pesan tersebut, lalu hapus. Pastikan ketiga peristiwa tersebut tercatat dalam jurnal, kemudian [ekspor dan verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/exports/) catatan tersebut.
+Di grup uji Anda, kirim pesan dari akun lain, sunting, lalu hapus. Ketiga peristiwa harus muncul di jurnal. Lalu [ekspor dan verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/exports/).
 
-Status "terhubung" menandakan bahwa koneksi telah terjalin. Pesan uji yang terekam menandakan bahwa peristiwa tertentu telah sampai ke ruang kerja ini.
+"Terhubung" berarti koneksinya berfungsi. Pesan uji yang tertangkap berarti peristiwa benar-benar sampai.
 
 ## Tambahkan akun lain
 
-Buat ruang kerja lain di **bagian Akun** dan ulangi proses penyiapan. Simpan sidik jari kunci penandatanganan setiap akun agar Anda dapat mengidentifikasi ekspornya nanti.
+Ruang kerja baru di **Akun**, langkah yang sama. Catat sidik jari kunci setiap akun supaya ekspornya bisa dibedakan nanti.

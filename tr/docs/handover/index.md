@@ -2,16 +2,16 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/handover/
 
-Orijinal çalışma alanını olduğu gibi koruyarak ilgili gözlemleri paylaşın.
+Yalnızca gerekeni paylaşın, orijinal dokunulmadan kalır.
 
-Bir devir, ayrı bir imzalı özet niteliğindedir. Sohbetleri ve kişileri seçin, kimlik bilgilerini veya metni kısaltın ve hangi dosyaların ve ekip notlarının alıcının kopyasına dahil edileceğine karar verin. Manifestosu, seçimi ve değiştirilmemiş, kısaltılmış ve çıkarılmış kayıtların sayısını kaydeder.
+Teslim, ayrı bir imzalı özettir: sohbetleri ve kişileri seçin, kimlikleri ya da metni gizleyin, dosyaları ve ekip notlarını belirleyin. Manifest neyin tutulduğunu, kısaltıldığını ve dışarıda bırakıldığını kaydeder.
 
 ## Alıcının özetini hazırlayın
 
-1. **Dışa Aktar → Devir Özetini** açın. Amacını yazın, sohbetleri ve isteğe bağlı UTC dönemini seçin, ardından isimlendirilmiş kişiler gerekiyorsa **seçilen sohbetlerdeki kişileri yükle seçeneğini** seçin.
-2. Diğer kullanıcıların nasıl ele alınacağını seçin: takma ad kullanın, mesajlarını atlayın veya kaydedildiği gibi gösterin. Mesaj metnini ve ekleri ayrı ayrı ayarlayın; isteğe bağlı olarak telefon numaralarını ve e-posta adreslerini gizleyin.
-3. Case Board yer imlerini ve dilimlerini mi, yoksa yorum içeren kartları mı dahil edeceğinize karar verin. Bu metinde ekip adlarının yerine soruşturmacı takma adları kullanılabilir.
-4. **"İndirme devri özeti"ni** seçin. Oluşturulan raporu ve seçilen kayıtları yerel olarak açın, arşivi doğrulayın ve göndermeden önce kopyayı inceleyin.
+1. **Dışa aktarımlar → Teslim özeti**: amacı yazın, sohbetleri ve dönemi seçin, adı geçen kişilere ihtiyacınız varsa **Seçili sohbetlerin kişilerini yükle**.
+2. Diğer herkes: takma ad, dışarıda ya da kaydedildiği gibi. Metin ve dosyalar ayrı anahtarlardır; telefonlar ve e-postalar maskelenebilir.
+3. Case Board: hiçbir şey, yer imleri ve kesitler ya da yorumlu kartlar. Ekip adları takma adlarla değiştirilebilir.
+4. **Teslim özetini indir**, açın, doğrulayın, göndermeden önce gözden geçirin.
 
 ### Bir adet orijinal, paylaşım amaçlı bir kopya
 
@@ -54,12 +54,12 @@ Kaynak derginin sınırlarına bağlı ayrı bir paket
 
 | Kontrol | Metin üzerindeki etkisi |
 | --- | --- |
-| Kişiler | Seçilen kişilerin kimlikleri anlaşılır kalmalıdır; diğer katılımcıların kimlikleri tercihe göre takma adlarla belirtilmeli veya metinden çıkarılmalıdır. |
-| Metin | Tüm metni dahil edin, yalnızca seçilen kişilerin ve gözlemci hesabının metnini dahil edin ya da mesaj metnini ve metin içeren ayrıntı alanlarını hariç tutun. |
-| Dosyalar | Seçilen kişilerin ve gözlemlenen hesabın dosyalarını, gösterilen tüm mesajların dosyalarını veya hiçbir dosyayı seçin. |
-| Case Board | Pano materyalleri, yer imleri ve dilimler ya da ekip tartışması içeren kartları seçmeyin. |
+| Kişiler | Seçili kişiler adlarıyla kalır; diğerleri takma ad alır ya da dışarıda bırakılır. |
+| Metin | Tüm metin, yalnızca seçili kişilerin ve hesabınızın metni ya da hiçbiri. |
+| Dosyalar | Seçili kişilerin ve hesabınızın dosyaları, gösterilen tüm dosyalar ya da hiçbiri. |
+| Case Board | Hiçbir şey, yer imleri ve kesitler ya da tartışmalı kartlar. |
 
-Serbest biçimli metinleri ve dosya içeriklerini yanı sıra kimlik bilgilerini de gözden geçirin: bir takma ad, mesajda veya ekte yazan her ismi otomatik olarak silmez. Seçilen bir koruma altındaki dosya mevcut değilse, özeti oluşturmadan önce dosyayı geri yükleyin veya ekleri açıkça hariç tutun.
+Metni ve dosyaları da okuyun: takma ad, bir mesajın ya da ekin içine yazılmış adları kaldırmaz. Seçili bir dosya eksikse geri yükleyin ya da ekleri dışarıda bırakın.
 
 ## Metnin bağımsız olarak doğrulanabilir olmasını sağlayın
 
@@ -67,4 +67,4 @@ Serbest biçimli metinleri ve dosya içeriklerini yanı sıra kimlik bilgilerini
 python -m tgwitness.verify handover.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
-Orijinal imzalı kanıt arşivini ve kontrol noktalarını ayrı olarak muhafaza edin. Devir teslimi kendi projeksiyonunu kaydeder; böylece alıcı, tüm çalışma alanını almadan teslim edilen kopyayı kontrol edebilir. [Report Studio,](https://phishdestroy.github.io/TgWitness/tr/docs/reports/) okuma tasarımını sağlar; [dışa aktarma doğrulaması,](https://phishdestroy.github.io/TgWitness/tr/docs/exports/) güvenilir referansları açıklar.
+Orijinal arşivi ve kontrol noktalarını kendiniz saklayın. Alıcı, tüm çalışma alanını almadan kendi kopyasını doğrulayabilir. Tasarım: [Report studio](https://phishdestroy.github.io/TgWitness/tr/docs/reports/). Güvenilir başvurular: [dışa aktarım doğrulaması](https://phishdestroy.github.io/TgWitness/tr/docs/exports/).
