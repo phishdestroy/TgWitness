@@ -11,7 +11,7 @@
   <a href="https://github.com/phishdestroy/TgWitness/wiki"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-handbook-mobile.svg"><img src="docs/assets/presentation/readme-nav-handbook.svg" width="32%" alt="Read the investigation handbook"></picture></a>
 </p>
 
-<p align="center"><strong>Your Telegram investigation workspace.</strong><br>Export chats, preserve observed changes and trace connections back to the source.<br>Self-hosted. Separate accounts. Signed handoffs.</p>
+<p align="center"><strong>Self-hosted workspace for Telegram investigations.</strong><br>Save chats, keep edits and deletions, see who's connected to whom<br>and hand over signed exports anyone can check.</p>
 
 <p align="center">
   <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.8.0 · pre-release"></a>
@@ -80,12 +80,10 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
   <a href="docs/COLLECTION.md"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-history-mobile.svg"><img src="docs/assets/presentation/readme-nav-history.svg" width="32%" alt="Collection and saved versions"></picture></a>
 </p>
 
-Choose what you want to do: [export your account](docs/ACCOUNT-EXPORT.md) or
-[follow an investigation](docs/INVESTIGATION.md). Connect an account, choose the
-chats and files to save, then start when you are ready.
-
-**Choose your scope:** selected chats, a Telegram folder or the whole account.
-Keep each account in its own workspace, with separate sources, session and signing key.
+Two ways to use it: [export your account](docs/ACCOUNT-EXPORT.md) once, or
+[follow an investigation](docs/INVESTIGATION.md) and keep saving changes.
+Pick a few chats, a Telegram folder or the whole account. Each account gets its
+own workspace, session and signing key.
 
 ## Built for the rest of the investigation
 
@@ -105,27 +103,23 @@ Keep each account in its own workspace, with separate sources, session and signi
   <a href="docs/HIGH-ASSURANCE.md"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-cloud-mobile.svg"><img src="docs/assets/presentation/readme-nav-cloud.svg" width="48%" alt="Sealed cloud deployment"></picture></a>
 </p>
 
-**Available in 0.7.1:** load the history of enabled chats with pause/resume,
-review sources before asking AI, connect read-only MCP clients, run local OCR or
-transcription, and send HMAC-signed webhooks.
-
 <details>
-<summary><strong>Pick the tools for your case</strong> · history, accounts, media and integrations</summary>
+<summary><strong>Everything else</strong> · history, accounts, proxies, AI, integrations</summary>
 
-| Task | What you get |
+| | |
 | --- | --- |
-| [Load older messages](docs/HISTORY.md) | Save older messages from your selected chats. Pause and resume without starting over. |
-| [Export with several accounts](docs/ACCOUNTS.md#multiple-accounts) | Use several connected accounts to export one chat. Each account keeps its own session and signing key. |
-| [Import a batch of accounts](docs/ACCOUNTS.md#bulk-import-and-account-groups) | Pair session files automatically, see each login result and organize workspaces into groups with shared settings. |
-| [Manage the MTProxy pool](docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) | Ping, countries, filters and your own lists; one shared catalog with separate account routes. |
-| [Bring an existing session](docs/ACCOUNTS.md) | Telegram Desktop TData, Telethon, Pyrogram, StringSession or an auth key. |
-| [Route through a proxy](docs/CONNECTION-SECURITY.md#ip-modes) | Per-workspace SOCKS5, HTTP CONNECT or MTProxy. **Hide IP** mode refuses direct fallback. |
-| [Search and review](docs/ANALYSIS.md) | Local search, optional AI, cited observations and separate analytical reports. |
-| [Connect via MCP](docs/MCP.md) | Seven read-only tools, selected workspaces/chats, expiry and revocation. |
-| [Read images and audio](docs/MEDIA-ANALYSIS.md) | Optional local OCR and transcription; original files stay unchanged. |
-| [Add independent capture](docs/OPTIONAL-CAPTURE.md) | Extras → Independent capture: optional browser/AyuGram recorders, separate keys, screenshots and verified signed exports. Connections and video start off. Preview. |
-| [Send webhooks](docs/WEBHOOKS.md) | Scoped outgoing events, HMAC signatures, retries and an n8n example. |
-| [Share a focused view](docs/ACCESS.md) | Selected accounts/chats, permissions, expiry and IP restrictions. |
+| [Load older messages](docs/HISTORY.md) | Pull past history of selected chats, pause and resume any time |
+| [Several accounts](docs/ACCOUNTS.md#multiple-accounts) | Export one chat through several accounts, each with its own session and key |
+| [Batch import](docs/ACCOUNTS.md#bulk-import-and-account-groups) | Drop in a pile of session files, sort accounts into groups with shared settings |
+| [MTProxy pool](docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) | Ping, countries, filters, your own lists |
+| [Existing sessions](docs/ACCOUNTS.md) | TData, Telethon, Pyrogram, StringSession, auth key |
+| [Proxies](docs/CONNECTION-SECURITY.md#ip-modes) | SOCKS5, HTTP CONNECT or MTProxy per workspace. **Hide IP** never falls back to direct |
+| [Search and AI](docs/ANALYSIS.md) | Local search, optional AI with sources you can check |
+| [MCP](docs/MCP.md) | Read-only access for MCP clients, limited to the chats you pick |
+| [OCR and transcription](docs/MEDIA-ANALYSIS.md) | Runs locally, originals stay untouched |
+| [Independent capture](docs/OPTIONAL-CAPTURE.md) | Optional browser/AyuGram recorders in Extras (preview, off by default) |
+| [Webhooks](docs/WEBHOOKS.md) | Signed outgoing events with retries, n8n example included |
+| [Shared access](docs/ACCESS.md) | Give someone selected chats only, with expiry and IP limits |
 
 </details>
 
@@ -139,12 +133,10 @@ transcription, and send HMAC-signed webhooks.
 
 ## Capture with GitHub provenance
 
-**Preview.** Collect a chat on a GitHub-hosted runner using a pinned version of
-TgWitness and a fresh Telegram session. Download the encrypted archive with its
-GitHub attestation. The verifier checks the approved workflow and collector
-version, the archive digest, journal and attachments.
-
-Open the capture helper from **Exports** in the panel or follow the guide below.
+**Preview.** Collect a chat on a GitHub-hosted runner with a pinned TgWitness and a
+fresh Telegram session, then download the encrypted archive with its GitHub
+attestation. The verifier checks the approved workflow and collector version, the
+archive digest, the journal and attachments. Also available under **Exports** in the panel.
 
 [Open the capture page](https://phishdestroy.github.io/TgWitness/docs/capture/) · [Instructions](docs/SEALED-ACTIONS.md)
 
@@ -154,16 +146,17 @@ Open the capture helper from **Exports** in the panel or follow the guide below.
 
 ## A record someone else can check
 
-Export the observations and preserved files together. Give the recipient an
-independently trusted key fingerprint and checkpoint to verify the handoff.
+An export carries the messages, files and the verifier. Send the recipient your
+key fingerprint and a checkpoint through another channel and they can check it
+themselves:
 
 ```sh
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --checkpoint checkpoint.json
 ```
 
-The verifier checks signatures, the journal chain, the file manifest and
-attachments against your trusted inputs. A retained checkpoint also checks the
-archive against a previously recorded journal state.
+The verifier checks signatures, the journal chain, the file manifest and attachments
+against your trusted inputs. With a retained checkpoint it also checks the archive
+against an earlier journal state.
 
 [Archive verification](docs/wiki/Exports-and-Verification.md) · [Checks and tested scale](docs/VERIFICATION.md)
 
@@ -236,8 +229,8 @@ verification steps for a signed TgWitness archive.
 
 </details>
 
-TgWitness can only collect what the connected account can access. It cannot recover
-unseen deleted messages or Secret Chats; downtime may leave gaps.
+It only sees what the connected account sees. Messages deleted before it saw them
+and Secret Chats are out of reach, and downtime leaves gaps.
 
 <p align="center">
   <a href="docs/README.md"><img src="docs/assets/presentation/readme-button-docs.svg" height="34" alt="Technical documentation"></a>
