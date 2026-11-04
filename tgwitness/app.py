@@ -1108,7 +1108,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         if dates[0] is not None and dates[1] is not None and dates[0] > dates[1]:
             raise HTTPException(422, "The start must precede the end of the selected period.")
         filters = dict(chat_id=chat_id, message_id=message_id, kind=kind, search=search,
-                       chat_ids=visible_chats(request), since=dates[0], until=dates[1], hide_system=hide_system)
+                       chat_ids=visible_chats(request), since=dates[0], until=dates[1], hide_system=hide_system,
+                       hide_access=not request.state.principal.admin)
         store = app.state.store
 
         def read_window():

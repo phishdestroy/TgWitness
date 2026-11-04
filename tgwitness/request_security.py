@@ -12,6 +12,19 @@ def networks(value):
                  for item in value.split(",") if item.strip())
 
 
+def bucket(address):
+    try:
+        ip = ipaddress.ip_address(address)
+    except ValueError:
+        return address
+    if ip.version == 4:
+        return str(ip)
+    if ip.ipv4_mapped is not None:
+        return str(ip.ipv4_mapped)
+    # One IPv6 subscriber usually holds a whole /64; per-address limits would be trivial to rotate around.
+    return str(ipaddress.ip_network((ip, 64), strict=False))
+
+
 class RequestSecurity:
     def __init__(self, app, trusted=None, header=None, allowed=None, clock=time.monotonic):
         self.app, self.clock = app, clock
@@ -70,13 +83,14 @@ class RequestSecurity:
         if "/api/" not in scope.get("path", ""):
             return await self.app(scope, receive, send)
         now = self.clock()
-        row = self.clients.get(address)
+        key = bucket(address)
+        row = self.clients.get(key)
         if row is None:
             if len(self.clients) >= 4096:
                 self.clients.popitem(last=False)
-            row = self.clients[address] = {"requests": deque(), "failures": deque(), "until": 0,
-                                           "strikes": 0, "last_failure": 0}
-        self.clients.move_to_end(address)
+            row = self.clients[key] = {"requests": deque(), "failures": deque(), "until": 0,
+                                       "strikes": 0, "last_failure": 0}
+        self.clients.move_to_end(key)
         for name in ("requests", "failures"):
             while row[name] and row[name][0] <= now - 60:
                 row[name].popleft()

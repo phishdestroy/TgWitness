@@ -62,6 +62,14 @@ async def boundary_checks():
         assert (await request())['status'] == 200
     assert (await request())['status'] == 429
     assert (await request(peer='203.0.113.10'))['status'] == 200
+    v6 = RequestSecurity(app, trusted='', allowed='', clock=lambda: clock[0])
+    for index in range(10):
+        assert (await request('/api/bad', peer='2001:db8:1:2::' + format(index + 1, 'x'), target=v6))['status'] == 401
+    assert (await request(peer='2001:db8:1:2:ffff::9', target=v6))['status'] == 429
+    assert (await request(peer='2001:db8:1:3::1', target=v6))['status'] == 200
+    for _ in range(10):
+        assert (await request('/api/bad', peer='::ffff:192.0.2.40', target=v6))['status'] == 401
+    assert (await request(peer='192.0.2.40', target=v6))['status'] == 429
     slots = StreamSlots(limit=3, per_token=2)
     assert slots.acquire('a') and slots.acquire('a') and not slots.acquire('a')
     assert slots.acquire('b') and not slots.acquire('c')
@@ -90,6 +98,11 @@ def disclosure_checks():
                     response = http.get(path, headers=headers)
                     assert response.status_code == 200, (path, response.content)
                     assert (marker.encode() in response.content) is visible, (permissions, path)
+                journal = http.get('/api/events', headers=headers, params={
+                    'kind': 'access.session_started,access.granted', 'include_count': 'true', 'limit': 500}).json()
+                assert journal['events'] == [] and journal['matched'] == 0, permissions
+                listed = http.get('/api/events', headers=headers, params={'limit': 500}).json()['events']
+                assert not any(event['kind'].startswith('access.') for event in listed), permissions
                 if not visible:
                     data = json.loads(http.get('/api/status', headers=headers).content)
                     assert 'network' not in data['collector'] and 'version' not in data and 'run_id' not in data
@@ -100,6 +113,9 @@ def disclosure_checks():
                 assert http.post('/api/access/token', headers=headers, json={}).status_code == 403
                 for path in ('/api/replica', '/api/alerts', '/api/parameters'):
                     assert http.get(path, headers=headers).status_code == 403
+            started = http.get('/api/events', headers=root_headers,
+                               params={'kind': 'access.session_started', 'limit': 50}).json()['events']
+            assert started and not any('address' in event['payload'] for event in started)
             for bad in ('../other', 'missing', 'default&ws=default', ''):
                 assert http.get('/api/access?ws=' + bad, headers=root_headers).status_code == 404
             assert http.get('/api/access?ws=default', headers=root_headers).status_code == 200
@@ -121,9 +137,20 @@ def disclosure_checks():
             assert app.state.collector.network_config().kind == 'socks5'
             assert 'PrivateBrowser' not in json.dumps(vault.read('access'))
             assert 'PrivateBrowser' not in json.dumps(access.state())
+            probe_settings = GrantSettings(label='Address probe', ips=['203.0.113.128/25'], workspaces={'default': None})
+            probe, probe_grant = access.issue(probe_settings)
+            access.change(probe_grant['id'], probe_settings)
+            access.login(probe, '203.0.113.201', None)
+            assert any(s['address'] == '203.0.113.201' for s in access.state()['sessions'])
+            policy = [event['payload'] for event in http.get('/api/events', headers=root_headers, params={
+                'kind': 'access.granted,access.changed', 'limit': 50}).json()['events']
+                if event['payload'].get('label') == 'Address probe']
+            assert len(policy) == 2 and all(p['ip_restrictions'] == 1 and 'ips' not in p for p in policy)
             archive = export_file(store, vault, 'zip')
             with zipfile.ZipFile(archive) as exported:
                 assert b'PrivateBrowser' not in exported.read('events.jsonl')
+                assert b'203.0.113.201' not in exported.read('events.jsonl')
+                assert b'203.0.113.128' not in exported.read('events.jsonl')
                 assert b'PrivateBrowser' not in exported.read('report.html')
             raw = vault.read('access')
             raw['sessions'][0]['agent'] = 'OldPrivateBrowser/123'
