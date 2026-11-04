@@ -2,11 +2,13 @@
 
 [Security policy](../.github/SECURITY.md)
 
-You can check artifact bytes against a public workflow and commit without access
-to our infrastructure or trust in our self-hosted runner. This still requires
-trust in the code you approve, GitHub's hosted runners and OIDC, Sigstore, and
-your verification tools. An attestation is a signed claim, not proof that code
-is harmless.
+Check the exact file you received against its public workflow and source commit.
+GitHub's hosted runners, OIDC and Sigstore supply the provenance records; your
+verification policy selects the workflow and code revisions you trust.
+
+For a Telegram archive, start with [sealed evidence](#sealed-evidence), or use
+the [signed journal guide](wiki/Exports-and-Verification.md) for a local workspace.
+For a downloaded TgWitness release, follow the source-archive procedure below.
 
 ## Release source archive
 

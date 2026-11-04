@@ -32,8 +32,8 @@ Illustrated workflows. [Export a chat](Chat-Export.md) · [Investigate](Investig
 
 **First successful check:** a test message from a chat you control appears in the
 journal; its captured edit becomes another version; its deletion notice leaves
-the captured content available. Verify the signed export as well. This checks
-that sequence, not every possible Telegram event.
+the captured content available. Verify the signed export and keep the result
+with the test archive.
 
 ## Pick your task
 
@@ -103,7 +103,7 @@ TgWitness is [MIT-licensed](../../LICENSE). Our
 
 Use a dedicated account you can afford to lose. A Telegram session grants access to that account; keep sessions, panel tokens and keys private. Local message content and attachments need disk encryption if you require protection at rest.
 
-A signature establishes integrity relative to a trusted key. It does not prove that Telegram created a message, that collection was complete, or that an operator could not fabricate a journal.
+Verify the signed archive with a separately retained key fingerprint and checkpoint. The result checks the saved records and files; the archive also reports the collection period and any recorded gaps. [Export and verify](Exports-and-Verification.md).
 
 ## Project and help
 
