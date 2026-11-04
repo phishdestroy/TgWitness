@@ -481,7 +481,7 @@ class AccessControl:
             self.sessions[session["sha256"]] = session
             self.save()
         self.store.append("access.session_started", {"access_id": owner, "label": label,
-                                                    "session_id": session["id"], "address": address})
+                                                    "session_id": session["id"]})
         LOG.info("Session %s started for %s from %s", session["id"], label, address)
         return session_token, self.principal(session)
 
@@ -536,9 +536,9 @@ class AccessControl:
 
     def journal_view(self, grant):
         return {"access_id": grant["id"], "showcase": bool(grant.get("showcase")), **{k: grant[k] for k in (
-            "label", "permissions", "all_workspaces", "workspaces", "ips", "bind_first_ip", "max_uses",
+            "label", "permissions", "all_workspaces", "workspaces", "bind_first_ip", "max_uses",
             "max_sessions", "on_limit", "session_minutes")}, "groups": grant.get("groups") or [],
-            "expires_at": unix_iso(grant["expires_at"])}
+            "ip_restrictions": len(grant["ips"]), "expires_at": unix_iso(grant["expires_at"])}
 
     def issue(self, settings: GrantSettings):
         if settings.expires_at is not None and settings.expires_at <= time.time():

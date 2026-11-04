@@ -371,11 +371,11 @@ class Store:
 
     def events(self, chat_id=None, message_id=None, kind=None, before=None, limit=100, search=None, chat_ids=None,
                *, since=None, until=None, message_min=None, message_max=None, timeout_s=None,
-               text_only=False, message_only=False, hide_system=False, after=None):
+               text_only=False, message_only=False, hide_system=False, after=None, hide_access=False):
         source, order, where, params = self._event_selection(
             chat_id, message_id, kind, before, search, chat_ids, since=since, until=until,
             message_min=message_min, message_max=message_max, text_only=text_only,
-            message_only=message_only, hide_system=hide_system, after=after)
+            message_only=message_only, hide_system=hide_system, after=after, hide_access=hide_access)
         sql = "SELECT events.* FROM " + source + where + " ORDER BY " + order
         sql += " ASC LIMIT ?" if after is not None else " DESC LIMIT ?"
         records = [self.decode(r) for r in self.bounded_read(sql, [*params, limit], timeout_s)]
@@ -387,9 +387,11 @@ class Store:
 
     def _event_selection(self, chat_id=None, message_id=None, kind=None, before=None, search=None, chat_ids=None,
                          *, since=None, until=None, message_min=None, message_max=None,
-                         text_only=False, message_only=False, hide_system=False, after=None):
+                         text_only=False, message_only=False, hide_system=False, after=None, hide_access=False):
         filters, params = [], []
         source, order = "events", "seq"
+        if hide_access:
+            filters.append("kind NOT GLOB 'access.*'")
         if chat_ids is not None:
             filters.append("chat_id IN (" + ",".join("?" * len(chat_ids)) + ")")
             params.extend(sorted(chat_ids))
