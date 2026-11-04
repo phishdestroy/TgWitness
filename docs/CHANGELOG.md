@@ -129,8 +129,21 @@
 ### Initial preview contents · 30 October 2026
 
 - First GitHub release: Windows portable, wheel, source archive.
-- Back to the plain MIT License. Our Taylor Wessing position stays in NOTICE as a
-  statement, not a licence condition.
+- The setup guide has an "Open to everyone" section: no country or sanctions blocks, and
+  Taylor Wessing as the only incompatibility we name. It is our position, not a licence condition.
+- The README and Wiki now present the authors' Ethical Notice & Historical
+  Continuity statement, with document references, historical context and an
+  explicit explanation that MIT permission applies to everyone.
+- The operator notice and the Taylor Wessing page speak in our own voice.
+- Returned to the MIT License. A tool whose output third parties must be able to check
+  should not stumble over its licence. `LICENSE` is the standard MIT text again, the
+  package declares MIT with the OSI classifier, and the container, portable package,
+  website, Wiki and translated README labels say so. Our statement stays in NOTICE
+  and on the Taylor Wessing page as our position; it adds no licence condition. The presentation artwork reads "open source" again.
+- Added our Operator Incompatibility NOTICE to README, SECURITY,
+  the documentation, Wiki and website. A single source keeps the complete statement
+  consistent across those pages; source, Python and portable distributions include
+  NOTICE alongside the licence.
 - High-assurance deployment (`python -m tgwitness.cloud`, [guide](HIGH-ASSURANCE.md)) on
   Hetzner, DigitalOcean, Linode, Vultr or EC2: no SSH key, no inbound ports, panel only
   through a Cloudflare Tunnel, and a `verify` command for third parties.
