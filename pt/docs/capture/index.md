@@ -10,6 +10,8 @@ Ative o JavaScript para gerar uma chave e descriptografar seu arquivo.
 
 **Preview available from `main`.** A fork launches a pinned reusable workflow from `phishdestroy/TgWitness`. The workflow exports an account, selected chats or one chat's event journal using a newly created Telegram session, attests the evidence ZIP or multipart manifest, and uploads only recipient-encrypted handoffs. The normal administration panel is not exposed.
 
+Choose `client=official_web` to run the [official-client witness](https://github.com/phishdestroy/TgWitness/blob/main/docs/OFFICIAL-WITNESS.md) with guarded Telegram Web controls and video．It requires your own upstream proxy and observes one rendered chat．The default `client=api` retains the full-account export modes described below．
+
 The verifier checks the archive against its GitHub attestation, the approved workflow and collector commits, and the signed journal and attachment hashes. The collection process uses pinned upstream code and fresh storage. A reviewer can inspect that code and verify the delivered archive against its recorded run.
 
 ## User flow
