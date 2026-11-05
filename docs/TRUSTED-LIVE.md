@@ -177,7 +177,7 @@ generated JSON fixture, verifies the signed ZIP and checks profile cleanup. The
 workflow retains its screenshot, logs and synthetic evidence as artifacts. It does
 not sign in to Telegram or exercise a WARP deployment.
 
-Local validation on 2026-11-05 (Windows, Python 3.12): **76 tests passed, none skipped**
+Local validation on 2026-11-05 (Windows, Python 3.12): **77 tests passed, none skipped**
 with `--capture-browser` and `--capture-ffmpeg` pointing to an installed encoder.
 The new panel also completed native-export import, styled inline observations, mobile
 layout, cleanup and ZIP download in Chromium without console errors. Provider/drand

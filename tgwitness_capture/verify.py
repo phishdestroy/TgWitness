@@ -64,7 +64,7 @@ def verify_zip(path, expected_fingerprint=None, checkpoint=None, receipt=None,
             raise ValueError("Unreferenced export files")
         from .trusted_verify import verify_analysis
         # Only the numeric count crosses into the public verification summary.
-        trusted_reports = int(verify_analysis(events, archive.read))
+        report_count = int(verify_analysis(events, archive.read))
     from .trusted_anchor import confirm
     drand = confirm(events, check_drand)
     anchored_seq = 0
@@ -95,4 +95,4 @@ def verify_zip(path, expected_fingerprint=None, checkpoint=None, receipt=None,
             "fingerprint": actual_fingerprint, "key_pinned": expected_fingerprint is not None,
             "events": len(events), "head_hash": head, "checkpoint_checked": checkpoint is not None,
             "independently_witnessed": independently_witnessed, "anchored_seq": anchored_seq,
-            "unanchored_events": len(events) - anchored_seq, "trusted_reports_checked": trusted_reports, "drand": drand}
+            "unanchored_events": len(events) - anchored_seq, "trusted_reports_checked": report_count, "drand": drand}

@@ -38,8 +38,9 @@ def main():
     route_path = "/run/trusted-route.json"
     with os.fdopen(os.open(route_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "w") as target:
         json.dump(receipt, target)
-    os.chown(route_path, 0, 10001)
-    os.chmod(route_path, 0o440)
+    os.chmod(route_path, 0o400)
+    # Keep root ownership; grant only the recorder UID read access, not its whole group.
+    subprocess.run(["setfacl", "-m", "u:10001:r--", route_path], check=True)
     for directory in ("/data", "/session", "/exports", "/home/recorder"):
         os.chown(directory, 10001, 10001)
     os.execvp("setpriv", ["setpriv", "--reuid=10001", "--regid=10001", "--init-groups",

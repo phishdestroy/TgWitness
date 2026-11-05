@@ -5,10 +5,12 @@ import io
 import os
 import shutil
 import socket
+import subprocess
 import time
 import threading
 import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 from fastapi.testclient import TestClient
@@ -19,7 +21,7 @@ from tgwitness_capture.export import export_zip
 from tgwitness_capture.format import canonical
 from tgwitness_capture.service import Config
 from tgwitness_capture.trusted_model import Choice, Scroll
-from tgwitness_capture.trusted_runtime import connector_config
+from tgwitness_capture.trusted_runtime import LinuxClient, connector_config
 from tgwitness_capture.trusted_service import TrustedRecorder, create_app
 from tgwitness_capture.verify import verify_zip
 
@@ -201,6 +203,25 @@ def test_setup_secrets_not_recorded_and_capture_input_guard(service):
     assert client.post("/api/scroll", json={"direction": "up"}).status_code == 200
     assert client.post("/api/scroll", json={"direction": "up"}).status_code == 409
     assert runtime.scrolls == ["up"]
+
+
+def test_unmapped_client_window_can_retry_setup_but_stops_collection(service):
+    client, recorder, runtime = service
+    linux = LinuxClient({})
+    linux.process = SimpleNamespace(poll=lambda: None, pid=os.getpid())
+    def unmapped(args, **kwargs):
+        raise subprocess.CalledProcessError(1, args)
+    linux.command = unmapped
+    runtime.arm = linux.arm
+    begin(client)
+    result = client.post("/api/start")
+    assert result.status_code == 409 and "not ready" in result.json()["detail"]
+    assert recorder.phase == "setup" and not runtime.stopped and recorder.video.process is None
+    runtime.arm = lambda: None
+    assert client.post("/api/start").status_code == 200
+    runtime.scroll = linux.scroll
+    assert client.post("/api/scroll", json={"direction": "up"}).status_code == 409
+    assert recorder.phase == "failed" and runtime.stopped
 
 
 @pytest.mark.parametrize("failure", ["bad_route", "bad_focus"])

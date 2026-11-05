@@ -84,13 +84,27 @@ def main():
 
                 state = call("status").json()
                 assert state["phase"] == "configured" and not state["settings"]["enabled"]
+                access_probe = """import os
+path='/run/trusted-route.json'
+assert os.stat(path).st_uid == 0
+assert os.access(path,os.R_OK) and not os.access(path,os.W_OK)
+try: os.chmod(path,0o600)
+except PermissionError: pass
+else: raise AssertionError('Recorder can change protected route permissions')
+"""
+                docker("exec", "--user", "10001", client, "python", "-c", access_probe)
+                docker("exec", "--user", "10002", client, "python", "-c",
+                       "import os; assert not os.access('/run/trusted-route.json',os.R_OK)")
                 call("begin", {"case": "CI synthetic export; no account", "connector": "ci-sink", "client": "desktop", "method": "hybrid"})
                 deadline = time.monotonic() + 20
+                attempts = []
                 while True:
                     result = session.post(base + "/api/start", json={}, timeout=15)
                     if result.status_code == 200:
                         break
-                    assert time.monotonic() < deadline, result.text
+                    attempts.append({"status": result.status_code, "detail": result.text[:500]})
+                    current = call("status").json()
+                    assert current["phase"] in {"setup", "paused"} and time.monotonic() < deadline, (attempts, current)
                     time.sleep(.5)
                 frame = call("frame")
                 assert frame.content.startswith(b"\x89PNG\r\n\x1a\n") and len(frame.content) > 1000
@@ -133,6 +147,12 @@ print(json.dumps(results))
     finally:
         logs = docker("logs", client, check=False)
         (args.output / "container.log").write_text(logs)
+        # This helper creates an unauthenticated, network-blocked client; its startup
+        # log can diagnose missing Qt libraries without ever handling an account.
+        startup = docker("exec", "--user", "10001", client, "python", "-c",
+                         "from pathlib import Path; print('\\n'.join(p.read_text(errors='replace')[-16000:] for p in Path('/session').glob('trusted-*/log.txt')))",
+                         check=False)
+        (args.output / "official-client-startup.log").write_text(startup)
         docker("rm", "-f", client, gateway, check=False)
         docker("network", "rm", network, check=False)
 

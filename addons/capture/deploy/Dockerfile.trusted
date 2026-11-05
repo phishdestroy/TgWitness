@@ -3,7 +3,7 @@ ARG TELEGRAM_ARCHIVE_URL=https://github.com/telegramdesktop/tdesktop/releases/do
 ARG TELEGRAM_ARCHIVE_SHA256=62082a56b212f22d75106dd13b7e3b9bc4ecdbfb472146b56c74da74199855b7
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates curl xz-utils xvfb xdotool openbox ffmpeg chromium chromium-sandbox \
-    nftables util-linux libegl1 libgl1 libopengl0 libxkbcommon0 libxcb-cursor0 \
+    nftables util-linux acl libegl1 libgl1 libopengl0 libxkbcommon0 libxcb-cursor0 \
     libxcb-keysyms1 libxcb-icccm4 libxcb-image0 libxcb-render-util0 libxcb-xinerama0 \
     libxcb-randr0 libxcb-shape0 libxcb-xkb1 libasound2 libdbus-1-3 fonts-dejavu-core \
     && rm -rf /var/lib/apt/lists/*

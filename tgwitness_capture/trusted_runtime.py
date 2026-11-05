@@ -108,8 +108,13 @@ class LinuxClient:
     def active_window(self):
         if self.process is None or self.process.poll() is not None:
             raise ValueError("Client exited")
-        window = self.command(["xdotool", "getactivewindow"]).decode().strip()
-        pid = int(self.command(["xdotool", "getwindowpid", window]).decode().strip())
+        try:
+            window = self.command(["xdotool", "getactivewindow"]).decode().strip()
+            pid = int(self.command(["xdotool", "getwindowpid", window]).decode().strip())
+        except subprocess.CalledProcessError:
+            # X11 may not yet have an active window while the official client starts.
+            # Setup remains retryable; scroll still turns this into an emergency stop.
+            raise ValueError("Client window is not ready; wait and review the screen") from None
         # Main process and browser children remain in the owned process group.
         if os.getpgid(pid) != self.process.pid:
             raise ValueError("Focus left the owned client")
