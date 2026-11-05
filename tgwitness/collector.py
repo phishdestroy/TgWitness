@@ -71,7 +71,7 @@ EXPOSURE_MEANING = {
 MEMBERSHIP_ACTIONS = (types.MessageActionChatAddUser, types.MessageActionChatDeleteUser,
                       types.MessageActionChatJoinedByLink, types.MessageActionChatJoinedByRequest)
 # The client description in the connection request Telegram receives.
-CLIENT_FIELDS = ("device_model", "system_version", "app_version", "lang_code", "system_lang_code")
+CLIENT_FIELDS = ("device_model", "system_version", "app_version", "lang_code", "system_lang_code", "lang_pack")
 CLOCK_TIMEOUT = 10
 PROFILE_TIMEOUT = 30
 PROFILE_FLAGS = ("scam", "fake", "verified", "restricted", "noforwards", "broadcast", "megagroup", "gigagroup",
@@ -387,6 +387,7 @@ class Collector:
             "account": self.store.get_setting("account", None),
             "account_loss": self.store.get_setting("account_loss", None),
             "client": self.client_identity(credentials=credentials),
+            "client_checks": self.store.get_setting("client_checks", None),
             "last_error": self.last_error, "last_heartbeat": self.last_heartbeat,
             "media_pending": sum(n for s, n in self.store.media_stats().items()
                                  if s in ("queued", "running", "retry")),
@@ -1483,6 +1484,26 @@ class Collector:
             from .client_initialization import post_login
             result = await post_login(candidate)
             self.store.append("account.initialized", {"account_id": me.id, "source": "telegram_api", "requests": result})
+        await self.check_client_connection(candidate)
+
+    async def check_client_connection(self, client):
+        if getattr(client, "tgwitness_connection_check", None) is None:
+            from .client_checks import inspect_connection
+            async def inspect():
+                result = await inspect_connection(client)
+                if client is self.client:
+                    with self.store.transaction():
+                        self.store.set_setting("client_checks", result)
+                        self.store.append("account.connection_checked", result)
+                return result
+            client.tgwitness_connection_check = asyncio.create_task(inspect())
+        task = client.tgwitness_connection_check
+        try:
+            return await task
+        except asyncio.CancelledError:
+            if task.cancelled() and client.tgwitness_connection_check is task:
+                client.tgwitness_connection_check = None
+            raise
 
     def resting_phase(self):
         if self.authorization_required:
@@ -1526,6 +1547,8 @@ class Collector:
                 and not credentials.get("client_profile") and self.vault.read("credentials") == credentials):
             credentials["client_profile"] = client.tgwitness_client_profile
             self.vault.save("credentials", credentials)
+        if client is self.client and authorization_generation == self.authorization_generation:
+            await self.check_client_connection(client)
 
     async def refusal(self, client):
         try:

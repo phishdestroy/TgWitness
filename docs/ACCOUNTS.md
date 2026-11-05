@@ -93,6 +93,20 @@ randomized intermediate transport and secret handling. Route switches apply the
 same choices. Obfuscation changes packet framing; it does not hide the account
 or its client metadata from Telegram or imply immunity to restrictions.
 
+After connecting an authorized client, TgWitness checks config, nearest DC,
+the current authorization, the reviewed layer baseline, languages, app updates
+and terms-of-service updates. These diagnostics run once per client instance,
+before collection, and are shown under the connection details with their time.
+`account.connection_checked` records the result without session hashes, IPs,
+tokens or API hashes. They never accept terms or install updates. A request
+failure or FloodWait stops subsequent requests; a missing result stays unknown.
+Local checks can still report their results while network checks are skipped.
+
+`official_app=True` or `False` is Telegram's current-authorization flag. Neither
+value establishes whether the account is restricted, trusted or under observation.
+The existing evidence-mode `account.devices` snapshots remain the history of all
+signed-in devices; connection diagnostics retain only the current device description.
+
 Before connection, advisory checks compare the API platform, language pack,
 device/OS and app-version formats, mobile system locale, and Telethon's actual
 schema layer against the reviewed catalog baseline. Warnings appear in the server

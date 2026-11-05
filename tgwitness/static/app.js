@@ -287,6 +287,8 @@ const labels = {
   "source.access_unconfirmed": [tr("Source access unconfirmed"), "question", "coverage"],
   "monitoring.changed": [tr("Monitoring settings changed"), "settings", "coverage"],
   "account.authorized": [tr("Account connected"), "account", "system"],
+  "account.initialized": [tr("Account initialized"), "account", "system"],
+  "account.connection_checked": [tr("Client connection checked"), "link", "system"],
   "account.signed_out": [tr("Signed out of Telegram"), "account", "system"], "target.changed": [tr("Source selection changed"), "sources", "system"],
   "capture.changed": [tr("Attachment settings changed"), "settings", "coverage"], "clock.discontinuity": [tr("Clock change detected"), "clock", "coverage"],
   "connection.retry": [tr("Reconnecting to Telegram"), "refresh", "system"], "connection.retry_failed": [tr("Reconnect attempt failed"), "alert", "coverage"],
@@ -3971,6 +3973,14 @@ function renderSeenBy(){
   const rows=[[tr("Network address"),address],[tr("Application"),pair],
     [tr("Session in Telegram's device list"),device||tr("Telethon's default description of this computer")]];
   if(id.meaning)rows.push(["",tr("This public pair belongs to Telegram Desktop; the session is described as Telegram Desktop.")]);
+  const checked=c.client_checks;
+  if(checked){
+    rows.push([tr("Current authorization"),typeof checked.official_app==="boolean"?"official_app="+(checked.official_app?"True":"False"):tr("Official-app flag unavailable")]);
+    rows.push([tr("Checked"),checked.checked_at||""]);
+    rows.push(["",tr("The official-app flag does not report account restrictions or whether Telegram is observing the account.")]);
+    for(const check of checked.checks||[])if(check.status!=="ok")rows.push([check.name,check.error||check.detail||check.status]);
+  }
+  for(const warning of id.warnings||[])rows.push([tr("Profile warning"),warning]);
   list.replaceChildren(...rows.flatMap(([term,value])=>[node("dt","",term),node("dd","",value)]));
 }
 $("network-details").addEventListener("toggle",()=>{if($("network-details").open&&$("network-kind").value==="mtproxy")loadProxyCatalog();});
