@@ -6136,5 +6136,10 @@
 "This search could not be read. Remove special characters and retry.": "この検索内容を読み取ることができませんでした。特殊文字を削除して、もう一度お試しください。",
 "Transcripts": "トランスクリプト",
 "Use at most 24 search terms.": "検索用語は最大24個まで使用してください。",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "日付は、since:2026-01-31 や until:2026-02-01T12:00+00:00 のような形式を使用してください。"
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "日付は、since:2026-01-31 や until:2026-02-01T12:00+00:00 のような形式を使用してください。",
+"Activity statistics": "アクティビティ統計",
+"Choose the export_messages tool for an export.": "エクスポートを行う場合は、export_messages ツールを選択してください。",
+"Export messages (command line only)": "メッセージのエクスポート（コマンドラインのみ）",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "保存された記録のみを対象とし、読み取り専用であり、Telegram での操作は行いません。このトークンは tgwitness コマンドラインでも使用可能ですが、メッセージのエクスポートができるのはコマンドラインのみです。",
+"Exports are available only from the archive export endpoint.": "エクスポートは、アーカイブエクスポートエンドポイントからのみ利用可能です。"
 }

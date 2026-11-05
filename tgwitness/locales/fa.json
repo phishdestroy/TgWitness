@@ -6175,5 +6175,10 @@
 "This search could not be read. Remove special characters and retry.": "این جستجو قابل خواندن نبود. کاراکترهای ویژه را حذف کرده و دوباره امتحان کنید.",
 "Transcripts": "پیاده‌سازی‌ها",
 "Use at most 24 search terms.": "حداکثر از ۲۴ عبارت جستجو استفاده کنید.",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "از تاریخ‌هایی مانند از: 2026-01-31 یا تا: 2026-02-01T12:00+00:00 استفاده کنید."
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "از تاریخ‌هایی مانند از: 2026-01-31 یا تا: 2026-02-01T12:00+00:00 استفاده کنید.",
+"Activity statistics": "آمار فعالیت",
+"Choose the export_messages tool for an export.": "برای خروجی‌گیری، ابزار export_messages را انتخاب کنید.",
+"Export messages (command line only)": "صادرات پیام‌ها (فقط از طریق خط فرمان)",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "فقط سوابق ذخیره شده، فقط خواندنی، بدون انجام هیچ عملی در تلگرام. همین توکن با خط فرمان tgwitness نیز کار می‌کند؛ تنها خط فرمان می‌تواند پیام‌ها را صادر کند.",
+"Exports are available only from the archive export endpoint.": "صادرات تنها از نقطه پایانی خروجی آرشیو در دسترس است."
 }

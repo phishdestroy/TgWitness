@@ -6214,5 +6214,10 @@
 "This search could not be read. Remove special characters and retry.": "לא ניתן לקרוא את החיפוש הזה. הסר תווים מיוחדים ונסה שוב.",
 "Transcripts": "תמלילים",
 "Use at most 24 search terms.": "השתמשו ב-24 מונחי חיפוש לכל היותר.",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "יש להשתמש בתאריכים כגון since:2026-01-31 או until:2026-02-01T12:00+00:00."
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "יש להשתמש בתאריכים כגון since:2026-01-31 או until:2026-02-01T12:00+00:00.",
+"Activity statistics": "סטטיסטיקות פעילות",
+"Choose the export_messages tool for an export.": "בחר בכלי export_messages לצורך ייצוא.",
+"Export messages (command line only)": "ייצוא הודעות (בשורת הפקודה בלבד)",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "רק רשומות שנשמרו, לקריאה בלבד, ללא פעולות ב-Telegram. אותו אסימון פועל גם בשורת הפקודה של tgwitness; רק שורת הפקודה יכולה לייצא הודעות.",
+"Exports are available only from the archive export endpoint.": "ייצוא זמין רק מנקודת הקצה לייצוא הארכיון."
 }

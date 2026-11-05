@@ -6136,5 +6136,10 @@
 "This search could not be read. Remove special characters and retry.": "無法讀取此搜尋內容。請移除特殊字元後重試。",
 "Transcripts": "對話紀錄",
 "Use at most 24 search terms.": "請使用最多 24 個搜尋詞。",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "日期格式請採用如下格式：例如 since:2026-01-31 或 until:2026-02-01T12:00+00:00。"
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "日期格式請採用如下格式：例如 since:2026-01-31 或 until:2026-02-01T12:00+00:00。",
+"Activity statistics": "活動統計",
+"Choose the export_messages tool for an export.": "請選擇 export_messages 工具進行匯出。",
+"Export messages (command line only)": "匯出訊息（僅限命令列）",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "僅限儲存記錄，唯讀模式，無法執行任何 Telegram 操作。同一組憑證亦適用於 tgwitness 命令列介面；僅有命令列介面可匯出訊息。",
+"Exports are available only from the archive export endpoint.": "僅可透過存檔匯出端點進行匯出。"
 }

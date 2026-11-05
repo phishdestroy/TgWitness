@@ -6175,5 +6175,10 @@
 "This search could not be read. Remove special characters and retry.": "Bu arama okunamadı. Özel karakterleri kaldırıp tekrar deneyin.",
 "Transcripts": "Transkriptler",
 "Use at most 24 search terms.": "En fazla 24 arama terimi kullanın.",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "since:2026-01-31 veya until:2026-02-01T12:00+00:00 gibi tarih biçimlerini kullanın."
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "since:2026-01-31 veya until:2026-02-01T12:00+00:00 gibi tarih biçimlerini kullanın.",
+"Activity statistics": "Etkinlik istatistikleri",
+"Choose the export_messages tool for an export.": "Dışa aktarım için export_messages aracını seçin.",
+"Export messages (command line only)": "Mesajları dışa aktar (yalnızca komut satırı)",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "Yalnızca kaydedilmiş kayıtlar, salt okunur, Telegram eylemleri yok. Aynı token, tgwitness komut satırında da çalışır; mesajları dışa aktarabilen tek yol komut satırıdır.",
+"Exports are available only from the archive export endpoint.": "Dışa aktarımlar yalnızca arşiv dışa aktarım uç noktasından yapılabilir."
 }

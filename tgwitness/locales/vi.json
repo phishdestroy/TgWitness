@@ -6136,5 +6136,10 @@
 "This search could not be read. Remove special characters and retry.": "Không thể đọc được nội dung tìm kiếm này. Hãy xóa các ký tự đặc biệt và thử lại.",
 "Transcripts": "Bản ghi",
 "Use at most 24 search terms.": "Sử dụng tối đa 24 từ khóa tìm kiếm.",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "Sử dụng các định dạng ngày tháng như since:2026-01-31 hoặc until:2026-02-01T12:00+00:00."
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "Sử dụng các định dạng ngày tháng như since:2026-01-31 hoặc until:2026-02-01T12:00+00:00.",
+"Activity statistics": "Thống kê hoạt động",
+"Choose the export_messages tool for an export.": "Chọn công cụ export_messages để thực hiện việc xuất dữ liệu.",
+"Export messages (command line only)": "Xuất tin nhắn (chỉ hỗ trợ dòng lệnh)",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "Chỉ lưu trữ các bản ghi đã lưu, chế độ chỉ đọc, không thực hiện bất kỳ thao tác nào trên Telegram. Token này cũng hoạt động với dòng lệnh tgwitness; chỉ dòng lệnh mới có thể xuất tin nhắn.",
+"Exports are available only from the archive export endpoint.": "Chức năng xuất dữ liệu chỉ khả dụng từ điểm cuối xuất dữ liệu lưu trữ."
 }

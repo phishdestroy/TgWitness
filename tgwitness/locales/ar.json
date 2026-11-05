@@ -6331,5 +6331,10 @@
 "This search could not be read. Remove special characters and retry.": "تعذر قراءة هذا البحث. قم بإزالة الأحرف الخاصة وأعد المحاولة.",
 "Transcripts": "نصوص المحادثات",
 "Use at most 24 search terms.": "استخدم 24 مصطلح بحث كحد أقصى.",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "استخدم التواريخ بالشكل التالي: منذ:2026-01-31 أو حتى:2026-02-01T12:00+00:00."
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "استخدم التواريخ بالشكل التالي: منذ:2026-01-31 أو حتى:2026-02-01T12:00+00:00.",
+"Activity statistics": "إحصائيات النشاط",
+"Choose the export_messages tool for an export.": "اختر أداة export_messages لإجراء عملية التصدير.",
+"Export messages (command line only)": "تصدير الرسائل (خط الأوامر فقط)",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "تقتصر الوظيفة على السجلات المحفوظة فقط، وهي للقراءة فقط، ولا تسمح بأي إجراءات على Telegram. يعمل الرمز نفسه مع سطر أوامر tgwitness؛ ولا يمكن تصدير الرسائل إلا عبر سطر الأوامر.",
+"Exports are available only from the archive export endpoint.": "تتوفر عمليات التصدير فقط من نقطة نهاية تصدير الأرشيف."
 }

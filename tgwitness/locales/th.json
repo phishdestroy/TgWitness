@@ -6136,5 +6136,10 @@
 "This search could not be read. Remove special characters and retry.": "ไม่สามารถอ่านการค้นหานี้ได้ โปรดลบตัวอักษรพิเศษแล้วลองอีกครั้ง",
 "Transcripts": "ข้อความบันทึก",
 "Use at most 24 search terms.": "ใช้คำค้นหาไม่เกิน 24 คำ",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "ใช้วันที่ เช่น since:2026-01-31 หรือ until:2026-02-01T12:00+00:00"
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "ใช้วันที่ เช่น since:2026-01-31 หรือ until:2026-02-01T12:00+00:00",
+"Activity statistics": "สถิติกิจกรรม",
+"Choose the export_messages tool for an export.": "เลือกเครื่องมือ export_messages เพื่อส่งออกข้อมูล",
+"Export messages (command line only)": "ส่งออกข้อความ (ใช้ผ่านบรรทัดคำสั่งเท่านั้น)",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "บันทึกเฉพาะข้อมูลที่เก็บไว้เท่านั้น, โหมดอ่านอย่างเดียว, ไม่มีการดำเนินการใดๆ บน Telegram โทเค็นเดียวกันนี้สามารถใช้งานร่วมกับบรรทัดคำสั่ง tgwitness ได้; มีเพียงบรรทัดคำสั่งเท่านั้นที่สามารถส่งออกข้อความได้",
+"Exports are available only from the archive export endpoint.": "การส่งออกข้อมูลสามารถทำได้เฉพาะจากจุดปลายทางส่งออกแบบอาร์ไคฟ์เท่านั้น"
 }

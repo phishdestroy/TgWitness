@@ -6136,5 +6136,10 @@
 "This search could not be read. Remove special characters and retry.": "Carian ini tidak dapat dibaca. Buang aksara khas dan cuba semula.",
 "Transcripts": "Transkrip",
 "Use at most 24 search terms.": "Gunakan paling banyak 24 istilah carian.",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "Gunakan tarikh seperti sejak:2026-01-31 atau sehingga:2026-02-01T12:00+00:00."
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "Gunakan tarikh seperti sejak:2026-01-31 atau sehingga:2026-02-01T12:00+00:00.",
+"Activity statistics": "Statistik aktiviti",
+"Choose the export_messages tool for an export.": "Pilih alat export_messages untuk eksport.",
+"Export messages (command line only)": "Eksport mesej (baris perintah sahaja)",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "Hanya rekod yang disimpan, hanya baca, tiada tindakan Telegram. Token yang sama berfungsi dengan baris perintah tgwitness; hanya baris perintah boleh mengeksport mesej.",
+"Exports are available only from the archive export endpoint.": "Eksport hanya tersedia daripada titik akhir eksport arkib."
 }

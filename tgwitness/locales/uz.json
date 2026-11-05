@@ -6175,5 +6175,10 @@
 "This search could not be read. Remove special characters and retry.": "Ushbu qidiruv o'qib bo'lmadi. Maxsus belgilarni olib tashlang va qayta urinish qiling.",
 "Transcripts": "Transkriptlar",
 "Use at most 24 search terms.": "Eng ko'pi bilan 24 ta qidiruv atamasidan foydalaning.",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "Quyidagi sanalarni ishlating: 2026-01-31 dan yoki 2026-02-01T12:00+00:00 gacha."
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "Quyidagi sanalarni ishlating: 2026-01-31 dan yoki 2026-02-01T12:00+00:00 gacha.",
+"Activity statistics": "Faoliyat statistikasi",
+"Choose the export_messages tool for an export.": "Eksport uchun export_messages vositasini tanlang.",
+"Export messages (command line only)": "Xabarlarni eksport qilish (faqat buyruq satri)",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "Faqat saqlangan yozuvlar, faqat o'qish uchun, Telegramda hech qanday harakat yo'q. Xuddi shu token tgwitness buyruq satri bilan ishlaydi; faqat buyruq satri xabarlarni eksport qila oladi.",
+"Exports are available only from the archive export endpoint.": "Eksportlar faqat arxiv eksport nuqtasidan mavjud."
 }

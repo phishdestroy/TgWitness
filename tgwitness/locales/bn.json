@@ -6175,5 +6175,10 @@
 "This search could not be read. Remove special characters and retry.": "এই অনুসন্ধানটি পড়া যায়নি। বিশেষ অক্ষরগুলি সরিয়ে পুনরায় চেষ্টা করুন।",
 "Transcripts": "ট্রান্সক্রিপ্টসমূহ",
 "Use at most 24 search terms.": "সর্বোচ্চ ২৪টি অনুসন্ধান শব্দ ব্যবহার করুন।",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "তারিখ ব্যবহার করুন যেমন: since:2026-01-31 অথবা until:2026-02-01T12:00+00:00।"
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "তারিখ ব্যবহার করুন যেমন: since:2026-01-31 অথবা until:2026-02-01T12:00+00:00।",
+"Activity statistics": "সক্রিয়তার পরিসংখ্যান",
+"Choose the export_messages tool for an export.": "রপ্তানির জন্য export_messages টুলটি নির্বাচন করুন।",
+"Export messages (command line only)": "বার্তা রপ্তানি (শুধুমাত্র কমান্ড লাইন)",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "শুধুমাত্র সংরক্ষিত রেকর্ড, শুধুমাত্র পড়ার জন্য, কোনো টেলিগ্রাম অ্যাকশন নেই। একই টোকেন tgwitness কমান্ড লাইনের সাথে কাজ করে; শুধুমাত্র কমান্ড লাইনই বার্তা রপ্তানি করতে পারে।",
+"Exports are available only from the archive export endpoint.": "রপ্তানি শুধুমাত্র আর্কাইভ এক্সপোর্ট এন্ডপয়েন্ট থেকে উপলব্ধ।"
 }

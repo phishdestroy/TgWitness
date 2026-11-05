@@ -6530,5 +6530,10 @@
 "This search could not be read. Remove special characters and retry.": "Этот запрос не удалось прочитать. Удалите специальные символы и повторите попытку.",
 "Transcripts": "Стенограммы",
 "Use at most 24 search terms.": "Используйте не более 24 поисковых терминов.",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "Используйте даты в формате, например, since:2026-01-31 или until:2026-02-01T12:00+00:00."
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "Используйте даты в формате, например, since:2026-01-31 или until:2026-02-01T12:00+00:00.",
+"Activity statistics": "Статистика активности",
+"Choose the export_messages tool for an export.": "Для экспорта выберите инструмент export_messages.",
+"Export messages (command line only)": "Экспорт сообщений (только из командной строки)",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "Только сохраненные записи, доступ только для чтения, никаких действий в Telegram. Тот же токен работает с командной строкой tgwitness; экспортировать сообщения можно только из командной строки.",
+"Exports are available only from the archive export endpoint.": "Экспорт данных доступен только через конечную точку экспорта архива."
 }

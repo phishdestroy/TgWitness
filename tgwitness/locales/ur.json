@@ -6175,5 +6175,10 @@
 "This search could not be read. Remove special characters and retry.": "یہ تلاش پڑھی نہیں جا سکی۔ خصوصی علامات ہٹا کر دوبارہ کوشش کریں۔",
 "Transcripts": "ٹرانسکرپٹس",
 "Use at most 24 search terms.": "زیادہ سے زیادہ 24 تلاش کے الفاظ استعمال کریں۔",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "تاریخیں استعمال کریں جیسے کہ: 2026-01-31 سے یا 2026-02-01T12:00+00:00 تک۔"
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "تاریخیں استعمال کریں جیسے کہ: 2026-01-31 سے یا 2026-02-01T12:00+00:00 تک۔",
+"Activity statistics": "سرگرمی کے اعدادوشمار",
+"Choose the export_messages tool for an export.": "ایکسپورٹ کے لیے export_messages ٹول منتخب کریں۔",
+"Export messages (command line only)": "پیغامات برآمد کریں (صرف کمانڈ لائن)",
+"Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.": "صرف محفوظ شدہ ریکارڈز، صرف پڑھنے کے لیے، کوئی ٹیلیگرام ایکشنز نہیں۔ یہی ٹوکن tgwitness کمانڈ لائن کے ساتھ کام کرتا ہے؛ صرف کمانڈ لائن ہی پیغامات برآمد کر سکتی ہے۔",
+"Exports are available only from the archive export endpoint.": "ایکسپورٹس صرف آرکائیو ایکسپورٹ اینڈ پوائنٹ سے دستیاب ہیں۔"
 }
