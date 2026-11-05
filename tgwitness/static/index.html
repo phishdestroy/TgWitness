@@ -1328,6 +1328,13 @@
       </div>
       <p class="method-description" id="method-description">Receive a login code in Telegram. Enter your 2FA password if asked.</p>
       <p class="hint" id="login-note" role="status"></p>
+      <aside class="session-import-warning" id="session-import-warning" hidden aria-labelledby="session-import-warning-title">
+        <h3 id="session-import-warning-title">Parallel session warning</h3>
+        <p>Importing TData, a session file, StringSession or Auth Key HEX reuses an existing authorization key. If Telegram detects parallel use of that key, it invalidates the authorization with <code>AUTH_KEY_DUPLICATED</code>. Both copies stop working and need a new login.</p>
+        <p>Fully quit Telegram Desktop, including its tray process, before copying or importing TData. Keep that copy of Desktop closed while TgWitness uses the imported session. The same rule applies to any other client whose session you import.</p>
+        <p>Quit the application; do not log out or terminate the imported session in Telegram. Logging out or revoking that authorization also invalidates the copy used by TgWitness.</p>
+        <p>For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.</p>
+      </aside>
       <div id="phone-fields"><label for="phone">Phone number</label><input autocomplete="tel" id="phone" pattern="\+[0-9]{7,16}" placeholder="+1 234 567 8900" required type="tel"></div>
       <div hidden id="qr-intro"><div class="qr-instructions"><span>1</span><p>Open Telegram on your phone.</p><span>2</span><p>Settings → Devices → Link Desktop Device.</p><span>3</span><p>Scan the code shown here.</p></div></div>
       <div hidden id="auth-key-fields">
@@ -1557,6 +1564,13 @@
   <section class="card padded fleet-import" hidden id="fleet-import">
     <div class="fleet-import-head"><div><div class="eyebrow">Bulk import</div><h2>Import many accounts at once</h2><p class="muted">Each account gets its own workspace, signing key and proxy. Files with the same name form one account, for example <code>name.session</code> with <code>name.json</code>. A session that does not sign in is not kept.</p></div><button class="quiet" id="fleet-import-close" type="button">Close</button></div>
     <label class="pool-drop fleet-drop" id="fleet-drop"><input accept=".session,.json,.zip,.txt" id="fleet-files" multiple type="file"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><span>Drop account files here or choose them: .session, .json, TData .zip, StringSession .txt</span></label>
+    <aside class="session-import-warning" id="fleet-session-warning" aria-labelledby="fleet-session-warning-title">
+      <h3 id="fleet-session-warning-title">Parallel session warning</h3>
+      <p>Importing TData, a session file, StringSession or Auth Key HEX reuses an existing authorization key. If Telegram detects parallel use of that key, it invalidates the authorization with <code>AUTH_KEY_DUPLICATED</code>. Both copies stop working and need a new login.</p>
+      <p>Fully quit Telegram Desktop, including its tray process, before copying or importing TData. Keep that copy of Desktop closed while TgWitness uses the imported session. The same rule applies to any other client whose session you import.</p>
+      <p>Quit the application; do not log out or terminate the imported session in Telegram. Logging out or revoking that authorization also invalidates the copy used by TgWitness.</p>
+      <p>For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.</p>
+    </aside>
     <div class="fleet-import-grid">
       <div><label for="fleet-group">Add to group</label><select id="fleet-group"></select></div>
       <div><label for="fleet-group-name">New group name</label><input id="fleet-group-name" maxlength="80" placeholder="e.g. Scam monitors"></div>

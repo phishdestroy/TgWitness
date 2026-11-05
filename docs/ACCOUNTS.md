@@ -124,6 +124,11 @@ be imported as JSON, see [Account JSON](#account-json).
 Open **Add account → Files** and select up to **four files belonging to one account**,
 **8 MiB** in total, then press **Connect account**.
 
+The **Files**, **Auth key** and bulk-import forms show the parallel-session warning
+before connecting. Imported authorizations are reused; conversion does not create
+a separate Telegram login. Keep the original client closed, or sign in here by
+phone or QR for an independent authorization.
+
 - Files are converted **in memory** on your TgWitness server. Uploads are not stored,
   ZIPs are not extracted to disk and no external service is contacted.
 - The resulting session is then checked with Telegram. If a file states a user ID,

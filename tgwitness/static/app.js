@@ -3820,6 +3820,7 @@ function setAuthMethod(method){
   show("phone-fields",method==="phone");$("phone").required=method==="phone";
   show("qr-intro",method==="qr");
   show("auth-key-fields",method==="key");
+  show("session-import-warning",method==="files"||method==="key");
   $("auth-continue").textContent=tr(method==="files"||method==="key"?"Connect account":"Continue");
   $("method-description").textContent=tr({phone:"Receive a login code in Telegram. Enter your 2FA password if asked.",
     qr:"Use Telegram on a device where you are already signed in.",
