@@ -566,6 +566,31 @@ def test_unfiltered_archive_keeps_number_analysis_and_rechecks_gaps(tmp_path, mo
             assert ids["recheck"]["asked"] == 2 and ids["recheck"]["returned"] == [5] and ids["recheck"]["empty"] == 1
             assert ids["missing"] == 1 and ids["missing_ranges"] == [[3, 3]], ids
             assert 5 in {row["id"] for row in result["messages"]}
+            assert ids["recheck"]["unchecked"] == 0 and ids["recheck"]["accounts"] == 2
+        finally:
+            await manager.close()
+            close_entries(entries)
+    asyncio.run(scenario())
+
+
+def test_recheck_reads_below_the_oldest_listed_message_and_counts_unchecked(tmp_path, monkeypatch):
+    async def scenario():
+        manager, entries = coordinator(tmp_path, [message(i) for i in (4, 5, 7, 8)])
+        for entry in entries.values():
+            entry["app"].state.collector.client.by_number = {2: message(2)}
+        monkeypatch.setattr(distributed_export, "CHUNK", 2)
+        monkeypatch.setattr(distributed_export, "RECHECK_PER_ACCOUNT", 1)
+        monkeypatch.setattr(distributed_export.replica, "outbox", lambda *args: None)
+        try:
+            state = await manager.start(CHAT, list(entries), "account0")
+            await asyncio.wait_for(manager.task, 60)
+            assert manager.state["phase"] == "done", manager.state
+            with zipfile.ZipFile(manager.result_path(state["id"])) as archive:
+                recheck = json.loads(archive.read("message-ids.json"))["recheck"]
+                ids = {row["id"] for row in json.loads(archive.read("chat.json"))["messages"]}
+            # Edge 1–3 and gap 6 are four numbers; two accounts × one number of budget ask the first two.
+            assert recheck["edge"] == [1, 3] and recheck["edge_found"] == 1 and 2 in ids, recheck
+            assert recheck["asked"] == 2 and recheck["unchecked"] == 2 and recheck["limit_reached"], recheck
         finally:
             await manager.close()
             close_entries(entries)

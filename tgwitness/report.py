@@ -2764,7 +2764,14 @@ def recheck_text(say, recheck):
     if recheck.get("returned"):
         text += " " + say("Returned then and included in this export, marked found on recheck: {n}.",
                           n=len(recheck["returned"]))
-    if recheck.get("limit_reached"):
+    if recheck.get("edge"):
+        low, high = recheck["edge"]
+        text += " " + say("Numbers {a}–{b}, just below the oldest message the history listing returned, were also "
+                          "requested; messages found there: {n}.", a=low, b=high, n=recheck.get("edge_found", 0))
+    if recheck.get("unchecked"):
+        text += " " + say("{n} absent numbers were not requested; they cannot be told apart from deleted ones.",
+                          n=recheck["unchecked"])
+    elif recheck.get("limit_reached"):
         text += " " + say("Only the first {n} absent numbers were requested.", n=recheck.get("asked"))
     return text
 

@@ -14,11 +14,12 @@ from datetime import datetime
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from telethon import utils
+from telethon.errors import TypeNotFoundError
 from telethon.tl import types
 
 from . import chat_export, replica, report, tuning
 from .account_export import durable_write, linked, read_json
-from .collector import AUTHORIZATION_ERRORS, message_record
+from .collector import AUTHORIZATION_ERRORS, message_record, unparsed_record
 from .message_selection import Selection, SelectionIndex, utc
 from .store import canonical, utcnow
 from .verify import fingerprint, verify_chat_export
@@ -30,6 +31,8 @@ OUTAGE_RETRIES = 4  # connection losses an account may recover from before it le
 OUTAGE_PAUSE = 30  # seconds before the first retry after a connection loss; doubles each time
 POISON_ACCOUNTS = 2  # distinct accounts a range may fail on before the range, not the accounts, is stopped
 ACCOUNT_ERRORS = 3  # consecutive failed ranges after which an account leaves the job
+RECHECK_EDGE = 1000  # numbers below the oldest paginated message that are read by number
+RECHECK_PER_ACCOUNT = 10000  # absent numbers each account reads by number, about 17 minutes at ten a second
 JOB_ID = re.compile(r"[a-f0-9]{32}")
 
 
@@ -468,10 +471,13 @@ class DistributedExport:
             index.close()
 
     async def recheck_absent(self, index, options):
-        """Ask the lead account about every number missing between the first and last message read.
+        """Ask Telegram by number about absent message numbers, shared by every account of the job.
 
         Without message filters an absent number is either deleted or never visible to the account;
-        the per-number answer separates that from a message the ranges simply missed.
+        the per-number answer separates that from a message paginated history skipped. Pagination
+        also loses messages just below the oldest one it returns, so that edge is read as well.
+        Reading by number is about ten numbers a second per account, so the check is capped per
+        account and the report states how many numbers stayed unchecked.
         """
         if options.excludes_messages() or self.job["chat_id"] >= -1000000000000:
             return None
@@ -479,23 +485,49 @@ class DistributedExport:
         if not present:
             return None
         known = set(present)
-        absent = [number for number in range(present[0], present[-1] + 1) if number not in known]
-        if not absent:
+        edge = list(range(max(1, present[0] - RECHECK_EDGE), present[0]))
+        gaps = [number for number in range(present[0], present[-1] + 1) if number not in known]
+        if not edge and not gaps:
             return None
-        lead = self.app_for(self.job["lead"]).state.collector
-        try:
-            recheck, found = await lead.recheck_absent(self.entities[self.job["lead"]], absent)
-        except asyncio.CancelledError:
-            raise
-        except Exception as exc:
-            return {"asked_at": utcnow(), "asked": 0, "absent_total": len(absent), "error_type": type(exc).__name__}
-        expected = set(absent)
-        for message in found:
-            if message.id not in expected or utils.get_peer_id(message.peer_id) != self.job["chat_id"]:
-                raise ValueError("Recovered messages do not match the absent message IDs.")
-            index.add({**message_record(message), "found_on_recheck": True}, self.job["lead"])
+        readers = [w["profile_id"] for w in self.state["workers"]
+                   if w["state"] not in ("skipped", "failed") and w["profile_id"] in self.entities]
+        wanted = edge + gaps
+        asked = wanted[:RECHECK_PER_ACCOUNT * len(readers)]
+        queue = [asked[low:low + 100] for low in range(0, len(asked), 100)]
+        found, errors, started = {}, {}, utcnow()
+        progress = self.state["recheck"] = {"asked": 0, "total": len(asked)}
+
+        async def read(profile):
+            collector = self.app_for(profile).state.collector
+            while queue:
+                batch = queue.pop()
+                try:
+                    answer = await collector.read_numbers(self.entities[profile], batch)
+                except asyncio.CancelledError:
+                    raise
+                except Exception as exc:
+                    errors[profile] = type(exc).__name__
+                    queue.append(batch)  # Another account may still read it.
+                    return
+                for number, value in answer.items():
+                    found[number] = (value, profile)
+                progress["asked"] += len(batch)
+        await asyncio.gather(*(read(profile) for profile in readers))
+        for number, (value, profile) in sorted(found.items()):
+            record = unparsed_record(number, value) if isinstance(value, TypeNotFoundError) else message_record(value)
+            index.add({**record, "found_on_recheck": True}, profile)
         index.db.commit()
-        return recheck
+        checked = progress["asked"]
+        returned = sorted(found)
+        return {"asked_at": started, "asked": checked, "absent_total": len(gaps), "empty": checked - len(returned),
+                "returned": returned, "unchecked": len(wanted) - checked, "limit_reached": len(wanted) > len(asked),
+                "edge": [edge[0], edge[-1]] if edge else None,
+                "edge_found": sum(1 for number in returned if number < present[0]),
+                "accounts": len(readers), **({"errors": errors} if errors else {}),
+                "method": "channels.getMessages by number, shared by the accounts of this export",
+                "meaning": "An empty answer means Telegram has no message under that number for these accounts: "
+                           "deleted, or never visible to them. Telegram does not say which. Unchecked numbers "
+                           "cannot be told apart from deleted ones."}
 
     def sign_parts(self, ranges):
         parts = []
