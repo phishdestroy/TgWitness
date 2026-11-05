@@ -31,10 +31,12 @@ def bytes_via_connector(host, path, connector):
         raise ValueError("Public anchoring is unavailable through an MTProxy-only connector")
     proxy = Proxy.create(proxy_type=ProxyType.SOCKS5 if connector["protocol"] == "socks5" else ProxyType.HTTP,
                          host=connector["host"], port=connector["port"], rdns=True)
-    connection = http.client.HTTPSConnection(host, timeout=5)
+    context = ssl.create_default_context()
+    context.minimum_version = ssl.TLSVersion.TLSv1_2
+    connection = http.client.HTTPSConnection(host, timeout=5, context=context)
     sock = proxy.connect(dest_host=host, dest_port=443, timeout=5)
     try:
-        connection.sock = ssl.create_default_context().wrap_socket(sock, server_hostname=host)
+        connection.sock = context.wrap_socket(sock, server_hostname=host)
         connection.request("GET", path, headers={"Accept": "application/json"})
         response = connection.getresponse()
         if response.status != 200:

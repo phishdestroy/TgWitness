@@ -183,8 +183,9 @@ The new panel also completed native-export import, styled inline observations, m
 layout, cleanup and ZIP download in Chromium without console errors. Provider/drand
 responses and the Telegram screen were synthetic; FFmpeg encoding was real. Ruff,
 JavaScript syntax checks and source-archive checks passed. One upstream Starlette
-TestClient deprecation warning remains. Docker image build, Linux route enforcement,
-real account login, WARP/provider integration and TDX attestation remain unexecuted.
+TestClient deprecation warning remains. The optional-capture CI job reports Linux
+image and namespace validation separately. Real account login, WARP/provider
+integration and TDX attestation remain unexecuted.
 
 For a local synthetic UI demonstration (no Telegram connection is possible):
 

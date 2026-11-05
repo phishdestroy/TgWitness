@@ -34,9 +34,12 @@ def main():
     # A fresh container namespace has no client connections at this point.
     subprocess.run(["nft", "-f", "-"], input=firewall(connector["host"], connector["port"]).encode(), check=True)
     receipt = {"policy": "trusted-live-deny-direct-v1", "host": connector["host"], "port": connector["port"],
-               "connector": chosen, "netns": os.readlink("/proc/self/ns/net")}
-    Path("/run/trusted-route.json").write_text(json.dumps(receipt))
-    os.chmod("/run/trusted-route.json", 0o444)
+               "netns": os.readlink("/proc/self/ns/net")}
+    route_path = "/run/trusted-route.json"
+    with os.fdopen(os.open(route_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "w") as target:
+        json.dump(receipt, target)
+    os.chown(route_path, 0, 10001)
+    os.chmod(route_path, 0o440)
     for directory in ("/data", "/session", "/exports", "/home/recorder"):
         os.chown(directory, 10001, 10001)
     os.execvp("setpriv", ["setpriv", "--reuid=10001", "--regid=10001", "--init-groups",
