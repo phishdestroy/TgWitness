@@ -482,7 +482,9 @@ class DistributedExport:
         readers = [w["profile_id"] for w in self.state["workers"]
                    if w["state"] not in ("skipped", "failed") and w["profile_id"] in self.entities]
         wanted = edge + gaps
-        asked = wanted[:RECHECK_PER_ACCOUNT * len(readers)]
+        budget = max(0, RECHECK_PER_ACCOUNT * len(readers) - len(edge))
+        step = max(1, -(-len(gaps) // budget)) if budget else len(gaps) + 1
+        asked = edge + gaps[::step][:budget]
         queue = [asked[low:low + 100] for low in range(0, len(asked), 100)]
         found, errors, started = {}, {}, utcnow()
         progress = self.state["recheck"] = {"asked": 0, "total": len(asked)}
@@ -511,6 +513,7 @@ class DistributedExport:
         returned = sorted(found)
         return {"asked_at": started, "asked": checked, "absent_total": len(gaps), "empty": checked - len(returned),
                 "returned": returned, "unchecked": len(wanted) - checked, "limit_reached": len(wanted) > len(asked),
+                "sampling": "every number" if len(asked) == len(wanted) else "every " + str(step) + "th absent number",
                 "edge": [edge[0], edge[-1]] if edge else None,
                 "edge_found": sum(1 for number in returned if number < present[0]),
                 "accounts": len(readers), **({"errors": errors} if errors else {}),

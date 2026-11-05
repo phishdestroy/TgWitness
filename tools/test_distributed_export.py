@@ -587,7 +587,7 @@ def test_recheck_reads_below_the_oldest_listed_message_and_counts_unchecked(tmp_
                 recheck = json.loads(archive.read("message-ids.json"))["recheck"]
                 ids = {row["id"] for row in json.loads(archive.read("chat.json"))["messages"]}
             assert recheck["edge"] == [1, 3] and recheck["edge_found"] == 1 and 2 in ids, recheck
-            assert recheck["asked"] == 2 and recheck["unchecked"] == 2 and recheck["limit_reached"], recheck
+            assert recheck["asked"] == 3 and recheck["unchecked"] == 1 and recheck["limit_reached"], recheck
         finally:
             await manager.close()
             close_entries(entries)
