@@ -2204,6 +2204,15 @@ class Collector:
                     if source and self.store.message_state(chat_id, update.message.id)["content"]:
                         return
                     await self.capture_message(update.message, "message.new", chat_id, update, source)
+            elif isinstance(update, (types.UpdatePinnedChannelMessages, types.UpdatePinnedMessages)) and not update.pinned:
+                chat_id = (utils.get_peer_id(types.PeerChannel(update.channel_id))
+                           if isinstance(update, types.UpdatePinnedChannelMessages) else utils.get_peer_id(update.peer))
+                if await self.covers(chat_id):
+                    for message_id in update.messages:
+                        self.store.append("message.unpinned", {
+                            "unpinned_by": None, "raw": plain(update),
+                            "meaning": "Telegram reported that this message is no longer pinned; it does not say who unpinned it."},
+                            chat_id, message_id)
             elif isinstance(update, types.UpdateChannelTooLong):
                 chat_id = utils.get_peer_id(types.PeerChannel(update.channel_id))
                 if self.selected(chat_id):

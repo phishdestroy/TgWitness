@@ -41,6 +41,10 @@ async def check(root):
         assert "raw" in single["payload"] and "batch" not in single["payload"]
         largest = max(len(json.dumps(e["payload"])) for e in batched)
         assert largest < 600, largest
+        await collector.on_raw(types.UpdatePinnedChannelMessages(channel_id=555, messages=[7], pts=2, pts_count=1, pinned=True))
+        await collector.on_raw(types.UpdatePinnedChannelMessages(channel_id=555, messages=[7], pts=3, pts_count=1, pinned=False))
+        unpinned = [e for e in store.all_events() if e["kind"] == "message.unpinned"]
+        assert [(e["chat_id"], e["message_id"]) for e in unpinned] == [(CHANNEL, 7)], unpinned
         store.verify(vault.public_key)
     finally:
         store.close()
