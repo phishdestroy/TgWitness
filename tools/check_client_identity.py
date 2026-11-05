@@ -49,6 +49,13 @@ def check_imports():
     assert json_account(json.dumps(PROFILE).encode())["client_profile"] == PROFILE
     android = json_account(json.dumps({"device": "Synthetic Android", "sdk": "SDK 33", "app_version": "11.7.4 (56982)"}).encode())
     assert android["client_profile"] == {"device_model": "Synthetic Android", "system_version": "SDK 33", "app_version": "11.7.4 (56982)"}
+    # Companion metadata is a connection profile, not client configuration or 2FA.
+    assert client_identity.from_account({**METADATA, "phone": "+15550001111", "tz_offset": "-36000",
+                                         "system_lang_pack": "fr-FR"}) == PROFILE
+    assert client_identity.from_account({"lang_pack": ""}) == {"lang_pack": ""}
+    assert client_identity.from_account({"device_model": "Synthetic phone", "device": "Synthetic phone",
+                                         "system_version": "SDK 34", "sdk": "SDK 34"}) == {
+        "device_model": "Synthetic phone", "system_version": "SDK 34"}
     for bad in ({"device": "x\nsecret"}, {"sdk": 11}, {"device": "a", "device_model": "b"},
                 {"app_version": "x" * 129}, {"lang_code": "en/invalid"}, {"lang_pack": []}):
         try:

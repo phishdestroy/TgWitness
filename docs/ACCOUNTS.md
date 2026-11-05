@@ -47,7 +47,8 @@ never converts it.
 
 You can sign in without creating a Telegram API application. When no pair is entered,
 imported or already saved in the workspace, TgWitness picks a pair from its built-in pool of
-50 public API pairs (`tgwitness/api_pool.py`) in random order. If Telegram refuses a pair
+50 public API pairs (`tgwitness/api_pool.py`), preferring Telegram Desktop for a fresh
+login and retaining a saved pair first; remaining candidates are shuffled. If Telegram refuses a pair
 (`API_ID_INVALID`, `API_ID_PUBLISHED_FLOOD`, `UPDATE_APP_TO_LOGIN`), the next one is tried,
 up to eight per sign-in; refused pairs are skipped until restart. The pair that signed in is
 saved with the account and reused for it. An **API ID** and **API hash** identify the application to Telegram; they
@@ -162,10 +163,16 @@ Accounts are often distributed as two files with the same name, for example
 
 - From the JSON, TgWitness uses `app_id`/`api_id` and `app_hash`/`api_hash`, so you
   usually do not have to type API credentials.
-- Other fields such as `phone`, `device`, `sdk`, `app_version`, `lang_pack` or a stored
-  `twoFA` password are **ignored**. If the account has 2FA, TgWitness asks for it.
-- A JSON on its own is only metadata. Without the session file, continue with phone
-  or QR login.
+- The connection profile uses `device_model` (alias `device`), `system_version`
+  (alias `sdk`), `app_version`, `lang_code`, `system_lang_code` and `lang_pack`.
+  Supplied fields take priority over generated defaults and the panel/browser
+  language. Conflicting aliases are rejected. The resolved profile is saved in the
+  encrypted workspace credentials and reused after restart, including its app version.
+- `phone`, a stored `twoFA` password, `tz_offset`, `system_lang_pack`, proxy settings
+  and device tokens are **ignored**. If the account has 2FA, TgWitness asks for it.
+- A JSON without a supported authorization field is only metadata. Add its session
+  file or continue with phone or QR login. A JSON containing a supported session or
+  Auth Key can authorize on its own; see [Account JSON](#account-json).
 
 ### Telegram Desktop (TData)
 
@@ -227,6 +234,10 @@ One JSON object, at most **64 KiB**, in a file ending in **`.json`**.
 | `string_session` (`session_string`, `session`) | Telethon StringSession text, not a file name |
 | `auth_key` (`auth_key_hex`) + `dc_id` | Complete 512-character Auth Key and DC 1–5 |
 | `user_id` (`id`) | Optional; checked against Telegram before the authorization is saved |
+| `device_model` (`device`) | Connection device description |
+| `system_version` (`sdk`) | Connection OS version |
+| `app_version` | Application version sent to Telegram |
+| `lang_code`, `system_lang_code`, `lang_pack` | Client language, system language and client language pack; an empty `lang_pack` is allowed |
 
 If both an alias and the main name are present, they must agree. Examples:
 
