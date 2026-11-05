@@ -4,6 +4,7 @@ from types import SimpleNamespace
 from typing import Literal
 
 from fastapi import Depends, HTTPException, Request
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field, SecretStr, ValidationError
 
 from .access import Refused
@@ -11,6 +12,7 @@ from .archive import ArchiveQuery, ArchiveReader, Connections, ConnectionSetting
 from .workers import limited_in_thread
 
 QUERY_TIMEOUT = 8
+EXPORT_RECHECK = 500
 
 async def startup(app):
     app.state.archive_mcp = None
@@ -106,7 +108,11 @@ def register(app, authenticate):
             status.update(available=False, problem="MCP support is installed. Restart TgWitness to activate the endpoint.")
         return {**status, "connections": [manager.public(e) for e in manager.entries], "tools": list(TOOLS),
                 "endpoint": "/mcp", "max_days": 90,
-                "tool_groups": {"navigation": list(TOOLS[:2]), "messages": list(TOOLS[2:6]), "capture": [TOOLS[6]]}}
+                "tool_groups": {"navigation": ["list_workspaces", "list_chats"],
+                                "messages": ["search_messages", "get_message_versions", "get_message_context",
+                                             "get_journal_event"],
+                                "analysis": ["get_activity_stats"], "capture": ["get_capture_status"],
+                                "command_line": ["export_messages"]}}
 
     @app.post("/api/mcp/connections", dependencies=[Depends(authenticate)])
     @app.post("/api/integrations/mcp", dependencies=[Depends(authenticate)])
@@ -177,6 +183,31 @@ def register(app, authenticate):
             raise HTTPException(422, str(exc)) from None
         except TimeoutError:
             raise HTTPException(503, "Archive query timed out. Narrow the query.") from None
+
+    @app.post("/api/archive/export")
+    async def export(request: Request, body: ArchiveQuery):
+        principal(request)
+        token = credential(request)
+        try:
+            who = connections(app).resolve(token, count=False, tool=body.tool)
+            lines = await limited_in_thread(app.state.archive_slots, ArchiveReader(app.state.profiles, who).export, body)
+        except Refused as exc:
+            raise HTTPException(403, str(exc)) from None
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from None
+        except TimeoutError:
+            raise HTTPException(503, "Archive query timed out. Narrow the query.") from None
+
+        def stream():
+            # Revocation, expiry or a timeout ends the stream without its completion line.
+            try:
+                for number, line in enumerate(lines, 1):
+                    if number % EXPORT_RECHECK == 0:
+                        connections(app).resolve(token, count=False, tool=body.tool)
+                    yield (json.dumps(line, ensure_ascii=False, separators=(",", ":")) + "\n").encode()
+            except (Refused, TimeoutError):
+                return
+        return StreamingResponse(stream(), media_type="application/x-ndjson", headers={"Cache-Control": "no-store"})
 
     from .mcp_transport import Endpoint
     app.add_route("/mcp", Endpoint(app), methods=["GET", "POST", "DELETE"])
