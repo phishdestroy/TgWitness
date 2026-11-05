@@ -4,7 +4,7 @@ from contextvars import ContextVar
 
 from telethon import TelegramClient, utils
 from telethon.errors import FloodWaitError, FloodPremiumWaitError
-from telethon.network.connection import ConnectionTcpFull
+from telethon.network.connection import ConnectionTcpObfuscated
 from telethon.network.connection.tcpmtproxy import TcpMTProxy
 from telethon.tl import functions, types
 
@@ -32,7 +32,7 @@ class WitnessClient(TelegramClient):
 
     async def switch_route(self, options):
         await self.disconnect()
-        self._connection = options.get("connection", ConnectionTcpFull)
+        self._connection = options.get("connection", ConnectionTcpObfuscated)
         self._proxy = options.get("proxy")
         self._init_request.proxy = (types.InputClientProxy(*self._connection.address_info(self._proxy))
                                     if issubclass(self._connection, TcpMTProxy) else None)

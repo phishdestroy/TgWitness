@@ -86,6 +86,13 @@ connection so daylight-saving changes are reflected. An imported `tz_offset`
 takes precedence on every platform and is kept exactly, including zero. Other
 `initConnection.params` entries are retained.
 
+Direct, SOCKS5 and HTTP CONNECT routes use Telethon's `ConnectionTcpObfuscated`
+(obfuscated abridged MTProto). HTTPS CONNECT retains TLS to the proxy and uses
+the same obfuscated transport inside the tunnel. MTProxy retains its required
+randomized intermediate transport and secret handling. Route switches apply the
+same choices. Obfuscation changes packet framing; it does not hide the account
+or its client metadata from Telegram or imply immunity to restrictions.
+
 Before connection, advisory checks compare the API platform, language pack,
 device/OS and app-version formats, mobile system locale, and Telethon's actual
 schema layer against the reviewed catalog baseline. Warnings appear in the server
