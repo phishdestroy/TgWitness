@@ -232,6 +232,13 @@ the new workspace. Keep its data directory and vault key. The final credentials 
 `account.authorized` journal record include the import method, input formats and
 donor API ID, without the donor key or password.
 
+On 5 November 2026, a dedicated account passed live checks with Telethon, Pyrogram
+and TData donors: 2FA completion, distinct new authorization keys, concurrent access
+by the donor and new client, and reading a public channel. The Telethon case also
+resumed a saved candidate after an interruption at the password step. Each new
+authorization completed the six post-login initialization requests, and its signed
+journal verified. The original session remained usable in all four supplied formats.
+
 Telegram's [RPC error database](https://core.telegram.org/api/errors.json) associates
 `FRESH_CHANGE_ADMINS_FORBIDDEN` with changing admins, `FRESH_CHANGE_PHONE_FORBIDDEN`
 with changing the phone number, and `FRESH_RESET_AUTHORISATION_FORBIDDEN` with
