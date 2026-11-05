@@ -491,7 +491,7 @@ setInterval(()=>{if(!document.hidden)updateTimes();},30000);
 function sourceTitle(id) { return state.status?.targets.find(x => x.chat_id === id)?.title || (id === null ? tr("Collector / account") : String(id)); }
 let toastTimer;
 let networkLoadedFor=null;
-let qrPending=null,importExpectedId=null,importClientProfile=null,accountImportRevision=0,authMethod="phone";
+let qrPending=null,importExpectedId=null,importClientProfile=null,importFormats=[],importTwoFactor="",accountImportRevision=0,authMethod="phone";
 let accessStarted=false;
 class StaleView extends Error {constructor(){super("");this.name="StaleView";}}
 function toast(message, error=false) { if(!message)return;const n = $("toast"); n.textContent = message; n.classList.toggle("error", error); show("toast", true); clearTimeout(toastTimer); toastTimer = setTimeout(() => leave("toast"), error ? 9000 : 5000); }
@@ -3806,6 +3806,7 @@ function setAuthStep(step){
   window.TgWitnessAccountImport?.renderAccount();
 }
 function setAuthMethod(method){
+  show("independent-session-option",method==="files"||method==="key");
   if(method!==authMethod){
     accountImportRevision++;importExpectedId=null;
     for(const id of ["session-string","session-file","tdata-passcode","auth-key","auth-dc","auth-user-id"])$(id).value="";
@@ -3888,7 +3889,8 @@ function clearSecrets(){
   window.TgWitnessAccountImport?.clear();
   $("panel-key-new").value="";show("panel-key-result",false);
   clearTimeout(toastTimer);show("toast",false);
-  cancelQR();importExpectedId=null;importClientProfile=null;accountImportRevision++;$("import-result").textContent="";
+  cancelQR();importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";
+  $("import-new-session").checked=false;accountImportRevision++;$("import-result").textContent="";
   for(const name of ["api-id","api-hash","session-string","session-file","phone","code","password",
                     "tdata-passcode","auth-key","auth-dc","auth-user-id","network-username","network-password","network-secret","network-link"])$(name).value="";
   $("network-link-result").textContent="";
@@ -3973,6 +3975,8 @@ function renderSeenBy(){
   const rows=[[tr("Network address"),address],[tr("Application"),pair],
     [tr("Session in Telegram's device list"),device||tr("Telethon's default description of this computer")]];
   if(id.meaning)rows.push(["",tr("This public pair belongs to Telegram Desktop; the session is described as Telegram Desktop.")]);
+  show("independent-session-pending",!!c.pending_new_session);
+  if(c.session_origin?.method==="qr_from_import")rows.push([tr("Authorization origin"),tr("Independent QR login approved by an imported session")]);
   const checked=c.client_checks;
   if(checked){
     rows.push([tr("Current authorization"),typeof checked.official_app==="boolean"?"official_app="+(checked.official_app?"True":"False"):tr("Official-app flag unavailable")]);
@@ -4130,7 +4134,7 @@ function renderSelectedFiles(){
   $("selected-files").textContent=files.map(f=>f.name).join(" · ");show("selected-files",!!files.length);
 }
 $("session-file").addEventListener("change",()=>{
-  accountImportRevision++;importClientProfile=null;
+  accountImportRevision++;importClientProfile=null;importFormats=[];importTwoFactor="";
   authProgress("");
   $("session-string").value="";importExpectedId=null;
   $("import-result").textContent="";
@@ -4158,14 +4162,16 @@ async function loadAuthKey(){
     if(revision!==state.workspaceRevision||selection!==accountImportRevision||!state.token)return;
     $("session-string").value=result.session||"";importExpectedId=result.expected_user_id||null;
     importClientProfile=result.client_profile||null;
+    importFormats=result.formats||[];importTwoFactor="";
     return result;
   }finally{if(revision===state.workspaceRevision&&selection===accountImportRevision)authProgress("");}
 }
 for(const id of ["auth-key","auth-dc","auth-user-id"])$(id).addEventListener("input",()=>{
-  accountImportRevision++;importExpectedId=null;importClientProfile=null;$("session-string").value="";authProgress("");
+  accountImportRevision++;importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";$("session-string").value="";authProgress("");
 });
 $("import-account").addEventListener("click",e=>busy(e.currentTarget,loadAccountFiles));
-$("session-string").addEventListener("input",()=>{accountImportRevision++;importExpectedId=null;importClientProfile=null;$("import-result").textContent="";});
+$("session-string").addEventListener("input",()=>{accountImportRevision++;importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";$("import-result").textContent="";});
+$("import-new-session").addEventListener("change",()=>{importTwoFactor="";});
 $("credentials-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   if(state.status.demo){toast(tr("Demo workspace. Connect accounts in your live installation."),true);return;}
   if(authMethod==="qr"){await beginQR();return;}
@@ -4190,16 +4196,19 @@ $("credentials-form").addEventListener("submit",e=>{e.preventDefault();busy(e.su
   if(revision!==state.workspaceRevision||method!==authMethod||selection!==accountImportRevision)return;
   const body=method==="phone"?{...credentials,phone:$("phone").value}:
     {...credentials,session:$("session-string").value.trim(),expected_user_id:importExpectedId};
+  const independent=method!=="phone"&&$("import-new-session").checked;
+  if(independent)Object.assign(body,{formats:importFormats,two_factor_password:importTwoFactor});
   let r;
   if(method==="phone"&&state.status.collector.has_api_credentials===undefined){
 
     await loginRequest("auth/configure",credentials,{profile});
     if(revision!==state.workspaceRevision)return;
     r=await loginRequest("auth/phone",{phone:body.phone},{profile});
-  }else r=await loginRequest(method==="phone"?"auth/phone/start":"auth/configure",body,{profile});
+  }else r=await loginRequest(method==="phone"?"auth/phone/start":independent?"auth/session/new":"auth/configure",body,{profile});
   if(revision!==state.workspaceRevision)return;
   if(r.step==="authorized")clearSecrets();
   setAuthStep(r.step);
+  if(r.error)toast(tr(r.error),true);
   await refreshStatus();
 });});
 async function cancelQR(){

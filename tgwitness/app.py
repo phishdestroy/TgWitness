@@ -103,6 +103,12 @@ class AccountFile(BaseModel):
 class AccountImport(BaseModel):
     files: list[AccountFile] = Field(min_length=1, max_length=4)
     passcode: str = Field(default="", max_length=512)
+    new_session: bool = False
+
+
+class IndependentSession(Credentials):
+    formats: list[Literal["Account JSON", "Telethon SQLite", "Pyrogram SQLite", "TData ZIP", "Telethon StringSession"]] = Field(default_factory=list, max_length=4)
+    two_factor_password: str = Field(default="", max_length=512)
 
 
 class Phone(BaseModel):
@@ -700,7 +706,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                                 headers={"Retry-After": str(exc.seconds)}) from None
         except AUTHORIZATION_ERRORS as exc:
             owner, name = getattr(call, "__self__", None), getattr(call, "__name__", "operation")
-            candidate = name in {"configure", "start_phone", "start_qr", "send_code", "confirm_code",
+            candidate = name in {"configure", "import_new_session", "start_phone", "start_qr", "send_code", "confirm_code",
                                  "confirm_password", "cancel_qr", "sign_out", "test_network"}
             if not candidate and (owner is collector or getattr(owner, "collector", None) is collector
                                   or args and args[0] is collector):
@@ -718,7 +724,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         async with op_lock:
             require_live()
             if (app.state.collector.export_claim and getattr(call, "__name__", "") in {
-                    "configure", "start_phone", "start_qr", "send_code", "confirm_code", "confirm_password",
+                    "configure", "import_new_session", "start_phone", "start_qr", "send_code", "confirm_code", "confirm_password",
                     "sign_out", "set_network", "set_route_policy", "apply", "dialogs", "save_profile",
                     "preview", "execute", "check_current", "test_network", "control"}):
                 raise HTTPException(409, "This account is busy. Pause its current task before another Telegram operation.")
@@ -933,7 +939,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             if (body.api_id is None) != (body.api_hash is None):
                 raise HTTPException(422, "Provide both API ID and API hash, or leave both empty.")
             try:
-                account = await asyncio.to_thread(import_accounts, [f.model_dump() for f in body.files], body.passcode)
+                account = await asyncio.to_thread(import_accounts, [f.model_dump() for f in body.files], body.passcode, body.new_session)
             except ValueError as exc:
                 raise HTTPException(400, str(exc)) from None
             if not account.get("session"):
@@ -955,7 +961,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 if release:
                     release()
                 raise HTTPException(409, str(exc)) from None
-            entry = None
+            entry = child = None
             label = body.label.strip() or (body.files[0].name.rsplit(".", 1)[0][:80] or "Imported account")
             try:
                 entry = await registry.create(label, body.group)
@@ -967,16 +973,21 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 async with child.state.operation_lock:
                     if child.state.closing:
                         raise ValueError("The new workspace could not start.")
-                    await asyncio.wait_for(collector.configure(
+                    connect = collector.import_new_session if body.new_session else collector.configure
+                    extra = (account.get("formats", []), account.get("two_factor_password", "")) if body.new_session else ()
+                    outcome = await asyncio.wait_for(connect(
                         body.api_id or account.get("api_id"), body.api_hash or account.get("api_hash"),
-                        account["session"], expected, account.get("client_profile"), client_languages(request)),
+                        account["session"], expected, account.get("client_profile"), client_languages(request), *extra),
                         tuning.value(app.state.store, "operation_timeout_seconds"))
                     account_info = child.state.store.get_setting("account", {}) or {}
-                    with suppress(Exception):
-                        await asyncio.wait_for(collector.avatar(account_info.get("id")), 20)
-                    await collector.stop()
+                    if outcome["step"] == "authorized":
+                        with suppress(Exception):
+                            await asyncio.wait_for(collector.avatar(account_info.get("id")), 20)
+                        await collector.stop()
             except (Exception, asyncio.CancelledError) as exc:
-                if entry is not None:
+                retained = bool(entry and child and body.new_session and (
+                    child.state.vault.read("independent_login") or child.state.vault.read("credentials").get("session")))
+                if entry is not None and not retained:
                     with suppress(Exception):
                         await registry.delete(entry["id"])
                 if isinstance(exc, asyncio.CancelledError):
@@ -984,12 +995,15 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 reason = (str(exc) if isinstance(exc, (ValueError, NoProxyAvailable)) else
                           "Telegram did not answer in time. Try again later." if isinstance(exc, TimeoutError)
                           else type(exc).__name__)
+                if retained:
+                    return {"profile": entry, "step": "retry", "error": reason,
+                            "formats": account.get("formats", [])}
                 raise HTTPException(400, "Not imported: " + reason) from None
             finally:
                 if release_account:
                     release_account()
                 release()
-            return {"profile": entry, "account": {"id": account_info.get("id"), "username": account_info.get("username"),
+            return {"profile": entry, **outcome, "account": {"id": account_info.get("id"), "username": account_info.get("username"),
                                                   "name": account_info.get("name")},
                     "formats": account.get("formats", [])}
 
@@ -1188,11 +1202,17 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return await operation(app.state.collector.start_phone, body.phone, body.api_id, body.api_hash,
                                body.client_profile, client_languages(request))
 
+    @app.post("/api/auth/session/new", dependencies=[Depends(authenticate)])
+    async def independent_session(body: IndependentSession, request: Request):
+        return await operation(app.state.collector.import_new_session, body.api_id, body.api_hash,
+                               body.session, body.expected_user_id, body.client_profile, client_languages(request),
+                               body.formats, body.two_factor_password)
+
     @app.post("/api/auth/import", dependencies=[Depends(authenticate)])
     async def import_account(body: AccountImport):
         require_live()
         try:
-            result = await asyncio.to_thread(import_accounts, [item.model_dump() for item in body.files], body.passcode)
+            result = await asyncio.to_thread(import_accounts, [item.model_dump() for item in body.files], body.passcode, body.new_session)
             if not result["has_authorization"]:
                 raise ValueError("No session — only application settings. Add a .session or TData file, or sign in by phone or QR.")
             if bool(result.get("api_id")) != bool(result.get("api_hash")):

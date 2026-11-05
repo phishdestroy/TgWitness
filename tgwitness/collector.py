@@ -388,6 +388,8 @@ class Collector:
             "account_loss": self.store.get_setting("account_loss", None),
             "client": self.client_identity(credentials=credentials),
             "client_checks": self.store.get_setting("client_checks", None),
+            "session_origin": credentials.get("session_origin"),
+            "pending_new_session": bool(self.vault.read("independent_login")),
             "last_error": self.last_error, "last_heartbeat": self.last_heartbeat,
             "media_pending": sum(n for s, n in self.store.media_stats().items()
                                  if s in ("queued", "running", "retry")),
@@ -1292,6 +1294,12 @@ class Collector:
                                         self.connect_login(pair_id, pair_hash, session, expected_user_id, client_profile, languages))
 
     @connection_change
+    async def import_new_session(self, api_id, api_hash, session, expected_user_id=None, client_profile=None,
+                                 languages=None, formats=(), password=""):
+        from .session_import import create_session
+        return await create_session(self, api_id, api_hash, session, expected_user_id, client_profile, languages, formats, password)
+
+    @connection_change
     async def connect_login(self, api_id, api_hash, session="", expected_user_id=None, client_profile=None, languages=None):
         from .client_identity import validate
         if client_profile is not None:
@@ -1462,7 +1470,12 @@ class Collector:
                                                    "key_origin": self.pending_key_origin})
                 self.store.set_setting("account_loss", None)
                 self.store.append("account.authorized", {"account_id": me.id, "key_origin": self.pending_key_origin,
-                                                         "client": self.client_identity(candidate)})
+                                                         "client": self.client_identity(candidate),
+                                                         **({"session_origin": credentials["session_origin"]}
+                                                            if credentials.get("session_origin") else {})})
+            pending = self.vault.read("independent_login")
+            if pending and session_key(pending.get("session")) == session_key(credentials["session"]):
+                self.vault.save("independent_login", {})
         except BaseException:
             await self.cancel_login()
             self.phase = self.resting_phase()

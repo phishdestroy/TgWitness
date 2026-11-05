@@ -11,7 +11,8 @@ from telethon.tl import functions, types
 _single_attempt = ContextVar("telegram_single_attempt", default=False)
 FLOOD_ERRORS = (FloodWaitError, FloodPremiumWaitError)
 _ACTIONS = (functions.messages.GetBotCallbackAnswerRequest,
-            functions.messages.ImportChatInviteRequest, functions.channels.JoinChannelRequest)
+            functions.messages.ImportChatInviteRequest, functions.channels.JoinChannelRequest,
+            functions.auth.AcceptLoginTokenRequest)
 
 
 class WitnessClient(TelegramClient):

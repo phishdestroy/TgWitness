@@ -117,7 +117,7 @@ chat, records partial results at its deadline, and splits large encrypted delive
 | [Several accounts](docs/ACCOUNTS.md#multiple-accounts) | Export one chat through several accounts, each with its own session and key |
 | [Batch import](docs/ACCOUNTS.md#bulk-import-and-account-groups) | Drop in a pile of session files, sort accounts into groups with shared settings |
 | [MTProxy pool](docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) | Ping, countries, filters, your own lists |
-| [Existing sessions](docs/ACCOUNTS.md) | TData, Telethon, Pyrogram, StringSession, auth key |
+| [Existing sessions](docs/ACCOUNTS.md) | TData, Telethon, Pyrogram, StringSession, auth key; optional independent QR authorization from an imported donor |
 | [Proxies](docs/CONNECTION-SECURITY.md#ip-modes) | SOCKS5, HTTP CONNECT or MTProxy per workspace. **Hide IP** never falls back to direct |
 | [Search and AI](docs/ANALYSIS.md) | Local search, optional AI with sources you can check |
 | [MCP](docs/MCP.md) | Read-only access for MCP clients, limited to the chats you pick |

@@ -28,6 +28,7 @@ Other work runs alongside, each item judged on its own test:
 | Complete source list | Skipped and later-added chats are visible, only failed ones retry | Open |
 | Everyday reading | Search, jumps by date and context, topics, gallery, forwards, reactions, versions | Open |
 | Connection identity and retry safety | Imported settings survive restart; platform defaults fill gaps; connection diagnostics report server responses; server-requested pauses survive reconnects | [Shipped](ACCOUNTS.md) |
+| Independent login from an imported session | Opt-in QR authorization keeps the donor intact, retains an interrupted candidate and supports 2FA | [Implemented](ACCOUNTS.md#create-an-independent-authorization); full live check awaits the test account's 2FA password |
 | Voice messages | Local transcription and search, original stays | [Shipped](MEDIA-ANALYSIS.md) |
 | Accounts and access | Revoking access stops reading, nobody sees other people's chats | [Shipped](ACCESS.md) |
 | Offline handover | Recipient reads and verifies without our server | [Shipped](CASE_REPORTS.md) |

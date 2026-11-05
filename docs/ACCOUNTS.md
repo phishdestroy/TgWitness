@@ -189,9 +189,10 @@ Open **Add account → Files** and select up to **four files belonging to one ac
 **8 MiB** in total, then press **Connect account**.
 
 The **Files**, **Auth key** and bulk-import forms show the parallel-session warning
-before connecting. Imported authorizations are reused; conversion does not create
-a separate Telegram login. Keep the original client closed, or sign in here by
-phone or QR for an independent authorization.
+before connecting. By default imported authorizations are reused. Keep the original
+client closed while its key is in use here. **Files** and **Auth key** also offer
+**Create an independent authorization**, described below. Bulk import still uses
+the direct mode. Phone and interactive QR login create separate authorizations.
 
 - Files are converted **in memory** on your TgWitness server. Uploads are not stored,
   ZIPs are not extracted to disk and no external service is contacted.
@@ -202,6 +203,41 @@ phone or QR for an independent authorization.
 - **Passcode or session text** holds the TData local passcode field, a box for pasting
   a StringSession and **Read files without signing in** (fills the form without
   contacting Telegram).
+
+### Create an independent authorization
+
+Select **Create an independent authorization** before connecting imported files or
+an Auth Key. TgWitness connects the imported donor briefly, uses it to approve the
+new client's QR login token, and disconnects the donor immediately after approval.
+The new client has its own authorization key and a separately selected Desktop
+profile. The donor's supplied API credentials and device profile are used only for
+the donor connection. No existing authorization is logged out or revoked.
+
+**Keep the donor's original client fully closed during this step.** The initial
+connection still uses its copied key, so this mode cannot remove that initial
+parallel-use risk. Once the new authorization is connected, the owner can reopen
+the original client and use both independently. Interactive **QR code** login lets
+the original client approve the login without copying or connecting its key here.
+
+If Telegram requests 2FA, this mode uses `twoFA` from the selected JSON when present,
+or asks for the password. A rejected imported password returns to the password form.
+Passwords are not saved. The candidate key is saved encrypted in
+`independent_login.enc`, including changes during data-centre migration. After an
+interruption, select the same donor and this option to resume the saved candidate.
+The workspace remains reserved for that account; failed completion does not delete
+the new workspace. Keep its data directory and vault key. The final credentials and
+`account.authorized` journal record include the import method, input formats and
+donor API ID, without the donor key or password.
+
+Telegram's [RPC error database](https://core.telegram.org/api/errors.json) associates
+`FRESH_CHANGE_ADMINS_FORBIDDEN` with changing admins, `FRESH_CHANGE_PHONE_FORBIDDEN`
+with changing the phone number, and `FRESH_RESET_AUTHORISATION_FORBIDDEN` with
+revoking other sessions, changing their lifetime or registering a passkey.
+`SESSION_TOO_FRESH_*` and `PASSWORD_TOO_FRESH_*` concern ownership transfers and
+revenue or gift withdrawals. These are not collection operations; a new login does
+not imply a blanket 24-hour reading ban. Export can separately return
+`TAKEOUT_INIT_DELAY_*`. TgWitness retains server-requested pauses and does not retry
+token acceptance automatically or revoke sessions to work around restrictions.
 
 ### Telethon `.session`
 
@@ -238,8 +274,8 @@ Accounts are often distributed as two files with the same name, for example
   Supplied fields take priority over generated defaults and the panel/browser
   language. Conflicting aliases are rejected. The resolved profile is saved in the
   encrypted workspace credentials and reused after restart, including its app version.
-- `phone`, a stored `twoFA` password, proxy settings
-  and device tokens are **ignored**. If the account has 2FA, TgWitness asks for it.
+- `phone`, proxy settings and device tokens are **ignored**. `twoFA` is read only
+  when **Create an independent authorization** is selected; direct import ignores it.
 - A JSON without a supported authorization field is only metadata. Add its session
   file or continue with phone or QR login. A JSON containing a supported session or
   Auth Key can authorize on its own; see [Account JSON](#account-json).
@@ -257,15 +293,16 @@ app from desktop.telegram.org).
 
 To import it:
 
-> **Parallel session warning.** Importing TData reuses Telegram Desktop's authorization
-> key; it does not create an independent login. Do not use that key in Desktop and
+> **Parallel session warning.** Direct TData import reuses Telegram Desktop's authorization
+> key. Do not use that key in Desktop and
 > TgWitness simultaneously. Telegram can invalidate the authorization with
 > `AUTH_KEY_DUPLICATED`, leaving both copies unusable until a new login.
 >
 > Fully quit Desktop, including its tray process, and keep that copy closed while
 > TgWitness uses the imported session. **Quit, do not log out or revoke the session:**
 > revocation also invalidates the imported copy. If you need both clients running,
-> sign in to TgWitness by phone or QR to create its own authorization. A dedicated
+> select **Create an independent authorization** and keep Desktop closed until the
+> new login succeeds, or sign in to TgWitness by phone or QR. A dedicated
 > account is recommended, but does not make cloned keys safe to use in parallel.
 >
 > This also applies to imported `.session` files, StringSession text and Auth Key HEX.
