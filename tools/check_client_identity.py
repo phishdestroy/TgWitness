@@ -189,6 +189,30 @@ def check_catalog():
         assert all(pair[0] != api_pool.DESKTOP_ID for pair in api_pool.login_order())
 
 
+def check_platforms():
+    data = client_profiles.catalog()["platforms"]
+    for api_id, name in ((4, "android"), (6, "android"), (21724, "android_x"),
+                         (10840, "ios"), (2834, "macos"), (2496, "web_a")):
+        expected = data["profiles"][name]
+        pairs = {(d["model"], d["system_version"]) for d in data["devices"][expected["catalog"]]}
+        for index in range(50):
+            profile = client_identity.resolve(api_id, seed=str(index))
+            assert profile == client_identity.resolve(api_id, seed=str(index))
+            assert (profile["device_model"], profile["system_version"]) in pairs
+            assert profile["app_version"] == expected["app_version"]
+            assert profile["lang_pack"] == expected["lang_pack"]
+        supplied = {"device_model": "Synthetic imported device", "system_version": "Imported OS",
+                    "app_version": "1.0 (1)", "lang_code": "fr", "system_lang_code": "fr-CA", "lang_pack": ""}
+        assert client_identity.resolve(api_id, supplied, "fixed") == supplied
+    for supplied, name in (({"app_version": "2.2 K"}, "web_k"), ({"lang_pack": "macos"}, "web_k"),
+                           ({"app_version": "0.7.0"}, "webogram")):
+        profile = client_identity.resolve(2496, supplied, "fixed")
+        expected = data["profiles"][name]
+        assert profile["lang_pack"] == expected["lang_pack"]
+        assert profile["system_version"] in {d["system_version"] for d in data["devices"]["web_k"]}
+    assert api_pool.device_for(123456789, "fixed") == {}
+
+
 async def check_catalog_retention(root):
     vault, store = Vault(root), Store(root)
     store.bind(vault)
@@ -224,7 +248,7 @@ async def main(http=False):
         vault.save("network", {"kind": "direct"})
         collector = Collector(store, vault, TelegramClient)
         try:
-            for api_id in (*sorted(api_pool.POOL_IDS), 123):
+            for api_id in (*sorted(api_pool.POOL_IDS), 123, 4, 6, 21724, 10840, 2834, 2496):
                 for session in ("", imported.save()):
                     client = collector.make_client(api_id, "a" * 32, session)
                     try:
@@ -233,7 +257,7 @@ async def main(http=False):
                         assert all(isinstance(value, str) and value for value in labels)
                         assert not any("tgwitness" in value.lower() for value in labels)
                         assert request.system_version != "Python"
-                        if api_id != api_pool.DESKTOP_ID:
+                        if api_id not in (api_pool.DESKTOP_ID, 4, 6, 21724, 10840, 2834, 2496):
                             assert request.app_version == TelegramClient.__version__
                         assert request.api_id == api_id
                         if session:
@@ -255,12 +279,13 @@ async def main(http=False):
             store.close()
         check_imports()
         check_catalog()
+        check_platforms()
         await check_retention(root / "retention")
         await check_catalog_retention(root / "catalog-retention")
         if http:
             await check_routes()
     print(f"Client identity passed: {checks} real initialization requests; imported profiles, encrypted retention, "
-          "legacy migration, stale-restore protection, 116-model Desktop catalog; no Telegram connections.")
+          "legacy migration, stale-restore protection, Desktop/Android/iOS/macOS/Web catalogs; no Telegram connections.")
     if http:
         print("Single and bulk HTTP import also passed.")
 

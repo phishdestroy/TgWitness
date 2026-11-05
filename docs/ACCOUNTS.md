@@ -54,6 +54,22 @@ up to eight per sign-in; refused pairs are skipped until restart. The pair that 
 saved with the account and reused for it. An **API ID** and **API hash** identify the application to Telegram; they
 do not authorize an account by themselves.
 
+Missing connection fields use a deterministic device/OS pair from the bundled
+[opentele2 2.0.0 catalogs](https://github.com/DedInc/opentele2/tree/7e973bc71cd7a714ad13ac703c0895a90d36a735):
+Desktop `2040`, Android `6`, Android X `21724`, iOS `10840`, macOS `2834`, and Web `2496`.
+Android's source-build ID `4` also uses the Android catalog, as identified in
+[Telegram Android's BuildVars](https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/messenger/BuildVars.java).
+Web defaults to A; an imported `K` app-version suffix or `macos` language pack selects
+K, and version `0.7.0` selects Webogram. Unknown application IDs keep Telethon's host
+defaults. Imported fields always win, including an older app version and an empty
+language pack. The catalog never changes the API ID/hash. Its version snapshot is
+reviewed explicitly, not fetched during login. A saved profile stays stable after updates.
+
+`account.getAuthorizations` reports Telegram's saved authorization metadata; it is
+not an echo of each new `initConnection`. Compare it with the actual sent profile.
+Connecting an existing authorization does not validate its companion API hash:
+`initConnection` sends the API ID, while the hash is used by login requests.
+
 To use your own application instead (the account that registers it is the one at risk; see
 [Why a built-in API pool?](PROJECT-GUIDE.md#connect-a-telegram-account)):
 
