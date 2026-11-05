@@ -1202,8 +1202,8 @@ def read_beacon(topic, key=None, session=None, public_key=None):
                 parts[3], address_signature(key, text)) else None
         if required and not signer:
             continue
-        # A signed post's own time is the signer's, so an old signed post sent again stays old. The time in an
-        # unsigned post is whatever its sender wrote; ntfy.sh's receive time orders those.
+        # A signed post retains its original ordering when it is delivered again.
+        # Unsigned timestamps are untrusted, so use the relay's receive time instead.
         posted, received = int(parts[2]), item.get("time")
         received = received if isinstance(received, int) else posted
         order = (posted, received) if signer else (received, posted)

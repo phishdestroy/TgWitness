@@ -32,6 +32,7 @@ FILES = [
     "deploy/Dockerfile", "compose.yaml", "deploy/compose/compose.image.yaml", "deploy/compose/compose.https.yaml", "deploy/compose/compose.witness.yaml", "deploy/compose/compose.proof.yaml", "deploy/compose/compose.proxies.yaml", "deploy/compose/compose.capture-panel.yaml",
     ".gitignore", ".gitattributes", ".dockerignore", "deploy/env.example", "deploy/constraints.txt", "deploy/requirements.lock", "deploy/build.lock",
     "deploy/audit.lock", "deploy/browser.lock", "deploy/mcp.lock", "deploy/site.lock",
+    "tools/tsa/time-stamps.json",
     *CONTAINER_INPUTS,
 ]
 FILES.extend("tgwitness/fonts/" + name for name in (
@@ -64,7 +65,6 @@ FILES.extend("tools/tdx/" + name for name in (
     "intel-outdated.collateral.json", "dstack-v4.json", "dstack-v4.collateral.json",
     "phala-dstack-0.5.12.json", "phala-dstack-0.5.12.collateral.json",
 ))
-FILES.append("tools/tsa/time-stamps.json")
 FILES.extend("addons/capture/" + name for name in (
     "README.md", "pyproject.toml", "requirements.lock", "lock_from_project.py", "compose.yaml",
     "config/browser.example.json", "config/ayugram.example.json",
