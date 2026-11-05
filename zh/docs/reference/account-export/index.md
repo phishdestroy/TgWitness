@@ -81,6 +81,6 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 自由文本、日期、罕见事件以及事实的组合，即使在移除姓名后仍可能识别出特定人员。若消息内容非必要，应优先采用文本省略处理；必要时需查阅完整的衍生文件。确保源文件和存储库的安全，与负责人就保留期限和共享规则达成一致，并记录确切移交的ZIP文件。
 
-该功能在本地面板中运行。单独发布的 [托管版 Capture 预览](https://phishdestroy.github.io/TgWitness/docs/capture/) 使用了一个固定的可抛弃式运行器及其自身的认证策略。本地收集器的签名不会继承该运行器的来源信息。此处的更改不会更新已批准的远程工作流或其信任固定项；托管的全账户捕获需要经过单独审查和发布的收集器/工作流对，并需获得实时运行器的接受。本地合成测试不涉及任何托管部署或真实 Telegram 账户的获取。
+GitHub Actions 支持通过 Takeout 或常规 API 导出整个账号或选定聊天，也支持单个聊天日志．[GitHub Actions](https://phishdestroy.github.io/TgWitness/docs/capture/) 指南说明设置验证和 120 分钟限制．本地导出和分享副本不继承 GitHub 证明，模拟测试不代表已通过真实 Telegram 账号验证．
 
 [证据格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/) · [案例报告](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)

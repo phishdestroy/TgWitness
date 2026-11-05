@@ -81,6 +81,6 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 자유 텍스트, 날짜, 드문 사건 및 사실의 조합을 통해 이름이 제거된 후에도 개인을 식별할 수 있습니다. 메시지 내용이 불필요한 경우 텍스트 생략을 우선하고, 필요한 경우에는 전체 파생본을 검토하십시오. 원본과 보관소를 안전하게 보호하고, 담당자와 보존 및 공유에 대해 합의하며, 정확히 어떤 ZIP가 전달되었는지 기록하십시오.
 
-이 기능은 로컬 패널에서 실행됩니다. 별도로 게시된 [호스팅된 캡처 미리보기](https://phishdestroy.github.io/TgWitness/docs/capture/)는 고정된 일회용 러너와 자체 인증 정책을 사용합니다. 로컬 수집기의 서명은 해당 러너의 출처를 상속받지 않습니다. 여기서 변경 사항이 발생하더라도 승인된 원격 워크플로우나 그 신뢰 핀은 업데이트되지 않습니다. 호스팅되는 전체 계정 캡처의 경우, 별도로 검토 및 게시된 수집기/워크플로우 쌍과 라이브 러너의 승인이 필요합니다. 로컬 합성 테스트에서는 호스팅 배포나 실제 텔레그램 계정 획득을 주장하지 않습니다.
+GitHub Actions는 Takeout이나 일반 API를 통한 전체 계정 또는 선택한 채팅 내보내기와 단일 채팅 기록을 지원합니다．[GitHub Actions](https://phishdestroy.github.io/TgWitness/docs/capture/) 안내는 설정 검증과 120분 제한을 설명합니다．로컬 내보내기와 공유 사본에는 GitHub 증명이 이어지지 않으며，합성 테스트는 실제 Telegram 계정에서의 작동을 입증하지 않습니다．
 
 [증거 형식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/) · [사례 보고서](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-reports/)

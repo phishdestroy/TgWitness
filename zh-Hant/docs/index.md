@@ -14,7 +14,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/
 
 ## 您捕獲的第一則訊息
 
-[### 幾分鐘內即可開始使用 請使用範例資料試用 TgWitness，接著在 Windows、Linux 或 macOS 上建立您專屬的 Telegram 監測工作區。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/start/)[### 專用帳戶 請準備一個專用的 Telegram 帳號用於資料蒐集。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/dedicated-account/)[### 連結帳戶 透過 QR 碼、電話號碼或會話匯入功能連接 Telegram。選擇資料來源，並確認新訊息已成功傳送至您的日誌。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/accounts/)[### 選擇代理伺服器 維護自動 MTProxy 路由，或使用您自己的代理伺服器。選擇 IP 模式、備用規則以及外部請求的路由。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/proxies/)[### 匯出與驗證 匯出擷取的 Telegram 通訊紀錄、驗證簽名，並將日誌與獨立見證人保留的檢查點進行比對。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/)[### GitHub Actions 擷取 在臨時 GitHub Runner 上匯出一個 Telegram 聊天紀錄。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/capture/)
+[### 幾分鐘內即可開始使用 請使用範例資料試用 TgWitness，接著在 Windows、Linux 或 macOS 上建立您專屬的 Telegram 監測工作區。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/start/)[### 專用帳戶 請準備一個專用的 Telegram 帳號用於資料蒐集。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/dedicated-account/)[### 連結帳戶 透過 QR 碼、電話號碼或會話匯入功能連接 Telegram。選擇資料來源，並確認新訊息已成功傳送至您的日誌。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/accounts/)[### 選擇代理伺服器 維護自動 MTProxy 路由，或使用您自己的代理伺服器。選擇 IP 模式、備用規則以及外部請求的路由。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/proxies/)[### 匯出與驗證 匯出擷取的 Telegram 通訊紀錄、驗證簽名，並將日誌與獨立見證人保留的檢查點進行比對。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/exports/)[### GitHub Actions 擷取 在臨時 GitHub runner 上選擇 Takeout、一般 API 匯出或聊天日誌．](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/capture/)
 
 ## 從儲存的紀錄到共享報告
 

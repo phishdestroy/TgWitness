@@ -2,13 +2,13 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/capture/
 
-ส่งออกการสนทนา Telegram หนึ่งครั้งไปยัง GitHub Runner ชั่วคราว แล้วดาวน์โหลดและตรวจสอบผลลัพธ์ที่ถูกเข้ารหัส
+เลือก Takeout การส่งออกผ่าน API ปกติ หรือบันทึกแชตบนตัวรัน GitHub ชั่วคราว．
 
 เปิดใช้งาน JavaScript เพื่อสร้างกุญแจและถอดรหัสไฟล์เก็บถาวรของคุณ
 
 **อ้างอิงเต็ม**
 
-**Preview available from `main`.** A fork launches a pinned reusable workflow from `phishdestroy/TgWitness`. The workflow reads one selected chat using a newly created Telegram session, attests the resulting evidence ZIP, and uploads only recipient-encrypted handoffs. The normal administration panel is not exposed.
+**Preview available from `main`.** A fork launches a pinned reusable workflow from `phishdestroy/TgWitness`. The workflow exports an account, selected chats or one chat's event journal using a newly created Telegram session, attests the evidence ZIP or multipart manifest, and uploads only recipient-encrypted handoffs. The normal administration panel is not exposed.
 
 The verifier checks the archive against its GitHub attestation, the approved workflow and collector commits, and the signed journal and attachment hashes. The collection process uses pinned upstream code and fresh storage. A reviewer can inspect that code and verify the delivered archive against its recorded run.
 
@@ -16,25 +16,47 @@ The verifier checks the archive against its GitHub attestation, the approved wor
 
 The helper explains the five stages and lets you try message or collector substitution on sample data. **Start my capture** opens the wizard.
 
-1. Choose **GitHub Actions capture (preview)** on the project homepage, the workspace login screen, or **Exports → Open capture helper**. You can also open the [official helper](https://phishdestroy.github.io/TgWitness/sealed.html?lang=en) or `tgwitness/static/capture.html` from a trusted checkout in a modern browser. The helper makes no network requests for key or file processing. It is available in English and Russian.
+1. Choose **GitHub Actions capture (preview)** on the project homepage, the workspace login screen, or **Exports → Open capture helper**. You can also open the [official helper](https://phishdestroy.github.io/TgWitness/sealed.html?lang=en) or `tgwitness/static/capture.html` from a trusted checkout in a modern browser. The helper makes no network requests for key or file processing. The helper supports the site's interface languages; the temporary collection panel supports English and Russian.
 2. Generate a key and save **sealed-key.json**. This is the only private decryption key. Copy the separate public **recipient** value. Losing the private key loses access to both the connection and the archive. Confirm that you saved it to unlock the next step. If you already have a delivery file, load the saved key and choose **I already have an archive**.
 3. Fork TgWitness, enable Actions in the fork, and run **Sealed chat capture**. Paste the public recipient and choose 30, 60, or 120 minutes. Never put a phone number, login code, Telegram password, private key, or session in workflow inputs, commits, issues, or logs.
 4. During the run, download **sealed-connection** from Artifacts and unzip it. Load `connection.tgwsealed` in the helper, using the saved private key. The resulting link contains a random access secret in its URL fragment. Keep this link private. The panel removes the fragment and keeps the secret in this tab's session storage; it is not placed in HTTP access logs.
-5. Open the connection link. Sign in with a QR code, or with your phone number and the login code. Enter your two-step verification password if Telegram asks for it. The built-in API credential pool is used by default, just like the normal workspace. You may expand the optional custom credentials section and enter both `api_id` and `api_hash` from [my.telegram.org/apps](https://my.telegram.org/apps). Leave both fields empty to use the built-in pool; a partial or malformed pair is rejected. Session imports are not allowed. Load the chats and choose one source. The connection link contains an access secret: keep it private.
-6. Load the dialogs and select one chat. Capture starts immediately. The selected source cannot be changed after starting. You can resume a paused history read, finish with the data already collected, or cancel without producing an archive. History reading and attachment downloading finish separately. Deadline expiry after starting produces an explicitly partial archive; expiry before starting produces no archive.
-7. Wait for **sealed-result**, download and unzip it, and decrypt `delivery.tgwsealed` in the helper. You receive `delivery.zip`, containing `evidence.zip`, `attestation.jsonl`, and instructions. Browser decryption is limited to 256 MiB; larger packages use the streaming local command below.
+5. Open the connection link. Sign in with a QR code, or with your phone number and the login code. Enter your two-step verification password if Telegram asks for it. The built-in API credential pool is used by default, just like the normal workspace. You may expand the optional custom credentials section and enter both `api_id` and `api_hash` from [my.telegram.org/apps](https://my.telegram.org/apps). Leave both fields empty to use the built-in pool; a partial or malformed pair is rejected. Session imports are not allowed. Choose the export mode and scope. The connection link contains an access secret: keep it private.
+6. Choose **Telegram Takeout**, **Regular Telegram API** or **Chat event journal**. For account export, choose all accessible chats or load and select one or more chats, then set dates, chat types, account categories and attachment rules. Check settings and size, optionally save the settings JSON for an independent reviewer, then press **Start capture**. Settings are fixed after starting. Resume works only while this runner exists; finishing early preserves acquired data and records gaps. Deadline expiry after starting produces an explicitly partial archive; expiry before starting or cancellation produces no archive.
+7. Wait for **sealed-result**, download and unzip it, and decrypt `delivery.tgwsealed` in the helper. You receive `delivery.zip`, containing `evidence.zip`, `attestation.jsonl`, and instructions. Browser decryption is limited to 256 MiB; larger packages use the streaming local command below. Large results also include `delivery-NNNNNN.tgwsealed` parts; the main `delivery.tgwsealed` then contains `evidence.parts.json` and the attestation. Download every part and assemble locally as described below.
 8. End the temporary session in Telegram Settings → Devices if revocation was not confirmed or the runner was killed. Normal completion attempts logout; network failures and forced runner termination prevent an absolute guarantee.
 
 The repository must contain the published pinned source and reusable-workflow commits. A local branch alone cannot be invoked by another GitHub repository.
 
 ## Choose this mode or a persistent workspace
 
+| Capture mode | Configurable scope | Difference |
+| --- | --- | --- |
+| Telegram Takeout, the default | All accessible cloud chats or selected chats, dates, account categories, media policies and JSON/HTML views | Uses Telegram's official export mechanism; approval or waiting may be required. Takeout can enumerate left channels/groups where Telegram permits it and request additional personal data. |
+| Regular Telegram API | The same account scope and output choices, subject to methods available through the regular API | Does not initialize Takeout; cannot enumerate left channels/supergroups or fetch Takeout-only personal data. Contacts cover Telegram users rather than the complete saved phone contact list. Rate limits still apply. |
+| Chat event journal | One selected chat, attachment policies and optional avatars | Captures history and changes observed during this run. Account categories, date filters and Desktop-compatible views do not apply. |
+
+All three modes have the same GitHub attestation and encrypted delivery. Takeout is an acquisition method, not a stronger signature. It is never silently replaced by regular API access. JSON/HTML views are generated by TgWitness; they are not Telegram-signed files or guaranteed byte-identical Desktop exports. See the [official Takeout API](https://core.telegram.org/api/takeout).
+
+Defaults use Takeout, all accessible chat types including archived chats, all dates, account profile and contacts, compatible JSON and HTML, and file downloads. The initial media budget is 4 GiB, with visible per-type file limits; larger files or exhausted download budgets use server hashes where available. Review these limits before collecting. Hashes cannot reconstruct a file. Optional photos, stories, session metadata and extra personal data remain separate choices.
+
+Takeout may require approval in an established Telegram session. Telegram sets the delay; a new login or runner does not bypass it. The maximum capture window is 120 minutes including login and approval, so a large account or long approval wait may not finish. A persistent local export can resume the same session, but does not inherit GitHub attestation.
+
+### Agree and verify the settings
+
+After **Check settings and size**, use **Save settings for verification**. Agree the resulting `sealed-export-settings.json` with the reviewer before collection. Changes invalidate the saved assessment. The collector signs the effective settings and their SHA-256, and account-export receipts bind the same options. The verifier reports the actual mode, selection and completeness, and rejects a disagreement between the journal and nested account export.
+
+```
+python -m tgwitness.sealed_verify evidence.zip --bundle attestation.jsonl --repo OWNER/TgWitness --expected-selection sealed-export-settings.json --require-complete
+```
+
+`--expected-selection` rejects a different transport, chat scope, filter or attachment policy. `--require-complete` rejects partial account exports and chat journals, whose overall completeness is not established. Without these flags, verification still checks provenance and integrity while reporting the recorded settings and gaps. A file supplied only with the finished archive cannot establish what was agreed beforehand. A valid signature never turns omitted data into data that was collected, or proves the owner did not edit/delete messages before capture.
+
 | Need | Mode |
 | --- | --- |
-| Collect one accessible chat during a limited session and give a reviewer an externally attested archive | GitHub Actions capture (preview) |
+| Export accessible account data or selected chats during a limited session and give a reviewer an externally attested archive | GitHub Actions capture (preview) |
 | Observe several chats continuously, manage accounts, search and read a growing archive | Local or Docker workspace |
 
-This starts a separate capture with a new login. It does not upload your existing local journal, export the currently open workspace, or reuse its Telegram session. An unfinished cloud capture cannot resume after its runner is destroyed; a new workflow starts a new capture. The helper is English/Russian; its entry points are translated with the rest of the interface.
+This starts a separate capture with a new login. It does not upload your existing local journal, export the currently open workspace, or reuse its Telegram session. An unfinished cloud capture cannot resume after its runner is destroyed; a new workflow starts a new capture.
 
 The workspace's **Exports → Open capture helper** opens the complete wizard inside the panel. The standalone page uses the same wizard, controls and themes. Both keep keys and decryption in your browser. GitHub workflow startup and the temporary Telegram panel open in separate tabs; the wizard tells you when to return. Locking the workspace clears the wizard's in-memory key. Your saved key file remains on your device.
 
@@ -56,7 +78,7 @@ The private decryption key stays in your browser/file. Telegram session material
 | No `sealed-connection` artifact | Check whether the job started and completed its startup/upload step. Queue, runner, image download, tunnel or repository policy failures can prevent startup. |
 | Cannot open the connection | Load the saved key for this run, unzip the downloaded artifact and select `connection.tgwsealed`. The runner must still be active. |
 | History is paused | Check the panel's status and use Resume while the session remains active, or finish with the data already collected. Telegram limits and inaccessible content can leave gaps. |
-| No `sealed-result` | Cancellation or expiry before selecting a chat produces no archive. A failed collection, attestation or packaging step also prevents delivery. Inspect the failed step without posting credentials. |
+| No `sealed-result` | Cancellation or expiry before starting collection produces no archive. A failed collection, attestation or packaging step also prevents delivery. Inspect the failed step without posting credentials. |
 | Browser cannot decrypt a large archive | Use the streaming CLI below for packages larger than 256 MiB. A wrong or lost private key cannot decrypt the result. |
 | Verification rejects the signer | Use a trusted current TgWitness installation and the exact caller `OWNER/REPOSITORY`. Do not accept a replacement policy supplied with the archive. |
 | Telegram still lists the temporary session | End it in Settings → Devices. Logout can fail and a forcibly terminated workflow may not run cleanup. |
@@ -72,6 +94,15 @@ python -m tgwitness.sealed_crypto decrypt delivery.tgwsealed --key sealed-key.js
 # Unzip delivery.zip using your archive manager, then:
 python -m tgwitness.sealed_verify evidence.zip --bundle attestation.jsonl --repo OWNER/TgWitness
 ```
+
+For multipart delivery, decrypt the main package first and keep its extracted manifest beside every encrypted part, then run:
+
+```
+python -m tgwitness.sealed_parts evidence.parts.json --key sealed-key.json --out evidence.zip
+python -m tgwitness.sealed_verify evidence.parts.json --assembled evidence.zip --bundle attestation.jsonl --repo OWNER/TgWitness
+```
+
+The manifest is the attested subject and binds every part and the assembled ZIP. Use `--max-gib` to set an appropriate uncompressed verification ceiling for a large archive; the default is 4 GiB. Expected-selection and complete-scope checks also work with multipart delivery.
 
 Python 3.11+, the project's dependencies, and a recent GitHub CLI supporting `--signer-digest` and `--deny-self-hosted-runners` are required. A CLI key generator is also available: `python -m tgwitness.sealed_crypto keygen sealed-key.json`.
 
@@ -92,9 +123,9 @@ The caller contains a job-level reference to the upstream reusable workflow at a
 
 The workflow does not restore caller caches, consume caller artifacts, execute caller files, or accept source/image URLs, shell commands, prepared ZIP files, or hashes to sign. It accepts a bounded public recipient and session duration. Actions, the Python base image, and cloudflared are pinned by immutable digests; Python dependencies use the existing hash-locked requirements. The image is built from the trusted source without a cache.
 
-The collector runs as a non-root user with a read-only image, dropped Linux capabilities, resource limits, and no Docker socket or GitHub-token environment. Its only mounts are fresh configuration, workspace, and output directories. The restricted FastAPI application exposes login, dialogs, one-chat collection, status, resume, finish, and cancellation. There is no plaintext download route, general administration route, import route, or signing endpoint.
+The collector runs as a non-root user with a read-only image, dropped Linux capabilities, resource limits, and no Docker socket or GitHub-token environment. Its only mounts are fresh configuration, workspace, and output directories. The restricted FastAPI application exposes login, dialogs, configurable account or chat collection, status, resume, finish, and cancellation. There is no plaintext download route, general administration route, import route, or signing endpoint.
 
-The supervisor stops the network-facing containers before the attest action reads the final fixed `evidence.zip`. The packaging container has no network. The upload steps name only `connection.tgwsealed` and `delivery.tgwsealed`; neither plaintext evidence nor Telegram credentials are uploaded as artifacts. Cleanup removes the private directories and containers, with no claim of physical disk erasure. Artifact retention is one day; download before expiry.
+The supervisor stops the network-facing containers before the attest action reads the final fixed `evidence.zip` or `evidence.parts.json`. The packaging container has no network. The upload steps name only `connection.tgwsealed` and `delivery*.tgwsealed`; neither plaintext evidence nor Telegram credentials are uploaded as artifacts. Cleanup removes the private directories and containers, with no claim of physical disk erasure. Artifact retention is one day; download before expiry.
 
 A fork owner can replace the caller or create a different signed file. The strict verifier must reject the resulting **different signer workflow/digest**. This construction still depends on the absence of exploitable bugs in approved code and on the integrity of GitHub's runner and signing infrastructure.
 
@@ -108,7 +139,7 @@ The original evidence bytes are attested **before** placing the evidence and att
 
 ## Limits and validation
 
-This mode uses the existing signed journal, resumable history reader, and media queue. It collects one visible chat, not Secret Chats, deleted history from before collection, or all account dialogs. Dialog enumeration is capped at 20,000. Existing attachment type/size limits and a 4 GiB export limit apply. Live updates for the selected chat can also be observed during the read; the history is not an atomic Telegram snapshot. Generated screenshots and screen recordings are not part of this mode.
+This mode uses the signed journal and account-export engine. Secret Chats, deleted history from before collection and data inaccessible to the account are excluded. Private cloud chats are eligible when selected. The chat picker is capped at 20,000 dialogs; account export discovers its own inventory. Missing data, failed files and unfinished tasks are recorded. Attachment limits and runner disk/time limits still apply. Large delivery uses encrypted parts instead of a fixed 4 GiB delivery cutoff. Completion means the frozen selected tasks finished, not that every historical Telegram record exists in the archive. The chat journal can also observe live updates; neither mode is an atomic snapshot. Generated screenshots and screen recordings are not part of this mode.
 
 Tests cover synthetic fresh login, scope isolation, media, cancellation, partial deadline completion, failed logout, forbidden API paths and fields, preloaded workspace rejection, wrong-key and tamper rejection, required verifier flags, and browser/Python encryption interoperability. The browser acceptance test uses a plainly labelled mock attestation; it is not a real Sigstore test. Real hosted-runner, Docker, GitHub attestation, and live Telegram acceptance must be reported separately from local synthetic checks.
 

@@ -64,7 +64,7 @@ Choose an entry below for the exact workflow, commands and limits. Each guide ha
 
 - [Keep it running](https://phishdestroy.github.io/TgWitness/docs/server/index.md): Run TgWitness on a server with persistent storage, private panel access, backups and checks after a restart.
 
-- [GitHub Actions capture](https://phishdestroy.github.io/TgWitness/docs/capture/index.md): Export one Telegram chat on a temporary GitHub runner.
+- [GitHub Actions capture](https://phishdestroy.github.io/TgWitness/docs/capture/index.md): Choose Takeout，regular API export or a chat journal on a temporary GitHub runner．
 
 - [Choose a proxy](https://phishdestroy.github.io/TgWitness/docs/proxies/index.md): Maintain automatic MTProxy routes or use your own proxy. Choose IP modes, fallback rules and the route for external requests.
 

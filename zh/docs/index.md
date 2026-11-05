@@ -14,7 +14,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/
 
 ## 您捕获的第一条消息
 
-[### 几分钟内即可开始使用 请使用示例数据试用 TgWitness，随后在 Windows、Linux 或 macOS 上启动您自己的 Telegram 监控工作区。](https://phishdestroy.github.io/TgWitness/zh/docs/start/)[### 专用账号 请准备一个单独的 Telegram 账号用于数据采集。](https://phishdestroy.github.io/TgWitness/zh/docs/dedicated-account/)[### 连接账户 可通过二维码、电话号码或会话导入连接 Telegram。选择消息来源，并确认新消息已成功记录到您的日志中。](https://phishdestroy.github.io/TgWitness/zh/docs/accounts/)[### 选择代理 维护自动 MTProxy 路由，或使用您自己的代理。选择 IP 模式、备用规则以及外部请求的路由。](https://phishdestroy.github.io/TgWitness/zh/docs/proxies/)[### 导出与验证 导出捕获的 Telegram 聊天记录，验证签名，并将日志与独立见证人保留的检查点进行比对。](https://phishdestroy.github.io/TgWitness/zh/docs/exports/)[### GitHub Actions 捕获 在临时 GitHub Runner 上导出一个 Telegram 聊天记录。](https://phishdestroy.github.io/TgWitness/zh/docs/capture/)
+[### 几分钟内即可开始使用 请使用示例数据试用 TgWitness，随后在 Windows、Linux 或 macOS 上启动您自己的 Telegram 监控工作区。](https://phishdestroy.github.io/TgWitness/zh/docs/start/)[### 专用账号 请准备一个单独的 Telegram 账号用于数据采集。](https://phishdestroy.github.io/TgWitness/zh/docs/dedicated-account/)[### 连接账户 可通过二维码、电话号码或会话导入连接 Telegram。选择消息来源，并确认新消息已成功记录到您的日志中。](https://phishdestroy.github.io/TgWitness/zh/docs/accounts/)[### 选择代理 维护自动 MTProxy 路由，或使用您自己的代理。选择 IP 模式、备用规则以及外部请求的路由。](https://phishdestroy.github.io/TgWitness/zh/docs/proxies/)[### 导出与验证 导出捕获的 Telegram 聊天记录，验证签名，并将日志与独立见证人保留的检查点进行比对。](https://phishdestroy.github.io/TgWitness/zh/docs/exports/)[### GitHub Actions 捕获 在临时 GitHub runner 上选择 Takeout、常规 API 导出或聊天日志．](https://phishdestroy.github.io/TgWitness/zh/docs/capture/)
 
 ## 从保存的记录到共享报告
 

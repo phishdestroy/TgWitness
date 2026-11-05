@@ -121,7 +121,7 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 <h2 id="data-protection-and-the-hosted-capture-preview">資料保護與託管版 Capture 預覽功能<a class="anchor" href="#data-protection-and-the-hosted-capture-preview" aria-label="此節的連結">#</a></h2>
 <p>這些控制措施支持「目的限制」與「資料最小化」原則；但並非自動的法律合規性檢查。<a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng">《一般資料保護條例》（GDPR）第 5 條及第 25 條</a> 針對上述原則及「設計/預設保護」進行規範。關於合法依據、必要性、適用情況下的特殊類別條件、保存期限、安全性及收件者存取權限，仍需根據個案作出適當決策。僅憑訴訟目的，並不能使所有資料揭露均屬合法。假名化資料通常仍屬個人資料；請參閱 <a href="https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en">EDPB 說明</a>。</p>
 <p>自由文字、日期、罕見事件及事實的組合，即使移除姓名後仍可能識別出特定人士。若訊息內容非必要，應優先省略文字；必要時則需檢視完整的衍生內容。務必保護原始資料與儲存庫的安全，與負責人就資料保留與分享達成共識，並記錄確切移交的 ZIP 內容。</p>
-<p>此功能在本地面板中運行。另行發布的 <a href="https://phishdestroy.github.io/TgWitness/docs/capture/">託管版 Capture 預覽</a> 使用一個固定的一次性執行器及其專屬的驗證政策。本地收集器的簽名不會繼承該執行器的來源資訊。此處的變更不會更新已核准的遠端工作流程或其信任固定點；託管式完整帳戶擷取需要一組經獨立審查並發布的收集器／工作流程組合，以及即時執行器的接受。本地模擬測試不聲稱進行任何託管部署或實際取得 Telegram 帳戶。</p>
+<p>GitHub Actions 支援透過 Takeout 或一般 API 匯出整個帳號或選定聊天，也支援單一聊天日誌．<a href="https://phishdestroy.github.io/TgWitness/docs/capture/">GitHub Actions</a> 指南說明設定驗證與 120 分鐘限制．本機匯出和分享副本不繼承 GitHub 證明，模擬測試不代表已通過真實 Telegram 帳號驗證．</p>
 <p><a href="../evidence/">證據格式</a> · <a href="../case-reports/">案例報告</a></p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNT-EXPORT.md">在 GitHub 上編輯此頁面 ↗</a><a class="next-guide" href="../evidence/"><span>下一步</span><strong>證據格式 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../verification/">已測試的內容 →</a></p></footer>
 </main>
