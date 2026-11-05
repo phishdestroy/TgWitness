@@ -63,6 +63,9 @@ class UnreadableHistory(ValueError):
     pass
 
 
+BULK_DELETION = 10
+BULK_MEANING = ("Many messages disappeared in one Telegram update: the history was cleared or bulk-deleted. "
+                "If it includes messages this account sent, the other side cleared the chat for both.")
 ACCESS_LOST_MEANING = ("The account was removed from this chat or can no longer read it. Observation of this chat "
                        "stopped at that moment; records saved before it remain in the journal.")
 
@@ -2078,18 +2081,31 @@ class Collector:
         except Exception as exc:
             await self.failure(exc, "message.edited", client=client)
 
-    def record_deletion(self, chat_id, message_id, raw, resolution=None):
+    def record_deletion(self, chat_id, message_id, raw, resolution=None, batch=None):
         state = self.store.message_state(chat_id, message_id)
         if state["deleted"]:
             return
         payload = {"deleted_by": None, "deletion_time": None,
-                   "meaning": "Telegram deletion notification; observation time is not deletion time", "raw": raw}
+                   "meaning": "Telegram deletion notification; observation time is not deletion time",
+                   **({"batch": batch} if batch else {"raw": raw})}
         if resolution:
             payload["chat_resolution"] = resolution
         if state["content"] and state["content"].get("outgoing"):
             payload["deleted_message_was_outgoing"] = True
             payload["deleter_visibility"] = "the message was sent by this account; who deleted it is not supplied"
         self.store.append("message.deleted", payload, chat_id, message_id)
+
+    def deletion_batch(self, chat_id, ids, raw):
+        if len(ids) < 2:
+            return None
+        outgoing = sum(1 for message_id in ids
+                       if ((self.store.message_state(chat_id, message_id)["content"] or {}).get("outgoing")))
+        event = self.store.append("history.cleared" if len(ids) >= BULK_DELETION else "deletion.batch", {
+            "count": len(ids), "first_id": min(ids), "last_id": max(ids), "message_ids": sorted(ids),
+            "outgoing_saved": outgoing, "raw": raw,
+            "meaning": BULK_MEANING if len(ids) >= BULK_DELETION else "Several messages deleted in one Telegram update."},
+            chat_id)
+        return {"seq": event["seq"], "hash": event["hash"], "count": len(ids)}
 
     async def on_delete(self, event):
         client = self.client
@@ -2100,22 +2116,28 @@ class Collector:
             if event.chat_id is None:
 
 
-                unresolved = []
+                unresolved, by_chat = [], {}
                 for message_id in event.deleted_ids:
                     chat_id = self.store.account_message_chat(message_id)
                     if chat_id is not None and await self.covers(chat_id):
-                        self.record_deletion(chat_id, message_id, raw, {
-                            "method": "chat of the previously saved message with this ID",
-                            "basis": "private chats and ordinary groups share one account-wide message ID sequence"})
+                        by_chat.setdefault(chat_id, []).append(message_id)
                     else:
                         unresolved.append(message_id)
+                for chat_id, ids in by_chat.items():
+                    batch = self.deletion_batch(chat_id, ids, raw)
+                    for message_id in ids:
+                        self.record_deletion(chat_id, message_id, raw, {
+                            "method": "chat of the previously saved message with this ID",
+                            "basis": "private chats and ordinary groups share one account-wide message ID sequence"},
+                            batch=batch)
                 if unresolved:
                     self.store.append("deletion.unscoped", {
                         "message_ids": unresolved, "scope": "account-level update; no saved message has these IDs",
                         "deleted_by": None, "raw": raw})
             elif await self.covers(event.chat_id):
+                batch = self.deletion_batch(event.chat_id, list(event.deleted_ids), raw)
                 for message_id in event.deleted_ids:
-                    self.record_deletion(event.chat_id, message_id, raw)
+                    self.record_deletion(event.chat_id, message_id, raw, batch=batch)
         except Exception as exc:
             await self.failure(exc, "message.deleted", client=client)
 
