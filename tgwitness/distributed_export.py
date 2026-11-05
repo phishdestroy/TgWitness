@@ -160,14 +160,10 @@ class DistributedExport:
                           "ranges": 0, "wait_until": None, "error": None}
                 try:
                     peer = entity if profile == lead_id else await collector.resolve_for_export(chat_id, username)
-                    latest = await collector.client.get_messages(peer, limit=1,
-                        offset_date=datetime.fromisoformat(scan_end))
-                    upper = latest[0].id if latest else 0
+                    upper = await collector.number_before(peer, datetime.fromisoformat(scan_end))
                     lower = 1
                     if upper and options.from_utc:
-                        before = await collector.client.get_messages(peer, limit=1,
-                            offset_date=datetime.fromisoformat(options.from_utc))
-                        lower = before[0].id + 1 if before else 1
+                        lower = await collector.number_before(peer, datetime.fromisoformat(options.from_utc)) + 1
                     if upper >= lower:
                         bounds.append((lower, upper, profile))
                     worker.update(low=lower, high=upper)
@@ -175,10 +171,13 @@ class DistributedExport:
                 except asyncio.CancelledError:
                     raise
                 except Exception as exc:
-                    worker.update(state="skipped", error=type(exc).__name__)
+                    worker.update(state="skipped", error=type(exc).__name__,
+                                  reason=str(exc) if isinstance(exc, ValueError) else None)
                 workers.append(worker)
             if lead_id not in self.entities:
-                raise ValueError("The starting account cannot read this chat.")
+                lead_worker = next(w for w in workers if w["profile_id"] == lead_id)
+                raise ValueError("The starting account cannot read this chat: "
+                                 + (lead_worker.get("reason") or lead_worker.get("error") or "unknown reason") + ".")
             cuts = sorted({edge for low, high, _ in bounds for edge in (low, high + 1)})
             segments = []
             for low, end in zip(cuts, cuts[1:]):

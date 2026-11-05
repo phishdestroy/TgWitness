@@ -14,7 +14,7 @@ from collections import deque
 
 from telethon import __version__ as telethon_version, events, utils
 from telethon.errors import SessionPasswordNeededError, FloodWaitError, InvalidBufferError, RPCError
-from telethon.errors import FileReferenceExpiredError, TakeoutInvalidError
+from telethon.errors import FileReferenceExpiredError, TakeoutInvalidError, TypeNotFoundError
 from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
                              FrozenMethodInvalidError, SessionExpiredError, SessionRevokedError,
                              UserDeactivatedBanError, UserDeactivatedError)
@@ -56,6 +56,35 @@ class AuthorizationRequired(ValueError):
 
 class ProtectedSession(ValueError):
     """The request would end a Telegram session that this workspace cannot sign in again."""
+
+
+class UnreadableHistory(ValueError):
+    pass
+
+
+# Telegram can send a newer type than the bundled Telethon schema knows. One such message
+# makes the whole history page undecodable; read that page number by number instead.
+SALVAGE_WINDOW = 100
+SALVAGE_LIMIT = 20
+UNPARSED_MEANING = ("Telegram has a message under this number, but it contains a data type that Telethon "
+                    "layer {layer} cannot decode. Its content is not in this export; read it again after a "
+                    "Telegram schema update.")
+
+
+def unparsed_record(number, error):
+    return {"id": number, "type": "unparsed", "date": None, "date_unixtime": None, "edited": None,
+            "from": None, "from_id": None, "from_username": None, "reply_to_message_id": None,
+            "text": "", "reply_to": None,
+            "unparsed": {"constructor": format(error.invalid_constructor_id, "08x"), "telethon_layer": LAYER,
+                         "remainder_sha256": hashlib.sha256(error.remaining or b"").hexdigest(),
+                         "meaning": UNPARSED_MEANING.format(layer=LAYER)}}
+
+
+def unreadable_history(error):
+    return UnreadableHistory(
+        "Telegram sends this chat a data type that Telethon layer " + str(LAYER) + " cannot decode (constructor "
+        + format(error.invalid_constructor_id, "08x") + ") in almost every answer, so its history cannot be read "
+        "message by message. Update TgWitness to a release with a newer Telegram schema.")
 
 
 AUTHORIZATION_ERRORS = (AuthorizationRequired, AuthKeyDuplicatedError, AuthKeyInvalidError,
@@ -2234,8 +2263,7 @@ class Collector:
             last = self.store.last_message_id(chat_id)
             if last is None and str(chat_id) not in floors:
 
-                newest = await self.client.get_messages(entity, limit=1)
-                floors[str(chat_id)] = newest[0].id if newest else 0
+                floors[str(chat_id)] = await self.number_before(entity)
                 self.store.set_setting("recheck_floor", floors)
             elif limit := self.param("recheck_new_limit"):
 
@@ -2303,7 +2331,10 @@ class Collector:
         result.update(checked=len(ids), checked_from=min(ids), checked_to=max(ids))
         if missing and settings["deletions"]:
             if len(missing) == len(ids):
-                probe = await self.client.get_messages(entity, limit=1)
+                try:
+                    probe = await self.client.get_messages(entity, limit=1)
+                except TypeNotFoundError:
+                    probe = [True]  # Telegram did answer with history, only in a type Telethon cannot decode.
                 if not probe or not any(message is not None for message in probe):
                     self.store.append("coverage.gap", {
                         "reason": "recheck_visibility_uncertain", "checked_from": min(ids), "checked_to": max(ids),
@@ -2398,10 +2429,19 @@ class Collector:
         await self.restore()
         entity = await self.resolve_target(chat_id)
         started = time.monotonic()
-        latest = await self.client.get_messages(entity, limit=1)
+        try:
+            latest = await self.client.get_messages(entity, limit=1)
+            last_id = latest[0].id if latest else None
+        except TypeNotFoundError:
+            # The newest message is undecodable; the total arrives with any readable page.
+            latest = []
+            for skip in (1, 2, 4, 8, 16, 32, 64):
+                with suppress(TypeNotFoundError):
+                    latest = await self.client.get_messages(entity, limit=1, add_offset=skip)
+                    break
+            last_id = await self.number_before(entity) or None
         request_seconds = time.monotonic() - started
         total = getattr(latest, "total", None) or 0
-        last_id = latest[0].id if latest else None
 
         per_chat_ids = self.dialog_cache.get(chat_id, {}).get("kind") in ("supergroup", "channel")
         pages = -(-total // 100)
@@ -2512,7 +2552,79 @@ class Collector:
                 scratch.unlink(missing_ok=True)
             shutil.rmtree(media_dir, ignore_errors=True)
 
-    async def iterate_history(self, entity, on_message, min_id=0, offset_id=0, on_wait=None):
+    async def read_numbers(self, entity, numbers):
+        """Map message numbers to messages, halving any batch Telegram answers with an undecodable type.
+
+        Numbers with no message are left out; a single number that still cannot be decoded maps to its
+        TypeNotFoundError.
+        """
+        found = {}
+        for start in range(0, len(numbers), 100):
+            batch = numbers[start:start + 100]
+            for attempt in range(3):
+                try:
+                    answer = await self.client.get_messages(entity, ids=batch)
+                    break
+                except FloodWaitError as exc:
+                    if attempt == 2 or exc.seconds > 600:
+                        raise
+                    await asyncio.sleep(exc.seconds + 1)
+                except TypeNotFoundError as error:
+                    if len(batch) == 1:
+                        found[batch[0]] = error
+                    else:
+                        middle = len(batch) // 2
+                        found.update(await self.read_numbers(entity, batch[:middle]))
+                        found.update(await self.read_numbers(entity, batch[middle:]))
+                    answer = None
+                    break
+            for message in answer or []:
+                if message is not None and not isinstance(message, types.MessageEmpty):
+                    if utils.get_peer_id(message.peer_id) != utils.get_peer_id(entity):
+                        raise ValueError("History returned a message from a different source.")
+                    found[message.id] = message
+        return found
+
+    async def number_before(self, entity, offset_date=None):
+        """Number of the newest message before offset_date, counting messages Telethon cannot decode."""
+        error = None
+        for skip in (0, 1, 2, 4, 8, 16, 32, 64):
+            try:
+                latest = await self.client.get_messages(entity, limit=1, offset_date=offset_date,
+                                                        **({"add_offset": skip} if skip else {}))
+            except TypeNotFoundError as exc:
+                error = exc
+                continue
+            readable = latest[0].id if latest else 0
+            if not skip:
+                return readable
+            above = await self.read_numbers(entity, list(range(readable + 1, readable + SALVAGE_WINDOW + 1)))
+            return max((number for number, value in above.items() if offset_date is None
+                        or isinstance(value, TypeNotFoundError) or value.date < offset_date), default=readable)
+        raise unreadable_history(error)
+
+    async def salvage_page(self, entity, offset_id, min_id, on_message, on_unparsed):
+        """Read the numbers just below offset_id one by one after Telegram sent an undecodable page."""
+        top = offset_id - 1 if offset_id else await self.number_before(entity)
+        low = max(min_id + 1, top - SALVAGE_WINDOW + 1, 1)
+        found = await self.read_numbers(entity, list(range(low, top + 1)))
+        unreadable = [n for n, value in found.items() if isinstance(value, TypeNotFoundError)]
+        if len(unreadable) > SALVAGE_LIMIT:
+            raise unreadable_history(found[unreadable[0]])
+        for number in sorted(found, reverse=True):
+            value = found[number]
+            if isinstance(value, TypeNotFoundError):
+                await on_unparsed(number, value)
+            else:
+                await on_message(value)
+        if unreadable:
+            self.store.append("history.unparsed", {
+                "chat_id": utils.get_peer_id(entity), "numbers": sorted(unreadable),
+                "constructors": sorted({format(found[n].invalid_constructor_id, "08x") for n in unreadable}),
+                "telethon_layer": LAYER, "meaning": UNPARSED_MEANING.format(layer=LAYER)})
+        return low
+
+    async def iterate_history(self, entity, on_message, min_id=0, offset_id=0, on_wait=None, on_unparsed=None):
         failures = 0
         while True:
             writing = False
@@ -2523,6 +2635,12 @@ class Collector:
                     writing = False
                     offset_id, failures = message.id, 0
                 return
+            except TypeNotFoundError:
+                if writing or on_unparsed is None:
+                    raise
+                offset_id = await self.salvage_page(entity, offset_id, min_id, on_message, on_unparsed)
+                if offset_id <= min_id + 1:
+                    return
             except FloodWaitError as exc:
                 if writing:
                     raise
@@ -2610,12 +2728,13 @@ class Collector:
     async def stream_history(self, entity, scratch, record, media_dir=None):
         count, started = 0, time.monotonic()
         with scratch.open("w", encoding="utf-8") as handle:
-            async def write(message):
+            async def write(message, entry=None):
                 nonlocal count
-                self.remember(getattr(message, "sender", None))
-                entry = message_record(message)
-                if media_dir is not None:
-                    entry.update(await self.export_attachment(message, media_dir))
+                if entry is None:
+                    self.remember(getattr(message, "sender", None))
+                    entry = message_record(message)
+                    if media_dir is not None:
+                        entry.update(await self.export_attachment(message, media_dir))
                 handle.write(json.dumps(entry, ensure_ascii=False) + "\n")
                 count += 1
                 record["captured"] = count
@@ -2625,7 +2744,10 @@ class Collector:
                     if record.get("total") and elapsed > 0:
                         record["eta_seconds"] = round(max(0, record["total"] - count) / (count / elapsed))
                     await asyncio.sleep(0)
-            await self.iterate_history(entity, write)
+
+            async def unparsed(number, error):
+                await write(None, unparsed_record(number, error))
+            await self.iterate_history(entity, write, on_unparsed=unparsed)
         return count
 
     async def resolve_for_export(self, chat_id, username=None):
@@ -2643,12 +2765,8 @@ class Collector:
     async def fetch_range(self, entity, low, high, path, progress=None, on_wait=None):
         digest, count = hashlib.sha256(), 0
         with path.open("w", encoding="utf-8") as handle:
-            async def write(message):
+            async def emit(record):
                 nonlocal count
-                if utils.get_peer_id(message.peer_id) != utils.get_peer_id(entity):
-                    raise ValueError("History returned a message from a different source.")
-                self.remember(getattr(message, "sender", None))
-                record = message_record(message)
                 handle.write(json.dumps(record, ensure_ascii=False) + "\n")
                 digest.update(canonical(record) + b"\n")
                 count += 1
@@ -2656,7 +2774,17 @@ class Collector:
                     progress()
                 if count % 200 == 0:
                     await asyncio.sleep(0)
-            await self.iterate_history(entity, write, min_id=low - 1, offset_id=high + 1, on_wait=on_wait)
+
+            async def write(message):
+                if utils.get_peer_id(message.peer_id) != utils.get_peer_id(entity):
+                    raise ValueError("History returned a message from a different source.")
+                self.remember(getattr(message, "sender", None))
+                await emit(message_record(message))
+
+            async def unparsed(number, error):
+                await emit(unparsed_record(number, error))
+            await self.iterate_history(entity, write, min_id=low - 1, offset_id=high + 1, on_wait=on_wait,
+                                       on_unparsed=unparsed)
         return count, digest.hexdigest()
 
     def poll_export(self, export_id):

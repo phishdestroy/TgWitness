@@ -6,12 +6,12 @@ from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
 import pytest
-from telethon.errors import FloodWaitError
+from telethon.errors import FloodWaitError, TypeNotFoundError
 from telethon.tl import types
 
 from tgwitness import distributed_export, settings_hub, telegram_client
 from tgwitness.account_export import AccountExport
-from tgwitness.collector import Collector, message_record
+from tgwitness.collector import Collector, UnreadableHistory, message_record
 from tgwitness.message_selection import Selection, SelectionIndex, detect_language
 from tgwitness.security import Vault
 from tgwitness.store import Store
@@ -204,6 +204,90 @@ class Client:
             if min_id < m.id < offset_id:
                 yield m
         await asyncio.sleep(0)
+
+
+class PoisonClient(Client):
+    """Telethon behaviour for a message whose type is newer than its schema: the whole answer fails."""
+    page = 3
+
+    def __init__(self, messages, poison):
+        super().__init__(messages)
+        self.poison = set(poison)
+
+    def fail(self):
+        raise TypeNotFoundError(0xddb5ab75, b"undecoded remainder")
+
+    async def get_messages(self, entity, limit=None, offset_date=None, ids=None, add_offset=0):
+        if ids is not None:
+            if self.poison & set(ids if isinstance(ids, list) else [ids]):
+                self.fail()
+            return await super().get_messages(entity, ids=ids)
+        ordered = sorted([m for m in self.messages if offset_date is None or m.date < offset_date], key=lambda m: -m.id)
+        window = ordered[add_offset:add_offset + (limit or len(ordered))]
+        if any(m.id in self.poison for m in window):
+            self.fail()
+        return window
+
+    async def iter_messages(self, entity, offset_id=0, min_id=0):
+        self.reads.append((min_id, offset_id))
+        ordered = [m for m in sorted(self.messages, key=lambda m: -m.id)
+                   if min_id < m.id and (not offset_id or m.id < offset_id)]
+        for start in range(0, len(ordered), self.page):
+            page = ordered[start:start + self.page]
+            if any(m.id in self.poison for m in page):
+                self.fail()
+            for m in page:
+                yield m
+            await asyncio.sleep(0)
+
+
+def test_undecodable_message_is_recorded_and_history_continues(tmp_path):
+    async def scenario():
+        app = workspace(tmp_path / "reader")
+        collector = app.state.collector
+        collector.client = PoisonClient([message(i) for i in range(1, 11)], poison={7})
+        peer = types.Channel(id=42, title="Synthetic group", photo=types.ChatPhotoEmpty(),
+                             date=datetime.now(timezone.utc), megagroup=True, access_hash=1)
+        try:
+            count, _ = await collector.fetch_range(peer, 1, 10, tmp_path / "chunk.jsonl")
+            rows = [json.loads(line) for line in (tmp_path / "chunk.jsonl").read_text(encoding="utf-8").splitlines()]
+            assert count == 10 and [row["id"] for row in rows] == list(range(10, 0, -1))
+            unparsed = [row for row in rows if row["type"] == "unparsed"]
+            assert [row["id"] for row in unparsed] == [7] and unparsed[0]["unparsed"]["constructor"] == "ddb5ab75"
+            event = next(e for e in app.state.store.events(limit=5) if e["kind"] == "history.unparsed")
+            assert event["payload"]["numbers"] == [7]
+
+            collector.client = PoisonClient([message(i) for i in range(1, 31)], poison=range(1, 31))
+            with pytest.raises(UnreadableHistory, match="ddb5ab75"):
+                await collector.fetch_range(peer, 1, 30, tmp_path / "broken.jsonl")
+        finally:
+            app.state.store.close()
+    asyncio.run(scenario())
+
+
+def test_undecodable_newest_message_does_not_block_the_start(tmp_path, monkeypatch):
+    async def scenario():
+        manager, entries = coordinator(tmp_path, [])
+        for entry in entries.values():
+            entry["app"].state.collector.client = PoisonClient([message(i) for i in range(1, 8)], poison={7})
+        monkeypatch.setattr(distributed_export, "CHUNK", 2)
+        monkeypatch.setattr(distributed_export.replica, "outbox", lambda *args: None)
+        try:
+            state = await manager.start(CHAT, list(entries), "account0")
+            assert state["workers"][0]["high"] == 7, state
+            await asyncio.wait_for(manager.task, 60)
+            assert manager.state["phase"] == "done", manager.state
+            path = manager.result_path(state["id"])
+            verify_chat_export(path, fingerprint(entries["account0"]["app"].state.vault.public_key))
+            with zipfile.ZipFile(path) as archive:
+                rows = {row["id"]: row for row in json.loads(archive.read("chat.json"))["messages"]}
+                ids = json.loads(archive.read("message-ids.json"))
+            assert set(rows) == set(range(1, 8)) and rows[7]["type"] == "unparsed", rows.get(7)
+            assert ids["missing"] == 0
+        finally:
+            await manager.close()
+            close_entries(entries)
+    asyncio.run(scenario())
 
 
 def coordinator(tmp_path, messages, count=2):

@@ -2378,6 +2378,12 @@ def absent_text(say, low, high):
         say("Message numbers {a}–{b} absent ({n})", a=low, b=high, n=high - low + 1)
 
 
+def unparsed_text(say, record):
+    return say("Message number {n} exists in Telegram but uses a data type this TgWitness version cannot decode "
+               "(constructor {c}); its content is not in this export.",
+               n=record.get("id"), c=(record.get("unparsed") or {}).get("constructor") or "?")
+
+
 def absent_before(record, previous):
     number = record.get("id")
     if type(number) is int and type(previous) is int and number > previous + 1:
@@ -2441,6 +2447,11 @@ def chat_rows(records, say, preview=False, base="", numbered=False, after=None, 
             yield '<div class="day"><time datetime="' + e(day) + '" data-day>' + e(day) + "</time></div>"
             previous_day, previous_sender = day, object()
         name = record.get("from") or (str(sender) if sender is not None else say("Unknown"))
+        if record.get("type") == "unparsed":
+            yield ('<div class="gap-row" id="m' + e(record.get("id")) + '" data-cat="service"><span>'
+                   + e(unparsed_text(say, record)) + "</span></div>")
+            previous_sender = object()
+            continue
         if record.get("type") == "service":
             yield ('<div class="svc-row" id="m' + e(record.get("id")) + '" data-cat="service"><span>' + e(name) + " · "
                    + e(action_text(record.get("action")) or say("Service message")) + "</span>"
