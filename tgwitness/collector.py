@@ -2624,17 +2624,23 @@ class Collector:
                 "telethon_layer": LAYER, "meaning": UNPARSED_MEANING.format(layer=LAYER)})
         return low
 
-    async def iterate_history(self, entity, on_message, min_id=0, offset_id=0, on_wait=None, on_unparsed=None):
+    async def iterate_history(self, entity, on_message, min_id=0, offset_id=0, on_wait=None, on_unparsed=None,
+                              page_timeout=None, attempts=8):
+        """Walk history newest first. page_timeout bounds each page so a silent route fails instead of hanging."""
         failures = 0
         while True:
             writing = False
+            pages = self.client.iter_messages(entity, offset_id=offset_id, min_id=min_id)
             try:
-                async for message in self.client.iter_messages(entity, offset_id=offset_id, min_id=min_id):
+                while True:
+                    try:
+                        message = await asyncio.wait_for(anext(pages), page_timeout)
+                    except StopAsyncIteration:
+                        return
                     writing = True
                     await on_message(message)
                     writing = False
                     offset_id, failures = message.id, 0
-                return
             except TypeNotFoundError:
                 if writing or on_unparsed is None:
                     raise
@@ -2655,11 +2661,14 @@ class Collector:
                 if writing:
                     raise
                 failures += 1
-                if failures > 8:
+                if failures > attempts:
                     raise
                 await asyncio.sleep(min(60, 5 * failures))
                 if not self.client.is_connected():
                     await self.restore()
+            finally:
+                with suppress(Exception):
+                    await pages.aclose()
 
     async def export_attachment(self, message, directory):
         if not getattr(message, "media", None) or not getattr(message, "file", None):
@@ -2762,7 +2771,7 @@ class Collector:
                 raise ValueError("The public username now points to a different chat.")
             return entity
 
-    async def fetch_range(self, entity, low, high, path, progress=None, on_wait=None):
+    async def fetch_range(self, entity, low, high, path, progress=None, on_wait=None, page_timeout=None, attempts=8):
         digest, count = hashlib.sha256(), 0
         with path.open("w", encoding="utf-8") as handle:
             async def emit(record):
@@ -2784,7 +2793,7 @@ class Collector:
             async def unparsed(number, error):
                 await emit(unparsed_record(number, error))
             await self.iterate_history(entity, write, min_id=low - 1, offset_id=high + 1, on_wait=on_wait,
-                                       on_unparsed=unparsed)
+                                       on_unparsed=unparsed, page_timeout=page_timeout, attempts=attempts)
         return count, digest.hexdigest()
 
     def poll_export(self, export_id):

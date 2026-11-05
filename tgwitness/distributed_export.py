@@ -18,13 +18,18 @@ from telethon.tl import types
 
 from . import chat_export, replica, report, tuning
 from .account_export import durable_write, linked, read_json
-from .collector import message_record
+from .collector import AUTHORIZATION_ERRORS, message_record
 from .message_selection import Selection, SelectionIndex, utc
 from .store import canonical, utcnow
 from .verify import fingerprint, verify_chat_export
 from .workers import complete_in_thread
 
 CHUNK = 2000
+PAGE_TIMEOUT = 60  # seconds for one history page before the range goes back to the queue
+OUTAGE_RETRIES = 4  # connection losses an account may recover from before it leaves the job
+OUTAGE_PAUSE = 30  # seconds before the first retry after a connection loss; doubles each time
+POISON_ACCOUNTS = 2  # distinct accounts a range may fail on before the range, not the accounts, is stopped
+ACCOUNT_ERRORS = 3  # consecutive failed ranges after which an account leaves the job
 JOB_ID = re.compile(r"[a-f0-9]{32}")
 
 
@@ -36,6 +41,7 @@ class DistributedExport:
             raise ValueError("Distributed-export storage must not be a link.")
         self.root.mkdir(mode=0o700, exist_ok=True)
         self.state = self.job = self.task = self.db = self.recheck = None
+        self.chunk_failures = {}
         self.preparing = set()
         self.reserved = {}
         self.entities = {}
@@ -310,6 +316,7 @@ class DistributedExport:
         collector = self.app_for(profile).state.collector
         directory = self.directory(self.state["id"])
         worker["state"] = "running"
+        outages = errors = 0
         while True:
             task = self.db.execute("SELECT t.* FROM tasks t JOIN eligible e USING(low) WHERE e.profile=? "
                                    "AND t.phase='pending' ORDER BY low DESC LIMIT 1", (profile,)).fetchone()
@@ -332,7 +339,7 @@ class DistributedExport:
                 if linked(temporary) or linked(path):
                     raise ValueError("Chunk paths must not be links.")
                 await collector.fetch_range(self.entities[profile], task["low"], task["high"], temporary,
-                                            lambda: None, waiting)
+                                            lambda: None, waiting, page_timeout=PAGE_TIMEOUT, attempts=1)
                 count, digest = self.check_chunk(temporary, task)
                 with temporary.open("r+b") as stream:
                     os.fsync(stream.fileno())
@@ -351,12 +358,34 @@ class DistributedExport:
                 raise
             except Exception as exc:
                 self.db.execute("UPDATE tasks SET phase='pending' WHERE low=?", (task["low"],))
-                self.db.execute("DELETE FROM eligible WHERE profile=?", (profile,))
                 self.db.commit()
-                worker.update(state="failed", error=type(exc).__name__)
-                return
+                if isinstance(exc, (OSError, ConnectionError, TimeoutError)) and outages < OUTAGE_RETRIES:
+                    # A silent or broken route: give the range to the others and come back later.
+                    outages += 1
+                    pause = min(300, OUTAGE_PAUSE * 2 ** (outages - 1))
+                    worker.update(state="waiting", wait_until=time.time() + pause, error="no_connection")
+                    self.persist()
+                    await asyncio.sleep(pause)
+                    worker.update(state="running", wait_until=None, error=None)
+                    continue
+                reason = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
+                failed = self.chunk_failures.setdefault(task["low"], {})
+                failed[profile] = reason
+                # This account does not retry this range; the range stops once it failed on several accounts.
+                self.db.execute("DELETE FROM eligible WHERE low=? AND profile=?", (task["low"], profile))
+                if len(failed) >= POISON_ACCOUNTS:
+                    self.db.execute("UPDATE tasks SET phase='failed' WHERE low=?", (task["low"],))
+                errors += 1
+                if isinstance(exc, AUTHORIZATION_ERRORS + (OSError, ConnectionError, TimeoutError)) or errors > ACCOUNT_ERRORS:
+                    self.db.execute("DELETE FROM eligible WHERE profile=?", (profile,))
+                    self.db.commit()
+                    worker.update(state="failed", error=type(exc).__name__, reason=reason)
+                    return
+                self.db.commit()
+                continue
             finally:
                 temporary.unlink(missing_ok=True)
+            outages = errors = 0
             await asyncio.sleep(0)
 
     async def context(self, index, options):
@@ -488,6 +517,7 @@ class DistributedExport:
         lead = self.app_for(self.job["lead"]).state.collector
         try:
             await complete_in_thread(self.prepare_chunks)
+            self.chunk_failures = {}
             for worker in self.job["workers"]:
                 profile_id = worker["profile_id"]
                 if worker["state"] != "skipped" and profile_id not in self.entities:
@@ -516,6 +546,14 @@ class DistributedExport:
                         interrupted = True
                 if interrupted:
                     raise asyncio.CancelledError
+            stuck = self.db.execute("SELECT low, high FROM tasks WHERE phase='failed' ORDER BY low DESC").fetchall()
+            if stuck:
+                low, high = stuck[0]["low"], stuck[0]["high"]
+                reasons = sorted(set(self.chunk_failures.get(low, {}).values()))
+                raise ValueError("Message numbers " + str(low) + "–" + str(high) + (" and " + str(len(stuck) - 1)
+                                 + " more ranges" if len(stuck) > 1 else "") + " failed on " + str(POISON_ACCOUNTS)
+                                 + " different accounts (" + "; ".join(reasons) + "). The accounts were kept; "
+                                 "saved chunks are retained.")
             if self.db.execute("SELECT 1 FROM tasks WHERE phase!='done' LIMIT 1").fetchone():
                 raise ValueError("Some ranges could not be read. Saved chunks are retained; resume when accounts are available.")
             self.state["phase"] = "selecting"

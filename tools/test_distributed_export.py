@@ -572,6 +572,78 @@ def test_unfiltered_archive_keeps_number_analysis_and_rechecks_gaps(tmp_path, mo
     asyncio.run(scenario())
 
 
+class SilentClient(Client):
+    """A route that stops answering for the first `silent` history reads."""
+
+    def __init__(self, messages, silent):
+        super().__init__(messages)
+        self.silent = silent
+
+    def is_connected(self):
+        return True
+
+    async def iter_messages(self, entity, offset_id=0, min_id=0):
+        if self.silent:
+            self.silent -= 1
+            await asyncio.Event().wait()
+        async for m in super().iter_messages(entity, offset_id=offset_id, min_id=min_id):
+            yield m
+
+
+class BrokenRangeClient(Client):
+    def __init__(self, messages, broken):
+        super().__init__(messages)
+        self.broken = broken
+
+    async def iter_messages(self, entity, offset_id=0, min_id=0):
+        if min_id < self.broken < offset_id:
+            raise ValueError("Telegram returned an unusable answer")
+        async for m in super().iter_messages(entity, offset_id=offset_id, min_id=min_id):
+            yield m
+
+
+def test_silent_account_returns_its_range_and_comes_back(tmp_path, monkeypatch):
+    async def scenario():
+        rows = [message(i) for i in range(1, 9)]
+        manager, entries = coordinator(tmp_path, rows)
+        entries["account1"]["app"].state.collector.client = SilentClient(rows, silent=2)
+        monkeypatch.setattr(distributed_export, "CHUNK", 2)
+        monkeypatch.setattr(distributed_export, "PAGE_TIMEOUT", 0.2)
+        monkeypatch.setattr(distributed_export, "OUTAGE_PAUSE", 0.05)
+        monkeypatch.setattr(distributed_export.replica, "outbox", lambda *args: None)
+        try:
+            state = await manager.start(CHAT, list(entries), "account0")
+            await asyncio.wait_for(manager.task, 60)
+            assert manager.state["phase"] == "done", manager.state
+            assert all(w["state"] == "done" for w in manager.state["workers"]), manager.state["workers"]
+            with zipfile.ZipFile(manager.result_path(state["id"])) as archive:
+                assert {row["id"] for row in json.loads(archive.read("chat.json"))["messages"]} == set(range(1, 9))
+        finally:
+            await manager.close()
+            close_entries(entries)
+    asyncio.run(scenario())
+
+
+def test_range_failing_on_two_accounts_stops_without_losing_accounts(tmp_path, monkeypatch):
+    async def scenario():
+        rows = [message(i) for i in range(1, 9)]
+        manager, entries = coordinator(tmp_path, rows, count=3)
+        for entry in entries.values():
+            entry["app"].state.collector.client = BrokenRangeClient(rows, broken=3)
+        monkeypatch.setattr(distributed_export, "CHUNK", 2)
+        try:
+            await manager.start(CHAT, list(entries), "account0")
+            await asyncio.wait_for(manager.task, 60)
+            assert manager.state["phase"] == "failed", manager.state
+            assert "3–4" in manager.state["error"] and "unusable answer" in manager.state["error"], manager.state["error"]
+            assert all(w["state"] == "done" for w in manager.state["workers"]), manager.state["workers"]
+            assert manager.state["ranges_done"] == 3
+        finally:
+            await manager.close()
+            close_entries(entries)
+    asyncio.run(scenario())
+
+
 def test_ten_accounts_cover_chunks_once(tmp_path, monkeypatch):
     async def scenario():
         manager, entries = coordinator(tmp_path, [message(i) for i in range(1, 21)], count=10)
