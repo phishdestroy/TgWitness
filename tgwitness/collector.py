@@ -54,6 +54,10 @@ class AuthorizationRequired(ValueError):
     pass
 
 
+class ProtectedSession(ValueError):
+    """The request would end a Telegram session that this workspace cannot sign in again."""
+
+
 AUTHORIZATION_ERRORS = (AuthorizationRequired, AuthKeyDuplicatedError, AuthKeyInvalidError,
                         AuthKeyUnregisteredError, SessionExpiredError, SessionRevokedError,
                         UserDeactivatedBanError, UserDeactivatedError, FrozenMethodInvalidError)
@@ -754,10 +758,18 @@ class Collector:
         if candidate and candidate is not self.client:
             await candidate.disconnect()
 
+    def imported_session(self):
+        return (self.store.get_setting("account", None) or {}).get("key_origin") == "imported"
+
     @connection_change
     async def sign_out(self):
         if self.running:
             raise ValueError("Pause observation before signing out.")
+        if self.imported_session():
+            # Without the phone and a login code an imported session cannot be created again.
+            raise ProtectedSession("This session was imported. Signing out would end it in Telegram for good: "
+                                   "it cannot be signed in again without the phone and a login code. "
+                                   "Use Forget on this computer to remove it here and leave it active in Telegram.")
         await self.cancel_login()
         credentials = self.vault.read("credentials")
         if not credentials.get("session"):
@@ -790,6 +802,32 @@ class Collector:
             **({"error_type": error} if error else {}),
             "kept": "journal, sources, settings and signing key; only the same account can connect again"})
         return {"telegram_session_ended": ended, **({"error_type": error} if error else {})}
+
+    @connection_change
+    async def forget_session(self):
+        """Remove the session from this workspace without ending it in Telegram."""
+        if self.running:
+            raise ValueError("Pause observation before forgetting the session.")
+        await self.cancel_login()
+        credentials = self.vault.read("credentials")
+        if not credentials.get("session"):
+            raise ValueError("No Telegram account is connected.")
+        await self.avatar_history.close()
+        client, self.client = self.client, None
+        if client is not None:
+            try:
+                await client.disconnect()
+            except Exception:
+                pass
+        self.vault.save("credentials", {k: v for k, v in credentials.items() if k != "session"})
+        self.dialog_cache = {}
+        self.phase, self.last_error = "offline", None
+        self.authorization_required = False
+        account = self.store.get_setting("account", None) or {}
+        self.store.append("account.forgotten", {
+            "account_id": account.get("id"), "telegram_session_ended": False,
+            "kept": "journal, sources, settings and signing key; the session stays active in Telegram"})
+        return {"telegram_session_ended": False, "forgotten": True}
 
     def network_config(self):
         return saved_route(self.vault.read("network"))

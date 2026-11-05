@@ -30,7 +30,7 @@ from .history_options import HistoryOptions
 from .disclosure import Disclosures, DisclosurePolicy
 from .downloads import RetainedDownload, TemporaryDownload, build_file
 from .access import POLICY, AccessControl, AdminSettings, Console, GrantSettings, Refused, check as access_check
-from .collector import AUTHORIZATION_ERRORS, Collector
+from .collector import AUTHORIZATION_ERRORS, Collector, ProtectedSession
 from .demo import seed_demo
 from .evidence import LIMITS, checkpoint, encrypt_export, export_file, producer, retain_checkpoint, cleanup_exports
 from . import i18n
@@ -709,6 +709,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(400, "Telegram authorization expired. Sign in again.") from None
         except RPCError as exc:
             raise HTTPException(400, "Telegram rejected the request: " + type(exc).__name__) from None
+        except ProtectedSession as exc:
+            raise HTTPException(409, str(exc)) from None
         except ValueError as exc:
             raise HTTPException(400, str(exc)) from None
         except (TimeoutError, OSError, ConnectionError) as exc:
@@ -720,7 +722,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             require_live()
             if (app.state.collector.export_claim and getattr(call, "__name__", "") in {
                     "configure", "start_phone", "start_qr", "send_code", "confirm_code", "confirm_password",
-                    "sign_out", "set_network", "set_route_policy", "apply", "dialogs", "save_profile",
+                    "sign_out", "forget_session", "set_network", "set_route_policy", "apply", "dialogs", "save_profile",
                     "preview", "execute", "check_current", "test_network", "control"}):
                 raise HTTPException(409, "This account is busy. Pause its current task before another Telegram operation.")
             collector = app.state.collector
@@ -1454,6 +1456,10 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.post("/api/auth/logout", dependencies=[Depends(authenticate)])
     async def logout():
         return await operation(app.state.collector.sign_out)
+
+    @app.post("/api/auth/forget", dependencies=[Depends(authenticate)])
+    async def forget_session():
+        return await operation(app.state.collector.forget_session)
 
     @app.get("/api/dialogs", dependencies=[Depends(authenticate)])
     async def dialogs():

@@ -3971,7 +3971,10 @@ function renderConnection(){
     networkLoadedFor=state.profile;routeFields();
   }
   $("network-form").querySelector('[type="submit"]').disabled=state.status.demo||c.running;
-  $("network-test").disabled=state.status.demo;$("sign-out").disabled=state.status.demo;
+  $("network-test").disabled=state.status.demo;
+  const importedSession=(c.account||{}).key_origin==="imported";
+  $("sign-out").disabled=state.status.demo||importedSession;$("sign-out-locked").hidden=!importedSession;
+  $("forget-session").hidden=!importedSession;$("forget-session").disabled=state.status.demo;
   if(state.status.demo)$("proxy-catalog-refresh").disabled=true;
   $("proxy-catalog-apply").disabled=state.status.demo||c.running||!$("proxy-catalog-select").value;
   const summary=$("protection-summary");summary.replaceChildren();
@@ -4291,6 +4294,15 @@ $("sign-out").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   clearSecrets();await refreshStatus();setAuthStep("credentials");
   toast(tr(r.telegram_session_ended?"Signed out. Telegram ended the session.":
     "Signed out here. Telegram did not confirm: end the session in Telegram under Settings → Devices."),!r.telegram_session_ended);
+}));
+$("forget-session").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const owner=actionOwner();
+  if(state.status.collector.running){toast(tr("Pause observation before forgetting the session."),true);return;}
+  if(!(await askConfirm(tr("Forget this session on this computer? It stays active in Telegram. The journal, sources and signing key stay; only the same account can connect to this workspace again."),{confirmText:tr("Forget on this computer")})))return;
+  if(!owner.current())return;
+  await json("auth/forget",{},{profile:owner.profile,token:owner.token});
+  clearSecrets();await refreshStatus();setAuthStep("credentials");
+  toast(tr("Forgotten on this computer. The session is still active in Telegram."));
 }));
 
 const avatarCache=new Map();
