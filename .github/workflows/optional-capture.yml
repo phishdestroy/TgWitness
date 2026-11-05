@@ -24,6 +24,11 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m pip install --require-hashes -r deploy/browser.lock
+      - name: Permit Chromium user namespaces on the temporary hosted runner
+        run: |
+          if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+            sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          fi
       - run: docker compose --project-directory . -f addons/capture/compose.official.yaml --profile official config --quiet
       - run: docker build -f addons/capture/deploy/Dockerfile.official -t tgwitness-official-check .
       - run: python tools/check_official_container.py
@@ -39,6 +44,11 @@ jobs:
           python-version: "3.12"
       - run: python -m pip install --require-hashes -r deploy/browser.lock
       - run: python -m playwright install --with-deps chromium
+      - name: Permit Chromium user namespaces on the temporary hosted runner
+        run: |
+          if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+            sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          fi
       - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: python addons/capture/lock_from_project.py && git diff --exit-code -- addons/capture/requirements.lock
       - run: python -m pytest addons/capture/tests -q --capture-browser

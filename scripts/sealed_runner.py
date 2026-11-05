@@ -57,6 +57,10 @@ def helper(directory, name, arguments, extra_mounts=()):
 
 
 def start_official(directory, name, config):
+    # A fresh GitHub-hosted VM only: allow the unprivileged user namespace used
+    # by Chromium's sandbox. Never launch this client with --no-sandbox.
+    if Path("/proc/sys/kernel/apparmor_restrict_unprivileged_userns").exists():
+        command(["sudo", "sysctl", "-w", "kernel.apparmor_restrict_unprivileged_userns=0"])
     upstream = os.environ.get("OFFICIAL_PROXY_SERVER", "")
     parsed = urlsplit(upstream)
     if (parsed.scheme not in {"http", "socks5"} or not parsed.hostname or not parsed.port

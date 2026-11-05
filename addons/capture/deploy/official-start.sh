@@ -14,7 +14,7 @@ while [ ! -S /tmp/.X11-unix/X99 ]; do
   fi
   sleep 0.1
 done
-"$@" &
+"$@" <&0 &
 app_pid=$!
 trap 'kill -TERM "$app_pid" 2>/dev/null || true; wait "$app_pid" || true; kill "$display_pid" 2>/dev/null || true' HUP INT TERM
 wait "$app_pid"

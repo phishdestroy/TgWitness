@@ -4,9 +4,11 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 
 
 def main():
@@ -88,11 +90,15 @@ asyncio.run(main())
     network = "official-check-" + uuid.uuid4().hex[:12]
     subprocess.run(["docker", "network", "create", "--internal", network], check=True, capture_output=True)
     try:
-        subprocess.run(["docker", "run", "--rm", "--init", "-i", "--network", network,
+        result = subprocess.run(["docker", "run", "--rm", "--init", "-i", "--network", network,
                         "--user", str(os.getuid()) + ":" + str(os.getgid()), "--read-only", "--cap-drop=ALL",
                         "--security-opt=no-new-privileges", "--security-opt", "seccomp=" + str(ROOT / "addons/capture/deploy/official-seccomp.json"),
                         "--tmpfs", "/tmp:rw,nosuid,nodev,size=1g", "--shm-size=1g", "--pids-limit=512", "--memory=4g",
-                        args.image, "python", "-"], input=script, text=True, timeout=120, check=True)
+                        args.image, "python", "-"], input=script, text=True, timeout=120,
+                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=False)
+        print(result.stdout)
+        if result.returncode or "PASS: Chromium sandbox" not in result.stdout:
+            raise RuntimeError("Official container acceptance did not complete")
     finally:
         subprocess.run(["docker", "network", "rm", network], capture_output=True, check=False)
 
