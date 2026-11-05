@@ -2878,7 +2878,8 @@ class Collector:
 
             async def unparsed(number, error):
                 await write(None, unparsed_record(number, error))
-            await self.iterate_history(entity, write, on_unparsed=unparsed)
+            async with self.history_reader(entity) as (reader, wait):
+                await self.iterate_history(entity, write, on_unparsed=unparsed, client=reader, wait_time=wait)
         return count
 
     async def resolve_for_export(self, chat_id, username=None):
