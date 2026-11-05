@@ -4,6 +4,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/accou
 
 Eksport apa yang boleh dibaca oleh akaun sekarang: skop, kerja yang boleh disambung semula, arkib yang ditandatangani dan salinan perkongsian yang dimimumkan.
 
+Eksport akaun menempah akaun itu secara eksklusif. Jedakan pemantauan atau pengumpulan lain secara nyata sebelum memulakan atau menyambung; aplikasi tidak pernah menghentikannya secara automatik.
+
 Sebagai pentadbir pemasangan, pilih **Mula di sini → Eksport akaun saya**, atau **Eksport → Akaun Telegram → Konfigurasikan eksport akaun**. Log masuk jika perlu, semak skop, dan mulakan eksport secara eksplisit. Pemantauan berterusan tidak diperlukan. **Pemantauan yang disimpan** adalah eksport berasingan daripada jurnal sedia ada; jurnal tersebutZIP merangkumi semua sumber tanpa mengira penapis jurnal. Setiap ruang kerja mempunyai tugas, identiti tandatangan dan storan sendiri. Akses panel yang dikeluarkan, termasuk pemberian kuasa eksport biasa tanpa had, tidak dapat membuka laluan merentas akaun ini.
 
 Penapis penghantar dan teks berkembang di bawah **Tapis mengikut penghantar atau teks mesej**. **Data akaun & kaedah sambungan** mengandungi kategori akaun pilihan dan pilihan Eksport/sesi biasa; ringkasannya memaparkan pilihan aktif walaupun ditutup. Menutup bahagian ini mengekalkan tetapan mereka. Draf eksport dan laporan kekal dalam sesi panel semasa semasa menukar pandangan; ia tidak disimpan melalui muat semula pelayar. Tugas sedia ada kekal boleh diakses daripada mana-mana pilihan eksport.

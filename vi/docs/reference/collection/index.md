@@ -119,9 +119,11 @@ Các số thứ tự thể hiện thứ tự quan sát. Dấu thời gian UTC c�
 
 ## Các bản chụp lịch sử
 
-Một yêu cầu chụp nhanh sẽ lấy các tin nhắn mới nhất hiện có từ một nguồn đã được kích hoạt, tối đa 500 tin nhắn cho mỗi yêu cầu. Kết quả được gắn nhãn là các quan sát lịch sử. Chúng có thể trùng lặp với dữ liệu thu thập trực tiếp, và các quan sát lặp lại sẽ được lưu giữ dưới dạng các bản ghi riêng biệt.
+Bản chụp yêu cầu các tin nhắn mới nhất mà tài khoản thấy được từ nguồn đã bật, tối đa 500 tin mỗi yêu cầu. Kết quả được đánh dấu là quan sát lịch sử. Chụp thủ công giữ riêng một tài khoản rảnh; trước hết hãy chủ động tạm dừng giám sát. Các quan sát lặp lại được giữ thành bản ghi riêng.
 
 Các bản chụp nhanh tuân thủ chính sách đính kèm nhưng vẫn tách biệt với các chuyển đổi sự kiện trực tiếp. Chúng không khôi phục các tin nhắn đã bị xóa hoặc các phiên bản trung gian bị bỏ lỡ. Quý vị có thể yêu cầu tạo bản chụp nhanh khi quá trình đang tạm dừng; mọi tệp đính kèm được xếp hàng sẽ chờ cho đến khi quá trình quan sát bắt đầu và trình xử lý tải xuống được khởi chạy.
+
+Lượt chạy **Lịch sử** là tác vụ độc quyền riêng: đọc nguồn đã chọn và tải lần lượt các tệp đính kèm trong hàng đợi mà không khởi động giám sát. Tạm dừng sẽ giải phóng tài khoản; tiếp tục sẽ nối lại lượt chạy đã lưu. Để lọc ngày, ngôn ngữ và phản hồi trên nhiều tài khoản rảnh, xem [Xuất cuộc trò chuyện phân tán](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
 
 ## Xử lý tệp đính kèm
 

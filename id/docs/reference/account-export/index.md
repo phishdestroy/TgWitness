@@ -4,6 +4,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/accou
 
 Ekspor apa yang dapat dibaca oleh suatu akun saat ini: cakupan, tugas yang dapat dilanjutkan, arsip yang telah ditandatangani, dan salinan berbagi yang telah diminimalkan.
 
+Ekspor akun mencadangkan akun itu secara eksklusif. Jeda pemantauan atau pengambilan data lain secara eksplisit sebelum memulai atau melanjutkan; aplikasi tidak pernah menghentikannya otomatis.
+
 Sebagai administrator instalasi, pilih **Mulai di sini → Ekspor akun saya**, atau **Ekspor → Akun Telegram → Konfigurasi ekspor akun**. Masuk jika diperlukan, tinjau cakupan, dan mulai ekspor secara eksplisit. Pengamatan berkelanjutan tidak diperlukan. **"Pengamatan yang disimpan**" adalah ekspor terpisah dari jurnal yang ada; ZIP-nya mencakup semua sumber terlepas dari filter jurnal. Setiap ruang kerja memiliki tugas, identitas penandatanganan, dan penyimpanan sendiri. Akses panel yang diberikan, termasuk izin ekspor biasa tanpa batasan, tidak dapat membuka rute-rute yang berlaku untuk seluruh akun ini.
 
 Filter pengirim dan teks dapat diperluas di bawah **"Filter berdasarkan pengirim atau teks pesan**". Bagian "**Data akun & metode koneksi"** berisi kategori akun opsional dan pilihan "Takeout" atau "sesi reguler"; ringkasannya menampilkan pilihan yang aktif meskipun panel tersebut ditutup. Menutup bagian-bagian ini akan mempertahankan pengaturannya. Draf ekspor dan laporan tetap ada di sesi panel saat ini saat berpindah tampilan; draf tersebut tidak disimpan saat browser dimuat ulang. Pekerjaan yang sudah ada tetap dapat diakses dari kedua pilihan ekspor tersebut.

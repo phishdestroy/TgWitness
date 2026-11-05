@@ -4,7 +4,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/changelo
 
 Henüz yayınlanmamış değişiklikler de dahil olmak üzere, sürüm bazında yapılan tüm değişiklikler.
 
-## Unreleased
+## 0.9.0 preview · 4 November 2026
+
+- Reserve each account exclusively for monitoring, history or an export. Serialize Telegram RPCs and persist full FloodWait deadlines.
+- Add durable distributed chat exports with date/language/reply filters, bounded labelled context, signed chunks and explicit pause/resume. See [Distributed chat export](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
+- Keep account reservations until every export worker has stopped, including repeated pause requests and sibling worker failures. History loading in sealed sessions also reserves the account exclusively.
+- Add participant timelines from saved observations: names, membership, explicit deletion flags and message activity. Profile refreshes are bounded; optional presence recording preserves unavailable or expired status as unknown and does not attribute online activity to a chat.
+- Save, import and reuse report layout profiles without copying case details or report filters. Profiles are validated and isolated by workspace.
+- Automatically offload eligible attachments to configured external storage under disk pressure, with reserve-space checks, compression, optional encryption and full readback verification before local eviction. Journals remain local.
+- Make the recording settings and chat tabs fit narrow screens, including wider system fonts, and fix profile controls and localized labels.
+- Include reviewed website assets in source archives and verify conditional dependency versions in SBOM inventories.
+- Phala Cloud deployments work on Phala Cloud itself (first real run, 4 November 2026): the compose carries its name, Phala's own pre-launch script is kept out of the measured app-compose, the production OS image is chosen instead of Phala's development default, the instance ID is read from the CVM state, and restarts from the CVM's operations count in `provider_actions`. `tools/check_phala.py` simulates each of these.
+- `tdx_os` without outside tools: the verifier downloads the published dstack OS image once, matches it to the hash the CVM reports and computes MRTD and RTMR0-2 itself, the ACPI tables QEMU builds for the VM's shape included. A development image, other firmware, kernel, command line, memory, vCPUs or devices fail. Each journal start is checked the same way.
+- Attestation certificate for Phala deployments: `verify --report` also writes HTML and a signed PDF, sealed by a qualified eIDAS time stamp from the Belgian government's time-stamping authority, a FreeTSA time stamp and the verifier's own key; `check-report` checks the seal.
+- Quick tunnel addresses are also posted signed with the collector key, so a verifier is not misled by forged posts on the address topic; on Phala Cloud the tunnel check passes, since its connector runs inside the measured compose.
 
 ## 0.8.1 preview · 2 November 2026
 
@@ -69,7 +82,7 @@ Henüz yayınlanmamış değişiklikler de dahil olmak üzere, sürüm bazında 
 
 - **Start here** with two paths: export my account, or follow an investigation.
 - Account export through Telegram Takeout or the regular API, resumable, with signed progress and coverage records ([account export](https://phishdestroy.github.io/TgWitness/tr/docs/reference/account-export/)).
-- Separate signed sharing copies with filters, pseudonyms and optional text/file removal. Signatures prove integrity, not authorship or admissibility.
+- Separate signed sharing copies with filters, pseudonyms and optional text/file removal. Signatures establish integrity; they do not establish Telegram authorship, completeness or legal admissibility.
 - Readable offline reports for account exports and sharing copies, printable, with record links and instructions for the recipient.
 - Clear handoff after download: original vs sharing copy, report preview, instructions to copy.
 - Rejected Telegram logins are told apart from paused accounts and network errors. **Sign in again** keeps the workspace.

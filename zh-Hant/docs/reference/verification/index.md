@@ -4,6 +4,51 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 Telegram 即時測試、自動化檢查、瀏覽器檢查，以及尚未經核實的內容。
 
+## Phala Cloud 即時部署 · 2026 年 11 月 4 日
+
+`--provider phala --quick-tunnel` 針對真實的 **Phala Cloud**（`tdx.small`，區域 US-WEST-1）進行執行，使用空工作區的 Phala Cloud API 金鑰、真實的 ntfy.sh、GitHub 及 Intel PCS。 該 CVM 安裝了提交 `df7d860c`（v0.8.1）；部署、驗證和銷毀操作均透過命令 列執行，並採用了以下修正方案。七台 CVM 的總費用約為 1.9 美分。
+
+前兩次部署發現與模擬的 Phala Cloud 有五處差異。 [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) 現已能重現每項差異，若未進行修正則會失敗：
+
+| 在 Phala Cloud 上 | 修正前 | 修正 |
+| --- | --- | --- |
+| 必須指定 `compose_file.name` | HTTP 422 錯誤，未建立任何內容 | Docker Compose 配置中包含 CVM 名稱 |
+| 除非指定為空，否則 Phala 會將其自身的啟動前腳本新增至被測的 app-compose 中（v0.0.20：Docker 登入、`docker compose pull`、root 密碼、來自 `user_config` 的 SSH 金鑰） | `tdx_compose` 失敗：程式碼超出已發佈的 Docker Compose 配置範圍 | app-compose 將 `pre_launch_script` 設定為 `""`；Phala 隨後會將其省略 |
+| 若未指定 `image`，Phala 會預設選用 `dstack-dev-0.5.12`（開發版），且此版本已啟用 SSH 存取權限 | `server_state` 失敗。此映像僅有硬體驗證記錄通過；僅供應商記錄與 `tdx_os` 顯示此結果 | 部署過程會要求使用 Phala 當前版本（`dstack-0.5.12`）的生產環境建置版本 |
+| 當 dstack 閘道器關閉時，CVM 詳細資訊中永遠不會出現 `instance_id` | 部署等待 30 分鐘後失敗 | 實例 ID 取自 CVM 狀態 |
+| 重新啟動、停止及啟動均屬 CVM 操作，而非應用程式版本更新 | `provider_actions` 未列出重新啟動紀錄 | 這些操作也包含讀取操作 |
+
+第三次部署：
+
+- 該 CVM 在關閉 SSH 存取的情況下執行 `dstack-0.5.12`。收集器在建立後約 1.5 分鐘發布其簽名位址。部署後通過 `tdx_binding`、`tdx_quote`（Intel TCB UpToDate、硬體驗證記錄 v4、FMSPC `20a06f000000`、非除錯模式、不可遷移、支援從 Intel 擷取的 加密驗證資料）、`tdx_compose_hash`、`tdx_compose`（逐位元組）以及 `tdx_identity`（KMS 金鑰）。
+- 位於 trycloudflare.com 網址的控制面板在未提供令牌或提供錯誤令牌時會返回 401 狀態碼， 而使用控制面板令牌時則會返回 200 狀態碼。
+- `verify` 搭配 `--source` 設定為 GitHub 的提交存檔，且指紋已 另行通過：伺服器、`server_state`、防火牆（無閘道、無公開端點）、供應商日誌、 帳單明細、指紋、來源雜湊、開機，以及五項 `tdx_*` 檢查均通過。 Cloudflare 及 `tdx_os` 無法取得，因此結果為「不完整」。
+- 透過 Phala 的 API 執行兩次重新啟動：每次 CVM 都在兩分鐘內恢復運作，並使用 相同的收集器金鑰、新的簽名位址，而舊的位址則回傳 530 狀態碼。`verify` 將 新的開機及兩次重新啟動皆報告為 REVIEW。 透過 `--evidence`，系統確認了日誌 簽名以及三次啟動，每次皆擁有來自同一 CVM 的獨立 Intel TDX 硬體驗證記錄。
+- `destroy` 僅移除了該 CVM。隨後工作區變為空狀態，且控制台網址停止 回應。
+- 控制台精靈的價格查詢顯示 `tdx.small`，每小時 0.058 美元。若輸入錯誤的金鑰，則會顯示 「未接受該 API 金鑰」的純文字訊息。
+
+另有兩項發現，已於事後修正：
+
+- 若無地址金鑰，`verify` 會遵循關於地址主題的最新且格式正確的貼文， 該貼文印在已發佈的 Docker Compose 配置中。一則偽造的貼文將其傳送至一個不 存在的宿主，導致 `statement` 失敗：偽造者無法冒充收集器，但能阻擋 第三方驗證，透過偽造的未來時間戳記，最長可阻擋長達 12 小時。收集器現在 也會發佈以其自身金鑰簽署的地址，當 收集器發佈此類貼文時，`verify` 僅接受此類貼文，且貼文會依照 ntfy.sh 的接收時間排序。 [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) 會重播這些偽造的發布。CVM 僅會從包含此程式碼的提交中執行此程式，因此本次執行的收集器尚未簽署其地址， 而 `verify` 亦已指出此情況。
+- `tdx_os` 原先依賴 `dstack-mr`，而該工具目前的版本提供的是 `measure-os`，並非文件中提到的 `measure --json`。驗證器現在會根據已發布的映像檔和虛擬機器設定（包含 ACPI 表格）自行計算 MRTD 和 RTMR0-2。
+
+第四次部署包含以下項目：
+
+- 部署程序曾一次下載已發佈的 `dstack-0.5.12`，並將其與 CVM 回報的作業系統映像雜湊值進行比對，而 `tdx_os` 通過驗證：MRTD、RTMR0、RTMR1 及 RTMR2 均等於針對 QEMU 8.2.2、1 個 vCPU 及 2 GiB 所計算的數值相符。然而，針對聲稱具備 4 GiB、2 個 vCPU、 QEMU 9.2.1 或第二張網路卡的配置，相同計算方式得出的 RTMR0 數值則不同；若內核、韌體或命令列 發生變更，以及針對開發版映像，驗證均會失敗。
+- `verify` 通過了全部 16 項檢查（包含快速隧道連接器），因此結果 為「通過」。 它寫入了 HTML 和 PDF 憑證，並以數位印章加蓋簽名與時間戳記，其中包含來自 比利時政府時間戳記單位 TSU 202301（已列入比利時可信 清單）的合格 eIDAS 時間戳記、FreeTSA 時間戳記以及驗證者的簽名；`check-report` 確認了所有這些 內容以及 PDF 文件的簽名。
+- 重新啟動後，`verify --evidence` 確認了兩次啟動，每次均伴隨在 CVM 內部生成的硬體驗證，且每次 皆從已發佈的 `dstack-0.5.12` 啟動；重新啟動與新一次的啟動均為 REVIEW 狀態。
+- `destroy` 使工作區保持空置狀態。
+
+第五次部署執行了來自提交 `53a0f7e9` 的收集器，該提交包含上述所有內容：
+
+- 該收集器在其地址旁發布了以自身金鑰簽署的地址，緊鄰操作員的 HMAC 貼文。 隨後，該主題中新增了兩則偽造貼文，一則 HMAC 值為零，另一則由另一把 Ed25519 金鑰簽署，兩者均聲稱時間為 2096 年。 `verify` 採用由 收集器金鑰簽署的地址，並通過了全部 16 項驗證；該印章再次附有符合資格的比利時時間戳記、 FreeTSA 的時間戳記以及驗證者的簽名，而 `check-report` 則確認了這些資訊。
+- 重新啟動後，收集器發佈了經簽名的全新位址：`verify` 立即偵測到該位址， 營運商的 **透過 HMAC 發佈，於 27 秒後偵測到當前位址**，兩者均忽略了 偽造的發佈。`verify --evidence` 確認有兩台裝置從 `dstack-0.5.12` 啟動。
+- 部署過程列出了 Phala 向 CVM 收取的費用（含磁碟空間）：每小時 0.06078 美元。
+
+面板精靈在 Phala Cloud 上執行了兩次，一次透過其工作 API，另一次則透過 搭載真實 Chromium 核心的瀏覽器：價格查核、以 **Advanced** 為提交標籤進行建立，全部六項 驗證檢查均通過，伺服器清單顯示計費價格（每月 44.37 美元）， **Find 當前位址**、下載已量測的 Docker Compose 配置，以及刪除操作。瀏覽器未出現任何頁面錯誤。 每次操作結束後，工作區均呈空狀態。
+
+未涵蓋項目：Phala 上的 Cloudflare 網域、CVM 上的 Telegram 帳戶，以及 `dstack-0.6.1` 映像檔。由於其 API 僅針對現有 CVM 列出磁碟 費用，因此精靈在建立前的報價僅包含 Phala 的運算費用；伺服器清單則顯示建立後的實際計費金額。
+
 ## Live server journal inventory · 1 November 2026
 
 At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.

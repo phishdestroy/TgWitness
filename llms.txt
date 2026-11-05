@@ -8,7 +8,7 @@ Signed exports let recipients verify file integrity and the signing key offline.
 
 The panel brings together isolated account workspaces, supported session imports, parallel chat export, cross-chat people profiles, observed name changes, bot-button interaction receipts, saved attachments and offline HTML/JSON evidence. Case Board keeps team annotations linked to saved records. The report studio offers eight designs, content choices and a data preview; minimized sharing copies control what recipients receive. Optional witnesses, timestamps and encrypted off-site copies add records outside the local journal. Archive search, AI analysis, OCR, transcription, MCP and signed webhooks work with the records you have collected.
 
-These guides track the `main` source branch. The project version is `0.8.1`; check the changelog and release notes before assuming a source feature is included in a downloaded package.
+These guides track the `main` source branch. The project version is `0.9.0`; check the changelog and release notes before assuming a source feature is included in a downloaded package.
 
 Choose an entry below for the exact workflow, commands and limits. Each guide has a Markdown edition; its canonical HTML page retains diagrams, animations and interactive examples. Translated pages also expose Markdown through `rel=alternate` links.
 

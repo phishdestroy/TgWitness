@@ -16,6 +16,18 @@ Alan boşaltma işlemi, imzalanmış günlüğü asla silmez veya yeniden yazmaz
 
 Yükleme yanıtı tek başına bir dosyayı silme izni değildir. TgWitness, şifrelenmiş nesnenin tamamını indirir, boyutunu doğrular ve SHA-256, makbuzu kaydeder, ardından silme işleminden hemen önce yerel baytları tekrar kontrol eder. Yükleme hatası, farklı geri okuma sonucu veya iptal edilen aktarım durumunda yerel dosya yerinde kalır. Eğer etkinleştirilmiş kanıt yedeklemesi o dosyayı henüz kopyalamamışsa, silme işlemi de yedeklemeyi bekler.
 
+## Disk dolmaya başladığında
+
+Boş alan **Parametreler → Ekler → boş disk alanı** değerinin (varsayılan 1 GiB) altına indiğinde ek indirmeleri duraklar; kuyruk korunur. Metin gözlemleri sürer. Bu, bildirim ayarlarından bağımsızdır: bildirimleri kapatmak indirme rezervini veya depolama korumalarını kapatmaz.
+
+Daha erken müdahale için **Otomatik çalıştır** seçeneğini açın, **Yer açmak için yerel dosyayı kaldır** seçeneğini belirleyin ve **Disk alanı azaldığında ek bir aktarım başlat** seçeneğini açın. İsteğe bağlı kural varsayılan olarak boş alan 5120 MiB altına indiğinde başlar ve 10240 MiB boşalana kadar gruplar halinde sürer. Her iki eşik ayarlanabilir. Elle çalıştırmayla aynı hedefi, asgari dosya yaşını, grup sınırını, tam geri okuma doğrulamasını ve kanıt yedekleme önkoşullarını kullanır. Bir hedefi kendiliğinden etkinleştirmez. Her 30 saniyede kontrol eder; hata veya ilerleme olmaması sonraki denemeyi beş dakika geciktirir. Durum ve yeniden deneme zamanı yeniden başlatmada korunur. Kural etkin değilken planlı çalışmalar normal aralıklarını kullanır.
+
+Panel boş alanı, paketleme rezervini, kuralın hazır olup olmadığını ve geçici alan yetersizliğinden atlanan dosyaları gösterir. Paketleme ve geri yükleme, başlamadan önce en yüksek geçici alan gereksinimini, yazarken de kullanılabilir alanı kontrol eder. Yapılandırılan indirme rezervi kullanılır; depolama işlemleri için en az 64 MiB ayrılır. Bu kontroller dosya sistemi kotası değildir; başka bir işlem kontroller arasında alan tüketebilir.
+
+Gzip uzak nesneleri kayıpsız sıkıştırır; etkin günlüğü küçültmez veya yerel arşiv oluşturmaz. JPEG, video ve ZIP dosyaları çok az küçülebilir ya da biraz büyüyebilir. Sıkıştırma açıkken paketleme geçici olarak ek boyutunun yaklaşık iki katı ve rezerv kadar alan gerektirebilir. En büyük dosyalarınız için yeterince erken bir başlangıç eşiği seçin. Hazırlanamayacak kadar büyük dosya korunur ve bildirilir; küçük dosyalar ve önceden doğrulanmış uzak kopyalar yine alan açabilir. Doğrulanmış bir kopya varsa yeni bir paketleme dosyası oluşturmadan yerel dosya kaldırılabilir. Geri yükleme de geçici alan ister ve yer açılana kadar reddedilebilir.
+
+Taşınmaya uygun dosya yoksa veya hedef yapılandırılmamışsa TgWitness otomatik yer açamaz. Depolama yönetimi imzalı günlüğü asla budamaz veya yeniden yazmaz. Yeni metin gözlemleri için hâlâ alan gerekir.
+
 ## Bir hedef bağlayın
 
 **Ekstra → Depolama ve disk alanı → Depolamayı yönet** bölümünden görevi ve hedefi seçin, kaydedin, ardından **Yükleme ve indirmeyi test et** seçeneğini seçin. Test, küçük bir rastgele deneme verisini yükler ve geri okur. Telegram içeriği kullanmaz.

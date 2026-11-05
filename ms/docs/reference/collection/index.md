@@ -119,9 +119,11 @@ Nombor urutan menyatakan susunan pemerhatian. Cap masa UTC pengumpul adalah jam 
 
 ## Snapshot sejarah
 
-Satu snapshot meminta mesej terkini yang boleh dilihat daripada sumber yang diaktifkan, sehingga 500 setiap permintaan. Keputusan dilabel sebagai pemerhatian sejarah. Ia boleh tumpang tindih dengan tangkapan langsung, dan pemerhatian berulang disimpan sebagai rekod berasingan.
+Petikan meminta mesej terkini yang kelihatan daripada sumber diaktifkan, sehingga 500 setiap permintaan. Hasil dilabel sebagai pemerhatian sejarah. Petikan manual menempah akaun terbiar; jedakan pemantauan secara nyata terlebih dahulu. Pemerhatian berulang disimpan sebagai rekod berasingan.
 
 Snapshot mematuhi dasar lampiran tetapi kekal berasingan daripada suis acara langsung. Ia tidak membina semula mesej yang telah dipadam atau versi perantaraan yang terlepas. Anda boleh meminta satu semasa berehat; sebarang lampiran yang ia susun menunggu sehingga pemerhatian bermula dan pekerja muat turun berjalan.
+
+Proses **Sejarah** ialah tugas eksklusif berasingan: membaca sumber dipilih dan memuat turun lampiran dalam gilirannya secara berturutan tanpa memulakan pemantauan. Jeda melepaskan akaun; sambung meneruskan proses tersimpan. Untuk penapis tarikh, bahasa dan balasan merentas beberapa akaun terbiar, lihat [Eksport sembang teragih](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
 
 ## Pengendalian lampiran
 

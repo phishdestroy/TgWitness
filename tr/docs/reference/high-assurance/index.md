@@ -44,7 +44,7 @@ Ana bilgisayar ölçümleri (SSH dinleyicileri ve işlemleri, mevcut oturumlar, 
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` salt okunur kapsamlar | Hesap olayları, güvenlik duvarı kural sürümleri | 90 gün |
 | `vultr` | `VULTR_API_KEY` | Okuma erişimi olan ve `activity_logs` izin | Hesap etkinlik günlüğü (yöntem, yol, aktör) | 30 gün; denetim günlüğü aboneliği ile daha uzun süre |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | CloudTrail olay geçmişi | 90 gün |
-| `phala` | `PHALA_CLOUD_API_KEY` | Aynı çalışma alanına ait bir API anahtarı | Uygulama güncellemeleri: kod ve ortam değişiklikleri, yeniden başlatmalar, işletim sistemi yükseltmeleri | Uygulama mevcut olduğu sürece |
+| `phala` | `PHALA_CLOUD_API_KEY` | Aynı çalışma alanına ait bir API anahtarı | Uygulama revizyonları ve CVM işlemleri: Docker Compose yapılandırması ve ortam değişiklikleri, yeniden başlatmalar, işletim sistemi yükseltmeleri | Uygulama mevcut olduğu sürece |
 | `generic` | yok | yok | yok: **kendi kendini doğrulamış** | – |
 
 Her vaka için ayrı bir proje, ekip, hesap veya alt hesap kullanın: doğrulayıcının salt okunur erişimi, yalnızca bu dağıtımı gösterir. Kimlik bilgileri, `--provider-token-file` yukarıdaki değişkenden okunur, asla komut satırından okunmaz. AWS için dosya şunu içerir `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; bölge `--location`.
@@ -62,9 +62,11 @@ Toplayıcı `--provider phala` toplayıcı, dstack tarafından yönetilen [Phala
 | `tdx_compose_hash` | dstack olay günlüğünden yeniden oynatılan RTMR3, toplayıcının raporladığı uygulama oluşturma işlemlerini ölçer. |
 | `tdx_compose` | Bu kod, dağıtılan commit'in derlediği kodun bayt bayt aynısıdır: kaynak dosyalar hash ile, her iki görüntü de özet ile sabitlenmiştir; başka hiçbir kod yoktur. |
 | `tdx_identity` | Doğrulama, Phala'nın KMS'sinden alınan anahtarlar ve şifrelenmiş bir disk ile birlikte, devreye alınmış uygulama ve örneğinden sağlanır. |
-| `tdx_os` | Burada `--tdx-measurements`, MRTD ve RTMR0-2, dstack işletim sistemi görüntüsünden hesaplanan değerlere eşittir (`dstack-mr measure --json`) |
+| `tdx_os` | MRTD ve RTMR0-2, doğrulayıcının Dstack-TEE tarafından yayınlanan dstack işletim sistemi görüntüsünden hesapladığı değerlere eşittir; bu değerler, CVM'nin bildirdiği işletim sistemi görüntüsü hash'i ve QEMU'nun sanal makinenin yapısı için oluşturduğu ACPI tablolarından elde edilir: bellenim, çekirdek, initrd, kök dosya sistemi hash'ini içeren komut satırı, bellek, vCPU'lar ve aygıtlar. Bir geliştirme görüntüsü başarısız olur |
 
-Günlüğe kaydedilen her toplayıcı başlatma işlemi böyle bir onay içerir, bu nedenle `verify --evidence` her başlatma kontrol edilir. Phala’nın uygulama revizyon listesi, sağlayıcı günlüğü işlevi görür: dağıtımdan sonra oluşturma işlemi değiştiyse, rapor başarısız olur.
+İşletim sistemi görüntüsü (yaklaşık 180 MB, bunun 21 MB'si saklanır) bir kez [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) adresinden kayıtın yanındaki `dstack-images` konumuna indirilir; `--tdx-image FOLDER` başka bir klasör veya açılmış bir görüntü kullanır, `--tdx-image none` karşılaştırmayı atlar. Ölçüm, Dstack-TEE/dstack dizininden alınan `dstack-mr` ve `qemu-acpi` Rust paketini takip eder; `tools/check_dstack_image.py`, bunu QEMU’nun kendi ACPI çıktısıyla ve gerçek bir Phala Cloud donanım doğrulama kaydıyla karşılaştırır; `--live` ise yayınlanmış görüntüyle de karşılaştırır. `--tdx-measurements` ise MRTD ve RTMR0-2 değerlerini JSON formatında karşılaştırmaya devam eder.
+
+Günlüğe kaydedilen her toplayıcı başlatma işlemi böyle bir doğrulama içerir, bu nedenle `verify --evidence` her başlatma işlemini ve önyüklenen işletim sistemi görüntüsünü kontrol eder. Phala'nın uygulama revizyonları ve CVM'nin işlemleri sağlayıcı günlüğü işlevi görür: dağıtımdan sonra değiştirilen bir Docker Compose yapılandırması raporun geçersiz kalmasına neden olur ve yeniden başlatmalar inceleme için listelenir.
 
 Panelde **Ekstra** → **7/24 Sunucu** altından **Gizli sanal makine · Phala Cloud** seçeneğini seçin ve bir Phala Cloud API anahtarını yapıştırın; hızlı tünel, Hetzner'da olduğu gibi çalışır. Komut satırından:
 
@@ -74,12 +76,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` Intel'in sertifikalarını ve iptal listelerini Intel'den indirmek yerine bir dosyadan okur. Gateway DNS burada kullanılamaz: Phala'da giden trafik için sağlayıcı güvenlik duvarı bulunmamaktadır.
 
+### Doğrulama sertifikası
+
+Bir Phala dağıtımı için `verify --report certificate.md` ayrıca sertifikayı da yazar: bağımsız bir `certificate.html` ve bir A4 `certificate.pdf` dosyası; bu dosyalarda karar, Intel'in kök sertifikasından toplayıcı anahtarına kadar uzanan güven zinciri, standart ve yüksek güvenilirlikli sunucularla karşılaştırma, yayınlanan görüntüden hesaplanan değerlerin yanındaki ölçümler, her bir bölümün garantörleri, Intel sertifika zinciri, her kontrol, sağlayıcı günlüğü ve doğrulamanın nasıl tekrarlanacağı yer alır. JSON raporu resmi kayıt olarak kalır; sayfalar bunu görüntüler.
+
+Rapor, `certificate.seal.json` dosyasında ve yanındaki `.tsq`/`.tsr` dosyalarında imzalar ve zaman damgaları ile dijital olarak mühürlenmiştir:
+
+| Seal | Neler ekliyor? |
+| --- | --- |
+| Nitelikli elektronik zaman damgası, `http://tsa.belgium.be/connect` | Belçika federal hükümetinin nitelikli güven hizmeti sağlayıcısından (FPS Policy and Support, BOSA) alınan `certificate.json`'in tam baytları üzerinde RFC 3161 zaman damgası. Bu birim, Belçika'nın AB güvenilir listesinde nitelikli zaman damgası hizmeti olarak, "onaylanmış" statüsüyle listelenmiştir; kök (Belçika Kök CA6) ve listenin girişleri, 20 Ekim 2026 tarihinde yayınlanan listeye göre, `tgwitness/tsa_roots.py`'te sabitlenmiştir. (AB) 910/2014 sayılı Tüzüğün 41. maddesi uyarınca, bu tür bir zaman damgası, tarih ve saat açısından ve verilerin bütünlüğü açısından her AB üye devletinde doğru kabul edilir. |
+| RFC 3161 zaman damgası, FreeTSA | İkinci, bağımsız bir zaman damgası |
+| Doğrulayıcı imzası | Ed25519, raporun SHA-256 değerini ve her zaman damgasını belirten bir ifade üzerinde, doğrulayıcının kendi anahtarıyla (`--sign-with FOLDER`, varsayılan `~/.tgwitness/verifier`) uygulanır; PDF dosyası aynı anahtarla imzalanır |
+
+`--timestamp URL` (tekrarlanabilir) diğer yetkilileri seçer, `--timestamp none` hiçbirini seçmez, `--sign-with
+none` mührü imzasız bırakır. `check-report`, raporun hash değerini, doğrulayıcı imzasını, her zaman damgasını güvenilir bir kök sertifikaya ve onun nitelikli durumuna göre kontrol eder ve PDF'nin imzasını doğrular. AB dışında nitelikli bir zaman damgasının ve raporun bir bütün olarak hukuki geçerliliği, raporu alan mahkeme veya yetkili kuruma bağlıdır; mühür, raporun ne zaman mevcut olduğunu ve değiştirilmediğini gösterir.
+
 Bir doğrulama, Intel’in TDX modülünde veya mikro kodunda bir kusuru ya da bellek veriyoluna fiziksel erişimi dışlayamaz. Phala’nın hesabındaki uygulamayı kontrol eden kişi, başka bir “compose” dağıtabilir; bu, yeni bir “compose” hash’iyle yeni bir revizyon olarak görünür. Ana bilgisayar, makinenin zaman kaynağını ve ağını kontrol eder.
+
+Dağıtım, `--evidence` ile doğrulama, yeniden başlatmalar, işletim sistemi görüntüsü karşılaştırması, imzalar ve zaman damgalarıyla dijital olarak mühürlenmiş sertifika ve imha işlemleri Phala Cloud üzerinde gerçekleştirilmiştir; bkz. [, 4 Kasım 2026 tarihli çalıştırma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026).
 
 ## Başlamadan önce
 
@@ -110,7 +130,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 Sunucuda, cloudflared panele bir [hızlı tünel](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/) açar: bu, `https://….trycloudflare.com` adres açar; bu adres, cloudflared veya sunucu yeniden başlatıldığında değişir. Sunucudaki küçük bir hizmet, her adresi rastgele bir ntfy.sh konusuna gönderir; bu adres, yalnızca dağıtım dizininde bulunan bir anahtarla (HMAC-SHA256) imzalanır (`address-key.txt`) ve ntfy.sh gönderileri 12 saat boyunca sakladığı için bunu her üç saatte bir tekrarlar. `deploy` **Güncel adresi bul**, yalnızca imzalı gönderileri kabul eder; bu sayede sahte bir gönderi, sizi ve panel jetonunuzu başka birinin adresine yönlendiremez. Konu, kayıtta ve yayınlanan cloud-init'te bulunur: bunlara sahip olan herkes, hâlâ panel jetonunu isteyen güncel adresi okuyabilir. Sunucu, her iki durumda da gelen bağlantı noktası açmaz.
 
-Maliyeti: Hiçbir Cloudflare hesabı hızlı tünelin kayıtlarını tutmaz, bu nedenle `verify` raporlar tünel, konektör ve DNS kontrolünü kullanılamaz olarak gösterir ve sonuç en iyi ihtimalle `incomplete`; sağlayıcı kayıtları, güvenlik duvarı, imzalı beyan, ana bilgisayar ölçümleri ve yükleyici karşılaştırması her zamanki gibi kontrol edilir. Referans yükleyiciyle yapılan bayt karşılaştırması, bunu zaten bilen bir dağıtılmış taahhüt gerektirir `--quick-tunnel`; 0.7.0 sürümünden alınan kod, etki alanı yükleyicisini derler ve farkı bildirir. Cloudflare, hızlı tünellere çalışma süresi garantisi vermez, 200 istek izin verir ve Sunucu Tarafından Gönderilen Olayları (Server-Sent Events) taşımaz; bu nedenle panelin canlı güncellemeleri (0.7.0'dan sonraki sürümler) bu yolla ulaşmayabilir ve sayfanın yeniden yüklenmesi gerekebilir; bu kısım denenmemiştir. Kalıcı olması gereken bir durum için kendi etki alanınızı kullanın.
+Bir doğrulayıcının adres anahtarı yoktur ve konuyu okuyan herkes bu konuya gönderi yapabilir. Bu nedenle toplayıcı kendi Ed25519 anahtarıyla imzalanmış adresi de yayınlar ve `verify`, dağıtım kaydında toplayıcı anahtarıyla imzalanmış en yeni gönderiyi alır; gönderiler, iddia ettikleri zamana göre değil, ntfy.sh'nin onları aldığı zamana göre sıralanır. Bu değişiklikten önceki bir toplayıcı hiçbir şeyi imzalamaz ve `verify` daha sonra en yeni gönderiyi alır ve bunu `statement` kontrolünde belirtir; sahte bir gönderi sadece bu kontrolün başarısız olmasına neden olabilir, çünkü adres yine de toplayıcının anahtarıyla yanıt vermelidir.
+
+Maliyeti: Hiçbir Cloudflare hesabı hızlı tünelin kayıtlarını tutmaz, bu nedenle `verify`, tünel, konektör ve DNS kontrolünü kullanılamaz olarak bildirir ve sonuç en iyi ihtimalle `incomplete` olur (Phala Cloud'da ise kontrol başarılı olur: konektör, ölçülen Docker Compose yapılandırması içinde çalışır); sağlayıcı kayıtları, güvenlik duvarı, imzalı beyan, ana bilgisayar ölçümleri ve yükleyici karşılaştırması her zamanki gibi kontrol edilir. Referans yükleyiciyle yapılan bayt karşılaştırması, `--quick-tunnel`'i zaten tanıyan dağıtılmış bir commit gerektirir; 0.7.0 sürümünden yapılan bir checkout, etki alanı yükleyicisini oluşturur ve farkı bildirir. Cloudflare, hızlı tünellere çalışma süresi garantisi vermez, işlem sırasında 200 istek izin verir ve Server-Sent Events'i taşımaz; bu nedenle panelin canlı güncellemeleri (0.7.0'dan sonraki sürümler) bu tünel üzerinden gelmeyebilir ve sayfanın yeniden yüklenmesi gerekebilir; bu kısım henüz denenmemiştir. Kesintisiz çalışması gerekli bir durum için kendi etki alanınızı kullanın.
 
 ## Dağıtım
 

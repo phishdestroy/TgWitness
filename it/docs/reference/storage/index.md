@@ -16,6 +16,18 @@ La liberazione di spazio non elimina né sovrascrive mai il registro firmato. Og
 
 Una risposta di caricamento da sola non costituisce autorizzazione alla cancellazione di un file. TgWitness scarica l’oggetto crittografato completo e ne verifica le dimensioni; SHA-256 salva la ricevuta, quindi ricontrolla immediatamente i byte locali prima della rimozione. Un errore di caricamento, una lettura diversa o un trasferimento annullato lasciano il file locale al suo posto. Se un backup delle prove abilitato non ha ancora copiato quel file, anche la rimozione attende che ciò avvenga.
 
+## Quando il disco si sta riempiendo
+
+Il download degli allegati si sospende sotto il valore di **Parametri → Allegati → spazio libero su disco** (1 GiB predefinito), mantenendo la coda. Le osservazioni testuali continuano. Questo non dipende dalle notifiche: disattivarle non disabilita la riserva per i download o le protezioni dello spazio di archiviazione.
+
+Per intervenire prima, abilita **Esegui automaticamente**, scegli **Rimuovi il file locale per liberare spazio** e abilita **Avvia un trasferimento aggiuntivo quando lo spazio è scarso**. La regola facoltativa parte sotto 5120 MiB liberi e procede per lotti fino a 10240 MiB, per impostazione predefinita. Entrambe le soglie sono configurabili. Destinazione, età minima dei file, limite del lotto, verifica tramite rilettura completa e requisiti di backup delle prove sono gli stessi dell’esecuzione manuale. La regola non abilita autonomamente una destinazione. I controlli avvengono ogni 30 secondi; errori o mancati progressi rimandano il tentativo successivo di cinque minuti. Stato e orario del tentativo sopravvivono al riavvio. Quando la regola è inattiva, le esecuzioni pianificate mantengono l’intervallo normale.
+
+Il pannello mostra spazio libero, riserva di preparazione, stato della regola e file saltati per spazio temporaneo insufficiente. Preparazione e ripristino verificano il fabbisogno massimo di spazio temporaneo prima di iniziare e lo spazio disponibile durante la scrittura. Vale la riserva configurata per i download, con un minimo di 64 MiB per le operazioni di archiviazione. Non è una quota del filesystem: altri processi possono consumare spazio tra i controlli.
+
+Gzip comprime senza perdita gli oggetti remoti; non riduce il registro attivo né crea archivi locali. JPEG, video e ZIP possono ridursi appena o aumentare leggermente. Con la compressione, la preparazione può richiedere temporaneamente circa il doppio della dimensione dell’allegato più la riserva. Scegli una soglia tempestiva per i file più grandi. Un file troppo grande viene conservato e segnalato; file più piccoli e copie remote già verificate possono ancora liberare spazio. Una copia verificata permette di rimuovere il file locale senza un altro file di preparazione. Anche il ripristino richiede spazio temporaneo e può essere rifiutato finché non è disponibile.
+
+Senza file idonei da spostare o una destinazione configurata, TgWitness non può recuperare spazio automaticamente. La gestione dell’archiviazione non tronca né riscrive mai il registro firmato. Occorre comunque spazio per nuove osservazioni testuali.
+
 ## Collega una destinazione
 
 In **Extra → Archiviazione e spazio su disco → Gestisci archiviazione**, scegli l’attività e la destinazione, salva, quindi seleziona **Prova caricamento e download**. Il test carica un piccolo file di prova casuale e lo rilegge. Non utilizza contenuti di Telegram.

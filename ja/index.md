@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/
 
-[オープンソース / v0.8.1](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/)
+[オープンソース ／ v0.9.0](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/)
 
 Telegram のチャットをすべての編集・削除ごと保存し、誰でも確認できる記録として渡せます。
 
@@ -12,19 +12,19 @@ Telegram のチャットをすべての編集・削除ごと保存し、誰で�
 
  [GitHub Actions で収集（プレビュー）](https://phishdestroy.github.io/TgWitness/ja/docs/capture/) [S3オフサイトコピー：セットアップと復旧](https://phishdestroy.github.io/TgWitness/ja/#s3)
 
-時を越えるメッセージ #0042
+時を越えるメッセージ ＃0042
 
 Northstar · リサーチ架空の情報源／メッセージ 42
 
-1. **観測されたメッセージ：**09:41:02
+1. **観測されたメッセージ：**09：41：02
 
-   ブリーフィングは14:00から始まります。
-2. **編集履歴を保持**09:43:18
+   ブリーフィングは14：00から始まります。
+2. **編集履歴を保持**09：43：18
 
-   ブリーフィングは15:00から始まります。
+   ブリーフィングは15：00から始まります。
 
    以前のバージョンはそのまま残されています
-3. **削除通知**10:06:45
+3. **削除通知**10：06：45
 
    キャプチャされたコンテンツは、お客様のジャーナルに保存されます。
 
@@ -36,33 +36,33 @@ Northstar · リサーチ架空の情報源／メッセージ 42
 
 本物の画面に、架空のデータを入れています。
 
-TgWitness / 保存されたチャットあなたの監視作業スペース
+TgWitness ／ 保存されたチャットあなたの監視作業スペース
 
 ![ダークテーマで保存されたTelegramの会話履歴。編集履歴や削除されたメッセージも、文脈を損なうことなく記録されます。](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
-01 / 保存したチャット 普通のチャットと同じ見た目で、編集と削除がメッセージのすぐ横に表示されます。
+01 ／ 保存したチャット 普通のチャットと同じ見た目で、編集と削除がメッセージのすぐ横に表示されます。
 
-TgWitness / ジャーナルローカルワークスペース
+TgWitness ／ ジャーナルローカルワークスペース
 
 ![観測されたメッセージ、編集、削除通知、およびカバレッジイベントを記録したジャーナル](https://phishdestroy.github.io/TgWitness/assets/workspace.png)
 
-02 / ジャーナル アカウントが見たものすべてを検索でき、欠落も記録されます。
+02 ／ ジャーナル アカウントが見たものすべてを検索でき、欠落も記録されます。
 
-TgWitness / 編集履歴ローカルワークスペース
+TgWitness ／ 編集履歴ローカルワークスペース
 
 ![メッセージのキャプチャされた以前のバージョンと編集後のバージョンを比較する詳細表示パネル](https://phishdestroy.github.io/TgWitness/assets/detail.png)
 
-03 / 編集履歴 旧版と新版を並べて表示し、何も上書きしません。
+03 ／ 編集履歴 旧版と新版を並べて表示し、何も上書きしません。
 
-TgWitness / 署名付きエクスポートローカルワークスペース
+TgWitness ／ 署名付きエクスポートローカルワークスペース
 
 ![ワークスペースのエクスポート機能により、署名付きのZIP、JSONL、CSV、およびオフライン用HTMLレポートを提供します。](https://phishdestroy.github.io/TgWitness/assets/exports.png)
 
-04 / 署名付きエクスポート ジャーナルを署名付きで持ち出せ、専用の検証ツールも付いています。
+04 ／ 署名付きエクスポート ジャーナルを署名付きで持ち出せ、専用の検証ツールも付いています。
 
 [「Case Board](https://phishdestroy.github.io/TgWitness/ja/docs/case-board/)」、[レポート作成](https://phishdestroy.github.io/TgWitness/ja/docs/reports/)、[共有用コピー](https://phishdestroy.github.io/TgWitness/ja/docs/handover/)を通じて、保存された記録を追跡してください。[アカウントグループを](https://phishdestroy.github.io/TgWitness/ja/docs/groups/)まとめて[確認してください](https://phishdestroy.github.io/TgWitness/ja/docs/groups/)。
 
-01 / キャプチャ
+01 ／ キャプチャ
 
 ### 範囲はお客様ご自身でお選びいただけます。
 
@@ -70,7 +70,7 @@ TgWitness / 署名付きエクスポートローカルワークスペース
 
 [収集モードの比較](https://phishdestroy.github.io/TgWitness/ja/guides/modes.html#scope)
 
-02 / 保存
+02 ／ 保存
 
 ### 変更点は記事に追加されます。
 
@@ -78,7 +78,7 @@ TgWitness / 署名付きエクスポートローカルワークスペース
 
 [イベントマトリックス「」をご覧ください。](https://phishdestroy.github.io/TgWitness/ja/guides/modes.html#events)
 
-03 / 引き渡し
+03 ／ 引き渡し
 
 ### 移動する記録。
 
@@ -111,13 +111,13 @@ tgwitness-evidence.zip署名付きバンドル
 
 - 01
 
-  当初の所見JSONL形式の記録 + CSVテーブル
+  当初の所見JSONL形式の記録 ＋ CSVテーブル
 - 02
 
   読みやすい文脈オフラインHTMLレポート＋保存されたメディア
 - 03
 
-  独立した検証署名付きマニフェスト + スタンドアロン型検証ツール
+  独立した検証署名付きマニフェスト ＋ スタンドアロン型検証ツール
 
 受け取った人はあなたの鍵ですべてを確認でき、別の場所に保管したチェックポイントがその後の書き換えがないことを示します。[確認の仕組み。](https://phishdestroy.github.io/TgWitness/ja/docs/concepts/#layers)
 
@@ -139,7 +139,7 @@ tgwitness-evidence.zip署名付きバンドル
 
 定期的または手動でのコピー
 
-今すぐ、または 1〜1,440 分ごとにコピーし、進行状況はパネルに表示されます。
+今すぐ、または 1〜1，440 分ごとにコピーし、進行状況はパネルに表示されます。
 
 Object Lock
 
@@ -210,7 +210,7 @@ Telegramアカウントがなくても、架空のワークスペースをお試
 
 [オンラインデモを開く →](https://phishdestroy.github.io/TgWitness/demo/?lang=ja)
 
-Windows `scripts\Demo.cmd`Linux / macOS `sh start.sh --demo`
+Windows `scripts\Demo.cmd`Linux ／ macOS `sh start.sh --demo`
 
 **ローカルインストール用コマンド**
 
@@ -262,7 +262,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ソースからインストールした場合、トークンは `data/live/panel-token.txt` にあります。[my.telegram.org](https://my.telegram.org) で取得する独自の API ペアは任意です。[詳しいセットアップガイド ↗](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)
 
-**TgWitness 0.8.1** [新着情報 →](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/) · [機能と既知の制限事項 →](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/)
+**TgWitness 0.9.0** [新着情報 →](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/) · [機能と既知の制限事項 →](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/)
 
 ## 分かりやすい手順。役立つ次のステップ。
 
@@ -290,19 +290,19 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 **ジャーナル全体は暗号化されていますか？**
 
-セッションと鍵は暗号化されます。メッセージとファイルはされないので、ディスク暗号化を使ってください。エクスポートには AES-256 のパスワードを設定できます。
+セッションと鍵は暗号化されます。メッセージとファイルはされないので、ディスク暗号化を使ってください。エクスポートには AES－256 のパスワードを設定できます。
 
 **これはTelegramと提携しているのでしょうか？**
 
 いいえ。Telethon 上に作られた MIT ライセンスの独立プロジェクトです。ログインには自分のアカウントを使います。
 
-PROJECT NOTICE / LICENCE
+PROJECT NOTICE ／ LICENCE
 
-## Operator incompatibility.
+## Operator incompatibility．
 
-**Taylor Wessing PartG mbB — German core, Hamburg office.**
+**Taylor Wessing PartG mbB， German core， Hamburg office．**
 
-Our statement as the authors of TgWitness. It adds no condition to the MIT License. Read the complete notice and its source record.
+This statement from the authors of TgWitness adds no condition to the MIT License， and the complete notice includes its source record．
 
 [Read the complete notice](https://phishdestroy.github.io/TgWitness/docs/reference/notice/) [Original text](https://phishdestroy.github.io/TgWitness/NOTICE)
 

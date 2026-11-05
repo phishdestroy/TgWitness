@@ -4,6 +4,51 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/verif
 
 Canlı Telegram testi, otomatik kontroller, tarayıcı kontrolleri ve henüz doğrulanmamış olan unsurlar.
 
+## Canlı Phala Cloud dağıtımı · 4 Kasım 2026
+
+`--provider phala --quick-tunnel`, gerçek **Phala Cloud** (`tdx.small`, bölge US-WEST-1) üzerinde, boş bir çalışma alanına ait Phala Cloud API anahtarı, gerçek ntfy.sh, GitHub ve Intel PCS kullanılarak çalıştırıldı. CVM, `df7d860c` (v0.8.1) commit'ini yükledi; dağıtım, doğrulama ve imha işlemleri, aşağıdaki düzeltmelerle komut satırından çalıştırıldı. Yedi CVM'nin toplam maliyeti yaklaşık 1,9 ABD senti oldu.
+
+İlk iki dağıtımda, simüle edilmiş Phala Cloud'dan beş farklılık tespit edildi. [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) artık her birini yeniden üretir ve düzeltme yapılmadığında hata verir:
+
+| Phala Cloud'da | Düzeltme öncesinde | Düzeltme |
+| --- | --- | --- |
+| `compose_file.name` gereklidir | HTTP 422 hatası, hiçbir şey oluşturulmadı | Docker Compose yapılandırması, CVM adını içerir |
+| Boş bir değer belirtilmedikçe, Phala ölçülen app-compose dosyasına kendi başlatma öncesi komut dosyasını ekler (v0.0.20: Docker oturum açma, `docker compose pull`, root şifresi, `user_config`'ten SSH anahtarları) | `tdx_compose` hatası: Yayınlanan Docker Compose yapılandırmasının dışında kod var | app-compose, `pre_launch_script` değerini `""` olarak ayarlar; Phala ise bunu dışarıda bırakır |
+| `image` olmadan Phala, SSH erişimi etkin olan geliştirme sürümü olan `dstack-dev-0.5.12`’i seçer | `server_state` başarısız olur. Bu görüntüde yalnızca donanım doğrulama kaydı başarılı olmuştur; bunu yalnızca sağlayıcı kaydı ve `tdx_os` gösterir. | Dağıtım, Phala’nın mevcut sürümünün üretim derlemesini ister: `dstack-0.5.12` |
+| dstack ağ geçidi kapalıyken, CVM ayrıntılarında hiçbir zaman `instance_id` | Dağıtım 30 dakika bekledikten sonra başarısız oluyor | Örnek kimliği, CVM durumundan okunur |
+| Yeniden başlatma, durdurma ve başlatma işlemleri CVM işlemleridir, uygulama revizyonları değildir | `provider_actions`, yeniden başlatmaları listelemed | İşlemler okuma olarak da gerçekleştirilir |
+
+Üçüncü dağıtım:
+
+- CVM, SSH erişimi kapalıyken `dstack-0.5.12`'i çalıştırdı. Toplayıcı, oluşturulduktan yaklaşık 1,5 dakika sonra imzalı adresini yayınladı. Dağıtım daha sonra `tdx_binding`, `tdx_quote` (Intel TCB UpToDate, donanım doğrulama kaydı v4, FMSPC `20a06f000000`, hata ayıklama modunda değil, taşınamaz, Intel’den alınan kriptografik doğrulama verilerini destekleyen), `tdx_compose_hash`, `tdx_compose` (bayt bayt) ve `tdx_identity` (KMS anahtarları) komutlarını geçti.
+- trycloudflare.com adresindeki panel, jeton olmadan veya yanlış bir jetonla 401 yanıtı verdi, jetonla ise 200 yanıtı verdi.
+- `verify` ile `--source`, GitHub’ın commit arşivine ayarlandı ve parmak izi ayrı olarak geçti: sunucu, `server_state`, güvenlik duvarı (ağ geçidi yok, genel uç nokta yok), sağlayıcı günlüğü, beyan, parmak izi, kaynak hash, önyükleme ve beş `tdx_*` kontrolü başarıyla geçti. Cloudflare ve `tdx_os` kullanılamadığından sonuç "INCOMPLETE" (Eksik) olarak belirlendi.
+- Phala'nın API'si aracılığıyla iki yeniden başlatma: her seferinde CVM, aynı toplayıcı anahtarı, yeni bir imzalı adres ve 530 yanıtı veren eski adresle iki dakikadan kısa sürede geri geldi. `verify`, yeni önyüklemeyi ve her iki yeniden başlatmayı da REVIEW olarak bildirdi. `--evidence` ile günlük imzaları ve üç başlatma işlemi doğrulandı; her birinin aynı CVM'den kendi Intel TDX donanım doğrulama kaydı vardı.
+- `destroy` komutu yalnızca o CVM’yi kaldırdı. Ardından çalışma alanı boşaldı ve panel adresi yanıt vermez hale geldi.
+- Panel sihirbazındaki fiyat kontrolünde `tdx.small` anahtarı için saat başına 0,058 $ gösterildi. Yanlış bir anahtar girildiğinde, "API anahtarı kabul edilmedi" şeklinde basit bir mesaj görüntülendi.
+
+Daha sonra düzeltilen iki bulgu daha:
+
+- Adres anahtarı olmadan, `verify`, adres konusundaki en yeni ve geçerli gönderiyi takip etti; bu gönderi, yayınlanan Docker Compose yapılandırmasında yer almaktadır. Sahte bir gönderi, onu var olmayan bir ana bilgisayara yönlendirdi ve `statement` başarısız oldu: bir sahteci, toplayıcı kılığına giremedi, ancak sahtecilik yoluyla üçüncü taraf doğrulamayı, sahte bir gelecek zaman damgası kullanarak 12 saate kadar engelleyebildi. Toplayıcı artık kendi anahtarıyla imzalanmış adresini de yayınlıyor; `verify`, yalnızca toplayıcı tarafından yapılan bu tür gönderileri kabul eder ve gönderiler ntfy.sh'nin alım zamanına göre sıralanır. [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py), sahte gönderileri tekrar oynatır. Bir CVM, bunu yalnızca onu içeren bir commit'ten çalıştırır; dolayısıyla bu çalıştırmadaki toplayıcı adresini henüz imzalamamıştı ve `verify` bunu belirtti.
+- `tdx_os`, `dstack-mr` olmadan çalışamıyordu; bu aracın mevcut sürümünde belgelerde belirtilen `measure --json` yerine `measure-os` bulunuyor. Doğrulayıcı artık MRTD ve RTMR0-2 değerlerini yayımlanan imajdan ve ACPI tabloları dahil sanal makine yapılandırmasından kendisi hesaplıyor.
+
+Dördüncü dağıtım, şunları içeriyordu:
+
+- Dağıtım, yayınlanan `dstack-0.5.12`'i bir kez indirdi, bunu CVM'nin bildirdiği işletim sistemi görüntüsü hash'iyle eşleştirdi ve `tdx_os` başarılı oldu: MRTD, RTMR0, RTMR1 ve RTMR2, QEMU 8.2.2, 1 vCPU ve 2 GiB için hesaplanan değerlere eşitti. Aynı hesaplama, beyan edilen 4 GiB, 2 vCPU, QEMU 9.2.1 veya ikinci bir ağ kartı için farklı bir RTMR0 değeri verdi ve değiştirilmiş çekirdek, bellenim veya komut satırı ve geliştirme görüntüsü için başarısız oldu.
+- `verify`, hızlı tünelin konektörü de dahil olmak üzere 16 kontrolün tamamını geçti, dolayısıyla sonuç PASS oldu. HTML ve PDF sertifikasını yazdı; bu belgeler, imzalar ve zaman damgalarıyla dijital olarak mühürlendi; zaman damgaları arasında Belçika hükümetinin zaman damgalama birimi TSU 202301’den alınan eIDAS onaylı bir zaman damgası (Belçika’nın güvenilir listesinde yer alan), bir FreeTSA zaman damgası ve doğrulayıcının imzası bulunuyordu; `check-report` bunların hepsini ve PDF’deki imzayı onayladı.
+- Yeniden başlatmanın ardından, `verify --evidence` iki başlatma işlemini doğruladı; her biri CVM içinde oluşturulan bir donanım doğrulama belgesiyle birlikteydi ve her biri yayınlanan `dstack-0.5.12`'ten önyüklendi; yeniden başlatma ve yeni önyükleme işlemleri REVIEW statüsündeydi.
+- `destroy`, çalışma alanını boş bıraktı.
+
+Beşinci dağıtımda, yukarıdakilerin tümünü içeren `53a0f7e9` taahhüdünden kolektör çalıştırıldı:
+
+- Toplayıcı, operatörün HMAC gönderisinin yanına kendi anahtarıyla imzalanmış adresini yayınladı. Ardından konuya iki sahte gönderi eklendi; biri sıfırlanmış HMAC'ye sahip, diğeri ise başka bir Ed25519 anahtarıyla imzalanmış ve her ikisi de 2096 yılına ait bir zamanı iddia ediyordu. `verify`, toplayıcı anahtarıyla imzalanmış adresi aldı ve 16 kontrolün tamamını geçti; mühür yine onaylı Belçika zaman damgasını, FreeTSA’nın zaman damgasını ve doğrulayıcının imzasını taşıyordu ve `check-report` bunları onayladı.
+- Yeniden başlatmanın ardından toplayıcı, imzalanmış yeni adresi yayınladı: `verify` bunu hemen buldu; operatörün **Find mevcut adresi**, HMAC gönderisinden 27 saniye sonra buldu ve her ikisi de sahte gönderileri görmezden geldi. `verify --evidence`, `dstack-0.5.12`'ten başlatılan iki başlatmayı doğruladı.
+- Dağıtım, Phala’nın CVM için faturalandırdığı tutarı (disk dahil) şu şekilde gösterdi: saat başına 0,06078 $.
+
+Panel sihirbazı, Phala Cloud üzerinde iki kez çalıştırıldı; bir kez iş API'si aracılığıyla, bir kez de gerçek Chromium ile tarayıcı üzerinden: fiyat kontrolü, **Advanced** altında commit ile oluşturma, altı doğrulama kontrolünün tümü başarıyla geçti, faturalandırılan fiyatı (aylık 44,37 USD) gösteren sunucu listesi, **Find mevcut adresi bul,**, ölçülen Docker Compose yapılandırmasının indirilmesi ve silinmesi. Tarayıcıda herhangi bir sayfa hatası görülmedi. Her seferinde çalışma alanı sonrasında boştu.
+
+Kapsam dışı olanlar: Phala üzerindeki bir Cloudflare etki alanı, CVM üzerindeki bir Telegram hesabı ve `dstack-0.6.1` görüntüsü. Oluşturma öncesinde sihirbazın gösterdiği fiyat yalnızca Phala’nın hesaplama ücretidir; zira API, disk ücretini yalnızca mevcut bir CVM için belirtir; sunucu listesi ise oluşturma sonrasında faturalandırılan fiyatı gösterir.
+
 ## Live server journal inventory · 1 November 2026
 
 At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.

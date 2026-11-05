@@ -1,109 +1,109 @@
-# Pesan bisa berubah. Simpan apa yang Anda lihat.
+# Pesan bisa berubah． Simpan apa yang Anda lihat．
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/
 
-[Sumber terbuka / v0.8.1](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/)
+[Sumber terbuka ／ v0.9.0](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/)
 
-Simpan obrolan Telegram beserta setiap suntingan dan penghapusan, lalu serahkan catatan yang bisa diperiksa siapa pun.
+Simpan obrolan Telegram beserta setiap suntingan dan penghapusan， lalu serahkan catatan yang bisa diperiksa siapa pun．
 
 [Buka demo](https://phishdestroy.github.io/TgWitness/demo/?lang=id)[Panduan pengaturan](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=id)
 
-Data fiktif, tanpa masuk ke Telegram.
+Data fiktif， tanpa masuk ke Telegram．
 
- [Pengambilan melalui GitHub Actions (pratinjau)](https://phishdestroy.github.io/TgWitness/id/docs/capture/) [Salinan di luar situs S3: pengaturan dan pemulihan](https://phishdestroy.github.io/TgWitness/id/#s3)
+ [Pengambilan melalui GitHub Actions （pratinjau）](https://phishdestroy.github.io/TgWitness/id/docs/capture/) [Salinan di luar situs S3： pengaturan dan pemulihan](https://phishdestroy.github.io/TgWitness/id/#s3)
 
-SEBUAH PESAN, MELINTASI WAKTU #0042
+SEBUAH PESAN， MELINTASI WAKTU ＃0042
 
-Northstar · PenelitianSumber fiktif / pesan 42
+Northstar · PenelitianSumber fiktif ／ pesan 42
 
-1. **Pesan yang terdeteksi:**09:41:02
+1. **Pesan yang terdeteksi：**09：41：02
 
-   Pengarahan dimulai di 14:00.
-2. **Pengeditan dipertahankan**09:43:18
+   Pengarahan dimulai di 14：00．
+2. **Pengeditan dipertahankan**09：43：18
 
-   Pengarahan dimulai di 15:00.
+   Pengarahan dimulai di 15：00．
 
    Versi sebelumnya tetap dipertahankan
-3. **Pemberitahuan penghapusan**10:06:45
+3. **Pemberitahuan penghapusan**10：06：45
 
-   Konten yang direkam tetap tersimpan di jurnal Anda.
+   Konten yang direkam tetap tersimpan di jurnal Anda．
 
-Tiga pengamatan. Satu riwayat. CONTOH
+Tiga pengamatan． Satu riwayat． CONTOH
 
-Pesan tersebut menghilang. Riwayat yang terekam tetap ada.
+Pesan tersebut menghilang． Riwayat yang terekam tetap ada．
 
-## Setiap perubahan yang terekam. Tepat di tempat yang Anda butuhkan.
+## Setiap perubahan yang terekam． Tepat di tempat yang Anda butuhkan．
 
-Antarmuka asli, dengan data karangan.
+Antarmuka asli， dengan data karangan．
 
-TgWitness / Percakapan yang disimpanRUANG KERJA PENGAMATAN ANDA
+TgWitness ／ Percakapan yang disimpanRUANG KERJA PENGAMATAN ANDA
 
-![Percakapan Telegram yang disimpan dalam tema gelap, dengan suntingan dan pesan yang dihapus tetap disimpan dalam konteksnya](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
+![Percakapan Telegram yang disimpan dalam tema gelap， dengan suntingan dan pesan yang dihapus tetap disimpan dalam konteksnya](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
-01 / Obrolan tersimpan Terlihat seperti obrolan biasa, dengan suntingan dan penghapusan tepat di samping pesan.
+01 ／ Obrolan tersimpan Terlihat seperti obrolan biasa， dengan suntingan dan penghapusan tepat di samping pesan．
 
-TgWitness / JurnalRUANG KERJA LOKAL
+TgWitness ／ JurnalRUANG KERJA LOKAL
 
-![Jurnal yang berisi pesan yang teramati, pengeditan, pemberitahuan penghapusan, dan peristiwa yang tercakup](https://phishdestroy.github.io/TgWitness/assets/workspace.png)
+![Jurnal yang berisi pesan yang teramati， pengeditan， pemberitahuan penghapusan， dan peristiwa yang tercakup](https://phishdestroy.github.io/TgWitness/assets/workspace.png)
 
-02 / Jurnal Semua yang dilihat akun Anda, bisa dicari, celah ikut tercatat.
+02 ／ Jurnal Semua yang dilihat akun Anda， bisa dicari， celah ikut tercatat．
 
-TgWitness / Riwayat pengeditanRUANG KERJA LOKAL
+TgWitness ／ Riwayat pengeditanRUANG KERJA LOKAL
 
 ![Panel detail yang membandingkan versi pesan sebelumnya yang terekam dengan versi yang telah diedit](https://phishdestroy.github.io/TgWitness/assets/detail.png)
 
-03 / Riwayat suntingan Versi lama dan baru berdampingan, tidak ada yang ditimpa.
+03 ／ Riwayat suntingan Versi lama dan baru berdampingan， tidak ada yang ditimpa．
 
-TgWitness / Ekspor yang ditandatanganiRUANG KERJA LOKAL
+TgWitness ／ Ekspor yang ditandatanganiRUANG KERJA LOKAL
 
-![Fitur ekspor ruang kerja yang menyediakan berkas ZIP, JSONL, CSV, dan laporan HTML offline yang telah ditandatangani](https://phishdestroy.github.io/TgWitness/assets/exports.png)
+![Fitur ekspor ruang kerja yang menyediakan berkas ZIP， JSONL， CSV， dan laporan HTML offline yang telah ditandatangani](https://phishdestroy.github.io/TgWitness/assets/exports.png)
 
-04 / Ekspor bertanda tangan Bawa jurnalnya, bertanda tangan dan dengan verifikatornya sendiri.
+04 ／ Ekspor bertanda tangan Bawa jurnalnya， bertanda tangan dan dengan verifikatornya sendiri．
 
-Lacak catatan yang disimpan melalui [Case Board](https://phishdestroy.github.io/TgWitness/id/docs/case-board/), [desain laporan,](https://phishdestroy.github.io/TgWitness/id/docs/reports/) dan [salinan](https://phishdestroy.github.io/TgWitness/id/docs/handover/) yang [dibagikan](https://phishdestroy.github.io/TgWitness/id/docs/handover/). [Tinjau kelompok akun](https://phishdestroy.github.io/TgWitness/id/docs/groups/) secara bersamaan.
+Lacak catatan yang disimpan melalui [Case Board](https://phishdestroy.github.io/TgWitness/id/docs/case-board/)， [desain laporan，](https://phishdestroy.github.io/TgWitness/id/docs/reports/) dan [salinan](https://phishdestroy.github.io/TgWitness/id/docs/handover/) yang [dibagikan](https://phishdestroy.github.io/TgWitness/id/docs/handover/)． [Tinjau kelompok akun](https://phishdestroy.github.io/TgWitness/id/docs/groups/) secara bersamaan．
 
-01 / PENANGKAPAN
+01 ／ PENANGKAPAN
 
-### Anda yang menentukan cakupannya.
+### Anda yang menentukan cakupannya．
 
-Beberapa obrolan, satu folder, atau seluruh akun. Setiap akun punya ruang kerjanya sendiri.
+Beberapa obrolan， satu folder， atau seluruh akun． Setiap akun punya ruang kerjanya sendiri．
 
 [Bandingkan mode pengumpulan](https://phishdestroy.github.io/TgWitness/id/guides/modes.html#scope)
 
-02 / PRESERVE
+02 ／ PRESERVE
 
-### Perubahan menambah nilai pada cerita.
+### Perubahan menambah nilai pada cerita．
 
-Versi, penghapusan, dan celah semuanya tetap di jurnal.
+Versi， penghapusan， dan celah semuanya tetap di jurnal．
 
 [Lihat matriks peristiwa](https://phishdestroy.github.io/TgWitness/id/guides/modes.html#events)
 
-03 / PENYERAHAN
+03 ／ PENYERAHAN
 
-### Sebuah catatan yang dapat diakses di mana saja.
+### Sebuah catatan yang dapat diakses di mana saja．
 
-ZIP bertanda tangan, berkas, dan laporan offline. Kata sandi opsional.
+ZIP bertanda tangan， berkas， dan laporan offline． Kata sandi opsional．
 
 [Ekspor dan verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/exports/)
 
-## Ubah satu byte saja.
-Verifikasi akan memberitahukannya kepada Anda.
+## Ubah satu byte saja．
+Verifikasi akan memberitahukannya kepada Anda．
 
-Setiap peristiwa tertaut ke hash sebelumnya dan dilengkapi dengan tanda tangan Ed25519.
+Setiap peristiwa tertaut ke hash sebelumnya dan dilengkapi dengan tanda tangan Ed25519．
 
-![Peristiwa yang direkam terhubung ke hash sebelumnya, dilengkapi tanda tangan, dan disimpan dalam format ekspor yang dapat diverifikasi.](https://phishdestroy.github.io/TgWitness/assets/evidence-chain-animated.svg)
+![Peristiwa yang direkam terhubung ke hash sebelumnya， dilengkapi tanda tangan， dan disimpan dalam format ekspor yang dapat diverifikasi．](https://phishdestroy.github.io/TgWitness/assets/evidence-chain-animated.svg)
 
-![Mengubah catatan yang telah direkam akan mengubah hash-nya dan merusak verifikasi catatan yang tertaut.](https://phishdestroy.github.io/TgWitness/assets/evidence-tamper-animated.svg)
+![Mengubah catatan yang telah direkam akan mengubah hash－nya dan merusak verifikasi catatan yang tertaut．](https://phishdestroy.github.io/TgWitness/assets/evidence-tamper-animated.svg)
 
-![Titik pemeriksaan yang disimpan secara terpisah memungkinkan penerima membandingkan jurnal yang diekspor dengan catatan sebelumnya.](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
+![Titik pemeriksaan yang disimpan secara terpisah memungkinkan penerima membandingkan jurnal yang diekspor dengan catatan sebelumnya．](https://phishdestroy.github.io/TgWitness/assets/evidence-checkpoint-animated.svg)
 
-Ikuti langkah-langkah verifikasi mulai dari hash file hingga titik pemeriksaan yang disimpan secara terpisah.
+Ikuti langkah－langkah verifikasi mulai dari hash file hingga titik pemeriksaan yang disimpan secara terpisah．
 
 [Jelajahi delapan tingkat bukti](https://phishdestroy.github.io/TgWitness/id/guides/modes.html#levels)
 
-## Siap untuk ditinjau oleh pihak lain.
+## Siap untuk ditinjau oleh pihak lain．
 
-Pesan, berkas, dan laporan offline dalam satu paket bertanda tangan.
+Pesan， berkas， dan laporan offline dalam satu paket bertanda tangan．
 
 [Baca model bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/)
 
@@ -111,201 +111,201 @@ tgwitness-evidence.zipPAKET YANG TELAH DITANDATANGANI
 
 - 01
 
-  Pengamatan asliCatatan JSONL + tabel CSV
+  Pengamatan asliCatatan JSONL ＋ tabel CSV
 - 02
 
-  Konteks yang mudah dipahamiLaporan HTML offline + media yang disimpan
+  Konteks yang mudah dipahamiLaporan HTML offline ＋ media yang disimpan
 - 03
 
-  Verifikasi independenManifest yang ditandatangani + verifikator mandiri
+  Verifikasi independenManifest yang ditandatangani ＋ verifikator mandiri
 
-Penerima memeriksa semuanya dengan kunci Anda, dan checkpoint yang disimpan di tempat lain menunjukkan tidak ada yang ditulis ulang sejak itu. [Cara kerja pemeriksaannya.](https://phishdestroy.github.io/TgWitness/id/docs/concepts/#layers)
+Penerima memeriksa semuanya dengan kunci Anda， dan checkpoint yang disimpan di tempat lain menunjukkan tidak ada yang ditulis ulang sejak itu． [Cara kerja pemeriksaannya．](https://phishdestroy.github.io/TgWitness/id/docs/concepts/#layers)
 
-## Salinan S3. Pemeriksaan eksternal.
+## Salinan S3． Pemeriksaan eksternal．
 
-Simpan salinan terenkripsi dan tambahkan pemeriksaan independen.
+Simpan salinan terenkripsi dan tambahkan pemeriksaan independen．
 
 Dinonaktifkan secara default
 
 ### Salin semuanya ke penyimpanan yang kompatibel dengan S3
 
-Jurnal, berkas, checkpoint, dan ekspor obrolan dienkripsi sebelum dikirim ke S3.
+Jurnal， berkas， checkpoint， dan ekspor obrolan dienkripsi sebelum dikirim ke S3．
 
 **Pengaturan penyimpanan dan pemulihan**
 
 Enkripsi sisi klien
 
-`AES-256-GCM` di mesin Anda. Penyedia hanya melihat teks sandi.
+`AES-256-GCM` di mesin Anda． Penyedia hanya melihat teks sandi．
 
 Pencadangan terjadwal atau manual
 
-Salin sekarang atau setiap 1–1.440 menit, kemajuannya ada di panel.
+Salin sekarang atau setiap 1－1.440 menit， kemajuannya ada di panel．
 
 Object Lock
 
-Pilih jumlah hari dan mode retensi; panel memeriksa apakah benar-benar berlaku.
+Pilih jumlah hari dan mode retensi； panel memeriksa apakah benar－benar berlaku．
 
 Pemulihan yang terverifikasi
 
-Simpan kunci secara terpisah. Pulihkan di mana saja; berkas baru keluar setelah verifikasi.
+Simpan kunci secara terpisah． Pulihkan di mana saja； berkas baru keluar setelah verifikasi．
 
-![Panel salinan lengkap di luar situs: titik akhir, wilayah, bucket, kunci akses, jadwal, penguncian objek, dan kontrol kunci pemulihan](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
+![Panel salinan lengkap di luar situs： titik akhir， wilayah， bucket， kunci akses， jadwal， penguncian objek， dan kontrol kunci pemulihan](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
-Panel lengkap dengan opsi lanjutan yang diperluas. Tidak ada kredensial penyimpanan yang ditampilkan.
+Panel lengkap dengan opsi lanjutan yang diperluas． Tidak ada kredensial penyimpanan yang ditampilkan．
 
 Jurnal dan media`AES-256-GCM`Penyimpanan yang kompatibel dengan S3
 
 [Konfigurasikan S3 dan pulihkan salinan](https://phishdestroy.github.io/TgWitness/id/docs/exports/#s3)[Baca detail verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#off-site-copy-and-restore-s3)
 
-**Kunci pemulihan** Simpan terpisah; tanpa itu salinan tidak bisa dibaca.
+**Kunci pemulihan** Simpan terpisah； tanpa itu salinan tidak bisa dibaca．
 
 ### Pemberitahuan · Apprise
 
-Masalah, perubahan obrolan, dan ringkasan harian ke aplikasi pesan, email, atau webhook Anda sendiri.
+Masalah， perubahan obrolan， dan ringkasan harian ke aplikasi pesan， email， atau webhook Anda sendiri．
 
-**Pilih yang dibagikan** Tanpa teks pesan kecuali Anda mengaktifkannya.
+**Pilih yang dibagikan** Tanpa teks pesan kecuali Anda mengaktifkannya．
 
  [Konfigurasikan tujuan pemberitahuan](https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/#notifications)
 
 ### Cap waktu eksternal
 
-Lakukan hashing titik pemeriksaan waktu dengan RFC 3161 dan OpenTimestamps.
+Lakukan hashing titik pemeriksaan waktu dengan RFC 3161 dan OpenTimestamps．
 
-**Pantau hasilnya** Periksa jawaban TSA atau tingkatkan tanda terima OpenTimestamps menjadi bukti Bitcoin.
+**Pantau hasilnya** Periksa jawaban TSA atau tingkatkan tanda terima OpenTimestamps menjadi bukti Bitcoin．
 
  [Periksa bukti cap waktu](https://phishdestroy.github.io/TgWitness/id/docs/reference/timestamp/)
 
 ### Saksi independen
 
-Host terpisah menyimpan pengamatan yang telah ditandatangani dan dapat menerbitkan `TGW1` titik pemeriksaan.
+Host terpisah menyimpan pengamatan yang telah ditandatangani dan dapat menerbitkan `TGW1` titik pemeriksaan．
 
-**Pisahkan acuannya** Jalankan di host lain, dengan kunci dan jurnalnya sendiri.
+**Pisahkan acuannya** Jalankan di host lain， dengan kunci dan jurnalnya sendiri．
 
  [Siapkan saksi](https://phishdestroy.github.io/TgWitness/id/docs/witness/)
 
 ### Pemulihan dan celah yang terlihat
 
-Lanjutkan setelah restart. Melakukan pemeriksaan ulang dan `coverage.json` menampilkan pesan yang berhasil dipulihkan serta celah-celah yang ada.
+Lanjutkan setelah restart． Melakukan pemeriksaan ulang dan `coverage.json` menampilkan pesan yang berhasil dipulihkan serta celah－celah yang ada．
 
-**Tinjau rentangnya** Pesan yang dipulihkan dan celah yang tercatat, berdampingan.
+**Tinjau rentangnya** Pesan yang dipulihkan dan celah yang tercatat， berdampingan．
 
  [Periksa kontinuitas dan celah](https://phishdestroy.github.io/TgWitness/id/guides/modes.html#continuity)
 
-## Ruang kerja pertama Anda dimulai di sini.
+## Ruang kerja pertama Anda dimulai di sini．
 
-Coba demo dulu, lalu sambungkan akun cadangan saat Anda siap.
-Windows, Linux, macOS, atau Docker.
+Coba demo dulu， lalu sambungkan akun cadangan saat Anda siap．
+Windows， Linux， macOS， atau Docker．
 
 [Baca panduan pengaturan](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=id)
 
-**Satu sesi yang diimpor, satu klien yang sedang berjalan.**
+**Satu sesi yang diimpor， satu klien yang sedang berjalan．**
 
-Jangan jalankan TData atau sesi hasil impor di Telegram Desktop dan TgWitness sekaligus: Telegram bisa membatalkan keduanya (AUTH_KEY_DUPLICATED). Butuh keduanya? Masuk ke TgWitness secara terpisah lewat telepon atau QR.
+Jangan jalankan TData atau sesi hasil impor di Telegram Desktop dan TgWitness sekaligus： Telegram bisa membatalkan keduanya （AUTH_KEY_DUPLICATED）． Butuh keduanya？ Masuk ke TgWitness secara terpisah lewat telepon atau QR．
 
 [Baca peringatan impor sesi](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=id#session-warning)
 
-**Silakan lihat terlebih dahulu sebelum Anda terhubung.**
+**Silakan lihat terlebih dahulu sebelum Anda terhubung．**
 
-Cobalah ruang kerja fiktif ini tanpa akun Telegram.
+Cobalah ruang kerja fiktif ini tanpa akun Telegram．
 
 [Buka demo online →](https://phishdestroy.github.io/TgWitness/demo/?lang=id)
 
-Windows `scripts\Demo.cmd`Linux / macOS `sh start.sh --demo`
+Windows `scripts\Demo.cmd`Linux ／ macOS `sh start.sh --demo`
 
 **Perintah instalasi lokal**
 
 LANGKAH 01
 
-### Unduh sumbernya.
+### Unduh sumbernya．
 
-[Unduh berkas ZIP sumber](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) dan ekstrak, atau kloning repositori:
+[Unduh berkas ZIP sumber](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) dan ekstrak， atau kloning repositori：
 
 ```
 git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-Perlu Python 3.11+. Di Windows, peluncur menawarkan untuk memasangnya.
+Perlu Python 3.11+． Di Windows， peluncur menawarkan untuk memasangnya．
 
 [Telusuri rilis](https://github.com/phishdestroy/TgWitness/releases)
 
 LANGKAH 02
 
-### Pilih cara menjalankannya.
+### Pilih cara menjalankannya．
 
-Klik dua kali `Start.cmd`, atau jalankan di PowerShell:
+Klik dua kali `Start.cmd`， atau jalankan di PowerShell：
 
 ```
 .\Start.cmd
 ```
 
-Hanya ingin menjelajah? Klik dua kali `scripts\Demo.cmd` untuk demo terisolasi. Tidak perlu login ke Telegram.
+Hanya ingin menjelajah？ Klik dua kali `scripts\Demo.cmd` untuk demo terisolasi． Tidak perlu login ke Telegram．
 
-Tersedia dengan Python 3.11+ dan `venv`:
+Tersedia dengan Python 3.11+ dan `venv`：
 
 ```
 sh start.sh
 ```
 
-Untuk membuka jurnal fiktif tersebut, jalankan perintah `sh start.sh --demo`.
+Untuk membuka jurnal fiktif tersebut， jalankan perintah `sh start.sh --demo`．
 
-Dengan Docker yang sudah berjalan dan Compose 2.20+ yang sudah terinstal:
+Dengan Docker yang sudah berjalan dan Compose 2.20+ yang sudah terinstal：
 
 ```
 docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt
 ```
 
-Perintah kedua menampilkan token panel pribadi Anda. Simpanlah di perangkat Anda.
+Perintah kedua menampilkan token panel pribadi Anda． Simpanlah di perangkat Anda．
 
-Buka [127.0.0.1:8787](http://127.0.0.1:8787) setelah diluncurkan.
+Buka [127.0.0.1:8787](http://127.0.0.1:8787) setelah diluncurkan．
 
-Pada instalasi dari sumber, token ada di `data/live/panel-token.txt`. Pasangan API Anda sendiri dari [my.telegram.org](https://my.telegram.org) bersifat opsional. [Panduan lengkap ↗](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
+Pada instalasi dari sumber， token ada di `data/live/panel-token.txt`． Pasangan API Anda sendiri dari [my.telegram.org](https://my.telegram.org) bersifat opsional． [Panduan lengkap ↗](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
 
-**TgWitness 0.8.1** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/) · [Fitur dan batasan yang diketahui →](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/)
+**TgWitness 0.9.0** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/) · [Fitur dan batasan yang diketahui →](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/)
 
-## Petunjuk yang jelas. Langkah selanjutnya yang bermanfaat.
+## Petunjuk yang jelas． Langkah selanjutnya yang bermanfaat．
 
 [Jelajahi panduan ↗](https://phishdestroy.github.io/TgWitness/id/docs/)
 
-[### Mode, skenario, dan tingkat bukti Empat mode pengumpulan. Delapan tingkat verifikasi. Temukan alur kerja yang sesuai untuk kasus Anda.](https://phishdestroy.github.io/TgWitness/id/guides/modes.html)
+[### Mode， skenario， dan tingkat bukti Empat mode pengumpulan． Delapan tingkat verifikasi． Temukan alur kerja yang sesuai untuk kasus Anda．](https://phishdestroy.github.io/TgWitness/id/guides/modes.html)
 
-[01 ### Hubungkan akun Impor melalui telepon, QR, dan sesi yang didukung.](https://phishdestroy.github.io/TgWitness/id/docs/accounts/)[02 ### Pilih proxy Daftar MTProxy publik atau rute Anda sendiri.](https://phishdestroy.github.io/TgWitness/id/docs/proxies/)[03 ### Siapkan bot saksi Titik pemeriksaan yang ditandatangani di saluran Telegram Anda.](https://phishdestroy.github.io/TgWitness/id/docs/witness/)[04 ### Ekspor dan verifikasi Bagikan riwayat yang terekam dan periksa integritasnya.](https://phishdestroy.github.io/TgWitness/id/docs/exports/)
+[01 ### Hubungkan akun Impor melalui telepon， QR， dan sesi yang didukung．](https://phishdestroy.github.io/TgWitness/id/docs/accounts/)[02 ### Pilih proxy Daftar MTProxy publik atau rute Anda sendiri．](https://phishdestroy.github.io/TgWitness/id/docs/proxies/)[03 ### Siapkan bot saksi Titik pemeriksaan yang ditandatangani di saluran Telegram Anda．](https://phishdestroy.github.io/TgWitness/id/docs/witness/)[04 ### Ekspor dan verifikasi Bagikan riwayat yang terekam dan periksa integritasnya．](https://phishdestroy.github.io/TgWitness/id/docs/exports/)
 
-## Kelola arsip.
+## Kelola arsip．
 
-Riwayat, AI dengan sumber, MCP, OCR, dan webhook bertanda tangan.
+Riwayat， AI dengan sumber， MCP， OCR， dan webhook bertanda tangan．
 
 [Jelajahi alur kerja](https://phishdestroy.github.io/TgWitness/id/docs/archive/)
 
-## Sebelum Anda memulai.
+## Sebelum Anda memulai．
 
-**Apakah halaman ini terhubung ke Telegram?**
+**Apakah halaman ini terhubung ke Telegram？**
 
-Tidak. Ini halaman statis dengan contoh fiktif. Aplikasinya berjalan di mesin Anda sendiri dan Anda masuk di sana.
+Tidak． Ini halaman statis dengan contoh fiktif． Aplikasinya berjalan di mesin Anda sendiri dan Anda masuk di sana．
 
-**Apakah alat ini dapat memulihkan pesan yang dihapus sebelum direkam?**
+**Apakah alat ini dapat memulihkan pesan yang dihapus sebelum direkam？**
 
-Tidak. Ia menyimpan apa yang dilihat akun Anda selama berjalan. Snapshot berikutnya tidak bisa merekonstruksi suntingan yang terlewat atau pesan yang dihapus.
+Tidak． Ia menyimpan apa yang dilihat akun Anda selama berjalan． Snapshot berikutnya tidak bisa merekonstruksi suntingan yang terlewat atau pesan yang dihapus．
 
-**Apakah seluruh jurnal saya dienkripsi?**
+**Apakah seluruh jurnal saya dienkripsi？**
 
-Sesi dan kunci, ya. Pesan dan berkas, tidak; gunakan enkripsi disk. Ekspor bisa diberi kata sandi AES-256.
+Sesi dan kunci， ya． Pesan dan berkas， tidak； gunakan enkripsi disk． Ekspor bisa diberi kata sandi AES－256．
 
-**Apakah ini berafiliasi dengan Telegram?**
+**Apakah ini berafiliasi dengan Telegram？**
 
-Tidak. Ini proyek independen berlisensi MIT yang dibangun di atas Telethon. Anda masuk dengan akun Anda sendiri.
+Tidak． Ini proyek independen berlisensi MIT yang dibangun di atas Telethon． Anda masuk dengan akun Anda sendiri．
 
-PROJECT NOTICE / LICENCE
+PROJECT NOTICE ／ LICENCE
 
-## Operator incompatibility.
+## Operator incompatibility．
 
-**Taylor Wessing PartG mbB — German core, Hamburg office.**
+**Taylor Wessing PartG mbB， German core， Hamburg office．**
 
-Our statement as the authors of TgWitness. It adds no condition to the MIT License. Read the complete notice and its source record.
+This statement from the authors of TgWitness adds no condition to the MIT License， and the complete notice includes its source record．
 
 [Read the complete notice](https://phishdestroy.github.io/TgWitness/docs/reference/notice/) [Original text](https://phishdestroy.github.io/TgWitness/NOTICE)
 
-## Jelajahi terlebih dahulu. Lakukan pengaturan saat sudah siap.
+## Jelajahi terlebih dahulu． Lakukan pengaturan saat sudah siap．
 
 [Buka demo](https://phishdestroy.github.io/TgWitness/demo/?lang=id)[Panduan pengaturan](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=id)

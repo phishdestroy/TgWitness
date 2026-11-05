@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/
 
-[開源 / v0.8.1](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/)
+[開源 ／ v0.9.0](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/)
 
 保存 Telegram 聊天室及每一次編輯和刪除，然後交出任何人都能核對的紀錄。
 
@@ -12,19 +12,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/
 
  [透過 GitHub Actions 擷取（預覽版）](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/capture/) [S3 異地備份：設定與還原](https://phishdestroy.github.io/TgWitness/zh-Hant/#s3)
 
-一則跨越時空的訊息 #0042
+一則跨越時空的訊息 ＃0042
 
 Northstar · 研究虛構來源／訊息 42
 
-1. **觀察到的訊息**09:41:02
+1. **觀察到的訊息**09：41：02
 
-   簡報內容自 14:00 開始。
-2. **編輯記錄已保留**09:43:18
+   簡報內容自 14：00 開始。
+2. **編輯記錄已保留**09：43：18
 
-   簡報內容自 15:00 開始。
+   簡報內容自 15：00 開始。
 
    保留前一版本
-3. **刪除通知**10:06:45
+3. **刪除通知**10：06：45
 
    擷取的內容將保留在您的日誌中。
 
@@ -36,33 +36,33 @@ Northstar · 研究虛構來源／訊息 42
 
 真實介面，虛構資料。
 
-TgWitness / 已儲存的聊天記錄您的觀察工作區
+TgWitness ／ 已儲存的聊天記錄您的觀察工作區
 
 ![以深色主題儲存 Telegram 對話，並將擷取的編輯內容與已刪除訊息完整保留於對話脈絡中](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
-01 / 已保存的聊天室 看起來就像一般聊天，編輯和刪除就顯示在訊息旁邊。
+01 ／ 已保存的聊天室 看起來就像一般聊天，編輯和刪除就顯示在訊息旁邊。
 
-TgWitness / 日誌本地工作區
+TgWitness ／ 日誌本地工作區
 
 ![包含已觀察到的訊息、編輯紀錄、刪除通知及涵蓋事件的日誌](https://phishdestroy.github.io/TgWitness/assets/workspace.png)
 
-02 / 日誌 您的帳戶看到的一切，可搜尋，空缺也會記錄。
+02 ／ 日誌 您的帳戶看到的一切，可搜尋，空缺也會記錄。
 
-TgWitness / 編輯歷史本地工作區
+TgWitness ／ 編輯歷史本地工作區
 
 ![透過詳細抽屜介面，比較訊息的原始版本與編輯後版本](https://phishdestroy.github.io/TgWitness/assets/detail.png)
 
-03 / 編輯歷史 新舊版本並排顯示，不會覆寫任何內容。
+03 ／ 編輯歷史 新舊版本並排顯示，不會覆寫任何內容。
 
-TgWitness / 簽名輸出檔本地工作區
+TgWitness ／ 簽名輸出檔本地工作區
 
 ![工作區匯出功能提供簽名過的 ZIP、JSONL、CSV 檔案，以及離線 HTML 報告](https://phishdestroy.github.io/TgWitness/assets/exports.png)
 
-04 / 簽名匯出 帶走日誌，已簽名，並附帶自己的驗證工具。
+04 ／ 簽名匯出 帶走日誌，已簽名，並附帶自己的驗證工具。
 
 透過「[案件看板](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/case-board/)」、「[報告設計」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reports/)及「[分享副本」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/handover/)追蹤已儲存的紀錄。一併[檢視帳戶群組](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/groups/)。
 
-01 / 擷取
+01 ／ 擷取
 
 ### 範圍由您決定。
 
@@ -70,7 +70,7 @@ TgWitness / 簽名輸出檔本地工作區
 
 [比較資料蒐集模式](https://phishdestroy.github.io/TgWitness/zh-Hant/guides/modes.html#scope)
 
-02 / 保存
+02 ／ 保存
 
 ### 變更內容將豐富這則報導。
 
@@ -78,7 +78,7 @@ TgWitness / 簽名輸出檔本地工作區
 
 [請參閱事件矩陣](https://phishdestroy.github.io/TgWitness/zh-Hant/guides/modes.html#events)
 
-03 / 移交
+03 ／ 移交
 
 ### 一份隨行而行的紀錄。
 
@@ -111,13 +111,13 @@ tgwitness-evidence.zip簽名套件
 
 - 01
 
-  原始觀察結果JSONL 記錄 + CSV 表格
+  原始觀察結果JSONL 記錄 ＋ CSV 表格
 - 02
 
-  易讀的背景說明離線 HTML 報告 + 完整保留的媒體檔案
+  易讀的背景說明離線 HTML 報告 ＋ 完整保留的媒體檔案
 - 03
 
-  獨立驗證簽名清單 + 獨立驗證器
+  獨立驗證簽名清單 ＋ 獨立驗證器
 
 接收方用您的金鑰核對所有內容，而存放在別處的檢查點表明此後沒有任何內容被改寫。[檢查的運作方式。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/concepts/#layers)
 
@@ -139,7 +139,7 @@ tgwitness-evidence.zip簽名套件
 
 排程或手動備份
 
-立即複製，或每 1 至 1,440 分鐘複製一次，進度顯示在面板中。
+立即複製，或每 1 至 1，440 分鐘複製一次，進度顯示在面板中。
 
 Object Lock
 
@@ -210,7 +210,7 @@ Windows、Linux、macOS 或 Docker。
 
 [開啟線上示範 →](https://phishdestroy.github.io/TgWitness/demo/?lang=zh-Hant)
 
-Windows `scripts\Demo.cmd`Linux / macOS `sh start.sh --demo`
+Windows `scripts\Demo.cmd`Linux ／ macOS `sh start.sh --demo`
 
 **本地安裝指令**
 
@@ -262,7 +262,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 從原始碼安裝時，權杖位於 `data/live/panel-token.txt`。您自己的 API 憑證（來自 [my.telegram.org](https://my.telegram.org)）為選用。[完整安裝指南 ↗](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
 
-**TgWitness 0.8.1** [最新動態 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/) · [功能與已知限制 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/)
+**TgWitness 0.9.0** [最新動態 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/) · [功能與已知限制 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/)
 
 ## 清晰的操作指引。實用的下一步建議。
 
@@ -290,19 +290,19 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 **我的整個日誌是否都經過加密？**
 
-工作階段和金鑰會加密。訊息和檔案不會，請使用磁碟加密。匯出可以設定 AES-256 密碼。
+工作階段和金鑰會加密。訊息和檔案不會，請使用磁碟加密。匯出可以設定 AES－256 密碼。
 
 **這與 Telegram 有任何關聯嗎？**
 
 不是。這是一個以 Telethon 為基礎、採用 MIT 授權的獨立專案。您使用自己的帳戶登入。
 
-PROJECT NOTICE / LICENCE
+PROJECT NOTICE ／ LICENCE
 
-## Operator incompatibility.
+## Operator incompatibility．
 
-**Taylor Wessing PartG mbB — German core, Hamburg office.**
+**Taylor Wessing PartG mbB， German core， Hamburg office．**
 
-Our statement as the authors of TgWitness. It adds no condition to the MIT License. Read the complete notice and its source record.
+This statement from the authors of TgWitness adds no condition to the MIT License， and the complete notice includes its source record．
 
 [Read the complete notice](https://phishdestroy.github.io/TgWitness/docs/reference/notice/) [Original text](https://phishdestroy.github.io/TgWitness/NOTICE)
 

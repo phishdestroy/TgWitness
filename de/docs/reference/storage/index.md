@@ -16,6 +16,18 @@ Beim Freigeben von Speicherplatz wird das signierte Protokoll niemals gelöscht 
 
 Eine Upload-Antwort allein ist keine Erlaubnis zum Löschen einer Datei. TgWitness lädt das vollständige verschlüsselte Objekt herunter, überprüft dessen Größe und SHA-256, speichert die Quittung und überprüft die lokalen Bytes unmittelbar vor dem Löschen erneut. Bei einem fehlgeschlagenen Upload, einer abweichenden Rücklesung oder einer abgebrochenen Übertragung bleibt die lokale Datei erhalten. Falls eine aktivierte Beweissicherung diese Datei noch nicht kopiert hat, wird auch das Löschen darauf gewartet.
 
+## Wenn der Datenträger voll wird
+
+Downloads von Anhängen pausieren unter dem Wert für **Parameter → Anhänge → freier Speicherplatz** (standardmäßig 1 GiB); die Warteschlange bleibt erhalten. Textbeobachtungen laufen weiter. Dies ist unabhängig von Benachrichtigungen: Ihr Abschalten deaktiviert weder die Downloadreserve noch die Speicherschutzprüfungen.
+
+Für einen früheren Eingriff aktivieren Sie **Automatisch ausführen**, wählen **Lokale Datei zum Freigeben von Speicherplatz entfernen** und aktivieren **Zusätzliche Auslagerung bei wenig Speicherplatz starten**. Standardmäßig beginnt diese optionale Regel unter 5120 MiB freiem Speicher und arbeitet in Stapeln, bis 10240 MiB frei sind. Beide Schwellen sind einstellbar. Ziel, Mindestalter, Stapellimit, vollständige Rückleseprüfung und Voraussetzungen zur Beweissicherung entsprechen einem manuellen Lauf. Die Regel aktiviert niemals selbst ein Ziel. Prüfungen erfolgen alle 30 Sekunden; Fehler oder fehlender Fortschritt verschieben den nächsten Versuch um fünf Minuten. Zustand und Wiederholungszeit bleiben nach einem Neustart erhalten. Bei inaktiver Regel nutzen geplante Läufe ihr normales Intervall.
+
+Das Panel zeigt freien Speicher, die Verpackungsreserve, die Bereitschaft der Regel und wegen fehlenden temporären Speichers übersprungene Dateien. Verpacken und Wiederherstellen prüfen vor Beginn ihren maximalen temporären Platzbedarf und während des Schreibens den verfügbaren Speicher. Es gilt die konfigurierte Downloadreserve, für Speichervorgänge jedoch mindestens 64 MiB. Das ist keine Dateisystemquote: Andere Prozesse können zwischen den Prüfungen Speicher verbrauchen.
+
+Gzip komprimiert entfernte Objekte verlustfrei; es verkleinert weder das aktive Journal noch erstellt es lokale Archive. JPEG-, Video- und ZIP-Dateien werden eventuell kaum kleiner oder etwas größer. Mit Komprimierung kann das Verpacken vorübergehend etwa die doppelte Anhanggröße plus Reserve benötigen. Wählen Sie die Startschwelle früh genug für Ihre größten Dateien. Zu große Dateien bleiben erhalten und werden gemeldet; kleinere Dateien und bereits geprüfte entfernte Kopien können weiterhin Platz schaffen. Eine geprüfte Kopie erlaubt das Entfernen der lokalen Datei ohne eine weitere Verpackungsdatei. Auch die Wiederherstellung braucht temporären Speicher und kann bis zu dessen Verfügbarkeit abgelehnt werden.
+
+Ohne geeignete verschiebbare Dateien oder konfiguriertes Ziel kann TgWitness nicht automatisch Speicher freigeben. Die Speicherverwaltung kürzt oder überschreibt das signierte Journal niemals. Es benötigt weiterhin Platz für neue Textbeobachtungen.
+
 ## Ein Ziel verbinden
 
 Wählen Sie unter **„Extras“ → „Speicher & Speicherplatz“ → „Speicher verwalten**“ die Aufgabe und das Ziel aus, speichern Sie diese und wählen Sie anschließend **„Upload und Download testen**“. Der Test lädt eine kleine zufällige Testdatei hoch und liest sie wieder ein. Dabei werden keine Telegram-Inhalte verwendet.

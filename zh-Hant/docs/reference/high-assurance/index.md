@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` 唯讀範圍 | 帳戶事件、防火牆規則版本 | 90 天 |
 | `vultr` | `VULTR_API_KEY` | 具備讀取權限且擁有 `activity_logs` 權限 | 帳戶活動日誌（方法、路徑、執行者） | 30 天，若訂閱稽核日誌則可延長保存期限 |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | CloudTrail 事件歷史紀錄 | 90 天 |
-| `phala` | `PHALA_CLOUD_API_KEY` | 同一工作區的 API 金鑰 | 應用程式更新：程式碼與環境變更、重新啟動、作業系統升級 | 雖然該應用程式確實存在 |
+| `phala` | `PHALA_CLOUD_API_KEY` | 同一工作區的 API 金鑰 | 應用程式修訂與 CVM 操作：Docker Compose 配置與環境變更、重新啟動、作業系統升級 | 雖然該應用程式確實存在 |
 | `generic` | 無 | 無 | 無：**自我驗證** | – |
 
 請為每個案例使用專屬的專案、團隊、帳戶或子帳戶：驗證者的 唯讀存取權限將僅顯示此部署。憑證會從 `--provider-token-file` 或上述變數中讀取，絕不從命令列取得。對於 AWS，該檔案 儲存 `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`；區域為 `--location`.
@@ -62,9 +62,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 | `tdx_compose_hash` | RTMR3 從 dstack 事件日誌中重播資料，並測量收集器所回報的應用程式編寫情況 |
 | `tdx_compose` | 該編譯結果與已部署提交的程式碼完全字節對字節一致：原始碼檔案透過雜湊值固定，兩張圖片則透過摘要值固定，沒有其他程式碼 |
 | `tdx_identity` | 此證明來自已部署的應用程式與實例，並使用 Phala 的 KMS 所提供的金鑰以及加密磁碟 |
-| `tdx_os` | 當 `--tdx-measurements`，MRTD 和 RTMR0-2 的數值等同於從 dstack 作業系統映像檔計算出的數值（`dstack-mr measure --json`) |
+| `tdx_os` | MRTD 和 RTMR0-2 的數值等同於驗證器根據 Dstack-TEE 發布的 dstack 作業系統映像所計算的數值，該數值是透過 CVM 回報的作業系統映像雜湊值，以及 QEMU 根據虛擬機型態所建立的 ACPI 表格（包含韌體、核心、initrd、附帶根檔案系統雜湊值的命令列、記憶體、vCPU 及裝置）所推算得出。開發用映像會導致驗證失敗 |
 
-日誌中記錄的每個收集器啟動次數都附有此類證明，因此 `verify --evidence` 會檢查每次啟動。Phala 的應用程式修訂清單用作 提供者日誌：若部署後撰寫功能有所變更，報告即會失敗。
+作業系統映像檔（約 180 MB，其中保留 21 MB）會從 [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) 下載一次至 記錄旁的 `dstack-images`；`--tdx-image FOLDER` 使用另一個資料夾或已解壓縮的映像檔， `--tdx-image none` 則跳過比對步驟。 測量步驟依循 `dstack-mr` 及來自 Dstack-TEE/dstack 的 `qemu-acpi` Rust 套件；`tools/check_dstack_image.py` 會將其與 QEMU 自身的 ACPI 輸出以及真實的 Phala Cloud 硬體認證記錄進行比對，`--live` 則會與已發布的映像進行比對。 `--tdx-measurements` 則仍會比較以 JSON 格式提供的 MRTD 與 RTMR0-2。
+
+日誌中記錄的每次收集器啟動都附有此類證明，因此 `verify --evidence` 會檢查每次啟動及其所啟動的作業系統映像。Phala 的應用程式修訂版本 以及 CVM 的運作狀況即作為供應商日誌：若 Docker Compose 配置在部署後發生變更， 報告將被判定為失敗，且重啟紀錄會被列出以供審查。
 
 在面板中，選擇**「額外功能** 」→「**24/7 伺服器** 」下的**「機密虛擬機器 · Phala Cloud」** ，並貼上 Phala Cloud API 金鑰；快速隧道運作方式與 Hetzner 相同。若透過命令列操作：
 
@@ -74,12 +76,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` 從檔案中讀取 Intel 的憑證和撤銷清單，而非 從 Intel 下載。此處無法使用 Gateway DNS：Phala 沒有針對 外發流量的服務供應商防火牆。
 
+### 驗證憑證
+
+對於 Phala 部署，`verify --report certificate.md` 還會寫入憑證：一個 獨立的 `certificate.html` 及一份 A4 規格的 `certificate.pdf`，內容包含驗證結果、從 Intel 根憑證到收集器金鑰的信任鏈、 與普通及高保障級別伺服器的比較、 實際測量值與根據已發布映像計算出的數值的對照、各部分的擔保方、 Intel 憑證鏈、每項檢查、供應商日誌，以及如何重現 驗證流程。 JSON 報告仍是權威性紀錄；這些頁面僅是其呈現形式。
+
+本報告已透過簽名與時間戳記進行數位加封，相關內容存於 `certificate.seal.json` 以及其旁之 `.tsq`/`.tsr` 檔案中：
+
+| Seal | 新增功能 |
+| --- | --- |
+| 合格電子時間戳記，`http://tsa.belgium.be/connect` | RFC 3161 時間戳記，基於比利時聯邦政府合格信任服務提供者（FPS 政策與支援局，BOSA）所提供的 `certificate.json` 精確位元組資料。 該單位被列為比利時歐盟可信清單中的「合格時間戳記服務」，狀態為「已授予」；截至 2026 年 10 月 20 日發布的清單，其根憑證（比利時根 CA6）及清單中的條目均已固定於 `tgwitness/tsa_roots.py` 中。 根據《歐盟法規》第 910/2014 號第 41 條，此類時間戳記在每個歐盟成員國內，其日期、時間及資料完整性均被推定為準確無誤。 |
+| RFC 3161 時間戳記，FreeTSA | 第二個獨立的時間戳記 |
+| 驗證器簽名 | Ed25519 基於一項聲明，該聲明列出報告的 SHA-256 值及所有時間戳記，並使用驗證者自身的金鑰（`--sign-with FOLDER`，預設為 `~/.tgwitness/verifier`）；該 PDF 文件附有由同一金鑰簽署的數位簽章 |
+
+`--timestamp URL`（可重複）選擇其他授權機構，`--timestamp none` 不選擇任何機構，`--sign-with
+none` 則不對印章進行簽署。`check-report` 會檢查報告的雜湊值、驗證者簽名、 每個時間戳至可信根憑證及其合格狀態，以及 PDF 文件的簽名。 在歐盟以外地區， 合格時間戳記及報告整體的法律效力，由接收該報告的 法院或主管機關決定；該印章僅顯示報告的生成時間，並證明其內容未被篡改。
+
 一份驗證報告無法排除 Intel TDX 模組或微程式中存在漏洞，亦無法排除對 記憶體匯流排的實體存取。無論誰控制 Phala 帳戶中的應用程式，皆可部署另一份「compose」； 它將以新的修訂版本出現，並附帶新的「compose」雜湊值。主機控制著機器 的時間來源與網路。
+
+部署、透過 `--evidence` 進行驗證、重新啟動、作業系統映像比較、附有簽名與時間戳記的數位密封憑證，以及 銷毀等操作均已在 Phala Cloud 平台上執行；請參閱 [（2026 年 11 月 4 日執行）及](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)。
 
 ## 開始之前
 
@@ -110,7 +130,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 在伺服器端，cloudflared 會開啟一條 [快速隧道](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/) 連接到控制面板：一個隨機 `https://….trycloudflare.com` 位址，該位址會在 cloudflared 或伺服器重新啟動時變更。伺服器上的一個小型服務會將每個位址發佈至隨機的 ntfy.sh 主題，並使用僅部署目錄所持有 的金鑰進行簽名（HMAC-SHA256） （`address-key.txt`），並每三小時重複發布一次，因為 ntfy.sh 會保留貼文長達 12 小時。 `deploy` 和**「查找當前位址**」功能僅接受經簽名的貼文，因此偽造的貼文無法 將您及您的面板憑證導向他人的位址。該主題記錄於 已發布的 cloud-init 中：任何持有這些資訊的人都能讀取當前位址，而該位址仍會要求提供 面板憑證。無論何種情況，伺服器均不保留任何傳入連接埠。
 
-相關成本：由於沒有 Cloudflare 帳戶會記錄快速隧道，因此 `verify` 系統會回報 隧道、連接器及 DNS 檢查無法使用，而結果頂多 `incomplete`；至於 服務供應商記錄、防火牆、簽名聲明、主機測量及安裝程式比較等項目，則 照常進行檢查。與參考安裝程式的位元組比對需要一個已部署的提交版本 ，該版本已知 `--quick-tunnel`；從 0.7.0 版本檢出可建置網域安裝程式並回報 差異。 Cloudflare 對快速隧道不提供正常運作時間保證，允許 200 個請求在 傳輸中，且不傳輸伺服器發送事件（Server-Sent Events），因此控制面板的即時更新（0.7.0 之後的版本） 可能無法透過快速隧道傳送，需重新載入頁面；此部分尚未經過測試。若需 長期運作，請使用您自己的網域。
+驗證器沒有地址金鑰，任何讀取該主題的人都能向其發佈訊息。因此，收集器 也會發佈該地址本身，並使用其自身的 Ed25519 金鑰進行簽名；而 `verify` 會取用部署記錄中 由收集器金鑰簽名的最新發佈訊息；發佈訊息的排序依據是 ntfy.sh 接收它們的時間，而非它們聲稱的時間。 在此變更之前的收集器不會對任何內容進行簽名，而 `verify` 隨後會取用最新的貼文，並在 `statement` 檢查中表明此點；偽造的貼文 只能導致該檢查失敗，因為該地址仍必須使用收集器的金鑰進行回應。
+
+代價為何：由於沒有 Cloudflare 帳戶會記錄快速隧道，因此 `verify` 會將 隧道、連接器及 DNS 檢查報告為不可用，結果最好也只能達到 `incomplete`（在 Phala Cloud 上，檢查則會通過：連接器在受測的 Docker Compose 配置中運行）； 供應商記錄、防火牆、簽名聲明、主機測量及安裝程式比對均 照常檢查。與參考安裝程式的位元組比對需要一個已部署的提交 版本，該版本必須已知 `--quick-tunnel`；從 0.7.0 版本檢出後，會建置網域安裝程式並回報 差異。 Cloudflare 對快速隧道不提供正常運作時間保證，允許 200 個 待處理請求，且不傳輸 Server-Sent Events，因此控制面板的即時更新（0.7.0 之後的版本） 可能無法透過快速隧道傳送，需重新載入頁面；此部分尚未進行測試。若需 確保系統穩定運作，請使用您自己的網域。
 
 ## 部署
 

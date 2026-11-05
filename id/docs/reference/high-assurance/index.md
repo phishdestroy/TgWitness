@@ -44,7 +44,7 @@ Pengukuran host (pendengar SSH dan proses, sesi saat ini, login `wtmp`, proses b
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` ruang lingkup baca-saja | Peristiwa akun, versi aturan firewall | 90 hari |
 | `vultr` | `VULTR_API_KEY` | Pengguna dengan akses baca dan `activity_logs` izin | Log aktivitas akun (metode, jalur, pelaku) | 30 hari, lebih lama dengan langganan log audit |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | Riwayat peristiwa CloudTrail | 90 hari |
-| `phala` | `PHALA_CLOUD_API_KEY` | Kunci API dari ruang kerja yang sama | Revisi aplikasi: perubahan komposisi dan lingkungan, restart, serta pembaruan sistem operasi | Selama aplikasi ini masih ada |
+| `phala` | `PHALA_CLOUD_API_KEY` | Kunci API dari ruang kerja yang sama | Revisi aplikasi dan operasi CVM: perubahan konfigurasi dan lingkungan Docker Compose, restart, serta pembaruan sistem operasi | Selama aplikasi ini masih ada |
 | `generic` | tidak ada | tidak ada | none: **disertifikasi sendiri** | – |
 
 Gunakan proyek, tim, akun, atau sub-akun khusus untuk setiap kasus: akses hanya baca dari verifikator kemudian hanya menampilkan penyebaran ini. Kredensial dibaca dari `--provider-token-file` atau variabel di atas, bukan dari baris perintah. Untuk AWS, berkas tersebut berisi `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; wilayahnya adalah `--location`.
@@ -62,9 +62,11 @@ Dengan `--provider phala` pengumpul berjalan di mesin virtual rahasia Intel TDX 
 | `tdx_compose_hash` | RTMR3, yang diambil dari log peristiwa dstack, mengukur laporan komposisi aplikasi yang dilaporkan oleh pengumpul |
 | `tdx_compose` | Kode tersebut, byte demi byte, sama persis dengan kode yang dihasilkan oleh commit yang telah di-deploy: berkas sumber diidentifikasi berdasarkan hash, kedua gambar berdasarkan digest, tanpa kode lain apa pun |
 | `tdx_identity` | Pengesahan berasal dari aplikasi dan instans yang telah diimplementasikan, dengan kunci dari KMS Phala dan disk terenkripsi |
-| `tdx_os` | Dengan `--tdx-measurements`, MRTD dan RTMR0-2 sama dengan nilai yang dihitung dari gambar sistem operasi dstack (`dstack-mr measure --json`) |
+| `tdx_os` | MRTD dan RTMR0-2 sama dengan nilai yang dihitung oleh verifikator dari gambar OS dstack yang diterbitkan oleh Dstack-TEE, yang ditemukan berdasarkan hash gambar OS yang dilaporkan oleh CVM, serta dari tabel ACPI yang dibuat oleh QEMU untuk konfigurasi VM: firmware, kernel, initrd, baris perintah beserta hash sistem berkas root, memori, vCPU, dan perangkat. Gambar pengembangan gagal |
 
-Setiap kali pengumpul dimulai dan dicatat dalam jurnal, terdapat pengesahan tersebut, sehingga `verify --evidence` memeriksa setiap kali dimulai. Daftar revisi aplikasi Phala berfungsi sebagai log penyedia: jika pesan yang sedang dibuat berubah setelah penerapan, laporan tersebut gagal.
+Gambar sistem operasi (sekitar 180 MB, di mana 21 MB disimpan) diunduh sekali dari [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) ke dalam `dstack-images` di samping catatan; `--tdx-image FOLDER` menggunakan folder lain atau gambar yang telah diekstrak, `--tdx-image none` melewatkan perbandingan. Pengukuran dilakukan oleh `dstack-mr` dan paket Rust `qemu-acpi` dari Dstack-TEE/dstack; `tools/check_dstack_image.py` memeriksanya terhadap keluaran ACPI QEMU sendiri dan terhadap catatan attestation perangkat keras Phala Cloud yang sebenarnya, sedangkan `--live` juga memeriksanya terhadap gambar yang dipublikasikan. `--tdx-measurements` tetap membandingkan MRTD dan RTMR0-2 yang diberikan dalam format JSON.
+
+Setiap kali pengumpul dimulai dan dicatat dalam jurnal, hal tersebut disertai dengan pengesahan tersebut, sehingga `verify --evidence` memeriksa setiap kali pengumpul dimulai serta citra sistem operasi yang digunakan untuk mem-boot-nya. Revisi aplikasi Phala dan operasi CVM berfungsi sebagai log penyedia: konfigurasi Docker Compose yang diubah setelah penyebaran akan menyebabkan laporan gagal, dan proses restart dicantumkan untuk ditinjau.
 
 Di panel, pilih **Mesin Virtual Rahasia · Phala Cloud** di bawah **Ekstra** → **Server 24/7** dan tempelkan kunci API Phala Cloud; terowongan cepat berfungsi seperti di Hetzner. Dari baris perintah:
 
@@ -74,12 +76,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` membaca sertifikat dan daftar pencabutan Intel dari sebuah berkas, bukan mengunduhnya dari Intel. Gateway DNS tidak tersedia di sini: Phala tidak memiliki firewall penyedia layanan untuk lalu lintas keluar.
 
+### Sertifikat attestation
+
+Untuk penyebaran Phala, `verify --report certificate.md` juga menulis sertifikat: sebuah `certificate.html` yang berdiri sendiri dan `certificate.pdf` berukuran A4 yang berisi kesimpulan, rantai kepercayaan dari root Intel hingga kunci pengumpul, perbandingan dengan server biasa dan server dengan jaminan tinggi, pengukuran di samping nilai yang dihitung dari gambar yang dipublikasikan, pihak yang menjamin setiap bagian, rantai sertifikat Intel, setiap pemeriksaan, log penyedia, dan cara mengulangi verifikasi. Laporan JSON tetap menjadi catatan resmi; halaman-halaman ini menampilkannya.
+
+Laporan ini disegel secara digital dengan tanda tangan dan cap waktu, dalam berkas `certificate.seal.json` serta berkas `.tsq`/`.tsr` di sampingnya:
+
+| Seal | Fitur tambahan |
+| --- | --- |
+| Cap waktu elektronik yang terverifikasi, `http://tsa.belgium.be/connect` | Cap waktu RFC 3161 pada byte yang tepat dari `certificate.json` dari penyedia layanan kepercayaan yang memenuhi syarat pemerintah federal Belgia (FPS Policy and Support, BOSA). Unit tersebut terdaftar sebagai layanan penandaan waktu yang memenuhi syarat, dengan status "diberikan", dalam daftar tepercaya UE Belgia; akar (Belgium Root CA6) dan entri-entri dalam daftar tersebut, berdasarkan daftar yang diterbitkan pada 20 Oktober 2026, disematkan dalam `tgwitness/tsa_roots.py`. Berdasarkan Peraturan (UE) No. 910/2014, Pasal 41, cap waktu semacam itu dianggap akurat dalam hal tanggal dan waktu serta integritas data di setiap negara anggota UE |
+| Stempel waktu RFC 3161, FreeTSA | Stempel waktu kedua yang independen |
+| Tanda tangan verifikator | Ed25519 diterapkan pada pernyataan yang mencantumkan SHA-256 laporan dan setiap cap waktu, menggunakan kunci verifikator itu sendiri (`--sign-with FOLDER`, default `~/.tgwitness/verifier`); PDF tersebut memuat tanda tangan dengan kunci yang sama |
+
+`--timestamp URL` (dapat diulang) memilih otoritas lain, `--timestamp none` tidak memilih apa pun, `--sign-with
+none` membiarkan segel tidak ditandatangani. `check-report` memeriksa hash laporan, tanda tangan verifikator, setiap cap waktu ke akar tepercaya dan status kualifikasinya, serta tanda tangan PDF. Bobot hukum dari cap waktu yang memenuhi syarat di luar UE, serta dari laporan secara keseluruhan, ditentukan oleh pengadilan atau otoritas yang menerimanya; segel tersebut menunjukkan kapan laporan tersebut ada dan bahwa laporan tersebut tidak berubah.
+
 Sebuah pengesahan tidak dapat mengesampingkan adanya kelemahan pada modul TDX atau mikrokode Intel, atau akses fisik ke bus memori. Siapa pun yang mengendalikan aplikasi di akun Phala dapat menerapkan pesan baru; pesan tersebut muncul sebagai revisi baru dengan hash pesan baru. Host mengendalikan sumber waktu dan jaringan mesin.
+
+Penerapan, verifikasi dengan `--evidence`, restart, perbandingan citra sistem operasi, sertifikat yang disegel secara digital dengan tanda tangan dan cap waktu, serta penghancuran telah dijalankan di Phala Cloud itu sendiri; lihat [pada 4 November 2026, jalankan](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026).
 
 ## Sebelum Anda mulai
 
@@ -110,7 +130,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 Di server, cloudflared membuka [terowongan cepat](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/) ke panel: sebuah alamat acak `https://….trycloudflare.com` yang berubah setiap kali cloudflared atau server dimulai ulang. Sebuah layanan kecil di server memposting setiap alamat ke topik ntfy.sh yang acak, ditandatangani (HMAC-SHA256) dengan kunci yang hanya disimpan di direktori deployment (`address-key.txt`), dan mengulanginya setiap tiga jam karena ntfy.sh menyimpan postingan selama 12. `deploy` dan **Temukan alamat saat ini** hanya menerima posting yang ditandatangani, sehingga posting palsu tidak dapat mengalihkan Anda, beserta token panel Anda, ke alamat orang lain. Topik tersebut tercatat dan dipublikasikan melalui cloud-init: siapa pun yang memilikinya dapat membaca alamat saat ini, yang tetap meminta token panel. Server tidak membuka port masuk apa pun dalam kedua kasus tersebut.
 
-Biayanya: akun Cloudflare tidak menyimpan catatan tentang terowongan cepat, sehingga `verify` melaporkan bahwa terowongan, konektor, dan pemeriksaan DNS tidak tersedia, dan hasilnya paling banter `incomplete`; catatan penyedia, firewall, pernyataan yang ditandatangani, pengukuran host, dan perbandingan penginstal diperiksa seperti biasa. Perbandingan byte dengan penginstal referensi memerlukan commit yang telah diterapkan yang sudah mengetahui `--quick-tunnel`; checkout versi 0.7.0 membangun penginstal domain dan melaporkan perbedaannya. Cloudflare tidak memberikan jaminan waktu aktif untuk terowongan cepat, mengizinkan 200 permintaan yang sedang diproses, dan tidak mendukung Server-Sent Events, sehingga pembaruan langsung panel (versi setelah 0.7.0) mungkin tidak sampai melalui terowongan tersebut dan tampilan perlu dimuat ulang; bagian tersebut belum dicoba. Untuk kasus yang harus tetap berfungsi, gunakan domain Anda sendiri.
+Seorang verifikator tidak memiliki kunci alamat, dan siapa pun yang membaca topik tersebut dapat memposting ke sana. Jadi, pengumpul juga memposting alamat itu sendiri, yang ditandatangani dengan kunci Ed25519 miliknya sendiri, dan `verify` mengambil posting terbaru yang ditandatangani oleh kunci pengumpul dalam catatan penyebaran; posting diurutkan berdasarkan waktu ntfy.sh menerimanya, bukan waktu yang mereka klaim. Seorang pengumpul dari sebelum perubahan ini tidak menandatangani apa pun, dan `verify` kemudian mengambil posting terbaru dan menyatakan hal itu dalam pemeriksaan `statement`; sebuah posting palsu hanya dapat membuat pemeriksaan tersebut gagal, karena alamat tersebut tetap harus merespons dengan kunci pengumpul.
+
+Biayanya: tidak ada akun Cloudflare yang menyimpan catatan tentang terowongan cepat, sehingga `verify` melaporkan terowongan, konektor, dan pemeriksaan DNS sebagai tidak tersedia, dan hasilnya paling baik adalah `incomplete` (di Phala Cloud, pemeriksaan justru lulus: konektor berjalan di dalam konfigurasi Docker Compose yang diukur); catatan penyedia, firewall, pernyataan yang ditandatangani, pengukuran host, dan perbandingan penginstal diperiksa seperti biasa. Perbandingan byte dengan penginstal referensi memerlukan commit yang telah diterapkan yang sudah mengenal `--quick-tunnel`; checkout versi 0.7.0 membangun penginstal domain dan melaporkan perbedaannya. Cloudflare tidak memberikan jaminan waktu aktif untuk terowongan cepat, mengizinkan 200 permintaan yang sedang diproses, dan tidak mendukung Server-Sent Events, sehingga pembaruan langsung pada panel (versi setelah 0.7.0) mungkin tidak sampai melalui terowongan tersebut dan tampilan perlu dimuat ulang; bagian tersebut belum dicoba. Untuk kasus yang harus tetap berfungsi, gunakan domain Anda sendiri.
 
 ## Deploy
 

@@ -44,7 +44,7 @@ Các số liệu máy chủ (trình nghe SSH và các tiến trình, phiên hi�
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` phạm vi chỉ đọc | Sự kiện tài khoản, phiên bản quy tắc tường lửa | 90 ngày |
 | `vultr` | `VULTR_API_KEY` | Người dùng có quyền truy cập đọc và `activity_logs` quyền | Nhật ký hoạt động tài khoản (phương thức, đường dẫn, tác nhân) | 30 ngày, thời gian lưu trữ có thể kéo dài hơn nếu đăng ký dịch vụ nhật ký kiểm toán |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | Lịch sử sự kiện CloudTrail | 90 ngày |
-| `phala` | `PHALA_CLOUD_API_KEY` | Một khóa API của cùng một không gian làm việc | Các bản cập nhật ứng dụng: thay đổi cấu hình và môi trường, khởi động lại, nâng cấp hệ điều hành | Mặc dù ứng dụng này hiện đã tồn tại |
+| `phala` | `PHALA_CLOUD_API_KEY` | Một khóa API của cùng một không gian làm việc | Các bản cập nhật ứng dụng và thao tác trên CVM: Thay đổi cấu hình và môi trường Docker Compose, khởi động lại, nâng cấp hệ điều hành | Mặc dù ứng dụng này hiện đã tồn tại |
 | `generic` | không có | không có | none: **tự chứng thực** | – |
 
 Sử dụng một dự án, nhóm, tài khoản hoặc tài khoản con dành riêng cho từng vụ việc: quyền truy cập chỉ đọc của người xác minh sau đó sẽ chỉ hiển thị triển khai này. Thông tin đăng nhập được đọc từ `--provider-token-file` hoặc biến ở trên, không bao giờ từ dòng lệnh. Đối với AWS, tệp chứa `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; khu vực là `--location`.
@@ -62,9 +62,11 @@ Với `--provider phala` trình thu thập chạy trong một máy ảo bảo m�
 | `tdx_compose_hash` | RTMR3, được tái tạo từ nhật ký sự kiện dstack, đo lường quá trình soạn thảo trong ứng dụng mà trình thu thập dữ liệu báo cáo |
 | `tdx_compose` | Mã nguồn đó, từng byte một, chính là mã nguồn được xây dựng từ commit đã triển khai: các tệp nguồn được cố định bằng băm, cả hai hình ảnh đều được cố định bằng bản tóm tắt, không có mã nguồn nào khác |
 | `tdx_identity` | Chứng nhận này được tạo ra từ ứng dụng và phiên bản đã triển khai, sử dụng các khóa từ hệ thống quản lý khóa (KMS) của Phala và một đĩa được mã hóa |
-| `tdx_os` | Với `--tdx-measurements`, MRTD và RTMR0-2 bằng các giá trị được tính toán từ hình ảnh hệ điều hành dstack (`dstack-mr measure --json`) |
+| `tdx_os` | MRTD và RTMR0-2 bằng các giá trị mà trình xác minh tính toán từ hình ảnh hệ điều hành dstack do Dstack-TEE công bố, được xác định thông qua băm hình ảnh hệ điều hành mà CVM báo cáo, cũng như từ các bảng ACPI mà QEMU xây dựng dựa trên cấu hình của máy ảo: phần sụn, nhân hệ điều hành, initrd, dòng lệnh kèm băm hệ thống tệp gốc, bộ nhớ, vCPU và các thiết bị. Hình ảnh phát triển bị lỗi |
 
-Mỗi lần khởi động trình thu thập được ghi lại trong nhật ký đều kèm theo chứng nhận như vậy, do đó `verify --evidence` kiểm tra mỗi lần khởi động. Danh sách các bản sửa đổi ứng dụng của Phala đóng vai trò là nhật ký nhà cung cấp: nếu nội dung soạn thảo thay đổi sau khi triển khai, báo cáo sẽ không thành công.
+Hình ảnh hệ điều hành (khoảng 180 MB, trong đó 21 MB được lưu giữ) được tải xuống một lần từ [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) vào `dstack-images` bên cạnh bản ghi; `--tdx-image FOLDER` sử dụng một thư mục khác hoặc hình ảnh đã giải nén, `--tdx-image none` bỏ qua bước so sánh. Quá trình đo lường được thực hiện theo `dstack-mr` và gói Rust `qemu-acpi` từ thư mục Dstack-TEE/dstack; `tools/check_dstack_image.py` đối chiếu kết quả với đầu ra ACPI của chính QEMU và với bản ghi chứng thực phần cứng Phala Cloud thực tế, còn `--live` cũng đối chiếu với hình ảnh đã được công bố. `--tdx-measurements` vẫn tiến hành so sánh MRTD và RTMR0-2 được cung cấp dưới dạng JSON.
+
+Mỗi lần khởi động bộ thu thập được ghi lại trong nhật ký đều kèm theo chứng nhận như vậy, do đó `verify --evidence` sẽ kiểm tra từng lần khởi động và hình ảnh hệ điều hành mà nó đã khởi động. Các phiên bản ứng dụng của Phala cùng các hoạt động của CVM đóng vai trò như nhật ký của nhà cung cấp: nếu cấu hình Docker Compose bị thay đổi sau khi triển khai, báo cáo sẽ bị từ chối, và các lần khởi động lại sẽ được liệt kê để xem xét.
 
 Trong bảng điều khiển, chọn **Máy ảo bảo mật · Phala Cloud** trong **mục Extras** → **Server 24/7** và dán khóa API Phala Cloud; đường hầm nhanh hoạt động tương tự như trên Hetzner. Từ dòng lệnh:
 
@@ -74,12 +76,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` đọc các chứng chỉ và danh sách thu hồi của Intel từ một tệp thay vì tải chúng xuống từ Intel. Dịch vụ Gateway DNS không khả dụng tại đây: Phala không có tường lửa của nhà cung cấp cho lưu lượng truy cập đi.
 
+### Chứng chỉ xác thực
+
+Đối với việc triển khai Phala, `verify --report certificate.md` cũng ghi lại chứng chỉ: một `certificate.html` độc lập và một tệp A4 `certificate.pdf` kèm theo kết luận, chuỗi tin cậy từ chứng chỉ gốc của Intel đến khóa thu thập, so sánh với các máy chủ thông thường và máy chủ có độ tin cậy cao, các số liệu đo lường bên cạnh các giá trị được tính toán từ hình ảnh đã công bố, ai là người xác nhận từng phần, chuỗi chứng chỉ của Intel, mọi bước kiểm tra, nhật ký nhà cung cấp, và cách thức lặp lại quá trình xác minh. Báo cáo JSON vẫn là bản ghi chính thức; các trang web hiển thị nội dung này.
+
+Báo cáo được niêm phong kỹ thuật số bằng chữ ký và dấu thời gian, trong tệp `certificate.seal.json` cùng các tệp `.tsq`/`.tsr` đi kèm:
+
+| Seal | Tính năng mới |
+| --- | --- |
+| Dấu thời gian điện tử được chứng nhận, `http://tsa.belgium.be/connect` | Dấu thời gian theo tiêu chuẩn RFC 3161 được áp dụng lên chính xác các byte của `certificate.json` từ nhà cung cấp dịch vụ chứng thực đủ điều kiện của Chính phủ Liên bang Bỉ (FPS Policy and Support, BOSA). Đơn vị này được liệt kê là dịch vụ đóng dấu thời gian đủ điều kiện, với trạng thái đã được cấp phép, trong danh sách tin cậy của EU tại Bỉ; chứng chỉ gốc (Belgium Root CA6) và các mục trong danh sách, tính đến danh sách được ban hành vào ngày 20 tháng 10 năm 2026, đã được cố định trong `tgwitness/tsa_roots.py`. Theo Điều 41 của Quy định (EU) số 910/2014, dấu thời gian như vậy được coi là chính xác về ngày giờ cũng như tính toàn vẹn của dữ liệu tại mọi quốc gia thành viên EU |
+| Dấu thời gian theo RFC 3161, FreeTSA | Một dấu thời gian thứ hai, độc lập |
+| Chữ ký của trình xác minh | Ed25519 được áp dụng cho một tuyên bố nêu rõ mã SHA-256 của báo cáo và mọi dấu thời gian, bằng chính khóa của bên xác minh (`--sign-with FOLDER`, mặc định là `~/.tgwitness/verifier`); tệp PDF mang chữ ký được tạo bằng chính khóa đó |
+
+`--timestamp URL` (có thể lặp lại) sẽ chọn các cơ quan chứng thực khác, `--timestamp none` không chọn cơ quan nào, `--sign-with
+none` để con dấu không được ký. `check-report` kiểm tra băm của báo cáo, chữ ký của bên xác minh, mỗi dấu thời gian đến một gốc đáng tin cậy cùng trạng thái đủ điều kiện của nó, và chữ ký của tệp PDF. Giá trị pháp lý của dấu thời gian đủ điều kiện bên ngoài Liên minh Châu Âu, cũng như của toàn bộ báo cáo, thuộc về tòa án hoặc cơ quan có thẩm quyền tiếp nhận báo cáo đó; con dấu này chứng minh thời điểm báo cáo được tạo ra và khẳng định rằng báo cáo chưa bị thay đổi.
+
 Một chứng nhận không thể loại trừ lỗ hổng trong mô-đun TDX hoặc vi mã của Intel, hoặc quyền truy cập vật lý vào bus bộ nhớ. Bất kỳ ai kiểm soát ứng dụng trong tài khoản của Phala đều có thể triển khai một bản soạn thảo khác; nó sẽ xuất hiện dưới dạng một bản sửa đổi mới với mã băm soạn thảo mới. Máy chủ kiểm soát nguồn thời gian và mạng của máy.
+
+Các thao tác triển khai, xác minh bằng `--evidence`, khởi động lại, so sánh hình ảnh hệ điều hành, chứng chỉ được niêm phong kỹ thuật số bằng chữ ký và dấu thời gian, cùng với thao tác hủy bỏ đã được thực thi ngay trên chính nền tảng Phala Cloud; xin tham khảo [– phiên chạy ngày 4 tháng 11 năm 2026 và](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026).
 
 ## Trước khi bắt đầu
 
@@ -110,7 +130,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 Trên máy chủ, cloudflared mở một [đường hầm nhanh](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/) đến bảng điều khiển: một địa chỉ ngẫu nhiên `https://….trycloudflare.com` thay đổi mỗi khi cloudflared hoặc máy chủ khởi động lại. Một dịch vụ nhỏ trên máy chủ đăng mỗi địa chỉ lên một chủ đề ngẫu nhiên trên ntfy.sh , được ký (HMAC-SHA256) bằng một khóa chỉ có trong thư mục triển khai (`address-key.txt`), và lặp lại việc này cứ sau ba giờ vì ntfy.sh lưu giữ các bài đăng trong 12. `deploy` và **Tìm địa chỉ hiện tại** chỉ chấp nhận các bài đăng được ký, do đó một bài đăng giả mạo không thể chuyển bạn và mã thông báo bảng điều khiển của bạn đến địa chỉ của người khác. Chủ đề này được lưu trong bản ghi và cloud-init đã được công bố: bất kỳ ai có chúng đều có thể đọc địa chỉ hiện tại, địa chỉ này vẫn yêu cầu mã thông báo bảng điều khiển. Máy chủ không giữ bất kỳ cổng vào nào trong cả hai trường hợp.
 
-Chi phí: không có tài khoản Cloudflare nào lưu trữ bản ghi về đường hầm tạm thời, do đó `verify` báo cáo rằng kênh, bộ kết nối và kiểm tra DNS không khả dụng và kết quả tốt nhất là `incomplete`; các bản ghi của nhà cung cấp, tường lửa, tuyên bố đã ký, đo lường máy chủ và so sánh trình cài đặt được kiểm tra như bình thường. Việc so sánh byte với trình cài đặt tham chiếu cần một bản commit đã triển khai đã biết trước `--quick-tunnel`; một bản checkout 0.7.0 sẽ xây dựng trình cài đặt miền và báo cáo sự khác biệt. Cloudflare không đảm bảo thời gian hoạt động cho các đường hầm nhanh, cho phép 200 yêu cầu đang được xử lý và không hỗ trợ Server-Sent Events, do đó các cập nhật trực tiếp trên bảng điều khiển (các phiên bản sau 0.7.0) có thể không được truyền qua đường hầm này và cần tải lại trang; phần này chưa được thử nghiệm. Đối với trường hợp cần đảm bảo tính ổn định, hãy sử dụng tên miền của riêng bạn.
+Một trình xác minh không có khóa địa chỉ, và bất kỳ ai đọc chủ đề đều có thể đăng bài lên đó. Do đó, trình thu thập cũng đăng chính địa chỉ đó, được ký bằng khóa Ed25519 của chính nó, và `verify` sẽ lấy bài đăng mới nhất được ký bởi khóa của trình thu thập trong bản ghi triển khai; các bài đăng được sắp xếp theo thời gian mà ntfy.sh nhận được chúng, chứ không phải thời gian mà chúng tuyên bố. Một bộ thu thập từ trước khi có thay đổi này sẽ không ký bất kỳ nội dung nào, và `verify` sau đó sẽ lấy bài đăng mới nhất và thông báo điều này trong quá trình kiểm tra `statement`; một bài đăng giả mạo chỉ có thể khiến quá trình kiểm tra đó thất bại, vì địa chỉ đó vẫn phải trả lời bằng khóa của bộ thu thập.
+
+Chi phí phát sinh: không có tài khoản Cloudflare nào lưu giữ hồ sơ về đường hầm nhanh, do đó `verify` báo cáo rằng đường hầm, bộ kết nối và kiểm tra DNS không khả dụng và kết quả tốt nhất là `incomplete` (trên Phala Cloud thì quá trình kiểm tra lại thành công: bộ kết nối chạy bên trong cấu hình Docker Compose đã được đo lường); các bản ghi của nhà cung cấp, tường lửa, tuyên bố có chữ ký, số liệu đo lường máy chủ và so sánh trình cài đặt đều được kiểm tra như bình thường. Việc so sánh byte với trình cài đặt tham chiếu cần một bản cam kết đã triển khai đã biết trước về `--quick-tunnel`; việc kiểm tra phiên bản 0.7.0 sẽ xây dựng trình cài đặt miền và báo cáo sự khác biệt. Cloudflare không đảm bảo thời gian hoạt động cho các đường hầm nhanh, cho phép tối đa 200 yêu cầu đang được xử lý và không hỗ trợ Server-Sent Events, do đó các bản cập nhật trực tiếp trên bảng điều khiển (các phiên bản sau 0.7.0) có thể không được truyền qua đường hầm này và người dùng cần tải lại trang; phần này chưa được thử nghiệm. Đối với trường hợp cần đảm bảo tính ổn định, quý vị nên sử dụng tên miền riêng của mình.
 
 ## Triển khai
 

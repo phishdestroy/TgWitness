@@ -4,6 +4,51 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/verif
 
 Jonli Telegram sinovi, avtomatlashtirilgan tekshiruvlar, brauzer tekshiruvlari va hali tasdiqlanmagan narsalar.
 
+## Live Phala Cloud joylashtirish · 2026-yil 4-noyabr
+
+`--provider phala --quick-tunnel` haqiqiy **Phala Cloud** (`tdx.small`, US-WEST-1 mintaqasi) bo'sh ish maydoni uchun Phala Cloud API kaliti, haqiqiy ntfy.sh, GitHub va Intel PCS bilan ishladi. CVM `df7d860c` (v0.8.1) commitini o'rnatdi; deploy, verify va destroy buyruq satridan quyidagi tuzatishlar bilan ishga tushirildi. Yetti CVM jami taxminan 1,9 AQSh sentiga tushdi.
+
+Birinchi ikkita joylashtirish simulyatsiya qilingan Phala Cloud'dan beshta farqni aniqladi. [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) endi har birini qayta hosil qiladi va tuzatishsiz xato beradi:
+
+| Phala Cloudda | Tuzatishdan oldin | Tuzatish |
+| --- | --- | --- |
+| `compose_file.name` talab etiladi | HTTP 422, hech narsa yaratilmadi | Docker Compose konfiguratsiyasi CVM nomini o'z ichiga oladi |
+| Bo'sh qiymat ko'rsatilmagan taqdirda, Phala o'lchangan app-comple ga o'zining ishga tushirishdan oldingi skriptini qo'shadi (v0.0.20: Docker login, `docker compose pull`, root paroli, `user_config` dan SSH kalitlari) | `tdx_compose` xato beradi: nashr etilgan Docker Compose konfiguratsiyasidan tashqaridagi kod | app-compose `pre_launch_script` ni `""` ga o'rnatadi; Phala esa uni hisobga olmaydi |
+| `image` bo'lmasa, Phala `dstack-dev-0.5.12`, rivojlantirish versiyasini, SSH-kirish yoqilgan holda tanlaydi | `server_state` muvaffaqiyatsiz bo'ladi. Faqat uskunani tasdiqlash yozuvi ushbu tasvirdan o'tdi; faqat provayder yozuvi va `tdx_os` uni ko'rsatadi. | Joylashtirish Phala'ning joriy chiqarilishining, `dstack-0.5.12`, ishlab chiqarish versiyasini so'raydi |
+| dstack gateway o'chirilganda, CVM tafsilotlari hech qachon `instance_id` kodini olmadi | Joylashtirish 30 daqiqa kutadi va muvaffaqiyatsiz tugaydi | Instance ID CVM holatidan o'qiladi |
+| Qayta ishga tushirish, to'xtatish va ishga tushirish — bu CVM operatsiyalari, ilova reviziyalari emas. | `provider_actions` qayta ishga tushirishlarni ro'yxatga olmadi | Operatsiyalar ham o'qiladi |
+
+Uchinchi joylashtirish:
+
+- CVM `dstack-0.5.12` ni SSH kirish o'chirilgan holda ishga tushirdi. Kollektor yaratilganidan taxminan 1,5 daqiqa o'tib o'z imzolangan manzilini joyladi. Keyin Deploy `tdx_binding` va `tdx_quote` (Intel TCB UpToDate, apparat guvohnoma yozuvi v4, FMSPC `20a06f000000`, xatolik tuzatish rejimida emas, ko'chirilmaydigan, Intel'dan olingan kriptografik tasdiqlash ma'lumotlarini qo'llab-quvvatlaydi), `tdx_compose_hash`, `tdx_compose` (byte for byte) va `tdx_identity` (KMS kalitlari).
+- trycloudflare.com manzildagi panel tokenisiz yoki noto'g'ri token bilan 401 kodini, panel tokeni bilan esa 200 kodini qaytardi.
+- `verify` bilan `--source` commit arxivini GitHubga o'rnatish va barmoq izi alohida uzatilgan: server, `server_state`, firewall (yo'lchiqarsiz, ommaviy nuqtasi yo'q), provayder logi, bayonot, barmoq izi, manba xesh, yuklash va beshta `tdx_*` tekshiruvlari o'tkazildi. Cloudflare va `tdx_os` mavjud emas edi, shuning uchun natija TO'LAKAMAS bo'ldi.
+- Phala API orqali ikki marta qayta ishga tushirish: har safar CVM ikki daqiqadan kam vaqt ichida bir xil yig'uvchi kalit, yangi imzolangan manzil va eski manzil 530-kod bilan javob bergan holda qayta ishga tushdi. `verify` yangi yuklashni va ikkala qayta ishga tushirishni REVIEW (ko'rib chiqish) deb xabar qildi. `--evidence` jurnal imzolarini va uchta ishga tushirishni tasdiqladi, har biri bir xil CVMdan olingan o'z Intel TDX apparat guvohnoma yozuviga ega edi.
+- `destroy` faqat o'sha CVMni o'chirib tashladi. Shundan so'ng ish maydoni bo'shab qoldi va panel manzili javob berishni to'xtatdi.
+- Panel ustasi narx tekshiruvi `tdx.small` soatiga $0.058 ni ko'rsatdi. Noto'g'ri kalit oddiy "API kalitini qabul qilmadi" xabarini berdi.
+
+Keyinchalik tuzatilgan yana ikki topilma:
+
+- Agar manzil kaliti bo'lmasa, `verify` manzil mavzusidagi eng yangi to'g'ri tuzilgan postni kuzatdi, u nashr etilgan Docker Compose konfiguratsiyasida chop etilgan. Bir soxta post uni mavjud bo'lmagan hostga yubordi, va `statement` muvaffaqiyatsiz bo'ldi: soxtalashtiruvchi yig'uvchi sifatida o'tolmaydi, lekin blok qilishi mumkin uchinchi tomon tasdiqlashni soxta kelajak vaqt belgisi bilan 12 soatgacha amalga oshiradi. Endi yig'uvchi o'z manzilini o'z kaliti bilan imzolab post qiladi, `verify` faqat yig'uvchi tomonidan qilingan bunday postlarni qabul qiladi va postlar ntfy.sh tomonidan qabul qilingan vaqt bo'yicha tartiblanadi. [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) soxta postlarni qayta ijro etadi. CVM buni faqat uni o'z ichiga olgan commitdan ishga tushiradi, shuning uchun ushbu ijro etuvchi collector hali o'z manzilini imzolamagan va `verify` shuni bildirgan.
+- `tdx_os` `dstack-mr`siz ishga tushmaydi, uning joriy versiyasida hujjatlarda ko'rsatilgan `measure --json` o'rniga `measure-os` mavjud. Verifikator endi nashr etilgan image va VM shakli, jumladan ACPI jadvallari asosida MRTD va RTMR0-2 ni o'zi hisoblaydi.
+
+To'rtinchi joylashtirish, quyidagilar bilan:
+
+- Deploy bir marta e'lon qilingan `dstack-0.5.12` ni yuklab olib, uni CVM xabar qilgan OS tasviri hashiga moslashtirdi va `tdx_os` o'tdi: MRTD, RTMR0, RTMR1 va RTMR2 QEMU uchun hisoblangan qiymatlarga teng. 8.2.2, 1 vCPU va 2 GiB. Xuddi shu hisob-kitob da'vo qilingan 4 GiB, 2 vCPU, QEMU 9.2.1 yoki ikkinchi tarmoq kartasi uchun boshqa RTMR0 berdi va o'zgartirilgan yadro, firmware yoki buyruq qatori hamda rivojlantirish tasviri uchun muvaffaqiyatsiz bo'ldi.
+- `verify` o'zining 16 ta tekshiruvining barchasidan, jumladan Quick Tunnel konnektori tekshiruvidan ham muvaffaqiyatli o'tdi, shuning uchun natija PASS bo'ldi. U Belgiya hukumati vaqt belgilash bo'limi TSU 202301 (Belgiyaning ishonchli ro'yxatiga kiritilgan) tomonidan berilgan malakali eIDAS vaqt belgilashi, FreeTSA vaqt belgilashi va verifikator imzosi bilan raqamli muhrlangan HTML va PDF sertifikatini yaratdi; `check-report` ularning barchasini va PDF imzosi tasdiqladi.
+- Qayta ishga tushirgandan so'ng, `verify --evidence` ikkita ishga tushirishni tasdiqladi, har biri CVM ichida yaratilgan apparat guvohnomasi bilan birga bo'lib, har biri e'lon qilingan `dstack-0.5.12` dan yuklangan; qayta ishga tushirish va yangi yuklash REVIEW bo'ldi.
+- `destroy` ish maydonini bo'sh qoldirdi.
+
+Beshinchi joylashtirish `53a0f7e9` commitidan collector-ni ishga tushirdi, unda yuqoridagilarning barchasi mavjud:
+
+- Yig'uvchi o'z kaliti bilan imzolangan manzilini operatorning HMAC posti yoniga joylashtirdi. Keyin mavzuga ikkita soxta post qo'shildi: biri HMAC qiymati nolga teng qilingan, ikkinchisi boshqa Ed25519 kaliti bilan imzolangan; ikkalasi ham 2096 yildagi vaqtni da'vo qilgan. `verify` kollektor kaliti bilan imzolangan manzilni oldi va barcha 16 tekshiruvdan o'tkazdi; muhr yana malakali Belgiya vaqti shtampi, FreeTSA vaqti shtampi va verifikator imzosi bilan edi, va `check-report` ularni tasdiqladi.
+- Qayta ishga tushgach, yig‘uvchi yangi manzilni imzolab e’lon qildi: `verify` uni darhol, operatorning **Joriy manzilni topish** funksiyasi esa HMAC xabaridan 27 soniya keyin topdi. Ikkalasi ham soxta xabarlarni e’tiborsiz qoldirdi. `verify --evidence` ikki ishga tushirish `dstack-0.5.12` dan yuklanganini tasdiqladi.
+- Deploy chop etdi: Phala CVMga diskni ham qo'shib qancha to'lov solishini: soatiga $0.06078.
+
+Panel ustasi Phala Cloud'da ikki marta ishga tushirildi: bir marta uning ish API'si orqali va bir marta haqiqiy Chromium brauzeri orqali: narxni tekshirish, **Advanced** ostidagi commit bilan yaratish, barcha oltita tasdiqlash tekshiruvlarining muvaffaqiyatli o'tishi, serverlar ro'yxatida to'langan narx (oyiga 44,37 USD) ko'rsatilishi, **Joriy manzilni topish**, o'lchangan Docker Compose konfiguratsiyasini yuklab olish va o'chirish. Brauzer hech qanday sahifa xatolarini ko'rmadi. Har safar undan keyin ish maydoni bo'sh bo'ldi.
+
+Qamrab olinmagan: Phala'dagi Cloudflare domeni, CVM'dagi Telegram hisobi va `dstack-0.6.1` image. Yaratishdan oldingi ustaning narxi faqat Phala'ning hisoblash narxi bo'lib, chunki uning API mavjud CVM uchun faqat disk narxini ko'rsatadi; serverlar ro'yxati esa yaratilgandan keyingi to'lanadigan narxni ko'rsatadi.
+
 ## Live server journal inventory · 1 November 2026
 
 At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.

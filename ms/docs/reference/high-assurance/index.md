@@ -44,7 +44,7 @@ Ukuran hos (pengadang SSH dan proses, sesi semasa, log masuk dalam `wtmp`, butan
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` skop baca sahaja | Acara akaun, versi peraturan tembok api | 90 hari |
 | `vultr` | `VULTR_API_KEY` | Pengguna dengan akses baca dan `activity_logs` izin | Log aktiviti akaun (kaedah, laluan, pelaku) | 30 hari, lebih lama dengan langganan log audit |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | Sejarah acara CloudTrail | 90 hari |
-| `phala` | `PHALA_CLOUD_API_KEY` | Kunci API bagi ruang kerja yang sama | Revisi aplikasi: perubahan susun atur dan persekitaran, permulaan semula, peningkatan OS | Sementara aplikasi wujud |
+| `phala` | `PHALA_CLOUD_API_KEY` | Kunci API bagi ruang kerja yang sama | Revisi aplikasi dan operasi CVM: konfigurasi Docker Compose dan perubahan persekitaran, permulaan semula, peningkatan OS | Sementara aplikasi wujud |
 | `generic` | tiada | tiada | tiada: **disahkan sendiri** | – |
 
 Gunakan projek, pasukan, akaun atau sub-akaun khusus untuk setiap kes: akses baca sahaja pemeriksa kemudian hanya memaparkan penyebaran ini. Kredensial dibaca daripada `--provider-token-file` atau pembolehubah di atas, tidak pernah daripada baris perintah. Untuk AWS fail tersebut mengandungi `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; rantau adalah `--location`.
@@ -62,9 +62,11 @@ Dengan `--provider phala` pengumpul dijalankan dalam mesin maya sulit Intel TDX 
 | `tdx_compose_hash` | RTMR3, dimainkan semula daripada log acara dstack, mengukur komposisi aplikasi yang dilaporkan oleh pengumpul |
 | `tdx_compose` | Kompos itu bait demi bait adalah sama dengan yang dibina oleh kod komit yang dikerahkan: fail sumber yang dipin oleh hash, kedua-dua imej oleh digest, tiada kod lain |
 | `tdx_identity` | Pengesahan datang daripada aplikasi dan instans yang dikerahkan, dengan kunci daripada KMS Phala dan cakera yang disulitkan |
-| `tdx_os` | Dengan `--tdx-measurements`, MRTD dan RTMR0-2 sama dengan nilai yang dikira daripada imej OS dstack (`dstack-mr measure --json`) |
+| `tdx_os` | MRTD dan RTMR0-2 sama dengan nilai yang dikira oleh pengesah daripada imej OS dstack yang diterbitkan oleh Dstack-TEE, yang ditemui melalui hash imej OS yang dilaporkan oleh CVM, dan daripada jadual ACPI yang dibina oleh QEMU untuk bentuk VM: firmware, kernel, initrd, baris perintah dengan hash sistem fail root, memori, vCPU dan peranti. Imej pembangunan gagal |
 
-Setiap permulaan pengumpul yang direkodkan dalam jurnal membawa pengesahan sedemikian, jadi `verify --evidence` memeriksa setiap permulaan. Senarai semakan semula aplikasi Phala berfungsi sebagai log penyedia: jika susun atur berubah selepas penyebaran, laporan itu gagal.
+Imej OS (kira-kira 180 MB, di mana 21 MB disimpan) dimuat turun sekali dari [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) ke dalam `dstack-images` di sebelah rekod; `--tdx-image FOLDER` menggunakan folder lain atau imej yang tidak dikemas, `--tdx-image none` melangkau perbandingan. Pengukuran ini diikuti oleh `dstack-mr` dan pakej Rust `qemu-acpi` daripada Dstack-TEE/dstack; `tools/check_dstack_image.py` menyemaknya dengan keluaran ACPI QEMU sendiri dan dengan rekod pengesahan perkakasan Phala Cloud sebenar, `--live` juga menyemak dengan imej yang diterbitkan. `--tdx-measurements` masih membandingkan MRTD dan RTMR0-2 yang diberikan sebagai JSON sebaliknya.
+
+Setiap permulaan pengumpul yang direkodkan dalam jurnal membawa pengesahan sedemikian, jadi `verify --evidence` memeriksa setiap permulaan dan imej OS yang dibootstrap. Semakan aplikasi Phala dan operasi CVM berfungsi sebagai log penyedia: konfigurasi Docker Compose yang diubah selepas penyebaran gagal laporan itu, dan permulaan semula disenaraikan untuk semakan.
 
 Dalam panel pilih **Mesin maya sulit · Phala Cloud** di bawah **Ekstra** → **Pelayan 24/7** dan tampal kunci API Phala Cloud; terowong pantas berfungsi seperti di Hetzner. Dari baris arahan:
 
@@ -74,12 +76,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` membaca sijil Intel dan senarai pembatalan daripada fail dan bukannya memuat turunnya daripada Intel. Gateway DNS tidak tersedia di sini: Phala tiada firewall penyedia untuk trafik keluar.
 
+### Sijil pengesahan
+
+Untuk penyebaran Phala `verify --report certificate.md` juga menulis sijil: a `certificate.html` yang berdiri sendiri dan sebuah A4 `certificate.pdf` dengan keputusan, rantaian kepercayaan daripada root Intel kepada kunci pengumpul, perbandingan dengan pelayan biasa dan pelayan berjaminan tinggi, ukuran di sebelah nilai yang dikira daripada imej yang diterbitkan, siapa yang menjamin setiap bahagian, rantaian sijil Intel, setiap semakan, log penyedia, dan cara mengulangi pengesahan. Laporan JSON kekal sebagai rekod yang sah; halaman-halaman memaparkannya.
+
+Laporan ini disegel secara digital dengan tandatangan dan cap masa, dalam `certificate.seal.json` dan fail `.tsq`/`.tsr` di sisinya:
+
+| Seal | Apa yang ditambahkannya |
+| --- | --- |
+| Cop masa elektronik berkelayakan, `http://tsa.belgium.be/connect` | Cap masa RFC 3161 ke atas bait tepat `certificate.json` daripada penyedia perkhidmatan kepercayaan berkelayakan kerajaan persekutuan Belgium (FPS Policy and Support, BOSA). Unitnya disenaraikan sebagai perkhidmatan cop masa bertauliah, status diberikan, dalam senarai dipercayai EU Belgium; root (Belgium Root CA6) dan entri dalam senarai itu, setakat senarai yang dikeluarkan pada 20 Oktober 2026, disemat dalam `tgwitness/tsa_roots.py`. Di bawah Peraturan (EU) No 910/2014, artikel 41, cop masa sedemikian dianggap tepat dari segi tarikh dan masa serta integriti data di setiap negara anggota EU |
+| Cap masa RFC 3161, FreeTSA | Cap masa kedua yang bebas |
+| Tandatangan pengesah | Ed25519 ke atas satu kenyataan yang menamakan SHA-256 laporan dan setiap cap masa, dengan kunci verifier sendiri (`--sign-with FOLDER`, lalai `~/.tgwitness/verifier`); PDF itu mengandungi tandatangan dengan kunci yang sama |
+
+`--timestamp URL` (boleh diulang) memilih pihak berkuasa lain, `--timestamp none` tiada, `--sign-with
+none` meninggalkan meterai tanpa ditandatangani. `check-report` memeriksa hash laporan, tandatangan pengesah, setiap cap masa kepada akar dipercayai dan status berkelayakannya, serta tandatangan PDF. Berat undang-undang cap masa bertauliah di luar EU, dan laporan secara keseluruhannya, adalah terpulang kepada mahkamah atau pihak berkuasa yang menerimanya; meterai menunjukkan bila laporan itu wujud dan bahawa ia tidak berubah.
+
 Satu pengesahan tidak dapat menolak kecacatan dalam modul TDX atau mikrokod Intel, atau akses fizikal ke pembus memori. Sesiapa yang mengawal aplikasi dalam akaun Phala boleh menyebarkan compose lain; ia muncul sebagai semakan baru dengan hash compose baru. Host mengawal sumber masa mesin dan rangkaian.
+
+Tugaskan, sahkan dengan `--evidence`, mulakan semula, bandingkan imej OS, sijil yang disegel secara digital dengan tandatangan dan cop masa dan musnahkan telah dijalankan pada Phala Cloud itu sendiri; lihat [, larian 4 November 2026](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026).
 
 ## Sebelum anda bermula
 
@@ -110,7 +130,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 Pada pelayan, cloudflared membuka [terowong pantas](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/) ke panel: satu rawak `https://….trycloudflare.com` alamat yang berubah setiap kali cloudflared atau pelayan dihidupkan semula. Satu perkhidmatan kecil pada pelayan menyiarkan setiap alamat ke topik ntfy.sh rawak, yang disahkan (HMAC-SHA256) dengan kunci yang hanya dipegang oleh direktori penyebaran (`address-key.txt`), dan mengulanginya setiap tiga jam kerana ntfy.sh menyimpan kiriman selama 12 jam. `deploy` dan **Cari alamat semasa** hanya menerima kiriman bermasa, jadi kiriman palsu tidak dapat menghantar anda, dan token panel anda, ke alamat orang lain. Topik itu terdapat dalam rekod dan cloud-init yang diterbitkan: sesiapa yang memilikinya boleh membaca alamat semasa, yang masih meminta token panel. Pelayan tidak membuka sebarang port masuk.
 
-Kosnya: tiada akaun Cloudflare menyimpan rekod terowong pantas, jadi `verify` melaporkan semakan terowong, penyambung dan DNS sebagai tidak tersedia dan hasilnya pada yang terbaik `incomplete`; rekod penyedia, firewall, kenyataan berasingan, ukuran hos dan perbandingan pemasang diperiksa seperti biasa. Perbandingan bait dengan pemasang rujukan memerlukan komit yang telah dikerahkan yang sudah mengetahui `--quick-tunnel`; checkout 0.7.0 membina pemasang domain dan melaporkan perbezaannya. Cloudflare tidak memberikan jaminan masa operasi untuk terowong pantas, membenarkan 200 permintaan dalam perjalanan dan tidak menyokong Server-Sent Events, jadi kemas kini langsung panel (versi selepas 0.7.0) mungkin tidak sampai melalui terowong tersebut dan paparan perlu dimuat semula; bahagian itu belum dicuba. Untuk kes yang perlu berterusan, gunakan domain anda sendiri.
+Pemverifikasi tidak mempunyai kunci alamat, dan sesiapa sahaja yang membaca topik boleh menghantar kiriman kepadanya. Jadi pengumpul juga menghantar alamat itu sendiri, yang ditandatangani dengan kunci Ed25519 miliknya sendiri, dan `verify` mengambil kiriman terbaru yang ditandatangani oleh kunci pengumpul dalam rekod penyebaran; kiriman diatur mengikut masa ntfy.sh menerimanya, bukan masa yang mereka dakwa. Pengumpul dari sebelum perubahan ini tidak menandatangani apa-apa, dan `verify` kemudian mengambil pos terbaru dan menyatakan demikian dalam pemeriksaan `statement`; pos palsu hanya boleh menyebabkan pemeriksaan itu gagal, kerana alamat masih perlu menjawab dengan kunci pengumpul.
+
+Kosnya: tiada akaun Cloudflare menyimpan rekod terowong pantas, jadi `verify` melaporkan terowong, penyambung dan semakan DNS sebagai tidak tersedia dan hasilnya paling baik ialah `incomplete` (pada Phala Cloud pemeriksaan lulus sebaliknya: penyambung dijalankan di dalam konfigurasi Docker Compose yang diukur); rekod penyedia, firewall, pernyataan bertauliah, pengukuran hos dan perbandingan pemasang diperiksa seperti biasa. Perbandingan bait dengan pemasang rujukan memerlukan commit yang telah dikerahkan yang sudah mengetahui `--quick-tunnel`; checkout 0.7.0 membina pemasang domain dan melaporkan perbezaannya. Cloudflare memberikan terowong pantas tanpa jaminan masa operasi, membenarkan 200 permintaan serentak dan tidak menyokong Server-Sent Events, jadi kemas kini langsung panel (versi selepas 0.7.0) mungkin tidak sampai melalui satu terowong dan paparan perlu dimuat semula; bahagian itu belum dicuba. Untuk kes yang perlu bertahan, gunakan domain anda sendiri.
 
 ## Tempatkan
 

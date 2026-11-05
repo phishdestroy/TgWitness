@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/
 
-[开源 / v0.8.1](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/)
+[开源 ／ v0.9.0](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/)
 
 保存 Telegram 聊天及其每一次编辑和删除，然后交出任何人都能核查的记录。
 
@@ -12,19 +12,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/
 
  [通过 GitHub Actions 采集（预览版）](https://phishdestroy.github.io/TgWitness/zh/docs/capture/) [S3 异地备份：设置与恢复](https://phishdestroy.github.io/TgWitness/zh/#s3)
 
-穿越时空的一则消息#0042
+穿越时空的一则消息＃0042
 
-Northstar · 研究虚构来源 / 消息 42
+Northstar · 研究虚构来源 ／ 消息 42
 
-1. **观察到的消息：**09:41:02
+1. **观察到的消息：**09：41：02
 
-   简报从 14:00 开始。
-2. **编辑记录已保留**09:43:18
+   简报从 14：00 开始。
+2. **编辑记录已保留**09：43：18
 
-   简报从 15:00 开始。
+   简报从 15：00 开始。
 
    保留了旧版本
-3. **删除通知**10:06:45
+3. **删除通知**10：06：45
 
    捕获的内容将保存在您的日志中。
 
@@ -36,33 +36,33 @@ Northstar · 研究虚构来源 / 消息 42
 
 真实界面，虚构数据。
 
-TgWitness / 已保存的聊天记录您的观察工作区
+TgWitness ／ 已保存的聊天记录您的观察工作区
 
 ![以深色主题保存 Telegram 对话记录，并完整保留编辑和已删除消息的上下文信息](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
-01 / 已保存的聊天 看起来就像普通聊天，编辑和删除就显示在消息旁边。
+01 ／ 已保存的聊天 看起来就像普通聊天，编辑和删除就显示在消息旁边。
 
-TgWitness / 日志本地工作区
+TgWitness ／ 日志本地工作区
 
 ![包含已观察到的消息、编辑记录、删除通知及覆盖事件的日志](https://phishdestroy.github.io/TgWitness/assets/workspace.png)
 
-02 / 日志 您的账户看到的一切，可搜索，空缺也会记录。
+02 ／ 日志 您的账户看到的一切，可搜索，空缺也会记录。
 
-TgWitness / 编辑历史本地工作区
+TgWitness ／ 编辑历史本地工作区
 
 ![详细信息抽屉，用于对比消息的原始版本与编辑后的版本](https://phishdestroy.github.io/TgWitness/assets/detail.png)
 
-03 / 编辑历史 新旧版本并排显示，不会覆盖任何内容。
+03 ／ 编辑历史 新旧版本并排显示，不会覆盖任何内容。
 
-TgWitness / 签名导出文件本地工作区
+TgWitness ／ 签名导出文件本地工作区
 
 ![导出功能支持生成带签名的 ZIP、JSONL、CSV 文件以及离线 HTML 报告](https://phishdestroy.github.io/TgWitness/assets/exports.png)
 
-04 / 签名导出 带走日志，已签名，并附带自己的验证工具。
+04 ／ 签名导出 带走日志，已签名，并附带自己的验证工具。
 
-通过[“案件看板](https://phishdestroy.github.io/TgWitness/zh/docs/case-board/)”、[报告设计](https://phishdestroy.github.io/TgWitness/zh/docs/reports/)和[共享副本](https://phishdestroy.github.io/TgWitness/zh/docs/handover/)追踪已保存的记录。集中[审查账户组](https://phishdestroy.github.io/TgWitness/zh/docs/groups/)。
+通过[＂案件看板](https://phishdestroy.github.io/TgWitness/zh/docs/case-board/)＂、[报告设计](https://phishdestroy.github.io/TgWitness/zh/docs/reports/)和[共享副本](https://phishdestroy.github.io/TgWitness/zh/docs/handover/)追踪已保存的记录。集中[审查账户组](https://phishdestroy.github.io/TgWitness/zh/docs/groups/)。
 
-01 / 捕获
+01 ／ 捕获
 
 ### 范围由您决定。
 
@@ -70,7 +70,7 @@ TgWitness / 签名导出文件本地工作区
 
 [比较采集模式](https://phishdestroy.github.io/TgWitness/zh/guides/modes.html#scope)
 
-02 / 保存
+02 ／ 保存
 
 ### 变更内容丰富了故事。
 
@@ -78,7 +78,7 @@ TgWitness / 签名导出文件本地工作区
 
 [查看事件矩阵](https://phishdestroy.github.io/TgWitness/zh/guides/modes.html#events)
 
-03 / 移交
+03 ／ 移交
 
 ### 一份随行记录。
 
@@ -111,13 +111,13 @@ tgwitness-evidence.zip带签名的软件包
 
 - 01
 
-  原始观察结果JSONL 记录 + CSV 表格
+  原始观察结果JSONL 记录 ＋ CSV 表格
 - 02
 
-  易于理解的背景信息离线 HTML 报告 + 保留的媒体文件
+  易于理解的背景信息离线 HTML 报告 ＋ 保留的媒体文件
 - 03
 
-  独立验证带签名的清单 + 独立验证器
+  独立验证带签名的清单 ＋ 独立验证器
 
 接收方用您的密钥核查所有内容，而保存在别处的检查点表明此后没有任何内容被改写。[检查的工作原理。](https://phishdestroy.github.io/TgWitness/zh/docs/concepts/#layers)
 
@@ -139,7 +139,7 @@ tgwitness-evidence.zip带签名的软件包
 
 定时或手动备份
 
-立即复制，或每 1 至 1,440 分钟复制一次，进度显示在面板中。
+立即复制，或每 1 至 1，440 分钟复制一次，进度显示在面板中。
 
 Object Lock
 
@@ -210,7 +210,7 @@ Windows、Linux、macOS 或 Docker。
 
 [打开在线演示 →](https://phishdestroy.github.io/TgWitness/demo/?lang=zh)
 
-Windows `scripts\Demo.cmd`Linux / macOS `sh start.sh --demo`
+Windows `scripts\Demo.cmd`Linux ／ macOS `sh start.sh --demo`
 
 **本地安装命令**
 
@@ -262,7 +262,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 源码安装时，令牌位于 `data/live/panel-token.txt`。您自己的 API 凭据（来自 [my.telegram.org](https://my.telegram.org)）是可选的。[完整安装指南 ↗](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
 
-**TgWitness 0.8.1** [最新动态 →](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/) · [功能与已知限制 →](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/)
+**TgWitness 0.9.0** [最新动态 →](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/) · [功能与已知限制 →](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/)
 
 ## 清晰的说明。有用的下一步操作。
 
@@ -290,19 +290,19 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 **我的整个日志是否都经过加密？**
 
-会话和密钥是加密的。消息和文件不是，请使用磁盘加密。导出可以设置 AES-256 密码。
+会话和密钥是加密的。消息和文件不是，请使用磁盘加密。导出可以设置 AES－256 密码。
 
 **该网站与 Telegram 有关联吗？**
 
 不是。这是一个基于 Telethon 构建、采用 MIT 许可的独立项目。您使用自己的账户登录。
 
-PROJECT NOTICE / LICENCE
+PROJECT NOTICE ／ LICENCE
 
-## Operator incompatibility.
+## Operator incompatibility．
 
-**Taylor Wessing PartG mbB — German core, Hamburg office.**
+**Taylor Wessing PartG mbB， German core， Hamburg office．**
 
-Our statement as the authors of TgWitness. It adds no condition to the MIT License. Read the complete notice and its source record.
+This statement from the authors of TgWitness adds no condition to the MIT License， and the complete notice includes its source record．
 
 [Read the complete notice](https://phishdestroy.github.io/TgWitness/docs/reference/notice/) [Original text](https://phishdestroy.github.io/TgWitness/NOTICE)
 

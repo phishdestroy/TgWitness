@@ -4,6 +4,51 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/verif
 
 Uji coba Telegram secara langsung, pemeriksaan otomatis, pemeriksaan browser, dan hal-hal yang masih belum terverifikasi.
 
+## Penerapan Phala Cloud langsung · 4 November 2026
+
+`--provider phala --quick-tunnel` dijalankan pada **Phala Cloud** yang sebenarnya (`tdx.small`, wilayah US-WEST-1) dengan kunci API Phala Cloud dari ruang kerja kosong, ntfy.sh asli, GitHub, dan Intel PCS. CVM menginstal commit `df7d860c` (v0.8.1); proses deploy, verify, dan destroy dijalankan dari baris perintah dengan perbaikan di bawah ini. Tujuh CVM menghabiskan biaya sekitar 1,9 sen AS secara total.
+
+Dua deployment pertama menemukan lima perbedaan dari Phala Cloud yang disimulasikan. [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) kini mereproduksi masing-masing perbedaan tersebut, dan gagal tanpa perbaikan:
+
+| Di Phala Cloud | Sebelum perbaikan | Perbaikan |
+| --- | --- | --- |
+| `compose_file.name` diperlukan | HTTP 422, tidak ada yang dibuat | Konfigurasi Docker Compose memuat nama CVM |
+| Kecuali jika diberikan yang kosong, Phala menambahkan skrip pra-peluncuran miliknya sendiri ke app-compose yang diukur (v0.0.20: login Docker, `docker compose pull`, kata sandi root, kunci SSH dari `user_config`) | `tdx_compose` gagal: kode di luar konfigurasi Docker Compose yang dipublikasikan | App-compose menetapkan `pre_launch_script` menjadi `""`; Phala kemudian mengabaikannya |
+| Tanpa `image`, Phala memilih `dstack-dev-0.5.12`, build pengembangan, dengan akses SSH diaktifkan | `server_state` gagal. Hanya catatan pengesahan perangkat keras yang lolos pada gambar ini; hanya catatan penyedia dan `tdx_os` yang menunjukkannya | Proses penyebaran meminta build produksi dari rilis Phala saat ini, `dstack-0.5.12` |
+| Dengan gateway dstack dimatikan, detail CVM tidak pernah menerima kode kesalahan `instance_id` | Proses penyebaran menunggu selama 30 menit dan gagal | ID instans dibaca dari status CVM |
+| Restart, penghentian, dan penyalaan adalah operasi CVM, bukan revisi aplikasi | `provider_actions` tidak mencantumkan restart | Operasi-operasi tersebut juga dibaca |
+
+Penerapan ketiga:
+
+- CVM menjalankan `dstack-0.5.12` dengan akses SSH dinonaktifkan. Pengumpul memposting alamat yang telah ditandatanganinya sekitar 1,5 menit setelah pembuatan. Proses penyebaran kemudian berhasil melewati `tdx_binding`, `tdx_quote` (Intel TCB UpToDate, catatan pengesahan perangkat keras v4, FMSPC `20a06f000000`, tidak dalam mode debug, tidak dapat dimigrasikan, mendukung data verifikasi kriptografi yang diambil dari Intel), `tdx_compose_hash`, `tdx_compose` (byte per byte), dan `tdx_identity` (kunci KMS).
+- Panel di alamat trycloudflare.com merespons dengan kode 401 tanpa token atau dengan token yang salah, dan 200 dengan token panel.
+- `verify` dengan `--source` diatur ke arsip GitHub dari commit tersebut dan sidik jari yang diserahkan secara terpisah: server, `server_state`, firewall (tanpa gateway, tanpa titik akhir publik), log penyedia, laporan, sidik jari, hash sumber, boot, dan lima pemeriksaan `tdx_*` berhasil dilalui. Cloudflare dan `tdx_os` tidak tersedia, sehingga hasilnya adalah INCOMPLETE.
+- Dua kali restart melalui API Phala: setiap kali CVM kembali aktif dalam waktu kurang dari dua menit dengan kunci pengumpul yang sama, alamat baru yang ditandatangani, dan alamat lama yang merespons 530. `verify` melaporkan boot baru dan kedua kali restart tersebut sebagai REVIEW. Dengan `--evidence`, sistem mengonfirmasi tanda tangan jurnal serta tiga kali proses booting, masing-masing dengan catatan pengesahan perangkat keras Intel TDX tersendiri dari CVM yang sama.
+- `destroy` hanya menghapus CVM tersebut. Ruang kerja kemudian menjadi kosong, dan alamat panel berhenti menanggapi.
+- Pemeriksaan harga pada panel wizard menunjukkan `tdx.small` sebesar $0,058 per jam. Kunci yang salah menghasilkan pesan sederhana "tidak menerima kunci API".
+
+Dua temuan tambahan, yang telah diperbaiki setelahnya:
+
+- Tanpa kunci alamat, `verify` mengikuti posting terbaru yang terstruktur dengan baik mengenai topik alamat, yang tercantum dalam konfigurasi Docker Compose yang dipublikasikan. Satu posting palsu mengirimkannya ke host yang tidak ada, dan `statement` gagal: seorang pemalsu tidak dapat menyamar sebagai pengumpul, tetapi dapat menghalangi verifikasi pihak ketiga, hingga 12 jam dengan cap waktu masa depan yang dipalsukan. Kolektor kini juga memposting alamatnya yang ditandatangani dengan kuncinya sendiri; `verify` hanya menerima postingan semacam itu ketika kolektor yang membuatnya, dan postingan diurutkan berdasarkan waktu penerimaan ntfy.sh. [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) memutar ulang postingan yang dipalsukan. Sebuah CVM hanya menjalankan ini dari sebuah commit yang mengandungnya, sehingga pengumpul pada eksekusi ini belum menandatangani alamatnya dan `verify` menyatakan hal tersebut.
+- `tdx_os` tidak dapat dijalankan tanpa `dstack-mr`, yang versi saat ini memiliki `measure-os`, bukan `measure --json` seperti yang disebutkan dalam dokumentasi. Verifikator kini menghitung MRTD dan RTMR0-2 sendiri dari gambar yang dipublikasikan dan bentuk VM, termasuk tabel ACPI.
+
+Penerapan keempat, dengan hal-hal berikut:
+
+- Deploy mengunduh `dstack-0.5.12` yang dipublikasikan sekali, mencocokkannya dengan hash gambar OS yang dilaporkan oleh CVM , dan `tdx_os` lulus: MRTD, RTMR0, RTMR1, dan RTMR2 sama dengan nilai yang dihitung untuk QEMU 8.2.2, 1 vCPU, dan 2 GiB. Perhitungan yang sama menghasilkan nilai RTMR0 yang berbeda untuk klaim 4 GiB, 2 vCPU, QEMU 9.2.1, atau kartu jaringan kedua, serta gagal untuk kernel, firmware, atau baris perintah yang diubah serta untuk citra pengembangan.
+- `verify` lulus semua dari 16 pemeriksaan yang dilakukannya, termasuk konektor quick tunnel, sehingga hasilnya adalah LULUS. Sistem tersebut menulis sertifikat HTML dan PDF, yang disegel secara digital dengan tanda tangan dan cap waktu menggunakan cap waktu eIDAS yang memenuhi syarat dari unit cap waktu pemerintah Belgia TSU 202301 (status disetujui dalam daftar tepercaya Belgia), cap waktu FreeTSA, dan tanda tangan verifikator; `check-report` mengonfirmasi semuanya serta tanda tangan pada PDF tersebut.
+- Setelah restart, `verify --evidence` mengonfirmasi dua kali proses booting, masing-masing disertai dengan pengesahan perangkat keras yang dihasilkan di dalam CVM dan masing-masing dibooting dari `dstack-0.5.12` yang telah dipublikasikan; proses restart dan booting baru tersebut berstatus REVIEW.
+- `destroy` meninggalkan ruang kerja dalam keadaan kosong.
+
+Penerapan kelima menjalankan pengumpul dari commit `53a0f7e9`, yang mencakup semua hal di atas:
+
+- Pengumpul memposting alamatnya yang ditandatangani dengan kunci miliknya sendiri, di samping postingan HMAC milik operator. Dua postingan palsu kemudian ditambahkan ke topik tersebut, satu dengan HMAC bernilai nol dan satu lagi ditandatangani oleh kunci Ed25519 lain, keduanya mengklaim waktu pada tahun 2096. `verify` mengambil alamat yang ditandatangani oleh kunci pengumpul dan lulus semua 16 pemeriksaan; segel tersebut kembali memuat cap waktu Belgia yang terakreditasi, cap waktu FreeTSA, dan tanda tangan verifikator, dan `check-report` mengonfirmasi semuanya.
+- Setelah restart, pengumpul memposting alamat baru yang ditandatangani: `verify` langsung menemukannya, **operator menemukan alamat saat ini,** 27 detik kemudian dari postingan HMAC, dan keduanya mengabaikan postingan palsu tersebut. `verify --evidence` mengonfirmasi dua kali booting dari `dstack-0.5.12`.
+- Deploy mencantumkan biaya yang ditagihkan Phala kepada CVM, termasuk disk: $0,06078 per jam.
+
+Wizard panel dijalankan di Phala Cloud dua kali, sekali melalui API tugasnya dan sekali melalui browser dengan Chromium asli: pemeriksaan harga, pembuatan dengan commit di bawah **Advanced**, keenam pemeriksaan sertifikasi lulus, daftar server menampilkan harga yang ditagih (44,37 USD per bulan), **Find alamat saat ini**, pengunduhan konfigurasi Docker Compose yang diukur, dan penghapusan. Browser tidak mendeteksi kesalahan halaman apa pun. Setiap kali, ruang kerja menjadi kosong setelahnya.
+
+Tidak termasuk: domain Cloudflare di Phala, akun Telegram di CVM, dan gambar `dstack-0.6.1` . Harga yang ditampilkan oleh wizard sebelum pembuatan hanya mencakup biaya komputasi Phala, karena API-nya hanya mencantumkan biaya disk untuk CVM yang sudah ada; daftar server menampilkan harga yang ditagihkan setelah pembuatan.
+
 ## Live server journal inventory · 1 November 2026
 
 At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.

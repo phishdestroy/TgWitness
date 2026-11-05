@@ -16,6 +16,18 @@ Joyni bo'shatish imzolangan jurnalni hech qachon o'chirib tashlamaydi yoki qayta
 
 Faylni yuklash bo'yicha javob o'zi faylni o'chirishga ruxsat emas.TgWitness to'liq shifrlangan obyektni yuklab oladi va uning hajmi hamdaSHA-256 ni tekshiradi, kvitansiyani saqlaydi, so'ng faylni o'chirishdan oldin mahalliy baytlarni yana bir bor tekshiradi. Yuklash muvaffaqiyatsiz bo'lsa, qayta o'qish boshqacha bo'lsa yoki uzatish bekor qilinsa, mahalliy fayl o'z o'rnida qoladi. Agar yoqilgan dalil zaxirasi hali o'sha faylni nusxalamagan bo'lsa, o'chirish ham uning nusxasini kutadi.
 
+## Diskdagi joy kamayganda
+
+Bo‘sh joy **Parametrlar → Biriktirmalar → diskdagi bo‘sh joy** qiymatidan (odatda 1 GiB) kamayganda biriktirmalarni yuklash to‘xtab turadi, navbat saqlanadi. Matn kuzatuvlari davom etadi. Bu bildirishnomalarga bog‘liq emas: ularni o‘chirish yuklash zaxirasi yoki saqlash himoyalarini o‘chirmaydi.
+
+Oldinroq choralar ko‘rish uchun **Avtomatik ishga tushirish**ni yoqing, **Joy bo‘shatish uchun mahalliy faylni o‘chirish**ni tanlang va **Diskda joy kamayganda qo‘shimcha ko‘chirishni boshlash**ni yoqing. Ixtiyoriy qoida odatda bo‘sh joy 5120 MiB dan kam bo‘lganda boshlanadi va 10240 MiB bo‘shaguncha guruhlar bilan ishlaydi. Ikkala chegara sozlanadi. Qo‘lda ishga tushirishdagi manzil, faylning eng kam yoshi, guruh hajmi, to‘liq qayta o‘qib tekshirish va dalillar zaxira nusxasi talablari ishlatiladi. Manzil o‘z-o‘zidan yoqilmaydi. Tekshiruv har 30 soniyada; xato yoki siljish bo‘lmasa keyingi urinish besh daqiqaga kechiktiriladi. Holat va qayta urinish vaqti qayta ishga tushirishda saqlanadi. Qoida faol bo‘lmasa, rejali jarayonlar odatdagi oraliqda ishlaydi.
+
+Panel bo‘sh joy, qadoqlash zaxirasi, qoida tayyorligi va vaqtinchalik joy yetishmagani uchun o‘tkazib yuborilgan fayllarni ko‘rsatadi. Qadoqlash va tiklash boshlanishdan oldin eng yuqori vaqtinchalik joy talabini, yozish paytida esa mavjud joyni tekshiradi. Yuklash uchun belgilangan zaxira ishlatiladi, saqlash operatsiyalari uchun u kamida 64 MiB. Bu fayl tizimi kvotasi emas: boshqa jarayon tekshiruvlar orasida joyni egallashi mumkin.
+
+Gzip masofaviy obyektlarni yo‘qotishsiz siqadi; faol jurnalni kichraytirmaydi va mahalliy arxiv yaratmaydi. JPEG, video va ZIP fayllari juda oz kichrayishi yoki biroz kattalashishi mumkin. Siqish yoqilganda qadoqlash vaqtincha biriktirma hajmining taxminan ikki baravari va zaxira miqdorida joy talab qilishi mumkin. Eng katta fayllarga yetadigan erta boshlash chegarasini tanlang. Tayyorlash uchun juda katta fayl saqlanadi va xabar qilinadi; kichik fayllar hamda oldin tekshirilgan masofaviy nusxalar joy bo‘shata oladi. Tekshirilgan nusxa bo‘lsa, yana qadoqlash faylini yaratmasdan mahalliy faylni olib tashlash mumkin. Tiklash ham vaqtinchalik joy talab qiladi va joy bo‘lguncha rad etilishi mumkin.
+
+Ko‘chirishga mos fayl yoki sozlangan manzil bo‘lmasa, TgWitness joyni avtomatik bo‘shata olmaydi. Saqlash boshqaruvi imzolangan jurnalni hech qachon qisqartirmaydi yoki qayta yozmaydi. Yangi matn kuzatuvlari uchun baribir joy kerak.
+
 ## Maqsadni ulang
 
 **Qo'shimchalar → Saqlash va disk joyi → Saqlashni boshqarish**-da vazifa va manzilni tanlang, uni saqlang, so'ngra **Sinov yuklash va yuklab olish**-ni tanlang. Test kichik tasodifiy probani yuklaydi va uni qayta o'qiydi. U Telegram kontentidan foydalanmaydi.

@@ -16,6 +16,18 @@ Pembebasan ruang penyimpanan tidak pernah menghapus atau menimpa jurnal yang tel
 
 Respons unggahan saja tidak berarti izin untuk menghapus file. TgWitness mengunduh objek terenkripsi secara lengkap dan memverifikasi ukurannya serta SHA-256, menyimpan tanda terima, lalu memeriksa byte lokal lagi segera sebelum penghapusan. Kegagalan unggahan, hasil pembacaan yang berbeda, atau transfer yang dibatalkan membuat file lokal tetap ada. Jika cadangan bukti yang diaktifkan belum menyalin file tersebut, penghapusan juga akan menunggunya.
 
+## Saat disk mulai penuh
+
+Unduhan lampiran dijeda ketika ruang kosong di bawah nilai **Parameter → Lampiran → ruang disk kosong** (default 1 GiB), dengan antrean tetap tersimpan. Pengamatan teks berlanjut. Ini tidak bergantung pada notifikasi: mematikannya tidak menonaktifkan cadangan unduhan atau perlindungan penyimpanan.
+
+Untuk bertindak lebih awal, aktifkan **Jalankan otomatis**, pilih **Hapus file lokal untuk mengosongkan ruang**, dan aktifkan **Mulai pemindahan tambahan saat ruang disk rendah**. Secara default, aturan opsional dimulai di bawah 5120 MiB kosong dan memproses kelompok file hingga tersedia 10240 MiB. Kedua ambang dapat diatur. Tujuan, usia minimum file, batas kelompok, verifikasi dengan pembacaan balik lengkap, dan prasyarat cadangan bukti sama seperti proses manual. Aturan tidak mengaktifkan tujuan sendiri. Pemeriksaan berjalan setiap 30 detik; kesalahan atau tidak adanya kemajuan menunda percobaan berikutnya lima menit. Status dan waktu percobaan ulang bertahan setelah mulai ulang. Saat aturan tidak aktif, proses terjadwal tetap memakai interval normal.
+
+Panel menampilkan ruang kosong, cadangan pengemasan, kesiapan aturan, dan file yang dilewati karena ruang sementara tidak cukup. Pengemasan dan pemulihan memeriksa kebutuhan ruang sementara maksimum sebelum dimulai serta ruang tersedia selama penulisan. Cadangan mengikuti pengaturan unduhan, minimal 64 MiB untuk operasi penyimpanan. Pemeriksaan ini bukan kuota sistem file; proses lain masih dapat memakai ruang di antara pemeriksaan.
+
+Gzip memampatkan objek jarak jauh tanpa kehilangan data; tidak mengecilkan jurnal aktif atau membuat arsip lokal. JPEG, video, dan ZIP mungkin hampir tidak mengecil atau sedikit membesar. Dengan kompresi, pengemasan dapat sementara membutuhkan sekitar dua kali ukuran lampiran ditambah cadangan. Pilih ambang mulai cukup awal untuk file terbesar. File yang terlalu besar tetap disimpan dan dilaporkan; file kecil dan salinan jarak jauh yang sudah diverifikasi masih dapat membebaskan ruang. Salinan terverifikasi memungkinkan penghapusan file lokal tanpa file pengemasan baru. Pemulihan juga memerlukan ruang sementara dan dapat ditolak sampai ruang tersedia.
+
+Jika tidak ada file yang memenuhi syarat untuk dipindahkan atau tujuan belum diatur, TgWitness tidak dapat membebaskan ruang otomatis. Pengelolaan penyimpanan tidak pernah memangkas atau menulis ulang jurnal bertanda tangan. Ruang tetap diperlukan untuk pengamatan teks baru.
+
 ## Hubungkan tujuan
 
 Di **Ekstra → Penyimpanan & ruang disk → Kelola penyimpanan**, pilih tugas dan tujuan, simpan, lalu pilih **Uji unggah & unduh**. Uji ini mengunggah probe acak berukuran kecil dan membacanya kembali. Uji ini tidak menggunakan konten Telegram.

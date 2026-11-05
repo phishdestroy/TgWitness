@@ -16,6 +16,18 @@ Membersihkan ruang tidak pernah memadam atau menulis semula jurnal yang disahkan
 
 Respon muat naik sahaja tidak memberi kebenaran untuk memadam fail. TgWitness memuat turun objek disulit sepenuhnya dan mengesahkan saiz serta SHA-256, menyimpan resit, kemudian menyemak bait tempatan sekali lagi sejurus sebelum pemadaman. Kegagalan muat naik, bacaan semula berbeza atau pemindahan dibatalkan mengekalkan fail tempatan di tempatnya. Jika sandaran bukti yang diaktifkan belum menyalin fail tersebut, pemadaman juga akan menunggu sehingga ia disalin.
 
+## Apabila cakera semakin penuh
+
+Muat turun lampiran dijeda apabila ruang kosong di bawah nilai **Parameter → Lampiran → ruang cakera kosong** (lalai 1 GiB), dengan giliran dikekalkan. Pemerhatian teks diteruskan. Ini tidak bergantung pada pemberitahuan: mematikannya tidak mematikan rizab muat turun atau perlindungan storan.
+
+Untuk bertindak lebih awal, aktifkan **Jalankan secara automatik**, pilih **Buang fail setempat untuk mengosongkan ruang** dan aktifkan **Mulakan pemindahan tambahan apabila ruang cakera rendah**. Secara lalai, peraturan pilihan bermula di bawah 5120 MiB kosong dan memproses kelompok sehingga 10240 MiB tersedia. Kedua-dua ambang boleh ditetapkan. Destinasi, usia minimum fail, had kelompok, pengesahan bacaan semula penuh dan prasyarat sandaran bukti sama seperti proses manual. Destinasi tidak diaktifkan sendiri. Semakan dibuat setiap 30 saat; ralat atau tiada kemajuan menangguhkan cubaan berikutnya lima minit. Keadaan dan masa cubaan semula kekal selepas mula semula. Ketika peraturan tidak aktif, proses berjadual mengekalkan sela biasa.
+
+Panel menunjukkan ruang kosong, rizab pembungkusan, kesiapsiagaan peraturan dan fail yang dilangkau kerana ruang sementara tidak cukup. Pembungkusan dan pemulihan menyemak keperluan ruang sementara puncak sebelum bermula serta ruang tersedia semasa menulis. Rizab mengikut tetapan muat turun, dengan minimum 64 MiB untuk operasi storan. Semakan ini bukan kuota sistem fail: proses lain masih boleh menggunakan ruang antara semakan.
+
+Gzip memampatkan objek jauh tanpa kehilangan data; ia tidak mengecilkan jurnal aktif atau mencipta arkib setempat. JPEG, video dan ZIP mungkin hampir tidak mengecil atau sedikit membesar. Dengan pemampatan, pembungkusan mungkin memerlukan ruang sementara kira-kira dua kali saiz lampiran ditambah rizab. Pilih ambang mula cukup awal untuk fail terbesar. Fail terlalu besar dikekalkan dan dilaporkan; fail kecil serta salinan jauh yang telah disahkan masih boleh mengosongkan ruang. Salinan disahkan membolehkan fail setempat dibuang tanpa fail pembungkusan baharu. Pemulihan juga memerlukan ruang sementara dan boleh ditolak sehingga ruang tersedia.
+
+Jika tiada fail layak dipindahkan atau destinasi belum ditetapkan, TgWitness tidak boleh mengosongkan ruang secara automatik. Pengurusan storan tidak pernah memangkas atau menulis semula jurnal bertandatangan. Ia masih memerlukan ruang untuk pemerhatian teks baharu.
+
 ## Sambungkan destinasi
 
 Di **Ekstra → Penyimpanan & ruang cakera → Kelola penyimpanan**, pilih tugas dan destinasi, simpannya, kemudian pilih **Uji muat naik & muat turun**. Ujian ini memuat naik probe rawak kecil dan membacanya semula. Ia tidak menggunakan kandungan Telegram.

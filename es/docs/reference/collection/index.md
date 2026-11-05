@@ -119,9 +119,11 @@ Los números de secuencia indican el orden de observación. La marca de tiempo U
 
 ## Instantáneas del historial
 
-Una instantánea solicita los últimos mensajes visibles de una fuente habilitada, hasta 500 por solicitud. Los resultados se etiquetan como observaciones del historial. Pueden solaparse con la captura en tiempo real, y las observaciones repetidas se conservan como registros independientes.
+Una instantánea solicita los últimos mensajes visibles de una fuente habilitada, hasta 500 por petición. Los resultados se etiquetan como observaciones del historial. Las instantáneas manuales reservan una cuenta libre; pausa antes la supervisión de forma explícita. Las observaciones repetidas se conservan como registros separados.
 
 Las capturas de pantalla se ajustan a la política de archivos adjuntos, pero permanecen separadas de los cambios en tiempo real. No reconstruyen los mensajes eliminados ni las versiones intermedias perdidas. Puede solicitar una mientras la herramienta está en pausa; cualquier archivo adjunto que se haya puesto en cola esperará hasta que comience la observación y se ejecute el proceso de descarga.
+
+La ejecución de **Historial** es una tarea exclusiva e independiente: lee las fuentes seleccionadas y descarga sus adjuntos en cola secuencialmente, sin iniciar la supervisión. Pausar libera la cuenta; reanudar continúa la ejecución guardada. Para filtrar por fechas, idioma y respuestas entre varias cuentas libres, consulta [Exportación distribuida de chats](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
 
 ## Gestión de archivos adjuntos
 

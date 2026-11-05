@@ -4,6 +4,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/accou
 
 Hisob hozirda o&#x27;qiy oladigan narsalarni eksport qiling: doira, qayta boshlanadigan ishlar, imzolangan arxiv va minimallashtirilgan ulashish nusxalari.
 
+Akkaunt eksporti akkauntni faqat o‘zi uchun band qiladi. Boshlash yoki davom ettirishdan oldin monitoringni yoki boshqa yig‘ish vazifasini aniq to‘xtatib turing; ilova ularni avtomatik to‘xtatmaydi.
+
 O'rnatish ma'muri sifatida **Start here → Export my account** yoki **Exports → Telegram account → Configure account export** ni tanlang. Kerak bo'lsa tizimga kiring, hajmini ko'rib chiqing va eksportni aniq boshlang. Uzluksiz kuzatuv talab qilinmaydi. **Saqlangan kuzatuvlar** mavjud jurnalning alohida eksporti hisoblanadi; uning ZIP jurnal filtrlaridan qat'i nazar barcha manbalarni o'z ichiga oladi. Har bir ish maydoni o'z ishlariga, imzolash identifikatoriga va saqlash joyiga ega. Chiqarilgan panelga kirish, jumladan cheklanmagan oddiy eksport ruxsati, bu hisob bo'ylab yo'llarni ochmaydi.
 
 Jo'natuvchi va xabar matni bo'yicha filtrlar **"Jo'natuvchi yoki xabar matni bo'yicha filtr"** ostida kengayadi. **Hisob ma'lumotlari va ulanish usuli** bo'limida ixtiyoriy hisob toifalari va "Export/oddiy sessiya" tanlovi mavjud; uning qisqacha mazmuni yopiq bo'lganda ham faol tanlovlarni ko'rsatadi. Ushbu bo'limlarni yopish ularning sozlamalarini saqlab qoladi. Eksport va hisobot loyihalari ko'rinishni o'zgartirish paytida ham joriy panel sessiyasida qoladi; ular brauzerni qayta yuklashda saqlanmaydi. Mavjud ishlar har ikkala eksport tanlovidan ham erishilishi mumkin.

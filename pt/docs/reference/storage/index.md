@@ -16,6 +16,18 @@ A liberação de espaço nunca exclui nem reescreve o diário assinado. Cada ane
 
 Uma resposta de upload, por si só, não constitui permissão para excluir um arquivo. TgWitness baixa o objeto criptografado completo e verifica seu tamanho; SHA-256 salva o comprovante e, em seguida, verifica os bytes locais novamente imediatamente antes da remoção. Uma falha no upload, uma leitura diferente ou uma transferência cancelada mantêm o arquivo local no lugar. Se um backup de evidência ativado ainda não tiver copiado esse arquivo, a remoção também aguarda até que isso ocorra.
 
+## Quando o disco está ficando cheio
+
+Os downloads de anexos são pausados abaixo do espaço definido em **Parâmetros → Anexos → espaço livre em disco** (1 GiB por padrão), mantendo a fila. As observações de texto continuam. Isso independe das notificações: desativá-las não desativa a reserva de download nem as proteções do armazenamento.
+
+Para agir antes, habilite **Executar automaticamente**, escolha **Remover o arquivo local para liberar espaço** e habilite **Iniciar uma transferência extra quando houver pouco espaço em disco**. Por padrão, a regra opcional começa abaixo de 5120 MiB livres e processa lotes até atingir 10240 MiB. Ambos os limites são configuráveis. Usa o mesmo destino, idade mínima dos arquivos, limite do lote, verificação por releitura completa e requisitos de backup das evidências da execução manual. Nunca habilita um destino sozinha. As verificações ocorrem a cada 30 segundos; um erro ou falta de progresso adia a próxima tentativa por cinco minutos. O estado e o horário da nova tentativa sobrevivem à reinicialização. Quando a regra está inativa, as execuções agendadas mantêm seu intervalo normal.
+
+O painel mostra espaço livre, reserva de empacotamento, se a regra está pronta e arquivos ignorados por falta de espaço temporário. Empacotamento e restauração verificam a necessidade máxima de espaço temporário antes de começar e o espaço disponível durante a gravação. A reserva é a configurada para downloads, com mínimo de 64 MiB nas operações de armazenamento. Não é uma cota do sistema de arquivos: outro processo pode consumir espaço entre verificações.
+
+A compressão Gzip é sem perdas e se aplica a objetos remotos; não reduz o diário ativo nem cria arquivos compactados locais. JPEG, vídeos e ZIP podem diminuir muito pouco ou crescer ligeiramente. Com compressão habilitada, o empacotamento pode precisar temporariamente de aproximadamente duas vezes o tamanho do anexo mais a reserva. Escolha um limite de início adequado aos maiores arquivos. Arquivos grandes demais são mantidos e informados; os menores e as cópias remotas já verificadas ainda podem liberar espaço. Uma cópia verificada permite remover o arquivo local sem outro arquivo de empacotamento. A restauração também precisa de espaço temporário e pode ser recusada até ele estar disponível.
+
+Se não houver arquivos elegíveis para mover ou nenhum destino estiver configurado, o TgWitness não poderá recuperar espaço automaticamente. O gerenciamento de armazenamento nunca reduz nem reescreve o diário assinado. Ele continua precisando de espaço para novas observações de texto.
+
 ## Conecte um destino
 
 Em **Extras → Armazenamento e espaço em disco → Gerenciar armazenamento**, escolha a tarefa e o destino, salve-a e, em seguida, selecione **Testar upload e download**. O teste faz o upload de uma pequena amostra aleatória e a lê de volta. Ele não utiliza conteúdo do Telegram.

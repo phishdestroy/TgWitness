@@ -44,7 +44,7 @@ Host-Messwerte (SSH-Listener und -Prozesse, aktuelle Sitzungen, Anmeldungen am `
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` Schreibgeschützte Bereiche | Kontoereignisse, Versionen von Firewall-Regeln | 90 Tage |
 | `vultr` | `VULTR_API_KEY` | Benutzer mit Lesezugriff und der `activity_logs` Berechtigung | Aktivitätsprotokoll des Kontos (Methode, Pfad, Akteur) | 30 Tage, länger mit einem Abonnement für das Audit-Protokoll |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | CloudTrail-Ereignisverlauf | 90 Tage |
-| `phala` | `PHALA_CLOUD_API_KEY` | Ein API-Schlüssel desselben Arbeitsbereichs | Anwendungsaktualisierungen: Änderungen am Code und an der Umgebung, Neustarts, Betriebssystem-Upgrades | Solange die Anwendung existiert |
+| `phala` | `PHALA_CLOUD_API_KEY` | Ein API-Schlüssel desselben Arbeitsbereichs | Anwendungsrevisionen und CVM-Vorgänge: Änderungen an der Docker-Compose-Konfiguration und der Umgebung, Neustarts, Betriebssystem-Upgrades | Solange die Anwendung existiert |
 | `generic` | keine | keine | keine: **selbstbeglaubigt** | – |
 
 Verwenden Sie für jeden Fall ein eigenes Projekt, Team, Konto oder Unterkonto: Der schreibgeschützte Zugriff des Prüfers zeigt dann nur diese Bereitstellung an. Anmeldedaten werden aus `--provider-token-file` oder der oben genannten Variablen, niemals aus der Befehlszeile. Bei AWS enthält die Datei die Angabe `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; die Region ist `--location`.
@@ -62,9 +62,11 @@ Der `--provider phala` läuft der Collector in einer vertraulichen Intel-TDX-Vir
 | `tdx_compose_hash` | RTMR3, das aus dem dstack-Ereignisprotokoll wiedergegeben wird, misst die App-Composes, die der Collector meldet. |
 | `tdx_compose` | Dieser Code entspricht Byte für Byte dem Code, der aus dem bereitgestellten Commit erstellt wird: Quelldateien sind über ihren Hash-Wert, beide Bilder über ihren Digest-Wert festverknüpft; es gibt keinen weiteren Code. |
 | `tdx_identity` | Die Bescheinigung stammt von der bereitgestellten Anwendung und Instanz, wobei Schlüssel aus dem KMS von Phala und einer verschlüsselten Festplatte verwendet werden. |
-| `tdx_os` | Mit `--tdx-measurements`entsprechen MRTD und RTMR0-2 den Werten, die aus dem dstack-OS-Image berechnet wurden (`dstack-mr measure --json`) |
+| `tdx_os` | MRTD und RTMR0-2 entsprechen den Werten, die der Verifizierer aus dem von Dstack-TEE veröffentlichten Dstack-OS-Image berechnet, das anhand des von der CVM gemeldeten OS-Image-Hashes ermittelt wird, sowie aus den ACPI-Tabellen, die QEMU für die Konfiguration der VM erstellt: Firmware, Kernel, initrd, Befehlszeile mit dem Hash des Root-Dateisystems, Arbeitsspeicher, vCPUs und Geräte. Ein Entwicklungsimage schlägt fehl |
 
-Jeder im Protokoll aufgezeichnete Start des Collectors enthält eine solche Bescheinigung, sodass `verify --evidence` jeder Start überprüft wird. Phalas Liste der Anwendungsrevisionen dient als Anbieterprotokoll: Wenn sich die Kompositionsfunktion nach der Bereitstellung geändert hat, schlägt der Bericht fehl.
+Das Betriebssystem-Image (ca. 180 MB, wovon 21 MB beibehalten werden) wird einmalig von [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) in `dstack-images` neben dem Datensatz heruntergeladen; `--tdx-image FOLDER` verwendet einen anderen Ordner oder ein entpacktes Image, `--tdx-image none` überspringt den Vergleich. Die Messung erfolgt gemäß `dstack-mr` und dem `qemu-acpi` Rust-Paket aus Dstack-TEE/dstack; `tools/check_dstack_image.py` vergleicht die Ergebnisse mit der QEMU-eigenen ACPI- Ausgabe sowie mit einem echten Phala-Cloud-Hardware-Attestationsdatensatz, `--live` zudem mit dem veröffentlichten Image. `--tdx-measurements` vergleicht weiterhin MRTD und RTMR0-2, die stattdessen als JSON angegeben werden.
+
+Jeder im Protokoll erfasste Start des Collectors ist mit einer solchen Bescheinigung versehen, sodass `verify --evidence` jeden Start sowie das dabei gebootete Betriebssystem-Image überprüft. Die Anwendungsrevisionen von Phala und die Vorgänge des CVM dienen als Anbieterprotokoll: Eine nach der Bereitstellung geänderte Docker-Compose-Konfiguration führt zu einem Fehlschlag des Berichts, und Neustarts werden zur Überprüfung aufgelistet.
 
 Wählen Sie im Panel **Vertrauliche virtuelle Maschine · Phala Cloud** unter **Extras** → **Server 24/7** und fügen Sie einen Phala-Cloud-API-Schlüssel ein; der Quick-Tunnel funktioniert wie bei Hetzner. Über die Befehlszeile:
 
@@ -74,12 +76,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` Liest Intels Zertifikate und Sperrlisten aus einer Datei aus, anstatt sie von Intel herunterzuladen. Gateway-DNS ist hier nicht verfügbar: Phala verfügt über keine Provider-Firewall für ausgehenden Datenverkehr.
 
+### Attestierungszertifikat
+
+Bei einer Phala-Bereitstellung schreibt `verify --report certificate.md` zudem das Zertifikat: ein eigenständige Datei „`certificate.html`“ und eine A4-Datei „`certificate.pdf`“ mit dem Ergebnis, der Vertrauenskette von Intels Stammzertifikat bis zum Collector-Schlüssel, einem Vergleich mit gewöhnlichen und hochsicheren Servern, den Messwerten neben den aus dem veröffentlichten Image berechneten Werten, den Verantwortlichen für die einzelnen Teile, der Intel-Zertifikatskette, jeder Prüfung, dem Anbieterprotokoll sowie einer Anleitung zur Wiederholung der Überprüfung. Der JSON-Bericht bleibt die maßgebliche Aufzeichnung; die Seiten stellen ihn dar.
+
+Der Bericht ist mit Signaturen und Zeitstempeln digital versiegelt, und zwar in der Datei „`certificate.seal.json`“ sowie in den daneben liegenden Dateien „`.tsq`“ und „`.tsr`“:
+
+| Seal | Was es bietet |
+| --- | --- |
+| Qualifizierter elektronischer Zeitstempel, `http://tsa.belgium.be/connect` | RFC-3161-Zeitstempel über die exakten Bytes von `certificate.json` vom qualifizierten Vertrauensdienstleister der belgischen Föderalregierung (FPS Policy and Support, BOSA). Diese Stelle ist als qualifizierter Zeitstempeldienst mit dem Status „gewährt“ auf der EU-Vertrauensliste Belgiens aufgeführt; die Stammzertifizierungsstelle (Belgium Root CA6) und die Einträge der Liste, gemäß der am 20. Oktober 2026 veröffentlichten Liste, sind in `tgwitness/tsa_roots.py` festgehalten. Gemäß Artikel 41 der Verordnung (EU) Nr. 910/2014 gilt ein solcher Zeitstempel in jedem EU-Mitgliedstaat als hinsichtlich Datum und Uhrzeit sowie hinsichtlich der Integrität der Daten als korrekt. |
+| RFC 3161-Zeitstempel, FreeTSA | Ein zweiter, unabhängiger Zeitstempel |
+| Signatur des Verifizierers | Ed25519 über eine Anweisung, die den SHA-256-Wert des Berichts und jeden Zeitstempel mit dem eigenen Schlüssel des Verifizierers (`--sign-with FOLDER`, Standard: `~/.tgwitness/verifier`) angibt; das PDF trägt eine Signatur mit demselben Schlüssel |
+
+`--timestamp URL` (wiederholbar) wählt andere Zertifizierungsstellen aus, `--timestamp none` keine, `--sign-with
+none` lässt das Siegel ungesigniert. `check-report` überprüft den Hash des Berichts, die Signatur des Verifizierers, jeden Zeitstempel auf eine vertrauenswürdige Stammzertifizierungsstelle und deren qualifizierten Status sowie die Signatur der PDF-Datei. Die rechtliche Bedeutung eines qualifizierten Zeitstempels außerhalb der EU sowie des Berichts als Ganzes liegt im Ermessen des Gerichts oder der Behörde, die ihn erhält; das Siegel zeigt an, wann der Bericht existierte und dass er nicht verändert wurde.
+
 Eine Bescheinigung kann einen Fehler im TDX-Modul oder im Mikrocode von Intel sowie physischen Zugriff auf den Speicherbus nicht ausschließen. Wer auch immer die Anwendung im Konto von Phala kontrolliert, kann ein weiteres „Compose“ bereitstellen; dies erscheint als neue Revision mit einem neuen „Compose“-Hash. Der Host kontrolliert die Zeitquelle und das Netzwerk des Rechners.
+
+Bereitstellung, Überprüfung mit `--evidence`, Neustarts, der Vergleich des Betriebssystem-Images, das mit Signaturen und Zeitstempeln digital versiegelte Zertifikat sowie die Vernichtung wurden auf der Phala Cloud selbst ausgeführt; siehe [– der Lauf vom 4. November 2026 –](https://phishdestroy.github.io/TgWitness/de/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026).
 
 ## Bevor Sie beginnen
 
@@ -110,7 +130,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 Auf dem Server öffnet „cloudflared“ einen [schnellen Tunnel](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/) zum Panel: eine zufällige `https://….trycloudflare.com` Adresse, die sich ändert, sobald „cloudflared“ oder der Server neu gestartet wird. Ein kleiner Dienst auf dem Server veröffentlicht jede Adresse in einem zufälligen „ntfy.sh“- Thema, signiert (HMAC-SHA256) mit einem Schlüssel, der ausschließlich im Deployment-Verzeichnis gespeichert ist (`address-key.txt`) und wiederholt dies alle drei Stunden, da ntfy.sh Beiträge 12 Stunden lang aufbewahrt. `deploy` und **„Find the current address“** akzeptieren nur signierte Beiträge, sodass ein gefälschter Beitrag dich und dein Panel-Token nicht an die Adresse einer anderen Person weiterleiten kann. Das Thema ist im Protokoll und im veröffentlichten cloud-init enthalten: Wer auch immer darüber verfügt, kann die aktuelle Adresse ablesen, die weiterhin nach dem Panel-Token fragt. Der Server hält in keinem Fall einen eingehenden Port offen.
 
-Was es kostet: Da kein Cloudflare-Konto Aufzeichnungen über einen Quick-Tunnel führt, `verify` werden der Tunnel, der Connector und die DNS-Prüfung als nicht verfügbar gemeldet, und das Ergebnis ist bestenfalls `incomplete`; die Anbieteraufzeichnungen, die Firewall, die signierte Erklärung, die Host-Messungen und der Installationsvergleich werden wie gewohnt geprüft. Der Byte-Vergleich mit dem Referenz-Installer erfordert einen bereitgestellten Commit, der bereits weiß, `--quick-tunnel`; ein 0.7.0-Checkout erstellt den Domain-Installer und meldet den Unterschied. Cloudflare gewährt für Quick-Tunnel keine Verfügbarkeitsgarantie, erlaubt 200 laufende Anfragen und überträgt keine „Server-Sent Events“, sodass die Live-Aktualisierungen des Panels (Versionen ab 0.7.0) möglicherweise nicht über einen Quick-Tunnel ankommen und eine Ansicht neu geladen werden muss; dieser Aspekt wurde noch nicht getestet. Für einen Fall, der beständig sein muss, verwenden Sie Ihre eigene Domain.
+Ein Verifizierer verfügt über keinen Adressschlüssel, und jeder, der das Thema liest, kann dort Beiträge verfassen. Daher veröffentlicht der Collector auch die Adresse selbst, signiert mit seinem eigenen Ed25519-Schlüssel, und `verify` übernimmt den neuesten Beitrag, der mit dem Collector-Schlüssel im Bereitstellungsdatensatz signiert ist; Beiträge werden nach dem Zeitpunkt sortiert, zu dem ntfy.sh sie empfangen hat, nicht nach dem von ihnen angegebenen Zeitpunkt. Ein Collector aus der Zeit vor dieser Änderung signiert nichts, und `verify` übernimmt daraufhin den neuesten Beitrag und gibt dies in der `statement`-Prüfung an; ein gefälschter Beitrag kann diese Prüfung lediglich zum Scheitern bringen, da die Adresse weiterhin mit dem Schlüssel des Collectors antworten muss.
+
+Was es kostet: Da kein Cloudflare-Konto Aufzeichnungen über einen Quick-Tunnel führt, meldet `verify` den Tunnel, den Connector und die DNS-Prüfung als nicht verfügbar, und das Ergebnis lautet bestenfalls `incomplete` (auf Phala Cloud wird die Prüfung stattdessen bestanden: Der Connector läuft innerhalb der gemessenen Docker-Compose-Konfiguration); die Anbieteraufzeichnungen, die Firewall, die signierte Erklärung, die Host-Messungen und der Installationsvergleich werden wie üblich geprüft. Der Byte-Vergleich mit dem Referenz-Installationsprogramm erfordert einen bereitgestellten Commit, der `--quick-tunnel` bereits kennt; ein 0.7.0-Checkout erstellt das Domain-Installationsprogramm und meldet den Unterschied. Cloudflare gewährt für Quick Tunnels keine Verfügbarkeitsgarantie, erlaubt 200 laufende Anfragen und überträgt keine Server-Sent-Events, sodass die Live-Aktualisierungen des Panels (Versionen ab 0.7.0) möglicherweise nicht über einen solchen Tunnel ankommen und eine Ansicht neu geladen werden muss; dieser Aspekt wurde noch nicht getestet. Für einen Fall, der zuverlässig funktionieren muss, verwenden Sie bitte Ihre eigene Domain.
 
 ## Bereitstellen
 

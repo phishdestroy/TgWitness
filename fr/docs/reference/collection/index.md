@@ -119,9 +119,11 @@ Les numéros de séquence indiquent l’ordre d’observation. L’horodatage UT
 
 ## Instantanés de l'historique
 
-Une requête « snapshot » récupère les derniers messages visibles provenant d’une source activée, dans la limite de 500 par requête. Les résultats sont qualifiés d’« observations historiques ». Ils peuvent se chevaucher avec la capture en temps réel, et les observations répétées sont conservées sous forme d’enregistrements distincts.
+Un instantané demande les derniers messages visibles d’une source activée, jusqu’à 500 par requête. Les résultats sont étiquetés comme observations de l’historique. Les instantanés manuels réservent un compte libre ; suspendez d’abord explicitement la surveillance. Les observations répétées restent des enregistrements distincts.
 
 Les instantanés respectent la politique relative aux pièces jointes, mais restent distincts des changements liés aux événements en temps réel. Ils ne reconstituent pas les messages supprimés ni les versions intermédiaires manquantes. Vous pouvez en demander un lorsque l’enregistrement est en pause ; les pièces jointes mises en file d’attente attendent que l’observation commence et que le processus de téléchargement s’exécute.
+
+L’exécution **Historique** est une tâche exclusive distincte : elle lit les sources sélectionnées et télécharge leurs pièces jointes en attente séquentiellement, sans lancer la surveillance. La pause libère le compte ; la reprise poursuit l’exécution enregistrée. Pour filtrer par dates, langue et réponses sur plusieurs comptes libres, voir [Export distribué de conversations](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
 
 ## Gestion des pièces jointes
 

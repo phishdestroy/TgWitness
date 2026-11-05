@@ -119,9 +119,11 @@ I numeri di sequenza indicano l’ordine di osservazione. Il timestamp UTC del c
 
 ## Istantanee storiche
 
-Uno snapshot richiede gli ultimi messaggi visibili da una fonte abilitata, fino a 500 per richiesta. I risultati vengono etichettati come osservazioni storiche. Possono sovrapporsi alla cattura in tempo reale e le osservazioni ripetute vengono conservate come record separati.
+Un’istantanea richiede gli ultimi messaggi visibili di una fonte abilitata, fino a 500 per richiesta. I risultati sono etichettati come osservazioni della cronologia. Le istantanee manuali riservano un account libero; sospendi prima esplicitamente il monitoraggio. Le osservazioni ripetute restano registrazioni separate.
 
 Le istantanee rispettano la politica relativa agli allegati, ma rimangono separate dagli eventi in tempo reale. Non ricostruiscono i messaggi cancellati né le versioni intermedie mancanti. È possibile richiederne una mentre il sistema è in pausa; eventuali allegati in coda attendono l’inizio dell’osservazione e l’esecuzione del processo di download.
+
+L’esecuzione **Cronologia** è un’attività esclusiva separata: legge le fonti selezionate e scarica in sequenza gli allegati in coda, senza avviare il monitoraggio. La pausa libera l’account; la ripresa continua l’esecuzione salvata. Per filtri di data, lingua e risposte su più account liberi, vedi [Esportazione distribuita delle chat](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
 
 ## Gestione degli allegati
 

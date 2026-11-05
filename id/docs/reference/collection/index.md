@@ -119,9 +119,11 @@ Nomor urut menunjukkan urutan pengamatan. Cap waktu UTC pengumpul adalah waktu l
 
 ## Cuplikan riwayat
 
-Sebuah snapshot meminta pesan-pesan terbaru yang terlihat dari sumber yang diaktifkan, hingga 500 pesan per permintaan. Hasilnya diberi label sebagai pengamatan riwayat. Pengamatan ini dapat tumpang tindih dengan penangkapan langsung, dan pengamatan yang berulang disimpan sebagai catatan terpisah.
+Snapshot meminta pesan terbaru yang terlihat dari sumber aktif, hingga 500 per permintaan. Hasil diberi label sebagai pengamatan riwayat. Snapshot manual mencadangkan akun yang menganggur; jeda pemantauan secara eksplisit terlebih dahulu. Pengamatan berulang disimpan sebagai catatan terpisah.
 
 Cuplikan mengikuti kebijakan lampiran tetapi tetap terpisah dari peralihan peristiwa langsung. Cuplikan tersebut tidak merekonstruksi pesan yang dihapus atau versi perantara yang terlewat. Anda dapat meminta cuplikan saat proses dijeda; lampiran apa pun yang masuk ke antrian akan menunggu hingga pengamatan dimulai dan proses pengunduhan berjalan.
+
+Proses **Riwayat** adalah tugas eksklusif tersendiri: membaca sumber terpilih dan mengunduh antrean lampirannya secara berurutan tanpa memulai pemantauan. Jeda membebaskan akun; melanjutkan meneruskan proses yang disimpan. Untuk filter tanggal, bahasa, dan balasan pada beberapa akun menganggur, lihat [Ekspor percakapan terdistribusi](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
 
 ## Penanganan lampiran
 

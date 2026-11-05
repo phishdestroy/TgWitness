@@ -16,6 +16,18 @@ La libération d’espace ne supprime ni ne réécrit jamais le journal signé. 
 
 Une réponse de téléchargement ne constitue pas à elle seule une autorisation de suppression d’un fichier. TgWitness télécharge l’objet chiffré dans son intégralité, vérifie sa taille et SHA-256, enregistre le reçu, puis vérifie à nouveau les octets locaux juste avant la suppression. Un échec de téléchargement, une lecture différente ou un transfert annulé laisse le fichier local en place. Si une sauvegarde de preuves activée n’a pas encore copié ce fichier, la suppression attend également que cela soit fait.
 
+## Lorsque le disque se remplit
+
+Le téléchargement des pièces jointes se met en pause sous le seuil de **Paramètres → Pièces jointes → espace disque libre** (1 GiB par défaut), en conservant la file d’attente. Les observations textuelles continuent. Cela ne dépend pas des notifications : les désactiver ne supprime ni la réserve de téléchargement ni les protections du stockage.
+
+Pour intervenir plus tôt, activez **Exécuter automatiquement**, choisissez **Supprimer le fichier local pour libérer de l’espace** et activez **Lancer un transfert supplémentaire lorsque l’espace disque est faible**. Par défaut, cette règle facultative démarre sous 5120 MiB libres et traite les fichiers par lots jusqu’à atteindre 10240 MiB. Les deux seuils sont configurables. La destination, l’âge minimal, la taille des lots, la vérification par relecture complète et les prérequis de sauvegarde des preuves sont ceux d’une exécution manuelle. La règle n’active jamais une destination seule. Les contrôles ont lieu toutes les 30 secondes ; une erreur ou l’absence de progrès reporte le prochain essai de cinq minutes. L’état et l’heure de nouvelle tentative survivent au redémarrage. Quand la règle est inactive, les passages planifiés gardent leur intervalle normal.
+
+Le panneau affiche l’espace libre, la réserve d’empaquetage, l’activation de la règle et les fichiers ignorés faute d’espace temporaire. L’empaquetage et la restauration vérifient leur besoin maximal d’espace temporaire avant de commencer, puis l’espace disponible pendant l’écriture. La réserve correspond au réglage des téléchargements, avec un minimum de 64 MiB pour le stockage. Ces contrôles ne constituent pas un quota du système de fichiers : un autre processus peut consommer de l’espace entre deux contrôles.
+
+Gzip compresse sans perte les objets distants ; il ne réduit pas le journal actif et ne crée pas d’archives locales. Les JPEG, vidéos et ZIP peuvent à peine diminuer, voire grossir légèrement. Avec la compression, l’empaquetage peut nécessiter temporairement environ deux fois la taille de la pièce jointe, plus la réserve. Choisissez un seuil assez précoce pour les plus gros fichiers. Un fichier trop volumineux est conservé et signalé ; les plus petits et les copies distantes déjà vérifiées peuvent encore libérer de l’espace. Une copie vérifiée permet de retirer le fichier local sans nouveau fichier d’empaquetage. La restauration nécessite aussi de l’espace temporaire et peut être refusée tant qu’il manque.
+
+Sans fichier admissible à déplacer ou destination configurée, TgWitness ne peut pas récupérer d’espace automatiquement. La gestion du stockage ne tronque et ne réécrit jamais le journal signé. Celui-ci a toujours besoin d’espace pour de nouvelles observations textuelles.
+
 ## Connecter une destination
 
 Dans **Extras → Stockage et espace disque → Gérer le stockage**, choisissez la tâche et la destination, enregistrez-la, puis sélectionnez **Tester le téléchargement et l'envoi**. Le test envoie une petite sonde aléatoire et la relit ensuite. Il n'utilise pas de contenu Telegram.

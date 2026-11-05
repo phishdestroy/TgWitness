@@ -44,7 +44,7 @@ Mehmon o'lchovlari (SSH tinglovchilari va jarayonlar, joriy sessiyalar, kirishla
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` faqat o'qish uchun mo'ljallangan doiralar | Hisob voqealari, firewall qoidalarining versiyalari | 90 kun |
 | `vultr` | `VULTR_API_KEY` | O'qish huquqiga ega foydalanuvchi va `activity_logs` ruxsati | Hisob faoliyati logi (usul, yo'l, ijrochi) | 30 kun, audit-log obunasiga ega bo'lsa, muddati uzaytiriladi |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | CloudTrail voqealari tarixi | 90 kun |
-| `phala` | `PHALA_CLOUD_API_KEY` | Bir xil ish maydonining API kaliti | Ilova versiyalari: kompozitsiya va muhit o'zgarishlari, qayta ishga tushirishlar, operatsion tizim yangilanishlari | Ilova mavjud bo'lsa |
+| `phala` | `PHALA_CLOUD_API_KEY` | Bir xil ish maydonining API kaliti | Ilova reviziyalari va CVM operatsiyalari: Docker Compose konfiguratsiyasi va muhit o'zgarishlari, qayta ishga tushirishlar, operatsion tizimni yangilashlar | Ilova mavjud bo'lsa |
 | `generic` | yo'q | yo'q | yo'q: **o'zini tasdiqlagan** | – |
 
 Har bir ish uchun maxsus loyiha, jamoa, hisob yoki kichik hisobdan foydalaning: tekshiruvchining faqat o'qish huquqi faqat shu joylashtirishni ko'rsatadi. Kirish ma'lumotlari `--provider-token-file` yoki yuqoridagi o'zgaruvchidan o'qiladi, hech qachon buyruq satridan emas. AWS uchun fayl saqlaydi `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; mintaqa esa `--location`.
@@ -62,9 +62,11 @@ Bilan `--provider phala` to'plovchi dstack tomonidan boshqariladigan [Phala Clou
 | `tdx_compose_hash` | RTMR3, dstack voqealar logidan qayta ijro etilganda, kollektorning hisobot bergan app-compose'ini o'lchaydi |
 | `tdx_compose` | Ushbu kompozitsiya joylashtirilgan commit kodining bytema-byte nusxasi: manba fayllari hash bo'yicha biriktirilgan, ikkala rasm esa digest bo'yicha, boshqa hech qanday kod yo'q. |
 | `tdx_identity` | Tasdiq joylashtirilgan ilova va instantsiya tomonidan beriladi, kalitlar Phala KMS'idan olinadi va disk shifrlangan. |
-| `tdx_os` | Bilan `--tdx-measurements`, MRTD va RTMR0-2 dstack OS tasviridan hisoblangan qiymatlarga teng (`dstack-mr measure --json`) |
+| `tdx_os` | MRTD va RTMR0-2 qiymatlari verifikator tomonidan Dstack-TEE operatsion tizimi tasviridan (Dstack-TEE tomonidan e'lon qilingan), CVM tomonidan xabar qilingan operatsion tizim tasviri xashi va VM shakli uchun QEMU tomonidan tuzilgan ACPI jadvallariga asoslanib hisoblangan qiymatlarga to'g'ri keladi: firmware, kernel, initrd, ildiz fayl tizimi xashi bilan buyruq qatori, xotira, vCPUlar va qurilmalar. Rivojlantirish tasviri muvaffaqiyatsiz bo'ladi |
 
-Kollektorning jurnalda qayd etilgan har bir ishga tushishi bunday tasdiqnomaga ega, shuning uchun `verify --evidence` har bir boshlanishni tekshiradi. Phala'ning ilova o'zgartirishlari ro'yxati provayder logi vazifasini bajaradi: agar joylashtirishdan keyin kompozitsiya o'zgarsa, hisobot muvaffaqiyatsiz bo'ladi.
+Operatsion tizim tasviri (taxminan 180 MB, ulardan 21 MB saqlanadi) bir marta [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) dan `dstack-images` yozuv yoniga yuklanadi; `--tdx-image FOLDER` boshqa papka yoki ochilmagan tasvirni ishlatadi, `--tdx-image none` taqqoslashni o'tkazib yuboradi. O'lchov `dstack-mr` va `qemu-acpi` Rust paketidan Dstack-TEE/dstack'dan keyin amalga oshiriladi; `tools/check_dstack_image.py` uni QEMU'ning o'z ACPI chiqishi va haqiqiy Phala Cloud apparat attestatlari yozuvi bilan solishtiradi, `--live` esa chop etilgan tasvir bilan ham solishtiradi. `--tdx-measurements` esa MRTD va RTMR0-2 ni JSON ko'rinishida solishtiradi.
+
+Jurnalga yozilgan har bir kollektor ishga tushishi bunday tasdiqnomaga ega, shuning uchun `verify --evidence` har bir ishga tushishni va uning yuklagan OS tasvirini tekshiradi. Phala ilovasining versiyalari va CVM amallari provayder logi sifatida xizmat qiladi: joylashtirishdan keyin o'zgartirilgan Docker Compose konfiguratsiyasi hisobotda xato sifatida qayd etiladi va qayta ishga tushishlar ko'rib chiqish uchun ro'yxatlanadi.
 
 Panelda **Extras** → **Server 24/7** bo'limida **Confidential virtual machine · Phala Cloud** ni tanlang va Phala Cloud API kalitini joylashtiring; tez tunnel Hetzner'da ishlaydi. Buyruq satridan:
 
@@ -74,12 +76,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` Intel sertifikatlari va bekor qilish ro'yxatlarini Intel'dan yuklab olish o'rniga fayldan o'qiydi. Gateway DNS bu yerda mavjud emas: Phala'da chiquvchi trafik uchun provayder firewalli yo'q.
 
+### Tasdiqlash sertifikati
+
+Phala joylashtirish uchun `verify --report certificate.md` ham sertifikatni yozadi: a mustaqil `certificate.html` va A4 `certificate.pdf` xulosasi bilan, Intel ildizidan to'plovchi kalitigacha bo'lgan ishonch zanjiri, oddiy va yuqori kafolatli serverlar bilan solishtirish, e'lon qilingan imidjdan hisoblangan qiymatlar yonidagi o'lchovlar, har bir qism uchun kim kafolat beradi, Intel sertifikat zanjiri, har bir tekshiruv, provayder logi va tekshiruvni qanday takrorlash. JSON hisobot rasmiy yozuv bo'lib qoladi; sahifalar uni ko'rsatadi.
+
+Hisobot `certificate.seal.json` va uning yonidagi `.tsq`/`.tsr` fayllarida imzo va vaqt shtamplari bilan raqamli muhrlangan:
+
+| Muhr | Qo'shgan yangiliklari |
+| --- | --- |
+| Malakali elektron vaqt shtampi, `http://tsa.belgium.be/connect` | RFC 3161 vaqt shtampi Belgiya federal hukumatining malakali ishonch xizmat provayderi (FPS Siyosat va Qo'llab-quvvatlash, BOSA) tomonidan taqdim etilgan `certificate.json` aniq baytlariga nisbatan qo'llanadi. Ushbu birlik Belgiya Yevropa Ittifoqi ishonchli ro'yxatida malakali vaqt belgilash xizmati sifatida, maqoli berilgan holda keltirilgan; root (Belgium Root CA6) va ro'yxatdagi yozuvlar 2026-yil 20-oktabrdagi ro'yxatga muvofiq `tgwitness/tsa_roots.py` ga mahkamlangan. 910/2014-sonli Reglamentning 41-moddasiga muvofiq, bunday vaqt shtampi har bir Yevropa Ittifoqi a'zo davlatida sana va vaqt hamda ma'lumotlarning yaxlitligi bo'yicha to'g'ri deb qabul qilinadi. |
+| RFC 3161 vaqt shtampi, FreeTSA | Ikkinchi, mustaqil vaqt tamg'asi |
+| Verifikator imzosi | Ed25519 hashi hisobotning SHA-256 va har bir vaqt shtampini o'z ichiga olgan bayonot ustida, verifikatorning o'z kaliti (`--sign-with FOLDER`, standart `~/.tgwitness/verifier`) bilan tuziladi; PDF ham shu kalit bilan imzolangan |
+
+`--timestamp URL` (takrorlanadigan) boshqa vakolatli organlarni tanlaydi, `--timestamp none` hech birini tanlamaydi, `--sign-with
+none` muhrni imzolamasdan qoldiradi. `check-report` hisobotning xeshini, tasdiqlovchi imzosini, har bir vaqt shtampini ishonchli ildizga va uning malakali holatini, shuningdek PDF faylining imzosini tekshiradi. Yevropa Ittifoqi tashqarisidagi malakali vaqt shtampining va hisobotning butunlay huquqiy og'irligi uni qabul qiluvchi sud yoki organ zimmasidadir; muhr hisobot qachon mavjud bo'lganini va u o'zgarmaganini ko'rsatadi.
+
 Attestatsiya Intel'ning TDX modulidagi yoki mikrokodidagi nuqsonni yoki xotira magistraliga jismoniy kirishni inkor eta olmaydi. Phala hisobidagi ilovani nazorat qiluvchi shaxs boshqa compose joylashtirishi mumkin; u yangi compose hash bilan yangi tahrir sifatida paydo bo'ladi. Mezbon mashina vaqt manbai va tarmog'ini nazorat qiladi.
+
+Joylashtirish, `--evidence` bilan tekshirish, qayta ishga tushirishlar, operatsion tizim tasvirini solishtirish, imzo va vaqt shtamplari bilan raqamli muhrlangan sertifikat va yo'q qilish amallari Phala Cloud'da o'zida bajarilgan; qarang [, 2026-yil 4-noyabrdagi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026) ishga tushirish.
 
 ## Boshlashdan oldin
 
@@ -110,7 +130,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 Serverda cloudflared panelga [tez tunnel](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/) ochadi: tasodifiy `https://….trycloudflare.com` manzilni har safar cloudflared yoki server qayta ishga tushirilganda o'zgartiradi. Serverdagi kichik bir xizmat har bir manzilni tasodifiy ntfy.sh mavzusiga joylaydi, uni faqat joylashtirish katalogida saqlangan kalit bilan imzolaydi (HMAC-SHA256) (`address-key.txt`), va uni har uch soatda takrorlaydi, chunki ntfy.sh postlarni 12 soat davomida saqlaydi. `deploy` **Joriy manzilni topish** faqat imzolangan postlarni qabul qiladi, shuning uchun soxtalashtirilgan post sizni va panel tokeningizni boshqasining manziliga yubora olmaydi. Mavzu yozuvda va e'lon qilingan cloud-initda mavjud: ularga ega bo'lgan har kim joriy manzilni o'qishi mumkin, u hanuzgacha panel tokenini so'raydi. Server hech qanday kiruvchi portni ochmaydi.
 
-Nima uchun: Cloudflare hisobingiz bo'lmasa, tezkor tunnel yozuvlarini saqlamaydi, shuning uchun `verify` tunnel, ulanuvchi va DNS tekshiruvini mavjud emas deb hisoblaydi va natija eng yaxshi holatda `incomplete`; provayder yozuvlari, firewall, imzolangan bayonot, host o'lchovlari va o'rnatuvchi solishtirish odatdagidek tekshiriladi. Referens o'rnatuvchi bilan baytlar solishtirish uchun allaqachon nimani bilishini biladigan joylashtirilgan commit kerak `--quick-tunnel`; 0.7.0 versiyasini yuklab olish domen o'rnatuvchini yaratadi va farqni xabar qiladi. Cloudflare tezkor tunnel'larga ish vaqti kafolatini bermaydi, 200 ta so'rovni bir vaqtda uzatishga ruxsat beradi va Server-Sent Events'ni uzatmaydi, shuning uchun panelning jonli yangilanishlari (0.7.0 dan keyingi versiyalar) birinchi urinishda kelmasligi mumkin va sahifani qayta yuklash kerak bo'ladi; bu qism sinab ko'rilmagan. Ish berilishi kerak bo'lgan holat uchun o'zingizning domeningizdan foydalaning.
+Verifikatorning manzil kaliti yo'q va mavzuni o'qiydigan har kim unga post yozishi mumkin. Shuning uchun collector ham manzilni o'zining Ed25519 kaliti bilan imzolab post qiladi va `verify` joylashtirish yozuvida collector kaliti bilan imzolangan eng yangi postni oladi; postlar ularning da'vo qilgan vaqtiga emas, balki ntfy.sh ularni qabul qilgan vaqtga ko'ra tartiblanadi. Ushbu o'zgarishdan oldingi kollektor hech narsani imzolamaydi va `verify` eng yangi postni oladi va `statement` tekshiruvida shuni bildiradi; soxtalashtirilgan post faqatgina ushbu tekshiruvni muvaffaqiyatsiz qilishi mumkin, chunki manzil hali ham kollektor kaliti bilan javob berishi kerak.
+
+Nima uchun: tezkor tunnel yozuvlarini saqlamaydigan Cloudflare hisobotlari yo'qligi sababli, `verify` tunnel, konnektor va DNS tekshiruvini mavjud emas deb hisoblaydi va natija eng yaxshi holatda ham `incomplete` (Phala'da Cloud tekshiruv o'rniga o'tkaziladi: ulagich o'lchangan Docker Compose konfiguratsiyasi ichida ishlaydi); provayder yozuvlari, firewall, imzolangan bayonot, host o'lchovlari va o'rnatuvchi solishtirish odatdagidek tekshiriladi. Referens o'rnatuvchi bilan bayt solishtirish `--quick-tunnel` ni allaqachon biladigan joylashtirilgan commitni talab qiladi; 0.7.0 checkout domen o'rnatuvchini yaratadi va farqni xabar qiladi. Cloudflare tezkor tunnelar uchun ish vaqti kafolatini bermaydi, 200 ta so'rovni bir vaqtda uzatishga ruxsat beradi va Server-Sent Eventsni uzatmaydi, shuning uchun paneldagi jonli yangilanishlar (0.7.0 dan keyingi versiyalar) birinchi usul orqali yetib kelmasligi mumkin va ko'rinishni qayta yuklash talab qilinadi; bu qism sinab ko'rilmagan. Ishga tushirish zarur bo'lgan holat uchun o'zingizning domeningizdan foydalaning.
 
 ## Joriy etish
 

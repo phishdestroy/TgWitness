@@ -8,7 +8,7 @@ Signed exports let recipients verify file integrity and the signing key offline.
 
 The panel brings together isolated account workspaces, supported session imports, parallel chat export, cross-chat people profiles, observed name changes, bot-button interaction receipts, saved attachments and offline HTML/JSON evidence. Case Board keeps team annotations linked to saved records. The report studio offers eight designs, content choices and a data preview; minimized sharing copies control what recipients receive. Optional witnesses, timestamps and encrypted off-site copies add records outside the local journal. Archive search, AI analysis, OCR, transcription, MCP and signed webhooks work with the records you have collected.
 
-These guides track the `main` source branch. The project version is `0.8.1`; check the changelog and release notes before assuming a source feature is included in a downloaded package.
+These guides track the `main` source branch. The project version is `0.9.0`; check the changelog and release notes before assuming a source feature is included in a downloaded package.
 
 Choose an entry below for the exact workflow, commands and limits. Each guide has a Markdown edition; its canonical HTML page retains diagrams, animations and interactive examples. Translated pages also expose Markdown through `rel=alternate` links.
 
@@ -3420,7 +3420,7 @@ Host measurements (SSH listeners and processes, current sessions, logins in `wtm
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` read-only scopes | Account events, firewall rule versions | 90 days |
 | `vultr` | `VULTR_API_KEY` | User with read access and the `activity_logs` permission | Account activity log (method, path, actor) | 30 days, longer with an audit-log subscription |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | CloudTrail event history | 90 days |
-| `phala` | `PHALA_CLOUD_API_KEY` | An API key of the same workspace | Application revisions: compose and environment changes, restarts, OS upgrades | While the application exists |
+| `phala` | `PHALA_CLOUD_API_KEY` | An API key of the same workspace | Application revisions and CVM operations: compose and environment changes, restarts, OS upgrades | While the application exists |
 | `generic` | none | none | none: **self-attested** | – |
 
 Use a dedicated project, team, account or sub-account for each case: the verifier's read-only access then shows only this deployment. Credentials are read from `--provider-token-file` or the variable above, never from the command line. For AWS the file holds `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; the region is `--location`.
@@ -3438,9 +3438,11 @@ With `--provider phala` the collector runs in an Intel TDX confidential virtual 
 | `tdx_compose_hash` | RTMR3, replayed from the dstack event log, measures the app-compose the collector reports |
 | `tdx_compose` | That compose is byte for byte the one the code of the deployed commit builds: source files pinned by hash, both images by digest, no other code |
 | `tdx_identity` | The attestation comes from the deployed application and instance, with keys from Phala's KMS and an encrypted disk |
-| `tdx_os` | With `--tdx-measurements`, MRTD and RTMR0-2 equal the values computed from the dstack OS image (`dstack-mr measure --json`) |
+| `tdx_os` | MRTD and RTMR0-2 equal the values the verifier computes from the dstack OS image Dstack-TEE publishes, found by the OS image hash the CVM reports, and from the ACPI tables QEMU builds for the VM's shape: firmware, kernel, initrd, command line with the root file system hash, memory, vCPUs and devices. A development image fails |
 
-Every start of the collector recorded in the journal carries such an attestation, so `verify --evidence` checks each start. Phala's list of application revisions serves as the provider log: if the compose changed after the deployment, the report fails.
+The OS image (about 180 MB, of which 21 MB are kept) is downloaded once from [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) into `dstack-images` beside the record; `--tdx-image FOLDER` uses another folder or an unpacked image, `--tdx-image none` skips the comparison. The measurement follows `dstack-mr` and the `qemu-acpi` crate of Dstack-TEE/dstack; `tools/check_dstack_image.py` checks it against QEMU's own ACPI output and against a real Phala Cloud quote, `--live` also against the published image. `--tdx-measurements` still compares MRTD and RTMR0-2 given as JSON instead.
+
+Every start of the collector recorded in the journal carries such an attestation, so `verify --evidence` checks each start and the OS image it booted. Phala's application revisions and the CVM's operations serve as the provider log: a compose changed after the deployment fails the report, and restarts are listed for review.
 
 In the panel choose **Confidential virtual machine · Phala Cloud** under **Extras** → **Server 24/7** and paste a Phala Cloud API key; the quick tunnel works as on Hetzner. From the command line:
 
@@ -3450,12 +3452,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` reads Intel's certificates and revocation lists from a file instead of downloading them from Intel. Gateway DNS is not available here: Phala has no provider firewall for outgoing traffic.
 
+### Attestation certificate
+
+For a Phala deployment `verify --report certificate.md` also writes the certificate: a self-contained `certificate.html` and an A4 `certificate.pdf` with the verdict, the chain of trust from Intel's root to the collector key, a comparison with ordinary and high-assurance servers, the measurements next to the values computed from the published image, who vouches for each part, the Intel certificate chain, every check, the provider log, and how to repeat the verification. The JSON report stays the authoritative record; the pages render it.
+
+The report is sealed, in `certificate.seal.json` and the `.tsq`/`.tsr` files beside it:
+
+| Seal | What it adds |
+| --- | --- |
+| Qualified electronic time stamp, `http://tsa.belgium.be/connect` | RFC 3161 time stamp over the exact bytes of `certificate.json` from the Belgian federal government's qualified trust service provider (FPS Policy and Support, BOSA). Its unit is listed as a qualified time-stamping service, status granted, on Belgium's EU trusted list; the root (Belgium Root CA6) and the list's entries, as of the list issued on 20 October 2026, are pinned in `tgwitness/tsa_roots.py`. Under Regulation (EU) No 910/2014, article 41, such a time stamp is presumed accurate as to date and time and as to the integrity of the data in every EU member state |
+| RFC 3161 time stamp, FreeTSA | A second, independent time stamp |
+| Verifier signature | Ed25519 over a statement naming the report's SHA-256 and every time stamp, with the verifier's own key (`--sign-with FOLDER`, default `~/.tgwitness/verifier`); the PDF carries a signature by the same key |
+
+`--timestamp URL` (repeatable) chooses other authorities, `--timestamp none` none, `--sign-with
+none` leaves the seal unsigned. `check-report` checks the report's hash, the verifier signature, each time stamp to a trusted root and its qualified status, and the PDF's signature. The legal weight of a qualified time stamp outside the EU, and of the report as a whole, is for the court or authority that receives it; the seal shows when the report existed and that it has not changed.
+
 An attestation cannot rule out a flaw in Intel's TDX module or microcode, or physical access to the memory bus. Whoever controls the application in Phala's account can deploy another compose; it appears as a new revision with a new compose hash. The host controls the machine's time source and network.
+
+Deploy, verify with `--evidence`, restarts, the OS image comparison, the sealed certificate and destroy have run on Phala Cloud itself; see [the 4 November 2026 run](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026).
 
 ## Before you start
 
@@ -3486,7 +3506,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 On the server, cloudflared opens a [quick tunnel](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/) to the panel: a random `https://….trycloudflare.com` address that changes whenever cloudflared or the server restarts. A small service on the server posts each address to a random ntfy.sh topic, signed (HMAC-SHA256) with a key only the deployment directory holds (`address-key.txt`), and repeats it every three hours because ntfy.sh keeps posts for 12. `deploy` and **Find the current address** accept signed posts only, so a forged post cannot send you, and your panel token, to someone else's address. The topic is in the record and the published cloud-init: whoever has them can read the current address, which still asks for the panel token. The server keeps no inbound port either way.
 
-What it costs: no Cloudflare account keeps records of a quick tunnel, so `verify` reports the tunnel, connector and DNS check as unavailable and the result is at best `incomplete`; the provider records, firewall, signed statement, host measurements and installer comparison are checked as usual. The byte comparison with the reference installer needs a deployed commit that already knows `--quick-tunnel`; a 0.7.0 checkout builds the domain installer and reports the difference. Cloudflare gives quick tunnels no uptime guarantee, allows 200 requests in flight and does not carry Server-Sent Events, so the panel's live updates (versions after 0.7.0) may not arrive through one and a view needs reloading; that part has not been tried. For a case that has to stand, use your own domain.
+A verifier has no address key, and anyone who reads the topic can post to it. So the collector also posts the address itself, signed with its own Ed25519 key, and `verify` takes the newest post signed by the collector key in the deployment record; posts are ordered by the time ntfy.sh received them, not the time they claim. A collector from before this change signs nothing, and `verify` then takes the newest post and says so in the `statement` check; a forged post can only make that check fail, since the address must still answer with the collector's key.
+
+What it costs: no Cloudflare account keeps records of a quick tunnel, so `verify` reports the tunnel, connector and DNS check as unavailable and the result is at best `incomplete` (on Phala Cloud the check passes instead: the connector runs inside the measured compose); the provider records, firewall, signed statement, host measurements and installer comparison are checked as usual. The byte comparison with the reference installer needs a deployed commit that already knows `--quick-tunnel`; a 0.7.0 checkout builds the domain installer and reports the difference. Cloudflare gives quick tunnels no uptime guarantee, allows 200 requests in flight and does not carry Server-Sent Events, so the panel's live updates (versions after 0.7.0) may not arrive through one and a view needs reloading; that part has not been tried. For a case that has to stand, use your own domain.
 
 ## Deploy
 
@@ -3967,9 +3989,11 @@ Sequence numbers express observation order. The collector's UTC timestamp is its
 
 ## History snapshots
 
-A snapshot requests the latest visible messages from an enabled source, up to 500 per request. Results are labeled as history observations. They can overlap with live capture, and repeated observations are kept as separate records.
+A snapshot requests the latest visible messages from an enabled source, up to 500 per request. Results are labeled as history observations. Manual snapshots reserve an idle account; pause monitoring explicitly first. Repeated observations are kept as separate records.
 
 Snapshots follow the attachment policy but remain separate from live-event switches. They do not reconstruct deleted messages or missed intermediate versions. You can request one while paused; any attachments it queues wait until observation starts and the download worker runs.
+
+The **History** run is a separate exclusive task: it reads selected sources and downloads their queued attachments sequentially without starting monitoring. Pause releases the account; resume continues the saved run. For date, language and reply filters across several idle accounts, see [Distributed chat export](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
 
 ## Attachment handling
 
@@ -5187,6 +5211,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/account-
 
 Export what an account can read now: scope, resumable jobs, a signed archive and minimized sharing copies.
 
+An account export reserves its account exclusively. Pause monitoring or another acquisition explicitly before starting or resuming; the app never stops it automatically.
+
 As the installation administrator, choose **Start here → Export my account**, or **Exports → Telegram account → Configure account export**. Sign in if needed, review the scope, and explicitly start the export. Continuous observation is not required. **Saved observations** is a separate export of the existing journal; its ZIP includes all sources regardless of journal filters. Every workspace has its own jobs, signing identity and storage. Issued panel access, including an unrestricted ordinary export grant, cannot open these account-wide routes.
 
 Sender and text filters expand under **Filter by sender or message text**. **Account data & connection method** contains optional account categories and the Takeout/regular-session choice; its summary shows the active choices even when closed. Closing these sections keeps their settings. Export and report drafts remain in the current panel session while changing views; they are not saved through a browser reload. Existing jobs remain reachable from either export choice.
@@ -5802,6 +5828,18 @@ Freeing space never deletes or rewrites the signed journal. Each attachment keep
 
 An upload response alone is not permission to delete a file. TgWitness downloads the complete encrypted object and verifies its size and SHA-256, saves the receipt, then checks the local bytes again immediately before removal. An upload failure, different readback or cancelled transfer leaves the local file in place. If an enabled evidence backup has not yet copied that file, removal also waits for it.
 
+## When the disk is filling up
+
+Attachment downloads already pause below **Parameters → Attachments → free disk space** (1 GiB by default), keeping their queue. Text observations continue. This does not depend on notification settings. Disabling notifications does not disable the download reserve or storage safeguards.
+
+For earlier intervention, enable **Run automatically**, choose **Remove the local file to free space**, and enable **Start an extra offload pass when disk space is low**. The optional rule starts below 5120 MiB free and continues in batches until 10240 MiB is free by default. Both thresholds are configurable. It uses the same destination, minimum file age, batch limit, full readback verification and evidence backup prerequisites as a manual pass. It never enables a destination on its own. Checks run every 30 seconds; an error or no progress delays another pressure pass for five minutes. The pressure state and retry time survive a restart. Scheduled passes still use their normal interval when the pressure rule is inactive.
+
+The panel shows free space, the packing reserve, whether the pressure rule is armed, and files skipped for lack of temporary space. Packing and restoration check their peak temporary-space requirement before starting and check available space while writing. The reserve is the configured download reserve, with a 64 MiB minimum for storage operations. These checks are not a filesystem quota; another process can still consume space between checks.
+
+Gzip compression is lossless and applies to remote objects; it does not shrink the active journal or create local archives. JPEG/video/ZIP files may barely shrink or grow slightly. The current packing pipeline may temporarily need approximately twice the attachment size plus the reserve when compression is enabled. Choose a start threshold early enough for your largest files. A file too large to prepare is kept and reported; smaller files and previously verified remote copies can still free space. A verified copy can be offloaded without another local packing file. Restoration also needs temporary space and can be refused until space is available.
+
+If nothing eligible can be moved, or no destination is configured, TgWitness cannot reclaim space automatically. The signed journal is never pruned or rewritten by storage management. It still needs space for new text observations.
+
 ## Connect a destination
 
 In **Extras → Storage & disk space → Manage storage**, choose the task and destination, save it, then select **Test upload & download**. The test uploads a small random probe and reads it back. It does not use Telegram content.
@@ -5989,6 +6027,51 @@ Local demo entry uses a separately generated process capability, never the confi
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/verification/
 
 The live Telegram test, automated checks, browser checks and what remains unverified.
+
+## Live Phala Cloud deployment · 4 November 2026
+
+`--provider phala --quick-tunnel` ran against real **Phala Cloud** (`tdx.small`, region US-WEST-1) with a Phala Cloud API key of an empty workspace, real ntfy.sh, GitHub and Intel PCS. The CVM installed commit `df7d860c` (v0.8.1); deploy, verify and destroy ran from the command line with the fixes below. Seven CVMs cost about 1.9 US cents together.
+
+The first two deployments found five differences from the simulated Phala Cloud. [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) now reproduces each, and fails without its fix:
+
+| On Phala Cloud | Before the fix | Fix |
+| --- | --- | --- |
+| `compose_file.name` is required | HTTP 422, nothing created | The compose carries the CVM name |
+| Unless given an empty one, Phala adds its own pre-launch script to the measured app-compose (v0.0.20: Docker login, `docker compose pull`, root password, SSH keys from `user_config`) | `tdx_compose` fails: code outside the published compose | The app-compose sets `pre_launch_script` to `""`; Phala then leaves it out |
+| Without `image` Phala picks `dstack-dev-0.5.12`, the development build, with SSH access enabled | `server_state` fails. The quote alone passed on this image; only the provider record and `tdx_os` show it | The deployment asks for the production build of Phala's current release, `dstack-0.5.12` |
+| With the dstack gateway off, the CVM details never get an `instance_id` | Deploy waits 30 minutes and fails | The instance ID is read from the CVM state |
+| Restarts, stops and starts are CVM operations, not application revisions | `provider_actions` did not list restarts | The operations are read as well |
+
+The third deployment:
+
+- The CVM ran `dstack-0.5.12` with SSH access off. The collector posted its signed address about 1.5 minutes after creation. Deploy then passed `tdx_binding`, `tdx_quote` (Intel TCB UpToDate, quote v4, FMSPC `20a06f000000`, not in debug mode, not migratable, collateral fetched from Intel), `tdx_compose_hash`, `tdx_compose` (byte for byte) and `tdx_identity` (KMS keys).
+- The panel at its trycloudflare.com address answered 401 without a token or with a wrong one, and 200 with the panel token.
+- `verify` with `--source` set to GitHub's archive of the commit and the fingerprint passed separately: server, `server_state`, firewall (no gateway, no public endpoint), provider log, statement, fingerprint, source hash, boot and the five `tdx_*` checks passed. Cloudflare and `tdx_os` were unavailable, so the result was INCOMPLETE.
+- Two restarts through Phala's API: each time the CVM was back in under two minutes with the same collector key, a new signed address, and the old one answering 530. `verify` reported the new boot and both restarts as REVIEW. With `--evidence` it confirmed the journal signatures and three starts, each with its own Intel TDX quote from the same CVM.
+- `destroy` removed only that CVM. The workspace was then empty, and the panel address stopped answering.
+- The panel wizard's price check read `tdx.small` at $0.058 an hour. A wrong key got a plain "did not accept the API key" message.
+
+Two further findings, fixed afterwards:
+
+- Without the address key, `verify` followed the newest well-formed post on the address topic, which is printed in the published compose. One forged post sent it to a host that does not exist, and `statement` failed: a forger could not pass as the collector, but could block third-party verification, for up to 12 hours with a forged future timestamp. The collector now also posts its address signed with its own key, `verify` accepts only such posts when the collector makes them, and posts are ordered by ntfy.sh's receive time. [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) replays the forged posts. A CVM runs this only from a commit that contains it, so this run's collector did not sign its address yet and `verify` said so.
+- `tdx_os` could not run without `dstack-mr`, whose current version has `measure-os` rather than the `measure --json` the documentation named. The verifier now computes MRTD and RTMR0-2 itself from the published image and the VM's shape, ACPI tables included.
+
+The fourth deployment, with these:
+
+- Deploy downloaded the published `dstack-0.5.12` once, matched it to the OS image hash the CVM reported, and `tdx_os` passed: MRTD, RTMR0, RTMR1 and RTMR2 equal the values computed for QEMU 8.2.2, 1 vCPU and 2 GiB. The same computation gave a different RTMR0 for a claimed 4 GiB, 2 vCPUs, QEMU 9.2.1 or a second network card, and failed for a changed kernel, firmware or command line and for the development image.
+- `verify` passed every one of its 16 checks, the quick tunnel's connector included, so the result was PASS. It wrote the HTML and PDF certificate, sealed with a qualified eIDAS time stamp from the Belgian government's time-stamping unit TSU 202301 (status granted on Belgium's trusted list), a FreeTSA time stamp and the verifier's signature; `check-report` confirmed all of them and the PDF's signature.
+- After a restart, `verify --evidence` confirmed two starts, each quoted inside the CVM and each booted from the published `dstack-0.5.12`; the restart and the new boot were REVIEW.
+- `destroy` left the workspace empty.
+
+The fifth deployment ran the collector from commit `53a0f7e9`, which has all of the above:
+
+- The collector posted its address signed with its own key, next to the operator's HMAC post. Two forged posts were then added to the topic, one with a zeroed HMAC and one signed by another Ed25519 key, both claiming a time in the year 2096. `verify` took the address signed by the collector key and passed all 16 checks; the seal again carried the qualified Belgian time stamp, FreeTSA's and the verifier's signature, and `check-report` confirmed them.
+- After a restart the collector posted the new address signed: `verify` found it at once, the operator's **Find the current address** 27 seconds later from the HMAC post, and both ignored the forged posts. `verify --evidence` confirmed two starts booted from `dstack-0.5.12`.
+- Deploy printed what Phala bills the CVM, disk included: $0.06078 an hour.
+
+The panel wizard ran against Phala Cloud twice, once through its job API and once through the browser with a real Chromium: the price check, creation with the commit under **Advanced**, all six attestation checks passed, the server list showing the billed price (44.37 USD a month), **Find the current address**, the measured compose download, and deletion. The browser saw no page errors. Each time the workspace was empty afterwards.
+
+Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the `dstack-0.6.1` image. The wizard's price before creation is Phala's compute price only, as its API names the disk price only for an existing CVM; the server list shows the billed price after creation.
 
 ## Live server journal inventory · 1 November 2026
 
@@ -6182,7 +6265,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/changelo
 
 Every change by version, including the changes not yet released.
 
-## Unreleased
+## 0.9.0 preview · 4 November 2026
+
+- Reserve each account exclusively for monitoring, history or an export. Serialize Telegram RPCs and persist full FloodWait deadlines.
+- Add durable distributed chat exports with date/language/reply filters, bounded labelled context, signed chunks and explicit pause/resume. See [Distributed chat export](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
+- Keep account reservations until every export worker has stopped, including repeated pause requests and sibling worker failures. History loading in sealed sessions also reserves the account exclusively.
+- Add participant timelines from saved observations: names, membership, explicit deletion flags and message activity. Profile refreshes are bounded; optional presence recording preserves unavailable or expired status as unknown and does not attribute online activity to a chat.
+- Save, import and reuse report layout profiles without copying case details or report filters. Profiles are validated and isolated by workspace.
+- Automatically offload eligible attachments to configured external storage under disk pressure, with reserve-space checks, compression, optional encryption and full readback verification before local eviction. Journals remain local.
+- Make the recording settings and chat tabs fit narrow screens, including wider system fonts, and fix profile controls and localized labels.
+- Include reviewed website assets in source archives and verify conditional dependency versions in SBOM inventories.
+- Phala Cloud deployments work on Phala Cloud itself (first real run, 4 November 2026): the compose carries its name, Phala's own pre-launch script is kept out of the measured app-compose, the production OS image is chosen instead of Phala's development default, the instance ID is read from the CVM state, and restarts from the CVM's operations count in `provider_actions`. `tools/check_phala.py` simulates each of these.
+- `tdx_os` without outside tools: the verifier downloads the published dstack OS image once, matches it to the hash the CVM reports and computes MRTD and RTMR0-2 itself, the ACPI tables QEMU builds for the VM's shape included. A development image, other firmware, kernel, command line, memory, vCPUs or devices fail. Each journal start is checked the same way.
+- Attestation certificate for Phala deployments: `verify --report` also writes HTML and a signed PDF, sealed by a qualified eIDAS time stamp from the Belgian government's time-stamping authority, a FreeTSA time stamp and the verifier's own key; `check-report` checks the seal.
+- Quick tunnel addresses are also posted signed with the collector key, so a verifier is not misled by forged posts on the address topic; on Phala Cloud the tunnel check passes, since its connector runs inside the measured compose.
 
 ## 0.8.1 preview · 2 November 2026
 
@@ -6247,7 +6343,7 @@ Every change by version, including the changes not yet released.
 
 - **Start here** with two paths: export my account, or follow an investigation.
 - Account export through Telegram Takeout or the regular API, resumable, with signed progress and coverage records ([account export](https://phishdestroy.github.io/TgWitness/docs/reference/account-export/)).
-- Separate signed sharing copies with filters, pseudonyms and optional text/file removal. Signatures prove integrity, not authorship or admissibility.
+- Separate signed sharing copies with filters, pseudonyms and optional text/file removal. Signatures establish integrity; they do not establish Telegram authorship, completeness or legal admissibility.
 - Readable offline reports for account exports and sharing copies, printable, with record links and instructions for the recipient.
 - Clear handoff after download: original vs sharing copy, report preview, instructions to copy.
 - Rejected Telegram logins are told apart from paused accounts and network errors. **Sign in again** keeps the workspace.

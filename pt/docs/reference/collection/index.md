@@ -119,9 +119,11 @@ Os números de sequência indicam a ordem de observação. O carimbo de data e h
 
 ## Instantâneos do histórico
 
-Uma captura instantânea solicita as mensagens visíveis mais recentes de uma fonte habilitada, até 500 por solicitação. Os resultados são rotulados como observações do histórico. Eles podem se sobrepor à captura em tempo real, e as observações repetidas são mantidas como registros separados.
+Uma captura solicita as mensagens visíveis mais recentes de uma fonte habilitada, até 500 por solicitação. Os resultados são identificados como observações do histórico. Capturas manuais reservam uma conta livre; pause explicitamente o monitoramento antes. Observações repetidas são mantidas como registros separados.
 
 Os instantâneos seguem a política de anexos, mas permanecem separados das alternâncias de eventos em tempo real. Eles não reconstroem mensagens excluídas nem versões intermediárias perdidas. É possível solicitar um instantâneo enquanto o sistema estiver em pausa; quaisquer anexos na fila aguardam até que a observação comece e o processo de download seja executado.
+
+A execução de **Histórico** é uma tarefa exclusiva e separada: lê as fontes selecionadas e baixa seus anexos pendentes sequencialmente, sem iniciar o monitoramento. Pausar libera a conta; retomar continua a execução salva. Para filtros de data, idioma e respostas em várias contas livres, consulte [Exportação distribuída de chats](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
 
 ## Tratamento de anexos
 

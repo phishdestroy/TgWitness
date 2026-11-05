@@ -16,6 +16,18 @@ Zwolnienie miejsca nigdy nie powoduje usunięcia ani nadpisania podpisanego dzie
 
 Sama odpowiedź na przesłanie pliku nie stanowi zgody na jego usunięcie. TgWitness pobiera cały zaszyfrowany obiekt i weryfikuje jego rozmiar, a SHA-256 zapisuje potwierdzenie, a następnie ponownie sprawdza lokalne bajty tuż przed usunięciem. Niepowodzenie przesłania, różnica w odczycie lub anulowany transfer powodują, że plik lokalny pozostaje na swoim miejscu. Jeśli włączona kopia zapasowa dowodów nie skopiowała jeszcze tego pliku, usunięcie również czeka na to.
 
+## Gdy kończy się miejsce na dysku
+
+Pobieranie załączników jest wstrzymywane poniżej wartości **Parametry → Załączniki → wolne miejsce na dysku** (domyślnie 1 GiB), z zachowaniem kolejki. Obserwacje tekstowe trwają dalej. Nie zależy to od powiadomień: ich wyłączenie nie wyłącza rezerwy pobierania ani zabezpieczeń magazynu.
+
+Aby zareagować wcześniej, włącz **Uruchamiaj automatycznie**, wybierz **Usuń lokalny plik, aby zwolnić miejsce** i włącz **Dodatkowe przenoszenie przy małej ilości miejsca**. Domyślnie opcjonalna reguła rusza poniżej 5120 MiB wolnego miejsca i przetwarza partie do osiągnięcia 10240 MiB. Oba progi można ustawić. Używa tego samego celu, minimalnego wieku plików, limitu partii, pełnej weryfikacji przez ponowny odczyt i wymogów kopii zapasowej dowodów co przebieg ręczny. Nie włącza samodzielnie miejsca docelowego. Sprawdza co 30 sekund; błąd lub brak postępu odracza kolejną próbę o pięć minut. Stan i termin próby przetrwają restart. Gdy reguła jest nieaktywna, zaplanowane przebiegi zachowują zwykły odstęp.
+
+Panel pokazuje wolne miejsce, rezerwę pakowania, gotowość reguły i pliki pominięte z powodu braku miejsca tymczasowego. Pakowanie i odtwarzanie sprawdzają szczytowe zapotrzebowanie przed startem oraz wolne miejsce podczas zapisu. Obowiązuje rezerwa ustawiona dla pobierania, ale co najmniej 64 MiB dla operacji magazynu. To nie limit systemu plików: inny proces może zużyć miejsce między kontrolami.
+
+Gzip bezstratnie kompresuje obiekty zdalne; nie zmniejsza aktywnego dziennika ani nie tworzy lokalnych archiwów. JPEG, filmy i ZIP mogą zmaleć nieznacznie lub nieco urosnąć. Przy kompresji pakowanie może tymczasowo wymagać około dwukrotnego rozmiaru załącznika plus rezerwy. Ustaw próg uruchomienia odpowiednio wcześnie dla największych plików. Zbyt duży plik pozostaje na miejscu i jest zgłaszany; mniejsze pliki i sprawdzone kopie zdalne nadal mogą zwalniać miejsce. Sprawdzona kopia pozwala usunąć plik lokalny bez tworzenia kolejnego pliku pakowania. Odtwarzanie też wymaga miejsca tymczasowego i może zostać odrzucone do czasu jego udostępnienia.
+
+Jeśli nie ma odpowiednich plików do przeniesienia lub skonfigurowanego celu, TgWitness nie zwolni miejsca automatycznie. Zarządzanie magazynem nigdy nie przycina ani nie przepisuje podpisanego dziennika. Nadal potrzebuje on miejsca na nowe obserwacje tekstowe.
+
 ## Połącz miejsce docelowe
 
 W **menu Dodatki → Pamięć i miejsce na dysku → Zarządzaj pamięcią** wybierz zadanie i miejsce docelowe, zapisz je, a następnie wybierz **opcję Test przesyłania i pobierania**. Test polega na przesłaniu małego losowego pliku testowego i odczytaniu go z powrotem. Nie wykorzystuje on treści z Telegrama.

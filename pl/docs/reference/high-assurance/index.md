@@ -44,7 +44,7 @@ Pomiary hosta (nasłuchujące procesy SSH i inne procesy, bieżące sesje, logow
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` zakresy tylko do odczytu | Zdarzenia związane z kontami, wersje reguł zapory sieciowej | 90 dni |
 | `vultr` | `VULTR_API_KEY` | Użytkownik z uprawnieniami do odczytu oraz `activity_logs` uprawnieniem | Dziennik aktywności konta (metoda, ścieżka, podmiot) | 30 dni, a przy subskrypcji dziennika audytowego – dłużej |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | Historia zdarzeń w CloudTrail | 90 dni |
-| `phala` | `PHALA_CLOUD_API_KEY` | Klucz API tego samego obszaru roboczego | Zmiany w aplikacji: modyfikacje kodu i środowiska, ponowne uruchomienia, aktualizacje systemu operacyjnego | Chociaż aplikacja istnieje |
+| `phala` | `PHALA_CLOUD_API_KEY` | Klucz API tego samego obszaru roboczego | Wersje aplikacji i operacje na maszynie wirtualnej (CVM): zmiany konfiguracji i środowiska Docker Compose, ponowne uruchomienia, aktualizacje systemu operacyjnego | Chociaż aplikacja istnieje |
 | `generic` | brak | brak | brak: **poświadczone samodzielnie** | – |
 
 Dla każdej sprawy należy używać dedykowanego projektu, zespołu, konta lub subkonta: dzięki temu dostęp tylko do odczytu weryfikatora wyświetla wyłącznie to wdrożenie. Dane uwierzytelniające są odczytywane z `--provider-token-file` lub z powyższej zmiennej, nigdy z wiersza poleceń. W przypadku AWS plik zawiera `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; region to `--location`.
@@ -62,9 +62,11 @@ Gdy `--provider phala` kolektor działa w poufnej maszynie wirtualnej Intel TDX 
 | `tdx_compose_hash` | RTMR3, odtwarzany z dziennika zdarzeń dstack, mierzy liczbę operacji tworzenia wiadomości w aplikacji zgłaszanych przez moduł zbierający dane |
 | `tdx_compose` | Ten kod jest bajt po bajcie identyczny z kodem wygenerowanym przez wdrożony commit: pliki źródłowe są przypisane na podstawie skrótu, oba obrazy na podstawie skrótu, nie ma żadnego innego kodu |
 | `tdx_identity` | Poświadczenie pochodzi z wdrożonej aplikacji i instancji, przy użyciu kluczy z systemu KMS firmy Phala oraz zaszyfrowanego dysku |
-| `tdx_os` | W przypadku `--tdx-measurements`, MRTD i RTMR0-2 są równe wartościom obliczonym na podstawie obrazu systemu operacyjnego dstack (`dstack-mr measure --json`) |
+| `tdx_os` | Wartości MRTD i RTMR0-2 są równe wartościom obliczonym przez weryfikator na podstawie obrazu systemu operacyjnego dstack opublikowanego przez Dstack-TEE, ustalonych na podstawie skrótu obrazu systemu operacyjnego zgłoszonego przez CVM oraz tabel ACPI generowanych przez QEMU dla konfiguracji maszyny wirtualnej: oprogramowania układowego, jądra, pliku initrd, wiersza poleceń wraz ze skrótem systemu plików root, pamięci, procesorów wirtualnych (vCPU) oraz urządzeń. Obraz deweloperski nie spełnia wymagań |
 
-Każde uruchomienie kolektora zarejestrowane w dzienniku zawiera takie poświadczenie, więc `verify --evidence` sprawdza każdy uruchomienie. Lista wersji aplikacji Phala służy jako dziennik dostawcy: jeśli kompozytor uległ zmianie po wdrożeniu, raport kończy się niepowodzeniem.
+Obraz systemu operacyjnego (około 180 MB, z czego zachowuje się 21 MB) jest pobierany jednorazowo z [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) do `dstack-images` obok rekordu; `--tdx-image FOLDER` wykorzystuje inny folder lub rozpakowany obraz, `--tdx-image none` pomija porównanie. Pomiar odbywa się zgodnie z `dstack-mr` oraz pakietem Rust `qemu-acpi` z katalogu Dstack-TEE/dstack; `tools/check_dstack_image.py` porównuje go z własnym wyjściem ACPI programu QEMU oraz z rzeczywistym rekordem poświadczenia sprzętowego Phala Cloud, a `--live` dodatkowo z opublikowanym obrazem. `--tdx-measurements` nadal porównuje MRTD i RTMR0-2, podane tym razem w formacie JSON.
+
+Każde uruchomienie kolektora zarejestrowane w dzienniku zawiera takie poświadczenie, dlatego `verify --evidence` weryfikuje każde uruchomienie oraz obraz systemu operacyjnego, z którego nastąpił rozruch. Wersje aplikacji Phala oraz operacje CVM pełnią rolę dziennika dostawcy: zmiana konfiguracji Docker Compose po wdrożeniu powoduje odrzucenie raportu, a ponowne uruchomienia są wykazywane do weryfikacji.
 
 W panelu wybierz opcję **„Poufna maszyna wirtualna · Phala Cloud”** w sekcji **„Dodatki** → **Serwer 24/7”** i wklej klucz API Phala Cloud; szybki tunel działa tak samo jak na Hetznerze. Z wiersza poleceń:
 
@@ -74,12 +76,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` odczytuje certyfikaty i listy unieważnionych certyfikatów firmy Intel z pliku zamiast pobierać je bezpośrednio od firmy Intel. Usługa Gateway DNS nie jest tutaj dostępna: Phala nie posiada zapory dostawcy dla ruchu wychodzącego.
 
+### Certyfikat poświadczający
+
+W przypadku wdrożenia Phala plik `verify --report certificate.md` zapisuje również certyfikat: samodzielny plik `certificate.html` oraz plik A4 `certificate.pdf` zawierający werdykt, łańcuch zaufania od certyfikatu głównego firmy Intel do klucza kolektora, porównanie z serwerami standardowymi i o wysokim poziomie bezpieczeństwa, wyniki pomiarów obok wartości obliczonych na podstawie opublikowanego obrazu, informacje o tym, kto poświadcza każdą część, łańcuch certyfikatów firmy Intel, wszystkie kontrole, dziennik dostawcy oraz instrukcję powtórzenia weryfikacji. Raport w formacie JSON pozostaje dokumentem nadrzędnym; strony internetowe służą jedynie do jego wyświetlenia.
+
+Raport jest opatrzony cyfrowym pieczęcią w postaci podpisów i znaczników czasu w pliku `certificate.seal.json` oraz w plikach `.tsq`/`.tsr` znajdujących się obok niego:
+
+| Seal | Co to wnosi |
+| --- | --- |
+| Kwalifikowany elektroniczny znacznik czasu, `http://tsa.belgium.be/connect` | Sygnatura czasowa zgodna z RFC 3161 na dokładnych bajtach pliku `certificate.json` pochodzącego od kwalifikowanego dostawcy usług zaufania rządu federalnego Belgii (FPS Policy and Support, BOSA). Jednostka ta figuruje jako kwalifikowana usługa znakowania czasem, ze statusem „przyznanym”, na belgijskiej liście zaufanych podmiotów UE; certyfikat główny (Belgium Root CA6) oraz pozycje tej listy, zgodnie z wersją opublikowaną 20 października 2026 r., są zapisane w pliku `tgwitness/tsa_roots.py`. Zgodnie z art. 41 rozporządzenia (UE) nr 910/2014 taki znacznik czasu uznaje się za dokładny pod względem daty i godziny oraz integralności danych w każdym państwie członkowskim UE |
+| Sygnatura czasowa zgodnie z RFC 3161, FreeTSA | Drugi, niezależny znacznik czasu |
+| Podpis weryfikatora | Ed25519 nad oświadczeniem podającym wartość SHA-256 raportu oraz wszystkie sygnatury czasowe, przy użyciu klucza weryfikatora (`--sign-with FOLDER`, domyślnie `~/.tgwitness/verifier`); plik PDF zawiera podpis wygenerowany tym samym kluczem |
+
+`--timestamp URL` (powtarzalny) wybiera inne urzędy certyfikacyjne, `--timestamp none` – żaden, `--sign-with
+none` pozostawia pieczęć niepodpisaną. `check-report` weryfikuje skrót raportu, podpis weryfikatora, każdy znacznik czasu w odniesieniu do zaufanego certyfikatu głównego oraz jego status kwalifikowany, a także podpis pliku PDF. Waga prawna kwalifikowanego znacznika czasu poza UE oraz całego raportu zależy od sądu lub organu, który go otrzymuje; pieczęć wskazuje, kiedy raport powstał i że nie został zmieniony.
+
 Poświadczenie nie wyklucza istnienia luki w module TDX firmy Intel lub w mikrokodzie, ani fizycznego dostępu do magistrali pamięci. Ktokolwiek kontroluje aplikację na koncie Phala, może wdrożyć kolejny kompozyt; pojawia się on jako nowa wersja z nowym skrótem kompozytu. Host kontroluje źródło czasu urządzenia oraz sieć.
+
+Wdrożenie, weryfikacja za pomocą `--evidence`, ponowne uruchomienia, porównanie obrazu systemu operacyjnego, certyfikat opatrzony podpisami cyfrowymi i znacznikami czasu oraz operacja zniszczenia zostały przeprowadzone w samej chmurze Phala Cloud; patrz [– przebieg z dnia 4 listopada 2026 r.](https://phishdestroy.github.io/TgWitness/pl/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026).
 
 ## Zanim zaczniesz
 
@@ -110,7 +130,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 Na serwerze usługa cloudflared otwiera [szybki tunel](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/) do panelu: losowy `https://….trycloudflare.com` adres, który zmienia się przy każdym ponownym uruchomieniu cloudflared lub serwera. Niewielka usługa na serwerze publikuje każdy adres w losowym temacie ntfy.sh , podpisując go (HMAC-SHA256) kluczem przechowywanym wyłącznie w katalogu wdrożeniowym (`address-key.txt`), i powtarza to co trzy godziny, ponieważ ntfy.sh przechowuje posty przez 12. `deploy` i **Find aktualny adres** akceptują wyłącznie podpisane posty, więc sfałszowany post nie może przekierować Ciebie i Twojego tokenu panelu na adres należący do kogoś innego. Temat znajduje się w rejestrze oraz w opublikowanym pliku cloud-init: każdy, kto je posiada, może odczytać aktualny adres, który nadal wymaga podania tokenu panelu. Serwer nie utrzymuje żadnego portu przychodzącego w żadnym przypadku.
 
-Koszt: żadne konto Cloudflare nie przechowuje danych dotyczących szybkiego tunelu, więc `verify` raportuje, że tunel, łącznik i sprawdzanie DNS są niedostępne, a wynik to w najlepszym razie `incomplete`; zapisy dostawcy, zapora sieciowa, podpisane oświadczenie, pomiary hosta oraz porównanie instalatorów są sprawdzane jak zwykle. Porównanie bajtów z instalatorem referencyjnym wymaga wdrożonego commitu, który już zna `--quick-tunnel`; pobranie wersji 0.7.0 kompiluje instalator domeny i zgłasza różnicę. Cloudflare nie udziela gwarancji dostępności szybkich tuneli, zezwala na 200 żądań w toku i nie obsługuje zdarzeń Server-Sent Events, więc aktualizacje panelu na żywo (wersje po 0.7.0) mogą nie docierać przez tunel i konieczne jest ponowne załadowanie widoku; ta część nie została przetestowana. W przypadku , który musi działać niezawodnie, użyj własnej domeny.
+Weryfikator nie posiada klucza adresu, a każdy, kto czyta ten wątek, może w nim publikować. Dlatego kolektor publikuje również sam adres, podpisany własnym kluczem Ed25519, a `verify` pobiera najnowszy wpis podpisany kluczem kolektora z rekordu wdrożenia; wpisy są uporządkowane według czasu, w którym ntfy.sh je odebrało, a nie według czasu, który podają. Kolektor sprzed tej zmiany niczego nie podpisuje, a `verify` pobiera wówczas najnowszy wpis i informuje o tym w ramach weryfikacji `statement`; sfałszowany wpis może jedynie spowodować niepowodzenie tej weryfikacji, ponieważ adres musi nadal odpowiadać kluczem kolektora.
+
+Koszt: żadne konto Cloudflare nie przechowuje zapisów dotyczących tunelu szybkiego, więc `verify` zgłasza, że tunel, łącznik i sprawdzanie DNS są niedostępne, a wynikiem jest w najlepszym razie `incomplete` (w chmurze Phala Cloud sprawdzenie przebiega pomyślnie: łącznik działa w ramach mierzonej konfiguracji Docker Compose); zapisy dostawcy, zapora sieciowa, podpisane oświadczenie, pomiary hosta oraz porównanie instalatorów są sprawdzane w zwykły sposób. Porównanie bajtowe z instalatorem referencyjnym wymaga wdrożonego commitu, który już rozpoznaje `--quick-tunnel`; pobranie wersji 0.7.0 powoduje skompilowanie instalatora domeny i zgłasza różnicę. Cloudflare nie udziela gwarancji dostępności tuneli szybkich, zezwala na 200 żądań w toku i nie obsługuje zdarzeń Server-Sent Events, więc aktualizacje na żywo panelu (wersje po 0.7.0) mogą nie dotrzeć przez taki tunel, a widok wymaga ponownego załadowania; ta część nie została jeszcze przetestowana. W przypadku, gdy rozwiązanie musi działać bez zarzutu, proszę użyć własnej domeny.
 
 ## Wdrożenie
 

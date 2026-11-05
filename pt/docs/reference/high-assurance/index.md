@@ -44,7 +44,7 @@ As métricas do host (ouvintes e processos SSH, sessões atuais, logins no `wtmp
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` escopos somente leitura | Eventos de conta, versões de regras de firewall | 90 dias |
 | `vultr` | `VULTR_API_KEY` | Usuário com acesso de leitura e a `activity_logs` permissão | Registro de atividades da conta (método, caminho, agente) | 30 dias, ou mais com uma assinatura do registro de auditoria |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | Histórico de eventos do CloudTrail | 90 dias |
-| `phala` | `PHALA_CLOUD_API_KEY` | Uma chave de API do mesmo espaço de trabalho | Revisões do aplicativo: alterações na composição e no ambiente, reinicializações, atualizações do sistema operacional | Embora o aplicativo exista |
+| `phala` | `PHALA_CLOUD_API_KEY` | Uma chave de API do mesmo espaço de trabalho | Revisões de aplicativos e operações da CVM: alterações na configuração e no ambiente do Docker Compose, reinicializações e atualizações do sistema operacional | Embora o aplicativo exista |
 | `generic` | nenhum | nenhum | nenhum: **autoatestado** | – |
 
 Use um projeto, equipe, conta ou subconta dedicada para cada caso: o acesso somente para leitura do verificador exibe, então, apenas essa implantação. As credenciais são lidas a partir `--provider-token-file` da variável acima, nunca da linha de comando. Para a AWS, o arquivo contém `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; a região é `--location`.
@@ -62,9 +62,11 @@ Com `--provider phala` o coletor é executado em uma máquina virtual confidenci
 | `tdx_compose_hash` | O RTMR3, reproduzido a partir do log de eventos do dstack, mede a composição do aplicativo que o coletor relata |
 | `tdx_compose` | Esse código é, byte por byte, o mesmo que o código do commit implantado compila: arquivos-fonte fixados por hash, ambas as imagens por digest, sem nenhum outro código |
 | `tdx_identity` | A certificação é fornecida pelo aplicativo e pela instância implantados, com chaves do KMS da Phala e um disco criptografado |
-| `tdx_os` | Com `--tdx-measurements`, MRTD e RTMR0-2 equivalem aos valores calculados a partir da imagem do sistema operacional dstack (`dstack-mr measure --json`) |
+| `tdx_os` | MRTD e RTMR0-2 equivalem aos valores que o verificador calcula a partir da imagem do sistema operacional dstack publicada pelo Dstack-TEE, identificada pelo hash da imagem do sistema operacional relatado pela CVM, e a partir das tabelas ACPI que o QEMU constrói para a configuração da VM: firmware, kernel, initrd, linha de comando com o hash do sistema de arquivos raiz, memória, vCPUs e dispositivos. Uma imagem de desenvolvimento falha |
 
-Cada inicialização do coletor registrada no diário traz esse atestado, de modo que `verify --evidence` verifica cada inicialização. A lista de revisões do aplicativo do Phala serve como log do provedor: se a composição tiver sido alterada após a implantação, o relatório falha.
+A imagem do sistema operacional (cerca de 180 MB, dos quais 21 MB são mantidos) é baixada uma vez de [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) para `dstack-images` ao lado do registro; `--tdx-image FOLDER` utiliza outra pasta ou uma imagem descompactada, `--tdx-image none` ignora a comparação. A medição segue `dstack-mr` e o pacote Rust `qemu-acpi` de Dstack-TEE/dstack; `tools/check_dstack_image.py` verifica-a em relação à saída ACPI do próprio QEMU e em relação a um registro de atestado de hardware real da Phala Cloud; `--live` também a compara com a imagem publicada. O `--tdx-measurements` ainda compara o MRTD e o RTMR0-2 fornecidos em formato JSON.
+
+Cada inicialização do coletor registrada no diário traz tal atestado, de modo que o `verify --evidence` verifica cada inicialização e a imagem do sistema operacional na qual ela foi inicializada. As revisões do aplicativo da Phala e as operações do CVM servem como o registro do provedor: uma configuração do Docker Compose alterada após a implantação faz com que o relatório seja reprovado, e as reinicializações são listadas para análise.
 
 No painel, selecione **“Máquina virtual confidencial · Phala Cloud”** em **“Extras”** → **“Servidor 24/7”** e cole uma chave de API do Phala Cloud; o túnel rápido funciona da mesma forma que no Hetzner. Na linha de comando:
 
@@ -74,12 +76,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` lê os certificados e as listas de revogação da Intel a partir de um arquivo, em vez de baixá-los do site da Intel. O Gateway DNS não está disponível aqui: o Phala não possui firewall do provedor para tráfego de saída.
 
+### Certificado de atestado
+
+Para uma implantação do Phala, o `verify --report certificate.md` também grava o certificado: um `certificate.html` autônomo e um `certificate.pdf` em formato A4 com o veredicto, a cadeia de confiança da raiz da Intel até a chave do coletor, uma comparação com servidores comuns e de alta segurança, as medições ao lado dos valores calculados a partir da imagem publicada, quem atesta cada parte, a cadeia de certificados da Intel, todas as verificações, o log do provedor e como repetir a verificação. O relatório JSON continua sendo o registro oficial; as páginas o apresentam.
+
+O relatório é selado digitalmente com assinaturas e carimbos de data e hora, no arquivo `certificate.seal.json` e nos arquivos `.tsq`/`.tsr` ao lado dele:
+
+| Seal | O que ela oferece |
+| --- | --- |
+| Carimbo de data e hora eletrônico qualificado, `http://tsa.belgium.be/connect` | Carimbo de data e hora RFC 3161 sobre os bytes exatos de `certificate.json` do provedor de serviços de confiança qualificado do governo federal belga (FPS Policy and Support, BOSA). Essa entidade está listada como um serviço qualificado de carimbo de data e hora, com status concedido, na lista de confiança da UE da Bélgica; a raiz (Belgium Root CA6) e as entradas da lista, conforme a lista emitida em 20 de outubro de 2026, estão fixadas em `tgwitness/tsa_roots.py`. Nos termos do artigo 41 do Regulamento (UE) n.º 910/2014, presume-se que tal carimbo de data e hora seja preciso quanto à data e à hora, bem como quanto à integridade dos dados, em todos os Estados-Membros da UE |
+| Carimbo de data/hora RFC 3161, FreeTSA | Um segundo carimbo de data/hora independente |
+| Assinatura do verificador | Ed25519 sobre uma declaração que identifica o SHA-256 do relatório e cada carimbo de data/hora, com a própria chave do verificador (`--sign-with FOLDER`, padrão `~/.tgwitness/verifier`); o PDF contém uma assinatura com a mesma chave |
+
+`--timestamp URL` (repetível) escolhe outras autoridades, `--timestamp none` nenhuma, `--sign-with
+none` deixa o selo sem assinatura. `check-report` verifica o hash do relatório, a assinatura do verificador, cada carimbo de data/hora em relação a uma raiz confiável e seu status qualificado, bem como a assinatura do PDF. O valor jurídico de um carimbo de data e hora qualificado fora da UE, bem como do relatório como um todo, cabe ao tribunal ou à autoridade que o receber; o selo indica quando o relatório existia e que não sofreu alterações.
+
 Um atestado não pode descartar uma falha no módulo TDX ou no microcódigo da Intel, nem o acesso físico ao barramento de memória. Quem controla o aplicativo na conta do Phala pode implantar outra composição; ela aparece como uma nova revisão com um novo hash de composição. O host controla a fonte de tempo da máquina e a rede.
+
+A implantação, a verificação com o `--evidence`, as reinicializações, a comparação da imagem do sistema operacional, o certificado selado digitalmente com assinaturas e carimbos de data/hora e a destruição foram executadas na própria Phala Cloud; consulte [, a execução de 4 de novembro de 2026,](https://phishdestroy.github.io/TgWitness/pt/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026).
 
 ## Antes de começar
 
@@ -110,7 +130,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 No servidor, o cloudflared abre um [túnel rápido](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/) para o painel: um endereço aleatório `https://….trycloudflare.com` que muda sempre que o cloudflared ou o servidor é reiniciado. Um pequeno serviço no servidor publica cada endereço em um tópico aleatório do ntfy.sh , assinado (HMAC-SHA256) com uma chave que só o diretório de implantação possui (`address-key.txt`), e o repete a cada três horas, pois o ntfy.sh mantém as postagens por 12. `deploy` e **o “Find the current address”** aceitam apenas postagens assinadas, de modo que uma postagem falsificada não pode enviar você e seu token do painel para o endereço de outra pessoa. O tópico fica registrado e no cloud-init publicado: quem quer que os tenha pode ler o endereço atual, que ainda solicita o token do painel. O servidor não mantém nenhuma porta de entrada de qualquer forma.
 
-Quanto custa: nenhuma conta do Cloudflare mantém registros de um túnel rápido, portanto `verify` os relatórios sobre o túnel, o conector e a verificação de DNS aparecem como indisponíveis e o resultado é, na melhor das hipóteses, `incomplete`; os registros do provedor, o firewall, a declaração assinada, as medições do host e a comparação do instalador são verificados normalmente. A comparação de bytes com o instalador de referência requer um commit implantado que já conheça `--quick-tunnel`; um checkout da versão 0.7.0 compila o instalador do domínio e relata a diferença. A Cloudflare não oferece garantia de tempo de atividade para os túneis rápidos, permite 200 solicitações em andamento e não transmite Server-Sent Events; portanto, as atualizações em tempo real do painel (versões posteriores à 0.7.0) podem não chegar por meio de um deles, e a visualização precisa ser recarregada; essa parte ainda não foi testada. Para um caso que precise permanecer ativo, use seu próprio domínio.
+Um verificador não possui chave de endereço, e qualquer pessoa que leia o tópico pode publicar nele. Assim, o coletor também publica o próprio endereço, assinado com sua própria chave Ed25519, e o `verify` seleciona a publicação mais recente assinada pela chave do coletor no registro de implantação; as publicações são ordenadas pela hora em que o ntfy.sh as recebeu, e não pela hora que elas alegam. Um coletor anterior a essa alteração não assina nada, e o `verify`, então, seleciona a postagem mais recente e indica isso na verificação do `statement`; uma postagem falsificada pode apenas fazer com que essa verificação falhe, uma vez que o endereço ainda deve responder com a chave do coletor.
+
+Custos: nenhuma conta da Cloudflare mantém registros de um túnel rápido; portanto, o `verify` relata que o túnel, o conector e a verificação de DNS estão indisponíveis, e o resultado é, na melhor das hipóteses, `incomplete` (no Phala Cloud, a verificação é aprovada: o conector é executado dentro da configuração medida do Docker Compose); os registros do provedor, o firewall, a declaração assinada, as medições do host e a comparação do instalador são verificados como de costume. A comparação de bytes com o instalador de referência requer um commit implantado que já reconheça o `--quick-tunnel`; um checkout da versão 0.7.0 compila o instalador do domínio e relata a diferença. A Cloudflare não oferece garantia de tempo de atividade para os túneis rápidos, permite 200 solicitações em andamento e não transmite Server-Sent Events; portanto, as atualizações em tempo real do painel (versões posteriores à 0.7.0) podem não chegar por meio de um desses túneis, e a visualização precisa ser recarregada; essa parte ainda não foi testada. Para um caso que precise permanecer ativo, utilize seu próprio domínio.
 
 ## Implantar
 

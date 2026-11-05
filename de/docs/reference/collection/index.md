@@ -119,9 +119,11 @@ Sequenznummern geben die Reihenfolge der Beobachtungen an. Der UTC-Zeitstempel d
 
 ## Momentaufnahmen der Historie
 
-Ein Snapshot-Aufruf fordert die neuesten sichtbaren Nachrichten von einer aktivierten Quelle ab, bis zu 500 pro Aufruf. Die Ergebnisse werden als Verlaufsbeobachtungen gekennzeichnet. Sie können sich mit der Live-Erfassung überschneiden, und wiederholte Beobachtungen werden als separate Datensätze gespeichert.
+Ein Snapshot ruft die neuesten sichtbaren Nachrichten einer aktivierten Quelle ab, bis zu 500 pro Anfrage. Die Ergebnisse werden als Beobachtungen des Verlaufs gekennzeichnet. Manuelle Snapshots reservieren ein freies Konto; pausieren Sie vorher ausdrücklich die Überwachung. Wiederholte Beobachtungen bleiben separate Einträge.
 
 Die Momentaufnahmen entsprechen den Richtlinien für Anhänge, bleiben jedoch von den Schaltvorgängen bei Live-Ereignissen getrennt. Sie rekonstruieren keine gelöschten Nachrichten oder fehlenden Zwischenversionen. Sie können eine Momentaufnahme anfordern, während der Vorgang angehalten ist; alle darin enthaltenen Anhänge werden in die Warteschlange gestellt und warten, bis die Beobachtung beginnt und der Download-Prozess abläuft.
+
+Der Lauf **Verlauf** ist eine eigene exklusive Aufgabe: Er liest die ausgewählten Quellen und lädt deren vorgemerkte Anhänge nacheinander herunter, ohne die Überwachung zu starten. Pausieren gibt das Konto frei; Fortsetzen führt den gespeicherten Lauf weiter. Datums-, Sprach- und Antwortfilter über mehrere freie Konten beschreibt [Verteilter Chat-Export](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
 
 ## Umgang mit Anhängen
 

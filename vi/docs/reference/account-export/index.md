@@ -4,6 +4,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/accou
 
 Xuất những nội dung mà tài khoản có thể truy cập hiện tại: phạm vi, các tác vụ có thể tiếp tục, tệp lưu trữ đã được ký và các bản sao chia sẻ đã được thu gọn.
 
+Xuất tài khoản giữ riêng tài khoản đó. Hãy chủ động tạm dừng giám sát hoặc một hoạt động thu thập khác trước khi bắt đầu hay tiếp tục; ứng dụng không bao giờ tự dừng chúng.
+
 Với tư cách là quản trị viên cài đặt, hãy chọn **Bắt đầu tại đây → Xuất tài khoản của tôi**, hoặc **Xuất → Tài khoản Telegram → Cấu hình xuất tài khoản**. Đăng nhập nếu cần, xem lại phạm vi và bắt đầu xuất một cách rõ ràng. Không cần quan sát liên tục. **"Lưu quan sát**" là một bản xuất riêng biệt của nhật ký hiện có; ZIP của nó bao gồm tất cả các nguồn bất kể bộ lọc nhật ký. Mỗi không gian làm việc có các tác vụ, danh tính ký và bộ nhớ riêng. Quyền truy cập bảng điều khiển đã cấp, bao gồm quyền xuất thông thường không hạn chế, không thể mở các đường dẫn trên toàn tài khoản này.
 
 Các bộ lọc người gửi và nội dung tin nhắn sẽ mở rộng khi chọn **“Lọc theo người gửi” hoặc “Lọc theo nội dung tin nhắn**”. **Phần “Dữ liệu tài khoản & phương thức kết nối**” chứa các danh mục tài khoản tùy chọn và tùy chọn “Takeout” hoặc “phiên làm việc thông thường”; phần tóm tắt của nó hiển thị các tùy chọn đang hoạt động ngay cả khi đã đóng. Việc đóng các phần này sẽ giữ nguyên cài đặt của chúng. Các bản nháp xuất và báo cáo vẫn tồn tại trong phiên làm việc hiện tại của bảng điều khiển khi chuyển đổi chế độ xem; chúng không được lưu khi tải lại trình duyệt. Các tác vụ hiện có vẫn có thể truy cập được từ cả hai tùy chọn xuất.

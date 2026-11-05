@@ -44,7 +44,7 @@ Hetzner または Phala Cloud 上の 24 時間 365 日稼働のシールドサ�
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` 読み取り専用スコープ | アカウントのイベント、ファイアウォールルールのバージョン | 90日間 |
 | `vultr` | `VULTR_API_KEY` | 読み取りアクセス権を持つユーザーおよび `activity_logs` 権限 | アカウントのアクティビティログ（メソッド、パス、アクター） | 30日間。監査ログのサブスクリプションを利用すれば、さらに長期に保存可能です。 |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | CloudTrailのイベント履歴 | 90日間 |
-| `phala` | `PHALA_CLOUD_API_KEY` | 同じワークスペースのAPIキー | アプリケーションの更新：構成および環境の変更、再起動、OSのアップグレード | このアプリケーションが存在する限り |
+| `phala` | `PHALA_CLOUD_API_KEY` | 同じワークスペースのAPIキー | アプリケーションの改訂およびCVMの操作：Docker Composeの設定および環境の変更、再起動、OSのアップグレード | このアプリケーションが存在する限り |
 | `generic` | なし | なし | なし：**自己認証済み** | – |
 
 各ケースごとに専用のプロジェクト、チーム、アカウント、またはサブアカウントを使用してください。これにより、検証者の 読み取り専用アクセス権では、このデプロイメントのみが表示されます。認証情報は `--provider-token-file` または上記の変数から読み込まれ、コマンドラインからは決して読み込まれません。AWSの場合、ファイルには 地域が格納されます `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; リージョンは `--location`.
@@ -62,9 +62,11 @@ Hetzner または Phala Cloud 上の 24 時間 365 日稼働のシールドサ�
 | `tdx_compose_hash` | dstack イベントログから再生される RTMR3 は、コレクターが報告するアプリ作成の状況を測定します。 |
 | `tdx_compose` | そのコンパイル結果は、デプロイされたコミットのコードが生成するものとバイト単位で完全に一致しています。ソースファイルはハッシュで、両方の画像はダイジェストで固定されており、その他のコードは一切含まれていません。 |
 | `tdx_identity` | 認証情報は、デプロイされたアプリケーションおよびインスタンスから提供され、PhalaのKMSからの鍵と暗号化されたディスクが使用されます。 |
-| `tdx_os` | ここで `--tdx-measurements`、MRTD および RTMR0-2 は、dstack OS イメージから計算された値と等しくなります（`dstack-mr measure --json`) |
+| `tdx_os` | MRTD および RTMR0-2 は、Dstack-TEE が公開する dstack OS イメージから検証ツールが算出する値、CVM が報告する OS イメージのハッシュ、および QEMU が VM の構成に基づいて生成する ACPI テーブル（ファームウェア、カーネル、initrd、ルートファイルシステムのハッシュを含むコマンドライン、メモリ、vCPU、デバイス）から算出された値と一致します。開発用イメージは失敗します |
 
-ジャーナルに記録されたコレクターの起動のたびに、このような証明が付与されるため、 `verify --evidence` 各起動を検証します。Phalaのアプリケーションリビジョン一覧が プロバイダーログとして機能します。デプロイ後にコンポーズが変更された場合、レポートは失敗します。
+OS イメージ（約 180 MB、そのうち 21 MB が保持されます）は、 [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) から、 レコードの隣にある `dstack-images` へ一度ダウンロードされます。`--tdx-image FOLDER` では別のフォルダまたは解凍済みのイメージが使用され、 `--tdx-image none` では比較が省略されます。 測定は、Dstack-TEE/dstack からの `dstack-mr` および `qemu-acpi` Rust パッケージに続いて行われます。`tools/check_dstack_image.py` は、QEMU 自身の ACPI 出力および実際の Phala Cloud ハードウェアアテステーションレコードと照合し、`--live` は公開されているイメージとも照合します。 `--tdx-measurements`では、代わりにJSON形式で指定されたMRTDとRTMR0-2の比較が行われます。
+
+ジャーナルに記録されたコレクターの起動のたびに、このような認証情報が含まれるため、 `verify --evidence`は各起動と、その起動に使用されたOSイメージを確認します。Phalaのアプリケーションのリビジョン およびCVMの動作は、プロバイダーログとして機能します。デプロイ後にDocker Composeの設定が変更された場合、 レポートは不合格となり、再起動の履歴はレビューのために一覧表示されます。
 
 パネルで、「**Extras** 」→「**Server 24/7** 」の下にある「**Confidential virtual machine · Phala Cloud** 」を選択し、Phala CloudのAPIキーを貼り付けてください。クイックトンネルはHetznerと同様に機能します。コマンドラインからは次のように実行します：
 
@@ -74,12 +76,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` Intelの証明書および失効リストを、Intelからダウンロードする代わりに ファイルから読み込みます。ここではGateway DNSは利用できません。Phalaには、 送信トラフィック用のプロバイダファイアウォールがないためです。
 
+### アテステーション証明書
+
+Phalaのデプロイでは、`verify --report certificate.md`も証明書を書き込みます： 自己完結型の `certificate.html` と、A4 形式の `certificate.pdf` には、判定結果、Intel のルートからコレクターキーまでの信頼チェーン、 通常サーバーおよび高保証サーバーとの比較、 公開イメージから算出された値と並べて示された測定結果、各 部分の保証元、Intel の証明書チェーン、すべてのチェック項目、プロバイダーログ、および 検証を再現する方法が記載されています。 JSONレポートが正式な記録であり、各ページはその内容を表示しています。
+
+本レポートは、署名とタイムスタンプを用いてデジタルで封印されており、`certificate.seal.json` およびその隣にある `.tsq`/`.tsr` ファイルに格納されています：
+
+| Seal | 追加機能 |
+| --- | --- |
+| 認定電子タイムスタンプ、`http://tsa.belgium.be/connect` | ベルギー連邦政府の認定信頼サービスプロバイダー（FPS Policy and Support、BOSA）から提供された`certificate.json`の正確なバイトデータに対するRFC 3161タイムスタンプです。 同機関は、ベルギーのEU信頼リストにおいて「認定タイムスタンプサービス、ステータス付与済み」として掲載されています。2026年10月20日に発行されたリスト時点でのルート（Belgium Root CA6）およびリストのエントリは、`tgwitness/tsa_roots.py`に固定されています。 規則（EU）第910/2014号第41条に基づき、このようなタイムスタンプは、すべてのEU加盟国において、日付および時刻、ならびにデータの完全性に関して正確であると推定されます。 |
+| RFC 3161 タイムスタンプ、FreeTSA | 2つ目の、独立したタイムスタンプ |
+| 検証者の署名 | Ed25519 を使用して、レポートの SHA-256 およびすべてのタイムスタンプを記載した記述文に、検証者自身の鍵（`--sign-with FOLDER`、デフォルトは `~/.tgwitness/verifier`）で署名しています。PDF には、同じ鍵による署名が含まれています |
+
+`--timestamp URL`（再現可能）は他の認証機関を選択し、`--timestamp none`は選択せず、`--sign-with
+none`はシールを未署名のままにします。`check-report`は、レポートのハッシュ、検証者の署名、 各タイムスタンプの信頼できるルートへの紐付けとその適格ステータス、およびPDFの署名を検証します。 EU域外における 適格タイムスタンプおよびレポート全体の法的効力は、それを受け取る裁判所 または当局によって決定されます。このシールは、レポートが存在した時点と、それが変更されていないことを示しています。
+
 この証明によって、IntelのTDXモジュールやマイクロコードの欠陥、あるいはメモリバスへの物理的なアクセスを 完全に排除できるわけではありません。Phalaのアカウント内のアプリケーションを制御している者は、別のコンポーズを展開することができ、 それは新しいコンポーズハッシュを持つ新しいリビジョンとして表示されます。ホストは、マシンの時刻 ソースとネットワークを制御しています。
+
+デプロイ、`--evidence`による検証、再起動、OSイメージの比較、署名とタイムスタンプでデジタル封印された証明書、および 破棄は、Phala Cloud自体上で実行されました。詳細は、 2026年11月4日の実行記録である[および](https://phishdestroy.github.io/TgWitness/ja/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)をご参照ください。
 
 ## 始める前に
 
@@ -110,7 +130,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 サーバー上では、cloudflaredがパネルへの [クイックトンネル](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/)を開きます。 これは、Cloudflare経由で `https://….trycloudflare.com` アドレスで、cloudflared またはサーバーが再起動するたびに変更されます。サーバー上の小さなサービスが、各アドレスをランダムな ntfy.sh トピックに投稿し、デプロイメントディレクトリにのみ保持されている鍵で （`address-key.txt`）、そしてntfy.shが投稿を12時間保持するため、3時間ごとにこれを繰り返します。 `deploy` および**「現在のアドレスを検索」**は署名付き投稿のみを受け付けるため、偽造された投稿によって あなたやあなたのパネルトークンが他人のアドレスに転送されることはありません。トピックは記録に残り、 公開された cloud-init にも記載されます。これらを保有する者なら誰でも現在のアドレスを読み取ることができますが、その際も依然として パネルトークンの入力が求められます。いずれの場合も、サーバーは受信ポートを一切開放しません。
 
-費用について：Cloudflareアカウントがないとクイックトンネルの記録が残らないため、 `verify` 、 トンネル、コネクタ、DNSチェックは利用不可と報告され、結果はせいぜい `incomplete`となります； プロバイダーの記録、ファイアウォール、署名付きステートメント、ホスト測定、およびインストーラーの比較は 通常通りチェックされます。参照用インストーラーとのバイト単位の比較には、 既に `--quick-tunnel`。0.7.0のチェックアウトではドメインインストーラーがビルドされ、 差異が報告されます。 Cloudflareはクイックトンネルに対して稼働時間の保証を行わず、処理中のリクエストは200件までしか許可せず、 Server-Sent Eventsも伝送しないため、パネルのライブ更新（バージョン0.7.0以降）が クイックトンネル経由で届かない可能性があり、ビューを再読み込みする必要がある。この点については未検証である。 確実に動作させる必要がある場合は、独自のドメインを使用すること。
+検証者（verifier）にはアドレスキーがなく、トピックを読み取る誰でもそこに投稿できます。そのため、コレクター も自身の Ed25519 キーで署名したアドレス自体を投稿し、`verify` はデプロイメントレコード内のコレクターキーで署名された最新の 投稿を採用します。投稿の順序は、投稿が主張する時刻ではなく、ntfy.sh が それを受け取った時刻によって決定されます。 この変更以前のコレクターは何も署名せず、 `verify`は最新の投稿を取得し、`statement`のチェックでその旨を伝えます。偽造された投稿は そのチェックを失敗させることしかできません。なぜなら、アドレスは依然としてコレクターの鍵で応答しなければならないからです。
+
+発生する問題：Cloudflareアカウントがないとクイックトンネルの記録が残らないため、`verify`では トンネル、コネクタ、DNSチェックが利用不可と報告され、結果はせいぜい`incomplete`となります（Phala Cloudでは、チェックは通過します。コネクタは測定対象のDocker Compose構成内で実行されます）。 プロバイダーの記録、ファイアウォール、署名付きステートメント、ホストの測定値、およびインストーラーの比較は、 通常通りチェックされます。参照用インストーラーとのバイト単位の比較には、`--quick-tunnel`を すでに認識しているデプロイ済みのコミットが必要です。0.7.0のチェックアウトでは、ドメインインストーラーがビルドされ、 差異が報告されます。 Cloudflareはクイックトンネルに対して稼働時間の保証を行っておらず、処理中のリクエストは200件までと 制限されており、Server-Sent Eventsも伝送しないため、パネルのライブ更新（バージョン0.7.0以降）が クイックトンネル経由で届かない可能性があり、ビューを再読み込みする必要があります。この点についてはまだ検証されていません。確実に動作させる必要がある場合は、 ご自身のドメインをご利用ください。
 
 ## デプロイ
 

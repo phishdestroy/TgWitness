@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/
 
-[اوپن سورس / v0.8.1](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/)
+[اوپن سورس ／ v0.9.0](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/)
 
 Telegram چیٹس کو ہر ترمیم اور حذف کے ساتھ محفوظ کریں، پھر ایسا ریکارڈ حوالے کریں جسے کوئی بھی جانچ سکے۔
 
@@ -10,21 +10,21 @@ Telegram چیٹس کو ہر ترمیم اور حذف کے ساتھ محفوظ ک
 
 جعلی ڈیٹا، Telegram لاگ اِن کی ضرورت نہیں۔
 
- [GitHub Actions سے محفوظ کریں (ابتدائی نسخہ)](https://phishdestroy.github.io/TgWitness/ur/docs/capture/) [S3 آف سائٹ کاپی: سیٹ اپ اور بازیابی](https://phishdestroy.github.io/TgWitness/ur/#s3)
+ [GitHub Actions سے محفوظ کریں （ابتدائی نسخہ）](https://phishdestroy.github.io/TgWitness/ur/docs/capture/) [S3 آف سائٹ کاپی： سیٹ اپ اور بازیابی](https://phishdestroy.github.io/TgWitness/ur/#s3)
 
-ایک پیغام، وقت کے پار#0042
+ایک پیغام، وقت کے پار＃0042
 
-نارتھ اسٹار · تحقیقفرضی ماخذ / پیغام 42
+نارتھ اسٹار · تحقیقفرضی ماخذ ／ پیغام 42
 
-1. **پیغام مشاہدہ ہوا**09:41:02
+1. **پیغام مشاہدہ ہوا**09：41：02
 
-   بریفنگ 14:00 پر شروع ہوتی ہے۔
-2. **ترمیم محفوظ رکھی گئی**09:43:18
+   بریفنگ 14：00 پر شروع ہوتی ہے۔
+2. **ترمیم محفوظ رکھی گئی**09：43：18
 
-   بریفنگ 15:00 پر شروع ہوتی ہے۔
+   بریفنگ 15：00 پر شروع ہوتی ہے۔
 
    پچھلا ورژن برقرار رکھا گیا
-3. **مٹانے کا نوٹس**10:06:45
+3. **مٹانے کا نوٹس**10：06：45
 
    محفوظ شدہ مواد آپ کے جرنل میں رہتا ہے۔
 
@@ -36,33 +36,33 @@ Telegram چیٹس کو ہر ترمیم اور حذف کے ساتھ محفوظ ک
 
 اصل انٹرفیس، فرضی ڈیٹا کے ساتھ۔
 
-TgWitness / محفوظ کردہ چیٹسآپ کا مشاہداتی ورک اسپیس
+TgWitness ／ محفوظ کردہ چیٹسآپ کا مشاہداتی ورک اسپیس
 
 ![ڈارک تھیم میں محفوظ شدہ ٹیلیگرام گفتگو، جس میں کی گئی ترامیم اور حذف شدہ پیغامات سیاق و سباق کے مطابق محفوظ کیے گئے ہیں۔](https://phishdestroy.github.io/TgWitness/assets/chats-dark.png)
 
-01 / محفوظ چیٹس عام چیٹ جیسی دکھتی ہے، ترامیم اور حذف پیغامات کے بالکل ساتھ۔
+01 ／ محفوظ چیٹس عام چیٹ جیسی دکھتی ہے، ترامیم اور حذف پیغامات کے بالکل ساتھ۔
 
-TgWitness / جرنلمقامی ورک اسپیس
+TgWitness ／ جرنلمقامی ورک اسپیس
 
 ![مشاہدہ شدہ پیغامات، ترامیم، حذف کرنے کے نوٹس اور کوریج واقعات پر مشتمل جریدہ](https://phishdestroy.github.io/TgWitness/assets/workspace.png)
 
-02 / جرنل آپ کے اکاؤنٹ نے جو کچھ دیکھا، قابلِ تلاش، خلا سمیت۔
+02 ／ جرنل آپ کے اکاؤنٹ نے جو کچھ دیکھا، قابلِ تلاش، خلا سمیت۔
 
-TgWitness / تاریخِ ترمیممقامی ورک اسپیس
+TgWitness ／ تاریخِ ترمیممقامی ورک اسپیس
 
 ![پیغام کے گرفتار شدہ پچھلے اور ترمیم شدہ ورژنز کا موازنہ کرنے والا تفصیلی ڈراور](https://phishdestroy.github.io/TgWitness/assets/detail.png)
 
-03 / ترمیم کی تاریخ پرانے اور نئے ورژن ساتھ ساتھ، کچھ بھی اوور رائٹ نہیں۔
+03 ／ ترمیم کی تاریخ پرانے اور نئے ورژن ساتھ ساتھ، کچھ بھی اوور رائٹ نہیں۔
 
-TgWitness / دستخط شدہ برآمداتمقامی ورک اسپیس
+TgWitness ／ دستخط شدہ برآمداتمقامی ورک اسپیس
 
 ![ایک دستخط شدہ ZIP، JSONL، CSV اور آف لائن HTML رپورٹ فراہم کرنے والا ورک اسپیس ایکسپورٹ](https://phishdestroy.github.io/TgWitness/assets/exports.png)
 
-04 / دستخط شدہ ایکسپورٹس جرنل ساتھ لے جائیں، دستخط شدہ، اپنے تصدیقی ٹول کے ساتھ۔
+04 ／ دستخط شدہ ایکسپورٹس جرنل ساتھ لے جائیں، دستخط شدہ، اپنے تصدیقی ٹول کے ساتھ۔
 
 [کیس بورڈ](https://phishdestroy.github.io/TgWitness/ur/docs/case-board/)، [رپورٹ ڈیزائن](https://phishdestroy.github.io/TgWitness/ur/docs/reports/) اور [شیئرنگ کاپی](https://phishdestroy.github.io/TgWitness/ur/docs/handover/) کے ذریعے محفوظ شدہ ریکارڈ کی پیروی کریں۔ [اکاؤنٹ گروپس کا جائزہ](https://phishdestroy.github.io/TgWitness/ur/docs/groups/) ایک ساتھ [ل](https://phishdestroy.github.io/TgWitness/ur/docs/groups/)یں۔
 
-01 / کیپچر
+01 ／ کیپچر
 
 ### آپ دائرہ کار خود منتخب کرتے ہیں۔
 
@@ -70,7 +70,7 @@ TgWitness / دستخط شدہ برآمداتمقامی ورک اسپیس
 
 [کے مجموعہ کے طریقوں کا موازنہ کریں](https://phishdestroy.github.io/TgWitness/ur/guides/modes.html#scope)
 
-02 / محفوظ رکھیں
+02 ／ محفوظ رکھیں
 
 ### تبدیلیاں کہانی میں اضافہ کرتی ہیں۔
 
@@ -78,7 +78,7 @@ TgWitness / دستخط شدہ برآمداتمقامی ورک اسپیس
 
 [ایونٹ میٹرکس دیکھیں](https://phishdestroy.github.io/TgWitness/ur/guides/modes.html#events)
 
-03 / حوالگی
+03 ／ حوالگی
 
 ### ایک ریکارڈ جو سفر کرتا ہے۔
 
@@ -111,13 +111,13 @@ tgwitness-evidence.zipمصنوعی طور پر دستخط شدہ بنڈل
 
 - 01
 
-  اصلی مشاہداتJSONL ریکارڈز + CSV جدول
+  اصلی مشاہداتJSONL ریکارڈز ＋ CSV جدول
 - 02
 
-  قابلِ فہم سیاق و سباقآف لائن HTML رپورٹ + محفوظ شدہ میڈیا
+  قابلِ فہم سیاق و سباقآف لائن HTML رپورٹ ＋ محفوظ شدہ میڈیا
 - 03
 
-  آزادانہ تصدیقدستخط شدہ مینیفیسٹ + خود مختار تصدیق کنندہ
+  آزادانہ تصدیقدستخط شدہ مینیفیسٹ ＋ خود مختار تصدیق کنندہ
 
 وصول کنندہ آپ کی کلید سے سب کچھ جانچتا ہے، اور کہیں اور رکھا گیا چیک پوائنٹ دکھاتا ہے کہ تب سے کچھ دوبارہ نہیں لکھا گیا۔ [جانچ کیسے کام کرتی ہے۔](https://phishdestroy.github.io/TgWitness/ur/docs/concepts/#layers)
 
@@ -139,7 +139,7 @@ tgwitness-evidence.zipمصنوعی طور پر دستخط شدہ بنڈل
 
 شیڈول شدہ یا دستی کاپیاں
 
-ابھی کاپی کریں یا ہر 1 سے 1,440 منٹ بعد، پیش رفت پینل میں۔
+ابھی کاپی کریں یا ہر 1 سے 1，440 منٹ بعد، پیش رفت پینل میں۔
 
 آبجیکٹ لاک
 
@@ -149,7 +149,7 @@ tgwitness-evidence.zipمصنوعی طور پر دستخط شدہ بنڈل
 
 کلید الگ رکھیں۔ کہیں بھی بحال کریں، فائلیں صرف تصدیق کے بعد نکلتی ہیں۔
 
-![مکمل آف سائٹ کاپی پینل: اینڈ پوائنٹ، خطہ، بکیٹ، رسائی کیز، شیڈول، آبجیکٹ لاک اور ریکوری کی کنٹرولز](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
+![مکمل آف سائٹ کاپی پینل： اینڈ پوائنٹ، خطہ، بکیٹ، رسائی کیز، شیڈول، آبجیکٹ لاک اور ریکوری کی کنٹرولز](https://phishdestroy.github.io/TgWitness/assets/off-site-copy.png)
 
 مکمل پینل جدید اختیارات کے ساتھ کھولا گیا ہے۔ کوئی اسٹوریج کی تفصیلات دکھائی نہیں گئی ہیں۔
 
@@ -200,7 +200,7 @@ Windows، Linux، macOS یا Docker۔
 
 **ایک درآمد شدہ سیشن، ایک چلنے والا کلائنٹ۔**
 
-امپورٹ شدہ TData یا سیشن کو Telegram Desktop اور TgWitness میں ایک ساتھ نہ چلائیں، Telegram دونوں کو ختم کر سکتا ہے (AUTH_KEY_DUPLICATED)۔ دونوں چاہئیں؟ TgWitness میں فون یا QR سے الگ لاگ اِن کریں۔
+امپورٹ شدہ TData یا سیشن کو Telegram Desktop اور TgWitness میں ایک ساتھ نہ چلائیں، Telegram دونوں کو ختم کر سکتا ہے （AUTH_KEY_DUPLICATED）۔ دونوں چاہئیں؟ TgWitness میں فون یا QR سے الگ لاگ اِن کریں۔
 
 [سیشن امپورٹ کی انتباہ پڑھیں](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=ur#session-warning)
 
@@ -210,7 +210,7 @@ Telegram اکاؤنٹ کے بغیر فرضی ورک اسپیس آزمائیں۔
 
 [آن لائن ڈیمو کھولیں →](https://phishdestroy.github.io/TgWitness/demo/?lang=ur)
 
-ونڈوز `scripts\Demo.cmd`لینکس / میک او ایس `sh start.sh --demo`
+ونڈوز `scripts\Demo.cmd`لینکس ／ میک او ایس `sh start.sh --demo`
 
 **مقامی تنصیب کے احکامات**
 
@@ -218,7 +218,7 @@ Telegram اکاؤنٹ کے بغیر فرضی ورک اسپیس آزمائیں۔
 
 ### ماخذ حاصل کریں۔
 
-[ماخذ ZIP فائل ڈاؤن لوڈ کریں](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) اور اسے نکالیں، یا ریپوزیٹری کلون کریں:
+[ماخذ ZIP فائل ڈاؤن لوڈ کریں](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) اور اسے نکالیں، یا ریپوزیٹری کلون کریں：
 
 ```
 git clone https://github.com/phishdestroy/TgWitness.git
@@ -233,7 +233,7 @@ Python 3.11+ درکار ہے۔ Windows پر لانچر اسے انسٹال کر�
 
 ### چلانے کا طریقہ منتخب کریں۔
 
-`Start.cmd` پر ڈبل کلک کریں، یا پاور شیل میں چلائیں:
+`Start.cmd` پر ڈبل کلک کریں، یا پاور شیل میں چلائیں：
 
 ```
 .\Start.cmd
@@ -241,7 +241,7 @@ Python 3.11+ درکار ہے۔ Windows پر لانچر اسے انسٹال کر�
 
 صرف دریافت کر رہے ہیں؟ ایک الگ تھلگ ڈیمو کے لیے `scripts\Demo.cmd` پر ڈبل کلک کریں۔ ٹیلیگرام لاگ ان کی ضرورت نہیں۔
 
-Python 3.11+ اور `venv` دستیاب ہیں:
+Python 3.11+ اور `venv` دستیاب ہیں：
 
 ```
 sh start.sh
@@ -249,7 +249,7 @@ sh start.sh
 
 اس کے بجائے فرضی جریدہ کھولنے کے لیے `sh start.sh --demo` چلائیں۔
 
-جب Docker چل رہا ہو اور Compose 2.20+ انسٹال ہو:
+جب Docker چل رہا ہو اور Compose 2.20+ انسٹال ہو：
 
 ```
 docker compose up -d --build --wait
@@ -262,7 +262,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 سورس سے انسٹال میں ٹوکن `data/live/panel-token.txt` میں ہوتا ہے۔ [my.telegram.org](https://my.telegram.org) سے اپنا API جوڑا اختیاری ہے۔ [مکمل سیٹ اپ گائیڈ ↗](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
 
-**TgWitness 0.8.1** [کیا نیا ہے →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/) · [خصوصیات اور معلوم حدود →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
+**TgWitness 0.9.0** [کیا نیا ہے →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/) · [خصوصیات اور معلوم حدود →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
 
 ## واضح ہدایات۔ ایک مفید اگلا قدم۔
 
@@ -290,19 +290,19 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 **کیا میرا پورا جرنل انکرپٹڈ ہے؟**
 
-سیشنز اور کلیدیں ہاں۔ پیغامات اور فائلیں نہیں، ڈسک انکرپشن استعمال کریں۔ ایکسپورٹس پر AES-256 پاس ورڈ لگ سکتا ہے۔
+سیشنز اور کلیدیں ہاں۔ پیغامات اور فائلیں نہیں، ڈسک انکرپشن استعمال کریں۔ ایکسپورٹس پر AES－256 پاس ورڈ لگ سکتا ہے۔
 
 **کیا یہ ٹیلیگرام سے منسلک ہے؟**
 
 نہیں۔ یہ Telethon پر بنا MIT لائسنس والا آزاد منصوبہ ہے۔ آپ اپنے اکاؤنٹس سے لاگ اِن کرتے ہیں۔
 
-PROJECT NOTICE / LICENCE
+PROJECT NOTICE ／ LICENCE
 
-## Operator incompatibility.
+## Operator incompatibility．
 
-**Taylor Wessing PartG mbB — German core, Hamburg office.**
+**Taylor Wessing PartG mbB， German core， Hamburg office．**
 
-Our statement as the authors of TgWitness. It adds no condition to the MIT License. Read the complete notice and its source record.
+This statement from the authors of TgWitness adds no condition to the MIT License， and the complete notice includes its source record．
 
 [Read the complete notice](https://phishdestroy.github.io/TgWitness/docs/reference/notice/) [Original text](https://phishdestroy.github.io/TgWitness/NOTICE)
 

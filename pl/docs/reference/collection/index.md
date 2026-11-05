@@ -119,9 +119,11 @@ Numery sekwencyjne odzwierciedlają kolejność obserwacji. Sygnatura czasowa UT
 
 ## Migawki historyczne
 
-Funkcja „snapshot” pobiera najnowsze widoczne wiadomości z włączonego źródła, maksymalnie 500 na jedno żądanie. Wyniki są oznaczane jako obserwacje historyczne. Mogą one pokrywać się z danymi zbieranymi na bieżąco, a powtarzające się obserwacje są przechowywane jako oddzielne zapisy.
+Migawka pobiera najnowsze widoczne wiadomości z włączonego źródła, do 500 na żądanie. Wyniki są oznaczane jako obserwacje historii. Ręczne migawki rezerwują wolne konto; najpierw jawnie wstrzymaj monitoring. Powtórzone obserwacje pozostają osobnymi rekordami.
 
 Zrzuty ekranu są zgodne z polityką dotyczącą załączników, ale pozostają oddzielone od przełączników zdarzeń na żywo. Nie odtwarzają one usuniętych wiadomości ani pominiętych wersji pośrednich. Można złożyć wniosek o ich utworzenie w trakcie wstrzymania; wszelkie załączniki umieszczone w kolejce pozostają w oczekiwaniu do momentu rozpoczęcia obserwacji i uruchomienia modułu pobierania.
+
+Uruchomienie **Historii** to osobne zadanie na wyłączność: kolejno odczytuje wybrane źródła i pobiera ich załączniki z kolejki, bez uruchamiania monitoringu. Wstrzymanie zwalnia konto, a wznowienie kontynuuje zapisany przebieg. Filtry dat, języka i odpowiedzi dla kilku wolnych kont opisuje [Rozproszony eksport czatu](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md).
 
 ## Obsługa załączników
 

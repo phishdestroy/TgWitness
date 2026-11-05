@@ -119,9 +119,11 @@ Sıra numaraları gözlem sırasını ifade eder. Toplayıcının UTC zaman damg
 
 ## Geçmiş anlık görüntüleri
 
-Bir anlık görüntü, etkinleştirilmiş bir kaynaktan en son görünen mesajları ister; istek başına en fazla 500 adede kadar. Sonuçlar, geçmiş gözlemleri olarak etiketlenir. Bunlar, canlı yakalama ile çakışabilir ve tekrarlanan gözlemler ayrı kayıtlar olarak saklanır.
+Anlık görüntü, etkin bir kaynaktan görülebilen en son iletileri, istek başına en fazla 500 adet olarak alır. Sonuçlar geçmiş gözlemleri olarak etiketlenir. Elle alınan görüntüler boş bir hesabı ayırır; önce izlemeyi açıkça duraklatın. Yinelenen gözlemler ayrı kayıtlar olarak saklanır.
 
 Anlık görüntüler ek dosya politikasına uyar, ancak canlı olay anahtarlamalarından ayrı tutulur. Silinen mesajları veya kaçırılan ara sürümleri yeniden oluşturmazlar. Duraklatılmış durumdayken bir anlık görüntü talep edebilirsiniz; kuyruğa alınan ek dosyalar, gözlem başlayana ve indirme işleyicisi çalışana kadar bekler.
+
+**Geçmiş** çalışması ayrı ve hesabı tek başına kullanan bir görevdir: seçili kaynakları okur ve sıradaki eklerini izlemeyi başlatmadan sırayla indirir. Duraklatma hesabı serbest bırakır; sürdürme kaydedilen çalışmaya devam eder. Birden fazla boş hesapta tarih, dil ve yanıt filtreleri için [Dağıtılmış sohbet dışa aktarımı](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md) bölümüne bakın.
 
 ## Eklerin işlenmesi
 

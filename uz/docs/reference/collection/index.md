@@ -119,9 +119,11 @@ Ketma-ketlik raqamlari kuzatuv tartibini bildiradi. Yig'uvchining UTC vaqti bo'y
 
 ## Tarix snopshotlari
 
-Snapshot yoqilgan manbadan so'nggi ko'rinadigan xabarlarni, har bir so'rov bo'yicha 500 tagacha so'raydi. Natijalar tarix kuzatuvlari deb belgilangan. Ular jonli yozib olish bilan to'qnashishi mumkin va takroriy kuzatuvlar alohida yozuvlar sifatida saqlanadi.
+Surat yoqilgan manbadan ko‘rinadigan eng so‘nggi xabarlarni, har so‘rovda ko‘pi bilan 500 tasini oladi. Natijalar tarix kuzatuvlari sifatida belgilanadi. Qo‘lda surat olish bo‘sh akkauntni band qiladi; avval monitoringni aniq to‘xtatib turing. Takroriy kuzatuvlar alohida yozuvlar bo‘lib saqlanadi.
 
 Snapshotlar ilova siyosatiga rioya qiladi, ammo jonli-voqea kalitlaridan alohida bo'lib qoladi. Ular o'chirilgan xabarlarni yoki o'tkazib yuborilgan oraliq versiyalarni qayta tiklamaydi. To'xtatilgan paytda bittasini so'rashingiz mumkin; u navbatga qo'ygan har qanday ilovalar kuzatuv boshlanib, yuklab olish ishchisi ishga tushguncha kutadi.
+
+**Tarix** alohida, akkauntdan yakka foydalanadigan vazifadir: u tanlangan manbalarni o‘qiydi va navbatdagi biriktirmalarni monitoringni boshlamasdan ketma-ket yuklaydi. Pauza akkauntni bo‘shatadi; davom ettirish saqlangan jarayonni davom ettiradi. Bir nechta bo‘sh akkauntda sana, til va javob filtrlari uchun [Taqsimlangan chat eksporti](https://github.com/phishdestroy/TgWitness/blob/main/docs/DISTRIBUTED-EXPORT.md)ga qarang.
 
 ## Ilovalar bilan ishlash
 

@@ -4,6 +4,51 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/verif
 
 O teste ao vivo no Telegram, as verificações automatizadas, as verificações no navegador e o que ainda não foi verificado.
 
+## Implantação ao vivo na Phala Cloud · 4 de novembro de 2026
+
+O `--provider phala --quick-tunnel` foi executado no **Phala Cloud** real (`tdx.small`, região US-WEST-1) com uma chave de API do Phala Cloud de um espaço de trabalho vazio, o ntfy.sh real, GitHub e Intel PCS. A CVM instalou o commit `df7d860c` (v0.8.1); as etapas de implantação, verificação e destruição foram executadas a partir da linha de comando com as correções abaixo. Sete CVMs custaram, no total, cerca de 1,9 centavos de dólar.
+
+As duas primeiras implantações identificaram cinco diferenças em relação à Phala Cloud simulada. [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) agora reproduz cada uma delas e falha sem a respectiva correção:
+
+| No Phala Cloud | Antes da correção | Correção |
+| --- | --- | --- |
+| É necessário o `compose_file.name` | HTTP 422, nada foi criado | A configuração do Docker Compose contém o nome da CVM |
+| A menos que seja fornecido um vazio, o Phala adiciona seu próprio script de pré-inicialização ao app-compose medido (v0.0.20: login no Docker, `docker compose pull`, senha de root, chaves SSH de `user_config`) | O `tdx_compose` falha: código fora da configuração publicada do Docker Compose | O app-compose define `pre_launch_script` como `""`; o Phala, então, o omite |
+| Sem o `image`, o Phala seleciona o `dstack-dev-0.5.12`, a versão de desenvolvimento, com acesso SSH habilitado | O `server_state` falha. Apenas o registro de atestado de hardware foi aprovado nesta imagem; somente o registro do provedor e o `tdx_os` o apresentam | A implantação solicita a versão de produção do lançamento atual do Phala, `dstack-0.5.12` |
+| Com o gateway dstack desativado, os detalhes da CVM nunca recebem um `instance_id` | A implantação aguarda 30 minutos e falha | O ID da instância é lido a partir do estado da CVM |
+| Reinicializações, paradas e inicializações são operações do CVM, não revisões do aplicativo | O `provider_actions` não listou reinicializações | As operações de leitura também foram realizadas |
+
+A terceira implantação:
+
+- A CVM executou o `dstack-0.5.12` com o acesso SSH desativado. O coletor publicou seu endereço assinado cerca de 1,5 minuto após a criação. A implantação foi então aprovada para o `tdx_binding`, `tdx_quote` (Intel TCB UpToDate, registro de atestado de hardware v4, FMSPC `20a06f000000`, sem modo de depuração, não migrável, com suporte a dados de verificação criptográfica obtidos da Intel), `tdx_compose_hash`, `tdx_compose` (byte a byte) e `tdx_identity` (chaves KMS).
+- O painel no endereço trycloudflare.com respondeu com código 401 sem um token ou com um token incorreto, e com código 200 com o token do painel.
+- `verify` com `--source` definido para o arquivo do commit no GitHub e a impressão digital aprovada separadamente: servidor, `server_state`, firewall (sem gateway, sem endpoint público), log do provedor, extrato, impressão digital, hash de origem, inicialização e as cinco verificações `tdx_*` foram aprovadas. O Cloudflare e o `tdx_os` estavam indisponíveis, portanto, o resultado foi INCOMPLETO.
+- Duas reinicializações por meio da API do Phala: em cada uma delas, a CVM voltou a funcionar em menos de dois minutos com a mesma chave de coletor, um novo endereço assinado e o antigo respondendo com o código 530. O `verify` relatou a nova inicialização e ambas as reinicializações como REVIEW. Com o `--evidence`, foram confirmadas as assinaturas do diário e três inicializações, cada uma com seu próprio registro de atestado de hardware Intel TDX proveniente do mesmo CVM.
+- O `destroy` removeu apenas essa CVM. O espaço de trabalho ficou então vazio, e o endereço do painel deixou de responder.
+- A verificação de preço do assistente do painel indicou `tdx.small` a US$ 0,058 por hora. Uma chave incorreta gerou uma mensagem simples “não aceitou a chave da API”.
+
+Duas outras constatações, corrigidas posteriormente:
+
+- Sem a chave de endereço, o `verify` seguiu a postagem mais recente e bem formada sobre o tópico de endereço, que está impressa na configuração publicada do Docker Compose. Uma postagem falsificada o enviou para um host que não existe, e o `statement` falhou: um falsificador não conseguiu se passar pelo coletor, mas conseguiu bloquear a verificação de terceiros por até 12 horas com um carimbo de data/hora futuro falsificado. O coletor agora também publica seu endereço assinado com sua própria chave; o `verify` aceita apenas essas publicações quando o coletor as faz, e as publicações são ordenadas pela hora de recebimento do ntfy.sh. [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) reproduz as postagens falsificadas. Um CVM executa isso apenas a partir de um commit que o contenha; portanto, o coletor desta execução ainda não assinou seu endereço e o `verify` indicou isso.
+- O `tdx_os` não pôde ser executado sem o `dstack-mr`, cuja versão atual possui o `measure-os` em vez do `measure --json` mencionado na documentação. O verificador agora calcula o MRTD e o RTMR0-2 por conta própria a partir da imagem publicada e da configuração da VM, incluindo as tabelas ACPI.
+
+A quarta implantação, com os seguintes elementos:
+
+- A implantação baixou o `dstack-0.5.12` publicado uma vez, comparou-o com o hash da imagem do SO que a CVM relatou, e o `tdx_os` foi aprovado: MRTD, RTMR0, RTMR1 e RTMR2 são iguais aos valores calculados para o QEMU 8.2.2, 1 vCPU e 2 GiB. O mesmo cálculo resultou em um RTMR0 diferente para os valores declarados de 4 GiB, 2 vCPUs, QEMU 9.2.1 ou uma segunda placa de rede, e falhou para um kernel, firmware ou linha de comando alterados e para a imagem de desenvolvimento.
+- O `verify` foi aprovado em todas as suas 16 verificações, incluindo o conector do túnel rápido, portanto, o resultado foi APROVADO. Ele gerou o certificado em HTML e PDF, selado digitalmente com assinaturas e carimbos de data e hora, incluindo um carimbo de data e hora qualificado pelo eIDAS proveniente da unidade de carimbo de data e hora do governo belga, a TSU 202301 (status concedido na lista de confiança da Bélgica ), um carimbo de data e hora FreeTSA e a assinatura do verificador; o `check-report` confirmou todos eles e a assinatura do PDF.
+- Após uma reinicialização, o `verify --evidence` confirmou duas inicializações, cada uma acompanhada por uma atestação de hardware gerada dentro da CVM e cada uma inicializada a partir do `dstack-0.5.12` publicado; a reinicialização e a nova inicialização foram classificadas como REVIEW.
+- O `destroy` deixou o espaço de trabalho vazio.
+
+A quinta implantação executou o coletor a partir do commit `53a0f7e9`, que contém todos os itens acima:
+
+- O coletor publicou seu endereço assinado com sua própria chave, ao lado da publicação HMAC do operador. Duas publicações falsificadas foram então adicionadas ao tópico, uma com um HMAC zerado e outra assinada por outra chave Ed25519, ambas alegando uma data no ano de 2096. O `verify` utilizou o endereço assinado pela chave do coletor e passou em todas as 16 verificações; o selo trazia novamente o carimbo de data e hora belga qualificado, o carimbo de data e hora do FreeTSA e a assinatura do verificador, e o `check-report` confirmou esses elementos.
+- Após uma reinicialização, o coletor publicou o novo endereço assinado: `verify` o encontrou imediatamente; o operador **localizou o endereço atual** 27 segundos depois a partir da publicação HMAC, e ambos ignoraram as publicações falsificadas. `verify --evidence` confirmou duas inicializações a partir de `dstack-0.5.12`.
+- A implantação exibiu o valor que a Phala cobra pela CVM, incluindo o disco: US$ 0,06078 por hora.
+
+O assistente do painel foi executado no Phala Cloud duas vezes: uma vez por meio de sua API de tarefas e outra vez por meio do navegador com um Chromium real: a verificação de preço, a criação com o commit sob **Advanced**, todas as seis verificações de atestado foram aprovadas, a lista de servidores exibindo o preço faturado (44,37 dólares por mês), **Find o endereço atual**, o download da configuração do Docker Compose medida e a exclusão. O navegador não detectou erros de página. Em ambas as ocasiões, o espaço de trabalho ficou vazio posteriormente.
+
+Não incluídos: um domínio do Cloudflare no Phala, uma conta do Telegram no CVM e a imagem `dstack-0.6.1` . O preço exibido pelo assistente antes da criação refere-se apenas ao custo de computação do Phala, uma vez que sua API indica o custo do disco apenas para um CVM já existente; a lista de servidores mostra o valor faturado após a criação.
+
 ## Live server journal inventory · 1 November 2026
 
 At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.

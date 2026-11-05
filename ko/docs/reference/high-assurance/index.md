@@ -44,7 +44,7 @@ Hetzner 또는 Phala Cloud에 구축된 24시간 연중무휴 보안 서버, 게
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` 읽기 전용 범위 | 계정 이벤트, 방화벽 규칙 버전 | 90일 |
 | `vultr` | `VULTR_API_KEY` | 읽기 권한과 `activity_logs` 권한 | 계정 활동 로그 (메서드, 경로, 행위자) | 30일, 감사 로그 구독 시 더 긴 기간 |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | CloudTrail 이벤트 기록 | 90일 |
-| `phala` | `PHALA_CLOUD_API_KEY` | 동일한 워크스페이스의 API 키 | 애플리케이션 수정 사항: 구성 및 환경 변경, 재시작, OS 업그레이드 | 이 애플리케이션이 존재하는 동안 |
+| `phala` | `PHALA_CLOUD_API_KEY` | 동일한 워크스페이스의 API 키 | 애플리케이션 개정 및 CVM 작업: Docker Compose 구성 및 환경 변경, 재시작, OS 업그레이드 | 이 애플리케이션이 존재하는 동안 |
 | `generic` | 없음 | 없음 | 없음: **자체 인증** | – |
 
 각 케이스마다 전용 프로젝트, 팀, 계정 또는 하위 계정을 사용하십시오. 그러면 검증자의 읽기 전용 액세스 권한을 통해 해당 배포 정보만 표시됩니다. 인증 정보는 `--provider-token-file` 또는 상기 변수에서 읽으며, 명령줄에서는 절대 읽지 않습니다. AWS의 경우 파일에는 지역이 저장됩니다 `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; 리전은 `--location`.
@@ -62,9 +62,11 @@ Hetzner 또는 Phala Cloud에 구축된 24시간 연중무휴 보안 서버, 게
 | `tdx_compose_hash` | dstack 이벤트 로그에서 재현된 RTMR3는 수집기가 보고하는 앱 작성 시간을 측정합니다. |
 | `tdx_compose` | 이 컴포즈는 배포된 커밋의 코드가 빌드하는 것과 바이트 단위로 완전히 일치합니다. 소스 파일은 해시로 고정되어 있고, 두 이미지는 다이제스트로 고정되어 있으며, 그 외의 코드는 없습니다. |
 | `tdx_identity` | 인증 정보는 배포된 애플리케이션과 인스턴스에서 제공되며, Phala의 KMS에서 발급된 키와 암호화된 디스크를 사용합니다. |
-| `tdx_os` | 다음과 같이 `--tdx-measurements`, MRTD 및 RTMR0-2는 dstack OS 이미지에서 계산된 값과 동일합니다 (`dstack-mr measure --json`) |
+| `tdx_os` | MRTD 및 RTMR0-2는 검증기가 Dstack-TEE가 게시한 dstack OS 이미지에서 계산한 값과, CVM이 보고한 OS 이미지 해시, 그리고 QEMU가 VM의 구성(shape)에 대해 생성한 ACPI 테이블(펌웨어, 커널, initrd, 루트 파일 시스템 해시가 포함된 명령줄, 메모리, vCPU 및 장치)을 기반으로 산출된 값과 일치합니다. 개발용 이미지는 실패합니다 |
 
-저널에 기록된 수집기의 모든 시작 시점에는 이러한 인증 정보가 포함되므로 `verify --evidence` 각 시작 시점을 확인합니다. Phala의 애플리케이션 개정 목록은 프로바이더 로그 역할을 합니다. 배포 후 작성 내용이 변경된 경우, 보고서가 실패합니다.
+OS 이미지(약 180MB, 이 중 21MB가 보관됨)는 [Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases)에서 기록 옆의 `dstack-images`로 한 번 다운로드됩니다. `--tdx-image FOLDER`는 다른 폴더나 압축 해제된 이미지를 사용하며, `--tdx-image none`는 비교 단계를 건너뜁니다. 측정은 `dstack-mr`에 이어 Dstack-TEE/dstack의 `qemu-acpi` Rust 패키지를 따릅니다. `tools/check_dstack_image.py`는 이를 QEMU 자체의 ACPI 출력 및 실제 Phala Cloud 하드웨어 인증 레코드와 비교하며, `--live`는 공개된 이미지와도 비교합니다. `--tdx-measurements`는 여전히 JSON 형식으로 제공된 MRTD와 RTMR0-2를 비교합니다.
+
+저널에 기록된 수집기의 모든 시작에는 이러한 인증 정보가 포함되므로, `verify --evidence`는 각 시작 시점과 부팅된 OS 이미지를 확인합니다. Phala의 애플리케이션 개정판 및 CVM의 운영 내역은 제공자 로그 역할을 합니다. 배포 후 변경된 Docker Compose 구성은 보고서 심사에서 불합격 처리되며, 재시작 내역은 검토를 위해 목록에 포함됩니다.
 
 패널에서 [**Extras]** → [**Server 24/7]** 아래의 **[Confidential virtual machine · Phala Cloud]** 를 선택하고 Phala Cloud API 키를 붙여넣으세요. 퀵 터널은 Hetzner에서와 마찬가지로 작동합니다. 명령줄에서:
 
@@ -74,12 +76,30 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` 인텔의 인증서 및 해지 목록을 인텔에서 직접 다운로드하는 대신 파일에서 읽어옵니다. 여기에서는 게이트웨이 DNS를 사용할 수 없습니다. Phala에는 발신 트래픽을 위한 제공자 방화벽이 없기 때문입니다.
 
+### 인증서
+
+Phala 배포의 경우 `verify --report certificate.md`는 인증서도 기록합니다: 독립형 `certificate.html`와 A4 용지 크기의 `certificate.pdf`로, 여기에는 검증 결과, 인텔 루트에서 수집기 키까지의 신뢰 체인, 일반 서버 및 고신뢰도 서버와의 비교, 공개된 이미지에서 계산된 값과 나란히 제시된 측정 결과, 각 부분을 보증하는 주체, 인텔 인증서 체인, 모든 검사 항목, 공급자 로그, 그리고 검증 과정을 재현하는 방법이 포함됩니다. JSON 보고서가 공식 기록으로 남아 있으며, 각 페이지는 이를 시각화하여 표시합니다.
+
+이 보고서는 서명과 타임스탬프를 통해 디지털로 봉인되었으며, `certificate.seal.json` 파일과 그 옆에 있는 `.tsq`/`.tsr` 파일에 포함되어 있습니다:
+
+| Seal | 추가된 기능 |
+| --- | --- |
+| 적격 전자 타임스탬프, `http://tsa.belgium.be/connect` | 벨기에 연방 정부의 공인 신뢰 서비스 제공자(FPS Policy and Support, BOSA)에서 발급한 `certificate.json`의 정확한 바이트에 대한 RFC 3161 타임스탬프. 해당 기관은 벨기에의 EU 신뢰 목록에 ‘인증된 타임스탬프 서비스’로 등재되어 있으며, 상태는 ‘승인됨’으로 표시됩니다. 2026년 10월 20일자 목록에 따른 루트(Belgium Root CA6) 및 목록 항목들은 `tgwitness/tsa_roots.py`에 고정되어 있습니다. 규정(EU) 제910/2014호 제41조에 따라, 이러한 타임스탬프는 모든 EU 회원국에서 날짜 및 시간, 그리고 데이터의 무결성 측면에서 정확한 것으로 간주됩니다. |
+| RFC 3161 타임스탬프, FreeTSA | 두 번째, 독립적인 타임스탬프 |
+| 검증자 서명 | 보고서의 SHA-256 및 모든 타임스탬프를 명시한 진술문에 대해, 검증자 자신의 키(`--sign-with FOLDER`, 기본값 `~/.tgwitness/verifier`)를 사용하여 Ed25519로 서명하며, PDF 파일에는 동일한 키로 서명된 서명이 포함되어 있습니다 |
+
+`--timestamp URL`(반복 가능)는 다른 인증 기관을 선택하고, `--timestamp none`는 아무것도 선택하지 않으며, `--sign-with
+none`는 인장에 서명을 하지 않습니다. `check-report`는 보고서의 해시, 검증자 서명, 신뢰할 수 있는 루트에 대한 각 타임스탬프와 그 적격 상태, 그리고 PDF의 서명을 확인합니다. EU 외부에서 적격 타임스탬프 및 보고서 전체의 법적 효력은 이를 수령하는 법원 또는 당국에 달려 있으며, 인장은 보고서가 언제 존재했는지와 변경되지 않았음을 나타냅니다.
+
 이 검증 결과만으로는 인텔의 TDX 모듈이나 마이크로코드의 결함, 또는 메모리 버스에 대한 물리적 접근 가능성을 배제할 수 없습니다. Phala 계정의 애플리케이션을 제어하는 사람은 누구나 다른 컴포즈를 배포할 수 있으며, 이는 새로운 컴포즈 해시를 가진 새로운 리비전으로 나타납니다. 호스트는 기기의 시간 소스와 네트워크를 제어합니다.
+
+배포, `--evidence`를 통한 검증, 재시작, OS 이미지 비교, 서명과 타임스탬프로 디지털 봉인된 인증서 및 파기 작업이 Phala Cloud 자체에서 실행되었습니다. [(2026년 11월 4일 실행) 및](https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)를 참조하십시오.
 
 ## 시작하기 전에
 
@@ -110,7 +130,9 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 
 서버에서 cloudflared는 패널로 연결되는 [빠른 터널](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/)을 열어줍니다. 이 터널의 주소는 `https://….trycloudflare.com` 주소로, cloudflared 또는 서버가 재시작될 때마다 변경됩니다. 서버의 작은 서비스가 각 주소를 무작위 ntfy.sh 토픽에 게시하며, 배포 디렉토리에만 존재하는 키로 (`address-key.txt`), 그리고 ntfy.sh가 게시물을 12시간 동안 보관하므로 3시간마다 이를 반복합니다. `deploy` 및 **현재 주소를 조회하는**기능은 서명된 게시물만 허용하므로, 위조된 게시물로 인해 사용자와 패널 토큰이 타인의 주소로 전송되는 일은 없습니다. 해당 토픽은 기록에 남아 있으며 공개된 cloud-init을 통해, 이를 보유한 사람은 누구나 현재 주소를 확인할 수 있습니다. 이 주소에서는 여전히 패널 토큰을 요청합니다. 서버는 어느 쪽으로도 인바운드 포트를 유지하지 않습니다.
 
-비용: Cloudflare 계정이 없으면 퀵 터널 기록이 저장되지 않으므로 `verify` 보고서에서는 터널, 커넥터 및 DNS 확인을 사용할 수 없는 상태로 표시하며, 결과는 기껏해야 `incomplete`; 제공자 기록, 방화벽, 서명된 명세서, 호스트 측정값 및 설치 프로그램 비교는 평소와 같이 확인됩니다. 참조 설치 프로그램과의 바이트 비교에는 이미 알고 있는 `--quick-tunnel`; 0.7.0 체크아웃은 도메인 설치 프로그램을 빌드하고 차이를 보고합니다. Cloudflare는 퀵 터널에 가동 시간 보장을 제공하지 않으며, 200건의 요청만 허용하고 Server-Sent Events를 전달하지 않으므로, 패널의 실시간 업데이트(0.7.0 이후 버전)가 퀵 터널을 통해 전달되지 않을 수 있으며 페이지를 다시 불러와야 할 수 있습니다. 해당 부분은 아직 테스트되지 않았습니다. 안정적인 운영이 필요한 경우에는 자체 도메인을 사용하십시오.
+검증자(verifier)는 주소 키를 가지고 있지 않으며, 토픽을 읽는 누구나 해당 토픽에 게시물을 올릴 수 있습니다. 따라서 수집기(collector)는 자신의 Ed25519 키로 서명된 주소 자체도 게시하며, `verify`는 배포 기록에서 수집기 키로 서명된 가장 최신 게시물을 가져옵니다. 게시물은 게시물이 주장하는 시간이 아니라 ntfy.sh가 수신한 시간 순으로 정렬됩니다. 이 변경 이전의 수집기는 아무것도 서명하지 않으며, `verify`는 가장 최근의 게시물을 가져와 `statement` 확인 과정에서 이를 알립니다. 위조된 게시물은 해당 확인을 실패하게 만들 뿐입니다. 주소는 여전히 수집기의 키로 응답해야 하기 때문입니다.
+
+발생하는 문제: Cloudflare 계정에는 퀵 터널에 대한 기록이 저장되지 않으므로, `verify`는 터널, 커넥터 및 DNS 확인을 사용할 수 없는 상태로 보고하며, 결과는 기껏해야 `incomplete`(Phala Cloud에서는 검사가 통과됩니다: 커넥터가 측정된 Docker Compose 구성 내에서 실행됨); 프로바이더 기록, 방화벽, 서명된 명세서, 호스트 측정 및 설치 프로그램 비교는 평소와 같이 확인됩니다. 참조 설치 프로그램과의 바이트 비교에는 이미 `--quick-tunnel`를 인식하는 배포된 커밋이 필요합니다; 0.7.0 체크아웃은 도메인 설치 프로그램을 빌드하고 차이를 보고합니다. Cloudflare는 퀵 터널에 가동 시간 보장을 제공하지 않으며, 200개의 요청만 동시에 처리할 수 있고 Server-Sent Events를 전송하지 않으므로, 패널의 실시간 업데이트(0.7.0 이후 버전)가 퀵 터널을 통해 전달되지 않을 수 있으며 페이지를 다시 불러와야 할 수 있습니다. 이 부분은 아직 테스트되지 않았습니다. 반드시 정상적으로 작동해야 하는 경우에는 자체 도메인을 사용하십시오.
 
 ## 배포
 

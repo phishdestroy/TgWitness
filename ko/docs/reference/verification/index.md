@@ -4,6 +4,51 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/verif
 
 실시간 텔레그램 테스트, 자동화된 점검, 브라우저 점검 및 아직 검증되지 않은 사항.
 
+## Phala Cloud 라이브 배포 · 2026년 11월 4일
+
+`--provider phala --quick-tunnel`는 실제 **Phala Cloud**(`tdx.small`, 리전 US-WEST-1)에서 실행되었으며, 빈 워크스페이스의 Phala Cloud API 키, 실제 ntfy.sh, GitHub 및 Intel PCS가 사용되었습니다. CVM은 커밋 `df7d860c`(v0.8.1)를 설치했으며, 아래 수정 사항을 적용하여 명령줄에서 배포, 검증 및 삭제 작업을 실행했습니다. 7대의 CVM 비용은 총 약 1.9 미국 센트였습니다.
+
+처음 두 번의 배포에서 시뮬레이션된 Phala Cloud와 5가지 차이점이 발견되었습니다. [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py)는 이제 각 차이점을 재현하며, 수정 사항이 없으면 실패합니다:
+
+| Phala Cloud에서 | 수정 전 | 수정 |
+| --- | --- | --- |
+| `compose_file.name`가 필요합니다 | HTTP 422, 아무것도 생성되지 않음 | Docker Compose 구성에는 CVM 이름이 포함됩니다. |
+| 빈 값이 지정되지 않은 경우, Phala는 측정 대상 app-compose에 자체 사전 실행 스크립트를 추가합니다(v0.0.20: Docker 로그인, `docker compose pull`, 루트 비밀번호, `user_config`의 SSH 키). | `tdx_compose` 오류: 게시된 Docker Compose 구성 외부의 코드 | app-compose가 `pre_launch_script`를 `""`로 설정하면, Phala는 이를 제외합니다 |
+| `image`가 없으면 Phala는 SSH 액세스가 활성화된 개발용 빌드인 `dstack-dev-0.5.12`를 선택합니다. | `server_state`가 실패합니다. 이 이미지에서는 하드웨어 인증 기록만 통과했으며, 제공자 기록과 `tdx_os`에만 해당 내용이 표시됩니다. | 배포 시 Phala의 현재 릴리스인 `dstack-0.5.12`의 프로덕션 빌드를 요청합니다. |
+| dstack 게이트웨이가 꺼져 있는 상태에서는 CVM 세부 정보에 `instance_id`가 표시되지 않습니다. | 배포가 30분 동안 대기한 후 실패합니다 | 인스턴스 ID는 CVM 상태에서 읽어옵니다. |
+| 재시작, 중지 및 시작은 CVM 작업이며, 애플리케이션 수정 사항이 아닙니다. | `provider_actions`에는 재시작 내역이 표시되지 않았습니다. | 읽기 작업도 수행됩니다. |
+
+세 번째 배포:
+
+- CVM은 SSH 액세스를 비활성화한 상태에서 `dstack-0.5.12`를 실행했습니다. 수집기는 생성 후 약 1.5분 후에 서명된 주소를 게시했습니다. 이후 배포는 `tdx_binding`, `tdx_quote`(Intel TCB UpToDate, 하드웨어 증명 기록 v4, FMSPC `20a06f000000`, 디버그 모드 아님, 마이그레이션 불가, Intel에서 가져온 암호화 검증 데이터 지원), `tdx_compose_hash`, `tdx_compose`(바이트 단위) 및 `tdx_identity`(KMS 키)를 통과했습니다.
+- trycloudflare.com 주소의 패널은 토큰이 없거나 잘못된 토큰을 입력했을 때 401을 반환했고, 패널 토큰을 입력했을 때는 200을 반환했습니다.
+- `verify`에서 `--source`는 GitHub의 커밋 아카이브로 설정되었으며, 지문은 별도로 통과되었습니다: 서버, `server_state`, 방화벽(게이트웨이 없음, 공용 엔드포인트 없음), 공급자 로그, 명세서, 지문, 소스 해시, 부팅 및 5가지 `tdx_*` 검사가 통과되었습니다. Cloudflare 및 `tdx_os`는 사용할 수 없었으므로 결과는 'INCOMPLETE'로 나타났습니다.
+- Phala의 API를 통해 두 번 재시작: 매번 CVM은 2분 이내에 동일한 수집기 키, 새로운 서명된 주소, 그리고 530 응답을 반환하는 기존 주소와 함께 복구되었습니다. `verify`는 새로운 부팅과 두 번의 재시작을 모두 REVIEW로 보고했습니다. `--evidence`를 통해 저널 서명과 세 번의 시작이 확인되었으며, 각 시작마다 동일한 CVM에서 생성된 고유한 Intel TDX 하드웨어 인증 기록이 있었습니다.
+- `destroy`는 해당 CVM만 제거했습니다. 그 후 작업 공간은 비어 있었고, 패널 주소는 응답을 중단했습니다.
+- 패널 마법사의 가격 확인 결과, `tdx.small`의 시간당 요금은 0.058달러로 표시되었습니다. 잘못된 키를 입력했을 때는 단순히 "API 키를 수락하지 않았습니다"라는 메시지가 표시되었습니다.
+
+이후 수정된 두 가지 추가 발견 사항:
+
+- 주소 키가 없으면, `verify`는 주소 주제에 대한 가장 최근의 올바른 형식의 게시물을 따랐는데, 이는 게시된 Docker Compose 구성에 인쇄되어 있습니다. 한 건의 위조된 게시물이 이를 존재하지 않는 호스트로 보냈고, `statement`는 실패했습니다: 위조자는 수집자로 위장할 수는 없었지만, 제3자 검증을 최대 12시간 동안 위조된 미래 타임스탬프를 사용하여 차단할 수 있었습니다. 이제 수집기는 자신의 키로 서명된 주소 게시물도 올리며, `verify`는 수집기가 직접 작성한 게시물만 수용하며, 게시물은 ntfy.sh의 수신 시간 순으로 정렬됩니다. [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py)는 위조된 게시물을 재실행합니다. CVM은 이를 포함하는 커밋에서만 이 코드를 실행하므로, 이번 실행의 수집기는 아직 자신의 주소에 서명하지 않았고 `verify`가 이를 알렸습니다.
+- `tdx_os`는 `dstack-mr` 없이는 실행할 수 없었습니다. 해당 도구의 현재 버전에는 문서에 나온 `measure --json` 대신 `measure-os`가 있습니다. 검증기는 이제 공개된 이미지와 ACPI 테이블을 포함한 VM 구성으로부터 MRTD 및 RTMR0-2를 직접 계산합니다.
+
+다음 요소들을 포함한 네 번째 배포:
+
+- Deploy는 게시된 `dstack-0.5.12`를 한 번 다운로드하여 CVM이 보고한 OS 이미지 해시와 대조한 결과, `tdx_os`가 통과되었습니다: MRTD, RTMR0, RTMR1 및 RTMR2 값이 QEMU 8.2.2, 1 vCPU 및 2 GiB 조건에서 계산된 값과 일치했습니다. 동일한 계산에서 4 GiB, 2 vCPU, QEMU 9.2.1 또는 두 번째 네트워크 카드를 지정했을 때는 다른 RTMR0 값이 산출되었으며, 커널, 펌웨어 또는 명령줄이 변경된 경우 및 개발용 이미지의 경우에는 테스트에 실패했습니다.
+- `verify`는 퀵 터널의 커넥터를 포함하여 16가지 검사 항목을 모두 통과했으므로, 결과는 PASS였습니다. 이 시스템은 HTML 및 PDF 인증서를 생성했으며, 벨기에 정부의 타임스탬프 기관인 TSU 202301(벨기에 신뢰 목록에 등재된 상태)에서 발급한 적격 eIDAS 타임스탬프, FreeTSA 타임스탬프 및 검증자의 서명으로 디지털 봉인했습니다. `check-report`는 이 모든 항목과 PDF의 서명을 확인했습니다.
+- 재시작 후, `verify --evidence`는 두 번의 시작을 확인했으며, 각 시작 시 CVM 내에서 생성된 하드웨어 인증이 동반되었고, 각각 게시된 `dstack-0.5.12`에서 부팅되었습니다. 재시작과 새로운 부팅 모두 REVIEW 상태였습니다.
+- `destroy`는 작업 공간을 비워 두었습니다.
+
+다섯 번째 배포에서는 위 항목들을 모두 포함하는 `53a0f7e9` 커밋의 컬렉터를 실행했습니다:
+
+- 수집기는 운영자의 HMAC 게시물 바로 옆에 자체 키로 서명된 주소를 게시했습니다. 그 후 해당 토픽에 두 개의 위조된 게시물이 추가되었는데, 하나는 HMAC 값이 0으로 설정된 것이고 다른 하나는 다른 Ed25519 키로 서명된 것이었으며, 둘 다 2096년의 시간을 주장하고 있었습니다. `verify`는 수집자 키로 서명된 주소를 가져와 16가지 검사 항목을 모두 통과했습니다. 이 인장에는 다시 한 번 벨기에의 공인 타임스탬프, FreeTSA의 타임스탬프 및 검증자의 서명이 포함되어 있었으며, `check-report`가 이를 확인했습니다.
+- 재시작 후, 수집기가 서명된 새 주소를 게시했습니다: `verify`가 이를 즉시 발견했고, 운영자의 **는 현재 주소를 찾았으며,**는 HMAC 게시물로부터 27초 후에 이를 확인했고, 둘 다 위조된 게시물을 무시했습니다. `verify --evidence`는 `dstack-0.5.12`에서 부팅된 두 대의 기기를 확인했습니다.
+- 배포 결과에는 Phala가 CVM에 청구하는 금액(디스크 포함)이 표시되었습니다: 시간당 $0.06078.
+
+패널 마법사는 Phala Cloud에서 두 번 실행되었습니다. 한 번은 작업 API를 통해, 다른 한 번은 실제 Chromium을 사용하는 브라우저를 통해 실행되었습니다: 가격 확인, **Advanced** 아래의 커밋을 통한 생성, 6가지 인증 검사 모두 통과, 청구 가격(월 44.37 USD)이 표시된 서버 목록, **Find 현재 주소**, 측정된 Docker Compose 구성 다운로드 및 삭제. 브라우저에서는 페이지 오류가 발생하지 않았습니다. 매번 작업 공간은 그 후 비어 있었습니다.
+
+포함되지 않은 항목: Phala의 Cloudflare 도메인, CVM의 Telegram 계정, `dstack-0.6.1` 이미지. 생성 전 마법사의 가격은 Phala의 컴퓨팅 요금만 반영됩니다. 이는 API가 기존 CVM에 대해서만 디스크 요금을 명시하기 때문이며, 서버 목록에는 생성 후 청구된 가격이 표시됩니다.
+
 ## Live server journal inventory · 1 November 2026
 
 At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.
