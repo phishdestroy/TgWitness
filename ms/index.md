@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/
 
-[Sumber terbuka ／ v0.9.0](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/)
+[Sumber terbuka ／ v0.9.1](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/)
 
 Simpan sembang Telegram bersama setiap suntingan dan pemadaman， kemudian serahkan rekod yang boleh disemak oleh sesiapa sahaja．
 
@@ -262,7 +262,7 @@ Buka [127.0.0.1:8787](http://127.0.0.1:8787) selepas pelancaran．
 
 Pemasangan daripada sumber menyimpan token dalam `data/live/panel-token.txt`． Pasangan API anda sendiri daripada [my.telegram.org](https://my.telegram.org) adalah pilihan． [Panduan persediaan penuh ↗](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)
 
-**TgWitness 0.9.0** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/) · [Ciri－ciri dan had yang diketahui →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/)
+**TgWitness 0.9.1** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/) · [Ciri－ciri dan had yang diketahui →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/)
 
 ## Arahan yang jelas． Langkah seterusnya yang berguna．
 

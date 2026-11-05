@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/
 
-[開源 ／ v0.9.0](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/)
+[開源 ／ v0.9.1](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/)
 
 保存 Telegram 聊天室及每一次編輯和刪除，然後交出任何人都能核對的紀錄。
 
@@ -262,7 +262,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 從原始碼安裝時，權杖位於 `data/live/panel-token.txt`。您自己的 API 憑證（來自 [my.telegram.org](https://my.telegram.org)）為選用。[完整安裝指南 ↗](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
 
-**TgWitness 0.9.0** [最新動態 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/) · [功能與已知限制 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/)
+**TgWitness 0.9.1** [最新動態 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/) · [功能與已知限制 →](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/)
 
 ## 清晰的操作指引。實用的下一步建議。
 

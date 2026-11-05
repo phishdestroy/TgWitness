@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/
 
-[Open source ／ v0.9.0](https://phishdestroy.github.io/TgWitness/fr/docs/reference/changelog/)
+[Open source ／ v0.9.1](https://phishdestroy.github.io/TgWitness/fr/docs/reference/changelog/)
 
 Enregistrez les chats Telegram avec chaque modification et suppression， puis transmettez un enregistrement que tout le monde peut vérifier．
 
@@ -262,7 +262,7 @@ Ouvrez le port [127.0.0.1:8787](http://127.0.0.1:8787) après le lancement．
 
 Pour une installation depuis les sources， le jeton se trouve dans `data/live/panel-token.txt`． Votre propre paire d＇API de [my.telegram.org](https://my.telegram.org) est facultative． [Guide complet ↗](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/)
 
-**TgWitness 0.9.0** [Quoi de neuf →](https://phishdestroy.github.io/TgWitness/fr/docs/reference/changelog/) · [Fonctionnalités et limites connues →](https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/)
+**TgWitness 0.9.1** [Quoi de neuf →](https://phishdestroy.github.io/TgWitness/fr/docs/reference/changelog/) · [Fonctionnalités et limites connues →](https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/)
 
 ## Des instructions claires． Une prochaine étape utile．
 

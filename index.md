@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/
 
-[Open source ／ v0.9.0](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/)
+[Open source ／ v0.9.1](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/)
 
 keep what
 you saw．
@@ -268,7 +268,7 @@ Open [127.0.0.1:8787](http://127.0.0.1:8787) after launch．
 
 Source installs keep the token in `data/live/panel-token.txt`， and you can optionally use your own API pair from [my.telegram.org](https://my.telegram.org)． [Full setup guide ↗](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
 
-**TgWitness 0.9.0** [What＇s new →](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/) · [Features and known limits →](https://phishdestroy.github.io/TgWitness/docs/reference/features/)
+**TgWitness 0.9.1** [What＇s new →](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/) · [Features and known limits →](https://phishdestroy.github.io/TgWitness/docs/reference/features/)
 
 ## Clear instructions
 for your next step．

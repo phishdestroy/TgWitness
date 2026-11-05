@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/
 
-[Open Source ／ v0.9.0](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/)
+[Open Source ／ v0.9.1](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/)
 
 Speichern Sie Telegram－Chats mit jeder Bearbeitung und Löschung und geben Sie einen Datensatz weiter， den jeder prüfen kann．
 
@@ -262,7 +262,7 @@ Der zweite Befehl zeigt Ihr privates Panel－Token an． Bewahren Sie es auf Ihr
 
 Bei Installation aus dem Quellcode liegt das Token in `data/live/panel-token.txt`． Ein eigenes API－Paar von [my.telegram.org](https://my.telegram.org) ist optional． [Vollständige Anleitung ↗](https://phishdestroy.github.io/TgWitness/de/docs/reference/quickstart/)
 
-**TgWitness 0.9.0** [Was gibt＇s Neues →](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/) · [Funktionen und bekannte Einschränkungen →](https://phishdestroy.github.io/TgWitness/de/docs/reference/features/)
+**TgWitness 0.9.1** [Was gibt＇s Neues →](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/) · [Funktionen und bekannte Einschränkungen →](https://phishdestroy.github.io/TgWitness/de/docs/reference/features/)
 
 ## Klare Anweisungen． Ein nützlicher nächster Schritt．
 

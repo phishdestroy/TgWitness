@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/
 
-[Открытый исходный код ／ v0.9.0](https://phishdestroy.github.io/TgWitness/ru/docs/reference/changelog/)
+[Открытый исходный код ／ v0.9.1](https://phishdestroy.github.io/TgWitness/ru/docs/reference/changelog/)
 
 Сохраняйте чаты Telegram со всеми правками и удалениями и передавайте запись， которую может проверить кто угодно．
 
@@ -262,7 +262,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 При установке из исходников токен лежит в `data/live/panel-token.txt`． Своя пара API с [my.telegram.org](https://my.telegram.org) не обязательна． [Полная инструкция ↗](https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/)
 
-**TgWitness 0.9.0** [Что нового →](https://phishdestroy.github.io/TgWitness/ru/docs/reference/changelog/) · [Возможности и известные ограничения →](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/)
+**TgWitness 0.9.1** [Что нового →](https://phishdestroy.github.io/TgWitness/ru/docs/reference/changelog/) · [Возможности и известные ограничения →](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/)
 
 ## Четкие инструкции． Полезный следующий шаг．
 

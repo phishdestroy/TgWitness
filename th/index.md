@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/
 
-[โอเพนซอร์ส ／ v0.9.0](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/)
+[โอเพนซอร์ส ／ v0.9.1](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/)
 
 บันทึกแชท Telegram พร้อมทุกการแก้ไขและการลบ แล้วส่งมอบบันทึกที่ใครก็ตรวจสอบได้
 
@@ -262,7 +262,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 การติดตั้งจากซอร์สเก็บโทเค็นไว้ที่ `data/live/panel-token.txt` คู่ API ของคุณเองจาก [my.telegram.org](https://my.telegram.org) เป็นตัวเลือก [คู่มือการตั้งค่าฉบับเต็ม ↗](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
 
-**TgWitness 0.9.0** [มีอะไรใหม่ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/) · [คุณสมบัติและข้อจำกัดที่ทราบ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
+**TgWitness 0.9.1** [มีอะไรใหม่ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/) · [คุณสมบัติและข้อจำกัดที่ทราบ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
 
 ## คำแนะนำที่ชัดเจน ขั้นตอนต่อไปที่มีประโยชน์
 

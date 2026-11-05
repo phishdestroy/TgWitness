@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/
 
-[اوپن سورس ／ v0.9.0](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/)
+[اوپن سورس ／ v0.9.1](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/)
 
 Telegram چیٹس کو ہر ترمیم اور حذف کے ساتھ محفوظ کریں، پھر ایسا ریکارڈ حوالے کریں جسے کوئی بھی جانچ سکے۔
 
@@ -262,7 +262,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 سورس سے انسٹال میں ٹوکن `data/live/panel-token.txt` میں ہوتا ہے۔ [my.telegram.org](https://my.telegram.org) سے اپنا API جوڑا اختیاری ہے۔ [مکمل سیٹ اپ گائیڈ ↗](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
 
-**TgWitness 0.9.0** [کیا نیا ہے →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/) · [خصوصیات اور معلوم حدود →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
+**TgWitness 0.9.1** [کیا نیا ہے →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/) · [خصوصیات اور معلوم حدود →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
 
 ## واضح ہدایات۔ ایک مفید اگلا قدم۔
 
