@@ -2,8 +2,10 @@
 import platform
 import re
 import unicodedata
+from datetime import datetime, timezone
 
 from telethon import TelegramClient
+from telethon.tl import functions, types
 
 from . import api_pool
 
@@ -88,6 +90,34 @@ def resolve(api_id, supplied=None, seed=""):
     profile.update(api_pool.device_for(api_id, seed, supplied))
     profile.update(supplied)
     return validate(profile)
+
+
+def desktop_timezone(now=None):
+    """Desktop's quarter-hour offset; see opentele2-core/src/fingerprint.rs (MIT)."""
+    offset = (now or datetime.now(timezone.utc).astimezone()).utcoffset()
+    seconds = int(offset.total_seconds()) if offset is not None else 0
+    while seconds < -43200:
+        seconds += 86400
+    while seconds > 50400:
+        seconds -= 86400
+    rounded = (abs(seconds) + 450) // 900 * 900
+    return -rounded if seconds < 0 else rounded
+
+
+def apply_init_params(client):
+    request = getattr(client, "_init_request", None)
+    if not isinstance(request, functions.InitConnectionRequest):
+        return
+    supplied = getattr(client, "tgwitness_client_profile", {})
+    if "tz_offset" in supplied:
+        offset = supplied["tz_offset"]
+    elif request.lang_pack == "tdesktop":
+        offset = desktop_timezone()
+    else:
+        return
+    values = request.params.value if isinstance(request.params, types.JsonObject) else []
+    request.params = types.JsonObject([value for value in values if value.key != "tz_offset"] +
+                                     [types.JsonObjectValue("tz_offset", types.JsonNumber(offset))])
 
 
 def consistency_warnings(api_id, profile, layer):

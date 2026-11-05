@@ -79,6 +79,13 @@ request stops the sequence without retrying or discarding the login. Results are
 recorded as `account.initialized`, with error names rather than response bodies.
 The sequence is not a guarantee against account restrictions.
 
+For `tdesktop`, a missing `tz_offset` uses the server's local UTC offset, rounded
+to 900 seconds using the [opentele2 algorithm](https://github.com/DedInc/opentele2/blob/7e973bc71cd7a714ad13ac703c0895a90d36a735/crates/opentele2-core/src/fingerprint.rs)
+(MIT; license in `tgwitness/client_profiles.LICENSE`). It is refreshed on each
+connection so daylight-saving changes are reflected. An imported `tz_offset`
+takes precedence on every platform and is kept exactly, including zero. Other
+`initConnection.params` entries are retained.
+
 Before connection, advisory checks compare the API platform, language pack,
 device/OS and app-version formats, mobile system locale, and Telethon's actual
 schema layer against the reviewed catalog baseline. Warnings appear in the server

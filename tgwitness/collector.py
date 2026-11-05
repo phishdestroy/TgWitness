@@ -671,8 +671,7 @@ class Collector:
         request = getattr(client, "_init_request", None)
         if isinstance(request, functions.InitConnectionRequest):
             request.lang_pack = device["lang_pack"]
-            if "tz_offset" in device:
-                request.params = types.JsonObject([types.JsonObjectValue("tz_offset", types.JsonNumber(device["tz_offset"]))])
+            client_identity.apply_init_params(client)
         def rpc_error(exc):
             self.handle_authorization_error(exc, "Telegram RPC", client=client)
         client.rpc_error_handler = rpc_error

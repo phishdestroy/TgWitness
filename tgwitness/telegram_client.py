@@ -16,6 +16,11 @@ _ACTIONS = (functions.messages.GetBotCallbackAnswerRequest,
 
 class WitnessClient(TelegramClient):
 
+    async def connect(self):
+        from .client_identity import apply_init_params
+        apply_init_params(self)
+        return await super().connect()
+
 
     @property
     def _request_retries(self):
