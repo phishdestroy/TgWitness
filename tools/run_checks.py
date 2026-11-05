@@ -24,7 +24,7 @@ SUITES = {
         "check_operator_security.py", "check_operator_browser.py",
         "check_guided_connection.py", "check_guided_connection_browser.py",
         "check_session_reservations.py", "check_account_recovery.py",
-        "test_session_import.py",
+        "check_client_identity.py", "check_connection_regressions.py", "test_session_import.py",
         "check_browser.py", "check_mcp_transport.py", "check_integrations_browser.py",
         "check_mcp_browser.py", "check_settings_browser.py", "check_analysis_browser.py",
         "check_account_browser.py", "check_fleet_browser.py", "check_proxy_async_browser.py",
