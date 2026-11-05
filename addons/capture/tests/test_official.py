@@ -1,8 +1,12 @@
 import asyncio
 import json
+import socket
+import threading
+import time
 
 import pytest
 from fastapi.testclient import TestClient
+import uvicorn
 
 from tgwitness_capture.format import canonical
 from tgwitness_capture.journal import Journal
@@ -90,6 +94,97 @@ def test_egress_change_and_unavailable_probe_stop(tmp_path):
         asyncio.run(exercise())
     finally:
         journal.close()
+
+
+def test_official_panel_login_selection_export_and_languages(tmp_path, request):
+    if not request.config.getoption("--capture-browser"):
+        pytest.skip("Use --capture-browser for the real panel test")
+    from playwright.sync_api import expect, sync_playwright
+    from tgwitness_capture.verify import verify_zip
+    root = tmp_path / "panel"
+    app = create_app(root, Config(official={"proxy_server": "http://127.0.0.1:9", "require_video": False}))
+    sock = socket.socket()
+    sock.bind(("127.0.0.1", 0))
+    server = uvicorn.Server(uvicorn.Config(app, access_log=False, log_level="warning", timeout_graceful_shutdown=5))
+    thread = threading.Thread(target=server.run, kwargs={"sockets": [sock]}, daemon=True)
+    thread.start()
+    try:
+        deadline = time.monotonic() + 10
+        while not server.started and time.monotonic() < deadline:
+            time.sleep(.05)
+        assert server.started
+        adapter = app.state.recorder.official
+        adapter.headless = True
+        real_route = adapter._route
+
+        async def fixture_route(route):
+            class FixtureRoute:
+                request = route.request
+
+                async def continue_(self):
+                    await route.fulfill(status=200, content_type="text/html", body=FIXTURE)
+
+                async def abort(self, error):
+                    await route.abort(error)
+            await real_route(FixtureRoute())
+
+        async def probe():
+            adapter.exit_ip = "203.0.113.7"
+            adapter.checked_route = time.monotonic()
+
+        adapter._route, adapter.check_route = fixture_route, probe
+        with sync_playwright() as runtime:
+            browser = runtime.chromium.launch()
+            page = browser.new_page(viewport={"width": 1440, "height": 1000})
+            errors = []
+            page.on("pageerror", lambda error: errors.append(str(error)))
+            page.goto("http://127.0.0.1:" + str(sock.getsockname()[1]))
+            page.locator("#token").fill((root / "control-token.txt").read_text())
+            page.locator("#login-form button").click()
+            expect(page.locator("#workspace")).to_be_visible()
+            page.locator("#language").select_option("ru")
+            expect(page.locator("h1")).to_have_text("Свидетель в официальном клиенте")
+            page.locator("#plan-form button").click()
+            expect(page.locator("#client-section")).to_be_visible(timeout=15000)
+            page.locator("#chats-refresh").click()
+            expect(page.locator("#chats option")).to_have_count(1)
+            page.locator("#chat-select").click()
+            expect(page.locator("#toggle")).to_be_enabled()
+            page.locator("#toggle").click()
+            expect(page.locator("#snapshot")).to_be_enabled()
+            page.locator("#snapshot").click()
+            expect(page.locator("#events")).to_contain_text("capture.saved")
+            page.locator("#toggle").click()
+            expect(page.locator("#snapshot")).to_be_disabled()
+            with page.expect_download() as saved:
+                page.locator("#selection").click()
+            selected = tmp_path / "selected.json"
+            saved.value.save_as(selected)
+            # Observe action completion instead of overlapping two API commands.
+            expect(page.locator("#export")).to_be_enabled()
+            with page.expect_download() as saved:
+                page.locator("#export").click()
+            archive = tmp_path / "official.zip"
+            saved.value.save_as(archive)
+            result = verify_zip(archive, expected_settings=json.loads(selected.read_bytes()))
+            assert result["official"]["settings_checked"]
+            assert "procedure_not_finished" in result["official"]["reasons"]
+            page.screenshot(path=str(tmp_path / "official-panel-ru.png"), full_page=True)
+            for language in ("en", "ru"):
+                page.locator("#language").select_option(language)
+                for width in (320, 390, 1440):
+                    page.set_viewport_size({"width": width, "height": 900})
+                    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+            page.set_viewport_size({"width": 390, "height": 900})
+            page.screenshot(path=str(tmp_path / "official-panel-mobile.png"), full_page=True)
+            assert not errors
+            assert "Alice <script>" in page.locator("#selected").inner_text()
+            browser.close()
+    finally:
+        server.should_exit = True
+        thread.join(45)
+        sock.close()
+        assert not thread.is_alive()
 
 
 # Synthetic DOM using the reviewed official client's public element boundaries.
