@@ -1801,15 +1801,18 @@ function renderHistory(){
   $("history-media").textContent=exists?tr("Attachments: {done} saved, {pending} pending, {failed} failed. Unavailable messages: {missing}.",{
     done:h.media?.done||0,pending:h.media_pending||0,failed:h.media?.failed||0,missing:h.unavailable||0}):"";
   $("history-wait").textContent=h.wait_until>Date.now()/1000?
-    "Telegram wait until "+new Date(h.wait_until*1000).toLocaleString():
-    exists&&h.pacing?.delay_seconds?"Account request spacing: "+Number(h.pacing.delay_seconds).toFixed(1)+" s":"";
+    tr("Telegram wait until {time}",{time:new Date(h.wait_until*1000).toLocaleString()}):
+    exists&&h.pacing?.delay_seconds?tr("Account request spacing: {seconds} s",{seconds:Number(h.pacing.delay_seconds).toFixed(1)}):"";
   const list=$("history-sources");list.replaceChildren();
   const phases={queued:tr("Queued"),reading:tr("Reading history"),complete:tr("History reading finished"),
     failed:tr("Failed"),skipped:tr("Skipped")};
   for(const source of h.sources||[]){
     const admin=["before","after"].map(stage=>{
       const p=source.metadata?.["admin_"+stage];
-      return p?"Recent Actions ("+stage+"): "+p.status+" · "+p.observed+(p.error?" · "+p.error:""):"";
+      const status={reading:tr("Reading"),complete:tr("Complete"),unavailable:tr("Unavailable"),not_applicable:tr("Not applicable")};
+      return p?tr("Recent Actions ({stage}): {status} · {count}",{
+        stage:stage==="before"?tr("Before history"):tr("After history"),status:status[p.status]||p.status,count:p.observed})+
+        (p.error?" · "+p.error:""):"";
     }).filter(Boolean).join(" · ");
     list.append(node("li","",source.title+" · "+(phases[source.phase]||source.phase)+" · "+source.captured+
       (source.error?" · "+tr(source.error):"")+(admin?" · "+admin:"")));
