@@ -583,6 +583,7 @@ class DistributedExport:
             scratch, ranges = await self.finish_selection(directory, Selection.model_validate(self.job["selection"]))
             meta = {"chat": {**self.job["chat"], "profile": profile, "profile_errors": problems},
                     "observer": observer, "admin_log": log, "recheck": self.recheck,
+                    "journal": chat_export.journal_changes(lead.store, self.job["chat_id"]),
                     "account": lead.store.get_setting("account", {}),
                     "client": lead.client_identity(), "route": lead.route_receipt(),
                     "message_count": self.state["counts"]["selected"], "parts": self.sign_parts(ranges),

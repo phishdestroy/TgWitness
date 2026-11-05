@@ -2545,6 +2545,7 @@ class Collector:
                              "visibility": info.get("visibility"), "profile": profile,
                              **({"profile_errors": problems} if problems else {})},
                     "observer": observer, "recheck": recheck, "admin_log": log,
+                    "journal": chat_export.journal_changes(self.store, chat_id),
                     "account": self.store.get_setting("account", None), "message_count": count,
                     "client": self.client_identity(), "route": self.route_receipt(),
                     "acquisition": {"started_at": record.get("started_at"), "finished_at": utcnow(),

@@ -9,7 +9,7 @@ import pytest
 from telethon.errors import FloodWaitError, TypeNotFoundError
 from telethon.tl import types
 
-from tgwitness import distributed_export, settings_hub, telegram_client
+from tgwitness import chat_export, distributed_export, settings_hub, telegram_client
 from tgwitness.account_export import AccountExport
 from tgwitness.collector import Collector, UnreadableHistory, message_record
 from tgwitness.message_selection import Selection, SelectionIndex, detect_language
@@ -658,6 +658,29 @@ def test_range_failing_on_two_accounts_stops_without_losing_accounts(tmp_path, m
             assert "3–4" in manager.state["error"] and "unusable answer" in manager.state["error"], manager.state["error"]
             assert all(w["state"] == "done" for w in manager.state["workers"]), manager.state["workers"]
             assert manager.state["ranges_done"] == 3
+        finally:
+            await manager.close()
+            close_entries(entries)
+    asyncio.run(scenario())
+
+
+def test_export_names_deletions_kept_in_the_journal(tmp_path, monkeypatch):
+    async def scenario():
+        manager, entries = coordinator(tmp_path, [message(i) for i in (1, 2, 3)])
+        store = entries["account0"]["app"].state.store
+        store.append("message.deleted", {"message_id": 4, "text": "Removed after it was observed."}, CHAT)
+        monkeypatch.setattr(distributed_export, "CHUNK", 2)
+        monkeypatch.setattr(distributed_export.replica, "outbox", lambda *args: None)
+        try:
+            state = await manager.start(CHAT, list(entries), "account0")
+            await asyncio.wait_for(manager.task, 60)
+            assert manager.state["phase"] == "done", manager.state
+            with zipfile.ZipFile(manager.result_path(state["id"])) as archive:
+                manifest = json.loads(archive.read("manifest.json"))
+                header = json.loads(archive.read("chat.json"))
+            assert manifest["journal"]["deleted"] == 1 and header["journal"]["deleted"] == 1
+            assert chat_export.JOURNAL_LIMIT in manifest["limitations"]
+            assert not any("cannot be recovered and are not present" in line for line in manifest["limitations"])
         finally:
             await manager.close()
             close_entries(entries)
