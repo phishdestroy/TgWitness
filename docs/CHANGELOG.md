@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.9.1 preview · 4 November 2026
+## 0.9.1 preview · 5 November 2026
 
 - Preserve signed message pages before requesting files or hashes. Resume from frozen history, retain completed attachments, and finish an interrupted export with explicit gaps when time or disk is limited.
 - Add Telegram Desktop compatible JSON/HTML views alongside authoritative signed data. GitHub capture supports full-account and selected-chat exports through regular API or Takeout, with chat types, dates and media settings.
@@ -14,6 +14,8 @@
 - Require sealed-container validation in the release workflow. Phala deployment status now distinguishes verified, incomplete and review-required attestation instead of inferring trust from the provider name.
 - Validate every sealed-container build input against its pinned source. Retry transient package downloads up to three times while retaining signature, SHA-256 and exact-package checks before offline installation.
 - Include the hash-export configuration examples in source archives and preserve the translated documentation and required site assets from the latest main revision.
+- Keep the current tunnel address when an older signed address post is replayed.
+  Signed posts are ordered by their signed time; unsigned posts use the relay's receive time.
 
 ## 0.9.0 preview · 4 November 2026
 
