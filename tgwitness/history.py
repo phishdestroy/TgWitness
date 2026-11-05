@@ -192,6 +192,13 @@ class History:
                     await self.collector.restore()
                     await asyncio.wait_for(HistoryTransport(self, run).finish(False),
                                            self.collector.param("operation_timeout_seconds"))
+                    with self.store.transaction():
+                        pending = list(self.store.db.execute("SELECT j.* FROM media_jobs j JOIN history_items h "
+                            "ON h.message_event=j.message_event JOIN events e ON e.seq=j.message_event "
+                            "WHERE h.run_id=? AND j.state IN ('queued','retry') "
+                            "AND json_extract(e.payload,'$.acquisition.source_mode')='takeout'", (run["id"],)))
+                        for job in pending:
+                            self.store.finish_media(dict(job), "skipped", {"reason": "operator ended Takeout acquisition"})
                 self.transition(run["id"], "cancelled", "operator_cancel; observations already saved are retained")
                 retain_checkpoint(self.store, self.collector.vault)
             finally:
@@ -291,6 +298,9 @@ class History:
                         self.transition(run_id, "paused", "authorization_required")
                         return
                     state = self.status()
+                    if self.transport and state["media_pending"]:
+                        self.transition(run_id, "paused", "takeout_media_pending; enable its sources and media policy to resume")
+                        return
                     with self.store.lock:
                         admin_gaps = any(any(v.get("status") == "unavailable" for k, v in json.loads(r[0]).items()
                                             if k.startswith("admin_")) for r in self.store.db.execute(

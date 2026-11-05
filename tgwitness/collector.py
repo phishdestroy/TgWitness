@@ -2767,6 +2767,7 @@ class Collector:
             limits = {"max_priority": 1} if lane == "urgent" else {"min_priority": 2} if lane == "bulk" else {}
             capture = capture_settings(self.store)
             job = self.store.claim_media(account.get("id", 0), history_run=history_run,
+                                         allow_takeout=client_for_job is not None,
                                          **limits) if capture["download_media"] else None
             if not job:
                 if owner:

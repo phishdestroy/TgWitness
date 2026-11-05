@@ -32,7 +32,8 @@ evidence contract](BACKFILL.md) for transport, retry and trust details.
 - FloodWait delays respect the saved account backoff. Transient failures retry up to
   five times; exhaustion and low disk space pause with the cursor intact.
 - **End this history run** preserves saved observations. It does not remove them or
-  cancel already queued attachment downloads. A new run reads enabled sources anew.
+  cancel standard-API attachment jobs. Ending Takeout marks its remaining Takeout
+  files as skipped; pausing keeps them resumable. A new run reads enabled sources anew.
 
 History completion describes history reads only. Attachments may remain pending,
 fail, or be excluded by the configured policy. Check media receipts in the journal

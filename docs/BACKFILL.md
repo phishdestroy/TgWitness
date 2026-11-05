@@ -63,6 +63,11 @@ failure or pending work. Ending an unfinished run closes Takeout without the suc
 flag and preserves observations. No claim is made about a fixed maximum approval delay,
 unlimited export volume or immunity from FloodWait.
 
+Paused Takeout attachments stay assigned to that acquisition; ordinary observation
+workers cannot silently download them through the standard API. Pending files caused
+by disabled sources or media settings pause Takeout completion until those settings
+are restored. Ending the run explicitly marks its remaining Takeout files as skipped.
+
 ## Durable observations and media
 
 Each message observation, original media descriptor, routing index and cursor commitment

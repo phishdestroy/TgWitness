@@ -484,11 +484,29 @@ def test_takeout_media_authorization_loss_pauses_and_retains_queue(tmp_path):
             state = await finished(c.history)
             assert state["phase"] == "paused" and state["reason"] == "authorization_required", state
             assert c.authorization_required and state["media_pending"] == 1
+            assert store.claim_media(44) is None, "Ordinary workers must not bypass the chosen Takeout transport"
             c.cleanup_rejected_authorization.assert_awaited_once_with(c.client)
             assert not any(isinstance(r, f.InvokeWithTakeoutRequest) and
                 isinstance(r.query, f.account.FinishTakeoutSessionRequest) for r in c.client.rpc)
         finally:
             await c.wait_authorization_cleanup()
+            store.close()
+    asyncio.run(run())
+
+
+def test_cancelled_takeout_marks_pending_files_skipped(tmp_path):
+    async def run():
+        c, store = make(tmp_path, [media_message(3)])
+        c.client.block_media = True
+        try:
+            await c.history.start(HistoryOptions(transport="takeout", admin_log=False))
+            await asyncio.wait_for(c.client.entered.wait(), 5)
+            await c.history.cancel()
+            state = c.history.status()
+            assert state["phase"] == "cancelled" and state["media_pending"] == 0
+            assert state["media"]["skipped"] == 1
+            assert len(store.events(kind="message.snapshot")) == 1
+        finally:
             store.close()
     asyncio.run(run())
 
