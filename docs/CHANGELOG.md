@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Keep the current tunnel address when an older signed address post is replayed.
+  Signed posts are ordered by their signed time; unsigned posts use the relay's receive time.
+
 ## 0.9.0 preview · 4 November 2026
 
 - Reserve each account exclusively for monitoring, history or an export. Serialize Telegram RPCs and persist full FloodWait deadlines.
@@ -26,9 +31,6 @@
 - Quick tunnel addresses are also posted signed with the collector key, so a verifier is not
   misled by forged posts on the address topic; on Phala Cloud the tunnel check passes, since its
   connector runs inside the measured compose.
-- Signed address posts are ordered by the time signed into them, so an old post sent to the topic
-  again does not replace the current address; unsigned posts are still ordered by ntfy.sh's
-  receive time.
 
 ## 0.8.1 preview · 2 November 2026
 

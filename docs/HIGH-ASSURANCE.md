@@ -127,8 +127,8 @@ The report is sealed, in `certificate.seal.json` and the `.tsq`/`.tsr` files bes
 | RFC 3161 time stamp, FreeTSA | A second, independent time stamp |
 | Verifier signature | Ed25519 over a statement naming the report's SHA-256 and every time stamp, with the verifier's own key (`--sign-with FOLDER`, default `~/.tgwitness/verifier`); the PDF carries a signature by the same key |
 
-`--timestamp URL` (repeatable) chooses other authorities, `--timestamp none` none,
-`--sign-with none` leaves the seal unsigned. `check-report` checks the report's hash, the verifier signature,
+`--timestamp URL` (repeatable) chooses other authorities, `--timestamp none` none, `--sign-with
+none` leaves the seal unsigned. `check-report` checks the report's hash, the verifier signature,
 each time stamp to a trusted root and its qualified status, and the PDF's signature. The legal
 weight of a qualified time stamp outside the EU, and of the report as a whole, is for the court
 or authority that receives it; the seal shows when the report existed and that it has not changed.
@@ -204,10 +204,9 @@ published cloud-init: whoever has them can read the current address, which still
 panel token. The server keeps no inbound port either way.
 
 A verifier has no address key, and anyone who reads the topic can post to it. So the collector
-also posts the address itself, signed with its own Ed25519 key, and `verify` takes, of the posts
-signed by the collector key in the deployment record, the one with the latest signed time, so an
-old post sent again stays old. Unsigned posts are ordered by the time ntfy.sh received them, not
-the time they claim. A collector from before this change signs nothing, and
+also posts the address itself, signed with its own Ed25519 key, and `verify` takes the newest
+post signed by the collector key in the deployment record; posts are ordered by the time ntfy.sh
+received them, not the time they claim. A collector from before this change signs nothing, and
 `verify` then takes the newest post and says so in the `statement` check; a forged post can
 only make that check fail, since the address must still answer with the collector's key.
 

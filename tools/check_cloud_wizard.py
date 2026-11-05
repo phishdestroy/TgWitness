@@ -355,7 +355,7 @@ def check_command_line(directory):
     assert found["host"] == "collector-signed-here.trycloudflare.com" and found["signer"] == "collector", found
     assert cloud.read_beacon(record["beacon"], key, world)["host"] == "bright-words-here.trycloudflare.com"
     assert cloud.read_beacon(record["beacon"], session=world)["host"] == "forged-future-here.trycloudflare.com"
-    # Genuine old posts sent again arrive last but stay old: signed posts are ordered by the time they were signed.
+    # Replaying an old signed post must not replace the current address.
     old = 1_800_000_000
     world.post(record["beacon"], assurance.address_post(host.vault, "stale-collector-here.trycloudflare.com", old))
     stale = cloud.ADDRESS_FORMAT + " stale-key-here.trycloudflare.com " + str(old)
