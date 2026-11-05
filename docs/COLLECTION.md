@@ -136,7 +136,9 @@ account asks for the usual confirmation.
 
   Chats already in the list when the mode is switched on are added without snapshots.
   A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
-  recording of the chat continues.
+  recording of the chat continues. This includes waits while resolving the new chat's
+  identity: the pending profile/history task is retained for retry, and an existing
+  longer account-wide wait is not shortened.
 - **Profiles on request.** **Chats → Profile → Save profile now** saves the current profile
   of any source; the newest one is shown above the messages.
 - **Not visible.** Inline (callback) buttons pressed in another Telegram app, the popup or

@@ -498,6 +498,8 @@ class Collector:
         except AUTHORIZATION_ERRORS as exc:
             self.handle_authorization_error(exc, "chat lookup", client=client)
             raise
+        except FLOOD_ERRORS:
+            raise
         except Exception:
             return None
 
