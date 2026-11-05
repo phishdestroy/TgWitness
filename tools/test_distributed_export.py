@@ -9,7 +9,7 @@ import pytest
 from telethon.errors import FloodWaitError, TypeNotFoundError
 from telethon.tl import types
 
-from tgwitness import chat_export, distributed_export, settings_hub, telegram_client
+from tgwitness import chat_export, distributed_export, settings_hub, telegram_client, verify
 from tgwitness.account_export import AccountExport
 from tgwitness.collector import Collector, UnreadableHistory, message_record
 from tgwitness.message_selection import Selection, SelectionIndex, detect_language
@@ -684,6 +684,35 @@ def test_export_names_deletions_kept_in_the_journal(tmp_path, monkeypatch):
         finally:
             await manager.close()
             close_entries(entries)
+    asyncio.run(scenario())
+
+
+def test_compare_finds_removed_and_edited_messages(tmp_path, monkeypatch):
+    async def export(path, rows, lead):
+        path.mkdir()
+        manager, entries = coordinator(path, rows)
+        try:
+            state = await manager.start(CHAT, [lead], lead)
+            await asyncio.wait_for(manager.task, 60)
+            assert manager.state["phase"] == "done", manager.state
+            return manager.result_path(state["id"]), entries[lead]["app"].state.vault.public_key
+        finally:
+            await manager.close()
+            close_entries(entries)
+
+    async def scenario():
+        monkeypatch.setattr(distributed_export.replica, "outbox", lambda *args: None)
+        before = [message(i) for i in range(1, 6)]
+        after = [message(1), message(2), message(4, "Rewritten after the fact."), message(5)]
+        first, key = await export(tmp_path / "t1", before, "account0")
+        second, _ = await export(tmp_path / "t2", after, "account0")
+        result = verify.compare_chat_exports(first, second, fingerprint(key))
+        assert result["method"] == "number" and result["first"]["key_pinned"], result
+        assert [row["id"] for row in result["only_first"]] == [3] and not result["only_second"]
+        assert [(c["first"]["id"], c["second"]["text"]) for c in result["changed"]] == [(4, "Rewritten after the fact.")]
+        assert result["unchanged"] == 3
+        other_side = verify.compare_chat_exports(second, (await export(tmp_path / "t3", after, "account1"))[0])
+        assert other_side["method"] == "content" and not other_side["only_first"] and not other_side["only_second"]
     asyncio.run(scenario())
 
 
