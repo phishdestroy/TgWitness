@@ -6202,5 +6202,17 @@
 "Takeout ranges changed. End this run and start a new acquisition.": "Los rangos de Takeout han cambiado. Finaliza esta sesión e inicia una nueva adquisición.",
 "Telegram wait until {time}": "Telegram espera hasta {time}",
 "The connected account differs from the signed history plan.": "La cuenta conectada difiere del plan de historial firmado.",
-"This account is busy. Pause its current task before ending history.": "Esta cuenta está ocupada. Pausa su tarea actual antes de cerrar el historial."
+"This account is busy. Pause its current task before ending history.": "Esta cuenta está ocupada. Pausa su tarea actual antes de cerrar el historial.",
+"Forget on this computer": "Olvidar en este equipo",
+"This session was imported. Signing out would end it in Telegram for good, so it is disabled. Forget on this computer removes it here and leaves it active in Telegram.": "Esta sesión se importó. Cerrar sesión la terminaría en Telegram para siempre, por eso está desactivado. «Olvidar en este equipo» la quita aquí y la deja activa en Telegram.",
+"Pause observation before forgetting the session.": "Pausa la observación antes de olvidar la sesión.",
+"Forget this session on this computer? It stays active in Telegram. The journal, sources and signing key stay; only the same account can connect to this workspace again.": "¿Olvidar esta sesión en este equipo? Seguirá activa en Telegram. El diario, las fuentes y la clave de firma se conservan; solo la misma cuenta puede volver a conectarse a este espacio de trabajo.",
+"Forgotten on this computer. The session is still active in Telegram.": "Olvidada en este equipo. La sesión sigue activa en Telegram.",
+"Message number {n} exists in Telegram but uses a data type this TgWitness version cannot decode (constructor {c}); its content is not in this export.": "El mensaje número {n} existe en Telegram, pero usa un tipo de datos que esta versión de TgWitness no puede decodificar (constructor {c}); su contenido no está en esta exportación.",
+"Numbers {a}–{b}, just below the oldest message the history listing returned, were also requested; messages found there: {n}.": "También se pidieron los números {a}–{b}, justo debajo del mensaje más antiguo que devolvió el historial; mensajes encontrados allí: {n}.",
+"{n} absent numbers were not requested; they cannot be told apart from deleted ones.": "No se pidieron {n} números ausentes; no se pueden distinguir de los eliminados.",
+"This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Esta instantánea solo contiene lo que Telegram devolvió al exportarla. El registro de este espacio de trabajo también contiene las eliminaciones o versiones anteriores observadas en este chat; exporta el registro de pruebas para incluirlas.",
+"access lost: removed or no longer readable": "Pérdida de acceso: eliminado o ya no legible",
+"The account was removed from every source or can no longer read them.": "La cuenta ha sido eliminada de todas las fuentes o ya no puede acceder a ellas.",
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "La cuenta ha sido eliminada de algunas fuentes o ya no puede acceder a ellas; no llega nada de ahí. Las demás siguen funcionando."
 }

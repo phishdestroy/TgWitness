@@ -6202,5 +6202,17 @@
 "Takeout ranges changed. End this run and start a new acquisition.": "محدوده‌های Takeout تغییر کردند. این اجرا را پایان دهید و یک جمع‌آوری جدید را آغاز کنید.",
 "Telegram wait until {time}": "تلگرام منتظر بماند تا {time}",
 "The connected account differs from the signed history plan.": "حساب متصل با طرح تاریخچه امضا شده متفاوت است.",
-"This account is busy. Pause its current task before ending history.": "این حساب در حال انجام کار است. قبل از پایان تاریخچه، وظیفهٔ جاری آن را متوقف کنید."
+"This account is busy. Pause its current task before ending history.": "این حساب در حال انجام کار است. قبل از پایان تاریخچه، وظیفهٔ جاری آن را متوقف کنید.",
+"Forget on this computer": "فراموش کردن در این رایانه",
+"This session was imported. Signing out would end it in Telegram for good, so it is disabled. Forget on this computer removes it here and leaves it active in Telegram.": "این نشست وارد شده است. خروج آن را برای همیشه در Telegram پایان می‌دهد، پس غیرفعال است. «فراموش کردن در این رایانه» آن را اینجا حذف می‌کند و در Telegram فعال نگه می‌دارد.",
+"Pause observation before forgetting the session.": "پیش از فراموش کردن نشست، پایش را متوقف کنید.",
+"Forget this session on this computer? It stays active in Telegram. The journal, sources and signing key stay; only the same account can connect to this workspace again.": "این نشست در این رایانه فراموش شود؟ در Telegram فعال می‌ماند. دفتر ثبت، منابع و کلید امضا باقی می‌مانند؛ فقط همان حساب می‌تواند دوباره به این فضای کار وصل شود.",
+"Forgotten on this computer. The session is still active in Telegram.": "در این رایانه فراموش شد. نشست همچنان در Telegram فعال است.",
+"Message number {n} exists in Telegram but uses a data type this TgWitness version cannot decode (constructor {c}); its content is not in this export.": "پیام شماره {n} در Telegram وجود دارد، اما از نوع داده‌ای استفاده می‌کند که این نسخه از TgWitness نمی‌تواند رمزگشایی کند (سازنده {c})؛ محتوای آن در این خروجی نیست.",
+"Numbers {a}–{b}, just below the oldest message the history listing returned, were also requested; messages found there: {n}.": "شماره‌های {a}–{b}، درست زیر قدیمی‌ترین پیامی که فهرست تاریخچه برگرداند، هم درخواست شدند؛ پیام‌های یافته‌شده در آنجا: {n}.",
+"{n} absent numbers were not requested; they cannot be told apart from deleted ones.": "{n} شمارهٔ غایب درخواست نشدند؛ نمی‌توان آن‌ها را از حذف‌شده‌ها تشخیص داد.",
+"This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "این اسنپ‌شات تنها شامل اطلاعاتی است که تلگرام در هنگام خروجی‌گیری بازگردانده است. مجلهٔ این فضای کاری نیز شامل حذف‌ها یا نسخه‌های قبلی مشاهده‌شده در این چت است؛ مجلهٔ شواهد را خروجی بگیرید تا آن‌ها را نیز دربرگیرد.",
+"access lost: removed or no longer readable": "دسترسی از دست رفته: حذف شده یا دیگر قابل خواندن نیست",
+"The account was removed from every source or can no longer read them.": "حساب از همه منابع حذف شده یا دیگر قادر به خواندن آن‌ها نیست.",
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "حساب از برخی منابع حذف شده یا دیگر قابل خواندن نیست؛ از آن‌ها هیچ چیزی دریافت نمی‌شود. بقیه ادامه دارند."
 }
