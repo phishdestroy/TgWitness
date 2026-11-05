@@ -1063,6 +1063,8 @@ def drand_fetcher():
 
 
 def verify_events(events, public_key):
+    # Account control events such as account.initialized use the same signed
+    # envelope as older events. They do not extend message or coverage claims.
     key = Ed25519PublicKey.from_public_bytes(base64.b64decode(public_key, validate=True))
     previous, count = "0" * 64, 0
     for count, event in enumerate(events, 1):

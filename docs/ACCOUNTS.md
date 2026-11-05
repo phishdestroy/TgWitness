@@ -70,6 +70,15 @@ not an echo of each new `initConnection`. Compare it with the actual sent profil
 Connecting an existing authorization does not validate its companion API hash:
 `initConnection` sends the API ID, while the hash is used by login requests.
 
+After a new phone or QR authorization, TgWitness requests config, nearest DC,
+online status, languages (when the language pack is nonempty), app updates and
+terms-of-service updates, with 0.3–1.5 seconds between requests. Updating status
+briefly marks the account online. This sequence runs once at login completion,
+not on imports, reconnects or restarts. The authorization is saved first; a failed
+request stops the sequence without retrying or discarding the login. Results are
+recorded as `account.initialized`, with error names rather than response bodies.
+The sequence is not a guarantee against account restrictions.
+
 Before connection, advisory checks compare the API platform, language pack,
 device/OS and app-version formats, mobile system locale, and Telethon's actual
 schema layer against the reviewed catalog baseline. Warnings appear in the server

@@ -1480,6 +1480,10 @@ class Collector:
         self.pending_phone = self.phone_hash = None
         self.authorization_required = False
         self.phase, self.last_error = "ready", None
+        if self.pending_key_origin == "created":
+            from .client_initialization import post_login
+            result = await post_login(candidate)
+            self.store.append("account.initialized", {"account_id": me.id, "source": "telegram_api", "requests": result})
 
     def resting_phase(self):
         if self.authorization_required:
