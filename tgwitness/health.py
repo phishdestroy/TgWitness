@@ -192,6 +192,8 @@ def connection(c, now):
         return part("failed", FAILED_PHASES[c["phase"]], **detail)
     if not c.get("has_session"):
         return part("configured" if c.get("phase") in SIGN_IN_PHASES else "off", "no_account", **detail)
+    if c.get("account_loss") and not c.get("running"):
+        return part("failed", "signed_out", cause=c["account_loss"].get("cause"), **detail)
     if not c.get("running"):
         return part("off", "paused", **detail)
     if not c.get("connected"):

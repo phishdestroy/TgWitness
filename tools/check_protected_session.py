@@ -4,6 +4,7 @@ import sys
 import tempfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tgwitness import health
 from tgwitness.collector import Collector, ProtectedSession
 from tgwitness.security import Vault
 from tgwitness.store import Store
@@ -53,6 +54,9 @@ async def check(root):
         created = collector.client = Connection()
         assert (await collector.sign_out())["telegram_session_ended"] is True
         assert created.logged_out and created.disconnected
+        lost = health.connection({"has_session": True, "running": False, "phase": "offline",
+                                  "account_loss": {"cause": "session_duplicated"}}, None)
+        assert (lost["state"], lost["reason"], lost["cause"]) == ("failed", "signed_out", "session_duplicated"), lost
         store.verify(vault.public_key)
     finally:
         store.close()
