@@ -6370,10 +6370,5 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "تحتوي هذه اللقطة فقط على ما أرجعته Telegram عند التصدير. كما يحتوي سجل هذه المساحة العملية على عمليات الحذف أو الإصدارات السابقة التي تمت ملاحظتها في هذه المحادثة؛ قم بتصدير سجل الأدلة لتضمينها.",
 "access lost: removed or no longer readable": "فقدان الوصول: تمت إزالته أو لم يعد قابلاً للقراءة",
 "The account was removed from every source or can no longer read them.": "تمت إزالة الحساب من جميع المصادر أو لم يعد بإمكانه قراءتها.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "تمت إزالة الحساب من بعض المصادر أو لم يعد بإمكانه قراءتها؛ ولا يصل أي شيء منها. أما المصادر الأخرى فتستمر.",
-"Create a key of its own": "إنشاء مفتاح خاص بها",
-"Pause observation before replacing the session key.": "إيقاف المراقبة مؤقتًا قبل استبدال مفتاح الجلسة.",
-"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "هل يتم إنشاء مفتاح جلسة خاص بـ TgWitness؟ تؤكد الجلسة المستوردة تسجيل دخول جديد إلى TgWitness، مثل مسح رمز QR؛ ثم يتوقف TgWitness عن استخدام المفتاح المستورد. ولا يمكن بعد ذلك لنسخة من المفتاح المستورد الموجودة في مكان آخر الاستيلاء على مساحة العمل هذه.",
-"This account has two-step verification. Enter its password to create the key.": "هذا الحساب مزود بخاصية التحقق بخطوتين. أدخل كلمة المرور الخاصة به لإنشاء المفتاح.",
-"TgWitness now uses a session key of its own. The imported key is no longer used.": "يستخدم TgWitness الآن مفتاح جلسة خاص به. لم يعد المفتاح المستورد مستخدمًا."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "تمت إزالة الحساب من بعض المصادر أو لم يعد بإمكانه قراءتها؛ ولا يصل أي شيء منها. أما المصادر الأخرى فتستمر."
 }

@@ -6175,10 +6175,5 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Bản chụp nhanh này chỉ chứa những gì Telegram trả về khi xuất dữ liệu. Nhật ký của không gian làm việc này cũng lưu giữ các nội dung đã bị xóa hoặc các phiên bản trước đó được ghi nhận trong cuộc trò chuyện này; hãy xuất nhật ký bằng chứng để bao gồm các nội dung đó.",
 "access lost: removed or no longer readable": "Mất quyền truy cập: đã bị xóa hoặc không còn đọc được",
 "The account was removed from every source or can no longer read them.": "Tài khoản đã bị xóa khỏi tất cả các nguồn hoặc không thể truy cập chúng nữa.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Tài khoản đã bị xóa khỏi một số nguồn hoặc không thể truy cập chúng nữa; không có thông tin nào đến từ những nguồn đó. Các nguồn khác vẫn tiếp tục hoạt động.",
-"Create a key of its own": "Tạo một khóa riêng",
-"Pause observation before replacing the session key.": "Tạm dừng quan sát trước khi thay thế khóa phiên.",
-"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "Tạo khóa phiên riêng của TgWitness? Phiên được nhập vào xác nhận một lần đăng nhập mới vào TgWitness, giống như quét mã QR; sau đó, TgWitness sẽ ngừng sử dụng khóa đã nhập. Một bản sao của khóa đã nhập ở nơi khác sẽ không thể tiếp quản không gian làm việc này nữa.",
-"This account has two-step verification. Enter its password to create the key.": "Tài khoản này đã bật xác minh hai bước. Nhập mật khẩu của tài khoản để tạo khóa.",
-"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness hiện sử dụng khóa phiên riêng của mình. Khóa được nhập vào trước đây không còn được sử dụng nữa."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Tài khoản đã bị xóa khỏi một số nguồn hoặc không thể truy cập chúng nữa; không có thông tin nào đến từ những nguồn đó. Các nguồn khác vẫn tiếp tục hoạt động."
 }

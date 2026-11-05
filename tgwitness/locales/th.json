@@ -6175,10 +6175,5 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "ภาพถ่ายหน้าจอนี้มีเพียงข้อมูลที่ Telegram ส่งกลับมาเมื่อทำการส่งออกเท่านั้น บันทึกของพื้นที่ทำงานนี้ยังเก็บข้อมูลการลบหรือเวอร์ชันเก่ากว่าที่เคยปรากฏในบทสนทนานี้ด้วย; ให้ส่งออกบันทึกหลักฐานเพื่อรวมข้อมูลเหล่านั้นด้วย",
 "access lost: removed or no longer readable": "สูญเสียการเข้าถึง: ถูกลบหรือไม่สามารถอ่านได้อีกต่อไป",
 "The account was removed from every source or can no longer read them.": "บัญชีดังกล่าวถูกลบออกจากทุกแหล่งข้อมูล หรือไม่สามารถอ่านข้อมูลจากแหล่งเหล่านั้นได้อีกต่อไป",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "บัญชีดังกล่าวถูกลบออกจากบางแหล่งข้อมูล หรือไม่สามารถอ่านข้อมูลจากแหล่งเหล่านั้นได้อีกต่อไป; ไม่มีข้อมูลใดส่งมาจากแหล่งเหล่านั้น ส่วนแหล่งข้อมูลอื่นๆ ยังคงทำงานตามปกติ",
-"Create a key of its own": "สร้างกุญแจของตัวเอง",
-"Pause observation before replacing the session key.": "หยุดการสังเกตการณ์ก่อนที่จะเปลี่ยนกุญแจเซสชัน",
-"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "สร้างกุญแจเซสชันของ TgWitness เองหรือไม่? เซสชันที่นำเข้าจะยืนยันการเข้าสู่ระบบ TgWitness ใหม่ เช่น การสแกนรหัส QR; หลังจากนั้น TgWitness จะหยุดใช้กุญแจที่นำเข้า และสำเนาของกุญแจที่นำเข้าที่เก็บไว้ที่อื่นจะไม่สามารถเข้าควบคุมพื้นที่ทำงานนี้ได้อีกต่อไป",
-"This account has two-step verification. Enter its password to create the key.": "บัญชีนี้มีการยืนยันสองขั้นตอน โปรดป้อนรหัสผ่านของบัญชีเพื่อสร้างกุญแจ",
-"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness ตอนนี้ใช้กุญแจเซสชันของตัวเองแล้ว กุญแจที่นำเข้ามาก่อนหน้านี้ไม่ถูกใช้อีกต่อไป"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "บัญชีดังกล่าวถูกลบออกจากบางแหล่งข้อมูล หรือไม่สามารถอ่านข้อมูลจากแหล่งเหล่านั้นได้อีกต่อไป; ไม่มีข้อมูลใดส่งมาจากแหล่งเหล่านั้น ส่วนแหล่งข้อมูลอื่นๆ ยังคงทำงานตามปกติ"
 }

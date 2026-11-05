@@ -6214,10 +6214,5 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "یہ اسنیپ شاٹ صرف وہی معلومات رکھتا ہے جو ٹیلیگرام نے ایکسپورٹ میں واپس کیں۔ اس ورک اسپیس کا جرنل بھی اس چیٹ میں دیکھی گئی حذف شدہ یا پہلے کے ورژنز کو محفوظ کرتا ہے؛ انہیں شامل کرنے کے لیے ثبوت جرنل کو ایکسپورٹ کریں۔",
 "access lost: removed or no longer readable": "رسائی ختم: حذف شدہ یا اب قابلِ مطالعہ نہیں",
 "The account was removed from every source or can no longer read them.": "اکاؤنٹ کو ہر ذریعہ سے ہٹا دیا گیا ہے یا اب وہ انہیں پڑھ نہیں سکتا۔",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "کچھ ذرائع سے اکاؤنٹ ہٹا دیا گیا ہے یا اب وہ انہیں پڑھ نہیں سکتا؛ ان سے کچھ بھی نہیں آتا۔ باقی جاری ہیں۔",
-"Create a key of its own": "اپنی ایک کلید بنائیں",
-"Pause observation before replacing the session key.": "سیشن کی کو تبدیل کرنے سے پہلے مشاہدے کو معطل کریں۔",
-"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "کیا TgWitness کی اپنی سیشن کلید بنائے؟ درآمد شدہ سیشن ایک نئے TgWitness لاگ ان کی تصدیق کرتا ہے، جیسے QR کوڈ اسکین کرنا؛ پھر TgWitness درآمد شدہ کلید استعمال کرنا بند کر دیتا ہے۔ کہیں اور موجود درآمد شدہ کلید کی کاپی اب اس ورک اسپیس پر قابو نہیں پا سکتی۔",
-"This account has two-step verification. Enter its password to create the key.": "اس اکاؤنٹ میں دو مرحلوں کی تصدیق ہے۔ کلید بنانے کے لیے اس کا پاس ورڈ درج کریں۔",
-"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness اب اپنی سیشن کلید استعمال کرتا ہے۔ درآمد شدہ کلید اب استعمال نہیں ہوتی۔"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "کچھ ذرائع سے اکاؤنٹ ہٹا دیا گیا ہے یا اب وہ انہیں پڑھ نہیں سکتا؛ ان سے کچھ بھی نہیں آتا۔ باقی جاری ہیں۔"
 }

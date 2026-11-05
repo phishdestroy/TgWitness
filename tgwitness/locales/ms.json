@@ -6175,10 +6175,5 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Snapshot ini hanya mengandungi apa yang Telegram kembalikan semasa eksport. Jurnal ruang kerja ini juga merangkumi pemadaman atau versi terdahulu yang diperhatikan dalam sembang ini; eksport jurnal bukti untuk memasukkannya.",
 "access lost: removed or no longer readable": "akses hilang: dialih keluar atau tidak dapat dibaca lagi",
 "The account was removed from every source or can no longer read them.": "Akaun itu telah dialih keluar daripada setiap sumber atau tidak lagi dapat membacanya.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Akaun itu telah dialih keluar daripada beberapa sumber atau tidak lagi dapat membacanya; tiada apa-apa yang sampai daripadanya. Yang lain diteruskan.",
-"Create a key of its own": "Buat kunci tersendiri",
-"Pause observation before replacing the session key.": "Jeda pemerhatian sebelum menggantikan kunci sesi.",
-"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "Buat kunci sesi TgWitness sendiri? Sesi yang diimport mengesahkan log masuk TgWitness yang baru, seperti mengimbas kod QR; TgWitness kemudian berhenti menggunakan kunci yang diimport. Salinan kunci yang diimport di tempat lain tidak lagi boleh mengambil alih ruang kerja ini.",
-"This account has two-step verification. Enter its password to create the key.": "Akaun ini mempunyai pengesahan dua langkah. Masukkan kata laluannya untuk menjana kunci.",
-"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness kini menggunakan kunci sesi sendiri. Kunci yang diimport tidak lagi digunakan."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Akaun itu telah dialih keluar daripada beberapa sumber atau tidak lagi dapat membacanya; tiada apa-apa yang sampai daripadanya. Yang lain diteruskan."
 }

@@ -6175,10 +6175,5 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "このスナップショットには、エクスポート時にTelegramから返された内容のみが含まれています。このワークスペースのログには、このチャットで確認された削除履歴や以前のバージョンも記録されています。それらを含めるには、証拠ログをエクスポートしてください。",
 "access lost: removed or no longer readable": "アクセス不可：削除されたか、読み取れなくなった",
 "The account was removed from every source or can no longer read them.": "そのアカウントはすべての情報源から削除されたか、またはそれらを読み取ることができなくなりました。",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "一部のソースからアカウントが削除されたか、またはそれらを読み取れなくなっており、それらからは何も届きません。その他のソースは引き続き機能しています。",
-"Create a key of its own": "独自のキーを作成する",
-"Pause observation before replacing the session key.": "セッションキーを更新する前に、監視を一時停止します。",
-"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "TgWitness独自のセッションキーを作成する？ インポートされたセッションは、QRコードをスキャンするのと同様に、新しいTgWitnessのログインを確認するものです。その後、TgWitnessはインポートされたキーの使用を停止します。別の場所に保存されたインポートされたキーのコピーでは、このワークスペースを引き継ぐことはできなくなります。",
-"This account has two-step verification. Enter its password to create the key.": "このアカウントには2段階認証が設定されています。キーを作成するには、そのパスワードを入力してください。",
-"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitnessは現在、独自のセッションキーを使用しています。インポートされたキーは使用されなくなりました。"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "一部のソースからアカウントが削除されたか、またはそれらを読み取れなくなっており、それらからは何も届きません。その他のソースは引き続き機能しています。"
 }

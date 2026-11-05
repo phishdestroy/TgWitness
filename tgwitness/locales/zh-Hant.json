@@ -6175,10 +6175,5 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "此快照僅包含 Telegram 在匯出時所回傳的內容。此工作區的日誌中亦包含此聊天紀錄中曾出現的刪除內容或較早版本；若要納入這些內容，請匯出證據日誌。",
 "access lost: removed or no longer readable": "無法存取：已刪除或無法再讀取",
 "The account was removed from every source or can no longer read them.": "該帳號已從所有來源中移除，或無法再讀取這些內容。",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "該帳號已從某些來源中移除，或無法再讀取這些來源；這些來源已無任何訊息傳入。其餘來源則仍正常運作。",
-"Create a key of its own": "建立專屬金鑰",
-"Pause observation before replacing the session key.": "在替換會話金鑰之前，暫停觀察。",
-"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "建立 TgWitness 專屬的會話金鑰？導入的會話會確認新的 TgWitness 登入，就像掃描 QR 碼一樣；隨後 TgWitness 便會停止使用該導入的金鑰。存放在其他地方的該導入金鑰副本將無法再接管此工作區。",
-"This account has two-step verification. Enter its password to create the key.": "此帳號已啟用兩步驟驗證。請輸入其密碼以建立金鑰。",
-"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness 現已採用其專屬的會話金鑰。導入的金鑰將不再使用。"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "該帳號已從某些來源中移除，或無法再讀取這些來源；這些來源已無任何訊息傳入。其餘來源則仍正常運作。"
 }

@@ -6214,10 +6214,5 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Esta instantánea solo contiene lo que Telegram devolvió al exportarla. El registro de este espacio de trabajo también contiene las eliminaciones o versiones anteriores observadas en este chat; exporta el registro de pruebas para incluirlas.",
 "access lost: removed or no longer readable": "Pérdida de acceso: eliminado o ya no legible",
 "The account was removed from every source or can no longer read them.": "La cuenta ha sido eliminada de todas las fuentes o ya no puede acceder a ellas.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "La cuenta ha sido eliminada de algunas fuentes o ya no puede acceder a ellas; no llega nada de ahí. Las demás siguen funcionando.",
-"Create a key of its own": "Crear una clave propia",
-"Pause observation before replacing the session key.": "Pausar la observación antes de sustituir la clave de sesión.",
-"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "¿Crear una clave de sesión propia de TgWitness? La sesión importada confirma un nuevo inicio de sesión en TgWitness, como al escanear un código QR; a continuación, TgWitness deja de utilizar la clave importada. Una copia de la clave importada que se encuentre en otro lugar ya no podrá hacerse con el control de este espacio de trabajo.",
-"This account has two-step verification. Enter its password to create the key.": "Esta cuenta tiene verificación en dos pasos. Introduce su contraseña para crear la clave.",
-"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness utiliza ahora su propia clave de sesión. La clave importada ya no se utiliza."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "La cuenta ha sido eliminada de algunas fuentes o ya no puede acceder a ellas; no llega nada de ahí. Las demás siguen funcionando."
 }
