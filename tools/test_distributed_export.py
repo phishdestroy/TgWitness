@@ -183,10 +183,15 @@ class Client:
         self.reads = []
         self.block = None
         self.blocked = asyncio.Event()
+        # Readable by number but never returned by history pages.
+        self.by_number = {}
+
+    def lookup(self, mid):
+        return next((m for m in self.messages if m.id == mid), None) or self.by_number.get(mid)
 
     async def get_messages(self, entity, limit=None, offset_date=None, ids=None):
         if ids is not None:
-            return next((m for m in self.messages if m.id == ids), None)
+            return [self.lookup(mid) for mid in ids] if isinstance(ids, list) else self.lookup(ids)
         return sorted([m for m in self.messages if offset_date is None or m.date < offset_date],
                       key=lambda m: -m.id)[:limit]
 
@@ -454,6 +459,32 @@ def test_rpc_peer_resolution_reentrancy_and_cancelled_wait(monkeypatch):
         await asyncio.gather(waiting, return_exceptions=True)
         assert calls == [1, 2] and client.rpc_backoff_getter() == deadline
         assert not client._rpc_lock.locked()
+    asyncio.run(scenario())
+
+
+def test_unfiltered_archive_keeps_number_analysis_and_rechecks_gaps(tmp_path, monkeypatch):
+    async def scenario():
+        manager, entries = coordinator(tmp_path, [message(i) for i in (1, 2, 4, 6, 7)])
+        for entry in entries.values():
+            entry["app"].state.collector.client.by_number = {5: message(5)}
+        monkeypatch.setattr(distributed_export, "CHUNK", 2)
+        monkeypatch.setattr(distributed_export.replica, "outbox", lambda *args: None)
+        try:
+            state = await manager.start(CHAT, list(entries), "account0")
+            await asyncio.wait_for(manager.task, 60)
+            assert manager.state["phase"] == "done", manager.state
+            path = manager.result_path(state["id"])
+            verify_chat_export(path, fingerprint(entries["account0"]["app"].state.vault.public_key))
+            with zipfile.ZipFile(path) as archive:
+                ids = json.loads(archive.read("message-ids.json"))
+                result = json.loads(archive.read("chat.json"))
+            assert not ids.get("selection_applied"), ids
+            assert ids["recheck"]["asked"] == 2 and ids["recheck"]["returned"] == [5] and ids["recheck"]["empty"] == 1
+            assert ids["missing"] == 1 and ids["missing_ranges"] == [[3, 3]], ids
+            assert 5 in {row["id"] for row in result["messages"]}
+        finally:
+            await manager.close()
+            close_entries(entries)
     asyncio.run(scenario())
 
 

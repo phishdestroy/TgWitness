@@ -35,7 +35,7 @@ class DistributedExport:
         if linked(self.root):
             raise ValueError("Distributed-export storage must not be a link.")
         self.root.mkdir(mode=0o700, exist_ok=True)
-        self.state = self.job = self.task = self.db = None
+        self.state = self.job = self.task = self.db = self.recheck = None
         self.preparing = set()
         self.reserved = {}
         self.entities = {}
@@ -400,6 +400,7 @@ class DistributedExport:
                         index.add(json.loads(line), task["profile"])
                 index.db.commit()
                 await asyncio.sleep(0)
+            self.recheck = await self.recheck_absent(index, options)
             batches = index.classify_batches(options)
             uncertain = 0
             while (result := await complete_in_thread(next, batches, None)) is not None:
@@ -415,8 +416,10 @@ class DistributedExport:
                     if options.download_media and record.get("media_type"):
                         collector = self.app_for(profile).state.collector
                         message = await collector.client.get_messages(self.entities[profile], ids=record["id"])
-                        if message and message_record(message) == json.loads(index.db.execute(
-                                "SELECT record FROM messages WHERE id=?", (record["id"],)).fetchone()[0]):
+                        stored = json.loads(index.db.execute(
+                            "SELECT record FROM messages WHERE id=?", (record["id"],)).fetchone()[0])
+                        stored.pop("found_on_recheck", None)
+                        if message and message_record(message) == stored:
                             record.update(await collector.export_attachment(message, directory / "media"))
                         else:
                             record["file_status"] = "message_changed_or_unavailable_at_media_read"
@@ -435,6 +438,36 @@ class DistributedExport:
             return scratch, ranges
         finally:
             index.close()
+
+    async def recheck_absent(self, index, options):
+        """Ask the lead account about every number missing between the first and last message read.
+
+        Without message filters an absent number is either deleted or never visible to the account;
+        the per-number answer separates that from a message the ranges simply missed.
+        """
+        if options.excludes_messages() or self.job["chat_id"] >= -1000000000000:
+            return None
+        present = [row[0] for row in index.db.execute("SELECT id FROM messages ORDER BY id")]
+        if not present:
+            return None
+        known = set(present)
+        absent = [number for number in range(present[0], present[-1] + 1) if number not in known]
+        if not absent:
+            return None
+        lead = self.app_for(self.job["lead"]).state.collector
+        try:
+            recheck, found = await lead.recheck_absent(self.entities[self.job["lead"]], absent)
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:
+            return {"asked_at": utcnow(), "asked": 0, "absent_total": len(absent), "error_type": type(exc).__name__}
+        expected = set(absent)
+        for message in found:
+            if message.id not in expected or utils.get_peer_id(message.peer_id) != self.job["chat_id"]:
+                raise ValueError("Recovered messages do not match the absent message IDs.")
+            index.add({**message_record(message), "found_on_recheck": True}, self.job["lead"])
+        index.db.commit()
+        return recheck
 
     def sign_parts(self, ranges):
         parts = []
@@ -490,7 +523,8 @@ class DistributedExport:
             self.persist()
             scratch, ranges = await self.finish_selection(directory, Selection.model_validate(self.job["selection"]))
             meta = {"chat": {**self.job["chat"], "profile": profile, "profile_errors": problems},
-                    "observer": observer, "admin_log": log, "account": lead.store.get_setting("account", {}),
+                    "observer": observer, "admin_log": log, "recheck": self.recheck,
+                    "account": lead.store.get_setting("account", {}),
                     "client": lead.client_identity(), "route": lead.route_receipt(),
                     "message_count": self.state["counts"]["selected"], "parts": self.sign_parts(ranges),
                     "collection": {"mode": "distributed_selection", "selection": self.job["selection"],

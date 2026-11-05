@@ -8,6 +8,7 @@ from pathlib import Path
 
 from . import indicators, pdf_report, report
 from .evidence import producer, report_entry, write_indicators, write_pdf, write_viewer
+from .message_selection import Selection
 from .store import canonical, utcnow
 from .verify import fingerprint, message_id_summary
 
@@ -192,7 +193,9 @@ def build_bundle(scratch_path, meta, vault, out_path, max_bytes=MAX_BUNDLE_BYTES
             people = authors(scratch_path)
             meta["author_count"] = len(people)
             ids = message_ids(scratch_path, (meta.get("chat") or {}).get("id"))
-            if (meta.get("collection") or {}).get("mode") == "distributed_selection":
+            collection = meta.get("collection") or {}
+            if collection.get("mode") == "distributed_selection" and Selection.model_validate(
+                    collection.get("selection") or {}).excludes_messages():
                 ids["selection_applied"] = True
                 ids["meaning"] = "Numbers absent from this selected export may have been excluded by filters; not evidence of deletion."
             if meta.get("recheck"):

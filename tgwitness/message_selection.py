@@ -78,6 +78,11 @@ class Selection(BaseModel):
         return not ((self.from_utc and (not date or date < self.from_utc))
                     or (self.to_utc and (not date or date >= self.to_utc)))
 
+    def excludes_messages(self):
+        """Whether any filter can leave a readable message out, so absent numbers stop meaning "not in the chat"."""
+        return bool(self.from_utc or self.to_utc or self.languages or self.reply_mode != "all"
+                    or self.sender_ids or self.text_contains)
+
 
 @lru_cache(maxsize=1)
 def detector():
