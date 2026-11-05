@@ -7,8 +7,9 @@ The official-client preview owns a fresh Chromium browser running [Telegram Web 
 | Official Web，passive | Visible messages，screenshots，rendered pages，silent video | One selected visible chat，with manual bounded scrolling |
 | Official Web，paced | The same evidence，with sequential scrolling and variable pauses | One selected visible chat，bounded by time，steps and storage |
 | API account export | Structured account history and selected attachments | Takeout or regular API，selected chats or the whole visible account |
+| Trusted Live local | Official Desktop chat JSON，video and frame-linked operator annotations | Separate local preview，manual setup，without the GitHub attestation of this Web mode |
 
-Official Web observation does not replace a complete Desktop account export．Choose the existing [account export](ACCOUNT-EXPORT.md) when completeness across selected chats is required．The visual mode does not expose arbitrary clicking，typing，profile visits，media downloads or Telegram Desktop automation．Only currently rendered fields are extracted，missing fields remain unavailable，and disappearing DOM elements are not reported as message deletions．
+Official Web observation does not replace a complete Desktop account export．Choose the existing [account export](ACCOUNT-EXPORT.md) when completeness across selected chats is required．For manually operated Desktop collection，see [Trusted Live](TRUSTED-LIVE.md)，which preserves a single-chat JSON export and has a different trust boundary．This Web mode does not expose arbitrary clicking，typing，profile visits，media downloads or Telegram Desktop automation．Only currently rendered fields are extracted，missing fields remain unavailable，and disappearing DOM elements are not reported as message deletions．
 
 ## Run through GitHub Actions
 

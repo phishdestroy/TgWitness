@@ -15,7 +15,8 @@ from pathlib import Path
 
 import requests
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 from tgwitness_capture.verify import verify_zip
 
 
@@ -54,7 +55,8 @@ def main():
             config_path.write_text(json.dumps(config))
             docker("run", "-d", "--name", client, "--network", network, "--cap-drop=ALL",
                    "--cap-add=NET_ADMIN", "--cap-add=SETUID", "--cap-add=SETGID", "--cap-add=SETPCAP", "--cap-add=CHOWN",
-                   "--security-opt=no-new-privileges:true", "--read-only", "--shm-size=512m",
+                   "--security-opt=no-new-privileges:true", "--security-opt",
+                   "seccomp=" + str(ROOT / "addons/capture/deploy/official-seccomp.json"), "--read-only", "--shm-size=512m",
                    "--tmpfs", "/session:rw,nosuid,nodev,mode=0700,size=256m",
                    "--tmpfs", "/exports:rw,nosuid,nodev,mode=0700,size=64m",
                    "--tmpfs", "/home/recorder:rw,nosuid,nodev,mode=0700,size=128m",
