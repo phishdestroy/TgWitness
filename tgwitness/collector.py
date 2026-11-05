@@ -650,7 +650,7 @@ class Collector:
                 client_profile = saved.get("client_profile")
         supplied = {**client_identity.validate(languages), **client_identity.validate(client_profile)}
         device = client_identity.resolve(api_id, supplied, self.vault.public_key)
-        options = {key: value for key, value in device.items() if key != "lang_pack"}
+        options = {key: value for key, value in device.items() if key not in ("lang_pack", "tz_offset")}
         string_session = StringSession(session)
         self.resumed_state_at = self.load_update_state(string_session)
 
@@ -668,6 +668,8 @@ class Collector:
         request = getattr(client, "_init_request", None)
         if isinstance(request, functions.InitConnectionRequest):
             request.lang_pack = device["lang_pack"]
+            if "tz_offset" in device:
+                request.params = types.JsonObject([types.JsonObjectValue("tz_offset", types.JsonNumber(device["tz_offset"]))])
         def rpc_error(exc):
             self.handle_authorization_error(exc, "Telegram RPC", client=client)
         client.rpc_error_handler = rpc_error

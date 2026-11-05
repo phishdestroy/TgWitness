@@ -185,11 +185,12 @@ Accounts are often distributed as two files with the same name, for example
 - From the JSON, TgWitness uses `app_id`/`api_id` and `app_hash`/`api_hash`, so you
   usually do not have to type API credentials.
 - The connection profile uses `device_model` (alias `device`), `system_version`
-  (alias `sdk`), `app_version`, `lang_code`, `system_lang_code` and `lang_pack`.
+  (alias `sdk`), `app_version`, `lang_code`, `system_lang_code` (alias `system_lang_pack`),
+  `lang_pack` and optional `tz_offset` (seconds from UTC, -43200 to 50400).
   Supplied fields take priority over generated defaults and the panel/browser
   language. Conflicting aliases are rejected. The resolved profile is saved in the
   encrypted workspace credentials and reused after restart, including its app version.
-- `phone`, a stored `twoFA` password, `tz_offset`, `system_lang_pack`, proxy settings
+- `phone`, a stored `twoFA` password, proxy settings
   and device tokens are **ignored**. If the account has 2FA, TgWitness asks for it.
 - A JSON without a supported authorization field is only metadata. Add its session
   file or continue with phone or QR login. A JSON containing a supported session or
@@ -252,15 +253,19 @@ One JSON object, at most **64 KiB**, in a file ending in **`.json`**.
 | --- | --- |
 | `api_id` (`app_id`) | Application ID, a positive number |
 | `api_hash` (`app_hash`) | Application hash, 32 hexadecimal characters |
-| `string_session` (`session_string`, `session`) | Telethon StringSession text, not a file name |
+| `string_session` (`session_string`, `session_str`; legacy `session`) | Telethon StringSession text, not a file name |
 | `auth_key` (`auth_key_hex`) + `dc_id` | Complete 512-character Auth Key and DC 1–5 |
 | `user_id` (`id`) | Optional; checked against Telegram before the authorization is saved |
 | `device_model` (`device`) | Connection device description |
 | `system_version` (`sdk`) | Connection OS version |
 | `app_version` | Application version sent to Telegram |
-| `lang_code`, `system_lang_code`, `lang_pack` | Client language, system language and client language pack; an empty `lang_pack` is allowed |
+| `lang_code`, `system_lang_code` (`system_lang_pack`), `lang_pack` | Client language, system language and client language pack; an empty `lang_pack` is allowed |
+| `tz_offset` | Optional UTC offset in seconds, sent in `initConnection.params`; integer or decimal integer string |
 
-If both an alias and the main name are present, they must agree. Examples:
+If both an alias and the main name are present, they must agree. Explicit Telethon
+session fields take priority over a generic `session` blob in another format. If
+both contain recognizable Telethon sessions, they must describe the same authorization.
+Without an explicit field, `session` must be a valid Telethon StringSession. Examples:
 
 ```json
 { "app_id": 1234567, "app_hash": "0123456789abcdef0123456789abcdef" }

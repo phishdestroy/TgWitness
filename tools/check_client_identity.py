@@ -51,13 +51,20 @@ def check_imports():
     assert android["client_profile"] == {"device_model": "Synthetic Android", "system_version": "SDK 33", "app_version": "11.7.4 (56982)"}
     # Companion metadata is a connection profile, not client configuration or 2FA.
     assert client_identity.from_account({**METADATA, "phone": "+15550001111", "tz_offset": "-36000",
-                                         "system_lang_pack": "fr-FR"}) == PROFILE
+                                         "system_lang_pack": "en-US"}) == {**PROFILE, "tz_offset": -36000}
+    assert client_identity.from_account({"system_lang_pack": "fr-CA"}) == {"system_lang_code": "fr-CA"}
+    for field in ("string_session", "session_string", "session_str"):
+        result = json_account(json.dumps({field: saved_session(), "session": "foreign-format-blob"}).encode())
+        assert result["session"] == saved_session()
     assert client_identity.from_account({"lang_pack": ""}) == {"lang_pack": ""}
     assert client_identity.from_account({"device_model": "Synthetic phone", "device": "Synthetic phone",
                                          "system_version": "SDK 34", "sdk": "SDK 34"}) == {
         "device_model": "Synthetic phone", "system_version": "SDK 34"}
     for bad in ({"device": "x\nsecret"}, {"sdk": 11}, {"device": "a", "device_model": "b"},
-                {"app_version": "x" * 129}, {"lang_code": "en/invalid"}, {"lang_pack": []}):
+                {"app_version": "x" * 129}, {"lang_code": "en/invalid"}, {"lang_pack": []},
+                {"system_lang_code": "en", "system_lang_pack": "fr"}, {"tz_offset": True}, {"tz_offset": 50401},
+                {"session_str": saved_session(), "session": saved_session(b"z")},
+                {"session_str": "invalid", "session": saved_session()}):
         try:
             json_account(json.dumps(bad).encode())
         except ValueError:
@@ -235,6 +242,29 @@ async def check_catalog_retention(root):
         store.close()
 
 
+async def check_imported_pair_retention(root):
+    vault, store = Vault(root), Store(root)
+    store.bind(vault)
+    vault.save("network", {"kind": "direct"})
+    profile = {"device_model": "Synthetic phone", "system_version": "SDK 34", "app_version": "12.8.3 (69222)",
+               "lang_code": "en", "system_lang_code": "en-us", "lang_pack": "android", "tz_offset": -36000}
+    collector = Collector(store, vault, FakeClient)
+    try:
+        with patch.object(api_pool, "login_order", side_effect=AssertionError("Imported pair must not use the pool")):
+            await collector.configure(4, "a" * 32, saved_session(), 4, profile)
+            saved = vault.read("credentials")
+            assert saved["api_id"] == 4 and saved["api_hash"] == "a" * 32
+            assert saved["client_profile"] == profile
+            await collector.stop(shutdown=True)
+            collector = Collector(store, vault, FakeClient)
+            await collector.restore()
+            assert collector.client.tgwitness_client_profile == profile
+            assert vault.read("credentials") == saved
+    finally:
+        await collector.stop(shutdown=True)
+        store.close()
+
+
 async def main(http=False):
     imported = StringSession()
     imported.set_dc(2, "149.154.167.51", 443)
@@ -266,9 +296,11 @@ async def main(http=False):
                         checks += 1
                     finally:
                         await client.disconnect()
-            client = collector.make_client(123, "a" * 32, imported.save(), PROFILE)
+            client = collector.make_client(123, "a" * 32, imported.save(), {**PROFILE, "tz_offset": "-36000"})
             try:
                 assert {field: getattr(client._init_request, field) for field in PROFILE} == PROFILE
+                assert client._init_request.params.value[0].key == "tz_offset"
+                assert client._init_request.params.value[0].value.value == -36000
                 assert client._init_request.api_id == 123
                 assert client.session.auth_key.key == imported.auth_key.key
                 assert client.session.dc_id == imported.dc_id
@@ -282,6 +314,7 @@ async def main(http=False):
         check_platforms()
         await check_retention(root / "retention")
         await check_catalog_retention(root / "catalog-retention")
+        await check_imported_pair_retention(root / "imported-pair")
         if http:
             await check_routes()
     print(f"Client identity passed: {checks} real initialization requests; imported profiles, encrypted retention, "

@@ -12,8 +12,9 @@ FIELDS = {
     "system_version": ("system_version", "sdk"),
     "app_version": ("app_version",),
     "lang_code": ("lang_code",),
-    "system_lang_code": ("system_lang_code",),
+    "system_lang_code": ("system_lang_code", "system_lang_pack"),
     "lang_pack": ("lang_pack",),
+    "tz_offset": ("tz_offset",),
 }
 
 
@@ -47,6 +48,13 @@ def validate(profile):
         raise ValueError("Unsupported Telegram client profile fields.")
     result = {}
     for field, value in profile.items():
+        if field == "tz_offset":
+            if isinstance(value, str) and re.fullmatch(r"-?[0-9]{1,5}", value):
+                value = int(value)
+            if type(value) is not int or not -43200 <= value <= 50400:
+                raise ValueError("Invalid Telegram client profile: tz_offset")
+            result[field] = value
+            continue
         limit = 32 if field in ("lang_code", "system_lang_code", "lang_pack") else 512 if field == "device_model" else 128
         if (not isinstance(value, str) or len(value) > limit
                 or any(unicodedata.category(c).startswith("C") for c in value)):

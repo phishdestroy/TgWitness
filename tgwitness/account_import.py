@@ -104,7 +104,7 @@ def json_account(payload):
     if client_profile:
         result["client_profile"] = client_profile
     aliases = {"api_id": ("api_id", "app_id"), "api_hash": ("api_hash", "app_hash"),
-               "session": ("string_session", "session_string", "session"),
+               "session": ("string_session", "session_string", "session_str"),
                "expected_user_id": ("user_id", "id"), "auth_key": ("auth_key", "auth_key_hex")}
     for destination, names in aliases.items():
         values = [raw[name] for name in names if raw.get(name) not in (None, "")]
@@ -112,6 +112,15 @@ def json_account(payload):
             raise ValueError("Conflicting account JSON fields.")
         if values:
             result[destination] = values[0]
+    # Explicit Telethon fields take precedence over a generic foreign-format
+    # `session` blob. Two recognizable authorizations must still agree.
+    generic = raw.get("session")
+    if generic not in (None, ""):
+        if "session" not in result:
+            result["session"] = generic
+        elif isinstance(generic, str) and session_key(generic):
+            if validate_string(generic) != validate_string(result["session"]):
+                raise ValueError("Conflicting account JSON fields.")
     for key in ("api_id", "expected_user_id"):
         if key in result:
             value = result[key]

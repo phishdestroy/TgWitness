@@ -74,7 +74,7 @@
         if(files.every(file=>/\.json$/i.test(file.name))){
           const objects=await Promise.all(files.map(file=>file.text().then(text=>JSON.parse(text.replace(/^\uFEFF/,"")))));
           if(objects.every(value=>value&&typeof value==="object"&&!Array.isArray(value)&&
-            !["string_session","session_string","session","auth_key","auth_key_hex"].some(key=>value[key])))
+            !["string_session","session_string","session_str","session","auth_key","auth_key_hex"].some(key=>value[key])))
             if(current(owner)&&ticket===inspectionSerial)render({state:"missing_session",can_connect:false,message:missing});
         }
         const filesEncoded=await encode(files);
