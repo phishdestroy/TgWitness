@@ -5,7 +5,7 @@ import json
 import shutil
 import time
 import secrets
-from contextlib import suppress
+from contextlib import asynccontextmanager, suppress
 from datetime import datetime, timedelta, timezone
 from functools import wraps
 from pathlib import Path
@@ -15,7 +15,7 @@ from collections import deque
 from telethon import __version__ as telethon_version, events, utils
 from telethon.errors import SessionPasswordNeededError, FloodWaitError, InvalidBufferError, RPCError
 from telethon.errors import ChannelInvalidError, ChannelPrivateError, FileReferenceExpiredError, TakeoutInvalidError
-from telethon.errors import TypeNotFoundError
+from telethon.errors import TakeoutInitDelayError, TypeNotFoundError
 from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
                              FrozenMethodInvalidError, SessionExpiredError, SessionRevokedError,
                              UserDeactivatedBanError, UserDeactivatedError)
@@ -2724,12 +2724,35 @@ class Collector:
                 "telethon_layer": LAYER, "meaning": UNPARSED_MEANING.format(layer=LAYER)})
         return low
 
+    @asynccontextmanager
+    async def history_reader(self, entity):
+        if not isinstance(entity, types.Channel):
+            yield self.client, None
+            return
+        try:
+            session = await self.client(functions.account.InitTakeoutSessionRequest(
+                message_megagroups=True, message_channels=True))
+        except (TakeoutInitDelayError, RPCError, OSError, ConnectionError, TimeoutError) as exc:
+            self.note("telegram.takeout_unavailable", {
+                "error_type": type(exc).__name__, "retry_after": getattr(exc, "seconds", None),
+                "meaning": "History is read without a Takeout session, about three times slower."})
+            yield self.client, None
+            return
+        from .account_export_transport import WrappedClient
+        reader = WrappedClient(self.client, session.id)
+        try:
+            yield reader, 0
+        finally:
+            with suppress(Exception):
+                await reader(functions.account.FinishTakeoutSessionRequest(success=True))
+
     async def iterate_history(self, entity, on_message, min_id=0, offset_id=0, on_wait=None, on_unparsed=None,
-                              page_timeout=None, attempts=8):
+                              page_timeout=None, attempts=8, client=None, wait_time=None):
         failures = 0
         while True:
             writing = False
-            pages = self.client.iter_messages(entity, offset_id=offset_id, min_id=min_id)
+            pages = (client or self.client).iter_messages(entity, offset_id=offset_id, min_id=min_id,
+                                                          **({"wait_time": wait_time} if wait_time is not None else {}))
             try:
                 while True:
                     try:
@@ -2870,7 +2893,8 @@ class Collector:
                 raise ValueError("The public username now points to a different chat.")
             return entity
 
-    async def fetch_range(self, entity, low, high, path, progress=None, on_wait=None, page_timeout=None, attempts=8):
+    async def fetch_range(self, entity, low, high, path, progress=None, on_wait=None, page_timeout=None, attempts=8,
+                          client=None, wait_time=None):
         digest, count = hashlib.sha256(), 0
         with path.open("w", encoding="utf-8") as handle:
             async def emit(record):
@@ -2892,7 +2916,8 @@ class Collector:
             async def unparsed(number, error):
                 await emit(unparsed_record(number, error))
             await self.iterate_history(entity, write, min_id=low - 1, offset_id=high + 1, on_wait=on_wait,
-                                       on_unparsed=unparsed, page_timeout=page_timeout, attempts=attempts)
+                                       on_unparsed=unparsed, page_timeout=page_timeout, attempts=attempts,
+                                       client=client, wait_time=wait_time)
         return count, digest.hexdigest()
 
     def poll_export(self, export_id):

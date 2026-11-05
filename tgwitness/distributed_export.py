@@ -315,6 +315,11 @@ class DistributedExport:
             worker.update(ranges=ranges, captured=messages)
 
     async def work(self, worker):
+        collector = self.app_for(worker["profile_id"]).state.collector
+        async with collector.history_reader(self.entities[worker["profile_id"]]) as (reader, wait):
+            await self.read_ranges(worker, reader, wait)
+
+    async def read_ranges(self, worker, reader=None, wait=None):
         profile = worker["profile_id"]
         collector = self.app_for(profile).state.collector
         directory = self.directory(self.state["id"])
@@ -342,7 +347,8 @@ class DistributedExport:
                 if linked(temporary) or linked(path):
                     raise ValueError("Chunk paths must not be links.")
                 await collector.fetch_range(self.entities[profile], task["low"], task["high"], temporary,
-                                            lambda: None, waiting, page_timeout=PAGE_TIMEOUT, attempts=1)
+                                            lambda: None, waiting, page_timeout=PAGE_TIMEOUT, attempts=1,
+                                            client=reader, wait_time=wait)
                 count, digest = self.check_chunk(temporary, task)
                 with temporary.open("r+b") as stream:
                     os.fsync(stream.fileno())

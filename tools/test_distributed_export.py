@@ -6,8 +6,9 @@ from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
 import pytest
-from telethon.errors import FloodWaitError, TypeNotFoundError
+from telethon.errors import FloodWaitError, RPCError, TypeNotFoundError
 from telethon.tl import types
+from telethon.tl.functions import account as account_functions
 
 from tgwitness import chat_export, distributed_export, settings_hub, telegram_client, verify
 from tgwitness.account_export import AccountExport
@@ -184,9 +185,13 @@ class Client:
         self.block = None
         self.blocked = asyncio.Event()
         self.by_number = {}
+        self.iter_options = []
 
     def lookup(self, mid):
         return next((m for m in self.messages if m.id == mid), None) or self.by_number.get(mid)
+
+    async def __call__(self, request, ordered=False):
+        raise RPCError(request, "TAKEOUT_UNAVAILABLE_IN_TEST", 400)
 
     async def get_messages(self, entity, limit=None, offset_date=None, ids=None):
         if ids is not None:
@@ -194,8 +199,9 @@ class Client:
         return sorted([m for m in self.messages if offset_date is None or m.date < offset_date],
                       key=lambda m: -m.id)[:limit]
 
-    async def iter_messages(self, entity, offset_id=0, min_id=0):
+    async def iter_messages(self, entity, offset_id=0, min_id=0, **options):
         self.reads.append((min_id, offset_id))
+        self.iter_options.append(options)
         if self.block is not None and len(self.reads) > 1:
             self.blocked.set()
             await self.block.wait()
@@ -733,6 +739,43 @@ def test_full_recheck_reads_every_absent_number(tmp_path, monkeypatch):
                 ids = json.loads(archive.read("message-ids.json"))
             assert ids["recheck"]["asked"] == 5 and ids["recheck"]["unchecked"] == 0, ids["recheck"]
             assert not ids.get("selection_applied")
+        finally:
+            await manager.close()
+            close_entries(entries)
+    asyncio.run(scenario())
+
+
+class TakeoutClient(Client):
+    def __init__(self, messages):
+        super().__init__(messages)
+        self.requests = []
+
+    async def __call__(self, request, ordered=False):
+        self.requests.append(request)
+        if isinstance(request, account_functions.InitTakeoutSessionRequest):
+            return types.account.Takeout(id=77)
+        return True
+
+
+def test_ranges_are_read_through_a_takeout_session(tmp_path, monkeypatch):
+    async def scenario():
+        rows = [message(i) for i in range(1, 7)]
+        manager, entries = coordinator(tmp_path, rows)
+        for entry in entries.values():
+            entry["app"].state.collector.client = TakeoutClient(rows)
+        monkeypatch.setattr(distributed_export, "CHUNK", 2)
+        monkeypatch.setattr(distributed_export.replica, "outbox", lambda *args: None)
+        try:
+            await manager.start(CHAT, list(entries), "account0")
+            await asyncio.wait_for(manager.task, 60)
+            assert manager.state["phase"] == "done", manager.state
+            for entry in entries.values():
+                client = entry["app"].state.collector.client
+                kinds = [type(r).__name__ for r in client.requests]
+                assert kinds.count("InitTakeoutSessionRequest") == 1 and "InvokeWithTakeoutRequest" in kinds, kinds
+                finish = [r for r in client.requests if type(r).__name__ == "InvokeWithTakeoutRequest"]
+                assert finish[-1].takeout_id == 77 and type(finish[-1].query).__name__ == "FinishTakeoutSessionRequest"
+                assert client.iter_options and all(o == {"wait_time": 0} for o in client.iter_options)
         finally:
             await manager.close()
             close_entries(entries)
