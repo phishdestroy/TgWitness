@@ -27,12 +27,17 @@ Other work runs alongside, each item judged on its own test:
 | Long history loading | A crash mid-way loses nothing and repeats nothing | [Shipped](HISTORY.md) |
 | Complete source list | Skipped and later-added chats are visible, only failed ones retry | Open |
 | Everyday reading | Search, jumps by date and context, topics, gallery, forwards, reactions, versions | Open |
-| Importing existing archives | Telegram Desktop JSON/HTML with attachments, resumable, marked as supplied | Open |
+| Connection identity and retry safety | Imported API/device settings survive restart; platform defaults fill gaps; server-requested pauses survive reconnects | [Shipped](ACCOUNTS.md) |
 | Voice messages | Local transcription and search, original stays | [Shipped](MEDIA-ANALYSIS.md) |
 | Accounts and access | Revoking access stops reading, nobody sees other people's chats | [Shipped](ACCESS.md) |
 | Offline handover | Recipient reads and verifies without our server | [Shipped](CASE_REPORTS.md) |
 | Operations and cost | Published CPU, memory, disk and recovery numbers | Open |
 | Independent verification | Rewritten chain, cut tail, key change or missing witness gets caught | [Shipped](WITNESS.md) |
+
+Importing third-party Desktop archives, device-cache dumps and recovered offline
+records is outside this roadmap. TgWitness records its own observations. Writing
+Desktop-compatible JSON from an account acquisition remains supported; see
+[account export](ACCOUNT-EXPORT.md).
 
 The controller with a real collector is the next milestone:
 
