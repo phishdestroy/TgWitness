@@ -28,8 +28,8 @@ TRACE = "https://www.cloudflare.com/cdn-cgi/trace"
 class OfficialOptions(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     mode: Literal["passive", "paced"] = "passive"
-    egress: Literal["http", "socks5", "cloudflare_warp"] = "http"
-    proxy_server: str = Field(min_length=1, max_length=2048)
+    egress: Literal["http", "socks5", "cloudflare_warp", "direct"] = "http"
+    proxy_server: str = Field(default="", max_length=2048)
     proxy_username_env: str = ""
     proxy_password_env: str = ""
     expected_ip: str = ""
@@ -45,6 +45,8 @@ class OfficialOptions(BaseModel):
     @field_validator("proxy_server")
     @classmethod
     def proxy_url(cls, value):
+        if not value:
+            return value
         parsed = urlsplit(value)
         try:
             port = parsed.port
@@ -73,6 +75,11 @@ class OfficialOptions(BaseModel):
     def consistent(self):
         if self.max_pause_seconds < self.min_pause_seconds:
             raise ValueError("Maximum pause must not be shorter than minimum pause")
+        if self.egress == "direct":
+            if self.proxy_server or self.proxy_username_env or self.proxy_password_env:
+                raise ValueError("Direct mode cannot include proxy settings")
+        elif not self.proxy_server:
+            raise ValueError("A proxy endpoint is required unless direct mode is explicitly selected")
         if self.egress == "socks5" and not self.proxy_server.startswith("socks5://"):
             raise ValueError("SOCKS5 requires a SOCKS5 endpoint")
         if self.egress == "http" and not self.proxy_server.startswith("http://"):
@@ -141,7 +148,8 @@ class OfficialBrowser(BrowserCapture):
         if self.phase != "created":
             raise ValueError("This procedure has already opened a client; finish it before starting another")
         from playwright.async_api import async_playwright
-        proxy = {"server": self.options.proxy_server, "bypass": "<-loopback>"}
+        direct = self.options.egress == "direct"
+        proxy = None if direct else {"server": self.options.proxy_server, "bypass": "<-loopback>"}
         for key in ("username", "password"):
             name = getattr(self.options, "proxy_" + key + "_env")
             if name:
@@ -153,7 +161,8 @@ class OfficialBrowser(BrowserCapture):
             self.browser = await self.runtime.chromium.launch(
                 headless=self.headless, chromium_sandbox=True, proxy=proxy,
                 args=["--disable-quic", "--disable-dev-shm-usage", "--no-first-run",
-                      "--force-webrtc-ip-handling-policy=disable_non_proxied_udp"])
+                      "--force-webrtc-ip-handling-policy=disable_non_proxied_udp",
+                      *(["--no-proxy-server"] if direct else [])])
             self.context = await self.browser.new_context(
                 viewport={"width": 1280, "height": 720}, locale="en-US",
                 accept_downloads=False, service_workers="block", permissions=[])
@@ -211,7 +220,7 @@ class OfficialBrowser(BrowserCapture):
             self.checked_route = time.monotonic()
             self.journal.append("official.egress_observed", {"ip": address, "observed_at": utcnow(),
                                 "provider": self.options.egress, "endpoint": TRACE,
-                                "scope": "browser-context proxy probe; does not prove every connection"})
+                                "scope": "browser-context route probe; does not prove every connection"})
         finally:
             await response.dispose()
 

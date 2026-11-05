@@ -20,6 +20,11 @@ on:
         description: Official Web requires an HTTP or SOCKS5 upstream, without credentials
         type: string
         default: ''
+      official_egress:
+        description: Proxy by default; direct exposes the runner public IP to Telegram
+        type: choice
+        default: proxy
+        options: [proxy, direct]
       official_expected_ip:
         description: Optional required exit IP for the official client
         type: string
@@ -42,6 +47,7 @@ jobs:
       session_minutes: ${{ inputs.session_minutes }}
       client: ${{ inputs.client }}
       official_proxy: ${{ inputs.official_proxy }}
+      official_egress: ${{ inputs.official_egress }}
       official_expected_ip: ${{ inputs.official_expected_ip }}
     secrets:
       official_proxy_username: ${{ secrets.OFFICIAL_PROXY_USERNAME }}

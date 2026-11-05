@@ -26,10 +26,22 @@ def test_origin_is_exact(url):
                                     {"proxy_server": "http://host:3128/path"},
                                     {"max_pause_seconds": 2.0, "min_pause_seconds": 3.0},
                                     {"proxy_server": "direct"}, {"max_steps": True},
-                                    {"egress": "socks5"}, {"expected_ip": "not-an-ip"}])
+                                    {"egress": "socks5"}, {"expected_ip": "not-an-ip"},
+                                    {"egress": "direct"}, {"proxy_server": ""}])
 def test_invalid_or_unsafe_configuration(change):
     with pytest.raises(ValueError):
         OfficialOptions.model_validate({"proxy_server": "http://gateway:3128", **change})
+
+
+def test_direct_requires_explicit_selection_and_rejects_proxy_secrets():
+    with pytest.raises(ValueError, match="proxy endpoint"):
+        OfficialOptions()
+    direct = OfficialOptions(egress="direct")
+    assert direct.receipt()["direct_fallback"] is False
+    assert direct.proxy_server == ""
+    for key in ("proxy_username_env", "proxy_password_env"):
+        with pytest.raises(ValueError, match="cannot include proxy"):
+            OfficialOptions(egress="direct", **{key: "PRIVATE_PROXY_SECRET"})
 
 
 def test_named_api_authentication_validation_and_frozen_plan(tmp_path):
@@ -60,7 +72,8 @@ def test_named_api_authentication_validation_and_frozen_plan(tmp_path):
         assert "official.js" in client.get("/").text
 
 
-def test_egress_change_and_unavailable_probe_stop(tmp_path):
+@pytest.mark.parametrize("direct", [False, True])
+def test_egress_change_and_unavailable_probe_stop(tmp_path, direct):
     class Reply:
         status, url = 200, "https://www.cloudflare.com/cdn-cgi/trace"
         ip = "203.0.113.7"
@@ -77,7 +90,8 @@ def test_egress_change_and_unavailable_probe_stop(tmp_path):
 
     response = Reply()
     journal = Journal(tmp_path)
-    adapter = OfficialBrowser(OfficialOptions(proxy_server="http://gateway:3128"), journal)
+    options = OfficialOptions(egress="direct") if direct else OfficialOptions(proxy_server="http://gateway:3128")
+    adapter = OfficialBrowser(options, journal)
     adapter.context = type("Context", (), {"request": Request()})()
 
     async def exercise():
@@ -96,13 +110,15 @@ def test_egress_change_and_unavailable_probe_stop(tmp_path):
         journal.close()
 
 
-def test_official_panel_login_selection_export_and_languages(tmp_path, request):
+@pytest.mark.parametrize("direct", [False, True])
+def test_official_panel_login_selection_export_and_languages(tmp_path, request, direct):
     if not request.config.getoption("--capture-browser"):
         pytest.skip("Use --capture-browser for the real panel test")
     from playwright.sync_api import expect, sync_playwright
     from tgwitness_capture.verify import verify_zip
     root = tmp_path / "panel"
-    app = create_app(root, Config(official={"proxy_server": "http://127.0.0.1:9", "require_video": False, "drand": False}))
+    route = {"egress": "direct"} if direct else {"proxy_server": "http://127.0.0.1:9"}
+    app = create_app(root, Config(official={**route, "require_video": False, "drand": False}))
     sock = socket.socket()
     sock.bind(("127.0.0.1", 0))
     server = uvicorn.Server(uvicorn.Config(app, access_log=False, log_level="warning", timeout_graceful_shutdown=5))
@@ -142,8 +158,12 @@ def test_official_panel_login_selection_export_and_languages(tmp_path, request):
             page.locator("#token").fill((root / "control-token.txt").read_text())
             page.locator("#login-form button").click()
             expect(page.locator("#workspace")).to_be_visible()
+            if direct:
+                expect(page.locator("#route")).to_contain_text("public IP")
             page.locator("#language").select_option("ru")
             expect(page.locator("h1")).to_have_text("Свидетель в официальном клиенте")
+            if direct:
+                expect(page.locator("#route")).to_contain_text("внешний IP")
             page.locator("#plan-form button").click()
             expect(page.locator("#client-section")).to_be_visible(timeout=15000)
             page.locator("#chats-refresh").click()

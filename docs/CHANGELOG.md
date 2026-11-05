@@ -2,6 +2,7 @@
 
 ## 0.9.1 preview · 5 November 2026
 
+- Add explicitly selected direct networking for official Web capture through GitHub Actions．Proxy remains the default and never falls back to direct．The panel and signed verification report disclose direct IP exposure，and verification rejects a mismatch between the selected route and the hosted network．
 - Add an optional official Telegram Web observation mode with passive or sequential paced viewing，a fresh profile，restricted UI actions，login-excluded video and signed rendered observations．A required proxy bridge prevents direct fallback；exit changes stop recording．The GitHub Actions mode uses the approved sealed workflow and recipient encryption．
 - Bind official recordings to independently saved source/settings，check video segment order and clean endings，record fresh drand rounds and support independent public-relay comparison．Report unfinished procedures，unconfirmed logout and the limits of local or Cloudflare assurance explicitly．See [Official client witness](OFFICIAL-WITNESS.md) for scope and validation．
 - Add opt-in Trusted Live preview: isolated official Desktop/Web sessions, native JSON preservation, guarded visual recording, per-chat continuity annotations, and verifier-recomputed reports. Supply a Linux network guard with no direct fallback, periodic proxy-routed drand observations, and optional independent read-only Cloudflare samples. Account/WARP/TDX qualification remains pending; see `docs/TRUSTED-LIVE.md`.

@@ -21,7 +21,7 @@
     const names={created:text('Not started','Не запущен'),login:text('Login without recording','Вход без записи'),ready:text('Ready to record','Готов к записи'),observing:text('Recording','Идёт запись'),paused:text('Paused','Пауза'),stopped:text('Stopped','Остановлен'),finishing:text('Finishing','Завершение'),finished:text('Finished','Завершён')};
     $('badge').textContent=names[o.phase]+(o.reason?'：'+o.reason:''); $('badge').className='badge'+(data.settings.enabled?' active':o.reason?' error':'');
     $('selected').textContent=(o.selected_chat||text('No chat selected','Чат не выбран'))+' · '+o.steps+' '+text('steps','шагов');
-    $('route').textContent=o.options.egress+' · '+o.options.proxy_server+' · '+(o.exit_ip||text('IP not checked yet','IP ещё не проверен'))+' · '+text('No direct fallback','Без прямого fallback');
+    $('route').textContent=(o.options.egress==='direct'?text('Direct connection · Telegram sees the runner or host public IP','Прямое соединение · Telegram видит внешний IP раннера или сервера'):o.options.egress+' · '+o.options.proxy_server+' · '+text('No direct fallback','Без прямого обхода'))+' · '+(o.exit_ip||text('IP not checked yet','IP ещё не проверен'));
     $('plan-section').hidden=o.phase!=='created'; $('client-section').hidden=['created','finished'].includes(o.phase);
     $('toggle').textContent=data.settings.enabled?text('Pause recording','Приостановить запись'):text('Start recording','Начать запись');
     $('toggle').disabled=!o.selected_chat||!['ready','paused','observing'].includes(o.phase); $('stop').disabled=['created','finished'].includes(o.phase);
