@@ -34,6 +34,7 @@ class Selection(BaseModel):
     sender_ids: list[int] = Field(default_factory=list, max_length=10000)
     text_contains: list[str] = Field(default_factory=list, max_length=100)
     download_media: bool = False
+    recheck_all: bool = False
 
     @field_validator("from_utc", "to_utc", mode="before")
     @classmethod

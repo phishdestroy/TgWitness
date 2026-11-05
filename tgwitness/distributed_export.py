@@ -32,7 +32,7 @@ OUTAGE_PAUSE = 30
 POISON_ACCOUNTS = 2
 ACCOUNT_ERRORS = 3
 RECHECK_EDGE = 1000
-RECHECK_PER_ACCOUNT = 10000
+RECHECK_PER_ACCOUNT = 1000
 JOB_ID = re.compile(r"[a-f0-9]{32}")
 
 
@@ -482,7 +482,7 @@ class DistributedExport:
         readers = [w["profile_id"] for w in self.state["workers"]
                    if w["state"] not in ("skipped", "failed") and w["profile_id"] in self.entities]
         wanted = edge + gaps
-        budget = max(0, RECHECK_PER_ACCOUNT * len(readers) - len(edge))
+        budget = len(gaps) if options.recheck_all else max(0, RECHECK_PER_ACCOUNT * len(readers) - len(edge))
         step = max(1, -(-len(gaps) // budget)) if budget else len(gaps) + 1
         asked = edge + gaps[::step][:budget]
         queue = [asked[low:low + 100] for low in range(0, len(asked), 100)]

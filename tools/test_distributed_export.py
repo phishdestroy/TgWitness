@@ -719,6 +719,26 @@ def test_compare_finds_removed_and_edited_messages(tmp_path, monkeypatch):
     asyncio.run(scenario())
 
 
+def test_full_recheck_reads_every_absent_number(tmp_path, monkeypatch):
+    async def scenario():
+        manager, entries = coordinator(tmp_path, [message(i) for i in (1, 2, 5, 9)])
+        monkeypatch.setattr(distributed_export, "CHUNK", 2)
+        monkeypatch.setattr(distributed_export, "RECHECK_PER_ACCOUNT", 1)
+        monkeypatch.setattr(distributed_export.replica, "outbox", lambda *args: None)
+        try:
+            state = await manager.start(CHAT, list(entries), "account0", selection={"recheck_all": True})
+            await asyncio.wait_for(manager.task, 60)
+            assert manager.state["phase"] == "done", manager.state
+            with zipfile.ZipFile(manager.result_path(state["id"])) as archive:
+                ids = json.loads(archive.read("message-ids.json"))
+            assert ids["recheck"]["asked"] == 5 and ids["recheck"]["unchecked"] == 0, ids["recheck"]
+            assert not ids.get("selection_applied")
+        finally:
+            await manager.close()
+            close_entries(entries)
+    asyncio.run(scenario())
+
+
 def test_ten_accounts_cover_chunks_once(tmp_path, monkeypatch):
     async def scenario():
         manager, entries = coordinator(tmp_path, [message(i) for i in range(1, 21)], count=10)
