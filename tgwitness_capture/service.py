@@ -282,7 +282,10 @@ class Recorder:
                 await self.task
             async with self.lock:
                 await asyncio.to_thread(self.video.stop)
-                await self.browser.close()
+                if self.official and self.official.phase != "finished" and self.official.page is not None:
+                    await self.official.finish()
+                else:
+                    await self.browser.close()
                 self.journal.append("service.stopped", {"capture_was_enabled": self.settings["enabled"]})
         finally:
             self.video.abort()

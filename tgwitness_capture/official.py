@@ -124,6 +124,7 @@ class OfficialBrowser(BrowserCapture):
     def status(self):
         return {"phase": self.phase, "reason": self.reason, "mode": self.options.mode,
                 "adapter": ADAPTER, "selected_chat": self.selected_title,
+                "source": self.selected_url, "source_locked": bool(self.started),
                 "steps": self.steps, "exit_ip": self.exit_ip, "options": self.options.receipt(),
                 "environment_attested": False, "logout_confirmed": getattr(self, "logout_confirmed", False),
                 "limits": ["Official client may send read receipts and online status",
@@ -269,6 +270,8 @@ class OfficialBrowser(BrowserCapture):
         if self.phase not in {"ready", "paused"} or handle not in self.handles:
             raise ValueError("Refresh the visible chat list and choose one chat while paused")
         href, title = self.handles[handle]
+        if self.started and self.selected_url and urlsplit(self.selected_url).fragment != href[1:]:
+            raise ValueError("The recorded source cannot change after observation starts")
         # href is accepted only from the rendered list and restricted to numeric chat routes.
         match = self.page.locator(CHAT_LIST + " a[href='" + href + "']")
         if await match.count() != 1:
@@ -374,12 +377,15 @@ class OfficialBrowser(BrowserCapture):
         return None
 
     async def finish(self):
+        if self.phase == "finished":
+            return self.status()
         self.phase = "finishing"
         self.logout_confirmed = False
         try:
             if self.page and not self.page.is_closed() and official_url(self.page.url):
                 await self.page.evaluate("window.__tgwitnessGuard.disarmForLogout()")
                 # Narrow English UI path. Unknown layouts fail closed; no internal logout RPC.
+                self.page.set_default_timeout(3000)
                 menu = self.page.locator("#LeftColumn .DropdownMenu .Button").first
                 await menu.click()
                 await self.page.get_by_role("menuitem", name="Settings", exact=True).click()

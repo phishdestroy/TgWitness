@@ -26,7 +26,8 @@
     $('toggle').textContent=data.settings.enabled?text('Pause recording','Приостановить запись'):text('Start recording','Начать запись');
     $('toggle').disabled=!o.selected_chat||!['ready','paused','observing'].includes(o.phase); $('stop').disabled=['created','finished'].includes(o.phase);
     for(const id of ['older','newer','snapshot']) $(id).disabled=!data.settings.enabled;
-    for(const id of ['chat-select','chats-refresh']) $(id).disabled=!['login','ready','paused'].includes(o.phase);
+    for(const id of ['chat-select','chats-refresh']) $(id).disabled=o.source_locked||!['login','ready','paused'].includes(o.phase);
+    $('selection').disabled=!o.source;
     $('finish').disabled=['created','finished','finishing'].includes(o.phase); $('export').disabled=data.settings.enabled;
     $('video-help').textContent=data.video_available?text('Video available，closed segments enter the signed journal．','Видео доступно，закрытые сегменты входят в подписанный журнал．'):text('Video unavailable．A profile requiring video cannot start．','Видео недоступно．Профиль с обязательным видео не запустится．');
     $('fingerprint').textContent=data.fingerprint; $('boundary').textContent='#'+data.seq+' · '+data.head_hash;
@@ -58,7 +59,7 @@
   $('snapshot').addEventListener('click',()=>action(()=>api('snapshot',{})));
   $('finish').addEventListener('click',()=>action(()=>api('official/finish',{})));
   $('stop').addEventListener('click',()=>{api('official/stop',{}).then(()=>refresh()).catch(e=>{$('notice').textContent=e.message;});});
-  $('selection').addEventListener('click',()=>download(new Blob([JSON.stringify({format:'tgwitness-official-selection-v1',options:status.official.options},null,2)],{type:'application/json'}),'official-settings.json'));
+  $('selection').addEventListener('click',()=>download(new Blob([JSON.stringify({format:'tgwitness-official-selection-v1',options:status.official.options,source:status.official.source},null,2)],{type:'application/json'}),'official-settings.json'));
   $('checkpoint').addEventListener('click',()=>action(async()=>download(await(await api('checkpoint')).blob(),'official-checkpoint.json')));
   $('export').addEventListener('click',()=>action(async()=>download(await(await api('export',{})).blob(),'official-evidence.zip')));
   setInterval(()=>refresh().catch(e=>{$('notice').textContent=e.message;}),2500);

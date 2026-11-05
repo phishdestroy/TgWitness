@@ -51,6 +51,9 @@ def create_sealed_app(root, output, session):
                             if recorder.official.phase != "finished":
                                 await recorder.official.pause("SessionDeadline")
                                 await recorder.official.finish()
+                            if not any(e["kind"] == "official.opened" for e in recorder.journal.events()):
+                                durable_write(output / "result.json", b'{"phase":"cancelled"}', exclusive=True)
+                                return
                             recorder.journal.append("official.sealed_finished", {
                                 "context": session["context"], "deadline_reached": time.monotonic() >= deadline,
                                 "logout_confirmed": recorder.official.logout_confirmed,

@@ -11,8 +11,9 @@ def official_report(events, expected=None):
         return None
     expected_options = None
     if expected is not None:
-        if (not isinstance(expected, dict) or set(expected) != {"format", "options"}
-                or expected["format"] != "tgwitness-official-selection-v1" or not isinstance(expected["options"], dict)):
+        if (not isinstance(expected, dict) or set(expected) != {"format", "options", "source"}
+                or expected["format"] != "tgwitness-official-selection-v1" or not isinstance(expected["options"], dict)
+                or not isinstance(expected["source"], str) or not expected["source"]):
             raise ValueError("Unsupported expected official-client settings")
         expected_options = expected["options"]
     reasons = []
@@ -29,6 +30,8 @@ def official_report(events, expected=None):
             raise ValueError("Invalid official-client settings binding")
         if expected_options is not None and settings != expected_options:
             raise ValueError("Official-client settings differ from the independently expected settings")
+        if expected is not None and payload.get("source") != expected["source"]:
+            raise ValueError("Official-client source differs from the independently expected source")
     finished = [e for e in events if e["kind"] == "official.finished"]
     if len(finished) != 1:
         reasons.append("procedure_not_finished")

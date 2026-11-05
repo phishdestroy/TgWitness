@@ -1,6 +1,7 @@
 # Chromium sandbox policy
 
-`official-seccomp.json` is the unmodified profile distributed with Playwright 1.64.1．
+`official-seccomp.json` derives from the profile distributed with Playwright 1.64.1．
+The only addition is unconditional seccomp permission for `chroot`，which Chromium needs inside its own user namespace when Docker drops every capability．The container receives no host `CAP_SYS_CHROOT` or `CAP_SYS_ADMIN` capability，and Chromium sandboxing remains enabled．
 It keeps a deny-by-default syscall policy and permits the user namespaces needed
 by Chromium's own sandbox，without adding host administration capabilities．
 
