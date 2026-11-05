@@ -1912,6 +1912,18 @@ COMPARE_MEANING = {
 }
 
 
+CLOCK_SLACK = 5
+
+
+def unix_time(row):
+    if row.get("date_unixtime") is not None:
+        return int(row["date_unixtime"])
+    try:
+        return int(datetime.fromisoformat(str(row.get("date")).replace("Z", "+00:00")).timestamp())
+    except ValueError:
+        return 0
+
+
 def chat_rows(path, max_gib=None):
     with open_archive(path, max_gib=max_gib) as archive:
         manifest = read_manifest(archive)
@@ -1938,18 +1950,33 @@ def compare_chat_exports(first, second, first_fingerprint=None, second_fingerpri
     same_chat = (first_manifest.get("chat") or {}).get("id") == (second_manifest.get("chat") or {}).get("id")
     same_account = ((first_manifest.get("account") or {}).get("id") == (second_manifest.get("account") or {}).get("id"))
     method = "number" if same_chat and same_account else "content"
-
-    def key(row):
-        if method == "number":
-            return row.get("id")
-        brief = row_brief(row)
-        return row.get("date_unixtime") or row.get("date"), brief["from_id"], brief["file_sha256"] or brief["text"]
-
-    left = {key(row): row for row in first_rows if row.get("type") != "unparsed"}
-    right = {key(row): row for row in second_rows if row.get("type") != "unparsed"}
+    first_rows = [row for row in first_rows if row.get("type") != "unparsed"]
+    second_rows = [row for row in second_rows if row.get("type") != "unparsed"]
     order = lambda rows: sorted(rows, key=lambda row: (str(row.get("date")), str(row.get("id"))))
-    changed = [{"first": row_brief(left[k]), "second": row_brief(right[k])}
-               for k in left.keys() & right.keys() if row_content(left[k]) != row_content(right[k])]
+    if method == "number":
+        left, right = {row.get("id"): row for row in first_rows}, {row.get("id"): row for row in second_rows}
+        pairs = [(left[k], right[k]) for k in left.keys() & right.keys()]
+        only_first = [left[k] for k in left.keys() - right.keys()]
+        only_second = [right[k] for k in right.keys() - left.keys()]
+    else:
+        def content_key(row):
+            brief = row_brief(row)
+            return brief["from_id"], brief["file_sha256"] or brief["text"]
+
+        waiting, pairs, only_first = {}, [], []
+        for row in order(second_rows):
+            waiting.setdefault(content_key(row), []).append(row)
+        for row in order(first_rows):
+            candidates = waiting.get(content_key(row), [])
+            match = next((c for c in candidates if abs(unix_time(c) - unix_time(row)) <= CLOCK_SLACK), None)
+            if match is None:
+                only_first.append(row)
+            else:
+                candidates.remove(match)
+                pairs.append((row, match))
+        only_second = [row for rows in waiting.values() for row in rows]
+    changed = [{"first": row_brief(a), "second": row_brief(b)} for a, b in pairs
+               if method == "number" and row_content(a) != row_content(b)]
     return {"format": "tgwitness-chat-comparison-v1", "method": method, "meaning": COMPARE_MEANING[method],
             "first": {"file": str(first), "fingerprint": checked[0]["fingerprint"], "exported_at": first_manifest.get("exported_at"),
                       "chat_id": (first_manifest.get("chat") or {}).get("id"), "messages": len(first_rows),
@@ -1957,10 +1984,10 @@ def compare_chat_exports(first, second, first_fingerprint=None, second_fingerpri
             "second": {"file": str(second), "fingerprint": checked[1]["fingerprint"], "exported_at": second_manifest.get("exported_at"),
                        "chat_id": (second_manifest.get("chat") or {}).get("id"), "messages": len(second_rows),
                        "key_pinned": checked[1]["key_pinned"]},
-            "only_first": [row_brief(row) for row in order(left[k] for k in left.keys() - right.keys())],
-            "only_second": [row_brief(row) for row in order(right[k] for k in right.keys() - left.keys())],
+            "only_first": [row_brief(row) for row in order(only_first)],
+            "only_second": [row_brief(row) for row in order(only_second)],
             "changed": sorted(changed, key=lambda item: (str(item["first"]["date"]), str(item["first"]["id"]))),
-            "unchanged": len(left.keys() & right.keys()) - len(changed)}
+            "unchanged": len(pairs) - len(changed)}
 
 
 def print_comparison(result, limit=50):

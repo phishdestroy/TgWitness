@@ -1,7 +1,7 @@
 import asyncio
 import json
 import zipfile
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
@@ -711,7 +711,10 @@ def test_compare_finds_removed_and_edited_messages(tmp_path, monkeypatch):
         assert [row["id"] for row in result["only_first"]] == [3] and not result["only_second"]
         assert [(c["first"]["id"], c["second"]["text"]) for c in result["changed"]] == [(4, "Rewritten after the fact.")]
         assert result["unchanged"] == 3
-        other_side = verify.compare_chat_exports(second, (await export(tmp_path / "t3", after, "account1"))[0])
+        shifted = [message(1), message(2), message(4, "Rewritten after the fact."), message(5)]
+        for row in shifted:
+            row.date += timedelta(seconds=1)
+        other_side = verify.compare_chat_exports(second, (await export(tmp_path / "t3", shifted, "account1"))[0])
         assert other_side["method"] == "content" and not other_side["only_first"] and not other_side["only_second"]
     asyncio.run(scenario())
 
