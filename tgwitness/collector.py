@@ -5,6 +5,7 @@ import json
 import shutil
 import time
 import secrets
+import warnings
 from contextlib import suppress
 from datetime import datetime, timedelta, timezone
 from functools import wraps
@@ -650,6 +651,8 @@ class Collector:
                 client_profile = saved.get("client_profile")
         supplied = {**client_identity.validate(languages), **client_identity.validate(client_profile)}
         device = client_identity.resolve(api_id, supplied, self.vault.public_key)
+        for issue in client_identity.consistency_warnings(api_id, device, LAYER):
+            warnings.warn(issue + " Imported profile values are retained.", UserWarning, stacklevel=2)
         options = {key: value for key, value in device.items() if key not in ("lang_pack", "tz_offset")}
         string_session = StringSession(session)
         self.resumed_state_at = self.load_update_state(string_session)
@@ -888,16 +891,21 @@ class Collector:
         return self.auto_route[1].client_options()
 
     def client_identity(self, client=None, credentials=None):
+        from .client_identity import consistency_warnings
+        credentials = credentials if credentials is not None else self.vault.read("credentials")
         init = getattr(client or self.client, "_init_request", None)
-        api_id = getattr(init, "api_id", None) or (credentials if credentials is not None
-                                                   else self.vault.read("credentials")).get("api_id")
+        api_id = getattr(init, "api_id", None) or credentials.get("api_id")
         sent = {name: getattr(init, name) for name in CLIENT_FIELDS if isinstance(getattr(init, name, None), str)}
+        profile = (sent or getattr(client or self.client, "tgwitness_client_profile", None)
+                   or credentials.get("client_profile") or api_pool.device_for(api_id, self.vault.public_key))
         session = getattr(client or self.client, "session", None)
         identity = {"library": "Telethon " + telethon_version, "layer": LAYER, "api_id": api_id,
                     **({"dc_id": session.dc_id} if isinstance(getattr(session, "dc_id", None), int) else {}),
                     "api_pair": "built-in public pair" if api_id in api_pool.POOL_IDS else
                                 "own application" if api_id else None,
-                    **(sent or api_pool.device_for(api_id))}
+                    **profile}
+        if issues := consistency_warnings(api_id, profile, LAYER):
+            identity["warnings"] = issues
         if api_id == api_pool.DESKTOP_ID:
             identity["meaning"] = "Telegram Desktop's public pair, sent with a Telegram Desktop client description"
         return identity

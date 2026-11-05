@@ -218,6 +218,14 @@ def check_platforms():
         assert profile["lang_pack"] == expected["lang_pack"]
         assert profile["system_version"] in {d["system_version"] for d in data["devices"]["web_k"]}
     assert api_pool.device_for(123456789, "fixed") == {}
+    for api_id in (4, 6, 21724, 10840, 2834, 2496, 2040):
+        profile = client_identity.resolve(api_id, seed="fixed")
+        assert client_identity.consistency_warnings(api_id, profile, 230) == []
+    profile = client_identity.resolve(4, seed="fixed")
+    mismatched = {**profile, "device_model": "iPhone 17", "system_version": "27.0.1", "lang_pack": "ios"}
+    assert len(client_identity.consistency_warnings(4, mismatched, 230)) == 3
+    assert "schema layer" in client_identity.consistency_warnings(4, profile, 229)[0]
+    assert client_identity.resolve(4, mismatched, "fixed") == mismatched
 
 
 async def check_catalog_retention(root):
@@ -257,6 +265,7 @@ async def check_imported_pair_retention(root):
             assert saved["client_profile"] == profile
             await collector.stop(shutdown=True)
             collector = Collector(store, vault, FakeClient)
+            assert collector.client_identity(credentials=saved)["device_model"] == profile["device_model"]
             await collector.restore()
             assert collector.client.tgwitness_client_profile == profile
             assert vault.read("credentials") == saved

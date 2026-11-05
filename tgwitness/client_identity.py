@@ -88,3 +88,37 @@ def resolve(api_id, supplied=None, seed=""):
     profile.update(api_pool.device_for(api_id, seed, supplied))
     profile.update(supplied)
     return validate(profile)
+
+
+def consistency_warnings(api_id, profile, layer):
+    """Advisory format checks, not Telegram's undocumented abuse decisions."""
+    from .client_profiles import catalog
+    expected = api_pool.device_for(api_id, supplied=profile)
+    if not expected:
+        return []
+    issues = []
+    if profile.get("lang_pack") != expected["lang_pack"]:
+        issues.append("The imported lang_pack does not match this API's platform.")
+    model, system, version = (profile.get(key, "") for key in ("device_model", "system_version", "app_version"))
+    if api_id in (4, 6, 21724):
+        if not re.fullmatch(r"SDK [0-9]{1,3}", system):
+            issues.append("Android system_version should use the SDK version format.")
+        if re.match(r"(?:iPhone|iPad|iPod|Mac|iMac|PC |Desktop)", model, re.I):
+            issues.append("The device_model describes another platform for an Android API.")
+    if api_id in (10840, 2834):
+        if not re.fullmatch(r"[0-9]+(?:\.[0-9]+){1,3}", system):
+            issues.append("This Apple API expects a numeric system_version.")
+        prefix = r"(?:iPhone|iPad|iPod)" if api_id == 10840 else r"(?:Mac|iMac)"
+        if not re.match(prefix, model):
+            issues.append("The device_model does not match this Apple API's platform.")
+    if api_id == 2496 and not model.startswith("Mozilla/"):
+        issues.append("The Web API expects a browser user agent as device_model.")
+    if api_id == 2040 and re.match(r"(?:SDK |iOS )", system):
+        issues.append("The system_version describes a mobile platform for the Desktop API.")
+    if not re.fullmatch(r"[0-9]+(?:\.[0-9]+){1,3}(?: \([0-9]+\))?(?: (?:x64|arm64|A|K))?", version):
+        issues.append("The app_version does not match the reviewed official version formats.")
+    if api_id in (4, 6, 21724, 10840) and not re.search(r"[-_]", profile.get("system_lang_code", "")):
+        issues.append("The mobile system_lang_code has no region component.")
+    if layer != catalog()["platforms"]["layer"]:
+        issues.append("Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.")
+    return issues

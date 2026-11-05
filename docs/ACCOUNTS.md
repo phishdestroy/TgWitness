@@ -70,6 +70,15 @@ not an echo of each new `initConnection`. Compare it with the actual sent profil
 Connecting an existing authorization does not validate its companion API hash:
 `initConnection` sends the API ID, while the hash is used by login requests.
 
+Before connection, advisory checks compare the API platform, language pack,
+device/OS and app-version formats, mobile system locale, and Telethon's actual
+schema layer against the reviewed catalog baseline. Warnings appear in the server
+log and account status metadata; they never replace imported values or change the
+schema layer. A different layer is a compatibility review signal, not proof of a
+broken or restricted account. These checks and `official_app` do not certify that
+Telegram considers the account safe from restrictions. Disconnected account status
+uses the saved profile instead of generating another device description.
+
 To use your own application instead (the account that registers it is the one at risk; see
 [Why a built-in API pool?](PROJECT-GUIDE.md#connect-a-telegram-account)):
 
