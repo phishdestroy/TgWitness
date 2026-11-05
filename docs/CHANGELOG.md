@@ -16,6 +16,9 @@
 - Include the hash-export configuration examples in source archives and preserve the translated documentation and required site assets from the latest main revision.
 - Keep the current tunnel address when an older signed address post is replayed.
   Signed posts are ordered by their signed time; unsigned posts use the relay's receive time.
+- Trust only the Caddy proxy on the private Docker HTTPS network and normalize client addresses for authentication limits.
+- Keep operator IP addresses out of new signed access events, hide administrative payloads from shared views, and enforce workspace and export ownership boundaries.
+- Reject duplicate JSON keys, prepended ZIP content and HTML injected into report seals; distinguish pinned witness keys from pinned collector keys.
 
 ## 0.9.0 preview · 4 November 2026
 

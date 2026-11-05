@@ -96,6 +96,9 @@ def open_archive(path, max_gib=None):
         names = [info.filename for info in infos]
         if len(names) != len(set(names)):
             raise ValueError("Duplicate ZIP members")
+        # Bytes before the first member could hold a second archive that streaming readers show instead.
+        if infos and min(info.header_offset for info in infos) != 0:
+            raise ValueError("Archive has data before its first member")
         if sum(info.file_size for info in infos) > limit * 1024**3:
             raise ValueError("Bundle exceeds the verifier's size limit; raise it with --max-gib")
     except BaseException:
@@ -114,8 +117,20 @@ def read_member(archive, name, limit=MAX_SMALL_MEMBER_BYTES):
     return data
 
 
+def unique_keys(pairs):
+    value = dict(pairs)
+    if len(value) != len(pairs):
+        raise ValueError("Signed JSON contains a duplicate key")
+    return value
+
+
+def strict_json(data):
+    # Signatures cover canonical(parsed); a duplicate key would let other parsers read different values.
+    return json.loads(data, object_pairs_hook=unique_keys)
+
+
 def read_manifest(archive):
-    return json.loads(read_member(archive, "manifest.json", MAX_MANIFEST_BYTES))
+    return strict_json(read_member(archive, "manifest.json", MAX_MANIFEST_BYTES))
 
 
 def member_digest(archive, name):
@@ -137,7 +152,7 @@ def read_json_file(path):
     path = Path(path)
     if path.stat().st_size > MAX_JSON_BYTES:
         raise ValueError(path.name + " exceeds the verifier's size limit")
-    return json.loads(path.read_text(encoding="utf-8"))
+    return strict_json(path.read_text(encoding="utf-8"))
 
 
 def der(data, offset):
@@ -530,7 +545,7 @@ def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None
     results = []
     for name in sorted(n for n in names if n.startswith("anchors/") and n.endswith(".json")):
         data = read_member(archive, name)
-        verify_checkpoint(json.loads(data), public_key, event_count, hash_at)
+        verify_checkpoint(strict_json(data), public_key, event_count, hash_at)
         digest, stem = hashlib.sha256(data).digest(), name[:-len(".json")] + "."
         for proof_name in sorted(n for n in names if n.startswith(stem) and n != name):
             service = proof_name[len(stem):].rsplit(".", 1)[0]
@@ -1109,7 +1124,11 @@ def read_sealed(stream):
     block = window[at + len(SEAL_OPEN):]
     if not block.endswith(SEAL_CLOSE):
         raise ValueError("The report seal is not at the end of the file")
-    return digest.hexdigest(), json.loads(block[:-len(SEAL_CLOSE)])
+    raw = block[:-len(SEAL_CLOSE)]
+    # The producer escapes "<"; a raw one could close the seal element and add unsigned page content.
+    if b"<" in raw:
+        raise ValueError("The report seal contains markup")
+    return digest.hexdigest(), strict_json(raw)
 
 
 def check_seal(sealed, public_key=None, expected_fingerprint=None):
@@ -1183,7 +1202,7 @@ def read_pdf_seal(data):
     seal = values(unsigned).get(PDF_SEAL) if unsigned else None
     if seal is None:
         raise ValueError("The PDF signature carries no TgWitness seal")
-    seal = json.loads(raw[seal[2]:seal[3]].decode("utf-8"))
+    seal = strict_json(raw[seal[2]:seal[3]].decode("utf-8"))
     certificate_sha256 = hashlib.sha256(der_certificate).hexdigest()
     if seal["statement"].get("document_certificate_sha256") != certificate_sha256 \
             or seal["statement"].get("content") != "pdf-byte-range":
@@ -3437,6 +3456,9 @@ def main():
             elif is_format(kind, "public-proof-v1"):
                 shown = "proof"
                 result = verify_public_proof(args.bundle, args.fingerprint, args.witness_fingerprint, args.evidence)
+                pinned = bool(args.witness_fingerprint)
+                if not pinned:
+                    notes.append("A public proof is signed by its witness: pass --witness-fingerprint to pin that key.")
             elif is_format(kind, "history-report-v1"):
                 shown = "history"
                 result = verify_history_report(args.bundle, args.fingerprint, args.evidence)
