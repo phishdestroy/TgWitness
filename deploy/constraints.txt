@@ -19,7 +19,7 @@ h11==0.16.0
 idna==3.20
 jieba==0.42.1
 markdown==3.11.2
-oauthlib==4.0.0
+oauthlib==4.0.1
 opentelemetry-api==1.45.2
 pillow==13.0.0
 pyaes==1.6.1
