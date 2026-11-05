@@ -3142,6 +3142,7 @@ SAY = {
         "No independent timestamps: times come from the collector's clock.":
             "Независимых меток нет: время — по часам коллектора.",
         "INTEGRITY VERIFIED": "ЦЕЛОСТНОСТЬ ПОДТВЕРЖДЕНА", "VERIFICATION FAILED": "ПРОВЕРКА НЕ ПРОЙДЕНА",
+        "INTEGRITY VERIFIED · SIGNER NOT CONFIRMED": "ЦЕЛОСТНОСТЬ ЕСТЬ · ПОДПИСАНТ НЕ ПОДТВЕРЖДЁН",
         "Source authenticity and clock accuracy are not established by this check.":
             "Эта проверка не устанавливает подлинность источника и точность часов.",
         "… and {n} more": "… и ещё {n}", "Checking signatures, hashes and the record chain":
@@ -3185,6 +3186,7 @@ SAY = {
         "No independent timestamps: times come from the collector's clock.":
             "Незалежних міток немає: час — за годинником колектора.",
         "INTEGRITY VERIFIED": "ЦІЛІСНІСТЬ ПІДТВЕРДЖЕНО", "VERIFICATION FAILED": "ПЕРЕВІРКУ НЕ ПРОЙДЕНО",
+        "INTEGRITY VERIFIED · SIGNER NOT CONFIRMED": "ЦІЛІСНІСТЬ Є · ПІДПИСАНТА НЕ ПІДТВЕРДЖЕНО",
         "Source authenticity and clock accuracy are not established by this check.":
             "Ця перевірка не встановлює автентичність джерела і точність годинника.",
         "… and {n} more": "… і ще {n}", "Checking signatures, hashes and the record chain":
@@ -3227,7 +3229,7 @@ def enable_ansi(stream):
 class Console:
     WIDTH = 66
     STYLES = {"ok": "1;32", "bad": "1;31", "warn": "1;33", "dim": "2", "bold": "1", "accent": "1;38;5;75",
-              "okbar": "1;97;42", "badbar": "1;97;41"}
+              "okbar": "1;97;42", "badbar": "1;97;41", "warnbar": "1;30;43"}
 
     def __init__(self, stream, lang="en", color=True):
         try:
@@ -3302,12 +3304,14 @@ class Console:
                 blocks += "\033[38;5;" + str(code) + "m" + self.glyph["block"]
             self.say("  " + " " * 11 + blocks + "\033[0m")
 
-    def verdict(self, ok, reason=""):
-        text = " " + (self.glyph["ok"] if ok else self.glyph["bad"]) + "  " \
-               + self.t("INTEGRITY VERIFIED" if ok else "VERIFICATION FAILED") + " "
+    def verdict(self, ok, reason="", pinned=True):
+        unconfirmed = ok and not pinned
+        text = " " + (self.glyph["warn"] if unconfirmed else self.glyph["ok"] if ok else self.glyph["bad"]) + "  " \
+               + self.t("INTEGRITY VERIFIED · SIGNER NOT CONFIRMED" if unconfirmed
+                        else "INTEGRITY VERIFIED" if ok else "VERIFICATION FAILED") + " "
         self.say()
         if self.color:
-            self.say("  " + self.paint(text.ljust(self.WIDTH - 2), "okbar" if ok else "badbar"))
+            self.say("  " + self.paint(text.ljust(self.WIDTH - 2), "warnbar" if unconfirmed else "okbar" if ok else "badbar"))
         else:
             self.say("  " + self.glyph["tl"] + self.glyph["h"] * (self.WIDTH - 4) + self.glyph["tr"])
             self.say("  " + self.glyph["v"] + text.ljust(self.WIDTH - 4) + self.glyph["v"])
@@ -3473,7 +3477,7 @@ class Console:
             self.lines("Details", facts, limit=12)
         self.lines("Notes", notes)
         self.case(result.get("case") or (result.get("report_seal") or {}).get("case") or {})
-        self.verdict(True)
+        self.verdict(True, pinned=pinned)
         producer = result.get("producer")
         if producer:
             self.say("  " + self.paint(self.t("Produced by") + ": " + str(producer.get("software")) + " "
