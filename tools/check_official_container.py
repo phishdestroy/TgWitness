@@ -21,7 +21,7 @@ def main():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     script = "FIXTURE = " + json.dumps(module.FIXTURE) + "\n" + r'''
-import asyncio, importlib.util, socket, time
+import asyncio, importlib.util, json, socket, time, zipfile
 from pathlib import Path
 from tgwitness_capture.official import OfficialBrowser, OfficialOptions
 from tgwitness_capture.journal import Journal
@@ -41,7 +41,7 @@ for host, family in [('1.1.1.1', socket.AF_INET), ('2606:4700:4700::1111', socke
             raise AssertionError('Direct external network access is available')
 async def main():
     journal=Journal('/tmp/check-records')
-    browser=OfficialBrowser(OfficialOptions(proxy_server='http://127.0.0.1:9'),journal)
+    browser=OfficialBrowser(OfficialOptions(proxy_server='http://127.0.0.1:9',drand=False),journal)
     real_route=browser._route
     async def route(original):
         class FixtureRoute:
@@ -79,8 +79,22 @@ async def main():
         checked=verify_zip('/tmp/check.zip',journal.fingerprint)
         assert checked['official']['video_segments']>=2
         assert checked['official']['reasons']==['logout_unconfirmed']
-        from tgwitness.sealed_package import connection
-        print('PASS: Chromium sandbox, denied IPv4/IPv6 egress, guarded DOM, Xvfb video with overlay, signed segments, standalone verification, encryption helper import')
+        from tgwitness.sealed_package import connection, package
+        from tgwitness.sealed_crypto import keypair, decrypt_file
+        recipient=keypair()
+        config={'client':'official_web','recipient':recipient['recipient'],'token':'a'*43,'context':{'synthetic':True}}
+        connection(config,'https://fixture.trycloudflare.com','/tmp/connection.tgwsealed')
+        decrypt_file('/tmp/connection.tgwsealed','/tmp/connection.json',recipient)
+        assert json.loads(Path('/tmp/connection.json').read_bytes())['url'].endswith('#access='+'a'*43)
+        out=Path('/tmp/delivery'); out.mkdir()
+        Path('/tmp/check.zip').replace(out/'evidence.zip')
+        (out/'result.json').write_text('{"phase":"sealed"}')
+        (out/'attestation.jsonl').write_text('synthetic test only; not GitHub attestation')
+        package(config,out,out/'attestation.jsonl')
+        decrypt_file(out/'delivery.tgwsealed','/tmp/delivery.zip',recipient)
+        with zipfile.ZipFile('/tmp/delivery.zip') as handoff:
+            assert handoff.read('evidence.zip')==(out/'evidence.zip').read_bytes()
+        print('PASS: Chromium sandbox, denied IPv4/IPv6 egress, guarded DOM, Xvfb video with overlay, signed segments, standalone verification, encrypted connection and evidence delivery roundtrip')
     finally:
         video.abort()
         await browser.close()

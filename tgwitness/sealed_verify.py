@@ -151,11 +151,17 @@ def main():
     parser.add_argument("--max-gib", type=int, default=4, help="Uncompressed archive verification ceiling")
     parser.add_argument("--expected-selection", type=Path, help="Independently agreed settings JSON saved before capture")
     parser.add_argument("--require-complete", action="store_true", help="Reject partial exports and chat journals")
+    parser.add_argument("--confirm-drand", action="store_true", help="Independently query public rounds in official-client recordings")
     args = parser.parse_args()
     try:
         result = verify(args.evidence, args.bundle, args.repo, args.policy, args.trusted_root,
                         max_gib=args.max_gib, assembled=args.assembled,
                         expected_selection=args.expected_selection, require_complete=args.require_complete)
+        if args.confirm_drand and result.get("mode") == "official_web":
+            from tgwitness_capture.beacon import confirm
+            official = result["journal"]["official"]
+            official["drand_verification"] = confirm(official["drand_rounds"])
+            official["drand_status"] = official["drand_verification"]["status"]
         print(json.dumps(result, indent=2, ensure_ascii=False))
     except Exception as exc:
         parser.exit(1, "Verification failed: " + str(exc) + "\n")

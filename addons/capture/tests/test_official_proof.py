@@ -20,7 +20,7 @@ def example(tmp_path, *, wrong_context=False, segments=(0, 1)):
     approved = json.loads(DEFAULT_POLICY.read_bytes())["releases"][0]
     context = {"collector_sha": "0" * 40 if wrong_context else approved["collector_sha"],
                "repository": "owner/example", "run_id": "123", "run_attempt": "1"}
-    options = OfficialOptions(proxy_server="http://gateway:3128").receipt()
+    options = OfficialOptions(proxy_server="http://gateway:3128", drand=False).receipt()
     source = "https://web.telegram.org/a/#123"
     journal.append("official.sealed_started", {"client": "official_web", "context": context,
                    "session_import_allowed": False, "network": "isolated-required-proxy"})
@@ -31,7 +31,8 @@ def example(tmp_path, *, wrong_context=False, segments=(0, 1)):
     for index in segments:
         artifact = journal.artifact(b"synthetic segment " + str(index).encode(), "screen_video_segment", "video/x-matroska")
         journal.append("video.segment", {"capture_id": "test-video", "segment_index": index}, [artifact])
-    journal.append("video.stopped", {"capture_id": "test-video"})
+    journal.append("video.stopped", {"capture_id": "test-video", "clean_exit": True,
+                                    "requested_stop": True, "unsealed_segments": []})
     artifact = journal.artifact(b"synthetic visible text", "derived_rendered_text", "text/plain")
     journal.append("capture.saved", {}, [artifact])
     journal.append("official.finished", {"logout_confirmed": True})

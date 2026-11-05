@@ -38,8 +38,9 @@ class OfficialOptions(BaseModel):
     scroll_pixels: int = Field(default=320, ge=80, le=600)
     max_steps: int = Field(default=300, ge=1, le=5000)
     session_minutes: int = Field(default=30, ge=1, le=120)
-    max_storage_mib: int = Field(default=4096, ge=128, le=65536)
+    max_storage_mib: int = Field(default=3072, ge=128, le=6144)
     require_video: bool = True
+    drand: bool = True
 
     @field_validator("proxy_server")
     @classmethod
@@ -301,6 +302,8 @@ class OfficialBrowser(BrowserCapture):
         self.journal.append("official.started", {"adapter": ADAPTER, "settings": self.options.receipt(),
                             "settings_sha256": digest(canonical(self.options.receipt())),
                             "source": self.selected_url, "recording_starts_after_login": True})
+        if self.options.drand:
+            await self.beacon()
 
     async def assert_safe(self):
         if self.stop_requested or self.page is None or self.page.is_closed():
@@ -314,6 +317,35 @@ class OfficialBrowser(BrowserCapture):
             raise GuardStopped("UnsupportedMessageLayout")
         if time.monotonic() - self.checked_route >= 30:
             await self.check_route()
+
+    async def beacon(self):
+        from .beacon import CHAIN, GENESIS, PERIOD, RELAY, round_time, validate
+        response = await self.context.request.get(RELAY + "latest", timeout=10000, max_redirects=0)
+        try:
+            if response.status != 200 or len(await response.body()) > 4096:
+                raise GuardStopped("BeaconUnavailable")
+            value = validate(await response.json())
+        finally:
+            await response.dispose()
+        if abs(GENESIS + (value["round"] - 1) * PERIOD - time.time()) > 60:
+            raise GuardStopped("BeaconNotFresh")
+        previous = getattr(self, "beacon_round", 0)
+        if value["round"] < previous:
+            raise GuardStopped("BeaconWentBackwards")
+        if value["round"] > previous:
+            self.journal.append("official.drand", {**value, "chain": CHAIN,
+                                "round_time": round_time(value["round"]),
+                                "meaning": "not-before bound after independent relay comparison; no upper time bound"})
+            self.beacon_round = value["round"]
+            await self.page.evaluate("""round => {
+              let el=document.getElementById('tgwitness-beacon');
+              if(!el){el=document.createElement('div');el.id='tgwitness-beacon';
+                Object.assign(el.style,{position:'fixed',bottom:'4px',right:'4px',zIndex:'2147483646',
+                  color:'#fff',background:'#101827',padding:'4px',font:'12px monospace',pointerEvents:'none'});
+                document.body.append(el);}
+              el.textContent='drand round '+round+' · not-before only';
+            }""", value["round"])
+        self.checked_beacon = time.monotonic()
 
     async def scroll(self, direction="older"):
         if self.phase != "observing" or self.stop_requested:
@@ -336,6 +368,8 @@ class OfficialBrowser(BrowserCapture):
         if self.phase != "observing":
             return
         await self.assert_safe()
+        if self.options.drand and time.monotonic() - getattr(self, "checked_beacon", 0) >= 30:
+            await self.beacon()
         if time.monotonic() - self.started >= self.options.session_minutes * 60:
             raise GuardStopped("SessionLimitReached")
         used = sum(p.stat().st_size for p in self.journal.objects.iterdir() if p.is_file())

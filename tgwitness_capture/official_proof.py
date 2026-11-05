@@ -3,6 +3,7 @@ from .format import canonical, digest
 
 
 def official_report(events, expected=None):
+    from .beacon import records
     starts = [e for e in events if e["kind"] == "official.started"]
     opened = [e for e in events if e["kind"] == "official.opened"]
     if not starts and not opened:
@@ -57,19 +58,29 @@ def official_report(events, expected=None):
             session["indices"].append(index)
         elif event["kind"] in {"video.stopped", "video.interrupted"}:
             session = sessions.get(event["payload"].get("capture_id"))
-            if session is None:
-                raise ValueError("Video end without a start")
+            if session is None or session["stopped"]:
+                raise ValueError("Video end without an open start")
+            if (event["kind"] != "video.stopped" or event["payload"].get("clean_exit") is not True
+                    or event["payload"].get("requested_stop") is not True
+                    or event["payload"].get("unsealed_segments") != []):
+                if "video_coverage_incomplete" not in reasons:
+                    reasons.append("video_coverage_incomplete")
             session["stopped"] = True
     required_video = any(e["payload"]["settings"].get("require_video") for e in starts)
     if required_video and (len(sessions) < len(starts) or any(not s["indices"] or not s["stopped"] for s in sessions.values())):
-        reasons.append("video_coverage_incomplete")
+        if "video_coverage_incomplete" not in reasons:
+            reasons.append("video_coverage_incomplete")
     if not any(e["kind"] == "capture.saved" for e in events):
         reasons.append("no_saved_observation")
+    beacons = records(events)
+    if any(e["payload"]["settings"].get("drand") for e in starts) and not beacons:
+        reasons.append("no_public_beacon")
     return {"mode": starts[0]["payload"]["settings"]["mode"] if starts else None,
             "settings_checked": expected_options is not None, "intervals": len(starts),
             "video_segments": sum(len(s["indices"]) for s in sessions.values()),
             "procedure_status": "INCOMPLETE" if reasons else "PASS", "reasons": reasons,
             "interruptions": [{"seq": e["seq"], "kind": e["kind"], "at": e["recorded_at"]} for e in interruptions],
             "environment_status": "INCOMPLETE", "cloudflare_status": "INCOMPLETE",
+            "drand_status": "INCOMPLETE", "drand_rounds": beacons,
             "scope": "rendered observations only; no complete account history or Telegram-signed content",
             "trust": "local integrity only; verify independent environment and network evidence separately"}

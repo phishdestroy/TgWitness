@@ -102,7 +102,7 @@ def test_official_panel_login_selection_export_and_languages(tmp_path, request):
     from playwright.sync_api import expect, sync_playwright
     from tgwitness_capture.verify import verify_zip
     root = tmp_path / "panel"
-    app = create_app(root, Config(official={"proxy_server": "http://127.0.0.1:9", "require_video": False}))
+    app = create_app(root, Config(official={"proxy_server": "http://127.0.0.1:9", "require_video": False, "drand": False}))
     sock = socket.socket()
     sock.bind(("127.0.0.1", 0))
     server = uvicorn.Server(uvicorn.Config(app, access_log=False, log_level="warning", timeout_graceful_shutdown=5))
@@ -204,7 +204,7 @@ def test_owned_browser_guard_scroll_capture_and_unknown_dialog(tmp_path, request
     if not request.config.getoption("--capture-browser"):
         pytest.skip("Use --capture-browser for real Chromium validation")
     journal = Journal(tmp_path / "official")
-    adapter = OfficialBrowser(OfficialOptions(proxy_server="http://127.0.0.1:9", require_video=False), journal, headless=True)
+    adapter = OfficialBrowser(OfficialOptions(proxy_server="http://127.0.0.1:9", require_video=False, drand=False), journal, headless=True)
 
     async def probe():
         adapter.exit_ip = "203.0.113.7"

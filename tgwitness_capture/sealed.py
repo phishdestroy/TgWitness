@@ -64,7 +64,18 @@ def create_sealed_app(root, output, session):
                         return
                     await asyncio.sleep(.5)
 
-            task = asyncio.create_task(supervise())
+            async def guarded_supervise():
+                try:
+                    await supervise()
+                except Exception:
+                    recorder.settings["enabled"] = False
+                    recorder.official.stop_requested = True
+                    recorder.video.abort()
+                    await recorder.official.close()
+                    # Do not disclose rendered content or credentials through supervisor errors.
+                    durable_write(output / "result.json", b'{"phase":"failed"}', exclusive=True)
+
+            task = asyncio.create_task(guarded_supervise())
             try:
                 yield
             finally:
