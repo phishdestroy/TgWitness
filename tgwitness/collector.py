@@ -16,6 +16,7 @@ from telethon import __version__ as telethon_version, events, utils
 from telethon.errors import SessionPasswordNeededError, FloodWaitError, InvalidBufferError, RPCError
 from telethon.errors import ChannelInvalidError, ChannelPrivateError, FileReferenceExpiredError, TakeoutInvalidError
 from telethon.errors import TakeoutInitDelayError, TypeNotFoundError
+from telethon.errors import FreshResetAuthorisationForbiddenError, PasswordHashInvalidError
 from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
                              FrozenMethodInvalidError, SessionExpiredError, SessionRevokedError,
                              UserDeactivatedBanError, UserDeactivatedError)
@@ -813,7 +814,7 @@ class Collector:
             await candidate.disconnect()
 
     def imported_session(self):
-        return (self.store.get_setting("account", None) or {}).get("key_origin") == "imported"
+        return (self.store.get_setting("account", None) or {}).get("key_origin") != "created"
 
     @connection_change
     async def sign_out(self):
@@ -1721,6 +1722,49 @@ class Collector:
                 **snapshot, "added": sorted(now - known) if previous else None,
                 "removed": sorted(known - now) if previous else None, "meaning": SESSIONS_MEANING})
         return snapshot
+
+    async def account_sessions(self):
+        await self.restore()
+        result = await asyncio.wait_for(self.client(functions.account.GetAuthorizationsRequest()), 30)
+        await self.check_sessions()
+        return {"sessions": [{
+            "hash": str(a.hash), "current": bool(a.current), "device_model": a.device_model, "platform": a.platform,
+            "app_name": a.app_name, "app_version": a.app_version, "official_app": bool(a.official_app),
+            "country": a.country, "region": a.region, "created_at": date_string(a.date_created),
+            "active_at": date_string(a.date_active), "password_pending": bool(a.password_pending)}
+            for a in result.authorizations], "inactive_ttl_days": getattr(result, "authorization_ttl_days", None)}
+
+    async def end_session(self, session_hash):
+        await self.restore()
+        result = await asyncio.wait_for(self.client(functions.account.GetAuthorizationsRequest()), 30)
+        target = next((a for a in result.authorizations if str(a.hash) == str(session_hash)), None)
+        if target is None:
+            raise ValueError("This session is no longer signed in.")
+        if target.current:
+            raise ProtectedSession("This is the session TgWitness works on. It cannot be ended from here.")
+        try:
+            await self.client(functions.account.ResetAuthorizationRequest(hash=target.hash))
+        except FreshResetAuthorisationForbiddenError:
+            raise ValueError("Telegram lets a session end other sessions only after it has been signed in for "
+                             "24 hours.") from None
+        self.store.append("account.session_ended", {
+            "device_model": target.device_model, "app_name": target.app_name, "app_version": target.app_version,
+            "country": target.country, "created_at": date_string(target.date_created),
+            "ended_by": "the operator, from this workspace"})
+        await self.check_sessions()
+        return {"ended": True}
+
+    async def change_password(self, current_password, new_password, hint=""):
+        await self.restore()
+        try:
+            await self.client.edit_2fa(current_password=current_password or None, new_password=new_password,
+                                       hint=hint or "")
+        except PasswordHashInvalidError:
+            raise ValueError("The current two-step password is wrong.") from None
+        self.store.append("account.password_changed", {
+            "had_password": bool(current_password), "hint_set": bool(hint),
+            "meaning": "The two-step password was set or changed from this workspace; it is not stored here."})
+        return {"changed": True}
 
     async def signed_in_devices(self):
         if not (self.running and self.client and self.client.is_connected()):

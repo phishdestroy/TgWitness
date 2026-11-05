@@ -6175,5 +6175,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "此快照仅包含 Telegram 在导出时返回的内容。该工作区的日志中还记录了此聊天中观察到的删除内容或早期版本；请导出证据日志以包含这些内容。",
 "access lost: removed or no longer readable": "访问权限丢失：已被删除或无法读取",
 "The account was removed from every source or can no longer read them.": "该账号已被从所有来源中移除，或无法再读取这些内容。",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "该账号已被某些来源移除，或无法再读取这些来源的内容；这些来源已无新消息传来。其余来源仍在正常更新。"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "该账号已被某些来源移除，或无法再读取这些来源的内容；这些来源已无新消息传来。其余来源仍在正常更新。",
+"Sessions of this account": "该账号的会话",
+"Two-step password": "两步验证密码",
+"signed in {date}": "登录于{date}",
+"TgWitness works on this session": "TgWitness 适用于本次会话",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "要结束本次 Telegram 会话吗？该设备已在 Telegram 中注销。此操作无法通过 TgWitness 撤销。",
+"Session ended.": "会话已结束。",
+"Current two-step password. Leave empty if the account has none.": "当前的两步验证密码。如果该账户没有两步验证，请留空。",
+"New two-step password.": "新的两步验证密码。",
+"Password hint (optional).": "密码提示（可选）。",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "两步验证密码保存在 Telegram 中。TgWitness 不会保存该密码。"
 }

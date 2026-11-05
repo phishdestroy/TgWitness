@@ -6175,5 +6175,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "このスナップショットには、エクスポート時にTelegramから返された内容のみが含まれています。このワークスペースのログには、このチャットで確認された削除履歴や以前のバージョンも記録されています。それらを含めるには、証拠ログをエクスポートしてください。",
 "access lost: removed or no longer readable": "アクセス不可：削除されたか、読み取れなくなった",
 "The account was removed from every source or can no longer read them.": "そのアカウントはすべての情報源から削除されたか、またはそれらを読み取ることができなくなりました。",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "一部のソースからアカウントが削除されたか、またはそれらを読み取れなくなっており、それらからは何も届きません。その他のソースは引き続き機能しています。"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "一部のソースからアカウントが削除されたか、またはそれらを読み取れなくなっており、それらからは何も届きません。その他のソースは引き続き機能しています。",
+"Sessions of this account": "このアカウントのセッション",
+"Two-step password": "2段階認証",
+"signed in {date}": "{date}にログインしました",
+"TgWitness works on this session": "TgWitnessはこのセッションで動作します",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "「Telegramでこのセッションを終了しますか？」そのTelegramにログインしているデバイスからログアウトされます。この操作はTgWitnessからは元に戻せません。",
+"Session ended.": "セッションが終了しました。",
+"Current two-step password. Leave empty if the account has none.": "現在の2段階認証パスワード。アカウントに設定されていない場合は空欄のままにしてください。",
+"New two-step password.": "新しい2段階認証。",
+"Password hint (optional).": "パスワードのヒント（任意）。",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Telegramに保存された2段階認証のパスワード。TgWitnessはこれを保持しません。"
 }

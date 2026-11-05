@@ -3974,7 +3974,7 @@ function renderConnection(){
   }
   $("network-form").querySelector('[type="submit"]').disabled=state.status.demo||c.running;
   $("network-test").disabled=state.status.demo;
-  const importedSession=(c.account||{}).key_origin==="imported";
+  const importedSession=!!c.account&&(c.account||{}).key_origin!=="created";
   $("sign-out").disabled=state.status.demo||importedSession;$("sign-out-locked").hidden=!importedSession;
   $("forget-session").hidden=!importedSession;$("forget-session").disabled=state.status.demo;
   if(state.status.demo)$("proxy-catalog-refresh").disabled=true;
@@ -4296,6 +4296,39 @@ $("sign-out").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   clearSecrets();await refreshStatus();setAuthStep("credentials");
   toast(tr(r.telegram_session_ended?"Signed out. Telegram ended the session.":
     "Signed out here. Telegram did not confirm: end the session in Telegram under Settings → Devices."),!r.telegram_session_ended);
+}));
+async function showAccountSessions(){
+  const owner=actionOwner(),box=$("account-sessions");
+  const r=await json("account/sessions",undefined,{profile:owner.profile,token:owner.token});
+  if(!owner.current())return;
+  box.replaceChildren();box.hidden=false;
+  for(const s of r.sessions){
+    const row=node("div","account-session"),who=node("span","",[s.device_model,s.app_name+" "+s.app_version,s.country].filter(Boolean).join(" · "));
+    row.append(who,node("span","muted",tr("signed in {date}",{date:(s.created_at||"").slice(0,10)})));
+    if(s.current)row.append(node("strong","",tr("TgWitness works on this session")));
+    else{
+      const end=node("button","quiet danger",tr("End session"));end.type="button";
+      end.addEventListener("click",e=>busy(e.currentTarget,async()=>{
+        if(!(await askConfirm(tr("End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness."),{danger:true,confirmText:tr("End session")})))return;
+        await json("account/sessions/end",{hash:s.hash},{profile:owner.profile,token:owner.token});
+        toast(tr("Session ended."));await showAccountSessions();
+      }));
+      row.append(end);
+    }
+    box.append(row);
+  }
+}
+$("account-sessions-show").addEventListener("click",e=>busy(e.currentTarget,showAccountSessions));
+$("account-password").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const owner=actionOwner();
+  const current=window.prompt(tr("Current two-step password. Leave empty if the account has none."));
+  if(current===null)return;
+  const next=window.prompt(tr("New two-step password."));
+  if(!next)return;
+  const hint=window.prompt(tr("Password hint (optional)."))||"";
+  if(!owner.current())return;
+  await json("account/password",{current_password:current||null,new_password:next,hint},{profile:owner.profile,token:owner.token});
+  toast(tr("Two-step password saved in Telegram. TgWitness does not keep it."));
 }));
 $("forget-session").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   const owner=actionOwner();

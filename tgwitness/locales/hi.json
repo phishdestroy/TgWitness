@@ -6214,5 +6214,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "यह स्नैपशॉट केवल वही जानकारी रखता है जो टेलीग्राम ने एक्सपोर्ट में लौटाई है। इस वर्कस्पेस का जर्नल भी इस चैट में देखी गई हटाई गई या पहले के संस्करणों को रखता है; उन्हें शामिल करने के लिए साक्ष्य जर्नल को एक्सपोर्ट करें।",
 "access lost: removed or no longer readable": "पहुँच खो गई: हटा दिया गया या अब पठनीय नहीं",
 "The account was removed from every source or can no longer read them.": "खाते को हर स्रोत से हटा दिया गया था या अब उन्हें पढ़ा नहीं जा सकता।",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "कुछ स्रोतों से खाता हटा दिया गया था या अब उन्हें पढ़ा नहीं जा सकता; उनसे कुछ भी नहीं आता। बाकी जारी हैं।"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "कुछ स्रोतों से खाता हटा दिया गया था या अब उन्हें पढ़ा नहीं जा सकता; उनसे कुछ भी नहीं आता। बाकी जारी हैं।",
+"Sessions of this account": "इस खाते के सत्र",
+"Two-step password": "दो-चरणीय पासवर्ड",
+"signed in {date}": "{date} को हस्ताक्षरित",
+"TgWitness works on this session": "TgWitness इस सत्र पर काम कर रहा है",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "क्या आप इस Telegram सत्र को समाप्त करना चाहते हैं? वहाँ साइन इन किया गया डिवाइस लॉग आउट हो गया है। इसे TgWitness से वापस नहीं किया जा सकता।",
+"Session ended.": "सत्र समाप्त हो गया।",
+"Current two-step password. Leave empty if the account has none.": "वर्तमान दो-चरणीय पासवर्ड। यदि खाते में कोई पासवर्ड नहीं है तो खाली छोड़ दें।",
+"New two-step password.": "नया दो-चरणीय पासवर्ड।",
+"Password hint (optional).": "पासवर्ड संकेत (वैकल्पिक)।",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "टेलिग्राम में दो-चरणीय पासवर्ड सहेजा गया है। TgWitness इसे नहीं रखता।"
 }

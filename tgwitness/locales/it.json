@@ -6214,5 +6214,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Questa istantanea contiene solo ciò che Telegram ha restituito al momento dell'esportazione. Il registro di questo spazio di lavoro contiene anche le eliminazioni o le versioni precedenti rilevate in questa chat; esporta il registro delle prove per includerle.",
 "access lost: removed or no longer readable": "accesso perso: rimosso o non più leggibile",
 "The account was removed from every source or can no longer read them.": "L'account è stato rimosso da tutte le fonti oppure non è più in grado di leggerle.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "L'account è stato rimosso da alcune fonti o non è più in grado di leggerle; da quelle non arriva più nulla. Le altre continuano a funzionare."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "L'account è stato rimosso da alcune fonti o non è più in grado di leggerle; da quelle non arriva più nulla. Le altre continuano a funzionare.",
+"Sessions of this account": "Sessioni di questo account",
+"Two-step password": "Password in due passaggi",
+"signed in {date}": "acceduto il {date}",
+"TgWitness works on this session": "TgWitness funziona in questa sessione",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "Vuoi terminare questa sessione su Telegram? Il dispositivo che ha effettuato l'accesso verrà disconnesso. Questa operazione non può essere annullata da TgWitness.",
+"Session ended.": "Sessione terminata.",
+"Current two-step password. Leave empty if the account has none.": "Password attuale in due passaggi. Lasciare vuoto se l'account non ne ha una.",
+"New two-step password.": "Nuova password in due passaggi.",
+"Password hint (optional).": "Suggerimento per la password (facoltativo).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Password in due passaggi salvata su Telegram. TgWitness non la conserva."
 }

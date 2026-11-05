@@ -6214,5 +6214,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "এই স্ন্যাপশটে শুধুমাত্র টেলিগ্রাম রপ্তানিতে ফেরত দেওয়া তথ্য রয়েছে। এই ওয়ার্কস্পেসের জার্নালেও এই চ্যাটে দেখা যাওয়া মুছে ফেলা অংশ বা পূর্ববর্তী সংস্করণগুলো রয়েছে; সেগুলো অন্তর্ভুক্ত করতে প্রমাণ জার্নাল রপ্তানি করুন।",
 "access lost: removed or no longer readable": "অ্যাক্সেস হারিয়ে গেছে: সরানো হয়েছে বা আর পড়া যাচ্ছে না",
 "The account was removed from every source or can no longer read them.": "অ্যাকাউন্টটি প্রতিটি উৎস থেকে মুছে ফেলা হয়েছে বা আর সেগুলো পড়তে পারবে না।",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "অ্যাকাউন্টটি কিছু উৎস থেকে সরিয়ে ফেলা হয়েছে বা আর সেগুলো পড়তে পারছে না; সেখান থেকে কিছুই আসছে না। বাকীগুলো চলছে।"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "অ্যাকাউন্টটি কিছু উৎস থেকে সরিয়ে ফেলা হয়েছে বা আর সেগুলো পড়তে পারছে না; সেখান থেকে কিছুই আসছে না। বাকীগুলো চলছে।",
+"Sessions of this account": "এই অ্যাকাউন্টের সেশনসমূহ",
+"Two-step password": "দুই-ধাপের পাসওয়ার্ড",
+"signed in {date}": "{date} তারিখে স্বাক্ষরিত",
+"TgWitness works on this session": "টিজিউইটনেস এই সেশনে কাজ করছে",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "টেলিগ্রামে এই সেশন শেষ করতে চান? সেখানে সাইন-ইন করা ডিভাইসটি লগ আউট হয়ে গেছে। এটি TgWitness থেকে আর পূর্বাবস্থায় ফেরানো যাবে না।",
+"Session ended.": "সেশন শেষ হয়েছে।",
+"Current two-step password. Leave empty if the account has none.": "বর্তমান দুই-ধাপের পাসওয়ার্ড। যদি অ্যাকাউন্টে কোনো পাসওয়ার্ড না থাকে তবে খালি রাখুন।",
+"New two-step password.": "নতুন দুই-ধাপের পাসওয়ার্ড।",
+"Password hint (optional).": "পাসওয়ার্ডের ইঙ্গিত (ঐচ্ছিক)।",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "টেলিগ্রামে দুই-ধাপের পাসওয়ার্ড সংরক্ষিত আছে। TgWitness এটি সংরক্ষণ করে না।"
 }

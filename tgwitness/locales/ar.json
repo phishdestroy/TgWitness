@@ -6370,5 +6370,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "تحتوي هذه اللقطة فقط على ما أرجعته Telegram عند التصدير. كما يحتوي سجل هذه المساحة العملية على عمليات الحذف أو الإصدارات السابقة التي تمت ملاحظتها في هذه المحادثة؛ قم بتصدير سجل الأدلة لتضمينها.",
 "access lost: removed or no longer readable": "فقدان الوصول: تمت إزالته أو لم يعد قابلاً للقراءة",
 "The account was removed from every source or can no longer read them.": "تمت إزالة الحساب من جميع المصادر أو لم يعد بإمكانه قراءتها.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "تمت إزالة الحساب من بعض المصادر أو لم يعد بإمكانه قراءتها؛ ولا يصل أي شيء منها. أما المصادر الأخرى فتستمر."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "تمت إزالة الحساب من بعض المصادر أو لم يعد بإمكانه قراءتها؛ ولا يصل أي شيء منها. أما المصادر الأخرى فتستمر.",
+"Sessions of this account": "جلسات هذا الحساب",
+"Two-step password": "كلمة مرور من خطوتين",
+"signed in {date}": "تم تسجيل الدخول في {date}",
+"TgWitness works on this session": "يعمل TgWitness في هذه الجلسة",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "هل تريد إنهاء هذه الجلسة في Telegram؟ سيتم تسجيل خروج الجهاز المسجل الدخول هناك. لا يمكن التراجع عن هذه العملية من TgWitness.",
+"Session ended.": "انتهت الجلسة.",
+"Current two-step password. Leave empty if the account has none.": "كلمة المرور الحالية المكونة من خطوتين. اترك الحقل فارغًا إذا لم يكن للحساب كلمة مرور من هذا النوع.",
+"New two-step password.": "كلمة مرور جديدة من خطوتين.",
+"Password hint (optional).": "تلميح كلمة المرور (اختياري).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "كلمة المرور المكونة من خطوتين محفوظة في Telegram. لا تحتفظ TgWitness بها."
 }

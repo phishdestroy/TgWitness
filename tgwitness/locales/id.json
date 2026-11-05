@@ -6175,5 +6175,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Cuplikan ini hanya berisi apa yang dikembalikan oleh Telegram saat diekspor. Jurnal ruang kerja ini juga mencatat penghapusan atau versi sebelumnya yang teramati dalam obrolan ini; ekspor jurnal bukti untuk menyertakan informasi tersebut.",
 "access lost: removed or no longer readable": "Akses hilang: dihapus atau tidak dapat dibaca lagi",
 "The account was removed from every source or can no longer read them.": "Akun tersebut telah dihapus dari semua sumber atau tidak dapat lagi mengaksesnya.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Akun tersebut telah dihapus dari beberapa sumber atau tidak dapat lagi mengaksesnya; tidak ada pesan yang masuk dari sumber-sumber tersebut. Sumber-sumber lainnya tetap berlanjut."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Akun tersebut telah dihapus dari beberapa sumber atau tidak dapat lagi mengaksesnya; tidak ada pesan yang masuk dari sumber-sumber tersebut. Sumber-sumber lainnya tetap berlanjut.",
+"Sessions of this account": "Sesi akun ini",
+"Two-step password": "Kata sandi dua langkah",
+"signed in {date}": "Masuk pada {date}",
+"TgWitness works on this session": "TgWitness berfungsi pada sesi ini",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "Apakah Anda ingin mengakhiri sesi ini di Telegram? Perangkat yang terdaftar di sana akan keluar. Tindakan ini tidak dapat dibatalkan dari TgWitness.",
+"Session ended.": "Sesi telah berakhir.",
+"Current two-step password. Leave empty if the account has none.": "Kata sandi dua langkah saat ini. Biarkan kosong jika akun tidak memilikinya.",
+"New two-step password.": "Kata sandi dua langkah yang baru.",
+"Password hint (optional).": "Petunjuk kata sandi (opsional).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Kata sandi dua langkah disimpan di Telegram. TgWitness tidak menyimpannya."
 }

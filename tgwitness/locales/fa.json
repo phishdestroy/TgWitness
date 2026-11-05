@@ -6214,5 +6214,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "این اسنپ‌شات تنها شامل اطلاعاتی است که تلگرام در هنگام خروجی‌گیری بازگردانده است. مجلهٔ این فضای کاری نیز شامل حذف‌ها یا نسخه‌های قبلی مشاهده‌شده در این چت است؛ مجلهٔ شواهد را خروجی بگیرید تا آن‌ها را نیز دربرگیرد.",
 "access lost: removed or no longer readable": "دسترسی از دست رفته: حذف شده یا دیگر قابل خواندن نیست",
 "The account was removed from every source or can no longer read them.": "حساب از همه منابع حذف شده یا دیگر قادر به خواندن آن‌ها نیست.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "حساب از برخی منابع حذف شده یا دیگر قابل خواندن نیست؛ از آن‌ها هیچ چیزی دریافت نمی‌شود. بقیه ادامه دارند."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "حساب از برخی منابع حذف شده یا دیگر قابل خواندن نیست؛ از آن‌ها هیچ چیزی دریافت نمی‌شود. بقیه ادامه دارند.",
+"Sessions of this account": "جلسات این حساب",
+"Two-step password": "رمز عبور دو مرحله‌ای",
+"signed in {date}": "وارد شده در {date}",
+"TgWitness works on this session": "TgWitness روی این جلسه کار می‌کند",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "آیا می‌خواهید این جلسه در تلگرام را پایان دهید؟ دستگاهی که در آنجا وارد شده بود، از تلگرام خارج شده است. این کار را نمی‌توان از طریق TgWitness انجام داد.",
+"Session ended.": "جلسه پایان یافت.",
+"Current two-step password. Leave empty if the account has none.": "رمز عبور دو مرحله‌ای فعلی. اگر حساب کاربری رمز عبور دو مرحله‌ای ندارد، خالی بگذارید.",
+"New two-step password.": "رمز عبور جدید دو مرحله‌ای.",
+"Password hint (optional).": "سرنخ رمز عبور (اختیاری).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "رمز عبور دو مرحله‌ای در تلگرام ذخیره می‌شود. TgWitness آن را نگه نمی‌دارد."
 }

@@ -6175,5 +6175,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "ภาพถ่ายหน้าจอนี้มีเพียงข้อมูลที่ Telegram ส่งกลับมาเมื่อทำการส่งออกเท่านั้น บันทึกของพื้นที่ทำงานนี้ยังเก็บข้อมูลการลบหรือเวอร์ชันเก่ากว่าที่เคยปรากฏในบทสนทนานี้ด้วย; ให้ส่งออกบันทึกหลักฐานเพื่อรวมข้อมูลเหล่านั้นด้วย",
 "access lost: removed or no longer readable": "สูญเสียการเข้าถึง: ถูกลบหรือไม่สามารถอ่านได้อีกต่อไป",
 "The account was removed from every source or can no longer read them.": "บัญชีดังกล่าวถูกลบออกจากทุกแหล่งข้อมูล หรือไม่สามารถอ่านข้อมูลจากแหล่งเหล่านั้นได้อีกต่อไป",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "บัญชีดังกล่าวถูกลบออกจากบางแหล่งข้อมูล หรือไม่สามารถอ่านข้อมูลจากแหล่งเหล่านั้นได้อีกต่อไป; ไม่มีข้อมูลใดส่งมาจากแหล่งเหล่านั้น ส่วนแหล่งข้อมูลอื่นๆ ยังคงทำงานตามปกติ"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "บัญชีดังกล่าวถูกลบออกจากบางแหล่งข้อมูล หรือไม่สามารถอ่านข้อมูลจากแหล่งเหล่านั้นได้อีกต่อไป; ไม่มีข้อมูลใดส่งมาจากแหล่งเหล่านั้น ส่วนแหล่งข้อมูลอื่นๆ ยังคงทำงานตามปกติ",
+"Sessions of this account": "เซสชันของบัญชีนี้",
+"Two-step password": "รหัสผ่านสองขั้นตอน",
+"signed in {date}": "ลงชื่อ{date}",
+"TgWitness works on this session": "TgWitness กำลังทำงานในเซสชันนี้",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "จะปิดเซสชันนี้ใน Telegram หรือไม่? อุปกรณ์ที่ลงชื่อเข้าใช้ใน Telegram จะถูกออกจากระบบ การดำเนินการนี้ไม่สามารถยกเลิกได้จาก TgWitness",
+"Session ended.": "เซสชันสิ้นสุดแล้ว",
+"Current two-step password. Leave empty if the account has none.": "รหัสผ่านแบบสองขั้นตอนปัจจุบัน ให้เว้นว่างไว้หากบัญชีไม่มีรหัสผ่านดังกล่าว",
+"New two-step password.": "รหัสผ่านแบบสองขั้นตอนใหม่",
+"Password hint (optional).": "คำใบ้รหัสผ่าน (ไม่บังคับ).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "รหัสผ่านสองขั้นตอนที่เก็บไว้ใน Telegram TgWitness ไม่เก็บรหัสผ่านนี้ไว้"
 }

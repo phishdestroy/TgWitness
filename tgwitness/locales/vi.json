@@ -6175,5 +6175,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Bản chụp nhanh này chỉ chứa những gì Telegram trả về khi xuất dữ liệu. Nhật ký của không gian làm việc này cũng lưu giữ các nội dung đã bị xóa hoặc các phiên bản trước đó được ghi nhận trong cuộc trò chuyện này; hãy xuất nhật ký bằng chứng để bao gồm các nội dung đó.",
 "access lost: removed or no longer readable": "Mất quyền truy cập: đã bị xóa hoặc không còn đọc được",
 "The account was removed from every source or can no longer read them.": "Tài khoản đã bị xóa khỏi tất cả các nguồn hoặc không thể truy cập chúng nữa.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Tài khoản đã bị xóa khỏi một số nguồn hoặc không thể truy cập chúng nữa; không có thông tin nào đến từ những nguồn đó. Các nguồn khác vẫn tiếp tục hoạt động."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Tài khoản đã bị xóa khỏi một số nguồn hoặc không thể truy cập chúng nữa; không có thông tin nào đến từ những nguồn đó. Các nguồn khác vẫn tiếp tục hoạt động.",
+"Sessions of this account": "Các phiên của tài khoản này",
+"Two-step password": "Mật khẩu hai bước",
+"signed in {date}": "đăng nhập vào ngày {date}",
+"TgWitness works on this session": "TgWitness hoạt động trên phiên này",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "Bạn có muốn kết thúc phiên này trên Telegram không? Thiết bị đã đăng nhập vào đó sẽ bị đăng xuất. Việc này không thể hoàn tác từ TgWitness.",
+"Session ended.": "Phiên đã kết thúc.",
+"Current two-step password. Leave empty if the account has none.": "Mật khẩu hai bước hiện tại. Để trống nếu tài khoản không có.",
+"New two-step password.": "Mật khẩu hai bước mới.",
+"Password hint (optional).": "Gợi ý mật khẩu (tùy chọn).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Mật khẩu hai bước được lưu trong Telegram. TgWitness không lưu giữ mật khẩu này."
 }

@@ -6292,5 +6292,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Ten zrzut zawiera wyłącznie dane zwrócone przez Telegram podczas eksportu. Dziennik tego obszaru roboczego zawiera również informacje o usuniętych wiadomościach lub wcześniejszych wersjach zaobserwowanych w tej rozmowie; aby je uwzględnić, należy wyeksportować dziennik dowodów.",
 "access lost: removed or no longer readable": "utrata dostępu: usunięto lub nie można już odczytać",
 "The account was removed from every source or can no longer read them.": "Konto zostało usunięte ze wszystkich źródeł lub nie ma już do nich dostępu.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Konto zostało usunięte z niektórych źródeł lub nie ma już do nich dostępu; z tych źródeł nie przychodzą żadne wiadomości. Pozostałe nadal działają."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Konto zostało usunięte z niektórych źródeł lub nie ma już do nich dostępu; z tych źródeł nie przychodzą żadne wiadomości. Pozostałe nadal działają.",
+"Sessions of this account": "Sesje tego konta",
+"Two-step password": "Hasło dwuetapowe",
+"signed in {date}": "zalogowano się {date}",
+"TgWitness works on this session": "TgWitness działa w tej sesji",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "Czy chcesz zakończyć tę sesję w Telegramie? Urządzenie zalogowane w tej aplikacji zostanie wylogowane. Nie można cofnąć tej czynności w TgWitness.",
+"Session ended.": "Sesja zakończona.",
+"Current two-step password. Leave empty if the account has none.": "Obecne hasło dwuetapowe. Pozostaw puste, jeśli konto nie posiada takiego hasła.",
+"New two-step password.": "Nowe hasło dwuetapowe.",
+"Password hint (optional).": "Wskazówka dotycząca hasła (opcjonalnie).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Hasło dwuetapowe zapisane w Telegramie. TgWitness go nie przechowuje."
 }

@@ -6214,5 +6214,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Ushbu snapshot faqat Telegram eksport qilganda qaytargan ma'lumotlarni o'z ichiga oladi. Ushbu ish maydonchasining jurnalida chatda kuzatilgan o'chirishlar yoki avvalgi versiyalar ham mavjud; ularni o'z ichiga olish uchun dalillar jurnalini eksport qiling.",
 "access lost: removed or no longer readable": "kirish yo'qolgan: o'chirib tashlangan yoki endi o'qib bo'lmaydi",
 "The account was removed from every source or can no longer read them.": "Hisob har bir manbadan o'chirib tashlandi yoki endi ularni o'qiy olmaydi.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Ba'zi manbalardan hisob o'chirilgan yoki endi ularni o'qib bo'lmaydi; ulardan hech narsa kelmaydi. Qolganlari davom etadi."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Ba'zi manbalardan hisob o'chirilgan yoki endi ularni o'qib bo'lmaydi; ulardan hech narsa kelmaydi. Qolganlari davom etadi.",
+"Sessions of this account": "Ushbu hisobning sessiyalari",
+"Two-step password": "Ikki bosqichli parol",
+"signed in {date}": "{date}da imzolangan",
+"TgWitness works on this session": "TgWitness ushbu sessiyada ishlaydi",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "Telegramda bu sessiyani yakunlayapsizmi? U yerda kirgan qurilma tizimdan chiqarildi. Buni TgWitness orqali qaytarib bo'lmaydi.",
+"Session ended.": "Sessiya tugadi.",
+"Current two-step password. Leave empty if the account has none.": "Joriy ikki bosqichli parol. Hisobda bo'lmasa, bo'sh qoldiring.",
+"New two-step password.": "Yangi ikki bosqichli parol.",
+"Password hint (optional).": "Parol bo'yicha yordam (ixtiyoriy).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Ikki bosqichli parol Telegramda saqlanadi. TgWitness uni saqlamaydi."
 }

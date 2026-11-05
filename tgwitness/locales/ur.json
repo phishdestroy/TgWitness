@@ -6214,5 +6214,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "یہ اسنیپ شاٹ صرف وہی معلومات رکھتا ہے جو ٹیلیگرام نے ایکسپورٹ میں واپس کیں۔ اس ورک اسپیس کا جرنل بھی اس چیٹ میں دیکھی گئی حذف شدہ یا پہلے کے ورژنز کو محفوظ کرتا ہے؛ انہیں شامل کرنے کے لیے ثبوت جرنل کو ایکسپورٹ کریں۔",
 "access lost: removed or no longer readable": "رسائی ختم: حذف شدہ یا اب قابلِ مطالعہ نہیں",
 "The account was removed from every source or can no longer read them.": "اکاؤنٹ کو ہر ذریعہ سے ہٹا دیا گیا ہے یا اب وہ انہیں پڑھ نہیں سکتا۔",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "کچھ ذرائع سے اکاؤنٹ ہٹا دیا گیا ہے یا اب وہ انہیں پڑھ نہیں سکتا؛ ان سے کچھ بھی نہیں آتا۔ باقی جاری ہیں۔"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "کچھ ذرائع سے اکاؤنٹ ہٹا دیا گیا ہے یا اب وہ انہیں پڑھ نہیں سکتا؛ ان سے کچھ بھی نہیں آتا۔ باقی جاری ہیں۔",
+"Sessions of this account": "اس اکاؤنٹ کے سیشنز",
+"Two-step password": "دو مرحلوں پر مشتمل پاس ورڈ",
+"signed in {date}": "{date} کو دستخط شدہ",
+"TgWitness works on this session": "TgWitness اس سیشن پر کام کر رہا ہے",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "کیا آپ اس ٹیلیگرام سیشن کو ختم کرنا چاہتے ہیں؟ وہ آلہ جس پر آپ وہاں سائن ان تھے، لاگ آؤٹ ہو چکا ہے۔ اسے TgWitness سے واپس نہیں کیا جا سکتا۔",
+"Session ended.": "سیشن ختم ہو گیا۔",
+"Current two-step password. Leave empty if the account has none.": "موجودہ دو مرحلوں پر مشتمل پاس ورڈ۔ اگر اکاؤنٹ میں کوئی پاس ورڈ نہیں ہے تو خالی چھوڑ دیں۔",
+"New two-step password.": "نیا دو مرحلوں پر مشتمل پاس ورڈ۔",
+"Password hint (optional).": "پاس ورڈ کا اشارہ (اختیاری)",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "دو مرحلوں پر مشتمل پاس ورڈ ٹیلیگرام میں محفوظ ہے۔ TgWitness اسے محفوظ نہیں کرتا۔"
 }

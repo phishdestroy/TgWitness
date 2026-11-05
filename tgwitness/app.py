@@ -248,6 +248,16 @@ class ParametersUpdate(BaseModel):
     values: dict[str, bool | int | float | list[str] | None] = Field(max_length=200)
 
 
+class EndSession(BaseModel):
+    hash: str = Field(pattern=r"^-?[0-9]{1,20}$")
+
+
+class AccountPassword(BaseModel):
+    current_password: str | None = Field(default=None, max_length=256)
+    new_password: str = Field(min_length=1, max_length=256)
+    hint: str = Field(default="", max_length=128)
+
+
 class ChatExport(BaseModel):
     chat_id: int
     language: str | None = Field(default=None, max_length=16)
@@ -1470,6 +1480,18 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.post("/api/auth/forget", dependencies=[Depends(authenticate)])
     async def forget_session():
         return await operation(app.state.collector.forget_session)
+
+    @app.get("/api/account/sessions", dependencies=[Depends(authenticate)])
+    async def account_sessions():
+        return await operation(app.state.collector.account_sessions)
+
+    @app.post("/api/account/sessions/end", dependencies=[Depends(authenticate)])
+    async def end_account_session(body: EndSession):
+        return await operation(app.state.collector.end_session, body.hash)
+
+    @app.post("/api/account/password", dependencies=[Depends(authenticate)])
+    async def change_account_password(body: AccountPassword):
+        return await operation(app.state.collector.change_password, body.current_password, body.new_password, body.hint)
 
     @app.get("/api/dialogs", dependencies=[Depends(authenticate)])
     async def dialogs():

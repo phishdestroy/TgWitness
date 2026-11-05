@@ -6214,5 +6214,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Bu anlık görüntü, yalnızca Telegram'ın dışa aktarım sırasında döndürdüğü bilgileri içerir. Bu çalışma alanının günlüğü, bu sohbette gözlemlenen silme işlemlerini veya önceki sürümleri de içerir; bunları dahil etmek için kanıt günlüğünü dışa aktarın.",
 "access lost: removed or no longer readable": "erişim kaybedildi: kaldırıldı veya artık okunamıyor",
 "The account was removed from every source or can no longer read them.": "Hesap tüm kaynaklardan kaldırıldı veya artık bu kaynakları okuyamıyor.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Hesap bazı kaynaklardan kaldırıldı ya da artık bu kaynakları okuyamıyor; bu kaynaklardan hiçbir şey gelmiyor. Diğerleri devam ediyor."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Hesap bazı kaynaklardan kaldırıldı ya da artık bu kaynakları okuyamıyor; bu kaynaklardan hiçbir şey gelmiyor. Diğerleri devam ediyor.",
+"Sessions of this account": "Bu hesabın oturumları",
+"Two-step password": "İki aşamalı şifre",
+"signed in {date}": "{date} tarihinde oturum açıldı",
+"TgWitness works on this session": "TgWitness bu oturumda çalışıyor",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "Telegram'daki bu oturumu sonlandırmak ister misiniz? Orada oturum açmış olan cihazın oturumu kapatılacaktır. Bu işlem TgWitness'ten geri alınamaz.",
+"Session ended.": "Oturum sona erdi.",
+"Current two-step password. Leave empty if the account has none.": "Mevcut iki aşamalı şifre. Hesapta yoksa boş bırakın.",
+"New two-step password.": "Yeni iki aşamalı şifre.",
+"Password hint (optional).": "Şifre ipucu (isteğe bağlı).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Telegram'da kaydedilen iki aşamalı şifre. TgWitness bu şifreyi saklamaz."
 }

@@ -6569,5 +6569,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Этот снимок содержит только то, что Telegram вернул при экспорте. Журнал этого рабочего пространства также содержит удалённые сообщения или более ранние версии, зафиксированные в этом чате; экспортируйте журнал доказательств, чтобы включить их.",
 "access lost: removed or no longer readable": "доступ утрачен: удалено или больше не читается",
 "The account was removed from every source or can no longer read them.": "Аккаунт был удалён из всех источников или больше не может их читать.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Аккаунт был удалён из некоторых источников или больше не может их читать; оттуда ничего не поступает. Остальные продолжают работать."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Аккаунт был удалён из некоторых источников или больше не может их читать; оттуда ничего не поступает. Остальные продолжают работать.",
+"Sessions of this account": "Сеансы этой учетной записи",
+"Two-step password": "Двухэтапный пароль",
+"signed in {date}": "зарегистрирован {date}",
+"TgWitness works on this session": "TgWitness работает над этой сессией",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "Завершить эту сессию в Telegram? Устройство, авторизованное в Telegram, будет выведено из системы. Это действие нельзя отменить из TgWitness.",
+"Session ended.": "Сессия завершена.",
+"Current two-step password. Leave empty if the account has none.": "Текущий двухэтапный пароль. Оставьте поле пустым, если у аккаунта его нет.",
+"New two-step password.": "Новый двухэтапный пароль.",
+"Password hint (optional).": "Подсказка к паролю (необязательно).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Двухэтапный пароль сохраняется в Telegram. TgWitness его не хранит."
 }

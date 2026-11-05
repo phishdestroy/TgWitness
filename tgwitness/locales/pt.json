@@ -6214,5 +6214,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Este instantâneo contém apenas o que o Telegram retornou na exportação. O registro deste espaço de trabalho também contém exclusões ou versões anteriores observadas neste chat; exporte o registro de evidências para incluí-las.",
 "access lost: removed or no longer readable": "Acesso perdido: removido ou não mais legível",
 "The account was removed from every source or can no longer read them.": "A conta foi removida de todas as fontes ou não consegue mais acessá-las.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "A conta foi removida de algumas fontes ou não consegue mais acessá-las; não chega mais nada dessas fontes. As outras continuam funcionando."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "A conta foi removida de algumas fontes ou não consegue mais acessá-las; não chega mais nada dessas fontes. As outras continuam funcionando.",
+"Sessions of this account": "Sessões desta conta",
+"Two-step password": "Senha em duas etapas",
+"signed in {date}": "acessado em {date}",
+"TgWitness works on this session": "O TgWitness funciona nesta sessão",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "Quer encerrar esta sessão no Telegram? O dispositivo conectado lá será desconectado. Isso não pode ser revertido no TgWitness.",
+"Session ended.": "Sessão encerrada.",
+"Current two-step password. Leave empty if the account has none.": "Senha atual de duas etapas. Deixe em branco se a conta não tiver nenhuma.",
+"New two-step password.": "Nova senha em duas etapas.",
+"Password hint (optional).": "Dica de senha (opcional).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Senha de duas etapas salva no Telegram. O TgWitness não a armazena."
 }

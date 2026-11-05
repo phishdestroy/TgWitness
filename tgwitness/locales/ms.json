@@ -6175,5 +6175,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Snapshot ini hanya mengandungi apa yang Telegram kembalikan semasa eksport. Jurnal ruang kerja ini juga merangkumi pemadaman atau versi terdahulu yang diperhatikan dalam sembang ini; eksport jurnal bukti untuk memasukkannya.",
 "access lost: removed or no longer readable": "akses hilang: dialih keluar atau tidak dapat dibaca lagi",
 "The account was removed from every source or can no longer read them.": "Akaun itu telah dialih keluar daripada setiap sumber atau tidak lagi dapat membacanya.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Akaun itu telah dialih keluar daripada beberapa sumber atau tidak lagi dapat membacanya; tiada apa-apa yang sampai daripadanya. Yang lain diteruskan."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Akaun itu telah dialih keluar daripada beberapa sumber atau tidak lagi dapat membacanya; tiada apa-apa yang sampai daripadanya. Yang lain diteruskan.",
+"Sessions of this account": "Sesi akaun ini",
+"Two-step password": "Kata laluan dua langkah",
+"signed in {date}": "dailu log masuk pada {date}",
+"TgWitness works on this session": "TgWitness sedang mengendalikan sesi ini",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "Akhirkan sesi ini di Telegram? Peranti yang log masuk di sana telah log keluar. Ini tidak boleh dibatalkan dari TgWitness.",
+"Session ended.": "Sesi telah tamat.",
+"Current two-step password. Leave empty if the account has none.": "Kata laluan dua langkah semasa. Biarkan kosong jika akaun tidak mempunyai kata laluan dua langkah.",
+"New two-step password.": "Kata laluan dua langkah baharu.",
+"Password hint (optional).": "Petunjuk kata laluan (pilihan).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Kata laluan dua langkah disimpan di Telegram. TgWitness tidak menyimpannya."
 }

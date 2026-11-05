@@ -6253,5 +6253,15 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "תמונת מצב זו מכילה רק את מה ש-Telegram החזיר בעת הייצוא. יומן סביבת העבודה הזו מכיל גם מחיקות או גרסאות קודמות שנצפו בצ'אט זה; ייצאו את יומן הראיות כדי לכלול אותן.",
 "access lost: removed or no longer readable": "אובדן גישה: הוסר או שאינו קריא עוד",
 "The account was removed from every source or can no longer read them.": "החשבון הוסר מכל המקורות או שאינו יכול עוד לקרוא אותם.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "החשבון הוסר ממקורות מסוימים או שאינו יכול עוד לקרוא אותם; לא מגיע דבר מאותם מקורות. האחרים ממשיכים לפעול."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "החשבון הוסר ממקורות מסוימים או שאינו יכול עוד לקרוא אותם; לא מגיע דבר מאותם מקורות. האחרים ממשיכים לפעול.",
+"Sessions of this account": "הפעלות של חשבון זה",
+"Two-step password": "סיסמה דו-שלבית",
+"signed in {date}": "נחתם ב-{date}",
+"TgWitness works on this session": "TgWitness פועל בפגישה זו",
+"End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness.": "האם ברצונך לסיים את ההפעלה ב-Telegram? המכשיר שנכנס לשירות זה יוצא מהמערכת. לא ניתן לבטל פעולה זו מ-TgWitness.",
+"Session ended.": "השיחה הסתיימה.",
+"Current two-step password. Leave empty if the account has none.": "סיסמה דו-שלבית נוכחית. השאר ריק אם לחשבון אין סיסמה כזו.",
+"New two-step password.": "סיסמה חדשה בשני שלבים.",
+"Password hint (optional).": "רמז לסיסמה (אופציונלי).",
+"Two-step password saved in Telegram. TgWitness does not keep it.": "סיסמה דו-שלבית שנשמרה ב-Telegram. TgWitness אינו שומר אותה."
 }
