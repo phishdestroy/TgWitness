@@ -36,6 +36,7 @@ class Config:
     video_input_args: list | None = None
     ffmpeg_executable: str = "ffmpeg"
     official: dict | None = None
+    trusted: dict | None = None
 
     @classmethod
     def load(cls, path):
@@ -47,8 +48,13 @@ class Config:
             if config.kind != "browser":
                 raise ValueError("Official client requires the browser recorder")
             OfficialOptions.model_validate(config.official)
-        if config.kind not in {"browser", "ayugram"}:
-            raise ValueError("kind must be browser or ayugram")
+        if config.kind not in {"browser", "ayugram", "trusted"}:
+            raise ValueError("kind must be browser, ayugram or trusted")
+        if config.kind == "trusted":
+            from .trusted_runtime import connector_config
+            if not isinstance(config.trusted, dict):
+                raise ValueError("Configure Trusted Live runtime settings")
+            connector_config(config.trusted.get("connectors"))
         for name in ("poll_seconds", "snapshot_seconds", "heartbeat_seconds"):
             value = getattr(config, name)
             if type(value) not in (int, float) or not 0.25 <= value <= 86400:
@@ -294,6 +300,9 @@ class Recorder:
 
 def create_app(root, config=None):
     config = config or Config()
+    if config.kind == "trusted":
+        from .trusted_service import create_app as trusted_app
+        return trusted_app(root, config)
 
     @asynccontextmanager
     async def lifespan(app):

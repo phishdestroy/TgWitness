@@ -37,7 +37,7 @@ docker compose --project-directory . -f addons/capture/compose.official.yaml --p
 docker compose --project-directory . -f addons/capture/compose.official.yaml --profile official exec official-recorder cat /data/control-token.txt
 ```
 
-Open `http://127.0.0.1:8793` and enter the token locally．Do not paste it into an issue or chat．Capture starts disabled．The browser profile exists only in temporary container storage，the persistent volume contains evidence and recorder keys．Use a different Compose project name and private upstream configuration for each account，for example the Compose option `-p case-one`．A local administrator can still alter the environment，so local signatures alone do not prove operator independence．
+Open `http://127.0.0.1:8794` and enter the token locally．Do not paste it into an issue or chat．Capture starts disabled．The browser profile exists only in temporary container storage，the persistent volume contains evidence and recorder keys．Use a different Compose project name and private upstream configuration for each account，for example the Compose option `-p case-one`．A local administrator can still alter the environment，so local signatures alone do not prove operator independence．
 
 The main application's **Extras → Independent capture** can connect to this recorder as a browser recorder．Once its pinned identity is checked，the panel links to the official-client controls and hides incompatible generic browser settings．
 

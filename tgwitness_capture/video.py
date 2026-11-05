@@ -7,7 +7,7 @@ from .format import utcnow
 
 
 class VideoCapture:
-    def __init__(self, journal, input_args, executable="ffmpeg", *, timestamp_overlay=False):
+    def __init__(self, journal, input_args, executable="ffmpeg", overlay=False, *, timestamp_overlay=False):
         self.journal = journal
         self.input_args = input_args
         self.executable = executable
@@ -17,7 +17,7 @@ class VideoCapture:
         self.last_segment_at = None
         self.log = None
         self.error = None
-        self.timestamp_overlay = timestamp_overlay
+        self.timestamp_overlay = timestamp_overlay or overlay
 
     @property
     def available(self):
@@ -52,7 +52,8 @@ class VideoCapture:
             self.journal.append("video.started", {"capture_id": self.capture_id, "codec": "h264",
                                 "audio": False, "segment_target_seconds": 10, "crf": 23,
                                 "overlay": "local UTC clock; not an independent timestamp" if self.timestamp_overlay else None,
-                                "scope": "configured screen input, silent recording", "frames_verified": False})
+                                "scope": "configured screen input, silent recording", "frames_verified": False,
+                                "timestamp_overlay": "UTC local clock, not trusted time" if self.timestamp_overlay else None})
         except BaseException:
             self.abort()
             raise

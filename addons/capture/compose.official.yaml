@@ -26,7 +26,7 @@ services:
       dockerfile: addons/capture/deploy/Dockerfile.official
     depends_on: [official-gateway]
     networks: [official-internal]
-    ports: ["127.0.0.1:8793:8793"]
+    ports: ["127.0.0.1:8794:8794"]
     volumes:
       - official-records:/data
       - type: bind

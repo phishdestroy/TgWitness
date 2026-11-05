@@ -76,6 +76,9 @@ FILES.extend("addons/capture/" + name for name in (
     "tests/conftest.py", "tests/test_capture.py", "tests/test_browser.py", "tests/test_video.py",
     "tests/test_panel.py", "tests/test_witness.py", "tests/test_deployment.py", "tests/test_integration.py",
     "tests/test_official.py", "tests/test_gateway.py", "tests/test_official_proof.py", "tests/test_beacon.py",
+    "compose.trusted.yaml", "config/trusted.example.json", "deploy/Dockerfile.trusted",
+    "deploy/trusted-entrypoint.py", "deploy/trusted-display.py",
+    "tests/test_trusted.py", "tests/test_trusted_anchors.py",
 ))
 DIRECTORIES = {
     "tgwitness_capture": {".py", ".html", ".css", ".js"},
