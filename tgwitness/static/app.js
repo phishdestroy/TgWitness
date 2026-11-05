@@ -3977,7 +3977,6 @@ function renderConnection(){
   const importedSession=(c.account||{}).key_origin==="imported";
   $("sign-out").disabled=state.status.demo||importedSession;$("sign-out-locked").hidden=!importedSession;
   $("forget-session").hidden=!importedSession;$("forget-session").disabled=state.status.demo;
-  $("reissue-key").hidden=(c.account||{}).key_origin!=="imported";$("reissue-key").disabled=state.status.demo||c.running;
   if(state.status.demo)$("proxy-catalog-refresh").disabled=true;
   $("proxy-catalog-apply").disabled=state.status.demo||c.running||!$("proxy-catalog-select").value;
   const summary=$("protection-summary");summary.replaceChildren();
@@ -4297,24 +4296,6 @@ $("sign-out").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   clearSecrets();await refreshStatus();setAuthStep("credentials");
   toast(tr(r.telegram_session_ended?"Signed out. Telegram ended the session.":
     "Signed out here. Telegram did not confirm: end the session in Telegram under Settings → Devices."),!r.telegram_session_ended);
-}));
-$("reissue-key").addEventListener("click",e=>busy(e.currentTarget,async()=>{
-  const owner=actionOwner();
-  if(state.status.collector.running){toast(tr("Pause observation before replacing the session key."),true);return;}
-  if(!(await askConfirm(tr("Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace."),{confirmText:tr("Create a key of its own")})))return;
-  if(!owner.current())return;
-  let body={};
-  for(;;){
-    try{await json("auth/reissue",body,{profile:owner.profile,token:owner.token});break;}
-    catch(error){
-      if(!/two-step verification/.test(String(error.message||error)))throw error;
-      const password=window.prompt(tr("This account has two-step verification. Enter its password to create the key."));
-      if(!password)return;
-      body={password};
-    }
-  }
-  await refreshStatus();
-  toast(tr("TgWitness now uses a session key of its own. The imported key is no longer used."));
 }));
 $("forget-session").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   const owner=actionOwner();

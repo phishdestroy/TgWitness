@@ -813,48 +813,7 @@ class Collector:
             await candidate.disconnect()
 
     def imported_session(self):
-        return (self.store.get_setting("account", None) or {}).get("key_origin") in ("imported", "reissued")
-
-    @connection_change
-    async def reissue_key(self, password=None):
-        if self.running:
-            raise ValueError("Pause observation before replacing the session key.")
-        account = self.store.get_setting("account", None) or {}
-        if account.get("key_origin") != "imported":
-            raise ValueError("Only an imported session needs a key of its own.")
-        await self.restore()
-        parent, credentials = self.client, self.vault.read("credentials")
-        await self.cancel_login()
-        candidate = self.make_client(credentials["api_id"], credentials["api_hash"], "", credentials.get("client_profile"))
-        self.login_client = candidate
-        self.pending_credentials = {"api_id": credentials["api_id"], "api_hash": credentials["api_hash"],
-                                    "client_profile": candidate.tgwitness_client_profile}
-        self.pending_account_id = account.get("id")
-        self.pending_key_origin = "reissued"
-        try:
-            await self.connect_client(candidate)
-            qr = await candidate.qr_login()
-            waiting = asyncio.create_task(qr.wait(60))
-            await asyncio.sleep(0)
-            await parent(functions.auth.AcceptLoginTokenRequest(qr.token))
-            try:
-                await waiting
-            except SessionPasswordNeededError:
-                if not password:
-                    raise ValueError("This account has two-step verification. Enter its password to create the key.")
-                await candidate.sign_in(password=password)
-            await self.authorized()
-        except BaseException:
-            await self.cancel_login()
-            self.pending_key_origin = None
-            raise
-        self.vault.save("retired_session", {"session": credentials["session"], "retired_at": utcnow()})
-        self.store.append("account.key_reissued", {
-            "account_id": account.get("id"), "client": self.client_identity(),
-            "previous_key": "retired: kept encrypted on this computer and never connected again",
-            "meaning": "TgWitness now uses a session Telegram created for it. Another copy of the imported key can "
-                       "no longer take over this workspace's connection or get it revoked as duplicated."})
-        return {"key_origin": "reissued"}
+        return (self.store.get_setting("account", None) or {}).get("key_origin") == "imported"
 
     @connection_change
     async def sign_out(self):

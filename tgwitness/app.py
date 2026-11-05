@@ -248,10 +248,6 @@ class ParametersUpdate(BaseModel):
     values: dict[str, bool | int | float | list[str] | None] = Field(max_length=200)
 
 
-class ReissueKey(BaseModel):
-    password: str | None = Field(default=None, max_length=256)
-
-
 class ChatExport(BaseModel):
     chat_id: int
     language: str | None = Field(default=None, max_length=16)
@@ -736,7 +732,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             require_live()
             if (app.state.collector.export_claim and getattr(call, "__name__", "") in {
                     "configure", "start_phone", "start_qr", "send_code", "confirm_code", "confirm_password",
-                    "sign_out", "forget_session", "reissue_key", "set_network", "set_route_policy", "apply", "dialogs", "save_profile",
+                    "sign_out", "forget_session", "set_network", "set_route_policy", "apply", "dialogs", "save_profile",
                     "preview", "execute", "check_current", "test_network", "control"}):
                 raise HTTPException(409, "This account is busy. Pause its current task before another Telegram operation.")
             collector = app.state.collector
@@ -1474,10 +1470,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.post("/api/auth/forget", dependencies=[Depends(authenticate)])
     async def forget_session():
         return await operation(app.state.collector.forget_session)
-
-    @app.post("/api/auth/reissue", dependencies=[Depends(authenticate)])
-    async def reissue_key(body: ReissueKey):
-        return await operation(app.state.collector.reissue_key, body.password)
 
     @app.get("/api/dialogs", dependencies=[Depends(authenticate)])
     async def dialogs():
