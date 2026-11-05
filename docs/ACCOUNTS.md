@@ -193,6 +193,9 @@ before connecting. By default imported authorizations are reused. Keep the origi
 client closed while its key is in use here. **Files** and **Auth key** also offer
 **Create an independent authorization**, described below. Bulk import still uses
 the direct mode. Phone and interactive QR login create separate authorizations.
+The warning heading stays visible in the import form; its full explanation opens
+automatically when files or a key/session string are supplied. It can be collapsed
+after reading, so the file picker and connection controls remain usable on a phone.
 
 - Files are converted **in memory** on your TgWitness server. Uploads are not stored,
   ZIPs are not extracted to disk and no external service is contacted.

@@ -131,6 +131,7 @@ def main():
             page.set_viewport_size({"width": 1440, "height": 1000})
             expect(page.locator("#import-new-workspace")).to_be_visible()
             page.locator("#session-file").set_input_files(browser_file("research.json", metadata))
+            expect(warning).to_have_attribute("open", "")
             expect(page.locator("#import-result")).to_have_attribute("data-state", "missing_session")
             expect(page.locator("#import-result")).to_contain_text("No session")
             expect(page.locator("#auth-continue")).to_be_disabled()

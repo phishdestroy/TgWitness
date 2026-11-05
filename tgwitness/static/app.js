@@ -3809,6 +3809,7 @@ function setAuthMethod(method){
   show("independent-session-option",method==="files"||method==="key");
   if(method!==authMethod){
     accountImportRevision++;importExpectedId=null;
+    $("session-import-warning").open=false;
     for(const id of ["session-string","session-file","tdata-passcode","auth-key","auth-dc","auth-user-id"])$(id).value="";
     $("import-result").textContent="";
   }
@@ -3891,6 +3892,7 @@ function clearSecrets(){
   clearTimeout(toastTimer);show("toast",false);
   cancelQR();importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";
   $("import-new-session").checked=false;accountImportRevision++;$("import-result").textContent="";
+  $("session-import-warning").open=false;
   for(const name of ["api-id","api-hash","session-string","session-file","phone","code","password",
                     "tdata-passcode","auth-key","auth-dc","auth-user-id","network-username","network-password","network-secret","network-link"])$(name).value="";
   $("network-link-result").textContent="";
@@ -4135,6 +4137,7 @@ function renderSelectedFiles(){
 }
 $("session-file").addEventListener("change",()=>{
   accountImportRevision++;importClientProfile=null;importFormats=[];importTwoFactor="";
+  $("session-import-warning").open=!!$("session-file").files.length;
   authProgress("");
   $("session-string").value="";importExpectedId=null;
   $("import-result").textContent="";
@@ -4168,9 +4171,10 @@ async function loadAuthKey(){
 }
 for(const id of ["auth-key","auth-dc","auth-user-id"])$(id).addEventListener("input",()=>{
   accountImportRevision++;importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";$("session-string").value="";authProgress("");
+  $("session-import-warning").open=!!$("auth-key").value.trim();
 });
 $("import-account").addEventListener("click",e=>busy(e.currentTarget,loadAccountFiles));
-$("session-string").addEventListener("input",()=>{accountImportRevision++;importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";$("import-result").textContent="";});
+$("session-string").addEventListener("input",()=>{accountImportRevision++;importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";$("import-result").textContent="";$("session-import-warning").open=!!$("session-string").value.trim();});
 $("import-new-session").addEventListener("change",()=>{importTwoFactor="";});
 $("credentials-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   if(state.status.demo){toast(tr("Demo workspace. Connect accounts in your live installation."),true);return;}
