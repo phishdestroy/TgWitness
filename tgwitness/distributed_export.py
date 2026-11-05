@@ -26,13 +26,13 @@ from .verify import fingerprint, verify_chat_export
 from .workers import complete_in_thread
 
 CHUNK = 2000
-PAGE_TIMEOUT = 60  # seconds for one history page before the range goes back to the queue
-OUTAGE_RETRIES = 4  # connection losses an account may recover from before it leaves the job
-OUTAGE_PAUSE = 30  # seconds before the first retry after a connection loss; doubles each time
-POISON_ACCOUNTS = 2  # distinct accounts a range may fail on before the range, not the accounts, is stopped
-ACCOUNT_ERRORS = 3  # consecutive failed ranges after which an account leaves the job
-RECHECK_EDGE = 1000  # numbers below the oldest paginated message that are read by number
-RECHECK_PER_ACCOUNT = 10000  # absent numbers each account reads by number, about 17 minutes at ten a second
+PAGE_TIMEOUT = 60
+OUTAGE_RETRIES = 4
+OUTAGE_PAUSE = 30
+POISON_ACCOUNTS = 2
+ACCOUNT_ERRORS = 3
+RECHECK_EDGE = 1000
+RECHECK_PER_ACCOUNT = 10000
 JOB_ID = re.compile(r"[a-f0-9]{32}")
 
 
@@ -363,7 +363,6 @@ class DistributedExport:
                 self.db.execute("UPDATE tasks SET phase='pending' WHERE low=?", (task["low"],))
                 self.db.commit()
                 if isinstance(exc, (OSError, ConnectionError, TimeoutError)) and outages < OUTAGE_RETRIES:
-                    # A silent or broken route: give the range to the others and come back later.
                     outages += 1
                     pause = min(300, OUTAGE_PAUSE * 2 ** (outages - 1))
                     worker.update(state="waiting", wait_until=time.time() + pause, error="no_connection")
@@ -374,7 +373,6 @@ class DistributedExport:
                 reason = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
                 failed = self.chunk_failures.setdefault(task["low"], {})
                 failed[profile] = reason
-                # This account does not retry this range; the range stops once it failed on several accounts.
                 self.db.execute("DELETE FROM eligible WHERE low=? AND profile=?", (task["low"], profile))
                 if len(failed) >= POISON_ACCOUNTS:
                     self.db.execute("UPDATE tasks SET phase='failed' WHERE low=?", (task["low"],))
@@ -471,14 +469,6 @@ class DistributedExport:
             index.close()
 
     async def recheck_absent(self, index, options):
-        """Ask Telegram by number about absent message numbers, shared by every account of the job.
-
-        Without message filters an absent number is either deleted or never visible to the account;
-        the per-number answer separates that from a message paginated history skipped. Pagination
-        also loses messages just below the oldest one it returns, so that edge is read as well.
-        Reading by number is about ten numbers a second per account, so the check is capped per
-        account and the report states how many numbers stayed unchecked.
-        """
         if options.excludes_messages() or self.job["chat_id"] >= -1000000000000:
             return None
         present = [row[0] for row in index.db.execute("SELECT id FROM messages ORDER BY id")]
@@ -507,7 +497,7 @@ class DistributedExport:
                     raise
                 except Exception as exc:
                     errors[profile] = type(exc).__name__
-                    queue.append(batch)  # Another account may still read it.
+                    queue.append(batch)
                     return
                 for number, value in answer.items():
                     found[number] = (value, profile)

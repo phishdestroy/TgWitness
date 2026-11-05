@@ -55,15 +55,13 @@ class AuthorizationRequired(ValueError):
 
 
 class ProtectedSession(ValueError):
-    """The request would end a Telegram session that this workspace cannot sign in again."""
+    pass
 
 
 class UnreadableHistory(ValueError):
     pass
 
 
-# Telegram can send a newer type than the bundled Telethon schema knows. One such message
-# makes the whole history page undecodable; read that page number by number instead.
 SALVAGE_WINDOW = 100
 SALVAGE_LIMIT = 20
 UNPARSED_MEANING = ("Telegram has a message under this number, but it contains a data type that Telethon "
@@ -349,6 +347,7 @@ class Collector:
         self.export_claim = None
         self.observation_starting = False
         self.connection_change_task = None
+        self.foreground = 0
         self.people = {}
         self.avatar_lock = asyncio.Lock()
         self.avatar_failures = {}
@@ -795,7 +794,6 @@ class Collector:
         if self.running:
             raise ValueError("Pause observation before signing out.")
         if self.imported_session():
-            # Without the phone and a login code an imported session cannot be created again.
             raise ProtectedSession("This session was imported. Signing out would end it in Telegram for good: "
                                    "it cannot be signed in again without the phone and a login code. "
                                    "Use Forget on this computer to remove it here and leave it active in Telegram.")
@@ -834,7 +832,6 @@ class Collector:
 
     @connection_change
     async def forget_session(self):
-        """Remove the session from this workspace without ending it in Telegram."""
         if self.running:
             raise ValueError("Pause observation before forgetting the session.")
         await self.cancel_login()
@@ -2334,7 +2331,7 @@ class Collector:
                 try:
                     probe = await self.client.get_messages(entity, limit=1)
                 except TypeNotFoundError:
-                    probe = [True]  # Telegram did answer with history, only in a type Telethon cannot decode.
+                    probe = [True]
                 if not probe or not any(message is not None for message in probe):
                     self.store.append("coverage.gap", {
                         "reason": "recheck_visibility_uncertain", "checked_from": min(ids), "checked_to": max(ids),
@@ -2409,6 +2406,32 @@ class Collector:
     def release_export(self, owner):
         if self.export_claim == owner:
             self.export_claim = None
+            self.close_when_idle()
+
+    def idle(self):
+        return not (self.running or self.observation_starting or self.history.busy or self.export_busy()
+                    or self.export_claim or self.connection_change_task is not None or self.foreground
+                    or self.login_client is not None or self.qr_task is not None)
+
+    def close_when_idle(self):
+        try:
+            asyncio.get_running_loop().create_task(self.release_idle_connection())
+        except RuntimeError:
+            pass
+
+    async def release_idle_connection(self):
+        await asyncio.sleep(0)
+        client = self.client
+        try:
+            if not self.idle() or client is None or not client.is_connected():
+                return False
+            await self.avatar_history.close()
+            if not self.idle() or self.client is not client:
+                return False
+            await client.disconnect()
+        except Exception:
+            return False
+        return True
 
     def note(self, kind, payload, chat_id=None):
         try:
@@ -2433,7 +2456,6 @@ class Collector:
             latest = await self.client.get_messages(entity, limit=1)
             last_id = latest[0].id if latest else None
         except TypeNotFoundError:
-            # The newest message is undecodable; the total arrives with any readable page.
             latest = []
             for skip in (1, 2, 4, 8, 16, 32, 64):
                 with suppress(TypeNotFoundError):
@@ -2553,11 +2575,6 @@ class Collector:
             shutil.rmtree(media_dir, ignore_errors=True)
 
     async def read_numbers(self, entity, numbers):
-        """Map message numbers to messages, halving any batch Telegram answers with an undecodable type.
-
-        Numbers with no message are left out; a single number that still cannot be decoded maps to its
-        TypeNotFoundError.
-        """
         found = {}
         for start in range(0, len(numbers), 100):
             batch = numbers[start:start + 100]
@@ -2586,7 +2603,6 @@ class Collector:
         return found
 
     async def number_before(self, entity, offset_date=None):
-        """Number of the newest message before offset_date, counting messages Telethon cannot decode."""
         error = None
         for skip in (0, 1, 2, 4, 8, 16, 32, 64):
             try:
@@ -2604,7 +2620,6 @@ class Collector:
         raise unreadable_history(error)
 
     async def salvage_page(self, entity, offset_id, min_id, on_message, on_unparsed):
-        """Read the numbers just below offset_id one by one after Telegram sent an undecodable page."""
         top = offset_id - 1 if offset_id else await self.number_before(entity)
         low = max(min_id + 1, top - SALVAGE_WINDOW + 1, 1)
         found = await self.read_numbers(entity, list(range(low, top + 1)))
@@ -2626,7 +2641,6 @@ class Collector:
 
     async def iterate_history(self, entity, on_message, min_id=0, offset_id=0, on_wait=None, on_unparsed=None,
                               page_timeout=None, attempts=8):
-        """Walk history newest first. page_timeout bounds each page so a silent route fails instead of hanging."""
         failures = 0
         while True:
             writing = False

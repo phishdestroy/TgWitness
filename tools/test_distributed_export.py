@@ -183,7 +183,6 @@ class Client:
         self.reads = []
         self.block = None
         self.blocked = asyncio.Event()
-        # Readable by number but never returned by history pages.
         self.by_number = {}
 
     def lookup(self, mid):
@@ -207,7 +206,6 @@ class Client:
 
 
 class PoisonClient(Client):
-    """Telethon behaviour for a message whose type is newer than its schema: the whole answer fails."""
     page = 3
 
     def __init__(self, messages, poison):
@@ -588,7 +586,6 @@ def test_recheck_reads_below_the_oldest_listed_message_and_counts_unchecked(tmp_
             with zipfile.ZipFile(manager.result_path(state["id"])) as archive:
                 recheck = json.loads(archive.read("message-ids.json"))["recheck"]
                 ids = {row["id"] for row in json.loads(archive.read("chat.json"))["messages"]}
-            # Edge 1–3 and gap 6 are four numbers; two accounts × one number of budget ask the first two.
             assert recheck["edge"] == [1, 3] and recheck["edge_found"] == 1 and 2 in ids, recheck
             assert recheck["asked"] == 2 and recheck["unchecked"] == 2 and recheck["limit_reached"], recheck
         finally:
@@ -598,8 +595,6 @@ def test_recheck_reads_below_the_oldest_listed_message_and_counts_unchecked(tmp_
 
 
 class SilentClient(Client):
-    """A route that stops answering for the first `silent` history reads."""
-
     def __init__(self, messages, silent):
         super().__init__(messages)
         self.silent = silent

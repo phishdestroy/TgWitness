@@ -717,6 +717,15 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(503, "Connection unavailable: " + type(exc).__name__) from None
 
     async def operation(call, *args):
+        collector = app.state.collector
+        collector.foreground += 1
+        try:
+            return await guarded_operation(call, *args)
+        finally:
+            collector.foreground -= 1
+            collector.close_when_idle()
+
+    async def guarded_operation(call, *args):
         require_live()
         async with op_lock:
             require_live()
