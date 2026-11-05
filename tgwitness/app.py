@@ -317,6 +317,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     bearer = HTTPBearer(auto_error=False)
     op_lock = asyncio.Lock()
     export_lock = asyncio.Lock()
+    prepared_chat_exports = {}
     public_proxies = PublicCatalog(root)
 
     shared_pool = proxy_pool or ProxyPool(public_proxies)
@@ -2582,10 +2583,20 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
     @app.get("/api/chat-export/{export_id}/download", dependencies=[Depends(authenticate)])
     async def chat_export_download(request: Request, export_id: str):
-        path = app.state.collector.export_result_path(export_id) if export_visible(request, export_id) else None
+        from . import export_history
+        collector = app.state.collector
+        path = collector.export_result_path(export_id) if export_visible(request, export_id) else None
         if not path:
             raise HTTPException(404, "No finished chat export is available to download.")
-        return TemporaryDownload(path, filename="tgwitness-chat-export.zip", media_type="application/zip")
+        entry = prepared_chat_exports.get(export_id)
+        if entry is None:
+            entry = await asyncio.to_thread(
+                export_history.prepared, app.state.store, path, "zip", False, owner=request.state.principal.owner,
+                workspace=profile_id, required_permissions=["view", "export"],
+                chat_ids=[(collector.export_state or {}).get("chat_id")])
+            prepared_chat_exports[export_id] = entry
+        return FileResponse(path, filename="tgwitness-chat-export.zip", media_type="application/zip",
+                            headers=export_history.headers(entry))
 
     @app.get("/api/checkpoint", dependencies=[Depends(authenticate)])
     async def get_checkpoint():

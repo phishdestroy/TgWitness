@@ -2492,6 +2492,8 @@ class Collector:
                       "phase": "running", "captured": 0, "total": total, "eta_seconds": None,
                       "ready": False, "error": None, "started_at": utcnow()}
             self.export_state = record
+            if self.export_path:
+                self.export_path.unlink(missing_ok=True)
             self.export_path = None
             self.export_task = asyncio.create_task(self.run_export(entity, info, record, report_options))
 
