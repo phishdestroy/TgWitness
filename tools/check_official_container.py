@@ -1,6 +1,5 @@
 """Linux acceptance: actual sandboxed Chromium, Xvfb, FFmpeg and isolated networking."""
 import argparse
-import json
 import os
 from pathlib import Path
 import subprocess
@@ -21,7 +20,7 @@ def main():
     spec = importlib.util.spec_from_file_location("official_test", ROOT / "addons/capture/tests/test_official.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    script = "DIRECT = " + repr(args.direct) + "\nFIXTURE = " + json.dumps(module.FIXTURE) + "\n" + r'''
+    script = "DIRECT = " + repr(args.direct) + "\nFIXTURE = " + repr(module.FIXTURE) + "\n" + r'''
 import asyncio, importlib.util, json, socket, time, zipfile
 from pathlib import Path
 from tgwitness_capture.official import OfficialBrowser, OfficialOptions
