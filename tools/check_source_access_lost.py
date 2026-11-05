@@ -61,6 +61,12 @@ async def check(root):
         assert any(e["kind"] == "coverage.gap" and e["payload"]["reason"] == "source_access_lost" for e in events)
         assert collector.source_visibility(CHANNEL, {CHANNEL: {"last_observed_at": "2999-01-01"}})["state"] == "access_lost"
 
+        collector.client = Client(types.Chat(id=4242, title="Watched group", photo=types.ChatPhotoEmpty(),
+                                             participants_count=2, date=datetime.now(timezone.utc), version=1))
+        await collector.on_raw(service(GROUP, types.MessageActionChatDeleteUser(user_id=ME)))
+        assert str(GROUP) not in store.get_setting("lost_sources"), "A replayed removal of a member is not a loss"
+
+        collector.client = Client(types.ChatForbidden(id=4242, title="Watched group"))
         await collector.on_raw(service(GROUP, types.MessageActionChatDeleteUser(user_id=ME)))
         assert str(GROUP) in store.get_setting("lost_sources")
 

@@ -2119,16 +2119,19 @@ class Collector:
         except Exception as exc:
             await self.failure(exc, "message.deleted", client=client)
 
-    async def check_channel_access(self, chat_id, update):
+    async def check_access(self, chat_id, update):
         try:
-            peer = await self.client.get_input_entity(types.PeerChannel(update.channel_id))
-            answer = await self.client(functions.channels.GetChannelsRequest([peer]))
-            channel = answer.chats[0] if answer.chats else None
+            if chat_id < -1000000000000:
+                peer = await self.client.get_input_entity(types.PeerChannel(-1000000000000 - chat_id))
+                answer = await self.client(functions.channels.GetChannelsRequest([peer]))
+            else:
+                answer = await self.client(functions.messages.GetChatsRequest([-chat_id]))
+            chat = answer.chats[0] if answer.chats else None
         except (ChannelPrivateError, ChannelInvalidError):
-            channel = None
-        if channel is None or isinstance(channel, types.ChannelForbidden):
+            chat = None
+        if chat is None or isinstance(chat, (types.ChannelForbidden, types.ChatForbidden)):
             self.access_lost(chat_id, "no_access", update)
-        elif getattr(channel, "left", False):
+        elif getattr(chat, "left", False) or getattr(chat, "deactivated", False):
             self.access_lost(chat_id, "not_a_member", update)
 
     def access_lost(self, chat_id, reason, update=None):
@@ -2158,7 +2161,7 @@ class Collector:
             if isinstance(update, types.UpdateChannel):
                 chat_id = utils.get_peer_id(types.PeerChannel(update.channel_id))
                 if self.selected(chat_id):
-                    await self.check_channel_access(chat_id, update)
+                    await self.check_access(chat_id, update)
                 return
             if isinstance(update, (types.UpdateNewMessage, types.UpdateNewChannelMessage)) and isinstance(
                     update.message, types.MessageService):
@@ -2168,7 +2171,7 @@ class Collector:
                 me = (self.store.get_setting("account", None) or {}).get("id")
                 if (isinstance(action, types.MessageActionChatDeleteUser) and action.user_id == me
                         and self.selected(chat_id)):
-                    self.access_lost(chat_id, "removed_from_group", update)
+                    await self.check_access(chat_id, update)
                 membership = isinstance(update.message.action, (
                     types.MessageActionChatAddUser, types.MessageActionChatDeleteUser,
                     types.MessageActionChatJoinedByLink, types.MessageActionChatJoinedByRequest))
