@@ -23,6 +23,7 @@ SOURCE_REVIEW = "6002824b6532f3d913997ce496d9ab5f9b86bc22"
 CHAT_LIST = "#LeftColumn .chat-list .Chat"
 MESSAGES = "#MiddleColumn .MessageList:visible"
 TRACE = "https://www.cloudflare.com/cdn-cgi/trace"
+RENDERED_TEXT = (Path(__file__).with_name("static") / "official-rendered-text.js").read_text(encoding="utf-8")
 
 
 class OfficialOptions(BaseModel):
@@ -399,20 +400,25 @@ class OfficialBrowser(BrowserCapture):
     async def targets(self):
         return [(self.page, self.target_id, self.page.url)] if self.page is not None else []
 
+    async def rendered_text(self, page):
+        return await page.locator("body").evaluate(RENDERED_TEXT, timeout=10000)
+
     async def capture(self, journal, settings, max_interval, force=False):
         await self.assert_safe()
         result = await super().capture(journal, settings, max_interval, force)
         await self.assert_safe()
         if result:
             metadata, artifacts, observed = result
-            messages = await self.page.locator(MESSAGES + " .Message[data-message-id]").evaluate_all("""elements => elements.slice(0,500).map(el => ({
-                rendered_id: el.getAttribute('data-message-id'), rendered_text: el.innerText.slice(0,100000),
-                author: el.querySelector('.sender-name')?.innerText || null,
+            messages = await self.page.locator(MESSAGES + " .Message[data-message-id]").evaluate_all("""elements => {
+              const text = """ + RENDERED_TEXT + """;
+              return elements.slice(0,500).map(el => ({
+                rendered_id: el.getAttribute('data-message-id'), rendered_text: text(el).slice(0,100000),
+                author: text(el.querySelector('.sender-name')) || null,
                 displayed_time: el.querySelector('.time')?.getAttribute('title') || el.querySelector('.time')?.innerText || null,
-                reply: el.querySelector('.embedded-message')?.innerText || null,
-                reactions: el.querySelector('.Reactions')?.innerText || null,
+                reply: text(el.querySelector('.embedded-message')) || null,
+                reactions: text(el.querySelector('.Reactions')) || null,
                 deletion_observed: false, telegram_origin_independently_proven: false
-            }))""")
+            })); }""")
             artifacts.append(journal.artifact(canonical(messages), "rendered_messages", "application/json"))
             metadata.update({"adapter": ADAPTER, "source": "official-telegram-web-a",
                              "environment_attested": False, "all_messages_observed": False})

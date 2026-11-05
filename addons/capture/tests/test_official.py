@@ -227,7 +227,7 @@ FIXTURE = """<!doctype html><html><head><meta charset="utf-8"><title>Synthetic o
 <style>.MessageList{height:350px;width:700px;overflow:auto}.Message{height:160px}body{margin:0}</style></head><body>
 <div id="LeftColumn"><div class="chat-list"><div class="Chat"><a class="ListItem-button" href="#123"><span class="title">Alice &lt;script&gt;</span></a></div></div></div>
 <div id="MiddleColumn"><div class="MessageList"><div class="messages-container">
-<div class="Message" data-message-id="1"><b class="sender-name">Alice</b><div class="text-content">Original message</div><span class="time" title="2026-11-05 12:00">12:00</span></div>
+<div class="Message" data-message-id="1"><b class="sender-name">Alice</b><div class="text-content">Original message <img class="emoji" alt="🧪"><br>Second line <span>nested <img class="emoji" alt="👩🏽‍💻"></span><span style="display:none">HIDDEN<img class="emoji" alt="⛔"></span><img alt="DECORATIVE"></div><div class="embedded-message">Reply <img class="emoji" alt="🧪"></div><div class="Reactions"><img class="emoji" alt="👍"> 1</div><span class="time" title="2026-11-05 12:00">12:00</span></div>
 <div class="Message" data-message-id="2"><div class="text-content">Second message</div></div>
 <div class="Message" data-message-id="3"><div class="text-content">Third message</div></div>
 </div></div><div class="Composer"><div contenteditable="true" id="composer"></div><button id="send">Send</button></div></div>
@@ -277,12 +277,25 @@ def test_owned_browser_guard_scroll_capture_and_unknown_dialog(tmp_path, request
         adapter.next_step = 0
         await adapter.scroll("newer")
         assert adapter.steps == 1
+        markup_before = await adapter.page.locator(".messages-container").inner_html()
         metadata, artifacts, observed = await adapter.capture(journal, {"screenshots": True, "pages": True}, 60, True)
+        assert await adapter.page.locator(".messages-container").inner_html() == markup_before
         journal.append("capture.saved", metadata, artifacts, observed)
         messages = next(a for a in artifacts if a["role"] == "rendered_messages")
         values = json.loads((journal.objects / messages["sha256"]).read_bytes())
         assert values[0]["rendered_id"] == "1" and "Original message" in values[0]["rendered_text"]
+        assert "Original message 🧪\nSecond line nested 👩🏽‍💻" in values[0]["rendered_text"]
+        assert values[0]["reply"] == "Reply 🧪" and values[0]["reactions"] == "👍 1"
+        derived = next(a for a in artifacts if a["role"] == "derived_rendered_text")
+        derived_text = (journal.objects / derived["sha256"]).read_text(encoding="utf-8")
+        assert "Original message 🧪\nSecond line nested 👩🏽‍💻" in derived_text
+        for text in (values[0]["rendered_text"], derived_text):
+            assert all(hidden not in text for hidden in ("HIDDEN", "⛔", "DECORATIVE"))
         assert not values[0]["telegram_origin_independently_proven"]
+        # An emoji-only edit must trigger observation before the periodic snapshot.
+        await adapter.page.locator('.text-content img.emoji').first.evaluate("el => el.alt='🔬'")
+        changed = await adapter.capture(journal, {"screenshots": True, "pages": True}, 60)
+        assert changed is not None and changed[0]["text_sha256"] != metadata["text_sha256"]
         await adapter.pause()
         with pytest.raises(ValueError, match="Start recording"):
             await adapter.scroll()
