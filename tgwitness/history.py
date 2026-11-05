@@ -4,7 +4,8 @@ import shutil
 import time
 
 from telethon import utils
-from telethon.errors import FloodWaitError, RPCError
+from telethon.errors import RPCError
+from .telegram_client import FLOOD_ERRORS
 
 from .evidence import checkpoint, retain_checkpoint
 from .monitoring import capture_settings
@@ -211,7 +212,7 @@ class History:
                     await asyncio.wait_for(self.read_page(job), self.collector.param("operation_timeout_seconds"))
                     if not capture_settings(self.store)["messages_first"]:
                         await self.collector.download_worker(owner="history:" + run_id, history_run=run_id)
-                except FloodWaitError as exc:
+                except FLOOD_ERRORS as exc:
                     with self.store.transaction():
                         self.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
                             self.store.get_setting("rpc_backoff_until", 0)))

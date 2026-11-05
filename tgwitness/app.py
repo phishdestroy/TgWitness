@@ -21,7 +21,8 @@ from fastapi import Path as ApiPath
 from fastapi.responses import FileResponse, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, model_validator
-from telethon.errors import FloodWaitError, RPCError
+from telethon.errors import RPCError
+from .telegram_client import FLOOD_ERRORS
 
 from . import __version__
 from .workers import complete_in_thread
@@ -692,7 +693,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         client = collector.client
         try:
             return await asyncio.wait_for(call(*args), tuning.value(app.state.store, "operation_timeout_seconds"))
-        except FloodWaitError as exc:
+        except FLOOD_ERRORS as exc:
             app.state.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
                 app.state.store.get_setting("rpc_backoff_until", 0)))
             raise HTTPException(429, {"message": "Telegram requested a pause.", "retry_after": exc.seconds},

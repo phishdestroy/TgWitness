@@ -13,7 +13,7 @@ from pathlib import Path
 from collections import deque
 
 from telethon import __version__ as telethon_version, events, utils
-from telethon.errors import SessionPasswordNeededError, FloodWaitError, InvalidBufferError, RPCError
+from telethon.errors import SessionPasswordNeededError, InvalidBufferError, RPCError
 from telethon.errors import FileReferenceExpiredError
 from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
                              FrozenMethodInvalidError, SessionExpiredError, SessionRevokedError,
@@ -33,7 +33,7 @@ from . import tuning
 from .history import History
 from .account_import import session_key, validate_string
 from .avatar_history import AvatarHistory
-from .telegram_client import WitnessClient
+from .telegram_client import WitnessClient, FLOOD_ERRORS
 from .workers import complete_in_thread
 from .store import canonical, utcnow
 from .evidence import retain_checkpoint
@@ -533,7 +533,7 @@ class Collector:
                     await self.snapshot(chat_id, options["history"], entity=entity, origin="new_chat")
             except asyncio.CancelledError:
                 raise
-            except FloodWaitError as exc:
+            except FLOOD_ERRORS as exc:
                 until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
                 self.store.set_setting("rpc_backoff_until", until)
                 self.store.append("telegram.backoff", {"operation": "new chat intake", "retry_after_seconds": exc.seconds})
@@ -991,7 +991,7 @@ class Collector:
                 try:
                     answer = await self.client.get_messages(entity, ids=batch)
                     break
-                except FloodWaitError as exc:
+                except FLOOD_ERRORS as exc:
                     if attempt == 2 or exc.seconds > 600:
                         raise
                     await asyncio.sleep(exc.seconds + 1)
@@ -1614,7 +1614,7 @@ class Collector:
         client = self.client
         try:
             result = await asyncio.wait_for(client(functions.messages.GetDialogFiltersRequest()), 15)
-        except FloodWaitError:
+        except FLOOD_ERRORS:
             raise
         except AUTHORIZATION_ERRORS as exc:
             self.handle_authorization_error(exc, "dialog folders", client=client)
@@ -1853,8 +1853,9 @@ class Collector:
             await self.restore()
         except AUTHORIZATION_ERRORS as exc:
             self.handle_authorization_error(exc, "reconnect", client=client)
-        except FloodWaitError as exc:
-            self.next_reconnect_at = now + exc.seconds
+        except FLOOD_ERRORS as exc:
+            self.next_reconnect_at = max(time.time() + exc.seconds,
+                                         self.store.get_setting("rpc_backoff_until", 0))
             self.store.set_setting("rpc_backoff_until", self.next_reconnect_at)
             self.store.append("telegram.backoff", {"operation": "reconnect", "retry_after_seconds": exc.seconds})
         except Exception as exc:
@@ -2111,8 +2112,9 @@ class Collector:
                 client = self.client
                 try:
                     await self.apply_scope()
-                except FloodWaitError as exc:
-                    self.store.set_setting("rpc_backoff_until", time.time() + exc.seconds)
+                except FLOOD_ERRORS as exc:
+                    self.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
+                        self.store.get_setting("rpc_backoff_until", 0)))
                     self.store.append("telegram.backoff", {"operation": "scope refresh",
                                                            "retry_after_seconds": exc.seconds})
                     continue
@@ -2163,11 +2165,11 @@ class Collector:
                     last = self.store.get_setting("recheck_last", {})
                     last[str(target["chat_id"])] = time.time()
                     self.store.set_setting("recheck_last", last)
-            except FloodWaitError as exc:
+            except FLOOD_ERRORS as exc:
                 until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
                 self.store.set_setting("rpc_backoff_until", until)
                 self.store.append("telegram.backoff", {"operation": "recheck", "retry_after_seconds": exc.seconds})
-                results.append({"chat_id": target["chat_id"], "error": "FloodWaitError"})
+                results.append({"chat_id": target["chat_id"], "error": type(exc).__name__})
                 break
             except Exception as exc:
                 results.append({"chat_id": target["chat_id"], "error": type(exc).__name__})
@@ -2482,7 +2484,7 @@ class Collector:
                     writing = False
                     offset_id, failures = message.id, 0
                 return
-            except FloodWaitError as exc:
+            except FLOOD_ERRORS as exc:
                 if writing:
                     raise
                 wait = exc.seconds + 1
@@ -2551,7 +2553,7 @@ class Collector:
                     if not (directory / digest).exists():
                         temp.replace(directory / digest)
                     return {"file": "media/" + digest, "file_sha256": digest, "file_size": written, "file_kind": kind}
-                except FloodWaitError as exc:
+                except FLOOD_ERRORS as exc:
                     if attempt == 2:
                         return {"file_status": "rate_limited", "file_kind": kind}
                     await asyncio.sleep(min(exc.seconds + 1, 600))
@@ -2699,7 +2701,7 @@ class Collector:
             try:
                 data = await asyncio.wait_for(
                     client.download_profile_photo(entity, file=bytes, download_big=False), 20)
-            except FloodWaitError as exc:
+            except FLOOD_ERRORS as exc:
                 until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
                 self.store.set_setting("rpc_backoff_until", until)
                 return None
@@ -2870,7 +2872,7 @@ class Collector:
                 self.store.finish_media(job, "retry", {"error_type": type(exc).__name__,
                     "reason": "Telegram authorization expired; durable job retained"})
                 return
-            except FloodWaitError as exc:
+            except FLOOD_ERRORS as exc:
                 until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
                 self.store.set_setting("rpc_backoff_until", until)
                 self.store.finish_media(job, "retry", {"error_type": type(exc).__name__,

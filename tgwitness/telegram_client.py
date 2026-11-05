@@ -3,12 +3,13 @@ import time
 from contextvars import ContextVar
 
 from telethon import TelegramClient, utils
-from telethon.errors import FloodWaitError
+from telethon.errors import FloodWaitError, FloodPremiumWaitError
 from telethon.network.connection import ConnectionTcpFull
 from telethon.network.connection.tcpmtproxy import TcpMTProxy
 from telethon.tl import functions, types
 
 _single_attempt = ContextVar("telegram_single_attempt", default=False)
+FLOOD_ERRORS = (FloodWaitError, FloodPremiumWaitError)
 _ACTIONS = (functions.messages.GetBotCallbackAnswerRequest,
             functions.messages.ImportChatInviteRequest, functions.channels.JoinChannelRequest)
 
@@ -63,7 +64,7 @@ class WitnessClient(TelegramClient):
         try:
             return await super()._call(sender, request, ordered, flood_sleep_threshold)
         except Exception as exc:
-            if isinstance(exc, FloodWaitError):
+            if isinstance(exc, FLOOD_ERRORS):
                 self._rpc_wait_until = max(self._rpc_wait_until, time.time() + exc.seconds + 1)
                 if save := getattr(self, "rpc_backoff_setter", None):
                     save(self._rpc_wait_until)

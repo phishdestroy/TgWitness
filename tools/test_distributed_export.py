@@ -6,7 +6,7 @@ from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
 import pytest
-from telethon.errors import FloodWaitError
+from telethon.errors import FloodWaitError, FloodPremiumWaitError
 from telethon.tl import types
 
 from tgwitness import distributed_export, settings_hub, telegram_client
@@ -106,14 +106,15 @@ def test_rpc_calls_and_batch_are_serial(monkeypatch):
     asyncio.run(scenario())
 
 
-def test_floodwait_is_full_and_persisted_before_next_rpc(monkeypatch):
+@pytest.mark.parametrize("error_type", [FloodWaitError, FloodPremiumWaitError])
+def test_floodwait_is_full_and_persisted_before_next_rpc(monkeypatch, error_type):
     async def scenario():
         client = object.__new__(telegram_client.WitnessClient)
         clock, saved, calls = [100.0], [], []
         async def request(self, sender, req, ordered=False, flood_sleep_threshold=None):
             calls.append((req, clock[0]))
             if req == 1:
-                raise FloodWaitError(request=None, capture=7200)
+                raise error_type(request=None, capture=7200)
             return req
         async def sleep(seconds):
             clock[0] += seconds
@@ -121,11 +122,51 @@ def test_floodwait_is_full_and_persisted_before_next_rpc(monkeypatch):
         monkeypatch.setattr(telegram_client.time, "time", lambda: clock[0])
         monkeypatch.setattr(telegram_client.asyncio, "sleep", sleep)
         client.rpc_backoff_setter = saved.append
-        with pytest.raises(FloodWaitError):
+        with pytest.raises(error_type):
             await client._call(None, 1)
         assert saved == [7301.0]
         assert await client._call(None, 2) == 2
         assert calls[1][1] >= 7301.0
+    asyncio.run(scenario())
+
+
+def test_reconnect_does_not_shorten_persisted_flood_wait(tmp_path, monkeypatch):
+    async def scenario():
+        app = workspace(tmp_path / "reconnect")
+        collector, store = app.state.collector, app.state.store
+        clock = [100.0]
+        monkeypatch.setattr(telegram_client.time, "time", lambda: clock[0])
+        async def restore():
+            clock[0] = 200.0
+            store.set_setting("rpc_backoff_until", 500.0)
+            raise FloodWaitError(None, capture=10)
+        collector.restore = restore
+        try:
+            await collector.reconnect()
+            assert store.get_setting("rpc_backoff_until") == 500.0
+            assert collector.next_reconnect_at == 500.0
+        finally:
+            store.close()
+    asyncio.run(scenario())
+
+
+@pytest.mark.parametrize("error_type", [FloodWaitError, FloodPremiumWaitError])
+def test_export_retry_waits_without_changing_api_pair(monkeypatch, error_type):
+    async def scenario():
+        clock, calls, states = [100.0], [], []
+        job = SimpleNamespace(current={}, persist=lambda: states.append(dict(job.current)))
+        async def request():
+            calls.append(clock[0])
+            if len(calls) == 1:
+                raise error_type(None, capture=60)
+            return "page"
+        async def sleep(seconds):
+            clock[0] += seconds
+        monkeypatch.setattr(telegram_client.time, "time", lambda: clock[0])
+        monkeypatch.setattr(telegram_client.asyncio, "sleep", sleep)
+        assert await AccountExport.retry(job, request) == "page"
+        assert calls == [100.0, 161.0]
+        assert states[0]["wait_reason"] == "rate_limit" and states[0]["wait_until"] == 160.0
     asyncio.run(scenario())
 
 

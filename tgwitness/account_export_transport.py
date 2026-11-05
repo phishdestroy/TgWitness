@@ -189,7 +189,7 @@ class Transport:
                         gaps.append("Chat " + str(chat["id"]) + ": full history unavailable; exporting own messages only.")
                         response = await self.history(task, 0, 1)
                     messages = [m for m in response.messages if not isinstance(m, t.MessageEmpty)]
-                except (errors.TakeoutInvalidError, errors.FloodWaitError, errors.ServerError):
+                except (errors.TakeoutInvalidError, errors.FloodWaitError, errors.FloodPremiumWaitError, errors.ServerError):
                     raise
                 except errors.RPCError as exc:
                     task["discovery_error"] = type(exc).__name__
@@ -326,7 +326,7 @@ class Transport:
             batch = missing[start:start + 100]
             try:
                 found = await self.ranged(task)(f.messages.GetCustomEmojiDocumentsRequest(batch))
-            except (errors.TakeoutInvalidError, errors.FloodWaitError, errors.ServerError):
+            except (errors.TakeoutInvalidError, errors.FloodWaitError, errors.FloodPremiumWaitError, errors.ServerError):
                 raise
             except errors.RPCError:
                 found = []
