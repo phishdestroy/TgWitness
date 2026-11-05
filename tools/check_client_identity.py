@@ -155,19 +155,23 @@ async def check_routes():
         assert not app.state.vault.read("credentials")
 
         response = await http.post("/api/auth/import", json={"files": [
-            uploaded("other.json", json.dumps({**METADATA, "app_id": 321, "session": saved_session(b"q")}).encode())]})
+            uploaded("other.json", json.dumps({**METADATA, "app_id": 321, "session": saved_session(b"q"),
+                                               "tz_offset": -36000}).encode())]})
         assert response.status_code == 200, response.text
         imported = response.json()
         credentials = {k: imported[k] for k in ("api_id", "api_hash", "session", "client_profile")}
         response = await http.post("/api/auth/configure", json=credentials, headers=headers)
         assert response.status_code == 200, response.text
-        assert app.state.vault.read("credentials")["client_profile"] == PROFILE
+        assert app.state.vault.read("credentials")["client_profile"] == {**PROFILE, "tz_offset": -36000}
         connections = RecordingClient.connections
         response = await http.post("/api/auth/configure", json={**credentials, "client_profile": {"proxy": "unused.invalid"}})
         assert response.status_code == 422 and RecordingClient.connections == connections
+        for invalid in (True, 1.5, 50401):
+            response = await http.post("/api/auth/configure", json={**credentials, "client_profile": {"tz_offset": invalid}})
+            assert response.status_code == 422 and RecordingClient.connections == connections
         response = await http.post("/api/auth/phone/start", json={"phone": "+15550001111"}, headers=headers)
         assert response.status_code == 200, response.text
-        assert app.state.collector.login_client.tgwitness_client_profile == PROFILE
+        assert app.state.collector.login_client.tgwitness_client_profile == {**PROFILE, "tz_offset": -36000}
 
 
 def check_catalog():

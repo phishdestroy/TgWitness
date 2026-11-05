@@ -79,7 +79,7 @@ class Credentials(BaseModel):
     api_hash: str | None = Field(default=None, pattern=r"^[a-fA-F0-9]{32}$")
     session: str = Field(default="", max_length=4096)
     expected_user_id: int | None = Field(default=None, gt=0)
-    client_profile: dict[str, str] | None = None
+    client_profile: dict[str, object] | None = None
 
     @model_validator(mode="after")
     def complete_api_pair(self):

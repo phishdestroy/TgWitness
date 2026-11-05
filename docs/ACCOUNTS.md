@@ -85,6 +85,8 @@ to 900 seconds using the [opentele2 algorithm](https://github.com/DedInc/opentel
 connection so daylight-saving changes are reflected. An imported `tz_offset`
 takes precedence on every platform and is kept exactly, including zero. Other
 `initConnection.params` entries are retained.
+The HTTP sign-in form accepts the numeric timezone returned by file import;
+booleans, fractions and offsets outside the supported range are rejected.
 
 Direct, SOCKS5 and HTTP CONNECT routes use Telethon's `ConnectionTcpObfuscated`
 (obfuscated abridged MTProto). HTTPS CONNECT retains TLS to the proxy and uses
