@@ -56,6 +56,8 @@ def account_capture(context, root, record):
                 raise TakeoutInitDelayError(None, capture=3600)
 
         async def download(self, media, stream, progress, task):
+            await progress(1, len(CONTENT))
+            await asyncio.sleep(3)
             stream.write(CONTENT)
             return stream
 
@@ -135,9 +137,11 @@ def account_capture(context, root, record):
                 page.screenshot(path=str(ROOT / "test-results/sealed-experience" / f"runner-account-{width}.png"), full_page=True)
             page.locator("#collect").click()
             expect(page.locator("#status")).to_contain_text("3600 seconds", timeout=15000)
+            expect(page.locator("#status")).to_contain_text("another device")
             expect(page.locator("#resume")).to_have_text("Check export approval")
             approved[0] = True
             page.locator("#resume").click()
+            expect(page.locator("#capture-transfer")).to_contain_text("Current file", timeout=10000)
             expect(page.locator("#complete")).to_be_visible(timeout=20000)
             expect(page.locator("#complete-summary")).to_contain_text("Export completed within the selected scope")
             result = verify_bundle(root / "out/evidence.zip")["account_export"]

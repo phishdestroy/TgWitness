@@ -221,6 +221,11 @@ async function poll() {
     $("capture-messages").textContent = String(account ? Math.max(account.counts?.messages || 0, account.acquisition?.messages_preserved || 0) : state.history.captured || 0);
     $("capture-unavailable").textContent = String(account ? account.coverage?.failures || 0 : state.history.unavailable || 0);
     $("capture-remaining").textContent = String(Math.ceil(state.remaining_seconds / 60));
+    const transfer = account?.active && account.transfer;
+    $("capture-transfer").hidden = !transfer;
+    $("capture-transfer").textContent = transfer ? tr(
+      `Current file：${(transfer.received_bytes / 1024**2).toFixed(2)} MiB received` + (transfer.total_bytes == null ? "" : ` of ${(transfer.total_bytes / 1024**2).toFixed(2)} MiB`) + "．The file is preserved after the download completes．",
+      `Текущий файл：получено ${(transfer.received_bytes / 1024**2).toFixed(2)} МиБ` + (transfer.total_bytes == null ? "" : ` из ${(transfer.total_bytes / 1024**2).toFixed(2)} МиБ`) + "．Файл сохраняется после завершения скачивания．") : "";
     $("resume").hidden = account ? !["paused", "waiting", "failed"].includes(account.phase) || account.active : state.history.phase !== "paused";
     $("resume").textContent = account?.wait_reason === "takeout_approval" ? tr("Check export approval", "Проверить подтверждение экспорта") : tr("Resume paused capture", "Продолжить сбор");
     $("cancel").hidden = terminal || state.phase === "sealing";
@@ -236,8 +241,8 @@ async function poll() {
       state.authorized ? tr("Connected. Choose what to export.", "Вход выполнен. Выберите данные для выгрузки.") :
       tr("Sign in to Telegram to continue.", "Для продолжения войдите в Telegram.");
     if (account?.wait_reason === "takeout_approval" && state.phase === "collecting") $("status").textContent =
-      tr(`Telegram requires export approval．Review the request in an established Telegram session，then click Check export approval．Telegram reported ${account.delay_seconds} seconds of waiting，this runner has ${state.remaining_seconds} seconds left．A new runner may require approval again．`,
-        `Telegram требует подтверждения экспорта，проверьте запрос в уже действующей сессии и нажмите «Проверить подтверждение экспорта»．Telegram сообщил об ожидании ${account.delay_seconds} секунд，у этого запуска осталось ${state.remaining_seconds} секунд．Новый запуск может снова потребовать подтверждения．`);
+      tr(`Telegram requires export approval from another device that was already signed in before this request．The requesting session and a fresh login cannot approve it．After allowing the export there，click Check export approval．Telegram reported ${account.delay_seconds} seconds of waiting，this runner has ${state.remaining_seconds} seconds left．A new runner may require approval again．`,
+        `Telegram требует подтверждения с другого устройства，на котором вход был выполнен до запроса экспорта．Запрашивающая сессия и новый вход не могут его подтвердить．Разрешите экспорт на том устройстве и нажмите «Проверить подтверждение экспорта»．Telegram сообщил об ожидании ${account.delay_seconds} секунд，у этого запуска осталось ${state.remaining_seconds} секунд．Новый запуск может снова потребовать подтверждения．`);
     else if (account?.error && state.phase === "collecting") $("error").textContent = account.error;
     if (state.authorized) {$("api-hash").value = ""; $("phone").value = ""; qrId = null;}
     if (state.revocation === "not_confirmed") $("error").textContent = tr("Session revocation was not confirmed. End this session in Telegram Settings > Devices.", "Отзыв сессии не подтверждён. Завершите её в Telegram: Настройки → Устройства.");

@@ -132,13 +132,18 @@ def test_official_panel_login_selection_export_and_languages(tmp_path, request, 
         adapter = app.state.recorder.official
         adapter.headless = True
         real_route = adapter._route
+        client_loop = None
 
         async def fixture_route(route):
+            nonlocal client_loop
+            client_loop = asyncio.get_running_loop()
             class FixtureRoute:
                 request = route.request
 
                 async def continue_(self):
-                    await route.fulfill(status=200, content_type="text/html", body=FIXTURE)
+                    body = FIXTURE.replace('<body>', '<body><div id="auth-password-form">Two-step verification</div>').replace(
+                        '<div id="LeftColumn">', '<div id="LeftColumn" style="display:none">')
+                    await route.fulfill(status=200, content_type="text/html", body=body)
 
                 async def abort(self, error):
                     await route.abort(error)
@@ -166,6 +171,15 @@ def test_official_panel_login_selection_export_and_languages(tmp_path, request, 
                 expect(page.locator("#route")).to_contain_text("внешний IP")
             page.locator("#plan-form button").click()
             expect(page.locator("#client-section")).to_be_visible(timeout=15000)
+            expect(page.locator("#login-state")).to_contain_text("password", timeout=15000)
+            expect(page.locator("#chats-refresh")).to_be_disabled()
+            expect(page.locator("#chat-select")).to_be_disabled()
+            asyncio.run_coroutine_threadsafe(adapter.page.evaluate("""() => {
+                document.getElementById('auth-password-form').remove();
+                document.getElementById('LeftColumn').style.display='';
+            }"""), client_loop).result(timeout=10)
+            expect(page.locator("#chats-refresh")).to_be_enabled(timeout=10000)
+            expect(page.locator("#chat-select")).to_be_disabled()
             page.locator("#chats-refresh").click()
             expect(page.locator("#chats option")).to_have_count(1)
             page.locator("#chat-select").click()
