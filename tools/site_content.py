@@ -1,6 +1,6 @@
 GUIDES = {
     "archive": ("Work the archive", "Load history, search saved records, review AI sources and connect your tools.", "archive history search AI MCP OCR transcription webhooks reports integrations", "docs/ANALYSIS.md"),
-    "capture": ("GitHub Actions capture", "Choose an account export or guarded official-client observation on a temporary GitHub runner．", "github actions capture takeout official client video account export encrypted archive", "docs/SEALED-ACTIONS.md"),
+    "capture": ("GitHub Actions capture", "Choose Takeout，regular API export or a chat journal on a temporary GitHub runner．", "github actions capture takeout account export encrypted archive", "docs/SEALED-ACTIONS.md"),
     "dedicated-account": ("Dedicated account", "Prepare a separate Telegram account for collection.", "dedicated telegram account session api login", "docs/ACCOUNTS.md"),
     "start": ("Start in minutes", "Try TgWitness with sample data, then launch your own Telegram observation workspace on Windows, Linux or macOS.", "demo install setup windows linux macos python", "docs/QUICKSTART.md"),
     "accounts": ("Connect an account", "Connect Telegram by QR code, phone number or session import. Choose sources and check that new messages reach your journal.", "qr phone session tdata api id hash account sources", "docs/ACCOUNTS.md"),
@@ -61,14 +61,13 @@ REFERENCE = {
     "account-export": ("Account export", "Export what an account can read now: scope, resumable jobs, a signed archive and minimized sharing copies.", "account export takeout disclosure minimized sharing copy scope", "docs/ACCOUNT-EXPORT.md"),
     "showcase": ("Public showcase", "Publish saved messages of selected public channels and signed snapshots through expiring, revocable links.", "showcase public channel link snapshot redaction verify", "docs/LIVE-SHOWCASE.md"),
     "high-assurance": ("High-assurance deployment", "A sealed 24/7 server on Hetzner or Phala Cloud, Gateway DNS and the checks a third party can repeat.", "high assurance hetzner phala tdx cloudflare gateway dns sealed server", "docs/HIGH-ASSURANCE.md"),
-    "official-witness": ("Official client witness", "Guarded Telegram Web observation with video，expected settings and independently verifiable evidence．", "official telegram web video passive paced witness proxy sealed", "docs/OFFICIAL-WITNESS.md"),
 }
 
 REFERENCE_GROUPS = (
     ("Set up", ("quickstart", "installation", "settings", "accounts", "access", "connection", "deployment", "high-assurance")),
     ("Collect", ("panel", "collection", "history", "operations", "investigation", "features")),
     ("Archive & integrations", ("case-board", "analysis", "mcp", "media-analysis", "webhooks", "showcase")),
-    ("Evidence", ("how-it-works", "case-reports", "account-export", "official-witness", "evidence", "witness", "timestamp", "storage")),
+    ("Evidence", ("how-it-works", "case-reports", "account-export", "evidence", "witness", "timestamp", "storage")),
     ("Security & project", ("security", "architecture", "verification", "license", "notice", "changelog")),
 )
 
