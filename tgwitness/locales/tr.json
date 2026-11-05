@@ -6214,5 +6214,10 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Bu anlık görüntü, yalnızca Telegram'ın dışa aktarım sırasında döndürdüğü bilgileri içerir. Bu çalışma alanının günlüğü, bu sohbette gözlemlenen silme işlemlerini veya önceki sürümleri de içerir; bunları dahil etmek için kanıt günlüğünü dışa aktarın.",
 "access lost: removed or no longer readable": "erişim kaybedildi: kaldırıldı veya artık okunamıyor",
 "The account was removed from every source or can no longer read them.": "Hesap tüm kaynaklardan kaldırıldı veya artık bu kaynakları okuyamıyor.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Hesap bazı kaynaklardan kaldırıldı ya da artık bu kaynakları okuyamıyor; bu kaynaklardan hiçbir şey gelmiyor. Diğerleri devam ediyor."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Hesap bazı kaynaklardan kaldırıldı ya da artık bu kaynakları okuyamıyor; bu kaynaklardan hiçbir şey gelmiyor. Diğerleri devam ediyor.",
+"Create a key of its own": "Kendine ait bir anahtar oluştur",
+"Pause observation before replacing the session key.": "Oturum anahtarını değiştirmeden önce gözlemi duraklatın.",
+"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "TgWitness'e özgü bir oturum anahtarı mı oluşturulmalı? İçe aktarılan oturum, QR kodunu taramak gibi yeni bir TgWitness oturum açma işlemini onaylar; ardından TgWitness, içe aktarılan anahtarı kullanmayı durdurur. Başka bir yerde bulunan içe aktarılan anahtarın bir kopyası artık bu çalışma alanını devralamaz.",
+"This account has two-step verification. Enter its password to create the key.": "Bu hesapta iki aşamalı doğrulama etkinleştirilmiştir. Anahtarı oluşturmak için şifresini girin.",
+"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness artık kendi oturum anahtarını kullanıyor. İçe aktarılan anahtar artık kullanılmıyor."
 }

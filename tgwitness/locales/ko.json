@@ -6175,5 +6175,10 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "이 스냅샷에는 텔레그램에서 내보낼 때 반환된 내용만 포함되어 있습니다. 이 작업 공간의 기록에는 이 채팅에서 확인된 삭제 내역이나 이전 버전도 포함되어 있습니다. 이를 포함하려면 증거 기록을 내보내십시오.",
 "access lost: removed or no longer readable": "접근 불가: 삭제되었거나 더 이상 읽을 수 없음",
 "The account was removed from every source or can no longer read them.": "해당 계정은 모든 소스에서 삭제되었거나 더 이상 해당 소스를 읽을 수 없습니다.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "해당 계정이 일부 소스에서 삭제되었거나 더 이상 해당 소스를 읽을 수 없게 되어, 해당 소스에서는 아무런 메시지도 수신되지 않습니다. 나머지 소스는 정상적으로 작동합니다."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "해당 계정이 일부 소스에서 삭제되었거나 더 이상 해당 소스를 읽을 수 없게 되어, 해당 소스에서는 아무런 메시지도 수신되지 않습니다. 나머지 소스는 정상적으로 작동합니다.",
+"Create a key of its own": "별도의 키 생성",
+"Pause observation before replacing the session key.": "세션 키를 교체하기 전에 관찰을 일시 중지합니다.",
+"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "TgWitness 고유의 세션 키를 생성하나요? 가져온 세션은 QR 코드를 스캔하는 것과 마찬가지로 새로운 TgWitness 로그인을 확인하며, 이후 TgWitness는 가져온 키의 사용을 중단합니다. 다른 곳에 저장된 가져온 키의 복사본으로는 더 이상 이 작업 공간을 제어할 수 없습니다.",
+"This account has two-step verification. Enter its password to create the key.": "이 계정은 2단계 인증이 설정되어 있습니다. 키를 생성하려면 해당 비밀번호를 입력하세요.",
+"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness는 이제 자체 세션 키를 사용합니다. 가져온 키는 더 이상 사용되지 않습니다."
 }

@@ -6214,5 +6214,10 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "এই স্ন্যাপশটে শুধুমাত্র টেলিগ্রাম রপ্তানিতে ফেরত দেওয়া তথ্য রয়েছে। এই ওয়ার্কস্পেসের জার্নালেও এই চ্যাটে দেখা যাওয়া মুছে ফেলা অংশ বা পূর্ববর্তী সংস্করণগুলো রয়েছে; সেগুলো অন্তর্ভুক্ত করতে প্রমাণ জার্নাল রপ্তানি করুন।",
 "access lost: removed or no longer readable": "অ্যাক্সেস হারিয়ে গেছে: সরানো হয়েছে বা আর পড়া যাচ্ছে না",
 "The account was removed from every source or can no longer read them.": "অ্যাকাউন্টটি প্রতিটি উৎস থেকে মুছে ফেলা হয়েছে বা আর সেগুলো পড়তে পারবে না।",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "অ্যাকাউন্টটি কিছু উৎস থেকে সরিয়ে ফেলা হয়েছে বা আর সেগুলো পড়তে পারছে না; সেখান থেকে কিছুই আসছে না। বাকীগুলো চলছে।"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "অ্যাকাউন্টটি কিছু উৎস থেকে সরিয়ে ফেলা হয়েছে বা আর সেগুলো পড়তে পারছে না; সেখান থেকে কিছুই আসছে না। বাকীগুলো চলছে।",
+"Create a key of its own": "নিজের একটি কী তৈরি করুন",
+"Pause observation before replacing the session key.": "সেশন কী প্রতিস্থাপনের আগে পর্যবেক্ষণ বিরতি দিন।",
+"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "TgWitness-এর নিজস্ব একটি সেশন কী তৈরি করুন? আমদানি করা সেশনটি একটি নতুন TgWitness লগইন নিশ্চিত করে, ঠিক QR কোড স্ক্যান করার মতো; এরপর TgWitness আমদানি করা কীটি আর ব্যবহার করে না। অন্য কোথাও সংরক্ষিত আমদানি করা কীটির একটি অনুলিপি আর এই ওয়ার্কস্পেসটি দখল করতে পারবে না।",
+"This account has two-step verification. Enter its password to create the key.": "এই অ্যাকাউন্টে দুই-ধাপ যাচাইকরণ রয়েছে। কী তৈরি করতে এর পাসওয়ার্ড লিখুন।",
+"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness এখন নিজস্ব সেশন কী ব্যবহার করে। আমদানি করা কী আর ব্যবহার করা হচ্ছে না।"
 }

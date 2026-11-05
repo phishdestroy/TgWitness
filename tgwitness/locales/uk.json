@@ -6292,5 +6292,10 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Цей знімок містить лише те, що Telegram повернув під час експорту. Журнал цього робочого простору також містить видалені повідомлення або попередні версії, зафіксовані в цьому чаті; щоб включити їх, експортуйте журнал доказів.",
 "access lost: removed or no longer readable": "доступ втрачено: видалено або більше не читається",
 "The account was removed from every source or can no longer read them.": "Акаунт було видалено з усіх джерел або він більше не має доступу до них.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Акаунт було видалено з деяких джерел або він більше не може їх читати; з них нічого не надходить. Інші продовжують працювати."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Акаунт було видалено з деяких джерел або він більше не може їх читати; з них нічого не надходить. Інші продовжують працювати.",
+"Create a key of its own": "Створити окремий ключ",
+"Pause observation before replacing the session key.": "Призупиніть спостереження перед заміною сесійного ключа.",
+"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "Створити власний сесійний ключ TgWitness? Імпортована сесія підтверджує новий вхід у TgWitness, як при скануванні QR-коду; після цього TgWitness припиняє використовувати імпортований ключ. Копія імпортованого ключа, що зберігається деінде, більше не зможе перехопити контроль над цим робочим простором.",
+"This account has two-step verification. Enter its password to create the key.": "Цей обліковий запис має двоступеневу аутентифікацію. Введіть його пароль, щоб створити ключ.",
+"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness тепер використовує власний сесійний ключ. Імпортований ключ більше не використовується."
 }

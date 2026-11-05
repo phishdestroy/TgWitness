@@ -6214,5 +6214,10 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Cet instantané ne contient que les données renvoyées par Telegram lors de l'exportation. Le journal de cet espace de travail contient également les suppressions ou les versions antérieures observées dans cette conversation ; exportez le journal des preuves pour les inclure.",
 "access lost: removed or no longer readable": "Accès perdu : supprimé ou plus lisible",
 "The account was removed from every source or can no longer read them.": "Le compte a été supprimé de toutes les sources ou ne peut plus y accéder.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Le compte a été supprimé de certaines sources ou ne peut plus y accéder ; rien ne provient de celles-ci. Les autres continuent de fonctionner."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Le compte a été supprimé de certaines sources ou ne peut plus y accéder ; rien ne provient de celles-ci. Les autres continuent de fonctionner.",
+"Create a key of its own": "Créer une clé distincte",
+"Pause observation before replacing the session key.": "Mettre l'observation en pause avant de remplacer la clé de session.",
+"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "Créer une clé de session propre à TgWitness ? La session importée confirme une nouvelle connexion à TgWitness, comme lors de la lecture d'un code QR ; TgWitness cesse alors d'utiliser la clé importée. Une copie de la clé importée stockée ailleurs ne peut plus prendre le contrôle de cet espace de travail.",
+"This account has two-step verification. Enter its password to create the key.": "Ce compte dispose d'une authentification en deux étapes. Saisissez son mot de passe pour créer la clé.",
+"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness utilise désormais sa propre clé de session. La clé importée n'est plus utilisée."
 }

@@ -6214,5 +6214,10 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "यह स्नैपशॉट केवल वही जानकारी रखता है जो टेलीग्राम ने एक्सपोर्ट में लौटाई है। इस वर्कस्पेस का जर्नल भी इस चैट में देखी गई हटाई गई या पहले के संस्करणों को रखता है; उन्हें शामिल करने के लिए साक्ष्य जर्नल को एक्सपोर्ट करें।",
 "access lost: removed or no longer readable": "पहुँच खो गई: हटा दिया गया या अब पठनीय नहीं",
 "The account was removed from every source or can no longer read them.": "खाते को हर स्रोत से हटा दिया गया था या अब उन्हें पढ़ा नहीं जा सकता।",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "कुछ स्रोतों से खाता हटा दिया गया था या अब उन्हें पढ़ा नहीं जा सकता; उनसे कुछ भी नहीं आता। बाकी जारी हैं।"
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "कुछ स्रोतों से खाता हटा दिया गया था या अब उन्हें पढ़ा नहीं जा सकता; उनसे कुछ भी नहीं आता। बाकी जारी हैं।",
+"Create a key of its own": "अपनी खुद की कुंजी बनाएँ",
+"Pause observation before replacing the session key.": "सत्र कुंजी बदलने से पहले अवलोकन को रोकें।",
+"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "क्या TgWitness की अपनी कोई सत्र कुंजी बनाई जाए? आयातित सत्र एक नए TgWitness लॉगिन की पुष्टि करता है, जैसे QR कोड स्कैन करना; फिर TgWitness आयातित कुंजी का उपयोग बंद कर देता है। कहीं और मौजूद आयातित कुंजी की प्रति अब इस कार्यक्षेत्र को नियंत्रित नहीं कर सकती।",
+"This account has two-step verification. Enter its password to create the key.": "इस खाते में दो-चरणीय सत्यापन है। कुंजी बनाने के लिए इसका पासवर्ड दर्ज करें।",
+"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness अब अपनी खुद की सत्र कुंजी का उपयोग करता है। आयातित कुंजी अब उपयोग नहीं की जाती।"
 }

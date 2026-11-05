@@ -6214,5 +6214,10 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Ushbu snapshot faqat Telegram eksport qilganda qaytargan ma'lumotlarni o'z ichiga oladi. Ushbu ish maydonchasining jurnalida chatda kuzatilgan o'chirishlar yoki avvalgi versiyalar ham mavjud; ularni o'z ichiga olish uchun dalillar jurnalini eksport qiling.",
 "access lost: removed or no longer readable": "kirish yo'qolgan: o'chirib tashlangan yoki endi o'qib bo'lmaydi",
 "The account was removed from every source or can no longer read them.": "Hisob har bir manbadan o'chirib tashlandi yoki endi ularni o'qiy olmaydi.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Ba'zi manbalardan hisob o'chirilgan yoki endi ularni o'qib bo'lmaydi; ulardan hech narsa kelmaydi. Qolganlari davom etadi."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Ba'zi manbalardan hisob o'chirilgan yoki endi ularni o'qib bo'lmaydi; ulardan hech narsa kelmaydi. Qolganlari davom etadi.",
+"Create a key of its own": "O'zining alohida kalitini yaratish",
+"Pause observation before replacing the session key.": " Sessiya kalitini almashtirishdan oldin kuzatuvni to'xtating.",
+"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "TgWitness'ning o'z sessiya kalitini yaratingmi? Import qilingan sessiya QR kodni skanerlash kabi yangi TgWitness kirishini tasdiqlaydi; TgWitness import qilingan kalitdan foydalanishni to'xtatadi. Import qilingan kalitning boshqa joyda mavjud nusxasi endi ushbu ish maydonini egallay olmaydi.",
+"This account has two-step verification. Enter its password to create the key.": "Ushbu hisobda ikki bosqichli tasdiqlash mavjud. Kalitni yaratish uchun uning parolini kiriting.",
+"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness endi o'z sessiya kalitidan foydalanadi. Import qilingan kalit endi ishlatilmaydi."
 }

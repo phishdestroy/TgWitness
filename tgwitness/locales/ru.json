@@ -6569,5 +6569,10 @@
 "This snapshot holds only what Telegram returned at export. The journal of this workspace also holds deletions or earlier versions observed in this chat; export the evidence journal to include them.": "Этот снимок содержит только то, что Telegram вернул при экспорте. Журнал этого рабочего пространства также содержит удалённые сообщения или более ранние версии, зафиксированные в этом чате; экспортируйте журнал доказательств, чтобы включить их.",
 "access lost: removed or no longer readable": "доступ утрачен: удалено или больше не читается",
 "The account was removed from every source or can no longer read them.": "Аккаунт был удалён из всех источников или больше не может их читать.",
-"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Аккаунт был удалён из некоторых источников или больше не может их читать; оттуда ничего не поступает. Остальные продолжают работать."
+"The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue.": "Аккаунт был удалён из некоторых источников или больше не может их читать; оттуда ничего не поступает. Остальные продолжают работать.",
+"Create a key of its own": "Создать отдельный ключ",
+"Pause observation before replacing the session key.": "Приостановите наблюдение перед заменой сеансового ключа.",
+"Create a session key of TgWitness's own? The imported session confirms a new TgWitness login, like scanning a QR code; TgWitness then stops using the imported key. A copy of the imported key elsewhere can no longer take over this workspace.": "Создать собственный сессионный ключ TgWitness? Импортированная сессия подтверждает новый вход в TgWitness, как при сканировании QR-кода; после этого TgWitness перестаёт использовать импортированный ключ. Копия импортированного ключа, хранящаяся в другом месте, больше не сможет получить контроль над этим рабочим пространством.",
+"This account has two-step verification. Enter its password to create the key.": "Для этого аккаунта включена двухэтапная аутентификация. Введите его пароль, чтобы создать ключ.",
+"TgWitness now uses a session key of its own. The imported key is no longer used.": "TgWitness теперь использует собственный сеансовый ключ. Импортированный ключ больше не используется."
 }
