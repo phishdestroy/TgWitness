@@ -63,6 +63,22 @@ class UnreadableHistory(ValueError):
     pass
 
 
+SESSIONS_EVERY = 15 * 60
+SESSIONS_MEANING = ("Signed-in sessions of this account as Telegram lists them. 'current' is this workspace's session; "
+                    "its address is stored as a SHA-256 digest with Telegram's country and region.")
+
+
+def sessions_snapshot(authorizations):
+    def entry(a):
+        return {"hash": str(a.hash), "device_model": a.device_model, "app_name": a.app_name,
+                "app_version": a.app_version, "api_id": a.api_id, "official_app": bool(a.official_app),
+                "country": a.country, "region": a.region, "created_at": date_string(a.date_created)}
+    current = next((a for a in authorizations if a.current), None)
+    return {"current": {**entry(current), "ip_sha256": hashlib.sha256((current.ip or "").encode()).hexdigest()}
+            if current else None,
+            "others": sorted((entry(a) for a in authorizations if not a.current), key=lambda e: e["hash"])}
+
+
 BULK_DELETION = 10
 BULK_MEANING = ("Many messages disappeared in one Telegram update: the history was cleared or bulk-deleted. "
                 "If it includes messages this account sent, the other side cleared the chat for both.")
@@ -356,6 +372,7 @@ class Collector:
         self.observation_starting = False
         self.connection_change_task = None
         self.foreground = 0
+        self.sessions_checked_at = -SESSIONS_EVERY
         self.people = {}
         self.avatar_lock = asyncio.Lock()
         self.avatar_failures = {}
@@ -713,6 +730,7 @@ class Collector:
         def rpc_error(exc):
             self.handle_authorization_error(exc, "Telegram RPC", client=client)
         client.rpc_error_handler = rpc_error
+        client.connection_listener = lambda state: self.connection_changed(client, state)
         for handler, builder in ((self.on_new, events.NewMessage()),
                                  (self.on_edit, events.MessageEdited()),
                                  (self.on_delete, events.MessageDeleted()),
@@ -1718,6 +1736,33 @@ class Collector:
                             for f in self.folders.values()],
                 "limit": limit, "may_be_truncated": count >= limit}
 
+    def connection_changed(self, client, state):
+        role = "current" if client is self.client else "candidate" if client is self.login_client else "other"
+        self.note("connection." + state, {"role": role, "route": self.route_receipt(),
+                                          "dc_id": getattr(client.session, "dc_id", None)})
+        if state == "opened" and role == "current" and time.monotonic() - self.sessions_checked_at > SESSIONS_EVERY:
+            self.sessions_checked_at = time.monotonic()
+            with suppress(RuntimeError):
+                asyncio.get_running_loop().create_task(self.check_sessions(client))
+
+    async def check_sessions(self, client=None):
+        client = client or self.client
+        await asyncio.sleep(0)
+        try:
+            result = await asyncio.wait_for(client(functions.account.GetAuthorizationsRequest()), 30)
+        except Exception:
+            return None
+        snapshot = sessions_snapshot(result.authorizations)
+        previous = self.store.get_setting("sessions_seen", None)
+        if previous != snapshot:
+            known = {s["hash"] for s in (previous or {}).get("others", [])}
+            now = {s["hash"] for s in snapshot["others"]}
+            self.store.set_setting("sessions_seen", snapshot)
+            self.store.append("account.sessions", {
+                **snapshot, "added": sorted(now - known) if previous else None,
+                "removed": sorted(known - now) if previous else None, "meaning": SESSIONS_MEANING})
+        return snapshot
+
     async def signed_in_devices(self):
         if not (self.running and self.client and self.client.is_connected()):
             raise ValueError("Telegram is not connected: observation is paused or reconnecting.")
@@ -1946,6 +1991,9 @@ class Collector:
                     "meaning": "collector liveness, not proof of complete capture"})
                 from .people import refresh_one
                 await refresh_one(self)
+                if time.monotonic() - self.sessions_checked_at > SESSIONS_EVERY:
+                    self.sessions_checked_at = time.monotonic()
+                    await self.check_sessions()
             if checkpoint_at is None or now - checkpoint_at >= self.param("checkpoint_minutes") * 60 - 1:
                 checkpoint_at = now
                 retain_checkpoint(self.store, self.vault)
