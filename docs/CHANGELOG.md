@@ -2,6 +2,7 @@
 
 ## 0.9.1 preview · 5 November 2026
 
+- Keep message and attachment outcomes visible after single-chat sealed capture，including missing data，failed files and unfinished downloads．Translate final status when changing language after shutdown，and clear connection or export errors once they recover while retaining rejected-action and unconfirmed-revocation warnings．
 - Update the pinned OAuthLib dependency to 4．0．1 for CVE-2026-49272 and regenerate the runtime，browser and MCP hash locks．
 - Show in-flight attachment bytes without counting them as preserved evidence，reset progress on retries and clear it on pause．Keep official-client chat controls disabled during QR／2FA login and until a chat is available．Explain that Takeout approval requires another previously signed-in device．Bound CI dependency installation and avoid the stalled Azure package mirror．
 - Add explicitly selected direct networking for official Web capture through GitHub Actions．Proxy remains the default and never falls back to direct．The panel and signed verification report disclose direct IP exposure，and verification rejects a mismatch between the selected route and the hosted network．

@@ -1,6 +1,7 @@
 "use strict";
 const $ = id => document.getElementById(id);
 let lang = "en", qrId = null, ended = false;
+let lastState = null, connectionFailed = false, statusError = "", actionError = "";
 const tr = (en, ru) => lang === "ru" ? ru : en;
 const fragment = new URLSearchParams(location.hash.slice(1));
 if (fragment.has("access")) {
@@ -13,7 +14,12 @@ function translate() {
   $("language").value = lang;
   document.querySelectorAll("[data-en]").forEach(el => {el.textContent = el.dataset[lang];});
 }
-$("language").onchange = () => {lang = $("language").value; translate(); describeMode(); if (assessmentResult) renderAssessment(assessmentResult); poll();};
+$("language").onchange = () => {
+  lang = $("language").value; translate(); describeMode();
+  if (assessmentResult) renderAssessment(assessmentResult);
+  if (lastState) renderState(lastState);
+  else renderError();
+};
 translate();
 async function api(path, body) {
   const response = await fetch("/api/" + path, {method: body === undefined ? "GET" : "POST",
@@ -21,14 +27,14 @@ async function api(path, body) {
       "X-TgWitness-System-Language": navigator.language},
     body: body === undefined ? undefined : JSON.stringify(body), cache: "no-store", redirect: "error"});
   const data = await response.json();
-  if (!response.ok) throw new Error(data.detail || "Request failed");
+  if (!response.ok) throw Object.assign(new Error(data.detail || "Request failed"), {status: response.status});
   return data;
 }
 function bind(id, action) {
   $(id).onclick = async () => {
-    $(id).disabled = true; $("error").textContent = "";
-    try {await action(); await poll();}
-    catch (error) {$("error").textContent = error.message;}
+    $(id).disabled = true; actionError = ""; renderError();
+    try {await action(); await poll().catch(() => {});}
+    catch (error) {actionError = error.message; renderError();}
     finally {$(id).disabled = false;}
   };
 }
@@ -201,11 +207,26 @@ bind("resume", () => api("resume", {}));
 bind("finish", () => api("finish", {}));
 bind("cancel", () => api("cancel", {}));
 let polling = false;
-async function poll() {
-  if (polling || ended) return;
-  polling = true;
-  try {
-    const state = await api("status");
+function renderError() {
+  $("error").textContent = lastState?.revocation === "not_confirmed" ? tr(
+    "Session revocation was not confirmed．End this session in Telegram Settings > Devices．",
+    "Отзыв сессии не подтверждён．Завершите её в Telegram：Настройки → Устройства．") : connectionFailed ? statusError || tr(
+    "Connection unavailable．The runner may be finishing，check GitHub Artifacts．",
+    "Нет соединения．Возможно，запуск завершается，проверьте GitHub Artifacts．") : !token ? tr(
+    "Open the connection file with your private key in the setup helper first．",
+    "Сначала откройте файл подключения своим закрытым ключом в помощнике запуска．") :
+    actionError || (lastState?.phase === "collecting" ? lastState.account_export?.error || "" : "");
+}
+function chatSummary(state) {
+  const history = state.history, media = state.media || {};
+  const pending = ["queued", "retry", "running", "cancelled"].reduce((sum, key) => sum + (media[key] || 0), 0);
+  const complete = history.phase === "complete" && !history.unavailable && !media.failed && !pending;
+  return (complete ? tr("History reading completed within the selected scope．", "Чтение истории в выбранном объёме завершено．") : tr(
+    "Partial capture，check the gaps recorded in the archive．", "Неполный сбор，проверьте пропуски，указанные в архиве．")) + " " + tr(
+    `Messages preserved：${history.captured || 0}，unavailable：${history.unavailable || 0}．Attachments saved：${media.done || 0}，hashes only：${media.hashed || 0}，skipped：${media.skipped || 0}，failed：${media.failed || 0}，unfinished：${pending}．`,
+    `Сохранено сообщений：${history.captured || 0}，недоступно：${history.unavailable || 0}．Вложения：сохранено ${media.done || 0}，только хеши ${media.hashed || 0}，пропущено ${media.skipped || 0}，ошибок ${media.failed || 0}，не завершено ${pending}．`);
+}
+function renderState(state) {
     const terminal = ["sealed", "cancelled", "failed"].includes(state.phase);
     $("login").hidden = state.authorized || state.phase !== "login";
     $("selection").hidden = !state.authorized || state.phase !== "login";
@@ -217,7 +238,9 @@ async function poll() {
     $("complete-summary").textContent = account ?
       (account.phase === "done" ? tr("Export completed within the selected scope．", "Выгрузка выбранных данных завершена．") : tr("Partial export：some selected data could not be acquired．", "Неполная выгрузка，часть выбранных данных не получена．")) + " " + tr(
         `${account.counts?.messages || 0} messages preserved，${account.coverage?.failures || 0} recorded failures．See coverage details in the archive．`,
-        `Сохранено сообщений：${account.counts?.messages || 0}，ошибок：${account.coverage?.failures || 0}．Подробности о полноте есть в архиве．`) : "";
+        `Сохранено сообщений：${account.counts?.messages || 0}，ошибок：${account.coverage?.failures || 0}．Подробности о полноте есть в архиве．`) : chatSummary(state);
+    if (state.revocation === "revoked") $("complete-summary").textContent += " " + tr(
+      "Telegram session revocation confirmed．", "Отзыв сессии Telegram подтверждён．");
     $("capture-messages").textContent = String(account ? Math.max(account.counts?.messages || 0, account.acquisition?.messages_preserved || 0) : state.history.captured || 0);
     $("capture-unavailable").textContent = String(account ? account.coverage?.failures || 0 : state.history.unavailable || 0);
     $("capture-remaining").textContent = String(Math.ceil(state.remaining_seconds / 60));
@@ -243,15 +266,22 @@ async function poll() {
     if (account?.wait_reason === "takeout_approval" && state.phase === "collecting") $("status").textContent =
       tr(`Telegram requires export approval from another device that was already signed in before this request．The requesting session and a fresh login cannot approve it．After allowing the export there，click Check export approval．Telegram reported ${account.delay_seconds} seconds of waiting，this runner has ${state.remaining_seconds} seconds left．A new runner may require approval again．`,
         `Telegram требует подтверждения с другого устройства，на котором вход был выполнен до запроса экспорта．Запрашивающая сессия и новый вход не могут его подтвердить．Разрешите экспорт на том устройстве и нажмите «Проверить подтверждение экспорта»．Telegram сообщил об ожидании ${account.delay_seconds} секунд，у этого запуска осталось ${state.remaining_seconds} секунд．Новый запуск может снова потребовать подтверждения．`);
-    else if (account?.error && state.phase === "collecting") $("error").textContent = account.error;
     if (state.authorized) {$("api-hash").value = ""; $("phone").value = ""; qrId = null;}
-    if (state.revocation === "not_confirmed") $("error").textContent = tr("Session revocation was not confirmed. End this session in Telegram Settings > Devices.", "Отзыв сессии не подтверждён. Завершите её в Telegram: Настройки → Устройства.");
+    renderError();
     if (terminal) {ended = true; sessionStorage.removeItem("sealed-access");}
+}
+async function poll() {
+  if (polling || ended) return;
+  polling = true;
+  try {
+    const state = await api("status");
+    lastState = state; connectionFailed = false; statusError = ""; renderState(state);
     if (qrId) {const qr = await api("qr/" + encodeURIComponent(qrId));
       if (["expired", "failed", "cancelled"].includes(qr.step)) {qrId = null; $("qr-image").hidden = true;
-        $("error").textContent = tr("QR expired or failed. Generate another code.", "QR истёк или вход не удался. Создайте новый код.");}}
+        actionError = tr("QR expired or failed. Generate another code.", "QR истёк или вход не удался. Создайте новый код."); renderError();}}
+  } catch (error) {connectionFailed = true; statusError = error.status ? error.message : ""; renderError(); throw error;
   } finally {polling = false;}
 }
-if (!token) {$("error").textContent = tr("Open the connection file with your private key in the setup helper first.", "Сначала откройте файл подключения своим закрытым ключом в помощнике запуска.");}
-else {poll().catch(error => {$("error").textContent = error.message;});
-  setInterval(() => {if (!ended) poll().catch(() => {$("error").textContent = tr("Connection unavailable. The runner may be finishing; check GitHub Artifacts.", "Нет соединения. Возможно, запуск завершается: проверьте GitHub Artifacts.");});}, 1500);}
+if (!token) renderError();
+else {poll().catch(() => {});
+  setInterval(() => {if (!ended) poll().catch(() => {});}, 1500);}
