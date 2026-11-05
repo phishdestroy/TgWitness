@@ -419,7 +419,7 @@ const termLabels={offline:tr("offline"),ready:tr("ready"),credentials:tr("creden
   observing:tr("observing"),paused:tr("paused"),reconnecting:tr("reconnecting"),collector_error:tr("collector error"),
   storage_error:tr("storage error"),supergroup:tr("supergroup"),channel:tr("channel"),group:tr("group"),
   private:tr("private chat"),bot:tr("bot"),discovered:tr("added automatically"),
-  visible_in_dialogs:tr("visible in dialogs"),receiving_updates:tr("receiving updates, not in the chat list"),access_unconfirmed:tr("access unconfirmed"),
+  visible_in_dialogs:tr("visible in dialogs"),receiving_updates:tr("receiving updates, not in the chat list"),access_unconfirmed:tr("access unconfirmed"),access_lost:tr("access lost: removed or no longer readable"),
   not_in_dialogs:tr("not found among the account's chats"),beyond_dialog_limit:tr("beyond the chats listed for this account"),public_username:tr("public username"),
   private_or_unlisted:tr("private or unlisted"),creator:tr("creator"),administrator:tr("administrator"),
   member_or_unknown:tr("member or unknown"),unknown:tr("unknown"),messages:tr("messages"),edits:tr("edits"),
@@ -1044,6 +1044,8 @@ function collectorLines(name,p){
     if(p.reason==="visible")return [tr("All checked sources are visible in the account's dialogs."),counts];
     if(p.reason==="some_unconfirmed")return [tr("Some sources were not found among the account's chats; the others continue."),counts];
     if(p.reason==="none_visible")return [tr("None of the sources was found among the account's chats."),counts];
+    if(p.reason==="access_lost")return [tr("The account was removed from every source or can no longer read them."),counts];
+    if(p.reason==="some_access_lost")return [tr("The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue."),counts];
     if(p.reason==="not_checked")return [tr("Sources are checked when observation starts.")];
     return [tr("No source is selected.")];
   }

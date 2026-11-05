@@ -14,7 +14,8 @@ from collections import deque
 
 from telethon import __version__ as telethon_version, events, utils
 from telethon.errors import SessionPasswordNeededError, FloodWaitError, InvalidBufferError, RPCError
-from telethon.errors import FileReferenceExpiredError, TakeoutInvalidError, TypeNotFoundError
+from telethon.errors import ChannelInvalidError, ChannelPrivateError, FileReferenceExpiredError, TakeoutInvalidError
+from telethon.errors import TypeNotFoundError
 from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
                              FrozenMethodInvalidError, SessionExpiredError, SessionRevokedError,
                              UserDeactivatedBanError, UserDeactivatedError)
@@ -60,6 +61,10 @@ class ProtectedSession(ValueError):
 
 class UnreadableHistory(ValueError):
     pass
+
+
+ACCESS_LOST_MEANING = ("The account was removed from this chat or can no longer read it. Observation of this chat "
+                       "stopped at that moment; records saved before it remain in the journal.")
 
 
 SALVAGE_WINDOW = 100
@@ -1604,8 +1609,15 @@ class Collector:
         cached = self.dialog_cache.get(chat_id)
         status = {"checked_at": utcnow(), "meaning": "Dialog visibility is not a guarantee of every update.",
                   "visibility": (cached or {}).get("visibility", "unknown"), "role": (cached or {}).get("role", "unknown")}
+        lost = self.store.get_setting("lost_sources", {})
         if cached is not None:
+            if str(chat_id) in lost:
+                lost.pop(str(chat_id))
+                self.store.set_setting("lost_sources", lost)
+                self.store.append("source.access_restored", {"meaning": "The chat is visible to the account again."}, chat_id)
             return {**status, "state": "visible_in_dialogs"}
+        if str(chat_id) in lost:
+            return {**status, "state": "access_lost", **lost[str(chat_id)], "meaning": ACCESS_LOST_MEANING}
         last = (overview.get(chat_id) or {}).get("last_observed_at")
         if last and last >= (datetime.now(timezone.utc) - timedelta(days=self.RECEIVING_DAYS)).isoformat(timespec="milliseconds"):
             return {**status, "state": "receiving_updates", "last_observed_at": last}
@@ -2107,6 +2119,32 @@ class Collector:
         except Exception as exc:
             await self.failure(exc, "message.deleted", client=client)
 
+    async def check_channel_access(self, chat_id, update):
+        try:
+            peer = await self.client.get_input_entity(types.PeerChannel(update.channel_id))
+            answer = await self.client(functions.channels.GetChannelsRequest([peer]))
+            channel = answer.chats[0] if answer.chats else None
+        except (ChannelPrivateError, ChannelInvalidError):
+            channel = None
+        if channel is None or isinstance(channel, types.ChannelForbidden):
+            self.access_lost(chat_id, "no_access", update)
+        elif getattr(channel, "left", False):
+            self.access_lost(chat_id, "not_a_member", update)
+
+    def access_lost(self, chat_id, reason, update=None):
+        lost = self.store.get_setting("lost_sources", {})
+        if str(chat_id) in lost:
+            return
+        lost[str(chat_id)] = {"lost_at": utcnow(), "reason": reason}
+        self.store.set_setting("lost_sources", lost)
+        self.store.append("source.access_lost", {"reason": reason, "meaning": ACCESS_LOST_MEANING,
+                                                 **({"raw": plain(update)} if update is not None else {})}, chat_id)
+        self.store.append("coverage.gap", {"reason": "source_access_lost", "cause": reason,
+                                           "completeness": "nothing is received from this chat after this point",
+                                           "meaning": ACCESS_LOST_MEANING}, chat_id)
+        self.source_status[str(chat_id)] = {"state": "access_lost", "checked_at": utcnow(), **lost[str(chat_id)],
+                                            "meaning": ACCESS_LOST_MEANING}
+
     async def on_raw(self, update):
         client = self.client
         if not self.running:
@@ -2117,10 +2155,20 @@ class Collector:
                 from .people import observe_update
                 observe_update(self.store, update, profiles=settings["profiles"], presence=settings["presence"], raw=plain(update))
                 return
+            if isinstance(update, types.UpdateChannel):
+                chat_id = utils.get_peer_id(types.PeerChannel(update.channel_id))
+                if self.selected(chat_id):
+                    await self.check_channel_access(chat_id, update)
+                return
             if isinstance(update, (types.UpdateNewMessage, types.UpdateNewChannelMessage)) and isinstance(
                     update.message, types.MessageService):
 
                 chat_id = utils.get_peer_id(update.message.peer_id)
+                action = update.message.action
+                me = (self.store.get_setting("account", None) or {}).get("id")
+                if (isinstance(action, types.MessageActionChatDeleteUser) and action.user_id == me
+                        and self.selected(chat_id)):
+                    self.access_lost(chat_id, "removed_from_group", update)
                 membership = isinstance(update.message.action, (
                     types.MessageActionChatAddUser, types.MessageActionChatDeleteUser,
                     types.MessageActionChatJoinedByLink, types.MessageActionChatJoinedByRequest))
