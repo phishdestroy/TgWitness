@@ -197,7 +197,14 @@ async def execute(collector, body):
                 else:
                     dispatched = True
                     joined = await collector.client(functions.messages.ImportChatInviteRequest(target["invite"]))
-                    entity = joined.chats[0]
+                    chats = getattr(joined, "chats", None) or []
+                    if chats:
+                        entity = chats[0]
+                    else:
+                        again = await collector.client(functions.messages.CheckChatInviteRequest(target["invite"]))
+                        entity = getattr(again, "chat", None)
+                        if entity is None:
+                            raise ValueError("Joined, but Telegram has not returned the chat yet. Open the link again.")
             else:
                 entity = await collector.client.get_entity(target["username"])
 
