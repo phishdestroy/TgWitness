@@ -3,6 +3,10 @@
   "workflow": "phishdestroy/TgWitness/.github/workflows/sealed-collector.yml",
   "releases": [
     {
+      "workflow_sha": "19bd545767272a848bb54ca21da5029d76224a63",
+      "collector_sha": "187b07260ef2eebf64f7428c88186b2123b57b26"
+    },
+    {
       "workflow_sha": "49aa098884a43855995ccf4cb519e3ecc9c2de81",
       "collector_sha": "5d92f27c1179faa0c5988c83b936accc5cc7ac78"
     },

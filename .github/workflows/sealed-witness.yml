@@ -41,7 +41,7 @@ jobs:
       id-token: write # Pass OIDC identity to the approved attestation job.
       attestations: write # Let the approved collector store its signed attestation.
     # The user owns this caller, but the verifier requires the upstream signer below.
-    uses: phishdestroy/TgWitness/.github/workflows/sealed-collector.yml@49aa098884a43855995ccf4cb519e3ecc9c2de81
+    uses: phishdestroy/TgWitness/.github/workflows/sealed-collector.yml@19bd545767272a848bb54ca21da5029d76224a63
     with:
       recipient: ${{ inputs.recipient }}
       session_minutes: ${{ inputs.session_minutes }}
