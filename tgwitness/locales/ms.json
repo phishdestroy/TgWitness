@@ -6236,5 +6236,19 @@
 "The account-wide numbering is measured where it applies.": "Penomboran merentas akaun diukur di mana ia terpakai.",
 "The account-wide numbering is not measured.": "Penomboran merentas akaun tidak diukur.",
 "A service-message estimate is shown.": "Anggaran mesej perkhidmatan dipaparkan.",
-"No service-message estimate is shown.": "Tiada anggaran mesej perkhidmatan dipaparkan."
+"No service-message estimate is shown.": "Tiada anggaran mesej perkhidmatan dipaparkan.",
+"Messages left out by the selection": "Mesej yang ditinggalkan oleh pemilihan",
+"One marker for each run": "Satu penanda untuk setiap larian",
+"One marker for each message": "Satu penanda untuk setiap mesej",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Penanda menunjukkan di mana pemilihan meninggalkan mesej, tanpa kandungannya. Mesej yang dijawab oleh balasan yang didedahkan sentiasa mendapat penanda tersendiri.",
+"Withheld by selection, shown as markers": "Disembunyikan oleh pemilihan, ditunjukkan sebagai penanda",
+"Withheld by selection": "Ditahan oleh pemilihan",
+"Rule: {rules}": "Peraturan: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Mesej yang dikeluarkan di sini: {count}. Mesej yang disembunyikan bukan pemadaman dan bukan jurang dalam pengumpulan.",
+"sender not selected": "pengirim tidak dipilih",
+"text filter not matched": "penapis teks tidak sepadan",
+"outside the selected period": "di luar tempoh yang dipilih",
+"This reply answers a message included in this copy.": "Balasan ini menjawab mesej yang disertakan dalam salinan ini.",
+"This reply answers a message withheld by the selection.": "Jawapan ini menjawab mesej yang disembunyikan oleh pemilihan.",
+"This reply answers a message that is not in the source export.": "Jawapan ini menjawab mesej yang tidak terdapat dalam eksport sumber."
 }

@@ -6353,5 +6353,19 @@
 "The account-wide numbering is measured where it applies.": "Спільна нумерація акаунта вимірюється там, де це застосовно.",
 "The account-wide numbering is not measured.": "Спільна нумерація акаунта не вимірюється.",
 "A service-message estimate is shown.": "Оцінку кількості службових повідомлень показано.",
-"No service-message estimate is shown.": "Оцінка кількості службових повідомлень не показується."
+"No service-message estimate is shown.": "Оцінка кількості службових повідомлень не показується.",
+"Messages left out by the selection": "Повідомлення, виключені відбором",
+"One marker for each run": "Одна мітка на серію поспіль",
+"One marker for each message": "Одна мітка на кожне повідомлення",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Мітки показують, де відбір виключив повідомлення, без їхнього вмісту. Повідомлення, на яке відповідає розкрита відповідь, завжди отримує власну мітку.",
+"Withheld by selection, shown as markers": "Виключено відбором, показано мітками",
+"Withheld by selection": "Виключено відбором",
+"Rule: {rules}": "Правило: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Тут виключено повідомлень: {count}. Виключене повідомлення — це не видалення і не пропуск у зборі.",
+"sender not selected": "відправника не вибрано",
+"text filter not matched": "текст не відповідає фільтру",
+"outside the selected period": "поза вибраним періодом",
+"This reply answers a message included in this copy.": "Ця відповідь стосується повідомлення, включеного в цю копію.",
+"This reply answers a message withheld by the selection.": "Ця відповідь стосується повідомлення, виключеного відбором.",
+"This reply answers a message that is not in the source export.": "Ця відповідь стосується повідомлення, якого немає у вихідному експорті."
 }

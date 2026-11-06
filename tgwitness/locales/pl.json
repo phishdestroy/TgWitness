@@ -6353,5 +6353,19 @@
 "The account-wide numbering is measured where it applies.": "W stosownych przypadkach stosuje się numerację obejmującą całe konto.",
 "The account-wide numbering is not measured.": "Numeracja obejmująca całe konto nie jest uwzględniana.",
 "A service-message estimate is shown.": "Wyświetlana jest szacunkowa liczba wiadomości serwisowych.",
-"No service-message estimate is shown.": "Nie wyświetla się szacunkowa liczba wiadomości serwisowych."
+"No service-message estimate is shown.": "Nie wyświetla się szacunkowa liczba wiadomości serwisowych.",
+"Messages left out by the selection": "Wiadomości pominięte podczas selekcji",
+"One marker for each run": "Jeden znacznik dla każdego uruchomienia",
+"One marker for each message": "Jeden znacznik dla każdej wiadomości",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Znaczniki wskazują miejsca, w których zaznaczenie pominęło wiadomości, bez ich treści. Wiadomość, na którą odpowiada ujawniona odpowiedź, zawsze otrzymuje własny znacznik.",
+"Withheld by selection, shown as markers": "Ukryte w wyniku selekcji, wyświetlane jako znaczniki",
+"Withheld by selection": "Zatajono w wyniku selekcji",
+"Rule: {rules}": "Zasada: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Liczba pominiętych wiadomości: {count}. Pominięta wiadomość nie oznacza jej usunięcia ani luki w zbiorze danych.",
+"sender not selected": "nadawca nie został wybrany",
+"text filter not matched": "nie znaleziono dopasowania filtru tekstowego",
+"outside the selected period": "poza wybranym okresem",
+"This reply answers a message included in this copy.": "Ta odpowiedź dotyczy wiadomości zawartej w tej kopii.",
+"This reply answers a message withheld by the selection.": "Ta odpowiedź dotyczy wiadomości ukrytej przez filtr selekcji.",
+"This reply answers a message that is not in the source export.": "Ta odpowiedź dotyczy wiadomości, której nie ma w eksporcie źródłowym."
 }

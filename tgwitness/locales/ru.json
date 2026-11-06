@@ -6643,5 +6643,19 @@
 "The account-wide numbering is measured where it applies.": "Общая нумерация аккаунта измеряется там, где это применимо.",
 "The account-wide numbering is not measured.": "Общая нумерация аккаунта не измеряется.",
 "A service-message estimate is shown.": "Оценка числа служебных сообщений показана.",
-"No service-message estimate is shown.": "Оценка числа служебных сообщений не показывается."
+"No service-message estimate is shown.": "Оценка числа служебных сообщений не показывается.",
+"Messages left out by the selection": "Сообщения, исключённые отбором",
+"One marker for each run": "Одна метка на серию подряд",
+"One marker for each message": "Одна метка на каждое сообщение",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Метки показывают, где отбор исключил сообщения, без их содержимого. Сообщение, на которое отвечает раскрытый ответ, всегда получает собственную метку.",
+"Withheld by selection, shown as markers": "Исключено отбором, показано метками",
+"Withheld by selection": "Исключено отбором",
+"Rule: {rules}": "Правило: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Здесь исключено сообщений: {count}. Исключённое сообщение — это не удаление и не пробел в сборе.",
+"sender not selected": "отправитель не выбран",
+"text filter not matched": "текст не подошёл под фильтр",
+"outside the selected period": "вне выбранного периода",
+"This reply answers a message included in this copy.": "Этот ответ относится к сообщению, включённому в эту копию.",
+"This reply answers a message withheld by the selection.": "Этот ответ относится к сообщению, исключённому отбором.",
+"This reply answers a message that is not in the source export.": "Этот ответ относится к сообщению, которого нет в исходном экспорте."
 }

@@ -6314,5 +6314,19 @@
 "The account-wide numbering is measured where it applies.": "מספור כלל-חשבון נמדד במקומות הרלוונטיים.",
 "The account-wide numbering is not measured.": "המספור ברמת החשבון אינו נמדד.",
 "A service-message estimate is shown.": "מוצגת הערכת עלות הודעות השירות.",
-"No service-message estimate is shown.": "לא מוצג אומדן של הודעות שירות."
+"No service-message estimate is shown.": "לא מוצג אומדן של הודעות שירות.",
+"Messages left out by the selection": "הודעות שלא נכללו בבחירה",
+"One marker for each run": "סימן אחד לכל הפעלה",
+"One marker for each message": "סימן אחד לכל הודעה",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "סמנים מציינים היכן הבחירה השמיטה הודעות, ללא תוכנן. הודעה שעליה עונה תשובה שנחשפה מקבלת תמיד סמן משלה.",
+"Withheld by selection, shown as markers": "הוסתר על פי בחירה, מוצג כסימונים",
+"Withheld by selection": "נמחק על פי בחירה",
+"Rule: {rules}": "כלל: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "הודעות שלא נכללו כאן: {count}. הודעה שלא נכללה אינה נחשבת למחיקה ואינה מהווה פער באיסוף הנתונים.",
+"sender not selected": "השולח לא נבחר",
+"text filter not matched": "מסנן הטקסט לא נמצא",
+"outside the selected period": "מחוץ לתקופה שנבחרה",
+"This reply answers a message included in this copy.": "תשובה זו מתייחסת להודעה הכלולה בעותק זה.",
+"This reply answers a message withheld by the selection.": "תשובה זו מתייחסת להודעה שנחסמה על ידי המערכת.",
+"This reply answers a message that is not in the source export.": "תשובה זו מגיבה להודעה שאינה מופיעה בייצוא המקור."
 }

@@ -6275,5 +6275,19 @@
 "The account-wide numbering is measured where it applies.": "اکاؤنٹ بھر میں نمبرنگ وہاں ناپی جاتی ہے جہاں یہ لاگو ہوتی ہے۔",
 "The account-wide numbering is not measured.": "اکاؤنٹ بھر میں نمبرنگ کی پیمائش نہیں کی جاتی۔",
 "A service-message estimate is shown.": "ایک سروس میسج کا تخمینہ دکھایا گیا ہے۔",
-"No service-message estimate is shown.": "کوئی سروس میسج کا تخمینہ نہیں دکھایا گیا۔"
+"No service-message estimate is shown.": "کوئی سروس میسج کا تخمینہ نہیں دکھایا گیا۔",
+"Messages left out by the selection": "انتخاب کے باعث خارج کیے گئے پیغامات",
+"One marker for each run": "ہر رن کے لیے ایک مارکر",
+"One marker for each message": "ہر پیغام کے لیے ایک مارکر",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "مارکر دکھاتے ہیں کہ انتخاب نے پیغامات کو کہاں خارج کیا، ان کے مواد کے بغیر۔ ایک پیغام جس کا جواب ایک ظاہر کردہ جواب دیتا ہے، ہمیشہ اپنا مارکر حاصل کرتا ہے۔",
+"Withheld by selection, shown as markers": "انتخاب کے ذریعے پوشیدہ، مارکر کے طور پر دکھایا گیا",
+"Withheld by selection": "انتخاب کے ذریعے پوشیدہ",
+"Rule: {rules}": "قاعدہ: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "یہاں چھوڑے گئے پیغامات: {count}۔ ایک پوشیدہ پیغام حذف نہیں ہوتا اور نہ ہی مجموعے میں خلا ہوتا ہے۔",
+"sender not selected": "موکل منتخب نہیں ہوا",
+"text filter not matched": "متن کا فلٹر میل نہیں کھا رہا",
+"outside the selected period": "منتخب مدت سے باہر",
+"This reply answers a message included in this copy.": "یہ جواب اس کاپی میں شامل پیغام کا جواب ہے۔",
+"This reply answers a message withheld by the selection.": "یہ جواب انتخاب کے ذریعے پوشیدہ کردہ پیغام کا جواب ہے۔",
+"This reply answers a message that is not in the source export.": "یہ جواب ایک ایسے پیغام کا جواب ہے جو سورس ایکسپورٹ میں شامل نہیں ہے۔"
 }

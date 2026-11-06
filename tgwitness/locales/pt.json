@@ -6275,5 +6275,19 @@
 "The account-wide numbering is measured where it applies.": "A numeração válida para toda a conta é aplicada onde for pertinente.",
 "The account-wide numbering is not measured.": "A numeração em toda a conta não é contabilizada.",
 "A service-message estimate is shown.": "É exibida uma estimativa de mensagens de serviço.",
-"No service-message estimate is shown.": "Nenhuma estimativa de mensagens de serviço é exibida."
+"No service-message estimate is shown.": "Nenhuma estimativa de mensagens de serviço é exibida.",
+"Messages left out by the selection": "Mensagens excluídas pela seleção",
+"One marker for each run": "Um marcador para cada execução",
+"One marker for each message": "Um marcador para cada mensagem",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Os marcadores indicam onde a seleção omitiu mensagens, sem exibir seu conteúdo. Uma mensagem à qual uma resposta divulgada se refere sempre recebe seu próprio marcador.",
+"Withheld by selection, shown as markers": "Omitido por seleção, exibido como marcadores",
+"Withheld by selection": "Omitido por seleção",
+"Rule: {rules}": "Regra: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Mensagens omitidas aqui: {count}. Uma mensagem omitida não é uma exclusão nem uma lacuna na coleta.",
+"sender not selected": "remetente não selecionado",
+"text filter not matched": "filtro de texto não correspondente",
+"outside the selected period": "fora do período selecionado",
+"This reply answers a message included in this copy.": "Esta resposta se refere a uma mensagem incluída nesta cópia.",
+"This reply answers a message withheld by the selection.": "Esta resposta se refere a uma mensagem ocultada pela seleção.",
+"This reply answers a message that is not in the source export.": "Esta resposta se refere a uma mensagem que não consta na exportação original."
 }

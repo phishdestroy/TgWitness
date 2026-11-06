@@ -6236,5 +6236,19 @@
 "The account-wide numbering is measured where it applies.": "アカウント全体の番号付けは、該当する箇所で適用されます。",
 "The account-wide numbering is not measured.": "アカウント全体の番号付けは計測対象外です。",
 "A service-message estimate is shown.": "サービスメッセージの推定値が表示されています。",
-"No service-message estimate is shown.": "サービスメッセージの推定値は表示されません。"
+"No service-message estimate is shown.": "サービスメッセージの推定値は表示されません。",
+"Messages left out by the selection": "選択により除外されたメッセージ",
+"One marker for each run": "実行ごとに1つのマーカー",
+"One marker for each message": "メッセージごとに1つのマーカー",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "マーカーは、選択範囲からメッセージが除外された箇所を示しますが、メッセージの内容自体は表示されません。公開された返信が回答しているメッセージには、常に独自のマーカーが付与されます。",
+"Withheld by selection, shown as markers": "選択により非表示、マーカーとして表示",
+"Withheld by selection": "選考により非公開",
+"Rule: {rules}": "ルール：{rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "ここで除外されたメッセージ：{count}。除外されたメッセージは削除されたものではなく、収集の欠落でもありません。",
+"sender not selected": "送信者が選択されていません",
+"text filter not matched": "テキストフィルターに一致しませんでした",
+"outside the selected period": "選択した期間外",
+"This reply answers a message included in this copy.": "この返信は、このメッセージに含まれている内容に対する回答です。",
+"This reply answers a message withheld by the selection.": "この返信は、選択により非表示にされたメッセージに対するものです。",
+"This reply answers a message that is not in the source export.": "この返信は、ソースエクスポートに含まれていないメッセージに対するものです。"
 }

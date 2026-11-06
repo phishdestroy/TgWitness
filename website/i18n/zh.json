@@ -4498,7 +4498,11 @@
 "cd6552d4cc77f562d607272bb47ba9e9b5d5aedeb9417c0e912a47fdbe532aeb": "<strong>全账户序列</strong>仅从全账户收集功能开启期间收到的第一条消息到最后一条消息进行统计，\n    并包含私聊、机器人、普通\n    群组以及该账户自身的消息，没有任何此类聊天被排除在外（<code>scope.changed</code>）。\n    标有 <code>deletion.unscoped</code> “count”命名的数字均视为已观察到的消息，不包含内容。导出或\n    移交选定聊天记录无法测量该数值。如果全账户收集功能曾被\n    关闭后又开启，则会提示说明：期间使用的数字将显示为缺口。",
 "1139797c3b371fe00a95433c5ad52e0c6171bcad18f20ad46d1edbc0f33122a9": "服务消息是带有独立编号的日志记录，因此它们会自动填补间隙；\n    可选的估计时间仅作为上下文参考。",
 "9e3043356fe4bbba21ff3f2ce3c28f992850aa13bfacf021b2ab8a8b8aa2d98e": "<code>verify.py</code> 重新计算 <code>gap_summary</code> 基于 <code>events.jsonl</code> 使用默认参数，并\n在覆盖范围摘要中打印全账户范围的行。存档的 <code>get_capture_status</code>（MCP 和命令行）针对某次访问可能读取的聊天记录返回相同的测量结果；\n而账户级序列仅适用于覆盖整个工作区的访问。",
-"373fd01f07628530aeb7fcece0f2e22725179590d6969baa8ee707ab75150322": "每个频道或超级群对应一条记录，每条记录均单独编号"
+"373fd01f07628530aeb7fcece0f2e22725179590d6969baa8ee707ab75150322": "每个频道或超级群对应一条记录，每条记录均单独编号",
+"1fa842ecef08d026077f21fcc6ce5f95542bc4c7feeacb140e72a840fd56cb43": "筛选后未包含的消息",
+"834900730a60524364c5375cdd330bb52aae2e66cbc36d80b90bff09a744edbf": "<strong>预览。</strong>当披露内容不完整时，其显示效果也会不完整。在每个包含至少一条已披露消息的聊天中，选定范围未包含的消息会以标记形式显示， <code>[withheld by selection — rule: sender]</code> （或 <code>text</code>, <code>period</code>)。选择<strong>“被选定范围排除的消息”</strong>：每组连续被排除的消息显示一个标记（默认），或每条消息显示一个标记。标记仅包含规则和计数，绝不包含文本、发件人、日期或文件。未披露任何内容的聊天将被完全排除，因此该软件包不会透露其存在。",
+"3be7e65d0abfd667ec7f29a72ae47ac5fad0c7f61acce12fe66d0046e77cb42c": "已披露的回复会说明其回复对象：是本副本中包含的消息、被筛选排除的消息，还是源导出中不存在的消息（在导出前已被删除或从未被导出；导出数据无法区分这两种情况）。 被披露回复所回应的被屏蔽消息始终带有独立标记，因此该回复会指向一条解释其为何为空的记录。这三种状态有别于删除和数据缺失，后者属于源导出数据本身。",
+"d41242ef48a0af16f8e3f97106619318527f6d4cbebb261b65db20f3bcc14f01": "在 <code>messages.jsonl</code> （格式 <code>tgwitness-account-disclosure-v2</code>）中，每条消息包含 <code>state</code>: <code>disclosed</code>，或 <code>withheld</code> 带有 <code>rules</code> 和 <code>count</code>。已披露的回复包含 <code>reply_to</code> 与目标 <code>id</code> 和 <code>state</code> (<code>disclosed</code>, <code>withheld</code>, <code>not_in_source</code>）。清单统计了已公开的消息、聊天、媒体和 <code>withheld</code> 消息。 <code>verify.py</code> 会拒绝携带内容的标记，以及指向包中缺失记录的回复；版本 1 的包仍按原有方式进行验证。"
 },
 "modes": {
 "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",

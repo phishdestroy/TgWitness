@@ -6275,5 +6275,19 @@
 "The account-wide numbering is measured where it applies.": "La numeración para toda la cuenta se aplica cuando procede.",
 "The account-wide numbering is not measured.": "No se tiene en cuenta la numeración de toda la cuenta.",
 "A service-message estimate is shown.": "Se muestra una estimación del mensaje de servicio.",
-"No service-message estimate is shown.": "No se muestra ninguna estimación de mensajes de servicio."
+"No service-message estimate is shown.": "No se muestra ninguna estimación de mensajes de servicio.",
+"Messages left out by the selection": "Mensajes excluidos de la selección",
+"One marker for each run": "Un marcador por cada ejecución",
+"One marker for each message": "Un marcador por cada mensaje",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Los marcadores indican dónde la selección ha omitido mensajes, sin mostrar su contenido. Un mensaje al que responde una réplica revelada siempre recibe su propio marcador.",
+"Withheld by selection, shown as markers": "Omitidos por selección, mostrados como marcadores",
+"Withheld by selection": "Omitido por selección",
+"Rule: {rules}": "Regla: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Mensajes omitidos aquí: {count}. Un mensaje omitido no supone una eliminación ni una laguna en la recopilación.",
+"sender not selected": "remitente no seleccionado",
+"text filter not matched": "No se ha encontrado ninguna coincidencia con el filtro de texto",
+"outside the selected period": "fuera del periodo seleccionado",
+"This reply answers a message included in this copy.": "Esta respuesta se refiere a un mensaje incluido en esta copia.",
+"This reply answers a message withheld by the selection.": "Esta respuesta se refiere a un mensaje oculto por la selección.",
+"This reply answers a message that is not in the source export.": "Esta respuesta se refiere a un mensaje que no figura en la exportación original."
 }

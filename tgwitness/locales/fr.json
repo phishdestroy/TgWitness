@@ -6275,5 +6275,19 @@
 "The account-wide numbering is measured where it applies.": "La numérotation à l'échelle du compte est prise en compte lorsque cela s'applique.",
 "The account-wide numbering is not measured.": "La numérotation à l'échelle du compte n'est pas prise en compte.",
 "A service-message estimate is shown.": "Une estimation du nombre de messages de service est affichée.",
-"No service-message estimate is shown.": "Aucune estimation relative aux messages de service n'est affichée."
+"No service-message estimate is shown.": "Aucune estimation relative aux messages de service n'est affichée.",
+"Messages left out by the selection": "Messages non retenus lors de la sélection",
+"One marker for each run": "Un marqueur par exécution",
+"One marker for each message": "Un marqueur par message",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Des marqueurs indiquent les endroits où la sélection a omis des messages, sans en révéler le contenu. Un message auquel une réponse divulguée fait référence bénéficie toujours de son propre marqueur.",
+"Withheld by selection, shown as markers": "Masqué lors de la sélection, affiché sous forme de marqueurs",
+"Withheld by selection": "Non divulgué pour des raisons de sélection",
+"Rule: {rules}": "Règle : {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Messages omis ici : {count}. Un message omis ne correspond ni à une suppression ni à une lacune dans la collecte.",
+"sender not selected": "expéditeur non sélectionné",
+"text filter not matched": "filtre de texte non trouvé",
+"outside the selected period": "en dehors de la période sélectionnée",
+"This reply answers a message included in this copy.": "Cette réponse fait suite à un message figurant dans cette copie.",
+"This reply answers a message withheld by the selection.": "Cette réponse fait suite à un message masqué par la sélection.",
+"This reply answers a message that is not in the source export.": "Cette réponse fait suite à un message qui ne figure pas dans l'exportation source."
 }

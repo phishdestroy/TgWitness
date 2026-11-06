@@ -6275,5 +6275,19 @@
 "The account-wide numbering is measured where it applies.": "شماره‌گذاری در سطح حساب در محل مربوطه اندازه‌گیری می‌شود.",
 "The account-wide numbering is not measured.": "شماره‌گذاری در سطح حساب اندازه‌گیری نمی‌شود.",
 "A service-message estimate is shown.": "یک برآورد پیام خدماتی نمایش داده می‌شود.",
-"No service-message estimate is shown.": "هیچ برآوردی از پیام سرویس نمایش داده نمی‌شود."
+"No service-message estimate is shown.": "هیچ برآوردی از پیام سرویس نمایش داده نمی‌شود.",
+"Messages left out by the selection": "پیام‌هایی که با انتخاب حذف شده‌اند",
+"One marker for each run": "یک نشانگر برای هر اجرا",
+"One marker for each message": "یک نشانگر برای هر پیام",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "نشانگرها نشان می‌دهند که انتخاب کجا پیام‌ها را حذف کرده است، بدون محتوای آن‌ها. پیامی که پاسخ افشا شده به آن پاسخ می‌دهد همیشه نشانگر مخصوص به خود را دارد.",
+"Withheld by selection, shown as markers": "با انتخاب پنهان شده، به صورت نشانگرها نمایش داده می‌شود",
+"Withheld by selection": "با انتخاب پنهان شده",
+"Rule: {rules}": "قاعده: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "پیام‌های حذف‌شده در اینجا: {count}. یک پیام مخفی‌شده نه حذف است و نه شکافی در مجموعه.",
+"sender not selected": "فرستنده انتخاب نشده است",
+"text filter not matched": "فیلتر متن مطابقت داده نشد",
+"outside the selected period": "خارج از دورهٔ انتخاب‌شده",
+"This reply answers a message included in this copy.": "این پاسخ به پیامی که در این نسخه گنجانده شده است پاسخ می‌دهد.",
+"This reply answers a message withheld by the selection.": "این پاسخ به پیامی که توسط انتخاب پنهان شده است پاسخ می‌دهد.",
+"This reply answers a message that is not in the source export.": "این پاسخ به پیامی پاسخ می‌دهد که در خروجی منبع وجود ندارد."
 }

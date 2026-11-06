@@ -6275,5 +6275,19 @@
 "The account-wide numbering is measured where it applies.": "La numerazione a livello di account viene applicata ove pertinente.",
 "The account-wide numbering is not measured.": "La numerazione a livello di account non viene misurata.",
 "A service-message estimate is shown.": "Viene mostrata una stima del messaggio di servizio.",
-"No service-message estimate is shown.": "Non viene mostrata alcuna stima relativa ai messaggi di servizio."
+"No service-message estimate is shown.": "Non viene mostrata alcuna stima relativa ai messaggi di servizio.",
+"Messages left out by the selection": "Messaggi esclusi dalla selezione",
+"One marker for each run": "Un marcatore per ogni esecuzione",
+"One marker for each message": "Un marcatore per ogni messaggio",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Gli indicatori mostrano dove la selezione ha tralasciato dei messaggi, senza rivelarne il contenuto. Un messaggio a cui risponde una replica divulgata riceve sempre un proprio indicatore.",
+"Withheld by selection, shown as markers": "Omissi in fase di selezione, indicati come indicatori",
+"Withheld by selection": "Omesso in fase di selezione",
+"Rule: {rules}": "Regola: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Messaggi omessi: {count}. Un messaggio omesso non costituisce una cancellazione né una lacuna nella raccolta.",
+"sender not selected": "mittente non selezionato",
+"text filter not matched": "filtro di testo non corrispondente",
+"outside the selected period": "al di fuori del periodo selezionato",
+"This reply answers a message included in this copy.": "Questa risposta si riferisce a un messaggio incluso in questa copia.",
+"This reply answers a message withheld by the selection.": "Questa risposta si riferisce a un messaggio nascosto dalla selezione.",
+"This reply answers a message that is not in the source export.": "Questa risposta si riferisce a un messaggio che non è presente nell'esportazione di origine."
 }

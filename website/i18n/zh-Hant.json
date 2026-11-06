@@ -4404,7 +4404,11 @@
 "cd6552d4cc77f562d607272bb47ba9e9b5d5aedeb9417c0e912a47fdbe532aeb": "<strong>全帳戶序列</strong>僅從\n    在「全帳戶收集」功能啟用期間收到的第一則至最後一則訊息開始計算，並包含私人聊天、機器人、一般\n    群組以及該帳戶自身的訊息，且不排除任何此類聊天（<code>scope.changed</code>）。\n    以 <code>deletion.unscoped</code> 計數的數字均視為已觀察到的訊息，但不包含內容。若僅對選定的聊天室進行匯出或\n    移交，則無法測量此數值。若「全帳戶收集」功能曾被\n    關閉後又重新開啟，系統會註明在此期間使用的數字將顯示為空缺。",
 "1139797c3b371fe00a95433c5ad52e0c6171bcad18f20ad46d1edbc0f33122a9": "服務訊息是具有獨立編號的日誌記錄，因此會自行填補空缺；\n    可選的預估時間僅供上下文參考。",
 "9e3043356fe4bbba21ff3f2ce3c28f992850aa13bfacf021b2ab8a8b8aa2d98e": "<code>verify.py</code> 重新計算 <code>gap_summary</code> 從 <code>events.jsonl</code> 使用預設參數重新計算，並\n在覆蓋範圍摘要中列印全帳戶範圍的行。該存檔的 <code>get_capture_status</code>（MCP 與命令列）針對某次存取可能讀取的聊天室，會返回相同的測量結果；\n而帳戶層級的序列僅適用於涵蓋整個工作區的存取。",
-"373fd01f07628530aeb7fcece0f2e22725179590d6969baa8ee707ab75150322": "每個頻道或超級群組各佔一筆記錄，每筆記錄均獨立編號"
+"373fd01f07628530aeb7fcece0f2e22725179590d6969baa8ee707ab75150322": "每個頻道或超級群組各佔一筆記錄，每筆記錄均獨立編號",
+"1fa842ecef08d026077f21fcc6ce5f95542bc4c7feeacb140e72a840fd56cb43": "篩選後未包含的訊息",
+"834900730a60524364c5375cdd330bb52aae2e66cbc36d80b90bff09a744edbf": "<strong>預覽。</strong>若揭露內容尚未完整，則顯示為不完整狀態。在每個至少包含一則已揭露訊息的聊天室中，選取範圍未涵蓋的訊息會以標記形式顯示， <code>[withheld by selection — rule: sender]</code> （或 <code>text</code>, <code>period</code>)。選擇<strong>「選取範圍中未包含的訊息</strong>」：每組連續未包含的訊息顯示一個標記（預設），或每則訊息顯示一個標記。標記僅包含規則與計數，絕不包含文字、發送者、日期或檔案。未包含任何已揭露內容的聊天室將被完全排除，因此本套件不會揭露其存在。",
+"3be7e65d0abfd667ec7f29a72ae47ac5fad0c7f61acce12fe66d0046e77cb42c": "已披露的回覆會說明其回應的對象：是本副本中包含的訊息、被選取範圍排除的訊息，或是原始匯出檔中不存在的訊息（可能是在匯出前已被刪除，或從未被匯出；匯出檔無法區分兩者）。 若已公開的回覆所回應的是一則被隱藏的訊息，該訊息將始終擁有專屬標記，因此該回覆會指向一則說明其為何為空的記錄。這三種狀態有別於刪除與資料收集缺口，後兩者屬於原始匯出資料的範疇。",
+"d41242ef48a0af16f8e3f97106619318527f6d4cbebb261b65db20f3bcc14f01": "在 <code>messages.jsonl</code> （格式 <code>tgwitness-account-disclosure-v2</code>）中，每則訊息皆包含 <code>state</code>: <code>disclosed</code>，或 <code>withheld</code> 搭配 <code>rules</code> 以及 <code>count</code>。一則已公開的回覆包含 <code>reply_to</code> 與目標 <code>id</code> 以及 <code>state</code> (<code>disclosed</code>, <code>withheld</code>, <code>not_in_source</code>）。該清單會統計已公開的訊息、聊天紀錄、媒體檔案及 <code>withheld</code> 訊息。 <code>verify.py</code> 會拒絕攜帶內容的標記，以及指向封包中缺失記錄的回覆；版本 1 的封包驗證方式與先前相同。"
 },
 "modes": {
 "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",
