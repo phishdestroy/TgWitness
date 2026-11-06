@@ -2664,6 +2664,11 @@ const REPORT_PRESETS={
     activity_chart:true,hourly_chart:true,participant_chart:true,chat_chart:true,composition_chart:true,show_changes:true,show_indicators:true}
 };
 let reportSelection;
+let reportGuidance;
+const reportGuidanceReady=import('./views/report-guidance.js?v=1').then(({createReportGuidance})=>{
+  reportGuidance=createReportGuidance({root:$("report-guidance"),tr});
+  return reportGuidance;
+});
 const reportSelectionReady=import('./views/report-selection.js?v=1').then(({createReportSelection})=>{
   reportSelection=createReportSelection({root:$("report-form"),tr,json,
     getOwner:()=>state.workspaceRevision+":"+state.profile,
@@ -2707,8 +2712,9 @@ function resetReportSettings(){
   $("report-design-preview-status").textContent=tr("Preview uses your draft. Save settings before exporting.");
   reportOwner=null;reportReady=false;reportDirty=false;reportRequest++;reportLoading=null;reportSaving=false;
   $("report-form").reset();$("report-fields").disabled=true;$("report-status").replaceChildren();
-  $("report-outline").replaceChildren();$("report-form").querySelector(".report-examination").open=false;
+  $("report-outline").replaceChildren();$("report-form").querySelectorAll(".report-examination").forEach(el=>el.open=false);
   reportSelection?.reset();
+  reportGuidance?.reset();
   reportConfigurations?.reset();
   $("report-form").querySelectorAll(".form-error").forEach(el=>el.remove());
 }
@@ -2719,7 +2725,7 @@ function reportControls(){
 }
 async function loadReportSettings(){
   if(!state.status)return;
-  await Promise.all([reportSelectionReady,reportConfigurationsReady]);
+  await Promise.all([reportSelectionReady,reportConfigurationsReady,reportGuidanceReady]);
   const owner=reportKey();
   if(reportOwner!==owner){resetReportSettings();reportOwner=owner;}
   if(reportSaving||reportReady&&reportDirty)return;
@@ -2728,7 +2734,7 @@ async function loadReportSettings(){
   reportReady=false;reportControls();$("report-status").textContent=tr("Loading…");
   const pending=(async()=>{
     try{
-      const options=await json("report-options",undefined,viewOptions('evidence'));if(!current()||state.view!=='evidence')return;
+      const [options,guidance]=await Promise.all([json("report-options",undefined,viewOptions('evidence')),json("report-guidance",undefined,viewOptions('evidence'))]);if(!current()||state.view!=='evidence')return;
       const select=$("report-language");
       if(!select.options.length){
         select.append(new Option(tr("Same as the panel"),"auto"));
@@ -2742,6 +2748,7 @@ async function loadReportSettings(){
       setReportTemplate(matches?template:"custom");
       setReportDesign(options.design);
       reportSelection.load(options.selection);
+      reportGuidance.load(options.jurisdiction_guidance,guidance);
       reportReady=true;reportDirty=false;formControls?.loaded("report-form");$("report-status").textContent=window.TGW_ONLINE_DEMO?tr("Sample data"):"";
       await reportConfigurations.load();if(!current()||state.view!=='evidence')return;
       if(!$("report-form").hidden&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();
@@ -2760,6 +2767,11 @@ function syncReportParts(){
   $("report-participant-labels").disabled=!$("report-participant-chart").checked;
   $("report-chart-limit").disabled=!$("report-participant-chart").checked&&!$("report-chat-chart").checked;
   const parts=[tr("Case details")];
+  const guidanceActive=reportGuidance?.sync();
+  if(guidanceActive)parts.push(tr("Jurisdiction guidance"));
+  const guidanceTab=$("report-form").querySelector('[data-preview-section="guidance"]');
+  guidanceTab.hidden=!guidanceActive;
+  if(!guidanceActive&&reportPreviewSection==='guidance')showReportPreviewSection('cover');
   if(["question","method","findings","conclusion"].some(key=>$("report-review-"+key).value.trim()))parts.push(tr("Examination notes"));
   if($("report-activity-chart").checked)parts.push(tr("Activity over time"));
   if($("report-hourly-chart").checked)parts.push(tr("Activity by weekday and hour"));
@@ -2784,6 +2796,7 @@ function reportDraft(){
   for(const [id,key] of Object.entries(REPORT_FIELDS))body[key]=$(id).value;
   body.part_size=$("report-part-size").valueAsNumber;body.chart_limit=$("report-chart-limit").valueAsNumber;
   body.selection=reportSelection?.read();
+  body.jurisdiction_guidance=reportGuidance?.read();
   for(const [id,key] of Object.entries(REPORT_CHECKS))body[key]=$(id).checked;
   return body;
 }
@@ -2803,6 +2816,7 @@ function showReportPreviewSection(section){
   const frame=$("report-preview-frame");
   if(frame.hidden)return;
   if(section==='analytics')frame.contentDocument?.getElementById('report-analytics')?.scrollIntoView({block:'start'});
+  else if(section==='guidance')frame.contentDocument?.getElementById('jurisdiction-guidance')?.scrollIntoView({block:'start'});
   else frame.contentWindow?.scrollTo(0,0);
 }
 $("report-preview-frame").addEventListener('load',()=>showReportPreviewSection(reportPreviewSection));

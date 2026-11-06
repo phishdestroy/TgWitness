@@ -6769,5 +6769,20 @@
   "Flags days with many new speakers and unchanged activity, as in bot injection.": "Отмечает дни с множеством новых авторов при прежней активности, как при вбросе ботов.",
   "Rows listed per metric": "Строк на метрику",
   "The most recent rows are listed; totals cover every row.": "Показываются последние строки; итоги считаются по всем.",
-  "rows": "строк"
+  "rows": "строк",
+  "Jurisdiction guidance · optional": "Рекомендации по юрисдикции · необязательно",
+  "Choose the intended court's jurisdiction and procedure. Guidance helps prepare the material; it does not certify admissibility.": "Выберите юрисдикцию суда и вид производства. Рекомендации помогают подготовить материалы, но не удостоверяют их допустимость.",
+  "Jurisdiction": "Юрисдикция",
+  "Procedure": "Вид производства",
+  "Civil / commercial": "Гражданское / коммерческое",
+  "Criminal": "Уголовное",
+  "Include guidance in the report": "Включить рекомендации в отчёт",
+  "Add the local-language summary": "Добавить резюме на местном языке",
+  "Explain collection safeguards": "Пояснить меры защиты при сборе",
+  "Legal guidance is supplied in English. Local summaries are not certified translations. Sources and research dates travel with the report.": "Правовые рекомендации даны на английском. Местные резюме не являются заверенными переводами. Источники и даты исследования включаются в отчёт.",
+  "These choices belong to this workspace, not to saved layout configurations. Sharing copies do not inherit this selection.": "Эти параметры относятся к текущему пространству, а не к сохранённым шаблонам оформления. Копии для передачи не наследуют этот выбор.",
+  "Jurisdiction guidance": "Рекомендации по юрисдикции",
+  "Guidance": "Рекомендации",
+  "Not selected": "Не выбрано",
+  "Choose a jurisdiction from the supplied catalog.": "Выберите юрисдикцию из каталога."
 }

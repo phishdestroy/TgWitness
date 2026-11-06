@@ -266,12 +266,22 @@ jobs:
           echo "VIRTUAL_ENV=$check_venv" >> "$GITHUB_ENV"
       - name: Build the Windows portable package and check its embedded runtime
         run: python tools/build_portable.py
+      - name: Build the standalone verifier and check all recipient languages
+        run: python tools/build_verifier.py
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: tgwitness-windows-portable
           path: |
             dist/*-portable.zip
             dist/*-portable.zip.sha256
+          retention-days: 3
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: tgwitness-windows-verifier
+          path: |
+            dist/TgWitness-verifier-*-all.zip
+            dist/TgWitness-verifier-*-all.zip.sha256
+          if-no-files-found: error
           retention-days: 3
   docker:
     name: Container and Compose integration
