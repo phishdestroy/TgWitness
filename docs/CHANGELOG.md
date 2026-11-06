@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Include the pinned Russian morphology dictionary in the Windows portable package. Allow its exact resource paths during packaging and keep rejecting unexpected files and session data beside them.
+
 - Publish the one-command installer only after application and security checks pass for the exact main commit and the signed package passes Ubuntu local/HTTPS service and Windows PowerShell acceptance. Keep the previous download when checks fail or time out. Add authenticated tests of the actual public installer URLs.
 
 - Preserve `previous_hash` in the signed-record preview even when its hexadecimal digits resemble a payment card number. Secret masking still applies to message content; the stored record is unchanged.

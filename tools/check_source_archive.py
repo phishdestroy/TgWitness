@@ -138,7 +138,11 @@ def check_portable_package(root):
         "python/Lib/site-packages/fpdf/data/color_profiles/__init__.py",
         "python/Lib/site-packages/fpdf/data/color_profiles/sRGB2014.icc",
         "python/Lib/site-packages/fpdf/data/color_profiles/sRGB2014.icc.LICENSE",
-    )
+    ) + tuple("python/Lib/site-packages/pymorphy3_dicts_ru/data/" + name for name in (
+        "grammemes.json", "gramtab-opencorpora-ext.json", "gramtab-opencorpora-int.json",
+        "meta.json", "p_t_given_w.intdawg", "paradigms.array", "prediction-suffixes-0.dawg",
+        "prediction-suffixes-1.dawg", "prediction-suffixes-2.dawg", "suffixes.json", "words.dawg",
+    ))
     for name in resources:
         path = stage / name
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -155,6 +159,11 @@ def check_portable_package(root):
         "python/Lib/site-packages/fpdf/data/color_profiles/vault.key",
         "python/Lib/site-packages/fpdf/DATA/extra.txt",
         "python/Lib/site-packages/fpdf/data/color_profiles/__pycache__/module.pyc",
+        "python/Lib/site-packages/pymorphy3_dicts_ru/data/notes.txt",
+        "python/Lib/site-packages/pymorphy3_dicts_ru/data/vault.key",
+        "python/Lib/site-packages/pymorphy3_dicts_ru/data/account.session",
+        "python/Lib/site-packages/pymorphy3_dicts_ru/data/nested/grammemes.json",
+        "python/Lib/site-packages/pymorphy3_dicts_ru/DATA/extra.txt",
     ):
         private = stage / name
         private.parent.mkdir(parents=True, exist_ok=True)
@@ -283,7 +292,7 @@ def main():
             assert archive.read("TgWitness/" + changed_input) == changed_bytes
             assert (hashlib.sha256(changed_bytes).hexdigest() + "  " + changed_input + "\n").encode() \
                 in archive.read("TgWitness/SOURCE_SHA256SUMS")
-    print("Source archive checks passed: repeatability, metadata, exact bytes, container and website inputs and hashes, private exclusions, secret redaction, interrupted writes, portable metadata and PDF resources.")
+    print("Source archive checks passed: repeatability, metadata, exact bytes, container and website inputs and hashes, private exclusions, secret redaction, interrupted writes, portable metadata, PDF and dictionary resources.")
 
 
 if __name__ == "__main__":
