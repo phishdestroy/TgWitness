@@ -6224,5 +6224,11 @@
 "Current two-step password. Leave empty if the account has none.": "رمز عبور دو مرحله‌ای فعلی. اگر حساب کاربری رمز عبور دو مرحله‌ای ندارد، خالی بگذارید.",
 "New two-step password.": "رمز عبور جدید دو مرحله‌ای.",
 "Password hint (optional).": "سرنخ رمز عبور (اختیاری).",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "رمز عبور دو مرحله‌ای در تلگرام ذخیره می‌شود. TgWitness آن را نگه نمی‌دارد."
+"Two-step password saved in Telegram. TgWitness does not keep it.": "رمز عبور دو مرحله‌ای در تلگرام ذخیره می‌شود. TgWitness آن را نگه نمی‌دارد.",
+"As in Sources → Recording": "همانند منابع → ضبط",
+"Download files": "دانلود فایل‌ها",
+"Only file fingerprints (fast)": "فقط اثرانگشت فایل (سریع)",
+"Messages only, no files": "فقط پیام‌ها، بدون فایل‌ها",
+"Messages are read first; files follow in a second stage with their own progress.": "ابتدا پیام‌ها خوانده می‌شوند؛ سپس فایل‌ها در مرحلهٔ دوم با پیشرفت اختصاصی خود دنبال می‌شوند.",
+"{captured} messages saved; files: {done}/{total}": "پیام‌های {captured} ذخیره شده؛ فایل‌ها: {done}/{total}"
 }

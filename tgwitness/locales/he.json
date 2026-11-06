@@ -6263,5 +6263,11 @@
 "Current two-step password. Leave empty if the account has none.": "סיסמה דו-שלבית נוכחית. השאר ריק אם לחשבון אין סיסמה כזו.",
 "New two-step password.": "סיסמה חדשה בשני שלבים.",
 "Password hint (optional).": "רמז לסיסמה (אופציונלי).",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "סיסמה דו-שלבית שנשמרה ב-Telegram. TgWitness אינו שומר אותה."
+"Two-step password saved in Telegram. TgWitness does not keep it.": "סיסמה דו-שלבית שנשמרה ב-Telegram. TgWitness אינו שומר אותה.",
+"As in Sources → Recording": "כמו ב\"מקורות\" → \"הקלטה\"",
+"Download files": "הורדת קבצים",
+"Only file fingerprints (fast)": "רק טביעות אצבע של קבצים (מהיר)",
+"Messages only, no files": "הודעות בלבד, ללא קבצים",
+"Messages are read first; files follow in a second stage with their own progress.": "ההודעות נקראות תחילה; הקבצים נקראים בשלב השני, עם התקדמות נפרדת משלהם.",
+"{captured} messages saved; files: {done}/{total}": "הודעות {captured} שנשמרו; קבצים: {done}/{total}"
 }

@@ -1914,7 +1914,9 @@ function renderExportState(x){
   const percent=running&&x.total?Math.min(99,Math.floor((x.captured||0)*100/x.total)):null;
   if(!x||x.phase==="unknown"){prog.textContent="";return;}
   const counts={title:x.title||tr("chat"),captured:(x.captured||0).toLocaleString(),total:(x.total||0).toLocaleString(),percent};
-  if(running)prog.textContent=tr("Exporting {title}: ",counts)+tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages read",counts)+
+  if(running&&x.stage==="files")prog.textContent=tr("Exporting {title}: ",counts)+tr("{captured} messages saved; files: {done}/{total}",{captured:counts.captured,done:(x.files_done||0).toLocaleString(),total:(x.files_total||0).toLocaleString()})+
+    (x.eta_seconds!==null&&x.eta_seconds!==undefined?" · "+tr("{time} left",{time:fmtDuration(x.eta_seconds)}):"")+"…";
+  else if(running)prog.textContent=tr("Exporting {title}: ",counts)+tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages read",counts)+
     (x.eta_seconds!==null&&x.eta_seconds!==undefined?" · "+tr("{time} left",{time:fmtDuration(x.eta_seconds)}):"")+"…";
   else if(x.phase==="done")prog.textContent=tr("Done: {captured} messages. Download the signed bundle.",counts);
   else if(x.phase==="failed")prog.textContent=tr("Export failed")+(x.error?" ("+x.error+")":"")+". "+tr("Try again.");
@@ -1945,7 +1947,8 @@ function syncExport(s){
 $("chat-export-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   const chat_id=Number($("chat-export-source").value),language=exportLanguage();
   if(!chat_id)throw new Error(tr("Select a source to export."));
-  const x=await json("chat-export/start",language?{chat_id,language}:{chat_id});
+  const files=$("chat-export-files").value||null;
+  const x=await json("chat-export/start",{chat_id,...(language?{language}:{}),...(files?{files}:{})});
   state.exportId=x.id;renderExportState(x);
   toast(tr("Full chat export started. Large chats can take a while."));pollExport(x.id);
 });});

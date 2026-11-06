@@ -6224,5 +6224,11 @@
 "Current two-step password. Leave empty if the account has none.": "Contraseña actual de dos pasos. Déjalo en blanco si la cuenta no tiene ninguna.",
 "New two-step password.": "Nueva contraseña en dos pasos.",
 "Password hint (optional).": "Pista para la contraseña (opcional).",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "Contraseña de dos pasos guardada en Telegram. TgWitness no la almacena."
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Contraseña de dos pasos guardada en Telegram. TgWitness no la almacena.",
+"As in Sources → Recording": "Al igual que en «Fuentes» → «Grabación»",
+"Download files": "Descargar archivos",
+"Only file fingerprints (fast)": "Solo huellas digitales de archivos (rápido)",
+"Messages only, no files": "Solo mensajes, sin archivos",
+"Messages are read first; files follow in a second stage with their own progress.": "Primero se leen los mensajes; los archivos se procesan en una segunda fase con su propio progreso.",
+"{captured} messages saved; files: {done}/{total}": "Mensajes {captured} guardados; archivos: {done}/{total}"
 }

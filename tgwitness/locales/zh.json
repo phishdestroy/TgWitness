@@ -6185,5 +6185,11 @@
 "Current two-step password. Leave empty if the account has none.": "当前的两步验证密码。如果该账户没有两步验证，请留空。",
 "New two-step password.": "新的两步验证密码。",
 "Password hint (optional).": "密码提示（可选）。",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "两步验证密码保存在 Telegram 中。TgWitness 不会保存该密码。"
+"Two-step password saved in Telegram. TgWitness does not keep it.": "两步验证密码保存在 Telegram 中。TgWitness 不会保存该密码。",
+"As in Sources → Recording": "如“来源 → 记录”中所示",
+"Download files": "下载文件",
+"Only file fingerprints (fast)": "仅文件指纹（快速）",
+"Messages only, no files": "仅限消息，不包含文件",
+"Messages are read first; files follow in a second stage with their own progress.": "消息会先被读取；文件则在第二阶段处理，并显示其自身的进度。",
+"{captured} messages saved; files: {done}/{total}": "已保存 {captured} 条消息；文件：{done}/{total}"
 }

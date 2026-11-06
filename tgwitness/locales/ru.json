@@ -6579,5 +6579,11 @@
 "Current two-step password. Leave empty if the account has none.": "Текущий двухэтапный пароль. Оставьте поле пустым, если у аккаунта его нет.",
 "New two-step password.": "Новый двухэтапный пароль.",
 "Password hint (optional).": "Подсказка к паролю (необязательно).",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "Двухэтапный пароль сохраняется в Telegram. TgWitness его не хранит."
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Двухэтапный пароль сохраняется в Telegram. TgWitness его не хранит.",
+"As in Sources → Recording": "Как в разделе «Источники» → «Запись»",
+"Download files": "Скачать файлы",
+"Only file fingerprints (fast)": "Только отпечатки файлов (быстро)",
+"Messages only, no files": "Только сообщения, без файлов",
+"Messages are read first; files follow in a second stage with their own progress.": "Сначала читаются сообщения; файлы обрабатываются на втором этапе с отдельным индикатором прогресса.",
+"{captured} messages saved; files: {done}/{total}": "Сохранены сообщения {captured}; файлы: {done}/{total}"
 }

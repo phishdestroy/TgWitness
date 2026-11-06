@@ -6185,5 +6185,11 @@
 "Current two-step password. Leave empty if the account has none.": "현재 2단계 인증 비밀번호. 계정에 해당 항목이 없는 경우 비워 두십시오.",
 "New two-step password.": "새로운 2단계 비밀번호.",
 "Password hint (optional).": "비밀번호 힌트 (선택 사항).",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "텔레그램에 저장된 2단계 비밀번호. TgWitness는 이를 보관하지 않습니다."
+"Two-step password saved in Telegram. TgWitness does not keep it.": "텔레그램에 저장된 2단계 비밀번호. TgWitness는 이를 보관하지 않습니다.",
+"As in Sources → Recording": "'소스 → 녹화' 항목과 마찬가지로",
+"Download files": "파일 다운로드",
+"Only file fingerprints (fast)": "파일 지문만 (빠름)",
+"Messages only, no files": "메시지만 포함, 파일은 제외",
+"Messages are read first; files follow in a second stage with their own progress.": "먼저 메시지가 읽히고, 그 다음 단계에서 파일이 별도의 진행률 표시와 함께 처리됩니다.",
+"{captured} messages saved; files: {done}/{total}": "{captured}개의 메시지 저장됨; 파일: {done}/{total}"
 }

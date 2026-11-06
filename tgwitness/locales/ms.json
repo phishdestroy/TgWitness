@@ -6185,5 +6185,11 @@
 "Current two-step password. Leave empty if the account has none.": "Kata laluan dua langkah semasa. Biarkan kosong jika akaun tidak mempunyai kata laluan dua langkah.",
 "New two-step password.": "Kata laluan dua langkah baharu.",
 "Password hint (optional).": "Petunjuk kata laluan (pilihan).",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "Kata laluan dua langkah disimpan di Telegram. TgWitness tidak menyimpannya."
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Kata laluan dua langkah disimpan di Telegram. TgWitness tidak menyimpannya.",
+"As in Sources → Recording": "Seperti dalam Sumber → Rakaman",
+"Download files": "Muat turun fail",
+"Only file fingerprints (fast)": "Hanya cap jari fail (cepat)",
+"Messages only, no files": "Mesej sahaja, tiada fail",
+"Messages are read first; files follow in a second stage with their own progress.": "Mesej dibaca terlebih dahulu; fail menyusul pada peringkat kedua dengan kemajuan mereka sendiri.",
+"{captured} messages saved; files: {done}/{total}": "Mesej {captured} yang disimpan; fail: {done}/{total}"
 }

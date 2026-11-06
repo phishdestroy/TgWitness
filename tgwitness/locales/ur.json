@@ -6224,5 +6224,11 @@
 "Current two-step password. Leave empty if the account has none.": "موجودہ دو مرحلوں پر مشتمل پاس ورڈ۔ اگر اکاؤنٹ میں کوئی پاس ورڈ نہیں ہے تو خالی چھوڑ دیں۔",
 "New two-step password.": "نیا دو مرحلوں پر مشتمل پاس ورڈ۔",
 "Password hint (optional).": "پاس ورڈ کا اشارہ (اختیاری)",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "دو مرحلوں پر مشتمل پاس ورڈ ٹیلیگرام میں محفوظ ہے۔ TgWitness اسے محفوظ نہیں کرتا۔"
+"Two-step password saved in Telegram. TgWitness does not keep it.": "دو مرحلوں پر مشتمل پاس ورڈ ٹیلیگرام میں محفوظ ہے۔ TgWitness اسے محفوظ نہیں کرتا۔",
+"As in Sources → Recording": "جیسا کہ ذرائع → ریکارڈنگ میں",
+"Download files": "فائلیں ڈاؤن لوڈ کریں",
+"Only file fingerprints (fast)": "صرف فائل فنگر پرنٹس (تیز)",
+"Messages only, no files": "صرف پیغامات، کوئی فائلیں نہیں",
+"Messages are read first; files follow in a second stage with their own progress.": "پیغامات پہلے پڑھے جاتے ہیں؛ فائلیں دوسرے مرحلے میں اپنی الگ پیش رفت کے ساتھ آتی ہیں۔",
+"{captured} messages saved; files: {done}/{total}": "{captured} پیغامات محفوظ؛ فائلیں: {done}/{total}"
 }

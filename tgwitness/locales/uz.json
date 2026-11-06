@@ -6224,5 +6224,11 @@
 "Current two-step password. Leave empty if the account has none.": "Joriy ikki bosqichli parol. Hisobda bo'lmasa, bo'sh qoldiring.",
 "New two-step password.": "Yangi ikki bosqichli parol.",
 "Password hint (optional).": "Parol bo'yicha yordam (ixtiyoriy).",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "Ikki bosqichli parol Telegramda saqlanadi. TgWitness uni saqlamaydi."
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Ikki bosqichli parol Telegramda saqlanadi. TgWitness uni saqlamaydi.",
+"As in Sources → Recording": "Manbalar → Yozuv bo'limidagi kabi",
+"Download files": "Fayllarni yuklab oling",
+"Only file fingerprints (fast)": "Faqat fayl barmoq izlari (tez)",
+"Messages only, no files": "Faqat xabarlar, fayllar yo'q",
+"Messages are read first; files follow in a second stage with their own progress.": "Avvalo xabarlar o'qiladi; fayllar esa ikkinchi bosqichda o'z progressi bilan ko'rsatiladi.",
+"{captured} messages saved; files: {done}/{total}": "{captured} xabarlari saqlangan; fayllar: {done}/{total}"
 }

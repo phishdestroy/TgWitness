@@ -2669,7 +2669,7 @@ class Collector:
                 "pages": pages, "estimate_seconds": round(pages * per_page),
                 "request_seconds": round(request_seconds, 3)}
 
-    async def start_export(self, chat_id, report_options=None):
+    async def start_export(self, chat_id, report_options=None, files=None):
 
         export_id = secrets.token_urlsafe(18)
         if not self.reserve_export(export_id):
@@ -2684,7 +2684,7 @@ class Collector:
                 total = None
             record = {"id": export_id, "chat_id": chat_id, "title": info.get("title"),
                       "phase": "running", "captured": 0, "total": total, "eta_seconds": None,
-                      "ready": False, "error": None, "started_at": utcnow()}
+                      "ready": False, "error": None, "started_at": utcnow(), "files": files}
             self.export_state = record
             if self.export_path:
                 self.export_path.unlink(missing_ok=True)
@@ -2718,7 +2718,7 @@ class Collector:
             settings = capture_settings(self.store)
             profile, observer, problems = await self.chat_profile(entity, media_dir,
                 include_photo=settings["download_media"] and settings["include_avatars"])
-            count = await self.stream_history(entity, scratch, record, media_dir)
+            count = await self.stream_history(entity, scratch, record, media_dir, record.get("files"))
             recheck = None
             if chat_id < -1000000000000:
                 absent = absent_numbers(scratch)
@@ -2904,19 +2904,21 @@ class Collector:
                 with suppress(Exception):
                     await pages.aclose()
 
-    async def export_attachment(self, message, directory):
+    async def export_attachment(self, message, directory, files=None):
         if not getattr(message, "media", None) or not getattr(message, "file", None):
             return {}
         settings = capture_settings(self.store)
-        if not settings["download_media"]:
-            return {}
         kind = media_kind(message)
+        if files == "skip":
+            return {"file_status": "skipped_by_export_option", "file_kind": kind}
+        if not settings["download_media"] and files is None:
+            return {}
         rule, size = settings["types"].get(kind) or {"enabled": False, "max_mb": 0}, getattr(message.file, "size", None)
-        if not rule["enabled"]:
+        if not rule["enabled"] and files != "hashes":
             return {"file_status": "type_not_collected", "file_kind": kind}
-        if not duration_allowed(message, rule):
+        if not duration_allowed(message, rule) and files != "hashes":
             return {"file_status": "duration_limit", "file_kind": kind}
-        action = media_action(settings, rule, size)
+        action = "hashes_only" if files == "hashes" else media_action(settings, rule, size)
         if action == "exclude":
             return {"file_status": "excluded_by_policy", "file_kind": kind}
         if action == "hashes_only":
@@ -2968,16 +2970,16 @@ class Collector:
         finally:
             temp.unlink(missing_ok=True)
 
-    async def stream_history(self, entity, scratch, record, media_dir=None):
-        count, started = 0, time.monotonic()
+    async def stream_history(self, entity, scratch, record, media_dir=None, files=None):
+        count, started, attached = 0, time.monotonic(), []
         with scratch.open("w", encoding="utf-8") as handle:
             async def write(message, entry=None):
                 nonlocal count
                 if entry is None:
                     self.remember(getattr(message, "sender", None))
                     entry = message_record(message)
-                    if media_dir is not None:
-                        entry.update(await self.export_attachment(message, media_dir))
+                    if media_dir is not None and getattr(message, "media", None) and getattr(message, "file", None):
+                        attached.append(message.id)
                 handle.write(json.dumps(entry, ensure_ascii=False) + "\n")
                 count += 1
                 record["captured"] = count
@@ -2992,7 +2994,35 @@ class Collector:
                 await write(None, unparsed_record(number, error))
             async with self.history_reader(entity) as (reader, wait):
                 await self.iterate_history(entity, write, on_unparsed=unparsed, client=reader, wait_time=wait)
+        if attached:
+            await self.export_files(entity, scratch, record, media_dir, attached, files)
         return count
+
+    async def export_files(self, entity, scratch, record, media_dir, ids, files=None):
+        record.update(stage="files", files_total=len(ids), files_done=0, eta_seconds=None)
+        found, started = {}, time.monotonic()
+        if files == "skip":
+            found = {number: {"file_status": "skipped_by_export_option"} for number in ids}
+            ids = []
+        for low in range(0, len(ids), 100):
+            for message in await self.client.get_messages(entity, ids=ids[low:low + 100]):
+                if message is None or isinstance(message, types.MessageEmpty):
+                    continue
+                found[message.id] = await self.export_attachment(message, media_dir, files)
+                record["files_done"] += 1
+                elapsed = time.monotonic() - started
+                record["eta_seconds"] = round((len(ids) - record["files_done"]) * elapsed / record["files_done"])
+        for missing in set(ids) - set(found):
+            found[missing] = {"file_status": "message_unavailable_at_file_read"}
+        merged = scratch.with_suffix(".files")
+        with scratch.open(encoding="utf-8") as source, merged.open("w", encoding="utf-8") as target:
+            for line in source:
+                entry = json.loads(line)
+                if entry.get("id") in found and entry.get("type") != "unparsed":
+                    entry.update(found[entry["id"]])
+                target.write(json.dumps(entry, ensure_ascii=False) + "\n")
+        merged.replace(scratch)
+        record["stage"] = None
 
     async def resolve_for_export(self, chat_id, username=None):
         await self.restore()

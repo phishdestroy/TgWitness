@@ -262,6 +262,7 @@ class AccountPassword(BaseModel):
 class ChatExport(BaseModel):
     chat_id: int
     language: str | None = Field(default=None, max_length=16)
+    files: Literal["download", "hashes", "skip"] | None = None
 
 
 class MultiExportStart(BaseModel):
@@ -2522,7 +2523,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def chat_export_start(request: Request, body: ChatExport):
         require_chat(request, body.chat_id)
         record = await operation(app.state.collector.start_export, body.chat_id,
-                                 report_options(app.state.store, request, body.language))
+                                 report_options(app.state.store, request, body.language), body.files)
         chat_export_owners.clear()
         chat_export_owners[record["id"]] = request.state.principal.owner
         return record

@@ -6185,5 +6185,11 @@
 "Current two-step password. Leave empty if the account has none.": "現在の2段階認証パスワード。アカウントに設定されていない場合は空欄のままにしてください。",
 "New two-step password.": "新しい2段階認証。",
 "Password hint (optional).": "パスワードのヒント（任意）。",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "Telegramに保存された2段階認証のパスワード。TgWitnessはこれを保持しません。"
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Telegramに保存された2段階認証のパスワード。TgWitnessはこれを保持しません。",
+"As in Sources → Recording": "「ソース」→「記録」と同様",
+"Download files": "ファイルをダウンロード",
+"Only file fingerprints (fast)": "ファイルのフィンガープリントのみ（高速）",
+"Messages only, no files": "メッセージのみ、ファイルは含まれません",
+"Messages are read first; files follow in a second stage with their own progress.": "まずメッセージが読み込まれ、その後にファイルが読み込まれ、ファイルの読み込みには独自の進行状況が表示されます。",
+"{captured} messages saved; files: {done}/{total}": "{captured}件のメッセージが保存されました；ファイル：{done}/{total}"
 }

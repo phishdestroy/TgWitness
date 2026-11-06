@@ -6380,5 +6380,11 @@
 "Current two-step password. Leave empty if the account has none.": "كلمة المرور الحالية المكونة من خطوتين. اترك الحقل فارغًا إذا لم يكن للحساب كلمة مرور من هذا النوع.",
 "New two-step password.": "كلمة مرور جديدة من خطوتين.",
 "Password hint (optional).": "تلميح كلمة المرور (اختياري).",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "كلمة المرور المكونة من خطوتين محفوظة في Telegram. لا تحتفظ TgWitness بها."
+"Two-step password saved in Telegram. TgWitness does not keep it.": "كلمة المرور المكونة من خطوتين محفوظة في Telegram. لا تحتفظ TgWitness بها.",
+"As in Sources → Recording": "كما في «المصادر» → «التسجيل»",
+"Download files": "تنزيل الملفات",
+"Only file fingerprints (fast)": "بصمات الملفات فقط (سريع)",
+"Messages only, no files": "الرسائل فقط، بدون ملفات",
+"Messages are read first; files follow in a second stage with their own progress.": "يتم قراءة الرسائل أولاً؛ ثم تتبعها الملفات في مرحلة ثانية مع شريط تقدم خاص بها.",
+"{captured} messages saved; files: {done}/{total}": "تم حفظ الرسائل {captured}؛ الملفات: {done}/{total}"
 }

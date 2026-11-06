@@ -6185,5 +6185,11 @@
 "Current two-step password. Leave empty if the account has none.": "รหัสผ่านแบบสองขั้นตอนปัจจุบัน ให้เว้นว่างไว้หากบัญชีไม่มีรหัสผ่านดังกล่าว",
 "New two-step password.": "รหัสผ่านแบบสองขั้นตอนใหม่",
 "Password hint (optional).": "คำใบ้รหัสผ่าน (ไม่บังคับ).",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "รหัสผ่านสองขั้นตอนที่เก็บไว้ใน Telegram TgWitness ไม่เก็บรหัสผ่านนี้ไว้"
+"Two-step password saved in Telegram. TgWitness does not keep it.": "รหัสผ่านสองขั้นตอนที่เก็บไว้ใน Telegram TgWitness ไม่เก็บรหัสผ่านนี้ไว้",
+"As in Sources → Recording": "เช่นใน แหล่งข้อมูล → การบันทึก",
+"Download files": "ดาวน์โหลดไฟล์",
+"Only file fingerprints (fast)": "เฉพาะลายนิ้วมือไฟล์ (เร็ว)",
+"Messages only, no files": "เฉพาะข้อความเท่านั้น ไม่รวมไฟล์",
+"Messages are read first; files follow in a second stage with their own progress.": "ข้อความจะถูกอ่านก่อน ส่วนไฟล์จะตามมาในขั้นตอนถัดไป พร้อมแสดงความคืบหน้าของไฟล์เอง",
+"{captured} messages saved; files: {done}/{total}": "ข้อความที่{captured}บันทึกไว้แล้ว; ไฟล์: {done}/{total}"
 }

@@ -6185,5 +6185,11 @@
 "Current two-step password. Leave empty if the account has none.": "Mật khẩu hai bước hiện tại. Để trống nếu tài khoản không có.",
 "New two-step password.": "Mật khẩu hai bước mới.",
 "Password hint (optional).": "Gợi ý mật khẩu (tùy chọn).",
-"Two-step password saved in Telegram. TgWitness does not keep it.": "Mật khẩu hai bước được lưu trong Telegram. TgWitness không lưu giữ mật khẩu này."
+"Two-step password saved in Telegram. TgWitness does not keep it.": "Mật khẩu hai bước được lưu trong Telegram. TgWitness không lưu giữ mật khẩu này.",
+"As in Sources → Recording": "Như trong Nguồn → Ghi lại",
+"Download files": "Tải xuống tệp tin",
+"Only file fingerprints (fast)": "Chỉ dấu vân tay tệp (nhanh)",
+"Messages only, no files": "Chỉ tin nhắn, không có tệp tin",
+"Messages are read first; files follow in a second stage with their own progress.": "Tin nhắn sẽ được đọc trước; các tệp sẽ được xử lý ở giai đoạn tiếp theo với thanh tiến trình riêng.",
+"{captured} messages saved; files: {done}/{total}": "Đã lưu các tin nhắn {captured}; tệp tin: {done}/{total}"
 }
