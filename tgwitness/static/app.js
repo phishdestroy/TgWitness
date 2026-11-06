@@ -302,7 +302,7 @@ const labels = {
   "source.access_lost": [tr("Access to the chat lost"), "alert", "coverage"],
   "source.access_restored": [tr("Access to the chat restored"), "refresh", "system"],
   "deletion.batch": [tr("Messages deleted together"), "trash", "delete"],
-  "history.cleared": [tr("Chat history cleared"), "trash", "delete"],
+  "history.cleared": [tr("Messages deleted together"), "trash", "delete"],
   "history.unparsed": [tr("Messages in a format this version cannot read"), "question", "coverage"],
   "message.unpinned": [tr("Message unpinned"), "edit", "edit"],
   "telegram.takeout_unavailable": [tr("Fast export session unavailable"), "clock", "system"],
@@ -1516,6 +1516,8 @@ function excerpt(e) {
     ephemeralMediaText(p.ephemeral_media)].filter(Boolean).join(" · ");
   if (p.text) return p.text;
   if (e.kind==="message.deleted") return tr("Earlier captured versions remain available. Telegram does not report who deleted the message.");
+  // Legacy batch labels and meanings inferred a history clear or actor not supplied by Telegram.
+  if (e.kind==="history.cleared") return tr("Messages deleted together")+" · "+String(p.count??"");
   if (e.kind==="message.missing_on_recheck") return tr("Telegram no longer returns this message; no deletion notice was received.");
   if (e.kind==="replica.completed") return p.error?tr("Stopped: {error}",{error:p.error}):tr("{n} encrypted object(s), {size}",{n:p.objects,size:humanSize(p.bytes)});
   if (e.kind==="alerts.changed") return p.enabled?tr("On · {n} destination(s)",{n:p.destinations}):tr("Off");

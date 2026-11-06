@@ -982,7 +982,7 @@ class Sequences:
             if isinstance(payload.get("scope"), dict):
                 self.set_scope(payload["scope"], event["observed_at"])
         elif kind == "deletion.unscoped":
-            # Account-level deletions name numbers of the account sequence that no saved message has.
+            # Account-level deletions name numbers without an attribution to an observed chat.
             for number in payload.get("message_ids") or []:
                 if type(number) is int and number > 0:
                     self.account.setdefault(number, event["observed_at"])
