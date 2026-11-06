@@ -51,6 +51,10 @@ def main():
             page.locator("#sources-tab-chats").click()
             expect(page.locator("#history-start")).to_be_disabled()
             expect(page.locator("#history-availability")).to_contain_text("This account is busy")
+            expect(page.locator("#history-card > .notice")).to_be_visible()
+            page.locator("#history-details > summary").click()
+            expect(page.locator("#history-details .hint")).to_contain_text("This run only loads the enabled sources listed at its start.")
+            page.locator("#history-details > summary").click()
             rejected = context.request.post(server.url + "/api/history/start", data={}, headers=headers)
             assert rejected.status == 400 and "busy" in rejected.text()
             assert context.request.post(server.url + "/api/collector/stop", data={}, headers=headers).ok
