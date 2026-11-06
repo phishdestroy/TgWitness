@@ -47,7 +47,8 @@ jobs:
           # The Azure mirror stalled both FFmpeg and multi-browser acceptance.
           sudo python3 -I - <<'PY'
           from pathlib import Path
-          for path in [Path('/etc/apt/sources.list'), *Path('/etc/apt/sources.list.d').glob('ubuntu.sources')]:
+          for path in [Path('/etc/apt/sources.list'), *Path('/etc/apt').glob('*mirrors*.txt'),
+                       *Path('/etc/apt/sources.list.d').glob('*.sources'), *Path('/etc/apt/sources.list.d').glob('*.list')]:
               if path.exists():
                   text = path.read_text()
                   for scheme in ('http', 'https'):
