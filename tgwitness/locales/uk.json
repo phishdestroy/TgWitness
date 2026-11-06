@@ -6308,5 +6308,16 @@
 "Only file fingerprints (fast)": "Тільки відбитки файлів (швидко)",
 "Messages only, no files": "Тільки повідомлення, без файлів",
 "Messages are read first; files follow in a second stage with their own progress.": "Спочатку читаються повідомлення; файли обробляються на другому етапі з окремим індикатором прогресу.",
-"{captured} messages saved; files: {done}/{total}": "Збережено повідомлення {captured}; файли: {done}/{total}"
+"{captured} messages saved; files: {done}/{total}": "Збережено повідомлення {captured}; файли: {done}/{total}",
+ "Compare collection methods": "Порівняти способи збору",
+ "Live observation": "Спостереження в реальному часі",
+ "Read past messages into this workspace. Pause observation first; new live changes are not recorded during history loading.": "Завантаження попередніх повідомлень у робочу область. Спочатку призупиніть спостереження: під час завантаження історії нові зміни не записуються.",
+ "Keep new messages and changes delivered while observation is running. Start it from Sources.": "Збереження нових повідомлень і змін, що надходять під час спостереження. Запуск — у розділі «Джерела».",
+ "Use an official Desktop or Web session with video or native JSON. Setup and hybrid comparison require manual steps. Preview.": "Запис відео або збереження штатного JSON-експорту через офіційний Desktop чи Web. Налаштування та зіставлення джерел потребують участі оператора. Попередня версія.",
+ "Collection uses the connection configured for the selected account or recorder.": "Збір використовує з’єднання, налаштоване для вибраного акаунта або рекордера.",
+ "For a separate archive of the account's current history, use Exports → Telegram account. This run only loads the enabled sources listed at its start.": "Для окремого архіву поточної історії акаунта відкрийте «Експорт» → «Акаунт Telegram». Цей запуск завантажує лише джерела, увімкнені на момент його початку.",
+ "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "Призупиніть спостереження перед завантаженням історії. Поки історія завантажується, нові зміни не записуються. Подальше читання не гарантує відновлення всіх видалень і проміжних правок.",
+ "Export saved records without reading Telegram. Observation can keep running.": "Експорт уже збережених записів без звернення до Telegram. Спостереження можна продовжувати.",
+ "Download selected chats into a separate archive. Pause observation on this account first.": "Завантаження вибраних чатів в окремий архів. Спочатку призупиніть спостереження на цьому акаунті.",
+ "Saved observations": "Збережені спостереження"
 }

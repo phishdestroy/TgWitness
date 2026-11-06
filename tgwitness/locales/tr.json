@@ -6230,5 +6230,16 @@
 "Only file fingerprints (fast)": "Yalnızca dosya parmak izleri (hızlı)",
 "Messages only, no files": "Yalnızca mesajlar, dosya yok",
 "Messages are read first; files follow in a second stage with their own progress.": "Önce mesajlar okunur; ikinci aşamada ise dosyalar kendi ilerleme çubuklarıyla birlikte açılır.",
-"{captured} messages saved; files: {done}/{total}": "{captured} mesaj kaydedildi; dosyalar: {done}/{total}"
+"{captured} messages saved; files: {done}/{total}": "{captured} mesaj kaydedildi; dosyalar: {done}/{total}",
+ "Compare collection methods": "Toplama yöntemlerini karşılaştırın",
+ "Live observation": "Canlı gözlem",
+ "Read past messages into this workspace. Pause observation first; new live changes are not recorded during history loading.": "Geçmiş mesajları bu çalışma alanına okuyun. Önce gözlemi duraklatın; geçmiş yüklenirken yeni canlı değişiklikler kaydedilmez.",
+ "Keep new messages and changes delivered while observation is running. Start it from Sources.": "Gözlem çalışırken gelen yeni mesajları ve değişiklikleri saklayın. \"Kaynaklar\" bölümünden başlatın.",
+ "Use an official Desktop or Web session with video or native JSON. Setup and hybrid comparison require manual steps. Preview.": "Video veya yerel JSON ile resmi bir Masaüstü veya Web oturumu kullanın. Kurulum ve hibrit karşılaştırma için manuel adımlar gereklidir. Önizleme.",
+ "Collection uses the connection configured for the selected account or recorder.": "Koleksiyon, seçilen hesap veya kayıt cihazı için yapılandırılmış bağlantıyı kullanır.",
+ "For a separate archive of the account's current history, use Exports → Telegram account. This run only loads the enabled sources listed at its start.": "Hesabın mevcut geçmişinin ayrı bir arşivi için, Dışa Aktar → Telegram hesabı seçeneğini kullanın. Bu işlem, yalnızca başlangıcında listelenen etkin kaynakları yükler.",
+ "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "Geçmişi yüklemeden önce gözlem işlemini duraklatın. Geçmiş yüklenirken yeni canlı değişiklikler kaydedilmez; daha sonraki okumalarda her silme işlemi veya ara düzenleme geri alınamayabilir.",
+ "Export saved records without reading Telegram. Observation can keep running.": "Telegram'ı açmadan kaydedilmiş kayıtları dışa aktarın. Gözlem işlemi devam edebilir.",
+ "Download selected chats into a separate archive. Pause observation on this account first.": "Seçilen sohbetleri ayrı bir arşive indirin. Önce bu hesaptaki gözlemlemeyi duraklatın.",
+ "Saved observations": "Kaydedilen gözlemler"
 }
