@@ -12,6 +12,39 @@ Obtain fingerprints independently. An unpinned package can be described, but its
 
 The destination must be empty. Generation stages all outputs before publishing them into that directory. It does not overwrite another report, contact Telegram, submit timestamps, send mail or publish anything. Network checks run only when requested. The input ZIP remains unchanged. The output is a derived report, not a new independently witnessed evidence package.
 
+## Saved configuration profiles
+
+Use an explicit local JSON file to save presentation choices and verification requirements. See the [example configuration](examples/narrative.json) and [Russian instructions](ru/NARRATIVE.md).
+
+```sh
+python -m tgwitness.narrative --write-config narrative-config.json
+python -m tgwitness.narrative --config narrative-config.json --profile ru-html --print-config
+python -m tgwitness.narrative evidence.zip --config narrative-config.json --profile ru-html --out narrative-ru/
+python -m tgwitness.narrative evidence.zip --config narrative-config.json --profile de-proof --fingerprint COLLECTOR_FP --witness witness.zip --witness-fingerprint WITNESS_FP --out narrative-de/
+```
+
+Precedence is built-in defaults → file `defaults` → named `profiles` entry → explicit CLI options. Only the file named by `--config` is loaded; configuration inside an evidence archive is never executed or applied. Relative witness and TSA CA paths in the file resolve from that file's directory; CLI paths resolve from the invocation directory. `--write-config` refuses to replace an existing file. `--print-config` shows effective settings without opening an evidence package or making network requests.
+
+| Setting | CLI | Default / meaning |
+|---|---|---|
+| `lang`, `jurisdiction` | `--lang`, `--jurisdiction` | `en`, no jurisdiction; `--jurisdiction none` clears a profile's jurisdiction |
+| `outputs` | `--outputs html json svg` | `pdf html json svg`; at least one of PDF, HTML or JSON is required |
+| `diagrams` | `--diagrams timeline flow ladder files` | All four; `--diagrams none` omits drawings when SVG output is not selected |
+| `max_records` | `--max-records` | 100000 per journal, allowed 1–1000000; overflow stops without truncating the report |
+| `scene_max_records` | `--scene-max-records` | 2000, allowed 1–10000; caps grouped records before adding restart cross-references |
+| `fingerprint`, `witness`, `witness_fingerprint`, `tsa_ca` | Existing flags with hyphenated names | Independently supplied trust inputs; fingerprints must be lowercase SHA-256 hex |
+| `check_drand`, `check_bitcoin` | `--check-drand`, `--check-bitcoin` | `false`; the corresponding `--no-check-…` option overrides a profile's `true` |
+| `require_tier` | `--require-tier` | `self_attested`; requirements do not create proofs or enable network requests implicitly |
+| `require_pinned_signer` | `--require-pinned-signer` / `--no-require-pinned-signer` | `false`; if required, an independently pinned collector or a verified matching pinned witness must be supplied |
+
+The `de-proof` example requests external checks and requires `witness_anchored` plus a trusted pin. It will refuse an archive that lacks these proofs. Merely specifying a witness fingerprint without a matching witness archive does not satisfy the pin requirement. JSON-only output avoids PDF font requirements. Diagram choices do not remove the textual assurance ladder, limitations or event references. Formats and languages do not change the machine scene model; changing scene size changes grouping only. A gap scene also cites the next recorded restart, even if that extra cross-reference exceeds the grouping cap.
+
+Every successful run also writes **`narrative-run.json`**: effective presentation/check settings, their SHA-256, input package hashes, optional TSA CA hash, pin status and attained tier. Local witness and CA paths are omitted. This is an unsigned run receipt, not an external attestation. It accompanies even PDF-only or HTML-only output. The settings hash describes the public settings object; input-file hashes are separate fields.
+
+Exit codes: **0** generated successfully; **1** package verification, record-limit or rendering failure; **2** invalid configuration or unmet pin/tier requirements. Unknown fields, duplicate JSON keys, invalid types and configurations over 64 KiB are rejected. There are no settings to skip signature verification, suppress limitations, raise a verdict or mark translations reviewed. Saved profiles and CLI settings do not change the signed input archive.
+
+Configuration tests cover precedence and paths, selective output, intact limitations/references without diagrams, bounded grouping, record overflow, invalid settings, archive tampering and CLI exit codes. Signed collector/witness fixtures test a required `witness_anchored` profile with confirmed, absent and mismatched commitments; external network responses in those tests are synthetic.
+
 ## Reading the report
 
 Read the introduction, chronology, assurance checks, limitations and verification commands in that order. Jurisdiction terms are optional. The appendix identifies every cited record by journal, sequence number and full SHA-256. The source package SHA-256 appears at the front. Collector and witness sequence numbers have separate namespaces.

@@ -6,6 +6,7 @@ from types import SimpleNamespace
 
 from .. import pdf_report
 from .diagrams import diagrams, svg
+from .config import DIAGRAMS, OUTPUTS
 from .text import Texts
 
 
@@ -59,7 +60,9 @@ def html_report(model, text, pictures, local):
            '<h1>1. ' + e(text('title')) + '</h1><p>' + e(text('intro')) + '</p>',
            '<p class="limit">' + e(text('limit.review')) + '</p>',
            '<code>SHA-256 ' + e(model['package_sha256']) + '</code>',
-           '<h2>2. ' + e(text('heading.chronology')) + '</h2>', svg(pictures['timeline'])]
+           '<h2>2. ' + e(text('heading.chronology')) + '</h2>']
+    if 'timeline' in pictures:
+        out.append(svg(pictures['timeline']))
     for scene in model['scenes']:
         out.append('<article><h3>' + e(text.glossary[scene['kind']]) + '</h3>')
         prose_count = min(7, len(scene['facts']))
@@ -71,7 +74,14 @@ def html_report(model, text, pictures, local):
             out.append('</table>')
         out.extend('<p class="limit">' + e(text.fact(limit)) + '</p>' for limit in scene['limits'])
         out.append('</article>')
-    out.extend(['<h2>3. ' + e(text('heading.assurance')) + '</h2>', svg(pictures['ladder']), svg(pictures['flow']), svg(pictures['files']), '<table>'])
+    out.append('<h2>3. ' + e(text('heading.assurance')) + '</h2>')
+    for key in ('ladder', 'flow', 'files'):
+        if key in pictures:
+            out.append(svg(pictures[key]))
+    out.append('<table>')
+    for row in (model.get('assurance') or {}).get('ladder', []):
+        out.append('<tr><td>' + e(text.glossary[row['tier']]) + '</td><td>' + e(text.glossary[row['status']]) + '</td></tr>')
+    out.append('</table><table>')
     for scene in model['scenes']:
         if scene['kind'] in ('anchoring', 'witnessing'):
             out.append('<tr><td>' + e(text.glossary[scene['kind']]) + '</td><td>' + e(scene['at_from']) + '</td><td>' + fact_refs(scene['facts'][0]) + '</td></tr>')
@@ -137,7 +147,8 @@ def pdf_report_bytes(model, text, pictures, local):
     pdf.line_text(text('intro'))
     pdf.line_text('SHA-256 ' + model['package_sha256'], family='Mono', size=8)
     pdf.line_text('2. ' + text('heading.chronology'), size=14, style='B')
-    pdf_diagram(pdf, pictures['timeline'])
+    if 'timeline' in pictures:
+        pdf_diagram(pdf, pictures['timeline'])
     for scene in model['scenes']:
         if pdf.will_page_break(25):
             pdf.add_page()
@@ -149,7 +160,8 @@ def pdf_report_bytes(model, text, pictures, local):
             pdf.line_text(text.fact(limit), size=8)
     pdf.line_text('3. ' + text('heading.assurance'), size=14, style='B')
     for key in ('ladder', 'flow', 'files'):
-        pdf_diagram(pdf, pictures[key])
+        if key in pictures:
+            pdf_diagram(pdf, pictures[key])
     for row in (model.get('assurance') or {}).get('ladder', []):
         pdf.line_text(text('assurance.state', tier=text.glossary[row['tier']], status=text.glossary[row['status']]))
     for anchor in model.get('verified_anchors', []):
@@ -176,15 +188,20 @@ def pdf_report_bytes(model, text, pictures, local):
     return bytes(pdf.output())
 
 
-def write(model, out, lang='en', jurisdiction_code=None):
+def write(model, out, lang='en', jurisdiction_code=None, outputs=OUTPUTS, diagram_names=DIAGRAMS):
     text = Texts(lang)
     local = jurisdiction(jurisdiction_code)
-    pictures = diagrams(model, text)
+    pictures = {k: v for k, v in diagrams(model, text).items() if k in diagram_names} if (
+        diagram_names and set(outputs) & {'pdf', 'html', 'svg'}) else {}
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
-    (out / 'diagrams').mkdir(exist_ok=True)
-    for name, picture in pictures.items():
-        (out / 'diagrams' / (name + '.svg')).write_text(svg(picture), encoding='utf-8')
-    (out / 'narrative.json').write_text(json.dumps(model, ensure_ascii=False, indent=2), encoding='utf-8')
-    (out / 'narrative.html').write_text(html_report(model, text, pictures, local), encoding='utf-8')
-    (out / 'narrative.pdf').write_bytes(pdf_report_bytes(model, text, pictures, local))
+    if 'svg' in outputs:
+        (out / 'diagrams').mkdir(exist_ok=True)
+        for name, picture in pictures.items():
+            (out / 'diagrams' / (name + '.svg')).write_text(svg(picture), encoding='utf-8')
+    if 'json' in outputs:
+        (out / 'narrative.json').write_text(json.dumps(model, ensure_ascii=False, indent=2), encoding='utf-8')
+    if 'html' in outputs:
+        (out / 'narrative.html').write_text(html_report(model, text, pictures, local), encoding='utf-8')
+    if 'pdf' in outputs:
+        (out / 'narrative.pdf').write_bytes(pdf_report_bytes(model, text, pictures, local))

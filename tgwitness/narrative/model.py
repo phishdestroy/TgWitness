@@ -78,9 +78,11 @@ def scene_kind(kind):
                  if any(kind.startswith(p) if p.endswith('.') else kind == p for p in patterns)), "other")
 
 
-def build(events, verification, journal="collector"):
+def build(events, verification, journal="collector", max_scene_records=2000):
     """Call only after verifying the complete source archive; never accept a supplied verdict file."""
     scenes, groups, restarts = [], [], []
+    if type(max_scene_records) is not int or not 1 <= max_scene_records <= 10000:
+        raise ValueError('Scene record limit must be an integer from 1 to 10000')
     pending_stop = None
     previous_seq = 0
     for event in events:
@@ -97,7 +99,7 @@ def build(events, verification, journal="collector"):
             pending_stop = None
         kind = scene_kind(event["kind"])
         group_key = (kind, when.date())
-        if not groups or groups[-1][0] != group_key or len(groups[-1][1]) >= 2000:
+        if not groups or groups[-1][0] != group_key or len(groups[-1][1]) >= max_scene_records:
             groups.append((group_key, []))
         groups[-1][1].append(event)
     for (kind, _), group in groups:
