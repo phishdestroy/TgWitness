@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add read-only MCP tools (preview): `get_messages_by_date` (one calendar day in a named time zone, computed server-side), `get_pinned_messages`, `get_chat_stats` with `gap_summary`, `get_topics`, and `get_media`, which returns a verified, downscaled image preview anchored to its SHA-256 and `media.saved` record. Every MCP tool now declares an output schema. New connections include these tools; existing connections keep the tools they were issued with.
 - Show each account's selected route and checked exit address，group session controls，and retain interface preferences when adding an account．Record connection changes without repeating identical background checks．Validate withheld-marker contents and reply states in minimized exports，including rejection of a missing-source label for an included record．
 
 - Describe local，witnessed，GitHub-hosted and Intel TDX collection separately，with their actual verification inputs．Remove repeated identity／certification digressions，update stale publication and WARP test descriptions，and refresh Russian guidance．Allow a bounded publication-settling interval while still requiring exact installer bytes．
