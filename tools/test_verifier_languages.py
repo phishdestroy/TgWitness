@@ -17,6 +17,13 @@ from tools.sync_verifier_languages import embedded, validate, START, END  # noqa
 LANGUAGES = tuple(verify.VERIFIER_LANGUAGES)
 
 
+def test_builder_starts_without_host_application_dependencies():
+    result = subprocess.run([sys.executable, "-I", "-S", str(ROOT / "tools/build_verifier.py"), "--help"],
+                            capture_output=True, text=True, encoding="utf-8", timeout=20)
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "--language" in result.stdout and "zh-Hant" in result.stdout
+
+
 def test_catalogue_matches_panel_and_standalone_copy():
     catalogue = json.loads((ROOT / "tgwitness/verifier_languages.json").read_text(encoding="utf-8"))
     validate(catalogue)

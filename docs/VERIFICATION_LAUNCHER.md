@@ -56,6 +56,9 @@ through a trusted channel: a checksum delivered alongside untrusted software
 does not by itself authenticate that software. The build uses the repository's
 existing pinned Python runtime and `deploy/constraints.txt`.
 
+Build on Windows with Python 3.12. The build host needs no preinstalled application
+dependencies: launcher generation runs inside the newly assembled embedded runtime.
+
 ```powershell
 python tools/build_verifier.py
 ```

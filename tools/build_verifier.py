@@ -14,13 +14,33 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tools.build_portable import HOST_ARCH, PYTHON, VERSION, embedded_runtime  # noqa: E402
-from tgwitness.verification_kit import VERIFIER_LANGUAGES, files, quickstart  # noqa: E402
 from tools.sync_verifier_languages import validate  # noqa: E402
+
+VERIFIER_LANGUAGES = json.loads((ROOT / "tgwitness/verifier_languages.json").read_text(encoding="utf-8"))
 
 
 def sha256(path):
     with path.open("rb") as stream:
         return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def write_launchers(stage, language):
+    # Run in the newly built runtime: the build host need not have cryptography.
+    from tgwitness.verification_kit import files, quickstart
+
+    stage = Path(stage)
+    for filename, body in files(language).items():
+        (stage / filename).write_bytes(body)
+    (stage.parent / "VERIFY-language-menu.cmd").write_bytes(files("auto")["VERIFY.cmd"])
+    (stage / "README.txt").write_bytes(quickstart(language))
+    (stage / "languages").mkdir()
+    for lang in VERIFIER_LANGUAGES:
+        instructions = quickstart(lang) + b"\n" + (
+            "python/python.exe -I verify.py archive.zip --interactive --lang " + lang + " --checkpoint retained.json\n"
+            "python/python.exe -I verify.py archive.zip --pretty --explain --lang " + lang + " --fingerprint TRUSTED_SHA256 --tsa-ca trusted-root.pem\n"
+            "python/python.exe -I verify.py archive.zip --pretty --explain --lang " + lang + " --witness witness.zip --witness-fingerprint TRUSTED_WITNESS_SHA256 --require-witness\n"
+            "python/python.exe -I verify.py archive.zip --interactive --lang " + lang + " --max-gib 16\n").encode("utf-8")
+        (stage / "languages" / ("START_HERE-" + lang + ".txt")).write_bytes(instructions)
 
 
 def main():
@@ -52,17 +72,13 @@ def main():
                         "--target", str(stage / "python/Lib/site-packages"),
                         "-c", str(ROOT / "deploy/constraints.txt"), "cryptography"], check=True)
         shutil.copyfile(ROOT / "tgwitness/verify.py", stage / "verify.py")
-        for filename, body in files(args.language).items():
-            (stage / filename).write_bytes(body)
-        (stage / "README.txt").write_bytes(quickstart(args.language))
-        (stage / "languages").mkdir()
-        for lang in VERIFIER_LANGUAGES:
-            instructions = quickstart(lang) + b"\n" + (
-                "python/python.exe -I verify.py archive.zip --interactive --lang " + lang + " --checkpoint retained.json\n"
-                "python/python.exe -I verify.py archive.zip --pretty --explain --lang " + lang + " --fingerprint TRUSTED_SHA256 --tsa-ca trusted-root.pem\n"
-                "python/python.exe -I verify.py archive.zip --pretty --explain --lang " + lang + " --witness witness.zip --witness-fingerprint TRUSTED_WITNESS_SHA256 --require-witness\n"
-                "python/python.exe -I verify.py archive.zip --interactive --lang " + lang + " --max-gib 16\n").encode("utf-8")
-            (stage / "languages" / ("START_HERE-" + lang + ".txt")).write_bytes(instructions)
+        # A short-lived child also releases its loaded Windows DLLs before cleanup.
+        subprocess.run([str(stage / "python/python.exe"), "-I", "-B", "-X", "utf8", "-c",
+                        "import sys; sys.path.insert(0, sys.argv[1]); "
+                        "from tools.build_verifier import write_launchers; write_launchers(sys.argv[2], sys.argv[3])",
+                        str(ROOT), str(stage), args.language], check=True)
+        default_launcher = (stage / "VERIFY.cmd").read_bytes()
+        menu_launcher = (stage.parent / "VERIFY-language-menu.cmd").read_bytes()
         for filename in ("LICENSE", "NOTICE"):
             shutil.copyfile(ROOT / filename, stage / filename)
         # Test the actual bundled interpreter/dependencies against existing signed evidence.
@@ -89,13 +105,13 @@ def main():
         print("VERIFY.cmd: clean/tampered ZIP and saved transcripts passed with system Python absent from PATH.")
         # Exercise every translation in the actual isolated recipient runtime.
         shutil.copyfile(ROOT / "tools/fixtures/evidence-before-fulltext.zip", probe)
-        (stage / "VERIFY.cmd").write_bytes(files("auto")["VERIFY.cmd"])
+        (stage / "VERIFY.cmd").write_bytes(menu_launcher)
         for lang, entry in VERIFIER_LANGUAGES.items():
             checked = subprocess.run(command, input=lang + "\n\n", env=env, cwd=stage, capture_output=True,
                                      text=True, encoding="utf-8", creationflags=subprocess.CREATE_NO_WINDOW, timeout=45)
             if checked.returncode or entry["reader"]["key_unconfirmed"].upper() not in checked.stdout:
                 raise SystemExit("Portable language check failed: " + lang + "\n" + checked.stdout + checked.stderr)
-        (stage / "VERIFY.cmd").write_bytes(files(args.language)["VERIFY.cmd"])
+        (stage / "VERIFY.cmd").write_bytes(default_launcher)
         print("All", len(VERIFIER_LANGUAGES), "languages passed through VERIFY.cmd without system Python on PATH.")
         shipped = sorted(p for p in stage.rglob("*") if p.is_file())
         if any(p.is_symlink() or getattr(p, "is_junction", lambda: False)() for p in stage.rglob("*")):
