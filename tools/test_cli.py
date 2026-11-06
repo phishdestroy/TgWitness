@@ -15,7 +15,7 @@ import requests
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from tgwitness import activity, cli  # noqa: E402
+from tgwitness import activity, archive_api, cli  # noqa: E402
 from tgwitness.access import Principal, Refused  # noqa: E402
 from tgwitness.archive import MCP_TOOLS, TOOLS, ArchiveQuery, ArchiveReader  # noqa: E402
 from tgwitness.security import InstanceLock, Vault  # noqa: E402
@@ -298,6 +298,56 @@ def test_panel_mode_uses_scoped_connection(tmp_path, capsys, monkeypatch):
         assert counted["messages"] == 4 and "collector_liveness" in counted["coverage"]
         assert set(full["connection"]["tools"]) == set(MCP_TOOLS), "Bulk export is granted only when chosen"
         assert run(capsys, "export", *base)[0] == 4
+
+
+@pytest.mark.parametrize("after_record", [False, True])
+def test_export_revocation_before_first_record_or_completion(tmp_path, after_record):
+    entered, release = threading.Event(), threading.Event()
+    record = {"source": {"chat_id": CHAT}, "text": "Synthetic streamed record"}
+    def controlled(reader, query):
+        def lines():
+            if after_record:
+                yield record
+            entered.set()
+            assert release.wait(15), 'Test did not release the export read'
+            if not after_record:
+                yield record
+            yield {"export_complete": {"records": 1}}
+        return lines()
+    with panel(tmp_path) as (app, url), patch.object(ArchiveReader, 'export', controlled):
+        manager = archive_api.connections(app)
+        token, entry = manager.issue(archive_api.ConnectionSettings(
+            name='Synthetic revocation', workspaces={'default': [CHAT]}, tools=['export_messages'], expires_in_seconds=3600))
+        response = requests.post(url + '/api/archive/export', headers={'Authorization': 'Bearer ' + token},
+                                 json={'tool': 'export_messages'}, stream=True, timeout=20)
+        try:
+            assert response.status_code == 200 and entered.wait(10)
+            manager.revoke(entry['id'])
+            release.set()
+            rows = [json.loads(line) for line in response.iter_lines() if line]
+            assert rows == ([record] if after_record else []), 'A revoked stream emitted more data or completion'
+        finally:
+            release.set()
+            response.close()
+
+
+def test_export_iteration_holds_archive_worker_budget(tmp_path):
+    with panel(tmp_path) as (app, url):
+        import asyncio
+        budget = app.state.archive_slots = asyncio.Semaphore(1)
+        def controlled(reader, query):
+            def lines():
+                assert budget.locked(), 'Lazy export reads escaped the archive worker budget'
+                yield {"export_complete": {"records": 0}}
+            return lines()
+        manager = archive_api.connections(app)
+        token, _ = manager.issue(archive_api.ConnectionSettings(
+            name='Synthetic worker limit', workspaces={'default': [CHAT]}, tools=['export_messages'], expires_in_seconds=3600))
+        with patch.object(ArchiveReader, 'export', controlled):
+            response = requests.post(url + '/api/archive/export', headers={'Authorization': 'Bearer ' + token},
+                                     json={'tool': 'export_messages'}, timeout=15)
+        assert response.status_code == 200
+        assert response.json() == {"export_complete": {"records": 0}}
 
 
 if __name__ == "__main__":
