@@ -6713,5 +6713,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "отправка, вступления и кнопки ботов отключены до {time}; чтение продолжается",
   "sending, joining and bot buttons are off; reading continues": "отправка, вступления и кнопки ботов отключены; чтение продолжается",
   "Queue": "Очередь",
-  "Same exit address as other accounts: {n}": "Тот же адрес выхода у других аккаунтов: {n}"
+  "Same exit address as other accounts: {n}": "Тот же адрес выхода у других аккаунтов: {n}",
+"Messages of one day": "Сообщения за один день",
+"Pinned messages": "Закреплённые сообщения",
+"Chat counts and gaps": "Счётчики чата и пропуски",
+"Forum topics": "Темы форума",
+"Image previews with hashes": "Превью изображений с хешами",
+"Choose a chat.": "Выберите чат.",
+"Choose a file by its SHA-256.": "Выберите файл по его SHA-256."
 }

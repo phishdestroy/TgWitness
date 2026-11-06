@@ -6346,5 +6346,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "yuborish, qo'shilish va bot tugmalari {time}gacha o'chirilgan; o'qish davom etadi",
   "sending, joining and bot buttons are off; reading continues": "jo'natish, chatlarga qo'shilish va bot tugmalari o'chirilgan; o'qish davom etadi",
   "Queue": "Navbat",
-  "Same exit address as other accounts: {n}": "Boshqa hisoblar bilan bir xil chiqish manzili: {n}"
+  "Same exit address as other accounts: {n}": "Boshqa hisoblar bilan bir xil chiqish manzili: {n}",
+"Messages of one day": "Bir kunlik xabarlar",
+"Pinned messages": "Biriktirilgan xabarlar",
+"Chat counts and gaps": "Suhbatlar soni va bo'shliqlar",
+"Forum topics": "Forum mavzulari",
+"Image previews with hashes": "Hashlar bilan rasm ko'rinishlari",
+"Choose a chat.": "Suhbatni tanlang.",
+"Choose a file by its SHA-256.": "Faylni uning SHA-256 ko'rsatkichi bo'yicha tanlang."
 }

@@ -6346,5 +6346,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "{time} পর্যন্ত পাঠানো, চ্যাটে যোগদান এবং বট বোতাম বন্ধ থাকবে; পড়া চালিয়ে যেতে থাকবে",
   "sending, joining and bot buttons are off; reading continues": "বার্তা পাঠানো, চ্যাটে যোগদান এবং বট বোতাম বন্ধ; পড়া চালিয়ে যাচ্ছে",
   "Queue": "সারি",
-  "Same exit address as other accounts: {n}": "অন্যান্য অ্যাকাউন্টের মতো একই প্রস্থান ঠিকানা: {n}"
+  "Same exit address as other accounts: {n}": "অন্যান্য অ্যাকাউন্টের মতো একই প্রস্থান ঠিকানা: {n}",
+"Messages of one day": "এক দিনের বার্তা",
+"Pinned messages": "পিন করা বার্তা",
+"Chat counts and gaps": "চ্যাটের সংখ্যা এবং ফাঁক",
+"Forum topics": "ফোরাম বিষয়সমূহ",
+"Image previews with hashes": "হ্যাশের সাথে ইমেজ প্রিভিউ",
+"Choose a chat.": "একটি চ্যাট নির্বাচন করুন।",
+"Choose a file by its SHA-256.": "SHA-256 দ্বারা একটি ফাইল নির্বাচন করুন।"
 }

@@ -6307,5 +6307,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "hantaran, penyertaan dan butang bot dimatikan sehingga {time}; pembacaan diteruskan",
   "sending, joining and bot buttons are off; reading continues": "hantaran, menyertai dan butang bot dimatikan; membaca diteruskan",
   "Queue": "Barisan",
-  "Same exit address as other accounts: {n}": "Alamat keluar yang sama seperti akaun lain: {n}"
+  "Same exit address as other accounts: {n}": "Alamat keluar yang sama seperti akaun lain: {n}",
+"Messages of one day": "Mesej sehari",
+"Pinned messages": "Mesej yang dipaku",
+"Chat counts and gaps": "Bilangan sembang dan jurang",
+"Forum topics": "Topik forum",
+"Image previews with hashes": "Previu imej dengan hash",
+"Choose a chat.": "Pilih sembang.",
+"Choose a file by its SHA-256.": "Pilih fail berdasarkan SHA-256nya."
 }

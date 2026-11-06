@@ -6424,5 +6424,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "надсилання, приєднання та кнопки бота вимкнені до {time}; читання триває",
   "sending, joining and bot buttons are off; reading continues": "надсилання, приєднання та кнопки бота вимкнені; читання продовжується",
   "Queue": "Черга",
-  "Same exit address as other accounts: {n}": "Та сама вихідна адреса, що й у інших облікових записів: {n}"
+  "Same exit address as other accounts: {n}": "Та сама вихідна адреса, що й у інших облікових записів: {n}",
+"Messages of one day": "Повідомлення за один день",
+"Pinned messages": "Закріплені повідомлення",
+"Chat counts and gaps": "Лічильники чату та пропуски",
+"Forum topics": "Теми форуму",
+"Image previews with hashes": "Прев'ю зображень із хешами",
+"Choose a chat.": "Виберіть чат.",
+"Choose a file by its SHA-256.": "Виберіть файл за його SHA-256."
 }

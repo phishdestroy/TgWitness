@@ -6346,5 +6346,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "L'envoi de messages, la participation aux discussions et les boutons des bots sont désactivés jusqu'à {time} ; la lecture se poursuit",
   "sending, joining and bot buttons are off; reading continues": "L'envoi de messages, la participation aux discussions et les boutons des bots sont désactivés ; la lecture se poursuit",
   "Queue": "File d'attente",
-  "Same exit address as other accounts: {n}": "Même adresse de sortie que d'autres comptes : {n}"
+  "Same exit address as other accounts: {n}": "Même adresse de sortie que d'autres comptes : {n}",
+"Messages of one day": "Messages d'une journée",
+"Pinned messages": "Messages épinglés",
+"Chat counts and gaps": "Nombre de conversations et lacunes",
+"Forum topics": "Sujets du forum",
+"Image previews with hashes": "Aperçus d'images avec hachages",
+"Choose a chat.": "Choisissez une conversation.",
+"Choose a file by its SHA-256.": "Choisissez un fichier en fonction de sa valeur SHA-256."
 }

@@ -6307,5 +6307,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "發送訊息、加入聊天室及按壓機器人按鈕的功能將停用至 {time} 為止；閱讀功能仍可繼續",
   "sending, joining and bot buttons are off; reading continues": "發送、加入及機器人按鈕已停用；閱讀功能仍可繼續",
   "Queue": "佇列",
-  "Same exit address as other accounts: {n}": "與其他帳戶相同的出口位址：{n}"
+  "Same exit address as other accounts: {n}": "與其他帳戶相同的出口位址：{n}",
+"Messages of one day": "單日訊息",
+"Pinned messages": "置頂訊息",
+"Chat counts and gaps": "聊天次數與間隔",
+"Forum topics": "論壇主題",
+"Image previews with hashes": "附帶雜湊值的圖片預覽",
+"Choose a chat.": "選擇一個聊天室。",
+"Choose a file by its SHA-256.": "根據 SHA-256 值選擇檔案。"
 }

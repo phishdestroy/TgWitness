@@ -6346,5 +6346,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "ارسال، پیوستن و دکمه‌های ربات تا زمان {time} غیرفعال هستند؛ خواندن ادامه دارد",
   "sending, joining and bot buttons are off; reading continues": "ارسال، پیوستن و دکمه‌های ربات غیرفعال هستند؛ خواندن ادامه دارد",
   "Queue": "صف",
-  "Same exit address as other accounts: {n}": "آدرس خروجی مشابه حساب‌های دیگر: {n}"
+  "Same exit address as other accounts: {n}": "آدرس خروجی مشابه حساب‌های دیگر: {n}",
+"Messages of one day": "پیام‌های یک روز",
+"Pinned messages": "پیام‌های سنجاق‌شده",
+"Chat counts and gaps": "شمارش چت‌ها و فواصل",
+"Forum topics": "موضوعات انجمن",
+"Image previews with hashes": "پیش‌نمایش تصاویر با هش‌ها",
+"Choose a chat.": "یک چت را انتخاب کنید.",
+"Choose a file by its SHA-256.": "یک فایل را بر اساس SHA-256 آن انتخاب کنید."
 }

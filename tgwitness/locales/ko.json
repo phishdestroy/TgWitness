@@ -6307,5 +6307,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "{time}까지 메시지 전송, 채팅 참여 및 봇 버튼 사용이 비활성화됩니다. 읽기는 계속됩니다.",
   "sending, joining and bot buttons are off; reading continues": "메시지 전송, 채팅 참여 및 봇 버튼 기능이 비활성화됨; 읽기는 계속됨",
   "Queue": "대기열",
-  "Same exit address as other accounts: {n}": "다른 계정과 동일한 출구 주소: {n}"
+  "Same exit address as other accounts: {n}": "다른 계정과 동일한 출구 주소: {n}",
+"Messages of one day": "하루 동안의 메시지",
+"Pinned messages": "고정된 메시지",
+"Chat counts and gaps": "채팅 횟수 및 간격",
+"Forum topics": "포럼 주제",
+"Image previews with hashes": "해시 값이 포함된 이미지 미리보기",
+"Choose a chat.": "채팅을 선택하세요.",
+"Choose a file by its SHA-256.": "SHA-256 값을 기준으로 파일을 선택하십시오."
 }

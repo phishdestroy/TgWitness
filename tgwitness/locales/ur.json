@@ -6346,5 +6346,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": " بھیجنا، شمولیت اور بوٹ بٹن بند ہیں جب تک {time}؛ پڑھنا جاری ہے",
   "sending, joining and bot buttons are off; reading continues": "پیغام بھیجنا، چیٹس میں شامل ہونا اور بوٹ کے بٹن بند ہیں؛ پڑھنا جاری ہے",
   "Queue": "قطار",
-  "Same exit address as other accounts: {n}": "دوسرے اکاؤنٹس کے برابر نکلنے کا پتہ: {n}"
+  "Same exit address as other accounts: {n}": "دوسرے اکاؤنٹس کے برابر نکلنے کا پتہ: {n}",
+"Messages of one day": "ایک دن کے پیغامات",
+"Pinned messages": "پن کیے گئے پیغامات",
+"Chat counts and gaps": "چٹ باتوں کی تعداد اور وقفے",
+"Forum topics": "فورم کے موضوعات",
+"Image previews with hashes": "ہیگز کے ساتھ تصویر کے پیش نظارے",
+"Choose a chat.": "ایک چیٹ منتخب کریں۔",
+"Choose a file by its SHA-256.": "فائل کو اس کے SHA-256 کے ذریعے منتخب کریں۔"
 }

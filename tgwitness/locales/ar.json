@@ -6502,5 +6502,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "يتم تعطيل الإرسال والانضمام وأزرار البوت حتى {time}؛ وتستمر القراءة",
   "sending, joining and bot buttons are off; reading continues": "يتم تعطيل إرسال الرسائل والانضمام إلى الدردشات وأزرار البوت؛ بينما تستمر القراءة",
   "Queue": "قائمة الانتظار",
-  "Same exit address as other accounts: {n}": "عنوان خروج مشترك مع حسابات أخرى: {n}"
+  "Same exit address as other accounts: {n}": "عنوان خروج مشترك مع حسابات أخرى: {n}",
+"Messages of one day": "رسائل يوم واحد",
+"Pinned messages": "الرسائل المثبتة",
+"Chat counts and gaps": "عدد المحادثات والفجوات",
+"Forum topics": "مواضيع المنتدى",
+"Image previews with hashes": "معاينات الصور مع التجزئات",
+"Choose a chat.": "اختر محادثة.",
+"Choose a file by its SHA-256.": "اختر ملفًا باستخدام رمز SHA-256 الخاص به."
 }

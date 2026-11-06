@@ -6307,5 +6307,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "{time}までは、メッセージの送信、チャットへの参加、ボットボタンの操作が利用できません。閲覧は継続されます",
   "sending, joining and bot buttons are off; reading continues": "送信、チャットへの参加、ボットボタンはオフ；閲覧は継続されます",
   "Queue": "キュー",
-  "Same exit address as other accounts: {n}": "他のアカウントと同じ出口アドレス：{n}"
+  "Same exit address as other accounts: {n}": "他のアカウントと同じ出口アドレス：{n}",
+"Messages of one day": "1日分のメッセージ",
+"Pinned messages": "固定メッセージ",
+"Chat counts and gaps": "チャット数と空白期間",
+"Forum topics": "フォーラムのトピック",
+"Image previews with hashes": "ハッシュ付き画像プレビュー",
+"Choose a chat.": "チャットを選択してください。",
+"Choose a file by its SHA-256.": "SHA-256値に基づいてファイルを選択してください。"
 }

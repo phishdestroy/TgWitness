@@ -6307,5 +6307,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "pengiriman, bergabung, dan tombol bot dinonaktifkan hingga {time}; pembacaan tetap berlanjut",
   "sending, joining and bot buttons are off; reading continues": "pengiriman, bergabung, dan tombol bot dinonaktifkan; pembacaan tetap berlanjut",
   "Queue": "Antrian",
-  "Same exit address as other accounts: {n}": "Alamat keluar yang sama dengan akun lain: {n}"
+  "Same exit address as other accounts: {n}": "Alamat keluar yang sama dengan akun lain: {n}",
+"Messages of one day": "Pesan selama satu hari",
+"Pinned messages": "Pesan yang disematkan",
+"Chat counts and gaps": "Jumlah obrolan dan celah",
+"Forum topics": "Topik forum",
+"Image previews with hashes": "Pratinjau gambar dengan hash",
+"Choose a chat.": "Pilih obrolan.",
+"Choose a file by its SHA-256.": "Pilih berkas berdasarkan SHA-256-nya."
 }

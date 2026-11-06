@@ -6307,5 +6307,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "การส่งข้อความ การเข้าร่วมกลุ่ม และปุ่มบอทถูกปิดจนกว่าจะถึง{time}; การอ่านยังคงดำเนินต่อไป",
   "sending, joining and bot buttons are off; reading continues": "การส่งข้อความ การเข้าร่วมกลุ่ม และปุ่มบอทถูกปิด; การอ่านยังคงดำเนินต่อไป",
   "Queue": "คิว",
-  "Same exit address as other accounts: {n}": "ที่อยู่ทางออกเดียวกันกับบัญชีอื่น: {n}"
+  "Same exit address as other accounts: {n}": "ที่อยู่ทางออกเดียวกันกับบัญชีอื่น: {n}",
+"Messages of one day": "ข้อความในหนึ่งวัน",
+"Pinned messages": "ข้อความที่ถูกปักหมุด",
+"Chat counts and gaps": "จำนวนการสนทนาและช่องว่าง",
+"Forum topics": "หัวข้อในฟอรัม",
+"Image previews with hashes": "ภาพตัวอย่างพร้อมรหัสแฮช",
+"Choose a chat.": "เลือกห้องสนทนา",
+"Choose a file by its SHA-256.": "เลือกไฟล์ตามค่า SHA-256 ของมัน"
 }

@@ -6307,5 +6307,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "các chức năng gửi tin nhắn, tham gia cuộc trò chuyện và nhấn nút bot bị tắt cho đến {time}; việc đọc vẫn tiếp tục",
   "sending, joining and bot buttons are off; reading continues": "các chức năng gửi tin nhắn, tham gia cuộc trò chuyện và nhấn nút bot bị tắt; việc đọc vẫn tiếp tục",
   "Queue": "Hàng đợi",
-  "Same exit address as other accounts: {n}": "Địa chỉ thoát giống với các tài khoản khác: {n}"
+  "Same exit address as other accounts: {n}": "Địa chỉ thoát giống với các tài khoản khác: {n}",
+"Messages of one day": "Các tin nhắn trong một ngày",
+"Pinned messages": "Tin nhắn được ghim",
+"Chat counts and gaps": "Số lượng cuộc trò chuyện và khoảng trống",
+"Forum topics": "Các chủ đề trên diễn đàn",
+"Image previews with hashes": "Xem trước hình ảnh kèm mã băm",
+"Choose a chat.": "Chọn một cuộc trò chuyện.",
+"Choose a file by its SHA-256.": "Chọn tệp theo mã SHA-256 của nó."
 }

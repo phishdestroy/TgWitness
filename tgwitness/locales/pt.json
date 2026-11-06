@@ -6346,5 +6346,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "O envio, a participação e os botões do bot ficam desativados até {time}; a leitura continua",
   "sending, joining and bot buttons are off; reading continues": "o envio, a participação e os botões do bot estão desativados; a leitura continua",
   "Queue": "Fila",
-  "Same exit address as other accounts: {n}": "Mesmo endereço de saída que outras contas: {n}"
+  "Same exit address as other accounts: {n}": "Mesmo endereço de saída que outras contas: {n}",
+"Messages of one day": "Mensagens de um dia",
+"Pinned messages": "Mensagens fixadas",
+"Chat counts and gaps": "Contagem de conversas e lacunas",
+"Forum topics": "Tópicos do fórum",
+"Image previews with hashes": "Pré-visualizações de imagens com hashes",
+"Choose a chat.": "Escolha um chat.",
+"Choose a file by its SHA-256.": "Escolha um arquivo pelo seu SHA-256."
 }

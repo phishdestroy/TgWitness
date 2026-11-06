@@ -6307,5 +6307,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "发送消息、加入聊天和点击机器人按钮的功能将禁用至{time}；阅读功能仍可继续",
   "sending, joining and bot buttons are off; reading continues": "发送、加入和机器人按钮已禁用；阅读功能仍可继续",
   "Queue": "队列",
-  "Same exit address as other accounts: {n}": "与其他账户相同的出口地址：{n}"
+  "Same exit address as other accounts: {n}": "与其他账户相同的出口地址：{n}",
+"Messages of one day": "某一天的消息",
+"Pinned messages": "置顶消息",
+"Chat counts and gaps": "聊天次数与间隔",
+"Forum topics": "论坛主题",
+"Image previews with hashes": "带哈希值的图片预览",
+"Choose a chat.": "选择一个聊天室。",
+"Choose a file by its SHA-256.": "根据 SHA-256 值选择文件。"
 }

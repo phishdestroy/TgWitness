@@ -6346,5 +6346,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "{time}'e kadar mesaj gönderme, sohbetlere katılma ve bot düğmeleri devre dışıdır; okuma devam eder",
   "sending, joining and bot buttons are off; reading continues": "mesaj gönderme, sohbetlere katılma ve bot düğmeleri devre dışıdır; okuma devam eder",
   "Queue": "Kuyruk",
-  "Same exit address as other accounts: {n}": "Diğer hesaplarla aynı çıkış adresi: {n}"
+  "Same exit address as other accounts: {n}": "Diğer hesaplarla aynı çıkış adresi: {n}",
+"Messages of one day": "Bir günlük mesajlar",
+"Pinned messages": "Sabitlenmiş mesajlar",
+"Chat counts and gaps": "Sohbet sayıları ve boşluklar",
+"Forum topics": "Forum konuları",
+"Image previews with hashes": "Hash değerleri içeren resim önizlemeleri",
+"Choose a chat.": "Bir sohbet seçin.",
+"Choose a file by its SHA-256.": "SHA-256 değerine göre bir dosya seçin."
 }

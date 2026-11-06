@@ -6424,5 +6424,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "wysyłanie, dołączanie do czatów oraz przyciski botów są wyłączone do godziny {time}; czytanie jest nadal możliwe",
   "sending, joining and bot buttons are off; reading continues": "wysyłanie, dołączanie oraz przyciski bota są wyłączone; czytanie jest nadal możliwe",
   "Queue": "Kolejka",
-  "Same exit address as other accounts: {n}": "Ten sam adres wyjściowy co w przypadku innych kont: {n}"
+  "Same exit address as other accounts: {n}": "Ten sam adres wyjściowy co w przypadku innych kont: {n}",
+"Messages of one day": "Wiadomości z jednego dnia",
+"Pinned messages": "Przypięte wiadomości",
+"Chat counts and gaps": "Liczba rozmów i luki",
+"Forum topics": "Wątki na forum",
+"Image previews with hashes": "Podglądy obrazów wraz z skrótami",
+"Choose a chat.": "Wybierz czat.",
+"Choose a file by its SHA-256.": "Wybierz plik na podstawie jego wartości SHA-256."
 }

@@ -6385,5 +6385,12 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "שליחה, הצטרפות וכפתורי הבוט מושבתים עד {time}; הקריאה נמשכת",
   "sending, joining and bot buttons are off; reading continues": "שליחה, הצטרפות וכפתורי הבוט מושבתים; הקריאה נמשכת",
   "Queue": "תור",
-  "Same exit address as other accounts: {n}": "כתובת יציאה זהה לזו של חשבונות אחרים: {n}"
+  "Same exit address as other accounts: {n}": "כתובת יציאה זהה לזו של חשבונות אחרים: {n}",
+"Messages of one day": "הודעות מיום אחד",
+"Pinned messages": "הודעות מוצמדות",
+"Chat counts and gaps": "מספר הצ'אטים והפערים",
+"Forum topics": "נושאי פורום",
+"Image previews with hashes": "תצוגה מקדימה של תמונות עם חתימות",
+"Choose a chat.": "בחרו צ'אט.",
+"Choose a file by its SHA-256.": "בחרו קובץ לפי ה-SHA-256 שלו."
 }
