@@ -36,6 +36,7 @@ from .history import History
 from .account_import import session_key, validate_string
 from .avatar_history import AvatarHistory
 from .telegram_client import WitnessClient
+from .security import KeyLock
 from .workers import complete_in_thread
 from .store import canonical, utcnow
 from .evidence import retain_checkpoint
@@ -373,6 +374,7 @@ class Collector:
         self.observation_starting = False
         self.connection_change_task = None
         self.foreground = 0
+        self.key_lock = None
         self.sessions_checked_at = -SESSIONS_EVERY
         self.people = {}
         self.avatar_lock = asyncio.Lock()
@@ -1267,7 +1269,22 @@ class Collector:
             return
         await self.planned_rotation()
 
+    def lock_key(self, client):
+        key = getattr(getattr(getattr(client, "session", None), "auth_key", None), "key", None)
+        if not key or self.key_lock is not None and self.key_lock[0] == key:
+            return
+        lock = KeyLock(key)
+        if self.key_lock is not None:
+            self.key_lock[1].close()
+        self.key_lock = (key, lock)
+
+    def unlock_key(self):
+        if self.key_lock is not None:
+            self.key_lock[1].close()
+            self.key_lock = None
+
     async def connect_client(self, client):
+        self.lock_key(client)
         attempts = self.param("proxy_connect_attempts")
         for attempt in range(1, attempts + 1):
             automatic = self.automatic()
@@ -1698,6 +1715,8 @@ class Collector:
 
     def connection_changed(self, client, state):
         role = "current" if client is self.client else "candidate" if client is self.login_client else "other"
+        if state == "closed" and role in ("current", "candidate"):
+            self.unlock_key()
         self.note("connection." + state, {"role": role, "route": self.route_receipt(),
                                           "dc_id": getattr(client.session, "dc_id", None)})
         if state == "opened" and role == "current" and time.monotonic() - self.sessions_checked_at > SESSIONS_EVERY:

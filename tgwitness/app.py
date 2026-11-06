@@ -31,6 +31,7 @@ from .disclosure import Disclosures, DisclosurePolicy
 from .downloads import RetainedDownload, TemporaryDownload, build_file
 from .access import POLICY, AccessControl, AdminSettings, Console, GrantSettings, Refused, check as access_check
 from .collector import AUTHORIZATION_ERRORS, Collector, ProtectedSession
+from .security import KeyInUse
 from .demo import seed_demo
 from .evidence import LIMITS, checkpoint, encrypt_export, export_file, producer, retain_checkpoint, cleanup_exports
 from . import i18n
@@ -720,7 +721,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(400, "Telegram authorization expired. Sign in again.") from None
         except RPCError as exc:
             raise HTTPException(400, "Telegram rejected the request: " + type(exc).__name__) from None
-        except ProtectedSession as exc:
+        except (ProtectedSession, KeyInUse) as exc:
             raise HTTPException(409, str(exc)) from None
         except ValueError as exc:
             raise HTTPException(400, str(exc)) from None
