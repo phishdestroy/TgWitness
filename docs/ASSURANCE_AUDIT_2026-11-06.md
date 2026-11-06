@@ -11,6 +11,10 @@ of the whole product, a penetration test of a live deployment, or a demonstratio
 of an Intel signature forgery. Severity below concerns evidence interpretation;
 it does not imply remote code execution or a demonstrated remote trigger.
 
+Previously exported archives retain their original verifier scripts and signed
+reports. Recheck retained evidence with the updated independently trusted
+verifier; do not rewrite the original archive to replace its embedded script.
+
 ## High priority
 
 ### 1. Capture failures could leave continuous observation active
