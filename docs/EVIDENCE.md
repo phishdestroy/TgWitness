@@ -13,7 +13,7 @@ This page describes the formats, the checks and the material to keep for handove
 | Evidence ZIP contents | `manifest.sig` signs the canonical manifest, which lists hashes of the content files | The complete ZIP, including its manifest and signature |
 | Preserved attachments | SHA-256 and byte count in a signed `media.saved` event; file hash in the signed ZIP manifest | The original bytes inside the verified ZIP |
 | Checkpoint | Ed25519 signature over journal length, head hash, public key, and creation time | An independent copy retained before a disputed change |
-| Run receipt | Separately signed collector measurements; also included in a signed `process.started` event | The receipt and associated journal; measurements are self-reported |
+| Run receipt | Signed record of the collector version，source-file hashes and start settings，also included in `process.started` | The receipt，associated journal and the environment evidence for the selected verification mode |
 | Readable reports: `report.html` and its parts, `report.json`, `report.pdf`, `chat.pdf` | An Ed25519 seal per file over its content; the PDF also carries a standard PDF signature (see [Readable reports](#readable-reports)) | The file as received and the trusted key fingerprint; the ZIP it describes |
 | Standalone CSV | No standalone cryptographic signature; event hashes alone are insufficient | Use the exact copy inside the verified ZIP for integrity checking |
 | Screenshots, printouts, or PDF produced by a browser | No TgWitness signature on the derivative | Keep the original verified package and document how the derivative was made |
@@ -127,9 +127,9 @@ basic groups numbers are shared by all of the account's chats and gaps are not c
 
 After reading the history, the export asks Telegram for every absent number again, by number
 (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report.
-An empty answer means Telegram has no message under that number for this account; it does not say
-whether the message was deleted or was never visible to the account. A message Telegram does return
-then was missed while reading and is added to the export, marked `found_on_recheck`.
+An empty answer records that the number is unavailable to this account at recheck time；
+it leaves the cause unspecified．A message returned on recheck is added to the export
+and marked `found_on_recheck`．
 
 Every report opens with **In brief**: one paragraph, then what the material shows and what it does
 not (who is behind an account, completeness of delivery, deletions before observation, clock time
@@ -331,8 +331,9 @@ carries `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session
 `session_revoked`, `session_expired`, `session_ended` or `not_authorized`) and the Telegram
 error; `verify.py` names the cause where the period ends.
 
-Coverage describes what this collector recorded. It is not proof that Telegram delivered
-every update during a continuous period.
+Coverage combines recorded observation periods，interruptions and message outcomes．
+Assess it together with the selected chats，period and attachment policy；continuous
+operation alone does not establish complete delivery of Telegram updates．
 
 ## Producer
 
@@ -392,32 +393,44 @@ broken sequence/chain, invalid signatures, and mismatch with a provided checkpoi
 It never extracts archive paths. It limits total declared uncompressed size to 4 GiB;
 `--max-gib N` allows larger archives made with a raised **Parameters** limit.
 
-Obtain verifier code from a trusted checkout or reviewed independent copy. A verifier
-inside an untrusted archive is executable material supplied by that archive's author;
-its presence is a portability convenience, not an independent trust anchor.
+Run verification from your installed TgWitness version or a reviewed checkout．
+The copy included in an archive supports portable use；check that copy against your
+trusted installation before executing it．
 
 A checkpoint signs a statement containing the public key, journal length, head
 hash, and creation time. The verifier can check that a later archive contains the
-same prefix. Retain a checkpoint outside the collector before a disputed change:
-an attacker controlling both archive and checkpoint can replace both.
+same prefix．Retain the checkpoint outside the collector，so later verification compares
+the archive with a reference held separately from it．
 
 ## Verification scope
 
-The signatures identify the collector key and protect the saved material. Pin its
-fingerprint independently to associate that key with the expected collector. Telegram
-updates are the input to collection; TgWitness signs its observations of those updates.
-The signatures are not signatures issued by Telegram or by message authors.
+Verification checks the archive and the collection mode used to produce it．Choose the
+mode whose trust boundary matches the case，then retain its verification inputs．
 
-A retained checkpoint or witness record detects a changed earlier journal prefix,
-including a replacement signed with a copied collector key. Records fabricated before
-their first independent checkpoint require source corroboration: a collector key holder
-can sign new material. Keep signing-key access controlled and retain references separately.
+| Collection mode | What the verifier checks | Verification inputs and trust boundary |
+| --- | --- | --- |
+| Local workspace | Record signatures，hash chain，manifest and attachment bytes | Independently retained collector fingerprint；the host administrator controls the local signing key |
+| Local workspace with an independent witness | The archive checks plus agreement with an earlier journal prefix retained by the witness | Separately trusted witness key and records；the checkpoint binds the prefix already observed |
+| [GitHub Actions capture](SEALED-ACTIONS.md) | GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity | Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow |
+| [Cloud deployment](HIGH-ASSURANCE.md) | Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record | Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider |
+| [Intel TDX confidential VM](HIGH-ASSURANCE.md#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status，binding to the collector statement，compose and OS measurements | Intel trust chain and expected deployment measurements；retain the results of every required TDX check |
 
-Assess account visibility and delivery using coverage records and controlled tests.
-Use a verified external timestamp for independent time anchoring. A sender ID identifies
-a Telegram account; link it to a person through your investigation. Program receipts and
-cloud checks describe collector-reported measurements and deployment configuration.
-See [validation results](VERIFICATION.md) for measured behavior and its scope.
+In sealed acquisition，the approved collector receives data through an authenticated
+Telegram connection inside the verified environment．Attestation binds the archive to
+that execution，so verification covers acquisition as well as later file integrity．
+This relies on the approved code and the platform trust chain listed above．
+GitHub capture verification requires a session created inside the run and rejects
+imported-session captures．
+
+The run receipt records the collector version，file hashes and startup settings．GitHub
+provenance and TDX measurements provide the environment checks；the
+[validation record](VERIFICATION.md) identifies tested configurations．
+
+TgWitness signs the observations it collects；Telegram and message authors do not issue
+these signatures．In a local workspace，material created before the first independent
+checkpoint still depends on the collector and its key holder．Coverage records describe
+the selected scope and collection outcomes，while verified external timestamps anchor
+the committed archive or journal boundary in time．
 
 ## Attachments
 
@@ -450,14 +463,15 @@ are retried, while permanent failure remains an explicit outcome.
 Each workspace has its own journal and signing identity. A process.started event includes
 a run ID, local clocks, dependency versions, source-file hashes, initial account/scope,
 and capture settings. Heartbeats include the run ID, monotonic time, and queue state.
-The process receipt can also be downloaded as a separately signed statement.
-File measurements are self-reported and are not trusted hardware attestation.
+The run receipt can also be downloaded as a separately signed statement．For verification
+of the execution environment，pair it with the GitHub attestation or TDX checks described
+in [Verification scope](#verification-scope)．
 
 Automatic checkpoints are retained locally on startup, every five minutes while
 observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal
 against the latest retained local checkpoint. This can detect a database rollback
-when the checkpoint survives; an operator controlling both can still replace both.
-Independent retention and external trusted timestamps remain separate requirements.
+when the checkpoint survives．Independent retention keeps that reference available outside
+the workspace；a verified external timestamp additionally anchors it in time．
 
 After a restart the saved Telegram update position is resumed (`catch_up_from` in
 `observation.started`) and missed updates are requested. A periodic recheck records

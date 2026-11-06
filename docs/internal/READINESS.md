@@ -6,10 +6,11 @@ qualification matrix is [Current status](../STATUS.md).
 
 ## Source and release boundary
 
-At this review, published downloads remain [0.9.0 preview](https://github.com/phishdestroy/TgWitness/releases/tag/v0.9.0).
-Do not describe subsequent main-branch features as included in those packages.
-The changelog, package version, README badge and qualification record must agree
-about which source they describe. Publication checks enforce source-version labels.
+The [current installer](https://get.destroy.tools/) publishes verified main-branch builds
+with their exact source revision in the signed manifest．The tagged
+[0.9.0 preview](https://github.com/phishdestroy/TgWitness/releases/tag/v0.9.0) is a separate package．
+The changelog，package version，README badge and qualification record identify the source
+they describe；publication checks enforce source-version labels．
 
 ## Required acceptance for the candidate
 
@@ -42,8 +43,10 @@ Vault encryption protects credentials and keys. Journal, attachments and derived
 search data require disk/volume encryption if confidentiality at rest is needed.
 Evidence archives are not resumable workspace backups.
 
-Signatures establish integrity relative to a trusted key and retained commitments.
-They do not authenticate Telegram as the source or establish legal admissibility.
+Local signatures establish integrity relative to a trusted key and retained checkpoints．
+Sealed acquisition additionally binds the archive to the approved collector's execution
+through GitHub provenance or verified TDX measurements；see
+[verification scope](../EVIDENCE.md#verification-scope) for each mode's inputs．
 
 Earlier security findings are preserved in the dated
 [container analysis](CODE-SCANNING-2026-11-01.md#remaining-container-findings).

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Describe local，witnessed，GitHub-hosted and Intel TDX collection separately，with their actual verification inputs．Remove repeated identity／certification digressions，update stale publication and WARP test descriptions，and refresh Russian guidance．Allow a bounded publication-settling interval while still requiring exact installer bytes．
+
 - Repeat gap analysis with the settings carried by the signed export，count each service-message number once，and bound account estimates to the measured interval．Require explicit whole-account scope，retain pause／resume boundaries，and interrupt expensive archive scans at their time budget．
 
 - Add missing message numbers (preview): `coverage.json`, the HTML and PDF reports, `verify.py` and the archive's `get_capture_status` measure numbers Telegram assigned and this collector never saw, per channel or supergroup and for the account-wide sequence of private chats, bots and ordinary groups during whole-account collection. Each result states whether it applies and why, lists its parameters, and anchors listed gaps to the neighbouring observations. **Parameters → Gap analysis** sets the listed gaps, the account-wide sequence and an optional service-message estimate that is never subtracted. A gap names no actor and no reason.

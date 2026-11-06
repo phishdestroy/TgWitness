@@ -244,8 +244,9 @@ verification steps for a signed TgWitness archive.
 
 </details>
 
-It only sees what the connected account sees. Messages deleted before it saw them
-and Secret Chats are out of reach, and downtime leaves gaps.
+Collect cloud-chat data available to the connected account，with the selected period，
+attachment policy and recorded collection outcomes．See the [mode comparison](docs/COLLECTION-MODES.md)
+for history，live observation and sealed acquisition．
 
 <p align="center">
   <a href="docs/README.md"><img src="docs/assets/presentation/readme-button-docs.svg" height="34" alt="Technical documentation"></a>
