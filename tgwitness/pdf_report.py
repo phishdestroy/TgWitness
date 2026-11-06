@@ -601,7 +601,7 @@ def details_lines(say, d, *, include_media=True):
         for field in ("document_id", "photo_id"):
             if type(media.get(field)) is int:
                 lines.append(say("Media ID") + ": " + str(media[field]))
-        if type(media.get("self_destruct_seconds")) is int:
+        if type(media.get("self_destruct_seconds")) is int and not media.get("ephemeral_media"):
             lines.append(say("Self-destruct timer") + ": " + report.seconds_text(say, media["self_destruct_seconds"]))
     return lines
 
@@ -712,6 +712,9 @@ def records(lay, say, events, titles, options):
             lay.text((payload.get("original_name") or say("Saved file")) + " · " + str(payload.get("mime_type") or "—")
                      + " · " + report.size_text(payload.get("size")), size=8)
             lay.text(say("File SHA-256") + ": " + payload["media_sha256"], size=6.8, color=MUTED, family="Mono")
+        if event["kind"].startswith("media.") and payload.get("ephemeral_media"):
+            from . import ephemeral
+            lay.text(ephemeral.label(say, payload["ephemeral_media"]), size=7.8, color=MUTED)
         lay.text(say("Record hash") + " · SHA-256 " + event["hash"], size=6.8, color=MUTED, family="Mono")
         lay.gap(1)
     if run:
@@ -1425,6 +1428,10 @@ def transcript(lay, say, messages, numbered=False):
                      style="B", color=WARN)
         if type(record.get("id")) is int:
             previous = record["id"] if type(previous) is not int else max(previous, record["id"])
+        if record.get("type") == "unparsed":
+            lay.text("—  " + report.unparsed_text(say, record) + "  —", size=7.8, style="B", color=WARN)
+            lay.gap(0.8)
+            continue
         sender = record.get("from") or (str(record["from_id"]) if record.get("from_id") is not None else say("Unknown"))
         head = "#" + str(record.get("id")) + "  " + report.utc_text(record.get("date")) + " · " + sender
         if record.get("selection"):
