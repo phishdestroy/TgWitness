@@ -8,11 +8,11 @@ from unittest.mock import AsyncMock
 import pytest
 from telethon.tl import types
 
-from tgwitness import chat_export, distributed_export, replica
+from tgwitness import chat_export, distributed_export, replica, telegram_client
 from tgwitness.collector import Collector, absent_numbers, message_record
 from tgwitness.message_numbers import MissingNumbers
 from tgwitness.message_selection import Selection, SelectionIndex
-from tgwitness.security import Vault
+from tgwitness.security import KeyInUse, KeyLock, Vault
 from tgwitness.store import Store
 from tools.check_export_files_stage import message
 
@@ -143,6 +143,84 @@ def test_distributed_sparse_recheck_is_bounded_and_cancellable(tmp_path, monkeyp
             index.close()
 
     asyncio.run(scenario())
+
+
+@pytest.mark.parametrize("detached", [False, True])
+def test_session_key_is_released_only_after_transport_shutdown(collector, monkeypatch, detached):
+    async def scenario():
+        key = b"export-review-synthetic-session".ljust(256, b"x")
+        connected, entered, finish = True, asyncio.Event(), asyncio.Event()
+        client = object.__new__(telegram_client.WitnessClient)
+        client.session = SimpleNamespace(auth_key=SimpleNamespace(key=key), dc_id=2)
+        client._sender = SimpleNamespace(is_connected=lambda: connected)
+        client.connection_listener = lambda state: collector.connection_changed(client, state)
+        collector.note = lambda *args: None
+        collector.client = None if detached else client
+        collector.lock_key(client)
+
+        async def disconnect(self):
+            nonlocal connected
+            entered.set()
+            await finish.wait()
+            connected = False
+
+        monkeypatch.setattr(telegram_client.TelegramClient, "_disconnect_coro", disconnect)
+        task = asyncio.ensure_future(client.disconnect())
+        try:
+            await entered.wait()
+            with pytest.raises(KeyInUse):
+                KeyLock(key)
+            # The shielded disconnect still completes if the awaiting operation is cancelled.
+            task.cancel()
+            with pytest.raises(asyncio.CancelledError):
+                await task
+            with pytest.raises(KeyInUse):
+                KeyLock(key)
+            finish.set()
+            for _ in range(10):
+                await asyncio.sleep(0)
+                if collector.key_lock is None:
+                    break
+            assert not connected and collector.key_lock is None
+            KeyLock(key).close()
+        finally:
+            finish.set()
+            collector.unlock_key()
+
+    asyncio.run(scenario())
+
+
+def test_old_connection_cannot_unlock_a_different_session(collector):
+    key = b"new-key-for-the-current-session".ljust(256, b"x")
+    current = SimpleNamespace(session=SimpleNamespace(auth_key=SimpleNamespace(key=key), dc_id=2))
+    old = SimpleNamespace(session=SimpleNamespace(auth_key=SimpleNamespace(key=b"old-key"), dc_id=2))
+    collector.note = lambda *args: None
+    collector.lock_key(current)
+    try:
+        collector.connection_changed(old, "closed")
+        with pytest.raises(KeyInUse):
+            KeyLock(key)
+        collector.connection_changed(current, "closed")
+        KeyLock(key).close()
+    finally:
+        collector.unlock_key()
+
+
+def test_new_login_key_is_reserved_after_connect(collector):
+    key = b"synthetic-key-created-during-connect".ljust(256, b"x")
+    client = SimpleNamespace(session=SimpleNamespace(auth_key=None, dc_id=2))
+    collector.note = lambda *args: None
+    collector.lock_key(client)
+    assert collector.key_lock is None
+    client.session.auth_key = SimpleNamespace(key=key)
+    try:
+        collector.connection_changed(client, "opened")
+        with pytest.raises(KeyInUse):
+            KeyLock(key)
+        collector.connection_changed(client, "closed")
+        KeyLock(key).close()
+    finally:
+        collector.unlock_key()
 
 
 if __name__ == "__main__":

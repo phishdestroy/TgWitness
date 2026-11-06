@@ -1719,7 +1719,10 @@ class Collector:
 
     def connection_changed(self, client, state):
         role = "current" if client is self.client else "candidate" if client is self.login_client else "other"
-        if state == "closed" and role in ("current", "candidate"):
+        key = getattr(getattr(getattr(client, "session", None), "auth_key", None), "key", None)
+        if state == "opened":
+            self.lock_key(client)  # A new login receives its auth key during connect.
+        if state == "closed" and self.key_lock is not None and self.key_lock[0] == key:
             self.unlock_key()
         self.note("connection." + state, {"role": role, "route": self.route_receipt(),
                                           "dc_id": getattr(client.session, "dc_id", None)})
