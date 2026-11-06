@@ -6307,5 +6307,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "{time}까지 메시지 전송, 채팅 참여 및 봇 버튼 사용이 비활성화됩니다. 읽기는 계속됩니다.",
   "sending, joining and bot buttons are off; reading continues": "메시지 전송, 채팅 참여 및 봇 버튼 기능이 비활성화됨; 읽기는 계속됨",
   "Queue": "대기열",
-  "Same exit address as other accounts: {n}": "다른 계정과 동일한 출구 주소: {n}"
+  "Same exit address as other accounts: {n}": "다른 계정과 동일한 출구 주소: {n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "고정 해제 시 메시지 수준의 기록은 남지 않으며, 스냅샷을 통해 어떤 메시지의 고정이 해제되었는지 확인할 수 있습니다.",
+  "Chat state": "채팅 상태",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0을 설정하면 채팅 상태 스냅샷 기능이 비활성화됩니다. 각 스냅샷은 일반 클라이언트에 표시되는 내용을 읽어들이며, 소스당 몇 번의 요청을 수행합니다.",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "선물은 서비스 메시지 없이 숨기거나, 변환하거나, 업그레이드하거나, 환불할 수 있습니다.",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "활성화된 모든 소스의 제목, 설명, 회원 수, 고정된 메시지, 관리자 및 선물에 대한 주기적인 스냅샷과 이전 스냅샷과의 차이점.",
+  "Read administrators and their rights": "관리자 및 해당 권한 알아보기",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "채널 관리자가 아닌 회원에게는 이 목록의 열람이 거부될 수 있으며, 이 경우 스냅샷에 해당 내용이 표시됩니다.",
+  "A short record keeps the time of each check; turn off to record changes only.": "'짧은 기록' 모드는 각 확인 시점을 기록합니다. 변경 사항만 기록하려면 이 기능을 해제하십시오.",
+  "Snapshot each source every": "각 소스에 대해 매",
+  "Record checks that found no change": "변경 사항이 발견되지 않은 검사 기록",
+  "Read pinned messages": "고정된 메시지 읽기",
+  "Read gifts shown on channels and profiles": "채널 및 프로필에 표시된 선물 읽기",
+  "Pause between sources": "소스 간 일시 정지"
 }

@@ -41,6 +41,8 @@ GROUPS = (
     ("exports", "Exports & history", "Size limits of history snapshots, signed archives and browser downloads."),
     ("gaps", "Gap analysis", "Missing message numbers in coverage, reports and the archive's capture status. Telegram "
                              "assigns the numbers; a gap names no actor and no reason."),
+    ("chatstate", "Chat state", "Periodic snapshots of title, description, member counts, pinned messages, administrators "
+                                "and gifts of every enabled source, with differences from the previous snapshot."),
     ("connection", "Telegram connection", "Timeouts and retries. Request timeouts and retries apply the next "
                                           "time the account connects."),
     ("proxies", "Automatic MTProxy", "When this account's listed proxy is replaced. List downloads and checks are "
@@ -60,6 +62,18 @@ PARAMETERS = (
     Parameter("gap_service_estimate", "gaps", False, label="Add a service-message estimate",
               help="How many missing numbers would be service messages at their observed share. An estimate "
                    "only; it is never subtracted from the missing count."),
+    Parameter("chat_state_minutes", "chatstate", 720, 0, 10080, "minutes", "Snapshot each source every",
+              "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few "
+              "requests per source."),
+    Parameter("chat_state_pause_seconds", "chatstate", 3, 1, 300, "seconds", "Pause between sources"),
+    Parameter("chat_state_pinned", "chatstate", True, label="Read pinned messages",
+              help="Unpinning leaves no message-level record; snapshots show which messages stopped being pinned."),
+    Parameter("chat_state_admins", "chatstate", True, label="Read administrators and their rights",
+              help="Channels may refuse this list to members who are not administrators; the snapshot then says so."),
+    Parameter("chat_state_gifts", "chatstate", True, label="Read gifts shown on channels and profiles",
+              help="Gifts can be hidden, converted, upgraded or refunded without a service message."),
+    Parameter("chat_state_unchanged", "chatstate", True, label="Record checks that found no change",
+              help="A short record keeps the time of each check; turn off to record changes only."),
     Parameter("board_max_cards", "exports", 10000, 100, 100000, "cards", "Case Board card soft limit",
               "Warn after this many cards. Existing annotations remain available."),
     Parameter("board_max_comments", "exports", 50000, 100, 500000, "comments", "Case Board comment soft limit"),

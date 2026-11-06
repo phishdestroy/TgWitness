@@ -6346,5 +6346,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "{time} পর্যন্ত পাঠানো, চ্যাটে যোগদান এবং বট বোতাম বন্ধ থাকবে; পড়া চালিয়ে যেতে থাকবে",
   "sending, joining and bot buttons are off; reading continues": "বার্তা পাঠানো, চ্যাটে যোগদান এবং বট বোতাম বন্ধ; পড়া চালিয়ে যাচ্ছে",
   "Queue": "সারি",
-  "Same exit address as other accounts: {n}": "অন্যান্য অ্যাকাউন্টের মতো একই প্রস্থান ঠিকানা: {n}"
+  "Same exit address as other accounts: {n}": "অন্যান্য অ্যাকাউন্টের মতো একই প্রস্থান ঠিকানা: {n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "আনপিনিং কোনো মেসেজ-স্তরের রেকর্ড রাখে না; স্ন্যাপশটগুলো দেখায় কোন মেসেজগুলো পিন করা বন্ধ হয়েছে।",
+  "Chat state": "চ্যাট অবস্থা",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 চ্যাট-স্টেট স্ন্যাপশট বন্ধ করে। প্রতিটি স্ন্যাপশট একটি সাধারণ ক্লায়েন্ট যা দেখায় তা পড়ে এবং প্রতিটি উত্স থেকে কয়েকটি অনুরোধ নেয়।",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "উপহারগুলো কোনো সার্ভিস মেসেজ ছাড়াই লুকানো, রূপান্তরিত, আপগ্রেড বা ফেরত দেওয়া যেতে পারে।",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "প্রতিটি সক্রিয় উৎসের শিরোনাম, বর্ণনা, সদস্য সংখ্যা, পিন করা বার্তা, প্রশাসক এবং উপহারের নিয়মিত স্ন্যাপশট, পূর্ববর্তী স্ন্যাপশটের সাথে পার্থক্যসহ।",
+  "Read administrators and their rights": "প্রশাসকদের এবং তাদের অধিকারসমূহ পড়ুন",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "চ্যানেলগুলো প্রশাসক নয় এমন সদস্যদের এই তালিকা দেখানো অস্বীকার করতে পারে; তখন স্ন্যাপশটে সেটি উল্লেখ করা হবে।",
+  "A short record keeps the time of each check; turn off to record changes only.": "একটি সংক্ষিপ্ত রেকর্ড প্রতিটি চেকের সময় সংরক্ষণ করে; পরিবর্তন রেকর্ড করতে চাইলে এটি বন্ধ করুন।",
+  "Snapshot each source every": "প্রতিটি উৎসকে প্রতিবার স্্ন্যাপশট করুন",
+  "Record checks that found no change": "কোনও পরিবর্তন পাওয়া যায়নি এমন রেকর্ড চেকগুলি",
+  "Read pinned messages": "পিন করা বার্তাগুলো পড়ুন",
+  "Read gifts shown on channels and profiles": "চ্যানেল এবং প্রোফাইলে প্রদর্শিত উপহারগুলো পড়ুন",
+  "Pause between sources": "উৎসগুলির মধ্যে বিরতি"
 }

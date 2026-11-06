@@ -6346,5 +6346,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "yuborish, qo'shilish va bot tugmalari {time}gacha o'chirilgan; o'qish davom etadi",
   "sending, joining and bot buttons are off; reading continues": "jo'natish, chatlarga qo'shilish va bot tugmalari o'chirilgan; o'qish davom etadi",
   "Queue": "Navbat",
-  "Same exit address as other accounts: {n}": "Boshqa hisoblar bilan bir xil chiqish manzili: {n}"
+  "Same exit address as other accounts: {n}": "Boshqa hisoblar bilan bir xil chiqish manzili: {n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Pinlashni bekor qilish xabar darajasida hech qanday yozuv qoldirmaydi; snapshotlar qaysi xabarlarning pinlashdan chiqarilganini ko'rsatadi.",
+  "Chat state": "Suhbat holati",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 chat holati snapshotlarini o'chiradi. Har bir snapshot oddiy klient ko'rsatadigan ma'lumotni o'qiydi va har bir manba bo'yicha bir nechta so'rov yuboradi.",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "Sovg'alar xizmat xabarisiz yashirilishi, konvertatsiya qilinishi, yangilanishi yoki qaytarilishi mumkin.",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Har bir yoqitilgan manbaning sarlavhasi, tavsifi, a'zo soni, pinlangan xabarlari, administratorlari va sovg'alari bo'yicha muntazam snapshotlar hamda ularning avvalgi snapshotga nisbatan farqlari.",
+  "Read administrators and their rights": "Administratorlar va ularning huquqlarini o'qing",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Kanal ma'mur bo'lmagan a'zolarga ushbu ro'yxatni ko'rishni rad etishi mumkin; snapshot shunda shuni ko'rsatadi.",
+  "A short record keeps the time of each check; turn off to record changes only.": "Qisqa yozuv har bir tekshiruv vaqtini saqlaydi; o'zgarishlarni qayd etish uchun o'chirib qo'ying.",
+  "Snapshot each source every": "Har bir manbani har",
+  "Record checks that found no change": "O'zgarish topilmagan tekshiruvlarni qayd eting",
+  "Read pinned messages": "Biriktirilgan xabarlarni o'qing",
+  "Read gifts shown on channels and profiles": "Kanal va profillarda ko'rsatilgan sovg'alarni o'qing",
+  "Pause between sources": "Manbalar orasida tanaffus"
 }

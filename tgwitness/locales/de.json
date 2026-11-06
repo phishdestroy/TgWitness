@@ -6369,5 +6369,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "Das Senden von Nachrichten, das Beitreten zu Chats und das Betätigen von Bot-Schaltflächen sind bis {time} deaktiviert; das Lesen wird fortgesetzt",
   "sending, joining and bot buttons are off; reading continues": "Das Senden, der Beitritt zu Chats und die Bot-Schaltflächen sind deaktiviert; das Lesen wird fortgesetzt",
   "Queue": "Warteschlange",
-  "Same exit address as other accounts: {n}": "Gleiche Ausgangsadresse wie bei anderen Konten: {n}"
+  "Same exit address as other accounts: {n}": "Gleiche Ausgangsadresse wie bei anderen Konten: {n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Das Aufheben der Anheftung hinterlässt keine Aufzeichnung auf Nachrichtenebene; Snapshots zeigen, welche Nachrichten nicht mehr angeheftet sind.",
+  "Chat state": "Chat-Status",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 deaktiviert Momentaufnahmen des Chat-Status. Jede Momentaufnahme gibt wieder, was ein gewöhnlicher Client anzeigt, und erfordert einige wenige Anfragen pro Quelle.",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "Geschenke können ohne Benachrichtigung ausgeblendet, umgewandelt, aufgewertet oder erstattet werden.",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Regelmäßige Momentaufnahmen von Titel, Beschreibung, Mitgliederzahlen, angehefteten Nachrichten, Administratoren und Geschenken jeder aktivierten Quelle, einschließlich der Unterschiede zum vorherigen Momentaufnahme.",
+  "Read administrators and their rights": "Administratoren und ihre Rechte",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Kanäle können Mitgliedern, die keine Administratoren sind, den Zugriff auf diese Liste verweigern; dies wird dann im Snapshot vermerkt.",
+  "A short record keeps the time of each check; turn off to record changes only.": "Ein kurzer Eintrag hält den Zeitpunkt jeder Überprüfung fest; deaktivieren Sie diese Option, um nur Änderungen zu protokollieren.",
+  "Snapshot each source every": "Erstellen Sie von jeder Quelle alle",
+  "Record checks that found no change": "Protokollieren Sie Prüfungen, bei denen keine Änderungen festgestellt wurden",
+  "Read pinned messages": "Angepinnte Nachrichten lesen",
+  "Read gifts shown on channels and profiles": "Geschenke lesen, die in Kanälen und Profilen angezeigt werden",
+  "Pause between sources": "Pause zwischen den Quellen"
 }

@@ -6346,5 +6346,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "{time}'e kadar mesaj gönderme, sohbetlere katılma ve bot düğmeleri devre dışıdır; okuma devam eder",
   "sending, joining and bot buttons are off; reading continues": "mesaj gönderme, sohbetlere katılma ve bot düğmeleri devre dışıdır; okuma devam eder",
   "Queue": "Kuyruk",
-  "Same exit address as other accounts: {n}": "Diğer hesaplarla aynı çıkış adresi: {n}"
+  "Same exit address as other accounts: {n}": "Diğer hesaplarla aynı çıkış adresi: {n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Sabitlemeyi kaldırmak mesaj düzeyinde herhangi bir kayıt bırakmaz; anlık görüntüler hangi mesajların sabitlenmesinin kaldırıldığını gösterir.",
+  "Chat state": "Sohbet durumu",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 değeri, sohbet durumu anlık görüntülerini devre dışı bırakır. Her anlık görüntü, sıradan bir istemcinin gösterdiği içeriği okur ve kaynak başına birkaç istek alır.",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "Hediyeler, hizmet mesajı gönderilmeden gizlenebilir, dönüştürülebilir, yükseltilebilir veya iade edilebilir.",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Etkinleştirilmiş her kaynağın başlığı, açıklaması, üye sayısı, sabitlenmiş mesajları, yöneticileri ve hediyelerine ilişkin periyodik anlık görüntüler ile bir önceki anlık görüntüye göre farklılıklar.",
+  "Read administrators and their rights": "Yöneticiler ve hakları hakkında bilgi edinin",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Kanallar, yönetici olmayan üyelere bu listeyi göstermeyebilir; bu durumda anlık görüntüde bu durum belirtilir.",
+  "A short record keeps the time of each check; turn off to record changes only.": "Kısa kayıt seçeneği, her kontrolün zamanını kaydeder; yalnızca değişiklikleri kaydetmek için bu seçeneği kapatın.",
+  "Snapshot each source every": "Her kaynağı her",
+  "Record checks that found no change": "Herhangi bir değişiklik tespit edilmeyen kontroller",
+  "Read pinned messages": "Sabitlenmiş mesajları okuyun",
+  "Read gifts shown on channels and profiles": "Kanallarda ve profillerde gösterilen hediyeleri okuyun",
+  "Pause between sources": "Kaynaklar arasında duraklama"
 }

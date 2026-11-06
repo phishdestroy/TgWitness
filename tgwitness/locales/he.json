@@ -6385,5 +6385,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "שליחה, הצטרפות וכפתורי הבוט מושבתים עד {time}; הקריאה נמשכת",
   "sending, joining and bot buttons are off; reading continues": "שליחה, הצטרפות וכפתורי הבוט מושבתים; הקריאה נמשכת",
   "Queue": "תור",
-  "Same exit address as other accounts: {n}": "כתובת יציאה זהה לזו של חשבונות אחרים: {n}"
+  "Same exit address as other accounts: {n}": "כתובת יציאה זהה לזו של חשבונות אחרים: {n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "ביטול ההצמדה אינו מותיר תיעוד ברמת ההודעה; תמונות מצב מראות אילו הודעות הפסיקו להיות מוצמדות.",
+  "Chat state": "מצב הצ'אט",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 מכבה את צילום מצב הצ'אט. כל צילום מציג את מה שהלקוח הרגיל מציג ודורש מספר בקשות מועט לכל מקור.",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "ניתן להסתיר, להמיר, לשדרג או להחזיר מתנות ללא הודעת שירות.",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "תמונות מצב תקופתיות של כותרת, תיאור, מספר חברים, הודעות מוצמדות, מנהלים ומתנות של כל מקור מופעל, עם ציון ההבדלים ביחס לתמונת המצב הקודמת.",
+  "Read administrators and their rights": "קראו על מנהלים וזכויותיהם",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "ערוצים עשויים למנוע גישה לרשימה זו מחברים שאינם מנהלים; במקרה כזה, תופיע הערה מתאימה בתמונת המצב.",
+  "A short record keeps the time of each check; turn off to record changes only.": "רישום קצר מתעד את השעה של כל בדיקה; יש לכבות את האפשרות כדי לתעד שינויים בלבד.",
+  "Snapshot each source every": "יש ליצור תמונת מצב של כל מקור כל",
+  "Record checks that found no change": "תיעוד בדיקות שלא מצאו שינויים",
+  "Read pinned messages": "קראו הודעות מוצמדות",
+  "Read gifts shown on channels and profiles": "קראו את המתנות המוצגות בערוצים ובפרופילים",
+  "Pause between sources": "הפסקה בין מקורות"
 }

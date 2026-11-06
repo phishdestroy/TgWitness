@@ -6307,5 +6307,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "các chức năng gửi tin nhắn, tham gia cuộc trò chuyện và nhấn nút bot bị tắt cho đến {time}; việc đọc vẫn tiếp tục",
   "sending, joining and bot buttons are off; reading continues": "các chức năng gửi tin nhắn, tham gia cuộc trò chuyện và nhấn nút bot bị tắt; việc đọc vẫn tiếp tục",
   "Queue": "Hàng đợi",
-  "Same exit address as other accounts: {n}": "Địa chỉ thoát giống với các tài khoản khác: {n}"
+  "Same exit address as other accounts: {n}": "Địa chỉ thoát giống với các tài khoản khác: {n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Việc gỡ ghim không để lại bản ghi ở cấp độ tin nhắn; các bản chụp nhanh cho thấy những tin nhắn nào đã ngừng được ghim.",
+  "Chat state": "Trạng thái cuộc trò chuyện",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 tắt tính năng chụp nhanh trạng thái cuộc trò chuyện. Mỗi bản chụp nhanh đọc những gì một ứng dụng khách thông thường hiển thị và thực hiện một vài yêu cầu cho mỗi nguồn.",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "Quà tặng có thể được ẩn, chuyển đổi, nâng cấp hoặc hoàn tiền mà không cần thông báo dịch vụ.",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Các bản chụp nhanh định kỳ về tiêu đề, mô tả, số lượng thành viên, tin nhắn được ghim, quản trị viên và quà tặng của mọi nguồn đã được kích hoạt, kèm theo sự khác biệt so với bản chụp nhanh trước đó.",
+  "Read administrators and their rights": "Xem danh sách các quản trị viên và quyền hạn của họ",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Các kênh có thể từ chối hiển thị danh sách này cho các thành viên không phải là quản trị viên; bản chụp nhanh sẽ ghi rõ điều này.",
+  "A short record keeps the time of each check; turn off to record changes only.": "Chế độ ghi ngắn sẽ ghi lại thời gian của mỗi lần kiểm tra; tắt chế độ này để chỉ ghi lại các thay đổi.",
+  "Snapshot each source every": "Tạo bản chụp nhanh từng nguồn mỗi",
+  "Record checks that found no change": "Ghi lại các lần kiểm tra không phát hiện thấy thay đổi",
+  "Read pinned messages": "Đọc các tin nhắn được ghim",
+  "Read gifts shown on channels and profiles": "Đọc các món quà được hiển thị trên các kênh và hồ sơ",
+  "Pause between sources": "Dừng lại giữa các nguồn"
 }

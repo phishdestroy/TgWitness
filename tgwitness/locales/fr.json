@@ -6346,5 +6346,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "L'envoi de messages, la participation aux discussions et les boutons des bots sont désactivés jusqu'à {time} ; la lecture se poursuit",
   "sending, joining and bot buttons are off; reading continues": "L'envoi de messages, la participation aux discussions et les boutons des bots sont désactivés ; la lecture se poursuit",
   "Queue": "File d'attente",
-  "Same exit address as other accounts: {n}": "Même adresse de sortie que d'autres comptes : {n}"
+  "Same exit address as other accounts: {n}": "Même adresse de sortie que d'autres comptes : {n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Le dépinage ne laisse aucune trace au niveau des messages ; les instantanés indiquent quels messages ont cessé d'être épinglés.",
+  "Chat state": "État de la conversation",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "La valeur 0 désactive les instantanés de l'état des discussions. Chaque instantané lit ce qu'affiche un client standard et nécessite quelques requêtes par source.",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "Les cadeaux peuvent être masqués, convertis, améliorés ou remboursés sans message de service.",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Instantanés périodiques du titre, de la description, du nombre de membres, des messages épinglés, des administrateurs et des cadeaux de chaque source activée, avec les différences par rapport à l'instantané précédent.",
+  "Read administrators and their rights": "Liste des administrateurs et de leurs droits",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Les chaînes peuvent refuser l'accès à cette liste aux membres qui ne sont pas administrateurs ; l'instantané l'indique alors.",
+  "A short record keeps the time of each check; turn off to record changes only.": "Un enregistrement succinct consigne l'heure de chaque vérification ; désactivez cette option pour n'enregistrer que les modifications.",
+  "Snapshot each source every": "Effectuer un instantané de chaque source toutes les",
+  "Record checks that found no change": "Enregistrer les vérifications n'ayant révélé aucun changement",
+  "Read pinned messages": "Lire les messages épinglés",
+  "Read gifts shown on channels and profiles": "Lire les cadeaux affichés sur les chaînes et les profils",
+  "Pause between sources": "Pause entre les sources"
 }

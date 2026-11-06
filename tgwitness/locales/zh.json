@@ -6307,5 +6307,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "发送消息、加入聊天和点击机器人按钮的功能将禁用至{time}；阅读功能仍可继续",
   "sending, joining and bot buttons are off; reading continues": "发送、加入和机器人按钮已禁用；阅读功能仍可继续",
   "Queue": "队列",
-  "Same exit address as other accounts: {n}": "与其他账户相同的出口地址：{n}"
+  "Same exit address as other accounts: {n}": "与其他账户相同的出口地址：{n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "取消置顶不会留下消息级别的记录；快照会显示哪些消息不再被置顶。",
+  "Chat state": "聊天状态",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 表示关闭聊天状态快照功能。每次快照都会读取普通客户端显示的内容，并针对每个消息源发送少量请求。",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "礼物可以被隐藏、转换、升级或退款，且无需发送服务消息。",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "定期对每个已启用的消息源的标题、描述、成员数量、置顶消息、管理员和礼物进行快照，并显示与上一次快照的差异。",
+  "Read administrators and their rights": "管理员及其权限说明",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "频道可拒绝向非管理员成员提供此列表；此时快照中会注明此情况。",
+  "A short record keeps the time of each check; turn off to record changes only.": "简短记录会保存每次检查的时间；关闭此功能仅记录更改内容。",
+  "Snapshot each source every": "每隔一段时间对每个来源进行快照",
+  "Record checks that found no change": "记录未发现变更的检查结果",
+  "Read pinned messages": "阅读置顶消息",
+  "Read gifts shown on channels and profiles": "读取频道和个人资料中显示的礼物",
+  "Pause between sources": "不同来源之间的停顿"
 }

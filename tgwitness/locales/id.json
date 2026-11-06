@@ -6307,5 +6307,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "pengiriman, bergabung, dan tombol bot dinonaktifkan hingga {time}; pembacaan tetap berlanjut",
   "sending, joining and bot buttons are off; reading continues": "pengiriman, bergabung, dan tombol bot dinonaktifkan; pembacaan tetap berlanjut",
   "Queue": "Antrian",
-  "Same exit address as other accounts: {n}": "Alamat keluar yang sama dengan akun lain: {n}"
+  "Same exit address as other accounts: {n}": "Alamat keluar yang sama dengan akun lain: {n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Melepaskan penandaan tidak meninggalkan catatan pada tingkat pesan; tangkapan layar menunjukkan pesan mana yang tidak lagi ditandai.",
+  "Chat state": "Status obrolan",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 menonaktifkan snapshot status obrolan. Setiap snapshot membaca apa yang ditampilkan oleh klien biasa dan melakukan beberapa permintaan per sumber.",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "Hadiah dapat disembunyikan, dikonversi, ditingkatkan, atau dikembalikan tanpa pesan layanan.",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Cuplikan berkala mengenai judul, deskripsi, jumlah anggota, pesan yang disematkan, administrator, dan hadiah dari setiap sumber yang diaktifkan, beserta perbedaannya dari cuplikan sebelumnya.",
+  "Read administrators and their rights": "Baca tentang administrator dan hak akses mereka",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Saluran dapat menolak daftar ini bagi anggota yang bukan administrator; dalam hal ini, snapshot akan mencantumkan hal tersebut.",
+  "A short record keeps the time of each check; turn off to record changes only.": "Catatan singkat mencatat waktu setiap pemeriksaan; nonaktifkan untuk hanya mencatat perubahan.",
+  "Snapshot each source every": "Ambil snapshot setiap sumber setiap",
+  "Record checks that found no change": "Catat pemeriksaan yang tidak menemukan perubahan",
+  "Read pinned messages": "Baca pesan yang disematkan",
+  "Read gifts shown on channels and profiles": "Baca hadiah yang ditampilkan di saluran dan profil",
+  "Pause between sources": "Jeda antar sumber"
 }

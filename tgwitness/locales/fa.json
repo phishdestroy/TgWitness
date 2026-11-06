@@ -6346,5 +6346,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "ارسال، پیوستن و دکمه‌های ربات تا زمان {time} غیرفعال هستند؛ خواندن ادامه دارد",
   "sending, joining and bot buttons are off; reading continues": "ارسال، پیوستن و دکمه‌های ربات غیرفعال هستند؛ خواندن ادامه دارد",
   "Queue": "صف",
-  "Same exit address as other accounts: {n}": "آدرس خروجی مشابه حساب‌های دیگر: {n}"
+  "Same exit address as other accounts: {n}": "آدرس خروجی مشابه حساب‌های دیگر: {n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "بازکردن پین هیچ سوابقی در سطح پیام باقی نمی‌گذارد؛ اسنپ‌شات‌ها نشان می‌دهند کدام پیام‌ها دیگر پین نشده‌اند.",
+  "Chat state": "وضعیت چت",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "۰ اسنپ‌شات‌های وضعیت چت را غیرفعال می‌کند. هر اسنپ‌شات آنچه را که یک کلاینت معمولی نمایش می‌دهد می‌خواند و چند درخواست را از هر منبع دریافت می‌کند.",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "هدایا را می‌توان بدون پیام خدماتی پنهان، تبدیل، ارتقا یا بازپرداخت کرد.",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "عکس‌های دوره‌ای از عنوان، توضیحات، تعداد اعضا، پیام‌های سنجاق‌شده، مدیران و هدایای هر منبع فعال، همراه با تفاوت‌ها نسبت به عکس قبلی.",
+  "Read administrators and their rights": "مدیران و حقوق آن‌ها را بخوانید",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "کانال‌ها ممکن است این فهرست را از اعضایی که مدیر نیستند محروم کنند؛ در آن صورت اسنپ‌شات این موضوع را اعلام می‌کند.",
+  "A short record keeps the time of each check; turn off to record changes only.": "یک رکورد کوتاه زمان هر بررسی را ثبت می‌کند؛ آن را خاموش کنید تا فقط تغییرات ثبت شوند.",
+  "Snapshot each source every": "هر منبع را هر",
+  "Record checks that found no change": "ثبت بررسی‌هایی که هیچ تغییری یافتند",
+  "Read pinned messages": "پیام‌های سنجاق‌شده را بخوانید",
+  "Read gifts shown on channels and profiles": "هدایای نمایش‌داده‌شده در کانال‌ها و پروفایل‌ها را بخوانید",
+  "Pause between sources": " مکث بین منابع"
 }

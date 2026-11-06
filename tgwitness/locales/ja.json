@@ -6307,5 +6307,18 @@
   "sending, joining and bot buttons are off until {time}; reading continues": "{time}までは、メッセージの送信、チャットへの参加、ボットボタンの操作が利用できません。閲覧は継続されます",
   "sending, joining and bot buttons are off; reading continues": "送信、チャットへの参加、ボットボタンはオフ；閲覧は継続されます",
   "Queue": "キュー",
-  "Same exit address as other accounts: {n}": "他のアカウントと同じ出口アドレス：{n}"
+  "Same exit address as other accounts: {n}": "他のアカウントと同じ出口アドレス：{n}",
+  "Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "ピン留めを解除してもメッセージレベルの記録は残りません。スナップショットには、ピン留めが解除されたメッセージが表示されます。",
+  "Chat state": "チャットの状態",
+  "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 に設定すると、チャット状態のスナップショットがオフになります。各スナップショットは、通常のクライアントに表示される内容を読み取り、ソースごとに数回のリクエストを行います。",
+  "Gifts can be hidden, converted, upgraded or refunded without a service message.": "ギフトは、サービスメッセージを送ることなく、非表示にしたり、変換したり、アップグレードしたり、払い戻したりすることができます。",
+  "Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "有効化されているすべてのソースについて、タイトル、説明、メンバー数、固定メッセージ、管理者、ギフトの定期的なスナップショットを、前回のスナップショットとの差異とともに取得します。",
+  "Read administrators and their rights": "管理者とその権限について",
+  "Channels may refuse this list to members who are not administrators; the snapshot then says so.": "チャンネルによっては、管理者以外のメンバーに対してこのリストの閲覧を拒否する場合があります。その場合は、スナップショットにその旨が記載されます。",
+  "A short record keeps the time of each check; turn off to record changes only.": "「short record」モードでは、各チェックの時刻が記録されます。変更内容のみを記録したい場合は、この機能をオフにしてください。",
+  "Snapshot each source every": "各ソースを",
+  "Record checks that found no change": "変更が確認されなかったチェックを記録する",
+  "Read pinned messages": "固定されたメッセージを読む",
+  "Read gifts shown on channels and profiles": "チャンネルやプロフィールに表示されている「ギフト」を読み取る",
+  "Pause between sources": "ソース間の間隔"
 }
