@@ -101,7 +101,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/inves
 | ایک ہی محفوظ شدہ فائل | میڈیا رسیدیں #151 اور #209 مکمل ہو چکی ہیں | محفوظ شدہ بائٹس کے لیے مکمل SHA-256 ویلیوز مطابقت رکھتے ہیں۔ |
 | چینل کی نسبت | #101 اور #188 | بغیر معتبر بھیجنے والے کے صارف 71001 کو کسی چینل پوسٹ کا مصنف نہ ٹھہرایا جائے |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+منسلک ہیشز اور ان کے متعلقہ پیغام حوالہ جات کا موازنہ کریں، اور ان ریکارڈز میں فراہم کردہ ٹیلیگرام آئی ڈیز کے مطابق اکاؤنٹ ٹائم لائنز کو گروپ میں رکھیں۔
 
 [کیس بورڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/) پر ٹیم کے کام کرنے کے نوٹس رکھیں: ان ریکارڈز کو بک مارک کریں جن پر آپ انحصار کرتے ہیں، جیسے #146، #188 اور #205، درست منزل والی سٹرنگ کو نمایاں کریں، اور دو ریکارڈز کے درمیان یا کسی مخصوص وقت کی حد میں ہر ریکارڈ شدہ عمل کا ایک حصہ محفوظ کریں۔ نوٹس اور اسٹیٹس ٹیم کے جائزے کو اپنی دستخط شدہ تاریخ میں برقرار رکھتے ہیں، جو ماخذ مشاہدات سے الگ طور پر قابل شناخت ہیں۔
 
@@ -161,6 +161,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | بوٹ کے ذریعے چلایا گیا آرڈر/ادائیگی کا تنازعہ | انٹری کا اعلان → محفوظ شدہ لنک کا پیش نظارہ → بوٹ کے آغاز کا پیرامیٹر → پیغام اور کی بورڈ ورژنز → پینل کال بیک رسیدیں → نجی/گروپ فالو اپ | مشاہدہ شدہ پیشکش/جواب کے اوقات اور تصدیق شدہ ذرائع؛ صرف ایک ادائیگی کا لنک ادائیگی ثابت نہیں کرتا۔ |
 | واقعات کے بعد پیغامات حذف کیے گئے | تمام متاثرہ چیٹس → محفوظ شدہ اصل پیغامات/ترمیمات → حذف یا دوبارہ چیک پر غائب ہونے کے نتائج → محفوظ شدہ میڈیا → کوریج اور دیگر اکاؤنٹ کے نقطۂ نظر | محفوظ شدہ ورژنز اور واضح نامعلوم وقفے؛ کوئی من گھڑا حذف کرنے والا کردار نہیں |
-| ایک شرکاء چیٹس میں نام تبدیل کرتا ہے | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| ایک شرکاء چیٹس میں نام تبدیل کرتا ہے | عددی بھیجنے والا شناختی نمبر → نام/صارف نام کی تاریخ → جوابات → دیگر مشاہدہ شدہ چیٹس → حوالہ شدہ مقامات/فائلیں | ایک ٹیلیگرام اکاؤنٹ کی سرگرمیوں کا ٹائم لائن جس میں اس کے ماخذ ریکارڈز کے لنکس شامل ہیں۔ |
 
 [جمع کرنے کا حوالہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/) · [افراد کے پروفائل کی تصدیق](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#people-profiles) · [شواہد کی حوالگی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#investigation-handoff) · [تصدیق مکمل](https://phishdestroy.github.io/TgWitness/ur/docs/reference/verification/)

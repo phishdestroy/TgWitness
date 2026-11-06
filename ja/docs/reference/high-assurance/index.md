@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-
 
 Hetzner または Phala Cloud 上の 24 時間 365 日稼働のシールドサーバー、Gateway DNS、および第三者が再現可能な検証手順。
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+高信頼性デプロイメントでは、アーカイブの検証に加え、収集環境に対する独立したチェックが 追加されます。レビュー担当者は、クラウドプロバイダーおよびCloudflareが保持する デプロイメントおよびアクセス記録を照会し、Intel TDXデプロイメントでは、コレクターの 環境に対するハードウェア認証が追加されます。
 
 通常のローカル環境およびDockerでの使用方法は変更ありません。 `python -m tgwitness.cloud`を使用してデプロイしない限り、ここで実行されるものはありません。また、コレクターはデプロイ設定で指定された場合にのみホストを読み取ります。 `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ High-assurance deployment adds independent checks of the collection environment 
 | 署名鍵はそのサーバー上で作成されました | この鍵は、プロバイダのサーバーIDと、受信したcloud-initのハッシュ名を記載したステートメントに署名します。 | Collector：プロバイダーとの照合済み |
 | このジャーナルは、そのキーおよびサーバーに属しています | 証拠ZIP内のすべてのプロセス開始には、そのサーバーのホスト測定値が含まれています。 | 証拠 ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+このコレクターは、SSHの状態、セッション、ログイン履歴、および起動情報を、署名付き プロセス起動記録および `host.state` レコードに記録します。通常のVM上では、これらはローカルなインベントリ レコードとなり、レビュー担当者はこれをプロバイダーの独立した記録と比較します。以下の Intel TDX展開では、さらにハードウェアベースの測定値の検証も行われます。
 
 ## プロバイダー
 
@@ -269,8 +269,8 @@ Gateway DNSはシステムリゾルバをカバーします。ポート443経由
 
 Cloudflareは、Telegramの暗号化内部、Telegramアカウントに紐づく他のデバイス （エビデンスモードのデバイスリストはTelegram側からそれらを記録します）、およびプロバイダーのハイパーバイザーを閲覧することはできません。
 
-## Reading the deployment result
+## デプロイ結果の確認
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+通常のVMの場合、プロバイダーがホストインフラストラクチャを管理し、ローカルのインベントリは プロバイダーの記録と併せてチェックされます。Intel TDXの場合、検証者はさらに ハードウェアのクォート、コレクターのバインディング、コンポーズ、およびOSの測定値もチェックします。個々の 結果を確認して、どのチェックが合格したか、あるいは利用できなかったかを確認してください。
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/ja/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+ファイアウォールの履歴の詳細はプロバイダによって異なります。Linodeではルールバージョンが保持されます。 [検証記録](https://phishdestroy.github.io/TgWitness/ja/docs/reference/verification/)には、テスト済みのデプロイメントと残りの稼働中の チェックが記載されており、[検証範囲](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)ではこれらの環境 チェックをアーカイブの取得および整合性確認と関連付けています。

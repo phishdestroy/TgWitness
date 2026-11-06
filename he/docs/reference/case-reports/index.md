@@ -84,6 +84,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/case-
 
 כאשר הוא כלול, הקובץ `analytics.json` מוגן על ידי חתימות ה-hash של הארכיון. הקובץ `report.json` משלב את אותו סיכום נבחר. אימות החתימה מזהה ביטים ששונו. כדי לבדוק את הנתונים, יש לחשב מחדש את הסיכומים של ה-journal באמצעות `report_analytics.Analytics` ו-`selected`, או את הסיכומים של ה-snapshot באמצעות `snapshot_analytics.collect` ו-`project`.
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | מה הוא מציג |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+
 מתוך גרסת המקור, צרו את כל שמונה העיצובים המפורטים לעיל מאותו כתב עת בדיוני:
 
 ```
@@ -134,7 +147,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. יש לשמור על קבצי ה-ZIP המקוריים ועל חתימות ה-hash שלהם. יש לתעד כל מחזיק, העברה, תאריך ומטרה. יש לשמור יחד איתם את הצהרות המפעילים המיוחסות ואת הערות התיק.
 5. במקרה של הודעות קוליות חסויות, יש לשמור ולאמת באופן עצמאי את הציטוט, האתגר, שרשרת האישורים של Intel, המדידות, המקור המדויק ותנאי הטיפול במפתחות. יש לשמור את תוצאת אימות האישור יחד עם הממצאים שנבדקו.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+ראו [את היקף האימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) לבדיקות של איסוף הנתונים, שלמות הארכיון, הזמן והיקף האיסוף בכל מצב.
 
 ## בדיקה על ידי הנמען
 

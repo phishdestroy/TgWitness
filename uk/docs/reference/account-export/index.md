@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 Посилання на джерело самостійно не доводить, що під час перетворення було вибрано всі необхідні елементи або видалено всі ідентифікуючі деталі. Оригінальний відкритий текст не вбудовано як доказ. Для такого висновку необхідний новий аналіз.
 
-## Sharing and hosted capture
+## Обмін даними та розміщення записів на сервері
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+Виберіть повідомлення та файли, які потрібні одержувачу, перегляньте повну копію для обміну та збережіть оригінал окремо. Запишіть хеш доставленого ZIP-файлу, щоб одержувач міг ідентифікувати та перевірити саме цю копію. Псевдонімізація замінює вибрані ідентифікатори; включений текст та оригінальні файли залишаються частиною перегляду.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope)．
+GitHub Actions підтримує експорт даних усього облікового запису та вибраних чатів через Takeout або звичайний API, а також журнал подій одного чату. У [посібнику](https://phishdestroy.github.io/TgWitness/docs/capture/) з [хостованого збору](https://phishdestroy.github.io/TgWitness/docs/capture/) даних пояснюються перевірка налаштувань та обмеження у 120 хвилин. Щоб перевірити копію, отриману з хостованого збору даних, порівняйте її вихідний хеш з оригінальним архівом та перевірте сертифікацію архіву за допомогою перевірок, [специфічних](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) [для](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) [відповідного](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) [режиму](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope).
 
 [Формат доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/) · [Звіти про справи](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-reports/)

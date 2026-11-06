@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-
 
 Một máy chủ được bảo mật 24/7 trên Hetzner hoặc Phala Cloud, Gateway DNS và các kiểm tra mà bên thứ ba có thể lặp lại.
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+Việc triển khai có độ tin cậy cao bổ sung các kiểm tra độc lập đối với môi trường thu thập dữ liệu vào quá trình xác minh kho lưu trữ. Người đánh giá truy vấn các bản ghi triển khai và truy cập do nhà cung cấp dịch vụ đám mây và Cloudflare lưu giữ, đồng thời việc triển khai Intel TDX bổ sung chứng thực phần cứng cho môi trường của bộ thu thập dữ liệu.
 
 Việc sử dụng thông thường trên máy cục bộ và Docker vẫn không thay đổi. Không có gì ở đây hoạt động trừ khi bạn triển khai bằng `python -m tgwitness.cloud`, và trình thu thập dữ liệu chỉ đọc máy chủ của nó khi quá trình triển khai được thiết lập `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Sơ đồ quy trình · Người vận hành → Máy chủ, tường lửa khô
 | Khóa ký đã được tạo trên máy chủ đó | Khóa này ký một tuyên bố nêu rõ ID máy chủ của nhà cung cấp và giá trị băm của tệp cloud-init mà nó đã nhận được | Collector, đã được kiểm tra với nhà cung cấp |
 | Nhật ký này thuộc về khóa và máy chủ đó | Mỗi quá trình bắt đầu trong bằng chứng ZIP đều chứa thông số đo lường máy chủ cho máy chủ đó | Bằng chứng ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+Trình thu thập ghi lại trạng thái SSH, các phiên, lịch sử đăng nhập và thông tin khởi động trong các bản ghi khởi động quá trình và `host.state` . Trên một máy ảo thông thường, đây là các bản ghi kiểm kê cục bộ , mà người đánh giá sẽ so sánh với các bản ghi độc lập của nhà cung cấp. Việc triển khai Intel TDX dưới đây còn xác minh thêm các phép đo được hỗ trợ bởi phần cứng.
 
 ## Nhà cung cấp
 
@@ -269,8 +269,8 @@ Gateway DNS bao gồm bộ giải quyết tên miền của hệ thống. DNS qu
 
 Cloudflare không thể xem nội dung bên trong lớp mã hóa của Telegram, các thiết bị khác trên tài khoản Telegram (danh sách thiết bị trong chế độ bằng chứng ghi lại chúng từ phía Telegram) hoặc hypervisor của nhà cung cấp.
 
-## Reading the deployment result
+## Xem kết quả triển khai
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+Đối với một máy ảo thông thường, nhà cung cấp kiểm soát cơ sở hạ tầng máy chủ, và danh mục thiết bị cục bộ được kiểm tra cùng với các bản ghi của nhà cung cấp. Đối với Intel TDX, bên xác minh còn kiểm tra thêm thông số phần cứng, liên kết bộ thu thập, quá trình biên dịch và các chỉ số hệ điều hành. Hãy xem các kết quả riêng lẻ để biết các kiểm tra nào đã vượt qua hoặc không khả dụng.
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+Chi tiết lịch sử tường lửa phụ thuộc vào nhà cung cấp; Linode lưu giữ các phiên bản quy tắc. Bản [ghi xác thực](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/) liệt kê các triển khai đã được kiểm tra và các kiểm tra đang hoạt động còn lại, và [phạm vi xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) kết nối các kiểm tra môi trường này với việc thu thập và tính toàn vẹn của kho lưu trữ.

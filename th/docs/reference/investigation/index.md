@@ -101,7 +101,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/inves
 | ไฟล์ที่บันทึกไว้เดียวกัน | เสร็จสิ้นใบรับสื่อ #151 และ #209 | ค่า SHA-256 ทั้งหมดตรงกันสำหรับไบต์ที่เก็บรักษาไว้ |
 | ที่มาของช่อง | #101 และ #188 | อย่าระบุโพสต์ในช่องว่าเป็นของผู้ใช้ 71001 โดยไม่มีข้อมูลผู้ส่งที่ระบุ |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+เปรียบเทียบค่าแฮชของไฟล์แนบและอ้างอิงข้อความที่เกี่ยวข้อง และจัดกลุ่ม ไทม์ไลน์บัญชีตาม ID Telegram ที่ระบุในบันทึกเหล่านั้น．
 
 เก็บบันทึกการทำงานของทีมไว้บน [Case Board](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/): ติดบุ๊กมาร์กบันทึก ที่คุณอ้างอิง เช่น #146, #188 และ #205, ไฮไลต์สตริงปลายทางที่แม่นยำ และ บันทึกส่วนย่อยของทุกการกระทำที่บันทึกไว้ระหว่างบันทึกสองรายการหรือในช่วงเวลาที่กำหนด บันทึก และสถานะจะเก็บการทบทวนของทีมไว้ในประวัติที่ลงนามของตนเอง ซึ่งสามารถ ระบุแยกต่างหากจากข้อมูลสังเกตการณ์ของแหล่งที่มา
 
@@ -161,6 +161,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | ข้อพิพาทเกี่ยวกับการสั่งซื้อ/การชำระเงินที่ดำเนินการโดยบอท | ประกาศการเข้าสู่ระบบ → ดูตัวอย่างลิงก์ที่บันทึกไว้ → พารามิเตอร์เริ่มต้นของบอท → เวอร์ชันข้อความและคีย์บอร์ด → ใบเสร็จรับเงินจากการเรียกกลับของแผงควบคุม → การติดตามผลในแชทส่วนตัว/กลุ่ม | ได้ตรวจสอบไทม์ไลน์ของข้อเสนอ/การตอบกลับและแหล่งข้อมูลที่ได้รับการยืนยันแล้ว; ลิงก์การชำระเงินเพียงอย่างเดียวไม่สามารถพิสูจน์ได้ว่ามีการชำระเงิน |
 | ข้อความที่ถูกลบหลังเกิดเหตุการณ์ | ทุกการสนทนาที่เกี่ยวข้อง → บันทึกต้นฉบับ/การแก้ไข → ผลลัพธ์จากการลบหรือการตรวจสอบซ้ำที่พบว่าข้อมูลหาย → สื่อที่เก็บรักษาไว้ → การรายงานและมุมมองจากบัญชีอื่น ๆ | เวอร์ชันที่เก็บรักษาไว้และช่วงเวลาที่ไม่ทราบอย่างชัดเจน; ไม่มีการสมมติผู้ลบข้อความ |
-| ผู้เข้าร่วมเปลี่ยนชื่อในแชทต่าง ๆ | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| ผู้เข้าร่วมเปลี่ยนชื่อในแชทต่าง ๆ | ID ผู้ส่งแบบตัวเลข → ประวัติชื่อ／ชื่อผู้ใช้ → คำตอบ → การสนทนาอื่น ๆ ที่ถูกสังเกต → จุดหมายปลายทาง／ไฟล์ที่ถูกอ้างอิง | ไทม์ไลน์กิจกรรมของบัญชี Telegram พร้อมลิงก์ไปยังบันทึกต้นฉบับ |
 
 [อ้างอิงการเก็บรวบรวม](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/) · [การตรวจสอบโปรไฟล์บุคคล](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#people-profiles) · [การส่งต่อหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#investigation-handoff) · [การตรวจสอบความถูกต้องเสร็จสิ้นแล้ว](https://phishdestroy.github.io/TgWitness/th/docs/reference/verification/)

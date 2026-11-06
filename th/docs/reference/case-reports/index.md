@@ -84,6 +84,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/case-
 
 เมื่อรวมไฟล์ `analytics.json` เข้าไป ไฟล์นี้จะได้รับการปกป้องโดยแฮชไฟล์ที่ลงนามของอาร์ไคฟ์ `report.json` ของ Journal จะฝังข้อมูลรวมที่เลือกไว้เดียวกัน การตรวจสอบลายเซ็น จะตรวจจับไบต์ที่เปลี่ยนแปลง เพื่อตรวจสอบตัวเลข ให้คำนวณข้อมูลรวมของ Journal ใหม่ด้วย `report_analytics.Analytics` และ `selected` หรือ คำนวณข้อมูลรวมของ snapshot ด้วย `snapshot_analytics.collect` และ `project`
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | สิ่งที่แสดง |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+
 จากแหล่งที่มาที่ตรวจสอบแล้ว ให้สร้างแบบทั้งแปดแบบที่กล่าวถึงข้างต้นจากนิตยสารสมมติเดียวกัน:
 
 ```
@@ -134,7 +147,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. รักษาไฟล์ ZIP ต้นฉบับและค่าแฮชของพวกมันไว้ บันทึกผู้ถือแต่ละราย การโอนย้าย วันที่ และวัตถุประสงค์ เก็บรักษาคำชี้แจงของผู้ดำเนินการและบันทึกคดีที่ระบุไว้พร้อมกับข้อมูลเหล่านั้น
 5. สำหรับ VM ที่เป็นความลับ ให้รักษาและตรวจสอบอย่างอิสระต่อคำเสนอราคา, การท้าทาย, ห่วงโซ่ใบรับรอง Intel, การวัดค่า, แหล่งที่มาที่แม่นยำ และเงื่อนไขการจัดการกุญแจ เก็บผลการตรวจสอบการรับรองไว้พร้อมกับหลักฐานที่ได้รับการตรวจสอบแล้ว
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+ดู[ขอบเขตการตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope)เพื่อทราบการตรวจสอบการเก็บข้อมูล, ความสมบูรณ์ของไฟล์เก็บถาวร, เวลา และขอบเขตการเก็บข้อมูลในแต่ละโหมด．
 
 ## การตรวจสอบของผู้รับ
 

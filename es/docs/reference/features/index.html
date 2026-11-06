@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="Guías"><a href="../../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../../">Documentación</a> <span aria-hidden="true">/</span> <a href="../">Referencia</a> <span aria-hidden="true">/</span> <span aria-current="page">Características y limitaciones</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Lo que se ha probado →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Algunas partes de esta página siguen estando en inglés: el original en inglés se modificó tras su traducción.</p><p class="eyebrow">Referencia / Recopilar</p><h1>Características y limitaciones</h1><p class="guide-outcome">El modelo de recopilación actual, los flujos de trabajo con varias cuentas, las exportaciones y los límites operativos de TgWitness.</p><div class="wiki-body"><p>TgWitness conserva las conversaciones de Telegram a las que tienen acceso las cuentas conectadas,
+<article class="guide-content"><p class="eyebrow">Referencia / Recopilar</p><h1>Características y limitaciones</h1><p class="guide-outcome">El modelo de recopilación actual, los flujos de trabajo con varias cuentas, las exportaciones y los límites operativos de TgWitness.</p><div class="wiki-body"><p>TgWitness conserva las conversaciones de Telegram a las que tienen acceso las cuentas conectadas,
 registra los cambios observados y prepara exportaciones verificables. Esta referencia describe
 el modelo de recopilación, los flujos de trabajo actuales y sus límites.</p>
 <h2 id="standalone-application">Aplicación independiente<a class="anchor" href="#standalone-application" aria-label="Enlace a esta sección">#</a></h2>
@@ -177,13 +177,13 @@ parámetros de actualización independiente. Todavía no existen anulaciones de 
 </tr>
 <tr>
 <td>Proceso de recopilación</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>Inicio/parada, señal de vida, errores, configuración, alcance y recibo de ejecución firmado</td>
+<td>Inventario local; GitHub y TDX añaden <a href="../evidence/#verification-scope">comprobaciones de entorno independientes</a></td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>La interfaz identifica la cuenta indicada en el evento de origen y conserva los
+nombres y nombres de usuario observados. Cuando el evento omite a su autor, el informe deja ese campo sin especificar.</p>
 <h2 id="capacity-and-telegram-limits">Capacidad y límites de Telegram<a class="anchor" href="#capacity-and-telegram-limits" aria-label="Enlace a esta sección">#</a></h2>
 <p>No existe un número universal de chats que puedan supervisarse con calidad garantizada.
 La capacidad depende de los picos de eventos por segundo, el volumen y el tamaño de los archivos adjuntos, los

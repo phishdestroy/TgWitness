@@ -101,7 +101,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/inves
 | همان فایل ذخیره شده | رسیدهای رسانه‌ای تکمیل‌شده #۱۵۱ و #۲۰۹ | مقادیر کامل SHA-256 برای بایت‌های نگهداری‌شده مطابقت دارند |
 | نسبت‌دهی کانال | #۱۰۱ و #۱۸۸ | بدون ذکر فرستندهٔ معتبر، یک پست کانال را به کاربر ۷۱۰۰۱ نسبت ندهید |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+هش‌های پیوست‌ها و ارجاعات پیام‌های مرتبط با آن‌ها را مقایسه کرده و سوابق حساب‌ها را بر اساس شناسه‌های تلگرام ارائه‌شده در آن سوابق گروه‌بندی کنید.
 
 یادداشت‌های کاری تیم را در [Case Board](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-board/) حفظ کنید: سوابقی را که به آنها استناد می‌کنید، مانند #146، #188 و #205، بوکمارک کنید، رشته مقصد دقیق را برجسته کنید و یک برش از هر اقدام ثبت‌شده بین دو رکورد یا در یک بازه زمانی را ذخیره کنید. یادداشت‌ها و وضعیت‌ها بازبینی تیم را در تاریخچه امضا شده خود، به گونه‌ای که به طور جداگانه از مشاهدات منبع قابل تشخیص است، حفظ می‌کنند.
 
@@ -161,6 +161,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | منازعهٔ سفارش/پرداخت توسط ربات | اعلان ورود → پیش‌نمایش لینک ذخیره شده → پارامتر شروع ربات → نسخه‌های پیام و صفحه‌کلید → رسیدهای فراخوانی پنل → پیگیری خصوصی/گروهی | خط زمانی مشاهده‌شده پیشنهاد/پاسخ و منابع تأییدشده؛ یک لینک پرداخت به‌تنهایی اثبات پرداخت نیست |
 | پیام‌های حذف‌شده پس از یک رویداد | تمام چت‌های درگیر → نسخه‌های اصلی/ویرایش‌های ذخیره شده → نتایج حذف یا عدم‌موجود در بازبینی مجدد → رسانه‌های حفظ‌شده → پوشش و دیدگاه‌های دیگر حساب‌ها | نسخه‌های نگهداری‌شده و بازه‌های زمانی نامشخص صریح؛ بدون عامل حذف ساختگی |
-| یک شرکت‌کننده در چت‌های مختلف نام‌های خود را تغییر می‌دهد | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| یک شرکت‌کننده در چت‌های مختلف نام‌های خود را تغییر می‌دهد | شناسه عددی فرستنده → تاریخچه نام/نام کاربری → پاسخ‌ها → سایر چت‌های مشاهده‌شده → مقاصد/فایل‌های استنادشده | خط زمانی فعالیت حساب تلگرام با پیوندهایی به سوابق منبع آن |
 
 [مرجع جمع‌آوری](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/) · [تأیید پروفایل افراد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#people-profiles) · [واگذاری شواهد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#investigation-handoff) · [اعتبارسنجی کامل شد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/verification/)

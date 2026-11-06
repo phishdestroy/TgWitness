@@ -219,6 +219,40 @@ O <code>report.json</code> do diário incorpora o mesmo agregado selecionado. A 
 detecta bytes alterados. Para verificar os números, recalcule os agregados do diário com
 <code>report_analytics.Analytics</code> e <code>selected</code>, ou
 os agregados do snapshot com <code>snapshot_analytics.collect</code> e <code>project</code>.</p>
+<h3 id="anomaly-indicators">Anomaly indicators<a class="anchor" href="#anomaly-indicators" aria-label="Link para esta seção">#</a></h3>
+<p><strong>Preview.</strong> Evidence reports add an <strong>Anomaly indicators</strong> section computed by
+registered processors (<code>tgwitness/metrics/</code>, one file per metric). The report names every
+processor that ran with its version, and prints its method under its table, so the
+computation can be repeated from <code>events.jsonl</code> with <code>tgwitness.metrics.run</code>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Processor</th>
+<th>O que ele mostra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>first_time_posters_over_time</code> v1</td>
+<td>First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up．</td>
+</tr>
+<tr>
+<td><code>service_vs_message_ratio</code> v1</td>
+<td>Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number.</td>
+</tr>
+<tr>
+<td><code>join_leave_per_month</code> v1</td>
+<td>Joins, departures and removals or bans per month, one per person, chat, change and day.</td>
+</tr>
+<tr>
+<td><code>pinned_per_month</code> v1</td>
+<td>Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Parameters → Report metrics</strong> selects processors and the number of displayed rows，
+including in filtered reports．Daily and monthly tables show recent rows，service-share
+tables rank chats by saved message count．Totals cover every row．</p>
 <p>A partir de uma versão do código-fonte, crie todos os oito designs listados acima a partir da mesma revista fictícia:</p>
 <pre><code class="language-sh">python tools/build_report_styles.py --output test-results/report-styles</code></pre>
 <p>Abra o arquivo <code>index.html</code> resultante para comparar relatórios HTML completos, PDFs assinados e
@@ -304,8 +338,8 @@ de sua própria verificação de confirmação do Bitcoin.</p>
     a cadeia de certificados da Intel, as medições, a fonte exata e as condições de manuseio das chaves.
     Mantenha o resultado da verificação do atestado junto com os artefatos revisados.</li>
 </ol>
-<p>See <a href="../evidence/#verification-scope">verification scope</a> for the checks of acquisition，
-archive integrity，time and collection coverage in each mode．</p>
+<p>Consulte <a href="../evidence/#verification-scope">o escopo de verificação</a> para as verificações de aquisição,
+integridade do arquivo, tempo e cobertura da coleta em cada modo.</p>
 <h2 id="recipient-review">Revisão do destinatário<a class="anchor" href="#recipient-review" aria-label="Link para esta seção">#</a></h2>
 <p>Utilize uma instalação confiável do TgWitness e uma impressão digital obtida de forma independente:</p>
 <pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256

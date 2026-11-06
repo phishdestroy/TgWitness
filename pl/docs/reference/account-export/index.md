@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 Powiązanie ze źródłem nie stanowi samodzielnego dowodu na to, że podczas przetwarzania wybrano wszystkie wymagane elementy lub usunięto wszystkie szczegóły umożliwiające identyfikację. Oryginalny tekst jawny nie został dołączony jako dowód. Do wydania takiej oceny konieczna jest nowa weryfikacja.
 
-## Sharing and hosted capture
+## Udostępnianie i przechowywanie zrzutów
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+Należy wybrać wiadomości i pliki potrzebne odbiorcy, przejrzeć kompletną kopię udostępnioną oraz zachować osobno kopię źródłową. Należy zapisać skrót pliku ZIP, który został dostarczony, aby odbiorca mógł zidentyfikować i zweryfikować tę konkretną kopię. Wybrane identyfikatory są zastępowane pseudonimami; zawarty tekst i oryginalne pliki pozostają częścią przeglądu.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope)．
+GitHub Actions obsługuje eksport całych kont i wybranych czatów za pośrednictwem Takeout lub standardowego API, a także dziennik zdarzeń z jednego czatu. Przewodnik dotyczący [przechwytywania hostowanego](https://phishdestroy.github.io/TgWitness/docs/capture/) wyjaśnia weryfikację ustawień oraz limit 120 minut. Aby zweryfikować kopię udostępnioną pochodzącą z przechwytywania hostowanego, należy porównać jej skrót źródłowy z oryginalnym archiwum oraz zweryfikować poświadczenie tego archiwum za pomocą kontroli [specyficznych dla](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) [danego](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) [trybu](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope).
 
 [Format dowodów](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/) · [Raporty dotyczące spraw](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-reports/)

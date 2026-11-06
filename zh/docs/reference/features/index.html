@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">功能与限制</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 收集</p><h1>功能与限制</h1><p class="guide-outcome">TgWitness 的当前采集模型、多账户工作流、导出功能及操作边界。</p><div class="wiki-body"><p>TgWitness 可保存已连接账户可访问的 Telegram 对话，
+<article class="guide-content"><p class="eyebrow">参考 / 收集</p><h1>功能与限制</h1><p class="guide-outcome">TgWitness 的当前采集模型、多账户工作流、导出功能及操作边界。</p><div class="wiki-body"><p>TgWitness 可保存已连接账户可访问的 Telegram 对话，
 记录观察到的变更，并生成可验证的导出文件。本参考文档描述了
 采集模型、当前工作流程及其边界。</p>
 <h2 id="standalone-application">独立应用程序<a class="anchor" href="#standalone-application" aria-label="本节链接">#</a></h2>
@@ -177,13 +177,13 @@ Telegram 授权或主面板密钥，即可审查案件。 仅限聊天的访问�
 </tr>
 <tr>
 <td>采集进程</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>启动／停止、心跳、错误、设置、范围和签名运行回执</td>
+<td>本地库存；GitHub 和 TDX 添加了<a href="../evidence/#verification-scope">独立的环境检查</a></td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>该界面会标注源事件中提供的账户名称，并保留被观察到的
+名称和用户名。当事件未指明行为者时，报告将该字段留空。</p>
 <h2 id="capacity-and-telegram-limits">容量与 Telegram 限制<a class="anchor" href="#capacity-and-telegram-limits" aria-label="本节链接">#</a></h2>
 <p>没有一个通用的聊天数量标准能保证监控质量。
 监控能力取决于每秒峰值事件数、附件数量和大小、额外的

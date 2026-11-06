@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-
 
 部署在 Hetzner 或 Phala Cloud 上的全天候密封服务器、网关 DNS 以及第三方可复现的验证机制。
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+高可信度部署在 归档验证之外，增加了对采集环境的独立检查。审核人员会查询云服务提供商和 Cloudflare 持有的部署及访问记录，而 Intel TDX 部署则为采集器的环境 增加了硬件认证。
 
 常规的本地和 Docker 使用方式保持不变。除非您使用 `python -m tgwitness.cloud`进行部署，且收集器仅在部署设置为 `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ High-assurance deployment adds independent checks of the collection environment 
 | 该签名密钥是在该服务器上生成的 | 该密钥会签署一份声明，其中包含服务提供商的服务器 ID 以及收到的 cloud-init 的哈希值 | Collector，已与提供商进行过核对 |
 | 该日志属于该密钥和服务器 | 证据ZIP中的每个进程启动时，都会携带该服务器的宿主测量数据 | 证据 ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+该收集器将 SSH 状态、会话、登录历史记录和启动信息记录在经过签名的 进程启动日志和 `host.state` 记录中。在普通虚拟机上，这些是本地库存 记录，审核人员会将其与提供商的独立记录进行比对。下文所述的 英特尔 TDX 部署还会额外验证基于硬件的测量数据。
 
 ## 提供商
 
@@ -269,8 +269,8 @@ Gateway DNS 负责系统解析器。通过 443 端口以 DNS over HTTPS 方式�
 
 Cloudflare 无法查看 Telegram 的加密内容、该 Telegram 账户下的其他设备 （“证据模式”的设备列表是从 Telegram 端记录的）或服务提供商的虚拟机管理程序。
 
-## Reading the deployment result
+## 阅读部署结果
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+对于普通虚拟机，提供商负责管理主机基础设施，并会将本地库存 与提供商的记录进行比对。对于 Intel TDX，验证者还会额外检查 硬件配置、收集器绑定、Compose 以及操作系统测量数据。请阅读各项 结果，以查看哪些检查通过或无法进行。
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+历史防火墙详细信息取决于服务提供商；Linode 会保留规则版本。 [验证记录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/)列出了已测试的部署和剩余的在线 检查，而[验证范围](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)将这些环境 检查与归档获取及完整性联系起来。

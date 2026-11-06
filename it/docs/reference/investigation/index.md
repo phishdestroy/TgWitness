@@ -101,7 +101,7 @@ Nell’esempio elaborato:
 | Stesso file salvato | Ricevute multimediali completate n. 151 e n. 209 | I valori SHA-256 completi corrispondono per i byte conservati |
 | Attribuzione del canale | #101 e #188 | Non attribuire un post del canale all’utente 71001 senza indicare il mittente |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+Confronta gli hash degli allegati e i riferimenti ai messaggi associati, e mantieni le cronologie degli account raggruppate in base agli ID Telegram forniti in tali registrazioni.
 
 Conservare le note di lavoro del team su [Case Board](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-board/): aggiungere ai segnalibri i record su cui ci si basa, come #146, #188 e #205, evidenziare la stringa di destinazione esatta e salvare una porzione di ogni azione registrata tra due record o in un intervallo di tempo. Le note e gli stati conservano la revisione del team nella propria cronologia firmata, separatamente identificabile dalle osservazioni di origine.
 
@@ -161,6 +161,6 @@ Mantenere i risultati effettivi della verifica e gli artefatti originali. Esport
 | --- | --- | --- |
 | Controversia relativa a ordini/pagamenti gestita da bot | Annuncio di inserimento → anteprima del link salvato → parametro di avvio del bot → versioni dei messaggi e della tastiera → ricevute di callback del pannello → follow-up privato/di gruppo | Sono state osservate le tempistiche delle offerte e delle risposte e sono state verificate le fonti; un semplice link di pagamento non costituisce di per sé prova di un pagamento |
 | Messaggi rimossi a seguito di un incidente | Tutte le chat interessate → originali e modifiche salvati → esiti relativi a cancellazioni o messaggi mancanti al momento della verifica successiva → contenuti multimediali conservati → copertura e altre prospettive relative all’account | Versioni conservate e intervalli di tempo esplicitamente indicati come sconosciuti; nessun autore di cancellazione inventato |
-| Un partecipante cambia nome nelle diverse chat | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| Un partecipante cambia nome nelle diverse chat | ID numerico del mittente → cronologia dei nomi/nomi utente → risposte → altre chat osservate → destinazioni/file citati | Una cronologia delle attività di un account Telegram con collegamenti ai relativi record di origine |
 
 [Riferimento alla raccolta](https://phishdestroy.github.io/TgWitness/it/docs/reference/collection/) · [Verifica dei profili delle persone](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#people-profiles) · [Trasferimento delle prove](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#investigation-handoff) · [Convalida completata](https://phishdestroy.github.io/TgWitness/it/docs/reference/verification/)

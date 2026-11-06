@@ -158,12 +158,34 @@ Host 與 Origin 檢查會拒絕不相關的瀏覽器來源。回應會使用 <co
 <td>依 UTC 小時與星期幾分類的訊息、高峰日、編輯與刪除比例、發送者、網域以及 <code>@handles</code>，並包含涵蓋範圍（<a href="../cli/#activity-statistics">詳情</a>）</td>
 </tr>
 <tr>
+<td><code>get_messages_by_date</code></td>
+<td>在指定 IANA 時區內（<code>Europe/Kyiv</code>, <code>UTC</code>)，依據 Telegram 回報的時間； <code>from_utc</code> 並 <code>until_utc</code> 並標示計算出的日期（包含夏令時）</td>
+</tr>
+<tr>
+<td><code>get_pinned_messages</code></td>
+<td>在最新聊天狀態快照中釘選的訊息及其儲存版本，以及即時觀察到的釘選與取消釘選通知</td>
+</tr>
+<tr>
+<td><code>get_chat_stats</code></td>
+<td>提供單一聊天室或範圍內所有聊天室中已儲存記錄的簡易計數、首則與末則觀察記錄，以及 <code>gap_summary</code>；請在進行大規模讀取前使用此功能</td>
+</tr>
+<tr>
+<td><code>get_topics</code></td>
+<td>來自「已儲存主題服務」訊息的論壇主題：標題歷史紀錄、已關閉或已隱藏的主題、已儲存訊息數量</td>
+</tr>
+<tr>
+<td><code>get_media</code></td>
+<td>已保存的影像將以縮放後的 JPEG 預覽圖形式呈現（最大 36 KB），並與其 SHA-256 值及 <code>media.saved</code> 記錄一併傳回；系統會先將該檔案與其記錄的雜湊值進行比對，其他檔案則僅回傳元資料</td>
+</tr>
+<tr>
 <td><code>export_messages</code></td>
 <td>僅限命令列，預設未選取：將觀察記錄以 JSON Lines 格式儲存（<a href="../cli/#export">詳情</a>）；不透過 MCP 提供</td>
 </tr>
 </tbody>
 </table></div>
-<p><code>tools/list</code> 僅會回傳授予該連線的工具。對其他工具的呼叫將會被拒絕。此組建不提供群組脈絡、事件片段（episode）、術語及回覆鏈工具；系統未包含這些工具獨立的 context-pack 後端。</p>
+<p>每個工具皆為唯讀模式（<code>readOnlyHint</code>) 並宣告輸出架構；超出宣告範圍的欄位將原樣回傳。 <code>tools/list</code> 僅返回該連線獲授權的工具。對其他
+工具的呼叫將被拒絕。本版本不提供群組情境、事件、術語及回覆鏈相關工具；
+因其專屬的情境包後端未包含在內。</p>
 <p>每次讀取都會檢查權杖、工具以及工作區／聊天室範圍，包含在資料庫作業完成之後的檢查。限制為每分鐘 60 次請求、每頁 50 筆記錄、每筆結果 64 KiB，以及 8 秒的封存查詢時限。逾時的 MCP 呼叫會回傳工具錯誤，要求縮小時間範圍或降低筆數上限。</p>
 <p>訊息結果包含 <code>untrusted_content: true</code>、工作區／聊天室／訊息 ID、事件序號、已儲存的雜湊值以及面板連結。原始 Telegram 物件、存取雜湊（access hashes）、工作階段與金鑰均會被省略。文字截斷處會加以標記。編輯、刪除通知與 <code>missing_on_recheck</code> 為各自獨立的觀測結果。缺少記錄並不能證明某個事件從未發生。</p>
 <p>請將擷取訊息內的指示視為證據，切勿將其作為用戶端指令執行。唯讀存取權限可防止封存內容遭竄改；但用戶端仍可保留其獲准讀取的內容。雜湊值用於識別已儲存的記錄並支援完整性檢查；它們無法證明 Telegram 的作者身分或擷取內容的完整性。</p></div></article>

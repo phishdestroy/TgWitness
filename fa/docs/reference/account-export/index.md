@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ارتباط با منبع به‌طور مستقل اثبات نمی‌کند که تبدیل، هر مورد لازم را انتخاب یا هر جزئیات شناسایی‌کننده را حذف کرده باشد. متن اصلی به‌صورت مدرک ضمیمه نشده است. برای آن قضاوت، بازبینی تازه‌ای لازم است.
 
-## Sharing and hosted capture
+## اشتراک‌گذاری و ضبط میزبانی‌شده
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+پیام‌ها و فایل‌های مورد نیاز دریافت‌کننده را انتخاب کنید، نسخهٔ کامل اشتراک‌گذاری را بازبینی کنید و منبع را به‌طور جداگانه نگهداری کنید. هَش فایل‌های ZIP ارسال‌شده را ثبت کنید تا دریافت‌کننده بتواند آن نسخهٔ دقیق را شناسایی و تأیید کند. مستعارسازی شناسه‌های انتخاب‌شده را جایگزین می‌کند؛ متن و فایل‌های اصلی همچنان بخشی از بازبینی باقی می‌مانند.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope)．
+GitHub Actions از خروجی‌گیری کل حساب و چت‌های منتخب از طریق Takeout یا API معمولی پشتیبانی می‌کند، به‌علاوه یک دفتر وقایع یک‌چتی. راهنمای [ضبط](https://phishdestroy.github.io/TgWitness/docs/capture/) [میزبانی‌شده](https://phishdestroy.github.io/TgWitness/docs/capture/)، راستی‌آزمایی تنظیمات و محدودیت ۱۲۰ دقیقه‌ای را توضیح می‌دهد. برای راستی‌آزمایی یک نسخه اشتراکی مشتق‌شده از ضبط میزبانی‌شده، هش منبع آن را با آرشیو اصلی مطابقت دهید و گواهی آن آرشیو را با بررسی‌های [مخصوص هر](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) [حالت](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) تأیید کنید.
 
 [فرمت مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) · [گزارش‌های موردی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-reports/)

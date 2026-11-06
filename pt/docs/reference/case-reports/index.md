@@ -84,6 +84,19 @@ Um intervalo vazio significa que não há observações incluídas; consulte a c
 
 Quando incluído, o arquivo `analytics.json` é protegido pelos hashes assinados do arquivo. O `report.json` do diário incorpora o mesmo agregado selecionado. A verificação de assinatura detecta bytes alterados. Para verificar os números, recalcule os agregados do diário com `report_analytics.Analytics` e `selected`, ou os agregados do snapshot com `snapshot_analytics.collect` e `project`.
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | O que ele mostra |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+
 A partir de uma versão do código-fonte, crie todos os oito designs listados acima a partir da mesma revista fictícia:
 
 ```
@@ -134,7 +147,7 @@ Analise cada verificação separadamente, juntamente com a cobertura da coleta r
 4. Preserve os arquivos ZIP originais e seus hashes. Registre cada detentor, transferência, data e finalidade. Mantenha as declarações atribuídas aos operadores e as notas do caso junto com eles.
 5. Para mensagens de voz confidenciais, preserve e verifique de forma independente a citação, o desafio, a cadeia de certificados da Intel, as medições, a fonte exata e as condições de manuseio das chaves. Mantenha o resultado da verificação do atestado junto com os artefatos revisados.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+Consulte [o escopo de verificação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope) para as verificações de aquisição, integridade do arquivo, tempo e cobertura da coleta em cada modo.
 
 ## Revisão do destinatário
 

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 位於 Hetzner 或 Phala Cloud 上的全天候密封伺服器、Gateway DNS，以及第三方可重複驗證的檢查機制。
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+高可信度部署在 存檔驗證的基礎上，額外加入對資料蒐集環境的獨立檢查。審查人員會查詢由 雲端服務供應商及 Cloudflare 所保存的部署與存取紀錄，而 Intel TDX 部署則會針對 資料蒐集器的環境進行硬體驗證。
 
 一般的本地端及 Docker 使用方式維持不變。除非您使用 `python -m tgwitness.cloud`進行部署，且收集器僅在部署設定為 `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ High-assurance deployment adds independent checks of the collection environment 
 | 該簽署金鑰是在該伺服器上建立的 | 該金鑰會簽署一份聲明，其中載明服務提供者的伺服器 ID 以及其收到的 cloud-init 檔的雜湊值 | Collector，已與服務提供商進行比對 |
 | 該日誌屬於該金鑰與伺服器 | 每個在證據 ZIP 中啟動的程序，皆包含該伺服器的主機測量值 | 證據 ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+此資料收集器會將 SSH 狀態、連線、登入紀錄及開機資訊記錄於經簽名的 「process-start」及 `host.state` 記錄中，記錄 SSH 狀態、連線、登入歷史紀錄及開機資訊。在一般虛擬機器上，這些屬於本地清單 記錄，審查人員會將其與服務供應商的獨立記錄進行比對。下文所述的 Intel TDX 部署方案，則會額外驗證由硬體支援的測量數據。
 
 ## 提供者
 
@@ -269,8 +269,8 @@ Gateway DNS 涵蓋系統解析器。透過 443 埠的 HTTPS DNS 連線至其他�
 
 Cloudflare 無法窺見 Telegram 的加密內容、該 Telegram 帳戶上的其他裝置 （「證據模式」的裝置清單是從 Telegram 端記錄下來的），亦無法窺見服務供應商的虛擬化平台。
 
-## Reading the deployment result
+## 閱讀部署結果
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+對於一般虛擬機器，服務供應商負責管理主機基礎架構，並會將 本地清單與供應商的記錄一併進行比對。至於 Intel TDX，驗證者還會額外檢查 硬體報價、收集器綁定、組合以及作業系統測量值。請閱讀各項 結果，以了解哪些檢查通過或無法取得。
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+歷史防火牆詳情取決於服務供應商；Linode 會保留規則版本。 [驗證記錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/)列出了已測試的部署環境及剩餘的即時 檢查項目，而[驗證範圍](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)則將這些環境 檢查與存檔的取得及完整性相互連結。

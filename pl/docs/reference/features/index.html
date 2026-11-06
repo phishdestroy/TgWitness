@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentacja</a> <span aria-hidden="true">/</span> <a href="../">Odniesienie</a> <span aria-hidden="true">/</span> <span aria-current="page">Funkcje i ograniczenia</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Co zostało przetestowane →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Niektóre fragmenty tej strony są nadal w języku angielskim: angielski tekst źródłowy uległ zmianie po przetłumaczeniu.</p><p class="eyebrow">Odniesienie / Zbieraj</p><h1>Funkcje i ograniczenia</h1><p class="guide-outcome">Obecny model gromadzenia danych, procesy obsługi wielu kont, eksporty oraz ograniczenia operacyjne programu TgWitness.</p><div class="wiki-body"><p>TgWitness archiwizuje rozmowy w Telegramie dostępne dla połączonych kont,
+<article class="guide-content"><p class="eyebrow">Odniesienie / Zbieraj</p><h1>Funkcje i ograniczenia</h1><p class="guide-outcome">Obecny model gromadzenia danych, procesy obsługi wielu kont, eksporty oraz ograniczenia operacyjne programu TgWitness.</p><div class="wiki-body"><p>TgWitness archiwizuje rozmowy w Telegramie dostępne dla połączonych kont,
 rejestruje zaobserwowane zmiany i przygotowuje weryfikowalne eksporty. Niniejszy dokument opisuje
 model gromadzenia danych, aktualne procesy oraz ich ograniczenia.</p>
 <h2 id="standalone-application">Aplikacja samodzielna<a class="anchor" href="#standalone-application" aria-label="Link do tej sekcji">#</a></h2>
@@ -177,13 +177,13 @@ ustawień dotyczących oddzielnych aktualizacji. Nie ma jeszcze możliwości nad
 </tr>
 <tr>
 <td>Proces gromadzenia danych</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>Uruchomienie/zatrzymanie, sygnał kontrolny, błędy, ustawienia, zakres oraz podpisane potwierdzenie uruchomienia</td>
+<td>Lokalny spis zasobów; GitHub i TDX dodają <a href="../evidence/#verification-scope">niezależne kontrole środowiska</a></td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>Interfejs nadaje nazwę kontu podanemu w zdarzeniu źródłowym oraz zachowuje zaobserwowane
+nazwy i nazwy użytkowników. Gdy w zdarzeniu pominięto podmiot, w raporcie pole to pozostaje nieokreślone.</p>
 <h2 id="capacity-and-telegram-limits">Pojemność i ograniczenia serwisu Telegram<a class="anchor" href="#capacity-and-telegram-limits" aria-label="Link do tej sekcji">#</a></h2>
 <p>Nie ma uniwersalnej liczby czatów, które można monitorować z gwarancją jakości.
 Wydajność zależy od szczytowej liczby zdarzeń na sekundę, liczby i rozmiarów załączników, dodatkowych

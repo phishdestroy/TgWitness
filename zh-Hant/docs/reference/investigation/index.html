@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首頁</a> <span aria-hidden="true">/</span> <a href="../../">文件說明</a> <span aria-hidden="true">/</span> <a href="../">參考資料</a> <span aria-hidden="true">/</span> <span aria-current="page">調查模式</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">本頁部分內容仍為英文：英文原文在翻譯後已進行修改。</p><p class="eyebrow">參考資料 / 收集</p><h1>調查模式</h1><p class="guide-outcome">涵蓋頻道、群組、私人聊天及機器人的完整帳戶調查，從調查範圍到經核實的案件檔案包。</p><div class="wiki-body"><p>可跨頻道、群組、私人聊天室及機器人追蹤案件，從最初的
+<article class="guide-content"><p class="eyebrow">參考資料 / 收集</p><h1>調查模式</h1><p class="guide-outcome">涵蓋頻道、群組、私人聊天及機器人的完整帳戶調查，從調查範圍到經核實的案件檔案包。</p><div class="wiki-body"><p>可跨頻道、群組、私人聊天室及機器人追蹤案件，從最初的
 資料擷取，到帶有引用時間軸及可驗證的交接流程。互動式網站
 版本位於 <code>/docs/cases/</code>；<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">預覽說明</a>。</p>
 <h2 id="worked-case-a-destination-changes-across-four-conversations">案例分析：四段對話中目的地資訊的變更<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="此節的連結">#</a></h2>
@@ -197,8 +197,8 @@
 </tr>
 </tbody>
 </table></div>
-<p>Compare attachment hashes and their associated message references，and keep account
-timelines grouped by the Telegram IDs supplied in those records．</p>
+<p>比較附件雜湊值及其相關的訊息參考，並將帳戶
+時間軸依這些記錄中提供的 Telegram ID 進行分組。</p>
 <p>請將團隊的工作筆記保留在<a href="../case-board/">「案件看板」</a>上：將您依賴的紀錄
 （例如 #146、#188 和 #205）加入書籤，標示出確切的目標字串，並
 儲存兩個紀錄之間或特定時間範圍內每項記錄動作的片段。 筆記
@@ -346,8 +346,8 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 </tr>
 <tr>
 <td>某位參與者在不同聊天室中使用不同的名稱</td>
-<td>Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files</td>
-<td>A Telegram-account activity timeline with links to its source records</td>
+<td>發訊者編號 → 姓名／使用者名稱 → 對話紀錄 → 回覆 → 其他被觀察到的對話 → 被引用的目的地／檔案</td>
+<td>Telegram 帳號的活動時間軸，附有其來源記錄的連結</td>
 </tr>
 </tbody>
 </table></div>

@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 การเชื่อมโยงแหล่งที่มาไม่สามารถพิสูจน์ได้อย่างอิสระว่าการแปลงข้อมูลได้เลือกทุกองค์ประกอบที่จำเป็นหรือลบทุกรายละเอียดที่สามารถระบุตัวตนได้ ข้อความต้นฉบับในรูปแบบข้อความธรรมดาไม่ได้ถูกฝังไว้เป็นหลักฐาน จำเป็นต้องมีการตรวจสอบใหม่เพื่อตัดสินในเรื่องนี้
 
-## Sharing and hosted capture
+## การแบ่งปันและการบันทึกข้อมูลบนเซิร์ฟเวอร์
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+เลือกข้อความและไฟล์ที่ผู้รับต้องการ ตรวจสอบสำเนาที่แชร์ทั้งหมด และเก็บต้นฉบับไว้แยกต่างหาก บันทึกค่าแฮชของไฟล์ ZIP ที่ส่งไป เพื่อให้ผู้รับสามารถระบุและตรวจสอบว่านั่นคือสำเนาที่ถูกต้อง การใช้ชื่อปลอมจะแทนที่ตัวระบุที่เลือกไว้ ส่วนข้อความและไฟล์ต้นฉบับที่รวมอยู่จะยังคงเป็นส่วนหนึ่งของการตรวจสอบ
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope)．
+GitHub Actions รองรับการส่งออกข้อมูลทั้งบัญชีและแชทที่เลือกผ่าน Takeout หรือ API ปกติ รวมถึงบันทึกเหตุการณ์ของแชทเดียว [คู่มือการบันทึกแบบโฮสต์อธิบายการตรวจสอบ](https://phishdestroy.github.io/TgWitness/docs/capture/)การตั้งค่าและข้อจำกัด 120 นาที เพื่อตรวจสอบสำเนาที่แชร์ซึ่งสร้างจากบันทึกแบบโฮสต์ ให้เปรียบเทียบแฮชของแหล่งที่มาของสำเนากับไฟล์เก็บถาวรต้นฉบับ และตรวจสอบการรับรองของไฟล์เก็บถาวรนั้นด้วยการตรวจสอบ[ตามโหมดเฉพาะ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope)
 
 [รูปแบบหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/) · [รายงานกรณี](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-reports/)

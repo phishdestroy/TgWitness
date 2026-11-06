@@ -84,6 +84,19 @@ Open **Exports → Configure और preview करें**। **Data → Design 
 
 जब शामिल किया जाता है, तो `analytics.json` को आर्काइव के हस्ताक्षरित फ़ाइल हैश द्वारा संरक्षित किया जाता है। जर्नल `report.json` उसी चयनित समेकन को एम्बेड करता है। हस्ताक्षर सत्यापन बदले हुए बाइट्स का पता लगाता है। आंकड़ों की जांच करने के लिए, `report_analytics.Analytics` और `selected` के साथ जर्नल समेकन को फिर से गणना करें, या `snapshot_analytics.collect` और `project` के साथ समेकन का स्नैपशॉट लें।
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | यह क्या दिखाता है |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+
 एक स्रोत चेकआउट से, उपरोक्त सूचीबद्ध सभी आठ डिज़ाइनों को उसी काल्पनिक जर्नल से बनाएं:
 
 ```
@@ -134,7 +147,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. मूल ZIP फ़ाइलों और उनके हैश को सुरक्षित रखें। प्रत्येक धारक, हस्तांतरण, तारीख और उद्देश्य को दर्ज करें। संबंधित ऑपरेटर बयानों और केस नोट्स को उनके साथ बनाए रखें।
 5. गोपनीय वीएम के लिए, उद्धरण, चुनौती, इंटेल प्रमाणपत्र श्रृंखला, माप, सटीक स्रोत और कुंजी-हैंडलिंग शर्तों को संरक्षित करें और स्वतंत्र रूप से सत्यापित करें। समीक्षा किए गए कलाकृतियों के साथ प्रमाणीकरण सत्यापन परिणाम रखें।
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+प्रत्येक मोड में अधिग्रहण, अभिलेखागार अखंडता, समय और संग्रह कवरेज की जाँच के लिए [सत्यापन दायरा](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) देखें।
 
 ## प्रापक समीक्षा
 

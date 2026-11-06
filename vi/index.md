@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/
 
 [Nguồn mở ／ v0.9.1](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/)
 
-Export Telegram chats，preserve their history，and share a signed archive others can verify．
+Xuất các cuộc trò chuyện trên Telegram， giữ nguyên lịch sử trò chuyện và chia sẻ một tệp lưu trữ được ký số mà người khác có thể xác minh．
 
 [Mở bản demo](https://phishdestroy.github.io/TgWitness/demo/?lang=vi)[Hướng dẫn cài đặt](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=vi)
 
 Dữ liệu giả， không cần đăng nhập Telegram．
 
- [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/vi/docs/reference/account-export/) [Thu thập qua GitHub Actions （bản xem trước）](https://phishdestroy.github.io/TgWitness/vi/docs/capture/) [Bản sao lưu ngoài trang web trên S3： thiết lập và khôi phục](https://phishdestroy.github.io/TgWitness/vi/#s3)
+ [Xuất tài khoản hoặc các cuộc trò chuyện đã chọn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/account-export/) [Thu thập qua GitHub Actions （bản xem trước）](https://phishdestroy.github.io/TgWitness/vi/docs/capture/) [Bản sao lưu ngoài trang web trên S3： thiết lập và khôi phục](https://phishdestroy.github.io/TgWitness/vi/#s3)
 
 MỘT TIN NHẮN， VƯỢT QUA THỜI GIAN ＃0042
 

@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ソースのリンクだけでは、変換処理によって必要な項目がすべて選択されたこと、あるいは個人を特定できる詳細がすべて削除されたことを単独で証明するものではありません。元の平文は証明として埋め込まれていません。その判断には、改めて検証を行う必要があります。
 
-## Sharing and hosted capture
+## 共有とホスト型キャプチャ
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+受信者が必要とするメッセージとファイルを選択し、共有されるコピー全体を確認した上で、ソースは別途保管してください。受信者がその正確なコピーを特定・検証できるよう、送信されたZIPファイルのハッシュ値を記録してください。選択された識別子は仮名化されますが、含まれるテキストおよび元のファイルは引き続き確認対象となります。
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)．
+GitHub Actions は、Takeout または通常の API を通じて、アカウント全体および選択したチャットのエクスポートに加え、1 つのチャットに関するイベントジャーナルのエクスポートをサポートしています。[ホスト型](https://phishdestroy.github.io/TgWitness/docs/capture/)キャプチャガイドでは、設定の確認方法と 120 分という制限について説明しています。ホスト型キャプチャから生成された共有コピーを確認するには、そのソースハッシュを元のアーカイブと照合し、[モード固有の](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)チェックを用いてそのアーカイブの認証を確認してください。
 
 [証拠の形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/) · [事例レポート](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-reports/)

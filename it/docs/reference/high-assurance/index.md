@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/high-
 
 Un server protetto attivo 24 ore su 24, 7 giorni su 7 su Hetzner o Phala Cloud, un DNS Gateway e controlli ripetibili da parte di terzi.
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+L'implementazione ad alta affidabilità aggiunge controlli indipendenti dell'ambiente di raccolta alla verifica dell'archivio. Il revisore interroga i registri di implementazione e di accesso conservati dal fornitore di servizi cloud e da Cloudflare, mentre un'implementazione Intel TDX aggiunge l'attestazione hardware dell'ambiente del collettore.
 
 L'utilizzo standard in locale e con Docker rimane invariato. Nulla qui funziona a meno che non si esegua la distribuzione con `python -m tgwitness.cloud`, e il collector legge il proprio host solo quando la distribuzione imposta `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Diagramma di flusso · Operatore → Server, firewall senza regole in entrata (A
 | La chiave di firma è stata creata su quel server | La chiave firma una dichiarazione in cui vengono indicati l’ID del server del provider e l’hash del file cloud-init ricevuto | Collector, verificato dal provider |
 | Il diario appartiene a quella chiave e a quel server | Ogni avvio di processo nella prova ZIP riporta la misurazione dell’host per quel server | Prove ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+Il collettore registra lo stato SSH, le sessioni, la cronologia degli accessi e le informazioni di avvio in registrazioni firmate relative all’avvio dei processi e `host.state` . Su una macchina virtuale standard si tratta di registrazioni di inventario locali , che il revisore confronta con le registrazioni indipendenti del provider. L’ implementazione Intel TDX riportata di seguito verifica inoltre le misurazioni supportate dall’hardware.
 
 ## Fornitori
 
@@ -269,8 +269,8 @@ Il DNS gateway gestisce il resolver di sistema. Il DNS over HTTPS sulla porta 44
 
 Cloudflare non può vedere all’interno della crittografia di Telegram, né gli altri dispositivi collegati all’account Telegram (l’elenco dei dispositivi in modalità “evidence” li registra dal lato di Telegram) né l’hypervisor del provider.
 
-## Reading the deployment result
+## Lettura del risultato della distribuzione
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+Per una macchina virtuale standard, il provider controlla l’infrastruttura host e l’inventario locale viene verificato insieme ai registri del provider. Per Intel TDX, il verificatore controlla inoltre le specifiche hardware, il binding del collector, il compose e le misurazioni del sistema operativo. Leggere i singoli risultati per vedere quali controlli sono stati superati o non erano disponibili.
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/it/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+I dettagli storici del firewall dipendono dal provider; Linode conserva le versioni delle regole. Il [registro di convalida](https://phishdestroy.github.io/TgWitness/it/docs/reference/verification/) elenca le distribuzioni testate e i controlli attivi rimanenti, mentre [l’ambito di verifica](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#verification-scope) collega questi controlli ambientali all’acquisizione e all’integrità dell’archivio.

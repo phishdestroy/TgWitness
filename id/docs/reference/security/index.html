@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Referensi</a> <span aria-hidden="true">/</span> <span aria-current="page">Keamanan dan penanganan data</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Sebagian isi halaman ini masih dalam bahasa Inggris: teks asli dalam bahasa Inggris telah diubah setelah diterjemahkan.</p><p class="eyebrow">Referensi / Keamanan &amp; proyek</p><h1>Keamanan dan penanganan data</h1><p class="guide-outcome">Model ancaman, model akses, data rahasia yang disimpan, paparan jaringan, impor sesi, dan cara melaporkan kerentanan.</p><div class="wiki-body"><p>This page describes access，storage and network protection in a local or server workspace．
-For collection on a GitHub runner or in an Intel TDX confidential VM，see the
-<a href="../evidence/#verification-scope">verification modes</a>，which add checks of the collection environment．
-Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．</p>
+<article class="guide-content"><p class="eyebrow">Referensi / Keamanan &amp; proyek</p><h1>Keamanan dan penanganan data</h1><p class="guide-outcome">Model ancaman, model akses, data rahasia yang disimpan, paparan jaringan, impor sesi, dan cara melaporkan kerentanan.</p><div class="wiki-body"><p>Halaman ini menjelaskan akses, penyimpanan, dan perlindungan jaringan di ruang kerja lokal atau server.
+Untuk pengumpulan data di GitHub Runner atau di VM rahasia Intel TDX, lihat mode
+<a href="../evidence/#verification-scope">verifikasi</a>, yang menambahkan pemeriksaan terhadap lingkungan pengumpulan data.
+Koneksi akun, pemberitahuan, cap waktu, salinan di luar lokasi, dan saksi memiliki pengaturan rute masing-masing.</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -61,8 +61,8 @@ Account connections，notifications，timestamps，off-site copies and witnesses
 <td>Rantai hash SHA-256 dan tanda tangan Ed25519 pada setiap catatan</td>
 </tr>
 <tr>
-<td>Local trust boundary</td>
-<td>The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary</td>
+<td>Batas kepercayaan lokal</td>
+<td>Administrator host mengontrol ruang kerja dan kunci penandatanganannya; titik pemeriksaan independen menyimpan batas jurnal sebelumnya</td>
 </tr>
 </tbody>
 </table></div>
@@ -102,22 +102,22 @@ escape terhadapnya; sel CSV yang berpotensi menjadi rumus diberi awalan tanda ap
 metadata sumber yang dikumpulkan, pengenal, dan kemungkinan konten pribadi atau sensitif.
 Hash akses Telegram dan referensi berkas dapat muncul dalam metadata sumber mentah.</p>
 <h2 id="secrets-at-rest">Rahasia yang tersimpan<a class="anchor" href="#secrets-at-rest" aria-label="Tautan ke bagian ini">#</a></h2>
-<p>Telegram API credentials，the session and signing key are encrypted with Fernet．
-For local messages and media，encryption is provided by the host's disk or volume；
-the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP，
-and off-site copies use AES-256-GCM．</p>
-<p>The vault key defaults to the protected data directory．Use an external master-key file
-below to store it separately．On Unix，new private-key files use mode 0600 and new data
-directories use 0700；on Windows，set the directory ACL for the service account and
-authorized administrators．Existing directory permissions are retained．</p>
+<p>Kredensial API Telegram, sesi, dan kunci penandatanganan dienkripsi menggunakan Fernet.
+Untuk pesan dan media lokal, enkripsi disediakan oleh disk atau volume host;
+ruang kerja menyimpan file biasa. Ekspor dapat menggunakan ZIP AES-256 yang dilindungi kata sandi,
+dan salinan di luar lokasi menggunakan AES-256-GCM.</p>
+<p>Kunci vault secara default disimpan di direktori data yang dilindungi. Gunakan berkas kunci utama eksternal
+di bawah ini untuk menyimpannya secara terpisah. Pada sistem Unix, berkas kunci pribadi baru menggunakan mode 0600 dan direktori data
+baru menggunakan 0700; pada Windows, atur ACL direktori untuk akun layanan dan
+administrator yang berwenang. Izin direktori yang sudah ada tetap dipertahankan.</p>
 <h3 id="external-master-key">Kunci utama eksternal<a class="anchor" href="#external-master-key" aria-label="Tautan ke bagian ini">#</a></h3>
-<p>For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random
-master key. HKDF-SHA256 and a separate random salt derive a different Fernet key
-for each workspace. vault.external.json must be retained for recovery. Missing or
-wrong master keys fail closed. Existing local vaults are not silently migrated.
-The panel displays the selected key-storage mode．Disk encryption protects the local
-message and media files in either mode；see
-<a href="../connection/">connection and data protection</a> for setup details．</p>
+<p>Untuk direktori data baru, TGWITNESS_VAULT_KEY_FILE dapat menyediakan kunci utama acak
+eksternal. HKDF-SHA256 dan garam acak terpisah menghasilkan kunci Fernet yang berbeda
+untuk setiap ruang kerja. Berkas vault.external.json harus dipertahankan untuk pemulihan. Kunci utama yang hilang atau
+salah akan menyebabkan kegagalan. Brankas lokal yang sudah ada tidak akan dimigrasikan secara otomatis.
+Panel menampilkan mode penyimpanan kunci yang dipilih. Enkripsi disk melindungi
+berkas pesan dan media lokal di kedua mode; lihat
+<a href="../connection/">koneksi dan perlindungan data</a> untuk detail pengaturan.</p>
 <h2 id="proxies-and-network-routes">Proksi dan rute jaringan<a class="anchor" href="#proxies-and-network-routes" aria-label="Tautan ke bagian ini">#</a></h2>
 <p>Konfigurasi proxy dienkripsi di dalam vault. Kata sandi dan rahasia MTProxy
 tidak dikembalikan oleh API atau ditulis ke dalam catatan bukti. Setiap ruang kerja memilih
@@ -159,19 +159,19 @@ Pencatatan akses aplikasi dinonaktifkan. Jangan konfigurasikan proxy terbalik
 untuk mencatat header Otorisasi atau isi permintaan. HTTP mengirimkan token dan rahasia login
 dalam teks biasa: gunakan HTTPS atau terowongan SSH setiap kali meninggalkan localhost.</p>
 <h2 id="integrity-limits">Batasan integritas<a class="anchor" href="#integrity-limits" aria-label="Tautan ke bagian ini">#</a></h2>
-<p>Local verification checks record signatures，the hash chain，attachments and the export manifest．
-The administrator holds the local signing key and can create another signed journal；
-an independently retained checkpoint detects replacement of the prefix it covers．
-Keep the key fingerprint and checkpoints with the recipient or an independent witness．</p>
-<p>For independently checked collection，choose <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions capture</a>
-or <a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX deployment</a>．
-Their verifiers check workflow provenance or hardware measurements in addition to archive integrity．
-Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies；
-the <a href="../evidence/#verification-scope">evidence format</a> describes the checks for each mode．</p>
+<p>Pemeriksaan verifikasi lokal memeriksa tanda tangan, rantai hash, lampiran, dan manifes ekspor.
+Administrator memegang kunci penandatanganan lokal dan dapat membuat jurnal bertanda tangan lainnya;
+titik pemeriksaan yang disimpan secara independen mendeteksi penggantian awalan yang dicakupnya.
+Simpan sidik jari kunci dan titik pemeriksaan bersama penerima atau saksi independen.</p>
+<p>Untuk pengumpulan yang diverifikasi secara independen, pilih <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">penangkapan</a> <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">melalui GitHub Actions</a>
+atau <a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">penyebaran Intel TDX</a>.
+Verifikator mereka memeriksa asal-usul alur kerja atau pengukuran perangkat keras selain integritas arsip.
+Cap waktu opsional dan salinan terenkripsi di luar lokasi menyediakan penanda waktu dan salinan yang dapat dipulihkan;
+<a href="../evidence/#verification-scope">format</a> <a href="../evidence/#verification-scope">bukti</a> menjelaskan pemeriksaan untuk setiap mode.</p>
 <h2 id="if-you-suspect-a-problem">Jika Anda mencurigai adanya masalah<a class="anchor" href="#if-you-suspect-a-problem" aria-label="Tautan ke bagian ini">#</a></h2>
-<p>Preserve the original data directory and use a separate copy for analysis．
-Report the affected version，operation and reproducible steps through the
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">security policy</a>，keeping account data and credentials private．</p></div></article>
+<p>Pertahankan direktori data asli dan gunakan salinan terpisah untuk analisis.
+Laporkan versi yang terpengaruh, operasi, dan langkah-langkah yang dapat direproduksi melalui kebijakan
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">keamanan,</a> dengan tetap menjaga kerahasiaan data akun dan kredensial.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/SECURITY-MODEL.md">Edit halaman ini di GitHub ↗</a><a class="next-guide" href="../architecture/"><span>Langkah selanjutnya</span><strong>Arsitektur →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../verification/">Apa yang telah diuji →</a></p></footer>
 </main>
 <aside class="toc" aria-label="Di halaman ini"><p class="nav-label">Di halaman ini</p><a href="#access-model">Model akses</a><a href="#panel-content-and-exports">Konten panel dan ekspor</a><a href="#secrets-at-rest">Rahasia yang tersimpan</a><a href="#proxies-and-network-routes">Proksi dan rute jaringan</a><a href="#sign-in-and-session-imports">Masuk dan impor sesi</a><a href="#logs-and-transport">Log dan pengiriman</a><a href="#integrity-limits">Batasan integritas</a><a href="#if-you-suspect-a-problem">Jika Anda mencurigai adanya masalah</a></aside>

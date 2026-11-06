@@ -80,9 +80,14 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 | `get_journal_event` | 单条经过脱敏处理的记录及其来源引用 |
 | `get_capture_status` | 采集状态、允许记录的覆盖范围以及 `gap_summary`：按频道或超级群以及全账户序列统计的未观察到的消息编号（[详情](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#missing-message-numbers-gap_summary)）；选择一个聊天室即可查看其列出的缺失记录 |
 | `get_activity_stats` | 按 UTC 小时和星期几分类的消息、高峰日、编辑与删除比例、发件人、域名以及 `@handles`，并包含覆盖范围（[详情](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/#activity-statistics)） |
+| `get_messages_by_date` | 在指定的 IANA 时区中保存一个日历日的消息（`Europe/Kyiv`, `UTC`)，以Telegram报告的时间为准； `from_utc` 并 `until_utc` 注明计算出的日期（包含夏令时） |
+| `get_pinned_messages` | 最新聊天状态快照中被置顶的消息及其保存版本，以及实时观察到的置顶和取消置顶通知 |
+| `get_chat_stats` | 提供单个聊天或范围内所有聊天的已保存记录数量、首次和最后一次观察记录，以及 `gap_summary`；请在进行大规模读取前使用该功能 |
+| `get_topics` | 来自“已保存主题”服务消息的论坛主题：标题历史、已关闭或已隐藏、已保存消息数量 |
+| `get_media` | 作为缩放后的 JPEG 预览图（最大 36 KB）保存的图像，将作为图像与 SHA-256 值及 `media.saved` 记录；该文件会首先与其记录的哈希值进行比对，其他文件仅返回元数据 |
 | `export_messages` | 仅限命令行，默认未选中：流将记录的观察结果保存为 JSON Lines 格式（[详情](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/#export)）；不通过 MCP 提供 |
 
-`tools/list` 仅返回授予该连接的工具。对其他工具的调用将被拒绝。此版本不提供群组上下文、事件片段（episode）、术语和回复链工具；未包含它们独立的上下文包后端。
+每个工具均为只读模式（`readOnlyHint`）并声明了一个输出模式；超出声明范围的字段将按原样返回。 `tools/list` 仅返回授予该连接权限的工具。对其他 工具的调用将被拒绝。本版本不提供组上下文、事件、术语和回复链工具； 因其独立的上下文包后端未包含在内。
 
 每次读取都会检查令牌、工具以及工作区/聊天范围，包括在数据库操作完成之后。限制为每分钟 60 次请求、每页 50 条记录、每个结果 64 KiB 以及 8 秒的归档截止时间。超时的 MCP 调用会返回工具错误，要求缩小时间段或降低限制。
 

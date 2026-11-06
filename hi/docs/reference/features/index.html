@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../../">होम</a> <span aria-hidden="true">/</span> <a href="../../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <a href="../">संदर्भ</a> <span aria-hidden="true">/</span> <span aria-current="page">विशेषताएँ और सीमाएँ</span></nav>
 <p class="verification-shortcut"><a href="../verification/">क्या परीक्षण किया गया है →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / एकत्र करें</p><h1>विशेषताएँ और सीमाएँ</h1><p class="guide-outcome">वर्तमान संग्रह मॉडल, बहु-खाता वर्कफ़्लो, निर्यात और TgWitness की परिचालन सीमाएँ।</p><div class="wiki-body"><p>TgWitness जुड़े खातों के लिए सुलभ टेलीग्राम बातचीत को संरक्षित करता है, देखे गए परिवर्तनों को रिकॉर्ड करता है और सत्यापन योग्य एक्सपोर्ट तैयार करता है। यह संदर्भ संग्रह मॉडल, वर्तमान वर्कफ़्लो और उनकी सीमाओं का वर्णन करता है।</p>
+<article class="guide-content"><p class="eyebrow">संदर्भ / एकत्र करें</p><h1>विशेषताएँ और सीमाएँ</h1><p class="guide-outcome">वर्तमान संग्रह मॉडल, बहु-खाता वर्कफ़्लो, निर्यात और TgWitness की परिचालन सीमाएँ।</p><div class="wiki-body"><p>TgWitness जुड़े खातों के लिए सुलभ टेलीग्राम बातचीत को संरक्षित करता है, देखे गए परिवर्तनों को रिकॉर्ड करता है और सत्यापन योग्य एक्सपोर्ट तैयार करता है। यह संदर्भ संग्रह मॉडल, वर्तमान वर्कफ़्लो और उनकी सीमाओं का वर्णन करता है।</p>
 <h2 id="standalone-application">स्वतंत्र एप्लिकेशन<a class="anchor" href="#standalone-application" aria-label="इस अनुभाग का लिंक">#</a></h2>
 <p>TgWitness की अपनी इंस्टॉलेशन, डेटा डायरेक्टरी, और रिलीज़ जीवनचक्र है। बंडल किए गए वेब इंटरफ़ेस सेटअप और समीक्षा को संभालता है; निर्यात किए गए रिकॉर्ड स्वतंत्र रूप से उपयोग किए जा सकते हैं।</p>
 <p>ऑपरेटर अपने खातों को जोड़ता है, प्रत्येक के लिए दिखाई देने वाले स्रोतों को चुनता है, और एक सहेजा गया अवलोकन जर्नल प्राप्त करता है। पैनल सामग्री, सहेजी गई परिवर्तन, अवलोकन उत्पत्ति और ज्ञात अंतरालों को प्रदर्शित करता है। एक अन्य जांचकर्ता निर्यात की गई सामग्री को सत्यापित कर सकता है।</p>
@@ -123,13 +123,12 @@
 </tr>
 <tr>
 <td>कलेक्टर प्रक्रिया</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>स्टार्ट/स्टॉप, हार्टबीट, त्रुटियाँ, सेटिंग्स, स्कोप और हस्ताक्षरित रन रसीद</td>
+<td>स्थानीय इन्वेंटरी; GitHub और TDX <a href="../evidence/#verification-scope">स्वतंत्र वातावरण जांच</a> जोड़ते हैं</td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>इंटरफ़ेस स्रोत घटना में दिए गए खाते का नाम रखता है और देखे गए नामों तथा उपयोगकर्ता नामों को बनाए रखता है। जब घटना अपने कर्ता को छोड़ देती है, तो रिपोर्ट उस क्षेत्र को अनिर्दिष्ट छोड़ देती है।</p>
 <h2 id="capacity-and-telegram-limits">क्षमता और टेलीग्राम सीमाएँ<a class="anchor" href="#capacity-and-telegram-limits" aria-label="इस अनुभाग का लिंक">#</a></h2>
 <p>निश्चित गुणवत्ता के साथ निगरानी के लिए चैट्स की कोई सार्वभौमिक संख्या नहीं है।
 क्षमता प्रति सेकंड पीक इवेंट्स, अटैचमेंट की मात्रा और आकार, अतिरिक्त RPCs, सक्रिय खातों, डिस्क लेटेंसी/खाली जगह, नेटवर्क की स्थितियों, टेलीग्राम की सीमाओं, स्वीकार्य लैग और कतार की गहराई पर निर्भर करती है।</p>

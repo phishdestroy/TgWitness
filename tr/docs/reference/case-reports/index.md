@@ -84,6 +84,19 @@ Boş bir aralık, ilgili gözlemlerin bulunmadığı anlamına gelir; eksiklikle
 
 `analytics.json` dosyası dahil edildiğinde, arşivin imzalı dosya hash'leri tarafından korunur. `report.json` dosyası, aynı seçilmiş toplamı içerir. İmza doğrulama değiştirilen baytları tespit eder. Rakamları kontrol etmek için, `report_analytics.Analytics` ve `selected` ile günlük toplamlarını yeniden hesaplayın veya `snapshot_analytics.collect` ve `project` ile anlık görüntü toplamlarını yeniden hesaplayın.
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | Neleri gösterir? |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+
 Kaynak kodundan, yukarıda listelenen sekiz tasarımı da aynı hayali dergiden oluşturun:
 
 ```
@@ -134,7 +147,7 @@ Her bir kontrolü, kaydedilen toplama kapsamıyla birlikte ayrı ayrı gözden g
 4. Orijinal ZIP dosyalarını ve bunların hash değerlerini koruyun. Her bir tutucuyu, aktarımı, tarihi ve amacı kaydedin. Atfedilen operatör ifadelerini ve vaka notlarını bunlarla birlikte koruyun.
 5. Gizli VM'ler için, fiyat teklifi, doğrulama sorusu, Intel sertifika zinciri, ölçümler, kesin kaynak ve anahtar işleme koşullarını koruyun ve bağımsız olarak doğrulayın. Doğrulama sonucunu, incelenen kanıtlarla birlikte saklayın.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+Her modda veri toplama, arşiv bütünlüğü, zaman ve toplama kapsamı kontrolleriyle ilgili olarak [doğrulama kapsamına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) bakınız.
 
 ## Alıcı tarafından incelenmesi
 

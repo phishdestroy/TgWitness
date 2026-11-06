@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/
 
 [開源 ／ v0.9.1](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/)
 
-Export Telegram chats，preserve their history，and share a signed archive others can verify．
+匯出 Telegram 聊天紀錄，保留其歷史紀錄，並分享可供他人驗證的簽名檔案。
 
 [開啟示範版](https://phishdestroy.github.io/TgWitness/demo/?lang=zh-Hant)[設定指南](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=zh-Hant)
 
 虛構資料，不需登入 Telegram。
 
- [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/account-export/) [透過 GitHub Actions 擷取（預覽版）](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/capture/) [S3 異地備份：設定與還原](https://phishdestroy.github.io/TgWitness/zh-Hant/#s3)
+ [匯出帳號或選定的聊天室](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/account-export/) [透過 GitHub Actions 擷取（預覽版）](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/capture/) [S3 異地備份：設定與還原](https://phishdestroy.github.io/TgWitness/zh-Hant/#s3)
 
 一則跨越時空的訊息 ＃0042
 

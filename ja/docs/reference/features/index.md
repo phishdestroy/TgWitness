@@ -74,9 +74,9 @@ TgWitnessには、独自のインストール手順、データディレクト�
 | 管理者の操作 | チャンネル／スーパーグループのチャットエクスポートに含まれる、関連する配信済み更新情報および管理ログのスナップショット | エクスポート機能は、エクスポートを行う管理者アカウントが利用可能な場合にログを読み取ります。管理者ログの継続的なポーリングは、この処理の流れには含まれません。 |
 | 添付ファイル | オリジナルバージョンの記述、ダウンロードされたバイト数／SHA-256、および試行結果 | 削除されたファイルは復元できない場合があります。最新バージョンが置き換えられることはありません。 |
 | 沿革 | 現在表示されているメッセージの明確なスナップショット | すべての編集や削除されたコンテンツを復元するわけではありません |
-| コレクタープロセス | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope) |
+| コレクタープロセス | 開始／停止、ハートビート、エラー、設定、スコープ、および署名付き実行受領証 | ローカルインベントリ；GitHubおよびTDXに[独立した環境チェック](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)を追加 |
 
-The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
+このインターフェースは、ソースイベントで指定されたアカウント名を記載し、観測された 名前およびユーザー名を保持します。イベントにアクターが記載されていない場合、レポートではそのフィールドは未指定のままとなります。
 
 ## 容量とTelegramの制限
 

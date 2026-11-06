@@ -74,9 +74,9 @@ MTProxy האוטומטי מתחזק נתיבי טלגרם פעילים מארב�
 | פעולות מנהל | עדכונים רלוונטיים שנמסרו ותמונת מצב של יומן המנהל בייצוא צ'אטים מערוצים/קבוצות-על | הייצוא קורא את היומן כאשר הוא זמין לחשבון המנהל המייצא; סריקה רציפה של יומן המנהל אינה כלולה בתהליך זה |
 | קובץ מצורף | תיאור הגרסה המקורית, בייטים שהורדו/SHA-256 ותוצאות הניסיונות | קובץ שנמחק עשוי להיות בלתי ניתן לשחזור; הגרסה האחרונה אינה מוחלפת |
 | היסטוריה | תמונת מצב מפורשת של ההודעות הגלויות כרגע | אינו משחזר את כל העריכות או התכנים שנמחקו |
-| תהליך האיסוף | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) |
+| תהליך האיסוף | הפעלה/כיבוי, פעימות, שגיאות, הגדרות, היקף וקבלת אישור חתימה על הפעלה | מלאי מקומי; GitHub ו-TDX מוסיפים [בדיקות סביבה עצמאיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
+הממשק מציין את שם החשבון שסופק באירוע המקור ושומר על השמות ושמות המשתמש שנצפו. כאשר האירוע אינו מציין את מבצע הפעולה, הדוח משאיר שדה זה ללא ציון.
 
 ## קיבולת ומגבלות טלגרם
 

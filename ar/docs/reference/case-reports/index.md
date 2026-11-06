@@ -84,6 +84,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-
 
 عند تضمينه، يتم حماية ملف `analytics.json` بواسطة تجزئات الملفات الموقعة الخاصة بالأرشيف. يقوم ملف `report.json` الخاص بالسجل بتضمين نفس المجموع المحدد. يتعرف التحقق من التوقيع على البايتات التي تم تغييرها. للتحقق من الأرقام، أعد حساب مجموعات السجل باستخدام `report_analytics.Analytics` و`selected`، أو مجموعات اللقطات باستخدام `snapshot_analytics.collect` و`project`.
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | ما يعرضه |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+
 انطلاقًا من نسخة من المصدر، قم بإنشاء جميع التصميمات الثمانية المذكورة أعلاه من نفس المجلة الخيالية:
 
 ```
@@ -134,7 +147,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. يجب الحفاظ على ملفات ZIP الأصلية وتجزئاتها. تسجيل كل حامل، وعملية نقل، وتاريخ وغرض. الاحتفاظ ببيانات المشغل المنسوبة وملاحظات القضية المرتبطة بها.
 5. بالنسبة للرسائل الصوتية السرية، يجب الحفاظ على الاقتباس والتحدي، وسلسلة شهادات Intel، والقياسات، والمصدر الدقيق، وشروط التعامل مع المفاتيح، والتحقق منها بشكل مستقل. احتفظ بنتيجة التحقق من الشهادة مع العناصر التي تمت مراجعتها.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+انظر [نطاق التحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope) لمعرفة الفحوصات المتعلقة بالاستحواذ، وسلامة الأرشيف، والوقت، وتغطية الجمع في كل وضع．
 
 ## مراجعة المستلم
 

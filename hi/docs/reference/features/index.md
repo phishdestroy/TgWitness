@@ -74,9 +74,9 @@ TgWitness की अपनी इंस्टॉलेशन, डेटा ड�
 | प्रशासनिक क्रियाएँ | प्रासंगिक डिलीवर किए गए अपडेट्स और चैनल/सुपरग्रुप चैट एक्सपोर्ट्स में एडमिन-लॉग का स्नैपशॉट | एक्सपोर्ट उपलब्ध होने पर लॉग को एक्सपोर्टिंग एडमिन खाते से पढ़ता है; निरंतर एडमिन-लॉग पोलिंग इस पथ के बाहर है |
 | संलग्नक | मूल संस्करण वर्णनकर्ता, डाउनलोड किए गए बाइट्स/SHA-256 और प्रयास के परिणाम | एक गायब फ़ाइल पुनर्प्राप्त नहीं की जा सकती; नवीनतम संस्करण प्रतिस्थापित नहीं किया जाता |
 | इतिहास | वर्तमान दृश्यमान संदेशों का स्पष्ट स्नैपशॉट | सभी संपादनों या हटाई गई सामग्री का पुनर्निर्माण नहीं करता |
-| कलेक्टर प्रक्रिया | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) |
+| कलेक्टर प्रक्रिया | स्टार्ट/स्टॉप, हार्टबीट, त्रुटियाँ, सेटिंग्स, स्कोप और हस्ताक्षरित रन रसीद | स्थानीय इन्वेंटरी; GitHub और TDX [स्वतंत्र वातावरण जांच](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) जोड़ते हैं |
 
-The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
+इंटरफ़ेस स्रोत घटना में दिए गए खाते का नाम रखता है और देखे गए नामों तथा उपयोगकर्ता नामों को बनाए रखता है। जब घटना अपने कर्ता को छोड़ देती है, तो रिपोर्ट उस क्षेत्र को अनिर्दिष्ट छोड़ देती है।
 
 ## क्षमता और टेलीग्राम सीमाएँ
 

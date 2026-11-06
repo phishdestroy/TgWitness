@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">รูปแบบหลักฐาน</span></nav>
 <p class="verification-shortcut"><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / หลักฐาน</p><h1>รูปแบบหลักฐาน</h1><p class="guide-outcome">เนื้อหาของไฟล์ ZIP ที่ลงนาม, ประเภทบันทึก, ใบยืนยันการดำเนินการ, โปรไฟล์ผู้ใช้, สำเนาที่เก็บไว้นอกระบบ และการตรวจสอบแบบออฟไลน์</p><div class="wiki-body"><p>TgWitness เก็บรักษาข้อมูลการสังเกต Telegram ที่ผู้ใช้งานสามารถเห็นได้ในบัญชีไว้ในสมุดบันทึกที่ลงนาม
+<article class="guide-content"><p class="eyebrow">อ้างอิง / หลักฐาน</p><h1>รูปแบบหลักฐาน</h1><p class="guide-outcome">เนื้อหาของไฟล์ ZIP ที่ลงนาม, ประเภทบันทึก, ใบยืนยันการดำเนินการ, โปรไฟล์ผู้ใช้, สำเนาที่เก็บไว้นอกระบบ และการตรวจสอบแบบออฟไลน์</p><div class="wiki-body"><p>TgWitness เก็บรักษาข้อมูลการสังเกต Telegram ที่ผู้ใช้งานสามารถเห็นได้ในบัญชีไว้ในสมุดบันทึกที่ลงนาม
 ผู้รับสามารถตรวจสอบบันทึก ไฟล์แนบ และรายงานที่เก็บไว้ โดยใช้
 กุญแจผู้เก็บรวบรวมที่เชื่อถือได้ จากนั้นเปรียบเทียบสมุดบันทึกกับจุดตรวจสอบที่เก็บรักษาไว้อย่างอิสระ
 หน้านี้อธิบายรูปแบบ การตรวจสอบ และข้อมูลที่จำเป็นต้องเก็บรักษาไว้สำหรับการส่งต่อ</p>
@@ -68,8 +68,8 @@
 </tr>
 <tr>
 <td>ใบเสร็จรับเงิน</td>
-<td>Signed record of the collector version，source-file hashes and start settings，also included in <code>process.started</code></td>
-<td>The receipt，associated journal and the environment evidence for the selected verification mode</td>
+<td>บันทึกที่ลงนามของเวอร์ชันเครื่องมือเก็บข้อมูล, ค่าแฮชของไฟล์ต้นฉบับ และการตั้งค่าเริ่มต้น ซึ่งยังรวมอยู่ใน <code>process.started</code></td>
+<td>ใบรับ，บันทึกที่เกี่ยวข้อง และหลักฐานสภาพแวดล้อมสำหรับโหมดการตรวจสอบที่เลือก</td>
 </tr>
 <tr>
 <td>รายงานที่อ่านได้: <code>report.html</code> และส่วนประกอบของมัน, <code>report.json</code>, <code>report.pdf</code>, <code>chat.pdf</code></td>
@@ -195,11 +195,11 @@ manifest ที่ลงนามและในรายงาน; บันท
 หมายเลขที่ขาดหายไปคือข้อความที่ Telegram
 ไม่ได้ส่งกลับมา (ถูกลบก่อนการส่งออก หรือไม่ปรากฏต่อบัญชี); ในแชทส่วนตัวและ
 กลุ่มพื้นฐาน หมายเลขจะถูกใช้ร่วมกันในทุกแชทของบัญชี และช่องว่างจะไม่ถูกนับ</p>
-<p>After reading the history, the export asks Telegram for every absent number again, by number
-(<code>channels.getMessages</code>, up to 10,000 numbers). The result is in <code>message-ids.json</code> and the report.
-An empty answer records that the number is unavailable to this account at recheck time；
-it leaves the cause unspecified．A message returned on recheck is added to the export
-and marked <code>found_on_recheck</code>．</p>
+<p>หลังจากอ่านประวัติแล้ว กระบวนการส่งออกจะขอข้อมูลจาก Telegram สำหรับทุกหมายเลขที่ยังขาดอีกครั้ง โดยระบุตามหมายเลข
+(<code>channels.getMessages</code>, สูงสุด 10,000 หมายเลข) ผลลัพธ์จะอยู่ใน <code>message-ids.json</code> และในรายงาน
+คำตอบที่ว่างจะบันทึกว่าหมายเลขดังกล่าวไม่สามารถติดต่อได้กับบัญชีนี้ ณ เวลาตรวจสอบซ้ำ；
+โดยไม่ระบุสาเหตุ．ข้อความที่ส่งกลับมาในการตรวจสอบซ้ำจะถูกเพิ่มเข้าไปในไฟล์ส่งออก
+และถูกทำเครื่องหมาย <code>found_on_recheck</code>．</p>
 <p>ทุกรายงานจะเริ่มต้นด้วย <strong> โดยสรุป</strong>: หนึ่งย่อหน้า ตามด้วยสิ่งที่ข้อมูลแสดงและสิ่งที่มันไม่แสดง
 (ผู้อยู่เบื้องหลังบัญชี, ความครบถ้วนของการส่งข้อมูล, การลบข้อมูลก่อนการสังเกต, เวลาตามนาฬิกา
 โดยไม่มีตราประทับเวลา). ตราประทับของหน้าเว็บจะเปลี่ยนเป็นสีเหลืองอำพันเมื่อเบราว์เซอร์ตรวจสอบลายเซ็นของตราประทับ
@@ -396,27 +396,26 @@ payload.deleted_message_was_outgoing จะมีค่าเป็น true; แ
 <li>ข้อความบริการเป็นบันทึกในสมุดบันทึกที่มีหมายเลขเฉพาะตัว ดังนั้นจึงปิดช่องว่าง
     ได้ด้วยตัวเอง; การประมาณค่าที่เป็นตัวเลือกเป็นเพียงข้อมูลบริบทเท่านั้น</li>
 </ul>
-<p><code>verify.py</code> recomputes <code>gap_summary</code> from <code>events.jsonl</code> with the parameters in the signed
-<code>coverage.json</code> member (defaults for older archives) and
-prints the account-wide line in its coverage summary. The archive's <code>get_capture_status</code>
-(MCP and the command line) returns the same measurement for the chats an access may read;
-the account-wide sequence only to access covering the whole workspace.</p>
-<p>Repeated observations of one service message count once，and the account service estimate
-uses only numbers inside the measured range．An applied scope must explicitly preserve
-the account's own messages before account-wide measurement is enabled；older records
-without that information cannot establish this condition．Stopped observation does not
-extend the measured range，and resuming it is noted．The live archive query has a time
-budget，including its database scan，and marks an unfinished measurement as partial．</p>
-<p>Telegram documents the <a href="https://core.telegram.org/api/updates#message-id-sequences">separate message ID sequences</a>．
-These numbers describe observations；they do not identify a deletion actor or establish
-why a number is absent．</p>
+<p><code>verify.py</code> คำนวณใหม่ <code>gap_summary</code> จาก <code>events.jsonl</code> จากพารามิเตอร์ใน
+<code>coverage.json</code> member (ค่าเริ่มต้นสำหรับอาร์ไคฟ์เก่า) และ
+พิมพ์บรรทัดระดับบัญชีในสรุปการครอบคลุมของมัน อาร์ไคฟ์ของ <code>get_capture_status</code>(MCP และบรรทัดคำสั่ง) จะคืนค่าการวัดที่เหมือนกันสำหรับแชทที่การเข้าถึงอาจอ่านได้;
+ส่วนลำดับข้อมูลระดับบัญชีจะคืนค่าเฉพาะสำหรับการเข้าถึงที่ครอบคลุมพื้นที่ทำงานทั้งหมดเท่านั้น</p>
+<p>การสังเกตซ้ำของข้อความบริการหนึ่งครั้งจะนับเป็นหนึ่งครั้ง และการประมาณค่าบริการบัญชี
+ใช้เฉพาะตัวเลขภายในช่วงที่วัดได้เท่านั้น ขอบเขตที่นำไปใช้ต้องรักษา
+ข้อความของบัญชีเองไว้อย่างชัดเจน ก่อนที่จะเปิดใช้งานการวัดระดับบัญชีทั้งหมด; บันทึกเก่า
+ที่ไม่มีข้อมูลดังกล่าวไม่สามารถยืนยันเงื่อนไขนี้ได้ การหยุดการสังเกตไม่
+ขยายช่วงที่วัดได้ และการเริ่มใหม่จะได้รับการบันทึก การค้นหาในคลังข้อมูลแบบเรียลไทม์มี
+งบประมาณเวลา ซึ่งรวมถึงการสแกนฐานข้อมูล และจะหมายเหตุการวัดที่ยังไม่เสร็จสิ้นว่าเป็นแบบไม่สมบูรณ์</p>
+<p>Telegram บันทึกลำดับ <a href="https://core.telegram.org/api/updates#message-id-sequences">ID</a> <a href="https://core.telegram.org/api/updates#message-id-sequences">ข้อความที่แยกกัน</a>
+ตัวเลขเหล่านี้อธิบายข้อมูลการสังเกตการณ์เท่านั้น; ไม่ระบุตัวผู้ลบข้อความหรือชี้แจง
+เหตุผลที่ตัวเลขบางตัวขาดหายไป</p>
 <p>เมื่อ Telegram หยุดรับบัญชีแล้ว บันทึก <code>coverage.gap</code> ที่สิ้นสุดการสังเกตการณ์
 จะนำ <code>cause</code> (<code>account_banned</code>, <code>account_frozen</code>, <code>account_deleted</code>, <code>session_duplicated</code>,
 <code>session_revoked</code>, <code>session_expired</code>, <code>session_ended</code> หรือ <code>not_authorized</code>) และข้อผิดพลาด Telegram;
 <code>verify.py</code> ระบุสาเหตุที่จุดสิ้นสุดของช่วงเวลา</p>
-<p>Coverage combines recorded observation periods，interruptions and message outcomes．
-Assess it together with the selected chats，period and attachment policy；continuous
-operation alone does not establish complete delivery of Telegram updates．</p>
+<p>การครอบคลุมรวมถึงช่วงเวลาการบันทึกการสังเกตการณ์ การหยุดชะงัก และผลลัพธ์ของข้อความ
+ให้ประเมินร่วมกับแชทที่เลือก ช่วงเวลา และนโยบายการแนบไฟล์; การทำงานต่อเนื่อง
+เพียงอย่างเดียวไม่สามารถยืนยันการส่งข้อมูลอัปเดตของ Telegram ได้อย่างครบถ้วน</p>
 <h2 id="producer">ผู้ผลิต<a class="anchor" href="#producer" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <p>ไฟล์ ZIP ของรายการหลักฐานที่ลงนาม, ไฟล์ส่งออกการสนทนา, บันทึกพยาน และคำชี้แจงของ
 ไฟล์โปรไฟล์บุคคล มีข้อมูล<code>producer</code>
@@ -462,66 +461,66 @@ manifest.sig คือลายเซ็น Ed25519 ที่เข้ารห�
 ลำดับ/โซ่ที่ขาดหาย ลายเซ็นที่ไม่ถูกต้อง และความไม่ตรงกันกับจุดตรวจสอบที่ให้มา
 ตัวตรวจสอบจะไม่ดึงเส้นทางของไฟล์เก็บถาวรออกมาเลย และจำกัดขนาดรวมที่ประกาศไว้ (ไม่รวมการบีบอัด) ไว้ที่ 4 GiB;
 <code>--max-gib N</code> อนุญาตให้สร้างไฟล์เก็บถาวรที่มีขนาดใหญ่ขึ้นได้ โดยเพิ่มขีดจำกัดของ <strong>Parameters</strong></p>
-<p>Run verification from your installed TgWitness version or a reviewed checkout．
-The copy included in an archive supports portable use；check that copy against your
-trusted installation before executing it．</p>
-<p>A checkpoint signs a statement containing the public key, journal length, head
-hash, and creation time. The verifier can check that a later archive contains the
-same prefix．Retain the checkpoint outside the collector，so later verification compares
-the archive with a reference held separately from it．</p>
+<p>ดำเนินการตรวจสอบจากเวอร์ชัน TgWitness ที่ติดตั้งไว้ หรือจากเวอร์ชันที่ได้รับการตรวจสอบแล้ว
+สำเนาที่รวมอยู่ในไฟล์อาร์ไคฟ์รองรับการใช้งานแบบพกพา; โปรดตรวจสอบสำเนานั้นกับ
+การติดตั้งที่คุณเชื่อถือได้ ก่อนที่จะดำเนินการ</p>
+<p>จุดตรวจสอบ (checkpoint) จะลงนามในข้อความที่ประกอบด้วยกุญแจสาธารณะ ความยาวของบันทึก ค่าแฮชส่วนหัว
+และเวลาสร้าง ผู้ตรวจสอบสามารถตรวจสอบได้ว่าไฟล์เก็บถาวรที่สร้างขึ้นภายหลังมี
+คำนำหน้าเดียวกัน ให้เก็บจุดตรวจสอบไว้ภายนอกตัวเก็บข้อมูล (collector) เพื่อให้การตรวจสอบในภายหลังสามารถเปรียบเทียบ
+ไฟล์เก็บถาวรกับข้อมูลอ้างอิงที่เก็บไว้แยกต่างหาก</p>
 <h2 id="verification-scope">ขอบเขตการตรวจสอบ<a class="anchor" href="#verification-scope" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
-<p>Verification checks the archive and the collection mode used to produce it．Choose the
-mode whose trust boundary matches the case，then retain its verification inputs．</p>
+<p>การตรวจสอบจะตรวจสอบไฟล์เก็บถาวรและโหมดการเก็บข้อมูลที่ใช้ในการสร้างไฟล์ดังกล่าว ให้เลือก
+โหมดที่มีขอบเขตความเชื่อถือตรงกับกรณีนั้น แล้วเก็บข้อมูลการตรวจสอบของโหมดนั้นไว้</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
-<th>Collection mode</th>
-<th>What the verifier checks</th>
-<th>Verification inputs and trust boundary</th>
+<th>โหมดการเก็บข้อมูล</th>
+<th>สิ่งที่ผู้ตรวจสอบจะตรวจสอบ</th>
+<th>ข้อมูลป้อนเข้าสำหรับการตรวจสอบและขอบเขตความเชื่อถือ</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Local workspace</td>
-<td>Record signatures，hash chain，manifest and attachment bytes</td>
-<td>Independently retained collector fingerprint；the host administrator controls the local signing key</td>
+<td>พื้นที่ทำงานท้องถิ่น</td>
+<td>บันทึกลายเซ็น, ห่วงโซ่แฮช, รายการเนื้อหา (manifest) และไบต์ของไฟล์แนบ</td>
+<td>ลายนิ้วมือของตัวเก็บข้อมูลที่เก็บไว้อย่างอิสระ；ผู้ดูแลระบบโฮสต์ควบคุมกุญแจลงนามท้องถิ่น</td>
 </tr>
 <tr>
-<td>Local workspace with an independent witness</td>
-<td>The archive checks plus agreement with an earlier journal prefix retained by the witness</td>
-<td>Separately trusted witness key and records；the checkpoint binds the prefix already observed</td>
+<td>พื้นที่ทำงานท้องถิ่นที่มีพยานอิสระ</td>
+<td>การตรวจสอบไฟล์เก็บถาวร รวมถึงการตรวจสอบความสอดคล้องกับคำนำหน้าของบันทึกก่อนหน้านี้ที่ผู้เป็นพยานเก็บรักษาไว้</td>
+<td>กุญแจพยานและบันทึกที่เชื่อถือได้แยกกัน；จุดตรวจสอบจะผูกกับคำนำหน้าที่ได้รับการสังเกตแล้ว</td>
 </tr>
 <tr>
-<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions capture</a></td>
-<td>GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity</td>
-<td>Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow</td>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">การบันทึกด้วย GitHub Actions</a></td>
+<td>การรับรองบน GitHub สำหรับข้อมูลสรุปของไฟล์เก็บถาวร, กระบวนการทำงานที่ได้รับการอนุมัติและคำสั่ง commit ของผู้รวบรวมข้อมูล, เครื่องรันเนอร์ที่โฮสต์เอง, ที่มาของเซสชัน/คีย์ใหม่ และความสมบูรณ์ของไฟล์เก็บถาวรภายใน</td>
+<td>นโยบายผู้ตรวจสอบที่เชื่อถือได้, ที่เก็บข้อมูลของผู้เรียก และชุดการรับรองจาก GitHub; การเก็บข้อมูลดำเนินการภายใต้เวิร์กโฟลว์ที่ถูกตรึง</td>
 </tr>
 <tr>
-<td><a href="../high-assurance/">Cloud deployment</a></td>
-<td>Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record</td>
-<td>Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider</td>
+<td><a href="../high-assurance/">การปรับใช้บนคลาวด์</a></td>
+<td>บันทึกวงจรชีวิตและสิทธิ์การเข้าถึงของผู้ให้บริการ, สถานะของไฟร์วอลล์และ Cloudflare, รวมถึงบันทึกการทำงานที่ลงนามของผู้รวบรวมข้อมูล</td>
+<td>การสอบถามแบบอ่านอย่างเดียวไปยังผู้ให้บริการและ Cloudflare；ความพร้อมใช้งานของการตรวจสอบแต่ละรายการขึ้นอยู่กับผู้ให้บริการ</td>
 </tr>
 <tr>
-<td><a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX confidential VM</a></td>
-<td>Quote signature and platform status，binding to the collector statement，compose and OS measurements</td>
-<td>Intel trust chain and expected deployment measurements；retain the results of every required TDX check</td>
+<td><a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX VM ลับ</a></td>
+<td>ระบุลายเซ็นและสถานะแพลตฟอร์ม，เชื่อมโยงกับคำสั่ง collector，การเขียนข้อความ และการวัดผลระบบปฏิบัติการ</td>
+<td>Intel trust chain และค่าการปรับใช้ที่คาดการณ์ไว้；เก็บรักษาผลการตรวจสอบ TDX ทุกครั้งที่จำเป็น</td>
 </tr>
 </tbody>
 </table></div>
-<p>In sealed acquisition，the approved collector receives data through an authenticated
-Telegram connection inside the verified environment．Attestation binds the archive to
-that execution，so verification covers acquisition as well as later file integrity．
-This relies on the approved code and the platform trust chain listed above．
-GitHub capture verification requires a session created inside the run and rejects
-imported-session captures．</p>
-<p>The run receipt records the collector version，file hashes and startup settings．GitHub
-provenance and TDX measurements provide the environment checks；the
-<a href="../verification/">validation record</a> identifies tested configurations．</p>
-<p>TgWitness signs the observations it collects；Telegram and message authors do not issue
-these signatures．In a local workspace，material created before the first independent
-checkpoint still depends on the collector and its key holder．Coverage records describe
-the selected scope and collection outcomes，while verified external timestamps anchor
-the committed archive or journal boundary in time．</p>
+<p>ในการเก็บข้อมูลแบบปิดผนึก (sealed acquisition) ผู้เก็บข้อมูลที่ได้รับการอนุมัติจะรับข้อมูลผ่านการเชื่อมต่อ Telegram ที่ได้รับการยืนยันตัวตน
+ภายในสภาพแวดล้อมที่ได้รับการตรวจสอบแล้ว การรับรอง (attestation) จะผูกไฟล์เก็บถาวรไว้กับ
+การดำเนินการนั้น ดังนั้นการตรวจสอบจึงครอบคลุมทั้งขั้นตอนการเก็บข้อมูลและความสมบูรณ์ของไฟล์ในภายหลัง
+สิ่งนี้ขึ้นอยู่กับโค้ดที่ได้รับการอนุมัติและห่วงโซ่ความเชื่อถือของแพลตฟอร์มที่ระบุไว้ข้างต้น
+การตรวจสอบการจับภาพบน GitHub จำเป็นต้องมีเซสชันที่สร้างขึ้นภายในกระบวนการทำงาน และจะปฏิเสธ
+การจับภาพจากเซสชันที่นำเข้ามา</p>
+<p>ใบยืนยันการรันบันทึกเวอร์ชันของตัวเก็บข้อมูล ค่าแฮชของไฟล์ และการตั้งค่าเริ่มต้น GitHub
+ข้อมูลที่มา (provenance) และการวัดค่า TDX ให้ข้อมูลการตรวจสอบสภาพแวดล้อม ส่วน
+<a href="../verification/">บันทึกการตรวจสอบ</a>ความถูกต้องระบุการตั้งค่าที่ได้รับการทดสอบ</p>
+<p>TgWitness ลงนามในข้อมูลการสังเกตที่เก็บรวบรวมได้；Telegram และผู้เขียนข้อความไม่ได้ออก
+ลายเซ็นเหล่านี้．ในพื้นที่ทำงานท้องถิ่น，ข้อมูลที่สร้างขึ้นก่อนจุดตรวจสอบอิสระ
+ครั้งแรกยังคงขึ้นอยู่กับผู้เก็บรวบรวมข้อมูลและผู้ถือกุญแจของมัน．บันทึกการครอบคลุมอธิบาย
+ขอบเขตที่เลือกและผลลัพธ์การเก็บรวบรวมข้อมูล ส่วนเวลาประทับจากภายนอกที่ได้รับการตรวจสอบจะกำหนด
+ขอบเขตของคลังข้อมูลหรือบันทึกที่ถูกบันทึกไว้ในเวลา</p>
 <h2 id="attachments">ไฟล์แนบ<a class="anchor" href="#attachments" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <p>ไฟล์ถูกระบุด้วย SHA-256 ในโฟลเดอร์ media/ เหตุการณ์ media.saved เชื่อมโยงค่าแฮชและ
 ความยาวไบต์กับเหตุการณ์ข้อความเฉพาะ ชื่อไฟล์ดิบเป็นข้อมูลเมตา ไม่เคยเป็น
@@ -544,17 +543,17 @@ media/ โดยตั้งชื่อเป็น SHA-256 แต่ละบ�
 และนโยบายขนาดไว้ การกู้คืนจะตรวจสอบการผูกนั้นก่อนดาวน์โหลด มันจะไม่เคยดึง
 ข้อความปัจจุบันมา และจะแทนที่ไฟล์แนบที่ใหม่กว่าอย่างเงียบๆ งานที่ถูกขัดจังหวะ
 จะได้รับการลองใหม่ ในขณะที่ความล้มเหลวถาวรยังคงเป็นผลลัพธ์ที่ชัดเจน</p>
-<p>Each workspace has its own journal and signing identity. A process.started event includes
-a run ID, local clocks, dependency versions, source-file hashes, initial account/scope,
-and capture settings. Heartbeats include the run ID, monotonic time, and queue state.
-The run receipt can also be downloaded as a separately signed statement．For verification
-of the execution environment，pair it with the GitHub attestation or TDX checks described
-in <a href="#verification-scope">Verification scope</a>．</p>
-<p>Automatic checkpoints are retained locally on startup, every five minutes while
-observing (<strong>Parameters → Signed checkpoint every</strong>), and on orderly stop. Startup verification and export compare the journal
-against the latest retained local checkpoint. This can detect a database rollback
-when the checkpoint survives．Independent retention keeps that reference available outside
-the workspace；a verified external timestamp additionally anchors it in time．</p>
+<p>แต่ละพื้นที่ทำงานมีบันทึกและตัวตนสำหรับการลงนามเป็นของตัวเอง เหตุการณ์ process.started ประกอบด้วย
+ID การรัน, นาฬิกาท้องถิ่น, เวอร์ชันของส่วนที่พึ่งพา, ค่าแฮชของไฟล์ต้นฉบับ, บัญชี/ขอบเขตเริ่มต้น,
+และการตั้งค่าการบันทึก Heartbeats ประกอบด้วย ID การรัน, เวลาแบบโมโนโทนิก, และสถานะคิว
+ใบยืนยันการรันยังสามารถดาวน์โหลดเป็นเอกสารที่ลงนามแยกต่างหากได้ เพื่อการตรวจสอบ
+สภาพแวดล้อมการรัน ให้ใช้ร่วมกับใบรับรองจาก GitHub หรือการตรวจสอบ TDX ที่อธิบายไว้
+ในส่วน &quot;<a href="#verification-scope">ขอบเขตการตรวจสอบ</a>&quot;</p>
+<p>จุดตรวจสอบอัตโนมัติจะถูกเก็บไว้อย่างท้องถิ่นเมื่อเริ่มต้นระบบ ทุกห้านาทีระหว่าง
+การสังเกตการณ์ (<strong>พารามิเตอร์ → Signed checkpoint every</strong>) และเมื่อหยุดระบบอย่างเป็นระเบียบ การตรวจสอบเมื่อเริ่มต้นระบบและการส่งออกจะเปรียบเทียบบันทึก
+กับจุดตรวจสอบท้องถิ่นล่าสุดที่เก็บไว้ สิ่งนี้สามารถตรวจพบการย้อนกลับของฐานข้อมูล
+เมื่อจุดตรวจสอบยังคงอยู่ การเก็บรักษาอย่างอิสระทำให้การอ้างอิงนี้สามารถใช้งานได้นอก
+พื้นที่ทำงาน; และเวลาประทับภายนอกที่ได้รับการตรวจสอบแล้วยังช่วยยึดจุดอ้างอิงนี้ให้คงที่ตามเวลาอีกด้วย．</p>
 <p>หลังจากรีสตาร์ท ระบบจะกลับมาดำเนินการต่อจากตำแหน่งการอัปเดต Telegram ที่บันทึกไว้ (<code>catch_up_from</code> ใน
 <code>observation.started</code>) และจะขอรับการอัปเดตที่พลาดไป การตรวจสอบซ้ำเป็นระยะจะบันทึก
 <code>message.recovered</code> สำหรับข้อความที่พลาดไป และ <code>message.missing_on_recheck</code> เมื่อ Telegram ไม่

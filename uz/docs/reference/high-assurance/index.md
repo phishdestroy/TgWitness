@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-
 
 Hetzner yoki Phala Cloud&#x27;da joylashgan, 24/7 yopiq server, Gateway DNS va uchinchi tomon takrorlay oladigan tekshiruvlar.
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+Yuqori ishonchlilikka ega joylashtirish arxivni tekshirishga yig'ish muhitining mustaqil tekshiruvlarini qo'shadi. Ko'rib chiquvchi bulut provayderi va Cloudflare'da saqlangan joylashtirish hamda kirish yozuvlarini so'raydi, Intel TDX joylashtirishi esa yig'uvchining muhitini apparat tasdiqlash bilan ta'minlaydi.
 
 Oddiy mahalliy va Docker ishlatish o'zgarmagan. Bu yerda hech narsa ishlamaydi, agar siz uni bilan joylashtirmang `python -m tgwitness.cloud`, va collector faqat joylashtirishda sozlamalar belgilanganida mezbonini o'qiydi. `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Oqim sxemasi · Operator → Server, kirish qoidalarsiz firewall (provayder API)
 | Imzo kaliti shu serverda yaratilgan | Kalit provayderning server IDsi va olgan cloud-initning xeshini ko'rsatadigan bayonotni imzolaydi | Provayderga qarshi tekshirilgan Collector |
 | Jurnal o'sha kalit va serverga tegishli | Har bir jarayon dalillarda boshlanadiZIP o'sha server uchun mezbon o'lchovini o'zida saqlaydi | Dalil ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+Yig'uvchi SSH holatini, sessiyalarni, kirish tarixini va ishga tushirish ma'lumotlarini imzolangan jarayon-boshlanishi va `host.state` yozuvlarda. Oddiy VMda bu mahalliy inventarizatsiya yozuvlari bo'lib, ko'rib chiquvchi ularni provayderning mustaqil yozuvlari bilan solishtiradi. Quyidagi Intel TDX joriy etilishi esa apparat bilan ta'minlangan o'lchovlarni ham tasdiqlaydi.
 
 ## Provayderlar
 
@@ -269,8 +269,8 @@ Gateway DNS tizim resolverini qamrab oladi. 443-port orqali HTTPS orqali boshqa 
 
 Cloudflare Telegramning shifrlash ichki qismiga, Telegram hisobidagi boshqa qurilmalarga (evidence mode'ning qurilmalar ro'yxati ularni Telegram tomonidan qayd etadi) yoki provayderning gipervizoriga kira olmaydi.
 
-## Reading the deployment result
+## Joylashtirish natijasini o'qish
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+Oddiy VM uchun provayder host infratuzilmasini va mahalliy inventarizatsiyani provayder yozuvlari bilan birga tekshiradi. Intel TDX uchun verifikator qo'shimcha ravishda apparat koti, yig'uvchi bog'lanishi, kompozitsiya va operatsion tizim o'lchovlarini tekshiradi. Qaysi tekshiruvlar o'tgan yoki mavjud bo'lmaganini ko'rish uchun alohida natijalarni o'qing.
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+Tarixiy firewall tafsilotlari provayderga bog'liq; Linode qoida versiyalarini saqlaydi. [Validatsiya yozuvi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/) sinovdan o'tkazilgan joylashtirishlarni va qolgan jonli tekshiruvlarni ro'yxatlaydi, hamda [tasdiqlash doirasi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) ushbu muhit tekshiruvlarini arxiv olish va yaxlitlik bilan bog'laydi.

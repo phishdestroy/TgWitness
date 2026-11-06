@@ -144,10 +144,35 @@ read-receipt blocking in the API collector．</p>
 <li>پروفایل آن به‌عنوان یک رکورد <code>source.profile</code>: توضیحات و دستورات ربات، متن دربارهٔ کاربر، گروه یا کانال، اعضا، چت مرتبط و لینک دعوت در صورتی که تلگرام بازگرداند؛</li>
 <li>آخرین پیام‌های قابل مشاهده آن (تا ۱۰۰۰ پیام) به عنوان یک نمای کلی تاریخچه با شناسه <code>new_chat</code>: پیام‌های قبلی یک گفتگوی تیمی که به تازگی به آن پیوسته‌اید، یا آنچه یک ربات قبل از اینکه چت تحت نظارت قرار گیرد، گفته است. پیام‌هایی که قبلاً به صورت زنده ذخیره شده‌اند، تکرار نمی‌شوند.</li>
 </ul>
-<p>گفتگوهایی که هنگام فعال شدن حالت در لیست موجود هستند، بدون اسنپ‌شات اضافه می‌شوند.
-یک FloodWait این کار را متوقف می‌کند و پس از آن از سر می‌گیرد؛ خطاها ثبت می‌شوند و ضبط زنده گفتگوی متوقف نمی‌شود.
-- <strong>پروفایل‌ها بنا به درخواست. چت‌ها → پروفایل → ذخیره پروفایل اکنون</strong> پروفایل فعلی هر منبعی را ذخیره می‌کند؛ جدیدترین پروفایل بالای پیام‌ها نمایش داده می‌شود.
-- <strong>نامرئی.</strong> دکمه‌های درون‌خطی (بازپاس) که در اپلیکیشن دیگری از تلگرام فشرده می‌شوند، پاپ‌آپ یا لینکی که ربات به چنین فشاری پاسخ می‌دهد، و لینک‌های دعوت استفاده‌شده در اپلیکیشن دیگر به TgWitness نمی‌رسند. آنچه ربات بعداً ارسال یا ویرایش می‌کند، ضبط می‌شود.</p>
+<p>Chats already in the list when the mode is switched on are added without snapshots.
+A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
+recording of the chat continues.
+- <strong>Profiles on request.</strong> <strong>Chats → Profile → Save profile now</strong> saves the current profile
+of any source; the newest one is shown above the messages.
+- <strong>Chat state snapshots (preview).</strong> State outside the message stream changes without a
+message: unpinning every message leaves no message-level trace, an administrator loses
+rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled
+source is read periodically and saved as a signed <code>chat.state</code> record: title, usernames,
+description, member and administrator counts, linked chat, slow mode, pinned message IDs
+(up to 100), administrators with their rights and titles, and gifts shown on channels and
+user profiles (up to 100). Each record lists the differences from the previous snapshot:
+changed fields with before and after, pinned messages added or removed, administrators and
+gifts added, changed or no longer listed. Telegram does not say who changed anything or
+when between snapshots.
+- A part Telegram refuses (for example the administrator list of a channel for a member
+    who is not an administrator) is named in <code>errors</code>; its earlier value is kept and listed
+    in <code>carried_forward</code>, never reported as removed.
+- A record whose only changes are counts, and a check that found no change, refer to the
+    last full state with <code>state_seq</code> and cumulative <code>state_overrides</code>. A full state is written at
+    least every seven days and whenever anything other than a count changes.
+- <code>parts_complete</code> marks capped lists．Additions require a complete earlier list，
+    removals require a complete current list，and explicit empty values record clearing．
+- <strong>Parameters → Chat state</strong> sets the interval (12 hours by default, 0 turns snapshots
+    off), the pause between sources, which parts are read, and whether checks that found no
+    change are recorded. A FloodWait pauses snapshots and they resume afterwards.
+- <strong>Not visible.</strong> Inline (callback) buttons pressed in another Telegram app, the popup or
+link a bot answers such a press with, and invite links used in another app do not reach
+TgWitness. What the bot sends or edits afterwards is recorded.</p>
 </li>
 </ul>
 <h3 id="act-from-the-panel">اقدام از پنل<a class="anchor" href="#act-from-the-panel" aria-label="لینک به این بخش">#</a></h3>
@@ -246,8 +271,9 @@ read-receipt blocking in the API collector．</p>
 حساب‌های مختلف می‌توانند یک گروه را مشاهده کنند، اما دفتر ثبت‌های آن‌ها جدا از هم باقی می‌ماند.</p>
 <p>هر رویداد شامل هش قبلی و یک امضای Ed25519 است. خروجی‌ها کل دفتر کار را از طریق یک شماره توالی ثابت پوشش می‌دهند. فیلترهای پنل، خروجی را فیلتر نمی‌کنند؛ جمع‌آوری ممکن است در حین آماده‌سازی، فراتر از محدوده آن ادامه یابد.</p>
 <p><strong>بررسی مجله،</strong> زنجیره رویدادها و امضاها را از طریق مرز نمایش‌داده‌شده <strong>اعتبارسنجی می‌کند</strong>. نتیجه آن هنگام تغییر فضای کاری پاک می‌شود و پنل، سوابق جدید افزوده‌شده پس از بررسی را شناسایی می‌کند. خروجی‌گیری ZIP نیز رسانه‌های جمع‌آوری‌شده را اعتبارسنجی می‌کند.</p>
-<p>یک امضای معتبر، یکپارچگی را نسبت به کلید مورد اعتماد برقرار می‌کند، نه نسبت به منشأ تلگرام یا صحت محتوا. اثر انگشت‌ها و نقاط کنترل را به‌طور مستقل حفظ کنید. برای الزامات اعتماد و تحویل، به <a href="../evidence/">مدل شواهد</a>، <a href="../operations/">عملیات روزانه</a> و
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">رویه پذیرش زنده</a> مراجعه کنید.</p></div></article>
+<p>Retain fingerprints and checkpoints independently．See the
+<a href="../evidence/#verification-scope">verification scope</a> for acquisition checks in each mode，
+and <a href="../operations/">daily operations</a> for routine collection．</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">ویرایش این صفحه در گیت‌هاب ↗</a><a class="next-guide" href="../history/"><span>مرحله بعدی</span><strong>بارگذاری تاریخچه منبع ←</strong></a><p>این راهنماها پیاده‌سازی فعلی را توصیف می‌کنند. نتایج اعتبارسنجی و شکاف‌های باقی‌مانده به‌طور جداگانه مستند شده‌اند. <a href="../verification/">آنچه آزمایش شده است ←</a></p></footer>
 </main>
 <aside class="toc" aria-label="در این صفحه"><p class="nav-label">در این صفحه</p><a href="#from-login-to-a-journal">از ورود تا دفترچهٔ ثبت</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">دامنهٔ مشاهده: چت‌های منتخب، یک پوشه یا کل حساب</a><a href="#scope-and-event-selection">دامنه و انتخاب رویدادها</a><a href="#own-actions">اقدامات خود</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">حالت تحقیق: پیوستن به تیم‌ها و گفتگو با ربات‌ها</a><a href="#recheck-tiers">بازبینی مجدد سطوح</a><a href="#message-history-and-attribution">تاریخچه پیام و انتساب</a><a href="#history-snapshots">لحظه‌های تاریخی</a><a href="#attachment-handling">مدیریت پیوست‌ها</a><a href="#pause-lock-disconnect-and-restart">مکث، قفل، قطع اتصال و راه‌اندازی مجدد</a><a href="#account-isolation-and-verification">ایزوله‌سازی و تأیید حساب</a></aside>

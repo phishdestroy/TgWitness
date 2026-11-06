@@ -101,7 +101,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 | 相同的儲存檔案 | 已完成媒體收據 #151 和 #209 | 所保存位元的完整 SHA-256 值完全一致 |
 | 頻道來源標示 | #101 和 #188 | 若未標明發送者，請勿將頻道貼文歸因於使用者 71001 |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+比較附件雜湊值及其相關的訊息參考，並將帳戶 時間軸依這些記錄中提供的 Telegram ID 進行分組。
 
 請將團隊的工作筆記保留在[「案件看板」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/)上：將您依賴的紀錄 （例如 #146、#188 和 #205）加入書籤，標示出確切的目標字串，並 儲存兩個紀錄之間或特定時間範圍內每項記錄動作的片段。 筆記 與狀態會將團隊的審閱內容保留在其各自的簽名歷史紀錄中，可與 原始觀察結果分開識別。
 
@@ -161,6 +161,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | 由機器人驅動的訂單／付款爭議 | 條目公告 → 已儲存連結預覽 → 機器人啟動參數 → 訊息與鍵盤版本 → 面板回呼收據 → 私人／群組後續追蹤 | 已觀察到的提議／回應時間軸及經核實的來源；僅憑付款連結並不能證明已付款 |
 | 事件發生後被刪除的訊息 | 所有受影響的聊天室 → 已儲存的原始內容／編輯紀錄 → 刪除或重新檢查時內容缺失的結果 → 已保存的媒體檔案 → 事件涵蓋範圍及其他帳戶視角 | 保留原始版本並明確標示未知時間區間；不假設任何虛構的刪除行為者 |
-| 某位參與者在不同聊天室中使用不同的名稱 | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| 某位參與者在不同聊天室中使用不同的名稱 | 發訊者編號 → 姓名／使用者名稱 → 對話紀錄 → 回覆 → 其他被觀察到的對話 → 被引用的目的地／檔案 | Telegram 帳號的活動時間軸，附有其來源記錄的連結 |
 
 [資料彙編參考](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/) · [個人資料驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#people-profiles) · [證據移交](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#investigation-handoff) · [驗證已完成](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/)

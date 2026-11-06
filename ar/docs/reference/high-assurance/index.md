@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-
 
 خادم مغلق يعمل على مدار الساعة طوال أيام الأسبوع على Hetzner أو Phala Cloud، وبوابة DNS، وعمليات التحقق التي يمكن لطرف ثالث تكرارها.
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+يضيف النشر عالي الضمان فحوصات مستقلة لبيئة التجميع إلى التحقق من الأرشيف. يقوم المراجع بالاستعلام عن سجلات النشر والوصول التي يحتفظ بها مزود الخدمة السحابية وCloudflare، كما يضيف نشر Intel TDX شهادة الأجهزة لبيئة أداة التجميع．
 
 لا يتغير الاستخدام العادي المحلي واستخدام Docker. لا يعمل أي شيء هنا ما لم تقم بالنشر باستخدام `python -m tgwitness.cloud`، ولا يقرأ المجمع مضيفه إلا عندما يحدد النشر `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ High-assurance deployment adds independent checks of the collection environment 
 | تم إنشاء مفتاح التوقيع على ذلك الخادم | يقوم المفتاح بتوقيع بيان يحدد معرّف خادم المزود وهاش ملف cloud-init الذي تلقّاه | Collector، تمت مقارنته مع المزود |
 | تنتمي اليومية إلى ذلك المفتاح والخادم | كل عملية تبدأ في الدليل ZIP تحمل قياس المضيف لذلك الخادم | الأدلة ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+يقوم المجمع بتسجيل حالة SSH، والجلسات، وسجل تسجيل الدخول، ومعلومات التشغيل في سجلات بدء العملية و `host.state` . على آلة افتراضية عادية، تكون هذه سجلات جرد محلية ، يقارنها المراجع بالسجلات المستقلة الخاصة بالمزود. كما أن نشر Intel TDX أدناه يتحقق بشكل إضافي من القياسات المدعومة بالأجهزة.
 
 ## المزودون
 
@@ -269,8 +269,8 @@ python -m tgwitness.cloud verify --record deployment.json \
 
 لا يمكن لـ Cloudflare الاطلاع على محتوى تشفير Telegram، أو الأجهزة الأخرى المرتبطة بحساب Telegram (قائمة الأجهزة في «وضع الأدلة» تسجلها من جانب Telegram) أو برنامج Hypervisor الخاص بالمزود.
 
-## Reading the deployment result
+## قراءة نتيجة النشر
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+بالنسبة للآلة الافتراضية العادية، يتحكم المزود في البنية التحتية للمضيف، ويتم فحص المخزون المحلي إلى جانب سجلات المزود. أما بالنسبة لـ Intel TDX، فيقوم المُحقق أيضًا بفحص مواصفات الأجهزة، وربط المجمع، وعمليات التكوين، وقياسات نظام التشغيل. اقرأ النتائج الفردية لمعرفة الفحوصات التي تم اجتيازها أو التي لم تكن متاحة.
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+تعتمد تفاصيل سجل جدار الحماية التاريخي على المزود؛ وتحتفظ Linode بإصدارات القواعد. يسرد [سجل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/) [التحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/) عمليات النشر التي تم اختبارها وعمليات الفحص الحية المتبقية، ويربط [نطاق التحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope) بين عمليات فحص البيئة هذه واكتساب الأرشيف وسلامته.

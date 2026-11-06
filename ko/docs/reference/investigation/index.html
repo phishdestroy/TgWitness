@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../../">홈</a> <span aria-hidden="true">/</span> <a href="../../">문서</a> <span aria-hidden="true">/</span> <a href="../">참고 문헌</a> <span aria-hidden="true">/</span> <span aria-current="page">조사 모드</span></nav>
 <p class="verification-shortcut"><a href="../verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">이 페이지의 일부 내용은 여전히 영어로 되어 있습니다. 번역 후 원본 영어 문구가 변경되었기 때문입니다.</p><p class="eyebrow">참고 문헌 / 수집</p><h1>조사 모드</h1><p class="guide-outcome">채널, 그룹, 비공개 채팅 및 봇에 걸친 전체 계정 조사: 조사 범위 설정부터 검증된 사건 자료 패키지 구성까지.</p><div class="wiki-body"><p>채널, 그룹, 비공개 채팅 및 봇 전반에 걸쳐 사건을 추적할 수 있으며, 초기
+<article class="guide-content"><p class="eyebrow">참고 문헌 / 수집</p><h1>조사 모드</h1><p class="guide-outcome">채널, 그룹, 비공개 채팅 및 봇에 걸친 전체 계정 조사: 조사 범위 설정부터 검증된 사건 자료 패키지 구성까지.</p><div class="wiki-body"><p>채널, 그룹, 비공개 채팅 및 봇 전반에 걸쳐 사건을 추적할 수 있으며, 초기
 데이터 수집부터 인용된 타임라인 및 검증 가능한 인계 과정까지 포함합니다. 대화형 웹사이트
 버전은 <code>/docs/cases/</code>에서 확인하실 수 있으며, <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">미리보기 사용법을 참조하십시오</a>.</p>
 <h2 id="worked-case-a-destination-changes-across-four-conversations">실제 사례: 네 건의 대화에서 수신처가 변경된 사례<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="이 섹션으로 이동">#</a></h2>
@@ -197,8 +197,8 @@
 </tr>
 </tbody>
 </table></div>
-<p>Compare attachment hashes and their associated message references，and keep account
-timelines grouped by the Telegram IDs supplied in those records．</p>
+<p>첨부 파일 해시와 관련 메시지 참조를 비교하고, 해당 기록에 제공된 텔레그램 ID별로 계정
+타임라인을 그룹화하여 유지합니다.</p>
 <p><a href="../case-board/">Case Board</a>에 팀의 작업 메모를 보관하십시오: #146, #188, #205와 같이
 참고하는 기록에 북마크를 지정하고, 정확한 대상 문자열을 강조 표시하며,
 두 기록 사이 또는 특정 시간 범위 내의 모든 기록된 작업의 일부를 저장하십시오. 메모
@@ -346,8 +346,8 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 </tr>
 <tr>
 <td>한 참가자가 채팅마다 이름을 바꿉니다</td>
-<td>Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files</td>
-<td>A Telegram-account activity timeline with links to its source records</td>
+<td>발신자 ID(숫자) → 이름／사용자 이름 기록 → 답장 → 기타 관찰된 채팅 → 인용된 수신처／파일</td>
+<td>원본 기록으로 연결되는 링크가 포함된 텔레그램 계정 활동 타임라인</td>
 </tr>
 </tbody>
 </table></div>

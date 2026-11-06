@@ -101,7 +101,7 @@ Ishlangan misolda:
 | Xuddi shu saqlangan fayl | Yakunlangan media kvitansiyalari #151 va #209 | Saqlangan baytlar uchun to'liq SHA-256 qiymatlari mos keladi |
 | Kanalga tegishlilik | #101 va #188 | Tasdiqlangan jo'natuvchi bo'lmasa, kanal postini foydalanuvchi 71001 ga tegishli deb hisoblamang |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+Ilovadagi hashlarni va ularga tegishli xabar havolalarini solishtiring hamda hisob vaqt chiziqlarini o'sha yozuvlarda ko'rsatilgan Telegram IDlari bo'yicha guruhlang.
 
 Jamoaning [Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/)'dagi ish yozuvlarini saqlang: #146, #188 va #205 kabi tayanadigan yozuvlarni belgilab qo'ying, aniq manzil satrini ajratib ko'rsating va har bir yozib olingan harakatning ikki yozuv orasidagi yoki vaqt oralig'idagi bo'lagini saqlang. Eslatmalar va holatlar jamoaning ko'rib chiqishini o'z imzolangan tarixida saqlaydi, ularni manba kuzatuvlaridan alohida aniqlash mumkin.
 
@@ -161,6 +161,6 @@ Haqiqiy tekshiruv natijalari va asl artefaktlarni saqlang. Case Board'dagi ish m
 | --- | --- | --- |
 | Bot tomonidan boshqariladigan buyurtma/to'lov nizosi | Yozuv e'lon qilish → saqlangan havola ko'rinishi → botni ishga tushirish parametri → xabar va klaviatura versiyalari → panel chaqiruvlari kvitansiyalari → shaxsiy/guruh bo'yicha keyingi kuzatuv | Kuzatilgan taklif/javob vaqt chizig'i va tasdiqlangan manbalar; faqat to'lov havolasi to'lovni isbotlamaydi |
 | Voqeadan keyin o'chirib tashlangan xabarlar | Ta'sirlangan barcha suhbatlar → saqlangan asl nusxalar/tahrirlar → o'chirish yoki qayta tekshirishda yo'qolish natijalari → saqlangan media → yoritish va boshqa hisob nuqtai nazarlari | Saqlangan versiyalar va aniq noma'lum oraliklar; ixtiro qilingan o'chirish sub'ekti yo'q |
-| Ishtirokchi suhbatlar bo'ylab ismlarini o'zgartiradi | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| Ishtirokchi suhbatlar bo'ylab ismlarini o'zgartiradi | Raqamli jo'natuvchi ID → ism/foydalanuvchi nomi tarixi → javoblar → boshqa kuzatilgan suhbatlar → keltirilgan manzillar/fayllar | Telegram hisobining faoliyat kronologiyasi va uning manba yozuvlariga havolalar |
 
 [Yig'ish manbai](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/) · [Foydalanuvchi profilini tasdiqlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#people-profiles) · [Dalillarni topshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#investigation-handoff) · [Validatsiya yakunlandi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/)

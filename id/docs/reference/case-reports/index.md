@@ -84,6 +84,19 @@ Interval kosong berarti tidak ada pengamatan yang disertakan; periksa cakupan un
 
 Jika disertakan, `analytics.json` dilindungi oleh hash file yang ditandatangani dari arsip. `report.json` jurnal menyematkan agregat terpilih yang sama. Verifikasi tanda tangan mendeteksi byte yang berubah. Untuk memeriksa angka-angka tersebut, hitung ulang agregat jurnal dengan `report_analytics.Analytics` dan `selected`, atau agregat snapshot dengan `snapshot_analytics.collect` dan `project`.
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | Apa yang ditampilkannya |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+
 Dari checkout sumber, buatlah kedelapan desain yang tercantum di atas dari jurnal fiktif yang sama:
 
 ```
@@ -134,7 +147,7 @@ Tinjau setiap pemeriksaan secara terpisah, bersamaan dengan cakupan pengumpulan 
 4. Pertahankan file ZIP asli beserta hash-nya. Catat setiap pemegang, transfer, tanggal, dan tujuan. Pertahankan pernyataan operator yang dikaitkan serta catatan kasus bersama dengan data tersebut.
 5. Untuk VM rahasia, pertahankan dan verifikasi secara independen kutipan, tantangan, rantai sertifikat Intel, pengukuran, sumber yang tepat, dan kondisi penanganan kunci. Simpan hasil verifikasi attestation bersama artefak yang telah ditinjau.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+Lihat [ruang lingkup verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) untuk pemeriksaan akuisisi, integritas arsip, waktu, dan cakupan pengumpulan dalam setiap mode.
 
 ## Tinjauan penerima
 

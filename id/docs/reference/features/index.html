@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Referensi</a> <span aria-hidden="true">/</span> <span aria-current="page">Fitur dan batasan</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Sebagian isi halaman ini masih dalam bahasa Inggris: teks asli dalam bahasa Inggris telah diubah setelah diterjemahkan.</p><p class="eyebrow">Referensi / Kumpulkan</p><h1>Fitur dan batasan</h1><p class="guide-outcome">Model pengumpulan saat ini, alur kerja multi-akun, ekspor, dan batasan operasional TgWitness.</p><div class="wiki-body"><p>TgWitness melestarikan percakapan Telegram yang dapat diakses oleh akun yang terhubung,
+<article class="guide-content"><p class="eyebrow">Referensi / Kumpulkan</p><h1>Fitur dan batasan</h1><p class="guide-outcome">Model pengumpulan saat ini, alur kerja multi-akun, ekspor, dan batasan operasional TgWitness.</p><div class="wiki-body"><p>TgWitness melestarikan percakapan Telegram yang dapat diakses oleh akun yang terhubung,
 mencatat perubahan yang teramati, dan menyiapkan ekspor yang dapat diverifikasi. Referensi ini menjelaskan
 model pengumpulan, alur kerja saat ini, dan batas-batasnya.</p>
 <h2 id="standalone-application">Aplikasi mandiri<a class="anchor" href="#standalone-application" aria-label="Tautan ke bagian ini">#</a></h2>
@@ -177,13 +177,13 @@ pengaturan pembaruan terpisah. Belum ada penggantian kategori per grup.</p>
 </tr>
 <tr>
 <td>Proses pengumpulan</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>Mulai／berhenti, detak jantung, kesalahan, pengaturan, cakupan, dan tanda terima eksekusi yang ditandatangani</td>
+<td>Inventaris lokal; GitHub dan TDX menambahkan <a href="../evidence/#verification-scope">pemeriksaan lingkungan independen</a></td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>Antarmuka tersebut mencantumkan akun yang tercantum dalam peristiwa sumber dan mempertahankan
+nama serta nama pengguna yang diamati. Jika peristiwa tersebut tidak mencantumkan pelakunya, laporan tersebut akan membiarkan kolom tersebut kosong.</p>
 <h2 id="capacity-and-telegram-limits">Kapasitas dan batasan Telegram<a class="anchor" href="#capacity-and-telegram-limits" aria-label="Tautan ke bagian ini">#</a></h2>
 <p>Tidak ada jumlah obrolan universal yang dapat dipantau dengan kualitas terjamin.
 Kapasitas bergantung pada jumlah peristiwa puncak per detik, volume dan ukuran lampiran,

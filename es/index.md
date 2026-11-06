@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/
 
 [Código abierto ／ v0.9.1](https://phishdestroy.github.io/TgWitness/es/docs/reference/changelog/)
 
-Export Telegram chats，preserve their history，and share a signed archive others can verify．
+Exporta chats de Telegram， conserva su historial y comparte un archivo firmado que otros puedan verificar．
 
 [Demostración disponible：](https://phishdestroy.github.io/TgWitness/demo/?lang=es)[Guía de configuración](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=es)
 
 Datos ficticios， sin iniciar sesión en Telegram．
 
- [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/es/docs/reference/account-export/) [Captura con GitHub Actions （versión preliminar）](https://phishdestroy.github.io/TgWitness/es/docs/capture/) [Copia externa en S3： configuración y recuperación](https://phishdestroy.github.io/TgWitness/es/#s3)
+ [Exportar una cuenta o chats seleccionados](https://phishdestroy.github.io/TgWitness/es/docs/reference/account-export/) [Captura con GitHub Actions （versión preliminar）](https://phishdestroy.github.io/TgWitness/es/docs/capture/) [Copia externa en S3： configuración y recuperación](https://phishdestroy.github.io/TgWitness/es/#s3)
 
 UN MENSAJE A TRAVÉS DEL TIEMPO ＃0042
 

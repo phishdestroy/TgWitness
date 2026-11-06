@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 Kaynak bağlantısı, dönüştürme işleminin gerekli tüm öğeleri seçtiğini veya tanımlayıcı tüm ayrıntıları kaldırdığını tek başına kanıtlamaz. Orijinal düz metin, kanıt olarak eklenmemiştir. Bu yargıya varmak için yeni bir inceleme gereklidir.
 
-## Sharing and hosted capture
+## Paylaşım ve barındırılan yakalama
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+Alıcının ihtiyaç duyduğu mesajları ve dosyaları seçin, paylaşılan kopyanın tamamını inceleyin ve kaynağı ayrı olarak saklayın. Alıcının tam olarak o kopyayı tanımlayıp doğrulayabilmesi için gönderilen ZIP dosyasının hash değerini kaydedin. Seçilen tanımlayıcılar takma adlandırma işlemiyle değiştirilir; dahil edilen metin ve orijinal dosyalar incelemenin bir parçası olarak kalır.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope)．
+GitHub Actions, Takeout veya normal API aracılığıyla tam hesap ve seçili sohbetlerin dışa aktarılmasını destekler; ayrıca tek bir sohbetin olay günlüğünü de destekler. [Barındırılan yakalama](https://phishdestroy.github.io/TgWitness/docs/capture/)kılavuzu, ayarların doğrulanmasını ve 120 dakikalık sınırı açıklar. Barındırılan yakalamadan elde edilen bir paylaşım kopyasını doğrulamak için, kaynak hash değerini orijinal arşivle karşılaştırın ve [moduna](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) [özgü](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope)kontrollerle arşivin doğruluğunu teyit edin.
 
 [Kanıt formatı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/) · [Vaka raporları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/)

@@ -152,6 +152,40 @@ HTML به‌صورت آفلاین کار می‌کند، از تم‌های رو
 <p>یک بازه خالی به معنای عدم وجود مشاهدات شامل است؛ برای بررسی شکاف‌ها به پوشش مراجعه کنید. این نمودارها فعالیت‌های ذخیره شده را توصیف می‌کنند. فرستندگان ناشناس به عنوان یک دسته مجزا باقی می‌مانند و هر چک به صورت جداگانه گزارش می‌شود.</p>
 <p>هنگامی که گنجانده شود، فایل <code>analytics.json</code> توسط هش‌های فایل امضا شده آرشیو محافظت می‌شود.
 ژورنال <code>report.json</code> همان مجموعه انتخابی را جاسازی می‌کند. تأیید امضا بایت‌های تغییر یافته را تشخیص می‌دهد. برای بررسی ارقام، مجموعه‌های ژورنال را با <code>report_analytics.Analytics</code> و <code>selected</code> مجدداً محاسبه کنید، یا مجموعه‌های اسنپ‌شات را با <code>snapshot_analytics.collect</code> و <code>project</code> تهیه کنید.</p>
+<h3 id="anomaly-indicators">Anomaly indicators<a class="anchor" href="#anomaly-indicators" aria-label="لینک به این بخش">#</a></h3>
+<p><strong>Preview.</strong> Evidence reports add an <strong>Anomaly indicators</strong> section computed by
+registered processors (<code>tgwitness/metrics/</code>, one file per metric). The report names every
+processor that ran with its version, and prints its method under its table, so the
+computation can be repeated from <code>events.jsonl</code> with <code>tgwitness.metrics.run</code>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Processor</th>
+<th>آنچه نشان می‌دهد</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>first_time_posters_over_time</code> v1</td>
+<td>First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up．</td>
+</tr>
+<tr>
+<td><code>service_vs_message_ratio</code> v1</td>
+<td>Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number.</td>
+</tr>
+<tr>
+<td><code>join_leave_per_month</code> v1</td>
+<td>Joins, departures and removals or bans per month, one per person, chat, change and day.</td>
+</tr>
+<tr>
+<td><code>pinned_per_month</code> v1</td>
+<td>Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Parameters → Report metrics</strong> selects processors and the number of displayed rows，
+including in filtered reports．Daily and monthly tables show recent rows，service-share
+tables rank chats by saved message count．Totals cover every row．</p>
 <p>از یک چک‌اوت منبع، هر هشت طرح فهرست‌شده در بالا را از همان مجلهٔ خیالی بسازید:</p>
 <pre><code class="language-sh">python tools/build_report_styles.py --output test-results/report-styles</code></pre>
 <p>فایل <code>index.html</code> حاصل را باز کنید تا گزارش‌های کامل HTML، PDFهای امضا شده و فایل‌های ZIP را مقایسه کنید. هر طرح از همان مجله منبع استفاده می‌کند. برای هر اجرا از یک دایرکتوری خروجی جدید استفاده کنید تا نمونه‌های امضا شده قبلی حفظ شوند.</p>
@@ -207,8 +241,7 @@ HTML به‌صورت آفلاین کار می‌کند، از تم‌های رو
 <li>فایل‌های ZIP اصلی و هش‌های آن‌ها را حفظ کنید. هر دارنده، انتقال، تاریخ و هدف را ثبت کنید. بیانیه‌های اپراتور منسوب و یادداشت‌های پرونده را همراه آن‌ها نگهداری کنید.</li>
 <li>برای ماشین‌های مجازی محرمانه، نقل‌قول، چالش، زنجیره گواهی اینتل، اندازه‌گیری‌ها، منبع دقیق و شرایط مدیریت کلید را حفظ کرده و به‌طور مستقل تأیید کنید. نتیجه تأیید اعتبار را همراه با مصنوعات بازبینی‌شده نگه دارید.</li>
 </ol>
-<p>See <a href="../evidence/#verification-scope">verification scope</a> for the checks of acquisition，
-archive integrity，time and collection coverage in each mode．</p>
+<p>برای بررسی‌های <a href="../evidence/#verification-scope">حوزه‌ی تأیید</a>، به دامنه‌ی <a href="../evidence/#verification-scope">تصدیق</a> برای بررسی‌های اکتساب، یکپارچگی آرشیو، زمان و پوشش جمع‌آوری در هر حالت مراجعه کنید.</p>
 <h2 id="recipient-review">بازبینی دریافت‌کننده<a class="anchor" href="#recipient-review" aria-label="لینک به این بخش">#</a></h2>
 <p>از یک نصب معتبر TgWitness و یک اثر انگشت به‌طور مستقل به‌دست‌آمده استفاده کنید:</p>
 <pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256

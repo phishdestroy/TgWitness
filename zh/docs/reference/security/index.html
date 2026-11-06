@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">安全与数据处理</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 安全与项目</p><h1>安全与数据处理</h1><p class="guide-outcome">威胁模型、访问模型、静态机密、网络暴露、会话导入以及如何报告漏洞。</p><div class="wiki-body"><p>This page describes access，storage and network protection in a local or server workspace．
-For collection on a GitHub runner or in an Intel TDX confidential VM，see the
-<a href="../evidence/#verification-scope">verification modes</a>，which add checks of the collection environment．
-Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．</p>
+<article class="guide-content"><p class="eyebrow">参考 / 安全与项目</p><h1>安全与数据处理</h1><p class="guide-outcome">威胁模型、访问模型、静态机密、网络暴露、会话导入以及如何报告漏洞。</p><div class="wiki-body"><p>本页面描述了在本地或服务器工作区中的访问、存储和网络保护机制。
+若要在 GitHub Runner 或 Intel TDX 机密虚拟机中进行数据采集，请参阅
+<a href="../evidence/#verification-scope">“验证</a>模式”，该模式会增加对采集环境的检查。
+账户连接、通知、时间戳、异地副本和见证人各有其独立的路由设置。</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -61,8 +61,8 @@ Account connections，notifications，timestamps，off-site copies and witnesses
 <td>每条记录均带有 SHA-256 哈希链和 Ed25519 签名</td>
 </tr>
 <tr>
-<td>Local trust boundary</td>
-<td>The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary</td>
+<td>本地信任边界</td>
+<td>主机管理员控制工作区及其签名密钥；独立检查点保留了较早的日志边界</td>
 </tr>
 </tbody>
 </table></div>
@@ -101,22 +101,22 @@ IP 限制、登录限制以及可撤销的会话。仅限聊天群组的访问�
 收集到的源元数据、标识符，以及可能包含的个人或敏感内容。
 原始源元数据中可能包含 Telegram 访问哈希值和文件引用。</p>
 <h2 id="secrets-at-rest">静态数据中的秘密<a class="anchor" href="#secrets-at-rest" aria-label="本节链接">#</a></h2>
-<p>Telegram API credentials，the session and signing key are encrypted with Fernet．
-For local messages and media，encryption is provided by the host's disk or volume；
-the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP，
-and off-site copies use AES-256-GCM．</p>
-<p>The vault key defaults to the protected data directory．Use an external master-key file
-below to store it separately．On Unix，new private-key files use mode 0600 and new data
-directories use 0700；on Windows，set the directory ACL for the service account and
-authorized administrators．Existing directory permissions are retained．</p>
+<p>Telegram API 凭据、会话密钥和签名密钥均采用 Fernet 算法进行加密。
+对于本地消息和媒体文件，加密由主机磁盘或卷提供；
+工作区用于存储普通文件。导出数据可采用受密码保护的 AES-256 ZIP 格式，
+异地备份则采用 AES-256-GCM 加密。</p>
+<p>保险库密钥默认位于受保护的数据目录中。请使用下方的外部主密钥文件
+将其单独存储。在 Unix 系统上，新建的私钥文件应使用权限模式 0600，新建的数据
+目录应使用 0700；在 Windows 系统上，请为服务账户和
+授权管理员设置目录访问控制列表 (ACL)。现有目录权限将予以保留。</p>
 <h3 id="external-master-key">外部主密钥<a class="anchor" href="#external-master-key" aria-label="本节链接">#</a></h3>
-<p>For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random
-master key. HKDF-SHA256 and a separate random salt derive a different Fernet key
-for each workspace. vault.external.json must be retained for recovery. Missing or
-wrong master keys fail closed. Existing local vaults are not silently migrated.
-The panel displays the selected key-storage mode．Disk encryption protects the local
-message and media files in either mode；see
-<a href="../connection/">connection and data protection</a> for setup details．</p>
+<p>对于新的数据目录，TGWITNESS_VAULT_KEY_FILE 可提供外部随机
+主密钥。系统会通过 HKDF-SHA256 及独立的随机盐值，为每个工作区
+生成不同的 Fernet 密钥。为确保数据恢复，必须保留 vault.external.json 文件。若主密钥缺失或
+错误，系统将无法启动。现有本地保险库不会被自动迁移。
+面板上会显示所选的密钥存储模式。无论采用哪种模式，磁盘加密都会保护本地
+消息和媒体文件；有关设置的详细信息，请参阅
+<a href="../connection/">“连接和数据保护”</a>部分。</p>
 <h2 id="proxies-and-network-routes">代理服务器与网络路由<a class="anchor" href="#proxies-and-network-routes" aria-label="本节链接">#</a></h2>
 <p>代理配置在保险库中经过加密存储。密码和 MTProxy 密钥
 不会通过 API 返回，也不会写入证据记录。每个工作区可自行选择
@@ -158,19 +158,19 @@ QR 图像在本地生成，包含短效的 Telegram 登录令牌，且
 以记录 Authorization 头或请求正文。HTTP 以明文形式传输令牌和登录
 密钥：只要连接离开 localhost，请务必使用 HTTPS 或 SSH 隧道。</p>
 <h2 id="integrity-limits">完整性限制<a class="anchor" href="#integrity-limits" aria-label="本节链接">#</a></h2>
-<p>Local verification checks record signatures，the hash chain，attachments and the export manifest．
-The administrator holds the local signing key and can create another signed journal；
-an independently retained checkpoint detects replacement of the prefix it covers．
-Keep the key fingerprint and checkpoints with the recipient or an independent witness．</p>
-<p>For independently checked collection，choose <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions capture</a>
-or <a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX deployment</a>．
-Their verifiers check workflow provenance or hardware measurements in addition to archive integrity．
-Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies；
-the <a href="../evidence/#verification-scope">evidence format</a> describes the checks for each mode．</p>
+<p>本地验证会检查记录的签名、哈希链、附件以及导出清单。
+管理员持有本地签名密钥，并可创建另一份签名日志；
+一个独立保存的检查点可检测其所覆盖的前缀是否被替换。
+请将密钥指纹和检查点交由接收方或独立见证人保管。</p>
+<p>对于经过独立验证的采集，请选择 <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions 捕获</a>
+或 <a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX 部署</a>。
+其验证器除检查归档完整性外，还会验证工作流溯源或硬件测量数据。
+可选的时间戳和加密的异地副本可提供时间锚点和可恢复的副本；
+<a href="../evidence/#verification-scope">证据格式</a>描述了每种模式下的验证流程。</p>
 <h2 id="if-you-suspect-a-problem">如果您怀疑存在问题<a class="anchor" href="#if-you-suspect-a-problem" aria-label="本节链接">#</a></h2>
-<p>Preserve the original data directory and use a separate copy for analysis．
-Report the affected version，operation and reproducible steps through the
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">security policy</a>，keeping account data and credentials private．</p></div></article>
+<p>保留原始数据目录，并使用另一份副本进行分析。
+通过
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a>政策报告受影响的版本、操作及可重现步骤，同时确保账户数据和凭据的私密性。</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/SECURITY-MODEL.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../architecture/"><span>下一步</span><strong>架构 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
 </main>
 <aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#access-model">访问模式</a><a href="#panel-content-and-exports">面板内容与导出功能</a><a href="#secrets-at-rest">静态数据中的秘密</a><a href="#proxies-and-network-routes">代理服务器与网络路由</a><a href="#sign-in-and-session-imports">登录与会话导入</a><a href="#logs-and-transport">日志与传输</a><a href="#integrity-limits">完整性限制</a><a href="#if-you-suspect-a-problem">如果您怀疑存在问题</a></aside>

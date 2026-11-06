@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/
 
 [오픈 소스 ／ v0.9.1](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/)
 
-Export Telegram chats，preserve their history，and share a signed archive others can verify．
+텔레그램 채팅 내용을 내보내고， 대화 내역을 보존하며， 다른 사람이 검증할 수 있는 서명된 아카이브를 공유합니다．
 
 [데모 열기](https://phishdestroy.github.io/TgWitness/demo/?lang=ko)[설정 가이드](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=ko)
 
 가짜 데이터， 텔레그램 로그인 없음．
 
- [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/ko/docs/reference/account-export/) [GitHub Actions로 수집 （미리 보기）](https://phishdestroy.github.io/TgWitness/ko/docs/capture/) [S3 오프사이트 백업： 설정 및 복구](https://phishdestroy.github.io/TgWitness/ko/#s3)
+ [계정 또는 선택한 채팅 내보내기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/account-export/) [GitHub Actions로 수집 （미리 보기）](https://phishdestroy.github.io/TgWitness/ko/docs/capture/) [S3 오프사이트 백업： 설정 및 복구](https://phishdestroy.github.io/TgWitness/ko/#s3)
 
 시간을 초월한 메시지 ＃0042
 

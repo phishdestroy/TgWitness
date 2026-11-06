@@ -101,7 +101,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/inves
 | 保存されたファイルは同じです | メディア受領書 #151 および #209 を完了しました | 保存されたバイトについて、SHA-256の値が完全に一致しています。 |
 | チャンネルの出典 | #101 および #188 | 送信者が明記されていない限り、チャンネルへの投稿をユーザー71001によるものと見なさないでください。 |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+添付ファイルのハッシュ値とそれに関連するメッセージ参照を照合し、 それらの記録に指定されたTelegram IDごとにグループ化されたアカウントのタイムラインを維持する。
 
 [Case](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/)Boardにはチームの作業メモを残してください。#146、#188、#205など、 参照する記録にはブックマークを付け、目的の文字列を正確にハイライトし、 2つの記録間または特定の時間範囲内のすべての記録されたアクションの一部を保存してください。 メモ やステータスは、チームによるレビュー内容を独自の署名付き履歴として保持し、 ソースの観察結果とは個別に識別可能です。
 
@@ -161,6 +161,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | ボットによる注文・支払いの紛争 | エントリーの告知 → 保存されたリンクのプレビュー → ボットの起動パラメータ → メッセージおよびキーボード版 → パネルコールバックの受信確認 → プライベート／グループのフォローアップ | 確認されたオファー／応答のタイムラインおよび検証済みの情報源；支払いリンクのみでは、支払いが行われたことを証明するものではありません |
 | インシデント発生後の削除されたメッセージ | 影響を受けたすべてのチャット → 保存されたオリジナル／編集履歴 → 削除または再確認時の欠落結果 → 保存されたメディア → カバー範囲およびその他のアカウントの視点 | 保存されたバージョンと明示的な不明な期間；削除を行った主体を推測して記載することはありません |
-| ある参加者が、チャットごとに名前を変えています | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| ある参加者が、チャットごとに名前を変えています | 送信者ID（数値） → 名前／ユーザー名の履歴 → 返信 → その他の観測されたチャット → 引用された宛先／ファイル | Telegramアカウントのアクティビティのタイムラインと、そのソースレコードへのリンク |
 
 [コレクション参照](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/) · [人物プロフィールの検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#people-profiles) · [証拠の引き渡し](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#investigation-handoff) · [検証完了](https://phishdestroy.github.io/TgWitness/ja/docs/reference/verification/)

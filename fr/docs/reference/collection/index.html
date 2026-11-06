@@ -194,14 +194,35 @@ compte nécessite la confirmation habituelle.</p>
     messages antérieurs d’une discussion de groupe à laquelle vous venez de rejoindre, ou ce qu’un bot a dit avant que l’observation
     ne détecte la discussion. Les messages déjà enregistrés en temps réel ne sont pas répétés.</li>
 </ul>
-<p>Les discussions déjà présentes dans la liste au moment de l’activation du mode sont ajoutées sans capture d’écran.
-Un FloodWait suspend cette opération, qui reprend ensuite ; les échecs sont consignés et l’
-enregistrement en temps réel de la discussion se poursuit.
-- <strong>Profils sur demande. Conversations → Profil → Enregistrer le profil </strong>permet <strong>désormais</strong> d’enregistrer le profil actuel
-de n’importe quelle source ; le plus récent s’affiche au-dessus des messages.
-- <strong>Non visible.</strong> Les boutons intégrés (callback) sur lesquels on appuie dans une autre application Telegram, la fenêtre contextuelle ou le
-lien par lequel un bot répond à une telle pression, ainsi que les liens d’invitation utilisés dans une autre application n’atteignent pas
-TgWitness. Ce que le bot envoie ou modifie par la suite est enregistré.</p>
+<p>Chats already in the list when the mode is switched on are added without snapshots.
+A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
+recording of the chat continues.
+- <strong>Profiles on request.</strong> <strong>Chats → Profile → Save profile now</strong> saves the current profile
+of any source; the newest one is shown above the messages.
+- <strong>Chat state snapshots (preview).</strong> State outside the message stream changes without a
+message: unpinning every message leaves no message-level trace, an administrator loses
+rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled
+source is read periodically and saved as a signed <code>chat.state</code> record: title, usernames,
+description, member and administrator counts, linked chat, slow mode, pinned message IDs
+(up to 100), administrators with their rights and titles, and gifts shown on channels and
+user profiles (up to 100). Each record lists the differences from the previous snapshot:
+changed fields with before and after, pinned messages added or removed, administrators and
+gifts added, changed or no longer listed. Telegram does not say who changed anything or
+when between snapshots.
+- A part Telegram refuses (for example the administrator list of a channel for a member
+    who is not an administrator) is named in <code>errors</code>; its earlier value is kept and listed
+    in <code>carried_forward</code>, never reported as removed.
+- A record whose only changes are counts, and a check that found no change, refer to the
+    last full state with <code>state_seq</code> and cumulative <code>state_overrides</code>. A full state is written at
+    least every seven days and whenever anything other than a count changes.
+- <code>parts_complete</code> marks capped lists．Additions require a complete earlier list，
+    removals require a complete current list，and explicit empty values record clearing．
+- <strong>Parameters → Chat state</strong> sets the interval (12 hours by default, 0 turns snapshots
+    off), the pause between sources, which parts are read, and whether checks that found no
+    change are recorded. A FloodWait pauses snapshots and they resume afterwards.
+- <strong>Not visible.</strong> Inline (callback) buttons pressed in another Telegram app, the popup or
+link a bot answers such a press with, and invite links used in another app do not reach
+TgWitness. What the bot sends or edits afterwards is recorded.</p>
 </li>
 </ul>
 <h3 id="act-from-the-panel">Intervention lors de la table ronde<a class="anchor" href="#act-from-the-panel" aria-label="Lien vers cette section">#</a></h3>
@@ -358,10 +379,9 @@ l’exportation ; la collecte peut se poursuivre au-delà de ses limites pendant
 <p><strong>La vérification du journal</strong> contrôle la chaîne d’événements et les signatures à travers la
 limite affichée. Son résultat est effacé lorsque l’espace de travail change, et le panneau identifie
 les nouveaux enregistrements ajoutés après la vérification. L’exportation au format ZIP permet également de vérifier les médias collectés.</p>
-<p>Une signature valide garantit l’intégrité par rapport à la clé de confiance, et non par rapport à l’origine Telegram
-ou à la véracité du contenu. Conservez les empreintes et les points de contrôle de manière indépendante. Consultez
-le <a href="../evidence/">modèle de preuve</a>, <a href="../operations/">les opérations quotidiennes</a> et
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">la procédure d’acceptation en temps réel</a> pour connaître les exigences en matière de confiance et de transmission.</p></div></article>
+<p>Retain fingerprints and checkpoints independently．See the
+<a href="../evidence/#verification-scope">verification scope</a> for acquisition checks in each mode，
+and <a href="../operations/">daily operations</a> for routine collection．</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">Modifier cette page sur GitHub ↗</a><a class="next-guide" href="../history/"><span>Étape suivante</span><strong>Charger l'historique des sources →</strong></a><p>Ces guides décrivent la mise en œuvre actuelle. Les résultats de validation et les lacunes restantes sont documentés séparément. <a href="../verification/">Ce qui a été testé →</a></p></footer>
 </main>
 <aside class="toc" aria-label="Sur cette page"><p class="nav-label">Sur cette page</p><a href="#from-login-to-a-journal">De la connexion au journal</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Périmètre d’observation : discussions sélectionnées, un dossier ou l’intégralité du compte</a><a href="#scope-and-event-selection">Portée et sélection des événements</a><a href="#own-actions">Actions propres</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">Mode d’enquête : rejoindre des groupes et communiquer avec des bots</a><a href="#recheck-tiers">Niveaux de vérification</a><a href="#message-history-and-attribution">Historique des messages et attribution</a><a href="#history-snapshots">Instantanés de l'historique</a><a href="#attachment-handling">Gestion des pièces jointes</a><a href="#pause-lock-disconnect-and-restart">Mettre en pause, verrouiller, se déconnecter et redémarrer</a><a href="#account-isolation-and-verification">Isolement et vérification des comptes</a></aside>

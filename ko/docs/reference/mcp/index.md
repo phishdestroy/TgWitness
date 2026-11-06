@@ -80,9 +80,14 @@ MCP 추가 기능이 설치된 클라이언트의 로컬 Python을 사용하세�
 | `get_journal_event` | 소스 참조가 포함된 정제된(sanitized) 단일 레코드 |
 | `get_capture_status` | 수집 상태, 허용되는 커버리지 기록 및 `gap_summary`: 채널 또는 슈퍼그룹별, 그리고 계정 전체 시퀀스별로 관측되지 않은 메시지 번호([상세 정보](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#missing-message-numbers-gap_summary)); 채팅을 선택하여 해당 채팅의 누락 목록을 확인하세요 |
 | `get_activity_stats` | UTC 시간대 및 요일별 메시지, 피크일, 수정 및 삭제 비율, 발신자, 도메인 및 `@handles`, 커버리지([상세 정보](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/#activity-statistics)) |
+| `get_messages_by_date` | 텔레그램이 보고할 시점까지, 지정된 IANA 시간대(`Europe/Kyiv`, `UTC`), 텔레그램이 보고한 시간을 기준으로 저장됩니다; `from_utc` 그리고 `until_utc` 계산된 날짜(일광 절약 시간 포함)를 명시하십시오. |
+| `get_pinned_messages` | 최신 채팅 상태 스냅샷에 고정된 메시지와 해당 메시지의 저장된 버전, 그리고 실시간으로 확인된 고정 및 고정 해제 알림 |
+| `get_chat_stats` | 범위에 포함된 특정 채팅 하나 또는 모든 채팅에 대해 저장된 기록의 수, 첫 번째 및 마지막 관측 내역, 그리고 `gap_summary`; 대량의 데이터를 읽기 전에 이 기능을 사용하십시오 |
+| `get_topics` | 저장된 주제 서비스 메시지의 포럼 주제: 제목 내역, 닫힘 또는 숨김, 저장된 메시지 수 |
+| `get_media` | 축소된 JPEG 미리보기(최대 36KB) 형태의 보존된 이미지는 SHA-256 해시 및 `media.saved` 기록과 함께 이미지 형태로 반환됩니다. 해당 파일은 먼저 기록된 해시와 대조하여 검증되며, 다른 파일들은 메타데이터만 반환합니다. |
 | `export_messages` | 명령줄 전용이며, 기본적으로 선택되지 않음: 스트림은 관측 결과를 JSON Lines 형식으로 저장합니다([자세히](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/#export)); MCP를 통해 제공되지 않음 |
 
-`tools/list`는 해당 연결에 권한이 부여된 도구만 반환합니다. 다른 도구에 대한 호출은 거부됩니다. 그룹 컨텍스트, 에피소드, 용어 및 답장 체인 도구는 이 빌드에서 제공되지 않으며, 별도의 컨텍스트 팩 백엔드가 포함되어 있지 않습니다.
+모든 도구는 읽기 전용이며 (`readOnlyHint`)이며 출력 스키마를 선언합니다. 선언된 필드 외의 항목은 있는 그대로 반환됩니다. `tools/list` 해당 연결에 허용된 도구만 반환합니다. 다른 도구에 대한 호출은 거부됩니다. 그룹 컨텍스트, 에피소드, 용어 및 응답 체인 도구는 이 빌드에서 제공되지 않으며, 이에 대한 별도의 컨텍스트 팩 백엔드가 포함되어 있지 않습니다.
 
 모든 읽기 작업은 데이터베이스 작업이 완료된 후를 포함하여 토큰, 도구 및 워크스페이스/채팅 범위를 확인합니다. 제한 사항은 분당 요청 60회, 페이지당 레코드 50개, 결과당 64 KiB 및 아카이브 처리 기한 8초입니다. 시간 초과된 MCP 호출은 더 좁은 기간이나 더 낮은 제한 값을 요청하는 도구 오류를 반환합니다.
 

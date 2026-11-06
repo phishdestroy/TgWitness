@@ -155,6 +155,40 @@ Journal <code>report.json</code> shu tanlangan agregatni o&#x27;z ichiga oladi. 
 o&#x27;zgargan baytlarni aniqlaydi. Raqamlarni tekshirish uchun jurnal agregatlarini qayta hisoblang
 <code>report_analytics.Analytics</code> va <code>selected</code> bilan, yoki
 snapshot agregatlarini <code>snapshot_analytics.collect</code> va <code>project</code> bilan.</p>
+<h3 id="anomaly-indicators">Anomaly indicators<a class="anchor" href="#anomaly-indicators" aria-label="Ushbu bo&#x27;limga havola">#</a></h3>
+<p><strong>Preview.</strong> Evidence reports add an <strong>Anomaly indicators</strong> section computed by
+registered processors (<code>tgwitness/metrics/</code>, one file per metric). The report names every
+processor that ran with its version, and prints its method under its table, so the
+computation can be repeated from <code>events.jsonl</code> with <code>tgwitness.metrics.run</code>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Processor</th>
+<th>U nimani ko&#x27;rsatadi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>first_time_posters_over_time</code> v1</td>
+<td>First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up．</td>
+</tr>
+<tr>
+<td><code>service_vs_message_ratio</code> v1</td>
+<td>Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number.</td>
+</tr>
+<tr>
+<td><code>join_leave_per_month</code> v1</td>
+<td>Joins, departures and removals or bans per month, one per person, chat, change and day.</td>
+</tr>
+<tr>
+<td><code>pinned_per_month</code> v1</td>
+<td>Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Parameters → Report metrics</strong> selects processors and the number of displayed rows，
+including in filtered reports．Daily and monthly tables show recent rows，service-share
+tables rank chats by saved message count．Totals cover every row．</p>
 <p>Manba kodini olgandan so&#x27;ng, yuqorida sanab o&#x27;tilgan sakkizta dizaynni bir xil badiiy jurnal asosida tuzing:</p>
 <pre><code class="language-sh">python tools/build_report_styles.py --output test-results/report-styles</code></pre>
 <p>Natijada hosil bo&#x27;lgan <code>index.html</code> faylini ochib, to&#x27;liq HTML hisobotlar, imzolangan PDF va ZIP fayllarni solishtiring. Har bir dizayn bir xil manba jurnalidan foydalanadi. Har bir ishga tushirish uchun yangi chiqish katalogidan foydalaning, shunda oldin imzolangan namunalar saqlanib qoladi.</p>
@@ -211,8 +245,7 @@ Faqat timestampni tahlil qilish yoki OTS kvitansiyasiga ega bo&#x27;lish yetarli
 <li>Asl ZIP-fayllarni va ularning hashlarini saqlang. Har bir saqlovchi, uzatish, sana va maqsadini qayd eting. Tegishli operator bayonotlari va ish yozuvlarini ular bilan birga saqlang.</li>
 <li>Maxfiy VMlar uchun iqtibos, chaqiriq, Intel sertifikat zanjiri, o&#x27;lchovlar, aniq manba va kalit boshqaruv shartlarini saqlang va mustaqil ravishda tasdiqlang. Attestatsiya tekshiruv natijasini ko&#x27;rib chiqilgan artefaktlar bilan birga saqlang.</li>
 </ol>
-<p>See <a href="../evidence/#verification-scope">verification scope</a> for the checks of acquisition，
-archive integrity，time and collection coverage in each mode．</p>
+<p>Har bir rejimda ma&#x27;lumotlarni olish, arxiv yaxlitligi, vaqt va yig&#x27;ish qamrovini tekshirish uchun <a href="../evidence/#verification-scope">tasdiqlash doirasiga</a> qarang.</p>
 <h2 id="recipient-review">Qabul qiluvchi ko&#x27;rib chiqishi<a class="anchor" href="#recipient-review" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <p>TgWitness&#x27;ning ishonchli o&#x27;rnatilgan versiyasidan va mustaqil ravishda olingan barmoq izidan foydalaning:</p>
 <pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256

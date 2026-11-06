@@ -74,9 +74,9 @@ MTProxy อัตโนมัติจะรักษาเส้นทาง Te
 | การดำเนินการของผู้ดูแลระบบ | อัปเดตที่เกี่ยวข้องที่ส่งมาและภาพถ่ายหน้าจอของบันทึกผู้ดูแลระบบ (admin-log) ในการส่งออกแชทของช่อง/กลุ่มซูเปอร์กรุ๊ป | การส่งออกจะอ่านบันทึกเมื่อมีให้สำหรับบัญชีผู้ดูแลระบบที่ทำการส่งออก; การตรวจสอบบันทึกผู้ดูแลระบบอย่างต่อเนื่องอยู่นอกกระบวนการนี้ |
 | ไฟล์แนบ | คำอธิบายเวอร์ชันต้นฉบับ, จำนวนไบต์ที่ดาวน์โหลด/SHA-256 และผลการลอง | ไฟล์ที่หายไปอาจไม่สามารถกู้คืนได้; เวอร์ชันล่าสุดจะไม่ถูกแทนที่ |
 | ประวัติ | ภาพถ่ายหน้าจอที่แสดงข้อความที่มองเห็นได้ในปัจจุบันอย่างชัดเจน | ไม่สร้างใหม่ทุกการแก้ไขหรือเนื้อหาที่ถูกลบ |
-| กระบวนการเก็บรวบรวม | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope) |
+| กระบวนการเก็บรวบรวม | เริ่ม／หยุด, สัญญาณชีพ, ข้อผิดพลาด, การตั้งค่า, ขอบเขต และใบรับการรันที่ลงนาม | รายการในเครื่อง；GitHub และ TDX เพิ่ม[การตรวจสอบสภาพแวดล้อมแบบอิสระ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
+อินเทอร์เฟซจะตั้งชื่อตามบัญชีที่ระบุในเหตุการณ์ต้นทาง และเก็บรักษา ชื่อและชื่อผู้ใช้ที่สังเกตได้ไว้ เมื่อเหตุการณ์ไม่ระบุผู้กระทำ รายงานจะทิ้งช่องนั้นไว้โดยไม่ระบุ
 
 ## ความจุและข้อจำกัดของ Telegram
 

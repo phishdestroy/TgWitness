@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">โหมดการสืบสวน</span></nav>
 <p class="verification-shortcut"><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / Collect</p><h1>โหมดการสืบสวน</h1><p class="guide-outcome">การสืบสวนบัญชีทั้งหมด รวมถึงช่อง กลุ่ม การสนทนาส่วนตัว และบอต ตั้งแต่ขั้นตอนการกำหนดขอบเขตไปจนถึงการจัดทำชุดหลักฐานที่ได้รับการยืนยัน</p><div class="wiki-body"><p>ติดตามคดีผ่านช่องต่างๆ กลุ่ม แชทส่วนตัว และบอต ตั้งแต่ขั้นตอน
+<article class="guide-content"><p class="eyebrow">อ้างอิง / Collect</p><h1>โหมดการสืบสวน</h1><p class="guide-outcome">การสืบสวนบัญชีทั้งหมด รวมถึงช่อง กลุ่ม การสนทนาส่วนตัว และบอต ตั้งแต่ขั้นตอนการกำหนดขอบเขตไปจนถึงการจัดทำชุดหลักฐานที่ได้รับการยืนยัน</p><div class="wiki-body"><p>ติดตามคดีผ่านช่องต่างๆ กลุ่ม แชทส่วนตัว และบอต ตั้งแต่ขั้นตอน
 การเก็บข้อมูลเบื้องต้น ไปจนถึงไทม์ไลน์ที่อ้างอิงได้ และการส่งต่อข้อมูลที่สามารถตรวจสอบได้ เวอร์ชันเว็บไซต์แบบโต้ตอบ
 อยู่ที่ <code>/docs/cases/</code>; <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">ดูคำแนะนำการดูตัวอย่าง</a></p>
 <h2 id="worked-case-a-destination-changes-across-four-conversations">กรณีตัวอย่าง: จุดหมายปลายทางเปลี่ยนแปลงไปตลอดการสนทนาสี่ครั้ง<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
@@ -199,8 +199,8 @@
 </tr>
 </tbody>
 </table></div>
-<p>Compare attachment hashes and their associated message references，and keep account
-timelines grouped by the Telegram IDs supplied in those records．</p>
+<p>เปรียบเทียบค่าแฮชของไฟล์แนบและอ้างอิงข้อความที่เกี่ยวข้อง และจัดกลุ่ม
+ไทม์ไลน์บัญชีตาม ID Telegram ที่ระบุในบันทึกเหล่านั้น．</p>
 <p>เก็บบันทึกการทำงานของทีมไว้บน <a href="../case-board/">Case Board</a>: ติดบุ๊กมาร์กบันทึก
 ที่คุณอ้างอิง เช่น #146, #188 และ #205, ไฮไลต์สตริงปลายทางที่แม่นยำ และ
 บันทึกส่วนย่อยของทุกการกระทำที่บันทึกไว้ระหว่างบันทึกสองรายการหรือในช่วงเวลาที่กำหนด บันทึก
@@ -348,8 +348,8 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 </tr>
 <tr>
 <td>ผู้เข้าร่วมเปลี่ยนชื่อในแชทต่าง ๆ</td>
-<td>Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files</td>
-<td>A Telegram-account activity timeline with links to its source records</td>
+<td>ID ผู้ส่งแบบตัวเลข → ประวัติชื่อ／ชื่อผู้ใช้ → คำตอบ → การสนทนาอื่น ๆ ที่ถูกสังเกต → จุดหมายปลายทาง／ไฟล์ที่ถูกอ้างอิง</td>
+<td>ไทม์ไลน์กิจกรรมของบัญชี Telegram พร้อมลิงก์ไปยังบันทึกต้นฉบับ</td>
 </tr>
 </tbody>
 </table></div>

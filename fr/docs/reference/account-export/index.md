@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 Le lien vers la source ne prouve pas à lui seul que la transformation a sélectionné tous les éléments requis ou supprimé tous les détails permettant l'identification. Le texte en clair d'origine n'est pas intégré à titre de preuve. Un nouvel examen est nécessaire pour se prononcer à ce sujet.
 
-## Sharing and hosted capture
+## Partage et capture hébergée
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+Sélectionnez les messages et les fichiers dont le destinataire a besoin, examinez la copie complète partagée et conservez la source séparément. Enregistrez le hachage du fichier ZIP transmis afin que le destinataire puisse identifier et vérifier qu'il s'agit bien de cette copie exacte. La pseudonymisation remplace les identifiants sélectionnés ; le texte inclus et les fichiers originaux font toujours partie de l'examen.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#verification-scope)．
+GitHub Actions prend en charge les exportations de comptes complets et de discussions sélectionnées via Takeout ou l'API standard, ainsi qu'un journal des événements d'une seule discussion. Le [guide de capture hébergée](https://phishdestroy.github.io/TgWitness/docs/capture/) explique la vérification des paramètres et la limite de 120 minutes. Pour vérifier une copie partagée issue d'une capture hébergée, comparez son hachage source à celui de l'archive d'origine et vérifiez l'attestation de cette archive à l'aide des contrôles [spécifiques au mode](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#verification-scope).
 
 [Format des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/) · [Rapports de cas](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-reports/)

@@ -178,14 +178,34 @@ tên máy chủ ổn định cho các cấu hình ứng dụng khách đã lưu.
 <td>Tin nhắn theo giờ UTC và ngày trong tuần, các ngày có lưu lượng cao nhất, tỷ lệ chỉnh sửa và xóa, người gửi, tên miền và <code>@handles</code>, kèm theo phạm vi bao phủ (<a href="../cli/#activity-statistics">chi tiết</a>)</td>
 </tr>
 <tr>
+<td><code>get_messages_by_date</code></td>
+<td>Các tin nhắn được lưu trữ trong một ngày dương lịch theo múi giờ IANA được đặt tên (<code>Europe/Kyiv</code>, <code>UTC</code>), theo thời gian mà Telegram báo cáo; <code>from_utc</code> và <code>until_utc</code> nêu rõ ngày đã tính toán, bao gồm cả giờ mùa hè</td>
+</tr>
+<tr>
+<td><code>get_pinned_messages</code></td>
+<td>Các tin nhắn được ghim trong bản chụp nhanh trạng thái cuộc trò chuyện mới nhất cùng với các phiên bản đã lưu của chúng, cũng như các thông báo ghim và bỏ ghim được quan sát trực tiếp</td>
+</tr>
+<tr>
+<td><code>get_chat_stats</code></td>
+<td>Số lượng bản ghi đã lưu với chi phí thấp cho một cuộc trò chuyện hoặc tất cả các cuộc trò chuyện trong phạm vi, quan sát đầu tiên và cuối cùng, và <code>gap_summary</code>; hãy sử dụng nó trước khi thực hiện thao tác đọc dữ liệu quy mô lớn</td>
+</tr>
+<tr>
+<td><code>get_topics</code></td>
+<td>Các chủ đề diễn đàn từ tin nhắn dịch vụ chủ đề đã lưu: lịch sử tiêu đề, đã đóng hoặc ẩn, số lượng tin nhắn đã lưu</td>
+</tr>
+<tr>
+<td><code>get_media</code></td>
+<td>Một hình ảnh được lưu giữ dưới dạng bản xem trước JPEG đã thu nhỏ (tối đa 36 KB), được trả về dưới dạng hình ảnh kèm theo mã SHA-256 và <code>media.saved</code> bản ghi; tệp này sẽ được kiểm tra so với giá trị băm đã ghi trước tiên, các tệp khác chỉ trả về siêu dữ liệu</td>
+</tr>
+<tr>
 <td><code>export_messages</code></td>
 <td>Chỉ hỗ trợ dòng lệnh, không được chọn mặc định: lưu các quan sát dưới dạng JSON Lines (<a href="../cli/#export">chi tiết</a>); không hỗ trợ qua MCP</td>
 </tr>
 </tbody>
 </table></div>
-<p><code>tools/list</code> chỉ trả về các công cụ được cấp cho kết nối đó. Các lệnh gọi đến những công cụ
-khác sẽ bị từ chối. Các công cụ ngữ cảnh nhóm, phân đoạn (episode), thuật ngữ và chuỗi trả lời
-không được cung cấp trong bản dựng này; phần phụ trợ gói ngữ cảnh riêng biệt của chúng không được bao gồm.</p>
+<p>Mỗi công cụ đều ở chế độ chỉ đọc (<code>readOnlyHint</code>) và khai báo một lược đồ đầu ra; các trường ngoài những trường đã khai báo sẽ được trả về nguyên trạng. <code>tools/list</code> chỉ trả về các công cụ được cấp quyền cho kết nối đó. Các yêu cầu đến các
+công cụ khác sẽ bị từ chối. Các công cụ bối cảnh nhóm, tập hợp sự kiện, thuật ngữ và chuỗi trả lời
+không được cung cấp trong bản dựng này; phần nền tảng gói bối cảnh riêng biệt của chúng không được bao gồm.</p>
 <p>Mọi thao tác đọc đều kiểm tra mã thông báo, công cụ và phạm vi không gian làm việc/cuộc trò chuyện, kể cả sau khi
 công việc của cơ sở dữ liệu hoàn tất. Giới hạn là 60 yêu cầu mỗi phút, 50 bản ghi mỗi trang,
 64 KiB mỗi kết quả và thời hạn truy xuất kho lưu trữ là tám giây. Một lệnh gọi MCP hết thời gian chờ

@@ -179,12 +179,32 @@ stable hostname for saved client configurations.</p>
 <td>Messages by UTC hour and weekday, peak days, edit and deletion shares, senders, domains and <code>@handles</code>, with coverage (<a href="../cli/#activity-statistics">details</a>)</td>
 </tr>
 <tr>
+<td><code>get_messages_by_date</code></td>
+<td>Saved messages of one calendar day in a named IANA time zone (<code>Europe/Kyiv</code>, <code>UTC</code>), by the time Telegram reports; <code>from_utc</code> and <code>until_utc</code> state the computed day, daylight saving included</td>
+</tr>
+<tr>
+<td><code>get_pinned_messages</code></td>
+<td>Messages pinned in the latest chat-state snapshot with their saved versions, and the pin and unpin notices observed live</td>
+</tr>
+<tr>
+<td><code>get_chat_stats</code></td>
+<td>Cheap counts of saved records for one chat or every chat in scope, first and last observation, and <code>gap_summary</code>; use it before a large read</td>
+</tr>
+<tr>
+<td><code>get_topics</code></td>
+<td>Forum topics from saved topic service messages: title history, closed or hidden, saved message counts</td>
+</tr>
+<tr>
+<td><code>get_media</code></td>
+<td>A preserved image as a downscaled JPEG preview (at most 36 KB), returned as an image together with its SHA-256 and the <code>media.saved</code> record; the file is checked against its recorded hash first, other files return metadata only</td>
+</tr>
+<tr>
 <td><code>export_messages</code></td>
 <td>Command line only, not selected by default: streams saved observations as JSON Lines (<a href="../cli/#export">details</a>); not offered over MCP</td>
 </tr>
 </tbody>
 </table></div>
-<p><code>tools/list</code> returns only the tools granted to that connection. Calls to other
+<p>Every tool is read-only (<code>readOnlyHint</code>) and declares an output schema; fields beyond the declared ones are returned as they are. <code>tools/list</code> returns only the tools granted to that connection. Calls to other
 tools are refused. Group-context, episode, terminology and reply-chain tools are
 not offered in this build; their separate context-pack backend is not included.</p>
 <p>Every read checks the token, tool and workspace/chat scope, including after the

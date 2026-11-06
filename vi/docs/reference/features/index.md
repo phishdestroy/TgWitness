@@ -74,9 +74,9 @@ Tính năng Nguồn cung cấp các tùy chọn riêng cho từng tài khoản �
 | Các thao tác của quản trị viên | Các bản cập nhật liên quan đã được cung cấp và bản chụp nhanh nhật ký quản trị trong các tệp xuất từ cuộc trò chuyện kênh/siêu nhóm | Quá trình xuất dữ liệu sẽ đọc nhật ký khi có sẵn cho tài khoản quản trị viên thực hiện xuất; việc kiểm tra liên tục nhật ký quản trị nằm ngoài quy trình này |
 | Tệp đính kèm | Mô tả phiên bản gốc, số byte đã tải xuống/SHA-256 và kết quả các lần thử | Một tệp đã biến mất có thể không thể khôi phục được; phiên bản mới nhất sẽ không được thay thế |
 | Lịch sử | Ảnh chụp màn hình chi tiết các tin nhắn hiện đang hiển thị | Không tái tạo lại toàn bộ các nội dung đã được chỉnh sửa hoặc xóa bỏ |
-| Quy trình thu thập dữ liệu | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) |
+| Quy trình thu thập dữ liệu | Bắt đầu／dừng, tín hiệu hoạt động, lỗi, cài đặt, phạm vi và biên nhận chạy có chữ ký | Kiểm tra kho lưu trữ cục bộ; GitHub và TDX bổ sung [các kiểm tra môi trường độc lập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
+Giao diện sẽ hiển thị tên tài khoản được cung cấp trong sự kiện nguồn và giữ nguyên các tên và tên người dùng được quan sát. Khi sự kiện không chỉ định tác nhân, báo cáo sẽ để trống trường đó.
 
 ## Dung lượng và các giới hạn của Telegram
 

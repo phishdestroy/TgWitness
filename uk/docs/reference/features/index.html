@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="Посібники"><a href="../../../">Головна</a> <span aria-hidden="true">/</span> <a href="../../">Документація</a> <span aria-hidden="true">/</span> <a href="../">Довідка</a> <span aria-hidden="true">/</span> <span aria-current="page">Можливості та обмеження</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Що було протестовано →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Пошук у документації</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Спробуйте «проксі», «хеш-ланцюг», «токен» або «свідок»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Зручний пошук" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введіть слово, щоб здійснити пошук у посібниках та довідковій інформації. Результати пошуку залишаються у вашому браузері.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Деякі частини цієї сторінки досі залишаються англійською мовою: англійський оригінал зазнав змін після перекладу.</p><p class="eyebrow">Довідка / Зібрати</p><h1>Можливості та обмеження</h1><p class="guide-outcome">Поточна модель збору даних, робочі процеси з кількома обліковими записами, експорт даних та операційні обмеження TgWitness.</p><div class="wiki-body"><p>TgWitness зберігає переписки в Telegram, доступні для підключених облікових записів,
+<article class="guide-content"><p class="eyebrow">Довідка / Зібрати</p><h1>Можливості та обмеження</h1><p class="guide-outcome">Поточна модель збору даних, робочі процеси з кількома обліковими записами, експорт даних та операційні обмеження TgWitness.</p><div class="wiki-body"><p>TgWitness зберігає переписки в Telegram, доступні для підключених облікових записів,
 фіксує виявлені зміни та готує експортні файли, що піддаються перевірці. Цей довідник описує
 модель збору даних, поточні робочі процеси та їхні обмеження.</p>
 <h2 id="standalone-application">Автономний додаток<a class="anchor" href="#standalone-application" aria-label="Посилання на цей розділ">#</a></h2>
@@ -177,13 +177,13 @@
 </tr>
 <tr>
 <td>Процес збору даних</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>Запуск/зупинка, перевірка працездатності, помилки, налаштування, область дії та підписане підтвердження виконання</td>
+<td>Локальний інвентар; GitHub та TDX додають <a href="../evidence/#verification-scope">незалежні перевірки середовища</a></td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>Інтерфейс вказує обліковий запис, наданий у вихідній події, та зберігає спостережувані
+імена та імена користувачів. Якщо у події не вказано учасника, у звіті це поле залишається незаповненим.</p>
 <h2 id="capacity-and-telegram-limits">Ємність та обмеження Telegram<a class="anchor" href="#capacity-and-telegram-limits" aria-label="Посилання на цей розділ">#</a></h2>
 <p>Не існує універсальної кількості чатів, які можна моніторити з гарантованою якістю.
 Пропускна здатність залежить від пікової кількості подій за секунду, обсягу та розміру вкладень, додаткових

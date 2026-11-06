@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Rujukan</a> <span aria-hidden="true">/</span> <span aria-current="page">Ciri dan had</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Bahagian-bahagian halaman ini masih dalam bahasa Inggeris: teks asal Inggeris telah diubah selepas diterjemahkan.</p><p class="eyebrow">Rujukan / Kumpulkan</p><h1>Ciri dan had</h1><p class="guide-outcome">Model pengumpulan semasa, aliran kerja berbilang akaun, eksport dan sempadan operasi TgWitness.</p><div class="wiki-body"><p>TgWitness mengekalkan perbualan Telegram yang boleh diakses oleh akaun yang disambungkan, merekod perubahan yang diperhatikan dan menyediakan eksport yang boleh disahkan. Rujukan ini menerangkan model pengumpulan, aliran kerja semasa dan sempadannya.</p>
+<article class="guide-content"><p class="eyebrow">Rujukan / Kumpulkan</p><h1>Ciri dan had</h1><p class="guide-outcome">Model pengumpulan semasa, aliran kerja berbilang akaun, eksport dan sempadan operasi TgWitness.</p><div class="wiki-body"><p>TgWitness mengekalkan perbualan Telegram yang boleh diakses oleh akaun yang disambungkan, merekod perubahan yang diperhatikan dan menyediakan eksport yang boleh disahkan. Rujukan ini menerangkan model pengumpulan, aliran kerja semasa dan sempadannya.</p>
 <h2 id="standalone-application">Aplikasi berdiri sendiri<a class="anchor" href="#standalone-application" aria-label="Pautan ke bahagian ini">#</a></h2>
 <p>TgWitness mempunyai pemasangan, direktori data, dan kitaran hayat keluaran tersendiri. Antaramuka web terbina dalam mengendalikan penyediaan dan semakan; rekod yang dieksport boleh digunakan secara bebas.</p>
 <p>Pengendali menyambungkan akaun mereka, memilih sumber yang boleh dilihat oleh setiap akaun, dan mendapatkan jurnal pemerhatian yang disimpan. Panel memaparkan kandungan, perubahan yang disimpan, asal-usul pemerhatian dan kekosongan yang diketahui. Penyiasat lain boleh mengesahkan bahan yang dieksport.</p>
@@ -128,13 +128,12 @@ membundelkan ZIP ruang kerja yang ditandatangani secara berasingan dengan senara
 </tr>
 <tr>
 <td>Proses pengumpul</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>Mula/henti, degupan jantung, ralat, tetapan, skop dan resit larian bertandatangan</td>
+<td>Inventori tempatan; GitHub dan TDX menambah <a href="../evidence/#verification-scope">semakan persekitaran bebas</a></td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>Antaramuka menamakan akaun yang dibekalkan dalam peristiwa sumber dan mengekalkan nama yang diperhatikan dan nama pengguna. Apabila peristiwa itu tidak menyertakan pelakunya, laporan membiarkan medan tersebut tidak ditentukan.</p>
 <h2 id="capacity-and-telegram-limits">Kapasiti dan had Telegram<a class="anchor" href="#capacity-and-telegram-limits" aria-label="Pautan ke bahagian ini">#</a></h2>
 <p>Tiada bilangan sembang sejagat yang boleh dipantau dengan kualiti terjamin.
 Kapasiti bergantung pada acara puncak per saat, volum dan saiz lampiran, RPC tambahan, akaun aktif, kelewatan/ruang kosong cakera, keadaan rangkaian, had Telegram, kelewatan yang boleh diterima dan kedalaman barisan.</p>

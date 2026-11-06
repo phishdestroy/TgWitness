@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/secur
 
 Mô hình mối đe dọa, mô hình truy cập, thông tin bí mật khi không được sử dụng, mức độ phơi bày mạng, nhập dữ liệu phiên làm việc và cách báo cáo lỗ hổng bảo mật.
 
-This page describes access，storage and network protection in a local or server workspace． For collection on a GitHub runner or in an Intel TDX confidential VM，see the [verification modes](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope)，which add checks of the collection environment． Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．
+Trang này mô tả các khía cạnh về quyền truy cập, lưu trữ và bảo vệ mạng trong môi trường làm việc cục bộ hoặc trên máy chủ. Để thu thập dữ liệu trên GitHub Runner hoặc trong máy ảo bảo mật Intel TDX, hãy tham khảo các chế độ [xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope), vốn bổ sung các kiểm tra đối với môi trường thu thập. Kết nối tài khoản, thông báo, dấu thời gian, bản sao ngoài site và các nhân chứng đều có cài đặt định tuyến riêng.
 
 | Lĩnh vực | Tóm lại |
 | --- | --- |
@@ -12,7 +12,7 @@ This page describes access，storage and network protection in a local or server
 | Thông tin bí mật khi không được truy cập | Các thông tin về phiên làm việc, cặp API, khóa ký và cài đặt proxy đều được mã hóa bằng thuật toán Fernet |
 | Tin nhắn và phương tiện truyền thông | Dữ liệu được lưu trữ dưới dạng không mã hóa: vui lòng sử dụng tính năng mã hóa đĩa và thiết lập quyền truy cập nghiêm ngặt |
 | Tính toàn vẹn | Chuỗi băm SHA-256 và chữ ký Ed25519 trên mỗi bản ghi |
-| Local trust boundary | The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary |
+| Ranh giới tin cậy cục bộ | Quản trị viên máy chủ kiểm soát không gian làm việc và khóa ký của nó; các điểm kiểm tra độc lập lưu giữ ranh giới nhật ký trước đó |
 
 Để biết thêm thông tin về việc báo cáo lỗ hổng bảo mật, vui lòng tham khảo chính [sách bảo mật](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md).
 
@@ -38,13 +38,13 @@ Các tệp xuất ra không bao gồm thông tin xác thực và khóa ký, như
 
 ## Thông tin bí mật khi không được truy cập
 
-Telegram API credentials，the session and signing key are encrypted with Fernet． For local messages and media，encryption is provided by the host's disk or volume； the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP， and off-site copies use AES-256-GCM．
+Thông tin đăng nhập API Telegram, khóa phiên và khóa ký được mã hóa bằng thuật toán Fernet. Đối với tin nhắn và phương tiện truyền thông cục bộ, việc mã hóa được thực hiện trên đĩa hoặc phân vùng của máy chủ; không gian làm việc lưu trữ các tệp thông thường. Các tệp xuất có thể sử dụng định dạng ZIP được bảo vệ bằng mật khẩu theo tiêu chuẩn AES-256, và các bản sao lưu ngoài site sử dụng AES-256-GCM.
 
-The vault key defaults to the protected data directory．Use an external master-key file below to store it separately．On Unix，new private-key files use mode 0600 and new data directories use 0700；on Windows，set the directory ACL for the service account and authorized administrators．Existing directory permissions are retained．
+Khóa kho lưu trữ mặc định nằm trong thư mục dữ liệu được bảo vệ. Sử dụng tệp khóa chính bên ngoài dưới đây để lưu trữ riêng biệt. Trên Unix, các tệp khóa riêng tư mới sử dụng chế độ 0600 và các thư mục dữ liệu mới sử dụng 0700; trên Windows, thiết lập quyền truy cập (ACL) cho thư mục dành cho tài khoản dịch vụ và các quản trị viên được ủy quyền. Các quyền truy cập hiện có của thư mục sẽ được giữ nguyên.
 
 ### Khóa chính bên ngoài
 
-For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode．Disk encryption protects the local message and media files in either mode；see [connection and data protection](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/) for setup details．
+Đối với thư mục dữ liệu mới, TGWITNESS_VAULT_KEY_FILE có thể cung cấp một khóa chính ngẫu nhiên từ bên ngoài. HKDF-SHA256 và một giá trị muối ngẫu nhiên riêng biệt sẽ tạo ra một khóa Fernet khác nhau cho mỗi không gian làm việc. Tệp vault.external.json phải được giữ lại để phục hồi. Nếu thiếu hoặc khóa chính sai, hệ thống sẽ không hoạt động. Các kho lưu trữ cục bộ hiện có sẽ không được di chuyển tự động. Bảng điều khiển hiển thị chế độ lưu trữ khóa đã chọn. Mã hóa đĩa bảo vệ các tệp tin tin nhắn và phương tiện cục bộ trong cả hai chế độ; xem [phần kết nối và bảo vệ dữ liệu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/) để biết chi tiết thiết lập.
 
 ## Máy chủ proxy và các tuyến mạng
 
@@ -68,10 +68,10 @@ Phản hồi xác thực API mặc định đã được thay thế để không
 
 ## Giới hạn về tính toàn vẹn
 
-Local verification checks record signatures，the hash chain，attachments and the export manifest． The administrator holds the local signing key and can create another signed journal； an independently retained checkpoint detects replacement of the prefix it covers． Keep the key fingerprint and checkpoints with the recipient or an independent witness．
+Các kiểm tra xác minh cục bộ kiểm tra chữ ký, chuỗi băm, tệp đính kèm và bản kê khai xuất khẩu. Quản trị viên nắm giữ khóa ký cục bộ và có thể tạo một nhật ký có chữ ký khác; một điểm kiểm tra được lưu trữ độc lập sẽ phát hiện việc thay thế tiền tố mà nó bao phủ. Giữ dấu vân tay khóa và các điểm kiểm tra với người nhận hoặc một nhân chứng độc lập.
 
-For independently checked collection，choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)． Their verifiers check workflow provenance or hardware measurements in addition to archive integrity． Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies； the [evidence format](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) describes the checks for each mode．
+Đối với việc thu thập dữ liệu được kiểm tra độc lập, hãy chọn [phương thức thu thập qua](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) [GitHub Actions](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) hoặc [triển khai qua Intel TDX](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Các công cụ xác minh của họ kiểm tra nguồn gốc quy trình làm việc hoặc các phép đo phần cứng bên cạnh tính toàn vẹn của kho lưu trữ. Dấu thời gian tùy chọn và các bản sao được mã hóa lưu trữ ngoài địa điểm cung cấp mốc thời gian và bản sao có thể khôi phục; [định dạng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) [bằng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) [chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) mô tả các bước kiểm tra cho từng chế độ.
 
 ## Nếu quý vị nghi ngờ có vấn đề
 
-Preserve the original data directory and use a separate copy for analysis． Report the affected version，operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)，keeping account data and credentials private．
+Giữ nguyên thư mục dữ liệu gốc và sử dụng một bản sao riêng biệt để phân tích. Báo cáo phiên bản bị ảnh hưởng, thao tác và các bước có thể tái hiện thông qua chính sách [bảo mật](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md), đồng thời giữ bí mật dữ liệu tài khoản và thông tin đăng nhập.

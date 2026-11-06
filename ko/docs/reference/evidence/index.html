@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../../">홈</a> <span aria-hidden="true">/</span> <a href="../../">문서</a> <span aria-hidden="true">/</span> <a href="../">참고 문헌</a> <span aria-hidden="true">/</span> <span aria-current="page">증거 형식</span></nav>
 <p class="verification-shortcut"><a href="../verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">이 페이지의 일부 내용은 여전히 영어로 되어 있습니다. 번역 후 원본 영어 문구가 변경되었기 때문입니다.</p><p class="eyebrow">참고 문헌 / 증거</p><h1>증거 형식</h1><p class="guide-outcome">서명된 ZIP 파일의 내용, 기록 유형, 처리 내역, 사용자 프로필, 외부 백업본 및 오프라인 검증.</p><div class="wiki-body"><p>TgWitness는 계정에서 확인 가능한 텔레그램 관찰 내용을 서명된 저널에 보존합니다.
+<article class="guide-content"><p class="eyebrow">참고 문헌 / 증거</p><h1>증거 형식</h1><p class="guide-outcome">서명된 ZIP 파일의 내용, 기록 유형, 처리 내역, 사용자 프로필, 외부 백업본 및 오프라인 검증.</p><div class="wiki-body"><p>TgWitness는 계정에서 확인 가능한 텔레그램 관찰 내용을 서명된 저널에 보존합니다.
 수신자는 신뢰할 수 있는
 수집기 키를 사용하여 저장된 기록, 첨부 파일 및 보고서를 검증한 후, 저널을 독립적으로 보관된 체크포인트와 비교할 수 있습니다.
 이 페이지에서는 인계 시 유지해야 할 형식, 검증 절차 및 자료를 설명합니다.</p>
@@ -68,8 +68,8 @@
 </tr>
 <tr>
 <td>실행 확인서</td>
-<td>Signed record of the collector version，source-file hashes and start settings，also included in <code>process.started</code></td>
-<td>The receipt，associated journal and the environment evidence for the selected verification mode</td>
+<td>수집기 버전, 소스 파일 해시 및 시작 설정에 대한 서명된 기록은 다음에도 포함되어 있습니다. <code>process.started</code></td>
+<td>선택한 검증 모드에 대한 영수증, 관련 저널 및 환경 증거</td>
 </tr>
 <tr>
 <td>읽기 쉬운 보고서: <code>report.html</code> 및 그 구성 요소인 <code>report.json</code>, <code>report.pdf</code>, <code>chat.pdf</code></td>
@@ -193,11 +193,11 @@ CA 정보 및 검증된 권한 응답을 보관하십시오. 요청을 준비하
 부터 번호를 다시 세어 나갑니다. 누락된 번호란 Telegram
 가 반환하지 않은 메시지(내보내기 전에 삭제되었거나, 해당 계정에서 볼 수 없는 메시지)를 의미합니다. 비공개 채팅 및
 기본 그룹의 경우 번호는 해당 계정의 모든 채팅에서 공유되며, 누락된 번호는 집계되지 않습니다.</p>
-<p>After reading the history, the export asks Telegram for every absent number again, by number
-(<code>channels.getMessages</code>, up to 10,000 numbers). The result is in <code>message-ids.json</code> and the report.
-An empty answer records that the number is unavailable to this account at recheck time；
-it leaves the cause unspecified．A message returned on recheck is added to the export
-and marked <code>found_on_recheck</code>．</p>
+<p>이력을 읽은 후, 내보내기 기능은 텔레그램에 누락된 모든 번호를 번호별로
+(<code>channels.getMessages</code>, 최대 10,000개 번호까지). 결과는 <code>message-ids.json</code> 및 보고서에 포함됩니다.
+빈 응답은 재확인 시점에 해당 번호가 이 계정에서 사용할 수 없음을 기록하며,
+원인은 명시되지 않습니다. 재확인 시 반환된 메시지는 내보내기 파일에 추가되고
+표시됩니다. <code>found_on_recheck</code>．</p>
 <p>모든 보고서는 <strong>로 시작하며, 요약 </strong>: 한 단락, 그 다음 자료가 보여주는 내용과 보여주지 않는 내용
 (계정 소유자, 전달의 완전성, 관찰 전 삭제 내역, 타임스탬프가 없는
 시각 정보). 브라우저가 페이지 자체가 아닌 봉인의
@@ -392,27 +392,26 @@ payload.deleted_message_was_outgoing이 true가 되지만, 삭제자는 여전�
 <li>서비스 메시지는 고유 번호가 부여된 저널 기록이므로 간격을
     자동으로 메웁니다. 선택 사항인 추정치는 단지 맥락을 제공하는 역할만 합니다.</li>
 </ul>
-<p><code>verify.py</code> recomputes <code>gap_summary</code> from <code>events.jsonl</code> with the parameters in the signed
-<code>coverage.json</code> member (defaults for older archives) and
-prints the account-wide line in its coverage summary. The archive's <code>get_capture_status</code>
-(MCP and the command line) returns the same measurement for the chats an access may read;
-the account-wide sequence only to access covering the whole workspace.</p>
-<p>Repeated observations of one service message count once，and the account service estimate
-uses only numbers inside the measured range．An applied scope must explicitly preserve
-the account's own messages before account-wide measurement is enabled；older records
-without that information cannot establish this condition．Stopped observation does not
-extend the measured range，and resuming it is noted．The live archive query has a time
-budget，including its database scan，and marks an unfinished measurement as partial．</p>
-<p>Telegram documents the <a href="https://core.telegram.org/api/updates#message-id-sequences">separate message ID sequences</a>．
-These numbers describe observations；they do not identify a deletion actor or establish
-why a number is absent．</p>
+<p><code>verify.py</code> 재계산 <code>gap_summary</code> from <code>events.jsonl</code> 서명된
+<code>coverage.json</code> 멤버(구형 아카이브의 경우 기본값)의 매개변수를 사용하여재계산하고,
+커버리지 요약에 계정 전체에 대한 행을 출력합니다. 아카이브의 <code>get_capture_status</code>(MCP 및 명령줄)은 특정 액세스가 읽을 수 있는 채팅에 대해 동일한 측정값을 반환하지만,
+전체 작업 공간을 포괄하는 액세스에 대해서만 계정 전체 시퀀스를 반환합니다.</p>
+<p>동일한 서비스 메시지에 대한 반복 관측은 1회로 집계되며, 계정 서비스 추정치는
+측정 범위 내의 수치만을 사용합니다. 적용된 범위는 계정 전체 측정이 활성화되기 전에
+계정 자체의 메시지를 명시적으로 보존해야 합니다. 해당 정보가 없는 오래된 기록은
+이 조건을 충족할 수 없습니다. 관측을 중지해도
+측정 범위는 확장되지 않으며, 재개 시에는 기록됩니다. 실시간 아카이브 쿼리에는
+데이터베이스 스캔을 포함한 시간 제한이 있으며, 완료되지 않은 측정은 부분 측정으로 표시됩니다.</p>
+<p>텔레그램은 <a href="https://core.telegram.org/api/updates#message-id-sequences">별도의 메시지 ID </a>시퀀스를 기록합니다.
+이 번호들은 관측 내용을 나타낼 뿐, 삭제 주체를 식별하거나
+특정 번호가 누락된 이유를 규명하지는 않습니다.</p>
 <p>Telegram가 계정 수신을 중단하면, 관찰을 종료하는 <code>coverage.gap</code> 레코드에는
 <code>cause</code>(<code>account_banned</code>, <code>account_frozen</code>, <code>account_deleted</code>, <code>session_duplicated</code>,
 <code>session_revoked</code>, <code>session_expired</code>, <code>session_ended</code> 또는 <code>not_authorized</code>)와 Telegram
 오류가 포함되며, <code>verify.py</code>는 해당 기간이 종료되는 원인을 명시합니다.</p>
-<p>Coverage combines recorded observation periods，interruptions and message outcomes．
-Assess it together with the selected chats，period and attachment policy；continuous
-operation alone does not establish complete delivery of Telegram updates．</p>
+<p>적용 범위는 기록된 관측 기간, 중단 사항 및 메시지 결과를 종합한 것입니다.
+선택한 채팅, 기간 및 첨부 파일 정책과 함께 이를 평가해야 합니다. 단순히
+지속적인 운영만으로는 텔레그램 업데이트가 완전히 전달되었다고 단정할 수 없습니다.</p>
 <h2 id="producer">제작자<a class="anchor" href="#producer" aria-label="이 섹션으로 이동">#</a></h2>
 <p>증거 ZIP 파일, 채팅 내역 내보내기, 증언 기록부 및
 사용자 프로필 파일의 진술서에 포함된 서명된 매니페스트에는 <code>producer</code>
@@ -458,66 +457,66 @@ manifest.sig는 정규화된 매니페스트 JSON에 대한 base64 Ed25519 서�
 파손된 시퀀스/체인, 유효하지 않은 서명, 제공된 체크포인트와의 불일치를 거부합니다.
 아카이브 경로는 절대 추출하지 않습니다. 선언된 총 압축 해제 크기를 4 GiB로 제한하며,
 <strong>매개변수</strong> 한도를 높인 <code>--max-gib N</code>를 사용하면 더 큰 아카이브를 만들 수 있습니다.</p>
-<p>Run verification from your installed TgWitness version or a reviewed checkout．
-The copy included in an archive supports portable use；check that copy against your
-trusted installation before executing it．</p>
-<p>A checkpoint signs a statement containing the public key, journal length, head
-hash, and creation time. The verifier can check that a later archive contains the
-same prefix．Retain the checkpoint outside the collector，so later verification compares
-the archive with a reference held separately from it．</p>
+<p>설치된 TgWitness 버전이나 검토를 거친 체크아웃에서 검증을 실행하십시오.
+아카이브에 포함된 사본은 이동식 사용을 지원합니다. 실행하기 전에 해당 사본을
+신뢰할 수 있는 설치본과 대조하여 확인하십시오.</p>
+<p>체크포인트는 공개 키, 저널 길이, 헤드
+해시 및 생성 시간을 포함하는 진술서에 서명합니다. 검증자는 이후 아카이브에
+동일한 접두사가 포함되어 있는지 확인할 수 있습니다. 체크포인트는 수집기 외부에 보관하여, 이후 검증 시
+아카이브를 수집기와 별도로 보관된 참조 자료와 비교할 수 있도록 합니다.</p>
 <h2 id="verification-scope">검증 범위<a class="anchor" href="#verification-scope" aria-label="이 섹션으로 이동">#</a></h2>
-<p>Verification checks the archive and the collection mode used to produce it．Choose the
-mode whose trust boundary matches the case，then retain its verification inputs．</p>
+<p>검증 단계에서는 아카이브와 이를 생성하는 데 사용된 수집 모드를 확인합니다.
+해당 사례와 신뢰 경계가 일치하는 모드를 선택한 후, 해당 모드의 검증 입력값을 유지하십시오.</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
-<th>Collection mode</th>
-<th>What the verifier checks</th>
-<th>Verification inputs and trust boundary</th>
+<th>수집 모드</th>
+<th>검증자가 확인하는 사항</th>
+<th>검증 입력값 및 신뢰 경계</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Local workspace</td>
-<td>Record signatures，hash chain，manifest and attachment bytes</td>
-<td>Independently retained collector fingerprint；the host administrator controls the local signing key</td>
+<td>로컬 작업 공간</td>
+<td>서명, 해시 체인, 매니페스트 및 첨부 파일 바이트를 기록합니다.</td>
+<td>독립적으로 유지되는 수집기 지문; 호스트 관리자가 로컬 서명 키를 제어합니다.</td>
 </tr>
 <tr>
-<td>Local workspace with an independent witness</td>
-<td>The archive checks plus agreement with an earlier journal prefix retained by the witness</td>
-<td>Separately trusted witness key and records；the checkpoint binds the prefix already observed</td>
+<td>독립적인 위트니스가 포함된 로컬 작업 공간</td>
+<td>아카이브 검증 및 증인이 보관하고 있는 이전 저널 접두사와의 일치 여부</td>
+<td>별도로 신뢰할 수 있는 증인 키 및 기록; 체크포인트는 이미 관측된 접두사를 바인딩합니다.</td>
 </tr>
 <tr>
-<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions capture</a></td>
-<td>GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity</td>
-<td>Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow</td>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions 캡처</a></td>
+<td>아카이브 다이제스트, 승인된 워크플로우 및 수집기 커밋, 호스팅된 러너, 새로운 세션/키 출처 및 내부 아카이브 무결성에 대한 GitHub 인증</td>
+<td>신뢰할 수 있는 검증자 정책, 호출자 저장소 및 GitHub 증명 번들; 수집 작업은 고정된 워크플로우에서 실행됩니다.</td>
 </tr>
 <tr>
-<td><a href="../high-assurance/">Cloud deployment</a></td>
-<td>Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record</td>
-<td>Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider</td>
+<td><a href="../high-assurance/">클라우드 배포</a></td>
+<td>프로바이더의 수명 주기 및 액세스 기록, 방화벽 및 Cloudflare 상태, 그리고 수집기의 서명된 실행 기록</td>
+<td>프로바이더 및 Cloudflare에 대한 읽기 전용 쿼리; 개별 확인 기능의 이용 가능 여부는 프로바이더에 따라 다릅니다.</td>
 </tr>
 <tr>
-<td><a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX confidential VM</a></td>
-<td>Quote signature and platform status，binding to the collector statement，compose and OS measurements</td>
-<td>Intel trust chain and expected deployment measurements；retain the results of every required TDX check</td>
+<td><a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX 기밀 VM</a></td>
+<td>서명 및 플랫폼 상태, 수집기 문장과의 바인딩, 컴포즈 및 OS 측정값을 인용하십시오.</td>
+<td>인텔 트러스트 체인 및 예상 배포 측정값; 모든 필수 TDX 검사 결과를 유지하십시오.</td>
 </tr>
 </tbody>
 </table></div>
-<p>In sealed acquisition，the approved collector receives data through an authenticated
-Telegram connection inside the verified environment．Attestation binds the archive to
-that execution，so verification covers acquisition as well as later file integrity．
-This relies on the approved code and the platform trust chain listed above．
-GitHub capture verification requires a session created inside the run and rejects
-imported-session captures．</p>
-<p>The run receipt records the collector version，file hashes and startup settings．GitHub
-provenance and TDX measurements provide the environment checks；the
-<a href="../verification/">validation record</a> identifies tested configurations．</p>
-<p>TgWitness signs the observations it collects；Telegram and message authors do not issue
-these signatures．In a local workspace，material created before the first independent
-checkpoint still depends on the collector and its key holder．Coverage records describe
-the selected scope and collection outcomes，while verified external timestamps anchor
-the committed archive or journal boundary in time．</p>
+<p>밀봉된 수집 과정에서, 승인된 수집기는 검증된 환경 내의 인증된
+텔레그램 연결을 통해 데이터를 수신합니다. 증명(Attestation)은 아카이브를
+해당 실행에 바인딩하므로, 검증은 수집 과정은 물론 이후의 파일 무결성까지 포함합니다.
+이는 승인된 코드와 위에 나열된 플랫폼 신뢰 체인에 기반합니다.
+GitHub 캡처 검증은 실행 내부에서 생성된 세션을 요구하며,
+가져온 세션(imported-session)으로 캡처된 내용은 거부합니다.</p>
+<p>실행 영수증에는 수집기 버전, 파일 해시 및 시작 설정이 기록됩니다. GitHub
+출처 정보와 TDX 측정값을 통해 환경 검증이 이루어지며,
+<a href="../verification/">검증 기록을</a> 통해 테스트된 구성이 식별됩니다.</p>
+<p>TgWitness는 수집한 관측 데이터를 서명합니다. 텔레그램이나 메시지 작성자는
+이러한 서명을 발행하지 않습니다. 로컬 작업 공간에서, 첫 번째 독립적인
+체크포인트 이전에 생성된 자료는 여전히 수집기와 해당 키 소유자에 의존합니다. 커버리지 기록은
+선택된 범위와 수집 결과를 설명하며, 검증된 외부 타임스탬프는
+커밋된 아카이브 또는 저널의 경계를 시간적으로 고정시킵니다.</p>
 <h2 id="attachments">첨부 파일<a class="anchor" href="#attachments" aria-label="이 섹션으로 이동">#</a></h2>
 <p>파일은 media/ 디렉터리 내에서 SHA-256 해시로 식별됩니다. media.saved 이벤트는 해시와
 바이트 길이를 특정 메시지 이벤트에 연결합니다. 원본 파일명은 메타데이터이며, 절대 로컬
@@ -540,17 +539,17 @@ media/ 폴더 내에 SHA-256라는 이름으로 저장됩니다. chat.json의 �
 및 크기 정책을 바인딩합니다. 복구 과정에서는 다운로드 전에 해당 바인딩을 검증합니다. 이 도구는
 현재 메시지를 가져오지 않으며, 새로운 첨부 파일을 자동으로 대체합니다. 중단된 작업은
 재시도되지만, 영구적인 실패는 명시적인 결과로 남습니다.</p>
-<p>Each workspace has its own journal and signing identity. A process.started event includes
-a run ID, local clocks, dependency versions, source-file hashes, initial account/scope,
-and capture settings. Heartbeats include the run ID, monotonic time, and queue state.
-The run receipt can also be downloaded as a separately signed statement．For verification
-of the execution environment，pair it with the GitHub attestation or TDX checks described
-in <a href="#verification-scope">Verification scope</a>．</p>
-<p>Automatic checkpoints are retained locally on startup, every five minutes while
-observing (<strong>Parameters → Signed checkpoint every</strong>), and on orderly stop. Startup verification and export compare the journal
-against the latest retained local checkpoint. This can detect a database rollback
-when the checkpoint survives．Independent retention keeps that reference available outside
-the workspace；a verified external timestamp additionally anchors it in time．</p>
+<p>각 워크스페이스에는 고유한 저널과 서명 주체가 있습니다. process.started 이벤트에는
+실행 ID, 로컬 시계, 종속성 버전, 소스 파일 해시, 초기 계정/범위,
+및 캡처 설정이 포함됩니다. 하트비트에는 실행 ID, 단조로운 시간 및 큐 상태가 포함됩니다.
+실행 영수증은 별도로 서명된 명세서로도 다운로드할 수 있습니다. 실행 환경의
+검증을 위해서는 <a href="#verification-scope">‘검증 </a>범위’에 설명된 GitHub 증명서 또는 TDX 검사와
+함께 사용하십시오.</p>
+<p>자동 체크포인트는 시작 시, 관찰 중 5분마다
+(<strong>매개변수 → ‘서명된 체크포인트 간격</strong>’), 그리고 정상 종료 시 로컬에 보관됩니다. 시작 시 검증 및 내보내기 과정에서는 저널을
+가장 최근에 보관된 로컬 체크포인트와 비교합니다. 이를 통해 체크포인트가 보존된 경우 데이터베이스 롤백을
+탐지할 수 있습니다. 독립적인 보존 기능을 통해 작업 공간 외부에서도 해당 참조를 이용할 수 있으며,
+검증된 외부 타임스탬프를 통해 시간적 기준점을 추가로 확보합니다.</p>
 <p>재시작 후 저장된 텔레그램 업데이트 위치(<code>catch_up_from</code>에서
 <code>observation.started</code>)가 재개되며, 누락된 업데이트가 요청됩니다. 주기적인 재확인 과정을 통해 누락된 메시지에 대해서는
 <code>message.recovered</code>가 기록되고, 텔레그램이 더 이상

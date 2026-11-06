@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <a href="../">Manba</a> <span aria-hidden="true">/</span> <span aria-current="page">Dalil formati</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Nima sinovdan o&#x27;tkazilgan →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Ushbu sahifaning ba&#x27;zi qismlari hanuz ingliz tilida: inglizcha asl matn tarjima qilinganidan keyin o&#x27;zgartirilgan.</p><p class="eyebrow">Manba / Dalil</p><h1>Dalil formati</h1><p class="guide-outcome">Imzolangan ZIP tarkibi, yozuv turlari, jarayon kvitansiyalari, odamlar profillari, masofaviy nusxalar va oflayn tekshirish.</p><div class="wiki-body"><p>TgWitness hisobga ko&#x27;rinadigan Telegram kuzatuvlarini imzolangan jurnalda saqlaydi.
+<article class="guide-content"><p class="eyebrow">Manba / Dalil</p><h1>Dalil formati</h1><p class="guide-outcome">Imzolangan ZIP tarkibi, yozuv turlari, jarayon kvitansiyalari, odamlar profillari, masofaviy nusxalar va oflayn tekshirish.</p><div class="wiki-body"><p>TgWitness hisobga ko&#x27;rinadigan Telegram kuzatuvlarini imzolangan jurnalda saqlaydi.
 Qabul qiluvchilar saqlangan yozuvlar, ilovalar va hisobotlarni ishonchli
 yig&#x27;uvchi kalitiga nisbatan tekshirib, so&#x27;ng jurnalni mustaqil saqlangan nazorat nuqtasiga
 solishtirishlari mumkin.
@@ -69,8 +69,8 @@ Ushbu sahifa formatlar, tekshiruvlar va topshirish uchun saqlanishi kerak bo&#x2
 </tr>
 <tr>
 <td>Jo&#x27;natish kvitasi</td>
-<td>Signed record of the collector version，source-file hashes and start settings，also included in <code>process.started</code></td>
-<td>The receipt，associated journal and the environment evidence for the selected verification mode</td>
+<td>Yig&#x27;uvchi versiyasining imzolangan yozuvi, manba-fayl hashlar va boshlang&#x27;ich sozlamalari ham kiritilgan <code>process.started</code></td>
+<td>Tanlangan tasdiqlash rejimi uchun kvitansiya, tegishli jurnal va muhit dalillari</td>
 </tr>
 <tr>
 <td>O'qiladigan hisobotlar: <code>report.html</code> va uning bo'laklari, <code>report.json</code>, <code>report.pdf</code>, <code>chat.pdf</code></td>
@@ -147,11 +147,11 @@ sarlavhasida ro'yxatlaydi hamda har bir bo'shliqni transkriptda qayerda joylashg
 ularni <code>chat.json</code>
 dan qayta sanaydi. Yo'qolgan raqam – bu Telegram
 qaytarmagan xabar (eksportdan oldin o'chirib tashlangan yoki hisobga ko'rinmaydigan); shaxsiy suhbatlarda va oddiy guruhlarda raqamlar hisobning barcha suhbatlari bo'ylab ulashiladi va bo'shliqlar hisobga olinmaydi.</p>
-<p>After reading the history, the export asks Telegram for every absent number again, by number
-(<code>channels.getMessages</code>, up to 10,000 numbers). The result is in <code>message-ids.json</code> and the report.
-An empty answer records that the number is unavailable to this account at recheck time；
-it leaves the cause unspecified．A message returned on recheck is added to the export
-and marked <code>found_on_recheck</code>．</p>
+<p>Tarixni o&#x27;qigandan so&#x27;ng, eksport Telegramdan har bir yo&#x27;q raqamni yana, raqam bo&#x27;yicha so&#x27;raydi
+(<code>channels.getMessages</code>, 10 000 tagacha raqam). Natija <code>message-ids.json</code> va hisobotda.
+Bo&#x27;sh javob raqamning qayta tekshirish vaqtida ushbu hisobga mavjud emasligini qayd etadi;
+u sababini ko&#x27;rsatmaydi. Qayta tekshirishda qaytgan xabar eksportga qo&#x27;shiladi
+va belgilangan <code>found_on_recheck</code>．</p>
 <p>Har bir hisobot<strong> bilan boshlanadi. Qisqacha</strong>: bir paragraf, keyin material nimani ko'rsatishini va nimani ko'rsatmasligini (hisob ortida kim turgani, yetkazib berish to'liqligi, kuzatuvdan oldin o'chirishlar, vaqt belgilovchi bo'lmasdan soat vaqti). Sahifaning o'z muhr tamg'asi sahifani emas, muhr imzosini tekshirganda ambra rangiga aylanadi: brauzer sahifaga o'z baytlarini bermaydi. U faqat o'quvchi faylni sahifaning oxiridagi tekshiruvga tashlaganda va har bir bayt mos kelganda yashil rangga aylanadi, shuningdek, ko'rsatilgan sahifa aynan shu fayl bo'lsa; aks holda u qizilga aylanadi.</p>
 <p>Har bir hisobot dastur nomini aniq ko'rsatadi: git commit, agar yig'uvchi checkoutdan ishga tushsa yoki o'rnatuvchi <code>TGWITNESS_COMMIT</code> ni belgilasa, va manba fayllarining SHA-256 (<code>source_tree_sha256</code>, yo'lning kanonik JSON → har bir <code>.py</code> ning SHA-256, <code>.js</code>, <code>.css</code>, <code>.html</code> va <code>.svg</code> fayli paketda), bu commitni checkout qilish fayllar o'zgartirilmagan bo'lsa, qayta yaratadi. Telegram klienti o'z kutubxonasi, API qatlami va ma'lumotlar markazi nomi bilan ataladi. Kuzatuv boshlanganda va suhbat eksporti boshlanib tugagach, yig'uvchi Telegram'dan vaqtini (<code>updates.getState</code>, butun soniyalarda) so'raydi va yig'uvchining soatidan Telegram vaqtini ayirib, qaytish vaqti noaniqligini hisobga olgan holda qayd etadi; hisobotlarda bu o'lchovlar "Zanjir nazorati" bo'limida ko'rsatiladi. Suhbat eksporti shuningdek xabarlar sanalaridan tashqari, tarixni qachon o'qigani sanasini ham qayd etadi.</p>
 <h3 id="offline-report-viewer-and-archive-guide">Oflayn hisobot ko'ruvchi va arxiv bo'yicha qo'llanma<a class="anchor" href="#offline-report-viewer-and-archive-guide" aria-label="Ushbu bo&#x27;limga havola">#</a></h3>
@@ -268,25 +268,17 @@ actor_id nol bo&#x27;lib qoladi. A&#x27;zolik xizmati xabarlari jo&#x27;natuvchi
     Nomlangan raqamlar <code>deletion.unscoped</code> mazmunisiz kuzatilgan deb hisoblanadi. Tanlangan suhbatlarni eksport qilish yoki topshirish buni o&#x27;lchay olmaydi. Agar butun hisob yig&#x27;ish o&#x27;chirilgan va yana yoqilgan bo&#x27;lsa, eslatmada aytilishicha, shu vaqt ichida ishlatilgan raqamlar bo&#x27;shliqlar sifatida paydo bo&#x27;ladi.</li>
 <li>Xizmat xabarlari o'z raqamlariga ega jurnal yozuvlari bo'lib, ular bo'shliqlarni o'z-o'zidan yopadi; ixtiyoriy baho esa faqat kontekst hisoblanadi.</li>
 </ul>
-<p><code>verify.py</code> recomputes <code>gap_summary</code> from <code>events.jsonl</code> with the parameters in the signed
-<code>coverage.json</code> member (defaults for older archives) and
-prints the account-wide line in its coverage summary. The archive's <code>get_capture_status</code>
-(MCP and the command line) returns the same measurement for the chats an access may read;
-the account-wide sequence only to access covering the whole workspace.</p>
-<p>Repeated observations of one service message count once，and the account service estimate
-uses only numbers inside the measured range．An applied scope must explicitly preserve
-the account's own messages before account-wide measurement is enabled；older records
-without that information cannot establish this condition．Stopped observation does not
-extend the measured range，and resuming it is noted．The live archive query has a time
-budget，including its database scan，and marks an unfinished measurement as partial．</p>
-<p>Telegram documents the <a href="https://core.telegram.org/api/updates#message-id-sequences">separate message ID sequences</a>．
-These numbers describe observations；they do not identify a deletion actor or establish
-why a number is absent．</p>
+<p><code>verify.py</code> qayta hisoblaydi <code>gap_summary</code> dan <code>events.jsonl</code> imzolangan parametrlar bilan
+<code>coverage.json</code> member (eski arxivlar uchun standart) va
+hisob bo&#x27;ylab chiziqni uning qamrovi xulosasida chop etadi. Arxivning <code>get_capture_status</code>(MCP va buyruq qatori) kirish o&#x27;qishi mumkin bo&#x27;lgan suhbatlar uchun bir xil o&#x27;lchovni qaytaradi;
+butun ish maydonini qamrab oladigan kirish uchun esa faqat hisob bo&#x27;ylab ketma-ketlikni chop etadi.</p>
+<p>Bir xizmat xabarining takroriy kuzatuvlari faqat bir marta hisobga olinadi va hisob xizmati baholashi faqat o'lchangan diapazon ichidagi raqamlardan foydalanadi. Qulay diapazon qo'llanganda, hisob bo'ylab o'lchov yoqilishidan oldin hisobning o'z xabarlari aniq saqlanishi kerak; bu ma'lumotlarsiz eski yozuvlar ushbu shartni aniqlay olmaydi. To'xtatilgan kuzatuv o'lchangan diapazonni kengaytirmaydi va uni qayta boshlash qayd etiladi. Jonli arxiv so'rovi vaqt byudjetiga ega bo'lib, unga ma'lumotlar bazasini skanerlash ham kiradi va tugallanmagan o'lchovni qisman deb belgilaydi.</p>
+<p>Telegram <a href="https://core.telegram.org/api/updates#message-id-sequences">alohida xabar ID </a>ketma-ketliklarini hujjatlashtiradi.
+Ushbu raqamlar kuzatuvlarni tasvirlaydi; ular o&#x27;chirishni amalga oshirgan tomonni aniqlamaydi yoki raqamning yo&#x27;qligi sababini ko&#x27;rsatmaydi.</p>
 <p>Telegram hisobni qabul qilishni to'xtatganda, kuzatuvni yakunlovchi <code>coverage.gap</code> yozuvi <code>cause</code> (<code>account_banned</code>, <code>account_frozen</code>, <code>account_deleted</code>, <code>session_duplicated</code>,
 <code>session_revoked</code>, <code>session_expired</code>, <code>session_ended</code> yoki <code>not_authorized</code>) va Telegram xatosini o'z ichiga oladi; <code>verify.py</code> davr yakunida sababni belgilaydi.</p>
-<p>Coverage combines recorded observation periods，interruptions and message outcomes．
-Assess it together with the selected chats，period and attachment policy；continuous
-operation alone does not establish complete delivery of Telegram updates．</p>
+<p>Qamrov yozib olingan kuzatuv davrlarini, uzilishlarni va xabar natijalarini birlashtiradi.
+Uni tanlangan suhbatlar, davr va ilova siyosati bilan birga baholang; faqat uzluksiz ishlash Telegram yangilanishlarining to'liq yetkazilishini ta'minlamaydi.</p>
 <h2 id="producer">Ishlab chiquvchi<a class="anchor" href="#producer" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <p>Dalillar ZIP-arxivlari, suhbat eksportlari, guvoh jurnallari va shaxsiy profil fayllari bayonotining imzolangan manifesti <code>producer</code>
 ni o&#x27;z ichiga oladi: dasturiy ta&#x27;minot, versiya, loyiha (PhishDestroy), bosh sahifa va manba ombori. HTML hisobotida ham xuddi shu satr ko&#x27;rsatiladi, va <code>verify.py</code>
@@ -307,66 +299,51 @@ Profil(lar) har bir suhbat bo&#x27;yicha yoqiladi, parol bilan himoyalangan AES-
 <p>manifest.json format, eksport vaqtini, jamoat kalitini, barmoq izini, jurnal uzunligini, bosh xeshini, doirasini, ishlab chiqaruvchini, cheklovlarni va <code>manifest.json</code> hamda <code>manifest.sig</code> o&#x27;zlari bundan mustasno, har bir kontent a&#x27;zosining SHA-256 ko&#x27;rsatkichini o&#x27;z ichiga oladi.
 manifest.sig esa kanonik manifest JSON ustidagi base64 Ed25519 imzodir.
 Verifikator kutilmagan/yetishmayotgan a&#x27;zolarni, takroriy nomlarni, shikastlangan fayllarni, uzilgan ketma-ketlik/zanjirni, noqonuniy imzo(lar)ni va taqdim etilgan tekshiruv nuqtasiga nomuvofiqlikni rad etadi. U hech qachon arxiv yo&#x27;llarini chiqarib olmaydi. U umumiy e&#x27;lon qilingan siqilmagan hajmni 4 GiB gacha cheklaydi;<code>--max-gib N</code> esa oshirilgan <strong>Parameters</strong> limiti bilan yaratilgan kattaroq arxivlarni yo&#x27;l qo&#x27;yadi.</p>
-<p>Run verification from your installed TgWitness version or a reviewed checkout．
-The copy included in an archive supports portable use；check that copy against your
-trusted installation before executing it．</p>
-<p>A checkpoint signs a statement containing the public key, journal length, head
-hash, and creation time. The verifier can check that a later archive contains the
-same prefix．Retain the checkpoint outside the collector，so later verification compares
-the archive with a reference held separately from it．</p>
+<p>O'rnatilgan TgWitness versiyangizdan yoki ko'rib chiqilgan checkout-dan tekshiruvni ishga tushiring.
+Arxivga kiritilgan nusxa portativ foydalanishni qo'llab-quvvatlaydi; uni ijro etishdan oldin ishonchli o'rnatishingiz bilan solishtiring.</p>
+<p>Chekpoint ommaviy kalit, jurnal uzunligi, head hash va yaratilish vaqtini o'z ichiga olgan bayonotni imzolaydi. Verifikator keyingi arxivda bir xil prefiks mavjudligini tekshirishi mumkin. Chekpointni kollektor tashqarisida saqlang, shunda keyingi verifikatsiya arxivni undan alohida saqlangan referensiya bilan solishtiradi.</p>
 <h2 id="verification-scope">Verifikatsiya doirasi<a class="anchor" href="#verification-scope" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
-<p>Verification checks the archive and the collection mode used to produce it．Choose the
-mode whose trust boundary matches the case，then retain its verification inputs．</p>
+<p>Verifikatsiya arxiv va uni yaratishda ishlatilgan yig'ish rejimini tekshiradi. Ishonch chegarasi holatga mos keladigan rejimni tanlang, so'ng uning verifikatsiya kirishlarini saqlang.</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
-<th>Collection mode</th>
-<th>What the verifier checks</th>
-<th>Verification inputs and trust boundary</th>
+<th>Yig'ish rejimi</th>
+<th>Verifikator nima tekshiradi</th>
+<th>Verifikatsiya kirishlari va ishonch chegarasi</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Local workspace</td>
-<td>Record signatures，hash chain，manifest and attachment bytes</td>
-<td>Independently retained collector fingerprint；the host administrator controls the local signing key</td>
+<td>Mahalliy ish maydoni</td>
+<td>Imzolarni, xesh zanjirini, manifestni va ilova baytlarini yozib oling</td>
+<td>Mustaqil saqlangan kollektor barmoq izi; mezbon ma'muri mahalliy imzolash kalitini nazorat qiladi</td>
 </tr>
 <tr>
-<td>Local workspace with an independent witness</td>
-<td>The archive checks plus agreement with an earlier journal prefix retained by the witness</td>
-<td>Separately trusted witness key and records；the checkpoint binds the prefix already observed</td>
+<td>Mustaqil guvoh bilan mahalliy ish maydoni</td>
+<td>Arxiv tekshiruvini amalga oshiradi va guvoh tomonidan saqlangan avvalgi jurnal prefiksi bilan kelishuvni ta'minlaydi</td>
+<td>Alohida ishonchli guvoh kaliti va yozuvlari; tekshiruv nuqtasi allaqachon kuzatilgan prefiksni bog'laydi</td>
 </tr>
 <tr>
-<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions capture</a></td>
-<td>GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity</td>
-<td>Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow</td>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions yozib oladi</a></td>
+<td>Arxiv xashining GitHub tasdiqi, ma'qullangan ish jarayoni va yig'uvchi commitlari, joylashtirilgan runner, yangi sessiya/kalit kelib chiqishi va ichki arxiv yaxlitligi</td>
+<td>Ishonchli tekshiruvchi siyosati, chaqiruvchi ombori va GitHub tasdiqlash to'plami; yig'ish jarayoni belgilangan ish jarayoni ostida ishlaydi</td>
 </tr>
 <tr>
-<td><a href="../high-assurance/">Cloud deployment</a></td>
-<td>Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record</td>
-<td>Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider</td>
+<td><a href="../high-assurance/">Bulutli joylashtirish</a></td>
+<td>Provayder hayotiy tsikli va kirish yozuvlari, firewall va Cloudflare holati, shuningdek yig'uvchining imzolangan ish yozuvi</td>
+<td>Provayder va Cloudflare'ga faqat o'qish uchun so'rovlar; individual tekshiruvlarning mavjudligi provayderga bog'liq</td>
 </tr>
 <tr>
-<td><a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX confidential VM</a></td>
-<td>Quote signature and platform status，binding to the collector statement，compose and OS measurements</td>
-<td>Intel trust chain and expected deployment measurements；retain the results of every required TDX check</td>
+<td><a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX maxfiy VM</a></td>
+<td>Imzo va platforma holatini keltiring, kollektor bayonotiga bog'laning, kompozitsiya va operatsion tizim o'lchovlarini tuzing</td>
+<td>Intel ishonch zanjiri va kutilayotgan joylashtirish o'lchovlari; har bir zarur TDX tekshiruvi natijalarini saqlang</td>
 </tr>
 </tbody>
 </table></div>
-<p>In sealed acquisition，the approved collector receives data through an authenticated
-Telegram connection inside the verified environment．Attestation binds the archive to
-that execution，so verification covers acquisition as well as later file integrity．
-This relies on the approved code and the platform trust chain listed above．
-GitHub capture verification requires a session created inside the run and rejects
-imported-session captures．</p>
-<p>The run receipt records the collector version，file hashes and startup settings．GitHub
-provenance and TDX measurements provide the environment checks；the
-<a href="../verification/">validation record</a> identifies tested configurations．</p>
-<p>TgWitness signs the observations it collects；Telegram and message authors do not issue
-these signatures．In a local workspace，material created before the first independent
-checkpoint still depends on the collector and its key holder．Coverage records describe
-the selected scope and collection outcomes，while verified external timestamps anchor
-the committed archive or journal boundary in time．</p>
+<p>Muhrlangan olishda tasdiqlangan yig'uvchi ma'lumotlarni tasdiqlangan Telegram ulanishi orqali tekshirilgan muhit ichida oladi. Attestatsiya arxivni shu ijroga bog'laydi, shuning uchun tekshirish olishni hamda keyingi fayl yaxlitligini qamrab oladi. Bu yuqorida keltirilgan tasdiqlangan kod va platforma ishonch zanjiriga tayanadi. GitHub qayd etishni tekshirish ijro davomida yaratilgan sessiyani talab qiladi va import qilingan sessiya qayd etishlarini rad etadi.</p>
+<p>Ijro kvitasi to&#x27;plovchi versiyasini, fayl hashlarini va ishga tushirish sozlamalarini qayd etadi. GitHub kelib chiqishi va TDX o&#x27;lchovlari muhit tekshiruvlarini ta&#x27;minlaydi;
+<a href="../verification/">tasdiqlash yozuvi</a> sinovdan o&#x27;tkazilgan konfiguratsiyalarni aniqlaydi.</p>
+<p>TgWitness yig'ilgan kuzatuvlarni imzolaydi; Telegram va xabar mualliflari bu imzolarni bermaydi. Mahalliy ish muhitida birinchi mustaqil tekshiruv nuqtasidan oldin yaratilgan material hali ham yig'uvchi va uning kalit egasiga bog'liq bo'ladi. Qamrov yozuvlari tanlangan doira va yig'ish natijalarini tasvirlaydi, tasdiqlangan tashqi vaqt tamg'alari esa saqlangan arxiv yoki jurnal chegarasini vaqt bo'yicha mahkamlaydi.</p>
 <h2 id="attachments">Ilovalar<a class="anchor" href="#attachments" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <p>Media/ katalogi ostida fayllar SHA-256 hashiga ko&#x27;ra manzillanadi. media.saved hodisasi haesh va bayt uzunligini ma&#x27;lum bir xabar hodisasi bilan bog&#x27;laydi. Xom fayl nomlari metama&#x27;lumot bo&#x27;lib, hech qachon mahalliy yo&#x27;l bo&#x27;lmaydi. Media baytlari asinxron tarzda yuklanadi, shuning uchun darhol o&#x27;chirish ularni qayd etilishini to&#x27;xtatishi mumkin. To&#x27;plamni o&#x27;chirib qo&#x27;yish, katta hajmli/noma&#x27;lum hajmli fayllar, yuklab olishdagi xatoliklar va uzilgan yuklab olishlar natijalar sifatida ko&#x27;rinadi. Jarayon qulashi bog&#x27;lanmagan qisman fayllarni qoldirishi mumkin; ular eksportga kiritilmaydi.</p>
 <p>ZIP eksporti saqlangan media fayllarini ularning nomlari bilan solishtiradi. JSONL, CSV va HTML eksportlari voqea imzolarini tekshiradi, lekin media baytlarini o&#x27;z ichiga olmaydi. Qo&#x27;shimcha hisobotlar qulaylik uchun mo&#x27;ljallangan; events.jsonl voqealarning haqiqiy vakilidir.</p>
@@ -374,17 +351,9 @@ the committed archive or journal boundary in time．</p>
 <code>file_sha256</code>) yoki uning yo'qligining sababini (<code>file_status</code>), shuningdek o'quvchiga matn atrofida ko'ringan narsalarni: matn ortidagi havolalar, yuboruvchi manbai, bot tugmalari, imzo, ko'rinishlar va avtomatik o'chirish taymerini qayd etadi. <code>verify.py</code> har bir nomlangan faylning shu xesh ostidagi imzolangan manifestda mavjudligini tekshiradi.</p>
 <h2 id="durable-collection-and-process-receipts-02">Chidamli yig&#x27;ish va jarayon kvitansiyalari (0.2)<a class="anchor" href="#durable-collection-and-process-receipts-02" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <p>Media ish va uning xabar voqeasi bitta tranzaktsiyada yozib qo&#x27;yiladi. Ish asl TL xabar tavsiflagichini saqlaydi; imzolangan kuzatuv uning SHA-256, hisob va hajm siyosatini bog&#x27;laydi. Tiklash yuklab olishdan oldin bu bog&#x27;lanishni tekshiradi. U hech qachon joriy xabarni olib kelmaydi va jimjit ravishda yangiroq ilovani almashtiradi. To&#x27;xtab qolgan ishlar qayta urinadi, lekin doimiy xato aniq natija bo&#x27;lib qoladi.</p>
-<p>Each workspace has its own journal and signing identity. A process.started event includes
-a run ID, local clocks, dependency versions, source-file hashes, initial account/scope,
-and capture settings. Heartbeats include the run ID, monotonic time, and queue state.
-The run receipt can also be downloaded as a separately signed statement．For verification
-of the execution environment，pair it with the GitHub attestation or TDX checks described
-in <a href="#verification-scope">Verification scope</a>．</p>
-<p>Automatic checkpoints are retained locally on startup, every five minutes while
-observing (<strong>Parameters → Signed checkpoint every</strong>), and on orderly stop. Startup verification and export compare the journal
-against the latest retained local checkpoint. This can detect a database rollback
-when the checkpoint survives．Independent retention keeps that reference available outside
-the workspace；a verified external timestamp additionally anchors it in time．</p>
+<p>Har bir ish maydonining o&#x27;z jurnali va imzolash identifikatori mavjud. process.started hodisasi run ID, mahalliy soatlar, bog&#x27;liqlik versiyalari, manba-fayl hashlar, dastlabki hisob/doirani va yozib olish sozlamalarini o&#x27;z ichiga oladi. Yurak urishlari (Heartbeats) run ID, monotonik vaqt va navbat holatini o&#x27;z ichiga oladi.
+Ijro kvitansiyasi alohida imzolangan bayonot sifatida ham yuklab olinishi mumkin. Ijro muhitini tasdiqlash uchun uni <a href="#verification-scope">Verification </a>scope bo&#x27;limida tasvirlangan GitHub attestasiyasi yoki TDX tekshiruvlari bilan birlashtiring.</p>
+<p>Avtomatik tekshiruv nuqtalari dastur ishga tushirilganda, kuzatuv paytida har besh daqiqada (<strong>Parametrlar → Imzolangan tekshiruv nuqtasi har</strong>) va tartibli to&#x27;xtatishda mahalliy saqlanadi. Ishga tushirishni tekshirish va eksport jurnalni eng so&#x27;nggi saqlangan mahalliy tekshiruv nuqtasi bilan solishtiradi. Bu tekshiruv nuqtasi saqlanib qolganda ma&#x27;lumotlar bazasining orqaga qaytishini aniqlashi mumkin. Mustaqil saqlash ushbu havolani ish maydonidan tashqarida mavjud bo&#x27;lishini ta&#x27;minlaydi; tasdiqlangan tashqi vaqt belgilovchi esa uni qo&#x27;shimcha ravishda vaqt bo&#x27;yicha mahkamlaydi.</p>
 <p>Qayta ishga tushirilgandan so&#x27;ng saqlangan Telegram yangilanish pozitsiyasi (<code>catch_up_from</code>da <code>observation.started</code>) tiklanadi va o&#x27;tkazib yuborilgan yangilanishlar so&#x27;raladi. Davriy qayta tekshirish o&#x27;tkazib yuborilgan xabarlar uchun
 <code>message.recovered</code>ni va Telegram saqlangan xabarni qaytarmasa <code>message.missing_on_recheck</code>ni qayd etadi; ikkinchisi o&#x27;chirish bildirishnomasi emas va o&#x27;chiruvchini ham, vaqtni ham ko&#x27;rsatmaydi.</p>
 <h3 id="off-site-copy-and-restore-s3">S3da nusxa olish va tiklash<a class="anchor" href="#off-site-copy-and-restore-s3" aria-label="Ushbu bo&#x27;limga havola">#</a></h3>

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/secur
 
 Model ancaman, model akses, data rahasia yang disimpan, paparan jaringan, impor sesi, dan cara melaporkan kerentanan.
 
-This page describes access，storage and network protection in a local or server workspace． For collection on a GitHub runner or in an Intel TDX confidential VM，see the [verification modes](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope)，which add checks of the collection environment． Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．
+Halaman ini menjelaskan akses, penyimpanan, dan perlindungan jaringan di ruang kerja lokal atau server. Untuk pengumpulan data di GitHub Runner atau di VM rahasia Intel TDX, lihat mode [verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope), yang menambahkan pemeriksaan terhadap lingkungan pengumpulan data. Koneksi akun, pemberitahuan, cap waktu, salinan di luar lokasi, dan saksi memiliki pengaturan rute masing-masing.
 
 | Area | Singkatnya |
 | --- | --- |
@@ -12,7 +12,7 @@ This page describes access，storage and network protection in a local or server
 | Rahasia yang tersimpan | Pengaturan sesi, pasangan API, kunci penandatanganan, dan proxy dienkripsi menggunakan Fernet |
 | Pesan dan media | Disimpan tanpa enkripsi: gunakan enkripsi disk dan izin akses yang ketat |
 | Integritas | Rantai hash SHA-256 dan tanda tangan Ed25519 pada setiap catatan |
-| Local trust boundary | The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary |
+| Batas kepercayaan lokal | Administrator host mengontrol ruang kerja dan kunci penandatanganannya; titik pemeriksaan independen menyimpan batas jurnal sebelumnya |
 
 Untuk laporan kerentanan, lihat [kebijakan keamanan](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md).
 
@@ -38,13 +38,13 @@ Ekspor tidak menyertakan rahasia otentikasi dan penandatanganan, tetapi secara s
 
 ## Rahasia yang tersimpan
 
-Telegram API credentials，the session and signing key are encrypted with Fernet． For local messages and media，encryption is provided by the host's disk or volume； the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP， and off-site copies use AES-256-GCM．
+Kredensial API Telegram, sesi, dan kunci penandatanganan dienkripsi menggunakan Fernet. Untuk pesan dan media lokal, enkripsi disediakan oleh disk atau volume host; ruang kerja menyimpan file biasa. Ekspor dapat menggunakan ZIP AES-256 yang dilindungi kata sandi, dan salinan di luar lokasi menggunakan AES-256-GCM.
 
-The vault key defaults to the protected data directory．Use an external master-key file below to store it separately．On Unix，new private-key files use mode 0600 and new data directories use 0700；on Windows，set the directory ACL for the service account and authorized administrators．Existing directory permissions are retained．
+Kunci vault secara default disimpan di direktori data yang dilindungi. Gunakan berkas kunci utama eksternal di bawah ini untuk menyimpannya secara terpisah. Pada sistem Unix, berkas kunci pribadi baru menggunakan mode 0600 dan direktori data baru menggunakan 0700; pada Windows, atur ACL direktori untuk akun layanan dan administrator yang berwenang. Izin direktori yang sudah ada tetap dipertahankan.
 
 ### Kunci utama eksternal
 
-For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode．Disk encryption protects the local message and media files in either mode；see [connection and data protection](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/) for setup details．
+Untuk direktori data baru, TGWITNESS_VAULT_KEY_FILE dapat menyediakan kunci utama acak eksternal. HKDF-SHA256 dan garam acak terpisah menghasilkan kunci Fernet yang berbeda untuk setiap ruang kerja. Berkas vault.external.json harus dipertahankan untuk pemulihan. Kunci utama yang hilang atau salah akan menyebabkan kegagalan. Brankas lokal yang sudah ada tidak akan dimigrasikan secara otomatis. Panel menampilkan mode penyimpanan kunci yang dipilih. Enkripsi disk melindungi berkas pesan dan media lokal di kedua mode; lihat [koneksi dan perlindungan data](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/) untuk detail pengaturan.
 
 ## Proksi dan rute jaringan
 
@@ -68,10 +68,10 @@ Respons validasi API default telah diganti agar tidak menampilkan nilai kredensi
 
 ## Batasan integritas
 
-Local verification checks record signatures，the hash chain，attachments and the export manifest． The administrator holds the local signing key and can create another signed journal； an independently retained checkpoint detects replacement of the prefix it covers． Keep the key fingerprint and checkpoints with the recipient or an independent witness．
+Pemeriksaan verifikasi lokal memeriksa tanda tangan, rantai hash, lampiran, dan manifes ekspor. Administrator memegang kunci penandatanganan lokal dan dapat membuat jurnal bertanda tangan lainnya; titik pemeriksaan yang disimpan secara independen mendeteksi penggantian awalan yang dicakupnya. Simpan sidik jari kunci dan titik pemeriksaan bersama penerima atau saksi independen.
 
-For independently checked collection，choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)． Their verifiers check workflow provenance or hardware measurements in addition to archive integrity． Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies； the [evidence format](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) describes the checks for each mode．
+Untuk pengumpulan yang diverifikasi secara independen, pilih [penangkapan](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) [melalui GitHub Actions](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) atau [penyebaran Intel TDX](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Verifikator mereka memeriksa asal-usul alur kerja atau pengukuran perangkat keras selain integritas arsip. Cap waktu opsional dan salinan terenkripsi di luar lokasi menyediakan penanda waktu dan salinan yang dapat dipulihkan; [format](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) [bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) menjelaskan pemeriksaan untuk setiap mode.
 
 ## Jika Anda mencurigai adanya masalah
 
-Preserve the original data directory and use a separate copy for analysis． Report the affected version，operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)，keeping account data and credentials private．
+Pertahankan direktori data asli dan gunakan salinan terpisah untuk analisis. Laporkan versi yang terpengaruh, operasi, dan langkah-langkah yang dapat direproduksi melalui kebijakan [keamanan,](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md) dengan tetap menjaga kerahasiaan data akun dan kredensial.

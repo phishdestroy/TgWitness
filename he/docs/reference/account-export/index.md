@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 קישור למקור אינו מהווה הוכחה עצמאית לכך שהשינוי בחר בכל פריט נדרש או הסיר כל פרט מזהה. הטקסט המקורי בגרסתו הבלתי מוצפנת אינו מוטמע כהוכחה. נדרשת בדיקה מחודשת על מנת להגיע למסקנה זו.
 
-## Sharing and hosted capture
+## שיתוף ותיעוד מאוחסן
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+בחרו את ההודעות והקבצים הדרושים למקבל, עברו על העותק המלא שנשלח, ושמרו את המקור בנפרד. תיעדו את ה-hash של קובץ ה-ZIP שנשלח, כדי שהמקבל יוכל לזהות ולאמת שמדובר באותו עותק בדיוק. תהליך הפסאודונימיזציה מחליף את המזהים שנבחרו; הטקסט הכלול והקבצים המקוריים נשארים חלק מהבדיקה.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope)．
+GitHub Actions תומך בייצוא של חשבונות מלאים וצ'אטים נבחרים באמצעות Takeout או ה-API הרגיל, בנוסף ליומן אירועים של צ'אט בודד. המדריך ללכידה [מאוחסנת](https://phishdestroy.github.io/TgWitness/docs/capture/) מסביר את אימות ההגדרות ואת מגבלת 120 הדקות. כדי לאמת עותק משותף שמקורו בלכידה מאוחסנת, יש להשוות את ה-hash של המקור לארכיון המקורי ולאמת את האישור של הארכיון באמצעות בדיקות [ספציפיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) [למצב](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope).
 
 [פורמט הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/) · [דוחות מקרה](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/)

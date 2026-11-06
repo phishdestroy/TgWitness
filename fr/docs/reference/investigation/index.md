@@ -101,7 +101,7 @@ Dans l’exemple ci-dessous :
 | Même fichier enregistré | Réceptions multimédias n° 151 et n° 209 terminées | Les valeurs SHA-256 complètes concordent pour les octets conservés |
 | Attribution de la chaîne | #101 et #188 | Ne pas attribuer une publication de chaîne à l’utilisateur 71001 sans mentionner l’expéditeur. |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+Comparer les hachages des pièces jointes et les références de messages associées, et conserver les chronologies des comptes regroupées par les identifiants Telegram fournis dans ces enregistrements.
 
 Conservez les notes de travail de l’équipe sur [Case Board](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/) : ajoutez aux favoris les enregistrements sur lesquels vous vous appuyez, tels que #146, #188 et #205, mettez en surbrillance la chaîne de destination exacte, et enregistrez un extrait de chaque action enregistrée entre deux enregistrements ou sur une plage horaire. Les notes et les statuts conservent l’examen effectué par l’équipe dans leur propre historique signé, distinct des observations sources.
 
@@ -161,6 +161,6 @@ Conservez les résultats de vérification réels et les artefacts d’origine. E
 | --- | --- | --- |
 | Litige relatif à une commande ou à un paiement géré par un bot | Annonce de l’entrée → aperçu du lien enregistré → paramètre de démarrage du bot → versions « message » et « clavier » → accusés de réception des rappels du panneau → suivi des conversations privées/de groupe | Chronologie des offres et des réponses observée et sources vérifiées ; un lien de paiement ne suffit pas à lui seul à prouver qu’un paiement a bien eu lieu |
 | Messages supprimés à la suite d’un incident | Toutes les conversations concernées → originaux et modifications enregistrés → résultats des suppressions ou des éléments manquants lors d’une nouvelle vérification → médias conservés → couverture et autres points de vue des comptes | Versions conservées et intervalles d’inconnues explicites ; aucun acteur de suppression inventé |
-| Un participant change de nom d’une conversation à l’autre | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| Un participant change de nom d’une conversation à l’autre | Identifiant numérique de l'expéditeur → nom／historique du nom d'utilisateur → réponses → autres discussions observées → destinations／fichiers cités | Chronologie de l'activité d'un compte Telegram avec des liens vers les enregistrements sources correspondants |
 
 [Référence de la collection](https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/) · [Vérification des profils de personnes](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#people-profiles) · [Transfert des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#investigation-handoff) · [Validation terminée](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/)

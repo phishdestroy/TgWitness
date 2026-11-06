@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="গাইডসমূহ"><a href="../../../">হোম</a> <span aria-hidden="true">/</span> <a href="../../">ডকুমেন্টেশন</a> <span aria-hidden="true">/</span> <a href="../">তথ্যসূত্র</a> <span aria-hidden="true">/</span> <span aria-current="page">নিরাপত্তা এবং ডেটা হ্যান্ডলিং</span></nav>
 <p class="verification-shortcut"><a href="../verification/">কি পরীক্ষা করা হয়েছে →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ডকুমেন্টেশন অনুসন্ধান করুন</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="প্রক্সি, হ্যাশ চেইন, টোকেন বা উইটনেস চেষ্টা করুন…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="স্পষ্ট অনুসন্ধান" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">গাইড এবং রেফারেন্স অনুসন্ধান করতে একটি শব্দ টাইপ করুন। অনুসন্ধান আপনার ব্রাউজারেই থাকবে।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">এই পৃষ্ঠার কিছু অংশ এখনও ইংরেজিতে রয়েছে: অনুবাদ করার পর মূল ইংরেজি সংস্করণটি পরিবর্তিত হয়েছে।</p><p class="eyebrow">তথ্যসূত্র / নিরাপত্তা ও প্রকল্প</p><h1>নিরাপত্তা এবং ডেটা হ্যান্ডলিং</h1><p class="guide-outcome">থ্রেট মডেল, অ্যাক্সেস মডেল, বিশ্রামকালীন গোপনীয়তা, নেটওয়ার্ক এক্সপোজার, সেশন ইমপোর্ট এবং কীভাবে একটি দুর্বলতা রিপোর্ট করবেন।</p><div class="wiki-body"><p>This page describes access，storage and network protection in a local or server workspace．
-For collection on a GitHub runner or in an Intel TDX confidential VM，see the
-<a href="../evidence/#verification-scope">verification modes</a>，which add checks of the collection environment．
-Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．</p>
+<article class="guide-content"><p class="eyebrow">তথ্যসূত্র / নিরাপত্তা ও প্রকল্প</p><h1>নিরাপত্তা এবং ডেটা হ্যান্ডলিং</h1><p class="guide-outcome">থ্রেট মডেল, অ্যাক্সেস মডেল, বিশ্রামকালীন গোপনীয়তা, নেটওয়ার্ক এক্সপোজার, সেশন ইমপোর্ট এবং কীভাবে একটি দুর্বলতা রিপোর্ট করবেন।</p><div class="wiki-body"><p>এই পৃষ্ঠায় স্থানীয় বা সার্ভার ওয়ার্কস্পেসে অ্যাক্সেস, স্টোরেজ এবং নেটওয়ার্ক সুরক্ষা বর্ণনা করা হয়েছে।
+GitHub রানার বা Intel TDX কনফিডেনশিয়াল VM-এ সংগ্রহের জন্য
+<a href="../evidence/#verification-scope">যাচাইকরণ </a>মোড দেখুন, যা সংগ্রহ পরিবেশের চেক যোগ করে।
+অ্যাকাউন্ট সংযোগ, বিজ্ঞপ্তি, টাইমস্ট্যাম্প, অফ-সাইট কপি এবং উইটনেসের নিজস্ব রাউটিং সেটিংস রয়েছে।</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -61,8 +61,8 @@ Account connections，notifications，timestamps，off-site copies and witnesses
 <td>প্রতি রেকর্ডে SHA-256 হ্যাশ চেইন এবং Ed25519 স্বাক্ষর</td>
 </tr>
 <tr>
-<td>Local trust boundary</td>
-<td>The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary</td>
+<td>স্থানীয় বিশ্বাস সীমানা</td>
+<td>হোস্ট প্রশাসক কর্মক্ষেত্র এবং এর স্বাক্ষর কী নিয়ন্ত্রণ করেন; স্বাধীন চেকপয়েন্টগুলো পূর্ববর্তী জার্নাল সীমানা ধরে রাখে</td>
 </tr>
 </tbody>
 </table></div>
@@ -84,22 +84,15 @@ Account connections，notifications，timestamps，off-site copies and witnesses
 টেলিগ্রাম-উৎসিত টেক্সট HTML হিসেবে নয়, সাধারণ টেক্সট হিসেবে সন্নিবেশিত হয়। ডাউনলোডকৃত সংযুক্তিগুলি বাইনারি সংযুক্তি হিসেবে পরিবেশিত হয়। JSONL এক্সপোর্ট মূল স্ট্রিংগুলো অপরিবর্তিত রাখে; HTML সেগুলোকে এস্কেপ করে; ফর্মুলায় পরিণত হতে পারে এমন CSV সেলের শুরুতে অ্যাপোস্ট্রফি যোগ করা হয়।</p>
 <p>রপ্তানিতে অথেন্টিকেশন এবং স্বাক্ষর সংক্রান্ত গোপনীয়তাগুলো বাদ দেওয়া হয়, তবে এতে ইচ্ছাকৃতভাবে সংগৃহীত সোর্স মেটাডেটা, আইডেন্টিফায়ার এবং সম্ভবত ব্যক্তিগত বা সংবেদনশীল বিষয়বস্তু অন্তর্ভুক্ত থাকে। টেলিগ্রাম অ্যাক্সেস হ্যাশ এবং ফাইল রেফারেন্স কাঁচা সোর্স মেটাডেটায় থাকতে পারে।</p>
 <h2 id="secrets-at-rest">বিশ্রামে গোপন রহস্য<a class="anchor" href="#secrets-at-rest" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
-<p>Telegram API credentials，the session and signing key are encrypted with Fernet．
-For local messages and media，encryption is provided by the host's disk or volume；
-the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP，
-and off-site copies use AES-256-GCM．</p>
-<p>The vault key defaults to the protected data directory．Use an external master-key file
-below to store it separately．On Unix，new private-key files use mode 0600 and new data
-directories use 0700；on Windows，set the directory ACL for the service account and
-authorized administrators．Existing directory permissions are retained．</p>
+<p>টেলিগ্রাম API ক্রেডেনশিয়াল, সেশন এবং স্বাক্ষর কী Fernet দিয়ে এনক্রিপ্ট করা হয়।
+স্থানীয় মেসেজ এবং মিডিয়ার জন্য হোস্টের ডিস্ক বা ভলিউম এনক্রিপশন প্রদান করে;
+ওয়ার্কস্পেস সাধারণ ফাইল সংরক্ষণ করে। এক্সপোর্টগুলো পাসওয়ার্ড-সুরক্ষিত AES-256 ZIP ব্যবহার করতে পারে,
+এবং অফ-সাইট কপিগুলো AES-256-GCM ব্যবহার করে।</p>
+<p>ভল্ট কী ডিফল্টরূপে সুরক্ষিত ডেটা ডিরেক্টরিতে সেট হয়। এটি আলাদাভাবে সংরক্ষণ করতে নীচের একটি বাহ্যিক মাস্টার-কী ফাইল ব্যবহার করুন। ইউনিক্সে, নতুন প্রাইভেট-কী ফাইল মোড 0600 এবং নতুন ডেটা ডিরেক্টরি মোড 0700 ব্যবহার করে; উইন্ডোজে, সার্ভিস অ্যাকাউন্ট এবং অনুমোদিত প্রশাসকদের জন্য ডিরেক্টরি ACL সেট করুন। বিদ্যমান ডিরেক্টরি অনুমতিগুলো অক্ষুণ্ণ থাকবে।</p>
 <h3 id="external-master-key">বাহ্যিক মাস্টার কী<a class="anchor" href="#external-master-key" aria-label="এই বিভাগের লিঙ্ক">#</a></h3>
-<p>For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random
-master key. HKDF-SHA256 and a separate random salt derive a different Fernet key
-for each workspace. vault.external.json must be retained for recovery. Missing or
-wrong master keys fail closed. Existing local vaults are not silently migrated.
-The panel displays the selected key-storage mode．Disk encryption protects the local
-message and media files in either mode；see
-<a href="../connection/">connection and data protection</a> for setup details．</p>
+<p>নতুন ডেটা ডিরেক্টরির জন্য, TGWITNESS_VAULT_KEY_FILE একটি বাহ্যিক র‍্যান্ডম মাস্টার কী সরবরাহ করতে পারে। HKDF-SHA256 এবং একটি পৃথক র‍্যান্ডম সল্ট প্রতিটি ওয়ার্কস্পেসের জন্য একটি ভিন্ন Fernet কী তৈরি করে। পুনরুদ্ধারের জন্য vault.external.json সংরক্ষণ করতে হবে। মাস্টার কী অনুপস্থিত বা ভুল হলে বন্ধ হয়ে যাবে। বিদ্যমান স্থানীয় ভল্টগুলো নীরবে স্থানান্তরিত হবে না।
+প্যানেলটি নির্বাচিত কী-স্টোরেজ মোড প্রদর্শন করে। ডিস্ক এনক্রিপশন যেকোনো মোডে স্থানীয় মেসেজ এবং মিডিয়া ফাইলগুলোকে সুরক্ষিত রাখে; সেটআপের বিবরণের জন্য
+<a href="../connection/">সংযোগ এবং ডেটা সুরক্ষা</a> দেখুন।</p>
 <h2 id="proxies-and-network-routes">প্রক্সি এবং নেটওয়ার্ক রুটসমূহ<a class="anchor" href="#proxies-and-network-routes" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
 <p>প্রক্সি কনফিগারেশন ভল্টে এনক্রিপ্ট করা হয়। পাসওয়ার্ড এবং MTProxy সিক্রেটগুলো API দ্বারা ফেরত দেওয়া হয় না বা প্রমাণ রেকর্ডে লেখা হয় না। প্রতিটি ওয়ার্কস্পেস তার টেলিগ্রাম রুট এবং একটি <a href="../connection/#ip-modes">IP মোড</a> বেছে নেয়।</p>
 <p><strong>&#x27;ঠিকানা লুকান&#x27;</strong> সরাসরি টেলিগ্রাম ফ্যালব্যাক নিষ্ক্রিয় করে এবং বাহ্যিক HTTP অনুরোধের জন্য প্রক্সি প্রয়োজন। স্পষ্টভাবে নির্বাচিত ফ্যালব্যাক মোড বিলম্বের পর সরাসরি টেলিগ্রাম অ্যাক্সেসের অনুমতি দেয়; টানেল/VPN মোড সরাসরি রুটের অনুমতি দেয়। টানেল মোড নির্বাচন করলে VPN ইনস্টল বা যাচাই করা হয় না। এই সেটিংস সমস্ত মেশিন ট্র্যাফিক, ব্রাউজার, প্যাকেজ ম্যানেজার বা স্থানীয় প্রক্সি-হোস্ট DNS রেজোলিউশন নিয়ন্ত্রণ করে না।</p>
@@ -118,19 +111,18 @@ QR ইমেজগুলো স্থানীয়ভাবে তৈরি �
 <h2 id="logs-and-transport">কাঠের গুঁড়ি এবং পরিবহন<a class="anchor" href="#logs-and-transport" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
 <p>ডিফল্ট API ভ্যালিডেషన్ রেসপন্সটি প্রতিস্থাপন করা হয়েছে যাতে এটি ক্রেডেনশিয়াল মানগুলো প্রতিধ্বনি না করে। অ্যাপ্লিকেশন অ্যাক্সেস লগিং নিষ্ক্রিয় করা হয়েছে। অথরাইজেশন হেডার বা অনুরোধের বডি লগ করার জন্য রিভার্স প্রক্সি কনফিগার করবেন না। HTTP প্লেনটেক্সটে টোকেন এবং লগইন সিক্রেট বহন করে: localhost ছাড়ার সময় সর্বদা HTTPS বা SSH টানেল ব্যবহার করুন।</p>
 <h2 id="integrity-limits">অখণ্ডতার সীমা<a class="anchor" href="#integrity-limits" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
-<p>Local verification checks record signatures，the hash chain，attachments and the export manifest．
-The administrator holds the local signing key and can create another signed journal；
-an independently retained checkpoint detects replacement of the prefix it covers．
-Keep the key fingerprint and checkpoints with the recipient or an independent witness．</p>
-<p>For independently checked collection，choose <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions capture</a>
-or <a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX deployment</a>．
-Their verifiers check workflow provenance or hardware measurements in addition to archive integrity．
-Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies；
-the <a href="../evidence/#verification-scope">evidence format</a> describes the checks for each mode．</p>
+<p>স্থানীয় যাচাইকরণ পরীক্ষাগুলি স্বাক্ষর, হ্যাশ চেইন, সংযুক্তি এবং রপ্তানি ম্যানিফেস্ট রেকর্ড করে।
+প্রশাসক স্থানীয় স্বাক্ষর কী ধারণ করেন এবং আরেকটি স্বাক্ষরিত জার্নাল তৈরি করতে পারেন;
+স্বতন্ত্রভাবে সংরক্ষিত একটি চেকপয়েন্ট এটি যে প্রিফিক্সটি কভার করে তার প্রতিস্থাপন সনাক্ত করে।
+কী ফিঙ্গারপ্রিন্ট এবং চেকপয়েন্টগুলি প্রাপক বা একজন স্বতন্ত্র সাক্ষীর কাছে সংরক্ষণ করুন।</p>
+<p>স্বতন্ত্রভাবে যাচাইকৃত সংগ্রহের জন্য, <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions capture</a> বা <a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX </a>deployment নির্বাচন করুন।
+তাদের ভেরিফায়াররা আর্কাইভের অখণ্ডতার পাশাপাশি ওয়ার্কফ্লোর উৎপত্তি বা হার্ডওয়্যার পরিমাপ যাচাই করে।
+ঐচ্ছিক টাইমস্ট্যাম্প এবং এনক্রিপ্টকৃত অফ-সাইট কপিগুলি সময়ের অ্যাঙ্কর এবং পুনরুদ্ধারযোগ্য কপি প্রদান করে;
+<a href="../evidence/#verification-scope">প্রমাণ ফরম্যাট</a> প্রতিটি মোডের জন্য চেকগুলি বর্ণনা করে।</p>
 <h2 id="if-you-suspect-a-problem">যদি আপনি কোনো সমস্যা সন্দেহ করেন<a class="anchor" href="#if-you-suspect-a-problem" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
-<p>Preserve the original data directory and use a separate copy for analysis．
-Report the affected version，operation and reproducible steps through the
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">security policy</a>，keeping account data and credentials private．</p></div></article>
+<p>মূল ডেটা ডিরেক্টরি সংরক্ষণ করুন এবং বিশ্লেষণের জন্য একটি পৃথক অনুলিপি ব্যবহার করুন।
+প্রভাবিত সংস্করণ, অপারেশন এবং পুনরুত্পাদনযোগ্য ধাপগুলি
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">নিরাপত্তা</a> নীতিমালার মাধ্যমে রিপোর্ট করুন, অ্যাকাউন্ট ডেটা এবং ক্রেডেনশিয়ালগুলি গোপন রাখুন।</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/SECURITY-MODEL.md">GitHub-এ এই পৃষ্ঠা সম্পাদনা করুন ↗</a><a class="next-guide" href="../architecture/"><span>পরবর্তী ধাপ</span><strong>আর্কিটেকচার →</strong></a><p>এই গাইডগুলো বর্তমান বাস্তবায়ন বর্ণনা করে। যাচাইকরণ ফলাফল এবং অবশিষ্ট ফাঁকগুলো আলাদাভাবে নথিভুক্ত করা হয়েছে। <a href="../verification/">কি পরীক্ষা করা হয়েছে →</a></p></footer>
 </main>
 <aside class="toc" aria-label="এই পৃষ্ঠায়"><p class="nav-label">এই পৃষ্ঠায়</p><a href="#access-model">অ্যাক্সেস মডেল</a><a href="#panel-content-and-exports">প্যানেলের বিষয়বস্তু এবং রপ্তানি</a><a href="#secrets-at-rest">বিশ্রামে গোপন রহস্য</a><a href="#proxies-and-network-routes">প্রক্সি এবং নেটওয়ার্ক রুটসমূহ</a><a href="#sign-in-and-session-imports">সাইন-ইন এবং সেশন আমদানি</a><a href="#logs-and-transport">কাঠের গুঁড়ি এবং পরিবহন</a><a href="#integrity-limits">অখণ্ডতার সীমা</a><a href="#if-you-suspect-a-problem">যদি আপনি কোনো সমস্যা সন্দেহ করেন</a></aside>

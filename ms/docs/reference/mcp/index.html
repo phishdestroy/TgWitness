@@ -176,14 +176,32 @@ nama hos yang stabil untuk konfigurasi klien yang disimpan.</p>
 <td>Mesej mengikut jam UTC dan hari dalam minggu, hari puncak, perkongsian suntingan dan pemadaman, penghantar, domain dan <code>@handles</code>, dengan liputan (<a href="../cli/#activity-statistics">perincian</a>)</td>
 </tr>
 <tr>
+<td><code>get_messages_by_date</code></td>
+<td>Mesej yang disimpan bagi satu hari kalendar dalam zon waktu IANA yang dinamakan (<code>Europe/Kyiv</code>, <code>UTC</code>), pada masa Telegram melaporkan; <code>from_utc</code> dan <code>until_utc</code> nyatakan hari yang dikira, termasuk penjimatan waktu siang</td>
+</tr>
+<tr>
+<td><code>get_pinned_messages</code></td>
+<td>Mesej yang dipin dalam snapshot status sembang terkini bersama versi simpanan mereka, serta pemberitahuan pin dan unpin yang diperhatikan secara langsung</td>
+</tr>
+<tr>
+<td><code>get_chat_stats</code></td>
+<td>Bilangan murah rekod yang disimpan untuk satu sembang atau setiap sembang dalam skop, pemerhatian pertama dan terakhir, dan <code>gap_summary</code>; gunakan sebelum bacaan besar</td>
+</tr>
+<tr>
+<td><code>get_topics</code></td>
+<td>Topik forum daripada mesej perkhidmatan topik yang disimpan: sejarah tajuk, ditutup atau disembunyikan, bilangan mesej yang disimpan</td>
+</tr>
+<tr>
+<td><code>get_media</code></td>
+<td>Imej yang disimpan sebagai pratonton JPEG bersaiz kecil (maksimum 36 KB), dikembalikan sebagai imej bersama SHA-256 dan <code>media.saved</code> rekod; fail itu disemak terlebih dahulu dengan hash yang direkodkan, manakala fail lain hanya mengembalikan metadata</td>
+</tr>
+<tr>
 <td><code>export_messages</code></td>
 <td>Baris arahan sahaja, tidak dipilih secara lalai: aliran simpanan pemerhatian sebagai JSON Lines (<a href="../cli/#export">perincian</a>); tidak ditawarkan melalui MCP</td>
 </tr>
 </tbody>
 </table></div>
-<p><code>tools/list</code> hanya mengembalikan alat yang dibenarkan kepada sambungan tersebut. Panggilan ke alat
-lain ditolak. Alat konteks kumpulan, episod, terminologi dan rantaian balasan tidak
-ditawarkan dalam binaan ini; bahagian belakang pek konteks berasingan mereka tidak disertakan.</p>
+<p>Setiap alat bersifat hanya-baca (<code>readOnlyHint</code>) dan mengisytiharkan skema output; medan di luar yang diisytiharkan akan dikembalikan seperti sedia ada. <code>tools/list</code> Hanya memulangkan alat yang diberikan kepada sambungan tersebut. Panggilan kepada alat lain ditolak. Alat konteks kumpulan, episod, terminologi dan rantaian balasan tidak ditawarkan dalam binaan ini; backend pek konteks berasingan mereka tidak disertakan.</p>
 <p>Setiap bacaan menyemak token, alat dan skop ruang kerja/sembang, termasuk selepas
 kerja pangkalan data selesai. Had ialah 60 permintaan seminit, 50 rekod setiap halaman,
 64 KiB setiap hasil dan tarikh akhir arkib lapan saat. Panggilan MCP yang tamat masa

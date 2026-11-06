@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="راهنماها"><a href="../../../">خانه</a> <span aria-hidden="true">/</span> <a href="../../">مستندسازی</a> <span aria-hidden="true">/</span> <a href="../">منبع</a> <span aria-hidden="true">/</span> <span aria-current="page">حالت تحقیق</span></nav>
 <p class="verification-shortcut"><a href="../verification/">آنچه آزمایش شده است ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">جستجو در مستندات</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، زنجیره هش، توکن یا ویسنس را امتحان کنید…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="جستجوی واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">یک کلمه تایپ کنید تا در راهنماها و مرجع جستجو شود. جستجو در مرورگر شما باقی می‌ماند.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">بخشی از این صفحه هنوز به زبان انگلیسی است: متن اصلی انگلیسی پس از ترجمه تغییر کرده است.</p><p class="eyebrow">منبع / جمع‌آوری</p><h1>حالت تحقیق</h1><p class="guide-outcome">تحقیقات کل حساب در سراسر کانال‌ها، گروه‌ها، چت‌های خصوصی و ربات‌ها، از دامنه تا بستهٔ پروندهٔ تأییدشده.</p><div class="wiki-body"><p>یک پرونده را در سراسر کانال‌ها، گروه‌ها، چت‌های خصوصی و ربات‌ها، از دریافت اولیه تا یک خط زمانی مستند و تحویل قابل تأیید دنبال کنید. نسخه وب‌سایت تعاملی در <code>/docs/cases/</code> موجود است؛ <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">دستورالعمل‌های پیش‌نمایش</a>.</p>
+<article class="guide-content"><p class="eyebrow">منبع / جمع‌آوری</p><h1>حالت تحقیق</h1><p class="guide-outcome">تحقیقات کل حساب در سراسر کانال‌ها، گروه‌ها، چت‌های خصوصی و ربات‌ها، از دامنه تا بستهٔ پروندهٔ تأییدشده.</p><div class="wiki-body"><p>یک پرونده را در سراسر کانال‌ها، گروه‌ها، چت‌های خصوصی و ربات‌ها، از دریافت اولیه تا یک خط زمانی مستند و تحویل قابل تأیید دنبال کنید. نسخه وب‌سایت تعاملی در <code>/docs/cases/</code> موجود است؛ <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">دستورالعمل‌های پیش‌نمایش</a>.</p>
 <h2 id="worked-case-a-destination-changes-across-four-conversations">مورد بررسی: تغییر مقصد در چهار گفتگو<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="لینک به این بخش">#</a></h2>
 <p>یک اعلان به یک ربات اشاره می‌کند. یک گروه عملیاتی یک مقصد پرداخت جدید را مورد بحث قرار می‌دهد و صفحه‌کلید ربات آن را نمایش می‌دهد. اعلان ویرایش می‌شود، یک پیام خصوصی پیگیری مقصد را تکرار می‌کند و یک پیام گروهی ناپدید می‌شود.</p>
 <p>سؤالات این هستند: چه چیزهایی قبل و بعد از تغییر مشاهده شد، کدام حساب‌های تلگرام هر مورد را ارسال کردند، مقصد در کجا ظاهر شد، کدام بایت‌های ضمیمه حفظ شدند و چه بازه‌های زمانی هنوز نامشخص هستند؟</p>
@@ -161,8 +161,7 @@
 </tr>
 </tbody>
 </table></div>
-<p>Compare attachment hashes and their associated message references，and keep account
-timelines grouped by the Telegram IDs supplied in those records．</p>
+<p>هش‌های پیوست‌ها و ارجاعات پیام‌های مرتبط با آن‌ها را مقایسه کرده و سوابق حساب‌ها را بر اساس شناسه‌های تلگرام ارائه‌شده در آن سوابق گروه‌بندی کنید.</p>
 <p>یادداشت‌های کاری تیم را در <a href="../case-board/">Case Board</a> حفظ کنید: سوابقی را که به آنها استناد می‌کنید، مانند #146، #188 و #205، بوکمارک کنید، رشته مقصد دقیق را برجسته کنید و یک برش از هر اقدام ثبت‌شده بین دو رکورد یا در یک بازه زمانی را ذخیره کنید. یادداشت‌ها و وضعیت‌ها بازبینی تیم را در تاریخچه امضا شده خود، به گونه‌ای که به طور جداگانه از مشاهدات منبع قابل تشخیص است، حفظ می‌کنند.</p>
 <h2 id="5-build-the-cross-chat-timeline">۵. ساخت خط زمانی میان‌گفتگوها<a class="anchor" href="#5-build-the-cross-chat-timeline" aria-label="لینک به این بخش">#</a></h2>
 <p>از نسخه‌های ذخیره‌شده در چت‌ها و لینک‌های #… در سوابق ژورنال استفاده کنید. در ژورنال، «تمام منابع» را با «ویرایش‌ها»، «حذف‌ها» و «پوشش» ترکیب کنید. هم <code>source_at</code> (در صورت ارائه) و هم <code>observed_at</code> را حفظ کنید.</p>
@@ -292,8 +291,8 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 </tr>
 <tr>
 <td>یک شرکت‌کننده در چت‌های مختلف نام‌های خود را تغییر می‌دهد</td>
-<td>Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files</td>
-<td>A Telegram-account activity timeline with links to its source records</td>
+<td>شناسه عددی فرستنده → تاریخچه نام/نام کاربری → پاسخ‌ها → سایر چت‌های مشاهده‌شده → مقاصد/فایل‌های استنادشده</td>
+<td>خط زمانی فعالیت حساب تلگرام با پیوندهایی به سوابق منبع آن</td>
 </tr>
 </tbody>
 </table></div>

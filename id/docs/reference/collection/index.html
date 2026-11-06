@@ -194,14 +194,35 @@ akun akan meminta konfirmasi seperti biasa.</p>
     pesan-pesan sebelumnya dari obrolan tim yang baru saja bergabung, atau apa yang dikatakan bot sebelum pengamatan
     memperhatikan obrolan tersebut. Pesan yang sudah disimpan secara langsung tidak diulang.</li>
 </ul>
-<p>Obrolan yang sudah ada dalam daftar saat mode diaktifkan akan ditambahkan tanpa tangkapan layar.
-Fitur FloodWait akan menghentikan sementara proses ini dan dilanjutkan setelahnya; kegagalan dicatat dan
-perekaman obrolan secara langsung tetap berlanjut.
-- <strong>Profil berdasarkan permintaan. Obrolan → Profil → Simpan profil kini</strong> menyimpan profil saat ini
-dari sumber mana pun; profil terbaru ditampilkan di atas pesan.
-- <strong>Tidak terlihat.</strong> Tombol inline (callback) yang ditekan di aplikasi Telegram lain, popup atau
-tautan yang digunakan bot sebagai respons atas penekanan tersebut, serta tautan undangan yang digunakan di aplikasi lain tidak sampai ke
-TgWitness. Apa yang dikirim atau diedit oleh bot setelahnya akan dicatat.</p>
+<p>Chats already in the list when the mode is switched on are added without snapshots.
+A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
+recording of the chat continues.
+- <strong>Profiles on request.</strong> <strong>Chats → Profile → Save profile now</strong> saves the current profile
+of any source; the newest one is shown above the messages.
+- <strong>Chat state snapshots (preview).</strong> State outside the message stream changes without a
+message: unpinning every message leaves no message-level trace, an administrator loses
+rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled
+source is read periodically and saved as a signed <code>chat.state</code> record: title, usernames,
+description, member and administrator counts, linked chat, slow mode, pinned message IDs
+(up to 100), administrators with their rights and titles, and gifts shown on channels and
+user profiles (up to 100). Each record lists the differences from the previous snapshot:
+changed fields with before and after, pinned messages added or removed, administrators and
+gifts added, changed or no longer listed. Telegram does not say who changed anything or
+when between snapshots.
+- A part Telegram refuses (for example the administrator list of a channel for a member
+    who is not an administrator) is named in <code>errors</code>; its earlier value is kept and listed
+    in <code>carried_forward</code>, never reported as removed.
+- A record whose only changes are counts, and a check that found no change, refer to the
+    last full state with <code>state_seq</code> and cumulative <code>state_overrides</code>. A full state is written at
+    least every seven days and whenever anything other than a count changes.
+- <code>parts_complete</code> marks capped lists．Additions require a complete earlier list，
+    removals require a complete current list，and explicit empty values record clearing．
+- <strong>Parameters → Chat state</strong> sets the interval (12 hours by default, 0 turns snapshots
+    off), the pause between sources, which parts are read, and whether checks that found no
+    change are recorded. A FloodWait pauses snapshots and they resume afterwards.
+- <strong>Not visible.</strong> Inline (callback) buttons pressed in another Telegram app, the popup or
+link a bot answers such a press with, and invite links used in another app do not reach
+TgWitness. What the bot sends or edits afterwards is recorded.</p>
 </li>
 </ul>
 <h3 id="act-from-the-panel">Tindakan dari panel<a class="anchor" href="#act-from-the-panel" aria-label="Tautan ke bagian ini">#</a></h3>
@@ -358,10 +379,9 @@ ekspor; pengumpulan data mungkin berlanjut melampaui batasnya saat ekspor sedang
 <p><strong>Jurnal verifikasi</strong> memeriksa rantai peristiwa dan tanda tangan melalui batas yang ditampilkan.
 Hasilnya akan dihapus saat ruang kerja berubah, dan panel akan mengidentifikasi
 catatan baru yang ditambahkan setelah pemeriksaan. Ekspor ZIP juga memverifikasi media yang dikumpulkan.</p>
-<p>Tanda tangan yang sah menjamin integritas relatif terhadap kunci tepercaya, bukan asal
-dari Telegram atau kebenaran isi pesan. Simpan sidik jari dan titik pemeriksaan secara terpisah. Lihat
-<a href="../evidence/">model bukti</a>, <a href="../operations/">operasi harian</a>, dan
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">prosedur penerimaan langsung</a> untuk persyaratan kepercayaan dan pengiriman.</p></div></article>
+<p>Retain fingerprints and checkpoints independently．See the
+<a href="../evidence/#verification-scope">verification scope</a> for acquisition checks in each mode，
+and <a href="../operations/">daily operations</a> for routine collection．</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">Edit halaman ini di GitHub ↗</a><a class="next-guide" href="../history/"><span>Langkah selanjutnya</span><strong>Muat riwayat sumber →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../verification/">Apa yang telah diuji →</a></p></footer>
 </main>
 <aside class="toc" aria-label="Di halaman ini"><p class="nav-label">Di halaman ini</p><a href="#from-login-to-a-journal">Dari proses login hingga jurnal</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Cakupan pemantauan: obrolan yang dipilih, sebuah folder, atau seluruh akun</a><a href="#scope-and-event-selection">Ruang lingkup dan pemilihan peristiwa</a><a href="#own-actions">Tindakan sendiri</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">Mode investigasi: bergabung dengan tim dan berkomunikasi dengan bot</a><a href="#recheck-tiers">Tingkat verifikasi ulang</a><a href="#message-history-and-attribution">Riwayat pesan dan atribusi</a><a href="#history-snapshots">Cuplikan riwayat</a><a href="#attachment-handling">Penanganan lampiran</a><a href="#pause-lock-disconnect-and-restart">Jeda, kunci, putuskan sambungan, dan mulai ulang</a><a href="#account-isolation-and-verification">Isolasi dan verifikasi akun</a></aside>

@@ -80,9 +80,14 @@ Panelning `/mcp` yo‘nalishini yo‘naltiring va bearer sarlavhasini saqlab qol
 | `get_journal_event` | Manba havolasiga ega bitta tozalangan (sanitized) yozuv |
 | `get_capture_status` | Yig'ish holati, ruxsat etilgan qamrov yozuvlari va `gap_summary`: hech qachon kuzatilmagan xabar raqamlari, kanal yoki superguruh bo'yicha va hisob bo'ylab ketma-ketlik ([tфанsilar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#missing-message-numbers-gap_summary)); chatni tanlab, uning ro'yxatdagi bo'shliqlarini ko'ring |
 | `get_activity_stats` | UTC soati va haftaning kunlari bo'yicha xabarlar, eng yuqori kunlar, tahrirlash va o'chirish ulushi, jo'natuvchilar, domenlar va `@handles`, qamrov ([tavsiflar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/#activity-statistics)) bilan |
+| `get_messages_by_date` | Belgilangan IANA vaqt zonasidagi bir kalendar kunga saqlangan xabarlar (`Europe/Kyiv`, `UTC`), Telegram xabar bergan vaqtga qadar; `from_utc` va `until_utc` hisoblangan kunni, yozgi vaqtni hisobga olgan holda ko'rsating |
+| `get_pinned_messages` | Oxirgi chat-holati snapshotida saqlangan versiyalari bilan birga mahkamlangan xabarlar va mahkamlash hamda mahkamlashdan bo'shatish bildirishnomalari jonli kuzatildi |
+| `get_chat_stats` | Har bir suhbat yoki doiradagi barcha suhbatlar bo'yicha saqlangan yozuvlarning arzon sanovlari, birinchi va oxirgi kuzatuv, va `gap_summary`; katta o'qishdan oldin undan foydalaning |
+| `get_topics` | Saqlangan mavzu xizmat xabarlari bo'yicha forum mavzulari: sarlavha tarixi, yopiq yoki yashirin, saqlangan xabarlar soni |
+| `get_media` | Saqlangan rasm kichraytirilgan JPEG ko'rinishi (eng ko'pi 36 KB) shaklida, uning SHA-256 va `media.saved` yozuv; fayl avvalo yozib olingan xesh bilan tekshiriladi, boshqa fayllar esa faqat metadata qaytaradi |
 | `export_messages` | Faqat buyruq satri, standart bo'yicha tanlanmagan: kuzatuvlarni JSON Lines shaklida saqlangan oqimlar ([tavsiflar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/#export)); MCP orqali taklif etilmaydi |
 
-`tools/list` faqat ushbu ulanishga ruxsat berilgan vositalarni qaytaradi. Boshqa vositalarga chaqiruvlar rad etiladi. Guruh konteksti, epizod, terminologiya va javoblar zanjiri vositalari ushbu yig‘mada taklif etilmaydi; ularning alohida kontekst-paket bekendi kiritilmagan.
+Har bir vosita faqat o'qish uchun mo'ljallangan (`readOnlyHint`) va chiqish sxemasini e'lon qiladi; e'lon qilinganlardan tashqari maydonlar o'z holicha qaytariladi. `tools/list` faqat o'sha ulanishga ruxsat berilgan vositalarni qaytaradi. Boshqa vositalarga chaqiruvlar rad etiladi. Guruh konteksti, epizod, terminologiya va javob zanjiri vositalari ushbu yig'mada taklif etilmaydi; ularning alohida kontekst-paket orqa tomoni kiritilmagan.
 
 Har bir o‘qish amali token, vosita va ish maydoni/chat qamrovini, jumladan ma’lumotlar bazasi ishi tugaganidan keyin ham tekshiradi. Cheklovlar: daqiqasiga 60 ta so‘rov, har bir sahifada 50 ta yozuv, har bir natija uchun 64 KiB va arxiv uchun sakkiz soniyalik yakuniy muddat. Vaqti tugagan MCP chaqiruvi torroq davrni yoki kamroq cheklovni so‘rab vosita xatosini qaytaradi.
 

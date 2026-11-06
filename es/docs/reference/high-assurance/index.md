@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/high-
 
 Un servidor sellado disponible las 24 horas del día, los 7 días de la semana, en Hetzner o Phala Cloud, un DNS de puerta de enlace y comprobaciones que un tercero puede repetir.
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+La implementación de alta seguridad añade comprobaciones independientes del entorno de recopilación a la verificación del archivo. El revisor consulta los registros de implementación y acceso que mantienen el proveedor de la nube y Cloudflare, y una implementación de Intel TDX añade una certificación por hardware del entorno del recopilador.
 
 El uso habitual de Docker y en el entorno local no sufre cambios. Nada de lo que hay aquí se ejecuta a menos que se implemente con `python -m tgwitness.cloud`, y el recopilador lee su host únicamente cuando la implementación establece `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Diagrama de flujo · Operador → Servidor, cortafuegos sin reglas de entrada (A
 | La clave de firma se creó en ese servidor. | La clave firma una declaración en la que se indica el ID del servidor del proveedor y el hash del archivo «cloud-init» que ha recibido. | Collector, verificado con el proveedor |
 | El diario pertenece a esa clave y a ese servidor | Cada inicio de proceso en la prueba ZIP incluye la medición del host correspondiente a ese servidor | Pruebas ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+El recopilador registra el estado de SSH, las sesiones, el historial de inicio de sesión y la información de arranque en registros firmados de inicio de proceso y `host.state` . En una máquina virtual normal, se trata de registros de inventario local , que el revisor compara con los registros independientes del proveedor. La implementación de Intel TDX que se muestra a continuación verifica además las mediciones respaldadas por el hardware.
 
 ## Proveedores
 
@@ -269,8 +269,8 @@ El DNS de la puerta de enlace se encarga del resolutor del sistema. El DNS sobre
 
 Cloudflare no puede ver el interior del cifrado de Telegram, otros dispositivos de la cuenta de Telegram (la lista de dispositivos del modo «evidence» los registra desde el lado de Telegram) ni el hipervisor del proveedor.
 
-## Reading the deployment result
+## Lectura del resultado de la implementación
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+En el caso de una máquina virtual convencional, el proveedor controla la infraestructura del host, y el inventario local se comprueba junto con los registros del proveedor. En el caso de Intel TDX, el verificador comprueba además la cita de hardware, el enlace del colector, la composición y las mediciones del sistema operativo. Lee los resultados individuales para ver qué comprobaciones se han superado o no estaban disponibles.
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/es/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+Los detalles históricos del cortafuegos dependen del proveedor; Linode conserva las versiones de las reglas. El [registro de validación](https://phishdestroy.github.io/TgWitness/es/docs/reference/verification/) enumera las implementaciones probadas y las comprobaciones activas restantes, y [el alcance de la verificación](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope) vincula estas comprobaciones del entorno con la adquisición y la integridad del archivo.

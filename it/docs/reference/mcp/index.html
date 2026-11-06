@@ -178,14 +178,34 @@ hostname stabile per le configurazioni salvate dei client.</p>
 <td>Messaggi per ora UTC e giorno della settimana, giorni di picco, percentuali di modifiche e cancellazioni, mittenti, domini e <code>@handles</code>, con copertura (<a href="../cli/#activity-statistics">dettagli</a>)</td>
 </tr>
 <tr>
+<td><code>get_messages_by_date</code></td>
+<td>Messaggi salvati relativi a un giorno di calendario in un fuso orario IANA specificato (<code>Europe/Kyiv</code>, <code>UTC</code>), in base all’ora riportata da Telegram; <code>from_utc</code> e <code>until_utc</code> indicare il giorno calcolato, ora legale inclusa</td>
+</tr>
+<tr>
+<td><code>get_pinned_messages</code></td>
+<td>Messaggi fissati nell’ultima istantanea dello stato della chat con le relative versioni salvate, nonché le notifiche di fissaggio e sblocco osservate in tempo reale</td>
+</tr>
+<tr>
+<td><code>get_chat_stats</code></td>
+<td>Conteggio approssimativo dei record salvati per una singola chat o per tutte le chat nell’ambito di analisi, prima e ultima osservazione, e <code>gap_summary</code>; utilizzarlo prima di una lettura di grandi dimensioni</td>
+</tr>
+<tr>
+<td><code>get_topics</code></td>
+<td>Argomenti del forum dai messaggi del servizio argomenti salvati: cronologia dei titoli, argomenti chiusi o nascosti, numero di messaggi salvati</td>
+</tr>
+<tr>
+<td><code>get_media</code></td>
+<td>Un&#x27;immagine conservata come anteprima JPEG ridimensionata (al massimo 36 KB), restituita come immagine insieme al suo SHA-256 e al <code>media.saved</code> record; il file viene prima verificato rispetto al proprio hash registrato, mentre gli altri file restituiscono solo i metadati</td>
+</tr>
+<tr>
 <td><code>export_messages</code></td>
 <td>Solo da riga di comando, non selezionato per impostazione predefinita: salva le osservazioni in formato JSON Lines (<a href="../cli/#export">dettagli</a>); non disponibile tramite MCP</td>
 </tr>
 </tbody>
 </table></div>
-<p><code>tools/list</code> restituisce solo gli strumenti concessi a quella connessione. Le chiamate ad altri
-strumenti vengono rifiutate. Gli strumenti per contesto di gruppo, episodi, terminologia e catene di risposte non
-sono offerti in questa build; il relativo backend separato per i context-pack non è incluso.</p>
+<p>Ogni strumento è di sola lettura (<code>readOnlyHint</code>) e dichiara uno schema di output; i campi che non rientrano in quello dichiarato vengono restituiti così come sono. <code>tools/list</code> Restituisce solo gli strumenti concessi a quella connessione. Le chiamate ad altri
+strumenti vengono rifiutate. Gli strumenti relativi al contesto di gruppo, all’episodio, alla terminologia e alla catena di risposte
+non sono disponibili in questa build; il relativo backend separato per i pacchetti di contesto non è incluso.</p>
 <p>Ogni lettura verifica il token, lo strumento e l'ambito di spazio di lavoro/chat, anche al termine
 dell'operazione sul database. I limiti sono di 60 richieste al minuto, 50 record per pagina,
 64 KiB per risultato e una scadenza di otto secondi per l'archivio. Una chiamata MCP scaduta

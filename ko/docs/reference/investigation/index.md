@@ -101,7 +101,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/inves
 | 동일한 저장 파일 | 미디어 수령 내역 #151 및 #209 완료 | 보존된 바이트에 대한 전체 SHA-256 값이 일치합니다. |
 | 채널 출처 표기 | #101 및 #188 | 발신자가 명시되지 않은 경우, 채널 게시물을 사용자 71001의 것으로 귀속시키지 마십시오. |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+첨부 파일 해시와 관련 메시지 참조를 비교하고, 해당 기록에 제공된 텔레그램 ID별로 계정 타임라인을 그룹화하여 유지합니다.
 
 [Case Board](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-board/)에 팀의 작업 메모를 보관하십시오: #146, #188, #205와 같이 참고하는 기록에 북마크를 지정하고, 정확한 대상 문자열을 강조 표시하며, 두 기록 사이 또는 특정 시간 범위 내의 모든 기록된 작업의 일부를 저장하십시오. 메모 및 상태 정보는 소스 관찰 내용과 별도로 식별 가능한, 자체 서명된 이력에 팀의 검토 내용을 보관합니다.
 
@@ -161,6 +161,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | 봇 기반 주문/결제 분쟁 | 항목 공지 → 저장된 링크 미리보기 → 봇 시작 매개변수 → 메시지 및 키보드 버전 → 패널 콜백 수신 확인 → 개인/그룹 후속 조치 | 확인된 제안/응답 타임라인 및 검증된 출처; 결제 링크만으로는 결제가 이루어졌음을 증명할 수 없습니다. |
 | 사건 발생 후 삭제된 메시지 | 관련된 모든 채팅 → 저장된 원본/수정 내역 → 삭제 또는 재확인 시 누락된 결과 → 보존된 미디어 → 보도 내용 및 기타 계정 관점 | 보존된 버전과 명확히 표시된 알 수 없는 기간; 삭제 주체를 임의로 추정하지 않음 |
-| 한 참가자가 채팅마다 이름을 바꿉니다 | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| 한 참가자가 채팅마다 이름을 바꿉니다 | 발신자 ID(숫자) → 이름／사용자 이름 기록 → 답장 → 기타 관찰된 채팅 → 인용된 수신처／파일 | 원본 기록으로 연결되는 링크가 포함된 텔레그램 계정 활동 타임라인 |
 
 [수집 참조](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/) · [개인 프로필 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#people-profiles) · [증거 인계](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#investigation-handoff) · [검증 완료](https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/)

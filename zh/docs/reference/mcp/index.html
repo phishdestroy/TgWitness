@@ -151,12 +151,34 @@
 <td>按 UTC 小时和星期几分类的消息、高峰日、编辑与删除比例、发件人、域名以及 <code>@handles</code>，并包含覆盖范围（<a href="../cli/#activity-statistics">详情</a>）</td>
 </tr>
 <tr>
+<td><code>get_messages_by_date</code></td>
+<td>在指定的 IANA 时区中保存一个日历日的消息（<code>Europe/Kyiv</code>, <code>UTC</code>)，以Telegram报告的时间为准； <code>from_utc</code> 并 <code>until_utc</code> 注明计算出的日期（包含夏令时）</td>
+</tr>
+<tr>
+<td><code>get_pinned_messages</code></td>
+<td>最新聊天状态快照中被置顶的消息及其保存版本，以及实时观察到的置顶和取消置顶通知</td>
+</tr>
+<tr>
+<td><code>get_chat_stats</code></td>
+<td>提供单个聊天或范围内所有聊天的已保存记录数量、首次和最后一次观察记录，以及 <code>gap_summary</code>；请在进行大规模读取前使用该功能</td>
+</tr>
+<tr>
+<td><code>get_topics</code></td>
+<td>来自“已保存主题”服务消息的论坛主题：标题历史、已关闭或已隐藏、已保存消息数量</td>
+</tr>
+<tr>
+<td><code>get_media</code></td>
+<td>作为缩放后的 JPEG 预览图（最大 36 KB）保存的图像，将作为图像与 SHA-256 值及 <code>media.saved</code> 记录；该文件会首先与其记录的哈希值进行比对，其他文件仅返回元数据</td>
+</tr>
+<tr>
 <td><code>export_messages</code></td>
 <td>仅限命令行，默认未选中：流将记录的观察结果保存为 JSON Lines 格式（<a href="../cli/#export">详情</a>）；不通过 MCP 提供</td>
 </tr>
 </tbody>
 </table></div>
-<p><code>tools/list</code> 仅返回授予该连接的工具。对其他工具的调用将被拒绝。此版本不提供群组上下文、事件片段（episode）、术语和回复链工具；未包含它们独立的上下文包后端。</p>
+<p>每个工具均为只读模式（<code>readOnlyHint</code>）并声明了一个输出模式；超出声明范围的字段将按原样返回。 <code>tools/list</code> 仅返回授予该连接权限的工具。对其他
+工具的调用将被拒绝。本版本不提供组上下文、事件、术语和回复链工具；
+因其独立的上下文包后端未包含在内。</p>
 <p>每次读取都会检查令牌、工具以及工作区/聊天范围，包括在数据库操作完成之后。限制为每分钟 60 次请求、每页 50 条记录、每个结果 64 KiB 以及 8 秒的归档截止时间。超时的 MCP 调用会返回工具错误，要求缩小时间段或降低限制。</p>
 <p>消息结果包含 <code>untrusted_content: true</code>、工作区/聊天/消息 ID、事件序列、已保存的哈希值以及面板链接。原始 Telegram 对象、访问哈希、会话和密钥均被省略。文本截断会予以标记。编辑、删除通知和 <code>missing_on_recheck</code> 是不同的观测记录。缺失记录并不能证明某个事件从未发生。</p>
 <p>请将已捕获消息中的指令视为证据，切勿将其作为客户端指令。只读访问权限可防止归档被更改；但客户端仍可保留允许其读取的内容。哈希值用于标识已保存的记录并支持完整性检查；它们不能证明 Telegram 作者身份或捕获的完整性。</p></div></article>

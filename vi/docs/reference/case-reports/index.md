@@ -84,6 +84,19 @@ Một khoảng trống có nghĩa là không có quan sát nào được bao g�
 
 Khi được bao gồm, tệp `analytics.json` được bảo vệ bởi các hàm băm tệp đã ký của kho lưu trữ. Tệp `report.json` của nhật ký nhúng cùng một tổng hợp đã chọn. Xác minh chữ ký phát hiện các byte bị thay đổi. Để kiểm tra các con số, hãy tính lại các tổng hợp nhật ký bằng `report_analytics.Analytics` và `selected`, hoặc các tổng hợp ảnh chụp nhanh bằng `snapshot_analytics.collect` và `project`.
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | Nội dung hiển thị |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+
 Từ bản sao nguồn, hãy xây dựng tất cả tám mẫu thiết kế được liệt kê ở trên dựa trên cùng một tạp chí hư cấu:
 
 ```
@@ -134,7 +147,7 @@ Kiểm tra từng mục riêng biệt, cùng với phạm vi thu thập đã ghi
 4. Giữ nguyên các tệp ZIP gốc và các giá trị băm của chúng. Ghi lại từng người nắm giữ, lần chuyển giao, ngày tháng và mục đích. Giữ lại các tuyên bố của người vận hành được ghi nhận và các ghi chú vụ việc kèm theo chúng.
 5. Đối với các máy ảo (VM) bí mật, cần bảo toàn và xác minh độc lập các thông tin sau: trích dẫn, thách thức, chuỗi chứng chỉ Intel, các phép đo, nguồn chính xác và điều kiện xử lý khóa. Giữ lại kết quả xác minh chứng nhận cùng với các bằng chứng đã được xem xét.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+Xem [phạm vi xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) để biết các kiểm tra về việc thu thập dữ liệu, tính toàn vẹn của kho lưu trữ, thời gian và phạm vi thu thập trong từng chế độ.
 
 ## Xem xét của người nhận
 

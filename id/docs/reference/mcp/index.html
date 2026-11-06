@@ -178,14 +178,34 @@ nama host yang stabil untuk konfigurasi klien yang disimpan.</p>
 <td>Pesan berdasarkan jam UTC dan hari kerja, hari-hari puncak, persentase pengeditan dan penghapusan, pengirim, domain, dan <code>@handles</code>, beserta cakupan (<a href="../cli/#activity-statistics">detail</a>)</td>
 </tr>
 <tr>
+<td><code>get_messages_by_date</code></td>
+<td>Pesan yang disimpan selama satu hari kalender dalam zona waktu IANA yang ditentukan (<code>Europe/Kyiv</code>, <code>UTC</code>), sesuai waktu yang dilaporkan oleh Telegram; <code>from_utc</code> dan <code>until_utc</code> cantumkan hari yang dihitung, termasuk waktu musim panas</td>
+</tr>
+<tr>
+<td><code>get_pinned_messages</code></td>
+<td>Pesan yang disematkan dalam snapshot status obrolan terbaru beserta versi yang disimpan, serta pemberitahuan penyematan dan pelepasan yang diamati secara langsung</td>
+</tr>
+<tr>
+<td><code>get_chat_stats</code></td>
+<td>Jumlah catatan yang disimpan untuk satu obrolan atau setiap obrolan dalam cakupan, pengamatan pertama dan terakhir, serta <code>gap_summary</code>; gunakan sebelum melakukan pembacaan data dalam jumlah besar</td>
+</tr>
+<tr>
+<td><code>get_topics</code></td>
+<td>Topik forum dari pesan layanan topik yang disimpan: riwayat judul, topik yang ditutup atau disembunyikan, jumlah pesan yang disimpan</td>
+</tr>
+<tr>
+<td><code>get_media</code></td>
+<td>Gambar yang disimpan sebagai pratinjau JPEG yang diperkecil (maksimal 36 KB), dikembalikan sebagai gambar bersama dengan SHA-256 dan <code>media.saved</code> catatan; berkas tersebut terlebih dahulu diverifikasi berdasarkan hash yang tercatat, sedangkan berkas lain hanya mengembalikan metadata</td>
+</tr>
+<tr>
 <td><code>export_messages</code></td>
 <td>Hanya baris perintah, tidak dipilih secara default: streams menyimpan pengamatan sebagai JSON Lines (<a href="../cli/#export">detail</a>); tidak tersedia melalui MCP</td>
 </tr>
 </tbody>
 </table></div>
-<p><code>tools/list</code> hanya mengembalikan alat yang diizinkan untuk koneksi tersebut. Pemanggilan ke alat
-lain akan ditolak. Alat konteks grup, episode, terminologi, dan rantai balasan
-tidak ditawarkan dalam build ini; backend paket konteks terpisahnya tidak disertakan.</p>
+<p>Setiap alat bersifat read-only (<code>readOnlyHint</code>) dan mendeklarasikan skema keluaran; bidang di luar yang telah dideklarasikan akan dikembalikan apa adanya. <code>tools/list</code> hanya mengembalikan alat-alat yang diberikan untuk koneksi tersebut. Panggilan ke
+alat lain akan ditolak. Alat-alat konteks grup, episode, terminologi, dan rantai balasan
+tidak tersedia dalam versi ini; backend paket konteks terpisah untuk alat-alat tersebut tidak disertakan.</p>
 <p>Setiap pembacaan memeriksa token, alat, dan cakupan ruang kerja/obrolan, termasuk setelah
 pekerjaan database selesai. Batasannya adalah 60 permintaan per menit, 50 catatan per halaman,
 64 KiB per hasil, dan batas waktu arsip delapan detik. Pemanggilan MCP yang kehabisan waktu

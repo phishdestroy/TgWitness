@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首頁</a> <span aria-hidden="true">/</span> <a href="../../">文件說明</a> <span aria-hidden="true">/</span> <a href="../">參考資料</a> <span aria-hidden="true">/</span> <span aria-current="page">證據格式</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">本頁部分內容仍為英文：英文原文在翻譯後已進行修改。</p><p class="eyebrow">參考資料 / 證據</p><h1>證據格式</h1><p class="guide-outcome">簽名 ZIP 檔案的內容、記錄類型、處理回執、使用者檔案、異地備份及離線驗證。</p><div class="wiki-body"><p>TgWitness 會將 Telegram 帳戶可見的觀察記錄保存於經簽署的日誌中。
+<article class="guide-content"><p class="eyebrow">參考資料 / 證據</p><h1>證據格式</h1><p class="guide-outcome">簽名 ZIP 檔案的內容、記錄類型、處理回執、使用者檔案、異地備份及離線驗證。</p><div class="wiki-body"><p>TgWitness 會將 Telegram 帳戶可見的觀察記錄保存於經簽署的日誌中。
 收件者可透過可信賴的
 收集器金鑰，驗證已保存的記錄、附件及報告，並將日誌與獨立保留的檢查點進行比對。
 本頁說明格式、驗證程序以及移交時應保留的資料。</p>
@@ -68,8 +68,8 @@
 </tr>
 <tr>
 <td>執行收據</td>
-<td>Signed record of the collector version，source-file hashes and start settings，also included in <code>process.started</code></td>
-<td>The receipt，associated journal and the environment evidence for the selected verification mode</td>
+<td>包含收集器版本、原始檔雜湊值及初始設定的簽名記錄，亦收錄於 <code>process.started</code></td>
+<td>所選驗證模式下的收據、相關日誌及環境證據</td>
 </tr>
 <tr>
 <td>易讀的報告：<code>report.html</code> 及其各部分，<code>report.json</code>、<code>report.pdf</code>、<code>chat.pdf</code></td>
@@ -194,11 +194,11 @@ CA 資訊以及經驗證的授權機構回應。僅準備請求
 開始重新編號。缺失的編號是指 Telegram
 未傳回的訊息（在匯出前已被刪除，或該帳號無法看見）；在私人聊天室和
 基本群組中，編號由該帳號的所有聊天室共用，且不會計入缺口。</p>
-<p>After reading the history, the export asks Telegram for every absent number again, by number
-(<code>channels.getMessages</code>, up to 10,000 numbers). The result is in <code>message-ids.json</code> and the report.
-An empty answer records that the number is unavailable to this account at recheck time；
-it leaves the cause unspecified．A message returned on recheck is added to the export
-and marked <code>found_on_recheck</code>．</p>
+<p>讀取歷史紀錄後，匯出功能會根據號碼
+（<code>channels.getMessages</code>，最多 10,000 個號碼）。結果將收錄於 <code>message-ids.json</code> 及報告中。
+若回應為空，則表示在重新檢查時該號碼對此帳號不可用；
+但未說明具體原因。重新檢查時收到的訊息將被加入匯出檔案
+並標記為 <code>found_on_recheck</code>．</p>
 <p>每份報告均以 <strong> 開頭。簡而言之 </strong>：先有一段文字，接著說明資料顯示的內容以及未顯示的內容
 （帳戶背後的人物、傳輸的完整性、監測前的刪除行為、未附時間戳記的
 時間）。 當瀏覽器驗證完印章的
@@ -395,27 +395,26 @@ payload.deleted_message_was_outgoing 為 true；但仍未提供刪除者資訊�
 <li>服務訊息是具有獨立編號的日誌記錄，因此會自行填補空缺；
     可選的預估時間僅供上下文參考。</li>
 </ul>
-<p><code>verify.py</code> recomputes <code>gap_summary</code> from <code>events.jsonl</code> with the parameters in the signed
-<code>coverage.json</code> member (defaults for older archives) and
-prints the account-wide line in its coverage summary. The archive's <code>get_capture_status</code>
-(MCP and the command line) returns the same measurement for the chats an access may read;
-the account-wide sequence only to access covering the whole workspace.</p>
-<p>Repeated observations of one service message count once，and the account service estimate
-uses only numbers inside the measured range．An applied scope must explicitly preserve
-the account's own messages before account-wide measurement is enabled；older records
-without that information cannot establish this condition．Stopped observation does not
-extend the measured range，and resuming it is noted．The live archive query has a time
-budget，including its database scan，and marks an unfinished measurement as partial．</p>
-<p>Telegram documents the <a href="https://core.telegram.org/api/updates#message-id-sequences">separate message ID sequences</a>．
-These numbers describe observations；they do not identify a deletion actor or establish
-why a number is absent．</p>
+<p><code>verify.py</code> 重新計算 <code>gap_summary</code> 根據 <code>events.jsonl</code> 使用簽名
+<code>coverage.json</code> 成員中的參數（針對較舊的存檔採用預設值），並
+在覆蓋範圍摘要中列印該帳戶範圍內的行。該存檔的 <code>get_capture_status</code>（MCP 與命令列）針對某次存取可能讀取的聊天室，會返回相同的測量結果；
+而帳戶層級的序列僅適用於涵蓋整個工作區的存取。</p>
+<p>對同一則服務訊息的重複觀察僅計為一次，且帳戶服務估算
+僅採用測量範圍內的數值。在啟用全帳戶測量之前，所套用的範圍必須明確保留
+該帳戶自身的訊息；較舊的紀錄
+若缺乏此資訊，則無法滿足此條件。停止觀察不會
+延長測量範圍，且恢復觀察時會予以註記。即時存檔查詢設有時間
+預算（包含其資料庫掃描），並將未完成的測量標記為「部分完成」。</p>
+<p>Telegram 會記錄<a href="https://core.telegram.org/api/updates#message-id-sequences">獨立的訊息 ID </a>序列。
+這些數字用以描述觀察結果；它們並不能識別刪除行為者，亦無法釐清
+為何某個數字會缺失。</p>
 <p>當 Telegram 停止接受該帳戶時，結束監測的 <code>coverage.gap</code> 記錄
 會攜帶 <code>cause</code>（<code>account_banned</code>、<code>account_frozen</code>、<code>account_deleted</code>、<code>session_duplicated</code>、
 <code>session_revoked</code>、<code>session_expired</code>、<code>session_ended</code> 或 <code>not_authorized</code>）以及 Telegram
 錯誤；<code>verify.py</code> 則標示該週期結束的原因。</p>
-<p>Coverage combines recorded observation periods，interruptions and message outcomes．
-Assess it together with the selected chats，period and attachment policy；continuous
-operation alone does not establish complete delivery of Telegram updates．</p>
+<p>涵蓋範圍包含已記錄的觀察期間、中斷情況及訊息結果。
+請配合所選的聊天室、時間範圍及附件政策一併評估；僅憑
+持續運作本身，並不能證明 Telegram 更新已完整送達。</p>
 <h2 id="producer">製作人<a class="anchor" href="#producer" aria-label="此節的連結">#</a></h2>
 <p>證據 ZIP 檔案、聊天記錄匯出檔、Witness 日誌以及
 人員檔案的聲明中所包含的簽名清單中，皆載有 <code>producer</code>
@@ -461,66 +460,66 @@ manifest.sig 是對規範化 manifest JSON 進行 Base64 編碼的 Ed25519 簽�
 序列/鏈路中斷、簽名無效，以及與提供的檢查點不匹配的情況。
 它絕不會提取存檔路徑。它將聲明總未壓縮大小限制為 4 GiB；
 若提高 <strong>Parameters</strong> 限制，<code>--max-gib N</code> 允許建立更大的存檔。</p>
-<p>Run verification from your installed TgWitness version or a reviewed checkout．
-The copy included in an archive supports portable use；check that copy against your
-trusted installation before executing it．</p>
-<p>A checkpoint signs a statement containing the public key, journal length, head
-hash, and creation time. The verifier can check that a later archive contains the
-same prefix．Retain the checkpoint outside the collector，so later verification compares
-the archive with a reference held separately from it．</p>
+<p>請從您已安裝的 TgWitness 版本或經審查的代碼庫副本執行驗證。
+壓縮檔中包含的副本支援可攜式使用；在執行該副本之前，請先將其與您
+可信賴的安裝版本進行比對。</p>
+<p>檢查點會對一份聲明進行簽名，該聲明包含公鑰、日誌長度、頭部
+雜湊值以及建立時間。驗證者可檢查後續的存檔是否包含
+相同的前綴。請將檢查點保留在收集器之外，以便後續驗證時能將
+存檔與獨立於其之外的參考資料進行比對。</p>
 <h2 id="verification-scope">驗證範圍<a class="anchor" href="#verification-scope" aria-label="此節的連結">#</a></h2>
-<p>Verification checks the archive and the collection mode used to produce it．Choose the
-mode whose trust boundary matches the case，then retain its verification inputs．</p>
+<p>驗證程序會檢查檔案及其生成所使用的收集模式。請選擇
+其信任邊界與該案例相符的模式，並保留其驗證輸入。</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
-<th>Collection mode</th>
-<th>What the verifier checks</th>
-<th>Verification inputs and trust boundary</th>
+<th>收集模式</th>
+<th>驗證者檢查的內容</th>
+<th>驗證輸入與信任邊界</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Local workspace</td>
-<td>Record signatures，hash chain，manifest and attachment bytes</td>
-<td>Independently retained collector fingerprint；the host administrator controls the local signing key</td>
+<td>本地工作區</td>
+<td>記錄簽名、雜湊鏈、清單及附件位元組</td>
+<td>獨立保留的收集器指紋；主機管理員控制本地簽署金鑰</td>
 </tr>
 <tr>
-<td>Local workspace with an independent witness</td>
-<td>The archive checks plus agreement with an earlier journal prefix retained by the witness</td>
-<td>Separately trusted witness key and records；the checkpoint binds the prefix already observed</td>
+<td>具備獨立見證者的本機工作區</td>
+<td>檔案校驗，以及與見證者所保留的早期日誌前綴是否一致</td>
+<td>獨立受信任的見證金鑰與記錄；檢查點會將已觀察到的前綴進行綁定</td>
 </tr>
 <tr>
-<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions capture</a></td>
-<td>GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity</td>
-<td>Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow</td>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions 擷取</a></td>
+<td>GitHub 對存檔摘要、經核准的工作流程與收集器提交、託管執行器、最新會話／金鑰來源，以及內部存檔完整性的驗證</td>
+<td>可信驗證者政策、呼叫者儲存庫及 GitHub 證明套件；資料蒐集作業在固定工作流程下執行</td>
 </tr>
 <tr>
-<td><a href="../high-assurance/">Cloud deployment</a></td>
-<td>Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record</td>
-<td>Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider</td>
+<td><a href="../high-assurance/">雲端部署</a></td>
+<td>服務供應商的生命週期與存取紀錄、防火牆及 Cloudflare 狀態，以及資料收集器的簽名執行紀錄</td>
+<td>對服務供應商及 Cloudflare 進行唯讀查詢；各項檢查的可用性取決於服務供應商</td>
 </tr>
 <tr>
-<td><a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX confidential VM</a></td>
-<td>Quote signature and platform status，binding to the collector statement，compose and OS measurements</td>
-<td>Intel trust chain and expected deployment measurements；retain the results of every required TDX check</td>
+<td><a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX 機密虛擬機器</a></td>
+<td>引用簽名與平台狀態，與收集器聲明綁定，以及組態與作業系統測量值</td>
+<td>Intel 信任鏈及預期部署指標；保留所有必備 TDX 檢查的結果</td>
 </tr>
 </tbody>
 </table></div>
-<p>In sealed acquisition，the approved collector receives data through an authenticated
-Telegram connection inside the verified environment．Attestation binds the archive to
-that execution，so verification covers acquisition as well as later file integrity．
-This relies on the approved code and the platform trust chain listed above．
-GitHub capture verification requires a session created inside the run and rejects
-imported-session captures．</p>
-<p>The run receipt records the collector version，file hashes and startup settings．GitHub
-provenance and TDX measurements provide the environment checks；the
-<a href="../verification/">validation record</a> identifies tested configurations．</p>
-<p>TgWitness signs the observations it collects；Telegram and message authors do not issue
-these signatures．In a local workspace，material created before the first independent
-checkpoint still depends on the collector and its key holder．Coverage records describe
-the selected scope and collection outcomes，while verified external timestamps anchor
-the committed archive or journal boundary in time．</p>
+<p>在「密封擷取」模式下，經核准的擷取器會透過經身份驗證的
+Telegram 連線，在已驗證的環境內接收資料。證明機制將檔案與
+該次執行綁定，因此驗證範圍涵蓋擷取過程以及後續的檔案完整性。
+此機制仰賴上述的核准程式碼與平台信任鏈。
+GitHub 擷取驗證要求擷取作業必須在執行環境內建立，並會拒絕
+採用「匯入的會話」所進行的擷取。</p>
+<p>執行收據會記錄收集器的版本、檔案雜湊值及啟動設定。GitHub
+來源追蹤與 TDX 測量結果提供環境檢查；
+<a href="../verification/">驗證記錄</a>則標示已測試的配置。</p>
+<p>TgWitness 會對其收集的觀察記錄進行簽名；Telegram 及訊息發送者並不會發出
+這些簽名。在本地工作區中，於第一個獨立
+檢查點之前所建立的資料，仍取決於收集器及其金鑰持有者。覆蓋範圍記錄描述
+所選範圍與收集結果，而經驗證的外部時間戳則將
+已提交的存檔或日誌邊界錨定於特定時間點。</p>
 <h2 id="attachments">附件<a class="anchor" href="#attachments" aria-label="此節的連結">#</a></h2>
 <p>檔案在 media/ 目錄下以 SHA-256 雜湊值作為位址。media.saved 事件會將雜湊值與
 位元組長度連結至特定的訊息事件。原始檔案名稱屬於元資料，絕非
@@ -543,17 +542,16 @@ media/ 目錄，並以 SHA-256 作為檔案名稱。 chat.json 中的每則訊�
 及大小政策。還原功能會在下載前驗證該綁定關係。系統絕不會擷取
 當前訊息，也不會默默替換為較新的附件。中斷的任務
 會重新嘗試執行，而永久失敗則仍為明確的結果。</p>
-<p>Each workspace has its own journal and signing identity. A process.started event includes
-a run ID, local clocks, dependency versions, source-file hashes, initial account/scope,
-and capture settings. Heartbeats include the run ID, monotonic time, and queue state.
-The run receipt can also be downloaded as a separately signed statement．For verification
-of the execution environment，pair it with the GitHub attestation or TDX checks described
-in <a href="#verification-scope">Verification scope</a>．</p>
-<p>Automatic checkpoints are retained locally on startup, every five minutes while
-observing (<strong>Parameters → Signed checkpoint every</strong>), and on orderly stop. Startup verification and export compare the journal
-against the latest retained local checkpoint. This can detect a database rollback
-when the checkpoint survives．Independent retention keeps that reference available outside
-the workspace；a verified external timestamp additionally anchors it in time．</p>
+<p>每個工作區皆擁有專屬的日誌與簽署身分。process.started 事件包含
+執行 ID、本地時鐘、依賴項版本、原始碼檔案雜湊值、初始帳戶／範圍，
+以及擷取設定。心跳訊息包含執行 ID、單調時間及佇列狀態。
+執行收據亦可下載為一份獨立簽署的聲明。若要驗證
+執行環境，請將其與「<a href="#verification-scope">驗證範圍</a>」中所述的 GitHub 證明或 TDX 檢查
+搭配使用。</p>
+<p>系統會在啟動時、監測期間每五分鐘（<strong>參見「參數 → 每隔」設定</strong>）以及正常關機時，將自動檢查點保留於本地端。啟動驗證與匯出過程會將日誌
+與最新保留的本地檢查點進行比對。當檢查點仍存在時，此機制可偵測到資料庫回滾
+的情況。獨立的保留機制確保該參考資料可在工作區
+之外取得；經驗證的外部時間戳記則進一步將其錨定於特定時間點。</p>
 <p>重新啟動後，系統將恢復已儲存的 Telegram 更新位置（<code>catch_up_from</code> 位於
 <code>observation.started</code>），並請求補取遺漏的更新。定期重新檢查會記錄
 <code>message.recovered</code> 以追蹤遺漏的訊息，並在 Telegram 不再

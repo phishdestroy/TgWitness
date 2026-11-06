@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 来源链接本身并不能独立证明该转换过程已选取所有必需项目或移除了所有可识别细节。原始明文并未作为证明嵌入其中。对此判断需要进行新的审查。
 
-## Sharing and hosted capture
+## 共享与托管捕获
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+选择收件人所需的消息和文件，审查完整的共享副本，并将源文件单独保留。记录已发送 ZIP 文件的哈希值，以便收件人能够识别并验证该确切副本。通过假名化处理替换选定的标识符；包含的文本和原始文件仍作为审查的一部分保留。
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)．
+GitHub Actions 支持通过 Takeout 或常规 API 导出整个账户或选定聊天记录，还支持单个聊天的事件日志导出。[托管捕获](https://phishdestroy.github.io/TgWitness/docs/capture/)指南详细说明了设置验证及 120 分钟的时限。要验证源自托管捕获的共享副本，请将该副本的源哈希值与原始存档进行比对，并使用[特定模式的](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)检查方法验证该存档的认证信息。
 
 [证据格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/) · [案例报告](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)

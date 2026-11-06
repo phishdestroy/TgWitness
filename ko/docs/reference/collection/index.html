@@ -194,14 +194,35 @@ read-receipt blocking in the API collector．</p>
     방금 가입한 팀 채팅의 초기 메시지나, 관찰자가 채팅을
     인식하기 전에 봇이 남긴 내용이 포함됩니다. 이미 저장된 실시간 메시지는 중복되지 않습니다.</li>
 </ul>
-<p>모드가 켜질 때 이미 목록에 있는 채팅은 스냅샷 없이 추가됩니다.
-FloodWait가 발생하면 이 작업이 일시 중지되었다가 이후 재개되며, 오류는 기록되고 채팅의 실시간
-기록은 계속됩니다.
-- 요청 시 프로필 제공. 채팅 → 프로필 → 프로필 저장을 통해 모든 소스의 현재 프로필을
-저장할 수 있으며, 가장 최신 프로필이 메시지 상단에 표시됩니다.
-- 표시되지 않음. 다른 텔레그램 앱에서 누른 인라인(콜백) 버튼, 봇이 해당 버튼 누름에 응답하여 표시하는 팝업이나
-링크, 그리고 다른 앱에서 사용된 초대 링크는
-TgWitness에 전달되지 않습니다. 봇이 그 후 전송하거나 편집하는 내용은 기록됩니다.</p>
+<p>Chats already in the list when the mode is switched on are added without snapshots.
+A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
+recording of the chat continues.
+- <strong>Profiles on request.</strong> <strong>Chats → Profile → Save profile now</strong> saves the current profile
+of any source; the newest one is shown above the messages.
+- <strong>Chat state snapshots (preview).</strong> State outside the message stream changes without a
+message: unpinning every message leaves no message-level trace, an administrator loses
+rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled
+source is read periodically and saved as a signed <code>chat.state</code> record: title, usernames,
+description, member and administrator counts, linked chat, slow mode, pinned message IDs
+(up to 100), administrators with their rights and titles, and gifts shown on channels and
+user profiles (up to 100). Each record lists the differences from the previous snapshot:
+changed fields with before and after, pinned messages added or removed, administrators and
+gifts added, changed or no longer listed. Telegram does not say who changed anything or
+when between snapshots.
+- A part Telegram refuses (for example the administrator list of a channel for a member
+    who is not an administrator) is named in <code>errors</code>; its earlier value is kept and listed
+    in <code>carried_forward</code>, never reported as removed.
+- A record whose only changes are counts, and a check that found no change, refer to the
+    last full state with <code>state_seq</code> and cumulative <code>state_overrides</code>. A full state is written at
+    least every seven days and whenever anything other than a count changes.
+- <code>parts_complete</code> marks capped lists．Additions require a complete earlier list，
+    removals require a complete current list，and explicit empty values record clearing．
+- <strong>Parameters → Chat state</strong> sets the interval (12 hours by default, 0 turns snapshots
+    off), the pause between sources, which parts are read, and whether checks that found no
+    change are recorded. A FloodWait pauses snapshots and they resume afterwards.
+- <strong>Not visible.</strong> Inline (callback) buttons pressed in another Telegram app, the popup or
+link a bot answers such a press with, and invite links used in another app do not reach
+TgWitness. What the bot sends or edits afterwards is recorded.</p>
 </li>
 </ul>
 <h3 id="act-from-the-panel">패널에서 발언하기<a class="anchor" href="#act-from-the-panel" aria-label="이 섹션으로 이동">#</a></h3>
@@ -358,11 +379,9 @@ ID를 유지합니다.
 <p><strong>Verify 저널은</strong> 표시된
 경계를 통해 이벤트 체인과 서명을 확인합니다. 작업 공간이 변경되면 결과가 초기화되며, 패널은
 확인 후 추가된 새로운 기록을 식별합니다. ZIP 내보내기 기능은 수집된 미디어도 검증합니다.</p>
-<p>유효한 서명은 텔레그램의
-출처나 내용의 진실성과는 무관하게, 신뢰할 수 있는 키를 기준으로 무결성을 입증합니다. 지문과 체크포인트는 별도로 보관하십시오. 신뢰 및 전달 요건에 대해서는
-<a href="../evidence/">증거 모델</a>, <a href="../operations/">일상적인 운영</a>
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">절차,
-실시간 승인 절차를</a> 참조하십시오.</p></div></article>
+<p>Retain fingerprints and checkpoints independently．See the
+<a href="../evidence/#verification-scope">verification scope</a> for acquisition checks in each mode，
+and <a href="../operations/">daily operations</a> for routine collection．</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">GitHub에서 이 페이지 편집하기 ↗</a><a class="next-guide" href="../history/"><span>다음 단계</span><strong>소스 기록 불러오기 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../verification/">테스트된 내용 →</a></p></footer>
 </main>
 <aside class="toc" aria-label="이 페이지에서"><p class="nav-label">이 페이지에서</p><a href="#from-login-to-a-journal">로그인부터 기록부까지</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">모니터링 범위: 선택한 채팅, 특정 폴더 또는 전체 계정</a><a href="#scope-and-event-selection">범위 및 이벤트 선택</a><a href="#own-actions">자신의 행동</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">조사 모드: 팀에 합류하고 봇과 대화하기</a><a href="#recheck-tiers">계층 재확인</a><a href="#message-history-and-attribution">메시지 기록 및 출처 정보</a><a href="#history-snapshots">이력 스냅샷</a><a href="#attachment-handling">첨부 파일 처리</a><a href="#pause-lock-disconnect-and-restart">일시 중지, 잠금, 연결 해제 및 재시작</a><a href="#account-isolation-and-verification">계정 격리 및 검증</a></aside>

@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Định dạng bằng chứng</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Những nội dung đã được kiểm thử →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Một số phần của trang này vẫn còn bằng tiếng Anh: bản gốc tiếng Anh đã được sửa đổi sau khi được dịch.</p><p class="eyebrow">Tham khảo / Bằng chứng</p><h1>Định dạng bằng chứng</h1><p class="guide-outcome">Nội dung của tệp ZIP đã được ký, các loại bản ghi, biên nhận giao dịch, hồ sơ người dùng, bản sao lưu ngoài trang web và xác minh ngoại tuyến.</p><div class="wiki-body"><p>TgWitness lưu trữ các quan sát trên Telegram có thể nhìn thấy trong tài khoản dưới dạng nhật ký được ký điện tử.
+<article class="guide-content"><p class="eyebrow">Tham khảo / Bằng chứng</p><h1>Định dạng bằng chứng</h1><p class="guide-outcome">Nội dung của tệp ZIP đã được ký, các loại bản ghi, biên nhận giao dịch, hồ sơ người dùng, bản sao lưu ngoài trang web và xác minh ngoại tuyến.</p><div class="wiki-body"><p>TgWitness lưu trữ các quan sát trên Telegram có thể nhìn thấy trong tài khoản dưới dạng nhật ký được ký điện tử.
 Người nhận có thể xác minh các bản ghi, tệp đính kèm và báo cáo đã lưu so với một
 khóa thu thập đáng tin cậy, sau đó so sánh nhật ký với một điểm kiểm tra được lưu giữ độc lập.
 Trang này mô tả các định dạng, các bước kiểm tra và tài liệu cần lưu giữ để bàn giao.</p>
@@ -68,8 +68,8 @@ Trang này mô tả các định dạng, các bước kiểm tra và tài liệu
 </tr>
 <tr>
 <td>Biên lai giao dịch</td>
-<td>Signed record of the collector version，source-file hashes and start settings，also included in <code>process.started</code></td>
-<td>The receipt，associated journal and the environment evidence for the selected verification mode</td>
+<td>Bản ghi có chữ ký về phiên bản trình thu thập, các giá trị băm của tệp nguồn và cài đặt ban đầu, cũng được bao gồm trong <code>process.started</code></td>
+<td>Biên lai, nhật ký liên quan và bằng chứng môi trường cho chế độ xác minh đã chọn</td>
 </tr>
 <tr>
 <td>Báo cáo dễ đọc: <code>report.html</code> và các phần của nó, <code>report.json</code>, <code>report.pdf</code>, <code>chat.pdf</code></td>
@@ -195,11 +195,11 @@ liệt kê lại chúng từ <code>chat.json</code>
 . Một số bị thiếu là tin nhắn mà Telegram
 không trả về (đã bị xóa trước khi xuất, hoặc không hiển thị với tài khoản); trong các cuộc trò chuyện riêng tư và
 nhóm cơ bản, các số được chia sẻ chung cho tất cả các cuộc trò chuyện của tài khoản và các khoảng trống không được tính.</p>
-<p>After reading the history, the export asks Telegram for every absent number again, by number
-(<code>channels.getMessages</code>, up to 10,000 numbers). The result is in <code>message-ids.json</code> and the report.
-An empty answer records that the number is unavailable to this account at recheck time；
-it leaves the cause unspecified．A message returned on recheck is added to the export
-and marked <code>found_on_recheck</code>．</p>
+<p>Sau khi đọc lịch sử, quá trình xuất dữ liệu sẽ yêu cầu Telegram cung cấp lại từng số điện thoại chưa có, theo từng số
+(<code>channels.getMessages</code>, tối đa 10.000 số). Kết quả được ghi trong <code>message-ids.json</code> và báo cáo.
+Một câu trả lời trống ghi nhận rằng số đó không khả dụng đối với tài khoản này tại thời điểm kiểm tra lại；
+nó không chỉ rõ nguyên nhân．Một tin nhắn được trả về khi kiểm tra lại sẽ được thêm vào tệp xuất
+và được đánh dấu <code>found_on_recheck</code>．</p>
 <p>Mỗi báo cáo bắt đầu bằng <strong>. Tóm tắt </strong>: một đoạn văn, sau đó là những gì tài liệu thể hiện và những gì nó
 không thể hiện (ai đứng sau tài khoản, tính đầy đủ của dữ liệu, các nội dung bị xóa trước khi quan sát, thời gian
 không có dấu thời gian). Con dấu của trang sẽ chuyển sang màu hổ phách khi trình duyệt đã kiểm tra
@@ -396,27 +396,26 @@ mọi tin nhắn được đánh số trong khoảng đó đều đã được q
 <li>Các tin nhắn dịch vụ là các bản ghi nhật ký có số thứ tự riêng, do đó chúng tự động lấp đầy các khoảng trống
     của chính mình; ước tính tùy chọn chỉ mang tính chất bối cảnh.</li>
 </ul>
-<p><code>verify.py</code> recomputes <code>gap_summary</code> from <code>events.jsonl</code> with the parameters in the signed
-<code>coverage.json</code> member (defaults for older archives) and
-prints the account-wide line in its coverage summary. The archive's <code>get_capture_status</code>
-(MCP and the command line) returns the same measurement for the chats an access may read;
-the account-wide sequence only to access covering the whole workspace.</p>
-<p>Repeated observations of one service message count once，and the account service estimate
-uses only numbers inside the measured range．An applied scope must explicitly preserve
-the account's own messages before account-wide measurement is enabled；older records
-without that information cannot establish this condition．Stopped observation does not
-extend the measured range，and resuming it is noted．The live archive query has a time
-budget，including its database scan，and marks an unfinished measurement as partial．</p>
-<p>Telegram documents the <a href="https://core.telegram.org/api/updates#message-id-sequences">separate message ID sequences</a>．
-These numbers describe observations；they do not identify a deletion actor or establish
-why a number is absent．</p>
+<p><code>verify.py</code> tính toán lại <code>gap_summary</code> từ <code>events.jsonl</code> với các tham số trong
+<code>coverage.json</code> (giá trị mặc định cho các kho lưu trữ cũ hơn) và
+in dòng toàn tài khoản trong bản tóm tắt phạm vi phủ sóng của nó. <code>get_capture_status</code>(MCP và dòng lệnh) trả về cùng một kết quả đo lường cho các cuộc trò chuyện mà một quyền truy cập có thể đọc;
+dãy dữ liệu toàn tài khoản chỉ áp dụng cho quyền truy cập bao phủ toàn bộ không gian làm việc.</p>
+<p>Các quan sát lặp lại của một tin nhắn dịch vụ chỉ được tính một lần, và ước tính dịch vụ tài khoản
+chỉ sử dụng các số nằm trong phạm vi đo lường. Phạm vi áp dụng phải rõ ràng bảo toàn
+các tin nhắn riêng của tài khoản trước khi kích hoạt đo lường toàn tài khoản; các bản ghi cũ
+không có thông tin đó không thể đáp ứng điều kiện này. Việc dừng quan sát không
+mở rộng phạm vi đo lường, và việc tiếp tục quan sát sẽ được ghi nhận. Truy vấn kho lưu trữ trực tiếp có giới hạn
+thời gian, bao gồm cả quá trình quét cơ sở dữ liệu, và đánh dấu phép đo chưa hoàn thành là không đầy đủ.</p>
+<p>Telegram ghi lại các chuỗi <a href="https://core.telegram.org/api/updates#message-id-sequences">ID tin nhắn riêng biệt</a>.
+Các số này mô tả các quan sát; chúng không xác định tác nhân xóa tin nhắn hoặc giải thích
+lý do tại sao một số lại bị thiếu.</p>
 <p>Khi Telegram ngừng chấp nhận tài khoản, bản ghi <code>coverage.gap</code> kết thúc quá trình giám sát
 sẽ chứa <code>cause</code> (<code>account_banned</code>, <code>account_frozen</code>, <code>account_deleted</code>, <code>session_duplicated</code>,
 <code>session_revoked</code>, <code>session_expired</code>, <code>session_ended</code> hoặc <code>not_authorized</code>) và lỗi Telegram;
 <code>verify.py</code> chỉ ra nguyên nhân khiến giai đoạn này kết thúc.</p>
-<p>Coverage combines recorded observation periods，interruptions and message outcomes．
-Assess it together with the selected chats，period and attachment policy；continuous
-operation alone does not establish complete delivery of Telegram updates．</p>
+<p>Phạm vi bao gồm các khoảng thời gian quan sát được ghi lại, các sự gián đoạn và kết quả tin nhắn.
+Đánh giá cùng với các cuộc trò chuyện đã chọn, khoảng thời gian và chính sách đính kèm; việc
+hoạt động liên tục một mình không đảm bảo việc truyền tải đầy đủ các cập nhật từ Telegram.</p>
 <h2 id="producer">Người sản xuất<a class="anchor" href="#producer" aria-label="Liên kết đến phần này">#</a></h2>
 <p>Bản kê khai có chữ ký của các tệp ZIP bằng chứng, bản xuất cuộc trò chuyện, nhật ký chứng cứ và tuyên bố về
 các tệp hồ sơ cá nhân chứa thông tin <code>producer</code>
@@ -462,66 +461,66 @@ Công cụ xác minh sẽ từ chối các thành phần bất thường hoặc 
 chuỗi/dãy bị gián đoạn, chữ ký không hợp lệ và sự không khớp với điểm kiểm tra được cung cấp.
 Công cụ này không bao giờ trích xuất đường dẫn lưu trữ. Công cụ này giới hạn tổng kích thước khai báo sau khi giải nén ở mức 4 GiB;
 tệp <code>--max-gib N</code> cho phép các tệp lưu trữ có kích thước lớn hơn được tạo ra nhờ giới hạn <strong>tham số</strong> được nâng cao.</p>
-<p>Run verification from your installed TgWitness version or a reviewed checkout．
-The copy included in an archive supports portable use；check that copy against your
-trusted installation before executing it．</p>
-<p>A checkpoint signs a statement containing the public key, journal length, head
-hash, and creation time. The verifier can check that a later archive contains the
-same prefix．Retain the checkpoint outside the collector，so later verification compares
-the archive with a reference held separately from it．</p>
+<p>Chạy quá trình xác minh từ phiên bản TgWitness đã cài đặt của bạn hoặc từ một bản checkout đã được kiểm tra.
+Bản sao được bao gồm trong tệp lưu trữ hỗ trợ sử dụng di động; hãy so sánh bản sao đó với
+bản cài đặt đáng tin cậy của bạn trước khi thực thi nó.</p>
+<p>Một điểm kiểm tra (checkpoint) ký một tuyên bố chứa khóa công khai, độ dài nhật ký, băm đầu
+(head hash) và thời gian tạo. Người xác minh có thể kiểm tra xem một tệp lưu trữ sau này có chứa
+tiền tố giống hệt hay không. Giữ điểm kiểm tra bên ngoài bộ thu thập (collector), để quá trình xác minh sau này so sánh
+tệp lưu trữ với một bản tham chiếu được lưu trữ riêng biệt với nó.</p>
 <h2 id="verification-scope">Phạm vi xác minh<a class="anchor" href="#verification-scope" aria-label="Liên kết đến phần này">#</a></h2>
-<p>Verification checks the archive and the collection mode used to produce it．Choose the
-mode whose trust boundary matches the case，then retain its verification inputs．</p>
+<p>Quá trình xác minh kiểm tra kho lưu trữ và chế độ thu thập được sử dụng để tạo ra nó. Chọn
+chế độ có ranh giới tin cậy phù hợp với trường hợp, sau đó giữ lại các đầu vào xác minh của chế độ đó.</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
-<th>Collection mode</th>
-<th>What the verifier checks</th>
-<th>Verification inputs and trust boundary</th>
+<th>Chế độ thu thập</th>
+<th>Những gì trình xác minh kiểm tra</th>
+<th>Dữ liệu đầu vào xác minh và ranh giới tin cậy</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Local workspace</td>
-<td>Record signatures，hash chain，manifest and attachment bytes</td>
-<td>Independently retained collector fingerprint；the host administrator controls the local signing key</td>
+<td>Không gian làm việc cục bộ</td>
+<td>Ghi lại chữ ký, chuỗi băm, bản kê khai và các byte tệp đính kèm</td>
+<td>Dấu vân tay của trình thu thập được lưu trữ độc lập; quản trị viên máy chủ kiểm soát khóa ký số cục bộ</td>
 </tr>
 <tr>
-<td>Local workspace with an independent witness</td>
-<td>The archive checks plus agreement with an earlier journal prefix retained by the witness</td>
-<td>Separately trusted witness key and records；the checkpoint binds the prefix already observed</td>
+<td>Không gian làm việc cục bộ với một nhân chứng độc lập</td>
+<td>Việc kiểm tra kho lưu trữ cùng với sự nhất quán với tiền tố nhật ký trước đó được người làm chứng lưu giữ</td>
+<td>Khóa chứng thực và bản ghi được lưu trữ riêng biệt; điểm kiểm tra (checkpoint) liên kết với tiền tố đã được quan sát trước đó</td>
 </tr>
 <tr>
-<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions capture</a></td>
-<td>GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity</td>
-<td>Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow</td>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions ghi lại</a></td>
+<td>Chứng nhận trên GitHub về băm tệp lưu trữ, quy trình làm việc đã được phê duyệt và các bản cam kết của trình thu thập, trình chạy được lưu trữ, nguồn phiên/khóa mới và tính toàn vẹn của tệp lưu trữ nội bộ</td>
+<td>Chính sách xác minh đáng tin cậy, kho lưu trữ của người gọi và gói chứng thực GitHub; quá trình thu thập dữ liệu được thực hiện theo quy trình làm việc được ghim</td>
 </tr>
 <tr>
-<td><a href="../high-assurance/">Cloud deployment</a></td>
-<td>Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record</td>
-<td>Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider</td>
+<td><a href="../high-assurance/">Triển khai trên đám mây</a></td>
+<td>Vòng đời của nhà cung cấp và bản ghi truy cập, trạng thái tường lửa và Cloudflare, cùng với bản ghi hoạt động được ký số của bộ thu thập dữ liệu</td>
+<td>Các truy vấn chỉ đọc đến nhà cung cấp và Cloudflare; tính khả dụng của từng kiểm tra phụ thuộc vào nhà cung cấp</td>
 </tr>
 <tr>
-<td><a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX confidential VM</a></td>
-<td>Quote signature and platform status，binding to the collector statement，compose and OS measurements</td>
-<td>Intel trust chain and expected deployment measurements；retain the results of every required TDX check</td>
+<td><a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Máy ảo (VM) bảo mật Intel TDX</a></td>
+<td>Chữ ký trích dẫn và trạng thái nền tảng, liên kết với tuyên bố của bộ thu thập, các phép đo thành phần và hệ điều hành</td>
+<td>Chuỗi tin cậy Intel và các chỉ số triển khai dự kiến; giữ nguyên kết quả của mọi kiểm tra TDX bắt buộc</td>
 </tr>
 </tbody>
 </table></div>
-<p>In sealed acquisition，the approved collector receives data through an authenticated
-Telegram connection inside the verified environment．Attestation binds the archive to
-that execution，so verification covers acquisition as well as later file integrity．
-This relies on the approved code and the platform trust chain listed above．
-GitHub capture verification requires a session created inside the run and rejects
-imported-session captures．</p>
-<p>The run receipt records the collector version，file hashes and startup settings．GitHub
-provenance and TDX measurements provide the environment checks；the
-<a href="../verification/">validation record</a> identifies tested configurations．</p>
-<p>TgWitness signs the observations it collects；Telegram and message authors do not issue
-these signatures．In a local workspace，material created before the first independent
-checkpoint still depends on the collector and its key holder．Coverage records describe
-the selected scope and collection outcomes，while verified external timestamps anchor
-the committed archive or journal boundary in time．</p>
+<p>Trong quá trình thu thập dữ liệu được niêm phong, bộ thu thập được phê duyệt nhận dữ liệu thông qua một kết nối Telegram đã được xác thực
+trong môi trường đã được xác minh. Chứng nhận liên kết kho lưu trữ với
+lần thực thi đó, do đó quá trình xác minh bao gồm cả quá trình thu thập cũng như tính toàn vẹn của tệp sau này.
+Điều này dựa trên mã nguồn được phê duyệt và chuỗi tin cậy của nền tảng được liệt kê ở trên.
+Quá trình xác minh bản ghi trên GitHub yêu cầu một phiên được tạo bên trong quá trình chạy và từ chối
+các bản ghi từ phiên được nhập vào.</p>
+<p>Biên bản chạy ghi lại phiên bản trình thu thập, băm tệp và cài đặt khởi động. Nguồn gốc trên GitHub
+và các phép đo TDX cung cấp các kiểm tra môi trường; bản
+<a href="../verification/">ghi xác thực</a> xác định các cấu hình đã được kiểm tra.</p>
+<p>TgWitness ký các dữ liệu quan sát mà nó thu thập; Telegram và tác giả tin nhắn không phát hành
+các chữ ký này. Trong không gian làm việc cục bộ, tài liệu được tạo ra trước điểm kiểm tra độc lập đầu tiên
+vẫn phụ thuộc vào trình thu thập và người nắm giữ khóa của nó. Các bản ghi phạm vi mô tả
+phạm vi được chọn và kết quả thu thập, trong khi các dấu thời gian bên ngoài đã được xác minh xác định
+ranh giới của kho lưu trữ hoặc nhật ký đã được cam kết theo thời gian.</p>
 <h2 id="attachments">Tệp đính kèm<a class="anchor" href="#attachments" aria-label="Liên kết đến phần này">#</a></h2>
 <p>Các tệp được định danh bằng mã băm SHA-256 trong thư mục media/. Một sự kiện media.saved liên kết mã băm và
 độ dài byte với một sự kiện tin nhắn cụ thể. Tên tệp gốc là siêu dữ liệu, không bao giờ là
@@ -544,17 +543,17 @@ mô tả tin nhắn TL gốc; quan sát có chữ ký liên kết mã SHA-256, t
 và chính sách kích thước của nó. Quá trình khôi phục sẽ xác minh liên kết đó trước khi tải xuống. Hệ thống không bao giờ truy xuất
 tin nhắn hiện tại mà sẽ âm thầm thay thế bằng tệp đính kèm mới hơn. Các tác vụ bị gián đoạn
 sẽ được thử lại, trong khi lỗi vĩnh viễn vẫn là một kết quả rõ ràng.</p>
-<p>Each workspace has its own journal and signing identity. A process.started event includes
-a run ID, local clocks, dependency versions, source-file hashes, initial account/scope,
-and capture settings. Heartbeats include the run ID, monotonic time, and queue state.
-The run receipt can also be downloaded as a separately signed statement．For verification
-of the execution environment，pair it with the GitHub attestation or TDX checks described
-in <a href="#verification-scope">Verification scope</a>．</p>
-<p>Automatic checkpoints are retained locally on startup, every five minutes while
-observing (<strong>Parameters → Signed checkpoint every</strong>), and on orderly stop. Startup verification and export compare the journal
-against the latest retained local checkpoint. This can detect a database rollback
-when the checkpoint survives．Independent retention keeps that reference available outside
-the workspace；a verified external timestamp additionally anchors it in time．</p>
+<p>Mỗi không gian làm việc có nhật ký và danh tính ký riêng. Sự kiện `process.started` bao gồm
+ID phiên chạy, đồng hồ cục bộ, phiên bản phụ thuộc, băm tệp nguồn, tài khoản/phạm vi ban đầu,
+và cài đặt ghi lại. Các tín hiệu kiểm tra (heartbeats) bao gồm ID phiên chạy, thời gian đơn điệu và trạng thái hàng đợi.
+Biên nhận lần chạy cũng có thể được tải xuống dưới dạng một bản tuyên bố được ký riêng biệt. Để xác minh
+môi trường thực thi, hãy kết hợp nó với chứng nhận GitHub hoặc các kiểm tra TDX được mô tả
+trong <a href="#verification-scope">phần Phạm vi xác minh</a>.</p>
+<p>Các điểm kiểm tra tự động được lưu trữ cục bộ khi khởi động, cứ sau năm phút trong quá trình
+quan sát (<strong>Tham số → Điểm kiểm tra có chữ ký mỗi</strong>), và khi dừng hệ thống một cách có trật tự. Quá trình xác minh khi khởi động và xuất dữ liệu sẽ so sánh nhật ký
+với điểm kiểm tra cục bộ mới nhất được lưu trữ. Điều này có thể phát hiện việc khôi phục cơ sở dữ liệu
+khi điểm kiểm tra vẫn còn tồn tại. Cơ chế lưu trữ độc lập giúp duy trì tham chiếu này bên ngoài
+không gian làm việc; một dấu thời gian bên ngoài đã được xác minh sẽ giúp cố định thời điểm đó một cách chính xác.</p>
 <p>Sau khi khởi động lại, vị trí cập nhật Telegram đã lưu sẽ được khôi phục (<code>catch_up_from</code> trong
 <code>observation.started</code>) và hệ thống sẽ yêu cầu các bản cập nhật bị bỏ lỡ. Quá trình kiểm tra lại định kỳ sẽ ghi lại
 <code>message.recovered</code> đối với các tin nhắn bị bỏ lỡ và <code>message.missing_on_recheck</code> khi Telegram không

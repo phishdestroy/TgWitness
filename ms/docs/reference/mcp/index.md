@@ -80,9 +80,14 @@ Alamat `*.trycloudflare.com` adalah sementara. Apabila permulaan semula terowong
 | `get_journal_event` | Satu rekod tersanitasi dengan rujukan sumbernya |
 | `get_capture_status` | Status pengumpulan, rekod liputan yang dibenarkan dan `gap_summary`: nombor mesej yang tidak pernah diperhatikan, mengikut saluran atau superkumpulan dan untuk urutan seluruh akaun ([perincian](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#missing-message-numbers-gap_summary)); pilih sembang untuk melihat kekosongan yang disenaraikan |
 | `get_activity_stats` | Mesej mengikut jam UTC dan hari dalam minggu, hari puncak, perkongsian suntingan dan pemadaman, penghantar, domain dan `@handles`, dengan liputan ([perincian](https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/#activity-statistics)) |
+| `get_messages_by_date` | Mesej yang disimpan bagi satu hari kalendar dalam zon waktu IANA yang dinamakan (`Europe/Kyiv`, `UTC`), pada masa Telegram melaporkan; `from_utc` dan `until_utc` nyatakan hari yang dikira, termasuk penjimatan waktu siang |
+| `get_pinned_messages` | Mesej yang dipin dalam snapshot status sembang terkini bersama versi simpanan mereka, serta pemberitahuan pin dan unpin yang diperhatikan secara langsung |
+| `get_chat_stats` | Bilangan murah rekod yang disimpan untuk satu sembang atau setiap sembang dalam skop, pemerhatian pertama dan terakhir, dan `gap_summary`; gunakan sebelum bacaan besar |
+| `get_topics` | Topik forum daripada mesej perkhidmatan topik yang disimpan: sejarah tajuk, ditutup atau disembunyikan, bilangan mesej yang disimpan |
+| `get_media` | Imej yang disimpan sebagai pratonton JPEG bersaiz kecil (maksimum 36 KB), dikembalikan sebagai imej bersama SHA-256 dan `media.saved` rekod; fail itu disemak terlebih dahulu dengan hash yang direkodkan, manakala fail lain hanya mengembalikan metadata |
 | `export_messages` | Baris arahan sahaja, tidak dipilih secara lalai: aliran simpanan pemerhatian sebagai JSON Lines ([perincian](https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/#export)); tidak ditawarkan melalui MCP |
 
-`tools/list` hanya mengembalikan alat yang dibenarkan kepada sambungan tersebut. Panggilan ke alat lain ditolak. Alat konteks kumpulan, episod, terminologi dan rantaian balasan tidak ditawarkan dalam binaan ini; bahagian belakang pek konteks berasingan mereka tidak disertakan.
+Setiap alat bersifat hanya-baca (`readOnlyHint`) dan mengisytiharkan skema output; medan di luar yang diisytiharkan akan dikembalikan seperti sedia ada. `tools/list` Hanya memulangkan alat yang diberikan kepada sambungan tersebut. Panggilan kepada alat lain ditolak. Alat konteks kumpulan, episod, terminologi dan rantaian balasan tidak ditawarkan dalam binaan ini; backend pek konteks berasingan mereka tidak disertakan.
 
 Setiap bacaan menyemak token, alat dan skop ruang kerja/sembang, termasuk selepas kerja pangkalan data selesai. Had ialah 60 permintaan seminit, 50 rekod setiap halaman, 64 KiB setiap hasil dan tarikh akhir arkib lapan saat. Panggilan MCP yang tamat masa mengembalikan ralat alat yang meminta tempoh yang lebih sempit atau had yang lebih rendah.
 

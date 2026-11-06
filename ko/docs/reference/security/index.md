@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/secur
 
 위협 모델, 접근 모델, 저장된 기밀 정보, 네트워크 노출, 세션 가져오기 및 취약점 보고 방법.
 
-This page describes access，storage and network protection in a local or server workspace． For collection on a GitHub runner or in an Intel TDX confidential VM，see the [verification modes](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope)，which add checks of the collection environment． Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．
+이 페이지에서는 로컬 또는 서버 작업 공간에서의 액세스, 저장 및 네트워크 보호에 대해 설명합니다. GitHub 러너 또는 Intel TDX 기밀 VM에서 데이터를 수집하는 경우, 수집 환경에 대한 추가 검증을 수행하는 [검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope)모드를 참조하십시오. 계정 연결, 알림, 타임스탬프, 오프사이트 사본 및 위트니스에는 각각 별도의 라우팅 설정이 적용됩니다.
 
 | 분야 | 요약하자면 |
 | --- | --- |
@@ -12,7 +12,7 @@ This page describes access，storage and network protection in a local or server
 | 저장된 비밀 | 세션, API 쌍, 서명 키 및 프록시 설정은 Fernet 알고리즘으로 암호화됩니다. |
 | 메시지 및 미디어 | 암호화되지 않은 상태로 저장됨: 디스크 암호화 및 엄격한 권한 설정을 사용하십시오. |
 | 무결성 | 모든 기록에 SHA-256 해시 체인과 Ed25519 서명이 적용됩니다. |
-| Local trust boundary | The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary |
+| 로컬 신뢰 경계 | 호스트 관리자가 작업 공간과 해당 서명 키를 관리하며, 독립적인 체크포인트는 이전 저널 경계를 유지합니다. |
 
 취약점 보고와 관련하여서는 [보안](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)정책을 참조하십시오.
 
@@ -38,13 +38,13 @@ This page describes access，storage and network protection in a local or server
 
 ## 저장된 비밀
 
-Telegram API credentials，the session and signing key are encrypted with Fernet． For local messages and media，encryption is provided by the host's disk or volume； the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP， and off-site copies use AES-256-GCM．
+텔레그램 API 인증 정보, 세션 및 서명 키는 Fernet을 사용하여 암호화됩니다. 로컬 메시지 및 미디어의 경우, 호스트의 디스크 또는 볼륨을 통해 암호화가 제공되며, 작업 공간에는 일반 파일이 저장됩니다. 내보내기 시에는 암호로 보호된 AES-256 ZIP을 사용할 수 있으며, 오프사이트 사본에는 AES-256-GCM이 사용됩니다.
 
-The vault key defaults to the protected data directory．Use an external master-key file below to store it separately．On Unix，new private-key files use mode 0600 and new data directories use 0700；on Windows，set the directory ACL for the service account and authorized administrators．Existing directory permissions are retained．
+볼트 키는 기본적으로 보호된 데이터 디렉터리에 저장됩니다. 별도의 외부 마스터 키 파일을 사용하여 별도로 저장하십시오. 유닉스에서는 새로운 개인 키 파일에 모드 0600을, 새로운 데이터 디렉터리에 모드 0700을 적용하십시오. 윈도우에서는 서비스 계정 및 승인된 관리자를 위해 디렉터리의 ACL을 설정하십시오. 기존 디렉터리 권한은 유지됩니다.
 
 ### 외부 마스터 키
 
-For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode．Disk encryption protects the local message and media files in either mode；see [connection and data protection](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/) for setup details．
+새로운 데이터 디렉터리의 경우, TGWITNESS_VAULT_KEY_FILE을 통해 외부 무작위 마스터 키를 제공할 수 있습니다. HKDF-SHA256과 별도의 무작위 솔트를 사용하여 각 작업 공간마다 서로 다른 Fernet 키를 생성합니다. 복구를 위해 vault.external.json 파일을 반드시 보관해야 합니다. 마스터 키가 없거나 잘못된 경우 오류가 발생합니다. 기존 로컬 볼트는 자동으로 마이그레이션되지 않습니다. 패널에는 선택된 키 저장 모드가 표시됩니다. 두 모드 모두에서 디스크 암호화를 통해 로컬 메시지 및 미디어 파일이 보호됩니다. 설정에 대한 자세한 내용은 [연결 및 데이터 보호를](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/) 참조하십시오.
 
 ## 프록시 및 네트워크 경로
 
@@ -68,10 +68,10 @@ MTProxy는 텔레그램 트래픽만 처리합니다. 외부 요청은 별도의
 
 ## 무결성 제한 사항
 
-Local verification checks record signatures，the hash chain，attachments and the export manifest． The administrator holds the local signing key and can create another signed journal； an independently retained checkpoint detects replacement of the prefix it covers． Keep the key fingerprint and checkpoints with the recipient or an independent witness．
+로컬 검증은 기록 서명, 해시 체인, 첨부 파일 및 내보내기 매니페스트를 확인합니다. 관리자는 로컬 서명 키를 보유하며, 또 다른 서명된 저널을 생성할 수 있습니다. 독립적으로 보관된 체크포인트는 해당 체크포인트가 포함하는 접두사의 대체 여부를 감지합니다. 키 지문과 체크포인트는 수신자나 독립적인 증인에게 보관하십시오.
 
-For independently checked collection，choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)． Their verifiers check workflow provenance or hardware measurements in addition to archive integrity． Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies； the [evidence format](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) describes the checks for each mode．
+독립적으로 검증되는 수집의 경우, [GitHub Actions 캡처](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) 또는 [Intel TDX 배포](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)를 선택하십시오. 해당 검증 도구는 아카이브 무결성 외에도 워크플로우 출처 정보나 하드웨어 측정값을 확인합니다. 선택 사항인 타임스탬프와 암호화된 외부 사본은 시간 기준점과 복구 가능한 사본을 제공하며, [증거 형식은](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) 각 모드에 대한 검증 절차를 설명합니다.
 
 ## 문제가 의심될 경우
 
-Preserve the original data directory and use a separate copy for analysis． Report the affected version，operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)，keeping account data and credentials private．
+원본 데이터 디렉터리를 보존하고, 분석을 위해 별도의 사본을 사용하십시오. [보안](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)정책을 통해 영향을 받는 버전, 작동 방식 및 재현 단계를 보고하되, 계정 데이터와 인증 정보는 비공개로 유지하십시오.

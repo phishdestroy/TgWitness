@@ -194,14 +194,35 @@ read-receipt blocking in the API collector．</p>
     剛加入的團隊聊天室中的較早訊息，或是觀察者
     注意到該聊天室之前，機器人所發的訊息。已即時儲存的訊息不會重複記錄。</li>
 </ul>
-<p>啟用此模式時，清單中已存在的聊天室將直接加入，且不包含快照。
-若觸發 FloodWait，此作業將暫停，並於之後恢復；失敗情況會被記錄，而
-該聊天室的即時記錄則會持續進行。
-- <strong>依需求儲存設定檔。在「聊天」→「設定檔」→「儲存設定檔」中，可</strong>儲存任何來源的當前設定檔；
-最新設定檔會顯示在訊息上方。
-- <strong>不可見。</strong>在其他 Telegram 應用程式中按下的內嵌（回呼）按鈕、
-機器人對此類按壓所作出的彈出視窗或連結，以及在其他應用程式中使用的邀請連結，均不會傳送至
-TgWitness。但機器人隨後發送或編輯的內容仍會被記錄。</p>
+<p>Chats already in the list when the mode is switched on are added without snapshots.
+A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
+recording of the chat continues.
+- <strong>Profiles on request.</strong> <strong>Chats → Profile → Save profile now</strong> saves the current profile
+of any source; the newest one is shown above the messages.
+- <strong>Chat state snapshots (preview).</strong> State outside the message stream changes without a
+message: unpinning every message leaves no message-level trace, an administrator loses
+rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled
+source is read periodically and saved as a signed <code>chat.state</code> record: title, usernames,
+description, member and administrator counts, linked chat, slow mode, pinned message IDs
+(up to 100), administrators with their rights and titles, and gifts shown on channels and
+user profiles (up to 100). Each record lists the differences from the previous snapshot:
+changed fields with before and after, pinned messages added or removed, administrators and
+gifts added, changed or no longer listed. Telegram does not say who changed anything or
+when between snapshots.
+- A part Telegram refuses (for example the administrator list of a channel for a member
+    who is not an administrator) is named in <code>errors</code>; its earlier value is kept and listed
+    in <code>carried_forward</code>, never reported as removed.
+- A record whose only changes are counts, and a check that found no change, refer to the
+    last full state with <code>state_seq</code> and cumulative <code>state_overrides</code>. A full state is written at
+    least every seven days and whenever anything other than a count changes.
+- <code>parts_complete</code> marks capped lists．Additions require a complete earlier list，
+    removals require a complete current list，and explicit empty values record clearing．
+- <strong>Parameters → Chat state</strong> sets the interval (12 hours by default, 0 turns snapshots
+    off), the pause between sources, which parts are read, and whether checks that found no
+    change are recorded. A FloodWait pauses snapshots and they resume afterwards.
+- <strong>Not visible.</strong> Inline (callback) buttons pressed in another Telegram app, the popup or
+link a bot answers such a press with, and invite links used in another app do not reach
+TgWitness. What the bot sends or edits afterwards is recorded.</p>
 </li>
 </ul>
 <h3 id="act-from-the-panel">從面板執行操作<a class="anchor" href="#act-from-the-panel" aria-label="此節的連結">#</a></h3>
@@ -358,10 +379,9 @@ Telegram 向該帳號顯示的計數及身分資訊。</p>
 <p><strong>「驗證日誌」</strong>會透過顯示的
 邊界檢查事件鏈與簽名。當工作區變更時，其結果將被清除，而面板會標示
 檢查後新增的記錄。ZIP 匯出功能亦會驗證所收集的媒體檔案。</p>
-<p>有效的簽名是針對可信密鑰的完整性進行驗證，而非針對 Telegram
-的來源或內容真實性。請獨立保留指紋與檢查點。請參閱
-<a href="../evidence/">證據模型</a>、<a href="../operations/">日常運作</a>流程及
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">即時驗收程序</a>，以了解信任與交付要求。</p></div></article>
+<p>Retain fingerprints and checkpoints independently．See the
+<a href="../evidence/#verification-scope">verification scope</a> for acquisition checks in each mode，
+and <a href="../operations/">daily operations</a> for routine collection．</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">在 GitHub 上編輯此頁面 ↗</a><a class="next-guide" href="../history/"><span>下一步</span><strong>載入來源歷史紀錄 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../verification/">已測試的內容 →</a></p></footer>
 </main>
 <aside class="toc" aria-label="本頁內容"><p class="nav-label">本頁內容</p><a href="#from-login-to-a-journal">從登入到日誌</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">監測範圍：指定聊天室、特定資料夾或整個帳戶</a><a href="#scope-and-event-selection">範圍與事件篩選</a><a href="#own-actions">自身行動</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">調查模式：加入群組並與機器人對話</a><a href="#recheck-tiers">重新檢查等級</a><a href="#message-history-and-attribution">訊息歷史紀錄與來源標示</a><a href="#history-snapshots">歷史快照</a><a href="#attachment-handling">附件處理</a><a href="#pause-lock-disconnect-and-restart">暫停、鎖定、斷開連接及重新啟動</a><a href="#account-isolation-and-verification">帳戶隔離與驗證</a></aside>

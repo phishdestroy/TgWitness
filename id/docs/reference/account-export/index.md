@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 Tautan sumber tidak secara mandiri membuktikan bahwa transformasi tersebut telah memilih setiap item yang diperlukan atau menghapus setiap detail yang dapat mengidentifikasi. Teks asli tidak disertakan sebagai bukti. Diperlukan tinjauan baru untuk penilaian tersebut.
 
-## Sharing and hosted capture
+## Berbagi dan penangkapan yang dihosting
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+Pilih pesan dan berkas yang dibutuhkan penerima, tinjau salinan lengkap yang dibagikan, dan simpan sumbernya secara terpisah. Catat hash ZIP yang telah dikirim agar penerima dapat mengidentifikasi dan memverifikasi salinan yang tepat tersebut. Pseudonimisasi menggantikan pengenal yang dipilih; teks yang disertakan dan berkas asli tetap menjadi bagian dari tinjauan.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope)．
+GitHub Actions mendukung ekspor seluruh akun dan obrolan terpilih melalui Takeout atau API reguler, serta jurnal peristiwa satu obrolan. Panduan [penangkapan](https://phishdestroy.github.io/TgWitness/docs/capture/) yang [dihosting](https://phishdestroy.github.io/TgWitness/docs/capture/) menjelaskan verifikasi pengaturan dan batas waktu 120 menit. Untuk memverifikasi salinan berbagi yang berasal dari penangkapan yang dihosting, bandingkan hash sumbernya dengan arsip asli dan verifikasi pengesahan arsip tersebut dengan pemeriksaan [khusus mode](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope).
 
 [Format bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/) · [Laporan kasus](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-reports/)

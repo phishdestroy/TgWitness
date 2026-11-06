@@ -101,7 +101,7 @@ Bir bulguda türetilmiş bir profili kullanmadan önce, alıntılanan kayıtlar�
 | Aynı kaydedilmiş dosya | #151 ve #209 numaralı medya makbuzları tamamlandı | Korunan baytlar için tam SHA-256 değerleri birbiriyle uyumludur |
 | Kanal kaynağı | #101 ve #188 | Göndereni belirtilmedikçe, bir kanal gönderisini 71001 numaralı kullanıcıya atfetmeyin. |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+Eklerin hash değerlerini ve bunlara ilişkin mesaj referanslarını karşılaştırın ve hesap zaman çizelgelerini, bu kayıtlarda sağlanan Telegram kimliklerine göre gruplandırılmış halde tutun.
 
 Ekibin çalışma notlarını [Case Board](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/)'da tutun: #146, #188 ve #205 gibi güvendiğiniz kayıtları yer imlerine ekleyin, tam hedef dizgisini vurgulayın ve iki kayıt arasında veya belirli bir zaman aralığında kaydedilen her eylemin bir kesitini kaydedin. Notlar ve durumlar, ekibin incelemesini kendi imzalı geçmişinde tutar; bu geçmiş, kaynak gözlemlerinden ayrı olarak tanımlanabilir.
 
@@ -161,6 +161,6 @@ Gerçek doğrulama sonuçlarını ve orijinal kanıtları koruyun. Case Board’
 | --- | --- | --- |
 | Bot destekli sipariş/ödeme anlaşmazlığı | Giriş duyurusu → kaydedilmiş bağlantı önizlemesi → bot başlatma parametresi → mesaj ve klavye sürümleri → panel geri arama makbuzları → özel/grup takibi | Gözlemlenen teklif/yanıt zaman çizelgesi ve doğrulanmış kaynaklar; tek başına bir ödeme bağlantısı, ödeme yapıldığını kanıtlamaz |
 | Bir olayın ardından silinen mesajlar | Etkilenen tüm sohbetler → kaydedilen orijinaller/düzenlemeler → silme veya yeniden kontrol edildiğinde eksiklik sonuçları → korunan medya → kapsam ve diğer hesap perspektifleri | Korunmuş sürümler ve açıkça belirtilmiş bilinmeyen aralıklar; uydurma silme failleri yok |
-| Bir katılımcı, farklı sohbetlerde farklı isimler kullanıyor | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| Bir katılımcı, farklı sohbetlerde farklı isimler kullanıyor | Sayısal gönderen kimliği → isim／kullanıcı adı geçmişi → yanıtlar → gözlemlenen diğer sohbetler → alıntılanan hedefler／dosyalar | Kaynak kayıtlarına bağlantılar içeren bir Telegram hesabı etkinlik zaman çizelgesi |
 
 [Koleksiyon referansı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/) · [Kişi profili doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#people-profiles) · [Kanıt devri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#investigation-handoff) · [Doğrulama tamamlandı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/)

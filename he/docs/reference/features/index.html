@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">תכונות ומגבלות</span></nav>
 <p class="verification-shortcut"><a href="../verification/">מה נבדק ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">חלקים מדף זה עדיין באנגלית: הטקסט המקורי באנגלית שונה לאחר תרגומו.</p><p class="eyebrow">הפניה / אסף</p><h1>תכונות ומגבלות</h1><p class="guide-outcome">מודל האיסוף הנוכחי, תהליכי עבודה עם חשבונות מרובים, ייצוא ומגבלות תפעוליות של TgWitness.</p><div class="wiki-body"><p>TgWitness משמרת שיחות Telegram הנגישות לחשבונות מחוברים,
+<article class="guide-content"><p class="eyebrow">הפניה / אסף</p><h1>תכונות ומגבלות</h1><p class="guide-outcome">מודל האיסוף הנוכחי, תהליכי עבודה עם חשבונות מרובים, ייצוא ומגבלות תפעוליות של TgWitness.</p><div class="wiki-body"><p>TgWitness משמרת שיחות Telegram הנגישות לחשבונות מחוברים,
 מתעדת שינויים שנצפו ומכינה ייצוא הניתן לאימות. מסמך זה מתאר
 את מודל האיסוף, את תהליכי העבודה הנוכחיים ואת מגבלותיהם.</p>
 <h2 id="standalone-application">יישום עצמאי<a class="anchor" href="#standalone-application" aria-label="קישור לסעיף זה">#</a></h2>
@@ -177,13 +177,13 @@
 </tr>
 <tr>
 <td>תהליך האיסוף</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>הפעלה/כיבוי, פעימות, שגיאות, הגדרות, היקף וקבלת אישור חתימה על הפעלה</td>
+<td>מלאי מקומי; GitHub ו-TDX מוסיפים <a href="../evidence/#verification-scope">בדיקות סביבה עצמאיות</a></td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>הממשק מציין את שם החשבון שסופק באירוע המקור ושומר על
+השמות ושמות המשתמש שנצפו. כאשר האירוע אינו מציין את מבצע הפעולה, הדוח משאיר שדה זה ללא ציון.</p>
 <h2 id="capacity-and-telegram-limits">קיבולת ומגבלות טלגרם<a class="anchor" href="#capacity-and-telegram-limits" aria-label="קישור לסעיף זה">#</a></h2>
 <p>אין מספר אחיד של צ&#x27;אטים שניתן לפקח עליהם באיכות מובטחת.
 הקיבולת תלויה במספר האירועים בשיא לשנייה, בנפח ובגודל הקבצים המצורפים, ב-RPCs נוספים,

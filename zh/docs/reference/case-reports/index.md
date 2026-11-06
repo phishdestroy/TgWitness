@@ -84,6 +84,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-
 
 若包含 `analytics.json` 文件，该文件将受到归档文件签名哈希值的保护。 日志 `report.json` 嵌入了相同的选定聚合值。签名验证 可检测到字节变更。若要核对数据，请使用 `report_analytics.Analytics` 和 `selected` 重新计算日志聚合值，或 使用 `snapshot_analytics.collect` 和 `project` 重新计算快照聚合值。
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | 功能展示 |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+
 从源代码检出开始，基于同一份虚构期刊构建上述所有八种设计：
 
 ```
@@ -134,7 +147,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 保留原始 ZIP 文件及其哈希值。记录每个持有者、传输情况、日期 及目的。同时保留归属的操作员陈述和案件笔记。
 5. 对于机密虚拟机，需保留并独立验证引文、挑战、 Intel 证书链、测量数据、确切来源及密钥处理条件。 将证明验证结果与已审查的证据一并保存。
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+请参阅[验证范围](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)，了解各模式下对数据采集、 归档完整性、时间及采集覆盖范围的检查内容。
 
 ## 收件人审核
 

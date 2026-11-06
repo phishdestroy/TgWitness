@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/high-
 
 Server yang diamankan 24/7 di Hetzner atau Phala Cloud, Gateway DNS, serta pemeriksaan yang dapat diulang oleh pihak ketiga.
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+Penerapan dengan jaminan tinggi menambahkan pemeriksaan independen terhadap lingkungan pengumpulan data ke verifikasi arsip. Peninjau memeriksa catatan penerapan dan akses yang disimpan oleh penyedia layanan cloud dan Cloudflare, serta penerapan Intel TDX menambahkan pengesahan perangkat keras terhadap lingkungan pengumpul data.
 
 Penggunaan lokal dan Docker biasa tetap tidak berubah. Tidak ada yang berjalan di sini kecuali Anda melakukan deployment dengan `python -m tgwitness.cloud`, dan pengumpul hanya membaca hostnya saat penyebaran tersebut ditetapkan `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Diagram alur · Operator → Server, firewall tanpa aturan masuk (API penyedia);
 | Kunci penandatanganan dibuat di server tersebut | Kunci tersebut menandatangani pernyataan yang mencantumkan ID server penyedia dan hash dari cloud-init yang diterimanya | Collector, telah diverifikasi oleh penyedia |
 | Jurnal tersebut terkait dengan kunci dan server tersebut | Setiap proses yang dimulai di bukti ZIP membawa pengukuran host untuk server tersebut | Bukti ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+Pengumpul ini mencatat status SSH, sesi, riwayat login, dan informasi boot dalam catatan proses-mulai dan `host.state` catatan. Pada VM biasa, ini merupakan catatan inventaris lokal yang kemudian dibandingkan oleh peninjau dengan catatan independen dari penyedia layanan. Penerapan Intel TDX di bawah ini juga memverifikasi pengukuran yang didukung perangkat keras.
 
 ## Penyedia
 
@@ -269,8 +269,8 @@ Gateway DNS mencakup resolver sistem. DNS melalui HTTPS pada port 443 ke resolve
 
 Cloudflare tidak dapat melihat isi enkripsi Telegram, perangkat lain pada akun Telegram (daftar perangkat dalam mode bukti mencatatnya dari sisi Telegram) atau hypervisor penyedia layanan.
 
-## Reading the deployment result
+## Membaca hasil penyebaran
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+Untuk VM biasa, penyedia mengontrol infrastruktur host, dan inventaris lokal diverifikasi bersamaan dengan catatan penyedia. Untuk Intel TDX, verifikator juga memeriksa spesifikasi perangkat keras, pengikatan pengumpul, komposisi, dan pengukuran sistem operasi. Baca hasil masing-masing untuk melihat pemeriksaan mana yang lulus atau tidak tersedia.
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+Rincian riwayat firewall bergantung pada penyedia layanan; Linode menyimpan versi aturan. [Catatan](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/) [validasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/) mencantumkan implementasi yang telah diuji dan pemeriksaan aktif yang tersisa, serta [ruang lingkup verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) menghubungkan pemeriksaan lingkungan ini dengan akuisisi arsip dan integritasnya.

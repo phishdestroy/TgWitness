@@ -178,14 +178,34 @@ istemci yapılandırmaları için sabit bir ana bilgisayar adı kullanın.</p>
 <td>UTC saatine ve hafta gününe göre mesajlar, en yoğun günler, düzenleme ve silme oranları, gönderenler, etki alanları ve <code>@handles</code>, kapsama alanı (<a href="../cli/#activity-statistics">ayrıntılar</a>) ile birlikte</td>
 </tr>
 <tr>
+<td><code>get_messages_by_date</code></td>
+<td>Telegram&#x27;ın raporlama yaptığı zamana kadar, belirli bir IANA saat diliminde (<code>Europe/Kyiv</code>, <code>UTC</code>), Telegram&#x27;ın bildirdiği zamana göre; <code>from_utc</code> ve <code>until_utc</code> hesaplanan günü, yaz saati uygulaması dahil olmak üzere belirtin</td>
+</tr>
+<tr>
+<td><code>get_pinned_messages</code></td>
+<td>En son sohbet durumu anlık görüntüsünde sabitlenmiş mesajlar ile bunların kaydedilmiş sürümleri ve canlı olarak gözlemlenen sabitleme ve sabitlemeyi kaldırma bildirimleri</td>
+</tr>
+<tr>
+<td><code>get_chat_stats</code></td>
+<td>Kapsamdaki bir sohbet veya tüm sohbetler için kaydedilen kayıtların sayısını, ilk ve son gözlemi ve <code>gap_summary</code>; büyük bir okuma işleminden önce kullanın</td>
+</tr>
+<tr>
+<td><code>get_topics</code></td>
+<td>Kaydedilmiş konu hizmeti mesajlarından alınan forum konuları: başlık geçmişi, kapatılmış veya gizlenmiş konular, kaydedilmiş mesaj sayısı</td>
+</tr>
+<tr>
+<td><code>get_media</code></td>
+<td>Küçültülmüş bir JPEG önizlemesi olarak saklanan bir görüntü (en fazla 36 KB), SHA-256 değeri ve <code>media.saved</code> kayıtla birlikte bir resim olarak döndürülür; dosya öncelikle kaydedilmiş hash değeriyle karşılaştırılır, diğer dosyalar ise yalnızca meta verileri döndürür</td>
+</tr>
+<tr>
 <td><code>export_messages</code></td>
 <td>Yalnızca komut satırı, varsayılan olarak seçili değildir: gözlemleri JSON Lines biçimi olarak akışa kaydeder (<a href="../cli/#export">ayrıntılar</a>); MCP üzerinden sunulmaz</td>
 </tr>
 </tbody>
 </table></div>
-<p><code>tools/list</code> yalnızca ilgili bağlantıya izin verilen araçları döndürür. Diğer araçlara yapılan
-çağrılar reddedilir. Grup bağlamı, bölüm (episode), terminoloji ve yanıt zinciri araçları
-bu derlemede sunulmamaktadır; bunların ayrı bağlam paketi arka ucu dahil edilmemiştir.</p>
+<p>Her araç salt okunurdur (<code>readOnlyHint</code>) ve bir çıktı şeması bildirir; bildirilenlerin dışındaki alanlar olduğu gibi döndürülür. <code>tools/list</code> Yalnızca o bağlantıya izin verilen araçları döndürür. Diğer
+araçlara yapılan çağrılar reddedilir. Grup bağlamı, olay, terminoloji ve yanıt zinciri araçları
+bu sürümde sunulmamaktadır; bunların ayrı bağlam paketi arka ucu dahil edilmemiştir.</p>
 <p>Her okuma işlemi, veritabanı çalışması bittikten sonrası da dahil olmak üzere belirteci, aracı ve
 çalışma alanı/sohbet kapsamını kontrol eder. Sınırlar dakikada 60 istek, sayfa başına 50 kayıt,
 sonuç başına 64 KiB ve sekiz saniyelik arşiv zaman sınırıdır. Zaman aşımına uğrayan bir MCP çağrısı,

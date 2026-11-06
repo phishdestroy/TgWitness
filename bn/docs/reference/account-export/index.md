@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 উৎস লিঙ্ক স্বতন্ত্রভাবে প্রমাণ করে না যে নির্বাচিত রূপান্তর প্রতিটি প্রয়োজনীয় আইটেম নির্বাচন করেছে বা প্রতিটি শনাক্তকরণযোগ্য বিবরণ মুছে ফেলেছে। মূল প্লেনটেক্সট প্রমাণ হিসেবে সংযুক্ত করা হয়নি। সেই সিদ্ধান্তের জন্য একটি নতুন পর্যালোচনা প্রয়োজন।
 
-## Sharing and hosted capture
+## শেয়ারিং এবং হোস্টেড ক্যাপচার
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+প্রাপ্তকারী যে বার্তা ও ফাইলগুলো প্রয়োজন তা নির্বাচন করুন, সম্পূর্ণ শেয়ারকৃত কপি পর্যালোচনা করুন, এবং উৎস আলাদাভাবে সংরক্ষণ করুন। প্রেরিত ZIP-এর হ্যাশ রেকর্ড করুন যাতে প্রাপ্তকারী সেই সঠিক কপিটি সনাক্ত ও যাচাই করতে পারে। ছদ্মনামকরণ নির্বাচিত শনাক্তকারীগুলোকে প্রতিস্থাপন করে; অন্তর্ভুক্ত টেক্সট ও মূল ফাইলগুলো পর্যালোচনার অংশ হিসেবে থাকে।
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope)．
+GitHub Actions Takeout বা নিয়মিত API-এর মাধ্যমে পূর্ণ-অ্যাকাউন্ট এবং নির্বাচিত-চ্যাট এক্সপোর্ট সমর্থন করে, পাশাপাশি একটি একক-চ্যাট ইভেন্ট জার্নাল। [হোস্টেড ক্যাপচার](https://phishdestroy.github.io/TgWitness/docs/capture/)গাইডে সেটিংস যাচাইকরণ এবং ১২০-মিনিটের সীমা ব্যাখ্যা করা হয়েছে। হোস্টেড ক্যাপচার থেকে প্রাপ্ত শেয়ারিং কপি যাচাই করতে, এর সোর্স হ্যাশ মূল আর্কাইভের সাথে মিলিয়ে দেখুন এবং সেই আর্কাইভের প্রত্যয়ন [মোড-নির্দিষ্ট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope)চেকের মাধ্যমে যাচাই করুন।
 
 [প্রমাণের ফর্ম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/) · [কেস রিপোর্টসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-reports/)

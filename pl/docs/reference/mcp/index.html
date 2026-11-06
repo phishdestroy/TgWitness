@@ -178,14 +178,34 @@ stabilnej nazwy hosta dla zapisanych konfiguracji klientów.</p>
 <td>Wiadomości według godziny UTC i dnia tygodnia, dni o największym natężeniu ruchu, odsetek edycji i usunięć, nadawców, domen oraz <code>@handles</code>, wraz z zasięgiem (<a href="../cli/#activity-statistics">szczegóły</a>)</td>
 </tr>
 <tr>
+<td><code>get_messages_by_date</code></td>
+<td>Zapisane wiadomości z jednego dnia kalendarzowego w określonej strefie czasowej IANA (<code>Europe/Kyiv</code>, <code>UTC</code>), według czasu zgłaszanego przez Telegram; <code>from_utc</code> oraz <code>until_utc</code> należy podać obliczony dzień, z uwzględnieniem czasu letniego</td>
+</tr>
+<tr>
+<td><code>get_pinned_messages</code></td>
+<td>Wiadomości przypięte w najnowszej migawce stanu czatu wraz z ich zapisanymi wersjami oraz powiadomienia o przypięciu i odpięciu obserwowane na żywo</td>
+</tr>
+<tr>
+<td><code>get_chat_stats</code></td>
+<td>Liczba zapisanych rekordów dla jednej rozmowy lub wszystkich rozmów objętych zakresem, pierwsza i ostatnia obserwacja oraz <code>gap_summary</code>; należy z niego skorzystać przed przeprowadzeniem operacji odczytu dużej ilości danych</td>
+</tr>
+<tr>
+<td><code>get_topics</code></td>
+<td>Wątki na forum z wiadomości z usługi zapisanych wątków: historia tytułów, wątki zamknięte lub ukryte, liczba zapisanych wiadomości</td>
+</tr>
+<tr>
+<td><code>get_media</code></td>
+<td>Zachowany obraz w postaci pomniejszonego podglądu w formacie JPEG (maksymalnie 36 KB), zwracany jako obraz wraz z jego skrótem SHA-256 oraz <code>media.saved</code> rekordem; plik jest najpierw porównywany z zarejestrowanym skrótem, natomiast w przypadku innych plików zwracane są wyłącznie metadane</td>
+</tr>
+<tr>
 <td><code>export_messages</code></td>
 <td>Działa wyłącznie z wiersza poleceń, domyślnie nie jest zaznaczone: strumieniowo zapisuje obserwacje w formacie JSON Lines (<a href="../cli/#export">szczegóły</a>); nie jest dostępne za pośrednictwem MCP</td>
 </tr>
 </tbody>
 </table></div>
-<p>Wywołanie <code>tools/list</code> zwraca wyłącznie narzędzia przyznane dla danego połączenia. Wywołania innych
-narzędzi są odrzucane. Narzędzia dotyczące kontekstu grupowego, epizodów, terminologii oraz łańcuchów odpowiedzi nie są
-dostępne w tej kompilacji; ich oddzielny backend pakietów kontekstowych nie jest dołączony.</p>
+<p>Każde narzędzie jest tylko do odczytu (<code>readOnlyHint</code>) i deklaruje schemat wyjściowy; pola wykraczające poza zadeklarowane są zwracane w niezmienionej postaci. <code>tools/list</code> Zwraca wyłącznie narzędzia przypisane do danego połączenia. Wywołania innych
+narzędzi są odrzucane. Narzędzia związane z kontekstem grupy, epizodem, terminologią i łańcuchem odpowiedzi
+nie są dostępne w tej kompilacji; nie zawiera ona oddzielnego backendu pakietu kontekstowego.</p>
 <p>Każdy odczyt weryfikuje token, narzędzie oraz zakres obszaru roboczego/czatu, w tym również po zakończeniu
 pracy bazy danych. Limity wynoszą 60 żądań na minutę, 50 rekordów na stronę,
 64 KiB na wynik oraz osiem sekund limitu czasu operacji w archiwum. Przekroczenie czasu wywołania MCP

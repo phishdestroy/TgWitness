@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="Посібники"><a href="../../../">Головна</a> <span aria-hidden="true">/</span> <a href="../../">Документація</a> <span aria-hidden="true">/</span> <a href="../">Довідка</a> <span aria-hidden="true">/</span> <span aria-current="page">Безпека та обробка даних</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Що було протестовано →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Пошук у документації</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Спробуйте «проксі», «хеш-ланцюг», «токен» або «свідок»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Зручний пошук" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введіть слово, щоб здійснити пошук у посібниках та довідковій інформації. Результати пошуку залишаються у вашому браузері.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Деякі частини цієї сторінки досі залишаються англійською мовою: англійський оригінал зазнав змін після перекладу.</p><p class="eyebrow">Довідка / Безпека та проект</p><h1>Безпека та обробка даних</h1><p class="guide-outcome">Модель загроз, модель доступу, збереження конфіденційних даних, мережева вразливість, імпорт сеансів та порядок повідомлення про вразливість.</p><div class="wiki-body"><p>This page describes access，storage and network protection in a local or server workspace．
-For collection on a GitHub runner or in an Intel TDX confidential VM，see the
-<a href="../evidence/#verification-scope">verification modes</a>，which add checks of the collection environment．
-Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．</p>
+<article class="guide-content"><p class="eyebrow">Довідка / Безпека та проект</p><h1>Безпека та обробка даних</h1><p class="guide-outcome">Модель загроз, модель доступу, збереження конфіденційних даних, мережева вразливість, імпорт сеансів та порядок повідомлення про вразливість.</p><div class="wiki-body"><p>На цій сторінці описано доступ, зберігання та захист мережі в локальному робочому просторі або на сервері.
+Щодо збору даних на GitHub Runner або в конфіденційній віртуальній машині Intel TDX, див. режими
+<a href="../evidence/#verification-scope">верифікації</a>, які додають перевірки середовища збору даних.
+Підключення облікових записів, сповіщення, часові мітки, позасайтові копії та свідки мають власні налаштування маршрутизації.</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -61,8 +61,8 @@ Account connections，notifications，timestamps，off-site copies and witnesses
 <td>Ланцюжок хеш-кодів SHA-256 та підпис Ed25519 на кожному записі</td>
 </tr>
 <tr>
-<td>Local trust boundary</td>
-<td>The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary</td>
+<td>Межа локальної довіри</td>
+<td>Адміністратор хосту керує робочим простором та його ключем підпису; незалежні контрольні точки зберігають межі попереднього журналу.</td>
 </tr>
 </tbody>
 </table></div>
@@ -101,22 +101,22 @@ Account connections，notifications，timestamps，off-site copies and witnesses
 зібрані метадані джерела, ідентифікатори та, можливо, особистий або конфіденційний вміст.
 У необроблених метаданих джерела можуть зустрічатися хеші доступу до Telegram та посилання на файли.</p>
 <h2 id="secrets-at-rest">Секрети в стані спокою<a class="anchor" href="#secrets-at-rest" aria-label="Посилання на цей розділ">#</a></h2>
-<p>Telegram API credentials，the session and signing key are encrypted with Fernet．
-For local messages and media，encryption is provided by the host's disk or volume；
-the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP，
-and off-site copies use AES-256-GCM．</p>
-<p>The vault key defaults to the protected data directory．Use an external master-key file
-below to store it separately．On Unix，new private-key files use mode 0600 and new data
-directories use 0700；on Windows，set the directory ACL for the service account and
-authorized administrators．Existing directory permissions are retained．</p>
+<p>Повноваження API Telegram, сесія та ключ підпису шифруються за допомогою алгоритму Fernet.
+Для локальних повідомлень та мультимедіа шифрування забезпечується диском або томом хоста;
+робоча область зберігає звичайні файли. Для експорту можна використовувати ZIP-архів із захистом паролем за алгоритмом AES-256,
+а для позасайтових копій — шифрування AES-256-GCM.</p>
+<p>За замовчуванням ключ сховища зберігається у каталозі захищених даних. Використовуйте зовнішній файл головного ключа,
+наведений нижче, щоб зберігати його окремо. У Unix нові файли приватних ключів мають режим доступу 0600, а нові каталоги даних —
+0700; у Windows налаштуйте список контролю доступу (ACL) каталогу для облікового запису служби та
+авторизованих адміністраторів. Існуючі права доступу до каталогів зберігаються.</p>
 <h3 id="external-master-key">Зовнішній головний ключ<a class="anchor" href="#external-master-key" aria-label="Посилання на цей розділ">#</a></h3>
-<p>For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random
-master key. HKDF-SHA256 and a separate random salt derive a different Fernet key
-for each workspace. vault.external.json must be retained for recovery. Missing or
-wrong master keys fail closed. Existing local vaults are not silently migrated.
-The panel displays the selected key-storage mode．Disk encryption protects the local
-message and media files in either mode；see
-<a href="../connection/">connection and data protection</a> for setup details．</p>
+<p>Для нового каталогу даних TGWITNESS_VAULT_KEY_FILE може надати зовнішній випадковий
+головний ключ. HKDF-SHA256 та окремий випадковий солт генерують різний ключ Ферне
+для кожного робочого простору. Файл vault.external.json необхідно зберегти для відновлення. Відсутність або
+неправильні головні ключі призводять до збою. Існуючі локальні сховища не мігруються автоматично.
+На панелі відображається вибраний режим зберігання ключів. Шифрування диска захищає локальні
+повідомлення та мультимедійні файли в обох режимах; детальні відомості щодо налаштування див. у розділі
+<a href="../connection/">«Підключення та захист даних</a>».</p>
 <h2 id="proxies-and-network-routes">Проксі-сервери та маршрути мережі<a class="anchor" href="#proxies-and-network-routes" aria-label="Посилання на цей розділ">#</a></h2>
 <p>Налаштування проксі-сервера шифруються у сховищі. Паролі та секретні дані MTProxy
 не повертаються API та не записуються у записи доказів. Кожна робоча область обирає
@@ -158,19 +158,19 @@ HTTP-запитів. Явно обраний режим резервного д�
 для реєстрації заголовків авторизації або тіл запитів. Протокол HTTP передає токени та секретні дані для входу
 у вигляді відкритого тексту: використовуйте HTTPS або SSH-тунель під час виходу за межі localhost.</p>
 <h2 id="integrity-limits">Обмеження щодо цілісності<a class="anchor" href="#integrity-limits" aria-label="Посилання на цей розділ">#</a></h2>
-<p>Local verification checks record signatures，the hash chain，attachments and the export manifest．
-The administrator holds the local signing key and can create another signed journal；
-an independently retained checkpoint detects replacement of the prefix it covers．
-Keep the key fingerprint and checkpoints with the recipient or an independent witness．</p>
-<p>For independently checked collection，choose <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions capture</a>
-or <a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX deployment</a>．
-Their verifiers check workflow provenance or hardware measurements in addition to archive integrity．
-Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies；
-the <a href="../evidence/#verification-scope">evidence format</a> describes the checks for each mode．</p>
+<p>Локальні перевірки перевіряють підписи записів, ланцюжок хешів, вкладення та маніфест експорту.
+Адміністратор володіє локальним ключем підпису та може створити інший підписаний журнал;
+незалежно збережений контрольний пункт виявляє заміну префікса, який він охоплює.
+Зберігайте відбиток ключа та контрольні пункти у одержувача або незалежного свідка.</p>
+<p>Для незалежно перевіреного збору даних виберіть <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">фіксацію</a> <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">за допомогою GitHub Actions</a>
+або <a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">розгортання Intel TDX</a>.
+Їхні верифікатори перевіряють походження робочого процесу або апаратні вимірювання на додаток до цілісності архіву.
+Опціональні часові мітки та зашифровані зовнішні копії забезпечують часові прив’язки та копії для відновлення;
+<a href="../evidence/#verification-scope">формат</a> <a href="../evidence/#verification-scope">доказів</a> описує перевірки для кожного режиму.</p>
 <h2 id="if-you-suspect-a-problem">Якщо ви підозрюєте наявність проблеми<a class="anchor" href="#if-you-suspect-a-problem" aria-label="Посилання на цей розділ">#</a></h2>
-<p>Preserve the original data directory and use a separate copy for analysis．
-Report the affected version，operation and reproducible steps through the
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">security policy</a>，keeping account data and credentials private．</p></div></article>
+<p>Збережіть оригінальний каталог даних і використовуйте окрему копію для аналізу.
+Повідомте про уражену версію, операцію та кроки для відтворення проблеми через політику
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">безпеки</a>, зберігаючи конфіденційність даних облікового запису та облікових даних.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/SECURITY-MODEL.md">Редагувати цю сторінку на GitHub ↗</a><a class="next-guide" href="../architecture/"><span>Наступний крок</span><strong>Архітектура →</strong></a><p>Ці посібники описують поточну реалізацію. Результати перевірки та існуючі прогалини задокументовані окремо. <a href="../verification/">Що було протестовано →</a></p></footer>
 </main>
 <aside class="toc" aria-label="На цій сторінці"><p class="nav-label">На цій сторінці</p><a href="#access-model">Модель доступу</a><a href="#panel-content-and-exports">Вміст панелі та експорт даних</a><a href="#secrets-at-rest">Секрети в стані спокою</a><a href="#proxies-and-network-routes">Проксі-сервери та маршрути мережі</a><a href="#sign-in-and-session-imports">Вхід та імпорт сеансів</a><a href="#logs-and-transport">Журнали та передача даних</a><a href="#integrity-limits">Обмеження щодо цілісності</a><a href="#if-you-suspect-a-problem">Якщо ви підозрюєте наявність проблеми</a></aside>

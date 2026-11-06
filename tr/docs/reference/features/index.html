@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../../">Belgeler</a> <span aria-hidden="true">/</span> <a href="../">Referans</a> <span aria-hidden="true">/</span> <span aria-current="page">Özellikler ve sınırlamalar</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Neler test edildi →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Bu sayfanın bazı bölümleri hâlâ İngilizce&#x27;dir: İngilizce orijinal metin, çevrildikten sonra değiştirilmiştir.</p><p class="eyebrow">Referans / Topla</p><h1>Özellikler ve sınırlamalar</h1><p class="guide-outcome">TgWitness’in mevcut toplama modeli, çoklu hesap iş akışları, dışa aktarımlar ve operasyonel sınırları.</p><div class="wiki-body"><p>TgWitness, bağlı hesapların erişebildiği Telegram sohbetlerini korur,
+<article class="guide-content"><p class="eyebrow">Referans / Topla</p><h1>Özellikler ve sınırlamalar</h1><p class="guide-outcome">TgWitness’in mevcut toplama modeli, çoklu hesap iş akışları, dışa aktarımlar ve operasyonel sınırları.</p><div class="wiki-body"><p>TgWitness, bağlı hesapların erişebildiği Telegram sohbetlerini korur,
 gözlemlenen değişiklikleri kaydeder ve doğrulanabilir dışa aktarımlar hazırlar. Bu kılavuzda
 toplama modeli, mevcut iş akışları ve bunların sınırları açıklanmaktadır.</p>
 <h2 id="standalone-application">Bağımsız uygulama<a class="anchor" href="#standalone-application" aria-label="Bu bölüme bağlantı">#</a></h2>
@@ -177,13 +177,13 @@ ayrı güncelleme ayarlarından bağımsız olarak gömülü meta verileri koruy
 </tr>
 <tr>
 <td>Toplayıcı süreci</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>Başlatma/durdurma, kalp atışı, hatalar, ayarlar, kapsam ve imzalı çalıştırma makbuzu</td>
+<td>Yerel envanter; GitHub ve TDX&#x27;e <a href="../evidence/#verification-scope">bağımsız ortam kontrolleri</a> eklendi</td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>Arayüz, kaynak olayda belirtilen hesabı adlandırır ve gözlemlenen
+adları ve kullanıcı adlarını korur. Olayda fail belirtilmediğinde, rapor bu alanı boş bırakır.</p>
 <h2 id="capacity-and-telegram-limits">Kapasite ve Telegram sınırları<a class="anchor" href="#capacity-and-telegram-limits" aria-label="Bu bölüme bağlantı">#</a></h2>
 <p>Garantili kaliteyle izlenebilecek sohbet sayısı konusunda evrensel bir rakam yoktur.
 Kapasite, saniye başına en yoğun olay sayısı, eklerin hacmi ve boyutları, ek

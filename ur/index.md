@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/
 
 [اوپن سورس ／ v0.9.1](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/)
 
-Export Telegram chats，preserve their history，and share a signed archive others can verify．
+ٹیلیگرام چیٹس کو برآمد کریں، ان کی تاریخ کو محفوظ رکھیں، اور ایک دستخط شدہ آرکائیو شیئر کریں جسے دوسرے تصدیق کر سکتے ہیں۔
 
 [ڈیمو کھولیں](https://phishdestroy.github.io/TgWitness/demo/?lang=ur)[کے لیے سیٹ اپ گائیڈ](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=ur)
 
 جعلی ڈیٹا، Telegram لاگ اِن کی ضرورت نہیں۔
 
- [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/ur/docs/reference/account-export/) [GitHub Actions سے محفوظ کریں （ابتدائی نسخہ）](https://phishdestroy.github.io/TgWitness/ur/docs/capture/) [S3 آف سائٹ کاپی： سیٹ اپ اور بازیابی](https://phishdestroy.github.io/TgWitness/ur/#s3)
+ [اکاؤنٹ یا منتخب چیٹس برآمد کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/account-export/) [GitHub Actions سے محفوظ کریں （ابتدائی نسخہ）](https://phishdestroy.github.io/TgWitness/ur/docs/capture/) [S3 آف سائٹ کاپی： سیٹ اپ اور بازیابی](https://phishdestroy.github.io/TgWitness/ur/#s3)
 
 ایک پیغام، وقت کے پار＃0042
 

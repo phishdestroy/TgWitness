@@ -144,10 +144,35 @@ read-receipt blocking in the API collector．</p>
 <li>اس کا پروفائل ایک <code>source.profile</code> ریکارڈ کے طور پر: بوٹ کی تفصیل اور کمانڈز، صارف، گروپ یا چینل کا &#x27;about&#x27; متن، ارکان، منسلک چیٹ اور دعوت نامہ کا لنک جب ٹیلیگرام ایک واپس کرے؛</li>
 <li>اس کے تازہ ترین دکھائی دینے والے پیغامات (1,000 تک) ایک ہسٹری سنپ شاٹ کے طور پر محفوظ کیے جاتے ہیں جس کی نشانی <code>new_chat</code> ہے: یہ ٹیم چیٹ کے اُن ابتدائی پیغامات کی نشاندہی کرتا ہے جن میں ابھی شمولیت اختیار کی گئی ہے، یا وہ پیغامات جو کسی بوٹ نے اس سے پہلے بھیجے تھے جب تک چیٹ کا مشاہدہ نہ کیا گیا ہو۔ پہلے ہی لائیو محفوظ شدہ پیغامات دہرائے نہیں جاتے۔</li>
 </ul>
-<p>جب موڈ آن کیا جاتا ہے تو فہرست میں پہلے سے موجود چیٹس بغیر سنپ شاٹس کے شامل ہو جاتی ہیں۔
-ایک فلڈ ویٹ (FloodWait) اس عمل کو روک دیتا ہے اور بعد میں دوبارہ شروع کر دیتا ہے؛ ناکامیوں کو ریکارڈ کیا جاتا ہے اور چیٹ کی لائیو ریکارڈنگ جاری رہتی ہے۔
-- <strong>درخواست پر پروفائلز۔ چیٹس → پروفائل → &#x27;پروفائل محفوظ کریں&#x27; اب</strong> کسی بھی ذریعہ کے موجودہ پروفائل کو محفوظ کر لیتا ہے؛ سب سے نیا پروفائل پیغامات کے اوپر دکھایا جاتا ہے۔
-- <strong>پوشیدہ۔</strong> دوسری ٹیلیگرام ایپ میں دبائے گئے ان لائن (کال بیک) بٹن، وہ پاپ اپ یا لنک جس کے ساتھ بوٹ ایسے دبانے کا جواب دیتا ہے، اور دوسری ایپ میں استعمال ہونے والی دعوت کے لنکس TgWitness تک نہیں پہنچتے۔ بوٹ بعد میں جو بھی بھیجتا یا ترمیم کرتا ہے وہ ریکارڈ ہو جاتا ہے۔</p>
+<p>Chats already in the list when the mode is switched on are added without snapshots.
+A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
+recording of the chat continues.
+- <strong>Profiles on request.</strong> <strong>Chats → Profile → Save profile now</strong> saves the current profile
+of any source; the newest one is shown above the messages.
+- <strong>Chat state snapshots (preview).</strong> State outside the message stream changes without a
+message: unpinning every message leaves no message-level trace, an administrator loses
+rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled
+source is read periodically and saved as a signed <code>chat.state</code> record: title, usernames,
+description, member and administrator counts, linked chat, slow mode, pinned message IDs
+(up to 100), administrators with their rights and titles, and gifts shown on channels and
+user profiles (up to 100). Each record lists the differences from the previous snapshot:
+changed fields with before and after, pinned messages added or removed, administrators and
+gifts added, changed or no longer listed. Telegram does not say who changed anything or
+when between snapshots.
+- A part Telegram refuses (for example the administrator list of a channel for a member
+    who is not an administrator) is named in <code>errors</code>; its earlier value is kept and listed
+    in <code>carried_forward</code>, never reported as removed.
+- A record whose only changes are counts, and a check that found no change, refer to the
+    last full state with <code>state_seq</code> and cumulative <code>state_overrides</code>. A full state is written at
+    least every seven days and whenever anything other than a count changes.
+- <code>parts_complete</code> marks capped lists．Additions require a complete earlier list，
+    removals require a complete current list，and explicit empty values record clearing．
+- <strong>Parameters → Chat state</strong> sets the interval (12 hours by default, 0 turns snapshots
+    off), the pause between sources, which parts are read, and whether checks that found no
+    change are recorded. A FloodWait pauses snapshots and they resume afterwards.
+- <strong>Not visible.</strong> Inline (callback) buttons pressed in another Telegram app, the popup or
+link a bot answers such a press with, and invite links used in another app do not reach
+TgWitness. What the bot sends or edits afterwards is recorded.</p>
 </li>
 </ul>
 <h3 id="act-from-the-panel">پینل سے عمل کریں<a class="anchor" href="#act-from-the-panel" aria-label="اس حصے کا لنک">#</a></h3>
@@ -247,8 +272,9 @@ read-receipt blocking in the API collector．</p>
 <p><strong>جرنل</strong> چیکس ایونٹ چین اور دستخطات کو دکھائی گئی حد کے ذریعے <strong>تصدیق کرتا</strong> ہے۔
 اس کا نتیجہ ورک اسپیس تبدیل ہونے پر صاف ہو جاتا ہے، اور پینل چیک کے بعد شامل کیے گئے
 نئے ریکارڈز کی نشاندہی کرتا ہے۔ زپ ایکسپورٹ بھی جمع شدہ میڈیا کی تصدیق کرتا ہے۔</p>
-<p>ایک درست دستخط امانت کو معتبر کلید کے حوالے سے قائم کرتا ہے، نہ کہ ٹیلیگرام کے ماخذ یا سچائی پر مبنی مواد کے حوالے سے۔ فنگر پرنٹس اور چیک پوائنٹس کو آزادانہ طور پر برقرار رکھیں۔ اعتماد اور ترسیل کی ضروریات کے لیے <a href="../evidence/">ثبوت کا ماڈل</a>، <a href="../operations/">روزانہ کے آپریشنز</a>، اور
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">لائیو قبولیت کا طریقہ کار</a> دیکھیں۔</p></div></article>
+<p>Retain fingerprints and checkpoints independently．See the
+<a href="../evidence/#verification-scope">verification scope</a> for acquisition checks in each mode，
+and <a href="../operations/">daily operations</a> for routine collection．</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">اس صفحے کو GitHub پر ترمیم کریں ↗</a><a class="next-guide" href="../history/"><span>اگلا قدم</span><strong>ماخذ کی تاریخ لوڈ کریں ←</strong></a><p>یہ رہنما موجودہ نفاذ کو بیان کرتے ہیں۔ توثیق کے نتائج اور باقی ماندہ خلائیں علیحدہ طور پر دستاویزی شکل میں درج ہیں۔ <a href="../verification/">کیا جانچا گیا ہے ←</a></p></footer>
 </main>
 <aside class="toc" aria-label="اس صفحے پر"><p class="nav-label">اس صفحے پر</p><a href="#from-login-to-a-journal">لاگ ان سے جرنل تک</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">مشاہدے کا دائرہ: منتخب چیٹس، ایک فولڈر یا پورا اکاؤنٹ</a><a href="#scope-and-event-selection">دائرہ کار اور واقعات کا انتخاب</a><a href="#own-actions">اپنے اعمال</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">تحقیقی موڈ: ٹیموں میں شمولیت اور بوٹس سے بات چیت</a><a href="#recheck-tiers">دوبارہ چیک کی سطحیں</a><a href="#message-history-and-attribution">پیغامات کی تاریخ اور منسوبیت</a><a href="#history-snapshots">تاریخ کے سنپ شاٹس</a><a href="#attachment-handling">منسلکات کا انتظام</a><a href="#pause-lock-disconnect-and-restart">وقف کریں، لاک کریں، منقطع کریں، اور دوبارہ شروع کریں</a><a href="#account-isolation-and-verification">اکاؤنٹ کی علیحدگی اور تصدیق</a></aside>

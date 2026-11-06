@@ -32,10 +32,10 @@
 <nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Accueil</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Référence</a> <span aria-hidden="true">/</span> <span aria-current="page">Sécurité et traitement des données</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Ce qui a été testé →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Rechercher dans la documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Essayez « proxy », « chaîne de hachage », « jeton » ou « témoin »…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Recherche claire" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Saisissez un mot pour effectuer une recherche dans les guides et la documentation de référence. La recherche s&#x27;effectue directement dans votre navigateur.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Certaines parties de cette page sont encore en anglais : le texte original en anglais a été modifié après sa traduction.</p><p class="eyebrow">Référence / Sécurité et projet</p><h1>Sécurité et traitement des données</h1><p class="guide-outcome">Modèle de menace, modèle d’accès, données confidentielles au repos, exposition du réseau, importation de sessions et procédure de signalement d’une vulnérabilité.</p><div class="wiki-body"><p>This page describes access，storage and network protection in a local or server workspace．
-For collection on a GitHub runner or in an Intel TDX confidential VM，see the
-<a href="../evidence/#verification-scope">verification modes</a>，which add checks of the collection environment．
-Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．</p>
+<article class="guide-content"><p class="eyebrow">Référence / Sécurité et projet</p><h1>Sécurité et traitement des données</h1><p class="guide-outcome">Modèle de menace, modèle d’accès, données confidentielles au repos, exposition du réseau, importation de sessions et procédure de signalement d’une vulnérabilité.</p><div class="wiki-body"><p>Cette page décrit l’accès, le stockage et la protection du réseau dans un espace de travail local ou sur serveur.
+Pour la collecte sur un GitHub Runner ou dans une machine virtuelle confidentielle Intel TDX, consultez les modes
+<a href="../evidence/#verification-scope">de vérification</a>, qui ajoutent des contrôles de l’environnement de collecte.
+Les connexions de compte, les notifications, les horodatages, les copies hors site et les témoins disposent de leurs propres paramètres de routage.</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -61,8 +61,8 @@ Account connections，notifications，timestamps，off-site copies and witnesses
 <td>Chaîne de hachages SHA-256 et signature Ed25519 sur chaque enregistrement</td>
 </tr>
 <tr>
-<td>Local trust boundary</td>
-<td>The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary</td>
+<td>Limite de confiance locale</td>
+<td>L'administrateur de l'hôte contrôle l'espace de travail et sa clé de signature ; des points de contrôle indépendants conservent une limite de journal antérieure.</td>
 </tr>
 </tbody>
 </table></div>
@@ -102,22 +102,22 @@ fournies sous forme de pièces jointes binaires. Les exportations au format JSON
 les métadonnées sources collectées, les identifiants et, éventuellement, du contenu personnel ou sensible.
 Des hachages d’accès à Telegram et des références de fichiers peuvent apparaître dans les métadonnées sources brutes.</p>
 <h2 id="secrets-at-rest">Secrets au repos<a class="anchor" href="#secrets-at-rest" aria-label="Lien vers cette section">#</a></h2>
-<p>Telegram API credentials，the session and signing key are encrypted with Fernet．
-For local messages and media，encryption is provided by the host's disk or volume；
-the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP，
-and off-site copies use AES-256-GCM．</p>
-<p>The vault key defaults to the protected data directory．Use an external master-key file
-below to store it separately．On Unix，new private-key files use mode 0600 and new data
-directories use 0700；on Windows，set the directory ACL for the service account and
-authorized administrators．Existing directory permissions are retained．</p>
+<p>Les identifiants de l'API Telegram, la session et la clé de signature sont chiffrés à l'aide de Fernet.
+Pour les messages et les médias locaux, le chiffrement est assuré par le disque ou le volume de l'hôte ;
+l'espace de travail stocke des fichiers ordinaires. Les exportations peuvent utiliser un fichier ZIP AES-256 protégé par mot de passe,
+et les copies hors site utilisent le chiffrement AES-256-GCM.</p>
+<p>La clé du coffre-fort est par défaut le répertoire de données protégées. Utilisez un fichier de clé principale externe
+ci-dessous pour la stocker séparément. Sous Unix, les nouveaux fichiers de clé privée utilisent le mode 0600 et les nouveaux répertoires de données
+utilisent le mode 0700 ; sous Windows, définissez les droits d'accès (ACL) du répertoire pour le compte de service et
+les administrateurs autorisés. Les droits d'accès existants du répertoire sont conservés.</p>
 <h3 id="external-master-key">Clé principale externe<a class="anchor" href="#external-master-key" aria-label="Lien vers cette section">#</a></h3>
-<p>For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random
-master key. HKDF-SHA256 and a separate random salt derive a different Fernet key
-for each workspace. vault.external.json must be retained for recovery. Missing or
-wrong master keys fail closed. Existing local vaults are not silently migrated.
-The panel displays the selected key-storage mode．Disk encryption protects the local
-message and media files in either mode；see
-<a href="../connection/">connection and data protection</a> for setup details．</p>
+<p>Pour un nouveau répertoire de données, TGWITNESS_VAULT_KEY_FILE peut fournir une
+clé maîtresse aléatoire externe. HKDF-SHA256 et un sel aléatoire distinct génèrent une clé Fernet différente
+pour chaque espace de travail. Le fichier vault.external.json doit être conservé à des fins de restauration. Si les clés maîtresses sont manquantes ou
+erronées, l’opération échoue. Les coffres-forts locaux existants ne sont pas migrés automatiquement.
+Le panneau affiche le mode de stockage des clés sélectionné. Le chiffrement du disque protège les
+fichiers de messages et multimédias locaux dans les deux modes ; voir «
+<a href="../connection/">Connexion et protection des données</a> » pour plus de détails sur la configuration.</p>
 <h2 id="proxies-and-network-routes">Proxys et chemins de réseau<a class="anchor" href="#proxies-and-network-routes" aria-label="Lien vers cette section">#</a></h2>
 <p>La configuration du proxy est chiffrée dans le coffre-fort. Les mots de passe et les secrets MTProxy ne sont
 ni renvoyés par l’API ni consignés dans les enregistrements de preuves. Chaque espace de travail choisit
@@ -159,19 +159,19 @@ La journalisation des accès à l’application est désactivée. Ne configurez 
 pour enregistrer les en-têtes d’autorisation ou le corps des requêtes. Le protocole HTTP transmet les jetons et les identifiants de connexion
 en clair : utilisez HTTPS ou un tunnel SSH dès que vous quittez localhost.</p>
 <h2 id="integrity-limits">Limites d’intégrité<a class="anchor" href="#integrity-limits" aria-label="Lien vers cette section">#</a></h2>
-<p>Local verification checks record signatures，the hash chain，attachments and the export manifest．
-The administrator holds the local signing key and can create another signed journal；
-an independently retained checkpoint detects replacement of the prefix it covers．
-Keep the key fingerprint and checkpoints with the recipient or an independent witness．</p>
-<p>For independently checked collection，choose <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">GitHub Actions capture</a>
-or <a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">Intel TDX deployment</a>．
-Their verifiers check workflow provenance or hardware measurements in addition to archive integrity．
-Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies；
-the <a href="../evidence/#verification-scope">evidence format</a> describes the checks for each mode．</p>
+<p>Des contrôles de vérification locaux vérifient les signatures des enregistrements, la chaîne de hachages, les pièces jointes et le manifeste d'exportation.
+L'administrateur détient la clé de signature locale et peut créer un autre journal signé ;
+un point de contrôle conservé de manière indépendante détecte tout remplacement du préfixe qu'il couvre.
+Conservez l'empreinte digitale de la clé et les points de contrôle auprès du destinataire ou d'un témoin indépendant.</p>
+<p>Pour une collecte vérifiée de manière indépendante, choisissez <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">la capture</a> <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md">via GitHub Actions</a>
+ou <a href="../high-assurance/#confidential-vm-on-phala-cloud-intel-tdx">le déploiement via Intel TDX</a>.
+Leurs vérificateurs contrôlent la provenance du flux de travail ou les mesures matérielles, en plus de l’intégrité des archives.
+Des horodatages facultatifs et des copies chiffrées hors site fournissent des repères temporels et des copies récupérables ;
+le <a href="../evidence/#verification-scope">format des preuves</a> décrit les vérifications pour chaque mode.</p>
 <h2 id="if-you-suspect-a-problem">Si vous soupçonnez un problème<a class="anchor" href="#if-you-suspect-a-problem" aria-label="Lien vers cette section">#</a></h2>
-<p>Preserve the original data directory and use a separate copy for analysis．
-Report the affected version，operation and reproducible steps through the
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">security policy</a>，keeping account data and credentials private．</p></div></article>
+<p>Conservez le répertoire de données d&#x27;origine et utilisez une copie distincte pour l&#x27;analyse.
+Signalez la version concernée, le fonctionnement et les étapes permettant de reproduire le problème via la politique
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">de sécurité,</a> en veillant à préserver la confidentialité des données de compte et des identifiants.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/SECURITY-MODEL.md">Modifier cette page sur GitHub ↗</a><a class="next-guide" href="../architecture/"><span>Étape suivante</span><strong>Architecture →</strong></a><p>Ces guides décrivent la mise en œuvre actuelle. Les résultats de validation et les lacunes restantes sont documentés séparément. <a href="../verification/">Ce qui a été testé →</a></p></footer>
 </main>
 <aside class="toc" aria-label="Sur cette page"><p class="nav-label">Sur cette page</p><a href="#access-model">Modèle d'accès</a><a href="#panel-content-and-exports">Contenu des panneaux et exportations</a><a href="#secrets-at-rest">Secrets au repos</a><a href="#proxies-and-network-routes">Proxys et chemins de réseau</a><a href="#sign-in-and-session-imports">Connexion et importation de sessions</a><a href="#logs-and-transport">Journaux et transport</a><a href="#integrity-limits">Limites d’intégrité</a><a href="#if-you-suspect-a-problem">Si vous soupçonnez un problème</a></aside>

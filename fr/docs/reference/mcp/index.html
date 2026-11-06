@@ -178,14 +178,34 @@ nom d'hôte stable pour les configurations client enregistrées.</p>
 <td>Messages par heure UTC et jour de la semaine, jours de pointe, proportions de messages modifiés et supprimés, expéditeurs, domaines et <code>@handles</code>, avec couverture (<a href="../cli/#activity-statistics">détails</a>)</td>
 </tr>
 <tr>
+<td><code>get_messages_by_date</code></td>
+<td>Messages enregistrés d’une journée civile dans un fuseau horaire IANA nommé (<code>Europe/Kyiv</code>, <code>UTC</code>), selon l&#x27;heure indiquée par Telegram ; <code>from_utc</code> et <code>until_utc</code> indiquer le jour calculé, heure d’été comprise</td>
+</tr>
+<tr>
+<td><code>get_pinned_messages</code></td>
+<td>Messages épinglés dans le dernier instantané de l'état de la conversation avec leurs versions enregistrées, ainsi que les notifications d'épinglage et de désépinglage observées en temps réel</td>
+</tr>
+<tr>
+<td><code>get_chat_stats</code></td>
+<td>Nombre approximatif d’enregistrements sauvegardés pour une conversation ou toutes les conversations concernées, première et dernière observation, et <code>gap_summary</code>; à utiliser avant une lecture volumineuse</td>
+</tr>
+<tr>
+<td><code>get_topics</code></td>
+<td>Sujets du forum issus des messages du service de sauvegarde des sujets : historique des titres, sujets fermés ou masqués, nombre de messages sauvegardés</td>
+</tr>
+<tr>
+<td><code>get_media</code></td>
+<td>Une image conservée sous forme d’aperçu JPEG redimensionné (36 Ko maximum), renvoyée en tant qu’image accompagnée de son SHA-256 et de l’ <code>media.saved</code> enregistrement ; le fichier est d’abord vérifié par rapport à son hachage enregistré, les autres fichiers ne renvoient que des métadonnées</td>
+</tr>
+<tr>
 <td><code>export_messages</code></td>
 <td>Ligne de commande uniquement, non sélectionné par défaut : envoie en continu les observations enregistrées au format JSON Lines (<a href="../cli/#export">détails</a>) ; non disponible via MCP</td>
 </tr>
 </tbody>
 </table></div>
-<p><code>tools/list</code> ne renvoie que les outils accordés à cette connexion. Les appels vers d'autres
-outils sont refusés. Les outils de contexte de groupe, d'épisode, de terminologie et de chaîne de réponses ne sont
-pas proposés dans cette version ; leur backend distinct de pack de contexte n'est pas inclus.</p>
+<p>Chaque outil est en lecture seule (<code>readOnlyHint</code>) et définit un schéma de sortie ; les champs ne figurant pas dans ce schéma sont renvoyés tels quels. <code>tools/list</code> Ne renvoie que les outils autorisés pour cette connexion. Les appels vers d’autres
+outils sont refusés. Les outils de contexte de groupe, d’épisode, de terminologie et de chaîne de réponses ne sont
+pas disponibles dans cette version ; leur backend de pack de contexte distinct n’est pas inclus.</p>
 <p>Chaque lecture vérifie le jeton, l'outil et la portée de l'espace de travail ou de la discussion, y compris une fois le
 traitement de la base de données terminé. Les limites sont de 60 requêtes par minute, 50 enregistrements par page,
 64 KiB par résultat et un délai maximal d'archive de huit secondes. Un appel MCP expiré

@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../../">홈</a> <span aria-hidden="true">/</span> <a href="../../">문서</a> <span aria-hidden="true">/</span> <a href="../">참고 문헌</a> <span aria-hidden="true">/</span> <span aria-current="page">기능 및 제한 사항</span></nav>
 <p class="verification-shortcut"><a href="../verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">이 페이지의 일부 내용은 여전히 영어로 되어 있습니다. 번역 후 원본 영어 문구가 변경되었기 때문입니다.</p><p class="eyebrow">참고 문헌 / 수집</p><h1>기능 및 제한 사항</h1><p class="guide-outcome">TgWitness의 현재 수집 모델, 다중 계정 워크플로우, 내보내기 기능 및 운영 범위.</p><div class="wiki-body"><p>TgWitness는 연결된 계정에서 접근 가능한 텔레그램 대화를 보존하고,
+<article class="guide-content"><p class="eyebrow">참고 문헌 / 수집</p><h1>기능 및 제한 사항</h1><p class="guide-outcome">TgWitness의 현재 수집 모델, 다중 계정 워크플로우, 내보내기 기능 및 운영 범위.</p><div class="wiki-body"><p>TgWitness는 연결된 계정에서 접근 가능한 텔레그램 대화를 보존하고,
 관찰된 변경 사항을 기록하며, 검증 가능한 내보내기 파일을 생성합니다. 이 참조 문서는
 수집 모델, 현재 워크플로우 및 그 범위를 설명합니다.</p>
 <h2 id="standalone-application">독립형 애플리케이션<a class="anchor" href="#standalone-application" aria-label="이 섹션으로 이동">#</a></h2>
@@ -177,13 +177,13 @@ MTProto와 통신하기 위해 사용하는 파이썬 라이브러리입니다.<
 </tr>
 <tr>
 <td>수집 프로세스</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>시작/중지, 하트비트, 오류, 설정, 범위 및 서명된 실행 영수증</td>
+<td>로컬 인벤토리; GitHub 및 TDX에 <a href="../evidence/#verification-scope">독립적인 환경 점검 기능</a> 추가</td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>이 인터페이스는 소스 이벤트에 제공된 계정 이름을 명시하며, 관찰된
+이름과 사용자 이름을 그대로 유지합니다. 이벤트에 행위자가 누락된 경우, 보고서는 해당 필드를 미지정 상태로 둡니다.</p>
 <h2 id="capacity-and-telegram-limits">용량 및 텔레그램 제한 사항<a class="anchor" href="#capacity-and-telegram-limits" aria-label="이 섹션으로 이동">#</a></h2>
 <p>품질 보장이 가능한 채팅 모니터링에 대한 보편적인 수치는 없습니다.
 처리 용량은 초당 최대 이벤트 수, 첨부 파일의 양과 크기, 추가

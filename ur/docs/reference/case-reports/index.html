@@ -153,6 +153,40 @@ HTML آف لائن کام کرتا ہے، لائٹ اور ڈارک تھیمز ک
 <p>ایک خالی وقفے کا مطلب ہے کہ کوئی مشاہدات شامل نہیں ہیں؛ خلا کے لیے کوریج دیکھیں۔ یہ چارٹس محفوظ شدہ سرگرمیوں کی وضاحت کرتے ہیں۔ نامعلوم بھیجنے والے ایک الگ زمرہ ہیں، اور ہر چیک کی رپورٹ الگ سے کی جاتی ہے۔</p>
 <p>جب شامل کیا جائے، تو <code>analytics.json</code> کو آرکائیو کے دستخط شدہ فائل ہیشز کے ذریعے محفوظ کیا جاتا ہے۔
 جرنل <code>report.json</code> اسی منتخب شدہ مجموعے کو ضم کرتا ہے۔ دستخط کی تصدیق تبدیل شدہ بائٹس کا پتہ لگاتی ہے۔ اعداد و شمار کی جانچ کے لیے، جرنل کے مجموعات کو <code>report_analytics.Analytics</code> اور <code>selected</code> کے ساتھ دوبارہ حساب کریں، یا <code>snapshot_analytics.collect</code> اور <code>project</code> کے ساتھ مجموعات کا اسنیپ شاٹ لیں۔</p>
+<h3 id="anomaly-indicators">Anomaly indicators<a class="anchor" href="#anomaly-indicators" aria-label="اس حصے کا لنک">#</a></h3>
+<p><strong>Preview.</strong> Evidence reports add an <strong>Anomaly indicators</strong> section computed by
+registered processors (<code>tgwitness/metrics/</code>, one file per metric). The report names every
+processor that ran with its version, and prints its method under its table, so the
+computation can be repeated from <code>events.jsonl</code> with <code>tgwitness.metrics.run</code>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Processor</th>
+<th>یہ کیا دکھاتا ہے</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>first_time_posters_over_time</code> v1</td>
+<td>First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up．</td>
+</tr>
+<tr>
+<td><code>service_vs_message_ratio</code> v1</td>
+<td>Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number.</td>
+</tr>
+<tr>
+<td><code>join_leave_per_month</code> v1</td>
+<td>Joins, departures and removals or bans per month, one per person, chat, change and day.</td>
+</tr>
+<tr>
+<td><code>pinned_per_month</code> v1</td>
+<td>Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Parameters → Report metrics</strong> selects processors and the number of displayed rows，
+including in filtered reports．Daily and monthly tables show recent rows，service-share
+tables rank chats by saved message count．Totals cover every row．</p>
 <p>ماخذ کے چیک آؤٹ سے، ایک ہی فرضی جریدے سے اوپر درج تمام آٹھ ڈیزائنز تیار کریں:</p>
 <pre><code class="language-sh">python tools/build_report_styles.py --output test-results/report-styles</code></pre>
 <p>نتائج کے طور پر بننے والی <code>index.html</code> کو کھولیں تاکہ مکمل HTML رپورٹس، دستخط شدہ PDFs اور ZIPs کا موازنہ کیا جا سکے۔ ہر ڈیزائن ایک ہی ماخذ جرنل استعمال کرتا ہے۔ ہر چلانے کے لیے ایک نئی آؤٹ پٹ ڈائریکٹری استعمال کریں تاکہ پہلے سے دستخط شدہ مثالیں محفوظ رہیں۔</p>
@@ -209,8 +243,7 @@ HTML آف لائن کام کرتا ہے، لائٹ اور ڈارک تھیمز ک
 <li>اصل ZIP فائلوں اور ان کے ہیشز کو محفوظ رکھیں۔ ہر ہولڈر، منتقلی، تاریخ اور مقصد کو ریکارڈ کریں۔ منسوب کردہ آپریٹر کے بیانات اور کیس نوٹس کو بھی برقرار رکھیں۔</li>
 <li>خفیہ VMs کے لیے اقتباس، چیلنج، انٹیل سرٹیفکیٹ چین، پیمائشیں، عین ماخذ اور کلید کے استعمال کی شرائط کو محفوظ کریں اور آزادانہ طور پر تصدیق کریں۔ جائزہ شدہ آرتفیکٹس کے ساتھ تصدیق کے نتیجے کو محفوظ رکھیں۔</li>
 </ol>
-<p>See <a href="../evidence/#verification-scope">verification scope</a> for the checks of acquisition，
-archive integrity，time and collection coverage in each mode．</p>
+<p>حصول، آرکائیو سالمیت، وقت اور ہر موڈ میں کوریج کے چیکس کے لیے <a href="../evidence/#verification-scope">توثیق کے دائرہ کار کو</a> دیکھیں۔</p>
 <h2 id="recipient-review">موصول کنندہ کا جائزہ<a class="anchor" href="#recipient-review" aria-label="اس حصے کا لنک">#</a></h2>
 <p>TgWitness کی معتبر تنصیب اور آزادانہ طور پر حاصل کردہ فنگر پرنٹ استعمال کریں:</p>
 <pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256

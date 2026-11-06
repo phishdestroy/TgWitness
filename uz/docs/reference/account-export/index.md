@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 Manba bog'lanishi mustaqil ravishda tanlangan o'zgartirish har bir zarur elementni tanlaganini yoki har bir identifikatsiya qiluvchi ma'lumotni olib tashlaganini isbotlamaydi. Asl oddiy matn dalil sifatida ilova qilinmagan. Ushbu hukm uchun yangi ko'rib chiqish zarur.
 
-## Sharing and hosted capture
+## Ulashish va mezbonlik qilingan yozib olish
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+Qabul qiluvchi uchun kerakli xabarlar va fayllarni tanlang, to'liq ulashish nusxasini ko'rib chiqing va manbani alohida saqlang. Yetkazilgan ZIP-ning hashini qayd eting, shunda qabul qiluvchi aynan shu nusxani aniqlab, tasdiqlay oladi. Psevdonimlash tanlangan identifikatorlarni almashtiradi; qo'shimcha matn va asl fayllar ko'rib chiqishning bir qismi bo'lib qoladi.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope)．
+GitHub Actions Takeout yoki oddiy API orqali to'liq hisob va tanlangan suhbat eksportlarini, shuningdek bitta suhbat voqealar jurnalini qo'llab-quvvatlaydi. [Joylashtirilgan yozib](https://phishdestroy.github.io/TgWitness/docs/capture/) olish bo'yicha[qo'llanma](https://phishdestroy.github.io/TgWitness/docs/capture/) sozlamalarni tekshirish va 120 daqiqalik cheklovni tushuntiradi. Joylashtirilgan yozib olishdan olingan ulashish nusxasini tekshirish uchun uning manba xeshini asl arxiv bilan solishtiring va arxivning tasdiqnomasini [tegishli](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) [rejimga](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) [xos](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope)tekshiruvlar orqali tasdiqlang.
 
 [Dalil formati](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/) · [Holat hisobotlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-reports/)

@@ -84,6 +84,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-
 
 `analytics.json` 파일이 포함된 경우, 아카이브의 서명된 파일 해시에 의해 보호됩니다. 저널 `report.json`에는 선택된 동일한 집계값이 포함됩니다. 서명 검증 을 통해 변경된 바이트를 감지할 수 있습니다. 수치를 확인하려면 `report_analytics.Analytics` 및 `selected`을 사용하여 저널 집계값을 재계산하거나, `snapshot_analytics.collect` 및 `project`을 사용하여 스냅샷 집계값을 재계산하십시오.
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | 이 도구가 제공하는 기능 |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+
 소스 체크아웃을 바탕으로, 동일한 가상의 저널에서 위에 나열된 8가지 디자인을 모두 제작하십시오:
 
 ```
@@ -134,7 +147,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 원본 ZIP 파일과 해당 해시 값을 그대로 유지하십시오. 각 보유자, 전송 내역, 날짜 및 목적을 기록하십시오. 해당 운영자의 진술 및 사건 메모도 함께 보존하십시오.
 5. 기밀 VM의 경우, 견적, 검증 요청, Intel 인증서 체인, 측정값, 정확한 출처 및 키 처리 조건을 보존하고 독립적으로 검증하십시오. 검증 결과를 검토된 아티팩트와 함께 보관하십시오.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+각 모드별 수집, 아카이브 무결성, 시간 및 수집 범위 검사에 대한 내용은 [검증 범위를](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) 참조하십시오.
 
 ## 수신자 검토
 

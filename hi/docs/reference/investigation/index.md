@@ -101,7 +101,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/inves
 | वही सहेजी गई फ़ाइल | मीडिया रसीदें #151 और #209 पूरी हो गईं | संरक्षित बाइट्स के लिए पूर्ण SHA-256 मान मेल खाते हैं। |
 | चैनल श्रेय | #101 और #188 | प्रामाणिक प्रेषक के बिना चैनल पोस्ट को उपयोगकर्ता 71001 से न जोड़ें |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+अटैचमेंट हैश और उनके संबंधित संदेश संदर्भों की तुलना करें, और उन रिकॉर्ड में दिए गए टेलीग्राम आईडी के अनुसार खाता टाइमलाइनों को समूहित रखें।
 
 टीम के कार्य-संबंधी नोट्स [Case Board](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/) पर रखें: उन रिकॉर्ड्स को बुकमार्क करें जिन पर आप निर्भर करते हैं, जैसे #146, #188 और #205, सटीक गंतव्य स्ट्रिंग को हाइलाइट करें, और दो रिकॉर्ड्स के बीच या एक समय सीमा में हर रिकॉर्ड की गई क्रिया का एक स्लाइस सहेजें। नोट्स और स्थितियाँ अपनी हस्ताक्षरित इतिहास में टीम की समीक्षा को बनाए रखते हैं, जो स्रोत अवलोकनों से अलग रूप से पहचानी जा सकती है।
 
@@ -161,6 +161,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | बॉट-संचालित ऑर्डर/भुगतान विवाद | प्रविष्टि घोषणा → सहेजे गए लिंक पूर्वावलोकन → बॉट प्रारंभ पैरामीटर → संदेश और कीबोर्ड संस्करण → पैनल कॉलबैक रसीदें → निजी/समूह फॉलो-अप | निगरानी की गई ऑफर/प्रतिक्रिया समयरेखा और सत्यापित स्रोत; केवल एक भुगतान लिंक भुगतान को साबित नहीं करता |
 | घटना के बाद हटाए गए संदेश | सभी प्रभावित चैट्स → सहेजे गए मूल संदेश/संपादन → हटाने या पुनः जाँच पर अनुपस्थित होने के परिणाम → संरक्षित मीडिया → कवरेज और अन्य खाता दृष्टिकोण | संरक्षित संस्करण और स्पष्ट अज्ञात अंतराल; कोई काल्पनिक हटाने वाला कर्ता नहीं |
-| एक प्रतिभागी चैट्स में नाम बदलता है | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| एक प्रतिभागी चैट्स में नाम बदलता है | संख्यात्मक प्रेषक आईडी → नाम/उपयोगकर्ता नाम इतिहास → प्रतिक्रियाएँ → अन्य देखी गई चैट्स → उद्धृत गंतव्य/फ़ाइलें | टेलीग्राम खाते की गतिविधि का समयरेखा, जिसमें इसके स्रोत रिकॉर्ड के लिंक शामिल हैं |
 
 [संग्रह संदर्भ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/) · [प्रोफ़ाइल सत्यापन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#people-profiles) · [साक्ष्य हस्तांतरण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#investigation-handoff) · [सत्यापन पूरा](https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/)

@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/
 
 [קוד פתוח ／ v0.9.1](https://phishdestroy.github.io/TgWitness/he/docs/reference/changelog/)
 
-Export Telegram chats，preserve their history，and share a signed archive others can verify．
+ייצא צ＇אטים מ－Telegram， שמור את ההיסטוריה שלהם ושתף ארכיון חתום שאחרים יוכלו לאמת．
 
 [הדגמה פתוחה](https://phishdestroy.github.io/TgWitness/demo/?lang=he)[מדריך התקנה](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=he)
 
 נתונים מזויפים， בלי התחברות ל－Telegram．
 
- [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/he/docs/reference/account-export/) [איסוף באמצעות GitHub Actions （גרסה מקדימה）](https://phishdestroy.github.io/TgWitness/he/docs/capture/) [עותק חיצוני ב－S3： הגדרה ושחזור](https://phishdestroy.github.io/TgWitness/he/#s3)
+ [ייצוא חשבון או צ＇אטים נבחרים](https://phishdestroy.github.io/TgWitness/he/docs/reference/account-export/) [איסוף באמצעות GitHub Actions （גרסה מקדימה）](https://phishdestroy.github.io/TgWitness/he/docs/capture/) [עותק חיצוני ב－S3： הגדרה ושחזור](https://phishdestroy.github.io/TgWitness/he/#s3)
 
 הודעה， לאורך הזמן ＃0042
 

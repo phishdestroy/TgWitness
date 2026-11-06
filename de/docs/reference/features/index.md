@@ -74,9 +74,9 @@ Unter „Quellen“ stehen pro Konto Schaltflächen für neue Nachrichten, Bearb
 | Administratoraktionen | Relevante bereitgestellte Updates und eine Momentaufnahme des Admin-Logs in den Exporten von Kanal-/Supergruppen-Chats | Der Export liest das Protokoll, sofern es für das exportierende Administratorkonto verfügbar ist; eine kontinuierliche Abfrage des Administratorprotokolls ist nicht Teil dieses Prozesses. |
 | Anhang | Beschreibung der Originalversion, heruntergeladene Bytes/SHA-256 und Ergebnisse der Versuche | Eine gelöschte Datei ist möglicherweise nicht wiederherstellbar; die neueste Version wird nicht ersetzt. |
 | Geschichte | Eindeutige Momentaufnahme der aktuell sichtbaren Nachrichten | Es werden nicht alle Bearbeitungen oder gelöschten Inhalte rekonstruiert. |
-| Erfassungsprozess | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope) |
+| Erfassungsprozess | Start/Stopp, Heartbeat, Fehler, Einstellungen, Umfang und signierte Ausführungsbestätigung | Lokales Inventar; GitHub und TDX fügen [unabhängige Umgebungsprüfungen](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope) hinzu |
 
-The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
+Die Benutzeroberfläche benennt das im Quellereignis angegebene Konto und behält beobachtete Namen und Benutzernamen bei. Wenn im Ereignis der Akteur fehlt, bleibt dieses Feld im Bericht unbestimmt.
 
 ## Kapazität und Telegram-Beschränkungen
 

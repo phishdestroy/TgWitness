@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="ガイド"><a href="../../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../../">ドキュメント</a> <span aria-hidden="true">/</span> <a href="../">参考文献</a> <span aria-hidden="true">/</span> <span aria-current="page">調査モード</span></nav>
 <p class="verification-shortcut"><a href="../verification/">テスト済みの内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">このページの一部は依然として英語のままです。翻訳後に英語の原文が変更されたためです。</p><p class="eyebrow">参考文献 / 収集</p><h1>調査モード</h1><p class="guide-outcome">チャンネル、グループ、プライベートチャット、ボットにまたがるアカウント全体の調査について、調査範囲の設定から検証済みのケースパッケージの作成までを網羅しています。</p><div class="wiki-body"><p>チャンネル、グループ、プライベートチャット、ボットを横断して、事案を
+<article class="guide-content"><p class="eyebrow">参考文献 / 収集</p><h1>調査モード</h1><p class="guide-outcome">チャンネル、グループ、プライベートチャット、ボットにまたがるアカウント全体の調査について、調査範囲の設定から検証済みのケースパッケージの作成までを網羅しています。</p><div class="wiki-body"><p>チャンネル、グループ、プライベートチャット、ボットを横断して、事案を
 初期の取得段階から、引用されたタイムライン、検証可能な引き継ぎに至るまで追跡できます。インタラクティブなウェブサイト
 版は <code>/docs/cases/</code> にあります。<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">プレビューの手順をご覧ください</a>。</p>
 <h2 id="worked-case-a-destination-changes-across-four-conversations">事例：4つの会話にわたって目的地が変更されたケース<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="このセクションへのリンク">#</a></h2>
@@ -198,8 +198,8 @@
 </tr>
 </tbody>
 </table></div>
-<p>Compare attachment hashes and their associated message references，and keep account
-timelines grouped by the Telegram IDs supplied in those records．</p>
+<p>添付ファイルのハッシュ値とそれに関連するメッセージ参照を照合し、
+それらの記録に指定されたTelegram IDごとにグループ化されたアカウントのタイムラインを維持する。</p>
 <p><a href="../case-board/">Case </a>Boardにはチームの作業メモを残してください。#146、#188、#205など、
 参照する記録にはブックマークを付け、目的の文字列を正確にハイライトし、
 2つの記録間または特定の時間範囲内のすべての記録されたアクションの一部を保存してください。 メモ
@@ -347,8 +347,8 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 </tr>
 <tr>
 <td>ある参加者が、チャットごとに名前を変えています</td>
-<td>Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files</td>
-<td>A Telegram-account activity timeline with links to its source records</td>
+<td>送信者ID（数値） → 名前／ユーザー名の履歴 → 返信 → その他の観測されたチャット → 引用された宛先／ファイル</td>
+<td>Telegramアカウントのアクティビティのタイムラインと、そのソースレコードへのリンク</td>
 </tr>
 </tbody>
 </table></div>

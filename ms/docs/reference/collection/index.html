@@ -148,9 +148,35 @@ Mesej keluar yang dilangkau akan memajukan kedudukan semakan semula supaya ia ti
 <li>profilnya sebagai rekod <code>source.profile</code>: bot description and commands, teks tentang pengguna, kumpulan atau saluran, ahli, chat yang dipautkan dan pautan jemputan apabila Telegram memulangkan satu;</li>
 <li>mesej terkini yang kelihatan (sehingga 1,000) sebagai potret sejarah yang ditandakan <code>new_chat</code>: mesej-mesej awal dalam sembang pasukan yang baru disertai, atau apa yang dikatakan oleh bot sebelum pemerhatian menyedari sembang itu. Mesej yang telah disimpan secara langsung tidak diulang.</li>
 </ul>
-<p>Perbualan yang sudah ada dalam senarai apabila mod diaktifkan akan ditambah tanpa imej skrin. FloodWait akan menangguhkan kerja ini dan ia akan disambung semula selepas itu; kegagalan direkodkan dan rakaman langsung perbualan diteruskan.
-- <strong>Profil atas permintaan. Perbualan → Profil → Simpan profil kini</strong> menyimpan profil semasa mana-mana sumber; yang terbaru dipaparkan di atas mesej.
-- <strong>Tidak kelihatan.</strong> Butang dalam talian (callback) yang ditekan di aplikasi Telegram lain, pop timbul atau pautan yang dijawab oleh bot, dan pautan jemputan yang digunakan di aplikasi lain tidak sampai ke TgWitness. Apa yang dihantar atau disunting oleh bot selepas itu akan direkodkan.</p>
+<p>Chats already in the list when the mode is switched on are added without snapshots.
+A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
+recording of the chat continues.
+- <strong>Profiles on request.</strong> <strong>Chats → Profile → Save profile now</strong> saves the current profile
+of any source; the newest one is shown above the messages.
+- <strong>Chat state snapshots (preview).</strong> State outside the message stream changes without a
+message: unpinning every message leaves no message-level trace, an administrator loses
+rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled
+source is read periodically and saved as a signed <code>chat.state</code> record: title, usernames,
+description, member and administrator counts, linked chat, slow mode, pinned message IDs
+(up to 100), administrators with their rights and titles, and gifts shown on channels and
+user profiles (up to 100). Each record lists the differences from the previous snapshot:
+changed fields with before and after, pinned messages added or removed, administrators and
+gifts added, changed or no longer listed. Telegram does not say who changed anything or
+when between snapshots.
+- A part Telegram refuses (for example the administrator list of a channel for a member
+    who is not an administrator) is named in <code>errors</code>; its earlier value is kept and listed
+    in <code>carried_forward</code>, never reported as removed.
+- A record whose only changes are counts, and a check that found no change, refer to the
+    last full state with <code>state_seq</code> and cumulative <code>state_overrides</code>. A full state is written at
+    least every seven days and whenever anything other than a count changes.
+- <code>parts_complete</code> marks capped lists．Additions require a complete earlier list，
+    removals require a complete current list，and explicit empty values record clearing．
+- <strong>Parameters → Chat state</strong> sets the interval (12 hours by default, 0 turns snapshots
+    off), the pause between sources, which parts are read, and whether checks that found no
+    change are recorded. A FloodWait pauses snapshots and they resume afterwards.
+- <strong>Not visible.</strong> Inline (callback) buttons pressed in another Telegram app, the popup or
+link a bot answers such a press with, and invite links used in another app do not reach
+TgWitness. What the bot sends or edits afterwards is recorded.</p>
 </li>
 </ul>
 <h3 id="act-from-the-panel">Tindakan daripada panel<a class="anchor" href="#act-from-the-panel" aria-label="Pautan ke bahagian ini">#</a></h3>
@@ -250,8 +276,9 @@ Hanya klien aktifnya boleh menyumbang pemerhatian secara langsung. Klien yang di
 Akaun yang berbeza boleh memerhati kumpulan yang sama, tetapi jurnal mereka kekal berasingan.</p>
 <p>Setiap peristiwa merangkumi hash sebelumnya dan tandatangan Ed25519. Eksport merangkumi keseluruhan jurnal ruang kerja melalui nombor urutan tetap. Penapis panel tidak menapis eksport; pengumpulan mungkin diteruskan melebihi sempadannya semasa ia sedang disediakan.</p>
 <p><strong>Semak jurnal</strong> memeriksa rantaian peristiwa dan tandatangan melalui sempadan yang dipaparkan. Keputusannya dipadamkan apabila ruang kerja berubah, dan panel mengenal pasti rekod baharu yang ditambah selepas pemeriksaan. Eksport ZIP juga mengesahkan media yang dikumpul.</p>
-<p>Tandatangan sah menetapkan integriti berbanding kunci yang dipercayai, bukan asal Telegram atau kandungan yang benar. Simpan cap jari dan titik pemeriksaan secara berasingan. Lihat <a href="../evidence/">model bukti</a>, <a href="../operations/">operasi harian</a>, dan
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">prosedur penerimaan langsung</a> untuk keperluan kepercayaan dan penghantaran.</p></div></article>
+<p>Retain fingerprints and checkpoints independently．See the
+<a href="../evidence/#verification-scope">verification scope</a> for acquisition checks in each mode，
+and <a href="../operations/">daily operations</a> for routine collection．</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">Sunting halaman ini di GitHub ↗</a><a class="next-guide" href="../history/"><span>Langkah seterusnya</span><strong>Muat sejarah sumber →</strong></a><p>Panduan ini menerangkan pelaksanaan semasa. Keputusan pengesahan dan jurang yang masih ada didokumenkan secara berasingan. <a href="../verification/">Apa yang telah diuji →</a></p></footer>
 </main>
 <aside class="toc" aria-label="Pada halaman ini"><p class="nav-label">Pada halaman ini</p><a href="#from-login-to-a-journal">Dari log masuk ke jurnal</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Skop pemerhatian: sembang terpilih, satu folder atau keseluruhan akaun</a><a href="#scope-and-event-selection">Skop dan pemilihan acara</a><a href="#own-actions">Tindakan sendiri</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">Mod siasatan: menyertai pasukan dan bercakap dengan bot</a><a href="#recheck-tiers">Semak semula peringkat</a><a href="#message-history-and-attribution">Sejarah mesej dan atribusi</a><a href="#history-snapshots">Snapshot sejarah</a><a href="#attachment-handling">Pengendalian lampiran</a><a href="#pause-lock-disconnect-and-restart">Pause, kunci, putuskan sambungan, dan mulakan semula</a><a href="#account-isolation-and-verification">Pengasingan dan pengesahan akaun</a></aside>

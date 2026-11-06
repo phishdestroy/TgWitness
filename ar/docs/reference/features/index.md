@@ -74,9 +74,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/featu
 | إجراءات المسؤول | التحديثات ذات الصلة التي تم تسليمها ولقطة من سجل المسؤول في تصديرات الدردشات الخاصة بالقنوات/المجموعات الفائقة | تقوم عملية التصدير بقراءة السجل عندما يكون متاحًا لحساب المسؤول القائم بالتصدير؛ أما الاستقصاء المستمر لسجل المسؤول فهو خارج نطاق هذا المسار |
 | مرفق | وصف النسخة الأصلية، وعدد البايتات التي تم تنزيلها/SHA-256 ونتائج المحاولات | قد يكون الملف المفقود غير قابل للاستعادة؛ ولا يتم استبدال أحدث إصدار |
 | التاريخ | لقطة واضحة للرسائل المرئية الحالية | لا يعيد بناء جميع التعديلات أو المحتوى المحذوف |
-| عملية التجميع | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope) |
+| عملية التجميع | التشغيل/الإيقاف، إشارة الحياة، الأخطاء، الإعدادات، النطاق وإيصال التشغيل الموقّع | الجرد المحلي؛ يضيف GitHub وTDX [فحوصات مستقلة للبيئة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
+تسمي الواجهة الحساب المذكور في الحدث المصدر وتحتفظ بالأسماء وأسماء المستخدمين التي تمت ملاحظتها. وعندما لا يذكر الحدث الفاعل، يترك التقرير هذا الحقل غير محدد.
 
 ## السعة وحدود Telegram
 

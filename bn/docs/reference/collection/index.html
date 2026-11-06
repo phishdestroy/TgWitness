@@ -144,10 +144,35 @@ read-receipt blocking in the API collector．</p>
 <li><code>source.profile</code> রেকর্ড হিসেবে এর প্রোফাইল: বটের বিবরণ ও কমান্ড, ব্যবহারকারী, গ্রুপ বা চ্যানেলের &#x27;অব্দি&#x27; টেক্সট, সদস্যরা, লিঙ্ককৃত চ্যাট এবং আমন্ত্রণ লিঙ্ক যখন টেলিগ্রাম একটি ফেরত দেয়;</li>
 <li>এর সর্বশেষ দৃশ্যমান বার্তাগুলি (১,০০০ পর্যন্ত) একটি ইতিহাসের স্ন্যাপশট হিসেবে <code>new_chat</code> ট্যাগ করা হয়েছে: সদ্য যোগদানকৃত একটি টিম চ্যাটের পূর্ববর্তী বার্তাগুলি, অথবা চ্যাটটি লক্ষ্য করার আগে একটি বট যা বলেছিল। ইতিমধ্যেই লাইভ সংরক্ষিত বার্তাগুলি পুনরাবৃত্তি করা হয় না।</li>
 </ul>
-<p>মোড চালু করার সময় তালিকায় ইতিমধ্যেই থাকা চ্যাটগুলো স্ন্যাপশট ছাড়াই যোগ করা হয়।
-একটি FloodWait এই কাজটি বিরতি দেয় এবং পরে পুনরায় শুরু করে; ব্যর্থতাগুলো রেকর্ড করা হয় এবং চ্যাটের লাইভ রেকর্ডিং অব্যাহত থাকে।
-- <strong>অনুরোধে প্রোফাইল। চ্যাট → প্রোফাইল → &#x27;প্রোফাইল সংরক্ষণ করুন&#x27; এখন</strong> যেকোনো উৎসের বর্তমান প্রোফাইল সংরক্ষণ করে; সর্বশেষটি বার্তাগুলোর উপরে দেখানো হয়।
-- <strong>অদৃশ্য।</strong> অন্য কোনো টেলিগ্রাম অ্যাপে ইনলাইন (কলব্যাক) বোতাম চাপলে, একটি পপআপ বা লিঙ্ক যার মাধ্যমে বট সেই চাপের উত্তর দেয়, এবং অন্য অ্যাপে ব্যবহৃত ইনভাইট লিঙ্কগুলো TgWitness-এ পৌঁছায় না। বট পরে যা পাঠায় বা সম্পাদনা করে তা রেকর্ড করা হয়।</p>
+<p>Chats already in the list when the mode is switched on are added without snapshots.
+A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
+recording of the chat continues.
+- <strong>Profiles on request.</strong> <strong>Chats → Profile → Save profile now</strong> saves the current profile
+of any source; the newest one is shown above the messages.
+- <strong>Chat state snapshots (preview).</strong> State outside the message stream changes without a
+message: unpinning every message leaves no message-level trace, an administrator loses
+rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled
+source is read periodically and saved as a signed <code>chat.state</code> record: title, usernames,
+description, member and administrator counts, linked chat, slow mode, pinned message IDs
+(up to 100), administrators with their rights and titles, and gifts shown on channels and
+user profiles (up to 100). Each record lists the differences from the previous snapshot:
+changed fields with before and after, pinned messages added or removed, administrators and
+gifts added, changed or no longer listed. Telegram does not say who changed anything or
+when between snapshots.
+- A part Telegram refuses (for example the administrator list of a channel for a member
+    who is not an administrator) is named in <code>errors</code>; its earlier value is kept and listed
+    in <code>carried_forward</code>, never reported as removed.
+- A record whose only changes are counts, and a check that found no change, refer to the
+    last full state with <code>state_seq</code> and cumulative <code>state_overrides</code>. A full state is written at
+    least every seven days and whenever anything other than a count changes.
+- <code>parts_complete</code> marks capped lists．Additions require a complete earlier list，
+    removals require a complete current list，and explicit empty values record clearing．
+- <strong>Parameters → Chat state</strong> sets the interval (12 hours by default, 0 turns snapshots
+    off), the pause between sources, which parts are read, and whether checks that found no
+    change are recorded. A FloodWait pauses snapshots and they resume afterwards.
+- <strong>Not visible.</strong> Inline (callback) buttons pressed in another Telegram app, the popup or
+link a bot answers such a press with, and invite links used in another app do not reach
+TgWitness. What the bot sends or edits afterwards is recorded.</p>
 </li>
 </ul>
 <h3 id="act-from-the-panel">প্যানেল থেকে ক্রিয়া সম্পাদন করুন<a class="anchor" href="#act-from-the-panel" aria-label="এই বিভাগের লিঙ্ক">#</a></h3>
@@ -242,8 +267,9 @@ read-receipt blocking in the API collector．</p>
 বিভিন্ন অ্যাকাউন্ট একই গ্রুপ পর্যবেক্ষণ করতে পারে, তবে তাদের জার্নালগুলো আলাদা থাকে।</p>
 <p>প্রতিটি ইভেন্টে পূর্ববর্তী হ্যাশ এবং একটি Ed25519 স্বাক্ষর অন্তর্ভুক্ত থাকে। রপ্তানি একটি স্থির সিকোয়েন্স নম্বর ব্যবহার করে পুরো ওয়ার্কস্পেস জার্নালকে আচ্ছাদন করে। প্যানেল ফিল্টার রপ্তানিকে ফিল্টার করে না; সংগ্রহ প্রস্তুত হওয়ার সময় এর সীমার বাইরেও চলতে পারে।</p>
 <p><strong>Verify journal</strong> প্রদর্শিত সীমার মাধ্যমে ইভেন্ট চেইন এবং স্বাক্ষরগুলি যাচাই করে। যখন কর্মক্ষেত্র পরিবর্তিত হয়, এর ফলাফল মুছে যায়, এবং প্যানেল যাচাইয়ের পরে যোগ করা নতুন রেকর্ডগুলি চিহ্নিত করে। ZIP রপ্তানিও সংগৃহীত মিডিয়া যাচাই করে।</p>
-<p>একটি বৈধ স্বাক্ষর বিশ্বাসযোগ্য কী-এর তুলনায় অখণ্ডতা প্রতিষ্ঠা করে, টেলিগ্রামের উৎস বা সত্যনিষ্ঠ বিষয়বস্তু নয়। ফিঙ্গারপ্রিন্ট এবং চেকপয়েন্টগুলো স্বতন্ত্রভাবে সংরক্ষণ করুন। বিশ্বাস ও ডেলিভারি সংক্রান্ত প্রয়োজনীয়তার জন্য <a href="../evidence/">প্রমাণ মডেল</a>, <a href="../operations/">দৈনন্দিন কার্যক্রম</a> এবং
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">লাইভ গ্রহণ প্রক্রিয়া</a> দেখুন।</p></div></article>
+<p>Retain fingerprints and checkpoints independently．See the
+<a href="../evidence/#verification-scope">verification scope</a> for acquisition checks in each mode，
+and <a href="../operations/">daily operations</a> for routine collection．</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">GitHub-এ এই পৃষ্ঠা সম্পাদনা করুন ↗</a><a class="next-guide" href="../history/"><span>পরবর্তী ধাপ</span><strong>লোড সোর্সের ইতিহাস →</strong></a><p>এই গাইডগুলো বর্তমান বাস্তবায়ন বর্ণনা করে। যাচাইকরণ ফলাফল এবং অবশিষ্ট ফাঁকগুলো আলাদাভাবে নথিভুক্ত করা হয়েছে। <a href="../verification/">কি পরীক্ষা করা হয়েছে →</a></p></footer>
 </main>
 <aside class="toc" aria-label="এই পৃষ্ঠায়"><p class="nav-label">এই পৃষ্ঠায়</p><a href="#from-login-to-a-journal">লগইন থেকে একটি জার্নাল পর্যন্ত</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">পর্যবেক্ষণের পরিধি: নির্বাচিত চ্যাট, একটি ফোল্ডার বা পুরো অ্যাকাউন্ট</a><a href="#scope-and-event-selection">পরিসর এবং ইভেন্ট নির্বাচন</a><a href="#own-actions">নিজের কর্মকাণ্ড</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">তদন্ত মোড: দলগুলোতে যোগদান এবং বটদের সাথে কথা বলা</a><a href="#recheck-tiers">পুনরায় স্তরগুলি পরীক্ষা করুন</a><a href="#message-history-and-attribution">বার্তার ইতিহাস এবং উৎসনির্ধারণ</a><a href="#history-snapshots">ইতিহাসের সংক্ষিপ্ত ঝলক</a><a href="#attachment-handling">সংযুক্তি পরিচালনা</a><a href="#pause-lock-disconnect-and-restart">থামাও, লক করো, বিচ্ছিন্ন করো এবং পুনরায় চালু করো</a><a href="#account-isolation-and-verification">অ্যাকাউন্ট বিচ্ছিন্নকরণ এবং যাচাইকরণ</a></aside>

@@ -194,14 +194,35 @@ read-receipt blocking in the API collector．</p>
     刚加入的团队聊天中的早期消息，或观察者注意到该聊天之前
     机器人所说的话。已实时保存的消息不会重复记录。</li>
 </ul>
-<p>启用该模式时，列表中已存在的聊天记录将被添加，但不包含快照。
-FloodWait 会暂停此操作，并在之后恢复；失败情况会被记录，而
-聊天的实时记录将继续进行。
-- <strong>按需保存配置文件。在“聊天”→“配置文件”中选择“保存配置文件”可</strong>保存当前
-任何来源的配置文件；最新配置文件将显示在消息上方。
-- <strong>不可见。</strong>在其他 Telegram 应用中点击的内联（回调）按钮、机器人对此类点击作出的弹出窗口或
-链接，以及在其他应用中使用的邀请链接，均不会传至
-TgWitness。但机器人随后发送或编辑的内容会被记录下来。</p>
+<p>Chats already in the list when the mode is switched on are added without snapshots.
+A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
+recording of the chat continues.
+- <strong>Profiles on request.</strong> <strong>Chats → Profile → Save profile now</strong> saves the current profile
+of any source; the newest one is shown above the messages.
+- <strong>Chat state snapshots (preview).</strong> State outside the message stream changes without a
+message: unpinning every message leaves no message-level trace, an administrator loses
+rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled
+source is read periodically and saved as a signed <code>chat.state</code> record: title, usernames,
+description, member and administrator counts, linked chat, slow mode, pinned message IDs
+(up to 100), administrators with their rights and titles, and gifts shown on channels and
+user profiles (up to 100). Each record lists the differences from the previous snapshot:
+changed fields with before and after, pinned messages added or removed, administrators and
+gifts added, changed or no longer listed. Telegram does not say who changed anything or
+when between snapshots.
+- A part Telegram refuses (for example the administrator list of a channel for a member
+    who is not an administrator) is named in <code>errors</code>; its earlier value is kept and listed
+    in <code>carried_forward</code>, never reported as removed.
+- A record whose only changes are counts, and a check that found no change, refer to the
+    last full state with <code>state_seq</code> and cumulative <code>state_overrides</code>. A full state is written at
+    least every seven days and whenever anything other than a count changes.
+- <code>parts_complete</code> marks capped lists．Additions require a complete earlier list，
+    removals require a complete current list，and explicit empty values record clearing．
+- <strong>Parameters → Chat state</strong> sets the interval (12 hours by default, 0 turns snapshots
+    off), the pause between sources, which parts are read, and whether checks that found no
+    change are recorded. A FloodWait pauses snapshots and they resume afterwards.
+- <strong>Not visible.</strong> Inline (callback) buttons pressed in another Telegram app, the popup or
+link a bot answers such a press with, and invite links used in another app do not reach
+TgWitness. What the bot sends or edits afterwards is recorded.</p>
 </li>
 </ul>
 <h3 id="act-from-the-panel">面板操作指南<a class="anchor" href="#act-from-the-panel" aria-label="本节链接">#</a></h3>
@@ -357,10 +378,9 @@ Telegram向该账户显示的计数和身份信息。</p>
 <p><strong>“验证日志”</strong>功能会通过显示的
 边界检查事件链和签名。当工作区发生变化时，其结果将被清空，面板会标识
 检查后新增的记录。ZIP导出功能还会对收集的媒体文件进行验证。</p>
-<p>有效的签名是基于可信密钥来验证数据的完整性，而非基于 Telegram
-的来源或内容的真实性。请独立保留指纹和检查点。有关信任和交付要求，请参阅
-<a href="../evidence/">证据模型</a>、<a href="../operations/">日常操作</a>以及
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">实时接纳流程</a>。</p></div></article>
+<p>Retain fingerprints and checkpoints independently．See the
+<a href="../evidence/#verification-scope">verification scope</a> for acquisition checks in each mode，
+and <a href="../operations/">daily operations</a> for routine collection．</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../history/"><span>下一步</span><strong>加载源代码历史记录 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
 </main>
 <aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#from-login-to-a-journal">从登录到日志</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">监控范围：选定的聊天群组、某个文件夹或整个账户</a><a href="#scope-and-event-selection">范围与事件选择</a><a href="#own-actions">自主操作</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">调查模式：加入团队并与机器人对话</a><a href="#recheck-tiers">重新核对分级</a><a href="#message-history-and-attribution">消息历史记录与来源归属</a><a href="#history-snapshots">历史快照</a><a href="#attachment-handling">附件处理</a><a href="#pause-lock-disconnect-and-restart">暂停、锁定、断开连接和重启</a><a href="#account-isolation-and-verification">账户隔离与验证</a></aside>

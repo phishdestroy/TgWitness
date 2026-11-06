@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="ガイド"><a href="../../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../../">ドキュメント</a> <span aria-hidden="true">/</span> <a href="../">参考文献</a> <span aria-hidden="true">/</span> <span aria-current="page">機能と制限事項</span></nav>
 <p class="verification-shortcut"><a href="../verification/">テスト済みの内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">このページの一部は依然として英語のままです。翻訳後に英語の原文が変更されたためです。</p><p class="eyebrow">参考文献 / 収集</p><h1>機能と制限事項</h1><p class="guide-outcome">TgWitnessの現在の収集モデル、マルチアカウントワークフロー、エクスポート機能、および運用上の制限事項。</p><div class="wiki-body"><p>TgWitnessは、接続されたアカウントからアクセス可能なTelegramの会話内容を保存し、
+<article class="guide-content"><p class="eyebrow">参考文献 / 収集</p><h1>機能と制限事項</h1><p class="guide-outcome">TgWitnessの現在の収集モデル、マルチアカウントワークフロー、エクスポート機能、および運用上の制限事項。</p><div class="wiki-body"><p>TgWitnessは、接続されたアカウントからアクセス可能なTelegramの会話内容を保存し、
 観測された変更を記録し、検証可能なエクスポートデータを生成します。このリファレンスでは、
 収集モデル、現在のワークフロー、およびその範囲について説明します。</p>
 <h2 id="standalone-application">スタンドアロンアプリケーション<a class="anchor" href="#standalone-application" aria-label="このセクションへのリンク">#</a></h2>
@@ -177,13 +177,13 @@ Witnessホストでの起動という3つのステップで構成されます。
 </tr>
 <tr>
 <td>コレクタープロセス</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>開始／停止、ハートビート、エラー、設定、スコープ、および署名付き実行受領証</td>
+<td>ローカルインベントリ；GitHubおよびTDXに<a href="../evidence/#verification-scope">独立した環境チェック</a>を追加</td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>このインターフェースは、ソースイベントで指定されたアカウント名を記載し、観測された
+名前およびユーザー名を保持します。イベントにアクターが記載されていない場合、レポートではそのフィールドは未指定のままとなります。</p>
 <h2 id="capacity-and-telegram-limits">容量とTelegramの制限<a class="anchor" href="#capacity-and-telegram-limits" aria-label="このセクションへのリンク">#</a></h2>
 <p>品質を保証して監視できるチャットの数は、一概には言えません。
 処理能力は、1秒あたりのピークイベント数、添付ファイルの量とサイズ、追加の

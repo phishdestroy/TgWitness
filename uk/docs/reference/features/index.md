@@ -74,9 +74,9 @@ TgWitness має власну процедуру встановлення, ка�
 | Дії адміністратора | Відповідні надані оновлення та знімок журналу адміністратора в експортованих даних чатів каналів/супергруп | Функція експорту зчитує журнал, якщо він доступний для облікового запису адміністратора, що здійснює експорт; постійне опитування журналу адміністратора не входить до цього процесу |
 | Вкладення | Опис оригінальної версії, завантажені байти/SHA-256 та результати спроб | Зниклий файл може виявитися неможливим для відновлення; остання версія не замінюється |
 | Історія | Чіткий знімок поточних видимих повідомлень | Не відтворює всі редагування або видалений вміст |
-| Процес збору даних | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) |
+| Процес збору даних | Запуск/зупинка, перевірка працездатності, помилки, налаштування, область дії та підписане підтвердження виконання | Локальний інвентар; GitHub та TDX додають [незалежні перевірки середовища](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
+Інтерфейс вказує обліковий запис, наданий у вихідній події, та зберігає спостережувані імена та імена користувачів. Якщо у події не вказано учасника, у звіті це поле залишається незаповненим.
 
 ## Ємність та обмеження Telegram
 

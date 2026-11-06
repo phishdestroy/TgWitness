@@ -219,6 +219,40 @@ Ledger &amp; margin ยังใช้กับภาพรวมบัญชี
 จะตรวจจับไบต์ที่เปลี่ยนแปลง เพื่อตรวจสอบตัวเลข ให้คำนวณข้อมูลรวมของ Journal ใหม่ด้วย
 <code>report_analytics.Analytics</code> และ <code>selected</code> หรือ
 คำนวณข้อมูลรวมของ snapshot ด้วย <code>snapshot_analytics.collect</code> และ <code>project</code></p>
+<h3 id="anomaly-indicators">Anomaly indicators<a class="anchor" href="#anomaly-indicators" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h3>
+<p><strong>Preview.</strong> Evidence reports add an <strong>Anomaly indicators</strong> section computed by
+registered processors (<code>tgwitness/metrics/</code>, one file per metric). The report names every
+processor that ran with its version, and prints its method under its table, so the
+computation can be repeated from <code>events.jsonl</code> with <code>tgwitness.metrics.run</code>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Processor</th>
+<th>สิ่งที่แสดง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>first_time_posters_over_time</code> v1</td>
+<td>First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up．</td>
+</tr>
+<tr>
+<td><code>service_vs_message_ratio</code> v1</td>
+<td>Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number.</td>
+</tr>
+<tr>
+<td><code>join_leave_per_month</code> v1</td>
+<td>Joins, departures and removals or bans per month, one per person, chat, change and day.</td>
+</tr>
+<tr>
+<td><code>pinned_per_month</code> v1</td>
+<td>Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Parameters → Report metrics</strong> selects processors and the number of displayed rows，
+including in filtered reports．Daily and monthly tables show recent rows，service-share
+tables rank chats by saved message count．Totals cover every row．</p>
 <p>จากแหล่งที่มาที่ตรวจสอบแล้ว ให้สร้างแบบทั้งแปดแบบที่กล่าวถึงข้างต้นจากนิตยสารสมมติเดียวกัน:</p>
 <pre><code class="language-sh">python tools/build_report_styles.py --output test-results/report-styles</code></pre>
 <p>เปิดไฟล์<code>index.html</code> ที่สร้างขึ้นเพื่อเปรียบเทียบรายงาน HTML แบบครบถ้วน, PDF ที่ลงนามแล้ว และ
@@ -304,8 +338,8 @@ Ledger &amp; margin ยังใช้กับภาพรวมบัญชี
     ห่วงโซ่ใบรับรอง Intel, การวัดค่า, แหล่งที่มาที่แม่นยำ และเงื่อนไขการจัดการกุญแจ
     เก็บผลการตรวจสอบการรับรองไว้พร้อมกับหลักฐานที่ได้รับการตรวจสอบแล้ว</li>
 </ol>
-<p>See <a href="../evidence/#verification-scope">verification scope</a> for the checks of acquisition，
-archive integrity，time and collection coverage in each mode．</p>
+<p>ดู<a href="../evidence/#verification-scope">ขอบเขตการตรวจสอบ</a>เพื่อทราบการตรวจสอบการเก็บข้อมูล,
+ความสมบูรณ์ของไฟล์เก็บถาวร, เวลา และขอบเขตการเก็บข้อมูลในแต่ละโหมด．</p>
 <h2 id="recipient-review">การตรวจสอบของผู้รับ<a class="anchor" href="#recipient-review" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <p>ใช้การติดตั้ง TgWitness ที่เชื่อถือได้และลายนิ้วมือ (fingerprint) ที่ได้รับมาอย่างอิสระ:</p>
 <pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256

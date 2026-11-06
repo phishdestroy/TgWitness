@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Các tính năng và giới hạn</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Những nội dung đã được kiểm thử →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Một số phần của trang này vẫn còn bằng tiếng Anh: bản gốc tiếng Anh đã được sửa đổi sau khi được dịch.</p><p class="eyebrow">Tham khảo / Thu thập</p><h1>Các tính năng và giới hạn</h1><p class="guide-outcome">Mô hình thu thập hiện tại, quy trình làm việc với nhiều tài khoản, tính năng xuất dữ liệu và các giới hạn vận hành của TgWitness.</p><div class="wiki-body"><p>TgWitness lưu trữ các cuộc trò chuyện trên Telegram mà các tài khoản được kết nối có thể truy cập,
+<article class="guide-content"><p class="eyebrow">Tham khảo / Thu thập</p><h1>Các tính năng và giới hạn</h1><p class="guide-outcome">Mô hình thu thập hiện tại, quy trình làm việc với nhiều tài khoản, tính năng xuất dữ liệu và các giới hạn vận hành của TgWitness.</p><div class="wiki-body"><p>TgWitness lưu trữ các cuộc trò chuyện trên Telegram mà các tài khoản được kết nối có thể truy cập,
 ghi lại các thay đổi được quan sát và chuẩn bị các tệp xuất có thể xác minh. Tài liệu tham khảo này mô tả
 mô hình thu thập, các quy trình làm việc hiện tại và phạm vi áp dụng của chúng.</p>
 <h2 id="standalone-application">Ứng dụng độc lập<a class="anchor" href="#standalone-application" aria-label="Liên kết đến phần này">#</a></h2>
@@ -177,13 +177,13 @@ các tùy chọn cập nhật riêng biệt. Hiện tại vẫn chưa có tùy c
 </tr>
 <tr>
 <td>Quy trình thu thập dữ liệu</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>Bắt đầu／dừng, tín hiệu hoạt động, lỗi, cài đặt, phạm vi và biên nhận chạy có chữ ký</td>
+<td>Kiểm tra kho lưu trữ cục bộ; GitHub và TDX bổ sung <a href="../evidence/#verification-scope">các kiểm tra môi trường độc lập</a></td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>Giao diện sẽ hiển thị tên tài khoản được cung cấp trong sự kiện nguồn và giữ nguyên
+các tên và tên người dùng được quan sát. Khi sự kiện không chỉ định tác nhân, báo cáo sẽ để trống trường đó.</p>
 <h2 id="capacity-and-telegram-limits">Dung lượng và các giới hạn của Telegram<a class="anchor" href="#capacity-and-telegram-limits" aria-label="Liên kết đến phần này">#</a></h2>
 <p>Không có con số chung nào về số lượng cuộc trò chuyện có thể được giám sát với chất lượng được đảm bảo.
 Khả năng xử lý phụ thuộc vào số sự kiện đỉnh điểm mỗi giây, khối lượng và kích thước tệp đính kèm, các

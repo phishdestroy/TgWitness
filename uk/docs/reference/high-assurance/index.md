@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-
 
 Захищений сервер, що працює цілодобово без вихідних, на Hetzner або Phala Cloud, шлюз DNS та перевірки, які може повторити третя сторона.
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+Розгортання з високим рівнем надійності додає незалежні перевірки середовища збору даних до верифікації архіву. Рецензент запитує записи про розгортання та доступ, що зберігаються у хмарного провайдера та Cloudflare, а розгортання Intel TDX додає апаратну атестацію середовища колектора.
 
 Звичайне використання локальних середовищ та Docker залишається без змін. Ніщо тут не працює, доки ви не розгорнете систему за допомогою `python -m tgwitness.cloud`, а колектор зчитує дані зі свого хоста лише тоді, коли розгортання встановлює `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ High-assurance deployment adds independent checks of the collection environment 
 | Ключ підпису було створено на цьому сервері | Ключ підписує повідомлення, в якому вказано ідентифікатор сервера провайдера та хеш отриманого ним файлу cloud-init | Collector, перевірений провайдером |
 | Журнал належить цьому ключу та серверу | Кожен процес, що запускається в доказі ZIP, містить показники хосту для цього сервера | Докази ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+Колектор фіксує стан SSH, сесії, історію входу та інформацію про завантаження у підписаних записах про запуск процесів та `host.state` записи. На звичайній віртуальній машині це локальні інвентарні записи, які рецензент порівнює з незалежними записами провайдера. Розгортання Intel TDX, описане нижче, додатково перевіряє вимірювання, що базуються на апаратному забезпеченні.
 
 ## Провайдери
 
@@ -269,8 +269,8 @@ DNS-шлюз охоплює системний резолвер. DNS через 
 
 Cloudflare не має доступу до шифрованих даних Telegram, інших пристроїв, пов’язаних з обліковим записом Telegram (список пристроїв у режимі «evidence mode» фіксує їх з боку Telegram) або гіпервізора провайдера.
 
-## Reading the deployment result
+## Перегляд результатів розгортання
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+Для звичайної віртуальної машини провайдер контролює інфраструктуру хоста, а локальний інвентар перевіряється разом із записами провайдера. Для Intel TDX верифікатор додатково перевіряє характеристики апаратного забезпечення, прив’язку колектора, композицію та вимірювання ОС. Ознайомтеся з окремими результатами, щоб дізнатися, які перевірки пройшли успішно або були недоступні.
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/uk/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+Історія налаштувань брандмауера залежить від провайдера; Linode зберігає версії правил. У [записі](https://phishdestroy.github.io/TgWitness/uk/docs/reference/verification/) [перевірки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/verification/) перелічено протестовані розгортання та решту активних перевірок, а [сфера перевірки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) пов’язує ці перевірки середовища з отриманням архіву та його цілісністю.

@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 Liên kết nguồn không tự nó chứng minh rằng quá trình chuyển đổi đã chọn tất cả các mục cần thiết hoặc loại bỏ tất cả các chi tiết nhận dạng. Văn bản gốc không được nhúng làm bằng chứng. Cần có một cuộc đánh giá mới để đưa ra phán đoán đó.
 
-## Sharing and hosted capture
+## Chia sẻ và lưu trữ dữ liệu ghi lại
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+Chọn các tin nhắn và tệp mà người nhận cần, xem xét bản sao chia sẻ đầy đủ và lưu giữ bản gốc riêng biệt. Ghi lại giá trị băm (hash) của tệp ZIP đã gửi để người nhận có thể xác định và xác minh chính xác bản sao đó. Quá trình ẩn danh hóa sẽ thay thế các thông tin nhận dạng đã chọn; văn bản và tệp gốc vẫn là một phần của quá trình xem xét.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope)．
+GitHub Actions hỗ trợ xuất toàn bộ tài khoản và các cuộc trò chuyện được chọn thông qua Takeout hoặc API thông thường, cùng với nhật ký sự kiện của một cuộc trò chuyện. Hướng dẫn [ghi](https://phishdestroy.github.io/TgWitness/docs/capture/) lại [trên máy chủ](https://phishdestroy.github.io/TgWitness/docs/capture/) giải thích cách xác minh cài đặt và giới hạn 120 phút. Để xác minh bản sao được chia sẻ từ bản ghi lại trên máy chủ, hãy so sánh băm nguồn của nó với bản lưu trữ gốc và xác minh chứng nhận của bản lưu trữ đó bằng các kiểm tra [cụ thể theo chế độ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope).
 
 [Định dạng bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/) · [Báo cáo trường hợp](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/)

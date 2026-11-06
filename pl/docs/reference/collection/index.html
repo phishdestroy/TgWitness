@@ -194,14 +194,35 @@ konto wymaga standardowego potwierdzenia.</p>
     wcześniejsze wiadomości z czatu zespołowego, do którego właśnie dołączył użytkownik, lub to, co powiedział bot, zanim obserwator
     zauważył czat. Wiadomości już zapisane na żywo nie są powtarzane.</li>
 </ul>
-<p>Czat, który znajdował się już na liście w momencie włączenia trybu, zostanie dodany bez zrzutów ekranu.
-Funkcja FloodWait wstrzymuje tę operację, a po jej zakończeniu wznawia ją; awarie są rejestrowane, a
-rejestrowanie czatu na żywo jest kontynuowane.
-- <strong>Profile na żądanie. Czat → Profil → Zapisz profil</strong> pozwala <strong>teraz</strong> zapisać bieżący profil
-dowolnego źródła; najnowszy profil jest wyświetlany nad wiadomościami.
-- <strong>Niewidoczne.</strong> Przyciski wbudowane (callback) naciśnięte w innej aplikacji Telegram, wyskakujące okienko lub
-link, którym bot odpowiada na takie naciśnięcie, a także linki zaproszeniowe używane w innej aplikacji nie docierają do
-TgWitness. To, co bot wysyła lub edytuje później, jest rejestrowane.</p>
+<p>Chats already in the list when the mode is switched on are added without snapshots.
+A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
+recording of the chat continues.
+- <strong>Profiles on request.</strong> <strong>Chats → Profile → Save profile now</strong> saves the current profile
+of any source; the newest one is shown above the messages.
+- <strong>Chat state snapshots (preview).</strong> State outside the message stream changes without a
+message: unpinning every message leaves no message-level trace, an administrator loses
+rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled
+source is read periodically and saved as a signed <code>chat.state</code> record: title, usernames,
+description, member and administrator counts, linked chat, slow mode, pinned message IDs
+(up to 100), administrators with their rights and titles, and gifts shown on channels and
+user profiles (up to 100). Each record lists the differences from the previous snapshot:
+changed fields with before and after, pinned messages added or removed, administrators and
+gifts added, changed or no longer listed. Telegram does not say who changed anything or
+when between snapshots.
+- A part Telegram refuses (for example the administrator list of a channel for a member
+    who is not an administrator) is named in <code>errors</code>; its earlier value is kept and listed
+    in <code>carried_forward</code>, never reported as removed.
+- A record whose only changes are counts, and a check that found no change, refer to the
+    last full state with <code>state_seq</code> and cumulative <code>state_overrides</code>. A full state is written at
+    least every seven days and whenever anything other than a count changes.
+- <code>parts_complete</code> marks capped lists．Additions require a complete earlier list，
+    removals require a complete current list，and explicit empty values record clearing．
+- <strong>Parameters → Chat state</strong> sets the interval (12 hours by default, 0 turns snapshots
+    off), the pause between sources, which parts are read, and whether checks that found no
+    change are recorded. A FloodWait pauses snapshots and they resume afterwards.
+- <strong>Not visible.</strong> Inline (callback) buttons pressed in another Telegram app, the popup or
+link a bot answers such a press with, and invite links used in another app do not reach
+TgWitness. What the bot sends or edits afterwards is recorded.</p>
 </li>
 </ul>
 <h3 id="act-from-the-panel">Działanie z poziomu panelu<a class="anchor" href="#act-from-the-panel" aria-label="Link do tej sekcji">#</a></h3>
@@ -358,10 +379,9 @@ eksportu; gromadzenie danych może trwać poza jego granicami w trakcie przygoto
 <p><strong>Dziennik weryfikacyjny</strong> sprawdza ciąg zdarzeń i podpisy w ramach wyświetlanego
 zakresu. Jego wynik jest kasowany w momencie zmiany obszaru roboczego, a panel identyfikuje
 nowe rekordy dodane po przeprowadzeniu kontroli. Eksport do formatu ZIP pozwala również zweryfikować zebrane pliki multimedialne.</p>
-<p>Ważny podpis potwierdza integralność w odniesieniu do zaufanego klucza, a nie do pochodzenia z serwisu Telegram
-ani prawdziwości treści. Należy niezależnie przechowywać odciski palców i punkty kontrolne. Proszę zapoznać się z
-<a href="../evidence/">modelem dowodowym</a>, <a href="../operations/">codziennymi operacjami</a> oraz
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">procedurą akceptacji na żywo</a> w celu zapoznania się z wymaganiami dotyczącymi zaufania i dostarczania danych.</p></div></article>
+<p>Retain fingerprints and checkpoints independently．See the
+<a href="../evidence/#verification-scope">verification scope</a> for acquisition checks in each mode，
+and <a href="../operations/">daily operations</a> for routine collection．</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">Edytuj tę stronę na GitHubie ↗</a><a class="next-guide" href="../history/"><span>Kolejny krok</span><strong>Wczytaj historię źródła →</strong></a><p>Niniejsze wytyczne opisują aktualną implementację. Wyniki walidacji oraz pozostałe luki zostały udokumentowane oddzielnie. <a href="../verification/">Co zostało przetestowane →</a></p></footer>
 </main>
 <aside class="toc" aria-label="Na tej stronie"><p class="nav-label">Na tej stronie</p><a href="#from-login-to-a-journal">Od logowania do dziennika</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Zakres monitorowania: wybrane czaty, folder lub całe konto</a><a href="#scope-and-event-selection">Zakres i wybór zdarzeń</a><a href="#own-actions">Własne działania</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">Tryb dochodzeniowy: dołączanie do zespołów i komunikacja z botami</a><a href="#recheck-tiers">Poziomy weryfikacji</a><a href="#message-history-and-attribution">Historia wiadomości i przypisanie autorstwa</a><a href="#history-snapshots">Migawki historyczne</a><a href="#attachment-handling">Obsługa załączników</a><a href="#pause-lock-disconnect-and-restart">Wstrzymanie, zablokowanie, rozłączenie i ponowne uruchomienie</a><a href="#account-isolation-and-verification">Izolacja i weryfikacja kont</a></aside>

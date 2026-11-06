@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ماخذ کے روابط خود بخود یہ ثابت نہیں کرتے کہ منتخب کردہ تبدیلی نے ہر ضروری آئٹم کو شامل کیا یا ہر شناختی تفصیل کو حذف کیا۔ اصل متن بطور ثبوت شامل نہیں کیا گیا۔ اس فیصلے کے لیے ایک نئے جائزے کی ضرورت ہے۔
 
-## Sharing and hosted capture
+## شیئرنگ اور ہوسٹڈ کیپچر
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+موصول کنندہ کے لیے مطلوبہ پیغامات اور فائلیں منتخب کریں، مکمل شیئرنگ کاپی کا جائزہ لیں، اور ماخذ کو الگ سے محفوظ رکھیں۔ ترسیل شدہ ZIP کا ہیش ریکارڈ کریں تاکہ موصول کنندہ اسی مخصوص کاپی کی شناخت اور تصدیق کر سکے۔ Pseudonymization منتخب شدہ شناختی نشانات کو تبدیل کر دیتا ہے؛ شامل کردہ متن اور اصل فائلیں جائزے کا حصہ رہتی ہیں۔
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope)．
+GitHub Actions مکمل اکاؤنٹ اور منتخب چیٹس کے Takeout یا معمول کے API کے ذریعے ایکسپورٹ کی حمایت کرتا ہے، نیز ایک چیٹ ایونٹ جرنل۔ [ہوسٹڈ کیپچر](https://phishdestroy.github.io/TgWitness/docs/capture/)گائیڈ ترتیبات کی تصدیق اور 120 منٹ کی حد کی وضاحت کرتا ہے۔ ہوسٹڈ کیپچر سے حاصل کردہ شیئرنگ کاپی کی تصدیق کے لیے، اس کے ماخذ ہیش کو اصل آرکائیو سے ملاپ کریں اور [مخصوص موڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) [کے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope)چیکس کے ذریعے اس آرکائیو کی شہادت کی تصدیق کریں۔
 
 [شواہد کا فارمیٹ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/) · [کیس رپورٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-reports/)

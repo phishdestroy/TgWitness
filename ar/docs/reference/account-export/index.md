@@ -85,10 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 لا يُثبت ربط المصدر بحد ذاته أن عملية التحويل قد اختارت كل عنصر مطلوب أو أزالت كل تفصيل مميز. لم يتم تضمين النص الأصلي العادي كدليل. ويلزم إجراء مراجعة جديدة لإصدار هذا الحكم.
 
-## Sharing and hosted capture
+## المشاركة والتسجيل المستضاف
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+اختر الرسائل والملفات التي يحتاجها المستلم، وراجع النسخة الكاملة التي تمت مشاركتها، واحتفظ بالمصدر بشكل منفصل. سجل التجزئة (هاش) لملف ZIP الذي تم تسليمه حتى يتمكن المستلم من تحديد تلك النسخة بالضبط والتحقق منها. يتم استبدال المعرّفات المحددة بأسماء مستعارة؛ ويظل النص المضمن والملفات الأصلية جزءًا من المراجعة.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope)．
+تدعم GitHub Actions تصدير الحساب بالكامل والمحادثات المحددة عبر Takeout أو واجهة برمجة التطبيقات (API) العادية، بالإضافة إلى سجل أحداث لمحادثة واحدة. يشرح دليل [التسجيل](https://phishdestroy.github.io/TgWitness/docs/capture/) [المستضاف](https://phishdestroy.github.io/TgWitness/docs/capture/) التحقق من الإعدادات والحد الزمني البالغ 120 دقيقة. للتحقق من نسخة مشاركة مشتقة من التسجيل المستضاف، قارن هاش المصدر الخاص بها مع الأرشيف الأصلي وتحقق من شهادة ذلك الأرشيف باستخدام الفحوصات [الخاصة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope) [بالوضع](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope).
 
 [تنسيق الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/) · [تقارير الحالات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-reports/)

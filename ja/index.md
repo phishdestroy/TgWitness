@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/
 
 [オープンソース ／ v0.9.1](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/)
 
-Export Telegram chats，preserve their history，and share a signed archive others can verify．
+Telegramのチャットをエクスポートし、その履歴を保持した上で、他者が検証可能な署名付きアーカイブを共有します。
 
 [デモ版を開く](https://phishdestroy.github.io/TgWitness/demo/?lang=ja)[セットアップガイド](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=ja)
 
 架空のデータで、Telegram へのログインは不要です。
 
- [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/ja/docs/reference/account-export/) [GitHub Actions で収集（プレビュー）](https://phishdestroy.github.io/TgWitness/ja/docs/capture/) [S3オフサイトコピー：セットアップと復旧](https://phishdestroy.github.io/TgWitness/ja/#s3)
+ [アカウントまたは選択したチャットをエクスポートする](https://phishdestroy.github.io/TgWitness/ja/docs/reference/account-export/) [GitHub Actions で収集（プレビュー）](https://phishdestroy.github.io/TgWitness/ja/docs/capture/) [S3オフサイトコピー：セットアップと復旧](https://phishdestroy.github.io/TgWitness/ja/#s3)
 
 時を越えるメッセージ ＃0042
 

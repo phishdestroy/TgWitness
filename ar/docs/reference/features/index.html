@@ -32,7 +32,7 @@
 <nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">الميزات والقيود</span></nav>
 <p class="verification-shortcut"><a href="../verification/">ما تم اختباره ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">لا تزال أجزاء من هذه الصفحة باللغة الإنجليزية: فقد تغير النص الأصلي باللغة الإنجليزية بعد ترجمته.</p><p class="eyebrow">مرجع / جمع</p><h1>الميزات والقيود</h1><p class="guide-outcome">نموذج التجميع الحالي، وسير العمل متعدد الحسابات، وعمليات التصدير، والحدود التشغيلية لبرنامج TgWitness.</p><div class="wiki-body"><p>يحفظ TgWitness محادثات Telegram التي يمكن الوصول إليها من الحسابات المرتبطة،
+<article class="guide-content"><p class="eyebrow">مرجع / جمع</p><h1>الميزات والقيود</h1><p class="guide-outcome">نموذج التجميع الحالي، وسير العمل متعدد الحسابات، وعمليات التصدير، والحدود التشغيلية لبرنامج TgWitness.</p><div class="wiki-body"><p>يحفظ TgWitness محادثات Telegram التي يمكن الوصول إليها من الحسابات المرتبطة،
 ويسجل التغييرات الملحوظة، ويُعد ملفات تصدير قابلة للتحقق. تصف هذه المرجع
 نموذج التجميع، وسير العمل الحالي وحدوده.</p>
 <h2 id="standalone-application">تطبيق مستقل<a class="anchor" href="#standalone-application" aria-label="رابط لهذا القسم">#</a></h2>
@@ -177,13 +177,13 @@
 </tr>
 <tr>
 <td>عملية التجميع</td>
-<td>Start／stop，heartbeat，errors，settings，scope and signed run receipt</td>
-<td>Local inventory；GitHub and TDX add <a href="../evidence/#verification-scope">independent environment checks</a></td>
+<td>التشغيل/الإيقاف، إشارة الحياة، الأخطاء، الإعدادات، النطاق وإيصال التشغيل الموقّع</td>
+<td>الجرد المحلي؛ يضيف GitHub وTDX <a href="../evidence/#verification-scope">فحوصات مستقلة للبيئة</a></td>
 </tr>
 </tbody>
 </table></div>
-<p>The interface names the account supplied in the source event and retains observed
-names and usernames．When the event omits its actor，the report leaves that field unspecified．</p>
+<p>تسمي الواجهة الحساب المذكور في الحدث المصدر وتحتفظ
+بالأسماء وأسماء المستخدمين التي تمت ملاحظتها. وعندما لا يذكر الحدث الفاعل، يترك التقرير هذا الحقل غير محدد.</p>
 <h2 id="capacity-and-telegram-limits">السعة وحدود Telegram<a class="anchor" href="#capacity-and-telegram-limits" aria-label="رابط لهذا القسم">#</a></h2>
 <p>لا يوجد عدد محدد من الدردشات التي يمكن مراقبتها بجودة مضمونة.
 تعتمد السعة على عدد الأحداث في الثانية في أوقات الذروة، وحجم المرفقات وعددها، و

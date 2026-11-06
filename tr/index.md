@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/
 
 [Açık kaynak ／ v0.9.1](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/)
 
-Export Telegram chats，preserve their history，and share a signed archive others can verify．
+Telegram sohbetlerini dışa aktarın， geçmişlerini koruyun ve başkalarının doğrulayabileceği imzalı bir arşiv paylaşın．
 
 [Demo＇yu açın](https://phishdestroy.github.io/TgWitness/demo/?lang=tr)[Kurulum kılavuzu](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=tr)
 
 Kurgusal veriler， Telegram girişi yok．
 
- [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/tr/docs/reference/account-export/) [GitHub Actions ile kayıt （önizleme）](https://phishdestroy.github.io/TgWitness/tr/docs/capture/) [S3 dış sunucu kopyası： kurulum ve kurtarma](https://phishdestroy.github.io/TgWitness/tr/#s3)
+ [Bir hesabı veya seçilen sohbetleri dışa aktarın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/account-export/) [GitHub Actions ile kayıt （önizleme）](https://phishdestroy.github.io/TgWitness/tr/docs/capture/) [S3 dış sunucu kopyası： kurulum ve kurtarma](https://phishdestroy.github.io/TgWitness/tr/#s3)
 
 ZAMANIN ÖTESİNE UZANAN BİR MESAJ ＃0042
 

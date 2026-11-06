@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-
 
 Hetzner या Phala Cloud पर एक सीलबंद 24/7 सर्वर, Gateway DNS और तीसरे पक्ष द्वारा दोहराए जा सकने वाले जाँच।
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+उच्च-आश्वासन परिनियोजन संग्रह वातावरण के स्वतंत्र सत्यापन को अभिलेखागार सत्यापन में जोड़ता है। समीक्षक क्लाउड प्रदाता और Cloudflare के पास रखे गए परिनियोजन और पहुँच रिकॉर्ड की पूछताछ करता है, और एक Intel TDX परिनियोजन संग्रहकर्ता के वातावरण की हार्डवेयर प्रमाणीकरण जोड़ता है।
 
 साधारण स्थानीय और Docker उपयोग अपरिवर्तित है। यहाँ कुछ भी तब तक नहीं चलता जब तक आप के साथ डिप्लॉय नहीं करते। `python -m tgwitness.cloud`, और कलेक्टर अपने होस्ट को केवल तब पढ़ता है जब डिप्लॉयमेंट सेट करता है `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ High-assurance deployment adds independent checks of the collection environment 
 | हस्ताक्षर कुंजी उस सर्वर पर बनाई गई थी | की प्रदाता के सर्वर आईडी और प्राप्त cloud-init के हैश का नाम बताने वाले एक कथन पर हस्ताक्षर करती है। | प्रदाता के खिलाफ जांचा गया कलेक्टर |
 | यह जर्नल उस कुंजी और सर्वर से संबंधित है | प्रत्येक प्रक्रिया साक्ष्य में शुरू होती है ZIP उस सर्वर के लिए होस्ट माप को वहन करता है | साक्ष्य ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+कलेक्टर SSH स्थिति, सत्र, लॉगिन इतिहास और बूट जानकारी को हस्ताक्षरित process-start और `host.state` रिकॉर्ड्स में SSH स्थिति, सत्र, लॉगिन इतिहास और बूट जानकारी को हस्ताक्षरित प्रक्रिया-प्रारंभ और रिकॉर्ड्स में दर्ज किया जाता है। एक सामान्य VM पर ये स्थानीय इन्वेंटरी रिकॉर्ड्स होते हैं, जिनकी समीक्षक प्रदाता के स्वतंत्र रिकॉर्ड्स से तुलना करता है। नीचे दी गई Intel TDX तैनाती अतिरिक्त रूप से हार्डवेयर-समर्थित मापों का सत्यापन करती है।
 
 ## प्रदायक
 
@@ -269,8 +269,8 @@ Logpush, जो Cloudflare की अपनी प्रति R2 में र�
 
 Cloudflare टेलीग्राम के एन्क्रिप्शन के अंदर, टेलीग्राम खाते पर अन्य डिवाइस (एविडेंस मोड की डिवाइस सूची उन्हें टेलीग्राम की ओर से रिकॉर्ड करती है) या प्रदाता के हाइपरवाइज़र को नहीं देख सकता।
 
-## Reading the deployment result
+## परिनियोजन परिणाम पढ़ना
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+एक सामान्य वीएम के लिए, प्रदाता होस्ट इंफ्रास्ट्रक्चर को नियंत्रित करता है, और स्थानीय इन्वेंट्री की जाँच प्रदाता रिकॉर्ड के साथ की जाती है। Intel TDX के लिए, सत्यायक अतिरिक्त रूप से हार्डवेयर कोट, कलेक्टर बाइंडिंग, कंपोज और ओएस माप की जाँच करता है। यह देखने के लिए व्यक्तिगत परिणाम पढ़ें कि कौन सी जाँचें पास हुईं या अनुपलब्ध थीं।
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+ऐतिहासिक फ़ायरवॉल विवरण प्रदाता पर निर्भर करता है;Linode नियम संस्करणों को बनाए रखता है। [प्रमाणीकरण रिकॉर्ड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/) में परीक्षण की गई तैनाती और शेष लाइव जाँचें सूचीबद्ध होती हैं, और [सत्यापन दायरा](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) इन पर्यावरण जाँचों को संग्रह अधिग्रहण और अखंडता से जोड़ता है।

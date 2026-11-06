@@ -84,6 +84,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-
 
 `analytics.json` অন্তর্ভুক্ত থাকলে, এটি আর্কাইভের স্বাক্ষরিত ফাইল হ্যাশ দ্বারা সুরক্ষিত থাকে। জার্নাল `report.json` একই নির্বাচিত সমষ্টি এমবেড করে। স্বাক্ষর যাচাইকরণ পরিবর্তিত বাইট সনাক্ত করে। সংখ্যাগুলি যাচাই করতে, `report_analytics.Analytics` এবং `selected` দিয়ে জার্নাল সমষ্টি পুনর্গণনা করুন, অথবা `snapshot_analytics.collect` এবং `project` দিয়ে স্ন্যাপশট সমষ্টি তৈরি করুন।
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | এটি যা দেখায় |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+
 একটি সোর্স চেকআউট থেকে, একই কাল্পনিক জার্নাল থেকে উপরে তালিকাভুক্ত সব আটটি ডিজাইন তৈরি করুন:
 
 ```
@@ -134,7 +147,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. মূল ZIP ফাইল এবং তাদের হ্যাশ সংরক্ষণ করুন। প্রতিটি ধারক, স্থানান্তর, তারিখ এবং উদ্দেশ্য রেকর্ড করুন। সংশ্লিষ্ট অপারেটর বিবৃতি এবং কেস নোটগুলোও সংরক্ষণ করুন।
 5. গোপনীয় ভেরচুয়াল মেশিনের জন্য উদ্ধৃতি, চ্যালেঞ্জ, ইন্টেল সার্টিফিকেট চেইন, পরিমাপ, সঠিক উৎস এবং কী-হ্যান্ডলিং শর্তাবলী সংরক্ষণ ও স্বতন্ত্রভাবে যাচাই করুন। পর্যালোচিত আর্টিফ্যাক্টগুলোর সাথে এটেস্টিশন যাচাইয়ের ফলাফল সংরক্ষণ করুন।
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+অর্জন, আর্কাইভ অখণ্ডতা, সময় এবং সংগ্রহের কভারেজ যাচাইয়ের জন্য [যাচাইকরণ পরিসর](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope) দেখুন।
 
 ## প্রাপ্তকারী পর্যালোচনা
 

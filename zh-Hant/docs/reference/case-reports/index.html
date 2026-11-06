@@ -218,6 +218,40 @@ HTML 支援離線使用、淺色與深色主題，並能適應窄螢幕
 可偵測字節變更。若要核對數值，請使用
 <code>report_analytics.Analytics</code> 和 <code>selected</code> 重新計算日誌彙總值，或
 使用 <code>snapshot_analytics.collect</code> 和 <code>project</code> 重新計算快照彙總值。</p>
+<h3 id="anomaly-indicators">Anomaly indicators<a class="anchor" href="#anomaly-indicators" aria-label="此節的連結">#</a></h3>
+<p><strong>Preview.</strong> Evidence reports add an <strong>Anomaly indicators</strong> section computed by
+registered processors (<code>tgwitness/metrics/</code>, one file per metric). The report names every
+processor that ran with its version, and prints its method under its table, so the
+computation can be repeated from <code>events.jsonl</code> with <code>tgwitness.metrics.run</code>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Processor</th>
+<th>功能展示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>first_time_posters_over_time</code> v1</td>
+<td>First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up．</td>
+</tr>
+<tr>
+<td><code>service_vs_message_ratio</code> v1</td>
+<td>Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number.</td>
+</tr>
+<tr>
+<td><code>join_leave_per_month</code> v1</td>
+<td>Joins, departures and removals or bans per month, one per person, chat, change and day.</td>
+</tr>
+<tr>
+<td><code>pinned_per_month</code> v1</td>
+<td>Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Parameters → Report metrics</strong> selects processors and the number of displayed rows，
+including in filtered reports．Daily and monthly tables show recent rows，service-share
+tables rank chats by saved message count．Totals cover every row．</p>
 <p>請從原始碼檢出點開始，根據同一份虛構期刊，建置上述列出的全部八種設計：</p>
 <pre><code class="language-sh">python tools/build_report_styles.py --output test-results/report-styles</code></pre>
 <p>開啟生成的 <code>index.html</code> 檔案，以比對完整的 HTML 報告、已簽名的 PDF 檔案及
@@ -303,8 +337,8 @@ ZIP 檔案。每個設計皆採用相同的原始日誌。每次執行時請使�
     Intel 憑證鏈、測量結果、確切來源及金鑰處理條件。
     請將驗證結果與已審查的證據一併保存。</li>
 </ol>
-<p>See <a href="../evidence/#verification-scope">verification scope</a> for the checks of acquisition，
-archive integrity，time and collection coverage in each mode．</p>
+<p>請參閱<a href="../evidence/#verification-scope">驗證範圍，</a>了解各模式下針對資料擷取、
+檔案完整性、時間及蒐集範圍的檢查項目。</p>
 <h2 id="recipient-review">收件人審閱<a class="anchor" href="#recipient-review" aria-label="此節的連結">#</a></h2>
 <p>請使用可信賴的 TgWitness 安裝版本，並搭配獨立取得的指紋：</p>
 <pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256
