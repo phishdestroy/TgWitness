@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Apply a chat export's skip／hash-only choice to recovered messages and profile photos，and record that choice in the acquisition metadata．Reject changed messages before fetching attachments in the separate files stage．Count missing message numbers as intervals so sparse histories do not exhaust memory，including during a cancellable full recheck．
+
 - Preserve available self-destructing photos，videos and files in the API journal with a dedicated immediate queue，explicit TTL／view-once labels and signed saved／unavailable／not-saved outcomes．Block read receipts in the API client，including batches and wrapped requests．Keep byte limits，disk reserves and Telegram backoff；saved bytes do not establish human viewing．
 - Preserve image-rendered Unicode emoji in official Web message text，reply previews，reactions and derived page text without changing the client DOM．A live account test exposed the omission；video and saved pages already retained the image．
 - Improve chat-export Takeout, unreadable-message recovery, shared absent-number rechecks and bounded range retries. Preserve observed deletions in export scope, compare verified archives, and distinguish archive integrity from an independently confirmed signer.
