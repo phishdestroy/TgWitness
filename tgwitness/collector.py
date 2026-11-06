@@ -1121,10 +1121,17 @@ class Collector:
         return {"read_at": utcnow(), "events": events, "complete": len(events) < ADMIN_LOG_LIMIT,
                 "meaning": ADMIN_LOG_MEANING}
 
+    def managed_route(self):
+        managed = getattr(self, "portable_routes", None)
+        selected = managed.selected() if managed else None
+        return selected["mode"] if selected else None
+
     def route_receipt(self):
         receipt = self.network_config().receipt(self.direct_fallback)
         if receipt["kind"] == "mtproxy_auto":
             receipt["proxy_id"] = self.auto_route[0] if self.auto_route else None
+        if mode := self.managed_route():
+            receipt["managed"] = mode
         receipt["exposure"] = self.route_policy()["exposure"]
         return receipt
 
@@ -1133,6 +1140,10 @@ class Collector:
         if public["kind"] == "mtproxy_auto":
             public.update(self.pool().describe(self.route_owner))
         public["exposure"] = self.route_policy()["exposure"]
+        public["managed"] = self.managed_route()
+        check = self.store.get_setting("connection_check", None)
+        public["check"] = {key: check.get(key) for key in ("telegram_connected", "exit_ip", "country", "warp", "checked_at")} \
+            if check else None
         return public
 
     def fallback_due(self):
