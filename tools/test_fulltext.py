@@ -295,6 +295,50 @@ def test_ranked_results_page_through_every_match(journal):
     assert len(rest["items"]) == 10 and rest["next_offset"] is None
 
 
+def test_ranked_pagination_stays_inside_the_result_window(journal):
+    _, store = journal
+    with store.transaction():
+        for number in range(1005):
+            store.append("message.new", {"text": "PaginationSentinel"}, OTHER, 2000 + number)
+    penultimate = store.fulltext.search("PaginationSentinel", limit=50, offset=900)
+    assert len(penultimate["hits"]) == 50 and penultimate["next_offset"] == 950
+    last = store.fulltext.search("PaginationSentinel", limit=200, offset=950)
+    assert len(last["hits"]) == 50 and last["next_offset"] is None
+    end = store.fulltext.search("PaginationSentinel", limit=20, offset=1000)
+    assert not end["hits"] and end["next_offset"] is None
+    with pytest.raises(ValueError, match="1,000"):
+        reader(store, [OTHER]).read(ArchiveQuery(tool="search_messages", query="PaginationSentinel", ranked=True,
+                                               offset=1001))
+
+
+@pytest.mark.parametrize("sources", [("ocr",), ("transcription",), ("messages", "ocr", "transcription")])
+def test_newest_pages_keep_recognition_and_message_order(journal, sources):
+    vault, store = journal
+    expected = []
+    for number in range(12):
+        event = store.append("message.new", {"text": "Needle"}, CHAT, 3000 + number)
+        if "messages" in sources:
+            expected.append(event["seq"])
+        engine = "ocr" if number % 2 == 0 else "transcription"
+        seq = derived_job(store, vault, CHAT, f"{number:032x}", "Needle", engine)
+        if engine in sources:
+            expected.append(seq)
+    observed, offset = [], 0
+    while offset is not None:
+        result = store.fulltext.search("Needle", sources=sources, order="newest", limit=3, offset=offset)
+        observed.extend(hit["event"]["seq"] for hit in result["hits"])
+        offset = result["next_offset"]
+    assert observed == sorted(expected, reverse=True)
+
+
+@pytest.mark.parametrize("text", ["ß" * 50 + " needle" + "\u200b" * 50,
+                                  "x\u200b" * 50 + " needle " + "ß" * 50,
+                                  "prefix e\u0301 needle", "prefix \ufb00 needle"],
+                         ids=["expansion-before-removal", "removal-before-expansion", "combining", "ligature"])
+def test_match_offsets_survive_combined_unicode_changes(text):
+    assert fulltext.focus(text, fulltext.Query("needle")) == text.index("needle")
+
+
 def test_long_questions_still_use_the_index(journal):
     _, store = journal
     now = datetime.now(timezone.utc)

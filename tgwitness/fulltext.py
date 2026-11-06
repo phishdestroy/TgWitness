@@ -557,7 +557,7 @@ def focus(text, query):
     if not found:
         return None
     first = min(found)
-    return first if len(normalized) == len(text) else original_offset(text, first)
+    return first if normalized == text else original_offset(text, first)
 
 
 def payload_text(payload):
@@ -791,19 +791,21 @@ class FullText:
         if not wanted <= set(SOURCES):
             raise ValueError("Choose messages, ocr or transcription sources.")
         found, matched = [], {}
-        # One result beyond the page shows whether another page exists.
-        wanted_hits = limit + offset + 1
+        # One result beyond the page shows whether another page exists, but
+        # paging must stay inside the same bounded window for every page size.
+        end = min(offset + limit, 1000)
+        wanted_hits = end + 1
         if "messages" in wanted:
             hits, matched["messages"] = self.messages(query, chats, since, until, order, wanted_hits, timeout_s)
             found.append(hits)
         derived = wanted & {"ocr", "transcription"}
         if derived:
-            hits = self.derived.search(query, chats, since, until, derived, wanted_hits)
+            hits = self.derived.search(query, chats, since, until, derived, wanted_hits, order=order)
             matched.update({name: sum(hit["source"] == name for hit in hits) for name in sorted(derived)})
             found.append(hits)
         merged = found[0] if len(found) == 1 else fused(found, order)
-        more = len(merged) > offset + limit and offset + limit <= 1000
-        return {"hits": merged[offset:offset + limit], "next_offset": offset + limit if more else None,
+        more = len(merged) > end and end < 1000
+        return {"hits": merged[offset:end], "next_offset": end if more else None,
                 "matched": matched, "query": query.explain(), "index": self.status(public=public), "order": order}
 
     def ready(self):
@@ -950,18 +952,25 @@ class DerivedIndex:
             self.db.close()
         self.db, self.signature, self.items = db, signature, items
 
-    def search(self, query, chats, since, until, engines, limit):
+    def search(self, query, chats, since, until, engines, limit, *, order="relevance"):
         if chats is not None and not chats or query.senders or query.usernames or query.message_ids or query.kinds:
             return []
         expression = query.expression(chats if chats is not None and len(chats) <= 500 else None, None, None, engines)
         with self.lock:
             self.refresh()
             try:
-                rows = self.db.execute("SELECT rowid, " + RANK + " FROM fulltext WHERE fulltext MATCH ? ORDER BY 2",
+                rows = self.db.execute("SELECT rowid, " + RANK + " FROM fulltext WHERE fulltext MATCH ? ORDER BY 2, rowid",
                                        (expression,)).fetchall()
             except sqlite3.OperationalError:
                 raise ValueError("This search could not be read. Remove special characters and retry.") from None
             items = dict(self.items)
+        if order == "newest":
+            def observed_seq(row):
+                seq = items.get(row[0], {}).get("event_seq")
+                return seq if type(seq) is int else -1
+            # Select the newest candidates before applying the page limit;
+            # sorting a relevance-limited prefix can miss or repeat results.
+            rows.sort(key=observed_seq, reverse=True)
         hits = []
         for rowid, score in rows:
             item = items.get(rowid)
