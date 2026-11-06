@@ -42,6 +42,7 @@ Builds stay local. See [publishing](../docs/internal/PUBLISHING.md) and
 | `python tools/capture_screenshots.py` | Screenshots in `test-results/`; `--docs` updates docs assets |
 | `python tools/capture_demo.py` | Refresh `website/demo/fixtures.json` from the local demo |
 | `python tools/test_cli.py` | Command line: local and panel modes, scoped connection tokens, refused tools, exit codes, activity statistics and JSON Lines export |
+| `python tools/test_metrics.py` | Metric processors: registry and versions, injection-like spikes after warm-up, service share, joins and departures, pins and unpins, report listing and parameters |
 | `python tools/test_fulltext.py` | Full-text search: word forms, scripts, references, scope, derived text, CLI and verifier compatibility with `fixtures/evidence-before-fulltext.zip` |
 
 Account, workspace, navigation, interaction and proxy checks have their own

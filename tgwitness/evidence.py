@@ -171,7 +171,8 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
         with store.snapshot() as snapshot:
             from . import board
             board_export = board.export_state(snapshot.connection, vault) if include_board and board.head(snapshot.connection)["seq"] else None
-            observed, digest = Coverage(), report.Digest()
+            from . import metrics
+            observed, digest = Coverage(), report.Digest(*metrics.from_store(store))
             journal_bytes = hashlib.sha256()
 
             def measured(events):

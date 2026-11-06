@@ -165,6 +165,26 @@ detects changed bytes. To check the figures, recompute journal aggregates with
 `report_analytics.Analytics` and `selected`, or
 snapshot aggregates with `snapshot_analytics.collect` and `project`.
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by
+registered processors (`tgwitness/metrics/`, one file per metric). The report names every
+processor that ran with its version, and prints its method under its table, so the
+computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | What it shows |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per day by Telegram's time. A day is flagged when first-time posters reach at least five and three times the median of the previous 14 days with messages, while messages stay within 1.5 times their median: many new speakers without more activity, as in bot injection. A chat's first seven days are never flagged. |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**Parameters → Report metrics** turns each processor on or off and sets how many of
+the most recent rows are listed. Indicators point at days and months worth checking;
+they do not establish what happened. Word clouds, topic models and retrieval chunking
+are deliberately not offered: their output varies with hyperparameters and stop lists
+and cannot be repeated exactly.
+
 From a source checkout, build all eight designs listed above from the same fictional journal:
 
 ```sh
