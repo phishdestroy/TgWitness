@@ -105,6 +105,30 @@ def test_sparse_message_numbers_are_counted_without_expansion(tmp_path):
     assert not MissingNumbers([]) and not MissingNumbers([1, 2])
 
 
+def test_multi_account_recovery_does_not_expand_missing_numbers(tmp_path, monkeypatch):
+    from tools.test_release_data_fixes import multi_scenario
+
+    def no_expansion(self):
+        raise AssertionError("Recovered IDs must be checked without expanding missing numbers")
+
+    monkeypatch.setattr(MissingNumbers, "__iter__", no_expansion)
+    result = asyncio.run(multi_scenario(tmp_path, [2, 7]))
+    assert result["state"]["phase"] == "done", result
+
+
+def test_sparse_membership_uses_intervals(monkeypatch):
+    def no_expansion(self):
+        raise AssertionError("Membership must not iterate a large missing range")
+
+    monkeypatch.setattr(MissingNumbers, "__iter__", no_expansion)
+    missing = MissingNumbers([1, 4, 5, 9, 2000000000])
+    for number in (2, 3, 6, 8, 10, 1999999999):
+        assert number in missing
+    for number in (-1, 0, 1, 4, 5, 9, 2000000000, 2000000001):
+        assert number not in missing
+    assert 1 not in MissingNumbers([])
+
+
 @pytest.mark.parametrize("full", [False, True])
 def test_distributed_sparse_recheck_is_bounded_and_cancellable(tmp_path, monkeypatch, full):
     async def scenario():

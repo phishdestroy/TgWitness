@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Keep photo downloads on the still variant named by their metadata and hash manifests，including after file-reference renewal．Reject truncated photo／chat attachments and corrupt reused files instead of counting them as saved．Check recovered multi-account message IDs against missing intervals without expanding large gaps．
+
 - Release a session's local connection lock after transport shutdown，including when a disconnected client was already removed from the workspace．Cancelling the waiting operation cannot release the lock early，and closing an older session cannot unlock a different current key．
 
 - Apply a chat export's skip／hash-only choice to recovered messages and profile photos，and record that choice in the acquisition metadata．Reject changed messages before fetching attachments in the separate files stage．Count missing message numbers as intervals so sparse histories do not exhaust memory，including during a cancellable full recheck．

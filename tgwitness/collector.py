@@ -2970,14 +2970,24 @@ class Collector:
             for attempt in range(3):
                 try:
                     with temp.open("wb") as stream:
+                        media = downloadable_media(message)
                         result = await asyncio.wait_for(self.client.download_media(
-                            downloadable_media(message), file=stream, progress_callback=progress), timeout)
+                            media, file=stream, progress_callback=progress, **file_hashes.download_options(media)), timeout)
                     if result is None:
                         return {"file_status": "unavailable", "file_kind": kind}
-                    digest = await complete_in_thread(file_digest, temp)
                     written = temp.stat().st_size
-                    if not (directory / digest).exists():
-                        temp.replace(directory / digest)
+                    if written > limit:
+                        raise ValueError("above_limit")
+                    if written != size:
+                        return {"file_status": "unavailable", "file_kind": kind,
+                                "file_error": "download_size_differs_from_observed_attachment"}
+                    digest = await complete_in_thread(file_digest, temp)
+                    destination = directory / digest
+                    if destination.exists():
+                        if destination.is_symlink() or await complete_in_thread(file_digest, destination) != digest:
+                            raise ValueError("existing_content_addressed_file_is_corrupt")
+                    else:
+                        temp.replace(destination)
                     return {"file": "media/" + digest, "file_sha256": digest, "file_size": written, "file_kind": kind}
                 except FloodWaitError as exc:
                     if attempt == 2:
@@ -3334,7 +3344,8 @@ class Collector:
                 async def download(media):
                     with temp.open("wb") as stream:
                         return await asyncio.wait_for(
-                            client.download_media(media, file=stream, progress_callback=progress), timeout)
+                            client.download_media(media, file=stream, progress_callback=progress,
+                                                  **file_hashes.download_options(media)), timeout)
 
                 try:
                     result = await download(media)
