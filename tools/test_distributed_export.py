@@ -1,7 +1,7 @@
 import asyncio
 import json
 import zipfile
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
@@ -351,6 +351,47 @@ def test_filtered_archive_is_verifiable_and_contains_context(tmp_path, monkeypat
             assert all(entry["app"].state.collector.export_claim is None for entry in entries.values())
         finally:
             await manager.close()
+            close_entries(entries)
+    asyncio.run(scenario())
+
+
+@pytest.mark.parametrize("inclusive", [False, True])
+@pytest.mark.parametrize("microseconds", [0, 500000])
+def test_date_selection_keeps_every_message_at_inclusive_start(tmp_path, inclusive, microseconds):
+    async def scenario():
+        boundary = datetime(2026, 10, 5, tzinfo=timezone.utc)
+        rows = [message(i) for i in range(1, 8)]
+        for row, seconds in zip(rows, (-2, -1, 0, 0, 0, 1, 2)):
+            row.date = boundary + timedelta(seconds=seconds)
+
+        class DateClient(Client):
+            async def get_messages(self, entity, limit=None, offset_date=None, ids=None):
+                if inclusive and offset_date is not None and ids is None:
+                    return sorted([m for m in self.messages if m.date <= offset_date.replace(microsecond=0)],
+                                  key=lambda m: -m.id)[:limit]
+                return await super().get_messages(entity, limit, offset_date, ids)
+
+        manager, entries = coordinator(tmp_path, rows, count=1)
+        collector = entries["account0"]["app"].state.collector
+        collector.client = DateClient(rows)
+        # Exercise the signed plan, real chunk acquisition and local selection.
+        # Bundle rendering and verification have their own integration check above.
+        manager.launch = lambda: None
+        options = Selection(from_utc=(boundary + timedelta(microseconds=microseconds)).isoformat(),
+                            to_utc=(boundary + timedelta(seconds=2)).isoformat())
+        try:
+            state = await manager.start(CHAT, ["account0"], "account0", selection=options.model_dump())
+            manager.prepare_chunks()
+            await manager.work(manager.state["workers"][0])
+            scratch, _ = await manager.finish_selection(manager.directory(state["id"]), options)
+            selected = [json.loads(line)["id"] for line in scratch.read_text().splitlines()]
+            assert selected == ([6, 5, 4, 3] if microseconds == 0 else [6])
+        finally:
+            if manager.db:
+                manager.db.close()
+                manager.db = None
+            if manager.state:
+                manager.release(manager.state["id"])
             close_entries(entries)
     asyncio.run(scenario())
 

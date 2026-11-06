@@ -9,6 +9,7 @@ One account runs one acquisition task. Monitoring, History, account export and c
 ## Selection
 
 - All available history, rolling 7/30 days, previous calendar month, or custom bounds. UI dates use the browser time zone and become fixed UTC bounds `[from, until)` at launch.
+- Messages exactly at **From**, including several messages in the same second, are included. Telegram can return the date-offset message itself, so acquisition reads slightly before the lower boundary and applies the precise period locally. **Until** remains exclusive.
 - Offline message-language detection using Lingua. Short, uncertain and mixed-language messages have a separate include/exclude option. Detector version and decisions accompany evaluated selected messages; confidence is a heuristic, not proof of language.
 - **Messages that are replies** selects direct replies. **Messages that received a reply** selects originals with an observed direct incoming reply. Relationships are built before language/text filtering, so a Russian answer can qualify an English original. Merely posting into a forum topic does not count as a direct reply.
 - Replies can be sought within the selected period or through the acquisition start. The latter can require scanning later history too.
@@ -22,6 +23,8 @@ For a supergroup/channel, preflight resolves the source separately for every acc
 `distributed-exports/<job-id>/` retains a signed immutable plan, signed chunk receipts, acquired JSONL chunks, rebuildable SQLite indexes and the resulting ZIP. Receipts include the fetching account's signing key, range, count, hash and commit time. Pause preserves committed chunks; an interrupted chunk is fetched again. Resume checks signatures, hashes, ranges, ordering and account identity before reusing chunks. Paused jobs can be reopened from **Saved exports** in the export dialog. One distributed job runs at a time in this coordinator.
 
 Intermediate chunks include messages needed to evaluate filters, including rejected messages. Filters limit the final archive; rejected messages can remain in local storage. The configured free-space reserve is checked before new chunks. Completed job directories are not deleted automatically.
+
+Plans created before the inclusive-start fix retain their original signed ID ranges on resume. Start a new date-filtered export to recover any message excluded at **From** by an older plan.
 
 ## Result and limits
 

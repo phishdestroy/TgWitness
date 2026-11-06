@@ -25,6 +25,7 @@ Other work runs alongside, each item judged on its own test:
 | What | Done when | Status |
 | --- | --- | --- |
 | Long history loading | A crash mid-way loses nothing and repeats nothing | [Shipped](HISTORY.md) |
+| Distributed export date boundaries | Every message at the inclusive start survives acquisition; signed chunks remain reusable after pause | [Shipped](DISTRIBUTED-EXPORT.md); regression tests and live two-account pause/resume with 160 matching public messages |
 | Complete source list | Skipped and later-added chats are visible, only failed ones retry | Open |
 | Everyday reading | Search, jumps by date and context, topics, gallery, forwards, reactions, versions | Open |
 | Connection identity and retry safety | Imported settings survive restart; platform defaults fill gaps; connection diagnostics report server responses; server-requested pauses survive reconnects | [Shipped](ACCOUNTS.md) |

@@ -9,7 +9,7 @@ import secrets
 import shutil
 import sqlite3
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
@@ -165,8 +165,10 @@ class DistributedExport:
                     upper = latest[0].id if latest else 0
                     lower = 1
                     if upper and options.from_utc:
+                        # Telegram can include messages exactly at offset_date.
+                        # Read past the boundary; local selection applies [from, until).
                         before = await collector.client.get_messages(peer, limit=1,
-                            offset_date=datetime.fromisoformat(options.from_utc))
+                            offset_date=datetime.fromisoformat(options.from_utc) - timedelta(seconds=1))
                         lower = before[0].id + 1 if before else 1
                     if upper >= lower:
                         bounds.append((lower, upper, profile))
