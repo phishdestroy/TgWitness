@@ -250,6 +250,10 @@ class API(unittest.TestCase):
         route = self.client.get('/api/status', headers=self.headers).json()['collector']['network']
         self.assertIsNone(route['managed'])
         self.assertFalse(route['check']['telegram_connected'])
+        with patch('tgwitness.guided_connection.revision', return_value='changed-route'):
+            with self.assertRaises(TimeoutError):
+                asyncio.run(connection.check_current(always=False))
+        self.assertEqual(checks(), 5, 'A failed check of another route is a new observation')
 
     def test_failed_check_does_not_stop_reused_selected_tunnel(self):
         portable = self.app.state.connection.portable

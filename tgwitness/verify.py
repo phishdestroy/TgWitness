@@ -2791,15 +2791,20 @@ def verify_account_disclosure(path, expected_fingerprint=None, source=None, max_
                         raise ValueError("Duplicate disclosure message") from None
                     if state == "withheld":
                         rules, count = message.get("rules"), message.get("count")
-                        if (not set(message) <= WITHHELD_FIELDS or message.get("attachments") != []
-                                or not isinstance(rules, list) or not rules or not set(rules) <= set(WITHHELD_RULES)
+                        if (set(message) != WITHHELD_FIELDS or message.get("attachments") != []
+                                or message.get("redacted_fields") != []
+                                or not isinstance(rules, list) or not rules
+                                or any(not isinstance(rule, str) or rule not in WITHHELD_RULES for rule in rules)
+                                or rules != [rule for rule in WITHHELD_RULES if rule in rules]
+                                or message.get("text") != "[withheld by selection \u2014 rule: " + ", ".join(rules) + "]"
                                 or type(count) is not int or count < 1):
                             raise ValueError("Invalid withheld-by-selection marker")
                         withheld += count
                         continue
                     reply = message.get("reply_to") if marked else None
                     if reply is not None:
-                        if (not isinstance(reply, dict) or type(reply.get("id")) not in (str, int) or not reply["id"]
+                        if (not isinstance(reply, dict) or set(reply) != {"id", "state"}
+                                or type(reply.get("id")) not in (str, int) or not reply["id"]
                                 or reply.get("state") not in REPLY_STATES):
                             raise ValueError("Invalid disclosure reply reference")
                         seen.execute("INSERT INTO replies VALUES (?,?,?)",
@@ -2827,7 +2832,8 @@ def verify_account_disclosure(path, expected_fingerprint=None, source=None, max_
             chats = seen.execute("SELECT COUNT(DISTINCT chat) FROM messages WHERE state='disclosed'").fetchone()[0]
             # A reply to a disclosed or withheld message must point at that record; only not_in_source points nowhere.
             dangling = seen.execute("SELECT count(*) FROM replies r LEFT JOIN messages m ON m.chat=r.chat AND m.id=r.id "
-                                    "WHERE r.state!='not_in_source' AND (m.id IS NULL OR m.state!=r.state)").fetchone()[0]
+                                    "WHERE (r.state!='not_in_source' AND (m.id IS NULL OR m.state!=r.state)) "
+                                    "OR (r.state='not_in_source' AND m.id IS NOT NULL)").fetchone()[0]
             if dangling:
                 raise ValueError("A disclosed reply points at a record that is not in this disclosure")
         finally:

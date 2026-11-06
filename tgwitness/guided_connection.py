@@ -378,11 +378,13 @@ class GuidedConnection:
             result = await asyncio.wait_for(probe(c, c.network_config(), selected["mode"] if selected else "proxy",
                 outside=c.route_policy()["outside_enabled"]), 45)
         except Exception as exc:
-            failed = {"telegram_connected": False, "checked_at": int(time.time()), "revision": revision(c)}
+            failed = {"telegram_connected": False, "checked_at": int(time.time()), "revision": revision(c),
+                      "error_type": type(exc).__name__}
             with c.store.transaction():
                 c.store.set_setting("connection_check", failed)
-                if always or previous.get("telegram_connected") is not False:
-                    c.store.append("network.connection_checked", {**failed, "error_type": type(exc).__name__})
+                if always or any(previous.get(key) != failed[key]
+                                 for key in ("telegram_connected", "revision", "error_type")):
+                    c.store.append("network.connection_checked", failed)
             raise
         result["revision"] = revision(c)
         changed = any(previous.get(key) != result.get(key)

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Show each account's selected route and checked exit address，group session controls，and retain interface preferences when adding an account．Record connection changes without repeating identical background checks．Validate withheld-marker contents and reply states in minimized exports，including rejection of a missing-source label for an included record．
+
 - Describe local，witnessed，GitHub-hosted and Intel TDX collection separately，with their actual verification inputs．Remove repeated identity／certification digressions，update stale publication and WARP test descriptions，and refresh Russian guidance．Allow a bounded publication-settling interval while still requiring exact installer bytes．
 
 - Mark messages left out of a minimized disclosure (preview): inside each disclosed chat, withheld messages appear as content-free markers naming the selection rule, one per run or one per message, and disclosed replies state whether they answer a disclosed message, a withheld one or one that is not in the source export. The package format becomes `tgwitness-account-disclosure-v2`; `verify.py` rejects markers with content and replies pointing at missing records, and still verifies version 1 packages.

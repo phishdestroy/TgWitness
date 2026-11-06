@@ -178,5 +178,34 @@ def test_disclosure_package_is_marked_and_verified(package, tmp_path):
     assert earlier["counts"] == {"messages": 2, "chats": 1, "media": 0}, "Version 1 packages verify as before"
 
 
+@pytest.mark.parametrize("field,value", [
+    ("text", "private message content"),
+    ("redacted_fields", ["private message content"]),
+    ("rules", [{"private": "message content"}]),
+])
+def test_marker_payload_cannot_carry_withheld_content(package, tmp_path, field, value):
+    vault, _preview, path = package
+
+    def change(members, _manifest):
+        rows = [json.loads(line) for line in members["messages.jsonl"].splitlines()]
+        next(row["message"] for row in rows if row["message"]["state"] == "withheld")[field] = value
+        members["messages.jsonl"] = b"".join(canonical(row) + b"\n" for row in rows)
+
+    with pytest.raises(ValueError, match="withheld-by-selection marker"):
+        verify_account_disclosure(resign(path, tmp_path / "payload.zip", vault, change))
+
+
+def test_reply_cannot_label_an_existing_record_as_absent(package, tmp_path):
+    vault, _preview, path = package
+
+    def change(members, _manifest):
+        rows = [json.loads(line) for line in members["messages.jsonl"].splitlines()]
+        next(row["message"]["reply_to"] for row in rows if row["message"].get("reply_to"))["state"] = "not_in_source"
+        members["messages.jsonl"] = b"".join(canonical(row) + b"\n" for row in rows)
+
+    with pytest.raises(ValueError, match="reply"):
+        verify_account_disclosure(resign(path, tmp_path / "absent.zip", vault, change))
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))
