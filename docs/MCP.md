@@ -109,7 +109,7 @@ stable hostname for saved client configurations.
 | `get_journal_event` | One sanitized record with its source reference |
 | `get_capture_status` | Collection state and permitted coverage records |
 | `get_activity_stats` | Messages by UTC hour and weekday, peak days, edit and deletion shares, senders, domains and `@handles`, with coverage ([details](CLI.md#activity-statistics)) |
-| `export_messages` | Command line only: streams saved observations as JSON Lines ([details](CLI.md#export)); not offered over MCP |
+| `export_messages` | Command line only, not selected by default: streams saved observations as JSON Lines ([details](CLI.md#export)); not offered over MCP |
 
 `tools/list` returns only the tools granted to that connection. Calls to other
 tools are refused. Group-context, episode, terminology and reply-chain tools are

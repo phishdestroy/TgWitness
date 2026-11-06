@@ -1,4 +1,5 @@
 import asyncio
+import itertools
 import json
 from types import SimpleNamespace
 from typing import Literal
@@ -198,13 +199,18 @@ def register(app, authenticate):
         except TimeoutError:
             raise HTTPException(503, "Archive query timed out. Narrow the query.") from None
 
-        def stream():
-            # Revocation, expiry or a timeout ends the stream without its completion line.
+        def portion():
+            return [(json.dumps(line, ensure_ascii=False, separators=(",", ":")) + "\n").encode()
+                    for line in itertools.islice(lines, EXPORT_RECHECK)]
+
+        async def stream():
+            # Each portion is read under the archive's shared thread limit, so open exports do not hold
+            # worker threads while a client reads. Revocation, expiry or a timeout ends the stream without
+            # its completion line.
             try:
-                for number, line in enumerate(lines, 1):
-                    if number % EXPORT_RECHECK == 0:
-                        connections(app).resolve(token, count=False, tool=body.tool)
-                    yield (json.dumps(line, ensure_ascii=False, separators=(",", ":")) + "\n").encode()
+                while chunk := await limited_in_thread(app.state.archive_slots, portion):
+                    yield b"".join(chunk)
+                    connections(app).resolve(token, count=False, tool=body.tool)
             except (Refused, TimeoutError):
                 return
         return StreamingResponse(stream(), media_type="application/x-ndjson", headers={"Cache-Control": "no-store"})

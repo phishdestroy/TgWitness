@@ -37,7 +37,8 @@ refused, so the token reaches only the address you give.
 
 **Directly from a stopped workspace (`--data-dir`).** Reads the data directory with
 full local access, without a token. Use it on a copy of a data directory or while
-collection is stopped. When the panel has the workspace open, the command exits with
+collection is stopped. Signed records are never changed; like the panel, opening a
+workspace may bring its derived indexes up to date. When the panel has the workspace open, the command exits with
 code `3`; read through the panel instead. Without `--data-dir`, `TGWITNESS_DATA`,
 `./data/live` or the data directory of the installation running the command is used.
 
@@ -99,7 +100,7 @@ file and exits with code `1`. `--output` never overwrites an existing file. With
 sequence and, for whole-workspace access, the journal head.
 
 An export through the panel needs a connection that allows **Export messages
-(command line only)**. This file is a working copy, not evidence: for a verifiable
+(command line only)**; it is not selected by default. This file is a working copy, not evidence: for a verifiable
 handover use the signed export in **Exports**, which `python -m tgwitness.verify`
 checks.
 

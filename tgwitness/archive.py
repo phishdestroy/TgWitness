@@ -33,7 +33,8 @@ class ConnectionSettings(BaseModel):
     workspaces: dict[str, list[int] | None] = Field(min_length=1, max_length=100)
     expires_at: float | None = None
     expires_in_seconds: int | None = Field(default=None, ge=60, le=90 * 86400, strict=True)
-    tools: list[Literal[TOOLS]] = Field(default_factory=lambda: list(TOOLS), min_length=1, max_length=len(TOOLS))
+    # Bulk export is granted only when chosen explicitly.
+    tools: list[Literal[TOOLS]] = Field(default_factory=lambda: list(MCP_TOOLS), min_length=1, max_length=len(TOOLS))
 
     @field_validator("name")
     @classmethod

@@ -73,13 +73,13 @@
     const box=$("mcp-tools"),previous=[...box.querySelectorAll("input:checked")].map(input=>input.value),initialized=!!box.childElementCount;
     if(JSON.stringify([...box.querySelectorAll("input")].map(input=>input.value))===JSON.stringify(tools))return;
     box.replaceChildren();
-    for(const name of tools){const label=node("label","check-label"),check=node("input"),text=node("span");check.type="checkbox";check.value=name;check.checked=initialized?previous.includes(name):true;
+    for(const name of tools){const label=node("label","check-label"),check=node("input"),text=node("span");check.type="checkbox";check.value=name;check.checked=initialized?previous.includes(name):name!=="export_messages";
       check.addEventListener("change",()=>{$("mcp-preset").value="custom";});text.append(node("span","",toolLabels[name]||name),node("code","",name));label.append(check,text);box.append(label);}
   }
   $("mcp-preset").addEventListener("change",()=>{
     const value=$("mcp-preset").value;if(value==="custom")return;
     const overview=new Set(["list_workspaces","list_chats","get_capture_status"]);
-    $("mcp-tools").querySelectorAll("input").forEach(input=>input.checked=value==="all"||overview.has(input.value));
+    $("mcp-tools").querySelectorAll("input").forEach(input=>input.checked=value==="all"&&input.value!=="export_messages"||overview.has(input.value));
   });
   function renderConnections(connections){
     const box=$("mcp-list"),keep=new Set(connections.map(entry=>entry.id));

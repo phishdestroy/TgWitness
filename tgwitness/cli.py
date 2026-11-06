@@ -154,7 +154,9 @@ def index(args):
 
 
 class Local:
-    """A stopped workspace read in this process with full local access. Nothing is written to the journal."""
+    """A stopped workspace read in this process with full local access.
+
+    Signed records are never changed; opening a workspace may bring its derived indexes up to date, as the panel does."""
 
     def __init__(self, root, workspace, budget):
         from .access import Principal
@@ -439,6 +441,8 @@ def export(archive, args):
     if target is not None and target.exists():
         raise Failure("The output file exists. Choose a new name.", EXIT_USAGE)
     partial = target.with_name(target.name + ".partial") if target else None
+    if partial is not None and partial.exists():
+        raise Failure("An interrupted export left " + str(partial) + ". Remove it or choose another name.", EXIT_USAGE)
     stream = open(partial, "x", encoding="utf-8", newline="\n") if partial else sys.stdout
     summary = None
     try:
@@ -492,7 +496,15 @@ def archive_command(args):
         archive.close()
 
 
+def utf8_output():
+    # JSON on a pipe must be UTF-8; Windows otherwise uses the ANSI code page and fails on other scripts.
+    for stream in (sys.stdout, sys.stderr):
+        if stream is not None and hasattr(stream, "reconfigure") and (stream.encoding or "").lower() not in ("utf-8", "utf8"):
+            stream.reconfigure(encoding="utf-8")
+
+
 def main(argv=None):
+    utf8_output()
     parser = argparse.ArgumentParser(prog="tgwitness", description="TgWitness command-line tools. Read-only except "
                                      "`index rebuild`, which rewrites only the derived search index.")
     commands = parser.add_subparsers(dest="command", required=True)

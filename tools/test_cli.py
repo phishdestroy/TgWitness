@@ -167,6 +167,10 @@ def test_local_commands(workspace, capsys):
     assert not target.with_name(target.name + ".partial").exists()
     code, _, err = run(capsys, "export", "--output", str(target), *base)
     assert code == 2 and "exists" in err
+    leftover = workspace.parent / "again.jsonl.partial"
+    leftover.write_text("", encoding="utf-8")
+    code, _, err = run(capsys, "export", "--output", str(workspace.parent / "again.jsonl"), *base)
+    assert code == 2 and "interrupted export" in err and leftover.exists()
     code, out, _ = run(capsys, "export", "--chat", str(OTHER), *base)
     assert code == 0 and [json.loads(line)["source"]["message_id"] for line in out.splitlines()] == [1, 2]
 
@@ -196,6 +200,17 @@ def test_exit_codes_and_clean_stdout(workspace, capsys, monkeypatch):
                              capture_output=True, text=True, encoding="utf-8", cwd=ROOT, timeout=120)
     assert process.returncode == 0, process.stderr
     assert json.loads(process.stdout)["messages"] == 4
+
+
+def test_output_is_utf8_on_any_pipe(monkeypatch):
+    import io
+    buffer = io.BytesIO()
+    stream = io.TextIOWrapper(buffer, encoding="cp1252")
+    monkeypatch.setattr(sys, "stdout", stream)
+    cli.utf8_output()
+    print("我 перевод ✅")
+    stream.flush()
+    assert buffer.getvalue().decode("utf-8").strip() == "我 перевод ✅"
 
 
 def test_tool_lists():
@@ -281,7 +296,8 @@ def test_panel_mode_uses_scoped_connection(tmp_path, capsys, monkeypatch):
         monkeypatch.setenv("TGWITNESS_MCP_TOKEN", full["token"])
         counted = document(capsys, "stats", "--chat", str(CHAT), *base)
         assert counted["messages"] == 4 and "collector_liveness" in counted["coverage"]
-        assert set(full["connection"]["tools"]) == set(TOOLS)
+        assert set(full["connection"]["tools"]) == set(MCP_TOOLS), "Bulk export is granted only when chosen"
+        assert run(capsys, "export", *base)[0] == 4
 
 
 if __name__ == "__main__":
