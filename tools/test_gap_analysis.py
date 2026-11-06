@@ -147,6 +147,7 @@ def test_export_report_and_verifier_carry_the_measurement(journal, tmp_path):
         assert "Missing message numbers" in page and "Account-wide message numbering" in page
         checked = verify_bundle(archive, expected_fingerprint=fingerprint(vault.public_key))
         recomputed = checked["coverage"]["gap_summary"]
+        assert recomputed == summary, "The verifier uses the signed measurement parameters"
         assert recomputed["account"]["missing"] == summary["account"]["missing"], "The verifier repeats it"
         assert any("Account-wide sequence" in line for line in coverage_lines(checked["coverage"]))
         with zipfile.ZipFile(FIXTURE) as old:
@@ -168,6 +169,58 @@ def test_report_rows_and_parameters_are_described():
     assert "A service-message estimate is shown." in view["note"]
     groups = {group["id"]: group for group in tuning.described(type("S", (), {"get_setting": lambda *_: {}})())["groups"]}
     assert {item["key"] for item in groups["gaps"]["items"]} == set(GAP_DEFAULTS)
+
+
+def test_service_numbers_are_observed_once_and_estimated_inside_the_window():
+    events = [event("scope.changed", payload={"after": WIDE}), event("chat.service", PERSON, 1)]
+    events += [event("message.new", PERSON, 100), event("chat.service", PERSON, 100)] * 4
+    events += [event("message.new", PERSON, 104), event("membership.service", PERSON, 102)]
+    events += [event("message.new", CHANNEL, 1), event("chat.service", CHANNEL, 2), event("message.new", CHANNEL, 3)]
+    measured = feed(Sequences({"gap_service_estimate": True}), events)
+    assert measured["chats"][0]["missing"] == 0
+    account = measured["account"]
+    assert account["missing"] == 2 and account["observed_without_content"] == 0
+    assert account["service_estimate"]["service_share"] == round(2 / 3, 4)
+
+
+def test_applied_scope_needs_explicit_own_message_coverage():
+    payload = {"mode": "account", "types": WIDE["types"], "excluded": []}
+    messages = [event("message.new", PERSON, 10), event("message.new", PERSON, 12)]
+    unknown = feed(Sequences(), [event("scope.applied", payload=payload)] + messages)
+    assert unknown["account"]["status"] == "not_applicable"
+    known = feed(Sequences(), [event("scope.applied", payload={**payload, "own_actions": True})] + messages)
+    assert known["account"]["missing"] == 1
+    partial = {"mode": "account", "types": {"private": True}, "own_actions": True}
+    assert feed(Sequences(), account_events(partial))["account"]["status"] == "not_applicable"
+    started = feed(Sequences(), [event("observation.started", payload={"scope": WIDE})] + messages)
+    assert started["account"]["missing"] == 1, "A recorded start scope is sufficient without a scope change"
+
+
+def test_stopped_collection_does_not_extend_account_measurement(journal):
+    from tgwitness.gap_analysis import capture_summary
+    _, store = journal
+    store.append("observation.stopped", {"reason": "operator"})
+    store.append("message.new", {"text": "outside live collection"}, PERSON, 1000)
+    stopped = capture_summary(store)["account"]
+    assert stopped["observed_to"] == 303
+    store.append("observation.started", {})
+    store.append("message.new", {"text": "resumed"}, PERSON, 1001)
+    resumed = capture_summary(store)["account"]
+    assert resumed["observed_to"] == 1001 and resumed["note"]
+
+
+def test_expired_capture_budget_returns_partial_without_poisoning_later_reads(journal):
+    from tgwitness.gap_analysis import capture_summary
+    _, store = journal
+    assert "partial" in capture_summary(store, budget=0)
+    assert "partial" not in capture_summary(store)
+
+
+@pytest.mark.parametrize("settings", [{"gap_analysis": "false"}, {"gap_clusters_listed": -1},
+                                      {"gap_cluster_min": True}, {"gap_service_estimate": []}])
+def test_gap_parameters_reject_invalid_types_and_ranges(settings):
+    with pytest.raises(ValueError, match="gap parameter"):
+        Sequences(settings)
 
 
 if __name__ == "__main__":

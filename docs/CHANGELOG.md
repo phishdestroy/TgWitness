@@ -3,7 +3,17 @@
 ## Unreleased
 
 - Mark messages left out of a minimized disclosure (preview): inside each disclosed chat, withheld messages appear as content-free markers naming the selection rule, one per run or one per message, and disclosed replies state whether they answer a disclosed message, a withheld one or one that is not in the source export. The package format becomes `tgwitness-account-disclosure-v2`; `verify.py` rejects markers with content and replies pointing at missing records, and still verifies version 1 packages.
+- Repeat gap analysis with the settings carried by the signed export，count each service-message number once，and bound account estimates to the measured interval．Require explicit whole-account scope，retain pause／resume boundaries，and interrupt expensive archive scans at their time budget．
+
 - Add missing message numbers (preview): `coverage.json`, the HTML and PDF reports, `verify.py` and the archive's `get_capture_status` measure numbers Telegram assigned and this collector never saw, per channel or supergroup and for the account-wide sequence of private chats, bots and ordinary groups during whole-account collection. Each result states whether it applies and why, lists its parameters, and anchors listed gaps to the neighbouring observations. **Parameters → Gap analysis** sets the listed gaps, the account-wide sequence and an optional service-message estimate that is never subtracted. A gap names no actor and no reason.
+- Keep ranked-search pages within the first 1，000 results regardless of page size，order OCR／transcription results before pagination，and retain exact match positions when Unicode expansions and invisible-character removal cancel each other's length changes．
+
+- Keep photo downloads on the still variant named by their metadata and hash manifests，including after file-reference renewal．Reject truncated photo／chat attachments and corrupt reused files instead of counting them as saved．Check recovered multi-account message IDs against missing intervals without expanding large gaps．
+
+- Release a session's local connection lock after transport shutdown，including when a disconnected client was already removed from the workspace．Cancelling the waiting operation cannot release the lock early，and closing an older session cannot unlock a different current key．
+
+- Apply a chat export's skip／hash-only choice to recovered messages and profile photos，and record that choice in the acquisition metadata．Reject changed messages before fetching attachments in the separate files stage．Count missing message numbers as intervals so sparse histories do not exhaust memory，including during a cancellable full recheck．
+
 - Preserve available self-destructing photos，videos and files in the API journal with a dedicated immediate queue，explicit TTL／view-once labels and signed saved／unavailable／not-saved outcomes．Block read receipts in the API client，including batches and wrapped requests．Keep byte limits，disk reserves and Telegram backoff；saved bytes do not establish human viewing．
 - Preserve image-rendered Unicode emoji in official Web message text，reply previews，reactions and derived page text without changing the client DOM．A live account test exposed the omission；video and saved pages already retained the image．
 - Improve chat-export Takeout, unreadable-message recovery, shared absent-number rechecks and bounded range retries. Preserve observed deletions in export scope, compare verified archives, and distinguish archive integrity from an independently confirmed signer.
@@ -15,7 +25,15 @@
 - Add [full-text search](SEARCH.md) (preview): Russian and Ukrainian word forms, English stems, Chinese and Japanese phrases without spaces, exact phrases, domains in hidden links and buttons, @usernames, wallets and phones, filters for chat, sender, message ID and observation period, ranked with BM25. The index is derived from the signed journal, bound to its latest record hash, never exported, and can be kept on disk, in memory only or turned off. Recognized text is indexed in memory only and labelled as machine recognition.
 - Ask the archive retrieves the best matches from the full-text index when it is complete, keeps the 24-source limit, and cuts long texts around their match. MCP `search_messages` accepts `ranked=true`.
 - Add `tgwitness index status|rebuild` with JSON output on stdout and stable exit codes.
+- Fix ranked search paging: `next_offset` is now returned when more matches exist, through `/api/search`, MCP `search_messages` and Ask the archive's partial marker. Paging stops at the first 1,000 results.
+- Fix Ask the archive failing on questions longer than 24 words or 200 characters. The full-text query keeps the question's first distinct words; a query the index cannot read falls back to exact-text retrieval.
+- Centre excerpts on the match in long texts that hide zero-width characters between letters.
 - Build the website when a language lacks new translations: untranslated blocks stay in English with the page notice and are listed by the build.
+- Add the [command line](CLI.md) (preview): `tgwitness search`, `context`, `messages`, `stats` and `export` with `--json` and stable exit codes, reading a stopped workspace directly or a running panel through a scoped, revocable archive connection. Add `.agents/skills/tgwitness-cli/SKILL.md` for agents.
+- Add the `get_activity_stats` archive tool, also offered over MCP: messages by UTC hour and weekday, peak days, edit and deletion shares, senders, domains and @handles, with coverage gaps. Computed on request, not stored.
+- Add the `export_messages` archive tool for the command line: saved observations streamed as JSON Lines in journal order, with full text and a completion record. It is granted only when selected; existing connections keep the tools they were issued with.
+- Recheck archive access before every streamed record, including completion. Revoked or expired connections end without a completion record; lazy export reads share the archive worker limit and timeout.
+- `tgwitness index` and the new commands find the data directory of the installation that runs them.
 
 ## 0.9.1 preview · 5 November 2026
 
