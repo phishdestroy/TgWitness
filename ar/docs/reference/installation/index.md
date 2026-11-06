@@ -44,6 +44,30 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
 
 يتضمن كل تثبيت **START-HERE.html** و**START-HERE.txt**، مع المسارات المحلية والأوامر والروابط إلى المستودع. قم بتشغيل `tgwitness guide` لفتح الدليل. في نظام Windows، استخدم `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` في PowerShell.
 
+## إعدادات البحث عن النص الكامل
+
+لا يحتاج [البحث عن النص الكامل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/) (معاينة) إلى أي إعداد. يتم إنشاء فهرسه في الخلفية بعد التحديث.
+
+| متغير أو أمر | التأثير |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | الافتراضي: يتم الاحتفاظ بالفهرس في `search/fulltext.sqlite3` كل مساحة عمل |
+| `TGWITNESS_FULLTEXT=memory` | لا يوجد ملف فهرس؛ يتم إعادة إنشاء الفهرس عند كل بدء تشغيل |
+| `TGWITNESS_FULLTEXT=off` | لا يوجد فهرس؛ البحث عن النص الدقيق فقط |
+| `tgwitness index status` | حالة فهرس كل مساحة عمل |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | أعد بناء كل فهرس من السجل الموقّع |
+
+يُفضل اختيار المسؤول في **«Journal» → «Filters» → «Search index»** على المتغير الخاص بمساحة العمل تلك. تبحث الأوامر عن دليل البيانات الخاص بالتثبيت الذي يتم تشغيلها عليه؛ وفي الأماكن الأخرى، أضف `--data-dir` المسار من `tgwitness paths`. للحصول على قاموس أوكراني كامل (بيانات GPL-3.0)، قم بتثبيت `pymorphy3-dicts-uk` في بيئة Python الخاصة بالتثبيت.
+
+## الوصول عبر سطر الأوامر
+
+يقرأ [سطر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/) [الأوامر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/) (نسخة تجريبية) الأرشيف بحثًا عن البرامج النصية والوكلاء.
+
+| متغير | التأثير |
+| --- | --- |
+| `TGWITNESS_URL` | عنوان اللوحة الخاصة بـ `tgwitness search`, `context`, `messages`, `stats` و `export`؛ القيمة الافتراضية `http://127.0.0.1:8787` عند تعيين رمز مميز |
+| `TGWITNESS_MCP_TOKEN` | أرشفة رمز الاتصال من **«التكاملات» → «MCP**»، الذي يتم مشاركته مع عملاء MCP؛ `--token-file` قراءته من ملف بدلاً من ذلك |
+| `TGWITNESS_DATA` | يتم قراءة دليل البيانات مباشرةً في حالة عدم `--data-dir`أو لم يتم تقديم عنوان URL أو رمز مميز |
+
 ## التحقق قبل التشغيل
 
 يعتمد الأمر المكون من سطر واحد على بروتوكول HTTPS في البرنامج النصي الأولي. يتحقق هذا البرنامج النصي من SHA-256 وتوقيع RSA الخاص بالمشروع على التطبيق والقيود قبل التثبيت. يمكنك أيضًا تنزيل البرنامج النصي الأولي والتحقق منه أولاً.

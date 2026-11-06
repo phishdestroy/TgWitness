@@ -8,6 +8,8 @@ TgWitness merekod apa yang diperhatikan oleh akaun Telegram yang disambungkan. J
 
 ## Dari log masuk ke jurnal
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 Diyagram aliran · Memberi kebenaran kepada akaun pengguna → Pilih kumpulan dan saluran yang boleh diakses; Pilih kumpulan dan saluran yang boleh diakses → Simpan tetapan acara dan lampiran; Simpan tetapan acara dan lampiran → Mulakan pemerhatian; Mulakan pemerhatian → Terima kemas kini daripada klien aktif; Terima kemas kini daripada klien aktif → Terapkan dasar sumber dan peristiwa; Terapkan dasar sumber dan peristiwa → Lampirkan pemerhatian yang disahkan; Lampirkan pemerhatian yang disahkan → Semak atau eksport jurnal; Lampirkan pemerhatian yang disahkan → Proses sebarang lampiran yang beratur; Proses sebarang lampiran yang beratur → Lampirkan hasil muat turun · Memberi kebenarankepada akaun pengguna · Pilih kumpulan dansaluran yang bolehdiakses · Simpan tetapan acaradan lampiran · Mulakan pemerhatian · Terima kemas kinidaripada klien aktif · Terapkan dasar sumberdan peristiwa · Lampirkan pemerhatianyang disahkan · Semak atau eksportjurnal · Proses sebaranglampiran yang beratur · Lampirkan hasil muatturun
 
 **Diagram sebagai teks**

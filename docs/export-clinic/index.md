@@ -119,7 +119,7 @@ If a subject learns of an impending seizure with sufficient lead time — seven 
 
 ### Garbage In, Garbage Out
 
-The signed report is accurate. It proves nothing about what preceded the extraction.
+The signed report binds the extracted bytes to that acquisition．Earlier device history is assessed using records from the earlier period．
 
 The chain that follows — expert witnesses reading the tool output, writing analyses, signing conclusions — is similarly accurate at each individual step. No one in the chain is lying. No one in the chain is proving historical truth. Each participant accurately reports what they received from the previous step.
 
@@ -215,10 +215,6 @@ Calculate each file's SHA-256 and compare it with the published checksums. Match
 **How does TgWitness make the record checkable?**
 
 The collector signs entries as it receives data from Telegram. The archive includes the journal, file hashes and verification data. Retain a key fingerprint and checkpoint separately, then check the recipient's copy against them. GitHub capture adds verification of the approved collection workflow and its output. [Follow the verification steps ↗](https://phishdestroy.github.io/TgWitness/docs/exports/)
-
-**What about Telegram Web and mobile apps?**
-
-Those are separate planned experiments. This Desktop recording does not establish behavior of mobile storage, backups or Web clients. [Read the scoped follow-up plan ↗](https://phishdestroy.github.io/TgWitness/assets/export-clinic/next-experiments-en.md)
 
 The seven conversations were prepared for this experiment. The recording, paired exports and change ledger document the local-file changes described above.
 

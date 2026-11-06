@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/witne
 
 [エクスポートと検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/) · [高信頼性](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/) · [パネルガイド](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#extras)
 
-コレクターは自身のジャーナルに署名するため、コレクターとその鍵を管理する者がいれば、 原則としてジャーナルを書き換えたり切り詰めたりして、再度署名することが可能です。 Witnessは、 その行為を検知可能にします。これは独立したプロセスであり、別のコンテナ、あるいはより正確には第三者が 運用するサーバーが、数分おきにコレクターの署名済みジャーナルの先頭部分を取得し、 確認した内容を自身の鍵で署名し、自身のジャーナルに保存した上で、Telegramチャンネルに投稿します。
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 フローチャート · コレクター → Witness (署名付きチェックポイント：記録数 + 先頭ハッシュ); Witness → Witnessジャーナル、独自の鍵; Witness → Telegramチャンネル (独自のボットを介して署名付きで投稿されました); 証拠 ZIP → verify.py; Witnessジャーナル、独自の鍵 → verify.py; Telegramチャンネル → verify.py (Telegram Desktopからのエクスポート、または「t.me/s」ページ) · コレクター · Witness · Witnessジャーナル、独自の鍵 · Telegramチャンネル · 証拠 ZIP · verify.py · 署名付きチェックポイント：記 · 録数 + 先頭ハッシュ · 独自のボットを介して署名付き · で投稿されました · Telegram · Desktopからのエクスポート、 · または「t.me/s」ページ
 
@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/witne
 一定の間隔（デフォルトでは10分ごと）ごとに、witnessは以下の処理を行います：
 
 1. ヘッド自体を取得します（コレクターはこれをプッシュしたりスキップしたりすることはできません）；
-2. コレクターの署名、固定されたコレクターキー（`--collector-fingerprint`、 または最初に確認されたキー）、非減少のカウント、およびカウントが変更されていない状態でヘッドが変更されていないことを検証します。
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. 自身のジャーナルに署名付きレコードを追加します：`witness.anchor`（ステータス：`ok`、 `key_changed`、`rollback`（以前よりレコード数が少ない）、`fork`（長さは同じですが、 ヘッダーが異なる）、または`invalid`（検証に失敗した）、あるいは`witness.no_response`（ コレクターが応答しなかった場合））；
 4. TgWitnessが 稼働中でBot APIにアクセス可能な間は、「no answer」を含め、署名付きの結果をチャンネルに投稿します。投稿ID（`witness.posted`）が記録され、 投稿に失敗した場合も同様に記録されます（`witness.post_failed`）。
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 これには、独立して保持されている「ウィットネス・フィンガープリント」と、このエクスポートの 正確な末尾にある一致するチェックポイントが必要です。より前のプレフィックスのみを カバーするチェックポイントでは不十分です。収集を一時停止し、ウィットネスに最終状態を 確認させた上で、ジャーナルへのさらなる書き込みが行われる前にエクスポートを行ってください。ジャーナルが変更された場合は、別のチェックポイントを保持し、 その状態をエクスポートしてください。 後のチェックポイントだけでは、より短いエクスポートの最終ハッシュを検証することはできません。 `--channel`も指定されている場合、主張された投稿の欠落や空のマッチセットは、この 厳格なチェックに失敗します。このフラグがない場合でも、通常の整合性チェックでは、 アーカイブ自体が破損していないにもかかわらず、証人による検証が行われていない レコードが報告されます。
 
-このフラグは、提供され、固定された証言記録との整合性を確保するものです。運用者は 依然として、証言の独立性を確立し、その記録を別途保存する必要があります。 このフラグは、メッセージの真実性、完全な収集、または独立して測定された実行時間を保証するものではありません。
-
-「ウィットネス」は、その時点でコレクターが報告した内容と、その後のエクスポート結果が それと一致していることを示します。コレクターがTelegramから配信されたすべてを記録したこと、あるいは メッセージの内容が真実であることを示すものではありません。同じオペレーターが同じマシン上で実行したウィットネスは、 他の誰かが実行したものよりも信頼性が低くなります。
-
-単に件数が増加しただけでは、オンライン上の「追記専用」の連続性を立証することはできません。オフラインでの 比較において、保持されている各プレフィックスハッシュが、コレクターのエクスポートデータ全体と一致している必要があります。 Witnessのダウンタイムや公開の失敗により、外部のアンカーがない期間が生じます。欠落した 投稿は、保持されているWitnessジャーナルに対して報告することができます。同じ運営者が管理するチャンネルやサーバーは、 不変の第三者アーカイブとはみなされません。
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

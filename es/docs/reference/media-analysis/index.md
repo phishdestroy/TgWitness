@@ -8,7 +8,7 @@ Reconoce las imágenes y el audio capturados mediante un «worker» local; manti
 
 Abre un registro del diario `media.saved`, elige **«Reconocer archivo adjunto**» y, a continuación, selecciona «OCR» o «transcripción» en **«Preguntar al archivo**». El procesamiento es manual y local. No hay modo de almacenamiento en la nube ni subida automática. Los bytes originales del archivo adjunto y el `media_sha256` permanecen inalterados; el texto reconocido se marca explícitamente como reconocimiento automático y se almacena por separado con el hash de origen, la versión del motor o modelo, el idioma, los parámetros y la hora de finalización. Las transcripciones conservan las marcas de tiempo devueltas.
 
-Busca en estos resultados utilizando **la opción «Buscar texto reconocido»** y el filtro «OCR/transcripción». Se trata de una búsqueda independiente de datos derivados; no convierte automáticamente el reconocimiento automático en texto original de Telegram ni lo añade a los eventos firmados.
+Busca entre estos resultados utilizando **la opción «Buscar texto reconocido»** y el filtro «OCR/transcripción», o selecciona el texto reconocido como fuente de una búsqueda de «mejor coincidencia» **en el diario**. Ambas opciones comparan formas de palabras a través de un [índice en memoria](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#recognized-text). Se trata de una búsqueda independiente basada en datos derivados; no convierte automáticamente el reconocimiento automático en texto original de Telegram ni lo añade a los eventos firmados.
 
 ## Configurar el «worker» opcional
 

@@ -134,7 +134,7 @@ Tinjau setiap pemeriksaan secara terpisah, bersamaan dengan cakupan pengumpulan 
 4. Pertahankan file ZIP asli beserta hash-nya. Catat setiap pemegang, transfer, tanggal, dan tujuan. Pertahankan pernyataan operator yang dikaitkan serta catatan kasus bersama dengan data tersebut.
 5. Untuk VM rahasia, pertahankan dan verifikasi secara independen kutipan, tantangan, rantai sertifikat Intel, pengukuran, sumber yang tepat, dan kondisi penanganan kunci. Simpan hasil verifikasi attestation bersama artefak yang telah ditinjau.
 
-Lihat [ruang lingkup verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) untuk asumsi kepercayaan serta penilaian terpisah terhadap klaim sumber, identitas, waktu, dan cakupan pengumpulan.
+See [verification scope](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Tinjauan penerima
 

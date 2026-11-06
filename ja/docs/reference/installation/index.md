@@ -44,6 +44,30 @@ Ubuntu では、**「このコンピュータ**」、「**一時的な HTTPS リ
 
 すべてのインストールには、ローカルの パス、コマンド、リポジトリへのリンクが記載された **START-HERE.html** および **START-HERE.txt** が含まれています。 `tgwitness guide` を実行してガイドを開きます。 Windowsでは、 `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` を使用してください。
 
+## 全文検索の設定
+
+[全文検索](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/)（プレビュー版）は設定が不要です。インデックスは更新後に バックグラウンドで構築されます。
+
+| 変数またはコマンド | 効果 |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | デフォルト：インデックスは各ワークスペースの `search/fulltext.sqlite3` 各ワークスペースの |
+| `TGWITNESS_FULLTEXT=memory` | インデックスファイルは存在せず、起動のたびにインデックスが再構築されます。 |
+| `TGWITNESS_FULLTEXT=off` | 索引は作成せず、完全一致検索のみとする |
+| `tgwitness index status` | すべてのワークスペースの状態をインデックス化 |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | 署名付きジャーナルからすべてのインデックスを再構築する |
+
+「**ジャーナル**」**→「フィルター」→**「**検索インデックス**」で管理者が選択した設定は、 そのワークスペースの変数を上書きします。コマンドは、それを実行しているインストール環境の データディレクトリを検索します。それ以外の場所では、 `--data-dir` からパスを追加してください `tgwitness paths`. 完全なウクライナ語辞書（GPL-3.0データ）を使用するには、 `pymorphy3-dicts-uk` を インストール先の Python 環境にインストールしてください。
+
+## コマンドラインからのアクセス
+
+[コマンドライン](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/)（プレビュー版）は、スクリプトやエージェントをアーカイブから読み込みます。
+
+| 変数 | 効果 |
+| --- | --- |
+| `TGWITNESS_URL` | パネル発表の `tgwitness search`, `context`, `messages`, `stats` および `export`; デフォルト `http://127.0.0.1:8787` が設定されている場合 |
+| `TGWITNESS_MCP_TOKEN` | **「統合」→「MCP」**から取得した接続トークンをアーカイブし、MCPクライアントと共有する。 `--token-file` 代わりにファイルから読み込む |
+| `TGWITNESS_DATA` | URLやトークンが指定されていない場合は、データディレクトリから直接読み込む `--data-dir`、URL、またはトークンが指定されていない場合、データディレクトリから直接読み込みます |
+
 ## 実行前に確認してください
 
 1行のコマンドは、初期スクリプトに対してHTTPSを信頼します。そのスクリプトは、インストール前に SHA-256およびアプリケーションと制約条件に対するプロジェクトのRSA署名を検証します。 また、最初に初期スクリプトをダウンロードして検証することも可能です。

@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/
 
 संग्रह और एकीकरण
 
-[केस बोर्ड संदर्भ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/)[संग्रह विश्लेषण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/analysis/)[केवल-पठनीय MCP](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/)[स्थानीय OCR और प्रतिलेखन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/media-analysis/)[आउटगोइंग वेबहुक्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/webhooks/)[सार्वजनिक प्रदर्शन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/showcase/)
+[केस बोर्ड संदर्भ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/)[संग्रह विश्लेषण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/analysis/)[पूर्ण-पाठ खोज](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/)[केवल-पठनीय MCP](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/)[कमांड लाइन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/cli/)[स्थानीय OCR और प्रतिलेखन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/media-analysis/)[आउटगोइंग वेबहुक्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/webhooks/)[सार्वजनिक प्रदर्शन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/showcase/)
 
 साक्ष्य
 

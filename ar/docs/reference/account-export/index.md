@@ -31,6 +31,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/accou
 
 لا يتم تحديد سجل صور الملف الشخصي والقصص بشكل افتراضي. قم بتعطيل الملف الشخصي وجهات الاتصال أيضًا عندما تحتاج القضية إلى الرسائل فقط. إذا كانت المرفقات أو البيانات الوصفية غير ضرورية، فإن استبعادها أثناء الاستحواذ يتجنب الاحتفاظ بنسخة خاصة أخرى في عملية التصدير هذه.
 
+Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+
 ## السيرة الذاتية والتغطية والتحقق
 
 تقوم كل مهمة بتجميد خياراتها وهوية الحساب. يتم توقيع قائمة الجرد والصفحات الملتقطة؛ وتسجل إيصالات الصفحات التجزئات والمؤشرات والأوقات ونتائج المرفقات والإيصالات السابقة لها. لا تتقدم في التقدم سوى الصفحات التي تم التزامها. تقوم عملية «إعادة التشغيل/الاستئناف» بالتحقق من تلك السجلات قبل المتابعة. ويتم رفض أي حساب تم تغييره، أو صفحة موقعة تم تغييرها، أو سلسلة إيصالات غير متسقة. لا يمكن تعديل الخيارات في منتصف عملية الاستحواذ: ابدأ مهمة أخرى لنطاق آخر.
@@ -64,6 +66,14 @@ python -m tgwitness.verify account-export.zip --fingerprint TRUSTED_SHA256
 5. قم بمعاينة الأعداد والتحذيرات وعينات الرسائل المحولة، ثم قم بتأكيد الإنشاء صراحةً. تقتصر العينات على 12 رسالة و2,000 حرف نصي لكل منها. هذه عينة وليست مراجعة كاملة للنتيجة. يتطلب تغيير الإعدادات معاينة أخرى. تنتهي صلاحية المعاينة بعد 15 دقيقة وترتبط بجلسة عمل ذلك المسؤول وZIP الأصلي بالضبط؛ ولا يمكن إعادة استخدامها بعد إنشائها. تؤدي المعاينة الجديدة إلى إبطال صلاحية المعاينة السابقة لنفس المهمة والجلسة.
 6. افحص النتيجة الكاملة `index.html` و `messages.jsonl` محليًّا قبل تسليمها. إذا كشفت عن معلومات غير ضرورية، فقم بإنشاء إفصاح جديد مع استثناءات أكثر صرامة. لا تقم بتحرير الصورة الموقعة ZIP في مكانها.
 
+### الرسائل التي تم استبعادها من عملية الاختيار
+
+**معاينة.** لا يبدو الإفصاح كاملاً عندما لا يكون كذلك. داخل كل محادثة تحتوي على رسالة واحدة على الأقل تم الإفصاح عنها، تظهر الرسائل التي استبعدها التحديد كعلامات، `[withheld by selection — rule: sender]` (أو `text`, `period`). اختر **«الرسائل التي استبعدها التحديد**»: علامة واحدة لكل سلسلة من الرسائل المتتالية المستبعدة (الافتراضي) أو علامة واحدة لكل رسالة. لا تحتوي العلامات إلا على القاعدة والعدد، ولا تحتوي أبدًا على النص أو المرسل أو التاريخ أو الملفات. تُستبعد الدردشات التي لا تحتوي على أي رسائل مكشوفة بالكامل، بحيث لا يكشف الحزمة عن وجودها.
+
+توضح الردود المكشوفة ما الذي تجيب عليه: رسالة مضمنة في هذه النسخة، أو رسالة تم حجبها من خلال عملية الاختيار، أو رسالة غير موجودة في التصدير الأصلي (تم حذفها قبل التصدير أو لم يتم تصديرها أبدًا؛ ولا يمكن للتصدير تحديد أيهما). تحصل الرسالة المحجوبة التي يجيب عليها الرد المكشوف دائمًا على علامة خاصة بها، بحيث يشير الرد إلى سجل يشرح سبب كونها فارغة. تختلف هذه الحالات الثلاث عن عمليات الحذف والثغرات في التجميع، التي تنتمي إلى التصدير الأصلي.
+
+في `messages.jsonl` (التنسيق `tgwitness-account-disclosure-v2`) تحتوي كل رسالة على `state`: `disclosed`، أو `withheld` مع `rules` و `count`. الرد المكشوف يحتوي على `reply_to` مع الهدف `id` و `state` (`disclosed`, `withheld`, `not_in_source`). ويحسب ملف البيانات الرسائل المكشوفة والمحادثات والوسائط و `withheld` الرسائل. `verify.py` يرفض العلامة التي تحمل محتوى والرد الذي يشير إلى سجل مفقود من الحزمة؛ أما حزم الإصدار 1 فتتم التحقق منها كما كان من قبل.
+
 يستبعد التنسيق المُصغر ملفات تعريف الحسابات المنظمة، وجهات الاتصال، والصور الرمزية، والجلسات، والقصص، وكائنات Telegram الأولية، ورؤوس إعادة التوجيه، واقتباسات الردود، وبطاقات جهات الاتصال، وبيانات تعريف الموقع. كما يستبعد ملفات JSONL الأصلية، وإعدادات التصفية الخاصة، ومفتاح الاسم المستعار، وخريطة الهوية. قد لا يزال النص المحدد، والهويات التي تم الاحتفاظ بها صراحةً، والملفات المضمنة تحتوي على نفس الأسماء أو المعرّفات أو العبارات المستخدمة في تلك المرشحات؛ لذا فهي تحتاج إلى مراجعة منفصلة. يتم الاحتفاظ بسياسة الخصوصية ومفتاح الاسم المستعار مشفرين في الخزينة المحلية الخاصة بالمهمة؛ ويؤدي حذف المهمة إلى مسح سجلات الكشف الخاصة المرتبطة بها. تسجل سياسة الخصوصية العامة عدد المرشحات بدلاً من قيم المرشحات. يكون الغرض المعلن عامًا في ملف البيان وملف HTML: حيث يتم إخفاء المعايير الخاصة الصريحة، وفي أوضاع استخدام الأسماء المستعارة، يتم إخفاء الهويات المخفية المعروفة هناك أيضًا، بما في ذلك عند حذف نص الرسالة. احرص على أن يكون الغرض خاليًا من التفاصيل الشخصية غير الضرورية؛ ويمكن أن يبقى سياق التعريف غير المعروف.
 
 يربط ملف البيان الخاص بها الملفات المشتقة، والسياسة العامة، وهاش الصورة الأصلية ZIP. يمكن للتحقق أن يثبت سلامة البيانات، وإذا تم توفير المصدر محليًّا، فإنه يثبت تطابق ارتباط المصدر:
@@ -75,12 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 لا يُثبت ربط المصدر بحد ذاته أن عملية التحويل قد اختارت كل عنصر مطلوب أو أزالت كل تفصيل مميز. لم يتم تضمين النص الأصلي العادي كدليل. ويلزم إجراء مراجعة جديدة لإصدار هذا الحكم.
 
-## حماية البيانات ومعاينة Capture المستضافة
+## Sharing and hosted capture
 
-تدعم هذه الضوابط مبدأ «تحديد الغرض» و«تقليل البيانات»؛ وهي لا تشكل فحصًا تلقائيًا للامتثال القانوني. تتناول [المادتان 5 و25 من اللائحة العامة لحماية البيانات (GDPR)](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) تلك المبادئ والحماية «من حيث التصميم» أو «افتراضيًا». ولا تزال المسائل المتعلقة بالأساس القانوني، والضرورة، وشروط الفئات الخاصة حيثما ينطبق ذلك، والاحتفاظ بالبيانات، والأمن، ووصول المستلمين، تتطلب اتخاذ قرار مناسب لكل حالة على حدة. ولا يجعل الغرض القضائي وحده كل عملية إفشاء معلومات قانونية. وتظل البيانات المُستعارة الهوية عمومًا بيانات شخصية؛ انظر [توضيح المجلس الأوروبي لحماية البيانات (EDPB)](https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en).
+Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
 
-يمكن للنصوص الحرة والتواريخ والأحداث النادرة ومجموعات الحقائق أن تحدد هوية الأشخاص حتى بعد حذف الأسماء. يُفضل حذف النص عندما يكون محتوى الرسالة غير ضروري؛ وافحص النسخة الكاملة عند الضرورة. حافظ على حماية المصدر والخزينة، واتفق على مدة الاحتفاظ والمشاركة مع الشخص المسؤول، وسجل أي ZIP بالضبط تم تسليمه.
-
-يدعم GitHub Actions تصدير الحساب كله أو محادثات محددة عبر Takeout أو API العادي إضافة إلى سجل محادثة واحدة．يوضح دليل [GitHub Actions](https://phishdestroy.github.io/TgWitness/docs/capture/) التحقق من الإعدادات وحد 120 دقيقة．لا ترث الصادرات المحلية ونسخ المشاركة شهادة GitHub，ولا تثبت الاختبارات الاصطناعية العمل مع حساب Telegram حقيقي．
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope)．
 
 [تنسيق الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/) · [تقارير الحالات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-reports/)

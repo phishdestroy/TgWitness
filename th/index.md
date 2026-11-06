@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/
 
 [โอเพนซอร์ส ／ v0.9.1](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/)
 
-บันทึกแชท Telegram พร้อมทุกการแก้ไขและการลบ แล้วส่งมอบบันทึกที่ใครก็ตรวจสอบได้
+Export Telegram chats，preserve their history，and share a signed archive others can verify．
 
 [เปิดเดโม](https://phishdestroy.github.io/TgWitness/demo/?lang=th)[คู่มือการติดตั้ง](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=th)
 
 ข้อมูลสมมติ ไม่ต้องเข้าสู่ระบบ Telegram
 
- [รวบรวมผ่าน GitHub Actions （รุ่นทดลอง）](https://phishdestroy.github.io/TgWitness/th/docs/capture/) [สำเนาสำรองนอกไซต์ S3： การตั้งค่าและการกู้คืน](https://phishdestroy.github.io/TgWitness/th/#s3)
+ [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/th/docs/reference/account-export/) [รวบรวมผ่าน GitHub Actions （รุ่นทดลอง）](https://phishdestroy.github.io/TgWitness/th/docs/capture/) [สำเนาสำรองนอกไซต์ S3： การตั้งค่าและการกู้คืน](https://phishdestroy.github.io/TgWitness/th/#s3)
 
 ข้อความหนึ่ง ผ่านกาลเวลา＃0042
 

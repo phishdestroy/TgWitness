@@ -101,7 +101,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/inves
 | نفس الملف المحفوظ | تم إكمال إيصالات الوسائط رقم #151 و#209 | تتطابق قيم SHA-256 الكاملة مع البايتات المحفوظة |
 | إسناد القناة | #101 و#188 | لا تنسب أي منشور في القناة إلى المستخدم 71001 دون ذكر المرسل |
 
-قارن هاشات المرفقات ومراجع الرسائل المرتبطة بها. لا تثبت الملفات المتطابقة وجود منشئ أو مُعيد إرسال أو مشغل مشترك. كما أن الأسماء المتطابقة والصور الرمزية المتشابهة وحدها لا تربط بين معرّفين على Telegram لتشير إلى شخص واحد.
+Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
 
 احتفظ بملاحظات عمل الفريق على [«لوحة القضية» (Case Board](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/)): ضع إشارة مرجعية على السجلات التي تعتمد عليها، مثل #146 و#188 و#205، وقم بتمييز سلسلة الوجهة الدقيقة، و احفظ جزءًا من كل إجراء مسجل بين سجلين أو في نطاق زمني معين. تحتفظ الملاحظات والحالات بمراجعة الفريق في سجلها الموقّع الخاص، والذي يمكن تمييزه بشكل منفصل عن الملاحظات المصدرية.
 
@@ -161,6 +161,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | نزاع حول الطلب/الدفع مدفوع بواسطة روبوت | إعلان الدخول → معاينة الرابط المحفوظ → معلمة بدء تشغيل البوت → إصدارات الرسائل ولوحة المفاتيح → إيصالات استدعاء اللوحة → متابعة الرسائل الخاصة/الجماعية | تم رصد التسلسل الزمني للعروض/الردود والتحقق من المصادر؛ ولا يُعد رابط الدفع وحده دليلاً على إتمام عملية الدفع |
 | الرسائل التي تم حذفها بعد وقوع الحادث | جميع المحادثات المعنية → النسخ الأصلية المحفوظة/التعديلات → نتائج الحذف أو الفقدان عند إعادة التحقق → الوسائط المحفوظة → التغطية ووجهات نظر الحسابات الأخرى | إصدارات محفوظة وفترات زمنية مجهولة محددة بوضوح؛ لا توجد جهات محددة مفترضة مسؤولة عن الحذف |
-| أحد المشاركين يغير أسماءه عبر الدردشات | معرّف المرسل الرقمي → سجل الأسماء/أسماء المستخدمين → الردود → المحادثات الأخرى التي تمت ملاحظتها → الوجهات/الملفات المذكورة | خط زمني لنشاط حساب Telegram المذكور، مع الفصل بين الهوية الحقيقية وفرضيات العلاقات |
+| أحد المشاركين يغير أسماءه عبر الدردشات | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
 
 [مرجع المجموعة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/) · [التحقق من الهوية الشخصية](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#people-profiles) · [تسليم الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#investigation-handoff) · [تم إتمام عملية التحقق من الصحة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/)

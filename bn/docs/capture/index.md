@@ -29,6 +29,12 @@ The helper explains the five stages and lets you try message or collector substi
 
 The repository must contain the published pinned source and reusable-workflow commits. A local branch alone cannot be invoked by another GitHub repository.
 
+## Session time budget
+
+Before collection，**Calculate time and size** estimates the selected history and files from message counts and a bounded sample．The display includes time already spent signing in，estimated collection time and a reserve for packaging．For files，the initial estimate uses 1 MiB/s and a twofold time margin；progress replaces that assumption with the measured rate．Use **Messages only** or select fewer chats when the estimate exceeds the remaining time．
+
+Telegram's reported Takeout wait is added to the budget．The collector stops acquisition when the remaining time is needed for packaging，retains acquired data and marks a partial result．A 120-minute session therefore uses its remaining collection window rather than waiting for the deadline before preparing the archive．The display identifies selections whose full size could not be sampled．
+
 ## Choose this mode or a persistent workspace
 
 | Capture mode | Configurable scope | Difference |

@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="th" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>การค้นหาข้อความเต็ม · อ้างอิง | TgWitness</title>
+<meta name="description" content="ค้นหาข้อความที่บันทึกไว้ตามรูปแบบคำ วลีที่ตรงกันเป๊ะ โดเมน และ @usernames โดยแสดงผลลัพธ์ที่ตรงกันมากที่สุดก่อน พร้อมทั้งดัชนีที่เชื่อมโยงกับบันทึกที่ลงนามแล้ว"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/search/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="th_TH">
+<meta property="og:title" content="การค้นหาข้อความเต็ม · อ้างอิง | TgWitness"><meta property="og:description" content="ค้นหาข้อความที่บันทึกไว้ตามรูปแบบคำ วลีที่ตรงกันเป๊ะ โดเมน และ @usernames โดยแสดงผลลัพธ์ที่ตรงกันมากที่สุดก่อน พร้อมทั้งดัชนีที่เชื่อมโยงกับบันทึกที่ลงนามแล้ว">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/th/docs/reference/search/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/search/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/search/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/search/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/search/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/search/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/search/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/search/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/search/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/search/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/th/docs/reference/search/", "url": "https://phishdestroy.github.io/TgWitness/th/docs/reference/search/", "name": "การค้นหาข้อความเต็ม · อ้างอิง | TgWitness", "description": "ค้นหาข้อความที่บันทึกไว้ตามรูปแบบคำ วลีที่ตรงกันเป๊ะ โดเมน และ @usernames โดยแสดงผลลัพธ์ที่ตรงกันมากที่สุดก่อน พร้อมทั้งดัชนีที่เชื่อมโยงกับบันทึกที่ลงนามแล้ว", "inLanguage": "th", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "หน้าหลัก", "item": "https://phishdestroy.github.io/TgWitness/th/"}, {"@type": "ListItem", "position": 2, "name": "เอกสาร", "item": "https://phishdestroy.github.io/TgWitness/th/docs/"}, {"@type": "ListItem", "position": 3, "name": "อ้างอิง", "item": "https://phishdestroy.github.io/TgWitness/th/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "การค้นหาข้อความเต็ม", "item": "https://phishdestroy.github.io/TgWitness/th/docs/reference/search/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / เอกสาร</span></a>
+<nav aria-label="คู่มือ"><a href="../../concepts/">คู่มือภาพ</a><a href="../../">คู่มือทั้งหมด</a><a href="../">อ้างอิง</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="ภาษา"><span aria-hidden="true">◍</span> ไทย</summary><div class="lang-list"><a href="../../../../docs/reference/search/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/search/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/search/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/search/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/search/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/search/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/search/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/search/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/search/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/search/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/search/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/search/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/search/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/search/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/search/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/search/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/search/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/search/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/search/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/search/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/search/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/search/" hreflang="ja" lang="ja">日本語</a><a href="./" hreflang="th" lang="th" aria-current="true">ไทย</a><a href="../../../../he/docs/reference/search/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/search/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="สลับระหว่างธีมสีอ่อนและสีเข้ม"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="คู่มือ"><a href="../../../guides/modes.html">โหมด, สถานการณ์ และระดับหลักฐาน</a><p class="nav-label">ขั้นตอนแรก</p><a href="../../start/">เริ่มใช้งานได้ภายในไม่กี่นาที</a><a href="../../dedicated-account/">บัญชีเฉพาะ</a><a href="../../accounts/">เชื่อมต่อบัญชี</a><a href="../../proxies/">เลือกพร็อกซี</a><a href="../../exports/">ส่งออกและตรวจสอบ</a><a href="../../capture/">การบันทึกด้วย GitHub Actions</a><p class="nav-label">การสืบสวนและรายงาน</p><a href="../../cases/">สืบสวนในทุกการสนทนา</a><a href="../../case-board/">สร้าง Case Board</a><a href="../../reports/">ออกแบบรายงาน</a><a href="../../handover/">เตรียมสำเนาเพื่อแบ่งปัน</a><a href="../../groups/">จัดการกลุ่มบัญชี</a><p class="nav-label">เข้าใจหลักฐาน</p><a href="../../concepts/">ดูวิธีการทำงานของหลักฐาน</a><a lang="en" dir="ltr" href="../../../../docs/export-clinic/">Export Clinic · EN</a><a href="../../security/">รักษาความปลอดภัย</a><a href="../../witness/">ตั้งค่าบอทพยาน</a><p class="nav-label">อ่านเพิ่มเติม</p><a href="../../archive/">จัดการกับคลังข้อมูล</a><a href="../../access/">แบ่งปันกรณีศึกษา</a><a href="../../server/">ให้ระบบทำงานต่อไป</a><a href="../../troubleshooting/">ค้นหาว่าเกิดข้อผิดพลาดอะไร</a></nav><nav class="wiki-nav" aria-label="อ้างอิง"><p class="nav-label"><a class="nav-label-link" href="../">อ้างอิง</a></p><details class="wiki-group"><summary>การตั้งค่า</summary><a href="../quickstart/">เริ่มต้นอย่างรวดเร็ว</a><a href="../installation/">ติดตั้ง ตรวจสอบ และอัปเดต</a><a href="../settings/">การตั้งค่าและกำหนดค่าครั้งแรก</a><a href="../accounts/">รูปแบบบัญชีและเซสชัน</a><a href="../access/">การเข้าถึงและสิทธิ์</a><a href="../connection/">การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล</a><a href="../deployment/">การติดตั้ง</a><a href="../high-assurance/">การปรับใช้ที่มีความมั่นใจสูง</a></details><details class="wiki-group"><summary>Collect</summary><a href="../panel/">คู่มือแผงควบคุม</a><a href="../collection/">วิธีการเก็บรวบรวมข้อมูล</a><a href="../history/">โหลดประวัติแหล่งที่มา</a><a href="../operations/">ขั้นตอนการทำงานและการดำเนินการ</a><a href="../investigation/">โหมดการสืบสวน</a><a href="../features/">คุณสมบัติและข้อจำกัด</a></details><details class="wiki-group" open><summary>การเก็บรักษาข้อมูลและการบูรณาการ</summary><a href="../case-board/">อ้างอิง Case Board</a><a href="../analysis/">การวิเคราะห์ข้อมูลในคลัง</a><a href="./" aria-current="page">การค้นหาข้อความเต็ม</a><a href="../mcp/">MCP แบบอ่านเท่านั้น</a><a href="../cli/">บรรทัดคำสั่ง</a><a href="../media-analysis/">OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น</a><a href="../webhooks/">webhooks ส่งออก</a><a href="../showcase/">แสดงผลงานสาธารณะ</a></details><details class="wiki-group"><summary>หลักฐาน</summary><a href="../how-it-works/">วิธีการทำงานของหลักฐาน</a><a href="../case-reports/">การตั้งค่าและตรวจสอบรายงาน</a><a href="../account-export/">การส่งออกบัญชี</a><a href="../evidence/">รูปแบบหลักฐาน</a><a href="../witness/">พยานอิสระ</a><a href="../timestamp/">ข้อมูลเวลา</a><a href="../storage/">การเก็บรักษาและกู้คืนข้อมูล</a></details><details class="wiki-group"><summary>ความปลอดภัยและโครงการ</summary><a href="../security/">ความปลอดภัยและการจัดการข้อมูล</a><a href="../architecture/">สถาปัตยกรรม</a><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว</a><a href="../license/">ประกาศเรื่องใบอนุญาตและความไม่เข้ากันทางสถาปัตยกรรม</a><a href="../notice/">ประกาศความไม่เข้ากันได้ของผู้ดำเนินการ</a><a href="../changelog/">บันทึกการเปลี่ยนแปลง</a></details></nav><p class="sidebar-note">v0.9.1<br>โอเพนซอร์ส · ทำงานบนเครื่องของคุณ</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">การค้นหาข้อความเต็ม</span></nav>
+<p class="verification-shortcut"><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / การเก็บรักษาข้อมูลและการบูรณาการ</p><h1>การค้นหาข้อความเต็ม</h1><p class="guide-outcome">ค้นหาข้อความที่บันทึกไว้ตามรูปแบบคำ วลีที่ตรงกันเป๊ะ โดเมน และ @usernames โดยแสดงผลลัพธ์ที่ตรงกันมากที่สุดก่อน พร้อมทั้งดัชนีที่เชื่อมโยงกับบันทึกที่ลงนามแล้ว</p><div class="wiki-body"><p><a href="../analysis/">การวิเคราะห์ข้อมูลในคลัง</a> · <a href="../media-analysis/">OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<p><strong>ดูตัวอย่าง</strong> ใน <strong>Journal</strong> ให้เลือก &quot;<strong>Best match · word forms</strong>&quot; ข้างช่องค้นหา
+ผลลัพธ์จะถูกจัดอันดับด้วย BM25 และจับคู่กับรูปแบบอื่น ๆ ของคำเดียวกัน:
+<em>&quot;перевод&quot;</em> จะพบ <em>&quot;переводом&quot;</em> และ <em>&quot;переводы&quot;</em>, <em>&quot;transfer&quot;</em> จะพบ <em>&quot;transfers&quot;</em>, และวลีภาษาจีน
+จะถูกค้นหาโดยไม่เว้นวรรค <strong>&quot;Newest first · exact text&quot;</strong> จะคงการค้นหา
+ส่วนย่อยของข้อความจากครั้งก่อนไว้บนบันทึกทั้งหมด</p>
+<p>ดัชนีเป็นข้อมูลที่สร้างขึ้นใหม่ โดยถูกสร้างขึ้นใหม่จากบันทึกที่ลงนามแล้ว ไม่เคยถูกลงนาม
+ด้วยตัวเอง และไม่เคยถูกส่งออกเลย บันทึกต้นฉบับไม่เปลี่ยนแปลง</p>
+<h2 id="search-syntax">ไวยากรณ์การค้นหา<a class="anchor" href="#search-syntax" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>เขียน</th>
+<th>ผลการค้นหา</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>перевод карта</code></td>
+<td>บันทึกที่มีคำทั้งสองคำอยู่ด้วย ในรูปแบบใดก็ตาม</td>
+</tr>
+<tr>
+<td><code>"переводом на карту"</code></td>
+<td>ใช้คำวลีนี้ตามลำดับที่ระบุไว้</td>
+</tr>
+<tr>
+<td><code>бонус OR подарок</code></td>
+<td>คำใดก็ได้</td>
+</tr>
+<tr>
+<td><code>перевод -казино</code></td>
+<td>บันทึกโดยไม่รวมคำที่ถูกยกเว้น</td>
+</tr>
+<tr>
+<td><code>example.com</code></td>
+<td>โดเมนและโดเมนย่อยของมัน รวมถึงในลิงก์ที่ซ่อนอยู่และ URL ของปุ่ม</td>
+</tr>
+<tr>
+<td><code>@username</code>, <code>t.me/username</code></td>
+<td>การกล่าวถึงและลิงก์ของบัญชี รวมถึงข้อความที่บัญชีดังกล่าวส่งไป</td>
+</tr>
+<tr>
+<td><code>#tag</code></td>
+<td>แฮชแท็ก</td>
+</tr>
+<tr>
+<td><code>+79991234567</code>, ที่อยู่กระเป๋าเงิน, ที่อยู่อีเมล</td>
+<td>ค่าเดียวกันในข้อความหรือลิงก์</td>
+</tr>
+<tr>
+<td><code>from:@username</code>, <code>from:123456</code></td>
+<td>ข้อความจากผู้ส่งนั้น</td>
+</tr>
+<tr>
+<td><code>chat:-1001234567890</code></td>
+<td>การสนทนาเดียว; สามารถจำกัดการเข้าถึงได้เฉพาะตัวคุณเท่านั้น</td>
+</tr>
+<tr>
+<td><code>id:42</code></td>
+<td>เวอร์ชันที่บันทึกไว้ของข้อความ 42</td>
+</tr>
+<tr>
+<td><code>since:2026-01-01 until:2026-01-31</code></td>
+<td>ช่วงเวลาการสังเกตการณ์; วันที่ไม่มีเวลาจะครอบคลุมทั้งวัน</td>
+</tr>
+<tr>
+<td><code>kind:edited</code></td>
+<td>แก้ไขเฉพาะ (<code>new</code>, <code>snapshot</code>, <code>edited</code>, <code>recovered</code>)</td>
+</tr>
+<tr>
+<td><code>source:ocr</code>, <code>source:transcription</code>, <code>source:all</code></td>
+<td>ข้อความที่ระบบระบุได้ แทนที่ หรือร่วมกับ ข้อความ</td>
+</tr>
+</tbody>
+</table></div>
+<p>คำบุพบทและคำหน้าที่อื่น ๆ จะถูกละเว้นเมื่อมีคำอื่นอยู่ด้วย
+ตัวอักษรที่คล้ายกันแต่ถูกผสมอยู่ในคำ (เช่น ตัวอักษรละติน <em>&quot;a&quot;</em> ภายในคำซีริลลิก), ตัวอักษร Unicode
+ที่มีความกว้างเต็มและตัวอักษรตกแต่ง รวมถึงตัวอักษรที่มองไม่เห็น จะถูกปรับให้เป็นมาตรฐาน</p>
+<h2 id="languages">ภาษา<a class="anchor" href="#languages" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>ภาษาจะถูกตรวจจับสำหรับแต่ละบันทึกจากสคริปต์และตัวอักษรในบันทึกนั้น:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>สคริปต์</th>
+<th>การจับคู่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>อักษรซีริลลิก</td>
+<td>เลมมาภาษารัสเซียและยูเครนด้วย <a href="https://github.com/no-plagiarism/pymorphy3">pymorphy3</a> โดยหากไม่ใช้พจนานุกรมภาษายูเครนแบบเลือกได้ จะใช้ตัวแยกคำรากภาษายูเครนแบบเบา</td>
+</tr>
+<tr>
+<td>ภาษาละติน</td>
+<td>ตัวแยกคำแบบ Snowball ภาษาอังกฤษ; เครื่องหมายเสียงถูกเพิกเฉย</td>
+</tr>
+<tr>
+<td>ภาษาจีน, ภาษาญี่ปุ่น, ภาษาเกาหลี, ภาษาไทย, ภาษาลาว, ภาษาเขมร, ภาษาพม่า</td>
+<td>คู่ตัวอักษรที่ทับซ้อนกัน: ทุกวลีจะถูกค้นหาโดยไม่เว้นช่องว่าง คำสั่งภาษาจีนจะถูกแบ่งเป็นคำด้วย jieba</td>
+</tr>
+<tr>
+<td>สคริปต์อื่น ๆ</td>
+<td>คำที่ตรงตามต้นฉบับ</td>
+</tr>
+</tbody>
+</table></div>
+<p>พจนานุกรมภาษายูเครน (<code>pymorphy3-dicts-uk</code>) ถูกแจกจ่ายภายใต้ใบอนุญาต GPL-3.0 ดังนั้นจึง
+ไม่ถูกติดตั้งโดยค่าเริ่มต้น ให้ติดตั้งด้วย <code>pip install &quot;tgwitness[uk-dictionary]&quot;</code>;
+ดัชนีจะตรวจพบตัววิเคราะห์ใหม่และสร้างตัวเองขึ้นใหม่</p>
+<h2 id="where-the-index-lives">ตำแหน่งของดัชนี<a class="anchor" href="#where-the-index-lives" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>โหมด</th>
+<th>พื้นที่จัดเก็บ</th>
+<th>การใช้งาน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>บนดิสก์ (ค่าเริ่มต้น)</td>
+<td><code>search/fulltext.sqlite3</code> ในไดเรกทอรี workspace</td>
+<td>ไฟล์เก็บถาวรขนาดใหญ่; ยังคงอยู่แม้จะรีสตาร์ทระบบ</td>
+</tr>
+<tr>
+<td>เก็บไว้ในหน่วยความจำเท่านั้น</td>
+<td>ไม่มีข้อมูลใดๆ บนดิสก์; สร้างใหม่ทุกครั้งที่เริ่มต้น</td>
+<td>ไม่มีการคัดลอกข้อความที่ดัดแปลงไว้บนดิสก์</td>
+</tr>
+<tr>
+<td>ปิด</td>
+<td>ไม่มีดัชนี; <strong>แสดงตามลำดับจากใหม่ที่สุด · ข้อความต้นฉบับ</strong>ยังคงอยู่</td>
+<td>การติดตั้งแบบขั้นต่ำ</td>
+</tr>
+</tbody>
+</table></div>
+<p>ผู้ดูแลระบบหลักจะเลือกโหมดภายใต้ <strong>Journal → Filters → Search index</strong>
+สำหรับแต่ละพื้นที่ทำงาน <code>TGWITNESS_FULLTEXT=disk|memory|off</code> ตั้งค่าเริ่มต้นสำหรับ
+พื้นที่ทำงานที่ยังไม่ได้เลือกเอง การเปลี่ยนไปใช้โหมดในหน่วยความจำหรือปิดโหมดจะลบไฟล์ดังกล่าว
+ไฟล์ดัชนีมีการป้องกันเช่นเดียวกับบันทึก: ไฟล์นี้อยู่ในไดเรกทอรีข้อมูลส่วนตัว
+ไฟล์นี้ไม่ได้รับการเข้ารหัส และไม่ถูกรวมอยู่ในการสำรองข้อมูลหรือสำเนาที่เก็บไว้นอกสถานที่</p>
+<p>บันทึกใหม่จะถูกจัดทำดัชนีในพื้นหลังภายในไม่กี่วินาที; การค้นหายังจัดทำดัชนี
+ข้อมูลค้างเก่าในปริมาณน้อยก่อน ดังนั้นบันทึกที่เพิ่งบันทึกเมื่อไม่นานมานี้จึงสามารถค้นหาได้ บันทึกที่มีอยู่
+จะถูกจัดทำดัชนีหลังการอัปเดตโดยไม่ทำให้แผงควบคุมหยุดทำงาน; จนกว่าจะเสร็จสิ้น ผลลัพธ์จะครอบคลุม
+บันทึกที่จัดทำดัชนีแล้ว และบันทึกจะแสดงความคืบหน้า <strong>การสร้างดัชนีใหม่จะ</strong>เริ่มต้นใหม่
+จากบันทึกแรก</p>
+<pre><code class="language-sh">python -m tgwitness index status --data-dir data/live
+python -m tgwitness index rebuild --data-dir data/live --json</code></pre>
+<p><code>rebuild</code> ต้องหยุดการทำงานของ panel (หากไม่หยุด จะให้รหัสออก 3) โดย <code>--json</code>,
+ผลออกทางมาตรฐานจะแสดงเพียงผลลัพธ์เท่านั้น; ความคืบหน้าจะถูกส่งไปยังมาตรฐานข้อผิดพลาด</p>
+<h2 id="results-and-the-signed-journal">ผลลัพธ์และบันทึกที่ลงนาม<a class="anchor" href="#results-and-the-signed-journal" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>ดัชนีเก็บหมายเลขลำดับและค่าแฮชของบันทึกในสมุดบันทึกสุดท้ายที่มันครอบคลุม
+และตรวจสอบข้อมูลเหล่านี้กับสมุดบันทึกเมื่อเปิดขึ้น สมุดบันทึกที่ถูกแทนที่ ฟื้นฟู หรือแก้ไข
+จะทำให้ต้องสร้างดัชนีใหม่ ทุกการตอบกลับจะรายงานตำแหน่งนี้ และทุกการค้นหาจะถูก
+อ่านกลับจากสมุดบันทึกที่ลงนามตามหมายเลขลำดับ: ดัชนีจะตัดสินใจว่า
+บันทึกใดจะแสดงและในลำดับใด แต่ไม่เคยกำหนดเนื้อหาของบันทึกนั้น การเข้าถึงแชทถูกนำไปใช้กับ
+ช่องแชทของสมุดบันทึกเอง ไม่ใช่เนื้อหาของดัชนี</p>
+<h2 id="recognized-text">ข้อความที่ตรวจพบ<a class="anchor" href="#recognized-text" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>OCR และข้อความถอดเสียงจะยังคงอยู่ในไฟล์ที่เข้ารหัสไว้ ดัชนีของข้อมูลเหล่านี้มีอยู่เพียงใน
+หน่วยความจำ และจะถูกสร้างขึ้นใหม่เมื่องานการรู้จำเสร็จสิ้น ผลลัพธ์ที่ตรงกันจะปรากฏใน
+<code>media.saved</code> บันทึก โดยถูกระบุว่าเป็น &quot;การระบุโดยเครื่อง&quot; พร้อมด้วยชื่อเครื่องยนต์ โมเดล และ
+ส่วนคัดลอก; มันจะไม่ถูกแสดงเป็นข้อความที่ส่งใน Telegram เลย ดัชนีเดียวกันนี้ยังใช้
+<strong>สำหรับการค้นหาข้อความที่ได้รับการระบุ</strong> ซึ่งยังคงสามารถจับคู่กับส่วนย่อยของข้อความแบบธรรมดาได้อีกด้วย</p>
+<h2 id="access">เข้าถึง<a class="anchor" href="#access" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>สิทธิ์การเข้าถึงในระดับแชทจะค้นหาบันทึกเฉพาะจากแชทนั้นเท่านั้น รวมถึงข้อความที่ระบบระบุได้จาก
+ไฟล์แนบของแชทนั้น <code>chat:</code> และตัวกรองอื่น ๆ สามารถจำกัดชุดข้อมูลนั้นได้เท่านั้น สถานะดัชนี
+ที่แสดงให้สิทธิ์การเข้าถึงแบบจำกัดจะไม่นับรวมยอดรวมของบันทึกทั้งหมด มีเพียงผู้ดูแลระบบหลักเท่านั้นที่สามารถเปลี่ยน
+โหมดหรือสร้างดัชนีใหม่ได้</p>
+<h2 id="ask-the-archive-and-mcp">ติดต่อกับฝ่ายเก็บข้อมูลและ MCP<a class="anchor" href="#ask-the-archive-and-mcp" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>เมื่อดัชนีเสร็จสมบูรณ์ <strong>ระบบจะ</strong>ดึงแหล่งข้อมูลจากดัชนีนี้:
+ผลลัพธ์ที่ตรงกันมากที่สุดจากแชทที่เลือก โดยข้อความที่บันทึกไว้จะถูกนับเพียงครั้งเดียว ส่งแหล่งข้อมูลได้สูงสุด 24
+แหล่ง; ข้อความยาวจะถูกตัดรอบจุดที่ตรงกันและทำเครื่องหมายว่าถูกตัดทอน
+คำถามเกี่ยวกับการเปลี่ยนแปลงล่าสุด เวอร์ชันที่บันทึกไว้ของข้อความเดียว และการค้นหาในขณะที่
+ดัชนียังอยู่ในระหว่างการสร้าง ให้ใช้การดึงข้อมูลตามลำดับเวลาครั้งก่อน การแสดงตัวอย่าง
+จะแสดงว่าใช้วิธีการใด</p>
+<p>ลูกค้า MCP สามารถเรียกใช้ <code>search_messages</code> ด้วย <code>ranked=true</code> และหน้าด้วย
+<code>next_offset</code>. การเชื่อมต่อแบบจำกัดขอบเขตจะรับเฉพาะการสนทนาของตนเองเท่านั้น</p>
+<p>Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．</p>
+<h2 id="dependencies">การพึ่งพา<a class="anchor" href="#dependencies" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>แพ็กเกจ</th>
+<th>ใบอนุญาต</th>
+<th>ทำไม</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pymorphy3, pymorphy3-dicts-ru, DAWG2-Python</td>
+<td>MIT</td>
+<td>เลมมาภาษารัสเซียและยูเครน; พจนานุกรมถูกโหลดไว้ในเครื่อง</td>
+</tr>
+<tr>
+<td>snowballstemmer</td>
+<td>BSD-3-Clause</td>
+<td>รากคำภาษาอังกฤษ, Python บริสุทธิ์</td>
+</tr>
+<tr>
+<td>jieba</td>
+<td>MIT</td>
+<td>การแบ่งส่วนคำค้นหาภาษาจีน, Python บริสุทธิ์ (แจกจ่ายเฉพาะโค้ดต้นฉบับ)</td>
+</tr>
+<tr>
+<td>pymorphy3-dicts-uk (ไม่จำเป็น)</td>
+<td>GPL-3.0</td>
+<td>พจนานุกรมภาษายูเครนฉบับสมบูรณ์</td>
+</tr>
+</tbody>
+</table></div>
+<p>SQLite FTS5 พร้อมด้วย <code>unicode61</code> tokenizer เป็นสิ่งจำเป็น; มันเป็นส่วนหนึ่งของ SQLite ใน
+เวอร์ชัน Python ปัจจุบัน หากไม่มีมัน ระบบค้นหาที่ตรงกันมากที่สุดจะรายงานว่าไม่สามารถใช้งานได้</p>
+<h2 id="benchmark">Benchmark<a class="anchor" href="#benchmark" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p><code>python tools/bench_fulltext.py --messages 1000000 --work &lt;empty directory&gt;</code>สร้างบันทึกที่ลงนามแบบกำหนดได้ ซึ่งประกอบด้วยข้อความผสมระหว่างภาษารัสเซีย ยูเครน อังกฤษ
+จีน และญี่ปุ่น พร้อมด้วยลิงก์และแฮนเดิลใน 200 ห้องสนทนา สร้างดัชนี
+และวัดเวลาการค้นหาทั่วไป (50 ผลลัพธ์, ค่ามัธยฐานจากการทดสอบ 7 ครั้ง)</p>
+<p>ทดสอบบน Windows 11, Intel Core i9-13900K, RAM 128 GB, Python 3.12.10, SQLite
+3.49.1, ข้อมูลบนไดรฟ์ exFAT, เครื่องวิเคราะห์ <code>fulltext-v1+pymorphy3-ru+light-uk+snowball-en</code>:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>วัด</th>
+<th>ผลลัพธ์</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>บันทึกที่ลงนาม</td>
+<td>1,000,000 ข้อความ, 1.50 GiB, เขียนเสร็จใน 19 นาที</td>
+</tr>
+<tr>
+<td>การสร้างดัชนีจากบันทึก</td>
+<td>71 วินาที, ประมาณ 14,141 ข้อความต่อวินาที</td>
+</tr>
+<tr>
+<td>ไฟล์ดัชนี</td>
+<td>58 MiB, 3.8% ของบันทึก</td>
+</tr>
+<tr>
+<td>ค้นหาทันทีหลังจากบันทึกข้อมูลใหม่</td>
+<td>ค่ามัธยฐาน 8 ms, p95 9 ms</td>
+</tr>
+<tr>
+<td>การค้นหาส่วนย่อยก่อนหน้านี้, บันทึกเดียวกัน</td>
+<td><code>перевод</code> 3.2 วินาที, <code>银行转账</code> 2.6 วินาที, <code>verify-account.example</code> 2.6 วินาที</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ค้นหา</th>
+<th>บันทึกที่ตรงกัน</th>
+<th style="text-align: right;">ผลลัพธ์ที่ตรงกันมากที่สุด, ค่ามัธยฐาน</th>
+<th style="text-align: right;">หน้า 95</th>
+<th style="text-align: right;">แสดงรายการใหม่ที่สุดก่อน, ค่ามัธยฐาน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>คำทั่วไป, รูปแบบของคำ: <code>перевод</code></td>
+<td>134,403</td>
+<td style="text-align: right;">82 ms</td>
+<td style="text-align: right;">85 ms</td>
+<td style="text-align: right;">7 ms</td>
+</tr>
+<tr>
+<td>สองคำ: <code>оплата карта</code></td>
+<td>28,996</td>
+<td style="text-align: right;">43 ms</td>
+<td style="text-align: right;">43 ms</td>
+<td style="text-align: right;">14 ms</td>
+</tr>
+<tr>
+<td>คำหายาก: <code>розыгрыш подарок</code></td>
+<td>28,881</td>
+<td style="text-align: right;">42 ms</td>
+<td style="text-align: right;">47 ms</td>
+<td style="text-align: right;">13 ms</td>
+</tr>
+<tr>
+<td>วลีที่ถูกต้อง: <code>&quot;переказ коштів на картку&quot;</code></td>
+<td>ไม่นับ</td>
+<td style="text-align: right;">35 ms</td>
+<td style="text-align: right;">36 ms</td>
+<td style="text-align: right;">6 ms</td>
+</tr>
+<tr>
+<td>โดเมนพร้อมโดเมนย่อย: <code>verify-account.example</code></td>
+<td>12,435</td>
+<td style="text-align: right;">17 ms</td>
+<td style="text-align: right;">17 ms</td>
+<td style="text-align: right;">3 ms</td>
+</tr>
+<tr>
+<td>@username: <code>@support_desk_bot</code></td>
+<td>10,331</td>
+<td style="text-align: right;">15 ms</td>
+<td style="text-align: right;">16 ms</td>
+<td style="text-align: right;">3 ms</td>
+</tr>
+<tr>
+<td>ภาษาจีนโดยไม่เว้นช่องว่าง: <code>银行转账</code></td>
+<td>17,691</td>
+<td style="text-align: right;">23 ms</td>
+<td style="text-align: right;">24 ms</td>
+<td style="text-align: right;">3 ms</td>
+</tr>
+<tr>
+<td>ภาษาญี่ปุ่น: <code>リンク</code></td>
+<td>16,603</td>
+<td style="text-align: right;">23 ms</td>
+<td style="text-align: right;">25 ms</td>
+<td style="text-align: right;">3 ms</td>
+</tr>
+<tr>
+<td>รากศัพท์ภาษาอังกฤษ: <code>withdrawal</code></td>
+<td>27,775</td>
+<td style="text-align: right;">26 ms</td>
+<td style="text-align: right;">26 ms</td>
+<td style="text-align: right;">2 ms</td>
+</tr>
+<tr>
+<td>OR และการยกเว้น: <code>бонус OR подарок -казино</code></td>
+<td>268,034</td>
+<td style="text-align: right;">190 ms</td>
+<td style="text-align: right;">193 ms</td>
+<td style="text-align: right;">19 ms</td>
+</tr>
+<tr>
+<td>ตัวกรองการสนทนา: <code>chat:-1000000000007 перевод</code></td>
+<td>652</td>
+<td style="text-align: right;">9 ms</td>
+<td style="text-align: right;">9 ms</td>
+<td style="text-align: right;">6 ms</td>
+</tr>
+<tr>
+<td>ตัวกรองช่วงเวลา: <code>since:2026-01-01 until:2026-01-31 выплата</code></td>
+<td>115,732</td>
+<td style="text-align: right;">155 ms</td>
+<td style="text-align: right;">156 ms</td>
+<td style="text-align: right;">81 ms</td>
+</tr>
+</tbody>
+</table></div>
+<p>วลีที่ตรงกันจะถูกตรวจสอบตามตัวอักษรบนผลลัพธ์ที่จัดเรียงตามลำดับความสำคัญจนกว่าหน้าจะ
+เต็ม ดังนั้นผลรวมจึงไม่ถูกนับ เวลาที่ใช้จะเพิ่มขึ้นตามจำนวนบันทึกที่ตรงกัน;
+การจำกัดการค้นหาให้แคบลง เช่น การเลือกแชทหรือช่วงเวลาเฉพาะ จะทำให้การค้นหาแบบกว้างเร็วขึ้น คอร์ปัสสังเคราะห์นี้ใช้
+คำศัพท์จำนวนน้อยซ้ำๆ ดังนั้นคำทั่วไปจะตรงกับบันทึกได้มากกว่าการแชทจริง</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/SEARCH.md">แก้ไขหน้านี้บน GitHub ↗</a><a class="next-guide" href="../mcp/"><span>ขั้นตอนต่อไป</span><strong>MCP แบบอ่านเท่านั้น →</strong></a><p>คู่มือเหล่านี้อธิบายการนำไปใช้ในปัจจุบัน ผลการตรวจสอบความถูกต้องและช่องว่างที่ยังเหลืออยู่ได้รับการบันทึกไว้อย่างแยกต่างหาก <a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p></footer>
+</main>
+<aside class="toc" aria-label="บนหน้านี้"><p class="nav-label">บนหน้านี้</p><a href="#search-syntax">ไวยากรณ์การค้นหา</a><a href="#languages">ภาษา</a><a href="#where-the-index-lives">ตำแหน่งของดัชนี</a><a href="#results-and-the-signed-journal">ผลลัพธ์และบันทึกที่ลงนาม</a><a href="#recognized-text">ข้อความที่ตรวจพบ</a><a href="#access">เข้าถึง</a><a href="#ask-the-archive-and-mcp">ติดต่อกับฝ่ายเก็บข้อมูลและ MCP</a><a href="#dependencies">การพึ่งพา</a><a href="#benchmark">Benchmark</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>โอเพนซอร์ส · ทำงานบนเครื่องของคุณ</span><a href="../../../../LICENSE">ใบอนุญาต MIT</a><a href="../notice/">ประกาศจากผู้ดำเนินการ</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">ความปลอดภัย</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "กำลังรอข้อความ", "Step through a fictional send, edit and delete.": "ลองทำตามขั้นตอนการส่ง แก้ไข และลบข้อความในสถานการณ์สมมติ", "No observations yet. Start the sequence or advance one event.": "ยังไม่มีความคิดเห็นใด ๆ เริ่มลำดับเหตุการณ์หรือเลื่อนไปหนึ่งเหตุการณ์", "Meet at 10:00": "พบกันเวลา 10:00", "A new message is visible in the chat.": "มีข้อความใหม่ปรากฏในแชท", "Record 1 appended: the collector observed the original message.": "บันทึก 1 แนบมาด้วย: ผู้เก็บข้อมูลได้สังเกตเห็นข้อความต้นฉบับ", "Meet at 11:00": "พบกันเวลา 11:00", "The current text changes. The earlier observation stays.": "ข้อความปัจจุบันมีการเปลี่ยนแปลง แต่ข้อสังเกตก่อนหน้านี้ยังคงอยู่", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "บันทึก 2 ได้ถูกเพิ่มเข้ามา: การแก้ไขนี้ถือเป็นการสังเกตการณ์ใหม่ บันทึก 1 ยังคงเก็บข้อความต้นฉบับไว้", "Message deleted": "ข้อความถูกลบ", "The message has disappeared from the chat view.": "ข้อความดังกล่าวได้หายไปแล้วจากหน้าจอสนทนา", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "บันทึก 3 ที่แนบมา: ประกาศการลบถูกรักษาไว้พร้อมกับทั้งสองเวอร์ชันที่สังเกตได้", "0 records": "0 รายการ", "1 record": "1 รายการ", "2 records": "2 รายการ", "3 records": "3 รายการ", "Complete / {n} of 3": "เสร็จสมบูรณ์ / {n} จาก 3", "Step / {n} of 3": "ขั้นตอน / {n} จาก 3", "Pause": "หยุดชั่วคราว", "Replay sequence": "ลำดับการเล่นซ้ำ", "Play sequence": "ลำดับการเล่น", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "มีตัวอย่างแบบคงที่ให้ใช้งานได้ หากต้องการคำนวณค่าแฮชแบบโต้ตอบ ให้เปิดหน้านี้ผ่าน HTTPS หรือดูตัวอย่างบน localhost ที่รองรับ Web Crypto", "No record supplied": "ไม่มีบันทึกที่ให้มา", "Tail removed": "ส่วนท้ายถูกลบ", "≠ saved hash": "≠ ค่าแฮชที่บันทึกไว้", "Rebuilt · different hash": "สร้างใหม่ · ค่าแฮชที่ต่างกัน", "= saved hash": "= hash ที่บันทึกไว้", "Same length and matching head.": "ความยาวเท่ากันและส่วนหัวที่สอดคล้องกัน", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "แฮชที่คำนวณได้ทั้งสามค่าตรงกับแฮชที่เก็บไว้ ตัวอย่างนี้สอดคล้องกับขอบเขตสามบันทึกที่เก็บไว้", "Same saved head; the journal prefix fails verification.": "ส่วนหัวที่บันทึกไว้เหมือนเดิม; ส่วนนำหน้าของบันทึกไม่ผ่านการตรวจสอบ", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "บันทึกที่ 2 ไม่ตรงกับค่าแฮชที่เก็บไว้แล้ว การตรวจสอบเพียงส่วนหัวสุดท้ายที่เก็บไว้จะไม่สามารถตรวจพบข้อผิดพลาดนี้ได้; ผู้ตรวจสอบจะตรวจสอบทุกบันทึก", "Head differs from the retained checkpoint.": "ส่วนหัวแตกต่างจากจุดตรวจสอบที่เก็บไว้", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ค่าแฮชที่สร้างใหม่เชื่อมโยงกัน แต่ส่วนหัวสุดท้ายได้เปลี่ยนแปลงไปแล้ว จุดตรวจสอบที่เก็บไว้จะปฏิเสธประวัติการเปลี่ยนแปลงนี้ ลายเซ็นต้นฉบับก็จะล้มเหลวเมื่อใช้กับบันทึกที่เปลี่ยนแปลงแล้ว", "Too short: 2 supplied records \u003c 3 retained records.": "สั้นเกินไป: 2 รายการที่ส่งมา \u003c 3 รายการที่เก็บไว้", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "แฮชสองตัวที่เหลือยังคงตรงกัน จุดตรวจสอบที่เก็บไว้เผยให้เห็นส่วนท้ายที่หายไป หากไม่มีขอบเขตก่อนหน้านี้ ส่วนนำหน้าสั้นกว่านี้เพียงอย่างเดียวจะไม่สามารถเปิดเผยการขาดหายได้", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "การคำนวณแฮชไม่สามารถใช้งานได้ในเบราว์เซอร์นี้ แต่สูตรและคำอธิบายแบบคงที่ด้านล่างยังคงใช้งานได้", "{n} records": "{n} บันทึก", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "ได้รับการยอมรับ: จำนวนเพิ่มขึ้น ลายเซ็นได้รับการยืนยัน และกุญแจตรงกัน ผู้เป็นพยานจะเก็บรักษาขอบเขตใหม่นี้ไว้", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: คำตอบที่ลงนามแสดงจำนวนบันทึกน้อยกว่าจุดตรวจสอบที่ได้รับการยอมรับล่าสุด Witness จะบันทึกปัญหาและรักษาขอบเขตที่ได้รับการยอมรับก่อนหน้านี้", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: จำนวนไม่เปลี่ยนแปลง แต่หัว (head) แตกต่างกัน ผู้เป็นพยานบันทึกความไม่เห็นพ้องและรักษาขอบเขตที่ได้รับการยอมรับก่อนหน้านี้", "No answer": "ไม่มีคำตอบ", "boundary unknown": "ขอบเขตไม่ทราบ", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "ไม่มีการตอบสนอง: TgWitness จะบันทึกการตรวจสอบที่ล้มเหลว และไม่สามารถยืนยันสถานะปัจจุบันของผู้เก็บข้อมูลได้ หาก TgWitness ยังสามารถติดต่อกับ Bot API ได้ และนโยบายการเผยแพร่ของมันอนุญาต ก็สามารถเผยแพร่การล้มเหลวนั้นได้", "Send {n}": "ส่ง {n}", "Edit {n}": "แก้ไข{n}", "Delete {n}": "ลบ{n}", "Both accounts captured all six expected observations in this example.": "ทั้งสองบัญชีได้บันทึกการสังเกตทั้งหกข้อที่คาดการณ์ไว้ในตัวอย่างนี้", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "บัญชี B ยังคงบันทึกได้ 6 จาก 6 ข้อความ สองใบเสร็จใช้เวลานานกว่า อัตราการบันทึกและความล่าช้าของใบเสร็จให้คำตอบที่ต่างกัน", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "บัญชี B ได้บันทึก 5 จาก 6 การดำเนินการก่อนถึงจุดตัด (83.3%) การแก้ไขที่ขาดหายไปไม่มีการวัดความล่าช้า ผลลัพธ์นี้อธิบายเฉพาะการดำเนินการ 6 ครั้งที่ได้รับการควบคุมเท่านั้น", "not observed by cutoff": "ไม่ถูกตัดออก", "{s} seconds": "{s} วินาที", "Exact values follow in the table.": "ค่าที่แม่นยำจะปรากฏในตารางต่อไป", "{s} s": "{s} s", "Not observed": "ไม่พบ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "สี่การสนทนาให้ข้อมูลสังเกตการณ์ที่แตกต่างกัน ให้ติดตามบันทึกต้นทางสำหรับทุกการเชื่อมต่อ; อย่ากำหนดโพสต์ในช่องให้กับผู้ใช้ 71001 โดยไม่มีผู้ส่งที่ระบุ", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "บันทึก #146 และ #205 มี ID ผู้ส่งเดียวกัน คือ 71001 ซึ่งเชื่อมโยงโพสต์ที่สังเกตได้จากบัญชี Telegram ในสองห้องสนทนา แต่ไม่ระบุตัวบุคคลจริงหรือระบุเจ้าของโพสต์ในช่องนั้น", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "ที่อยู่ปลายทาง pay.example.invalid/new ปรากฏในบันทึกกลุ่ม #146, คีย์บอร์ดบอท #173, การแก้ไขช่อง #188 และข้อความส่วนตัว #205 ที่อยู่ปลายทางที่ปรากฏซ้ำๆ นี้ช่วยเชื่อมโยงข้อมูลเข้าด้วยกัน แต่ไม่ได้เป็นหลักฐานว่าบัญชีเหล่านั้นอยู่ภายใต้การควบคุมร่วมกัน", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "ใบเสร็จสื่อที่เสร็จสมบูรณ์ #151 และ #209 มีค่า SHA-256 เต็มที่เท่ากันในคดีสมมตินี้ โปรดเปรียบเทียบไบต์จริงและบันทึกข้อความที่เกี่ยวข้อง ไฟล์ที่ตรงกันนี้ไม่ระบุผู้สร้างหรือพิสูจน์ว่าใครเป็นผู้ส่งต่อ", "the encrypted off-site copy": "สำเนาที่เข้ารหัสและเก็บไว้นอกเว็บไซต์", "notifications": "การแจ้งเตือน", "checkpoint hashes for timestamps": "ค่าแฮชจุดตรวจสอบสำหรับเวลา", "signed checkpoints for the witness": "จุดตรวจสอบที่ลงนามสำหรับ TgWitness", "Switched on in this example": "เปิดใช้งานในตัวอย่างนี้", "Optional · off by default": "เลือกได้ · ปิดตามค่าเริ่มต้น", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ข้อมูลที่ส่งออกจากเครื่องนี้: การเชื่อมต่อ Telegram และ{list} ไม่มีข้อมูลอื่นใดอีก", "Default: only the Telegram connection leaves this machine.": "ค่าเริ่มต้น: มีเพียงการเชื่อมต่อ Telegram เท่านั้นที่ออกจากเครื่องนี้", "{done} of {total} done": "{done} จาก {total} เสร็จแล้ว", "Mark step {n} as done": "ทำเครื่องหมายขั้นตอน{n} ว่าเสร็จแล้ว", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "คัดลอก", "Copied": "คัดลอก", "Command copied.": "คำสั่งถูกคัดลอกแล้ว", "Selected — Ctrl/Cmd+C": "คัดลอก — Ctrl/Cmd+C", "Command selected. Copy it manually.": "คำสั่งถูกเลือกแล้ว คัดลอกด้วยมือ", "Command copied to clipboard.": "คำสั่งได้ถูกคัดลอกไปยังคลิปบอร์ดแล้ว", "Select text": "เลือกข้อความ", "The clipboard is unavailable, so the command is selected for you to copy manually.": "คลิปบอร์ดไม่สามารถใช้งานได้ คำสั่งถูกเลือกแล้ว; คัดลอกด้วยมือ", "When a message arrives, the first observation is saved.": "มีข้อความเข้ามา ข้อสังเกตแรกถูกบันทึกไว้", "When the time changes, both captured versions stay.": "เวลาเปลี่ยนแปลง แต่ทั้งสองเวอร์ชันที่บันทึกไว้ยังคงอยู่", "When the message disappears, its captured history remains.": "ข้อความจะหายไป แต่ประวัติที่ถูกบันทึกไว้จะยังคงอยู่", "Pause example animation": "หยุดตัวอย่างแอนิเมชัน", "Play example animation": "ดูตัวอย่างแอนิเมชัน", "Play": "เล่น", "Full-size workspace screenshot": "ภาพหน้าจอพื้นที่ทำงานขนาดเต็ม", "Workspace screenshot · fictional data": "ภาพหน้าจอพื้นที่ทำงาน · ข้อมูลสมมติ", "Close": "ปิด", "Close screenshot": "ปิดภาพหน้าจอ", "Scrollable full-size screenshot": "ภาพหน้าจอขนาดเต็มที่สามารถเลื่อนดูได้", "Enlarge: {name}": "ขยาย: {name}", "View full size": "ดูขนาดเต็ม", "Step {n} of {total}": "ขั้นตอนที่ {n} จาก {total}"}</script>
+</body></html>

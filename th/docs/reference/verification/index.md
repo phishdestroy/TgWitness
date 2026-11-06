@@ -4,6 +4,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/verif
 
 การทดสอบ Telegram แบบเรียลไทม์ การตรวจสอบอัตโนมัติ การตรวจสอบผ่านเบราว์เซอร์ และสิ่งที่ยังไม่ได้รับการยืนยัน
 
+Each result below applies to its recorded revision and environment. The [current capability matrix](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) separates implementation, published downloads and remaining qualification.
+
+## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+
+The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+
+- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
+- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
+- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
+- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
+- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+
+An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+
 ## การปรับใช้ Phala Cloud แบบสด · 4 พฤศจิกายน 2026
 
 `--provider phala --quick-tunnel` ทำงานกับ **Phala Cloud** ที่จริง (`tdx.small`, region US-WEST-1) ด้วย Phala Cloud API key ของ workspace ที่ว่าง, ntfy.sh ที่จริง, GitHub และ Intel PCS. CVM ได้ติดตั้ง commit `df7d860c` (v0.8.1); กระบวนการ deploy, verify และ destroy ดำเนินการผ่านบรรทัดคำสั่ง พร้อมการแก้ไขดังต่อไปนี้ CVM 7 เครื่องมีค่าใช้จ่ายรวมประมาณ 1.9 US cents
@@ -153,10 +167,16 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 การวัดนี้วัดเส้นทางบันทึก/ส่งออกแบบซีเรียลในเครื่องโฮสต์ Windows นี้เท่านั้น ไม่ วัดการส่ง MTProto บัญชีที่ใช้งานพร้อมกัน การจำกัดความเร็วของ Telegram สื่อ งานที่ทำงานต่อเนื่องเป็นเวลานาน หรือจำนวนการสนทนาจริงที่รับประกัน การวัดนี้ทำขึ้นก่อน เครื่องมือประทับเวลาออฟไลน์เวอร์ชันสุดท้าย ซึ่งไม่ส่งผลต่อเส้นทางข้อความที่วัดได้
 
+## การค้นหาข้อความเต็มในข้อความหนึ่งล้านข้อความ · 5 พฤศจิกายน 2026
+
+คำสั่ง: `python tools/bench_fulltext.py --messages 1000000 --work <empty directory>`
+
+สมุดบันทึกที่ลงนามแบบกำหนดค่าแน่นอน (deterministic signed journal) ซึ่งประกอบด้วยข้อความสังเคราะห์ 1,000,000 ข้อความใน 200 ห้องสนทนา (รูปแบบคำภาษารัสเซีย ภาษายูเครน ภาษาอังกฤษ ภาษาจีน ภาษาญี่ปุ่น ลิงก์ และชื่อผู้ใช้) ได้รับการจัดทำดัชนีใน 71 วินาที; ดัชนีมีขนาด 58 MiB นอกเหนือจากสมุดบันทึกขนาด 1.50 GiB การค้นหา ที่ตรงกันมากที่สุดใช้เวลา 9 ถึง 190 มิลลิวินาที (ค่ามัธยฐาน) เทียบกับ 2.4 ถึง 3.2 วินาที สำหรับการค้นหา ส่วนย่อยของข้อความแบบเดิม ผลลัพธ์เต็มรูปแบบ อุปกรณ์ และข้อจำกัด: [การค้นหาข้อความเต็มรูปแบบ](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#benchmark) `tools/test_fulltext.py` ยังตรวจสอบไฟล์เก็บถาวรที่ลงนามไว้ก่อนการค้นหาข้อความเต็ม (`tools/fixtures/evidence-before-fulltext.zip`) ด้วยตัวตรวจสอบปัจจุบัน และไฟล์เก็บถาวรปัจจุบัน ด้วยตัวตรวจสอบของไฟล์เก็บถาวรนั้นเอง `verify.py`.
+
 ## คุณสมบัติเพิ่มเติม
 
 บันทึกแบบเรียลไทม์ที่เก็บรักษาไว้จะบันทึกการเก็บรวบรวมจริง การแก้ไข การแจ้งเตือนการลบ ไฟล์แนบ การตรวจสอบซ้ำ และการจัดการข้อจำกัดอัตรา มันไม่บันทึกการส่งข้อความอย่างครบถ้วน หรือ แมทริกซ์ที่ควบคุมได้เกี่ยวกับความมองเห็นตามบทบาท ผู้ดำเนินการตอบสนอง การรอ FloodWait ที่ยืดเยื้อ การห้ามบัญชี และ การกู้คืนหลังการขัดจังหวะเครือข่าย/กระบวนการ การออกโทเคน QR ยังคงแยกต่างหากจาก การยืนยัน QR บนมือถือที่เสร็จสิ้นแล้ว
 
-การสร้าง/การรัน Docker, การติดตั้งบน Linux/macOS, การรองรับโหลดสูงอย่างต่อเนื่อง, การตรวจสอบความปลอดภัยอย่างอิสระ การตอบสนอง TSA ที่อิสระจริง, การตรวจสอบการเพิกถอน/การเก็บรักษาใบรับรอง และการ รับรองทางนิติวิทยาศาสตร์ ยังคงอยู่นอกขอบเขตการรับรองที่บันทึกไว้ การบันทึกสถานะ MTProto และการติดตามสถานะได้ถูกนำไปใช้แล้ว; แต่การเล่นซ้ำแบบอะตอมิกและทนทานยังไม่ได้รับการยืนยัน การเก็บรวบรวม บันทึกผู้ดูแลระบบ, รายชื่อรีแอคเตอร์เพิ่มเติม และการสำรวจแบบสั้นตามลำดับความสำคัญ ยังคงเป็นคุณสมบัติที่แยกต่างหาก ดู[การยอมรับแบบสด](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md)สำหรับเมทริกซ์การรับรองที่ควบคุม
+Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
 
 ใบเสร็จรับเงินและภาพหน้าจอรายละเอียดท้องถิ่นอยู่ในโฟลเดอร์ test-results/ (ถูก Git ละเว้น) ภาพหน้าจอสาธารณะในโฟลเดอร์ docs/assets/ มีเพียงข้อมูลสาธิตที่สมมติขึ้นเท่านั้น

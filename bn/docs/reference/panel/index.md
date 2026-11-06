@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel
 
 প্রতিটি স্ক্রিন কী করে, এটি স্বাক্ষরিত জার্নালে কী লেখে এবং বিস্তারিত গাইড কোথায়। প্যানেল একবারে একটি ওয়ার্কস্পেস দেখায়: একটি টেলিগ্রাম অ্যাকাউন্ট যার নিজস্ব সোর্স, জার্নাল এবং স্বাক্ষর কী রয়েছে। সাইডবারের শীর্ষে থাকা সিলেক্টর ওয়ার্কস্পেস পরিবর্তন করে। ঠিকানাটি ওয়ার্কস্পেস বহন করে (`?ws=…`); ঠিকানা যখন workspace-কে বহন করে (); ঠিকানা, সিলেক্টর এবং লোডকৃত অ্যাকাউন্টের মধ্যে অমিল থাকলে, অ্যাকশনগুলো ব্লক থাকে।
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## আপনার পথ খুঁজে নিন
 
 ডেইলি সেকশনগুলো সাইডবারের শীর্ষে থাকে, **হিসাবসমূহ** **কর্মক্ষেত্র** -এর নিচে, এবং বাকি সবকিছু **আরও টুল ও সেটিংস** -এর নিচে। টপ বারে থাকা **ইন্টারফেসের স্তর** সুইচ নির্ধারণ করে কতগুলো সেকশন দেখাবে:

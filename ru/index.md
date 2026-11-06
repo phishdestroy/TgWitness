@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/
 
 [Открытый исходный код ／ v0.9.1](https://phishdestroy.github.io/TgWitness/ru/docs/reference/changelog/)
 
-Сохраняйте чаты Telegram со всеми правками и удалениями и передавайте запись， которую может проверить кто угодно．
+Выгружайте чаты Telegram，сохраняйте их историю и передавайте подписанный архив с проверкой целостности．
 
 [Открыть демо－версию](https://phishdestroy.github.io/TgWitness/demo/?lang=ru)[Руководство по настройке](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=ru)
 
 Вымышленные данные， без входа в Telegram．
 
- [Выгрузка через GitHub Actions （предварительная версия）](https://phishdestroy.github.io/TgWitness/ru/docs/capture/) [Внесайтовая копия на S3： настройка и восстановление](https://phishdestroy.github.io/TgWitness/ru/#s3)
+ [Выгрузить аккаунт или выбранные чаты](https://phishdestroy.github.io/TgWitness/ru/docs/reference/account-export/) [Выгрузка через GitHub Actions （предварительная версия）](https://phishdestroy.github.io/TgWitness/ru/docs/capture/) [Внесайтовая копия на S3： настройка и восстановление](https://phishdestroy.github.io/TgWitness/ru/#s3)
 
 СООБЩЕНИЕ， ПРЕОДОЛЕВАЮЩЕЕ ВРЕМЯ ＃0042
 

@@ -44,6 +44,30 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
 
 כל התקנה כוללת את **START-HERE.html** ו-**START-HERE.txt**, עם נתיבים מקומיים, פקודות וקישורים למאגר. הפעל `tgwitness guide` כדי לפתוח את המדריך. ב-Windows, השתמש `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` ב-PowerShell.
 
+## הגדרות חיפוש בטקסט מלא
+
+[חיפוש טקסט מלא](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/) (תצוגה מקדימה) אינו דורש הגדרה. האינדקס שלו נבנה ברקע לאחר עדכון.
+
+| משתנה או פקודה | השפעה |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | ברירת מחדל: האינדקס נשמר ב- `search/fulltext.sqlite3` של כל סביבת עבודה |
+| `TGWITNESS_FULLTEXT=memory` | אין קובץ אינדקס; האינדקס נבנה מחדש בכל הפעלה |
+| `TGWITNESS_FULLTEXT=off` | אין אינדקס; חיפוש לפי טקסט מדויק בלבד |
+| `tgwitness index status` | מצב האינדקס של כל סביבת עבודה |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | בנו מחדש את כל האינדקסים מתוך היומן החתום |
+
+הבחירה של המנהל ב-**Journal → Filters → Search index** גוברת על המשתנה עבור סביבת העבודה הזו. פקודות מוצאות את ספריית הנתונים של ההתקנה שמפעילה אותן; במקומות אחרים, הוסיפו `--data-dir` את הנתיב מ- `tgwitness paths`. לקבלת מילון אוקראיני מלא (נתוני GPL-3.0), התקן `pymorphy3-dicts-uk` בסביבת Python של ההתקנה.
+
+## גישה דרך שורת הפקודה
+
+[שורת](https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/) [הפקודה](https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/) (תצוגה מקדימה) סורקת את הארכיון בחיפוש אחר סקריפטים וסוכנים.
+
+| משתנה | השפעה |
+| --- | --- |
+| `TGWITNESS_URL` | כתובת הפאנל עבור `tgwitness search`, `context`, `messages`, `stats` ו- `export`; ברירת מחדל `http://127.0.0.1:8787` כאשר מוגדר אסימון |
+| `TGWITNESS_MCP_TOKEN` | ארכיון אסימון החיבור מ-**Integrations → MCP**, המשותף עם לקוחות MCP; `--token-file` קורא אותו מקובץ במקום זאת |
+| `TGWITNESS_DATA` | יש לקרוא את ספריית הנתונים ישירות כאשר לא `--data-dir`, כתובת URL או אסימון |
+
 ## יש לוודא לפני ההפעלה
 
 הפקודה בת שורה אחת סומכת על HTTPS עבור הסקריפט הראשוני שלה. סקריפט זה בודק את SHA-256 ואת חתימת ה-RSA של הפרויקט על היישום והמגבלות לפני ההתקנה. ניתן גם להוריד ולאמת את הסקריפט הראשוני תחילה.

@@ -44,7 +44,7 @@ Collect
 
 Archive & integrations
 
-[Case Board reference](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/)[Archive analysis](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/)[Read-only MCP](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/)[Local OCR and transcription](https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/)[Outgoing webhooks](https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/)[Public showcase](https://phishdestroy.github.io/TgWitness/docs/reference/showcase/)
+[Case Board reference](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/)[Archive analysis](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/)[Full-text search](https://phishdestroy.github.io/TgWitness/docs/reference/search/)[Read-only MCP](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/)[Command line](https://phishdestroy.github.io/TgWitness/docs/reference/cli/)[Local OCR and transcription](https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/)[Outgoing webhooks](https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/)[Public showcase](https://phishdestroy.github.io/TgWitness/docs/reference/showcase/)
 
 Evidence
 

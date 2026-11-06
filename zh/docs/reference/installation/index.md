@@ -44,6 +44,30 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
 
 每次安装都包含 **START-HERE.html** 和 **START-HERE.txt** 文件，其中包含本地 路径、命令以及代码库的链接。运行 `tgwitness guide` 以打开指南。 在 Windows 上，请使用 `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` 在 PowerShell 中运行。
 
+## 全文搜索设置
+
+[全文搜索](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/)（预览版）无需任何配置。其索引会在更新后在 后台自动构建。
+
+| 变量或命令 | 效果 |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | 默认：索引保存在 `search/fulltext.sqlite3` 每个工作区的 |
+| `TGWITNESS_FULLTEXT=memory` | 无索引文件；每次启动时都会重建索引 |
+| `TGWITNESS_FULLTEXT=off` | 不建立索引；仅支持精确文本搜索 |
+| `tgwitness index status` | 索引每个工作区的状态 |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | 从签名日志中重建所有索引 |
+
+管理员在**“日志”→“过滤器”→“搜索索引**”中的选择将覆盖 该工作区的变量。命令会查找运行它们的安装 的数据目录；在其他地方，请添加 `--data-dir` 并使用来自 `tgwitness paths`。 如需完整的乌克兰语词典（GPL-3.0 数据），请在 `pymorphy3-dicts-uk` 在 该安装的 Python 环境中。
+
+## 命令行访问
+
+该[命令行](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/)（预览版）用于读取存档文件中的脚本和代理程序。
+
+| 变量 | 效果 |
+| --- | --- |
+| `TGWITNESS_URL` | 面板地址为 `tgwitness search`, `context`, `messages`, `stats` 和 `export`；默认 `http://127.0.0.1:8787` 当设置令牌时 |
+| `TGWITNESS_MCP_TOKEN` | 将连接令牌从**“集成”→“MCP**”中存档，该令牌与 MCP 客户端共享； `--token-file` 改为从文件中读取该令牌 |
+| `TGWITNESS_DATA` | 当未提供 `--data-dir`、URL 或令牌时，将直接读取数据目录 |
+
 ## 运行前请先验证
 
 该单行命令会信任 HTTPS 上的初始脚本。该脚本会在安装前检查 SHA-256 以及应用程序和约束条件上的项目 RSA 签名。 您也可以先下载并验证初始脚本。

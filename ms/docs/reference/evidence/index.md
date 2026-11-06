@@ -14,7 +14,7 @@ TgWitness memelihara pemerhatian Telegram yang boleh dilihat oleh akaun dalam ju
 | Kandungan ZIP bukti | `manifest.sig` menandatangani manif kanonik, yang menyenaraikan hash fail kandungan | Fail ZIP lengkap, termasuk manifes dan tandatangan |
 | Lampiran yang disimpan | SHA-256 dan kiraan bait dalam acara `media.saved` yang ditandatangani; hash fail dalam manifes ZIP yang ditandatangani | Byte asal di dalam ZIP yang disahkan |
 | Pemeriksaan | Tandatangan Ed25519 merangkumi keseluruhan jurnal, hash kepala, kunci awam, dan masa penciptaan | Salinan bebas yang disimpan sebelum perubahan yang dipertikaikan |
-| Resit pelaksanaan | Pengukuran kolektor yang ditandatangani secara berasingan; juga disertakan dalam peristiwa `process.started` yang ditandatangani | Resit dan jurnal berkaitan; ukuran dilaporkan sendiri |
+| Resit pelaksanaan | Signed record of the collector version，source-file hashes and start settings，also included in `process.started` | The receipt，associated journal and the environment evidence for the selected verification mode |
 | Laporan yang boleh dibaca: `report.html` dan bahagian-bahagiannya, `report.json`, `report.pdf`, `chat.pdf` | Setiap fail disegel dengan cap Ed25519; PDF juga membawa tandatangan piawai PDF (lihat [Laporan boleh dibaca](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#readable-reports)) | Fail seperti yang diterima dan cap jari kunci dipercayai; ZIP yang diterangkan |
 | CSV berdiri sendiri | Tiada tandatangan kriptografi berdiri sendiri; hash peristiwa sahaja tidak mencukupi | Gunakan salinan tepat di dalam fail ZIP yang disahkan untuk pemeriksaan integriti |
 | Skrinshot, cetakan, atau PDF yang dihasilkan oleh pelayar | Tiada tandatangan TgWitness pada derivatif | Simpan pakej asal yang disahkan dan dokumentasikan bagaimana derivatif itu dibuat |
@@ -62,7 +62,7 @@ Bukti bertandatangan, handover dan fail ZIP sembang mengandungi laporan HTML dan
 
 Dalam saluran atau superkumpulan, Telegram menyusun nombor mesej 1, 2, 3… mengikut urutan. Eksport sembang menyenaraikan nombor pertama dan terakhir, berapa banyak yang hadir dan setiap siri nombor yang tiada dalam `message-ids.json` , manifes dan tajuk `chat.json` , serta menandakan setiap jurang di mana ia terletak dalam transkrip. `verify.py` menyenaraikannya semula daripada `chat.json` . Nombor yang tiada ialah mesej yang tidak dikembalikan oleh Telegram (dihapuskan sebelum eksport, atau tidak dapat dilihat oleh akaun); dalam sembang peribadi dan kumpulan asas, nombor dikongsi oleh semua sembang dalam akaun dan jurang tidak dikira.
 
-Selepas membaca sejarah, eksport meminta semula Telegram untuk setiap nombor yang tiada, mengikut nombor (`channels.getMessages`, sehingga 10,000 nombor). Keputusannya terdapat dalam `message-ids.json` dan laporan. Jawapan kosong bermaksud Telegram tidak mempunyai sebarang mesej di bawah nombor tersebut untuk akaun ini; ia tidak menyatakan sama ada mesej itu telah dipadam atau tidak pernah dipaparkan kepada akaun tersebut. Mesej yang dikembalikan oleh Telegram bermakna mesej itu terlepas semasa bacaan dan akan ditambah ke dalam eksport, ditandakan `found_on_recheck`.
+After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time； it leaves the cause unspecified．A message returned on recheck is added to the export and marked `found_on_recheck`．
 
 Setiap laporan dibuka dengan **Secara ringkas**: satu perenggan, kemudian apa yang ditunjukkan oleh bahan tersebut dan apa yang tidak (siapa di sebalik akaun, kelengkapan penghantaran, pemadaman sebelum pemerhatian, masa jam tanpa cap masa). Cop meterai pada halaman itu sendiri bertukar menjadi amber apabila pelayar mengesahkan tandatangan meterai, bukan halaman: pelayar tidak memberikan halaman itu baitnya sendiri. Ia bertukar hijau hanya apabila pembaca meletakkan fail ke dalam pemeriksaan di hujung halaman dan setiap bait sepadan, dan hanya jika halaman yang dipaparkan adalah fail tersebut; jika tidak, ia bertukar merah.
 
@@ -124,12 +124,41 @@ Setiap fail ZIP yang disahkan mengandungi `coverage.json`; laporan HTML dibuka d
 
 - **Dipantau secara berterusan dari X hingga Y.** Satu tempoh bermula dengan `observation.started` dan berakhir pada jeda, pemberhentian, kehilangan sambungan Telegram, log keluar, permulaan proses tanpa pemberhentian yang teratur, atau lebih daripada tiga minit tanpa sebarang rekod semasa memantau (denyutan jantung direkodkan setiap minit, jadi kesunyian bermakna proses berhenti, beku atau komputer berehat). Apabila selang denyutan jantung diubah dalam **Parameter**, setiap denyutan jantung direkodkan dan kesunyian yang dibenarkan menjadi tiga selang, tidak pernah kurang daripada tiga minit.
 - **Kekosongan** menyenaraikan masa antara tempoh beserta sebab. Kekosongan yang masih terbuka pada rekod terakhir ditandakan sebagai`not_resumed_by_last_record`.
-- **ID mesej yang tidak diperhatikan.** Bagi saluran dan superkumpulan, yang menyenaraikan bilangan mesej setiap sembang, ID yang hilang antara yang diperhatikan disenaraikan sebagai julat. Ia dilaporkan sebagai tidak*diperhatikan* — dipadam, tidak pernah dihantar, atau di luar sejarah yang disimpan — tidak pernah sebagai dipadam. Perbualan peribadi dan kumpulan biasa berkongsi urutan merentas akaun, jadi jurang di situ tidak bermakna apa-apa dan tidak disenaraikan.
+- **ID mesej yang tidak diperhatikan.** Bagi saluran dan superkumpulan, yang menyenaraikan bilangan mesej bagi setiap sembang, ID yang hilang di antara mesej yang diperhatikan disenaraikan sebagai julat. Mereka dilaporkan sebagai tidak*diperhatikan* — dipadam, tidak pernah dihantar, atau di luar sejarah yang disimpan — tetapi tidak pernah dilaporkan sebagai dipadam. Sembang peribadi dan kumpulan biasa berkongsi urutan di seluruh akaun, jadi jurang dalam salah satu sembang tersebut tidak bermakna apa-apa dan tidak disenaraikan di situ.
 - Notis jurang pada peringkat sembang (contohnya Telegram meminta pemulihan perbezaan dalam satu saluran) dikira sebagai nota; ia tidak mengganggu liputan global.
+
+### Nombor mesej yang hilang (`gap_summary`)
+
+**Pratinjau.** `coverage.json` → `gap_summary` mengukur nombor yang diberikan oleh Telegram dan yang tidak pernah dilihat oleh pengumpul ini. Telegram menombor mesej sekali bagi setiap saluran atau superkumpulan, dan sekali bagi setiap akaun merentasi sembang peribadi, bot dan kumpulan biasa. Nombor antara dua mesej yang diperhatikan sama ada diperhatikan atau hilang; julat bersebelahan adalah kenyataan positif bahawa setiap mesej yang bernombor di dalamnya telah diperhatikan. Kelompongan tidak menyatakan sebarang pelaku atau sebab.
+
+| Medan | Maksud |
+| --- | --- |
+| `status` | `on`, atau `off` apabila dilumpuhkan dalam **Parameter → Analisis jurang** |
+| `parameters` | Parameter yang menghasilkan keputusan, supaya ia boleh diulang |
+| `chats[]` | Satu entri bagi setiap saluran atau superkumpulan, masing-masing bernombor sendiri |
+| `account` | Susunan merentas akaun bagi sembang peribadi, bot dan kumpulan biasa |
+| `status` (per urutan) | `applicable`, atau `not_applicable` dengan `reason` |
+| `observed_from`, `observed_to`, `span` | Nombor pertama dan terakhir yang diperhatikan dan saiz julat |
+| `observed`, `observed_without_content` | Nombor yang diperhatikan; nombor yang hanya diketahui melalui rekod pemadaman atau semakan semula |
+| `missing`, `density`, `gap_ranges`, `largest_gap` | Nombor yang tidak pernah diperhatikan, bahagian mereka dalam julat, berapa banyak larian, larian terpanjang |
+| `clusters[]` | Jurang yang disenaraikan: `low`, `high`, `missing`, dan nombor jiran yang diperhatikan `after` / `before` dengan masa pemerhatian mereka |
+| `service_estimate` | Hanya apabila diaktifkan: berapa banyak nombor yang hilang akan menjadi mesej perkhidmatan pada bahagian yang diperhatikan. Tidak pernah ditolak daripada `missing` |
+
+Kesahihan diperoleh daripada jurnal, tidak pernah diandaikan:
+
+- **Saluran dan superkumpulan** diukur bagi setiap sembang, juga dalam eksport sembang terpilih. Rekod yang dipilih oleh penghantar membentuk ukuran `not_applicable`.
+- **Susunan peringkat akaun** diukur hanya dari mesej pertama hingga mesej terakhir yang telah diterima semasa pengumpulan seluruh akaun diaktifkan dan merangkumi sembang peribadi, bot, kumpulan biasa serta mesej akaun itu sendiri, tanpa sebarang sembang dikecualikan (`scope.changed`). Nombor yang dinamakan oleh `deletion.unscoped` dikira sebagai diperhatikan tanpa kandungan. Eksport atau penyerahan sembang terpilih tidak dapat mengukurnya. Jika pengumpulan seluruh akaun dipadamkan dan dihidupkan semula, satu nota menyatakan bahawa nombor yang digunakan dalam tempoh tersebut akan muncul sebagai jurang.
+- Mesej perkhidmatan adalah rekod jurnal dengan nombor mereka sendiri, jadi ia menutup jurangnya sendiri; anggaran pilihan hanyalah konteks.
+
+`verify.py` recomputes `gap_summary` from `events.jsonl` with the parameters in the signed `coverage.json` member (defaults for older archives) and prints the account-wide line in its coverage summary. The archive's `get_capture_status` (MCP and the command line) returns the same measurement for the chats an access may read; the account-wide sequence only to access covering the whole workspace.
+
+Repeated observations of one service message count once，and the account service estimate uses only numbers inside the measured range．An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled；older records without that information cannot establish this condition．Stopped observation does not extend the measured range，and resuming it is noted．The live archive query has a time budget，including its database scan，and marks an unfinished measurement as partial．
+
+Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences)． These numbers describe observations；they do not identify a deletion actor or establish why a number is absent．
 
 Apabila Telegram berhenti menerima akaun, rekod `coverage.gap` yang menamatkan pemerhatian membawa `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` atau `not_authorized`) dan ralat Telegram; `verify.py` menamakan punca di mana tempoh itu berakhir.
 
-Liputan menerangkan apa yang direkodkan oleh pengumpul ini. Ia bukan bukti bahawa Telegram telah menyampaikan setiap kemas kini sepanjang tempoh berterusan.
+Coverage combines recorded observation periods，interruptions and message outcomes． Assess it together with the selected chats，period and attachment policy；continuous operation alone does not establish complete delivery of Telegram updates．
 
 ## Pengeluar
 
@@ -157,17 +186,27 @@ Jurnal saksi (`tgwitness-witness-v1`) dan kiriman saluran beliau disemak menenta
 
 manifest.json merangkumi format, masa eksport, kunci awam, cap jari, panjang jurnal, hash kepala, skop, pengeluar, had, dan SHA-256 bagi setiap ahli kandungan selain `manifest.json` dan `manifest.sig` itu sendiri. manifest.sig ialah tandatangan Ed25519 base64 ke atas JSON manifest kanonik. Pemverifikasi menolak ahli yang tidak dijangka/hilang, nama duplikat, fail rosak, urutan/rantaian terputus, tandatangan tidak sah, dan ketidakpadanan dengan checkpoint yang disediakan. Ia tidak pernah mengekstrak laluan arkib. Ia mengehadkan saiz keseluruhan yang diisytiharkan tanpa mampatan kepada 4 GiB; `--max-gib N` membenarkan arkib yang lebih besar yang dibuat dengan had **Parameter** yang ditingkatkan.
 
-Dapatkan kod pengesah daripada sumber yang dipercayai atau salinan bebas yang telah disemak. Pengesah dalam arkib yang tidak dipercayai adalah bahan boleh dilaksanakan yang dibekalkan oleh pengarang arkib tersebut; kehadirannya adalah kemudahan kebolehsusuran, bukan jangkar kepercayaan bebas.
+Run verification from your installed TgWitness version or a reviewed checkout． The copy included in an archive supports portable use；check that copy against your trusted installation before executing it．
 
-Satu checkpoint menandatangani kenyataan yang mengandungi kunci awam, panjang jurnal, hash kepala, dan masa penciptaan. Pemeriksa boleh menyemak bahawa arkib kemudian mengandungi pendahuluan yang sama. Kekalkan checkpoint di luar pengumpul sebelum perubahan yang dipertikaikan: penyerang yang mengawal kedua-dua arkib dan checkpoint boleh menggantikan kedua-duanya.
+A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix．Retain the checkpoint outside the collector，so later verification compares the archive with a reference held separately from it．
 
 ## Skop pengesahan
 
-Tandatangan mengenal pasti kunci pengumpul dan melindungi bahan yang disimpan. Pin cap jarinya secara bebas untuk mengaitkan kunci tersebut dengan pengumpul yang dijangka. Kemas kini Telegram adalah input kepada pengumpulan; TgWitness menandatangani pemerhatiannya terhadap kemas kini tersebut. Tandatangan ini bukan tandatangan yang dikeluarkan oleh Telegram atau oleh pengarang mesej.
+Verification checks the archive and the collection mode used to produce it．Choose the mode whose trust boundary matches the case，then retain its verification inputs．
 
-Satu checkpoint yang disimpan atau rekod saksi mengesan perubahan pada awalan jurnal terdahulu, termasuk penggantian yang ditandatangani dengan kunci pengumpul yang disalin. Rekod yang dihasilkan sebelum checkpoint bebas pertama mereka memerlukan pengesahan sumber: pemegang kunci pengumpul boleh menandatangani bahan baharu. Kekalkan kawalan akses kepada kunci penandatanganan dan simpan rujukan secara berasingan.
+| Collection mode | What the verifier checks | Verification inputs and trust boundary |
+| --- | --- | --- |
+| Local workspace | Record signatures，hash chain，manifest and attachment bytes | Independently retained collector fingerprint；the host administrator controls the local signing key |
+| Local workspace with an independent witness | The archive checks plus agreement with an earlier journal prefix retained by the witness | Separately trusted witness key and records；the checkpoint binds the prefix already observed |
+| [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity | Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow |
+| [Cloud deployment](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/) | Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record | Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider |
+| [Intel TDX confidential VM](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status，binding to the collector statement，compose and OS measurements | Intel trust chain and expected deployment measurements；retain the results of every required TDX check |
 
-Nilai kebolehlihatan akaun dan penghantaran menggunakan rekod liputan dan ujian terkawal. Gunakan cap masa luaran yang disahkan untuk penentuan masa bebas. ID penghantar mengenal pasti akaun Telegram; hubungkannya dengan seseorang melalui siasatan anda. Resit program dan pemeriksaan awan menerangkan ukuran yang dilaporkan oleh pengumpul dan konfigurasi penyebaran. Lihat [keputusan pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/) untuk tingkah laku yang diukur dan skopnya.
+In sealed acquisition，the approved collector receives data through an authenticated Telegram connection inside the verified environment．Attestation binds the archive to that execution，so verification covers acquisition as well as later file integrity． This relies on the approved code and the platform trust chain listed above． GitHub capture verification requires a session created inside the run and rejects imported-session captures．
+
+The run receipt records the collector version，file hashes and startup settings．GitHub provenance and TDX measurements provide the environment checks；the [validation record](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/) identifies tested configurations．
+
+TgWitness signs the observations it collects；Telegram and message authors do not issue these signatures．In a local workspace，material created before the first independent checkpoint still depends on the collector and its key holder．Coverage records describe the selected scope and collection outcomes，while verified external timestamps anchor the committed archive or journal boundary in time．
 
 ## Lampiran
 
@@ -181,9 +220,9 @@ Eksport sembang penuh menyimpan lampiran dalam tetapan lampiran ruang kerja ke d
 
 Satu job media dan acara pesannya disimpan dalam satu transaksi. Tugas ini menyimpan deskriptor mesej TL asal; pemerhatian yang disahkan mengikat SHA-256, akaun, dan dasar saiznya. Pemulihan mengesahkan ikatan tersebut sebelum memuat turun. Ia tidak pernah mengambil mesej semasa dan secara senyap menggantikan lampiran yang lebih baru. Tugas yang terhenti akan dicuba semula, manakala kegagalan kekal kekal sebagai hasil yang nyata.
 
-Setiap ruang kerja mempunyai jurnal dan identiti tandatangan sendiri. Peristiwa process.started merangkumi ID larian, jam tempatan, versi kebergantungan, has sumber fail, akaun/skop awal, dan tetapan tangkapan. Detak jantung merangkumi ID larian, masa monotonic, dan status barisan. Resit proses juga boleh dimuat turun sebagai kenyataan yang ditandatangani secara berasingan. Ukuran fail dilaporkan sendiri dan bukan pengesahan perkakasan yang dipercayai.
+Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement．For verification of the execution environment，pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope)．
 
-Pemeriksa automatik disimpan secara tempatan semasa permulaan, setiap lima minit semasa memantau (**Parameter → Pemeriksa berasingan setiap**), dan semasa pemberhentian yang teratur. Pengesahan permulaan dan eksport membandingkan jurnal dengan checkpoint tempatan terkini yang disimpan. Ini boleh mengesan pengunduran pangkalan data apabila checkpoint masih wujud; seorang pengendali yang mengawal kedua-duanya masih boleh menggantikan kedua-duanya. Penyimpanan bebas dan cap masa luaran yang dipercayai kekal sebagai keperluan berasingan.
+Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives．Independent retention keeps that reference available outside the workspace；a verified external timestamp additionally anchors it in time．
 
 Selepas dihidupkan semula, kedudukan kemas kini Telegram yang disimpan akan disambung semula (`catch_up_from` dalam `observation.started`) dan kemas kini yang terlepas akan diminta. Semakan semula berkala merekod `message.recovered` untuk mesej yang terlepas dan `message.missing_on_recheck` apabila Telegram tidak lagi memulangkan mesej yang disimpan; yang terakhir bukan notis pemadaman dan tidak menyatakan nama pemadam atau masa.
 

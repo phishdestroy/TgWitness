@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/secur
 
 Mô hình mối đe dọa, mô hình truy cập, thông tin bí mật khi không được sử dụng, mức độ phơi bày mạng, nhập dữ liệu phiên làm việc và cách báo cáo lỗ hổng bảo mật.
 
-TgWitness hoạt động trên máy tính hoặc máy chủ của chính quý vị. Việc kết nối tài khoản, duy trì danh sách proxy công khai và các dịch vụ bên ngoài tùy chọn đều có các chính sách định tuyến rõ ràng. Thông báo, dấu thời gian, bản sao lưu ngoài hệ thống và nhân chứng được cấu hình riêng biệt. Trang này liệt kê những thông tin được bảo vệ, cách thức bảo vệ, cũng như những vấn đề còn lại thuộc trách nhiệm của người vận hành.
+This page describes access，storage and network protection in a local or server workspace． For collection on a GitHub runner or in an Intel TDX confidential VM，see the [verification modes](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope)，which add checks of the collection environment． Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．
 
 | Lĩnh vực | Tóm lại |
 | --- | --- |
@@ -12,7 +12,7 @@ TgWitness hoạt động trên máy tính hoặc máy chủ của chính quý v�
 | Thông tin bí mật khi không được truy cập | Các thông tin về phiên làm việc, cặp API, khóa ký và cài đặt proxy đều được mã hóa bằng thuật toán Fernet |
 | Tin nhắn và phương tiện truyền thông | Dữ liệu được lưu trữ dưới dạng không mã hóa: vui lòng sử dụng tính năng mã hóa đĩa và thiết lập quyền truy cập nghiêm ngặt |
 | Tính toàn vẹn | Chuỗi băm SHA-256 và chữ ký Ed25519 trên mỗi bản ghi |
-| Chưa được đề cập | Quản trị viên hệ thống, mã thông báo bảng điều khiển bị rò rỉ, tính đầy đủ của dữ liệu thu thập |
+| Local trust boundary | The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary |
 
 Để biết thêm thông tin về việc báo cáo lỗ hổng bảo mật, vui lòng tham khảo chính [sách bảo mật](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md).
 
@@ -38,11 +38,13 @@ Các tệp xuất ra không bao gồm thông tin xác thực và khóa ký, như
 
 ## Thông tin bí mật khi không được truy cập
 
-Thông tin đăng nhập API Telegram, StringSession và khóa riêng Ed25519 được mã hóa bằng Fernet. Theo mặc định, khóa này được lưu trữ trong cùng một thư mục dữ liệu được bảo vệ. Điều này giúp giảm thiểu nguy cơ lộ thông tin dạng văn bản thuần túy do sơ suất; tuy nhiên, đây không phải là biện pháp bảo vệ trước những kẻ tấn công có khả năng đọc toàn bộ thư mục. Nội dung tin nhắn và tệp đa phương tiện **không** được TgWitness **mã hóa** . Quý vị nên sử dụng tính năng mã hóa đĩa và các quyền truy cập hệ điều hành hạn chế. Các tệp khóa riêng trên Unix được tạo với chế độ 0600; các thư mục dữ liệu mới được tạo sẽ sử dụng chế độ 0700. Các quyền truy cập hiện có của thư mục sẽ không bị thay đổi. Hệ điều hành Windows kế thừa các danh sách kiểm soát truy cập (ACL) của thư mục: hãy giới hạn quyền truy cập chỉ dành cho tài khoản dịch vụ và các quản trị viên được ủy quyền.
+Telegram API credentials，the session and signing key are encrypted with Fernet． For local messages and media，encryption is provided by the host's disk or volume； the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP， and off-site copies use AES-256-GCM．
+
+The vault key defaults to the protected data directory．Use an external master-key file below to store it separately．On Unix，new private-key files use mode 0600 and new data directories use 0700；on Windows，set the directory ACL for the service account and authorized administrators．Existing directory permissions are retained．
 
 ### Khóa chính bên ngoài
 
-Đối với thư mục dữ liệu mới, TGWITNESS_VAULT_KEY_FILE có thể cung cấp một khóa chính ngẫu nhiên từ bên ngoài. HKDF-SHA256 và một giá trị muối ngẫu nhiên riêng biệt sẽ tạo ra một khóa Fernet khác nhau cho mỗi không gian làm việc. Tệp vault.external.json phải được lưu giữ để phục hồi. Trường hợp thiếu hoặc sử dụng khóa chính sai sẽ dẫn đến lỗi và hệ thống sẽ không hoạt động. Các kho dữ liệu cục bộ hiện có sẽ không được di chuyển tự động. Quá trình đang chạy có thể truy cập khóa; đây không phải là cơ chế cách ly HSM. Bảng điều khiển sẽ hiển thị chế độ đã chọn và nêu rõ rằng việc lưu trữ tin nhắn/phương tiện không được mã hóa bởi ứng dụng. Vui lòng tham khảo [phần kết nối, máy chủ proxy và bảo vệ dữ liệu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/) để biết mô hình mối đe dọa đầy đủ.
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode．Disk encryption protects the local message and media files in either mode；see [connection and data protection](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/) for setup details．
 
 ## Máy chủ proxy và các tuyến mạng
 
@@ -66,8 +68,10 @@ Phản hồi xác thực API mặc định đã được thay thế để không
 
 ## Giới hạn về tính toàn vẹn
 
-Chuỗi băm, các trình kích hoạt cơ sở dữ liệu và chữ ký sẽ phát hiện một số thay đổi nhất định; chúng không ngăn cản quản trị viên cục bộ ghi đè và ký lại sổ nhật ký. Vui lòng lưu giữ các điểm kiểm tra đã được ký và dấu vân tay khóa công khai trên một hệ thống riêng biệt. Chế độ bằng chứng và bản sao ngoài trang web (cả hai đều bị tắt theo mặc định) sẽ gửi các giá trị băm điểm kiểm tra đến các dịch vụ đóng dấu thời gian và các bản sao được mã hóa đến bộ lưu trữ tương thích với S3; vui lòng tham khảo định [dạng bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/). Nhật ký minh bạch, việc ký kết được hỗ trợ bởi HSM và chứng nhận chuỗi lưu giữ chính thức hiện chưa được triển khai.
+Local verification checks record signatures，the hash chain，attachments and the export manifest． The administrator holds the local signing key and can create another signed journal； an independently retained checkpoint detects replacement of the prefix it covers． Keep the key fingerprint and checkpoints with the recipient or an independent witness．
+
+For independently checked collection，choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)． Their verifiers check workflow provenance or hardware measurements in addition to archive integrity． Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies； the [evidence format](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) describes the checks for each mode．
 
 ## Nếu quý vị nghi ngờ có vấn đề
 
-Vui lòng giữ nguyên thư mục dữ liệu gốc và sử dụng một bản sao riêng biệt để phân tích. Không được đưa dữ liệu Telegram riêng tư hoặc thông tin đăng nhập vào các vấn đề công khai. Không có chứng nhận bảo mật độc lập nào được tuyên bố.
+Preserve the original data directory and use a separate copy for analysis． Report the affected version，operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)，keeping account data and credentials private．

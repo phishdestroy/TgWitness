@@ -134,7 +134,7 @@ Należy sprawdzić każdy punkt osobno, biorąc pod uwagę zakres zgromadzonych 
 4. Należy zachować oryginalne pliki ZIP i ich skróty. Należy odnotować każdego posiadacza, transfer, datę i cel. Należy zachować przypisane oświadczenia operatorów i notatki dotyczące sprawy wraz z nimi.
 5. W przypadku poufnych komunikatów głosowych należy zachować i niezależnie zweryfikować cytat, wyzwanie, łańcuch certyfikatów Intel, pomiary, dokładne źródło oraz warunki obsługi kluczy. Wynik weryfikacji poświadczenia należy zachować wraz ze zweryfikowanymi artefaktami.
 
-Zobacz [zakres weryfikacji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) w odniesieniu do założeń dotyczących wiarygodności oraz oddzielną ocenę twierdzeń dotyczących źródeł, tożsamości, czasu i zakresu gromadzenia danych.
+See [verification scope](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Weryfikacja przez odbiorcę
 

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/
 
 নির্বাচিত ওয়ার্কস্পেস এবং চ্যাটে মেয়াদোত্তীর্ণ, প্রত্যাহারযোগ্য অ্যাক্সেস সহ একটি MCP ক্লায়েন্ট সংযুক্ত করুন।
 
-একটি অ্যানালিস্ট ক্লায়েন্টকে নির্বাচিত ওয়ার্কস্পেস এবং চ্যাটগুলোর সাথে সংযুক্ত করুন। TgWitness **প্যানেল প্রসেসের `/mcp`-এ Streamable HTTP** সার্ভ করে। প্রতিটি সংযোগের নিজস্ব টোকেন, মেয়াদ শেষ হওয়ার সময় এবং অনুমোদিত টুলস থাকে। MCP কোনো Telegram মেসেজ পাঠাতে, সেটিংস পরিবর্তন করতে বা স্বাক্ষরিত জার্নাল মডিফাই করতে পারে না।
+নির্বাচিত ওয়ার্কস্পেস এবং চ্যাটে একজন বিশ্লেষক ক্লায়েন্ট সংযুক্ত করুন। TgWitness **প্যানেল প্রক্রিয়ায় `/mcp`-এ Streamable HTTP** পরিবেশন করে। প্রতিটি সংযোগের নিজস্ব টোকেন, মেয়াদোত্তীর্ণ সময় এবং অনুমোদিত টুল রয়েছে। MCP টেলিগ্রাম বার্তা পাঠাতে, সেটিংস পরিবর্তন করতে বা স্বাক্ষরিত জার্নাল সম্পাদনা করতে পারে না। একই সংযোগগুলো [কমান্ড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/)লাইনেও কাজ করে।
 
 [ওয়ার্কফ্লো গাইড](https://phishdestroy.github.io/TgWitness/docs/archive/) · [উইকি](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 | --- | --- |
 | `list_workspaces` | অনুমোদিত ওয়ার্কস্পেসসমূহ |
 | `list_chats` | অনুমোদিত চ্যাটসমূহ |
-| `search_messages` | নির্বাচিত সময়ের মধ্যে সেভ করা মেসেজ টেক্সট |
+| `search_messages` | নির্বাচিত সময়সীমার মধ্যে সংরক্ষিত বার্তার পাঠ্য; `ranked=true` [পূর্ণ-পাঠ অনুসন্ধান](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/) ব্যবহার করে (শব্দের রূপ, প্রথমে সেরা মিল, `next_offset` পেইজিং) |
 | `get_message_versions` | ক্যাপচার করা ভার্সন এবং ডিলিট সংক্রান্ত পর্যবেক্ষণ |
 | `get_message_context` | কাছাকাছি ক্যাপচার করা মেসেজ আইডিগুলো |
 | `get_journal_event` | সোর্স রেফারেন্সসহ একটি স্যানিটাইজড রেকর্ড |
-| `get_capture_status` | কালেকশন স্টেট এবং অনুমোদিত কভারেজ রেকর্ডসমূহ |
+| `get_capture_status` | সংগ্রহ অবস্থা, অনুমোদিত কভারেজ রেকর্ড এবং `gap_summary`: কখনোই দেখা যায়নি এমন মেসেজ নম্বর, প্রতি চ্যানেল বা সুপারগ্রুপ অনুযায়ী এবং অ্যাকাউন্ট-ব্যাপী ক্রম ([বিবরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#missing-message-numbers-gap_summary)); তালিকাভুক্ত ফাঁক দেখতে একটি চ্যাট নির্বাচন করুন |
+| `get_activity_stats` | UTC ঘণ্টা ও সপ্তাহের দিন অনুযায়ী বার্তা, শীর্ষ দিনগুলো, সম্পাদনা ও মুছে ফেলার শেয়ার, প্রেরক, ডোমেইন এবং `@handles`, কভারেজ ([বিস্তারিত](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/#activity-statistics)) সহ |
+| `export_messages` | শুধুমাত্র কমান্ড লাইন, ডিফল্টভাবে নির্বাচিত নয়: পর্যবেক্ষণগুলি JSON Lines হিসেবে সংরক্ষিত স্ট্রিম করে ([বিবরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/#export)); MCP-র মাধ্যমে উপলব্ধ নয় |
 
 `tools/list` শুধুমাত্র সেই সংযোগে অনুমোদিত টুলগুলোই রিটার্ন করে। অন্য টুলগুলোতে কল করা হলে তা প্রত্যাখ্যান করা হয়। এই বিল্ডে গ্রুপ-কনটেক্সট, এপিসোড, টার্মিনোলজি এবং রিপ্লাই-চেইন টুলগুলো অফার করা হয়নি; এগুলোর জন্য আলাদা কনটেক্সট-প্যাক ব্যাকএন্ড এতে অন্তর্ভুক্ত নেই।
 

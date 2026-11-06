@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/
 
 Підключіть клієнт MCP до вибраних робочих просторів та чатів із тимчасовим, відкличним доступом.
 
-Підключіть аналітичний клієнт до вибраних робочих просторів і чатів. TgWitness обслуговує **Streamable HTTP за шляхом `/mcp` у процесі панелі**. Кожне підключення має власний токен, термін дії та дозволені інструменти. MCP не може надсилати повідомлення Telegram, змінювати налаштування або модифікувати підписаний журнал.
+Підключіть клієнт-аналітик до вибраних робочих просторів та чатів. TgWitness надає доступ до **Streamable HTTP за адресою `/mcp` у процесі панелі**. Кожне з’єднання має власний токен, термін дії та дозволені інструменти. MCP не може надсилати повідомлення Telegram, змінювати налаштування або модифікувати підписаний журнал. Ці ж з’єднання працюють із [командним рядком](https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/).
 
 [Посібник з організації робочого процесу](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Вікі](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 | --- | --- |
 | `list_workspaces` | Дозволені робочі простори |
 | `list_chats` | Дозволені чати |
-| `search_messages` | Збережений текст повідомлень за вибраний період |
+| `search_messages` | Текст збережених повідомлень за вибраний період; `ranked=true` використовує [повнотекстовий пошук](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/) (форми слів, найкращі збіги першими, `next_offset` пагінація) |
 | `get_message_versions` | Зафіксовані версії та спостереження щодо видалення |
 | `get_message_context` | Сусідні ідентифікатори зафіксованих повідомлень |
 | `get_journal_event` | Один очищений запис із посиланням на його джерело |
-| `get_capture_status` | Стан збору та дозволені записи про охоплення |
+| `get_capture_status` | Стан збору даних, дозволені записи охоплення та `gap_summary`: номери повідомлень, які ніколи не спостерігалися, за кожним каналом або супергрупою, а також для послідовності в межах усього облікового запису ([деталі](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#missing-message-numbers-gap_summary)); виберіть чат, щоб переглянути перелік пропусків у ньому |
+| `get_activity_stats` | Повідомлення за годинами за UTC та днями тижня, дні пікового навантаження, частка редагувань та видалень, відправники, домени та `@handles`, із охопленням ([деталі](https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/#activity-statistics)) |
+| `export_messages` | Тільки командний рядок, не вибрано за замовчуванням: потоки зберігають спостереження у форматі JSON Lines ([деталі](https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/#export)); не доступно через MCP |
 
 `tools/list` повертає лише інструменти, надані цьому підключенню. Виклики інших інструментів відхиляються. Інструменти групового контексту, епізодів, термінології та ланцюжків відповідей не пропонуються в цій збірці; їхній окремий бекенд пакетів контексту не включено.
 

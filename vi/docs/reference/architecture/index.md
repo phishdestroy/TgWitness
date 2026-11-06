@@ -15,6 +15,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | message_content.py | So sánh tin nhắn có thể quan sát được, không bao gồm siêu dữ liệu truy cập truyền tải |
 | workers.py | Vui lòng đợi cho đến khi các tác vụ xuất tệp hoàn tất trước khi tiến hành dọn dẹp sau khi hủy bỏ |
 | store.py | Các giao dịch WAL, chuỗi sự kiện có thứ tự, bộ lọc truy vấn, cài đặt vận hành |
+| fulltext.py | Chỉ mục toàn văn được tạo ra (các dạng từ, BM25), được liên kết với tiêu đề của nhật ký có chữ ký; không bao giờ được xuất ra ngoài |
 | security.py | Tạo tệp riêng tư, kho lưu trữ được mã hóa, ký số bằng Ed25519, khóa quy trình đơn |
 | evidence.py | Xuất toàn bộ nhật ký, các bản sao, điểm kiểm tra, xác minh tệp đính kèm |
 | verify.py | Trình xác minh độc lập, chỉ đọc (thư viện chuẩn + mật mã học): kho lưu trữ, phạm vi bao phủ, nhật ký chứng cứ và bài đăng trên kênh, tệp hồ sơ |

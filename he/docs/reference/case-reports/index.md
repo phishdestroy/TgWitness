@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. יש לשמור על קבצי ה-ZIP המקוריים ועל חתימות ה-hash שלהם. יש לתעד כל מחזיק, העברה, תאריך ומטרה. יש לשמור יחד איתם את הצהרות המפעילים המיוחסות ואת הערות התיק.
 5. במקרה של הודעות קוליות חסויות, יש לשמור ולאמת באופן עצמאי את הציטוט, האתגר, שרשרת האישורים של Intel, המדידות, המקור המדויק ותנאי הטיפול במפתחות. יש לשמור את תוצאת אימות האישור יחד עם הממצאים שנבדקו.
 
-ראו את [היקף האימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) לגבי הנחות האמון וההערכה הנפרדת של טענות המקור, הזהות, הזמן והיקף האיסוף.
+See [verification scope](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## בדיקה על ידי הנמען
 

@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/witne
 
 [ส่งออกและตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/) · [ความมั่นใจสูง](https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/) · [คู่มือการใช้งานแผงควบคุม](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#extras)
 
-ผู้เก็บข้อมูลจะลงนามในบันทึกของตนเอง ดังนั้นผู้ใดก็ตามที่ควบคุมผู้เก็บข้อมูลและกุญแจของมัน ก็สามารถ ในหลักการ เขียนใหม่หรือตัดทอนบันทึกและลงนามใหม่ได้ Witness ทำให้สิ่งนั้น สามารถตรวจพบได้ นี่เป็นกระบวนการแยกต่างหาก — คอนเทนเนอร์อีกตัว หรือดีกว่าคือเซิร์ฟเวอร์ที่บุคคลอื่น ดำเนินการ — ซึ่งจะดึงส่วนหัวของบันทึกที่ลงนามจากเครื่องมือเก็บข้อมูลทุกไม่กี่นาที ลงนามสิ่งที่ มันเห็นด้วยกุญแจของตัวเอง เก็บไว้ในบันทึกของตัวเอง และโพสต์ไปยังช่อง Telegram
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 แผนผังกระบวนการ · Collector → Witness (จุดตรวจสอบที่ลงนาม: จำนวนบันทึก + ค่าแฮชส่วนหัว); Witness → สมุดบันทึกพยาน, กุญแจส่วนตัว; Witness → ช่อง Telegram (โพสต์ที่ลงนามผ่านบอทของระบบเอง); ไฟล์ ZIP ของหลักฐาน → verify.py; สมุดบันทึกพยาน, กุญแจส่วนตัว → verify.py; ช่อง Telegram → verify.py (หน้าส่งออก Telegram Desktop หรือ t.me/s) · Collector · Witness · สมุดบันทึกพยาน,กุญแจส่วนตัว · ช่อง Telegram · ไฟล์ ZIP ของหลักฐาน · verify.py · จุดตรวจสอบที่ลงนาม: · จำนวนบันทึก + ค่าแฮชส่วนหัว · โพสต์ที่ลงนามผ่านบอทของระบบเ · อง · หน้าส่งออก Telegram Desktop · หรือ t.me/s
 
@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/witne
 ทุกช่วงเวลา (ค่าเริ่มต้นคือ 10 นาที) TgWitness จะ:
 
 1. ดึงส่วนหัวมาเอง (ผู้รวบรวมข้อมูลไม่สามารถส่งหรือข้ามส่วนหัวนี้ได้);
-2. ตรวจสอบลายเซ็นของผู้เก็บข้อมูล, กุญแจผู้เก็บข้อมูลที่ถูกตรึง (`--collector-fingerprint`, หรือกุญแจแรกที่พบ), จำนวนที่ไม่ลดลง และส่วนหัวที่ไม่เปลี่ยนแปลงที่จำนวนที่ไม่เปลี่ยนแปลง;
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. เพิ่มบันทึกที่ลงนามแล้วลงในบันทึกของตนเอง: `witness.anchor` ด้วยสถานะ `ok`, `key_changed`, `rollback` (จำนวนบันทึกน้อยกว่าเดิม), `fork` (ความยาวเท่ากัน แต่ส่วนหัวต่างกัน ) หรือ `invalid` (คำตอบไม่ผ่านการตรวจสอบ), หรือ `witness.no_response` เมื่อ ผู้รวบรวมข้อมูลไม่ตอบกลับ;
 4. ส่งผลลัพธ์ไปยังช่อง (channel) พร้อมลายเซ็น รวมถึงข้อความ "no answer" ในขณะที่ TgWitness กำลังทำงานและสามารถเข้าถึง Bot API ได้ ID ของการโพสต์ถูกบันทึกไว้ (`witness.posted`), รวมถึงการโพสต์ที่ล้มเหลวด้วย (`witness.post_failed`).
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 สิ่งนี้ต้องการลายนิ้วมือของพยานที่เก็บรักษาไว้อย่างอิสระและจุดตรวจสอบที่ตรงกัน ที่จุดสิ้นสุดที่แม่นยำของการส่งออกนี้ จุดตรวจสอบที่ครอบคลุมเพียงส่วนนำหน้าก่อนหน้านี้ ไม่เพียงพอ ให้หยุดการเก็บข้อมูลชั่วคราว ให้พยานสังเกตสถานะสุดท้าย และส่งออก ก่อนที่จะมีการเขียนบันทึกเพิ่มเติม; หากบันทึกมีการเปลี่ยนแปลง ให้เก็บจุดตรวจสอบอีกจุดและ ส่งออกสถานะนั้น จุดตรวจสอบที่สร้างขึ้นภายหลังเพียงอย่างเดียวไม่สามารถตรวจสอบค่าแฮชสุดท้ายของการส่งออกที่สั้นกว่าได้ เมื่อมีการระบุ `--channel` ด้วย การขาดโพสต์ที่อ้างว่ามีอยู่หรือชุดการจับคู่ที่ว่างเปล่าจะทำให้การตรวจสอบ ที่เข้มงวดนี้ล้มเหลว หากไม่มีตัวบ่งชี้นี้ การตรวจสอบความสมบูรณ์แบบปกติจะยังคงรายงาน บันทึกที่ไม่มีพยานยืนยัน โดยไม่ปฏิเสธอาร์ไคฟ์ที่สมบูรณ์ในส่วนอื่น
 
-ธงนี้ช่วยรักษาความสอดคล้องกับบันทึกพยานที่ได้รับการจัดเตรียมและตรึงไว้แล้ว ผู้ดำเนินการ ยังคงต้องยืนยันความเป็นอิสระของพยานและเก็บรักษาบันทึกของพยานไว้อย่างแยกต่างหาก ธงนี้ไม่ยืนยันความจริงของข้อความ การเก็บรวบรวมที่ครบถ้วน หรือระยะเวลาการทำงานที่วัดได้อย่างอิสระ
-
-Witness แสดงให้เห็นว่าผู้เก็บข้อมูลได้รายงานอะไรในช่วงเวลาดังกล่าว และว่าการส่งออกข้อมูลในภายหลังสอดคล้อง กับข้อมูลนั้น มันไม่แสดงว่าผู้เก็บข้อมูลได้บันทึกทุกสิ่งที่ Telegram ส่งมา หรือ ว่าเนื้อหาของข้อความนั้นเป็นความจริง Witness ที่ถูกดำเนินการโดยผู้ดำเนินการเดียวกันบนเครื่องเดียวกันนั้น มีความน่าเชื่อถือต่ำกว่าเมื่อถูกดำเนินการโดยบุคคลอื่น
-
-การเพิ่มจำนวนเพียงอย่างเดียวไม่สามารถยืนยันความต่อเนื่องแบบเพิ่มข้อมูลเท่านั้น (append-only) บนออนไลน์ได้: การเปรียบเทียบแบบออฟไลน์ ต้องตรวจสอบให้ตรงกันระหว่างแฮชของส่วนนำ (prefix hash) ที่เก็บไว้กับข้อมูลส่งออกทั้งหมดจากตัวเก็บรวบรวม ช่วงเวลาที่ Witness หยุดทำงานหรือการเผยแพร่ล้มเหลวจะทิ้งช่วงว่างที่ไม่มีจุดอ้างอิงจากภายนอก โพสต์ที่หายไป สามารถรายงานได้โดยเปรียบเทียบกับบันทึกของ Witness ที่เก็บรักษาไว้; ทั้งช่อง (channel) และเซิร์ฟเวอร์ ที่ควบคุมโดยผู้ดำเนินการเดียวกัน ล้วนไม่ใช่คลังข้อมูลของบุคคลที่สามที่ไม่สามารถเปลี่ยนแปลงได้
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

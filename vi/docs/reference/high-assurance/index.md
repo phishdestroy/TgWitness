@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-
 
 Một máy chủ được bảo mật 24/7 trên Hetzner hoặc Phala Cloud, Gateway DNS và các kiểm tra mà bên thứ ba có thể lặp lại.
 
-Một nhật ký đã được ký xác nhận chứng minh rằng các bản ghi không bị thay đổi **sau khi** ký. Đối với các trường hợp nghiêm trọng, câu hỏi tiếp theo là liệu có ai đó có thể đã can thiệp vào dữ liệu **trước** khi nó được ký hay không: ai đã chạy trình thu thập dữ liệu, trên máy nào, và liệu có ai đã đăng nhập vào nó hay không. Chế độ tùy chọn này triển khai trình thu thập dữ liệu sao cho một bên thứ ba có thể kiểm tra điều đó, bằng cách sử dụng các bản ghi được lưu trữ bởi nhà cung cấp dịch vụ đám mây và Cloudflare thay vì chỉ dựa vào lời khẳng định của nhà điều hành.
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 Việc sử dụng thông thường trên máy cục bộ và Docker vẫn không thay đổi. Không có gì ở đây hoạt động trừ khi bạn triển khai bằng `python -m tgwitness.cloud`, và trình thu thập dữ liệu chỉ đọc máy chủ của nó khi quá trình triển khai được thiết lập `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Sơ đồ quy trình · Người vận hành → Máy chủ, tường lửa khô
 | Khóa ký đã được tạo trên máy chủ đó | Khóa này ký một tuyên bố nêu rõ ID máy chủ của nhà cung cấp và giá trị băm của tệp cloud-init mà nó đã nhận được | Collector, đã được kiểm tra với nhà cung cấp |
 | Nhật ký này thuộc về khóa và máy chủ đó | Mỗi quá trình bắt đầu trong bằng chứng ZIP đều chứa thông số đo lường máy chủ cho máy chủ đó | Bằng chứng ZIP |
 
-Các số liệu máy chủ (trình nghe SSH và các tiến trình, phiên hiện tại, các lần đăng nhập `wtmp`, quá trình khởi động) được chính bộ thu thập báo cáo và được ký vào mỗi lần khởi động tiến trình cũng như vào `host.state` bản ghi mỗi khi chúng thay đổi. Người dùng root trên máy chủ có thể làm sai lệch các số liệu này; chúng hỗ trợ các bản ghi của nhà cung cấp và Cloudflare thay vì thay thế chúng.
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## Nhà cung cấp
 
@@ -269,11 +269,8 @@ Gateway DNS bao gồm bộ giải quyết tên miền của hệ thống. DNS qu
 
 Cloudflare không thể xem nội dung bên trong lớp mã hóa của Telegram, các thiết bị khác trên tài khoản Telegram (danh sách thiết bị trong chế độ bằng chứng ghi lại chúng từ phía Telegram) hoặc hypervisor của nhà cung cấp.
 
-## Điều này không xác định được
+## Reading the deployment result
 
-- Nhà cung cấp và nhân viên của họ quản lý hypervisor, đĩa cứng và mạng.
-- Các chỉ số máy chủ được báo cáo tự động bởi trình thu thập dữ liệu.
-- Nội dung các quy tắc tường lửa trước đây không có trong nhật ký của mọi nhà cung cấp; chỉ có Linode lưu giữ các phiên bản quy tắc.
-- Nó không đề cập đến bất kỳ thông tin mới nào về tính xác thực của tin nhắn; xem phần [Bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/).
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-Chưa được chạy trên các tài khoản thực: một bản triển khai dưới tên miền riêng của bạn (đường hầm Cloudflare và DNS), các nhà cung cấp khác, một bản triển khai gỡ lỗi và `lock`, một tài khoản Telegram trên máy chủ đó, và các bản cập nhật trực tiếp của các phiên bản sau thông qua đường hầm nhanh. Kiểm tra lần triển khai đầu tiên trên mỗi nhà cung cấp với `plan`, một triển khai gỡ lỗi và `verify` trước khi sử dụng nó trong một vụ việc.
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

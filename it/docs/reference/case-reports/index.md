@@ -134,7 +134,7 @@ Esaminare ogni controllo separatamente, insieme alla copertura della raccolta re
 4. Mantenere i file ZIP originali e i relativi hash. Registrare ogni detentore, trasferimento, data e scopo. Conservare insieme a essi le dichiarazioni attribuite agli operatori e le note relative al caso.
 5. Per i messaggi vocali riservati, conservare e verificare in modo indipendente la citazione, la verifica, la catena di certificati Intel, le misurazioni, la fonte esatta e le condizioni di gestione delle chiavi. Conservare il risultato della verifica dell’attestazione insieme agli artefatti esaminati.
 
-Consultare [l’ambito di verifica](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#verification-scope) per le ipotesi di affidabilità e la valutazione separata delle affermazioni relative alle fonti, all’identità, alla tempistica e alla copertura della raccolta.
+See [verification scope](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Revisione da parte del destinatario
 

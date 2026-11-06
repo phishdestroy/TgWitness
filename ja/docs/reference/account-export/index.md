@@ -31,6 +31,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/accou
 
 プロフィール写真の履歴やストーリーは、デフォルトでは選択されません。ケースでメッセージのみが必要な場合は、プロフィールと連絡先も無効にしてください。添付ファイルやメタデータが不要な場合は、取得時にそれらを除外することで、このエクスポートに別のプライベートコピーが残るのを防ぐことができます。
 
+Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+
 ## 概要、対応範囲、検証
 
 各ジョブでは、オプションとアカウントの識別情報が固定されます。インベントリとキャプチャされたページには署名が付与され、ページレシートにはハッシュ値、カーソル位置、時刻、添付ファイルの結果、および直前のレシートが記録されます。コミットされたページのみが進行状況に反映されます。再起動／再開時には、処理を続行する前にこれらの記録がチェックされます。アカウントの変更、署名済みページの変更、またはレシートチェーンの不整合がある場合は拒否されます。取得処理の途中でオプションを編集することはできません。別の範囲を処理する場合は、別のジョブを開始してください。
@@ -64,6 +66,14 @@ Ed25519署名およびSHA-256ハッシュは、コレクターが関連するバ
 5. カウント数、警告、および変換後のメッセージのサンプルをプレビューし、作成を明示的に確認してください。サンプルは、12 メッセージまで、各メッセージは 2,000 文字までです。これはサンプルであり、結果の完全なレビューではありません。設定を変更するには、再度プレビューを行う必要があります。プレビューは 15 分後に失効し、その管理者セッションおよび元の ZIP に紐付けられています。作成後は再利用できません。新しいプレビューを作成すると、同じジョブおよびセッションにおける以前のプレビューは無効になります。
 6. 生成された完全な結果を `index.html` を `messages.jsonl` をローカルで確認してください。不要な情報が含まれている場合は、除外条件を厳格化した新しい開示情報を作成してください。署名済みのZIPをその場で編集しないでください。
 
+### 選択により除外されたメッセージ
+
+**プレビュー。**開示情報が不完全な場合、そのように表示されます。少なくとも1つの開示済みメッセージを含むすべてのチャット内では、選択範囲から除外されたメッセージがマーカーとして表示されます。 `[withheld by selection — rule: sender]` （または `text`, `period`）。「**選択範囲から除外されたメッセージ**」を選択してください：連続する非開示メッセージの各ブロックごとに1つのマーカー（デフォルト）、またはメッセージごとに1つのマーカー。マーカーにはルールとカウントのみが含まれ、テキスト、送信者、日付、ファイルは一切含まれません。開示されたメッセージがないチャットは完全に除外されるため、このパッケージはその存在を明らかにしません。
+
+「開示された返信」とは、その返信が何に対して行われたかを示すものです。具体的には、このコピーに含まれるメッセージ、選択によって非開示とされたメッセージ、あるいはソースエクスポートに含まれていないメッセージ（エクスポート前に削除されたか、そもそもエクスポートされなかったかのいずれか。エクスポートデータからは区別できません）です。 開示された返信が回答対象とする除外されたメッセージには、常に独自のマーカーが付与されるため、その返信は、なぜ空であるかを説明するレコードを指し示します。これら3つの状態は、ソースエクスポートに属する削除や収集の欠落とは区別されます。
+
+書式は `messages.jsonl` （フォーマット `tgwitness-account-disclosure-v2`）では、各メッセージには `state`: `disclosed`、または `withheld` で `rules` および `count`。公開された返信には `reply_to` 対象を伴う `id` と。開示された返信には `state` (`disclosed`, `withheld`, `not_in_source`）。マニフェストには、公開されたメッセージ、チャット、メディア、および `withheld` メッセージをカウントします。 `verify.py` コンテンツを含むマーカーや、パッケージ内に存在しないレコードを指す返信は拒否されます。バージョン1のパッケージは従来通り検証されます。
+
 この最小化された形式では、構造化されたアカウントプロフィール、連絡先、アバター、セッション、ストーリー、Telegramの生データオブジェクト、転送ヘッダー、返信の引用、連絡先カード、位置情報メタデータは省略されます。また、元のJSONLファイル、非公開フィルター設定、仮名化キー、およびIDマップも除外されます。選択されたテキスト、明示的に保持されたID、および含まれるファイルには、これらのフィルターで使用されたものと同じ名前、ID、またはフレーズが含まれている可能性があります。これらについては別途確認が必要です。 プライバシーポリシーと仮名化キーは、そのジョブ用のローカル保管庫に暗号化された状態で保持されます。ジョブを削除すると、関連する非公開開示記録も消去されます。公開ポリシー記録には、フィルタ値ではなくフィルタの件数が記録されます。明示された目的はマニフェストおよびHTML上で公開されます。明示的な非公開基準、および仮名化モードにおける既知の隠された身元情報も、メッセージ本文が省略されている場合を含め、そこでマスクされます。目的の記述には不必要な個人情報を含めないようにしてください。身元を特定できない文脈については記載したままにしておいても構いません。
 
 そのマニフェストには、派生ファイル、公開ポリシー、および元のZIPのハッシュが紐付けられています。検証を行うことで完全性を確認でき、ソースがローカルで提供されている場合は、ソースとのリンクの一致も確認できます：
@@ -75,12 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ソースのリンクだけでは、変換処理によって必要な項目がすべて選択されたこと、あるいは個人を特定できる詳細がすべて削除されたことを単独で証明するものではありません。元の平文は証明として埋め込まれていません。その判断には、改めて検証を行う必要があります。
 
-## データ保護とホスト型「Capture」プレビュー
+## Sharing and hosted capture
 
-これらの制御機能は、利用目的の限定およびデータ最小化をサポートするものであり、自動的な法令遵守チェックを行うものではありません。[GDPRの第5条および第25条では、](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng)これらの原則および「設計・デフォルトによる保護」について規定されています。適法な根拠、必要性、該当する場合の特別カテゴリに関する条件、保存期間、セキュリティ、および受領者によるアクセスについては、依然として事案に応じた適切な判断が必要です。訴訟目的であるという理由だけで、あらゆる情報開示が適法となるわけではありません。仮名化されたデータは、一般的に依然として個人データとして扱われます。[EDPBの説明](https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en)を参照してください。
+Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
 
-自由文、日付、稀な出来事、および事実の組み合わせにより、名前が削除された後でも個人を特定できる可能性があります。メッセージの内容が不要な場合はテキストの省略を優先し、必要な場合は完全な派生データを精査してください。ソースと保管庫を保護し、責任者と保存期間および共有について合意し、どのZIPが引き渡されたかを正確に記録してください。
-
-GitHub Actions は Takeout または通常 API によるアカウント全体や選択したチャットのエクスポートと，単一チャットのログに対応します．[GitHub Actions](https://phishdestroy.github.io/TgWitness/docs/capture/) ガイドでは設定の検証と 120 分の制限を説明しています．ローカルのエクスポートや共有用コピーに GitHub の証明は引き継がれず，模擬テストは実際の Telegram アカウントでの動作確認にはなりません．
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)．
 
 [証拠の形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/) · [事例レポート](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-reports/)

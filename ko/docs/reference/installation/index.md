@@ -44,6 +44,30 @@ Ubuntu에서는 **‘이 컴퓨터**’, **‘임시 HTTPS 링크’** 또는 **
 
 모든 설치 패키지에는 로컬 경로, 명령어 및 저장소 링크가 포함된 **START-HERE.html** 및 **START-HERE.txt** 파일이 들어 있습니다. `tgwitness guide` 를 실행하여 가이드를 엽니다. Windows에서는 `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` PowerShell에서 다음 명령을 실행하세요.
 
+## 전체 텍스트 검색 설정
+
+[전체 텍스트 검색](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/)(미리보기)은 별도의 설정이 필요하지 않습니다. 인덱스는 업데이트 후 백그라운드에서 자동으로 생성됩니다.
+
+| 변수 또는 명령어 | 효과 |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | 기본값: 인덱스는 `search/fulltext.sqlite3` 각 워크스페이스의 |
+| `TGWITNESS_FULLTEXT=memory` | 인덱스 파일이 없으며, 시작 시마다 인덱스가 재구축됩니다. |
+| `TGWITNESS_FULLTEXT=off` | 색인 없음; 정확한 텍스트 검색만 가능 |
+| `tgwitness index status` | 모든 워크스페이스의 인덱스 상태 |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | 서명된 저널에서 모든 인덱스를 재구축합니다. |
+
+관리자가 **‘저널(Journal) → 필터(Filters) → 검색 인덱스(Search index)**’에서 선택한 항목이 해당 작업 공간의 변수 설정을 우선합니다. 명령어는 해당 명령어가 실행되는 설치본의 데이터 디렉터리를 찾습니다. 그 외의 경우, `--data-dir` 다음 경로를 추가하십시오 `tgwitness paths`. 전체 우크라이나어 사전(GPL-3.0 데이터)을 사용하려면 `pymorphy3-dicts-uk` 을 설치된 Python 환경에 설치하십시오.
+
+## 명령줄 액세스
+
+[명령줄](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/)(미리보기)은 아카이브에서 스크립트와 에이전트를 읽어옵니다.
+
+| 변수 | 효과 |
+| --- | --- |
+| `TGWITNESS_URL` | 다음에 대한 패널 주소 `tgwitness search`, `context`, `messages`, `stats` 및 `export`; 토큰이 설정된 경우 `http://127.0.0.1:8787` 설정된 경우 |
+| `TGWITNESS_MCP_TOKEN` | '통합(**Integrations) → MCP**'에서 MCP 클라이언트와 공유되는 연결 토큰을 아카이브하고, `--token-file` 대신 파일에서 읽어옵니다. |
+| `TGWITNESS_DATA` | 다음이 지정되지 않은 경우 데이터 디렉터리를 직접 읽습니다 `--data-dir`, URL 또는 토큰이 지정되지 않은 경우 |
+
 ## 실행 전 확인 사항
 
 이 한 줄짜리 명령어는 초기 스크립트에 대해 HTTPS를 신뢰합니다. 해당 스크립트는 설치 전에 SHA-256와 애플리케이션 및 제약 조건에 대한 프로젝트의 RSA 서명을 확인합니다. 또한 초기 스크립트를 먼저 다운로드하여 검증할 수도 있습니다.

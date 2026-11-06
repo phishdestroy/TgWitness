@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-
 
 Pelayan 24/7 yang disegel di Hetzner atau Phala Cloud, Gateway DNS dan pemeriksaan yang boleh diulang oleh pihak ketiga.
 
-Jurnal yang disahkan membuktikan bahawa rekod tidak diubah **selepas** ditandatangani. Bagi kes yang serius, persoalan seterusnya ialah sama ada sesiapa pun boleh mengubah suai data **sebelum** ia disahkan: siapa yang menjalankan pengumpul, di mesin mana, dan sama ada seseorang telah log masuk ke dalamnya. Mod pilihan ini menyebarkan pengumpul supaya pihak ketiga boleh menyemak perkara itu, menggunakan rekod yang disimpan oleh penyedia awan dan Cloudflare dan bukannya kata-kata pengendali.
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 Penggunaan biasa secara tempatan dan Docker tidak berubah. Tiada apa yang berjalan di sini melainkan anda menyebarkan dengan `python -m tgwitness.cloud`, dan pengumpul hanya membaca hosnya apabila penyebaran menetapkan `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Diyagram aliran · Pengendali → Pelayan, firewall tanpa peraturan masuk (API p
 | Kunci penandatanganan telah dibuat pada pelayan tersebut | Kunci menandatangani pernyataan yang menamakan ID pelayan penyedia dan hash cloud-init yang diterimanya | Pengumpul, disemak menentang penyedia |
 | Jurnal ini milik kunci dan pelayan tersebut | Setiap proses bermula dalam bukti ZIP membawa ukuran hos untuk pelayan tersebut | Bukti ZIP |
 
-Ukuran hos (pengadang SSH dan proses, sesi semasa, log masuk dalam `wtmp`, butang) dilaporkan oleh pengumpul itu sendiri dan ditandatangani pada setiap permulaan proses dan ke dalam `host.state` direkodkan setiap kali ia berubah. Akses root pada pelayan boleh memalsukannya; ia menyokong rekod penyedia dan Cloudflare dan bukannya menggantikannya.
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## Penyedia
 
@@ -269,11 +269,8 @@ Gateway DNS merangkumi penyelesai sistem. DNS melalui HTTPS pada port 443 ke pen
 
 Cloudflare tidak dapat melihat ke dalam penyulitan Telegram, peranti lain pada akaun Telegram (senarai peranti mod bukti merekodkannya dari pihak Telegram) atau hipervisor penyedia.
 
-## Apa yang tidak ditetapkan oleh ini
+## Reading the deployment result
 
-- Penyedia dan kakitangannya mengawal hipervisor, cakera dan rangkaian.
-- Ukuran hos dilaporkan sendiri oleh pengumpul.
-- Kandungan peraturan firewall terdahulu tidak terdapat dalam setiap log penyedia; hanya Linode mengekalkan versi peraturan.
-- Ia tidak menyatakan apa-apa yang baharu mengenai keaslian mesej; lihat [Bukti](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/).
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-Belum dijalankan pada akaun sebenar: satu penyebaran di bawah domain anda sendiri (tunel Cloudflare dan DNS), penyedia lain, satu penyebaran debug dan `lock`, akaun Telegram pada pelayan sedemikian, dan kemas kini langsung versi kemudian melalui terowong pantas. Semak penyebaran pertama pada setiap penyedia dengan `plan`, penyebaran debug dan `verify` sebelum menggunakannya dalam sesuatu kes.
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

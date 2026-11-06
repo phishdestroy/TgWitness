@@ -44,7 +44,7 @@ Kumpulkan
 
 Arkib & integrasi
 
-[Rujukan Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/)[Analisis arkib](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/)[MCP hanya-baca](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/)[OCR tempatan dan transkripsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/media-analysis/)[Webhook keluaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/webhooks/)[Paparan awam](https://phishdestroy.github.io/TgWitness/ms/docs/reference/showcase/)
+[Rujukan Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/)[Analisis arkib](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/)[Carian penuh](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/)[MCP hanya-baca](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/)[Baris perintah](https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/)[OCR tempatan dan transkripsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/media-analysis/)[Webhook keluaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/webhooks/)[Paparan awam](https://phishdestroy.github.io/TgWitness/ms/docs/reference/showcase/)
 
 Bukti
 

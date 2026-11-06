@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/witne
 
 [निर्यात करें और सत्यापित करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/) · [उच्च आश्वासन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/) · [पैनल मार्गदर्शिका](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#extras)
 
-एक कलेक्टर अपने स्वयं के जर्नल पर हस्ताक्षर करता है, इसलिए जो कोई भी कलेक्टर और उसकी कुंजी को नियंत्रित करता है, वह सिद्धांत रूप में जर्नल को फिर से लिख या संक्षिप्त कर सकता है और फिर से हस्ताक्षर कर सकता है। एक गवाह इसे पता लगाने योग्य बनाता है। यह एक अलग प्रक्रिया है — एक और कंटेनर, या बेहतर कहें तो कोई और चलाया हुआ सर्वर — जो हर कुछ मिनटों में कलेक्टर के हस्ताक्षरित जर्नल हेड को प्राप्त करता है, जो उसने देखा उसे अपनी कुंजी से हस्ताक्षरित करता है, उसे अपने स्वयं के जर्नल में रखता है और एक टेलीग्राम चैनल पर पोस्ट करता है।
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 प्रवाह आरेख · संग्रहकर्ता → गवाह (हस्ताक्षरित चेकपॉइंट: रिकॉर्ड की संख्या + हेड हैश); गवाह → विटनेस जर्नल, अपनी कुंजी; गवाह → टेलीग्राम चैनल (अपने स्वयं के बॉट के माध्यम से हस्ताक्षरित पोस्ट); साक्ष्य ज़िप → verify.py; विटनेस जर्नल, अपनी कुंजी → verify.py; टेलीग्राम चैनल → verify.py (टेलीग्राम डेस्कटॉप एक्सपोर्ट या t.me/s पृष्ठ) · संग्रहकर्ता · गवाह · विटनेस जर्नल, अपनी कुंजी · टेलीग्राम चैनल · साक्ष्य ज़िप · verify.py · हस्ताक्षरित चेकपॉइंट: · रिकॉर्ड की संख्या + हेड हैश · अपने स्वयं के बॉट के माध्यम · से हस्ताक्षरित पोस्ट · टेलीग्राम डेस्कटॉप एक्सपोर्ट · या t.me/s पृष्ठ
 
@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/witne
 प्रत्येक अंतराल (डिफ़ॉल्ट रूप से 10 मिनट) पर गवाह:
 
 1. स्वयं हेड को प्राप्त करता है (कलेक्टर इसे धकेल या छोड़ नहीं सकता);
-2. संग्रहकर्ता के हस्ताक्षर, पिन किए गए संग्रहकर्ता कुंजी (`--collector-fingerprint`, या पहली देखी गई कुंजी), एक गैर-घटती गिनती और एक अपरिवर्तित गिनती पर अपरिवर्तित हेड का सत्यापन करता है;
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. अपने स्वयं के जर्नल में एक हस्ताक्षरित रिकॉर्ड जोड़ता है: `witness.anchor` स्थिति `ok`, `key_changed`, `rollback` (पहले से कम रिकॉर्ड), `fork` (लंबाई समान, अलग हेडर) या `invalid` (उत्तर सत्यापन में विफल रहा), या `witness.no_response` जब संग्रहकर्ता ने उत्तर नहीं दिया;
 4. परिणाम को चैनल पर पोस्ट करता है, हस्ताक्षरित, जिसमें "कोई उत्तर नहीं" भी शामिल है, जब तक कि गवाह चल रहा हो और बॉट एपीआई तक पहुँच सकता हो। पोस्ट आईडी रिकॉर्ड की जाती है (`witness.posted`), एक असफल पोस्ट भी (`witness.post_failed`)।
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 इसके लिए स्वतंत्र रूप से रखे गए गवाह के फिंगरप्रिंट और इस एक्सपोर्ट के बिल्कुल अंत में एक मिलान करने वाले चेकपॉइंट की आवश्यकता होती है। केवल पहले के प्रीफ़िक्स को कवर करने वाला एक चेकपॉइंट अपर्याप्त है। संग्रह को रोकें, गवाह को अंतिम स्थिति देखने दें, और आगे के जर्नल राइट्स से पहले एक्सपोर्ट करें; यदि जर्नल बदलता है, तो एक और चेकपॉइंट रखें और उस स्थिति को एक्सपोर्ट करें। केवल एक बाद का चेकपॉइंट एक छोटे एक्सपोर्ट के अंतिम हैश को सत्यापित नहीं कर सकता है। जब `--channel` भी प्रदान किया जाता है, तो दावे वाले गायब पोस्ट या एक खाली मैच सेट इस सख्त जांच में विफल हो जाते हैं। फ्लैग के बिना, सामान्य अखंडता जांचें अन्यथा सही संग्रह को अस्वीकार किए बिना, बिना गवाह वाले रिकॉर्ड की रिपोर्ट करती हैं।
 
-यह फ़्लैग प्रदान किए गए, पिन किए गए विटनेस रिकॉर्ड के साथ सुसंगति लागू करता है। ऑपरेटर को अभी भी विटनेस की स्वतंत्रता स्थापित करनी होगी और इसके रिकॉर्ड को अलग से संरक्षित रखना होगा। यह संदेश की सत्यता, संपूर्ण संग्रह या स्वतंत्र रूप से मापे गए रनटाइम को स्थापित नहीं करता है।
-
-एक विटनेस यह दिखाता है कि कलेक्टर ने उन समयों पर क्या रिपोर्ट किया था और बाद के एक्सपोर्ट्स उससे मेल खाते हैं। यह नहीं दिखाता कि कलेक्टर ने टेलीग्राम द्वारा दी गई हर चीज़ को रिकॉर्ड किया, या कि संदेश की सामग्री सच है। एक ही ऑपरेटर द्वारा एक ही मशीन पर चलाया गया विटनेस, किसी और द्वारा चलाए गए विटनेस से कमजोर होता है।
-
-केवल बढ़ी हुई संख्या ऑनलाइन केवल-संलग्न निरंतरता स्थापित नहीं कर सकती: ऑफ़लाइन तुलना में प्रत्येक संरक्षित प्रीफ़िक्स हैश का मिलान पूर्ण कलेक्टर एक्सपोर्ट से होना चाहिए। विटनेस के डाउनटाइम और विफल प्रकाशन से बाहरी एंकर के बिना अंतराल रह जाते हैं। रखे गए विटनेस जर्नल के खिलाफ गायब पोस्टों की रिपोर्ट की जा सकती है; न तो एक चैनल और न ही उसी ऑपरेटर द्वारा नियंत्रित कोई सर्वर एक अपरिवर्तनीय तृतीय-पक्ष आर्काइव है।
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

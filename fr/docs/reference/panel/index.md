@@ -8,6 +8,8 @@ Tous les écrans du panneau : discussions, journal, sources, exportations, « Ex
 
 Fonctionnalités de chaque écran, informations consignées dans le journal signé et emplacement du guide détaillé. Le panneau affiche un espace de travail à la fois : un compte Telegram avec ses propres sources, son journal et sa clé de signature. Le sélecteur situé en haut de la barre latérale permet de changer d’ espace de travail. L’adresse identifie l’espace de travail (`?ws=…`) ; tant que l’adresse, le sélecteur et le compte chargé ne correspondent pas, les actions restent bloquées.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Repérez-vous
 
 Les sections quotidiennes se trouvent en haut de la barre latérale, **la section « Comptes »** se trouve sous « **Espace de travail »** , et tout le reste se trouve sous « **Autres outils et paramètres** ». Le sélecteur **de niveau d’interface** dans la barre supérieure détermine le nombre de sections affichées :

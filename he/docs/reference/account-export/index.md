@@ -31,6 +31,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/accou
 
 היסטוריית תמונות הפרופיל והסיפורים אינם נבחרים כברירת מחדל. יש להשבית גם את הפרופיל ואת אנשי הקשר כאשר התיק דורש הודעות בלבד. אם קבצים מצורפים או מטא-נתונים אינם נחוצים, אי-הכללתם במהלך האיסוף תמנע שמירת עותק פרטי נוסף בייצוא זה.
 
+Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+
 ## סיכום, כיסוי ואימות
 
 כל משימה מקפיאה את האפשרויות ואת זהות החשבון שלה. המלאי והדפים שנלכדו חתומים; קבלות הדפים מתעדות חשישים, סמנים, זמנים, תוצאות קבצים מצורפים והקבלה שקדמה להם. רק דפים שאושרו מקדמים את ההתקדמות. הפעלה מחדש/המשך בודקים את הרישומים הללו לפני ההמשך. חשבון ששונה, דף חתום ששונה או שרשרת קבלות לא עקבית נדחים. לא ניתן לערוך את האפשרויות באמצע תהליך הרכישה: יש להתחיל משימה נוספת עבור היקף אחר.
@@ -64,6 +66,14 @@ python -m tgwitness.verify account-export.zip --fingerprint TRUSTED_SHA256
 5. הצג תצוגה מקדימה של הספירות, האזהרות ודוגמאות להודעות שעברו עיבוד, ולאחר מכן אשר במפורש את היצירה. הדוגמאות מוגבלות ל-12 הודעות ו-2,000 תווים טקסט בכל אחת. זוהי דוגמה, ולא סקירה מלאה של התוצאה. שינוי הגדרות מחייב תצוגה מקדימה נוספת. תצוגה מקדימה פוקעת לאחר 15 דקות והיא קשורה לאותה הפעלה של המנהל ולZIP המקורי המדויק; לא ניתן לעשות בה שימוש חוזר לאחר יצירתה. תצוגה מקדימה חדשה מבטלת את הקודמת עבור אותה משימה ואותה הפעלה.
 6. בדקו את התוצאה המלאה `index.html` והתוצאה `messages.jsonl` מקומית לפני שתמסרו אותו. אם הוא חושף מידע מיותר, צרו גילוי חדש עם הגבלות חמורות יותר. אל תערכו את ה-ZIP החתום במקומו.
 
+### הודעות שלא נכללו בבחירה
+
+**תצוגה מקדימה.** גילוי אינו נראה שלם כאשר הוא אינו כזה. בתוך כל צ'אט המכיל לפחות הודעה אחת שנחשפה, ההודעות שהבחירה השמיטה מופיעות כסימנים, `[withheld by selection — rule: sender]` (או `text`, `period`). בחרו **"הודעות שלא נכללו בבחירה"**: סמן אחד לכל רצף של הודעות שנשמרו ברצף (ברירת מחדל) או סמן אחד לכל הודעה. הסמנים נושאים רק את הכלל ואת המספר, לעולם לא טקסט, שולח, תאריך או קבצים. צ'אטים שבהם לא נחשף דבר אינם נכללים כלל, כך שהחבילה אינה מגלה את קיומם.
+
+תשובות שנחשפו מציינות על מה הן עונות: הודעה הכלולה בעותק זה, הודעה שנשמרה על ידי הבחירה, או הודעה שאינה נמצאת בייצוא המקור (נמחקה לפני הייצוא או מעולם לא יוצאה; הייצוא אינו יכול להבחין בין השניים). הודעה שנשמרה, שעליה עונה תשובה שנחשפה, מקבלת תמיד סימון משלה, כך שהתשובה מפנה לרישום שמסביר מדוע היא ריקה. שלושת המצבים הללו נבדלים ממחיקות ומפערים באוסף, השייכים לייצוא המקור.
+
+ב `messages.jsonl` (בפורמט `tgwitness-account-disclosure-v2`) לכל הודעה יש `state`: `disclosed`, או `withheld` עם `rules` ו `count`. לתשובה שנחשפה יש `reply_to` עם היעד `id` ו `state` (`disclosed`, `withheld`, `not_in_source`). המניפסט סופר הודעות, צ'אטים, מדיה ו `withheld` הודעות. `verify.py` דוחה סמן הנושא תוכן ותגובה המפנה לרשומה החסרה בחבילה; חבילות בגרסה 1 מאומתות כבעבר.
+
 הפורמט הממוזער משמיט פרופילי חשבונות מובנים, אנשי קשר, אווטרים, הפעלות, סיפורים, אובייקטים גולמיים של Telegram, כותרות העברה, ציטוטי תשובות, כרטיסי אנשי קשר ומטא-נתוני מיקום. הוא אינו כולל את קבצי ה-JSONL המקוריים, הגדרות המסנן הפרטי, מפתח הכינוי ומפת הזהויות. טקסט שנבחר, זהויות שנשמרו במפורש וקבצים כלולים עשויים עדיין להכיל את אותם שמות, מזהים או ביטויים המשמשים במסננים אלה; הם דורשים בדיקה נפרדת. מדיניות הפרטיות ומפתח הכינוי נשמרים מוצפנים בכספת המקומית של המשימה; מחיקת המשימה מוחקת את רשומות הגילוי הפרטיות הקשורות אליה. רשומות מדיניות הפרסום מסננות לפי ספירה ולא לפי ערכי סינון. המטרה המוצהרת היא ציבורית במניפסט וב-HTML: קריטריונים פרטיים מפורשים, ובמצבי כינוי, זהויות נסתרות ידועות מוסוות שם גם כן, כולל כאשר טקסט ההודעה מושמט. יש לשמור על המטרה נקייה מפרטים אישיים מיותרים; הקשר מזהה לא ידוע יכול להישאר.
 
 המניפסט שלו מאגד את הקבצים הנגזרים, את המדיניות הציבורית ואת ה-hash של ה-ZIP המקורי. אימות יכול לקבוע את תקינות הנתונים, ובמידה והמקור מסופק באופן מקומי, גם את התאמת הקישור למקור:
@@ -75,12 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 קישור למקור אינו מהווה הוכחה עצמאית לכך שהשינוי בחר בכל פריט נדרש או הסיר כל פרט מזהה. הטקסט המקורי בגרסתו הבלתי מוצפנת אינו מוטמע כהוכחה. נדרשת בדיקה מחודשת על מנת להגיע למסקנה זו.
 
-## הגנה על נתונים ותצוגה מקדימה של Capture המארח
+## Sharing and hosted capture
 
-אמצעי בקרה אלה תומכים בהגבלת המטרה ובצמצום הנתונים; הם אינם מהווים בדיקה אוטומטית של עמידה בדרישות החוק. [סעיפים 5 ו-25 ב-GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) עוסקים בעקרונות אלה ובהגנה מובנית/כברירת מחדל. בסיס חוקי, צורך, תנאים של קטגוריות מיוחדות (במידת הצורך), שמירת נתונים, אבטחה וגישת מקבלי הנתונים עדיין מצריכים החלטה המתאימה למקרה הספציפי. מטרת התדיינות משפטית כשלעצמה אינה הופכת כל חשיפה של נתונים לחוקית. נתונים שעברו אנונימיזציה נותרים בדרך כלל נתונים אישיים; ראו את [ההסבר של ה-EDPB](https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en).
+Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
 
-טקסט חופשי, תאריכים, אירועים נדירים ושילובים של עובדות יכולים לזהות אנשים גם לאחר הסרת שמות. העדיפו השמטת טקסט כאשר תוכן ההודעה אינו נחוץ; בדקו את הנגזרת המלאה כאשר הדבר נחוץ. שמרו על המקור והכספת מוגנים, הסכימו על שמירה ושיתוף עם האדם האחראי, ותעדו איזה ZIP בדיוק הועבר.
-
-GitHub Actions תומך בייצוא כל החשבון או שיחות נבחרות דרך Takeout או ה־API הרגיל וגם ביומן של שיחה אחת．המדריך [GitHub Actions](https://phishdestroy.github.io/TgWitness/docs/capture/) מסביר את אימות ההגדרות ואת מגבלת 120 הדקות．ייצוא מקומי ועותקים לשיתוף אינם יורשים את האישור של GitHub，ובדיקות מדומות אינן מוכיחות פעולה עם חשבון Telegram אמיתי．
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope)．
 
 [פורמט הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/) · [דוחות מקרה](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/)

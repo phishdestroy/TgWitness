@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/
 
 [Sumber terbuka ／ v0.9.1](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/)
 
-Simpan obrolan Telegram beserta setiap suntingan dan penghapusan， lalu serahkan catatan yang bisa diperiksa siapa pun．
+Export Telegram chats，preserve their history，and share a signed archive others can verify．
 
 [Buka demo](https://phishdestroy.github.io/TgWitness/demo/?lang=id)[Panduan pengaturan](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=id)
 
 Data fiktif， tanpa masuk ke Telegram．
 
- [Pengambilan melalui GitHub Actions （pratinjau）](https://phishdestroy.github.io/TgWitness/id/docs/capture/) [Salinan di luar situs S3： pengaturan dan pemulihan](https://phishdestroy.github.io/TgWitness/id/#s3)
+ [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/id/docs/reference/account-export/) [Pengambilan melalui GitHub Actions （pratinjau）](https://phishdestroy.github.io/TgWitness/id/docs/capture/) [Salinan di luar situs S3： pengaturan dan pemulihan](https://phishdestroy.github.io/TgWitness/id/#s3)
 
 SEBUAH PESAN， MELINTASI WAKTU ＃0042
 

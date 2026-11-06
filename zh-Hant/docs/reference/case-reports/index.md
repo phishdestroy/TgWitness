@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 請保留原始 ZIP 檔案及其雜湊值。記錄每位持有者、轉移情況、日期 及目的。並將附有來源標示的操作員陳述與案件筆記一併保留。
 5. 針對機密虛擬機器，請保留並獨立驗證引述、挑戰、 Intel 憑證鏈、測量結果、確切來源及金鑰處理條件。 請將驗證結果與已審查的證據一併保存。
 
-請參閱[驗證範圍](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)以了解信任假設， 以及針對來源主張、身分、時間與蒐集範圍的獨立評估。
+See [verification scope](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## 收件人審閱
 

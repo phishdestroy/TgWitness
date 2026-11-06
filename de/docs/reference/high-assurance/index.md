@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/high-
 
 Ein gesicherter 24/7-Server bei Hetzner oder Phala Cloud, Gateway-DNS und Überprüfungen, die von Dritten wiederholt werden können.
 
-Ein signiertes Protokoll belegt, dass die Aufzeichnungen **nach** der Signierung nicht verändert wurden. Bei schwerwiegenden Fällen stellt sich als Nächstes die Frage, ob jemand die Daten **vor** der Signierung manipulieren konnte: Wer hat den Collector betrieben, auf welchem Rechner, und hat sich jemand dort angemeldet? Dieser optionale Modus stellt den Collector so bereit, dass ein Dritter dies überprüfen kann – anhand von Aufzeichnungen, die vom Cloud-Anbieter und von Cloudflare gespeichert werden, anstatt sich auf die Aussage des Betreibers zu verlassen.
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 Die normale Nutzung lokal und mit Docker bleibt unverändert. Hier läuft nichts, es sei denn, Sie führen eine Bereitstellung mit `python -m tgwitness.cloud`, und der Collector liest seinen Host nur, wenn die Bereitstellung `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Ablaufdiagramm · Operator → Server, Firewall ohne Eingangsregeln (Anbieter-AP
 | Der Signaturschlüssel wurde auf diesem Server erstellt | Der Schlüssel signiert eine Erklärung, in der die Server-ID des Anbieters und der Hash des empfangenen „cloud-init“ angegeben sind. | Collector, vom Anbieter überprüft |
 | Das Journal gehört zu diesem Schlüssel und diesem Server | Jeder Prozessstart im Evidenz-ZIP enthält die Host-Messung für diesen Server | Beweismaterial ZIP |
 
-Host-Messwerte (SSH-Listener und -Prozesse, aktuelle Sitzungen, Anmeldungen am `wtmp`, den Systemstart) werden vom Collector selbst gemeldet und bei jedem Prozessstart sowie bei `host.state` Aufzeichnungen, sobald sie sich ändern. Ein Root-Benutzer auf dem Server könnte sie fälschen; sie unterstützen die Aufzeichnungen des Anbieters und von Cloudflare, anstatt diese zu ersetzen.
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## Anbieter
 
@@ -269,11 +269,8 @@ Ohne einen Zero-Trust-Plan hat ein Konto einen DNS-Standort. Wenn Cloudflare ein
 
 Cloudflare hat keinen Einblick in die Verschlüsselung von Telegram, in andere Geräte des Telegram-Kontos (die Geräteliste im „Evidence Mode“ erfasst diese von Telegram-Seite aus) oder in den Hypervisor des Anbieters.
 
-## Was damit nicht festgelegt wird
+## Reading the deployment result
 
-- Der Anbieter und seine Mitarbeiter verwalten den Hypervisor, die Festplatten und das Netzwerk.
-- Die Host-Messwerte werden vom Collector selbst gemeldet.
-- Frühere Inhalte von Firewall-Regeln sind nicht in jedem Provider-Protokoll enthalten; nur Linode speichert Regelversionen.
-- Es enthält keine neuen Informationen zur Authentizität von Nachrichten; siehe [„Evidence](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/)“.
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-Noch nicht mit echten Konten getestet: eine Bereitstellung unter Ihrer eigenen Domain (Cloudflare-Tunnel und DNS), die anderen Anbieter, eine Debug-Bereitstellung und `lock`, ein Telegram-Konto auf einem solchen Server sowie die Live-Updates späterer Versionen über einen Quick-Tunnel. Überprüfen Sie die erste Bereitstellung bei jedem Anbieter mit `plan`, einer Debug-Bereitstellung und `verify` , bevor Sie sich in einem Fall darauf verlassen.
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/de/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

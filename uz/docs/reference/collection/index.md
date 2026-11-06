@@ -8,6 +8,8 @@ TgWitness ulanib turgan Telegram hisobining kuzatganlarini qayd etadi. Jurnal us
 
 ## Kirishdan jurnalga
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 Oqim sxemasi · Foydalanuvchi hisobini ruxsat berish → Kirish mumkin bo'lgan guruhlar va kanallarni tanlang; Kirish mumkin bo'lgan guruhlar va kanallarni tanlang → Voqea va ilova sozlamalarini saqlash; Voqea va ilova sozlamalarini saqlash → Kuzatuvni boshlang; Kuzatuvni boshlang → Faol mijozdan yangilanishlarni oling; Faol mijozdan yangilanishlarni oling → Manba va voqea siyosatini qo'llash; Manba va voqea siyosatini qo'llash → Imzolangan kuzatuvni ilova qiling; Imzolangan kuzatuvni ilova qiling → Jurnalni ko'rib chiqing yoki eksport qiling; Imzolangan kuzatuvni ilova qiling → Navbatga qo'yilgan har qanday ilovani qayta ishlang; Navbatga qo'yilgan har qanday ilovani qayta ishlang → Yuklab olish natijasini ilova qiling · Foydalanuvchi hisobiniruxsat berish · Kirish mumkin bo'lganguruhlar va kanallarnitanlang · Voqea va ilovasozlamalarini saqlash · Kuzatuvni boshlang · Faol mijozdanyangilanishlarni oling · Manba va voqeasiyosatini qo'llash · Imzolangan kuzatuvniilova qiling · Jurnalni ko'ribchiqing yoki eksportqiling · Navbatga qo'yilgan harqanday ilovani qaytaishlang · Yuklab olishnatijasini ilovaqiling
 
 **Diagramma matn sifatida**

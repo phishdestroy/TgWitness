@@ -8,6 +8,8 @@ TgWitness 會記錄已連線的 Telegram 帳號所觀察到的內容。該日誌
 
 ## 從登入到日誌
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 流程圖 · 授權使用者帳戶 → 選擇可存取的群組與頻道; 選擇可存取的群組與頻道 → 儲存事件與附件設定; 儲存事件與附件設定 → 開始監測; 開始監測 → 透過活躍的客戶端接收更新; 透過活躍的客戶端接收更新 → 適用來源與事件政策; 適用來源與事件政策 → 附加一份經簽署的觀察記錄; 附加一份經簽署的觀察記錄 → 檢視或匯出日誌; 附加一份經簽署的觀察記錄 → 處理任何排程中的附件; 處理任何排程中的附件 → 附上下載結果 · 授權使用者帳戶 · 選擇可存取的群組與頻道 · 儲存事件與附件設定 · 開始監測 · 透過活躍的客戶端接收更新 · 適用來源與事件政策 · 附加一份經簽署的觀察記錄 · 檢視或匯出日誌 · 處理任何排程中的附件 · 附上下載結果
 
 **圖表轉為文字**

@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/
 
 Архів та інтеграції
 
-[Довідка щодо Case Board](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-board/)[Аналіз архіву](https://phishdestroy.github.io/TgWitness/uk/docs/reference/analysis/)[MCP тільки для читання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/)[Локальне розпізнавання тексту (OCR) та транскрипція](https://phishdestroy.github.io/TgWitness/uk/docs/reference/media-analysis/)[Вихідні веб-хуки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/webhooks/)[Публічна вітрина](https://phishdestroy.github.io/TgWitness/uk/docs/reference/showcase/)
+[Довідка щодо Case Board](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-board/)[Аналіз архіву](https://phishdestroy.github.io/TgWitness/uk/docs/reference/analysis/)[Повнотекстовий пошук](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/)[MCP тільки для читання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/)[Командний рядок](https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/)[Локальне розпізнавання тексту (OCR) та транскрипція](https://phishdestroy.github.io/TgWitness/uk/docs/reference/media-analysis/)[Вихідні веб-хуки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/webhooks/)[Публічна вітрина](https://phishdestroy.github.io/TgWitness/uk/docs/reference/showcase/)
 
 Докази
 

@@ -134,7 +134,7 @@ Review each check separately, alongside the recorded collection coverage.
 4. Preserve original ZIPs and their hashes. Record each holder, transfer, date and purpose. Retain the attributed operator statements and case notes with them.
 5. For confidential VMs, preserve and independently verify the quote, challenge, Intel certificate chain, measurements, exact source and key-handling conditions. Keep the attestation verification result with the reviewed artifacts.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) for the trust assumptions and the separate assessment of source claims, identity, time and collection coverage.
+See [verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Recipient review
 

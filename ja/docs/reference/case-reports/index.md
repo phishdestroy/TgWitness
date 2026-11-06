@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 元のZIPファイルとそのハッシュ値を保持してください。各保持者、転送、日付 および目的を記録してください。それらに関連付けられたオペレーターの陳述およびケースノートも保持してください。
 5. 機密性の高いVMについては、見積もり、チャレンジ、 Intel証明書チェーン、測定値、正確なソース、および鍵の取り扱い条件を保存し、独立して検証してください。 検証済みのアーティファクトとともに、アテステーションの検証結果も保管してください。
 
-信頼の前提条件については[検証範囲を](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)参照してください。 また、ソースの主張、身元、時間、および収集範囲については別途評価が行われています。
+See [verification scope](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## 受領者によるレビュー
 

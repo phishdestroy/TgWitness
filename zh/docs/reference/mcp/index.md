@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/
 
 将 MCP 客户端连接到选定的工作区和聊天群组，并授予具有时效性且可撤销的访问权限。
 
-将分析员客户端连接到选定的工作区和聊天。TgWitness **在面板进程的 `/mcp` 处提供 Streamable HTTP 服务**。每个连接都有各自的令牌、过期时间和允许使用的工具。MCP 无法发送 Telegram 消息、更改设置或修改已签名的日志。
+将分析客户端连接到选定的工作区和聊天群组。TgWitness **在面板进程的 `/mcp` 端点**提供 **可流式传输的 HTTP** 服务。每个连接都有其专属的 令牌、有效期和允许使用的工具。MCP 无法发送 Telegram 消息、更改 设置或修改签名日志。这些连接同样适用于 [命令行](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/)。
 
 [工作流指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 | --- | --- |
 | `list_workspaces` | 已授权的工作区 |
 | `list_chats` | 已授权的聊天 |
-| `search_messages` | 选定时间段内已保存的消息文本 |
+| `search_messages` | 所选时间段内保存的消息正文； `ranked=true` 支持[全文搜索](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/)（包含词形变体，优先显示最匹配结果， `next_offset` 分页） |
 | `get_message_versions` | 已捕获的版本和删除观测记录 |
 | `get_message_context` | 附近已捕获的消息 ID |
 | `get_journal_event` | 单条经过脱敏处理的记录及其来源引用 |
-| `get_capture_status` | 采集状态和允许的覆盖范围记录 |
+| `get_capture_status` | 采集状态、允许记录的覆盖范围以及 `gap_summary`：按频道或超级群以及全账户序列统计的未观察到的消息编号（[详情](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#missing-message-numbers-gap_summary)）；选择一个聊天室即可查看其列出的缺失记录 |
+| `get_activity_stats` | 按 UTC 小时和星期几分类的消息、高峰日、编辑与删除比例、发件人、域名以及 `@handles`，并包含覆盖范围（[详情](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/#activity-statistics)） |
+| `export_messages` | 仅限命令行，默认未选中：流将记录的观察结果保存为 JSON Lines 格式（[详情](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/#export)）；不通过 MCP 提供 |
 
 `tools/list` 仅返回授予该连接的工具。对其他工具的调用将被拒绝。此版本不提供群组上下文、事件片段（episode）、术语和回复链工具；未包含它们独立的上下文包后端。
 

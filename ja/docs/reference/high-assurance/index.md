@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-
 
 Hetzner または Phala Cloud 上の 24 時間 365 日稼働のシールドサーバー、Gateway DNS、および第三者が再現可能な検証手順。
 
-署名付きジャーナルは、**署**名**後に**記録が変更されていないことを証明します。深刻なケースでは、 次の疑問として、署名前に誰かがデータを改ざんした可能性がないかが挙げられます。 つまり、誰が、どのマシンでコレクターを実行したのか、また誰かがそこにログインしたかどうかです。このオプションの モードでは、オペレーターの主張ではなく、クラウドプロバイダーとCloudflareが保持する記録を用いて、 第三者がそれを確認できるよう、コレクターが展開されます。
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 通常のローカル環境およびDockerでの使用方法は変更ありません。 `python -m tgwitness.cloud`を使用してデプロイしない限り、ここで実行されるものはありません。また、コレクターはデプロイ設定で指定された場合にのみホストを読み取ります。 `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Hetzner または Phala Cloud 上の 24 時間 365 日稼働のシールドサ�
 | 署名鍵はそのサーバー上で作成されました | この鍵は、プロバイダのサーバーIDと、受信したcloud-initのハッシュ名を記載したステートメントに署名します。 | Collector：プロバイダーとの照合済み |
 | このジャーナルは、そのキーおよびサーバーに属しています | 証拠ZIP内のすべてのプロセス開始には、そのサーバーのホスト測定値が含まれています。 | 証拠 ZIP |
 
-ホストの測定値（SSHリスナーおよびプロセス、現在のセッション、 `wtmp`、起動） はコレクター自体によって報告され、プロセスの起動時および `host.state` 変更があるたびに記録に署名されます。サーバーのroot権限を持つユーザーはこれらを改ざんする可能性がありますが、 これらはプロバイダーやCloudflareの記録に取って代わるものではなく、それらを補完するものです。
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## プロバイダー
 
@@ -269,11 +269,8 @@ Gateway DNSはシステムリゾルバをカバーします。ポート443経由
 
 Cloudflareは、Telegramの暗号化内部、Telegramアカウントに紐づく他のデバイス （エビデンスモードのデバイスリストはTelegram側からそれらを記録します）、およびプロバイダーのハイパーバイザーを閲覧することはできません。
 
-## これによって確立されないこと
+## Reading the deployment result
 
-- プロバイダーとそのスタッフは、ハイパーバイザー、ディスク、ネットワークを管理します。
-- ホストの測定値は、コレクターによって自己申告されます。
-- 以前のファイアウォールルールの内容は、すべてのプロバイダーのログに記録されているわけではありません。Linodeのみがルールのバージョンを保持しています。
-- メッセージの真正性については特に新しいことは述べていません。「[証拠」](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)を参照してください。
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-実際のアカウントではまだ実行されていません：独自のドメイン（Cloudflareトンネルおよび DNS）でのデプロイ、その他のプロバイダー、デバッグ用デプロイ、 `lock`、そのようなサーバー上のTelegramアカウント、 およびクイックトンネルを介した後続バージョンのライブ更新。各プロバイダーでの最初のデプロイを 以下で確認してください `plan`、デバッグ用デプロイメント、および `verify` 、クイックトンネルを介した後続バージョンのライブ更新を確認してください。ケースでこれを利用する前に、各プロバイダーでの最初のデプロイメントを、デバッグ用デプロイメント、および
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/ja/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

@@ -8,6 +8,8 @@ Every screen of the panel: chats, journal, sources, exports, Extras, protection 
 
 What each screen does, what it writes to the signed journal and where the detailed guide is. The panel shows one workspace at a time: one Telegram account with its own sources, journal and signing key. The selector at the top of the sidebar switches workspaces. The address carries the workspace (`?ws=…`); while the address, the selector and the loaded account disagree, actions stay blocked.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Find your way
 
 Daily sections are at the top of the sidebar, **Accounts** is under **Workspace**, and everything else is under **More tools & settings**. The **Interface level** switch in the top bar decides how many sections appear:

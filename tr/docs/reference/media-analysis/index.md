@@ -8,7 +8,7 @@ Yerel bir işleyici ile yakalanan görüntüleri ve sesleri tanıyın; elde edil
 
 Bir `media.saved` günlük kaydını açın, "**Eki tanıma"yı** seçin, ardından "**Arşive sor"** altından OCR veya transkripsiyon seçeneğini seçin. İşleme manuel ve yerel olarak gerçekleştirilir. Bulut ortam modu veya otomatik yükleme yoktur. Orijinal ek baytları ve `media_sha256` dosyası değişmeden kalır; tanınan metin, açıkça "makine tanınması" olarak işaretlenir ve kaynak hash değeri, motor/model sürümü, dil, parametreler ve tamamlanma zamanı ile birlikte ayrı olarak saklanır. Transkriptler, döndürülen zaman damgalarını korur.
 
-Bu sonuçları, **"Tanınan metni ara"** ve OCR/transkript filtresini kullanarak arayın. Bu, ayrı bir türetilmiş veri aramasıdır; makine tanımlamasını sessizce orijinal Telegram metnine dönüştürmez veya imzalı olaylara eklemez.
+Bu sonuçları **"Tanınan metni ara**" ve OCR/transkript filtresini kullanarak arayın veya "**Günlük**" en iyi eşleşme aramasının kaynağı olarak tanınan metni seçin. Her ikisi de [bellek içi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#recognized-text) bir [dizin](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#recognized-text) aracılığıyla kelime biçimlerini eşleştirir. Bu, ayrı bir türetilmiş veri aramasıdır; makine tanıma sonuçlarını sessizce orijinal Telegram metnine dönüştürmez veya imzalı olaylara eklemez.
 
 ## İsteğe bağlı işleyicinin kurulumu
 

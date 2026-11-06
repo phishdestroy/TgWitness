@@ -8,7 +8,7 @@ Nhận diện hình ảnh và âm thanh đã thu thập bằng một worker cụ
 
 Mở bản ghi nhật ký `media.saved`, chọn **“Nhận diện tệp đính kèm**”, sau đó chọn “OCR” hoặc “chuyển đổi văn bản” trong mục **“Yêu cầu từ kho lưu trữ**”. Quá trình xử lý được thực hiện thủ công và tại địa phương. Không có chế độ phương tiện đám mây hay tải lên tự động. Dữ liệu gốc của tệp đính kèm và bản ghi `media_sha256` vẫn giữ nguyên; văn bản được nhận diện được đánh dấu rõ ràng là kết quả nhận diện bằng máy và được lưu trữ riêng biệt cùng với mã băm nguồn, phiên bản công cụ/mô hình, ngôn ngữ, các tham số và thời gian hoàn thành. Bản chép lại vẫn giữ nguyên dấu thời gian được trả về.
 
-Tìm kiếm các kết quả này bằng cách sử dụng **tính năng "Tìm kiếm văn bản được nhận diện**" và bộ lọc OCR/bản chép lại. Đây là một tìm kiếm dữ liệu phái sinh riêng biệt; nó không tự động chuyển đổi kết quả nhận diện bằng máy thành văn bản gốc của Telegram hoặc thêm nó vào các sự kiện đã được ký xác thực.
+Tìm kiếm các kết quả này bằng cách sử dụng **tính năng "Tìm kiếm văn bản được nhận diện"** và bộ lọc OCR/bản chép, hoặc chọn văn bản được nhận diện làm nguồn cho tìm kiếm khớp tốt nhất trong **Nhật** **ký**. Cả hai đều khớp các dạng từ thông qua [chỉ mục](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#recognized-text) [trong](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#recognized-text) [bộ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#recognized-text) [nhớ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#recognized-text). Đây là một tìm kiếm dữ liệu dẫn xuất riêng biệt; nó không tự động chuyển đổi kết quả nhận diện máy thành văn bản Telegram gốc hoặc thêm nó vào các sự kiện được ký.
 
 ## Cài đặt worker tùy chọn
 

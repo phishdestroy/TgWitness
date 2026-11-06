@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel
 
 وظيفة كل شاشة، وما تكتبه في السجل الموقّع، ومكان وجود الدليل التفصيلي. تعرض اللوحة مساحة عمل واحدة في كل مرة: حساب Telegram واحد مع مصادره الخاصة، وسجله، ومفتاح التوقيع. يعمل المحدد الموجود في الجزء العلوي من الشريط الجانبي على التبديل بين مساحات العمل. يحمل العنوان مساحة العمل (`?ws=…`)؛ وطالما كان العنوان و أداة التحديد والحساب المحمّل غير متطابقين، تظل الإجراءات محظورة.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## اكتشف طريقك
 
 توجد الأقسام اليومية في الجزء العلوي من الشريط الجانبي، ويقع **قسم «الحسابات»** تحت **«مساحة العمل** »، أما كل العناصر الأخرى فتوجد تحت **«المزيد من الأدوات والإعدادات** ». ويحدد مفتاح **مستوى الواجهة** الموجود في الشريط العلوي عدد الأقسام التي تظهر:

@@ -31,6 +31,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/accou
 
 个人资料照片历史记录和动态消息默认不被选中。当案件仅需消息时，请同时禁用个人资料和联系人。如果附件或元数据并非必需，在采集过程中将其排除可避免在本次导出中保留另一份私有副本。
 
+Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+
 ## 简历、报道范围与验证
 
 每个任务都会锁定其选项和账户身份。清单和捕获的页面均经过签名；页面收据记录了哈希值、光标位置、时间、附件结果及其前一个收据。只有已提交的页面才会推进进度。重启/恢复操作会在继续之前检查这些记录。若账户发生变更、已签名页面发生变更或收据链不一致，则会被拒绝。在捕获过程中无法编辑选项：如需处理其他范围的内容，请启动另一个任务。
@@ -64,6 +66,14 @@ Ed25519签名和SHA-256哈希值可检测收集器提交相关字节后的变更
 5. 预览计数、警告和转换后的消息示例，然后明确确认创建。示例限制为每条消息 12 条，每条文本长度不超过 2,000 个字符。这仅为示例，并非对结果的完整审查。更改设置需要再次预览。预览在 15 分钟后失效，且与该管理员会话及原始的 ZIP 严格绑定；创建后无法重复使用。新的预览将使同一任务和会话中的先前预览失效。
 6. 查看生成的完整 `index.html` 并 `messages.jsonl` 在本地进行检查。若发现其中包含不必要的信息，请创建一份新的披露文件并设置更严格的排除条款。请勿直接编辑已签名的ZIP。
 
+### 筛选后未包含的消息
+
+**预览。**当披露内容不完整时，其显示效果也会不完整。在每个包含至少一条已披露消息的聊天中，选定范围未包含的消息会以标记形式显示， `[withheld by selection — rule: sender]` （或 `text`, `period`)。选择**“被选定范围排除的消息”**：每组连续被排除的消息显示一个标记（默认），或每条消息显示一个标记。标记仅包含规则和计数，绝不包含文本、发件人、日期或文件。未披露任何内容的聊天将被完全排除，因此该软件包不会透露其存在。
+
+已披露的回复会说明其回复对象：是本副本中包含的消息、被筛选排除的消息，还是源导出中不存在的消息（在导出前已被删除或从未被导出；导出数据无法区分这两种情况）。 被披露回复所回应的被屏蔽消息始终带有独立标记，因此该回复会指向一条解释其为何为空的记录。这三种状态有别于删除和数据缺失，后者属于源导出数据本身。
+
+在 `messages.jsonl` （格式 `tgwitness-account-disclosure-v2`）中，每条消息包含 `state`: `disclosed`，或 `withheld` 带有 `rules` 和 `count`。已披露的回复包含 `reply_to` 与目标 `id` 和 `state` (`disclosed`, `withheld`, `not_in_source`）。清单统计了已公开的消息、聊天、媒体和 `withheld` 消息。 `verify.py` 会拒绝携带内容的标记，以及指向包中缺失记录的回复；版本 1 的包仍按原有方式进行验证。
+
 精简格式省略了结构化的账户资料、联系人、头像、会话、故事、原始 Telegram 对象、转发头信息、回复引用、联系人卡片和位置元数据。它不包含原始 JSONL 文件、私有过滤器设置、化名密钥和身份映射。选中的文本、明确保留的身份信息以及包含的文件仍可能包含与这些过滤器中相同的名称、ID 或短语；这些内容需要单独审查。 隐私策略和化名密钥以加密形式保存在该任务的本地保险库中；删除任务将清除其关联的隐私披露记录。公共策略记录的是过滤器计数而非过滤器值。声明的目的在清单和 HTML 中是公开的：明确的隐私标准以及在化名模式下已知的隐藏身份也会被遮蔽，包括在省略消息文本的情况下。请确保目的陈述中不包含不必要的个人细节；未知的身份识别上下文可以保留。
 
 其清单文件将衍生文件、公开政策以及原始 ZIP 的哈希值绑定在一起。通过验证可以确认文件的完整性，如果源文件在本地提供，还可以验证源文件的关联性：
@@ -75,12 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 来源链接本身并不能独立证明该转换过程已选取所有必需项目或移除了所有可识别细节。原始明文并未作为证明嵌入其中。对此判断需要进行新的审查。
 
-## 数据保护与托管版 Capture 预览
+## Sharing and hosted capture
 
-这些控制措施支持“目的限制”和“数据最小化”原则；但并非自动的法律合规性检查。[《通用数据保护条例》（GDPR）第 5 条和第 25 条](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) 通过“设计/默认保护”机制落实了这些原则。关于合法依据、必要性、特殊类别数据的适用条件（如适用）、保留期限、安全性和接收方访问权限，仍需根据具体情况作出适当决策。仅以诉讼为目的并不能使所有数据披露均属合法。假名化数据通常仍属于个人数据；详见 [EDPB 说明](https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en)。
+Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
 
-自由文本、日期、罕见事件以及事实的组合，即使在移除姓名后仍可能识别出特定人员。若消息内容非必要，应优先采用文本省略处理；必要时需查阅完整的衍生文件。确保源文件和存储库的安全，与负责人就保留期限和共享规则达成一致，并记录确切移交的ZIP文件。
-
-GitHub Actions 支持通过 Takeout 或常规 API 导出整个账号或选定聊天，也支持单个聊天日志．[GitHub Actions](https://phishdestroy.github.io/TgWitness/docs/capture/) 指南说明设置验证和 120 分钟限制．本地导出和分享副本不继承 GitHub 证明，模拟测试不代表已通过真实 Telegram 账号验证．
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)．
 
 [证据格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/) · [案例报告](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)

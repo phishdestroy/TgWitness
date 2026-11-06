@@ -15,6 +15,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | message_content.py | Perbandingan pesan yang dapat diamati, tidak termasuk metadata akses transportasi |
 | workers.py | Tunggu hingga proses ekspor file selesai sebelum melakukan pembersihan setelah pembatalan |
 | store.py | Transaksi WAL, rantai peristiwa terurut, filter kueri, pengaturan operasional |
+| fulltext.py | Indeks teks lengkap yang dihasilkan (bentuk kata, BM25), terikat pada bagian awal jurnal yang ditandatangani; tidak pernah diekspor |
 | security.py | Pembuatan berkas pribadi, brankas terenkripsi, penandatanganan Ed25519, penguncian proses tunggal |
 | evidence.py | Ekspor jurnal lengkap, turunan, titik pemeriksaan, verifikasi lampiran |
 | verify.py | Verifikator mandiri dan hanya baca (perpustakaan standar + kriptografi): arsip, cakupan, jurnal saksi, dan posting saluran, serta berkas profil |

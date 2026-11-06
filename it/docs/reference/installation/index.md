@@ -44,6 +44,30 @@ Imposta `TGWITNESS_INSTALL_DIR` per scegliere un’altra cartella. Le versioni i
 
 Ogni installazione include i file **START-HERE.html** e **START-HERE.txt**, contenenti percorsi locali, comandi e collegamenti al repository. Esegui `tgwitness guide` per aprire la guida. Su Windows, utilizzare `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` in PowerShell.
 
+## Impostazioni della ricerca full-text
+
+[La ricerca full-text](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/) (anteprima) non richiede alcuna configurazione. Il suo indice viene creato in background dopo un aggiornamento.
+
+| Variabile o comando | Effetto |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | Impostazione predefinita: l'indice viene conservato in `search/fulltext.sqlite3` di ciascun spazio di lavoro |
+| `TGWITNESS_FULLTEXT=memory` | Nessun file di indice; l'indice viene ricostruito ad ogni avvio |
+| `TGWITNESS_FULLTEXT=off` | Nessun indice; solo ricerca per testo esatto |
+| `tgwitness index status` | Stato dell’indice di ogni area di lavoro |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | Ricostruire tutti gli indici a partire dal registro firmato |
+
+La scelta dell'amministratore in **Registro → Filtri → Indice di ricerca** sovrascrive la variabile per quell'area di lavoro. I comandi individuano la directory dei dati dell'installazione che li esegue; altrove, aggiungere `--data-dir` il percorso da `tgwitness paths`. Per un dizionario ucraino completo (dati GPL-3.0), installare `pymorphy3-dicts-uk` nell’ ambiente Python dell’installazione.
+
+## Accesso da riga di comando
+
+La [riga di](https://phishdestroy.github.io/TgWitness/it/docs/reference/cli/) [comando](https://phishdestroy.github.io/TgWitness/it/docs/reference/cli/) (anteprima) legge l’archivio alla ricerca di script e agenti.
+
+| Variabile | Effetto |
+| --- | --- |
+| `TGWITNESS_URL` | Indirizzo del pannello per `tgwitness search`, `context`, `messages`, `stats` e `export`; impostazione predefinita `http://127.0.0.1:8787` quando è impostato un token |
+| `TGWITNESS_MCP_TOKEN` | Archiviare il token di connessione da **Integrazioni → MCP**, condiviso con i client MCP; `--token-file` leggere invece da un file |
+| `TGWITNESS_DATA` | La directory dei dati viene letta direttamente quando non `--data-dir`, URL o token specificato |
+
 ## Verificare prima dell’esecuzione
 
 Il comando di una riga si affida a HTTPS per lo script iniziale. Tale script verifica SHA-256 e la firma RSA del progetto sull’applicazione e sui vincoli prima dell’ installazione. È anche possibile scaricare e verificare prima lo script iniziale.

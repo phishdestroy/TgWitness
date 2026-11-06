@@ -74,9 +74,9 @@ TgWitness کا اپنا انسٹالیشن، ڈیٹا ڈائریکٹری، او�
 | انتظامی کارروائیاں | متعلقہ فراہم کردہ اپ ڈیٹس اور چینل/سپر گروپ چیٹ ایکسپورٹس میں ایڈمن لاگ کا اسنیپ شاٹ | ایکسپورٹ دستیاب ہونے پر ایکسپورٹ کرنے والے ایڈمن اکاؤنٹ کے لیے لاگ پڑھتا ہے؛ مسلسل ایڈمن لاگ پولنگ اس راستے سے باہر ہے۔ |
 | منسلک | اصلی ورژن کا بیان، ڈاؤن لوڈ کیے گئے بائٹس/SHA-256 اور کوشش کے نتائج | ایک غائب شدہ فائل ناقابل بازیافت ہو سکتی ہے؛ تازہ ترین ورژن متبادل نہیں ہے۔ |
 | تاریخ | موجودہ دکھائی دینے والے پیغامات کی واضح جھلک | تمام ترامیم یا حذف شدہ مواد کی دوبارہ تشکیل نہیں کرتا |
-| جمع کرنے کا عمل | شروع/روک، دل کی دھڑکن، غلطیاں، ترتیبات، دائرہ کار اور پروگرام کی رسید | خود رپورٹ، آزادانہ عمل کی تصدیق نہیں |
+| جمع کرنے کا عمل | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) |
 
-کسی عمل کو کسی شخص سے منسوب تب کیا جاتا ہے جب ماخذ حقیقتاً اسی انجام دہندہ کو فراہم کرے۔ ورنہ انٹرفیس منسوبہ جات کی کمی کی اطلاع دیتا ہے۔ صارف کے نام اور نام مشاہدہ شدہ خصوصیات ہیں، حقیقی دنیا کی شناخت کا ثبوت نہیں۔
+The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
 
 ## گنجائش اور ٹیلیگرام کی حدیں
 

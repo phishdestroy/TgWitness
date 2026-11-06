@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel
 
 各画面の機能、署名付きジャーナルへの書き込み内容、および詳細な ガイドの場所について説明します。パネルには一度に1つのワークスペースが表示されます。これは、独自の ソース、ジャーナル、署名鍵を持つ1つのTelegramアカウントです。サイドバー上部のセレクターで ワークスペースを切り替えます。アドレスにはワークスペース情報が含まれます（`?ws=…`）を識別します。アドレス、 セレクター、および読み込まれたアカウントのいずれかが一致しない場合、操作はブロックされたままになります。
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## 使い方のガイド
 
 サイドバーの上部には「Daily」セクションがあり、**「Accounts」** は**「Workspace」** の下に、 その他すべての項目は**「More tools & settings」** の下にあります。上部バーにある「**Interface level」** スイッチで、表示されるセクションの数を切り替えることができます：

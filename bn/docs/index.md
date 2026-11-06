@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/
 
 আর্কাইভ ও ইন্টিগ্রেশনসমূহ
 
-[কেস বোর্ড রেফারেন্স](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/)[আর্কাইভ বিশ্লেষণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/analysis/)[শুধুমাত্র-পঠন MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/)[স্থানীয় OCR এবং প্রতিলিপি](https://phishdestroy.github.io/TgWitness/bn/docs/reference/media-analysis/)[প্রস্থানকারী ওয়েবহুকস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/webhooks/)[জনসাধারণের প্রদর্শনী](https://phishdestroy.github.io/TgWitness/bn/docs/reference/showcase/)
+[কেস বোর্ড রেফারেন্স](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/)[আর্কাইভ বিশ্লেষণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/analysis/)[পূর্ণ-পাঠ অনুসন্ধান](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/)[শুধুমাত্র-পঠন MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/)[কমান্ড লাইন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/)[স্থানীয় OCR এবং প্রতিলিপি](https://phishdestroy.github.io/TgWitness/bn/docs/reference/media-analysis/)[প্রস্থানকারী ওয়েবহুকস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/webhooks/)[জনসাধারণের প্রদর্শনী](https://phishdestroy.github.io/TgWitness/bn/docs/reference/showcase/)
 
 প্রমাণ
 

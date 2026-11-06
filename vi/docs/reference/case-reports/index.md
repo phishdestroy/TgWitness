@@ -134,7 +134,7 @@ Kiểm tra từng mục riêng biệt, cùng với phạm vi thu thập đã ghi
 4. Giữ nguyên các tệp ZIP gốc và các giá trị băm của chúng. Ghi lại từng người nắm giữ, lần chuyển giao, ngày tháng và mục đích. Giữ lại các tuyên bố của người vận hành được ghi nhận và các ghi chú vụ việc kèm theo chúng.
 5. Đối với các máy ảo (VM) bí mật, cần bảo toàn và xác minh độc lập các thông tin sau: trích dẫn, thách thức, chuỗi chứng chỉ Intel, các phép đo, nguồn chính xác và điều kiện xử lý khóa. Giữ lại kết quả xác minh chứng nhận cùng với các bằng chứng đã được xem xét.
 
-Xem [phạm vi xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) đối với các giả định về độ tin cậy và đánh giá riêng biệt về các tuyên bố nguồn, danh tính, thời gian và phạm vi thu thập.
+See [verification scope](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Xem xét của người nhận
 

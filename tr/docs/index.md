@@ -44,7 +44,7 @@ Topla
 
 Arşiv ve entegrasyonlar
 
-[Case Board referansı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/)[Arşiv analizi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/analysis/)[Salt okunur MCP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/)[Yerel OCR ve transkripsiyon](https://phishdestroy.github.io/TgWitness/tr/docs/reference/media-analysis/)[Giden webhook'lar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/webhooks/)[Halka açık vitrin](https://phishdestroy.github.io/TgWitness/tr/docs/reference/showcase/)
+[Case Board referansı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/)[Arşiv analizi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/analysis/)[Tam metin arama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/)[Salt okunur MCP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/)[Komut satırı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/)[Yerel OCR ve transkripsiyon](https://phishdestroy.github.io/TgWitness/tr/docs/reference/media-analysis/)[Giden webhook'lar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/webhooks/)[Halka açık vitrin](https://phishdestroy.github.io/TgWitness/tr/docs/reference/showcase/)
 
 Kanıt
 

@@ -15,6 +15,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | message_content.py | Perbandingan mesej yang dapat diperhatikan, mengecualikan metadata capaian penghantaran |
 | workers.py | Tunggu pekerja fail eksport sebelum pembersihan pembatalan |
 | store.py | Transaksi WAL, rantaian peristiwa teratur, penapis pertanyaan, tetapan operasi |
+| fulltext.py | Indeks penuh terbitan (bentuk kata, BM25), diikat pada kepala jurnal yang ditandatangani; tidak pernah dieksport |
 | security.py | Penciptaan fail peribadi, peti simpanan disulitkan, tandatangan Ed25519, kunci proses tunggal |
 | evidence.py | Eksport jurnal lengkap, derivatif, titik pemeriksaan, pengesahan lampiran |
 | verify.py | Pemverifikasi berdiri sendiri, baca sahaja (stdlib + kriptografi): arkib, liputan, jurnal saksi dan kiriman saluran, fail profil |

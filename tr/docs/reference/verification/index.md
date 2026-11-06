@@ -4,6 +4,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/verif
 
 Canlı Telegram testi, otomatik kontroller, tarayıcı kontrolleri ve henüz doğrulanmamış olan unsurlar.
 
+Each result below applies to its recorded revision and environment. The [current capability matrix](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) separates implementation, published downloads and remaining qualification.
+
+## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+
+The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+
+- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
+- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
+- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
+- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
+- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+
+An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+
 ## Canlı Phala Cloud dağıtımı · 4 Kasım 2026
 
 `--provider phala --quick-tunnel`, gerçek **Phala Cloud** (`tdx.small`, bölge US-WEST-1) üzerinde, boş bir çalışma alanına ait Phala Cloud API anahtarı, gerçek ntfy.sh, GitHub ve Intel PCS kullanılarak çalıştırıldı. CVM, `df7d860c` (v0.8.1) commit'ini yükledi; dağıtım, doğrulama ve imha işlemleri, aşağıdaki düzeltmelerle komut satırından çalıştırıldı. Yedi CVM'nin toplam maliyeti yaklaşık 1,9 ABD senti oldu.
@@ -153,10 +167,16 @@ Komut: `python tools/check_capacity.py --events 10000 --chats 100`
 
 Bu ölçüm, bu Windows sunucusundaki yerel seri kayıt/dışa aktarma yolunu ölçer. MTProto teslimatı, eşzamanlı hesaplar, Telegram hız sınırlaması, medya, uzun süreli iş yükü veya garantili gerçek sohbet sayısını ölçmez. Bu ölçüm, ölçülen mesaj yolunu değiştirmeyen nihai çevrimdışı zaman damgası araçlarından önce gerçekleştirilmiştir.
 
+## Bir milyon mesajda tam metin arama · 5 Kasım 2026
+
+Komut: `python tools/bench_fulltext.py --messages 1000000 --work <empty directory>`
+
+200 sohbetteki 1.000.000 sentetik mesajdan oluşan deterministik imzalı bir günlük (Rusça kelime biçimleri, Ukraynaca, İngilizce, Çince, Japonca, bağlantılar ve kullanıcı adları) 71 saniyede indekslendi; indeks, 1,50 GiB'lik günlüğün yanı sıra 58 MiB yer kapladı. En iyi eşleşme arama işlemleri 9 ila 190 ms (medyan) sürdü; önceki alt dize aramasında ise bu süre 2,4 ila 3,2 saniyeydi. Tam sonuçlar, donanım ve sınırlar: [Tam metin arama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#benchmark). `tools/test_fulltext.py` ayrıca, tam metin araması öncesinde oluşturulmuş imzalı bir arşivi (`tools/fixtures/evidence-before-fulltext.zip`) ile mevcut doğrulayıcıyı ve o arşivin kendi doğrulayıcısını kullanarak mevcut bir arşivi `verify.py`.
+
 ## Kalan nitelikler
 
 Saklanan canlı günlük, gerçek toplama işlemlerini, düzenlemeleri, silme bildirimlerini, ekleri, yeniden kontrolleri ve hız sınırlaması yönetimini kaydeder. Bu günlük, kapsamlı teslimat bilgilerini veya rol görünürlüğü, tepki veren aktörler, uzatılmış FloodWait, hesap yasaklamaları ve ağ/işlem kesintisi kurtarma işlemlerini içeren kontrollü bir matris kaydetmez. QR jetonu düzenleme işlemi, tamamlanmış mobil QR onayı işleminden ayrıdır.
 
-Docker derleme/çalıştırma, Linux/macOS kurulumu, sürekli yüksek yük, bağımsız güvenlik incelemesi, gerçek bir bağımsız TSA yanıtı, sertifika iptal/arşivleme doğrulaması ve adli sertifikasyon, kaydedilen yeterlilik kapsamı dışında kalmaktadır. Kaydedilmiş MTProto durumu ve yakalama işlevleri uygulanmaktadır; atomik kalıcı tekrar oynatma ise henüz kurulmamıştır. Yönetici günlüğü toplama, ek reaktör listeleri ve öncelikli kısa sorgulama ayrı özellikler olarak kalmaktadır. Kontrollü yeterlilik matrisi için [canlı kabul](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) bölümüne bakınız.
+Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
 
 Yerel ayrıntılı makbuzlar ve ekran görüntüleri test-results/ dizininde bulunur (Git tarafından göz ardı edilir). docs/assets/ dizinindeki herkese açık ekran görüntüsü yalnızca kurgusal örnek veriler içerir.

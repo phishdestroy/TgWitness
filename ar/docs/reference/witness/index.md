@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/witne
 
 [التصدير والتحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/) · [ضمان عالي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/) · [دليل اللوحة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#extras)
 
-يقوم المجمع بتوقيع سجله الخاص، لذا فإن من يتحكم في المجمع ومفتاحه يمكنه من حيث المبدأ إعادة كتابة السجل أو اقتطاعه وتوقيعه مرة أخرى. أما «الشهود» (Witness) فيجعلون ذلك قابلاً للكشف. وهي عملية منفصلة — عبارة عن حاوية أخرى، أو بالأحرى خادم يديره شخص آخر — تقوم كل بضع دقائق بجلب رأس السجل الموقّع الخاص بـ«المجمع»، وتوقّع ما رأته بمفتاحها الخاص، وتحتفظ به في سجلها الخاص وتنشره على قناة Telegram.
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 مخطط تدفق · أداة التجميع → Witness (نقطة التحقق الموقعة: عدد السجلات + هاش الرأس); Witness → سجل الشهود، مفتاح خاص; Witness → قناة Telegram (منشور موقّع عبر الروبوت الخاص بها); ملف ZIP للأدلة → verify.py; سجل الشهود، مفتاح خاص → verify.py; قناة Telegram → verify.py (صفحة التصدير من Telegram Desktop أو صفحة t.me/s) · أداة التجميع · Witness · سجل الشهود، مفتاح خاص · قناة Telegram · ملف ZIP للأدلة · verify.py · نقطة التحقق الموقعة: عدد · السجلات + هاش الرأس · منشور موقّع عبر الروبوت · الخاص بها · صفحة التصدير من Telegram · Desktop أو صفحة t.me/s
 
@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/witne
 في كل فترة زمنية (10 دقائق بشكل افتراضي)، تقوم الأداة بما يلي:
 
 1. يسترد الرأس نفسه (لا يمكن للمجمع دفعه أو تخطيه)؛
-2. يتحقق من توقيع المجمع، ومفتاح المجمع المثبت (`--collector-fingerprint`، أو أول مفتاح يظهر)، وعدد غير متناقص، ورأس لم يتغير عند عدد لم يتغير؛
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. يُلحق سجلًا موقّعًا بسجله الخاص: `witness.anchor` مع الحالة `ok`، `key_changed`، `rollback` (عدد سجلات أقل من ذي قبل)، `fork` (نفس الطول، رأس مختلف ) أو `invalid` (فشل التحقق من الإجابة)، أو `witness.no_response` عندما لم يرد المُجمِّع؛
 4. ينشر النتيجة على القناة، موقعة، بما في ذلك «لا يوجد رد» أثناء تشغيل TgWitness وإمكانية وصوله إلى واجهة برمجة تطبيقات الروبوت (Bot API). يتم تسجيل معرّف المنشور (`witness.posted`)، وكذلك المنشور الفاشل (`witness.post_failed`).
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 وهذا يتطلب الاحتفاظ بشكل مستقل ببصمة الشاهد ونقطة تفتيش مطابقة في النهاية الدقيقة لعملية التصدير هذه. إن نقطة التفتيش التي تغطي فقط البادئة السابقة غير كافية. أوقف عملية التجميع مؤقتًا، ودع الشاهد يراقب الحالة النهائية، ثم قم بالتصدير قبل إجراء أي عمليات كتابة أخرى في السجل؛ إذا تغير السجل، فاحتفظ بنقطة تفتيش أخرى و قم بتصدير تلك الحالة. لا يمكن لنقطة فحص لاحقة بمفردها التحقق من التجزئة النهائية لعملية تصدير أقصر. عندما يتم توفير `--channel` أيضًا، فإن المنشورات المزعومة المفقودة أو مجموعة المطابقة الفارغة تفشل في اجتياز هذا الفحص الصارم. بدون العلامة، لا تزال فحوصات السلامة العادية تبلغ عن السجلات غير المشهودة دون رفض أرشيف سليم بخلاف ذلك.
 
-يضمن هذا العلامة الاتساق مع سجلات الشهود المرفقة والمثبتة. ولا يزال يتعين على المشغل التأكد من استقلالية الشاهد والحفاظ على سجلاته بشكل منفصل. ولا يثبت هذا العلامة صحة الرسائل، أو اكتمال جمعها، أو مدة تشغيلها المقاسة بشكل مستقل.
-
-يُظهر «الشاهد» ما أبلغ عنه المُجمِّع في تلك الأوقات، وأن عمليات التصدير اللاحقة تتوافق مع ذلك. ولا يُظهر أن المُجمِّع سجل كل ما أرسله Telegram، أو أن محتوى الرسالة صحيح. إن تشغيل «الشاهد» بواسطة نفس المشغل على نفس الجهاز يكون أضعف من تشغيله بواسطة شخص آخر.
-
-لا يمكن لزيادة العدد وحدها إثبات استمرارية «الإضافة فقط» عبر الإنترنت: يجب أن تتطابق المقارنة في وضع عدم الاتصال مع كل هاش بادئة محفوظة مقابل التصدير الكامل للمجمع. يؤدي تعطل «Witness» وفشل النشر إلى وجود فترات زمنية دون نقاط ارتكاز خارجية. يمكن الإبلاغ عن المنشورات المفقودة مقارنةً بسجل «Witness» المحفوظ؛ ولا يُعد أي قناة أو خادم يخضع لسيطرة نفس المشغل أرشيفًا ثابتًا تابعًا لطرف ثالث.
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

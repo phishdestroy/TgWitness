@@ -8,6 +8,8 @@ Tutte le schermate del pannello: chat, diario, fonti, esportazioni, Extra, modal
 
 Cosa fa ogni schermata, cosa scrive nel registro firmato e dove si trova la guida dettagliata. Il pannello mostra un’area di lavoro alla volta: un account Telegram con le proprie fonti, il proprio registro e la propria chiave di firma. Il selettore nella parte superiore della barra laterale consente di passare da un’ area di lavoro all’altra. L’indirizzo contiene l’area di lavoro (`?ws=…`); finché l’indirizzo, il selettore e l’account caricato non coincidono, le azioni rimangono bloccate.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Orientati
 
 Le sezioni giornaliere si trovano nella parte superiore della barra laterale, **la sezione «Account»** è sotto **«Area di lavoro»** , mentre tutto il resto si trova sotto **«Altri strumenti e impostazioni** ». L’interruttore **a livello di interfaccia** nella barra superiore determina il numero di sezioni visualizzate:

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/
 
 Kết nối một máy khách MCP với các không gian làm việc và cuộc trò chuyện đã chọn bằng quyền truy cập có thời hạn và có thể thu hồi.
 
-Kết nối một ứng dụng khách dành cho chuyên viên phân tích với các không gian làm việc và cuộc trò chuyện đã chọn. TgWitness phục vụ **Streamable HTTP tại `/mcp` trong tiến trình bảng điều khiển**. Mỗi kết nối có mã thông báo, thời hạn và các công cụ được phép riêng. MCP không thể gửi tin nhắn Telegram, thay đổi cài đặt hoặc sửa đổi nhật ký đã ký.
+Kết nối máy khách phân tích với các không gian làm việc và cuộc trò chuyện đã chọn. TgWitness cung cấp dịch **vụ Streamable HTTP tại `/mcp` trong quy trình bảng điều khiển**. Mỗi kết nối có mã thông báo, thời hạn và các công cụ được phép riêng. MCP không thể gửi tin nhắn Telegram, thay đổi cài đặt hoặc sửa đổi nhật ký có chữ ký. Các kết nối này cũng hoạt động với [dòng lệnh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/).
 
 [Hướng dẫn quy trình làm việc](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ Chuyển tiếp tuyến đường `/mcp` của bảng điều khiển và giữ 
 | --- | --- |
 | `list_workspaces` | Các không gian làm việc được cấp quyền |
 | `list_chats` | Các cuộc trò chuyện được cấp quyền |
-| `search_messages` | Văn bản tin nhắn đã lưu trong khoảng thời gian đã chọn |
+| `search_messages` | Nội dung tin nhắn đã lưu trong khoảng thời gian đã chọn; `ranked=true` sử dụng [tính năng tìm kiếm toàn văn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/) (các dạng từ, kết quả phù hợp nhất hiển thị trước, `next_offset` trang) |
 | `get_message_versions` | Các phiên bản đã thu thập và các ghi nhận xóa |
 | `get_message_context` | ID của các tin nhắn lân cận đã thu thập |
 | `get_journal_event` | Một bản ghi đã được làm sạch kèm theo tham chiếu nguồn của nó |
-| `get_capture_status` | Trạng thái thu thập và các bản ghi phạm vi bao phủ được phép |
+| `get_capture_status` | Trạng thái thu thập, các bản ghi phạm vi được phép và `gap_summary`: số tin nhắn chưa từng được quan sát, theo từng kênh hoặc siêu nhóm và cho chuỗi tin nhắn toàn tài khoản ([chi tiết](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#missing-message-numbers-gap_summary)); chọn một cuộc trò chuyện để xem các khoảng trống được liệt kê trong đó |
+| `get_activity_stats` | Tin nhắn theo giờ UTC và ngày trong tuần, các ngày có lưu lượng cao nhất, tỷ lệ chỉnh sửa và xóa, người gửi, tên miền và `@handles`, kèm theo phạm vi bao phủ ([chi tiết](https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/#activity-statistics)) |
+| `export_messages` | Chỉ hỗ trợ dòng lệnh, không được chọn mặc định: lưu các quan sát dưới dạng JSON Lines ([chi tiết](https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/#export)); không hỗ trợ qua MCP |
 
 `tools/list` chỉ trả về các công cụ được cấp cho kết nối đó. Các lệnh gọi đến những công cụ khác sẽ bị từ chối. Các công cụ ngữ cảnh nhóm, phân đoạn (episode), thuật ngữ và chuỗi trả lời không được cung cấp trong bản dựng này; phần phụ trợ gói ngữ cảnh riêng biệt của chúng không được bao gồm.
 

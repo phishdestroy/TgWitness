@@ -44,7 +44,7 @@ Thu thập
 
 Lưu trữ & tích hợp
 
-[Tham chiếu Case Board](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/)[Phân tích kho lưu trữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/analysis/)[MCP chỉ đọc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/)[Nhận dạng ký tự quang học (OCR) và chuyển đổi văn bản tại địa phương](https://phishdestroy.github.io/TgWitness/vi/docs/reference/media-analysis/)[Webhook đi](https://phishdestroy.github.io/TgWitness/vi/docs/reference/webhooks/)[Trưng bày công khai](https://phishdestroy.github.io/TgWitness/vi/docs/reference/showcase/)
+[Tham chiếu Case Board](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/)[Phân tích kho lưu trữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/analysis/)[Tìm kiếm toàn văn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/)[MCP chỉ đọc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/)[Dòng lệnh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/)[Nhận dạng ký tự quang học (OCR) và chuyển đổi văn bản tại địa phương](https://phishdestroy.github.io/TgWitness/vi/docs/reference/media-analysis/)[Webhook đi](https://phishdestroy.github.io/TgWitness/vi/docs/reference/webhooks/)[Trưng bày công khai](https://phishdestroy.github.io/TgWitness/vi/docs/reference/showcase/)
 
 Bằng chứng
 

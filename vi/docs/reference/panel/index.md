@@ -8,6 +8,8 @@ Mọi màn hình của bảng điều khiển: cuộc trò chuyện, nhật ký,
 
 Chức năng của từng màn hình, nội dung được ghi vào nhật ký đã ký và vị trí của hướng dẫn chi tiết. Bảng điều khiển hiển thị một không gian làm việc tại một thời điểm: một tài khoản Telegram với các nguồn, nhật ký và khóa ký riêng. Bộ chọn ở đầu thanh bên dùng để chuyển đổi giữa các không gian làm việc. Địa chỉ chứa thông tin về không gian làm việc (`?ws=…`); trong khi địa chỉ, công cụ chọn và tài khoản đã tải không khớp nhau, các thao tác sẽ bị chặn.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Tìm hiểu cách sử dụng
 
 Các phần hàng ngày nằm ở đầu thanh bên, **phần Tài khoản** nằm dưới **mục Không gian làm việc** , và tất cả các mục khác nằm dưới **mục Công cụ và cài đặt khác** . Công tắc **cấp độ giao diện** trên thanh trên cùng quyết định số lượng phần hiển thị:

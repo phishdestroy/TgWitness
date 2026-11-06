@@ -8,6 +8,8 @@ TgWitness ghi lại những gì mà một tài khoản Telegram được kết n
 
 ## Từ quá trình đăng nhập đến sổ ghi chép
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 Sơ đồ quy trình · Xác thực tài khoản người dùng → Chọn các nhóm và kênh có thể truy cập; Chọn các nhóm và kênh có thể truy cập → Lưu cài đặt sự kiện và tệp đính kèm; Lưu cài đặt sự kiện và tệp đính kèm → Bắt đầu quan sát; Bắt đầu quan sát → Nhận thông tin cập nhật từ ứng dụng khách đang hoạt động; Nhận thông tin cập nhật từ ứng dụng khách đang hoạt động → Áp dụng chính sách về nguồn và sự kiện; Áp dụng chính sách về nguồn và sự kiện → Thêm một ghi chú có chữ ký; Thêm một ghi chú có chữ ký → Xem lại hoặc xuất sổ nhật ký; Thêm một ghi chú có chữ ký → Xử lý mọi tệp đính kèm đang chờ xử lý; Xử lý mọi tệp đính kèm đang chờ xử lý → Thêm kết quả tải xuống · Xác thực tài khoảnngười dùng · Chọn các nhóm và kênhcó thể truy cập · Lưu cài đặt sự kiện vàtệp đính kèm · Bắt đầu quan sát · Nhận thông tin cậpnhật từ ứng dụng kháchđang hoạt động · Áp dụng chính sách vềnguồn và sự kiện · Thêm một ghi chú cóchữ ký · Xem lại hoặc xuất sổnhật ký · Xử lý mọi tệp đính kèmđang chờ xử lý · Thêm kết quả tải xuống
 
 **Sơ đồ dưới dạng văn bản**

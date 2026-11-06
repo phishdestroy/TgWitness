@@ -7,13 +7,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/
 keep what
 you saw．
 
-Save Telegram chats with every edit and deletion， then hand over a record anyone can check．
+Export Telegram chats，preserve their history，and share a signed archive others can verify．
 
 [Open demo](https://phishdestroy.github.io/TgWitness/demo/?lang=en)[Setup guide](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=en)
 
 Explore a fictional case without logging in to Telegram．
 
- [GitHub Actions capture （preview）](https://phishdestroy.github.io/TgWitness/docs/capture/) [S3 off－site copy： setup and recovery](https://phishdestroy.github.io/TgWitness/#s3)
+ [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/docs/reference/account-export/) [GitHub Actions capture （preview）](https://phishdestroy.github.io/TgWitness/docs/capture/) [S3 off－site copy： setup and recovery](https://phishdestroy.github.io/TgWitness/#s3)
 
 A MESSAGE， THROUGH TIME＃0042
 

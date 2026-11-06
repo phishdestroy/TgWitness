@@ -31,6 +31,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/accou
 
 프로필 사진 기록과 스토리는 기본적으로 선택되지 않습니다. 케이스에 메시지만 필요한 경우 프로필과 연락처도 비활성화하십시오. 첨부 파일이나 메타데이터가 필요하지 않은 경우, 수집 과정에서 이를 제외하면 이 내보내기 파일에 별도의 사본이 저장되는 것을 방지할 수 있습니다.
 
+Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+
 ## 이력서, 적용 범위 및 검증
 
 각 작업은 해당 옵션과 계정 식별 정보를 고정합니다. 인벤토리와 캡처된 페이지는 서명되며, 페이지 수신 확인 기록에는 해시, 커서, 시간, 첨부 파일 결과 및 이전 수신 확인 기록이 포함됩니다. 커밋된 페이지만 진행 상황을 업데이트합니다. 재시작/재개 시에는 계속 진행하기 전에 해당 기록을 확인합니다. 변경된 계정, 변경된 서명된 페이지 또는 일관성이 없는 수신 확인 체인은 거부됩니다. 수집 도중에는 옵션을 편집할 수 없습니다. 다른 범위를 처리하려면 새로운 작업을 시작하십시오.
@@ -64,6 +66,14 @@ Ed25519 서명과 SHA-256 해시는 수집기가 관련 바이트를 커밋한 �
 5. 카운트, 경고 및 변환된 메시지 샘플을 미리 본 후, 생성 여부를 명시적으로 확인하십시오. 샘플은 메시지당 12개, 텍스트 2,000자씩으로 제한됩니다. 이는 결과의 전체 검토가 아닌 샘플입니다. 설정을 변경하려면 다시 미리 보기를 수행해야 합니다. 미리 보기는 15분 후에 만료되며, 해당 관리자 세션과 정확한 원본 ZIP에 바인딩되어 있으므로 생성 후에는 재사용할 수 없습니다. 새로운 미리 보기를 생성하면 동일한 작업 및 세션에 대한 이전 미리 보기는 무효화됩니다.
 6. 결과물의 전체 내용을 확인해 보세요 `index.html` 결과물을 `messages.jsonl` 를 로컬에서 검토하십시오. 불필요한 정보가 노출된 경우, 더 강력한 제외 조건을 적용하여 새로운 공개 문서를 생성하십시오. 서명된 ZIP을 해당 위치에서 직접 편집하지 마십시오.
 
+### 선택 과정에서 제외된 메시지
+
+**미리보기.** 공개된 내용이 완전하지 않은 경우, 공개 내역이 불완전해 보입니다. 공개된 메시지가 하나 이상 포함된 모든 채팅 내에서는, 선택 범위에서 제외된 메시지가 마커 형태로 표시되며, `[withheld by selection — rule: sender]` (또는 `text`, `period`). **‘선택 범위에 포함되지 않은 메시지’ 표시 방식을** 선택하세요: 연속된 비공개 메시지 블록마다 하나의 마커(기본값) 또는 메시지마다 하나의 마커. 마커에는 규칙과 개수만 표시되며, 본문, 발신자, 날짜 또는 파일 정보는 절대 포함되지 않습니다. 공개된 내용이 전혀 없는 채팅은 완전히 제외되므로, 이 패키지는 해당 채팅의 존재 자체를 드러내지 않습니다.
+
+공개된 답장은 그 답장이 무엇에 대한 것인지 명시합니다: 이 사본에 포함된 메시지, 선택 과정에서 제외된 메시지, 또는 소스 내보내기 파일에 없는 메시지(내보내기 전에 삭제되었거나 애초에 내보내지지 않은 메시지; 내보내기 파일만으로는 어느 쪽인지 구분할 수 없음)입니다. 공개된 응답이 답변하는 제외된 메시지에는 항상 고유한 마커가 부여되므로, 해당 응답은 메시지가 비어 있는 이유를 설명하는 기록을 가리킵니다. 이 세 가지 상태는 원본 내보내기 데이터에 속하는 삭제 및 수집 누락과는 구별됩니다.
+
+다음 `messages.jsonl` (형식 `tgwitness-account-disclosure-v2`)에서 각 메시지에는 `state`: `disclosed`, 또는 `withheld` 다음과 같이 `rules` 와 `count`. 공개된 답장에는 `reply_to` 대상과 함께 `id` 와 `state` (`disclosed`, `withheld`, `not_in_source`). 매니페스트는 공개된 메시지, 채팅, 미디어 및 `withheld` 메시지를 집계합니다. `verify.py` 콘텐츠를 포함하는 마커와 패키지에서 누락된 레코드를 가리키는 응답을 거부합니다. 버전 1 패키지는 이전과 동일하게 검증됩니다.
+
 이 축소된 형식에서는 구조화된 계정 프로필, 연락처, 아바타, 세션, 스토리, 원시 텔레그램 객체, 전달 헤더, 답글 인용문, 연락처 카드 및 위치 메타데이터가 생략됩니다. 또한 원본 JSONL 파일, 비공개 필터 설정, 가명 키 및 신원 매핑도 제외됩니다. 선택된 텍스트, 명시적으로 보존된 신원 정보 및 포함된 파일에는 여전히 해당 필터에서 사용된 것과 동일한 이름, ID 또는 문구가 포함될 수 있으므로 별도의 검토가 필요합니다. 비공개 정책 및 가명 키는 해당 작업에 대해 로컬 볼트에 암호화된 상태로 보관되며, 작업을 삭제하면 관련 비공개 공개 기록이 지워집니다. 공개 정책 기록은 필터 값이 아닌 필터 개수를 기록합니다. 명시된 목적은 매니페스트와 HTML에 공개되며, 명시적인 비공개 기준과 가명 처리 모드에서 알려진 숨겨진 신원 정보도 메시지 본문이 생략된 경우를 포함하여 해당 위치에서 가려집니다. 목적 설명에는 불필요한 개인 정보를 포함하지 말고, 신원을 식별할 수 없는 맥락은 그대로 남겨두십시오.
 
 이 도구의 매니페스트는 파생 파일, 공개 정책 및 원본 ZIP의 해시를 결합합니다. 검증을 통해 무결성을 확인할 수 있으며, 소스가 로컬에 제공된 경우 소스 연결의 일치 여부도 확인할 수 있습니다:
@@ -75,12 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 출처 연동만으로는 선택된 변환이 필요한 모든 항목을 포함했거나 식별 가능한 모든 세부 정보를 제거했음을 독립적으로 입증할 수 없습니다. 원본 평문은 증거로 포함되지 않았습니다. 이러한 판단을 위해서는 새로운 검토가 필요합니다.
 
-## 데이터 보호 및 호스팅형 Capture 미리보기
+## Sharing and hosted capture
 
-이러한 제어 수단은 목적 제한 및 데이터 최소화를 지원하지만, 자동적인 법적 준수 점검 기능은 아닙니다. [GDPR 제5조 및 제25조는](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) 이러한 원칙과 설계 및 기본 설정에 의한 보호를 다루고 있습니다. 합법적 근거, 필요성, 해당되는 경우 특별 범주 조건, 보존, 보안 및 수신자 접근 권한에 대해서는 여전히 해당 사례에 적합한 결정이 필요합니다. 소송 목적만으로는 모든 정보 공개가 합법화되는 것은 아닙니다. 가명 처리된 데이터는 일반적으로 여전히 개인정보로 간주됩니다. [EDPB의 설명을](https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en) 참조하십시오.
+Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
 
-자유 텍스트, 날짜, 드문 사건 및 사실의 조합을 통해 이름이 제거된 후에도 개인을 식별할 수 있습니다. 메시지 내용이 불필요한 경우 텍스트 생략을 우선하고, 필요한 경우에는 전체 파생본을 검토하십시오. 원본과 보관소를 안전하게 보호하고, 담당자와 보존 및 공유에 대해 합의하며, 정확히 어떤 ZIP가 전달되었는지 기록하십시오.
-
-GitHub Actions는 Takeout이나 일반 API를 통한 전체 계정 또는 선택한 채팅 내보내기와 단일 채팅 기록을 지원합니다．[GitHub Actions](https://phishdestroy.github.io/TgWitness/docs/capture/) 안내는 설정 검증과 120분 제한을 설명합니다．로컬 내보내기와 공유 사본에는 GitHub 증명이 이어지지 않으며，합성 테스트는 실제 Telegram 계정에서의 작동을 입증하지 않습니다．
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope)．
 
 [증거 형식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/) · [사례 보고서](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-reports/)

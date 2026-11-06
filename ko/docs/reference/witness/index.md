@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/witne
 
 [내보내기 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/) · [높은 신뢰도](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/) · [패널 가이드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#extras)
 
-수집기는 자체 저널에 서명하므로, 수집기와 그 키를 제어하는 사람은 원칙적으로 저널을 재작성하거나 일부를 삭제한 후 다시 서명할 수 있습니다. ‘위트니스(Witness)’는 이러한 변조를 감지 가능하게 만듭니다. 이는 별도의 프로세스—다른 컨테이너, 또는 더 정확히 말해 다른 사람이 운영하는 서버—로, 몇 분마다 수집기의 서명된 저널 헤드를 가져와, 확인한 내용을 자신의 키로 서명하고, 이를 자체 저널에 보관한 뒤 텔레그램 채널에 게시합니다.
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 흐름도 · 수집기 → Witness (서명된 체크포인트: 기록 수 + 헤더 해시); Witness → Witness 저널, 자체 키; Witness → 텔레그램 채널 (자체 봇을 통해 서명된 게시물); 증거 ZIP → verify.py; Witness 저널, 자체 키 → verify.py; 텔레그램 채널 → verify.py (텔레그램 데스크톱 내보내기 또는 t.me/s 페이지) · 수집기 · Witness · Witness 저널, 자체키 · 텔레그램채널 · 증거 ZIP · verify.py · 서명된체크포인트: 기록수 + · 헤더해시 · 자체봇을통해서명된게시물 · 텔레그램데스크톱내보내기또는 · t.me/s 페이지
 
@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/witne
 지정된 간격(기본값 10분)마다 TgWitness는 다음과 같은 작업을 수행합니다:
 
 1. 헤드 자체를 가져옵니다(수집기는 이를 푸시하거나 건너뛸 수 없습니다);
-2. 수집자의 서명, 고정된 수집자 키(`--collector-fingerprint`, 또는 가장 먼저 확인된 키), 비감소 카운트, 그리고 변경되지 않은 카운트에 대한 변경되지 않은 헤드를 검증합니다;
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. 자체 저널에 서명된 기록을 추가합니다: `witness.anchor` (상태 `ok`, `key_changed`, `rollback`(이전보다 기록 수가 적음), `fork`(길이는 동일하지만 헤더가 다름) 또는 `invalid`(검증에 실패함), 또는 `witness.no_response`( 수집기가 응답하지 않은 경우);
 4. TgWitness가 실행 중이고 봇 API에 접속할 수 있는 동안에는 “응답 없음”을 포함하여 서명된 결과를 채널에 게시합니다. 게시물 ID(`witness.posted`)가 기록되며, 게시 실패 시에도 ID(`witness.post_failed`)가 기록됩니다.
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 이를 위해서는 독립적으로 보관된 위트니스 지문과 이 내보내기 파일의 정확한 끝 부분에 위치한 일치하는 체크포인트가 필요합니다. 이전 접두사만 포함하는 체크포인트는 불충분합니다. 수집을 일시 중지하고, 위트니스가 최종 상태를 관찰하도록 한 뒤, 저널에 추가 기록이 이루어지기 전에 내보내십시오. 저널이 변경되면 다른 체크포인트를 보관하고 해당 상태를 내보내십시오. 후속 체크포인트만으로는 더 짧은 내보내기 파일의 최종 해시를 검증할 수 없습니다. `--channel` 플래그가 함께 제공될 경우, 주장된 게시물이 누락되었거나 일치 세트가 비어 있으면 이 엄격한 검사에 실패합니다. 플래그가 없어도 일반적인 무결성 검사에서는 여전히 증인이 없는 레코드를 보고하지만, 그 외에는 손상되지 않은 아카이브를 거부하지는 않습니다.
 
-이 플래그는 제공되고 고정된 증인 기록과의 일관성을 보장합니다. 운영자는 여전히 증인의 독립성을 입증하고 기록을 별도로 보존해야 합니다. 이는 메시지의 진실성, 완전한 수집 또는 독립적으로 측정된 실행 시간을 입증하지는 않습니다.
-
-‘위트니스(witness)’는 수집기가 해당 시점에 보고한 내용을 보여주며, 이후의 내보내기 결과가 이와 일치함을 확인시켜 줍니다. 이는 수집기가 텔레그램에서 전송된 모든 내용을 기록했음을 보여주거나, 메시지 내용이 사실임을 보증하는 것은 아닙니다. 동일한 운영자가 동일한 시스템에서 실행한 위트니스는 다른 사람이 실행한 것보다 신뢰도가 낮습니다.
-
-단순히 개수만 증가했다고 해서 온라인상에서 ‘추가 전용(append-only)’ 연속성이 입증되는 것은 아닙니다. 오프라인 비교 과정에서 보존된 각 접두사 해시가 전체 수집기 내보내기 파일과 일치해야 합니다. Witness의 가동 중단 및 게시 실패로 인해 외부 기준점이 없는 간격이 발생합니다. 누락된 게시물은 보존된 Witness 저널을 기준으로 신고할 수 있습니다. 동일한 운영자가 관리하는 채널이나 서버는 변경 불가능한 제3자 아카이브가 아닙니다.
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

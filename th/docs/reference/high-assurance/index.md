@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/high-
 
 เซิร์ฟเวอร์ที่ได้รับการรักษาความปลอดภัยอย่างแน่นหนาและทำงานตลอด 24/7 บน Hetzner หรือ Phala Cloud, Gateway DNS และขั้นตอนการตรวจสอบที่ฝ่ายที่สามสามารถทำซ้ำได้
 
-บันทึกที่ลงนามแล้วเป็นหลักฐานว่าข้อมูลไม่ได้ถูกแก้ไข**หลังจาก**ลงนามแล้ว สำหรับกรณีที่ร้ายแรง คำถามต่อไปคือว่ามีใครสามารถปรับเปลี่ยนข้อมูล**ก่อน**การลงนามได้หรือไม่: ใครเป็นผู้ดำเนินการตัวเก็บข้อมูล (collector) บนเครื่องใด และมีใครเข้าสู่ระบบนั้นหรือไม่ โหมดนี้ เป็นโหมดเลือกใช้ ซึ่งจะติดตั้งตัวเก็บข้อมูล (collector) ให้ฝ่ายที่สามสามารถตรวจสอบได้ โดยใช้ข้อมูลที่เก็บไว้โดย ผู้ให้บริการคลาวด์และ Cloudflare แทนที่จะพึ่งพาคำกล่าวของผู้ดำเนินการ
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 การใช้งานในเครื่องท้องถิ่นและ Docker ปกติยังคงไม่เปลี่ยนแปลง ไม่มีอะไรที่นี่จะทำงานได้จนกว่าคุณจะ deploy ด้วย `python -m tgwitness.cloud`, และตัวเก็บข้อมูลจะอ่านข้อมูลจากโฮสต์เฉพาะเมื่อการปรับใช้ตั้งค่า `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/high-
 | กุญแจการลงนามได้ถูกสร้างขึ้นบนเซิร์ฟเวอร์นั้น | กุญแจจะลงนามในข้อความที่ระบุ ID เซิร์ฟเวอร์ของผู้ให้บริการและค่าแฮชของ cloud-init ที่ได้รับ | Collector, ตรวจสอบกับผู้ให้บริการ |
 | บันทึกนี้เกี่ยวข้องกับกุญแจและเซิร์ฟเวอร์ดังกล่าว | ทุกกระบวนการที่เริ่มต้นในหลักฐาน ZIP จะนำค่าการวัดของโฮสต์สำหรับเซิร์ฟเวอร์นั้นมาด้วย | หลักฐานZIP |
 
-ข้อมูลการวัดประสิทธิภาพของเซิร์ฟเวอร์ (SSH listeners และกระบวนการทำงาน, เซสชันปัจจุบัน, การเข้าสู่ระบบใน `wtmp`, การบูต) ถูกรายงานโดยตัวผู้เก็บข้อมูลเอง และถูกลงนามทุกครั้งที่กระบวนการเริ่มต้นขึ้น และใน `host.state` บันทึกทุกครั้งที่มีการเปลี่ยนแปลง ผู้ใช้ root บนเซิร์ฟเวอร์อาจปลอมแปลงข้อมูลเหล่านี้ได้; ข้อมูลเหล่านี้ สนับสนุนบันทึกของผู้ให้บริการและ Cloudflare แทนที่จะแทนที่บันทึกเหล่านั้น
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## ผู้ให้บริการ
 
@@ -269,11 +269,8 @@ Gateway DNS ครอบคลุมตัวแก้ปัญหา DNS ขอ
 
 Cloudflare ไม่สามารถเข้าถึงข้อมูลภายในระบบการเข้ารหัสของ Telegram, อุปกรณ์อื่น ๆ ที่ใช้บัญชี Telegram เดียวกัน (รายชื่ออุปกรณ์ในโหมดหลักฐานบันทึกข้อมูลจากด้าน Telegram) หรือไฮเปอร์ไวเซอร์ของผู้ให้บริการ
 
-## สิ่งที่เอกสารนี้ไม่ได้กำหนด
+## Reading the deployment result
 
-- ผู้ให้บริการและพนักงานควบคุมไฮเปอร์ไวเซอร์, ดิสก์ และเครือข่าย
-- ข้อมูลการวัดประสิทธิภาพของเซิร์ฟเวอร์ถูกรายงานโดยตัวเก็บข้อมูลเอง
-- เนื้อหาของกฎไฟร์วอลล์ในเวอร์ชันก่อนหน้าไม่ได้ปรากฏในบันทึกของผู้ให้บริการทุกแห่ง; มีเพียง Linode เท่านั้นที่เก็บเวอร์ชันของกฎไว้
-- เครื่องมือนี้ไม่กล่าวถึงเรื่องความแท้จริงของข้อความเพิ่มเติม; ดูส่วน [Evidence](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-ยังไม่ได้ทดสอบกับบัญชีจริง: การติดตั้งบนโดเมนของคุณเอง (Cloudflare tunnel และ DNS), ผู้ให้บริการอื่น ๆ, การติดตั้งเพื่อดีบัก และ `lock`, บัญชี Telegram บนเซิร์ฟเวอร์ดังกล่าว, และการอัปเดตแบบเรียลไทม์ของเวอร์ชันถัดไปผ่าน quick tunnel ตรวจสอบการปรับใช้ครั้งแรกบน ผู้ให้บริการแต่ละรายด้วย `plan`, การปรับใช้เพื่อดีบัก และ `verify` ก่อนที่จะใช้มันในเคสจริง
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/th/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

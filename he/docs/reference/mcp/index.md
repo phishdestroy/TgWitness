@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/
 
 חבר לקוח MCP לסביבות עבודה וצ'אטים נבחרים עם גישה מוגבלת בזמן וניתנת לביטול.
 
-חברו לקוח אנליסט לסביבות עבודה וצ'אטים נבחרים. TgWitness מספקת **Streamable HTTP בנתיב `/mcp` בתוך תהליך הפאנל**. לכל חיבור יש אסימון (token), תוקף וכלים מורשים משלו. MCP אינו יכול לשלוח הודעות Telegram, לשנות הגדרות או לערוך את היומן החתום.
+חברו לקוח אנליסט לסביבות עבודה וצ'אטים נבחרים. TgWitness מספק **Streamable HTTP בכתובת `/mcp` בתהליך הפאנל**. לכל חיבור יש אסימון, תוקף וכלים מותרים משלו. MCP אינו יכול לשלוח הודעות Telegram, לשנות הגדרות או לערוך את היומן החתום. אותם חיבורים פועלים גם בשורת [הפקודה](https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/).
 
 [מדריך לתהליך העבודה](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ויקי](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 | --- | --- |
 | `list_workspaces` | סביבות עבודה שהוענקו להן הרשאות |
 | `list_chats` | צ'אטים שהוענקו להם הרשאות |
-| `search_messages` | טקסט הודעות שמור בתוך התקופה שנבחרה |
+| `search_messages` | טקסט ההודעות שנשמרו בתקופה הנבחרת; `ranked=true` משתמש [בחיפוש טקסט מלא](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/) (צורות מילים, התאמות הטובות ביותר תחילה, `next_offset` דפדוף) |
 | `get_message_versions` | גרסאות שנלכדו ותצפיות מחיקה |
 | `get_message_context` | מזהי הודעות סמוכות שנלכדו |
 | `get_journal_event` | רשומה מסוננת אחת עם סימוכין למקור שלה |
-| `get_capture_status` | מצב איסוף ורשומות כיסוי מורשות |
+| `get_capture_status` | מצב האיסוף, רשומות כיסוי מותרות ו `gap_summary`: מספרי הודעות שמעולם לא נצפו, לפי ערוץ או סופר-קבוצה ולכל הרצף ברמת החשבון ([פרטים](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#missing-message-numbers-gap_summary)); בחרו צ'אט כדי לראות את הפערים המפורטים בו |
+| `get_activity_stats` | הודעות לפי שעה (UTC) ויום בשבוע, ימי שיא, שיעורי עריכה ומחיקה, שולחים, דומיינים ו `@handles`, עם כיסוי ([פרטים](https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/#activity-statistics)) |
+| `export_messages` | שורת פקודה בלבד, לא נבחר כברירת מחדל: זרם התצפיות שנשמרו כ-JSON Lines ([פרטים](https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/#export)); לא מוצע דרך MCP |
 
 `tools/list` מחזיר רק את הכלים שהוענקו לאותו חיבור. קריאות לכלים אחרים נדחות. כלי הקשר קבוצתי, אפיזודות, טרמינולוגיה ושרשראות תגובה אינם מוצעים בגרסת בנייה זו; מנגנון ה-backend הנפרד של חבילות ההקשר שלהם אינו כלול.
 

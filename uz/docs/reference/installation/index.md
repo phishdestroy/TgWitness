@@ -44,6 +44,30 @@ Sozlash `TGWITNESS_INSTALL_DIR` boshqa papkani tanlash uchun. O'rnatilgan versiy
 
 Har bir o'rnatishga mahalliy yo'llar, buyruqlar va omborga havolalar bilan **START-HERE.html** va **START-HERE.txt** fayllari kiradi. `tgwitness guide` qo'llanmani ochish uchun. Windowsda esa `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` PowerShell'da ishlating.
 
+## To'liq matnli qidiruv sozlamalari
+
+[To'liq matnli qidiruv](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/) (oldindan ko'rish) hech qanday sozlashni talab qilmaydi. Uning indeksi yangilanishdan so'ng fon rejimida yaratiladi.
+
+| O'zgaruvchi yoki buyruq | Ta'sir |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | Standart: indeks saqlanadi `search/fulltext.sqlite3` har bir ish maydonining |
+| `TGWITNESS_FULLTEXT=memory` | Indeks fayli yo'q; indeks har boshlanishda qayta tuziladi |
+| `TGWITNESS_FULLTEXT=off` | Indeks yo'q; faqat aniq matn bo'yicha qidiruv |
+| `tgwitness index status` | Har bir ish maydonining holatini indekslash |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | Imzolangan jurnalning har bir indeksini qayta tuzing |
+
+Administratorning **Journal → Filters → Search index** bo'limidagi tanlovi shu ish maydoni uchun o'zgaruvchini ustun qo'yadi. Buyruqlar ularni ishga tushirayotgan o'rnatmaning ma'lumotlar katalogini topadi; boshqa joylarda qo'shing `--data-dir` yo'ldan `tgwitness paths`. To'liq ukraincha lug'at (GPL-3.0 ma'lumotlari) uchun o'rnating `pymorphy3-dicts-uk` o'rnatishning Python muhitida o'rnatiladi.
+
+## Komanda satri orqali kirish
+
+[Komanda satri](https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/) (oldindan ko'rinish) skriptlar va agentlar uchun arxivni o'qiydi.
+
+| O'zgaruvchi | Ta'sir |
+| --- | --- |
+| `TGWITNESS_URL` | Panel manzili uchun `tgwitness search`, `context`, `messages`, `stats` va `export`; standart `http://127.0.0.1:8787` token o'rnatilganda |
+| `TGWITNESS_MCP_TOKEN` | **Integratsiyalar → MCP** bo'limidan MCP mijozlari bilan baham ko'rilgan ulanish tokenini arxivlang; `--token-file` uning o'rniga fayldan o'qiydi |
+| `TGWITNESS_DATA` | Ma'lumotlar katalogi hech qanday bo'lmaganda to'g'ridan-to'g'ri o'qiladi `--data-dir`, URL yoki token ko'rsatilmagan taqdirda to'g'ridan-to'g'ri o'qiladi |
+
 ## Ijro etishdan oldin tekshiring
 
 Bir qatorli buyruq dastlabki skript uchun HTTPS ga ishonadi. Ushbu skript o'rnatishdan oldin ilovadagi SHA-256 va loyihaning RSA imzolarini tekshiradi. Shuningdek, avval dastlabki skriptni yuklab olib, uni tekshirishingiz mumkin.

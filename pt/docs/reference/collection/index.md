@@ -8,6 +8,8 @@ O TgWitness registra o que uma conta conectada do Telegram observa. O registro p
 
 ## Do login ao registro
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 Diagrama de fluxo · Autorizar uma conta de usuário → Selecione grupos e canais acessíveis; Selecione grupos e canais acessíveis → Salvar configurações de eventos e anexos; Salvar configurações de eventos e anexos → Iniciar observação; Iniciar observação → Receba atualizações do cliente ativo; Receba atualizações do cliente ativo → Aplique a política de fontes e eventos; Aplique a política de fontes e eventos → Anexar uma observação assinada; Anexar uma observação assinada → Revisar ou exportar o registro; Anexar uma observação assinada → Processar qualquer anexo em fila; Processar qualquer anexo em fila → Anexe o resultado do download · Autorizar uma conta deusuário · Selecione grupos ecanais acessíveis · Salvar configuraçõesde eventos e anexos · Iniciar observação · Receba atualizações docliente ativo · Aplique a política defontes e eventos · Anexar uma observaçãoassinada · Revisar ou exportar oregistro · Processar qualqueranexo em fila · Anexe o resultado dodownload
 
 **Diagrama em formato de texto**

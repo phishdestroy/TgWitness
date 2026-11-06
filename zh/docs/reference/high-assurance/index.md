@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-
 
 部署在 Hetzner 或 Phala Cloud 上的全天候密封服务器、网关 DNS 以及第三方可复现的验证机制。
 
-经过签名的日志可证明记录未被篡改 **after** 签名。对于严重案件， 接下来的问题是：在签名之前 **之前** 是否有人可能篡改了数据： 谁运行了数据收集器、在哪个机器上运行，以及是否有人登录过该设备。此可选 模式会部署数据收集器，以便第三方能够通过云服务提供商和 Cloudflare 保存的记录 （而非运营商的口头声明）来核查上述情况。
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 常规的本地和 Docker 使用方式保持不变。除非您使用 `python -m tgwitness.cloud`进行部署，且收集器仅在部署设置为 `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-
 | 该签名密钥是在该服务器上生成的 | 该密钥会签署一份声明，其中包含服务提供商的服务器 ID 以及收到的 cloud-init 的哈希值 | Collector，已与提供商进行过核对 |
 | 该日志属于该密钥和服务器 | 证据ZIP中的每个进程启动时，都会携带该服务器的宿主测量数据 | 证据 ZIP |
 
-主机指标（SSH 监听器和进程、当前会话、 `wtmp`、系统启动） 由收集器自身报告，并在每次进程启动时以及 `host.state` 记录中。服务器上的 root 用户可能篡改这些数据；这些数据 旨在支持提供商和 Cloudflare 的记录，而非取代它们。
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## 提供商
 
@@ -269,11 +269,8 @@ Gateway DNS 负责系统解析器。通过 443 端口以 DNS over HTTPS 方式�
 
 Cloudflare 无法查看 Telegram 的加密内容、该 Telegram 账户下的其他设备 （“证据模式”的设备列表是从 Telegram 端记录的）或服务提供商的虚拟机管理程序。
 
-## 这并未说明以下内容
+## Reading the deployment result
 
-- 服务提供商及其员工负责管理虚拟机管理程序、磁盘和网络。
-- 主机指标由收集器自行报告。
-- 早期防火墙规则的内容并非在每个服务商的日志中都有记录；只有 Linode 会保留规则版本信息。
-- 该工具并未提供有关消息真实性的新信息；请参阅[“证据”部分](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)。
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-尚未在真实账户上运行：包括在您自己的域名下部署（Cloudflare 隧道和 DNS）、其他服务商、调试部署以及 `lock`，该服务器上的 Telegram 账户， 以及通过快速隧道获取后续版本的实时更新。请通过 以下链接查看各服务商的首个部署： `plan`，以及调试部署， `verify` ，以及，再将其应用于具体案例。
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

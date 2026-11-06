@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/
 
 アーカイブと連携機能
 
-[Case Board の参照](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/)[アーカイブ分析](https://phishdestroy.github.io/TgWitness/ja/docs/reference/analysis/)[読み取り専用 MCP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/)[ローカルでのOCRおよび文字起こし](https://phishdestroy.github.io/TgWitness/ja/docs/reference/media-analysis/)[送信されるWebhook](https://phishdestroy.github.io/TgWitness/ja/docs/reference/webhooks/)[公開ショーケース](https://phishdestroy.github.io/TgWitness/ja/docs/reference/showcase/)
+[Case Board の参照](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/)[アーカイブ分析](https://phishdestroy.github.io/TgWitness/ja/docs/reference/analysis/)[全文検索](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/)[読み取り専用 MCP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/)[コマンドライン](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/)[ローカルでのOCRおよび文字起こし](https://phishdestroy.github.io/TgWitness/ja/docs/reference/media-analysis/)[送信されるWebhook](https://phishdestroy.github.io/TgWitness/ja/docs/reference/webhooks/)[公開ショーケース](https://phishdestroy.github.io/TgWitness/ja/docs/reference/showcase/)
 
 証拠
 

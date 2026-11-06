@@ -14,7 +14,7 @@ TgWitness conserva le osservazioni di Telegram visibili sull’account in un reg
 | Contenuto del file ZIP delle prove | `manifest.sig` firma il manifesto canonico, che elenca gli hash dei file di contenuto | Il file ZIP completo, comprensivo di manifesto e firma |
 | Allegati conservati | SHA-256 e conteggio dei byte in un evento `media.saved` firmato; hash del file nel manifesto ZIP firmato | I byte originali contenuti nel file ZIP verificato |
 | Checkpoint | Firma Ed25519 relativa alla lunghezza del registro, all’hash dell’intestazione, alla chiave pubblica e alla data di creazione | Una copia indipendente conservata prima di una modifica contestata |
-| Ricevuta di esecuzione | Misurazioni del collettore firmate separatamente; incluse anche in un evento `process.started` firmato | La ricevuta e il registro associato; i dati sono autodichiarati |
+| Ricevuta di esecuzione | Signed record of the collector version，source-file hashes and start settings，also included in `process.started` | The receipt，associated journal and the environment evidence for the selected verification mode |
 | Rapporti leggibili: `report.html` e le sue parti, `report.json`, `report.pdf`, `chat.pdf` | Un sigillo Ed25519 per ogni file sul suo contenuto; anche l’PDF reca una firma standard PDF (vedi [. Rapporti leggibili](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#readable-reports)) | Il file così come ricevuto e l’impronta digitale della chiave attendibile; l’archivio ZIP a cui si riferisce |
 | CSV autonomo | Non è presente una firma crittografica autonoma; gli hash degli eventi da soli non sono sufficienti | Si prega di utilizzare il testo esatto contenuto nel file ZIP verificato per il controllo dell’integrità |
 | Screenshot, stampe o file PDF generati da un browser | Nessuna firma di TgWitness sul derivato | Conservare il pacchetto originale verificato e documentare le modalità di creazione del derivato |
@@ -62,7 +62,7 @@ Le prove firmate, i trasferimenti e gli archivi ZIP delle chat contengono report
 
 In un canale o in un supergruppo, Telegram numera i messaggi 1, 2, 3… in ordine. Un’esportazione della chat elenca il primo e l’ultimo numero, quanti ne sono presenti e ogni serie di numeri mancanti in `message-ids.json` , il manifesto e l’intestazione `chat.json` , e contrassegna ogni lacuna nel punto in cui si trova nella trascrizione. `verify.py` li ricompila a partire da `chat.json` . Un numero mancante indica un messaggio che Telegram non ha restituito (cancellato prima dell’esportazione o non visibile all’account); nelle chat private e nei gruppi di base i numeri sono condivisi da tutte le chat dell’account e le lacune non vengono conteggiate.
 
-Dopo aver letto la cronologia, l’esportazione richiede nuovamente a Telegram ogni numero mancante, in ordine numerico (da `channels.getMessages` fino a 10.000 numeri). Il risultato si trova in `message-ids.json` e nel report. Una risposta vuota significa che Telegram non contiene alcun messaggio con quel numero per questo account; non indica se il messaggio sia stato cancellato o non sia mai stato visibile all’account. Se invece viene restituito un messaggio Telegram, significa che era sfuggito durante la lettura e viene aggiunto all’esportazione, contrassegnato come `found_on_recheck`.
+After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time； it leaves the cause unspecified．A message returned on recheck is added to the export and marked `found_on_recheck`．
 
 Ogni rapporto inizia con **. In breve**: un paragrafo, seguito da ciò che il materiale mostra e ciò che non mostra (chi c'è dietro un account, completezza della consegna, cancellazioni prima dell'osservazione, ora senza timestamp). Il sigillo della pagina stessa diventa ambra quando il browser ha verificato la firma del sigillo, non quella della pagina: un browser non assegna a una pagina i propri byte. Diventa verde solo quando il lettore trascina il file nell’area di verifica alla fine della pagina e ogni byte corrisponde, e solo se la pagina visualizzata è proprio quel file; altrimenti diventa rosso.
 
@@ -124,12 +124,41 @@ Ogni file ZIP firmato contiene `coverage.json`; il report HTML si apre con lo st
 
 - **Osservazione continua da X a Y.** Un periodo inizia con `observation.started` e termina in caso di pausa, arresto, interruzione della connessione a Telegram, disconnessione, avvio di un processo senza un arresto ordinato, oppure se trascorrono più di tre minuti senza alcuna registrazione durante l’osservazione (i segnali di attività vengono registrati ogni minuto, pertanto il silenzio indica che il processo si è arrestato, si è bloccato o che il computer è entrato in modalità di sospensione). Quando l’intervallo dei segnali di attività viene modificato in **«Parametri»**, ogni segnale ne tiene traccia e il silenzio consentito diventa pari a tre intervalli, mai inferiore a tre minuti.
 - **Le lacune** indicano l’intervallo di tempo tra i periodi, con la relativa motivazione. Una lacuna ancora aperta all’ultimo record è contrassegnata con il codice `not_resumed_by_last_record`.
-- **Gli ID dei messaggi non vengono rilevati.** Per i canali e i supergruppi, che numerano i messaggi per singola chat, gli ID mancanti tra quelli rilevati sono elencati come intervalli. Vengono segnalati come non*rilevati* — cancellati, mai consegnati o al di fuori della cronologia salvata — mai come cancellati. Le chat private e i gruppi ordinari condividono una sequenza a livello di account, pertanto eventuali lacune in tali casi non hanno alcun significato e non vengono elencate.
+- **ID dei messaggi non rilevati.** Per i canali e i supergruppi, che numerano i messaggi per chat, gli ID mancanti tra quelli rilevati sono elencati come intervalli. Vengono segnalati come non*rilevati* — cancellati, mai consegnati o al di fuori della cronologia salvata — mai come cancellati. Le chat private e i gruppi ordinari condividono una sequenza a livello di account, quindi le lacune all’interno di una di queste chat non hanno alcun significato e non vengono elencate in tale sezione.
 - Le segnalazioni di interruzioni a livello di chat (ad esempio quando Telegram richiede il ripristino delle differenze in un canale) vengono conteggiate come note; esse non interrompono la copertura globale.
+
+### Numeri dei messaggi mancanti (`gap_summary`)
+
+**Anteprima.** `coverage.json` → `gap_summary` Misura i numeri assegnati da Telegram che questo collettore non ha mai rilevato. Telegram numera i messaggi una volta per canale o supergruppo e una volta per account tra chat private, bot e gruppi ordinari. Un numero compreso tra due messaggi osservati è o stato osservato o è mancante; un intervallo contiguo costituisce un'affermazione positiva secondo cui ogni messaggio in esso numerato è stato osservato. Un'interruzione non indica alcun attore né alcuna ragione.
+
+| Settore | Significato |
+| --- | --- |
+| `status` | `on`, oppure `off` quando è disattivato in **Parametri → Analisi delle lacune** |
+| `parameters` | I parametri che hanno prodotto il risultato, in modo che possa essere ripetuto |
+| `chats[]` | Una voce per ogni canale o supergruppo, ciascuna numerata separatamente |
+| `account` | La sequenza a livello di account delle chat private, dei bot e dei gruppi normali |
+| `status` (per sequenza) | `applicable`, oppure `not_applicable` con `reason` |
+| `observed_from`, `observed_to`, `span` | Primo e ultimo numero osservato e dimensione dell'intervallo |
+| `observed`, `observed_without_content` | Numeri osservati; quelli noti solo da un record di cancellazione o di ricontrollo |
+| `missing`, `density`, `gap_ranges`, `largest_gap` | Numeri mai osservati, la loro percentuale rispetto all’intervallo, il numero di cicli, il ciclo più lungo |
+| `clusters[]` | Lacune elencate: `low`, `high`, `missing`, e i numeri osservati adiacenti `after` / `before` con i relativi orari di osservazione |
+| `service_estimate` | Solo se abilitato: quanti numeri mancanti sarebbero messaggi di servizio in base alla loro percentuale osservata. Mai sottratto da `missing` |
+
+La validità è ricavata dal registro, non viene mai data per scontata:
+
+- **I canali e i supergruppi** vengono conteggiati per ogni chat, anche nell’esportazione delle chat selezionate. Le registrazioni selezionate in base al mittente determinano il conteggio `not_applicable`.
+- **La sequenza a livello di account** viene misurata solo dal primo all’ultimo messaggio pervenuto mentre era attiva la raccolta completa dell’account e include chat private, bot, gruppi ordinari e i messaggi dell’account stesso, senza escludere alcuna chat di questo tipo (`scope.changed`). I numeri indicati da `deletion.unscoped` vengono considerati osservati senza contenuto. Un’esportazione o un trasferimento di chat selezionate non può misurarla. Se la raccolta dell’intero account è stata disattivata e riattivata, una nota indica che i numeri utilizzati nel frattempo appaiono come lacune.
+- I messaggi di servizio sono voci del registro con numeri propri, quindi colmano da soli le lacune; la stima facoltativa serve solo a fornire contesto.
+
+`verify.py` recomputes `gap_summary` from `events.jsonl` with the parameters in the signed `coverage.json` member (defaults for older archives) and prints the account-wide line in its coverage summary. The archive's `get_capture_status` (MCP and the command line) returns the same measurement for the chats an access may read; the account-wide sequence only to access covering the whole workspace.
+
+Repeated observations of one service message count once，and the account service estimate uses only numbers inside the measured range．An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled；older records without that information cannot establish this condition．Stopped observation does not extend the measured range，and resuming it is noted．The live archive query has a time budget，including its database scan，and marks an unfinished measurement as partial．
+
+Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences)． These numbers describe observations；they do not identify a deletion actor or establish why a number is absent．
 
 Quando Telegram smette di accettare l’account, il record `coverage.gap` che conclude il monitoraggio contiene `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` o `not_authorized`) e l’Telegram errore; `verify.py` indica la causa per cui il periodo termina.
 
-La copertura descrive ciò che questo strumento di raccolta ha registrato. Non costituisce una prova del fatto che Telegram abbia consegnato ogni aggiornamento durante un periodo continuativo.
+Coverage combines recorded observation periods，interruptions and message outcomes． Assess it together with the selected chats，period and attachment policy；continuous operation alone does not establish complete delivery of Telegram updates．
 
 ## Produttore
 
@@ -157,17 +186,27 @@ Un registro testimone (`tgwitness-witness-v1`) e i relativi post del canale veng
 
 Il file manifest.json include il formato, l’ora di esportazione, la chiave pubblica, l’impronta digitale, la lunghezza del registro, l’hash di testa, l’ambito, il produttore, le limitazioni e l’SHA-256 di ogni elemento di contenuto diverso dagli stessi `manifest.json` e `manifest.sig`. Il file manifest.sig è la firma Ed25519 in base64 sul manifest JSON canonico. Il verificatore rifiuta elementi inattesi o mancanti, nomi duplicati, file danneggiati, sequenze o catene interrotte, firme non valide e discrepanze rispetto a un checkpoint fornito. Non estrae mai i percorsi degli archivi. Limita la dimensione totale dichiarata non compressa a 4 GiB; il `--max-gib N` consente archivi più grandi realizzati con un limite **di Parameters** aumentato.
 
-Si prega di ottenere il codice di verifica da un checkout affidabile o da una copia indipendente sottoposta a revisione. Un verificatore contenuto in un archivio non attendibile è materiale eseguibile fornito dall’autore di tale archivio; la sua presenza costituisce una comodità in termini di portabilità, non un punto di riferimento indipendente di affidabilità.
+Run verification from your installed TgWitness version or a reviewed checkout． The copy included in an archive supports portable use；check that copy against your trusted installation before executing it．
 
-Un checkpoint firma una dichiarazione contenente la chiave pubblica, la lunghezza del registro, l’hash di testa e l’ora di creazione. Il verificatore può accertarsi che un archivio successivo contenga lo stesso prefisso. Si raccomanda di conservare un checkpoint al di fuori del collettore prima di una modifica contestata: un malintenzionato che controlli sia l’archivio che il checkpoint può sostituire entrambi.
+A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix．Retain the checkpoint outside the collector，so later verification compares the archive with a reference held separately from it．
 
 ## Ambito di verifica
 
-Le firme identificano la chiave del collettore e proteggono il materiale salvato. Associare la sua impronta digitale in modo indipendente per collegare quella chiave al collettore previsto. Gli aggiornamenti di Telegram costituiscono l’input per la raccolta; TgWitness firma le proprie osservazioni relative a tali aggiornamenti. Le firme non sono firme emesse da Telegram né dagli autori dei messaggi.
+Verification checks the archive and the collection mode used to produce it．Choose the mode whose trust boundary matches the case，then retain its verification inputs．
 
-Un checkpoint conservato o un record di testimonianza rileva un prefisso del registro precedente modificato, inclusa una sostituzione firmata con una chiave del collettore copiata. I record creati prima del loro primo checkpoint indipendente richiedono una conferma da parte della fonte: il titolare della chiave del collettore può firmare il nuovo materiale. Mantenere controllato l’accesso alla chiave di firma e conservare i riferimenti separatamente.
+| Collection mode | What the verifier checks | Verification inputs and trust boundary |
+| --- | --- | --- |
+| Local workspace | Record signatures，hash chain，manifest and attachment bytes | Independently retained collector fingerprint；the host administrator controls the local signing key |
+| Local workspace with an independent witness | The archive checks plus agreement with an earlier journal prefix retained by the witness | Separately trusted witness key and records；the checkpoint binds the prefix already observed |
+| [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity | Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow |
+| [Cloud deployment](https://phishdestroy.github.io/TgWitness/it/docs/reference/high-assurance/) | Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record | Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider |
+| [Intel TDX confidential VM](https://phishdestroy.github.io/TgWitness/it/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status，binding to the collector statement，compose and OS measurements | Intel trust chain and expected deployment measurements；retain the results of every required TDX check |
 
-Valutare la visibilità dell’account e la consegna utilizzando i registri di copertura e test controllati. Utilizzare un timestamp esterno verificato per un ancoraggio temporale indipendente. Un ID mittente identifica un account Telegram; collegarlo a una persona nel corso dell’indagine. Le ricevute del programma e i controlli cloud descrivono le misurazioni riportate dal Collector e la configurazione di distribuzione. Consultare [i risultati della convalida](https://phishdestroy.github.io/TgWitness/it/docs/reference/verification/) per il comportamento misurato e la sua portata.
+In sealed acquisition，the approved collector receives data through an authenticated Telegram connection inside the verified environment．Attestation binds the archive to that execution，so verification covers acquisition as well as later file integrity． This relies on the approved code and the platform trust chain listed above． GitHub capture verification requires a session created inside the run and rejects imported-session captures．
+
+The run receipt records the collector version，file hashes and startup settings．GitHub provenance and TDX measurements provide the environment checks；the [validation record](https://phishdestroy.github.io/TgWitness/it/docs/reference/verification/) identifies tested configurations．
+
+TgWitness signs the observations it collects；Telegram and message authors do not issue these signatures．In a local workspace，material created before the first independent checkpoint still depends on the collector and its key holder．Coverage records describe the selected scope and collection outcomes，while verified external timestamps anchor the committed archive or journal boundary in time．
 
 ## Allegati
 
@@ -181,9 +220,9 @@ Un’esportazione completa della chat salva gli allegati, in base alle impostazi
 
 Un’operazione relativa a un file multimediale e il relativo evento di invio del messaggio vengono eseguiti in un’unica transazione. Il processo memorizza il descrittore originale del messaggio TL; l’osservazione firmata associa il proprio SHA-256, l’account e la politica relativa alle dimensioni. Il recupero verifica tale associazione prima del download. Non recupera mai il messaggio corrente e sostituisce silenziosamente l’allegato con uno più recente. I processi interrotti vengono riprovati, mentre il fallimento permanente rimane un esito esplicito.
 
-Ogni area di lavoro dispone di un proprio registro e di una propria identità di firma. Un evento «process.started» include un ID di esecuzione, gli orologi locali, le versioni delle dipendenze, gli hash dei file sorgente, l’account/ambito iniziale, e le impostazioni di acquisizione. Gli «heartbeat» includono l’ID di esecuzione, il tempo monotono e lo stato della coda. La ricevuta del processo può inoltre essere scaricata come dichiarazione firmata separatamente. Le misurazioni dei file sono autodichiarate e non costituiscono un’attestazione hardware attendibile.
+Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement．For verification of the execution environment，pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#verification-scope)．
 
-I checkpoint automatici vengono conservati localmente all’avvio, ogni cinque minuti durante il monitoraggio (**Parametri → Checkpoint firmato ogni**) e al termine ordinato dell’operazione. La verifica all’avvio e l’esportazione confrontano il registro con l’ultimo checkpoint locale conservato. Ciò consente di rilevare un rollback del database qualora il checkpoint sia ancora presente; un operatore che controlli entrambi può comunque sostituirli entrambi. La conservazione indipendente e i timestamp esterni attendibili rimangono requisiti distinti.
+Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives．Independent retention keeps that reference available outside the workspace；a verified external timestamp additionally anchors it in time．
 
 Dopo un riavvio, viene ripreso il punto di aggiornamento di Telegram salvato (`catch_up_from` in `observation.started`) e vengono richiesti gli aggiornamenti mancanti. Una verifica periodica registra `message.recovered` per i messaggi mancanti e `message.missing_on_recheck` quando Telegram non restituisce più un messaggio salvato; quest’ultimo non costituisce un avviso di cancellazione e non indica né l’autore della cancellazione né l’ora.
 

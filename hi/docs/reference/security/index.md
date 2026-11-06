@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/secur
 
 थ्रेट मॉडल, एक्सेस मॉडल, रेस्ट में सिक्रेट्स, नेटवर्क एक्सपोजर, सेशन इम्पोर्ट्स और भेद्यता की रिपोर्ट कैसे करें।
 
-TgWitness आपके अपने कंप्यूटर या सर्वर पर चलता है। खाता कनेक्शन, सार्वजनिक प्रॉक्सी-सूची के रखरखाव और वैकल्पिक बाहरी सेवाओं के लिए स्पष्ट राउटिंग नीतियां हैं। सूचनाएं, टाइमस्टैम्प, ऑफ-साइट प्रतियां और एक गवाह अलग से कॉन्फ़िगर किए जाते हैं। यह पेज बताता है कि क्या सुरक्षित है, कैसे, और क्या ऑपरेटर पर निर्भर रहता है।
+This page describes access，storage and network protection in a local or server workspace． For collection on a GitHub runner or in an Intel TDX confidential VM，see the [verification modes](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope)，which add checks of the collection environment． Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．
 
 | क्षेत्र | संक्षेप में |
 | --- | --- |
@@ -12,7 +12,7 @@ TgWitness आपके अपने कंप्यूटर या सर्व
 | विश्राम में रहस्य | सत्र, एपीआई जोड़ी, हस्ताक्षर कुंजी और प्रॉक्सी सेटिंग्स Fernet के साथ एन्क्रिप्ट की जाती हैं |
 | संदेश और मीडिया | अनएन्क्रिप्टेड संग्रहीत: डिस्क एन्क्रिप्शन और सख्त अनुमतियों का उपयोग करें |
 | अखंडता | हर रिकॉर्ड पर SHA-256 हैश चेन और Ed25519 हस्ताक्षर |
-| शामिल नहीं | एक मशीन प्रशासक, एक लीक पैनल टोकन, कैप्चर की पूर्णता |
+| Local trust boundary | The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary |
 
 कमजोरियों की रिपोर्टों के लिए, [सुरक्षा नीति](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md) देखें।
 
@@ -38,11 +38,13 @@ TgWitness आपके अपने कंप्यूटर या सर्व
 
 ## विश्राम में रहस्य
 
-Telegram API क्रेडेंशियल, StringSession, और Ed25519 प्राइवेट की Fernet का उपयोग करके एन्क्रिप्ट किए जाते हैं। डिफ़ॉल्ट रूप से इसकी कुंजी उसी संरक्षित डेटा निर्देशिका में संग्रहीत होती है। यह आकस्मिक प्लेनटेक्स्ट के खुलासे को कम करता है; यह उस हमलावर के खिलाफ सुरक्षा नहीं है जो पूरी डायरेक्टरी पढ़ सकता है। TgWitness संदेश की सामग्री और मीडिया को **एन्क्रिप्ट नहीं** करता है। डिस्क एन्क्रिप्शन और प्रतिबंधात्मक OS परमिशन का उपयोग करें। यूनिक्स प्राइवेट की फ़ाइलें मोड 0600 के साथ बनाई जाती हैं; नए बनाए गए डेटा डायरेक्टरी मोड 0700 का उपयोग करती हैं। मौजूदा डायरेक्टरी अनुमतियों को नहीं बदला जाता है। विंडोज डायरेक्टरी ACLs को विरासत में लेता है: उन्हें सेवा खाते और अधिकृत प्रशासकों तक सीमित करें।
+Telegram API credentials，the session and signing key are encrypted with Fernet． For local messages and media，encryption is provided by the host's disk or volume； the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP， and off-site copies use AES-256-GCM．
+
+The vault key defaults to the protected data directory．Use an external master-key file below to store it separately．On Unix，new private-key files use mode 0600 and new data directories use 0700；on Windows，set the directory ACL for the service account and authorized administrators．Existing directory permissions are retained．
 
 ### बाहरी मास्टर कुंजी
 
-एक नई डेटा निर्देशिका के लिए, TGWITNESS_VAULT_KEY_FILE एक बाहरी यादृच्छिक मास्टर कुंजी प्रदान कर सकता है। HKDF-SHA256 और एक अलग यादृच्छिक सॉल्ट प्रत्येक वर्कस्पेस के लिए एक अलग फर्नेट कुंजी उत्पन्न करते हैं। रिकवरी के लिए vault.external.json को बनाए रखना आवश्यक है। खोई हुई या गलत मास्टर कुंजियों के कारण क्लोज़ फ़ेल हो जाता है। मौजूदा स्थानीय वॉल्ट्स को चुपचाप माइग्रेट नहीं किया जाता है। चल रही प्रक्रिया कुंजी तक पहुँच सकती है; यह HSM आइसोलेशन नहीं है। पैनल चयनित मोड की रिपोर्ट करता है और स्पष्ट रूप से बताता है कि संदेश/मीडिया भंडारण एप्लिकेशन द्वारा एन्क्रिप्ट नहीं किया गया है। पूर्ण थ्रेट मॉडल के लिए [कनेक्शन, प्रॉक्सी और डेटा सुरक्षा](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/) देखें।
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode．Disk encryption protects the local message and media files in either mode；see [connection and data protection](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/) for setup details．
 
 ## प्रॉक्सी और नेटवर्क मार्ग
 
@@ -66,8 +68,10 @@ TData प्रोसेसिंग कंटेनर चेक्सम, स�
 
 ## अखंडता सीमाएँ
 
-हैश चेन, डेटाबेस ट्रिगर्स, और हस्ताक्षर कुछ संशोधनों का पता लगाते हैं; वे एक स्थानीय प्रशासक को जर्नल को फिर से लिखने और फिर से हस्ताक्षर करने से नहीं रोकते हैं। हस्ताक्षरित चेकपॉइंट और सार्वजनिक-कुंजी फिंगरप्रिंट को एक अलग सिस्टम पर बनाए रखें। एविडेंस मोड और ऑफ-साइट कॉपी (दोनों डिफ़ॉल्ट रूप से बंद हैं) चेकपॉइंट हैश को टाइमस्टैम्प सेवाओं पर और एन्क्रिप्टेड कॉपी को S3-संगत स्टोरेज पर भेजते हैं; [एविडेंस प्रारूप](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/) देखें। पारदर्शिता लॉग, HSM-समर्थित साइनिंग और औपचारिक चेन-ऑफ-कस्टडी प्रमाणन लागू नहीं किए गए हैं।
+Local verification checks record signatures，the hash chain，attachments and the export manifest． The administrator holds the local signing key and can create another signed journal； an independently retained checkpoint detects replacement of the prefix it covers． Keep the key fingerprint and checkpoints with the recipient or an independent witness．
+
+For independently checked collection，choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)． Their verifiers check workflow provenance or hardware measurements in addition to archive integrity． Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies； the [evidence format](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) describes the checks for each mode．
 
 ## यदि आपको कोई समस्या संदेह हो
 
-मूल डेटा निर्देशिका को संरक्षित रखें और विश्लेषण के लिए एक अलग प्रति का उपयोग करें। सार्वजनिक मुद्दे में निजी टेलीग्राम डेटा या क्रेडेंशियल शामिल न करें। किसी स्वतंत्र सुरक्षा प्रमाणन का दावा नहीं किया जाता है।
+Preserve the original data directory and use a separate copy for analysis． Report the affected version，operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)，keeping account data and credentials private．

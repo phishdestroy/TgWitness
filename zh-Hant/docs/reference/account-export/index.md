@@ -31,6 +31,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 個人檔案照片歷史紀錄與限時動態預設不會被選中。若案件僅需訊息內容，請一併停用個人檔案與聯絡人功能。若附件或元資料非必要，在擷取過程中將其排除，可避免在本次匯出中保留另一份私人副本。
 
+Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+
 ## 簡介、涵蓋範圍與驗證
 
 每個工作任務都會凍結其選項與帳戶身分。清單與擷取的頁面均經過簽名；頁面收據會記錄雜湊值、游標位置、時間、附件結果及其前一筆收據。僅已提交的頁面才會推進進度。重新啟動／恢復時，系統會在繼續執行前檢查這些記錄。若帳戶變更、已簽名頁面變更或收據鏈不一致，則會被拒絕。在擷取過程中無法編輯選項：若需處理其他範圍的內容，請啟動另一個工作任務。
@@ -64,6 +66,14 @@ Ed25519 簽名與 SHA-256 雜湊值可偵測收集器提交相關位元組後所
 5. 預覽計數、警告及轉換後的訊息範例後，請明確確認建立。每個範例限 12 則訊息，且每則訊息的文字長度不得超過 2,000 個字元。此為範例，並非對結果的完整檢視。變更設定需再次進行預覽。預覽將於 15 分鐘後失效，且綁定於該管理員會話及原始的 ZIP；建立後無法重複使用。建立新的預覽將使同一工作與會話中的先前預覽失效。
 6. 檢視完整的結果 `index.html` 並 `messages.jsonl` 檔案。若發現其中包含不必要的資訊，請建立新的披露文件並設定更嚴格的排除條件。請勿直接編輯已簽名的 ZIP。
 
+### 篩選後未包含的訊息
+
+**預覽。**若揭露內容尚未完整，則顯示為不完整狀態。在每個至少包含一則已揭露訊息的聊天室中，選取範圍未涵蓋的訊息會以標記形式顯示， `[withheld by selection — rule: sender]` （或 `text`, `period`)。選擇**「選取範圍中未包含的訊息**」：每組連續未包含的訊息顯示一個標記（預設），或每則訊息顯示一個標記。標記僅包含規則與計數，絕不包含文字、發送者、日期或檔案。未包含任何已揭露內容的聊天室將被完全排除，因此本套件不會揭露其存在。
+
+已披露的回覆會說明其回應的對象：是本副本中包含的訊息、被選取範圍排除的訊息，或是原始匯出檔中不存在的訊息（可能是在匯出前已被刪除，或從未被匯出；匯出檔無法區分兩者）。 若已公開的回覆所回應的是一則被隱藏的訊息，該訊息將始終擁有專屬標記，因此該回覆會指向一則說明其為何為空的記錄。這三種狀態有別於刪除與資料收集缺口，後兩者屬於原始匯出資料的範疇。
+
+在 `messages.jsonl` （格式 `tgwitness-account-disclosure-v2`）中，每則訊息皆包含 `state`: `disclosed`，或 `withheld` 搭配 `rules` 以及 `count`。一則已公開的回覆包含 `reply_to` 與目標 `id` 以及 `state` (`disclosed`, `withheld`, `not_in_source`）。該清單會統計已公開的訊息、聊天紀錄、媒體檔案及 `withheld` 訊息。 `verify.py` 會拒絕攜帶內容的標記，以及指向封包中缺失記錄的回覆；版本 1 的封包驗證方式與先前相同。
+
 精簡格式省略了結構化的帳號個人資料、聯絡人、頭像、會話、動態、原始 Telegram 物件、轉發標頭、回覆引文、聯絡人卡片及位置元資料。它不包含原始的 JSONL 檔案、私人篩選設定、化名金鑰及身分映射。選取的文字、明確保留的身分資訊及包含的檔案仍可能包含與該篩選器中相同的名稱、ID 或短語；這些內容需要另行審查。 隱私政策與化名金鑰會以加密形式保留於該任務的本地金庫中；刪除任務將清除其相關的隱私披露記錄。公開政策記錄的是篩選次數，而非篩選值。聲明之目的在清單與 HTML 中屬公開資訊：明確的隱私標準，以及在化名模式下已知的隱藏身分，均會在此處被遮蔽，即使訊息文字被省略亦然。請確保目的陳述中不包含不必要的個人細節；未知的身分識別背景則可保留。
 
 其清單檔案會將衍生檔案、公開政策以及原始 ZIP 的雜湊值綁定在一起。透過驗證可確認資料的完整性，若來源檔案為本地提供，亦可驗證來源連結是否匹配：
@@ -75,12 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 來源連結本身並不能獨立證明該轉換過程已選取所有必要項目，或已移除所有可識別的細節。原始明文並未作為證明嵌入其中。要做出此判斷，仍需進行新的審查。
 
-## 資料保護與託管版 Capture 預覽功能
+## Sharing and hosted capture
 
-這些控制措施支持「目的限制」與「資料最小化」原則；但並非自動的法律合規性檢查。[《一般資料保護條例》（GDPR）第 5 條及第 25 條](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) 針對上述原則及「設計/預設保護」進行規範。關於合法依據、必要性、適用情況下的特殊類別條件、保存期限、安全性及收件者存取權限，仍需根據個案作出適當決策。僅憑訴訟目的，並不能使所有資料揭露均屬合法。假名化資料通常仍屬個人資料；請參閱 [EDPB 說明](https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en)。
+Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
 
-自由文字、日期、罕見事件及事實的組合，即使移除姓名後仍可能識別出特定人士。若訊息內容非必要，應優先省略文字；必要時則需檢視完整的衍生內容。務必保護原始資料與儲存庫的安全，與負責人就資料保留與分享達成共識，並記錄確切移交的 ZIP 內容。
-
-GitHub Actions 支援透過 Takeout 或一般 API 匯出整個帳號或選定聊天，也支援單一聊天日誌．[GitHub Actions](https://phishdestroy.github.io/TgWitness/docs/capture/) 指南說明設定驗證與 120 分鐘限制．本機匯出和分享副本不繼承 GitHub 證明，模擬測試不代表已通過真實 Telegram 帳號驗證．
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)．
 
 [證據格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/) · [案例報告](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)

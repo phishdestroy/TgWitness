@@ -8,6 +8,8 @@ Alle Bildschirme des Panels: Chats, Tagebuch, Quellen, Exporte, Extras, Schutzmo
 
 Was die einzelnen Bildschirme bewirken, was sie in das signierte Protokoll schreiben und wo sich die ausführliche Anleitung befindet. Das Fenster zeigt jeweils einen Arbeitsbereich an: ein Telegram-Konto mit eigenen Quellen, einem eigenen Protokoll und einem eigenen Signaturschlüssel. Mit dem Auswahlfeld oben in der Seitenleiste kann man zwischen den Arbeitsbereichen wechseln. Die Adresse enthält den Arbeitsbereich (`?ws=…`); solange die Adresse, der Auswähler und das geladene Konto nicht übereinstimmen, bleiben Aktionen gesperrt.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Finden Sie sich zurecht
 
 Die täglichen Bereiche befinden sich oben in der Seitenleiste, **„Konten“** ist unter **„Arbeitsbereich“** zu finden, und alles andere ist unter **„Weitere Tools & Einstellungen“** zu finden. Der Schalter **für die Oberflächenebene** in der oberen Leiste legt fest, wie viele Bereiche angezeigt werden:

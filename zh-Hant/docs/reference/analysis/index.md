@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 [工作流程指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-使用**日誌**可進行本地搜尋，無需使用 AI。若要使用**查詢檔案庫**，請先在**整合功能**中啟用並設定服務供應商。工作區選擇器用於選擇帳戶； 表單則用於選擇聊天室及觀察期間。檢索在本地執行。 輸入精確短語或網域可縮小檢索範圍；輸入訊息 ID 可查詢已儲存的 版本。請檢視摘錄，並開啟其日誌記錄或上下文。 本工具不包含向量資料庫，亦不會自動執行任何 Telegram 操作。
+使用**「日誌」**進行不依賴 AI 的本地搜尋；[全文搜尋](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/)（預覽） 可匹配詞形、短語、網域及 @用戶名。若要使用「**詢問存檔」**功能，請先在「**整合**」中啟用 並設定提供者。工作區選擇器用於選擇 帳戶；表單則用於選擇聊天室及觀察期間。 檢索作業 在本地執行。精確短語或網域可縮小檢索範圍；輸入訊息 ID 可查詢已儲存的 版本。檢視摘錄內容，並開啟其日誌記錄或上下文。 本工具不包含向量資料庫，亦不執行自動 Telegram 操作。
 
 ## 服務提供者與同意聲明
 
@@ -24,7 +24,7 @@ Ollama 使用其已記錄的 [`/api/chat` 端點](https://docs.ollama.com/api/ch
 
 ## 來源與限制
 
-檢索功能會透過有限範圍的詞彙搜尋，分析已儲存的訊息內容。該功能最多會返回 24 個來源，並標示被截斷的摘錄或不完整的結果集。此 時間範圍僅指**觀察期間**，並非聲稱 Telegram 歷史紀錄 完整無缺。工作區範圍內的事件，不會包含在聊天室範圍的存取權限中。 缺失的資料將被描述為「在現有存檔中未找到」。
+當[全文索引](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#ask-the-archive-and-mcp)建置完成時，檢索功能將 利用該[索引](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#ask-the-archive-and-mcp)：在選定的聊天室中，根據詞形提供最佳匹配結果。關於 近期變更或單則訊息版本的查詢，以及在索引 建置期間的搜尋，則會對最新記錄進行有限詞彙搜尋。預覽功能會標示 該方法名稱。檢索結果最多返回 24 個來源；長篇文字會以匹配內容為基準進行截取。 截斷的摘錄與不完整的結果集均會標示。該 時間段僅指**觀察期間**，並非聲稱 Telegram 歷史紀錄 完整無缺。工作區範圍內的事件不會包含在聊天室範圍的存取權限中。 缺失的資料將被描述為「在可用存檔中未找到」。
 
 該模型不接收任何工具。其來源 ID 會與選定的 記錄進行比對，雜湊值會重新核對，且引用的字串必須出現在這些記錄中。 若出現未知 ID、引文內容變更或未經引用的主張，則會駁回該答案。本應用程式 會產生連結；模型生成的 URL 不得用作引用來源。這些檢查 旨在確認來源的存在與引文的準確性，而非推論的真實性。 在依賴推論結果之前，請務必根據原始紀錄進行核對。
 

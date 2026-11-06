@@ -101,7 +101,7 @@ Trong ví dụ minh họa:
 | Tệp lưu trữ tương tự | Đã hoàn tất các biên nhận phương tiện truyền thông số #151 và #209 | Các giá trị SHA-256 đầy đủ trùng khớp với các byte được lưu giữ |
 | Nguồn thông tin kênh | #101 và #188 | Không được quy cho người dùng 71001 là tác giả của bài đăng trên kênh nếu không có thông tin xác định người gửi |
 
-So sánh các giá trị băm của tệp đính kèm và các tham chiếu tin nhắn liên quan. Các tệp giống hệt nhau không đủ để xác định người tạo, người chuyển tiếp hoặc người vận hành chung. Chỉ riêng việc có cùng tên và hình đại diện tương tự không đủ để kết luận rằng hai ID Telegram thuộc về cùng một người.
+Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
 
 Lưu giữ các ghi chú làm việc của nhóm trên [Case Board](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/): đánh dấu các bản ghi mà bạn dựa vào, chẳng hạn như #146, #188 và #205, đánh dấu chuỗi đích chính xác, và lưu một đoạn của mọi hành động được ghi lại giữa hai bản ghi hoặc trong một khoảng thời gian. Các ghi chú và trạng thái lưu giữ quá trình rà soát của nhóm trong lịch sử đã ký riêng biệt, có thể nhận diện độc lập với các quan sát từ nguồn.
 
@@ -161,6 +161,6 @@ Giữ nguyên kết quả xác minh thực tế và các bằng chứng gốc. X
 | --- | --- | --- |
 | Tranh chấp về đơn hàng/thanh toán do bot xử lý | Thông báo đăng ký → xem trước liên kết đã lưu → tham số khởi động bot → phiên bản tin nhắn và bàn phím → biên nhận gọi lại trên bảng điều khiển → theo dõi tin nhắn riêng tư/nhóm | Dòng thời gian đề nghị/phản hồi được ghi nhận và các nguồn tin đã được xác minh; riêng một liên kết thanh toán không đủ để chứng minh việc thanh toán đã diễn ra |
 | Các tin nhắn đã bị xóa sau khi xảy ra sự cố | Tất cả các cuộc trò chuyện bị ảnh hưởng → bản gốc/bản chỉnh sửa đã được lưu trữ → kết quả xóa hoặc không còn tồn tại khi kiểm tra lại → phương tiện truyền thông được bảo toàn → phạm vi bao quát và các góc nhìn khác từ tài khoản | Các phiên bản được lưu giữ và các khoảng thời gian không xác định được nêu rõ; không có đối tượng xóa tin nhắn nào được giả định |
-| Một người tham gia thay đổi tên trong các cuộc trò chuyện | ID người gửi dạng số → lịch sử tên/tên người dùng → các phản hồi → các cuộc trò chuyện khác được ghi nhận → các đích đến/tệp tin được trích dẫn | Dòng thời gian hoạt động của tài khoản Telegram được trích dẫn, trong đó các giả thuyết về danh tính và mối quan hệ trong thế giới thực được tách biệt rõ ràng |
+| Một người tham gia thay đổi tên trong các cuộc trò chuyện | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
 
 [Tham chiếu bộ sưu tập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/) · [Xác minh hồ sơ cá nhân](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#people-profiles) · [Việc chuyển giao bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#investigation-handoff) · [Đã hoàn tất quá trình xác thực](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/)

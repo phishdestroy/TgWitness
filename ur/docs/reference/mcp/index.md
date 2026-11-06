@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/
 
 ایک MCP کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے منسلک کریں، جس کی رسائی ختم ہونے والی اور منسوخ کی جانے والی ہو۔
 
-کسی تجزیہ کار کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے منسلک کریں۔ TgWitness **پینل پراسیس میں `/mcp` پر Streamable HTTP** فراہم کرتا ہے۔ ہر کنکشن کا اپنا الگ ٹوکن، میعادِ ختم ہونے کا وقت اور مجاز ٹولز ہوتے ہیں۔ MCP ٹیلی گرام پیغامات نہیں بھیج سکتا، ترتیبات تبدیل نہیں کر سکتا اور نہ ہی دستخط شدہ جرنل میں ترمیم کر سکتا ہے۔
+ایک تجزیہ کار کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے جوڑیں۔ TgWitness **پینل کے عمل میں `/mcp` پر Streamable HTTP** فراہم کرتا ہے۔ ہر کنکشن کا اپنا ٹوکن، میعادِ ختم اور مجاز ٹولز ہوتے ہیں۔ MCP ٹیلیگرام پیغامات بھیجنے، ترتیبات تبدیل کرنے یا دستخط شدہ جرنل میں ترمیم کرنے کے قابل نہیں ہے۔ یہی کنکشنز [کمانڈ لائن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/) کے ساتھ بھی کام کرتے ہیں۔
 
 [ورک فلو گائیڈ](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 | --- | --- |
 | `list_workspaces` | مجاز ورک اسپیسز |
 | `list_chats` | مجاز چیٹس |
-| `search_messages` | منتخب مدت کے اندر محفوظ کردہ پیغام کا متن |
+| `search_messages` | منتخب مدت کے دوران محفوظ کردہ پیغام کا متن؛ `ranked=true` [مکمل متن کی تلاش](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/) استعمال کرتا ہے (لفظی شکلوں کے ساتھ، بہترین مماثل پہلے، `next_offset` صفحہ بندی) |
 | `get_message_versions` | کیپچر کیے گئے ورژنز اور حذف کیے جانے کے مشاہدات |
 | `get_message_context` | قریبی کیپچر کیے گئے پیغام کی IDs |
 | `get_journal_event` | اپنے سورس ریفرنس کے ساتھ ایک صاف شدہ ریکارڈ |
-| `get_capture_status` | کولیکشن اسٹیٹ اور مجاز کوریج ریکارڈز |
+| `get_capture_status` | جمع کرنے کی حالت، اجازت یافتہ کوریج ریکارڈز اور `gap_summary`: پیغام نمبر جو کبھی دیکھے نہیں گئے، فی چینل یا سپر گروپ اور اکاؤنٹ بھر کے تسلسل کے لیے ([تفصیلات](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#missing-message-numbers-gap_summary))؛ کسی چیٹ کو منتخب کریں تاکہ اس کے درج خلاؤں کو دیکھ سکیں |
+| `get_activity_stats` | UTC گھنٹے اور ہفتے کے دن کے مطابق پیغامات، عروج کے دن، ترمیم اور حذف شدہ شیئرز، بھیجنے والے، ڈومینز اور `@handles`، کوریج ([تفصیلات](https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/#activity-statistics)) کے ساتھ |
+| `export_messages` | صرف کمانڈ لائن، بطورِ ڈیفالٹ منتخب نہیں: streams محفوظ شدہ مشاہدات کو JSON Lines کے طور پر محفوظ کرتا ہے ([تفصیلات](https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/#export))؛ MCP کے ذریعے دستیاب نہیں۔ |
 
 `tools/list` صرف وہی ٹولز واپس کرتا ہے جن کی اس کنکشن کو اجازت دی گئی ہے۔ دیگر ٹولز کی کالز مسترد کر دی جاتی ہیں۔ اس بلڈ میں گروپ کانٹیکسٹ، ایپی سوڈ، ٹرمینالوجی اور ریپلائی چین کے ٹولز پیش نہیں کیے گئے ہیں؛ ان کا الگ کانٹیکسٹ پیک بیک اینڈ شامل نہیں ہے۔
 

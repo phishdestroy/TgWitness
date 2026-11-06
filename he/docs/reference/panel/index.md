@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/panel
 
 מה כל מסך עושה, מה הוא רושם ביומן החתום והיכן נמצא המדריך המפורט . הלוח מציג סביבת עבודה אחת בכל פעם: חשבון Telegram אחד עם המקורות, היומן ומפתח החתימה שלו. הבורר בחלק העליון של סרגל הצד מאפשר מעבר בין סביבות עבודה. הכתובת נושאת את סביבת העבודה (`?ws=…`); כל עוד הכתובת, הבוחר והחשבון הטעון אינם תואמים, הפעולות נותרות חסומות.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## התמצא באתר
 
 הקטגוריות היומיות נמצאות בחלק העליון של סרגל הצד, **"חשבונות"** נמצאת תחת **"סביבת עבודה"** , וכל השאר נמצא תחת **"כלים והגדרות נוספים"** . מתג **רמת הממשק** בסרגל העליון קובע כמה קטגוריות יופיעו:

@@ -4,6 +4,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/verif
 
 Jonli Telegram sinovi, avtomatlashtirilgan tekshiruvlar, brauzer tekshiruvlari va hali tasdiqlanmagan narsalar.
 
+Each result below applies to its recorded revision and environment. The [current capability matrix](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) separates implementation, published downloads and remaining qualification.
+
+## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+
+The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+
+- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
+- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
+- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
+- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
+- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+
+An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+
 ## Live Phala Cloud joylashtirish · 2026-yil 4-noyabr
 
 `--provider phala --quick-tunnel` haqiqiy **Phala Cloud** (`tdx.small`, US-WEST-1 mintaqasi) bo'sh ish maydoni uchun Phala Cloud API kaliti, haqiqiy ntfy.sh, GitHub va Intel PCS bilan ishladi. CVM `df7d860c` (v0.8.1) commitini o'rnatdi; deploy, verify va destroy buyruq satridan quyidagi tuzatishlar bilan ishga tushirildi. Yetti CVM jami taxminan 1,9 AQSh sentiga tushdi.
@@ -153,10 +167,16 @@ Komanda: `python tools/check_capacity.py --events 10000 --chats 100`
 
 Bu Windows mezbonidagi mahalliy ketma-ket yozib olish/eksport yo'lini o'lchaydi. U MTProto yetkazib berishni, bir vaqtda bir nechta hisoblarni, Telegramning cheklovlarini, media fayllarni, uzoq muddatli ish yukini yoki haqiqiy suhbatlarning kafolatlangan sonini o'lchamaydi. Ushbu o'lchov yakuniy oflayn vaqt tamg'alari vositalaridan oldin amalga oshirilgan bo'lib, u o'lchangan xabar yo'lini o'zgartirmaydi.
 
+## Bir million xabarda to'liq matnli qidiruv · 2026-yil 5-noyabr
+
+Komanda: `python tools/bench_fulltext.py --messages 1000000 --work <empty directory>`
+
+200 ta suhbatda 1 000 000 ta sintetik xabardan iborat deterministik imzolangan jurnal (rus so'z shakllari, ukrain, ingliz, xitoy, yapon, havolalar va foydalanuvchi nomlari) 71 soniyada indekslangan; indeks 1,50 GiB jurnalga qo'shimcha ravishda 58 MiB joy egallagan. Eng mos qidiruvlar 9 dan 190 ms gacha (mediана) vaqt oldi, avvalgi substring qidiruvida esa 2,4 dan 3,2 soniyagacha vaqt ketgan. To'liq natijalar, apparat va cheklovlar: [To'liq matnli qidiruv](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#benchmark). `tools/test_fulltext.py` shuningdek, to'liq matnli qidiruvdan oldin yaratilgan imzolangan arxivni ham tasdiqlaydi (`tools/fixtures/evidence-before-fulltext.zip`) hozirgi verifikator yordamida, shuningdek, to'liq matnli qidiruvdan oldin yaratilgan imzolangan arxivni (2) o'sha arxivning o'z `verify.py`.
+
 ## Qolgan malaka
 
 Saqlangan jonli jurnal haqiqiy yig'ish, tahrirlar, o'chirish bildirishnomalari, ilovalar, qayta tekshirishlar va tezlik chegaralashni boshqarishni qayd etadi. U to'liq yetkazib berilishni yoki rollarning ko'rinishi, reaksiya qiluvchi aktyorlar, uzoq muddatli FloodWait, hisob taqiqlanishi va tarmoq/jarayon uzilishidan tiklanish bo'yicha nazorat matritsasini aniqlamaydi. QR-token chiqarilishi yakunlangan mobil QR tasdig'idan alohida bo'lib qoladi.
 
-Docker build/run, Linux/macOS o'rnatilishi, barqaror yuqori yuk, mustaqil xavfsizlik ko'rib chiqilishi, haqiqiy mustaqil TSA javobi, sertifikatni bekor qilish/arxivni tasdiqlash va sud-tibbiyot sertifikatlash yozib olingan malaka doirasidan tashqarida qoladi. Saqlangan MTProto holati va orqaga yetish amalga oshirilgan; atomik barqaror qayta ijro etish hali joriy etilmagan. Ma'muriy-log yig'ish, qo'shimcha reaktorlar ro'yxatlari va ustuvor qisqa so'rovlar alohida xususiyatlar bo'lib qoladi. Boshqariladigan malaka matritsasi uchun [jonli qabulni](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) ko'ring.
+Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
 
 Mahalliy batafsil kvitansiyalar va skrinshotlar test-results/ (Git tomonidan e'tiborsiz qoldirilgan) yo'lida joylashgan. docs/assets/ dagi ommaviy skrinshot faqat badiiy namoyish ma'lumotlarini o'z ichiga oladi.

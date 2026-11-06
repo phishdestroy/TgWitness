@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/high-
 
 Um servidor seguro, disponível 24 horas por dia, 7 dias por semana, na Hetzner ou na Phala Cloud, DNS Gateway e verificações que terceiros podem repetir.
 
-Um diário assinado comprova que os registros não foram alterados **após** a assinatura. Para casos graves, a próxima questão é se alguém poderia ter manipulado os dados **antes** da assinatura: quem executou o coletor, em qual máquina e se alguém fez login nele. Esse modo opcional implanta o coletor de forma que um terceiro possa verificar isso, utilizando registros mantidos pelo provedor de nuvem e pela Cloudflare, em vez de confiar apenas na palavra do operador.
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 O uso normal local e do Docker permanece inalterado. Nada aqui é executado a menos que você faça a implantação com `python -m tgwitness.cloud`, e o coletor lê seu host somente quando a implantação define `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Diagrama de fluxo · Operador → Servidor, firewall sem regras de entrada (API 
 | A chave de assinatura foi criada nesse servidor | A chave assina uma declaração indicando o ID do servidor do provedor e o hash do `cloud-init` que recebeu | Collector, verificado em relação ao provedor |
 | O diário pertence a essa chave e a esse servidor | Cada início de processo na evidência ZIP contém a medição do host para aquele servidor | Evidências ZIP |
 
-As métricas do host (ouvintes e processos SSH, sessões atuais, logins no `wtmp`, a inicialização) são relatadas pelo próprio coletor e são assinadas a cada início de processo e nos `host.state` registros sempre que houver alterações. Um usuário com privilégios de root no servidor poderia falsificá-las; elas complementam os registros do provedor e da Cloudflare, em vez de substituí-los.
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## Provedores
 
@@ -269,11 +269,8 @@ O Gateway DNS abrange o resolvedor do sistema. O DNS sobre HTTPS na porta 443 pa
 
 A Cloudflare não tem acesso ao conteúdo criptografado do Telegram, a outros dispositivos na conta do Telegram (a lista de dispositivos do modo de evidência os registra a partir do lado do Telegram) nem ao hipervisor do provedor.
 
-## O que isso não estabelece
+## Reading the deployment result
 
-- O provedor e sua equipe controlam o hipervisor, os discos e a rede.
-- As medições do servidor são auto-relatadas pelo coletor.
-- Os conteúdos das regras de firewall anteriores não constam em todos os logs dos provedores; apenas a Linode mantém as versões das regras.
-- Isso não traz nada de novo sobre a autenticidade das mensagens; consulte a seção [“Evidências](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/)”.
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-Ainda não foi testado com contas reais: uma implantação em seu próprio domínio (túnel do Cloudflare e DNS), os outros provedores, uma implantação de depuração e `lock`, uma conta do Telegram nesse servidor, e as atualizações em tempo real de versões posteriores por meio de um túnel rápido. Verifique a primeira implantação em cada provedor com `plan`, uma implantação de depuração e `verify` antes de confiar nela em um caso.
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/pt/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

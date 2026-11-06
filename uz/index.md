@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/
 
 [Ochiq manba ／ v0.9.1](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/)
 
-Telegram chatlarini har bir tahrir va o＇chirish bilan saqlang， so＇ng istalgan kishi tekshira oladigan yozuvni topshiring．
+Export Telegram chats，preserve their history，and share a signed archive others can verify．
 
 [demo ochish](https://phishdestroy.github.io/TgWitness/demo/?lang=uz)[sozlash bo＇yicha qo＇llanma](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=uz)
 
 Soxta ma＇lumotlar， Telegram＇ga kirish shart emas．
 
- [GitHub Actions orqali yig＇ish （dastlabki versiya）](https://phishdestroy.github.io/TgWitness/uz/docs/capture/) [S3 tashqi nusxa： sozlash va tiklash](https://phishdestroy.github.io/TgWitness/uz/#s3)
+ [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/uz/docs/reference/account-export/) [GitHub Actions orqali yig＇ish （dastlabki versiya）](https://phishdestroy.github.io/TgWitness/uz/docs/capture/) [S3 tashqi nusxa： sozlash va tiklash](https://phishdestroy.github.io/TgWitness/uz/#s3)
 
 VAQT ORQALI XABAR＃0042
 

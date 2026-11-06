@@ -1,0 +1,83 @@
+# コマンドライン
+
+Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/
+
+スクリプトやエージェントからメッセージを検索、コンテキストの読み取り、アクティビティの集計、保存済みメッセージのエクスポートが可能で、--json 出力、安定した終了コード、スコープ付きの読み取り専用トークンをサポートしています。
+
+[読み取り専用 MCP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/) · [全文検索](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**プレビュー。** `tgwitness search`, `context`, `messages`, `stats` および `export` スクリプトやAIエージェント向けに、 保存された観測データを読み取ることができます。ただし、 Telegramへの送信、設定の変更、署名付きジャーナルの修正は行えません。
+
+この場合 `--json`、stdoutにはJSONドキュメントが1つだけ出力されます（`export` JSON Lines形式で出力されます）。 進行状況、ヒント、エラーはstderrに出力されます。終了コードは安定しています：
+
+| コード | 意味 |
+| --- | --- |
+| `0` | 成功（結果が空の場合も含む） |
+| `1` | 失敗：パネルにアクセスできない、データが読み取れない、エクスポートが中断された |
+| `2` | 使用上のエラーまたは無効なリクエスト：日付が不正、不明なオプション、検索インデックスがオフ |
+| `3` | 現在利用不可：ワークスペースが実行中のパネルで開かれているか、パネルから「後で再試行してください」というメッセージが表示されています（レート制限、タイムアウト）。 |
+| `4` | アクセス拒否：トークンの欠落、有効期限切れ、または失効、対象範囲外のチャット、許可されていないツール |
+
+## 読み方の2つの方法
+
+**パネル経由（`--url`）。**このコマンドは、MCPと同じスコープ付きアーカイブAPIを使用します。 「**Integrations」→「MCP」**で接続を作成します。ワークスペースとチャット、 ツール、有効期限を選択し、トークンを1回コピーしてください。この接続は読み取り専用で、 指定されたチャットに限定され、1分あたり60リクエストにレート制限が設けられており、 いつでも取り消しまたは更新が可能です。パネルのログイントークンやTelegramの認証情報は、ここでは使用できません。
+
+```
+export TGWITNESS_URL=https://panel.example.org      # default http://127.0.0.1:8787
+export TGWITNESS_MCP_TOKEN=tgw_mcp_...              # or --token-file path
+tgwitness search 'перевод карта' --json
+```
+
+リモートパネルには HTTPS が必要です。プレーン HTTP が受け入れられるのは、 `127.0.0.1`, `localhost` および `::1`に限り、プレーンHTTPが受け入れられます。プロキシ環境変数は無視され、リダイレクトは 拒否されるため、トークンは指定したアドレスにのみ到達します。
+
+**停止中のワークスペースから直接実行（`--data-dir`）。**トークンを使用せずに、 完全なローカルアクセス権でデータディレクトリを読み込みます。データディレクトリのコピー上で、または 収集が停止している間に使用してください。署名付きレコードは決して変更されません。パネルと同様に、 ワークスペースを開くと、そこから派生したインデックスが最新の状態に更新される場合があります。パネルでワークスペースが開かれている場合、このコマンドは コード `3`で終了します。代わりにパネル経由で読み込んでください。 `--data-dir`, `TGWITNESS_DATA`, `./data/live` 、またはコマンドを実行しているインストールのデータディレクトリが使用されます。
+
+`--workspace ID` ワークスペースを選択します（デフォルト `default`). `tgwitness messages
+--workspaces` 閲覧可能なワークスペースを一覧表示します。
+
+## コマンド
+
+| コマンド | 結果 |
+| --- | --- |
+| `tgwitness search QUERY [--chat ID] [--since] [--until] [--any] [--limit N] [--offset N]` | 一致度の高い順に表示し、語形、引用符で囲まれた完全なフレーズ、ドメイン、および `@username` （[構文](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#search-syntax)） |
+| `tgwitness search QUERY --exact [--before SEQ]` | 正確なテキストを、最新のものから順に、インデックスを除いて記載してください。 |
+| `tgwitness context CHAT_ID MESSAGE_ID` | 前後10件のメッセージID範囲内の保存済みメッセージ |
+| `tgwitness messages` | 閲覧可能なチャット |
+| `tgwitness messages CHAT_ID [--since] [--until] [--before SEQ]` | チャットの保存済みメッセージ（新しい順） |
+| `tgwitness messages CHAT_ID --message ID` | 1つのメッセージについて、保存されたすべてのバージョンおよび削除記録 |
+| `tgwitness stats [--chat ID] [--sender ID] [--since] [--until] [--top N]` | 活動統計は以下の通りです。 |
+| `tgwitness export [--chat ID] [--since] [--until] [--output FILE]` | 記録された観測データは、ジャーナルの順序に従って JSON Lines 形式で保存されます |
+
+日付は `2026-10-01` （UTC 0時）またはタイムゾーンを明記したISO形式の時刻 `2026-10-01T09:00+03:00`。 `search`, `messages` および `export` については、 観測時刻を選択します。各ページには最大50件のレコードが格納されます：ランク付け検索については `next_offset` (`--offset`) を参照して 順位付き検索を行い、 `next_before` (`--before`) については他の箇所を参照してください。
+
+Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+
+各メッセージの結果には `untrusted_content: true`、ワークスペース、チャット、および メッセージID、ジャーナルのシーケンス番号、保存されたレコードのハッシュ、パネルへのリンクが含まれます。編集、 削除通知、および `missing_on_recheck` は個別のレコードとして扱われます。レコードが存在しない からといって、そのイベントが決して発生しなかったことを証明するものではありません。
+
+### アクティビティ統計
+
+`stats` 対象範囲内の1つのチャット、1人の送信者、またはすべてのチャットについて、保存された観測データをカウントします：
+
+- UTC時間別および曜日別（月曜日を先頭）のメッセージ数、最も利用が集中する時間帯および曜日；
+- 編集、削除、および `missing_on_recheck` 共有；
+- 送信者、メッセージ数、および最初のメッセージと最後のメッセージの時刻；
+- 最も頻度の高いドメインおよび `@handles`、保存された各バージョンにおいて、メッセージごとに1回ずつカウントされた もの；
+- 対象範囲： `coverage.gap` 記録、およびワークスペース全体へのアクセスに関する、 コレクターのハートビートが接続されていない期間（`collector_liveness`).
+
+期間には、**Telegramが報告するメッセージの時刻**が選択されます。時間および曜日のカウントは、 送信者のタイムゾーンを推定する一助となりますが、それを確定するものではありません。数値は リクエストに応じてジャーナルから計算されるものであり、保存されることはありません。各結果には、 アクセス範囲がワークスペースにまたがる場合、その範囲をカバーするジャーナルのヘッダー名が 記載されます。パネルを介して5秒間、または `--timeout` ローカルで（デフォルトは30秒）経過すると読み取りが停止します。その後、 `complete` はfalseとなり、 `partial` 未読の最初のレコードが指定されます。その場合、 最新のレコードのみがカウントされます。
+
+### エクスポート
+
+`export` 保存された観測結果（新しいメッセージ、スナップショット、 編集、復元されたメッセージ、削除通知、 `missing_on_recheck` 保存されたメディア レコード）について、ジャーナルの順序に従って1つのJSONオブジェクトを書き出します。各行は他の結果と同じフィールドを持ち、 全文が含まれます。 `--output`、ファイルは `.partial` 名前で書き込まれ、 パネルの完了記録が記録された後にのみ名前が変更されます。エクスポートが中断された場合、 ファイルは残されず、コード `1`. `--output` は、既存のファイルを上書きすることはありません。 `--output` および `--json`を指定した場合、標準出力には要約（レコード数、最後のジャーナル シーケンス、およびワークスペース全体へのアクセス時にはジャーナルの先頭）が表示されます。
+
+パネル経由でのエクスポートには、「**メッセージのエクスポート」**を許可する接続が必要です **（コマンドラインのみ）**。これはデフォルトでは選択されていません。このファイルは作業用コピーであり、証拠ではありません。検証可能な 引き渡しを行うには、「**エクスポート**」にある署名付きエクスポートを使用してください。 `python -m tgwitness.verify`検証が行われます。
+
+The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+
+## エージェントスキル
+
+[`.agents/skills/tgwitness-cli/SKILL.md`](https://github.com/phishdestroy/TgWitness/blob/main/.agents/skills/tgwitness-cli/SKILL.md) には、エージェント向けに、これらのコマンドの使用方法、記録の引用方法、および キャプチャされたテキストの扱い方が記載されています。エージェントは `.agents/skills` リポジトリのチェックアウトから読み込みます。 Claude Codeの場合は、 `tgwitness-cli` フォルダを `.claude/skills/` プロジェクト内の または `~/.claude/skills/`.
+
+## MCP およびコマンドライン
+
+両者とも、同じ接続、スコープチェック、および制限を使用しています。MCPの結果は 64 KiBのページ1つに制限されているため、MCPでは一括エクスポート機能は提供されていません。コマンドラインからストリーム出力されます。 `get_activity_stats` は両方で利用可能です。

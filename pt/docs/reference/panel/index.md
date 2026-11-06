@@ -8,6 +8,8 @@ Todas as telas do painel: bate-papos, diário, fontes, exportações, Extras, mo
 
 O que cada tela faz, o que ela grava no diário assinado e onde está o guia detalhado. O painel exibe um espaço de trabalho por vez: uma conta do Telegram com suas próprias fontes, diário e chave de assinatura. O seletor na parte superior da barra lateral alterna entre os espaços de trabalho. O endereço contém o espaço de trabalho (`?ws=…`); enquanto o endereço, o seletor e a conta carregada não coincidirem, as ações permanecem bloqueadas.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Navegue pelo site
 
 As seções diárias ficam na parte superior da barra lateral, **“Contas”** está em **“Espaço de trabalho”** , e todo o restante está em **“Mais ferramentas e configurações** ”. O seletor **de nível de interface** na barra superior determina quantas seções são exibidas:

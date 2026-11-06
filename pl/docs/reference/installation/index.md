@@ -44,6 +44,30 @@ Ustaw `TGWITNESS_INSTALL_DIR` , aby wybrać inny folder. Zainstalowane wersje i 
 
 Każda instalacja zawiera **pliki START-HERE.html** i **START-HERE.txt** z lokalnymi ścieżkami, poleceniami i linkami do repozytorium. Uruchom `tgwitness guide` , aby otworzyć przewodnik. W systemie Windows użyj `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` w PowerShellu.
 
+## Ustawienia wyszukiwania pełnotekstowego
+
+[Wyszukiwanie pełnotekstowe](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/) (wersja podglądowa) nie wymaga konfiguracji. Jego indeks jest tworzony w tle po aktualizacji.
+
+| Zmienna lub polecenie | Efekt |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | Domyślnie: indeks jest przechowywany w `search/fulltext.sqlite3` każdego obszaru roboczego |
+| `TGWITNESS_FULLTEXT=memory` | Brak pliku indeksowego; indeks jest odbudowywany przy każdym uruchomieniu |
+| `TGWITNESS_FULLTEXT=off` | Brak indeksu; wyszukiwanie wyłącznie po dokładnym tekście |
+| `tgwitness index status` | Stan indeksu każdego obszaru roboczego |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | Odbuduj wszystkie indeksy na podstawie podpisanego dziennika |
+
+Wybór administratora w sekcji **Dziennik → Filtry → Indeks wyszukiwania** zastępuje zmienną dla danego obszaru roboczego. Polecenia wyszukują katalog danych instalacji, w której są uruchamiane; w pozostałych przypadkach należy dodać `--data-dir` ścieżkę z `tgwitness paths`. Aby uzyskać pełny słownik języka ukraińskiego (dane na licencji GPL-3.0), zainstaluj `pymorphy3-dicts-uk` w środowisku Python tej instalacji.
+
+## Dostęp z wiersza poleceń
+
+[Wiersz](https://phishdestroy.github.io/TgWitness/pl/docs/reference/cli/) [poleceń](https://phishdestroy.github.io/TgWitness/pl/docs/reference/cli/) (wersja podglądowa) odczytuje archiwum w poszukiwaniu skryptów i agentów.
+
+| Zmienna | Efekt |
+| --- | --- |
+| `TGWITNESS_URL` | Adres panelu dla `tgwitness search`, `context`, `messages`, `stats` oraz `export`; domyślnie `http://127.0.0.1:8787` gdy ustawiono token |
+| `TGWITNESS_MCP_TOKEN` | Zarchiwizuj token połączenia z **sekcji Integracje → MCP**, udostępniony klientom MCP; `--token-file` zamiast tego odczytuje go z pliku |
+| `TGWITNESS_DATA` | Katalog danych odczytywany bezpośrednio, gdy nie podano `--data-dir`, adresu URL ani tokenu |
+
 ## Sprawdź przed uruchomieniem
 
 Jednowierszowe polecenie polega na protokole HTTPS w przypadku skryptu początkowego. Skrypt ten sprawdza element SHA-256 oraz podpis RSA projektu w aplikacji i ograniczeniach przed instalacją. Można również najpierw pobrać i zweryfikować skrypt początkowy.

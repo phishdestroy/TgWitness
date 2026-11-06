@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 
 ארכיון ושילובים
 
-[הפניה ל-Case Board](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/)[ניתוח ארכיונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/analysis/)[MCP לקריאה בלבד](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/)[OCR מקומי ותמלול](https://phishdestroy.github.io/TgWitness/he/docs/reference/media-analysis/)[webhooks יוצאים](https://phishdestroy.github.io/TgWitness/he/docs/reference/webhooks/)[תצוגה ציבורית](https://phishdestroy.github.io/TgWitness/he/docs/reference/showcase/)
+[הפניה ל-Case Board](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/)[ניתוח ארכיונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/analysis/)[חיפוש בטקסט מלא](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/)[MCP לקריאה בלבד](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/)[שורת הפקודה](https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/)[OCR מקומי ותמלול](https://phishdestroy.github.io/TgWitness/he/docs/reference/media-analysis/)[webhooks יוצאים](https://phishdestroy.github.io/TgWitness/he/docs/reference/webhooks/)[תצוגה ציבורית](https://phishdestroy.github.io/TgWitness/he/docs/reference/showcase/)
 
 ראיות
 

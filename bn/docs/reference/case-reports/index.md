@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. মূল ZIP ফাইল এবং তাদের হ্যাশ সংরক্ষণ করুন। প্রতিটি ধারক, স্থানান্তর, তারিখ এবং উদ্দেশ্য রেকর্ড করুন। সংশ্লিষ্ট অপারেটর বিবৃতি এবং কেস নোটগুলোও সংরক্ষণ করুন।
 5. গোপনীয় ভেরচুয়াল মেশিনের জন্য উদ্ধৃতি, চ্যালেঞ্জ, ইন্টেল সার্টিফিকেট চেইন, পরিমাপ, সঠিক উৎস এবং কী-হ্যান্ডলিং শর্তাবলী সংরক্ষণ ও স্বতন্ত্রভাবে যাচাই করুন। পর্যালোচিত আর্টিফ্যাক্টগুলোর সাথে এটেস্টিশন যাচাইয়ের ফলাফল সংরক্ষণ করুন।
 
-বিশ্বাসযোগ্যতার অনুমান এবং উৎস দাবি, পরিচয়, সময় ও সংগ্রহের কভারেজের পৃথক মূল্যায়নের [যাচাইয়ের পরিধি](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope) দেখুন।
+See [verification scope](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## প্রাপ্তকারী পর্যালোচনা
 

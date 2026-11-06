@@ -134,7 +134,7 @@ Analise cada verificação separadamente, juntamente com a cobertura da coleta r
 4. Preserve os arquivos ZIP originais e seus hashes. Registre cada detentor, transferência, data e finalidade. Mantenha as declarações atribuídas aos operadores e as notas do caso junto com eles.
 5. Para mensagens de voz confidenciais, preserve e verifique de forma independente a citação, o desafio, a cadeia de certificados da Intel, as medições, a fonte exata e as condições de manuseio das chaves. Mantenha o resultado da verificação do atestado junto com os artefatos revisados.
 
-Consulte [o escopo de verificação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope) para as premissas de confiança e a avaliação separada das alegações das fontes, identidade, tempo e cobertura da coleta.
+See [verification scope](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Revisão do destinatário
 

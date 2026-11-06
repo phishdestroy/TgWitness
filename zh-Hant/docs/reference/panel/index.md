@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 各畫面功能說明、其寫入簽名日誌的內容，以及詳細 指南的位置。面板每次僅顯示一個工作區：一個 Telegram 帳號及其專屬的 來源、日誌與簽名金鑰。側邊欄頂端的選取器可切換 工作區。網址包含工作區資訊（`?ws=…`）；若網址、 選擇器與已載入的帳號不一致，則所有操作將被封鎖。
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## 探索使用方法
 
 「每日」區塊位於側邊欄頂端，**「帳戶」** 位於「**工作區** 」之下， 其餘項目則位於**「更多工具與設定」** 之下。頂部工具列中的**介面層級** 切換按鈕可決定顯示多少個區塊：

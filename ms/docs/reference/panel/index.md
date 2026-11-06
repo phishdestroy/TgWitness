@@ -8,6 +8,8 @@ Setiap skrin panel: sembang, jurnal, sumber, eksport, Ekstra, mod perlindungan d
 
 Apa fungsi setiap skrin, apa yang ditulisnya ke jurnal yang disahkan dan di mana panduan terperinci berada. Panel memaparkan satu ruang kerja pada satu masa: satu akaun Telegram dengan sumber, jurnal dan kunci tandatangan tersendiri. Pemilih di bahagian atas bar sisi menukar ruang kerja. Alamat membawa ruang kerja (`?ws=…`); selagi alamat, pemilih dan akaun yang dimuat tidak sehaluan, tindakan kekal dihalang.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Temui jalan anda
 
 Bahagian harian terletak di bahagian atas bar sisi, **Akaun** berada di bawah **Ruang Kerja** , dan segala-galanya yang lain berada di bawah **Alat & Tetapan Lain** . Suis **aras Antara Muka** di bar atas menentukan berapa banyak bahagian yang dipaparkan:

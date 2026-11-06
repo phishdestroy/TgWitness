@@ -4,18 +4,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/histo
 
 بارگذاری پیام‌های گذشته از منابع فعال، مکث و از سرگیری، و تأیید گزارش پیشرفت امضا شده.
 
-در **بخش «منابع» (Sources)**، چت‌های فعال را مرور کنید، مشاهده را شروع کنید، سپس **«بارگذاری کل تاریخچه» (Load full history) را** انتخاب کنید. این فرایند آن فهرست منابع را تثبیت کرده و پیام‌های گذشتهٔ در دسترس آن‌ها را در بخش «چت‌ها» (Chats) و دفترچهٔ مشاهدات امضا شده بارگذاری می‌کند. بخش «رسانه‌ها» (Media) از تنظیمات پیوست موجود و صف دانلود پایدار استفاده می‌کند. این بخش از خروجی امضا شدهٔ JSON/HTML برای هر چت به صورت جداگانه مستقل است.
+In **Sources**, review the enabled chats, pause observation, choose Standard API or Takeout export, then choose **Load full history**. The run fixes that list of sources and reads their available past messages into Chats and the signed observation journal. Media uses the existing attachment settings and durable download queue. This is separate from the per-chat signed JSON/HTML export.
 
-برای جمع‌آوری در سطح کل حساب، گزینه **«کل حساب»**(**Whole account**) را انتخاب کنید، «مشاهده» (Observation) را برای بارگذاری لیست منابع آن شروع کنید و پیش از شروع تاریخچه، آن لیست را بررسی کنید. محدودیت لیست مکالمات همچنان اعمال می‌شود (به طور پیش‌فرض ۱۰۰۰، قابل تنظیم در «پارامترها» (Parameters)). یک اجرای موفق، اثبات نمی‌کند که تمام مکالمات حساب فهرست شده‌اند. چت‌هایی که بعداً کشف یا فعال می‌شوند، به اجرای مجدد نیاز دارند.
+For account-wide collection, select **Whole account**, start observation to load its source list, and review that list before starting history. The dialog-list limit still applies (1,000 by default, adjustable in Parameters). A successful run does not prove that every account dialog was listed. Chats discovered or enabled later need another run. Pause observation before starting history; one acquisition owns an account at a time.
+
+Choose one to five attachment workers and whether to preserve available Recent Actions and compare previously saved versions. Takeout may require approval in Telegram and a server-specified wait. These options remain fixed on resume. See [Backfill behavior and evidence contract](https://github.com/phishdestroy/TgWitness/blob/main/docs/BACKFILL.md) for transport, retry and trust details.
 
 ## تعطیل، راه‌اندازی مجدد و نتایج جزئی
 
-- **تاریخچه توقف،** خواندن را متوقف می‌کند. **ادامه تاریخچه** از آخرین پیام ثبت‌شده در هر منبع از سر گرفته می‌شود؛ راه‌اندازی مجدد برنامه نیز اجرای آن را تا زمان از سرگیری متوقف می‌کند. ابتدا مشاهده را راه‌اندازی مجدد کنید. از سرگیری نیازمند همان حساب تلگرام است.
+- **Pause history** stops reading. **Continue history** resumes from the last committed message in each source; restarting the app also leaves the run paused until resumed. Resuming requires the same idle Telegram account.
 - مشاهده پیام، انجام عملیات پیوست و ثبت مکان نما در یک تراکنش واحد. اجرای از سر گرفته شده مشاهدات ثبت‌شده قبلی را تکرار نمی‌کند. ضبط زنده یا اجرای جداگانه و صراحتاً آغازشده می‌تواند به‌طور مستقل همان پیام را مشاهده کند.
-- هر منبع در اولین خواندن، یک شناسهٔ بالای پیام را تثبیت می‌کند. پیام‌های جدیدتر مربوط به مشاهدهٔ زنده هستند، نه صفحات تاریخی باقی‌ماندهٔ آن منبع.
+- Each source (each Telegram split range in Takeout) fixes an upper message ID on its first read. Newer messages belong to live observation, not to that source's remaining historical pages.
 - منابع غیرقابل‌دسترس و منابعی که در حین جمع‌آوری غیرفعال شده‌اند، همچنان به‌عنوان «ناموفق» یا «نادیده گرفته شده» قابل مشاهده‌اند. سایر منابع به کار خود ادامه می‌دهند؛ نتیجه کلی ناقص است.
-- تأخیرهای FloodWait به بازه زمانی انتظار ذخیره شده برای حساب احترام می‌گذارند. تایم‌اوت‌های انتقال و کمبود فضای دیسک اجرای برنامه را متوقف می‌کنند و نشانگر آن را دست‌نخورده نگه می‌دارند. پس از برطرف شدن علت، اجرا از سر گرفته می‌شود.
-- **پایان این اجرای تاریخچه** مشاهدات ذخیره‌شده را حفظ می‌کند. این کار آن‌ها را حذف نمی‌کند یا دانلودهای پیوست‌های صف‌شده را لغو نمی‌کند. یک اجرای جدید منابع فعال را دوباره می‌خواند.
+- FloodWait delays respect the saved account backoff. Transient failures retry up to five times; exhaustion and low disk space pause with the cursor intact.
+- **End this history run** preserves saved observations. It does not remove them or cancel standard-API attachment jobs. Ending Takeout marks its remaining Takeout files as skipped; pausing keeps them resumable. A new run reads enabled sources anew.
 
 تکمیل تاریخچه، فقط خواندنی است. ضمیمه‌ها ممکن است در حالت انتظار باقی بمانند، ناموفق باشند، یا توسط سیاست پیکربندی‌شده مستثنی شوند. رسیدهای رسانه را در دفترچه و صف ضمیمه‌ها بررسی کنید؛ تنها یک رسید تکمیل‌شده با بایت‌های حفظ‌شده، یک ضمیمه ذخیره‌شده را تشکیل می‌دهد. عملیات تاریخچه یک درخواست اسنپ‌شات صریح است و از سوئیچ‌هایی که دسته‌های رویدادهای زنده آینده را انتخاب می‌کنند، مستقل است.
 
@@ -27,8 +29,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/histo
 python tgwitness/verify.py tgwitness-history-report.json --evidence evidence.zip --fingerprint TRUSTED_FINGERPRINT
 ```
 
-اثر انگشت کلید امضای مورد انتظار را به طور مستقل حفظ کنید. اعتبارسنج، امضای گزارش، آرشیو شواهد، نقطه کنترل گزارش، طرح منبع، حساب کاربری و تعداد پیام‌های ذخیره شده/دسترسی‌ناپذیر را بررسی می‌کند. بدون `--evidence`، فقط گزارش امضا شده و سازگاری داخلی آن را بررسی می‌کند. مراحل پیشرفت، عناوین، نشانگرها و خلاصه‌های پیوست‌ها، بیانیه‌های امضا شده توسط گردآورنده هستند و نه اینکه توسط این بررسی‌کننده گزارش به طور مستقل بازسازی شده باشند. اعتبارسنج شواهد همچنان بایت‌های رسانه‌های آرشیو شده را بررسی می‌کند.
+Keep the expected signing-key fingerprint independently. The verifier checks the report signature, the evidence archive, the report checkpoint, source plan, account and counts of saved/unavailable messages. New runs also bind source progress and options to signed cursor events. Without `--evidence`, it checks only the signed report and its internal consistency. Legacy progress fields and attachment summaries remain signed collector statements. The evidence verifier checks archived media bytes.
 
-امضا کردن یا تکمیل تاریخچه موجود، اصالت تلگرام، یک نمای کلی آنی، یا جامعیت تاریخی را اثبات نمی‌کند. پیام‌ها می‌توانند هنگام خواندن تغییر کنند؛ پیام‌های حذف‌شده، ویرایش‌های میانی مشاهده‌نشده و چت‌های مخفی بازیابی نمی‌شوند. یک اپراتور که کنترل کلید امضا را در دست دارد می‌تواند پیش از وجود تعهدات خارجی، یک دفترچه خاطرات جعلی بسازد. برای ویژگی‌های مستندشده تشخیص دستکاری، از نقاط کنترل نگهداری‌شده به‌طور جداگانه یا یک شاهد مستقل استفاده کنید.
+Neither signing nor finishing the available history proves Telegram origin, an atomic snapshot, or historical completeness. Messages can change while reading; deleted messages and intermediate edits outside available Recent Actions, and Secret Chats, are not recovered. An operator controlling the signing key can fabricate a journal before outside commitments exist. Use separately retained checkpoints or an independent witness for the documented tamper-detection properties.
 
 نشانگر اکتشاف وضعیت فضای کاری محلی است. بازیابی یک فایل ZIP مدرک به تنهایی، شغل اکتشافی در حال انتظار یا جلسه تلگرام را بازیابی نمی‌کند. اگر ادامه شغل اصلی لازم است، از پشتیبان فضای کاری نگهداری کنید.

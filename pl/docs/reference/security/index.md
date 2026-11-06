@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/secur
 
 Model zagrożeń, model dostępu, dane poufne w stanie spoczynku, narażenie sieciowe, import sesji oraz sposób zgłaszania luk w zabezpieczeniach.
 
-TgWitness działa na Państwa własnym komputerze lub serwerze. Połączenia z kontami, prowadzenie publicznej listy serwerów proxy oraz opcjonalne usługi zewnętrzne podlegają jasno określonym zasadom routingu. Powiadomienia, sygnatury czasowe, kopie poza serwerem oraz świadek są konfigurowane oddzielnie. Na tej stronie wymieniono, co jest chronione, w jaki sposób oraz co pozostaje w gestii operatora.
+This page describes access，storage and network protection in a local or server workspace． For collection on a GitHub runner or in an Intel TDX confidential VM，see the [verification modes](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope)，which add checks of the collection environment． Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．
 
 | Obszar | W skrócie |
 | --- | --- |
@@ -12,7 +12,7 @@ TgWitness działa na Państwa własnym komputerze lub serwerze. Połączenia z k
 | Sekrety w stanie spoczynku | Sesja, para API, klucz podpisujący oraz ustawienia serwera proxy są szyfrowane za pomocą algorytmu Fernet |
 | Wiadomości i pliki multimedialne | Dane przechowywane są w postaci niezaszyfrowanej: zaleca się stosowanie szyfrowania dysku oraz rygorystycznych uprawnień dostępu |
 | Rzetelność | Łańcuch skrótów SHA-256 oraz podpis Ed25519 na każdym wpisie |
-| Nieobjęte zakresem | Administrator urządzenia, ujawniony token panelu, kompletność przechwytywania |
+| Local trust boundary | The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary |
 
 W sprawie zgłoszeń luk w zabezpieczeniach prosimy zapoznać się z [polityką bezpieczeństwa](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md).
 
@@ -38,11 +38,13 @@ Eksportowane dane nie zawierają kluczy uwierzytelniających ani podpisujących,
 
 ## Sekrety w stanie spoczynku
 
-Dane uwierzytelniające do API serwisu Telegram, obiekt StringSession oraz klucz prywatny Ed25519 są szyfrowane za pomocą biblioteki Fernet. Domyślnie klucz ten jest przechowywany w tym samym chronionym katalogu danych. Ogranicza to przypadkowe ujawnienie tekstu jawnego; nie stanowi to jednak zabezpieczenia przed atakującym, który może odczytać zawartość całego katalogu. Treść wiadomości i pliki multimedialne **nie** są **szyfrowane** przez TgWitness. Należy stosować szyfrowanie dysku oraz restrykcyjne uprawnienia systemu operacyjnego. Pliki klucza prywatnego w systemie Unix są tworzone z trybem dostępu 0600; nowo utworzone katalogi danych wykorzystują tryb 0700. Istniejące uprawnienia katalogów nie ulegają zmianie. System Windows dziedziczy listy kontroli dostępu (ACL) katalogów: należy je ograniczyć do konta usługi oraz upoważnionych administratorów.
+Telegram API credentials，the session and signing key are encrypted with Fernet． For local messages and media，encryption is provided by the host's disk or volume； the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP， and off-site copies use AES-256-GCM．
+
+The vault key defaults to the protected data directory．Use an external master-key file below to store it separately．On Unix，new private-key files use mode 0600 and new data directories use 0700；on Windows，set the directory ACL for the service account and authorized administrators．Existing directory permissions are retained．
 
 ### Zewnętrzny klucz główny
 
-W przypadku nowego katalogu danych zmienna TGWITNESS_VAULT_KEY_FILE może dostarczyć zewnętrzny losowy klucz główny. HKDF-SHA256 oraz oddzielny losowy salt generują inny klucz Fernet dla każdego obszaru roboczego. Plik vault.external.json należy zachować na potrzeby odzyskiwania danych. Brakujące lub nieprawidłowe klucze główne powodują niepowodzenie operacji. Istniejące lokalne skarbce nie są migrowane w trybie cichym. Uruchomiony proces ma dostęp do klucza; nie jest to izolacja typu HSM. Panel informuje o wybranym trybie i wyraźnie zaznacza, że przechowywanie wiadomości/multimediów nie jest szyfrowane przez aplikację. Pełny model zagrożeń można znaleźć w sekcjach dotyczących [połączeń, serwerów proxy i ochrony danych](https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/) .
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode．Disk encryption protects the local message and media files in either mode；see [connection and data protection](https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/) for setup details．
 
 ## Serwery proxy i trasy sieciowe
 
@@ -66,8 +68,10 @@ Domyślna odpowiedź walidacyjna API została zastąpiona tak, aby nie powtarza�
 
 ## Ograniczenia dotyczące integralności
 
-Łańcuch skrótów, wyzwalacze bazy danych oraz podpisy wykrywają określone modyfikacje; nie uniemożliwiają one jednak lokalnemu administratorowi przepisania i ponownego podpisania dziennika. Prosimy o przechowywanie podpisanych punktów kontrolnych oraz odcisku klucza publicznego w oddzielnym systemie. Tryb dowodowy oraz kopia zewnętrzna (oba domyślnie wyłączone) wysyłają skróty punktów kontrolnych do usług znaczników czasu oraz zaszyfrowane kopie do pamięci masowej zgodnej ze standardem S3; proszę zapoznać się z [formatem dowodowym](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/). Dzienniki przejrzystości, podpisywanie oparte na module HSM oraz formalna certyfikacja łańcucha dowodowego nie zostały wdrożone.
+Local verification checks record signatures，the hash chain，attachments and the export manifest． The administrator holds the local signing key and can create another signed journal； an independently retained checkpoint detects replacement of the prefix it covers． Keep the key fingerprint and checkpoints with the recipient or an independent witness．
+
+For independently checked collection，choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/pl/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)． Their verifiers check workflow provenance or hardware measurements in addition to archive integrity． Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies； the [evidence format](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) describes the checks for each mode．
 
 ## Jeśli podejrzewają Państwo wystąpienie problemu
 
-Należy zachować oryginalny katalog danych i wykorzystać do analizy oddzielną kopię. Nie należy umieszczać prywatnych danych z Telegrama ani danych uwierzytelniających w publicznych zgłoszeniach. Nie przedstawia się żadnych niezależnych certyfikatów bezpieczeństwa.
+Preserve the original data directory and use a separate copy for analysis． Report the affected version，operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)，keeping account data and credentials private．

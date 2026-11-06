@@ -8,6 +8,8 @@ TgWitness protokolliert, was ein verbundenes Telegram-Konto wahrnimmt. Das Proto
 
 ## Von der Anmeldung bis zum Protokoll
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 Ablaufdiagramm · Ein Benutzerkonto autorisieren → Wählen Sie zugängliche Gruppen und Kanäle aus; Wählen Sie zugängliche Gruppen und Kanäle aus → Einstellungen für Ereignisse und Anhänge speichern; Einstellungen für Ereignisse und Anhänge speichern → Beobachtung starten; Beobachtung starten → Erhalten Sie Updates vom aktiven Client; Erhalten Sie Updates vom aktiven Client → Richtlinien zu Quellen und Ereignissen anwenden; Richtlinien zu Quellen und Ereignissen anwenden → Eine signierte Beobachtung anhängen; Eine signierte Beobachtung anhängen → Das Protokoll einsehen oder exportieren; Eine signierte Beobachtung anhängen → Alle in der Warteschlange befindlichen Anhänge verarbeiten; Alle in der Warteschlange befindlichen Anhänge verarbeiten → Fügen Sie das Ergebnis des Downloads hinzu · Ein Benutzerkontoautorisieren · Wählen Sie zugänglicheGruppen und Kanäle aus · Einstellungen fürEreignisse und Anhängespeichern · Beobachtung starten · Erhalten Sie Updatesvom aktiven Client · Richtlinien zu Quellenund Ereignissenanwenden · Eine signierteBeobachtung anhängen · Das Protokoll einsehenoder exportieren · Alle in derWarteschlangebefindlichen Anhängeverarbeiten · Fügen Sie das Ergebnisdes Downloads hinzu
 
 **Diagramm als Text**

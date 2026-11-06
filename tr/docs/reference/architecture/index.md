@@ -15,6 +15,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | message_content.py | Aktarım erişim meta verileri hariç tutulmuş, gözlemlenebilir mesaj karşılaştırması |
 | workers.py | İptal temizliği işleminden önce dosya dışa aktarma işlemlerinin tamamlanmasını bekleyin |
 | store.py | WAL işlemleri, sıralı olay zinciri, sorgu filtreleri, operasyonel ayarlar |
+| fulltext.py | Türetilmiş tam metin dizini (kelime biçimleri, BM25), imzalı günlük başlığına bağlı; asla dışa aktarılmaz |
 | security.py | Özel dosya oluşturma, şifreli depo, Ed25519 imzalaması, tek işlem kilidi |
 | evidence.py | Tam günlük dışa aktarma, türevler, kontrol noktaları, ek doğrulama |
 | verify.py | Bağımsız, salt okunur doğrulayıcı (stdlib + kriptografi): arşivler, kapsama alanı, tanık günlükleri ve kanal gönderileri, profil dosyaları |

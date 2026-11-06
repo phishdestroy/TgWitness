@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/
 
 เชื่อมต่อไคลเอนต์ MCP กับพื้นที่ทำงานและห้องสนทนาที่เลือกไว้ โดยให้สิทธิ์การเข้าถึงที่มีระยะเวลาจำกัดและสามารถเพิกถอนได้
 
-เชื่อมต่อไคลเอนต์ของนักวิเคราะห์เข้ากับเวิร์กสเปซและแชตที่เลือก TgWitness ให้บริการ **Streamable HTTP ที่ `/mcp` ในโปรเซสของพาเนล** การเชื่อมต่อแต่ละรายการจะมี โทเค็น วันหมดอายุ และเครื่องมือที่ได้รับอนุญาตเป็นของตัวเอง MCP ไม่สามารถส่งข้อความ Telegram เปลี่ยน การตั้งค่า หรือแก้ไขบันทึกประจำวัน (journal) ที่ลงนามแล้วได้
+เชื่อมต่อไคลเอนต์นักวิเคราะห์กับพื้นที่ทำงานและแชทที่เลือกไว้ TgWitness ให้บริการ **Streamable HTTP ที่ `/mcp` ในกระบวนการของ panel** แต่ละการเชื่อมต่อมี token ระยะเวลาหมดอายุ และเครื่องมือที่ได้รับอนุญาตเป็นของตัวเอง MCP ไม่สามารถส่งข้อความ Telegram เปลี่ยนแปลง การตั้งค่า หรือแก้ไขบันทึกที่ลงนามได้ การเชื่อมต่อเดียวกันนี้สามารถใช้งานได้กับ [บรรทัดคำสั่ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/)
 
 [คู่มือขั้นตอนการทำงาน](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 | --- | --- |
 | `list_workspaces` | เวิร์กสเปซที่ได้รับอนุญาต |
 | `list_chats` | แชตที่ได้รับอนุญาต |
-| `search_messages` | ข้อความที่บันทึกไว้ภายในช่วงเวลาที่เลือก |
+| `search_messages` | ข้อความที่บันทึกไว้ภายในช่วงเวลาที่เลือก; `ranked=true` ใช้[การค้นหาข้อความเต็ม](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/) (รูปแบบคำ, ผลที่ตรงกันมากที่สุดก่อน, `next_offset` การแบ่งหน้า) |
 | `get_message_versions` | รุ่นที่บันทึกไว้และการตรวจพบการลบ |
 | `get_message_context` | ID ข้อความที่บันทึกไว้ในบริเวณใกล้เคียง |
 | `get_journal_event` | ระเบียนที่คัดกรองข้อมูลแล้วหนึ่งรายการพร้อมข้อมูลอ้างอิงต้นทาง |
-| `get_capture_status` | สถานะการรวบรวมข้อมูลและระเบียนความครอบคลุมที่ได้รับอนุญาต |
+| `get_capture_status` | สถานะการเก็บรวบรวม, บันทึกการครอบคลุมที่ได้รับอนุญาต และ `gap_summary`: หมายเลขข้อความที่ยังไม่เคยถูกสังเกตเห็น ตามช่องหรือกลุ่มใหญ่ และสำหรับลำดับข้อความของบัญชีทั้งหมด ([รายละเอียด](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#missing-message-numbers-gap_summary)); เลือกการสนทนาเพื่อดูช่องว่างที่แสดงในรายการ |
+| `get_activity_stats` | ข้อความตามชั่วโมง UTC และวันในสัปดาห์, วันที่มีปริมาณสูงสุด, สัดส่วนการแก้ไขและการลบ, ผู้ส่ง, โดเมน และ `@handles`, พร้อมข้อมูลรายละเอียด ([รายละเอียด](https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/#activity-statistics)) |
+| `export_messages` | ใช้ผ่านบรรทัดคำสั่งเท่านั้น ไม่ถูกเลือกเป็นค่าเริ่มต้น: streams บันทึกข้อมูลการสังเกตเป็น JSON Lines ([รายละเอียด](https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/#export)); ไม่ให้บริการผ่าน MCP |
 
 `tools/list` จะส่งคืนเฉพาะเครื่องมือที่ได้รับอนุญาตสำหรับการเชื่อมต่อนั้น การเรียกใช้เครื่องมืออื่น จะถูกปฏิเสธ เครื่องมือสำหรับบริบทกลุ่ม เหตุการณ์ย่อย คำศัพท์เฉพาะ และสายการตอบกลับยังไม่มีให้ใช้งาน ในบิลด์นี้ เนื่องจากยังไม่ได้รวมแบ็กเอนด์ context-pack แยกต่างหากเข้ามา
 

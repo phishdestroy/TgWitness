@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Command line · Reference | TgWitness</title>
+<meta name="description" content="Search, read context, count activity and export saved messages from scripts and agents, with --json output, stable exit codes and scoped read-only tokens."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/cli/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Command line · Reference | TgWitness"><meta property="og:description" content="Search, read context, count activity and export saved messages from scripts and agents, with --json output, stable exit codes and scoped read-only tokens.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/cli/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/cli/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/cli/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/cli/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/cli/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/cli/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/cli/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/cli/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/cli/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/cli/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/cli/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/cli/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/docs/reference/cli/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/cli/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/cli/", "name": "Command line · Reference | TgWitness", "description": "Search, read context, count activity and export saved messages from scripts and agents, with --json output, stable exit codes and scoped read-only tokens.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/docs/reference/cli/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/cli/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Command line", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/cli/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/cli/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/cli/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/cli/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/cli/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/cli/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/cli/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/cli/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/cli/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/cli/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/cli/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/cli/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/cli/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../fr/docs/reference/cli/" hreflang="fr" lang="fr">Français</a><a href="../../../de/docs/reference/cli/" hreflang="de" lang="de">Deutsch</a><a href="../../../it/docs/reference/cli/" hreflang="it" lang="it">Italiano</a><a href="../../../uz/docs/reference/cli/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../ko/docs/reference/cli/" hreflang="ko" lang="ko">한국어</a><a href="../../../zh-Hant/docs/reference/cli/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../ms/docs/reference/cli/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../pl/docs/reference/cli/" hreflang="pl" lang="pl">Polski</a><a href="../../../ja/docs/reference/cli/" hreflang="ja" lang="ja">日本語</a><a href="../../../th/docs/reference/cli/" hreflang="th" lang="th">ไทย</a><a href="../../../he/docs/reference/cli/" hreflang="he" lang="he">עברית</a><a href="../../../bn/docs/reference/cli/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../dedicated-account/">Dedicated account</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><a href="../../capture/">GitHub Actions capture</a><p class="nav-label">Investigation & reporting</p><a href="../../cases/">Investigate across all chats</a><a href="../../case-board/">Build a Case Board</a><a href="../../reports/">Design a report</a><a href="../../handover/">Prepare a sharing copy</a><a href="../../groups/">Manage a group of accounts</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a lang="en" dir="ltr" href="../../export-clinic/">Export Clinic</a><a href="../../security/">Keep it secure</a><a href="../../witness/">Set up a witness bot</a><p class="nav-label">Go further</p><a href="../../archive/">Work the archive</a><a href="../../access/">Share a case</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../installation/">Install, verify and update</a><a href="../settings/">First setup and settings</a><a href="../accounts/">Accounts and session formats</a><a href="../access/">Access and permissions</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a><a href="../high-assurance/">High-assurance deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../panel/">Panel guide</a><a href="../collection/">How collection works</a><a href="../history/">Load source history</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group" open><summary>Archive & integrations</summary><a href="../case-board/">Case Board reference</a><a href="../analysis/">Archive analysis</a><a href="../search/">Full-text search</a><a href="../mcp/">Read-only MCP</a><a href="./" aria-current="page">Command line</a><a href="../media-analysis/">Local OCR and transcription</a><a href="../webhooks/">Outgoing webhooks</a><a href="../showcase/">Public showcase</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../case-reports/">Report configuration and verification</a><a href="../account-export/">Account export</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a><a href="../storage/">Storage and recovery</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.9.1<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Command line</span></nav>
+<p class="verification-shortcut"><a href="../verification/">What has been tested →</a></p>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Archive &amp; integrations</p><h1>Command line</h1><p class="guide-outcome">Search, read context, count activity and export saved messages from scripts and agents, with --json output, stable exit codes and scoped read-only tokens.</p><div class="wiki-body"><p><a href="../mcp/">Read-only MCP</a> · <a href="../search/">Full-text search</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<p><strong>Preview.</strong> <code>tgwitness search</code>, <code>context</code>, <code>messages</code>, <code>stats</code> and <code>export</code> read
+saved observations for scripts and AI agents. They cannot send anything to
+Telegram, change settings or modify the signed journal.</p>
+<p>With <code>--json</code>, stdout carries exactly one JSON document (<code>export</code> writes JSON Lines).
+Progress, hints and errors go to stderr. Exit codes are stable:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>Success, including an empty result</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>Failure: unreachable panel, unreadable data, interrupted export</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Usage error or invalid request: bad date, unknown option, search index off</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>Unavailable now: the workspace is open in a running panel, or the panel asks to retry later (rate limit, timeout)</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td>Access refused: missing, expired or revoked token, a chat outside its scope, a tool it does not allow</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="two-ways-to-read">Two ways to read<a class="anchor" href="#two-ways-to-read" aria-label="Link to this section">#</a></h2>
+<p><strong>Through the panel (<code>--url</code>).</strong> The command uses the same scoped archive API as
+MCP. Create a connection in <strong>Integrations → MCP</strong>: choose workspaces and chats,
+tools and an expiry, then copy the token once. The connection is read-only, limited
+to those chats, rate-limited to 60 requests per minute and can be revoked or
+rotated at any time. Panel login tokens and Telegram credentials do not work here.</p>
+<pre><code class="language-sh">export TGWITNESS_URL=https://panel.example.org      # default http://127.0.0.1:8787
+export TGWITNESS_MCP_TOKEN=tgw_mcp_...              # or --token-file path
+tgwitness search &#x27;перевод карта&#x27; --json</code></pre>
+<p>A remote panel needs HTTPS; plain HTTP is accepted only for <code>127.0.0.1</code>,
+<code>localhost</code> and <code>::1</code>. Proxy environment variables are ignored and redirects are
+refused, so the token reaches only the address you give.</p>
+<p><strong>Directly from a stopped workspace (<code>--data-dir</code>).</strong> Reads the data directory with
+full local access, without a token. Use it on a copy of a data directory or while
+collection is stopped. Signed records are never changed; like the panel, opening a
+workspace may bring its derived indexes up to date. When the panel has the workspace open, the command exits with
+code <code>3</code>; read through the panel instead. Without <code>--data-dir</code>, <code>TGWITNESS_DATA</code>,
+<code>./data/live</code> or the data directory of the installation running the command is used.</p>
+<p><code>--workspace ID</code> selects a workspace (default <code>default</code>). <code>tgwitness messages
+--workspaces</code> lists the ones you can read.</p>
+<h2 id="commands">Commands<a class="anchor" href="#commands" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tgwitness search QUERY [--chat ID] [--since] [--until] [--any] [--limit N] [--offset N]</code></td>
+<td>Best matches first, with word forms, exact phrases in quotes, domains and <code>@username</code> (<a href="../search/#search-syntax">syntax</a>)</td>
+</tr>
+<tr>
+<td><code>tgwitness search QUERY --exact [--before SEQ]</code></td>
+<td>Exact text, newest first, without the index</td>
+</tr>
+<tr>
+<td><code>tgwitness context CHAT_ID MESSAGE_ID</code></td>
+<td>Saved messages within ten message IDs on either side</td>
+</tr>
+<tr>
+<td><code>tgwitness messages</code></td>
+<td>Chats you can read</td>
+</tr>
+<tr>
+<td><code>tgwitness messages CHAT_ID [--since] [--until] [--before SEQ]</code></td>
+<td>Saved messages of the chat, newest first</td>
+</tr>
+<tr>
+<td><code>tgwitness messages CHAT_ID --message ID</code></td>
+<td>Every saved version and deletion record of one message</td>
+</tr>
+<tr>
+<td><code>tgwitness stats [--chat ID] [--sender ID] [--since] [--until] [--top N]</code></td>
+<td>Activity statistics, below</td>
+</tr>
+<tr>
+<td><code>tgwitness export [--chat ID] [--since] [--until] [--output FILE]</code></td>
+<td>Saved observations as JSON Lines in journal order</td>
+</tr>
+</tbody>
+</table></div>
+<p>Dates are <code>2026-10-01</code> (UTC midnight) or ISO times with a timezone,
+<code>2026-10-01T09:00+03:00</code>. For <code>search</code>, <code>messages</code> and <code>export</code> they select
+observation time. Pages hold up to 50 records: follow <code>next_offset</code> (<code>--offset</code>) for
+ranked search and <code>next_before</code> (<code>--before</code>) elsewhere.</p>
+<p>Ranked search stops at 1，000 results．The final page may be shorter than <code>--limit</code>；narrow the query，chat or period when more matching observations exist．</p>
+<p>Every message result carries <code>untrusted_content: true</code>, the workspace, chat and
+message IDs, the journal sequence, the saved record hash and a panel link. Edits,
+deletion notices and <code>missing_on_recheck</code> are separate records. Absence of a record
+does not prove that an event never happened.</p>
+<h3 id="activity-statistics">Activity statistics<a class="anchor" href="#activity-statistics" aria-label="Link to this section">#</a></h3>
+<p><code>stats</code> counts saved observations for one chat, one sender, or every chat in scope:</p>
+<ul>
+<li>messages by UTC hour and by weekday (Monday first), busiest hours and days;</li>
+<li>edited, deleted and <code>missing_on_recheck</code> shares;</li>
+<li>senders with message counts and first and last message times;</li>
+<li>the most frequent domains and <code>@handles</code>, counted once per message across its
+    saved versions;</li>
+<li>coverage: <code>coverage.gap</code> records and, for access to the whole workspace, periods
+    without a connected collector heartbeat (<code>collector_liveness</code>).</li>
+</ul>
+<p>The period selects <strong>message time reported by Telegram</strong>. Hour and weekday counts can
+help estimate a sender's time zone; they do not establish it. Figures are computed on
+request from the journal and are not stored. Each result names the journal head it
+covers when your access spans the workspace. Reading stops after five seconds through
+the panel, or <code>--timeout</code> seconds locally (default 30); then <code>complete</code> is false and
+<code>partial</code> names the first record that was not read. Only the most recent records are
+counted in that case.</p>
+<h3 id="export">Export<a class="anchor" href="#export" aria-label="Link to this section">#</a></h3>
+<p><code>export</code> writes one JSON object per saved observation (new messages, snapshots,
+edits, recovered messages, deletion notices, <code>missing_on_recheck</code> and saved media
+records) in journal order. Each line has the same fields as other results, with
+the full text. With <code>--output</code>, the file is written under a <code>.partial</code> name and
+renamed only after the panel's completion record; an interrupted export leaves no
+file and exits with code <code>1</code>. <code>--output</code> never overwrites an existing file. With
+<code>--output</code> and <code>--json</code>, stdout carries a summary: record count, last journal
+sequence and, for whole-workspace access, the journal head.</p>
+<p>An export through the panel needs a connection that allows <strong>Export messages
+(command line only)</strong>; it is not selected by default. This file is a working copy, not evidence: for a verifiable
+handover use the signed export in <strong>Exports</strong>, which <code>python -m tgwitness.verify</code>
+checks.</p>
+<p>The panel rechecks access before emitting each record, including the completion
+record. Revoked or expired access leaves an incomplete export. Lazy page reads
+share the archive worker limit with other queries and have a bounded wait.</p>
+<h2 id="agent-skill">Agent skill<a class="anchor" href="#agent-skill" aria-label="Link to this section">#</a></h2>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/.agents/skills/tgwitness-cli/SKILL.md"><code>.agents/skills/tgwitness-cli/SKILL.md</code></a>
+tells an agent how to use these commands, how to cite records and how to treat
+captured text. Agents that read <code>.agents/skills</code> load it from a repository
+checkout. For Claude Code, copy the <code>tgwitness-cli</code> folder to <code>.claude/skills/</code> in
+your project or <code>~/.claude/skills/</code>.</p>
+<h2 id="mcp-and-the-command-line">MCP and the command line<a class="anchor" href="#mcp-and-the-command-line" aria-label="Link to this section">#</a></h2>
+<p>Both use the same connections, scope checks and limits. MCP results are limited to
+one 64 KiB page, so MCP offers no bulk export; the command line streams it.
+<code>get_activity_stats</code> is available to both.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CLI.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../media-analysis/"><span>Next step</span><strong>Local OCR and transcription →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#two-ways-to-read">Two ways to read</a><a href="#commands">Commands</a><a href="#agent-skill">Agent skill</a><a href="#mcp-and-the-command-line">MCP and the command line</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

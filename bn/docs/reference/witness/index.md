@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/witne
 
 [রপ্তানি এবং যাচাই করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/) · [উচ্চ নিশ্চয়তা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/) · [প্যানেল গাইড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#extras)
 
-একজন কালেক্টর তার নিজস্ব জার্নালে স্বাক্ষর করে, তাই যে কেউ কালেক্টর এবং এর কী নিয়ন্ত্রণ করে, তাত্ত্বিকভাবে জার্নালটি পুনঃলিখন বা সংক্ষিপ্ত করে আবার স্বাক্ষর করতে পারে। একজন সাক্ষী এটিকে শনাক্তযোগ্য করে তোলে। এটি একটি পৃথক প্রক্রিয়া — আরেকটি কন্টেইনার, বা আরও ভালোভাবে বলতে গেলে অন্য কেউ চালানো একটি সার্ভার — যা প্রতি কয়েক মিনিটে কালেক্টরের স্বাক্ষরিত জার্নাল হেড সংগ্রহ করে, যা দেখে তা নিজের কী দিয়ে স্বাক্ষর করে, নিজের জার্নালে সংরক্ষণ করে এবং একটি টেলিগ্রাম চ্যানেলে পোস্ট করে।
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 প্রবাহ চিত্র · সংগ্রাহক → সাক্ষী (স্বাক্ষরিত চেকপয়েন্ট: রেকর্ড গণনা + হেড হ্যাশ); সাক্ষী → সাক্ষী জার্নাল, নিজস্ব কী; সাক্ষী → টেলিগ্রাম চ্যানেল (নিজের বটের মাধ্যমে স্বাক্ষরিত পোস্ট); প্রমাণ ZIP → verify.py; সাক্ষী জার্নাল, নিজস্ব কী → verify.py; টেলিগ্রাম চ্যানেল → verify.py (টেলিগ্রাম ডেস্কটপ এক্সপোর্ট অথবা t.me/s পৃষ্ঠা) · সংগ্রাহক · সাক্ষী · সাক্ষী জার্নাল, নিজস্ব কী · টেলিগ্রাম চ্যানেল · প্রমাণ ZIP · verify.py · স্বাক্ষরিত চেকপয়েন্ট: · রেকর্ড গণনা + হেড হ্যাশ · নিজের বটের মাধ্যমে · স্বাক্ষরিত পোস্ট · টেলিগ্রাম ডেস্কটপ এক্সপোর্ট · অথবা t.me/s পৃষ্ঠা
 
@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/witne
 প্রতিটি ব্যবধান (ডিফল্ট ১০ মিনিট) সাক্ষী:
 
 1. এটি হেডটিকে নিজেই আনয়ন করে (কলেক্টর এটিকে পুশ বা স্কিপ করতে পারে না);
-2. সংগ্রাহকের স্বাক্ষর যাচাই করে, পিন করা সংগ্রাহক কী (`--collector-fingerprint` অথবা প্রথম দেখা কী), একটি অ-হ্রাসমান গণনা এবং অপরিবর্তিত গণনায় অপরিবর্তিত হেড;
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. নিজের জার্নালে একটি স্বাক্ষরিত রেকর্ড সংযুক্ত করে: `witness.anchor`, স্ট্যাটাস `ok`, `key_changed`, `rollback` (আগের তুলনায় কম রেকর্ড), `fork` (একই দৈর্ঘ্য, ভিন্ন হেড) অথবা `invalid` (উত্তর যাচাইকরণে ব্যর্থ), অথবা `witness.no_response` যখন কালেক্টর উত্তর দেয়নি;
 4. চ্যানেলে ফলাফলটি স্বাক্ষরিত অবস্থায় পোস্ট করা হয়, যার মধ্যে "no answer" অন্তর্ভুক্ত, যখন সাক্ষী চলছে এবং Bot API-তে পৌঁছাতে পারে। পোস্ট আইডি (`witness.posted`) এবং একটি ব্যর্থ পোস্ট (`witness.post_failed`) রেকর্ড করা হয়।
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 এর জন্য স্বাধীনভাবে সংরক্ষিত সাক্ষীর আঙ্গুলের ছাপ এবং এই রপ্তানির একেবারে শেষে একটি মিলিত চেকপয়েন্ট প্রয়োজন। শুধুমাত্র পূর্ববর্তী প্রিফিক্সকে অন্তর্ভুক্ত করে এমন একটি চেকপয়েন্ট অপর্যাপ্ত। সংগ্রহ স্থগিত করুন, সাক্ষীকে চূড়ান্ত অবস্থা পর্যবেক্ষণ করতে দিন, এবং আরও জার্নাল লেখার আগে রপ্তানি করুন; যদি জার্নাল পরিবর্তিত হয়, আরেকটি চেকপয়েন্ট সংরক্ষণ করুন এবং সেই অবস্থা রপ্তানি করুন। শুধুমাত্র পরবর্তী একটি চেকপয়েন্ট ছোট এক্সপোর্টের চূড়ান্ত হ্যাশ যাচাই করতে পারে না। যখন `--channel` ফ্ল্যাগও সরবরাহ করা হয়, দাবি করা পোস্টগুলি অনুপস্থিত থাকা বা খালি মিল সেট এই কঠোর পরীক্ষাটি ব্যর্থ করে। ফ্ল্যাগ ছাড়া, সাধারণ অখণ্ডতা পরীক্ষাগুলি অন্যথায় অক্ষত একটি আর্কাইভ প্রত্যাখ্যান না করেই পর্যবেক্ষণহীন রেকর্ডগুলি রিপোর্ট করে।
 
-এই ফ্ল্যাগটি সরবরাহিত, পিন করা সাক্ষী রেকর্ডগুলোর সাথে সামঞ্জস্য বজায় রাখে। অপারেটরকে অবশ্যই সাক্ষীর স্বতন্ত্রতা প্রতিষ্ঠা করতে হবে এবং এর রেকর্ডগুলো আলাদাভাবে সংরক্ষণ করতে হবে। এটি বার্তার সত্যতা, সম্পূর্ণ সংগ্রহ বা স্বতন্ত্রভাবে পরিমাপিত রানটাইম প্রতিষ্ঠা করে না।
-
-একজন সাক্ষী দেখায় যে সেই সময়ে কালেক্টর যা রিপোর্ট করেছিল এবং পরবর্তীতে রপ্তানিগুলো তার সাথে মেলে। এটি দেখায় না যে কালেক্টর টেলিগ্রামের সব ডেলিভারি রেকর্ড করেছিল, বা বার্তার বিষয়বস্তু সত্য। একই অপারেটর একই মেশিনে চালানো একটি সাক্ষী অন্য কেউ চালানো সাক্ষীর তুলনায় দুর্বল।
-
-শুধুমাত্র গণসংখ্যা বৃদ্ধি করলে অনলাইনে শুধুমাত্র সংযোজনযোগ্য ধারাবাহিকতা প্রতিষ্ঠা করা যায় না: অফলাইন তুলনায় প্রতিটি সংরক্ষিত প্রিফিক্স হ্যাশকে সম্পূর্ণ কালেক্টর এক্সপোর্টের সাথে মিলিয়ে দেখতে হবে। উইটনেস ডাউনটাইম এবং প্রকাশনা ব্যর্থতার কারণে ইন্টারভালগুলো বাহ্যিক অ্যাঙ্করবিহীন হয়ে যায়। সংরক্ষিত উইটনেস জার্নালের বিরুদ্ধে অনুপস্থিত পোস্টগুলো রিপোর্ট করা যেতে পারে; একই অপারেটর দ্বারা নিয়ন্ত্রিত কোনো চ্যানেল বা সার্ভারই অপরিবর্তনীয় তৃতীয় পক্ষের আর্কাইভ নয়।
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

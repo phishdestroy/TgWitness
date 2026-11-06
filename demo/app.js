@@ -105,7 +105,7 @@ const connectionViewReady=import('./views/connection.js?v=2').then(({createConne
 });
 const accountStateReady=import('./components/account-state.js?v=1').then(module=>{accountState=module.accountState;});
 let disclosurePreview;
-const disclosurePreviewReady=import('./views/disclosure-preview.js?v=1').then(({createDisclosurePreview})=>{
+const disclosurePreviewReady=import('./views/disclosure-preview.js?v=2').then(({createDisclosurePreview})=>{
   disclosurePreview=createDisclosurePreview({root:$('view-evidence'),tr,formatTime:accountExportTime});
 });
 let viewHost=null;
@@ -288,6 +288,27 @@ const labels = {
   "monitoring.changed": [tr("Monitoring settings changed"), "settings", "coverage"],
   "account.authorized": [tr("Account connected"), "account", "system"],
   "account.signed_out": [tr("Signed out of Telegram"), "account", "system"], "target.changed": [tr("Source selection changed"), "sources", "system"],
+  "account.sessions": [tr("Account sessions recorded"), "account", "system"],
+  "account.session_ended": [tr("Account session ended"), "account", "system"],
+  "account.password_changed": [tr("Two-step password changed"), "lock", "system"],
+  "account.forgotten": [tr("Session forgotten on this computer"), "account", "system"],
+  "account.restricted": [tr("Telegram restricted the account"), "alert", "coverage"],
+  "account.restriction_expired": [tr("Account restriction ended"), "refresh", "system"],
+  "connection.opened": [tr("Connected to Telegram"), "link", "system"],
+  "connection.closed": [tr("Disconnected from Telegram"), "link", "system"],
+  "source.added": [tr("Source added"), "plus", "system"],
+  "source.access_lost": [tr("Access to the chat lost"), "alert", "coverage"],
+  "source.access_restored": [tr("Access to the chat restored"), "refresh", "system"],
+  "deletion.batch": [tr("Messages deleted together"), "trash", "delete"],
+  "history.cleared": [tr("Chat history cleared"), "trash", "delete"],
+  "history.unparsed": [tr("Messages in a format this version cannot read"), "question", "coverage"],
+  "message.unpinned": [tr("Message unpinned"), "edit", "edit"],
+  "telegram.takeout_unavailable": [tr("Fast export session unavailable"), "clock", "system"],
+  "chat_export.started": [tr("Chat export started"), "export", "system"],
+  "chat_export.completed": [tr("Chat export completed"), "export", "system"],
+  "chat_export.interrupted": [tr("Chat export interrupted"), "alert", "coverage"],
+  "network.tunnel_unavailable": [tr("Local tunnel unavailable"), "alert", "coverage"],
+  "profile.renamed": [tr("Workspace renamed"), "settings", "system"],
   "capture.changed": [tr("Attachment settings changed"), "settings", "coverage"], "clock.discontinuity": [tr("Clock change detected"), "clock", "coverage"],
   "connection.retry": [tr("Reconnecting to Telegram"), "refresh", "system"], "connection.retry_failed": [tr("Reconnect attempt failed"), "alert", "coverage"],
   "telegram.backoff": [tr("Telegram rate limit"), "clock", "coverage"], "export.failed": [tr("Export failed"), "alert", "coverage"],
@@ -419,7 +440,7 @@ const termLabels={offline:tr("offline"),ready:tr("ready"),credentials:tr("creden
   observing:tr("observing"),paused:tr("paused"),reconnecting:tr("reconnecting"),collector_error:tr("collector error"),
   storage_error:tr("storage error"),supergroup:tr("supergroup"),channel:tr("channel"),group:tr("group"),
   private:tr("private chat"),bot:tr("bot"),discovered:tr("added automatically"),
-  visible_in_dialogs:tr("visible in dialogs"),receiving_updates:tr("receiving updates, not in the chat list"),access_unconfirmed:tr("access unconfirmed"),
+  visible_in_dialogs:tr("visible in dialogs"),receiving_updates:tr("receiving updates, not in the chat list"),access_unconfirmed:tr("access unconfirmed"),access_lost:tr("access lost: removed or no longer readable"),
   not_in_dialogs:tr("not found among the account's chats"),beyond_dialog_limit:tr("beyond the chats listed for this account"),public_username:tr("public username"),
   private_or_unlisted:tr("private or unlisted"),creator:tr("creator"),administrator:tr("administrator"),
   member_or_unknown:tr("member or unknown"),unknown:tr("unknown"),messages:tr("messages"),edits:tr("edits"),
@@ -700,6 +721,8 @@ function connectionSettings(open){
 }
 $("entry-settings").addEventListener("click",()=>connectionSettings(!state.connectionSettings));
 $("route-open").addEventListener("click",()=>{
+  const guided=$("connect-details");
+  if(guided&&!guided.closest("[hidden]")){guided.open=true;guided.scrollIntoView({block:"start"});return;}
   connectionSettings(true);$("network-details").open=true;$("connection-options").scrollIntoView({block:"start"});
 });
 $("open-demo").addEventListener("click",e=>busy(e.currentTarget,async()=>{
@@ -1044,6 +1067,8 @@ function collectorLines(name,p){
     if(p.reason==="visible")return [tr("All checked sources are visible in the account's dialogs."),counts];
     if(p.reason==="some_unconfirmed")return [tr("Some sources were not found among the account's chats; the others continue."),counts];
     if(p.reason==="none_visible")return [tr("None of the sources was found among the account's chats."),counts];
+    if(p.reason==="access_lost")return [tr("The account was removed from every source or can no longer read them."),counts];
+    if(p.reason==="some_access_lost")return [tr("The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue."),counts];
     if(p.reason==="not_checked")return [tr("Sources are checked when observation starts.")];
     return [tr("No source is selected.")];
   }
@@ -1307,6 +1332,8 @@ function renderAccounts(){
   $("accounts-limit").textContent=trn("{n} workspace. Add as many as you need — each uses its own Telegram account.",
     "{n} workspaces. Add as many as you need — each uses its own Telegram account.",list.length);
   $("account-add-form").querySelector("button").disabled=s.demo;
+  const exits=new Map();
+  for(const value of list){const net=value.collector?.network,ip=net?.check?.exit_ip;if(ip&&net.managed!=="warp")exits.set(ip,(exits.get(ip)||0)+1);}
   for(const value of list){
     const existing=cards.get(value.id),p=existing?Object.assign(existing.profileData,value):value;
     const c=p.collector,current=p.id===state.profile,down=!!p.error_type||!c;
@@ -1324,7 +1351,12 @@ function renderAccounts(){
       pair(tr("Observation"),s.demo?tr("Sample data"):accountPhaseLabel(p),"observation");
       const attention=!s.demo&&p.health?Object.keys(healthPartNames).filter(name=>needsLook(p.health[name]?.state)):[];
       if(attention.length)pair(tr("Needs attention"),attention.map(name=>healthPartNames[name]+" — "+healthStates[healthKnown(p.health[name].state)][0]).join(" · "),"attention");
-      pair(tr("Sources"),tr("{n} active",{n:p.sources_enabled||0})+(p.sources_total?" / "+p.sources_total:""),"sources");
+      const restricted=c.account_restriction&&(!c.account_restriction.until||c.account_restriction.until*1000>Date.now())?c.account_restriction:null;
+      pair(tr("Route"),[routeText(c.network),exitText(c.network?.check)].filter(Boolean).join(" · ")||"—","route");
+      const sharing=exits.get(c.network?.check?.exit_ip)||0;
+      if(sharing>1)meta.lastElementChild.lastElementChild.append(node("span","route-shared",tr("Same exit address as other accounts: {n}",{n:sharing-1})));
+      if(restricted)pair(tr("Telegram restriction"),restrictionText(restricted.kind),"restriction");
+      pair(tr("Sources"),(p.sources_enabled||0)+(p.sources_total?" / "+p.sources_total:""),"sources");
       pair(tr("Journal"),p.stats?trn("{n} event","{n} events",p.stats.total):tr("Unavailable"),"events");
       pair(tr("Pending media"),String(c.media_pending||0),"pending");
       pair(tr("Last update"),c.last_update_at?fmtTime(c.last_update_at):"—","updated");
@@ -1478,6 +1510,8 @@ $("account-add-form").addEventListener("submit",event=>{
 $("accounts-refresh").addEventListener("click",e=>busy(e.currentTarget,async()=>{await loadProfiles();}));
 function excerpt(e) {
   const p=e.payload;
+  if (p.ephemeral_media) return [excerpt({...e,payload:{...p,ephemeral_media:null}}),
+    ephemeralMediaText(p.ephemeral_media)].filter(Boolean).join(" · ");
   if (p.text) return p.text;
   if (e.kind==="message.deleted") return tr("Earlier captured versions remain available. Telegram does not report who deleted the message.");
   if (e.kind==="message.missing_on_recheck") return tr("Telegram no longer returns this message; no deletion notice was received.");
@@ -1531,6 +1565,14 @@ function excerpt(e) {
     case "network.route_fallback": return tr("Telegram sees this server's address until a listed proxy answers");
     case "network.policy_changed": return exposureNames[p.exposure]||p.exposure;
     case "network.probe": return p.connected ? tr("Telegram transport connected") : tr("Connection failed")+failure;
+    case "network.connection_checked": return p.telegram_connected?[tr("Telegram connected"),p.exit_ip,countryName(p.country),p.warp?"WARP: "+p.warp:"",
+      p.latency_ms!=null?p.latency_ms+" ms":""].filter(Boolean).join(" · "):tr("Not connected")+failure;
+    case "connection.opened": case "connection.closed": return [routeText(p.route),p.dc_id?"DC "+p.dc_id:"",
+      p.role==="current"?"":tr({candidate:"sign-in connection",other:"helper connection"}[p.role]||p.role)].filter(Boolean).join(" · ");
+    case "account.sessions": return tr("Other sessions: {n}",{n:(p.others||[]).length})+
+      ((p.added||[]).length?" · "+tr("new: {n}",{n:p.added.length}):"")+((p.removed||[]).length?" · "+tr("ended: {n}",{n:p.removed.length}):"");
+    case "account.session_ended": return [p.device_model,[p.app_name,p.app_version].filter(Boolean).join(" "),p.country].filter(Boolean).join(" · ");
+    case "account.restricted": case "account.restriction_expired": return restrictionText(p.kind);
     case "profile.created": return p.label||p.id;
     case "profile.unavailable": return p.profile_id+failure;
     case "snapshot.started": return tr("Up to {n} recent messages",{n:p.limit});
@@ -1571,6 +1613,10 @@ function eventRow(e) {
     const title=node("div","event-title",label[0]); title.append(node("span","",tr("Record #{n}",{n:e.seq})));
     const mobileMeta=node("div","event-mobile-meta",sourceTitle(e.chat_id)+" · ");
     mobileMeta.append(timeNode(e.observed_at));text.append(title,node("div","event-excerpt",window.TgWitnessPrivacy.preview(safeExcerpt(e))),mobileMeta);
+    if(e.match?.machine_recognition){
+      const found=node("div","event-match",tr(e.match.source==="transcription"?"Matched in the transcript (machine recognition):":"Matched in recognized image text (machine recognition):"));
+      found.append(node("q","",window.TgWitnessPrivacy.preview(e.match.excerpt||"")));text.append(found);
+    }
     const mark=node("span","event-icon "+label[2]); mark.append(icon(label[1]));
     summary.append(mark,text); cell.append(summary);
     const source=node("td"); source.append(node("span","source-title",sourceTitle(e.chat_id)),node("span","source-id",e.chat_id || tr("system")));
@@ -1602,6 +1648,7 @@ async function refreshEvents(direction=false) {
   if(state.view!=='observations')return;
   await journalReady;
   window.TgWitnessJournal.sync();
+  if(state.search&&state.searchMode==="relevance"&&!state.boardSlice){await refreshRanked(++state.request);return;}
   const request=++state.request,params=new URLSearchParams({limit:"200",include_count:"true"});
   const after=direction==="newer"?state.eventAfter:null;
   const before=direction==="latest"?null:direction===true||direction==="older"?state.cursor:state.eventBefore;
@@ -1622,8 +1669,22 @@ async function refreshEvents(direction=false) {
   renderEvents();
   if(direction)window.TgWitnessRouter?.record({seq:null,before:state.eventBefore});
 }
-const journalReady=import('./components/journal.js?v=4').then(({createJournal})=>{
+async function refreshRanked(request) {
+  const params=new URLSearchParams({q:state.search,limit:"200",source:state.searchSource||"messages"});
+  if(state.source)params.set("chat_id",state.source);
+  if(state.eventSince)params.set("since",state.eventSince);
+  if(state.eventUntil)params.set("until",state.eventUntil);
+  const result=await json("search?"+params,undefined,viewOptions('observations'));
+  if(request!==state.request)return;
+  const counts=Object.values(result.matched||{});
+  state.events=result.events;state.cursor=state.eventAfter=state.eventBefore=null;
+  state.eventMatched=counts.length&&counts.every(Number.isFinite)?counts.reduce((a,b)=>a+b,0):null;
+  state.searchIndex=result.index;
+  renderEvents();
+}
+const journalReady=import('./components/journal.js?v=5').then(({createJournal})=>{
   window.TgWitnessJournal=createJournal({get:$,state,node,icon,tr,invalidate:()=>{state.request++;},error:message=>toast(message,true),
+    request:(path,body)=>json(path,body),admin:()=>!!state.me?.admin,
     changed:async()=>{state.boardSlice=null;state.boardAdded=false;$('board-slice-context')?.remove();state.cursor=state.eventBefore=state.eventAfter=state.eventMatched=null;closeDetail({history:false});window.TgWitnessRouter?.record({seq:null});await refreshEvents();},
     page:direction=>{closeDetail({history:false});return refreshEvents(direction);},openDetail,showBackdrop:visible=>show("drawer-backdrop",visible),
     openChat:async event=>{
@@ -1647,6 +1708,14 @@ $("collector-toggle").addEventListener("click",e=>busy(e.currentTarget,async()=>
 }));
 function detailBlock(label,text,cls="") {
   const n=node("div","detail-block "+cls); n.append(node("small","",label),window.TgWitnessPrivacy.render(text||tr("(No text in this version)"),{className:"message-text",tr})); return n;
+}
+function ephemeralMediaText(facts) {
+  const title=facts.mode==="view_once"?tr("View-once media"):tr("Self-destructing media：{n} s",{n:facts.ttl_seconds});
+  const outcomes={saved:"File preserved",unavailable:"Attachment unavailable when observed",not_saved:"File not preserved",
+    retry:"Preservation pending",hashed:"File hashes; content not downloaded"};
+  const detail=outcomes[facts.outcome]||(facts.availability==="unavailable_at_observation"?outcomes.unavailable:null);
+  return [title,detail?tr(detail):null,tr("Saving this attachment does not establish that a person viewed it."),
+    facts.outcome&&facts.outcome!=="saved"?tr("Self-destructing media may disappear before another attempt."):null].filter(Boolean).join(" · ");
 }
 async function openDetail(e,options={}) {
   const detailView=state.view,detailRevision=state.workspaceRevision;await journalReady;
@@ -1760,12 +1829,22 @@ function mediaLimitText(c,short=false){
 function renderHistory(){
   const s=state.status,h=s?.history||{phase:"none"},phase=h.phase;
   const active=phase==="running",paused=phase==="paused",exists=phase!=="none";
+  $("history-options").disabled=active||paused;
+  if((active||paused)&&h.options){
+    $("history-transport").value=h.options.transport;
+    $("history-workers").value=String(h.options.media_workers);
+    $("history-admin").checked=h.options.admin_log;
+    $("history-compare").checked=h.options.compare_saved;
+  }
   show("history-card",may("sources")&&!s?.chats_limited);
   show("history-start",!active&&!paused);show("history-pause",active);
   show("history-resume",paused);show("history-cancel",active||paused);
   show("history-report",exists&&may("export"));
   $("history-start").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export||!s?.targets.some(x=>x.enabled);
   $("history-resume").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export;
+  const busyAccount=!s?.demo&&!!s?.collector.has_session&&!s?.collector.available_for_export&&!active;
+  show("history-availability",busyAccount);
+  $("history-availability").textContent=busyAccount?tr("This account is busy. Pause observation or its current task before loading history."):"";
   const labels={running:tr("Loading history"),paused:tr("History paused"),complete:tr("History reading finished"),
     incomplete:tr("History finished with gaps"),cancelled:tr("History run ended")};
   const counts=h.sources_by_phase||{},finished=(counts.complete||0)+(counts.failed||0)+(counts.skipped||0);
@@ -1774,18 +1853,31 @@ function renderHistory(){
     tr("{n} enabled sources. History requires an idle account; pause observation first.",{n:s?.targets.filter(x=>x.enabled).length||0});
   $("history-media").textContent=exists?tr("Attachments: {done} saved, {pending} pending, {failed} failed. Unavailable messages: {missing}.",{
     done:h.media?.done||0,pending:h.media_pending||0,failed:h.media?.failed||0,missing:h.unavailable||0}):"";
+  $("history-wait").textContent=h.wait_until>Date.now()/1000?
+    tr("Telegram wait until {time}",{time:new Date(h.wait_until*1000).toLocaleString()}):
+    exists&&h.pacing?.delay_seconds?tr("Account request spacing: {seconds} s",{seconds:Number(h.pacing.delay_seconds).toFixed(1)}):"";
   const list=$("history-sources");list.replaceChildren();
   const phases={queued:tr("Queued"),reading:tr("Reading history"),complete:tr("History reading finished"),
     failed:tr("Failed"),skipped:tr("Skipped")};
   for(const source of h.sources||[]){
+    const admin=["before","after"].map(stage=>{
+      const p=source.metadata?.["admin_"+stage];
+      const status={reading:tr("Reading"),complete:tr("Complete"),unavailable:tr("Unavailable"),not_applicable:tr("Not applicable")};
+      return p?tr("Recent Actions ({stage}): {status} · {count}",{
+        stage:stage==="before"?tr("Before history"):tr("After history"),status:status[p.status]||p.status,count:p.observed})+
+        (p.error?" · "+p.error:""):"";
+    }).filter(Boolean).join(" · ");
     list.append(node("li","",source.title+" · "+(phases[source.phase]||source.phase)+" · "+source.captured+
-      (source.error?" · "+tr(source.error):"")));
+      (source.error?" · "+tr(source.error):"")+(admin?" · "+admin:"")));
   }
   if(h.sources_total>50)list.append(node("li","hint",tr("The signed report lists every source.")));
 }
 for(const action of ["start","pause","resume","cancel"]){
   $("history-"+action).addEventListener("click",e=>busy(e.currentTarget,async()=>{
-    await json("history/"+action,{});await refreshStatus();await refreshEvents();
+    const options=action==="start"?{transport:$("history-transport").value,
+      media_workers:Number($("history-workers").value),admin_log:$("history-admin").checked,
+      compare_saved:$("history-compare").checked}:{};
+    await json("history/"+action,options);await refreshStatus();await refreshEvents();
   }));
 }
 $("history-report").addEventListener("click",e=>busy(e.currentTarget,()=>download("history/report","tgwitness-history-report.json")));
@@ -1873,7 +1965,9 @@ function renderExportState(x){
   const percent=running&&x.total?Math.min(99,Math.floor((x.captured||0)*100/x.total)):null;
   if(!x||x.phase==="unknown"){prog.textContent="";return;}
   const counts={title:x.title||tr("chat"),captured:(x.captured||0).toLocaleString(),total:(x.total||0).toLocaleString(),percent};
-  if(running)prog.textContent=tr("Exporting {title}: ",counts)+tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages read",counts)+
+  if(running&&x.stage==="files")prog.textContent=tr("Exporting {title}: ",counts)+tr("{captured} messages saved; files: {done}/{total}",{captured:counts.captured,done:(x.files_done||0).toLocaleString(),total:(x.files_total||0).toLocaleString()})+
+    (x.eta_seconds!==null&&x.eta_seconds!==undefined?" · "+tr("{time} left",{time:fmtDuration(x.eta_seconds)}):"")+"…";
+  else if(running)prog.textContent=tr("Exporting {title}: ",counts)+tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages read",counts)+
     (x.eta_seconds!==null&&x.eta_seconds!==undefined?" · "+tr("{time} left",{time:fmtDuration(x.eta_seconds)}):"")+"…";
   else if(x.phase==="done")prog.textContent=tr("Done: {captured} messages. Download the signed bundle.",counts);
   else if(x.phase==="failed")prog.textContent=tr("Export failed")+(x.error?" ("+x.error+")":"")+". "+tr("Try again.");
@@ -1904,7 +1998,8 @@ function syncExport(s){
 $("chat-export-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   const chat_id=Number($("chat-export-source").value),language=exportLanguage();
   if(!chat_id)throw new Error(tr("Select a source to export."));
-  const x=await json("chat-export/start",language?{chat_id,language}:{chat_id});
+  const files=$("chat-export-files").value||null;
+  const x=await json("chat-export/start",{chat_id,...(language?{language}:{}),...(files?{files}:{})});
   state.exportId=x.id;renderExportState(x);
   toast(tr("Full chat export started. Large chats can take a while."));pollExport(x.id);
 });});
@@ -2106,7 +2201,7 @@ function accountExportNextStep(job){
     'Progress is saved. Choose Resume to continue this job.');
   if(job.phase==='waiting')return tr(job.active!==false?
     'Telegram has asked this job to wait. It will continue automatically while TgWitness is running.':accountExportWaiting(job)?
-    'Open Telegram on a device where you were already signed in and allow this export. Then choose Check approval. Otherwise resume after the displayed deadline. Keep this session.':
+    'Open Telegram on another device that was signed in before this request and allow this export．The requesting session and a fresh login cannot approve it．Then choose Check approval，or keep this session and resume after the displayed deadline．':
     'Progress is saved. Choose Resume to continue this job.');
   if(job.phase==='paused')return tr('Progress is saved. Choose Resume to continue this job.');
   if(job.phase==='failed')return tr('Review the error below, then choose Resume to retry from saved progress.');
@@ -2179,6 +2274,11 @@ function renderAccountExportJobs(){
     if(Number.isFinite(counts.unique_media_bytes))metric(tr("unique file bytes saved"),counts.unique_media_bytes);
     else if(Number.isFinite(counts.bytes_saved))metric(tr("bytes saved"),counts.bytes_saved);
     if(facts.childNodes.length)card.append(facts);
+    const transfer=job.active!==false&&job.transfer;
+    if(transfer){
+      const received=humanSize(transfer.received_bytes),total=transfer.total_bytes==null?tr('Unknown'):humanSize(transfer.total_bytes);
+      card.append(node('p','account-export-transfer',tr('Current file：{received} received of {total}．Preserved after the download completes．',{received,total})));
+    }
     const current=job.current_chat;
     if(current)card.append(node("p","account-export-job-note",tr("Current chat: {name}",
       {name:typeof current==="object"?(current.title||current.id||current.chat_id||tr("Unknown")):current})));
@@ -2368,6 +2468,7 @@ function accountDisclosurePolicy(){
     disclose_user_ids:identity_mode==="pseudonymize_third_parties"?
       accountExportIds($("account-disclosure-disclose-ids").value,"disclosed user"):[],
     text_mode:$("account-disclosure-text-mode").value,
+    withheld_markers:$("account-disclosure-withheld").value,
     include_media:$("account-disclosure-media").checked,
     include_contacts:false,include_profile:false,include_profile_photos:false,
     include_stories:false,include_session_metadata:false,include_other_data:false};
@@ -3911,7 +4012,8 @@ function renderConnection(){
     mtproxy_auto:"Automatic MTProxy"}[r.kind]);
   const auto=r.kind==="mtproxy_auto",now=auto&&r.current,pool=(auto&&r.pool)||{};
   $("route-summary").textContent=route;
-  $("route-line-text").textContent=tr("Connection: {route}",{route:r.kind==="direct"||(auto&&!now)?route:route+" · "+(now||r).host+":"+(now||r).port});
+  $("route-line-text").textContent=tr("Connection: {route}",{route:r.managed?[routeText(r),exitText(r.check)].filter(Boolean).join(" · "):
+    r.kind==="direct"||(auto&&!now)?route:route+" · "+(now||r).host+":"+(now||r).port});
   show("route-line",!state.status.demo);show("network-running",!state.status.demo&&c.running);
   renderSeenBy();
   if(!$("network-pause-change")){const b=node("button","secondary small",tr("Pause observation and change the route"));b.type="button";b.id="network-pause-change";
@@ -3932,7 +4034,15 @@ function renderConnection(){
     networkLoadedFor=state.profile;routeFields();
   }
   $("network-form").querySelector('[type="submit"]').disabled=state.status.demo||c.running;
-  $("network-test").disabled=state.status.demo;$("sign-out").disabled=state.status.demo;
+  $("network-test").disabled=state.status.demo;
+  const importedSession=!!c.account&&(c.account||{}).key_origin!=="created";
+  $("sign-out").disabled=state.status.demo||importedSession;$("sign-out").hidden=importedSession;$("sign-out-locked").hidden=!importedSession;
+  $("forget-session").hidden=!importedSession;$("forget-session").disabled=state.status.demo;
+  const restricted=c.account_restriction&&(!c.account_restriction.until||c.account_restriction.until*1000>Date.now())?c.account_restriction:null;
+  $("account-restriction").hidden=!restricted;
+  if(restricted)$("account-restriction").textContent=restrictionText(restricted.kind)+" · "+(restricted.until?
+    tr("sending, joining and bot buttons are off until {time}; reading continues",{time:fmtTime(new Date(restricted.until*1000).toISOString())}):
+    tr("sending, joining and bot buttons are off; reading continues"));
   if(state.status.demo)$("proxy-catalog-refresh").disabled=true;
   $("proxy-catalog-apply").disabled=state.status.demo||c.running||!$("proxy-catalog-select").value;
   const summary=$("protection-summary");summary.replaceChildren();
@@ -3956,11 +4066,24 @@ document.querySelectorAll("[data-route-preset]").forEach(button=>button.addEvent
   (preset==="socks5"?$("network-host"):$("network-form").querySelector('[type="submit"]')).focus();
 }));
 const LOCAL_HOSTS=["127.0.0.1","localhost","::1"];
+const RESTRICTION_NAMES={frozen:"Frozen by Telegram",spam_block:"Spam block",peer_flood:"Too many actions (PEER_FLOOD)"};
+function restrictionText(kind){return RESTRICTION_NAMES[kind]?tr(RESTRICTION_NAMES[kind]):kind||"";}
+function routeText(route){
+  if(!route)return "";
+  if(route.managed==="warp")return "Cloudflare WARP";
+  if(route.managed==="vpn")return tr("WireGuard VPN");
+  if(route.fallback_to_direct||route.kind==="direct")return tr("Direct connection");
+  return tr({mtproxy_auto:"Automatic MTProxy",socks5:"SOCKS5 proxy",http:"HTTP proxy",mtproxy:"MTProxy"}[route.kind]||route.kind||"");
+}
+function countryName(code){try{return code?new Intl.DisplayNames([document.documentElement.lang||"en"],{type:"region"}).of(code):"";}catch{return code||"";}}
+function exitText(check){return check&&check.exit_ip?[check.exit_ip,countryName(check.country)].filter(Boolean).join(" · "):"";}
 function renderSeenBy(){
   const c=state.status.collector,r=c.network||{},id=c.client||{},list=$("seen-by-list");
   show("seen-by",!state.status.demo);if(state.status.demo)return;
-  const direct=r.kind==="direct"||r.fallback_to_direct,now=r.kind==="mtproxy_auto"&&r.current;
+  const direct=r.kind==="direct"||r.fallback_to_direct,now=r.kind==="mtproxy_auto"&&r.current,exit=exitText(r.check);
   const address=direct?tr("This server's own address")+(r.exposure==="tunnel"?" "+tr("(or that of the tunnel or VPN it uses)"):""):
+    r.managed==="warp"?tr("Cloudflare WARP exit address")+(exit?": "+exit:""):
+    r.managed==="vpn"?tr("Exit address of your WireGuard VPN")+(exit?": "+exit:""):
     r.kind==="socks5"&&LOCAL_HOSTS.includes(r.host)?tr("The exit of the proxy on this machine (Tor or another local proxy, port {port})",{port:r.port}):
     r.kind==="mtproxy_auto"?(now?tr("The MTProxy server {host}",{host:now.host}):tr("An MTProxy server from the public lists, once one is chosen")):
     tr("The proxy {host}",{host:r.host});
@@ -4252,6 +4375,56 @@ $("sign-out").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   clearSecrets();await refreshStatus();setAuthStep("credentials");
   toast(tr(r.telegram_session_ended?"Signed out. Telegram ended the session.":
     "Signed out here. Telegram did not confirm: end the session in Telegram under Settings → Devices."),!r.telegram_session_ended);
+}));
+async function showAccountSessions(){
+  const owner=actionOwner(),box=$("account-sessions");
+  const r=await json("account/sessions",undefined,{profile:owner.profile,token:owner.token});
+  if(!owner.current())return;
+  box.replaceChildren();box.hidden=false;
+  const others=r.sessions.filter(s=>!s.current).length;
+  box.append(node("p","hint",others?tr("Other sessions signed in to this account: {n}",{n:others}):
+    tr("No other sessions. Only this one is signed in.")));
+  for(const s of [...r.sessions].sort((a,b)=>Number(b.current)-Number(a.current)||String(b.active_at).localeCompare(String(a.active_at)))){
+    const row=node("div","account-session"+(s.current?" current":""));
+    row.append(node("span","account-session-device",[s.device_model,[s.app_name,s.app_version].filter(Boolean).join(" ")].filter(Boolean).join(" · ")+
+      (s.official_app?"":" · "+tr("unofficial app"))));
+    row.append(node("span","muted",[[s.region,s.country].filter(Boolean).join(", "),tr("first sign-in {date}",{date:(s.created_at||"").slice(0,10)}),
+      s.current?"":tr("last active {date}",{date:(s.active_at||"").slice(0,10)})].filter(Boolean).join(" · ")));
+    if(s.current)row.append(node("strong","",tr("This session (TgWitness)")));
+    else{
+      const end=node("button","quiet danger",tr("End session"));end.type="button";
+      end.addEventListener("click",e=>busy(e.currentTarget,async()=>{
+        if(!(await askConfirm(tr("End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness."),{danger:true,confirmText:tr("End session")})))return;
+        if(!owner.current())return;
+        await json("account/sessions/end",{hash:s.hash},{profile:owner.profile,token:owner.token});
+        toast(tr("Session ended."));await showAccountSessions();
+      }));
+      row.append(end);
+    }
+    box.append(row);
+  }
+}
+$("account-sessions-show").addEventListener("click",e=>busy(e.currentTarget,showAccountSessions));
+$("account-password").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const owner=actionOwner();
+  const prompt=(label,options={})=>window.TgWitnessDialogs.prompt("",{title:tr("Two-step password"),label:tr(label),maxLength:256,...options});
+  const current=await prompt("Current two-step password. Leave empty if the account has none.",{type:"password",autocomplete:"current-password",required:false});
+  if(current===null||!owner.current())return;
+  const next=await prompt("New two-step password.",{type:"password",autocomplete:"new-password"});
+  if(next===null||!owner.current())return;
+  const hint=await prompt("Password hint (optional).",{required:false});
+  if(hint===null||!owner.current())return;
+  await json("account/password",{current_password:current||null,new_password:next,hint},{profile:owner.profile,token:owner.token});
+  toast(tr("Two-step password saved in Telegram. TgWitness does not keep it."));
+}));
+$("forget-session").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const owner=actionOwner();
+  if(state.status.collector.running){toast(tr("Pause observation before forgetting the session."),true);return;}
+  if(!(await askConfirm(tr("Forget this session on this computer? It stays active in Telegram. The journal, sources and signing key stay; only the same account can connect to this workspace again."),{confirmText:tr("Forget on this computer")})))return;
+  if(!owner.current())return;
+  await json("auth/forget",{},{profile:owner.profile,token:owner.token});
+  clearSecrets();await refreshStatus();setAuthStep("credentials");
+  toast(tr("Forgotten on this computer. The session is still active in Telegram."));
 }));
 
 const avatarCache=new Map();

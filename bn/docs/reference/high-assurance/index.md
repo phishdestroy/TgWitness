@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-
 
 Hetzner বা Phala Cloud-এ সিল করা ২৪/৭ সার্ভার, Gateway DNS এবং তৃতীয় পক্ষ পুনরায় যাচাই করতে পারে এমন চেকসমূহ।
 
-একটি স্বাক্ষরিত জার্নাল প্রমাণ করে যে স্বাক্ষরের **পর** রেকর্ডগুলো পরিবর্তন করা হয়নি। গুরুতর ক্ষেত্রে পরবর্তী প্রশ্ন হল, স্বাক্ষরের **আগে** কেউ তথ্যটি পরিবর্তন করেছিল কি না: কে কালেক্টরটি চালিয়েছিল, কোন মেশিনে, এবং কেউ এতে লগইন করেছিল কি না। এই ঐচ্ছিক মোডটি কালেক্টরটিকে এমনভাবে মোতায়েন করে যাতে তৃতীয় পক্ষ অপারেটরের কথার ওপর নির্ভর না করে ক্লাউড প্রদানকারী ও ক্লাউডফ্লেয়ারের সংরক্ষিত রেকর্ড ব্যবহার করে তা যাচাই করতে পারে।
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 সাধারণ স্থানীয় এবং Docker ব্যবহার অপরিবর্তিত রয়েছে। এখানে কিছুই চলে না যদি না আপনি সাথে ডিপ্লয় করেন `python -m tgwitness.cloud`, এবং কালেক্টর তার হোস্ট শুধুমাত্র তখনই পড়ে যখন ডিপ্লয়মেন্ট সেট করে `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Hetzner বা Phala Cloud-এ সিল করা ২৪/৭ সার্ভা
 | স্বাক্ষর কীটি ঐ সার্ভারে তৈরি করা হয়েছিল | কী প্রদানকারীর সার্ভার আইডি এবং প্রাপ্ত ক্লাউড-ইনિટের হ্যাশের নাম উল্লেখ করে একটি বিবৃতি স্বাক্ষর করে। | প্রোভাইডারের বিরুদ্ধে যাচাইকৃত কালেক্টর |
 | জার্নালটি সেই কী এবং সার্ভারের অন্তর্গত | প্রত্যেক প্রক্রিয়া প্রমাণপত্রের ZIP-এ শুরু হয়, যা সেই সার্ভারের হোস্ট পরিমাপ বহন করে। | প্রমাণ ZIP |
 
-হোস্ট পরিমাপ (SSH লিসেনার এবং প্রসেস, বর্তমান সেশন, লগইনগুলি `wtmp`, বুট) সংগ্রহকারী নিজেই রিপোর্ট করে এবং প্রতিটি প্রক্রিয়া শুরুতে এবং `host.state` রেকর্ডগুলো যখনই পরিবর্তিত হয়, সেগুলো স্বাক্ষরিত হয়। সার্ভারে রুট অ্যাক্সেস থাকলে সেগুলো ভুয়া করা যেতে পারে; সেগুলো প্রতিস্থাপনের পরিবর্তে প্রদানকারী এবং Cloudflare রেকর্ডগুলোকে সমর্থন করে।
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## প্রদানকারীরা
 
@@ -269,11 +269,8 @@ Gateway DNS সিস্টেম রিসলভারকে আচ্ছাদ
 
 Cloudflare টেলিগ্রামের এনক্রিপশনের ভিতরে দেখতে পারে না, টেলিগ্রাম অ্যাকাউন্টের অন্যান্য ডিভাইস (প্রমাণ মোডের ডিভাইস তালিকা টেলিগ্রামের পক্ষ থেকে সেগুলো রেকর্ড করে) বা প্রদানকারীর হাইপারভাইজার দেখতে পারে না।
 
-## এটি যা প্রতিষ্ঠিত করে না
+## Reading the deployment result
 
-- প্রোভাইডার এবং এর কর্মীরা হাইপারভাইজার, ডিস্ক এবং নেটওয়ার্ক নিয়ন্ত্রণ করে।
-- হোস্ট পরিমাপগুলো সংগ্রহকারী নিজেই রিপোর্ট করে।
-- আগের ফায়ারওয়াল নিয়মের বিষয়বস্তু প্রতিটি প্রদানকারীর লগে নেই; শুধুমাত্র Linode নিয়মের সংস্করণ সংরক্ষণ করে।
-- এটি বার্তার সত্যতা সম্পর্কে নতুন কিছু বলে না; দেখুন [প্রমাণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)।
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-এখনও বাস্তব অ্যাকাউন্টে চালানো হয়নি: আপনার নিজস্ব ডোমেইন (Cloudflare টানেল এবং DNS) অধীনে একটি ডিপ্লয়মেন্ট, অন্যান্য প্রদানকারী, একটি ডিবাগ ডিপ্লয়মেন্ট এবং `lock`, একটি সার্ভারে একটি টেলিগ্রাম অ্যাকাউন্ট, এবং একটি দ্রুত টানেলের মাধ্যমে পরবর্তী সংস্করণগুলির লাইভ আপডেট। প্রতিটি প্রদানকারীর প্রথম ডিপ্লয়মেন্ট পরীক্ষা করুন `plan`, একটি ডিবাগ ডিপ্লয়মেন্ট এবং `verify` কেসে নির্ভর করার আগে।
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-
 
 Hetzner या Phala Cloud पर एक सीलबंद 24/7 सर्वर, Gateway DNS और तीसरे पक्ष द्वारा दोहराए जा सकने वाले जाँच।
 
-एक हस्ताक्षरित जर्नल यह साबित करता है कि हस्ताक्षर करने **के बाद** रिकॉर्ड नहीं बदले गए थे। गंभीर मामलों के लिए अगला सवाल यह है कि क्या किसी ने हस्ताक्षर किए जाने से **पहले** डेटा को बदला था: कलेक्टर किसने चलाया, किस मशीन पर, और क्या कोई उसमें लॉग इन हुआ था। यह वैकल्पिक मोड कलेक्टर को इस तरह से तैनात करता है कि कोई तीसरा पक्ष ऑपरेटर की बात पर भरोसा करने के बजाय, क्लाउड प्रदाता और क्लाउडफ्लेयर द्वारा रखे गए रिकॉर्ड का उपयोग करके इसकी जांच कर सकता है।
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 साधारण स्थानीय और Docker उपयोग अपरिवर्तित है। यहाँ कुछ भी तब तक नहीं चलता जब तक आप के साथ डिप्लॉय नहीं करते। `python -m tgwitness.cloud`, और कलेक्टर अपने होस्ट को केवल तब पढ़ता है जब डिप्लॉयमेंट सेट करता है `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Hetzner या Phala Cloud पर एक सीलबंद 24/7 सर्वर
 | हस्ताक्षर कुंजी उस सर्वर पर बनाई गई थी | की प्रदाता के सर्वर आईडी और प्राप्त cloud-init के हैश का नाम बताने वाले एक कथन पर हस्ताक्षर करती है। | प्रदाता के खिलाफ जांचा गया कलेक्टर |
 | यह जर्नल उस कुंजी और सर्वर से संबंधित है | प्रत्येक प्रक्रिया साक्ष्य में शुरू होती है ZIP उस सर्वर के लिए होस्ट माप को वहन करता है | साक्ष्य ZIP |
 
-होस्ट माप (SSH लिसनर्स और प्रक्रियाएँ, वर्तमान सत्र, लॉगिन में `wtmp`, बूट) की रिपोर्ट स्वयं कलेक्टर द्वारा की जाती है और हर प्रक्रिया की शुरुआत में और में हस्ताक्षर किए जाते हैं `host.state` रिकॉर्ड्स में बदलाव होने पर उन्हें स्वयं कलेक्टर द्वारा रिपोर्ट किया जाता है और हस्ताक्षरित किया जाता है। सर्वर पर रूट होने पर उन्हें फर्जी बनाया जा सकता है; वे प्रदाता और Cloudflare रिकॉर्ड्स को बदलने के बजाय उनका समर्थन करते हैं।
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## प्रदायक
 
@@ -269,11 +269,8 @@ Logpush, जो Cloudflare की अपनी प्रति R2 में र�
 
 Cloudflare टेलीग्राम के एन्क्रिप्शन के अंदर, टेलीग्राम खाते पर अन्य डिवाइस (एविडेंस मोड की डिवाइस सूची उन्हें टेलीग्राम की ओर से रिकॉर्ड करती है) या प्रदाता के हाइपरवाइज़र को नहीं देख सकता।
 
-## यह क्या स्थापित नहीं करता
+## Reading the deployment result
 
-- प्रदाता और उसके कर्मचारी हाइपरवाइज़र, डिस्क और नेटवर्क को नियंत्रित करते हैं।
-- होस्ट माप संग्रहकर्ता द्वारा स्वयं रिपोर्ट किए जाते हैं।
-- पहले के फ़ायरवॉल नियमों की सामग्री हर प्रदाता के लॉग में नहीं होती; केवल Linode ही नियमों के संस्करणों को रखता है।
-- यह संदेश की प्रामाणिकता के बारे में कुछ नया नहीं कहता; देखें [साक्ष्य](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/)।
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-असली खातों पर अभी तक नहीं चलाया गया है: आपके अपने डोमेन (क्लाउडफ्लेयर टनल और DNS) के तहत एक डिप्लॉयमेंट, अन्य प्रदाताओं, एक डिबग डिप्लॉयमेंट और `lock`, ऐसे सर्वर पर एक टेलीग्राम खाता, और एक त्वरित टनल के माध्यम से बाद के संस्करणों के लाइव अपडेट। प्रत्येक प्रदाता पर पहली तैनाती की जाँच करें `plan`, एक डिबग डिप्लॉयमेंट और `verify` मामले में उस पर भरोसा करने से पहले।
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

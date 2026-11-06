@@ -74,9 +74,9 @@ Manbalar har bir akkaunt bo'yicha yangi xabarlar, tahrirlar, o'chirishlar, munos
 | Ma'mur harakatlari | Mavzuga oid yetkazilgan yangilanishlar va admin-log snapshoti kanal/superguruh chat eksportlarida | Eksport mavjud bo'lganda eksport qilayotgan admin akkauntining logini o'qiydi; admin-logni uzluksiz so'rov qilish ushbu yo'ldan tashqarida |
 | Ilova | Asl versiya tavsifi, yuklab olingan baytlar/SHA-256 va urinish natijalari | Yo'qolgan fayl tiklanmasligi mumkin; eng so'nggi versiya o'rniga qo'yilmaydi |
 | Tarix | Joriy ko'rinadigan xabarlarning aniq snapshoti | Barcha tahrirlar yoki o'chirilgan kontentni qayta tiklamaydi |
-| Yig'uvchi jarayon | Boshlash/to'xtatish, yurak urishi, xatolar, sozlamalar, doira va dastur kvitasi | O'z-o'zini hisoblash, mustaqil jarayonni tasdiqlash emas |
+| Yig'uvchi jarayon | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) |
 
-Har qanday harakat faqat manba haqiqatan ham shu ijrochini ko'rsatganda shaxsga tegishli deb hisoblanadi. Aks holda interfeys etishmayotgan tegishlilikni bildiradi. Foydalanuvchi nomlari va ismlar kuzatilgan xususiyatlardir, real dunyo identifikatsiyasining isboti emas.
+The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
 
 ## Sig'im va Telegram cheklovlari
 

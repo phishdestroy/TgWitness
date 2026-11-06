@@ -15,6 +15,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | message_content.py | 전송 액세스 메타데이터를 제외한 메시지 비교 기능 |
 | workers.py | 취소 정리 작업을 수행하기 전에 파일 내보내기 작업이 완료될 때까지 대기 |
 | store.py | WAL 트랜잭션, 순차적 이벤트 체인, 쿼리 필터, 운영 설정 |
+| fulltext.py | 파생된 전체 텍스트 색인(단어 형태, BM25)은 서명된 저널 헤더에 바인딩되며, 절대 내보내지지 않습니다. |
 | security.py | 비공개 파일 생성, 암호화된 보관소, Ed25519 서명, 단일 프로세스 잠금 |
 | evidence.py | 전체 기록부 내보내기, 파생 파일, 체크포인트, 첨부 파일 검증 |
 | verify.py | 독립형, 읽기 전용 검증 도구(표준 라이브러리 + 암호학): 아카이브, 커버리지, 위트니스 저널 및 채널 게시물, 프로필 파일 |

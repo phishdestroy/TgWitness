@@ -8,6 +8,8 @@ Setiap layar pada panel: obrolan, jurnal, sumber, ekspor, Ekstra, mode perlindun
 
 Fungsi setiap layar, apa yang ditulis ke jurnal yang ditandatangani, dan di mana panduan terperinci tersedia. Panel menampilkan satu ruang kerja pada satu waktu: satu akun Telegram dengan sumber, jurnal, dan kunci penandatanganan miliknya sendiri. Pemilih di bagian atas bilah samping digunakan untuk berganti ruang kerja. Alamat membawa informasi ruang kerja (`?ws=…`); selama alamat, pemilih, dan akun yang dimuat tidak sesuai, tindakan akan tetap diblokir.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Temukan jalannya
 
 Bagian harian terletak di bagian atas bilah samping, **"Akun"** berada di bawah **"Ruang Kerja"** , dan semua yang lain berada di bawah **"Alat & pengaturan lainnya"** . Tombol pengalih **tingkat antarmuka** di bilah atas menentukan berapa banyak bagian yang ditampilkan:

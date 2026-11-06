@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/
 
 MCPクライアントを、有効期限付きかつ取り消し可能なアクセス権限で、選択したワークスペースやチャットに接続します。
 
-アナリストクライアントを選択したワークスペースとチャットに接続します。TgWitness は**パネルプロセス内の `/mcp` で Streamable HTTP** を提供します。各接続には独自のトークン、有効期限、許可されたツールが設定されます。MCP は Telegram メッセージの送信、設定の変更、署名付きジャーナルの変更を行うことはできません。
+アナリストクライアントを、選択したワークスペースやチャットに接続します。TgWitnessは、 **パネルプロセス内の`/mcp`でStreamable HTTP**を提供します。各接続には、独自の トークン、有効期限、および許可されたツールが割り当てられます。MCPは、Telegramメッセージの送信、 設定の変更、または署名付きジャーナルの修正を行うことはできません。これらの接続は、 [コマンドライン](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/)でも同様に機能します。
 
 [ワークフローガイド](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ MCP extra がインストールされたクライアントのローカル Python
 | --- | --- |
 | `list_workspaces` | 許可されたワークスペース |
 | `list_chats` | 許可されたチャット |
-| `search_messages` | 選択した期間内の保存済みメッセージテキスト |
+| `search_messages` | 選択した期間内の保存済みメッセージ本文； `ranked=true` [全文検索](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/)に対応（語形変化、最良の一致を優先、 `next_offset` ページング）に対応） |
 | `get_message_versions` | キャプチャされたバージョンと削除の観測記録 |
 | `get_message_context` | 前後のキャプチャ済みメッセージ ID |
 | `get_journal_event` | ソース参照付きのサニタイズされた1件のレコード |
-| `get_capture_status` | 収集状態と許可されたカバレッジレコード |
+| `get_capture_status` | 収集状況、許可されたカバレッジ記録、および `gap_summary`：チャンネルまたはスーパーグループごと、およびアカウント全体のシーケンスにおける、未観測のメッセージ番号（[詳細](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#missing-message-numbers-gap_summary)）；チャットを選択して、そのリストされた欠落箇所を確認する |
+| `get_activity_stats` | UTC 時間および曜日ごとのメッセージ数、ピーク日、編集・削除の割合、送信者、ドメイン、および `@handles`、およびカバレッジ（[詳細](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/#activity-statistics)） |
+| `export_messages` | コマンドライン専用で、デフォルトでは選択されません：観測データを JSON Lines 形式でストリーム保存します（[詳細](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/#export)）。MCP 経由では提供されません。 |
 
 `tools/list` は、その接続に許可されたツールのみを返します。他のツールへの呼び出しは拒否されます。グループコンテキスト、エピソード、用語、リプライチェーンのツールはこのビルドでは提供されていません（それらの別個のコンテキストパックバックエンドは含まれていません）。
 

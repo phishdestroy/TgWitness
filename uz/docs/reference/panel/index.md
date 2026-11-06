@@ -8,6 +8,8 @@ Panelning har bir ekrani: suhbatlar, jurnal, manbalar, eksportlar, Extras, himoy
 
 Har bir ekran nima qilishini, imzolangan jurnalga nimalarni yozishini va batafsil qo'llanma qaerda ekanligini ko'rsatadi. Panel bir vaqtning o'zida bitta ish maydonini ko'rsatadi: o'z manbalari, jurnali va imzolash kalitiga ega bitta Telegram hisob. Yon panelning yuqori qismidagi selektor ish maydonlarini almashtiradi. Manzil ish maydonini o'zida saqlaydi (`?ws=…`); manzil ish maydonini o'zida saqlaydi ( manzil, selektor va yuklangan hisob bir-biriga to'g'ri kelmasa, harakatlar bloklanib qoladi.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Yo'lingizni toping
 
 Kunlik bo'limlar yon panelning yuqori qismida, **Hisoblar** esa **Ish maydoni** ostida joylashgan, va boshqa barcha narsalar **Qo'shimcha vositalar va sozlamalar** ostida. Yuqori panelda joylashgan **Interfeys darajasi** kaliti nechta bo'lim ko'rinishini belgilaydi:

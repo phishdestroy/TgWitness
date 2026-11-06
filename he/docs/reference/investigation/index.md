@@ -101,7 +101,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/inves
 | אותו קובץ שמור | הושלמו קבלות מדיה מס' 151 ו-209 | ערכי ה-SHA-256 המלאים תואמים עבור הבתים שנשמרו |
 | ייחוס הערוץ | #101 ו-#188 | אין לייחס פוסט בערוץ למשתמש 71001 ללא ציון השולח |
 
-השוו את חתימות ההאש של הקבצים המצורפים והפניות להודעות הקשורות אליהם. קבצים זהים אינם מעידים על יוצר, מעביר או מפעיל משותף. שמות זהים ו אווטרים דומים כשלעצמם אינם מספיקים כדי לקשר בין שני מזהי טלגרם לאדם אחד.
+Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
 
 שמרו את הערות העבודה של הצוות ב-[Case Board](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/): הוסיפו סימניות לרשומות עליהן אתם מסתמכים, כגון #146, #188 ו-#205, הדגישו את מחרוזת היעד המדויקת, ו שמרו קטע מכל פעולה שנרשמה בין שתי רשומות או בטווח זמן מסוים. הערות ומצבים שומרים את סקירת הצוות בהיסטוריה החתומה שלהם, הנפרדת והניתנת לזיהוי מהתצפיות המקוריות.
 
@@ -161,6 +161,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | סכסוכים בנושא הזמנות/תשלומים המנוהלים על ידי בוט | הודעת כניסה → תצוגה מקדימה של קישור שמור → פרמטר הפעלה של הבוט → גרסאות הודעה ומקלדת → קבלות החזרה של פאנל → מעקב פרטי/קבוצתי | נבדקו ציר הזמן של ההצעה והתגובה וכן מקורות מאומתים; קישור לתשלום כשלעצמו אינו מהווה הוכחה לתשלום |
 | הודעות שהוסרו לאחר אירוע | כל הצ'אטים הרלוונטיים → מסמכים מקוריים/עריכות שנשמרו → תוצאות מחיקה או היעדרות בבדיקה חוזרת → מדיה שנשמרה → כיסוי ונקודות מבט אחרות של החשבון | גרסאות משומרות ופרקי זמן לא ידועים המפורשים במפורש; ללא ייחוס כוזב של הגורם למחיקה |
-| משתתף משנה את שמו בצ'אטים שונים | מזהה שולח מספרי → היסטוריית שמות/שמות משתמש → תשובות → צ'אטים נוספים שנצפו → יעדים/קבצים שצוינו | ציר זמן של פעילות חשבון טלגרם שצוטט, שבו זהות בעולם האמיתי והשערות לגבי קשרים נשמרים בנפרד |
+| משתתף משנה את שמו בצ'אטים שונים | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
 
 [הפניה לאוסף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/) · [אימות פרופילים אישיים](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#people-profiles) · [העברת ראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#investigation-handoff) · [אימות הושלם](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/)

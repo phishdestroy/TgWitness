@@ -74,9 +74,9 @@ Sumber menyediakan suis bagi setiap akaun untuk mesej baru, suntingan, pemadaman
 | Tindakan pentadbir | Kemas kini yang berkaitan telah disampaikan dan snapshot log pentadbir dalam eksport sembang saluran/superkumpulan | Eksport membaca log apabila tersedia untuk akaun pentadbir yang mengeksport; pemantauan log pentadbir secara berterusan berada di luar aliran kerja ini |
 | Lampiran | Deskriptor versi asal, bait yang dimuat turun/SHA-256 dan keputusan percubaan | Fail yang hilang mungkin tidak dapat dipulihkan; versi terkini tidak digantikan |
 | Sejarah | Sneak peek eksplisit mesej yang kini kelihatan | Tidak membina semula semua suntingan atau kandungan yang dipadam |
-| Proses pengumpul | Mula/henti, degupan jantung, ralat, tetapan, skop dan resit program | Laporan kendiri, bukan pengesahan proses bebas |
+| Proses pengumpul | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope) |
 
-Sebuah tindakan hanya dikaitkan dengan seseorang jika sumber benar-benar memberikan pelaku tersebut. Jika tidak, antara muka melaporkan kekurangan atribusi. Nama pengguna dan nama adalah atribut yang diperhatikan, bukan bukti identiti dunia sebenar.
+The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
 
 ## Kapasiti dan had Telegram
 

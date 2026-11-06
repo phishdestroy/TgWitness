@@ -8,6 +8,8 @@ TgWitness merekam apa yang diamati oleh akun Telegram yang terhubung. Jurnal ter
 
 ## Dari proses login hingga jurnal
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 Diagram alur · Otorisasi akun pengguna → Pilih grup dan saluran yang dapat diakses; Pilih grup dan saluran yang dapat diakses → Simpan pengaturan peristiwa dan lampiran; Simpan pengaturan peristiwa dan lampiran → Mulai pemantauan; Mulai pemantauan → Dapatkan pembaruan dari klien yang aktif; Dapatkan pembaruan dari klien yang aktif → Terapkan kebijakan sumber dan peristiwa; Terapkan kebijakan sumber dan peristiwa → Tambahkan pengamatan yang ditandatangani; Tambahkan pengamatan yang ditandatangani → Tinjau atau ekspor jurnal tersebut; Tambahkan pengamatan yang ditandatangani → Memproses lampiran yang ada dalam antrian; Memproses lampiran yang ada dalam antrian → Tambahkan hasil unduhan · Otorisasi akunpengguna · Pilih grup dan saluranyang dapat diakses · Simpan pengaturanperistiwa dan lampiran · Mulai pemantauan · Dapatkan pembaruandari klien yang aktif · Terapkan kebijakansumber dan peristiwa · Tambahkan pengamatanyang ditandatangani · Tinjau atau eksporjurnal tersebut · Memproses lampiranyang ada dalam antrian · Tambahkan hasilunduhan
 
 **Diagram dalam bentuk teks**

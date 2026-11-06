@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/
 
 Bir MCP istemcisini, süresi dolan ve iptal edilebilir erişim izniyle seçilen çalışma alanlarına ve sohbetlere bağlayın.
 
-Bir analist istemcisini seçili çalışma alanlarına ve sohbetlere bağlayın. TgWitness, **panel sürecinde `/mcp` adresinde Streamable HTTP** sunar. Her bağlantının kendi belirteci (token), geçerlilik süresi ve izin verilen araçları vardır. MCP; Telegram mesajları gönderemez, ayarları değiştiremez veya imzalı günlüğü (journal) düzenleyemez.
+Bir analist istemcisini seçilen çalışma alanlarına ve sohbetlere bağlayın. TgWitness, **panel sürecinde `/mcp` adresinde Streamable HTTP hizmeti** sunar. Her bağlantının kendine ait bir token'ı, geçerlilik süresi ve izin verilen araçları vardır. MCP, Telegram mesajları gönderemez, ayarları değiştiremez veya imzalı günlüğü düzenleyemez. Aynı bağlantılar [komut satırı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/) ile de çalışır.
 
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ Bir `*.trycloudflare.com` adresi geçicidir. Bir tünel yeniden başlatması ana
 | --- | --- |
 | `list_workspaces` | İzin verilen çalışma alanları |
 | `list_chats` | İzin verilen sohbetler |
-| `search_messages` | Seçilen dönem içindeki kaydedilmiş mesaj metni |
+| `search_messages` | Seçilen dönem içindeki kaydedilmiş mesaj metinleri; `ranked=true` [tam metin araması](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/) kullanır (kelime biçimleri, en iyi eşleşmeler önce, `next_offset` sayfalama) |
 | `get_message_versions` | Yakalanan sürümler ve silme gözlemleri |
 | `get_message_context` | Yakındaki yakalanmış mesaj kimlikleri (ID'leri) |
 | `get_journal_event` | Kaynak referansıyla birlikte temizlenmiş (sanitized) tek bir kayıt |
-| `get_capture_status` | Toplama durumu ve izin verilen kapsam kayıtları |
+| `get_capture_status` | Toplama durumu, izin verilen kapsama kayıtları ve `gap_summary`: kanal veya süper grup bazında ve hesap genelindeki sıra numarası için ([ayrıntılar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#missing-message-numbers-gap_summary)) hiç gözlemlenmemiş mesaj numaraları; listelenen boşlukları görmek için bir sohbet seçin |
+| `get_activity_stats` | UTC saatine ve hafta gününe göre mesajlar, en yoğun günler, düzenleme ve silme oranları, gönderenler, etki alanları ve `@handles`, kapsama alanı ([ayrıntılar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/#activity-statistics)) ile birlikte |
+| `export_messages` | Yalnızca komut satırı, varsayılan olarak seçili değildir: gözlemleri JSON Lines biçimi olarak akışa kaydeder ([ayrıntılar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/#export)); MCP üzerinden sunulmaz |
 
 `tools/list` yalnızca ilgili bağlantıya izin verilen araçları döndürür. Diğer araçlara yapılan çağrılar reddedilir. Grup bağlamı, bölüm (episode), terminoloji ve yanıt zinciri araçları bu derlemede sunulmamaktadır; bunların ayrı bağlam paketi arka ucu dahil edilmemiştir.
 

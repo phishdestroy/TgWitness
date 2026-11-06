@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel
 
 各屏幕的功能说明、其向签名日志写入的内容，以及详细 指南的所在位置。面板每次仅显示一个工作区：一个 Telegram 账户及其专属的 来源、日志和签名密钥。侧边栏顶部的选择器用于切换 工作区。地址包含工作区信息（`?ws=…`）；当地址、 选择器与已加载的账户不一致时，所有操作将被阻止。
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## 快速入门
 
 “每日”板块位于侧边栏顶部**，“账户** ”位于**“工作区** ”下， 其余内容均位于**“更多工具与设置** ”下。顶部栏中的**“界面级别** ”切换按钮决定显示多少个板块：

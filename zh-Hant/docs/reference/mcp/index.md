@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 將 MCP 客戶端連接到選定的工作區和聊天室，並賦予其具有有效期限且可撤銷的存取權限。
 
-將分析師用戶端連線至選定的工作區與聊天室。TgWitness **在面板行程中的 `/mcp` 提供 Streamable HTTP 服務**。每個連線都有獨立的權杖、到期時間與授權工具。MCP 無法傳送 Telegram 訊息、變更設定或修改已簽章的日誌。
+將分析師客戶端連接到選定的工作區和聊天室。TgWitness **在面板進程的 `/mcp` 端點**提供 **可串流的 HTTP**服務。每個連線皆擁有專屬的 憑證、有效期限及允許使用的工具。MCP 無法發送 Telegram 訊息、變更 設定或修改簽名日誌。這些連線亦可透過 [命令列](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/)操作。
 
 [工作流程指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 | --- | --- |
 | `list_workspaces` | 已授權的工作區 |
 | `list_chats` | 已授權的聊天室 |
-| `search_messages` | 指定期間內已儲存的訊息文字 |
+| `search_messages` | 選定期間內儲存的訊息內容； `ranked=true` 支援[全文搜尋](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/)（包含詞形變化、最佳匹配優先、 `next_offset` 分頁） |
 | `get_message_versions` | 已擷取的版本與刪除觀測記錄 |
 | `get_message_context` | 鄰近的已擷取訊息 ID |
 | `get_journal_event` | 單筆經過清理的記錄及其來源參照 |
-| `get_capture_status` | 收集狀態與授權的涵蓋範圍記錄 |
+| `get_capture_status` | 收集狀態、允許的覆蓋記錄以及 `gap_summary`：從未觀察到的訊息編號，按頻道或超級群組以及全帳戶序列分別列出（[詳情](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#missing-message-numbers-gap_summary)）；選擇一個聊天室以查看其列出的缺口 |
+| `get_activity_stats` | 依 UTC 小時與星期幾分類的訊息、高峰日、編輯與刪除比例、發送者、網域以及 `@handles`，並包含涵蓋範圍（[詳情](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/#activity-statistics)） |
+| `export_messages` | 僅限命令列，預設未選取：將觀察記錄以 JSON Lines 格式儲存（[詳情](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/#export)）；不透過 MCP 提供 |
 
 `tools/list` 僅會回傳授予該連線的工具。對其他工具的呼叫將會被拒絕。此組建不提供群組脈絡、事件片段（episode）、術語及回覆鏈工具；系統未包含這些工具獨立的 context-pack 後端。
 

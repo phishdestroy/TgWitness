@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/
 
 آرکائیو اور انضمامات
 
-[کیس بورڈ حوالہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/)[آرکائیو کا تجزیہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/analysis/)[صرف پڑھنے کے لیے MCP](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/)[مقامی OCR اور ٹرانسکرپشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/media-analysis/)[جاں نکلنے والے ویب ہُکس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/webhooks/)[عوامی نمائش](https://phishdestroy.github.io/TgWitness/ur/docs/reference/showcase/)
+[کیس بورڈ حوالہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/)[آرکائیو کا تجزیہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/analysis/)[مکمل متن تلاش](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/)[صرف پڑھنے کے لیے MCP](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/)[کمانڈ لائن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/)[مقامی OCR اور ٹرانسکرپشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/media-analysis/)[جاں نکلنے والے ویب ہُکس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/webhooks/)[عوامی نمائش](https://phishdestroy.github.io/TgWitness/ur/docs/reference/showcase/)
 
 شواہد
 

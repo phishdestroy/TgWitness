@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/
 
 [开源 ／ v0.9.1](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/)
 
-保存 Telegram 聊天及其每一次编辑和删除，然后交出任何人都能核查的记录。
+Export Telegram chats，preserve their history，and share a signed archive others can verify．
 
 [打开演示](https://phishdestroy.github.io/TgWitness/demo/?lang=zh)[安装指南](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=zh)
 
 虚构数据，无需登录 Telegram。
 
- [通过 GitHub Actions 采集（预览版）](https://phishdestroy.github.io/TgWitness/zh/docs/capture/) [S3 异地备份：设置与恢复](https://phishdestroy.github.io/TgWitness/zh/#s3)
+ [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/zh/docs/reference/account-export/) [通过 GitHub Actions 采集（预览版）](https://phishdestroy.github.io/TgWitness/zh/docs/capture/) [S3 异地备份：设置与恢复](https://phishdestroy.github.io/TgWitness/zh/#s3)
 
 穿越时空的一则消息＃0042
 

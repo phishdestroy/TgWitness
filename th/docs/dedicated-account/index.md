@@ -207,7 +207,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/dedicated-accou
 
   สุดท้าย
 
-  One code
+  โค้ดเดียว
 
   ระวัง
 

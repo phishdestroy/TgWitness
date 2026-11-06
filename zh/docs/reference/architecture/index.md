@@ -15,6 +15,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | message_content.py | 可视化消息对比，不包含传输访问元数据 |
 | workers.py | 在取消操作前，请等待导出文件处理程序完成 |
 | store.py | WAL 事务、有序事件链、查询过滤器、运行设置 |
+| fulltext.py | 衍生全文索引（词形变体、BM25），与签名日志头关联；绝不导出 |
 | security.py | 私有文件的创建、加密存储库、Ed25519 签名、单进程锁定 |
 | evidence.py | 完整日志导出、衍生日志、检查点、附件验证 |
 | verify.py | 独立的只读验证器（标准库 + 加密技术）：存档、覆盖范围、证据日志和频道帖子、个人资料文件 |

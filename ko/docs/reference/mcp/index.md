@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/
 
 만료 및 취소 가능한 액세스 권한을 통해 MCP 클라이언트를 선택한 작업 공간 및 채팅에 연결합니다.
 
-선택한 워크스페이스와 채팅에 분석가 클라이언트를 연결합니다. TgWitness는 **패널 프로세스의 `/mcp`에서 Streamable HTTP**를 제공합니다. 각 연결에는 고유한 토큰, 만료 시간 및 허용된 도구가 지정됩니다. MCP는 텔레그램 메시지를 전송하거나 설정을 변경하거나 서명된 저널을 수정할 수 없습니다.
+분석가 클라이언트를 선택한 워크스페이스 및 채팅에 연결합니다. TgWitness는 **패널 프로세스 내 `/mcp`에서 Streamable HTTP를** 제공합니다. 각 연결에는 고유한 토큰, 만료 시간 및 허용된 도구가 있습니다. MCP는 텔레그램 메시지를 전송하거나, 설정을 변경하거나, 서명된 저널을 수정할 수 없습니다. 동일한 연결을 [명령줄에서도](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/)사용할 수 있습니다.
 
 [워크플로우 가이드](https://phishdestroy.github.io/TgWitness/docs/archive/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ MCP 추가 기능이 설치된 클라이언트의 로컬 Python을 사용하세�
 | --- | --- |
 | `list_workspaces` | 권한이 부여된 워크스페이스 |
 | `list_chats` | 권한이 부여된 채팅 |
-| `search_messages` | 선택한 기간 내에 저장된 메시지 텍스트 |
+| `search_messages` | 선택한 기간 내의 저장된 메시지 본문; `ranked=true` [전체 텍스트 검색](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/) 기능(단어 형태, 가장 적합한 결과 우선, `next_offset` 페이지 단위 검색) |
 | `get_message_versions` | 수집된 버전 및 삭제 관측 기록 |
 | `get_message_context` | 인접한 수집 메시지 ID |
 | `get_journal_event` | 소스 참조가 포함된 정제된(sanitized) 단일 레코드 |
-| `get_capture_status` | 수집 상태 및 허용된 범위(coverage) 레코드 |
+| `get_capture_status` | 수집 상태, 허용되는 커버리지 기록 및 `gap_summary`: 채널 또는 슈퍼그룹별, 그리고 계정 전체 시퀀스별로 관측되지 않은 메시지 번호([상세 정보](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#missing-message-numbers-gap_summary)); 채팅을 선택하여 해당 채팅의 누락 목록을 확인하세요 |
+| `get_activity_stats` | UTC 시간대 및 요일별 메시지, 피크일, 수정 및 삭제 비율, 발신자, 도메인 및 `@handles`, 커버리지([상세 정보](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/#activity-statistics)) |
+| `export_messages` | 명령줄 전용이며, 기본적으로 선택되지 않음: 스트림은 관측 결과를 JSON Lines 형식으로 저장합니다([자세히](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/#export)); MCP를 통해 제공되지 않음 |
 
 `tools/list`는 해당 연결에 권한이 부여된 도구만 반환합니다. 다른 도구에 대한 호출은 거부됩니다. 그룹 컨텍스트, 에피소드, 용어 및 답장 체인 도구는 이 빌드에서 제공되지 않으며, 별도의 컨텍스트 팩 백엔드가 포함되어 있지 않습니다.
 

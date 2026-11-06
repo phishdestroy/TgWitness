@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel
 
 هر صفحه چه کاری انجام می‌دهد، چه چیزی را به دفترچه یادداشت امضا‌شده می‌نویسد و راهنمای دقیق در کجا قرار دارد. پنل هر بار یک فضای کاری را نشان می‌دهد: یک حساب تلگرام با منابع، دفترچه یادداشت و کلید امضای مخصوص به خود. انتخابگر در بالای نوار کناری، فضاهای کاری را جابجا می‌کند. آدرس، فضای کاری را در خود حمل می‌کند (`?ws=…`)؛ در حالی که آدرس، انتخابگر و حساب بارگذاری‌شده با هم اختلاف دارند، اقدامات مسدود باقی می‌مانند.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## راه خود را بیابید
 
 بخش‌های روزانه در بالای نوار کناری قرار دارند، **«حساب‌ها»** زیر **«محیط کاری»** است و سایر موارد زیر **«ابزارها و تنظیمات بیشتر** » قرار دارند. کلید تغییر **سطح رابط کاربری** در نوار بالا مشخص می‌کند که چند بخش نمایش داده شوند:

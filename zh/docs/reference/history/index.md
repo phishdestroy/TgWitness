@@ -4,18 +4,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/histo
 
 从已启用的来源加载历史消息，暂停和恢复操作，并验证带签名的进度报告。
 
-在**“来源**”中，查看已启用的聊天，开始监控，然后选择“**加载完整 历史记录**”。该操作会锁定该来源列表，并将可用的历史消息 读取到“聊天”和已签名的监控日志中。媒体文件将使用现有的附件 设置和持久化下载队列。这与按聊天生成的已签名 JSON/HTML 导出文件是分开的。
+In **Sources**, review the enabled chats, pause observation, choose Standard API or Takeout export, then choose **Load full history**. The run fixes that list of sources and reads their available past messages into Chats and the signed observation journal. Media uses the existing attachment settings and durable download queue. This is separate from the per-chat signed JSON/HTML export.
 
-若需收集整个账户的数据，请选择**“整个账户**”，开始监控以加载其 来源列表，并在开始记录历史记录前审查该列表。对话列表的限制仍 适用（默认1,000条，可在“参数”中调整）。 运行成功并不意味着 每个账户的对话都已列入列表。后续发现或启用的聊天需要再次运行。
+For account-wide collection, select **Whole account**, start observation to load its source list, and review that list before starting history. The dialog-list limit still applies (1,000 by default, adjustable in Parameters). A successful run does not prove that every account dialog was listed. Chats discovered or enabled later need another run. Pause observation before starting history; one acquisition owns an account at a time.
+
+Choose one to five attachment workers and whether to preserve available Recent Actions and compare previously saved versions. Takeout may require approval in Telegram and a server-specified wait. These options remain fixed on resume. See [Backfill behavior and evidence contract](https://github.com/phishdestroy/TgWitness/blob/main/docs/BACKFILL.md) for transport, retry and trust details.
 
 ## 暂停、重启和部分结果
 
-- **暂停操作将**停止读取**历史记录**。**继续操作**将从每个来源中最后一条已提交的 消息开始恢复；重新启动应用后，运行状态也将保持暂停，直至手动恢复。 请先重新启动监控。恢复操作需要使用相同的 Telegram 账户。
+- **Pause history** stops reading. **Continue history** resumes from the last committed message in each source; restarting the app also leaves the run paused until resumed. Resuming requires the same idle Telegram account.
 - 消息观察、附件处理和光标提交在一笔事务中完成。 恢复运行时不会重复已提交的观察结果。实时捕获或 单独、显式启动的运行可独立观察同一条消息。
-- 每个数据源在首次读取时会设定一个消息 ID 上限。较新的消息属于 实时监控，而不属于该数据源剩余的历史页面。
+- Each source (each Telegram split range in Takeout) fixes an upper message ID on its first read. Newer messages belong to live observation, not to that source's remaining historical pages.
 - 无法访问的来源以及在采集过程中被禁用的来源仍会显示为 “失败”或“跳过”。其他来源将继续采集；最终结果将不完整。
-- FloodWait 会遵循已保存的账户回退策略。传输超时和磁盘空间不足 将暂停运行，同时保持光标位置不变。解决原因后可恢复运行。
-- **结束本次历史记录运行**将保留已保存的观察结果。此操作不会删除这些观察结果，也不会 取消已排入队列的附件下载。新一轮运行将重新读取已启用的消息源。
+- FloodWait delays respect the saved account backoff. Transient failures retry up to five times; exhaustion and low disk space pause with the cursor intact.
+- **End this history run** preserves saved observations. It does not remove them or cancel standard-API attachment jobs. Ending Takeout marks its remaining Takeout files as skipped; pausing keeps them resumable. A new run reads enabled sources anew.
 
 历史记录补全仅指历史记录的读取操作。附件可能仍处于待处理状态、 处理失败，或被配置的策略排除。请在日志 和附件队列中检查媒体回执；只有字节数据完整且已保存的回执才构成 已保存的附件。历史记录操作是一项显式的快照请求，与 用于选择未来实时事件类别的开关独立。
 
@@ -27,8 +29,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/histo
 python tgwitness/verify.py tgwitness-history-report.json --evidence evidence.zip --fingerprint TRUSTED_FINGERPRINT
 ```
 
-请独立保存预期的签名密钥指纹。验证器将检查 报告签名、证据存档、报告检查点、来源计划、账户 以及已保存/不可用消息的数量。若未使用`--evidence`，则仅检查 已签名的报告及其内部一致性。 进度阶段、标题、光标位置及 附件摘要均为经签名的采集声明，并非由本报告验证器 独立重建。证据验证器仍需对归档的媒体数据字节进行核查。
+Keep the expected signing-key fingerprint independently. The verifier checks the report signature, the evidence archive, the report checkpoint, source plan, account and counts of saved/unavailable messages. New runs also bind source progress and options to signed cursor events. Without `--evidence`, it checks only the signed report and its internal consistency. Legacy progress fields and attachment summaries remain signed collector statements. The evidence verifier checks archived media bytes.
 
-无论是对可用历史记录进行签名还是完成签名，均不能证明其源自 Telegram、属于原子 快照，或具有历史完整性。消息在阅读过程中可能会发生变化；已删除的 消息、未被察觉的中间编辑以及秘密聊天内容均无法恢复。控制签名密钥的操作员 可在外部承诺存在之前伪造日志。 请使用单独保留的检查点或独立见证人来验证所记录的 防篡改特性。
+Neither signing nor finishing the available history proves Telegram origin, an atomic snapshot, or historical completeness. Messages can change while reading; deleted messages and intermediate edits outside available Recent Actions, and Secret Chats, are not recovered. An operator controlling the signing key can fabricate a journal before outside commitments exist. Use separately retained checkpoints or an independent witness for the documented tamper-detection properties.
 
 采集光标代表本地工作区的状态。仅恢复证据 ZIP 文件并 不会恢复待处理的采集任务或 Telegram 会话。若需继续执行原始任务， 请保留工作区备份。

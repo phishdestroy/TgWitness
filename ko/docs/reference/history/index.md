@@ -4,18 +4,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/histo
 
 활성화된 소스의 과거 메시지를 불러오고, 일시 중지 및 재시작하며, 서명된 진행 보고서를 검증할 수 있습니다.
 
-**소스**에서 활성화된 채팅을 확인하고 관찰을 시작한 다음 **전체 기록 불러오기**를 선택합니다. 실행 시 소스 목록이 확정되며, 이용 가능한 과거 메시지를 채팅과 서명된 관찰 기록에 불러옵니다. 미디어에는 기존 첨부 파일 설정과 영구 다운로드 대기열이 적용됩니다. 이 기능은 채팅별로 서명된 JSON/HTML 내보내기와 별개입니다.
+In **Sources**, review the enabled chats, pause observation, choose Standard API or Takeout export, then choose **Load full history**. The run fixes that list of sources and reads their available past messages into Chats and the signed observation journal. Media uses the existing attachment settings and durable download queue. This is separate from the per-chat signed JSON/HTML export.
 
-계정 전체를 수집하려면 **‘전체 계정’을** 선택하고, 관찰을 시작하여 소스 목록을 불러온 다음, 기록을 시작하기 전에 해당 목록을 검토하십시오. 대화 목록 제한은 여전히 적용됩니다(기본값 1,000개, ‘매개변수’에서 조정 가능). 실행이 성공적으로 완료되었다고 해서 모든 계정 대화 목록이 포함되었다는 것을 의미하지는 않습니다. 나중에 발견되거나 활성화된 채팅은 다시 실행해야 합니다.
+For account-wide collection, select **Whole account**, start observation to load its source list, and review that list before starting history. The dialog-list limit still applies (1,000 by default, adjustable in Parameters). A successful run does not prove that every account dialog was listed. Chats discovered or enabled later need another run. Pause observation before starting history; one acquisition owns an account at a time.
+
+Choose one to five attachment workers and whether to preserve available Recent Actions and compare previously saved versions. Takeout may require approval in Telegram and a server-specified wait. These options remain fixed on resume. See [Backfill behavior and evidence contract](https://github.com/phishdestroy/TgWitness/blob/main/docs/BACKFILL.md) for transport, retry and trust details.
 
 ## 일시 중지, 재개 및 부분 결과
 
-- **기록 일시 중지 시** 읽기가 중단됩니다. **기록을 계속하면** 각 소스의 마지막으로 커밋된 메시지부터 재개됩니다. 앱을 다시 시작해도 재개될 때까지 기록이 일시 중지된 상태로 유지됩니다. 먼저 관찰을 다시 시작하십시오. 재개하려면 동일한 텔레그램 계정이 필요합니다.
+- **Pause history** stops reading. **Continue history** resumes from the last committed message in each source; restarting the app also leaves the run paused until resumed. Resuming requires the same idle Telegram account.
 - 메시지 관찰, 첨부 파일 처리 및 커서 커밋이 하나의 트랜잭션으로 수행됩니다. 실행이 재개되더라도 이미 커밋된 관찰 내용은 반복되지 않습니다. 실시간 캡처 또는 별도로 명시적으로 시작된 실행에서는 동일한 메시지를 독립적으로 관찰할 수 있습니다.
-- 각 소스는 첫 번째 읽기 시 메시지 ID의 상한값을 고정합니다. 더 최근의 메시지는 실시간 관찰 대상이며, 해당 소스의 나머지 기록 페이지에는 포함되지 않습니다.
+- Each source (each Telegram split range in Takeout) fixes an upper message ID on its first read. Newer messages belong to live observation, not to that source's remaining historical pages.
 - 접근할 수 없는 소스나 수집 과정에서 비활성화된 소스는 '실패' 또는 '건너뜀'으로 표시됩니다. 다른 소스는 계속 수집되며, 전체 결과는 불완전합니다.
-- FloodWait 지연은 저장된 계정 백오프 설정을 준수합니다. 전송 타임아웃 및 디스크 공간 부족 시 커서를 유지한 채 실행이 일시 중지됩니다. 원인을 해결한 후 다시 시작하십시오.
-- **이 기록 실행을 종료해도** 저장된 관측 데이터는 유지됩니다. 데이터가 삭제되거나 이미 대기열에 있는 첨부 파일 다운로드가 취소되지는 않습니다. 새로운 실행에서는 활성화된 소스를 다시 읽습니다.
+- FloodWait delays respect the saved account backoff. Transient failures retry up to five times; exhaustion and low disk space pause with the cursor intact.
+- **End this history run** preserves saved observations. It does not remove them or cancel standard-API attachment jobs. Ending Takeout marks its remaining Takeout files as skipped; pausing keeps them resumable. A new run reads enabled sources anew.
 
 이력 완료는 이력 읽기 작업에 대해서만 설명합니다. 첨부 파일은 대기 상태로 남아 있거나, 실패하거나, 구성된 정책에 따라 제외될 수 있습니다. 저널과 첨부 파일 대기열에서 미디어 수신 확인을 확인하십시오. 바이트가 보존된 완료된 수신 확인만 저장된 첨부 파일로 간주됩니다. 이력 작업은 명시적인 스냅샷 요청이며, 향후 실시간 이벤트의 범주를 선택하는 스위치와는 별개입니다.
 
@@ -27,8 +29,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/histo
 python tgwitness/verify.py tgwitness-history-report.json --evidence evidence.zip --fingerprint TRUSTED_FINGERPRINT
 ```
 
-예상되는 서명 키 지문을 별도로 보관하십시오. 검증자는 보고서 서명, 증거 아카이브, 보고서 체크포인트, 소스 계획, 계정 및 저장된 메시지/사용 불가능한 메시지의 개수를 확인합니다. `--evidence`가 없는 경우, 서명된 보고서와 그 내부 일관성만 확인합니다. 진행 단계, 제목, 커서 및 첨부 파일 요약은 서명된 수집자 진술서이며, 본 보고서 검증기에 의해 독립적으로 재구성된 것이 아닙니다. 증거 검증자는 여전히 아카이브된 미디어 바이트를 확인합니다.
+Keep the expected signing-key fingerprint independently. The verifier checks the report signature, the evidence archive, the report checkpoint, source plan, account and counts of saved/unavailable messages. New runs also bind source progress and options to signed cursor events. Without `--evidence`, it checks only the signed report and its internal consistency. Legacy progress fields and attachment summaries remain signed collector statements. The evidence verifier checks archived media bytes.
 
-사용 가능한 기록에 서명을 하거나 완결 처리한다고 해서 텔레그램의 출처, 원자적 스냅샷 또는 기록의 완전성이 입증되는 것은 아닙니다. 메시지는 읽는 동안 변경될 수 있으며, 삭제된 메시지, 확인되지 않은 중간 수정 내용 및 비밀 채팅은 복구되지 않습니다. 서명 키를 관리하는 운영자는 외부 검증 절차가 이루어지기 전에 기록을 조작할 수 있습니다. 문서화된 변조 감지 특성을 확인하려면 별도로 보관된 체크포인트나 독립적인 증인을 활용하십시오.
+Neither signing nor finishing the available history proves Telegram origin, an atomic snapshot, or historical completeness. Messages can change while reading; deleted messages and intermediate edits outside available Recent Actions, and Secret Chats, are not recovered. An operator controlling the signing key can fabricate a journal before outside commitments exist. Use separately retained checkpoints or an independent witness for the documented tamper-detection properties.
 
 획득 커서는 로컬 작업 공간의 상태를 나타냅니다. 증거 ZIP 파일만 복원한다고 해서 진행 중인 획득 작업이나 텔레그램 세션이 복원되는 것은 아닙니다. 원래 작업을 계속 진행해야 하는 경우 작업 공간 백업을 보관해 두십시오.

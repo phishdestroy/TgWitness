@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/witne
 
 [ייצוא ואימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/) · [אמינות גבוהה](https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/) · [מדריך לפאנלים](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#extras)
 
-אוסף הנתונים חותם על היומן שלו עצמו, ולכן מי ששולט באוסף הנתונים ובמפתח שלו יכול, בעיקרון, לשכתב או לקצר את היומן ולחתום עליו שוב. "Witness" מאפשר לזהות זאת. זהו תהליך נפרד — מיכל נוסף, או ליתר דיוק שרת שמישהו אחר מפעיל — אשר כל כמה דקות משיג את ראש היומן החתום של האספן, חותם על מה ש ראה באמצעות המפתח שלו, שומר זאת ביומן משלו ומפרסם זאת בערוץ טלגרם.
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 תרשים זרימה · Collector → Witness (נקודת ביקורת חתומה: מספר הרשומות + חתימת ה-hash של הכותרת); Witness → יומן Witness, מפתח פרטי; Witness → ערוץ טלגרם (הודעה חתומה באמצעות הבוט של האתר); קובץ ZIP של הראיות → verify.py; יומן Witness, מפתח פרטי → verify.py; ערוץ טלגרם → verify.py (ייצוא מ-Telegram Desktop או דף "t.me/s") · Collector · Witness · יומן Witness, מפתח פרטי · ערוץ טלגרם · קובץ ZIP של הראיות · verify.py · נקודת ביקורת חתומה: מספר · הרשומות + חתימת ה-hash של · הכותרת · הודעה חתומה באמצעות הבוט של · האתר · ייצוא מ-Telegram Desktop או · דף "t.me/s"
 
@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/witne
 בכל פרק זמן (10 דקות כברירת מחדל) ה-Witness:
 
 1. מביא את הראש עצמו (האספן אינו יכול לדחוף או לדלג עליו);
-2. מאמת את חתימת האספן, את מפתח האספן המוצמד (`--collector-fingerprint`, או המפתח הראשון שנראה), ספירה שאינה פוחתת וראש שלא השתנה בספירה שלא השתנתה;
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. מוסיף רשומה חתומה ליומן שלו: `witness.anchor` עם הסטטוס `ok`, `key_changed`, `rollback` (פחות רשומות מבעבר), `fork` (אותו אורך, כותרת שונה ) או `invalid` (התשובה נכשלה באימות), או `witness.no_response` כאשר האספן לא ענה;
 4. מפרסם את התוצאה בערוץ, חתומה, כולל "אין תשובה" כל עוד ה-Witness פועל ומסוגל לגשת ל-Bot API. מזהה הפרסום נרשם (`witness.posted`), כמו גם פרסום שנכשל (`witness.post_failed`).
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 לשם כך נדרשת טביעת אצבע של עד שנשמרה באופן עצמאי ונקודת ביקורת תואמת בדיוק בסוף הייצוא הזה. נקודת ביקורת המכסה רק קידומת מוקדמת יותר אינה מספיקה. יש להשהות את האיסוף, לאפשר לעד לבחון את המצב הסופי, ולייצא לפני כתיבות נוספות ביומן; אם היומן משתנה, יש לשמור נקודת ביקורת נוספת ו לייצא את המצב הזה. נקודת ביקורת מאוחרת יותר לבדה אינה יכולה לאמת את ה-hash הסופי של ייצוא קצר יותר. כאשר מסופק גם הדגל `--channel`, פוסטים נטענים חסרים או קבוצת התאמות ריקה נכשלים בבדיקה הקפדנית הזו. ללא הדגל, בדיקות תקינות רגילות עדיין מדווחות על רשומות שלא עברו אימות מבלי לדחות ארכיון שלם בכל שאר המובנים.
 
-הסימון מבטיח עקביות עם רישומי העדים המסופקים והמוצמדים. על המפעיל להמשיך ולוודא את עצמאותו של העד ולשמור את הרישומים בנפרד. הסימון אינו קובע את אמיתות ההודעות, את שלמות האוסף או את משך הזמן שנמדד באופן עצמאי.
-
-"עדות" מציגה את מה שהאספן דיווח באותם רגעים, וכי ייצוא מאוחר יותר תואם לכך. היא אינה מראה שהאספן תיעד את כל מה ש-Telegram העביר, או שתוכן ההודעות הוא אמת. "עדות" המופעלת על ידי אותו מפעיל על אותה מכונה היא חלשה יותר מזו המופעלת על ידי אדם אחר.
-
-עלייה במספר בלבד אינה יכולה להוכיח רציפות של "הוספה בלבד" ברשת: ההשוואה במצב לא מקוון חייבת להתאים כל חתימת hash של קידומת שנשמרה מול הייצוא המלא של האספן. זמן השבתה של Witness וכישלונות בפרסום מותירים פרקי זמן ללא נקודות ייחוס חיצוניות. ניתן לדווח על פוסטים חסרים בהשוואה ליומן Witness שנשמר; לא ערוץ ולא שרת הנשלטים על ידי אותו מפעיל מהווים ארכיון צד שלישי בלתי ניתן לשינוי.
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 원본 ZIP 파일과 해당 해시 값을 그대로 유지하십시오. 각 보유자, 전송 내역, 날짜 및 목적을 기록하십시오. 해당 운영자의 진술 및 사건 메모도 함께 보존하십시오.
 5. 기밀 VM의 경우, 견적, 검증 요청, Intel 인증서 체인, 측정값, 정확한 출처 및 키 처리 조건을 보존하고 독립적으로 검증하십시오. 검증 결과를 검토된 아티팩트와 함께 보관하십시오.
 
-신뢰 전제에 대해서는 [검증 범위를](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) 참조하십시오. 또한 출처 주장, 신원, 시간 및 수집 범위에 대한 별도의 평가도 참조하십시오.
+See [verification scope](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## 수신자 검토
 

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-
 
 Захищений сервер, що працює цілодобово без вихідних, на Hetzner або Phala Cloud, шлюз DNS та перевірки, які може повторити третя сторона.
 
-Підписаний журнал підтверджує, що записи не були змінені **після** підписання. У серйозних випадках наступне питання полягає в тому, чи міг хтось змінити дані **до** їх підписання: хто запускав колектор, на якій машині та чи хтось входив у систему. Цей опціональний режим розгортає колектор таким чином, щоб третя сторона могла це перевірити, використовуючи записи, що зберігаються хмарним провайдером та Cloudflare, а не покладаючись на слова оператора.
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 Звичайне використання локальних середовищ та Docker залишається без змін. Ніщо тут не працює, доки ви не розгорнете систему за допомогою `python -m tgwitness.cloud`, а колектор зчитує дані зі свого хоста лише тоді, коли розгортання встановлює `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-
 | Ключ підпису було створено на цьому сервері | Ключ підписує повідомлення, в якому вказано ідентифікатор сервера провайдера та хеш отриманого ним файлу cloud-init | Collector, перевірений провайдером |
 | Журнал належить цьому ключу та серверу | Кожен процес, що запускається в доказі ZIP, містить показники хосту для цього сервера | Докази ZIP |
 
-Показники хосту (SSH-приймачі та процеси, поточні сесії, входи в `wtmp`, завантаження) повідомляються самим колектором і підписуються під час кожного запуску процесу та у `host.state` записів щоразу, коли вони змінюються. Користувач із правами root на сервері міг би їх сфальсифікувати; вони підтримують записи провайдера та Cloudflare, а не замінюють їх.
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## Провайдери
 
@@ -269,11 +269,8 @@ DNS-шлюз охоплює системний резолвер. DNS через 
 
 Cloudflare не має доступу до шифрованих даних Telegram, інших пристроїв, пов’язаних з обліковим записом Telegram (список пристроїв у режимі «evidence mode» фіксує їх з боку Telegram) або гіпервізора провайдера.
 
-## Що це не встановлює
+## Reading the deployment result
 
-- Провайдер та його персонал контролюють гіпервізор, диски та мережу.
-- Показники хосту самозвітуються збирачем даних.
-- Раніше вміст правил брандмауера зберігається не в усіх журналах провайдерів; лише Linode зберігає версії правил.
-- Це не містить нової інформації щодо автентичності повідомлень; див. розділ [«Докази](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/)».
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-Ще не тестувалося на реальних акаунтах: розгортання під вашим власним доменом (тунель Cloudflare та DNS), інші провайдери, розгортання для налагодження та `lock`, обліковий запис Telegram на такому сервері, а також оперативні оновлення пізніших версій через швидкий тунель. Перевірте перше розгортання на кожному провайдері за допомогою `plan`, розгортання для налагодження та `verify` перш ніж покладатися на нього під час роботи над справою.
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/uk/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

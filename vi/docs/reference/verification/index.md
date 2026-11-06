@@ -4,6 +4,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/verif
 
 Thử nghiệm Telegram trực tiếp, các kiểm tra tự động, kiểm tra trên trình duyệt và những nội dung vẫn chưa được xác minh.
 
+Each result below applies to its recorded revision and environment. The [current capability matrix](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) separates implementation, published downloads and remaining qualification.
+
+## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+
+The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+
+- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
+- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
+- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
+- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
+- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+
+An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+
 ## Triển khai trên Phala Cloud · Ngày 4 tháng 11 năm 2026
 
 `--provider phala --quick-tunnel` đã được chạy trên môi trường thực tế **Phala Cloud** (`tdx.small`, khu vực US-WEST-1) với khóa API Phala Cloud của một không gian làm việc trống, tệp ntfy.sh thực tế, GitHub và Intel PCS. CVM đã cài đặt bản cam kết `df7d860c` (phiên bản 0.8.1); các thao tác triển khai, xác minh và hủy bỏ được thực hiện từ dòng lệnh với các bản sửa lỗi dưới đây. Tổng chi phí cho bảy CVM là khoảng 1,9 xu Mỹ.
@@ -153,10 +167,16 @@ Lệnh: `python tools/check_capacity.py --events 10000 --chats 100`
 
 Chỉ số này đo lường đường dẫn ghi lại/xuất dữ liệu cục bộ trên máy chủ Windows này. Chỉ số này không đo lường việc truyền tải qua MTProto, số lượng tài khoản đồng thời, việc giới hạn băng thông của Telegram, tệp đa phương tiện, tải công việc kéo dài, hay số lượng cuộc trò chuyện thực tế được đảm bảo. Việc đo lường này được thực hiện trước khi công cụ đóng dấu thời gian ngoại tuyến cuối cùng được triển khai, và công cụ này không làm thay đổi đường dẫn tin nhắn đã được đo lường.
 
+## Tìm kiếm toàn văn trên một triệu tin nhắn · 5 tháng 11 năm 2026
+
+Lệnh: `python tools/bench_fulltext.py --messages 1000000 --work <empty directory>`
+
+Một nhật ký có chữ ký xác định gồm 1.000.000 tin nhắn tổng hợp trong 200 cuộc trò chuyện (các dạng từ tiếng Nga, tiếng Ukraina, tiếng Anh, tiếng Trung, tiếng Nhật, các liên kết và tên người dùng) đã được lập chỉ mục trong 71 giây; chỉ mục chiếm 58 MiB bên cạnh nhật ký 1,50 GiB. Các tìm kiếm phù hợp nhất mất từ 9 đến 190 ms (giá trị trung vị), so với 2,4 đến 3,2 giây cho tìm kiếm chuỗi con trước đó. Kết quả đầy đủ, phần cứng và giới hạn: [Tìm kiếm toàn văn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#benchmark). `tools/test_fulltext.py` cũng xác minh một tệp lưu trữ đã ký được tạo trước khi tìm kiếm toàn văn (`tools/fixtures/evidence-before-fulltext.zip`) bằng trình xác minh hiện tại, và một tập tin lưu trữ hiện tại với chính tập tin lưu trữ đó `verify.py`.
+
 ## Các tiêu chí còn lại
 
 Nhật ký trực tiếp được lưu giữ này ghi nhận chính xác các hoạt động thu thập, chỉnh sửa, thông báo xóa, tệp đính kèm, việc kiểm tra lại và xử lý giới hạn tốc độ. Nó không ghi lại toàn bộ quá trình gửi tin nhắn hay một ma trận được kiểm soát về phạm vi hiển thị theo vai trò, các chủ thể phản ứng, thời gian chờ FloodWait kéo dài, việc khóa tài khoản và quá trình khôi phục sau sự cố gián đoạn mạng/quy trình. Việc phát hành mã QR-token vẫn tách biệt với quá trình xác nhận mã QR trên thiết bị di động đã hoàn tất.
 
-Việc xây dựng/chạy Docker, cài đặt trên Linux/macOS, khả năng chịu tải cao liên tục, đánh giá bảo mật độc lập, phản hồi TSA độc lập thực sự, xác thực thu hồi/lưu trữ chứng chỉ và chứng nhận pháp y vẫn nằm ngoài phạm vi chứng nhận đã ghi nhận. Tình trạng MTProto đã lưu và tính năng bắt kịp đã được triển khai; tính năng phát lại nguyên tử bền vững vẫn chưa được thiết lập. Việc thu thập nhật ký quản trị, danh sách máy chủ phản hồi bổ sung và cơ chế thăm dò ưu tiên ngắn vẫn là các tính năng riêng biệt. Vui lòng tham khảo [bản chấp nhận trực tiếp](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) để xem ma trận chứng nhận có kiểm soát.
+Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
 
 Các bản ghi chi tiết và ảnh chụp màn hình tại địa phương hiện được lưu trữ trong thư mục test-results/ (bị Git bỏ qua). Ảnh chụp màn hình công khai trong thư mục docs/assets/ chỉ chứa dữ liệu minh họa hư cấu.

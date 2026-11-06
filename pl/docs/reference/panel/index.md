@@ -8,6 +8,8 @@ Każdy ekran panelu: czaty, dziennik, źródła, eksporty, opcje dodatkowe, tryb
 
 Jak działa każdy ekran, co zapisuje w podpisanym dzienniku i gdzie znajduje się szczegółowy przewodnik. Panel wyświetla po jednym obszarze roboczym na raz: jedno konto Telegramu z własnymi źródłami, dziennikiem i kluczem podpisującym. Selektor u góry paska bocznego służy do przełączania obszarów roboczych. Adres zawiera nazwę obszaru roboczego (`?ws=…`); dopóki adres, selektor i załadowane konto nie są zgodne, działania pozostają zablokowane.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Zorientuj się w serwisie
 
 Sekcje codzienne znajdują się u góry paska bocznego, **sekcja „Konta”** znajduje się pod **„Obszarem roboczym** ”, a wszystko inne znajduje się w sekcji **„Więcej narzędzi i ustawień** ”. Przełącznik **poziomu interfejsu** na górnym pasku określa, ile sekcji jest wyświetlanych:

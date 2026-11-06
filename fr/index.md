@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/
 
 [Open source ／ v0.9.1](https://phishdestroy.github.io/TgWitness/fr/docs/reference/changelog/)
 
-Enregistrez les chats Telegram avec chaque modification et suppression， puis transmettez un enregistrement que tout le monde peut vérifier．
+Export Telegram chats，preserve their history，and share a signed archive others can verify．
 
 [Démonstration en ligne ：](https://phishdestroy.github.io/TgWitness/demo/?lang=fr)[Guide d＇installation](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=fr)
 
 Données fictives， sans connexion à Telegram．
 
- [Collecte via GitHub Actions （version préliminaire）](https://phishdestroy.github.io/TgWitness/fr/docs/capture/) [Copie hors site sur S3 ： configuration et restauration](https://phishdestroy.github.io/TgWitness/fr/#s3)
+ [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/fr/docs/reference/account-export/) [Collecte via GitHub Actions （version préliminaire）](https://phishdestroy.github.io/TgWitness/fr/docs/capture/) [Copie hors site sur S3 ： configuration et restauration](https://phishdestroy.github.io/TgWitness/fr/#s3)
 
 UN MESSAGE À TRAVERS LE TEMPS ＃0042
 

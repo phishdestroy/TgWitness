@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/
 
 [ओपन सोर्स ／ v0.9.1](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/)
 
-Telegram चैट को हर संपादन और हटाने के साथ सहेजें， फिर ऐसा रिकॉर्ड सौंपें जिसे कोई भी जाँच सके।
+Export Telegram chats，preserve their history，and share a signed archive others can verify．
 
 [ओपन डेमो](https://phishdestroy.github.io/TgWitness/demo/?lang=hi)[सेटअप गाइड](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=hi)
 
 नकली डेटा， Telegram लॉगिन की ज़रूरत नहीं।
 
- [GitHub Actions से संग्रह （पूर्वावलोकन）](https://phishdestroy.github.io/TgWitness/hi/docs/capture/) [S3 ऑफ－साइट प्रतिलिपि： सेटअप और रिकवरी](https://phishdestroy.github.io/TgWitness/hi/#s3)
+ [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/hi/docs/reference/account-export/) [GitHub Actions से संग्रह （पूर्वावलोकन）](https://phishdestroy.github.io/TgWitness/hi/docs/capture/) [S3 ऑफ－साइट प्रतिलिपि： सेटअप और रिकवरी](https://phishdestroy.github.io/TgWitness/hi/#s3)
 
 एक संदेश， समय के माध्यम से＃0042
 

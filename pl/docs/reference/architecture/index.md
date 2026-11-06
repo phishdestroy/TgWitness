@@ -15,6 +15,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | message_content.py | Porównanie widocznych wiadomości, z wyłączeniem metadanych dotyczących dostępu do sieci transportowej |
 | workers.py | Należy poczekać na zakończenie pracy procesów eksportujących pliki przed przeprowadzeniem operacji czyszczenia po anulowaniu |
 | store.py | Transakcje WAL, uporządkowany łańcuch zdarzeń, filtry zapytań, ustawienia operacyjne |
+| fulltext.py | Wyprowadzony indeks pełnotekstowy (formy wyrazów, BM25), powiązany z nagłówkiem podpisanego dziennika; nigdy nie jest eksportowany |
 | security.py | Tworzenie plików prywatnych, zaszyfrowany sejf, podpisywanie algorytmem Ed25519, blokada pojedynczego procesu |
 | evidence.py | Eksport pełnego dziennika, pliki pochodne, punkty kontrolne, weryfikacja załączników |
 | verify.py | Samodzielny weryfikator tylko do odczytu (biblioteka standardowa + kryptografia): archiwa, zakres, dzienniki świadków i posty na kanałach, pliki profilowe |

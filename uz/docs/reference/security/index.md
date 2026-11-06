@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/secur
 
 Xavf modeli, kirish modeli, saqlashdagi sirlar, tarmoqdagi ochiqlik, sessiya importlari va zaiflikni qanday xabar qilish.
 
-TgWitness sizning shaxsiy kompyuteringizda yoki serveringizda ishlaydi. Hisob ma'lumotlari ulanishlari, ommaviy proxy-ro'yxatni yuritish va ixtiyoriy tashqi xizmatlar aniq marshrutlash siyosatiga ega. Bildirishnomalar, vaqt tamg'alari, masofaviy nusxalar va guvoh alohida sozlanadi. Ushbu sahifada nima himoyalanganligi, qanday himoyalanganligi va operatorga qanday vazifalar qoldirilganligi ko'rsatilgan.
+This page describes access，storage and network protection in a local or server workspace． For collection on a GitHub runner or in an Intel TDX confidential VM，see the [verification modes](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope)，which add checks of the collection environment． Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．
 
 | Soha | Qisqasi |
 | --- | --- |
@@ -12,7 +12,7 @@ TgWitness sizning shaxsiy kompyuteringizda yoki serveringizda ishlaydi. Hisob ma
 | Saqlangan sirlar | Sessiya, API juftligi, imzolash kaliti va proksi sozlamalari Fernet bilan shifrlangan |
 | Xabarlar va media | Shifrlanmagan holda saqlanadi: diskni shifrlash va qat'iy ruxsatnomalarni qo'llang |
 | Buzilmaslik | Har bir yozuvda SHA-256 xesh zanjiri va Ed25519 imzosi |
-| Qamrab olinmagan | Mashina ma'muri, oshkor bo'lgan panel tokeni, yozib olish to'liqligi |
+| Local trust boundary | The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary |
 
 Zaifliklar bo'yicha hisobotlar uchun [xavfsizlik siyosat](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)iga qarang.
 
@@ -38,11 +38,13 @@ Eksportlar autentifikatsiya va imzolash sirlarini o'z ichiga olmaydi, lekin atay
 
 ## Saqlangan sirlar
 
-Telegram API kreditsialari, StringSession va Ed25519 xususiy kaliti Fernet yordamida shifrlanadi. Standart bo'yicha uning kaliti shu himoyalangan ma'lumotlar papkasi ichida saqlanadi. Bu tasodifan oddiy matnning oshkor bo'lishini kamaytiradi; bu butun katalogni o'qiy oladigan hujumchiga qarshi himoya emas. TgWitness xabar mazmuni va media fayllarini **shifrlamaydi** . Diskni shifrlash va operatsion tizim ruxsatlarini cheklashdan foydalaning. Unix shaxsiy kalit fayllari 0600 rejimida yaratiladi; yangi yaratilgan ma'lumotlar kataloglari 0700 rejimidan foydalanadi. Mavjud papka ruxsatlari o'zgartirilmaydi. Windows papka ACLlarini meros qilib oladi: ularni faqat xizmat akkaunti va vakolatli administratorlarga cheklang.
+Telegram API credentials，the session and signing key are encrypted with Fernet． For local messages and media，encryption is provided by the host's disk or volume； the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP， and off-site copies use AES-256-GCM．
+
+The vault key defaults to the protected data directory．Use an external master-key file below to store it separately．On Unix，new private-key files use mode 0600 and new data directories use 0700；on Windows，set the directory ACL for the service account and authorized administrators．Existing directory permissions are retained．
 
 ### Tashqi bosh kalit
 
-Yangi ma'lumotlar katalogi uchun TGWITNESS_VAULT_KEY_FILE tashqi tasodifiy bosh kalitni ta'minlashi mumkin. HKDF-SHA256 va alohida tasodifiy salt har bir ish maydoni uchun turli Fernet kalitini hosil qiladi. vault.external.json tiklash uchun saqlanishi kerak. Yo'qolgan yoki noto'g'ri bosh kalitlar yopilishga olib keladi. Mavjud mahalliy omborlar jimjit ko'chirilmaydi. Ijro etilayotgan jarayon kalitga kirish huquqiga ega; bu HSM izolyatsiyasi emas. Panel tanlangan rejimni xabar qiladi va xabar/media saqlovi ilova tomonidan shifrlanmaganligini aniq ko'rsatadi. To'liq tahdid modelini ko'rish uchun [ulanish, proksi-serverlar va ma'lumotlarni himoya qilish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/) bo'limlariga murojaat qiling.
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode．Disk encryption protects the local message and media files in either mode；see [connection and data protection](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/) for setup details．
 
 ## Proxy-lar va tarmoq yo'nalishlari
 
@@ -66,8 +68,10 @@ Standart API tasdiqlash javobi o'zgartiriladi, shunda u autentifikatsiya ma'lumo
 
 ## Buzilmaslik chegaralari
 
-Hash zanjiri, ma'lumotlar bazasi trigerlari va imzolar ma'lum o'zgartirishlarni aniqlaydi; ular mahalliy administratorning jurnalni qayta yozishi va qayta imzolashini oldini olmaydi. Imzolangan tekshiruv nuqtalarini va ommaviy kalit barmoq izini alohida tizimda saqlang. Dalil rejimi va masofaviy nusxa (ikkovlasi ham standart bo'yicha o'chirilgan) tekshiruv nuqtasi xeshlarini vaqt belgilash xizmatlariga va S3-ga mos saqlashga shifrlangan nusxalarni yuboradi; [dalil format](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)iga qarang. Ochiqlik jurnallari, HSM bilan qo'llab-quvvatlanadigan imzolash va rasmiy zanjir bo'ylab mulkchilik sertifikati amalga oshirilmagan.
+Local verification checks record signatures，the hash chain，attachments and the export manifest． The administrator holds the local signing key and can create another signed journal； an independently retained checkpoint detects replacement of the prefix it covers． Keep the key fingerprint and checkpoints with the recipient or an independent witness．
+
+For independently checked collection，choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)． Their verifiers check workflow provenance or hardware measurements in addition to archive integrity． Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies； the [evidence format](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) describes the checks for each mode．
 
 ## Agar muammo borligiga shubha qilsangiz
 
-Asl ma'lumotlar katalogini saqlang va tahlil uchun alohida nusxa ishlating. Xususiy Telegram ma'lumotlari yoki kirish ma'lumotlarini ommaviy masalaga kiritmang. Hech qanday mustaqil xavfsizlik sertifikati da'vo qilinmaydi.
+Preserve the original data directory and use a separate copy for analysis． Report the affected version，operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)，keeping account data and credentials private．

@@ -8,7 +8,7 @@ Kenal pasti imej dan audio yang dirakam dengan pekerja tempatan; pastikan teks t
 
 Buka rekod jurnal `media.saved`, pilih **Kenal pasti lampiran**, kemudian pilih OCR atau transkripsi di bawah **Tanya arkib**. Pemprosesan adalah secara manual dan tempatan. Tiada mod media awan atau muat naik automatik. Bait lampiran asal dan `media_sha256` kekal tidak berubah; teks yang diiktiraf ditandakan secara eksplisit sebagai pengiktirafan mesin dan disimpan secara berasingan dengan hash sumber, versi enjin/model, bahasa, parameter dan masa penyempurnaan. Transkrip mengekalkan cap masa yang dikembalikan.
 
-Cari keputusan ini menggunakan **teks yang diiktiraf oleh Search** dan penapis OCR/transkrip. Ini adalah carian data terbitan yang berasingan; ia tidak secara senyap menukarkan pengiktirafan mesin kepada teks Telegram asal atau menambahkannya ke dalam acara yang disahkan.
+Cari keputusan ini menggunakan **teks yang diiktiraf** dan penapis OCR/transkrip, atau pilih teks yang diiktiraf sebagai sumber carian padanan terbaik **Jurnal**. Kedua-duanya memadankan bentuk kata melalui [indeks](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#recognized-text) [dalam memori](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#recognized-text). Ini adalah carian data terbitan yang berasingan; ia tidak secara senyap menukarkan pengiktirafan mesin kepada teks Telegram asal atau menambahkannya ke dalam peristiwa yang disahkan.
 
 ## Menyiapkan pekerja pilihan
 

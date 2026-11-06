@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/witne
 
 [ایکسپورٹ اور تصدیق کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/) · [اعلیٰ یقین دہانی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/) · [پینل گائیڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#extras)
 
-ایک کلیکٹر اپنا جرنل خود دستخط کرتا ہے، لہٰذا جو بھی کلیکٹر اور اس کی کلید کو کنٹرول کرتا ہے، اصولی طور پر جرنل کو دوبارہ لکھ سکتا ہے یا اس کا حصہ حذف کر کے دوبارہ دستخط کر سکتا ہے۔ ایک گواہ اسے قابلِ شناخت بنا دیتا ہے۔ یہ ایک الگ عمل ہے — ایک اور کنٹینر، یا بہتر یہ کہ کوئی اور چلانے والا سرور — جو ہر چند منٹ بعد کلیکٹر کے دستخط شدہ جرنل ہیڈ کو حاصل کرتا ہے، جو کچھ اس نے دیکھا اسے اپنی چابی سے دستخط کرتا ہے، اسے اپنے جرنل میں محفوظ رکھتا ہے اور اسے ایک ٹیلیگرام چینل پر پوسٹ کرتا ہے۔
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 دھارے کا خاکہ · جمع کنندہ → گواہ (مصنوعی چیک پوائنٹ: ریکارڈز کی تعداد + ہیڈ ہیش); گواہ → گواہ جرنل، اپنی کلید; گواہ → ٹیلیگرام چینل (اپنے بوٹ کے ذریعے دستخط شدہ پوسٹ); شواہد کا زپ → verify.py; گواہ جرنل، اپنی کلید → verify.py; ٹیلیگرام چینل → verify.py (ٹیلیگرام ڈیسک ٹاپ ایکسپورٹ یا t.me/s صفحہ) · جمع کنندہ · گواہ · گواہ جرنل، اپنی کلید · ٹیلیگرام چینل · شواہد کا زپ · verify.py · مصنوعی چیک پوائنٹ: ریکارڈز · کی تعداد + ہیڈ ہیش · اپنے بوٹ کے ذریعے دستخط شدہ · پوسٹ · ٹیلیگرام ڈیسک ٹاپ ایکسپورٹ · یا t.me/s صفحہ
 
@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/witne
 ہر وقفے (ڈیفالٹ کے طور پر 10 منٹ) پر گواہ:
 
 1. خود ہی ہیڈ کو حاصل کرتا ہے (جمع کرنے والا اسے دھکیل یا چھوڑ نہیں سکتا)؛
-2. جمع کنندہ کے دستخط کی تصدیق کرتا ہے، پن کیے گئے جمع کنندہ کلید (`--collector-fingerprint`، یا پہلی دیکھی گئی کلید)، ایک غیر کمی پذیر گنتی اور ایک غیر تبدیل شدہ ہیڈ کو غیر تبدیل شدہ گنتی پر؛
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. اپنے جرنل میں ایک دستخط شدہ ریکارڈ منسلک کرتا ہے: `witness.anchor` جس کی حیثیت `ok`، `key_changed`، `rollback` (پہلے سے کم ریکارڈز)، `fork` (لمبائی ایک جیسی، مختلف ہیڈر) یا `invalid` (جواب توثیق میں ناکام رہا)، یا `witness.no_response` جب جمع کرنے والے نے جواب نہیں دیا؛
 4. نتیجہ چینل پر پوسٹ کیا جاتا ہے، دستخط شدہ، بشمول "کوئی جواب نہیں" جب تک گواہ چل رہا ہو اور Bot API تک پہنچ سکے۔ پوسٹ آئی ڈی ریکارڈ کی جاتی ہے (`witness.posted`)، ایک ناکام پوسٹ بھی (`witness.post_failed`).
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 اس کے لیے آزادانہ طور پر محفوظ کردہ گواہ کے فنگر پرنٹ اور اس ایکسپورٹ کے بالکل آخر میں ایک مماثل چیک پوائنٹ درکار ہوتا ہے۔ صرف پہلے کے پری فکس کو کور کرنے والا چیک پوائنٹ ناکافی ہے۔ کلیکشن کو روک دیں، گواہ کو حتمی حالت دیکھنے دیں، اور مزید جرنل لکھنے سے پہلے ایکسپورٹ کریں؛ اگر جرنل تبدیل ہو جائے تو ایک اور چیک پوائنٹ محفوظ کریں اور اس حالت کو ایکسپورٹ کریں۔ صرف بعد والا چیک پوائنٹ ایک چھوٹے ایکسپورٹ کے حتمی ہیش کی تصدیق نہیں کر سکتا۔ جب `--channel` بھی فراہم کیا جائے، تو دعویٰ شدہ لیکن غائب پوسٹس یا خالی میچ سیٹ اس سخت چیک میں ناکام ہو جاتے ہیں۔ فلیگ کے بغیر، عام سالمیت چیکس اب بھی ایسے ریکارڈز کی اطلاع دیتے ہیں جن کی گواہی نہیں دی گئی، بغیر اس کے کہ ایک ورنہ سالم آرکائیو کو مسترد کر دیں۔
 
-یہ فلیگ فراہم کردہ، پن کیے گئے ویٹنس ریکارڈز کے ساتھ مطابقت کو برقرار رکھتا ہے۔ آپریٹر کو اب بھی ویٹنس کی آزادی قائم کرنی ہوگی اور اس کے ریکارڈز کو علیحدہ طور پر محفوظ کرنا ہوگا۔ یہ پیغام کی صداقت، مکمل جمع یا آزادانہ طور پر ماپا گیا رن ٹائم ثابت نہیں کرتا۔
-
-ایک ویٹنس دکھاتا ہے کہ کلیکٹر نے اُس وقت کیا رپورٹ کیا اور بعد کی ایکسپورٹس اس سے مطابقت رکھتی ہیں۔ یہ اس بات کو ثابت نہیں کرتا کہ کلیکٹر نے ٹیلیگرام کی جانب سے فراہم کردہ ہر چیز کو ریکارڈ کیا، یا یہ کہ پیغام کا مواد درست ہے۔ ایک ہی آپریٹر کے ذریعے ایک ہی مشین پر چلایا گیا ویٹنس، کسی اور کے ذریعے چلائے گئے ویٹنس کے مقابلے میں کمزور ہوتا ہے۔
-
-صرف تعداد میں اضافے سے آن لائن صرف-ضم تسلسل قائم نہیں ہوتا: آف لائن موازنہ میں ہر محفوظ شدہ پری فکس ہیش کا مکمل کلیکٹر ایکسپورٹ سے میل ہونا ضروری ہے۔ ویٹنس کے بند رہنے کے اوقات اور شائع ہونے میں ناکامی کے باعث وقفے بیرونی اینکر کے بغیر رہ جاتے ہیں۔ گمشدہ پوسٹس کو محفوظ شدہ ویٹنس جرنل کے خلاف رپورٹ کیا جا سکتا ہے؛ نہ تو ایک چینل اور نہ ہی ایک سرور جو ایک ہی آپریٹر کے زیرِ کنٹرول ہو، ایک غیر متغیر تیسری پارٹی کا آرکائیو ہے۔
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

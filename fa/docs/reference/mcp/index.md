@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/
 
 یک کلاینت MCP را به فضاهای کاری و چت‌های منتخب با دسترسی منقضی‌شونده و قابل فسخ متصل کنید.
 
-یک کلاینت تحلیل‌گر را به محیط‌های کاری و چت‌های انتخاب‌شده متصل کنید. TgWitness **پروتکل Streamable HTTP را در مسیر `/mcp` در فرآیند پنل** ارائه می‌دهد. هر اتصال دارای توکن، تاریخ انقضا و ابزارهای مجاز مخصوص به خود است. MCP نمی‌تواند پیام‌های تلگرام را ارسال کند، تنظیمات را تغییر دهد یا ژورنال امضاشده را ویرایش کند.
+یک کلاینت تحلیلگر را به فضاهای کاری و چت‌های منتخب متصل کنید. TgWitness **در فرآیند پنل، HTTP قابل جریانی‌سازی را در `/mcp`** ارائه می‌دهد. هر اتصال دارای توکن، تاریخ انقضا و ابزارهای مجاز خاص خود است. MCP نمی‌تواند پیام‌های تلگرام ارسال کند، تنظیمات را تغییر دهد یا دفترچه یادداشت امضا شده را اصلاح کند. همین اتصالات با [خط فرمان](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/)نیز کار می‌کنند.
 
 [راهنمای گردش کار](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 | --- | --- |
 | `list_workspaces` | محیط‌های کاری مجاز |
 | `list_chats` | چت‌های مجاز |
-| `search_messages` | متن پیام‌های ذخیره‌شده در بازه زمانی انتخاب‌شده |
+| `search_messages` | متن پیام‌های ذخیره شده در بازهٔ زمانی انتخاب‌شده؛ `ranked=true` از [جستجوی تمام‌متنی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/) استفاده می‌کند (شکل‌های کلمات، بهترین تطابق‌ها در اولویت، `next_offset` صفحه‌بندی) |
 | `get_message_versions` | نسخه‌های ثبت‌شده و مشاهدات مربوط به حذف |
 | `get_message_context` | شناسه‌های پیام‌های ثبت‌شده در مجاورت |
 | `get_journal_event` | یک رکورد پاک‌سازی‌شده به همراه مرجع منبع آن |
-| `get_capture_status` | وضعیت جمع‌آوری و رکوردهای پوشش مجاز |
+| `get_capture_status` | وضعیت جمع‌آوری، سوابق پوشش مجاز و `gap_summary`: شماره‌های پیام‌هایی که هرگز مشاهده نشده‌اند، به تفکیک کانال یا ابرگروه و برای توالی در سطح حساب ([جزئیات](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#missing-message-numbers-gap_summary))؛ یک چت را انتخاب کنید تا فواصل فهرست‌شده آن را ببینید |
+| `get_activity_stats` | پیام‌ها بر اساس ساعت UTC و روز هفته، روزهای اوج، اشتراک‌گذاری ویرایش و حذف، فرستندگان، دامنه‌ها و `@handles`، همراه با پوشش ([جزئیات](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/#activity-statistics)) |
+| `export_messages` | فقط خط فرمان، به‌صورت پیش‌فرض انتخاب نشده است: جریان‌ها مشاهدات ضبط‌شده را به‌صورت JSON Lines ذخیره می‌کنند ([جزئیات](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/#export))؛ از طریق MCP ارائه نمی‌شود |
 
 فراخوانی `tools/list` تنها ابزارهای اعطاشده به آن اتصال را برمی‌گرداند. فراخوانی سایر ابزارها رد می‌شود. ابزارهای زمینه گروه، اپیزود، اصطلاح‌شناسی و زنجیره پاسخ در این نسخه ارائه نمی‌شوند؛ بک‌اند مجزای بسته زمینه (context-pack) آن‌ها گنجانده نشده است.
 

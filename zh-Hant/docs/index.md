@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/
 
 存檔與整合功能
 
-[「案件看板」參考說明](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/)[檔案分析](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/)[唯讀 MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/)[本地 OCR 與文字轉錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/)[外發 Webhook](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/webhooks/)[公開展示](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/showcase/)
+[「案件看板」參考說明](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/)[檔案分析](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/)[全文搜尋](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/)[唯讀 MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/)[命令列](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/)[本地 OCR 與文字轉錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/)[外發 Webhook](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/webhooks/)[公開展示](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/showcase/)
 
 證據
 

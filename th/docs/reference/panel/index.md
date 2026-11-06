@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/panel
 
 หน้าที่ของแต่ละหน้าจอ, ข้อมูลที่บันทึกไว้ในสมุดบันทึกที่ลงนามแล้ว และตำแหน่งของ คู่มือรายละเอียด แผงควบคุมแสดงพื้นที่ทำงานหนึ่งพื้นที่ต่อครั้ง: บัญชี Telegram หนึ่งบัญชีพร้อม แหล่งข้อมูล สมุดบันทึก และกุญแจลงนามของตัวเอง ตัวเลือกที่ด้านบนของแถบข้างใช้เพื่อ เปลี่ยนพื้นที่ทำงาน ที่อยู่จะนำพื้นที่ทำงาน (`?ws=…`); ในขณะที่ที่อยู่, ตัวเลือก และบัญชีที่โหลดมาไม่ตรงกัน การดำเนินการจะถูกบล็อกไว้
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## ค้นหาทางของคุณ
 
 ส่วน Daily อยู่ที่ด้านบนของแถบข้าง **Accounts** อยู่ใต้ **Workspace** และส่วนอื่นๆ ทั้งหมดอยู่ใต้ **More tools & settings** สวิตช์**ระดับ Interface** ในแถบด้านบนกำหนดจำนวนส่วนที่จะแสดง:

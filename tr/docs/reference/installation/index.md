@@ -44,6 +44,30 @@ Başka bir klasör `TGWITNESS_INSTALL_DIR` başka bir klasör seçin. Yüklü s�
 
 Her kurulumda, yerel yollar, komutlar ve depoya bağlantılar içeren **START-HERE.html** ve **START-HERE.txt** dosyaları bulunur. `tgwitness guide` komutunu çalıştırın. Windows'ta, `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` komutunu kullanın.
 
+## Tam metin arama ayarları
+
+[Tam metin arama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/) (önizleme) için herhangi bir kurulum gerekmez. Dizin, güncellemeden sonra arka planda oluşturulur.
+
+| Değişken veya komut | Etki |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | Varsayılan: dizin, `search/fulltext.sqlite3` saklanır |
+| `TGWITNESS_FULLTEXT=memory` | Dizin dosyası yoktur; dizin her başlatmada yeniden oluşturulur |
+| `TGWITNESS_FULLTEXT=off` | Dizin yok; yalnızca tam metin araması |
+| `tgwitness index status` | Her çalışma alanının dizin durumu |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | İmzalı günlüğün tüm dizinlerini yeniden oluşturun |
+
+Yöneticinin **Günlük → Filtreler → Arama dizini**'ndeki seçimi, o çalışma alanı için değişkeni geçersiz kılar. Komutlar, kendilerini çalıştıran kurulumun veri dizinini bulur; diğer yerlerde, `--data-dir` buradaki yolu ekleyin `tgwitness paths`. Tam Ukraynaca sözlük (GPL-3.0 verileri) için, `pymorphy3-dicts-uk` kurulumun Python ortamına yükleyin.
+
+## Komut satırı erişimi
+
+[Komut satırı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/) (önizleme), komut dosyaları ve ajanlar için arşivi okur.
+
+| Değişken | Etki |
+| --- | --- |
+| `TGWITNESS_URL` | Aşağıdaki panel adresi `tgwitness search`, `context`, `messages`, `stats` ve `export`; varsayılan `http://127.0.0.1:8787` bir jeton ayarlandığında |
+| `TGWITNESS_MCP_TOKEN` | **Entegrasyonlar → MCP** bölümünden, MCP istemcileriyle paylaşılan bağlantı jetonunu arşivleyin; `--token-file` bunun yerine bir dosyadan okur |
+| `TGWITNESS_DATA` | URL veya belirteç belirtilmediğinde `--data-dir`, URL veya belirteç belirtilmediğinde |
+
 ## Çalıştırmadan önce doğrulayın
 
 Tek satırlık komut, ilk komut dosyası için HTTPS'ye güvenir. Bu komut dosyası, kurulumdan önce SHA-256'yi ve uygulama ile kısıtlamalar üzerindeki projenin RSA imzasını kontrol eder. Ayrıca, ilk komut dosyasını önceden indirip doğrulayabilirsiniz.

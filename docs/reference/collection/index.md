@@ -8,6 +8,8 @@ TgWitness records what a connected Telegram account observes. The journal preser
 
 ## From login to a journal
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 Flow diagram · Authorize a user account → Select accessible groups and channels; Select accessible groups and channels → Save event and attachment settings; Save event and attachment settings → Start observation; Start observation → Receive updates from the active client; Receive updates from the active client → Apply source and event policy; Apply source and event policy → Append a signed observation; Append a signed observation → Review or export the journal; Append a signed observation → Process any queued attachment; Process any queued attachment → Append the download outcome · Authorize a useraccount · Select accessiblegroups and channels · Save event andattachment settings · Start observation · Receive updates fromthe active client · Apply source and eventpolicy · Append a signedobservation · Review or export thejournal · Process any queuedattachment · Append the downloadoutcome
 
 **Diagram as text**

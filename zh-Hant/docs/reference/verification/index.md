@@ -4,6 +4,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 Telegram 即時測試、自動化檢查、瀏覽器檢查，以及尚未經核實的內容。
 
+Each result below applies to its recorded revision and environment. The [current capability matrix](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) separates implementation, published downloads and remaining qualification.
+
+## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+
+The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+
+- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
+- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
+- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
+- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
+- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+
+An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+
 ## Phala Cloud 即時部署 · 2026 年 11 月 4 日
 
 `--provider phala --quick-tunnel` 針對真實的 **Phala Cloud**（`tdx.small`，區域 US-WEST-1）進行執行，使用空工作區的 Phala Cloud API 金鑰、真實的 ntfy.sh、GitHub 及 Intel PCS。 該 CVM 安裝了提交 `df7d860c`（v0.8.1）；部署、驗證和銷毀操作均透過命令 列執行，並採用了以下修正方案。七台 CVM 的總費用約為 1.9 美分。
@@ -153,10 +167,16 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 此測量針對本 Windows 主機上的本地序列記錄／匯出路徑。它 不測量 MTProto 傳輸、並行帳戶、Telegram 流量限制、媒體檔案、 長期運行的負載，亦不保證實際聊天數目。此測量是在 最終離線時間戳工具推出之前進行的，該工具並不會改變所測量的訊息路徑。
 
+## 對一百萬則訊息進行全文搜尋 · 2026年11月5日
+
+指令： `python tools/bench_fulltext.py --messages 1000000 --work <empty directory>`
+
+包含 200 個聊天室中 1,000,000 則合成訊息（俄語 詞形、烏克蘭語、英語、中文、日語、連結及識別碼）的確定性簽名日誌，於 71 秒內完成索引；該索引佔用 58 MiB 空間，此外還有 1.50 GiB 的日誌檔案。 最佳匹配 搜尋耗時 9 至 190 毫秒（中位數），相較之下，先前子字串 搜尋則需 2.4 至 3.2 秒。完整結果、硬體配置與限制：[全文搜尋](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#benchmark)。 `tools/test_fulltext.py` 亦會使用當前驗證器驗證在全文搜尋 （`tools/fixtures/evidence-before-fulltext.zip`）使用當前驗證器進行驗證，並使用該歸檔檔自身的 驗證器對當前 歸檔檔進行驗證。 `verify.py`.
+
 ## 其餘資格說明
 
 所保留的即時日誌可記錄實際的訊息收集、編輯、刪除通知、附件、 重新檢查及速率限制處理。 它並未完整記錄訊息送達狀況，亦未建立受控的 角色可見性矩陣、反應主體、延長的 FloodWait、帳號封禁以及 網路／程序中斷恢復等資訊。QR 代幣的發行仍與已完成的 行動端 QR 碼確認程序有所區別。
 
-Docker 建置／執行、Linux／macOS 安裝、持續高負載、獨立安全 審查、真正的獨立 TSA 回應、憑證撤銷／歸檔驗證以及 鑑識認證仍不在本次記錄的認證範圍內。已實作 MTProto 狀態 儲存與補錄功能；原子性持久重播功能尚未建立。 管理日誌 收集、額外的反應器清單以及優先級短輪詢仍屬獨立功能。 請參閱[即時驗收](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md)報告以了解受控資格認證矩陣。
+Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
 
 本地詳細收據與螢幕截圖位於 test-results/ 目錄下（Git 已忽略）。 docs/assets/ 目錄中的公開螢幕截圖僅包含虛構的示範資料。

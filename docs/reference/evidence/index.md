@@ -14,7 +14,7 @@ TgWitness preserves account-visible Telegram observations in a signed journal. R
 | Evidence ZIP contents | `manifest.sig` signs the canonical manifest, which lists hashes of the content files | The complete ZIP, including its manifest and signature |
 | Preserved attachments | SHA-256 and byte count in a signed `media.saved` event; file hash in the signed ZIP manifest | The original bytes inside the verified ZIP |
 | Checkpoint | Ed25519 signature over journal length, head hash, public key, and creation time | An independent copy retained before a disputed change |
-| Run receipt | Separately signed collector measurements; also included in a signed `process.started` event | The receipt and associated journal; measurements are self-reported |
+| Run receipt | Signed record of the collector version，source-file hashes and start settings，also included in `process.started` | The receipt，associated journal and the environment evidence for the selected verification mode |
 | Readable reports: `report.html` and its parts, `report.json`, `report.pdf`, `chat.pdf` | An Ed25519 seal per file over its content; the PDF also carries a standard PDF signature (see [Readable reports](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#readable-reports)) | The file as received and the trusted key fingerprint; the ZIP it describes |
 | Standalone CSV | No standalone cryptographic signature; event hashes alone are insufficient | Use the exact copy inside the verified ZIP for integrity checking |
 | Screenshots, printouts, or PDF produced by a browser | No TgWitness signature on the derivative | Keep the original verified package and document how the derivative was made |
@@ -62,7 +62,7 @@ Signed evidence, handover and chat ZIPs carry readable HTML and JSON reports, pl
 
 In a channel or supergroup Telegram numbers messages 1, 2, 3… in order. A chat export lists the first and last number, how many are present and every run of absent numbers in `message-ids.json`, the manifest and the `chat.json` header, and marks each gap where it falls in the transcript. `verify.py` recounts them from `chat.json`. An absent number is a message Telegram did not return (deleted before the export, or not visible to the account); in private chats and basic groups numbers are shared by all of the account's chats and gaps are not counted.
 
-After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer means Telegram has no message under that number for this account; it does not say whether the message was deleted or was never visible to the account. A message Telegram does return then was missed while reading and is added to the export, marked `found_on_recheck`.
+After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time； it leaves the cause unspecified．A message returned on recheck is added to the export and marked `found_on_recheck`．
 
 Every report opens with **In brief**: one paragraph, then what the material shows and what it does not (who is behind an account, completeness of delivery, deletions before observation, clock time without a timestamp). The page's own seal stamp turns amber when the browser has checked the seal's signature, not the page: a browser does not give a page its own bytes. It turns green only when the reader drops the file into the check at the end of the page and every byte matches, and only if the page shown is that file; otherwise it turns red.
 
@@ -124,12 +124,41 @@ Every signed ZIP carries `coverage.json`, the HTML report opens with the same su
 
 - **Continuously observed from X to Y.** A period starts with `observation.started` and ends at a pause, a stop, a lost Telegram connection, a sign-out, a process start without an orderly stop, or more than three minutes without any record while observing (heartbeats are written every minute, so silence means the process stopped, froze or the computer slept). When the heartbeat interval is changed in **Parameters**, each heartbeat records it and the allowed silence becomes three intervals, never less than three minutes.
 - **Gaps** list the time between periods with the reason. A gap still open at the last record is marked `not_resumed_by_last_record`.
-- **Message IDs not observed.** For channels and supergroups, which number messages per chat, the IDs missing between observed ones are listed as ranges. They are reported as *not observed* — deleted, never delivered, or outside the saved history — never as deleted. Private chats and ordinary groups share an account-wide sequence, so gaps there mean nothing and are not listed.
+- **Message IDs not observed.** For channels and supergroups, which number messages per chat, the IDs missing between observed ones are listed as ranges. They are reported as *not observed* — deleted, never delivered, or outside the saved history — never as deleted. Private chats and ordinary groups share an account-wide sequence, so gaps inside one such chat mean nothing and are not listed there.
 - Chat-level gap notices (for example Telegram asking for difference recovery in one channel) are counted as notes; they do not interrupt global coverage.
+
+### Missing message numbers (`gap_summary`)
+
+**Preview.** `coverage.json` → `gap_summary` measures the numbers Telegram assigned and this collector never saw. Telegram numbers messages once per channel or supergroup, and once per account across private chats, bots and ordinary groups. A number between two observed messages is either observed or missing; a contiguous range is a positive statement that every message numbered in it was observed. A gap names no actor and no reason.
+
+| Field | Meaning |
+| --- | --- |
+| `status` | `on`, or `off` when turned off in **Parameters → Gap analysis** |
+| `parameters` | The parameters that produced the result, so it can be repeated |
+| `chats[]` | One entry per channel or supergroup, each numbered on its own |
+| `account` | The account-wide sequence of private chats, bots and ordinary groups |
+| `status` (per sequence) | `applicable`, or `not_applicable` with `reason` |
+| `observed_from`, `observed_to`, `span` | First and last observed number and the size of the range |
+| `observed`, `observed_without_content` | Observed numbers; those known only from a deletion or recheck record |
+| `missing`, `density`, `gap_ranges`, `largest_gap` | Numbers never observed, their share of the range, how many runs, the longest run |
+| `clusters[]` | Listed gaps: `low`, `high`, `missing`, and the neighbouring observed numbers `after` / `before` with their observation times |
+| `service_estimate` | Only when enabled: how many missing numbers would be service messages at their observed share. Never subtracted from `missing` |
+
+Validity is derived from the journal, never assumed:
+
+- **Channels and supergroups** are measured per chat, also in an export of chosen chats. Records chosen by sender make the measurement `not_applicable`.
+- **The account-wide sequence** is measured only from the first to the last message that arrived while whole-account collection was on and kept private chats, bots, ordinary groups and the account's own messages, with no such chat excluded (`scope.changed`). Numbers named by `deletion.unscoped` count as observed without content. An export or handover of chosen chats cannot measure it. If whole-account collection was switched off and on, a note says that numbers used meanwhile appear as gaps.
+- Service messages are journal records with their own numbers, so they close their gaps themselves; the optional estimate is only context.
+
+`verify.py` recomputes `gap_summary` from `events.jsonl` with the parameters in the signed `coverage.json` member (defaults for older archives) and prints the account-wide line in its coverage summary. The archive's `get_capture_status` (MCP and the command line) returns the same measurement for the chats an access may read; the account-wide sequence only to access covering the whole workspace.
+
+Repeated observations of one service message count once，and the account service estimate uses only numbers inside the measured range．An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled；older records without that information cannot establish this condition．Stopped observation does not extend the measured range，and resuming it is noted．The live archive query has a time budget，including its database scan，and marks an unfinished measurement as partial．
+
+Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences)． These numbers describe observations；they do not identify a deletion actor or establish why a number is absent．
 
 When Telegram stops accepting the account, the `coverage.gap` record that ends observation carries `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` or `not_authorized`) and the Telegram error; `verify.py` names the cause where the period ends.
 
-Coverage describes what this collector recorded. It is not proof that Telegram delivered every update during a continuous period.
+Coverage combines recorded observation periods，interruptions and message outcomes． Assess it together with the selected chats，period and attachment policy；continuous operation alone does not establish complete delivery of Telegram updates．
 
 ## Producer
 
@@ -157,17 +186,27 @@ A witness journal (`tgwitness-witness-v1`) and its channel posts are checked aga
 
 manifest.json includes the format, export time, public key, fingerprint, journal length, head hash, scope, producer, limitations, and SHA-256 of every content member other than `manifest.json` and `manifest.sig` themselves. manifest.sig is the base64 Ed25519 signature over canonical manifest JSON. The verifier rejects unexpected/missing members, duplicate names, corrupt files, broken sequence/chain, invalid signatures, and mismatch with a provided checkpoint. It never extracts archive paths. It limits total declared uncompressed size to 4 GiB; `--max-gib N` allows larger archives made with a raised **Parameters** limit.
 
-Obtain verifier code from a trusted checkout or reviewed independent copy. A verifier inside an untrusted archive is executable material supplied by that archive's author; its presence is a portability convenience, not an independent trust anchor.
+Run verification from your installed TgWitness version or a reviewed checkout． The copy included in an archive supports portable use；check that copy against your trusted installation before executing it．
 
-A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix. Retain a checkpoint outside the collector before a disputed change: an attacker controlling both archive and checkpoint can replace both.
+A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix．Retain the checkpoint outside the collector，so later verification compares the archive with a reference held separately from it．
 
 ## Verification scope
 
-The signatures identify the collector key and protect the saved material. Pin its fingerprint independently to associate that key with the expected collector. Telegram updates are the input to collection; TgWitness signs its observations of those updates. The signatures are not signatures issued by Telegram or by message authors.
+Verification checks the archive and the collection mode used to produce it．Choose the mode whose trust boundary matches the case，then retain its verification inputs．
 
-A retained checkpoint or witness record detects a changed earlier journal prefix, including a replacement signed with a copied collector key. Records fabricated before their first independent checkpoint require source corroboration: a collector key holder can sign new material. Keep signing-key access controlled and retain references separately.
+| Collection mode | What the verifier checks | Verification inputs and trust boundary |
+| --- | --- | --- |
+| Local workspace | Record signatures，hash chain，manifest and attachment bytes | Independently retained collector fingerprint；the host administrator controls the local signing key |
+| Local workspace with an independent witness | The archive checks plus agreement with an earlier journal prefix retained by the witness | Separately trusted witness key and records；the checkpoint binds the prefix already observed |
+| [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity | Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow |
+| [Cloud deployment](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/) | Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record | Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider |
+| [Intel TDX confidential VM](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status，binding to the collector statement，compose and OS measurements | Intel trust chain and expected deployment measurements；retain the results of every required TDX check |
 
-Assess account visibility and delivery using coverage records and controlled tests. Use a verified external timestamp for independent time anchoring. A sender ID identifies a Telegram account; link it to a person through your investigation. Program receipts and cloud checks describe collector-reported measurements and deployment configuration. See [validation results](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) for measured behavior and its scope.
+In sealed acquisition，the approved collector receives data through an authenticated Telegram connection inside the verified environment．Attestation binds the archive to that execution，so verification covers acquisition as well as later file integrity． This relies on the approved code and the platform trust chain listed above． GitHub capture verification requires a session created inside the run and rejects imported-session captures．
+
+The run receipt records the collector version，file hashes and startup settings．GitHub provenance and TDX measurements provide the environment checks；the [validation record](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) identifies tested configurations．
+
+TgWitness signs the observations it collects；Telegram and message authors do not issue these signatures．In a local workspace，material created before the first independent checkpoint still depends on the collector and its key holder．Coverage records describe the selected scope and collection outcomes，while verified external timestamps anchor the committed archive or journal boundary in time．
 
 ## Attachments
 
@@ -181,9 +220,9 @@ A full chat export saves attachments within the workspace's attachment settings 
 
 A media job and its message event commit in one transaction. The job stores the original TL message descriptor; the signed observation binds its SHA-256, account, and size policy. Recovery verifies that binding before downloading. It never fetches the current message and silently substitutes a newer attachment. Interrupted jobs are retried, while permanent failure remains an explicit outcome.
 
-Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The process receipt can also be downloaded as a separately signed statement. File measurements are self-reported and are not trusted hardware attestation.
+Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement．For verification of the execution environment，pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope)．
 
-Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives; an operator controlling both can still replace both. Independent retention and external trusted timestamps remain separate requirements.
+Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives．Independent retention keeps that reference available outside the workspace；a verified external timestamp additionally anchors it in time．
 
 After a restart the saved Telegram update position is resumed (`catch_up_from` in `observation.started`) and missed updates are requested. A periodic recheck records `message.recovered` for missed messages and `message.missing_on_recheck` when Telegram no longer returns a saved message; the latter is not a deletion notice and names no deleter or time.
 

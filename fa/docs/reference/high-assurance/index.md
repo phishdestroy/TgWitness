@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-
 
 یک سرور مهر و موم‌شدهٔ ۲۴ ساعته و ۷ روز هفته در Hetzner یا Phala Cloud، DNS Gateway و چک‌هایی که شخص ثالث می‌تواند تکرار کند.
 
-یک دفترچه ثبت امضا شده ثابت می‌کند که سوابق **پس از** امضا تغییر نکرده‌اند. برای پرونده‌های جدی، سؤال بعدی این است که آیا کسی می‌توانسته **قبل** از امضای داده‌ها، آن‌ها را دستکاری کرده باشد: چه کسی گردآورنده را اجرا کرده، روی کدام ماشین، و آیا کسی به آن وارد شده است. این حالت اختیاری، گردآورنده را طوری مستقر می‌کند که شخص ثالث بتواند این موارد را با استفاده از سوابقی که توسط ارائه‌دهنده ابری و کلودفلر نگهداری می‌شود، بررسی کند، نه بر اساس گفتهٔ اپراتور.
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 استفادهٔ معمولی محلی و Docker بدون تغییر است. هیچ چیزی در اینجا اجرا نمی‌شود مگر اینکه با `python -m tgwitness.cloud`، و کالکتور تنها زمانی میزبان خود را می‌خواند که استقرار تنظیم کند. `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-
 | کلید امضا روی آن سرور ایجاد شد | کلید بیانیه‌ای را امضا می‌کند که شامل شناسهٔ سرور ارائه‌دهنده و هش cloud-init دریافتی است. | کالکتور، بررسی‌شده در برابر ارائه‌دهنده |
 | این مجله متعلق به آن کلید و سرور است | هر فرایند در شواهد آغاز می‌شود ZIP اندازه‌گیری میزبان را برای آن سرور حمل می‌کند | شواهد ZIP |
 
-اندازه‌گیری‌های میزبان (گوش‌گیرها و فرآیندهای SSH، جلسات جاری، ورودها در `wtmp`، بوت) توسط خود جمع‌آوری‌کننده گزارش شده و در هر شروع فرآیند و در `host.state` هرگاه تغییر کنند، گزارش می‌شوند. دسترسی روت روی سرور می‌تواند آن‌ها را جعل کند؛ آن‌ها به جای جایگزینی، از رکوردهای ارائه‌دهنده و Cloudflare پشتیبانی می‌کنند.
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## ارائه‌دهندگان
 
@@ -269,11 +269,8 @@ DNS گیت‌وی، حل‌کننده سیستم را پوشش می‌دهد. DN
 
 کلودفلر نمی‌تواند محتوای داخل رمزگذاری تلگرام، سایر دستگاه‌های متصل به حساب تلگرام (فهرست دستگاه‌های حالت مدرک، آن‌ها را از سمت تلگرام ثبت می‌کند) یا هایپروایزر ارائه‌دهنده را مشاهده کند.
 
-## آنچه این مستندات اثبات نمی‌کند
+## Reading the deployment result
 
-- ارائه‌دهنده و کارکنان آن، هایپروایزر، دیسک‌ها و شبکه را کنترل می‌کنند.
-- اندازه‌گیری‌های میزبان به‌صورت خوداظهاری توسط گردآورنده گزارش می‌شوند.
-- محتویات قوانین فایروال قبلی در هر لاگ ارائه‌دهنده وجود ندارد؛ تنها Linode نسخه‌های قوانین را نگه می‌دارد.
-- این موضوع چیز جدیدی دربارهٔ اصالت پیام نمی‌گوید؛ به [شواهد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) مراجعه کنید.
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-هنوز روی حساب‌های واقعی اجرا نشده است: یک استقرار تحت دامنه خودتان (تونل و DNS کلودفلر)، سایر ارائه‌دهندگان، یک استقرار عیب‌یابی و `lock`، یک حساب تلگرام روی چنین سروری، و به‌روزرسانی‌های زنده نسخه‌های بعدی از طریق یک تونل سریع. اولین استقرار را روی هر ارائه‌دهنده با بررسی کنید `plan`، یک استقرار اشکال‌زدایی و `verify` قبل از اینکه در یک پرونده به آن متکی شوید.
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/fa/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

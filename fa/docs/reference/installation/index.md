@@ -44,6 +44,30 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
 
 هر نصب شامل **فایل‌های START-HERE.html** و **START-HERE.txt** است که شامل مسیرهای محلی، دستورات و لینک‌هایی به مخزن (repository) می‌باشد. اجرا کنید `tgwitness guide` برای باز کردن راهنما. در ویندوز، از دستور زیر استفاده کنید: `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` در PowerShell استفاده کنید.
 
+## تنظیمات جستجوی متن کامل
+
+[جستجوی متن کامل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/) (پیش‌نمایش) نیازی به تنظیم ندارد. نمایه‌اش پس از به‌روزرسانی در پس‌زمینه ساخته می‌شود.
+
+| متغیر یا فرمان | اثر |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | پیش‌فرض: شاخص در نگهداری می‌شود `search/fulltext.sqlite3` هر فضای کاری |
+| `TGWITNESS_FULLTEXT=memory` | فایل شاخص وجود ندارد؛ شاخص در هر بار راه‌اندازی دوباره ساخته می‌شود |
+| `TGWITNESS_FULLTEXT=off` | بدون نمایه؛ فقط جستجوی متنی دقیق |
+| `tgwitness index status` | وضعیت هر فضای کاری را فهرست‌بندی کنید |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | هر نمایه را از دفترچهٔ امضا‌شده بازسازی کنید |
+
+انتخاب مدیر در **Journal → Filters → Search index** بر متغیر آن فضای کاری اولویت دارد. دستورات دایرکتوری دادهٔ نصب را که آن‌ها را اجرا می‌کند پیدا می‌کنند؛ در جاهای دیگر، اضافه کنید `--data-dir` با مسیر از `tgwitness paths`. برای یک فرهنگ لغت کامل اوکراینی (داده‌های GPL-3.0)، نصب کنید `pymorphy3-dicts-uk` در محیط پایتون نصب.
+
+## دسترسی خط فرمان
+
+[خط](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/) [فرمان](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/) (پیش‌نمایش) آرشیو را برای اسکریپت‌ها و ایجنت‌ها می‌خواند.
+
+| متغیر | اثر |
+| --- | --- |
+| `TGWITNESS_URL` | آدرس پنل برای `tgwitness search`, `context`, `messages`, `stats` و `export`؛ پیش‌فرض `http://127.0.0.1:8787` وقتی یک توکن تنظیم می‌شود |
+| `TGWITNESS_MCP_TOKEN` | توکن اتصال را از **Integrations → MCP** بایگانی کنید، که با کلاینت‌های MCP به اشتراک گذاشته می‌شود؛ `--token-file` در عوض آن را از یک فایل می‌خواند |
+| `TGWITNESS_DATA` | زمانی که هیچ ... داده نمی‌شود، دایرکتوری داده‌ها مستقیماً خوانده می‌شود. `--data-dir`، URL یا توکن داده نشده باشد |
+
 ## پیش از اجرا تأیید کنید
 
 دستور یک‌خطی برای اجرای اسکریپت اولیه به HTTPS اعتماد می‌کند. آن اسکریپت قبل از نصب، نشانی SHA-256 و امضای RSA پروژه را روی برنامه و محدودیت‌ها بررسی می‌کند. همچنین می‌توانید ابتدا اسکریپت اولیه را دانلود و تأیید کنید.

@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. Збережіть оригінальні ZIP-архіви та їхні хеші. Зафіксуйте кожного власника, передачу, дату та мету. Збережіть разом із ними відповідні заяви операторів та примітки щодо справи.
 5. Для конфіденційних віртуальних машин збережіть та незалежно перевірте цитату, запит, ланцюжок сертифікатів Intel, вимірювання, точне джерело та умови поводження з ключами. Зберігайте результат перевірки атестації разом із перевіреними артефактами.
 
-Див. [обсяг перевірки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) щодо припущень про достовірність та окрему оцінку тверджень джерел, ідентичності, часу та охоплення збору даних.
+See [verification scope](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Перевірка одержувачем
 

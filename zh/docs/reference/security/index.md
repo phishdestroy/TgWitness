@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/secur
 
 威胁模型、访问模型、静态机密、网络暴露、会话导入以及如何报告漏洞。
 
-TgWitness 可在您的计算机或服务器上运行。账户连接、公共代理列表维护以及可选的外部服务均设有 明确的路由策略。通知、时间戳、异地副本和见证人 均可单独配置。本页面列出了受保护的内容、保护方式以及 由操作员自行决定的事项。
+This page describes access，storage and network protection in a local or server workspace． For collection on a GitHub runner or in an Intel TDX confidential VM，see the [verification modes](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)，which add checks of the collection environment． Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．
 
 | 领域 | 简而言之 |
 | --- | --- |
@@ -12,7 +12,7 @@ TgWitness 可在您的计算机或服务器上运行。账户连接、公共代�
 | 静态数据中的秘密 | 会话、API 对、签名密钥和代理设置均采用 Fernet 算法进行加密 |
 | 消息和媒体文件 | 数据以明文形式存储：请使用磁盘加密并设置严格的权限 |
 | 完整性 | 每条记录均带有 SHA-256 哈希链和 Ed25519 签名 |
-| 未涵盖 | 机器管理员、泄露的控制面板令牌、捕获的完整性 |
+| Local trust boundary | The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary |
 
 有关漏洞报告，请参阅[安全政策](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)。
 
@@ -38,11 +38,13 @@ TgWitness 可在您的计算机或服务器上运行。账户连接、公共代�
 
 ## 静态数据中的秘密
 
-Telegram API 凭据、StringSession 以及 Ed25519 私钥均使用 Fernet 进行加密。默认情况下，其密钥存储在同一受保护的数据目录中。 这可减少明文意外泄露的风险；但无法防范能够读取整个目录的攻击者。 TgWitness 不会对消息内容和媒体文件进行**加密** 。请使用磁盘加密并设置严格的操作系统权限。Unix 私钥 文件创建时采用 0600 权限模式；新创建的数据目录采用 0700 权限模式。 现有目录的权限不会被更改。Windows 会继承目录的访问控制列表 (ACL)：请将其 限制为服务账户和授权管理员。
+Telegram API credentials，the session and signing key are encrypted with Fernet． For local messages and media，encryption is provided by the host's disk or volume； the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP， and off-site copies use AES-256-GCM．
+
+The vault key defaults to the protected data directory．Use an external master-key file below to store it separately．On Unix，new private-key files use mode 0600 and new data directories use 0700；on Windows，set the directory ACL for the service account and authorized administrators．Existing directory permissions are retained．
 
 ### 外部主密钥
 
-对于新的数据目录，TGWITNESS_VAULT_KEY_FILE 可提供一个外部随机 主密钥。 系统会通过 HKDF-SHA256 及独立的随机盐值，为每个工作区生成不同的 Fernet 密钥。 为确保恢复功能，必须保留 vault.external.json 文件。若主密钥缺失或 错误，系统将无法启动。现有本地保险库不会被自动迁移。 运行中的进程可以访问该密钥；这并非 HSM 隔离。控制面板会报告 所选模式，并明确说明消息/媒体存储不会由应用程序 进行加密。有关完整的威胁模型，请参阅[“连接”、“代理”和“数据保护”部分](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/) 。
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode．Disk encryption protects the local message and media files in either mode；see [connection and data protection](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/) for setup details．
 
 ## 代理服务器与网络路由
 
@@ -66,8 +68,10 @@ MTProxy 仅传输 Telegram 流量。外部请求可使用独立的 SOCKS5/HTTP �
 
 ## 完整性限制
 
-哈希链、数据库触发器和签名可检测到某些修改； 但无法阻止本地管理员重写日志并重新签名。 请将已签名的检查点和公钥指纹保存在独立系统中。 证据模式和异地副本（默认均处于关闭状态）会将检查点哈希值发送至 时间戳服务，并将加密副本发送至兼容 S3 的存储；请参阅 [证据格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)。透明度日志、基于 HSM 的签名以及正式的 证据链认证尚未实现。
+Local verification checks record signatures，the hash chain，attachments and the export manifest． The administrator holds the local signing key and can create another signed journal； an independently retained checkpoint detects replacement of the prefix it covers． Keep the key fingerprint and checkpoints with the recipient or an independent witness．
+
+For independently checked collection，choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)． Their verifiers check workflow provenance or hardware measurements in addition to archive integrity． Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies； the [evidence format](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) describes the checks for each mode．
 
 ## 如果您怀疑存在问题
 
-请保留原始数据目录，并使用另一份副本进行分析。请勿 在公开问题中包含私人的 Telegram 数据或凭据。本工具不 声称拥有任何独立的安全认证。
+Preserve the original data directory and use a separate copy for analysis． Report the affected version，operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)，keeping account data and credentials private．

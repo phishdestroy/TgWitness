@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-
 
 Hetzner یا Phala Cloud پر ایک سیل شدہ 24/7 سرور، Gateway DNS اور وہ چیکس جنہیں تیسری پارٹی دہرا سکتی ہے۔
 
-ایک دستخط شدہ جرنل اس بات کا ثبوت فراہم کرتا ہے کہ دستخط کرنے **کے بعد** ریکارڈز میں کوئی تبدیلی نہیں کی گئی۔ سنگین معاملات کے لیے اگلا سوال یہ ہے کہ کیا دستخط ہونے سے **پہلے** کسی نے ڈیٹا کو ترتیب دیا ہے: کلیکٹر کس نے چلایا، کون سی مشین پر، اور کیا کوئی اس میں لاگ ان ہوا تھا۔ یہ اختیاری موڈ کلیکٹر کو اس طرح تعینات کرتا ہے کہ کوئی تیسری پارٹی آپریٹر کی بات پر انحصار کیے بغیر، کلاؤڈ فراہم کنندہ اور کلاؤڈ فلیئر کے پاس موجود ریکارڈز کا استعمال کرتے ہوئے اس کی تصدیق کر سکے۔
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 عام مقامی اور Docker استعمال میں کوئی تبدیلی نہیں آئی۔ یہاں کچھ بھی نہیں چلتا جب تک آپ کو `python -m tgwitness.cloud` کے ساتھ تعینات کریں، اور کلیکٹر صرف اسی وقت اپنے ہوسٹ کو پڑھتا ہے جب تعیناتی سیٹ کرتی ہے۔ `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Hetzner یا Phala Cloud پر ایک سیل شدہ 24/7 سرور، Gateway DNS �
 | دستخطی کلید اسی سرور پر بنائی گئی تھی۔ | کلیدی بیان کو دستخط کرتی ہے جس میں فراہم کنندہ کے سرور آئی ڈی اور موصول شدہ cloud-init کے ہیش کا ذکر ہوتا ہے۔ | کلیکٹر، فراہم کنندہ کے خلاف چیک کیا گیا |
 | یہ جرنل اُس کلید اور سرور کا ہے۔ | ہر عمل ثبوت میں شروع ہوتا ہے ZIP اس سرور کے لیے میزبان کی پیمائش کو لے کر جاتا ہے۔ | شواہد ZIP |
 
-ہوسٹ کی پیمائشیں (SSH لِسَنرز اور پراسیسز، موجودہ سیشنز، لاگ انز `wtmp`، بوٹ) کی رپورٹ خود کلیکٹر کرتا ہے اور ہر پراسیس کے آغاز اور میں دستخط کیے جاتے ہیں `host.state` ریکارڈز میں شامل کیے جاتے ہیں جب بھی وہ تبدیل ہوتے ہیں۔ سرور پر روٹ انہیں جعلی بنا سکتا ہے؛ وہ فراہم کنندہ اور Cloudflare کے ریکارڈز کو تبدیل کرنے کے بجائے ان کی تائید کرتے ہیں۔
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## فراہم کنندگان
 
@@ -269,11 +269,8 @@ Logpush، جو Cloudflare کی اپنی کاپی R2 میں محفوظ رکھتا
 
 Cloudflare ٹیلیگرام کی انکرپشن کے اندر نہیں دیکھ سکتا، ٹیلیگرام اکاؤنٹ پر موجود دیگر آلات (evidence mode کی ڈیوائس لسٹ انہیں ٹیلیگرام کی جانب سے ریکارڈ کرتی ہے) یا فراہم کنندہ کے ہائپروائزر کو بھی نہیں۔
 
-## یہ کیا ثابت نہیں کرتا
+## Reading the deployment result
 
-- فراہم کنندہ اور اس کا عملہ ہائپروائزر، ڈسکس اور نیٹ ورک کو کنٹرول کرتے ہیں۔
-- میزبان کی پیمائشیں جمع کرنے والے کی جانب سے خود رپورٹ کی جاتی ہیں۔
-- پرانے فائر وال قواعد کا مواد ہر فراہم کنندہ کے لاگ میں موجود نہیں ہوتا؛ صرف Linode قواعد کے ورژنز کو محفوظ رکھتا ہے۔
-- یہ پیغام کی صداقت کے بارے میں کچھ نیا نہیں بتاتا؛ دیکھیں [شواہد](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/)۔
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-ابھی تک حقیقی اکاؤنٹس پر چلایا نہیں گیا: آپ کے اپنے ڈومین (Cloudflare ٹنل اور DNS) کے تحت ایک تعیناتی، دیگر فراہم کنندگان، ایک ڈیبگ تعیناتی اور `lock`، ایک Telegram اکاؤنٹ ایسے سرور پر، اور بعد کے ورژنز کی لائیو اپ ڈیٹس ایک فوری ٹنل کے ذریعے۔ ہر فراہم کنندہ پر پہلی تعیناتی کو چیک کریں `plan`، ایک ڈیبگ تعیناتی اور `verify` ایک کیس میں انحصار کرنے سے پہلے۔
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/ur/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

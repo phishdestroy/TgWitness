@@ -44,7 +44,7 @@ Yig'ish
 
 Arxiv va integratsiyalar
 
-[Case Board havolasi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/)[Arxiv tahlili](https://phishdestroy.github.io/TgWitness/uz/docs/reference/analysis/)[Faqat o'qish uchun MCP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/)[Mahalliy OCR va transkripsiya](https://phishdestroy.github.io/TgWitness/uz/docs/reference/media-analysis/)[Chiquvchi webhooks](https://phishdestroy.github.io/TgWitness/uz/docs/reference/webhooks/)[Jamoat namoyishi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/showcase/)
+[Case Board havolasi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/)[Arxiv tahlili](https://phishdestroy.github.io/TgWitness/uz/docs/reference/analysis/)[To'liq matnli qidiruv](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/)[Faqat o'qish uchun MCP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/)[Buyruq satri](https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/)[Mahalliy OCR va transkripsiya](https://phishdestroy.github.io/TgWitness/uz/docs/reference/media-analysis/)[Chiquvchi webhooks](https://phishdestroy.github.io/TgWitness/uz/docs/reference/webhooks/)[Jamoat namoyishi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/showcase/)
 
 Dalil
 

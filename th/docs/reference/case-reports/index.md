@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. รักษาไฟล์ ZIP ต้นฉบับและค่าแฮชของพวกมันไว้ บันทึกผู้ถือแต่ละราย การโอนย้าย วันที่ และวัตถุประสงค์ เก็บรักษาคำชี้แจงของผู้ดำเนินการและบันทึกคดีที่ระบุไว้พร้อมกับข้อมูลเหล่านั้น
 5. สำหรับ VM ที่เป็นความลับ ให้รักษาและตรวจสอบอย่างอิสระต่อคำเสนอราคา, การท้าทาย, ห่วงโซ่ใบรับรอง Intel, การวัดค่า, แหล่งที่มาที่แม่นยำ และเงื่อนไขการจัดการกุญแจ เก็บผลการตรวจสอบการรับรองไว้พร้อมกับหลักฐานที่ได้รับการตรวจสอบแล้ว
 
-ดู[ขอบเขตการตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope)เพื่อทราบสมมติฐานความน่าเชื่อถือ และการประเมินแยกต่างหากเกี่ยวกับคำกล่าวอ้างของแหล่งข้อมูล, ความเป็นบุคคล, เวลา และขอบเขตการเก็บรวบรวมข้อมูล
+See [verification scope](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## การตรวจสอบของผู้รับ
 

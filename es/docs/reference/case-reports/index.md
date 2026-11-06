@@ -134,7 +134,7 @@ Revisa cada comprobación por separado, junto con la cobertura de la recopilaci�
 4. Conserve los archivos ZIP originales y sus hash. Registre cada titular, transferencia, fecha y finalidad. Mantenga junto a ellos las declaraciones atribuidas a los operadores y las notas del caso.
 5. En el caso de los mensajes de voz confidenciales, se deben conservar y verificar de forma independiente la cotización, la verificación, la cadena de certificados de Intel, las mediciones, la fuente exacta y las condiciones de gestión de claves. Se debe conservar el resultado de la verificación de la certificación junto con los artefactos revisados.
 
-Consulte [el alcance de la verificación](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope) para conocer los supuestos de fiabilidad y la evaluación independiente de las afirmaciones de las fuentes, la identidad, la fecha y la cobertura de la recopilación.
+See [verification scope](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Revisión del destinatario
 

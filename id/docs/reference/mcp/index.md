@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/
 
 Hubungkan klien MCP ke ruang kerja dan obrolan yang dipilih dengan akses yang memiliki batas waktu dan dapat dicabut.
 
-Hubungkan klien analis ke ruang kerja dan obrolan yang dipilih. TgWitness menyajikan **Streamable HTTP di `/mcp` dalam proses panel**. Setiap koneksi memiliki token, masa berlaku, dan alat yang diizinkan sendiri. MCP tidak dapat mengirim pesan Telegram, mengubah pengaturan, atau memodifikasi jurnal bertanda tangan.
+Hubungkan klien analis ke ruang kerja dan obrolan yang dipilih. TgWitness menyediakan layanan **Streamable HTTP di `/mcp` dalam proses panel**. Setiap koneksi memiliki token, masa berlaku, dan alat yang diizinkan masing-masing. MCP tidak dapat mengirim pesan Telegram, mengubah pengaturan, atau memodifikasi jurnal yang ditandatangani. Koneksi yang sama juga berfungsi melalui [baris perintah](https://phishdestroy.github.io/TgWitness/id/docs/reference/cli/).
 
 [Panduan alur kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ Alamat `*.trycloudflare.com` bersifat sementara. Ketika mulai ulang tunnel mengu
 | --- | --- |
 | `list_workspaces` | Ruang kerja yang diizinkan |
 | `list_chats` | Obrolan yang diizinkan |
-| `search_messages` | Teks pesan tersimpan dalam periode yang dipilih |
+| `search_messages` | Teks pesan yang disimpan dalam periode yang dipilih; `ranked=true` menggunakan [pencarian teks lengkap](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/) (bentuk kata, hasil yang paling cocok ditampilkan terlebih dahulu, `next_offset` paginasi) |
 | `get_message_versions` | Versi yang tertangkap dan pengamatan penghapusan |
 | `get_message_context` | ID pesan sekitar yang tertangkap |
 | `get_journal_event` | Satu catatan yang telah disanitasi beserta referensi sumbernya |
-| `get_capture_status` | Status pengumpulan dan catatan cakupan yang diizinkan |
+| `get_capture_status` | Status pengumpulan, catatan cakupan yang diizinkan, dan `gap_summary`: nomor pesan yang tidak pernah teramati, per saluran atau supergrup dan untuk urutan seluruh akun ([detail](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#missing-message-numbers-gap_summary)); pilih obrolan untuk melihat celah yang terdaftar di dalamnya |
+| `get_activity_stats` | Pesan berdasarkan jam UTC dan hari kerja, hari-hari puncak, persentase pengeditan dan penghapusan, pengirim, domain, dan `@handles`, beserta cakupan ([detail](https://phishdestroy.github.io/TgWitness/id/docs/reference/cli/#activity-statistics)) |
+| `export_messages` | Hanya baris perintah, tidak dipilih secara default: streams menyimpan pengamatan sebagai JSON Lines ([detail](https://phishdestroy.github.io/TgWitness/id/docs/reference/cli/#export)); tidak tersedia melalui MCP |
 
 `tools/list` hanya mengembalikan alat yang diizinkan untuk koneksi tersebut. Pemanggilan ke alat lain akan ditolak. Alat konteks grup, episode, terminologi, dan rantai balasan tidak ditawarkan dalam build ini; backend paket konteks terpisahnya tidak disertakan.
 

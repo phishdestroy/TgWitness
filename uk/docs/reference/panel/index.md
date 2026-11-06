@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel
 
 Що робить кожен екран, що записується в підписаний журнал і де знаходиться детальний посібник. Панель відображає по одному робочому простору за раз: один обліковий запис Telegram із власними джерелами, журналом та ключем підпису. Селектор у верхній частині бічної панелі дозволяє перемикатися між робочими просторами. Адреса містить робочий простір (`?ws=…`); доки адреса, селектор та завантажений обліковий запис не збігаються, дії залишаються заблокованими.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Орієнтуйтеся
 
 Розділи «Щоденні» розташовані у верхній частині бічної панелі, **«Акаунти»** — під розділом **«Робоча область»** , а все інше — у розділі **«Інші інструменти та налаштування** ». Перемикач **рівня інтерфейсу** у верхній панелі визначає, скільки розділів відображається:

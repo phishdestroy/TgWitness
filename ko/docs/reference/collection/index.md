@@ -8,6 +8,8 @@ TgWitness는 연결된 텔레그램 계정이 감지한 내용을 기록합니�
 
 ## 로그인부터 기록부까지
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 흐름도 · 사용자 계정 승인 → 접근 가능한 그룹 및 채널 선택; 접근 가능한 그룹 및 채널 선택 → 이벤트 및 첨부 파일 설정 저장; 이벤트 및 첨부 파일 설정 저장 → 관찰 시작; 관찰 시작 → 활성 클라이언트로부터 업데이트 받기; 활성 클라이언트로부터 업데이트 받기 → 출처 및 이벤트 정책 적용; 출처 및 이벤트 정책 적용 → 서명된 관찰 기록 추가; 서명된 관찰 기록 추가 → 저널 검토 또는 내보내기; 서명된 관찰 기록 추가 → 대기 중인 첨부 파일 처리; 대기 중인 첨부 파일 처리 → 다운로드 결과 추가 · 사용자계정승인 · 접근가능한그룹및채널선택 · 이벤트및첨부파일설정저장 · 관찰시작 · 활성클라이언트로부터업데이트받기 · 출처및이벤트정책적용 · 서명된관찰기록추가 · 저널검토또는내보내기 · 대기중인첨부파일처리 · 다운로드결과추가
 
 **도표를 텍스트로 변환**

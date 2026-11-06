@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. فایل‌های ZIP اصلی و هش‌های آن‌ها را حفظ کنید. هر دارنده، انتقال، تاریخ و هدف را ثبت کنید. بیانیه‌های اپراتور منسوب و یادداشت‌های پرونده را همراه آن‌ها نگهداری کنید.
 5. برای ماشین‌های مجازی محرمانه، نقل‌قول، چالش، زنجیره گواهی اینتل، اندازه‌گیری‌ها، منبع دقیق و شرایط مدیریت کلید را حفظ کرده و به‌طور مستقل تأیید کنید. نتیجه تأیید اعتبار را همراه با مصنوعات بازبینی‌شده نگه دارید.
 
-برای فرضیات اعتماد، به [دامنه تأیید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) مراجعه کنید و همچنین به ارزیابی جداگانه ادعاهای منبع، هویت، زمان و پوشش جمع‌آوری.
+See [verification scope](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## بازبینی دریافت‌کننده
 

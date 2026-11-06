@@ -15,6 +15,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | message_content.py | Kuzatiladigan xabarlarni solishtirish, transportga kirish metama'lumotlarini istisno qilgan holda |
 | workers.py | Bekor qilishni tozalashdan oldin eksport fayllari ishchilarini kuting |
 | store.py | WAL tranzaktsiyalari, tartibga solingan voqealar zanjiri, so'rov filtrlari, operatsion sozlamalar |
+| fulltext.py | To'liq matn indeksi (so'z shakllari, BM25) imzolangan jurnal boshiga bog'langan; hech qachon eksport qilinmaydi |
 | security.py | Shaxsiy fayl yaratish, shifrlangan ombor, Ed25519 imzolash, yagona jarayon qulfi |
 | evidence.py | Butun jurnalni eksport qilish, derivativlar, tekshiruv nuqtalari, ilovalarni tasdiqlash |
 | verify.py | Mustaqil, faqat o'qish uchun mo'ljallangan tasdiqlovchi (stdlib + kriptografiya): arxivlar, qamrov, guvoh jurnallari va kanal postlari, profil fayllari |

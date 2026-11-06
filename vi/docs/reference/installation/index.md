@@ -44,6 +44,30 @@ Chọn `TGWITNESS_INSTALL_DIR` để chọn một thư mục khác. Các phiên 
 
 Mỗi bản cài đặt đều bao gồm **các tệp START-HERE.html** và **START-HERE.txt**, với các đường dẫn cục bộ, lệnh và liên kết đến kho lưu trữ. Chạy `tgwitness guide` để mở hướng dẫn. Trên Windows, hãy sử dụng `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` trong PowerShell.
 
+## Cài đặt tìm kiếm toàn văn
+
+[Tính năng tìm kiếm toàn văn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/) (bản xem trước) không cần thiết lập. Chỉ mục của nó được xây dựng ở chế độ nền sau khi cập nhật.
+
+| Biến hoặc lệnh | Hiệu quả |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | Mặc định: chỉ mục được lưu trữ trong `search/fulltext.sqlite3` của mỗi không gian làm việc |
+| `TGWITNESS_FULLTEXT=memory` | Không có tệp chỉ mục; chỉ mục được xây dựng lại mỗi khi khởi động |
+| `TGWITNESS_FULLTEXT=off` | Không có chỉ mục; chỉ tìm kiếm theo văn bản chính xác |
+| `tgwitness index status` | Trạng thái chỉ mục của mỗi không gian làm việc |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | Xây dựng lại mọi chỉ mục từ nhật ký được ký điện tử |
+
+Lựa chọn của quản trị viên trong **Nhật ký → Bộ lọc → Chỉ mục tìm kiếm** sẽ ghi đè lên biến cho không gian làm việc đó. Các lệnh sẽ tìm thư mục dữ liệu của bản cài đặt chạy chúng; ở các vị trí khác, hãy thêm `--data-dir` với đường dẫn từ `tgwitness paths`. Để có từ điển tiếng Ukraina đầy đủ (dữ liệu GPL-3.0), hãy cài đặt `pymorphy3-dicts-uk` trong môi trường Python của bản cài đặt.
+
+## Truy cập qua dòng lệnh
+
+[Dòng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/) [lệnh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/) (bản xem trước) đọc tệp lưu trữ để tìm các tập lệnh và tác nhân.
+
+| Biến | Hiệu quả |
+| --- | --- |
+| `TGWITNESS_URL` | Địa chỉ bảng điều khiển cho `tgwitness search`, `context`, `messages`, `stats` và `export`; mặc định `http://127.0.0.1:8787` khi đã thiết lập mã thông báo |
+| `TGWITNESS_MCP_TOKEN` | Lưu trữ mã thông báo kết nối từ **mục Tích hợp → MCP**, được chia sẻ với các khách hàng MCP; `--token-file` thay vào đó, đọc nó từ một tệp |
+| `TGWITNESS_DATA` | Thư mục dữ liệu được đọc trực tiếp khi không `--data-dir`, URL hoặc mã thông báo nào được cung cấp |
+
 ## Kiểm tra trước khi chạy
 
 Lệnh một dòng này tin cậy HTTPS cho tập lệnh ban đầu của nó. Tập lệnh đó kiểm tra SHA-256 và chữ ký RSA của dự án trên ứng dụng cũng như các ràng buộc trước khi cài đặt. Bạn cũng có thể tải xuống và xác minh tập lệnh ban đầu trước.

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/
 
 MCP mijozini tanlangan ish maydonlari va suhbatlarga muddati tugaydigan, bekor qilinishi mumkin bo'lgan kirish huquqi bilan ulashing.
 
-Tahlilchi mijozini tanlangan ish maydonlari va chatlarga ulang. TgWitness **panel jarayonida `/mcp` manzilida Streamable HTTP** xizmatini ko‘rsatadi. Har bir ulanish o‘zining tokeni, amal qilish muddati va ruxsat etilgan vositalariga ega. MCP Telegram xabarlarini yubora olmaydi, sozlamalarni o‘zgartira olmaydi yoki imzolangan jurnalni tahrirlay olmaydi.
+Analitik klientni tanlangan ish maydonlari va suhbatlarga ulang. TgWitness **panel jarayonida `/mcp` manzilida Streamable HTTP xizmatini** taqdim etadi. Har bir ulanishning o'z tokeni, amal qilish muddati va ruxsat etilgan vositalari mavjud. MCP Telegram xabarlarini yubora olmaydi, sozlamalarni o'zgartira olmaydi yoki imzolangan jurnalni tahrir qila olmaydi. Xuddi shu ulanishlar [buyruq qatori](https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/) bilan ham ishlaydi.
 
 [Ish jarayoni bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ Panelning `/mcp` yo‘nalishini yo‘naltiring va bearer sarlavhasini saqlab qol
 | --- | --- |
 | `list_workspaces` | Ruxsat berilgan ish maydonlari |
 | `list_chats` | Ruxsat berilgan chatlar |
-| `search_messages` | Tanlangan davr ichida saqlangan xabar matni |
+| `search_messages` | Tanlangan davr ichidagi saqlangan xabar matni; `ranked=true` [to'liq matn qidiruvidan](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/) foydalanadi (so'z shakllari, eng yaxshi mos keladiganlar birinchi, `next_offset` paging) |
 | `get_message_versions` | Qayd etilgan talqinlar va o‘chirish kuzatuvlari |
 | `get_message_context` | Yaqin atrofdagi qayd etilgan xabar ID lari |
 | `get_journal_event` | Manba havolasiga ega bitta tozalangan (sanitized) yozuv |
-| `get_capture_status` | Yig‘ish holati va ruxsat etilgan qamrov yozuvlari |
+| `get_capture_status` | Yig'ish holati, ruxsat etilgan qamrov yozuvlari va `gap_summary`: hech qachon kuzatilmagan xabar raqamlari, kanal yoki superguruh bo'yicha va hisob bo'ylab ketma-ketlik ([tфанsilar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#missing-message-numbers-gap_summary)); chatni tanlab, uning ro'yxatdagi bo'shliqlarini ko'ring |
+| `get_activity_stats` | UTC soati va haftaning kunlari bo'yicha xabarlar, eng yuqori kunlar, tahrirlash va o'chirish ulushi, jo'natuvchilar, domenlar va `@handles`, qamrov ([tavsiflar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/#activity-statistics)) bilan |
+| `export_messages` | Faqat buyruq satri, standart bo'yicha tanlanmagan: kuzatuvlarni JSON Lines shaklida saqlangan oqimlar ([tavsiflar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/#export)); MCP orqali taklif etilmaydi |
 
 `tools/list` faqat ushbu ulanishga ruxsat berilgan vositalarni qaytaradi. Boshqa vositalarga chaqiruvlar rad etiladi. Guruh konteksti, epizod, terminologiya va javoblar zanjiri vositalari ushbu yig‘mada taklif etilmaydi; ularning alohida kontekst-paket bekendi kiritilmagan.
 

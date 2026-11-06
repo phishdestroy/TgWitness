@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/mcp/
 
 Connect an MCP client to selected workspaces and chats with expiring, revocable access.
 
-Connect an analyst client to selected workspaces and chats. TgWitness serves **Streamable HTTP at `/mcp` in the panel process**. Each connection has its own token, expiry and permitted tools. MCP cannot send Telegram messages, change settings or modify the signed journal.
+Connect an analyst client to selected workspaces and chats. TgWitness serves **Streamable HTTP at `/mcp` in the panel process**. Each connection has its own token, expiry and permitted tools. MCP cannot send Telegram messages, change settings or modify the signed journal. The same connections work with the [command line](https://phishdestroy.github.io/TgWitness/docs/reference/cli/).
 
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ A `*.trycloudflare.com` address is temporary. When a tunnel restart changes the 
 | --- | --- |
 | `list_workspaces` | Granted workspaces |
 | `list_chats` | Granted chats |
-| `search_messages` | Saved message text within the selected period |
+| `search_messages` | Saved message text within the selected period; `ranked=true` uses [full-text search](https://phishdestroy.github.io/TgWitness/docs/reference/search/) (word forms, best matches first, `next_offset` paging) |
 | `get_message_versions` | Captured versions and deletion observations |
 | `get_message_context` | Nearby captured message IDs |
 | `get_journal_event` | One sanitized record with its source reference |
-| `get_capture_status` | Collection state and permitted coverage records |
+| `get_capture_status` | Collection state, permitted coverage records and `gap_summary`: message numbers never observed, per channel or supergroup and for the account-wide sequence ([details](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#missing-message-numbers-gap_summary)); choose a chat to see its listed gaps |
+| `get_activity_stats` | Messages by UTC hour and weekday, peak days, edit and deletion shares, senders, domains and `@handles`, with coverage ([details](https://phishdestroy.github.io/TgWitness/docs/reference/cli/#activity-statistics)) |
+| `export_messages` | Command line only, not selected by default: streams saved observations as JSON Lines ([details](https://phishdestroy.github.io/TgWitness/docs/reference/cli/#export)); not offered over MCP |
 
 `tools/list` returns only the tools granted to that connection. Calls to other tools are refused. Group-context, episode, terminology and reply-chain tools are not offered in this build; their separate context-pack backend is not included.
 

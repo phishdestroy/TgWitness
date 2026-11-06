@@ -101,7 +101,7 @@ En el ejemplo práctico:
 | El mismo archivo guardado | Se han completado los recibos multimedia n.º 151 y n.º 209 | Los valores SHA-256 completos coinciden para los bytes conservados |
 | Atribución del canal | N.º 101 y n.º 188 | No atribuya una publicación del canal al usuario 71001 sin indicar el remitente correspondiente. |
 
-Compare los hash de los archivos adjuntos y las referencias de los mensajes asociados. Los archivos idénticos no permiten determinar quién es el creador, el reenviador o un operador común. Los nombres iguales y los avatares similares, por sí solos, no permiten vincular dos ID de Telegram a una misma persona.
+Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
 
 Guarda las notas de trabajo del equipo en [Case Board](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-board/): marca como favoritos los registros en los que te basas, como el n.º 146, el n.º 188 y el n.º 205; resalta la cadena de destino exacta y guarda un fragmento de cada acción registrada entre dos registros o en un intervalo de tiempo. Las notas y los estados conservan la revisión del equipo en su propio historial firmado, que se puede identificar por separado de las observaciones de origen.
 
@@ -161,6 +161,6 @@ Conserve los resultados reales de la verificación y los artefactos originales. 
 | --- | --- | --- |
 | Disputa sobre pedidos o pagos gestionada por un bot | Anuncio de entrada → vista previa del enlace guardado → parámetro de inicio del bot → versiones de mensajes y teclado → recibos de devolución de llamada del panel → seguimiento de mensajes privados y de grupo | Se ha respectado la cronología de ofertas y respuestas y se han verificado las fuentes; un enlace de pago por sí solo no constituye prueba de que se haya realizado dicho pago. |
 | Mensajes eliminados tras un incidente | Todos los chats afectados → originales y modificaciones guardados → resultados de eliminación o de ausencia tras una nueva comprobación → archivos multimedia conservados → cobertura y otras perspectivas de la cuenta | Versiones conservadas e intervalos desconocidos explícitos; no se atribuye a nadie la autoría de las eliminaciones. |
-| Un participante cambia de nombre en los distintos chats | ID numérico del remitente → historial de nombres/nombres de usuario → respuestas → otros chats observados → destinos/archivos citados | Una cronología de la actividad de una cuenta de Telegram citada, en la que se mantienen separadas las hipótesis sobre la identidad real y las relaciones. |
+| Un participante cambia de nombre en los distintos chats | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
 
 [Referencia de la recopilación](https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/) · [Verificación de perfiles de personas](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#people-profiles) · [Entrega de pruebas](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#investigation-handoff) · [Validación completada](https://phishdestroy.github.io/TgWitness/es/docs/reference/verification/)

@@ -8,7 +8,7 @@ Rozpoznawanie przechwyconych obrazów i plików audio za pomocą lokalnego modu�
 
 Otwórz wpis w dzienniku `media.saved`, wybierz opcję **„Rozpoznaj załącznik**”, a następnie wybierz „OCR” lub „transkrypcja” w sekcji **„Zapytaj archiwum**”. Przetwarzanie odbywa się ręcznie i lokalnie. Nie ma trybu mediów w chmurze ani automatycznego przesyłania. Oryginalne bajty załącznika i plik `media_sha256` pozostają niezmienione; rozpoznany tekst jest wyraźnie oznaczony jako wynik rozpoznawania maszynowego i przechowywany oddzielnie wraz z skrótem źródłowym, wersją silnika/modelu, językiem, parametrami oraz czasem zakończenia. Transkrypcje zachowują zwrócone znaczniki czasu.
 
-Przeszukuj te wyniki, korzystając z **funkcji „Wyszukaj rozpoznany tekst”** oraz filtra OCR/transkrypcji. Jest to oddzielne wyszukiwanie danych pochodnych; nie przekształca ono automatycznie wyników rozpoznania maszynowego w oryginalny tekst z Telegrama ani nie dodaje go do podpisanych zdarzeń.
+Wyszukuj wyniki za pomocą **funkcji** **„Wyszukaj rozpoznany tekst”** oraz filtra OCR/transkrypcji lub wybierz rozpoznany tekst jako źródło wyszukiwania najlepszego dopasowania w **dzienniku**. Oba filtry dopasowują formy słów za pomocą [indeksu](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#recognized-text) [przechowywanego w pamięci](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#recognized-text). Jest to oddzielne wyszukiwanie w danych pochodnych; nie przekształca ono w tle rozpoznanego przez maszynę tekstu w oryginalny tekst z Telegrama ani nie dodaje go do podpisanych zdarzeń.
 
 ## Skonfiguruj opcjonalnego pracownika
 

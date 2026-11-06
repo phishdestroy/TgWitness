@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/secur
 
 مدل تهدید، مدل دسترسی، اسرار در حالت استراحت، در معرض دید شبکه، وارد کردن جلسات و نحوه گزارش آسیب‌پذیری.
 
-TgWitness روی کامپیوتر یا سرور خودتان اجرا می‌شود. اتصالات حساب کاربری، نگهداری لیست پروکسی عمومی و خدمات خارجی اختیاری دارای سیاست‌های مسیریابی صریح هستند. اعلان‌ها، زمان‌مهرها، نسخه‌های پشتیبان خارج از محل و یک شاهد به طور جداگانه پیکربندی می‌شوند. این صفحه فهرست می‌کند که چه چیزی محافظت می‌شود، چگونه، و چه چیزی به اپراتور واگذار می‌شود.
+This page describes access，storage and network protection in a local or server workspace． For collection on a GitHub runner or in an Intel TDX confidential VM，see the [verification modes](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope)，which add checks of the collection environment． Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．
 
 | حوزه | به طور خلاصه |
 | --- | --- |
@@ -12,7 +12,7 @@ TgWitness روی کامپیوتر یا سرور خودتان اجرا می‌ش�
 | رازهای در آرامش | تنظیمات جلسه، جفت API، کلید امضا و پروکسی با Fernet رمزگذاری می‌شوند. |
 | پیام‌ها و رسانه‌ها | ذخیره بدون رمزگذاری: از رمزگذاری دیسک و مجوزهای سخت‌گیرانه استفاده کنید |
 | یکپارچگی | زنجیره هش SHA-256 و امضای Ed25519 بر روی هر رکورد |
-| پوشش داده نشده | مدیر ماشین، توکن پنل نشت‌کرده، جامعیت ضبط |
+| Local trust boundary | The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary |
 
 برای گزارش‌های آسیب‌پذیری، به [سیاست امنیتی](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md) مراجعه کنید.
 
@@ -38,11 +38,13 @@ TgWitness روی کامپیوتر یا سرور خودتان اجرا می‌ش�
 
 ## رازهای در آرامش
 
-اطلاعات احراز هویت API تلگرام، StringSession و کلید خصوصی Ed25519 با استفاده از Fernet رمزگذاری می‌شوند. به طور پیش‌فرض، کلید آن در همان پوشه داده‌های محافظت‌شده ذخیره می‌شود. این امر خطر افشای تصادفی متن ساده را کاهش می‌دهد؛ این محافظتی در برابر یک مهاجم که می‌تواند کل دایرکتوری را بخواند، نیست. محتوای پیام و رسانه‌ها توسط TgWitness **رمزگذاری** نمی‌شوند. از رمزگذاری دیسک و مجوزهای محدودکننده سیستم‌عامل استفاده کنید. فایل‌های کلید خصوصی یونیکس با حالت 0600 ایجاد می‌شوند؛ دایرکتوری‌های داده تازه‌ساخت از حالت 0700 استفاده می‌کنند. مجوزهای موجود دایرکتوری تغییر نمی‌کنند. ویندوز ACLهای دایرکتوری را به ارث می‌برد: آن‌ها را به حساب سرویس و مدیران مجاز محدود کنید.
+Telegram API credentials，the session and signing key are encrypted with Fernet． For local messages and media，encryption is provided by the host's disk or volume； the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP， and off-site copies use AES-256-GCM．
+
+The vault key defaults to the protected data directory．Use an external master-key file below to store it separately．On Unix，new private-key files use mode 0600 and new data directories use 0700；on Windows，set the directory ACL for the service account and authorized administrators．Existing directory permissions are retained．
 
 ### کلید اصلی خارجی
 
-برای یک دایرکتوری داده جدید، TGWITNESS_VAULT_KEY_FILE می‌تواند یک کلید اصلی تصادفی خارجی را فراهم کند. HKDF-SHA256 و یک سالت تصادفی جداگانه، یک کلید Fernet متفاوت برای هر فضای کاری تولید می‌کنند. فایل vault.external.json باید برای بازیابی نگهداری شود. در صورت عدم وجود یا نادرست بودن کلیدهای اصلی، عملیات با خطا متوقف می‌شود. گاوصندوق‌های محلی موجود به صورت خودکار و بی‌سروصدا مهاجرت نمی‌شوند. فرآیند در حال اجرا می‌تواند به کلید دسترسی داشته باشد؛ این ایزولاسیون HSM نیست. پنل حالت انتخاب‌شده را گزارش می‌دهد و صراحتاً بیان می‌کند که ذخیره‌سازی پیام/رسانه توسط برنامه رمزگذاری نمی‌شود. برای مشاهده مدل کامل تهدید، به [بخش‌های اتصال، پروکسی‌ها و حفاظت از داده‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/) مراجعه کنید.
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode．Disk encryption protects the local message and media files in either mode；see [connection and data protection](https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/) for setup details．
 
 ## پروکسی‌ها و مسیرهای شبکه
 
@@ -66,8 +68,10 @@ MTProxy فقط ترافیک تلگرام را منتقل می‌کند. درخو
 
 ## محدودیت‌های یکپارچگی
 
-زنجیره هش، محرک‌های پایگاه داده و امضاها، تغییرات خاصی را تشخیص می‌دهند؛ آنها مانع از بازنویسی و امضای مجدد دفترچه توسط یک مدیر محلی نمی‌شوند. نقاط کنترل امضا شده و اثر انگشت کلید عمومی را روی یک سیستم جداگانه نگهداری کنید. حالت شواهد و نسخهٔ خارج از محل (که هر دو به‌صورت پیش‌فرض غیرفعال هستند) هش‌های نقاط کنترل را به سرویس‌های زمان‌نگاری و نسخه‌های رمزگذاری‌شده را به ذخیره‌سازی سازگار با S3 ارسال می‌کنند؛ به [فرمت شواهد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) مراجعه کنید. گزارش‌های شفافیت، امضای پشتیبانی‌شده توسط HSM و گواهی رسمی زنجیرهٔ مالکیت پیاده‌سازی نشده‌اند.
+Local verification checks record signatures，the hash chain，attachments and the export manifest． The administrator holds the local signing key and can create another signed journal； an independently retained checkpoint detects replacement of the prefix it covers． Keep the key fingerprint and checkpoints with the recipient or an independent witness．
+
+For independently checked collection，choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)． Their verifiers check workflow provenance or hardware measurements in addition to archive integrity． Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies； the [evidence format](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) describes the checks for each mode．
 
 ## اگر به وجود مشکل مشکوک هستید
 
-دایرکتوری داده‌های اصلی را حفظ کرده و برای تحلیل از یک نسخهٔ مجزا استفاده کنید. داده‌ها یا اعتبارنامه‌های خصوصی تلگرام را در یک نسخهٔ عمومی درج نکنید. هیچ گواهی امنیتی مستقلی ادعا نشده است.
+Preserve the original data directory and use a separate copy for analysis． Report the affected version，operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)，keeping account data and credentials private．

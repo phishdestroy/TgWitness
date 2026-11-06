@@ -8,7 +8,7 @@ Kenali gambar dan audio yang direkam menggunakan worker lokal; jaga agar teks ya
 
 Buka catatan jurnal `media.saved`, pilih "**Kenali lampiran**", lalu pilih OCR atau transkripsi di bawah **"Tanyakan ke arsip**". Pemrosesan dilakukan secara manual dan lokal. Tidak ada mode media cloud atau unggahan otomatis. Byte lampiran asli dan `media_sha256` tetap tidak berubah; teks yang dikenali ditandai secara eksplisit sebagai hasil pengenalan mesin dan disimpan terpisah bersama hash sumber, versi mesin/model, bahasa, parameter, dan waktu penyelesaian. Transkrip mempertahankan cap waktu yang dikembalikan.
 
-Cari hasil ini menggunakan **fitur "Cari teks yang dikenali**" dan filter OCR/transkrip. Ini adalah pencarian data turunan yang terpisah; fitur ini tidak secara otomatis mengubah hasil pengenalan mesin menjadi teks Telegram asli atau menambahkannya ke peristiwa yang ditandatangani.
+Cari hasil ini menggunakan **fitur "Cari Teks yang Dikenali"** dan filter OCR/transkrip, atau pilih teks yang dikenali sebagai sumber pencarian "Kecocokan Terbaik" dalam **Jurnal**. Keduanya mencocokkan bentuk kata melalui [indeks](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#recognized-text) [dalam memori](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#recognized-text). Ini adalah pencarian data turunan yang terpisah; pencarian ini tidak secara diam-diam mengubah hasil pengenalan mesin menjadi teks Telegram asli atau menambahkannya ke peristiwa yang ditandatangani.
 
 ## Siapkan worker opsional
 

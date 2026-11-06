@@ -6,7 +6,7 @@ Search saved messages, review AI inputs and keep analytical reports with their s
 
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Use **Journal** for local search without AI. For **Ask the archive**, first enable and configure a provider in **Integrations**. The workspace selector chooses the account; the form chooses chats and the observation period. Retrieval runs locally. An exact phrase or domain narrows retrieval; a message ID requests saved versions. Review the excerpts and open their journal records or context. There is no vector database or automatic Telegram action.
+Use **Journal** for local search without AI; [full-text search](https://phishdestroy.github.io/TgWitness/docs/reference/search/) (preview) matches word forms, phrases, domains and @usernames. For **Ask the archive**, first enable and configure a provider in **Integrations**. The workspace selector chooses the account; the form chooses chats and the observation period. Retrieval runs locally. An exact phrase or domain narrows retrieval; a message ID requests saved versions. Review the excerpts and open their journal records or context. There is no vector database or automatic Telegram action.
 
 ## Providers and consent
 
@@ -24,7 +24,7 @@ There are at most two concurrent provider requests globally and one per workspac
 
 ## Sources and limits
 
-Retrieval examines saved message text with a bounded lexical search. It returns up to 24 sources and marks truncated excerpts or incomplete result sets. The period refers to **observation time**, not a claim that Telegram history is complete. Workspace-wide coverage events are withheld from chat-scoped access. Missing data is described as not found in the available archive.
+Retrieval uses the [full-text index](https://phishdestroy.github.io/TgWitness/docs/reference/search/#ask-the-archive-and-mcp) when it is complete: the best matches across the selected chats, with word forms. Questions about recent changes or one message's versions, and searches while the index is building, use a bounded lexical search of the newest records. The preview names the method. Retrieval returns up to 24 sources; long texts are cut around their match. Truncated excerpts and incomplete result sets are marked. The period refers to **observation time**, not a claim that Telegram history is complete. Workspace-wide coverage events are withheld from chat-scoped access. Missing data is described as not found in the available archive.
 
 The model receives no tools. Its source IDs are resolved against the selected records, hashes are rechecked, and quoted strings must occur in those records. Unknown IDs, changed quotes and uncited claims reject the answer. The application creates links; model-generated URLs are not used as citations. These checks establish source existence and quote accuracy, not the truth of an inference. Review inferences against the records before relying on them.
 

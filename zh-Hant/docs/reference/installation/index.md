@@ -44,6 +44,30 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
 
 每個安裝包均包含 **START-HERE.html** 和 **START-HERE.txt** 檔案，其中載有本機 路徑、指令以及儲存庫連結。執行 `tgwitness guide` 以開啟指南。 在 Windows 上，請使用 `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` 在 PowerShell 中執行。
 
+## 全文搜尋設定
+
+[全文搜尋](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/)（預覽版）無需任何設定。其索引會在更新後於 後台自動建立。
+
+| 變數或指令 | 效果 |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | 預設：索引儲存於 `search/fulltext.sqlite3` 每個工作區中 |
+| `TGWITNESS_FULLTEXT=memory` | 無索引檔案；每次啟動時都會重新建立索引 |
+| `TGWITNESS_FULLTEXT=off` | 不提供索引；僅支援精確文字搜尋 |
+| `tgwitness index status` | 索引每個工作區的狀態 |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | 從簽名日誌重建所有索引 |
+
+管理員在「**日誌**」**→「篩選器」→「搜尋索引」**中的設定會覆寫 該工作區的變數。指令會尋找執行該指令之安裝版本的 資料目錄；其他情況下，請在路徑後方加入 `--data-dir` 並加入來自 `tgwitness paths`。 若要取得完整的烏克蘭語詞典（GPL-3.0 資料），請在 `pymorphy3-dicts-uk` 至 該安裝的 Python 環境中。
+
+## 命令列存取
+
+[命令列](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/)（預覽版）會讀取存檔中的腳本和代理程式。
+
+| 變數 | 效果 |
+| --- | --- |
+| `TGWITNESS_URL` | 面板位址為 `tgwitness search`, `context`, `messages`, `stats` 以及 `export`；預設 `http://127.0.0.1:8787` 當設定代幣時 |
+| `TGWITNESS_MCP_TOKEN` | 將連線憑證從**「整合」→「MCP**」中存檔，並與 MCP 客戶端共享； `--token-file` 改為從檔案中讀取該憑證 |
+| `TGWITNESS_DATA` | 若未提供 `--data-dir`、URL 或憑證時，將直接讀取資料目錄 |
+
 ## 執行前請先驗證
 
 這條單行指令會信任 HTTPS 上的初始腳本。該腳本會在安裝前檢查 SHA-256 以及應用程式和限制條件上的專案 RSA 簽名。 您也可以先下載並驗證初始腳本。

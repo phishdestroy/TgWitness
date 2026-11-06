@@ -134,7 +134,7 @@ Semak setiap semakan secara berasingan, bersama liputan pengumpulan yang direkod
 4. Pelihara ZIP asal dan hash mereka. Catatkan setiap pemegang, pemindahan, tarikh dan tujuan. Simpan kenyataan pengendali yang dikaitkan dan nota kes bersamanya.
 5. Untuk VM sulit, pelihara dan sahkan secara bebas petikan, cabaran, rantaian sijil Intel, ukuran, sumber tepat dan syarat pengendalian kunci. Simpan keputusan pengesahan pengakuan bersama artifak yang telah disemak.
 
-Lihat [skop pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope) untuk andaian kepercayaan dan penilaian berasingan terhadap tuntutan sumber, identiti, masa dan liputan pengumpulan.
+See [verification scope](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Semakan penerima
 

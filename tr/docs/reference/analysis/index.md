@@ -6,7 +6,7 @@ Kaydedilen mesajları arayın, yapay zeka girdilerini inceleyin ve kaynak refera
 
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Yapay zekâ kullanmadan yerel arama yapmak için **Günlük** bölümünü kullanın. **Arşive sor** özelliği için önce **Entegrasyonlar** bölümünde bir sağlayıcıyı etkinleştirip yapılandırın. Çalışma alanı seçici hesabı belirler; form ise sohbetleri ve gözlem dönemini belirler. Getirme işlemi yerel olarak çalışır. Tam bir ifade veya alan adı getirilen sonuçları daraltır; bir mesaj kimliği kaydedilmiş sürümleri talep eder. Alıntıları inceleyin ve ilgili günlük kayıtlarını veya bağlamlarını açın. Vektör veritabanı veya otomatik Telegram eylemi yoktur.
+AI olmadan yerel arama için **Günlüğü** kullanın; [tam metin araması](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/) (önizleme) kelime biçimleri, ifadeler, etki alanları ve @kullanıcı adlarıyla eşleşir. **Arşivi Sorgula özelliği** için önce **Entegrasyonlar** bölümünde bir sağlayıcıyı etkinleştirin ve yapılandırın. Çalışma alanı seçici, hesabı seçer; form ise sohbetleri ve gözlem dönemini seçer. Arama işlemi yerel olarak gerçekleştirilir. Tam bir ifade veya etki alanı arama sonuçlarını daraltır; bir mesaj kimliği, kaydedilmiş sürümleri getirir. Alıntıları inceleyin ve günlük kayıtlarını veya bağlamlarını açın. Vektör veritabanı veya otomatik Telegram eylemi yoktur.
 
 ## Hizmet sağlayıcılar ve rıza
 
@@ -24,7 +24,7 @@ Küresel olarak en fazla iki eşzamanlı sağlayıcı isteği ve her çalışma 
 
 ## Kaynaklar ve sınırlamalar
 
-Geri getirme işlevi, kaydedilmiş mesaj metinlerini sınırlı bir sözcüksel arama ile inceler. En fazla 24 kaynak döndürür ve kesilmiş alıntıları veya eksik sonuç kümelerini işaretler. Süre, **gözlem zaman**ını ifade eder; Telegram geçmişinin eksiksiz olduğu iddiasını içermez. Çalışma alanı genelindeki olaylar, sohbet kapsamındaki erişimden hariç tutulur. Eksik veriler, mevcut arşivde bulunamayan veriler olarak tanımlanır.
+Arama, [tam metin](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#ask-the-archive-and-mcp)dizini tamamlandığında bu dizini kullanır: seçilen sohbetler arasında kelime biçimleriyle en iyi eşleşmeler. Son değişiklikler veya bir mesajın sürümleri hakkındaki sorular ve dizin oluşturulurken yapılan aramalar, en yeni kayıtların sınırlı sözcüksel aramasını kullanır. Önizleme, yöntemin adını belirtir. Arama, en fazla 24 kaynak döndürür; uzun metinler, eşleşen kısımların etrafından kesilir. Kısaltılmış alıntılar ve eksik sonuç kümeleri işaretlenir. Bu dönem, **gözlem süresini** ifade eder; Telegram geçmişinin eksiksiz olduğu iddiasını değil. Çalışma alanı genelindeki olaylar, sohbet kapsamındaki erişimden hariç tutulur. Eksik veriler, mevcut arşivde bulunamayan veriler olarak tanımlanır.
 
 Modele herhangi bir araç sağlanmaz. Modelin kaynak kimlikleri, seçilen kayıtlara göre doğrulanır, hash değerleri yeniden kontrol edilir ve alıntılanan dizeler bu kayıtlarda yer almalıdır. Bilinmeyen kimlikler, değiştirilmiş alıntılar ve kaynak gösterilmemiş iddialar cevabı geçersiz kılar. Uygulama bağlantılar oluşturur; model tarafından üretilen URL’ler kaynak gösterimi olarak kullanılmaz. Bu kontroller bir çıkarımın doğruluğunu değil, kaynağın varlığını ve alıntının doğruluğunu teyit eder. Çıkarımlara güvenmeden önce bunları kayıtlarla karşılaştırarak gözden geçirin.
 

@@ -74,9 +74,9 @@ A seção “Fontes” oferece opções por conta para novas mensagens, ediçõe
 | Ações do administrador | Atualizações relevantes entregues e um instantâneo do log de administração nas exportações de bate-papos de canais/supergrupos | A exportação lê o log quando este estiver disponível para a conta de administrador responsável pela exportação; a consulta contínua do log de administração está fora deste processo |
 | Anexo | Descritor da versão original, bytes baixados/SHA-256 e resultados das tentativas | Um arquivo excluído pode ser irrecuperável; a versão mais recente não é substituída |
 | Histórico | Captura de tela explícita das mensagens visíveis no momento | Não reconstrói todas as edições nem o conteúdo excluído |
-| Processo do coletor | Inicialização/encerramento, verificação de funcionamento, erros, configurações, escopo e recebimento do programa | Auto-relatório, e não atestado de processo independente |
+| Processo do coletor | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope) |
 
-Uma ação é atribuída a uma pessoa somente se a fonte realmente indicar esse agente. Caso contrário, a interface sinaliza a falta de atribuição. Nomes de usuário e nomes próprios são atributos observados, não prova de identidade no mundo real.
+The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
 
 ## Capacidade e limites do Telegram
 

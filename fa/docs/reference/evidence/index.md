@@ -14,7 +14,7 @@ TgWitness مشاهدات تلگرام قابل مشاهده در حساب کار
 | محتویات فایل ZIP شواهد | `manifest.sig` مانیفست کانونیکال را امضا می‌کند که هش فایل‌های محتوا را فهرست می‌کند | فایل فشردهٔ کامل، شامل مانیفست و امضا |
 | پیوست‌های نگهداری‌شده | SHA-256 و شمارش بایت در یک رویداد امضا‌شده با `media.saved`؛ هش فایل در مانیفست ZIP امضا‌شده | بایت‌های اصلی درون فایل ZIP تأییدشده |
 | نقطهٔ کنترل | امضای Ed25519 بر طول دفترچه، هش سر، کلید عمومی و زمان ایجاد | یک نسخهٔ مستقل که پیش از تغییر مورد مناقشه نگهداری شده است |
-| دریافت رسید | اندازه‌گیری‌های جمع‌آوری‌شده که به‌طور جداگانه امضا شده‌اند؛ همچنین در یک رویداد امضا‌شده با کلید `process.started` گنجانده شده‌اند | رسید و دفترچه مربوطه؛ اندازه‌ها به‌صورت خوداظهاری گزارش شده‌اند |
+| دریافت رسید | Signed record of the collector version，source-file hashes and start settings，also included in `process.started` | The receipt，associated journal and the environment evidence for the selected verification mode |
 | گزارش‌های قابل‌خواندن: `report.html` و اجزای آن، `report.json`، `report.pdf`، `chat.pdf` | یک مهر Ed25519 بر هر فایل بر روی محتوای آن؛ PDF همچنین دارای امضای استاندارد PDF است (رجوع کنید به [گزارش‌های قابل‌خواندن](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#readable-reports)) | فایل دریافت‌شده و اثر انگشت کلید مورد اعتماد؛ زیپی که آن را توصیف می‌کند |
 | مستقل CSV | امضای رمزنگاری مستقل وجود ندارد؛ هش‌های رویداد به‌تنهایی کافی نیستند | برای بررسی یکپارچگی، از متن دقیق داخل فایل ZIP تأییدشده استفاده کنید. |
 | اسکرین‌شات‌ها، خروجی‌های چاپی یا PDF تولیدشده توسط مرورگر | امضای TgWitness روی مشتق وجود ندارد | پکیج اصلی تأییدشده را حفظ کنید و نحوهٔ ساخت نسخهٔ مشتق را مستندسازی کنید |
@@ -62,7 +62,7 @@ TgWitness مشاهدات تلگرام قابل مشاهده در حساب کار
 
 در یک کانال یا ابرگروه، Telegram پیام‌های ۱، ۲، ۳ و ... را به ترتیب شماره‌گذاری می‌کند. یک خروجی چت، شماره‌های اول و آخر، تعداد کل پیام‌ها، هر سری از شماره‌های غایب در `message-ids.json` ، مانیفست و هدر `chat.json` را فهرست می‌کند و هر شکاف را در جایی که در متن گفتگو قرار دارد، علامت‌گذاری می‌کند. `verify.py` آنها را از `chat.json` شمارش می‌کند. یک شماره غایب، پیامی است که Telegram بازنگشت (پیش از خروجی‌گیری حذف شده یا برای حساب قابل مشاهده نبوده است)؛ در چت‌های خصوصی و گروه‌های پایه، شماره‌ها در تمام چت‌های یک حساب مشترک هستند و فاصله‌ها شمرده نمی‌شوند.
 
-پس از خواندن تاریخچه، خروجی برای هر شماره غایب، دوباره از Telegram می‌پرسد (`channels.getMessages`، تا ۱۰٬۰۰۰ شماره). نتیجه در `message-ids.json` و گزارش موجود است. یک پاسخ خالی به این معنی است که Telegram برای این حساب، پیامی با آن شماره ندارد؛ این پاسخ مشخص نمی‌کند که آیا پیام حذف شده است یا هرگز برای حساب قابل مشاهده نبوده است. در صورتی که پیام Telegram بازگردانده شود، به این معنی است که هنگام خواندن از دست رفته و با علامت `found_on_recheck` به خروجی اضافه می‌شود.
+After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time； it leaves the cause unspecified．A message returned on recheck is added to the export and marked `found_on_recheck`．
 
 هر گزارش با **آغاز می‌شود. به اختصار**: یک پاراگراف، سپس آنچه که محتوا نشان می‌دهد و آنچه که نشان نمی‌دهد (چه کسی پشت یک حساب کاربری است، کامل بودن تحویل، حذف‌ها پیش از مشاهده، زمان ساعت بدون مهر زمانی). مهر و موم صفحه زمانی به رنگ کهربایی درمی‌آید که مرورگر امضای مهر و موم را بررسی کرده باشد، نه خود صفحه را: مرورگر بایت‌های یک صفحه را به آن اختصاص نمی‌دهد. این رنگ فقط زمانی به سبز تغییر می‌کند که خواننده فایل را در قسمت بررسی در انتهای صفحه قرار دهد و تمام بایت‌ها مطابقت داشته باشند، و تنها در صورتی که صفحه نمایش داده شده همان فایل باشد؛ در غیر این صورت به قرمز تغییر می‌کند.
 
@@ -124,12 +124,41 @@ actor_id در message.new، فرستنده پیام است. message.edited وی�
 
 - **به‌طور مداوم از X تا Y مشاهده می‌شود.** یک دوره با `observation.started` آغاز می‌شود و در یک مکث، یک توقف، قطع اتصال تلگرام، خروج، شروع فرآیندی بدون توقف منظم، یا بیش از سه دقیقه بدون هیچ ثبت در حین مشاهده پایان می‌یابد (تپش‌های قلب هر دقیقه ثبت می‌شوند، بنابراین سکوت به معنای توقف فرآیند، یخ‌زدگی یا خواب رفتن کامپیوتر است). هنگامی که فاصله تپش قلب در **بخش پارامترها** تغییر کند، هر تپش آن را ثبت می‌کند و سکوت مجاز به سه بازه تبدیل می‌شود، که هرگز کمتر از سه دقیقه نخواهد بود.
 - **شکاف‌ها** زمان بین دوره‌ها را همراه با دلیل فهرست می‌کنند. شکافی که در آخرین ثبت هنوز باز است با `not_resumed_by_last_record` علامت‌گذاری می‌شود.
-- **شناسه پیام‌های مشاهده‌نشده ثبت نمی‌شوند.** برای کانال‌ها و ابرگروه‌ها که پیام‌ها را به ازای هر چت شماره‌گذاری می‌کنند، شناسه پیام‌های مفقود بین موارد مشاهده‌شده به صورت بازه فهرست می‌شوند. این موارد به عنوان *«مشاهده‌نشده*» گزارش می‌شوند — حذف‌شده، هرگز تحویل‌داده‌نشده، یا خارج از تاریخچه ذخیره‌شده — و هرگز به عنوان «حذف‌شده». گفتگوهای خصوصی و گروه‌های عادی از یک توالی در سراسر حساب استفاده می‌کنند، بنابراین فواصل در آنجا معنایی ندارند و فهرست نمی‌شوند.
+- **شناسه پیام‌های مشاهده‌نشده.** برای کانال‌ها و ابرگروه‌ها، که پیام‌ها را به‌ازای هر چت شمارش می‌کنند، شناسه‌هایی که بین موارد مشاهده‌شده مفقود هستند به‌صورت بازه فهرست می‌شوند. آن‌ها به‌عنوان *مشاهده‌نشده* گزارش می‌شوند — حذف‌شده، هرگز تحویل‌داده‌نشده، یا خارج از تاریخچه ذخیره‌شده — هرگز به‌عنوان حذف‌شده. چت‌های خصوصی و گروه‌های عادی از یک توالی در سراسر حساب استفاده می‌کنند، بنابراین فواصل درون یکی از این چت‌ها معنایی ندارند و در آنجا فهرست نمی‌شوند.
 - اخطاریه‌های شکاف در سطح گفتگو (برای مثال درخواست تلگرام برای بازیابی تفاوت در یک کانال) به‌عنوان یادداشت محسوب می‌شوند؛ آن‌ها پوشش کلی را مختل نمی‌کنند.
+
+### شماره‌های پیام‌های مفقود (`gap_summary`)
+
+**پیش‌نمایش.** `coverage.json` → `gap_summary` اعدادی را که تلگرام اختصاص داده و این گردآورنده هرگز ندیده است، اندازه‌گیری می‌کند. تلگرام پیام‌ها را یک‌بار در هر کانال یا ابرگروه، و یک‌بار در هر حساب کاربری در سراسر چت‌های خصوصی، ربات‌ها و گروه‌های عادی شماره‌گذاری می‌کند. عددی بین دو پیام مشاهده‌شده یا مشاهده شده یا مفقود است؛ یک بازه پیوسته، این گزاره مثبت را بیان می‌کند که هر پیام شماره‌گذاری‌شده در آن مشاهده شده است. یک شکاف، نه کنشگری را نام می‌برد و نه دلیلی را.
+
+| میدان | معنی |
+| --- | --- |
+| `status` | `on`، یا `off` وقتی در **پارامترها → تحلیل شکاف** غیرفعال شود |
+| `parameters` | پارامترهایی که نتیجه را تولید کرده‌اند، تا بتوان آن را تکرار کرد |
+| `chats[]` | برای هر کانال یا ابرگروه یک ورودی، که هر کدام به‌طور جداگانه شماره‌گذاری شده‌اند |
+| `account` | سلسلهٔ سراسری حساب شامل چت‌های خصوصی، ربات‌ها و گروه‌های عادی |
+| `status` (به ازای هر توالی) | `applicable`، یا `not_applicable` با `reason` |
+| `observed_from`, `observed_to`, `span` | اولین و آخرین شماره مشاهده‌شده و اندازهٔ بازه |
+| `observed`, `observed_without_content` | اعداد مشاهده‌شده؛ اعدادی که تنها از طریق سوابق حذف یا بازبینی مجدد شناخته می‌شوند |
+| `missing`, `density`, `gap_ranges`, `largest_gap` | اعدادی که هرگز مشاهده نشدند، سهم آن‌ها از بازه، تعداد اجراها، طولانی‌ترین اجرا |
+| `clusters[]` | شکاف‌های فهرست‌شده: `low`, `high`, `missing`، و اعداد مشاهده‌شده مجاور `after` / `before` به همراه زمان‌های مشاهدهٔ آن‌ها |
+| `service_estimate` | فقط زمانی که فعال باشد: چند شماره مفقود بر اساس سهم مشاهده‌شده‌شان به‌عنوان پیام‌های خدماتی محسوب می‌شوند. هرگز از `missing` |
+
+اعتبار از ژورنال استخراج می‌شود، هرگز فرض نمی‌شود:
+
+- **کانال‌ها و ابرگروه‌ها** به‌ازای هر چت اندازه‌گیری می‌شوند، همچنین در خروجی چت‌های منتخب. سوابق انتخاب‌شده توسط فرستنده اندازه‌گیری را انجام می‌دهند. `not_applicable`.
+- **سecuence در سطح کل حساب** فقط از اولین پیام تا آخرین پیامی که در حالی که جمع‌آوری کل حساب فعال بود دریافت شد، اندازه‌گیری می‌شود و چت‌های خصوصی، ربات‌ها، گروه‌های عادی و پیام‌های خود حساب را حفظ می‌کند، بدون اینکه هیچ چتی مستثنی شود (`scope.changed`). اعدادی که توسط `deletion.unscoped` به‌عنوان مشاهده‌شده بدون محتوا شمرده می‌شوند. خروجی‌گیری یا واگذاری چت‌های انتخابی نمی‌تواند آن را اندازه‌گیری کند. اگر جمع‌آوری کل حساب خاموش و سپس روشن شود، یادداشتی می‌گوید که اعدادی که در این فاصله استفاده شده‌اند، به‌صورت شکاف ظاهر می‌شوند.
+- پیام‌های سرویس، رکوردهای دفترچه یادداشت با شماره‌های اختصاصی خود هستند، بنابراین خودِ شکاف‌هایشان را می‌بندند؛ برآورد اختیاری تنها یک زمینه است.
+
+`verify.py` recomputes `gap_summary` from `events.jsonl` with the parameters in the signed `coverage.json` member (defaults for older archives) and prints the account-wide line in its coverage summary. The archive's `get_capture_status` (MCP and the command line) returns the same measurement for the chats an access may read; the account-wide sequence only to access covering the whole workspace.
+
+Repeated observations of one service message count once，and the account service estimate uses only numbers inside the measured range．An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled；older records without that information cannot establish this condition．Stopped observation does not extend the measured range，and resuming it is noted．The live archive query has a time budget，including its database scan，and marks an unfinished measurement as partial．
+
+Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences)． These numbers describe observations；they do not identify a deletion actor or establish why a number is absent．
 
 زمانی که Telegram پذیرش حساب را متوقف می‌کند، رکورد `coverage.gap` که نظارت را پایان می‌دهد، حاوی `cause` (`account_banned`، `account_frozen`، `account_deleted`، `session_duplicated`، `session_revoked`، `session_expired`، `session_ended` یا `not_authorized`) و خطای Telegram است؛ `verify.py` علت پایان دوره را نام‌گذاری می‌کند.
 
-پوشش توضیح می‌دهد که این گردآورنده چه چیزی را ضبط کرده است. این اثباتی بر تحویل هر به‌روزرسانی توسط تلگرام در یک دوره مداوم نیست.
+Coverage combines recorded observation periods，interruptions and message outcomes． Assess it together with the selected chats，period and attachment policy；continuous operation alone does not establish complete delivery of Telegram updates．
 
 ## تهیه‌کننده
 
@@ -157,17 +186,27 @@ python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evid
 
 فایل manifest.json شامل فرمت، زمان خروجی، کلید عمومی، اثر انگشت، طول دفترچه، هش سر، دامنه، تولیدکننده، محدودیت‌ها و SHA-256 هر عضو محتوای دیگر به جز خود `manifest.json` و `manifest.sig` است. فایل manifest.sig امضای Ed25519 در قالب base64 بر روی JSON کانونیکال manifest است. اعتبارسنج، اعضای غیرمنتظره/غایب، نام‌های تکراری، فایل‌های خراب، توالی/زنجیره شکسته، امضاهای نامعتبر و عدم تطابق با نقطه کنترل ارائه‌شده را رد می‌کند. این هیچ‌گاه مسیرهای آرشیو را استخراج نمی‌کند. اندازه کل اعلام‌شده بدون فشرده‌سازی را به ۴ گیگابایت محدود می‌کند؛ `--max-gib N` آرشیوهای بزرگ‌تری را که با افزایش حد **پارامترها** ساخته شده‌اند، مجاز می‌داند.
 
-کد راستی‌آزمایی را از یک نسخه معتبر یا یک نسخه مستقل بررسی‌شده دریافت کنید. یک راستی‌آزمایی‌کننده در یک آرشیو غیرقابل‌اعتماد، یک فایل اجرایی است که توسط نویسنده آن آرشیو ارائه شده است؛ حضور آن یک سهولت در حمل‌پذیری است، نه یک لنگر اعتماد مستقل.
+Run verification from your installed TgWitness version or a reviewed checkout． The copy included in an archive supports portable use；check that copy against your trusted installation before executing it．
 
-یک نقطهٔ کنترل بیانیه‌ای را امضا می‌کند که شامل کلید عمومی، طول دفترچه، هش سرآیند و زمان ایجاد است. اعتبارسنج می‌تواند بررسی کند که یک آرشیو بعدی حاوی همان پیش‌وند است. یک نقطهٔ کنترل را خارج از جمع‌کننده و پیش از یک تغییر مورد مناقشه حفظ کنید: یک مهاجم که هم بر آرشیو و هم بر نقطهٔ کنترل تسلط دارد می‌تواند هر دو را جایگزین کند.
+A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix．Retain the checkpoint outside the collector，so later verification compares the archive with a reference held separately from it．
 
 ## دامنهٔ اعتبارسنجی
 
-این امضاها، کلید گردآورنده را شناسایی کرده و از محتوای ذخیره‌شده محافظت می‌کنند. اثر انگشت آن را به‌طور مستقل پین کنید تا آن کلید را با گردآورنده مورد انتظار مرتبط سازید. به‌روزرسانی‌های تلگرام ورودی برای گردآوری هستند؛ TgWitness مشاهدات خود از آن به‌روزرسانی‌ها را امضا می‌کند. این امضاها، امضاهایی نیستند که توسط تلگرام یا نویسندگان پیام صادر شده‌اند.
+Verification checks the archive and the collection mode used to produce it．Choose the mode whose trust boundary matches the case，then retain its verification inputs．
 
-یک نقطه کنترل نگهداری‌شده یا رکورد شاهد، تغییر پیشوند ژورنال قبلی را تشخیص می‌دهد، از جمله جایگزینی که با یک کلید گردآورنده کپی‌شده امضا شده است. رکوردهایی که قبل از اولین نقطه کنترل مستقل خود ساخته شده‌اند، به تأیید منبع نیاز دارند: دارنده کلید گردآورنده می‌تواند بر روی مطالب جدید امضا بگذارد. دسترسی به کلید امضا را کنترل‌شده نگه دارید و ارجاعات را به صورت جداگانه نگهداری کنید.
+| Collection mode | What the verifier checks | Verification inputs and trust boundary |
+| --- | --- | --- |
+| Local workspace | Record signatures，hash chain，manifest and attachment bytes | Independently retained collector fingerprint；the host administrator controls the local signing key |
+| Local workspace with an independent witness | The archive checks plus agreement with an earlier journal prefix retained by the witness | Separately trusted witness key and records；the checkpoint binds the prefix already observed |
+| [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity | Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow |
+| [Cloud deployment](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/) | Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record | Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider |
+| [Intel TDX confidential VM](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status，binding to the collector statement，compose and OS measurements | Intel trust chain and expected deployment measurements；retain the results of every required TDX check |
 
-با استفاده از سوابق پوشش و تست‌های کنترل‌شده، قابلیت مشاهده و تحویل حساب کاربری را ارزیابی کنید. از یک مهر زمانی خارجی تأییدشده برای زمان‌بندی مستقل استفاده کنید. شناسه فرستنده یک حساب تلگرام را شناسایی می‌کند؛ آن را از طریق تحقیقات خود به یک شخص مرتبط کنید. رسیدها و بررسی‌های ابری، اندازه‌گیری‌های گزارش‌شده توسط گردآورنده و پیکربندی استقرار را توصیف می‌کنند. [نتایج اعتبارسنجی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/verification/)را برای رفتار اندازه‌گیری‌شده و دامنه آن مشاهده کنید.
+In sealed acquisition，the approved collector receives data through an authenticated Telegram connection inside the verified environment．Attestation binds the archive to that execution，so verification covers acquisition as well as later file integrity． This relies on the approved code and the platform trust chain listed above． GitHub capture verification requires a session created inside the run and rejects imported-session captures．
+
+The run receipt records the collector version，file hashes and startup settings．GitHub provenance and TDX measurements provide the environment checks；the [validation record](https://phishdestroy.github.io/TgWitness/fa/docs/reference/verification/) identifies tested configurations．
+
+TgWitness signs the observations it collects；Telegram and message authors do not issue these signatures．In a local workspace，material created before the first independent checkpoint still depends on the collector and its key holder．Coverage records describe the selected scope and collection outcomes，while verified external timestamps anchor the committed archive or journal boundary in time．
 
 ## پیوست‌ها
 
@@ -181,9 +220,9 @@ python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evid
 
 یک جاب رسانه و رویداد پیام آن در یک تراکنش ثبت می‌شوند. این جاب، توصیف‌کننده اصلی پیام تلگرام (TL) را ذخیره می‌کند؛ مشاهده امضا شده، سیاست‌های SHA-256، حساب کاربری و اندازه آن را پیوند می‌دهد. بازیابی، پیش از دانلود، این پیوند را تأیید می‌کند. این جاب هرگز پیام فعلی را فراخوانی نمی‌کند و بی‌صدا یک پیوست جدیدتر را جایگزین آن می‌کند. جاب‌های متوقف‌شده دوباره امتحان می‌شوند، در حالی که شکست دائمی یک نتیجه صریح باقی می‌ماند.
 
-هر فضای کاری (workspace) دارای دفتر ثبت (journal) و هویت امضای خود است. یک رویداد process.started شامل شناسه اجرا (run ID)، ساعت‌های محلی، نسخه‌های وابستگی، هش‌های فایل منبع، حساب/دامنه اولیه و تنظیمات ضبط است. تپش‌های قلب (Heartbeats) شامل شناسه اجرا، زمان مونوتونیک و وضعیت صف هستند. رسید فرآیند نیز می‌تواند به صورت یک بیانیه با امضای جداگانه دانلود شود. اندازه‌گیری‌های فایل به صورت خوداظهاری هستند و تأیید هویت سخت‌افزاری مورد اعتماد نیستند.
+Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement．For verification of the execution environment，pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope)．
 
-نقاط کنترل خودکار هنگام راه‌اندازی، هر پنج دقیقه در حین مشاهده (**پارامترها → نقطه کنترل امضا شده هر**)، و در هنگام توقف منظم، به‌صورت محلی نگهداری می‌شوند. تأییدیه راه‌اندازی و مقایسه خروجی، دفترچه را با آخرین نقطه کنترل محلی نگهداری‌شده مقایسه می‌کنند. این کار می‌تواند بازگشت پایگاه داده را در صورتی که نقطه کنترل باقی بماند، تشخیص دهد؛ یک اپراتور که هر دو را کنترل می‌کند همچنان می‌تواند هر دو را جایگزین کند. نگهداری مستقل و مهرهای زمانی خارجی مورد اعتماد، همچنان الزامات جداگانه‌ای باقی می‌مانند.
+Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives．Independent retention keeps that reference available outside the workspace；a verified external timestamp additionally anchors it in time．
 
 پس از راه‌اندازی مجدد، موقعیت به‌روزرسانی ذخیره‌شده تلگرام از سر گرفته می‌شود (`catch_up_from` در `observation.started`) و به‌روزرسانی‌های از دست رفته درخواست می‌شوند. یک بازبینی دوره‌ای، `message.recovered` را برای پیام‌های از دست رفته و `message.missing_on_recheck` را زمانی که تلگرام دیگر یک پیام ذخیره‌شده را بازنمی‌گرداند، ثبت می‌کند؛ مورد دوم یک اطلاعیه حذف نیست و نه نام حذف‌کننده و نه زمان را مشخص نمی‌کند.
 

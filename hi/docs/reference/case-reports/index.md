@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. मूल ZIP फ़ाइलों और उनके हैश को सुरक्षित रखें। प्रत्येक धारक, हस्तांतरण, तारीख और उद्देश्य को दर्ज करें। संबंधित ऑपरेटर बयानों और केस नोट्स को उनके साथ बनाए रखें।
 5. गोपनीय वीएम के लिए, उद्धरण, चुनौती, इंटेल प्रमाणपत्र श्रृंखला, माप, सटीक स्रोत और कुंजी-हैंडलिंग शर्तों को संरक्षित करें और स्वतंत्र रूप से सत्यापित करें। समीक्षा किए गए कलाकृतियों के साथ प्रमाणीकरण सत्यापन परिणाम रखें।
 
-विश्वास संबंधी धारणाओं के लिए [सत्यापन के दायरे](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) और स्रोत दावों, पहचान, समय तथा संग्रह कवरेज के पृथक मूल्यांकन को देखें।
+See [verification scope](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## प्रापक समीक्षा
 

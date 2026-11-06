@@ -8,6 +8,8 @@ Panelin tüm ekranları: sohbetler, günlük, kaynaklar, dışa aktarmalar, Ekst
 
 Her ekranın işlevi, imzalı günlüğe ne yazdığı ve ayrıntılı kılavuzun bulunduğu yer. Panel, her seferinde tek bir çalışma alanını gösterir: kendi kaynakları, günlüğü ve imzalama anahtarı olan bir Telegram hesabı. Kenar çubuğunun üst kısmındaki seçici, çalışma alanları arasında geçiş yapar. Adres, çalışma alanını taşır (`?ws=…`); adres, seçici ve yüklü hesap birbiriyle uyuşmadığında işlemler engelli kalır.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Yolunuzu bulun
 
 Günlük bölümler kenar çubuğunun en üstünde yer alır, **Hesaplar** ise **Çalışma Alanı'nın** altındadır, diğer her şey ise **Diğer araçlar ve ayarlar** altında bulunur. Üst çubuktaki **Arayüz seviyesi** anahtarı, kaç bölümün görüneceğini belirler:

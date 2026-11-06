@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. اصل ZIP فائلوں اور ان کے ہیشز کو محفوظ رکھیں۔ ہر ہولڈر، منتقلی، تاریخ اور مقصد کو ریکارڈ کریں۔ منسوب کردہ آپریٹر کے بیانات اور کیس نوٹس کو بھی برقرار رکھیں۔
 5. خفیہ VMs کے لیے اقتباس، چیلنج، انٹیل سرٹیفکیٹ چین، پیمائشیں، عین ماخذ اور کلید کے استعمال کی شرائط کو محفوظ کریں اور آزادانہ طور پر تصدیق کریں۔ جائزہ شدہ آرتفیکٹس کے ساتھ تصدیق کے نتیجے کو محفوظ رکھیں۔
 
-اعتماد کے مفروضات اور ماخذ کے دعووں، شناخت، وقت اور جمع کے دائرہ کار کے الگ الگ جائزے کے لیے [توثیق کے دائرہ کار](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) کو دیکھیں۔
+See [verification scope](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## موصول کنندہ کا جائزہ
 

@@ -8,7 +8,7 @@ Erkennen Sie erfasste Bilder und Audiodateien mit einem lokalen Worker; verknüp
 
 Öffnen Sie einen `media.saved`-Protokoll-Eintrag, wählen Sie **„Anhang erkennen“** und wählen Sie anschließend unter **„Archiv befragen“** entweder „OCR“ oder „Transkription“ aus. Die Verarbeitung erfolgt manuell und lokal. Es gibt keinen Cloud-Medienmodus und keinen automatischen Upload. Die ursprünglichen Anhangsdaten und das „ `media_sha256`“-Protokoll bleiben unverändert; der erkannte Text wird ausdrücklich als maschinelle Erkennung gekennzeichnet und separat zusammen mit dem Quell-Hash, der Engine-/Modellversion, der Sprache, den Parametern und der Fertigstellungszeit gespeichert. Transkripte behalten die zurückgegebenen Zeitstempel bei.
 
-Durchsuchen Sie diese Ergebnisse mithilfe **der Suche nach erkanntem Text** und dem OCR-/Transkript-Filter. Es handelt sich hierbei um eine separate Suche in abgeleiteten Daten; sie wandelt die maschinelle Erkennung nicht stillschweigend in den ursprünglichen Telegram-Text um und fügt ihn auch nicht zu signierten Ereignissen hinzu.
+Durchsuchen Sie diese Ergebnisse mithilfe **der Suche nach erkanntem Text** und des OCR-/Transkript-Filters oder wählen Sie erkannten Text als Quelle für eine **„Journal** Best-Match“-Suche. Beide suchen nach Wortformen über einen [In-Memory-Index](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#recognized-text). Hierbei handelt es sich um eine separate Suche in abgeleiteten Daten; sie wandelt die maschinelle Erkennung nicht stillschweigend in den ursprünglichen Telegram-Text um und fügt ihn auch nicht zu signierten Ereignissen hinzu.
 
 ## Richten Sie den optionalen Worker ein
 

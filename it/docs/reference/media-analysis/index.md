@@ -8,7 +8,7 @@ Riconoscere le immagini e i file audio acquisiti tramite un worker locale; mante
 
 Aprire un record del registro `media.saved`, scegliere **«Riconoscimento allegato**», quindi selezionare «OCR» o «Trascrizione» nella sezione **«Chiedi all’archivio**». L’elaborazione è manuale e locale. Non è prevista alcuna modalità di archiviazione su cloud né il caricamento automatico. I byte originali dell’allegato e il file `media_sha256` rimangono invariati; il testo riconosciuto viene esplicitamente contrassegnato come riconoscimento automatico e archiviato separatamente con l’hash di origine, la versione del motore/modello, la lingua, i parametri e l’ora di completamento. Le trascrizioni mantengono i timestamp restituiti.
 
-Cerca tra questi risultati utilizzando **la funzione “Cerca nel testo riconosciuto”** e il filtro OCR/trascrizione. Si tratta di una ricerca separata su dati derivati; non converte automaticamente il riconoscimento automatico in testo originale di Telegram né lo aggiunge agli eventi firmati.
+Cerca tra questi risultati utilizzando **la funzione «Cerca testo riconosciuto»** e il filtro OCR/trascrizione, oppure scegli il testo riconosciuto come fonte per una ricerca «Migliore corrispondenza **nel registro**». Entrambe le opzioni effettuano la corrispondenza delle forme delle parole tramite un [indice in memoria](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#recognized-text). Si tratta di una ricerca separata basata su dati derivati; non converte automaticamente il riconoscimento automatico nel testo originale di Telegram né lo aggiunge agli eventi firmati.
 
 ## Configurazione del worker opzionale
 

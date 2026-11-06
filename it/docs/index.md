@@ -44,7 +44,7 @@ Raccogli
 
 Archivio e integrazioni
 
-[Riferimento a Case Board](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-board/)[Analisi dell’archivio](https://phishdestroy.github.io/TgWitness/it/docs/reference/analysis/)[MCP di sola lettura](https://phishdestroy.github.io/TgWitness/it/docs/reference/mcp/)[OCR locale e trascrizione](https://phishdestroy.github.io/TgWitness/it/docs/reference/media-analysis/)[Webhook in uscita](https://phishdestroy.github.io/TgWitness/it/docs/reference/webhooks/)[Vetrina pubblica](https://phishdestroy.github.io/TgWitness/it/docs/reference/showcase/)
+[Riferimento a Case Board](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-board/)[Analisi dell’archivio](https://phishdestroy.github.io/TgWitness/it/docs/reference/analysis/)[Ricerca full-text](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/)[MCP di sola lettura](https://phishdestroy.github.io/TgWitness/it/docs/reference/mcp/)[Riga di comando](https://phishdestroy.github.io/TgWitness/it/docs/reference/cli/)[OCR locale e trascrizione](https://phishdestroy.github.io/TgWitness/it/docs/reference/media-analysis/)[Webhook in uscita](https://phishdestroy.github.io/TgWitness/it/docs/reference/webhooks/)[Vetrina pubblica](https://phishdestroy.github.io/TgWitness/it/docs/reference/showcase/)
 
 Prove
 

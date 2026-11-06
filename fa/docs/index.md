@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/
 
 آرشیو و یکپارچه‌سازی‌ها
 
-[مرجع Case Board](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-board/)[تحلیل بایگانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/analysis/)[MCP فقط-خواندنی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/)[شناسایی نوری حروف (OCR) و رونویسی محلی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/media-analysis/)[وب‌هوک‌های خروجی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/webhooks/)[نمایشگاه عمومی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/showcase/)
+[مرجع Case Board](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-board/)[تحلیل بایگانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/analysis/)[جستجوی متن کامل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/)[MCP فقط-خواندنی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/)[خط فرمان](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/)[شناسایی نوری حروف (OCR) و رونویسی محلی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/media-analysis/)[وب‌هوک‌های خروجی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/webhooks/)[نمایشگاه عمومی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/showcase/)
 
 شواهد
 

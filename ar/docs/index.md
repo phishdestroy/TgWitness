@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/
 
 الأرشيف والتكاملات
 
-[مرجع «لوحة القضية»](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/)[تحليل الأرشيف](https://phishdestroy.github.io/TgWitness/ar/docs/reference/analysis/)[MCP للقراءة فقط](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/)[التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/media-analysis/)[الويب هوكس الصادرة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/webhooks/)[عرض عام](https://phishdestroy.github.io/TgWitness/ar/docs/reference/showcase/)
+[مرجع «لوحة القضية»](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/)[تحليل الأرشيف](https://phishdestroy.github.io/TgWitness/ar/docs/reference/analysis/)[البحث عن النص الكامل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/)[MCP للقراءة فقط](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/)[سطر الأوامر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/)[التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/media-analysis/)[الويب هوكس الصادرة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/webhooks/)[عرض عام](https://phishdestroy.github.io/TgWitness/ar/docs/reference/showcase/)
 
 الأدلة
 

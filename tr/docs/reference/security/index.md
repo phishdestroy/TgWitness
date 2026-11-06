@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/secur
 
 Tehdit modeli, erişim modeli, depolanan gizli bilgiler, ağ maruziyeti, oturum içe aktarmaları ve bir güvenlik açığının nasıl bildirileceği.
 
-TgWitness, kendi bilgisayarınızda veya sunucunuzda çalışır. Hesap bağlantıları, genel proxy listesinin bakımı ve isteğe bağlı harici hizmetler için açık yönlendirme ilkeleri vardır. Bildirimler, zaman damgaları, site dışı kopyalar ve tanık ayrı ayrı yapılandırılır. Bu sayfada, nelerin nasıl korunduğu ve nelerin operatöre bırakıldığı listelenmiştir.
+This page describes access，storage and network protection in a local or server workspace． For collection on a GitHub runner or in an Intel TDX confidential VM，see the [verification modes](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope)，which add checks of the collection environment． Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．
 
 | Alan | Kısacası |
 | --- | --- |
@@ -12,7 +12,7 @@ TgWitness, kendi bilgisayarınızda veya sunucunuzda çalışır. Hesap bağlant
 | Depolanan gizli bilgiler | Oturum, API çifti, imzalama anahtarı ve proxy ayarları Fernet ile şifrelenmiştir. |
 | Mesajlar ve medya | Şifrelenmemiş olarak saklanır: disk şifreleme ve sıkı izin ayarları kullanın |
 | Bütünlük | Her kayıtta SHA-256 hash zinciri ve Ed25519 imzası bulunur |
-| Kapsam dışı | Bir makine yöneticisi, sızdırılmış bir panel jetonu, yakalama işleminin eksiksizliği |
+| Local trust boundary | The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary |
 
 Güvenlik açıkları bildirimleri için [güvenlik](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)politikasına bakınız.
 
@@ -38,11 +38,13 @@ Dışa aktarımlar, kimlik doğrulama ve imzalama gizli bilgilerini içermez, an
 
 ## Depolanan gizli bilgiler
 
-Telegram API kimlik bilgileri, StringSession ve Ed25519 özel anahtarı, Fernet kullanılarak şifrelenir. Varsayılan olarak anahtarı, aynı korumalı veri dizininde saklanır. Bu, düz metnin kazara ifşa edilme riskini azaltır; ancak dizinin tamamını okuyabilen bir saldırgana karşı koruma sağlamaz. Mesaj içeriği ve medya dosyaları TgWitness tarafından **şifrelenmez** . Disk şifreleme ve kısıtlayıcı işletim sistemi izinleri kullanın. Unix özel anahtar dosyaları 0600 modunda oluşturulur; yeni oluşturulan veri dizinleri ise 0700 modunu kullanır. Mevcut dizin izinleri değiştirilmez. Windows, dizin ACL’lerini devralır: bunları hizmet hesabı ve yetkili yöneticilerle sınırlandırın.
+Telegram API credentials，the session and signing key are encrypted with Fernet． For local messages and media，encryption is provided by the host's disk or volume； the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP， and off-site copies use AES-256-GCM．
+
+The vault key defaults to the protected data directory．Use an external master-key file below to store it separately．On Unix，new private-key files use mode 0600 and new data directories use 0700；on Windows，set the directory ACL for the service account and authorized administrators．Existing directory permissions are retained．
 
 ### Harici ana anahtar
 
-Yeni bir veri dizini için, TGWITNESS_VAULT_KEY_FILE harici bir rastgele ana anahtar sağlayabilir. HKDF-SHA256 ve ayrı bir rastgele tuz, her çalışma alanı için farklı bir Fernet anahtarı üretir. Kurtarma amacıyla vault.external.json dosyası saklanmalıdır. Eksik veya yanlış anahtarlar, işlemin başarısızlıkla sonuçlanmasına neden olur. Mevcut yerel kasalar sessizce taşınmaz. Çalışan işlem anahtara erişebilir; bu, HSM izolasyonu değildir. Panel, seçilen modu bildirir ve mesaj/medya depolamasının uygulama tarafından şifrelenmediğini açıkça belirtir. Tam tehdit modeli için [bağlantı, proxy'ler ve veri koruma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/) bölümlerine bakın.
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode．Disk encryption protects the local message and media files in either mode；see [connection and data protection](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/) for setup details．
 
 ## Proxy'ler ve ağ yolları
 
@@ -66,8 +68,10 @@ Varsayılan API doğrulama yanıtı, kimlik bilgilerini yansıtmayacak şekilde 
 
 ## Bütünlük sınırları
 
-Hash zinciri, veritabanı tetikleyicileri ve imzalar belirli değişiklikleri algılar; ancak bunlar, yerel bir yöneticinin günlüğü yeniden yazmasını ve yeniden imzalamasını engellemez. İmzalı kontrol noktalarını ve açık anahtar parmak izini ayrı bir sistemde saklayın. Kanıt modu ve site dışı kopya (her ikisi de varsayılan olarak kapalıdır), kontrol noktası hash'lerini zaman damgası hizmetlerine ve şifrelenmiş kopyaları S3 uyumlu depolama alanına gönderir; [kanıt](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)formatına bakınız. Şeffaflık günlükleri, HSM destekli imzalama ve resmi zincir-i-mülkiyet sertifikasyonu uygulanmamaktadır.
+Local verification checks record signatures，the hash chain，attachments and the export manifest． The administrator holds the local signing key and can create another signed journal； an independently retained checkpoint detects replacement of the prefix it covers． Keep the key fingerprint and checkpoints with the recipient or an independent witness．
+
+For independently checked collection，choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)． Their verifiers check workflow provenance or hardware measurements in addition to archive integrity． Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies； the [evidence format](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) describes the checks for each mode．
 
 ## Bir sorun olduğundan şüpheleniyorsanız
 
-Orijinal veri dizinini koruyun ve analiz için ayrı bir kopya kullanın. Telegram'a ait özel verileri veya kimlik bilgilerini halka açık bir soruna dahil etmeyin. Bağımsız bir güvenlik sertifikası iddia edilmemektedir.
+Preserve the original data directory and use a separate copy for analysis． Report the affected version，operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)，keeping account data and credentials private．

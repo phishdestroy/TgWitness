@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 位於 Hetzner 或 Phala Cloud 上的全天候密封伺服器、Gateway DNS，以及第三方可重複驗證的檢查機制。
 
-經簽署的日誌可證明記錄未被竄改 **後** 簽署。針對嚴重案例 ，下一個問題在於是否有人可能篡改了簽署前的資料 **之前**： 誰在運作資料收集器、在哪台機器上運作，以及是否有人曾登入該系統。此可選 模式會部署資料收集器，讓第三方能透過雲端服務供應商和 Cloudflare 保存的記錄 來驗證上述事項，而非僅憑營運商的口頭聲明。
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 一般的本地端及 Docker 使用方式維持不變。除非您使用 `python -m tgwitness.cloud`進行部署，且收集器僅在部署設定為 `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 | 該簽署金鑰是在該伺服器上建立的 | 該金鑰會簽署一份聲明，其中載明服務提供者的伺服器 ID 以及其收到的 cloud-init 檔的雜湊值 | Collector，已與服務提供商進行比對 |
 | 該日誌屬於該金鑰與伺服器 | 每個在證據 ZIP 中啟動的程序，皆包含該伺服器的主機測量值 | 證據 ZIP |
 
-主機測量數據（SSH 監聽器與進程、當前會話、 `wtmp`、開機狀態） 由收集器本身回報，並在每個程序啟動時及 `host.state` 記錄中。伺服器上的 root 使用者可能篡改這些數據；這些數據 旨在支援服務提供者與 Cloudflare 的記錄，而非取代它們。
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## 提供者
 
@@ -269,11 +269,8 @@ Gateway DNS 涵蓋系統解析器。透過 443 埠的 HTTPS DNS 連線至其他�
 
 Cloudflare 無法窺見 Telegram 的加密內容、該 Telegram 帳戶上的其他裝置 （「證據模式」的裝置清單是從 Telegram 端記錄下來的），亦無法窺見服務供應商的虛擬化平台。
 
-## 這並未確立什麼
+## Reading the deployment result
 
-- 服務提供者及其員工負責管理虛擬化平台、磁碟及網路。
-- 主機測量數據由資料收集器自行回報。
-- 並非所有服務供應商的日誌中都包含較早的防火牆規則內容；僅有 Linode 會保留規則版本。
-- 關於訊息真實性並無新論述；請參閱「[證據」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)。
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-尚未在真實帳戶上運行：包含您自有網域下的部署（Cloudflare 隧道與 DNS）、其他服務供應商、除錯部署，以及 `lock`，該伺服器上的 Telegram 帳號， 以及透過快速隧道接收後續版本的即時更新。請透過 各服務供應商的首個部署環境，使用 `plan`，以及除錯部署， `verify` ，以及，再於個案中實際使用。
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/
 
 存档与集成
 
-[“案件看板”参考](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-board/)[存档分析](https://phishdestroy.github.io/TgWitness/zh/docs/reference/analysis/)[只读 MCP](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/)[本地 OCR 和转录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/media-analysis/)[外发 webhook](https://phishdestroy.github.io/TgWitness/zh/docs/reference/webhooks/)[公开展示](https://phishdestroy.github.io/TgWitness/zh/docs/reference/showcase/)
+[“案件看板”参考](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-board/)[存档分析](https://phishdestroy.github.io/TgWitness/zh/docs/reference/analysis/)[全文搜索](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/)[只读 MCP](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/)[命令行](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/)[本地 OCR 和转录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/media-analysis/)[外发 webhook](https://phishdestroy.github.io/TgWitness/zh/docs/reference/webhooks/)[公开展示](https://phishdestroy.github.io/TgWitness/zh/docs/reference/showcase/)
 
 证据
 

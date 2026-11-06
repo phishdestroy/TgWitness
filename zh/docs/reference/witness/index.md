@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/witne
 
 [导出与验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/) · [高可信度](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/) · [面板指南](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#extras)
 
-收集器会对自己的日志进行签名，因此无论谁控制了收集器及其密钥，原则上都可能 重写或截断日志并重新签名。 Witness 使这种 行为变得可检测。它是一个独立的进程——另一个容器，或者更准确地说，是由他人 运行的服务器——每隔几分钟会获取收集器的已签名日志头，用自己的密钥对所 观察到的内容进行签名，将其保存在自己的日志中，并发布到 Telegram 频道上。
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 流程图 · 收集器 → Witness (签名检查点：记录条数 + 头部哈希值); Witness → Witness日志，自有密钥; Witness → Telegram 频道 (通过其自有机器人发布的签名帖子); 证据 ZIP → verify.py; Witness日志，自有密钥 → verify.py; Telegram 频道 → verify.py (Telegram 桌面版导出功能或 t.me/s 页面) · 收集器 · Witness · Witness日志，自有密钥 · Telegram 频道 · 证据 ZIP · verify.py · 签名检查点：记录条数 + · 头部哈希值 · 通过其自有机器人发布的签名帖 · 子 · Telegram 桌面版导出功能或 · t.me/s 页面
 
@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/witne
 每隔一段时间（默认间隔为 10 分钟），该工具会：
 
 1. 自行获取头部数据（收集器无法推送或跳过该数据）；
-2. 验证收集器的签名、固定的收集器密钥（`--collector-fingerprint`， 或首个出现的密钥）、一个非递减计数，以及在计数未变时头部未发生变更；
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. 将其签名记录追加到自身的日志中：`witness.anchor`，状态为 `ok`、 `key_changed`、`rollback`（记录数少于之前）、`fork`（长度相同，但 头部不同）或 `invalid`（响应未通过验证），或者当 收集器未响应时为 `witness.no_response`；
 4. 将结果发布到频道，并附带签名，包括“无响应”的情况——只要 TgWitness 正在运行且能够访问 Bot API。发布 ID 会被记录下来（`witness.posted`）， 发布失败的情况也会被记录（`witness.post_failed`）。
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 这需要独立保留的见证指纹以及与之匹配的检查点， 且该检查点必须位于本次导出的确切末尾。仅覆盖较早前缀的检查点 是不够的。暂停采集，让见证方观察最终状态，并在 进一步写入日志之前进行导出；如果日志发生变化，请保留另一个检查点并 导出该状态。 仅凭后续检查点无法验证较短导出文件的最终哈希值。 当同时提供`--channel`标志时，若声明的帖子缺失或匹配集为空，将导致此 严格检查失败。若未使用该标志，普通完整性检查仍会报告未被见证的 记录，但不会因此拒绝一个除此之外完整的存档。
 
-该标记确保与提供的、置顶的见证记录保持一致。操作员 仍需确认见证记录的独立性，并单独保存其记录。 该标记并不证明消息的真实性、收集的完整性或经独立测量的运行时间。
-
-“见证”功能展示收集器在特定时间点报告的内容，并证明后续导出的数据与之 一致。它并不表明收集器记录了 Telegram 发送的所有内容，也不 表明消息内容属实。由同一操作员在同一台机器上运行的“见证” 其可信度低于由其他人运行的“见证”。
-
-仅凭计数增加无法证明在线“仅追加”的连续性：离线 比对必须将每个保留的前缀哈希与收集器的完整导出数据进行匹配。 Witness 停机和发布失败会导致某些时间段缺乏外部锚点。缺失的 帖子可针对保留的见证日志进行报告；无论是由同一运营商控制的频道还是服务器， 均不属于不可变的第三方存档。
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

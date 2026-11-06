@@ -101,7 +101,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/inves
 | 相同的保存文件 | 已完成媒体收据 #151 和 #209 | 所保存字节的完整 SHA-256 值完全一致 |
 | 频道来源说明 | #101 和 #188 | 若未注明发件人，请勿将频道帖子归因于用户 71001 |
 
-请对比附件哈希值及其关联的消息引用。文件完全相同 并不能证明其创建者、转发者或共同操作者。仅凭相同的名称和 相似的头像，不能将两个 Telegram ID 归为同一人。
+Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
 
 请将团队的工作笔记保存在[“案件看板](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-board/)”上：对您依赖的记录 （如 #146、#188 和 #205）添加书签，突出显示确切的目标字符串，并 保存两个记录之间或某个时间范围内所有记录操作的片段。 笔记 和状态会将团队的审查记录保留在其各自的已签名历史记录中，可与 源观察记录区分开来。
 
@@ -161,6 +161,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | 由机器人驱动的订单/支付纠纷 | 条目公告 → 已保存链接预览 → 机器人启动参数 → 消息和键盘版本 → 面板回调收据 → 私信/群组跟进 | 已观察到的报价/响应时间线及经过验证的来源；仅凭支付链接无法证明已发生支付 |
 | 事件发生后被删除的消息 | 所有受影响的聊天记录 → 保存的原始内容/编辑记录 → 删除或复查时缺失的结果 → 保留的媒体文件 → 覆盖范围及其他账户视角 | 保留版本及明确标注的未知时间段；不假设任何虚构的删除行为者 |
-| 某参与者在不同聊天群中使用了不同的名字 | 发件人编号 → 姓名/用户名历史 → 回复 → 其他被观察到的聊天记录 → 提及的目标/文件 | 所引用的 Telegram 账号活动时间线，其中现实世界中的身份信息与关系假设被明确区分开来 |
+| 某参与者在不同聊天群中使用了不同的名字 | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
 
 [收藏参考](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/) · [个人资料验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#people-profiles) · [证据移交](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#investigation-handoff) · [验证已完成](https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/)

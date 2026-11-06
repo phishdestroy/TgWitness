@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/
 
 قم بتوصيل عميل MCP بمساحات العمل والدردشات المحددة مع وصول قابل للانتهاء وقابل للإلغاء.
 
-اربط عميل محلل بمساحات عمل ومحادثات محددة. يُقدّم TgWitness **Streamable HTTP عند المسار `/mcp` ضمن عملية لوحة التحكم**. لكل اتصال رمزه الخاص وتاريخ انتهاء صلاحيته والأدوات المسموح بها. لا يستطيع MCP إرسال رسائل تيليجرام أو تغيير الإعدادات أو تعديل السجل الموقَّع.
+قم بتوصيل عميل المحلل بمساحات العمل والدردشات المحددة. تقدم TgWitness خدمة **Streamable HTTP على `/mcp` في عملية اللوحة**. لكل اتصال رمز مميز خاص به، وتاريخ انتهاء صلاحية، وأدوات مسموح بها. لا يمكن لـ MCP إرسال رسائل Telegram، أو تغيير الإعدادات، أو تعديل السجل الموقّع. تعمل نفس الاتصالات مع [سطر الأوامر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/).
 
 [دليل سير العمل](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ويكي](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 | --- | --- |
 | `list_workspaces` | مساحات العمل الممنوحة |
 | `list_chats` | المحادثات الممنوحة |
-| `search_messages` | نص الرسائل المحفوظة ضمن الفترة المحددة |
+| `search_messages` | نص الرسائل المحفوظة خلال الفترة المحددة؛ `ranked=true` يستخدم [البحث عن النص الكامل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/) (أشكال الكلمات، أفضل النتائج أولاً، `next_offset` التصفح) |
 | `get_message_versions` | الإصدارات الملتقطة وملاحظات الحذف |
 | `get_message_context` | مُعرِّفات الرسائل الملتقطة المجاورة |
 | `get_journal_event` | سجل واحد مُنقّى مع مرجع مصدره |
-| `get_capture_status` | حالة الجمع وسجلات التغطية المسموح بها |
+| `get_capture_status` | حالة التجميع، وسجلات التغطية المسموح بها، و `gap_summary`: أرقام الرسائل التي لم يتم رصدها مطلقًا، لكل قناة أو مجموعة فرعية وعلى مستوى التسلسل الخاص بالحساب ([التفاصيل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#missing-message-numbers-gap_summary))؛ اختر محادثة لترى الفجوات المدرجة فيها |
+| `get_activity_stats` | الرسائل حسب الساعة وفقًا للتوقيت العالمي المنسق (UTC) ويوم الأسبوع، وأيام الذروة، ونسب التعديل والحذف، والمرسلين، والمجالات، و `@handles`، مع التغطية ([التفاصيل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/#activity-statistics)) |
+| `export_messages` | تعمل عبر سطر الأوامر فقط، وليست محددة بشكل افتراضي: تقوم ببث الملاحظات المحفوظة كسطور JSON ([التفاصيل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/#export))؛ ولا تتوفر عبر MCP |
 
 تُعيد `tools/list` الأدوات الممنوحة لذلك الاتصال فقط. ويتم رفض استدعاءات الأدوات الأخرى. لا تتوفر أدوات سياق المجموعة والحلقات والمصطلحات وسلاسل الردود في هذا الإصدار؛ حيث لم يتم تضمين الواجهة الخلفية المنفصلة لحزم السياق الخاصة بها.
 

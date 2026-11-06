@@ -8,7 +8,7 @@ Reconnaître les images et les fichiers audio capturés à l'aide d'un worker lo
 
 Ouvrez un enregistrement du journal `media.saved`, choisissez « **Reconnaître la pièce jointe** », puis sélectionnez « OCR » ou « transcription » sous « **Demander à l’archive** ». Le traitement est manuel et local. Il n’y a ni mode de stockage dans le cloud ni téléchargement automatique. Les octets de la pièce jointe d’origine et le fichier `media_sha256` restent inchangés ; le texte reconnu est explicitement marqué comme issu d’une reconnaissance automatique et stocké séparément avec le hachage source, la version du moteur/modèle, la langue, les paramètres et l’heure d’achèvement. Les transcriptions conservent les horodatages d’origine.
 
-Effectuez une recherche parmi ces résultats à l'aide de **la fonction « Rechercher du texte reconnu »** et du filtre OCR/transcription. Il s'agit d'une recherche distincte sur des données dérivées ; elle ne convertit pas automatiquement la reconnaissance automatique en texte Telegram d'origine ni ne l'ajoute aux événements signés.
+Effectuez une recherche parmi ces résultats à l'aide de **la fonction « Rechercher du texte reconnu »** et du filtre OCR/transcription, ou choisissez le texte reconnu comme source d'une recherche par meilleure correspondance dans **le** **journal**. Ces deux méthodes font correspondre les formes des mots via un [index en mémoire](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#recognized-text). Il s'agit d'une recherche distincte sur des données dérivées ; elle ne convertit pas implicitement la reconnaissance automatique en texte Telegram d'origine ni ne l'ajoute aux événements signés.
 
 ## Configurer le worker optionnel
 

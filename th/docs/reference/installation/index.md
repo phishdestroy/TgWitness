@@ -44,6 +44,30 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
 
 การติดตั้งทุกครั้งจะรวมถึงไฟล์ **START-HERE.html** และ **START-HERE.txt** ซึ่งระบุ เส้นทางในเครื่อง คำสั่ง และลิงก์ไปยัง repositori ให้เรียกใช้ `tgwitness guide` เพื่อเปิดคู่มือ บน Windows ให้ใช้ `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` ใน PowerShell
 
+## การตั้งค่าการค้นหาข้อความเต็ม
+
+[การค้นหาข้อความเต็ม](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/) (เวอร์ชันทดลอง) ไม่ต้องการการตั้งค่าใดๆ ดัชนีจะถูกสร้างขึ้นใน เบื้องหลังหลังจากอัปเดต
+
+| ตัวแปรหรือคำสั่ง | ผลลัพธ์ |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | ค่าเริ่มต้น: ดัชนีจะถูกเก็บไว้ใน `search/fulltext.sqlite3` ของแต่ละพื้นที่ทำงาน |
+| `TGWITNESS_FULLTEXT=memory` | ไม่มีไฟล์ดัชนี; ดัชนีจะถูกสร้างใหม่ทุกครั้งที่เริ่มต้น |
+| `TGWITNESS_FULLTEXT=off` | ไม่มีดัชนี; ค้นหาได้เฉพาะข้อความที่ตรงกันเท่านั้น |
+| `tgwitness index status` | บันทึกสถานะของทุกพื้นที่ทำงาน |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | สร้างดัชนีใหม่ทั้งหมดจากบันทึกที่ลงนาม |
+
+การเลือกของผู้ดูแลระบบใน **Journal → Filters → Search index** จะแทนที่ ตัวแปรสำหรับพื้นที่ทำงานนั้น คำสั่งจะค้นหาไดเรกทอรีข้อมูลของระบบติดตั้ง ที่รันคำสั่งนั้น; ในกรณีอื่น ๆ ให้เพิ่ม `--data-dir` ด้วยเส้นทางจาก `tgwitness paths`. เพื่อใช้พจนานุกรมภาษายูเครนแบบเต็ม (ข้อมูล GPL-3.0) ให้ติดตั้ง `pymorphy3-dicts-uk` ใน สภาพแวดล้อม Python ของการติดตั้ง
+
+## การเข้าถึงผ่านบรรทัดคำสั่ง
+
+[บรรทัดคำสั่ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/) (เวอร์ชันทดลอง) จะอ่านไฟล์เก็บถาวรเพื่อค้นหาสคริปต์และเอเจนต์
+
+| ตัวแปร | ผลลัพธ์ |
+| --- | --- |
+| `TGWITNESS_URL` | ที่อยู่ของแผงสำหรับ `tgwitness search`, `context`, `messages`, `stats` และ `export`; ค่าเริ่มต้น `http://127.0.0.1:8787` เมื่อมีการกำหนดโทเคน |
+| `TGWITNESS_MCP_TOKEN` | เก็บโทเค็นการเชื่อมต่อจาก **Integrations → MCP** ซึ่งถูกแชร์กับลูกค้า MCP; `--token-file` อ่านจากไฟล์แทน |
+| `TGWITNESS_DATA` | อ่านไดเรกทอรีข้อมูลโดยตรงเมื่อไม่มี `--data-dir`, URL หรือ token |
+
 ## ตรวจสอบก่อนที่จะดำเนินการ
 
 คำสั่งหนึ่งบรรทัดนี้ใช้ HTTPS เพื่อตรวจสอบความน่าเชื่อถือของสคริปต์เริ่มต้น สคริปต์ดังกล่าวจะตรวจสอบ SHA-256 และลายเซ็น RSA ของโครงการบนแอปพลิเคชันและข้อจำกัดก่อน การติดตั้ง คุณยังสามารถดาวน์โหลดและตรวจสอบสคริปต์เริ่มต้นก่อนได้

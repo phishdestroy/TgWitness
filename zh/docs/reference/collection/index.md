@@ -8,6 +8,8 @@ TgWitness 记录已连接的 Telegram 账户所观察到的内容。该日志保
 
 ## 从登录到日志
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 流程图 · 授权用户账户 → 选择可访问的群组和频道; 选择可访问的群组和频道 → 保存事件和附件设置; 保存事件和附件设置 → 开始监控; 开始监控 → 接收来自活跃客户端的更新; 接收来自活跃客户端的更新 → 应用来源与事件政策; 应用来源与事件政策 → 追加一份经过签名的观察记录; 追加一份经过签名的观察记录 → 查看或导出日志; 追加一份经过签名的观察记录 → 处理队列中的任何附件; 处理队列中的任何附件 → 附上下载结果 · 授权用户账户 · 选择可访问的群组和频道 · 保存事件和附件设置 · 开始监控 · 接收来自活跃客户端的更新 · 应用来源与事件政策 · 追加一份经过签名的观察记录 · 查看或导出日志 · 处理队列中的任何附件 · 附上下载结果
 
 **图表转为文本**

@@ -74,9 +74,9 @@ W sekcji „Źródła” dostępne są przełączniki dla poszczególnych kont, 
 | Działania administratora | Odpowiednie dostarczone aktualizacje oraz migawka dziennika administratora w eksportach czatów z kanałów/supergrup | Funkcja eksportu odczytuje dziennik, o ile jest on dostępny dla konta administratora odpowiedzialnego za eksport; ciągłe sprawdzanie dziennika administratora wykracza poza ten proces. |
 | Załącznik | Opis wersji oryginalnej, liczba pobranych bajtów/SHA-256 oraz wyniki prób | Utracony plik może okazać się niemożliwy do odzyskania; najnowsza wersja nie zastępuje poprzedniej. |
 | Historia | Wyraźny zrzut ekranu przedstawiający aktualnie widoczne wiadomości | Nie odtwarza wszystkich zmian ani usuniętych treści |
-| Proces gromadzenia danych | Uruchamianie/zatrzymywanie, sygnał kontrolny, błędy, ustawienia, zakres działania oraz potwierdzenie odbioru programu | Oświadczenie własne, a nie niezależne poświadczenie procesu |
+| Proces gromadzenia danych | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) |
 
-Dane działanie przypisuje się danej osobie wyłącznie wtedy, gdy źródło faktycznie wskazuje tę osobę jako sprawcę. W przeciwnym razie interfejs zgłasza brak przypisania. Nazwy użytkowników i imiona to atrybuty obserwowane, a nie dowód tożsamości w świecie rzeczywistym.
+The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
 
 ## Pojemność i ograniczenia serwisu Telegram
 

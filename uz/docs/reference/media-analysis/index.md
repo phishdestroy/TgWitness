@@ -8,7 +8,7 @@ Mahalliy ishchi yordamida ushlangan tasvirlar va audio materiallarni aniqlang; h
 
 `media.saved` jurnal yozuvini oching, **Ilovani aniqlashni** tanlang, so'ngra **Arxivdan so'rash** bo'limida OCR yoki transkripsiyani tanlang. Ishlov berish qo'lda va mahalliy tarzda amalga oshiriladi. Bulutli media rejimi yoki avtomatik yuklash mavjud emas. Ilova asl baytlari va `media_sha256` o'zgarmasligicha qoladi; aniqlangan matn aniq mashinaviy tan olish deb belgilangan va manba xesh, dvigatel/model versiyasi, til, parametrlar va yakunlanish vaqti bilan alohida saqlanadi. Transkriptlar qaytarilgan vaqt tamg'alarini saqlab qoladi.
 
-Ushbu natijalarni **matnni avtomatik aniqlash** va OCR/transkript filtri yordamida qidiring. Bu alohida hosil ma'lumotlar bo'yicha qidiruv; u mashinaning aniqlashini sukut bo'yicha asl Telegram matniga aylantirmaydi yoki imzolangan voqealarga qo'shmaydi.
+Ushbu natijalarni **tan olingan matn** va OCR/transkript filtri yordamida qidiring, yoki **Jurnal**ning eng yaxshi mos keluvchi qidiruvi manbai sifatida tan olingan matnni tanlang. Ikkalasi ham [xotiradagi indeks](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#recognized-text) orqali so'z shakllariga mos keladi. Bu alohida hosil qilingan ma'lumotlar qidiruvi; u mashinaning tan olishini sukut bo'yicha asl Telegram matniga aylantirmaydi yoki uni imzolangan voqealarga qo'shmaydi.
 
 ## Ixtiyoriy ishchini sozlang
 

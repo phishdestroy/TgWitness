@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/witne
 
 [صادرات و تأیید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) · [اطمینان بالا](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/) · [راهنمای پنل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#extras)
 
-یک گردآورنده دفترچه خود را امضا می‌کند، بنابراین هر کسی که کنترل گردآورنده و کلید آن را در دست داشته باشد، از نظر تئوری می‌تواند دفترچه را بازنویسی یا کوتاه کند و دوباره آن را امضا نماید. یک شاهد این کار را قابل تشخیص می‌کند. این یک فرآیند جداگانه است — یک کانتینر دیگر، یا بهتر بگوییم یک سرور که شخص دیگری آن را اجرا می‌کند — که هر چند دقیقه یک‌بار سرآیند دفترچه ثبت امضا شدهٔ گردآورنده را دریافت می‌کند، آنچه را که دیده با کلید خود امضا می‌کند، آن را در دفترچه ثبت خود نگه می‌دارد و آن را در یک کانال تلگرام منتشر می‌کند.
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 نمودار جریان · جمع‌آور → شاهد (نقطهٔ کنترل امضا شده: تعداد رکوردها + هش سرآیند); شاهد → دفترچه شواهد، کلید شخصی; شاهد → کانال تلگرام (ارسال امضا شده از طریق ربات اختصاصی خود); فایل فشرده شواهد → verify.py; دفترچه شواهد، کلید شخصی → verify.py; کانال تلگرام → verify.py (صادرات تلگرام دسکتاپ یا صفحهٔ t.me/s) · جمع‌آور · شاهد · دفترچه شواهد، کلید شخصی · کانال تلگرام · فایل فشرده شواهد · verify.py · نقطهٔ کنترل امضا شده: تعداد · رکوردها + هش سرآیند · ارسال امضا شده از طریق ربات · اختصاصی خود · صادرات تلگرام دسکتاپ یا · صفحهٔ t.me/s
 
@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/witne
 در هر بازه زمانی (به طور پیش‌فرض ۱۰ دقیقه) شاهد:
 
 1. خودِ سر را بازیابی می‌کند (جمع‌کننده نمی‌تواند آن را جابجا کند یا از آن بگذرد)؛
-2. امضای گردآورنده، کلید ثابت‌شده گردآورنده (`--collector-fingerprint`، یا اولین کلید مشاهده‌شده)، یک شمارش نزولی‌نبوده و یک هِد ثابت‌شده در شمارش ثابت را تأیید می‌کند؛
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. یک رکورد امضا شده را به ژورنال خود ضمیمه می‌کند: `witness.anchor` با وضعیت `ok`، `key_changed`، `rollback` (رکوردهای کمتر از قبل)، `fork` (طول یکسان، هدر متفاوت) یا `invalid` (پاسخ در اعتبارسنجی شکست خورد)، یا `witness.no_response` وقتی گردآورنده پاسخ نداد؛
 4. نتیجه را در حالی که شاهد در حال اجرا است و می‌تواند به API ربات دسترسی داشته باشد، امضا شده و همراه با «بدون پاسخ» در کانال ارسال می‌کند. شناسه پست ثبت می‌شود (`witness.posted`)، یک پست ناموفق نیز (`witness.post_failed`).
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 این امر مستلزم اثر انگشت شاهدی است که به‌طور مستقل نگهداری شده و یک نقطه کنترل تطابق‌دار در انتهای دقیق این خروجی. یک نقطه کنترل که فقط پیشوند قبلی را پوشش می‌دهد ناکافی است. جمع‌آوری را متوقف کنید، اجازه دهید شاهد وضعیت نهایی را مشاهده کند و قبل از نوشتن‌های بیشتر در ژورنال، خروجی را صادر کنید؛ اگر ژورنال تغییر کرد، یک نقطه کنترل دیگر نگهداری کرده و آن وضعیت را صادر کنید. یک نقطه کنترل بعدی به تنهایی نمی‌تواند هش نهایی یک خروجی کوتاه‌تر را تأیید کند. هنگامی که `--channel` نیز ارائه شود، عدم وجود پست‌های ادعا شده یا یک مجموعه تطابق خالی، این بررسی سخت‌گیرانه را ناموفق می‌کند. بدون این پرچم، بررسی‌های یکپارچگی عادی همچنان رکوردهای بدون شاهد را گزارش می‌کنند بدون اینکه آرشیوی را که در غیر این صورت سالم است، رد کنند.
 
-این پرچم، سازگاری با سوابق شاهدی که ارائه و سنجاق شده‌اند را تضمین می‌کند. اپراتور همچنان باید استقلال شاهد را احراز کرده و سوابق آن را به طور جداگانه حفظ کند. این امر صحت پیام، جمع‌آوری کامل یا زمان اجرای اندازه‌گیری‌شده به طور مستقل را تضمین نمی‌کند.
-
-یک ویژه‌گواه آنچه را که گردآورنده در آن زمان‌ها گزارش کرده است نشان می‌دهد و اینکه خروجی‌های بعدی با آن مطابقت دارند. این نشان نمی‌دهد که گردآورنده همه چیز را که تلگرام ارائه کرده ضبط کرده است، یا اینکه محتوای پیام‌ها درست است. ویژه‌گواهی که توسط همان اپراتور روی همان دستگاه اجرا می‌شود، از ویژه‌گواهی که توسط شخص دیگری اجرا شده ضعیف‌تر است.
-
-تنها افزایش تعداد به تنهایی نمی‌تواند تداوم الحاقی صرف را به صورت آنلاین اثبات کند: مقایسه آفلاین باید هر هش پیشوند نگهداری‌شده را با خروجی کامل گردآورنده مطابقت دهد. از کار افتادن شاهد و انتشار ناموفق، بازه‌های زمانی را بدون لنگرهای خارجی رها می‌کند. پست‌های گمشده را می‌توان در دفترچه شاهد نگهداری‌شده گزارش کرد؛ نه یک کانال و نه سروری که توسط همان اپراتور کنترل می‌شود، یک آرشیو ثالث تغییرناپذیر نیست.
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

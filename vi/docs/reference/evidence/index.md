@@ -14,7 +14,7 @@ TgWitness lưu trữ các quan sát trên Telegram có thể nhìn thấy trong 
 | Nội dung tệp ZIP chứa bằng chứng | `manifest.sig` ký vào bản kê khai chuẩn, trong đó liệt kê các giá trị băm của các tệp nội dung | Tệp ZIP đầy đủ, bao gồm tệp manifest và chữ ký |
 | Tệp đính kèm được lưu giữ | Giá trị SHA-256 và số byte trong một sự kiện `media.saved` có chữ ký; băm tệp trong bản kê khai ZIP có chữ ký | Các byte gốc bên trong tệp ZIP đã được xác minh |
 | Checkpoint | Chữ ký Ed25519 trên độ dài sổ ghi chép, băm tiêu đề, khóa công khai và thời gian tạo | Một bản sao độc lập được lưu giữ trước khi có thay đổi gây tranh cãi |
-| Biên lai giao dịch | Các số liệu thu thập được ký riêng biệt; đồng thời cũng được bao gồm trong sự kiện `process.started` đã được ký | Biên bản ghi nhận và sổ nhật ký liên quan; các số liệu được tự báo cáo |
+| Biên lai giao dịch | Signed record of the collector version，source-file hashes and start settings，also included in `process.started` | The receipt，associated journal and the environment evidence for the selected verification mode |
 | Báo cáo dễ đọc: `report.html` và các phần của nó, `report.json`, `report.pdf`, `chat.pdf` | Mỗi tệp có một con dấu Ed25519 trên nội dung của nó; PDF cũng mang theo chữ ký tiêu chuẩn PDF (xem [Báo cáo có thể đọc được](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#readable-reports)) | Tệp nhận được và dấu vân tay khóa đáng tin cậy; tệp ZIP được mô tả trong đó |
 | CSV độc lập | Không có chữ ký mật mã độc lập; chỉ riêng các giá trị băm sự kiện là chưa đủ | Vui lòng sử dụng bản sao chính xác có trong tệp ZIP đã được xác minh để kiểm tra tính toàn vẹn |
 | Ảnh chụp màn hình, bản in hoặc tệp PDF được tạo ra từ trình duyệt | Không có chữ ký của TgWitness trên bản sao | Vui lòng giữ lại gói phần mềm gốc đã được xác minh và ghi chép lại quy trình tạo ra phiên bản phái sinh |
@@ -62,7 +62,7 @@ Bằng chứng đã ký, tệp ZIP bàn giao và tệp ZIP cuộc trò chuyện 
 
 Trong một kênh hoặc siêu nhóm, Telegram đánh số các tin nhắn 1, 2, 3… theo thứ tự. Một bản xuất cuộc trò chuyện liệt kê số đầu tiên và số cuối cùng, số lượng tin nhắn hiện có và mọi dãy số bị thiếu trong `message-ids.json` , bản kê khai và tiêu đề `chat.json` , đồng thời đánh dấu từng khoảng trống ở vị trí tương ứng trong bản ghi. `verify.py` liệt kê lại chúng từ `chat.json` . Một số bị thiếu là tin nhắn mà Telegram không trả về (đã bị xóa trước khi xuất, hoặc không hiển thị với tài khoản); trong các cuộc trò chuyện riêng tư và nhóm cơ bản, các số được chia sẻ chung cho tất cả các cuộc trò chuyện của tài khoản và các khoảng trống không được tính.
 
-Sau khi đọc lịch sử, quá trình xuất dữ liệu sẽ yêu cầu lại Telegram cho từng số còn thiếu, theo thứ tự số (`channels.getMessages`, lên đến 10.000 số). Kết quả nằm trong `message-ids.json` và báo cáo. Câu trả lời trống có nghĩa là Telegram không có tin nhắn nào dưới số đó cho tài khoản này; nó không cho biết tin nhắn đó đã bị xóa hay chưa bao giờ hiển thị trên tài khoản. Nếu tin nhắn Telegram được trả về thì có nghĩa là nó đã bị bỏ sót trong quá trình đọc và được thêm vào tệp xuất, được đánh dấu là `found_on_recheck`.
+After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time； it leaves the cause unspecified．A message returned on recheck is added to the export and marked `found_on_recheck`．
 
 Mỗi báo cáo bắt đầu bằng **. Tóm tắt**: một đoạn văn, sau đó là những gì tài liệu thể hiện và những gì nó không thể hiện (ai đứng sau tài khoản, tính đầy đủ của dữ liệu, các nội dung bị xóa trước khi quan sát, thời gian không có dấu thời gian). Con dấu của trang sẽ chuyển sang màu hổ phách khi trình duyệt đã kiểm tra chữ ký của con dấu, chứ không phải trang: trình duyệt không cung cấp các byte riêng cho trang. Nó chỉ chuyển sang màu xanh lục khi người đọc kéo tệp vào phần kiểm tra ở cuối trang và mọi byte đều khớp, và chỉ khi trang được hiển thị chính là tệp đó; nếu không, nó sẽ chuyển sang màu đỏ.
 
@@ -124,12 +124,41 @@ Mỗi tệp ZIP được ký số đều chứa tệp `coverage.json`; báo cáo
 
 - **Quá trình quan sát diễn ra liên tục từ X đến Y.** Một khoảng thời gian bắt đầu bằng `observation.started` và kết thúc khi có tạm dừng, ngừng hoạt động, mất kết nối Telegram, đăng xuất, quá trình khởi động mà không có bước dừng đúng trình tự, hoặc khi không có bất kỳ bản ghi nào trong hơn ba phút trong quá trình quan sát (các tín hiệu kiểm tra trạng thái được ghi lại mỗi phút, do đó sự im lặng có nghĩa là quá trình đã dừng lại, bị treo hoặc máy tính đã chuyển sang chế độ ngủ). Khi khoảng thời gian giữa các tín hiệu kiểm tra trạng thái được thay đổi trong **phần Cài đặt**, mỗi tín hiệu kiểm tra trạng thái sẽ ghi lại thay đổi này và khoảng thời gian im lặng được phép sẽ là ba khoảng thời gian, không bao giờ ít hơn ba phút.
 - **Danh sách các khoảng trống** liệt kê khoảng thời gian giữa các giai đoạn kèm theo lý do. Một khoảng trống vẫn còn tồn tại tại bản ghi cuối cùng sẽ được đánh dấu là `not_resumed_by_last_record`.
-- **ID tin nhắn không được ghi nhận.** Đối với các kênh và siêu nhóm, nơi số lượng tin nhắn được tính theo cuộc trò chuyện, các ID bị thiếu giữa các ID đã ghi nhận sẽ được liệt kê dưới dạng khoảng. Chúng được báo cáo là không*được ghi nhận* — do đã bị xóa, chưa bao giờ được gửi đi hoặc nằm ngoài lịch sử đã lưu — chứ không bao giờ được ghi là đã bị xóa. Các cuộc trò chuyện riêng tư và nhóm thông thường sử dụng chung một dãy số ID trên toàn tài khoản, do đó các khoảng trống ở đó không có ý nghĩa gì và không được liệt kê.
+- **ID tin nhắn không được ghi nhận.** Đối với các kênh và siêu nhóm, nơi số tin nhắn được tính theo cuộc trò chuyện, các ID bị thiếu giữa các ID đã ghi nhận sẽ được liệt kê dưới dạng khoảng. Chúng được báo cáo là không*được ghi nhận* — đã bị xóa, chưa bao giờ được gửi hoặc nằm ngoài lịch sử đã lưu — chứ không bao giờ được ghi là đã bị xóa. Các cuộc trò chuyện riêng tư và nhóm thông thường chia sẻ một chuỗi ID chung cho toàn tài khoản, do đó các khoảng trống bên trong một cuộc trò chuyện như vậy không có ý nghĩa gì và không được liệt kê ở đó.
 - Các thông báo về khoảng trống ở cấp độ cuộc trò chuyện (ví dụ: Telegram yêu cầu khôi phục dữ liệu bị thiếu trong một kênh) được tính là các ghi chú; chúng không làm gián đoạn phạm vi ghi lại toàn bộ.
+
+### Số tin nhắn bị thiếu (`gap_summary`)
+
+**Xem trước.** `coverage.json` → `gap_summary` đo lường các số mà Telegram đã gán và công cụ thu thập này chưa từng ghi nhận. Telegram đánh số tin nhắn một lần cho mỗi kênh hoặc siêu nhóm, và một lần cho mỗi tài khoản trên các cuộc trò chuyện riêng tư, bot và nhóm thông thường. Một số nằm giữa hai tin nhắn được quan sát có thể đã được quan sát hoặc bị thiếu; một khoảng liên tục là một khẳng định chắc chắn rằng mọi tin nhắn được đánh số trong khoảng đó đều đã được quan sát. Một khoảng trống không chỉ ra bất kỳ đối tượng nào cũng như không nêu lý do.
+
+| Lĩnh vực | Ý nghĩa |
+| --- | --- |
+| `status` | `on`, hoặc `off` khi được tắt trong **mục Cài đặt → Phân tích khoảng trống** |
+| `parameters` | Các tham số đã tạo ra kết quả, để có thể lặp lại quá trình này |
+| `chats[]` | Mỗi kênh hoặc siêu nhóm tương ứng với một mục, mỗi mục được đánh số riêng biệt |
+| `account` | Danh sách các cuộc trò chuyện riêng tư, bot và nhóm thông thường trên toàn tài khoản |
+| `status` (theo từng chuỗi) | `applicable`, hoặc `not_applicable` với `reason` |
+| `observed_from`, `observed_to`, `span` | Số đầu tiên và số cuối cùng được quan sát cùng với kích thước của phạm vi |
+| `observed`, `observed_without_content` | Các số liệu quan sát được; những số liệu chỉ được biết thông qua bản ghi xóa hoặc kiểm tra lại |
+| `missing`, `density`, `gap_ranges`, `largest_gap` | Số lần chưa từng được quan sát, tỷ lệ phần trăm của chúng trong phạm vi, số lần chạy, lần chạy dài nhất |
+| `clusters[]` | Các lỗ hổng được liệt kê: `low`, `high`, `missing`, cùng với các số quan sát liền kề `after` / `before` cùng với thời gian quan sát của chúng |
+| `service_estimate` | Chỉ khi được kích hoạt: số lượng số điện thoại thiếu sẽ là tin nhắn dịch vụ theo tỷ lệ quan sát được. Không bao giờ trừ đi từ `missing` |
+
+Tính hợp lệ được xác định dựa trên nhật ký, không bao giờ được giả định:
+
+- **Các kênh và siêu nhóm** được đo lường theo từng cuộc trò chuyện, bao gồm cả khi xuất dữ liệu từ các cuộc trò chuyện đã chọn. Các bản ghi được người gửi chọn sẽ được sử dụng để thực hiện phép đo `not_applicable`.
+- **Dãy tin nhắn trên toàn tài khoản** chỉ được tính từ tin nhắn đầu tiên đến tin nhắn cuối cùng được nhận trong thời gian chế độ thu thập toàn bộ tài khoản đang hoạt động và bao gồm các cuộc trò chuyện riêng tư, bot, nhóm thông thường và các tin nhắn của chính tài khoản đó, không loại trừ bất kỳ cuộc trò chuyện nào (`scope.changed`). Các số được chỉ định bởi `deletion.unscoped` được tính là đã quan sát được mà không bao gồm nội dung. Việc xuất hoặc chuyển giao các cuộc trò chuyện được chọn không thể đo lường được điều này. Nếu chế độ thu thập toàn bộ tài khoản đã được tắt và bật lại, một ghi chú sẽ cho biết rằng các số được sử dụng trong khoảng thời gian đó sẽ xuất hiện dưới dạng khoảng trống.
+- Các tin nhắn dịch vụ là các bản ghi nhật ký có số thứ tự riêng, do đó chúng tự động lấp đầy các khoảng trống của chính mình; ước tính tùy chọn chỉ mang tính chất bối cảnh.
+
+`verify.py` recomputes `gap_summary` from `events.jsonl` with the parameters in the signed `coverage.json` member (defaults for older archives) and prints the account-wide line in its coverage summary. The archive's `get_capture_status` (MCP and the command line) returns the same measurement for the chats an access may read; the account-wide sequence only to access covering the whole workspace.
+
+Repeated observations of one service message count once，and the account service estimate uses only numbers inside the measured range．An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled；older records without that information cannot establish this condition．Stopped observation does not extend the measured range，and resuming it is noted．The live archive query has a time budget，including its database scan，and marks an unfinished measurement as partial．
+
+Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences)． These numbers describe observations；they do not identify a deletion actor or establish why a number is absent．
 
 Khi Telegram ngừng chấp nhận tài khoản, bản ghi `coverage.gap` kết thúc quá trình giám sát sẽ chứa `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` hoặc `not_authorized`) và lỗi Telegram; `verify.py` chỉ ra nguyên nhân khiến giai đoạn này kết thúc.
 
-Phạm vi ghi nhận mô tả những nội dung mà công cụ thu thập này đã ghi lại. Điều này không phải là bằng chứng cho thấy Telegram đã gửi mọi bản cập nhật trong suốt một khoảng thời gian liên tục.
+Coverage combines recorded observation periods，interruptions and message outcomes． Assess it together with the selected chats，period and attachment policy；continuous operation alone does not establish complete delivery of Telegram updates．
 
 ## Người sản xuất
 
@@ -157,17 +186,27 @@ Một sổ nhật ký chứng cứ (`tgwitness-witness-v1`) cùng các bài đă
 
 Tệp manifest.json bao gồm định dạng, thời gian xuất, khóa công khai, dấu vân tay, độ dài nhật ký, băm đầu, phạm vi, nhà sản xuất, các giới hạn và giá trị SHA-256 của mọi thành phần nội dung ngoại trừ chính các thành phần `manifest.json` và `manifest.sig`. Tệp manifest.sig là chữ ký Ed25519 mã hóa base64 trên tệp JSON manifest chuẩn. Công cụ xác minh sẽ từ chối các thành phần bất thường hoặc thiếu sót, tên trùng lặp, tệp bị hỏng, chuỗi/dãy bị gián đoạn, chữ ký không hợp lệ và sự không khớp với điểm kiểm tra được cung cấp. Công cụ này không bao giờ trích xuất đường dẫn lưu trữ. Công cụ này giới hạn tổng kích thước khai báo sau khi giải nén ở mức 4 GiB; tệp `--max-gib N` cho phép các tệp lưu trữ có kích thước lớn hơn được tạo ra nhờ giới hạn **tham số** được nâng cao.
 
-Vui lòng lấy mã xác minh từ một bản tải xuống đáng tin cậy hoặc bản sao độc lập đã được kiểm duyệt. Mã xác minh nằm trong một kho lưu trữ không đáng tin cậy là tài liệu có thể thực thi do tác giả của kho lưu trữ đó cung cấp; sự hiện diện của nó chỉ nhằm mục đích thuận tiện cho việc di chuyển, chứ không phải là một điểm neo tin cậy độc lập.
+Run verification from your installed TgWitness version or a reviewed checkout． The copy included in an archive supports portable use；check that copy against your trusted installation before executing it．
 
-Một điểm kiểm tra sẽ ký vào một tuyên bố chứa khóa công khai, độ dài nhật ký, băm đầu (head hash) và thời gian tạo. Người xác minh có thể kiểm tra xem một bản lưu trữ sau đó có chứa tiền tố tương tự hay không. Hãy lưu giữ một điểm kiểm tra bên ngoài bộ thu thập trước khi xảy ra thay đổi có tranh chấp: một kẻ tấn công kiểm soát cả bản lưu trữ lẫn điểm kiểm tra có thể thay thế cả hai.
+A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix．Retain the checkpoint outside the collector，so later verification compares the archive with a reference held separately from it．
 
 ## Phạm vi xác minh
 
-Các chữ ký xác định khóa của người thu thập và bảo vệ tài liệu đã lưu. Gắn dấu vân tay của nó một cách độc lập để liên kết khóa đó với người thu thập dự kiến. Các bản cập nhật của Telegram là đầu vào cho quá trình thu thập; TgWitness ký xác nhận các quan sát của mình về những bản cập nhật đó. Các chữ ký này không phải là chữ ký do Telegram hoặc tác giả tin nhắn phát hành.
+Verification checks the archive and the collection mode used to produce it．Choose the mode whose trust boundary matches the case，then retain its verification inputs．
 
-Một điểm kiểm tra được lưu giữ hoặc bản ghi chứng cứ sẽ phát hiện tiền tố nhật ký trước đó đã bị thay đổi, bao gồm cả trường hợp thay thế được ký bằng khóa thu thập dữ liệu đã sao chép. Các bản ghi được tạo ra trước điểm kiểm tra độc lập đầu tiên của chúng cần có sự xác nhận từ nguồn: người nắm giữ khóa thu thập dữ liệu có thể ký vào tài liệu mới. Giữ quyền truy cập vào khóa ký được kiểm soát chặt chẽ và lưu giữ các tham chiếu riêng biệt.
+| Collection mode | What the verifier checks | Verification inputs and trust boundary |
+| --- | --- | --- |
+| Local workspace | Record signatures，hash chain，manifest and attachment bytes | Independently retained collector fingerprint；the host administrator controls the local signing key |
+| Local workspace with an independent witness | The archive checks plus agreement with an earlier journal prefix retained by the witness | Separately trusted witness key and records；the checkpoint binds the prefix already observed |
+| [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity | Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow |
+| [Cloud deployment](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/) | Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record | Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider |
+| [Intel TDX confidential VM](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status，binding to the collector statement，compose and OS measurements | Intel trust chain and expected deployment measurements；retain the results of every required TDX check |
 
-Đánh giá khả năng hiển thị và khả năng gửi tin nhắn của tài khoản bằng cách sử dụng hồ sơ phạm vi phủ sóng và các thử nghiệm có kiểm soát. Sử dụng dấu thời gian bên ngoài đã được xác minh để xác định mốc thời gian độc lập. ID người gửi xác định một tài khoản Telegram; liên kết nó với một cá nhân thông qua quá trình điều tra của bạn. Biên lai chương trình và kiểm tra đám mây mô tả các số liệu do Collector báo cáo và cấu hình triển khai. Xem [kết quả xác thực](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/) về hành vi được đo lường và phạm vi của nó.
+In sealed acquisition，the approved collector receives data through an authenticated Telegram connection inside the verified environment．Attestation binds the archive to that execution，so verification covers acquisition as well as later file integrity． This relies on the approved code and the platform trust chain listed above． GitHub capture verification requires a session created inside the run and rejects imported-session captures．
+
+The run receipt records the collector version，file hashes and startup settings．GitHub provenance and TDX measurements provide the environment checks；the [validation record](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/) identifies tested configurations．
+
+TgWitness signs the observations it collects；Telegram and message authors do not issue these signatures．In a local workspace，material created before the first independent checkpoint still depends on the collector and its key holder．Coverage records describe the selected scope and collection outcomes，while verified external timestamps anchor the committed archive or journal boundary in time．
 
 ## Tệp đính kèm
 
@@ -181,9 +220,9 @@ Việc xuất toàn bộ cuộc trò chuyện sẽ lưu các tệp đính kèm t
 
 Một tác vụ phương tiện và sự kiện tin nhắn tương ứng được ghi lại trong một giao dịch duy nhất. Tác vụ này lưu trữ mô tả tin nhắn TL gốc; quan sát có chữ ký liên kết mã SHA-256, tài khoản và chính sách kích thước của nó. Quá trình khôi phục sẽ xác minh liên kết đó trước khi tải xuống. Hệ thống không bao giờ truy xuất tin nhắn hiện tại mà sẽ âm thầm thay thế bằng tệp đính kèm mới hơn. Các tác vụ bị gián đoạn sẽ được thử lại, trong khi lỗi vĩnh viễn vẫn là một kết quả rõ ràng.
 
-Mỗi không gian làm việc đều có sổ nhật ký và danh tính ký riêng. Sự kiện `process.started` bao gồm ID phiên chạy, thời gian theo đồng hồ cục bộ, phiên bản các thành phần phụ thuộc, băm tệp nguồn, tài khoản/phạm vi ban đầu, và cài đặt ghi lại. Các tín hiệu kiểm tra trạng thái (heartbeats) bao gồm ID phiên chạy, thời gian đơn điệu và trạng thái hàng đợi. Biên nhận quá trình cũng có thể được tải xuống dưới dạng một bản tuyên bố được ký riêng biệt. Các số liệu về tệp là do hệ thống tự báo cáo và không phải là chứng nhận phần cứng đáng tin cậy.
+Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement．For verification of the execution environment，pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope)．
 
-Các điểm kiểm tra tự động được lưu giữ cục bộ khi khởi động, cứ sau năm phút trong quá trình theo dõi (**Tham số → Điểm kiểm tra có chữ ký mỗi**) và khi dừng hoạt động theo trình tự. Quá trình xác minh khi khởi động và xuất dữ liệu sẽ so sánh nhật ký với điểm kiểm tra cục bộ mới nhất được lưu giữ. Điều này có thể phát hiện tình trạng khôi phục cơ sở dữ liệu khi điểm kiểm tra vẫn còn tồn tại; tuy nhiên, người vận hành kiểm soát cả hai vẫn có thể thay thế cả hai. Việc lưu trữ độc lập và các dấu thời gian đáng tin cậy từ bên ngoài vẫn là các yêu cầu riêng biệt.
+Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives．Independent retention keeps that reference available outside the workspace；a verified external timestamp additionally anchors it in time．
 
 Sau khi khởi động lại, vị trí cập nhật Telegram đã lưu sẽ được khôi phục (`catch_up_from` trong `observation.started`) và hệ thống sẽ yêu cầu các bản cập nhật bị bỏ lỡ. Quá trình kiểm tra lại định kỳ sẽ ghi lại `message.recovered` đối với các tin nhắn bị bỏ lỡ và `message.missing_on_recheck` khi Telegram không còn trả về tin nhắn đã lưu; trường hợp sau không phải là thông báo xóa và không nêu tên người xóa cũng như thời gian.
 

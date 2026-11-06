@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel
 
 ہر اسکرین کیا کرتی ہے، یہ دستخط شدہ جرنل میں کیا لکھتی ہے اور تفصیلی رہنما کہاں ہے۔ پینل ایک وقت میں ایک ورک اسپیس دکھاتا ہے: ایک ٹیلیگرام اکاؤنٹ اپنے ذرائع، جرنل اور دستخطی کلید کے ساتھ۔ سائیڈبار کے اوپر موجود سلیکٹر ورک اسپیسز کو تبدیل کرتا ہے۔ ایڈریس ورک اسپیس کو لے کر جاتا ہے (`?ws=…`)؛ جبکہ پتہ، سلیکٹر اور لوڈ شدہ اکاؤنٹ میں اختلاف ہو تو، ایکشنز بلاک رہتے ہیں۔
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## اپنا راستہ تلاش کریں
 
 روزانہ کے سیکشنز سائڈبار کے اوپر ہیں، **اکاؤنٹس** **ورک اسپیس** کے نیچے ہے، اور باقی سب **مزید ٹولز اور ترتیبات** کے نیچے ہیں۔ ٹاپ بار میں موجود **انٹرفیس کی سطح** سوئچ یہ طے کرتا ہے کہ کتنے سیکشنز ظاہر ہوں:

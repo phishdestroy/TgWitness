@@ -4,6 +4,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/verif
 
 Uji coba Telegram secara langsung, pemeriksaan otomatis, pemeriksaan browser, dan hal-hal yang masih belum terverifikasi.
 
+Each result below applies to its recorded revision and environment. The [current capability matrix](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) separates implementation, published downloads and remaining qualification.
+
+## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+
+The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+
+- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
+- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
+- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
+- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
+- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+
+An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+
 ## Penerapan Phala Cloud langsung · 4 November 2026
 
 `--provider phala --quick-tunnel` dijalankan pada **Phala Cloud** yang sebenarnya (`tdx.small`, wilayah US-WEST-1) dengan kunci API Phala Cloud dari ruang kerja kosong, ntfy.sh asli, GitHub, dan Intel PCS. CVM menginstal commit `df7d860c` (v0.8.1); proses deploy, verify, dan destroy dijalankan dari baris perintah dengan perbaikan di bawah ini. Tujuh CVM menghabiskan biaya sekitar 1,9 sen AS secara total.
@@ -153,10 +167,16 @@ Perintah: `python tools/check_capacity.py --events 10000 --chats 100`
 
 Pengukuran ini mencakup jalur perekaman/ekspor serial lokal pada host Windows ini. Pengukuran ini tidak mencakup pengiriman MTProto, akun bersamaan, pembatasan kecepatan Telegram, media, beban kerja jangka panjang, atau jumlah obrolan nyata yang dijamin. Pengukuran ini dilakukan sebelum alat cap waktu offline final, yang tidak mengubah jalur pesan yang diukur.
 
+## Pencarian teks lengkap pada satu juta pesan · 5 November 2026
+
+Perintah: `python tools/bench_fulltext.py --messages 1000000 --work <empty directory>`
+
+Jurnal bertanda deterministik berisi 1.000.000 pesan sintetis dalam 200 obrolan (bentuk kata dalam bahasa Rusia, Ukraina, Inggris, Mandarin, Jepang, tautan, dan handle) diindeks dalam 71 detik; indeks tersebut memakan ruang 58 MiB di samping jurnal berukuran 1,50 GiB. Pencarian yang paling cocok memakan waktu 9 hingga 190 ms (median), dibandingkan dengan 2,4 hingga 3,2 detik untuk pencarian substring sebelumnya. Hasil lengkap, perangkat keras, dan batasan: [Pencarian teks lengkap](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#benchmark). `tools/test_fulltext.py` juga memverifikasi arsip yang ditandatangani yang dibuat sebelum pencarian teks lengkap (`tools/fixtures/evidence-before-fulltext.zip`) menggunakan verifikator saat ini, serta arsip saat ini dengan verifikator milik arsip tersebut sendiri `verify.py`.
+
 ## Kualifikasi lainnya
 
 Jurnal langsung yang disimpan ini mencatat pengumpulan yang sebenarnya, pengeditan, pemberitahuan penghapusan, lampiran, pemeriksaan ulang, dan penanganan batasan laju. Jurnal ini tidak mencatat pengiriman yang lengkap atau matriks terkontrol mengenai visibilitas peran, pihak yang bereaksi, FloodWait yang berkepanjangan, pemblokiran akun, dan pemulihan gangguan jaringan/proses. Penerbitan token QR tetap terpisah dari konfirmasi QR seluler yang telah diselesaikan.
 
-Pembuatan/pengoperasian Docker, instalasi di Linux/macOS, beban tinggi yang berkelanjutan, tinjauan keamanan independen, tanggapan TSA yang benar-benar independen, validasi pencabutan/pengarsipan sertifikat, dan sertifikasi forensik tetap berada di luar kualifikasi yang tercatat. Penyimpanan status MTProto dan fitur catch-up telah diimplementasikan; replay atomik yang tahan lama masih belum terwujud. Pengumpulan log admin, daftar reaktor tambahan, dan polling singkat prioritas tetap menjadi fitur terpisah. Lihat [penerimaan langsung](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) untuk matriks kualifikasi terkontrol.
+Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
 
 Tangkapan layar dan bukti transaksi lokal yang terperinci terdapat di bawah folder test-results/ (diabaikan oleh Git). Tangkapan layar publik di folder docs/assets/ hanya berisi data demonstrasi fiktif.

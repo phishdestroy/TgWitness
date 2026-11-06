@@ -15,6 +15,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | message_content.py | 可觀察的訊息比對，不包含傳輸存取元資料 |
 | workers.py | 在執行取消清理操作前，請先等待匯出檔案工作程序完成 |
 | store.py | WAL 交易、有序事件鏈、查詢篩選器、運作設定 |
+| fulltext.py | 衍生出的全文索引（詞形變體、BM25），與簽名日誌的開頭部分綁定；絕不外匯 |
 | security.py | 建立私人檔案、加密儲存庫、Ed25519 簽名、單一進程鎖定 |
 | evidence.py | 完整日誌匯出、衍生檔、檢查點、附件驗證 |
 | verify.py | 獨立運作、唯讀驗證器（標準函式庫 + 加密技術）：存檔、涵蓋範圍、證據日誌及頻道貼文、個人檔案 |

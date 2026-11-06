@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/witne
 
 [Експорт та перевірка](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/) · [Високий рівень надійності](https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/) · [Посібник з панелей](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#extras)
 
-Колектор підписує власний журнал, тому той, хто контролює колектор та його ключ, може, в принципі, переписати або скоротити журнал і підписати його знову. Witness робить це видимим. Це окремий процес — інший контейнер, а краще сервер, який управляє хтось інший, — який кожні кілька хвилин отримує завірену заголовок журналу колектора, підписує те, що побачив, своїм власним ключем, зберігає це у своєму журналі та публікує у каналі Telegram.
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 Блок-схема · Collector → Witness (підписаний контрольний пункт: кількість записів + хеш заголовка); Witness → Журнал Witness, власний ключ; Witness → Канал у Telegram (підписаний допис через власного бота); ЗIP-архів доказів → verify.py; Журнал Witness, власний ключ → verify.py; Канал у Telegram → verify.py (Експорт з Telegram Desktop або сторінка «t.me/s») · Collector · Witness · Журнал Witness, власнийключ · Канал у Telegram · ЗIP-архів доказів · verify.py · підписаний контрольний · пункт: кількість записів + · хеш заголовка · підписаний допис через · власного бота · Експорт з Telegram Desktop · або сторінка «t.me/s»
 
@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/witne
 Кожного інтервалу (за замовчуванням — кожні 10 хвилин) TgWitness:
 
 1. завантажує сам заголовок (колектор не може його додавати або пропускати);
-2. перевіряє підпис колектора, закріплений ключ колектора (`--collector-fingerprint`, або перший виявлений ключ), незменшуваний лічильник та незмінний заголовок при незмінному лічильнику;
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. додає підписаний запис до власного журналу: `witness.anchor` зі статусом `ok`, `key_changed`, `rollback` (менше записів, ніж раніше), `fork` (така сама довжина, інший заголовок) або `invalid` (відповідь не пройшла перевірку), або `witness.no_response`, коли колектор не відповів;
 4. публікує результат у каналі, підписаний, включаючи «немає відповіді», поки TgWitness працює та має доступ до Bot API. Ідентифікатор публікації записується (`witness.posted`), так само як і невдала публікація (`witness.post_failed`).
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 Для цього необхідний незалежно збережений відбиток свідка та відповідна контрольна точка саме в кінці цього експорту. Контрольна точка, що охоплює лише попередній префікс, є недостатньою. Призупиніть збір даних, дайте свідку можливість перевірити кінцевий стан і виконайте експорт до подальшого запису в журнал; якщо журнал зміниться, збережіть ще одну контрольну точку та експортуйте цей стан. Один лише пізніший контрольний пункт не може підтвердити кінцевий хеш коротшого експорту. Коли також надається `--channel`, відсутність заявлених публікацій або порожній набір збігів не проходять цю сувору перевірку. Без цього прапорця звичайні перевірки цілісності все одно повідомляють про записи без свідків, не відхиляючи при цьому архів, який в іншому випадку є цілим.
 
-Цей прапорець забезпечує узгодженість із наданими, закріпленими записами свідка. Оператор все одно повинен підтвердити незалежність свідка та зберігати його записи окремо. Він не підтверджує правдивість повідомлень, повноту збору даних або незалежно виміряний час роботи.
-
-«Свідок» показує, що саме збирач даних зафіксував у той чи інший момент, і що пізніші експортовані дані збігаються з цим. Він не показує, що збирач зафіксував усе, що було доставлено Telegram, або що зміст повідомлень є правдивим. «Свідок», запущений тим самим оператором на тій самій машині, є менш надійним, ніж той, що запущений кимось іншим.
-
-Саме по собі збільшення кількості записів не може підтвердити безперервність онлайн-зберігання з можливістю лише додавання: під час офлайн- порівняння кожен збережений префіксний хеш повинен збігатися з повним експортом колектора. Час простою «Witness» та невдалі публікації залишають проміжки без зовнішніх орієнтирів. Про відсутні публікації можна повідомляти на основі збереженого журналу «Witness»; ані канал, ані сервер, що контролюються тим самим оператором, не є незмінним стороннім архівом.
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

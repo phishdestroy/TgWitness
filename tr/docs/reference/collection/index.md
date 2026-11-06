@@ -8,6 +8,8 @@ TgWitness, bağlı bir Telegram hesabının gözlemlediklerini kaydeder. Günlü
 
 ## Girişten günlüğe
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 Akış şeması · Bir kullanıcı hesabını yetkilendirin → Erişilebilir grupları ve kanalları seçin; Erişilebilir grupları ve kanalları seçin → Olay ve ek ayarlarını kaydet; Olay ve ek ayarlarını kaydet → Gözlemi başlat; Gözlemi başlat → Aktif müşteriden güncellemeleri alın; Aktif müşteriden güncellemeleri alın → Kaynak ve olay politikasını uygulayın; Kaynak ve olay politikasını uygulayın → İmzalı bir gözlem ekleyin; İmzalı bir gözlem ekleyin → Günlüğü inceleyin veya dışa aktarın; İmzalı bir gözlem ekleyin → Kuyrukta bekleyen ekleri işleme; Kuyrukta bekleyen ekleri işleme → İndirme sonucunu ekleyin · Bir kullanıcı hesabınıyetkilendirin · Erişilebilir gruplarıve kanalları seçin · Olay ve ek ayarlarınıkaydet · Gözlemi başlat · Aktif müşteridengüncellemeleri alın · Kaynak ve olaypolitikasını uygulayın · İmzalı bir gözlemekleyin · Günlüğü inceleyin veyadışa aktarın · Kuyrukta bekleyenekleri işleme · İndirme sonucunuekleyin
 
 **Diyagramın metin olarak gösterimi**

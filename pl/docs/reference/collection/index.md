@@ -8,6 +8,8 @@ TgWitness rejestruje to, co obserwuje podłączone konto w aplikacji Telegram. D
 
 ## Od logowania do dziennika
 
+For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+
 Schemat blokowy · Autoryzacja konta użytkownika → Wybierz dostępne grupy i kanały; Wybierz dostępne grupy i kanały → Zapisz ustawienia zdarzeń i załączników; Zapisz ustawienia zdarzeń i załączników → Rozpocznij obserwację; Rozpocznij obserwację → Otrzymuj aktualizacje od aktywnego klienta; Otrzymuj aktualizacje od aktywnego klienta → Należy stosować zasady dotyczące źródeł i zdarzeń; Należy stosować zasady dotyczące źródeł i zdarzeń → Dodaj podpisane zgłoszenie; Dodaj podpisane zgłoszenie → Przeglądaj lub eksportuj dziennik; Dodaj podpisane zgłoszenie → Przetwarzanie wszelkich załączników znajdujących się w kolejce; Przetwarzanie wszelkich załączników znajdujących się w kolejce → Proszę dołączyć wynik pobierania · Autoryzacja kontaużytkownika · Wybierz dostępne grupyi kanały · Zapisz ustawieniazdarzeń i załączników · Rozpocznij obserwację · Otrzymuj aktualizacjeod aktywnego klienta · Należy stosować zasadydotyczące źródeł izdarzeń · Dodaj podpisanezgłoszenie · Przeglądaj lubeksportuj dziennik · Przetwarzaniewszelkich załącznikówznajdujących się wkolejce · Proszę dołączyć wynikpobierania
 
 **Schemat w formie tekstowej**

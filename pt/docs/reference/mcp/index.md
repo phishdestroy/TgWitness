@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/mcp/
 
 Conecte um cliente MCP a espaços de trabalho e chats selecionados com acesso temporário e revogável.
 
-Conecte um cliente analista aos workspaces e chats selecionados. O TgWitness serve **Streamable HTTP em `/mcp` no processo do painel**. Cada conexão possui seu próprio token, validade e ferramentas permitidas. O MCP não pode enviar mensagens do Telegram, alterar configurações ou modificar o diário assinado.
+Conecte um cliente de análise a espaços de trabalho e chats selecionados. O TgWitness disponibiliza **Streamable HTTP em `/mcp` no processo do painel**. Cada conexão possui seu próprio token, prazo de validade e ferramentas permitidas. O MCP não pode enviar mensagens do Telegram, alterar configurações nem modificar o diário assinado. As mesmas conexões funcionam com a [linha de comando](https://phishdestroy.github.io/TgWitness/pt/docs/reference/cli/).
 
 [Guia de fluxo de trabalho](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -74,11 +74,13 @@ Um endereço `*.trycloudflare.com` é temporário. Quando uma reinicialização 
 | --- | --- |
 | `list_workspaces` | Workspaces concedidos |
 | `list_chats` | Chats concedidos |
-| `search_messages` | Texto de mensagens salvas dentro do período selecionado |
+| `search_messages` | Texto das mensagens salvas dentro do período selecionado; `ranked=true` utiliza [pesquisa de texto completo](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/) (formas de palavras, melhores correspondências primeiro, `next_offset` paginação) |
 | `get_message_versions` | Versões capturadas e observações de exclusão |
 | `get_message_context` | IDs de mensagens capturadas próximas |
 | `get_journal_event` | Um registro higienizado com sua referência de origem |
-| `get_capture_status` | Estado da coleta e registros de cobertura permitidos |
+| `get_capture_status` | Estado da coleta, registros de cobertura permitidos e `gap_summary`: números de mensagens nunca observadas, por canal ou supergrupo e para a sequência de toda a conta ([detalhes](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#missing-message-numbers-gap_summary)); escolha um chat para ver as lacunas listadas |
+| `get_activity_stats` | Mensagens por hora UTC e dia da semana, dias de pico, proporções de edições e exclusões, remetentes, domínios e `@handles`, com cobertura ([detalhes](https://phishdestroy.github.io/TgWitness/pt/docs/reference/cli/#activity-statistics)) |
+| `export_messages` | Apenas linha de comando, não selecionado por padrão: transmite as observações salvas como JSON Lines ([detalhes](https://phishdestroy.github.io/TgWitness/pt/docs/reference/cli/#export)); não disponível via MCP |
 
 `tools/list` retorna apenas as ferramentas concedidas àquela conexão. Chamadas para outras ferramentas são recusadas. Ferramentas de contexto de grupo, episódio, terminologia e cadeia de respostas não são oferecidas nesta compilação; o backend separado de pacote de contexto delas não está incluído.
 

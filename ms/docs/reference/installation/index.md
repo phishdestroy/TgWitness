@@ -44,6 +44,30 @@ Tetapkan `TGWITNESS_INSTALL_DIR` untuk memilih folder lain. Versi terpasang dan 
 
 Setiap pemasangan termasuk **START-HERE.html** dan **START-HERE.txt**, dengan laluan tempatan, arahan dan pautan ke repositori. Jalankan `tgwitness guide` untuk membuka panduan. Pada Windows, gunakan `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` dalam PowerShell.
 
+## Tetapan carian teks penuh
+
+[Carian penuh teks](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/) (pratinjau) tidak memerlukan sebarang tetapan. Indeksnya dibina di latar belakang selepas kemas kini.
+
+| Pembolehubah atau arahan | Kesan |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | Default: indeks disimpan dalam `search/fulltext.sqlite3` daripada setiap ruang kerja |
+| `TGWITNESS_FULLTEXT=memory` | Tiada fail indeks; indeks dibina semula setiap kali permulaan |
+| `TGWITNESS_FULLTEXT=off` | Tiada indeks; hanya carian teks tepat |
+| `tgwitness index status` | Indekskan keadaan setiap ruang kerja |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | Bina semula setiap indeks daripada jurnal yang disahkan |
+
+Pilihan pentadbir dalam **Jurnal → Penapis → Indeks carian** mengimbangi pembolehubah untuk ruang kerja tersebut. Perintah mencari direktori data pemasangan yang menjalankannya; di tempat lain, tambah `--data-dir` dengan laluan dari `tgwitness paths`. Untuk kamus Ukraine penuh (data GPL-3.0), pasang `pymorphy3-dicts-uk` dalam persekitaran Python pemasangan.
+
+## Akses baris perintah
+
+[Baris](https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/) [perintah](https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/) (pratinjau) membaca arkib untuk skrip dan ejen.
+
+| Penyata | Kesan |
+| --- | --- |
+| `TGWITNESS_URL` | Alamat panel untuk `tgwitness search`, `context`, `messages`, `stats` dan `export`; lalai `http://127.0.0.1:8787` apabila token ditetapkan |
+| `TGWITNESS_MCP_TOKEN` | Token sambungan arkib daripada **Integrations → MCP**, dikongsi dengan klien MCP; `--token-file` membacanya daripada fail sebaliknya |
+| `TGWITNESS_DATA` | Direktori data dibaca terus apabila tiada `--data-dir`, URL atau token diberikan |
+
 ## Sahkan sebelum menjalankan
 
 Perintah satu baris mempercayai HTTPS untuk skrip permulaannya. Skrip itu memeriksa SHA-256 dan tandatangan RSA projek pada aplikasi dan sekatan sebelum pemasangan. Anda juga boleh memuat turun dan mengesahkan skrip permulaan terlebih dahulu.

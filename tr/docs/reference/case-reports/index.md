@@ -134,7 +134,7 @@ Her bir kontrolü, kaydedilen toplama kapsamıyla birlikte ayrı ayrı gözden g
 4. Orijinal ZIP dosyalarını ve bunların hash değerlerini koruyun. Her bir tutucuyu, aktarımı, tarihi ve amacı kaydedin. Atfedilen operatör ifadelerini ve vaka notlarını bunlarla birlikte koruyun.
 5. Gizli VM'ler için, fiyat teklifi, doğrulama sorusu, Intel sertifika zinciri, ölçümler, kesin kaynak ve anahtar işleme koşullarını koruyun ve bağımsız olarak doğrulayın. Doğrulama sonucunu, incelenen kanıtlarla birlikte saklayın.
 
-Güven varsayımları için [doğrulama kapsamına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) ve kaynak iddiaları, kimlik, zaman ve toplama kapsamına ilişkin ayrı değerlendirmeye bakınız.
+See [verification scope](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Alıcı tarafından incelenmesi
 

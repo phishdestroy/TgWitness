@@ -4,6 +4,20 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/verifica
 
 The live Telegram test, automated checks, browser checks and what remains unverified.
 
+Each result below applies to its recorded revision and environment. The [current capability matrix](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) separates implementation, published downloads and remaining qualification.
+
+## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+
+The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+
+- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
+- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
+- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
+- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
+- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+
+An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+
 ## Live Phala Cloud deployment · 4 November 2026
 
 `--provider phala --quick-tunnel` ran against real **Phala Cloud** (`tdx.small`, region US-WEST-1) with a Phala Cloud API key of an empty workspace, real ntfy.sh, GitHub and Intel PCS. The CVM installed commit `df7d860c` (v0.8.1); deploy, verify and destroy ran from the command line with the fixes below. Seven CVMs cost about 1.9 US cents together.
@@ -153,10 +167,16 @@ Command: `python tools/check_capacity.py --events 10000 --chats 100`
 
 This measures the local serial recording/export path on this Windows host. It does not measure MTProto delivery, concurrent accounts, Telegram throttling, media, a long-running workload, or a guaranteed number of real chats. The measurement predates the final offline timestamp tooling, which does not change the measured message path.
 
+## Full-text search on one million messages · 5 November 2026
+
+Command: `python tools/bench_fulltext.py --messages 1000000 --work <empty directory>`
+
+A deterministic signed journal of 1,000,000 synthetic messages in 200 chats (Russian word forms, Ukrainian, English, Chinese, Japanese, links and handles) was indexed in 71 seconds; the index took 58 MiB beside a 1.50 GiB journal. Best-match searches took 9 to 190 ms (median), against 2.4 to 3.2 seconds for the previous substring search. Full results, hardware and limits: [Full-text search](https://phishdestroy.github.io/TgWitness/docs/reference/search/#benchmark). `tools/test_fulltext.py` also verifies a signed archive made before full-text search (`tools/fixtures/evidence-before-fulltext.zip`) with the current verifier, and a current archive with that archive's own `verify.py`.
+
 ## Remaining qualification
 
 The retained live journal establishes real collection, edits, deletion notices, attachments, rechecks and rate-limit handling. It does not establish exhaustive delivery or a controlled matrix of role visibility, reaction actors, prolonged FloodWait, account bans and network/process interruption recovery. QR-token issuance remains distinct from completed mobile QR confirmation.
 
-Docker build/run, Linux/macOS installation, sustained high load, independent security review, a real independent TSA response, certificate revocation/archival validation and forensic certification remain outside the recorded qualification. Saved MTProto state and catch-up are implemented; atomic durable replay remains unestablished. Admin-log collection, extra reactor lists and priority short polling remain separate features. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
+Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
 
 Local detailed receipts and screenshots are under test-results/ (Git-ignored). The public screenshot in docs/assets/ contains only fictional demonstration data.

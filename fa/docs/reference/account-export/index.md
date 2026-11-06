@@ -31,6 +31,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/accou
 
 تاریخچه عکس پروفایل و استوری‌ها به‌صورت پیش‌فرض انتخاب نمی‌شوند. همچنین وقتی پرونده تنها به پیام‌ها نیاز دارد، پروفایل و مخاطبین را غیرفعال کنید. اگر پیوست‌ها یا متادیتا غیرضروری هستند، حذف آن‌ها در حین جمع‌آوری از نگهداری یک نسخه خصوصی دیگر در این خروجی جلوگیری می‌کند.
 
+Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+
 ## خلاصه، پوشش و تأیید
 
 هر کار، گزینه‌ها و هویت حساب کاربری خود را منجمد می‌کند. موجودی و صفحات ضبط‌شده امضا می‌شوند؛ رسیدهای صفحات، هش‌ها، مکان‌نماها، زمان‌ها، نتایج پیوست‌ها و رسید قبلی آن‌ها را ثبت می‌کنند. تنها صفحات ارسال‌شده پیشرفت را جلو می‌برند. عملیات ازسرگیری/ادامه، پیش از ادامه، آن سوابق را بررسی می‌کند. حساب تغییر‌یافته، صفحه امضا‌شده تغییر‌یافته یا زنجیره رسید ناسازگار رد می‌شوند. گزینه‌ها را نمی‌توان در میانه یک عملیات ضبط ویرایش کرد: برای دامنه دیگر، کار دیگری را آغاز کنید.
@@ -64,6 +66,14 @@ python -m tgwitness.verify account-export.zip --fingerprint TRUSTED_SHA256
 5. پیش‌نمایش شمارش‌ها، هشدارها و نمونه‌های پیام‌های تبدیل‌شده را مشاهده کنید، سپس صراحتاً ایجاد را تأیید کنید. هر نمونه محدود به ۱۲ پیام و ۲۰۰۰ کاراکتر متن است. این یک نمونه است، نه بررسی کامل نتیجه. تغییر تنظیمات نیاز به پیش‌نمایش دیگری دارد. پیش‌نمایش پس از ۱۵ دقیقه منقضی می‌شود و به آن جلسه مدیر و دقیقاً همان ZIP اصلی محدود است؛ پس از ایجاد قابل استفاده مجدد نیست. پیش‌نمایش جدید، پیش‌نمایش قبلی را برای همان کار و جلسه باطل می‌کند.
 6. نتایج کامل را بررسی کنید `index.html` و `messages.jsonl` محلی را قبل از تحویل بررسی کنید. اگر اطلاعات غیرضروری را فاش کرد، یک افشاگری جدید با استثناهای قوی‌تر ایجاد کنید. ZIP امضا شده را در محل ویرایش نکنید.
 
+### پیام‌هایی که با انتخاب حذف شده‌اند
+
+**پیش‌نمایش.** افشا وقتی کامل به نظر نمی‌رسد که کامل نباشد. در هر چتی که حداقل یک پیام افشا شده دارد، پیام‌هایی که از انتخاب حذف شده‌اند به صورت نشانگر ظاهر می‌شوند، `[withheld by selection — rule: sender]` (یا `text`, `period`). **پیام‌های خارج‌شده از انتخاب را** انتخاب کنید: یک نشانگر برای هر گروه متوالی از پیام‌های پنهان‌شده (پیش‌فرض) یا یک نشانگر برای هر پیام. نشانگرها فقط شامل قانون و یک شمارش هستند، هرگز متن، فرستنده، تاریخ یا فایل‌ها را در بر نمی‌گیرند. چت‌هایی که هیچ پیامی در آن‌ها فاش نشده است، به طور کامل حذف می‌شوند، بنابراین این بسته وجود آن‌ها را فاش نمی‌کند.
+
+پاسخ‌های افشا شده می‌گویند به چه چیزی پاسخ می‌دهند: پیامی که در این نسخه گنجانده شده، پیامی که توسط انتخاب پنهان شده، یا پیامی که در خروجی منبع وجود ندارد (پیش از صدور حذف شده یا هرگز صادر نشده؛ خروجی نمی‌تواند تشخیص دهد کدام یک). پیامی که پنهان شده و یک پاسخ افشا شده به آن پاسخ می‌دهد، همیشه نشانگر مخصوص به خود را دریافت می‌کند، بنابراین پاسخ به سندی اشاره می‌کند که توضیح می‌دهد چرا خالی است. این سه وضعیت با حذف‌ها و فواصل جمع‌آوری که به خروجی منبع تعلق دارند، متفاوت هستند.
+
+در `messages.jsonl` (قالب `tgwitness-account-disclosure-v2`) هر پیام دارای `state`: `disclosed`، یا `withheld` با `rules` و `count`. یک پاسخ افشا شده دارای `reply_to` با هدف `id` و `state` (`disclosed`, `withheld`, `not_in_source`). منیفست پیام‌های افشا شده، چت‌ها، رسانه‌ها و `withheld` پیام‌ها. `verify.py` یک نشانگر حاوی محتوا و پاسخی که به رکوردی اشاره می‌کند که در بسته وجود ندارد را رد می‌کند؛ بسته‌های نسخه 1 همانند قبل اعتبارسنجی می‌شوند.
+
 قالب فشرده‌شده پروفایل‌های ساختاریافته حساب، مخاطبین، آواتارها، جلسات، استوری‌ها، اشیاء خام تلگرام، سربرگ‌های فوروارد، نقل‌قول‌های پاسخ، کارت‌های تماس و متادیتای موقعیت را حذف می‌کند. این قالب فایل‌های اصلی JSONL، تنظیمات فیلتر خصوصی، کلید نام مستعار و نقشه هویت را شامل نمی‌شود. متن‌های انتخاب‌شده، هویت‌های صراحتاً نگه‌داشته‌شده و فایل‌های گنجانده‌شده همچنان می‌توانند حاوی همان نام‌ها، شناسه‌ها یا عبارات به‌کاررفته در آن فیلترها باشند؛ این موارد نیازمند بررسی جداگانه‌اند. سیاست خصوصی و کلید مستعار در گاوصندوق محلی برای این کار به‌صورت رمزگذاری‌شده نگهداری می‌شوند؛ حذف این کار، سوابق افشای خصوصی مرتبط با آن را پاک می‌کند. سوابق سیاست عمومی به جای مقادیر فیلتر، تعداد فیلترها را ثبت می‌کنند. هدف اعلام‌شده در مانیفست و HTML عمومی است: معیارهای خصوصی صریح و در حالت‌های مستعار، هویت‌های پنهان شناخته‌شده نیز در آنجا ماسک می‌شوند، حتی زمانی که متن پیام حذف شده باشد. هدف را از جزئیات شخصی غیرضروری عاری نگه دارید؛ زمینه شناسایی ناشناخته می‌تواند باقی بماند.
 
 بیانیهٔ آن فایل‌های مشتق، سیاست عمومی و هش نسخهٔ اصلی ZIP را پیوند می‌دهد. تأیید می‌تواند یکپارچگی را برقرار کند و در صورتی که منبع به‌صورت محلی ارائه شود، پیوند تطبیقی منبع را نیز برقرار سازد:
@@ -75,12 +85,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ارتباط با منبع به‌طور مستقل اثبات نمی‌کند که تبدیل، هر مورد لازم را انتخاب یا هر جزئیات شناسایی‌کننده را حذف کرده باشد. متن اصلی به‌صورت مدرک ضمیمه نشده است. برای آن قضاوت، بازبینی تازه‌ای لازم است.
 
-## حفاظت از داده‌ها و پیش‌نمایش میزبانی‌شده‌ی Capture
+## Sharing and hosted capture
 
-این کنترل‌ها از محدودیت هدف و حداقل‌سازی داده‌ها پشتیبانی می‌کنند؛ آن‌ها بررسی خودکار انطباق قانونی نیستند. [ماده‌های ۵ و ۲۵ مقررات GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) به این اصول و حفاظت از ابتدا/پیش‌فرض می‌پردازند. پایه قانونی، ضرورت، شرایط دسته‌بندی ویژه در صورت کاربرد، نگهداری، امنیت و دسترسی دریافت‌کننده همچنان نیازمند تصمیمی متناسب با مورد هستند. هدف دادرسی به تنهایی هر افشا را قانونی نمی‌کند. داده‌های مستعار معمولاً همچنان داده‌های شخصی باقی می‌مانند؛ به [توضیحات EDPB](https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en) مراجعه کنید.
+Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
 
-متن آزاد، تاریخ‌ها، رویدادهای نادر و ترکیب حقایق می‌توانند افراد را حتی پس از حذف نام‌ها شناسایی کنند. در مواردی که محتوای پیام غیرضروری است، از حذف متن استفاده کنید؛ و در صورت لزوم، نسخهٔ مشتق کامل را بررسی کنید. منبع و گاوصندوق را محافظت‌شده نگه دارید، دربارهٔ نگهداری و اشتراک‌گذاری با فرد مسئول توافق کنید و دقیقاً مشخص کنید که کدام ZIP تحویل داده شده است.
-
-GitHub Actions از خروجی کل حساب یا گفتگوهای انتخابی با Takeout یا API معمولی و گزارش یک گفتگو پشتیبانی می‌کند．راهنمای [GitHub Actions](https://phishdestroy.github.io/TgWitness/docs/capture/) بررسی تنظیمات و محدودیت ۱۲۰ دقیقه را توضیح می‌دهد．خروجی‌های محلی و نسخه‌های اشتراک‌گذاری گواهی GitHub را به ارث نمی‌برند و آزمون‌های مصنوعی کارکرد با حساب واقعی Telegram را ثابت نمی‌کنند．
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope)．
 
 [فرمت مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) · [گزارش‌های موردی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-reports/)

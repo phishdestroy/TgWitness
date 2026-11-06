@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 保留原始 ZIP 文件及其哈希值。记录每个持有者、传输情况、日期 及目的。同时保留归属的操作员陈述和案件笔记。
 5. 对于机密虚拟机，需保留并独立验证引文、挑战、 Intel 证书链、测量数据、确切来源及密钥处理条件。 将证明验证结果与已审查的证据一并保存。
 
-请参阅[验证范围](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)以了解信任假设， 以及对来源主张、身份、时间和采集覆盖范围的单独评估。
+See [verification scope](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## 收件人审核
 

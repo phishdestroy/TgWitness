@@ -6,7 +6,7 @@ Cari mesej yang disimpan, semak input AI dan simpan laporan analitik beserta ruj
 
 [Panduan aliran kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Gunakan **Jurnal** untuk carian tempatan tanpa AI. Untuk **Tanya arkib**, dayakan dan konfigurasikan penyedia dalam **Integrasi** terlebih dahulu. Pemilih ruang kerja memilih akaun; borang memilih sembang dan tempoh pemerhatian. Pengambilan semula dijalankan secara tempatan. Frasa tepat atau domain menyempitkan pengambilan semula; ID mesej meminta versi yang disimpan. Semak petikan dan buka rekod jurnal atau konteksnya. Tiada pangkalan data vektor atau tindakan Telegram automatik.
+Gunakan **Jurnal** untuk carian tempatan tanpa AI; [carian penuh](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/) (pratinjau) memadankan bentuk kata, frasa, domain dan @nama pengguna. Untuk **Ask the archive**, pertama sekali aktifkan dan konfigurasikan penyedia dalam **Integrasi**. Pemilih ruang kerja memilih akaun; borang memilih sembang dan tempoh pemerhatian. Pemulihan dijalankan secara tempatan. Frasa atau domain tepat menyempitkan pemulihan; ID mesej meminta versi yang disimpan. Semak petikan dan buka rekod jurnal atau konteks mereka. Tiada pangkalan data vektor atau tindakan Telegram automatik.
 
 ## Penyedia dan persetujuan
 
@@ -24,7 +24,7 @@ Terdapat paling banyak dua permintaan penyedia serentak di seluruh dunia dan sat
 
 ## Sumber dan had
 
-Pemulihan memeriksa teks mesej yang disimpan dengan carian leksikal terhad. Ia memaparkan sehingga 24 sumber dan menandakan petikan yang dipotong atau set keputusan yang tidak lengkap. Tempoh merujuk kepada **masa pemerhatian**, bukan dakwaan bahawa sejarah Telegram adalah lengkap. Acara liputan merentas ruang kerja disembunyikan daripada capaian skop sembang. Data yang hilang diterangkan sebagai tidak ditemui dalam arkib yang tersedia.
+Pemulihan menggunakan [indeks](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#ask-the-archive-and-mcp) [penuh](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#ask-the-archive-and-mcp) apabila ia lengkap: padanan terbaik merentasi sembang terpilih, dengan bentuk kata. Soalan tentang perubahan terkini atau versi satu mesej, dan carian semasa indeks sedang dibina, menggunakan carian leksikal terhad pada rekod terkini. Pratonton menamakan kaedah tersebut. Pemulihan mengembalikan sehingga 24 sumber; teks panjang dipotong di sekitar padanan mereka. Petikan yang dipotong dan set keputusan yang tidak lengkap akan ditandakan. Tempoh merujuk kepada **masa pemerhatian**, bukan dakwaan bahawa sejarah Telegram lengkap. Acara liputan di seluruh ruang kerja disekat daripada capaian skop sembang. Data yang hilang diterangkan sebagai tidak ditemui dalam arkib yang tersedia.
 
 Model tidak menerima sebarang alat. ID sumbernya diselesaikan terhadap rekod terpilih, hash disemak semula, dan rentetan petikan mesti wujud dalam rekod tersebut. ID yang tidak diketahui, petikan yang diubah dan dakwaan tanpa rujukan menolak jawapan tersebut. Aplikasi ini mencipta pautan; URL yang dijana oleh model tidak digunakan sebagai rujukan. Semakan ini mengesahkan kewujudan sumber dan ketepatan petikan, bukan kebenaran sesuatu inferens. Semak inferens menentang rekod sebelum bergantung kepadanya.
 

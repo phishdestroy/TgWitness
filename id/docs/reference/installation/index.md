@@ -44,6 +44,30 @@ Pilih `TGWITNESS_INSTALL_DIR` untuk memilih folder lain. Versi yang terinstal da
 
 Setiap instalasi mencakup berkas **START-HERE.html** dan **START-HERE.txt**, yang berisi jalur lokal, perintah, dan tautan ke repositori. Jalankan `tgwitness guide` untuk membuka panduan. Di Windows, gunakan `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` di PowerShell.
 
+## Pengaturan pencarian teks lengkap
+
+[Pencarian teks lengkap](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/) (pratinjau) tidak memerlukan pengaturan. Indeksnya dibangun di latar belakang setelah pembaruan.
+
+| Variabel atau perintah | Efek |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | Secara default: indeks disimpan di `search/fulltext.sqlite3` setiap ruang kerja |
+| `TGWITNESS_FULLTEXT=memory` | Tidak ada berkas indeks; indeks dibangun ulang setiap kali aplikasi dimulai |
+| `TGWITNESS_FULLTEXT=off` | Tanpa indeks; hanya pencarian teks persis |
+| `tgwitness index status` | Indeks status setiap ruang kerja |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | Bangun ulang setiap indeks dari jurnal yang ditandatangani |
+
+Pilihan administrator di **Jurnal → Filter → Indeks Pencarian** akan menggantikan variabel untuk ruang kerja tersebut. Perintah akan mencari direktori data dari instalasi yang menjalankannya; di tempat lain, tambahkan `--data-dir` dengan jalur dari `tgwitness paths`. Untuk kamus bahasa Ukraina lengkap (data GPL-3.0), instal `pymorphy3-dicts-uk` di lingkungan Python instalasi tersebut.
+
+## Akses baris perintah
+
+[Baris](https://phishdestroy.github.io/TgWitness/id/docs/reference/cli/) [perintah](https://phishdestroy.github.io/TgWitness/id/docs/reference/cli/) (pratinjau) membaca arsip untuk skrip dan agen.
+
+| Variabel | Efek |
+| --- | --- |
+| `TGWITNESS_URL` | Alamat panel untuk `tgwitness search`, `context`, `messages`, `stats` dan `export`; default `http://127.0.0.1:8787` ketika token telah ditetapkan |
+| `TGWITNESS_MCP_TOKEN` | Arsipkan token koneksi dari **Integrasi → MCP**, yang dibagikan dengan klien MCP; `--token-file` membacanya dari berkas sebagai gantinya |
+| `TGWITNESS_DATA` | Direktori data dibaca secara langsung jika tidak `--data-dir`, URL, atau token yang diberikan |
+
 ## Verifikasi sebelum dijalankan
 
 Perintah satu baris ini mempercayai HTTPS untuk skrip awalnya. Skrip tersebut memeriksa SHA-256 serta tanda tangan RSA proyek pada aplikasi dan batasan-batasan sebelum pemasangan. Anda juga dapat mengunduh dan memverifikasi skrip awal tersebut terlebih dahulu.

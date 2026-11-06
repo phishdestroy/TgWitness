@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/
 
 Архив и интеграции
 
-[Справочная информация по Case Board](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/)[Анализ архива](https://phishdestroy.github.io/TgWitness/ru/docs/reference/analysis/)[MCP только для чтения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/)[Локальное распознавание текста (OCR) и транскрипция](https://phishdestroy.github.io/TgWitness/ru/docs/reference/media-analysis/)[Исходящие веб-хуки](https://phishdestroy.github.io/TgWitness/ru/docs/reference/webhooks/)[Публичная витрина](https://phishdestroy.github.io/TgWitness/ru/docs/reference/showcase/)
+[Справочная информация по Case Board](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/)[Анализ архива](https://phishdestroy.github.io/TgWitness/ru/docs/reference/analysis/)[Полнотекстовый поиск](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/)[MCP только для чтения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/)[Командная строка](https://phishdestroy.github.io/TgWitness/ru/docs/reference/cli/)[Локальное распознавание текста (OCR) и транскрипция](https://phishdestroy.github.io/TgWitness/ru/docs/reference/media-analysis/)[Исходящие веб-хуки](https://phishdestroy.github.io/TgWitness/ru/docs/reference/webhooks/)[Публичная витрина](https://phishdestroy.github.io/TgWitness/ru/docs/reference/showcase/)
 
 Доказательства
 

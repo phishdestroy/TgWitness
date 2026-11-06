@@ -14,7 +14,7 @@ TgWitness เก็บรักษาข้อมูลการสังเก�
 | เนื้อหาในไฟล์ ZIP ของหลักฐาน | `manifest.sig` ลงนามในไฟล์ manifest แบบมาตรฐาน ซึ่งระบุค่าแฮชของไฟล์เนื้อหา | ไฟล์ ZIP ฉบับสมบูรณ์ รวมถึงไฟล์ manifest และลายเซ็น |
 | ไฟล์แนบที่เก็บรักษาไว้ | SHA-256 และจำนวนไบต์ในเหตุการณ์`media.saved`ที่ลงนาม; ค่าแฮชไฟล์ในไฟล์ ZIP manifest ที่ลงนาม | ข้อมูลต้นฉบับภายในไฟล์ ZIP ที่ได้รับการตรวจสอบแล้ว |
 | จุดตรวจสอบ | ลายเซ็น Ed25519 ที่ครอบคลุมความยาวของบันทึก, ค่าแฮชส่วนหัว, กุญแจสาธารณะ และเวลาสร้าง | สำเนาอิสระที่เก็บไว้ก่อนการเปลี่ยนแปลงที่มีข้อโต้แย้ง |
-| ใบเสร็จรับเงิน | ข้อมูลการเก็บรวบรวมที่ลงนามแยกกัน; รวมถึงในเหตุการณ์`process.started`ที่ลงนามด้วย | ใบรับและบันทึกที่เกี่ยวข้อง; ข้อมูลการวัดผลเป็นข้อมูลที่รายงานโดยผู้ใช้เอง |
+| ใบเสร็จรับเงิน | Signed record of the collector version，source-file hashes and start settings，also included in `process.started` | The receipt，associated journal and the environment evidence for the selected verification mode |
 | รายงานที่อ่านได้: `report.html` และส่วนประกอบของมัน, `report.json`, `report.pdf`, `chat.pdf` | มีตราประทับ Ed25519 สำหรับแต่ละไฟล์ที่ครอบคลุมเนื้อหาของไฟล์นั้น; PDF ยังมาพร้อมกับลายเซ็นมาตรฐาน PDF (ดูรายงาน [Readable](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#readable-reports)) | ไฟล์ที่รับมาและลายนิ้วมือของกุญแจที่เชื่อถือได้; ไฟล์ ZIP ที่เอกสารนี้อธิบาย |
 | CSV แบบสแตนด์อโลน | ไม่มีลายเซ็นเข้ารหัสแบบสแตนด์อโลน; การใช้แฮชของเหตุการณ์เพียงอย่างเดียวไม่เพียงพอ | ใช้สำเนาที่อยู่ในไฟล์ ZIP ที่ได้รับการตรวจสอบแล้วเพื่อตรวจสอบความสมบูรณ์ |
 | ภาพหน้าจอ, เอกสารพิมพ์ หรือไฟล์ PDF ที่สร้างขึ้นจากเบราว์เซอร์ | ไม่มีลายเซ็นของ TgWitness บนเวอร์ชันที่ดัดแปลง | เก็บรักษาแพ็กเกจต้นฉบับที่ได้รับการตรวจสอบแล้ว และบันทึกวิธีการสร้างเวอร์ชันที่ดัดแปลง |
@@ -62,7 +62,7 @@ Collector จะตรวจสอบลายเซ็นของบันท�
 
 ในช่องหรือกลุ่มใหญ่ Telegram จะจัดลำดับข้อความ 1, 2, 3… ตามลำดับ การส่งออกบทสนทนาจะแสดง หมายเลขแรกและหมายเลขสุดท้าย จำนวนข้อความที่มีอยู่ และทุกช่วงของหมายเลขที่ขาดหายไปใน `message-ids.json` , รายการเนื้อหา (manifest) และส่วนหัว (header) ของ `chat.json` พร้อมทั้งทำเครื่องหมายช่องว่างแต่ละจุดที่ปรากฏใน บันทึกการสนทนา `verify.py` นับหมายเลขต่อจาก `chat.json` หมายเลขที่ขาดหายไปคือข้อความที่ Telegram ไม่ได้ส่งกลับมา (ถูกลบก่อนการส่งออก หรือไม่ปรากฏต่อบัญชี); ในแชทส่วนตัวและ กลุ่มพื้นฐาน หมายเลขจะถูกใช้ร่วมกันในทุกแชทของบัญชี และช่องว่างจะไม่ถูกนับ
 
-หลังจากอ่านประวัติแล้ว การส่งออกจะขอข้อมูลจาก Telegram สำหรับทุกหมายเลขที่ขาดหายไปอีกครั้ง ตามลำดับหมายเลข (`channels.getMessages`, จนถึง 10,000 หมายเลข) ผลลัพธ์จะอยู่ใน `message-ids.json` และในรายงาน คำตอบที่ว่างเปล่าหมายความว่า Telegram ไม่มีข้อความภายใต้หมายเลขนั้นสำหรับบัญชีนี้; ไม่ระบุว่า ข้อความถูกลบหรือไม่เคยปรากฏให้บัญชีนี้เห็น ข้อความ Telegram ที่ส่งกลับมา แสดงว่าข้อความนั้นถูกพลาดไปขณะอ่านและถูกเพิ่มเข้าไปในไฟล์ส่งออก โดยถูกทำเครื่องหมายเป็น `found_on_recheck`
+After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time； it leaves the cause unspecified．A message returned on recheck is added to the export and marked `found_on_recheck`．
 
 ทุกรายงานจะเริ่มต้นด้วย **โดยสรุป**: หนึ่งย่อหน้า ตามด้วยสิ่งที่ข้อมูลแสดงและสิ่งที่มันไม่แสดง (ผู้อยู่เบื้องหลังบัญชี, ความครบถ้วนของการส่งข้อมูล, การลบข้อมูลก่อนการสังเกต, เวลาตามนาฬิกา โดยไม่มีตราประทับเวลา). ตราประทับของหน้าเว็บจะเปลี่ยนเป็นสีเหลืองอำพันเมื่อเบราว์เซอร์ตรวจสอบลายเซ็นของตราประทับ ไม่ใช่ของหน้าเว็บ: เบราว์เซอร์ไม่ส่งข้อมูลไบต์ของหน้าเว็บนั้นเอง มันจะเปลี่ยนเป็นสีเขียวเฉพาะเมื่อ ผู้อ่านนำไฟล์ไปตรวจสอบที่ส่วนท้ายของหน้า และทุกไบต์ตรงกัน และเฉพาะเมื่อ หน้าที่แสดงคือไฟล์นั้นเอง; มิฉะนั้นมันจะเปลี่ยนเป็นสีแดง
 
@@ -124,12 +124,41 @@ message.new actor_id คือผู้ส่งข้อความ message.ed
 
 - **ถูกสังเกตอย่างต่อเนื่องจาก X ถึง Y** ช่วงหนึ่งเริ่มต้นด้วย `observation.started` และ สิ้นสุดเมื่อมีการหยุดชั่วคราว การหยุด การสูญเสียการเชื่อมต่อ Telegram การออกจากระบบ การเริ่มกระบวนการโดยไม่ มีการหยุดอย่างเป็นระเบียบ หรือไม่มีบันทึกใดๆ เป็นเวลามากกว่าสามนาทีระหว่างการสังเกต (สัญญาณชีพถูกบันทึกทุกนาที ดังนั้นความเงียบหมายความว่ากระบวนการหยุดลง แช่แข็ง หรือ คอมพิวเตอร์เข้าสู่โหมดสลีป) เมื่อช่วงเวลาสัญญาณชีพถูกปรับเปลี่ยนใน**ส่วนพารามิเตอร์** แต่ละสัญญาณชีพ จะบันทึกการเปลี่ยนแปลงนี้ และช่วงเวลาความเงียบที่อนุญาตจะกลายเป็นสามช่วงเวลา โดยไม่เคยน้อยกว่าสามนาที
 - **ช่องว่าง**จะแสดงช่วงเวลาที่ขาดหายไปพร้อมเหตุผล ช่องว่างที่ยังคงเปิดอยู่ ณ บันทึกสุดท้าย จะถูกทำเครื่องหมายว่า `not_resumed_by_last_record`
-- **ID ข้อความที่ไม่ได้สังเกตเห็น** สำหรับช่อง (channels) และกลุ่มใหญ่ (supergroups) ซึ่งนับจำนวนข้อความตาม การสนทนา ID ที่ขาดหายไประหว่าง ID ที่สังเกตเห็นจะถูกรายการเป็นช่วง (range) และถูกรายงานว่า *“ไม่ได้สังเกตเห็น”* — ซึ่งอาจหมายถึงถูกลบ ไม่เคยส่งถึง หรืออยู่นอกประวัติที่บันทึกไว้ — ไม่เคยถูกรายงานว่า “ถูกลบ” การสนทนาส่วนตัวและกลุ่มทั่วไปใช้ลำดับเดียวกันสำหรับบัญชีทั้งหมด ดังนั้นช่องว่างในส่วนนี้ จึงไม่มีความหมายและไม่ถูกแสดงในรายการ
+- **ID ข้อความที่ไม่ได้สังเกตเห็น** สำหรับช่องและกลุ่มซูเปอร์ ซึ่งนับจำนวนข้อความต่อ การสนทนา ID ที่ขาดหายไประหว่างข้อความที่สังเกตเห็นจะถูกรายการเป็นช่วง (range) และถูกรายงานว่า *“ไม่ได้สังเกตเห็น*” — ซึ่งอาจหมายถึงถูกลบ ไม่เคยส่งถึงผู้รับ หรืออยู่นอกประวัติที่บันทึกไว้ — แต่ไม่เคยถูกรายงานว่า “ถูกลบ” การสนทนาส่วนตัวและกลุ่มทั่วไปใช้ลำดับหมายเลขเดียวกันสำหรับบัญชีทั้งหมด ดังนั้นช่องว่างภายใน การสนทนาประเภทนี้จึงไม่มีความหมายและไม่ถูกรายการไว้ที่นั่น
 - การแจ้งเตือนช่องว่างระดับแชท (เช่น Telegram ที่ขอการกู้คืนความแตกต่างใน ช่องหนึ่ง) จะถูกนับเป็นบันทึก; สิ่งเหล่านี้ไม่ขัดขวางการครอบคลุมโดยรวม
+
+### หมายเลขข้อความที่ขาด (`gap_summary`)
+
+**ดูตัวอย่าง.** `coverage.json` → `gap_summary` วัดหมายเลขที่ Telegram กำหนดและ ตัวเก็บข้อมูลนี้ไม่เคยเห็น Telegram กำหนดหมายเลขให้ข้อความครั้งเดียวต่อช่องหรือกลุ่มซูเปอร์ และครั้งเดียวต่อ บัญชีในแชทส่วนตัว บอท และกลุ่มทั่วไป หมายเลขระหว่างข้อความที่สังเกตได้ สองข้อความนั้นอาจถูกสังเกตได้หรือขาดหายไป ช่วงที่ต่อเนื่องกันเป็นคำยืนยันเชิงบวกว่า ทุกข้อความที่มีหมายเลขในช่วงนั้นถูกสังเกตได้ ช่องว่างไม่ระบุผู้กระทำหรือเหตุผลใดๆ
+
+| Field | ความหมาย |
+| --- | --- |
+| `status` | `on`, หรือ `off` เมื่อปิดใน **Parameters → Gap analysis** |
+| `parameters` | พารามิเตอร์ที่สร้างผลลัพธ์ดังกล่าว เพื่อให้สามารถทำซ้ำได้ |
+| `chats[]` | บันทึกหนึ่งรายการต่อช่องหรือกลุ่มใหญ่ โดยแต่ละรายการมีหมายเลขเฉพาะตัว |
+| `account` | ลำดับการสนทนาส่วนตัว บอท และกลุ่มทั่วไปในบัญชีทั้งหมด |
+| `status` (ตามลำดับ) | `applicable`, หรือ `not_applicable` ด้วย `reason` |
+| `observed_from`, `observed_to`, `span` | หมายเลขแรกและหมายเลขสุดท้ายที่สังเกตได้ รวมถึงขนาดของช่วง |
+| `observed`, `observed_without_content` | ตัวเลขที่สังเกตได้; ตัวเลขที่ทราบได้เฉพาะจากบันทึกการลบหรือการตรวจสอบซ้ำ |
+| `missing`, `density`, `gap_ranges`, `largest_gap` | ตัวเลขที่ยังไม่เคยถูกสังเกต, สัดส่วนของช่วงค่า, จำนวนรอบการรัน, รอบการรันที่ยาวที่สุด |
+| `clusters[]` | ช่องว่างที่ระบุไว้: `low`, `high`, `missing`, และตัวเลขที่สังเกตได้ใกล้เคียง `after` / `before` พร้อมเวลาการสังเกต |
+| `service_estimate` | เฉพาะเมื่อเปิดใช้งาน: จำนวนหมายเลขที่ขาดหายไปซึ่งจะเป็นข้อความบริการตามสัดส่วนที่สังเกตได้ ไม่เคยถูกหักออก `missing` |
+
+ความถูกต้องถูกกำหนดจากบันทึก ไม่เคยถูกสมมติไว้:
+
+- **ช่องและกลุ่มใหญ่**จะถูกวัดตามแต่ละการสนทนา รวมถึงในการส่งออกการสนทนาที่เลือกไว้ การวัดผลจะขึ้นอยู่กับบันทึกที่ผู้ส่งเลือก `not_applicable`.
+- **ลำดับการส่งข้อความของบัญชีทั้งหมด**จะถูกวัดเฉพาะจากข้อความแรกถึงข้อความสุดท้ายที่ ได้รับมาในขณะที่การเก็บข้อมูลทั้งบัญชีกำลังเปิดอยู่ และรวมถึงการสนทนาส่วนตัว, บอท, กลุ่ม ทั่วไป และข้อความของบัญชีเอง โดยไม่มีการสนทนาใดถูกยกเว้น (`scope.changed`). ตัวเลขที่ระบุโดย `deletion.unscoped` นับเป็นข้อความที่สังเกตได้โดยไม่รวมเนื้อหา การส่งออกหรือ การโอนย้ายการสนทนาที่เลือกไว้ไม่สามารถวัดค่านี้ได้ หากการเก็บข้อมูลทั้งบัญชีถูกปิด และเปิดใหม่ จะมีหมายเหตุระบุว่าตัวเลขที่ใช้ในช่วงเวลานั้นจะปรากฏเป็นช่องว่าง
+- ข้อความบริการเป็นบันทึกในสมุดบันทึกที่มีหมายเลขเฉพาะตัว ดังนั้นจึงปิดช่องว่าง ได้ด้วยตัวเอง; การประมาณค่าที่เป็นตัวเลือกเป็นเพียงข้อมูลบริบทเท่านั้น
+
+`verify.py` recomputes `gap_summary` from `events.jsonl` with the parameters in the signed `coverage.json` member (defaults for older archives) and prints the account-wide line in its coverage summary. The archive's `get_capture_status` (MCP and the command line) returns the same measurement for the chats an access may read; the account-wide sequence only to access covering the whole workspace.
+
+Repeated observations of one service message count once，and the account service estimate uses only numbers inside the measured range．An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled；older records without that information cannot establish this condition．Stopped observation does not extend the measured range，and resuming it is noted．The live archive query has a time budget，including its database scan，and marks an unfinished measurement as partial．
+
+Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences)． These numbers describe observations；they do not identify a deletion actor or establish why a number is absent．
 
 เมื่อ Telegram หยุดรับบัญชีแล้ว บันทึก `coverage.gap` ที่สิ้นสุดการสังเกตการณ์ จะนำ `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` หรือ `not_authorized`) และข้อผิดพลาด Telegram; `verify.py` ระบุสาเหตุที่จุดสิ้นสุดของช่วงเวลา
 
-ส่วน "Coverage" อธิบายว่าเครื่องมือเก็บข้อมูลนี้บันทึกข้อมูลอะไรไว้เท่านั้น ไม่ใช่หลักฐานว่า Telegram ได้ส่ง การอัปเดตทุกครั้งในช่วงเวลาต่อเนื่อง
+Coverage combines recorded observation periods，interruptions and message outcomes． Assess it together with the selected chats，period and attachment policy；continuous operation alone does not establish complete delivery of Telegram updates．
 
 ## ผู้ผลิต
 
@@ -157,17 +186,27 @@ python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evid
 
 manifest.json ประกอบด้วยรูปแบบ เวลาส่งออก กุญแจสาธารณะ ลายนิ้วมือ ความยาวของบันทึก แฮชส่วนหัว ขอบเขต ผู้ผลิต ข้อจำกัด และ SHA-256 ของสมาชิกเนื้อหาทุกตัว ยกเว้น `manifest.json` และ `manifest.sig` เอง manifest.sig คือลายเซ็น Ed25519 ที่เข้ารหัสด้วย base64 บนไฟล์ manifest JSON แบบมาตรฐาน ตัวตรวจสอบจะปฏิเสธองค์ประกอบที่ไม่คาดคิด/ขาดหายไป ชื่อที่ซ้ำกัน ไฟล์ที่เสียหาย ลำดับ/โซ่ที่ขาดหาย ลายเซ็นที่ไม่ถูกต้อง และความไม่ตรงกันกับจุดตรวจสอบที่ให้มา ตัวตรวจสอบจะไม่ดึงเส้นทางของไฟล์เก็บถาวรออกมาเลย และจำกัดขนาดรวมที่ประกาศไว้ (ไม่รวมการบีบอัด) ไว้ที่ 4 GiB; `--max-gib N` อนุญาตให้สร้างไฟล์เก็บถาวรที่มีขนาดใหญ่ขึ้นได้ โดยเพิ่มขีดจำกัดของ **Parameters**
 
-รับรหัสผู้ตรวจสอบจากสำเนาที่ผ่านการตรวจสอบหรือสำเนาอิสระที่ได้รับการตรวจสอบแล้ว ผู้ตรวจสอบ ภายในไฟล์เก็บถาวรที่ไม่น่าเชื่อถือคือวัสดุที่สามารถรันได้ ซึ่งจัดหาโดยผู้สร้างไฟล์เก็บถาวรนั้น; การมีอยู่ของมันเป็นความสะดวกในการพกพา ไม่ใช่จุดยึดความน่าเชื่อถือที่อิสระ
+Run verification from your installed TgWitness version or a reviewed checkout． The copy included in an archive supports portable use；check that copy against your trusted installation before executing it．
 
-จุดตรวจสอบ (checkpoint) จะลงนามในคำแถลงที่ประกอบด้วยกุญแจสาธารณะ ความยาวของบันทึก แฮชส่วนหัว และเวลาสร้าง ผู้ตรวจสอบสามารถตรวจสอบได้ว่าไฟล์เก็บถาวรที่สร้างขึ้นภายหลังมี คำนำหน้าเดียวกัน เก็บจุดตรวจสอบไว้ภายนอกตัวเก็บข้อมูลก่อนการเปลี่ยนแปลงที่มีข้อโต้แย้ง: ผู้โจมตีที่ควบคุมทั้งไฟล์เก็บถาวรและจุดตรวจสอบสามารถแทนที่ทั้งสองได้
+A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix．Retain the checkpoint outside the collector，so later verification compares the archive with a reference held separately from it．
 
 ## ขอบเขตการตรวจสอบ
 
-ลายเซ็นเหล่านี้ระบุกุญแจของผู้เก็บรวบรวมข้อมูลและปกป้องข้อมูลที่เก็บไว้ ให้กำหนด ลายนิ้วมือ (fingerprint) ของกุญแจนั้นอย่างอิสระ เพื่อเชื่อมโยงกุญแจดังกล่าวกับผู้เก็บรวบรวมข้อมูลที่คาดหมาย Telegram อัปเดตเป็นข้อมูลนำเข้าสำหรับการเก็บรวบรวมข้อมูล; TgWitness ลงลายเซ็นบนการสังเกตการณ์เกี่ยวกับการอัปเดตเหล่านั้น ลายเซ็นเหล่านี้ไม่ใช่ลายเซ็นที่ออกโดย Telegram หรือผู้เขียนข้อความ
+Verification checks the archive and the collection mode used to produce it．Choose the mode whose trust boundary matches the case，then retain its verification inputs．
 
-จุดตรวจสอบที่เก็บรักษาไว้หรือบันทึกพยานจะตรวจพบการเปลี่ยนแปลงในคำนำหน้าของบันทึกก่อนหน้า รวมถึงการแทนที่ที่ลงนามด้วยกุญแจผู้เก็บรวบรวมที่คัดลอกมา บันทึกที่ถูกสร้างขึ้นก่อน จุดตรวจสอบอิสระครั้งแรกจำเป็นต้องมีการยืนยันจากแหล่งที่มา: ผู้ถือกุญแจผู้เก็บรวบรวม สามารถลงนามในข้อมูลใหม่ได้ ให้ควบคุมการเข้าถึงกุญแจลงนามอย่างเคร่งครัด และเก็บรักษาการอ้างอิงไว้แยกต่างหาก
+| Collection mode | What the verifier checks | Verification inputs and trust boundary |
+| --- | --- | --- |
+| Local workspace | Record signatures，hash chain，manifest and attachment bytes | Independently retained collector fingerprint；the host administrator controls the local signing key |
+| Local workspace with an independent witness | The archive checks plus agreement with an earlier journal prefix retained by the witness | Separately trusted witness key and records；the checkpoint binds the prefix already observed |
+| [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity | Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow |
+| [Cloud deployment](https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/) | Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record | Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider |
+| [Intel TDX confidential VM](https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status，binding to the collector statement，compose and OS measurements | Intel trust chain and expected deployment measurements；retain the results of every required TDX check |
 
-ประเมินความมองเห็นของบัญชีและการส่งข้อมูลโดยใช้บันทึกการครอบคลุมและทดสอบที่ควบคุม ใช้ตราเวลาภายนอกที่ได้รับการยืนยันเพื่อกำหนดจุดอ้างอิงเวลาอย่างอิสระ ID ผู้ส่งใช้เพื่อระบุ บัญชี Telegram; เชื่อมโยงมันกับบุคคลผ่านการสอบสวนของคุณ ใบเสร็จรับเงินของโปรแกรมและ การตรวจสอบบนคลาวด์อธิบายการวัดผลที่รายงานโดย Collector และการกำหนดค่าการติดตั้ง ดู[ผลการตรวจสอบความ](https://phishdestroy.github.io/TgWitness/th/docs/reference/verification/)ถูกต้องสำหรับพฤติกรรมที่วัดได้และขอบเขตของมัน
+In sealed acquisition，the approved collector receives data through an authenticated Telegram connection inside the verified environment．Attestation binds the archive to that execution，so verification covers acquisition as well as later file integrity． This relies on the approved code and the platform trust chain listed above． GitHub capture verification requires a session created inside the run and rejects imported-session captures．
+
+The run receipt records the collector version，file hashes and startup settings．GitHub provenance and TDX measurements provide the environment checks；the [validation record](https://phishdestroy.github.io/TgWitness/th/docs/reference/verification/) identifies tested configurations．
+
+TgWitness signs the observations it collects；Telegram and message authors do not issue these signatures．In a local workspace，material created before the first independent checkpoint still depends on the collector and its key holder．Coverage records describe the selected scope and collection outcomes，while verified external timestamps anchor the committed archive or journal boundary in time．
 
 ## ไฟล์แนบ
 
@@ -181,9 +220,9 @@ manifest.json ประกอบด้วยรูปแบบ เวลาส�
 
 งานสื่อและเหตุการณ์การส่งข้อความถูกบันทึกในธุรกรรมเดียว งานนี้จะเก็บ ตัวระบุข้อความ TL ต้นฉบับ; การสังเกตที่ลงนามจะผูก SHA-256, บัญชี, และนโยบายขนาดไว้ การกู้คืนจะตรวจสอบการผูกนั้นก่อนดาวน์โหลด มันจะไม่เคยดึง ข้อความปัจจุบันมา และจะแทนที่ไฟล์แนบที่ใหม่กว่าอย่างเงียบๆ งานที่ถูกขัดจังหวะ จะได้รับการลองใหม่ ในขณะที่ความล้มเหลวถาวรยังคงเป็นผลลัพธ์ที่ชัดเจน
 
-แต่ละพื้นที่ทำงานมีบันทึกและตัวตนการลงนามเป็นของตัวเอง เหตุการณ์ process.started ประกอบด้วย ID การทำงาน, นาฬิกาท้องถิ่น, เวอร์ชันของส่วนที่พึ่งพา, ค่าแฮชของไฟล์ต้นฉบับ, บัญชี/ขอบเขตเริ่มต้น, และตั้งค่าการบันทึก Heartbeats ประกอบด้วย ID การทำงาน, เวลาแบบโมโนโทนิก, และสถานะคิว ใบยืนยันกระบวนการยังสามารถดาวน์โหลดได้ในรูปแบบเอกสารที่ลงนามแยกต่างหาก การวัดค่าไฟล์เป็นการรายงานด้วยตนเอง และไม่ใช่การรับรองจากฮาร์ดแวร์ที่เชื่อถือได้
+Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement．For verification of the execution environment，pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope)．
 
-จุดตรวจสอบอัตโนมัติจะถูกเก็บรักษาไว้ในเครื่องท้องถิ่นเมื่อเริ่มต้นระบบ ทุกห้านาทีระหว่าง การเฝ้าสังเกต (**พารามิเตอร์ → จุดตรวจสอบที่มีลายเซ็นทุก**), และเมื่อหยุดระบบอย่างเป็นระเบียบ การตรวจสอบเมื่อเริ่มต้นระบบและการส่งออกจะเปรียบเทียบบันทึก กับจุดตรวจสอบล่าสุดที่เก็บไว้บนเครื่องท้องถิ่น สิ่งนี้สามารถตรวจพบการย้อนกลับของฐานข้อมูล เมื่อจุดตรวจสอบยังคงอยู่; ผู้ควบคุมที่จัดการทั้งสองส่วนยังคงสามารถแทนที่ทั้งสองได้ การเก็บรักษาข้อมูลอย่างอิสระและเวลาประทับที่เชื่อถือได้จากภายนอกยังคงเป็นข้อกำหนดที่แยกต่างหาก
+Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives．Independent retention keeps that reference available outside the workspace；a verified external timestamp additionally anchors it in time．
 
 หลังจากรีสตาร์ท ระบบจะกลับมาดำเนินการต่อจากตำแหน่งการอัปเดต Telegram ที่บันทึกไว้ (`catch_up_from` ใน `observation.started`) และจะขอรับการอัปเดตที่พลาดไป การตรวจสอบซ้ำเป็นระยะจะบันทึก `message.recovered` สำหรับข้อความที่พลาดไป และ `message.missing_on_recheck` เมื่อ Telegram ไม่ ส่งข้อความที่บันทึกไว้กลับมาอีกต่อไป; กรณีหลังนี้ไม่ใช่การแจ้งเตือนการลบ และไม่ระบุชื่อผู้ลบหรือเวลา
 

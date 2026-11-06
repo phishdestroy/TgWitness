@@ -134,7 +134,7 @@ Har bir tekshiruvni yozib olingan to'plam qamrovi bilan birga alohida ko'rib chi
 4. Asl ZIP-fayllarni va ularning hashlarini saqlang. Har bir saqlovchi, uzatish, sana va maqsadini qayd eting. Tegishli operator bayonotlari va ish yozuvlarini ular bilan birga saqlang.
 5. Maxfiy VMlar uchun iqtibos, chaqiriq, Intel sertifikat zanjiri, o'lchovlar, aniq manba va kalit boshqaruv shartlarini saqlang va mustaqil ravishda tasdiqlang. Attestatsiya tekshiruv natijasini ko'rib chiqilgan artefaktlar bilan birga saqlang.
 
-Ishonch taxminlari uchun [tekshiruv doirasiga](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) va manba da'volari, shaxsiyat, vaqt hamda yig'ish qamrovining alohida baholashiga qarang.
+See [verification scope](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Qabul qiluvchi ko'rib chiqishi
 

@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel
 
 각 화면의 기능, 서명된 저널에 기록되는 내용, 그리고 자세한 가이드의 위치에 대한 설명입니다. 패널에는 한 번에 하나의 작업 공간이 표시됩니다. 즉, 고유한 소스, 저널 및 서명 키를 가진 하나의 텔레그램 계정입니다. 사이드바 상단의 선택기를 통해 작업 공간을 전환할 수 있습니다. 주소에는 작업 공간이 포함되며(`?ws=…`); 주소, 선택기 및 로드된 계정이 일치하지 않으면 작업이 차단된 상태로 유지됩니다.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## 사용 방법 알아보기
 
 사이드바 상단에는 ‘Daily’ 섹션이 있으며, **계정** 는 **작업 공간** 아래에, 그 외 모든 항목은 **기타 도구 및 설정** 아래에 위치합니다. 상단 바의 **인터페이스 수준** 스위치를 통해 표시될 섹션의 수를 결정할 수 있습니다:

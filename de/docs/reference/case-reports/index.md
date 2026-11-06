@@ -134,7 +134,7 @@ Ein verwendbarer Zeitstempel muss alle folgenden Prüfungen bestehen: Sein Abdru
 4. Behalten Sie die ursprünglichen ZIP-Dateien und deren Hashes bei. Erfassen Sie jeden Inhaber, jede Übertragung, jedes Datum und jeden Zweck. Behalten Sie die zugeordneten Aussagen der Betreiber und Fallnotizen dazu bei.
 5. Bei vertraulichen VMs sind das Zitat, die Challenge, die Intel-Zertifikatskette, die Messwerte, die genaue Quelle und die Bedingungen für den Umgang mit Schlüsseln zu bewahren und unabhängig zu überprüfen. Das Ergebnis der Beglaubigungsprüfung ist zusammen mit den geprüften Artefakten aufzubewahren.
 
-Siehe [Verifizierungsumfang](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope) für die Vertrauensannahmen sowie die separate Bewertung von Quellenangaben, Identität, Zeitangaben und Erfassungsumfang.
+See [verification scope](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## Überprüfung durch den Empfänger
 

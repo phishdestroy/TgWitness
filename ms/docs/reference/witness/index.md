@@ -6,7 +6,7 @@ Jalankan witness dengan kunci dan botnya sendiri, terbitkan titik pemeriksaan ya
 
 [Eksport dan sahkan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/) · [Jaminan tinggi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/) · [Panduan panel](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#extras)
 
-Pengumpul menandatangani jurnalnya sendiri, jadi sesiapa yang mengawal pengumpul dan kuncinya secara prinsip boleh menulis semula atau memendekkan jurnal itu dan menandatangani semula. Seorang saksi menjadikannya dapat dikesan. Ia adalah proses berasingan — satu lagi kontena, atau lebih tepat sebuah pelayan yang dijalankan oleh orang lain — yang setiap beberapa minit mengambil kepala jurnal yang ditandatangani oleh pengumpul, menandatangani apa yang dilihatnya dengan kunci sendiri, menyimpannya dalam jurnalnya sendiri dan menyiarkannya ke saluran Telegram.
+A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
 
 Diyagram aliran · Pengumpul → Saksi (titik pemeriksaan yang ditandatangani: jumlah rekod + hash kepala); Saksi → Jurnal saksi, kunci sendiri; Saksi → Saluran Telegram (pos yang disahkan melalui botnya sendiri); ZIP Bukti → verify.py; Jurnal saksi, kunci sendiri → verify.py; Saluran Telegram → verify.py (Eksport Telegram Desktop atau halaman t.me/s) · Pengumpul · Saksi · Jurnal saksi, kuncisendiri · Saluran Telegram · ZIP Bukti · verify.py · titik pemeriksaan yang · ditandatangani: jumlah rekod · + hash kepala · pos yang disahkan melalui · botnya sendiri · Eksport Telegram Desktop · atau halaman t.me/s
 
@@ -36,7 +36,7 @@ Saksi baharu menghantar cabaran rawak pada setiap undian; pernyataan tangkapan m
 Setiap selang (10 minit secara lalai) saksi:
 
 1. mengambil kepala itu sendiri (pengumpul tidak boleh menolaknya atau melangkauinya);
-2. memeriksa sahih tandatangan pengumpul, kunci pengumpul yang dipasang pin (`--collector-fingerprint`, atau kunci pertama yang dilihat), kiraan yang tidak berkurang dan kepala yang tidak berubah pada kiraan yang tidak berubah;
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
 3. menambah rekod yang disahkan ke jurnalnya sendiri: `witness.anchor` dengan status `ok`, `key_changed`, `rollback` (lebih sedikit rekod berbanding sebelum ini), `fork` (panjang sama, kepala berbeza) atau `invalid` (jawapan gagal pengesahan), atau `witness.no_response` apabila pengumpul tidak menjawab;
 4. menyiarkan hasil ke saluran, ditandatangani, termasuk "tiada jawapan" selagi saksi sedang berjalan dan boleh mengakses Bot API. ID siaran direkodkan (`witness.posted`), siaran gagal juga (`witness.post_failed`).
 
@@ -196,8 +196,4 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 Ini memerlukan cap jari saksi yang disimpan secara berasingan dan checkpoint yang sepadan di hujung tepat eksport ini. Satu checkpoint yang hanya merangkumi pratonton awal adalah tidak mencukupi. Jeda pengumpulan, biarkan saksi memerhati keadaan akhir, dan eksport sebelum penulisan jurnal selanjutnya; jika jurnal berubah, simpan satu lagi checkpoint dan eksport keadaan itu. Satu checkpoint kemudian sahaja tidak dapat mengesahkan hash akhir eksport yang lebih pendek. Apabila `--channel` turut disertakan, pos yang didakwa hilang atau set padanan kosong akan menyebabkan pemeriksaan ketat ini gagal. Tanpa penanda itu, pemeriksaan integriti biasa masih melaporkan rekod yang tidak disaksikan tanpa menolak arkib yang sebaliknya utuh.
 
-Penanda ini menguatkan konsistensi dengan rekod saksi yang disediakan dan dipaku. Pengendali masih perlu mengesahkan kebebasan saksi dan memelihara rekodnya secara berasingan. Ia tidak mengesahkan kebenaran mesej, pengumpulan lengkap atau jangka masa yang diukur secara bebas.
-
-Saksi menunjukkan apa yang dilaporkan oleh pengumpul pada masa-masa tersebut dan bahawa eksport kemudian sepadan dengannya. Ia tidak menunjukkan bahawa pengumpul merekodkan segala yang dihantar oleh Telegram, atau bahawa kandungan mesej itu benar. Saksi yang dijalankan oleh pengendali yang sama pada mesin yang sama adalah lebih lemah daripada yang dijalankan oleh orang lain.
-
-Bilangan yang meningkat sahaja tidak dapat membuktikan kesinambungan hanya-tambah dalam talian: perbandingan luar talian mesti memadankan setiap hash prefiks yang disimpan dengan eksport penuh pengumpul. Masa henti saksi dan kegagalan penerbitan meninggalkan selang tanpa jangkar luaran. Pos yang hilang boleh dilaporkan dalam jurnal saksi yang disimpan; sama ada saluran mahupun pelayan yang dikawal oleh pengendali yang sama bukanlah arkib pihak ketiga yang tidak berubah.
+Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．

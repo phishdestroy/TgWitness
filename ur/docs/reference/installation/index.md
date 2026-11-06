@@ -44,6 +44,30 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
 
 ہر انسٹالیشن میں **START-HERE.html** اور **START-HERE.txt** شامل ہوتے ہیں، جن میں مقامی راستے، کمانڈز اور ریپوزیٹری کے لنکس ہوتے ہیں۔ چلائیں `tgwitness guide` رہنما کھولنے کے لیے۔ ونڈوز پر، استعمال کریں `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` PowerShell میں استعمال کریں۔
 
+## مکمل متن تلاش کی ترتیبات
+
+[مکمل متن تلاش](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/) (پریویو) کے لیے کسی سیٹ اپ کی ضرورت نہیں۔ اس کا انڈیکس اپ ڈیٹ کے بعد پسِ منظر میں بن جاتا ہے۔
+
+| متغیر یا کمانڈ | اثر |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | ڈیفالٹ: انڈیکس کو میں رکھا جاتا ہے `search/fulltext.sqlite3` ہر ورک اسپیس کا |
+| `TGWITNESS_FULLTEXT=memory` | انڈیکس فائل نہیں؛ ہر آغاز پر انڈیکس دوبارہ بنایا جاتا ہے۔ |
+| `TGWITNESS_FULLTEXT=off` | انڈیکس نہیں؛ صرف عین متن کی تلاش |
+| `tgwitness index status` | ہر ورک اسپیس کی حالت کا انڈیکس |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | دستیخط شدہ جرنل سے ہر انڈیکس کو دوبارہ تعمیر کریں |
+
+انتظامیہ کا انتخاب **Journal → Filters → Search index** میں اس ورک اسپیس کے لیے متغیر کو اوور رائیڈ کرتا ہے۔ کمانڈز اس انسٹالیشن کی ڈیٹا ڈائریکٹری تلاش کرتے ہیں جو انہیں چلاتی ہے؛ دوسری جگہوں پر، شامل کریں `--data-dir` کے راستے کے ساتھ `tgwitness paths`. ایک مکمل یوکرینی لغت (GPL-3.0 ڈیٹا) کے لیے، انسٹال کریں `pymorphy3-dicts-uk` انسٹالیشن کے Python ماحول میں انسٹال کریں۔
+
+## کمانڈ لائن تک رسائی
+
+[کمانڈ لائن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/) (پریویو) اسکرپٹس اور ایجنٹس کے لیے آرکائیو پڑھتی ہے۔
+
+| متغیر | اثر |
+| --- | --- |
+| `TGWITNESS_URL` | پینل کا پتہ کے لیے `tgwitness search`, `context`, `messages`, `stats` اور `export`؛ ڈیفالٹ `http://127.0.0.1:8787` جب کوئی ٹوکن سیٹ ہوتا ہے |
+| `TGWITNESS_MCP_TOKEN` | **Integrations → MCP** سے کنکشن ٹوکن کو آرکائیو کریں، جو MCP کلائنٹس کے ساتھ شیئر کیا گیا ہے؛ `--token-file` اسے فائل سے پڑھتا ہے |
+| `TGWITNESS_DATA` | جب کوئی نہ ہو تو ڈیٹا ڈائریکٹری براہِ راست پڑھی جائے `--data-dir`، URL یا ٹوکن دیا گیا ہو |
+
 ## چلانے سے پہلے تصدیق کریں
 
 ایک سطری کمانڈ اپنی ابتدائی اسکرپٹ کے لیے HTTPS پر بھروسہ کرتی ہے۔ یہ اسکرپٹ انسٹالیشن سے پہلے SHA-256 اور ایپلیکیشن اور پابندیوں پر پروجیکٹ کے RSA دستخط کی جانچ کرتی ہے۔ آپ ابتدائی اسکرپٹ کو پہلے ڈاؤن لوڈ کر کے اس کی تصدیق بھی کر سکتے ہیں۔

@@ -15,6 +15,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | message_content.py | Comparación observable de mensajes, excluyendo los metadatos de acceso de transporte |
 | workers.py | Espere a que finalicen los procesos de exportación de archivos antes de proceder a la limpieza tras la cancelación |
 | store.py | Transacciones WAL, cadena de eventos ordenada, filtros de consulta, ajustes operativos |
+| fulltext.py | Índice de texto completo derivado (formas de palabras, BM25), vinculado al encabezado del diario firmado; nunca se exporta. |
 | security.py | Creación de archivos privados, almacén cifrado, firma Ed25519, bloqueo de un único proceso |
 | evidence.py | Exportación del registro completo, derivados, puntos de control y verificación de archivos adjuntos |
 | verify.py | Verificador independiente y de solo lectura (biblioteca estándar + criptografía): archivos, cobertura, registros de testigos y publicaciones en canales, archivos de perfil |

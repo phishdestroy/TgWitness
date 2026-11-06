@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/
 
 아카이브 및 연동 기능
 
-[Case Board 참조](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-board/)[아카이브 분석](https://phishdestroy.github.io/TgWitness/ko/docs/reference/analysis/)[읽기 전용 MCP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/)[로컬 OCR 및 텍스트 변환](https://phishdestroy.github.io/TgWitness/ko/docs/reference/media-analysis/)[발신 웹훅](https://phishdestroy.github.io/TgWitness/ko/docs/reference/webhooks/)[공개 쇼케이스](https://phishdestroy.github.io/TgWitness/ko/docs/reference/showcase/)
+[Case Board 참조](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-board/)[아카이브 분석](https://phishdestroy.github.io/TgWitness/ko/docs/reference/analysis/)[전체 텍스트 검색](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/)[읽기 전용 MCP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/)[명령줄](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/)[로컬 OCR 및 텍스트 변환](https://phishdestroy.github.io/TgWitness/ko/docs/reference/media-analysis/)[발신 웹훅](https://phishdestroy.github.io/TgWitness/ko/docs/reference/webhooks/)[공개 쇼케이스](https://phishdestroy.github.io/TgWitness/ko/docs/reference/showcase/)
 
 증거
 

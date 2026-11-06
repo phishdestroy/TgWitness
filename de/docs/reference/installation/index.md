@@ -44,6 +44,30 @@ Wählen Sie `TGWITNESS_INSTALL_DIR` , um einen anderen Ordner auszuwählen. Inst
 
 Jede Installation enthält **die Dateien „START-HERE.html“** und **„START-HERE.txt“** mit lokalen Pfaden, Befehlen und Links zum Repository. Führen Sie `tgwitness guide` aus, um die Anleitung zu öffnen. Unter Windows verwenden Sie `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` in der PowerShell.
 
+## Einstellungen für die Volltextsuche
+
+[Die Volltextsuche](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/) (Vorschau) erfordert keine Einrichtung. Der Index wird nach einem Update im Hintergrund erstellt.
+
+| Variable oder Befehl | Wirkung |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | Standard: Das Verzeichnis „index“ wird in `search/fulltext.sqlite3` jedes Arbeitsbereichs |
+| `TGWITNESS_FULLTEXT=memory` | Keine Indexdatei; der Index wird bei jedem Start neu erstellt |
+| `TGWITNESS_FULLTEXT=off` | Kein Index; nur Exaktsuche |
+| `tgwitness index status` | Indexstatus jedes Arbeitsbereichs |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | Erstellen Sie jeden Index aus dem signierten Protokoll neu. |
+
+Die vom Administrator unter **„Journal“ → „Filter“ → „Suchindex“** getroffene Auswahl überschreibt die Variable für diesen Arbeitsbereich. Befehle suchen das Datenverzeichnis der Installation, in der sie ausgeführt werden; fügen Sie andernfalls `--data-dir` den Pfad aus `tgwitness paths`. Für ein vollständiges ukrainisches Wörterbuch (GPL-3.0-Daten) installieren Sie `pymorphy3-dicts-uk` in der Python-Umgebung der Installation.
+
+## Zugriff über die Befehlszeile
+
+Die [Befehlszeile](https://phishdestroy.github.io/TgWitness/de/docs/reference/cli/) (Vorschau) liest das Archiv nach Skripten und Agenten ab.
+
+| Variable | Wirkung |
+| --- | --- |
+| `TGWITNESS_URL` | Panel-Adresse für `tgwitness search`, `context`, `messages`, `stats` und `export`; Standardwert `http://127.0.0.1:8787` , wenn ein Token festgelegt ist |
+| `TGWITNESS_MCP_TOKEN` | Archivieren Sie das Verbindungstoken unter **„Integrationen“ → „MCP“**, das mit MCP-Clients geteilt wird; `--token-file` stattdessen aus einer Datei lesen |
+| `TGWITNESS_DATA` | Das Datenverzeichnis wird direkt gelesen, wenn keine `--data-dir`, URL oder Token angegeben wird |
+
 ## Vor der Ausführung überprüfen
 
 Der einzeilige Befehl vertraut bei seinem Startskript auf HTTPS. Dieses Skript überprüft vor der Installation SHA-256 sowie die RSA-Signatur des Projekts in Bezug auf die Anwendung und die Einschränkungen. Sie können das Startskript auch zunächst herunterladen und überprüfen.

@@ -134,7 +134,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. يجب الحفاظ على ملفات ZIP الأصلية وتجزئاتها. تسجيل كل حامل، وعملية نقل، وتاريخ وغرض. الاحتفاظ ببيانات المشغل المنسوبة وملاحظات القضية المرتبطة بها.
 5. بالنسبة للرسائل الصوتية السرية، يجب الحفاظ على الاقتباس والتحدي، وسلسلة شهادات Intel، والقياسات، والمصدر الدقيق، وشروط التعامل مع المفاتيح، والتحقق منها بشكل مستقل. احتفظ بنتيجة التحقق من الشهادة مع العناصر التي تمت مراجعتها.
 
-انظر [نطاق التحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope) للاطلاع على افتراضات الثقة والتقييم المنفصل لمزاعم المصادر، والهوية، والوقت، ونطاق التجميع.
+See [verification scope](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
 
 ## مراجعة المستلم
 

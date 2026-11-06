@@ -44,7 +44,7 @@ Collect
 
 การเก็บรักษาข้อมูลและการบูรณาการ
 
-[อ้างอิง Case Board](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/)[การวิเคราะห์ข้อมูลในคลัง](https://phishdestroy.github.io/TgWitness/th/docs/reference/analysis/)[MCP แบบอ่านเท่านั้น](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/)[OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น](https://phishdestroy.github.io/TgWitness/th/docs/reference/media-analysis/)[webhooks ส่งออก](https://phishdestroy.github.io/TgWitness/th/docs/reference/webhooks/)[แสดงผลงานสาธารณะ](https://phishdestroy.github.io/TgWitness/th/docs/reference/showcase/)
+[อ้างอิง Case Board](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/)[การวิเคราะห์ข้อมูลในคลัง](https://phishdestroy.github.io/TgWitness/th/docs/reference/analysis/)[การค้นหาข้อความเต็ม](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/)[MCP แบบอ่านเท่านั้น](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/)[บรรทัดคำสั่ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/)[OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น](https://phishdestroy.github.io/TgWitness/th/docs/reference/media-analysis/)[webhooks ส่งออก](https://phishdestroy.github.io/TgWitness/th/docs/reference/webhooks/)[แสดงผลงานสาธารณะ](https://phishdestroy.github.io/TgWitness/th/docs/reference/showcase/)
 
 หลักฐาน
 

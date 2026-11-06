@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/high-
 
 שרת מאובטח הפועל 24/7 ב-Hetzner או ב-Phala Cloud, Gateway DNS ובדיקות שצד שלישי יכול לחזור עליהן.
 
-יומן חתום מוכיח שהרשומות לא שונו **לאחר** החתימה. במקרים חמורים השאלה הבאה היא האם מישהו יכול היה לשנות את הנתונים **לפני** החתימה: מי הפעיל את האספן, על איזה מחשב, והאם מישהו התחבר אליו. מצב אופציונלי זה מפעיל את האספן כך שצד שלישי יוכל לבדוק זאת, באמצעות רשומות המוחזקות על ידי ספק הענן ו-Cloudflare, במקום להסתמך על דברי המפעיל.
+High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
 
 השימוש הרגיל בסביבה מקומית וב-Docker נותר ללא שינוי. שום דבר כאן לא פועל אלא אם כן אתם מבצעים פריסה באמצעות `python -m tgwitness.cloud`, והאספן קורא את המארח שלו רק כאשר הפריסה מוגדרת `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/high-
 | מפתח החתימה נוצר בשרת זה | המפתח חותם על הצהרה המציינת את מזהה השרת של הספק ואת ה-hash של ה-cloud-init שקיבל | Collector, נבדק מול הספק |
 | היומן שייך למפתח ולשרת הזה | כל תהליך שמתחיל בראיות ZIP נושא את מדידת המארח עבור אותו שרת | ראיות ZIP |
 
-מדדי המארח (מאזיני SSH ותהליכים, הפעלות נוכחיות, כניסות `wtmp`, האתחול) מדווחים על ידי האספן עצמו ונחתמים בכל התחלת תהליך ובכל `host.state` לרשומות בכל פעם שהם משתנים. משתמש root בשרת יכול לזייף אותם; הם תומכים ברשומות של הספק ושל Cloudflare במקום להחליף אותן.
+The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
 
 ## ספקים
 
@@ -269,11 +269,8 @@ Gateway DNS מכסה את מפתרון השמות של המערכת. DNS over HT
 
 Cloudflare אינה יכולה לראות את תוכן ההצפנה של Telegram, מכשירים אחרים בחשבון Telegram (רשימת המכשירים במצב הראיות מתעדת אותם מצד Telegram) או את ההיפר-ויזור של הספק.
 
-## מה שהדבר הזה לא קובע
+## Reading the deployment result
 
-- הספק וצוותו שולטים בהיפר-ויזור, בדיסקים וברשת.
-- נתוני המארח מדווחים באופן עצמאי על ידי האספן.
-- תוכן כללי חומת האש הקודמים אינו מופיע בכל יומני הספקים; רק Linode שומר את גרסאות הכללים.
-- אין כאן שום דבר חדש בנוגע לאותנטיות ההודעות; ראו "[ראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)".
+For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
 
-טרם נבדק על חשבונות אמיתיים: פריסה תחת הדומיין שלכם (מנהרת Cloudflare ו- DNS), ספקים אחרים, פריסת ניפוי באגים ו `lock`, חשבון Telegram בשרת כזה, והעדכונים החיים של גרסאות מאוחרות יותר דרך מנהרה מהירה. בדקו את הפריסה הראשונה אצל כל ספק באמצעות `plan`, פריסת ניפוי באגים ו `verify` לפני שתסתמכו עליו בתיק.
+Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．

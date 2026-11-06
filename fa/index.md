@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/
 
 [متن‌باز ／ v0.9.1](https://phishdestroy.github.io/TgWitness/fa/docs/reference/changelog/)
 
-گفتگوهای Telegram را با همه ویرایش‌ها و حذف‌ها ذخیره کنید، سپس سابقه‌ای تحویل دهید که هر کسی بتواند بررسی کند．
+Export Telegram chats，preserve their history，and share a signed archive others can verify．
 
 [دموی](https://phishdestroy.github.io/TgWitness/demo/?lang=fa)[راهنمای راه‌اندازی](https://phishdestroy.github.io/TgWitness/demo/guide.html?lang=fa)
 
 داده جعلی، بدون ورود به Telegram．
 
- [ثبت با GitHub Actions （پیش‌نمایش）](https://phishdestroy.github.io/TgWitness/fa/docs/capture/) [نسخهٔ پشتیبان خارج از محل S3： راه‌اندازی و بازیابی](https://phishdestroy.github.io/TgWitness/fa/#s3)
+ [Export an account or selected chats](https://phishdestroy.github.io/TgWitness/fa/docs/reference/account-export/) [ثبت با GitHub Actions （پیش‌نمایش）](https://phishdestroy.github.io/TgWitness/fa/docs/capture/) [نسخهٔ پشتیبان خارج از محل S3： راه‌اندازی و بازیابی](https://phishdestroy.github.io/TgWitness/fa/#s3)
 
 پیامی در گذر زمان＃0042
 

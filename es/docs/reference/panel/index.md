@@ -8,6 +8,8 @@ Todas las pantallas del panel: chats, diario, fuentes, exportaciones, Extras, mo
 
 Qué hace cada pantalla, qué escribe en el diario firmado y dónde se encuentra la guía detallada. El panel muestra un espacio de trabajo cada vez: una cuenta de Telegram con sus propias fuentes, diario y clave de firma. El selector situado en la parte superior de la barra lateral permite cambiar de espacio de trabajo. La dirección identifica el espacio de trabajo (`?ws=…`); mientras la dirección, el selector y la cuenta cargada no coincidan, las acciones permanecerán bloqueadas.
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## Oriéntate
 
 Las secciones diarias se encuentran en la parte superior de la barra lateral; **«Cuentas»** está debajo de **«Espacio de trabajo»** , y todo lo demás se encuentra en **«Más herramientas y ajustes** ». El selector **de nivel de interfaz** de la barra superior determina cuántas secciones aparecen:

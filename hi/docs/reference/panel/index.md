@@ -8,6 +8,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel
 
 प्रत्येक स्क्रीन क्या करती है, यह हस्ताक्षरित जर्नल में क्या लिखती है और विस्तृत मार्गदर्शिका कहाँ है। पैनल एक समय में एक वर्कस्पेस दिखाता है: एक टेलीग्राम खाता अपने स्वयं के स्रोतों, जर्नल और हस्ताक्षर कुंजी के साथ। साइडबार के शीर्ष पर स्थित सेलेक्टर वर्कस्पेस बदलता है। पता वर्कस्पेस को ले जाता है (`?ws=…`); जब तक पता, चयनकर्ता और लोड किया गया खाता असंगत रहते हैं, तब तक क्रियाएँ अवरुद्ध रहती हैं।
 
+Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
 ## अपना रास्ता खोजें
 
 दैनिक अनुभाग साइडबार के शीर्ष पर होते हैं, **खाते** **कार्यक्षेत्र** के अंतर्गत है, और बाकी सब कुछ **अधिक उपकरण और सेटिंग्स** के अंतर्गत है। शीर्ष बार में **इंटरफ़ेस स्तर** स्विच यह तय करता है कि कितने अनुभाग दिखाई दें:
