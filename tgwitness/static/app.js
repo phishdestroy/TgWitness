@@ -4327,12 +4327,13 @@ async function showAccountSessions(){
 $("account-sessions-show").addEventListener("click",e=>busy(e.currentTarget,showAccountSessions));
 $("account-password").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   const owner=actionOwner();
-  const current=window.prompt(tr("Current two-step password. Leave empty if the account has none."));
-  if(current===null)return;
-  const next=window.prompt(tr("New two-step password."));
-  if(!next)return;
-  const hint=window.prompt(tr("Password hint (optional)."))||"";
-  if(!owner.current())return;
+  const prompt=(label,options={})=>window.TgWitnessDialogs.prompt("",{title:tr("Two-step password"),label:tr(label),maxLength:256,...options});
+  const current=await prompt("Current two-step password. Leave empty if the account has none.",{type:"password",autocomplete:"current-password",required:false});
+  if(current===null||!owner.current())return;
+  const next=await prompt("New two-step password.",{type:"password",autocomplete:"new-password"});
+  if(next===null||!owner.current())return;
+  const hint=await prompt("Password hint (optional).",{required:false});
+  if(hint===null||!owner.current())return;
   await json("account/password",{current_password:current||null,new_password:next,hint},{profile:owner.profile,token:owner.token});
   toast(tr("Two-step password saved in Telegram. TgWitness does not keep it."));
 }));
