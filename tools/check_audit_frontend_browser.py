@@ -353,7 +353,7 @@ def presentation(page):
 def pending_action_owners(page, server, child):
     for app in (server.app, server.app.state.profiles.entries[child]['app']):
         app.state.vault.save('credentials', {'api_id': 123, 'api_hash': 'b' * 32, 'session': saved_session()})
-        app.state.store.set_setting('account', {'id': 44, 'username': 'synthetic_fixture'})
+        app.state.store.set_setting('account', {'id': 44, 'username': 'synthetic_fixture', 'key_origin': 'created'})
     mutations = []
     paths = ('auth/logout', 'network/policy', 'alerts')
 

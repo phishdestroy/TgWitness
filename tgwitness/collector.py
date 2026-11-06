@@ -2844,7 +2844,9 @@ class Collector:
         try:
             session = await self.client(functions.account.InitTakeoutSessionRequest(
                 message_megagroups=True, message_channels=True))
-        except (TakeoutInitDelayError, RPCError, OSError, ConnectionError, TimeoutError) as exc:
+            if not isinstance(session, types.account.Takeout):
+                raise ValueError("Telegram did not open a Takeout session.")
+        except (TakeoutInitDelayError, RPCError, OSError, ConnectionError, TimeoutError, ValueError) as exc:
             self.note("telegram.takeout_unavailable", {
                 "error_type": type(exc).__name__, "retry_after": getattr(exc, "seconds", None),
                 "meaning": "History is read without a Takeout session, about three times slower."})
