@@ -17,6 +17,14 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 MAX_LOG_BYTES = 4 * 1024**2
 SUITES = {
+    "evidence": (
+        "test_witness_freshness.py", "test_witness_daily.py", "test_witness_keys.py",
+        "test_witness_continuity.py", "test_replica_recipient.py", "test_assurance_ladder.py",
+        "test_assurance_chain.py", "test_assurance_boundaries.py", "test_verifier_output_safety.py",
+        "test_deletion_semantics.py", "test_deletion_evidence_reports.py",
+        "test_narrative.py", "test_narrative_config.py", "test_evidence_checks.py",
+        "check_narrative_texts.py",
+    ),
     "browser": (
         "test_case_board.py", "test_case_board_api.py", "check_case_board_browser.py",
         "check_showcase.py", "check_showcase_browser.py",
@@ -36,7 +44,7 @@ SUITES = {
         "check_account_reports.py", "check_report_design.py", "check_report_studio.py", "test_snapshot_analytics.py", "test_report_analytics.py", "test_report_composition.py", "check_report_builder_browser.py",
         "test_report_selection.py", "test_report_selection_exports.py", "test_report_history_context.py", "check_report_selection_browser.py",
         "test_report_record_metadata.py", "test_pdf_record_metadata.py",
-        "test_report_profiles.py",
+        "test_report_profiles.py", "test_jurisdiction_guidance.py",
         "test_people_timeline.py", "check_people_timeline_browser.py",
         "test_report_styles.py", "test_report_styles_pdf.py", "check_report_styles_browser.py", "check_report_style_documents.py",
         "check_independent_report_designs_browser.py",
@@ -52,7 +60,7 @@ SUITES = {
         "test_release_data_fixes.py",
         "test_proxy_destination_dns.py",
         "test_ai_routes.py", "test_fulltext.py", "test_cli.py", "test_gap_analysis.py", "test_disclosure_markers.py",
-        "test_verifier_comparison.py", "test_export_budget.py", "test_witness_continuity.py",
+        "test_verifier_comparison.py", "test_verification_launcher.py", "test_verifier_languages.py", "test_export_budget.py", "test_witness_continuity.py",
         "test_capture_liveness.py",
         "test_chat_state.py",
         "test_archive_views.py",
@@ -225,6 +233,13 @@ async def run_checks(checks, output, *, workers=2, timeout=600, cwd=ROOT):
     return passed, results
 
 
+def suite_checks(suite):
+    # Pytest modules without a __main__ block otherwise exit 0 without executing a test.
+    return [Check(Path(script).stem, (sys.executable,
+                  *(("-m", "pytest", "-q", "--tb=short") if suite == 'evidence' and script.startswith('test_') else ()),
+                  str(ROOT / "tools" / script))) for script in SUITES[suite]]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--suite", required=True, choices=SUITES)
@@ -233,8 +248,7 @@ def main():
                         help="Seconds per check, followed by up to five seconds of cleanup")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    checks = [Check(Path(script).stem, (sys.executable, str(ROOT / "tools" / script)))
-              for script in SUITES[args.suite]]
+    checks = suite_checks(args.suite)
     passed, _ = asyncio.run(run_checks(checks, args.output or ROOT / "build/check-results" / args.suite,
                                       workers=args.jobs, timeout=args.timeout))
     return 0 if passed else 1

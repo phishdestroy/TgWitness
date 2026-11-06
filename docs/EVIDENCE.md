@@ -5,6 +5,11 @@ Recipients can verify the saved records, attachments and reports against a trust
 collector key, then compare the journal with an independently retained checkpoint.
 This page describes the formats, the checks and the material to keep for handover.
 
+Recipients can start with **VERIFY.cmd** on Windows: it asks for the original
+ZIP and independently obtained key fingerprint, displays an explained result,
+and saves a separate verification transcript. See [verification launchers and
+the portable runtime](VERIFICATION_LAUNCHER.md) for setup and trust limits.
+
 ## What is signed
 
 | Material | Protection | What to retain |
@@ -288,6 +293,22 @@ naming the method. IDs that were never saved are kept as deletion.unscoped with 
 chat_id; nothing is guessed. Channels and supergroups number messages per chat and are
 never matched this way. When the deleted message was sent by the observed account,
 payload.deleted_message_was_outgoing is true; the deleter is still not supplied.
+
+An unscoped notice does not establish that a message was never saved: a matching
+chat may be outside the current observation scope, or a unique match may be
+unavailable. Recheck absence remains a separate observation from a deletion
+notification in report counts, filters and labels. A later recovery clears the
+current missing state while preserving the earlier unsuccessful check in the
+signed history; neither observation establishes a deletion notice.
+
+Multiple IDs resolved to the same chat from one notification are grouped as
+`deletion.batch`, regardless of their count. The notification does not establish that the entire history was
+cleared, who performed the deletion, or whether it applied to all participants.
+Saved outgoing messages do not change these limits. Older journals may contain
+`history.cleared` events inferred from batches of ten or more IDs, with explanatory
+text attributing the deletion to the other participant. Those inferences are not
+supported by the update. Preserve those original signed records, but treat them
+as grouped deletion notifications; the current interface labels them accordingly.
 
 ## Coverage: continuity, gaps and unobserved IDs
 

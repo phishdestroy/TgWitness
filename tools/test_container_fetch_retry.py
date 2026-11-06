@@ -2,6 +2,7 @@
 
 Run inside a built Wolfi container. Only apk transport and sleep are simulated;
 shell control flow, cache enumeration, SHA-256 checks and cleanup are real.
+The executable stand-ins use its disposable /data volume because /tmp is noexec.
 """
 import argparse
 import hashlib
@@ -15,6 +16,7 @@ import tempfile
 import unittest
 
 INSTALLER = Path(__file__).resolve().parents[1] / "deploy/containers/install-packages.sh"
+FIXTURE_ROOT = Path("/data")
 PAYLOAD = b"synthetic authenticated package fixture\n"
 APK = r'''
 import json, os, pathlib, sys
@@ -59,7 +61,7 @@ with (pathlib.Path(os.environ["FIXTURE_STATE"]) / "calls").open("a") as log:
 
 class FetchRetry(unittest.TestCase):
     def run_installer(self, **environment):
-        with tempfile.TemporaryDirectory(prefix="container-fetch-fixture-") as temporary:
+        with tempfile.TemporaryDirectory(prefix="container-fetch-fixture-", dir=FIXTURE_ROOT) as temporary:
             root = Path(temporary)
             (root / "bin").mkdir()
             for name in ("dirname", "mktemp", "awk", "mkdir", "sort", "ls", "cmp", "ln", "sha256sum", "rm"):
@@ -71,11 +73,17 @@ class FetchRetry(unittest.TestCase):
             (root / "runtime-x86_64.lock").write_text(digest + "  synthetic-1.0-r0.apk\n")
             for name, body in (("apk", APK), ("sleep", SLEEP)):
                 path = root / "bin" / name
-                path.write_text("#!" + sys.executable + "\n" + body)
-                path.chmod(0o700)
-            result = subprocess.run([shutil.which("sh"), str(root / "install-packages.sh"), "runtime"],
+                path.write_text(body)
+                path.chmod(0o600)
+            # The container's temporary mount can be noexec. Run fixture data
+            # through the installed interpreter, keeping that mount restricted.
+            driver = ('apk() { "$FIXTURE_PYTHON" "$FIXTURE_STATE/bin/apk" "$@"; }\n'
+                      'sleep() { "$FIXTURE_PYTHON" "$FIXTURE_STATE/bin/sleep" "$@"; }\n'
+                      '. "$FIXTURE_STATE/install-packages.sh"\n')
+            result = subprocess.run([shutil.which("sh"), "-c", driver, str(root / "install-packages.sh"), "runtime"],
                 env={**os.environ, "PATH": str(root / "bin"),
-                     "FIXTURE_STATE": str(root), **{key: str(value) for key, value in environment.items()}},
+                     "FIXTURE_STATE": str(root), "FIXTURE_PYTHON": sys.executable,
+                     **{key: str(value) for key, value in environment.items()}},
                 capture_output=True, text=True, timeout=60)
             self.assertTrue((root / "calls").is_file(), result.stdout + result.stderr)
             calls = [json.loads(line) for line in (root / "calls").read_text().splitlines()]
@@ -125,8 +133,13 @@ class FetchRetry(unittest.TestCase):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--installer", type=Path, default=INSTALLER)
+    parser.add_argument("--fixture-root", type=Path, default=FIXTURE_ROOT,
+                        help="Writable executable test volume; /tmp is normally noexec")
     args, extra = parser.parse_known_args()
     INSTALLER = args.installer
+    FIXTURE_ROOT = args.fixture_root
     if not Path("/etc/apk/repositories").is_file() or not shutil.which("sh"):
         parser.error("Run inside the built Linux container with its real repository configuration")
+    if not FIXTURE_ROOT.is_dir():
+        parser.error("The executable fixture volume must exist")
     unittest.main(argv=[sys.argv[0], *extra])

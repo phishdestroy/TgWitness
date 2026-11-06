@@ -302,7 +302,7 @@ const labels = {
   "source.access_lost": [tr("Access to the chat lost"), "alert", "coverage"],
   "source.access_restored": [tr("Access to the chat restored"), "refresh", "system"],
   "deletion.batch": [tr("Messages deleted together"), "trash", "delete"],
-  "history.cleared": [tr("Chat history cleared"), "trash", "delete"],
+  "history.cleared": [tr("Messages deleted together"), "trash", "delete"],
   "history.unparsed": [tr("Messages in a format this version cannot read"), "question", "coverage"],
   "message.unpinned": [tr("Message unpinned"), "edit", "edit"],
   "telegram.takeout_unavailable": [tr("Fast export session unavailable"), "clock", "system"],
@@ -1516,6 +1516,8 @@ function excerpt(e) {
     ephemeralMediaText(p.ephemeral_media)].filter(Boolean).join(" · ");
   if (p.text) return p.text;
   if (e.kind==="message.deleted") return tr("Earlier captured versions remain available. Telegram does not report who deleted the message.");
+  // Legacy batch labels and meanings inferred a history clear or actor not supplied by Telegram.
+  if (e.kind==="history.cleared") return tr("Messages deleted together")+" · "+String(p.count??"");
   if (e.kind==="message.missing_on_recheck") return tr("Telegram no longer returns this message; no deletion notice was received.");
   if (e.kind==="replica.completed") return p.error?tr("Stopped: {error}",{error:p.error}):tr("{n} encrypted object(s), {size}",{n:p.objects,size:humanSize(p.bytes)});
   if (e.kind==="alerts.changed") return p.enabled?tr("On · {n} destination(s)",{n:p.destinations}):tr("Off");
@@ -2664,6 +2666,11 @@ const REPORT_PRESETS={
     activity_chart:true,hourly_chart:true,participant_chart:true,chat_chart:true,composition_chart:true,show_changes:true,show_indicators:true}
 };
 let reportSelection;
+let reportGuidance;
+const reportGuidanceReady=import('./views/report-guidance.js?v=1').then(({createReportGuidance})=>{
+  reportGuidance=createReportGuidance({root:$("report-guidance"),tr});
+  return reportGuidance;
+});
 const reportSelectionReady=import('./views/report-selection.js?v=1').then(({createReportSelection})=>{
   reportSelection=createReportSelection({root:$("report-form"),tr,json,
     getOwner:()=>state.workspaceRevision+":"+state.profile,
@@ -2707,8 +2714,9 @@ function resetReportSettings(){
   $("report-design-preview-status").textContent=tr("Preview uses your draft. Save settings before exporting.");
   reportOwner=null;reportReady=false;reportDirty=false;reportRequest++;reportLoading=null;reportSaving=false;
   $("report-form").reset();$("report-fields").disabled=true;$("report-status").replaceChildren();
-  $("report-outline").replaceChildren();$("report-form").querySelector(".report-examination").open=false;
+  $("report-outline").replaceChildren();$("report-form").querySelectorAll(".report-examination").forEach(el=>el.open=false);
   reportSelection?.reset();
+  reportGuidance?.reset();
   reportConfigurations?.reset();
   $("report-form").querySelectorAll(".form-error").forEach(el=>el.remove());
 }
@@ -2719,7 +2727,7 @@ function reportControls(){
 }
 async function loadReportSettings(){
   if(!state.status)return;
-  await Promise.all([reportSelectionReady,reportConfigurationsReady]);
+  await Promise.all([reportSelectionReady,reportConfigurationsReady,reportGuidanceReady]);
   const owner=reportKey();
   if(reportOwner!==owner){resetReportSettings();reportOwner=owner;}
   if(reportSaving||reportReady&&reportDirty)return;
@@ -2728,7 +2736,7 @@ async function loadReportSettings(){
   reportReady=false;reportControls();$("report-status").textContent=tr("Loading…");
   const pending=(async()=>{
     try{
-      const options=await json("report-options",undefined,viewOptions('evidence'));if(!current()||state.view!=='evidence')return;
+      const [options,guidance]=await Promise.all([json("report-options",undefined,viewOptions('evidence')),json("report-guidance",undefined,viewOptions('evidence'))]);if(!current()||state.view!=='evidence')return;
       const select=$("report-language");
       if(!select.options.length){
         select.append(new Option(tr("Same as the panel"),"auto"));
@@ -2742,6 +2750,7 @@ async function loadReportSettings(){
       setReportTemplate(matches?template:"custom");
       setReportDesign(options.design);
       reportSelection.load(options.selection);
+      reportGuidance.load(options.jurisdiction_guidance,guidance);
       reportReady=true;reportDirty=false;formControls?.loaded("report-form");$("report-status").textContent=window.TGW_ONLINE_DEMO?tr("Sample data"):"";
       await reportConfigurations.load();if(!current()||state.view!=='evidence')return;
       if(!$("report-form").hidden&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();
@@ -2760,6 +2769,11 @@ function syncReportParts(){
   $("report-participant-labels").disabled=!$("report-participant-chart").checked;
   $("report-chart-limit").disabled=!$("report-participant-chart").checked&&!$("report-chat-chart").checked;
   const parts=[tr("Case details")];
+  const guidanceActive=reportGuidance?.sync();
+  if(guidanceActive)parts.push(tr("Jurisdiction guidance"));
+  const guidanceTab=$("report-form").querySelector('[data-preview-section="guidance"]');
+  guidanceTab.hidden=!guidanceActive;
+  if(!guidanceActive&&reportPreviewSection==='guidance')showReportPreviewSection('cover');
   if(["question","method","findings","conclusion"].some(key=>$("report-review-"+key).value.trim()))parts.push(tr("Examination notes"));
   if($("report-activity-chart").checked)parts.push(tr("Activity over time"));
   if($("report-hourly-chart").checked)parts.push(tr("Activity by weekday and hour"));
@@ -2784,6 +2798,7 @@ function reportDraft(){
   for(const [id,key] of Object.entries(REPORT_FIELDS))body[key]=$(id).value;
   body.part_size=$("report-part-size").valueAsNumber;body.chart_limit=$("report-chart-limit").valueAsNumber;
   body.selection=reportSelection?.read();
+  body.jurisdiction_guidance=reportGuidance?.read();
   for(const [id,key] of Object.entries(REPORT_CHECKS))body[key]=$(id).checked;
   return body;
 }
@@ -2803,6 +2818,7 @@ function showReportPreviewSection(section){
   const frame=$("report-preview-frame");
   if(frame.hidden)return;
   if(section==='analytics')frame.contentDocument?.getElementById('report-analytics')?.scrollIntoView({block:'start'});
+  else if(section==='guidance')frame.contentDocument?.getElementById('jurisdiction-guidance')?.scrollIntoView({block:'start'});
   else frame.contentWindow?.scrollTo(0,0);
 }
 $("report-preview-frame").addEventListener('load',()=>showReportPreviewSection(reportPreviewSection));
@@ -3036,7 +3052,8 @@ function renderReplica(r){
     $("replica-enabled").checked=s.enabled;$("replica-endpoint").value=s.endpoint;$("replica-region").value=s.region;
     $("replica-bucket").value=s.bucket;$("replica-prefix").value=s.prefix;$("replica-path-style").checked=s.path_style;
     $("replica-interval").value=String(s.interval_minutes);$("replica-retention").value=String(s.retention_days);
-    $("replica-mode").value=s.retention_mode;formControls?.loaded("replica-form");
+    $("replica-mode").value=s.retention_mode;$("replica-evidence").checked=!!s.evidence;
+    $("replica-recipient").value=s.recipient_public_key||"";formControls?.loaded("replica-form");
   }
   for(const id of ["replica-access","replica-secret"])$(id).placeholder=r.has_credentials?tr("Saved — leave empty to keep"):"";
   $("replica-test").disabled=!r.has_credentials;$("replica-sync").disabled=!s.enabled||r.busy;$("replica-key").disabled=!r.has_key;
@@ -3049,6 +3066,7 @@ $("replica-form").addEventListener("submit",event=>{event.preventDefault();busy(
     region:$("replica-region").value.trim()||"us-east-1",bucket:$("replica-bucket").value.trim(),prefix:$("replica-prefix").value.trim()||"tgwitness",
     path_style:$("replica-path-style").checked,interval_minutes:Number($("replica-interval").value),
     retention_days:Number($("replica-retention").value||0),retention_mode:$("replica-mode").value,
+    evidence:$("replica-evidence").checked,recipient_public_key:$("replica-recipient").value.trim(),
     access_key:$("replica-access").value.trim(),secret_key:$("replica-secret").value.trim()});
   formControls?.clearSubmitted(draft,["replica-access","replica-secret"]);
   state.replicaDirty=formControls?.changed(draft)||false;renderReplica(r);formControls?.accepted(draft,state.replicaDirty);
