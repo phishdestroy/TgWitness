@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/witne
 
 独自の鍵とボットを使用してWitnessを実行し、署名済みのチェックポイントをチャンネルに公開し、エクスポートしたデータと照合してください。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [エクスポートと検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/) · [高信頼性](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/) · [パネルガイド](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ A witness retains signed checkpoints separately from the collector. It checks th
 4. 証拠 ZIP → verify.py
 5. Witnessジャーナル、独自の鍵 → verify.py
 6. Telegramチャンネル → verify.py (Telegram Desktopからのエクスポート、または「t.me/s」ページ)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/#verify)
 
 ## TgWitnessが提供するもの、および提供しないもの
 

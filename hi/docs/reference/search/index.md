@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/searc
 
 हस्ताक्षरित जर्नल से जुड़े सूचकांक के साथ, शब्द रूपों, सटीक वाक्यांशों, डोमेनों और @usernames के आधार पर सहेजे गए संदेश खोजें, सर्वोत्तम मिलान पहले।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [संग्रह विश्लेषण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/analysis/) · [स्थानीय OCR और प्रतिलेखन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/media-analysis/) · [विकी](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **पूर्वावलोकन।** **जर्नल** में, खोज क्षेत्र के बगल में **'सर्वश्रेष्ठ मिलान · शब्द रूप'** चुनें। परिणामों को BM25 से रैंक किया जाता है और एक ही शब्द के अन्य रूपों से मेल खाता है: *перевод* खोज परिणामों में *переводом* और *переводы* मिलते हैं, *transfer* खोज परिणामों में *transfers* मिलते हैं, एक चीनी वाक्यांश बिना रिक्त स्थान के भी मिल जाता है। **'नवीनतम पहले · सटीक पाठ**' पूरे रिकॉर्ड पर पिछली उप-स्ट्रिंग खोज को बनाए रखता है।
 
 इंडेक्स व्युत्पन्न डेटा है। इसे हस्ताक्षरित जर्नल से फिर से बनाया जाता है, यह स्वयं कभी हस्ताक्षरित नहीं होता है और कभी निर्यात में शामिल नहीं होता है। मूल रिकॉर्ड नहीं बदलते हैं।
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#benchmark)
 
 ## खोज सिंटैक्स
 

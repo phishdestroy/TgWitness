@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 搜尋已儲存的訊息、檢視 AI 輸入內容，並保存附有來源參考的分析報告。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [工作流程指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 使用**「日誌」**進行不依賴 AI 的本地搜尋；[全文搜尋](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/)（預覽） 可匹配詞形、短語、網域及 @用戶名。若要使用「**詢問存檔」**功能，請先在「**整合**」中啟用 並設定提供者。工作區選擇器用於選擇 帳戶；表單則用於選擇聊天室及觀察期間。 檢索作業 在本地執行。精確短語或網域可縮小檢索範圍；輸入訊息 ID 可查詢已儲存的 版本。檢視摘錄內容，並開啟其日誌記錄或上下文。 本工具不包含向量資料庫，亦不執行自動 Telegram 操作。

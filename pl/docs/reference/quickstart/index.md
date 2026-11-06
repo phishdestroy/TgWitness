@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/quick
 
 Wszystkie sposoby instalacji i uruchomienia TgWitness: pakiet dla systemu Windows, Python, Docker oraz syntetyczna wersja demonstracyjna wraz z wstępnymi testami.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 **Język angielski** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md) · [Ukraiński](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md) · [Português (Brasil)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md) · [Urdu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md) · [हिन्दी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md) · [Bahasa Indonesia](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md) · [Chiński uproszczony](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md)
 
 TgWitness to samodzielna aplikacja służąca do monitorowania grup i kanałów w serwisie Telegram, do których mają Państwo dostęp za pośrednictwem swoich kont. Działa ona lokalnie, korzystając z własnego katalogu danych.

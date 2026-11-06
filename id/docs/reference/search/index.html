@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Referensi</a> <span aria-hidden="true">/</span> <span aria-current="page">Pencarian teks lengkap</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Sebagian isi halaman ini masih dalam bahasa Inggris: teks asli dalam bahasa Inggris telah diubah setelah diterjemahkan.</p><p class="eyebrow">Referensi / Arsip &amp; integrasi</p><h1>Pencarian teks lengkap</h1><p class="guide-outcome">Temukan pesan yang disimpan berdasarkan bentuk kata, frasa persis, domain, dan @nama pengguna, dengan hasil yang paling sesuai ditampilkan terlebih dahulu, serta indeks yang terikat pada jurnal yang ditandatangani.</p><div class="wiki-body"><p><a href="../analysis/">Analisis arsip</a> · <a href="../media-analysis/">OCR dan transkripsi lokal</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<article class="guide-content"><p class="language-notice">Sebagian isi halaman ini masih dalam bahasa Inggris: teks asli dalam bahasa Inggris telah diubah setelah diterjemahkan.</p><p class="eyebrow">Referensi / Arsip &amp; integrasi</p><h1>Pencarian teks lengkap</h1><p class="guide-outcome">Temukan pesan yang disimpan berdasarkan bentuk kata, frasa persis, domain, dan @nama pengguna, dengan hasil yang paling sesuai ditampilkan terlebih dahulu, serta indeks yang terikat pada jurnal yang ditandatangani.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentasi</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">Analisis arsip</a> · <a href="../media-analysis/">OCR dan transkripsi lokal</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
 <p><strong>Pratinjau.</strong> Di <strong>Jurnal</strong>, pilih <strong>&quot;Kecocokan terbaik · bentuk kata&quot;</strong> di sebelah bidang pencarian.
 Hasil diurutkan menggunakan algoritma BM25 dan mencakup bentuk lain dari kata yang sama:
 <em>&quot;перевод&quot;</em> menemukan <em>&quot;переводом&quot;</em> dan <em>&quot;переводы&quot;</em>, <em>&quot;transfer&quot;</em> menemukan <em>&quot;transfers&quot;</em>, frasa dalam bahasa Mandarin
@@ -40,6 +42,20 @@ ditemukan tanpa spasi. Opsi <strong>&quot;Terbaru terlebih dahulu · teks persis
 substring sebelumnya di seluruh catatan.</p>
 <p>Indeks merupakan data turunan. Indeks ini dibangun ulang dari jurnal yang ditandatangani, tidak pernah ditandatangani
 sendiri, dan tidak pernah dimasukkan ke dalam ekspor. Catatan asli tidak berubah.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">Sintaks pencarian<a class="anchor" href="#search-syntax" aria-label="Tautan ke bagian ini">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-
 
 Filtres de rapports, huit modèles, préréglages de contenu, historiques des modifications enregistrés et évaluation incluse dans les exportations signées.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Transformez les observations sélectionnées en un compte rendu lisible de l’affaire : son objet, sa portée, les modifications enregistrées, les graphiques, les conclusions et les références aux sources. Chaque rapport offre au destinataire un moyen de vérifier les éléments fournis et d’examiner l’étendue de la collecte .
 
 La section « **Base de confiance et limitations** » apparaît dans les rapports de journal, de transfert, de discussion, de compte et de partage. Les fichiers PDF du journal et du transfert utilisent la même évaluation que leur fichier « `report.json` » signé. Les manifestes ZIP contiennent le fichier « `case_assessment` » dans le manifeste signé. Cette évaluation accompagne les données exportées. Les observations originales conservent leurs signatures existantes.

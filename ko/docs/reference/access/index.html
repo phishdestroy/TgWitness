@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../../">홈</a> <span aria-hidden="true">/</span> <a href="../../">문서</a> <span aria-hidden="true">/</span> <a href="../">참고 문헌</a> <span aria-hidden="true">/</span> <span aria-current="page">접근 및 권한</span></nav>
 <p class="verification-shortcut"><a href="../verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">참고 문헌 / 설정</p><h1>접근 및 권한</h1><p class="guide-outcome">계정 및 채팅에 대한 접근 권한을 제한하고, 권한을 선택하며, 세션 및 IP 주소를 제한하고, 접근 권한을 철회할 수 있습니다.</p><div class="wiki-body"><p>검토자에게는 하나의 채팅에 대한 접근 권한을, 분석가에게는 사건 내역 내보내기 권한을,
+<article class="guide-content"><p class="language-notice">이 페이지의 일부 내용은 여전히 영어로 되어 있습니다. 번역 후 원본 영어 문구가 변경되었기 때문입니다.</p><p class="eyebrow">참고 문헌 / 설정</p><h1>접근 및 권한</h1><p class="guide-outcome">계정 및 채팅에 대한 접근 권한을 제한하고, 권한을 선택하며, 세션 및 IP 주소를 제한하고, 접근 권한을 철회할 수 있습니다.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">문서</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>검토자에게는 하나의 채팅에 대한 접근 권한을, 분석가에게는 사건 내역 내보내기 권한을,
 운영자에게는 선택된 계정에 대한 관리 권한을 부여할 수 있습니다. 각 사용자는 고유한 토큰을 부여받습니다. 메인
 패널 토큰은 관리자가 보유합니다.</p>
 <p><a href="../accounts/">계정 설정</a> · <a href="../connection/">연결 경로</a> · <a href="../security/">보안 모델</a></p>
@@ -259,16 +261,13 @@ IP 리터럴, URL 자격 증명 및 라벨이 지정된 비밀 정보를 가립�
 발급된 토큰과 세션 인증 정보는 암호화된 볼트에 해시 형태로 보관됩니다.</p>
 <details>
 <summary><strong>주 관리자 및 신뢰 경계</strong></summary>
-
-메인 패널 토큰은 제한 없이 사용됩니다. 이 토큰을 사용하여 브라우저에 로그인하면
-관리자가 설정한 세션 제한이 적용되는 세션이 생성됩니다. 메인 토큰을
-직접 전송하는 스크립트는 전체 액세스 권한을 유지하며 브라우저 세션으로 집계되지 않습니다.
-
-이는 단일 설치 환경 내의 애플리케이션 수준 접근 제어입니다. 모든 작업 공간은
-서버 프로세스를 공유하며, 이는 호스트 관리자로부터의 격리를 의미하지 않습니다. 메인
-토큰, 텔레그램 세션, 서명 키 및 데이터 디렉터리는 비공개로 유지하십시오. 위트니스 토큰은
-패널 접근 토큰이 아닌 별도의 체크포인트/정상 작동 확인 자격 증명입니다.
-
+<p>The main panel token remains unrestricted. Browser sign-ins with it create sessions
+subject to the administrator's configured session limits. Scripts sending the
+main token directly retain full access and are not counted as browser sessions.</p>
+<p>This is application-level access control in one installation. All workspaces share
+the server process; this is not isolation from the host administrator. Keep the main
+token, Telegram sessions, signing keys and data directory private. A witness token
+is a separate checkpoint/health credential, not a panel access token.</p>
 </details></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">GitHub에서 이 페이지 편집하기 ↗</a><a class="next-guide" href="../connection/"><span>다음 단계</span><strong>연결, 프록시 및 데이터 보호 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../verification/">테스트된 내용 →</a></p></footer>
 </main>

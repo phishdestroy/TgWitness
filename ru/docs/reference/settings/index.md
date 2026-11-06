@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/setti
 
 Мастер настройки, цели, уровни интерфейса, маршруты подключения и настройки, общие для группы аккаунтов.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Аккаунты](https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/) · [Связь](https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/) · [Доступ](https://phishdestroy.github.io/TgWitness/ru/docs/reference/access/)
 
 Новая рабочая область открывается `/first-run`: язык и время, уровень интерфейса, цель, подключение, Telegram и чаты. Каждый ответ сохраняется на сервере сразу же после его изменения, поэтому при перезагрузке процесс продолжается с того же шага. На последнем экране отображается список ответов, и вы можете вернуться к любому из них.

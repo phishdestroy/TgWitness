@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-
 
 报告过滤器、八种设计模板、内容预设、已保存的变更历史记录以及评估结果均包含在已签名的导出文件中。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 将选定的观察结果转化为一份通俗易懂的案件报告：包括案件问题、 范围、已保存的更改、图表、调查结果及来源参考。每份报告都为 接收方提供了核查所交付材料并检查其采集 覆盖范围的途径。
 
 **“信任基础与限制**”部分出现在日志、移交、聊天、 账户和共享报告中。日志和移交 PDF 文件采用与 其已签名的 `report.json` 相同的评估结果。ZIP 清单在已签名的 清单中包含 `case_assessment`。该评估结果随导出材料一同传输。原始 观察结果保留其现有的签名。

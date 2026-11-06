@@ -32,12 +32,24 @@
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">MCP แบบอ่านเท่านั้น</span></nav>
 <p class="verification-shortcut"><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">อ้างอิง / การเก็บรักษาข้อมูลและการบูรณาการ</p><h1>MCP แบบอ่านเท่านั้น</h1><p class="guide-outcome">เชื่อมต่อไคลเอนต์ MCP กับพื้นที่ทำงานและห้องสนทนาที่เลือกไว้ โดยให้สิทธิ์การเข้าถึงที่มีระยะเวลาจำกัดและสามารถเพิกถอนได้</p><div class="wiki-body"><p>เชื่อมต่อไคลเอนต์นักวิเคราะห์กับพื้นที่ทำงานและแชทที่เลือกไว้ TgWitness ให้บริการ
+<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / การเก็บรักษาข้อมูลและการบูรณาการ</p><h1>MCP แบบอ่านเท่านั้น</h1><p class="guide-outcome">เชื่อมต่อไคลเอนต์ MCP กับพื้นที่ทำงานและห้องสนทนาที่เลือกไว้ โดยให้สิทธิ์การเข้าถึงที่มีระยะเวลาจำกัดและสามารถเพิกถอนได้</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">เอกสารประกอบ</a> · <a href="../cli/">Archive integrations</a></p>
+<p><img alt="Archive integrations" src="../../../../assets/chapter-integrations.svg" /></p>
+<p>เชื่อมต่อไคลเอนต์นักวิเคราะห์กับพื้นที่ทำงานและแชทที่เลือกไว้ TgWitness ให้บริการ
 <strong>Streamable HTTP ที่ <code>/mcp</code> ในกระบวนการของ panel</strong> แต่ละการเชื่อมต่อมี
 token ระยะเวลาหมดอายุ และเครื่องมือที่ได้รับอนุญาตเป็นของตัวเอง MCP ไม่สามารถส่งข้อความ Telegram เปลี่ยนแปลง
 การตั้งค่า หรือแก้ไขบันทึกที่ลงนามได้ การเชื่อมต่อเดียวกันนี้สามารถใช้งานได้กับ
 <a href="../cli/">บรรทัดคำสั่ง</a></p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">คู่มือขั้นตอนการทำงาน</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#install-and-check">Install and check</a></li>
+<li><a href="#issue-a-connection">Issue a connection</a></li>
+<li><a href="#connect-your-client">Connect your client</a></li>
+<li><a href="#cloudflare-tunnel">Cloudflare Tunnel</a></li>
+<li><a href="#tools-and-boundaries">Tools and boundaries</a></li>
+</ul>
+</details>
 <h2 id="install-and-check">การติดตั้งและการตรวจสอบ<a class="anchor" href="#install-and-check" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <p>ใช้สภาพแวดล้อม Python ที่รันพาเนล จากซอร์สโค้ดที่เช็กเอาต์ออกมา:</p>
 <pre><code class="language-powershell"># Windows PowerShell

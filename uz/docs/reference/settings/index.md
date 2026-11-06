@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/setti
 
 Sozlash ustasi, maqsadlar, interfeys darajalari, ulanish yo&#x27;nalishlari va hisob guruhi bo&#x27;yicha baham ko&#x27;riladigan sozlamalar.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Hisoblar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) · [Ulanish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/) · [Kirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/)
 
 Yangi ish maydoni ochiladi `/first-run`: til va vaqt, interfeys darajasi, maqsad, ulanish, Telegram va suhbatlar. Har bir javob serverda o'zgargach darhol saqlanadi, shuning uchun sahifani yangilash (reload) shu bosqichni davom ettiradi. Oxirgi ekranda javoblar ro'yxati keltirilgan va ularning istalganiga qaytish imkonini beradi.

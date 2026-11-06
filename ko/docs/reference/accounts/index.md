@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/accou
 
 전화번호, QR 코드 또는 인증 키로 로그인하고, Telethon, Pyrogram 또는 Telegram Desktop 세션을 가져와 여러 계정을 동시에 운영할 수 있습니다.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness는 Telethon을 사용하여 MTProto를 통해 텔레그램 사용자 계정(봇이 아님)으로 로그인합니다. 각 계정은 고유한 세션, 소스, 저널 및 서명 키를 가진 별도의 작업 공간(API 및 명령줄 도구에서 ‘워크스페이스’라고 함)에 존재합니다.
 
 세션 파일, 세션 문자열 및 인증 키는 **계정 인증** 수단입니다. 이를 소지한 사람은 누구나 해당 계정으로 활동할 수 있습니다. 여기에는 메시지 내역이 포함되어 있지 않습니다.

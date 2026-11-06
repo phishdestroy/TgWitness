@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/
 
 MCPクライアントを、有効期限付きかつ取り消し可能なアクセス権限で、選択したワークスペースやチャットに接続します。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 アナリストクライアントを、選択したワークスペースやチャットに接続します。TgWitnessは、 **パネルプロセス内の`/mcp`でStreamable HTTP**を提供します。各接続には、独自の トークン、有効期限、および許可されたツールが割り当てられます。MCPは、Telegramメッセージの送信、 設定の変更、または署名付きジャーナルの修正を行うことはできません。これらの接続は、 [コマンドライン](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/)でも同様に機能します。
 
 [ワークフローガイド](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#tools-and-boundaries)
 
 ## インストールと確認
 

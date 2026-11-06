@@ -889,11 +889,28 @@ Enable JavaScript to generate a key and decrypt your archive.
 
 **Full reference**
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Independent capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md)
+
+![Independent capture](https://phishdestroy.github.io/TgWitness/assets/chapter-capture.svg)
+
 **Preview available from `main`.** A fork launches a pinned reusable workflow from `phishdestroy/TgWitness`. The workflow exports an account, selected chats or one chat's event journal using a newly created Telegram session, attests the evidence ZIP or multipart manifest, and uploads only recipient-encrypted handoffs. The normal administration panel is not exposed.
 
 Choose `client=official_web` to run the [official-client witness](https://github.com/phishdestroy/TgWitness/blob/main/docs/OFFICIAL-WITNESS.md) with guarded Telegram Web controls and video. It requires your own upstream proxy and observes one rendered chat. The default `client=api` retains the full-account export modes described below.
 
 The verifier checks the archive against its GitHub attestation, the approved workflow and collector commits, and the signed journal and attachment hashes. The collection process uses pinned upstream code and fresh storage. A reviewer can inspect that code and verify the delivered archive against its recorded run.
+
+**On this page**
+
+- [User flow](https://phishdestroy.github.io/TgWitness/docs/capture/#user-flow)
+- [Session time budget](https://phishdestroy.github.io/TgWitness/docs/capture/#session-time-budget)
+- [Choose this mode or a persistent workspace](https://phishdestroy.github.io/TgWitness/docs/capture/#choose-this-mode-or-a-persistent-workspace)
+- [What is public, and what must stay private](https://phishdestroy.github.io/TgWitness/docs/capture/#what-is-public-and-what-must-stay-private)
+- [Troubleshooting](https://phishdestroy.github.io/TgWitness/docs/capture/#troubleshooting)
+- [Local decryption and verification](https://phishdestroy.github.io/TgWitness/docs/capture/#local-decryption-and-verification)
+- [How the fork is kept outside the capture process](https://phishdestroy.github.io/TgWitness/docs/capture/#how-the-fork-is-kept-outside-the-capture-process)
+- [Cryptographic handoff](https://phishdestroy.github.io/TgWitness/docs/capture/#cryptographic-handoff)
+- [Limits and validation](https://phishdestroy.github.io/TgWitness/docs/capture/#limits-and-validation)
+- [Maintainer release sequence](https://phishdestroy.github.io/TgWitness/docs/capture/#maintainer-release-sequence)
 
 ## User flow
 
@@ -2530,6 +2547,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/quicksta
 
 Every way to install and launch TgWitness: Windows package, Python, Docker and the synthetic demo, with first checks.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 **English** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md) · [Українська](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md) · [Português (Brasil)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md) · [اردو](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md) · [हिन्दी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md) · [Bahasa Indonesia](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md) · [简体中文](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md)
 
 TgWitness is a standalone application for observing Telegram groups and channels that your accounts can access. It runs locally with its own data directory.
@@ -2651,7 +2672,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/installa
 
 Install with one command, check signatures and hashes, update and remove an installation.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Project](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [Quick start](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/) · [Deployment](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/)
+
+**On this page**
+
+- [Install with one command](https://phishdestroy.github.io/TgWitness/docs/reference/installation/#install-with-one-command)
+- [Where everything runs](https://phishdestroy.github.io/TgWitness/docs/reference/installation/#where-everything-runs)
+- [Full-text search settings](https://phishdestroy.github.io/TgWitness/docs/reference/installation/#full-text-search-settings)
+- [Command-line access](https://phishdestroy.github.io/TgWitness/docs/reference/installation/#command-line-access)
+- [Verify before running](https://phishdestroy.github.io/TgWitness/docs/reference/installation/#verify-before-running)
+- [Update an existing installation](https://phishdestroy.github.io/TgWitness/docs/reference/installation/#update-an-existing-installation)
+- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/docs/reference/installation/#remove-tgwitness)
 
 ## Install with one command
 
@@ -2839,6 +2875,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/settings
 
 The setup wizard, goals, interface levels, connection routes and settings shared by an account group.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Accounts](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/) · [Connection](https://phishdestroy.github.io/TgWitness/docs/reference/connection/) · [Access](https://phishdestroy.github.io/TgWitness/docs/reference/access/)
 
 A new workspace opens `/first-run`: language and time, interface level, goal, connection, Telegram and chats. Each answer is saved on the server as soon as it changes, so a reload continues the same step. The last screen lists the answers and lets you go back to any of them.
@@ -2906,6 +2946,10 @@ The size and time estimate reads up to three selected chats and up to 20 message
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/accounts/
 
 Sign in by phone, QR code or auth key, import Telethon, Pyrogram or Telegram Desktop sessions, and run several accounts.
+
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 TgWitness signs in as a **Telegram user account** (not a bot) over MTProto, using Telethon. Each account lives in its own **workspace** (called a *workspace* in the API and command-line tools) with its own session, sources, journal and signing key.
 
@@ -3218,6 +3262,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/access/
 
 Issue scoped access to accounts and chats, choose permissions, limit sessions and IP addresses, and withdraw access.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 Give a reviewer access to one chat, an analyst permission to export a case, or an operator control of selected accounts. Each person gets their own token. The main panel token stays with the administrator.
 
 [Account setup](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/) · [Connection routes](https://phishdestroy.github.io/TgWitness/docs/reference/connection/) · [Security model](https://phishdestroy.github.io/TgWitness/docs/reference/security/)
@@ -3318,7 +3366,11 @@ Panel scripts and styles carry SHA-384 integrity metadata. An import map also co
 
 Issuing, changing and revoking access, and starting or ending sessions, also create signed `access.*` journal records. Tokens are not included in those records. Issued tokens and session credentials are retained as hashes in the encrypted vault.
 
-****Main administrator and trust boundary**** The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions. This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
+****Main administrator and trust boundary****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
 
 
 ---
@@ -3328,6 +3380,10 @@ Issuing, changing and revoking access, and starting or ending sessions, also cre
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/connection/
 
 Authentication, automatic proxy pools, IP modes, fallback policy, external requests and secret storage.
+
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 This document describes TgWitness 0.8.0 behavior and its limits. Authentication, source access, network connectivity and capture completeness are separate states. For sign-in steps, file formats, and multiple accounts, start with [accounts and session formats](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/). For event policies and restart behavior, see [how collection works](https://phishdestroy.github.io/TgWitness/docs/reference/collection/).
 
@@ -3442,7 +3498,21 @@ An MTProxy carries Telegram traffic only. Workspace HTTP operations such as time
 
 For operator-managed private services, the existing server environment setting `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` permits private destinations and keeps proxy-side hostname resolution. It cannot be enabled from the panel. Public-only mode rejects `.onion` destinations before querying the public resolver; Tor onion services require that explicit private-destination setting and a suitable proxy. This DNS behavior applies to external HTTP operations, not Telegram's transport. Cloudflare documents the [JSON DNS endpoint](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Automatic pool parameters**** Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay. | Control | Default | | --- | --- | | Disconnects before replacement | 3 within 10 minutes | | Proxies tried per connection attempt | 3 | | First / maximum rest after failure | 10 minutes / 6 hours | | Planned rotation | Disabled; switch on failure | | Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. | | Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct | | Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool | Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+****Automatic pool parameters****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Control | Default |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 To replace the public list with your own operator catalog, configure the override below. It disables external subscriptions entirely, including when its `proxies` array is empty.
 
@@ -3525,6 +3595,10 @@ Keep the existing key for existing installations until a deliberate migration is
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/deployment/
 
 Run TgWitness as a service on Windows, Linux, macOS or Docker, behind HTTPS, with backups and updates.
+
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **English** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [Українська](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Português (Brasil)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [اردو](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [हिन्दी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [Bahasa Indonesia](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [简体中文](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -3759,6 +3833,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/high-ass
 
 A sealed 24/7 server on Hetzner or Phala Cloud, Gateway DNS and the checks a third party can repeat.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
 
 Ordinary local and Docker use is unchanged. Nothing here runs unless you deploy with `python -m tgwitness.cloud`, and the collector reads its host only when the deployment sets `TGWITNESS_ASSURANCE`.
@@ -3775,6 +3853,23 @@ Flow diagram · Operator → Server, firewall without inbound rules (provider AP
 6. Verifier, read-only tokens → Tunnel connector address and ingress
 7. Verifier, read-only tokens → Signed /api/assurance statement
 8. Verifier, read-only tokens → Evidence ZIP
+
+**On this page**
+
+- [What a verifier can check](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [Providers](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#providers)
+- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [Before you start](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#before-you-start)
+- [From the panel](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#from-the-panel)
+- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [Deploy](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#deploy)
+- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [Remove a deployment](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#remove-a-deployment)
+- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#any-server-self-attested)
+- [Verify](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#verify)
+- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#report-for-evidence-handover)
+- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## What a verifier can check
 
@@ -4039,11 +4134,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/panel/
 
 Every screen of the panel: chats, journal, sources, exports, Extras, protection modes and the code check.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [First setup and settings](https://phishdestroy.github.io/TgWitness/docs/reference/settings/) · [Accounts](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/) · [Export and verify](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/) · [Case reports](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/)
 
 What each screen does, what it writes to the signed journal and where the detailed guide is. The panel shows one workspace at a time: one Telegram account with its own sources, journal and signing key. The selector at the top of the sidebar switches workspaces. The address carries the workspace (`?ws=…`); while the address, the selector and the loaded account disagree, actions stay blocked.
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#more-tools)
 
 ## Find your way
 
@@ -4252,7 +4364,25 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/collecti
 
 Observation scope, live updates, rechecks, attachments, own actions and what a gap means, record by record.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Collection](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
+
+![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+
 TgWitness records what a connected Telegram account observes. The journal preserves those observations, their sequence, and the context supplied with them. It does not infer unseen actions from a missing message or from an account being connected.
+
+**On this page**
+
+- [From login to a journal](https://phishdestroy.github.io/TgWitness/docs/reference/collection/#from-login-to-a-journal)
+- [Observation scope: chosen chats, a folder or the whole account](https://phishdestroy.github.io/TgWitness/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
+- [Scope and event selection](https://phishdestroy.github.io/TgWitness/docs/reference/collection/#scope-and-event-selection)
+- [Own actions](https://phishdestroy.github.io/TgWitness/docs/reference/collection/#own-actions)
+- [Investigation mode: joining teams and talking to bots](https://phishdestroy.github.io/TgWitness/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
+- [Recheck tiers](https://phishdestroy.github.io/TgWitness/docs/reference/collection/#recheck-tiers)
+- [Message history and attribution](https://phishdestroy.github.io/TgWitness/docs/reference/collection/#message-history-and-attribution)
+- [History snapshots](https://phishdestroy.github.io/TgWitness/docs/reference/collection/#history-snapshots)
+- [Attachment handling](https://phishdestroy.github.io/TgWitness/docs/reference/collection/#attachment-handling)
+- [Pause, lock, disconnect, and restart](https://phishdestroy.github.io/TgWitness/docs/reference/collection/#pause-lock-disconnect-and-restart)
+- [Account isolation and verification](https://phishdestroy.github.io/TgWitness/docs/reference/collection/#account-isolation-and-verification)
 
 ## From login to a journal
 
@@ -4417,6 +4547,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/history/
 
 Load past messages from enabled sources, pause and resume, and verify a signed progress report.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Collection](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
+
+![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+
 In **Sources**, review the enabled chats, pause observation, choose Standard API or Takeout export, then choose **Load full history**. The run fixes that list of sources and reads their available past messages into Chats and the signed observation journal. Media uses the existing attachment settings and durable download queue. This is separate from the per-chat signed JSON/HTML export.
 
 For account-wide collection, select **Whole account**, start observation to load its source list, and review that list before starting history. The dialog-list limit still applies (1,000 by default, adjustable in Parameters). A successful run does not prove that every account dialog was listed. Chats discovered or enabled later need another run. Pause observation before starting history; one acquisition owns an account at a time.
@@ -4457,11 +4591,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/operatio
 
 Daily operation of the panel: modes, monitoring categories, parameters, notifications, exports, backup and capacity.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 For your first connection, use [accounts and session formats](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/). For an explanation of saved versions, event policies, and gaps, see [how collection works](https://phishdestroy.github.io/TgWitness/docs/reference/collection/). This guide covers daily operation and recovery.
 
 A managed installation includes **START-HERE.html** and **START-HERE.txt** beside its launcher, with the repository link and commands tailored to its installation path. Run `tgwitness guide --print` over SSH, or `tgwitness paths` to locate the actual data directory. A root systemd install stores private state under `/var/lib/tgwitness-…`; `/opt/tgwitness` holds the program.
 
 For a managed temporary Cloudflare tunnel, `tgwitness tunnel off` closes public access while the local panel and collection keep running. `tgwitness tunnel on` enables it; `tgwitness tunnel restart` creates a new tunnel connection. Use `tgwitness open` to see its current address. An explicit off setting survives service restarts. `tgwitness stop` stops both the panel and collection.
+
+**On this page**
+
+- [Operator workflow](https://phishdestroy.github.io/TgWitness/docs/reference/operations/#operator-workflow)
+- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Runtime modes](https://phishdestroy.github.io/TgWitness/docs/reference/operations/#runtime-modes)
+- [Monitoring categories](https://phishdestroy.github.io/TgWitness/docs/reference/operations/#monitoring-categories)
+- [Notifications](https://phishdestroy.github.io/TgWitness/docs/reference/operations/#notifications)
+- [Panel layout](https://phishdestroy.github.io/TgWitness/docs/reference/operations/#panel-layout)
+- [Deployment environments](https://phishdestroy.github.io/TgWitness/docs/reference/operations/#deployment-environments)
+- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/docs/reference/operations/#startup-checks-and-exports)
+- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/docs/reference/operations/#backup-restore-and-interruptions)
+- [Capacity and retention](https://phishdestroy.github.io/TgWitness/docs/reference/operations/#capacity-and-retention)
 
 ## Operator workflow
 
@@ -4625,7 +4776,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/investig
 
 Whole-account investigations across channels, groups, private chats and bots, from scope to a verified case package.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Follow a case across channels, groups, private chats and bots, from initial acquisition to a cited timeline and verifiable handoff. The interactive website version is at `/docs/cases/`; [preview instructions](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally).
+
+**On this page**
+
+- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/#adapt-the-investigation)
 
 ## Worked case: a destination changes across four conversations
 
@@ -4795,7 +4962,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/features
 
 The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
 TgWitness preserves Telegram conversations accessible to connected accounts, records observed changes and prepares verifiable exports. This reference describes the collection model, current workflows and their boundaries.
+
+**On this page**
+
+- [Standalone application](https://phishdestroy.github.io/TgWitness/docs/reference/features/#standalone-application)
+- [Shared investigations](https://phishdestroy.github.io/TgWitness/docs/reference/features/#shared-investigations)
+- [Archive tools](https://phishdestroy.github.io/TgWitness/docs/reference/features/#archive-tools)
+- [Optional extras](https://phishdestroy.github.io/TgWitness/docs/reference/features/#optional-extras)
+- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/docs/reference/features/#protocol-and-private-sources)
+- [Multiple accounts](https://phishdestroy.github.io/TgWitness/docs/reference/features/#multiple-accounts)
+- [Capture and attribution](https://phishdestroy.github.io/TgWitness/docs/reference/features/#capture-and-attribution)
+- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/docs/reference/features/#capacity-and-telegram-limits)
+- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/docs/reference/features/#reliability-and-recovery)
+- [Evidence model](https://phishdestroy.github.io/TgWitness/docs/reference/features/#evidence-model)
+- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/docs/reference/features/#export-deployment-and-handoff)
+- [Stable release criteria](https://phishdestroy.github.io/TgWitness/docs/reference/features/#stable-release-criteria)
 
 ## Standalone application
 
@@ -4944,11 +5130,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/case-boa
 
 Bookmarks, exact highlights, action slices, discussions, scoped access and the signed annotation history used by Case Board.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Case Board gives an investigation team a shared working view of saved material. Bookmark an observation, highlight an exact passage, save a range of actions, and discuss it with colleagues. Cards retain their source references and signed revision history. Team annotations stay in the workspace, separately identifiable from the original Telegram observations.
 
 [Evidence model](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/) · [Access](https://phishdestroy.github.io/TgWitness/docs/reference/access/) · [Reports](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/)
 
 ![Synthetic investigation feed](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
+
+**On this page**
+
+- [Work with a case](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/#work-with-a-case)
+- [Permissions](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/#permissions)
+- [Stored contracts](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/#stored-contracts)
+- [API and exports](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/#api-and-exports)
+- [Operating limits](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/#operating-limits)
 
 ## Work with a case
 
@@ -5045,6 +5243,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/analysis
 
 Search saved messages, review AI inputs and keep analytical reports with their source references.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Use **Journal** for local search without AI; [full-text search](https://phishdestroy.github.io/TgWitness/docs/reference/search/) (preview) matches word forms, phrases, domains and @usernames. For **Ask the archive**, first enable and configure a provider in **Integrations**. The workspace selector chooses the account; the form chooses chats and the observation period. Retrieval runs locally. An exact phrase or domain narrows retrieval; a message ID requests saved versions. Review the excerpts and open their journal records or context. There is no vector database or automatic Telegram action.
@@ -5086,11 +5288,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/search/
 
 Find saved messages by word forms, exact phrases, domains and @usernames, best matches first, with the index bound to the signed journal.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Archive analysis](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/) · [Local OCR and transcription](https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Preview.** In **Journal**, choose **Best match · word forms** next to the search field. Results are ranked with BM25 and match other forms of the same word: *перевод* finds *переводом* and *переводы*, *transfer* finds *transfers*, a Chinese phrase is found without spaces. **Newest first · exact text** keeps the previous substring search over the whole record.
 
 The index is derived data. It is rebuilt from the signed journal, is never signed itself and never enters an export. The original records do not change.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/docs/reference/search/#benchmark)
 
 ## Search syntax
 
@@ -5216,9 +5434,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/mcp/
 
 Connect an MCP client to selected workspaces and chats with expiring, revocable access.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 Connect an analyst client to selected workspaces and chats. TgWitness serves **Streamable HTTP at `/mcp` in the panel process**. Each connection has its own token, expiry and permitted tools. MCP cannot send Telegram messages, change settings or modify the signed journal. The same connections work with the [command line](https://phishdestroy.github.io/TgWitness/docs/reference/cli/).
 
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/#tools-and-boundaries)
 
 ## Install and check
 
@@ -5316,6 +5546,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/cli/
 
 Search, read context, count activity and export saved messages from scripts and agents, with --json output, stable exit codes and scoped read-only tokens.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [Read-only MCP](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/) · [Full-text search](https://phishdestroy.github.io/TgWitness/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Preview.** `tgwitness search`, `context`, `messages`, `stats` and `export` read saved observations for scripts and AI agents. They cannot send anything to Telegram, change settings or modify the signed journal.
@@ -5403,6 +5637,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/media-an
 
 Recognize captured images and audio with a local worker; keep derived text linked to its source file.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Open a `media.saved` journal record, choose **Recognize attachment**, then select OCR or transcription under **Ask the archive**. Processing is manual and local. There is no cloud media mode or automatic upload. Original attachment bytes and `media_sha256` remain unchanged; recognized text is explicitly marked as machine recognition and stored separately with the source hash, engine/model version, language, parameters and completion time. Transcripts retain returned timestamps.
@@ -5438,6 +5676,10 @@ Files are limited to 50 MiB, images to 20 million pixels, audio to 30 minutes wi
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/
 
 Send scoped events to HTTPS receivers with HMAC signatures, retries and delivery status.
+
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -5475,6 +5717,10 @@ Before adding SIEM writes or notifications, add durable idempotency storage keye
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/showcase/
 
 Publish saved messages of selected public channels and signed snapshots through expiring, revocable links.
+
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Access → Public showcase** creates a separate, read-only page using the existing access-token system. It reads the installation's saved observations. It does not start a collector, sign in to Telegram or acquire a channel for a visitor.
 
@@ -5536,9 +5782,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/how-it-w
 
 Hash chain, signatures, checkpoints and witnesses explained with the exact formulas the verifier uses.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness preserves what a collecting account observed, links those observations into a signed journal and lets another person verify an export against a trusted key and an earlier retained checkpoint.
 
 The [local documentation website](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) adds interactive examples at `/docs/concepts/`, a checkpoint decision explorer at `/docs/witness/`, and walkthroughs for [Case Board](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/), [report design](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/) and [handover extracts](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#handover-extract). All example messages, counts and delays are fictional. Hashes in the chain sandbox are calculated with SHA-256 in the browser. Nothing is sent to Telegram.
+
+**On this page**
+
+- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [What a hash covers](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#what-a-hash-covers)
+- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Pick a workflow](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#pick-a-workflow)
 
 ## A message changes; observations accumulate
 
@@ -5658,6 +5917,10 @@ The website's `/docs/cases/` guide includes an interactive case map and variants
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/
 
 Report filters, eight designs, contents presets, saved change histories and the assessment included in signed exports.
+
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Turn selected observations into a readable account of the case: its question, scope, saved changes, charts, findings and source references. Each report gives the recipient a way to check the delivered material and inspect its collection coverage.
 
@@ -5832,6 +6095,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/account-
 
 Export what an account can read now: scope, resumable jobs, a signed archive and minimized sharing copies.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 An account export reserves its account exclusively. Pause monitoring or another acquisition explicitly before starting or resuming; the app never stops it automatically.
 
 As the installation administrator, choose **Start here → Export my account**, or **Exports → Telegram account → Configure account export**. Sign in if needed, review the scope, and explicitly start the export. Continuous observation is not required. **Saved observations** is a separate export of the existing journal; its ZIP includes all sources regardless of journal filters. Every workspace has its own jobs, signing identity and storage. Issued panel access, including an unrestricted ordinary export grant, cannot open these account-wide routes.
@@ -5936,9 +6203,33 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/evidence
 
 Contents of the signed ZIP, record kinds, process receipts, people profiles, off-site copies and offline verification.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness preserves account-visible Telegram observations in a signed journal. Recipients can verify the saved records, attachments and reports against a trusted collector key, then compare the journal with an independently retained checkpoint. This page describes the formats, the checks and the material to keep for handover.
 
 Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZIP and independently obtained key fingerprint, displays an explained result, and saves a separate verification transcript. See [verification launchers and the portable runtime](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md) for setup and trust limits.
+
+**On this page**
+
+- [What is signed](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#what-is-signed)
+- [Comparing chat exports](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#comparing-chat-exports)
+- [Investigation handoff](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#investigation-handoff)
+- [Handover extract](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#handover-extract)
+- [Readable reports](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#readable-reports)
+- [Event canonicalization](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#event-canonicalization)
+- [Actor semantics](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#actor-semantics)
+- [Coverage: continuity, gaps and unobserved IDs](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)
+- [Producer](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#producer)
+- [People profiles](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#people-profiles)
+- [Independent witness](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#independent-witness)
+- [Manifest and checkpoints](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#manifest-and-checkpoints)
+- [Verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope)
+- [Attachments](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#attachments)
+- [Durable collection and process receipts (0.2)](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#durable-collection-and-process-receipts-02)
+- [RFC 3161 preparation and response verification (0.2)](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)
+- [Optional records in evidence mode: drand and Telegram devices](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices)
 
 ## What is signed
 
@@ -6224,6 +6515,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/witness/
 
 Run a witness with its own key and bot, publish signed checkpoints to a channel and check exports against it.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [Export and verify](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/) · [High assurance](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/) · [Panel guide](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -6238,6 +6533,14 @@ Flow diagram · Collector → Witness (signed checkpoint: record count + head ha
 4. Evidence ZIP → verify.py
 5. Witness journal, own key → verify.py
 6. Telegram channel → verify.py (Telegram Desktop export or t.me/s page)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/docs/reference/witness/#verify)
 
 ## What the witness gets, and what it does not
 
@@ -6435,6 +6738,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/timestam
 
 RFC 3161 timestamps for signed checkpoints: what is sent to the authority and how a response is verified.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness prepares RFC 3161 requests and verifies timestamp authority (TSA) responses. This manual procedure neither selects a TSA nor submits data; evidence mode does both on a schedule ([evidence format](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). A prepared request is **not yet a timestamp proof**.
 
 ## What the proof binds
@@ -6515,6 +6822,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/storage/
 
 Backups, moving older files to your cloud, copies under Object Lock and recovery on a new machine.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 The panel separates three tasks:
 
 | Task | What it does |
@@ -6526,6 +6837,14 @@ The panel separates three tasks:
 Freeing space never deletes or rewrites the signed journal. Each attachment keeps its original SHA-256 and a recovery receipt. Optional gzip compression takes place before authenticated encryption. Cloud filenames do not contain Telegram names, chat IDs or original attachment names. One attachment may be up to 32 GiB.
 
 An upload response alone is not permission to delete a file. TgWitness downloads the complete encrypted object and verifies its size and SHA-256, saves the receipt, then checks the local bytes again immediately before removal. An upload failure, different readback or cancelled transfer leaves the local file in place. If an enabled evidence backup has not yet copied that file, removal also waits for it.
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## When the disk is filling up
 
@@ -6592,6 +6911,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/security
 
 Threat model, access model, secrets at rest, network exposure, session imports and how to report a vulnerability.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
 
 | Area | In short |
@@ -6603,6 +6926,17 @@ This page describes access, storage and network protection in a local or server 
 | Local trust boundary | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
 
 For vulnerability reports, see the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md).
+
+**On this page**
+
+- [Access model](https://phishdestroy.github.io/TgWitness/docs/reference/security/#access-model)
+- [Panel content and exports](https://phishdestroy.github.io/TgWitness/docs/reference/security/#panel-content-and-exports)
+- [Secrets at rest](https://phishdestroy.github.io/TgWitness/docs/reference/security/#secrets-at-rest)
+- [Proxies and network routes](https://phishdestroy.github.io/TgWitness/docs/reference/security/#proxies-and-network-routes)
+- [Sign-in and session imports](https://phishdestroy.github.io/TgWitness/docs/reference/security/#sign-in-and-session-imports)
+- [Logs and transport](https://phishdestroy.github.io/TgWitness/docs/reference/security/#logs-and-transport)
+- [Integrity limits](https://phishdestroy.github.io/TgWitness/docs/reference/security/#integrity-limits)
+- [If you suspect a problem](https://phishdestroy.github.io/TgWitness/docs/reference/security/#if-you-suspect-a-problem)
 
 ## Access model
 
@@ -6673,6 +7007,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/architec
 
 Components of the collector, panel, journal, workers and witness, and how data moves between them.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+
 One Python process hosts the FastAPI panel and any number of isolated workspaces, each with a Telethon user-account client. SQLite holds an append-only signed event journal and mutable operational settings. An encrypted vault holds API credentials, the StringSession, and signing key. The frontend is plain bundled HTML/CSS/JavaScript: no Node build, CDNs, or runtime frontend downloads are needed.
 
 Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.
@@ -6734,7 +7072,61 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/verifica
 
 The live Telegram test, automated checks, browser checks and what remains unverified.
 
-Each result below applies to its recorded revision and environment. The [current capability matrix](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) separates implementation, published downloads and remaining qualification.
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
+**Updated 6 November 2026.** Results are tied to the revision, environment and workload recorded for each run. [Current capabilities](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) describes the available workflows; this page records what has actually been checked.
+
+[Performance graphs](https://phishdestroy.github.io/TgWitness/docs/validation/) · [Signed English audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [Downloadable measurements](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
+
+| Latest evidence | Result | Scope |
+| --- | --- | --- |
+| Release audit · 6 Nov | 1,461 core tests passed; 37 platform skips | Source `92e539af40d8`; open findings retained |
+| Fresh exports · 6 Nov | 127.713 and 141.781 records/s, complete cycle | Two accounts per server; text and metadata through WARP |
+| Retained archives · 6 Nov | 48 archives; 3,598,381 records verified | Existing archives checked against pinned workspace keys |
+| Trusted Live · 5 Nov | Guarded CPU recording and WARP checks | Official Desktop login and native export remain unqualified |
+| Phala / Intel TDX · 4 Nov | All 16 verifier checks passed on later runs | Historical deployment; no Telegram account on the CVM |
+
+**On this page**
+
+- [Release audit and fresh exports · 6 November 2026](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
+- [Trusted Live CPU Ubuntu and WARP · 5 November 2026](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
+- [Live Phala Cloud deployment · 4 November 2026](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
+- [Live server journal inventory · 1 November 2026](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
+- [Recent offline and fault-injection checks · 1 November 2026](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
+- [Live Telegram test, whole account · 29 October 2026](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
+- [Password-protected export opened with libarchive · 29 October 2026](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
+- [Live Telegram test · 27 to 29 October 2026](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
+- [Synthetic local capacity measurement](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#synthetic-local-capacity-measurement)
+- [Full-text search on one million messages · 5 November 2026](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
+- [Remaining qualification](https://phishdestroy.github.io/TgWitness/docs/reference/verification/#remaining-qualification)
+
+## Release audit and fresh exports · 6 November 2026
+
+The audit used v0.9.1 at source `92e539af40d8368d198ff5e040f1d876f2c1310e`, release `92e539af40d8-83e41104669e`. Installed-package smoke checks passed on three servers. The signed report retains the state observed at that time.
+
+[![Acquisition and complete export rates for two fresh workloads](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
+
+| Workload | Records | Acquisition | Complete cycle | Complete-cycle rate |
+| --- | --- | --- | --- | --- |
+| Server A · two accounts | 27,030 | 189.043 s | 211.647 s | 127.713 records/s |
+| Server B · two accounts | 29,299 | 182.513 s | 206.650 s | 141.781 records/s |
+
+Both exports began without resume, excluded attachments and avatars, and ended with zero duplicate or reused records. The complete cycle includes preparation, acquisition, selection, packaging and archive verification. Server A also ran a protected-chat read check. Four FloodWait events on A and three on B were respected. These observations do not establish a general throughput guarantee.
+
+| Check | Result | Qualification |
+| --- | --- | --- |
+| Core pytest | 1,461 passed | 37 platform skips |
+| Browser / browser UX / evidence / site | 102 / 66 / 15 / 9 passed | These programs overlap other tests; counts are not additive |
+| Capture addon | 124 passed | Three Official Web checks blocked by the required Chromium sandbox |
+| API authorization | 269 routes; 538 requests passed | Missing credentials and revoked access |
+| Retained archives | 48 of 48 verified | 3,598,381 records; pinned workspace keys |
+| Live fleet read checks | 24 of 40 profiles passed | 16 WARP routes failed qualification; those profiles were not connected |
+
+The [signed report](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) records all open findings, including three defects in an unpublished secret-chat snapshot absent from the audited main build. The earlier [public-history qualification](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md) used a different revision and workload; its rates must not be combined with this comparison.
+
+Verify the original report using the [pinned key and verifier](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files). Its signature protects the operator's report from alteration. It is not independent attestation, proof of Telegram authorship or GDPR certification.
 
 ## Trusted Live CPU Ubuntu and WARP · 5 November 2026
 
@@ -6750,7 +7142,21 @@ An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and 
 
 ## Live Phala Cloud deployment · 4 November 2026
 
-`--provider phala --quick-tunnel` ran against real **Phala Cloud** (`tdx.small`, region US-WEST-1) with a Phala Cloud API key of an empty workspace, real ntfy.sh, GitHub and Intel PCS. The CVM installed commit `df7d860c` (v0.8.1); deploy, verify and destroy ran from the command line with the fixes below. Seven CVMs cost about 1.9 US cents together.
+**Historical result:** later deployments passed all 16 verifier checks, including Intel TDX and the quick tunnel. Restart evidence, signed address discovery and report timestamps were checked separately. Each test CVM was removed after its run.
+
+| Setup | Recorded value |
+| --- | --- |
+| Provider | Phala Cloud · `tdx.small` · US-WEST-1 |
+| Deployment | `--provider phala --quick-tunnel`; initially empty workspace |
+| Initial collector | `df7d860c` · v0.8.1 |
+| Collector with all fixes | `53a0f7e9` |
+| Production guest | `dstack-0.5.12`; SSH access disabled |
+| External services | ntfy.sh, GitHub and Intel PCS |
+| Observed cost | Seven CVMs, about 1.9 US cents together; historical test pricing |
+
+The sequence below separates initial failures, fixes and completed checks. No Telegram account was connected to these CVMs.
+
+**Deployments 1–2 · provider differences and regression checks**
 
 The first two deployments found five differences from the simulated Phala Cloud. [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) now reproduces each, and fails without its fix:
 
@@ -6762,7 +7168,7 @@ The first two deployments found five differences from the simulated Phala Cloud.
 | With the dstack gateway off, the CVM details never get an `instance_id` | Deploy waits 30 minutes and fails | The instance ID is read from the CVM state |
 | Restarts, stops and starts are CVM operations, not application revisions | `provider_actions` did not list restarts | The operations are read as well |
 
-The third deployment:
+**Deployment 3 · attestation, access checks and restart evidence**
 
 - The CVM ran `dstack-0.5.12` with SSH access off. The collector posted its signed address about 1.5 minutes after creation. Deploy then passed `tdx_binding`, `tdx_quote` (Intel TCB UpToDate, quote v4, FMSPC `20a06f000000`, not in debug mode, not migratable, collateral fetched from Intel), `tdx_compose_hash`, `tdx_compose` (byte for byte) and `tdx_identity` (KMS keys).
 - The panel at its trycloudflare.com address answered 401 without a token or with a wrong one, and 200 with the panel token.
@@ -6771,27 +7177,31 @@ The third deployment:
 - `destroy` removed only that CVM. The workspace was then empty, and the panel address stopped answering.
 - The panel wizard's price check read `tdx.small` at $0.058 an hour. A wrong key got a plain "did not accept the API key" message.
 
-Two further findings, fixed afterwards:
+**Follow-up fixes · signed address discovery and OS measurements**
 
 - Without the address key, `verify` followed the newest well-formed post on the address topic, which is printed in the published compose. One forged post sent it to a host that does not exist, and `statement` failed: a forger could not pass as the collector, but could block third-party verification, for up to 12 hours with a forged future timestamp. The collector now also posts its address signed with its own key, `verify` accepts only such posts when the collector makes them, and posts are ordered by ntfy.sh's receive time. [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) replays the forged posts. A CVM runs this only from a commit that contains it, so this run's collector did not sign its address yet and `verify` said so.
 - `tdx_os` could not run without `dstack-mr`, whose current version has `measure-os` rather than the `measure --json` the documentation named. The verifier now computes MRTD and RTMR0-2 itself from the published image and the VM's shape, ACPI tables included.
 
-The fourth deployment, with these:
+**Deployment 4 · all 16 checks, report seals and restart verification**
 
 - Deploy downloaded the published `dstack-0.5.12` once, matched it to the OS image hash the CVM reported, and `tdx_os` passed: MRTD, RTMR0, RTMR1 and RTMR2 equal the values computed for QEMU 8.2.2, 1 vCPU and 2 GiB. The same computation gave a different RTMR0 for a claimed 4 GiB, 2 vCPUs, QEMU 9.2.1 or a second network card, and failed for a changed kernel, firmware or command line and for the development image.
 - `verify` passed every one of its 16 checks, the quick tunnel's connector included, so the result was PASS. It wrote the HTML and PDF certificate, sealed with a qualified eIDAS time stamp from the Belgian government's time-stamping unit TSU 202301 (status granted on Belgium's trusted list), a FreeTSA time stamp and the verifier's signature; `check-report` confirmed all of them and the PDF's signature.
 - After a restart, `verify --evidence` confirmed two starts, each quoted inside the CVM and each booted from the published `dstack-0.5.12`; the restart and the new boot were REVIEW.
 - `destroy` left the workspace empty.
 
-The fifth deployment ran the collector from commit `53a0f7e9`, which has all of the above:
+**Deployment 5 · collector-signed discovery and forged-post rejection**
+
+The collector ran from commit `53a0f7e9`, which includes the fixes above.
 
 - The collector posted its address signed with its own key, next to the operator's HMAC post. Two forged posts were then added to the topic, one with a zeroed HMAC and one signed by another Ed25519 key, both claiming a time in the year 2096. `verify` took the address signed by the collector key and passed all 16 checks; the seal again carried the qualified Belgian time stamp, FreeTSA's and the verifier's signature, and `check-report` confirmed them.
 - After a restart the collector posted the new address signed: `verify` found it at once, the operator's **Find the current address** 27 seconds later from the HMAC post, and both ignored the forged posts. `verify --evidence` confirmed two starts booted from `dstack-0.5.12`.
 - Deploy printed what Phala bills the CVM, disk included: $0.06078 an hour.
 
+### Panel wizard and remaining scope
+
 The panel wizard ran against Phala Cloud twice, once through its job API and once through the browser with a real Chromium: the price check, creation with the commit under **Advanced**, all six attestation checks passed, the server list showing the billed price (44.37 USD a month), **Find the current address**, the measured compose download, and deletion. The browser saw no page errors. Each time the workspace was empty afterwards.
 
-Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the `dstack-0.6.1` image. The wizard's price before creation is Phala's compute price only, as its API names the disk price only for an existing CVM; the server list shows the billed price after creation.
+Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the `dstack-0.6.1` image. The wizard's price before creation is Phala's compute price only, as its API names the disk price only for an existing CVM; the server list shows the billed price after creation. All prices in this section were observed on 4 November 2026.
 
 ## Live server journal inventory · 1 November 2026
 
@@ -6909,7 +7319,7 @@ The retained live journal establishes real collection, edits, deletion notices, 
 
 Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
 
-Local detailed receipts and screenshots are under test-results/ (Git-ignored). The public screenshot in docs/assets/ contains only fictional demonstration data.
+The [public audit directory](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md) contains only the signed report and aggregate measurements. Detailed operational receipts, raw captures and account material remain private. Application screenshots in `docs/assets/` use fictional demonstration data.
 
 
 ---
@@ -6990,6 +7400,24 @@ To strictly comply with the MIT License, we do not restrict the use of this soft
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/changelog/
 
 Every change by version, including the changes not yet released.
+
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
+**On this page**
+
+- [Unreleased](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/#unreleased)
+- [0.9.1 preview · 5 November 2026](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/#091-preview--5-november-2026)
+- [0.9.0 preview · 4 November 2026](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/#090-preview--4-november-2026)
+- [0.8.1 preview · 2 November 2026](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/#081-preview--2-november-2026)
+- [0.8.0 preview · 2 November 2026](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/#080-preview--2-november-2026)
+- [0.7.1 preview · 1 November 2026](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/#071-preview--1-november-2026)
+- [0.7.0 preview · 31 October 2026](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/#070-preview--31-october-2026)
+- [0.6.1 · 27 October 2026](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/#061--27-october-2026)
+- [0.6.0 · 27 October 2026](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/#060--27-october-2026)
+- [0.5.1 · 27 October 2026](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/#051--27-october-2026)
+- [0.5.0 · 26 October 2026](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/#050--26-october-2026)
 
 ## Unreleased
 

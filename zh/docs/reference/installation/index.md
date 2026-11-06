@@ -4,7 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/insta
 
 只需一条命令即可完成安装、验证签名和哈希值，以及更新和卸载该工具。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [项目](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [快速入门](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/) · [部署](https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/)
+
+**On this page**
+
+- [Install with one command](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#install-with-one-command)
+- [Where everything runs](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#where-everything-runs)
+- [Full-text search settings](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#full-text-search-settings)
+- [Command-line access](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#command-line-access)
+- [Verify before running](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#verify-before-running)
+- [Update an existing installation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#update-an-existing-installation)
+- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#remove-tgwitness)
 
 ## 只需一条命令即可安装
 

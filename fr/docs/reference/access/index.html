@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Accueil</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Référence</a> <span aria-hidden="true">/</span> <span aria-current="page">Accès et autorisations</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Ce qui a été testé →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Rechercher dans la documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Essayez « proxy », « chaîne de hachage », « jeton » ou « témoin »…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Recherche claire" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Saisissez un mot pour effectuer une recherche dans les guides et la documentation de référence. La recherche s&#x27;effectue directement dans votre navigateur.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Référence / Configuration</p><h1>Accès et autorisations</h1><p class="guide-outcome">Définissez les droits d’accès aux comptes et aux discussions, choisissez les autorisations, limitez les sessions et les adresses IP, et révoquez les accès.</p><div class="wiki-body"><p>Accordez à un réviseur l’accès à une conversation, à un analyste l’autorisation d’exporter un dossier, ou à un
+<article class="guide-content"><p class="language-notice">Certaines parties de cette page sont encore en anglais : le texte original en anglais a été modifié après sa traduction.</p><p class="eyebrow">Référence / Configuration</p><h1>Accès et autorisations</h1><p class="guide-outcome">Définissez les droits d’accès aux comptes et aux discussions, choisissez les autorisations, limitez les sessions et les adresses IP, et révoquez les accès.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentation</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>Accordez à un réviseur l’accès à une conversation, à un analyste l’autorisation d’exporter un dossier, ou à un
 opérateur le contrôle de comptes sélectionnés. Chaque personne dispose de son propre jeton. Le jeton du
 panneau principal reste entre les mains de l’administrateur.</p>
 <p><a href="../accounts/">Configuration du compte</a> · <a href="../connection/">Itinéraires de connexion</a> · <a href="../security/">Modèle de sécurité</a></p>
@@ -259,16 +261,13 @@ des enregistrements signés dans le journal <code>access.*</code>. Les jetons ne
 Les jetons émis et les identifiants de session sont conservés sous forme de hachages dans le coffre-fort chiffré.</p>
 <details>
 <summary><strong>Administrateur principal et périmètre de confiance</strong></summary>
-
-Le jeton du panneau principal reste sans restriction. Les connexions via un navigateur à l’aide de ce jeton créent des sessions
-soumises aux limites de session configurées par l’administrateur. Les scripts envoyant le
-jeton principal directement conservent un accès complet et ne sont pas comptabilisés comme des sessions de navigateur.
-
-Il s’agit d’un contrôle d’accès au niveau de l’application au sein d’une même installation. Tous les espaces de travail partagent
-le processus serveur ; il ne s’agit pas d’une isolation vis-à-vis de l’administrateur de l’hôte. Veillez à préserver la confidentialité du
-jeton principal, des sessions Telegram, des clés de signature et du répertoire de données. Un jeton « witness »
-est un identifiant distinct de vérification de l’état de santé du système, et non un jeton d’accès au panneau de contrôle.
-
+<p>The main panel token remains unrestricted. Browser sign-ins with it create sessions
+subject to the administrator's configured session limits. Scripts sending the
+main token directly retain full access and are not counted as browser sessions.</p>
+<p>This is application-level access control in one installation. All workspaces share
+the server process; this is not isolation from the host administrator. Keep the main
+token, Telegram sessions, signing keys and data directory private. A witness token
+is a separate checkpoint/health credential, not a panel access token.</p>
 </details></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">Modifier cette page sur GitHub ↗</a><a class="next-guide" href="../connection/"><span>Étape suivante</span><strong>Connexion, proxys et protection des données →</strong></a><p>Ces guides décrivent la mise en œuvre actuelle. Les résultats de validation et les lacunes restantes sont documentés séparément. <a href="../verification/">Ce qui a été testé →</a></p></footer>
 </main>

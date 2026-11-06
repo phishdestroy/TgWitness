@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/archi
 
 Компоненты системы: сборщик, панель управления, журнал, рабочие процессы и модуль «witness», а также схема передачи данных между ними.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+
 Один процесс на языке Python обеспечивает работу панели FastAPI и любого количества изолированных рабочих пространств, каждое из которых содержит клиент с учетной записью пользователя Telegram. В базе данных SQLite хранится подписанный журнал событий, доступный только для добавления, а также изменяемые операционные настройки. В зашифрованном хранилище находятся учетные данные API, объект StringSession и ключ подписи. Фронтенд представляет собой простой пакет HTML/CSS/JavaScript: не требуется сборка Node, использование CDN или загрузка фронтенда во время выполнения.
 
 Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.

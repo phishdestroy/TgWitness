@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/times
 
 Временные метки RFC 3161 для подписанных контрольных точек: что отправляется в центр авторизации и как проверяется ответ.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness формирует запросы в соответствии со стандартом RFC 3161 и проверяет ответы от органа временных меток (TSA). Данная ручная процедура не предусматривает ни выбора TSA, ни отправки данных; режим сбора доказательств выполняет обе эти операции в соответствии с графиком ([формат доказательств](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Подготовленный запрос **ещё не** является **доказательством с временной меткой**.
 
 ## Что подтверждают эти доказательства

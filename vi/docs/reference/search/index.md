@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/searc
 
 Tìm các tin nhắn đã lưu theo dạng từ, cụm từ chính xác, tên miền và @tên người dùng, hiển thị kết quả phù hợp nhất trước tiên, với chỉ mục được liên kết với nhật ký có chữ ký.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Phân tích kho lưu trữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/analysis/) · [OCR và chuyển đổi văn bản tại địa phương](https://phishdestroy.github.io/TgWitness/vi/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Xem trước.** Trong **Nhật ký**, chọn **"Kết quả phù hợp nhất · các dạng từ**" bên cạnh trường tìm kiếm. Kết quả được xếp hạng theo thuật toán BM25 và bao gồm các dạng khác của cùng một từ: *"перевод"* sẽ tìm thấy *"переводом"* và *"переводы"*, *"transfer"* sẽ tìm thấy *"transfers"*, một cụm từ tiếng Trung sẽ được tìm thấy mà không cần khoảng trắng. Chế độ "**Mới nhất trước · văn bản chính xác"** duy trì tìm kiếm chuỗi con trước đó trên toàn bộ bản ghi.
 
 Chỉ mục là dữ liệu được trích xuất. Nó được tái tạo từ nhật ký đã ký, bản thân nó không bao giờ được ký và không bao giờ được xuất ra. Các bản ghi gốc không bị thay đổi.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#benchmark)
 
 ## Cú pháp tìm kiếm
 

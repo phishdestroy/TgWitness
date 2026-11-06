@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/accou
 
 এখন একটি অ্যাকাউন্ট যা পড়তে পারে তা রপ্তানি করুন: স্কোপ, পুনরায় চালানো যাবে এমন কাজ, স্বাক্ষরিত আর্কাইভ এবং মিনিমাইজড শেয়ারিং কপি।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 অ্যাকাউন্ট রপ্তানি সেই অ্যাকাউন্টকে এককভাবে সংরক্ষণ করে। শুরু বা আবার চালানোর আগে পর্যবেক্ষণ বা অন্য সংগ্রহ স্পষ্টভাবে সাময়িক বন্ধ করুন; অ্যাপ কখনো সেগুলো নিজে বন্ধ করে না।
 
 ইনস্টলেশন প্রশাসক হিসেবে, **Start here → Export my account** অথবা **Exports → Telegram account → Configure account export** নির্বাচন করুন। প্রয়োজন হলে সাইন ইন করুন, স্কোপ পর্যালোচনা করুন এবং স্পষ্টভাবে এক্সপোর্ট শুরু করুন। অবিরাম পর্যবেক্ষণ প্রয়োজন নেই। **সংরক্ষিত পর্যবেক্ষণ** হল বিদ্যমান জার্নালের একটি পৃথক এক্সপোর্ট; এর ZIP জার্নাল ফিল্টার নির্বিশেষে সমস্ত উৎস অন্তর্ভুক্ত করে। প্রতিটি ওয়ার্কস্পেসের নিজস্ব জব, স্বাক্ষরকারী পরিচয় এবং স্টোরেজ রয়েছে। ইস্যুকৃত প্যানেল অ্যাক্সেস, যার মধ্যে একটি অবাধ সাধারণ এক্সপোর্ট গ্রান্ট অন্তর্ভুক্ত, এই অ্যাকাউন্ট-ব্যাপী রুটগুলি খুলতে পারে না।

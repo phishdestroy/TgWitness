@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 透過本地工作程序識別擷取的圖像與音訊；並將衍生的文字與其原始檔案保持關聯。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [工作流程指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 開啟一份 `media.saved` 日誌記錄，選擇「**識別附件**」，然後在「**查詢存檔」**下選取 OCR 或轉錄。處理過程為手動且在本地進行。 本工具不提供雲端媒體模式或自動上傳功能。原始附件位元組與 `media_sha256` 均保持不變；辨識出的文字會明確標示為機器 辨識結果，並與來源雜湊值、引擎／模型版本、 語言、參數及完成時間分開儲存。轉錄內容會保留原始的時間戳記。

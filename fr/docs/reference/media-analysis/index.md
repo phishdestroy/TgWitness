@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/media
 
 Reconnaître les images et les fichiers audio capturés à l'aide d'un worker local ; conserver le texte extrait lié à son fichier source.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Guide des procédures](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Ouvrez un enregistrement du journal `media.saved`, choisissez « **Reconnaître la pièce jointe** », puis sélectionnez « OCR » ou « transcription » sous « **Demander à l’archive** ». Le traitement est manuel et local. Il n’y a ni mode de stockage dans le cloud ni téléchargement automatique. Les octets de la pièce jointe d’origine et le fichier `media_sha256` restent inchangés ; le texte reconnu est explicitement marqué comme issu d’une reconnaissance automatique et stocké séparément avec le hachage source, la version du moteur/modèle, la langue, les paramètres et l’heure d’achèvement. Les transcriptions conservent les horodatages d’origine.

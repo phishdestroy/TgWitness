@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/accou
 
 Bir hesabın şu anda okuyabileceği içeriği dışa aktarın: kapsam, devam ettirilebilir işler, imzalanmış bir arşiv ve küçültülmüş paylaşım kopyaları.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 Hesap dışa aktarımı hesabı yalnızca kendisi için ayırır. Başlatmadan veya sürdürmeden önce izlemeyi ya da diğer veri toplama görevini açıkça duraklatın; uygulama bunları otomatik olarak durdurmaz.
 
 Kurulum yöneticisi olarak, **Buradan başla → Hesabımı dışa aktar seçeneğini** veya **Dışa Aktarmalar → Telegram hesabı → Hesap dışa aktarımını yapılandır seçeneğini** seçin. Gerekirse oturum açın, kapsamı gözden geçirin ve dışa aktarmayı açıkça başlatın. Sürekli gözlem gerekli değildir. "**Kaydedilen gözlemler**", mevcut günlüğün ayrı bir dışa aktarımdır; ZIP, günlük filtrelerinden bağımsız olarak tüm kaynakları içerir. Her çalışma alanının kendi işleri, imzalama kimliği ve depolama alanı vardır. Sınırsız normal dışa aktarma izni dahil olmak üzere verilen panel erişimi, bu hesap genelindeki yolları açamaz.

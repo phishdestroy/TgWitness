@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/accou
 
 导出该账户当前可读取的内容：范围、可恢复的任务、经签名的存档以及已缩减的共享副本。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 账号导出会独占该账号。启动或恢复前，请明确暂停监控或其他采集任务；应用绝不会自动停止它们。
 
 作为安装管理员，请选择**“从这里开始”→“导出我的账户**”，或**“导出”→“Telegram 账户”→“配置账户导出”**。 如有需要请登录，查看权限范围，并明确启动导出。无需持续监控。**已保存的观察记录**是对现有日志的单独导出；其ZIP包含所有来源，不受日志过滤器限制。每个工作区都有独立的任务、签名身份和存储空间。已授予的面板访问权限（包括无限制的普通导出权限）无法访问这些全账户范围的路径。

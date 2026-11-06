@@ -32,9 +32,28 @@
 <nav class="breadcrumbs" aria-label="Guías"><a href="../../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../../">Documentación</a> <span aria-hidden="true">/</span> <a href="../">Referencia</a> <span aria-hidden="true">/</span> <span aria-current="page">Características y limitaciones</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Lo que se ha probado →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Algunas partes de esta página siguen estando en inglés: el original en inglés se modificó tras su traducción.</p><p class="eyebrow">Referencia / Recopilar</p><h1>Características y limitaciones</h1><p class="guide-outcome">El modelo de recopilación actual, los flujos de trabajo con varias cuentas, las exportaciones y los límites operativos de TgWitness.</p><div class="wiki-body"><p>TgWitness conserva las conversaciones de Telegram a las que tienen acceso las cuentas conectadas,
+<article class="guide-content"><p class="language-notice">Algunas partes de esta página siguen estando en inglés: el original en inglés se modificó tras su traducción.</p><p class="eyebrow">Referencia / Recopilar</p><h1>Características y limitaciones</h1><p class="guide-outcome">El modelo de recopilación actual, los flujos de trabajo con varias cuentas, las exportaciones y los límites operativos de TgWitness.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentación</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Project reference</a></p>
+<p><img alt="Project reference" src="../../../../assets/chapter-project.svg" /></p>
+<p>TgWitness conserva las conversaciones de Telegram a las que tienen acceso las cuentas conectadas,
 registra los cambios observados y prepara exportaciones verificables. Esta referencia describe
 el modelo de recopilación, los flujos de trabajo actuales y sus límites.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#standalone-application">Standalone application</a></li>
+<li><a href="#shared-investigations">Shared investigations</a></li>
+<li><a href="#archive-tools">Archive tools</a></li>
+<li><a href="#optional-extras">Optional extras</a></li>
+<li><a href="#protocol-and-private-sources">Protocol and private sources</a></li>
+<li><a href="#multiple-accounts">Multiple accounts</a></li>
+<li><a href="#capture-and-attribution">Capture and attribution</a></li>
+<li><a href="#capacity-and-telegram-limits">Capacity and Telegram limits</a></li>
+<li><a href="#reliability-and-recovery">Reliability and recovery</a></li>
+<li><a href="#evidence-model">Evidence model</a></li>
+<li><a href="#export-deployment-and-handoff">Export, deployment and handoff</a></li>
+<li><a href="#stable-release-criteria">Stable release criteria</a></li>
+</ul>
+</details>
 <h2 id="standalone-application">Aplicación independiente<a class="anchor" href="#standalone-application" aria-label="Enlace a esta sección">#</a></h2>
 <p>TgWitness cuenta con su propia instalación, su propio directorio de datos y su propio ciclo de vida de versiones. La interfaz web incluida
 se encarga de la configuración y la revisión; los registros exportados pueden utilizarse de forma independiente.</p>

@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel
 
 패널의 모든 화면: 채팅, 일지, 소스, 내보내기, 추가 기능, 보호 모드 및 코드 확인.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [초기 설정 및 구성](https://phishdestroy.github.io/TgWitness/ko/docs/reference/settings/) · [계정](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/) · [내보내기 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/) · [사례 보고서](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-reports/)
 
 각 화면의 기능, 서명된 저널에 기록되는 내용, 그리고 자세한 가이드의 위치에 대한 설명입니다. 패널에는 한 번에 하나의 작업 공간이 표시됩니다. 즉, 고유한 소스, 저널 및 서명 키를 가진 하나의 텔레그램 계정입니다. 사이드바 상단의 선택기를 통해 작업 공간을 전환할 수 있습니다. 주소에는 작업 공간이 포함되며(`?ws=…`); 주소, 선택기 및 로드된 계정이 일치하지 않으면 작업이 차단된 상태로 유지됩니다.
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#more-tools)
 
 ## 사용 방법 알아보기
 

@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Guías"><a href="../../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../../">Documentación</a> <span aria-hidden="true">/</span> <a href="../">Referencia</a> <span aria-hidden="true">/</span> <span aria-current="page">Almacenamiento y recuperación</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Lo que se ha probado →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Referencia / Pruebas</p><h1>Almacenamiento y recuperación</h1><p class="guide-outcome">Copias de seguridad, traslado de archivos antiguos a tu nube, copias bajo Object Lock y recuperación en un nuevo equipo.</p><div class="wiki-body"><p>El panel distingue tres tareas:</p>
+<article class="guide-content"><p class="language-notice">Algunas partes de esta página siguen estando en inglés: el original en inglés se modificó tras su traducción.</p><p class="eyebrow">Referencia / Pruebas</p><h1>Almacenamiento y recuperación</h1><p class="guide-outcome">Copias de seguridad, traslado de archivos antiguos a tu nube, copias bajo Object Lock y recuperación en un nuevo equipo.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentación</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>El panel distingue tres tareas:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@ el objeto cifrado completo y verifica su tamaño; SHA-256 guarda el recibo y,
 a continuación, vuelve a comprobar los bytes locales inmediatamente antes de la eliminación. Un error en la subida,
 una lectura diferente o una transferencia cancelada hacen que el archivo local permanezca en su sitio. Si una
 copia de seguridad de pruebas habilitada aún no ha copiado ese archivo, la eliminación también espera a que lo haga.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">Cuando el disco se está llenando<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="Enlace a esta sección">#</a></h2>
 <p>La descarga de adjuntos se pausa por debajo del espacio indicado en <strong>Parámetros → Adjuntos → espacio libre en disco</strong> (1 GiB por defecto), conservando la cola. Las observaciones de texto continúan. Esto es independiente de las notificaciones: desactivarlas no elimina la reserva de descarga ni las protecciones del almacenamiento.</p>
 <p>Para intervenir antes, activa <strong>Ejecutar automáticamente</strong>, elige <strong>Eliminar el archivo local para liberar espacio</strong> y activa <strong>Iniciar una descarga adicional al almacenamiento externo cuando quede poco espacio</strong>. Por defecto, esta regla opcional se inicia con menos de 5120 MiB libres y continúa por lotes hasta alcanzar 10240 MiB. Ambos umbrales son configurables. Usa el mismo destino, antigüedad mínima, límite de lote, verificación mediante lectura completa y requisitos de copia de seguridad de pruebas que una ejecución manual. Nunca habilita un destino por sí sola. Comprueba el espacio cada 30 segundos; un error o la falta de progreso retrasa el siguiente intento cinco minutos. El estado y la hora del reintento sobreviven a los reinicios. Cuando la regla está inactiva, las ejecuciones programadas mantienen su intervalo normal.</p>

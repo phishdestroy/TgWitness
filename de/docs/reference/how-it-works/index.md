@@ -4,9 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/how-i
 
 Hash-Kette, Signaturen, Kontrollpunkte und Zeugen werden anhand der genauen Formeln erläutert, die der Verifizierer verwendet.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness bewahrt die von einem Erfassungskonto beobachteten Inhalte auf, verknüpft diese Beobachtungen zu einem signierten Protokoll und ermöglicht es einer anderen Person, einen Export anhand eines vertrauenswürdigen Schlüssels und eines zuvor gespeicherten Prüfpunkts zu verifizieren.
 
 Die [lokale Dokumentationswebsite](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) enthält zusätzlich interaktive Beispiele unter `/docs/concepts/`, einen Checkpoint-Entscheidungs-Explorer unter `/docs/witness/` sowie Anleitungen für [das Case Board](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-board/), [die Berichtsgestaltung](https://phishdestroy.github.io/TgWitness/de/docs/reference/case-reports/) und [Auszüge zur Übergabe](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#handover-extract). Alle Beispielnachrichten, Zahlenangaben und Verzögerungen sind fiktiv. Hashes in der Chain-Sandbox werden mit SHA-256 im Browser berechnet. Es werden keine Daten an Telegram gesendet.
+
+**On this page**
+
+- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/de/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [What a hash covers](https://phishdestroy.github.io/TgWitness/de/docs/reference/how-it-works/#what-a-hash-covers)
+- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/de/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/de/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/de/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Pick a workflow](https://phishdestroy.github.io/TgWitness/de/docs/reference/how-it-works/#pick-a-workflow)
 
 ## Eine Nachricht ändert sich; Beobachtungen sammeln sich an
 

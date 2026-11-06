@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 匯出該帳號當前可讀取的內容：範圍、可恢復的任務、經簽名的存檔，以及已最小化的共享副本。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 帳號匯出會獨占該帳號。啟動或恢復前，請明確暫停監控或其他蒐集工作；應用程式絕不會自動停止它們。
 
 身為安裝管理員，請選擇「**從這裡開始」→「匯出我的帳號**」，或「**匯出」→「Telegram 帳號」→「設定帳號匯出**」。 如有需要請先登入，檢視權限範圍，並明確啟動匯出程序。無需持續監控。**已儲存的觀察記錄**是對現有日誌的獨立匯出；其 ZIP 包含所有來源，不受日誌篩選器限制。每個工作區皆擁有專屬的任務、簽署身分及儲存空間。已授予的面板存取權限（包含無限制的普通匯出授權）無法開啟這些帳戶層級的路徑。

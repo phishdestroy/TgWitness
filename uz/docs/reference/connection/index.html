@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <a href="../">Manba</a> <span aria-hidden="true">/</span> <span aria-current="page">Ulanish, proksi va ma&#x27;lumotlarni himoya qilish</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Nima sinovdan o&#x27;tkazilgan →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Manba / Sozlash</p><h1>Ulanish, proksi va ma&#x27;lumotlarni himoya qilish</h1><p class="guide-outcome">Avtorizatsiya, avtomatik proksi havzalari, IP rejimlari, zaxira siyosati, tashqi so&#x27;rovlar va maxfiy saqlash.</p><div class="wiki-body"><p>Ushbu hujjat TgWitness 0.8.0 xatti-harakatlari va uning cheklovlarini tasvirlaydi. Avtorizatsiya, manbaga kirish, tarmoq ulanishi va yozib olish to&#x27;liqligi alohida holatlardir. Kirish bosqichlari, fayl formatlari va bir nechta hisoblar bo&#x27;yicha
+<article class="guide-content"><p class="language-notice">Ushbu sahifaning ba&#x27;zi qismlari hanuz ingliz tilida: inglizcha asl matn tarjima qilinganidan keyin o&#x27;zgartirilgan.</p><p class="eyebrow">Manba / Sozlash</p><h1>Ulanish, proksi va ma&#x27;lumotlarni himoya qilish</h1><p class="guide-outcome">Avtorizatsiya, avtomatik proksi havzalari, IP rejimlari, zaxira siyosati, tashqi so&#x27;rovlar va maxfiy saqlash.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Hujjatlash</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Ushbu hujjat TgWitness 0.8.0 xatti-harakatlari va uning cheklovlarini tasvirlaydi. Avtorizatsiya, manbaga kirish, tarmoq ulanishi va yozib olish to&#x27;liqligi alohida holatlardir. Kirish bosqichlari, fayl formatlari va bir nechta hisoblar bo&#x27;yicha
 <a href="../accounts/">hisoblar va sessiya formatlari</a> bo&#x27;limidan boshlang. Hodisalar siyosati va qayta ishga tushirish xatti-harakatlari uchun <a href="../collection/">to&#x27;plash qanday ishlashini</a> ko&#x27;ring.</p>
 <h2 id="guided-connection-setup">Yo'naltirilgan ulanishni sozlash<a class="anchor" href="#guided-connection-setup" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <p><strong>Ulanishida</strong>ma'mur quyidagilarni tanlashi mumkin:<strong>bu hisob</strong><strong>guruh hisobi</strong>yoki<strong>barcha hisoblar</strong>, so'ngra yo'nalishni tanlaydi. <strong>tanlovni ko'rib chiqish</strong>ta'sirlangan hisoblarni ro'yxatlaydi. <strong>tayyorlash va tekshirish</strong>taklif qilingan yo'nalishni saqlanganini o'zgartirmay sinovdan o'tkazadi. <strong>tekshirilgan ulanishni qo'llash</strong>yana tekshiradi, zarur bo'lsa kuzatuvni to'xtatadi, yo'nalishni saqlaydi va allaqachon ishlayotgan kuzatuvni davom ettiradi.
@@ -265,23 +267,49 @@ Ushbu DNS xatti-harakatlari Telegram transportiga emas, balki tashqi HTTP operat
 Cloudflare <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">JSON DNS oxirgi</a> nuqtasini hujjatlashtiradi.</p>
 <details>
 <summary><strong>Avtomatik havza parametrlari</strong></summary>
-
-**Parametrlar → Avtomatik MTProxy** bo&#x27;limida xato chegarasi, sovish vaqti, rejalashtirilgan rotatsiya, proksi ulashish va ruxsat etilgan zaxira kechikishini sozlang.
-
-| Nazorat | Bo&#x27;sh |
-| --- | --- |
-| Almashishdan oldin uzilishlar | 10 daqiqa ichida 3 marta |
-| Har bir ulanish urinishida sinab ko&#x27;riladigan proksi-lar | 3 |
-| Xato bo&#x27;lgandan keyingi birinchi / maksimal dam olish | 10 daqiqa / 6 soat |
-| Rejalashtirilgan aylantirish | O&#x27;chirilgan; xato bo&#x27;lganda yoqiladi |
-| Har bir proksi bo&#x27;yicha hisoblar | 0: alohida kirishlarni afzal ko&#x27;ring, kerak bo&#x27;lganda ulashing. Eksklyuziv kirishni kutish uchun 1 ni belgilang. |
-| Ruxsat etilgan to&#x27;g&#x27;ridan-to&#x27;g&#x27;ri zaxiraga qaytishdan oldingi kechikish | 10 daqiqa; Manzilni yashirish hanuzgacha to&#x27;g&#x27;ridan-to&#x27;g&#x27;ri ulanishni rad etadi |
-| Ma&#x27;lumot oqimini yangilash / transport tekshiruvlari | 60 / 10 daqiqa; asosiy ish maydoni qiymatlari umumiy zaxiraga ham tegishli |
-
-Turli proxy-serverlar turli chiqish manzillarini kafolatlamaydi. Ushbu sozlamalar Telegram limitlarini bekor qilmaydi yoki anonimlikni isbotlamaydi.
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Boshqaruv</th>
+<th>O&#x27;rnatilgan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>Ommaviy ro&#x27;yxatni o&#x27;zingizning operator katalogingiz bilan almashtirish uchun quyidagi ustunlikni sozlang.
 Bu tashqi obunalarni butunlay o&#x27;chirib qo&#x27;yadi, hatto uning <code>proxies</code> massivida hech narsa bo&#x27;lmaganida ham.</p>
 <p><a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">Bo&#x27;sh katalogni</a>

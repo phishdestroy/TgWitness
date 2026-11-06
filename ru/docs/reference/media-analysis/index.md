@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/media
 
 Распознавайте захваченные изображения и аудио с помощью локального рабочего процесса; сохраняйте полученный текст с привязкой к исходному файлу.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Руководство по рабочему процессу](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Вики](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Откройте запись журнала `media.saved`, выберите **«Распознать вложение**», затем выберите «OCR» или «транскрипция» в разделе **«Запросить у архива**». Обработка осуществляется вручную и локально. Режим облачного хранения медиафайлов или автоматическая загрузка отсутствуют. Исходные байты вложения и файл `media_sha256` остаются неизменными; распознанный текст явно помечается как результат машинного распознавания и хранится отдельно с указанием исходного хеша, версии движка/модели, языка, параметров и времени завершения. В транскрипциях сохраняются возвращённые временные метки.

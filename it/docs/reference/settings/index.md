@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/setti
 
 La procedura guidata di configurazione, gli obiettivi, i livelli dell’interfaccia, i percorsi di connessione e le impostazioni condivise da un gruppo di account.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/it/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Account](https://phishdestroy.github.io/TgWitness/it/docs/reference/accounts/) · [Collegamento](https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/) · [Accesso](https://phishdestroy.github.io/TgWitness/it/docs/reference/access/)
 
 Si apre un nuovo spazio di lavoro `/first-run`: lingua e ora, livello dell’interfaccia, obiettivo, connessione, Telegram e chat. Ogni risposta viene salvata sul server non appena cambia, quindi ricaricando la pagina si riprende dallo stesso passaggio. L’ultima schermata elenca le risposte e consente di tornare a qualsiasi di esse.

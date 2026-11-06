@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/witne
 
 자체 키와 봇을 사용하여 위트니스를 실행하고, 서명된 체크포인트를 채널에 게시한 후, 내보낸 데이터를 이를 기준으로 대조하여 확인하십시오.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [내보내기 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/) · [높은 신뢰도](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/) · [패널 가이드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ A witness retains signed checkpoints separately from the collector. It checks th
 4. 증거 ZIP → verify.py
 5. Witness 저널, 자체 키 → verify.py
 6. 텔레그램 채널 → verify.py (텔레그램 데스크톱 내보내기 또는 t.me/s 페이지)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#verify)
 
 ## TgWitness가 제공하는 기능과 제공하지 않는 기능
 

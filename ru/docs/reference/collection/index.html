@@ -32,9 +32,27 @@
 <nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">Как устроен сбор</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Что проверено →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Часть страницы пока на английском: английский оригинал изменился после перевода.</p><p class="eyebrow">Справочник / Сбор</p><h1>Как устроен сбор</h1><p class="guide-outcome">Объём наблюдения, обновления в режиме реального времени, повторные проверки, вложения, собственные действия и значение пробелов — запись за записью.</p><div class="wiki-body"><p>TgWitness фиксирует то, что наблюдает подключённая учётная запись Telegram. Журнал сохраняет
+<article class="guide-content"><p class="language-notice">Часть страницы пока на английском: английский оригинал изменился после перевода.</p><p class="eyebrow">Справочник / Сбор</p><h1>Как устроен сбор</h1><p class="guide-outcome">Объём наблюдения, обновления в режиме реального времени, повторные проверки, вложения, собственные действия и значение пробелов — запись за записью.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Документация</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md">Коллекция</a></p>
+<p><img alt="Collection" src="../../../../assets/chapter-collect.svg" /></p>
+<p>TgWitness фиксирует то, что наблюдает подключённая учётная запись Telegram. Журнал сохраняет
 эти наблюдения, их последовательность и сопутствующий контекст. Он
 не делает выводов о невидимых действиях на основании отсутствующего сообщения или факта подключения учётной записи.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#from-login-to-a-journal">From login to a journal</a></li>
+<li><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Observation scope: chosen chats, a folder or the whole account</a></li>
+<li><a href="#scope-and-event-selection">Scope and event selection</a></li>
+<li><a href="#own-actions">Own actions</a></li>
+<li><a href="#investigation-mode-joining-teams-and-talking-to-bots">Investigation mode: joining teams and talking to bots</a></li>
+<li><a href="#recheck-tiers">Recheck tiers</a></li>
+<li><a href="#message-history-and-attribution">Message history and attribution</a></li>
+<li><a href="#history-snapshots">History snapshots</a></li>
+<li><a href="#attachment-handling">Attachment handling</a></li>
+<li><a href="#pause-lock-disconnect-and-restart">Pause, lock, disconnect, and restart</a></li>
+<li><a href="#account-isolation-and-verification">Account isolation and verification</a></li>
+</ul>
+</details>
 <h2 id="from-login-to-a-journal">От входа в систему до журнала<a class="anchor" href="#from-login-to-a-journal" aria-label="Ссылка на раздел">#</a></h2>
 <p>For self-destructing photos and files, see <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md">Self-destructing media</a>.
 It explains the priority worker, saved and unavailable outcomes, and the limits of

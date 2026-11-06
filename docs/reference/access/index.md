@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/access/
 
 Issue scoped access to accounts and chats, choose permissions, limit sessions and IP addresses, and withdraw access.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 Give a reviewer access to one chat, an analyst permission to export a case, or an operator control of selected accounts. Each person gets their own token. The main panel token stays with the administrator.
 
 [Account setup](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/) · [Connection routes](https://phishdestroy.github.io/TgWitness/docs/reference/connection/) · [Security model](https://phishdestroy.github.io/TgWitness/docs/reference/security/)
@@ -104,4 +108,8 @@ Panel scripts and styles carry SHA-384 integrity metadata. An import map also co
 
 Issuing, changing and revoking access, and starting or ending sessions, also create signed `access.*` journal records. Tokens are not included in those records. Issued tokens and session credentials are retained as hashes in the encrypted vault.
 
-****Main administrator and trust boundary**** The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions. This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
+****Main administrator and trust boundary****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

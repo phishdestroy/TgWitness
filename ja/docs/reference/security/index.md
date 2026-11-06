@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/secur
 
 脅威モデル、アクセスモデル、保存中の機密情報、ネットワークへの露出、セッションのインポート、および脆弱性の報告方法について。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
 
 | エリア | 要約すると |
@@ -15,6 +19,17 @@ This page describes access, storage and network protection in a local or server 
 | ローカル・トラスト・バウンダリー | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
 
 脆弱性に関する報告については、[セキュリティポリシー](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)をご参照ください。
+
+**On this page**
+
+- [Access model](https://phishdestroy.github.io/TgWitness/ja/docs/reference/security/#access-model)
+- [Panel content and exports](https://phishdestroy.github.io/TgWitness/ja/docs/reference/security/#panel-content-and-exports)
+- [Secrets at rest](https://phishdestroy.github.io/TgWitness/ja/docs/reference/security/#secrets-at-rest)
+- [Proxies and network routes](https://phishdestroy.github.io/TgWitness/ja/docs/reference/security/#proxies-and-network-routes)
+- [Sign-in and session imports](https://phishdestroy.github.io/TgWitness/ja/docs/reference/security/#sign-in-and-session-imports)
+- [Logs and transport](https://phishdestroy.github.io/TgWitness/ja/docs/reference/security/#logs-and-transport)
+- [Integrity limits](https://phishdestroy.github.io/TgWitness/ja/docs/reference/security/#integrity-limits)
+- [If you suspect a problem](https://phishdestroy.github.io/TgWitness/ja/docs/reference/security/#if-you-suspect-a-problem)
 
 ## アクセスモデル
 

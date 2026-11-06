@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/media
 
 זיהוי תמונות וקבצי אודיו שנלכדו באמצעות עובד מקומי; שמירת הטקסט המופק מקושר לקובץ המקור שלו.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [מדריך לתהליך העבודה](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ויקי](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 פתחו רשומת יומן `media.saved`, בחרו **באפשרות "זיהוי קובץ מצורף"** (**Recognize attachment**), ולאחר מכן בחרו ב-OCR או בתמלול תחת "**שאל את הארכיון" (Ask the archive**). העיבוד הוא ידני ומקומי. אין מצב מדיה בענן או העלאה אוטומטית. בתים מקוריים של הקובץ המצורף ו- `media_sha256` נשארים ללא שינוי; טקסט מזוהה מסומן במפורש כזיהוי ממוחשב ומאוחסן בנפרד עם ה-hash המקורי, גרסת המנוע/המודל, השפה, הפרמטרים וזמן ההשלמה. תמלולים שומרים על חותמות הזמן שהוחזרו.

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/setti
 
 设置向导、目标、界面层级、连接路径以及账户组共享的设置。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [账户](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/) · [连接](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/) · [访问](https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/)
 
 新建工作区时会弹出 `/first-run`：语言与时间、界面层级、目标、 连接、Telegram 及聊天。每个答案一经 更改即会保存到服务器，因此刷新页面后可继续执行同一步骤。最后一个屏幕列出了所有答案， 并允许您返回其中的任意一个。

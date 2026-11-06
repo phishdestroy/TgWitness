@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/witne
 
 Jalankan TgWitness dengan kunci dan botnya sendiri, publikasikan titik pemeriksaan yang ditandatangani ke saluran, dan periksa ekspor data berdasarkan titik pemeriksaan tersebut.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [Ekspor dan verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/) · [Jaminan tinggi](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/) · [Panduan panel](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ Diagram alur · Pengumpul → Witness (titik pemeriksaan yang ditandatangani: ju
 4. Berkas ZIP Bukti → verify.py
 5. Jurnal saksi, kunci sendiri → verify.py
 6. Saluran Telegram → verify.py (Ekspor dari Telegram Desktop atau halaman t.me/s)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/#verify)
 
 ## Apa yang diperoleh oleh TgWitness, dan apa yang tidak
 

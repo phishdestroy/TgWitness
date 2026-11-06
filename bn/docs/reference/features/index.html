@@ -32,7 +32,26 @@
 <nav class="breadcrumbs" aria-label="গাইডসমূহ"><a href="../../../">হোম</a> <span aria-hidden="true">/</span> <a href="../../">ডকুমেন্টেশন</a> <span aria-hidden="true">/</span> <a href="../">তথ্যসূত্র</a> <span aria-hidden="true">/</span> <span aria-current="page">বৈশিষ্ট্য এবং সীমাবদ্ধতা</span></nav>
 <p class="verification-shortcut"><a href="../verification/">কি পরীক্ষা করা হয়েছে →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ডকুমেন্টেশন অনুসন্ধান করুন</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="প্রক্সি, হ্যাশ চেইন, টোকেন বা উইটনেস চেষ্টা করুন…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="স্পষ্ট অনুসন্ধান" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">গাইড এবং রেফারেন্স অনুসন্ধান করতে একটি শব্দ টাইপ করুন। অনুসন্ধান আপনার ব্রাউজারেই থাকবে।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">এই পৃষ্ঠার কিছু অংশ এখনও ইংরেজিতে রয়েছে: অনুবাদ করার পর মূল ইংরেজি সংস্করণটি পরিবর্তিত হয়েছে।</p><p class="eyebrow">তথ্যসূত্র / সংগ্রহ করুন</p><h1>বৈশিষ্ট্য এবং সীমাবদ্ধতা</h1><p class="guide-outcome">বর্তমান সংগ্রহ মডেল, মাল্টি-অ্যাকাউন্ট ওয়ার্কফ্লো, এক্সপোর্ট এবং TgWitness-এর অপারেশনাল সীমা।</p><div class="wiki-body"><p>TgWitness সংযুক্ত অ্যাকাউন্টগুলির জন্য Telegram কথোপকথন সংরক্ষণ করে, পর্যবেক্ষিত পরিবর্তনগুলি রেকর্ড করে এবং যাচাইযোগ্য রপ্তানি প্রস্তুত করে। এই রেফারেন্সে সংগ্রহ মডেল, বর্তমান কর্মপ্রবাহ এবং তাদের সীমাবদ্ধতা বর্ণনা করা হয়েছে।</p>
+<article class="guide-content"><p class="language-notice">এই পৃষ্ঠার কিছু অংশ এখনও ইংরেজিতে রয়েছে: অনুবাদ করার পর মূল ইংরেজি সংস্করণটি পরিবর্তিত হয়েছে।</p><p class="eyebrow">তথ্যসূত্র / সংগ্রহ করুন</p><h1>বৈশিষ্ট্য এবং সীমাবদ্ধতা</h1><p class="guide-outcome">বর্তমান সংগ্রহ মডেল, মাল্টি-অ্যাকাউন্ট ওয়ার্কফ্লো, এক্সপোর্ট এবং TgWitness-এর অপারেশনাল সীমা।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">টিজিউইটনেস</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">ডকুমেন্টেশন</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Project reference</a></p>
+<p><img alt="Project reference" src="../../../../assets/chapter-project.svg" /></p>
+<p>TgWitness সংযুক্ত অ্যাকাউন্টগুলির জন্য Telegram কথোপকথন সংরক্ষণ করে, পর্যবেক্ষিত পরিবর্তনগুলি রেকর্ড করে এবং যাচাইযোগ্য রপ্তানি প্রস্তুত করে। এই রেফারেন্সে সংগ্রহ মডেল, বর্তমান কর্মপ্রবাহ এবং তাদের সীমাবদ্ধতা বর্ণনা করা হয়েছে।</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#standalone-application">Standalone application</a></li>
+<li><a href="#shared-investigations">Shared investigations</a></li>
+<li><a href="#archive-tools">Archive tools</a></li>
+<li><a href="#optional-extras">Optional extras</a></li>
+<li><a href="#protocol-and-private-sources">Protocol and private sources</a></li>
+<li><a href="#multiple-accounts">Multiple accounts</a></li>
+<li><a href="#capture-and-attribution">Capture and attribution</a></li>
+<li><a href="#capacity-and-telegram-limits">Capacity and Telegram limits</a></li>
+<li><a href="#reliability-and-recovery">Reliability and recovery</a></li>
+<li><a href="#evidence-model">Evidence model</a></li>
+<li><a href="#export-deployment-and-handoff">Export, deployment and handoff</a></li>
+<li><a href="#stable-release-criteria">Stable release criteria</a></li>
+</ul>
+</details>
 <h2 id="standalone-application">স্বতন্ত্র অ্যাপ্লিকেশন<a class="anchor" href="#standalone-application" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
 <p>TgWitness-এর নিজস্ব ইনস্টলেশন, ডেটা ডিরেক্টরি এবং রিলিজ লাইফসাইকেল রয়েছে। বান্ডিলকৃত ওয়েব ইন্টারফেস সেটআপ এবং পর্যালোচনা পরিচালনা করে; রপ্তানি করা রেকর্ডগুলো স্বতন্ত্রভাবে ব্যবহার করা যেতে পারে।</p>
 <p>অপারেটর তাদের অ্যাকাউন্ট সংযুক্ত করে, প্রত্যেকের কাছে দৃশ্যমান উৎস নির্বাচন করে এবং সংরক্ষিত পর্যবেক্ষণ জার্নাল অর্জন করে। প্যানেল বিষয়বস্তু, সংরক্ষিত পরিবর্তন, পর্যবেক্ষণের উৎস-তথ্য এবং পরিচিত ফাঁকগুলো প্রদর্শন করে। অন্য একজন তদন্তকারী রপ্তানি করা উপাদান যাচাই করতে পারে।</p>

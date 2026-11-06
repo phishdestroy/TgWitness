@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 面板中的每個畫面：聊天、日誌、來源、匯出、額外功能、保護模式以及程式碼檢查。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [首次設定與設定選項](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/settings/) · [帳戶](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/) · [匯出與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/) · [案例報告](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)
 
 各畫面功能說明、其寫入簽名日誌的內容，以及詳細 指南的位置。面板每次僅顯示一個工作區：一個 Telegram 帳號及其專屬的 來源、日誌與簽名金鑰。側邊欄頂端的選取器可切換 工作區。網址包含工作區資訊（`?ws=…`）；若網址、 選擇器與已載入的帳號不一致，則所有操作將被封鎖。
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#more-tools)
 
 ## 探索使用方法
 

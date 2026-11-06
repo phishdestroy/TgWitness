@@ -4,7 +4,25 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/colle
 
 Обсяг спостереження, оновлення в режимі реального часу, повторні перевірки, вкладення, власні дії та значення пропусків — запис за записом.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Колекція](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
+
+![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+
 TgWitness фіксує те, що бачить підключений обліковий запис Telegram. Журнал зберігає ці спостереження, їхню послідовність та контекст, що супроводжує їх. Він не робить висновків про невидимі дії на підставі відсутнього повідомлення або підключеного облікового запису.
+
+**On this page**
+
+- [From login to a journal](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/#from-login-to-a-journal)
+- [Observation scope: chosen chats, a folder or the whole account](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
+- [Scope and event selection](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/#scope-and-event-selection)
+- [Own actions](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/#own-actions)
+- [Investigation mode: joining teams and talking to bots](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
+- [Recheck tiers](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/#recheck-tiers)
+- [Message history and attribution](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/#message-history-and-attribution)
+- [History snapshots](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/#history-snapshots)
+- [Attachment handling](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/#attachment-handling)
+- [Pause, lock, disconnect, and restart](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/#pause-lock-disconnect-and-restart)
+- [Account isolation and verification](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/#account-isolation-and-verification)
 
 ## Від входу в систему до журналу
 

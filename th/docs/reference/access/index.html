@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">การเข้าถึงและสิทธิ์</span></nav>
 <p class="verification-shortcut"><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">อ้างอิง / การตั้งค่า</p><h1>การเข้าถึงและสิทธิ์</h1><p class="guide-outcome">กำหนดสิทธิ์การเข้าถึงบัญชีและห้องสนทนา, เลือกสิทธิ์การเข้าถึง, จำกัดจำนวนเซสชันและที่อยู่ IP, และยกเลิกสิทธิ์การเข้าถึง</p><div class="wiki-body"><p>ให้สิทธิ์ผู้ตรวจสอบเข้าถึงการสนทนาหนึ่งครั้ง ให้สิทธิ์นักวิเคราะห์ส่งออกกรณี หรือ
+<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / การตั้งค่า</p><h1>การเข้าถึงและสิทธิ์</h1><p class="guide-outcome">กำหนดสิทธิ์การเข้าถึงบัญชีและห้องสนทนา, เลือกสิทธิ์การเข้าถึง, จำกัดจำนวนเซสชันและที่อยู่ IP, และยกเลิกสิทธิ์การเข้าถึง</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">เอกสารประกอบ</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>ให้สิทธิ์ผู้ตรวจสอบเข้าถึงการสนทนาหนึ่งครั้ง ให้สิทธิ์นักวิเคราะห์ส่งออกกรณี หรือ
 ให้ผู้ดำเนินการควบคุมบัญชีที่เลือกไว้ แต่ละคนจะได้รับโทเค็นของตัวเอง โทเค็นของ
 แผงควบคุมหลักจะอยู่กับผู้ดูแลระบบ</p>
 <p><a href="../accounts/">การตั้งค่าบัญชี</a> · <a href="../connection/">เส้นทางการเชื่อมต่อ</a> · <a href="../security/">โมเดลความปลอดภัย</a></p>
@@ -259,16 +261,13 @@ tunnel ให้ตรวจสอบที่อยู่แสดงใน &qu
 โทเค็นที่ออกและข้อมูลรับรองเซสชันจะถูกเก็บรักษาไว้ในรูปแบบแฮชภายในคลังข้อมูลที่เข้ารหัส</p>
 <details>
 <summary><strong>ผู้ดูแลระบบหลักและขอบเขตความเชื่อถือ</strong></summary>
-
-โทเค็นแผงหลักยังคงไม่ถูกจำกัด การเข้าสู่ระบบผ่านเบราว์เซอร์ด้วยโทเค็นนี้จะสร้างเซสชัน
-ที่อยู่ภายใต้ขีดจำกัดเซสชันที่ผู้ดูแลระบบกำหนด สคริปต์ที่ส่ง
-โทเค็นหลักโดยตรงจะยังคงมีสิทธิ์เข้าถึงเต็มรูปแบบ และไม่ถูกนับเป็นเซสชันเบราว์เซอร์
-
-นี่คือระบบควบคุมการเข้าถึงระดับแอปพลิเคชันในระบบติดตั้งเดียว ทุกพื้นที่ทำงานใช้
-กระบวนการเซิร์ฟเวอร์ร่วมกัน; นี่ไม่ใช่การแยกตัวจากผู้ดูแลระบบโฮสต์ ให้รักษา
-โทเค็นหลัก เซสชัน Telegram กุญแจการลงนาม และไดเรกทอรีข้อมูลให้เป็นความลับ โทเค็นพยาน
-เป็นจุดตรวจสอบ/ข้อมูลรับรองสถานะการทำงานที่แยกต่างหาก ไม่ใช่โทเค็นการเข้าถึงแผงควบคุม
-
+<p>The main panel token remains unrestricted. Browser sign-ins with it create sessions
+subject to the administrator's configured session limits. Scripts sending the
+main token directly retain full access and are not counted as browser sessions.</p>
+<p>This is application-level access control in one installation. All workspaces share
+the server process; this is not isolation from the host administrator. Keep the main
+token, Telegram sessions, signing keys and data directory private. A witness token
+is a separate checkpoint/health credential, not a panel access token.</p>
 </details></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">แก้ไขหน้านี้บน GitHub ↗</a><a class="next-guide" href="../connection/"><span>ขั้นตอนต่อไป</span><strong>การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล →</strong></a><p>คู่มือเหล่านี้อธิบายการนำไปใช้ในปัจจุบัน ผลการตรวจสอบความถูกต้องและช่องว่างที่ยังเหลืออยู่ได้รับการบันทึกไว้อย่างแยกต่างหาก <a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p></footer>
 </main>

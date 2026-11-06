@@ -32,9 +32,25 @@
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">โหมดการสืบสวน</span></nav>
 <p class="verification-shortcut"><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / Collect</p><h1>โหมดการสืบสวน</h1><p class="guide-outcome">การสืบสวนบัญชีทั้งหมด รวมถึงช่อง กลุ่ม การสนทนาส่วนตัว และบอต ตั้งแต่ขั้นตอนการกำหนดขอบเขตไปจนถึงการจัดทำชุดหลักฐานที่ได้รับการยืนยัน</p><div class="wiki-body"><p>ติดตามคดีผ่านช่องต่างๆ กลุ่ม แชทส่วนตัว และบอต ตั้งแต่ขั้นตอน
+<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / Collect</p><h1>โหมดการสืบสวน</h1><p class="guide-outcome">การสืบสวนบัญชีทั้งหมด รวมถึงช่อง กลุ่ม การสนทนาส่วนตัว และบอต ตั้งแต่ขั้นตอนการกำหนดขอบเขตไปจนถึงการจัดทำชุดหลักฐานที่ได้รับการยืนยัน</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">เอกสารประกอบ</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p>ติดตามคดีผ่านช่องต่างๆ กลุ่ม แชทส่วนตัว และบอต ตั้งแต่ขั้นตอน
 การเก็บข้อมูลเบื้องต้น ไปจนถึงไทม์ไลน์ที่อ้างอิงได้ และการส่งต่อข้อมูลที่สามารถตรวจสอบได้ เวอร์ชันเว็บไซต์แบบโต้ตอบ
 อยู่ที่ <code>/docs/cases/</code>; <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">ดูคำแนะนำการดูตัวอย่าง</a></p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#worked-case-a-destination-changes-across-four-conversations">Worked case: a destination changes across four conversations</a></li>
+<li><a href="#1-define-the-case-and-collect-the-whole-account">1. Define the case and collect the whole account</a></li>
+<li><a href="#2-inventory-every-source-and-acquire-historical-context">2. Inventory every source and acquire historical context</a></li>
+<li><a href="#3-preserve-the-evolving-case-and-deliberate-interactions">3. Preserve the evolving case and deliberate interactions</a></li>
+<li><a href="#4-connect-observations-across-chats">4. Connect observations across chats</a></li>
+<li><a href="#5-build-the-cross-chat-timeline">5. Build the cross-chat timeline</a></li>
+<li><a href="#6-add-account-perspectives-without-losing-their-origin">6. Add account perspectives without losing their origin</a></li>
+<li><a href="#7-assemble-and-verify-the-case-handoff">7. Assemble and verify the case handoff</a></li>
+<li><a href="#adapt-the-investigation">Adapt the investigation</a></li>
+</ul>
+</details>
 <h2 id="worked-case-a-destination-changes-across-four-conversations">กรณีตัวอย่าง: จุดหมายปลายทางเปลี่ยนแปลงไปตลอดการสนทนาสี่ครั้ง<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <p>ประกาศหนึ่งชี้ไปยังบอท กลุ่มปฏิบัติการหารือเกี่ยวกับจุดหมายการชำระเงินใหม่
 และคีย์บอร์ดของบอทแสดงจุดหมายนั้น ประกาศถูกแก้ไข

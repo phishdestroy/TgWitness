@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">الأمن ومعالجة البيانات</span></nav>
 <p class="verification-shortcut"><a href="../verification/">ما تم اختباره ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">لا تزال أجزاء من هذه الصفحة باللغة الإنجليزية: فقد تغير النص الأصلي باللغة الإنجليزية بعد ترجمته.</p><p class="eyebrow">مرجع / الأمن والمشروع</p><h1>الأمن ومعالجة البيانات</h1><p class="guide-outcome">نموذج التهديدات، ونموذج الوصول، والأسرار المخزنة، والتعرض الشبكي، واستيراد الجلسات، وكيفية الإبلاغ عن الثغرات الأمنية.</p><div class="wiki-body"><p>This page describes access, storage and network protection in a local or server workspace.
+<article class="guide-content"><p class="language-notice">لا تزال أجزاء من هذه الصفحة باللغة الإنجليزية: فقد تغير النص الأصلي باللغة الإنجليزية بعد ترجمته.</p><p class="eyebrow">مرجع / الأمن والمشروع</p><h1>الأمن ومعالجة البيانات</h1><p class="guide-outcome">نموذج التهديدات، ونموذج الوصول، والأسرار المخزنة، والتعرض الشبكي، واستيراد الجلسات، وكيفية الإبلاغ عن الثغرات الأمنية.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">التوثيق</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>This page describes access, storage and network protection in a local or server workspace.
 For collection on a GitHub runner or in an Intel TDX confidential VM, see the
 <a href="../evidence/#verification-scope">verification modes</a>, which add checks of the collection environment.
 Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.</p>
@@ -67,6 +69,19 @@ Account connections, notifications, timestamps, off-site copies and witnesses ha
 </tbody>
 </table></div>
 <p>للاطلاع على تقارير الثغرات الأمنية، انظر <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">سياسة الأمان</a>.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#access-model">Access model</a></li>
+<li><a href="#panel-content-and-exports">Panel content and exports</a></li>
+<li><a href="#secrets-at-rest">Secrets at rest</a></li>
+<li><a href="#proxies-and-network-routes">Proxies and network routes</a></li>
+<li><a href="#sign-in-and-session-imports">Sign-in and session imports</a></li>
+<li><a href="#logs-and-transport">Logs and transport</a></li>
+<li><a href="#integrity-limits">Integrity limits</a></li>
+<li><a href="#if-you-suspect-a-problem">If you suspect a problem</a></li>
+</ul>
+</details>
 <h2 id="access-model">نموذج الوصول<a class="anchor" href="#access-model" aria-label="رابط لهذا القسم">#</a></h2>
 <p>يمنح رمز اللوحة الرئيسية تحكمًا كاملاً. يمكن للأشخاص الآخرين الحصول على صلاحيات وصول
 <a href="../access/">محددة النطاق</a>: مساحات العمل والدردشات المختارة، والأذونات، وتاريخ انتهاء الصلاحية،

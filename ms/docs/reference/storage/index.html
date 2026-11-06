@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Rujukan</a> <span aria-hidden="true">/</span> <span aria-current="page">Penyimpanan dan pemulihan</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Rujukan / Bukti</p><h1>Penyimpanan dan pemulihan</h1><p class="guide-outcome">Sandaran, memindahkan fail lama ke awan anda, salinan di bawah Object Lock dan pemulihan pada mesin baru.</p><div class="wiki-body"><p>Panel memisahkan tiga tugas:</p>
+<article class="guide-content"><p class="language-notice">Bahagian-bahagian halaman ini masih dalam bahasa Inggeris: teks asal Inggeris telah diubah selepas diterjemahkan.</p><p class="eyebrow">Rujukan / Bukti</p><h1>Penyimpanan dan pemulihan</h1><p class="guide-outcome">Sandaran, memindahkan fail lama ke awan anda, salinan di bawah Object Lock dan pemulihan pada mesin baru.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentasi</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Panel memisahkan tiga tugas:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -57,6 +59,16 @@
 </table></div>
 <p>Membersihkan ruang tidak pernah memadam atau menulis semula jurnal yang disahkan. Setiap lampiran mengekalkan tandatangan asalnya dan resit pemulihan.SHA-256 Pemampatan gzip pilihan dilakukan sebelum penyulitan berotentikasi. Nama fail awan tidak mengandungi nama Telegram, ID sembang atau nama lampiran asal. Satu lampiran boleh sehingga 32 GiB.</p>
 <p>Respon muat naik sahaja tidak memberi kebenaran untuk memadam fail. TgWitness memuat turun objek disulit sepenuhnya dan mengesahkan saiz serta SHA-256, menyimpan resit, kemudian menyemak bait tempatan sekali lagi sejurus sebelum pemadaman. Kegagalan muat naik, bacaan semula berbeza atau pemindahan dibatalkan mengekalkan fail tempatan di tempatnya. Jika sandaran bukti yang diaktifkan belum menyalin fail tersebut, pemadaman juga akan menunggu sehingga ia disalin.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">Apabila cakera semakin penuh<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="Pautan ke bahagian ini">#</a></h2>
 <p>Muat turun lampiran dijeda apabila ruang kosong di bawah nilai <strong>Parameter → Lampiran → ruang cakera kosong</strong> (lalai 1 GiB), dengan giliran dikekalkan. Pemerhatian teks diteruskan. Ini tidak bergantung pada pemberitahuan: mematikannya tidak mematikan rizab muat turun atau perlindungan storan.</p>
 <p>Untuk bertindak lebih awal, aktifkan <strong>Jalankan secara automatik</strong>, pilih <strong>Buang fail setempat untuk mengosongkan ruang</strong> dan aktifkan <strong>Mulakan pemindahan tambahan apabila ruang cakera rendah</strong>. Secara lalai, peraturan pilihan bermula di bawah 5120 MiB kosong dan memproses kelompok sehingga 10240 MiB tersedia. Kedua-dua ambang boleh ditetapkan. Destinasi, usia minimum fail, had kelompok, pengesahan bacaan semula penuh dan prasyarat sandaran bukti sama seperti proses manual. Destinasi tidak diaktifkan sendiri. Semakan dibuat setiap 30 saat; ralat atau tiada kemajuan menangguhkan cubaan berikutnya lima minit. Keadaan dan masa cubaan semula kekal selepas mula semula. Ketika peraturan tidak aktif, proses berjadual mengekalkan sela biasa.</p>

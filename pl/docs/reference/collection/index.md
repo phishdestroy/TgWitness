@@ -4,7 +4,25 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/colle
 
 Zakres obserwacji, aktualizacje na żywo, ponowne weryfikacje, załączniki, własne działania oraz znaczenie luk w danych – wszystko to w ujęciu poszczególnych wpisów.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Kolekcja](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
+
+![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+
 TgWitness rejestruje to, co obserwuje podłączone konto w aplikacji Telegram. Dziennik zachowuje te obserwacje, ich kolejność oraz towarzyszący im kontekst. Nie wyciąga wniosków dotyczących niewidocznych działań na podstawie brakującej wiadomości lub faktu, że konto jest podłączone.
+
+**On this page**
+
+- [From login to a journal](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/#from-login-to-a-journal)
+- [Observation scope: chosen chats, a folder or the whole account](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
+- [Scope and event selection](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/#scope-and-event-selection)
+- [Own actions](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/#own-actions)
+- [Investigation mode: joining teams and talking to bots](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
+- [Recheck tiers](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/#recheck-tiers)
+- [Message history and attribution](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/#message-history-and-attribution)
+- [History snapshots](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/#history-snapshots)
+- [Attachment handling](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/#attachment-handling)
+- [Pause, lock, disconnect, and restart](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/#pause-lock-disconnect-and-restart)
+- [Account isolation and verification](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/#account-isolation-and-verification)
 
 ## Od logowania do dziennika
 

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/webho
 
 HMAC imzolari, qayta urinishlar va yetkazib berish holati bilan HTTPS qabul qiluvchilarga doirali voqealarni yuboring.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [Ish jarayoni bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Tanlangan ish maydonida **Integratsiyalar → Chiquvchi webhooks** bo'limini oching. HTTPS qabul qiluvchini qo'shing, collector/media/export voqealarini tanlang va ixtiyoriy ravishda yangi kuzatuvlar va o'zgarishlar uchun suhbatlarni tanlang. Xabar matni standart bo'yicha o'chirilgan. Parchalarni yoqish xabar o'zgarishi voqealariga ko'pi bilan 1 000 belgini qo'shadi; xom Telegram maydonchalari va ma'lumotlar hech qachon yuborilmaydi.

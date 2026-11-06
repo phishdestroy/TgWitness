@@ -4,11 +4,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-
 
 بُک مارکس، عین نمایاں نشانیات، ایکشن سلائسز، مباحثے، محدود رسائی اور دستخط شدہ تشریحی تاریخ جو کیس بورڈ استعمال کرتا ہے۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 کیس بورڈ تفتیشی ٹیم کو محفوظ شدہ مواد کا ایک مشترکہ ورکنگ ویو فراہم کرتا ہے۔ کسی مشاہدے کو بک مارک کریں، کسی مخصوص عبارت کو نمایاں کریں، متعدد کارروائیوں کو محفوظ کریں، اور اسے ساتھیوں کے ساتھ زیرِ بحث لائیں۔ کارڈز اپنے ماخذ کے حوالہ جات اور دستخط شدہ نظر ثانی کی تاریخ کو برقرار رکھتے ہیں۔ ٹیم کی تشریحات ورک اسپیس میں رہتی ہیں، اور اصل ٹیلیگرام مشاہدات سے علیحدہ طور پر قابلِ شناخت ہوتی ہیں۔
 
 [شواہد کا ماڈل](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/) · [رسائی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/access/) · [رپورٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-reports/)
 
 ![مصنوعی تفتیش فیڈ](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
+
+**On this page**
+
+- [Work with a case](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/#work-with-a-case)
+- [Permissions](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/#permissions)
+- [Stored contracts](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/#stored-contracts)
+- [API and exports](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/#api-and-exports)
+- [Operating limits](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/#operating-limits)
 
 ## ایک کیس کے ساتھ کام کریں
 

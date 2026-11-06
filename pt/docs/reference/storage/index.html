@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Guias"><a href="../../../">Página inicial</a> <span aria-hidden="true">/</span> <a href="../../">Documentação</a> <span aria-hidden="true">/</span> <a href="../">Referência</a> <span aria-hidden="true">/</span> <span aria-current="page">Armazenamento e recuperação</span></nav>
 <p class="verification-shortcut"><a href="../verification/">O que foi testado →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Pesquisar na documentação</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Experimente “proxy”, “cadeia de hash”, “token” ou “testemunha”…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pesquisa clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Digite uma palavra para pesquisar nos guias e na referência. A pesquisa é realizada diretamente no seu navegador.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Referência / Provas</p><h1>Armazenamento e recuperação</h1><p class="guide-outcome">Backups, transferência de arquivos mais antigos para a nuvem, cópias sob o Object Lock e recuperação em um novo computador.</p><div class="wiki-body"><p>O painel separa três tarefas:</p>
+<article class="guide-content"><p class="language-notice">Algumas partes desta página ainda estão em inglês: o original em inglês sofreu alterações após ter sido traduzido.</p><p class="eyebrow">Referência / Provas</p><h1>Armazenamento e recuperação</h1><p class="guide-outcome">Backups, transferência de arquivos mais antigos para a nuvem, cópias sob o Object Lock e recuperação em um novo computador.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentação</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>O painel separa três tarefas:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@ o objeto criptografado completo e verifica seu tamanho; SHA-256 salva o comprova
 e, em seguida, verifica os bytes locais novamente imediatamente antes da remoção. Uma falha no upload,
 uma leitura diferente ou uma transferência cancelada mantêm o arquivo local no lugar. Se um
 backup de evidência ativado ainda não tiver copiado esse arquivo, a remoção também aguarda até que isso ocorra.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">Quando o disco está ficando cheio<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="Link para esta seção">#</a></h2>
 <p>Os downloads de anexos são pausados abaixo do espaço definido em <strong>Parâmetros → Anexos → espaço livre em disco</strong> (1 GiB por padrão), mantendo a fila. As observações de texto continuam. Isso independe das notificações: desativá-las não desativa a reserva de download nem as proteções do armazenamento.</p>
 <p>Para agir antes, habilite <strong>Executar automaticamente</strong>, escolha <strong>Remover o arquivo local para liberar espaço</strong> e habilite <strong>Iniciar uma transferência extra quando houver pouco espaço em disco</strong>. Por padrão, a regra opcional começa abaixo de 5120 MiB livres e processa lotes até atingir 10240 MiB. Ambos os limites são configuráveis. Usa o mesmo destino, idade mínima dos arquivos, limite do lote, verificação por releitura completa e requisitos de backup das evidências da execução manual. Nunca habilita um destino sozinha. As verificações ocorrem a cada 30 segundos; um erro ou falta de progresso adia a próxima tentativa por cinco minutos. O estado e o horário da nova tentativa sobrevivem à reinicialização. Quando a regra está inativa, as execuções agendadas mantêm seu intervalo normal.</p>

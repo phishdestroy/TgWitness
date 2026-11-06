@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">Полнотекстовый поиск</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Что проверено →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Часть страницы пока на английском: английский оригинал изменился после перевода.</p><p class="eyebrow">Справочник / Архив и интеграции</p><h1>Полнотекстовый поиск</h1><p class="guide-outcome">Поиск сохраненных сообщений по формам слов, точным фразам, доменам и @именам пользователей, с отображением наиболее подходящих результатов в первую очередь, при этом индекс привязан к подписанному журналу.</p><div class="wiki-body"><p><a href="../analysis/">Анализ архива</a> · <a href="../media-analysis/">Локальное распознавание текста (OCR) и транскрипция</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Вики</a></p>
+<article class="guide-content"><p class="language-notice">Часть страницы пока на английском: английский оригинал изменился после перевода.</p><p class="eyebrow">Справочник / Архив и интеграции</p><h1>Полнотекстовый поиск</h1><p class="guide-outcome">Поиск сохраненных сообщений по формам слов, точным фразам, доменам и @именам пользователей, с отображением наиболее подходящих результатов в первую очередь, при этом индекс привязан к подписанному журналу.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Документация</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">Анализ архива</a> · <a href="../media-analysis/">Локальное распознавание текста (OCR) и транскрипция</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Вики</a></p>
 <p><strong>Предварительный просмотр.</strong> В разделе <strong>«Журнал</strong>» выберите <strong>«Лучшее совпадение · формы слова»</strong> рядом с полем поиска.
 Результаты ранжируются по алгоритму BM25 и включают другие формы того же слова:
 <em>«перевод»</em> находит <em>«переводом»</em> и <em>«переводы»</em>, <em>«transfer»</em> находит <em>«transfers»</em>, китайская
@@ -40,6 +42,20 @@
 поиск подстроки по всей записи.</p>
 <p>Индекс представляет собой производные данные. Он воссоздаётся на основе подписанного журнала, сам по себе никогда не подписывается
 и никогда не попадает в экспорт. Исходные записи не изменяются.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">Синтаксис поиска<a class="anchor" href="#search-syntax" aria-label="Ссылка на раздел">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

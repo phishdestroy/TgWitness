@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/acces
 
 계정 및 채팅에 대한 접근 권한을 제한하고, 권한을 선택하며, 세션 및 IP 주소를 제한하고, 접근 권한을 철회할 수 있습니다.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 검토자에게는 하나의 채팅에 대한 접근 권한을, 분석가에게는 사건 내역 내보내기 권한을, 운영자에게는 선택된 계정에 대한 관리 권한을 부여할 수 있습니다. 각 사용자는 고유한 토큰을 부여받습니다. 메인 패널 토큰은 관리자가 보유합니다.
 
 [계정 설정](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/) · [연결 경로](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/) · [보안 모델](https://phishdestroy.github.io/TgWitness/ko/docs/reference/security/)
@@ -104,4 +108,8 @@ API `ws` 쿼리 선택자는 요청 경로에서 작업 공간을 식별해야 �
 
 접근 권한의 발급, 변경 및 취소, 세션 시작 또는 종료 시에도 서명된 `access.*` 저널 기록이 생성됩니다. 토큰은 해당 기록에 포함되지 않습니다. 발급된 토큰과 세션 인증 정보는 암호화된 볼트에 해시 형태로 보관됩니다.
 
-****주 관리자 및 신뢰 경계**** 메인 패널 토큰은 제한 없이 사용됩니다. 이 토큰을 사용하여 브라우저에 로그인하면 관리자가 설정한 세션 제한이 적용되는 세션이 생성됩니다. 메인 토큰을 직접 전송하는 스크립트는 전체 액세스 권한을 유지하며 브라우저 세션으로 집계되지 않습니다. 이는 단일 설치 환경 내의 애플리케이션 수준 접근 제어입니다. 모든 작업 공간은 서버 프로세스를 공유하며, 이는 호스트 관리자로부터의 격리를 의미하지 않습니다. 메인 토큰, 텔레그램 세션, 서명 키 및 데이터 디렉터리는 비공개로 유지하십시오. 위트니스 토큰은 패널 접근 토큰이 아닌 별도의 체크포인트/정상 작동 확인 자격 증명입니다.
+****주 관리자 및 신뢰 경계****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

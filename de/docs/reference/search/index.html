@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Anleitungen"><a href="../../../">Startseite</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentation</a> <span aria-hidden="true">/</span> <a href="../">Referenz</a> <span aria-hidden="true">/</span> <span aria-current="page">Volltextsuche</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Was wurde getestet? →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Durchsuchen Sie die Dokumentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Versuchen Sie es mit „Proxy“, „Hash-Kette“, „Token“ oder „Witness“ …" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Klare Suche" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Geben Sie ein Wort ein, um die Anleitungen und das Nachschlagewerk zu durchsuchen. Die Suche erfolgt in Ihrem Browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Teile dieser Seite sind noch auf Englisch: Das englische Original wurde nach der Übersetzung geändert.</p><p class="eyebrow">Referenz / Archiv &amp; Integrationen</p><h1>Volltextsuche</h1><p class="guide-outcome">Suche nach gespeicherten Nachrichten anhand von Wortformen, genauen Phrasen, Domains und @Benutzernamen, wobei die besten Treffer zuerst angezeigt werden und der Index mit dem signierten Protokoll verknüpft ist.</p><div class="wiki-body"><p><a href="../analysis/">Analyse des Archivs</a> · <a href="../media-analysis/">Lokale OCR und Transkription</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<article class="guide-content"><p class="language-notice">Teile dieser Seite sind noch auf Englisch: Das englische Original wurde nach der Übersetzung geändert.</p><p class="eyebrow">Referenz / Archiv &amp; Integrationen</p><h1>Volltextsuche</h1><p class="guide-outcome">Suche nach gespeicherten Nachrichten anhand von Wortformen, genauen Phrasen, Domains und @Benutzernamen, wobei die besten Treffer zuerst angezeigt werden und der Index mit dem signierten Protokoll verknüpft ist.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentation</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">Analyse des Archivs</a> · <a href="../media-analysis/">Lokale OCR und Transkription</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
 <p><strong>Vorschau.</strong> Wählen Sie im <strong>Protokoll</strong> neben dem Suchfeld <strong>„Beste Übereinstimmung · Wortformen“</strong> aus.
 Die Ergebnisse werden nach BM25 sortiert und umfassen auch andere Formen desselben Wortes:
 <em>„перевод“</em> findet <em>„переводом“</em> und <em>„переводы“</em>, <em>„transfer“</em> findet <em>„transfers“</em>, eine chinesische
@@ -40,6 +42,20 @@ Phrase wird ohne Leerzeichen gefunden. <strong>„Neueste zuerst · exakter Text
 Teilstring-Suche über den gesamten Datensatz bei.</p>
 <p>Der Index besteht aus abgeleiteten Daten. Er wird aus dem signierten Protokoll neu erstellt, ist selbst niemals signiert
 und wird niemals exportiert. Die ursprünglichen Datensätze bleiben unverändert.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">Suchsyntax<a class="anchor" href="#search-syntax" aria-label="Link zu diesem Abschnitt">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

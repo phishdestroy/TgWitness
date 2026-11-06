@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/
 
 تلاش کریں، سیاق و سباق پڑھیں، سرگرمی کی گنتی کریں اور اسکرپٹس اور ایجنٹس سے محفوظ شدہ پیغامات برآمد کریں، --json آؤٹ پٹ، مستحکم ایگزٹ کوڈز اور محدود دائرہ کار کے ریڈ-اونلی ٹوکنز کے ساتھ۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [صرف پڑھنے کے لیے MCP](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/) · [مکمل متن تلاش](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **پریویو۔** `tgwitness search`, `context`, `messages`, `stats` اور `export` پڑھیں محفوظ شدہ مشاہدات اسکرپٹس اور AI ایجنٹس کے لیے۔ وہ ٹیلیگرام پر کچھ بھی بھیج نہیں سکتے، سیٹنگز تبدیل نہیں کر سکتے یا دستخط شدہ جرنل میں ترمیم نہیں کر سکتے۔

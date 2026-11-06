@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Посібники"><a href="../../../">Головна</a> <span aria-hidden="true">/</span> <a href="../../">Документація</a> <span aria-hidden="true">/</span> <a href="../">Довідка</a> <span aria-hidden="true">/</span> <span aria-current="page">Повнотекстовий пошук</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Що було протестовано →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Пошук у документації</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Спробуйте «проксі», «хеш-ланцюг», «токен» або «свідок»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Зручний пошук" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введіть слово, щоб здійснити пошук у посібниках та довідковій інформації. Результати пошуку залишаються у вашому браузері.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Деякі частини цієї сторінки досі залишаються англійською мовою: англійський оригінал зазнав змін після перекладу.</p><p class="eyebrow">Довідка / Архів та інтеграції</p><h1>Повнотекстовий пошук</h1><p class="guide-outcome">Знайдіть збережені повідомлення за формами слів, точними фразами, доменами та @іменами користувачів, з найкращими збігами на початку, з індексом, прив’язаним до підписаного журналу.</p><div class="wiki-body"><p><a href="../analysis/">Аналіз архіву</a> · <a href="../media-analysis/">Локальне розпізнавання тексту та транскрипція</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Вікі</a></p>
+<article class="guide-content"><p class="language-notice">Деякі частини цієї сторінки досі залишаються англійською мовою: англійський оригінал зазнав змін після перекладу.</p><p class="eyebrow">Довідка / Архів та інтеграції</p><h1>Повнотекстовий пошук</h1><p class="guide-outcome">Знайдіть збережені повідомлення за формами слів, точними фразами, доменами та @іменами користувачів, з найкращими збігами на початку, з індексом, прив’язаним до підписаного журналу.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Документація</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">Аналіз архіву</a> · <a href="../media-analysis/">Локальне розпізнавання тексту та транскрипція</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Вікі</a></p>
 <p><strong>Попередній перегляд.</strong> У розділі <strong>«Журнал</strong>» виберіть <strong>«Найкращий збіг · форми слів»</strong> поруч із полем пошуку.
 Результати ранжуються за алгоритмом BM25 і відповідають іншим формам того самого слова:
 <em>«перевод»</em> знаходить <em>«переводом»</em> і <em>«переводи»</em>, <em>«transfer»</em> знаходить <em>«transfers»</em>, китайська
@@ -40,6 +42,20 @@
 пошук підрядка в усьому записі.</p>
 <p>Індекс є похідними даними. Він відтворюється на основі підписаного журналу, сам ніколи не підписується
 і ніколи не потрапляє до експорту. Оригінальні записи не змінюються.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">Синтаксис пошуку<a class="anchor" href="#search-syntax" aria-label="Посилання на цей розділ">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

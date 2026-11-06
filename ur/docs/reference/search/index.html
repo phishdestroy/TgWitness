@@ -32,10 +32,26 @@
 <nav class="breadcrumbs" aria-label="رہنما"><a href="../../../">گھر</a> <span aria-hidden="true">/</span> <a href="../../">دستاویزات</a> <span aria-hidden="true">/</span> <a href="../">حوالہ</a> <span aria-hidden="true">/</span> <span aria-current="page">مکمل متن تلاش</span></nav>
 <p class="verification-shortcut"><a href="../verification/">کیا جانچا گیا ہے ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">دستاویزات میں تلاش کریں</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، ہیش چین، ٹوکن یا ویٹنس آزمائیں…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="خلاصہ تلاش" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">رہنما اور حوالہ جات میں تلاش کرنے کے لیے ایک لفظ ٹائپ کریں۔ تلاش آپ کے براؤزر میں ہی رہتی ہے۔</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">اس صفحے کے کچھ حصے اب بھی انگریزی میں ہیں: اصل انگریزی متن ترجمے کے بعد تبدیل کر دیا گیا۔</p><p class="eyebrow">حوالہ / آرکائیو اور انضمامات</p><h1>مکمل متن تلاش</h1><p class="guide-outcome">محفوظ شدہ پیغامات کو لفظی شکلوں، بالکل درست عبارتوں، ڈومینز اور @usernames کی بنیاد پر تلاش کریں، بہترین مماثلتیں پہلے، انڈیکس کو دستخط شدہ جرنل سے منسلک کریں۔</p><div class="wiki-body"><p><a href="../analysis/">آرکائیو تجزیہ</a> · <a href="../media-analysis/">مقامی OCR اور ٹرانسکرپشن</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">ویکی</a></p>
+<article class="guide-content"><p class="language-notice">اس صفحے کے کچھ حصے اب بھی انگریزی میں ہیں: اصل انگریزی متن ترجمے کے بعد تبدیل کر دیا گیا۔</p><p class="eyebrow">حوالہ / آرکائیو اور انضمامات</p><h1>مکمل متن تلاش</h1><p class="guide-outcome">محفوظ شدہ پیغامات کو لفظی شکلوں، بالکل درست عبارتوں، ڈومینز اور @usernames کی بنیاد پر تلاش کریں، بہترین مماثلتیں پہلے، انڈیکس کو دستخط شدہ جرنل سے منسلک کریں۔</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">ٹی جی وٹنس</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">دستاویزات</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">آرکائیو تجزیہ</a> · <a href="../media-analysis/">مقامی OCR اور ٹرانسکرپشن</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">ویکی</a></p>
 <p><strong>پریویو۔</strong> <strong>جرنل</strong> میں، سرچ فیلڈ کے ساتھ <strong>&#x27;بہترین میل · لفظ کی اقسام&#x27; (Best match · word forms</strong>) منتخب کریں۔ نتائج کو BM25 کے ساتھ درجہ بندی کیا جاتا ہے اور ایک ہی لفظ کی دیگر شکلوں سے بھی میل کھاتا ہے:
 <em>перевод</em>، <em>переводом</em> اور <em>переводы</em> تلاش کرتا ہے، <em>transfer</em>، <em>transfers</em> تلاش کرتا ہے، ایک چینی عبارت بغیر خالی جگہوں کے تلاش کی جاتی ہے۔ <strong>&#x27;نئے پہلے · بالکل ٹیکسٹ&#x27; (Newest first · exact text)</strong> پوری ریکارڈ پر پچھلی سب سٹرنگ تلاش کو برقرار رکھتا ہے۔</p>
 <p>انڈیکس مشتق ڈیٹا ہے۔ یہ دستخط شدہ جرنل سے دوبارہ تیار کیا جاتا ہے، خود کبھی دستخط نہیں کیا جاتا اور کبھی برآمد نہیں ہوتا۔ اصل ریکارڈز میں کوئی تبدیلی نہیں ہوتی۔</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">سرچ سنٹیکس<a class="anchor" href="#search-syntax" aria-label="اس حصے کا لنک">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

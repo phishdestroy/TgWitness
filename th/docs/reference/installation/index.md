@@ -4,7 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/insta
 
 ติดตั้งด้วยคำสั่งเดียว ตรวจสอบลายเซ็นและค่าแฮช อัปเดตและลบการติดตั้ง
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [โครงการ](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [เริ่มต้นอย่างรวดเร็ว](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/) · [การติดตั้ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
+
+**On this page**
+
+- [Install with one command](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#install-with-one-command)
+- [Where everything runs](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#where-everything-runs)
+- [Full-text search settings](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#full-text-search-settings)
+- [Command-line access](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#command-line-access)
+- [Verify before running](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#verify-before-running)
+- [Update an existing installation](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#update-an-existing-installation)
+- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#remove-tgwitness)
 
 ## ติดตั้งด้วยคำสั่งเดียว
 

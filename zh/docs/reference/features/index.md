@@ -4,7 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/featu
 
 TgWitness 的当前采集模型、多账户工作流、导出功能及操作边界。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
 TgWitness 可保存已连接账户可访问的 Telegram 对话， 记录观察到的变更，并生成可验证的导出文件。本参考文档描述了 采集模型、当前工作流程及其边界。
+
+**On this page**
+
+- [Standalone application](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#standalone-application)
+- [Shared investigations](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#shared-investigations)
+- [Archive tools](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#archive-tools)
+- [Optional extras](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#optional-extras)
+- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#protocol-and-private-sources)
+- [Multiple accounts](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#multiple-accounts)
+- [Capture and attribution](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#capture-and-attribution)
+- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#capacity-and-telegram-limits)
+- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#reliability-and-recovery)
+- [Evidence model](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#evidence-model)
+- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#export-deployment-and-handoff)
+- [Stable release criteria](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#stable-release-criteria)
 
 ## 独立应用程序
 

@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Storage and recovery</span></nav>
 <p class="verification-shortcut"><a href="../verification/">What has been tested →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Reference / Evidence</p><h1>Storage and recovery</h1><p class="guide-outcome">Backups, moving older files to your cloud, copies under Object Lock and recovery on a new machine.</p><div class="wiki-body"><p>The panel separates three tasks:</p>
+<article class="guide-content"><p class="eyebrow">Reference / Evidence</p><h1>Storage and recovery</h1><p class="guide-outcome">Backups, moving older files to your cloud, copies under Object Lock and recovery on a new machine.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentation</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../assets/chapter-operate.svg" /></p>
+<p>The panel separates three tasks:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@ the complete encrypted object and verifies its size and SHA-256, saves the recei
 then checks the local bytes again immediately before removal. An upload failure,
 different readback or cancelled transfer leaves the local file in place. If an
 enabled evidence backup has not yet copied that file, removal also waits for it.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">When the disk is filling up<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="Link to this section">#</a></h2>
 <p>Attachment downloads already pause below <strong>Parameters → Attachments → free disk
 space</strong> (1 GiB by default), keeping their queue. Text observations continue. This

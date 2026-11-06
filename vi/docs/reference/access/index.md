@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/acces
 
 Quản lý quyền truy cập vào các tài khoản và cuộc trò chuyện, chọn quyền hạn, giới hạn phiên truy cập và địa chỉ IP, cũng như thu hồi quyền truy cập.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 Cấp quyền truy cập cho người đánh giá vào một cuộc trò chuyện, cấp quyền cho nhà phân tích để xuất dữ liệu vụ việc, hoặc cấp quyền kiểm soát các tài khoản đã chọn cho người vận hành. Mỗi người sẽ nhận được mã thông báo riêng. Mã thông báo trên bảng điều khiển chính sẽ do quản trị viên nắm giữ.
 
 [Thiết lập tài khoản](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/) · [Các tuyến kết nối](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/) · [Mô hình bảo mật](https://phishdestroy.github.io/TgWitness/vi/docs/reference/security/)
@@ -104,4 +108,8 @@ Các tập lệnh và kiểu dáng của bảng điều khiển chứa siêu d�
 
 Việc cấp, thay đổi và thu hồi quyền truy cập, cũng như bắt đầu hoặc kết thúc phiên làm việc, đều tạo ra các bản ghi nhật ký `access.*` được ký điện tử. Các mã thông báo (token) không được bao gồm trong các bản ghi này. Các mã thông báo đã được cấp và thông tin xác thực phiên làm việc được lưu giữ dưới dạng băm (hash) trong kho lưu trữ được mã hóa.
 
-****Quản trị viên chính và ranh giới tin cậy**** Mã thông báo bảng điều khiển chính vẫn không bị hạn chế. Việc đăng nhập qua trình duyệt bằng mã thông báo này sẽ tạo ra các phiên tuân theo giới hạn phiên do quản trị viên cấu hình. Các tập lệnh gửi mã thông báo chính trực tiếp vẫn giữ quyền truy cập đầy đủ và không được tính là các phiên trình duyệt. Đây là cơ chế kiểm soát truy cập ở cấp độ ứng dụng trong một lần cài đặt. Tất cả các không gian làm việc đều chia sẻ quá trình máy chủ; điều này không có nghĩa là cách ly với quản trị viên máy chủ. Hãy bảo mật mã thông báo chính, các phiên Telegram, khóa ký và thư mục dữ liệu. Mã thông báo chứng thực là một thông tin xác thực kiểm tra trạng thái/điểm kiểm tra riêng biệt, không phải là mã thông báo truy cập bảng điều khiển.
+****Quản trị viên chính và ranh giới tin cậy****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

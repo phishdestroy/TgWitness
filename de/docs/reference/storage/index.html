@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Anleitungen"><a href="../../../">Startseite</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentation</a> <span aria-hidden="true">/</span> <a href="../">Referenz</a> <span aria-hidden="true">/</span> <span aria-current="page">Speicherung und Wiederherstellung</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Was wurde getestet? →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Durchsuchen Sie die Dokumentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Versuchen Sie es mit „Proxy“, „Hash-Kette“, „Token“ oder „Witness“ …" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Klare Suche" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Geben Sie ein Wort ein, um die Anleitungen und das Nachschlagewerk zu durchsuchen. Die Suche erfolgt in Ihrem Browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Referenz / Beweismaterial</p><h1>Speicherung und Wiederherstellung</h1><p class="guide-outcome">Backups, das Verschieben älterer Dateien in Ihre Cloud, Kopien unter „Object Lock“ und die Wiederherstellung auf einem neuen Rechner.</p><div class="wiki-body"><p>Das Panel unterteilt drei Aufgaben:</p>
+<article class="guide-content"><p class="language-notice">Teile dieser Seite sind noch auf Englisch: Das englische Original wurde nach der Übersetzung geändert.</p><p class="eyebrow">Referenz / Beweismaterial</p><h1>Speicherung und Wiederherstellung</h1><p class="guide-outcome">Backups, das Verschieben älterer Dateien in Ihre Cloud, Kopien unter „Object Lock“ und die Wiederherstellung auf einem neuen Rechner.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentation</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Das Panel unterteilt drei Aufgaben:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@ das vollständige verschlüsselte Objekt herunter, überprüft dessen Größe un
 überprüft die lokalen Bytes unmittelbar vor dem Löschen erneut. Bei einem fehlgeschlagenen Upload,
 einer abweichenden Rücklesung oder einer abgebrochenen Übertragung bleibt die lokale Datei erhalten. Falls eine
 aktivierte Beweissicherung diese Datei noch nicht kopiert hat, wird auch das Löschen darauf gewartet.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">Wenn der Datenträger voll wird<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="Link zu diesem Abschnitt">#</a></h2>
 <p>Downloads von Anhängen pausieren unter dem Wert für <strong>Parameter → Anhänge → freier Speicherplatz</strong> (standardmäßig 1 GiB); die Warteschlange bleibt erhalten. Textbeobachtungen laufen weiter. Dies ist unabhängig von Benachrichtigungen: Ihr Abschalten deaktiviert weder die Downloadreserve noch die Speicherschutzprüfungen.</p>
 <p>Für einen früheren Eingriff aktivieren Sie <strong>Automatisch ausführen</strong>, wählen <strong>Lokale Datei zum Freigeben von Speicherplatz entfernen</strong> und aktivieren <strong>Zusätzliche Auslagerung bei wenig Speicherplatz starten</strong>. Standardmäßig beginnt diese optionale Regel unter 5120 MiB freiem Speicher und arbeitet in Stapeln, bis 10240 MiB frei sind. Beide Schwellen sind einstellbar. Ziel, Mindestalter, Stapellimit, vollständige Rückleseprüfung und Voraussetzungen zur Beweissicherung entsprechen einem manuellen Lauf. Die Regel aktiviert niemals selbst ein Ziel. Prüfungen erfolgen alle 30 Sekunden; Fehler oder fehlender Fortschritt verschieben den nächsten Versuch um fünf Minuten. Zustand und Wiederholungszeit bleiben nach einem Neustart erhalten. Bei inaktiver Regel nutzen geplante Läufe ihr normales Intervall.</p>

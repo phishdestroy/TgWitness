@@ -4,9 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-i
 
 Hash zanjiri, imzolar, tekshiruv nuqtalari va guvohlar verifikator ishlatadigan aniq formulalar bilan tushuntirilgan.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness yig'uvchi akkaunt tomonidan kuzatilganlarni saqlaydi, bu kuzatuvlarni imzolangan jurnalga bog'laydi va boshqa shaxsga ishonchli kalit hamda oldin saqlangan tekshiruv nuqtasiga nisbatan eksportni tasdiqlash imkonini beradi.
 
 [Mahalliy hujjatlar veb-sayti](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)`/docs/concepts/` manzilida interaktiv misollar, `/docs/witness/` manzilida Checkpoint qarorlar eksplorerini va [Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/), [hisobot dizayni](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-reports/) hamda [topshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#handover-extract) bo'yicha bosqichma-bosqich ko'rsatmalarni o'z ichiga oladi. Barcha misol xabarlar, hisoblar va kechikishlar tasodifiydir. Zanjirli qumdonidagi xeshlar brauzerda SHA-256 yordamida hisoblanadi. Hech narsa Telegramga yuborilmaydi.
+
+**On this page**
+
+- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [What a hash covers](https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-it-works/#what-a-hash-covers)
+- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Pick a workflow](https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-it-works/#pick-a-workflow)
 
 ## Xabar o'zgaradi; kuzatuvlar to'planadi
 

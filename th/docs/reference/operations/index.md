@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/opera
 
 การดำเนินงานประจำวันของแผงควบคุม: โหมดการทำงาน, หมวดหมู่การติดตาม, พารามิเตอร์, การแจ้งเตือน, การส่งออกข้อมูล, การสำรองข้อมูล และขีดความสามารถ
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 สำหรับการเชื่อมต่อครั้งแรก ให้[ใช้บัญชีและรูปแบบเซสชัน](https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/) เพื่อดูคำอธิบายเกี่ยวกับเวอร์ชันที่บันทึกไว้ นโยบายเหตุการณ์ และช่องว่าง โปรด [ดูวิธีการทำงานของระบบการเก็บข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/) คู่มือนี้ครอบคลุมการดำเนินงานประจำวันและการกู้คืนข้อมูล
 
 การติดตั้งแบบจัดการจะรวมถึงไฟล์ **START-HERE.html** และ **START-HERE.txt** ไว้ข้าง โปรแกรมเปิดตัว (launcher) พร้อมด้วยลิงก์ repositori และคำสั่งที่ปรับให้เหมาะสมกับ เส้นทางติดตั้ง (installation path) ของมัน 実行 `tgwitness guide --print` ผ่าน SSH หรือ `tgwitness paths` เพื่อค้นหา ไดเรกทอรีข้อมูลจริง (actual data directory) การติดตั้ง systemd แบบ root จะเก็บสถานะส่วนตัวไว้ภายใต้ `/var/lib/tgwitness-…`; ส่วน `/opt/tgwitness` จะเก็บโปรแกรมไว้
 
 สำหรับอุโมงค์ Cloudflare ชั่วคราวที่ได้รับการจัดการ `tgwitness tunnel off` จะปิดการเข้าถึงสาธารณะ ในขณะที่แผงควบคุมและระบบเก็บข้อมูลท้องถิ่นยังคงทำงานต่อไป `tgwitness tunnel on` เปิดใช้งานอุโมงค์; `tgwitness tunnel restart` สร้างการเชื่อมต่ออุโมงค์ใหม่ ใช้ `tgwitness open` เพื่อดูที่อยู่ปัจจุบันของอุโมงค์ การตั้งค่าปิดอย่างชัดเจนจะคงอยู่ แม้หลังการรีสตาร์ทบริการ `tgwitness stop` หยุดการทำงานของทั้งแผงควบคุมและระบบเก็บข้อมูล
+
+**On this page**
+
+- [Operator workflow](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#operator-workflow)
+- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Runtime modes](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#runtime-modes)
+- [Monitoring categories](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#monitoring-categories)
+- [Notifications](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#notifications)
+- [Panel layout](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#panel-layout)
+- [Deployment environments](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#deployment-environments)
+- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#startup-checks-and-exports)
+- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#backup-restore-and-interruptions)
+- [Capacity and retention](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#capacity-and-retention)
 
 ## ขั้นตอนการทำงานของผู้ใช้
 

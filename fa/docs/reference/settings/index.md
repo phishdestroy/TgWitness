@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/setti
 
 جادوگر راه‌اندازی، اهداف، سطوح رابط، مسیرهای اتصال و تنظیمات مشترک یک گروه حساب.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [حساب‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/) · [اتصال](https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/) · [دسترسی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/)
 
 یک فضای کاری جدید باز می‌شود `/first-run`: زبان و زمان، سطح رابط کاربری، هدف، اتصال، تلگرام و چت‌ها. هر پاسخ به محض تغییر روی سرور ذخیره می‌شود، بنابراین با بارگذاری مجدد، همان مرحله ادامه می‌یابد. آخرین صفحه فهرستی از پاسخ‌ها را نمایش می‌دهد و به شما امکان می‌دهد به هر کدام از آن‌ها بازگردید.

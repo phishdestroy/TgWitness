@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../../">होम</a> <span aria-hidden="true">/</span> <a href="../../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <a href="../">संदर्भ</a> <span aria-hidden="true">/</span> <span aria-current="page">भंडारण और पुनर्प्राप्ति</span></nav>
 <p class="verification-shortcut"><a href="../verification/">क्या परीक्षण किया गया है →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">संदर्भ / साक्ष्य</p><h1>भंडारण और पुनर्प्राप्ति</h1><p class="guide-outcome">बैकअप, पुरानी फ़ाइलों को आपके क्लाउड में स्थानांतरित करना, ऑब्जेक्ट लॉक के तहत प्रतियां और नई मशीन पर पुनर्प्राप्ति।</p><div class="wiki-body"><p>पैनल तीन कार्यों को अलग करता है:</p>
+<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / साक्ष्य</p><h1>भंडारण और पुनर्प्राप्ति</h1><p class="guide-outcome">बैकअप, पुरानी फ़ाइलों को आपके क्लाउड में स्थानांतरित करना, ऑब्जेक्ट लॉक के तहत प्रतियां और नई मशीन पर पुनर्प्राप्ति।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">टीजीविटनेस</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">दस्तावेज़ीकरण</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>पैनल तीन कार्यों को अलग करता है:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -57,6 +59,16 @@
 </table></div>
 <p>स्पेस खाली करने से कभी भी हस्ताक्षरित जर्नल को हटाया या फिर से लिखा नहीं जाता है। प्रत्येक अटैचमेंट अपना मूल SHA-256 और एक रिकवरी रसीद रखता है। प्रमाणीकृत एन्क्रिप्शन से पहले वैकल्पिक gzip कंप्रेशन होता है। क्लाउड फ़ाइलनामों में टेलीग्राम नाम, चैट आईडी या मूल अटैचमेंट नाम शामिल नहीं होते हैं। एक अटैचमेंट 32 GiB तक का हो सकता है।</p>
 <p>केवल एक अपलोड प्रतिक्रिया फ़ाइल को हटाने की अनुमति नहीं है। TgWitness पूरी एन्क्रिप्टेड ऑब्जेक्ट को डाउनलोड करता है और उसके आकार और SHA-256 को सत्यापित करता है, रसीद को सहेजता है, फिर हटाने से ठीक पहले स्थानीय बाइट्स की फिर से जाँच करता है। एक अपलोड विफलता, अलग रीडबैक या रद्द किया गया ट्रांसफर स्थानीय फ़ाइल को वहीं छोड़ देता है। यदि एक सक्षम साक्ष्य बैकअप ने अभी तक उस फ़ाइल की प्रतिलिपि नहीं बनाई है, तो हटाने की प्रक्रिया भी उसके लिए प्रतीक्षा करती है।</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">जब डिस्क भरने लगे<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="इस अनुभाग का लिंक">#</a></h2>
 <p>खाली स्थान <strong>पैरामीटर → संलग्नक → खाली डिस्क स्थान</strong> के मान से कम होने पर (डिफ़ॉल्ट 1 GiB), संलग्नक डाउनलोड रुकते हैं और कतार बनी रहती है। पाठ अवलोकन जारी रहते हैं। यह सूचनाओं से स्वतंत्र है: सूचनाएँ बंद करने से डाउनलोड आरक्षित स्थान या भंडारण सुरक्षा बंद नहीं होती।</p>
 <p>पहले कार्रवाई करने के लिए <strong>स्वचालित चलाएँ</strong> चालू करें, <strong>स्थान खाली करने के लिए स्थानीय फ़ाइल हटाएँ</strong> चुनें और <strong>डिस्क स्थान कम होने पर अतिरिक्त स्थानांतरण शुरू करें</strong> चालू करें। यह वैकल्पिक नियम डिफ़ॉल्ट रूप से 5120 MiB से कम खाली स्थान पर शुरू होकर बैचों में चलता है, जब तक 10240 MiB खाली न हो जाए। दोनों सीमाएँ बदली जा सकती हैं। गंतव्य, फ़ाइल की न्यूनतम आयु, बैच सीमा, पूरा दोबारा पढ़कर सत्यापन और साक्ष्य बैकअप की शर्तें मैन्युअल कार्य जैसी हैं। नियम खुद कोई गंतव्य सक्रिय नहीं करता। हर 30 सेकंड जाँच होती है; त्रुटि या प्रगति न होने पर अगला प्रयास पाँच मिनट टलता है। स्थिति और पुनः प्रयास का समय पुनरारंभ के बाद भी रहते हैं। नियम निष्क्रिय हो तो निर्धारित कार्य सामान्य अंतराल पर चलते हैं।</p>

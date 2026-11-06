@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/
 
 Kết nối một máy khách MCP với các không gian làm việc và cuộc trò chuyện đã chọn bằng quyền truy cập có thời hạn và có thể thu hồi.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 Kết nối máy khách phân tích với các không gian làm việc và cuộc trò chuyện đã chọn. TgWitness cung cấp dịch **vụ Streamable HTTP tại `/mcp` trong quy trình bảng điều khiển**. Mỗi kết nối có mã thông báo, thời hạn và các công cụ được phép riêng. MCP không thể gửi tin nhắn Telegram, thay đổi cài đặt hoặc sửa đổi nhật ký có chữ ký. Các kết nối này cũng hoạt động với [dòng lệnh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/).
 
 [Hướng dẫn quy trình làm việc](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#tools-and-boundaries)
 
 ## Cài đặt và kiểm tra
 

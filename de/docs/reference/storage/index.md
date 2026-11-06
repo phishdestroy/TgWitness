@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/stora
 
 Backups, das Verschieben älterer Dateien in Ihre Cloud, Kopien unter „Object Lock“ und die Wiederherstellung auf einem neuen Rechner.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/de/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Das Panel unterteilt drei Aufgaben:
 
 | Aufgabe | Funktionsweise |
@@ -15,6 +19,14 @@ Das Panel unterteilt drei Aufgaben:
 Beim Freigeben von Speicherplatz wird das signierte Protokoll niemals gelöscht oder überschrieben. Jeder Anhang behält sein ursprüngliches SHA-256 und eine Wiederherstellungsbestätigung. Eine optionale gzip-Komprimierung erfolgt vor der authentifizierten Verschlüsselung. Cloud-Dateinamen enthalten keine Telegram-Namen, Chat-IDs oder ursprünglichen Anhangsnamen. Ein Anhang darf bis zu 32 GiB groß sein.
 
 Eine Upload-Antwort allein ist keine Erlaubnis zum Löschen einer Datei. TgWitness lädt das vollständige verschlüsselte Objekt herunter, überprüft dessen Größe und SHA-256, speichert die Quittung und überprüft die lokalen Bytes unmittelbar vor dem Löschen erneut. Bei einem fehlgeschlagenen Upload, einer abweichenden Rücklesung oder einer abgebrochenen Übertragung bleibt die lokale Datei erhalten. Falls eine aktivierte Beweissicherung diese Datei noch nicht kopiert hat, wird auch das Löschen darauf gewartet.
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/de/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/de/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/de/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/de/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/de/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## Wenn der Datenträger voll wird
 

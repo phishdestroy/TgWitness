@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/opera
 
 Hoạt động hàng ngày của bảng điều khiển: các chế độ, danh mục giám sát, thông số, thông báo, xuất dữ liệu, sao lưu và dung lượng.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Đối với lần kết nối đầu tiên, vui lòng sử dụng [các định dạng tài khoản và phiên làm việc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/). Để tìm hiểu về các phiên bản đã lưu, chính sách sự kiện và các khoảng trống, xin tham khảo phần [giải thích về cơ chế thu thập dữ liệu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/). Hướng dẫn này bao quát các hoạt động hàng ngày và quy trình khôi phục dữ liệu.
 
 Một bản cài đặt được quản lý bao gồm các tệp **, START-HERE.html,** và **, START-HERE.txt,** bên cạnh trình khởi chạy của nó, kèm theo liên kết kho lưu trữ và các lệnh được tùy chỉnh theo đường dẫn cài đặt của nó. Chạy tệp `tgwitness guide --print` qua SSH, hoặc tệp `tgwitness paths` để xác định vị trí thư mục dữ liệu thực tế. Một bản cài đặt systemd với quyền root lưu trữ trạng thái riêng tư trong tệp `/var/lib/tgwitness-…`; tệp `/opt/tgwitness` chứa chương trình.
 
 Đối với đường hầm Cloudflare tạm thời được quản lý, `tgwitness tunnel off` sẽ đóng quyền truy cập công khai trong khi bảng điều khiển cục bộ và quá trình thu thập dữ liệu vẫn tiếp tục hoạt động. `tgwitness tunnel on` kích hoạt quyền truy cập này; `tgwitness tunnel restart` tạo kết nối đường hầm mới. Sử dụng `tgwitness open` để xem địa chỉ hiện tại của đường hầm. Cài đặt tắt rõ ràng sẽ được duy trì ngay cả khi dịch vụ khởi động lại. `tgwitness stop` dừng cả bảng điều khiển và quá trình thu thập dữ liệu.
+
+**On this page**
+
+- [Operator workflow](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/#operator-workflow)
+- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Runtime modes](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/#runtime-modes)
+- [Monitoring categories](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/#monitoring-categories)
+- [Notifications](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/#notifications)
+- [Panel layout](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/#panel-layout)
+- [Deployment environments](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/#deployment-environments)
+- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/#startup-checks-and-exports)
+- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/#backup-restore-and-interruptions)
+- [Capacity and retention](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/#capacity-and-retention)
 
 ## Quy trình làm việc của người vận hành
 

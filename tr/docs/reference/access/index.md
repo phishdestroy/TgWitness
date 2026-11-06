@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/acces
 
 Hesaplara ve sohbetlere kısıtlı erişim izni verin, izinleri seçin, oturumları ve IP adreslerini sınırlayın ve erişimi iptal edin.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 Bir gözden geçiren kişiye bir sohbet erişimi, bir analiste bir vakayı dışa aktarma izni veya bir operatöre seçilen hesaplar üzerinde kontrol hakkı verin. Her kişi kendi jetonuna sahip olur. Ana panel jetonu ise yöneticiye aittir.
 
 [Hesap kurulumu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) · [Bağlantı yolları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/) · [Güvenlik modeli](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/)
@@ -104,4 +108,8 @@ Panel komut dosyaları ve stilleri, SHA-384 bütünlük meta verilerini içerir.
 
 Erişim izni verme, değiştirme ve iptal etme ile oturum başlatma veya sonlandırma işlemleri de imzalı `access.*` günlük kayıtları oluşturur. Jetonlar bu kayıtlara dahil edilmez. Verilen jetonlar ve oturum kimlik bilgileri, şifrelenmiş kasada hash değerleri olarak saklanır.
 
-****Ana yönetici ve güven sınırı**** Ana panel jetonu kısıtlamasız kalır. Bu jetonla yapılan tarayıcı oturum açma işlemleri, yöneticinin yapılandırdığı oturum sınırlarına tabi oturumlar oluşturur. Ana jetonu doğrudan gönderen komut dosyaları tam erişim hakkını korur ve tarayıcı oturumları olarak sayılmaz. Bu, tek bir kurulumda uygulama düzeyinde erişim denetimidir. Tüm çalışma alanları sunucu sürecini paylaşır; bu, ana bilgisayar yöneticisinden izolasyon anlamına gelmez. Ana tokeni, Telegram oturumlarını, imzalama anahtarlarını ve veri dizinini gizli tutun. Tanık tokeni, panel erişim tokeni değil, ayrı bir kontrol noktası/durum kimlik bilgisidir.
+****Ana yönetici ve güven sınırı****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

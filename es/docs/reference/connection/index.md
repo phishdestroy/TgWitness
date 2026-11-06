@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/conne
 
 Autenticación, grupos de proxies automáticos, modos de IP, política de respaldo, solicitudes externas y almacenamiento de claves secretas.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Este documento describe el comportamiento de TgWitness 0.8.0 y sus limitaciones. La autenticación, el acceso a la fuente, la conectividad de red y la integridad de la captura son estados independientes. Para conocer los pasos de inicio de sesión, los formatos de archivo y la gestión de cuentas múltiples, comience por la sección [«Cuentas y formatos de sesión](https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/)». Para conocer las políticas de eventos y el comportamiento ante reinicios, consulte [«Cómo funciona la recopilación](https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/)».
 
 ## Configuración guiada de la conexión
@@ -117,7 +121,21 @@ Un MTProxy solo transporta tráfico de Telegram. Las operaciones HTTP del espaci
 
 Para los servicios privados gestionados por el operador, la configuración existente del entorno del servidor `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` permite destinos privados y mantiene la resolución del nombre de host por parte del proxy. No se puede habilitar desde el panel. El modo «solo público» rechaza los destinos .`.onion` antes de consultar el resolutor público; los servicios «onion» de Tor requieren esa configuración explícita de destino privado y un proxy adecuado. Este comportamiento del DNS se aplica a las operaciones HTTP externas, no al transporte de Telegram. Cloudflare documenta el [punto final JSON del DNS](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Parámetros automáticos del grupo**** En **Parámetros → Automático MTProxy**, configura el umbral de fallo, el tiempo de espera, la rotación planificada, el uso compartido de proxies y el retraso de recambio permitido. | Control | Predeterminado | | --- | --- | | Desconexiones antes de la sustitución | 3 en 10 minutos | | Proxies probados por intento de conexión | 3 | | Primer / máximo descanso tras un fallo | 10 minutos / 6 horas | | Rotación planificada | Desactivada; activar en caso de fallo | | Cuentas por proxy | 0: se prefieren entradas separadas, compartir cuando sea necesario. Establecer en 1 para esperar una entrada exclusiva. | | Retraso antes de permitir el recurso directo | 10 minutos; «Ocultar la dirección» sigue rechazando el recurso directo | | Actualización de feeds / comprobaciones de transporte | 60 / 10 minutos; los valores del espacio de trabajo principal se aplican al grupo compartido | El uso de diferentes proxies no garantiza direcciones de salida diferentes. Estos ajustes no anulan los límites de Telegram ni garantizan el anonimato.
+****Parámetros automáticos del grupo****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Control | Por defecto |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 Para sustituir la lista pública por su propio catálogo de operadores, configure la sustitución que se indica a continuación. Esto desactiva por completo las suscripciones externas, incluso cuando su matriz «`proxies`» está vacía.
 

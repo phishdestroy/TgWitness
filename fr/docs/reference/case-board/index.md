@@ -4,11 +4,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-
 
 Signets, surlignages précis, extraits d’actions, discussions, accès restreint et historique des annotations signées utilisés par Case Board.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Case Board offre à l’équipe d’enquête une vue de travail partagée sur les éléments enregistrés. Ajoutez une observation à vos favoris, surlignez un passage précis, enregistrez une série d’actions et discutez-en avec vos collègues. Les fiches conservent leurs références sources et l’historique des révisions signé. Les annotations de l’équipe restent dans l’ espace de travail, et peuvent être identifiées séparément des observations Telegram d’origine.
 
 [Modèle de preuve](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/) · [Accès](https://phishdestroy.github.io/TgWitness/fr/docs/reference/access/) · [Rapports](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-reports/)
 
 ![Flux d'enquête synthétique](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
+
+**On this page**
+
+- [Work with a case](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/#work-with-a-case)
+- [Permissions](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/#permissions)
+- [Stored contracts](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/#stored-contracts)
+- [API and exports](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/#api-and-exports)
+- [Operating limits](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/#operating-limits)
 
 ## Travailler sur un dossier
 

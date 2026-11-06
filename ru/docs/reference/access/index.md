@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/acces
 
 Устанавливайте ограниченный доступ к аккаунтам и чатам, выбирайте права доступа, ограничивайте количество сеансов и IP-адресов, а также отзывайте доступ.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 Предоставьте рецензенту доступ к одному чату, аналитику — право на экспорт дела, а оператору — контроль над выбранными аккаунтами. Каждый пользователь получает собственный токен. Главный токен панели управления остается у администратора.
 
 [Настройка учетной записи](https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/) · [Маршруты подключения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/) · [Модель безопасности](https://phishdestroy.github.io/TgWitness/ru/docs/reference/security/)
@@ -104,4 +108,8 @@ API допускает до 600 запросов в минуту на один I
 
 Предоставление, изменение и отзыв доступа, а также начало или завершение сеансов также приводят к созданию подписанных записей в журнале `access.*`. Токены не включаются в эти записи. Выданные токены и учетные данные сеансов хранятся в виде хэшей в зашифрованном хранилище.
 
-****Главный администратор и граница доверия**** Основной токен панели остается неограниченным. Вход в систему через браузер с его использованием создаёт сессии, подпадающие под ограничения сеансов, настроенные администратором. Скрипты, отправляющие основной токен напрямую, сохраняют полный доступ и не учитываются как сеансы браузера. Речь идёт о контроле доступа на уровне приложения в рамках одной установки. Все рабочие пространства используют общий серверный процесс; это не означает изоляции от администратора хоста. Обеспечьте конфиденциальность главного токена, сеансов Telegram, ключей подписи и каталога данных. Токен «witness» представляет собой отдельный контрольный точка/удостоверение работоспособности, а не токен доступа к панели.
+****Главный администратор и граница доверия****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

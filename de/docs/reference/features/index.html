@@ -32,9 +32,28 @@
 <nav class="breadcrumbs" aria-label="Anleitungen"><a href="../../../">Startseite</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentation</a> <span aria-hidden="true">/</span> <a href="../">Referenz</a> <span aria-hidden="true">/</span> <span aria-current="page">Funktionen und Einschränkungen</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Was wurde getestet? →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Durchsuchen Sie die Dokumentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Versuchen Sie es mit „Proxy“, „Hash-Kette“, „Token“ oder „Witness“ …" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Klare Suche" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Geben Sie ein Wort ein, um die Anleitungen und das Nachschlagewerk zu durchsuchen. Die Suche erfolgt in Ihrem Browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Teile dieser Seite sind noch auf Englisch: Das englische Original wurde nach der Übersetzung geändert.</p><p class="eyebrow">Referenz / Sammeln</p><h1>Funktionen und Einschränkungen</h1><p class="guide-outcome">Das aktuelle Erfassungsmodell, Workflows für mehrere Konten, Exporte und operative Grenzen von TgWitness.</p><div class="wiki-body"><p>TgWitness sichert Telegram-Konversationen, auf die verbundene Konten Zugriff haben,
+<article class="guide-content"><p class="language-notice">Teile dieser Seite sind noch auf Englisch: Das englische Original wurde nach der Übersetzung geändert.</p><p class="eyebrow">Referenz / Sammeln</p><h1>Funktionen und Einschränkungen</h1><p class="guide-outcome">Das aktuelle Erfassungsmodell, Workflows für mehrere Konten, Exporte und operative Grenzen von TgWitness.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentation</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Project reference</a></p>
+<p><img alt="Project reference" src="../../../../assets/chapter-project.svg" /></p>
+<p>TgWitness sichert Telegram-Konversationen, auf die verbundene Konten Zugriff haben,
 erfasst festgestellte Änderungen und erstellt überprüfbare Exporte. Diese Referenz beschreibt
 das Erfassungsmodell, aktuelle Arbeitsabläufe und deren Grenzen.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#standalone-application">Standalone application</a></li>
+<li><a href="#shared-investigations">Shared investigations</a></li>
+<li><a href="#archive-tools">Archive tools</a></li>
+<li><a href="#optional-extras">Optional extras</a></li>
+<li><a href="#protocol-and-private-sources">Protocol and private sources</a></li>
+<li><a href="#multiple-accounts">Multiple accounts</a></li>
+<li><a href="#capture-and-attribution">Capture and attribution</a></li>
+<li><a href="#capacity-and-telegram-limits">Capacity and Telegram limits</a></li>
+<li><a href="#reliability-and-recovery">Reliability and recovery</a></li>
+<li><a href="#evidence-model">Evidence model</a></li>
+<li><a href="#export-deployment-and-handoff">Export, deployment and handoff</a></li>
+<li><a href="#stable-release-criteria">Stable release criteria</a></li>
+</ul>
+</details>
 <h2 id="standalone-application">Eigenständige Anwendung<a class="anchor" href="#standalone-application" aria-label="Link zu diesem Abschnitt">#</a></h2>
 <p>TgWitness verfügt über eine eigene Installation, ein eigenes Datenverzeichnis und einen eigenen Release-Zyklus. Die mitgelieferte
 Weboberfläche übernimmt die Einrichtung und Überprüfung; exportierte Datensätze können eigenständig verwendet werden.</p>

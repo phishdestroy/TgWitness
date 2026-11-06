@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/analy
 
 ابحث في الرسائل المحفوظة، وراجع مدخلات الذكاء الاصطناعي، واحتفظ بالتقارير التحليلية مع مراجع مصادرها.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [دليل سير العمل](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ويكي](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 استخدم **«Journal»** للبحث المحلي بدون الذكاء الاصطناعي؛ [البحث عن النص الكامل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/) (معاينة) يطابق أشكال الكلمات والعبارات والمجالات وأسماء المستخدمين @. بالنسبة لـ **«Ask the archive**»، قم أولاً بتمكين وتكوين مزود في قسم **«Integrations**». يختار محدد مساحة العمل الحساب؛ ويختار النموذج الدردشات وفترة الملاحظة. يتم تنفيذ عملية الاسترجاع محليًّا. تؤدي العبارة الدقيقة أو المجال إلى تضييق نطاق الاسترجاع؛ بينما يؤدي معرّف الرسالة إلى طلب الإصدارات المحفوظة. راجع المقتطفات وافتح سجلات السجل الخاصة بها أو سياقها. لا توجد قاعدة بيانات متجهة أو إجراء تلقائي على Telegram.

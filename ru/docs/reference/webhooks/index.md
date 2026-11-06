@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/webho
 
 Отправка событий в заданном диапазоне на HTTPS-приемники с HMAC-подписями, повторными попытками и статусом доставки.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ru/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [Руководство по рабочему процессу](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Вики](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Откройте раздел **«Интеграции» → «Исходящие веб-хуки»** в выбранном рабочем пространстве. Добавьте HTTPS- приемник, выберите события «коллектор», «медиа» и «экспорт», а также, по желанию, укажите чаты для отслеживания новых сообщений и изменений. По умолчанию текст сообщений не передается. Включение выдержек добавляет не более 1 000 символов к событиям об изменении сообщений; исходные поля Telegram и учетные данные никогда не отправляются.

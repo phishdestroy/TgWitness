@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/webho
 
 ارسال رویدادهای محدودشده به گیرندگان HTTPS با امضاهای HMAC، تلاش‌های مجدد و وضعیت تحویل.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [راهنمای گردش کار](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 در فضای کاری انتخاب‌شده، **«ادغام‌ها» → «وب‌هوک‌های خروجی»** را باز کنید. یک گیرنده HTTPS اضافه کنید، رویدادهای جمع‌آوری‌کننده/رسانه/خروجی را انتخاب کنید و اختیاریاً چت‌ها را برای مشاهدات جدید و تغییرات برگزینید. متن پیام به طور پیش‌فرض غیرفعال است. فعال‌سازی گزیده‌ها حداکثر ۱۰۰۰ کاراکتر به رویدادهای تغییر پیام اضافه می‌کند؛ فیلدهای خام تلگرام و اطلاعات هویتی هرگز ارسال نمی‌شوند.

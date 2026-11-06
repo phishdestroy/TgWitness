@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Посібники"><a href="../../../">Головна</a> <span aria-hidden="true">/</span> <a href="../../">Документація</a> <span aria-hidden="true">/</span> <a href="../">Довідка</a> <span aria-hidden="true">/</span> <span aria-current="page">Зберігання та відновлення</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Що було протестовано →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Пошук у документації</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Спробуйте «проксі», «хеш-ланцюг», «токен» або «свідок»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Зручний пошук" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введіть слово, щоб здійснити пошук у посібниках та довідковій інформації. Результати пошуку залишаються у вашому браузері.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Довідка / Докази</p><h1>Зберігання та відновлення</h1><p class="guide-outcome">Резервне копіювання, переміщення старих файлів у хмарне сховище, копії під захистом Object Lock та відновлення на новому комп’ютері.</p><div class="wiki-body"><p>Панель розділяє три завдання:</p>
+<article class="guide-content"><p class="language-notice">Деякі частини цієї сторінки досі залишаються англійською мовою: англійський оригінал зазнав змін після перекладу.</p><p class="eyebrow">Довідка / Докази</p><h1>Зберігання та відновлення</h1><p class="guide-outcome">Резервне копіювання, переміщення старих файлів у хмарне сховище, копії під захистом Object Lock та відновлення на новому комп’ютері.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Документація</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Панель розділяє три завдання:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@
 а потім ще раз перевіряє локальні байти безпосередньо перед видаленням. У разі невдалого завантаження,
 відмінного результату зчитування або скасованого перенесення локальний файл залишається на місці. Якщо
 увімкнена резервна копія доказів ще не скопіювала цей файл, видалення також чекає на це.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">Коли закінчується місце на диску<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="Посилання на цей розділ">#</a></h2>
 <p>Завантаження вкладень призупиняється, коли вільного місця менше за значення в <strong>Параметри → Вкладення → вільне місце на диску</strong> (типово 1 GiB); черга зберігається. Текстові спостереження тривають. Це не залежить від сповіщень: їх вимкнення не скасовує резерв для завантажень і захисні перевірки сховища.</p>
 <p>Для раннього реагування ввімкніть <strong>Запускати автоматично</strong>, виберіть <strong>Видаляти локальний файл для звільнення місця</strong> та ввімкніть <strong>Додаткове перенесення за нестачі місця</strong>. Типово правило запускається нижче 5120 MiB вільного місця й обробляє файли пакетами, доки не стане доступно 10240 MiB. Обидва пороги налаштовуються. Місце призначення, мінімальний вік файлів, розмір пакета, повна перевірка зворотним читанням і вимоги до резервної копії доказів такі самі, як для ручного запуску. Місце призначення не вмикається автоматично. Перевірки відбуваються кожні 30 секунд; помилка або відсутність прогресу відкладає повтор на п’ять хвилин. Стан правила й час повтору зберігаються після перезапуску. Коли правило неактивне, планові проходи мають звичайний інтервал.</p>

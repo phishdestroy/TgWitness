@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/setti
 
 El asistente de configuración, los objetivos, los niveles de interfaz, las rutas de conexión y los ajustes compartidos por un grupo de cuentas.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/es/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Cuentas](https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/) · [Conexión](https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/) · [Acceso](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/)
 
 Se abre un nuevo espacio de trabajo `/first-run`: idioma y hora, nivel de interfaz, objetivo, conexión, Telegram y chats. Cada respuesta se guarda en el servidor tan pronto como cambia, por lo que al recargar la página se continúa en el mismo paso. La última pantalla muestra una lista de las respuestas y te permite volver a cualquiera de ellas.

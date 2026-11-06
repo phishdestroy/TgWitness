@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../../">होम</a> <span aria-hidden="true">/</span> <a href="../../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <a href="../">संदर्भ</a> <span aria-hidden="true">/</span> <span aria-current="page">सुरक्षा और डेटा प्रबंधन</span></nav>
 <p class="verification-shortcut"><a href="../verification/">क्या परीक्षण किया गया है →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / सुरक्षा और परियोजना</p><h1>सुरक्षा और डेटा प्रबंधन</h1><p class="guide-outcome">थ्रेट मॉडल, एक्सेस मॉडल, रेस्ट में सिक्रेट्स, नेटवर्क एक्सपोजर, सेशन इम्पोर्ट्स और भेद्यता की रिपोर्ट कैसे करें।</p><div class="wiki-body"><p>This page describes access, storage and network protection in a local or server workspace.
+<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / सुरक्षा और परियोजना</p><h1>सुरक्षा और डेटा प्रबंधन</h1><p class="guide-outcome">थ्रेट मॉडल, एक्सेस मॉडल, रेस्ट में सिक्रेट्स, नेटवर्क एक्सपोजर, सेशन इम्पोर्ट्स और भेद्यता की रिपोर्ट कैसे करें।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">टीजीविटनेस</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">दस्तावेज़ीकरण</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>This page describes access, storage and network protection in a local or server workspace.
 For collection on a GitHub runner or in an Intel TDX confidential VM, see the
 <a href="../evidence/#verification-scope">verification modes</a>, which add checks of the collection environment.
 Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.</p>
@@ -67,6 +69,19 @@ Account connections, notifications, timestamps, off-site copies and witnesses ha
 </tbody>
 </table></div>
 <p>कमजोरियों की रिपोर्टों के लिए, <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">सुरक्षा नीति</a> देखें।</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#access-model">Access model</a></li>
+<li><a href="#panel-content-and-exports">Panel content and exports</a></li>
+<li><a href="#secrets-at-rest">Secrets at rest</a></li>
+<li><a href="#proxies-and-network-routes">Proxies and network routes</a></li>
+<li><a href="#sign-in-and-session-imports">Sign-in and session imports</a></li>
+<li><a href="#logs-and-transport">Logs and transport</a></li>
+<li><a href="#integrity-limits">Integrity limits</a></li>
+<li><a href="#if-you-suspect-a-problem">If you suspect a problem</a></li>
+</ul>
+</details>
 <h2 id="access-model">पहुँच मॉडल<a class="anchor" href="#access-model" aria-label="इस अनुभाग का लिंक">#</a></h2>
 <p>मुख्य पैनल टोकन पूर्ण नियंत्रण प्रदान करता है। अन्य लोग अपनी स्वयं की
 <a href="../access/">सीमित पहुँच</a> प्राप्त कर सकते हैं: चुने हुए वर्कस्पेस और चैट, अनुमतियाँ, समाप्ति, आईपी प्रतिबंध, साइन-इन सीमाएँ और रद्द की जा सकने वाली सत्र। चैट-सीमित पहुँच पूरे वर्कस्पेस के संचालन नहीं कर सकती, भले ही उनकी अनुमति टिक की गई हो।

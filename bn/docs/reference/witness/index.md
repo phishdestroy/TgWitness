@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/witne
 
 নিজের কী এবং বট সহ একটি উইটনেস চালান, চ্যানেলে স্বাক্ষরিত চেকপয়েন্ট প্রকাশ করুন এবং এর বিপরীতে এক্সপোর্টগুলো যাচাই করুন।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [রপ্তানি এবং যাচাই করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/) · [উচ্চ নিশ্চয়তা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/) · [প্যানেল গাইড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ A witness retains signed checkpoints separately from the collector. It checks th
 4. প্রমাণ ZIP → verify.py
 5. সাক্ষী জার্নাল, নিজস্ব কী → verify.py
 6. টেলিগ্রাম চ্যানেল → verify.py (টেলিগ্রাম ডেস্কটপ এক্সপোর্ট অথবা t.me/s পৃষ্ঠা)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#verify)
 
 ## সাক্ষী যা পায় এবং যা পায় না
 

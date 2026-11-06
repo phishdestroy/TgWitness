@@ -4,9 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-i
 
 हैश चेन, हस्ताक्षर, चेकपॉइंट और विटनेस को सटीक सूत्रों के साथ समझाया गया है, जिनका उपयोग सत्यापनकर्ता करता है।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness एक संग्रह करने वाले खाते द्वारा देखी गई चीज़ों को संरक्षित करता है, उन अवलोकनों को एक हस्ताक्षरित जर्नल में जोड़ता है और किसी अन्य व्यक्ति को एक विश्वसनीय कुंजी और पहले से सहेजे गए चेकपॉइंट के खिलाफ एक एक्सपोर्ट को सत्यापित करने देता है।
 
 [स्थानीय दस्तावेज़ीकरण वेबसाइट](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)`/docs/concepts/` पर इंटरैक्टिव उदाहरण, `/docs/witness/` पर एक चेकपॉइंट निर्णय एक्सप्लोरर, और [केस बोर्ड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/), [रिपोर्ट डिज़ाइन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-reports/) और [हैंडओवर अर्क](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#handover-extract) के लिए वॉकथ्रू जोड़ती है। सभी उदाहरण संदेश, गणनाएं और देरी काल्पनिक हैं। चेन सैंडबॉक्स में हैश ब्राउज़र में SHA-256 के साथ गणना किए जाते हैं। कुछ भी टेलीग्राम पर नहीं भेजा जाता है।
+
+**On this page**
+
+- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [What a hash covers](https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/#what-a-hash-covers)
+- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Pick a workflow](https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/#pick-a-workflow)
 
 ## एक संदेश बदलता है; अवलोकन संचित होते हैं
 

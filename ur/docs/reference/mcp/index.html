@@ -32,10 +32,22 @@
 <nav class="breadcrumbs" aria-label="رہنما"><a href="../../../">گھر</a> <span aria-hidden="true">/</span> <a href="../../">دستاویزات</a> <span aria-hidden="true">/</span> <a href="../">حوالہ</a> <span aria-hidden="true">/</span> <span aria-current="page">صرف پڑھنے کے لیے MCP</span></nav>
 <p class="verification-shortcut"><a href="../verification/">کیا جانچا گیا ہے ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">دستاویزات میں تلاش کریں</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، ہیش چین، ٹوکن یا ویٹنس آزمائیں…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="خلاصہ تلاش" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">رہنما اور حوالہ جات میں تلاش کرنے کے لیے ایک لفظ ٹائپ کریں۔ تلاش آپ کے براؤزر میں ہی رہتی ہے۔</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">حوالہ / آرکائیو اور انضمامات</p><h1>صرف پڑھنے کے لیے MCP</h1><p class="guide-outcome">ایک MCP کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے منسلک کریں، جس کی رسائی ختم ہونے والی اور منسوخ کی جانے والی ہو۔</p><div class="wiki-body"><p>ایک تجزیہ کار کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے جوڑیں۔ TgWitness
+<article class="guide-content"><p class="language-notice">اس صفحے کے کچھ حصے اب بھی انگریزی میں ہیں: اصل انگریزی متن ترجمے کے بعد تبدیل کر دیا گیا۔</p><p class="eyebrow">حوالہ / آرکائیو اور انضمامات</p><h1>صرف پڑھنے کے لیے MCP</h1><p class="guide-outcome">ایک MCP کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے منسلک کریں، جس کی رسائی ختم ہونے والی اور منسوخ کی جانے والی ہو۔</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">ٹی جی وٹنس</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">دستاویزات</a> · <a href="../cli/">Archive integrations</a></p>
+<p><img alt="Archive integrations" src="../../../../assets/chapter-integrations.svg" /></p>
+<p>ایک تجزیہ کار کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے جوڑیں۔ TgWitness
 <strong>پینل کے عمل میں <code>/mcp</code> پر Streamable HTTP</strong> فراہم کرتا ہے۔ ہر کنکشن کا اپنا ٹوکن، میعادِ ختم اور مجاز ٹولز ہوتے ہیں۔ MCP ٹیلیگرام پیغامات بھیجنے، ترتیبات تبدیل کرنے یا دستخط شدہ جرنل میں ترمیم کرنے کے قابل نہیں ہے۔ یہی کنکشنز
 <a href="../cli/">کمانڈ لائن</a> کے ساتھ بھی کام کرتے ہیں۔</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">ورک فلو گائیڈ</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">ویکی</a></p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#install-and-check">Install and check</a></li>
+<li><a href="#issue-a-connection">Issue a connection</a></li>
+<li><a href="#connect-your-client">Connect your client</a></li>
+<li><a href="#cloudflare-tunnel">Cloudflare Tunnel</a></li>
+<li><a href="#tools-and-boundaries">Tools and boundaries</a></li>
+</ul>
+</details>
 <h2 id="install-and-check">انسٹال اور چیک کریں<a class="anchor" href="#install-and-check" aria-label="اس حصے کا لنک">#</a></h2>
 <p>وہی Python انوائرنمنٹ استعمال کریں جو پینل چلاتا ہے۔ سورس چیک آؤٹ سے:</p>
 <pre><code class="language-powershell"># Windows PowerShell

@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel
 
 Кожен екран панелі: чати, щоденник, джерела, експорт, додаткові функції, режими захисту та перевірка коду.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Перше налаштування та параметри](https://phishdestroy.github.io/TgWitness/uk/docs/reference/settings/) · [Акаунти](https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/) · [Експорт та перевірка](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/) · [Звіти про справи](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-reports/)
 
 Що робить кожен екран, що записується в підписаний журнал і де знаходиться детальний посібник. Панель відображає по одному робочому простору за раз: один обліковий запис Telegram із власними джерелами, журналом та ключем підпису. Селектор у верхній частині бічної панелі дозволяє перемикатися між робочими просторами. Адреса містить робочий простір (`?ws=…`); доки адреса, селектор та завантажений обліковий запис не збігаються, дії залишаються заблокованими.
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#more-tools)
 
 ## Орієнтуйтеся
 

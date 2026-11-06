@@ -32,10 +32,22 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Rujukan</a> <span aria-hidden="true">/</span> <span aria-current="page">MCP hanya-baca</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Rujukan / Arkib &amp; integrasi</p><h1>MCP hanya-baca</h1><p class="guide-outcome">Sambungkan klien MCP ke ruang kerja dan sembang terpilih dengan akses yang akan tamat tempoh dan boleh ditarik balik.</p><div class="wiki-body"><p>Sambungkan klien penganalisis kepada ruang kerja dan sembang terpilih. TgWitness menyediakan
+<article class="guide-content"><p class="language-notice">Bahagian-bahagian halaman ini masih dalam bahasa Inggeris: teks asal Inggeris telah diubah selepas diterjemahkan.</p><p class="eyebrow">Rujukan / Arkib &amp; integrasi</p><h1>MCP hanya-baca</h1><p class="guide-outcome">Sambungkan klien MCP ke ruang kerja dan sembang terpilih dengan akses yang akan tamat tempoh dan boleh ditarik balik.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentasi</a> · <a href="../cli/">Archive integrations</a></p>
+<p><img alt="Archive integrations" src="../../../../assets/chapter-integrations.svg" /></p>
+<p>Sambungkan klien penganalisis kepada ruang kerja dan sembang terpilih. TgWitness menyediakan
 <strong>Streamable HTTP di <code>/mcp</code> dalam proses panel</strong>. Setiap sambungan mempunyai token, tarikh luput dan alat yang dibenarkan masing-masing. MCP tidak boleh menghantar mesej Telegram, mengubah tetapan atau mengubah jurnal yang disahkan. Sambungan yang sama berfungsi dengan
 <a href="../cli/">baris perintah</a>.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">Panduan aliran kerja</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#install-and-check">Install and check</a></li>
+<li><a href="#issue-a-connection">Issue a connection</a></li>
+<li><a href="#connect-your-client">Connect your client</a></li>
+<li><a href="#cloudflare-tunnel">Cloudflare Tunnel</a></li>
+<li><a href="#tools-and-boundaries">Tools and boundaries</a></li>
+</ul>
+</details>
 <h2 id="install-and-check">Pasang dan semak<a class="anchor" href="#install-and-check" aria-label="Pautan ke bahagian ini">#</a></h2>
 <p>Gunakan persekitaran Python yang menjalankan panel. Daripada semak keluar sumber:</p>
 <pre><code class="language-powershell"># Windows PowerShell

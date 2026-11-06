@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/webho
 
 ایچ ایم اے سی سگنیچرز، دوبارہ کوششوں اور ترسیل کی حیثیت کے ساتھ HTTPS وصول کنندگان کو محدود واقعات بھیجیں۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [ورک فلو گائیڈ](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 منتخب ورک اسپیس میں Open **Integrations → Outgoing webhooks** کھولیں۔ ایک HTTPS ریسیور شامل کریں، کلیکٹر/میڈیا/ایکسپورٹ ایونٹس منتخب کریں، اور اختیاری طور پر نئے مشاہدات اور تبدیلیوں کے لیے چیٹس منتخب کریں۔ پیغام کا متن ڈیفالٹ طور پر بند ہوتا ہے۔ اقتباسات فعال کرنے سے پیغام-تبدیلی ایونٹس میں زیادہ سے زیادہ 1,000 حروف شامل ہوتے ہیں؛ خام ٹیلیگرام فیلڈز اور اسناد کبھی بھی بھیجے نہیں جاتے۔

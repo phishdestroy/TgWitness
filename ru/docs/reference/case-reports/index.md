@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-
 
 Фильтры отчетов, восемь шаблонов дизайна, предустановленные настройки содержания, сохраненная история изменений и оценка, включённая в подписанные экспортные файлы.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Превратите выбранные наблюдения в удобочитаемый отчёт по делу: его постановку, объём, сохраненные изменения, диаграммы, выводы и ссылки на источники. Каждый отчёт предоставляет получателю возможность проверить предоставленный материал и оценить полноту сбора данных.
 
 Раздел **«Основа доверия и ограничения»** появляется в отчетах журнала, передачи, чата, учетной записи и обмена данными. PDF-файлы журнала и передачи используют ту же оценку, что и их подписанный файл `report.json`. ZIP-манифесты содержат `case_assessment` в подписанном манифесте. Эта оценка передается вместе с экспортированными материалами. Исходные наблюдения сохраняют свои существующие подписи.

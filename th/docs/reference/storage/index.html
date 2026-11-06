@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">การเก็บรักษาและกู้คืนข้อมูล</span></nav>
 <p class="verification-shortcut"><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">อ้างอิง / หลักฐาน</p><h1>การเก็บรักษาและกู้คืนข้อมูล</h1><p class="guide-outcome">การสำรองข้อมูล การย้ายไฟล์เก่าไปยังคลาวด์ การคัดลอกภายใต้ Object Lock และการกู้คืนบนเครื่องใหม่</p><div class="wiki-body"><p>แผงควบคุมนี้แบ่งงานออกเป็นสามส่วน:</p>
+<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / หลักฐาน</p><h1>การเก็บรักษาและกู้คืนข้อมูล</h1><p class="guide-outcome">การสำรองข้อมูล การย้ายไฟล์เก่าไปยังคลาวด์ การคัดลอกภายใต้ Object Lock และการกู้คืนบนเครื่องใหม่</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">เอกสารประกอบ</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>แผงควบคุมนี้แบ่งงานออกเป็นสามส่วน:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@ ID การสนทนา หรือชื่อไฟล์แนบต้�
 จากนั้นตรวจสอบไบต์ในเครื่องอีกครั้งทันทีก่อนการลบ การอัปโหลดล้มเหลว,
 การอ่านกลับที่ต่างกัน หรือการถ่ายโอนที่ถูกยกเลิก จะทำให้ไฟล์ในเครื่องยังคงอยู่ หาก
 การสำรองหลักฐานที่เปิดใช้งานยังไม่ได้คัดลอกไฟล์นั้น การลบจะรอจนกว่าการสำรองข้อมูลจะเสร็จสิ้น</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">เมื่อพื้นที่ดิสก์ใกล้เต็ม<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <p>การดาวน์โหลดไฟล์แนบจะหยุดชั่วคราวเมื่อพื้นที่ว่างต่ำกว่าค่าใน <strong>พารามิเตอร์ → ไฟล์แนบ → พื้นที่ดิสก์ว่าง</strong> (ค่าเริ่มต้น 1 GiB) โดยเก็บคิวไว้ การสังเกตข้อความยังดำเนินต่อ การทำงานนี้ไม่ขึ้นกับการแจ้งเตือน การปิดแจ้งเตือนไม่ได้ปิดพื้นที่สำรองสำหรับดาวน์โหลดหรือมาตรการป้องกันของที่เก็บข้อมูล</p>
 <p>หากต้องการเริ่มแก้ไขเร็วขึ้น ให้เปิด <strong>ทำงานอัตโนมัติ</strong> เลือก <strong>ลบไฟล์ในเครื่องเพื่อคืนพื้นที่</strong> และเปิด <strong>เริ่มย้ายข้อมูลเพิ่มเมื่อพื้นที่ดิสก์ต่ำ</strong> กฎเสริมนี้เริ่มโดยค่าเริ่มต้นเมื่อว่างน้อยกว่า 5120 MiB และทำงานเป็นชุดจนมีพื้นที่ว่าง 10240 MiB ปรับทั้งสองเกณฑ์ได้ ใช้ปลายทาง อายุไฟล์ขั้นต่ำ จำนวนไฟล์ต่อชุด การอ่านกลับเพื่อตรวจสอบทั้งหมด และเงื่อนไขสำรองหลักฐานเช่นเดียวกับการทำงานด้วยตนเอง โดยไม่เปิดปลายทางเอง ตรวจสอบทุก 30 วินาที หากผิดพลาดหรือไม่มีความคืบหน้าจะเลื่อนการลองครั้งถัดไปห้านาที สถานะและเวลาลองใหม่คงอยู่หลังเริ่มระบบใหม่ เมื่อกฎไม่ทำงาน งานตามกำหนดยังคงใช้ช่วงเวลาปกติ</p>

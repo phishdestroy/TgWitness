@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/analy
 
 সংরক্ষিত বার্তাগুলি অনুসন্ধান করুন, এআই ইনপুটগুলি পর্যালোচনা করুন এবং উত্স রেফারেন্সসহ বিশ্লেষণাত্মক প্রতিবেদনগুলি সংরক্ষণ করুন।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [ওয়ার্কফ্লো গাইড](https://phishdestroy.github.io/TgWitness/docs/archive/) · [উইকি](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 AI ছাড়া স্থানীয় অনুসন্ধানের জন্য **Journal** ব্যবহার করুন; [পূর্ণ-পাঠ অনুসন্ধান](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/) (প্রিভিউ) শব্দরূপ, বাক্যাংশ, ডোমেইন এবং @usernames মিলিয়ে দেখায়। **Ask the archive**-এর জন্য, প্রথমে **Integrations**-এ একটি প্রদানকারী সক্ষম ও কনফিগার করুন। ওয়ার্কস্পেস সিলেক্টর অ্যাকাউন্ট নির্বাচন করে; ফর্মটি চ্যাট এবং পর্যবেক্ষণ সময়কাল নির্বাচন করে। রিকভারি স্থানীয়ভাবে চলে। একটি সঠিক বাক্যাংশ বা ডোমেইন রিকভারিকে সংকীর্ণ করে; একটি মেসেজ আইডি সংরক্ষিত সংস্করণ অনুরোধ করে। উদ্ধৃতিগুলো পর্যালোচনা করুন এবং তাদের জার্নাল রেকর্ড বা প্রসঙ্গ খুলুন। কোনো ভেক্টর ডাটাবেস বা স্বয়ংক্রিয় টেলিগ্রাম অ্যাকশন নেই।

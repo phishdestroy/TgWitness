@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/acces
 
 Définissez les droits d’accès aux comptes et aux discussions, choisissez les autorisations, limitez les sessions et les adresses IP, et révoquez les accès.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 Accordez à un réviseur l’accès à une conversation, à un analyste l’autorisation d’exporter un dossier, ou à un opérateur le contrôle de comptes sélectionnés. Chaque personne dispose de son propre jeton. Le jeton du panneau principal reste entre les mains de l’administrateur.
 
 [Configuration du compte](https://phishdestroy.github.io/TgWitness/fr/docs/reference/accounts/) · [Itinéraires de connexion](https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/) · [Modèle de sécurité](https://phishdestroy.github.io/TgWitness/fr/docs/reference/security/)
@@ -104,4 +108,8 @@ Les scripts et les styles des panneaux contiennent des métadonnées d’intégr
 
 L'octroi, la modification et la révocation d'accès, ainsi que le démarrage ou la fin de sessions, génèrent également des enregistrements signés dans le journal `access.*`. Les jetons ne figurent pas dans ces enregistrements. Les jetons émis et les identifiants de session sont conservés sous forme de hachages dans le coffre-fort chiffré.
 
-****Administrateur principal et périmètre de confiance**** Le jeton du panneau principal reste sans restriction. Les connexions via un navigateur à l’aide de ce jeton créent des sessions soumises aux limites de session configurées par l’administrateur. Les scripts envoyant le jeton principal directement conservent un accès complet et ne sont pas comptabilisés comme des sessions de navigateur. Il s’agit d’un contrôle d’accès au niveau de l’application au sein d’une même installation. Tous les espaces de travail partagent le processus serveur ; il ne s’agit pas d’une isolation vis-à-vis de l’administrateur de l’hôte. Veillez à préserver la confidentialité du jeton principal, des sessions Telegram, des clés de signature et du répertoire de données. Un jeton « witness » est un identifiant distinct de vérification de l’état de santé du système, et non un jeton d’accès au panneau de contrôle.
+****Administrateur principal et périmètre de confiance****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

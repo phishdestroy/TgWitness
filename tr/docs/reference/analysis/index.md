@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/analy
 
 Kaydedilen mesajları arayın, yapay zeka girdilerini inceleyin ve kaynak referanslarıyla birlikte analitik raporlar tutun.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 AI olmadan yerel arama için **Günlüğü** kullanın; [tam metin araması](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/) (önizleme) kelime biçimleri, ifadeler, etki alanları ve @kullanıcı adlarıyla eşleşir. **Arşivi Sorgula özelliği** için önce **Entegrasyonlar** bölümünde bir sağlayıcıyı etkinleştirin ve yapılandırın. Çalışma alanı seçici, hesabı seçer; form ise sohbetleri ve gözlem dönemini seçer. Arama işlemi yerel olarak gerçekleştirilir. Tam bir ifade veya etki alanı arama sonuçlarını daraltır; bir mesaj kimliği, kaydedilmiş sürümleri getirir. Alıntıları inceleyin ve günlük kayıtlarını veya bağlamlarını açın. Vektör veritabanı veya otomatik Telegram eylemi yoktur.

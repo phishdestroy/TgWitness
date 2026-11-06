@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/setti
 
 Der Einrichtungsassistent, Ziele, Benutzeroberflächenebenen, Verbindungswege und Einstellungen, die von einer Kontengruppe gemeinsam genutzt werden.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/de/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Konten](https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/) · [Zusammenhang](https://phishdestroy.github.io/TgWitness/de/docs/reference/connection/) · [Zugriff](https://phishdestroy.github.io/TgWitness/de/docs/reference/access/)
 
 Ein neuer Arbeitsbereich öffnet sich `/first-run`: Sprache und Zeit, Benutzeroberflächenebene, Ziel, Verbindung, Telegram und Chats. Jede Antwort wird auf dem Server gespeichert, sobald sie sich ändert, sodass beim Neuladen derselbe Schritt fortgesetzt wird. Der letzte Bildschirm listet die Antworten auf und ermöglicht es dir, zu jeder beliebigen davon zurückzukehren.

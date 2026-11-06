@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/
 
 만료 및 취소 가능한 액세스 권한을 통해 MCP 클라이언트를 선택한 작업 공간 및 채팅에 연결합니다.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 분석가 클라이언트를 선택한 워크스페이스 및 채팅에 연결합니다. TgWitness는 **패널 프로세스 내 `/mcp`에서 Streamable HTTP를** 제공합니다. 각 연결에는 고유한 토큰, 만료 시간 및 허용된 도구가 있습니다. MCP는 텔레그램 메시지를 전송하거나, 설정을 변경하거나, 서명된 저널을 수정할 수 없습니다. 동일한 연결을 [명령줄에서도](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/)사용할 수 있습니다.
 
 [워크플로우 가이드](https://phishdestroy.github.io/TgWitness/docs/archive/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#tools-and-boundaries)
 
 ## 설치 및 확인
 

@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel
 
 パネルのすべての画面：チャット、ジャーナル、ソース、エクスポート、エクストラ、保護モード、コードチェック。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [初期設定と設定](https://phishdestroy.github.io/TgWitness/ja/docs/reference/settings/) · [アカウント](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/) · [エクスポートと検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/) · [事例レポート](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-reports/)
 
 各画面の機能、署名付きジャーナルへの書き込み内容、および詳細な ガイドの場所について説明します。パネルには一度に1つのワークスペースが表示されます。これは、独自の ソース、ジャーナル、署名鍵を持つ1つのTelegramアカウントです。サイドバー上部のセレクターで ワークスペースを切り替えます。アドレスにはワークスペース情報が含まれます（`?ws=…`）を識別します。アドレス、 セレクター、および読み込まれたアカウントのいずれかが一致しない場合、操作はブロックされたままになります。
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#more-tools)
 
 ## 使い方のガイド
 

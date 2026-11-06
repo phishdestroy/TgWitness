@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/quick
 
 TgWitness를 설치하고 실행하는 모든 방법: Windows 패키지, Python, Docker 및 종합 데모와 초기 점검 절차.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 **영어** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md) · [우크라이나어](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md) · [포르투갈어 (브라질)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md) · [우르두어](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md) · [हिन्दी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md) · [인도네시아어](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md) · [베트남어](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md) · [간체 중국어](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md)
 
 TgWitness는 사용자의 계정이 접근할 수 있는 텔레그램 그룹 및 채널을 모니터링하기 위한 독립형 애플리케이션입니다. 이 애플리케이션은 자체 데이터 디렉터리를 사용하여 로컬에서 실행됩니다.

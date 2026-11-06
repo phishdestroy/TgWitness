@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/quick
 
 TgWitness کو انسٹال اور لانچ کرنے کے تمام طریقے: ونڈوز پیکیج، پائتھن، ڈاکر اور مصنوعی ڈیمو، ابتدائی جانچ کے ساتھ۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 **انگریزی** · [روسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md) · [یوکرینی](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md) · [اسپینش](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md) · [پرتگالی (برازیل)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md) · [ترکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md) · [عربی](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md) · [اردو](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md) · [ہندی](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md) · [انڈونیشیائی زبان](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md) · [ویتنام زبان](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md) · [سادہ چینی](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md)
 
 TgWitness ایک خود مختار ایپلیکیشن ہے جو آپ کے اکاؤنٹس تک رسائی والے ٹیلیگرام گروپس اور چینلز کا مشاہدہ کرتی ہے۔ یہ مقامی طور پر اپنی ڈیٹا ڈائریکٹری کے ساتھ چلتی ہے۔

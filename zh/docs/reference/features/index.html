@@ -32,9 +32,28 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">功能与限制</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 收集</p><h1>功能与限制</h1><p class="guide-outcome">TgWitness 的当前采集模型、多账户工作流、导出功能及操作边界。</p><div class="wiki-body"><p>TgWitness 可保存已连接账户可访问的 Telegram 对话，
+<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 收集</p><h1>功能与限制</h1><p class="guide-outcome">TgWitness 的当前采集模型、多账户工作流、导出功能及操作边界。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文档</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Project reference</a></p>
+<p><img alt="Project reference" src="../../../../assets/chapter-project.svg" /></p>
+<p>TgWitness 可保存已连接账户可访问的 Telegram 对话，
 记录观察到的变更，并生成可验证的导出文件。本参考文档描述了
 采集模型、当前工作流程及其边界。</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#standalone-application">Standalone application</a></li>
+<li><a href="#shared-investigations">Shared investigations</a></li>
+<li><a href="#archive-tools">Archive tools</a></li>
+<li><a href="#optional-extras">Optional extras</a></li>
+<li><a href="#protocol-and-private-sources">Protocol and private sources</a></li>
+<li><a href="#multiple-accounts">Multiple accounts</a></li>
+<li><a href="#capture-and-attribution">Capture and attribution</a></li>
+<li><a href="#capacity-and-telegram-limits">Capacity and Telegram limits</a></li>
+<li><a href="#reliability-and-recovery">Reliability and recovery</a></li>
+<li><a href="#evidence-model">Evidence model</a></li>
+<li><a href="#export-deployment-and-handoff">Export, deployment and handoff</a></li>
+<li><a href="#stable-release-criteria">Stable release criteria</a></li>
+</ul>
+</details>
 <h2 id="standalone-application">独立应用程序<a class="anchor" href="#standalone-application" aria-label="本节链接">#</a></h2>
 <p>TgWitness 拥有独立的安装流程、数据目录和发布生命周期。随附的
 Web 界面负责配置和审查；导出的记录可独立使用。</p>

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/conne
 
 Avtorizatsiya, avtomatik proksi havzalari, IP rejimlari, zaxira siyosati, tashqi so'rovlar va maxfiy saqlash.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Ushbu hujjat TgWitness 0.8.0 xatti-harakatlari va uning cheklovlarini tasvirlaydi. Avtorizatsiya, manbaga kirish, tarmoq ulanishi va yozib olish to'liqligi alohida holatlardir. Kirish bosqichlari, fayl formatlari va bir nechta hisoblar bo'yicha [hisoblar va sessiya formatlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) bo'limidan boshlang. Hodisalar siyosati va qayta ishga tushirish xatti-harakatlari uchun [to'plash qanday ishlashini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/) ko'ring.
 
 ## Yo'naltirilgan ulanishni sozlash
@@ -117,7 +121,21 @@ MTProxy faqat Telegram trafigini o'tkazadi. Ish maydoni HTTP amaliyotlari, masal
 
 Operator boshqariladigan xususiy xizmatlar uchun mavjud server muhit sozlamasi `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` xususiy manzillarni ruxsat etadi va proxy tomonidan host nomini aniqlashni saqlaydi. Uni panel orqali yoqib bo'lmaydi. Faqat ommaviy rejim `.onion` manzillarini ommaviy resolver so'ralmasidan oldin rad etadi; Tor onion xizmatlari aniq xususiy manzil sozlamasi va mos proxy talab qiladi. Ushbu DNS xatti-harakatlari Telegram transportiga emas, balki tashqi HTTP operatsiyalariga tegishli. Cloudflare [JSON DNS oxirgi](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) nuqtasini hujjatlashtiradi.
 
-****Avtomatik havza parametrlari**** **Parametrlar → Avtomatik MTProxy** bo'limida xato chegarasi, sovish vaqti, rejalashtirilgan rotatsiya, proksi ulashish va ruxsat etilgan zaxira kechikishini sozlang. | Nazorat | Bo'sh | | --- | --- | | Almashishdan oldin uzilishlar | 10 daqiqa ichida 3 marta | | Har bir ulanish urinishida sinab ko'riladigan proksi-lar | 3 | | Xato bo'lgandan keyingi birinchi / maksimal dam olish | 10 daqiqa / 6 soat | | Rejalashtirilgan aylantirish | O'chirilgan; xato bo'lganda yoqiladi | | Har bir proksi bo'yicha hisoblar | 0: alohida kirishlarni afzal ko'ring, kerak bo'lganda ulashing. Eksklyuziv kirishni kutish uchun 1 ni belgilang. | | Ruxsat etilgan to'g'ridan-to'g'ri zaxiraga qaytishdan oldingi kechikish | 10 daqiqa; Manzilni yashirish hanuzgacha to'g'ridan-to'g'ri ulanishni rad etadi | | Ma'lumot oqimini yangilash / transport tekshiruvlari | 60 / 10 daqiqa; asosiy ish maydoni qiymatlari umumiy zaxiraga ham tegishli | Turli proxy-serverlar turli chiqish manzillarini kafolatlamaydi. Ushbu sozlamalar Telegram limitlarini bekor qilmaydi yoki anonimlikni isbotlamaydi.
+****Avtomatik havza parametrlari****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Boshqaruv | O'rnatilgan |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 Ommaviy ro'yxatni o'zingizning operator katalogingiz bilan almashtirish uchun quyidagi ustunlikni sozlang. Bu tashqi obunalarni butunlay o'chirib qo'yadi, hatto uning `proxies` massivida hech narsa bo'lmaganida ham.
 

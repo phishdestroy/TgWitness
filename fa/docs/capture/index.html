@@ -35,7 +35,9 @@
 <article class="guide-content"><p class="eyebrow">مستندسازی / 02</p><h1>GitHub Actions ضبط می‌کند</h1><p>Takeout，خروجی با API معمولی یا گزارش یک گفتگو را روی اجراکننده موقت GitHub انتخاب کنید．</p>
 <div class="capture-widget" data-capture-wizard data-site-language="fa" data-no-translate></div>
 <noscript><p>جاوااسکریپت را فعال کنید تا یک کلید تولید شود و آرشیو خود را رمزگشایی کنید.</p></noscript>
-<details class="detail-block"><summary>مرجع کامل</summary><div class="wiki-body" lang="en" dir="ltr"><p><strong>Preview available from <code>main</code>.</strong> A fork launches a pinned reusable workflow from
+<details class="detail-block"><summary>مرجع کامل</summary><div class="wiki-body" lang="en" dir="ltr"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentation</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md">Independent capture</a></p>
+<p><img alt="Independent capture" src="../../../assets/chapter-capture.svg" /></p>
+<p><strong>Preview available from <code>main</code>.</strong> A fork launches a pinned reusable workflow from
 <code>phishdestroy/TgWitness</code>. The workflow exports an account, selected chats or one
 chat's event journal using a newly created Telegram session, attests the evidence
 ZIP or multipart manifest, and uploads only
@@ -45,6 +47,21 @@ recipient-encrypted handoffs. The normal administration panel is not exposed.</p
 workflow and collector commits, and the signed journal and attachment hashes.
 The collection process uses pinned upstream code and fresh storage. A reviewer
 can inspect that code and verify the delivered archive against its recorded run.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#user-flow">User flow</a></li>
+<li><a href="#session-time-budget">Session time budget</a></li>
+<li><a href="#choose-this-mode-or-a-persistent-workspace">Choose this mode or a persistent workspace</a></li>
+<li><a href="#what-is-public-and-what-must-stay-private">What is public, and what must stay private</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#local-decryption-and-verification">Local decryption and verification</a></li>
+<li><a href="#how-the-fork-is-kept-outside-the-capture-process">How the fork is kept outside the capture process</a></li>
+<li><a href="#cryptographic-handoff">Cryptographic handoff</a></li>
+<li><a href="#limits-and-validation">Limits and validation</a></li>
+<li><a href="#maintainer-release-sequence">Maintainer release sequence</a></li>
+</ul>
+</details>
 <h2 id="user-flow">User flow<a class="anchor" href="#user-flow" aria-label="Link to this section">#</a></h2>
 <p>The helper explains the five stages and lets you try message or collector
 substitution on sample data. <strong>Start my capture</strong> opens the wizard.</p>

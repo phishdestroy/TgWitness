@@ -32,9 +32,154 @@
 <nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">ما تم اختباره</span></nav>
 <p class="verification-shortcut"><a href="./">ما تم اختباره ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">لا تزال أجزاء من هذه الصفحة باللغة الإنجليزية: فقد تغير النص الأصلي باللغة الإنجليزية بعد ترجمته.</p><p class="eyebrow">مرجع / الأمن والمشروع</p><h1>ما تم اختباره</h1><p class="guide-outcome">اختبار Telegram المباشر، والفحوصات الآلية، وفحوصات المتصفح، وما لم يتم التحقق منه بعد.</p><div class="wiki-body"><p>Each result below applies to its recorded revision and environment. The
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">current capability matrix</a> separates implementation, published downloads
-and remaining qualification.</p>
+<article class="guide-content"><p class="language-notice">لا تزال أجزاء من هذه الصفحة باللغة الإنجليزية: فقد تغير النص الأصلي باللغة الإنجليزية بعد ترجمته.</p><p class="eyebrow">مرجع / الأمن والمشروع</p><h1>ما تم اختباره</h1><p class="guide-outcome">اختبار Telegram المباشر، والفحوصات الآلية، وفحوصات المتصفح، وما لم يتم التحقق منه بعد.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">التوثيق</a> · <a href="../evidence/">Evidence and verification</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../../assets/chapter-evidence.svg" /></p>
+<p><strong>Updated 6 November 2026.</strong> Results are tied to the revision, environment and
+workload recorded for each run. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">Current capabilities</a> describes the
+available workflows; this page records what has actually been checked.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/">Performance graphs</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">Signed English audit</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv">Downloadable measurements</a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Latest evidence</th>
+<th>النتيجة</th>
+<th>النطاق</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Release audit · 6 Nov</td>
+<td>1,461 core tests passed; 37 platform skips</td>
+<td>Source <code>92e539af40d8</code>; open findings retained</td>
+</tr>
+<tr>
+<td>Fresh exports · 6 Nov</td>
+<td>127.713 and 141.781 records/s, complete cycle</td>
+<td>Two accounts per server; text and metadata through WARP</td>
+</tr>
+<tr>
+<td>Retained archives · 6 Nov</td>
+<td>48 archives; 3,598,381 records verified</td>
+<td>Existing archives checked against pinned workspace keys</td>
+</tr>
+<tr>
+<td>Trusted Live · 5 Nov</td>
+<td>Guarded CPU recording and WARP checks</td>
+<td>Official Desktop login and native export remain unqualified</td>
+</tr>
+<tr>
+<td>Phala / Intel TDX · 4 Nov</td>
+<td>All 16 verifier checks passed on later runs</td>
+<td>Historical deployment; no Telegram account on the CVM</td>
+</tr>
+</tbody>
+</table></div>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a></li>
+<li><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a></li>
+<li><a href="#live-phala-cloud-deployment--4-november-2026">Live Phala Cloud deployment · 4 November 2026</a></li>
+<li><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a></li>
+<li><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a></li>
+<li><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a></li>
+<li><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a></li>
+<li><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a></li>
+<li><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a></li>
+<li><a href="#full-text-search-on-one-million-messages--5-november-2026">Full-text search on one million messages · 5 November 2026</a></li>
+<li><a href="#remaining-qualification">Remaining qualification</a></li>
+</ul>
+</details>
+<h2 id="release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026<a class="anchor" href="#release-audit-and-fresh-exports--6-november-2026" aria-label="رابط لهذا القسم">#</a></h2>
+<p>The audit used v0.9.1 at source
+<code>92e539af40d8368d198ff5e040f1d876f2c1310e</code>, release
+<code>92e539af40d8-83e41104669e</code>. Installed-package smoke checks passed on three
+servers. The signed report retains the state observed at that time.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/"><img alt="Acquisition and complete export rates for two fresh workloads" src="../../../../assets/performance.svg" /></a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Workload</th>
+<th style="text-align: right;">السجلات</th>
+<th style="text-align: right;">Acquisition</th>
+<th style="text-align: right;">Complete cycle</th>
+<th style="text-align: right;">Complete-cycle rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server A · two accounts</td>
+<td style="text-align: right;">27,030</td>
+<td style="text-align: right;">189.043 s</td>
+<td style="text-align: right;">211.647 s</td>
+<td style="text-align: right;">127.713 records/s</td>
+</tr>
+<tr>
+<td>Server B · two accounts</td>
+<td style="text-align: right;">29,299</td>
+<td style="text-align: right;">182.513 s</td>
+<td style="text-align: right;">206.650 s</td>
+<td style="text-align: right;">141.781 records/s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both exports began without resume, excluded attachments and avatars, and ended
+with zero duplicate or reused records. The complete cycle includes preparation,
+acquisition, selection, packaging and archive verification. Server A also ran a
+protected-chat read check. Four FloodWait events on A and three on B were
+respected. These observations do not establish a general throughput guarantee.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>تحقق</th>
+<th>النتيجة</th>
+<th>Qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core pytest</td>
+<td>1,461 passed</td>
+<td>37 platform skips</td>
+</tr>
+<tr>
+<td>Browser / browser UX / evidence / site</td>
+<td>102 / 66 / 15 / 9 passed</td>
+<td>These programs overlap other tests; counts are not additive</td>
+</tr>
+<tr>
+<td>Capture addon</td>
+<td>124 passed</td>
+<td>Three Official Web checks blocked by the required Chromium sandbox</td>
+</tr>
+<tr>
+<td>API authorization</td>
+<td>269 routes; 538 requests passed</td>
+<td>Missing credentials and revoked access</td>
+</tr>
+<tr>
+<td>Retained archives</td>
+<td>48 of 48 verified</td>
+<td>3,598,381 records; pinned workspace keys</td>
+</tr>
+<tr>
+<td>Live fleet read checks</td>
+<td>24 of 40 profiles passed</td>
+<td>16 WARP routes failed qualification; those profiles were not connected</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">signed report</a> records all open
+findings, including three defects in an unpublished secret-chat snapshot absent
+from the audited main build. The earlier
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md">public-history qualification</a> used a different
+revision and workload; its rates must not be combined with this comparison.</p>
+<p>Verify the original report using the
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files">pinned key and verifier</a>.
+Its signature protects the operator's report from alteration. It is not
+independent attestation, proof of Telegram authorship or GDPR certification.</p>
 <h2 id="trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026<a class="anchor" href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026" aria-label="رابط لهذا القسم">#</a></h2>
 <p>The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB)
 under QEMU inside a RunPod CPU host. The collector used <code>14e642a5</code>; verification used
@@ -63,10 +208,52 @@ login, native chat export, real hybrid comparison and Telegram-side logout remai
 pending. No supplied Telethon session was imported. Attachments, automatic OCR,
 local drand BLS verification and Trusted Live TDX attestation were not qualified.</p>
 <h2 id="live-phala-cloud-deployment--4-november-2026">النشر المباشر على Phala Cloud · 4 نوفمبر 2026<a class="anchor" href="#live-phala-cloud-deployment--4-november-2026" aria-label="رابط لهذا القسم">#</a></h2>
-<p>تم تشغيل <code>--provider phala --quick-tunnel</code> على <strong>Phala Cloud</strong> الحقيقي (<code>tdx.small</code>، المنطقة
-US-WEST-1) باستخدام مفتاح API لـ Phala Cloud لمساحة عمل فارغة، وملف ntfy.sh الحقيقي، وGitHub، وIntel PCS.
-قامت CVM بتثبيت الالتزام <code>df7d860c</code> (v0.8.1)؛ وتم تنفيذ عمليات النشر والتحقق والإزالة من سطر الأوامر
-مع الإصلاحات أدناه. بلغت تكلفة السبع CVMs مجتمعة حوالي 1.9 سنت أمريكي.</p>
+<p><strong>Historical result:</strong> later deployments passed all 16 verifier checks,
+including Intel TDX and the quick tunnel. Restart evidence, signed address
+discovery and report timestamps were checked separately. Each test CVM was
+removed after its run.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>الإعداد</th>
+<th>Recorded value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>المزود</td>
+<td>Phala Cloud · <code>tdx.small</code> · US-WEST-1</td>
+</tr>
+<tr>
+<td>النشر</td>
+<td><code>--provider phala --quick-tunnel</code>; initially empty workspace</td>
+</tr>
+<tr>
+<td>Initial collector</td>
+<td><code>df7d860c</code> · v0.8.1</td>
+</tr>
+<tr>
+<td>Collector with all fixes</td>
+<td><code>53a0f7e9</code></td>
+</tr>
+<tr>
+<td>Production guest</td>
+<td><code>dstack-0.5.12</code>; SSH access disabled</td>
+</tr>
+<tr>
+<td>External services</td>
+<td>ntfy.sh, GitHub and Intel PCS</td>
+</tr>
+<tr>
+<td>Observed cost</td>
+<td>Seven CVMs, about 1.9 US cents together; historical test pricing</td>
+</tr>
+</tbody>
+</table></div>
+<p>The sequence below separates initial failures, fixes and completed checks.
+No Telegram account was connected to these CVMs.</p>
+<details>
+<summary>Deployments 1–2 · provider differences and regression checks</summary>
 <p>اكتشفت عمليتا النشر الأوليتان خمسة اختلافات عن Phala Cloud المحاكاة.
 تقوم <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py"><code>tools/check_phala.py</code></a> الآن بإعادة إنتاج كل منها، وتفشل دون إصلاحها:</p>
 <div class="table-wrap" tabindex="0"><table>
@@ -105,7 +292,9 @@ US-WEST-1) باستخدام مفتاح API لـ Phala Cloud لمساحة عمل 
 </tr>
 </tbody>
 </table></div>
-<p>النشر الثالث:</p>
+</details>
+<details>
+<summary>Deployment 3 · attestation, access checks and restart evidence</summary>
 <ul>
 <li>قامت الآلة الافتراضية (CVM) بتشغيل <code>dstack-0.5.12</code> مع تعطيل الوصول عبر SSH. نشر المجمع عنوانه الموقّع بعد حوالي
     1.5 دقيقة من الإنشاء. ثم نجح النشر في تمرير <code>tdx_binding</code> و<code>tdx_quote</code> (Intel TCB
@@ -126,7 +315,9 @@ US-WEST-1) باستخدام مفتاح API لـ Phala Cloud لمساحة عمل 
 <li>أظهرت مراجعة السعر في معالج اللوحة <code>tdx.small</code> بسعر 0.058 دولار في الساعة. وأدى إدخال مفتاح خاطئ إلى ظهور رسالة بسيطة
     تقول «لم يتم قبول مفتاح واجهة برمجة التطبيقات».</li>
 </ul>
-<p>نتيجتان أخريان، تم إصلاحهما لاحقًا:</p>
+</details>
+<details>
+<summary>Follow-up fixes · signed address discovery and OS measurements</summary>
 <ul>
 <li>بدون مفتاح العنوان، اتبع <code>verify</code> أحدث منشور صحيح التكوين حول موضوع العنوان،
     والذي يرد مطبوعًا في تكوين Docker Compose المنشور. أرسله منشور مزور إلى مضيف غير
@@ -141,7 +332,9 @@ US-WEST-1) باستخدام مفتاح API لـ Phala Cloud لمساحة عمل 
     <code>measure --json</code> المذكور في الوثائق. يقوم المدقق الآن بحساب MRTD و RTMR0-2 بنفسه
     من الصورة المنشورة وشكل الجهاز الظاهري، بما في ذلك جداول ACPI.</li>
 </ul>
-<p>النشر الرابع، مع ما يلي:</p>
+</details>
+<details>
+<summary>Deployment 4 · all 16 checks, report seals and restart verification</summary>
 <ul>
 <li>نزّلت عملية النشر الصورة المنشورة <code>dstack-0.5.12</code> مرة واحدة، وطابقتها مع تجزئة صورة نظام التشغيل التي أبلغت عنها CVM. نجح فحص <code>tdx_os</code>: تطابقت قيم MRTD وRTMR0 وRTMR1 وRTMR2 مع القيم المحسوبة لـ QEMU 8.2.2، و1 vCPU و2 GiB. أعطى الحساب نفسه قيمة RTMR0 مختلفة عند افتراض 4 GiB أو2 vCPU أوQEMU 9.2.1 أوبطاقة شبكة ثانية، وفشل عند تغيير النواة أوالبرامج الثابتة أو سطر الأوامر، وكذلك مع صورة التطوير.</li>
 <li>اجتاز <code>verify</code> جميع الفحوصات الـ 16، بما في ذلك موصل النفق السريع، لذا كانت النتيجة
@@ -153,7 +346,10 @@ US-WEST-1) باستخدام مفتاح API لـ Phala Cloud لمساحة عمل 
     تشغيل كل منهما من <code>dstack-0.5.12</code> المنشور؛ وكانت إعادة التشغيل وعملية التشغيل الجديدة من النوع REVIEW.</li>
 <li>ترك <code>destroy</code> مساحة العمل فارغة.</li>
 </ul>
-<p>أجرى النشر الخامس تشغيل المجمع من الالتزام <code>53a0f7e9</code>، الذي يحتوي على كل ما سبق:</p>
+</details>
+<details>
+<summary>Deployment 5 · collector-signed discovery and forged-post rejection</summary>
+<p>The collector ran from commit <code>53a0f7e9</code>, which includes the fixes above.</p>
 <ul>
 <li>نشر المُجمِّع عنوانه المُوقَّع بمفتاحه الخاص، بجوار منشور HMAC الخاص بالمشغل.
     ثم أُضيف منشوران مزيفان إلى الموضوع، أحدهما بـ HMAC مُصفَّر والآخر مُوقَّع بمفتاح
@@ -165,14 +361,17 @@ US-WEST-1) باستخدام مفتاح API لـ Phala Cloud لمساحة عمل 
     المنشورات المزورة. <code>verify --evidence</code> أكد تشغيل جهازيْن من <code>dstack-0.5.12</code>.</li>
 <li>أظهر «Deploy» ما تحاسبه Phala على CVM، بما في ذلك القرص: 0.06078 دولار في الساعة.</li>
 </ul>
+</details>
+<h3 id="panel-wizard-and-remaining-scope">Panel wizard and remaining scope<a class="anchor" href="#panel-wizard-and-remaining-scope" aria-label="رابط لهذا القسم">#</a></h3>
 <p>تم تشغيل معالج اللوحة على Phala Cloud مرتين، مرة عبر واجهة برمجة تطبيقات المهام (API) الخاصة بها ومرة عبر
 المتصفح باستخدام Chromium حقيقي: فحص السعر، والإنشاء مع الالتزام تحت <strong>Advanced</strong>، واجتياز جميع
 فحوصات التصديق الستة، وقائمة الخوادم التي تعرض السعر المفوتر (44.37 دولارًا أمريكيًا شهريًا)، <strong>Find
 العنوان الحالي </strong>، وتنزيل تكوين Docker Compose المقاس، والحذف. لم يلاحظ المتصفح أي أخطاء في الصفحة.
 في كل مرة كانت مساحة العمل فارغة بعد ذلك.</p>
-<p>غير مشمول: نطاق Cloudflare على Phala، وحساب Telegram على CVM، وصورة <code>dstack-0.6.1</code>
-. سعر المعالج قبل الإنشاء هو سعر الحوسبة في Phala فقط، حيث إن واجهة برمجة التطبيقات (API) الخاصة بها تحدد سعر القرص
-فقط لـ CVM موجود بالفعل؛ وتُظهر قائمة الخوادم السعر المفوتر بعد الإنشاء.</p>
+<p>Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the <code>dstack-0.6.1</code>
+image. The wizard's price before creation is Phala's compute price only, as its API names the disk
+price only for an existing CVM; the server list shows the billed price after creation.
+All prices in this section were observed on 4 November 2026.</p>
 <h2 id="live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026<a class="anchor" href="#live-server-journal-inventory--1-november-2026" aria-label="رابط لهذا القسم">#</a></h2>
 <p>At approximately 19:15 UTC, sequential read-only SQLite <code>query_only</code> queries counted
 events in ten workspace databases on a running server. Collection continued during
@@ -488,11 +687,13 @@ and catch-up are implemented; atomic lossless live replay remains unestablished.
 The newer backfill commits messages and cursors atomically and preserves available
 Recent Actions, but its synthetic coverage is distinct from live qualification.
 See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">live acceptance</a> for the controlled qualification matrix.</p>
-<p>توجد الإيصالات المحلية التفصيلية ولقطات الشاشة في المجلد test-results/ (مهملة في Git).
-تحتوي لقطات الشاشة العامة الموجودة في المجلد docs/assets/ على بيانات توضيحية خيالية فقط.</p></div></article>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md">public audit directory</a> contains only
+the signed report and aggregate measurements. Detailed operational receipts,
+raw captures and account material remain private. Application screenshots in
+<code>docs/assets/</code> use fictional demonstration data.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">تحرير هذه الصفحة على GitHub ↗</a><a class="next-guide" href="../license/"><span>الخطوة التالية</span><strong>إشعار بشأن الترخيص وعدم التوافق المعماري ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="./">ما تم اختباره ←</a></p></footer>
 </main>
-<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">النشر المباشر على Phala Cloud · 4 نوفمبر 2026</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">اختبار Telegram مباشر، الحساب بالكامل · 29 أكتوبر 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">ملف تصدير محمي بكلمة مرور يُفتح باستخدام libarchive · 29 أكتوبر 2026</a><a href="#live-telegram-test--27-to-29-october-2026">اختبار Telegram المباشر · من 27 إلى 29 أكتوبر 2026</a><a href="#synthetic-local-capacity-measurement">قياس القدرات المحلية الاصطناعية</a><a href="#full-text-search-on-one-million-messages--5-november-2026">البحث عن النص الكامل في مليون رسالة · 5 نوفمبر 2026</a><a href="#remaining-qualification">المؤهلات المتبقية</a></aside>
+<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">النشر المباشر على Phala Cloud · 4 نوفمبر 2026</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">اختبار Telegram مباشر، الحساب بالكامل · 29 أكتوبر 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">ملف تصدير محمي بكلمة مرور يُفتح باستخدام libarchive · 29 أكتوبر 2026</a><a href="#live-telegram-test--27-to-29-october-2026">اختبار Telegram المباشر · من 27 إلى 29 أكتوبر 2026</a><a href="#synthetic-local-capacity-measurement">قياس القدرات المحلية الاصطناعية</a><a href="#full-text-search-on-one-million-messages--5-november-2026">البحث عن النص الكامل في مليون رسالة · 5 نوفمبر 2026</a><a href="#remaining-qualification">المؤهلات المتبقية</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>مفتوحة المصدر · تعمل على جهازك</span><a href="../../../../LICENSE">رخصة MIT</a><a href="../notice/">إشعار المشغل</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">الأمن</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "في انتظار رسالة", "Step through a fictional send, edit and delete.": "تتبع خطوات عملية إرسال وتعديل وحذف افتراضية.", "No observations yet. Start the sequence or advance one event.": "لا توجد ملاحظات حتى الآن. ابدأ التسلسل أو انتقل إلى الحدث التالي.", "Meet at 10:00": "نلتقي الساعة 10:00", "A new message is visible in the chat.": "تظهر رسالة جديدة في الدردشة.", "Record 1 appended: the collector observed the original message.": "تم إرفاق السجل رقم 1: لاحظ المجمع الرسالة الأصلية.", "Meet at 11:00": "نلتقي الساعة 11:00", "The current text changes. The earlier observation stays.": "النص الحالي قد يتغير. أما الملاحظة السابقة فتبقى كما هي.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "تم إرفاق السجل 2: التعديل يمثل ملاحظة جديدة. ولا يزال السجل 1 يحتوي على النص الأصلي.", "Message deleted": "تم حذف الرسالة", "The message has disappeared from the chat view.": "لقد اختفت الرسالة من شاشة الدردشة.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "تم إرفاق السجل رقم 3: يتم الاحتفاظ بإشعار الحذف جنبًا إلى جنب مع كلا النسختين اللتين تمت ملاحظتهما.", "0 records": "0 سجل", "1 record": "سجل واحد", "2 records": "سجلان", "3 records": "3 سجلات", "Complete / {n} of 3": "كامل / {n} من 3", "Step / {n} of 3": "الخطوة / {n} من 3", "Pause": "توقف مؤقت", "Replay sequence": "تسلسل إعادة التشغيل", "Play sequence": "تشغيل التسلسل", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "يتوفر نموذج ثابت. لحساب التجزئات (هاش) تفاعليًّا، افتح هذه الصفحة عبر HTTPS أو معاينة localhost مع دعم Web Crypto.", "No record supplied": "لم يتم تقديم أي سجل", "Tail removed": "تم حذف الجزء الأخير", "≠ saved hash": "≠ التجزئة المحفوظة", "Rebuilt · different hash": "أعيد بناؤه · هاش مختلف", "= saved hash": "= التجزئة المحفوظة", "Same length and matching head.": "نفس الطول وعنوان مطابق.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تتطابق جميع التجزئات الحسابية الثلاثة مع التجزئات المحفوظة. تتوافق هذه العينة مع الحد المحدد المتمثل في الاحتفاظ بثلاثة سجلات.", "Same saved head; the journal prefix fails verification.": "نفس العنوان المحفوظ؛ لم تجتز بادئة السجل عملية التحقق.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "لم يعد السجل رقم 2 مطابقًا لـ«هاش»ه المحفوظ. قد يفوت هذا الأمر عند التحقق من الرأس الأخير المخزن فقط؛ لذا يقوم المُحقق بفحص كل سجل.", "Head differs from the retained checkpoint.": "يختلف العنوان عن نقطة التحقق التي تم الاحتفاظ بها.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ترتبط التجزئات المعاد بناؤها ببعضها البعض، لكن الرأس النهائي قد تغير. نقطة التحقق المحتفظ بها ترفض هذا السجل. كما أن التوقيعات الأصلية ستفشل أيضًا في السجلات التي تم تغييرها.", "Too short: 2 supplied records \u003c 3 retained records.": "قصير جدًا: 2 سجلات مقدمة \u003c 3 سجلات محفوظة.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "لا يزال التوافقيان المتبقيان متطابقين. ويكشف نقطة التحقق المحتفظ بها عن الجزء المفقود في نهاية السلسلة. وبدون ذلك الحد السابق، لما كشفت هذه البادئة الأقصر وحدها عن هذا الحذف.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "حساب التجزئة غير متاح في هذا المتصفح. تظل الصيغ والتفسيرات الثابتة أدناه متاحة.", "{n} records": "{n} سجل", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "تم القبول: يزداد العدد، ويتم التحقق من التوقيع، ويتطابق المفتاح. ويحتفظ الشاهد بهذا الحد الجديد.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "التراجع: يُظهر الرد الموقّع عددًا أقل من السجلات مقارنةً بنقطة التحقق الأخيرة المقبولة. تقوم الأداة بتسجيل المشكلة والاحتفاظ بحدود النسخة السابقة المقبولة.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "التفرع (Fork): العدد لم يتغير لكن الرأس يختلف. يقوم الشاهد بتسجيل الخلاف ويحتفظ بالحدود التي تم قبولها سابقًا.", "No answer": "لا توجد إجابة", "boundary unknown": "الحدود غير معروفة", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "عدم الاستجابة: يسجل «الشهود» فشل عملية التحقق. ولا يمكنه تأكيد الحالة الحالية لـ«المجمع». إذا كان «الشهود» لا يزال قادرًا على الوصول إلى واجهة برمجة تطبيقات الروبوت (Bot API) وكانت سياسة النشر الخاصة به تسمح بذلك، فيمكنه نشر هذا الفشل.", "Send {n}": "أرسل {n}", "Edit {n}": "تحرير {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "وقد استوفى كلا الحسابين جميع الملاحظات الست المتوقعة في هذا المثال.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "لا يزال الحساب «ب» قد سجل 6 من أصل 6. استغرق تسجيل إيصالين وقتًا أطول. تعكس نسبة التسجيل وتأخير استلام الإيصالات إجابات مختلفة.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "سجل الحساب «ب» 5 من أصل 6 قبل الموعد النهائي (83.3٪). لا يوجد تأخير مقاس للتعديل المفقود. تصف هذه النتيجة فقط الإجراءات الستة الخاضعة للرقابة.", "not observed by cutoff": "لم يُلاحظ ذلك بحلول الموعد النهائي", "{s} seconds": "{s} ثانية", "Exact values follow in the table.": "ترد القيم الدقيقة في الجدول التالي.", "{s} s": "{s} s", "Not observed": "لم يُلاحظ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "تقدم أربع محادثات ملاحظات مختلفة. اتبع السجلات المصدرية لكل اتصال؛ ولا تنسب منشور القناة إلى المستخدم 71001 دون وجود مرسل محدد.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "يقدم السجلان رقم 146 ورقم 205 نفس معرّف المرسل، 71001. وهذا يربط بين المنشورات الملحوظة لحساب Telegram عبر محادثتين. ولا يحدد هوية شخص حقيقي ولا ينسب المنشور إلى القناة.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "يظهر العنوان pay.example.invalid/new في سجل المجموعة رقم 146، ولوحة مفاتيح الروبوت رقم 173، وتعديل القناة رقم 188، والرسالة الخاصة رقم 205. وجود عنوان متكرر يربط بين المواد؛ لكنه لا يثبت وجود سيطرة مشتركة على تلك الحسابات.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "تحتوي إيصالات الوسائط المكتملة رقم #151 ورقم #209 على قيم SHA-256 كاملة متطابقة في هذه الحالة الافتراضية. قارن بين البايتات الفعلية وسجلات الرسائل المرتبطة بها. لا يحدد الملف المطابق هوية منشئه ولا يثبت هوية من قام بإعادة توجيهه.", "the encrypted off-site copy": "النسخة المشفرة خارج الموقع", "notifications": "الإشعارات", "checkpoint hashes for timestamps": "تجزئات نقاط التحقق (checkpoint hashes) للطوابع الزمنية", "signed checkpoints for the witness": "نقاط تحقق موقعة لـ «TgWitness»", "Switched on in this example": "تم تفعيلها في هذا المثال", "Optional · off by default": "اختياري · معطّل افتراضيًا", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ما يُترك في هذا الجهاز: اتصال Telegram و{list}. لا شيء آخر.", "Default: only the Telegram connection leaves this machine.": "الإعداد الافتراضي: لا يغادر هذا الجهاز سوى اتصال Telegram.", "{done} of {total} done": "{done} من {total} تم إنجازها", "Mark step {n} as done": "وضع علامة «تم» على الخطوة {n}", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "نص", "Copied": "نسخ", "Command copied.": "تم نسخ الأمر.", "Selected — Ctrl/Cmd+C": "تم التحديد — Ctrl/Cmd+C", "Command selected. Copy it manually.": "تم تحديد الأمر. انسخه يدويًّا.", "Command copied to clipboard.": "تم نسخ الأمر إلى الحافظة.", "Select text": "حدد النص", "The clipboard is unavailable, so the command is selected for you to copy manually.": "الحافظة غير متاحة. تم تحديد الأمر؛ انسخه يدويًّا.", "When a message arrives, the first observation is saved.": "تصل رسالة. يتم حفظ الملاحظة الأولى.", "When the time changes, both captured versions stay.": "يتغير الوقت. وتبقى النسختان المسجلتان كما هما.", "When the message disappears, its captured history remains.": "تختفي الرسالة. لكن السجل المسجل يبقى.", "Pause example animation": "إيقاف الرسوم المتحركة التوضيحية مؤقتًا", "Play example animation": "تشغيل مثال للرسوم المتحركة", "Play": "تشغيل", "Full-size workspace screenshot": "لقطة شاشة لمساحة العمل بالحجم الكامل", "Workspace screenshot · fictional data": "لقطة شاشة لمساحة العمل · بيانات خيالية", "Close": "إغلاق", "Close screenshot": "إغلاق لقطة الشاشة", "Scrollable full-size screenshot": "لقطة شاشة كاملة الحجم قابلة للتمرير", "Enlarge: {name}": "تكبير: {name}", "View full size": "عرض بالحجم الكامل", "Step {n} of {total}": "الخطوة {n} من {total}"}</script>

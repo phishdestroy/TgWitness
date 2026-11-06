@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 請使用具備專屬金鑰與機器人的「Witness」執行程序，將簽署過的檢查點發佈至頻道，並據此核對匯出資料。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [匯出與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/) · [高可信度](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/) · [面板指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ A witness retains signed checkpoints separately from the collector. It checks th
 4. 證據 ZIP 檔案 → verify.py
 5. Witness 日誌，自有金鑰 → verify.py
 6. Telegram 頻道 → verify.py (Telegram 桌面版匯出功能或 t.me/s 頁面)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/#verify)
 
 ## TgWitness 能提供什麼，以及它無法提供什麼
 

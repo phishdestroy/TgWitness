@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel
 
 Setiap skrin panel: sembang, jurnal, sumber, eksport, Ekstra, mod perlindungan dan pemeriksaan kod.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Pendaftaran awal dan tetapan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/settings/) · [Akaun](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/) · [Eksport dan sahkan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/) · [Laporan kes](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-reports/)
 
 Apa fungsi setiap skrin, apa yang ditulisnya ke jurnal yang disahkan dan di mana panduan terperinci berada. Panel memaparkan satu ruang kerja pada satu masa: satu akaun Telegram dengan sumber, jurnal dan kunci tandatangan tersendiri. Pemilih di bahagian atas bar sisi menukar ruang kerja. Alamat membawa ruang kerja (`?ws=…`); selagi alamat, pemilih dan akaun yang dimuat tidak sehaluan, tindakan kekal dihalang.
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#more-tools)
 
 ## Temui jalan anda
 

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/accou
 
 فون، QR کوڈ یا auth کلید کے ذریعے سائن ان کریں، Telethon، Pyrogram یا Telegram Desktop سیشنز کو امپورٹ کریں، اور متعدد اکاؤنٹس چلائیں۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness MTProto کے ذریعے ایک **ٹیلیگرام صارف اکاؤنٹ** (بوٹ نہیں) کے طور پر سائن ان کرتا ہے، Telethon استعمال کرتے ہوئے۔ ہر اکاؤنٹ اپنے مخصوص **ورک اسپیس** (جسے API اور کمانڈ لائن ٹولز میں ورک *اسپیس* کہا جاتا ہے) میں موجود ہوتا ہے، جس کا اپنا سیشن، ذرائع، جرنل اور دستخطی کلید ہوتی ہے۔
 
 سیشن فائلز، سیشن سٹرنگز اور آتھ کیز **اکاؤنٹ کی اجازت نامے** ہیں: جو بھی ان میں سے کسی کو اپنے پاس رکھے وہ اس اکاؤنٹ کے طور پر کام کر سکتا ہے۔ ان میں پیغامات کی تاریخ شامل نہیں ہوتی۔

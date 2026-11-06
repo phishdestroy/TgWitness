@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/showc
 
 Publikuj zapisane wiadomości z wybranych kanałów publicznych oraz podpisane migawki za pomocą linków z terminem ważności i możliwością cofnięcia.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/pl/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Opcja **„Dostęp → Publiczna prezentacja”** tworzy oddzielną stronę tylko do odczytu przy użyciu istniejącego systemu tokenów dostępu. Odczytuje ona zapisane obserwacje instalacji. Nie uruchamia kolektora, nie loguje się do Telegrama ani nie uzyskuje dostępu do kanału dla odwiedzającego.
 
 ## Opublikuj stronę

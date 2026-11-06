@@ -32,9 +32,28 @@
 <nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">Возможности и ограничения</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Что проверено →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Часть страницы пока на английском: английский оригинал изменился после перевода.</p><p class="eyebrow">Справочник / Сбор</p><h1>Возможности и ограничения</h1><p class="guide-outcome">Текущая модель сбора данных, рабочие процессы с несколькими учетными записями, экспорт данных и операционные ограничения TgWitness.</p><div class="wiki-body"><p>TgWitness сохраняет переписки в Telegram, доступные для подключенных учетных записей,
+<article class="guide-content"><p class="language-notice">Часть страницы пока на английском: английский оригинал изменился после перевода.</p><p class="eyebrow">Справочник / Сбор</p><h1>Возможности и ограничения</h1><p class="guide-outcome">Текущая модель сбора данных, рабочие процессы с несколькими учетными записями, экспорт данных и операционные ограничения TgWitness.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Документация</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Project reference</a></p>
+<p><img alt="Project reference" src="../../../../assets/chapter-project.svg" /></p>
+<p>TgWitness сохраняет переписки в Telegram, доступные для подключенных учетных записей,
 фиксирует наблюдаемые изменения и готовит поддающиеся проверке экспортные файлы. В данном руководстве описаны
 модель сбора данных, текущие рабочие процессы и их ограничения.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#standalone-application">Standalone application</a></li>
+<li><a href="#shared-investigations">Shared investigations</a></li>
+<li><a href="#archive-tools">Archive tools</a></li>
+<li><a href="#optional-extras">Optional extras</a></li>
+<li><a href="#protocol-and-private-sources">Protocol and private sources</a></li>
+<li><a href="#multiple-accounts">Multiple accounts</a></li>
+<li><a href="#capture-and-attribution">Capture and attribution</a></li>
+<li><a href="#capacity-and-telegram-limits">Capacity and Telegram limits</a></li>
+<li><a href="#reliability-and-recovery">Reliability and recovery</a></li>
+<li><a href="#evidence-model">Evidence model</a></li>
+<li><a href="#export-deployment-and-handoff">Export, deployment and handoff</a></li>
+<li><a href="#stable-release-criteria">Stable release criteria</a></li>
+</ul>
+</details>
 <h2 id="standalone-application">Автономное приложение<a class="anchor" href="#standalone-application" aria-label="Ссылка на раздел">#</a></h2>
 <p>TgWitness имеет собственную процедуру установки, каталог данных и жизненный цикл выпусков. Входящий в комплект
 веб-интерфейс обеспечивает настройку и просмотр; экспортированные записи можно использовать независимо.</p>

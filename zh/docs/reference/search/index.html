@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">全文搜索</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 存档与集成</p><h1>全文搜索</h1><p class="guide-outcome">根据词形、精确短语、域名和 @用户名 查找已保存的消息，按最匹配结果优先排序，索引与签名日志绑定。</p><div class="wiki-body"><p><a href="../analysis/">存档分析</a> · <a href="../media-analysis/">本地 OCR 和转录</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">维基</a></p>
+<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 存档与集成</p><h1>全文搜索</h1><p class="guide-outcome">根据词形、精确短语、域名和 @用户名 查找已保存的消息，按最匹配结果优先排序，索引与签名日志绑定。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文档</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">存档分析</a> · <a href="../media-analysis/">本地 OCR 和转录</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">维基</a></p>
 <p><strong>预览。</strong>在<strong>“日志</strong>”中，选择搜索框旁边的<strong>“最佳匹配 · 词形变体</strong>”
 选项。结果按 BM25 算法排序，并匹配同一单词的其他形式：
 <em>搜索“перевод</em>”会找到<em>“переводом</em>”和<em>“переводы</em>”，<em>搜索“transfer</em>”会找到<em>“transfers</em>”，中文
@@ -40,6 +42,20 @@
 对整个记录进行的子字符串搜索。</p>
 <p>索引是衍生数据。它由签名日志重建而成，本身从未被签名，
 也从未被导出。原始记录不会发生任何变化。</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">搜索语法<a class="anchor" href="#search-syntax" aria-label="本节链接">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

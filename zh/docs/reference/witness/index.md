@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/witne
 
 运行一个带有独立密钥和机器人的 Witness 实例，将签名后的检查点发布到频道中，并据此验证导出数据。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [导出与验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/) · [高可信度](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/) · [面板指南](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ A witness retains signed checkpoints separately from the collector. It checks th
 4. 证据 ZIP → verify.py
 5. Witness日志，自有密钥 → verify.py
 6. Telegram 频道 → verify.py (Telegram 桌面版导出功能或 t.me/s 页面)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#verify)
 
 ## TgWitness 能做什么，以及它不能做什么
 

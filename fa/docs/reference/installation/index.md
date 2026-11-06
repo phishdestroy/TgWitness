@@ -4,7 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/insta
 
 نصب با یک دستور، بررسی امضاها و هش‌ها، به‌روزرسانی و حذف یک نصب.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [پروژه](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [راه‌اندازی سریع](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/) · [استقرار](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
+
+**On this page**
+
+- [Install with one command](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#install-with-one-command)
+- [Where everything runs](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#where-everything-runs)
+- [Full-text search settings](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#full-text-search-settings)
+- [Command-line access](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#command-line-access)
+- [Verify before running](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#verify-before-running)
+- [Update an existing installation](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#update-an-existing-installation)
+- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#remove-tgwitness)
 
 ## با یک دستور نصب کنید
 

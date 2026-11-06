@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/
 
 البحث وقراءة السياق وحساب النشاط وتصدير الرسائل المحفوظة من البرامج النصية والوكلاء، مع إخراج بتنسيق --json ورموز خروج مستقرة ورموز مميزة مخصصة للقراءة فقط.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [MCP للقراءة فقط](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/) · [البحث عن النص الكامل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/) · [ويكي](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **معاينة.** `tgwitness search`, `context`, `messages`, `stats` و `export` قراءة الملاحظات المحفوظة من أجل البرامج النصية وعوامل الذكاء الاصطناعي. ولا يمكنها إرسال أي شيء إلى Telegram، أو تغيير الإعدادات، أو تعديل السجل الموقّع.

@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel
 
 Mọi màn hình của bảng điều khiển: cuộc trò chuyện, nhật ký, nguồn, xuất dữ liệu, Tính năng bổ sung, chế độ bảo vệ và kiểm tra mã nguồn.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Cài đặt ban đầu và cấu hình](https://phishdestroy.github.io/TgWitness/vi/docs/reference/settings/) · [Tài khoản](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/) · [Xuất và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/) · [Báo cáo trường hợp](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/)
 
 Chức năng của từng màn hình, nội dung được ghi vào nhật ký đã ký và vị trí của hướng dẫn chi tiết. Bảng điều khiển hiển thị một không gian làm việc tại một thời điểm: một tài khoản Telegram với các nguồn, nhật ký và khóa ký riêng. Bộ chọn ở đầu thanh bên dùng để chuyển đổi giữa các không gian làm việc. Địa chỉ chứa thông tin về không gian làm việc (`?ws=…`); trong khi địa chỉ, công cụ chọn và tài khoản đã tải không khớp nhau, các thao tác sẽ bị chặn.
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#more-tools)
 
 ## Tìm hiểu cách sử dụng
 

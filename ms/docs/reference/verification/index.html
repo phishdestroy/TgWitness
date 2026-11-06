@@ -32,9 +32,154 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Rujukan</a> <span aria-hidden="true">/</span> <span aria-current="page">Apa yang telah diuji</span></nav>
 <p class="verification-shortcut"><a href="./">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Bahagian-bahagian halaman ini masih dalam bahasa Inggeris: teks asal Inggeris telah diubah selepas diterjemahkan.</p><p class="eyebrow">Rujukan / Keselamatan &amp; projek</p><h1>Apa yang telah diuji</h1><p class="guide-outcome">Ujian Telegram secara langsung, pemeriksaan automatik, pemeriksaan pelayar dan apa yang masih belum disahkan.</p><div class="wiki-body"><p>Each result below applies to its recorded revision and environment. The
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">current capability matrix</a> separates implementation, published downloads
-and remaining qualification.</p>
+<article class="guide-content"><p class="language-notice">Bahagian-bahagian halaman ini masih dalam bahasa Inggeris: teks asal Inggeris telah diubah selepas diterjemahkan.</p><p class="eyebrow">Rujukan / Keselamatan &amp; projek</p><h1>Apa yang telah diuji</h1><p class="guide-outcome">Ujian Telegram secara langsung, pemeriksaan automatik, pemeriksaan pelayar dan apa yang masih belum disahkan.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentasi</a> · <a href="../evidence/">Evidence and verification</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../../assets/chapter-evidence.svg" /></p>
+<p><strong>Updated 6 November 2026.</strong> Results are tied to the revision, environment and
+workload recorded for each run. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">Current capabilities</a> describes the
+available workflows; this page records what has actually been checked.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/">Performance graphs</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">Signed English audit</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv">Downloadable measurements</a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Latest evidence</th>
+<th>Keputusan</th>
+<th>Skop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Release audit · 6 Nov</td>
+<td>1,461 core tests passed; 37 platform skips</td>
+<td>Source <code>92e539af40d8</code>; open findings retained</td>
+</tr>
+<tr>
+<td>Fresh exports · 6 Nov</td>
+<td>127.713 and 141.781 records/s, complete cycle</td>
+<td>Two accounts per server; text and metadata through WARP</td>
+</tr>
+<tr>
+<td>Retained archives · 6 Nov</td>
+<td>48 archives; 3,598,381 records verified</td>
+<td>Existing archives checked against pinned workspace keys</td>
+</tr>
+<tr>
+<td>Trusted Live · 5 Nov</td>
+<td>Guarded CPU recording and WARP checks</td>
+<td>Official Desktop login and native export remain unqualified</td>
+</tr>
+<tr>
+<td>Phala / Intel TDX · 4 Nov</td>
+<td>All 16 verifier checks passed on later runs</td>
+<td>Historical deployment; no Telegram account on the CVM</td>
+</tr>
+</tbody>
+</table></div>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a></li>
+<li><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a></li>
+<li><a href="#live-phala-cloud-deployment--4-november-2026">Live Phala Cloud deployment · 4 November 2026</a></li>
+<li><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a></li>
+<li><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a></li>
+<li><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a></li>
+<li><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a></li>
+<li><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a></li>
+<li><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a></li>
+<li><a href="#full-text-search-on-one-million-messages--5-november-2026">Full-text search on one million messages · 5 November 2026</a></li>
+<li><a href="#remaining-qualification">Remaining qualification</a></li>
+</ul>
+</details>
+<h2 id="release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026<a class="anchor" href="#release-audit-and-fresh-exports--6-november-2026" aria-label="Pautan ke bahagian ini">#</a></h2>
+<p>The audit used v0.9.1 at source
+<code>92e539af40d8368d198ff5e040f1d876f2c1310e</code>, release
+<code>92e539af40d8-83e41104669e</code>. Installed-package smoke checks passed on three
+servers. The signed report retains the state observed at that time.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/"><img alt="Acquisition and complete export rates for two fresh workloads" src="../../../../assets/performance.svg" /></a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Workload</th>
+<th style="text-align: right;">Merekod</th>
+<th style="text-align: right;">Acquisition</th>
+<th style="text-align: right;">Complete cycle</th>
+<th style="text-align: right;">Complete-cycle rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server A · two accounts</td>
+<td style="text-align: right;">27,030</td>
+<td style="text-align: right;">189.043 s</td>
+<td style="text-align: right;">211.647 s</td>
+<td style="text-align: right;">127.713 records/s</td>
+</tr>
+<tr>
+<td>Server B · two accounts</td>
+<td style="text-align: right;">29,299</td>
+<td style="text-align: right;">182.513 s</td>
+<td style="text-align: right;">206.650 s</td>
+<td style="text-align: right;">141.781 records/s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both exports began without resume, excluded attachments and avatars, and ended
+with zero duplicate or reused records. The complete cycle includes preparation,
+acquisition, selection, packaging and archive verification. Server A also ran a
+protected-chat read check. Four FloodWait events on A and three on B were
+respected. These observations do not establish a general throughput guarantee.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Semak</th>
+<th>Keputusan</th>
+<th>Qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core pytest</td>
+<td>1,461 passed</td>
+<td>37 platform skips</td>
+</tr>
+<tr>
+<td>Browser / browser UX / evidence / site</td>
+<td>102 / 66 / 15 / 9 passed</td>
+<td>These programs overlap other tests; counts are not additive</td>
+</tr>
+<tr>
+<td>Capture addon</td>
+<td>124 passed</td>
+<td>Three Official Web checks blocked by the required Chromium sandbox</td>
+</tr>
+<tr>
+<td>API authorization</td>
+<td>269 routes; 538 requests passed</td>
+<td>Missing credentials and revoked access</td>
+</tr>
+<tr>
+<td>Retained archives</td>
+<td>48 of 48 verified</td>
+<td>3,598,381 records; pinned workspace keys</td>
+</tr>
+<tr>
+<td>Live fleet read checks</td>
+<td>24 of 40 profiles passed</td>
+<td>16 WARP routes failed qualification; those profiles were not connected</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">signed report</a> records all open
+findings, including three defects in an unpublished secret-chat snapshot absent
+from the audited main build. The earlier
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md">public-history qualification</a> used a different
+revision and workload; its rates must not be combined with this comparison.</p>
+<p>Verify the original report using the
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files">pinned key and verifier</a>.
+Its signature protects the operator's report from alteration. It is not
+independent attestation, proof of Telegram authorship or GDPR certification.</p>
 <h2 id="trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026<a class="anchor" href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026" aria-label="Pautan ke bahagian ini">#</a></h2>
 <p>The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB)
 under QEMU inside a RunPod CPU host. The collector used <code>14e642a5</code>; verification used
@@ -63,8 +208,52 @@ login, native chat export, real hybrid comparison and Telegram-side logout remai
 pending. No supplied Telethon session was imported. Attachments, automatic OCR,
 local drand BLS verification and Trusted Live TDX attestation were not qualified.</p>
 <h2 id="live-phala-cloud-deployment--4-november-2026">Penyebaran Langsung Phala Cloud · 4 November 2026<a class="anchor" href="#live-phala-cloud-deployment--4-november-2026" aria-label="Pautan ke bahagian ini">#</a></h2>
-<p><code>--provider phala --quick-tunnel</code> dijalankan terhadap <strong>Phala Cloud</strong> (<code>tdx.small</code>, rantau US-WEST-1) dengan kunci API Phala Cloud untuk ruang kerja kosong, ntfy.sh sebenar, GitHub dan Intel PCS.
-CVM memasang commit <code>df7d860c</code> (v0.8.1); deploy, verify dan destroy dijalankan dari baris perintah dengan pembetulan di bawah. Tujuh CVM menelan kos kira-kira 1.9 sen AS secara keseluruhannya.</p>
+<p><strong>Historical result:</strong> later deployments passed all 16 verifier checks,
+including Intel TDX and the quick tunnel. Restart evidence, signed address
+discovery and report timestamps were checked separately. Each test CVM was
+removed after its run.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Pemasangan</th>
+<th>Recorded value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Penyedia</td>
+<td>Phala Cloud · <code>tdx.small</code> · US-WEST-1</td>
+</tr>
+<tr>
+<td>Penyebaran</td>
+<td><code>--provider phala --quick-tunnel</code>; initially empty workspace</td>
+</tr>
+<tr>
+<td>Initial collector</td>
+<td><code>df7d860c</code> · v0.8.1</td>
+</tr>
+<tr>
+<td>Collector with all fixes</td>
+<td><code>53a0f7e9</code></td>
+</tr>
+<tr>
+<td>Production guest</td>
+<td><code>dstack-0.5.12</code>; SSH access disabled</td>
+</tr>
+<tr>
+<td>External services</td>
+<td>ntfy.sh, GitHub and Intel PCS</td>
+</tr>
+<tr>
+<td>Observed cost</td>
+<td>Seven CVMs, about 1.9 US cents together; historical test pricing</td>
+</tr>
+</tbody>
+</table></div>
+<p>The sequence below separates initial failures, fixes and completed checks.
+No Telegram account was connected to these CVMs.</p>
+<details>
+<summary>Deployments 1–2 · provider differences and regression checks</summary>
 <p>Dua penyebaran pertama menemui lima perbezaan daripada Phala Cloud yang disimulasi.
 <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py"><code>tools/check_phala.py</code></a> kini dapat dihasilkan semula setiap satu, dan gagal tanpa pembetulannya:</p>
 <div class="table-wrap" tabindex="0"><table>
@@ -103,7 +292,9 @@ CVM memasang commit <code>df7d860c</code> (v0.8.1); deploy, verify dan destroy d
 </tr>
 </tbody>
 </table></div>
-<p>Penyebaran ketiga:</p>
+</details>
+<details>
+<summary>Deployment 3 · attestation, access checks and restart evidence</summary>
 <ul>
 <li>CVM menjalankan <code>dstack-0.5.12</code> dengan akses SSH dimatikan. Pengumpul menyiarkan alamat yang ditandatangani kira-kira 1.5 minit selepas penciptaan. Deploy kemudian meneruskan <code>tdx_binding</code>, <code>tdx_quote</code> (Intel TCB
     UpToDate, rekod pengesahan perkakasan v4, FMSPC <code>20a06f000000</code>, tidak dalam mod debug, tidak boleh dialih, menyokong data pengesahan kriptografi yang diperoleh daripada Intel), <code>tdx_compose_hash</code>, <code>tdx_compose</code> (byte demi byte) dan <code>tdx_identity</code> (kunci KMS).</li>
@@ -115,7 +306,9 @@ CVM memasang commit <code>df7d860c</code> (v0.8.1); deploy, verify dan destroy d
     menjawab.</li>
 <li>Semakan harga wizard panel membaca <code>tdx.small</code> pada $0.058 sejam. Kunci yang salah menerima mesej biasa "tidak menerima kunci API".</li>
 </ul>
-<p>Dua penemuan selanjutnya, yang diperbaiki kemudian:</p>
+</details>
+<details>
+<summary>Follow-up fixes · signed address discovery and OS measurements</summary>
 <ul>
 <li>Tanpa kunci alamat, <code>verify</code> mengikuti kiriman terbentuk baik terbaru mengenai topik alamat,
     yang dicetak dalam konfigurasi Docker Compose yang diterbitkan. Satu kiriman palsu menghantarnya ke hos yang tidak
@@ -128,7 +321,9 @@ CVM memasang commit <code>df7d860c</code> (v0.8.1); deploy, verify dan destroy d
     <code>measure --json</code> seperti yang dinyatakan dalam dokumentasi. Pemeriksa kini mengira MRTD dan RTMR0-2 sendiri
     daripada imej yang diterbitkan dan bentuk VM, termasuk jadual ACPI.</li>
 </ul>
-<p>Penyebaran keempat, dengan ini:</p>
+</details>
+<details>
+<summary>Deployment 4 · all 16 checks, report seals and restart verification</summary>
 <ul>
 <li>Deploy memuat turun <code>dstack-0.5.12</code> yang diterbitkan sekali, memadankannya dengan hash imej OS yang dilaporkan oleh CVM, dan <code>tdx_os</code> lulus: MRTD, RTMR0, RTMR1 dan RTMR2 sama dengan nilai yang dikira untuk QEMU
     8.2.2, 1 vCPU dan 2 GiB. Pengiraan yang sama memberikan RTMR0 yang berbeza untuk tuntutan 4 GiB, 2 vCPU,
@@ -140,7 +335,10 @@ CVM memasang commit <code>df7d860c</code> (v0.8.1); deploy, verify dan destroy d
     diboot daripada <code>dstack-0.5.12</code> yang diterbitkan; but semula dan but baru itu adalah REVIEW.</li>
 <li><code>destroy</code> meninggalkan ruang kerja kosong.</li>
 </ul>
-<p>Penyebaran kelima menjalankan pengumpul daripada komit <code>53a0f7e9</code>, yang mempunyai semua perkara di atas:</p>
+</details>
+<details>
+<summary>Deployment 5 · collector-signed discovery and forged-post rejection</summary>
+<p>The collector ran from commit <code>53a0f7e9</code>, which includes the fixes above.</p>
 <ul>
 <li>Pengumpul menyiarkan alamatnya yang ditandatangani dengan kuncinya sendiri, di sebelah kiriman HMAC pengendali.
     Dua kiriman palsu kemudian ditambah ke topik, satu dengan HMAC bernilai sifar dan satu lagi ditandatangani oleh kunci Ed25519 lain, kedua-duanya mendakwa masa pada tahun 2096. <code>verify</code> mengambil alamat yang ditandatangani oleh kunci pengumpul dan lulus semua 16 pemeriksaan; meterai itu sekali lagi memaparkan cop masa Belgium yang berkelayakan, cop masa FreeTSA dan tandatangan pengesah, dan <code>check-report</code> mengesahkannya.</li>
@@ -149,8 +347,13 @@ CVM memasang commit <code>df7d860c</code> (v0.8.1); deploy, verify dan destroy d
     siaran palsu itu. <code>verify --evidence</code> mengesahkan dua permulaan dibootstrap daripada <code>dstack-0.5.12</code>.</li>
 <li>Deploy mencetak apa yang Phala bilkan kepada CVM, termasuk cakera: $0.06078 sejam.</li>
 </ul>
+</details>
+<h3 id="panel-wizard-and-remaining-scope">Panel wizard and remaining scope<a class="anchor" href="#panel-wizard-and-remaining-scope" aria-label="Pautan ke bahagian ini">#</a></h3>
 <p>Pembantu panel dijalankan pada Phala Cloud dua kali, sekali melalui API tugasnya dan sekali melalui pelayar dengan Chromium sebenar: pemeriksaan harga, penciptaan dengan komit di bawah <strong>Advanced</strong>, semua enam pemeriksaan pengesahan lulus, senarai pelayan memaparkan harga yang dikenakan (44.37 USD sebulan), <strong>Cari alamat semasa</strong>, muat turun konfigurasi Docker Compose yang diukur, dan pemadaman. Pelayar tidak menunjukkan sebarang ralat halaman. Setiap kali, ruang kerja kosong selepas itu.</p>
-<p>Tidak termasuk: domain Cloudflare di Phala, akaun Telegram di CVM, dan imej <code>dstack-0.6.1</code>. Harga wizard sebelum penciptaan adalah hanya harga komputasi Phala, kerana API-nya hanya menyenaraikan harga cakera untuk CVM yang sedia ada; senarai pelayan menunjukkan harga yang ditagih selepas penciptaan.</p>
+<p>Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the <code>dstack-0.6.1</code>
+image. The wizard's price before creation is Phala's compute price only, as its API names the disk
+price only for an existing CVM; the server list shows the billed price after creation.
+All prices in this section were observed on 4 November 2026.</p>
 <h2 id="live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026<a class="anchor" href="#live-server-journal-inventory--1-november-2026" aria-label="Pautan ke bahagian ini">#</a></h2>
 <p>At approximately 19:15 UTC, sequential read-only SQLite <code>query_only</code> queries counted
 events in ten workspace databases on a running server. Collection continued during
@@ -440,11 +643,13 @@ and catch-up are implemented; atomic lossless live replay remains unestablished.
 The newer backfill commits messages and cursors atomically and preserves available
 Recent Actions, but its synthetic coverage is distinct from live qualification.
 See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">live acceptance</a> for the controlled qualification matrix.</p>
-<p>Resit terperinci tempatan dan tangkapan skrin berada di bawah test-results/ (diabaikan oleh Git).
-Tangkapan skrin awam dalam docs/assets/ hanya mengandungi data demonstrasi rekaan.</p></div></article>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md">public audit directory</a> contains only
+the signed report and aggregate measurements. Detailed operational receipts,
+raw captures and account material remain private. Application screenshots in
+<code>docs/assets/</code> use fictional demonstration data.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">Sunting halaman ini di GitHub ↗</a><a class="next-guide" href="../license/"><span>Langkah seterusnya</span><strong>Notis lesen dan ketidakserasian seni bina →</strong></a><p>Panduan ini menerangkan pelaksanaan semasa. Keputusan pengesahan dan jurang yang masih ada didokumenkan secara berasingan. <a href="./">Apa yang telah diuji →</a></p></footer>
 </main>
-<aside class="toc" aria-label="Pada halaman ini"><p class="nav-label">Pada halaman ini</p><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">Penyebaran Langsung Phala Cloud · 4 November 2026</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Ujian Telegram langsung, akaun penuh · 29 Oktober 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Eksport terlindung kata laluan dibuka dengan libarchive · 29 Oktober 2026</a><a href="#live-telegram-test--27-to-29-october-2026">Ujian Telegram langsung · 27 hingga 29 Oktober 2026</a><a href="#synthetic-local-capacity-measurement">Pengukuran kapasiti tempatan sintetik</a><a href="#full-text-search-on-one-million-messages--5-november-2026">Carian penuh teks pada sejuta mesej · 5 November 2026</a><a href="#remaining-qualification">Kelayakan tambahan</a></aside>
+<aside class="toc" aria-label="Pada halaman ini"><p class="nav-label">Pada halaman ini</p><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">Penyebaran Langsung Phala Cloud · 4 November 2026</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Ujian Telegram langsung, akaun penuh · 29 Oktober 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Eksport terlindung kata laluan dibuka dengan libarchive · 29 Oktober 2026</a><a href="#live-telegram-test--27-to-29-october-2026">Ujian Telegram langsung · 27 hingga 29 Oktober 2026</a><a href="#synthetic-local-capacity-measurement">Pengukuran kapasiti tempatan sintetik</a><a href="#full-text-search-on-one-million-messages--5-november-2026">Carian penuh teks pada sejuta mesej · 5 November 2026</a><a href="#remaining-qualification">Kelayakan tambahan</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Sumber terbuka · Berjalan pada mesin anda</span><a href="../../../../LICENSE">lesen MIT</a><a href="../notice/">Notis pengendali</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Keselamatan</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "Menunggu mesej", "Step through a fictional send, edit and delete.": "Lalui langkah demi langkah penghantaran, penyuntingan dan pemadaman rekaan.", "No observations yet. Start the sequence or advance one event.": "Tiada pemerhatian setakat ini. Mulakan urutan atau majukan satu peristiwa.", "Meet at 10:00": "Bertemu pada pukul 10:00", "A new message is visible in the chat.": "Satu mesej baru kelihatan dalam sembang.", "Record 1 appended: the collector observed the original message.": "Rekod 1 dilampirkan: pengumpul memerhati mesej asal.", "Meet at 11:00": "Bertemu pada pukul 11:00", "The current text changes. The earlier observation stays.": "Teks semasa berubah. Pengamatan terdahulu kekal.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Rekod 2 dilampirkan: suntingan ini adalah pemerhatian baru. Rekod 1 masih mengekalkan teks asal.", "Message deleted": "Mesej telah dipadam", "The message has disappeared from the chat view.": "Mesej itu telah hilang daripada paparan sembang.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Rekod 3 dilampirkan: notis pemadaman disimpan bersama kedua-dua versi yang diperhatikan.", "0 records": "0 rekod", "1 record": "1 rekod", "2 records": "2 rekod", "3 records": "3 rekod", "Complete / {n} of 3": "Selesai / {n} daripada 3", "Step / {n} of 3": "Langkah / {n} daripada 3", "Pause": "Pause", "Replay sequence": "Susunan semula urutan", "Play sequence": "Mainkan urutan", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Contoh statik tersedia. Untuk mengira hash secara interaktif, buka halaman ini melalui HTTPS atau pratonton localhost dengan sokongan Web Crypto.", "No record supplied": "Tiada rekod disediakan", "Tail removed": "Bahagian akhir telah dialih keluar", "≠ saved hash": "≠ hash yang disimpan", "Rebuilt · different hash": "Dibina semula · hash berbeza", "= saved hash": "= hash yang disimpan", "Same length and matching head.": "Panjang yang sama dan kepala yang sepadan.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Ketiga-tiga hash yang dikira sepadan dengan hash yang disimpan. Sampel ini selari dengan sempadan tiga rekod yang disimpan.", "Same saved head; the journal prefix fails verification.": "Kepala yang sama disimpan; awalan jurnal gagal pengesahan.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Rekod 2 tidak lagi sepadan dengan hash yang disimpannya. Memeriksa hanya kepala simpanan terakhir akan terlepas perkara ini; pengesah memeriksa setiap rekod.", "Head differs from the retained checkpoint.": "Kepala berbeza daripada checkpoint yang disimpan.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Hashes yang dibina semula saling berkait, tetapi kepala terakhir telah berubah. Titik pemeriksaan yang dikekalkan menolak sejarah ini. Tandatangan asal juga akan gagal pada rekod yang diubah.", "Too short: 2 supplied records \u003c 3 retained records.": "Terlalu pendek: 2 rekod dibekalkan \u003c 3 rekod disimpan.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Dua hash yang masih tinggal masih sepadan. Titik pemeriksaan yang dikekalkan mendedahkan ekor yang hilang. Tanpa sempadan awal itu, hanya awalan yang lebih pendek ini tidak akan mendedahkan pengecualian tersebut.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Pengiraan hash tidak tersedia dalam pelayar ini. Formula dan penjelasan statik di bawah masih tersedia.", "{n} records": "{n}rekod", "head {hash}": "Hujung {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Diterima: bilangan meningkat, tandatangan disahkan dan kunci sepadan. Saksi mengekalkan sempadan baharu ini.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: jawapan yang disahkan melaporkan lebih sedikit rekod berbanding titik pemeriksaan terakhir yang diterima. Saksi merekodkan masalah dan mengekalkan sempadan yang diterima sebelum ini.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Simpangan: bilangan tidak berubah tetapi kepala berbeza. Saksi merekodkan perselisihan dan mengekalkan sempadan yang diterima sebelum ini.", "No answer": "Tiada jawapan", "boundary unknown": "batas tidak diketahui", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Tiada maklum balas: saksi merekodkan pemeriksaan yang gagal. Ia tidak dapat mengesahkan keadaan semasa pengumpul. Jika saksi masih dapat mencapai Bot API dan dasar penerbitannya membenarkan, ia boleh menerbitkan kegagalan tersebut.", "Send {n}": "Hantar {n}", "Edit {n}": "Sunting {n}", "Delete {n}": "Padam {n}", "Both accounts captured all six expected observations in this example.": "Kedua-dua akaun merakam kesemua enam pemerhatian yang dijangka dalam contoh ini.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Akaun B masih menangkap 6 daripada 6. Dua resit mengambil masa lebih lama. Nisbah tangkapan dan kelewatan resit menjawab soalan yang berbeza.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Akaun B merakam 5 daripada 6 sebelum had masa (83.3%). Suntingan yang hilang tidak mempunyai kelewatan yang diukur. Keputusan ini hanya menerangkan enam tindakan terkawal.", "not observed by cutoff": "tidak dikesan oleh cutoff", "{s} seconds": "{s} saat", "Exact values follow in the table.": "Nilai tepat diikuti dalam jadual.", "{s} s": "{s}s", "Not observed": "Tidak diperhatikan", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Empat perbualan menyumbang pemerhatian yang berbeza. Ikuti rekod sumber bagi setiap sambungan; jangan kaitkan kiriman saluran kepada pengguna 71001 tanpa penghantar yang disahkan.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Rekod #146 dan #205 memberikan ID penghantar yang sama, 71001. Ini menghubungkan kiriman yang diperhatikan daripada akaun Telegram merentasi dua sembang. Ia tidak mengenal pasti individu sebenar atau mengaitkan kiriman saluran tersebut.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Tujuan pay.example.invalid/new muncul dalam rekod kumpulan #146, papan kekunci bot #173, suntingan saluran #188 dan mesej peribadi #205. Tujuan yang berulang menghubungkan bahan tersebut; ia tidak membuktikan kawalan bersama ke atas akaun-akaun tersebut.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Resit media yang diselesaikan #151 dan #209 mempunyai nilai SHA-256 penuh yang sama dalam kes fiksyen ini. Bandingkan bait sebenar dan rekod mesej yang berkaitan. Fail yang sepadan tidak mengenal pasti penciptanya atau membuktikan siapa yang menghantarnya.", "the encrypted off-site copy": "salinan luar tapak yang disulitkan", "notifications": "pemberitahuan", "checkpoint hashes for timestamps": "Hash titik pemeriksaan untuk cap masa", "signed checkpoints for the witness": "titik pemeriksaan bertandatangan untuk saksi", "Switched on in this example": "Diaktifkan dalam contoh ini", "Optional · off by default": "Pilihan · dimatikan secara lalai", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Meninggalkan mesin ini: sambungan Telegram dan {list}. Tiada apa-apa lagi.", "Default: only the Telegram connection leaves this machine.": "Lalai: hanya sambungan Telegram yang keluar dari mesin ini.", "{done} of {total} done": "{done} daripada {total} telah selesai", "Mark step {n} as done": "Tandakan langkah {n} sebagai selesai", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Salin", "Copied": "Disalin", "Command copied.": "Perintah disalin.", "Selected — Ctrl/Cmd+C": "Disalin — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Perintah telah dipilih. Salin secara manual.", "Command copied to clipboard.": "Perintah disalin ke papan klip.", "Select text": "Pilih teks", "The clipboard is unavailable, so the command is selected for you to copy manually.": "Papan klip tidak tersedia. Perintah telah dipilih; salin secara manual.", "When a message arrives, the first observation is saved.": "Satu mesej tiba. Pengamatan pertama disimpan.", "When the time changes, both captured versions stay.": "Waktu berubah. Kedua-dua versi yang dirakam kekal.", "When the message disappears, its captured history remains.": "Mesej itu hilang. Sejarah yang dirakam kekal.", "Pause example animation": "Jeda animasi contoh", "Play example animation": "Mainkan animasi contoh", "Play": "Main", "Full-size workspace screenshot": "Tangkapan skrin ruang kerja bersaiz penuh", "Workspace screenshot · fictional data": "Tangkapan skrin ruang kerja · data rekaan", "Close": "Tutup", "Close screenshot": "Tutup tangkapan skrin", "Scrollable full-size screenshot": "Skrinshot bersaiz penuh yang boleh disejuk", "Enlarge: {name}": "Perbesarkan: {name}", "View full size": "Lihat saiz penuh", "Step {n} of {total}": "Langkah {n} daripada {total}"}</script>

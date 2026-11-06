@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/acces
 
 Надавайте доступ до облікових записів та чатів з обмеженим обсягом повноважень, обирайте права доступу, обмежуйте сеанси та IP-адреси, а також скасовуйте доступ.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 Надайте рецензенту доступ до одного чату, аналітику — дозвіл на експорт справи, а оператору — контроль над обраними акаунтами. Кожна особа отримує власний токен. Головний токен панелі залишається у адміністратора.
 
 [Налаштування облікового запису](https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/) · [Маршрути підключення](https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/) · [Модель безпеки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/security/)
@@ -104,4 +108,8 @@ API допускає до 600 запитів на хвилину з кожної
 
 Надання, зміна та скасування доступу, а також початок або закінчення сеансів також створюють підписані записи в журналі `access.*`. Токени не включаються до цих записів. Видані токени та облікові дані сеансів зберігаються у вигляді хеш-значень у зашифрованому сховищі.
 
-****Головний адміністратор та межа довіри**** Головний токен панелі залишається необмеженим. Вхід у браузері за його допомогою створює сесії, які підпадають під обмеження сесій, налаштовані адміністратором. Скрипти, що надсилають головний токен безпосередньо, зберігають повний доступ і не враховуються як сесії браузера. Це контроль доступу на рівні додатка в рамках однієї інсталяції. Усі робочі простори спільно використовують серверний процес; це не є ізоляцією від адміністратора хосту. Зберігайте головний токен, сесії Telegram, ключі підпису та каталог даних у таємниці. Токен свідка — це окремий контрольний пункт/посвідчення працездатності, а не токен доступу до панелі.
+****Головний адміністратор та межа довіри****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

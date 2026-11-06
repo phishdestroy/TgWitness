@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/
 
 Подключите клиент MCP к выбранным рабочим пространствам и чатам с ограниченным по времени и отзывным доступом.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ru/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 Подключите клиент аналитика к выбранным рабочим пространствам и чатам. TgWitness предоставляет доступ к **Streamable HTTP по адресу `/mcp` в процессе панели**. Каждое соединение имеет свой собственный токен, срок действия и разрешённые инструменты. MCP не может отправлять сообщения в Telegram, изменять настройки или модифицировать подписанный журнал. Те же соединения работают с [командной строкой](https://phishdestroy.github.io/TgWitness/ru/docs/reference/cli/).
 
 [Руководство по рабочему процессу](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Вики](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/#tools-and-boundaries)
 
 ## Установка и проверка
 

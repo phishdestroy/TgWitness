@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/acces
 
 Hisoblar va suhbatlarga cheklangan kirish huquqini bering, ruxsatlarni tanlang, sessiyalar va IP-manzillarni cheklang hamda kirishni bekor qiling.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 Ko'rib chiquvchiga bitta suhbatga, tahlilchiga ishni eksport qilishga yoki operatorga tanlangan hisoblarni boshqarishga ruxsat bering. Har bir kishiga o'z tokeni beriladi. Asosiy panel tokeni administrator qo'lida qoladi.
 
 [Hisobni sozlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) · [Ulanish yo'nalishlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/) · [Xavfsizlik modeli](https://phishdestroy.github.io/TgWitness/uz/docs/reference/security/)
@@ -104,4 +108,8 @@ Panel skriptlari va uslublari SHA-384 yaxlitlik metama'lumotlarini o'z ichiga ol
 
 Kirishni berish, o'zgartirish va bekor qilish hamda sessiyalarni boshlash yoki yakunlash ham imzolangan `access.*` jurnal yozuvlarini yaratadi. Tokenlar ushbu yozuvlarga kiritilmaydi. Berilgan tokenlar va sessiya ma'lumotlari shifrlangan omborxonada xeshlar ko'rinishida saqlanadi.
 
-****Asosiy administrator va ishonch chegarasi**** Asosiy panel tokeni cheklovsiz qoladi. U bilan brauzer orqali tizimga kirish administrator sozlagan sessiya cheklovlariga bo'ysunadigan sessiyalarni yaratadi. Asosiy tokenni to'g'ridan-to'g'ri yuboradigan skriptlar to'liq kirish huquqini saqlab qoladi va brauzer sessiyalari sifatida hisoblanmaydi. Bu bitta o'rnatishda ilova darajasidagi kirishni nazorat qilishdir. Barcha ish maydonchalari server jarayonini baham ko'radi; bu mezbon ma'muridan izolyatsiya emas. Asosiy token, Telegram sessiyalari, imzolash kalitlari va ma'lumotlar katalogini maxfiy saqlang. Guvoh tokeni alohida tekshiruv nuqtasi/sog'liq guvohnomasi bo'lib, panelga kirish tokeni emas.
+****Asosiy administrator va ishonch chegarasi****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

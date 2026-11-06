@@ -32,9 +32,27 @@
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">כיצד מתבצע האיסוף</span></nav>
 <p class="verification-shortcut"><a href="../verification/">מה נבדק ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">חלקים מדף זה עדיין באנגלית: הטקסט המקורי באנגלית שונה לאחר תרגומו.</p><p class="eyebrow">הפניה / אסף</p><h1>כיצד מתבצע האיסוף</h1><p class="guide-outcome">היקף התצפית, עדכונים בזמן אמת, בדיקות חוזרות, קבצים מצורפים, פעולות עצמיות ומשמעותו של &quot;פער&quot;, רשומה אחר רשומה.</p><div class="wiki-body"><p>TgWitness מתעד את מה שחשבון Telegram מחובר רואה. היומן משמר
+<article class="guide-content"><p class="language-notice">חלקים מדף זה עדיין באנגלית: הטקסט המקורי באנגלית שונה לאחר תרגומו.</p><p class="eyebrow">הפניה / אסף</p><h1>כיצד מתבצע האיסוף</h1><p class="guide-outcome">היקף התצפית, עדכונים בזמן אמת, בדיקות חוזרות, קבצים מצורפים, פעולות עצמיות ומשמעותו של &quot;פער&quot;, רשומה אחר רשומה.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">תיעוד</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md">אוסף</a></p>
+<p><img alt="Collection" src="../../../../assets/chapter-collect.svg" /></p>
+<p>TgWitness מתעד את מה שחשבון Telegram מחובר רואה. היומן משמר
 את התצפיות הללו, את סדרן ואת ההקשר הנלווה אליהן. הוא
 אינו מסיק פעולות בלתי נראות מהיעדר הודעה או מהיות החשבון מחובר.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#from-login-to-a-journal">From login to a journal</a></li>
+<li><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Observation scope: chosen chats, a folder or the whole account</a></li>
+<li><a href="#scope-and-event-selection">Scope and event selection</a></li>
+<li><a href="#own-actions">Own actions</a></li>
+<li><a href="#investigation-mode-joining-teams-and-talking-to-bots">Investigation mode: joining teams and talking to bots</a></li>
+<li><a href="#recheck-tiers">Recheck tiers</a></li>
+<li><a href="#message-history-and-attribution">Message history and attribution</a></li>
+<li><a href="#history-snapshots">History snapshots</a></li>
+<li><a href="#attachment-handling">Attachment handling</a></li>
+<li><a href="#pause-lock-disconnect-and-restart">Pause, lock, disconnect, and restart</a></li>
+<li><a href="#account-isolation-and-verification">Account isolation and verification</a></li>
+</ul>
+</details>
 <h2 id="from-login-to-a-journal">מהכניסה למערכת ועד ליומן<a class="anchor" href="#from-login-to-a-journal" aria-label="קישור לסעיף זה">#</a></h2>
 <p>For self-destructing photos and files, see <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md">Self-destructing media</a>.
 It explains the priority worker, saved and unavailable outcomes, and the limits of

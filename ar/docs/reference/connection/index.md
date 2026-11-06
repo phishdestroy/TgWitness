@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/conne
 
 المصادقة، ومجموعات البروكسي التلقائية، وأنماط عناوين IP، وسياسة الحل البديل، والطلبات الخارجية، والتخزين السري.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 يصف هذا المستند سلوك TgWitness 0.8.0 وحدوده. تعتبر المصادقة، والوصول إلى المصدر، والاتصال بالشبكة، واكتمال التقاط البيانات حالات منفصلة. للاطلاع على خطوات تسجيل الدخول، وتنسيقات الملفات، والحسابات المتعددة، ابدأ بـ [«الحسابات وتنسيقات الجلسات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/)». وللاطلاع على سياسات الأحداث وسلوك إعادة التشغيل، انظر [«كيفية عمل عملية التجميع](https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/)».
 
 ## إعداد الاتصال الموجه
@@ -117,7 +121,21 @@ MTProto هو بروتوكول Telegram. Telethon هي مكتبة عميل لغة
 
 بالنسبة للخدمات الخاصة التي يديرها المشغل، فإن الإعداد الحالي لبيئة الخادم `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` يسمح بالوجهات الخاصة ويحافظ على تحليل اسم المضيف من جانب الوكيل. لا يمكن تمكينه من اللوحة. يرفض الوضع «عام فقط» الوجهات `.onion` قبل الاستعلام عن المحلل العام؛ تتطلب خدمات Tor onion هذا الإعداد الصريح للوجهة الخاصة ووكيلًا مناسبًا. ينطبق سلوك DNS هذا على عمليات HTTP الخارجية، وليس على نقل Telegram. توثق Cloudflare نقطة [نهاية DNS بتنسيق](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) [JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****معلمات التجميع التلقائي**** تحت **المعلمات → تلقائي MTProxy**، قم بتكوين عتبة الفشل، وفترة التهدئة، والتناوب المخطط، ومشاركة البروكسي، وتأخير الرجوع البديل المسموح به. | عنصر التحكم | القيمة الافتراضية | | --- | --- | | قطع الاتصال قبل الاستبدال | 3 مرات خلال 10 دقائق | | عدد الوكلاء الذين يتم تجربتهم لكل محاولة اتصال | 3 | | فترة الراحة الأولى / القصوى بعد الفشل | 10 دقائق / 6 ساعات | | التناوب المخطط | معطل؛ يتم التبديل عند الفشل | | عدد الحسابات لكل وكيل | 0: يُفضل استخدام إدخالات منفصلة، والمشاركة عند الحاجة. اضبط القيمة على 1 لانتظار إدخال حصري. | | التأخير قبل السماح بالرجوع المباشر | 10 دقائق؛ إخفاء العنوان الذي لا يزال يرفض الاتصال المباشر | | تحديث الخلاصة / فحوصات النقل | 60 / 10 دقائق؛ تنطبق قيم مساحة العمل الرئيسية على المجموعة المشتركة | لا تضمن الخوادم الوكيلة المختلفة عناوين خروج مختلفة. هذه الإعدادات لا تتجاوز حدود Telegram ولا تضمن إخفاء الهوية.
+****معلمات التجميع التلقائي****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| التحكم | الافتراضي |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 لاستبدال القائمة العامة بكتالوج المشغل الخاص بك، قم بتكوين التجاوز أدناه. يؤدي ذلك إلى تعطيل الاشتراكات الخارجية تمامًا، بما في ذلك عندما تكون مصفوفة `proxies` فارغة.
 

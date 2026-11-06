@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/accou
 
 صادرات آنچه یک حساب اکنون می‌تواند بخواند: دامنه، کارهای قابل از سرگیری، یک آرشیو امضا شده و نسخه‌های اشتراک‌گذاری‌شدهٔ به حداقل‌رسیده.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 خروجی حساب، آن حساب را انحصاری رزرو می‌کند. پیش از شروع یا ازسرگیری، پایش یا گردآوری دیگر را صریحاً موقتاً متوقف کنید؛ برنامه هرگز آن را خودکار متوقف نمی‌کند.
 
 به‌عنوان مدیر نصب، **«از اینجا شروع کنید» → «حسابم را صادر کن**» یا **«صادرات‌ها» → «حساب تلگرام» → «تنظیم صادرات حساب»** را انتخاب کنید. در صورت لزوم وارد شوید، دامنه را بررسی کنید و خروجی‌گیری را به صراحت آغاز کنید. نظارت مداوم ضروری نیست. **مشاهدات ذخیره‌شده**، یک خروجی‌گیری جداگانه از ژورنال موجود است؛ ZIP آن شامل تمام منابع، صرف‌نظر از فیلترهای ژورنال می‌شود. هر فضای کاری دارای جاب‌ها، هویت امضا و ذخیره‌سازی خاص خود است. دسترسی به پنل صادرشده، از جمله مجوز خروجی‌گیری عادی نامحدود، نمی‌تواند این مسیرهای در سطح حساب را باز کند.

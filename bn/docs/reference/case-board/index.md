@@ -4,11 +4,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-
 
 বুকমার্ক, সঠিক হাইলাইট, অ্যাকশন স্লাইস, আলোচনা, স্কোপড অ্যাক্সেস এবং Case Board-এ ব্যবহৃত স্বাক্ষরিত অ্যানোটেশন ইতিহাস।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Case Board তদন্তকারী দলকে সংরক্ষিত উপাদানের একটি যৌথ কর্মদৃশ্য প্রদান করে। একটি পর্যবেক্ষণ বুকমার্ক করুন, সঠিক অংশ হাইলাইট করুন, বিভিন্ন কর্মের একটি পরিসর সংরক্ষণ করুন, এবং সহকর্মীদের সাথে আলোচনা করুন। কার্ডগুলো তাদের উৎস রেফারেন্স এবং স্বাক্ষরিত সংশোধন ইতিহাস ধরে রাখে। দলের মন্তব্যগুলো কর্মস্থলে থাকে, মূল টেলিগ্রাম পর্যবেক্ষণ থেকে পৃথকভাবে শনাক্তযোগ্য।
 
 [প্রমাণ মডেল](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/) · [অ্যাক্সেস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/) · [প্রতিবেদনসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-reports/)
 
 ![কৃত্রিম তদন্ত ফিড](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
+
+**On this page**
+
+- [Work with a case](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/#work-with-a-case)
+- [Permissions](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/#permissions)
+- [Stored contracts](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/#stored-contracts)
+- [API and exports](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/#api-and-exports)
+- [Operating limits](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/#operating-limits)
 
 ## একটি মামলার সাথে কাজ করুন
 

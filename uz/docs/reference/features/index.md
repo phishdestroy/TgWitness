@@ -4,7 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/featu
 
 Joriy yig'ish modeli, ko'p hisobli ish jarayonlari, eksportlar va TgWitness'ning operatsion chegaralari.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
 TgWitness ulanilgan hisoblarga kirish mumkin bo'lgan Telegram suhbatlarini saqlaydi, kuzatilgan o'zgarishlarni qayd etadi va tekshirilishi mumkin bo'lgan eksportlarni tayyorlaydi. Ushbu qo'llanma to'plash modelini, joriy ish jarayonlarini va ularning chegaralarini tasvirlaydi.
+
+**On this page**
+
+- [Standalone application](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#standalone-application)
+- [Shared investigations](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#shared-investigations)
+- [Archive tools](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#archive-tools)
+- [Optional extras](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#optional-extras)
+- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#protocol-and-private-sources)
+- [Multiple accounts](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#multiple-accounts)
+- [Capture and attribution](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#capture-and-attribution)
+- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#capacity-and-telegram-limits)
+- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#reliability-and-recovery)
+- [Evidence model](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#evidence-model)
+- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#export-deployment-and-handoff)
+- [Stable release criteria](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#stable-release-criteria)
 
 ## Mustaqil ilova
 

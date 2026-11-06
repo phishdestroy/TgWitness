@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/acces
 
 กำหนดสิทธิ์การเข้าถึงบัญชีและห้องสนทนา, เลือกสิทธิ์การเข้าถึง, จำกัดจำนวนเซสชันและที่อยู่ IP, และยกเลิกสิทธิ์การเข้าถึง
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 ให้สิทธิ์ผู้ตรวจสอบเข้าถึงการสนทนาหนึ่งครั้ง ให้สิทธิ์นักวิเคราะห์ส่งออกกรณี หรือ ให้ผู้ดำเนินการควบคุมบัญชีที่เลือกไว้ แต่ละคนจะได้รับโทเค็นของตัวเอง โทเค็นของ แผงควบคุมหลักจะอยู่กับผู้ดูแลระบบ
 
 [การตั้งค่าบัญชี](https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/) · [เส้นทางการเชื่อมต่อ](https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/) · [โมเดลความปลอดภัย](https://phishdestroy.github.io/TgWitness/th/docs/reference/security/)
@@ -104,4 +108,8 @@ API อนุญาตให้มีคำขอสูงสุด 600 คร�
 
 การออก เปลี่ยนแปลง และเพิกถอนสิทธิ์การเข้าถึง รวมถึงการเริ่มหรือสิ้นสุดเซสชัน จะสร้าง บันทึกสมุดบันทึก`access.*` ที่ลงนามด้วยเช่นกัน โทเค็นไม่ถูกรวมอยู่ในบันทึกเหล่านั้น โทเค็นที่ออกและข้อมูลรับรองเซสชันจะถูกเก็บรักษาไว้ในรูปแบบแฮชภายในคลังข้อมูลที่เข้ารหัส
 
-****ผู้ดูแลระบบหลักและขอบเขตความเชื่อถือ**** โทเค็นแผงหลักยังคงไม่ถูกจำกัด การเข้าสู่ระบบผ่านเบราว์เซอร์ด้วยโทเค็นนี้จะสร้างเซสชัน ที่อยู่ภายใต้ขีดจำกัดเซสชันที่ผู้ดูแลระบบกำหนด สคริปต์ที่ส่ง โทเค็นหลักโดยตรงจะยังคงมีสิทธิ์เข้าถึงเต็มรูปแบบ และไม่ถูกนับเป็นเซสชันเบราว์เซอร์ นี่คือระบบควบคุมการเข้าถึงระดับแอปพลิเคชันในระบบติดตั้งเดียว ทุกพื้นที่ทำงานใช้ กระบวนการเซิร์ฟเวอร์ร่วมกัน; นี่ไม่ใช่การแยกตัวจากผู้ดูแลระบบโฮสต์ ให้รักษา โทเค็นหลัก เซสชัน Telegram กุญแจการลงนาม และไดเรกทอรีข้อมูลให้เป็นความลับ โทเค็นพยาน เป็นจุดตรวจสอบ/ข้อมูลรับรองสถานะการทำงานที่แยกต่างหาก ไม่ใช่โทเค็นการเข้าถึงแผงควบคุม
+****ผู้ดูแลระบบหลักและขอบเขตความเชื่อถือ****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

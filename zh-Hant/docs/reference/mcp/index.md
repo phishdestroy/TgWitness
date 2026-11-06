@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 將 MCP 客戶端連接到選定的工作區和聊天室，並賦予其具有有效期限且可撤銷的存取權限。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 將分析師客戶端連接到選定的工作區和聊天室。TgWitness **在面板進程的 `/mcp` 端點**提供 **可串流的 HTTP**服務。每個連線皆擁有專屬的 憑證、有效期限及允許使用的工具。MCP 無法發送 Telegram 訊息、變更 設定或修改簽名日誌。這些連線亦可透過 [命令列](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/)操作。
 
 [工作流程指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#tools-and-boundaries)
 
 ## 安裝與檢查
 

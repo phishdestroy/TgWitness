@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Guías"><a href="../../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../../">Documentación</a> <span aria-hidden="true">/</span> <a href="../">Referencia</a> <span aria-hidden="true">/</span> <span aria-current="page">Conexión, servidores proxy y protección de datos</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Lo que se ha probado →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Referencia / Configuración</p><h1>Conexión, servidores proxy y protección de datos</h1><p class="guide-outcome">Autenticación, grupos de proxies automáticos, modos de IP, política de respaldo, solicitudes externas y almacenamiento de claves secretas.</p><div class="wiki-body"><p>Este documento describe el comportamiento de TgWitness 0.8.0 y sus limitaciones. La autenticación,
+<article class="guide-content"><p class="language-notice">Algunas partes de esta página siguen estando en inglés: el original en inglés se modificó tras su traducción.</p><p class="eyebrow">Referencia / Configuración</p><h1>Conexión, servidores proxy y protección de datos</h1><p class="guide-outcome">Autenticación, grupos de proxies automáticos, modos de IP, política de respaldo, solicitudes externas y almacenamiento de claves secretas.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentación</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Este documento describe el comportamiento de TgWitness 0.8.0 y sus limitaciones. La autenticación,
 el acceso a la fuente, la conectividad de red y la integridad de la captura son estados independientes.
 Para conocer los pasos de inicio de sesión, los formatos de archivo y la gestión de cuentas múltiples, comience por la sección
 <a href="../accounts/">«Cuentas y formatos de sesión</a>». Para conocer las políticas de eventos y el
@@ -341,25 +343,49 @@ Este comportamiento del DNS se aplica a las operaciones HTTP externas, no al tra
 Cloudflare documenta el <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">punto final JSON del DNS</a>.</p>
 <details>
 <summary><strong>Parámetros automáticos del grupo</strong></summary>
-
-En **Parámetros → Automático MTProxy**, configura el umbral de fallo, el tiempo de espera,
-la rotación planificada, el uso compartido de proxies y el retraso de recambio permitido.
-
-| Control | Predeterminado |
-| --- | --- |
-| Desconexiones antes de la sustitución | 3 en 10 minutos |
-| Proxies probados por intento de conexión | 3 |
-| Primer / máximo descanso tras un fallo | 10 minutos / 6 horas |
-| Rotación planificada | Desactivada; activar en caso de fallo |
-| Cuentas por proxy | 0: se prefieren entradas separadas, compartir cuando sea necesario. Establecer en 1 para esperar una entrada exclusiva. |
-| Retraso antes de permitir el recurso directo | 10 minutos; «Ocultar la dirección» sigue rechazando el recurso directo |
-| Actualización de feeds / comprobaciones de transporte | 60 / 10 minutos; los valores del espacio de trabajo principal se aplican al grupo compartido |
-
-El uso de diferentes proxies no garantiza direcciones de salida diferentes. Estos ajustes no
-anulan los límites de Telegram ni garantizan el anonimato.
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Por defecto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>Para sustituir la lista pública por su propio catálogo de operadores, configure la sustitución que se indica a continuación.
 Esto desactiva por completo las suscripciones externas, incluso cuando su matriz «<code>proxies</code>» está vacía.</p>
 <p>Copie <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">el catálogo vacío</a>

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/
 
 スクリプトやエージェントからメッセージを検索、コンテキストの読み取り、アクティビティの集計、保存済みメッセージのエクスポートが可能で、--json 出力、安定した終了コード、スコープ付きの読み取り専用トークンをサポートしています。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [読み取り専用 MCP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/) · [全文検索](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **プレビュー。** `tgwitness search`, `context`, `messages`, `stats` および `export` スクリプトやAIエージェント向けに、 保存された観測データを読み取ることができます。ただし、 Telegramへの送信、設定の変更、署名付きジャーナルの修正は行えません。

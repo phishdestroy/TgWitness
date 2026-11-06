@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../../">होम</a> <span aria-hidden="true">/</span> <a href="../../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <a href="../">संदर्भ</a> <span aria-hidden="true">/</span> <span aria-current="page">कनेक्शन, प्रॉक्सी और डेटा सुरक्षा</span></nav>
 <p class="verification-shortcut"><a href="../verification/">क्या परीक्षण किया गया है →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">संदर्भ / सेटअप</p><h1>कनेक्शन, प्रॉक्सी और डेटा सुरक्षा</h1><p class="guide-outcome">प्रमाणीकरण, स्वचालित प्रॉक्सी पूल, आईपी मोड, फॉलबैक नीति, बाहरी अनुरोध और गुप्त भंडारण।</p><div class="wiki-body"><p>यह दस्तावेज़ TgWitness 0.8.0 के व्यवहार और इसकी सीमाओं का वर्णन करता है। प्रमाणीकरण, स्रोत पहुँच, नेटवर्क कनेक्टिविटी और कैप्चर की पूर्णता अलग-अलग स्थितियाँ हैं। साइन-इन चरणों, फ़ाइल स्वरूपों और एकाधिक खातों के लिए,
+<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / सेटअप</p><h1>कनेक्शन, प्रॉक्सी और डेटा सुरक्षा</h1><p class="guide-outcome">प्रमाणीकरण, स्वचालित प्रॉक्सी पूल, आईपी मोड, फॉलबैक नीति, बाहरी अनुरोध और गुप्त भंडारण।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">टीजीविटनेस</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">दस्तावेज़ीकरण</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>यह दस्तावेज़ TgWitness 0.8.0 के व्यवहार और इसकी सीमाओं का वर्णन करता है। प्रमाणीकरण, स्रोत पहुँच, नेटवर्क कनेक्टिविटी और कैप्चर की पूर्णता अलग-अलग स्थितियाँ हैं। साइन-इन चरणों, फ़ाइल स्वरूपों और एकाधिक खातों के लिए,
 <a href="../accounts/">खातों और सत्र स्वरूपों</a> से शुरू करें। इवेंट नीतियों और पुनरारंभ व्यवहार के लिए, देखें <a href="../collection/">कि संग्रहण कैसे काम करता है</a>।</p>
 <h2 id="guided-connection-setup">मार्गदर्शित कनेक्शन सेटअप<a class="anchor" href="#guided-connection-setup" aria-label="इस अनुभाग का लिंक">#</a></h2>
 <p><strong>कनेक्शन</strong>में, प्रशासक <strong>यह खाता</strong>, <strong>एक खाता समूह</strong>या <strong>सभी खाते</strong>चुन सकते हैं, फिर एक मार्ग चुनें। <strong>चयन समीक्षा</strong>प्रभावित खातों को सूचीबद्ध करता है। <strong>तैयार करें और जांचें</strong>सहेजे गए मार्ग को बदले बिना प्रस्तावित मार्ग का परीक्षण करता है। <strong>जांचा हुआ कनेक्शन लागू करें</strong>फिर से जांचता है, यदि आवश्यक हो तो अवलोकन को रोकता है, मार्ग को सहेजता है और पहले से चल रहे अवलोकन को फिर से शुरू करता है।
@@ -269,23 +271,49 @@ MTProxy एक टेलीग्राम ट्रांसपोर्ट प
 क्लाउडफ्लेयर <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">JSON DNS एंडपॉइंट</a> को दस्तावेजीकृत करता है।</p>
 <details>
 <summary><strong>स्वचालित पूल पैरामीटर</strong></summary>
-
-**पैरामीटर → स्वचालित MTProxy** के अंतर्गत, विफलता सीमा, कूलडाउन, नियोजित रोटेशन, प्रॉक्सी साझाकरण और अनुमत फॉलबैक विलंब को कॉन्फ़िगर करें।
-
-| नियंत्रण | डिफ़ॉल्ट |
-| --- | --- |
-| प्रतिस्थापन से पहले डिस्कनेक्ट | 10 मिनट के भीतर 3 |
-| प्रति कनेक्शन प्रयास पर आजमाई गई प्रॉक्सी | 3 |
-| विफलता के बाद पहला / अधिकतम विश्राम | 10 मिनट / 6 घंटे |
-| नियोजित रोटेशन | अक्षम; विफलता पर चालू करें |
-| प्रति प्रॉक्सी खाते | 0: अलग प्रविष्टियों को प्राथमिकता दें, आवश्यकता पड़ने पर साझा करें। एक विशिष्ट प्रविष्टि की प्रतीक्षा के लिए 1 सेट करें। |
-| अनुमत डायरेक्ट फॉलबैक से पहले की देरी | 10 मिनट; पता छिपाने पर भी डायरेक्ट से इनकार करता है |
-| फ़ीड रिफ़्रेश / ट्रांसपोर्ट चेक्स | 60 / 10 मिनट; मुख्य वर्कस्पेस मान साझा पूल पर लागू होते हैं |
-
-अलग-अलग प्रॉक्सी अलग-अलग एग्जिट एड्रेस की गारंटी नहीं देतीं। ये सेटिंग्स टेलीग्राम की सीमाओं को ओवरराइड नहीं करतीं या गुमनामी साबित नहीं करतीं।
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>नियंत्रण</th>
+<th>डिफ़ॉल्ट</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>सार्वजनिक सूची को अपने ऑपरेटर कैटलॉग से बदलने के लिए, नीचे ओवरराइड कॉन्फ़िगर करें।
 यह बाहरी सदस्यताएँ पूरी तरह से अक्षम कर देता है, जिसमें तब भी शामिल है जब इसका <code>proxies</code> ऐरे खाली हो।</p>
 <p><a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">खाली कैटलॉग को </a><code>proxy-config/proxies.json</code>

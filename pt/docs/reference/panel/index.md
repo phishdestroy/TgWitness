@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel
 
 Todas as telas do painel: bate-papos, diário, fontes, exportações, Extras, modos de proteção e verificação de código.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/pt/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Primeira configuração e ajustes](https://phishdestroy.github.io/TgWitness/pt/docs/reference/settings/) · [Contas](https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/) · [Exportar e verificar](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/) · [Relatórios de casos](https://phishdestroy.github.io/TgWitness/pt/docs/reference/case-reports/)
 
 O que cada tela faz, o que ela grava no diário assinado e onde está o guia detalhado. O painel exibe um espaço de trabalho por vez: uma conta do Telegram com suas próprias fontes, diário e chave de assinatura. O seletor na parte superior da barra lateral alterna entre os espaços de trabalho. O endereço contém o espaço de trabalho (`?ws=…`); enquanto o endereço, o seletor e a conta carregada não coincidirem, as ações permanecem bloqueadas.
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/#more-tools)
 
 ## Navegue pelo site
 

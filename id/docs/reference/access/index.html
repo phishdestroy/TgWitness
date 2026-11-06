@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Referensi</a> <span aria-hidden="true">/</span> <span aria-current="page">Akses dan izin</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Referensi / Pengaturan</p><h1>Akses dan izin</h1><p class="guide-outcome">Tentukan cakupan akses ke akun dan obrolan, pilih izin, batasi sesi dan alamat IP, serta cabut akses.</p><div class="wiki-body"><p>Berikan akses kepada peninjau ke satu obrolan, izin kepada analis untuk mengekspor suatu kasus, atau
+<article class="guide-content"><p class="language-notice">Sebagian isi halaman ini masih dalam bahasa Inggris: teks asli dalam bahasa Inggris telah diubah setelah diterjemahkan.</p><p class="eyebrow">Referensi / Pengaturan</p><h1>Akses dan izin</h1><p class="guide-outcome">Tentukan cakupan akses ke akun dan obrolan, pilih izin, batasi sesi dan alamat IP, serta cabut akses.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentasi</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>Berikan akses kepada peninjau ke satu obrolan, izin kepada analis untuk mengekspor suatu kasus, atau
 kontrol kepada operator atas akun-akun yang dipilih. Setiap orang mendapatkan tokennya masing-masing. Token
 panel utama tetap berada di tangan administrator.</p>
 <p><a href="../accounts/">Pengaturan akun</a> · <a href="../connection/">Rute koneksi</a> · <a href="../security/">Model keamanan</a></p>
@@ -259,16 +261,13 @@ catatan jurnal <code>access.*</code> yang ditandatangani. Token tidak termasuk d
 Token yang diterbitkan dan kredensial sesi disimpan sebagai hash di brankas terenkripsi.</p>
 <details>
 <summary><strong>Administrator utama dan batas kepercayaan</strong></summary>
-
-Token panel utama tetap tidak dibatasi. Masuk melalui browser menggunakan token tersebut akan membuat sesi
-yang tunduk pada batas sesi yang dikonfigurasi oleh administrator. Skrip yang mengirimkan
-token utama secara langsung tetap memiliki akses penuh dan tidak dihitung sebagai sesi browser.
-
-Ini adalah kontrol akses tingkat aplikasi dalam satu instalasi. Semua ruang kerja berbagi
-proses server; ini bukan isolasi dari administrator host. Jaga kerahasiaan
-token utama, sesi Telegram, kunci penandatanganan, dan direktori data. Token saksi
-adalah kredensial titik pemeriksaan/kesehatan terpisah, bukan token akses panel.
-
+<p>The main panel token remains unrestricted. Browser sign-ins with it create sessions
+subject to the administrator's configured session limits. Scripts sending the
+main token directly retain full access and are not counted as browser sessions.</p>
+<p>This is application-level access control in one installation. All workspaces share
+the server process; this is not isolation from the host administrator. Keep the main
+token, Telegram sessions, signing keys and data directory private. A witness token
+is a separate checkpoint/health credential, not a panel access token.</p>
 </details></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">Edit halaman ini di GitHub ↗</a><a class="next-guide" href="../connection/"><span>Langkah selanjutnya</span><strong>Koneksi, proxy, dan perlindungan data →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../verification/">Apa yang telah diuji →</a></p></footer>
 </main>

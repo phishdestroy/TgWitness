@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/
 
 Qidiruv, kontekstni o'qish, faoliyatni hisoblash va skriptlar hamda agentlardan saqlangan xabarlarni eksport qilish, --json chiqish, barqaror chiqish kodlari va doirali faqat o'qish uchun tokenlar bilan.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [Faqat o'qish uchun MCP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/) · [To'liq matnli qidiruv](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Oldindan ko'rish.** `tgwitness search`, `context`, `messages`, `stats` va `export` o'qish skriptlar va sun'iy intellekt agentlari uchun saqlangan kuzatuvlar. Ular Telegramga hech narsa yubora olmaydi, sozlamalarni o'zgartira olmaydi yoki imzolangan jurnalni tahrir qila olmaydi.

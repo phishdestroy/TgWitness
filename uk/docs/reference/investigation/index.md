@@ -4,7 +4,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/inves
 
 Повні розслідування акаунтів у каналах, групах, приватних чатах та ботах — від визначення обсягу до формування перевіреного пакету матеріалів справи.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Відстежуйте справу в різних каналах, групах, приватних чатах та ботах — від початкового збору даних до хронології з посиланнями та перевіреної передачі матеріалів. Інтерактивна версія веб-сайту знаходиться за адресою `/docs/cases/`; [інструкції щодо попереднього перегляду](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally).
+
+**On this page**
+
+- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/#adapt-the-investigation)
 
 ## Приклад із практики: зміна пункту призначення у чотирьох діалогах
 

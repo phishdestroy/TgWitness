@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">البحث عن النص الكامل</span></nav>
 <p class="verification-shortcut"><a href="../verification/">ما تم اختباره ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">لا تزال أجزاء من هذه الصفحة باللغة الإنجليزية: فقد تغير النص الأصلي باللغة الإنجليزية بعد ترجمته.</p><p class="eyebrow">مرجع / الأرشيف والتكاملات</p><h1>البحث عن النص الكامل</h1><p class="guide-outcome">ابحث عن الرسائل المحفوظة حسب أشكال الكلمات، والعبارات الدقيقة، والنطاقات، وأسماء المستخدمين @، مع عرض أفضل النتائج أولاً، مع ربط الفهرس بالسجل الموقّع.</p><div class="wiki-body"><p><a href="../analysis/">تحليل الأرشيف</a> · <a href="../media-analysis/">التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">ويكي</a></p>
+<article class="guide-content"><p class="language-notice">لا تزال أجزاء من هذه الصفحة باللغة الإنجليزية: فقد تغير النص الأصلي باللغة الإنجليزية بعد ترجمته.</p><p class="eyebrow">مرجع / الأرشيف والتكاملات</p><h1>البحث عن النص الكامل</h1><p class="guide-outcome">ابحث عن الرسائل المحفوظة حسب أشكال الكلمات، والعبارات الدقيقة، والنطاقات، وأسماء المستخدمين @، مع عرض أفضل النتائج أولاً، مع ربط الفهرس بالسجل الموقّع.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">التوثيق</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">تحليل الأرشيف</a> · <a href="../media-analysis/">التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">ويكي</a></p>
 <p><strong>المعاينة.</strong> في <strong>«Journal</strong>»، اختر <strong>«أفضل تطابق · أشكال الكلمة»</strong> بجوار حقل البحث.
 يتم ترتيب النتائج باستخدام خوارزمية BM25 وتتطابق مع الأشكال الأخرى لنفس الكلمة:
 يبحث <em>«перевод»</em> عن <em>«переводом</em>» <em>و«переводы</em>»، ويبحث <em>«transfer»</em> عن <em>«transfers</em>»، ويتم العثور على العبارة الصينية
@@ -40,6 +42,20 @@
 عن السلسلة الفرعية عبر السجل بأكمله.</p>
 <p>الفهرس عبارة عن بيانات مشتقة. يتم إعادة بنائه من السجل الموقّع، ولا يتم توقيعه
 أبدًا ولا يدخل أبدًا في عملية التصدير. لا تتغير السجلات الأصلية.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">صيغة البحث<a class="anchor" href="#search-syntax" aria-label="رابط لهذا القسم">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

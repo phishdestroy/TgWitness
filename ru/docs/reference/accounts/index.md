@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/accou
 
 Войдите в систему с помощью телефона, QR-кода или ключа аутентификации, импортируйте сеансы из Telethon, Pyrogram или Telegram Desktop и управляйте несколькими учётными записями.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness входит в систему как учетная **запись пользователя Telegram** (а не как бот) через протокол MTProto с использованием Telethon. Каждая учетная запись находится в собственном **рабочем пространстве** (называемом *«workspace»* в API и инструментах командной строки) с собственной сессией, источниками, журналом и ключом подписи.
 
 Файлы сеансов, строки сеансов и ключи аутентификации являются **средствами авторизации учетной записи**: любой, кто имеет один из них, может действовать от имени этой учетной записи. Они не содержат истории сообщений.

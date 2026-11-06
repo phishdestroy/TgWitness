@@ -4,9 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-i
 
 Пояснення щодо хеш-ланцюга, підписів, контрольних точок та свідків із зазначенням точних формул, які використовує верифікатор.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness зберігає дані, зафіксовані обліковим акаунтом, пов’язує ці спостереження у підписаний журнал і дозволяє іншій особі перевірити експорт за допомогою надійного ключа та раніше збереженої контрольної точки.
 
 На [локальному веб-сайті документації](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) додано інтерактивні приклади за адресою `/docs/concepts/`, інструмент для аналізу рішень на контрольних точках за адресою `/docs/witness/`, а також покрокові інструкції щодо [Case Board](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-board/), [оформлення звітів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-reports/) та [витягів із передачі матеріалів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#handover-extract). Усі приклади повідомлень, кількість та затримки є вигаданими. Хеші в пісочниці ланцюга обчислюються за допомогою алгоритму SHA-256 у браузері. Ніщо не надсилається до Telegram.
+
+**On this page**
+
+- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [What a hash covers](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#what-a-hash-covers)
+- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Pick a workflow](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#pick-a-workflow)
 
 ## Повідомлення змінюється; спостереження накопичуються
 

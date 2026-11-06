@@ -32,9 +32,154 @@
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <a href="../">Manba</a> <span aria-hidden="true">/</span> <span aria-current="page">Nima sinovdan o&#x27;tkazilgan</span></nav>
 <p class="verification-shortcut"><a href="./">Nima sinovdan o&#x27;tkazilgan →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Ushbu sahifaning ba&#x27;zi qismlari hanuz ingliz tilida: inglizcha asl matn tarjima qilinganidan keyin o&#x27;zgartirilgan.</p><p class="eyebrow">Manba / Xavfsizlik va loyiha</p><h1>Nima sinovdan o&#x27;tkazilgan</h1><p class="guide-outcome">Jonli Telegram sinovi, avtomatlashtirilgan tekshiruvlar, brauzer tekshiruvlari va hali tasdiqlanmagan narsalar.</p><div class="wiki-body"><p>Each result below applies to its recorded revision and environment. The
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">current capability matrix</a> separates implementation, published downloads
-and remaining qualification.</p>
+<article class="guide-content"><p class="language-notice">Ushbu sahifaning ba&#x27;zi qismlari hanuz ingliz tilida: inglizcha asl matn tarjima qilinganidan keyin o&#x27;zgartirilgan.</p><p class="eyebrow">Manba / Xavfsizlik va loyiha</p><h1>Nima sinovdan o&#x27;tkazilgan</h1><p class="guide-outcome">Jonli Telegram sinovi, avtomatlashtirilgan tekshiruvlar, brauzer tekshiruvlari va hali tasdiqlanmagan narsalar.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Hujjatlash</a> · <a href="../evidence/">Evidence and verification</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../../assets/chapter-evidence.svg" /></p>
+<p><strong>Updated 6 November 2026.</strong> Results are tied to the revision, environment and
+workload recorded for each run. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">Current capabilities</a> describes the
+available workflows; this page records what has actually been checked.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/">Performance graphs</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">Signed English audit</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv">Downloadable measurements</a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Latest evidence</th>
+<th>Natija</th>
+<th>Doira</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Release audit · 6 Nov</td>
+<td>1,461 core tests passed; 37 platform skips</td>
+<td>Source <code>92e539af40d8</code>; open findings retained</td>
+</tr>
+<tr>
+<td>Fresh exports · 6 Nov</td>
+<td>127.713 and 141.781 records/s, complete cycle</td>
+<td>Two accounts per server; text and metadata through WARP</td>
+</tr>
+<tr>
+<td>Retained archives · 6 Nov</td>
+<td>48 archives; 3,598,381 records verified</td>
+<td>Existing archives checked against pinned workspace keys</td>
+</tr>
+<tr>
+<td>Trusted Live · 5 Nov</td>
+<td>Guarded CPU recording and WARP checks</td>
+<td>Official Desktop login and native export remain unqualified</td>
+</tr>
+<tr>
+<td>Phala / Intel TDX · 4 Nov</td>
+<td>All 16 verifier checks passed on later runs</td>
+<td>Historical deployment; no Telegram account on the CVM</td>
+</tr>
+</tbody>
+</table></div>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a></li>
+<li><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a></li>
+<li><a href="#live-phala-cloud-deployment--4-november-2026">Live Phala Cloud deployment · 4 November 2026</a></li>
+<li><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a></li>
+<li><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a></li>
+<li><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a></li>
+<li><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a></li>
+<li><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a></li>
+<li><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a></li>
+<li><a href="#full-text-search-on-one-million-messages--5-november-2026">Full-text search on one million messages · 5 November 2026</a></li>
+<li><a href="#remaining-qualification">Remaining qualification</a></li>
+</ul>
+</details>
+<h2 id="release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026<a class="anchor" href="#release-audit-and-fresh-exports--6-november-2026" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<p>The audit used v0.9.1 at source
+<code>92e539af40d8368d198ff5e040f1d876f2c1310e</code>, release
+<code>92e539af40d8-83e41104669e</code>. Installed-package smoke checks passed on three
+servers. The signed report retains the state observed at that time.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/"><img alt="Acquisition and complete export rates for two fresh workloads" src="../../../../assets/performance.svg" /></a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Workload</th>
+<th style="text-align: right;">Yozib oladi</th>
+<th style="text-align: right;">Acquisition</th>
+<th style="text-align: right;">Complete cycle</th>
+<th style="text-align: right;">Complete-cycle rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server A · two accounts</td>
+<td style="text-align: right;">27,030</td>
+<td style="text-align: right;">189.043 s</td>
+<td style="text-align: right;">211.647 s</td>
+<td style="text-align: right;">127.713 records/s</td>
+</tr>
+<tr>
+<td>Server B · two accounts</td>
+<td style="text-align: right;">29,299</td>
+<td style="text-align: right;">182.513 s</td>
+<td style="text-align: right;">206.650 s</td>
+<td style="text-align: right;">141.781 records/s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both exports began without resume, excluded attachments and avatars, and ended
+with zero duplicate or reused records. The complete cycle includes preparation,
+acquisition, selection, packaging and archive verification. Server A also ran a
+protected-chat read check. Four FloodWait events on A and three on B were
+respected. These observations do not establish a general throughput guarantee.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tekshirish</th>
+<th>Natija</th>
+<th>Qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core pytest</td>
+<td>1,461 passed</td>
+<td>37 platform skips</td>
+</tr>
+<tr>
+<td>Browser / browser UX / evidence / site</td>
+<td>102 / 66 / 15 / 9 passed</td>
+<td>These programs overlap other tests; counts are not additive</td>
+</tr>
+<tr>
+<td>Capture addon</td>
+<td>124 passed</td>
+<td>Three Official Web checks blocked by the required Chromium sandbox</td>
+</tr>
+<tr>
+<td>API authorization</td>
+<td>269 routes; 538 requests passed</td>
+<td>Missing credentials and revoked access</td>
+</tr>
+<tr>
+<td>Retained archives</td>
+<td>48 of 48 verified</td>
+<td>3,598,381 records; pinned workspace keys</td>
+</tr>
+<tr>
+<td>Live fleet read checks</td>
+<td>24 of 40 profiles passed</td>
+<td>16 WARP routes failed qualification; those profiles were not connected</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">signed report</a> records all open
+findings, including three defects in an unpublished secret-chat snapshot absent
+from the audited main build. The earlier
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md">public-history qualification</a> used a different
+revision and workload; its rates must not be combined with this comparison.</p>
+<p>Verify the original report using the
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files">pinned key and verifier</a>.
+Its signature protects the operator's report from alteration. It is not
+independent attestation, proof of Telegram authorship or GDPR certification.</p>
 <h2 id="trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026<a class="anchor" href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <p>The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB)
 under QEMU inside a RunPod CPU host. The collector used <code>14e642a5</code>; verification used
@@ -63,8 +208,52 @@ login, native chat export, real hybrid comparison and Telegram-side logout remai
 pending. No supplied Telethon session was imported. Attachments, automatic OCR,
 local drand BLS verification and Trusted Live TDX attestation were not qualified.</p>
 <h2 id="live-phala-cloud-deployment--4-november-2026">Live Phala Cloud joylashtirish · 2026-yil 4-noyabr<a class="anchor" href="#live-phala-cloud-deployment--4-november-2026" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
-<p><code>--provider phala --quick-tunnel</code> haqiqiy <strong>Phala Cloud </strong> (<code>tdx.small</code>, US-WEST-1 mintaqasi) bo'sh ish maydoni uchun Phala Cloud API kaliti, haqiqiy ntfy.sh, GitHub va Intel PCS bilan ishladi.
-CVM <code>df7d860c</code> (v0.8.1) commitini o'rnatdi; deploy, verify va destroy buyruq satridan quyidagi tuzatishlar bilan ishga tushirildi. Yetti CVM jami taxminan 1,9 AQSh sentiga tushdi.</p>
+<p><strong>Historical result:</strong> later deployments passed all 16 verifier checks,
+including Intel TDX and the quick tunnel. Restart evidence, signed address
+discovery and report timestamps were checked separately. Each test CVM was
+removed after its run.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Sozlash</th>
+<th>Recorded value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Provayder</td>
+<td>Phala Cloud · <code>tdx.small</code> · US-WEST-1</td>
+</tr>
+<tr>
+<td>Joylashtirish</td>
+<td><code>--provider phala --quick-tunnel</code>; initially empty workspace</td>
+</tr>
+<tr>
+<td>Initial collector</td>
+<td><code>df7d860c</code> · v0.8.1</td>
+</tr>
+<tr>
+<td>Collector with all fixes</td>
+<td><code>53a0f7e9</code></td>
+</tr>
+<tr>
+<td>Production guest</td>
+<td><code>dstack-0.5.12</code>; SSH access disabled</td>
+</tr>
+<tr>
+<td>External services</td>
+<td>ntfy.sh, GitHub and Intel PCS</td>
+</tr>
+<tr>
+<td>Observed cost</td>
+<td>Seven CVMs, about 1.9 US cents together; historical test pricing</td>
+</tr>
+</tbody>
+</table></div>
+<p>The sequence below separates initial failures, fixes and completed checks.
+No Telegram account was connected to these CVMs.</p>
+<details>
+<summary>Deployments 1–2 · provider differences and regression checks</summary>
 <p>Birinchi ikkita joylashtirish simulyatsiya qilingan Phala Cloud'dan beshta farqni aniqladi.
 <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py"><code>tools/check_phala.py</code></a> endi har birini qayta hosil qiladi va tuzatishsiz xato beradi:</p>
 <div class="table-wrap" tabindex="0"><table>
@@ -103,7 +292,9 @@ CVM <code>df7d860c</code> (v0.8.1) commitini o'rnatdi; deploy, verify va destroy
 </tr>
 </tbody>
 </table></div>
-<p>Uchinchi joylashtirish:</p>
+</details>
+<details>
+<summary>Deployment 3 · attestation, access checks and restart evidence</summary>
 <ul>
 <li>CVM <code>dstack-0.5.12</code> ni SSH kirish o'chirilgan holda ishga tushirdi. Kollektor yaratilganidan taxminan 1,5 daqiqa o'tib o'z imzolangan manzilini joyladi. Keyin Deploy <code>tdx_binding</code> va <code>tdx_quote</code> (Intel TCB
     UpToDate, apparat guvohnoma yozuvi v4, FMSPC <code>20a06f000000</code>, xatolik tuzatish rejimida emas, ko'chirilmaydigan, Intel'dan olingan kriptografik tasdiqlash ma'lumotlarini qo'llab-quvvatlaydi), <code>tdx_compose_hash</code>, <code>tdx_compose</code> (byte for byte) va <code>tdx_identity</code> (KMS kalitlari).</li>
@@ -114,7 +305,9 @@ CVM <code>df7d860c</code> (v0.8.1) commitini o'rnatdi; deploy, verify va destroy
 <li>Panel ustasi narx tekshiruvi <code>tdx.small</code> soatiga $0.058 ni ko'rsatdi. Noto'g'ri kalit oddiy
     "API kalitini qabul qilmadi" xabarini berdi.</li>
 </ul>
-<p>Keyinchalik tuzatilgan yana ikki topilma:</p>
+</details>
+<details>
+<summary>Follow-up fixes · signed address discovery and OS measurements</summary>
 <ul>
 <li>Agar manzil kaliti bo'lmasa, <code>verify</code> manzil mavzusidagi eng yangi to'g'ri tuzilgan postni kuzatdi,
     u nashr etilgan Docker Compose konfiguratsiyasida chop etilgan. Bir soxta post uni mavjud bo'lmagan hostga yubordi, va <code>statement</code> muvaffaqiyatsiz bo'ldi: soxtalashtiruvchi yig'uvchi sifatida o'tolmaydi, lekin blok qilishi mumkin
@@ -122,7 +315,9 @@ CVM <code>df7d860c</code> (v0.8.1) commitini o'rnatdi; deploy, verify va destroy
     <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py"><code>tools/check_cloud_wizard.py</code></a> soxta postlarni qayta ijro etadi. CVM buni faqat uni o'z ichiga olgan commitdan ishga tushiradi, shuning uchun ushbu ijro etuvchi collector hali o'z manzilini imzolamagan va <code>verify</code> shuni bildirgan.</li>
 <li><code>tdx_os</code> <code>dstack-mr</code>siz ishga tushmaydi, uning joriy versiyasida hujjatlarda ko'rsatilgan <code>measure --json</code> o'rniga <code>measure-os</code> mavjud. Verifikator endi nashr etilgan image va VM shakli, jumladan ACPI jadvallari asosida MRTD va RTMR0-2 ni o'zi hisoblaydi.</li>
 </ul>
-<p>To'rtinchi joylashtirish, quyidagilar bilan:</p>
+</details>
+<details>
+<summary>Deployment 4 · all 16 checks, report seals and restart verification</summary>
 <ul>
 <li>Deploy bir marta e'lon qilingan <code>dstack-0.5.12</code> ni yuklab olib, uni CVM xabar qilgan OS tasviri hashiga moslashtirdi va <code>tdx_os</code> o'tdi: MRTD, RTMR0, RTMR1 va RTMR2 QEMU uchun hisoblangan qiymatlarga teng.
     8.2.2, 1 vCPU va 2 GiB. Xuddi shu hisob-kitob da'vo qilingan 4 GiB, 2 vCPU, QEMU 9.2.1 yoki ikkinchi tarmoq kartasi uchun boshqa RTMR0 berdi va o'zgartirilgan yadro, firmware yoki buyruq qatori hamda rivojlantirish tasviri uchun muvaffaqiyatsiz bo'ldi.</li>
@@ -131,17 +326,23 @@ CVM <code>df7d860c</code> (v0.8.1) commitini o'rnatdi; deploy, verify va destroy
     e'lon qilingan <code>dstack-0.5.12</code> dan yuklangan; qayta ishga tushirish va yangi yuklash REVIEW bo'ldi.</li>
 <li><code>destroy</code> ish maydonini bo'sh qoldirdi.</li>
 </ul>
-<p>Beshinchi joylashtirish <code>53a0f7e9</code> commitidan collector-ni ishga tushirdi, unda yuqoridagilarning barchasi mavjud:</p>
+</details>
+<details>
+<summary>Deployment 5 · collector-signed discovery and forged-post rejection</summary>
+<p>The collector ran from commit <code>53a0f7e9</code>, which includes the fixes above.</p>
 <ul>
 <li>Yig'uvchi o'z kaliti bilan imzolangan manzilini operatorning HMAC posti yoniga joylashtirdi.
    Keyin mavzuga ikkita soxta post qo'shildi: biri HMAC qiymati nolga teng qilingan, ikkinchisi boshqa Ed25519 kaliti bilan imzolangan; ikkalasi ham 2096 yildagi vaqtni da'vo qilgan. <code>verify</code> kollektor kaliti bilan imzolangan manzilni oldi va barcha 16 tekshiruvdan o'tkazdi; muhr yana malakali Belgiya vaqti shtampi, FreeTSA vaqti shtampi va verifikator imzosi bilan edi, va <code>check-report</code> ularni tasdiqladi.</li>
 <li>Qayta ishga tushgach, yig‘uvchi yangi manzilni imzolab e’lon qildi: <code>verify</code> uni darhol, operatorning <strong>Joriy manzilni topish</strong> funksiyasi esa HMAC xabaridan 27 soniya keyin topdi. Ikkalasi ham soxta xabarlarni e’tiborsiz qoldirdi. <code>verify --evidence</code> ikki ishga tushirish <code>dstack-0.5.12</code> dan yuklanganini tasdiqladi.</li>
 <li>Deploy chop etdi: Phala CVMga diskni ham qo'shib qancha to'lov solishini: soatiga $0.06078.</li>
 </ul>
+</details>
+<h3 id="panel-wizard-and-remaining-scope">Panel wizard and remaining scope<a class="anchor" href="#panel-wizard-and-remaining-scope" aria-label="Ushbu bo&#x27;limga havola">#</a></h3>
 <p>Panel ustasi Phala Cloud'da ikki marta ishga tushirildi: bir marta uning ish API'si orqali va bir marta haqiqiy Chromium brauzeri orqali: narxni tekshirish, <strong>Advanced</strong> ostidagi commit bilan yaratish, barcha oltita tasdiqlash tekshiruvlarining muvaffaqiyatli o'tishi, serverlar ro'yxatida to'langan narx (oyiga 44,37 USD) ko'rsatilishi, <strong>Joriy manzilni topish</strong>, o'lchangan Docker Compose konfiguratsiyasini yuklab olish va o'chirish. Brauzer hech qanday sahifa xatolarini ko'rmadi. Har safar undan keyin ish maydoni bo'sh bo'ldi.</p>
-<p>Qamrab olinmagan: Phala'dagi Cloudflare domeni, CVM'dagi Telegram hisobi va <code>dstack-0.6.1</code>
-image. Yaratishdan oldingi ustaning narxi faqat Phala'ning hisoblash narxi bo'lib, chunki uning API mavjud CVM uchun faqat disk
-narxini ko'rsatadi; serverlar ro'yxati esa yaratilgandan keyingi to'lanadigan narxni ko'rsatadi.</p>
+<p>Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the <code>dstack-0.6.1</code>
+image. The wizard's price before creation is Phala's compute price only, as its API names the disk
+price only for an existing CVM; the server list shows the billed price after creation.
+All prices in this section were observed on 4 November 2026.</p>
 <h2 id="live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026<a class="anchor" href="#live-server-journal-inventory--1-november-2026" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <p>At approximately 19:15 UTC, sequential read-only SQLite <code>query_only</code> queries counted
 events in ten workspace databases on a running server. Collection continued during
@@ -431,11 +632,13 @@ and catch-up are implemented; atomic lossless live replay remains unestablished.
 The newer backfill commits messages and cursors atomically and preserves available
 Recent Actions, but its synthetic coverage is distinct from live qualification.
 See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">live acceptance</a> for the controlled qualification matrix.</p>
-<p>Mahalliy batafsil kvitansiyalar va skrinshotlar test-results/ (Git tomonidan e&#x27;tiborsiz qoldirilgan) yo&#x27;lida joylashgan.
-docs/assets/ dagi ommaviy skrinshot faqat badiiy namoyish ma&#x27;lumotlarini o&#x27;z ichiga oladi.</p></div></article>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md">public audit directory</a> contains only
+the signed report and aggregate measurements. Detailed operational receipts,
+raw captures and account material remain private. Application screenshots in
+<code>docs/assets/</code> use fictional demonstration data.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">Ushbu sahifani GitHubda tahrirlang ↗</a><a class="next-guide" href="../license/"><span>Keyingi qadam</span><strong>Litsenziya va arxitektura nomuvofiqligi to'g'risidagi ogohlantirish →</strong></a><p>Ushbu qo&#x27;llanmalar joriy amalga oshirishni tasvirlaydi. Tasdiqlash natijalari va qolgan bo&#x27;shliqlar alohida hujjatlashtirilgan. <a href="./">Nima sinovdan o&#x27;tkazilgan →</a></p></footer>
 </main>
-<aside class="toc" aria-label="Ushbu sahifada"><p class="nav-label">Ushbu sahifada</p><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">Live Phala Cloud joylashtirish · 2026-yil 4-noyabr</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Jonli Telegram sinovi, to'liq hisob · 29 oktyabr 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Parol bilan himoyalangan eksport libarchive yordamida ochildi · 2026-yil 29-oktabr</a><a href="#live-telegram-test--27-to-29-october-2026">Telegram jonli sinovi · 2026 yil 27–29 oktyabr</a><a href="#synthetic-local-capacity-measurement">Sun'iy mahalliy quvvatni o'lchash</a><a href="#full-text-search-on-one-million-messages--5-november-2026">Bir million xabarda to'liq matnli qidiruv · 2026-yil 5-noyabr</a><a href="#remaining-qualification">Qolgan malaka</a></aside>
+<aside class="toc" aria-label="Ushbu sahifada"><p class="nav-label">Ushbu sahifada</p><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">Live Phala Cloud joylashtirish · 2026-yil 4-noyabr</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Jonli Telegram sinovi, to'liq hisob · 29 oktyabr 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Parol bilan himoyalangan eksport libarchive yordamida ochildi · 2026-yil 29-oktabr</a><a href="#live-telegram-test--27-to-29-october-2026">Telegram jonli sinovi · 2026 yil 27–29 oktyabr</a><a href="#synthetic-local-capacity-measurement">Sun'iy mahalliy quvvatni o'lchash</a><a href="#full-text-search-on-one-million-messages--5-november-2026">Bir million xabarda to'liq matnli qidiruv · 2026-yil 5-noyabr</a><a href="#remaining-qualification">Qolgan malaka</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Ochiq manba · Sizning kompyuteringizda ishlaydi</span><a href="../../../../LICENSE">MIT litsenziyasi</a><a href="../notice/">Operator bildirishi</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Xavfsizlik</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "Xabarni kutish", "Step through a fictional send, edit and delete.": "Tasavvuriy jo'natish, tahrirlash va o'chirish jarayonini bosqichma-bosqich o'ting.", "No observations yet. Start the sequence or advance one event.": "Hali hech qanday kuzatuvlar yo'q. Ketma-ketlikni boshlang yoki bir voqeani oldinga suring.", "Meet at 10:00": "10:00 da uchrashing", "A new message is visible in the chat.": "Suhbatda yangi xabar ko'rinadi.", "Record 1 appended: the collector observed the original message.": "1-raqamli yozuv ilova qilindi: to'plovchi asl xabarni kuzatdi.", "Meet at 11:00": "11:00 da uchrashing", "The current text changes. The earlier observation stays.": "Joriy matn o'zgaradi. Avvalgi kuzatuv saqlanadi.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "2-yozuv ilova qilindi: tahrir yangi kuzatuvdir. 1-yozuv hanuzgacha asl matnni saqlab qolmoqda.", "Message deleted": "Xabar o'chirildi", "The message has disappeared from the chat view.": "Xabar suhbat ko'rinishidan yo'qoldi.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "3-raqamli yozuv ilova qilindi: o'chirish to'g'risidagi bildirishnoma kuzatilgan ikkala versiya bilan birga saqlanadi.", "0 records": "0 yozuv", "1 record": "1 yozuv", "2 records": "2 yozuv", "3 records": "3 yozuv", "Complete / {n} of 3": "3dan {n} to'liq", "Step / {n} of 3": "3 qadam / {n}dan 3", "Pause": "Tanaffus", "Replay sequence": "Qayta ijro etish ketma-ketligi", "Play sequence": "Sequensani ijro eting", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Statik misol mavjud. Hashlarni interaktiv tarzda hisoblash uchun ushbu sahifani HTTPS orqali yoki Web Crypto qo'llab-quvvatlanadigan localhost ko'rinishida oching.", "No record supplied": "Hech qanday yozuv taqdim etilmagan", "Tail removed": "Oxiri olib tashlandi", "≠ saved hash": "≠ saqlangan xesh", "Rebuilt · different hash": "Qayta qurilgan · boshqa xesh", "= saved hash": "= saqlangan xesh", "Same length and matching head.": "Bir xil uzunlik va mos keluvchi sarlavha.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Uchala hisoblangan xesh saqlangan xeshlarga mos keladi. Ushbu namunada saqlangan uch yozuv chegarasi bilan mos keladi.", "Same saved head; the journal prefix fails verification.": "Xuddi shu saqlangan sarlavha; jurnal prefiksi tasdiqdan o'tmaydi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "2-yozuv saqlangan xeshga mos kelmaydi. Faqat oxirgi saqlangan headni tekshirish buni aniqlamaydi; verifikator har bir yozuvni tekshiradi.", "Head differs from the retained checkpoint.": "Head saqlangan tekshiruv nuqtasidan farq qiladi.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Qayta tuzilgan xeshlar bir-biriga bog'lanadi, lekin oxirgi bosh o'zgardi. Saqlangan tekshiruv nuqtasi bu tarixni rad etadi. O'zgartirilgan yozuvlarda asl imzolar ham muvaffaqiyatsiz bo'lardi.", "Too short: 2 supplied records \u003c 3 retained records.": "Juda qisqa: 2 ta taqdim etilgan yozuv \u003c 3 ta saqlangan yozuv.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Qolgan ikkita xesh hanuzgacha mos keladi. Saqlangan tekshiruv nuqtasi yo'qolgan oxirni ko'rsatadi. O'sha oldingi chegarasiz, bu qisqaroq prefiks o'zi o'chirib tashlangan qismni aniqlamas edi.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Hash hisoblash ushbu brauzerda mavjud emas. Quyidagi formulalar va statik izoh esa hanuzgacha mavjud.", "{n} records": "{n} yozuvlari", "head {hash}": "Zanjir boshi {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Qabul qilindi: hisob ortadi, imzo tasdiqlanadi va kalit mos keladi. Guvoh ushbu yangi chegarani saqlab qoladi.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: imzolangan javob oxirgi qabul qilingan tekshiruv nuqtasiga qaraganda kamroq yozuvlarni bildiradi. Guvoh muammoni qayd etadi va avvalgi qabul qilingan chegarani saqlab qoladi.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: hisob o'zgarmagan, lekin boshqasi boshqacha. Guvoh kelishmovchilikni qayd etadi va ilgari qabul qilingan chegarani saqlab qoladi.", "No answer": "Javob yo'q", "boundary unknown": "Chegara noma'lum", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Javob yo'q: guvoh muvaffaqiyatsiz tekshiruvni qayd etadi. Bu yig'uvchining joriy holatini aniqlay olmaydi. Agar guvoh hali ham Bot API ga ulanish imkoniga ega bo'lsa va uning nashr etish siyosati ruxsat etsa, u bu muvaffaqiyatsizlikni e'lon qilishi mumkin.", "Send {n}": "{n} yuboring", "Edit {n}": "Tahrir {n}", "Delete {n}": "{n}o'chirish", "Both accounts captured all six expected observations in this example.": "Bu misolda har ikkala akkaunt ham kutilgan oltita kuzatuvni to'liq qayd etdi.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Hisob B hanuzgacha 6 dan 6 tasini qayd etdi. Ikki kvitansiya esa ko'proq vaqt oldi. Qayd etish nisbatlari va kvitansiya kechikishlari turli savollarga javob beradi.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Account B kesish nuqtasigacha 6 ta harakatdan 5 tasini (83,3%) qayd etdi. Yo'qolgan tahrir uchun hech qanday o'lchangan kechikish yo'q. Ushbu natija faqat olti nazorat ostidagi harakatni tasvirlaydi.", "not observed by cutoff": "chegara nuqtasi tomonidan kuzatilmagan", "{s} seconds": "{s} soniya", "Exact values follow in the table.": "Jadvalda aniq qiymatlar keltirilgan.", "{s} s": "{s}s", "Not observed": "Kuzatilmagan", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "To'rtta suhbat turli kuzatuvlarni taqdim etadi. Har bir ulanish bo'yicha manba yozuvlarini kuzating; jo'natuvchi aniqlanmagan holda kanal postini 71001 foydalanuvchiga biriktirmang.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Yozuvlar #146 va #205 bir xil jo'natuvchi ID, 71001, ni ko'rsatadi. Bu Telegram hisobidagi kuzatilgan postlarni ikki chat bo'ylab bog'laydi. Bu haqiqiy shaxsni aniqlamaydi yoki kanal postini unga tegishli deb hisoblamaydi.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new manzili guruh yozuvi #146, bot klaviatura #173, kanal tahriri #188 va shaxsiy xabar #205 da uchraydi. Takroriy manzil materialni bog'laydi; bu hisoblarning umumiy nazorat ostida ekanligini isbotlamaydi.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Ushbu badiiy holatda #151 va #209 raqamli media kvitansiyalari to'liq SHA-256 qiymatlari bo'yicha teng. Haqiqiy baytlarni va ularga tegishli xabar yozuvlarini solishtiring. Mos keladigan fayl uning yaratuvchisini aniqlamaydi yoki uni kim jo'natganini isbotlamaydi.", "the encrypted off-site copy": "shifrlangan tashqi nusxa", "notifications": "bildirishnomalar", "checkpoint hashes for timestamps": "vaqt tamg'alari uchun tekshiruv nuqtasi xeshlari", "signed checkpoints for the witness": "guvoh uchun imzolangan tekshiruv nuqtalari", "Switched on in this example": "Ushbu misolda yoqilgan", "Optional · off by default": "Ixtiyoriy · standart bo'yicha o'chirilgan", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Ushbu mashinadan chiqishda: Telegram ulanishi va {list}. Boshqa hech narsa.", "Default: only the Telegram connection leaves this machine.": "Standart bo'yicha: faqat Telegram ulanishi ushbu mashinadan chiqadi.", "{done} of {total} done": "{done}dan {total} bajarildi", "Mark step {n} as done": "{n} bosqichini bajarilgan deb belgilash", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Ko'chirish", "Copied": "Ko'chirilgan", "Command copied.": "Buyruq nusxalandi.", "Selected — Ctrl/Cmd+C": "Tanlandi — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Buyruq tanlandi. Uni qo'lda nusxalash.", "Command copied to clipboard.": "Buyruq clipboardga nusxalandi.", "Select text": "Matnni tanlang", "The clipboard is unavailable, so the command is selected for you to copy manually.": "Klipbord mavjud emas. Buyruq tanlandi; uni qo'lda nusxalash.", "When a message arrives, the first observation is saved.": "Xabar keladi. Birinchi kuzatuv saqlanadi.", "When the time changes, both captured versions stay.": "Vaqt o'zgaradi. Ikkala yozib olingan versiya ham saqlanadi.", "When the message disappears, its captured history remains.": "Xabar yo'qoladi. Qayd etilgan tarix esa qoladi.", "Pause example animation": "Animatsiyani to'xtatish misoli", "Play example animation": "Namuna animatsiyasini ijro eting", "Play": "O'ynatish", "Full-size workspace screenshot": "To'liq o'lchamdagi ish maydoni skrinshoti", "Workspace screenshot · fictional data": "Ish maydoni skrinshoti · badiiy ma'lumotlar", "Close": "Yopish", "Close screenshot": "Ekran tasvirini yopish", "Scrollable full-size screenshot": "Haydaladigan to'liq o'lchamdagi skrinshot", "Enlarge: {name}": "Kengaytirish: {name}", "View full size": "To'liq o'lchamda ko'rish", "Step {n} of {total}": "{total}dan {n}"}</script>

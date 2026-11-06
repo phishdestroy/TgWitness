@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/witne
 
 Запустите Witness с собственным ключом и ботом, публикуйте подписанные контрольные точки в канале и сверяйте экспортированные данные с ними.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [Экспорт и проверка](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/) · [Высокая степень надежности](https://phishdestroy.github.io/TgWitness/ru/docs/reference/high-assurance/) · [Руководство по панелям](https://phishdestroy.github.io/TgWitness/ru/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ A witness retains signed checkpoints separately from the collector. It checks th
 4. Архив доказательств в формате ZIP → verify.py
 5. Журнал Witness, собственный ключ → verify.py
 6. Канал в Telegram → verify.py (Экспорт из Telegram Desktop или страница «t.me/s»)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/#verify)
 
 ## Что предоставляет TgWitness, а чего не предоставляет
 

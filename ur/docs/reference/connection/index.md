@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/conne
 
 تصدیق، خودکار پراکسی پولز، آئی پی موڈز، فال بیک پالیسی، بیرونی درخواستیں اور خفیہ ذخیرہ۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 یہ دستاویز TgWitness 0.8.0 کے طرز عمل اور اس کی حدود کو بیان کرتی ہے۔ تصدیق، ماخذ تک رسائی، نیٹ ورک کنیکٹیویٹی اور مکمل کپچر الگ الگ حالتें ہیں۔ سائن ان کے مراحل، فائل فارمیٹس، اور متعدد اکاؤنٹس کے لیے، [اکاؤنٹس اور سیشن فارمیٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/) سے شروع کریں۔ ایونٹ پالیسیاں اور دوبارہ شروع کرنے کے طرز عمل کے لیے، دیکھیں [کہ کلیکشن کیسے کام کرتی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/) ہے۔
 
 ## رہنمائی شدہ کنکشن سیٹ اپ
@@ -117,7 +121,21 @@ MTProxy صرف ٹیلیگرام ٹریفک منتقل کرتا ہے۔ ورک ا�
 
 آپریٹر کے زیر انتظام نجی خدمات کے لیے، موجودہ سرور ماحول کی سیٹنگ `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` نجی منزلوں کی اجازت دیتی ہے اور پروکسی سائیڈ ہوسٹ نیم ریزولوشن کو برقرار رکھتی ہے۔ اسے پینل سے فعال نہیں کیا جا سکتا۔ صرف عوامی موڈ، پبلک ریزولور سے پوچھ گچھ کرنے سے پہلے `.onion` منزلوں کو مسترد کر دیتا ہے؛ ٹور آنیون سروسز کے لیے اس واضح نجی منزل کی سیٹنگ اور ایک مناسب پروکسی درکار ہوتی ہے۔ یہ DNS رویہ بیرونی HTTP آپریشنز پر لاگو ہوتا ہے، نہ کہ ٹیلیگرام کے ٹرانسپورٹ پر۔ کلود فلئیر [JSON DNS اینڈ پوائنٹ](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) کو دستاویزی شکل دیتا ہے۔
 
-****خودکار پول کے پیرامیٹرز**** **پیرامیٹرز → خودکار MTProxy** کے تحت، ناکامی کی حد، کول ڈاؤن، منصوبہ بند گردش، پروکسی شیئرنگ اور اجازت یافتہ فال بیک تاخیر کو ترتیب دیں۔ | کنٹرول | ڈیفالٹ | | --- | --- | | تبدیلی سے پہلے کنکشن ختم ہونا | 10 منٹ کے اندر 3 | | ہر کنکشن کی کوشش میں آزمائے جانے والے پراکسیز | 3 | | ناکامی کے بعد پہلا / زیادہ سے زیادہ آرام | 10 منٹ / 6 گھنٹے | | منصوبہ بند گردش | غیر فعال؛ ناکامی پر فعال کریں | | فی پراکسی اکاؤنٹس | 0: الگ اندراجات کو ترجیح دیں، ضرورت پڑنے پر شیئر کریں۔ خصوصی اندراج کے لیے 1 سیٹ کریں۔ | | اجازت یافتہ براہِ راست واپسی سے پہلے تاخیر | 10 منٹ؛ پابندی کے باوجود براہِ راست پتہ چھپائیں۔ | | فیڈ ریفریش / ٹرانسپورٹ چیکس | 60 / 10 منٹ؛ مرکزی ورک اسپیس کی قدریں مشترکہ پول پر لاگو ہوتی ہیں۔ | مختلف پراکسیز مختلف نکلنے کے پتے کی ضمانت نہیں دیتیں۔ یہ ترتیبات ٹیلیگرام کی حدوں کو ختم نہیں کرتیں اور نہ ہی گمنامی ثابت کرتی ہیں۔
+****خودکار پول کے پیرامیٹرز****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| کنٹرول | ڈیفالٹ |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 پبلک لسٹ کو اپنی آپریٹر کیٹلاگ سے تبدیل کرنے کے لیے نیچے دی گئی اووررائیڈ کو کنفیگر کریں۔ یہ بیرونی سبسکرپشنز کو مکمل طور پر غیر فعال کر دیتا ہے، بشمول اس کے کہ جب اس کا `proxies` اری خالی ہو۔
 

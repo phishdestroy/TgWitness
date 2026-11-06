@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล</span></nav>
 <p class="verification-shortcut"><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">อ้างอิง / การตั้งค่า</p><h1>การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล</h1><p class="guide-outcome">การยืนยันตัวตน, กลุ่มพร็อกซีอัตโนมัติ, โหมด IP, นโยบายสำรอง, คำขอจากภายนอก และการจัดเก็บข้อมูลลับ</p><div class="wiki-body"><p>เอกสารนี้อธิบายการทำงานและข้อจำกัดของ TgWitness 0.8.0 การยืนยันตัวตน,
+<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / การตั้งค่า</p><h1>การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล</h1><p class="guide-outcome">การยืนยันตัวตน, กลุ่มพร็อกซีอัตโนมัติ, โหมด IP, นโยบายสำรอง, คำขอจากภายนอก และการจัดเก็บข้อมูลลับ</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">เอกสารประกอบ</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>เอกสารนี้อธิบายการทำงานและข้อจำกัดของ TgWitness 0.8.0 การยืนยันตัวตน,
 การเข้าถึงแหล่งข้อมูล, การเชื่อมต่อเครือข่าย และความครบถ้วนของการบันทึก เป็นสถานะที่แยกกัน
 สำหรับขั้นตอนการลงชื่อเข้าใช้ รูปแบบไฟล์ และบัญชีหลายบัญชี ให้เริ่มจาก
 <a href="../accounts/">ส่วนบัญชีและรูปแบบเซสชัน</a> สำหรับนโยบายเหตุการณ์และพฤติกรรม
@@ -341,25 +343,49 @@ MTProxy เป็นพร็อกซีการส่งข้อมูลข
 Cloudflare มีเอกสารอธิบายเกี่ยวกับ<a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">จุดปลายทาง DNS แบบ</a> <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">JSON</a></p>
 <details>
 <summary><strong>พารามิเตอร์พูลอัตโนมัติ</strong></summary>
-
-ใน **Parameters → Automatic MTProxy** ให้กำหนดค่าเกณฑ์ความล้มเหลว, ระยะเวลาพัก,
-การหมุนเวียนตามแผน, การแชร์พร็อกซี และระยะเวลาหน่วงเวลาสำรองที่อนุญาต
-
-| การควบคุม | ค่าเริ่มต้น |
-| --- | --- |
-| ตัดการเชื่อมต่อก่อนการเปลี่ยน | 3 ครั้งภายใน 10 นาที |
-| จำนวนพร็อกซีที่ลองต่อครั้ง | 3 |
-| เวลาพักครั้งแรก / สูงสุดหลังความล้มเหลว | 10 นาที / 6 ชั่วโมง |
-| การหมุนเวียนตามแผน | ปิด; เปิดเมื่อเกิดความล้มเหลว |
-| จำนวนบัญชีต่อพร็อกซี | 0: ให้ใช้รายการแยกกันเป็นหลัก, แบ่งปันเมื่อจำเป็น ตั้งค่าเป็น 1 เพื่อรอรายการแบบเอกสิทธิ์ |
-| เวลารอ ก่อนอนุญาตให้ใช้ Direct fallback | 10 นาที; ซ่อนที่อยู่หากยังปฏิเสธ Direct |
-| การรีเฟรชฟีด / การตรวจสอบการส่งข้อมูล | 60 / 10 นาที; ค่าในพื้นที่ทำงานหลักใช้กับกลุ่มที่แชร์ |
-
-พร็อกซีที่ต่างกันไม่รับประกันว่าจะมีที่อยู่ทางออกที่ต่างกัน การตั้งค่าเหล่านี้ไม่
-แทนที่ข้อจำกัดของ Telegram หรือรับประกันความเป็นนิรนาม
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>ค่าเริ่มต้น</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>เพื่อแทนที่รายชื่อสาธารณะด้วยแคตตาล็อกผู้ให้บริการของคุณเอง ให้กำหนดค่าการแทนที่ด้านล่างนี้
 การตั้งค่านี้จะปิดการสมัครรับข้อมูลจากภายนอกอย่างสมบูรณ์ รวมถึงเมื่ออาร์เรย์ <code>proxies</code> ของมันว่างเปล่า</p>
 <p>คัดลอก<a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">แคตตาล็อกที่ว่าง</a>

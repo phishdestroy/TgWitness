@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel
 
 面板的每个界面：聊天、日志、来源、导出、扩展功能、保护模式和代码检查。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [初始设置与配置](https://phishdestroy.github.io/TgWitness/zh/docs/reference/settings/) · [账户](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/) · [导出与验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/) · [案例报告](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)
 
 各屏幕的功能说明、其向签名日志写入的内容，以及详细 指南的所在位置。面板每次仅显示一个工作区：一个 Telegram 账户及其专属的 来源、日志和签名密钥。侧边栏顶部的选择器用于切换 工作区。地址包含工作区信息（`?ws=…`）；当地址、 选择器与已加载的账户不一致时，所有操作将被阻止。
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#more-tools)
 
 ## 快速入门
 

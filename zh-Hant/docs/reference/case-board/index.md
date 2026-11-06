@@ -4,11 +4,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 書籤、精確標註、操作片段、討論、範圍限定存取，以及「案件看板」所使用的簽名註解歷史紀錄。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 「案件看板」為調查團隊提供一個可共享的儲存資料工作視圖。您可以將 觀察結果加入書籤、標示特定段落、儲存一系列操作，並與同事進行討論。 卡片會保留其來源參考資訊及經簽署的修訂歷史紀錄。團隊註解會保留在 工作區中，並可與原始的 Telegram 觀察結果明確區分。
 
 [證據模型](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/) · [存取](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/) · [報告](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)
 
 ![綜合調查資訊流](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
+
+**On this page**
+
+- [Work with a case](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/#work-with-a-case)
+- [Permissions](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/#permissions)
+- [Stored contracts](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/#stored-contracts)
+- [API and exports](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/#api-and-exports)
+- [Operating limits](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/#operating-limits)
 
 ## 處理案件
 

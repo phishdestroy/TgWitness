@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/secur
 
 Modello di minaccia, modello di accesso, dati sensibili inattivi, esposizione di rete, importazione delle sessioni e modalità di segnalazione di una vulnerabilità.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/it/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
 
 | Area | In sintesi |
@@ -15,6 +19,17 @@ This page describes access, storage and network protection in a local or server 
 | Confine di fiducia locale | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
 
 Per le segnalazioni di vulnerabilità, si prega di consultare la [politica sulla sicurezza](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md).
+
+**On this page**
+
+- [Access model](https://phishdestroy.github.io/TgWitness/it/docs/reference/security/#access-model)
+- [Panel content and exports](https://phishdestroy.github.io/TgWitness/it/docs/reference/security/#panel-content-and-exports)
+- [Secrets at rest](https://phishdestroy.github.io/TgWitness/it/docs/reference/security/#secrets-at-rest)
+- [Proxies and network routes](https://phishdestroy.github.io/TgWitness/it/docs/reference/security/#proxies-and-network-routes)
+- [Sign-in and session imports](https://phishdestroy.github.io/TgWitness/it/docs/reference/security/#sign-in-and-session-imports)
+- [Logs and transport](https://phishdestroy.github.io/TgWitness/it/docs/reference/security/#logs-and-transport)
+- [Integrity limits](https://phishdestroy.github.io/TgWitness/it/docs/reference/security/#integrity-limits)
+- [If you suspect a problem](https://phishdestroy.github.io/TgWitness/it/docs/reference/security/#if-you-suspect-a-problem)
 
 ## Modello di accesso
 

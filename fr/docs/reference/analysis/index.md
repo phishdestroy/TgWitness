@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/analy
 
 Recherchez des messages enregistrés, examinez les contributions de l'IA et conservez des rapports analytiques accompagnés de leurs références sources.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Guide des procédures](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Utilisez **Journal** pour effectuer une recherche locale sans IA ; [la recherche en texte intégral](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/) (aperçu) reconnaît les formes de mots, les expressions, les domaines et les @noms d'utilisateur. Pour **utiliser** **« Ask the archive »**, commencez par activer et configurer un fournisseur dans **la** **section** **« Intégrations** ». Le sélecteur d'espace de travail permet de choisir le compte ; le formulaire permet de sélectionner les discussions et la période d'observation. La recherche s’effectue localement. Une expression exacte ou un domaine affine la recherche ; un identifiant de message permet de récupérer les versions enregistrées. Passez en revue les extraits et ouvrez leurs entrées de journal ou leur contexte. Il n’y a pas de base de données vectorielle ni d’action automatique sur Telegram.

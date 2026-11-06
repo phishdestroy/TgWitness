@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Connection, proxies and data protection</span></nav>
 <p class="verification-shortcut"><a href="../verification/">What has been tested →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Reference / Set up</p><h1>Connection, proxies and data protection</h1><p class="guide-outcome">Authentication, automatic proxy pools, IP modes, fallback policy, external requests and secret storage.</p><div class="wiki-body"><p>This document describes TgWitness 0.8.0 behavior and its limits. Authentication,
+<article class="guide-content"><p class="eyebrow">Reference / Set up</p><h1>Connection, proxies and data protection</h1><p class="guide-outcome">Authentication, automatic proxy pools, IP modes, fallback policy, external requests and secret storage.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentation</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../assets/chapter-operate.svg" /></p>
+<p>This document describes TgWitness 0.8.0 behavior and its limits. Authentication,
 source access, network connectivity and capture completeness are separate states.
 For sign-in steps, file formats, and multiple accounts, start with
 <a href="../accounts/">accounts and session formats</a>. For event policies and restart
@@ -338,25 +340,49 @@ This DNS behavior applies to external HTTP operations, not Telegram's transport.
 Cloudflare documents the <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">JSON DNS endpoint</a>.</p>
 <details>
 <summary><strong>Automatic pool parameters</strong></summary>
-
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown,
-planned rotation, proxy sharing and permitted fallback delay.
-
-| Control | Default |
-| --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
-
-Different proxies do not guarantee different exit addresses. These settings do not
-override Telegram limits or prove anonymity.
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>To replace the public list with your own operator catalog, configure the override below.
 It disables external subscriptions entirely, including when its <code>proxies</code> array is empty.</p>
 <p>Copy <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">the empty catalog</a> to <code>proxy-config/proxies.json</code>

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/
 
 جستجو، خواندن زمینه، شمارش فعالیت و صادر کردن پیام‌های ذخیره‌شده از اسکریپت‌ها و ایجنت‌ها، با خروجی --json، کدهای خروجی پایدار و توکن‌های محدودخوانی.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [MCP فقط-خواندنی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/) · [جستجوی متن کامل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **پیش‌نمایش.** `tgwitness search`, `context`, `messages`, `stats` و `export` خواندن مشاهدات ذخیره شده برای اسکریپت‌ها و عامل‌های هوش مصنوعی. آنها نمی‌توانند هیچ چیزی را به تلگرام ارسال کنند، تنظیمات را تغییر دهند یا مجله امضا شده را اصلاح کنند.

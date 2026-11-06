@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/media
 
 通过本地工作进程识别捕获的图像和音频；将生成的文本与源文件保持关联。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [工作流指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 打开`media.saved`日志记录，选择**“识别附件**”，然后在**“查询存档**”下选择 OCR或转录。处理过程为手动且在本地进行。 不支持云端媒体模式或自动上传。原始附件字节和 `media_sha256`保持不变；识别出的文本会被明确标记为机器 识别结果，并单独存储，同时包含源文件哈希值、引擎/模型版本、 语言、参数及完成时间。转录文本保留返回的时间戳。

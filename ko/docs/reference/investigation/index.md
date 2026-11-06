@@ -4,7 +4,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/inves
 
 채널, 그룹, 비공개 채팅 및 봇에 걸친 전체 계정 조사: 조사 범위 설정부터 검증된 사건 자료 패키지 구성까지.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 채널, 그룹, 비공개 채팅 및 봇 전반에 걸쳐 사건을 추적할 수 있으며, 초기 데이터 수집부터 인용된 타임라인 및 검증 가능한 인계 과정까지 포함합니다. 대화형 웹사이트 버전은 `/docs/cases/`에서 확인하실 수 있으며, [미리보기 사용법을 참조하십시오](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally).
+
+**On this page**
+
+- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/#adapt-the-investigation)
 
 ## 실제 사례: 네 건의 대화에서 수신처가 변경된 사례
 

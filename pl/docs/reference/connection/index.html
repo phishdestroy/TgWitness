@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentacja</a> <span aria-hidden="true">/</span> <a href="../">Odniesienie</a> <span aria-hidden="true">/</span> <span aria-current="page">Połączenia, serwery proxy i ochrona danych</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Co zostało przetestowane →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Odniesienie / Konfiguracja</p><h1>Połączenia, serwery proxy i ochrona danych</h1><p class="guide-outcome">Uwierzytelnianie, automatyczne pule serwerów proxy, tryby adresów IP, zasady rezerwowe, żądania zewnętrzne oraz przechowywanie kluczy tajnych.</p><div class="wiki-body"><p>Niniejszy dokument opisuje działanie programu TgWitness w wersji 0.8.0 oraz jego ograniczenia. Uwierzytelnianie,
+<article class="guide-content"><p class="language-notice">Niektóre fragmenty tej strony są nadal w języku angielskim: angielski tekst źródłowy uległ zmianie po przetłumaczeniu.</p><p class="eyebrow">Odniesienie / Konfiguracja</p><h1>Połączenia, serwery proxy i ochrona danych</h1><p class="guide-outcome">Uwierzytelnianie, automatyczne pule serwerów proxy, tryby adresów IP, zasady rezerwowe, żądania zewnętrzne oraz przechowywanie kluczy tajnych.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentacja</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Niniejszy dokument opisuje działanie programu TgWitness w wersji 0.8.0 oraz jego ograniczenia. Uwierzytelnianie,
 dostęp do źródła, łączność sieciowa oraz kompletność przechwytywania stanowią odrębne stany.
 W przypadku procedur logowania, formatów plików oraz obsługi wielu kont proszę zapoznać się najpierw z sekcją
 <a href="../accounts/">„Konta i formaty sesji</a>”. Informacje na temat zasad dotyczących zdarzeń oraz
@@ -343,25 +345,49 @@ To zachowanie DNS dotyczy zewnętrznych operacji HTTP, a nie transportu Telegram
 Cloudflare udokumentowało <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">punkt końcowy DNS</a> w formacie <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">JSON</a>.</p>
 <details>
 <summary><strong>Parametry automatycznego puli</strong></summary>
-
-W sekcji **Parametry → Automatyczne MTProxy** skonfiguruj próg awarii, czas oczekiwania,
-planowaną rotację, współdzielenie serwerów proxy oraz dopuszczalne opóźnienie przełączenia awaryjnego.
-
-| Kontrola | Domyślnie |
-| --- | --- |
-| Rozłącza przed zastąpieniem | 3 w ciągu 10 minut |
-| Liczba prób proxy na próbę połączenia | 3 |
-| Pierwsza / maksymalna przerwa po awarii | 10 minut / 6 godzin |
-| Planowana rotacja | Wyłączona; włączanie po awarii |
-| Liczba kont na proxy | 0: preferuj oddzielne wpisy, udostępniaj w razie potrzeby. Ustaw 1, aby czekać na wpis z wyłącznością. |
-| Opóźnienie przed dozwolonym bezpośrednim przełączeniem awaryjnym | 10 minut; adres, który nadal odrzuca połączenie bezpośrednie, jest ukrywany |
-| Odświeżanie kanałów / sprawdzanie transportu | 60 / 10 minut; wartości z głównego obszaru roboczego mają zastosowanie do puli współdzielonej |
-
-Różne serwery proxy nie gwarantują różnych adresów wyjściowych. Te ustawienia nie
-zastępują limitów Telegrama ani nie zapewniają anonimowości.
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kontrola</th>
+<th>Domyślnie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>Aby zastąpić publiczną listę własnym katalogiem operatorów, skonfiguruj poniższe nadpisanie.
 Powoduje to całkowite wyłączenie subskrypcji zewnętrznych, nawet jeśli tablica <code>proxies</code> jest pusta.</p>
 <p>Skopiuj <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">pusty katalog</a>

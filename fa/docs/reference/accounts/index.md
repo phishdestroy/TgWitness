@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/accou
 
 ورود با شماره تلفن، کد QR یا کلید احراز هویت، وارد کردن جلسات تله‌تون، پایروگرام یا تلگرام دسکتاپ و اجرای چندین حساب کاربری.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness به عنوان یک **حساب کاربری تلگرام** (نه یک ربات) از طریق MTProto، با استفاده از Telethon، وارد می‌شود. هر حساب در **فضای** کاری خود (که در API و ابزارهای خط فرمان به آن *workspace* گفته می‌شود) با جلسه، منابع، دفترچه یادداشت و کلید امضای مخصوص به خود قرار دارد.
 
 فایل‌های جلسه، رشته‌های جلسه و کلیدهای احراز هویت، **مجوزهای حساب کاربری** هستند: هر کسی که یکی از آن‌ها را در اختیار داشته باشد می‌تواند به‌عنوان آن حساب کاربری عمل کند. آن‌ها حاوی تاریخچه پیام‌ها نیستند.

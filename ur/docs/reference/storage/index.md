@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/stora
 
 بیک اپ، پرانی فائلوں کو آپ کے کلاؤڈ میں منتقل کرنا، Object Lock کے تحت نقول اور نئے مشین پر بحالی۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 پینل تین کاموں کو الگ کرتا ہے:
 
 | ٹاسک | یہ کیا کرتا ہے |
@@ -15,6 +19,14 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/stora
 جگہ خالی کرنے سے کبھی بھی دستخط شدہ جرنل کو حذف یا دوبارہ لکھا نہیں جاتا۔ ہر منسلک فائل اپنے اصل SHA-256 اور ایک بحالی رسید کو برقرار رکھتی ہے۔ اختیاری gzip کمپریشن تصدیق شدہ انکرپشن سے پہلے ہوتی ہے۔ کلاؤڈ فائل ناموں میں ٹیلیگرام کے نام، چیٹ آئی ڈیز یا اصل منسلک نام شامل نہیں ہوتے۔ ایک منسلک فائل 32 GB تک ہو سکتی ہے۔
 
 صرف اپ لوڈ کے جواب سے فائل حذف کرنے کی اجازت نہیں ملتی۔TgWitness مکمل انکرپٹڈ آبجیکٹ کو ڈاؤن لوڈ کرتا ہے اور اس کے سائز اورSHA-256 کی تصدیق کرتا ہے، رسید محفوظ کرتا ہے، پھر حذف کرنے سے فوراً پہلے مقامی بائٹس کی دوبارہ جانچ کرتا ہے۔ اپ لوڈ کی ناکامی، مختلف ریڈ بیک یا منسوخ شدہ ٹرانسفر مقامی فائل کو اپنی جگہ پر برقرار رکھتا ہے۔ اگر فعال ثبوت بیک اپ نے ابھی تک اس فائل کی کاپی نہیں کی ہے تو حذف کرنے کا عمل بھی اس کا انتظار کرتا ہے۔
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/ur/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/ur/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/ur/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/ur/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/ur/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## جب ڈسک کی جگہ بھرنے لگے
 

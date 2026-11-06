@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/accou
 
 ייצא את מה שהחשבון יכול לקרוא כרגע: היקף, משימות הניתנות להמשך, ארכיון חתום ועותקי שיתוף ממוזערים.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 ייצוא חשבון מקצה את החשבון באופן בלעדי. לפני התחלה או חידוש יש להשהות במפורש ניטור או איסוף אחר; היישום לעולם אינו עוצר אותם אוטומטית.
 
 כמנהל ההתקנה, בחר "**התחל כאן" → "ייצא את החשבון שלי**", או "**ייצוא" → "חשבון Telegram" → "הגדר ייצוא חשבון**". התחבר במידת הצורך, בדוק את היקף הייצוא, והפעל את הייצוא באופן מפורש. אין צורך במעקב רציף. **"תצפיות שמורות**" הוא ייצוא נפרד של היומן הקיים; ה-ZIP שלו כולל את כל המקורות ללא תלות במסנני היומן. לכל סביבת עבודה יש משימות, זהות חתימה ואחסון משלה. גישה ללוח שהונפקה, כולל הרשאת ייצוא רגילה ללא הגבלות, אינה יכולה לפתוח נתיבים אלה ברמת החשבון.

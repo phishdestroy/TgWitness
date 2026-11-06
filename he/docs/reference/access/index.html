@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">גישה והרשאות</span></nav>
 <p class="verification-shortcut"><a href="../verification/">מה נבדק ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">הפניה / הגדרה</p><h1>גישה והרשאות</h1><p class="guide-outcome">הגדירו את היקף הגישה לחשבונות ולצ&#x27;אטים, בחרו הרשאות, הגבלו את משך ההפעלה ואת כתובות ה-IP, ובטלו את הגישה.</p><div class="wiki-body"><p>הענק למבקר גישה לצ&#x27;אט אחד, לאנליסט הרשאה לייצא תיק, או
+<article class="guide-content"><p class="language-notice">חלקים מדף זה עדיין באנגלית: הטקסט המקורי באנגלית שונה לאחר תרגומו.</p><p class="eyebrow">הפניה / הגדרה</p><h1>גישה והרשאות</h1><p class="guide-outcome">הגדירו את היקף הגישה לחשבונות ולצ&#x27;אטים, בחרו הרשאות, הגבלו את משך ההפעלה ואת כתובות ה-IP, ובטלו את הגישה.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">תיעוד</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>הענק למבקר גישה לצ&#x27;אט אחד, לאנליסט הרשאה לייצא תיק, או
 למפעיל שליטה על חשבונות נבחרים. כל אדם מקבל אסימון משלו. האסימון של
 לוח הבקרה הראשי נשאר בידי המנהל.</p>
 <p><a href="../accounts/">הגדרת חשבון</a> · <a href="../connection/">נתיבי חיבור</a> · <a href="../security/">מודל אבטחה</a></p>
@@ -259,16 +261,13 @@
 אסימונים שהונפקו ופרטי הזדהות של הפעלה נשמרים כ-hashים בכספת המוצפנת.</p>
 <details>
 <summary><strong>מנהל ראשי וגבולות האמון</strong></summary>
-
-אסימון הלוח הראשי נשאר ללא הגבלות. כניסות לדפדפן באמצעותו יוצרות הפעלות
-הכפופות למגבלות ההפעלה שהוגדרו על ידי המנהל. סקריפטים השולחים את
-האסימון הראשי ישירות שומרים על גישה מלאה ואינם נספרים כהפעלות דפדפן.
-
-זוהי בקרת גישה ברמת היישום בהתקנה אחת. כל סביבות העבודה חולקות
-את תהליך השרת; אין מדובר בבידוד ממנהל המערכת המארח. יש לשמור על פרטיות
-האסימון הראשי, הפעלות טלגרם, מפתחות החתימה וספריית הנתונים. אסימון עד
-הוא אמצעי אימות נפרד לבדיקת תקינות, ולא אסימון גישה ללוח הבקרה.
-
+<p>The main panel token remains unrestricted. Browser sign-ins with it create sessions
+subject to the administrator's configured session limits. Scripts sending the
+main token directly retain full access and are not counted as browser sessions.</p>
+<p>This is application-level access control in one installation. All workspaces share
+the server process; this is not isolation from the host administrator. Keep the main
+token, Telegram sessions, signing keys and data directory private. A witness token
+is a separate checkpoint/health credential, not a panel access token.</p>
 </details></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">ערוך דף זה ב-GitHub ↗</a><a class="next-guide" href="../connection/"><span>השלב הבא</span><strong>חיבור, פרוקסי והגנה על נתונים ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../verification/">מה נבדק ←</a></p></footer>
 </main>

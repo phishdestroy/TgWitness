@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/quick
 
 TgWitness ইনস্টল ও চালু করার প্রতিটি উপায়: উইন্ডোজ প্যাকেজ, পাইথন, ডকার এবং সিন্থেটিক ডেমো, প্রাথমিক যাচাইসহ।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 **ইংরেজি** · [রাশিয়ান](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md) · [ইউক্রেনীয়](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md) · [স্প্যানিশ](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md) · [পর্তুগিজ (ব্রাজিল)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md) · [তুরস্কী](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md) · [আরবি](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md) · [ফার্সি](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md) · [উর্দু](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md) · [হিন্দি](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md) · [ইন্দোনেশীয় ভাষা](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md) · [ভিয়েতনামী ভাষা](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md) · [সরলীকৃত চীনা](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md)
 
 TgWitness হল একটি স্বতন্ত্র অ্যাপ্লিকেশন যা আপনার অ্যাকাউন্টগুলো অ্যাক্সেস করতে পারা টেলিগ্রাম গ্রুপ এবং চ্যানেলগুলো পর্যবেক্ষণের জন্য। এটি নিজস্ব ডেটা ডিরেক্টরি সহ স্থানীয়ভাবে চলে।

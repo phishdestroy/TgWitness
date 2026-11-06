@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <a href="../">Manba</a> <span aria-hidden="true">/</span> <span aria-current="page">Kirish va ruxsatnomalar</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Nima sinovdan o&#x27;tkazilgan →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Manba / Sozlash</p><h1>Kirish va ruxsatnomalar</h1><p class="guide-outcome">Hisoblar va suhbatlarga cheklangan kirish huquqini bering, ruxsatlarni tanlang, sessiyalar va IP-manzillarni cheklang hamda kirishni bekor qiling.</p><div class="wiki-body"><p>Ko&#x27;rib chiquvchiga bitta suhbatga, tahlilchiga ishni eksport qilishga yoki operatorga tanlangan hisoblarni boshqarishga ruxsat bering. Har bir kishiga o&#x27;z tokeni beriladi. Asosiy panel tokeni administrator qo&#x27;lida qoladi.</p>
+<article class="guide-content"><p class="language-notice">Ushbu sahifaning ba&#x27;zi qismlari hanuz ingliz tilida: inglizcha asl matn tarjima qilinganidan keyin o&#x27;zgartirilgan.</p><p class="eyebrow">Manba / Sozlash</p><h1>Kirish va ruxsatnomalar</h1><p class="guide-outcome">Hisoblar va suhbatlarga cheklangan kirish huquqini bering, ruxsatlarni tanlang, sessiyalar va IP-manzillarni cheklang hamda kirishni bekor qiling.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Hujjatlash</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>Ko&#x27;rib chiquvchiga bitta suhbatga, tahlilchiga ishni eksport qilishga yoki operatorga tanlangan hisoblarni boshqarishga ruxsat bering. Har bir kishiga o&#x27;z tokeni beriladi. Asosiy panel tokeni administrator qo&#x27;lida qoladi.</p>
 <p><a href="../accounts/">Hisobni sozlash</a> · <a href="../connection/">Ulanish yo&#x27;nalishlari</a> · <a href="../security/">Xavfsizlik modeli</a></p>
 <h2 id="two-scopes-two-different-jobs">Ikki maqsad, ikki xil vazifa<a class="anchor" href="#two-scopes-two-different-jobs" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <p><strong>Yig&#x27;ish doirasi</strong> hisob qaydnomasining nimani qayd etishini belgilaydi: tanlangan suhbatlar, Telegram papkasi yoki butun hisob qaydnomasi. <strong>Kirish doirasi esa</strong> qayd etilgan hisob qaydnomalari va suhbatlardan qaysilarini boshqa shaxs ko&#x27;rishi va ulardan foydalanishi mumkinligini aniqlaydi. Kirish huquqini berish Telegram suhbatiga qo&#x27;shilishni, yig&#x27;ishni boshlashni yoki Telegram hisob qaydnomasi ruxsatlarini berishni anglatmaydi.</p>
@@ -199,11 +201,13 @@ Dinamik ravishda hosil qilingan til javobi alohida. Ushbu tekshiruvlar yetkazib 
 <p>Kirishni berish, o&#x27;zgartirish va bekor qilish hamda sessiyalarni boshlash yoki yakunlash ham imzolangan <code>access.*</code> jurnal yozuvlarini yaratadi. Tokenlar ushbu yozuvlarga kiritilmaydi. Berilgan tokenlar va sessiya ma&#x27;lumotlari shifrlangan omborxonada xeshlar ko&#x27;rinishida saqlanadi.</p>
 <details>
 <summary><strong>Asosiy administrator va ishonch chegarasi</strong></summary>
-
-Asosiy panel tokeni cheklovsiz qoladi. U bilan brauzer orqali tizimga kirish administrator sozlagan sessiya cheklovlariga bo&#x27;ysunadigan sessiyalarni yaratadi. Asosiy tokenni to&#x27;g&#x27;ridan-to&#x27;g&#x27;ri yuboradigan skriptlar to&#x27;liq kirish huquqini saqlab qoladi va brauzer sessiyalari sifatida hisoblanmaydi.
-
-Bu bitta o&#x27;rnatishda ilova darajasidagi kirishni nazorat qilishdir. Barcha ish maydonchalari server jarayonini baham ko&#x27;radi; bu mezbon ma&#x27;muridan izolyatsiya emas. Asosiy token, Telegram sessiyalari, imzolash kalitlari va ma&#x27;lumotlar katalogini maxfiy saqlang. Guvoh tokeni alohida tekshiruv nuqtasi/sog&#x27;liq guvohnomasi bo&#x27;lib, panelga kirish tokeni emas.
-
+<p>The main panel token remains unrestricted. Browser sign-ins with it create sessions
+subject to the administrator's configured session limits. Scripts sending the
+main token directly retain full access and are not counted as browser sessions.</p>
+<p>This is application-level access control in one installation. All workspaces share
+the server process; this is not isolation from the host administrator. Keep the main
+token, Telegram sessions, signing keys and data directory private. A witness token
+is a separate checkpoint/health credential, not a panel access token.</p>
 </details></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">Ushbu sahifani GitHubda tahrirlang ↗</a><a class="next-guide" href="../connection/"><span>Keyingi qadam</span><strong>Ulanish, proksi va ma'lumotlarni himoya qilish →</strong></a><p>Ushbu qo&#x27;llanmalar joriy amalga oshirishni tasvirlaydi. Tasdiqlash natijalari va qolgan bo&#x27;shliqlar alohida hujjatlashtirilgan. <a href="../verification/">Nima sinovdan o&#x27;tkazilgan →</a></p></footer>
 </main>

@@ -32,7 +32,26 @@
 <nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../../">होम</a> <span aria-hidden="true">/</span> <a href="../../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <a href="../">संदर्भ</a> <span aria-hidden="true">/</span> <span aria-current="page">विशेषताएँ और सीमाएँ</span></nav>
 <p class="verification-shortcut"><a href="../verification/">क्या परीक्षण किया गया है →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / एकत्र करें</p><h1>विशेषताएँ और सीमाएँ</h1><p class="guide-outcome">वर्तमान संग्रह मॉडल, बहु-खाता वर्कफ़्लो, निर्यात और TgWitness की परिचालन सीमाएँ।</p><div class="wiki-body"><p>TgWitness जुड़े खातों के लिए सुलभ टेलीग्राम बातचीत को संरक्षित करता है, देखे गए परिवर्तनों को रिकॉर्ड करता है और सत्यापन योग्य एक्सपोर्ट तैयार करता है। यह संदर्भ संग्रह मॉडल, वर्तमान वर्कफ़्लो और उनकी सीमाओं का वर्णन करता है।</p>
+<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / एकत्र करें</p><h1>विशेषताएँ और सीमाएँ</h1><p class="guide-outcome">वर्तमान संग्रह मॉडल, बहु-खाता वर्कफ़्लो, निर्यात और TgWitness की परिचालन सीमाएँ।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">टीजीविटनेस</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">दस्तावेज़ीकरण</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Project reference</a></p>
+<p><img alt="Project reference" src="../../../../assets/chapter-project.svg" /></p>
+<p>TgWitness जुड़े खातों के लिए सुलभ टेलीग्राम बातचीत को संरक्षित करता है, देखे गए परिवर्तनों को रिकॉर्ड करता है और सत्यापन योग्य एक्सपोर्ट तैयार करता है। यह संदर्भ संग्रह मॉडल, वर्तमान वर्कफ़्लो और उनकी सीमाओं का वर्णन करता है।</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#standalone-application">Standalone application</a></li>
+<li><a href="#shared-investigations">Shared investigations</a></li>
+<li><a href="#archive-tools">Archive tools</a></li>
+<li><a href="#optional-extras">Optional extras</a></li>
+<li><a href="#protocol-and-private-sources">Protocol and private sources</a></li>
+<li><a href="#multiple-accounts">Multiple accounts</a></li>
+<li><a href="#capture-and-attribution">Capture and attribution</a></li>
+<li><a href="#capacity-and-telegram-limits">Capacity and Telegram limits</a></li>
+<li><a href="#reliability-and-recovery">Reliability and recovery</a></li>
+<li><a href="#evidence-model">Evidence model</a></li>
+<li><a href="#export-deployment-and-handoff">Export, deployment and handoff</a></li>
+<li><a href="#stable-release-criteria">Stable release criteria</a></li>
+</ul>
+</details>
 <h2 id="standalone-application">स्वतंत्र एप्लिकेशन<a class="anchor" href="#standalone-application" aria-label="इस अनुभाग का लिंक">#</a></h2>
 <p>TgWitness की अपनी इंस्टॉलेशन, डेटा डायरेक्टरी, और रिलीज़ जीवनचक्र है। बंडल किए गए वेब इंटरफ़ेस सेटअप और समीक्षा को संभालता है; निर्यात किए गए रिकॉर्ड स्वतंत्र रूप से उपयोग किए जा सकते हैं।</p>
 <p>ऑपरेटर अपने खातों को जोड़ता है, प्रत्येक के लिए दिखाई देने वाले स्रोतों को चुनता है, और एक सहेजा गया अवलोकन जर्नल प्राप्त करता है। पैनल सामग्री, सहेजी गई परिवर्तन, अवलोकन उत्पत्ति और ज्ञात अंतरालों को प्रदर्शित करता है। एक अन्य जांचकर्ता निर्यात की गई सामग्री को सत्यापित कर सकता है।</p>

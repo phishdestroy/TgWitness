@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">账户与会话格式</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 设置</p><h1>账户与会话格式</h1><p class="guide-outcome">支持通过手机、二维码或授权密钥登录，可导入 Telethon、Pyrogram 或 Telegram Desktop 的会话数据，并同时管理多个账户。</p><div class="wiki-body"><p>TgWitness 通过 MTProto 协议以 <strong>Telegram 用户账户</strong>（而非机器人）身份登录，使用
+<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 设置</p><h1>账户与会话格式</h1><p class="guide-outcome">支持通过手机、二维码或授权密钥登录，可导入 Telethon、Pyrogram 或 Telegram Desktop 的会话数据，并同时管理多个账户。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文档</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>TgWitness 通过 MTProto 协议以 <strong>Telegram 用户账户</strong>（而非机器人）身份登录，使用
 Telethon 实现。每个账户都位于独立的工作区中（在
 API 和命令行工具中称为“<em>工作区</em>”），并拥有独立的会话、消息源、日志和签名密钥。</p>
 <p>会话文件、会话字符串和认证密钥均属于<strong>账户授权凭证</strong>：任何

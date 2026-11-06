@@ -4,11 +4,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-
 
 ブックマーク、正確なハイライト、アクションスライス、ディスカッション、アクセス範囲の制限、および Case Board で使用される署名付き注釈履歴。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Case Board を使用すると、調査チームは保存された資料を共有して閲覧できます。 観察事項をブックマークしたり、特定の箇所をハイライトしたり、一連のアクションを保存したりして、同僚と議論することができます。 カードには、ソースへの参照情報と署名付きの改訂履歴が保持されます。チームの注釈は ワークスペース内に残り、元の Telegram の観察事項とは区別して識別可能です。
 
 [証拠モデル](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/) · [アクセス](https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/) · [レポート](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-reports/)
 
 ![調査用合成フィード](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
+
+**On this page**
+
+- [Work with a case](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/#work-with-a-case)
+- [Permissions](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/#permissions)
+- [Stored contracts](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/#stored-contracts)
+- [API and exports](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/#api-and-exports)
+- [Operating limits](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/#operating-limits)
 
 ## 案件の取り扱い
 

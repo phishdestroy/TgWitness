@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/secur
 
 위협 모델, 접근 모델, 저장된 기밀 정보, 네트워크 노출, 세션 가져오기 및 취약점 보고 방법.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
 
 | 분야 | 요약하자면 |
@@ -15,6 +19,17 @@ This page describes access, storage and network protection in a local or server 
 | 로컬 신뢰 경계 | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
 
 취약점 보고와 관련하여서는 [보안](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)정책을 참조하십시오.
+
+**On this page**
+
+- [Access model](https://phishdestroy.github.io/TgWitness/ko/docs/reference/security/#access-model)
+- [Panel content and exports](https://phishdestroy.github.io/TgWitness/ko/docs/reference/security/#panel-content-and-exports)
+- [Secrets at rest](https://phishdestroy.github.io/TgWitness/ko/docs/reference/security/#secrets-at-rest)
+- [Proxies and network routes](https://phishdestroy.github.io/TgWitness/ko/docs/reference/security/#proxies-and-network-routes)
+- [Sign-in and session imports](https://phishdestroy.github.io/TgWitness/ko/docs/reference/security/#sign-in-and-session-imports)
+- [Logs and transport](https://phishdestroy.github.io/TgWitness/ko/docs/reference/security/#logs-and-transport)
+- [Integrity limits](https://phishdestroy.github.io/TgWitness/ko/docs/reference/security/#integrity-limits)
+- [If you suspect a problem](https://phishdestroy.github.io/TgWitness/ko/docs/reference/security/#if-you-suspect-a-problem)
 
 ## 접근 모델
 

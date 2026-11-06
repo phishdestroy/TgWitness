@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/witne
 
 เรียกใช้ witness ด้วยกุญแจและบอทของตัวเอง เผยแพร่จุดตรวจสอบที่ลงนามแล้วไปยังช่อง และตรวจสอบการส่งออกข้อมูลกับจุดตรวจสอบดังกล่าว
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [ส่งออกและตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/) · [ความมั่นใจสูง](https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/) · [คู่มือการใช้งานแผงควบคุม](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ A witness retains signed checkpoints separately from the collector. It checks th
 4. ไฟล์ ZIP ของหลักฐาน → verify.py
 5. สมุดบันทึกพยาน, กุญแจส่วนตัว → verify.py
 6. ช่อง Telegram → verify.py (หน้าส่งออก Telegram Desktop หรือ t.me/s)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/th/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/th/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/th/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/th/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/th/docs/reference/witness/#verify)
 
 ## สิ่งที่ TgWitness สามารถทำได้ และสิ่งที่มันทำไม่ได้
 

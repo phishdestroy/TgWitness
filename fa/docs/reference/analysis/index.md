@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/analy
 
 جستجوی پیام‌های ذخیره‌شده، بازبینی ورودی‌های هوش مصنوعی و نگهداری گزارش‌های تحلیلی همراه با ارجاعات منبع.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [راهنمای گردش کار](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 از **«ژورنال»** برای جستجوی محلی بدون هوش مصنوعی استفاده کنید؛ [جستجوی تمام‌متن](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/) (پیش‌نمایش) فرم‌های کلمات، عبارات، دامنه‌ها و @نام_کاربری‌ها را مطابقت می‌دهد. برای **«پرسش از آرشیو**»، ابتدا یک ارائه‌دهنده را در بخش **«ادغام‌ها»** فعال و پیکربندی کنید. انتخابگر فضای کاری، حساب کاربری را انتخاب می‌کند؛ فرم، چت‌ها و دوره مشاهده را انتخاب می‌کند. فرآیند بازیابی به‌صورت محلی اجرا می‌شود. یک عبارت یا دامنه دقیق، بازیابی را محدود می‌کند؛ یک شناسه پیام، نسخه‌های ذخیره شده را درخواست می‌کند. گزیده‌ها را مرور کرده و سوابق ژورنال یا زمینه آن‌ها را باز کنید. هیچ پایگاه داده برداری یا اقدام خودکار تلگرامی وجود ندارد.

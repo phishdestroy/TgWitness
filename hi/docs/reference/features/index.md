@@ -4,7 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/featu
 
 वर्तमान संग्रह मॉडल, बहु-खाता वर्कफ़्लो, निर्यात और TgWitness की परिचालन सीमाएँ।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
 TgWitness जुड़े खातों के लिए सुलभ टेलीग्राम बातचीत को संरक्षित करता है, देखे गए परिवर्तनों को रिकॉर्ड करता है और सत्यापन योग्य एक्सपोर्ट तैयार करता है। यह संदर्भ संग्रह मॉडल, वर्तमान वर्कफ़्लो और उनकी सीमाओं का वर्णन करता है।
+
+**On this page**
+
+- [Standalone application](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#standalone-application)
+- [Shared investigations](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#shared-investigations)
+- [Archive tools](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#archive-tools)
+- [Optional extras](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#optional-extras)
+- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#protocol-and-private-sources)
+- [Multiple accounts](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#multiple-accounts)
+- [Capture and attribution](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#capture-and-attribution)
+- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#capacity-and-telegram-limits)
+- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#reliability-and-recovery)
+- [Evidence model](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#evidence-model)
+- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#export-deployment-and-handoff)
+- [Stable release criteria](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#stable-release-criteria)
 
 ## स्वतंत्र एप्लिकेशन
 

@@ -4,9 +4,33 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/evide
 
 हस्ताक्षरित ZIP की सामग्री, रिकॉर्ड प्रकार, प्रक्रिया रसीदें, लोगों की प्रोफाइल, ऑफ-साइट प्रतियां और ऑफ़लाइन सत्यापन।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness हस्ताक्षरित जर्नल में खाते में दिखाई देने वाले टेलीग्राम अवलोकनों को संरक्षित करता है। प्राप्तकर्ता एक विश्वसनीय कलेक्टर कुंजी के विरुद्ध सहेजे गए रिकॉर्ड, संलग्नक और रिपोर्टों का सत्यापन कर सकते हैं, फिर जर्नल की तुलना स्वतंत्र रूप से रखे गए चेकपॉइंट से कर सकते हैं। यह पृष्ठ प्रारूपों, जाँचों और हैंडओवर के लिए रखे जाने वाले सामग्री का वर्णन करता है।
 
 Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZIP and independently obtained key fingerprint, displays an explained result, and saves a separate verification transcript. See [verification launchers and the portable runtime](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md) for setup and trust limits.
+
+**On this page**
+
+- [What is signed](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#what-is-signed)
+- [Comparing chat exports](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#comparing-chat-exports)
+- [Investigation handoff](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#investigation-handoff)
+- [Handover extract](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#handover-extract)
+- [Readable reports](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#readable-reports)
+- [Event canonicalization](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#event-canonicalization)
+- [Actor semantics](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#actor-semantics)
+- [Coverage: continuity, gaps and unobserved IDs](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)
+- [Producer](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#producer)
+- [People profiles](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#people-profiles)
+- [Independent witness](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#independent-witness)
+- [Manifest and checkpoints](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#manifest-and-checkpoints)
+- [Verification scope](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope)
+- [Attachments](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#attachments)
+- [Durable collection and process receipts (0.2)](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#durable-collection-and-process-receipts-02)
+- [RFC 3161 preparation and response verification (0.2)](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)
+- [Optional records in evidence mode: drand and Telegram devices](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices)
 
 ## हस्ताक्षरित क्या है
 

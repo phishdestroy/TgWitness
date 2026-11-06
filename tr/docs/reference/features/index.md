@@ -4,7 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/featu
 
 TgWitness’in mevcut toplama modeli, çoklu hesap iş akışları, dışa aktarımlar ve operasyonel sınırları.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
 TgWitness, bağlı hesapların erişebildiği Telegram sohbetlerini korur, gözlemlenen değişiklikleri kaydeder ve doğrulanabilir dışa aktarımlar hazırlar. Bu kılavuzda toplama modeli, mevcut iş akışları ve bunların sınırları açıklanmaktadır.
+
+**On this page**
+
+- [Standalone application](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#standalone-application)
+- [Shared investigations](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#shared-investigations)
+- [Archive tools](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#archive-tools)
+- [Optional extras](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#optional-extras)
+- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#protocol-and-private-sources)
+- [Multiple accounts](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#multiple-accounts)
+- [Capture and attribution](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#capture-and-attribution)
+- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#capacity-and-telegram-limits)
+- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#reliability-and-recovery)
+- [Evidence model](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#evidence-model)
+- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#export-deployment-and-handoff)
+- [Stable release criteria](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/#stable-release-criteria)
 
 ## Bağımsız uygulama
 

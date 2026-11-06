@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/conne
 
 Autenticação, conjuntos automáticos de proxies, modos de IP, política de fallback, solicitações externas e armazenamento de segredos.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Este documento descreve o comportamento do TgWitness 0.8.0 e suas limitações. A autenticação, o acesso à fonte, a conectividade de rede e a integridade da captura são estados distintos. Para etapas de login, formatos de arquivo e contas múltiplas, comece por [“Contas e formatos de sessão](https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/)”. Para políticas de eventos e comportamento de reinício, consulte [“Como funciona a coleta](https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/)”.
 
 ## Configuração guiada da conexão
@@ -117,7 +121,21 @@ Um MTProxy transporta apenas tráfego do Telegram. Operações HTTP do espaço d
 
 Para serviços privados gerenciados por operadores, a configuração existente do ambiente de servidor `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` permite destinos privados e mantém a resolução do nome de host no lado do proxy. Ela não pode ser ativada a partir do painel. O modo somente público rejeita destinos `.onion` antes de consultar o resolvedor público; os serviços onion do Tor exigem essa configuração explícita de destino privado e um proxy adequado. Esse comportamento do DNS se aplica a operações HTTP externas, não ao transporte do Telegram. A Cloudflare documenta o [endpoint JSON do DNS](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Parâmetros automáticos do pool**** Em **Parâmetros → Automático MTProxy**, configure o limite de falhas, o tempo de espera, a rotação planejada, o compartilhamento de proxy e o atraso permitido para o fallback. | Controle | Padrão | | --- | --- | | Desconecta antes da substituição | 3 em 10 minutos | | Proxies tentados por tentativa de conexão | 3 | | Primeiro / máximo de descanso após falha | 10 minutos / 6 horas | | Rotação planejada | Desativada; ativar em caso de falha | | Contas por proxy | 0: prefira entradas separadas, compartilhe quando necessário. Defina como 1 para aguardar uma entrada exclusiva. | | Atraso antes do fallback direto permitido | 10 minutos; o endereço ainda recusa o Direct | | Atualização do feed / verificações de transporte | 60 / 10 minutos; os valores da área de trabalho principal se aplicam ao pool compartilhado | Proxies diferentes não garantem endereços de saída diferentes. Essas configurações não substituem os limites do Telegram nem garantem o anonimato.
+****Parâmetros automáticos do pool****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Controle | Padrão |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 Para substituir a lista pública pelo seu próprio catálogo de operadoras, configure a substituição abaixo. Isso desativa totalmente as assinaturas externas, inclusive quando a matriz `proxies` estiver vazia.
 

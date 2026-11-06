@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/setti
 
 Trình hướng dẫn thiết lập, mục tiêu, cấp độ giao diện, đường dẫn kết nối và các cài đặt được chia sẻ bởi một nhóm tài khoản.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Tài khoản](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/) · [Kết nối](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/) · [Truy cập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/)
 
 Một không gian làm việc mới sẽ mở ra `/first-run`: ngôn ngữ và múi giờ, mức độ giao diện, mục tiêu, kết nối, Telegram và các cuộc trò chuyện. Mỗi câu trả lời được lưu trên máy chủ ngay khi có thay đổi, do đó việc tải lại trang sẽ tiếp tục từ bước đó. Màn hình cuối cùng liệt kê các câu trả lời và cho phép bạn quay lại bất kỳ câu trả lời nào trong số đó.

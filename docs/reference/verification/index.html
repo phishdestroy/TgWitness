@@ -32,9 +32,154 @@
 <nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">What has been tested</span></nav>
 <p class="verification-shortcut"><a href="./">What has been tested →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Reference / Security &amp; project</p><h1>What has been tested</h1><p class="guide-outcome">The live Telegram test, automated checks, browser checks and what remains unverified.</p><div class="wiki-body"><p>Each result below applies to its recorded revision and environment. The
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">current capability matrix</a> separates implementation, published downloads
-and remaining qualification.</p>
+<article class="guide-content"><p class="eyebrow">Reference / Security &amp; project</p><h1>What has been tested</h1><p class="guide-outcome">The live Telegram test, automated checks, browser checks and what remains unverified.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentation</a> · <a href="../evidence/">Evidence and verification</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../assets/chapter-evidence.svg" /></p>
+<p><strong>Updated 6 November 2026.</strong> Results are tied to the revision, environment and
+workload recorded for each run. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">Current capabilities</a> describes the
+available workflows; this page records what has actually been checked.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/">Performance graphs</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">Signed English audit</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv">Downloadable measurements</a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Latest evidence</th>
+<th>Result</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Release audit · 6 Nov</td>
+<td>1,461 core tests passed; 37 platform skips</td>
+<td>Source <code>92e539af40d8</code>; open findings retained</td>
+</tr>
+<tr>
+<td>Fresh exports · 6 Nov</td>
+<td>127.713 and 141.781 records/s, complete cycle</td>
+<td>Two accounts per server; text and metadata through WARP</td>
+</tr>
+<tr>
+<td>Retained archives · 6 Nov</td>
+<td>48 archives; 3,598,381 records verified</td>
+<td>Existing archives checked against pinned workspace keys</td>
+</tr>
+<tr>
+<td>Trusted Live · 5 Nov</td>
+<td>Guarded CPU recording and WARP checks</td>
+<td>Official Desktop login and native export remain unqualified</td>
+</tr>
+<tr>
+<td>Phala / Intel TDX · 4 Nov</td>
+<td>All 16 verifier checks passed on later runs</td>
+<td>Historical deployment; no Telegram account on the CVM</td>
+</tr>
+</tbody>
+</table></div>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a></li>
+<li><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a></li>
+<li><a href="#live-phala-cloud-deployment--4-november-2026">Live Phala Cloud deployment · 4 November 2026</a></li>
+<li><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a></li>
+<li><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a></li>
+<li><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a></li>
+<li><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a></li>
+<li><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a></li>
+<li><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a></li>
+<li><a href="#full-text-search-on-one-million-messages--5-november-2026">Full-text search on one million messages · 5 November 2026</a></li>
+<li><a href="#remaining-qualification">Remaining qualification</a></li>
+</ul>
+</details>
+<h2 id="release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026<a class="anchor" href="#release-audit-and-fresh-exports--6-november-2026" aria-label="Link to this section">#</a></h2>
+<p>The audit used v0.9.1 at source
+<code>92e539af40d8368d198ff5e040f1d876f2c1310e</code>, release
+<code>92e539af40d8-83e41104669e</code>. Installed-package smoke checks passed on three
+servers. The signed report retains the state observed at that time.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/"><img alt="Acquisition and complete export rates for two fresh workloads" src="../../../assets/performance.svg" /></a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Workload</th>
+<th style="text-align: right;">Records</th>
+<th style="text-align: right;">Acquisition</th>
+<th style="text-align: right;">Complete cycle</th>
+<th style="text-align: right;">Complete-cycle rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server A · two accounts</td>
+<td style="text-align: right;">27,030</td>
+<td style="text-align: right;">189.043 s</td>
+<td style="text-align: right;">211.647 s</td>
+<td style="text-align: right;">127.713 records/s</td>
+</tr>
+<tr>
+<td>Server B · two accounts</td>
+<td style="text-align: right;">29,299</td>
+<td style="text-align: right;">182.513 s</td>
+<td style="text-align: right;">206.650 s</td>
+<td style="text-align: right;">141.781 records/s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both exports began without resume, excluded attachments and avatars, and ended
+with zero duplicate or reused records. The complete cycle includes preparation,
+acquisition, selection, packaging and archive verification. Server A also ran a
+protected-chat read check. Four FloodWait events on A and three on B were
+respected. These observations do not establish a general throughput guarantee.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+<th>Qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core pytest</td>
+<td>1,461 passed</td>
+<td>37 platform skips</td>
+</tr>
+<tr>
+<td>Browser / browser UX / evidence / site</td>
+<td>102 / 66 / 15 / 9 passed</td>
+<td>These programs overlap other tests; counts are not additive</td>
+</tr>
+<tr>
+<td>Capture addon</td>
+<td>124 passed</td>
+<td>Three Official Web checks blocked by the required Chromium sandbox</td>
+</tr>
+<tr>
+<td>API authorization</td>
+<td>269 routes; 538 requests passed</td>
+<td>Missing credentials and revoked access</td>
+</tr>
+<tr>
+<td>Retained archives</td>
+<td>48 of 48 verified</td>
+<td>3,598,381 records; pinned workspace keys</td>
+</tr>
+<tr>
+<td>Live fleet read checks</td>
+<td>24 of 40 profiles passed</td>
+<td>16 WARP routes failed qualification; those profiles were not connected</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">signed report</a> records all open
+findings, including three defects in an unpublished secret-chat snapshot absent
+from the audited main build. The earlier
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md">public-history qualification</a> used a different
+revision and workload; its rates must not be combined with this comparison.</p>
+<p>Verify the original report using the
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files">pinned key and verifier</a>.
+Its signature protects the operator's report from alteration. It is not
+independent attestation, proof of Telegram authorship or GDPR certification.</p>
 <h2 id="trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026<a class="anchor" href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026" aria-label="Link to this section">#</a></h2>
 <p>The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB)
 under QEMU inside a RunPod CPU host. The collector used <code>14e642a5</code>; verification used
@@ -63,10 +208,52 @@ login, native chat export, real hybrid comparison and Telegram-side logout remai
 pending. No supplied Telethon session was imported. Attachments, automatic OCR,
 local drand BLS verification and Trusted Live TDX attestation were not qualified.</p>
 <h2 id="live-phala-cloud-deployment--4-november-2026">Live Phala Cloud deployment · 4 November 2026<a class="anchor" href="#live-phala-cloud-deployment--4-november-2026" aria-label="Link to this section">#</a></h2>
-<p><code>--provider phala --quick-tunnel</code> ran against real <strong>Phala Cloud</strong> (<code>tdx.small</code>, region
-US-WEST-1) with a Phala Cloud API key of an empty workspace, real ntfy.sh, GitHub and Intel PCS.
-The CVM installed commit <code>df7d860c</code> (v0.8.1); deploy, verify and destroy ran from the command
-line with the fixes below. Seven CVMs cost about 1.9 US cents together.</p>
+<p><strong>Historical result:</strong> later deployments passed all 16 verifier checks,
+including Intel TDX and the quick tunnel. Restart evidence, signed address
+discovery and report timestamps were checked separately. Each test CVM was
+removed after its run.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setup</th>
+<th>Recorded value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Provider</td>
+<td>Phala Cloud · <code>tdx.small</code> · US-WEST-1</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td><code>--provider phala --quick-tunnel</code>; initially empty workspace</td>
+</tr>
+<tr>
+<td>Initial collector</td>
+<td><code>df7d860c</code> · v0.8.1</td>
+</tr>
+<tr>
+<td>Collector with all fixes</td>
+<td><code>53a0f7e9</code></td>
+</tr>
+<tr>
+<td>Production guest</td>
+<td><code>dstack-0.5.12</code>; SSH access disabled</td>
+</tr>
+<tr>
+<td>External services</td>
+<td>ntfy.sh, GitHub and Intel PCS</td>
+</tr>
+<tr>
+<td>Observed cost</td>
+<td>Seven CVMs, about 1.9 US cents together; historical test pricing</td>
+</tr>
+</tbody>
+</table></div>
+<p>The sequence below separates initial failures, fixes and completed checks.
+No Telegram account was connected to these CVMs.</p>
+<details>
+<summary>Deployments 1–2 · provider differences and regression checks</summary>
 <p>The first two deployments found five differences from the simulated Phala Cloud.
 <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py"><code>tools/check_phala.py</code></a> now reproduces each, and fails without its fix:</p>
 <div class="table-wrap" tabindex="0"><table>
@@ -105,7 +292,9 @@ line with the fixes below. Seven CVMs cost about 1.9 US cents together.</p>
 </tr>
 </tbody>
 </table></div>
-<p>The third deployment:</p>
+</details>
+<details>
+<summary>Deployment 3 · attestation, access checks and restart evidence</summary>
 <ul>
 <li>The CVM ran <code>dstack-0.5.12</code> with SSH access off. The collector posted its signed address about
     1.5 minutes after creation. Deploy then passed <code>tdx_binding</code>, <code>tdx_quote</code> (Intel TCB
@@ -126,7 +315,9 @@ line with the fixes below. Seven CVMs cost about 1.9 US cents together.</p>
 <li>The panel wizard's price check read <code>tdx.small</code> at $0.058 an hour. A wrong key got a plain
     "did not accept the API key" message.</li>
 </ul>
-<p>Two further findings, fixed afterwards:</p>
+</details>
+<details>
+<summary>Follow-up fixes · signed address discovery and OS measurements</summary>
 <ul>
 <li>Without the address key, <code>verify</code> followed the newest well-formed post on the address topic,
     which is printed in the published compose. One forged post sent it to a host that does not
@@ -141,7 +332,9 @@ line with the fixes below. Seven CVMs cost about 1.9 US cents together.</p>
     the <code>measure --json</code> the documentation named. The verifier now computes MRTD and RTMR0-2 itself
     from the published image and the VM's shape, ACPI tables included.</li>
 </ul>
-<p>The fourth deployment, with these:</p>
+</details>
+<details>
+<summary>Deployment 4 · all 16 checks, report seals and restart verification</summary>
 <ul>
 <li>Deploy downloaded the published <code>dstack-0.5.12</code> once, matched it to the OS image hash the CVM
     reported, and <code>tdx_os</code> passed: MRTD, RTMR0, RTMR1 and RTMR2 equal the values computed for QEMU
@@ -157,7 +350,10 @@ line with the fixes below. Seven CVMs cost about 1.9 US cents together.</p>
     booted from the published <code>dstack-0.5.12</code>; the restart and the new boot were REVIEW.</li>
 <li><code>destroy</code> left the workspace empty.</li>
 </ul>
-<p>The fifth deployment ran the collector from commit <code>53a0f7e9</code>, which has all of the above:</p>
+</details>
+<details>
+<summary>Deployment 5 · collector-signed discovery and forged-post rejection</summary>
+<p>The collector ran from commit <code>53a0f7e9</code>, which includes the fixes above.</p>
 <ul>
 <li>The collector posted its address signed with its own key, next to the operator's HMAC post.
     Two forged posts were then added to the topic, one with a zeroed HMAC and one signed by another
@@ -169,6 +365,8 @@ line with the fixes below. Seven CVMs cost about 1.9 US cents together.</p>
     the forged posts. <code>verify --evidence</code> confirmed two starts booted from <code>dstack-0.5.12</code>.</li>
 <li>Deploy printed what Phala bills the CVM, disk included: $0.06078 an hour.</li>
 </ul>
+</details>
+<h3 id="panel-wizard-and-remaining-scope">Panel wizard and remaining scope<a class="anchor" href="#panel-wizard-and-remaining-scope" aria-label="Link to this section">#</a></h3>
 <p>The panel wizard ran against Phala Cloud twice, once through its job API and once through the
 browser with a real Chromium: the price check, creation with the commit under <strong>Advanced</strong>, all six
 attestation checks passed, the server list showing the billed price (44.37 USD a month), <strong>Find
@@ -176,7 +374,8 @@ the current address</strong>, the measured compose download, and deletion. The b
 Each time the workspace was empty afterwards.</p>
 <p>Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the <code>dstack-0.6.1</code>
 image. The wizard's price before creation is Phala's compute price only, as its API names the disk
-price only for an existing CVM; the server list shows the billed price after creation.</p>
+price only for an existing CVM; the server list shows the billed price after creation.
+All prices in this section were observed on 4 November 2026.</p>
 <h2 id="live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026<a class="anchor" href="#live-server-journal-inventory--1-november-2026" aria-label="Link to this section">#</a></h2>
 <p>At approximately 19:15 UTC, sequential read-only SQLite <code>query_only</code> queries counted
 events in ten workspace databases on a running server. Collection continued during
@@ -492,11 +691,13 @@ and catch-up are implemented; atomic lossless live replay remains unestablished.
 The newer backfill commits messages and cursors atomically and preserves available
 Recent Actions, but its synthetic coverage is distinct from live qualification.
 See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">live acceptance</a> for the controlled qualification matrix.</p>
-<p>Local detailed receipts and screenshots are under test-results/ (Git-ignored).
-The public screenshot in docs/assets/ contains only fictional demonstration data.</p></div></article>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md">public audit directory</a> contains only
+the signed report and aggregate measurements. Detailed operational receipts,
+raw captures and account material remain private. Application screenshots in
+<code>docs/assets/</code> use fictional demonstration data.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../license/"><span>Next step</span><strong>Licence and architectural incompatibility notice →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="./">What has been tested →</a></p></footer>
 </main>
-<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">Live Phala Cloud deployment · 4 November 2026</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a><a href="#full-text-search-on-one-million-messages--5-november-2026">Full-text search on one million messages · 5 November 2026</a><a href="#remaining-qualification">Remaining qualification</a></aside>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">Live Phala Cloud deployment · 4 November 2026</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a><a href="#full-text-search-on-one-million-messages--5-november-2026">Full-text search on one million messages · 5 November 2026</a><a href="#remaining-qualification">Remaining qualification</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
 <script id="site-dict" type="application/json">{}</script>

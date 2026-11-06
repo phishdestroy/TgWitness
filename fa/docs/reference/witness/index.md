@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/witne
 
 یک ویژنس را با کلید و بات اختصاصی خود اجرا کنید، نقاط کنترل امضا شده را در یک کانال منتشر کنید و خروجی‌ها را با آن مطابقت دهید.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [صادرات و تأیید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) · [اطمینان بالا](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/) · [راهنمای پنل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ A witness retains signed checkpoints separately from the collector. It checks th
 4. فایل فشرده شواهد → verify.py
 5. دفترچه شواهد، کلید شخصی → verify.py
 6. کانال تلگرام → verify.py (صادرات تلگرام دسکتاپ یا صفحهٔ t.me/s)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#verify)
 
 ## آنچه ویجت دریافت می‌کند و آنچه دریافت نمی‌کند
 

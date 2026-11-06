@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentacja</a> <span aria-hidden="true">/</span> <a href="../">Odniesienie</a> <span aria-hidden="true">/</span> <span aria-current="page">Bezpieczeństwo i przetwarzanie danych</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Co zostało przetestowane →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Niektóre fragmenty tej strony są nadal w języku angielskim: angielski tekst źródłowy uległ zmianie po przetłumaczeniu.</p><p class="eyebrow">Odniesienie / Bezpieczeństwo i projekt</p><h1>Bezpieczeństwo i przetwarzanie danych</h1><p class="guide-outcome">Model zagrożeń, model dostępu, dane poufne w stanie spoczynku, narażenie sieciowe, import sesji oraz sposób zgłaszania luk w zabezpieczeniach.</p><div class="wiki-body"><p>This page describes access, storage and network protection in a local or server workspace.
+<article class="guide-content"><p class="language-notice">Niektóre fragmenty tej strony są nadal w języku angielskim: angielski tekst źródłowy uległ zmianie po przetłumaczeniu.</p><p class="eyebrow">Odniesienie / Bezpieczeństwo i projekt</p><h1>Bezpieczeństwo i przetwarzanie danych</h1><p class="guide-outcome">Model zagrożeń, model dostępu, dane poufne w stanie spoczynku, narażenie sieciowe, import sesji oraz sposób zgłaszania luk w zabezpieczeniach.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentacja</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>This page describes access, storage and network protection in a local or server workspace.
 For collection on a GitHub runner or in an Intel TDX confidential VM, see the
 <a href="../evidence/#verification-scope">verification modes</a>, which add checks of the collection environment.
 Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.</p>
@@ -67,6 +69,19 @@ Account connections, notifications, timestamps, off-site copies and witnesses ha
 </tbody>
 </table></div>
 <p>W sprawie zgłoszeń luk w zabezpieczeniach prosimy zapoznać się z <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">polityką bezpieczeństwa</a>.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#access-model">Access model</a></li>
+<li><a href="#panel-content-and-exports">Panel content and exports</a></li>
+<li><a href="#secrets-at-rest">Secrets at rest</a></li>
+<li><a href="#proxies-and-network-routes">Proxies and network routes</a></li>
+<li><a href="#sign-in-and-session-imports">Sign-in and session imports</a></li>
+<li><a href="#logs-and-transport">Logs and transport</a></li>
+<li><a href="#integrity-limits">Integrity limits</a></li>
+<li><a href="#if-you-suspect-a-problem">If you suspect a problem</a></li>
+</ul>
+</details>
 <h2 id="access-model">Model dostępu<a class="anchor" href="#access-model" aria-label="Link do tej sekcji">#</a></h2>
 <p>Token panelu głównego zapewnia pełną kontrolę. Inne osoby mogą otrzymać
 <a href="../access/">dostęp

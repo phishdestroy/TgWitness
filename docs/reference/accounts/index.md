@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/accounts
 
 Sign in by phone, QR code or auth key, import Telethon, Pyrogram or Telegram Desktop sessions, and run several accounts.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness signs in as a **Telegram user account** (not a bot) over MTProto, using Telethon. Each account lives in its own **workspace** (called a *workspace* in the API and command-line tools) with its own session, sources, journal and signing key.
 
 Session files, session strings and Auth Keys are **account authorizations**: whoever holds one can act as that account. They do not contain message history.

@@ -4,11 +4,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-
 
 Case Board tarafından kullanılan yer imleri, tam vurgu işaretleri, eylem dilimleri, tartışmalar, kapsamlı erişim ve imzalı açıklama geçmişi.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Case Board, soruşturma ekibine kaydedilen materyallerin paylaşımlı bir çalışma görünümünü sunar. Bir gözlemi yer imlerine ekleyin, belirli bir bölümü vurgulayın, bir dizi eylemi kaydedin ve bunları meslektaşlarınızla tartışın. Kartlar, kaynak referanslarını ve imzalı revizyon geçmişini korur. Ekip açıklamaları, çalışma alanında kalır ve orijinal Telegram gözlemlerinden ayrı olarak tanımlanabilir.
 
 [Kanıt modeli](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/) · [Erişim](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/) · [Raporlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/)
 
 ![Sentetik soruşturma akışı](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
+
+**On this page**
+
+- [Work with a case](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/#work-with-a-case)
+- [Permissions](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/#permissions)
+- [Stored contracts](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/#stored-contracts)
+- [API and exports](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/#api-and-exports)
+- [Operating limits](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/#operating-limits)
 
 ## Bir vaka üzerinde çalışın
 

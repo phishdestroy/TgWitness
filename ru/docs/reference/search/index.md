@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/searc
 
 Поиск сохраненных сообщений по формам слов, точным фразам, доменам и @именам пользователей, с отображением наиболее подходящих результатов в первую очередь, при этом индекс привязан к подписанному журналу.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Анализ архива](https://phishdestroy.github.io/TgWitness/ru/docs/reference/analysis/) · [Локальное распознавание текста (OCR) и транскрипция](https://phishdestroy.github.io/TgWitness/ru/docs/reference/media-analysis/) · [Вики](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Предварительный просмотр.** В разделе **«Журнал**» выберите **«Лучшее совпадение · формы слова»** рядом с полем поиска. Результаты ранжируются по алгоритму BM25 и включают другие формы того же слова: *«перевод»* находит *«переводом»* и *«переводы»*, *«transfer»* находит *«transfers»*, китайская фраза находит без пробелов. **«Сначала новые · точный текст»** сохраняет предыдущий поиск подстроки по всей записи.
 
 Индекс представляет собой производные данные. Он воссоздаётся на основе подписанного журнала, сам по себе никогда не подписывается и никогда не попадает в экспорт. Исходные записи не изменяются.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#benchmark)
 
 ## Синтаксис поиска
 

@@ -32,9 +32,154 @@
 <nav class="breadcrumbs" aria-label="গাইডসমূহ"><a href="../../../">হোম</a> <span aria-hidden="true">/</span> <a href="../../">ডকুমেন্টেশন</a> <span aria-hidden="true">/</span> <a href="../">তথ্যসূত্র</a> <span aria-hidden="true">/</span> <span aria-current="page">কি পরীক্ষা করা হয়েছে</span></nav>
 <p class="verification-shortcut"><a href="./">কি পরীক্ষা করা হয়েছে →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ডকুমেন্টেশন অনুসন্ধান করুন</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="প্রক্সি, হ্যাশ চেইন, টোকেন বা উইটনেস চেষ্টা করুন…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="স্পষ্ট অনুসন্ধান" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">গাইড এবং রেফারেন্স অনুসন্ধান করতে একটি শব্দ টাইপ করুন। অনুসন্ধান আপনার ব্রাউজারেই থাকবে।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">এই পৃষ্ঠার কিছু অংশ এখনও ইংরেজিতে রয়েছে: অনুবাদ করার পর মূল ইংরেজি সংস্করণটি পরিবর্তিত হয়েছে।</p><p class="eyebrow">তথ্যসূত্র / নিরাপত্তা ও প্রকল্প</p><h1>কি পরীক্ষা করা হয়েছে</h1><p class="guide-outcome">লাইভ টেলিগ্রাম পরীক্ষা, স্বয়ংক্রিয় যাচাইকরণ, ব্রাউজার যাচাইকরণ এবং যা যাচাই করা যায়নি।</p><div class="wiki-body"><p>Each result below applies to its recorded revision and environment. The
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">current capability matrix</a> separates implementation, published downloads
-and remaining qualification.</p>
+<article class="guide-content"><p class="language-notice">এই পৃষ্ঠার কিছু অংশ এখনও ইংরেজিতে রয়েছে: অনুবাদ করার পর মূল ইংরেজি সংস্করণটি পরিবর্তিত হয়েছে।</p><p class="eyebrow">তথ্যসূত্র / নিরাপত্তা ও প্রকল্প</p><h1>কি পরীক্ষা করা হয়েছে</h1><p class="guide-outcome">লাইভ টেলিগ্রাম পরীক্ষা, স্বয়ংক্রিয় যাচাইকরণ, ব্রাউজার যাচাইকরণ এবং যা যাচাই করা যায়নি।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">টিজিউইটনেস</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">ডকুমেন্টেশন</a> · <a href="../evidence/">Evidence and verification</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../../assets/chapter-evidence.svg" /></p>
+<p><strong>Updated 6 November 2026.</strong> Results are tied to the revision, environment and
+workload recorded for each run. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">Current capabilities</a> describes the
+available workflows; this page records what has actually been checked.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/">Performance graphs</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">Signed English audit</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv">Downloadable measurements</a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Latest evidence</th>
+<th>ফলাফল</th>
+<th>পরিধি</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Release audit · 6 Nov</td>
+<td>1,461 core tests passed; 37 platform skips</td>
+<td>Source <code>92e539af40d8</code>; open findings retained</td>
+</tr>
+<tr>
+<td>Fresh exports · 6 Nov</td>
+<td>127.713 and 141.781 records/s, complete cycle</td>
+<td>Two accounts per server; text and metadata through WARP</td>
+</tr>
+<tr>
+<td>Retained archives · 6 Nov</td>
+<td>48 archives; 3,598,381 records verified</td>
+<td>Existing archives checked against pinned workspace keys</td>
+</tr>
+<tr>
+<td>Trusted Live · 5 Nov</td>
+<td>Guarded CPU recording and WARP checks</td>
+<td>Official Desktop login and native export remain unqualified</td>
+</tr>
+<tr>
+<td>Phala / Intel TDX · 4 Nov</td>
+<td>All 16 verifier checks passed on later runs</td>
+<td>Historical deployment; no Telegram account on the CVM</td>
+</tr>
+</tbody>
+</table></div>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a></li>
+<li><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a></li>
+<li><a href="#live-phala-cloud-deployment--4-november-2026">Live Phala Cloud deployment · 4 November 2026</a></li>
+<li><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a></li>
+<li><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a></li>
+<li><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a></li>
+<li><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a></li>
+<li><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a></li>
+<li><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a></li>
+<li><a href="#full-text-search-on-one-million-messages--5-november-2026">Full-text search on one million messages · 5 November 2026</a></li>
+<li><a href="#remaining-qualification">Remaining qualification</a></li>
+</ul>
+</details>
+<h2 id="release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026<a class="anchor" href="#release-audit-and-fresh-exports--6-november-2026" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p>The audit used v0.9.1 at source
+<code>92e539af40d8368d198ff5e040f1d876f2c1310e</code>, release
+<code>92e539af40d8-83e41104669e</code>. Installed-package smoke checks passed on three
+servers. The signed report retains the state observed at that time.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/"><img alt="Acquisition and complete export rates for two fresh workloads" src="../../../../assets/performance.svg" /></a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Workload</th>
+<th style="text-align: right;">রেকর্ডসমূহ</th>
+<th style="text-align: right;">Acquisition</th>
+<th style="text-align: right;">Complete cycle</th>
+<th style="text-align: right;">Complete-cycle rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server A · two accounts</td>
+<td style="text-align: right;">27,030</td>
+<td style="text-align: right;">189.043 s</td>
+<td style="text-align: right;">211.647 s</td>
+<td style="text-align: right;">127.713 records/s</td>
+</tr>
+<tr>
+<td>Server B · two accounts</td>
+<td style="text-align: right;">29,299</td>
+<td style="text-align: right;">182.513 s</td>
+<td style="text-align: right;">206.650 s</td>
+<td style="text-align: right;">141.781 records/s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both exports began without resume, excluded attachments and avatars, and ended
+with zero duplicate or reused records. The complete cycle includes preparation,
+acquisition, selection, packaging and archive verification. Server A also ran a
+protected-chat read check. Four FloodWait events on A and three on B were
+respected. These observations do not establish a general throughput guarantee.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>যাচাই করুন</th>
+<th>ফলাফল</th>
+<th>Qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core pytest</td>
+<td>1,461 passed</td>
+<td>37 platform skips</td>
+</tr>
+<tr>
+<td>Browser / browser UX / evidence / site</td>
+<td>102 / 66 / 15 / 9 passed</td>
+<td>These programs overlap other tests; counts are not additive</td>
+</tr>
+<tr>
+<td>Capture addon</td>
+<td>124 passed</td>
+<td>Three Official Web checks blocked by the required Chromium sandbox</td>
+</tr>
+<tr>
+<td>API authorization</td>
+<td>269 routes; 538 requests passed</td>
+<td>Missing credentials and revoked access</td>
+</tr>
+<tr>
+<td>Retained archives</td>
+<td>48 of 48 verified</td>
+<td>3,598,381 records; pinned workspace keys</td>
+</tr>
+<tr>
+<td>Live fleet read checks</td>
+<td>24 of 40 profiles passed</td>
+<td>16 WARP routes failed qualification; those profiles were not connected</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">signed report</a> records all open
+findings, including three defects in an unpublished secret-chat snapshot absent
+from the audited main build. The earlier
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md">public-history qualification</a> used a different
+revision and workload; its rates must not be combined with this comparison.</p>
+<p>Verify the original report using the
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files">pinned key and verifier</a>.
+Its signature protects the operator's report from alteration. It is not
+independent attestation, proof of Telegram authorship or GDPR certification.</p>
 <h2 id="trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026<a class="anchor" href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
 <p>The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB)
 under QEMU inside a RunPod CPU host. The collector used <code>14e642a5</code>; verification used
@@ -63,8 +208,52 @@ login, native chat export, real hybrid comparison and Telegram-side logout remai
 pending. No supplied Telethon session was imported. Attachments, automatic OCR,
 local drand BLS verification and Trusted Live TDX attestation were not qualified.</p>
 <h2 id="live-phala-cloud-deployment--4-november-2026">লাইভ ফালা ক্লাউড ডিপ্লয়মেন্ট · ৪ নভেম্বর ২০২৬<a class="anchor" href="#live-phala-cloud-deployment--4-november-2026" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
-<p><code>--provider phala --quick-tunnel</code> চালানো হয়েছে বাস্তব <strong>Phala Cloud</strong> (<code>tdx.small</code>, region US-WEST-1) এর বিরুদ্ধে, একটি ফাঁকা ওয়ার্কস্পেসের Phala Cloud API কী, বাস্তব ntfy.sh, GitHub এবং Intel PCS সহ।
-CVM ইনস্টল করা commit <code>df7d860c</code> (v0.8.1); deploy, verify এবং destroy কমান্ড লাইন থেকে নিচের ফিক্সগুলো সহ চালানো হয়েছিল। সাতটি CVM মিলিয়ে মোট প্রায় ১.৯ মার্কিন সেন্ট খরচ হয়েছে।</p>
+<p><strong>Historical result:</strong> later deployments passed all 16 verifier checks,
+including Intel TDX and the quick tunnel. Restart evidence, signed address
+discovery and report timestamps were checked separately. Each test CVM was
+removed after its run.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>সেটআপ</th>
+<th>Recorded value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>প্রদানকারী</td>
+<td>Phala Cloud · <code>tdx.small</code> · US-WEST-1</td>
+</tr>
+<tr>
+<td>নিয়োগ</td>
+<td><code>--provider phala --quick-tunnel</code>; initially empty workspace</td>
+</tr>
+<tr>
+<td>Initial collector</td>
+<td><code>df7d860c</code> · v0.8.1</td>
+</tr>
+<tr>
+<td>Collector with all fixes</td>
+<td><code>53a0f7e9</code></td>
+</tr>
+<tr>
+<td>Production guest</td>
+<td><code>dstack-0.5.12</code>; SSH access disabled</td>
+</tr>
+<tr>
+<td>External services</td>
+<td>ntfy.sh, GitHub and Intel PCS</td>
+</tr>
+<tr>
+<td>Observed cost</td>
+<td>Seven CVMs, about 1.9 US cents together; historical test pricing</td>
+</tr>
+</tbody>
+</table></div>
+<p>The sequence below separates initial failures, fixes and completed checks.
+No Telegram account was connected to these CVMs.</p>
+<details>
+<summary>Deployments 1–2 · provider differences and regression checks</summary>
 <p>প্রথম দুইটি ডিপ্লয়মেন্ট সিমুলেটেড Phala Cloud থেকে পাঁচটি পার্থক্য খুঁজে পেয়েছিল।
 <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py"><code>tools/check_phala.py</code></a> এখন প্রতিটি পুনরুত্পাদন করে, এবং এর ফিক্স ছাড়া ব্যর্থ হয়:</p>
 <div class="table-wrap" tabindex="0"><table>
@@ -103,7 +292,9 @@ CVM ইনস্টল করা commit <code>df7d860c</code> (v0.8.1); deploy, 
 </tr>
 </tbody>
 </table></div>
-<p>তৃতীয় স্থাপনা:</p>
+</details>
+<details>
+<summary>Deployment 3 · attestation, access checks and restart evidence</summary>
 <ul>
 <li>CVM SSH অ্যাক্সেস বন্ধ রেখে <code>dstack-0.5.12</code> চালিয়েছিল। কালেক্টর তৈরি হওয়ার প্রায় ১.৫ মিনিট পর তার স্বাক্ষরিত ঠিকানা পোস্ট করেছিল। Deploy তারপর <code>tdx_binding</code>, <code>tdx_quote</code> (Intel TCB
     UpToDate, হার্ডওয়্যার অ্যাটেস্টেশন রেকর্ড v4, FMSPC <code>20a06f000000</code>, ডিবাগ মোডে নেই, স্থানান্তরযোগ্য নয়, Intel থেকে প্রাপ্ত ক্রিপ্টোগ্রাফিক যাচাইকরণ ডেটা সমর্থন করে
@@ -116,7 +307,9 @@ CVM ইনস্টল করা commit <code>df7d860c</code> (v0.8.1); deploy, 
 <li>প্যানেল উইজার্ডের মূল্য যাচাইয়ে <code>tdx.small</code> প্রতি ঘণ্টায় $0.058 দেখিয়েছে। একটি ভুল কী-তে একটি সাধারণ
     "API কী গ্রহণ করা হয়নি" বার্তা এসেছে।</li>
 </ul>
-<p>আরও দুটি ফলাফল, পরে ঠিক করা হয়েছে:</p>
+</details>
+<details>
+<summary>Follow-up fixes · signed address discovery and OS measurements</summary>
 <ul>
 <li>ঠিকানা কী ছাড়া, <code>verify</code> ঠিকানা বিষয়ের সর্বশেষ সুগঠিত পোস্টটি অনুসরণ করেছিল,
     যা প্রকাশিত Docker Compose কনফিগারেশনে মুদ্রিত আছে। একটি জাল পোস্ট এটিকে এমন একটি হোস্টে পাঠিয়েছিল যা
@@ -125,7 +318,9 @@ CVM ইনস্টল করা commit <code>df7d860c</code> (v0.8.1); deploy, 
     <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py"><code>tools/check_cloud_wizard.py</code></a> জাল পোস্টগুলো পুনরায় চালায়। একটি CVM এটিকে শুধুমাত্র সেই কমিট থেকে চালায় যাতে এটি থাকে, তাই এই রানের কালেক্টর এখনও তার ঠিকানায় স্বাক্ষর করেনি এবং <code>verify</code> তাই বলেছে।</li>
 <li><code>tdx_os</code> <code>dstack-mr</code> ছাড়া চলতে পারেনি, যার বর্তমান সংস্করণে ডকুমেন্টেশনে উল্লেখিত <code>measure --json</code>-এর পরিবর্তে <code>measure-os</code> রয়েছে। যাচাইকারী এখন প্রকাশিত ইমেজ এবং VM-এর আকৃতি (ACPI টেবিলসহ) থেকে নিজেই MRTD এবং RTMR0-2 গণনা করে।</li>
 </ul>
-<p>চতুর্থ স্থাপনা, এইগুলির সাথে:</p>
+</details>
+<details>
+<summary>Deployment 4 · all 16 checks, report seals and restart verification</summary>
 <ul>
 <li>Deploy প্রকাশিত <code>dstack-0.5.12</code> একবার ডাউনলোড করল, CVM রিপোর্টকৃত OS ইমেজ হ্যাশের সাথে মিলিয়ে দেখল, এবং <code>tdx_os</code> পাস করল: MRTD, RTMR0, RTMR1 এবং RTMR2 QEMU-এর জন্য গণনা করা মানগুলোর সমান।
     ৮.২.২, ১ vCPU এবং ২ GiB। একই গণনা দাবি করা ৪ GiB, ২ vCPU, QEMU 9.2.1 বা দ্বিতীয় নেটওয়ার্ক কার্ডের জন্য ভিন্ন RTMR0 দিয়েছে, এবং পরিবর্তিত কার্নেল, ফার্মওয়্যার বা কমান্ড লাইন এবং ডেভেলপমেন্ট ইমেজের জন্য ব্যর্থ হয়েছে।</li>
@@ -133,15 +328,23 @@ CVM ইনস্টল করা commit <code>df7d860c</code> (v0.8.1); deploy, 
 <li>পুনঃশুরু করার পর, <code>verify --evidence</code> দুটি শুরু নিশ্চিত করেছে, প্রতিটি CVM-এর ভিতরে তৈরি হওয়া হার্ডওয়্যার অ্যাটেস্টেশনের সাথে এবং প্রতিটি প্রকাশিত <code>dstack-0.5.12</code> থেকে বুট করা হয়েছে; পুনঃশুরু এবং নতুন বুট REVIEW ছিল।</li>
 <li><code>destroy</code> ওয়ার্কস্পেস ফাঁকা রেখেছে।</li>
 </ul>
-<p>পঞ্চম ডিপ্লয়মেন্ট commit <code>53a0f7e9</code> থেকে কালেক্টরটি চালিয়েছিল, যাতে উপরের সবগুলোই রয়েছে:</p>
+</details>
+<details>
+<summary>Deployment 5 · collector-signed discovery and forged-post rejection</summary>
+<p>The collector ran from commit <code>53a0f7e9</code>, which includes the fixes above.</p>
 <ul>
 <li>কলেক্টর তার নিজস্ব কী দিয়ে স্বাক্ষরিত ঠিকানাটি অপারেটরের HMAC পোস্টের পাশে পোস্ট করল।
 তারপর টপিকে দুটি জাল পোস্ট যোগ করা হল, একটি শূন্য HMAC সহ এবং অন্যটি অন্য একটি Ed25519 কী দিয়ে স্বাক্ষরিত, উভয়ই ২০৯৬ সালের একটি সময় দাবি করছে। <code>verify</code> কালেক্টর কী দ্বারা স্বাক্ষরিত ঠিকানাটি গ্রহণ করে এবং সব ১৬টি যাচাই সফলভাবে সম্পন্ন করে; সীলটিতে আবার যোগ্য বেলজিয়ান টাইম স্ট্যাম্প, FreeTSA-এর টাইম স্ট্যাম্প এবং যাচাইকারীর স্বাক্ষর ছিল, এবং <code>check-report</code> সেগুলো নিশ্চিত করে।</li>
 <li>পুনঃশুরু করার পর কালেক্টর স্বাক্ষরিত নতুন ঠিকানা পোস্ট করল: <code>verify</code> তা সঙ্গে সঙ্গেই খুঁজে পেল, অপারেটরের <strong> বর্তমান ঠিকানা খুঁজে পেল </strong> HMAC পোস্টের ২৭ সেকেন্ড পর, এবং উভয়েই জাল পোস্টগুলো উপেক্ষা করল। <code>verify --evidence</code> নিশ্চিত করল যে দুইটি স্টার্ট <code>dstack-0.5.12</code> থেকে বুট হয়েছে।</li>
 <li>Deploy প্রিন্ট করেছে Phala CVM-কে কী বিল করে, ডিস্ক সহ: প্রতি ঘণ্টায় $0.06078।</li>
 </ul>
+</details>
+<h3 id="panel-wizard-and-remaining-scope">Panel wizard and remaining scope<a class="anchor" href="#panel-wizard-and-remaining-scope" aria-label="এই বিভাগের লিঙ্ক">#</a></h3>
 <p>প্যানেল উইজার্ড Phala Cloud-এ দুইবার চালানো হয়েছিল, একবার এর জব API-এর মাধ্যমে এবং একবার একটি প্রকৃত Chromium-সহ ব্রাউজারের মাধ্যমে: মূল্য যাচাই, <strong>Advanced</strong>-এর অধীনে commit-সহ তৈরি, সব ছয়টি attestation যাচাই পাস, সার্ভার তালিকা বিল করা মূল্য (মাসে 44.37 USD) দেখিয়েছিল, <strong> বর্তমান ঠিকানা খুঁজে বের করা </strong>, পরিমাপকৃত Docker Compose কনফিগারেশন ডাউনলোড, এবং মুছে ফেলা। ব্রাউজারে কোনো পৃষ্ঠা ত্রুটি দেখা যায়নি। প্রতিবার পরবর্তীতে ওয়ার্কস্পেস খালি ছিল।</p>
-<p>অবশ্যই অন্তর্ভুক্ত নয়: Phala-তে একটি Cloudflare ডোমেইন, CVM-এ একটি Telegram অ্যাকাউন্ট, এবং <code>dstack-0.6.1</code> ইমেজ। উইজার্ডের তৈরি করার আগে প্রদর্শিত মূল্য শুধুমাত্র Phala-এর কম্পিউট মূল্য, কারণ এর API বিদ্যমান CVM-এর জন্য শুধুমাত্র ডিস্কের মূল্য দেখায়; সার্ভার তালিকা তৈরি করার পরে বিলকৃত মূল্য দেখায়।</p>
+<p>Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the <code>dstack-0.6.1</code>
+image. The wizard's price before creation is Phala's compute price only, as its API names the disk
+price only for an existing CVM; the server list shows the billed price after creation.
+All prices in this section were observed on 4 November 2026.</p>
 <h2 id="live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026<a class="anchor" href="#live-server-journal-inventory--1-november-2026" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
 <p>At approximately 19:15 UTC, sequential read-only SQLite <code>query_only</code> queries counted
 events in ten workspace databases on a running server. Collection continued during
@@ -431,11 +634,13 @@ and catch-up are implemented; atomic lossless live replay remains unestablished.
 The newer backfill commits messages and cursors atomically and preserves available
 Recent Actions, but its synthetic coverage is distinct from live qualification.
 See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">live acceptance</a> for the controlled qualification matrix.</p>
-<p>স্থানীয় বিস্তারিত রসিদ এবং স্ক্রিনশটগুলো test-results/ (Git-ignored) ফোল্ডারে রয়েছে।
-docs/assets/ ফোল্ডারে থাকা পাবলিক স্ক্রিনশটে শুধুমাত্র কাল্পনিক প্রদর্শনী ডেটা রয়েছে।</p></div></article>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md">public audit directory</a> contains only
+the signed report and aggregate measurements. Detailed operational receipts,
+raw captures and account material remain private. Application screenshots in
+<code>docs/assets/</code> use fictional demonstration data.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">GitHub-এ এই পৃষ্ঠা সম্পাদনা করুন ↗</a><a class="next-guide" href="../license/"><span>পরবর্তী ধাপ</span><strong>লাইসেন্স এবং স্থাপত্যগত অসামঞ্জস্যতার বিজ্ঞপ্তি →</strong></a><p>এই গাইডগুলো বর্তমান বাস্তবায়ন বর্ণনা করে। যাচাইকরণ ফলাফল এবং অবশিষ্ট ফাঁকগুলো আলাদাভাবে নথিভুক্ত করা হয়েছে। <a href="./">কি পরীক্ষা করা হয়েছে →</a></p></footer>
 </main>
-<aside class="toc" aria-label="এই পৃষ্ঠায়"><p class="nav-label">এই পৃষ্ঠায়</p><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">লাইভ ফালা ক্লাউড ডিপ্লয়মেন্ট · ৪ নভেম্বর ২০২৬</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">লাইভ টেলিগ্রাম পরীক্ষা, সম্পূর্ণ অ্যাকাউন্ট · ২৯ অক্টোবর ২০২৬</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">পাসওয়ার্ড-সুরক্ষিত রপ্তানি libarchive দিয়ে খোলা হয়েছে · ২৯ অক্টোবর ২০২৬</a><a href="#live-telegram-test--27-to-29-october-2026">লাইভ টেলিগ্রাম পরীক্ষা · ২৭ থেকে ২৯ অক্টোবর ২০২৬</a><a href="#synthetic-local-capacity-measurement">কৃত্রিম স্থানীয় সক্ষমতা পরিমাপ</a><a href="#full-text-search-on-one-million-messages--5-november-2026">এক মিলিয়ন বার্তায় পূর্ণ-পাঠ অনুসন্ধান · ৫ নভেম্বর ২০২৬</a><a href="#remaining-qualification">বাকী যোগ্যতা</a></aside>
+<aside class="toc" aria-label="এই পৃষ্ঠায়"><p class="nav-label">এই পৃষ্ঠায়</p><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">লাইভ ফালা ক্লাউড ডিপ্লয়মেন্ট · ৪ নভেম্বর ২০২৬</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">লাইভ টেলিগ্রাম পরীক্ষা, সম্পূর্ণ অ্যাকাউন্ট · ২৯ অক্টোবর ২০২৬</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">পাসওয়ার্ড-সুরক্ষিত রপ্তানি libarchive দিয়ে খোলা হয়েছে · ২৯ অক্টোবর ২০২৬</a><a href="#live-telegram-test--27-to-29-october-2026">লাইভ টেলিগ্রাম পরীক্ষা · ২৭ থেকে ২৯ অক্টোবর ২০২৬</a><a href="#synthetic-local-capacity-measurement">কৃত্রিম স্থানীয় সক্ষমতা পরিমাপ</a><a href="#full-text-search-on-one-million-messages--5-november-2026">এক মিলিয়ন বার্তায় পূর্ণ-পাঠ অনুসন্ধান · ৫ নভেম্বর ২০২৬</a><a href="#remaining-qualification">বাকী যোগ্যতা</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>ওপেন সোর্স · আপনার মেশিনে চলে</span><a href="../../../../LICENSE">MIT লাইসেন্স</a><a href="../notice/">অপারেটর বিজ্ঞপ্তি</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">নিরাপত্তা</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "বার্তার অপেক্ষায়", "Step through a fictional send, edit and delete.": "একটি কাল্পনিক পাঠানো, সম্পাদনা এবং মুছে ফেলার ধাপ অনুসরণ করুন।", "No observations yet. Start the sequence or advance one event.": "এখন পর্যন্ত কোনো পর্যবেক্ষণ নেই। সিকোয়েন্স শুরু করুন অথবা একটি ইভেন্ট এগিয়ে নিন।", "Meet at 10:00": "১০:০০ টায় মিলিত হন", "A new message is visible in the chat.": "চ্যাটে একটি নতুন বার্তা দৃশ্যমান।", "Record 1 appended: the collector observed the original message.": "রেকর্ড ১ সংযুক্ত: সংগ্রাহক মূল বার্তাটি পর্যবেক্ষণ করেছেন।", "Meet at 11:00": "১১:০০ টায় মিলিত হোন", "The current text changes. The earlier observation stays.": "বর্তমান পাঠ্য পরিবর্তিত হয়। পূর্ববর্তী পর্যবেক্ষণ অপরিবর্তিত থাকে।", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "রেকর্ড ২ সংযুক্ত: সম্পাদনাটি একটি নতুন পর্যবেক্ষণ। রেকর্ড ১ এখনও মূল পাঠ্য সংরক্ষণ করে।", "Message deleted": "বার্তা মুছে ফেলা হয়েছে", "The message has disappeared from the chat view.": "বার্তাটি চ্যাট ভিউ থেকে অদৃশ্য হয়ে গেছে।", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "রেকর্ড ৩ সংযুক্ত: মুছে ফেলার বিজ্ঞপ্তিটি উভয় দেখা সংস্করণের পাশাপাশি সংরক্ষিত রয়েছে।", "0 records": "0টি রেকর্ড", "1 record": "১টি রেকর্ড", "2 records": "২টি রেকর্ড", "3 records": "৩টি রেকর্ড", "Complete / {n} of 3": "৩টির মধ্যে সম্পূর্ণ / {n}", "Step / {n} of 3": "৩-এর মধ্যে ধাপ / {n}", "Pause": "বিরতি", "Replay sequence": "পুনঃপ্রচার ক্রম", "Play sequence": "ক্রম বাজান", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "স্থির উদাহরণটি উপলব্ধ। হ্যাশগুলো ইন্টার‍্যাক্টিভভাবে গণনা করতে HTTPS-এ এই পৃষ্ঠাটি খুলুন অথবা Web Crypto সমর্থনসহ লোকালহোস্ট প্রিভিউ ব্যবহার করুন।", "No record supplied": "কোনও রেকর্ড সরবরাহ করা হয়নি", "Tail removed": "টেইল অপসারণ করা হয়েছে", "≠ saved hash": "≠ সংরক্ষিত হ্যাশ", "Rebuilt · different hash": "পুনর্নির্মিত · ভিন্ন হ্যাশ", "= saved hash": "= সংরক্ষিত হ্যাশ", "Same length and matching head.": "একই দৈর্ঘ্য এবং মিলিত শিরোনাম।", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "তিনটি গণনা করা হ্যাশ সংরক্ষিত হ্যাশের সাথে মিলছে। এই নমুনাটি রাখা তিনটি রেকর্ডের সীমানার সাথে সামঞ্জস্যপূর্ণ।", "Same saved head; the journal prefix fails verification.": "একই সংরক্ষিত হেড; জার্নাল প্রিফিক্স যাচাইকরণে ব্যর্থ।", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "রেকর্ড ২ আর তার সংরক্ষিত হ্যাশের সাথে মিলছে না। শুধুমাত্র সর্বশেষ সংরক্ষিত হেড যাচাই করলে এটি ধরা পড়বে না; যাচাইকারী প্রতিটি রেকর্ড পরীক্ষা করে।", "Head differs from the retained checkpoint.": "হেড সংরক্ষিত চেকপয়েন্ট থেকে পৃথক।", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "পুনর্নির্মিত হ্যাশগুলো একে অপরের সাথে সংযুক্ত, কিন্তু চূড়ান্ত হেডটি পরিবর্তিত হয়েছে। সংরক্ষিত চেকপয়েন্ট এই ইতিহাস প্রত্যাখ্যান করে। পরিবর্তিত রেকর্ডগুলিতেও মূল স্বাক্ষরগুলো ব্যর্থ হবে।", "Too short: 2 supplied records \u003c 3 retained records.": "খুব সংক্ষিপ্ত: ২টি সরবরাহিত রেকর্ড \u003c ৩টি সংরক্ষিত রেকর্ড।", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "বাকী থাকা দুইটি হ্যাশ এখনও মিলছে। সংরক্ষিত চেকপয়েন্ট অনুপস্থিত টেইল উন্মোচন করে। সেই পূর্বের সীমানা ছাড়া শুধুমাত্র এই সংক্ষিপ্ত প্রিফিক্সটি বাদ পড়া অংশটি প্রকাশ করতে পারত না।", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "এই ব্রাউজারে হ্যাশ গণনা অনুপলব্ধ। নীচের সূত্র এবং স্থির ব্যাখ্যাগুলো এখনও উপলব্ধ।", "{n} records": "{n} রেকর্ডস", "head {hash}": "হেড {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "গ্রহণ করা হয়েছে: গণনা বৃদ্ধি পাচ্ছে, স্বাক্ষর যাচাই হচ্ছে এবং কী মিলছে। সাক্ষী এই নতুন সীমা বজায় রাখে।", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "রোলব্যাক: স্বাক্ষরিত উত্তরটি শেষ গৃহীত চেকপয়েন্টের তুলনায় কম রেকর্ড রিপোর্ট করে। সাক্ষী সমস্যাটি রেকর্ড করে এবং পূর্বের গৃহীত সীমা বজায় রাখে।", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "ফর্ক: গণনা অপরিবর্তিত আছে কিন্তু হেড ভিন্ন। সাক্ষী মতবিরোধ রেকর্ড করে এবং পূর্বে গৃহীত সীমানা বজায় রাখে।", "No answer": "কোনও উত্তর নেই", "boundary unknown": "সীমা অজানা", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "কোনো প্রতিক্রিয়া নেই: সাক্ষী ব্যর্থ চেক রেকর্ড করে। এটি সংগ্রাহকের বর্তমান অবস্থা নিশ্চিত করতে পারে না। যদি সাক্ষী এখনও Bot API-এ পৌঁছাতে পারে এবং এর প্রকাশ নীতি অনুমতি দেয়, তবে এটি সেই ব্যর্থতা প্রকাশ করতে পারে।", "Send {n}": "{n} পাঠান", "Edit {n}": "{n}সম্পাদনা", "Delete {n}": "{n} মুছুন", "Both accounts captured all six expected observations in this example.": "উভয় অ্যাকাউন্টই এই উদাহরণে প্রত্যাশিত ছয়টি পর্যবেক্ষণই ধারণ করেছে।", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "অ্যাকাউন্ট B এখনও ৬টির মধ্যে ৬টিই ধারণ করেছে। দুটি রসিদ ধারণ করতে বেশি সময় লেগেছে। ধারণ অনুপাত এবং রসিদ বিলম্ব ভিন্ন প্রশ্নগুলোর উত্তর দেয়।", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "কাটঅফের সময়সীমার মধ্যে Account B ছয়টির মধ্যে পাঁচটি (৮৩.৩%) ধারণ করেছে। অনুপস্থিত সম্পাদনার কোনো পরিমাপযোগ্য বিলম্ব নেই। এই ফলাফল শুধুমাত্র ছয়টি নিয়ন্ত্রিত কর্মকাণ্ডকে বর্ণনা করে।", "not observed by cutoff": "কাটঅফের মাধ্যমে পর্যবেক্ষণ করা হয়নি", "{s} seconds": "{s} সেকেন্ড", "Exact values follow in the table.": "নির্দিষ্ট মানসমূহ টেবিলে অনুসরণ করা হয়েছে।", "{s} s": "{s}s", "Not observed": "পর্যবেক্ষণ করা হয়নি", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "চারটি চ্যাট বিভিন্ন পর্যবেক্ষণ প্রদান করে। প্রতিটি সংযোগের জন্য উৎস রেকর্ডগুলো অনুসরণ করুন; প্রেরক নির্ধারণ না করে চ্যানেল পোস্টটি ব্যবহারকারী ৭১০०১-এ বরাদ্দ করবেন না।", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "রেকর্ড #146 এবং #205 একই প্রেরক আইডি, 71001, সরবরাহ করে। এটি দুইটি চ্যাটে একটি টেলিগ্রাম অ্যাকাউন্টের পর্যবেক্ষিত পোস্টগুলোকে সংযুক্ত করে। এটি কোনো বাস্তব ব্যক্তিকে চিহ্নিত করে না বা চ্যানেল পোস্টের সাথে কোনো ব্যক্তিকে যুক্ত করে না।", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new গন্তব্যটি গ্রুপ রেকর্ড #146, বট কীবোর্ড #173, চ্যানেল সম্পাদনা #188 এবং ব্যক্তিগত বার্তা #205-এ প্রদর্শিত হয়েছে। একই গন্তব্যের পুনরাবৃত্তি বিষয়বস্তুকে সংযুক্ত করে; এটি সেই অ্যাকাউন্টগুলির সাধারণ নিয়ন্ত্রণের প্রমাণ দেয় না।", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "এই কাল্পনিক ক্ষেত্রে সম্পন্ন মিডিয়া রসিদ #151 এবং #209-এর পূর্ণ SHA-256 মান সমান। প্রকৃত বাইট এবং সংশ্লিষ্ট বার্তা রেকর্ডগুলো তুলনা করুন। মিলিত ফাইলটি এর নির্মাতাকে শনাক্ত করে না বা কে এটি ফরওয়ার্ড করেছে তা প্রমাণ করে না।", "the encrypted off-site copy": "এনক্রিপ্টকৃত অফ-সাইট কপি", "notifications": "অ্যালার্টসমূহ", "checkpoint hashes for timestamps": "টাইমস্ট্যাম্পের জন্য চেকপয়েন্ট হ্যাশ", "signed checkpoints for the witness": "সাক্ষীর স্বাক্ষরিত চেকপয়েন্টসমূহ", "Switched on in this example": "এই উদাহরণে চালু করা হয়েছে", "Optional · off by default": "ঐচ্ছিক · ডিফল্টভাবে বন্ধ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "এই মেশিন থেকে যাওয়া: টেলিগ্রাম সংযোগ এবং {list}। আর কিছুই না।", "Default: only the Telegram connection leaves this machine.": "ডিফল্ট: শুধুমাত্র টেলিগ্রাম সংযোগই এই মেশিন থেকে বের হয়।", "{done} of {total} done": "{total}-এর মধ্যে {done} সম্পন্ন", "Mark step {n} as done": "{n} ধাপটি সম্পন্ন হিসেবে চিহ্নিত করুন", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "কপি", "Copied": "কপি করা হয়েছে", "Command copied.": "কমান্ড অনুলিপি করা হয়েছে।", "Selected — Ctrl/Cmd+C": "নির্বাচিত — Ctrl/Cmd+C", "Command selected. Copy it manually.": "কমান্ড নির্বাচিত। এটি ম্যানুয়ালি অনুলিপি করুন।", "Command copied to clipboard.": "কমান্ডটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে।", "Select text": "টেক্সট নির্বাচন করুন", "The clipboard is unavailable, so the command is selected for you to copy manually.": "ক্লিপবোর্ড অনুপলব্ধ। কমান্ড নির্বাচিত; ম্যানুয়ালি অনুলিপি করুন।", "When a message arrives, the first observation is saved.": "একটি বার্তা এসেছে। প্রথম পর্যবেক্ষণ সংরক্ষিত হয়েছে।", "When the time changes, both captured versions stay.": "সময় পরিবর্তিত হয়। উভয় ধারণকৃত সংস্করণই থাকে।", "When the message disappears, its captured history remains.": "বার্তাটি অদৃশ্য হয়ে যায়। ধারণকৃত ইতিহাস রয়ে যায়।", "Pause example animation": "অ্যানিমেশন বিরতি উদাহরণ", "Play example animation": "উদাহরণ অ্যানিমেশন প্লে করুন", "Play": "চালু করুন", "Full-size workspace screenshot": "পূর্ণ-আকারের কর্মস্থলের স্ক্রিনশট", "Workspace screenshot · fictional data": "ওয়ার্কস্পেস স্ক্রিনশট · কাল্পনিক ডেটা", "Close": "বন্ধ করুন", "Close screenshot": "স্ক্রিনশট বন্ধ করুন", "Scrollable full-size screenshot": "স্ক্রলযোগ্য পূর্ণ-আকারের স্ক্রিনশট", "Enlarge: {name}": "বড় করুন: {name}", "View full size": "পূর্ণ আকারে দেখুন", "Step {n} of {total}": "{n} -এর ধাপ {total}"}</script>

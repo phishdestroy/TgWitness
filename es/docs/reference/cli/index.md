@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/cli/
 
 Buscar, leer el contexto, contabilizar la actividad y exportar mensajes guardados desde scripts y agentes, con salida en formato --json, códigos de salida estables y tokens de solo lectura con ámbito limitado.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [MCP de solo lectura](https://phishdestroy.github.io/TgWitness/es/docs/reference/mcp/) · [Búsqueda de texto completo](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Vista previa.** `tgwitness search`, `context`, `messages`, `stats` y `export` leer las observaciones guardadas para scripts y agentes de IA. No pueden enviar nada a Telegram, cambiar la configuración ni modificar el diario firmado.

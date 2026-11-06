@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/setti
 
 セットアップウィザード、目標、インターフェースレベル、接続ルート、およびアカウントグループで共有される設定。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [アカウント](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/) · [接続](https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/) · [アクセス](https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/)
 
 新しいワークスペースが開くと `/first-run`：言語と時間、インターフェースレベル、目標、 接続、Telegramおよびチャット。各回答は変更されるやいなや サーバーに保存されるため、ページを再読み込みしても同じステップから続行できます。最後の画面には回答が一覧表示され、 その中から任意の回答に戻ることができます。

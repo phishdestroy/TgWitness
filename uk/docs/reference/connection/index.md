@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/conne
 
 Аутентифікація, автоматичні пули проксі-серверів, режими IP, політика резервного переходу, зовнішні запити та зберігання секретних даних.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Цей документ описує поведінку TgWitness 0.8.0 та її обмеження. Аутентифікація, доступ до джерел, мережеве з’єднання та повнота збору даних — це окремі стани. Щоб дізнатися про етапи входу, формати файлів та роботу з кількома обліковими записами, почніть з розділу [«Облікові записи та формати сеансів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/)». Щодо політик подій та поведінки при перезапуску див. розділ [«Як працює збір даних](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/)».
 
 ## Покрокове налаштування з’єднання
@@ -117,7 +121,21 @@ MTProxy передає лише трафік Telegram. HTTP-операції р�
 
 Для приватних сервісів, що управляються оператором, існуюче налаштування серверного середовища `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` дозволяє приватні адреси призначення та зберігає визначення імені хосту на стороні проксі. Його неможливо ввімкнути з панелі. Режим «лише публічні» відхиляє адреси призначення у форматі `.onion` перед запитом до публічного резолвера; сервіси Tor onion вимагають явного налаштування приватних адрес призначення та відповідного проксі. Ця поведінка DNS застосовується до зовнішніх HTTP-операцій, а не до транспортного протоколу Telegram. Cloudflare надає документацію щодо [кінцевої точки DNS у](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) [форматі](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) [JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Параметри автоматичного пулу**** У розділі **Параметри → Автоматичний MTProxy** налаштуйте поріг відмов, час очікування, заплановану ротацію, спільне використання проксі та допустиму затримку переходу на резервний сервер. | Параметр | За замовчуванням | | --- | --- | | Відключення перед заміною | 3 протягом 10 хвилин | | Кількість проксі, що перевіряються за одну спробу з’єднання | 3 | | Перша / максимальна пауза після збою | 10 хвилин / 6 годин | | Запланована ротація | Вимкнено; увімкнути при збої | | Акаунти на один проксі | 0: краще використовувати окремі записи, об’єднувати за потреби. Встановіть 1, щоб чекати на ексклюзивний запис. | | Затримка до дозволеного переходу на Direct | 10 хвилин; прихована адреса все ще відхиляє Direct | | Оновлення каналу / перевірки транспорту | 60 / 10 хвилин; значення основної робочої області застосовуються до спільного пулу | Різні проксі-сервери не гарантують різних вихідних адрес. Ці налаштування не перекривають обмеження Telegram і не забезпечують анонімності.
+****Параметри автоматичного пулу****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Контроль | За замовчуванням |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 Щоб замінити публічний список на власний каталог операторів, налаштуйте наведені нижче параметри заміщення. Це повністю вимикає зовнішні підписки, навіть якщо масив `proxies` порожній.
 

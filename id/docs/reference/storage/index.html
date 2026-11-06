@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Referensi</a> <span aria-hidden="true">/</span> <span aria-current="page">Penyimpanan dan pemulihan</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Referensi / Bukti</p><h1>Penyimpanan dan pemulihan</h1><p class="guide-outcome">Pencadangan, pemindahan berkas lama ke cloud Anda, salinan di bawah Object Lock, dan pemulihan di perangkat baru.</p><div class="wiki-body"><p>Panel ini membagi tiga tugas:</p>
+<article class="guide-content"><p class="language-notice">Sebagian isi halaman ini masih dalam bahasa Inggris: teks asli dalam bahasa Inggris telah diubah setelah diterjemahkan.</p><p class="eyebrow">Referensi / Bukti</p><h1>Penyimpanan dan pemulihan</h1><p class="guide-outcome">Pencadangan, pemindahan berkas lama ke cloud Anda, salinan di bawah Object Lock, dan pemulihan di perangkat baru.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentasi</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Panel ini membagi tiga tugas:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@ objek terenkripsi secara lengkap dan memverifikasi ukurannya serta SHA-256, meny
 lalu memeriksa byte lokal lagi segera sebelum penghapusan. Kegagalan unggahan,
 hasil pembacaan yang berbeda, atau transfer yang dibatalkan membuat file lokal tetap ada. Jika
 cadangan bukti yang diaktifkan belum menyalin file tersebut, penghapusan juga akan menunggunya.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">Saat disk mulai penuh<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="Tautan ke bagian ini">#</a></h2>
 <p>Unduhan lampiran dijeda ketika ruang kosong di bawah nilai <strong>Parameter → Lampiran → ruang disk kosong</strong> (default 1 GiB), dengan antrean tetap tersimpan. Pengamatan teks berlanjut. Ini tidak bergantung pada notifikasi: mematikannya tidak menonaktifkan cadangan unduhan atau perlindungan penyimpanan.</p>
 <p>Untuk bertindak lebih awal, aktifkan <strong>Jalankan otomatis</strong>, pilih <strong>Hapus file lokal untuk mengosongkan ruang</strong>, dan aktifkan <strong>Mulai pemindahan tambahan saat ruang disk rendah</strong>. Secara default, aturan opsional dimulai di bawah 5120 MiB kosong dan memproses kelompok file hingga tersedia 10240 MiB. Kedua ambang dapat diatur. Tujuan, usia minimum file, batas kelompok, verifikasi dengan pembacaan balik lengkap, dan prasyarat cadangan bukti sama seperti proses manual. Aturan tidak mengaktifkan tujuan sendiri. Pemeriksaan berjalan setiap 30 detik; kesalahan atau tidak adanya kemajuan menunda percobaan berikutnya lima menit. Status dan waktu percobaan ulang bertahan setelah mulai ulang. Saat aturan tidak aktif, proses terjadwal tetap memakai interval normal.</p>

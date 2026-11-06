@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/
 
 یک کلاینت MCP را به فضاهای کاری و چت‌های منتخب با دسترسی منقضی‌شونده و قابل فسخ متصل کنید.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 یک کلاینت تحلیلگر را به فضاهای کاری و چت‌های منتخب متصل کنید. TgWitness **در فرآیند پنل، HTTP قابل جریانی‌سازی را در `/mcp`** ارائه می‌دهد. هر اتصال دارای توکن، تاریخ انقضا و ابزارهای مجاز خاص خود است. MCP نمی‌تواند پیام‌های تلگرام ارسال کند، تنظیمات را تغییر دهد یا دفترچه یادداشت امضا شده را اصلاح کند. همین اتصالات با [خط فرمان](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/)نیز کار می‌کنند.
 
 [راهنمای گردش کار](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#tools-and-boundaries)
 
 ## نصب و بررسی
 

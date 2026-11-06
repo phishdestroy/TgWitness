@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/case-
 
 מסנני דוחות, שמונה עיצובים, הגדרות קבועות מראש לתוכן, היסטוריית שינויים שנשמרה וההערכה הכלולה בייצואים חתומים.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 הפכו את התצפיות שנבחרו לתיאור קריא של המקרה: השאלה, היקף החקירה, השינויים שנשמרו, התרשימים, הממצאים והפניות למקורות. כל דוח מספק למקבל דרך לבדוק את החומר שנמסר ולבחון את היקף האיסוף שלו.
 
 הסעיף "**בסיס האמון והמגבלות"** מופיע בדוחות היומן, המסירה, הצ'אט, החשבון והשיתוף. קבצי ה-PDF של היומן והמסירה משתמשים באותה הערכה כמו קובץ ה-`report.json` החתום שלהם. קבצי ה-ZIP נושאים את ה-`case_assessment` במניפסט החתום. הערכה זו מועברת יחד עם החומר המיוצא. התצפיות המקוריות שומרות על החתימות הקיימות שלהן.

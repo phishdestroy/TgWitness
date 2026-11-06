@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/acces
 
 Proszę określić zakres dostępu do kont i czatów, wybrać uprawnienia, ograniczyć liczbę sesji i adresów IP oraz cofnąć dostęp.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/pl/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 Można przyznać recenzentowi dostęp do jednej rozmowy, analitykowi uprawnienie do eksportowania sprawy lub operatorowi kontrolę nad wybranymi kontami. Każda osoba otrzymuje własny token. Główny token panelu pozostaje w posiadaniu administratora.
 
 [Konfiguracja konta](https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/) · [Trasy połączeń](https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/) · [Model bezpieczeństwa](https://phishdestroy.github.io/TgWitness/pl/docs/reference/security/)
@@ -104,4 +108,8 @@ Skrypty i style paneli zawierają metadane integralności SHA-384. Mapa importu 
 
 Przyznawanie, zmiana i cofanie uprawnień dostępu, a także rozpoczynanie lub kończenie sesji powodują również utworzenie podpisanych wpisów w dzienniku `access.*`. Tokeny nie są uwzględniane w tych wpisach. Przyznane tokeny i poświadczenia sesji są przechowywane w postaci skrótów w zaszyfrowanym sejfie.
 
-****Główny administrator i granica zaufania**** Token panelu głównego pozostaje nieograniczony. Logowanie za jego pomocą w przeglądarce tworzy sesje podlegające limitom sesji skonfigurowanym przez administratora. Skrypty wysyłające bezpośrednio token główny zachowują pełny dostęp i nie są traktowane jako sesje przeglądarki. Jest to kontrola dostępu na poziomie aplikacji w ramach jednej instalacji. Wszystkie obszary robocze współdzielą proces serwera; nie oznacza to izolacji od administratora hosta. Należy zachować poufność głównego tokena, sesji Telegramu, kluczy podpisujących oraz katalogu danych. Token świadka stanowi oddzielny punkt kontrolny/poświadczenie stanu, a nie token dostępu do panelu.
+****Główny administrator i granica zaufania****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

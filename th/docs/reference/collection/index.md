@@ -4,7 +4,25 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/colle
 
 ขอบเขตการสังเกตการณ์, การอัปเดตแบบเรียลไทม์, การตรวจสอบซ้ำ, ไฟล์แนบ, การดำเนินการของผู้ใช้เอง และความหมายของช่องว่าง (gap) — บันทึกอย่างละเอียดทีละรายการ
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [คอลเลกชัน](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
+
+![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+
 TgWitness บันทึกสิ่งที่บัญชี Telegram ที่เชื่อมต่อไว้สังเกตเห็น บันทึกนี้เก็บรักษา การสังเกตเหล่านั้น ลำดับการเกิด และบริบทที่มาพร้อมกับมัน มัน ไม่สันนิษฐานการกระทำที่มองไม่เห็นจากข้อความที่หายไป หรือจากบัญชีที่กำลังเชื่อมต่ออยู่
+
+**On this page**
+
+- [From login to a journal](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/#from-login-to-a-journal)
+- [Observation scope: chosen chats, a folder or the whole account](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
+- [Scope and event selection](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/#scope-and-event-selection)
+- [Own actions](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/#own-actions)
+- [Investigation mode: joining teams and talking to bots](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
+- [Recheck tiers](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/#recheck-tiers)
+- [Message history and attribution](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/#message-history-and-attribution)
+- [History snapshots](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/#history-snapshots)
+- [Attachment handling](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/#attachment-handling)
+- [Pause, lock, disconnect, and restart](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/#pause-lock-disconnect-and-restart)
+- [Account isolation and verification](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/#account-isolation-and-verification)
 
 ## ตั้งแต่การเข้าสู่ระบบจนถึงบันทึก
 

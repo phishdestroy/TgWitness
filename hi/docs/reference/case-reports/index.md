@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-
 
 रिपोर्ट फ़िल्टर, आठ डिज़ाइन, सामग्री प्रीसेट, सहेजी गई परिवर्तन इतिहास और हस्ताक्षरित निर्यात में शामिल मूल्यांकन।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 चयनित अवलोकनों को मामले का एक पठनीय विवरण बनाएं: इसके प्रश्न, दायरा, सहेनी गई परिवर्तन, चार्ट, निष्कर्ष और स्रोत संदर्भ। प्रत्येक रिपोर्ट प्राप्तकर्ता को पहुँचाई गई सामग्री की जाँच करने और इसके संग्रह की व्यापकता का निरीक्षण करने का एक तरीका देती है।
 
 **विश्वास और सीमाओं का** **आधार** अनुभाग जर्नल, हैंडओवर, चैट, खाते और साझाकरण रिपोर्टों में दिखाई देता है। जर्नल और हैंडओवर पीडीएफ अपने हस्ताक्षरित `report.json` के समान मूल्यांकन का उपयोग करते हैं। ज़िप मैनिफेस्ट हस्ताक्षरित मैनिफेस्ट में `case_assessment` को ले जाते हैं। यह मूल्यांकन निर्यात की गई सामग्री के साथ जाता है। मूल अवलोकन अपने मौजूदा हस्ताक्षरों को बनाए रखते हैं।

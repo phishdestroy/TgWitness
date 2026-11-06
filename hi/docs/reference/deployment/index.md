@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/deplo
 
 Windows, Linux, macOS या Docker पर HTTPS के पीछे बैकअप और अपडेट के साथ TgWitness को एक सेवा के रूप में चलाएँ।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **अंग्रेज़ी** · [रूसी](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [यूक्रेनी](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [स्पेनिश](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [पुर्तगाली (ब्राज़ील)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [तुर्की](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [अरबी](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [फ़ारसी](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [उर्दू](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [हिंदी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [बाहासा इंडोनेशिया](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [वियतनामी](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [सरलीकृत चीनी](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
 ## स्थापना चुनें

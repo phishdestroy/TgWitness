@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/showc
 
 चयनित सार्वजनिक चैनलों के सहेजे गए संदेशों और हस्ताक्षरित स्नैपशॉट्स को समाप्त होने वाले, रद्द किए जा सकने वाले लिंक के माध्यम से प्रकाशित करें।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **एक्सेस → पब्लिक शोकेस** मौजूदा एक्सेस-टोकन सिस्टम का उपयोग करके एक अलग, केवल-पढ़ने योग्य पेज बनाता है। यह इंस्टॉलेशन के सहेजे गए अवलोकनों को पढ़ता है। यह कलेक्टर शुरू नहीं करता, टेलीग्राम में साइन इन नहीं करता या आगंतुक के लिए कोई चैनल प्राप्त नहीं करता।
 
 ## एक पृष्ठ प्रकाशित करें

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/witne
 
 अपनी कुंजी और बॉट के साथ एक विटनेस चलाएँ, एक चैनल पर हस्ताक्षरित चेकपॉइंट प्रकाशित करें और उनके विरुद्ध एक्सपोर्ट्स की जाँच करें।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [निर्यात करें और सत्यापित करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/) · [उच्च आश्वासन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/) · [पैनल मार्गदर्शिका](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ A witness retains signed checkpoints separately from the collector. It checks th
 4. साक्ष्य ज़िप → verify.py
 5. विटनेस जर्नल, अपनी कुंजी → verify.py
 6. टेलीग्राम चैनल → verify.py (टेलीग्राम डेस्कटॉप एक्सपोर्ट या t.me/s पृष्ठ)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/#verify)
 
 ## गवाह को क्या मिलता है, और क्या नहीं मिलता
 

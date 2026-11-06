@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/webho
 
 Envie eventos específicos para destinatários HTTPS com assinaturas HMAC, tentativas de reenvio e status de entrega.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/pt/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [Guia de fluxo de trabalho](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Abra **“Integrações” → “Webhooks de saída”** no espaço de trabalho selecionado. Adicione um receptor HTTPS, escolha eventos de coleta/mídia/exportação e, opcionalmente, selecione chats para novas observações e alterações. O texto da mensagem está desativado por padrão. Ativar trechos adiciona no máximo 1.000 caracteres aos eventos de alteração de mensagem; campos brutos do Telegram e credenciais nunca são enviados.

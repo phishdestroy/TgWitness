@@ -4,11 +4,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/case-
 
 סימניות, הדגשות מדויקות, קטעי פעולה, דיונים, גישה מוגבלת והיסטוריית ההערות החתומות שבהן משתמש Case Board.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Case Board מספק לצוות החקירה תצוגה משותפת של החומר שנשמר. ניתן לסמן הערה, להדגיש קטע מדויק, לשמור רצף פעולות ולדון בו עם עמיתים. הכרטיסים שומרים על הפניות למקורותיהם ועל היסטוריית הגרסאות החתומה. ההערות של הצוות נשארות בסביבת העבודה, וניתן לזהותן בנפרד מהתצפיות המקוריות ב-Telegram.
 
 [מודל הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/) · [גישה](https://phishdestroy.github.io/TgWitness/he/docs/reference/access/) · [דוחות](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/)
 
 ![עדכון חקירה סינתטי](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
+
+**On this page**
+
+- [Work with a case](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/#work-with-a-case)
+- [Permissions](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/#permissions)
+- [Stored contracts](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/#stored-contracts)
+- [API and exports](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/#api-and-exports)
+- [Operating limits](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/#operating-limits)
 
 ## עבודה עם תיק
 

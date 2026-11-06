@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">证据格式</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 证据</p><h1>证据格式</h1><p class="guide-outcome">签名 ZIP 文件的内容、记录类型、操作收据、用户资料、异地副本及离线验证。</p><div class="wiki-body"><p>TgWitness 将账户可见的 Telegram 观察记录保存于经签名的日志中。
+<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 证据</p><h1>证据格式</h1><p class="guide-outcome">签名 ZIP 文件的内容、记录类型、操作收据、用户资料、异地副本及离线验证。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文档</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../../assets/chapter-evidence.svg" /></p>
+<p>TgWitness 将账户可见的 Telegram 观察记录保存于经签名的日志中。
 接收方可使用可信的
 采集器密钥对保存的记录、附件和报告进行验证，随后将日志与独立保留的检查点进行比对。
 本页介绍了格式、校验方法以及移交时需保留的材料。</p>
@@ -40,6 +42,28 @@
 ZIP and independently obtained key fingerprint, displays an explained result,
 and saves a separate verification transcript. See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md">verification launchers and
 the portable runtime</a> for setup and trust limits.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#what-is-signed">What is signed</a></li>
+<li><a href="#comparing-chat-exports">Comparing chat exports</a></li>
+<li><a href="#investigation-handoff">Investigation handoff</a></li>
+<li><a href="#handover-extract">Handover extract</a></li>
+<li><a href="#readable-reports">Readable reports</a></li>
+<li><a href="#event-canonicalization">Event canonicalization</a></li>
+<li><a href="#actor-semantics">Actor semantics</a></li>
+<li><a href="#coverage-continuity-gaps-and-unobserved-ids">Coverage: continuity, gaps and unobserved IDs</a></li>
+<li><a href="#producer">Producer</a></li>
+<li><a href="#people-profiles">People profiles</a></li>
+<li><a href="#independent-witness">Independent witness</a></li>
+<li><a href="#manifest-and-checkpoints">Manifest and checkpoints</a></li>
+<li><a href="#verification-scope">Verification scope</a></li>
+<li><a href="#attachments">Attachments</a></li>
+<li><a href="#durable-collection-and-process-receipts-02">Durable collection and process receipts (0.2)</a></li>
+<li><a href="#rfc-3161-preparation-and-response-verification-02">RFC 3161 preparation and response verification (0.2)</a></li>
+<li><a href="#optional-records-in-evidence-mode-drand-and-telegram-devices">Optional records in evidence mode: drand and Telegram devices</a></li>
+</ul>
+</details>
 <h2 id="what-is-signed">什么是签名<a class="anchor" href="#what-is-signed" aria-label="本节链接">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

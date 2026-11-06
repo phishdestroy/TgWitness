@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/accou
 
 Eksportuj to, co konto może obecnie odczytać: zakres, zadania z możliwością wznowienia, podpisane archiwum oraz zminimalizowane kopie udostępniane.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 Eksport konta rezerwuje je na wyłączność. Przed startem lub wznowieniem jawnie wstrzymaj monitoring albo inne pozyskiwanie danych; aplikacja nigdy nie zatrzymuje ich automatycznie.
 
 Jako administrator instalacji wybierz **Zacznij tutaj → Eksportuj moje konto** lub **Eksporty → Konto Telegram → Skonfiguruj eksport konta**. W razie potrzeby zaloguj się, sprawdź zakres i wyraźnie uruchom eksport. Ciągła obserwacja nie jest wymagana. **Zapisane obserwacje** to oddzielny eksport istniejącego dziennika; jego ZIP obejmuje wszystkie źródła niezależnie od filtrów dziennika. Każdy obszar roboczy ma własne zadania, tożsamość podpisującą i pamięć masową. Przyznany dostęp do panelu, w tym nieograniczone uprawnienie do zwykłego eksportu, nie pozwala na otwarcie tych ścieżek obejmujących całe konto.

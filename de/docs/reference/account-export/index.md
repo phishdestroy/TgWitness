@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/accou
 
 Exportieren Sie, was ein Konto derzeit lesen kann: Umfang, wiederaufnehmbare Aufträge, ein signiertes Archiv und minimierte Freigabekopien.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 Ein Kontoexport reserviert sein Konto exklusiv. Pausieren Sie vor dem Starten oder Fortsetzen ausdrücklich die Überwachung oder eine andere Erfassung; die Anwendung beendet diese niemals automatisch.
 
 Wählen Sie als Installationsadministrator entweder **Hier beginnen → Mein Konto exportieren** oder **Exporte → Telegram-Konto → Kontoexport konfigurieren**. Melden Sie sich bei Bedarf an, überprüfen Sie den Umfang und starten Sie den Export explizit. Eine kontinuierliche Überwachung ist nicht erforderlich. **Gespeicherte Beobachtungen** ist ein separater Export des bestehenden Journals; dessen ZIP umfasst alle Quellen unabhängig von Journalfiltern. Jeder Arbeitsbereich verfügt über eigene Jobs, eine eigene Signaturidentität und eigenen Speicherplatz. Ein erteilter Panel-Zugriff, einschließlich einer uneingeschränkten Berechtigung für normale Exporte, kann diese kontoweiten Pfade nicht öffnen.

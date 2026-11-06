@@ -32,7 +32,25 @@
 <nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../../">होम</a> <span aria-hidden="true">/</span> <a href="../../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <a href="../">संदर्भ</a> <span aria-hidden="true">/</span> <span aria-current="page">संग्रह कैसे काम करता है</span></nav>
 <p class="verification-shortcut"><a href="../verification/">क्या परीक्षण किया गया है →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / एकत्र करें</p><h1>संग्रह कैसे काम करता है</h1><p class="guide-outcome">निरीक्षण दायरा, लाइव अपडेट, पुनः जाँच, संलग्नक, अपनी कार्रवाइयाँ और किसी अंतराल का क्या अर्थ है, रिकॉर्ड दर रिकॉर्ड।</p><div class="wiki-body"><p>TgWitness उस बात को रिकॉर्ड करता है जो एक कनेक्टेड टेलीग्राम अकाउंट देखता है। यह जर्नल उन अवलोकनों, उनकी अनुक्रमण, और उनके साथ दिए गए संदर्भ को संरक्षित करता है। यह किसी अनुपस्थित संदेश या अकाउंट के कनेक्ट होने से अनदेखी कार्रवाइयों का अनुमान नहीं लगाता है।</p>
+<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / एकत्र करें</p><h1>संग्रह कैसे काम करता है</h1><p class="guide-outcome">निरीक्षण दायरा, लाइव अपडेट, पुनः जाँच, संलग्नक, अपनी कार्रवाइयाँ और किसी अंतराल का क्या अर्थ है, रिकॉर्ड दर रिकॉर्ड।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">टीजीविटनेस</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">दस्तावेज़ीकरण</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md">संग्रह</a></p>
+<p><img alt="Collection" src="../../../../assets/chapter-collect.svg" /></p>
+<p>TgWitness उस बात को रिकॉर्ड करता है जो एक कनेक्टेड टेलीग्राम अकाउंट देखता है। यह जर्नल उन अवलोकनों, उनकी अनुक्रमण, और उनके साथ दिए गए संदर्भ को संरक्षित करता है। यह किसी अनुपस्थित संदेश या अकाउंट के कनेक्ट होने से अनदेखी कार्रवाइयों का अनुमान नहीं लगाता है।</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#from-login-to-a-journal">From login to a journal</a></li>
+<li><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Observation scope: chosen chats, a folder or the whole account</a></li>
+<li><a href="#scope-and-event-selection">Scope and event selection</a></li>
+<li><a href="#own-actions">Own actions</a></li>
+<li><a href="#investigation-mode-joining-teams-and-talking-to-bots">Investigation mode: joining teams and talking to bots</a></li>
+<li><a href="#recheck-tiers">Recheck tiers</a></li>
+<li><a href="#message-history-and-attribution">Message history and attribution</a></li>
+<li><a href="#history-snapshots">History snapshots</a></li>
+<li><a href="#attachment-handling">Attachment handling</a></li>
+<li><a href="#pause-lock-disconnect-and-restart">Pause, lock, disconnect, and restart</a></li>
+<li><a href="#account-isolation-and-verification">Account isolation and verification</a></li>
+</ul>
+</details>
 <h2 id="from-login-to-a-journal">लॉगिन से जर्नल तक<a class="anchor" href="#from-login-to-a-journal" aria-label="इस अनुभाग का लिंक">#</a></h2>
 <p>For self-destructing photos and files, see <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md">Self-destructing media</a>.
 It explains the priority worker, saved and unavailable outcomes, and the limits of

@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首頁</a> <span aria-hidden="true">/</span> <a href="../../">文件說明</a> <span aria-hidden="true">/</span> <a href="../">參考資料</a> <span aria-hidden="true">/</span> <span aria-current="page">儲存與還原</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">參考資料 / 證據</p><h1>儲存與還原</h1><p class="guide-outcome">備份功能、將舊檔案移至您的雲端儲存空間、在 Object Lock 下的副本，以及在新裝置上的資料恢復。</p><div class="wiki-body"><p>該面板將任務分為三類：</p>
+<article class="guide-content"><p class="language-notice">本頁部分內容仍為英文：英文原文在翻譯後已進行修改。</p><p class="eyebrow">參考資料 / 證據</p><h1>儲存與還原</h1><p class="guide-outcome">備份功能、將舊檔案移至您的雲端儲存空間、在 Object Lock 下的副本，以及在新裝置上的資料恢復。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文件說明</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>該面板將任務分為三類：</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@
 並在刪除前立即再次檢查本機的位元組數。若發生上傳失敗、
 讀回結果不符或傳輸被取消的情況，本機檔案將保留原狀。若
 已啟用的證據備份尚未複製該檔案，刪除操作亦會等待備份完成。</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">磁碟空間即將耗盡時<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="此節的連結">#</a></h2>
 <p>當可用空間低於<strong>參數 → 附件 → 可用磁碟空間</strong>中的門檻（預設 1 GiB）時，附件下載會暫停並保留佇列。文字觀察繼續進行。這不受通知設定影響：關閉通知不會關閉下載預留空間或儲存保護措施。</p>
 <p>若要提早介入，請啟用<strong>自動執行</strong>，選擇<strong>刪除本機檔案以釋放空間</strong>，並啟用<strong>磁碟空間不足時額外執行一次轉存</strong>。此選用規則預設在可用空間低於 5120 MiB 時啟動，分批處理直到可用空間達到 10240 MiB。兩個門檻皆可設定。它與手動執行使用相同的目的地、檔案最短存放時間、批次上限、完整回讀驗證及證據備份前提條件，不會自行啟用目的地。每 30 秒檢查一次；發生錯誤或沒有進展時，下次嘗試延後五分鐘。規則狀態及重試時間在重新啟動後保留。規則未啟動時，排程工作仍依正常間隔執行。</p>

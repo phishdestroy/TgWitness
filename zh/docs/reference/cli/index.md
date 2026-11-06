@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/
 
 支持通过脚本和代理进行搜索、阅读上下文、统计活动以及导出已保存的消息，提供 --json 输出格式、稳定的退出代码以及作用域限定的只读令牌。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [只读 MCP](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/) · [全文搜索](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **预览。** `tgwitness search`, `context`, `messages`, `stats` 以及 `export` 读取 已保存的观察记录，供脚本和 AI 代理使用。它们无法向 Telegram 发送任何内容、更改设置或修改签名日志。

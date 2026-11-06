@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/case-rep
 
 Report filters, eight designs, contents presets, saved change histories and the assessment included in signed exports.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Turn selected observations into a readable account of the case: its question, scope, saved changes, charts, findings and source references. Each report gives the recipient a way to check the delivered material and inspect its collection coverage.
 
 The **Basis of trust and limitations** section appears in journal, handover, chat, account and sharing reports. Journal and handover PDFs use the same assessment as their signed `report.json`. ZIP manifests carry `case_assessment` in the signed manifest. This assessment travels with the exported material. The original observations retain their existing signatures.

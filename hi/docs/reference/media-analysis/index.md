@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/media
 
 स्थानीय वर्कर के साथ कैप्चर की गई छवियों और ऑडियो को पहचानें; व्युत्पन्न पाठ को उसकी स्रोत फ़ाइल से लिंक रखें।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [कार्यप्रवाह मार्गदर्शिका](https://phishdestroy.github.io/TgWitness/docs/archive/) · [विकी](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 `media.saved` जर्नल रिकॉर्ड खोलें, **'अटैचमेंट पहचानें'** चुनें, फिर **'आर्काइव से पूछें**' के तहत OCR या ट्रांसक्रिप्शन चुनें। प्रोसेसिंग मैन्युअल और लोकल है। इसमें कोई क्लाउड मीडिया मोड या स्वचालित अपलोड नहीं है। मूल अटैचमेंट बाइट्स और `media_sha256` अपरिवर्तित रहते हैं; पहचाने गए टेक्स्ट को स्पष्ट रूप से मशीन मान्यता के रूप में चिह्नित किया जाता है और स्रोत हैश, इंजन/मॉडल संस्करण, भाषा, पैरामीटर और पूर्णता समय के साथ अलग से संग्रहीत किया जाता है। ट्रांसक्रिप्ट में लौटाए गए टाइमस्टैम्प बरकरार रहते हैं।

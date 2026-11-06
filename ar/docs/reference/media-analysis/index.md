@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/media
 
 التعرف على الصور والتسجيلات الصوتية الملتقطة باستخدام عامل محلي؛ والحفاظ على ارتباط النص المستخرج بملف المصدر.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [دليل سير العمل](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ويكي](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 افتح سجل دفتر `media.saved`، واختر **«التعرف على المرفق**»، ثم حدد «OCR» أو «النسخ» ضمن **«اسأل الأرشيف**». تتم المعالجة يدويًا ومحليًّا. لا يوجد وضع وسائط سحابية أو تحميل تلقائي. تظل بايتات المرفق الأصلية و `media_sha256` دون تغيير؛ ويتم تمييز النص المعترف به صراحةً على أنه نتيجة التعرف الآلي ويتم تخزينه بشكل منفصل مع التجزئة المصدرية، وإصدار المحرك/النموذج، واللغة، والمعلمات، ووقت الإكمال. تحتفظ النصوص المكتوبة بالطوابع الزمنية التي تم إرجاعها.

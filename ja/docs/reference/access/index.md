@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/acces
 
 アカウントやチャットへのアクセス範囲を限定し、権限を選択し、セッションやIPアドレスを制限し、アクセス権を取り消すことができます。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 レビュー担当者には1つのチャットへのアクセス権を、アナリストには案件のエクスポート権限を、 オペレーターには選択したアカウントの管理権限を付与します。各ユーザーには独自のトークンが割り当てられます。メイン パネルのトークンは管理者が保持します。
 
 [アカウントの設定](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/) · [接続経路](https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/) · [セキュリティモデル](https://phishdestroy.github.io/TgWitness/ja/docs/reference/security/)
@@ -104,4 +108,8 @@ APIの`ws`クエリセレクタは、リクエストパス内でワークスペ�
 
 アクセス権の付与、変更、取り消し、およびセッションの開始・終了の際にも、 署名付き`access.*`ジャーナル記録が生成されます。これらの記録にはトークンは含まれません。 発行されたトークンおよびセッション認証情報は、ハッシュ化された状態で暗号化された保管庫に保持されます。
 
-****メイン管理者および信頼境界**** メインパネルのトークンには制限が設けられていません。このトークンを使用してブラウザでログインすると、 管理者が設定したセッション制限の対象となるセッションが作成されます。 メイントークンを直接送信するスクリプトは、完全なアクセス権を維持し、ブラウザセッションとしてカウントされません。 これは、単一のインストール環境におけるアプリケーションレベルのアクセス制御です。すべてのワークスペースは サーバープロセスを共有しており、ホスト管理者からの隔離は行われていません。メイントークン、 Telegramセッション、署名鍵、およびデータディレクトリは、機密として厳重に管理してください。ウィットネストークンは 、パネルアクセストークンではなく、独立したチェックポイント／健全性確認用の認証情報です。
+****メイン管理者および信頼境界****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

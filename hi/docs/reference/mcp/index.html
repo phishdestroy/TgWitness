@@ -32,10 +32,22 @@
 <nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../../">होम</a> <span aria-hidden="true">/</span> <a href="../../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <a href="../">संदर्भ</a> <span aria-hidden="true">/</span> <span aria-current="page">केवल-पठनीय MCP</span></nav>
 <p class="verification-shortcut"><a href="../verification/">क्या परीक्षण किया गया है →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">संदर्भ / संग्रह और एकीकरण</p><h1>केवल-पठनीय MCP</h1><p class="guide-outcome">MCP क्लाइंट को चयनित वर्कस्पेस और चैट्स से समाप्त होने वाली, रद्द की जा सकने वाली पहुँच के साथ कनेक्ट करें।</p><div class="wiki-body"><p>एक एनालिस्ट क्लाइंट को चयनित वर्कस्पेस और चैट से कनेक्ट करें। TgWitness
+<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / संग्रह और एकीकरण</p><h1>केवल-पठनीय MCP</h1><p class="guide-outcome">MCP क्लाइंट को चयनित वर्कस्पेस और चैट्स से समाप्त होने वाली, रद्द की जा सकने वाली पहुँच के साथ कनेक्ट करें।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">टीजीविटनेस</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">दस्तावेज़ीकरण</a> · <a href="../cli/">Archive integrations</a></p>
+<p><img alt="Archive integrations" src="../../../../assets/chapter-integrations.svg" /></p>
+<p>एक एनालिस्ट क्लाइंट को चयनित वर्कस्पेस और चैट से कनेक्ट करें। TgWitness
 <strong>पैनल प्रक्रिया में <code>/mcp</code> पर स्ट्रीमएबल HTTP</strong> प्रदान करता है। प्रत्येक कनेक्शन का अपना टोकन, समाप्ति और अनुमत टूल होते हैं। MCP टेलीग्राम संदेश नहीं भेज सकता, सेटिंग्स नहीं बदल सकता या साइन किए गए जर्नल को संशोधित नहीं कर सकता। वही कनेक्शन
 <a href="../cli/">कमांड लाइन</a> के साथ भी काम करते हैं।</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">कार्यप्रवाह मार्गदर्शिका</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">विकी</a></p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#install-and-check">Install and check</a></li>
+<li><a href="#issue-a-connection">Issue a connection</a></li>
+<li><a href="#connect-your-client">Connect your client</a></li>
+<li><a href="#cloudflare-tunnel">Cloudflare Tunnel</a></li>
+<li><a href="#tools-and-boundaries">Tools and boundaries</a></li>
+</ul>
+</details>
 <h2 id="install-and-check">इंस्टॉल करें और जांचें<a class="anchor" href="#install-and-check" aria-label="इस अनुभाग का लिंक">#</a></h2>
 <p>उस Python एनवायरनमेंट का उपयोग करें जो पैनल चलाता है। सोर्स चेकआउट से:</p>
 <pre><code class="language-powershell"># Windows PowerShell

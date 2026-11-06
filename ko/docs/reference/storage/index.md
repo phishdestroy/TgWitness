@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/stora
 
 백업, 오래된 파일을 클라우드로 이동, Object Lock 하의 복사본, 새 기기에서 복구.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 이 패널은 다음 세 가지 작업을 구분합니다:
 
 | 과제 | 기능 |
@@ -15,6 +19,14 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/stora
 공간을 확보하더라도 서명된 일지는 절대 삭제되거나 덮어쓰이지 않습니다. 각 첨부 파일은 원본 SHA-256과 복구 영수증을 유지합니다. 선택적 gzip 압축은 인증된 암호화 전에 수행됩니다. 클라우드 파일 이름에는 텔레그램 이름, 채팅 ID 또는 원본 첨부 파일 이름이 포함되지 않습니다. 하나의 첨부 파일 크기는 최대 32 GiB까지 가능합니다.
 
 업로드 응답만으로는 파일을 삭제할 수 있는 권한이 부여되지 않습니다. TgWitness는 암호화된 전체 객체를 다운로드하여 크기를 확인하고, SHA-256 수신 확인증을 저장한 후, 삭제 직전에 로컬 바이트를 다시 한 번 확인합니다. 업로드 실패, 읽어온 내용이 다르거나 전송이 취소된 경우, 로컬 파일은 그대로 유지됩니다. 만약 활성화된 증거 백업이 해당 파일을 아직 복사하지 않은 경우, 삭제 작업도 백업이 완료될 때까지 대기합니다.
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## 디스크 공간이 부족해질 때
 

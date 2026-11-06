@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../../">होम</a> <span aria-hidden="true">/</span> <a href="../../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <a href="../">संदर्भ</a> <span aria-hidden="true">/</span> <span aria-current="page">पहुँच और अनुमतियाँ</span></nav>
 <p class="verification-shortcut"><a href="../verification/">क्या परीक्षण किया गया है →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">संदर्भ / सेटअप</p><h1>पहुँच और अनुमतियाँ</h1><p class="guide-outcome">खातों और चैट्स के लिए सीमित पहुँच प्रदान करें, अनुमतियाँ चुनें, सत्रों और आईपी पतों को सीमित करें, और पहुँच वापस ले लें।</p><div class="wiki-body"><p>एक समीक्षक को एक चैट तक पहुंच दें, एक विश्लेषक को एक मामले को निर्यात करने की अनुमति दें, या एक ऑपरेटर को चयनित खातों का नियंत्रण दें। प्रत्येक व्यक्ति को अपना टोकन मिलता है। मुख्य पैनल का टोकन प्रशासक के पास रहता है।</p>
+<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / सेटअप</p><h1>पहुँच और अनुमतियाँ</h1><p class="guide-outcome">खातों और चैट्स के लिए सीमित पहुँच प्रदान करें, अनुमतियाँ चुनें, सत्रों और आईपी पतों को सीमित करें, और पहुँच वापस ले लें।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">टीजीविटनेस</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">दस्तावेज़ीकरण</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>एक समीक्षक को एक चैट तक पहुंच दें, एक विश्लेषक को एक मामले को निर्यात करने की अनुमति दें, या एक ऑपरेटर को चयनित खातों का नियंत्रण दें। प्रत्येक व्यक्ति को अपना टोकन मिलता है। मुख्य पैनल का टोकन प्रशासक के पास रहता है।</p>
 <p><a href="../accounts/">खाता सेटअप</a> · <a href="../connection/">कनेक्शन मार्ग</a> · <a href="../security/">सुरक्षा मॉडल</a></p>
 <h2 id="two-scopes-two-different-jobs">दो दायरे, दो अलग-अलग काम<a class="anchor" href="#two-scopes-two-different-jobs" aria-label="इस अनुभाग का लिंक">#</a></h2>
 <p><strong>संग्रह का दायरा</strong> यह तय करता है कि कोई खाता क्या रिकॉर्ड करता है: चुनी हुई चैट्स, एक टेलीग्राम फ़ोल्डर या पूरा खाता। <strong>पहुँच का दायरा</strong> यह तय करता है कि उन रिकॉर्ड किए गए खातों और चैट्स में से कोई दूसरा व्यक्ति कौन सा देख और उपयोग कर सकता है। पहुँच देने से कोई टेलीग्राम चैट जुड़ती नहीं है, संग्रह शुरू नहीं होता या टेलीग्राम खाते की अनुमति नहीं मिलती।</p>
@@ -203,11 +205,13 @@ Case Board वाली प्रतियों के लिए <code>board.re
 <p>एक्सेस जारी करने, बदलने और रद्द करने, और सत्र शुरू करने या समाप्त करने से भी हस्ताक्षरित <code>access.*</code> जर्नल रिकॉर्ड बनते हैं। उन रिकॉर्ड्स में टोकन शामिल नहीं होते हैं। जारी किए गए टोकन और सत्र क्रेडेंशियल एन्क्रिप्टेड वॉल्ट में हैश के रूप में रखे जाते हैं।</p>
 <details>
 <summary><strong>मुख्य प्रशासक और विश्वास सीमा</strong></summary>
-
-मुख्य पैनल टोकन प्रतिबंधित नहीं रहता है। इसके साथ ब्राउज़र साइन-इन सत्र बनाते हैं जो प्रशासक द्वारा कॉन्फ़िगर की गई सत्र सीमाओं के अधीन होते हैं। मुख्य टोकन को सीधे भेजने वाली स्क्रिप्ट्स पूरी पहुँच बनाए रखती हैं और उन्हें ब्राउज़र सत्रों के रूप में नहीं गिना जाता है।
-
-यह एक इंस्टॉलेशन में एप्लिकेशन-स्तर का एक्सेस कंट्रोल है। सभी वर्कस्पेस सर्वर प्रक्रिया को साझा करते हैं; यह होस्ट प्रशासक से अलगाव नहीं है। मुख्य टोकन, टेलीग्राम सत्र, साइनिंग कुंजियाँ और डेटा निर्देशिका को निजी रखें। एक विटनेस टोकन एक अलग चेकपॉइंट/स्वास्थ्य क्रेडेंशियल है, न कि एक पैनल एक्सेस टोकन।
-
+<p>The main panel token remains unrestricted. Browser sign-ins with it create sessions
+subject to the administrator's configured session limits. Scripts sending the
+main token directly retain full access and are not counted as browser sessions.</p>
+<p>This is application-level access control in one installation. All workspaces share
+the server process; this is not isolation from the host administrator. Keep the main
+token, Telegram sessions, signing keys and data directory private. A witness token
+is a separate checkpoint/health credential, not a panel access token.</p>
 </details></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">GitHub पर इस पृष्ठ को संपादित करें ↗</a><a class="next-guide" href="../connection/"><span>अगला कदम</span><strong>कनेक्शन, प्रॉक्सी और डेटा सुरक्षा →</strong></a><p>ये मार्गदर्शिकाएँ वर्तमान कार्यान्वयन का वर्णन करती हैं। सत्यापन परिणाम और शेष अंतराल अलग से दस्तावेजीकृत किए गए हैं। <a href="../verification/">क्या परीक्षण किया गया है →</a></p></footer>
 </main>

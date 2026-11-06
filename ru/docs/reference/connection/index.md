@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/conne
 
 Аутентификация, автоматические пулы прокси-серверов, режимы работы с IP-адресами, политика резервного переключения, внешние запросы и хранение секретных данных.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 В данном документе описывается поведение TgWitness версии 0.8.0 и его ограничения. Аутентификация, доступ к источнику, сетевое соединение и полнота сбора данных представляют собой отдельные состояния. Для ознакомления с этапами входа в систему, форматами файлов и работой с несколькими учетными записями начните с раздела [«Учетные записи и форматы сеансов](https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/)». Информацию о правилах обработки событий и поведении при перезапуске см. в разделе [«Как работает сбор данных](https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/)».
 
 ## Пошаговая инструкция по настройке подключения
@@ -117,7 +121,21 @@ MTProxy передаёт только трафик Telegram. HTTP-операци
 
 Для частных сервисов, управляемых оператором, существующая настройка серверной среды `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` разрешает частные адреса назначения и сохраняет разрешение имен хостов на стороне прокси. Её нельзя включить через панель управления. Режим «только публичные» отклоняет адреса назначения в формате `.onion` перед отправкой запроса в публичный резолвер; для onion-сервисов Tor требуется явная настройка частных адресов назначения и подходящий прокси. Данное поведение DNS применимо к внешним HTTP-операциям, а не к транспортному протоколу Telegram. Cloudflare предоставляет документацию по [JSON-конечной](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) [точке DNS](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Параметры автоматического пула**** В разделе **«Параметры» → «Автоматический режим» MTProxy** настройте порог сбоя, время ожидания, плановую ротацию, совместное использование прокси и допустимую задержку переключения на резервный сервер. | Параметр | По умолчанию | | --- | --- | | Отключения до замены | 3 за 10 минут | | Количество проб прокси на одну попытку подключения | 3 | | Первая / максимальная пауза после сбоя | 10 минут / 6 часов | | Запланированная ротация | Отключено; переключение при сбое | | Количество аккаунтов на один прокси | 0: предпочтительно использовать отдельные записи, совместное использование — по необходимости. Установите значение 1, чтобы дождаться эксклюзивной записи. | | Задержка до разрешённого перехода на Direct | 10 минут; скрыть адрес, если Direct по-прежнему отказывает | | Обновление канала / проверки транспорта | 60 / 10 минут; значения основного рабочего пространства применяются к общему пулу | Различные прокси не гарантируют разных адресов выхода. Эти настройки не переопределяют ограничения Telegram и не обеспечивают анонимность.
+****Параметры автоматического пула****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Контроль | По умолчанию |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 Чтобы заменить общедоступный список на свой собственный каталог операторов, настройте приведённую ниже переопределение. Это полностью отключает внешние подписки, в том числе в случае, когда массив `proxies` пуст.
 

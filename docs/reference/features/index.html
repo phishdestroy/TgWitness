@@ -32,9 +32,28 @@
 <nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Features and limits</span></nav>
 <p class="verification-shortcut"><a href="../verification/">What has been tested →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Reference / Collect</p><h1>Features and limits</h1><p class="guide-outcome">The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.</p><div class="wiki-body"><p>TgWitness preserves Telegram conversations accessible to connected accounts,
+<article class="guide-content"><p class="eyebrow">Reference / Collect</p><h1>Features and limits</h1><p class="guide-outcome">The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentation</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Project reference</a></p>
+<p><img alt="Project reference" src="../../../assets/chapter-project.svg" /></p>
+<p>TgWitness preserves Telegram conversations accessible to connected accounts,
 records observed changes and prepares verifiable exports. This reference describes
 the collection model, current workflows and their boundaries.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#standalone-application">Standalone application</a></li>
+<li><a href="#shared-investigations">Shared investigations</a></li>
+<li><a href="#archive-tools">Archive tools</a></li>
+<li><a href="#optional-extras">Optional extras</a></li>
+<li><a href="#protocol-and-private-sources">Protocol and private sources</a></li>
+<li><a href="#multiple-accounts">Multiple accounts</a></li>
+<li><a href="#capture-and-attribution">Capture and attribution</a></li>
+<li><a href="#capacity-and-telegram-limits">Capacity and Telegram limits</a></li>
+<li><a href="#reliability-and-recovery">Reliability and recovery</a></li>
+<li><a href="#evidence-model">Evidence model</a></li>
+<li><a href="#export-deployment-and-handoff">Export, deployment and handoff</a></li>
+<li><a href="#stable-release-criteria">Stable release criteria</a></li>
+</ul>
+</details>
 <h2 id="standalone-application">Standalone application<a class="anchor" href="#standalone-application" aria-label="Link to this section">#</a></h2>
 <p>TgWitness has its own installation, data directory, and release lifecycle. The bundled
 web interface handles setup and review; exported records can be used independently.</p>

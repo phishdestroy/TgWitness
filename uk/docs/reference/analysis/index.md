@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/analy
 
 Здійснюйте пошук серед збережених повідомлень, переглядайте результати роботи штучного інтелекту та зберігайте аналітичні звіти з посиланнями на джерела.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Посібник з організації робочого процесу](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Вікі](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Використовуйте **«Журнал»** для локального пошуку без штучного інтелекту; [повнотекстовий пошук](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/) (попередній перегляд) знаходить збіги за формами слів, фразами, доменами та @іменами користувачів. Для **функції** **«Запитати архів»** спочатку увімкніть та налаштуйте провайдера в розділі **«Інтеграції**». Вибір робочого простору визначає обліковий запис; форма — чати та період спостереження. Пошук виконується локально. Точна фраза або домен звужують пошук; за ID повідомлення запитуються збережені версії. Перегляньте уривки та відкрийте їхні записи в журналі або контекст. Немає векторної бази даних або автоматичних дій у Telegram.

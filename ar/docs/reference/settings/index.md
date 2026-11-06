@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/setti
 
 معالج الإعداد، والأهداف، ومستويات الواجهة، ومسارات الاتصال، والإعدادات التي تشاركها مجموعة الحسابات.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [الحسابات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/) · [الارتباط](https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/) · [الوصول](https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/)
 
 يتم فتح مساحة عمل جديدة `/first-run`: اللغة والوقت، ومستوى الواجهة، والهدف، والاتصال، وTelegram والدردشات. يتم حفظ كل إجابة على الخادم فور تغييرها، لذا فإن إعادة التحميل تستكمل نفس الخطوة. تعرض الشاشة الأخيرة قائمة بالإجابات و تتيح لك العودة إلى أي منها.

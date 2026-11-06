@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="رہنما"><a href="../../../">گھر</a> <span aria-hidden="true">/</span> <a href="../../">دستاویزات</a> <span aria-hidden="true">/</span> <a href="../">حوالہ</a> <span aria-hidden="true">/</span> <span aria-current="page">سیکیورٹی اور ڈیٹا ہینڈلنگ</span></nav>
 <p class="verification-shortcut"><a href="../verification/">کیا جانچا گیا ہے ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">دستاویزات میں تلاش کریں</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، ہیش چین، ٹوکن یا ویٹنس آزمائیں…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="خلاصہ تلاش" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">رہنما اور حوالہ جات میں تلاش کرنے کے لیے ایک لفظ ٹائپ کریں۔ تلاش آپ کے براؤزر میں ہی رہتی ہے۔</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">اس صفحے کے کچھ حصے اب بھی انگریزی میں ہیں: اصل انگریزی متن ترجمے کے بعد تبدیل کر دیا گیا۔</p><p class="eyebrow">حوالہ / سیکیورٹی اور پروجیکٹ</p><h1>سیکیورٹی اور ڈیٹا ہینڈلنگ</h1><p class="guide-outcome">دھمکی کا ماڈل، رسائی کا ماڈل، ذخیرہ شدہ راز، نیٹ ورک کی نمائش، سیشن امپورٹس اور کمزوری کی رپورٹنگ کا طریقہ۔</p><div class="wiki-body"><p>This page describes access, storage and network protection in a local or server workspace.
+<article class="guide-content"><p class="language-notice">اس صفحے کے کچھ حصے اب بھی انگریزی میں ہیں: اصل انگریزی متن ترجمے کے بعد تبدیل کر دیا گیا۔</p><p class="eyebrow">حوالہ / سیکیورٹی اور پروجیکٹ</p><h1>سیکیورٹی اور ڈیٹا ہینڈلنگ</h1><p class="guide-outcome">دھمکی کا ماڈل، رسائی کا ماڈل، ذخیرہ شدہ راز، نیٹ ورک کی نمائش، سیشن امپورٹس اور کمزوری کی رپورٹنگ کا طریقہ۔</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">ٹی جی وٹنس</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">دستاویزات</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>This page describes access, storage and network protection in a local or server workspace.
 For collection on a GitHub runner or in an Intel TDX confidential VM, see the
 <a href="../evidence/#verification-scope">verification modes</a>, which add checks of the collection environment.
 Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.</p>
@@ -67,6 +69,19 @@ Account connections, notifications, timestamps, off-site copies and witnesses ha
 </tbody>
 </table></div>
 <p>کمزوریوں کی رپورٹس کے لیے <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">سیکیورٹی پالیسی</a> ملاحظہ کریں۔</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#access-model">Access model</a></li>
+<li><a href="#panel-content-and-exports">Panel content and exports</a></li>
+<li><a href="#secrets-at-rest">Secrets at rest</a></li>
+<li><a href="#proxies-and-network-routes">Proxies and network routes</a></li>
+<li><a href="#sign-in-and-session-imports">Sign-in and session imports</a></li>
+<li><a href="#logs-and-transport">Logs and transport</a></li>
+<li><a href="#integrity-limits">Integrity limits</a></li>
+<li><a href="#if-you-suspect-a-problem">If you suspect a problem</a></li>
+</ul>
+</details>
 <h2 id="access-model">رسائی ماڈل<a class="anchor" href="#access-model" aria-label="اس حصے کا لنک">#</a></h2>
 <p>مین پینل ٹوکن مکمل کنٹرول فراہم کرتا ہے۔ دوسرے افراد اپنی
 <a href="../access/">مخصوص رسائی</a> حاصل کر سکتے ہیں: منتخب کردہ ورک اسپیسز اور چیٹس، اجازت نامے، میعاد ختم ہونے کی تاریخ، آئی پی پابندیاں، سائن ان کی حدیں اور منسوخ شدنی سیشنز۔ چیٹ تک محدود رسائی پورے ورک اسپیس کے آپریشنز انجام نہیں دے سکتی چاہے ان کی اجازت دی گئی ہو۔

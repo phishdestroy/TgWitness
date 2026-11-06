@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首頁</a> <span aria-hidden="true">/</span> <a href="../../">文件說明</a> <span aria-hidden="true">/</span> <a href="../">參考資料</a> <span aria-hidden="true">/</span> <span aria-current="page">連線、代理伺服器與資料保護</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">參考資料 / 設定</p><h1>連線、代理伺服器與資料保護</h1><p class="guide-outcome">驗證、自動代理伺服器池、IP 模式、備用策略、外部請求及機密資料儲存。</p><div class="wiki-body"><p>本文檔說明 TgWitness 0.8.0 的運作方式及其限制。驗證、
+<article class="guide-content"><p class="language-notice">本頁部分內容仍為英文：英文原文在翻譯後已進行修改。</p><p class="eyebrow">參考資料 / 設定</p><h1>連線、代理伺服器與資料保護</h1><p class="guide-outcome">驗證、自動代理伺服器池、IP 模式、備用策略、外部請求及機密資料儲存。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文件說明</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>本文檔說明 TgWitness 0.8.0 的運作方式及其限制。驗證、
 來源存取、網路連線及擷取完整性均為獨立的狀態。
 關於登入步驟、檔案格式及多重帳戶，請先參閱「
 <a href="../accounts/">帳戶與會話格式</a>」；關於事件政策及重新啟動
@@ -342,25 +344,49 @@ MTProxy 是一款 Telegram 傳輸代理伺服器；SOCKS5 和 HTTP CONNECT 提�
 Cloudflare 已針對 <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">JSON DNS 端點</a>提供相關文件說明。</p>
 <details>
 <summary><strong>自動池參數</strong></summary>
-
-在 **參數 → 自動 MTProxy** 下，設定失敗閾值、冷卻時間、
-預定輪替、代理伺服器共享及允許的備用延遲。
-
-| 控制項 | 預設值 |
-| --- | --- |
-| 替換前斷線次數 | 10 分鐘內 3 次 |
-| 每次連線嘗試的代理伺服器試行次數 | 3 |
-| 失敗後的首次／最長休息時間 | 10 分鐘／6 小時 |
-| 預定輪替 | 已停用；失敗時切換 |
-| 每個代理伺服器的帳戶數 | 0：優先使用獨立條目，必要時共享。設定為 1 則會等待專用條目。 |
-| 允許直接備援前的延遲 | 10 分鐘；若隱藏的地址仍拒絕直接連線 |
-| 資料源刷新／傳輸檢查 | 60 / 10 分鐘；主要工作區的設定值適用於共用池 |
-
-不同的代理伺服器並不保證會產生不同的出口地址。這些設定不會
-覆寫 Telegram 的限制，亦無法證明匿名性。
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>控制</th>
+<th>預設</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>若要將公開清單替換為您自己的營運商目錄，請配置以下覆寫設定。
 此設定將完全停用外部訂閱功能，即使其 <code>proxies</code> 陣列為空時亦然。</p>
 <p>將<a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">空目錄</a>

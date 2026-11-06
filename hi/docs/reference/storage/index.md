@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/stora
 
 बैकअप, पुरानी फ़ाइलों को आपके क्लाउड में स्थानांतरित करना, ऑब्जेक्ट लॉक के तहत प्रतियां और नई मशीन पर पुनर्प्राप्ति।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 पैनल तीन कार्यों को अलग करता है:
 
 | कार्य | यह क्या करता है |
@@ -15,6 +19,14 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/stora
 स्पेस खाली करने से कभी भी हस्ताक्षरित जर्नल को हटाया या फिर से लिखा नहीं जाता है। प्रत्येक अटैचमेंट अपना मूल SHA-256 और एक रिकवरी रसीद रखता है। प्रमाणीकृत एन्क्रिप्शन से पहले वैकल्पिक gzip कंप्रेशन होता है। क्लाउड फ़ाइलनामों में टेलीग्राम नाम, चैट आईडी या मूल अटैचमेंट नाम शामिल नहीं होते हैं। एक अटैचमेंट 32 GiB तक का हो सकता है।
 
 केवल एक अपलोड प्रतिक्रिया फ़ाइल को हटाने की अनुमति नहीं है। TgWitness पूरी एन्क्रिप्टेड ऑब्जेक्ट को डाउनलोड करता है और उसके आकार और SHA-256 को सत्यापित करता है, रसीद को सहेजता है, फिर हटाने से ठीक पहले स्थानीय बाइट्स की फिर से जाँच करता है। एक अपलोड विफलता, अलग रीडबैक या रद्द किया गया ट्रांसफर स्थानीय फ़ाइल को वहीं छोड़ देता है। यदि एक सक्षम साक्ष्य बैकअप ने अभी तक उस फ़ाइल की प्रतिलिपि नहीं बनाई है, तो हटाने की प्रक्रिया भी उसके लिए प्रतीक्षा करती है।
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/hi/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/hi/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/hi/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/hi/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/hi/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## जब डिस्क भरने लगे
 

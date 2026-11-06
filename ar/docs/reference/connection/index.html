@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">الاتصال، والوكلاء، وحماية البيانات</span></nav>
 <p class="verification-shortcut"><a href="../verification/">ما تم اختباره ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">مرجع / الإعداد</p><h1>الاتصال، والوكلاء، وحماية البيانات</h1><p class="guide-outcome">المصادقة، ومجموعات البروكسي التلقائية، وأنماط عناوين IP، وسياسة الحل البديل، والطلبات الخارجية، والتخزين السري.</p><div class="wiki-body"><p>يصف هذا المستند سلوك TgWitness 0.8.0 وحدوده. تعتبر المصادقة،
+<article class="guide-content"><p class="language-notice">لا تزال أجزاء من هذه الصفحة باللغة الإنجليزية: فقد تغير النص الأصلي باللغة الإنجليزية بعد ترجمته.</p><p class="eyebrow">مرجع / الإعداد</p><h1>الاتصال، والوكلاء، وحماية البيانات</h1><p class="guide-outcome">المصادقة، ومجموعات البروكسي التلقائية، وأنماط عناوين IP، وسياسة الحل البديل، والطلبات الخارجية، والتخزين السري.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">التوثيق</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>يصف هذا المستند سلوك TgWitness 0.8.0 وحدوده. تعتبر المصادقة،
 والوصول إلى المصدر، والاتصال بالشبكة، واكتمال التقاط البيانات حالات منفصلة.
 للاطلاع على خطوات تسجيل الدخول، وتنسيقات الملفات، والحسابات المتعددة، ابدأ بـ
 <a href="../accounts/">«الحسابات وتنسيقات الجلسات</a>». وللاطلاع على سياسات الأحداث وسلوك إعادة التشغيل،
@@ -342,25 +344,49 @@ MTProxy هو وكيل نقل Telegram؛ ويوفر كل من SOCKS5 وHTTP CONNE
 توثق Cloudflare نقطة <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">نهاية DNS بتنسيق</a> <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">JSON</a>.</p>
 <details>
 <summary><strong>معلمات التجميع التلقائي</strong></summary>
-
-تحت **المعلمات → تلقائي MTProxy**، قم بتكوين عتبة الفشل، وفترة التهدئة،
-والتناوب المخطط، ومشاركة البروكسي، وتأخير الرجوع البديل المسموح به.
-
-| عنصر التحكم | القيمة الافتراضية |
-| --- | --- |
-| قطع الاتصال قبل الاستبدال | 3 مرات خلال 10 دقائق |
-| عدد الوكلاء الذين يتم تجربتهم لكل محاولة اتصال | 3 |
-| فترة الراحة الأولى / القصوى بعد الفشل | 10 دقائق / 6 ساعات |
-| التناوب المخطط | معطل؛ يتم التبديل عند الفشل |
-| عدد الحسابات لكل وكيل | 0: يُفضل استخدام إدخالات منفصلة، والمشاركة عند الحاجة. اضبط القيمة على 1 لانتظار إدخال حصري. |
-| التأخير قبل السماح بالرجوع المباشر | 10 دقائق؛ إخفاء العنوان الذي لا يزال يرفض الاتصال المباشر |
-| تحديث الخلاصة / فحوصات النقل | 60 / 10 دقائق؛ تنطبق قيم مساحة العمل الرئيسية على المجموعة المشتركة |
-
-لا تضمن الخوادم الوكيلة المختلفة عناوين خروج مختلفة. هذه الإعدادات لا
-تتجاوز حدود Telegram ولا تضمن إخفاء الهوية.
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>التحكم</th>
+<th>الافتراضي</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>لاستبدال القائمة العامة بكتالوج المشغل الخاص بك، قم بتكوين التجاوز أدناه.
 يؤدي ذلك إلى تعطيل الاشتراكات الخارجية تمامًا، بما في ذلك عندما تكون مصفوفة <code>proxies</code> فارغة.</p>
 <p>انسخ <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">الكتالوج الفارغ</a>

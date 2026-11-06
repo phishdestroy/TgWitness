@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/showc
 
 เผยแพร่ข้อความที่บันทึกไว้จากช่องสาธารณะที่เลือกไว้และภาพสแนปช็อตที่ลงนามแล้ว ผ่านลิงก์ที่มีอายุการใช้งานจำกัดและสามารถยกเลิกได้
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **Access → Public showcase** สร้างหน้าแยกต่างหากแบบอ่านอย่างเดียวโดยใช้ระบบ access-token ที่มีอยู่ มันอ่านข้อมูลการสังเกตที่บันทึกไว้ของระบบติดตั้ง แต่ไม่ เริ่มทำงานของ collector ไม่ลงชื่อเข้าใช้ Telegram และไม่สร้างช่องสำหรับผู้เยี่ยมชม
 
 ## เผยแพร่หน้า

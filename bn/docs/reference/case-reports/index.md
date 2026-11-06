@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-
 
 রিপোর্ট ফিল্টার, আটটি ডিজাইন, বিষয়বস্তু প্রিসেট, সংরক্ষিত পরিবর্তন ইতিহাস এবং স্বাক্ষরিত রপ্তানিতে অন্তর্ভুক্ত মূল্যায়ন।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 নির্বাচিত পর্যবেক্ষণগুলোকে মামলার একটি পাঠযোগ্য বিবরণে রূপান্তর করুন: এর প্রশ্ন, পরিসর, সংরক্ষিত পরিবর্তনসমূহ, চার্ট, ফলাফল এবং উৎস উল্লেখসমূহ। প্রতিটি প্রতিবেদন প্রাপ্তকারীকে সরবরাহিত উপাদানগুলো যাচাই করার এবং এর সংগ্রহের পরিধি পরিদর্শন করার একটি উপায় প্রদান করে।
 
 **বিশ্বাস ও সীমাবদ্ধতার** **ভিত্তি** বিভাগ জার্নাল, হস্তান্তর, চ্যাট, অ্যাকাউন্ট এবং শেয়ারিং রিপোর্টে প্রদর্শিত হয়। জার্নাল এবং হস্তান্তরের PDF-গুলো তাদের স্বাক্ষরিত `report.json`-এর মতো একই মূল্যায়ন ব্যবহার করে। স্বাক্ষরিত ম্যানিফেস্টে ZIP ম্যানিফেস্টগুলো `case_assessment` বহন করে। এই মূল্যায়ন রপ্তানি করা উপাদানের সাথে চলে। মূল পর্যবেক্ষণগুলো তাদের বিদ্যমান স্বাক্ষরগুলো ধরে রাখে।

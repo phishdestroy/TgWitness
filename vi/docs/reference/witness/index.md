@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/witne
 
 Vui lòng chạy một bản sao TgWitness với khóa và bot riêng, đăng các điểm kiểm tra đã được ký lên một kênh và đối chiếu các tệp xuất với các điểm kiểm tra đó.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [Xuất và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/) · [Độ tin cậy cao](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/) · [Hướng dẫn sử dụng bảng điều khiển](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ Sơ đồ quy trình · Trình thu thập → Witness (điểm kiểm tra có ch
 4. Tệp ZIP chứa bằng chứng → verify.py
 5. Sổ nhật ký chứng cứ, khóa riêng → verify.py
 6. Kênh Telegram → verify.py (Tính năng xuất dữ liệu từ Telegram Desktop hoặc trang t.me/s)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#verify)
 
 ## Những gì TgWitness cung cấp và những gì nó không cung cấp
 

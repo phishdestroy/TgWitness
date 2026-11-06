@@ -32,9 +32,28 @@
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">คุณสมบัติและข้อจำกัด</span></nav>
 <p class="verification-shortcut"><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / Collect</p><h1>คุณสมบัติและข้อจำกัด</h1><p class="guide-outcome">โมเดลการเก็บรวบรวมข้อมูลปัจจุบัน กระบวนการทำงานแบบหลายบัญชี การส่งออกข้อมูล และขอบเขตการดำเนินงานของ TgWitness</p><div class="wiki-body"><p>TgWitness เก็บรักษาการสนทนาใน Telegram ที่บัญชีที่เชื่อมต่อสามารถเข้าถึงได้,
+<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / Collect</p><h1>คุณสมบัติและข้อจำกัด</h1><p class="guide-outcome">โมเดลการเก็บรวบรวมข้อมูลปัจจุบัน กระบวนการทำงานแบบหลายบัญชี การส่งออกข้อมูล และขอบเขตการดำเนินงานของ TgWitness</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">เอกสารประกอบ</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Project reference</a></p>
+<p><img alt="Project reference" src="../../../../assets/chapter-project.svg" /></p>
+<p>TgWitness เก็บรักษาการสนทนาใน Telegram ที่บัญชีที่เชื่อมต่อสามารถเข้าถึงได้,
 บันทึกการเปลี่ยนแปลงที่สังเกตได้ และเตรียมไฟล์ส่งออกที่สามารถตรวจสอบได้ เอกสารอ้างอิงนี้อธิบาย
 โมเดลการเก็บรวบรวม, กระบวนการทำงานปัจจุบัน และขอบเขตของกระบวนการเหล่านั้น</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#standalone-application">Standalone application</a></li>
+<li><a href="#shared-investigations">Shared investigations</a></li>
+<li><a href="#archive-tools">Archive tools</a></li>
+<li><a href="#optional-extras">Optional extras</a></li>
+<li><a href="#protocol-and-private-sources">Protocol and private sources</a></li>
+<li><a href="#multiple-accounts">Multiple accounts</a></li>
+<li><a href="#capture-and-attribution">Capture and attribution</a></li>
+<li><a href="#capacity-and-telegram-limits">Capacity and Telegram limits</a></li>
+<li><a href="#reliability-and-recovery">Reliability and recovery</a></li>
+<li><a href="#evidence-model">Evidence model</a></li>
+<li><a href="#export-deployment-and-handoff">Export, deployment and handoff</a></li>
+<li><a href="#stable-release-criteria">Stable release criteria</a></li>
+</ul>
+</details>
 <h2 id="standalone-application">แอปพลิเคชันแบบสแตนด์อโลน<a class="anchor" href="#standalone-application" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <p>TgWitness มีกระบวนการติดตั้ง ไดเรกทอรีข้อมูล และวงจรการปล่อยเวอร์ชันเป็นของตัวเอง ส่วน
 อินเทอร์เฟซเว็บที่มาพร้อมในแพ็กเกจจะจัดการการตั้งค่าและการตรวจสอบ; บันทึกที่ส่งออกสามารถใช้งานได้อย่างอิสระ</p>

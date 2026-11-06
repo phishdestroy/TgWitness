@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="ガイド"><a href="../../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../../">ドキュメント</a> <span aria-hidden="true">/</span> <a href="../">参考文献</a> <span aria-hidden="true">/</span> <span aria-current="page">保存と復元</span></nav>
 <p class="verification-shortcut"><a href="../verification/">テスト済みの内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">参考文献 / 証拠</p><h1>保存と復元</h1><p class="guide-outcome">バックアップ、古いファイルのクラウドへの移動、Object Lock によるデータの複製、および新しいマシンでの復元。</p><div class="wiki-body"><p>このパネルでは、以下の3つのタスクを区別しています：</p>
+<article class="guide-content"><p class="language-notice">このページの一部は依然として英語のままです。翻訳後に英語の原文が変更されたためです。</p><p class="eyebrow">参考文献 / 証拠</p><h1>保存と復元</h1><p class="guide-outcome">バックアップ、古いファイルのクラウドへの移動、Object Lock によるデータの複製、および新しいマシンでの復元。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">ドキュメント</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>このパネルでは、以下の3つのタスクを区別しています：</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@
 削除の直前にローカルのバイト数を再度確認します。アップロードの失敗、
 読み取り結果の不一致、または転送の中止があった場合、ローカルファイルはそのまま残ります。もし
 有効になっている証拠バックアップがそのファイルをまだコピーしていない場合、削除もそれが完了するまで待機します。</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">ディスクの空き容量が少なくなった場合<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="このセクションへのリンク">#</a></h2>
 <p>空き容量が<strong>パラメーター → 添付ファイル → ディスクの空き容量</strong>の設定値（既定は1 GiB）を下回ると、添付ファイルのダウンロードを一時停止し、キューを保持します。テキストの観測は続行します。これは通知設定とは独立しており、通知を無効にしてもダウンロード用の予約容量やストレージの保護は無効になりません。</p>
 <p>早めに対処するには、<strong>自動実行</strong>を有効にし、<strong>ローカルファイルを削除して容量を空ける</strong>を選び、<strong>空き容量が少ないときに追加の移送を実行</strong>を有効にします。この任意のルールは、既定では空き容量が5120 MiB未満で開始し、10240 MiBになるまでバッチ処理を続けます。両方のしきい値を変更できます。移送先、ファイルの最小経過時間、バッチ上限、全内容の読み戻し検証、証拠バックアップの前提条件は手動実行と同じです。移送先を自動的に有効にはしません。30秒ごとに確認し、エラーまたは進捗がない場合は次の試行を5分遅らせます。状態と再試行時刻は再起動後も保持します。ルールが作動していない間、定期実行は通常の間隔を使います。</p>

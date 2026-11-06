@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/setti
 
 অ্যাকাউন্ট গ্রুপ দ্বারা ভাগ করা সেটআপ উইজার্ড, লক্ষ্য, ইন্টারফেস স্তর, সংযোগ পথ এবং সেটিংস।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [অ্যাকাউন্টসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/) · [সংযোগ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/) · [অ্যাক্সেস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/)
 
 একটি নতুন ওয়ার্কস্পেস খোলে `/first-run`: ভাষা এবং সময়, ইন্টারফেস স্তর, লক্ষ্য, সংযোগ, টেলিগ্রাম এবং চ্যাট। প্রতিটি উত্তর পরিবর্তিত হওয়ার সাথে সাথেই সার্ভারে সংরক্ষিত হয়, তাই রিলোড করলে একই ধাপ অব্যাহত থাকে। শেষ স্ক্রিন উত্তরগুলি তালিকাভুক্ত করে এবং আপনাকে যেকোনোটিতে ফিরে যেতে দেয়।

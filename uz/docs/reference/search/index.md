@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/searc
 
 Imzolangan jurnalga bog'langan indeks yordamida so'z shakllari, aniq iboralar, domenlar va @foydalanuvchi nomlari bo'yicha saqlangan xabarlarni toping, eng yaxshi mos keladiganlarini birinchi qilib ko'rsating.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Arxiv tahlili](https://phishdestroy.github.io/TgWitness/uz/docs/reference/analysis/) · [Mahalliy OCR va transkripsiya](https://phishdestroy.github.io/TgWitness/uz/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Ko'rinish.** Jurnalda qidiruv maydoni yonidagi **Eng yaxshi moslik · so'z shakllari** ni tanlang. Natijalar BM25 bo'yicha tartiblangan va bir xil so'zning boshqa shakllariga mos keladi: *перевод* so'zi *переводом* va *переводы ni* topadi, *transfer* *so'zi* *transfers* ni topadi, xitoy iborasi bo'shliqlarsiz topiladi. **Eng yangi birinchi · aniq matn** butun yozuv bo'ylab oldingi substring qidiruvini saqlaydi.
 
 Indeks – bu hosil qilingan ma'lumot. U imzolangan jurnal asosida qayta tuziladi, hech qachon o'zi imzolanmaydi va hech qachon eksportga kiritilmaydi. Asl yozuvlar o'zgarmaydi.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#benchmark)
 
 ## Qidiruv sintaksi
 

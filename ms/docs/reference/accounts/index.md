@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/accou
 
 Log masuk melalui telefon, kod QR atau kunci auth, import sesi Telethon, Pyrogram atau Telegram Desktop, dan jalankan beberapa akaun.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness log masuk sebagai **akaun pengguna Telegram** (bukan bot) melalui MTProto, menggunakan Telethon. Setiap akaun wujud dalam **ruang** kerja sendiri (dipanggil *workspace* dalam API dan alat baris perintah) dengan sesi, sumber, jurnal dan kunci tandatangan masing-masing.
 
 Fail sesi, rentetan sesi dan Kunci Auth adalah **kebenaran akaun**: sesiapa yang memegangnya boleh bertindak sebagai akaun tersebut. Ia tidak mengandungi sejarah mesej.

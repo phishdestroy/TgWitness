@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/showc
 
 פרסם הודעות שנשמרו מערוצים ציבוריים נבחרים ותמונות מצב חתומות באמצעות קישורים שתוקפם פג וניתנים לביטול.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **Access → Public showcase** יוצר דף נפרד, לקריאה בלבד, באמצעות מערכת ה-access-token הקיימת. הוא קורא את התצפיות השמורות של ההתקנה. הוא אינו מפעיל אספן, אינו מתחבר ל-Telegram ואינו רוכש ערוץ עבור מבקר.
 
 ## פרסום דף

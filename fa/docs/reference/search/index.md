@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/searc
 
 پیام‌های ذخیره‌شده را بر اساس شکل‌های واژه‌ای، عبارات دقیق، دامنه‌ها و نام‌های کاربری @ پیدا کنید، بهترین تطابق‌ها در اولویت، با شاخص متصل به دفترچهٔ امضا‌شده.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [تحلیل بایگانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/analysis/) · [شناسایی نوری حروف (OCR) و رونویسی محلی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/media-analysis/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **پیش‌نمایش.** در **«ژورنال**»، **«بهترین تطابق · اشکال واژه‌ای» را** در کنار کادر جستجو انتخاب کنید. نتایج با BM25 رتبه‌بندی می‌شوند و با سایر اشکال همان کلمه مطابقت دارند: *«перевод» کلمات* *«переводом»* و *«переводы» را* پیدا می‌کند، *«transfer» کلماتی مانند* *«transfers» را* پیدا می‌کند و یک عبارت چینی بدون فاصله پیدا می‌شود. **«جدیدترین‌ها اول · متن دقیق»** جستجوی زیر رشته‌ای قبلی را بر روی کل رکورد حفظ می‌کند.
 
 این شاخص داده‌ای مشتق‌شده است. این شاخص از دفترچهٔ امضا‌شده بازسازی می‌شود، خود هرگز امضا نمی‌شود و هرگز صادر نمی‌گردد. سوابق اصلی تغییر نمی‌کنند.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#benchmark)
 
 ## سینتکس جستجو
 

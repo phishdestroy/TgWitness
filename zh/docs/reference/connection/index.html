@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">连接、代理和数据保护</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">参考 / 设置</p><h1>连接、代理和数据保护</h1><p class="guide-outcome">身份验证、自动代理池、IP 模式、备用策略、外部请求及密钥存储。</p><div class="wiki-body"><p>本文档描述了 TgWitness 0.8.0 的行为及其限制。身份验证、
+<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 设置</p><h1>连接、代理和数据保护</h1><p class="guide-outcome">身份验证、自动代理池、IP 模式、备用策略、外部请求及密钥存储。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文档</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>本文档描述了 TgWitness 0.8.0 的行为及其限制。身份验证、
 源访问、网络连接和捕获完整性属于各自独立的状态。
 有关登录步骤、文件格式和多账户管理，请先参阅
 <a href="../accounts/">“账户与会话格式</a>”部分。有关事件策略和重启
@@ -342,25 +344,49 @@ MTProxy 是一个 Telegram 传输代理；SOCKS5 和 HTTP CONNECT 提供通用
 Cloudflare 提供了关于 <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">JSON DNS 端点的</a>文档。</p>
 <details>
 <summary><strong>自动池参数</strong></summary>
-
-在 **参数 → 自动 MTProxy** 下，配置故障阈值、冷却时间、
-计划轮换、代理共享和允许的备用延迟。
-
-| 控制项 | 默认值 |
-| --- | --- |
-| 断开连接前替换次数 | 10 分钟内 3 次 |
-| 每次连接尝试尝试的代理数量 | 3 |
-| 失败后的首次/最长休息时间 | 10 分钟 / 6 小时 |
-| 计划轮换 | 已禁用；失败时切换 |
-| 每个代理的账户数 | 0：优先使用独立条目，需要时共享。设置为 1 以等待独占条目。 |
-| 允许直接回退前的延迟 | 10 分钟；若地址仍拒绝直接连接则隐藏 |
-| 数据源刷新 / 传输检查 | 60 / 10 分钟；主工作区设置同样适用于共享池 |
-
-不同的代理并不保证会生成不同的出口地址。这些设置不会
-覆盖 Telegram 的限制，也无法保证匿名性。
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>控制</th>
+<th>默认</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>若要用您自己的运营商目录替换公共列表，请配置以下覆盖设置。
 这将完全禁用外部订阅，包括当其 <code>proxies</code> 数组为空时。</p>
 <p><a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">将空目录</a>

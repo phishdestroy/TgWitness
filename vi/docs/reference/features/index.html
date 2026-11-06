@@ -32,9 +32,28 @@
 <nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Các tính năng và giới hạn</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Những nội dung đã được kiểm thử →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Một số phần của trang này vẫn còn bằng tiếng Anh: bản gốc tiếng Anh đã được sửa đổi sau khi được dịch.</p><p class="eyebrow">Tham khảo / Thu thập</p><h1>Các tính năng và giới hạn</h1><p class="guide-outcome">Mô hình thu thập hiện tại, quy trình làm việc với nhiều tài khoản, tính năng xuất dữ liệu và các giới hạn vận hành của TgWitness.</p><div class="wiki-body"><p>TgWitness lưu trữ các cuộc trò chuyện trên Telegram mà các tài khoản được kết nối có thể truy cập,
+<article class="guide-content"><p class="language-notice">Một số phần của trang này vẫn còn bằng tiếng Anh: bản gốc tiếng Anh đã được sửa đổi sau khi được dịch.</p><p class="eyebrow">Tham khảo / Thu thập</p><h1>Các tính năng và giới hạn</h1><p class="guide-outcome">Mô hình thu thập hiện tại, quy trình làm việc với nhiều tài khoản, tính năng xuất dữ liệu và các giới hạn vận hành của TgWitness.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Tài liệu</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Project reference</a></p>
+<p><img alt="Project reference" src="../../../../assets/chapter-project.svg" /></p>
+<p>TgWitness lưu trữ các cuộc trò chuyện trên Telegram mà các tài khoản được kết nối có thể truy cập,
 ghi lại các thay đổi được quan sát và chuẩn bị các tệp xuất có thể xác minh. Tài liệu tham khảo này mô tả
 mô hình thu thập, các quy trình làm việc hiện tại và phạm vi áp dụng của chúng.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#standalone-application">Standalone application</a></li>
+<li><a href="#shared-investigations">Shared investigations</a></li>
+<li><a href="#archive-tools">Archive tools</a></li>
+<li><a href="#optional-extras">Optional extras</a></li>
+<li><a href="#protocol-and-private-sources">Protocol and private sources</a></li>
+<li><a href="#multiple-accounts">Multiple accounts</a></li>
+<li><a href="#capture-and-attribution">Capture and attribution</a></li>
+<li><a href="#capacity-and-telegram-limits">Capacity and Telegram limits</a></li>
+<li><a href="#reliability-and-recovery">Reliability and recovery</a></li>
+<li><a href="#evidence-model">Evidence model</a></li>
+<li><a href="#export-deployment-and-handoff">Export, deployment and handoff</a></li>
+<li><a href="#stable-release-criteria">Stable release criteria</a></li>
+</ul>
+</details>
 <h2 id="standalone-application">Ứng dụng độc lập<a class="anchor" href="#standalone-application" aria-label="Liên kết đến phần này">#</a></h2>
 <p>TgWitness có quy trình cài đặt, thư mục dữ liệu và chu kỳ phát hành riêng. Giao diện web đi kèm
 giúp quản lý việc thiết lập và xem xét; các bản ghi đã xuất ra có thể được sử dụng độc lập.</p>

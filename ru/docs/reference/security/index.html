@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">Безопасность и обращение с данными</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Что проверено →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Часть страницы пока на английском: английский оригинал изменился после перевода.</p><p class="eyebrow">Справочник / Безопасность и проект</p><h1>Безопасность и обращение с данными</h1><p class="guide-outcome">Модель угроз, модель доступа, защита конфиденциальных данных в состоянии покоя, сетевая уязвимость, импорт сеансов и порядок сообщения об уязвимостях.</p><div class="wiki-body"><p>This page describes access, storage and network protection in a local or server workspace.
+<article class="guide-content"><p class="language-notice">Часть страницы пока на английском: английский оригинал изменился после перевода.</p><p class="eyebrow">Справочник / Безопасность и проект</p><h1>Безопасность и обращение с данными</h1><p class="guide-outcome">Модель угроз, модель доступа, защита конфиденциальных данных в состоянии покоя, сетевая уязвимость, импорт сеансов и порядок сообщения об уязвимостях.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Документация</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>This page describes access, storage and network protection in a local or server workspace.
 For collection on a GitHub runner or in an Intel TDX confidential VM, see the
 <a href="../evidence/#verification-scope">verification modes</a>, which add checks of the collection environment.
 Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.</p>
@@ -67,6 +69,19 @@ Account connections, notifications, timestamps, off-site copies and witnesses ha
 </tbody>
 </table></div>
 <p>Информацию об отчетах об уязвимостях см. в <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">политике безопасности</a>.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#access-model">Access model</a></li>
+<li><a href="#panel-content-and-exports">Panel content and exports</a></li>
+<li><a href="#secrets-at-rest">Secrets at rest</a></li>
+<li><a href="#proxies-and-network-routes">Proxies and network routes</a></li>
+<li><a href="#sign-in-and-session-imports">Sign-in and session imports</a></li>
+<li><a href="#logs-and-transport">Logs and transport</a></li>
+<li><a href="#integrity-limits">Integrity limits</a></li>
+<li><a href="#if-you-suspect-a-problem">If you suspect a problem</a></li>
+</ul>
+</details>
 <h2 id="access-model">Модель доступа<a class="anchor" href="#access-model" aria-label="Ссылка на раздел">#</a></h2>
 <p>Токен главной панели предоставляет полный контроль. Другие пользователи могут получить
 <a href="../access/">доступ с

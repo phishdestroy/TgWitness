@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">架构</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 安全与项目</p><h1>架构</h1><p class="guide-outcome">收集器、控制面板、日志、工作进程和见证程序的组成部分，以及数据在它们之间如何流动。</p><div class="wiki-body"><p>一个 Python 进程托管 FastAPI 控制面板和任意数量的隔离工作区，
+<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 安全与项目</p><h1>架构</h1><p class="guide-outcome">收集器、控制面板、日志、工作进程和见证程序的组成部分，以及数据在它们之间如何流动。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文档</a></p>
+<p><img alt="Development" src="../../../../assets/chapter-develop.svg" /></p>
+<p>一个 Python 进程托管 FastAPI 控制面板和任意数量的隔离工作区，
 每个工作区都配有一个 Telethon 用户账户客户端。
 SQLite 存储着一个仅支持追加的、经过签名的事件日志以及可变的操作设置。
 加密保险库中存储着 API 凭据、StringSession 以及签名密钥。

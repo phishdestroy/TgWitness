@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/media
 
 Yerel bir işleyici ile yakalanan görüntüleri ve sesleri tanıyın; elde edilen metni kaynak dosyasına bağlı tutun.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Bir `media.saved` günlük kaydını açın, "**Eki tanıma"yı** seçin, ardından "**Arşive sor"** altından OCR veya transkripsiyon seçeneğini seçin. İşleme manuel ve yerel olarak gerçekleştirilir. Bulut ortam modu veya otomatik yükleme yoktur. Orijinal ek baytları ve `media_sha256` dosyası değişmeden kalır; tanınan metin, açıkça "makine tanınması" olarak işaretlenir ve kaynak hash değeri, motor/model sürümü, dil, parametreler ve tamamlanma zamanı ile birlikte ayrı olarak saklanır. Transkriptler, döndürülen zaman damgalarını korur.

@@ -4,7 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/featu
 
 TgWitness의 현재 수집 모델, 다중 계정 워크플로우, 내보내기 기능 및 운영 범위.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
 TgWitness는 연결된 계정에서 접근 가능한 텔레그램 대화를 보존하고, 관찰된 변경 사항을 기록하며, 검증 가능한 내보내기 파일을 생성합니다. 이 참조 문서는 수집 모델, 현재 워크플로우 및 그 범위를 설명합니다.
+
+**On this page**
+
+- [Standalone application](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#standalone-application)
+- [Shared investigations](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#shared-investigations)
+- [Archive tools](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#archive-tools)
+- [Optional extras](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#optional-extras)
+- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#protocol-and-private-sources)
+- [Multiple accounts](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#multiple-accounts)
+- [Capture and attribution](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#capture-and-attribution)
+- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#capacity-and-telegram-limits)
+- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#reliability-and-recovery)
+- [Evidence model](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#evidence-model)
+- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#export-deployment-and-handoff)
+- [Stable release criteria](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#stable-release-criteria)
 
 ## 독립형 애플리케이션
 

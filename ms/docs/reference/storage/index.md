@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/stora
 
 Sandaran, memindahkan fail lama ke awan anda, salinan di bawah Object Lock dan pemulihan pada mesin baru.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Panel memisahkan tiga tugas:
 
 | Tugas | Apa yang dilakukannya |
@@ -15,6 +19,14 @@ Panel memisahkan tiga tugas:
 Membersihkan ruang tidak pernah memadam atau menulis semula jurnal yang disahkan. Setiap lampiran mengekalkan tandatangan asalnya dan resit pemulihan.SHA-256 Pemampatan gzip pilihan dilakukan sebelum penyulitan berotentikasi. Nama fail awan tidak mengandungi nama Telegram, ID sembang atau nama lampiran asal. Satu lampiran boleh sehingga 32 GiB.
 
 Respon muat naik sahaja tidak memberi kebenaran untuk memadam fail. TgWitness memuat turun objek disulit sepenuhnya dan mengesahkan saiz serta SHA-256, menyimpan resit, kemudian menyemak bait tempatan sekali lagi sejurus sebelum pemadaman. Kegagalan muat naik, bacaan semula berbeza atau pemindahan dibatalkan mengekalkan fail tempatan di tempatnya. Jika sandaran bukti yang diaktifkan belum menyalin fail tersebut, pemadaman juga akan menunggu sehingga ia disalin.
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/ms/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/ms/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/ms/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/ms/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/ms/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## Apabila cakera semakin penuh
 

@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/
 
 MCP क्लाइंट को चयनित वर्कस्पेस और चैट्स से समाप्त होने वाली, रद्द की जा सकने वाली पहुँच के साथ कनेक्ट करें।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/hi/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 एक एनालिस्ट क्लाइंट को चयनित वर्कस्पेस और चैट से कनेक्ट करें। TgWitness **पैनल प्रक्रिया में `/mcp` पर स्ट्रीमएबल HTTP** प्रदान करता है। प्रत्येक कनेक्शन का अपना टोकन, समाप्ति और अनुमत टूल होते हैं। MCP टेलीग्राम संदेश नहीं भेज सकता, सेटिंग्स नहीं बदल सकता या साइन किए गए जर्नल को संशोधित नहीं कर सकता। वही कनेक्शन [कमांड लाइन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/cli/) के साथ भी काम करते हैं।
 
 [कार्यप्रवाह मार्गदर्शिका](https://phishdestroy.github.io/TgWitness/docs/archive/) · [विकी](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#tools-and-boundaries)
 
 ## इंस्टॉल करें और जांचें
 

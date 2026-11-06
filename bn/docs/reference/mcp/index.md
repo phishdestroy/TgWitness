@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/
 
 নির্বাচিত ওয়ার্কস্পেস এবং চ্যাটে মেয়াদোত্তীর্ণ, প্রত্যাহারযোগ্য অ্যাক্সেস সহ একটি MCP ক্লায়েন্ট সংযুক্ত করুন।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 নির্বাচিত ওয়ার্কস্পেস এবং চ্যাটে একজন বিশ্লেষক ক্লায়েন্ট সংযুক্ত করুন। TgWitness **প্যানেল প্রক্রিয়ায় `/mcp`-এ Streamable HTTP** পরিবেশন করে। প্রতিটি সংযোগের নিজস্ব টোকেন, মেয়াদোত্তীর্ণ সময় এবং অনুমোদিত টুল রয়েছে। MCP টেলিগ্রাম বার্তা পাঠাতে, সেটিংস পরিবর্তন করতে বা স্বাক্ষরিত জার্নাল সম্পাদনা করতে পারে না। একই সংযোগগুলো [কমান্ড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/)লাইনেও কাজ করে।
 
 [ওয়ার্কফ্লো গাইড](https://phishdestroy.github.io/TgWitness/docs/archive/) · [উইকি](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#tools-and-boundaries)
 
 ## ইনস্টল এবং যাচাই
 

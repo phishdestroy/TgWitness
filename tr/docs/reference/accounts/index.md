@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/accou
 
 Telefon, QR kodu veya kimlik anahtarıyla oturum açın, Telethon, Pyrogram veya Telegram Desktop oturumlarını içe aktarın ve birden fazla hesabı yönetin.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness, Telethon kullanarak MTProto üzerinden bir **Telegram kullanıcı hesabı** (bot değil) olarak oturum açar. Her hesap, kendi oturumu, kaynakları, günlüğü ve imzalama anahtarı ile birlikte kendi **çalışma** alanında (API ve komut satırı araçlarında "*çalışma alanı*" olarak adlandırılır) bulunur.
 
 Oturum dosyaları, oturum dizeleri ve Oturum Açma Anahtarları **hesap yetkilendirmeleridir**: bunlardan birine sahip olan kişi, o hesap adına hareket edebilir. Bunlar mesaj geçmişini içermez.

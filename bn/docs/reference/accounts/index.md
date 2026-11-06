@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/accou
 
 ফোন, QR কোড বা auth কী দিয়ে সাইন ইন করুন, Telethon, Pyrogram বা Telegram Desktop সেশন আমদানি করুন, এবং একাধিক অ্যাকাউন্ট চালান।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness MTProto ব্যবহার করে টেলিথন-এর মাধ্যমে একটি **টেলিগ্রাম ব্যবহারকারী অ্যাকাউন্ট** (বট নয়) হিসেবে সাইন ইন করে। প্রতিটি অ্যাকাউন্ট তার নিজস্ব সেশন, সোর্স, জার্নাল এবং সই করার কী সহ নিজস্ব একটি **কর্মস্থলে** (API এবং কমান্ড-লাইন টুলসে *workspace* নামে পরিচিত) অবস্থান করে।
 
 সেশন ফাইল, সেশন স্ট্রিং এবং অ্যথ কী-গুলো **অ্যাকাউন্ট অনুমোদন**: যার কাছে এগুলো থাকবে, সে ঐ অ্যাকাউন্ট হিসেবে কাজ করতে পারবে। এগুলোতে বার্তার ইতিহাস থাকে না।

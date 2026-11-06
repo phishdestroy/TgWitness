@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/case-
 
 Berichtsfilter, acht Designs, Inhaltsvorlagen, gespeicherte Änderungsverläufe und die Bewertung sind in den signierten Exporten enthalten.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Verwandeln Sie ausgewählte Beobachtungen in einen lesbaren Fallbericht: mit Fragestellung, Umfang, gespeicherten Änderungen, Diagrammen, Ergebnissen und Quellenangaben. Jeder Bericht bietet dem Empfänger die Möglichkeit, das gelieferte Material zu überprüfen und den Erfassungsumfang der Datenerhebung zu begutachten.
 
 Der Abschnitt **„Grundlage des Vertrauens und Einschränkungen“** erscheint in Protokoll-, Übergabe-, Chat-, Konto- und Freigabeberichten. Protokoll- und Übergabe-PDFs verwenden dieselbe Bewertung wie ihr signiertes „`report.json`“-Dokument. ZIP-Manifeste enthalten „`case_assessment`“ im signierten Manifest. Diese Bewertung wird zusammen mit dem exportierten Material übermittelt. Die ursprünglichen Beobachtungen behalten ihre bestehenden Signaturen bei.

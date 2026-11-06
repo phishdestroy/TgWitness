@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel
 
 Panelin tüm ekranları: sohbetler, günlük, kaynaklar, dışa aktarmalar, Ekstralar, koruma modları ve kod kontrolü.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [İlk kurulum ve ayarlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/settings/) · [Hesaplar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) · [Dışa aktarma ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/) · [Vaka raporları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/)
 
 Her ekranın işlevi, imzalı günlüğe ne yazdığı ve ayrıntılı kılavuzun bulunduğu yer. Panel, her seferinde tek bir çalışma alanını gösterir: kendi kaynakları, günlüğü ve imzalama anahtarı olan bir Telegram hesabı. Kenar çubuğunun üst kısmındaki seçici, çalışma alanları arasında geçiş yapar. Adres, çalışma alanını taşır (`?ws=…`); adres, seçici ve yüklü hesap birbiriyle uyuşmadığında işlemler engelli kalır.
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#more-tools)
 
 ## Yolunuzu bulun
 

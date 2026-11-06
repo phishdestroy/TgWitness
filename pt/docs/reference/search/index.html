@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Guias"><a href="../../../">Página inicial</a> <span aria-hidden="true">/</span> <a href="../../">Documentação</a> <span aria-hidden="true">/</span> <a href="../">Referência</a> <span aria-hidden="true">/</span> <span aria-current="page">Pesquisa de texto completo</span></nav>
 <p class="verification-shortcut"><a href="../verification/">O que foi testado →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Pesquisar na documentação</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Experimente “proxy”, “cadeia de hash”, “token” ou “testemunha”…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pesquisa clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Digite uma palavra para pesquisar nos guias e na referência. A pesquisa é realizada diretamente no seu navegador.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Algumas partes desta página ainda estão em inglês: o original em inglês sofreu alterações após ter sido traduzido.</p><p class="eyebrow">Referência / Arquivo e integrações</p><h1>Pesquisa de texto completo</h1><p class="guide-outcome">Encontre mensagens salvas por formas de palavras, frases exatas, domínios e @nomes de usuário, com as melhores correspondências exibidas primeiro, tendo o índice vinculado ao diário assinado.</p><div class="wiki-body"><p><a href="../analysis/">Análise de arquivos</a> · <a href="../media-analysis/">OCR local e transcrição</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<article class="guide-content"><p class="language-notice">Algumas partes desta página ainda estão em inglês: o original em inglês sofreu alterações após ter sido traduzido.</p><p class="eyebrow">Referência / Arquivo e integrações</p><h1>Pesquisa de texto completo</h1><p class="guide-outcome">Encontre mensagens salvas por formas de palavras, frases exatas, domínios e @nomes de usuário, com as melhores correspondências exibidas primeiro, tendo o índice vinculado ao diário assinado.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentação</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">Análise de arquivos</a> · <a href="../media-analysis/">OCR local e transcrição</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
 <p><strong>Pré-visualização.</strong> No <strong>“Diário”</strong>, selecione <strong>“Melhor correspondência · formas da palavra”</strong> ao lado do campo de pesquisa.
 Os resultados são classificados pelo BM25 e correspondem a outras formas da mesma palavra:
 <em>“перевод”</em> encontra <em>“переводом”</em> e <em>“переводы”</em>, <em>“transfer”</em> encontra <em>“transfers”</em>, uma frase em chinês
@@ -40,6 +42,20 @@ Os resultados são classificados pelo BM25 e correspondem a outras formas da mes
 de subcadeias de caracteres em todo o registro.</p>
 <p>O índice é um dado derivado. Ele é reconstruído a partir do diário assinado, nunca é assinado
 por si só e nunca é incluído em uma exportação. Os registros originais não sofrem alterações.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">Sintaxe de pesquisa<a class="anchor" href="#search-syntax" aria-label="Link para esta seção">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/conne
 
 Uwierzytelnianie, automatyczne pule serwerów proxy, tryby adresów IP, zasady rezerwowe, żądania zewnętrzne oraz przechowywanie kluczy tajnych.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/pl/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Niniejszy dokument opisuje działanie programu TgWitness w wersji 0.8.0 oraz jego ograniczenia. Uwierzytelnianie, dostęp do źródła, łączność sieciowa oraz kompletność przechwytywania stanowią odrębne stany. W przypadku procedur logowania, formatów plików oraz obsługi wielu kont proszę zapoznać się najpierw z sekcją [„Konta i formaty sesji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/)”. Informacje na temat zasad dotyczących zdarzeń oraz zachowania po ponownym uruchomieniu można znaleźć w sekcji [„Jak działa gromadzenie danych](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/)”.
 
 ## Konfiguracja połączenia z przewodnikiem
@@ -117,7 +121,21 @@ MTProxy obsługuje wyłącznie ruch z Telegrama. Operacje HTTP w obszarze robocz
 
 W przypadku usług prywatnych zarządzanych przez operatora istniejące ustawienie środowiska serwera `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` zezwala na prywatne miejsca docelowe i zachowuje rozpoznawanie nazw hostów po stronie proxy. Nie można go włączyć z poziomu panelu. Tryb wyłącznie publiczny odrzuca miejsca docelowe `.onion` przed wysłaniem zapytania do publicznego serwera rozpoznającego; usługi Tor typu onion wymagają wyraźnego ustawienia prywatnych miejsc docelowych oraz odpowiedniego serwera proxy. To zachowanie DNS dotyczy zewnętrznych operacji HTTP, a nie transportu Telegramu. Cloudflare udokumentowało [punkt końcowy DNS](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) w formacie [JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Parametry automatycznego puli**** W sekcji **Parametry → Automatyczne MTProxy** skonfiguruj próg awarii, czas oczekiwania, planowaną rotację, współdzielenie serwerów proxy oraz dopuszczalne opóźnienie przełączenia awaryjnego. | Kontrola | Domyślnie | | --- | --- | | Rozłącza przed zastąpieniem | 3 w ciągu 10 minut | | Liczba prób proxy na próbę połączenia | 3 | | Pierwsza / maksymalna przerwa po awarii | 10 minut / 6 godzin | | Planowana rotacja | Wyłączona; włączanie po awarii | | Liczba kont na proxy | 0: preferuj oddzielne wpisy, udostępniaj w razie potrzeby. Ustaw 1, aby czekać na wpis z wyłącznością. | | Opóźnienie przed dozwolonym bezpośrednim przełączeniem awaryjnym | 10 minut; adres, który nadal odrzuca połączenie bezpośrednie, jest ukrywany | | Odświeżanie kanałów / sprawdzanie transportu | 60 / 10 minut; wartości z głównego obszaru roboczego mają zastosowanie do puli współdzielonej | Różne serwery proxy nie gwarantują różnych adresów wyjściowych. Te ustawienia nie zastępują limitów Telegrama ani nie zapewniają anonimowości.
+****Parametry automatycznego puli****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Kontrola | Domyślnie |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 Aby zastąpić publiczną listę własnym katalogiem operatorów, skonfiguruj poniższe nadpisanie. Powoduje to całkowite wyłączenie subskrypcji zewnętrznych, nawet jeśli tablica `proxies` jest pusta.
 

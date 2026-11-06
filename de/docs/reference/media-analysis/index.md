@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/media
 
 Erkennen Sie erfasste Bilder und Audiodateien mit einem lokalen Worker; verknüpfen Sie den abgeleiteten Text weiterhin mit der Quelldatei.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Anleitung zum Arbeitsablauf](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Öffnen Sie einen `media.saved`-Protokoll-Eintrag, wählen Sie **„Anhang erkennen“** und wählen Sie anschließend unter **„Archiv befragen“** entweder „OCR“ oder „Transkription“ aus. Die Verarbeitung erfolgt manuell und lokal. Es gibt keinen Cloud-Medienmodus und keinen automatischen Upload. Die ursprünglichen Anhangsdaten und das „ `media_sha256`“-Protokoll bleiben unverändert; der erkannte Text wird ausdrücklich als maschinelle Erkennung gekennzeichnet und separat zusammen mit dem Quell-Hash, der Engine-/Modellversion, der Sprache, den Parametern und der Fertigstellungszeit gespeichert. Transkripte behalten die zurückgegebenen Zeitstempel bei.

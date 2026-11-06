@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/conne
 
 Authentification, pools de proxys automatiques, modes IP, politique de repli, requêtes externes et stockage des secrets.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Ce document décrit le fonctionnement de TgWitness 0.8.0 et ses limites. L’authentification, l’accès à la source, la connectivité réseau et l’exhaustivité de la capture constituent des états distincts. Pour connaître les étapes de connexion, les formats de fichiers et la gestion des comptes multiples, commencez par consulter la section « [Comptes et formats de session](https://phishdestroy.github.io/TgWitness/fr/docs/reference/accounts/) ». Pour les règles relatives aux événements et le comportement en cas de redémarrage, consultez [la section « Fonctionnement de la collecte](https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/) ».
 
 ## Configuration guidée de la connexion
@@ -117,7 +121,21 @@ Un MTProxy achemine uniquement le trafic Telegram. Les opérations HTTP de l'esp
 
 Pour les services privés gérés par l’opérateur, le paramètre d’environnement serveur existant `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` autorise les destinations privées et conserve la résolution du nom d’hôte côté proxy. Il ne peut pas être activé depuis le panneau de configuration. Le mode « public uniquement » rejette les destinations .`.onion` avant d’interroger le résolveur public ; les services Tor « onion » nécessitent ce paramètre explicite de destination privée ainsi qu’un proxy adapté. Ce comportement DNS s’applique aux opérations HTTP externes, et non au transport de Telegram. Cloudflare documente le [point de terminaison DNS JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Paramètres automatiques du pool**** Sous **Paramètres → Automatique MTProxy**, configurez le seuil d'échec, le délai de recharge, la rotation planifiée, le partage de proxy et le délai de repli autorisé. | Contrôle | Par défaut | | --- | --- | | Déconnexions avant remplacement | 3 en 10 minutes | | Nombre de proxys essayés par tentative de connexion | 3 | | Premier / temps de repos maximal après échec | 10 minutes / 6 heures | | Rotation planifiée | Désactivée ; activation en cas d’échec | | Comptes par proxy | 0 : privilégier les entrées séparées, partager si nécessaire. Définir sur 1 pour attendre une entrée exclusive. | | Délai avant autorisation du repli direct | 10 minutes ; « Masquer l’adresse » refuse toujours le repli direct | | Actualisation du flux / vérifications de transport | 60 / 10 minutes ; les valeurs de l’espace de travail principal s’appliquent au pool partagé | Des proxys différents ne garantissent pas des adresses de sortie différentes. Ces paramètres ne remplacent pas les limites de Telegram et ne garantissent pas l’anonymat.
+****Paramètres automatiques du pool****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Contrôle | Par défaut |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 Pour remplacer la liste publique par votre propre catalogue d’opérateurs, configurez la surécriture ci-dessous. Cela désactive entièrement les abonnements externes, y compris lorsque son tableau « `proxies` » est vide.
 

@@ -4,7 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/featu
 
 TgWitnessの現在の収集モデル、マルチアカウントワークフロー、エクスポート機能、および運用上の制限事項。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
 TgWitnessは、接続されたアカウントからアクセス可能なTelegramの会話内容を保存し、 観測された変更を記録し、検証可能なエクスポートデータを生成します。このリファレンスでは、 収集モデル、現在のワークフロー、およびその範囲について説明します。
+
+**On this page**
+
+- [Standalone application](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#standalone-application)
+- [Shared investigations](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#shared-investigations)
+- [Archive tools](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#archive-tools)
+- [Optional extras](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#optional-extras)
+- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#protocol-and-private-sources)
+- [Multiple accounts](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#multiple-accounts)
+- [Capture and attribution](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#capture-and-attribution)
+- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#capacity-and-telegram-limits)
+- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#reliability-and-recovery)
+- [Evidence model](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#evidence-model)
+- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#export-deployment-and-handoff)
+- [Stable release criteria](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#stable-release-criteria)
 
 ## スタンドアロンアプリケーション
 

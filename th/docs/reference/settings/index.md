@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/setti
 
 ตัวช่วยตั้งค่า, เป้าหมาย, ระดับอินเทอร์เฟซ, เส้นทางการเชื่อมต่อ และการตั้งค่าที่กลุ่มบัญชีใช้ร่วมกัน
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [บัญชี](https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/) · [การเชื่อมต่อ](https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/) · [เข้าถึง](https://phishdestroy.github.io/TgWitness/th/docs/reference/access/)
 
 พื้นที่ทำงานใหม่จะเปิดขึ้น `/first-run`: ภาษาและเวลา, ระดับอินเทอร์เฟซ, เป้าหมาย, การเชื่อมต่อ, Telegram และการสนทนา. ทุกคำตอบจะถูกบันทึกบนเซิร์ฟเวอร์ทันทีที่ มีการเปลี่ยนแปลง ดังนั้นการรีโหลดจะต่อจากขั้นตอนเดิม หน้าจอสุดท้ายแสดงรายการคำตอบและ ให้คุณกลับไปยังคำตอบใดก็ได้

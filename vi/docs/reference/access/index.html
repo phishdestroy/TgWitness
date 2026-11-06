@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Quyền truy cập và quyền hạn</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Những nội dung đã được kiểm thử →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Tham khảo / Thiết lập</p><h1>Quyền truy cập và quyền hạn</h1><p class="guide-outcome">Quản lý quyền truy cập vào các tài khoản và cuộc trò chuyện, chọn quyền hạn, giới hạn phiên truy cập và địa chỉ IP, cũng như thu hồi quyền truy cập.</p><div class="wiki-body"><p>Cấp quyền truy cập cho người đánh giá vào một cuộc trò chuyện, cấp quyền cho nhà phân tích để xuất dữ liệu vụ việc, hoặc cấp
+<article class="guide-content"><p class="language-notice">Một số phần của trang này vẫn còn bằng tiếng Anh: bản gốc tiếng Anh đã được sửa đổi sau khi được dịch.</p><p class="eyebrow">Tham khảo / Thiết lập</p><h1>Quyền truy cập và quyền hạn</h1><p class="guide-outcome">Quản lý quyền truy cập vào các tài khoản và cuộc trò chuyện, chọn quyền hạn, giới hạn phiên truy cập và địa chỉ IP, cũng như thu hồi quyền truy cập.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Tài liệu</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>Cấp quyền truy cập cho người đánh giá vào một cuộc trò chuyện, cấp quyền cho nhà phân tích để xuất dữ liệu vụ việc, hoặc cấp
 quyền kiểm soát các tài khoản đã chọn cho người vận hành. Mỗi người sẽ nhận được mã thông báo riêng. Mã thông báo
 trên bảng điều khiển chính sẽ do quản trị viên nắm giữ.</p>
 <p><a href="../accounts/">Thiết lập tài khoản</a> · <a href="../connection/">Các tuyến kết nối</a> · <a href="../security/">Mô hình bảo mật</a></p>
@@ -259,16 +261,13 @@ các bản ghi nhật ký <code>access.*</code> được ký điện tử. Các 
 Các mã thông báo đã được cấp và thông tin xác thực phiên làm việc được lưu giữ dưới dạng băm (hash) trong kho lưu trữ được mã hóa.</p>
 <details>
 <summary><strong>Quản trị viên chính và ranh giới tin cậy</strong></summary>
-
-Mã thông báo bảng điều khiển chính vẫn không bị hạn chế. Việc đăng nhập qua trình duyệt bằng mã thông báo này sẽ tạo ra các phiên
-tuân theo giới hạn phiên do quản trị viên cấu hình. Các tập lệnh gửi
-mã thông báo chính trực tiếp vẫn giữ quyền truy cập đầy đủ và không được tính là các phiên trình duyệt.
-
-Đây là cơ chế kiểm soát truy cập ở cấp độ ứng dụng trong một lần cài đặt. Tất cả các không gian làm việc đều chia sẻ
-quá trình máy chủ; điều này không có nghĩa là cách ly với quản trị viên máy chủ. Hãy bảo mật
-mã thông báo chính, các phiên Telegram, khóa ký và thư mục dữ liệu. Mã thông báo chứng thực
-là một thông tin xác thực kiểm tra trạng thái/điểm kiểm tra riêng biệt, không phải là mã thông báo truy cập bảng điều khiển.
-
+<p>The main panel token remains unrestricted. Browser sign-ins with it create sessions
+subject to the administrator's configured session limits. Scripts sending the
+main token directly retain full access and are not counted as browser sessions.</p>
+<p>This is application-level access control in one installation. All workspaces share
+the server process; this is not isolation from the host administrator. Keep the main
+token, Telegram sessions, signing keys and data directory private. A witness token
+is a separate checkpoint/health credential, not a panel access token.</p>
 </details></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">Chỉnh sửa trang này trên GitHub ↗</a><a class="next-guide" href="../connection/"><span>Bước tiếp theo</span><strong>Kết nối, máy chủ trung gian và bảo vệ dữ liệu →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../verification/">Những nội dung đã được kiểm thử →</a></p></footer>
 </main>

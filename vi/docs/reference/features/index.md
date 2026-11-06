@@ -4,7 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/featu
 
 Mô hình thu thập hiện tại, quy trình làm việc với nhiều tài khoản, tính năng xuất dữ liệu và các giới hạn vận hành của TgWitness.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
 TgWitness lưu trữ các cuộc trò chuyện trên Telegram mà các tài khoản được kết nối có thể truy cập, ghi lại các thay đổi được quan sát và chuẩn bị các tệp xuất có thể xác minh. Tài liệu tham khảo này mô tả mô hình thu thập, các quy trình làm việc hiện tại và phạm vi áp dụng của chúng.
+
+**On this page**
+
+- [Standalone application](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#standalone-application)
+- [Shared investigations](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#shared-investigations)
+- [Archive tools](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#archive-tools)
+- [Optional extras](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#optional-extras)
+- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#protocol-and-private-sources)
+- [Multiple accounts](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#multiple-accounts)
+- [Capture and attribution](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#capture-and-attribution)
+- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#capacity-and-telegram-limits)
+- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#reliability-and-recovery)
+- [Evidence model](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#evidence-model)
+- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#export-deployment-and-handoff)
+- [Stable release criteria](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#stable-release-criteria)
 
 ## Ứng dụng độc lập
 

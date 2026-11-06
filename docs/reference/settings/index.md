@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/settings
 
 The setup wizard, goals, interface levels, connection routes and settings shared by an account group.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Accounts](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/) · [Connection](https://phishdestroy.github.io/TgWitness/docs/reference/connection/) · [Access](https://phishdestroy.github.io/TgWitness/docs/reference/access/)
 
 A new workspace opens `/first-run`: language and time, interface level, goal, connection, Telegram and chats. Each answer is saved on the server as soon as it changes, so a reload continues the same step. The last screen lists the answers and lets you go back to any of them.

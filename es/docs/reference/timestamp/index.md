@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/times
 
 Marcas de tiempo RFC 3161 para puntos de control firmados: qué se envía a la autoridad y cómo se verifica la respuesta.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness prepara solicitudes conforme a la norma RFC 3161 y verifica las respuestas de la autoridad de sellado de tiempo (TSA). Este procedimiento manual no selecciona una TSA ni envía datos; el modo de pruebas realiza ambas acciones según una programación ([formato de pruebas](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Una solicitud preparada **aún no** constituye **una prueba de sellado de tiempo**.
 
 ## Lo que la prueba acredita

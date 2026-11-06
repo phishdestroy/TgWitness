@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/searc
 
 Знайдіть збережені повідомлення за формами слів, точними фразами, доменами та @іменами користувачів, з найкращими збігами на початку, з індексом, прив’язаним до підписаного журналу.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Аналіз архіву](https://phishdestroy.github.io/TgWitness/uk/docs/reference/analysis/) · [Локальне розпізнавання тексту та транскрипція](https://phishdestroy.github.io/TgWitness/uk/docs/reference/media-analysis/) · [Вікі](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Попередній перегляд.** У розділі **«Журнал**» виберіть **«Найкращий збіг · форми слів»** поруч із полем пошуку. Результати ранжуються за алгоритмом BM25 і відповідають іншим формам того самого слова: *«перевод»* знаходить *«переводом»* і *«переводи»*, *«transfer»* знаходить *«transfers»*, китайська фраза знаходиться без пробілів. **«Новіші спочатку · точний текст»** зберігає попередній пошук підрядка в усьому записі.
 
 Індекс є похідними даними. Він відтворюється на основі підписаного журналу, сам ніколи не підписується і ніколи не потрапляє до експорту. Оригінальні записи не змінюються.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#benchmark)
 
 ## Синтаксис пошуку
 

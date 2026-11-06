@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/searc
 
 ابحث عن الرسائل المحفوظة حسب أشكال الكلمات، والعبارات الدقيقة، والنطاقات، وأسماء المستخدمين @، مع عرض أفضل النتائج أولاً، مع ربط الفهرس بالسجل الموقّع.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [تحليل الأرشيف](https://phishdestroy.github.io/TgWitness/ar/docs/reference/analysis/) · [التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/media-analysis/) · [ويكي](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **المعاينة.** في **«Journal**»، اختر **«أفضل تطابق · أشكال الكلمة»** بجوار حقل البحث. يتم ترتيب النتائج باستخدام خوارزمية BM25 وتتطابق مع الأشكال الأخرى لنفس الكلمة: يبحث *«перевод»* عن *«переводом*» *و«переводы*»، ويبحث *«transfer»* عن *«transfers*»، ويتم العثور على العبارة الصينية بدون مسافات. **خيار «الأحدث أولاً · النص الدقيق»** يحافظ على البحث السابق عن السلسلة الفرعية عبر السجل بأكمله.
 
 الفهرس عبارة عن بيانات مشتقة. يتم إعادة بنائه من السجل الموقّع، ولا يتم توقيعه أبدًا ولا يدخل أبدًا في عملية التصدير. لا تتغير السجلات الأصلية.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#benchmark)
 
 ## صيغة البحث
 

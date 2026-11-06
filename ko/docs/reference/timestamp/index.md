@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/times
 
 서명된 체크포인트에 대한 RFC 3161 타임스탬프: 인증 기관에 전송되는 내용과 응답을 검증하는 방법.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness는 RFC 3161 요청을 생성하고 타임스탬프 인증 기관(TSA)의 응답을 검증합니다. 이 수동 절차는 TSA를 선택하거나 데이터를 제출하지 않지만, 증거 모드는 일정에 따라 두 가지 작업을 모두 수행합니다([증거 형식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). 생성된 요청만으로는 **아직 타임스탬프 증거가 아닙니다**.
 
 ## 증거가 입증하는 바

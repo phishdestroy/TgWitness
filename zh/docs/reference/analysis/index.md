@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/analy
 
 搜索已保存的消息、审查 AI 输入内容，并保存附有来源参考信息的分析报告。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [工作流指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 使用**“日志**”进行不依赖 AI 的本地搜索；[全文搜索](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/)（预览） 可匹配词形、短语、域名和 @用户名。若要**使用“查询存档”**功能，请先在**“集成**”中 启用并配置提供商。工作区选择器用于选择 账户；表单用于选择聊天记录和观察时间段。 检索在 本地运行。精确短语或域名可缩小检索范围；输入消息 ID 可查询已保存的 版本。查看摘录并打开其日志记录或上下文。 本工具不包含向量数据库，也不支持自动执行 Telegram 操作。

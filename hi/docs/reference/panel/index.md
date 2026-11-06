@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel
 
 पैनल की प्रत्येक स्क्रीन: चैट्स, जर्नल, स्रोत, एक्सपोर्ट्स, एक्स्ट्रा, सुरक्षा मोड और कोड जांच।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [पहला सेटअप और सेटिंग्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/settings/) · [खाते](https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/) · [निर्यात करें और सत्यापित करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/) · [केस रिपोर्ट](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-reports/)
 
 प्रत्येक स्क्रीन क्या करती है, यह हस्ताक्षरित जर्नल में क्या लिखती है और विस्तृत मार्गदर्शिका कहाँ है। पैनल एक समय में एक वर्कस्पेस दिखाता है: एक टेलीग्राम खाता अपने स्वयं के स्रोतों, जर्नल और हस्ताक्षर कुंजी के साथ। साइडबार के शीर्ष पर स्थित सेलेक्टर वर्कस्पेस बदलता है। पता वर्कस्पेस को ले जाता है (`?ws=…`); जब तक पता, चयनकर्ता और लोड किया गया खाता असंगत रहते हैं, तब तक क्रियाएँ अवरुद्ध रहती हैं।
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/#more-tools)
 
 ## अपना रास्ता खोजें
 

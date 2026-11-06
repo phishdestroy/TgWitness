@@ -32,9 +32,27 @@
 <nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Cách thức thu thập dữ liệu</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Những nội dung đã được kiểm thử →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Một số phần của trang này vẫn còn bằng tiếng Anh: bản gốc tiếng Anh đã được sửa đổi sau khi được dịch.</p><p class="eyebrow">Tham khảo / Thu thập</p><h1>Cách thức thu thập dữ liệu</h1><p class="guide-outcome">Phạm vi quan sát, cập nhật trực tiếp, kiểm tra lại, tệp đính kèm, các hành động của người dùng và ý nghĩa của “khoảng trống”, được ghi lại theo từng bản ghi.</p><div class="wiki-body"><p>TgWitness ghi lại những gì mà một tài khoản Telegram được kết nối quan sát được. Nhật ký này lưu giữ
+<article class="guide-content"><p class="language-notice">Một số phần của trang này vẫn còn bằng tiếng Anh: bản gốc tiếng Anh đã được sửa đổi sau khi được dịch.</p><p class="eyebrow">Tham khảo / Thu thập</p><h1>Cách thức thu thập dữ liệu</h1><p class="guide-outcome">Phạm vi quan sát, cập nhật trực tiếp, kiểm tra lại, tệp đính kèm, các hành động của người dùng và ý nghĩa của “khoảng trống”, được ghi lại theo từng bản ghi.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Tài liệu</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md">Bộ sưu tập</a></p>
+<p><img alt="Collection" src="../../../../assets/chapter-collect.svg" /></p>
+<p>TgWitness ghi lại những gì mà một tài khoản Telegram được kết nối quan sát được. Nhật ký này lưu giữ
 những quan sát đó, trình tự của chúng cũng như bối cảnh đi kèm. Công cụ này
 không suy luận các hành động không được quan sát thấy từ một tin nhắn bị thiếu hoặc từ việc tài khoản đang được kết nối.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#from-login-to-a-journal">From login to a journal</a></li>
+<li><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Observation scope: chosen chats, a folder or the whole account</a></li>
+<li><a href="#scope-and-event-selection">Scope and event selection</a></li>
+<li><a href="#own-actions">Own actions</a></li>
+<li><a href="#investigation-mode-joining-teams-and-talking-to-bots">Investigation mode: joining teams and talking to bots</a></li>
+<li><a href="#recheck-tiers">Recheck tiers</a></li>
+<li><a href="#message-history-and-attribution">Message history and attribution</a></li>
+<li><a href="#history-snapshots">History snapshots</a></li>
+<li><a href="#attachment-handling">Attachment handling</a></li>
+<li><a href="#pause-lock-disconnect-and-restart">Pause, lock, disconnect, and restart</a></li>
+<li><a href="#account-isolation-and-verification">Account isolation and verification</a></li>
+</ul>
+</details>
 <h2 id="from-login-to-a-journal">Từ quá trình đăng nhập đến sổ ghi chép<a class="anchor" href="#from-login-to-a-journal" aria-label="Liên kết đến phần này">#</a></h2>
 <p>For self-destructing photos and files, see <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md">Self-destructing media</a>.
 It explains the priority worker, saved and unavailable outcomes, and the limits of

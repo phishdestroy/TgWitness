@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/
 
 חפשו, קראו את ההקשר, ספרו פעילויות וייצאו הודעות שנשמרו באמצעות סקריפטים וסוכנים, עם פלט בפורמט --json, קודי יציאה יציבים ואסימוני קריאה בלבד בעלי תחום מוגדר.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [MCP לקריאה בלבד](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/) · [חיפוש בטקסט מלא](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/) · [ויקי](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **תצוגה מקדימה.** `tgwitness search`, `context`, `messages`, `stats` ו `export` לקרוא תצפיות שנשמרו עבור סקריפטים וסוכני בינה מלאכותית. הם אינם יכולים לשלוח דבר ל- Telegram, לשנות הגדרות או לערוך את היומן החתום.

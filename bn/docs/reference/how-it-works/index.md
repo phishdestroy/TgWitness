@@ -4,9 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-i
 
 হ্যাশ চেইন, স্বাক্ষর, চেকপয়েন্ট এবং উইটনেসগুলো যাচাইকারী যে সঠিক সূত্রগুলো ব্যবহার করে, সেগুলো দিয়ে ব্যাখ্যা করা হয়েছে।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness একটি সংগ্রহকারী অ্যাকাউন্ট যা পর্যবেক্ষণ করেছে তা সংরক্ষণ করে, সেই পর্যবেক্ষণগুলোকে একটি স্বাক্ষরিত জার্নালে সংযুক্ত করে এবং অন্য একজনকে একটি বিশ্বস্ত কী ও পূর্বে সংরক্ষিত চেকপয়েন্টের বিপরীতে একটি এক্সপোর্ট যাচাই করার সুযোগ দেয়।
 
 [স্থানীয় ডকুমেন্টেশন ওয়েবসাইটে](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) `/docs/concepts/`-এ ইন্টারেক্টিভ উদাহরণ, `/docs/witness/`-এ একটি চেকপয়েন্ট ডিসিশন এক্সপ্লোরার, এবং [Case Board](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/), [রিপোর্ট ডিজাইন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-reports/) ও [হ্যান্ডওভার এক্সট্র্যাক্টের](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#handover-extract) জন্য ওয়াকথ্রু যোগ করা হয়েছে। সব উদাহরণমূলক বার্তা, গণনা এবং বিলম্ব কাল্পনিক। চেইন স্যান্ডবক্সে হ্যাশগুলো ব্রাউজারে SHA-256 দিয়ে গণনা করা হয়। টেলিগ্রামে কিছুই পাঠানো হয় না।
+
+**On this page**
+
+- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [What a hash covers](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/#what-a-hash-covers)
+- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Pick a workflow](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/#pick-a-workflow)
 
 ## একটি বার্তা পরিবর্তিত হয়; পর্যবেক্ষণগুলো জমা হয়।
 

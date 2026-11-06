@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/analy
 
 सहेजे गए संदेशों को खोजें, एआई इनपुट्स की समीक्षा करें और उनके स्रोत संदर्भों के साथ विश्लेषणात्मक रिपोर्टें रखें।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [कार्यप्रवाह मार्गदर्शिका](https://phishdestroy.github.io/TgWitness/docs/archive/) · [विकी](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 AI के बिना स्थानीय खोज के लिए **जर्नल** का उपयोग करें; [पूर्ण-पाठ खोज](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/) (पूर्वावलोकन) शब्द रूपों, वाक्यांशों, डोमेन और @usernames से मेल खाती है। **आर्काइव से पूछने** के लिए, पहले **इंटीग्रेशन** में एक प्रदाता को सक्षम और कॉन्फ़िगर करें। वर्कस्पेस चयनकर्ता खाते का चयन करता है; फ़ॉर्म चैट और अवलोकन अवधि का चयन करता है। पुनः प्राप्ति स्थानीय रूप से चलती है। एक सटीक वाक्यांश या डोमेन पुनः प्राप्ति को सीमित करता है; एक संदेश आईडी सहेजे गए संस्करणों का अनुरोध करती है। अंशों की समीक्षा करें और उनके जर्नल रिकॉर्ड या संदर्भ खोलें। कोई वेक्टर डेटाबेस या स्वचालित टेलीग्राम क्रिया नहीं है।

@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 可透過詞形、精確短語、網域及 @用戶名 搜尋已儲存的訊息，結果依最符合的順序排列，且索引與簽名日誌綁定。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [檔案分析](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/) · [本地 OCR 與文字轉錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **預覽。**在「**日誌**」中，於搜尋欄旁選擇「**最佳匹配 · 詞形變體**」。 搜尋結果依 BM25 演算法排序，並會匹配同一詞彙的其他詞形： *搜尋「перевод」*會找到*「переводом」*和*「переводы」*，搜尋*「transfer」*會找到*「transfers」*，而中文 短語則會以不帶空格的形式被檢索。選擇**「最新優先 · 精確文字」**可維持先前 針對整個記錄進行的子字串搜尋。
 
 索引屬衍生資料。它由簽名日誌重建而成，本身從未經過簽名， 也絕不會被導出。原始記錄不會被更改。
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#benchmark)
 
 ## 搜尋語法
 

@@ -32,9 +32,27 @@
 <nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentacja</a> <span aria-hidden="true">/</span> <a href="../">Odniesienie</a> <span aria-hidden="true">/</span> <span aria-current="page">Jak przebiega gromadzenie danych</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Co zostało przetestowane →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Niektóre fragmenty tej strony są nadal w języku angielskim: angielski tekst źródłowy uległ zmianie po przetłumaczeniu.</p><p class="eyebrow">Odniesienie / Zbieraj</p><h1>Jak przebiega gromadzenie danych</h1><p class="guide-outcome">Zakres obserwacji, aktualizacje na żywo, ponowne weryfikacje, załączniki, własne działania oraz znaczenie luk w danych – wszystko to w ujęciu poszczególnych wpisów.</p><div class="wiki-body"><p>TgWitness rejestruje to, co obserwuje podłączone konto w aplikacji Telegram. Dziennik zachowuje
+<article class="guide-content"><p class="language-notice">Niektóre fragmenty tej strony są nadal w języku angielskim: angielski tekst źródłowy uległ zmianie po przetłumaczeniu.</p><p class="eyebrow">Odniesienie / Zbieraj</p><h1>Jak przebiega gromadzenie danych</h1><p class="guide-outcome">Zakres obserwacji, aktualizacje na żywo, ponowne weryfikacje, załączniki, własne działania oraz znaczenie luk w danych – wszystko to w ujęciu poszczególnych wpisów.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentacja</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md">Kolekcja</a></p>
+<p><img alt="Collection" src="../../../../assets/chapter-collect.svg" /></p>
+<p>TgWitness rejestruje to, co obserwuje podłączone konto w aplikacji Telegram. Dziennik zachowuje
 te obserwacje, ich kolejność oraz towarzyszący im kontekst. Nie
 wyciąga wniosków dotyczących niewidocznych działań na podstawie brakującej wiadomości lub faktu, że konto jest podłączone.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#from-login-to-a-journal">From login to a journal</a></li>
+<li><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Observation scope: chosen chats, a folder or the whole account</a></li>
+<li><a href="#scope-and-event-selection">Scope and event selection</a></li>
+<li><a href="#own-actions">Own actions</a></li>
+<li><a href="#investigation-mode-joining-teams-and-talking-to-bots">Investigation mode: joining teams and talking to bots</a></li>
+<li><a href="#recheck-tiers">Recheck tiers</a></li>
+<li><a href="#message-history-and-attribution">Message history and attribution</a></li>
+<li><a href="#history-snapshots">History snapshots</a></li>
+<li><a href="#attachment-handling">Attachment handling</a></li>
+<li><a href="#pause-lock-disconnect-and-restart">Pause, lock, disconnect, and restart</a></li>
+<li><a href="#account-isolation-and-verification">Account isolation and verification</a></li>
+</ul>
+</details>
 <h2 id="from-login-to-a-journal">Od logowania do dziennika<a class="anchor" href="#from-login-to-a-journal" aria-label="Link do tej sekcji">#</a></h2>
 <p>For self-destructing photos and files, see <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md">Self-destructing media</a>.
 It explains the priority worker, saved and unavailable outcomes, and the limits of

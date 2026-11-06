@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首頁</a> <span aria-hidden="true">/</span> <a href="../../">文件說明</a> <span aria-hidden="true">/</span> <a href="../">參考資料</a> <span aria-hidden="true">/</span> <span aria-current="page">全文搜尋</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">本頁部分內容仍為英文：英文原文在翻譯後已進行修改。</p><p class="eyebrow">參考資料 / 存檔與整合功能</p><h1>全文搜尋</h1><p class="guide-outcome">可透過詞形、精確短語、網域及 @用戶名 搜尋已儲存的訊息，結果依最符合的順序排列，且索引與簽名日誌綁定。</p><div class="wiki-body"><p><a href="../analysis/">檔案分析</a> · <a href="../media-analysis/">本地 OCR 與文字轉錄</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">維基</a></p>
+<article class="guide-content"><p class="language-notice">本頁部分內容仍為英文：英文原文在翻譯後已進行修改。</p><p class="eyebrow">參考資料 / 存檔與整合功能</p><h1>全文搜尋</h1><p class="guide-outcome">可透過詞形、精確短語、網域及 @用戶名 搜尋已儲存的訊息，結果依最符合的順序排列，且索引與簽名日誌綁定。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文件說明</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">檔案分析</a> · <a href="../media-analysis/">本地 OCR 與文字轉錄</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">維基</a></p>
 <p><strong>預覽。</strong>在「<strong>日誌</strong>」中，於搜尋欄旁選擇「<strong>最佳匹配 · 詞形變體</strong>」。
 搜尋結果依 BM25 演算法排序，並會匹配同一詞彙的其他詞形：
 <em>搜尋「перевод」</em>會找到<em>「переводом」</em>和<em>「переводы」</em>，搜尋<em>「transfer」</em>會找到<em>「transfers」</em>，而中文
@@ -40,6 +42,20 @@
 針對整個記錄進行的子字串搜尋。</p>
 <p>索引屬衍生資料。它由簽名日誌重建而成，本身從未經過簽名，
 也絕不會被導出。原始記錄不會被更改。</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">搜尋語法<a class="anchor" href="#search-syntax" aria-label="此節的連結">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

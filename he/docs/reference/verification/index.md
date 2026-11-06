@@ -4,7 +4,61 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/verif
 
 הבדיקה החיה של טלגרם, בדיקות אוטומטיות, בדיקות דפדפן ומה שעדיין לא אומת.
 
-Each result below applies to its recorded revision and environment. The [current capability matrix](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) separates implementation, published downloads and remaining qualification.
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
+**Updated 6 November 2026.** Results are tied to the revision, environment and workload recorded for each run. [Current capabilities](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) describes the available workflows; this page records what has actually been checked.
+
+[Performance graphs](https://phishdestroy.github.io/TgWitness/docs/validation/) · [Signed English audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [Downloadable measurements](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
+
+| Latest evidence | תוצאה | היקף |
+| --- | --- | --- |
+| Release audit · 6 Nov | 1,461 core tests passed; 37 platform skips | Source `92e539af40d8`; open findings retained |
+| Fresh exports · 6 Nov | 127.713 and 141.781 records/s, complete cycle | Two accounts per server; text and metadata through WARP |
+| Retained archives · 6 Nov | 48 archives; 3,598,381 records verified | Existing archives checked against pinned workspace keys |
+| Trusted Live · 5 Nov | Guarded CPU recording and WARP checks | Official Desktop login and native export remain unqualified |
+| Phala / Intel TDX · 4 Nov | All 16 verifier checks passed on later runs | Historical deployment; no Telegram account on the CVM |
+
+**On this page**
+
+- [Release audit and fresh exports · 6 November 2026](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
+- [Trusted Live CPU Ubuntu and WARP · 5 November 2026](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
+- [Live Phala Cloud deployment · 4 November 2026](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
+- [Live server journal inventory · 1 November 2026](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
+- [Recent offline and fault-injection checks · 1 November 2026](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
+- [Live Telegram test, whole account · 29 October 2026](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
+- [Password-protected export opened with libarchive · 29 October 2026](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
+- [Live Telegram test · 27 to 29 October 2026](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
+- [Synthetic local capacity measurement](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/#synthetic-local-capacity-measurement)
+- [Full-text search on one million messages · 5 November 2026](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
+- [Remaining qualification](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/#remaining-qualification)
+
+## Release audit and fresh exports · 6 November 2026
+
+The audit used v0.9.1 at source `92e539af40d8368d198ff5e040f1d876f2c1310e`, release `92e539af40d8-83e41104669e`. Installed-package smoke checks passed on three servers. The signed report retains the state observed at that time.
+
+[![Acquisition and complete export rates for two fresh workloads](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
+
+| Workload | תיעוד | Acquisition | Complete cycle | Complete-cycle rate |
+| --- | --- | --- | --- | --- |
+| Server A · two accounts | 27,030 | 189.043 s | 211.647 s | 127.713 records/s |
+| Server B · two accounts | 29,299 | 182.513 s | 206.650 s | 141.781 records/s |
+
+Both exports began without resume, excluded attachments and avatars, and ended with zero duplicate or reused records. The complete cycle includes preparation, acquisition, selection, packaging and archive verification. Server A also ran a protected-chat read check. Four FloodWait events on A and three on B were respected. These observations do not establish a general throughput guarantee.
+
+| בדוק | תוצאה | Qualification |
+| --- | --- | --- |
+| Core pytest | 1,461 passed | 37 platform skips |
+| Browser / browser UX / evidence / site | 102 / 66 / 15 / 9 passed | These programs overlap other tests; counts are not additive |
+| Capture addon | 124 passed | Three Official Web checks blocked by the required Chromium sandbox |
+| API authorization | 269 routes; 538 requests passed | Missing credentials and revoked access |
+| Retained archives | 48 of 48 verified | 3,598,381 records; pinned workspace keys |
+| Live fleet read checks | 24 of 40 profiles passed | 16 WARP routes failed qualification; those profiles were not connected |
+
+The [signed report](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) records all open findings, including three defects in an unpublished secret-chat snapshot absent from the audited main build. The earlier [public-history qualification](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md) used a different revision and workload; its rates must not be combined with this comparison.
+
+Verify the original report using the [pinned key and verifier](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files). Its signature protects the operator's report from alteration. It is not independent attestation, proof of Telegram authorship or GDPR certification.
 
 ## Trusted Live CPU Ubuntu and WARP · 5 November 2026
 
@@ -20,7 +74,21 @@ An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and 
 
 ## פריסה חיה ב-Phala Cloud · 4 בנובמבר 2026
 
-`--provider phala --quick-tunnel` הוצא לפועל מול **Phala Cloud** האמיתי (`tdx.small`, אזור US-WEST-1) עם מפתח API של Phala Cloud של סביבת עבודה ריקה, קובץ ntfy.sh אמיתי, GitHub ו-Intel PCS. ה-CVM התקין את ה-commit `df7d860c` (v0.8.1); הפריסה, האימות והמחיקה בוצעו משורת הפקודה עם התיקונים המפורטים להלן. שבעה CVMs עלו יחד כ-1.9 סנט אמריקאי.
+**Historical result:** later deployments passed all 16 verifier checks, including Intel TDX and the quick tunnel. Restart evidence, signed address discovery and report timestamps were checked separately. Each test CVM was removed after its run.
+
+| הגדרה | Recorded value |
+| --- | --- |
+| ספק | Phala Cloud · `tdx.small` · US-WEST-1 |
+| פריסה | `--provider phala --quick-tunnel`; initially empty workspace |
+| Initial collector | `df7d860c` · v0.8.1 |
+| Collector with all fixes | `53a0f7e9` |
+| Production guest | `dstack-0.5.12`; SSH access disabled |
+| External services | ntfy.sh, GitHub and Intel PCS |
+| Observed cost | Seven CVMs, about 1.9 US cents together; historical test pricing |
+
+The sequence below separates initial failures, fixes and completed checks. No Telegram account was connected to these CVMs.
+
+**Deployments 1–2 · provider differences and regression checks**
 
 בשתי הפריסות הראשונות נמצאו חמישה הבדלים ביחס ל-Phala Cloud המדומה. [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) משחזר כעת כל אחד מהם, ונכשל ללא התיקון:
 
@@ -32,7 +100,7 @@ An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and 
 | כאשר שער ה-dstack כבוי, פרטי ה-CVM לעולם אינם מקבלים `instance_id` | הפריסה ממתינה 30 דקות ונכשלת | מזהה המופע נקרא ממצב ה-CVM |
 | הפעלה מחדש, עצירה והפעלה הן פעולות CVM, ולא עדכוני יישום | `provider_actions` לא ציין את הפעולות מחדש | הפעולות נקראות גם כן |
 
-הפריסה השלישית:
+**Deployment 3 · attestation, access checks and restart evidence**
 
 - ה-CVM הפעיל את `dstack-0.5.12` עם גישה ל-SSH כבויה. האספן פרסם את כתובתו החתומה כ- 1.5 דקות לאחר יצירתו. לאחר מכן, הפריסה העבירה את `tdx_binding`, `tdx_quote` (Intel TCB UpToDate, רשומת אימות חומרה v4, FMSPC `20a06f000000`, לא במצב ניפוי באגים, לא ניתן להעברה, תומך בנתוני אימות קריפטוגרפיים שהורדו מ-Intel), `tdx_compose_hash`, `tdx_compose` (בייט אחר בייט) ו-`tdx_identity` (מפתחות KMS).
 - הלוח בכתובת trycloudflare.com השיב 401 ללא אסימון או עם אסימון שגוי, ו-200 עם אסימון הלוח.
@@ -41,27 +109,31 @@ An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and 
 - הפקודה `destroy` הסירה רק את ה-CVM הזה. לאחר מכן, סביבת העבודה הייתה ריקה, וכתובת הלוח הפסיקה להגיב.
 - בדיקת המחיר באשף הפאנל הראתה `tdx.small` במחיר של 0.058 דולר לשעה. מפתח שגוי גרר הודעה פשוטה "לא התקבל מפתח ה-API".
 
-שתי ממצאים נוספים, שתוקנו לאחר מכן:
+**Follow-up fixes · signed address discovery and OS measurements**
 
 - ללא מפתח הכתובת, `verify` עקב אחר הפוסט האחרון והתקין בנושא הכתובת, המופיע בתצורת Docker Compose שפורסמה. פוסט מזויף אחד שלח אותו למארח שאינו קיים, ו-`statement` נכשל: זייפן לא יכול היה להתחזות לאספן, אך יכול היה לחסום אימות צד שלישי, למשך עד 12 שעות באמצעות חותמת זמן עתידית מזויפת. האספן כעת מפרסם גם את כתובתו חתומה במפתח שלו, `verify` מקבל רק פוסטים כאלה כאשר האספן מפרסם אותם, והפוסטים ממוינים לפי זמן הקבלה של ntfy.sh. [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) משחזר את הפרסומים המזויפים. CVM מפעיל זאת רק מתוך commit המכיל אותה, ולכן האספן של הריצה הזו עדיין לא חתם על כתובתו ו-`verify` ציין זאת.
 - `tdx_os` לא יכול היה לפעול ללא `dstack-mr`, שגרסתו הנוכחית כוללת את `measure-os` במקום את `measure --json` המוזכר בתיעוד. המאמת מחשב כעת את MRTD ו-RTMR0-2 בעצמו מהתמונה שפורסמה וממבנה ה-VM, כולל טבלאות ACPI.
 
-הפריסה הרביעית, עם המרכיבים הבאים:
+**Deployment 4 · all 16 checks, report seals and restart verification**
 
 - הפריסה הורידה את ה-`dstack-0.5.12` שפורסם פעם אחת, התאימה אותו להאש של תמונת מערכת ההפעלה ש-CVM דיווח עליה, ו-`tdx_os` עבר: MRTD, RTMR0, RTMR1 ו-RTMR2 שווים לערכים שחושבו עבור QEMU 8.2.2, 1 vCPU ו-2 GiB. אותו חישוב הניב ערך RTMR0 שונה עבור 4 GiB מוצהרים, 2 vCPUs, QEMU 9.2.1 או כרטיס רשת שני, ונכשל עבור גרעין, קושחה או שורת פקודה ששונו וכן עבור תמונת הפיתוח.
 - `verify` עבר את כל 16 הבדיקות, כולל מחבר המנהרה המהירה, ולכן התוצאה הייתה "עבר". הוא כתב את תעודת ה-HTML וה-PDF, שנחתמו דיגיטלית בחתימות ובחותמות זמן עם חותמת זמן eIDAS מוסמכת מ יחידת חותמות הזמן של ממשלת בלגיה TSU 202301 (סטטוס שהוענק ברשימת האמינות של בלגיה ), חותמת זמן FreeTSA וחתימת המאמת; `check-report` אישר את כולן ואת חתימת ה-PDF.
 - לאחר הפעלה מחדש, `verify --evidence` אישר שתי הפעלות, שכל אחת מהן לוותה באישור חומרה שנוצר בתוך ה-CVM וכל אחת הופעלה מה-`dstack-0.5.12` שפורסם; ההפעלה מחדש והאתחול החדש היו בדרגת REVIEW.
 - `destroy` השאיר את סביבת העבודה ריקה.
 
-הפריסה החמישית הפעילה את האספן מה-commit `53a0f7e9`, הכולל את כל האמור לעיל:
+**Deployment 5 · collector-signed discovery and forged-post rejection**
+
+The collector ran from commit `53a0f7e9`, which includes the fixes above.
 
 - האספן פרסם את כתובתו, חתומה במפתח שלו, לצד ההודעה של המפעיל עם ה-HMAC. לאחר מכן נוספו לנושא שתי הודעות מזויפות, אחת עם HMAC מאופס ואחת חתומה על ידי מפתח Ed25519 אחר, שתיהן טוענות לתאריך בשנת 2096. `verify` לקח את הכתובת החתומה על ידי מפתח האספן ועבר את כל 16 הבדיקות; החותם נשא שוב את חותמת הזמן הבלגית המוסמכת, את חותמת הזמן של FreeTSA ואת חתימת המאמת, ו-`check-report` אישר אותם.
 - לאחר הפעלה מחדש, האספן פרסם את הכתובת החדשה החתומה: `verify` מצא אותה מיד, המפעיל **מצא את הכתובת הנוכחית** 27 שניות לאחר הפרסום ב-HMAC, ושניהם התעלמו מהפרסומים המזויפים. `verify --evidence` אישר שתי הפעלות שהותחלו מ-`dstack-0.5.12`.
 - הפריסה הציגה את הסכום ש-Phala גובה עבור ה-CVM, כולל הדיסק: 0.06078 דולר לשעה.
 
+### Panel wizard and remaining scope
+
 אשף הפאנל הופעל פעמיים ב-Phala Cloud, פעם אחת דרך ממשק ה-API של המשימות ופעם אחת דרך הדפדפן עם Chromium אמיתי: בדיקת המחיר, יצירה עם ה-commit תחת **Advanced**, כל שש בדיקות האישור עברו בהצלחה, רשימת השרתים מציגה את המחיר שחויב (44.37 דולר לחודש), **Find הכתובת הנוכחית**, הורדת תצורת Docker Compose שנמדדה, והמחיקה. הדפדפן לא זיהה שגיאות בדף. בכל פעם, סביבת העבודה הייתה ריקה לאחר מכן.
 
-לא נכללו: דומיין Cloudflare ב-Phala, חשבון Telegram ב-CVM, ותמונת ה-`dstack-0.6.1` . המחיר המוצג באשף לפני היצירה הוא מחיר המחשוב של Phala בלבד, שכן ה-API שלה מציין את מחיר הדיסק רק עבור CVM קיים; רשימת השרתים מציגה את המחיר שחויב לאחר היצירה.
+Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the `dstack-0.6.1` image. The wizard's price before creation is Phala's compute price only, as its API names the disk price only for an existing CVM; the server list shows the billed price after creation. All prices in this section were observed on 4 November 2026.
 
 ## Live server journal inventory · 1 November 2026
 
@@ -179,4 +251,4 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
 
-קבלות וצילומי מסך מקומיים ומפורטים נמצאים בתיקייה test-results/ (מוחרגים ב-Git). צילומי המסך הציבוריים בתיקייה docs/assets/ מכילים אך ורק נתוני הדגמה פיקטיביים.
+The [public audit directory](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md) contains only the signed report and aggregate measurements. Detailed operational receipts, raw captures and account material remain private. Application screenshots in `docs/assets/` use fictional demonstration data.

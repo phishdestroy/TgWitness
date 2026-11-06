@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/webho
 
 HMAC हस्ताक्षरों, पुनः प्रयासों और वितरण स्थिति के साथ HTTPS रिसीवरों को स्कोप्ड इवेंट्स भेजें।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/hi/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [कार्यप्रवाह मार्गदर्शिका](https://phishdestroy.github.io/TgWitness/docs/archive/) · [विकी](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 चुने गए वर्कस्पेस में **इंटीग्रेशन → आउटगोइंग वेबहुक्स** खोलें। एक HTTPS रिसीवर जोड़ें, कलेक्टर/मीडिया/एक्सपोर्ट इवेंट्स चुनें, और वैकल्पिक रूप से नए अवलोकनों और परिवर्तनों के लिए चैट्स चुनें। संदेश का टेक्स्ट डिफ़ॉल्ट रूप से बंद होता है। अंश सक्षम करने से संदेश-परिवर्तन इवेंट्स में अधिकतम 1,000 वर्ण जोड़े जाते हैं; कच्चे टेलीग्राम फ़ील्ड और क्रेडेंशियल कभी भी नहीं भेजे जाते हैं।

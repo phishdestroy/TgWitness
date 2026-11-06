@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">אחסון ושחזור</span></nav>
 <p class="verification-shortcut"><a href="../verification/">מה נבדק ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">הפניה / ראיות</p><h1>אחסון ושחזור</h1><p class="guide-outcome">גיבויים, העברת קבצים ישנים לענן, עותקים תחת Object Lock ושחזור במחשב חדש.</p><div class="wiki-body"><p>הלוח מחלק את העבודה לשלוש משימות:</p>
+<article class="guide-content"><p class="language-notice">חלקים מדף זה עדיין באנגלית: הטקסט המקורי באנגלית שונה לאחר תרגומו.</p><p class="eyebrow">הפניה / ראיות</p><h1>אחסון ושחזור</h1><p class="guide-outcome">גיבויים, העברת קבצים ישנים לענן, עותקים תחת Object Lock ושחזור במחשב חדש.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">תיעוד</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>הלוח מחלק את העבודה לשלוש משימות:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@
 ואז בודק שוב את הבתים המקומיים מיד לפני ההסרה. כישלון בהעלאה,
 קריאה חוזרת שונה או העברה שבוטלה משאירים את הקובץ המקומי במקומו. אם
 גיבוי ראיות מופעל עדיין לא העתיק את הקובץ, ההסרה ממתינה גם לכך.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">כשהדיסק מתמלא<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="קישור לסעיף זה">#</a></h2>
 <p>הורדת קבצים מצורפים מושהית כאשר השטח הפנוי יורד מתחת לערך <strong>פרמטרים ← קבצים מצורפים ← שטח דיסק פנוי</strong> (ברירת מחדל 1 GiB), תוך שמירת התור. תצפיות טקסט ממשיכות. הדבר אינו תלוי בהתראות: כיבוין אינו מבטל את השטח השמור להורדה או את הגנות האחסון.</p>
 <p>כדי לפעול מוקדם יותר, הפעילו <strong>הרצה אוטומטית</strong>, בחרו <strong>הסרת הקובץ המקומי לפינוי מקום</strong> והפעילו <strong>העברה נוספת כאשר שטח הדיסק נמוך</strong>. כברירת מחדל, הכלל האופציונלי מתחיל מתחת ל־5120 MiB פנויים וממשיך באצוות עד שמתפנים 10240 MiB. שני הספים ניתנים להגדרה. היעד, גיל הקובץ המזערי, גודל האצווה, אימות בקריאה חוזרת מלאה ודרישות גיבוי הראיות זהים להרצה ידנית. הכלל אינו מפעיל יעד בעצמו. בדיקות נערכות כל 30 שניות; שגיאה או חוסר התקדמות דוחים את הניסיון הבא בחמש דקות. המצב ומועד הניסיון החוזר נשמרים לאחר הפעלה מחדש. כאשר הכלל אינו פעיל, הרצות מתוזמנות שומרות על המרווח הרגיל.</p>

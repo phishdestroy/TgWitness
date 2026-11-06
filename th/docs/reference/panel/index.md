@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/panel
 
 ทุกหน้าจอของแผงควบคุม: การสนทนา, บันทึก, แหล่งข้อมูล, การส่งออก, Extras, โหมดการป้องกัน และการตรวจสอบโค้ด
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [การตั้งค่าและปรับแต่งครั้งแรก](https://phishdestroy.github.io/TgWitness/th/docs/reference/settings/) · [บัญชี](https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/) · [ส่งออกและตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/) · [รายงานกรณี](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-reports/)
 
 หน้าที่ของแต่ละหน้าจอ, ข้อมูลที่บันทึกไว้ในสมุดบันทึกที่ลงนามแล้ว และตำแหน่งของ คู่มือรายละเอียด แผงควบคุมแสดงพื้นที่ทำงานหนึ่งพื้นที่ต่อครั้ง: บัญชี Telegram หนึ่งบัญชีพร้อม แหล่งข้อมูล สมุดบันทึก และกุญแจลงนามของตัวเอง ตัวเลือกที่ด้านบนของแถบข้างใช้เพื่อ เปลี่ยนพื้นที่ทำงาน ที่อยู่จะนำพื้นที่ทำงาน (`?ws=…`); ในขณะที่ที่อยู่, ตัวเลือก และบัญชีที่โหลดมาไม่ตรงกัน การดำเนินการจะถูกบล็อกไว้
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#more-tools)
 
 ## ค้นหาทางของคุณ
 

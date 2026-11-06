@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/webho
 
 Надсилайте визначені події на HTTPS-приймачі з HMAC-підписами, повторними спробами та статусом доставки.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [Посібник з організації робочого процесу](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Вікі](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Відкрийте **розділ «Інтеграції» → «Вихідні веб-хуки»** у вибраному робочому просторі. Додайте HTTPS- приймач, виберіть події «збір даних», «медіа» та «експорт», а також, за бажанням, вкажіть чати для нових спостережень та змін. Текст повідомлень за замовчуванням не передається. Увімкнення витягів додає не більше 1 000 символів до подій зміни повідомлень; необроблені поля Telegram та аутентифікаційні дані ніколи не надсилаються.

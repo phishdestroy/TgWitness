@@ -32,10 +32,26 @@
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <a href="../">Manba</a> <span aria-hidden="true">/</span> <span aria-current="page">To&#x27;liq matnli qidiruv</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Nima sinovdan o&#x27;tkazilgan →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Ushbu sahifaning ba&#x27;zi qismlari hanuz ingliz tilida: inglizcha asl matn tarjima qilinganidan keyin o&#x27;zgartirilgan.</p><p class="eyebrow">Manba / Arxiv va integratsiyalar</p><h1>To&#x27;liq matnli qidiruv</h1><p class="guide-outcome">Imzolangan jurnalga bog&#x27;langan indeks yordamida so&#x27;z shakllari, aniq iboralar, domenlar va @foydalanuvchi nomlari bo&#x27;yicha saqlangan xabarlarni toping, eng yaxshi mos keladiganlarini birinchi qilib ko&#x27;rsating.</p><div class="wiki-body"><p><a href="../analysis/">Arxiv tahlili</a> · <a href="../media-analysis/">Mahalliy OCR va transkripsiya</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<article class="guide-content"><p class="language-notice">Ushbu sahifaning ba&#x27;zi qismlari hanuz ingliz tilida: inglizcha asl matn tarjima qilinganidan keyin o&#x27;zgartirilgan.</p><p class="eyebrow">Manba / Arxiv va integratsiyalar</p><h1>To&#x27;liq matnli qidiruv</h1><p class="guide-outcome">Imzolangan jurnalga bog&#x27;langan indeks yordamida so&#x27;z shakllari, aniq iboralar, domenlar va @foydalanuvchi nomlari bo&#x27;yicha saqlangan xabarlarni toping, eng yaxshi mos keladiganlarini birinchi qilib ko&#x27;rsating.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Hujjatlash</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">Arxiv tahlili</a> · <a href="../media-analysis/">Mahalliy OCR va transkripsiya</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
 <p><strong>Ko&#x27;rinish.</strong> Jurnalda qidiruv maydoni yonidagi <strong>Eng yaxshi moslik · so&#x27;z shakllari</strong> ni tanlang. Natijalar BM25 bo&#x27;yicha tartiblangan va bir xil so&#x27;zning boshqa shakllariga mos keladi:
 <em>перевод</em> so&#x27;zi <em>переводом</em> va <em>переводы ni</em> topadi, <em>transfer</em> <em>so&#x27;zi</em> <em>transfers</em> ni topadi, xitoy iborasi bo&#x27;shliqlarsiz topiladi. <strong>Eng yangi birinchi · aniq matn</strong> butun yozuv bo&#x27;ylab oldingi substring qidiruvini saqlaydi.</p>
 <p>Indeks – bu hosil qilingan ma'lumot. U imzolangan jurnal asosida qayta tuziladi, hech qachon o'zi imzolanmaydi va hech qachon eksportga kiritilmaydi. Asl yozuvlar o'zgarmaydi.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">Qidiruv sintaksi<a class="anchor" href="#search-syntax" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

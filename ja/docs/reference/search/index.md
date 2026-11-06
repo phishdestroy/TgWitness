@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/searc
 
 保存されたメッセージを、単語の形態、完全なフレーズ、ドメイン、@ユーザー名で検索し、署名付きジャーナルに紐付けられたインデックスを用いて、最も一致度の高いものから順に表示します。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [アーカイブの分析](https://phishdestroy.github.io/TgWitness/ja/docs/reference/analysis/) · [ローカルでのOCRおよび文字起こし](https://phishdestroy.github.io/TgWitness/ja/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **プレビュー。**「**ジャーナル**」で、検索フィールドの横にある**「最良の一致・語形」**を選択します。 結果はBM25でランク付けされ、同じ単語の他の語形とも一致します。 たとえば、*「перевод」*と入力すると*「переводом」*や*「переводы」*が、*「transfer」*と入力すると*「transfers」*が検索され、中国語の フレーズはスペースなしで検出されます。**「最新順・完全一致」を選択すると、**レコード全体に対する以前の 部分文字列検索が維持されます。
 
 インデックスは派生データです。これは署名付きジャーナルから再構築されるものであり、それ自体は決して署名されず、 エクスポート対象にもなりません。元の記録は変更されません。
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#benchmark)
 
 ## 検索構文
 

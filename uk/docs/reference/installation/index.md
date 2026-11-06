@@ -4,7 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/insta
 
 Встановіть за допомогою однієї команди, перевіряйте підписи та хеші, оновлюйте та видаляйте інсталяцію.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Проєкт](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [Швидкий старт](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/) · [Розгортання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/)
+
+**On this page**
+
+- [Install with one command](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#install-with-one-command)
+- [Where everything runs](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#where-everything-runs)
+- [Full-text search settings](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#full-text-search-settings)
+- [Command-line access](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#command-line-access)
+- [Verify before running](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#verify-before-running)
+- [Update an existing installation](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#update-an-existing-installation)
+- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#remove-tgwitness)
 
 ## Встановіть за допомогою однієї команди
 

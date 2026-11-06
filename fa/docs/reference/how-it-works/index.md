@@ -4,9 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-i
 
 زنجیره هش، امضاها، نقاط کنترل و شاهدان با فرمول‌های دقیقی که اعتبارسنج استفاده می‌کند توضیح داده شده‌اند.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness آنچه را که یک حساب گردآورنده مشاهده کرده است حفظ می‌کند، این مشاهدات را به یک دفترچه ثبت امضا شده پیوند می‌دهد و به شخص دیگری اجازه می‌دهد تا یک خروجی را با استفاده از یک کلید مورد اعتماد و یک نقطه کنترل قبلی که نگهداری شده است، تأیید کند.
 
 [وب‌سایت مستندات](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) [محلی](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)، نمونه‌های تعاملی را در `/docs/concepts/`، یک کاوشگر تصمیم‌گیری نقطه‌کنترل را در `/docs/witness/`، و راهنماهای گام‌به‌گام برای [Case Board](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-board/)، [طراحی گزارش](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-reports/) و [خروجی‌های handover](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#handover-extract)را اضافه می‌کند. تمام پیام‌های نمونه، شمارش‌ها و تأخیرها فرضی هستند. هش‌ها در محیط شبیه‌سازی زنجیره با SHA-256 در مرورگر محاسبه می‌شوند. هیچ چیزی به تلگرام ارسال نمی‌شود.
+
+**On this page**
+
+- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [What a hash covers](https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-it-works/#what-a-hash-covers)
+- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Pick a workflow](https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-it-works/#pick-a-workflow)
 
 ## پیامی تغییر می‌کند؛ مشاهدات انباشته می‌شوند
 

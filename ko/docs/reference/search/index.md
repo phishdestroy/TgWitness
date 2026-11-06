@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/searc
 
 저장된 메시지를 단어 형태, 정확한 구문, 도메인 및 @사용자명으로 검색하며, 서명된 저널에 인덱스가 연동되어 가장 일치도가 높은 결과부터 우선적으로 표시됩니다.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [아카이브 분석](https://phishdestroy.github.io/TgWitness/ko/docs/reference/analysis/) · [로컬 OCR 및 텍스트 변환](https://phishdestroy.github.io/TgWitness/ko/docs/reference/media-analysis/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **미리 보기.** ‘저널’에서 검색 필드 옆에 있는 **‘최적 일치 · 단어 형태’를** 선택하세요. 결과는 BM25 알고리즘으로 순위가 매겨지며, 같은 단어의 다른 형태와도 일치합니다. 예를 들어, *‘перевод’를* 검색하면 *‘переводом’과* *‘переводы’가* 검색되고, *‘transfer’를* 검색하면 *‘transfers’가* 검색되며, 중국어 구문은 공백 없이 검색됩니다. **‘최신순 · 정확한 텍스트’를** 선택하면 전체 레코드에 대한 기존 부분 문자열 검색이 유지됩니다.
 
 인덱스는 파생 데이터입니다. 이 인덱스는 서명된 저널을 기반으로 재구성되며, 그 자체로는 서명되지 않으며 내보내기 대상에도 포함되지 않습니다. 원본 기록은 변경되지 않습니다.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#benchmark)
 
 ## 검색 구문
 

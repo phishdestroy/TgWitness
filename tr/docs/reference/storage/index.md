@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/stora
 
 Yedeklemeler, eski dosyaları bulutunuza taşıma, Object Lock altında kopyalama ve yeni bir makinede kurtarma.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Panel, üç görevi birbirinden ayırır:
 
 | Görev | Ne işe yarar? |
@@ -15,6 +19,14 @@ Panel, üç görevi birbirinden ayırır:
 Alan boşaltma işlemi, imzalanmış günlüğü asla silmez veya yeniden yazmaz. Her ek, orijinal SHA-256'sini ve bir kurtarma makbuzunu saklar. İsteğe bağlı gzip sıkıştırması, kimlik doğrulamalı şifrelemeden önce gerçekleştirilir. Bulut dosya adları, Telegram adlarını, sohbet kimliklerini veya orijinal ek adlarını içermez. Bir ek, en fazla 32 GiB boyutunda olabilir.
 
 Yükleme yanıtı tek başına bir dosyayı silme izni değildir. TgWitness, şifrelenmiş nesnenin tamamını indirir, boyutunu doğrular ve SHA-256, makbuzu kaydeder, ardından silme işleminden hemen önce yerel baytları tekrar kontrol eder. Yükleme hatası, farklı geri okuma sonucu veya iptal edilen aktarım durumunda yerel dosya yerinde kalır. Eğer etkinleştirilmiş kanıt yedeklemesi o dosyayı henüz kopyalamamışsa, silme işlemi de yedeklemeyi bekler.
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/tr/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/tr/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/tr/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/tr/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## Disk dolmaya başladığında
 

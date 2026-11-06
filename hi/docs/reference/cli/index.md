@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/cli/
 
 खोजें, संदर्भ पढ़ें, गतिविधि गिनें और स्क्रिप्ट्स व एजेंट्स से सहेजे गए संदेशों को --json आउटपुट, स्थिर एग्जिट कोड्स और स्कोप्ड रीड-ओनली टोकन्स के साथ एक्सपोर्ट करें।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [केवल-पठनीय MCP](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/) · [पूर्ण-पाठ खोज](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/) · [विकी](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **पूर्वावलोकन।** `tgwitness search`, `context`, `messages`, `stats` और `export` पढ़ें स्क्रिप्ट्स और AI एजेंट्स के लिए सहेजे गए अवलोकन। वे टेलीग्राम पर कुछ भी भेजने, सेटिंग्स बदलने या हस्ताक्षरित जर्नल को संशोधित करने में असमर्थ हैं।

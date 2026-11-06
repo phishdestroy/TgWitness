@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/analy
 
 חפשו בהודעות שנשמרו, עיינו בתשומות ה-AI ושמרו דוחות אנליטיים עם הפניות למקורותיהם.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [מדריך לתהליך העבודה](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ויקי](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 השתמשו ב**-Journal** לחיפוש מקומי ללא בינה מלאכותית; [חיפוש טקסט מלא](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/) (תצוגה מקדימה) מתאים צורות מילים, ביטויים, דומיינים ושמות משתמש @. עבור **"Ask the archive**", יש להפעיל תחילה ולהגדיר ספק ב**-Integrations**. בורר סביבת העבודה בוחר את החשבון; הטופס בוחר את הצ'אטים ואת תקופת התצפית. החיפוש מתבצע באופן מקומי. ביטוי מדויק או דומיין מצמצמים את תוצאות החיפוש; מזהה הודעה מבקש גרסאות שנשמרו. עיינו בקטעים ופתחו את רשומות היומן או את ההקשר שלהם. אין מסד נתונים וקטורי או פעולה אוטומטית ב-Telegram.

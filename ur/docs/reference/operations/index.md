@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/opera
 
 پینل کے روزانہ آپریشن: موڈز، مانیٹرنگ کیٹیگریز، پیرامیٹرز، نوٹیفیکیشنز، ایکسپورٹس، بیک اپ اور گنجائش۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 اپنے پہلے کنکشن کے لیے [اکاؤنٹس اور سیشن فارمیٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/) استعمال کریں۔ محفوظ شدہ ورژنز، ایونٹ پالیسیاں، اور خلا کی وضاحت کے لیے دیکھیں کہ [کلیکشن کیسے کام کرتی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/) ہے۔ یہ گائیڈ روزانہ کے آپریشن اور بازیابی کا احاطہ کرتی ہے۔
 
 ایک منظم تنصیب میں لانچر کے ساتھ **START-HERE.html** اور **START-HERE.txt** شامل ہوتا ہے، جس کے ساتھ ریپوزیٹری کا لنک اور کمانڈز اس کی تنصیب کے راستے کے مطابق ترتیب دیے جاتے ہیں۔ اصل ڈیٹا ڈائریکٹری تلاش کرنے کے لیے `tgwitness guide --print` کو SSH کے ذریعے چلائیں، یا `tgwitness paths` چلائیں۔ ایک روٹ سسٹم ڈی انسٹالیشن نجی حالت کو `/var/lib/tgwitness-…` کے تحت محفوظ کرتی ہے؛ `/opt/tgwitness` پروگرام کو محفوظ رکھتا ہے۔
 
 ایک منظم عارضی Cloudflare سرنگ کے لیے، `tgwitness tunnel off` عوامی رسائی بند کر دیتا ہے جبکہ مقامی پینل اور کلیکشن چلتے رہتے ہیں۔ `tgwitness tunnel on` اسے فعال کرتا ہے؛ `tgwitness tunnel restart` ایک نئی سرنگ کنکشن بناتا ہے۔ اس کا موجودہ پتہ دیکھنے کے لیے `tgwitness open` استعمال کریں۔ ایک واضح آف سیٹنگ سروس کے دوبارہ شروع ہونے کے بعد بھی برقرار رہتی ہے۔ `tgwitness stop` پینل اور کلیکشن دونوں کو روک دیتا ہے۔
+
+**On this page**
+
+- [Operator workflow](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/#operator-workflow)
+- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Runtime modes](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/#runtime-modes)
+- [Monitoring categories](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/#monitoring-categories)
+- [Notifications](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/#notifications)
+- [Panel layout](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/#panel-layout)
+- [Deployment environments](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/#deployment-environments)
+- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/#startup-checks-and-exports)
+- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/#backup-restore-and-interruptions)
+- [Capacity and retention](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/#capacity-and-retention)
 
 ## آپریٹر کا کام کرنے کا بہاؤ
 

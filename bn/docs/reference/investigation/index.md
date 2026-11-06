@@ -4,7 +4,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/inves
 
 চ্যানেল, গ্রুপ, ব্যক্তিগত চ্যাট এবং বট জুড়ে পুরো অ্যাকাউন্ট তদন্ত, পরিসর থেকে যাচাইকৃত কেস প্যাকেজ পর্যন্ত।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 একটি কেস চ্যানেল, গ্রুপ, ব্যক্তিগত চ্যাট এবং বট জুড়ে অনুসরণ করুন, প্রাথমিক অধিগ্রহণ থেকে শুরু করে উল্লিখিত সময়রেখা এবং যাচাইযোগ্য হস্তান্তর পর্যন্ত। ইন্টারেক্টিভ ওয়েবসাইট সংস্করণটি `/docs/cases/`-এ; [প্রিভিউ নির্দেশাবলী](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)।
+
+**On this page**
+
+- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#adapt-the-investigation)
 
 ## সমাধানকৃত কেস: চারটি কথোপকথনের মধ্যে গন্তব্য পরিবর্তন হয়।
 

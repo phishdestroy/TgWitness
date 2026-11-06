@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/searc
 
 根据词形、精确短语、域名和 @用户名 查找已保存的消息，按最匹配结果优先排序，索引与签名日志绑定。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [存档分析](https://phishdestroy.github.io/TgWitness/zh/docs/reference/analysis/) · [本地 OCR 和转录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/media-analysis/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **预览。**在**“日志**”中，选择搜索框旁边的**“最佳匹配 · 词形变体**” 选项。结果按 BM25 算法排序，并匹配同一单词的其他形式： *搜索“перевод*”会找到*“переводом*”和*“переводы*”，*搜索“transfer*”会找到*“transfers*”，中文 短语在搜索时不保留空格。**选择“最新优先 · 精确文本**”可保留之前 对整个记录进行的子字符串搜索。
 
 索引是衍生数据。它由签名日志重建而成，本身从未被签名， 也从未被导出。原始记录不会发生任何变化。
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#benchmark)
 
 ## 搜索语法
 

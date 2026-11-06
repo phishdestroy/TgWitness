@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/accou
 
 फ़ोन, QR कोड या auth कुंजी से साइन इन करें, Telethon, Pyrogram या Telegram Desktop सत्र आयात करें, और कई खाते चलाएँ।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness, MTProto का उपयोग करते हुए, एक टेलीथॉन खाते से **टेलीग्राम उपयोगकर्ता खाते** (बॉट नहीं) के रूप में साइन इन करता है। प्रत्येक खाता अपने स्वयं के **कार्यक्षेत्र** (API और कमांड-लाइन टूल में जिसे *वर्कस्पेस* कहा जाता है) में रहता है, जिसमें उसका अपना सत्र, स्रोत, जर्नल और हस्ताक्षर कुंजी होती है।
 
 सेशन फ़ाइलें, सेशन स्ट्रिंग्स और ऑथ कीज़ **खाता प्राधिकरण** हैं: जिसके पास इनमें से कोई भी हो, वह उस खाते के रूप में कार्य कर सकता है। इनमें संदेश इतिहास शामिल नहीं होता।

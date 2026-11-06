@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/archi
 
 Elementy składowe: moduł zbierający, panel, dziennik, moduły robocze oraz moduł „witness”, a także sposób przepływu danych między nimi.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+
 Jeden proces w języku Python obsługuje panel FastAPI oraz dowolną liczbę izolowanych obszarów roboczych, z których każdy posiada klienta konta użytkownika Telethon. Baza danych SQLite przechowuje podpisany dziennik zdarzeń z możliwością wyłącznie dodawania wpisów oraz zmienne ustawienia operacyjne. W zaszyfrowanym sejfie przechowywane są dane uwierzytelniające API, obiekt StringSession oraz klucz podpisujący. Interfejs użytkownika stanowi zwykły pakiet plików HTML/CSS/JavaScript: nie jest wymagana kompilacja w środowisku Node, korzystanie z sieci CDN ani pobieranie interfejsu użytkownika w czasie wykonywania.
 
 Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.

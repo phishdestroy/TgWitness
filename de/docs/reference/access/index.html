@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Anleitungen"><a href="../../../">Startseite</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentation</a> <span aria-hidden="true">/</span> <a href="../">Referenz</a> <span aria-hidden="true">/</span> <span aria-current="page">Zugriff und Berechtigungen</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Was wurde getestet? →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Durchsuchen Sie die Dokumentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Versuchen Sie es mit „Proxy“, „Hash-Kette“, „Token“ oder „Witness“ …" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Klare Suche" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Geben Sie ein Wort ein, um die Anleitungen und das Nachschlagewerk zu durchsuchen. Die Suche erfolgt in Ihrem Browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Referenz / Einrichtung</p><h1>Zugriff und Berechtigungen</h1><p class="guide-outcome">Legen Sie den Zugriff auf Konten und Chats fest, wählen Sie Berechtigungen aus, beschränken Sie Sitzungen und IP-Adressen und entziehen Sie den Zugriff.</p><div class="wiki-body"><p>Gewähren Sie einem Prüfer Zugriff auf einen Chat, einem Analysten die Berechtigung zum Exportieren eines Falls oder einem
+<article class="guide-content"><p class="language-notice">Teile dieser Seite sind noch auf Englisch: Das englische Original wurde nach der Übersetzung geändert.</p><p class="eyebrow">Referenz / Einrichtung</p><h1>Zugriff und Berechtigungen</h1><p class="guide-outcome">Legen Sie den Zugriff auf Konten und Chats fest, wählen Sie Berechtigungen aus, beschränken Sie Sitzungen und IP-Adressen und entziehen Sie den Zugriff.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentation</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>Gewähren Sie einem Prüfer Zugriff auf einen Chat, einem Analysten die Berechtigung zum Exportieren eines Falls oder einem
 Operator die Kontrolle über ausgewählte Konten. Jede Person erhält ihr eigenes Token. Das Haupt-
 Panel-Token verbleibt beim Administrator.</p>
 <p><a href="../accounts/">Einrichtung eines Kontos</a> · <a href="../connection/">Verbindungswege</a> · <a href="../security/">Sicherheitsmodell</a></p>
@@ -259,16 +261,13 @@ signierter <code>access.*</code>-Protokollaufzeichnungen. Token sind in diesen A
 Ausgegebene Token und Sitzungszugangsdaten werden als Hash-Werte im verschlüsselten Tresor gespeichert.</p>
 <details>
 <summary><strong>Hauptadministrator und Vertrauensgrenze</strong></summary>
-
-Das Haupt-Panel-Token unterliegt keinen Einschränkungen. Bei der Anmeldung über den Browser mit diesem Token werden Sitzungen erstellt,
-die den vom Administrator konfigurierten Sitzungslimits unterliegen. Skripte, die das
-Haupt-Token direkt übermitteln, behalten den uneingeschränkten Zugriff und werden nicht als Browsersitzungen gezählt.
-
-Dies ist eine Zugriffskontrolle auf Anwendungsebene innerhalb einer Installation. Alle Arbeitsbereiche nutzen
-gemeinsam den Serverprozess; es handelt sich hierbei nicht um eine Isolierung vom Host-Administrator. Bewahren Sie das Haupt-Token,
-die Telegram-Sitzungen, die Signaturschlüssel und das Datenverzeichnis vertraulich auf. Ein Witness-Token
-ist eine separate Kontroll- bzw. Integritätsbescheinigung, kein Panel-Zugriffstoken.
-
+<p>The main panel token remains unrestricted. Browser sign-ins with it create sessions
+subject to the administrator's configured session limits. Scripts sending the
+main token directly retain full access and are not counted as browser sessions.</p>
+<p>This is application-level access control in one installation. All workspaces share
+the server process; this is not isolation from the host administrator. Keep the main
+token, Telegram sessions, signing keys and data directory private. A witness token
+is a separate checkpoint/health credential, not a panel access token.</p>
 </details></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">Diese Seite auf GitHub bearbeiten ↗</a><a class="next-guide" href="../connection/"><span>Nächster Schritt</span><strong>Verbindung, Proxys und Datenschutz →</strong></a><p>Diese Leitfäden beschreiben die aktuelle Implementierung. Validierungsergebnisse und verbleibende Lücken werden separat dokumentiert. <a href="../verification/">Was wurde getestet? →</a></p></footer>
 </main>

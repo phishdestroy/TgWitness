@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/times
 
 Часові мітки RFC 3161 для підписаних контрольних точок: що надсилається до центру авторизації та як перевіряється відповідь.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness формує запити за стандартом RFC 3161 та перевіряє відповіді від органу авторизації часових міток (TSA). Ця ручна процедура не передбачає ні вибору TSA, ні надсилання даних; режим доказового збору виконує обидві ці дії за графіком ([формат доказового збору](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Підготовлений запит **ще не** є **доказом часової мітки**.
 
 ## Що фіксує цей журнал доказів

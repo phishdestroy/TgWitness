@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentacja</a> <span aria-hidden="true">/</span> <a href="../">Odniesienie</a> <span aria-hidden="true">/</span> <span aria-current="page">Przechowywanie i odzyskiwanie</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Co zostało przetestowane →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Odniesienie / Dowody</p><h1>Przechowywanie i odzyskiwanie</h1><p class="guide-outcome">Kopie zapasowe, przenoszenie starszych plików do chmury, kopie objęte funkcją Object Lock oraz odzyskiwanie danych na nowym komputerze.</p><div class="wiki-body"><p>Panel dzieli zadania na trzy kategorie:</p>
+<article class="guide-content"><p class="language-notice">Niektóre fragmenty tej strony są nadal w języku angielskim: angielski tekst źródłowy uległ zmianie po przetłumaczeniu.</p><p class="eyebrow">Odniesienie / Dowody</p><h1>Przechowywanie i odzyskiwanie</h1><p class="guide-outcome">Kopie zapasowe, przenoszenie starszych plików do chmury, kopie objęte funkcją Object Lock oraz odzyskiwanie danych na nowym komputerze.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentacja</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Panel dzieli zadania na trzy kategorie:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@ cały zaszyfrowany obiekt i weryfikuje jego rozmiar, a SHA-256 zapisuje potwierd
 a następnie ponownie sprawdza lokalne bajty tuż przed usunięciem. Niepowodzenie przesłania,
 różnica w odczycie lub anulowany transfer powodują, że plik lokalny pozostaje na swoim miejscu. Jeśli
 włączona kopia zapasowa dowodów nie skopiowała jeszcze tego pliku, usunięcie również czeka na to.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">Gdy kończy się miejsce na dysku<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="Link do tej sekcji">#</a></h2>
 <p>Pobieranie załączników jest wstrzymywane poniżej wartości <strong>Parametry → Załączniki → wolne miejsce na dysku</strong> (domyślnie 1 GiB), z zachowaniem kolejki. Obserwacje tekstowe trwają dalej. Nie zależy to od powiadomień: ich wyłączenie nie wyłącza rezerwy pobierania ani zabezpieczeń magazynu.</p>
 <p>Aby zareagować wcześniej, włącz <strong>Uruchamiaj automatycznie</strong>, wybierz <strong>Usuń lokalny plik, aby zwolnić miejsce</strong> i włącz <strong>Dodatkowe przenoszenie przy małej ilości miejsca</strong>. Domyślnie opcjonalna reguła rusza poniżej 5120 MiB wolnego miejsca i przetwarza partie do osiągnięcia 10240 MiB. Oba progi można ustawić. Używa tego samego celu, minimalnego wieku plików, limitu partii, pełnej weryfikacji przez ponowny odczyt i wymogów kopii zapasowej dowodów co przebieg ręczny. Nie włącza samodzielnie miejsca docelowego. Sprawdza co 30 sekund; błąd lub brak postępu odracza kolejną próbę o pięć minut. Stan i termin próby przetrwają restart. Gdy reguła jest nieaktywna, zaplanowane przebiegi zachowują zwykły odstęp.</p>

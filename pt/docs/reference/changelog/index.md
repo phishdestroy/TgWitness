@@ -4,6 +4,24 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/changelo
 
 Todas as alterações por versão, incluindo as que ainda não foram lançadas.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
+**On this page**
+
+- [Unreleased](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/#unreleased)
+- [0.9.1 preview · 5 November 2026](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/#091-preview--5-november-2026)
+- [0.9.0 preview · 4 November 2026](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/#090-preview--4-november-2026)
+- [0.8.1 preview · 2 November 2026](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/#081-preview--2-november-2026)
+- [0.8.0 preview · 2 November 2026](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/#080-preview--2-november-2026)
+- [0.7.1 preview · 1 November 2026](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/#071-preview--1-november-2026)
+- [0.7.0 preview · 31 October 2026](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/#070-preview--31-october-2026)
+- [0.6.1 · 27 October 2026](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/#061--27-october-2026)
+- [0.6.0 · 27 October 2026](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/#060--27-october-2026)
+- [0.5.1 · 27 October 2026](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/#051--27-october-2026)
+- [0.5.0 · 26 October 2026](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/#050--26-october-2026)
+
 ## Unreleased
 
 - Remove the unused one-shot exporter and check recovery against the current exporter. Reject unexpected or repeated message IDs in recheck responses.

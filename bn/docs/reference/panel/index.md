@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel
 
 প্যানেলের প্রতিটি স্ক্রিন: চ্যাট, জার্নাল, সোর্স, এক্সপোর্ট, এক্সট্রা, সুরক্ষা মোড এবং কোড চেক।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [প্রাথমিক সেটআপ এবং সেটিংস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/settings/) · [অ্যাকাউন্টসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/) · [রপ্তানি এবং যাচাই করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/) · [কেস রিপোর্টসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-reports/)
 
 প্রতিটি স্ক্রিন কী করে, এটি স্বাক্ষরিত জার্নালে কী লেখে এবং বিস্তারিত গাইড কোথায়। প্যানেল একবারে একটি ওয়ার্কস্পেস দেখায়: একটি টেলিগ্রাম অ্যাকাউন্ট যার নিজস্ব সোর্স, জার্নাল এবং স্বাক্ষর কী রয়েছে। সাইডবারের শীর্ষে থাকা সিলেক্টর ওয়ার্কস্পেস পরিবর্তন করে। ঠিকানাটি ওয়ার্কস্পেস বহন করে (`?ws=…`); ঠিকানা যখন workspace-কে বহন করে (); ঠিকানা, সিলেক্টর এবং লোডকৃত অ্যাকাউন্টের মধ্যে অমিল থাকলে, অ্যাকশনগুলো ব্লক থাকে।
 
 Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+
+**On this page**
+
+- [Find your way](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#find-your-way)
+- [Start here](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#start-here)
+- [Chats](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#chats)
+- [Journal](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#journal)
+- [Sources](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#sources)
+- [Exports](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#exports)
+- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#settings-accounts-and-connection)
+- [Extras](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#extras)
+- [Protection modes](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#protection-modes)
+- [More tools](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#more-tools)
 
 ## আপনার পথ খুঁজে নিন
 

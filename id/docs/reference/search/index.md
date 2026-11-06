@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/searc
 
 Temukan pesan yang disimpan berdasarkan bentuk kata, frasa persis, domain, dan @nama pengguna, dengan hasil yang paling sesuai ditampilkan terlebih dahulu, serta indeks yang terikat pada jurnal yang ditandatangani.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Analisis arsip](https://phishdestroy.github.io/TgWitness/id/docs/reference/analysis/) · [OCR dan transkripsi lokal](https://phishdestroy.github.io/TgWitness/id/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Pratinjau.** Di **Jurnal**, pilih **"Kecocokan terbaik · bentuk kata"** di sebelah bidang pencarian. Hasil diurutkan menggunakan algoritma BM25 dan mencakup bentuk lain dari kata yang sama: *"перевод"* menemukan *"переводом"* dan *"переводы"*, *"transfer"* menemukan *"transfers"*, frasa dalam bahasa Mandarin ditemukan tanpa spasi. Opsi **"Terbaru terlebih dahulu · teks persis"** mempertahankan pencarian substring sebelumnya di seluruh catatan.
 
 Indeks merupakan data turunan. Indeks ini dibangun ulang dari jurnal yang ditandatangani, tidak pernah ditandatangani sendiri, dan tidak pernah dimasukkan ke dalam ekspor. Catatan asli tidak berubah.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#benchmark)
 
 ## Sintaks pencarian
 

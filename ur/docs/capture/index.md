@@ -8,11 +8,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/capture/
 
 **مکمل حوالہ**
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Independent capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md)
+
+![Independent capture](https://phishdestroy.github.io/TgWitness/assets/chapter-capture.svg)
+
 **Preview available from `main`.** A fork launches a pinned reusable workflow from `phishdestroy/TgWitness`. The workflow exports an account, selected chats or one chat's event journal using a newly created Telegram session, attests the evidence ZIP or multipart manifest, and uploads only recipient-encrypted handoffs. The normal administration panel is not exposed.
 
 Choose `client=official_web` to run the [official-client witness](https://github.com/phishdestroy/TgWitness/blob/main/docs/OFFICIAL-WITNESS.md) with guarded Telegram Web controls and video. It requires your own upstream proxy and observes one rendered chat. The default `client=api` retains the full-account export modes described below.
 
 The verifier checks the archive against its GitHub attestation, the approved workflow and collector commits, and the signed journal and attachment hashes. The collection process uses pinned upstream code and fresh storage. A reviewer can inspect that code and verify the delivered archive against its recorded run.
+
+**On this page**
+
+- [User flow](https://phishdestroy.github.io/TgWitness/ur/docs/capture/#user-flow)
+- [Session time budget](https://phishdestroy.github.io/TgWitness/ur/docs/capture/#session-time-budget)
+- [Choose this mode or a persistent workspace](https://phishdestroy.github.io/TgWitness/ur/docs/capture/#choose-this-mode-or-a-persistent-workspace)
+- [What is public, and what must stay private](https://phishdestroy.github.io/TgWitness/ur/docs/capture/#what-is-public-and-what-must-stay-private)
+- [Troubleshooting](https://phishdestroy.github.io/TgWitness/ur/docs/capture/#troubleshooting)
+- [Local decryption and verification](https://phishdestroy.github.io/TgWitness/ur/docs/capture/#local-decryption-and-verification)
+- [How the fork is kept outside the capture process](https://phishdestroy.github.io/TgWitness/ur/docs/capture/#how-the-fork-is-kept-outside-the-capture-process)
+- [Cryptographic handoff](https://phishdestroy.github.io/TgWitness/ur/docs/capture/#cryptographic-handoff)
+- [Limits and validation](https://phishdestroy.github.io/TgWitness/ur/docs/capture/#limits-and-validation)
+- [Maintainer release sequence](https://phishdestroy.github.io/TgWitness/ur/docs/capture/#maintainer-release-sequence)
 
 ## User flow
 

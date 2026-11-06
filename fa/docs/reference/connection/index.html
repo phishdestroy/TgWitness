@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="راهنماها"><a href="../../../">خانه</a> <span aria-hidden="true">/</span> <a href="../../">مستندسازی</a> <span aria-hidden="true">/</span> <a href="../">منبع</a> <span aria-hidden="true">/</span> <span aria-current="page">اتصال، پروکسی‌ها و حفاظت از داده‌ها</span></nav>
 <p class="verification-shortcut"><a href="../verification/">آنچه آزمایش شده است ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">جستجو در مستندات</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، زنجیره هش، توکن یا ویسنس را امتحان کنید…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="جستجوی واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">یک کلمه تایپ کنید تا در راهنماها و مرجع جستجو شود. جستجو در مرورگر شما باقی می‌ماند.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">منبع / راه‌اندازی</p><h1>اتصال، پروکسی‌ها و حفاظت از داده‌ها</h1><p class="guide-outcome">احراز هویت، استخرهای خودکار پروکسی، حالت‌های IP، سیاست پشتیبان، درخواست‌های خارجی و ذخیره‌سازی مخفی.</p><div class="wiki-body"><p>این سند رفتار و محدودیت‌های TgWitness 0.8.0 را توصیف می‌کند. احراز هویت، دسترسی به منبع، اتصال شبکه و کامل بودن ضبط، حالات جداگانه‌ای هستند. برای مراحل ورود، فرمت‌های فایل و حساب‌های متعدد، از بخش
+<article class="guide-content"><p class="language-notice">بخشی از این صفحه هنوز به زبان انگلیسی است: متن اصلی انگلیسی پس از ترجمه تغییر کرده است.</p><p class="eyebrow">منبع / راه‌اندازی</p><h1>اتصال، پروکسی‌ها و حفاظت از داده‌ها</h1><p class="guide-outcome">احراز هویت، استخرهای خودکار پروکسی، حالت‌های IP، سیاست پشتیبان، درخواست‌های خارجی و ذخیره‌سازی مخفی.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">مستندسازی</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>این سند رفتار و محدودیت‌های TgWitness 0.8.0 را توصیف می‌کند. احراز هویت، دسترسی به منبع، اتصال شبکه و کامل بودن ضبط، حالات جداگانه‌ای هستند. برای مراحل ورود، فرمت‌های فایل و حساب‌های متعدد، از بخش
 <a href="../accounts/">«حساب‌ها و فرمت‌های جلسه</a>» شروع کنید. برای سیاست‌های رویداد و رفتار راه‌اندازی مجدد، به بخش <a href="../collection/">«نحوه کارکرد جمع‌آوری»</a> مراجعه کنید.</p>
 <h2 id="guided-connection-setup">راه‌اندازی اتصال هدایت‌شده<a class="anchor" href="#guided-connection-setup" aria-label="لینک به این بخش">#</a></h2>
 <p>در <strong>اتصال</strong>، مدیر می‌تواند <strong>این حساب</strong>، <strong>گروه حساب‌ها</strong> یا <strong>تمام حساب‌ها</strong> را انتخاب کرده، سپس یک مسیر را برگزیند. <strong>بازبینی انتخاب</strong>، حساب‌های تحت تأثیر را فهرست می‌کند. <strong>آماده و بررسی کنید</strong>، مسیر پیشنهادی را بدون تغییر مسیر ذخیره شده، آزمایش می‌کند. <strong>اتصال بررسی‌شده را اعمال کنید</strong>، دوباره بررسی می‌کند، در صورت لزوم مشاهده را متوقف می‌کند، مسیر را ذخیره کرده و مشاهده‌ای را که قبلاً در حال اجرا بوده از سر می‌گیرد.
@@ -264,24 +266,49 @@ MTProxy یک پروکسی حمل‌ونقل تلگرام است؛ SOCKS5 و HTTP
 کلودفلر این <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">نقطه پایانی DNS JSON</a> را مستندسازی کرده است.</p>
 <details>
 <summary><strong>پارامترهای استخر خودکار</strong></summary>
-
-در بخش **پارامترها → MTProxy خودکار**، آستانه خطا، زمان خنک‌سازی،
-گردش برنامه‌ریزی‌شده، اشتراک‌گذاری پروکسی و تأخیر بازگشتی مجاز را پیکربندی کنید.
-
-| کنترل | پیش‌فرض |
-| --- | --- |
-| قطع اتصال‌ها قبل از تعویض | ۳ در ۱۰ دقیقه |
-| پروکسی‌های امتحان‌شده در هر تلاش اتصال | ۳ |
-| اولین / حداکثر استراحت پس از خطا | ۱۰ دقیقه / ۶ ساعت |
-| چرخش برنامه‌ریزی‌شده | غیرفعال؛ هنگام خطا فعال شود |
-| حساب‌ها در هر پروکسی | ۰: ورودی‌های جداگانه ترجیح داده می‌شوند، در صورت نیاز به اشتراک گذاشته شوند. عدد ۱ را برای انتظار برای یک ورودی انحصاری تنظیم کنید. |
-| تأخیر قبل از بازگشت مستقیم مجاز | ۱۰ دقیقه؛ مخفی کردن آدرس همچنان بازگشت مستقیم را رد می‌کند |
-| بررسی‌های به‌روزرسانی فید / حمل‌ونقل | ۶۰ / ۱۰ دقیقه؛ مقادیر فضای کاری اصلی برای استخر مشترک اعمال می‌شوند |
-
-پروکسی‌های مختلف، آدرس‌های خروجی متفاوتی را تضمین نمی‌کنند. این تنظیمات محدودیت‌های تلگرام را نادیده نمی‌گیرند یا ناشناس بودن را اثبات نمی‌کنند.
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>کنترل</th>
+<th>پیش‌فرض</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>برای جایگزینی فهرست عمومی با کاتالوگ اپراتور خود، موارد زیر را برای بازنویسی پیکربندی کنید.
 این کار اشتراک‌های خارجی را به طور کامل غیرفعال می‌کند، حتی زمانی که آرایه <code>proxies</code> آن خالی باشد.</p>
 <p><a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">کاتالوگ خالی را</a>

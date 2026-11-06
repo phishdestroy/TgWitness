@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/conne
 
 การยืนยันตัวตน, กลุ่มพร็อกซีอัตโนมัติ, โหมด IP, นโยบายสำรอง, คำขอจากภายนอก และการจัดเก็บข้อมูลลับ
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 เอกสารนี้อธิบายการทำงานและข้อจำกัดของ TgWitness 0.8.0 การยืนยันตัวตน, การเข้าถึงแหล่งข้อมูล, การเชื่อมต่อเครือข่าย และความครบถ้วนของการบันทึก เป็นสถานะที่แยกกัน สำหรับขั้นตอนการลงชื่อเข้าใช้ รูปแบบไฟล์ และบัญชีหลายบัญชี ให้เริ่มจาก [ส่วนบัญชีและรูปแบบเซสชัน](https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/) สำหรับนโยบายเหตุการณ์และพฤติกรรม เมื่อเริ่มต้นใหม่ ให้ดู[ส่วนวิธีการทำงานของการเก็บรวบรวมข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/)
 
 ## การตั้งค่าการเชื่อมต่อตามคู่มือ
@@ -117,7 +121,21 @@ MTProxy ส่งผ่านเฉพาะการรับส่งข้อ
 
 สำหรับบริการส่วนตัวที่ผู้ดำเนินการจัดการ การตั้งค่าสภาพแวดล้อมเซิร์ฟเวอร์ที่มีอยู่ `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` อนุญาตปลายทางส่วนตัวและรักษา การแปลชื่อโฮสต์ด้านพร็อกซี ไม่สามารถเปิดใช้งานได้จากแผงควบคุม โหมดเฉพาะสาธารณะ จะปฏิเสธปลายทาง `.onion` ก่อนที่จะส่งคำขอไปยังตัวแก้ปัญหาสาธารณะ; บริการ onion ของ Tor ต้องการการตั้งค่าปลายทางส่วนตัวที่ชัดเจนและพร็อกซีที่เหมาะสม พฤติกรรม DNS นี้ใช้กับการดำเนินการ HTTP ภายนอก ไม่ใช่การส่งข้อมูลของ Telegram Cloudflare มีเอกสารอธิบายเกี่ยวกับ[จุดปลายทาง DNS แบบ](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) [JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/)
 
-****พารามิเตอร์พูลอัตโนมัติ**** ใน **Parameters → Automatic MTProxy** ให้กำหนดค่าเกณฑ์ความล้มเหลว, ระยะเวลาพัก, การหมุนเวียนตามแผน, การแชร์พร็อกซี และระยะเวลาหน่วงเวลาสำรองที่อนุญาต | การควบคุม | ค่าเริ่มต้น | | --- | --- | | ตัดการเชื่อมต่อก่อนการเปลี่ยน | 3 ครั้งภายใน 10 นาที | | จำนวนพร็อกซีที่ลองต่อครั้ง | 3 | | เวลาพักครั้งแรก / สูงสุดหลังความล้มเหลว | 10 นาที / 6 ชั่วโมง | | การหมุนเวียนตามแผน | ปิด; เปิดเมื่อเกิดความล้มเหลว | | จำนวนบัญชีต่อพร็อกซี | 0: ให้ใช้รายการแยกกันเป็นหลัก, แบ่งปันเมื่อจำเป็น ตั้งค่าเป็น 1 เพื่อรอรายการแบบเอกสิทธิ์ | | เวลารอ ก่อนอนุญาตให้ใช้ Direct fallback | 10 นาที; ซ่อนที่อยู่หากยังปฏิเสธ Direct | | การรีเฟรชฟีด / การตรวจสอบการส่งข้อมูล | 60 / 10 นาที; ค่าในพื้นที่ทำงานหลักใช้กับกลุ่มที่แชร์ | พร็อกซีที่ต่างกันไม่รับประกันว่าจะมีที่อยู่ทางออกที่ต่างกัน การตั้งค่าเหล่านี้ไม่ แทนที่ข้อจำกัดของ Telegram หรือรับประกันความเป็นนิรนาม
+****พารามิเตอร์พูลอัตโนมัติ****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Control | ค่าเริ่มต้น |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 เพื่อแทนที่รายชื่อสาธารณะด้วยแคตตาล็อกผู้ให้บริการของคุณเอง ให้กำหนดค่าการแทนที่ด้านล่างนี้ การตั้งค่านี้จะปิดการสมัครรับข้อมูลจากภายนอกอย่างสมบูรณ์ รวมถึงเมื่ออาร์เรย์ `proxies` ของมันว่างเปล่า
 

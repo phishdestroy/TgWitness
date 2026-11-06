@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="راهنماها"><a href="../../../">خانه</a> <span aria-hidden="true">/</span> <a href="../../">مستندسازی</a> <span aria-hidden="true">/</span> <a href="../">منبع</a> <span aria-hidden="true">/</span> <span aria-current="page">امنیت و مدیریت داده‌ها</span></nav>
 <p class="verification-shortcut"><a href="../verification/">آنچه آزمایش شده است ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">جستجو در مستندات</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، زنجیره هش، توکن یا ویسنس را امتحان کنید…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="جستجوی واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">یک کلمه تایپ کنید تا در راهنماها و مرجع جستجو شود. جستجو در مرورگر شما باقی می‌ماند.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">بخشی از این صفحه هنوز به زبان انگلیسی است: متن اصلی انگلیسی پس از ترجمه تغییر کرده است.</p><p class="eyebrow">منبع / امنیت و پروژه</p><h1>امنیت و مدیریت داده‌ها</h1><p class="guide-outcome">مدل تهدید، مدل دسترسی، اسرار در حالت استراحت، در معرض دید شبکه، وارد کردن جلسات و نحوه گزارش آسیب‌پذیری.</p><div class="wiki-body"><p>This page describes access, storage and network protection in a local or server workspace.
+<article class="guide-content"><p class="language-notice">بخشی از این صفحه هنوز به زبان انگلیسی است: متن اصلی انگلیسی پس از ترجمه تغییر کرده است.</p><p class="eyebrow">منبع / امنیت و پروژه</p><h1>امنیت و مدیریت داده‌ها</h1><p class="guide-outcome">مدل تهدید، مدل دسترسی، اسرار در حالت استراحت، در معرض دید شبکه، وارد کردن جلسات و نحوه گزارش آسیب‌پذیری.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">مستندسازی</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>This page describes access, storage and network protection in a local or server workspace.
 For collection on a GitHub runner or in an Intel TDX confidential VM, see the
 <a href="../evidence/#verification-scope">verification modes</a>, which add checks of the collection environment.
 Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.</p>
@@ -67,6 +69,19 @@ Account connections, notifications, timestamps, off-site copies and witnesses ha
 </tbody>
 </table></div>
 <p>برای گزارش‌های آسیب‌پذیری، به <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">سیاست امنیتی</a> مراجعه کنید.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#access-model">Access model</a></li>
+<li><a href="#panel-content-and-exports">Panel content and exports</a></li>
+<li><a href="#secrets-at-rest">Secrets at rest</a></li>
+<li><a href="#proxies-and-network-routes">Proxies and network routes</a></li>
+<li><a href="#sign-in-and-session-imports">Sign-in and session imports</a></li>
+<li><a href="#logs-and-transport">Logs and transport</a></li>
+<li><a href="#integrity-limits">Integrity limits</a></li>
+<li><a href="#if-you-suspect-a-problem">If you suspect a problem</a></li>
+</ul>
+</details>
 <h2 id="access-model">مدل دسترسی<a class="anchor" href="#access-model" aria-label="لینک به این بخش">#</a></h2>
 <p>توکن پنل اصلی کنترل کامل را اعطا می‌کند. سایر افراد می‌توانند
 <a href="../access/">دسترسی محدود</a> خود را دریافت کنند: فضاهای کاری و چت‌های منتخب، مجوزها، انقضا، محدودیت‌های IP، محدودیت‌های ورود و جلسات قابل لغو. یک دسترسی محدود به چت نمی‌تواند عملیات کل فضا را انجام دهد حتی اگر مجوز آن تیک خورده باشد.

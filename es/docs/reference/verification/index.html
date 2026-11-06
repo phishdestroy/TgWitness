@@ -32,9 +32,154 @@
 <nav class="breadcrumbs" aria-label="Guías"><a href="../../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../../">Documentación</a> <span aria-hidden="true">/</span> <a href="../">Referencia</a> <span aria-hidden="true">/</span> <span aria-current="page">Lo que se ha probado</span></nav>
 <p class="verification-shortcut"><a href="./">Lo que se ha probado →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Algunas partes de esta página siguen estando en inglés: el original en inglés se modificó tras su traducción.</p><p class="eyebrow">Referencia / Seguridad y proyecto</p><h1>Lo que se ha probado</h1><p class="guide-outcome">La prueba en tiempo real de Telegram, las comprobaciones automatizadas, las comprobaciones en el navegador y lo que aún no se ha verificado.</p><div class="wiki-body"><p>Each result below applies to its recorded revision and environment. The
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">current capability matrix</a> separates implementation, published downloads
-and remaining qualification.</p>
+<article class="guide-content"><p class="language-notice">Algunas partes de esta página siguen estando en inglés: el original en inglés se modificó tras su traducción.</p><p class="eyebrow">Referencia / Seguridad y proyecto</p><h1>Lo que se ha probado</h1><p class="guide-outcome">La prueba en tiempo real de Telegram, las comprobaciones automatizadas, las comprobaciones en el navegador y lo que aún no se ha verificado.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentación</a> · <a href="../evidence/">Evidence and verification</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../../assets/chapter-evidence.svg" /></p>
+<p><strong>Updated 6 November 2026.</strong> Results are tied to the revision, environment and
+workload recorded for each run. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">Current capabilities</a> describes the
+available workflows; this page records what has actually been checked.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/">Performance graphs</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">Signed English audit</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv">Downloadable measurements</a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Latest evidence</th>
+<th>Resultado</th>
+<th>Ámbito de aplicación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Release audit · 6 Nov</td>
+<td>1,461 core tests passed; 37 platform skips</td>
+<td>Source <code>92e539af40d8</code>; open findings retained</td>
+</tr>
+<tr>
+<td>Fresh exports · 6 Nov</td>
+<td>127.713 and 141.781 records/s, complete cycle</td>
+<td>Two accounts per server; text and metadata through WARP</td>
+</tr>
+<tr>
+<td>Retained archives · 6 Nov</td>
+<td>48 archives; 3,598,381 records verified</td>
+<td>Existing archives checked against pinned workspace keys</td>
+</tr>
+<tr>
+<td>Trusted Live · 5 Nov</td>
+<td>Guarded CPU recording and WARP checks</td>
+<td>Official Desktop login and native export remain unqualified</td>
+</tr>
+<tr>
+<td>Phala / Intel TDX · 4 Nov</td>
+<td>All 16 verifier checks passed on later runs</td>
+<td>Historical deployment; no Telegram account on the CVM</td>
+</tr>
+</tbody>
+</table></div>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a></li>
+<li><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a></li>
+<li><a href="#live-phala-cloud-deployment--4-november-2026">Live Phala Cloud deployment · 4 November 2026</a></li>
+<li><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a></li>
+<li><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a></li>
+<li><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a></li>
+<li><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a></li>
+<li><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a></li>
+<li><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a></li>
+<li><a href="#full-text-search-on-one-million-messages--5-november-2026">Full-text search on one million messages · 5 November 2026</a></li>
+<li><a href="#remaining-qualification">Remaining qualification</a></li>
+</ul>
+</details>
+<h2 id="release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026<a class="anchor" href="#release-audit-and-fresh-exports--6-november-2026" aria-label="Enlace a esta sección">#</a></h2>
+<p>The audit used v0.9.1 at source
+<code>92e539af40d8368d198ff5e040f1d876f2c1310e</code>, release
+<code>92e539af40d8-83e41104669e</code>. Installed-package smoke checks passed on three
+servers. The signed report retains the state observed at that time.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/"><img alt="Acquisition and complete export rates for two fresh workloads" src="../../../../assets/performance.svg" /></a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Workload</th>
+<th style="text-align: right;">Registros</th>
+<th style="text-align: right;">Acquisition</th>
+<th style="text-align: right;">Complete cycle</th>
+<th style="text-align: right;">Complete-cycle rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server A · two accounts</td>
+<td style="text-align: right;">27,030</td>
+<td style="text-align: right;">189.043 s</td>
+<td style="text-align: right;">211.647 s</td>
+<td style="text-align: right;">127.713 records/s</td>
+</tr>
+<tr>
+<td>Server B · two accounts</td>
+<td style="text-align: right;">29,299</td>
+<td style="text-align: right;">182.513 s</td>
+<td style="text-align: right;">206.650 s</td>
+<td style="text-align: right;">141.781 records/s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both exports began without resume, excluded attachments and avatars, and ended
+with zero duplicate or reused records. The complete cycle includes preparation,
+acquisition, selection, packaging and archive verification. Server A also ran a
+protected-chat read check. Four FloodWait events on A and three on B were
+respected. These observations do not establish a general throughput guarantee.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Comprobar</th>
+<th>Resultado</th>
+<th>Qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core pytest</td>
+<td>1,461 passed</td>
+<td>37 platform skips</td>
+</tr>
+<tr>
+<td>Browser / browser UX / evidence / site</td>
+<td>102 / 66 / 15 / 9 passed</td>
+<td>These programs overlap other tests; counts are not additive</td>
+</tr>
+<tr>
+<td>Capture addon</td>
+<td>124 passed</td>
+<td>Three Official Web checks blocked by the required Chromium sandbox</td>
+</tr>
+<tr>
+<td>API authorization</td>
+<td>269 routes; 538 requests passed</td>
+<td>Missing credentials and revoked access</td>
+</tr>
+<tr>
+<td>Retained archives</td>
+<td>48 of 48 verified</td>
+<td>3,598,381 records; pinned workspace keys</td>
+</tr>
+<tr>
+<td>Live fleet read checks</td>
+<td>24 of 40 profiles passed</td>
+<td>16 WARP routes failed qualification; those profiles were not connected</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">signed report</a> records all open
+findings, including three defects in an unpublished secret-chat snapshot absent
+from the audited main build. The earlier
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md">public-history qualification</a> used a different
+revision and workload; its rates must not be combined with this comparison.</p>
+<p>Verify the original report using the
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files">pinned key and verifier</a>.
+Its signature protects the operator's report from alteration. It is not
+independent attestation, proof of Telegram authorship or GDPR certification.</p>
 <h2 id="trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026<a class="anchor" href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026" aria-label="Enlace a esta sección">#</a></h2>
 <p>The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB)
 under QEMU inside a RunPod CPU host. The collector used <code>14e642a5</code>; verification used
@@ -63,10 +208,52 @@ login, native chat export, real hybrid comparison and Telegram-side logout remai
 pending. No supplied Telethon session was imported. Attachments, automatic OCR,
 local drand BLS verification and Trusted Live TDX attestation were not qualified.</p>
 <h2 id="live-phala-cloud-deployment--4-november-2026">Despliegue en Phala Cloud en tiempo real · 4 de noviembre de 2026<a class="anchor" href="#live-phala-cloud-deployment--4-november-2026" aria-label="Enlace a esta sección">#</a></h2>
-<p><code>--provider phala --quick-tunnel</code> se ejecutó en un entorno real <strong>Phala Cloud</strong> (<code>tdx.small</code>, región
-US-WEST-1) con una clave de la API de Phala Cloud de un espacio de trabajo vacío, el archivo ntfy.sh real, GitHub e Intel PCS.
-La CVM instaló la confirmación <code>df7d860c</code> (v0.8.1); las operaciones de implementación, verificación y eliminación se ejecutaron desde la línea de comandos
-con las correcciones que se indican a continuación. Siete CVM costaron en total unos 1,9 céntimos de dólar estadounidense.</p>
+<p><strong>Historical result:</strong> later deployments passed all 16 verifier checks,
+including Intel TDX and the quick tunnel. Restart evidence, signed address
+discovery and report timestamps were checked separately. Each test CVM was
+removed after its run.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Configuración</th>
+<th>Recorded value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proveedor</td>
+<td>Phala Cloud · <code>tdx.small</code> · US-WEST-1</td>
+</tr>
+<tr>
+<td>Implementación</td>
+<td><code>--provider phala --quick-tunnel</code>; initially empty workspace</td>
+</tr>
+<tr>
+<td>Initial collector</td>
+<td><code>df7d860c</code> · v0.8.1</td>
+</tr>
+<tr>
+<td>Collector with all fixes</td>
+<td><code>53a0f7e9</code></td>
+</tr>
+<tr>
+<td>Production guest</td>
+<td><code>dstack-0.5.12</code>; SSH access disabled</td>
+</tr>
+<tr>
+<td>External services</td>
+<td>ntfy.sh, GitHub and Intel PCS</td>
+</tr>
+<tr>
+<td>Observed cost</td>
+<td>Seven CVMs, about 1.9 US cents together; historical test pricing</td>
+</tr>
+</tbody>
+</table></div>
+<p>The sequence below separates initial failures, fixes and completed checks.
+No Telegram account was connected to these CVMs.</p>
+<details>
+<summary>Deployments 1–2 · provider differences and regression checks</summary>
 <p>Las dos primeras implementaciones detectaron cinco diferencias con respecto a la Phala Cloud simulada.
 <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py"><code>tools/check_phala.py</code></a> ahora reproduce cada una de ellas y falla si no se aplica la corrección correspondiente:</p>
 <div class="table-wrap" tabindex="0"><table>
@@ -105,7 +292,9 @@ con las correcciones que se indican a continuación. Siete CVM costaron en total
 </tr>
 </tbody>
 </table></div>
-<p>Tercera implementación:</p>
+</details>
+<details>
+<summary>Deployment 3 · attestation, access checks and restart evidence</summary>
 <ul>
 <li>La CVM ejecutó <code>dstack-0.5.12</code> con el acceso SSH desactivado. El colector publicó su dirección firmada aproximadamente
     1,5 minutos después de su creación. A continuación, la implementación superó las pruebas de <code>tdx_binding</code> y <code>tdx_quote</code> (Intel TCB
@@ -126,7 +315,9 @@ con las correcciones que se indican a continuación. Siete CVM costaron en total
 <li>La comprobación de precios del asistente del panel indicaba <code>tdx.small</code> a 0,058 dólares por hora. Al introducir una clave incorrecta, apareció un mensaje sencillo
     que decía «no se ha aceptado la clave de API».</li>
 </ul>
-<p>Otros dos hallazgos, corregidos posteriormente:</p>
+</details>
+<details>
+<summary>Follow-up fixes · signed address discovery and OS measurements</summary>
 <ul>
 <li>Sin la clave de dirección, <code>verify</code> siguió la última publicación bien formada sobre el tema de la dirección,
     que figura en la configuración de Docker Compose publicada. Una publicación falsificada lo envió a un host que no
@@ -141,7 +332,9 @@ con las correcciones que se indican a continuación. Siete CVM costaron en total
     el <code>measure --json</code> que figuraba en la documentación. El verificador calcula ahora por sí mismo MRTD y RTMR0-2
     a partir de la imagen publicada y la configuración de la máquina virtual, incluidas las tablas ACPI.</li>
 </ul>
-<p>La cuarta implementación, con los siguientes elementos:</p>
+</details>
+<details>
+<summary>Deployment 4 · all 16 checks, report seals and restart verification</summary>
 <ul>
 <li>Deploy descargó una vez el archivo <code>dstack-0.5.12</code> publicado, lo comparó con el hash de la imagen del sistema operativo que la CVM
     notificó, y <code>tdx_os</code> superó la comprobación: MRTD, RTMR0, RTMR1 y RTMR2 coinciden con los valores calculados para QEMU
@@ -157,7 +350,10 @@ con las correcciones que se indican a continuación. Siete CVM costaron en total
     iniciado desde el <code>dstack-0.5.12</code> publicado; tanto el reinicio como el nuevo arranque fueron de tipo REVIEW.</li>
 <li><code>destroy</code> dejó el espacio de trabajo vacío.</li>
 </ul>
-<p>La quinta implementación ejecutó el colector a partir de la confirmación <code>53a0f7e9</code>, que incluye todo lo anterior:</p>
+</details>
+<details>
+<summary>Deployment 5 · collector-signed discovery and forged-post rejection</summary>
+<p>The collector ran from commit <code>53a0f7e9</code>, which includes the fixes above.</p>
 <ul>
 <li>El recopilador publicó su dirección firmada con su propia clave, junto a la publicación HMAC del operador.
     A continuación, se añadieron dos publicaciones falsificadas al tema, una con un HMAC a cero y otra firmada por otra
@@ -169,14 +365,17 @@ con las correcciones que se indican a continuación. Siete CVM costaron en total
     las publicaciones falsificadas. <code>verify --evidence</code> confirmó dos arranques iniciados desde <code>dstack-0.5.12</code>.</li>
 <li>La implementación mostró lo que Phala factura por la CVM, disco incluido: 0,06078 dólares por hora.</li>
 </ul>
+</details>
+<h3 id="panel-wizard-and-remaining-scope">Panel wizard and remaining scope<a class="anchor" href="#panel-wizard-and-remaining-scope" aria-label="Enlace a esta sección">#</a></h3>
 <p>El asistente del panel se ejecutó en Phala Cloud en dos ocasiones: una a través de su API de tareas y otra a través del
 navegador con un Chromium real: la comprobación del precio, la creación con la confirmación bajo <strong>Advanced</strong>, las seis
 comprobaciones de certificación superadas, la lista de servidores que muestra el precio facturado (44,37 USD al mes), <strong>Find
 la dirección actual </strong>, la descarga de la configuración de Docker Compose medida y la eliminación. El navegador no detectó ningún error en las páginas.
 En ambas ocasiones, el espacio de trabajo quedó vacío posteriormente.</p>
-<p>No se incluyen: un dominio de Cloudflare en Phala, una cuenta de Telegram en la CVM y la imagen <code>dstack-0.6.1</code>
-. El precio que indica el asistente antes de la creación corresponde únicamente al coste de computación de Phala, ya que su API solo especifica el coste del disco
-para una CVM ya existente; la lista de servidores muestra el precio facturado tras la creación.</p>
+<p>Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the <code>dstack-0.6.1</code>
+image. The wizard's price before creation is Phala's compute price only, as its API names the disk
+price only for an existing CVM; the server list shows the billed price after creation.
+All prices in this section were observed on 4 November 2026.</p>
 <h2 id="live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026<a class="anchor" href="#live-server-journal-inventory--1-november-2026" aria-label="Enlace a esta sección">#</a></h2>
 <p>At approximately 19:15 UTC, sequential read-only SQLite <code>query_only</code> queries counted
 events in ten workspace databases on a running server. Collection continued during
@@ -492,11 +691,13 @@ and catch-up are implemented; atomic lossless live replay remains unestablished.
 The newer backfill commits messages and cursors atomically and preserves available
 Recent Actions, but its synthetic coverage is distinct from live qualification.
 See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">live acceptance</a> for the controlled qualification matrix.</p>
-<p>Los recibos locales detallados y las capturas de pantalla se encuentran en la carpeta test-results/ (ignorada por Git).
-La captura de pantalla pública que se encuentra en docs/assets/ contiene únicamente datos de demostración ficticios.</p></div></article>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md">public audit directory</a> contains only
+the signed report and aggregate measurements. Detailed operational receipts,
+raw captures and account material remain private. Application screenshots in
+<code>docs/assets/</code> use fictional demonstration data.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">Edite esta página en GitHub ↗</a><a class="next-guide" href="../license/"><span>Siguiente paso</span><strong>Aviso sobre incompatibilidades de licencia y arquitectura →</strong></a><p>Estas guías describen la implementación actual. Los resultados de la validación y las deficiencias pendientes se documentan por separado. <a href="./">Lo que se ha probado →</a></p></footer>
 </main>
-<aside class="toc" aria-label="En esta página"><p class="nav-label">En esta página</p><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">Despliegue en Phala Cloud en tiempo real · 4 de noviembre de 2026</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Prueba en directo de Telegram, cuenta completa · 29 de octubre de 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Exportación protegida con contraseña que se abre con libarchive · 29 de octubre de 2026</a><a href="#live-telegram-test--27-to-29-october-2026">Prueba en directo de Telegram · Del 27 al 29 de octubre de 2026</a><a href="#synthetic-local-capacity-measurement">Medición sintética de la capacidad local</a><a href="#full-text-search-on-one-million-messages--5-november-2026">Búsqueda de texto completo en un millón de mensajes · 5 de noviembre de 2026</a><a href="#remaining-qualification">Cualificación restante</a></aside>
+<aside class="toc" aria-label="En esta página"><p class="nav-label">En esta página</p><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">Despliegue en Phala Cloud en tiempo real · 4 de noviembre de 2026</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Prueba en directo de Telegram, cuenta completa · 29 de octubre de 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Exportación protegida con contraseña que se abre con libarchive · 29 de octubre de 2026</a><a href="#live-telegram-test--27-to-29-october-2026">Prueba en directo de Telegram · Del 27 al 29 de octubre de 2026</a><a href="#synthetic-local-capacity-measurement">Medición sintética de la capacidad local</a><a href="#full-text-search-on-one-million-messages--5-november-2026">Búsqueda de texto completo en un millón de mensajes · 5 de noviembre de 2026</a><a href="#remaining-qualification">Cualificación restante</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Código abierto · Se ejecuta en su equipo</span><a href="../../../../LICENSE">Licencia MIT</a><a href="../notice/">Aviso del operador</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Seguridad</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "A la espera de un mensaje", "Step through a fictional send, edit and delete.": "Siga paso a paso un proceso ficticio de envío, edición y eliminación.", "No observations yet. Start the sequence or advance one event.": "Aún no hay observaciones. Inicie la secuencia o avance un evento.", "Meet at 10:00": "Nos vemos a las 10:00", "A new message is visible in the chat.": "Aparece un nuevo mensaje en el chat.", "Record 1 appended: the collector observed the original message.": "Se adjunta el registro n.º 1: el recopilador ha observado el mensaje original.", "Meet at 11:00": "Nos vemos a las 11:00", "The current text changes. The earlier observation stays.": "El texto actual cambia. La observación anterior se mantiene.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Se ha añadido el registro 2: la modificación constituye una nueva observación. El registro 1 sigue conteniendo el texto original.", "Message deleted": "Mensaje eliminado", "The message has disappeared from the chat view.": "El mensaje ha desaparecido de la vista del chat.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Se adjunta el registro n.º 3: el aviso de eliminación se conserva junto con ambas versiones observadas.", "0 records": "0 registros", "1 record": "1 registro", "2 records": "2 registros", "3 records": "3 registros", "Complete / {n} of 3": "Completo / {n} de 3", "Step / {n} of 3": "Paso / {n} de 3", "Pause": "Pausa", "Replay sequence": "Secuencia de reproducción", "Play sequence": "Secuencia de reproducción", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "El ejemplo estático está disponible. Para calcular los hash de forma interactiva, abra esta página a través de HTTPS o en una vista previa en localhost con soporte para Web Crypto.", "No record supplied": "No se ha facilitado ningún registro", "Tail removed": "Se ha eliminado la cola", "≠ saved hash": "≠ hash guardado", "Rebuilt · different hash": "Reconstruido · hash diferente", "= saved hash": "= hash guardado", "Same length and matching head.": "Misma extensión y encabezado a juego.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Los tres hash calculados coinciden con los hash guardados. Esta muestra se ajusta al límite de tres registros conservados.", "Same saved head; the journal prefix fails verification.": "Se ha guardado el mismo encabezado; el prefijo del registro no supera la verificación.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "El registro n.º 2 ya no coincide con su hash guardado. Si solo se comprobara el último registro almacenado, esto pasaría desapercibido; el verificador comprueba todos los registros.", "Head differs from the retained checkpoint.": "El encabezado difiere del punto de control conservado.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Los hash reconstruidos se enlazan entre sí, pero el encabezado final ha cambiado. El punto de control conservado rechaza este historial. Las firmas originales también fallarían en los registros modificados.", "Too short: 2 supplied records \u003c 3 retained records.": "Demasiado breve: 2 registros facilitados \u003c 3 registros conservados.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Los dos hash restantes siguen coincidiendo. El punto de control conservado revela la parte final que falta. Sin ese límite anterior, este prefijo más corto por sí solo no revelaría la omisión.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "El cálculo de hash no está disponible en este navegador. Las fórmulas y la explicación estática que figuran a continuación siguen estando disponibles.", "{n} records": "{n} registros", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Aceptado: el recuento aumenta, la firma se verifica y la clave coincide. El testigo conserva este nuevo límite.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Reversión: la respuesta firmada indica un número de registros inferior al del último punto de control aceptado. El sistema registra el problema y mantiene el límite aceptado anteriormente.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Bifurcación: el recuento no ha variado, pero la punta difiere. El testigo registra el desacuerdo y mantiene el límite aceptado anteriormente.", "No answer": "Sin respuesta", "boundary unknown": "límite desconocido", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Sin respuesta: el «witness» registra el fallo en la comprobación. No puede determinar el estado actual del recopilador. Si el «witness» sigue pudiendo acceder a la API del bot y su política de publicación lo permite, puede publicar dicho fallo.", "Send {n}": "Enviar {n}", "Edit {n}": "Editar {n}", "Delete {n}": "Eliminar {n}", "Both accounts captured all six expected observations in this example.": "Ambas cuentas han recogido las seis observaciones previstas en este ejemplo.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "La cuenta B volvió a capturar 6 de 6. Dos recibos tardaron más en aparecer. La tasa de captura y el retraso en la recepción de los recibos responden a cuestiones diferentes.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "La cuenta B capturó 5 de 6 antes del plazo límite (83,3 %). La edición que falta no presenta ningún retraso medido. Este resultado solo describe las seis acciones controladas.", "not observed by cutoff": "No se ha respetado el límite de caracteres.", "{s} seconds": "{s} segundos", "Exact values follow in the table.": "Los valores exactos figuran en la tabla.", "{s} s": "{s} s", "Not observed": "No se ha observado", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Cuatro chats aportan observaciones diferentes. Siga los registros originales de cada conexión; no asigne la publicación del canal al usuario 71001 sin un remitente identificado.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Los registros n.º 146 y n.º 205 presentan el mismo identificador de remitente, 71001. Esto permite relacionar las publicaciones observadas de una cuenta de Telegram en dos chats diferentes. No identifica a ninguna persona del mundo real ni atribuye la publicación al canal.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "La dirección de destino pay.example.invalid/new aparece en el registro del grupo n.º 146, en el teclado del bot n.º 173, en la edición del canal n.º 188 y en el mensaje privado n.º 205. Una dirección de destino repetida vincula el material; ello no demuestra que exista un control común de dichas cuentas.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Los recibos multimedia completados n.º 151 y n.º 209 presentan valores SHA-256 completos idénticos en este caso ficticio. Compare los bytes reales y sus registros de mensajes asociados. El archivo coincidente no identifica a su creador ni demuestra quién lo reenvió.", "the encrypted off-site copy": "la copia cifrada almacenada externamente", "notifications": "notificaciones", "checkpoint hashes for timestamps": "Hashes de puntos de control para marcas de tiempo", "signed checkpoints for the witness": "puntos de control firmados para TgWitness", "Switched on in this example": "Activado en este ejemplo", "Optional · off by default": "Opcional · desactivado por defecto", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Al salir de este equipo: la conexión a Telegram y {list}. Nada más.", "Default: only the Telegram connection leaves this machine.": "Por defecto: solo la conexión a Telegram sale de este equipo.", "{done} of {total} done": "{done} de {total} completado", "Mark step {n} as done": "Marcar el paso {n} como completado", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Texto", "Copied": "Copiado", "Command copied.": "Comando copiado.", "Selected — Ctrl/Cmd+C": "Seleccionado — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Comando seleccionado. Cópielo manualmente.", "Command copied to clipboard.": "Comando copiado en el portapapeles.", "Select text": "Seleccionar texto", "The clipboard is unavailable, so the command is selected for you to copy manually.": "El portapapeles no está disponible. Se ha seleccionado el comando; cópielo manualmente.", "When a message arrives, the first observation is saved.": "Llega un mensaje. Se guarda la primera observación.", "When the time changes, both captured versions stay.": "La hora cambia. Ambas versiones capturadas se conservan.", "When the message disappears, its captured history remains.": "El mensaje desaparece. El historial capturado permanece.", "Pause example animation": "Pausar la animación de ejemplo", "Play example animation": "Reproduzca la animación de ejemplo", "Play": "Reproducir", "Full-size workspace screenshot": "Captura de pantalla a pantalla completa del espacio de trabajo", "Workspace screenshot · fictional data": "Captura de pantalla del espacio de trabajo · datos ficticios", "Close": "Cerrar", "Close screenshot": "Cerrar captura de pantalla", "Scrollable full-size screenshot": "Captura de pantalla a tamaño completo con desplazamiento", "Enlarge: {name}": "Ampliar: {name}", "View full size": "Ver a tamaño completo", "Step {n} of {total}": "Paso {n} de {total}"}</script>

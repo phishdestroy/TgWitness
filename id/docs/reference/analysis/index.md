@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/analy
 
 Cari pesan yang disimpan, tinjau masukan AI, dan simpan laporan analitis beserta referensi sumbernya.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Panduan alur kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Gunakan **Jurnal** untuk pencarian lokal tanpa AI; [pencarian teks lengkap](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/) (pratinjau) mencocokkan bentuk kata, frasa, domain, dan @nama pengguna. Untuk **"Tanya Arsip**", aktifkan dan konfigurasikan penyedia di **Integrasi** terlebih dahulu. Pemilih ruang kerja menentukan akun; formulir memilih obrolan dan periode pengamatan. Proses pencarian dilakukan secara lokal. Frasa atau domain yang tepat mempersempit hasil pencarian; ID pesan meminta versi yang disimpan. Tinjau kutipan dan buka catatan jurnal atau konteksnya. Tidak ada basis data vektor atau tindakan Telegram otomatis.

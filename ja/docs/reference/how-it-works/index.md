@@ -4,9 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-i
 
 ハッシュチェーン、署名、チェックポイント、およびウィットネスについて、検証者が使用する正確な数式を用いて解説しています。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitnessは、収集アカウントが観測した内容を保存し、それらの観測結果を 署名付きジャーナルにリンクさせ、信頼できる 鍵と以前に保存されたチェックポイントを用いて、別の担当者がエクスポート内容を検証できるようにします。
 
 [ローカルのドキュメントウェブサイト](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)には、 `/docs/concepts/` にインタラクティブな例、 `/docs/witness/` にチェックポイント決定エクスプローラー、および [Case Board](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/)、 [レポート作成](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-reports/)、[引き渡し抜粋](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#handover-extract)の手順解説が追加されています。 すべてのサンプルメッセージ、 カウント、遅延は架空のものです。チェーンサンドボックス内のハッシュは、 ブラウザ上で SHA-256 を使用して計算されます。Telegram には何も送信されません。
+
+**On this page**
+
+- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [What a hash covers](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/#what-a-hash-covers)
+- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Pick a workflow](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/#pick-a-workflow)
 
 ## メッセージは変化し、観察結果は蓄積されていきます
 

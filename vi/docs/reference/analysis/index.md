@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/analy
 
 Tìm kiếm các tin nhắn đã lưu, xem lại các đầu vào từ AI và lưu giữ các báo cáo phân tích kèm theo nguồn tham khảo.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Hướng dẫn quy trình làm việc](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Sử dụng **Nhật ký** để tìm kiếm cục bộ mà không cần AI; [tìm kiếm toàn văn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/) (xem trước) khớp với các dạng từ, cụm từ, miền và @tên người dùng. Đối với **tính năng** **"Hỏi kho lưu trữ"**, trước tiên hãy kích hoạt và cấu hình nhà cung cấp trong **phần** **Tích hợp**. Bộ chọn không gian làm việc chọn tài khoản; biểu mẫu chọn các cuộc trò chuyện và khoảng thời gian quan sát. Quá trình truy xuất diễn ra tại địa phương. Một cụm từ chính xác hoặc tên miền sẽ thu hẹp phạm vi truy xuất; ID tin nhắn yêu cầu các phiên bản đã lưu. Xem lại các đoạn trích và mở bản ghi nhật ký hoặc bối cảnh của chúng. Không có cơ sở dữ liệu vectơ hay hành động tự động trên Telegram.

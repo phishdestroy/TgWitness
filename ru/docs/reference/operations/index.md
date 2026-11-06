@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/opera
 
 Ежедневная эксплуатация панели управления: режимы работы, категории мониторинга, параметры, уведомления, экспорт данных, резервное копирование и емкость хранилища.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 При первом подключении используйте [учетные записи и форматы сеансов](https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/). Объяснение понятий «сохраненные версии», «политики событий» и «пробелы» см. в разделе [«Как работает сбор данных](https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/)». В данном руководстве рассматриваются вопросы повседневной эксплуатации и восстановления данных.
 
 Управляемая установка включает файлы **, START-HERE.html,** и **, а также файл START-HERE.txt и** наряду с её программой запуска, со ссылкой на репозиторий и командами, адаптированными к пути установки. Запустите `tgwitness guide --print` через SSH или `tgwitness paths`, чтобы определить фактический каталог данных. При установке с правами root через systemd частные данные хранятся в `/var/lib/tgwitness-…`; `/opt/tgwitness` содержит саму программу.
 
 Для управляемого временного туннеля Cloudflare код `tgwitness tunnel off` закрывает публичный доступ, при этом локальная панель и сбор данных продолжают работать. Код `tgwitness tunnel on` включает его; код `tgwitness tunnel restart` создает новое туннельное соединение. Используйте код `tgwitness open`, чтобы увидеть его текущий адрес. Явное отключение сохраняется после перезапуска службы. Код `tgwitness stop` останавливает как панель, так и сбор данных.
+
+**On this page**
+
+- [Operator workflow](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/#operator-workflow)
+- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Runtime modes](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/#runtime-modes)
+- [Monitoring categories](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/#monitoring-categories)
+- [Notifications](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/#notifications)
+- [Panel layout](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/#panel-layout)
+- [Deployment environments](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/#deployment-environments)
+- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/#startup-checks-and-exports)
+- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/#backup-restore-and-interruptions)
+- [Capacity and retention](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/#capacity-and-retention)
 
 ## Рабочий процесс оператора
 

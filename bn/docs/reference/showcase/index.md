@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/showc
 
 নির্বাচিত পাবলিক চ্যানেলের সংরক্ষিত বার্তা এবং স্বাক্ষরিত স্ন্যাপশটগুলো মেয়াদোত্তীর্ণ, প্রত্যাহারযোগ্য লিঙ্কের মাধ্যমে প্রকাশ করুন।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **অ্যাক্সেস → পাবলিক শোকেস** বিদ্যমান অ্যাক্সেস-টোকেন সিস্টেম ব্যবহার করে একটি পৃথক, শুধুমাত্র-পঠনযোগ্য পৃষ্ঠা তৈরি করে। এটি ইনস্টলেশনের সংরক্ষিত পর্যবেক্ষণগুলো পড়ে। এটি কোনো কালেক্টর শুরু করে না, টেলিগ্রামে সাইন ইন করে না বা দর্শকের জন্য কোনো চ্যানেল অর্জন করে না।
 
 ## একটি পৃষ্ঠা প্রকাশ করুন

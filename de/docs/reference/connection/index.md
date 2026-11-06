@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/conne
 
 Authentifizierung, automatische Proxy-Pools, IP-Modi, Fallback-Richtlinie, externe Anfragen und Speicherung von Geheimnissen.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/de/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Dieses Dokument beschreibt das Verhalten von TgWitness 0.8.0 und dessen Grenzen. Authentifizierung, Zugriff auf die Quelle, Netzwerkverbindung und Vollständigkeit der Erfassung sind separate Zustände. Informationen zu Anmeldeschritten, Dateiformaten und mehreren Konten finden Sie unter [„Konten und Sitzungsformate](https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/)“. Informationen zu Ereignisrichtlinien und zum Verhalten bei einem Neustart finden Sie unter [„So funktioniert die Erfassung](https://phishdestroy.github.io/TgWitness/de/docs/reference/collection/)“.
 
 ## Anleitung zur Verbindungsherstellung
@@ -117,7 +121,21 @@ Ein MTProxy überträgt ausschließlich Telegram-Datenverkehr. HTTP-Vorgänge de
 
 Bei vom Betreiber verwalteten privaten Diensten erlaubt die vorhandene Serverumgebungseinstellung „ `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1`“ private Ziele und behält die Hostnamenauflösung auf Proxy-Seite bei. Sie kann nicht über das Panel aktiviert werden. Der „Nur-öffentlich“-Modus lehnt „`.onion`“-Ziele ab, bevor der öffentliche Resolver abgefragt wird; Tor-Onion-Dienste erfordern diese explizite Einstellung für private Ziele sowie einen geeigneten Proxy. Dieses DNS-Verhalten gilt für externe HTTP-Vorgänge, nicht für den Telegram-Transport. Cloudflare dokumentiert den [JSON-DNS-Endpunkt](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Automatische Pool-Parameter**** Konfigurieren Sie unter **Parameter → Automatisch MTProxy** den Fehlerschwellenwert, die Abkühlphase, die geplante Rotation, die Proxy-Freigabe und die zulässige Fallback-Verzögerung. | Steuerung | Standard | | --- | --- | | Trennt die Verbindung vor dem Austausch | 3 innerhalb von 10 Minuten | | Proben von Proxys pro Verbindungsversuch | 3 | | Erste / maximale Pause nach einem Fehler | 10 Minuten / 6 Stunden | | Geplante Rotation | Deaktiviert; bei Fehler umschalten | | Konten pro Proxy | 0: separate Einträge bevorzugen, bei Bedarf gemeinsam nutzen. Setze 1, um auf einen exklusiven Eintrag zu warten. | | Verzögerung vor zulässigem „Direct“-Fallback | 10 Minuten; „Hide the address“ lehnt „Direct“ weiterhin ab | | Feed-Aktualisierung / Transportprüfungen | 60 / 10 Minuten; die Werte des Hauptarbeitsbereichs gelten für den gemeinsamen Pool | Unterschiedliche Proxys garantieren keine unterschiedlichen Ausgangsadressen. Diese Einstellungen setzen die Telegram-Beschränkungen nicht außer Kraft und gewährleisten keine Anonymität.
+****Automatische Pool-Parameter****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Kontrolle | Standard |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 Um die öffentliche Liste durch Ihren eigenen Betreiberkatalog zu ersetzen, konfigurieren Sie die folgende Überschreibung. Dadurch werden externe Abonnements vollständig deaktiviert, auch wenn das Array „`proxies`“ leer ist.
 

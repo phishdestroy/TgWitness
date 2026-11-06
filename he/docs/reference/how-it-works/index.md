@@ -4,9 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/how-i
 
 הסבר על שרשרת חשישים, חתימות, נקודות ביקורת ועדים, תוך שימוש בנוסחאות המדויקות שבהן משתמש המאמת.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness שומר את מה שנצפה על ידי חשבון האיסוף, מקשר תצפיות אלה ליומן חתום ומאפשר לאדם אחר לאמת ייצוא באמצעות מפתח מהימן ונקודת ביקורת שנשמרה קודם לכן.
 
 [אתר התיעוד המקומי](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) מוסיף דוגמאות אינטראקטיביות ב-`/docs/concepts/`, מחשבון החלטות בנקודות ביקורת ב- `/docs/witness/`, ומדריכים מפורטים [ל-Case Board](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/), [לעיצוב דוחות](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/) [ולתקצירי](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#handover-extract) [מסירת התיק](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#handover-extract). כל הודעות הדוגמה, הספירות והעיכובים הם פיקטיביים. חתימות ה-hash בסביבת הבדיקה של ה-chain מחושבות באמצעות SHA-256 בדפדפן. שום דבר לא נשלח ל-Telegram.
+
+**On this page**
+
+- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [What a hash covers](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#what-a-hash-covers)
+- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Pick a workflow](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#pick-a-workflow)
 
 ## הודעה משתנה; התצפיות מצטברות
 

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/accou
 
 Inicie sesión mediante teléfono, código QR o clave de autenticación, importe sesiones de Telethon, Pyrogram o Telegram Desktop, y gestione varias cuentas.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/es/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness inicia sesión como una **cuenta de usuario de Telegram** (no como un bot) a través de MTProto, utilizando Telethon. Cada cuenta se encuentra en su propio **espacio de trabajo** (denominado *«workspace*» en la API y en las herramientas de línea de comandos) con su propia sesión, fuentes, registro y clave de firma.
 
 Los archivos de sesión, las cadenas de sesión y las claves de autenticación son **autorizaciones de cuenta**: quienquiera que las posea puede actuar en nombre de dicha cuenta. No contienen el historial de mensajes.

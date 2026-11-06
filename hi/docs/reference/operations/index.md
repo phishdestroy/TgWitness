@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/opera
 
 पैनल का दैनिक संचालन: मोड, निगरानी श्रेणियाँ, पैरामीटर, सूचनाएं, निर्यात, बैकअप और क्षमता।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 अपने पहले कनेक्शन के लिए, [खातों और सत्र प्रारूपों का](https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/) उपयोग करें। सहेजे गए संस्करणों, इवेंट नीतियों और अंतरालों की व्याख्या के लिए, देखें [कि संग्रहण कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/)। यह गाइड दैनिक संचालन और पुनर्प्राप्ति को कवर करती है।
 
 एक प्रबंधित इंस्टॉलेशन में इसके लॉन्चर के बगल में **START-HERE.html** और **START-HERE.txt** शामिल होता है, जिसमें इसके इंस्टॉलेशन पथ के लिए अनुकूलित रिपॉजिटरी लिंक और कमांड होते हैं। वास्तविक डेटा डायरेक्टरी का पता लगाने के लिए `tgwitness guide --print` को SSH पर चलाएँ, या `tgwitness paths` चलाएँ। एक रूट systemd इंस्टॉल निजी स्थिति को `/var/lib/tgwitness-…` के तहत संग्रहीत करता है; `/opt/tgwitness` प्रोग्राम को होल्ड करता है।
 
 एक प्रबंधित अस्थायी Cloudflare टनल के लिए, `tgwitness tunnel off` सार्वजनिक पहुँच बंद कर देता है जबकि स्थानीय पैनल और संग्रहण चलते रहते हैं। `tgwitness tunnel on` इसे सक्षम करता है; `tgwitness tunnel restart` एक नया टनल कनेक्शन बनाता है। इसका वर्तमान पता देखने के लिए `tgwitness open` का उपयोग करें। एक स्पष्ट बंद सेटिंग सेवा के पुनरारंभ के बाद भी बनी रहती है। `tgwitness stop` पैनल और संग्रहण दोनों को रोकता है।
+
+**On this page**
+
+- [Operator workflow](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#operator-workflow)
+- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Runtime modes](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#runtime-modes)
+- [Monitoring categories](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#monitoring-categories)
+- [Notifications](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#notifications)
+- [Panel layout](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#panel-layout)
+- [Deployment environments](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#deployment-environments)
+- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#startup-checks-and-exports)
+- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#backup-restore-and-interruptions)
+- [Capacity and retention](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#capacity-and-retention)
 
 ## ऑपरेटर वर्कफ़्लो
 

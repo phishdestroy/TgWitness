@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 備份功能、將舊檔案移至您的雲端儲存空間、在 Object Lock 下的副本，以及在新裝置上的資料恢復。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 該面板將任務分為三類：
 
 | 任務 | 功能說明 |
@@ -15,6 +19,14 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 釋放儲存空間時，絕不會刪除或覆寫已簽名的日誌。每個附件均保留 其原始 SHA-256 以及一份恢復憑證。可選的 gzip 壓縮會在 經過驗證的加密之前進行。雲端檔案名稱不包含 Telegram 名稱、 聊天 ID 或原始附件名稱。單一附件最大可達 32 GiB。
 
 僅憑上傳回應並不能作為刪除檔案的授權。TgWitness 會下載 完整的加密物件並驗證其大小，SHA-256 則會儲存收據， 並在刪除前立即再次檢查本機的位元組數。若發生上傳失敗、 讀回結果不符或傳輸被取消的情況，本機檔案將保留原狀。若 已啟用的證據備份尚未複製該檔案，刪除操作亦會等待備份完成。
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## 磁碟空間即將耗盡時
 

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/webho
 
 HMAC署名、再送信、配信ステータスを付加して、指定されたイベントをHTTPS受信先に送信します。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [ワークフローガイド](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 選択したワークスペースで**連携 → 送信Webhook**を開きます。HTTPSの送信先を追加し、コレクター・メディア・エクスポートのイベントを選びます。新しい観測や変更の対象となるチャットも指定できます。メッセージ本文は既定では送信されません。抜粋を有効にすると、メッセージ変更イベントに最大1,000文字が追加されます。Telegramの生データや認証情報は送信されません。

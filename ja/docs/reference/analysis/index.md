@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/analy
 
 保存されたメッセージを検索し、AIの入力内容を検証し、出典情報を記載した分析レポートを管理できます。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [ワークフローガイド](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 AI を使用しないローカル検索には**「Journal」**を使用してください。[全文検索](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/)（プレビュー）[は](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/)、 単語の形態、フレーズ、ドメイン、@ユーザー名に一致します。**「Ask the archive**」を使用するには、まず 「**Integrations**」でプロバイダーを有効化し、設定を行ってください。ワークスペースセレクターで アカウントを選択し、フォームでチャットと観測期間を選択します。 検索処理は ローカルで実行されます。正確なフレーズやドメインを指定すると検索範囲が絞り込まれ、メッセージIDを指定すると保存された バージョンが取得されます。抜粋を確認し、ジャーナル記録やコンテキストを開くことができます。 ベクトルデータベースやTelegramへの自動アクション機能はありません。

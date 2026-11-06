@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/media
 
 قید شدہ تصاویر اور آڈیو کو ایک مقامی ورکر کے ساتھ پہچانیں؛ مشتق متن کو اس کی ماخذ فائل سے منسلک رکھیں۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [ورک فلو گائیڈ](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 `media.saved` جرنل ریکارڈ کھولیں، **'منسلکہ کو پہچانیں' (Recognize attachment**) منتخب کریں، پھر **'آرکائیو سے پوچھیں' (Ask the archive**) کے تحت OCR یا ٹرانسکرپشن کا انتخاب کریں۔ پراسیسنگ دستی اور مقامی ہے۔ اس میں کلاؤڈ میڈیا موڈ یا خودکار اپ لوڈ کی سہولت نہیں ہے۔ اصل منسلک بائٹس اور `media_sha256` تبدیل نہیں ہوتے؛ پہچانا گیا متن واضح طور پر مشینی پہچان کے طور پر نشان زد کیا جاتا ہے اور ماخذ ہیش، انجن/ماڈل ورژن، زبان، پیرامیٹرز اور تکمیل کے وقت کے ساتھ علیحدہ محفوظ کیا جاتا ہے۔ ٹرانسکرپٹس میں واپس آئے ہوئے ٹائم اسٹیمپز برقرار رہتے ہیں۔

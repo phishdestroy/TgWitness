@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/accou
 
 계정이 현재 읽을 수 있는 내용을 내보내기: 범위, 재개 가능한 작업, 서명된 아카이브 및 최소화된 공유 사본.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 계정 내보내기는 해당 계정을 독점 예약합니다. 시작하거나 재개하기 전에 모니터링 또는 다른 수집을 명시적으로 일시 중지하세요. 앱이 이를 자동으로 중지하지는 않습니다.
 
 설치 관리자는 [**여기서 시작] → [내 계정 내보내기**]를 선택하거나, [**내보내기] → [텔레그램 계정] → [계정 내보내기 구성]**을 선택하십시오. 필요한 경우 로그인하고, 권한 범위를 확인한 뒤 내보내기를 명시적으로 시작하십시오. 지속적인 관찰은 필요하지 않습니다. **‘저장된 관찰** 기록’은 기존 저널을 별도로 내보낸 것으로, 여기ZIP에는 저널 필터와 관계없이 모든 소스가 포함됩니다. 각 작업 공간은 고유한 작업, 서명 신원 및 저장 공간을 갖습니다. 제한 없는 일반 내보내기 권한을 포함한 패널 접근 권한이 부여되어도 이러한 계정 전체 경로는 열 수 없습니다.

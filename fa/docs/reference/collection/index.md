@@ -4,7 +4,25 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/colle
 
 دامنهٔ مشاهده، به‌روزرسانی‌های زنده، بازبینی‌ها، پیوست‌ها، اقدامات خود و معنای یک شکاف، رکورد به رکورد.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [مجموعه](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
+
+![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+
 TgWitness آنچه را که یک حساب تلگرام متصل مشاهده می‌کند، ثبت می‌کند. این دفترچه مشاهدات، توالی آن‌ها و زمینه همراهشان را حفظ می‌کند. این ابزار از روی یک پیام حذف‌شده یا از متصل بودن یک حساب، به وجود اقدامات نامرئی پی نمی‌برد.
+
+**On this page**
+
+- [From login to a journal](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/#from-login-to-a-journal)
+- [Observation scope: chosen chats, a folder or the whole account](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
+- [Scope and event selection](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/#scope-and-event-selection)
+- [Own actions](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/#own-actions)
+- [Investigation mode: joining teams and talking to bots](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
+- [Recheck tiers](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/#recheck-tiers)
+- [Message history and attribution](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/#message-history-and-attribution)
+- [History snapshots](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/#history-snapshots)
+- [Attachment handling](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/#attachment-handling)
+- [Pause, lock, disconnect, and restart](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/#pause-lock-disconnect-and-restart)
+- [Account isolation and verification](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/#account-isolation-and-verification)
 
 ## از ورود تا دفترچهٔ ثبت
 

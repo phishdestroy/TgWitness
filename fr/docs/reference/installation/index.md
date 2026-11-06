@@ -4,7 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/insta
 
 Installez-le en une seule commande, vérifiez les signatures et les hachages, mettez à jour et désinstallez l&#x27;application.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Projet](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [Mise en route rapide](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/) · [Déploiement](https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/)
+
+**On this page**
+
+- [Install with one command](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#install-with-one-command)
+- [Where everything runs](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#where-everything-runs)
+- [Full-text search settings](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#full-text-search-settings)
+- [Command-line access](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#command-line-access)
+- [Verify before running](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#verify-before-running)
+- [Update an existing installation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#update-an-existing-installation)
+- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#remove-tgwitness)
 
 ## Installation en une seule commande
 

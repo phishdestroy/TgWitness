@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/accou
 
 Xuất những nội dung mà tài khoản có thể truy cập hiện tại: phạm vi, các tác vụ có thể tiếp tục, tệp lưu trữ đã được ký và các bản sao chia sẻ đã được thu gọn.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 Xuất tài khoản giữ riêng tài khoản đó. Hãy chủ động tạm dừng giám sát hoặc một hoạt động thu thập khác trước khi bắt đầu hay tiếp tục; ứng dụng không bao giờ tự dừng chúng.
 
 Với tư cách là quản trị viên cài đặt, hãy chọn **Bắt đầu tại đây → Xuất tài khoản của tôi**, hoặc **Xuất → Tài khoản Telegram → Cấu hình xuất tài khoản**. Đăng nhập nếu cần, xem lại phạm vi và bắt đầu xuất một cách rõ ràng. Không cần quan sát liên tục. **"Lưu quan sát**" là một bản xuất riêng biệt của nhật ký hiện có; ZIP của nó bao gồm tất cả các nguồn bất kể bộ lọc nhật ký. Mỗi không gian làm việc có các tác vụ, danh tính ký và bộ nhớ riêng. Quyền truy cập bảng điều khiển đã cấp, bao gồm quyền xuất thông thường không hạn chế, không thể mở các đường dẫn trên toàn tài khoản này.

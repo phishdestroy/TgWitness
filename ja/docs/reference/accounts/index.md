@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/accou
 
 電話番号、QRコード、または認証キーでログインし、Telethon、Pyrogram、またはTelegram Desktopのセッションをインポートして、複数のアカウントを運用できます。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitnessは、Telethonを使用して、MTProto経由で**Telegramのユーザーアカウント**（ボットではありません）としてログインします。 各アカウントは、独自の**ワークスペース**（APIおよびコマンドラインツールでは「*ワークスペース*」と呼ばれます）内に存在し、 独自のセッション、ソース、ジャーナル、および署名鍵を持っています。
 
 セッションファイル、セッション文字列、および認証キーは**アカウントの認証情報**です。これらを 所持している者は誰でも、そのアカウントとして行動することができます。これらにはメッセージ履歴は含まれていません。

@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Lưu trữ và khôi phục</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Những nội dung đã được kiểm thử →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Tham khảo / Bằng chứng</p><h1>Lưu trữ và khôi phục</h1><p class="guide-outcome">Sao lưu, di chuyển các tệp cũ lên đám mây của bạn, các bản sao được bảo vệ bởi Object Lock và khôi phục trên máy mới.</p><div class="wiki-body"><p>Bảng điều khiển này phân chia thành ba tác vụ:</p>
+<article class="guide-content"><p class="language-notice">Một số phần của trang này vẫn còn bằng tiếng Anh: bản gốc tiếng Anh đã được sửa đổi sau khi được dịch.</p><p class="eyebrow">Tham khảo / Bằng chứng</p><h1>Lưu trữ và khôi phục</h1><p class="guide-outcome">Sao lưu, di chuyển các tệp cũ lên đám mây của bạn, các bản sao được bảo vệ bởi Object Lock và khôi phục trên máy mới.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Tài liệu</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Bảng điều khiển này phân chia thành ba tác vụ:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@ toàn bộ đối tượng được mã hóa và xác minh kích thước của 
 sau đó kiểm tra lại các byte cục bộ ngay trước khi xóa. Nếu việc tải lên thất bại,
 kết quả đọc lại khác hoặc quá trình truyền tải bị hủy, tệp cục bộ sẽ vẫn được giữ nguyên. Nếu
 bản sao lưu bằng chứng đã được kích hoạt chưa sao chép tệp đó, quá trình xóa cũng sẽ chờ cho đến khi bản sao lưu hoàn tất.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">Khi ổ đĩa sắp đầy<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="Liên kết đến phần này">#</a></h2>
 <p>Tải tệp đính kèm tạm dừng khi dung lượng trống thấp hơn mức <strong>Tham số → Tệp đính kèm → dung lượng đĩa trống</strong> (mặc định 1 GiB), vẫn giữ hàng đợi. Quan sát văn bản tiếp tục. Điều này độc lập với thông báo: tắt thông báo không tắt dung lượng dự phòng tải xuống hay các biện pháp bảo vệ lưu trữ.</p>
 <p>Để can thiệp sớm hơn, bật <strong>Chạy tự động</strong>, chọn <strong>Xóa tệp cục bộ để giải phóng dung lượng</strong> và bật <strong>Chạy thêm một lượt chuyển khi ổ đĩa ít chỗ trống</strong>. Mặc định, quy tắc tùy chọn bắt đầu dưới 5120 MiB trống và xử lý từng lô đến khi trống 10240 MiB. Cả hai ngưỡng đều cấu hình được. Nó dùng cùng đích, tuổi tệp tối thiểu, giới hạn lô, kiểm tra đọc lại toàn bộ và điều kiện sao lưu bằng chứng như lượt chạy thủ công; không tự bật đích. Kiểm tra mỗi 30 giây; lỗi hoặc không tiến triển sẽ lùi lần thử tiếp theo năm phút. Trạng thái và thời điểm thử lại vẫn được giữ sau khởi động lại. Khi quy tắc không hoạt động, các lượt theo lịch dùng khoảng thời gian thông thường.</p>

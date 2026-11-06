@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/searc
 
 ค้นหาข้อความที่บันทึกไว้ตามรูปแบบคำ วลีที่ตรงกันเป๊ะ โดเมน และ @usernames โดยแสดงผลลัพธ์ที่ตรงกันมากที่สุดก่อน พร้อมทั้งดัชนีที่เชื่อมโยงกับบันทึกที่ลงนามแล้ว
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [การวิเคราะห์ข้อมูลในคลัง](https://phishdestroy.github.io/TgWitness/th/docs/reference/analysis/) · [OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น](https://phishdestroy.github.io/TgWitness/th/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **ดูตัวอย่าง** ใน **Journal** ให้เลือก "**Best match · word forms**" ข้างช่องค้นหา ผลลัพธ์จะถูกจัดอันดับด้วย BM25 และจับคู่กับรูปแบบอื่น ๆ ของคำเดียวกัน: *"перевод"* จะพบ *"переводом"* และ *"переводы"*, *"transfer"* จะพบ *"transfers"*, และวลีภาษาจีน จะถูกค้นหาโดยไม่เว้นวรรค **"Newest first · exact text"** จะคงการค้นหา ส่วนย่อยของข้อความจากครั้งก่อนไว้บนบันทึกทั้งหมด
 
 ดัชนีเป็นข้อมูลที่สร้างขึ้นใหม่ โดยถูกสร้างขึ้นใหม่จากบันทึกที่ลงนามแล้ว ไม่เคยถูกลงนาม ด้วยตัวเอง และไม่เคยถูกส่งออกเลย บันทึกต้นฉบับไม่เปลี่ยนแปลง
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#benchmark)
 
 ## ไวยากรณ์การค้นหา
 

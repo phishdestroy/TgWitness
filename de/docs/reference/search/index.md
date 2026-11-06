@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/searc
 
 Suche nach gespeicherten Nachrichten anhand von Wortformen, genauen Phrasen, Domains und @Benutzernamen, wobei die besten Treffer zuerst angezeigt werden und der Index mit dem signierten Protokoll verknüpft ist.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Analyse des Archivs](https://phishdestroy.github.io/TgWitness/de/docs/reference/analysis/) · [Lokale OCR und Transkription](https://phishdestroy.github.io/TgWitness/de/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Vorschau.** Wählen Sie im **Protokoll** neben dem Suchfeld **„Beste Übereinstimmung · Wortformen“** aus. Die Ergebnisse werden nach BM25 sortiert und umfassen auch andere Formen desselben Wortes: *„перевод“* findet *„переводом“* und *„переводы“*, *„transfer“* findet *„transfers“*, eine chinesische Phrase wird ohne Leerzeichen gefunden. **„Neueste zuerst · exakter Text“** behält die vorherige Teilstring-Suche über den gesamten Datensatz bei.
 
 Der Index besteht aus abgeleiteten Daten. Er wird aus dem signierten Protokoll neu erstellt, ist selbst niemals signiert und wird niemals exportiert. Die ursprünglichen Datensätze bleiben unverändert.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#benchmark)
 
 ## Suchsyntax
 

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/stora
 
 Pencadangan, pemindahan berkas lama ke cloud Anda, salinan di bawah Object Lock, dan pemulihan di perangkat baru.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Panel ini membagi tiga tugas:
 
 | Tugas | Fungsinya |
@@ -15,6 +19,14 @@ Panel ini membagi tiga tugas:
 Pembebasan ruang penyimpanan tidak pernah menghapus atau menimpa jurnal yang telah ditandatangani. Setiap lampiran menyimpan SHA-256 aslinya dan tanda terima pemulihan. Kompresi gzip opsional dilakukan sebelum enkripsi terotentikasi. Nama file di cloud tidak mengandung nama Telegram, ID obrolan, atau nama lampiran asli. Satu lampiran dapat berukuran hingga 32 GiB.
 
 Respons unggahan saja tidak berarti izin untuk menghapus file. TgWitness mengunduh objek terenkripsi secara lengkap dan memverifikasi ukurannya serta SHA-256, menyimpan tanda terima, lalu memeriksa byte lokal lagi segera sebelum penghapusan. Kegagalan unggahan, hasil pembacaan yang berbeda, atau transfer yang dibatalkan membuat file lokal tetap ada. Jika cadangan bukti yang diaktifkan belum menyalin file tersebut, penghapusan juga akan menunggunya.
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/id/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/id/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/id/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/id/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/id/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## Saat disk mulai penuh
 

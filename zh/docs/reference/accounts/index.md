@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/accou
 
 支持通过手机、二维码或授权密钥登录，可导入 Telethon、Pyrogram 或 Telegram Desktop 的会话数据，并同时管理多个账户。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness 通过 MTProto 协议以 **Telegram 用户账户**（而非机器人）身份登录，使用 Telethon 实现。每个账户都位于独立的工作区中（在 API 和命令行工具中称为“*工作区*”），并拥有独立的会话、消息源、日志和签名密钥。
 
 会话文件、会话字符串和认证密钥均属于**账户授权凭证**：任何 持有者均可代表该账户进行操作。这些凭证不包含消息历史记录。

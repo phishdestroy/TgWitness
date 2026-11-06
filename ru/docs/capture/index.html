@@ -35,7 +35,9 @@
 <article class="guide-content"><p class="eyebrow">Документация / 02</p><h1>Выгрузка через GitHub Actions</h1><p>Выберите Takeout，выгрузку через обычный API или журнал чата на временном раннере GitHub．</p>
 <div class="capture-widget" data-capture-wizard data-site-language="ru" data-no-translate></div>
 <noscript><p>Включите JavaScript, чтобы сгенерировать ключ и расшифровать ваш архив.</p></noscript>
-<details class="detail-block"><summary>Полный справочник</summary><div class="wiki-body" lang="ru" dir="ltr"><p><strong>Предварительная версия в ветке <code>main</code>.</strong> Пользователь делает форк,
+<details class="detail-block"><summary>Полный справочник</summary><div class="wiki-body" lang="ru" dir="ltr"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentation</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/README.md">Folder</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md">Independent capture</a></p>
+<p><img alt="Independent capture" src="../../../assets/chapter-capture.svg" /></p>
+<p><strong>Предварительная версия в ветке <code>main</code>.</strong> Пользователь делает форк,
 запускает задачу, входит в Telegram во временной панели и выбирает режим, состав
 данных и настройки. Можно выгрузить весь доступный аккаунт, выбранные чаты или
 журнал одного чата, GitHub создаёт аттестацию ZIP либо манифеста частей, после
@@ -44,6 +46,18 @@
 <p>Верификатор сверяет архив с аттестацией GitHub, разрешёнными версиями workflow
 и сборщика, затем проверяет журнал и вложения. Получатель может изучить код
 сбора и проверить, что полученный файл соответствует зафиксированному запуску.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#расчёт-времени-сеанса">Расчёт времени сеанса</a></li>
+<li><a href="#запуск-по-шагам">Запуск по шагам</a></li>
+<li><a href="#проверка-результата">Проверка результата</a></li>
+<li><a href="#какой-режим-выбрать">Какой режим выбрать</a></li>
+<li><a href="#форк-ключи-и-приватность">Форк, ключи и приватность</a></li>
+<li><a href="#если-что-то-не-получается">Если что-то не получается</a></li>
+<li><a href="#проверка-перед-первой-выгрузкой">Проверка перед первой выгрузкой</a></li>
+</ul>
+</details>
 <h2 id="расчёт-времени-сеанса">Расчёт времени сеанса<a class="anchor" href="#расчёт-времени-сеанса" aria-label="Link to this section">#</a></h2>
 <p>Перед сбором нажмите <strong>«Рассчитать время и размер»</strong>. Панель покажет оценку истории
 и вложений, оставшееся время с учётом входа и резерв на упаковку. Начальная оценка

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/analy
 
 Cerca i messaggi salvati, esamina i dati forniti dall’intelligenza artificiale e conserva i rapporti analitici con i relativi riferimenti alle fonti.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/it/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Guida al flusso di lavoro](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Utilizzare **il Registro** per la ricerca locale senza IA; [la ricerca full-text](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/) (anteprima) trova corrispondenze tra forme di parole, frasi, domini e @nomi utente. Per **"Chiedi all’archivio**", abilitare e configurare prima un provider in **Integrazioni**. Il selettore dell’area di lavoro sceglie l’ account; il modulo seleziona le chat e il periodo di osservazione. Il recupero avviene localmente. Una frase esatta o un dominio restringe il recupero; un ID messaggio richiede le versioni salvate . Esamina gli estratti e apri i relativi record del registro o il contesto. Non è presente alcun database vettoriale né alcuna azione automatica su Telegram.

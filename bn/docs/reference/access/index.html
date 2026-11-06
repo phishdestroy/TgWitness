@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="গাইডসমূহ"><a href="../../../">হোম</a> <span aria-hidden="true">/</span> <a href="../../">ডকুমেন্টেশন</a> <span aria-hidden="true">/</span> <a href="../">তথ্যসূত্র</a> <span aria-hidden="true">/</span> <span aria-current="page">অ্যাক্সেস এবং অনুমতিসমূহ</span></nav>
 <p class="verification-shortcut"><a href="../verification/">কি পরীক্ষা করা হয়েছে →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ডকুমেন্টেশন অনুসন্ধান করুন</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="প্রক্সি, হ্যাশ চেইন, টোকেন বা উইটনেস চেষ্টা করুন…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="স্পষ্ট অনুসন্ধান" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">গাইড এবং রেফারেন্স অনুসন্ধান করতে একটি শব্দ টাইপ করুন। অনুসন্ধান আপনার ব্রাউজারেই থাকবে।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">তথ্যসূত্র / সেটআপ</p><h1>অ্যাক্সেস এবং অনুমতিসমূহ</h1><p class="guide-outcome">অ্যাকাউন্ট এবং চ্যাটে সীমিত পরিসরের অ্যাক্সেস ইস্যু করুন, অনুমতি নির্বাচন করুন, সেশন এবং আইপি ঠিকানা সীমিত করুন, এবং অ্যাক্সেস প্রত্যাহার করুন।</p><div class="wiki-body"><p>একজন পর্যালোচনাকারীকে একটি চ্যাটে অ্যাক্সেস দিন, একজন বিশ্লেষককে একটি কেস রপ্তানি করার অনুমতি দিন, অথবা একজন অপারেটরকে নির্বাচিত অ্যাকাউন্টগুলির নিয়ন্ত্রণ দিন। প্রত্যেক ব্যক্তি তাদের নিজস্ব টোকেন পাবেন। প্রধান প্যানেলের টোকেন প্রশাসকের কাছে থাকবে।</p>
+<article class="guide-content"><p class="language-notice">এই পৃষ্ঠার কিছু অংশ এখনও ইংরেজিতে রয়েছে: অনুবাদ করার পর মূল ইংরেজি সংস্করণটি পরিবর্তিত হয়েছে।</p><p class="eyebrow">তথ্যসূত্র / সেটআপ</p><h1>অ্যাক্সেস এবং অনুমতিসমূহ</h1><p class="guide-outcome">অ্যাকাউন্ট এবং চ্যাটে সীমিত পরিসরের অ্যাক্সেস ইস্যু করুন, অনুমতি নির্বাচন করুন, সেশন এবং আইপি ঠিকানা সীমিত করুন, এবং অ্যাক্সেস প্রত্যাহার করুন।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">টিজিউইটনেস</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">ডকুমেন্টেশন</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>একজন পর্যালোচনাকারীকে একটি চ্যাটে অ্যাক্সেস দিন, একজন বিশ্লেষককে একটি কেস রপ্তানি করার অনুমতি দিন, অথবা একজন অপারেটরকে নির্বাচিত অ্যাকাউন্টগুলির নিয়ন্ত্রণ দিন। প্রত্যেক ব্যক্তি তাদের নিজস্ব টোকেন পাবেন। প্রধান প্যানেলের টোকেন প্রশাসকের কাছে থাকবে।</p>
 <p><a href="../accounts/">অ্যাকাউন্ট সেটআপ</a> · <a href="../connection/">সংযোগ পথসমূহ</a> · <a href="../security/">নিরাপত্তা মডেল</a></p>
 <h2 id="two-scopes-two-different-jobs">দুটি স্কোপ, দুটি ভিন্ন কাজ<a class="anchor" href="#two-scopes-two-different-jobs" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
 <p><strong>সংগ্রহের পরিধি</strong> নির্ধারণ করে একটি অ্যাকাউন্ট কী রেকর্ড করবে: নির্বাচিত চ্যাট, একটি টেলিগ্রাম ফোল্ডার বা পুরো অ্যাকাউন্ট। <strong>অ্যাক্সেসের পরিধি</strong> নির্ধারণ করে ওই রেকর্ডকৃত অ্যাকাউন্ট এবং চ্যাটগুলির মধ্যে কোনগুলো অন্য কেউ দেখতে এবং ব্যবহার করতে পারবে। অ্যাক্সেস দেওয়া টেলিগ্রাম চ্যাটে যোগ দেয় না, সংগ্রহ শুরু করে না বা টেলিগ্রাম অ্যাকাউন্টের অনুমতি প্রদান করে না।</p>
@@ -203,11 +205,13 @@
 <p>অ্যাক্সেস ইস্যু করা, পরিবর্তন করা এবং বাতিল করা, এবং সেশন শুরু বা শেষ করা, এছাড়াও স্বাক্ষরিত <code>access.*</code> জার্নাল রেকর্ড তৈরি করে। সেই রেকর্ডগুলিতে টোকেন অন্তর্ভুক্ত থাকে না। ইস্যু করা টোকেন এবং সেশন ক্রেডেনশিয়ালগুলি এনক্রিপ্ট করা ভল্টে হ্যাশ হিসেবে সংরক্ষণ করা হয়।</p>
 <details>
 <summary><strong>প্রধান প্রশাসক এবং বিশ্বাসের সীমা</strong></summary>
-
-প্রধান প্যানেল টোকেন অবাধ থাকে। এটি ব্যবহার করে ব্রাউজার সাইন-ইন করলে প্রশাসকের নির্ধারিত সেশন সীমার আওতায় সেশন তৈরি হয়। প্রধান টোকেন সরাসরি পাঠানোর স্ক্রিপ্টগুলো সম্পূর্ণ অ্যাক্সেস ধরে রাখে এবং সেগুলো ব্রাউজার সেশন হিসেবে গণ্য হয় না।
-
-এটি একটি ইনস্টলেশনে অ্যাপ্লিকেশন-স্তরের অ্যাক্সেস নিয়ন্ত্রণ। সমস্ত ওয়ার্কস্পেস সার্ভার প্রক্রিয়া শেয়ার করে; এটি হোস্ট প্রশাসকের থেকে বিচ্ছিন্ন নয়। প্রধান টোকেন, টেলিগ্রাম সেশন, স্বাক্ষর কী এবং ডেটা ডিরেক্টরি ব্যক্তিগত রাখুন। একটি উইটনেস টোকেন একটি পৃথক চেকপয়েন্ট/স্বাস্থ্য সনদ, প্যানেল অ্যাক্সেস টোকেন নয়।
-
+<p>The main panel token remains unrestricted. Browser sign-ins with it create sessions
+subject to the administrator's configured session limits. Scripts sending the
+main token directly retain full access and are not counted as browser sessions.</p>
+<p>This is application-level access control in one installation. All workspaces share
+the server process; this is not isolation from the host administrator. Keep the main
+token, Telegram sessions, signing keys and data directory private. A witness token
+is a separate checkpoint/health credential, not a panel access token.</p>
 </details></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">GitHub-এ এই পৃষ্ঠা সম্পাদনা করুন ↗</a><a class="next-guide" href="../connection/"><span>পরবর্তী ধাপ</span><strong>সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা →</strong></a><p>এই গাইডগুলো বর্তমান বাস্তবায়ন বর্ণনা করে। যাচাইকরণ ফলাফল এবং অবশিষ্ট ফাঁকগুলো আলাদাভাবে নথিভুক্ত করা হয়েছে। <a href="../verification/">কি পরীক্ষা করা হয়েছে →</a></p></footer>
 </main>

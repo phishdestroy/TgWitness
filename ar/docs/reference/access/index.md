@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/acces
 
 يمكنك تحديد نطاق الوصول إلى الحسابات والمحادثات، واختيار الأذونات، وتقييد الجلسات وعناوين IP، وسحب حق الوصول.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 امنح المراجع حق الوصول إلى محادثة واحدة، أو امنح المحلل إذنًا لتصدير قضية، أو امنح المشغل حق التحكم في حسابات محددة. يحصل كل شخص على رمزه الخاص. ويبقى رمز لوحة التحكم الرئيسية بحوزة المسؤول.
 
 [إعداد الحساب](https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/) · [مسارات الاتصال](https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/) · [نموذج الأمان](https://phishdestroy.github.io/TgWitness/ar/docs/reference/security/)
@@ -104,4 +108,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/acces
 
 كما يؤدي إصدار حقوق الوصول وتغييرها وإلغاؤها، وبدء الجلسات أو إنهاؤها، إلى إنشاء سجلات موثقة في دفتر «`access.*`». ولا يتم تضمين الرموز المميزة في تلك السجلات. يتم الاحتفاظ بالرموز المميزة الصادرة وبيانات اعتماد الجلسات كقيم هاش في الخزينة المشفرة.
 
-****المسؤول الرئيسي وحدود الثقة**** يظل الرمز المميز للوحة الرئيسية غير مقيد. تؤدي عمليات تسجيل الدخول عبر المتصفح باستخدامه إلى إنشاء جلسات تخضع لحدود الجلسات التي يحددها المسؤول. تحتفظ البرامج النصية التي ترسل الرمز المميز الرئيسي مباشرةً بالوصول الكامل ولا تُحسب كجلسات متصفح. هذا هو التحكم في الوصول على مستوى التطبيق في تثبيت واحد. تتشارك جميع مساحات العمل في عملية الخادم؛ وهذا لا يعني العزل عن مسؤول المضيف. حافظ على سرية الرمز الرئيسي وجلسات Telegram ومفاتيح التوقيع ودليل البيانات. رمز الشاهد هو نقطة تفتيش/بيانات اعتماد حالة منفصلة، وليس رمز وصول إلى اللوحة.
+****المسؤول الرئيسي وحدود الثقة****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

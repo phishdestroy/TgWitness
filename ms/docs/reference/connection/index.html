@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Rujukan</a> <span aria-hidden="true">/</span> <span aria-current="page">Sambungan, proksi dan perlindungan data</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Rujukan / Pemasangan</p><h1>Sambungan, proksi dan perlindungan data</h1><p class="guide-outcome">Pengesahan, kolam proksi automatik, mod IP, dasar sandaran, permintaan luaran dan penyimpanan rahsia.</p><div class="wiki-body"><p>Dokumen ini menerangkan tingkah laku TgWitness 0.8.0 dan hadnya. Pengesahan,
+<article class="guide-content"><p class="language-notice">Bahagian-bahagian halaman ini masih dalam bahasa Inggeris: teks asal Inggeris telah diubah selepas diterjemahkan.</p><p class="eyebrow">Rujukan / Pemasangan</p><h1>Sambungan, proksi dan perlindungan data</h1><p class="guide-outcome">Pengesahan, kolam proksi automatik, mod IP, dasar sandaran, permintaan luaran dan penyimpanan rahsia.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Dokumentasi</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Dokumen ini menerangkan tingkah laku TgWitness 0.8.0 dan hadnya. Pengesahan,
 akses sumber, sambungan rangkaian dan kelengkapan tangkapan adalah keadaan yang berasingan.
 Untuk langkah log masuk, format fail, dan akaun berbilang, mulakan dengan
 <a href="../accounts/">akaun dan format sesi</a>. Untuk dasar peristiwa dan tingkah laku permulaan semula, lihat <a href="../collection/">bagaimana pengumpulan berfungsi</a>.</p>
@@ -260,25 +262,49 @@ Tingkah laku DNS ini terpakai kepada operasi HTTP luaran, bukan pengangkutan Tel
 Cloudflare mendokumenkan <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">hujung titik akhir DNS JSON</a>.</p>
 <details>
 <summary><strong>Parameter kolam automatik</strong></summary>
-
-Di bawah **Parameter → MTProxy Automatik**, konfigurasi ambang kegagalan, masa rehat,
-putaran yang dirancang, perkongsian proksi dan kelewatan fallback yang dibenarkan.
-
-| Kawalan | Lalai |
-| --- | --- |
-| Pemutusan sambungan sebelum penggantian | 3 dalam 10 minit |
-| Proksi dicuba bagi setiap percubaan sambungan | 3 |
-| Rehat pertama / maksimum selepas kegagalan | 10 minit / 6 jam |
-| Putaran yang dirancang | Dilumpuhkan; aktifkan semasa kegagalan |
-| Akaun setiap proksi | 0: utamakan entri berasingan, kongsi apabila perlu. Tetapkan 1 untuk menunggu entri eksklusif. |
-| Jeda sebelum pelepasan langsung yang dibenarkan | 10 minit; Sembunyikan alamat masih menolak Direct |
-| Semakan penyegaran suapan / pengangkutan | 60 / 10 minit; nilai ruang kerja utama terpakai pada kolam kongsi |
-
-Proksi yang berbeza tidak menjamin alamat keluar yang berbeza. Tetapan ini tidak
-membatalkan had Telegram atau membuktikan kebolehsembunyian.
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kawal</th>
+<th>Lalai</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>Untuk menggantikan senarai awam dengan katalog pengendali anda sendiri, konfigurasi penggantian di bawah.
 Ia menyahaktifkan langganan luaran sepenuhnya, termasuk apabila tatasusunan <code>proxies</code>-nya kosong.</p>
 <p>Salin <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">katalog kosong</a>

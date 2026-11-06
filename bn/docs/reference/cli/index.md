@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/
 
 অনুসন্ধান করুন, প্রসঙ্গ পড়ুন, কার্যকলাপ গণনা করুন এবং স্ক্রিপ্ট ও এজেন্ট থেকে সংরক্ষিত বার্তা রপ্তানি করুন, --json আউটপুট, স্থিতিশীল এক্সিট কোড এবং স্কোপড রিড-অনলি টোকেনসহ।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [শুধুমাত্র-পঠনযোগ্য MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/) · [পূর্ণ-পাঠ অনুসন্ধান](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/) · [উইকি](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **প্রিভিউ।** `tgwitness search`, `context`, `messages`, `stats` এবং `export` পড়ুন স্ক্রিপ্ট এবং AI এজেন্টদের জন্য সংরক্ষিত পর্যবেক্ষণ। তারা টেলিগ্রামে কিছুই পাঠাতে পারে না, সেটিংস পরিবর্তন করতে পারে না বা স্বাক্ষরিত জার্নাল সংশোধন করতে পারে না।

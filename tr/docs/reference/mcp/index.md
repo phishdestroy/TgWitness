@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/
 
 Bir MCP istemcisini, süresi dolan ve iptal edilebilir erişim izniyle seçilen çalışma alanlarına ve sohbetlere bağlayın.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 Bir analist istemcisini seçilen çalışma alanlarına ve sohbetlere bağlayın. TgWitness, **panel sürecinde `/mcp` adresinde Streamable HTTP hizmeti** sunar. Her bağlantının kendine ait bir token'ı, geçerlilik süresi ve izin verilen araçları vardır. MCP, Telegram mesajları gönderemez, ayarları değiştiremez veya imzalı günlüğü düzenleyemez. Aynı bağlantılar [komut satırı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/) ile de çalışır.
 
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#tools-and-boundaries)
 
 ## Kurulum ve kontrol
 

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/times
 
 签名检查点采用 RFC 3161 时间戳：向认证机构发送的内容以及如何验证响应。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness 会生成 RFC 3161 请求并验证时间戳授权机构（TSA）的响应。 此手动流程既不选择 TSA，也不提交数据；而证据模式会根据 预定时间表（[证据格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)）自动完成这两项操作。生成的请求本身 **尚不**构成 **时间戳证明**。
 
 ## 证据的约束力

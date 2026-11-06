@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/media
 
 Mahalliy ishchi yordamida ushlangan tasvirlar va audio materiallarni aniqlang; hosil qilingan matnni uning manba fayli bilan bog'lab saqlang.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Ish jarayoni bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 `media.saved` jurnal yozuvini oching, **Ilovani aniqlashni** tanlang, so'ngra **Arxivdan so'rash** bo'limida OCR yoki transkripsiyani tanlang. Ishlov berish qo'lda va mahalliy tarzda amalga oshiriladi. Bulutli media rejimi yoki avtomatik yuklash mavjud emas. Ilova asl baytlari va `media_sha256` o'zgarmasligicha qoladi; aniqlangan matn aniq mashinaviy tan olish deb belgilangan va manba xesh, dvigatel/model versiyasi, til, parametrlar va yakunlanish vaqti bilan alohida saqlanadi. Transkriptlar qaytarilgan vaqt tamg'alarini saqlab qoladi.

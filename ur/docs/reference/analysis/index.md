@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/analy
 
 محفوظ شدہ پیغامات تلاش کریں، AI ان پٹس کا جائزہ لیں اور ماخذ حوالہ جات کے ساتھ تجزیاتی رپورٹس محفوظ رکھیں۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [ورک فلو گائیڈ](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 AI کے بغیر مقامی تلاش کے لیے **جرنل** استعمال کریں؛ [فل ٹیکسٹ سرچ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/) (پریویو) لفظوں کی شکلوں، جملوں، ڈومینز اور @usernames کا میل کراتی ہے۔ **Ask the archive** کے لیے، پہلے **Integrations** میں ایک پرووائیڈر کو فعال اور کنفیگر کریں۔ ورک اسپیس سیلیکٹر اکاؤنٹ کا انتخاب کرتا ہے؛ فارم چیٹس اور مشاہدے کی مدت کا انتخاب کرتا ہے۔ حصول مقامی طور پر چلتا ہے۔ ایک بالکل درست فقرہ یا ڈومین تلاش کو محدود کرتا ہے؛ ایک پیغام کی آئی ڈی محفوظ شدہ ورژنز کی درخواست کرتا ہے۔ اقتباسات کا جائزہ لیں اور ان کے جرنل ریکارڈز یا سیاق و سباق کو کھولیں۔ کوئی ویکٹر ڈیٹا بیس یا خودکار ٹیلیگرام ایکشن نہیں ہے۔

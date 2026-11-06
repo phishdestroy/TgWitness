@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-
 
 Un serveur sécurisé disponible 24 h/24 et 7 j/7 sur Hetzner ou Phala Cloud, un DNS Gateway et des vérifications reproductibles par un tiers.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
 
 L'utilisation classique en local et avec Docker reste inchangée. Rien ne fonctionne ici à moins que vous ne déployiez avec `python -m tgwitness.cloud`, et le collecteur ne lit son hôte que lorsque le déploiement est configuré `TGWITNESS_ASSURANCE`.
@@ -20,6 +24,23 @@ Organigramme · Opérateur → Serveur, pare-feu sans règles entrantes (API du 
 6. Verifier, jetons en lecture seule → Adresse du connecteur de tunnel et point d’entrée
 7. Verifier, jetons en lecture seule → Déclaration /api/assurance signée
 8. Verifier, jetons en lecture seule → Fichier ZIP de preuves
+
+**On this page**
+
+- [What a verifier can check](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [Providers](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#providers)
+- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [Before you start](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#before-you-start)
+- [From the panel](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#from-the-panel)
+- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [Deploy](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#deploy)
+- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [Remove a deployment](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#remove-a-deployment)
+- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#any-server-self-attested)
+- [Verify](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#verify)
+- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#report-for-evidence-handover)
+- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## Ce qu’un vérificateur peut contrôler
 

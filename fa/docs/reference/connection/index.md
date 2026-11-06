@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/conne
 
 احراز هویت، استخرهای خودکار پروکسی، حالت‌های IP، سیاست پشتیبان، درخواست‌های خارجی و ذخیره‌سازی مخفی.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 این سند رفتار و محدودیت‌های TgWitness 0.8.0 را توصیف می‌کند. احراز هویت، دسترسی به منبع، اتصال شبکه و کامل بودن ضبط، حالات جداگانه‌ای هستند. برای مراحل ورود، فرمت‌های فایل و حساب‌های متعدد، از بخش [«حساب‌ها و فرمت‌های جلسه](https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/)» شروع کنید. برای سیاست‌های رویداد و رفتار راه‌اندازی مجدد، به بخش [«نحوه کارکرد جمع‌آوری»](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/) مراجعه کنید.
 
 ## راه‌اندازی اتصال هدایت‌شده
@@ -117,7 +121,21 @@ MTProto پروتکل تلگرام است. Telethon کتابخانه کلاینت
 
 برای سرویس‌های خصوصی مدیریت‌شده توسط اپراتور، تنظیم محیط سرور موجود `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` مقصدهای خصوصی را مجاز می‌داند و حل نام میزبان را به سمت پروکسی واگذار می‌کند. این تنظیم از طریق پنل قابل فعال‌سازی نیست. حالت فقط عمومی مقصدهای `.onion` را قبل از استعلام از ریزولور عمومی رد می‌کند؛ سرویس‌های پیازی تور به آن تنظیم صریح مقصد خصوصی و یک پروکسی مناسب نیاز دارند. این رفتار DNS برای عملیات HTTP خارجی اعمال می‌شود، نه برای انتقال تلگرام. کلودفلر این [نقطه پایانی DNS JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) را مستندسازی کرده است.
 
-****پارامترهای استخر خودکار**** در بخش **پارامترها → MTProxy خودکار**، آستانه خطا، زمان خنک‌سازی، گردش برنامه‌ریزی‌شده، اشتراک‌گذاری پروکسی و تأخیر بازگشتی مجاز را پیکربندی کنید. | کنترل | پیش‌فرض | | --- | --- | | قطع اتصال‌ها قبل از تعویض | ۳ در ۱۰ دقیقه | | پروکسی‌های امتحان‌شده در هر تلاش اتصال | ۳ | | اولین / حداکثر استراحت پس از خطا | ۱۰ دقیقه / ۶ ساعت | | چرخش برنامه‌ریزی‌شده | غیرفعال؛ هنگام خطا فعال شود | | حساب‌ها در هر پروکسی | ۰: ورودی‌های جداگانه ترجیح داده می‌شوند، در صورت نیاز به اشتراک گذاشته شوند. عدد ۱ را برای انتظار برای یک ورودی انحصاری تنظیم کنید. | | تأخیر قبل از بازگشت مستقیم مجاز | ۱۰ دقیقه؛ مخفی کردن آدرس همچنان بازگشت مستقیم را رد می‌کند | | بررسی‌های به‌روزرسانی فید / حمل‌ونقل | ۶۰ / ۱۰ دقیقه؛ مقادیر فضای کاری اصلی برای استخر مشترک اعمال می‌شوند | پروکسی‌های مختلف، آدرس‌های خروجی متفاوتی را تضمین نمی‌کنند. این تنظیمات محدودیت‌های تلگرام را نادیده نمی‌گیرند یا ناشناس بودن را اثبات نمی‌کنند.
+****پارامترهای استخر خودکار****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| کنترل | پیش‌فرض |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 برای جایگزینی فهرست عمومی با کاتالوگ اپراتور خود، موارد زیر را برای بازنویسی پیکربندی کنید. این کار اشتراک‌های خارجی را به طور کامل غیرفعال می‌کند، حتی زمانی که آرایه `proxies` آن خالی باشد.
 

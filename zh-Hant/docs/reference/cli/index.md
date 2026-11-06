@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 可透過腳本和代理程式進行搜尋、讀取上下文、統計活動次數，並匯出已儲存的訊息，具備 --json 輸出格式、穩定的退出代碼，以及範圍限定的唯讀憑證。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [唯讀 MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/) · [全文搜尋](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **預覽。** `tgwitness search`, `context`, `messages`, `stats` 以及 `export` 讀取 已儲存的觀察記錄，供腳本及 AI 代理程式使用。該工具無法向 Telegram 發送任何內容、變更設定或修改簽名日誌。

@@ -4,11 +4,23 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-
 
 نشانک‌ها، برجسته‌سازی‌های دقیق، برش‌های عملیاتی، بحث‌ها، دسترسی محدودشده و تاریخچه حاشیه‌نویسی امضا‌شده مورد استفاده در Case Board.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 کیس‌بورد یک نمای کاری مشترک از مطالب ذخیره‌شده را در اختیار تیم تحقیق قرار می‌دهد. یک مشاهده را بوکمارک کنید، یک بخش دقیق را برجسته کنید، یک مجموعه از اقدامات را ذخیره کنید و آن را با همکاران خود بحث کنید. کارت‌ها ارجاع منابع و تاریخچه بازبینی امضا شده خود را حفظ می‌کنند. حاشیه‌نویسی‌های تیمی در فضای کاری باقی می‌مانند و به طور جداگانه از مشاهدات اصلی تلگرام قابل تشخیص هستند.
 
 [مدل مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) · [دسترسی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/) · [گزارش‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-reports/)
 
 ![جریان کاوش مصنوعی](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
+
+**On this page**
+
+- [Work with a case](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-board/#work-with-a-case)
+- [Permissions](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-board/#permissions)
+- [Stored contracts](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-board/#stored-contracts)
+- [API and exports](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-board/#api-and-exports)
+- [Operating limits](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-board/#operating-limits)
 
 ## کار با یک پرونده
 

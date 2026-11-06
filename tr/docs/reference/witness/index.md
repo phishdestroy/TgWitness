@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/witne
 
 Kendi anahtarı ve botu olan bir tanık çalıştırın, imzalı kontrol noktalarını bir kanala yayınlayın ve dışa aktarımları bu kontrol noktalarıyla karşılaştırarak doğrulayın.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [Dışa aktarma ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/) · [Yüksek güvenilirlik](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/) · [Panel kılavuzu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ Akış şeması · Toplayıcı → Witness (imzalı kontrol noktası: kayıt say
 4. Kanıt ZIP dosyası → verify.py
 5. Witness günlüğü, özel anahtar → verify.py
 6. Telegram kanalı → verify.py (Telegram Desktop dışa aktarma veya t.me/s sayfası)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#verify)
 
 ## TgWitness'in sundukları ve sunmadıkları
 

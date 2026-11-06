@@ -32,9 +32,154 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">已测试的内容</span></nav>
 <p class="verification-shortcut"><a href="./">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 安全与项目</p><h1>已测试的内容</h1><p class="guide-outcome">Telegram 实时测试、自动化检查、浏览器检查以及尚未经过验证的内容。</p><div class="wiki-body"><p>Each result below applies to its recorded revision and environment. The
-<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">current capability matrix</a> separates implementation, published downloads
-and remaining qualification.</p>
+<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 安全与项目</p><h1>已测试的内容</h1><p class="guide-outcome">Telegram 实时测试、自动化检查、浏览器检查以及尚未经过验证的内容。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文档</a> · <a href="../evidence/">Evidence and verification</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../../assets/chapter-evidence.svg" /></p>
+<p><strong>Updated 6 November 2026.</strong> Results are tied to the revision, environment and
+workload recorded for each run. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md">Current capabilities</a> describes the
+available workflows; this page records what has actually been checked.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/">Performance graphs</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">Signed English audit</a> ·
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv">Downloadable measurements</a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Latest evidence</th>
+<th>结果</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Release audit · 6 Nov</td>
+<td>1,461 core tests passed; 37 platform skips</td>
+<td>Source <code>92e539af40d8</code>; open findings retained</td>
+</tr>
+<tr>
+<td>Fresh exports · 6 Nov</td>
+<td>127.713 and 141.781 records/s, complete cycle</td>
+<td>Two accounts per server; text and metadata through WARP</td>
+</tr>
+<tr>
+<td>Retained archives · 6 Nov</td>
+<td>48 archives; 3,598,381 records verified</td>
+<td>Existing archives checked against pinned workspace keys</td>
+</tr>
+<tr>
+<td>Trusted Live · 5 Nov</td>
+<td>Guarded CPU recording and WARP checks</td>
+<td>Official Desktop login and native export remain unqualified</td>
+</tr>
+<tr>
+<td>Phala / Intel TDX · 4 Nov</td>
+<td>All 16 verifier checks passed on later runs</td>
+<td>Historical deployment; no Telegram account on the CVM</td>
+</tr>
+</tbody>
+</table></div>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a></li>
+<li><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a></li>
+<li><a href="#live-phala-cloud-deployment--4-november-2026">Live Phala Cloud deployment · 4 November 2026</a></li>
+<li><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a></li>
+<li><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a></li>
+<li><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a></li>
+<li><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a></li>
+<li><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a></li>
+<li><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a></li>
+<li><a href="#full-text-search-on-one-million-messages--5-november-2026">Full-text search on one million messages · 5 November 2026</a></li>
+<li><a href="#remaining-qualification">Remaining qualification</a></li>
+</ul>
+</details>
+<h2 id="release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026<a class="anchor" href="#release-audit-and-fresh-exports--6-november-2026" aria-label="本节链接">#</a></h2>
+<p>The audit used v0.9.1 at source
+<code>92e539af40d8368d198ff5e040f1d876f2c1310e</code>, release
+<code>92e539af40d8-83e41104669e</code>. Installed-package smoke checks passed on three
+servers. The signed report retains the state observed at that time.</p>
+<p><a href="https://phishdestroy.github.io/TgWitness/docs/validation/"><img alt="Acquisition and complete export rates for two fresh workloads" src="../../../../assets/performance.svg" /></a></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Workload</th>
+<th style="text-align: right;">记录</th>
+<th style="text-align: right;">Acquisition</th>
+<th style="text-align: right;">Complete cycle</th>
+<th style="text-align: right;">Complete-cycle rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server A · two accounts</td>
+<td style="text-align: right;">27,030</td>
+<td style="text-align: right;">189.043 s</td>
+<td style="text-align: right;">211.647 s</td>
+<td style="text-align: right;">127.713 records/s</td>
+</tr>
+<tr>
+<td>Server B · two accounts</td>
+<td style="text-align: right;">29,299</td>
+<td style="text-align: right;">182.513 s</td>
+<td style="text-align: right;">206.650 s</td>
+<td style="text-align: right;">141.781 records/s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both exports began without resume, excluded attachments and avatars, and ended
+with zero duplicate or reused records. The complete cycle includes preparation,
+acquisition, selection, packaging and archive verification. Server A also ran a
+protected-chat read check. Four FloodWait events on A and three on B were
+respected. These observations do not establish a general throughput guarantee.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>结果</th>
+<th>Qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core pytest</td>
+<td>1,461 passed</td>
+<td>37 platform skips</td>
+</tr>
+<tr>
+<td>Browser / browser UX / evidence / site</td>
+<td>102 / 66 / 15 / 9 passed</td>
+<td>These programs overlap other tests; counts are not additive</td>
+</tr>
+<tr>
+<td>Capture addon</td>
+<td>124 passed</td>
+<td>Three Official Web checks blocked by the required Chromium sandbox</td>
+</tr>
+<tr>
+<td>API authorization</td>
+<td>269 routes; 538 requests passed</td>
+<td>Missing credentials and revoked access</td>
+</tr>
+<tr>
+<td>Retained archives</td>
+<td>48 of 48 verified</td>
+<td>3,598,381 records; pinned workspace keys</td>
+</tr>
+<tr>
+<td>Live fleet read checks</td>
+<td>24 of 40 profiles passed</td>
+<td>16 WARP routes failed qualification; those profiles were not connected</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">signed report</a> records all open
+findings, including three defects in an unpublished secret-chat snapshot absent
+from the audited main build. The earlier
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md">public-history qualification</a> used a different
+revision and workload; its rates must not be combined with this comparison.</p>
+<p>Verify the original report using the
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files">pinned key and verifier</a>.
+Its signature protects the operator's report from alteration. It is not
+independent attestation, proof of Telegram authorship or GDPR certification.</p>
 <h2 id="trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026<a class="anchor" href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026" aria-label="本节链接">#</a></h2>
 <p>The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB)
 under QEMU inside a RunPod CPU host. The collector used <code>14e642a5</code>; verification used
@@ -63,10 +208,52 @@ login, native chat export, real hybrid comparison and Telegram-side logout remai
 pending. No supplied Telethon session was imported. Attachments, automatic OCR,
 local drand BLS verification and Trusted Live TDX attestation were not qualified.</p>
 <h2 id="live-phala-cloud-deployment--4-november-2026">Phala Cloud 实时部署 · 2026年11月4日<a class="anchor" href="#live-phala-cloud-deployment--4-november-2026" aria-label="本节链接">#</a></h2>
-<p><code>--provider phala --quick-tunnel</code> 在真实的 <strong>Phala Cloud</strong>（<code>tdx.small</code>，区域
-US-WEST-1）上运行，使用了一个空工作区的 Phala Cloud API 密钥、真实的 ntfy.sh、GitHub 以及 Intel PCS。
-CVM 安装了提交 <code>df7d860c</code>（v0.8.1）；部署、验证和销毁操作均通过命令行执行，
-并应用了以下修复方案。七台 CVM 的总费用约为 1.9 美分。</p>
+<p><strong>Historical result:</strong> later deployments passed all 16 verifier checks,
+including Intel TDX and the quick tunnel. Restart evidence, signed address
+discovery and report timestamps were checked separately. Each test CVM was
+removed after its run.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>设置</th>
+<th>Recorded value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>提供商</td>
+<td>Phala Cloud · <code>tdx.small</code> · US-WEST-1</td>
+</tr>
+<tr>
+<td>部署</td>
+<td><code>--provider phala --quick-tunnel</code>; initially empty workspace</td>
+</tr>
+<tr>
+<td>Initial collector</td>
+<td><code>df7d860c</code> · v0.8.1</td>
+</tr>
+<tr>
+<td>Collector with all fixes</td>
+<td><code>53a0f7e9</code></td>
+</tr>
+<tr>
+<td>Production guest</td>
+<td><code>dstack-0.5.12</code>; SSH access disabled</td>
+</tr>
+<tr>
+<td>External services</td>
+<td>ntfy.sh, GitHub and Intel PCS</td>
+</tr>
+<tr>
+<td>Observed cost</td>
+<td>Seven CVMs, about 1.9 US cents together; historical test pricing</td>
+</tr>
+</tbody>
+</table></div>
+<p>The sequence below separates initial failures, fixes and completed checks.
+No Telegram account was connected to these CVMs.</p>
+<details>
+<summary>Deployments 1–2 · provider differences and regression checks</summary>
 <p>前两次部署发现了与模拟的 Phala Cloud 存在五处差异。
 <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py"><code>tools/check_phala.py</code></a> 现在可以重现每处差异，若未进行修复则会失败：</p>
 <div class="table-wrap" tabindex="0"><table>
@@ -105,7 +292,9 @@ CVM 安装了提交 <code>df7d860c</code>（v0.8.1）；部署、验证和销毁
 </tr>
 </tbody>
 </table></div>
-<p>第三次部署：</p>
+</details>
+<details>
+<summary>Deployment 3 · attestation, access checks and restart evidence</summary>
 <ul>
 <li>该 CVM 在关闭 SSH 访问的情况下运行了 <code>dstack-0.5.12</code>。收集器在创建后约
     1.5 分钟发布了其签名地址。随后部署通过了 <code>tdx_binding</code>、<code>tdx_quote</code>（Intel TCB
@@ -126,7 +315,9 @@ CVM 安装了提交 <code>df7d860c</code>（v0.8.1）；部署、验证和销毁
 <li>控制面板向导的价格查询显示 <code>tdx.small</code> 的价格为每小时 0.058 美元。若 API 密钥错误，则会显示简单的
     “未接受该 API 密钥”提示信息。</li>
 </ul>
-<p>另外两项发现，已随后修复：</p>
+</details>
+<details>
+<summary>Follow-up fixes · signed address discovery and OS measurements</summary>
 <ul>
 <li>在没有地址密钥的情况下，<code>verify</code> 遵循了关于该地址主题的最新格式正确的帖子，
     该帖子印在已发布的 Docker Compose 配置中。一条伪造的帖子将其发送到一个不
@@ -139,7 +330,9 @@ CVM 安装了提交 <code>df7d860c</code>（v0.8.1）；部署、验证和销毁
     <code>verify</code> 也指出了这一点。</li>
 <li><code>tdx_os</code> 原先依赖 <code>dstack-mr</code>，而该工具当前版本提供的是 <code>measure-os</code>，并非文档中提到的 <code>measure --json</code>。验证器现在会根据已发布的镜像和虚拟机配置（包括 ACPI 表）自行计算 MRTD 和 RTMR0-2。</li>
 </ul>
-<p>第四次部署包含以下内容：</p>
+</details>
+<details>
+<summary>Deployment 4 · all 16 checks, report seals and restart verification</summary>
 <ul>
 <li>部署过程曾一次下载已发布的 <code>dstack-0.5.12</code>，将其与 CVM
     报告的操作系统镜像哈希值进行比对，而 <code>tdx_os</code> 通过验证：MRTD、RTMR0、RTMR1 和 RTMR2 均与针对 QEMU
@@ -155,7 +348,10 @@ CVM 安装了提交 <code>df7d860c</code>（v0.8.1）；部署、验证和销毁
     均从已发布的 <code>dstack-0.5.12</code> 启动；重启和新启动均处于 REVIEW 状态。</li>
 <li><code>destroy</code> 使工作区保持为空。</li>
 </ul>
-<p>第五次部署运行了来自提交 <code>53a0f7e9</code> 的收集器，其中包含上述所有内容：</p>
+</details>
+<details>
+<summary>Deployment 5 · collector-signed discovery and forged-post rejection</summary>
+<p>The collector ran from commit <code>53a0f7e9</code>, which includes the fixes above.</p>
 <ul>
 <li>收集器在其地址旁发布了使用自身密钥签名的地址，紧邻操作员的 HMAC 帖子。
     随后，该主题中被添加了两条伪造的帖子，一条 HMAC 值为零，另一条由另一个
@@ -167,14 +363,17 @@ CVM 安装了提交 <code>df7d860c</code>（v0.8.1）；部署、验证和销毁
     伪造的发布。<code>verify --evidence</code> 确认有两个实例从 <code>dstack-0.5.12</code> 启动。</li>
 <li>部署过程显示了 Phala 对 CVM 的计费金额（含磁盘费用）：每小时 0.06078 美元。</li>
 </ul>
+</details>
+<h3 id="panel-wizard-and-remaining-scope">Panel wizard and remaining scope<a class="anchor" href="#panel-wizard-and-remaining-scope" aria-label="本节链接">#</a></h3>
 <p>面板向导在 Phala Cloud 上运行了两次，一次通过其任务 API，一次通过
 基于真实 Chromium 内核的浏览器：价格核查、在 <strong>Advanced</strong> 下提交创建，全部六项
 认证检查均通过，服务器列表显示了计费价格（每月 44.37 美元）， <strong>Find
 当前地址</strong>、下载已测量的 Docker Compose 配置以及删除操作。浏览器未出现任何页面错误。
 此后，工作区每次均处于空状态。</p>
-<p>未涵盖内容：Phala 上的 Cloudflare 域名、CVM 上的 Telegram 账户以及 <code>dstack-0.6.1</code>
-镜像。向导在创建前的报价仅包含 Phala 的计算费用，因为其 API 仅针对现有 CVM 列出磁盘
-费用；服务器列表显示的是创建后的实际计费金额。</p>
+<p>Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the <code>dstack-0.6.1</code>
+image. The wizard's price before creation is Phala's compute price only, as its API names the disk
+price only for an existing CVM; the server list shows the billed price after creation.
+All prices in this section were observed on 4 November 2026.</p>
 <h2 id="live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026<a class="anchor" href="#live-server-journal-inventory--1-november-2026" aria-label="本节链接">#</a></h2>
 <p>At approximately 19:15 UTC, sequential read-only SQLite <code>query_only</code> queries counted
 events in ten workspace databases on a running server. Collection continued during
@@ -490,11 +689,13 @@ and catch-up are implemented; atomic lossless live replay remains unestablished.
 The newer backfill commits messages and cursors atomically and preserves available
 Recent Actions, but its synthetic coverage is distinct from live qualification.
 See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">live acceptance</a> for the controlled qualification matrix.</p>
-<p>本地详细记录和截图位于 test-results/ 目录下（Git 已忽略）。
-docs/assets/ 目录中的公开截图仅包含虚构的演示数据。</p></div></article>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md">public audit directory</a> contains only
+the signed report and aggregate measurements. Detailed operational receipts,
+raw captures and account material remain private. Application screenshots in
+<code>docs/assets/</code> use fictional demonstration data.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../license/"><span>下一步</span><strong>许可协议与架构不兼容声明 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="./">已测试的内容 →</a></p></footer>
 </main>
-<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">Phala Cloud 实时部署 · 2026年11月4日</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Telegram 实时测试，完整账户 · 2026年10月29日</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">通过 libarchive 打开受密码保护的导出文件 · 2026年10月29日</a><a href="#live-telegram-test--27-to-29-october-2026">Telegram 实时测试 · 2026年10月27日至29日</a><a href="#synthetic-local-capacity-measurement">合成本地能力测量</a><a href="#full-text-search-on-one-million-messages--5-november-2026">对一百万条消息进行全文搜索 · 2026年11月5日</a><a href="#remaining-qualification">剩余资格要求</a></aside>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#release-audit-and-fresh-exports--6-november-2026">Release audit and fresh exports · 6 November 2026</a><a href="#trusted-live-cpu-ubuntu-and-warp--5-november-2026">Trusted Live CPU Ubuntu and WARP · 5 November 2026</a><a href="#live-phala-cloud-deployment--4-november-2026">Phala Cloud 实时部署 · 2026年11月4日</a><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Telegram 实时测试，完整账户 · 2026年10月29日</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">通过 libarchive 打开受密码保护的导出文件 · 2026年10月29日</a><a href="#live-telegram-test--27-to-29-october-2026">Telegram 实时测试 · 2026年10月27日至29日</a><a href="#synthetic-local-capacity-measurement">合成本地能力测量</a><a href="#full-text-search-on-one-million-messages--5-november-2026">对一百万条消息进行全文搜索 · 2026年11月5日</a><a href="#remaining-qualification">剩余资格要求</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "The clipboard is unavailable, so the command is selected for you to copy manually.": "剪贴板不可用。已选中命令；请手动复制。", "When a message arrives, the first observation is saved.": "一条消息送达。首次记录被保存。", "When the time changes, both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "When the message disappears, its captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图", "Step {n} of {total}": "第 {n} 步，共 {total} 步"}</script>

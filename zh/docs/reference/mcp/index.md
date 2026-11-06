@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/
 
 将 MCP 客户端连接到选定的工作区和聊天群组，并授予具有时效性且可撤销的访问权限。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 将分析客户端连接到选定的工作区和聊天群组。TgWitness **在面板进程的 `/mcp` 端点**提供 **可流式传输的 HTTP** 服务。每个连接都有其专属的 令牌、有效期和允许使用的工具。MCP 无法发送 Telegram 消息、更改 设置或修改签名日志。这些连接同样适用于 [命令行](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/)。
 
 [工作流指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#tools-and-boundaries)
 
 ## 安装与检查
 

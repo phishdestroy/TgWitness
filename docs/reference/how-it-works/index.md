@@ -4,9 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/how-it-w
 
 Hash chain, signatures, checkpoints and witnesses explained with the exact formulas the verifier uses.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness preserves what a collecting account observed, links those observations into a signed journal and lets another person verify an export against a trusted key and an earlier retained checkpoint.
 
 The [local documentation website](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) adds interactive examples at `/docs/concepts/`, a checkpoint decision explorer at `/docs/witness/`, and walkthroughs for [Case Board](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/), [report design](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/) and [handover extracts](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#handover-extract). All example messages, counts and delays are fictional. Hashes in the chain sandbox are calculated with SHA-256 in the browser. Nothing is sent to Telegram.
+
+**On this page**
+
+- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [What a hash covers](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#what-a-hash-covers)
+- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Pick a workflow](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/#pick-a-workflow)
 
 ## A message changes; observations accumulate
 

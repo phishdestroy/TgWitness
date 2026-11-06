@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/showc
 
 Публикуйте сохраненные сообщения из выбранных публичных каналов и подписанные снимки состояния по ссылкам с ограниченным сроком действия и возможностью отзыва.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **«Доступ» → «Публичная витрина»** создаёт отдельную страницу, доступную только для чтения, с использованием существующей системы access-token. Она считывает сохранённые наблюдения установки. Она не запускает сборщик, не входит в Telegram и не получает доступ к каналу для посетителя.
 
 ## Опубликовать страницу

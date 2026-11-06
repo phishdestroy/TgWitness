@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/showc
 
 انشر الرسائل المحفوظة من القنوات العامة المحددة واللقطات الموقعة عبر روابط قابلة للإلغاء وتنتهي صلاحيتها.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **الوصول → «Public showcase»** يُنشئ صفحة منفصلة للقراءة فقط باستخدام نظام «access-token» الحالي. ويقوم بقراءة الملاحظات المحفوظة في التثبيت. ولا يقوم بتشغيل أداة التجميع، أو تسجيل الدخول إلى Telegram، أو الحصول على قناة للزائر.
 
 ## نشر صفحة

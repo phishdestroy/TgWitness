@@ -8,11 +8,25 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/capture/
 
 **Полный справочник**
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) / [Folder](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/README.md) · [Independent capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md)
+
+![Independent capture](https://phishdestroy.github.io/TgWitness/assets/chapter-capture.svg)
+
 **Предварительная версия в ветке `main`.** Пользователь делает форк, запускает задачу, входит в Telegram во временной панели и выбирает режим, состав данных и настройки. Можно выгрузить весь доступный аккаунт, выбранные чаты или журнал одного чата, GitHub создаёт аттестацию ZIP либо манифеста частей, после чего результат передаётся в зашифрованном виде.
 
 Для просмотра через официальный Telegram Web с видеозаписью выберите `client=official_web` и укажите свой HTTP или SOCKS5 прокси в `official_proxy`. В панели доступны пассивное наблюдение и последовательная прокрутка, вход по QR, выбор чата, ограничения темпа и времени. Этот режим сохраняет отображаемое в одном чате, а полная выгрузка аккаунта остаётся в `client=api`. Подробности и пределы описаны в [руководстве официального клиента](https://github.com/phishdestroy/TgWitness/blob/main/docs/OFFICIAL-WITNESS.md).
 
 Верификатор сверяет архив с аттестацией GitHub, разрешёнными версиями workflow и сборщика, затем проверяет журнал и вложения. Получатель может изучить код сбора и проверить, что полученный файл соответствует зафиксированному запуску.
+
+**On this page**
+
+- [Расчёт времени сеанса](https://phishdestroy.github.io/TgWitness/ru/docs/capture/#расчёт-времени-сеанса)
+- [Запуск по шагам](https://phishdestroy.github.io/TgWitness/ru/docs/capture/#запуск-по-шагам)
+- [Проверка результата](https://phishdestroy.github.io/TgWitness/ru/docs/capture/#проверка-результата)
+- [Какой режим выбрать](https://phishdestroy.github.io/TgWitness/ru/docs/capture/#какой-режим-выбрать)
+- [Форк, ключи и приватность](https://phishdestroy.github.io/TgWitness/ru/docs/capture/#форк-ключи-и-приватность)
+- [Если что-то не получается](https://phishdestroy.github.io/TgWitness/ru/docs/capture/#если-что-то-не-получается)
+- [Проверка перед первой выгрузкой](https://phishdestroy.github.io/TgWitness/ru/docs/capture/#проверка-перед-первой-выгрузкой)
 
 ## Расчёт времени сеанса
 

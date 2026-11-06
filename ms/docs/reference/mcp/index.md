@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/
 
 Sambungkan klien MCP ke ruang kerja dan sembang terpilih dengan akses yang akan tamat tempoh dan boleh ditarik balik.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 Sambungkan klien penganalisis kepada ruang kerja dan sembang terpilih. TgWitness menyediakan **Streamable HTTP di `/mcp` dalam proses panel**. Setiap sambungan mempunyai token, tarikh luput dan alat yang dibenarkan masing-masing. MCP tidak boleh menghantar mesej Telegram, mengubah tetapan atau mengubah jurnal yang disahkan. Sambungan yang sama berfungsi dengan [baris perintah](https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/).
 
 [Panduan aliran kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#tools-and-boundaries)
 
 ## Pasang dan semak
 

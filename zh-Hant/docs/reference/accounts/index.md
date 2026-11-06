@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 可透過手機、QR 碼或授權金鑰登入，匯入 Telethon、Pyrogram 或 Telegram Desktop 的會話紀錄，並同時管理多個帳戶。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness 透過 MTProto 協議，使用 Telethon 以 Telegram 用戶帳戶（而非機器人）身分登入。每個帳戶皆位於獨立的工作區中（在 API 和命令列工具中稱為「工作區」），並擁有專屬的會話、來源、日誌及簽名金鑰。
 
 會話檔案、會話字串及認證金鑰均屬**帳戶授權憑證**：凡 持有其中任何一項者，皆可代表該帳戶進行操作。這些資料不包含訊息歷史紀錄。

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-
 
 レポートフィルター、8種類のデザイン、コンテンツのプリセット、保存された変更履歴、および署名付きエクスポートに含まれる評価。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 選択した観察事項を、案件に関する読みやすい報告書にまとめます。その内容には、案件の課題、 範囲、保存された変更点、図表、調査結果、およびソースの参照先が含まれます。各レポートは、 受領者が提供された資料を確認し、その収集範囲を 検証する手段を提供します。
 
 「**信頼の根拠と制限事項**」セクションは、ジャーナル、引き継ぎ、チャット、 アカウント、および共有レポートに記載されています。ジャーナルおよび引き継ぎのPDFは、 署名済みの`report.json`と同じ評価を使用しています。ZIPマニフェストは、署名済みの マニフェスト内に`case_assessment`を含んでいます。この評価は、エクスポートされた資料と共に渡されます。元の 観察結果には、既存の署名が保持されます。

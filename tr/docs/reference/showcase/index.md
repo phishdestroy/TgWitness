@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/showc
 
 Seçilen genel kanalların kaydedilmiş mesajlarını ve imzalanmış anlık görüntüleri, süresi dolan ve iptal edilebilir bağlantılar aracılığıyla yayınlayın.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **Erişim → Genel vitrin**, mevcut erişim jetonu sistemini kullanarak ayrı, salt okunur bir sayfa oluşturur. Kurulumun kaydedilmiş gözlemlerini okur. Ziyaretçi için bir toplayıcı başlatmaz, Telegram’da oturum açmaz veya bir kanal edinmez.
 
 ## Sayfa yayınla

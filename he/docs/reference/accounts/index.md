@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/accou
 
 התחברו באמצעות טלפון, קוד QR או מפתח אימות, ייבאו הפעלות מ-Telethon, Pyrogram או Telegram Desktop, והפעילו מספר חשבונות.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness מתחבר כחשבון **משתמש טלגרם** (לא כבוט) באמצעות MTProto, תוך שימוש ב- Telethon. כל חשבון פועל בס**ביבת** עבודה משלו (המכונה "*סביבת עבודה*" ב- API ובכלי שורת הפקודה) עם הפעלה, מקורות, יומן ומפתח חתימה משלו.
 
 קובצי הפעלה, מחרוזות הפעלה ומפתחות אימות (Auth Keys) הם **אישורי גישה לחשבון**: מי שמחזיק באחד מהם יכול לפעול בשם אותו חשבון. הם אינם מכילים היסטוריית הודעות.

@@ -4,9 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/mcp/
 
 Conecte um cliente MCP a espaços de trabalho e chats selecionados com acesso temporário e revogável.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/pt/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 Conecte um cliente de análise a espaços de trabalho e chats selecionados. O TgWitness disponibiliza **Streamable HTTP em `/mcp` no processo do painel**. Cada conexão possui seu próprio token, prazo de validade e ferramentas permitidas. O MCP não pode enviar mensagens do Telegram, alterar configurações nem modificar o diário assinado. As mesmas conexões funcionam com a [linha de comando](https://phishdestroy.github.io/TgWitness/pt/docs/reference/cli/).
 
 [Guia de fluxo de trabalho](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
+
+**On this page**
+
+- [Install and check](https://phishdestroy.github.io/TgWitness/pt/docs/reference/mcp/#install-and-check)
+- [Issue a connection](https://phishdestroy.github.io/TgWitness/pt/docs/reference/mcp/#issue-a-connection)
+- [Connect your client](https://phishdestroy.github.io/TgWitness/pt/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/pt/docs/reference/mcp/#cloudflare-tunnel)
+- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/pt/docs/reference/mcp/#tools-and-boundaries)
 
 ## Instalar e verificar
 

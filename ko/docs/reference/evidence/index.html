@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../../">홈</a> <span aria-hidden="true">/</span> <a href="../../">문서</a> <span aria-hidden="true">/</span> <a href="../">참고 문헌</a> <span aria-hidden="true">/</span> <span aria-current="page">증거 형식</span></nav>
 <p class="verification-shortcut"><a href="../verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">이 페이지의 일부 내용은 여전히 영어로 되어 있습니다. 번역 후 원본 영어 문구가 변경되었기 때문입니다.</p><p class="eyebrow">참고 문헌 / 증거</p><h1>증거 형식</h1><p class="guide-outcome">서명된 ZIP 파일의 내용, 기록 유형, 처리 내역, 사용자 프로필, 외부 백업본 및 오프라인 검증.</p><div class="wiki-body"><p>TgWitness는 계정에서 확인 가능한 텔레그램 관찰 내용을 서명된 저널에 보존합니다.
+<article class="guide-content"><p class="language-notice">이 페이지의 일부 내용은 여전히 영어로 되어 있습니다. 번역 후 원본 영어 문구가 변경되었기 때문입니다.</p><p class="eyebrow">참고 문헌 / 증거</p><h1>증거 형식</h1><p class="guide-outcome">서명된 ZIP 파일의 내용, 기록 유형, 처리 내역, 사용자 프로필, 외부 백업본 및 오프라인 검증.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">문서</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../../assets/chapter-evidence.svg" /></p>
+<p>TgWitness는 계정에서 확인 가능한 텔레그램 관찰 내용을 서명된 저널에 보존합니다.
 수신자는 신뢰할 수 있는
 수집기 키를 사용하여 저장된 기록, 첨부 파일 및 보고서를 검증한 후, 저널을 독립적으로 보관된 체크포인트와 비교할 수 있습니다.
 이 페이지에서는 인계 시 유지해야 할 형식, 검증 절차 및 자료를 설명합니다.</p>
@@ -40,6 +42,28 @@
 ZIP and independently obtained key fingerprint, displays an explained result,
 and saves a separate verification transcript. See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md">verification launchers and
 the portable runtime</a> for setup and trust limits.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#what-is-signed">What is signed</a></li>
+<li><a href="#comparing-chat-exports">Comparing chat exports</a></li>
+<li><a href="#investigation-handoff">Investigation handoff</a></li>
+<li><a href="#handover-extract">Handover extract</a></li>
+<li><a href="#readable-reports">Readable reports</a></li>
+<li><a href="#event-canonicalization">Event canonicalization</a></li>
+<li><a href="#actor-semantics">Actor semantics</a></li>
+<li><a href="#coverage-continuity-gaps-and-unobserved-ids">Coverage: continuity, gaps and unobserved IDs</a></li>
+<li><a href="#producer">Producer</a></li>
+<li><a href="#people-profiles">People profiles</a></li>
+<li><a href="#independent-witness">Independent witness</a></li>
+<li><a href="#manifest-and-checkpoints">Manifest and checkpoints</a></li>
+<li><a href="#verification-scope">Verification scope</a></li>
+<li><a href="#attachments">Attachments</a></li>
+<li><a href="#durable-collection-and-process-receipts-02">Durable collection and process receipts (0.2)</a></li>
+<li><a href="#rfc-3161-preparation-and-response-verification-02">RFC 3161 preparation and response verification (0.2)</a></li>
+<li><a href="#optional-records-in-evidence-mode-drand-and-telegram-devices">Optional records in evidence mode: drand and Telegram devices</a></li>
+</ul>
+</details>
 <h2 id="what-is-signed">서명된 증거란 무엇인가<a class="anchor" href="#what-is-signed" aria-label="이 섹션으로 이동">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

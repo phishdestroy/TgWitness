@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/opera
 
 عملیات روزانه پنل: حالت‌ها، دسته‌بندی‌های نظارت، پارامترها، اعلان‌ها، خروجی‌ها، پشتیبان‌گیری و ظرفیت.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 برای اولین اتصال، از [حساب‌ها و قالب‌های جلسه](https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/) استفاده کنید. برای توضیح نسخه‌های ذخیره شده، سیاست‌های رویداد و فواصل، به بخش [نحوه کارکرد جمع‌آوری](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/) مراجعه کنید. این راهنما عملیات روزانه و بازیابی را پوشش می‌دهد.
 
 یک نصب مدیریت‌شده شامل فایل‌های **START-HERE.html** و **START-HERE.txt** در کنار لانچر آن است، همراه با لینک مخزن و دستوراتی که برای مسیر نصب آن سفارشی شده‌اند. `tgwitness guide --print` را از طریق SSH اجرا کنید، یا `tgwitness paths` را برای یافتن دایرکتوری داده واقعی اجرا کنید. یک نصب root systemd وضعیت خصوصی را زیر `/var/lib/tgwitness-…` ذخیره می‌کند؛ `/opt/tgwitness` برنامه را در خود جای داده است.
 
 برای یک تونل موقت مدیریت‌شده Cloudflare، `tgwitness tunnel off` دسترسی عمومی را قطع می‌کند در حالی که پنل محلی و مجموعه به کار خود ادامه می‌دهند. `tgwitness tunnel on` آن را فعال می‌کند؛ `tgwitness tunnel restart` یک اتصال تونل جدید ایجاد می‌کند. برای مشاهده آدرس فعلی آن از `tgwitness open` استفاده کنید. یک تنظیم خاموش صریح پس از راه‌اندازی مجدد سرویس باقی می‌ماند. `tgwitness stop` هم پنل و هم مجموعه را متوقف می‌کند.
+
+**On this page**
+
+- [Operator workflow](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/#operator-workflow)
+- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Runtime modes](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/#runtime-modes)
+- [Monitoring categories](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/#monitoring-categories)
+- [Notifications](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/#notifications)
+- [Panel layout](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/#panel-layout)
+- [Deployment environments](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/#deployment-environments)
+- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/#startup-checks-and-exports)
+- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/#backup-restore-and-interruptions)
+- [Capacity and retention](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/#capacity-and-retention)
 
 ## روند کاری اپراتور
 

@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">存储与恢复</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">参考 / 证据</p><h1>存储与恢复</h1><p class="guide-outcome">备份、将旧文件移至云端、Object Lock 下的副本以及在新设备上的恢复。</p><div class="wiki-body"><p>该面板将任务分为三类：</p>
+<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 证据</p><h1>存储与恢复</h1><p class="guide-outcome">备份、将旧文件移至云端、Object Lock 下的副本以及在新设备上的恢复。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文档</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>该面板将任务分为三类：</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@
 然后在删除前立即再次检查本地字节。如果上传失败、
 回读结果不同或传输被取消，本地文件将保留原位。如果
 已启用的证据备份尚未复制该文件，删除操作也会等待备份完成。</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">磁盘空间即将耗尽时<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="本节链接">#</a></h2>
 <p>当可用空间低于<strong>参数 → 附件 → 可用磁盘空间</strong>中的阈值（默认 1 GiB）时，附件下载会暂停并保留队列。文本观察继续进行。这不受通知设置影响：关闭通知不会关闭下载预留空间或存储保护措施。</p>
 <p>若要更早介入，请启用<strong>自动运行</strong>，选择<strong>删除本地文件以释放空间</strong>，并启用<strong>磁盘空间不足时额外执行一次转存</strong>。此可选规则默认在可用空间低于 5120 MiB 时启动，分批处理直到可用空间达到 10240 MiB。两个阈值均可配置。它与手动执行使用相同的目标位置、文件最小存放时间、批量上限、完整回读验证和证据备份前提条件，不会自行启用目标位置。每 30 秒检查一次；发生错误或没有进展时，下次尝试推迟五分钟。规则状态和重试时间在重启后保留。规则未激活时，定时任务仍按正常间隔运行。</p>

@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/searc
 
 חפש הודעות שנשמרו לפי צורות מילים, ביטויים מדויקים, דומיינים ושמות משתמש @, כשהתוצאות המתאימות ביותר מוצגות ראשונות, והאינדקס מקושר ליומן החתום.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [ניתוח ארכיונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/analysis/) · [OCR מקומי ותמלול](https://phishdestroy.github.io/TgWitness/he/docs/reference/media-analysis/) · [ויקי](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **תצוגה מקדימה.** ב-**Journal**, בחרו באפשרות**"התאמה מיטבית · צורות מילה"** לצד שדה החיפוש. התוצאות מדורגות לפי BM25 ומתאימות לצורות אחרות של אותה מילה: *"перевод*" מוצא *את* *"переводом"* ו-*"переводы"*, *"transfer"* מוצא את *"transfers"*, ביטוי בסינית נמצא ללא רווחים. האפשרות **"החדש ביותר ראשון · טקסט מדויק**" שומרת על חיפוש תת-המחרוזת הקודם על פני כל הרשומה.
 
 האינדקס הוא נתון נגזר. הוא נבנה מחדש מתוך היומן החתום, אינו חתום לעולם ואינו נכלל בייצוא. הרשומות המקוריות אינן משתנות.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#benchmark)
 
 ## תחביר חיפוש
 

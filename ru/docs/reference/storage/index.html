@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">Хранение и восстановление</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Что проверено →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Справочник / Доказательства</p><h1>Хранение и восстановление</h1><p class="guide-outcome">Резервное копирование, перемещение старых файлов в облако, копии с защитой Object Lock и восстановление на новом компьютере.</p><div class="wiki-body"><p>Панель разделяет три задачи:</p>
+<article class="guide-content"><p class="language-notice">Часть страницы пока на английском: английский оригинал изменился после перевода.</p><p class="eyebrow">Справочник / Доказательства</p><h1>Хранение и восстановление</h1><p class="guide-outcome">Резервное копирование, перемещение старых файлов в облако, копии с защитой Object Lock и восстановление на новом компьютере.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Документация</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Панель разделяет три задачи:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@
 а затем непосредственно перед удалением ещё раз проверяет локальные байты. Сбой загрузки,
 несоответствие при обратном считывании или отмена передачи оставляют локальный файл на месте. Если
 включённая резервная копия доказательств ещё не скопировала этот файл, удаление также откладывается до её завершения.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">Когда заканчивается место на диске<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="Ссылка на раздел">#</a></h2>
 <p>Загрузка вложений приостанавливается, когда свободного места становится меньше значения в <strong>Параметры → Вложения → свободное место на диске</strong> (по умолчанию 1 GiB); очередь сохраняется. Наблюдение за текстовыми сообщениями продолжается. Это не зависит от настроек уведомлений: их отключение не отменяет резерв для загрузок и защитные проверки хранилища.</p>
 <p>Для более раннего вмешательства включите <strong>Запускать автоматически</strong>, выберите <strong>Удалять локальный файл для освобождения места</strong> и включите <strong>Запускать дополнительную выгрузку при нехватке места</strong>. По умолчанию правило запускается при свободном месте ниже 5120 MiB и обрабатывает файлы партиями, пока не освободится 10240 MiB. Оба порога настраиваются. Используются те же назначение, минимальный возраст файлов, размер партии, полная проверка обратным чтением и требования к резервной копии доказательств, что и при ручном запуске. Назначение само не включается. Проверка выполняется каждые 30 секунд; ошибка или отсутствие прогресса откладывает следующую попытку на пять минут. Состояние правила и время повтора переживают перезапуск. Когда правило неактивно, плановые проходы сохраняют обычный интервал.</p>

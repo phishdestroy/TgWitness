@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/setti
 
 सेटअप विज़ार्ड, लक्ष्य, इंटरफ़ेस स्तर, कनेक्शन मार्ग और एक खाता समूह द्वारा साझा की गई सेटिंग्स।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [खाते](https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/) · [कनेक्शन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/) · [पहुँच](https://phishdestroy.github.io/TgWitness/hi/docs/reference/access/)
 
 एक नया वर्कस्पेस खुलता है `/first-run`: भाषा और समय, इंटरफ़ेस स्तर, लक्ष्य, कनेक्शन, टेलीग्राम और चैट। प्रत्येक उत्तर सर्वर पर तब ही सहेजा जाता है जब वह बदलता है, इसलिए रीलोड करने पर वही चरण जारी रहता है। अंतिम स्क्रीन उत्तरों को सूचीबद्ध करती है और आपको उनमें से किसी पर भी वापस जाने देती है।

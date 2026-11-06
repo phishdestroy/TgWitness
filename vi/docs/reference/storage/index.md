@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/stora
 
 Sao lưu, di chuyển các tệp cũ lên đám mây của bạn, các bản sao được bảo vệ bởi Object Lock và khôi phục trên máy mới.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Bảng điều khiển này phân chia thành ba tác vụ:
 
 | Nhiệm vụ | Chức năng |
@@ -15,6 +19,14 @@ Bảng điều khiển này phân chia thành ba tác vụ:
 Việc giải phóng dung lượng không bao giờ xóa hoặc ghi đè lên nhật ký đã được ký. Mỗi tệp đính kèm giữ lại SHA-256 gốc và một biên nhận khôi phục. Nén gzip tùy chọn được thực hiện trước khi mã hóa được xác thực. Tên tệp trên đám mây không chứa tên Telegram, ID cuộc trò chuyện hoặc tên tệp đính kèm gốc. Một tệp đính kèm có thể có dung lượng tối đa 32 GiB.
 
 Chỉ riêng phản hồi tải lên không phải là quyền xóa tệp. TgWitness tải xuống toàn bộ đối tượng được mã hóa và xác minh kích thước của nó, SHA-256 lưu biên nhận, sau đó kiểm tra lại các byte cục bộ ngay trước khi xóa. Nếu việc tải lên thất bại, kết quả đọc lại khác hoặc quá trình truyền tải bị hủy, tệp cục bộ sẽ vẫn được giữ nguyên. Nếu bản sao lưu bằng chứng đã được kích hoạt chưa sao chép tệp đó, quá trình xóa cũng sẽ chờ cho đến khi bản sao lưu hoàn tất.
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## Khi ổ đĩa sắp đầy
 

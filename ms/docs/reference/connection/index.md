@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/conne
 
 Pengesahan, kolam proksi automatik, mod IP, dasar sandaran, permintaan luaran dan penyimpanan rahsia.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Dokumen ini menerangkan tingkah laku TgWitness 0.8.0 dan hadnya. Pengesahan, akses sumber, sambungan rangkaian dan kelengkapan tangkapan adalah keadaan yang berasingan. Untuk langkah log masuk, format fail, dan akaun berbilang, mulakan dengan [akaun dan format sesi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/). Untuk dasar peristiwa dan tingkah laku permulaan semula, lihat [bagaimana pengumpulan berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/).
 
 ## Pengesanan sambungan berpandu
@@ -117,7 +121,21 @@ MTProxy hanya membawa trafik Telegram. Operasi HTTP ruang kerja seperti cap masa
 
 Untuk perkhidmatan peribadi yang diuruskan oleh pengendali, tetapan persekitaran pelayan sedia ada `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` membenarkan destinasi peribadi dan mengekalkan penyelesaian nama hos di pihak proksi. Ia tidak boleh diaktifkan dari panel. Mod hanya awam menolak destinasi `.onion` sebelum membuat pertanyaan kepada penyelesai awam; perkhidmatan bawang Tor memerlukan tetapan destinasi peribadi yang jelas tersebut dan proksi yang sesuai. Tingkah laku DNS ini terpakai kepada operasi HTTP luaran, bukan pengangkutan Telegram. Cloudflare mendokumenkan [hujung titik akhir DNS JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Parameter kolam automatik**** Di bawah **Parameter → MTProxy Automatik**, konfigurasi ambang kegagalan, masa rehat, putaran yang dirancang, perkongsian proksi dan kelewatan fallback yang dibenarkan. | Kawalan | Lalai | | --- | --- | | Pemutusan sambungan sebelum penggantian | 3 dalam 10 minit | | Proksi dicuba bagi setiap percubaan sambungan | 3 | | Rehat pertama / maksimum selepas kegagalan | 10 minit / 6 jam | | Putaran yang dirancang | Dilumpuhkan; aktifkan semasa kegagalan | | Akaun setiap proksi | 0: utamakan entri berasingan, kongsi apabila perlu. Tetapkan 1 untuk menunggu entri eksklusif. | | Jeda sebelum pelepasan langsung yang dibenarkan | 10 minit; Sembunyikan alamat masih menolak Direct | | Semakan penyegaran suapan / pengangkutan | 60 / 10 minit; nilai ruang kerja utama terpakai pada kolam kongsi | Proksi yang berbeza tidak menjamin alamat keluar yang berbeza. Tetapan ini tidak membatalkan had Telegram atau membuktikan kebolehsembunyian.
+****Parameter kolam automatik****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Kawal | Lalai |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 Untuk menggantikan senarai awam dengan katalog pengendali anda sendiri, konfigurasi penggantian di bawah. Ia menyahaktifkan langganan luaran sepenuhnya, termasuk apabila tatasusunan `proxies`-nya kosong.
 

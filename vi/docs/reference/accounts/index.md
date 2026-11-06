@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/accou
 
 Đăng nhập bằng số điện thoại, mã QR hoặc khóa xác thực, nhập các phiên làm việc từ Telethon, Pyrogram hoặc Telegram Desktop, và quản lý nhiều tài khoản cùng lúc.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness đăng nhập dưới dạng tài **khoản người dùng Telegram** (không phải bot) qua giao thức MTProto, sử dụng Telethon. Mỗi tài khoản tồn tại trong **không gian** làm việc riêng (được gọi là *“workspace”* trong API và các công cụ dòng lệnh) với phiên làm việc, nguồn dữ liệu, nhật ký và khóa ký riêng.
 
 Các tệp phiên làm việc, chuỗi phiên làm việc và Khóa xác thực là **các thông tin ủy quyền tài khoản**: bất kỳ ai sở hữu chúng đều có thể thực hiện các thao tác như chủ tài khoản đó. Chúng không chứa lịch sử tin nhắn.

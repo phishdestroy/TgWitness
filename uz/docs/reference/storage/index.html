@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <a href="../">Manba</a> <span aria-hidden="true">/</span> <span aria-current="page">Saqlash va tiklash</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Nima sinovdan o&#x27;tkazilgan →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Manba / Dalil</p><h1>Saqlash va tiklash</h1><p class="guide-outcome">Zaxira nusxalari, eski fayllarni bulutga ko&amp;#x27;chirish, Object Lock ostidagi nusxalar va yangi qurilmada tiklash.</p><div class="wiki-body"><p>Panel uchta vazifani ajratadi:</p>
+<article class="guide-content"><p class="language-notice">Ushbu sahifaning ba&#x27;zi qismlari hanuz ingliz tilida: inglizcha asl matn tarjima qilinganidan keyin o&#x27;zgartirilgan.</p><p class="eyebrow">Manba / Dalil</p><h1>Saqlash va tiklash</h1><p class="guide-outcome">Zaxira nusxalari, eski fayllarni bulutga ko&amp;#x27;chirish, Object Lock ostidagi nusxalar va yangi qurilmada tiklash.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Hujjatlash</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>Panel uchta vazifani ajratadi:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -57,6 +59,16 @@
 </table></div>
 <p>Joyni bo&#x27;shatish imzolangan jurnalni hech qachon o&#x27;chirib tashlamaydi yoki qayta yozmaydi. Har bir ilova o&#x27;zining asl SHA-256i va tiklash kvitansiyasini saqlaydi. Ixtiyoriy gzip siqish autentifikatsiyalangan shifrlashdan oldin amalga oshiriladi. Bulut fayl nomlari Telegram nomlari, suhbat IDlari yoki asl ilova nomlarini o&#x27;z ichiga olmaydi. Bitta ilova 32 GiB gacha bo&#x27;lishi mumkin.</p>
 <p>Faylni yuklash bo&#x27;yicha javob o&#x27;zi faylni o&#x27;chirishga ruxsat emas.TgWitness to&#x27;liq shifrlangan obyektni yuklab oladi va uning hajmi hamdaSHA-256 ni tekshiradi, kvitansiyani saqlaydi, so&#x27;ng faylni o&#x27;chirishdan oldin mahalliy baytlarni yana bir bor tekshiradi. Yuklash muvaffaqiyatsiz bo&#x27;lsa, qayta o&#x27;qish boshqacha bo&#x27;lsa yoki uzatish bekor qilinsa, mahalliy fayl o&#x27;z o&#x27;rnida qoladi. Agar yoqilgan dalil zaxirasi hali o&#x27;sha faylni nusxalamagan bo&#x27;lsa, o&#x27;chirish ham uning nusxasini kutadi.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">Diskdagi joy kamayganda<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <p>Bo‘sh joy <strong>Parametrlar → Biriktirmalar → diskdagi bo‘sh joy</strong> qiymatidan (odatda 1 GiB) kamayganda biriktirmalarni yuklash to‘xtab turadi, navbat saqlanadi. Matn kuzatuvlari davom etadi. Bu bildirishnomalarga bog‘liq emas: ularni o‘chirish yuklash zaxirasi yoki saqlash himoyalarini o‘chirmaydi.</p>
 <p>Oldinroq choralar ko‘rish uchun <strong>Avtomatik ishga tushirish</strong>ni yoqing, <strong>Joy bo‘shatish uchun mahalliy faylni o‘chirish</strong>ni tanlang va <strong>Diskda joy kamayganda qo‘shimcha ko‘chirishni boshlash</strong>ni yoqing. Ixtiyoriy qoida odatda bo‘sh joy 5120 MiB dan kam bo‘lganda boshlanadi va 10240 MiB bo‘shaguncha guruhlar bilan ishlaydi. Ikkala chegara sozlanadi. Qo‘lda ishga tushirishdagi manzil, faylning eng kam yoshi, guruh hajmi, to‘liq qayta o‘qib tekshirish va dalillar zaxira nusxasi talablari ishlatiladi. Manzil o‘z-o‘zidan yoqilmaydi. Tekshiruv har 30 soniyada; xato yoki siljish bo‘lmasa keyingi urinish besh daqiqaga kechiktiriladi. Holat va qayta urinish vaqti qayta ishga tushirishda saqlanadi. Qoida faol bo‘lmasa, rejali jarayonlar odatdagi oraliqda ishlaydi.</p>

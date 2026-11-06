@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/timestam
 
 RFC 3161 timestamps for signed checkpoints: what is sent to the authority and how a response is verified.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness prepares RFC 3161 requests and verifies timestamp authority (TSA) responses. This manual procedure neither selects a TSA nor submits data; evidence mode does both on a schedule ([evidence format](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). A prepared request is **not yet a timestamp proof**.
 
 ## What the proof binds

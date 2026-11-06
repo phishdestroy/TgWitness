@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/times
 
 RFC 3161-Zeitstempel für signierte Checkpoints: Was wird an die Behörde gesendet und wie wird eine Antwort verifiziert?
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 TgWitness erstellt RFC-3161-Anfragen und überprüft die Antworten der Zeitstempel-Behörde (TSA). Bei diesem manuellen Verfahren wird weder eine TSA ausgewählt noch werden Daten übermittelt; der Beweismodus erledigt beides nach einem Zeitplan ([Beweisformat](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Eine vorbereitete Anfrage stellt **noch keinen Zeitstempel-Nachweis** dar.
 
 ## Was die Beweise belegen

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/
 
 ค้นหา อ่านบริบท นับกิจกรรม และส่งออกข้อความที่บันทึกไว้จากสคริปต์และเอเจนต์ ด้วยผลลัพธ์ --json รหัสออกที่เสถียร และโทเค็นอ่านอย่างเดียวที่มีขอบเขต
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [MCP แบบอ่านอย่างเดียว](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/) · [การค้นหาข้อความเต็ม](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **ดูตัวอย่าง.** `tgwitness search`, `context`, `messages`, `stats` และ `export` อ่าน ข้อมูลการสังเกตที่บันทึกไว้สำหรับสคริปต์และเอเยนต์ AI เครื่องมือนี้ไม่สามารถส่งข้อมูลใดๆ ไปยัง Telegram เปลี่ยนแปลงการตั้งค่า หรือแก้ไขสมุดบันทึกที่ลงนามได้

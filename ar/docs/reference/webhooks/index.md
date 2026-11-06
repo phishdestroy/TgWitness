@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/webho
 
 إرسال الأحداث المحددة النطاق إلى مستقبلات HTTPS مع توقيعات HMAC، وإعادة المحاولة، وحالة التسليم.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [دليل سير العمل](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ويكي](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 افتح **«التكاملات» → «webhooks الصادرة»** في مساحة العمل المحددة. أضف مستقبِل HTTPS، واختر أحداث التجميع/الوسائط/التصدير، واختر اختياريًّا الدردشات للملاحظات والتغييرات الجديدة. نص الرسالة معطّل افتراضيًّا. يؤدي تمكين المقتطفات إلى إضافة 1,000 حرف كحد أقصى إلى أحداث تغيير الرسائل؛ ولا يتم إرسال حقول Telegram الأولية و بيانات الاعتماد أبدًا.

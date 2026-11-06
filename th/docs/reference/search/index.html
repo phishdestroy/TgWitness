@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">การค้นหาข้อความเต็ม</span></nav>
 <p class="verification-shortcut"><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / การเก็บรักษาข้อมูลและการบูรณาการ</p><h1>การค้นหาข้อความเต็ม</h1><p class="guide-outcome">ค้นหาข้อความที่บันทึกไว้ตามรูปแบบคำ วลีที่ตรงกันเป๊ะ โดเมน และ @usernames โดยแสดงผลลัพธ์ที่ตรงกันมากที่สุดก่อน พร้อมทั้งดัชนีที่เชื่อมโยงกับบันทึกที่ลงนามแล้ว</p><div class="wiki-body"><p><a href="../analysis/">การวิเคราะห์ข้อมูลในคลัง</a> · <a href="../media-analysis/">OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<article class="guide-content"><p class="language-notice">ส่วนหนึ่งของหน้านี้ยังคงเป็นภาษาอังกฤษ: เนื้อหาต้นฉบับภาษาอังกฤษได้เปลี่ยนแปลงไปหลังจากถูกแปล</p><p class="eyebrow">อ้างอิง / การเก็บรักษาข้อมูลและการบูรณาการ</p><h1>การค้นหาข้อความเต็ม</h1><p class="guide-outcome">ค้นหาข้อความที่บันทึกไว้ตามรูปแบบคำ วลีที่ตรงกันเป๊ะ โดเมน และ @usernames โดยแสดงผลลัพธ์ที่ตรงกันมากที่สุดก่อน พร้อมทั้งดัชนีที่เชื่อมโยงกับบันทึกที่ลงนามแล้ว</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">เอกสารประกอบ</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">การวิเคราะห์ข้อมูลในคลัง</a> · <a href="../media-analysis/">OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
 <p><strong>ดูตัวอย่าง</strong> ใน <strong>Journal</strong> ให้เลือก &quot;<strong>Best match · word forms</strong>&quot; ข้างช่องค้นหา
 ผลลัพธ์จะถูกจัดอันดับด้วย BM25 และจับคู่กับรูปแบบอื่น ๆ ของคำเดียวกัน:
 <em>&quot;перевод&quot;</em> จะพบ <em>&quot;переводом&quot;</em> และ <em>&quot;переводы&quot;</em>, <em>&quot;transfer&quot;</em> จะพบ <em>&quot;transfers&quot;</em>, และวลีภาษาจีน
@@ -40,6 +42,20 @@
 ส่วนย่อยของข้อความจากครั้งก่อนไว้บนบันทึกทั้งหมด</p>
 <p>ดัชนีเป็นข้อมูลที่สร้างขึ้นใหม่ โดยถูกสร้างขึ้นใหม่จากบันทึกที่ลงนามแล้ว ไม่เคยถูกลงนาม
 ด้วยตัวเอง และไม่เคยถูกส่งออกเลย บันทึกต้นฉบับไม่เปลี่ยนแปลง</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">ไวยากรณ์การค้นหา<a class="anchor" href="#search-syntax" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

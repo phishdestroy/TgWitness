@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">التخزين والاستعادة</span></nav>
 <p class="verification-shortcut"><a href="../verification/">ما تم اختباره ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">مرجع / الأدلة</p><h1>التخزين والاستعادة</h1><p class="guide-outcome">النسخ الاحتياطية، ونقل الملفات القديمة إلى السحابة الخاصة بك، والنسخ الخاضعة لـ Object Lock، والاستعادة على جهاز جديد.</p><div class="wiki-body"><p>تُقسّم اللوحة المهام إلى ثلاث مهام:</p>
+<article class="guide-content"><p class="language-notice">لا تزال أجزاء من هذه الصفحة باللغة الإنجليزية: فقد تغير النص الأصلي باللغة الإنجليزية بعد ترجمته.</p><p class="eyebrow">مرجع / الأدلة</p><h1>التخزين والاستعادة</h1><p class="guide-outcome">النسخ الاحتياطية، ونقل الملفات القديمة إلى السحابة الخاصة بك، والنسخ الخاضعة لـ Object Lock، والاستعادة على جهاز جديد.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">التوثيق</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>تُقسّم اللوحة المهام إلى ثلاث مهام:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -64,6 +66,16 @@
 ثم يتحقق من البايتات المحلية مرة أخرى مباشرةً قبل الحذف. في حالة فشل التحميل،
 أو اختلاف القراءة، أو إلغاء النقل، يبقى الملف المحلي في مكانه. إذا لم
 تكن نسخة احتياطية للأدلة المُفعَّلة قد نسخت هذا الملف بعد، فإن عملية الحذف تنتظر ذلك أيضًا.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">عندما توشك مساحة القرص على النفاد<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="رابط لهذا القسم">#</a></h2>
 <p>يتوقف تنزيل المرفقات مؤقتًا عندما تقل المساحة الحرة عن قيمة <strong>المعلمات ← المرفقات ← مساحة القرص الحرة</strong> (افتراضيًا 1 GiB)، مع الاحتفاظ بالطابور. تستمر ملاحظات النصوص. هذا مستقل عن الإشعارات: تعطيلها لا يعطل المساحة الاحتياطية للتنزيل أو وسائل حماية التخزين.</p>
 <p>للتدخل مبكرًا، فعّل <strong>التشغيل تلقائيًا</strong> واختر <strong>حذف الملف المحلي لتحرير مساحة</strong> وفعّل <strong>بدء نقل إضافي عند انخفاض مساحة القرص</strong>. تبدأ القاعدة الاختيارية افتراضيًا عندما تقل المساحة الحرة عن 5120 MiB وتعمل على دفعات حتى تتوفر 10240 MiB. يمكن ضبط الحدّين. تستخدم الوجهة نفسها والحد الأدنى لعمر الملفات وحد الدفعة والتحقق بإعادة القراءة الكاملة ومتطلبات النسخ الاحتياطي للأدلة الخاصة بالتشغيل اليدوي. لا تفعّل وجهة من تلقاء نفسها. تفحص كل 30 ثانية؛ ويؤخر الخطأ أو عدم التقدم المحاولة التالية خمس دقائق. تبقى الحالة ووقت إعادة المحاولة بعد إعادة التشغيل. عندما تكون القاعدة غير نشطة، تحتفظ العمليات المجدولة بفاصلها المعتاد.</p>

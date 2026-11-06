@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="গাইডসমূহ"><a href="../../../">হোম</a> <span aria-hidden="true">/</span> <a href="../../">ডকুমেন্টেশন</a> <span aria-hidden="true">/</span> <a href="../">তথ্যসূত্র</a> <span aria-hidden="true">/</span> <span aria-current="page">সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা</span></nav>
 <p class="verification-shortcut"><a href="../verification/">কি পরীক্ষা করা হয়েছে →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ডকুমেন্টেশন অনুসন্ধান করুন</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="প্রক্সি, হ্যাশ চেইন, টোকেন বা উইটনেস চেষ্টা করুন…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="স্পষ্ট অনুসন্ধান" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">গাইড এবং রেফারেন্স অনুসন্ধান করতে একটি শব্দ টাইপ করুন। অনুসন্ধান আপনার ব্রাউজারেই থাকবে।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">তথ্যসূত্র / সেটআপ</p><h1>সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা</h1><p class="guide-outcome">প্রমাণীকরণ, স্বয়ংক্রিয় প্রক্সি পুল, আইপি মোড, ফ্যালব্যাক নীতি, বাহ্যিক অনুরোধ এবং গোপন সঞ্চয়।</p><div class="wiki-body"><p>এই নথিটি TgWitness 0.8.0 এর কার্যপ্রণালী এবং এর সীমাবদ্ধতা বর্ণনা করে। প্রমাণীকরণ, উৎস অ্যাক্সেস, নেটওয়ার্ক সংযোগ এবং ক্যাপচার পরিপূর্ণতা পৃথক অবস্থা। সাইন-ইন ধাপ, ফাইল ফরম্যাট এবং একাধিক অ্যাকাউন্টের জন্য,
+<article class="guide-content"><p class="language-notice">এই পৃষ্ঠার কিছু অংশ এখনও ইংরেজিতে রয়েছে: অনুবাদ করার পর মূল ইংরেজি সংস্করণটি পরিবর্তিত হয়েছে।</p><p class="eyebrow">তথ্যসূত্র / সেটআপ</p><h1>সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা</h1><p class="guide-outcome">প্রমাণীকরণ, স্বয়ংক্রিয় প্রক্সি পুল, আইপি মোড, ফ্যালব্যাক নীতি, বাহ্যিক অনুরোধ এবং গোপন সঞ্চয়।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">টিজিউইটনেস</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">ডকুমেন্টেশন</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>এই নথিটি TgWitness 0.8.0 এর কার্যপ্রণালী এবং এর সীমাবদ্ধতা বর্ণনা করে। প্রমাণীকরণ, উৎস অ্যাক্সেস, নেটওয়ার্ক সংযোগ এবং ক্যাপচার পরিপূর্ণতা পৃথক অবস্থা। সাইন-ইন ধাপ, ফাইল ফরম্যাট এবং একাধিক অ্যাকাউন্টের জন্য,
 <a href="../accounts/">অ্যাকাউন্ট এবং সেশন ফরম্যাট</a> দিয়ে শুরু করুন। ইভেন্ট নীতি এবং পুনরায় শুরু করার কার্যপ্রণালীর জন্য, <a href="../collection/">সংগ্রহ কীভাবে কাজ করে তা</a> দেখুন।</p>
 <h2 id="guided-connection-setup">নির্দেশিত সংযোগ সেটআপ<a class="anchor" href="#guided-connection-setup" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
 <p><strong>কানেকশন</strong>-এ, প্রশাসক <strong>এই অ্যাকাউন্ট</strong>, <strong>একটি অ্যাকাউন্ট গ্রুপ</strong> অথবা <strong>সমস্ত অ্যাকাউন্ট</strong> নির্বাচন করতে পারেন, তারপর একটি রুট নির্বাচন করুন। <strong>নির্বাচন পর্যালোচনা</strong> প্রভাবিত অ্যাকাউন্টগুলি তালিকাভুক্ত করে। <strong>প্রস্তুত এবং পরীক্ষা</strong> সংরক্ষিত রুট পরিবর্তন না করে প্রস্তাবিত রুটটি পরীক্ষা করে। <strong>পরীক্ষিত সংযোগ প্রয়োগ করুন</strong> আবার পরীক্ষা করে, প্রয়োজন হলে পর্যবেক্ষণ বিরতি দেয়, রুটটি সংরক্ষণ করে এবং ইতিমধ্যে চলমান পর্যবেক্ষণ পুনরায় শুরু করে।
@@ -259,23 +261,49 @@ MTProxy হল একটি টেলিগ্রাম পরিবহন প�
 Cloudflare <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">JSON DNS এন্ড</a>পয়<a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">েন্ট</a>টি ডকুমেন্ট করে।</p>
 <details>
 <summary><strong>স্বয়ংক্রিয় পুল পরামিতিসমূহ</strong></summary>
-
-**প্যারামিটার → স্বয়ংক্রিয় MTProxy**-এর অধীনে, ব্যর্থতার থ্রেশহোল্ড, কুলডাউন, পরিকল্পিত রোটেশন, প্রক্সি শেয়ারিং এবং অনুমোদিত ফলব্যাক বিলম্ব কনফিগার করুন।
-
-| নিয়ন্ত্রণ | ডিফল্ট |
-| --- | --- |
-| প্রতিস্থাপনের আগে বিচ্ছিন্নতা | ১০ মিনিটের মধ্যে ৩ বার |
-| প্রতি সংযোগ প্রচেষ্টায় প্রক্সি চেষ্টা | ৩ |
-| ব্যর্থতার পর প্রথম / সর্বোচ্চ বিশ্রাম | ১০ মিনিট / ৬ ঘণ্টা |
-| পরিকল্পিত রোটেশন | অক্ষম; ব্যর্থ হলে চালু করুন |
-| প্রতি প্রক্সিতে অ্যাকাউন্ট | 0: পৃথক এন্ট্রি পছন্দ করুন, প্রয়োজনে শেয়ার করুন। একচেটিয়া এন্ট্রির জন্য অপেক্ষা করতে 1 সেট করুন। |
-| অনুমোদিত ডাইরেক্ট ফলব্যাকের আগে বিলম্ব | ১০ মিনিট; ঠিকানা লুকানো থাকা সত্ত্বেও ডাইরেক্ট প্রত্যাখ্যান করে |
-| ফিড রিফ্রেশ / ট্রান্সপোর্ট চেক | ৬০ / ১০ মিনিট; প্রধান ওয়ার্কস্পেস মানগুলি শেয়ারকৃত পুলে প্রযোজ্য |
-
-বিভিন্ন প্রক্সি ভিন্ন এক্সিট ঠিকানার নিশ্চয়তা দেয় না। এই সেটিংস টেলিগ্রামের সীমা অতিক্রম করে না বা অজ্ঞাতপরিচিতি প্রমাণ করে না।
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>নিয়ন্ত্রণ</th>
+<th>ডিফল্ট</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>পাবলিক তালিকা আপনার নিজস্ব অপারেটর ক্যাটালগ দিয়ে প্রতিস্থাপন করতে, নিচের ওভাররাইড কনফিগার করুন।
 এটি বাহ্যিক সাবস্ক্রিপশন সম্পূর্ণরূপে নিষ্ক্রিয় করে, এমনকি যখন এর <code>proxies</code> অ্যারে খালি থাকে তখনও।</p>
 <p><a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">খালি ক্যাটালগটি</a>

@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/searc
 
 محفوظ شدہ پیغامات کو لفظی شکلوں، بالکل درست عبارتوں، ڈومینز اور @usernames کی بنیاد پر تلاش کریں، بہترین مماثلتیں پہلے، انڈیکس کو دستخط شدہ جرنل سے منسلک کریں۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [آرکائیو تجزیہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/analysis/) · [مقامی OCR اور ٹرانسکرپشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/media-analysis/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **پریویو۔** **جرنل** میں، سرچ فیلڈ کے ساتھ **'بہترین میل · لفظ کی اقسام' (Best match · word forms**) منتخب کریں۔ نتائج کو BM25 کے ساتھ درجہ بندی کیا جاتا ہے اور ایک ہی لفظ کی دیگر شکلوں سے بھی میل کھاتا ہے: *перевод*، *переводом* اور *переводы* تلاش کرتا ہے، *transfer*، *transfers* تلاش کرتا ہے، ایک چینی عبارت بغیر خالی جگہوں کے تلاش کی جاتی ہے۔ **'نئے پہلے · بالکل ٹیکسٹ' (Newest first · exact text)** پوری ریکارڈ پر پچھلی سب سٹرنگ تلاش کو برقرار رکھتا ہے۔
 
 انڈیکس مشتق ڈیٹا ہے۔ یہ دستخط شدہ جرنل سے دوبارہ تیار کیا جاتا ہے، خود کبھی دستخط نہیں کیا جاتا اور کبھی برآمد نہیں ہوتا۔ اصل ریکارڈز میں کوئی تبدیلی نہیں ہوتی۔
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#benchmark)
 
 ## سرچ سنٹیکس
 

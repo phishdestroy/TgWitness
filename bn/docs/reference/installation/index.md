@@ -4,7 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/insta
 
 একটি কমান্ডে ইনস্টল করুন, স্বাক্ষর ও হ্যাশ যাচাই করুন, ইনস্টলেশন আপডেট ও অপসারণ করুন।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [প্রকল্প](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [দ্রুত শুরু](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/) · [নিয়োগ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/)
+
+**On this page**
+
+- [Install with one command](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#install-with-one-command)
+- [Where everything runs](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#where-everything-runs)
+- [Full-text search settings](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#full-text-search-settings)
+- [Command-line access](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#command-line-access)
+- [Verify before running](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#verify-before-running)
+- [Update an existing installation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#update-an-existing-installation)
+- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#remove-tgwitness)
 
 ## একটি কমান্ডে ইনস্টল করুন
 

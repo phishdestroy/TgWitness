@@ -4,7 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/featu
 
 বর্তমান সংগ্রহ মডেল, মাল্টি-অ্যাকাউন্ট ওয়ার্কফ্লো, এক্সপোর্ট এবং TgWitness-এর অপারেশনাল সীমা।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
 TgWitness সংযুক্ত অ্যাকাউন্টগুলির জন্য Telegram কথোপকথন সংরক্ষণ করে, পর্যবেক্ষিত পরিবর্তনগুলি রেকর্ড করে এবং যাচাইযোগ্য রপ্তানি প্রস্তুত করে। এই রেফারেন্সে সংগ্রহ মডেল, বর্তমান কর্মপ্রবাহ এবং তাদের সীমাবদ্ধতা বর্ণনা করা হয়েছে।
+
+**On this page**
+
+- [Standalone application](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#standalone-application)
+- [Shared investigations](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#shared-investigations)
+- [Archive tools](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#archive-tools)
+- [Optional extras](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#optional-extras)
+- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#protocol-and-private-sources)
+- [Multiple accounts](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#multiple-accounts)
+- [Capture and attribution](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#capture-and-attribution)
+- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#capacity-and-telegram-limits)
+- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#reliability-and-recovery)
+- [Evidence model](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#evidence-model)
+- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#export-deployment-and-handoff)
+- [Stable release criteria](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#stable-release-criteria)
 
 ## স্বতন্ত্র অ্যাপ্লিকেশন
 

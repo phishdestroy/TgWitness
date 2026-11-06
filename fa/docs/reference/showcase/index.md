@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/showc
 
 انتشار پیام‌های ذخیره‌شده‌ی کانال‌های عمومی منتخب و اسنپ‌شات‌های امضاشده از طریق لینک‌های منقضی‌شونده و قابل‌ابطال.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **دسترسی → ویترین عمومی** با استفاده از سیستم توکن دسترسی موجود، یک صفحهٔ مجزا و فقط-خواندنی ایجاد می‌کند. این صفحه مشاهدات ذخیره‌شدهٔ نصب را می‌خواند. این کار هیچ گردآورنده‌ای را راه‌اندازی نمی‌کند، به تلگرام وارد نمی‌شود و برای بازدیدکننده کانالی تهیه نمی‌کند.
 
 ## انتشار یک صفحه

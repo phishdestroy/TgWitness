@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-
 
 رپورٹ فلٹرز، آٹھ ڈیزائنز، مواد کے پری سیٹس، محفوظ شدہ تبدیلیوں کی تاریخ اور دستخط شدہ برآمدات میں شامل تشخیص۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 منتخب مشاہدات کو کیس کا ایک پڑھنے کے قابل بیان بنائیں: اس کے سوال، دائرہ کار، محفوظ تبدیلیاں، چارٹس، نتائج اور ماخذ حوالہ جات۔ ہر رپورٹ وصول کنندہ کو فراہم کردہ مواد کی جانچ اور اس کے مجموعے کی کوریج کا معائنہ کرنے کا طریقہ فراہم کرتی ہے۔
 
 **اعتماد اور حدود کی** **بنیاد**کا سیکشن جرنل، حوالگی، چیٹ، اکاؤنٹ اور شیئرنگ رپورٹس میں ظاہر ہوتا ہے۔ جرنل اور حوالگی کے پی ڈی ایف میں اسی تشخیص کا استعمال ہوتا ہے جو ان کے دستخط شدہ `report.json` میں ہے۔ زپ مینیفیسٹس میں دستخط شدہ مینیفیسٹ میں `case_assessment` شامل ہوتا ہے۔ یہ تشخیص برآمد شدہ مواد کے ساتھ منتقل ہوتی ہے۔ اصل مشاہدات اپنے موجودہ دستخطات برقرار رکھتے ہیں۔

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/conne
 
 인증, 자동 프록시 풀, IP 모드, 대체 정책, 외부 요청 및 비밀 정보 저장.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 이 문서는 TgWitness 0.8.0의 동작 방식과 그 한계를 설명합니다. 인증, 소스 액세스, 네트워크 연결 및 캡처 완전성은 각각 별개의 상태입니다. 로그인 절차, 파일 형식 및 다중 계정에 대해서는 [‘계정 및 세션 형식’](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/) 섹션부터 확인하십시오. 이벤트 정책 및 재시작 동작에 대해서는 [‘수집 방식’ 섹션을](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/) 참조하십시오.
 
 ## 연결 설정 안내
@@ -117,7 +121,21 @@ MTProxy는 텔레그램 트래픽만 처리합니다. 타임스탬프, 알림, �
 
 운영자가 관리하는 비공개 서비스의 경우, 기존 서버 환경 설정인 `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1`은 비공개 목적지를 허용하고 프록시 측 호스트 이름 확인을 유지합니다. 이 설정은 패널에서 활성화할 수 없습니다. 공개 전용 모드는 공개 리졸버에 쿼리를 보내기 전에 `.onion` 목적지를 거부합니다. Tor onion 서비스를 이용하려면 명시적인 비공개 목적지 설정과 적절한 프록시가 필요합니다. 이 DNS 동작은 외부 HTTP 작업에 적용되며, 텔레그램의 전송 방식에는 적용되지 않습니다. Cloudflare는 [JSON DNS 엔드포인트](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/)에 대해 문서화하고 있습니다.
 
-****자동 풀 매개변수**** **매개변수 → 자동 MTProxy**에서 오류 임계값, 대기 시간, 계획된 로테이션, 프록시 공유 및 허용되는 폴백 지연 시간을 구성합니다. | 제어 | 기본값 | | --- | --- | | 교체 전 연결 끊김 횟수 | 10분 내 3회 | | 연결 시도당 프록시 시도 횟수 | 3 | | 실패 후 첫 번째 / 최대 대기 시간 | 10분 / 6시간 | | 계획된 로테이션 | 비활성화됨; 실패 시 전환 | | 프록시당 계정 수 | 0: 별도의 항목을 우선하며, 필요할 때 공유합니다. 1로 설정하면 전용 항목을 기다립니다. | | Direct 대체 허용 전 지연 시간 | 10분; 주소가 여전히 Direct를 거부하는 경우 숨김 | | 피드 새로고침 / 전송 확인 | 60 / 10분; 메인 작업 공간 값이 공유 풀에 적용됨 | 서로 다른 프록시를 사용한다고 해서 서로 다른 출구 주소가 보장되는 것은 아닙니다. 이 설정들은 Telegram의 제한을 무효화하지 않으며 익명성을 보장하지도 않습니다.
+****자동 풀 매개변수****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| 제어 | 기본값 |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 공개 목록을 자체 운영자 카탈로그로 대체하려면 아래의 오버라이드 설정을 구성하십시오. 이 설정은 `proxies` 배열이 비어 있는 경우를 포함하여 외부 구독을 완전히 비활성화합니다.
 

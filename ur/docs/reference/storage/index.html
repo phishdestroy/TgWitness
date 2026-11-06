@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="رہنما"><a href="../../../">گھر</a> <span aria-hidden="true">/</span> <a href="../../">دستاویزات</a> <span aria-hidden="true">/</span> <a href="../">حوالہ</a> <span aria-hidden="true">/</span> <span aria-current="page">ذخیرہ اور بازیابی</span></nav>
 <p class="verification-shortcut"><a href="../verification/">کیا جانچا گیا ہے ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">دستاویزات میں تلاش کریں</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، ہیش چین، ٹوکن یا ویٹنس آزمائیں…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="خلاصہ تلاش" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">رہنما اور حوالہ جات میں تلاش کرنے کے لیے ایک لفظ ٹائپ کریں۔ تلاش آپ کے براؤزر میں ہی رہتی ہے۔</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">حوالہ / شواہد</p><h1>ذخیرہ اور بازیابی</h1><p class="guide-outcome">بیک اپ، پرانی فائلوں کو آپ کے کلاؤڈ میں منتقل کرنا، Object Lock کے تحت نقول اور نئے مشین پر بحالی۔</p><div class="wiki-body"><p>پینل تین کاموں کو الگ کرتا ہے:</p>
+<article class="guide-content"><p class="language-notice">اس صفحے کے کچھ حصے اب بھی انگریزی میں ہیں: اصل انگریزی متن ترجمے کے بعد تبدیل کر دیا گیا۔</p><p class="eyebrow">حوالہ / شواہد</p><h1>ذخیرہ اور بازیابی</h1><p class="guide-outcome">بیک اپ، پرانی فائلوں کو آپ کے کلاؤڈ میں منتقل کرنا، Object Lock کے تحت نقول اور نئے مشین پر بحالی۔</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">ٹی جی وٹنس</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">دستاویزات</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>پینل تین کاموں کو الگ کرتا ہے:</p>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -57,6 +59,16 @@
 </table></div>
 <p>جگہ خالی کرنے سے کبھی بھی دستخط شدہ جرنل کو حذف یا دوبارہ لکھا نہیں جاتا۔ ہر منسلک فائل اپنے اصل SHA-256 اور ایک بحالی رسید کو برقرار رکھتی ہے۔ اختیاری gzip کمپریشن تصدیق شدہ انکرپشن سے پہلے ہوتی ہے۔ کلاؤڈ فائل ناموں میں ٹیلیگرام کے نام، چیٹ آئی ڈیز یا اصل منسلک نام شامل نہیں ہوتے۔ ایک منسلک فائل 32 GB تک ہو سکتی ہے۔</p>
 <p>صرف اپ لوڈ کے جواب سے فائل حذف کرنے کی اجازت نہیں ملتی۔TgWitness مکمل انکرپٹڈ آبجیکٹ کو ڈاؤن لوڈ کرتا ہے اور اس کے سائز اورSHA-256 کی تصدیق کرتا ہے، رسید محفوظ کرتا ہے، پھر حذف کرنے سے فوراً پہلے مقامی بائٹس کی دوبارہ جانچ کرتا ہے۔ اپ لوڈ کی ناکامی، مختلف ریڈ بیک یا منسوخ شدہ ٹرانسفر مقامی فائل کو اپنی جگہ پر برقرار رکھتا ہے۔ اگر فعال ثبوت بیک اپ نے ابھی تک اس فائل کی کاپی نہیں کی ہے تو حذف کرنے کا عمل بھی اس کا انتظار کرتا ہے۔</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#when-the-disk-is-filling-up">When the disk is filling up</a></li>
+<li><a href="#connect-a-destination">Connect a destination</a></li>
+<li><a href="#keep-the-recovery-file">Keep the recovery file</a></li>
+<li><a href="#recover-after-losing-the-installation">Recover after losing the installation</a></li>
+<li><a href="#operator-bot-and-completion-notices">Operator bot and completion notices</a></li>
+</ul>
+</details>
 <h2 id="when-the-disk-is-filling-up">جب ڈسک کی جگہ بھرنے لگے<a class="anchor" href="#when-the-disk-is-filling-up" aria-label="اس حصے کا لنک">#</a></h2>
 <p>جب خالی جگہ <strong>پیرامیٹرز ← منسلکات ← ڈسک کی خالی جگہ</strong> کی حد سے کم ہو (پہلے سے طے شدہ 1 GiB)، منسلکات کا ڈاؤن لوڈ موقوف ہوتا ہے اور قطار برقرار رہتی ہے۔ متنی مشاہدات جاری رہتے ہیں۔ یہ اطلاعات سے آزاد ہے: اطلاعات بند کرنے سے ڈاؤن لوڈ کے لیے مخصوص جگہ یا ذخیرے کی حفاظتی جانچ بند نہیں ہوتی۔</p>
 <p>پہلے اقدام کے لیے <strong>خودکار چلائیں</strong> فعال کریں، <strong>جگہ خالی کرنے کے لیے مقامی فائل ہٹائیں</strong> منتخب کریں اور <strong>ڈسک کی جگہ کم ہونے پر اضافی منتقلی شروع کریں</strong> فعال کریں۔ اختیاری اصول عموماً 5120 MiB سے کم خالی جگہ پر شروع ہوتا اور مجموعوں میں کام کرتا ہے، یہاں تک کہ 10240 MiB خالی ہو۔ دونوں حدیں قابلِ ترتیب ہیں۔ منزل، فائل کی کم از کم عمر، مجموعے کی حد، مکمل دوبارہ پڑھ کر تصدیق اور شواہد کے بیک اپ کی شرائط دستی کارروائی جیسی ہیں۔ اصول خود کسی منزل کو فعال نہیں کرتا۔ ہر 30 سیکنڈ میں جانچ ہوتی ہے؛ خرابی یا پیش رفت نہ ہونے پر اگلی کوشش پانچ منٹ مؤخر ہوتی ہے۔ حالت اور اگلی کوشش کا وقت دوبارہ آغاز کے بعد بھی محفوظ رہتے ہیں۔ اصول غیر فعال ہو تو طے شدہ کارروائیاں معمول کے وقفے پر چلتی ہیں۔</p>

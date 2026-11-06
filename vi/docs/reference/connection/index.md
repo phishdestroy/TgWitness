@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/conne
 
 Xác thực, nhóm proxy tự động, chế độ IP, chính sách dự phòng, yêu cầu bên ngoài và lưu trữ khóa bí mật.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Tài liệu này mô tả cách thức hoạt động và các giới hạn của TgWitness phiên bản 0.8.0. Quá trình xác thực, quyền truy cập nguồn, kết nối mạng và tính đầy đủ của dữ liệu thu thập là các trạng thái độc lập. Để tìm hiểu về các bước đăng nhập, định dạng tệp và quản lý nhiều tài khoản, quý vị hãy bắt đầu từ phần [“Tài khoản và định dạng phiên làm việc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/)”. Đối với chính sách sự kiện và hành vi khởi động lại, xin vui lòng tham khảo phần [“Cách thức thu thập dữ liệu hoạt động](https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/)”.
 
 ## Hướng dẫn thiết lập kết nối
@@ -117,7 +121,21 @@ Một MTProxy chỉ truyền tải lưu lượng Telegram. Các thao tác HTTP c
 
 Đối với các dịch vụ riêng tư do nhà điều hành quản lý, cài đặt môi trường máy chủ hiện có `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` cho phép các đích đến riêng tư và duy trì việc giải quyết tên máy chủ phía proxy. Tính năng này không thể được kích hoạt từ bảng điều khiển. Chế độ chỉ công khai sẽ từ chối các đích đến `.onion` trước khi truy vấn trình giải quyết công khai; các dịch vụ Tor onion yêu cầu cài đặt đích đến riêng tư rõ ràng và một proxy phù hợp. Hành vi DNS này áp dụng cho các hoạt động HTTP bên ngoài, không áp dụng cho giao thức truyền tải của Telegram. Cloudflare cung cấp tài liệu về [điểm cuối DNS JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Các tham số nhóm tự động**** Trong phần **Tham số → Tự động MTProxy**, hãy cấu hình ngưỡng lỗi, thời gian chờ, lịch luân phiên, chia sẻ proxy và độ trễ dự phòng cho phép. | Kiểm soát | Mặc định | | --- | --- | | Ngắt kết nối trước khi thay thế | 3 lần trong vòng 10 phút | | Số proxy thử mỗi lần kết nối | 3 | | Thời gian nghỉ đầu tiên / tối đa sau khi thất bại | 10 phút / 6 giờ | | Luân phiên theo kế hoạch | Tắt; chuyển sang chế độ dự phòng khi thất bại | | Số tài khoản trên mỗi proxy | 0: ưu tiên các mục riêng biệt, chia sẻ khi cần thiết. Đặt 1 để chờ một mục độc quyền. | | Thời gian trễ trước khi cho phép chuyển sang Direct | 10 phút; Ẩn địa chỉ nếu vẫn từ chối Direct | | Tần suất làm mới nguồn cấp dữ liệu / kiểm tra kết nối | 60 / 10 phút; các giá trị trong không gian làm việc chính áp dụng cho nhóm chia sẻ | Các máy chủ proxy khác nhau không đảm bảo các địa chỉ thoát khác nhau. Các cài đặt này không vượt qua giới hạn của Telegram hoặc đảm bảo tính ẩn danh.
+****Các tham số nhóm tự động****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Kiểm soát | Mặc định |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 Để thay thế danh sách công khai bằng danh mục nhà mạng của riêng quý vị, vui lòng cấu hình tùy chọn ghi đè dưới đây. Tùy chọn này sẽ vô hiệu hóa hoàn toàn các đăng ký bên ngoài, kể cả khi mảng `proxies` của nó trống.
 

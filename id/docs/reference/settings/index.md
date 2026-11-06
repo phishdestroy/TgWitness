@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/setti
 
 Wizard pengaturan, tujuan, tingkat antarmuka, rute koneksi, dan pengaturan yang dibagikan oleh sebuah grup akun.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [Akun](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/) · [Koneksi](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/) · [Akses](https://phishdestroy.github.io/TgWitness/id/docs/reference/access/)
 
 Ruang kerja baru terbuka `/first-run`: bahasa dan waktu, tingkat antarmuka, tujuan, koneksi, Telegram, dan obrolan. Setiap jawaban disimpan di server segera setelah berubah, sehingga memuat ulang halaman akan melanjutkan langkah yang sama. Layar terakhir mencantumkan jawaban-jawaban tersebut dan memungkinkan Anda kembali ke jawaban mana pun.

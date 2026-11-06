@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Tìm kiếm toàn văn</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Những nội dung đã được kiểm thử →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Một số phần của trang này vẫn còn bằng tiếng Anh: bản gốc tiếng Anh đã được sửa đổi sau khi được dịch.</p><p class="eyebrow">Tham khảo / Lưu trữ &amp; tích hợp</p><h1>Tìm kiếm toàn văn</h1><p class="guide-outcome">Tìm các tin nhắn đã lưu theo dạng từ, cụm từ chính xác, tên miền và @tên người dùng, hiển thị kết quả phù hợp nhất trước tiên, với chỉ mục được liên kết với nhật ký có chữ ký.</p><div class="wiki-body"><p><a href="../analysis/">Phân tích kho lưu trữ</a> · <a href="../media-analysis/">OCR và chuyển đổi văn bản tại địa phương</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<article class="guide-content"><p class="language-notice">Một số phần của trang này vẫn còn bằng tiếng Anh: bản gốc tiếng Anh đã được sửa đổi sau khi được dịch.</p><p class="eyebrow">Tham khảo / Lưu trữ &amp; tích hợp</p><h1>Tìm kiếm toàn văn</h1><p class="guide-outcome">Tìm các tin nhắn đã lưu theo dạng từ, cụm từ chính xác, tên miền và @tên người dùng, hiển thị kết quả phù hợp nhất trước tiên, với chỉ mục được liên kết với nhật ký có chữ ký.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Tài liệu</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">Phân tích kho lưu trữ</a> · <a href="../media-analysis/">OCR và chuyển đổi văn bản tại địa phương</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
 <p><strong>Xem trước.</strong> Trong <strong>Nhật ký</strong>, chọn <strong>&quot;Kết quả phù hợp nhất · các dạng từ</strong>&quot; bên cạnh trường tìm kiếm.
 Kết quả được xếp hạng theo thuật toán BM25 và bao gồm các dạng khác của cùng một từ:
 <em>&quot;перевод&quot;</em> sẽ tìm thấy <em>&quot;переводом&quot;</em> và <em>&quot;переводы&quot;</em>, <em>&quot;transfer&quot;</em> sẽ tìm thấy <em>&quot;transfers&quot;</em>, một cụm từ tiếng Trung
@@ -40,6 +42,20 @@ sẽ được tìm thấy mà không cần khoảng trắng. Chế độ &quot;<
 tìm kiếm chuỗi con trước đó trên toàn bộ bản ghi.</p>
 <p>Chỉ mục là dữ liệu được trích xuất. Nó được tái tạo từ nhật ký đã ký, bản thân nó không bao giờ được ký
 và không bao giờ được xuất ra. Các bản ghi gốc không bị thay đổi.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">Cú pháp tìm kiếm<a class="anchor" href="#search-syntax" aria-label="Liên kết đến phần này">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

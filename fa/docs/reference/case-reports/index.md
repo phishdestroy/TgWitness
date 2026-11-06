@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-
 
 فیلترهای گزارش، هشت طرح، پیش‌تنظیم‌های محتوا، سوابق تغییرات ذخیره‌شده و ارزیابی گنجانده‌شده در صادرات امضا‌شده.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 مشاهدات منتخب را به گزارشی خوانا از پرونده تبدیل کنید: شامل پرسش، دامنه، تغییرات ذخیره‌شده، نمودارها، یافته‌ها و ارجاعات منابع آن. هر گزارش به دریافت‌کننده راهی برای بررسی مطالب تحویل‌شده و بازرسی پوشش جمع‌آوری آن می‌دهد.
 
 بخش **«بنیاد اعتماد و محدودیت‌ها**» در گزارش‌های دفترچه خاطرات، تحویل، چت، حساب کاربری و اشتراک‌گذاری ظاهر می‌شود. فایل‌های PDF دفترچه خاطرات و تحویل از همان ارزیابی موجود در `report.json` امضا شده خود استفاده می‌کنند. فایل‌های فشرده ZIP، `case_assessment` را در فایل فشرده امضا شده حمل می‌کنند. این ارزیابی به همراه محتوای صادر شده منتقل می‌شود. مشاهدات اصلی امضاهای موجود خود را حفظ می‌کنند.

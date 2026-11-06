@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/accou
 
 Exporta lo que una cuenta puede leer en este momento: ámbito, tareas reanudables, un archivo firmado y copias compartidas minimizadas.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 Una exportación de cuenta reserva esa cuenta en exclusiva. Pausa explícitamente la supervisión u otra adquisición antes de iniciar o reanudar; la aplicación nunca la detiene automáticamente.
 
 Como administrador de la instalación, selecciona **«Empezar aquí» → «Exportar mi cuenta**» o **«Exportaciones» → «Cuenta de Telegram» → «Configurar la exportación de la cuenta**». Inicia sesión si es necesario, revisa el alcance e inicia explícitamente la exportación. No es necesaria una observación continua. **«Observaciones guardadas»** es una exportación independiente del diario existente; su ZIP incluye todas las fuentes, independientemente de los filtros del diario. Cada espacio de trabajo tiene sus propias tareas, identidad de firma y almacenamiento. El acceso al panel concedido, incluida una autorización de exportación ordinaria sin restricciones, no puede abrir estas rutas que abarcan toda la cuenta.

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/archi
 
 מרכיבי האספן, לוח הבקרה, היומן, העובדים וה-Witness, וכיצד הנתונים עוברים ביניהם.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+
 תהליך Python אחד מארח את לוח הבקרה של FastAPI ומספר בלתי מוגבל של סביבות עבודה מבודדות, כשכל אחת מהן כוללת לקוח חשבון משתמש של Telethon. SQLite מכיל יומן אירועים חתום שניתן להוסיף אליו בלבד, וכן הגדרות תפעוליות הניתנות לשינוי. כספת מוצפנת מאחסנת את פרטי הזיהוי של ה-API, את ה-StringSession ואת מפתח החתימה. ה-frontend מורכב מקובצי HTML/CSS/JavaScript רגילים: אין צורך בבניית Node, ב-CDNs או בהורדות frontend בזמן ריצה.
 
 Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/stora
 
 ব্যাকআপ, পুরনো ফাইলগুলো আপনার ক্লাউডে স্থানান্তর, Object Lock-এর অধীনে অনুলিপি এবং নতুন মেশিনে পুনরুদ্ধার।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 প্যানেলটি তিনটি কাজ আলাদা করে:
 
 | টাস্ক | এটি কী করে |
@@ -15,6 +19,14 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/stora
 স্থান মুক্ত করার সময় স্বাক্ষরিত জার্নাল কখনোই মুছে ফেলা বা পুনরায় লেখা হয় না। প্রতিটি সংযুক্তি তার মূল SHA-256 এবং একটি পুনরুদ্ধার রসিদ সংরক্ষণ করে। প্রমাণীকৃত এনক্রিপশনের আগে ঐচ্ছিক gzip সংকোচন করা হয়। ক্লাউড ফাইলনামে টেলিগ্রাম নাম, চ্যাট আইডি বা মূল সংযুক্তির নাম থাকে না। একটি সংযুক্তি সর্বোচ্চ ৩২ জিবি পর্যন্ত হতে পারে।
 
 শুধুমাত্র একটি আপলোড প্রতিক্রিয়া ফাইল মুছে ফেলার অনুমতি দেয় না। TgWitness সম্পূর্ণ এনক্রিপ্ট করা অবজেক্টটি ডাউনলোড করে এবং এর আকার ও SHA-256 যাচাই করে, রসিদ সংরক্ষণ করে, তারপর মুছে ফেলার ঠিক আগে স্থানীয় বাইটগুলো আবার পরীক্ষা করে। একটি আপলোড ব্যর্থতা, ভিন্ন রিডব্যাক বা বাতিল হওয়া ট্রান্সফার স্থানীয় ফাইলটিকে অক্ষত রাখে। যদি একটি সক্ষম প্রমাণ ব্যাকআপ এখনও সেই ফাইলটি অনুলিপি না করে থাকে, তবে মুছে ফেলাও তার জন্য অপেক্ষা করে।
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/bn/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/bn/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/bn/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/bn/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## ডিস্কের জায়গা ভরে এলে
 

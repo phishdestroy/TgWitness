@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/showc
 
 Publiez les messages enregistrés des chaînes publiques sélectionnées ainsi que les instantanés signés via des liens à durée limitée et révocables.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **Access → Public showcase** crée une page distincte en lecture seule à l’aide du système d’access-token existant. Elle lit les observations enregistrées par l’installation. Elle ne lance pas de collecteur, ne se connecte pas à Telegram et n’acquiert pas de chaîne pour un visiteur.
 
 ## Publier une page

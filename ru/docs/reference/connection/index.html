@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">Подключение, прокси и защита данных</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Что проверено →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Справочник / Установка</p><h1>Подключение, прокси и защита данных</h1><p class="guide-outcome">Аутентификация, автоматические пулы прокси-серверов, режимы работы с IP-адресами, политика резервного переключения, внешние запросы и хранение секретных данных.</p><div class="wiki-body"><p>В данном документе описывается поведение TgWitness версии 0.8.0 и его ограничения. Аутентификация,
+<article class="guide-content"><p class="language-notice">Часть страницы пока на английском: английский оригинал изменился после перевода.</p><p class="eyebrow">Справочник / Установка</p><h1>Подключение, прокси и защита данных</h1><p class="guide-outcome">Аутентификация, автоматические пулы прокси-серверов, режимы работы с IP-адресами, политика резервного переключения, внешние запросы и хранение секретных данных.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Документация</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>В данном документе описывается поведение TgWitness версии 0.8.0 и его ограничения. Аутентификация,
 доступ к источнику, сетевое соединение и полнота сбора данных представляют собой отдельные состояния.
 Для ознакомления с этапами входа в систему, форматами файлов и работой с несколькими учетными записями начните с раздела
 <a href="../accounts/">«Учетные записи и форматы сеансов</a>». Информацию о правилах обработки событий и поведении при перезапуске
@@ -337,25 +339,49 @@ MTProxy — это транспортный прокси Telegram; SOCKS5 и HTT
 Cloudflare предоставляет документацию по <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">JSON-конечной</a> <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">точке DNS</a>.</p>
 <details>
 <summary><strong>Параметры автоматического пула</strong></summary>
-
-В разделе **«Параметры» → «Автоматический режим» MTProxy** настройте порог сбоя, время ожидания,
-плановую ротацию, совместное использование прокси и допустимую задержку переключения на резервный сервер.
-
-| Параметр | По умолчанию |
-| --- | --- |
-| Отключения до замены | 3 за 10 минут |
-| Количество проб прокси на одну попытку подключения | 3 |
-| Первая / максимальная пауза после сбоя | 10 минут / 6 часов |
-| Запланированная ротация | Отключено; переключение при сбое |
-| Количество аккаунтов на один прокси | 0: предпочтительно использовать отдельные записи, совместное использование — по необходимости. Установите значение 1, чтобы дождаться эксклюзивной записи. |
-| Задержка до разрешённого перехода на Direct | 10 минут; скрыть адрес, если Direct по-прежнему отказывает |
-| Обновление канала / проверки транспорта | 60 / 10 минут; значения основного рабочего пространства применяются к общему пулу |
-
-Различные прокси не гарантируют разных адресов выхода. Эти настройки не
-переопределяют ограничения Telegram и не обеспечивают анонимность.
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Контроль</th>
+<th>По умолчанию</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>Чтобы заменить общедоступный список на свой собственный каталог операторов, настройте приведённую ниже переопределение.
 Это полностью отключает внешние подписки, в том числе в случае, когда массив <code>proxies</code> пуст.</p>
 <p>Скопируйте <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">пустой каталог</a>

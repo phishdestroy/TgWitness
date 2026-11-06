@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/case-
 
 ตัวกรองรายงาน, แปดแบบออกแบบ, การตั้งค่าเนื้อหาล่วงหน้า, ประวัติการเปลี่ยนแปลงที่บันทึกไว้ และการประเมินผลที่รวมอยู่ในไฟล์ส่งออกที่ลงนามแล้ว
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 แปลงข้อสังเกตที่เลือกไว้เป็นรายงานคดีที่อ่านได้: คำถามของคดี, ขอบเขต, การเปลี่ยนแปลงที่บันทึกไว้, แผนภูมิ, ผลการค้นพบ และแหล่งอ้างอิง แต่ละรายงานให้ ผู้รับสามารถตรวจสอบข้อมูลที่ส่งมาและประเมินความครบถ้วน ของการเก็บรวบรวมข้อมูลได้
 
 ส่วน **“พื้นฐานของความเชื่อถือและข้อจำกัด”** ปรากฏในรายงานบันทึกประจำวัน รายงานการส่งต่อ รายงานแชท รายงานบัญชี และรายงานการแบ่งปัน ไฟล์ PDF ของรายงานบันทึกประจำวันและรายงานการส่งต่อใช้การประเมินเดียวกันกับ `report.json` ที่ลงนามแล้ว รายการ ZIP มี `case_assessment` ใน manifest ที่ลงนามแล้ว การประเมินนี้จะถูกส่งไปพร้อมกับข้อมูลที่ส่งออก ส่วน การสังเกตการณ์ต้นฉบับจะรักษาลายเซ็นที่มีอยู่เดิม

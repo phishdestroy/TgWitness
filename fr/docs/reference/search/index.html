@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Accueil</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Référence</a> <span aria-hidden="true">/</span> <span aria-current="page">Recherche en texte intégral</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Ce qui a été testé →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Rechercher dans la documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Essayez « proxy », « chaîne de hachage », « jeton » ou « témoin »…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Recherche claire" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Saisissez un mot pour effectuer une recherche dans les guides et la documentation de référence. La recherche s&#x27;effectue directement dans votre navigateur.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Certaines parties de cette page sont encore en anglais : le texte original en anglais a été modifié après sa traduction.</p><p class="eyebrow">Référence / Archives et intégrations</p><h1>Recherche en texte intégral</h1><p class="guide-outcome">Recherchez les messages enregistrés par formes de mots, expressions exactes, domaines et @noms d&#x27;utilisateurs, en affichant les résultats les plus pertinents en premier, grâce à l&#x27;index lié au journal signé.</p><div class="wiki-body"><p><a href="../analysis/">Analyse des archives</a> · <a href="../media-analysis/">OCR et transcription en local</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<article class="guide-content"><p class="language-notice">Certaines parties de cette page sont encore en anglais : le texte original en anglais a été modifié après sa traduction.</p><p class="eyebrow">Référence / Archives et intégrations</p><h1>Recherche en texte intégral</h1><p class="guide-outcome">Recherchez les messages enregistrés par formes de mots, expressions exactes, domaines et @noms d&#x27;utilisateurs, en affichant les résultats les plus pertinents en premier, grâce à l&#x27;index lié au journal signé.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentation</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">Analyse des archives</a> · <a href="../media-analysis/">OCR et transcription en local</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
 <p><strong>Aperçu.</strong> Dans <strong>«</strong> <strong>Journal</strong> », sélectionnez <strong>« Meilleure correspondance · formes du mot »</strong> à côté du champ de recherche.
 Les résultats sont classés selon l’algorithme BM25 et correspondent à d’autres formes du même mot :
 <em>« перевод »</em> trouve <em>« переводом »</em> et <em>«</em> <em>переводы »</em>, <em>« transfer »</em> trouve <em>« transfers »</em>, une phrase en chinois
@@ -40,6 +42,20 @@ est trouvée sans espaces. L’option « <strong>Les plus récents en premier ·
 sur l’ensemble de l’enregistrement.</p>
 <p>L'index est constitué de données dérivées. Il est reconstruit à partir du journal signé, n'est jamais signé
 en soi et n'est jamais inclus dans une exportation. Les enregistrements d'origine ne sont pas modifiés.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">Syntaxe de recherche<a class="anchor" href="#search-syntax" aria-label="Lien vers cette section">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

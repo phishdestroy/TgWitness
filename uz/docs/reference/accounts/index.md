@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/accou
 
 Telefon, QR kod yoki avtorizatsiya kaliti orqali tizimga kiring, Telethon, Pyrogram yoki Telegram Desktop sessiyalarini import qiling va bir nechta akkauntlarni boshqaring.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness **Telegram foydalanuvchi**hisobiga (bot emas) MTProto orqali Telethon yordamida kiradi. Har bir hisob o'zining alohida **ish** maydonida (API va buyruq qatori vositalarida "*workspace*" deb ataladi) joylashadi, o'z sessiyasi, manbalari, jurnali va imzolash kalitiga ega.
 
 Sessiya fayllari, sessiya satrlari va Auth kalitlari **hisob ma'lumotlari ruxsatnomalaridir**: ularni egallagan har kim o'sha hisob sifatida harakat qilishi mumkin. Ular xabarlar tarixini o'z ichiga olmaydi.

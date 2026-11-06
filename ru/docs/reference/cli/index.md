@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/cli/
 
 Поиск, чтение контекста, подсчёт активности и экспорт сохраненных сообщений из скриптов и агентов с выводом в формате --json, стабильными кодами завершения и токенами с ограниченной областью действия, доступными только для чтения.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [MCP только для чтения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/) · [Полнотекстовый поиск](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/) · [Вики](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Предварительный просмотр.** `tgwitness search`, `context`, `messages`, `stats` а также `export` читать сохраненные наблюдения для скриптов и ИИ-агентов. Они не могут отправлять что-либо в Telegram, изменять настройки или модифицировать подписанный журнал.

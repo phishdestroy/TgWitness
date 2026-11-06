@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-
 
 보고서 필터, 8가지 디자인, 콘텐츠 사전 설정, 저장된 변경 내역 및 서명된 내보내기 파일에 포함된 평가 결과가 제공됩니다.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 선택한 관찰 내용을 사건에 대한 읽기 쉬운 기록으로 정리하십시오: 사건의 질문, 범위, 저장된 변경 사항, 차트, 조사 결과 및 출처 참조. 각 보고서는 수신자가 전달된 자료를 확인하고 수집 범위를 검토할 수 있는 방법을 제공합니다.
 
 **'신뢰의** **근거 및 제한** 사항' 섹션은 일지, 인계, 채팅, 계정 및 공유 보고서에 표시됩니다. 일지 및 인계 PDF는 서명된 `report.json`과 동일한 평가를 사용합니다. ZIP 매니페스트는 서명된 매니페스트 내에 `case_assessment`을 포함합니다. 이 평가는 내보낸 자료와 함께 전달됩니다. 원본 관찰 기록은 기존 서명을 그대로 유지합니다.

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/
 
 Tìm kiếm, đọc bối cảnh, đếm hoạt động và xuất các tin nhắn đã lưu từ các skript và tác nhân, với đầu ra --json, mã thoát ổn định và các token chỉ đọc có phạm vi giới hạn.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [MCP chỉ đọc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/) · [Tìm kiếm toàn văn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Xem trước.** `tgwitness search`, `context`, `messages`, `stats` và `export` đọc các quan sát đã lưu cho các tập lệnh và tác nhân AI. Chúng không thể gửi bất cứ thứ gì đến Telegram, thay đổi cài đặt hoặc sửa đổi nhật ký được ký điện tử.

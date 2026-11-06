@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/accou
 
 Exportez ce qu’un compte peut lire actuellement : champ d’application, tâches reprenables, archive signée et copies de partage réduites.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 Un export de compte réserve ce compte exclusivement. Suspendez explicitement la surveillance ou une autre acquisition avant de démarrer ou reprendre ; l’application ne l’arrête jamais automatiquement.
 
 En tant qu’administrateur de l’installation, choisissez « **Commencer ici » → « Exporter mon compte** », ou « **Exportations » → « Compte Telegram » → « Configurer l’exportation du compte** ». Connectez-vous si nécessaire, vérifiez la portée de l’opération, puis lancez explicitement l’exportation. Une surveillance continue n’est pas requise. **Les « Observations enregistrées »** constituent une exportation distincte du journal existant ; son ZIP inclut toutes les sources, indépendamment des filtres du journal. Chaque espace de travail dispose de ses propres tâches, de son identité de signature et de son espace de stockage. L’accès au panneau d’administration, y compris une autorisation d’exportation ordinaire sans restriction, ne permet pas d’accéder à ces chemins à l’échelle du compte.

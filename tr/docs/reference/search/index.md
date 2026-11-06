@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/searc
 
 İndeks, imzalı günlüğe bağlı olarak, kelime biçimleri, tam ifadeler, etki alanları ve @kullanıcıadları ile kaydedilmiş mesajları en iyi eşleşmelerden başlayarak bulun.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Arşiv analizi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/analysis/) · [Yerel OCR ve transkripsiyon](https://phishdestroy.github.io/TgWitness/tr/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Önizleme.** **Günlük**'te, arama alanının yanındaki **En iyi eşleşme · kelime biçimleri** seçeneğini seçin. Sonuçlar BM25 ile sıralanır ve aynı kelimenin diğer biçimleriyle eşleşir: *перевод*, *переводом* ve *переводы* sonuçlarını bulur; *transfer*, *transfers* sonuçlarını bulur; Çince bir ifade boşluklar olmadan bulunur. **En yenisi önce · tam metin seçeneği,** önceki alt dize aramasını tüm kayıt üzerinde sürdürür.
 
 Dizin, türetilmiş verilerdir. İmzalı günlüğünden yeniden oluşturulur, kendisi asla imzalanmaz ve hiçbir zaman dışa aktarıma dahil edilmez. Orijinal kayıtlarda herhangi bir değişiklik olmaz.
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#benchmark)
 
 ## Arama sözdizimi
 

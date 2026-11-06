@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 驗證、自動代理伺服器池、IP 模式、備用策略、外部請求及機密資料儲存。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 本文檔說明 TgWitness 0.8.0 的運作方式及其限制。驗證、 來源存取、網路連線及擷取完整性均為獨立的狀態。 關於登入步驟、檔案格式及多重帳戶，請先參閱「 [帳戶與會話格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/)」；關於事件政策及重新啟動 行為，請參閱[「資料擷取運作方式」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/)。
 
 ## 引導式連線設定
@@ -117,7 +121,21 @@ MTProxy 僅傳輸 Telegram 流量。工作區的 HTTP 操作（例如時間戳�
 
 對於由營運商管理的私有服務，現有的伺服器環境設定 `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` 可允許私有目的地，並維持 代理端的主機名稱解析。此設定無法透過控制面板啟用。僅限公開 模式會在查詢公開解析器之前拒絕 `.onion` 目的地；Tor 洋蔥 服務需要明確的私有目的地設定以及合適的代理。 此 DNS 行為適用於外部 HTTP 操作，不適用於 Telegram 的傳輸層。 Cloudflare 已針對 [JSON DNS 端點](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/)提供相關文件說明。
 
-****自動池參數**** 在 **參數 → 自動 MTProxy** 下，設定失敗閾值、冷卻時間、 預定輪替、代理伺服器共享及允許的備用延遲。 | 控制項 | 預設值 | | --- | --- | | 替換前斷線次數 | 10 分鐘內 3 次 | | 每次連線嘗試的代理伺服器試行次數 | 3 | | 失敗後的首次／最長休息時間 | 10 分鐘／6 小時 | | 預定輪替 | 已停用；失敗時切換 | | 每個代理伺服器的帳戶數 | 0：優先使用獨立條目，必要時共享。設定為 1 則會等待專用條目。 | | 允許直接備援前的延遲 | 10 分鐘；若隱藏的地址仍拒絕直接連線 | | 資料源刷新／傳輸檢查 | 60 / 10 分鐘；主要工作區的設定值適用於共用池 | 不同的代理伺服器並不保證會產生不同的出口地址。這些設定不會 覆寫 Telegram 的限制，亦無法證明匿名性。
+****自動池參數****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| 控制 | 預設 |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 若要將公開清單替換為您自己的營運商目錄，請配置以下覆寫設定。 此設定將完全停用外部訂閱功能，即使其 `proxies` 陣列為空時亦然。
 

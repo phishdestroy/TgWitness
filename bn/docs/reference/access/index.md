@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/acces
 
 অ্যাকাউন্ট এবং চ্যাটে সীমিত পরিসরের অ্যাক্সেস ইস্যু করুন, অনুমতি নির্বাচন করুন, সেশন এবং আইপি ঠিকানা সীমিত করুন, এবং অ্যাক্সেস প্রত্যাহার করুন।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 একজন পর্যালোচনাকারীকে একটি চ্যাটে অ্যাক্সেস দিন, একজন বিশ্লেষককে একটি কেস রপ্তানি করার অনুমতি দিন, অথবা একজন অপারেটরকে নির্বাচিত অ্যাকাউন্টগুলির নিয়ন্ত্রণ দিন। প্রত্যেক ব্যক্তি তাদের নিজস্ব টোকেন পাবেন। প্রধান প্যানেলের টোকেন প্রশাসকের কাছে থাকবে।
 
 [অ্যাকাউন্ট সেটআপ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/) · [সংযোগ পথসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/) · [নিরাপত্তা মডেল](https://phishdestroy.github.io/TgWitness/bn/docs/reference/security/)
@@ -104,4 +108,8 @@ API প্রতিটি ক্লায়েন্ট IP-তে প্রত�
 
 অ্যাক্সেস ইস্যু করা, পরিবর্তন করা এবং বাতিল করা, এবং সেশন শুরু বা শেষ করা, এছাড়াও স্বাক্ষরিত `access.*` জার্নাল রেকর্ড তৈরি করে। সেই রেকর্ডগুলিতে টোকেন অন্তর্ভুক্ত থাকে না। ইস্যু করা টোকেন এবং সেশন ক্রেডেনশিয়ালগুলি এনক্রিপ্ট করা ভল্টে হ্যাশ হিসেবে সংরক্ষণ করা হয়।
 
-****প্রধান প্রশাসক এবং বিশ্বাসের সীমা**** প্রধান প্যানেল টোকেন অবাধ থাকে। এটি ব্যবহার করে ব্রাউজার সাইন-ইন করলে প্রশাসকের নির্ধারিত সেশন সীমার আওতায় সেশন তৈরি হয়। প্রধান টোকেন সরাসরি পাঠানোর স্ক্রিপ্টগুলো সম্পূর্ণ অ্যাক্সেস ধরে রাখে এবং সেগুলো ব্রাউজার সেশন হিসেবে গণ্য হয় না। এটি একটি ইনস্টলেশনে অ্যাপ্লিকেশন-স্তরের অ্যাক্সেস নিয়ন্ত্রণ। সমস্ত ওয়ার্কস্পেস সার্ভার প্রক্রিয়া শেয়ার করে; এটি হোস্ট প্রশাসকের থেকে বিচ্ছিন্ন নয়। প্রধান টোকেন, টেলিগ্রাম সেশন, স্বাক্ষর কী এবং ডেটা ডিরেক্টরি ব্যক্তিগত রাখুন। একটি উইটনেস টোকেন একটি পৃথক চেকপয়েন্ট/স্বাস্থ্য সনদ, প্যানেল অ্যাক্সেস টোকেন নয়।
+****প্রধান প্রশাসক এবং বিশ্বাসের সীমা****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

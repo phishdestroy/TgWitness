@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/opera
 
 Panelning kundalik ishlashi: rejimlar, monitoring kategoriyalari, parametrlar, bildirishnomalar, eksportlar, zaxira nusxasi va sig'im.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Birinchi ulanishingiz uchun [akkauntlar va sessiya formatlaridan](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) foydalaning. Saqlangan versiyalar, voqea siyosatlari va bo'shliqlar haqida tushuntirish uchun [yig'ish qanday ishlashini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/) ko'ring. Ushbu qo'llanma kundalik ish faoliyati va tiklashni qamrab oladi.
 
 Boshqariladigan o'rnatish quyidagilarni o'z ichiga oladi: **START-HERE.html** va **START-HERE.txt** uning ishga tushiruvchi dasturi yonida, o'rnatish yo'liga moslashtirilgan omborcha havolasi va buyruqlar bilan. `tgwitness guide --print`ni SSH orqali ishga tushiring yoki `tgwitness paths`ni haqiqiy ma'lumotlar katalogini aniqlash uchun ishlating. Asosiy systemd o'rnatishi maxfiy holatni `/var/lib/tgwitness-…` ostida saqlaydi; `/opt/tgwitness` esa dasturni o'z ichiga oladi.
 
 Boshqariladigan vaqtinchalik Cloudflare tunneli uchun `tgwitness tunnel off` jamoat kirishini yopadi, mahalliy panel va to'plam esa ishlashda davom etadi. `tgwitness tunnel on` uni yoqadi; `tgwitness tunnel restart` yangi tunnel ulanishini yaratadi. Uning joriy manzilini ko'rish uchun `tgwitness open` dan foydalaning. Aniq o'chirish sozlamasi xizmatni qayta ishga tushirgandan keyin ham saqlanib qoladi. `tgwitness stop` panel va to'plamni to'xtatadi.
+
+**On this page**
+
+- [Operator workflow](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#operator-workflow)
+- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Runtime modes](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#runtime-modes)
+- [Monitoring categories](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#monitoring-categories)
+- [Notifications](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#notifications)
+- [Panel layout](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#panel-layout)
+- [Deployment environments](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#deployment-environments)
+- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#startup-checks-and-exports)
+- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#backup-restore-and-interruptions)
+- [Capacity and retention](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/#capacity-and-retention)
 
 ## Operator ish jarayoni
 

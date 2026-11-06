@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/acces
 
 Tentukan cakupan akses ke akun dan obrolan, pilih izin, batasi sesi dan alamat IP, serta cabut akses.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 Berikan akses kepada peninjau ke satu obrolan, izin kepada analis untuk mengekspor suatu kasus, atau kontrol kepada operator atas akun-akun yang dipilih. Setiap orang mendapatkan tokennya masing-masing. Token panel utama tetap berada di tangan administrator.
 
 [Pengaturan akun](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/) · [Rute koneksi](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/) · [Model keamanan](https://phishdestroy.github.io/TgWitness/id/docs/reference/security/)
@@ -104,4 +108,8 @@ Skrip dan gaya panel membawa metadata integritas SHA-384. Peta impor juga mencak
 
 Penerbitan, perubahan, dan pencabutan akses, serta memulai atau mengakhiri sesi, juga menghasilkan catatan jurnal `access.*` yang ditandatangani. Token tidak termasuk dalam catatan tersebut. Token yang diterbitkan dan kredensial sesi disimpan sebagai hash di brankas terenkripsi.
 
-****Administrator utama dan batas kepercayaan**** Token panel utama tetap tidak dibatasi. Masuk melalui browser menggunakan token tersebut akan membuat sesi yang tunduk pada batas sesi yang dikonfigurasi oleh administrator. Skrip yang mengirimkan token utama secara langsung tetap memiliki akses penuh dan tidak dihitung sebagai sesi browser. Ini adalah kontrol akses tingkat aplikasi dalam satu instalasi. Semua ruang kerja berbagi proses server; ini bukan isolasi dari administrator host. Jaga kerahasiaan token utama, sesi Telegram, kunci penandatanganan, dan direktori data. Token saksi adalah kredensial titik pemeriksaan/kesehatan terpisah, bukan token akses panel.
+****Administrator utama dan batas kepercayaan****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

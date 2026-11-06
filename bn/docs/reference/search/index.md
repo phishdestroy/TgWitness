@@ -4,11 +4,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/searc
 
 সigned journal-এ সূচকের সাথে আবদ্ধ ইনডেক্স ব্যবহার করে শব্দরূপ, সঠিক বাক্যাংশ, ডোমেইন এবং @usernames অনুসারে সংরক্ষিত বার্তাগুলো খুঁজুন, প্রথমে সেরা মিলগুলো দেখান।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [আর্কাইভ বিশ্লেষণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/analysis/) · [স্থানীয় OCR এবং ট্রান্সক্রিপশন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/media-analysis/) · [উইকি](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **প্রিভিউ।** জার্নালে, অনুসন্ধান ক্ষেত্রের পাশে **'সেরা মিল · শব্দ রূপ'** নির্বাচন করুন। ফলাফলগুলি BM25 দ্বারা র‌্যাঙ্ক করা হয় এবং একই শব্দের অন্যান্য রূপের সাথে মেলে: *перевод* খুঁজে পায় *переводом* এবং *переводы*, *transfer* খুঁজে পায় *transfers*, একটি চীনা বাক্যাংশ ফাঁকা স্থান ছাড়াই পাওয়া যায়। **'নতুনতম প্রথমে · সঠিক টেক্সট'** পুরো রেকর্ডে পূর্ববর্তী সাবস্ট্রিং অনুসন্ধান বজায় রাখে।
 
 সূচী হল প্রাপ্ত তথ্য। এটি স্বাক্ষরিত জার্নাল থেকে পুনর্নির্মাণ করা হয়, নিজে কখনো স্বাক্ষরিত হয় না এবং কখনো রপ্তানি হয় না। মূল রেকর্ডগুলো অপরিবর্তিত থাকে।
+
+**On this page**
+
+- [Search syntax](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#search-syntax)
+- [Languages](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#languages)
+- [Where the index lives](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#where-the-index-lives)
+- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#results-and-the-signed-journal)
+- [Recognized text](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#recognized-text)
+- [Access](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#access)
+- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencies](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#dependencies)
+- [Benchmark](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#benchmark)
 
 ## অনুসন্ধান সিনট্যাক্স
 

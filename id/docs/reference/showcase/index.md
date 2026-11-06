@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/showc
 
 Publikasikan pesan yang disimpan dari saluran publik yang dipilih serta snapshot yang ditandatangani melalui tautan yang kedaluwarsa dan dapat dicabut.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **Akses → Galeri Publik** membuat halaman terpisah yang hanya dapat dibaca menggunakan sistem token akses yang sudah ada. Halaman ini membaca pengamatan yang disimpan oleh instalasi. Halaman ini tidak menjalankan pengumpul data, masuk ke Telegram, atau memperoleh saluran untuk pengunjung.
 
 ## Publikasikan halaman

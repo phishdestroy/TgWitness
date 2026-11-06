@@ -4,11 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/opera
 
 Operasi harian panel: mod, kategori pemantauan, parameter, pemberitahuan, eksport, sandaran dan kapasiti.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Untuk sambungan pertama anda, gunakan [akaun dan format sesi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/). Untuk penjelasan mengenai versi yang disimpan, dasar peristiwa, dan jurang, lihat [bagaimana pengumpulan berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/). Panduan ini merangkumi operasi harian dan pemulihan.
 
 Pemasangan yang diuruskan merangkumi **START-HERE.html** dan **START-HERE.txt** di sebelah pelancarannya, dengan pautan repositori dan arahan yang disesuaikan dengan laluan pemasangannya. Jalankan `tgwitness guide --print` melalui SSH, atau `tgwitness paths` untuk mencari direktori data sebenar. Pemasangan root systemd menyimpan keadaan peribadi di bawah `/var/lib/tgwitness-…`; `/opt/tgwitness` memegang program tersebut.
 
 Untuk terowong Cloudflare sementara yang diuruskan, `tgwitness tunnel off` menutup akses awam manakala panel tempatan dan pengumpulan terus beroperasi. `tgwitness tunnel on` membenarkannya; `tgwitness tunnel restart` mewujudkan sambungan terowong baru. Gunakan `tgwitness open` untuk melihat alamat semasa. Tetapan 'off' yang eksplisit kekal walaupun perkhidmatan dihidupkan semula. `tgwitness stop` menghentikan kedua-dua panel dan pengumpulan.
+
+**On this page**
+
+- [Operator workflow](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#operator-workflow)
+- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Runtime modes](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#runtime-modes)
+- [Monitoring categories](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#monitoring-categories)
+- [Notifications](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#notifications)
+- [Panel layout](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#panel-layout)
+- [Deployment environments](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#deployment-environments)
+- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#startup-checks-and-exports)
+- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#backup-restore-and-interruptions)
+- [Capacity and retention](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#capacity-and-retention)
 
 ## Aliran kerja operator
 

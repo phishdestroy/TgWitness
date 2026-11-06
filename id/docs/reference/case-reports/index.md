@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/case-
 
 Filter laporan, delapan desain, preset konten, riwayat perubahan yang disimpan, dan penilaian yang disertakan dalam ekspor yang telah ditandatangani.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Ubah pengamatan yang dipilih menjadi laporan kasus yang mudah dibaca: pertanyaannya, ruang lingkupnya, perubahan yang disimpan, bagan, temuan, dan referensi sumber. Setiap laporan memberikan penerima cara untuk memeriksa materi yang dikirimkan dan meninjau cakupan pengumpulannya.
 
 Bagian **Dasar Kepercayaan dan Batasan** muncul dalam laporan jurnal, serah terima, obrolan, akun, dan berbagi. PDF jurnal dan serah terima menggunakan penilaian yang sama dengan `report.json` yang telah ditandatangani. Manifest ZIP menyertakan `case_assessment` dalam manifest yang telah ditandatangani. Penilaian ini disertakan bersama materi yang diekspor. Pengamatan asli tetap mempertahankan tanda tangan yang ada.

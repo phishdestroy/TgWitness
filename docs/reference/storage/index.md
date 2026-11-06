@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/storage/
 
 Backups, moving older files to your cloud, copies under Object Lock and recovery on a new machine.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 The panel separates three tasks:
 
 | Task | What it does |
@@ -15,6 +19,14 @@ The panel separates three tasks:
 Freeing space never deletes or rewrites the signed journal. Each attachment keeps its original SHA-256 and a recovery receipt. Optional gzip compression takes place before authenticated encryption. Cloud filenames do not contain Telegram names, chat IDs or original attachment names. One attachment may be up to 32 GiB.
 
 An upload response alone is not permission to delete a file. TgWitness downloads the complete encrypted object and verifies its size and SHA-256, saves the receipt, then checks the local bytes again immediately before removal. An upload failure, different readback or cancelled transfer leaves the local file in place. If an enabled evidence backup has not yet copied that file, removal also waits for it.
+
+**On this page**
+
+- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Connect a destination](https://phishdestroy.github.io/TgWitness/docs/reference/storage/#connect-a-destination)
+- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/docs/reference/storage/#keep-the-recovery-file)
+- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## When the disk is filling up
 

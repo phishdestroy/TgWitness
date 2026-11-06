@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/setti
 
 설정 마법사, 목표, 인터페이스 수준, 연결 경로 및 계정 그룹에서 공유되는 설정.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [계정](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/) · [연결](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/) · [접근](https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/)
 
 새로운 작업 공간이 열리면 `/first-run`: 언어 및 시간, 인터페이스 수준, 목표, 연결, 텔레그램 및 채팅. 각 답변은 변경되는 즉시 서버에 저장되므로 페이지를 새로 고침해도 동일한 단계에서 계속 진행할 수 있습니다. 마지막 화면에는 답변 목록이 표시되며 원하는 답변으로 돌아갈 수 있습니다.

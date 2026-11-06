@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/accou
 
 Esporta ciò che un account può leggere al momento: ambito, attività riprendibili, un archivio firmato e copie di condivisione ridotte al minimo.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 L’esportazione di un account riserva quell’account in esclusiva. Sospendi esplicitamente il monitoraggio o un’altra acquisizione prima di avviare o riprendere: l’applicazione non la interrompe mai automaticamente.
 
 In qualità di amministratore dell’installazione, seleziona **«Inizia qui» → «Esporta il mio account**» oppure **«Esportazioni» → «Account Telegram» → «Configura esportazione account**». Effettua l’accesso se necessario, verifica l’ambito e avvia esplicitamente l’esportazione. Non è richiesto un monitoraggio continuo. **Le osservazioni salvate** costituiscono un’esportazione separata del diario esistente; il suo ZIP include tutte le fonti indipendentemente dai filtri del diario. Ogni area di lavoro dispone di propri processi, identità di firma e spazio di archiviazione. L’accesso al pannello concesso, compresa un’autorizzazione illimitata all’esportazione ordinaria, non consente di aprire questi percorsi a livello di account.

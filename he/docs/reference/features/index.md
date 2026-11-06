@@ -4,7 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/featu
 
 מודל האיסוף הנוכחי, תהליכי עבודה עם חשבונות מרובים, ייצוא ומגבלות תפעוליות של TgWitness.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+
 TgWitness משמרת שיחות Telegram הנגישות לחשבונות מחוברים, מתעדת שינויים שנצפו ומכינה ייצוא הניתן לאימות. מסמך זה מתאר את מודל האיסוף, את תהליכי העבודה הנוכחיים ואת מגבלותיהם.
+
+**On this page**
+
+- [Standalone application](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#standalone-application)
+- [Shared investigations](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#shared-investigations)
+- [Archive tools](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#archive-tools)
+- [Optional extras](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#optional-extras)
+- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#protocol-and-private-sources)
+- [Multiple accounts](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#multiple-accounts)
+- [Capture and attribution](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#capture-and-attribution)
+- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#capacity-and-telegram-limits)
+- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#reliability-and-recovery)
+- [Evidence model](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#evidence-model)
+- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#export-deployment-and-handoff)
+- [Stable release criteria](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#stable-release-criteria)
 
 ## יישום עצמאי
 

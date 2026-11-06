@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/accou
 
 اب ایک اکاؤنٹ جو کچھ پڑھ سکتا ہے اسے برآمد کریں: دائرہ کار، دوبارہ قابلِ اجرا جابز، ایک دستخط شدہ آرکائیو اور کم از کم شیئرنگ کاپیاں۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 اکاؤنٹ ایکسپورٹ اس اکاؤنٹ کو خصوصی طور پر اپنے لیے مخصوص کرتا ہے۔ شروع کرنے یا دوبارہ جاری کرنے سے پہلے نگرانی یا دوسری جمع آوری واضح طور پر موقوف کریں؛ ایپ انہیں خودکار بند نہیں کرتی۔
 
 انسٹالیشن کے منتظم کے طور پر، **Start here → Export my account** منتخب کریں، یا **Exports → Telegram account → Configure account export**۔ اگر ضرورت ہو تو سائن ان کریں، دائرہ کار کا جائزہ لیں، اور واضح طور پر ایکسپورٹ شروع کریں۔ مسلسل مشاہدہ ضروری نہیں ہے۔ **محفوظ شدہ مشاہدات** موجودہ جریدے کی ایک علیحدہ ایکسپورٹ ہے؛ اس کے ZIP میں جریدے کے فلٹرز سے قطع نظر تمام ذرائع شامل ہیں۔ ہر ورک اسپیس کے اپنے جابز، دستخطی شناخت اور اسٹوریج ہوتے ہیں۔ جاری کردہ پینل کی رسائی، بشمول ایک غیر محدود عام ایکسپورٹ گرانٹ، ان اکاؤنٹ بھرے راستوں کو نہیں کھول سکتی۔

@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <a href="../">Manba</a> <span aria-hidden="true">/</span> <span aria-current="page">Dalil formati</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Nima sinovdan o&#x27;tkazilgan →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Ushbu sahifaning ba&#x27;zi qismlari hanuz ingliz tilida: inglizcha asl matn tarjima qilinganidan keyin o&#x27;zgartirilgan.</p><p class="eyebrow">Manba / Dalil</p><h1>Dalil formati</h1><p class="guide-outcome">Imzolangan ZIP tarkibi, yozuv turlari, jarayon kvitansiyalari, odamlar profillari, masofaviy nusxalar va oflayn tekshirish.</p><div class="wiki-body"><p>TgWitness hisobga ko&#x27;rinadigan Telegram kuzatuvlarini imzolangan jurnalda saqlaydi.
+<article class="guide-content"><p class="language-notice">Ushbu sahifaning ba&#x27;zi qismlari hanuz ingliz tilida: inglizcha asl matn tarjima qilinganidan keyin o&#x27;zgartirilgan.</p><p class="eyebrow">Manba / Dalil</p><h1>Dalil formati</h1><p class="guide-outcome">Imzolangan ZIP tarkibi, yozuv turlari, jarayon kvitansiyalari, odamlar profillari, masofaviy nusxalar va oflayn tekshirish.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Hujjatlash</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../../assets/chapter-evidence.svg" /></p>
+<p>TgWitness hisobga ko&#x27;rinadigan Telegram kuzatuvlarini imzolangan jurnalda saqlaydi.
 Qabul qiluvchilar saqlangan yozuvlar, ilovalar va hisobotlarni ishonchli
 yig&#x27;uvchi kalitiga nisbatan tekshirib, so&#x27;ng jurnalni mustaqil saqlangan nazorat nuqtasiga
 solishtirishlari mumkin.
@@ -41,6 +43,28 @@ Ushbu sahifa formatlar, tekshiruvlar va topshirish uchun saqlanishi kerak bo&#x2
 ZIP and independently obtained key fingerprint, displays an explained result,
 and saves a separate verification transcript. See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md">verification launchers and
 the portable runtime</a> for setup and trust limits.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#what-is-signed">What is signed</a></li>
+<li><a href="#comparing-chat-exports">Comparing chat exports</a></li>
+<li><a href="#investigation-handoff">Investigation handoff</a></li>
+<li><a href="#handover-extract">Handover extract</a></li>
+<li><a href="#readable-reports">Readable reports</a></li>
+<li><a href="#event-canonicalization">Event canonicalization</a></li>
+<li><a href="#actor-semantics">Actor semantics</a></li>
+<li><a href="#coverage-continuity-gaps-and-unobserved-ids">Coverage: continuity, gaps and unobserved IDs</a></li>
+<li><a href="#producer">Producer</a></li>
+<li><a href="#people-profiles">People profiles</a></li>
+<li><a href="#independent-witness">Independent witness</a></li>
+<li><a href="#manifest-and-checkpoints">Manifest and checkpoints</a></li>
+<li><a href="#verification-scope">Verification scope</a></li>
+<li><a href="#attachments">Attachments</a></li>
+<li><a href="#durable-collection-and-process-receipts-02">Durable collection and process receipts (0.2)</a></li>
+<li><a href="#rfc-3161-preparation-and-response-verification-02">RFC 3161 preparation and response verification (0.2)</a></li>
+<li><a href="#optional-records-in-evidence-mode-drand-and-telegram-devices">Optional records in evidence mode: drand and Telegram devices</a></li>
+</ul>
+</details>
 <h2 id="what-is-signed">Imzolangan nima<a class="anchor" href="#what-is-signed" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

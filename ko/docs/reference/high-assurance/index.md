@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-
 
 Hetzner 또는 Phala Cloud에 구축된 24시간 연중무휴 보안 서버, 게이트웨이 DNS, 그리고 제3자가 재현할 수 있는 검증 절차.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
 
 일반적인 로컬 및 Docker 사용 방법은 변함이 없습니다. 다음을 사용하여 배포하지 않는 한 여기에서 실행되는 것은 없습니다 `python -m tgwitness.cloud`를 사용하여 배포하지 않는 한 여기에서 실행되는 것은 없으며, 수집기는 배포가 설정된 경우에만 호스트를 읽습니다. `TGWITNESS_ASSURANCE`.
@@ -20,6 +24,23 @@ High-assurance deployment adds independent checks of the collection environment 
 6. Verifier, 읽기 전용 토큰 → 터널 커넥터 주소 및 인그레스
 7. Verifier, 읽기 전용 토큰 → 서명된 /api/assurance 성명서
 8. Verifier, 읽기 전용 토큰 → 증거 ZIP
+
+**On this page**
+
+- [What a verifier can check](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [Providers](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#providers)
+- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [Before you start](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#before-you-start)
+- [From the panel](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#from-the-panel)
+- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [Deploy](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#deploy)
+- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [Remove a deployment](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#remove-a-deployment)
+- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#any-server-self-attested)
+- [Verify](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#verify)
+- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#report-for-evidence-handover)
+- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## 검증자가 확인할 수 있는 사항
 

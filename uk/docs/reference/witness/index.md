@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/witne
 
 Запустіть «witness» із власним ключем та ботом, опублікуйте підписані контрольні точки в каналі та звіряйте експортовані дані з ними.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 [Експорт та перевірка](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/) · [Високий рівень надійності](https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/) · [Посібник з панелей](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#extras)
 
 A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
@@ -18,6 +22,14 @@ A witness retains signed checkpoints separately from the collector. It checks th
 4. ЗIP-архів доказів → verify.py
 5. Журнал Witness, власний ключ → verify.py
 6. Канал у Telegram → verify.py (Експорт з Telegram Desktop або сторінка «t.me/s»)
+
+**On this page**
+
+- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/#what-it-checks-and-records)
+- [Run a witness](https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/#run-a-witness)
+- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verify](https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/#verify)
 
 ## Що отримує TgWitness і чого він не робить
 

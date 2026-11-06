@@ -4,7 +4,25 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/colle
 
 পর্যবেক্ষণ পরিধি, লাইভ আপডেট, পুনঃপরীক্ষা, সংযুক্তি, নিজস্ব কর্ম এবং ফাঁক কী নির্দেশ করে, প্রতিটি রেকর্ড অনুযায়ী।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [সংগ্রহ](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
+
+![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+
 TgWitness সংযুক্ত টেলিগ্রাম অ্যাকাউন্ট যা পর্যবেক্ষণ করে তা রেকর্ড করে। জার্নাল সেই পর্যবেক্ষণগুলো, তাদের ক্রম এবং সাথে প্রদত্ত প্রেক্ষাপট সংরক্ষণ করে। এটি অনুপস্থিত বার্তা বা অ্যাকাউন্ট সংযুক্ত থাকা থেকে অদেখা ক্রিয়াকলাপ অনুমান করে না।
+
+**On this page**
+
+- [From login to a journal](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/#from-login-to-a-journal)
+- [Observation scope: chosen chats, a folder or the whole account](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
+- [Scope and event selection](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/#scope-and-event-selection)
+- [Own actions](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/#own-actions)
+- [Investigation mode: joining teams and talking to bots](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
+- [Recheck tiers](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/#recheck-tiers)
+- [Message history and attribution](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/#message-history-and-attribution)
+- [History snapshots](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/#history-snapshots)
+- [Attachment handling](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/#attachment-handling)
+- [Pause, lock, disconnect, and restart](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/#pause-lock-disconnect-and-restart)
+- [Account isolation and verification](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/#account-isolation-and-verification)
 
 ## লগইন থেকে একটি জার্নাল পর্যন্ত
 

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/archi
 
 সংগ্রাহক, প্যানেল, জার্নাল, ওয়ার্কার্স এবং উইটনেসের উপাদানসমূহ এবং কীভাবে ডেটা তাদের মধ্যে স্থানান্তরিত হয়।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+
 একটি পাইথন প্রসেস FastAPI প্যানেল এবং যেকোনো সংখ্যক বিচ্ছিন্ন ওয়ার্কস্পেস হোস্ট করে, প্রতিটি একটি Telethon ব্যবহারকারী-অ্যাকাউন্ট ক্লায়েন্টসহ। SQLite একটি শুধুমাত্র সংযোজনযোগ্য স্বাক্ষরিত ইভেন্ট জার্নাল এবং পরিবর্তনযোগ্য অপারেশনাল সেটিংস ধারণ করে। একটি এনক্রিপ্ট করা ভল্টে API ক্রেডেনশিয়াল, StringSession, এবং স্বাক্ষর কী সংরক্ষিত থাকে। ফ্রন্টএন্ডটি হল সাধারণভাবে বান্ডেল করা HTML/CSS/JavaScript: কোনো Node বিল্ড, CDN, বা রানিটাইম ফ্রন্টএন্ড ডাউনলোডের প্রয়োজন নেই।
 
 Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.

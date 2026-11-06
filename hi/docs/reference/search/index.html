@@ -32,10 +32,26 @@
 <nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../../">होम</a> <span aria-hidden="true">/</span> <a href="../../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <a href="../">संदर्भ</a> <span aria-hidden="true">/</span> <span aria-current="page">पूर्ण-पाठ खोज</span></nav>
 <p class="verification-shortcut"><a href="../verification/">क्या परीक्षण किया गया है →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / संग्रह और एकीकरण</p><h1>पूर्ण-पाठ खोज</h1><p class="guide-outcome">हस्ताक्षरित जर्नल से जुड़े सूचकांक के साथ, शब्द रूपों, सटीक वाक्यांशों, डोमेनों और @usernames के आधार पर सहेजे गए संदेश खोजें, सर्वोत्तम मिलान पहले।</p><div class="wiki-body"><p><a href="../analysis/">संग्रह विश्लेषण</a> · <a href="../media-analysis/">स्थानीय OCR और प्रतिलेखन</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">विकी</a></p>
+<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / संग्रह और एकीकरण</p><h1>पूर्ण-पाठ खोज</h1><p class="guide-outcome">हस्ताक्षरित जर्नल से जुड़े सूचकांक के साथ, शब्द रूपों, सटीक वाक्यांशों, डोमेनों और @usernames के आधार पर सहेजे गए संदेश खोजें, सर्वोत्तम मिलान पहले।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">टीजीविटनेस</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">दस्तावेज़ीकरण</a> · <a href="../investigation/">Investigation</a></p>
+<p><img alt="Investigation" src="../../../../assets/chapter-investigate.svg" /></p>
+<p><a href="../analysis/">संग्रह विश्लेषण</a> · <a href="../media-analysis/">स्थानीय OCR और प्रतिलेखन</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">विकी</a></p>
 <p><strong>पूर्वावलोकन।</strong> <strong>जर्नल</strong> में, खोज क्षेत्र के बगल में <strong>&#x27;सर्वश्रेष्ठ मिलान · शब्द रूप&#x27;</strong> चुनें। परिणामों को BM25 से रैंक किया जाता है और एक ही शब्द के अन्य रूपों से मेल खाता है:
 <em>перевод</em> खोज परिणामों में <em>переводом</em> और <em>переводы</em> मिलते हैं, <em>transfer</em> खोज परिणामों में <em>transfers</em> मिलते हैं, एक चीनी वाक्यांश बिना रिक्त स्थान के भी मिल जाता है। <strong>&#x27;नवीनतम पहले · सटीक पाठ</strong>&#x27; पूरे रिकॉर्ड पर पिछली उप-स्ट्रिंग खोज को बनाए रखता है।</p>
 <p>इंडेक्स व्युत्पन्न डेटा है। इसे हस्ताक्षरित जर्नल से फिर से बनाया जाता है, यह स्वयं कभी हस्ताक्षरित नहीं होता है और कभी निर्यात में शामिल नहीं होता है। मूल रिकॉर्ड नहीं बदलते हैं।</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#search-syntax">Search syntax</a></li>
+<li><a href="#languages">Languages</a></li>
+<li><a href="#where-the-index-lives">Where the index lives</a></li>
+<li><a href="#results-and-the-signed-journal">Results and the signed journal</a></li>
+<li><a href="#recognized-text">Recognized text</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#ask-the-archive-and-mcp">Ask the archive and MCP</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#benchmark">Benchmark</a></li>
+</ul>
+</details>
 <h2 id="search-syntax">खोज सिंटैक्स<a class="anchor" href="#search-syntax" aria-label="इस अनुभाग का लिंक">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

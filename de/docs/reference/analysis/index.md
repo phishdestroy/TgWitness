@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/analy
 
 Durchsuchen Sie gespeicherte Nachrichten, überprüfen Sie KI-Eingaben und erstellen Sie Analyseberichte mit Quellenangaben.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Anleitung zum Arbeitsablauf](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Verwenden Sie **das Protokoll** für die lokale Suche ohne KI; [die Volltextsuche](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/) (Vorschau) erkennt Wortformen, Phrasen, Domains und @Benutzernamen. Für **„Ask the archive**“ müssen Sie zunächst einen Anbieter unter **„Integrationen“** aktivieren und konfigurieren. Über die Arbeitsbereichsauswahl wählen Sie das Konto aus; über das Formular wählen Sie Chats und den Beobachtungszeitraum aus. Die Abfrage läuft lokal. Eine exakte Phrase oder Domain grenzt die Suche ein; eine Nachrichten-ID fordert gespeicherte Versionen an. Überprüfen Sie die Auszüge und öffnen Sie deren Protokoll-Einträge oder den Kontext. Es gibt keine Vektordatenbank und keine automatischen Telegram-Aktionen.

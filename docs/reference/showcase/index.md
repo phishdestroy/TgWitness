@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/showcase
 
 Publish saved messages of selected public channels and signed snapshots through expiring, revocable links.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **Access → Public showcase** creates a separate, read-only page using the existing access-token system. It reads the installation's saved observations. It does not start a collector, sign in to Telegram or acquire a channel for a visitor.
 
 ## Publish a page

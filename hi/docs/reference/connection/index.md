@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/conne
 
 प्रमाणीकरण, स्वचालित प्रॉक्सी पूल, आईपी मोड, फॉलबैक नीति, बाहरी अनुरोध और गुप्त भंडारण।
 
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 यह दस्तावेज़ TgWitness 0.8.0 के व्यवहार और इसकी सीमाओं का वर्णन करता है। प्रमाणीकरण, स्रोत पहुँच, नेटवर्क कनेक्टिविटी और कैप्चर की पूर्णता अलग-अलग स्थितियाँ हैं। साइन-इन चरणों, फ़ाइल स्वरूपों और एकाधिक खातों के लिए, [खातों और सत्र स्वरूपों](https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/) से शुरू करें। इवेंट नीतियों और पुनरारंभ व्यवहार के लिए, देखें [कि संग्रहण कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/)।
 
 ## मार्गदर्शित कनेक्शन सेटअप
@@ -117,7 +121,21 @@ MTProxy केवल टेलीग्राम ट्रैफ़िक ले
 
 ऑपरेटर-प्रबंधित निजी सेवाओं के लिए, मौजूदा सर्वर वातावरण सेटिंग `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` निजी गंतव्यों की अनुमति देती है और प्रॉक्सी-साइड होस्टनेम समाधान को बनाए रखती है। इसे पैनल से सक्षम नहीं किया जा सकता है। केवल-सार्वजनिक मोड सार्वजनिक रिज़ॉल्वर से पूछताछ करने से पहले `.onion` गंतव्यों को अस्वीकार कर देता है; टोर अनियन सेवाओं के लिए उस स्पष्ट निजी-गंतव्य सेटिंग और एक उपयुक्त प्रॉक्सी की आवश्यकता होती है। यह DNS व्यवहार बाहरी HTTP संचालन पर लागू होता है, न कि टेलीग्राम के ट्रांसपोर्ट पर। क्लाउडफ्लेयर [JSON DNS एंडपॉइंट](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) को दस्तावेजीकृत करता है।
 
-****स्वचालित पूल पैरामीटर**** **पैरामीटर → स्वचालित MTProxy** के अंतर्गत, विफलता सीमा, कूलडाउन, नियोजित रोटेशन, प्रॉक्सी साझाकरण और अनुमत फॉलबैक विलंब को कॉन्फ़िगर करें। | नियंत्रण | डिफ़ॉल्ट | | --- | --- | | प्रतिस्थापन से पहले डिस्कनेक्ट | 10 मिनट के भीतर 3 | | प्रति कनेक्शन प्रयास पर आजमाई गई प्रॉक्सी | 3 | | विफलता के बाद पहला / अधिकतम विश्राम | 10 मिनट / 6 घंटे | | नियोजित रोटेशन | अक्षम; विफलता पर चालू करें | | प्रति प्रॉक्सी खाते | 0: अलग प्रविष्टियों को प्राथमिकता दें, आवश्यकता पड़ने पर साझा करें। एक विशिष्ट प्रविष्टि की प्रतीक्षा के लिए 1 सेट करें। | | अनुमत डायरेक्ट फॉलबैक से पहले की देरी | 10 मिनट; पता छिपाने पर भी डायरेक्ट से इनकार करता है | | फ़ीड रिफ़्रेश / ट्रांसपोर्ट चेक्स | 60 / 10 मिनट; मुख्य वर्कस्पेस मान साझा पूल पर लागू होते हैं | अलग-अलग प्रॉक्सी अलग-अलग एग्जिट एड्रेस की गारंटी नहीं देतीं। ये सेटिंग्स टेलीग्राम की सीमाओं को ओवरराइड नहीं करतीं या गुमनामी साबित नहीं करतीं।
+****स्वचालित पूल पैरामीटर****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| नियंत्रण | डिफ़ॉल्ट |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 सार्वजनिक सूची को अपने ऑपरेटर कैटलॉग से बदलने के लिए, नीचे ओवरराइड कॉन्फ़िगर करें। यह बाहरी सदस्यताएँ पूरी तरह से अक्षम कर देता है, जिसमें तब भी शामिल है जब इसका `proxies` ऐरे खाली हो।
 

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/acces
 
 اکاؤنٹس اور چیٹس کے لیے محدود رسائی فراہم کریں، اجازت نامے منتخب کریں، سیشنز اور آئی پی پتے محدود کریں، اور رسائی واپس لیں۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 ایک جائزہ نگار کو ایک چیٹ تک رسائی دیں، ایک تجزیہ کار کو کیس برآمد کرنے کی اجازت دیں، یا ایک آپریٹر کو منتخب اکاؤنٹس پر کنٹرول دیں۔ ہر شخص کو اپنا ٹوکن دیا جاتا ہے۔ مرکزی پینل کا ٹوکن منتظم کے پاس رہتا ہے۔
 
 [اکاؤنٹ کی ترتیب](https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/) · [کنیکشن کے راستے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/) · [سیکیورٹی ماڈل](https://phishdestroy.github.io/TgWitness/ur/docs/reference/security/)
@@ -104,4 +108,8 @@ API ہر کلائنٹ IP پر فی منٹ 600 درخواستیں قبول کرت
 
 رسائی جاری کرنا، تبدیل کرنا اور منسوخ کرنا، اور سیشن شروع یا ختم کرنا بھی دستخط شدہ `access.*` جرنل ریکارڈز بناتا ہے۔ ان ریکارڈز میں ٹوکن شامل نہیں کیے جاتے۔ جاری کردہ ٹوکن اور سیشن کی اسناد انکرپٹڈ والٹ میں ہیشز کے طور پر محفوظ رکھی جاتی ہیں۔
 
-****اہم منتظم اور اعتماد کی حد**** مین پینل ٹوکن بلا روک ٹوک رہتا ہے۔ اس کے ساتھ براؤزر سائن ان کرنے سے ایسے سیشنز بنتی ہیں جو منتظم کی ترتیب دی گئی سیشن حدود کے تابع ہیں۔ جو اسکرپٹس مین ٹوکن براہِ راست بھیجتی ہیں وہ مکمل رسائی برقرار رکھتی ہیں اور انہیں براؤزر سیشنز میں شمار نہیں کیا جاتا۔ یہ ایک تنصیب میں ایپلیکیشن کی سطح پر رسائی کا کنٹرول ہے۔ تمام ورک اسپیسز سرور کے عمل کو شیئر کرتے ہیں؛ یہ ہوسٹ کے منتظم سے علیحدگی نہیں ہے۔ مرکزی ٹوکن، ٹیلیگرام سیشنز، دستخطی کلیدیں اور ڈیٹا ڈائریکٹری کو نجی رکھیں۔ ایک وِٹنس ٹوکن ایک علیحدہ چیک پوائنٹ/صحت کی تصدیق نامہ ہے، نہ کہ پینل کا رسائی ٹوکن۔
+****اہم منتظم اور اعتماد کی حد****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

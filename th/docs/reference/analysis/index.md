@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/analy
 
 ค้นหาข้อความที่บันทึกไว้ ตรวจสอบข้อมูลที่ AI ให้มา และเก็บรายงานวิเคราะห์พร้อมแหล่งอ้างอิง
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [คู่มือขั้นตอนการทำงาน](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 ใช้ **Journal** เพื่อค้นหาในท้องถิ่นโดยไม่ใช้ AI; [การค้นหาข้อความเต็ม](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/) (เวอร์ชันทดลอง) จะจับคู่รูปแบบคำ วลี โดเมน และ @usernames สำหรับ **Ask the archive** ให้เปิดใช้งาน และกำหนดค่าผู้ให้บริการใน **Integrations** ก่อน ตัวเลือกพื้นที่ทำงานจะเลือก บัญชี; แบบฟอร์มจะเลือกการสนทนาและช่วงเวลาการสังเกต การค้นหาทำงาน ในเครื่องท้องถิ่น การใช้วลีหรือโดเมนที่ตรงกันจะจำกัดผลการค้นหา; การใช้ ID ข้อความจะขอเวอร์ชันที่บันทึกไว้ ตรวจสอบส่วนที่คัดลอกและเปิดบันทึกในสมุดบันทึกหรือบริบทของข้อความ ไม่มีฐานข้อมูลเวกเตอร์หรือการดำเนินการอัตโนมัติของ Telegram

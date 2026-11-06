@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/media-an
 
 Recognize captured images and audio with a local worker; keep derived text linked to its source file.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Open a `media.saved` journal record, choose **Recognize attachment**, then select OCR or transcription under **Ask the archive**. Processing is manual and local. There is no cloud media mode or automatic upload. Original attachment bytes and `media_sha256` remain unchanged; recognized text is explicitly marked as machine recognition and stored separately with the source hash, engine/model version, language, parameters and completion time. Transcripts retain returned timestamps.

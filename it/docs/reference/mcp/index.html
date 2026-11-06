@@ -32,12 +32,24 @@
 <nav class="breadcrumbs" aria-label="Guide"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentazione</a> <span aria-hidden="true">/</span> <a href="../">Riferimento</a> <span aria-hidden="true">/</span> <span aria-current="page">MCP di sola lettura</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Cosa è stato testato →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cerca nella documentazione</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Si provi con «proxy», «catena di hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Ricerca chiara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Digiti una parola per effettuare una ricerca nelle guide e nella documentazione di riferimento. La ricerca rimane nel Suo browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Riferimento / Archivio e integrazioni</p><h1>MCP di sola lettura</h1><p class="guide-outcome">Collega un client MCP agli spazi di lavoro e alle chat selezionati con un accesso a scadenza e revocabile.</p><div class="wiki-body"><p>Collegare un client di analisi a spazi di lavoro e chat selezionati. TgWitness fornisce un servizio
+<article class="guide-content"><p class="language-notice">Alcune parti di questa pagina sono ancora in inglese: il testo originale in inglese è stato modificato dopo la traduzione.</p><p class="eyebrow">Riferimento / Archivio e integrazioni</p><h1>MCP di sola lettura</h1><p class="guide-outcome">Collega un client MCP agli spazi di lavoro e alle chat selezionati con un accesso a scadenza e revocabile.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentazione</a> · <a href="../cli/">Archive integrations</a></p>
+<p><img alt="Archive integrations" src="../../../../assets/chapter-integrations.svg" /></p>
+<p>Collegare un client di analisi a spazi di lavoro e chat selezionati. TgWitness fornisce un servizio
 <strong>HTTP Streamable all&#x27;indirizzo <code>/mcp</code> nel processo del pannello</strong>. Ogni connessione dispone di un proprio
 token, una scadenza e strumenti consentiti. MCP non può inviare messaggi Telegram, modificare
 le impostazioni né alterare il registro firmato. Le stesse connessioni funzionano anche dalla
 <a href="../cli/">riga di comando</a>.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">Guida al flusso di lavoro</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#install-and-check">Install and check</a></li>
+<li><a href="#issue-a-connection">Issue a connection</a></li>
+<li><a href="#connect-your-client">Connect your client</a></li>
+<li><a href="#cloudflare-tunnel">Cloudflare Tunnel</a></li>
+<li><a href="#tools-and-boundaries">Tools and boundaries</a></li>
+</ul>
+</details>
 <h2 id="install-and-check">Installa e verifica<a class="anchor" href="#install-and-check" aria-label="Collegamento a questa sezione">#</a></h2>
 <p>Usa l'ambiente Python che esegue il pannello. Da un checkout dei sorgenti:</p>
 <pre><code class="language-powershell"># Windows PowerShell

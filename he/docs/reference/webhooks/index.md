@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/webho
 
 שליחת אירועים מוגדרים למקבלים ב-HTTPS עם חתימות HMAC, ניסיונות חוזרים וסטטוס מסירה.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [מדריך לתהליך העבודה](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ויקי](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 פתח את **'אינטגרציות' → 'webhooks יוצאים'** בסביבת העבודה הנבחרת. הוסף מקלט HTTPS, בחר אירועי איסוף/מדיה/ייצוא, ובאופן אופציונלי בחר צ'אטים עבור תצפיות ושינויים חדשים. טקסט ההודעה כבוי כברירת מחדל. הפעלת קטעים נבחרים מוסיפה לכל היותר 1,000 תווים לאירועי שינוי הודעות; שדות Telegram גולמיים ו פרטי הזדהות לעולם אינם נשלחים.

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/accou
 
 قم بتسجيل الدخول عبر الهاتف أو رمز الاستجابة السريعة (QR) أو مفتاح المصادقة، واستورد جلسات Telethon أو Pyrogram أو Telegram Desktop، وقم بتشغيل عدة حسابات.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 تقوم TgWitness بتسجيل الدخول كحساب **مستخدم Telegram** (وليس كروبوت) عبر بروتوكول MTProto، باستخدام Telethon. ويوجد كل حساب في **مساحة عمل** خاصة به (تُسمى *«مساحة العمل*» في واجهة برمجة التطبيقات وأدوات سطر الأوامر) مع جلسة عمل ومصادر وسجل ومفتاح توقيع خاص به.
 
 ملفات الجلسة وسلاسل الجلسة ومفاتيح المصادقة هي **تفويضات للحساب**: فمن يمتلك أيًا منها يمكنه التصرف بصفته صاحب ذلك الحساب. ولا تحتوي هذه العناصر على سجل الرسائل.

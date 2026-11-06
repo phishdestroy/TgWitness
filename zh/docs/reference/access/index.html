@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">访问与权限</span></nav>
 <p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">参考 / 设置</p><h1>访问与权限</h1><p class="guide-outcome">设置账户和聊天室的访问权限范围，选择权限类型，限制会话和 IP 地址，并撤销访问权限。</p><div class="wiki-body"><p>可授予审阅者访问某个聊天记录的权限，授予分析师导出案件的权限，或授予
+<article class="guide-content"><p class="language-notice">本页面部分内容仍为英文：英文原文在翻译后发生了变更。</p><p class="eyebrow">参考 / 设置</p><h1>访问与权限</h1><p class="guide-outcome">设置账户和聊天室的访问权限范围，选择权限类型，限制会话和 IP 地址，并撤销访问权限。</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">文档</a> · <a href="../quickstart/">Getting started</a></p>
+<p><img alt="Getting started" src="../../../../assets/chapter-start.svg" /></p>
+<p>可授予审阅者访问某个聊天记录的权限，授予分析师导出案件的权限，或授予
 操作员对选定账户的控制权。每个人都会获得专属令牌。主
 控制面板的令牌由管理员持有。</p>
 <p><a href="../accounts/">账户设置</a> · <a href="../connection/">连接路径</a> · <a href="../security/">安全模型</a></p>
@@ -259,16 +261,13 @@ IP字面量、URL凭据和标记机密。本地服务日志和
 已发放的令牌和会话凭据将作为哈希值保存在加密保险库中。</p>
 <details>
 <summary><strong>主要管理员与信任边界</strong></summary>
-
-主面板令牌不受限制。使用该令牌通过浏览器登录将创建会话，
-这些会话受管理员配置的会话限制约束。直接发送
-主令牌的脚本仍保留完全访问权限，且不计入浏览器会话。
-
-这是单个安装环境中的应用层访问控制。所有工作区共享
-服务器进程；这并不意味着与主机管理员隔离。请确保主
-令牌、Telegram 会话、签名密钥和数据目录的私密性。见证令牌
-是一个独立的检查点/健康凭证，并非面板访问令牌。
-
+<p>The main panel token remains unrestricted. Browser sign-ins with it create sessions
+subject to the administrator's configured session limits. Scripts sending the
+main token directly retain full access and are not counted as browser sessions.</p>
+<p>This is application-level access control in one installation. All workspaces share
+the server process; this is not isolation from the host administrator. Keep the main
+token, Telegram sessions, signing keys and data directory private. A witness token
+is a separate checkpoint/health credential, not a panel access token.</p>
 </details></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../connection/"><span>下一步</span><strong>连接、代理和数据保护 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
 </main>

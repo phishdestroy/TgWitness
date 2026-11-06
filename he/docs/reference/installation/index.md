@@ -4,7 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/insta
 
 התקן בפקודה אחת, בדוק חתימות ו-hash, עדכן והסר את ההתקנה.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [פרויקט](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [התחלה מהירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/) · [פריסה](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
+
+**On this page**
+
+- [Install with one command](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#install-with-one-command)
+- [Where everything runs](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#where-everything-runs)
+- [Full-text search settings](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#full-text-search-settings)
+- [Command-line access](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#command-line-access)
+- [Verify before running](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#verify-before-running)
+- [Update an existing installation](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#update-an-existing-installation)
+- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#remove-tgwitness)
 
 ## התקנה בפקודה אחת
 

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/analy
 
 저장된 메시지를 검색하고, AI 입력 내용을 검토하며, 출처 참조 정보가 포함된 분석 보고서를 보관할 수 있습니다.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [워크플로우 가이드](https://phishdestroy.github.io/TgWitness/docs/archive/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 AI를 사용하지 않는 로컬 검색에는 **‘저널(Journal)**’을 사용하십시오. [전체 텍스트 검색](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/)(미리 보기)은 단어 형태, 구, 도메인 및 @사용자 이름을 일치시킵니다. **‘아카이브에 질문하기**(**Ask the archive**)’를 사용하려면 먼저 **‘통합(Integrations**)’에서 제공자를 활성화하고 구성하십시오. 작업 공간 선택기를 통해 계정을 선택하고, 양식을 통해 채팅 및 관측 기간을 선택합니다. 검색은 로컬에서 실행됩니다. 정확한 구문이나 도메인을 입력하면 검색 범위가 좁아지며, 메시지 ID를 입력하면 저장된 버전을 조회할 수 있습니다. 발췌문을 검토하고 해당 저널 기록이나 맥락을 열어보세요. 벡터 데이터베이스나 텔레그램 자동 실행 기능은 제공되지 않습니다.

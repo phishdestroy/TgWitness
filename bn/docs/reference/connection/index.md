@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/conne
 
 প্রমাণীকরণ, স্বয়ংক্রিয় প্রক্সি পুল, আইপি মোড, ফ্যালব্যাক নীতি, বাহ্যিক অনুরোধ এবং গোপন সঞ্চয়।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 এই নথিটি TgWitness 0.8.0 এর কার্যপ্রণালী এবং এর সীমাবদ্ধতা বর্ণনা করে। প্রমাণীকরণ, উৎস অ্যাক্সেস, নেটওয়ার্ক সংযোগ এবং ক্যাপচার পরিপূর্ণতা পৃথক অবস্থা। সাইন-ইন ধাপ, ফাইল ফরম্যাট এবং একাধিক অ্যাকাউন্টের জন্য, [অ্যাকাউন্ট এবং সেশন ফরম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/) দিয়ে শুরু করুন। ইভেন্ট নীতি এবং পুনরায় শুরু করার কার্যপ্রণালীর জন্য, [সংগ্রহ কীভাবে কাজ করে তা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/) দেখুন।
 
 ## নির্দেশিত সংযোগ সেটআপ
@@ -117,7 +121,21 @@ MTProxy শুধুমাত্র টেলিগ্রাম ট্র্য�
 
 অপারেটর-পরিচালিত ব্যক্তিগত সেবার জন্য, বিদ্যমান সার্ভার পরিবেশ সেটিং `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` ব্যক্তিগত গন্তব্য অনুমোদন করে এবং প্রক্সি-সাইড হোস্টনেম রেজোলিউশন বজায় রাখে। এটি প্যানেল থেকে সক্ষম করা যায় না। পাবলিক-অনলি মোড পাবলিক রিজলভারকে জিজ্ঞাসা করার আগে `.onion` গন্তব্য প্রত্যাখ্যান করে; Tor অনিয়ন সার্ভিসের জন্য সেই স্পষ্ট ব্যক্তিগত-গন্তব্য সেটিং এবং একটি উপযুক্ত প্রক্সি প্রয়োজন। এই DNS আচরণটি বাহ্যিক HTTP অপারেশনের ক্ষেত্রে প্রযোজ্য, টেলিগ্রামের ট্রান্সপোর্টে নয়। Cloudflare [JSON DNS এন্ড](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/)পয়[েন্ট](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/)টি ডকুমেন্ট করে।
 
-****স্বয়ংক্রিয় পুল পরামিতিসমূহ**** **প্যারামিটার → স্বয়ংক্রিয় MTProxy**-এর অধীনে, ব্যর্থতার থ্রেশহোল্ড, কুলডাউন, পরিকল্পিত রোটেশন, প্রক্সি শেয়ারিং এবং অনুমোদিত ফলব্যাক বিলম্ব কনফিগার করুন। | নিয়ন্ত্রণ | ডিফল্ট | | --- | --- | | প্রতিস্থাপনের আগে বিচ্ছিন্নতা | ১০ মিনিটের মধ্যে ৩ বার | | প্রতি সংযোগ প্রচেষ্টায় প্রক্সি চেষ্টা | ৩ | | ব্যর্থতার পর প্রথম / সর্বোচ্চ বিশ্রাম | ১০ মিনিট / ৬ ঘণ্টা | | পরিকল্পিত রোটেশন | অক্ষম; ব্যর্থ হলে চালু করুন | | প্রতি প্রক্সিতে অ্যাকাউন্ট | 0: পৃথক এন্ট্রি পছন্দ করুন, প্রয়োজনে শেয়ার করুন। একচেটিয়া এন্ট্রির জন্য অপেক্ষা করতে 1 সেট করুন। | | অনুমোদিত ডাইরেক্ট ফলব্যাকের আগে বিলম্ব | ১০ মিনিট; ঠিকানা লুকানো থাকা সত্ত্বেও ডাইরেক্ট প্রত্যাখ্যান করে | | ফিড রিফ্রেশ / ট্রান্সপোর্ট চেক | ৬০ / ১০ মিনিট; প্রধান ওয়ার্কস্পেস মানগুলি শেয়ারকৃত পুলে প্রযোজ্য | বিভিন্ন প্রক্সি ভিন্ন এক্সিট ঠিকানার নিশ্চয়তা দেয় না। এই সেটিংস টেলিগ্রামের সীমা অতিক্রম করে না বা অজ্ঞাতপরিচিতি প্রমাণ করে না।
+****স্বয়ংক্রিয় পুল পরামিতিসমূহ****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| নিয়ন্ত্রণ | ডিফল্ট |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 পাবলিক তালিকা আপনার নিজস্ব অপারেটর ক্যাটালগ দিয়ে প্রতিস্থাপন করতে, নিচের ওভাররাইড কনফিগার করুন। এটি বাহ্যিক সাবস্ক্রিপশন সম্পূর্ণরূপে নিষ্ক্রিয় করে, এমনকি যখন এর `proxies` অ্যারে খালি থাকে তখনও।
 

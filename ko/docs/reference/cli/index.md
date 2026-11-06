@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/
 
 스크립트 및 에이전트를 통해 메시지를 검색하고, 문맥을 확인하며, 활동 횟수를 집계하고, 저장된 메시지를 내보낼 수 있으며, --json 출력, 안정적인 종료 코드 및 범위 지정된 읽기 전용 토큰을 지원합니다.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [읽기 전용 MCP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/) · [전체 텍스트 검색](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **미리 보기.** `tgwitness search`, `context`, `messages`, `stats` 그리고 `export` 스크립트 및 AI 에이전트를 위해 저장된 관측 내용을 읽을 수 있습니다. 이 도구들은 텔레그램으로 아무것도 전송하거나, 설정을 변경하거나, 서명된 일지를 수정할 수 없습니다.

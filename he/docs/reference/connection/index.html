@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">חיבור, פרוקסי והגנה על נתונים</span></nav>
 <p class="verification-shortcut"><a href="../verification/">מה נבדק ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">הפניה / הגדרה</p><h1>חיבור, פרוקסי והגנה על נתונים</h1><p class="guide-outcome">אימות, מאגרי פרוקסי אוטומטיים, מצבי IP, מדיניות גיבוי, בקשות חיצוניות ואחסון סודי.</p><div class="wiki-body"><p>מסמך זה מתאר את התנהגות TgWitness 0.8.0 ואת מגבלותיו. אימות,
+<article class="guide-content"><p class="language-notice">חלקים מדף זה עדיין באנגלית: הטקסט המקורי באנגלית שונה לאחר תרגומו.</p><p class="eyebrow">הפניה / הגדרה</p><h1>חיבור, פרוקסי והגנה על נתונים</h1><p class="guide-outcome">אימות, מאגרי פרוקסי אוטומטיים, מצבי IP, מדיניות גיבוי, בקשות חיצוניות ואחסון סודי.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">תיעוד</a> · <a href="../deployment/">Deployment and recovery</a></p>
+<p><img alt="Deployment &amp; recovery" src="../../../../assets/chapter-operate.svg" /></p>
+<p>מסמך זה מתאר את התנהגות TgWitness 0.8.0 ואת מגבלותיו. אימות,
 גישה למקור, קישוריות רשת ושלמות הלכידה הם מצבים נפרדים.
 לפרטים על שלבי הכניסה, פורמטי קבצים וחשבונות מרובים, התחל בסעיף &quot;
 <a href="../accounts/">חשבונות ופורמטי הפעלה</a>&quot;. לגבי מדיניות אירועים והתנהגות
@@ -341,25 +343,49 @@ MTProxy הוא פרוקסי העברה של טלגרם; SOCKS5 ו-HTTP CONNECT �
 Cloudflare מתעדת את <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/">נקודת הקצה של ה-DNS ב-JSON</a>.</p>
 <details>
 <summary><strong>פרמטרים אוטומטיים של מאגר</strong></summary>
-
-תחת **פרמטרים → אוטומטי MTProxy**, הגדר את סף הכישלון, זמן ההמתנה,
-הרוטציה המתוכננת, שיתוף הפרוקסי ועיכוב הגיבוי המותר.
-
-| בקרה | ברירת מחדל |
-| --- | --- |
-| ניתוק לפני החלפה | 3 תוך 10 דקות |
-| מספר הפרוקסי שנבדקים בכל ניסיון חיבור | 3 |
-| מנוחה ראשונה / מקסימלית לאחר כשל | 10 דקות / 6 שעות |
-| רוטציה מתוכננת | מושבתת; מופעלת במקרה של כשל |
-| חשבונות לכל פרוקסי | 0: עדיף רשומות נפרדות, שתפו בעת הצורך. הגדירו 1 כדי להמתין לרשומה בלעדית. |
-| עיכוב לפני מעבר מותר ל-Direct | 10 דקות; &quot;הסתר את הכתובת&quot; עדיין מסרב ל-Direct |
-| רענון עדכונים / בדיקות העברה | 60 / 10 דקות; ערכי סביבת העבודה הראשית חלים על המאגר המשותף |
-
-פרוקסי שונים אינם מבטיחים כתובות יציאה שונות. הגדרות אלו אינן
-עוקפות את המגבלות של Telegram ואינן מבטיחות אנונימיות.
-
+<p>Under <strong>Parameters → Automatic MTProxy</strong>, configure the failure threshold, cooldown,
+planned rotation, proxy sharing and permitted fallback delay.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>בקרה</th>
+<th>ברירת מחדל</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disconnects before replacement</td>
+<td>3 within 10 minutes</td>
+</tr>
+<tr>
+<td>Proxies tried per connection attempt</td>
+<td>3</td>
+</tr>
+<tr>
+<td>First / maximum rest after failure</td>
+<td>10 minutes / 6 hours</td>
+</tr>
+<tr>
+<td>Planned rotation</td>
+<td>Disabled; switch on failure</td>
+</tr>
+<tr>
+<td>Accounts per proxy</td>
+<td>0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry.</td>
+</tr>
+<tr>
+<td>Delay before permitted Direct fallback</td>
+<td>10 minutes; Hide the address still refuses Direct</td>
+</tr>
+<tr>
+<td>Feed refresh / transport checks</td>
+<td>60 / 10 minutes; main workspace values apply to the shared pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different proxies do not guarantee different exit addresses. These settings do not
+override Telegram limits or prove anonymity.</p>
 </details>
-
 <p>כדי להחליף את הרשימה הציבורית בקטלוג המפעילים שלך, הגדר את העקיפה שלהלן.
 פעולה זו מבטלת לחלוטין את המנויים החיצוניים, גם כאשר מערך ה-<code>proxies</code> שלו ריק.</p>
 <p>העתיקו <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">את הקטלוג הריק</a>

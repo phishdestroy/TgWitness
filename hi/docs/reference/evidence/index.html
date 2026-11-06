@@ -32,13 +32,37 @@
 <nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../../">होम</a> <span aria-hidden="true">/</span> <a href="../../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <a href="../">संदर्भ</a> <span aria-hidden="true">/</span> <span aria-current="page">साक्ष्य प्रारूप</span></nav>
 <p class="verification-shortcut"><a href="../verification/">क्या परीक्षण किया गया है →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / साक्ष्य</p><h1>साक्ष्य प्रारूप</h1><p class="guide-outcome">हस्ताक्षरित ZIP की सामग्री, रिकॉर्ड प्रकार, प्रक्रिया रसीदें, लोगों की प्रोफाइल, ऑफ-साइट प्रतियां और ऑफ़लाइन सत्यापन।</p><div class="wiki-body"><p>TgWitness हस्ताक्षरित जर्नल में खाते में दिखाई देने वाले टेलीग्राम अवलोकनों को संरक्षित करता है।
+<article class="guide-content"><p class="language-notice">इस पृष्ठ के कुछ हिस्से अभी भी अंग्रेज़ी में हैं: अंग्रेज़ी मूल अनुवाद के बाद बदल दिया गया था।</p><p class="eyebrow">संदर्भ / साक्ष्य</p><h1>साक्ष्य प्रारूप</h1><p class="guide-outcome">हस्ताक्षरित ZIP की सामग्री, रिकॉर्ड प्रकार, प्रक्रिया रसीदें, लोगों की प्रोफाइल, ऑफ-साइट प्रतियां और ऑफ़लाइन सत्यापन।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">टीजीविटनेस</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">दस्तावेज़ीकरण</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../../assets/chapter-evidence.svg" /></p>
+<p>TgWitness हस्ताक्षरित जर्नल में खाते में दिखाई देने वाले टेलीग्राम अवलोकनों को संरक्षित करता है।
 प्राप्तकर्ता एक विश्वसनीय कलेक्टर कुंजी के विरुद्ध सहेजे गए रिकॉर्ड, संलग्नक और रिपोर्टों का सत्यापन कर सकते हैं, फिर जर्नल की तुलना स्वतंत्र रूप से रखे गए चेकपॉइंट से कर सकते हैं।
 यह पृष्ठ प्रारूपों, जाँचों और हैंडओवर के लिए रखे जाने वाले सामग्री का वर्णन करता है।</p>
 <p>Recipients can start with <strong>VERIFY.cmd</strong> on Windows: it asks for the original
 ZIP and independently obtained key fingerprint, displays an explained result,
 and saves a separate verification transcript. See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md">verification launchers and
 the portable runtime</a> for setup and trust limits.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#what-is-signed">What is signed</a></li>
+<li><a href="#comparing-chat-exports">Comparing chat exports</a></li>
+<li><a href="#investigation-handoff">Investigation handoff</a></li>
+<li><a href="#handover-extract">Handover extract</a></li>
+<li><a href="#readable-reports">Readable reports</a></li>
+<li><a href="#event-canonicalization">Event canonicalization</a></li>
+<li><a href="#actor-semantics">Actor semantics</a></li>
+<li><a href="#coverage-continuity-gaps-and-unobserved-ids">Coverage: continuity, gaps and unobserved IDs</a></li>
+<li><a href="#producer">Producer</a></li>
+<li><a href="#people-profiles">People profiles</a></li>
+<li><a href="#independent-witness">Independent witness</a></li>
+<li><a href="#manifest-and-checkpoints">Manifest and checkpoints</a></li>
+<li><a href="#verification-scope">Verification scope</a></li>
+<li><a href="#attachments">Attachments</a></li>
+<li><a href="#durable-collection-and-process-receipts-02">Durable collection and process receipts (0.2)</a></li>
+<li><a href="#rfc-3161-preparation-and-response-verification-02">RFC 3161 preparation and response verification (0.2)</a></li>
+<li><a href="#optional-records-in-evidence-mode-drand-and-telegram-devices">Optional records in evidence mode: drand and Telegram devices</a></li>
+</ul>
+</details>
 <h2 id="what-is-signed">हस्ताक्षरित क्या है<a class="anchor" href="#what-is-signed" aria-label="इस अनुभाग का लिंक">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

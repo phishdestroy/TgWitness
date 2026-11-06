@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/acces
 
 设置账户和聊天室的访问权限范围，选择权限类型，限制会话和 IP 地址，并撤销访问权限。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 可授予审阅者访问某个聊天记录的权限，授予分析师导出案件的权限，或授予 操作员对选定账户的控制权。每个人都会获得专属令牌。主 控制面板的令牌由管理员持有。
 
 [账户设置](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/) · [连接路径](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/) · [安全模型](https://phishdestroy.github.io/TgWitness/zh/docs/reference/security/)
@@ -104,4 +108,8 @@ API 中的 `ws` 查询选择器必须在请求路径中标识工作区； 未知
 
 授予、更改和撤销访问权限，以及启动或结束会话，也会生成 经过签名的`access.*`日志记录。这些记录中不包含令牌。 已发放的令牌和会话凭据将作为哈希值保存在加密保险库中。
 
-****主要管理员与信任边界**** 主面板令牌不受限制。使用该令牌通过浏览器登录将创建会话， 这些会话受管理员配置的会话限制约束。直接发送 主令牌的脚本仍保留完全访问权限，且不计入浏览器会话。 这是单个安装环境中的应用层访问控制。所有工作区共享 服务器进程；这并不意味着与主机管理员隔离。请确保主 令牌、Telegram 会话、签名密钥和数据目录的私密性。见证令牌 是一个独立的检查点/健康凭证，并非面板访问令牌。
+****主要管理员与信任边界****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

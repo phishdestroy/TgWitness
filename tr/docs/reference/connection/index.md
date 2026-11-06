@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/conne
 
 Kimlik doğrulama, otomatik proxy havuzları, IP modları, yedekleme politikası, harici istekler ve gizli depolama.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 Bu belge, TgWitness 0.8.0 sürümünün davranışını ve sınırlarını açıklamaktadır. Kimlik doğrulama, kaynağa erişim, ağ bağlantısı ve yakalama eksiksizliği ayrı durumlardır. Oturum açma adımları, dosya biçimleri ve birden fazla hesap hakkında bilgi için [hesaplar ve oturum biçimleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) bölümünden başlayın. Olay ilkeleri ve yeniden başlatma davranışı hakkında bilgi için [toplama işleminin nasıl çalıştığına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/) bakın.
 
 ## Kılavuzlu bağlantı kurulumu
@@ -117,7 +121,21 @@ MTProxy, yalnızca Telegram trafiğini taşır. Zaman damgaları, bildirimler, s
 
 Operatör tarafından yönetilen özel hizmetler için, mevcut sunucu ortamı ayarı `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1`, özel hedefleri izin verir ve proxy tarafında ana bilgisayar adı çözümlemesini korur. Bu ayar panelden etkinleştirilemez. Yalnızca genel mod, genel çözümleyicisine sorgu göndermeden önce `.onion` hedeflerini reddeder; Tor onion hizmetleri, bu açık özel hedef ayarını ve uygun bir proxy gerektirir. Bu DNS davranışı, Telegram'ın aktarım protokolü için değil, harici HTTP işlemleri için geçerlidir. Cloudflare, [JSON DNS uç](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/) noktasını belgelemektedir.
 
-****Otomatik havuz parametreleri**** **Parametreler → Otomatik MTProxy** altında, hata eşiğini, bekleme süresini, planlı rotasyonu, proxy paylaşımını ve izin verilen yedekleme gecikmesini yapılandırın. | Kontrol | Varsayılan | | --- | --- | | Değiştirme öncesi bağlantı kesme | 10 dakika içinde 3 kez | | Bağlantı denemesi başına denenecek proxy sayısı | 3 | | Hata sonrası ilk / maksimum bekleme süresi | 10 dakika / 6 saat | | Planlı rotasyon | Devre dışı; hata durumunda etkinleştir | | Proxy başına hesap sayısı | 0: ayrı girişleri tercih edin, gerektiğinde paylaşın. Özel bir girişi beklemek için 1'i ayarlayın. | | Doğrudan yedeklemeye izin verilmeden önceki gecikme | 10 dakika; adres hâlâ Doğrudan'ı reddediyorsa gizle | | Besleme yenileme / aktarım kontrolleri | 60 / 10 dakika; ana çalışma alanı değerleri paylaşılan havuz için geçerlidir | Farklı proxy'ler, farklı çıkış adreslerini garanti etmez. Bu ayarlar, Telegram sınırlarını geçersiz kılmaz veya anonimliği garanti etmez.
+****Otomatik havuz parametreleri****
+
+Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+
+| Kontrol | Varsayılan |
+| --- | --- |
+| Disconnects before replacement | 3 within 10 minutes |
+| Proxies tried per connection attempt | 3 |
+| First / maximum rest after failure | 10 minutes / 6 hours |
+| Planned rotation | Disabled; switch on failure |
+| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
+| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
+| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+
+Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
 
 Genel listeyi kendi operatör kataloğunuzla değiştirmek için aşağıdaki geçersiz kılma ayarını yapılandırın. Bu ayar, `proxies` dizisi boş olduğunda da dahil olmak üzere harici abonelikleri tamamen devre dışı bırakır.
 

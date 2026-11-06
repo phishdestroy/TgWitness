@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/analy
 
 Saqlangan xabarlarni qidiring, sun'iy intellekt kirimlarini ko'rib chiqing va manba havolalari bilan analitik hisobotlarni saqlang.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [Ish jarayoni bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 AI ishtirokisiz mahalliy qidiruv uchun **Journal-**dan foydalaning; [to'liq matnli qidiruv](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/) (oldindan ko'rish) so'z shakllari, iboralar, domenlar va @foydalanuvchi nomlarini mos keltiradi. **Ask arxivi** uchun avvalo **Integrations** bo'limida provayderni yoqib, sozlang. Ish maydoni tanlovchisi hisobni, forma esa suhbatlar va kuzatuv davrini tanlaydi. Ma'lumotlarni tiklash mahalliy tarzda ishlaydi. Aniq ibora yoki domen qidiruvni toraytiradi; xabar ID saqlangan versiyalarni so'raydi. Parçalarni ko'rib chiqing va ularning jurnal yozuvlari yoki kontekstini oching. Vektor ma'lumotlar bazasi yoki avtomatik Telegram harakati mavjud emas.

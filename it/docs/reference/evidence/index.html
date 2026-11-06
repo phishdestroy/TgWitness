@@ -32,7 +32,9 @@
 <nav class="breadcrumbs" aria-label="Guide"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentazione</a> <span aria-hidden="true">/</span> <a href="../">Riferimento</a> <span aria-hidden="true">/</span> <span aria-current="page">Formato delle prove</span></nav>
 <p class="verification-shortcut"><a href="../verification/">Cosa è stato testato →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cerca nella documentazione</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Si provi con «proxy», «catena di hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Ricerca chiara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Digiti una parola per effettuare una ricerca nelle guide e nella documentazione di riferimento. La ricerca rimane nel Suo browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="language-notice">Alcune parti di questa pagina sono ancora in inglese: il testo originale in inglese è stato modificato dopo la traduzione.</p><p class="eyebrow">Riferimento / Prove</p><h1>Formato delle prove</h1><p class="guide-outcome">Contenuto del file ZIP firmato, tipi di registrazioni, ricevute di elaborazione, profili degli utenti, copie esterne e verifica offline.</p><div class="wiki-body"><p>TgWitness conserva le osservazioni di Telegram visibili sull’account in un registro firmato.
+<article class="guide-content"><p class="language-notice">Alcune parti di questa pagina sono ancora in inglese: il testo originale in inglese è stato modificato dopo la traduzione.</p><p class="eyebrow">Riferimento / Prove</p><h1>Formato delle prove</h1><p class="guide-outcome">Contenuto del file ZIP firmato, tipi di registrazioni, ricevute di elaborazione, profili degli utenti, copie esterne e verifica offline.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentazione</a></p>
+<p><img alt="Evidence &amp; verification" src="../../../../assets/chapter-evidence.svg" /></p>
+<p>TgWitness conserva le osservazioni di Telegram visibili sull’account in un registro firmato.
 I destinatari possono verificare i record salvati, gli allegati e i report confrontandoli con una
 chiave di raccolta attendibile, quindi confrontare il registro con un checkpoint conservato in modo indipendente.
 Questa pagina descrive i formati, i controlli e il materiale da conservare per il passaggio di consegne.</p>
@@ -40,6 +42,28 @@ Questa pagina descrive i formati, i controlli e il materiale da conservare per i
 ZIP and independently obtained key fingerprint, displays an explained result,
 and saves a separate verification transcript. See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md">verification launchers and
 the portable runtime</a> for setup and trust limits.</p>
+<details>
+<summary>On this page</summary>
+<ul>
+<li><a href="#what-is-signed">What is signed</a></li>
+<li><a href="#comparing-chat-exports">Comparing chat exports</a></li>
+<li><a href="#investigation-handoff">Investigation handoff</a></li>
+<li><a href="#handover-extract">Handover extract</a></li>
+<li><a href="#readable-reports">Readable reports</a></li>
+<li><a href="#event-canonicalization">Event canonicalization</a></li>
+<li><a href="#actor-semantics">Actor semantics</a></li>
+<li><a href="#coverage-continuity-gaps-and-unobserved-ids">Coverage: continuity, gaps and unobserved IDs</a></li>
+<li><a href="#producer">Producer</a></li>
+<li><a href="#people-profiles">People profiles</a></li>
+<li><a href="#independent-witness">Independent witness</a></li>
+<li><a href="#manifest-and-checkpoints">Manifest and checkpoints</a></li>
+<li><a href="#verification-scope">Verification scope</a></li>
+<li><a href="#attachments">Attachments</a></li>
+<li><a href="#durable-collection-and-process-receipts-02">Durable collection and process receipts (0.2)</a></li>
+<li><a href="#rfc-3161-preparation-and-response-verification-02">RFC 3161 preparation and response verification (0.2)</a></li>
+<li><a href="#optional-records-in-evidence-mode-drand-and-telegram-devices">Optional records in evidence mode: drand and Telegram devices</a></li>
+</ul>
+</details>
 <h2 id="what-is-signed">Che cosa viene firmato<a class="anchor" href="#what-is-signed" aria-label="Collegamento a questa sezione">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

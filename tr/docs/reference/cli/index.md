@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/
 
 Komut dosyaları ve ajanlardan arama yapın, bağlamı okuyun, etkinlikleri sayın ve kaydedilmiş mesajları dışa aktarın; --json çıktısı, kararlı çıkış kodları ve kapsamlı salt okunur belirteçler ile.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [Salt okunur MCP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/) · [Tam metin arama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Önizleme.** `tgwitness search`, `context`, `messages`, `stats` ve `export` komut dosyaları ve yapay zeka ajanları için kaydedilmiş gözlemleri okuyun. Bu araçlar, Telegram'a hiçbir şey gönderemez, ayarları değiştiremez veya imzalı günlüğü düzenleyemez.

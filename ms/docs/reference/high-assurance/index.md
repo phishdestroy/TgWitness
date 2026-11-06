@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-
 
 Pelayan 24/7 yang disegel di Hetzner atau Phala Cloud, Gateway DNS dan pemeriksaan yang boleh diulang oleh pihak ketiga.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
 
 Penggunaan biasa secara tempatan dan Docker tidak berubah. Tiada apa yang berjalan di sini melainkan anda menyebarkan dengan `python -m tgwitness.cloud`, dan pengumpul hanya membaca hosnya apabila penyebaran menetapkan `TGWITNESS_ASSURANCE`.
@@ -20,6 +24,23 @@ Diyagram aliran · Pengendali → Pelayan, firewall tanpa peraturan masuk (API p
 6. Pemverifikasi, token baca sahaja → Alamat penyambung terowong dan kemasukan
 7. Pemverifikasi, token baca sahaja → Pernyataan /api/jaminan yang ditandatangani
 8. Pemverifikasi, token baca sahaja → ZIP Bukti
+
+**On this page**
+
+- [What a verifier can check](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [Providers](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#providers)
+- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [Before you start](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#before-you-start)
+- [From the panel](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#from-the-panel)
+- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [Deploy](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#deploy)
+- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [Remove a deployment](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#remove-a-deployment)
+- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#any-server-self-attested)
+- [Verify](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#verify)
+- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#report-for-evidence-handover)
+- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## Apa yang boleh disemak oleh pengesah
 

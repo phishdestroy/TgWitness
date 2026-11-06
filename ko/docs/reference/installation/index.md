@@ -4,7 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/insta
 
 단 한 줄의 명령어로 설치하고, 서명과 해시를 확인하며, 업데이트 및 제거할 수 있습니다.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 [프로젝트](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [빠른 시작](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/) · [배포](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
+
+**On this page**
+
+- [Install with one command](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#install-with-one-command)
+- [Where everything runs](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#where-everything-runs)
+- [Full-text search settings](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#full-text-search-settings)
+- [Command-line access](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#command-line-access)
+- [Verify before running](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#verify-before-running)
+- [Update an existing installation](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#update-an-existing-installation)
+- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#remove-tgwitness)
 
 ## 단 한 줄의 명령어로 설치하기
 

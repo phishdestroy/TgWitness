@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/showc
 
 منتخب عوامی چینلز کے محفوظ شدہ پیغامات اور دستخط شدہ سنپ شاٹس کو ختم ہونے والے، منسوخ کیے جانے والے لنکس کے ذریعے شائع کریں۔
 
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/)
+
+![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+
 **رسائی → عوامی نمائش** موجودہ access-token سسٹم استعمال کرتے ہوئے ایک الگ، صرف-پڑھنے والا صفحہ بناتا ہے۔ یہ تنصیب میں محفوظ شدہ مشاہدات پڑھتا ہے۔ یہ کلیکٹر شروع نہیں کرتا، ٹیلیگرام میں سائن ان نہیں کرتا اور زائر کے لیے کوئی چینل حاصل نہیں کرتا۔
 
 ## صفحہ شائع کریں

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/accou
 
 アカウントが現在閲覧可能な内容をエクスポートします：スコープ、再開可能なジョブ、署名付きアーカイブ、および最小化された共有コピー。
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 アカウントエクスポートは対象アカウントを排他的に予約します。開始・再開前に監視や他の収集を明示的に一時停止してください。アプリが自動停止することはありません。
 
 インストール管理者として、「**ここから始める」→「自分のアカウントをエクスポート**」を選択するか、「**エクスポート」→「Telegramアカウント」→「アカウントのエクスポートを設定」**を選択してください。 必要に応じてログインし、権限範囲を確認した上で、明示的にエクスポートを開始してください。継続的な監視は不要です。**「保存された観察記録」**は、既存の日誌を別途エクスポートしたものであり、そのZIPには、日誌フィルターに関係なくすべてのソースが含まれます。各ワークスペースには、独自のジョブ、署名用ID、およびストレージがあります。無制限の通常エクスポート権限を含む、発行済みのパネルアクセス権限では、これらのアカウント全体のルートを開くことはできません。

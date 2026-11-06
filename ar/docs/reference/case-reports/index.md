@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-
 
 تتضمن الصادرات الموقعة عوامل تصفية التقارير، وثمانية تصميمات، وإعدادات مسبقة للمحتوى، وسجلات التغييرات المحفوظة، والتقييم.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 حوّل الملاحظات المختارة إلى سرد سهل القراءة للقضية: سؤالها، ونطاقها، والتغييرات المحفوظة، والرسوم البيانية، والنتائج، ومراجع المصادر. يتيح كل تقرير للمستلم وسيلة للتحقق من المواد المرسلة وفحص نطاق الجمع.
 
 يظهر قسم **«أساس الثقة والقيود»** في تقارير السجل، والتسليم، والدردشة، والحساب، والمشاركة. تستخدم ملفات PDF الخاصة بالسجل والتسليم نفس التقييم الموجود في ملف `report.json` الموقع. تحتوي قوائم ملفات ZIP على `case_assessment` في قائمة الملفات الموقعة. ينتقل هذا التقييم مع المواد المصدرة. تحتفظ الملاحظات الأصلية بتوقيعاتها الحالية.

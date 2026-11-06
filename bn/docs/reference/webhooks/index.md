@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/webho
 
 এইচএমএসি স্বাক্ষর, পুনঃচেষ্টা এবং ডেলিভারি স্ট্যাটাস সহ স্কোপড ইভেন্টগুলি HTTPS রিসিভারদের কাছে পাঠান।
 
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [ওয়ার্কফ্লো গাইড](https://phishdestroy.github.io/TgWitness/docs/archive/) · [উইকি](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 নির্বাচিত ওয়ার্কস্পেসে Open **Integrations → Outgoing webhooks** খুলুন। একটি HTTPS রিসিভার যোগ করুন, কালেক্টর/মিডিয়া/এক্সপোর্ট ইভেন্ট নির্বাচন করুন, এবং ঐচ্ছিকভাবে নতুন পর্যবেক্ষণ ও পরিবর্তনের জন্য চ্যাট নির্বাচন করুন। মেসেজ টেক্সট ডিফল্টভাবে বন্ধ থাকে। এক্সcerpts সক্ষম করলে মেসেজ-পরিবর্তন ইভেন্টে সর্বোচ্চ ১,০০০ অক্ষর যোগ হয়; কাঁচা টেলিগ্রাম ফিল্ড এবং ক্রেডেনশিয়াল কখনোই পাঠানো হয় না।

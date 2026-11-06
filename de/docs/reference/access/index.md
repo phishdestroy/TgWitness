@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/acces
 
 Legen Sie den Zugriff auf Konten und Chats fest, wählen Sie Berechtigungen aus, beschränken Sie Sitzungen und IP-Adressen und entziehen Sie den Zugriff.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/de/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 Gewähren Sie einem Prüfer Zugriff auf einen Chat, einem Analysten die Berechtigung zum Exportieren eines Falls oder einem Operator die Kontrolle über ausgewählte Konten. Jede Person erhält ihr eigenes Token. Das Haupt- Panel-Token verbleibt beim Administrator.
 
 [Einrichtung eines Kontos](https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/) · [Verbindungswege](https://phishdestroy.github.io/TgWitness/de/docs/reference/connection/) · [Sicherheitsmodell](https://phishdestroy.github.io/TgWitness/de/docs/reference/security/)
@@ -104,4 +108,8 @@ Panel-Skripte und -Stile enthalten SHA-384-Integritätsmetadaten. Eine Import-Ma
 
 Das Erteilen, Ändern und Widerrufen von Zugriffsrechten sowie das Starten oder Beenden von Sitzungen führen ebenfalls zur Erstellung signierter `access.*`-Protokollaufzeichnungen. Token sind in diesen Aufzeichnungen nicht enthalten. Ausgegebene Token und Sitzungszugangsdaten werden als Hash-Werte im verschlüsselten Tresor gespeichert.
 
-****Hauptadministrator und Vertrauensgrenze**** Das Haupt-Panel-Token unterliegt keinen Einschränkungen. Bei der Anmeldung über den Browser mit diesem Token werden Sitzungen erstellt, die den vom Administrator konfigurierten Sitzungslimits unterliegen. Skripte, die das Haupt-Token direkt übermitteln, behalten den uneingeschränkten Zugriff und werden nicht als Browsersitzungen gezählt. Dies ist eine Zugriffskontrolle auf Anwendungsebene innerhalb einer Installation. Alle Arbeitsbereiche nutzen gemeinsam den Serverprozess; es handelt sich hierbei nicht um eine Isolierung vom Host-Administrator. Bewahren Sie das Haupt-Token, die Telegram-Sitzungen, die Signaturschlüssel und das Datenverzeichnis vertraulich auf. Ein Witness-Token ist eine separate Kontroll- bzw. Integritätsbescheinigung, kein Panel-Zugriffstoken.
+****Hauptadministrator und Vertrauensgrenze****
+
+The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+
+This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.

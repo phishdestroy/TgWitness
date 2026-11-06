@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/accou
 
 ลงชื่อเข้าใช้ผ่านโทรศัพท์มือถือ รหัส QR หรือกุญแจการยืนยันตัวตน นำเข้าเซสชันจาก Telethon Pyrogram หรือ Telegram Desktop และจัดการหลายบัญชีได้
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
+
+![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+
 TgWitness ลงชื่อเข้าใช้ในฐานะบัญชี**ผู้ใช้ Telegram** (ไม่ใช่บอต) ผ่าน MTProto โดยใช้ Telethon แต่ละบัญชีจะอยู่ในพื้นที่ทำงานของตัวเอง (เรียกว่า *workspace* ใน API และเครื่องมือบรรทัดคำสั่ง) พร้อมด้วยเซสชัน แหล่งข้อมูล บันทึก และกุญแจลงนามของตัวเอง
 
 ไฟล์เซสชัน, สตริงเซสชัน และ Auth Keys เป็น**ข้อมูลการอนุญาตของบัญชี**: ผู้ใดก็ตาม ที่ถือข้อมูลเหล่านี้สามารถดำเนินการในนามบัญชีนั้นได้ แต่ข้อมูลเหล่านี้ไม่รวมประวัติข้อความ

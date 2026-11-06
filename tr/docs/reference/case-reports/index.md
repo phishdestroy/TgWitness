@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-
 
 Rapor filtreleri, sekiz tasarım, içerik ön ayarları, kaydedilmiş değişiklik geçmişleri ve imzalı dışa aktarımlara dahil edilen değerlendirme.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 Seçilen gözlemleri, vakanın okunabilir bir özetine dönüştürün: vakanın sorusu, kapsamı, kaydedilen değişiklikler, grafikler, bulgular ve kaynak referansları. Her rapor, alıcıya teslim edilen materyali kontrol etme ve toplama kapsamını inceleme imkanı sunar.
 
 "**Güven Temeli ve Sınırlamalar**" bölümü günlük, devir teslimi, sohbet, hesap ve paylaşım raporlarında yer alır. Günlük ve devir teslimi PDF'leri, imzalanmış `report.json` dosyasıyla aynı değerlendirmeyi kullanır. ZIP manifestoları, imzalanmış manifestoda `case_assessment` bilgisini taşır. Bu değerlendirme, dışa aktarılan materyalle birlikte aktarılır. Orijinal gözlemler mevcut imzalarını korur.

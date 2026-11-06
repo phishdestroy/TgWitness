@@ -4,7 +4,25 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/colle
 
 관찰 범위, 실시간 업데이트, 재확인, 첨부 파일, 사용자 작업 및 ‘갭(gap)’의 의미 등을 기록 단위로 상세히 설명합니다.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [컬렉션](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
+
+![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+
 TgWitness는 연결된 텔레그램 계정이 감지한 내용을 기록합니다. 이 기록부는 감지된 내용, 그 순서, 그리고 함께 제공된 맥락을 보존합니다. 이 도구는 누락된 메시지나 계정이 연결된 사실만으로는 보이지 않는 행동을 추론하지 않습니다.
+
+**On this page**
+
+- [From login to a journal](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/#from-login-to-a-journal)
+- [Observation scope: chosen chats, a folder or the whole account](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
+- [Scope and event selection](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/#scope-and-event-selection)
+- [Own actions](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/#own-actions)
+- [Investigation mode: joining teams and talking to bots](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
+- [Recheck tiers](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/#recheck-tiers)
+- [Message history and attribution](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/#message-history-and-attribution)
+- [History snapshots](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/#history-snapshots)
+- [Attachment handling](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/#attachment-handling)
+- [Pause, lock, disconnect, and restart](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/#pause-lock-disconnect-and-restart)
+- [Account isolation and verification](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/#account-isolation-and-verification)
 
 ## 로그인부터 기록부까지
 

@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/cli/
 
 Cari, baca konteks, hitung aktivitas, dan ekspor pesan yang disimpan dari skrip dan agen, dengan output --json, kode keluar yang stabil, dan token baca-saja yang terbatas cakupannya.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+
 [MCP hanya baca](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/) · [Pencarian teks lengkap](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 **Pratinjau.** `tgwitness search`, `context`, `messages`, `stats` dan `export` membaca pengamatan yang disimpan untuk skrip dan agen AI. Mereka tidak dapat mengirim apa pun ke Telegram, mengubah pengaturan, atau memodifikasi jurnal yang ditandatangani.

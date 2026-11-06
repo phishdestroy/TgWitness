@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/media
 
 تصاویر و فایل‌های صوتی ضبط‌شده را با یک کارگر محلی شناسایی کنید؛ متن استخراج‌شده را به فایل منبع آن پیوند دهید.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/)
+
+![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+
 [راهنمای گردش کار](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 یک رکورد دفترچه یادداشت `media.saved` را باز کنید، **«شناسایی پیوست**» (**Recognize attachment**) را انتخاب کنید، سپس در بخش **«از آرشیو بپرس» (Ask the archive**) گزینه OCR یا رونویسی را برگزینید. پردازش به‌صورت دستی و محلی انجام می‌شود. حالت ابری یا بارگذاری خودکار وجود ندارد. بایت‌های اصلی پیوست و `media_sha256` بدون تغییر باقی می‌مانند؛ متن شناسایی‌شده صراحتاً به عنوان شناسایی ماشینی علامت‌گذاری شده و به طور جداگانه به همراه هش منبع، نسخه موتور/مدل، زبان، پارامترها و زمان تکمیل ذخیره می‌شود. رونوشت‌ها مهرهای زمانی بازگشتی را حفظ می‌کنند.

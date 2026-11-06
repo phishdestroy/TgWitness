@@ -4,6 +4,10 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/accou
 
 تصدير ما يمكن للحساب قراءته الآن: النطاق، والمهام القابلة للاستئناف، وأرشيف موقّع، ونسخ مشاركة مصغّرة.
 
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/)
+
+![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+
 يحجز تصدير الحساب ذلك الحساب حصريًا. أوقف المراقبة أو عملية جمع أخرى مؤقتًا وبشكل صريح قبل البدء أو الاستئناف؛ فالتطبيق لا يوقفها تلقائيًا أبدًا.
 
 بصفتك مسؤول التثبيت، اختر **«ابدأ من هنا» → «تصدير حسابي**»، أو **«عمليات التصدير» → «حساب Telegram» → «تكوين تصدير الحساب**». قم بتسجيل الدخول إذا لزم الأمر، وراجع النطاق، وابدأ عملية التصدير بشكل صريح. لا يلزم المراقبة المستمرة. **«الملاحظات المحفوظة»** هي تصدير منفصل للمجلة الحالية؛ حيث تتضمن ZIP جميع المصادر بغض النظر عن مرشحات المجلة. لكل مساحة عمل مهامها الخاصة، وهوية التوقيع، ومساحة التخزين الخاصة بها. لا يمكن للوصول الممنوح إلى اللوحة، بما في ذلك منحة التصدير العادية غير المقيدة، فتح هذه المسارات على مستوى الحساب.
