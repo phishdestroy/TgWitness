@@ -112,3 +112,57 @@ def test_daily_upgrade_retains_original_and_stays_unconfirmed_offline(tmp_path):
         observer.close()
     export(tmp_path / 'witness', path)
     assert verify_witness(path)['days'][0]['bitcoin'] == 'pending'
+
+
+def test_failed_submission_retries_after_restart_without_rewriting_the_daily_seal(tmp_path):
+    root = tmp_path / 'witness'
+    observer = Witness(root, 'https://collector.invalid', 'synthetic')
+    try:
+        with patch('tgwitness.store.utcnow', return_value='2026-10-02T00:00:00+00:00'), \
+                patch('tgwitness.witness.utc_date', return_value=date(2026, 10, 2)), \
+                patch('tgwitness.anchoring.post', AsyncMock(side_effect=OSError('offline'))):
+            seal = asyncio.run(observer.daily())
+        original = canonical(seal)
+        assert not list((root / 'anchors').glob('*.ots'))
+    finally:
+        observer.close()
+    observer = Witness(root, 'https://collector.invalid', 'synthetic')
+    try:
+        with patch('tgwitness.store.utcnow', return_value='2026-10-04T12:00:00+00:00'), \
+                patch('tgwitness.anchoring.post', AsyncMock(return_value=PENDING)) as send:
+            attempts = asyncio.run(observer.retry_daily_ots())
+            assert [a['record'] for a in attempts] == [seal['seq']]
+            assert all(call.args[1] == hashlib.sha256(original).digest() for call in send.call_args_list)
+            send.reset_mock()
+            assert asyncio.run(observer.retry_daily_ots()) == []
+            send.assert_not_called()
+        seals = [event for event in observer.store.all_events() if event['kind'] == 'witness.daily']
+        assert [canonical(event) for event in seals] == [original]
+        assert (root / 'anchors/daily-2026-10-01.json').read_bytes() == original
+    finally:
+        observer.close()
+    package = tmp_path / 'witness.zip'
+    export(root, package)
+    day = verify_witness(package)['days'][0]
+    assert day['date'] == '2026-10-01' and day['bitcoin'] == 'pending'
+
+
+def test_failed_submission_retry_is_bounded_and_rotates_between_old_seals(tmp_path):
+    observer = Witness(tmp_path / 'witness', 'https://collector.invalid', 'synthetic')
+    try:
+        for day in (1, 2, 3):
+            with patch('tgwitness.store.utcnow', return_value=f'2026-10-{day + 1:02d}T00:00:00+00:00'), \
+                    patch('tgwitness.witness.utc_date', return_value=date(2026, 10, day + 1)), \
+                    patch('tgwitness.anchoring.post', AsyncMock(side_effect=OSError('offline'))):
+                asyncio.run(observer.daily())
+        seals = [e for e in observer.store.all_events() if e['kind'] == 'witness.daily']
+        with patch('tgwitness.store.utcnow', return_value='2026-10-05T00:00:00+00:00'), \
+                patch('tgwitness.anchoring.post', AsyncMock(side_effect=OSError('offline'))):
+            first = asyncio.run(observer.retry_daily_ots())
+            second = asyncio.run(observer.retry_daily_ots())
+            third = asyncio.run(observer.retry_daily_ots())
+        assert [a['record'] for a in first] == [e['seq'] for e in seals[:2]]
+        assert [a['record'] for a in second] == [seals[2]['seq']]
+        assert [a['record'] for a in third] == [e['seq'] for e in seals[:2]]
+    finally:
+        observer.close()

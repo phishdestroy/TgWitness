@@ -20,7 +20,7 @@ from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
 from . import __version__
 from . import continuity
-from .anchoring import DEFAULT_OTS, ots_stamp, upgrade_pending_ots
+from .anchoring import DEFAULT_OTS, ots_stamp, service_name, upgrade_pending_ots
 from .evidence import producer
 from .netclient import HTTPError, RouteError, request
 from .network import NetworkConfig
@@ -424,11 +424,7 @@ class Witness:
             payload = daily_payload(events, date)
             payload["root"] = continuity.Tree(self.store.db).root(0, payload["to_seq"]).hex()
             event = self.store.append("witness.daily", payload)
-        folder, name = self.store.root / "anchors", "daily-" + date
-        folder.mkdir(exist_ok=True, mode=0o700)
-        private_write(folder / (name + ".json"), canonical(event))
-        results = await ots_stamp(hashlib.sha256(canonical(event)).digest(), DEFAULT_OTS, folder, name, self.network)
-        self.store.append("witness.anchored", {"record": event["seq"], "results": results})
+        await self.stamp_daily(event)
         self.store.set_setting("last_daily_date", date)
         if self.send:
             try:
@@ -437,6 +433,49 @@ class Witness:
             except Exception as exc:
                 self.store.append("witness.post_failed", {"record": event["seq"], "error": describe(exc)})
         return event
+
+    async def stamp_daily(self, event):
+        date = event['payload']['date']
+        if not isinstance(date, str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', date):
+            raise ValueError('Invalid retained daily seal date')
+        datetime.strptime(date, '%Y-%m-%d')
+        folder, name = self.store.root / 'anchors', 'daily-' + date
+        folder.mkdir(exist_ok=True, mode=0o700)
+        raw = canonical(event)
+        private_write(folder / (name + '.json'), raw)
+        results = await ots_stamp(hashlib.sha256(raw).digest(), DEFAULT_OTS, folder, name, self.network)
+        self.store.append('witness.anchored', {'record': event['seq'], 'results': results})
+        return results
+
+    async def retry_daily_ots(self):
+        """Retry seals with no retained submission, including after restarts and date changes."""
+        cursor = self.store.get_setting('witness_daily_retry_cursor', 0)
+        with self.store.lock:
+            rows = self.store.db.execute("SELECT * FROM events WHERE kind='witness.daily' AND seq>? ORDER BY seq LIMIT 32",
+                                         (cursor,)).fetchall()
+            if not rows:
+                rows = self.store.db.execute("SELECT * FROM events WHERE kind='witness.daily' ORDER BY seq LIMIT 32").fetchall()
+        deadline, attempts = time.monotonic() + 60, []
+        for row in rows:
+            event = self.store.decode(row)
+            name = 'daily-' + str(event['payload']['date'])
+            # Existing submissions are handled by upgrade_pending_ots. Their existence is not a verdict.
+            if any((self.store.root / 'anchors' / (name + '.' + service_name(url) + '.ots')).is_file()
+                   for url in DEFAULT_OTS):
+                cursor = event['seq']
+                continue
+            if len(attempts) >= 2 or time.monotonic() >= deadline:
+                break
+            try:
+                async with asyncio.timeout(max(0.1, deadline - time.monotonic())):
+                    results = await self.stamp_daily(event)
+            except TimeoutError:
+                results = [{'kind': 'opentimestamps', 'ok': False, 'error': 'retry deadline exceeded'}]
+                self.store.append('witness.anchored', {'record': event['seq'], 'results': results})
+            attempts.append({'record': event['seq'], 'results': results})
+            cursor = event['seq']
+        self.store.set_setting('witness_daily_retry_cursor', cursor)
+        return attempts
 
     async def run(self, ticks=None):
         self.store.append("witness.started", {
@@ -454,6 +493,7 @@ class Witness:
                     await self.daily()
                 last_upgrade = self.store.get_setting("witness_ots_upgrade_at", 0)
                 if time.time() - last_upgrade >= 3600:
+                    await self.retry_daily_ots()
                     await upgrade_pending_ots(self.store, self.network, {"ots_calendars": DEFAULT_OTS},
                                               folder=self.store.root / "anchors")
                     self.store.set_setting("witness_ots_upgrade_at", time.time())
