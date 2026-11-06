@@ -48,6 +48,25 @@ DRAND_CHECK_LIMIT = 100
 GATEWAY_FIELDS = ("at", "name", "type", "rcode", "decision", "colo")
 
 
+class VerifierTooOld(ValueError):
+    def __init__(self, detail=""):
+        super().__init__("пакет подписан корректно, но этот верификатор старше формата пакета" +
+                         (": " + detail if detail else ""))
+
+
+def safe_text(value):
+    text = str(value)
+    text = re.sub(r"\x1b(?:\[[0-?]*[ -/]*[@-~]|\][^\x07\x1b]*(?:\x07|\x1b\\))", "", text)
+    return re.sub(r"[\x00-\x08\x0b-\x1f\x7f-\x9f]", "", text)
+
+
+def authenticate_statement(value, key_field="public_key"):
+    statement = value["statement"]
+    Ed25519PublicKey.from_public_bytes(base64.b64decode(statement[key_field], validate=True)).verify(
+        base64.b64decode(value["signature"], validate=True), canonical(statement))
+    return statement
+
+
 def validate_server_hashes(value):
     """Validate claimed range coverage, not Telegram origin or absent payloads."""
     if (not isinstance(value, dict) or value.get("format") != "telegram-file-hashes-v1"
@@ -130,7 +149,10 @@ def strict_json(data):
 
 
 def read_manifest(archive):
-    return strict_json(read_member(archive, "manifest.json", MAX_MANIFEST_BYTES))
+    manifest = strict_json(read_member(archive, "manifest.json", MAX_MANIFEST_BYTES))
+    Ed25519PublicKey.from_public_bytes(base64.b64decode(manifest["public_key"], validate=True)).verify(
+        base64.b64decode(read_member(archive, "manifest.sig"), validate=True), canonical(manifest))
+    return manifest
 
 
 def member_digest(archive, name):
@@ -1437,9 +1459,9 @@ def read_sealed(stream):
 
 def check_seal(sealed, public_key=None, expected_fingerprint=None):
     content, seal = sealed
-    statement = seal["statement"]
+    statement = authenticate_statement(seal)
     if not is_format(statement.get("format"), "report-seal-v1"):
-        raise ValueError("Unsupported report seal")
+        raise VerifierTooOld("Unsupported report seal")
     key = statement["public_key"]
     if public_key is not None and key != public_key:
         raise ValueError("The report was sealed with a different key than the archive")
@@ -1608,7 +1630,7 @@ def verify_report(path, expected_fingerprint=None, evidence=None):
 
 def verify_selection(path, expected_fingerprint=None, evidence=None):
     data = read_json_file(path)
-    if data.get("statement", {}).get("format") == "tgwitness-board-selection-v1":
+    if isinstance(data.get("statement"), dict) and "signature" in data:
         return verify_board_selection(data, expected_fingerprint, evidence)
     if not isinstance(data, dict) or data.get("format") != "tgwitness-selection-v1":
         raise ValueError("Unsupported selection format")
@@ -1688,7 +1710,9 @@ BOARD_KINDS = {"board." + kind for kind in ("bookmark", "highlight", "slice", "c
 
 
 def verify_board_selection(data, expected_fingerprint=None, evidence=None):
-    statement = data["statement"]
+    statement = authenticate_statement(data)
+    if statement.get("format") != "tgwitness-board-selection-v1":
+        raise VerifierTooOld("Unsupported board selection")
     public = statement["public_key"]
     fp = fingerprint(public)
     if expected_fingerprint and fp != expected_fingerprint:
@@ -2007,7 +2031,7 @@ def verify_board_disclosure(archive, manifest):
     if "case-board.json" not in manifest["files"]:
         return None
     signed = json.loads(read_member(archive, "case-board.json", MAX_JSON_BYTES))
-    statement, public = signed["statement"], manifest["public_key"]
+    statement, public = authenticate_statement(signed), manifest["public_key"]
     if statement.get("format") != "tgwitness-case-board-handover-v1" or statement.get("public_key") != public:
         raise ValueError("Invalid handover board format or signing key")
     Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
@@ -2034,7 +2058,9 @@ def verify_board_disclosure(archive, manifest):
 
 def verify_board_document(path, expected_fingerprint=None, evidence=None):
     signed = read_json_file(path)
-    statement = signed["statement"]
+    statement = authenticate_statement(signed)
+    if statement.get("format") not in ("tgwitness-case-board-v1", "tgwitness-case-board-disclosure-v1", "tgwitness-case-board-handover-v1"):
+        raise VerifierTooOld("Unsupported Case Board document")
     public = statement["public_key"]
     fp = fingerprint(public)
     if expected_fingerprint and fp != expected_fingerprint:
@@ -2077,7 +2103,7 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
         names = archive.namelist()
         manifest = read_manifest(archive)
         if not is_format(manifest["format"], "evidence-v1"):
-            raise ValueError("Unsupported evidence format")
+            raise VerifierTooOld("Unsupported evidence format")
         public = manifest["public_key"]
         fp = fingerprint(public)
         if expected_fingerprint and fp != expected_fingerprint:
@@ -2342,7 +2368,7 @@ def verify_chat_export(path, expected_fingerprint=None, max_gib=None):
         names = archive.namelist()
         manifest = read_manifest(archive)
         if not is_format(manifest["format"], "chat-export-v1"):
-            raise ValueError("Unsupported chat export format")
+            raise VerifierTooOld("Unsupported chat export format")
         public = manifest["public_key"]
         fp = fingerprint(public)
         if expected_fingerprint and fp != expected_fingerprint:
@@ -2541,7 +2567,7 @@ def verify_handover(path, expected_fingerprint=None):
         names = archive.namelist()
         manifest = read_manifest(archive)
         if not is_format(manifest["format"], "handover-v1"):
-            raise ValueError("Unsupported handover format")
+            raise VerifierTooOld("Unsupported handover format")
         public = manifest["public_key"]
         fp = fingerprint(public)
         if expected_fingerprint and fp != expected_fingerprint:
@@ -2746,7 +2772,7 @@ def verify_account_export(path, expected_fingerprint=None, max_gib=None):
         names = archive.namelist()
         manifest = read_manifest(archive)
         if manifest.get("format") != "tgwitness-account-export-v1":
-            raise ValueError("Unsupported account export format")
+            raise VerifierTooOld("Unsupported account export format")
         public = manifest["public_key"]
         fp = fingerprint(public)
         if manifest.get("fingerprint") != fp:
@@ -3069,7 +3095,7 @@ def verify_account_disclosure(path, expected_fingerprint=None, source=None, max_
     with open_archive(path, max_gib=max_gib) as archive, tempfile.TemporaryDirectory() as temporary:
         manifest = read_manifest(archive)
         if manifest.get("format") not in DISCLOSURE_FORMATS:
-            raise ValueError("Unsupported account disclosure format")
+            raise VerifierTooOld("Unsupported account disclosure format")
         # Version 2 keeps records the selection left out as content-free markers, and replies say what they answer.
         marked = manifest["format"] == "tgwitness-account-disclosure-v2"
         public = manifest["public_key"]
@@ -3223,7 +3249,9 @@ CAPTURE_KINDS = ("message.new", "message.edited", "message.deleted", "message.re
 
 
 def verify_capture(value, checkpoint):
-    statement = value["statement"]
+    statement = authenticate_statement(value)
+    if not is_format(statement.get("format"), "capture-v1"):
+        raise VerifierTooOld("Unsupported capture proof")
     fields = {"format", "created_at", "public_key", "event_count", "head_hash", "challenge", "counts", "last_message_at", "health"}
     if set(value) != {"statement", "signature"} or set(statement) not in (fields, fields | {"keys"}):
         raise ValueError("Unexpected capture proof fields")
@@ -3418,7 +3446,7 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
         names = archive.namelist()
         manifest = read_manifest(archive)
         if not is_format(manifest["format"], "witness-v1"):
-            raise ValueError("Unsupported witness format")
+            raise VerifierTooOld("Unsupported witness format")
         public = manifest["public_key"]
         fp = fingerprint(public)
         if expected_fingerprint and fp != expected_fingerprint:
@@ -3678,7 +3706,9 @@ def assurance(result):
     ladder = [
         {"tier": "self_attested", "status": "pass", "detail": "signature, hashes and applicable chain/manifest checks"},
         {"tier": "timestamped", "status": "pass" if times else "absent",
-         "detail": "export head existed by " + min(times) if times else "no authenticated external time covering the export head"},
+         "detail": ("external timestamp covering the export head: " + min(times)
+                    + "; Bitcoin dates are block-header times; TSA dates depend on the trusted authority")
+                   if times else "no authenticated external time covering the export head"},
         {"tier": "witnessed", "status": "fail" if bad_witness else "pass" if independent else "absent",
          "detail": ("witness " + str(witness.get("witness_fingerprint")) + "; records 1.." + str(result.get("events"))
                     + "; witness clock " + str(witness.get("head_witnessed_at"))) if independent else "no pinned independent witness at the export head"},
@@ -3777,9 +3807,9 @@ def check_channel(witness, source):
 
 def verify_dossier(path, expected_fingerprint=None, bundle=None):
     value = read_json_file(path)
-    statement = value["statement"]
+    statement = authenticate_statement(value)
     if not is_format(statement.get("format"), "dossier-v1"):
-        raise ValueError("Unsupported profile format")
+        raise VerifierTooOld("Unsupported profile format")
     fp = fingerprint(statement["public_key"])
     if expected_fingerprint and fp != expected_fingerprint:
         raise ValueError("Public key differs from the independently trusted fingerprint")
@@ -3804,9 +3834,9 @@ def verify_dossier(path, expected_fingerprint=None, bundle=None):
 
 def verify_public_proof(path, collector_fingerprint=None, witness_fingerprint=None, bundle=None):
     value = read_json_file(path)
-    statement = value["statement"]
+    statement = authenticate_statement(value, "witness_public_key")
     if not is_format(statement.get("format"), "public-proof-v1"):
-        raise ValueError("Unsupported public proof")
+        raise VerifierTooOld("Unsupported public proof")
     public = statement["witness_public_key"]
     fp = fingerprint(public)
     if witness_fingerprint and fp != witness_fingerprint:
@@ -3840,9 +3870,9 @@ def verify_public_proof(path, collector_fingerprint=None, witness_fingerprint=No
 
 def verify_history_report(path, expected_fingerprint=None, bundle=None):
     value = read_json_file(path)
-    statement = value["statement"]
+    statement = authenticate_statement(value)
     if not is_format(statement.get("format"), "history-report-v1"):
-        raise ValueError("Unsupported history progress report")
+        raise VerifierTooOld("Unsupported history progress report")
     public = statement["public_key"]
     fp = fingerprint(public)
     if expected_fingerprint and fp != expected_fingerprint:
@@ -4080,9 +4110,21 @@ class Console:
         return text
 
     def paint(self, text, style):
-        return "\033[" + self.STYLES[style] + "m" + text + "\033[0m" if self.color and style else text
+        text = safe_text(text)
+        if not self.color or not style:
+            return text
+        # Only formatting produced here may become terminal control sequences.
+        if not hasattr(self, "_paints"):
+            self._paints = {}
+        token = "TGWSTYLE" + os.urandom(16).hex()
+        self._paints[token + "B"] = "\033[" + self.STYLES[style] + "m"
+        self._paints[token + "E"] = "\033[0m"
+        return token + "B" + text + token + "E"
 
     def say(self, text=""):
+        text = safe_text(text)
+        for token, sequence in getattr(self, "_paints", {}).items():
+            text = text.replace(token, sequence)
         self.stream.write(text + "\n")
 
     def number(self, value):
@@ -4150,8 +4192,8 @@ class Console:
         return Spinner(sys.stderr, self.t("Checking signatures, hashes and the record chain"), self.glyph["spin"])
 
     def failure(self, path, exc):
-        self.field("File", str(path))
-        self.verdict(False, type(exc).__name__ + ": " + str(exc))
+        self.field("File", safe_text(path))
+        self.verdict(False, type(exc).__name__ + ": " + safe_text(exc))
         self.say()
 
     def case(self, case):
@@ -4346,6 +4388,11 @@ class Spinner:
 
 
 def main():
+    import builtins
+
+    def print(*values, **kwargs):
+        builtins.print(*(safe_text(v) if isinstance(v, str) else v for v in values), **kwargs)
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("bundle", type=Path,
                         help="Evidence/chat/account/disclosure/witness ZIP, report JSON/HTML, or a stopped distributed acquisition directory")
@@ -4364,6 +4411,7 @@ def main():
     parser.add_argument("--check-bitcoin", action="store_true",
                         help="Evaluate OTS proofs against block headers agreed by two HTTPS explorers (needs internet)")
     parser.add_argument("--require-tier", choices=ASSURANCE_TIERS, help="Exit 2 if the complete export does not reach this tier")
+    parser.add_argument("--strict", action="store_true", help="Exit 2 for an unpinned signer, 3 for an authenticated newer format")
     parser.add_argument("--sealed-attestation", type=Path, help="GitHub attestation bundle; checked with the existing gh verifier")
     parser.add_argument("--sealed-policy", type=Path, help="Independently trusted policy listing reviewed workflow and collector commits")
     parser.add_argument("--sealed-repo", default="phishdestroy/TgWitness", help="Repository identity expected in GitHub attestation")
@@ -4433,6 +4481,13 @@ def main():
         elif args.bundle.suffix.lower() == ".json":
             data = read_json_file(args.bundle)
             kind = data.get("statement", {}).get("format")
+            if "statement" in data and "signature" in data:
+                authenticate_statement(data, "public_key" if "public_key" in data["statement"] else "witness_public_key")
+                known = {"tgwitness-board-selection-v1", "tgwitness-case-board-v1", "tgwitness-case-board-disclosure-v1",
+                         "tgwitness-case-board-handover-v1"}
+                if kind not in known and not any(is_format(kind, name) for name in (
+                        "public-proof-v1", "history-report-v1", "dossier-v1")):
+                    raise VerifierTooOld("Unsupported signed JSON format")
             if kind == "tgwitness-board-selection-v1":
                 shown, result = "selection", verify_selection(args.bundle, args.fingerprint, args.evidence)
                 pinned = bool(args.fingerprint)
@@ -4568,32 +4623,36 @@ def main():
         if any(row["status"] == "fail" for row in result["assurance"]["ladder"]):
             raise ValueError("Assurance checks found contradictory witness evidence")
     except Exception as exc:
+        code = 3 if args.strict and isinstance(exc, VerifierTooOld) else 1
         if spinner:
             spinner.__exit__(None, None, None)
         if console:
             console.say("ASSURANCE: fail")
             console.failure(args.bundle, exc)
-            raise SystemExit(1)
+            raise SystemExit(code)
         if mode == "json":
             print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + str(exc)}, indent=2))
-            raise SystemExit(1)
+            raise SystemExit(code)
         print("ASSURANCE: fail")
-        parser.exit(1, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + str(exc) + "\n")
+        parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + safe_text(exc) + "\n")
     if spinner:
         spinner.__exit__(None, None, None)
     unmet = bool(args.require_tier and ASSURANCE_TIERS.index(result["assurance"]["tier"]) < ASSURANCE_TIERS.index(args.require_tier))
+    unpinned = args.strict and not pinned
+    if not pinned:
+        notes.append("ключ не закреплён: результат зависит от ключа внутри самого пакета")
     if unmet:
         notes.append("Required assurance tier was not reached: " + args.require_tier)
     if console:
         console.show(shown, args.bundle, result, notes, pinned)
-        if unmet:
+        if unmet or unpinned:
             raise SystemExit(2)
         return
     if mode == "json":
         print(json.dumps({"verified": True, "kind": shown, "signer_pinned": pinned, "notes": notes, "result": result,
-                          "requirements_met": not unmet},
-                         indent=2, ensure_ascii=False))
-        if unmet:
+                          "requirements_met": not (unmet or unpinned)},
+                         indent=2, ensure_ascii=True))
+        if unmet or unpinned:
             raise SystemExit(2)
         return
     print(assurance_line(result))
@@ -4623,7 +4682,7 @@ def main():
     print("Integrity verified. Source authenticity and clock accuracy are not established.")
     if not pinned:
         print("Signer identity is unpinned: retain and compare the fingerprint independently.")
-    if unmet:
+    if unmet or unpinned:
         raise SystemExit(2)
 
 
