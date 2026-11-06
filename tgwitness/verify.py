@@ -759,8 +759,8 @@ class Coverage:
         self.sequences = Sequences(gap_settings, chats_selected=chats_selected, senders_selected=senders_selected)
         self.periods, self.gaps, self.notes = [], [], []
         self.start = self.alive = self.closed_at = self.close_reason = None
-        self.observing = self.disconnected = False
-        self.silent = False
+        self.observing = self.active = False
+        self.run_id = None
         self.ids, self.titles = {}, {}
         self.first = self.last = None
         self.allowed = LIVENESS_GAP_SECONDS
@@ -779,19 +779,14 @@ class Coverage:
     def add(self, event):
         at, kind, payload, chat_id = event["observed_at"], event["kind"], event["payload"], event["chat_id"]
         self.first, self.last = self.first or at, at
-        activity = (kind == "collector.heartbeat" and payload.get("connected") is not False) or (
-            kind in ("message.new", "message.edited", "message.deleted")
-            and payload.get("source", "live_update") == "live_update")
         if self.observing and kind not in ("observation.started", "process.started"):
             silent = (parse_time(at) - parse_time(self.alive)).total_seconds()
             if silent > self.allowed:
-                self.close(self.alive, "no records for " + str(round(silent / 60)) + " min while observing: "
+                self.close(self.alive, "no capture heartbeat for " + str(round(silent / 60)) + " min while observing: "
                            "the process stopped, froze or the computer slept")
-                self.silent = True
-        if self.silent and activity:
-            self.open(at)
-            self.silent = False
-        interval = payload.get("interval_seconds") if kind == "collector.heartbeat" else \
+        heartbeat = (kind == "collector.heartbeat" and self.active
+                     and (self.run_id is None or payload.get("run_id") == self.run_id))
+        interval = payload.get("interval_seconds") if heartbeat else \
             (payload.get("parameters") or {}).get("heartbeat_seconds") if kind == "observation.started" else None
         if type(interval) is int and interval > 0:
             self.allowed = max(LIVENESS_GAP_SECONDS, 3 * interval)
@@ -802,46 +797,41 @@ class Coverage:
         if kind == "observation.started":
             self.close(self.alive, "observation restarted")
             self.open(at)
-            self.disconnected = False
-            self.silent = False
+            self.active, self.run_id = True, payload.get("run_id")
         elif kind == "observation.stopped":
-            self.silent = self.disconnected = False
             self.close(at, "observation paused by the operator" if payload.get("reason") == "operator"
                        else "observation stopped: " + str(payload.get("reason") or "unknown"))
+            self.active = False
         elif kind == "process.stopped":
-            self.silent = self.disconnected = False
             self.close(at, "collector process stopped")
+            self.active = False
         elif kind == "process.started":
-            self.silent = self.disconnected = False
             self.close(self.alive, "collector process ended without an orderly stop")
-        elif kind == "collector.error" and payload.get("observation_stopped"):
-            self.silent = self.disconnected = False
-            self.close(at, "observation stopped: collector_error")
-        elif (kind == "connection.closed" and payload.get("role", "current") == "current"
-              and (self.observing or self.silent)):
-            self.silent = False
+            self.active = False
+        elif kind == "collector.error":
+            self.close(self.alive, "collector error: capture may be incomplete")
+            self.notes.append({"at": at, "chat_id": chat_id, "reason": "collector_error",
+                               "operation": payload.get("operation"), "error_type": payload.get("error_type")})
+            if payload.get("observation_stopped") is True:
+                self.active = False
+        elif kind == "connection.closed" and payload.get("role") in (None, "current"):
             self.close(at, "connection to Telegram closed")
-            self.disconnected = True
-        elif (kind == "collector.heartbeat" and payload.get("connected") is False
-              and (self.observing or self.silent)):
-            self.silent = False
-            self.close(self.alive, "connection to Telegram lost")
-            self.disconnected = True
         elif kind == "coverage.gap":
             reason = payload.get("reason")
             if chat_id is None and reason in INTERRUPTIONS:
                 cause = ACCOUNT_LOSS.get(payload.get("cause")) if reason == "authorization_required" else None
                 self.close(at, INTERRUPTIONS[reason] + (": " + cause if cause else ""))
-                self.silent = False
-                self.disconnected = reason == "transport_disconnected"
+                if reason != "transport_disconnected":
+                    self.active = False
             else:
                 self.notes.append({"at": at, "chat_id": chat_id, "reason": reason})
-        elif self.disconnected and (kind == "connection.restored" or
-                                    kind == "collector.heartbeat" and payload.get("connected") is True):
-            self.disconnected = False
-            self.open(at)
-        if self.observing and activity:
-            self.alive = at
+        elif heartbeat:
+            if payload.get("connected") is True:
+                if not self.observing:
+                    self.open(at)
+                self.alive = at
+            elif payload.get("connected") is False:
+                self.close(at, "collector heartbeat reports Telegram disconnected")
         if chat_id is not None and isinstance(payload.get("title"), str) and kind in (
                 "target.changed", "source.discovered", "target.removed"):
             self.titles[chat_id] = payload["title"]
@@ -872,10 +862,10 @@ class Coverage:
                                "ranges": [{"low": low, "high": high} for low, high in holes[:ranges_per_chat]],
                                "ranges_total": len(holes)})
         return {"continuous": periods, "gaps": gaps, "notes": self.notes[:200], "notes_total": len(self.notes),
-                "unobserved_ids": unobserved, "gap_summary": self.sequences.result(self.titles),
-                "first_record": self.first, "last_record": self.last,
-                "meaning": "Continuous = observation on, connected and writing records at least every three "
-                           "minutes (or every three heartbeat intervals when they are longer). IDs not observed were never seen by this collector; that is not evidence "
+                "unobserved_ids": unobserved, "gap_summary": self.sequences.result(self.titles), "first_record": self.first, "last_record": self.last,
+                "meaning": "Continuous = observation started and connected capture heartbeats recorded at least every three "
+                           "minutes (or every three heartbeat intervals when they are longer). Administrative and history records do not extend capture liveness. "
+                           "Still observing means not stopped as of the last capture confirmation, not proof of current activity or complete capture. IDs not observed were never seen by this collector; that is not evidence "
                            "that they were deleted. Only channels and supergroups number messages per chat."}
 
 
@@ -1074,7 +1064,7 @@ def coverage_lines(coverage):
         hours, rest = divmod(int(seconds), 3600)
         return (str(hours) + " h " if hours else "") + str(rest // 60) + " min"
     lines = ["Continuously observed from " + p["from"] + " to " + p["to"] + " (" + span(p["seconds"]) + ")"
-             + (", still observing at the last record" if p.get("still_observing") else "")
+             + (", observing at the last capture confirmation" if p.get("still_observing") else "")
              for p in coverage["continuous"]]
     lines += ["Gap from " + g["from"] + " to " + g["to"] + ": " + str(g["reason"]) for g in coverage["gaps"]]
     for chat in coverage["unobserved_ids"]:
@@ -2247,7 +2237,7 @@ def print_comparison(result, limit=50):
     print("Changed: " + str(len(result["changed"])))
     for item in result["changed"][:limit]:
         print("  #" + str(item["first"]["id"]) + ": " + " ".join(item["first"]["text"].split())[:80] + "  ->  "
-              + " ".join(item["second"]["text"].split())[:80])
+              + " ".join(item["second"]["text"].split())[:80] + " (" + ", ".join(item["changed_fields"]) + ")")
     print("Unchanged: " + str(result["unchanged"]))
     if not (first["key_pinned"] and second["key_pinned"]):
         print("Signer identity is unpinned for at least one archive: compare the fingerprints with copies kept elsewhere.")
@@ -2353,8 +2343,14 @@ def check_attachments(archive, manifest):
     for name, digest in files.items():
         if name.startswith("media/") and name[len("media/"):] != digest:
             raise ValueError("Attachment name differs from its SHA-256: " + name)
-    referenced, hash_files = 0, set()
+    referenced, hash_files, count, numbers = 0, set(), 0, set()
     for message in chat_messages(archive):
+        count += 1
+        number = message.get("id")
+        if type(number) is int:
+            if number in numbers:
+                raise ValueError("Duplicate message ID in chat.json: " + str(number))
+            numbers.add(number)
         if message.get("server_hashes") is not None:
             hashes = message["server_hashes"]
             validate_server_hashes(hashes)
@@ -2372,21 +2368,50 @@ def check_attachments(archive, manifest):
         referenced += 1
     if {name for name in files if name.startswith("hashes/")} != hash_files:
         raise ValueError("Unreferenced chat file-hash manifest")
+    if type(manifest.get("message_count")) is not int or manifest["message_count"] != count:
+        raise ValueError("Chat message count differs from the signed manifest")
     return referenced
 
 
 def chat_messages(archive):
     with archive.open("chat.json") as stream:
-        inside = False
-        for raw in bounded_lines(io.TextIOWrapper(stream, encoding="utf-8")):
+        inside, header, header_bytes, separator = False, [], 0, None
+        lines = iter(bounded_lines(io.TextIOWrapper(stream, encoding="utf-8")))
+        for raw in lines:
             line = raw.strip()
             if not inside:
-                inside = line.endswith('"messages": [')
+                if line == '"messages": [':
+                    # The export wire format places one complete message on each line.
+                    # Reject other layouts instead of authenticating bytes but silently skipping records.
+                    json.loads("".join(header) + '"messages": []}')
+                    inside = True
+                else:
+                    header_bytes += len(raw.encode("utf-8"))
+                    if header_bytes > MAX_JSON_BYTES:
+                        raise ValueError("Chat header exceeds the verification limit")
+                    header.append(raw)
                 continue
             if line.startswith("]"):
+                if separator:
+                    raise ValueError("Trailing comma after chat message")
+                tail = "".join(line.split())
+                for rest in lines:
+                    tail += "".join(rest.split())
+                    if len(tail) > 2:
+                        raise ValueError("Unexpected data after chat messages")
+                if tail != "]}":
+                    raise ValueError("Invalid chat messages terminator")
                 return
-            if line.startswith("{"):
-                yield json.loads(line.rstrip(","))
+            if not line:
+                continue
+            if separator is False:
+                raise ValueError("Missing comma between chat messages")
+            separator = line.endswith(",")
+            message = json.loads(line.removesuffix(","))
+            if not isinstance(message, dict):
+                raise ValueError("Chat message must be an object")
+            yield message
+        raise ValueError("Missing or unsupported chat messages array")
 
 
 def verify_parts(archive, manifest):

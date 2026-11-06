@@ -2063,16 +2063,14 @@ def gap_html(say, summary):
 def coverage_section(say, number, coverage):
     if not coverage:
         return ""
-    periods = [[when(p["from"]), when(p["to"]), e(span_text(say, p["from"], p["to"]))
-                + (' <span class="pill ok">' + e(say("still observing")) + "</span>" if p.get("still_observing") else "")]
+    periods = [[when(p["from"]), when(p["to"]), e(span_text(say, p["from"], p["to"]))]
                for p in coverage["continuous"]]
     gaps = [[when(g["from"]), when(g["to"]), e(g.get("reason"))] for g in coverage["gaps"]]
     ids = [[e(c.get("title") or c["chat_id"]), num(c["observed_from"]) + " – " + num(c["observed_to"]), num(c["observed"]),
             num(c["not_observed"]), ranges_text(c.get("ranges") or [], c.get("ranges_total", 0))]
            for c in coverage["unobserved_ids"]]
     out = section(number, "coverage", say("Coverage"),
-                  say("Continuous means observation was on, connected and writing records at least every three minutes. "
-                      "IDs not observed were never seen by this collector; that is not evidence that they were deleted."))
+                  coverage.get("meaning") or say("Recorded intervals only. Blank space is not proof of uninterrupted collection."))
     out += coverage_figure(say, coverage)
     out += "<h3>" + e(say("Continuous observation")) + "</h3>" + (table([say("Interval start"), say("Interval end"), say("Duration")], periods)
                                                                     if periods else "<p>—</p>")

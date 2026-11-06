@@ -109,6 +109,10 @@
     {
       "workflow_sha": "0b64d84a242c45293f96ab7db5a438ef062cabb0",
       "collector_sha": "d8b8f4c47b5e1de7da3aac458f02d775961df99d"
+    },
+    {
+      "workflow_sha": "8266c9deb026b15aa5170352fb1e255bad7ef0a3",
+      "collector_sha": "f20487e3da638bef2a66add2f4f29e04769329ea"
     }
   ]
 }

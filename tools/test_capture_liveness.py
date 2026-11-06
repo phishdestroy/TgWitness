@@ -41,7 +41,7 @@ def test_worker_failure_closes_signed_capture_before_cleanup(tmp_path):
             result = verify_bundle(archive, expected_fingerprint=fingerprint(vault.public_key))
             coverage = result["coverage"]
             assert result["key_pinned"]
-            assert coverage["continuous"][-1]["to"] == event("", 70)["observed_at"]
+            assert coverage["continuous"][-1]["to"] == event("", 60)["observed_at"]
             assert not any(p.get("still_observing") for p in coverage["continuous"])
             assert coverage["gaps"][-1]["not_resumed_by_last_record"]
     asyncio.run(run())

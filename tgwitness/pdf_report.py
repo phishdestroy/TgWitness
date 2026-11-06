@@ -997,9 +997,8 @@ def evidence_pdf(data, context, events=None, certificate=None):
                          (10, 26, 18, 17, 29))
 
         def render_coverage():
-            lay.section(say("Coverage"), say("Continuous means observation was on, connected and writing records at least "
-                                             "every three minutes. IDs not observed were never seen by this collector; "
-                                             "that is not evidence that they were deleted."))
+            lay.section(say("Coverage"), (coverage or {}).get("meaning") or
+                        say("Recorded intervals only. Blank space is not proof of uninterrupted collection."))
             if coverage:
                 lay.coverage_figure(coverage)
                 lay.grid([say("Interval start"), say("Interval end"), say("Duration")],
