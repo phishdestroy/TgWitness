@@ -1333,7 +1333,7 @@ function renderAccounts(){
     "{n} workspaces. Add as many as you need — each uses its own Telegram account.",list.length);
   $("account-add-form").querySelector("button").disabled=s.demo;
   const exits=new Map();
-  for(const value of list){const ip=value.collector?.network?.check?.exit_ip;if(ip)exits.set(ip,(exits.get(ip)||0)+1);}
+  for(const value of list){const net=value.collector?.network,ip=net?.check?.exit_ip;if(ip&&net.managed!=="warp")exits.set(ip,(exits.get(ip)||0)+1);}
   for(const value of list){
     const existing=cards.get(value.id),p=existing?Object.assign(existing.profileData,value):value;
     const c=p.collector,current=p.id===state.profile,down=!!p.error_type||!c;
