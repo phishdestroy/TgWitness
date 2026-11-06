@@ -6495,5 +6495,8 @@
   "Jurisdiction guidance": "Wskazówki dotyczące jurysdykcji",
   "Guidance": "Wskazówki",
   "Not selected": "Nie wybrano",
-  "Choose a jurisdiction from the supplied catalog.": "Wybierz jurysdykcję z katalogu."
+  "Choose a jurisdiction from the supplied catalog.": "Wybierz jurysdykcję z katalogu.",
+  "Recipient public key (X25519, base64; optional)": "Klucz publiczny odbiorcy (X25519, base64; opcjonalnie)",
+  "Require Compliance retention for every copied object": "Wymagaj przechowywania w trybie Compliance dla każdego skopiowanego obiektu",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "Przy użyciu klucza odbiorcy odtworzenie wymaga także jego klucza prywatnego. Przechowuj go oddzielnie. Zmiana odbiorcy rozpoczyna osobną kopię."
 }

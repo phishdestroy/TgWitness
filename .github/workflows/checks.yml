@@ -21,6 +21,8 @@ concurrency:
   group: checks-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name != 'release' }}
 jobs:
+  evidence:
+    uses: ./.github/workflows/evidence-checks.yml
   quality:
     name: Dependencies, lint and source
     # Independent checks use fresh runners; Docker retains the project runner.
@@ -266,22 +268,12 @@ jobs:
           echo "VIRTUAL_ENV=$check_venv" >> "$GITHUB_ENV"
       - name: Build the Windows portable package and check its embedded runtime
         run: python tools/build_portable.py
-      - name: Build the standalone verifier and check all recipient languages
-        run: python tools/build_verifier.py
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: tgwitness-windows-portable
           path: |
             dist/*-portable.zip
             dist/*-portable.zip.sha256
-          retention-days: 3
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
-        with:
-          name: tgwitness-windows-verifier
-          path: |
-            dist/TgWitness-verifier-*-all.zip
-            dist/TgWitness-verifier-*-all.zip.sha256
-          if-no-files-found: error
           retention-days: 3
   docker:
     name: Container and Compose integration
@@ -329,6 +321,13 @@ jobs:
           --security-opt=no-new-privileges --tmpfs /tmp:size=128m,mode=1777
           --mount type=bind,source="$GITHUB_WORKSPACE/tools",target=/checks,readonly
           tgwitness:test python /checks/check_container_runtime.py --output /data/checks
+      - name: Check authenticated APK retries and corrupt downloads inside Wolfi
+        run: >-
+          docker run --rm --network none --read-only --cap-drop=ALL
+          --security-opt=no-new-privileges --tmpfs /tmp:size=128m,mode=1777
+          --mount type=bind,source="$GITHUB_WORKSPACE/tools",target=/checks,readonly
+          tgwitness:test python /checks/test_container_fetch_retry.py
+          --installer /usr/share/tgwitness-build/containers/install-packages.sh
       - name: Check Compose health, access control, and persistent restart
         run: python tools/check_compose.py
   media:

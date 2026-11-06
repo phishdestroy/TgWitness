@@ -101,6 +101,34 @@ def test_key_entry_accepts_grouped_hex_but_never_executes_text(package):
     assert not (path.parent / "owned.txt").exists()
 
 
+@pytest.mark.parametrize("options", [("--strict",), ("--require-tier", "witnessed")])
+def test_interactive_keeps_assurance_requirements(package, options):
+    path, _ = package
+    result = run_reader(path, "\n", "--lang", "en", *options)
+    assert result.returncode == 2, result.stdout + result.stderr
+    text = next(path.parent.glob("verify-result-*.txt")).read_text(encoding="utf-8")
+    assert "Exit code: 2" in text and "SIGNER NOT CONFIRMED" in text
+
+
+def test_interactive_rejects_unpaired_attestation_inputs(package, tmp_path):
+    path, _ = package
+    result = run_reader(path, "\n", "--sealed-policy", str(tmp_path / "policy.json"))
+    assert result.returncode == 2 and "must be supplied together" in result.stderr
+    assert not list(path.parent.glob("verify-result-*.txt"))
+
+
+@pytest.mark.skipif(os.name == "nt", reason="Windows rejects control characters in file names")
+def test_interactive_transcript_sanitizes_archive_path(package):
+    path, pin = package
+    escaped = path.with_name("case\x1b[2J.zip")
+    path.rename(escaped)
+    result = run_reader(escaped, pin + "\n", "--lang", "en", "--no-color")
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "\x1b" not in result.stdout
+    text = next(path.parent.glob("verify-result-*.txt")).read_text(encoding="utf-8")
+    assert "\x1b" not in text and "case.zip" in text
+
+
 def test_missing_runtime_does_not_claim_html_is_archive_verification(tmp_path):
     if os.name != "nt":
         pytest.skip("Windows launcher")

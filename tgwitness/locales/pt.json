@@ -6417,5 +6417,8 @@
   "Jurisdiction guidance": "Orientações por jurisdição",
   "Guidance": "Orientações",
   "Not selected": "Não selecionado",
-  "Choose a jurisdiction from the supplied catalog.": "Escolha uma jurisdição do catálogo."
+  "Choose a jurisdiction from the supplied catalog.": "Escolha uma jurisdição do catálogo.",
+  "Recipient public key (X25519, base64; optional)": "Chave pública do destinatário (X25519, base64; opcional)",
+  "Require Compliance retention for every copied object": "Exigir retenção no modo Compliance para cada objeto copiado",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "Com uma chave de destinatário, a recuperação também exige a chave privada dele. Guarde-a separadamente. Mudar o destinatário inicia uma cópia separada."
 }

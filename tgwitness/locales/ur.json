@@ -6417,5 +6417,8 @@
   "Jurisdiction guidance": "دائرۂ اختیار کی رہنمائی",
   "Guidance": "رہنمائی",
   "Not selected": "منتخب نہیں",
-  "Choose a jurisdiction from the supplied catalog.": "فہرست سے دائرۂ اختیار منتخب کریں۔"
+  "Choose a jurisdiction from the supplied catalog.": "فہرست سے دائرۂ اختیار منتخب کریں۔",
+  "Recipient public key (X25519, base64; optional)": "وصول کنندہ کی عوامی کلید (X25519، base64؛ اختیاری)",
+  "Require Compliance retention for every copied object": "ہر نقل شدہ آبجیکٹ کے لیے Compliance موڈ میں محفوظ رکھنا لازم کریں",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "وصول کنندہ کی کلید استعمال کرنے پر بحالی کے لیے اس کی نجی کلید بھی درکار ہے۔ اسے الگ محفوظ رکھیں۔ وصول کنندہ بدلنے سے ایک الگ نقل شروع ہوتی ہے۔"
 }

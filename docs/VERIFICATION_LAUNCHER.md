@@ -119,6 +119,13 @@ The default maximum expanded ZIP size is 4 GiB; `--max-gib` explicitly changes
 it. `--json` keeps its machine-readable format, including when `--explain` is
 supplied. `--plain --explain` gives readable explanations without colour.
 
+Interactive mode also preserves `--strict`, `--require-tier`, `--check-bitcoin`
+and the sealed-attestation options. Strict or unmet assurance requirements return
+status 2; an authenticated newer format returns status 3 with `--strict`.
+`--check-drand`, `--check-bitcoin` and the corresponding required tiers can use
+network services. Attestation verification requires the installed TgWitness
+sealed verifier and `gh`; the standalone archive does not provide those tools.
+
 `VERIFY.cmd`, `VERIFY.sh` and `START_HERE.txt` are generated before signing the
 manifest for evidence, chat, handover, account, disclosure and witness exports.
 They are hashed and signed as ordinary archive members. Encrypted transport

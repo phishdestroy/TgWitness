@@ -6440,5 +6440,8 @@
   "Jurisdiction guidance": "Hinweise zur Rechtsordnung",
   "Guidance": "Hinweise",
   "Not selected": "Nicht ausgewählt",
-  "Choose a jurisdiction from the supplied catalog.": "Wählen Sie eine Rechtsordnung aus dem Katalog."
+  "Choose a jurisdiction from the supplied catalog.": "Wählen Sie eine Rechtsordnung aus dem Katalog.",
+  "Recipient public key (X25519, base64; optional)": "Öffentlicher Schlüssel des Empfängers (X25519, base64; optional)",
+  "Require Compliance retention for every copied object": "Für jedes kopierte Objekt Aufbewahrung im Compliance-Modus verlangen",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "Bei einem Empfängerschlüssel benötigt die Wiederherstellung auch den privaten Schlüssel des Empfängers. Bewahren Sie ihn getrennt auf. Ein Empfängerwechsel beginnt eine separate Kopie."
 }

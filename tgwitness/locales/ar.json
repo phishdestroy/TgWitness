@@ -6573,5 +6573,8 @@
   "Jurisdiction guidance": "إرشادات الاختصاص القضائي",
   "Guidance": "الإرشادات",
   "Not selected": "لم يتم الاختيار",
-  "Choose a jurisdiction from the supplied catalog.": "اختر اختصاصاً قضائياً من الدليل."
+  "Choose a jurisdiction from the supplied catalog.": "اختر اختصاصاً قضائياً من الدليل.",
+  "Recipient public key (X25519, base64; optional)": "المفتاح العام للمستلم (X25519، base64؛ اختياري)",
+  "Require Compliance retention for every copied object": "اشتراط الاحتفاظ في وضع Compliance لكل كائن منسوخ",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "عند استخدام مفتاح المستلم، تتطلب الاستعادة أيضًا مفتاحه الخاص. احتفظ به بشكل منفصل. يؤدي تغيير المستلم إلى بدء نسخة منفصلة."
 }

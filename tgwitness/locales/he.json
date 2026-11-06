@@ -6456,5 +6456,8 @@
   "Jurisdiction guidance": "הנחיות לפי תחום שיפוט",
   "Guidance": "הנחיות",
   "Not selected": "לא נבחר",
-  "Choose a jurisdiction from the supplied catalog.": "בחרו תחום שיפוט מהקטלוג."
+  "Choose a jurisdiction from the supplied catalog.": "בחרו תחום שיפוט מהקטלוג.",
+  "Recipient public key (X25519, base64; optional)": "המפתח הציבורי של הנמען (X25519, base64; רשות)",
+  "Require Compliance retention for every copied object": "דרישת שמירה במצב Compliance לכל אובייקט שהועתק",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "בשימוש במפתח נמען, השחזור דורש גם את המפתח הפרטי שלו. יש לשמור אותו בנפרד. החלפת הנמען מתחילה עותק נפרד."
 }

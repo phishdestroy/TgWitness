@@ -6378,5 +6378,8 @@
   "Jurisdiction guidance": "Hướng dẫn theo thẩm quyền",
   "Guidance": "Hướng dẫn",
   "Not selected": "Chưa chọn",
-  "Choose a jurisdiction from the supplied catalog.": "Chọn thẩm quyền từ danh mục."
+  "Choose a jurisdiction from the supplied catalog.": "Chọn thẩm quyền từ danh mục.",
+  "Recipient public key (X25519, base64; optional)": "Khóa công khai của người nhận (X25519, base64; tùy chọn)",
+  "Require Compliance retention for every copied object": "Yêu cầu lưu giữ ở chế độ Compliance cho mỗi đối tượng được sao chép",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "Khi dùng khóa người nhận, việc khôi phục cũng cần khóa riêng của người nhận. Hãy lưu khóa riêng biệt. Đổi người nhận sẽ bắt đầu một bản sao riêng."
 }

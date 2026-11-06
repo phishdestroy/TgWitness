@@ -6378,5 +6378,8 @@
   "Jurisdiction guidance": "法域別ガイダンス",
   "Guidance": "ガイダンス",
   "Not selected": "未選択",
-  "Choose a jurisdiction from the supplied catalog.": "一覧から法域を選択してください。"
+  "Choose a jurisdiction from the supplied catalog.": "一覧から法域を選択してください。",
+  "Recipient public key (X25519, base64; optional)": "受信者の公開鍵（X25519、base64、任意）",
+  "Require Compliance retention for every copied object": "コピーしたすべてのオブジェクトに Compliance モードでの保持を要求",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "受信者の鍵を使う場合、復元には受信者の秘密鍵も必要です。秘密鍵は別に保管してください。受信者を変更すると、別のコピーの作成が始まります。"
 }

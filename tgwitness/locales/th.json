@@ -6378,5 +6378,8 @@
   "Jurisdiction guidance": "คำแนะนำตามเขตอำนาจศาล",
   "Guidance": "คำแนะนำ",
   "Not selected": "ยังไม่ได้เลือก",
-  "Choose a jurisdiction from the supplied catalog.": "เลือกเขตอำนาจศาลจากรายการ"
+  "Choose a jurisdiction from the supplied catalog.": "เลือกเขตอำนาจศาลจากรายการ",
+  "Recipient public key (X25519, base64; optional)": "กุญแจสาธารณะของผู้รับ (X25519, base64; ไม่บังคับ)",
+  "Require Compliance retention for every copied object": "กำหนดให้เก็บรักษาทุกออบเจ็กต์ที่คัดลอกในโหมด Compliance",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "เมื่อใช้กุญแจของผู้รับ การกู้คืนต้องใช้กุญแจส่วนตัวของผู้รับด้วย เก็บกุญแจไว้แยกต่างหาก การเปลี่ยนผู้รับจะเริ่มสำเนาแยกใหม่"
 }

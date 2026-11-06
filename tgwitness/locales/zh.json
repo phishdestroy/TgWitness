@@ -6378,5 +6378,8 @@
   "Jurisdiction guidance": "司法管辖区指南",
   "Guidance": "指南",
   "Not selected": "未选择",
-  "Choose a jurisdiction from the supplied catalog.": "请从目录中选择司法管辖区。"
+  "Choose a jurisdiction from the supplied catalog.": "请从目录中选择司法管辖区。",
+  "Recipient public key (X25519, base64; optional)": "接收方公钥（X25519，base64；可选）",
+  "Require Compliance retention for every copied object": "要求每个复制的对象使用 Compliance 模式保留",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "使用接收方密钥时，恢复还需要接收方的私钥。请单独保管私钥。更换接收方将开始创建独立副本。"
 }

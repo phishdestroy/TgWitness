@@ -6417,5 +6417,8 @@
   "Jurisdiction guidance": "Yargı alanı rehberi",
   "Guidance": "Rehber",
   "Not selected": "Seçilmedi",
-  "Choose a jurisdiction from the supplied catalog.": "Katalogdan bir yargı alanı seçin."
+  "Choose a jurisdiction from the supplied catalog.": "Katalogdan bir yargı alanı seçin.",
+  "Recipient public key (X25519, base64; optional)": "Alıcının açık anahtarı (X25519, base64; isteğe bağlı)",
+  "Require Compliance retention for every copied object": "Kopyalanan her nesne için Compliance modunda saklama gerektir",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "Alıcı anahtarı kullanıldığında kurtarma için alıcının özel anahtarı da gerekir. Bu anahtarı ayrı saklayın. Alıcı değişikliği ayrı bir kopya başlatır."
 }

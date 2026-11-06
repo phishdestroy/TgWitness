@@ -6378,5 +6378,8 @@
   "Jurisdiction guidance": "Panduan bidang kuasa",
   "Guidance": "Panduan",
   "Not selected": "Belum dipilih",
-  "Choose a jurisdiction from the supplied catalog.": "Pilih bidang kuasa daripada katalog."
+  "Choose a jurisdiction from the supplied catalog.": "Pilih bidang kuasa daripada katalog.",
+  "Recipient public key (X25519, base64; optional)": "Kunci awam penerima (X25519, base64; pilihan)",
+  "Require Compliance retention for every copied object": "Wajibkan pengekalan dalam mod Compliance bagi setiap objek yang disalin",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "Dengan kunci penerima, pemulihan juga memerlukan kunci peribadi penerima. Simpannya secara berasingan. Menukar penerima memulakan salinan berasingan."
 }

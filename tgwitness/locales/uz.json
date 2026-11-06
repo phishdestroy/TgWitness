@@ -6417,5 +6417,8 @@
   "Jurisdiction guidance": "Yurisdiksiya bo‘yicha yo‘riqnoma",
   "Guidance": "Yo‘riqnoma",
   "Not selected": "Tanlanmagan",
-  "Choose a jurisdiction from the supplied catalog.": "Katalogdan yurisdiksiya tanlang."
+  "Choose a jurisdiction from the supplied catalog.": "Katalogdan yurisdiksiya tanlang.",
+  "Recipient public key (X25519, base64; optional)": "Qabul qiluvchining ochiq kaliti (X25519, base64; ixtiyoriy)",
+  "Require Compliance retention for every copied object": "Har bir nusxalangan obyekt uchun Compliance rejimida saqlashni talab qilish",
+  "With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.": "Qabul qiluvchi kaliti ishlatilsa, tiklash uchun uning maxfiy kaliti ham kerak. Uni alohida saqlang. Qabul qiluvchini o‘zgartirish alohida nusxa yaratishni boshlaydi."
 }
