@@ -863,10 +863,9 @@ class Coverage:
                                "ranges_total": len(holes)})
         return {"continuous": periods, "gaps": gaps, "notes": self.notes[:200], "notes_total": len(self.notes),
                 "unobserved_ids": unobserved, "gap_summary": self.sequences.result(self.titles), "first_record": self.first, "last_record": self.last,
-                "meaning": "Continuous = observation started and connected capture heartbeats recorded at least every three "
-                           "minutes (or every three heartbeat intervals when they are longer). Administrative and history records do not extend capture liveness. "
-                           "Still observing means not stopped as of the last capture confirmation, not proof of current activity or complete capture. IDs not observed were never seen by this collector; that is not evidence "
-                           "that they were deleted. Only channels and supergroups number messages per chat."}
+                "meaning": "Observation intervals follow connected capture heartbeats from the same run, within three "
+                           "heartbeat intervals (at least three minutes). Each interval ends at its last capture "
+                           "confirmation or recorded stop. Message-number gaps describe the observed numbering range."}
 
 
 # Missing message numbers. Telegram numbers messages once per channel or supergroup, and once per account

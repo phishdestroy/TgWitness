@@ -998,7 +998,7 @@ def evidence_pdf(data, context, events=None, certificate=None):
 
         def render_coverage():
             lay.section(say("Coverage"), (coverage or {}).get("meaning") or
-                        say("Recorded intervals only. Blank space is not proof of uninterrupted collection."))
+                        say("Recorded observation intervals."))
             if coverage:
                 lay.coverage_figure(coverage)
                 lay.grid([say("Interval start"), say("Interval end"), say("Duration")],

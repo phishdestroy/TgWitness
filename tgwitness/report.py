@@ -2070,7 +2070,7 @@ def coverage_section(say, number, coverage):
             num(c["not_observed"]), ranges_text(c.get("ranges") or [], c.get("ranges_total", 0))]
            for c in coverage["unobserved_ids"]]
     out = section(number, "coverage", say("Coverage"),
-                  coverage.get("meaning") or say("Recorded intervals only. Blank space is not proof of uninterrupted collection."))
+                  coverage.get("meaning") or say("Recorded observation intervals."))
     out += coverage_figure(say, coverage)
     out += "<h3>" + e(say("Continuous observation")) + "</h3>" + (table([say("Interval start"), say("Interval end"), say("Duration")], periods)
                                                                     if periods else "<p>—</p>")
