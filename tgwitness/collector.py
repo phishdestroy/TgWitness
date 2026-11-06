@@ -399,6 +399,8 @@ class Collector:
             "last_update_at": self.last_update_at,
             "max_handler_ms": round(self.max_handler_ms, 2),
             "rpc_backoff_until": self.store.get_setting("rpc_backoff_until", 0),
+            "rpc_backoff": self.store.get_setting("rpc_backoff", None),
+            "rpc_activity": self.client.rpc_activity() if isinstance(self.client, WitnessClient) else None,
             "disk_free_bytes": shutil.disk_usage(self.store.root).free,
             "run_id": self.run_id,
             "reconnect_attempts": self.reconnect_attempts,
@@ -673,6 +675,10 @@ class Collector:
         client.rpc_backoff_getter = lambda: self.store.get_setting("rpc_backoff_until", 0)
         client.rpc_backoff_setter = lambda until: self.store.set_setting("rpc_backoff_until", max(
             until, self.store.get_setting("rpc_backoff_until", 0)))
+        def rpc_backoff(details):
+            self.store.set_setting("rpc_backoff", details)
+            self.store.append("telegram.backoff", {"operation": "Telegram RPC", **details})
+        client.rpc_backoff_observer = rpc_backoff
         request = getattr(client, "_init_request", None)
         if isinstance(request, functions.InitConnectionRequest):
             request.lang_pack = device["lang_pack"]

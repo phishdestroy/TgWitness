@@ -3980,6 +3980,11 @@ function renderSeenBy(){
   show("independent-session-pending",!!c.pending_new_session);
   if(c.session_origin?.method==="qr_from_import")rows.push([tr("Authorization origin"),tr("Independent QR login approved by an imported session")]);
   const checked=c.client_checks;
+  const backoff=c.rpc_backoff;
+  if(c.rpc_backoff_until>Date.now()/1000){
+    rows.push([tr("Telegram rate limit"),backoff?.failed_method||backoff?.method||tr("Method unavailable")]);
+    rows.push([tr("Requests paused until"),formatTime(new Date(c.rpc_backoff_until*1000).toISOString())]);
+  }
   if(checked){
     rows.push([tr("Current authorization"),typeof checked.official_app==="boolean"?"official_app="+(checked.official_app?"True":"False"):tr("Official-app flag unavailable")]);
     rows.push([tr("Checked"),checked.checked_at||""]);

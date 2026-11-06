@@ -1,4 +1,5 @@
 import asyncio
+import copy
 import time
 from contextvars import ContextVar
 
@@ -15,7 +16,31 @@ _ACTIONS = (functions.messages.GetBotCallbackAnswerRequest,
             functions.auth.AcceptLoginTokenRequest)
 
 
+def request_method(request):
+    """Only TL method names: never serialize request arguments or error text."""
+    wrappers = (functions.InvokeWithTakeoutRequest, functions.InvokeWithMessagesRangeRequest,
+                functions.InvokeWithLayerRequest, functions.InitConnectionRequest)
+    names = []
+    for _ in range(8):
+        cls = type(request)
+        prefix = "telethon.tl.functions"
+        if cls.__module__ != prefix and not cls.__module__.startswith(prefix + "."):
+            names.append("unknown")
+            break
+        namespace = cls.__module__[len(prefix):].strip(".")
+        name = cls.__name__.removesuffix("Request")
+        names.append((namespace + "." if namespace else "") + name[:1].lower() + name[1:])
+        if not isinstance(request, wrappers):
+            break
+        request = request.query
+    return {"method": names[-1], "wrappers": names[:-1]}
+
+
 class WitnessClient(TelegramClient):
+
+    def rpc_activity(self):
+        # These count client calls, not packets or Telethon's internal retries.
+        return copy.deepcopy(getattr(self, "_rpc_activity", None))
 
     async def connect(self):
         from .client_identity import apply_init_params
@@ -67,13 +92,34 @@ class WitnessClient(TelegramClient):
             await asyncio.sleep(min(remaining, 1))
         single = isinstance(request, _ACTIONS)
         token = _single_attempt.set(single)
+        info = request_method(request)
+        if not hasattr(self, "_rpc_activity"):
+            self._rpc_activity = {"since": time.time(), "methods": {}}
+        key = "/".join([*info["wrappers"], info["method"]])
+        counts = self._rpc_activity["methods"].setdefault(key,
+            {"calls": 0, "ok": 0, "errors": 0, "cancelled": 0, "flood_waits": 0})
+        counts["calls"] += 1
         try:
-            return await super()._call(sender, request, ordered, flood_sleep_threshold)
+            result = await super()._call(sender, request, ordered, flood_sleep_threshold)
+            counts["ok"] += 1
+            return result
+        except asyncio.CancelledError:
+            counts["cancelled"] += 1
+            raise
         except Exception as exc:
+            counts["errors"] += 1
             if isinstance(exc, FLOOD_ERRORS):
-                self._rpc_wait_until = max(self._rpc_wait_until, time.time() + exc.seconds + 1)
+                counts["flood_waits"] += 1
+                self._rpc_wait_until = max(self._rpc_wait_until,
+                    getattr(self, "rpc_backoff_getter", lambda: 0)(), time.time() + exc.seconds + 1)
                 if save := getattr(self, "rpc_backoff_setter", None):
                     save(self._rpc_wait_until)
+                if observe := getattr(self, "rpc_backoff_observer", None):
+                    failed = getattr(exc, "request", None)
+                    observe({**info, "failed_method": request_method(failed)["method"] if failed is not None else info["method"],
+                             "error_type": type(exc).__name__, "retry_after_seconds": exc.seconds,
+                             "wait_until": self._rpc_wait_until, "observed_at": time.time(),
+                             "activity": self.rpc_activity()})
             if handler := getattr(self, "rpc_error_handler", None):
                 handler(exc)
             raise

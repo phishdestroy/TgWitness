@@ -104,6 +104,18 @@ tokens or API hashes. They never accept terms or install updates. A request
 failure or FloodWait stops subsequent requests; a missing result stays unknown.
 Local checks can still report their results while network checks are skipped.
 
+FloodWait diagnostics retain the failed TL method, any Takeout/range wrappers,
+the server-requested wait and the effective deadline in `telegram.backoff`.
+Connection details show the method and deadline while requests are paused.
+The diagnostic includes per-method client-call counters since that client was
+created; they count nested peer resolution separately, but do not count packets
+or Telethon's internal retry attempts. Current counters are also available as
+`collector.rpc_activity` in the status API. No request arguments, usernames, access
+hashes or exception text are included. The last diagnostic and full deadline
+survive restart. Earlier waits without a method record cannot be attributed
+retrospectively. See [export limits](EXPORT-LIMITS.md) for the source review and
+the distinction between discovery and history acquisition.
+
 `official_app=True` or `False` is Telegram's current-authorization flag. Neither
 value establishes whether the account is restricted, trusted or under observation.
 The existing evidence-mode `account.devices` snapshots remain the history of all
