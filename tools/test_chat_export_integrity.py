@@ -2,12 +2,15 @@ import asyncio
 import builtins
 import json
 from itertools import islice
+from pathlib import Path
+import sys
 from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
 import pytest
 from telethon.tl import types
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tgwitness import chat_export, distributed_export, replica, telegram_client
 from tgwitness.collector import Collector, absent_numbers, message_record
 from tgwitness.message_numbers import MissingNumbers
