@@ -1171,6 +1171,8 @@ button.pill { cursor: pointer; font-family: inherit; }
 .connection-simple > .page-heading { grid-column: 1 / -1; align-items: center; }
 .connection-simple #account-summary { grid-column: 1; margin: 0 0 14px; }
 .connection-simple:has(#credentials-form:not([hidden]), #authorized-state:not([hidden])) #account-summary { display: none; }
+.connection-simple:has(#authorized-state:not([hidden])) { grid-template-columns: minmax(0, 640px); justify-content: center; }
+.connection-simple:has(#authorized-state:not([hidden])) .account-guide { display: none; }
 .auth-card {
   grid-column: 1; padding: 26px; border: 1px solid var(--border); border-radius: var(--radius-xl);
   background: var(--surface); box-shadow: none;
