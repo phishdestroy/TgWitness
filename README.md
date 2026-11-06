@@ -133,6 +133,7 @@ chat, records partial results at its deadline, and splits large encrypted delive
 | [Sealed official Web](docs/OFFICIAL-WITNESS.md) | Fresh official browser on GitHub Actions，restricted controls，signed video and independently expected source/settings |
 | [Webhooks](docs/WEBHOOKS.md) | Signed outgoing events with retries, n8n example included |
 | [Shared access](docs/ACCESS.md) | Give someone selected chats only, with expiry and IP limits |
+| [Missing message numbers](docs/EVIDENCE.md#missing-message-numbers-gap_summary) | Numbers Telegram assigned that were never observed, per channel and for the whole account, in coverage, reports and MCP (**Preview**) |
 
 </details>
 

@@ -270,10 +270,49 @@ Every signed ZIP carries `coverage.json`, the HTML report opens with the same su
 - **Message IDs not observed.** For channels and supergroups, which number messages per
   chat, the IDs missing between observed ones are listed as ranges. They are reported as
   *not observed* — deleted, never delivered, or outside the saved history — never as
-  deleted. Private chats and ordinary groups share an account-wide sequence, so gaps there
-  mean nothing and are not listed.
+  deleted. Private chats and ordinary groups share an account-wide sequence, so gaps inside
+  one such chat mean nothing and are not listed there.
 - Chat-level gap notices (for example Telegram asking for difference recovery in one
   channel) are counted as notes; they do not interrupt global coverage.
+
+### Missing message numbers (`gap_summary`)
+
+**Preview.** `coverage.json` → `gap_summary` measures the numbers Telegram assigned and this
+collector never saw. Telegram numbers messages once per channel or supergroup, and once per
+account across private chats, bots and ordinary groups. A number between two observed
+messages is either observed or missing; a contiguous range is a positive statement that
+every message numbered in it was observed. A gap names no actor and no reason.
+
+| Field | Meaning |
+| --- | --- |
+| `status` | `on`, or `off` when turned off in **Parameters → Gap analysis** |
+| `parameters` | The parameters that produced the result, so it can be repeated |
+| `chats[]` | One entry per channel or supergroup, each numbered on its own |
+| `account` | The account-wide sequence of private chats, bots and ordinary groups |
+| `status` (per sequence) | `applicable`, or `not_applicable` with `reason` |
+| `observed_from`, `observed_to`, `span` | First and last observed number and the size of the range |
+| `observed`, `observed_without_content` | Observed numbers; those known only from a deletion or recheck record |
+| `missing`, `density`, `gap_ranges`, `largest_gap` | Numbers never observed, their share of the range, how many runs, the longest run |
+| `clusters[]` | Listed gaps: `low`, `high`, `missing`, and the neighbouring observed numbers `after` / `before` with their observation times |
+| `service_estimate` | Only when enabled: how many missing numbers would be service messages at their observed share. Never subtracted from `missing` |
+
+Validity is derived from the journal, never assumed:
+
+- **Channels and supergroups** are measured per chat, also in an export of chosen chats.
+  Records chosen by sender make the measurement `not_applicable`.
+- **The account-wide sequence** is measured only from the first to the last message that
+  arrived while whole-account collection was on and kept private chats, bots, ordinary
+  groups and the account's own messages, with no such chat excluded (`scope.changed`).
+  Numbers named by `deletion.unscoped` count as observed without content. An export or
+  handover of chosen chats cannot measure it. If whole-account collection was switched
+  off and on, a note says that numbers used meanwhile appear as gaps.
+- Service messages are journal records with their own numbers, so they close their gaps
+  themselves; the optional estimate is only context.
+
+`verify.py` recomputes `gap_summary` from `events.jsonl` with the default parameters and
+prints the account-wide line in its coverage summary. The archive's `get_capture_status`
+(MCP and the command line) returns the same measurement for the chats an access may read;
+the account-wide sequence only to access covering the whole workspace.
 
 When Telegram stops accepting the account, the `coverage.gap` record that ends observation
 carries `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`,

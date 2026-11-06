@@ -106,7 +106,7 @@ stable hostname for saved client configurations.
 | `get_message_versions` | Captured versions and deletion observations |
 | `get_message_context` | Nearby captured message IDs |
 | `get_journal_event` | One sanitized record with its source reference |
-| `get_capture_status` | Collection state and permitted coverage records |
+| `get_capture_status` | Collection state, permitted coverage records and `gap_summary`: message numbers never observed, per channel or supergroup and for the account-wide sequence ([details](EVIDENCE.md#missing-message-numbers-gap_summary)); choose a chat to see its listed gaps |
 
 `tools/list` returns only the tools granted to that connection. Calls to other
 tools are refused. Group-context, episode, terminology and reply-chain tools are
