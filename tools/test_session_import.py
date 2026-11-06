@@ -17,7 +17,7 @@ from tgwitness import client_checks, client_initialization
 from tgwitness.account_import import import_accounts, preview, session_key
 from tgwitness.collector import Collector
 from tgwitness.profiles import Profiles
-from tgwitness.security import Vault
+from tgwitness.security import KeyInUse, KeyLock, Vault
 from tgwitness.store import Store
 from tgwitness.verify import verify_events
 from tools.browser_fixtures import FakeClient, saved_session, sqlite_fixture, tdata_fixture
@@ -43,10 +43,14 @@ class DonorClient(FakeClient):
         assert key not in self.active, "The same authorization key connected twice"
         self.active.add(key)
         self.connected = True
+        if listener := getattr(self, "connection_listener", None):
+            listener("opened")
 
     async def disconnect(self):
         self.active.discard(session_key(self.session.save()))
         self.connected = False
+        if listener := getattr(self, "connection_listener", None):
+            listener("closed")
 
     async def is_user_authorized(self):
         return session_key(self.session.save()) in self.authorized_keys
@@ -60,6 +64,9 @@ class DonorClient(FakeClient):
         assert isinstance(request, functions.auth.AcceptLoginTokenRequest), type(request).__name__
         type(self).accepts += 1
         candidate = next(c for c in self.instances if c.listening)
+        for active in (self, candidate):
+            with pytest.raises(KeyInUse):
+                KeyLock(session_key(active.session.save()))
         assert self.api_id == 4 and self.tgwitness_client_profile["device_model"] == PROFILE["device_model"]
         assert candidate.api_id == 2040 and candidate.tgwitness_client_profile["lang_pack"] == "tdesktop"
         assert candidate.options["device_model"] != self.options["device_model"]

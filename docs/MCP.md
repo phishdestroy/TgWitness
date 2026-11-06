@@ -3,7 +3,8 @@
 Connect an analyst client to selected workspaces and chats. TgWitness serves
 **Streamable HTTP at `/mcp` in the panel process**. Each connection has its own
 token, expiry and permitted tools. MCP cannot send Telegram messages, change
-settings or modify the signed journal.
+settings or modify the signed journal. The same connections work with the
+[command line](CLI.md).
 
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](wiki/Archive-and-Integrations.md)
 
@@ -102,11 +103,13 @@ stable hostname for saved client configurations.
 | --- | --- |
 | `list_workspaces` | Granted workspaces |
 | `list_chats` | Granted chats |
-| `search_messages` | Saved message text within the selected period |
+| `search_messages` | Saved message text within the selected period; `ranked=true` uses [full-text search](SEARCH.md) (word forms, best matches first, `next_offset` paging) |
 | `get_message_versions` | Captured versions and deletion observations |
 | `get_message_context` | Nearby captured message IDs |
 | `get_journal_event` | One sanitized record with its source reference |
-| `get_capture_status` | Collection state and permitted coverage records |
+| `get_capture_status` | Collection state, permitted coverage records and `gap_summary`: message numbers never observed, per channel or supergroup and for the account-wide sequence ([details](EVIDENCE.md#missing-message-numbers-gap_summary)); choose a chat to see its listed gaps |
+| `get_activity_stats` | Messages by UTC hour and weekday, peak days, edit and deletion shares, senders, domains and `@handles`, with coverage ([details](CLI.md#activity-statistics)) |
+| `export_messages` | Command line only, not selected by default: streams saved observations as JSON Lines ([details](CLI.md#export)); not offered over MCP |
 
 `tools/list` returns only the tools granted to that connection. Calls to other
 tools are refused. Group-context, episode, terminology and reply-chain tools are

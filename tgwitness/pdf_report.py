@@ -601,7 +601,7 @@ def details_lines(say, d, *, include_media=True):
         for field in ("document_id", "photo_id"):
             if type(media.get(field)) is int:
                 lines.append(say("Media ID") + ": " + str(media[field]))
-        if type(media.get("self_destruct_seconds")) is int:
+        if type(media.get("self_destruct_seconds")) is int and not media.get("ephemeral_media"):
             lines.append(say("Self-destruct timer") + ": " + report.seconds_text(say, media["self_destruct_seconds"]))
     return lines
 
@@ -712,6 +712,9 @@ def records(lay, say, events, titles, options):
             lay.text((payload.get("original_name") or say("Saved file")) + " · " + str(payload.get("mime_type") or "—")
                      + " · " + report.size_text(payload.get("size")), size=8)
             lay.text(say("File SHA-256") + ": " + payload["media_sha256"], size=6.8, color=MUTED, family="Mono")
+        if event["kind"].startswith("media.") and payload.get("ephemeral_media"):
+            from . import ephemeral
+            lay.text(ephemeral.label(say, payload["ephemeral_media"]), size=7.8, color=MUTED)
         lay.text(say("Record hash") + " · SHA-256 " + event["hash"], size=6.8, color=MUTED, family="Mono")
         lay.gap(1)
     if run:
@@ -994,9 +997,8 @@ def evidence_pdf(data, context, events=None, certificate=None):
                          (10, 26, 18, 17, 29))
 
         def render_coverage():
-            lay.section(say("Coverage"), say("Continuous means observation was on, connected and writing records at least "
-                                             "every three minutes. IDs not observed were never seen by this collector; "
-                                             "that is not evidence that they were deleted."))
+            lay.section(say("Coverage"), (coverage or {}).get("meaning") or
+                        say("Recorded observation intervals."))
             if coverage:
                 lay.coverage_figure(coverage)
                 lay.grid([say("Interval start"), say("Interval end"), say("Duration")],
@@ -1013,6 +1015,23 @@ def evidence_pdf(data, context, events=None, certificate=None):
                              [[c.get("title") or c["chat_id"], str(c["observed_from"]) + " – " + str(c["observed_to"]),
                                c["observed"], c["not_observed"], ranges_line(c.get("ranges") or [], c.get("ranges_total", 0))]
                               for c in coverage["unobserved_ids"]], (26, 18, 12, 12, 32))
+                view = report.gap_overview(say, coverage.get("gap_summary"))
+                if view is not None:
+                    lay.heading(say("Missing message numbers"))
+                    lay.text(view["lead"], size=8, color=MUTED)
+                    if view["measured"]:
+                        widths = (28, 18, 11, 11, 10, 11, 11) if len(view["headers"]) == 7 else (30, 20, 12, 12, 12, 14)
+                        lay.grid(view["headers"], [[str(value) for value in row] for row in view["measured"]], widths)
+                    if view["listed"]:
+                        lay.heading(say("Listed gaps"))
+                        lay.grid(view["listed_headers"], [
+                            [name, numbers, str(count), str(after), report.utc_text(after_at), str(before),
+                             report.utc_text(before_at)]
+                            for name, numbers, count, after, after_at, before, before_at in view["listed"]],
+                            (20, 16, 8, 11, 17, 11, 17))
+                    if view["skipped"]:
+                        lay.grid(view["skipped_headers"], view["skipped"], (30, 70))
+                    lay.text(view["note"], size=7.5, color=MUTED)
                 lay.heading(say("Verifier summary"))
                 for line in coverage_lines(coverage):
                     lay.text(line, size=7.2, family="Mono")
@@ -1425,6 +1444,10 @@ def transcript(lay, say, messages, numbered=False):
                      style="B", color=WARN)
         if type(record.get("id")) is int:
             previous = record["id"] if type(previous) is not int else max(previous, record["id"])
+        if record.get("type") == "unparsed":
+            lay.text("—  " + report.unparsed_text(say, record) + "  —", size=7.8, style="B", color=WARN)
+            lay.gap(0.8)
+            continue
         sender = record.get("from") or (str(record["from_id"]) if record.get("from_id") is not None else say("Unknown"))
         head = "#" + str(record.get("id")) + "  " + report.utc_text(record.get("date")) + " · " + sender
         if record.get("selection"):

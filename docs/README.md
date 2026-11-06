@@ -53,7 +53,9 @@ First time? Do it in this order:
 | Send a trimmed copy to a lawyer | [Minimized disclosure](ACCOUNT-EXPORT.md#prepare-a-disclosure-for-a-lawyer-or-another-recipient) |
 | Give someone limited access | [Access and permissions](ACCESS.md) |
 | Connect an AI client | [Read-only MCP](MCP.md) |
+| Script searches, statistics and exports | [Command line](CLI.md) (preview) |
 | Ask questions, write a report | [Archive analysis](ANALYSIS.md) |
+| Find messages by word forms, domains or @usernames | [Full-text search](SEARCH.md) (preview) |
 | Keep team notes on a case | [Case Board](CASE-BOARD.md) |
 | Hand over a readable report | [Case reports](CASE_REPORTS.md) |
 | Read text in images and audio | [Local OCR and transcription](MEDIA-ANALYSIS.md) |
@@ -79,7 +81,7 @@ Also: [panel safeguards](PANEL-SAFETY.md), [storage and recovery](STORAGE.md),
 - [Security model and data handling](SECURITY-MODEL.md)
 - [Access scopes, permissions and sessions](ACCESS.md)
 - [Connection and secret storage](CONNECTION-SECURITY.md)
-- [Readiness and known limits](internal/READINESS.md)
+- [Release checks](internal/READINESS.md)
 - [Live acceptance procedure](internal/LIVE_ACCEPTANCE.md)
 - [External timestamps](TIMESTAMP.md)
 - [Release procedure](internal/RELEASE.md)

@@ -5,9 +5,10 @@ recorders under **Extras → Independent capture**. Its panel selects Telegram D
 Linux or Telegram Web, native JSON export / visual capture / hybrid, and a provisioned
 connector. It does not start TgWitness's Telethon collector or import a Telegram session.
 
-This preview has automated synthetic acceptance tests. It has **not been qualified
-with a real Telegram account, WARP deployment or TDX environment**. Do not treat the
-preview badge or a passing synthetic test as account-safety certification.
+Validation includes automated acceptance tests and the
+[CPU Ubuntu and WARP integration](VERIFICATION.md#trusted-live-cpu-ubuntu-and-warp--5-november-2026)．
+Real-account native export／hybrid collection and attestation of this recorder's TDX image
+remain separate live checks．
 
 ![Synthetic chat with inline continuity observations](assets/trusted-live-continuity.png)
 
@@ -25,7 +26,7 @@ preview badge or a passing synthetic test as account-safety certification.
 | Hybrid | Compare the export with **operator-transcribed** messages linked to preserved frames. No fabricated IDs from pixels. Unannotated frames have no automatic message-level comparison. |
 | Integrity | Existing independent-capture Ed25519 chain, content-addressed artifacts, signed ZIP manifest and checkpoints. Verifier recomputes continuity reports and HTML from preserved observations. |
 | Time evidence | Periodic drand queries through the chosen HTTP/SOCKS connector; two HTTPS relays must agree. BLS is not locally verified. Independent witness retains signed checkpoints with fresh challenges. |
-| Network isolation | Container OUTPUT policy denies everything except loopback, established replies and the selected proxy IPv4/port. No DNS, IPv6, or direct fallback. Policy precedes client launch; privileges are then dropped. |
+| Network isolation | Container OUTPUT policy denies everything except local `127.0.0.1`, established replies and the selected proxy IPv4/port. Docker's embedded DNS at `127.0.0.11` is blocked along with external DNS, IPv6 and direct fallback. Policy precedes client launch; privileges are then dropped. |
 | Provider witness | Optional independent read-only polling of Cloudflare WARP Connector status/connections and scoped Gateway DNS observations; raw responses are signed as artifacts in the witness journal. |
 | Cleanup | Stop the process group and remove the created profile. Server-side logout is never claimed without confirmation; the operator logs out or revokes the session in Telegram Devices. |
 
@@ -36,9 +37,9 @@ preview badge or a passing synthetic test as account-safety certification.
 - The guard covers inputs **through this recorder** during capture. Host administrators
   can bypass it. Manual setup is unrestricted and intentionally not recorded. Selecting
   export options or logging out requires pausing; those intervals are coverage gaps.
-- Native export generation is manual. This version preserves its JSON, not the linked
-  attachment tree. It does not authenticate Telegram as the file's author. Review the
-  original and the visible procedure together.
+- Native export generation is manual．This version preserves the selected JSON and
+  recorded procedure；linked attachments are outside this mode's package．Verify the
+  saved file together with that procedure．
 - Unknown gaps are never labelled proven deletions. Private/basic-group IDs share an
   account-wide sequence; channel/supergroup intervals are only candidates. Export date
   filters and visibility can explain absent records. Silence may be ordinary inactivity.
@@ -167,7 +168,9 @@ unknown replies, HTML injection, guarded inputs, pacing, lost route/focus, token
 cross-origin requests, file boundaries, frame attribution, report recomputation,
 truncation versus retained checkpoints, provider failures, and real FFmpeg encoding.
 The FFmpeg test uses a synthetic video source; the browser suite uses local fixtures.
-These tests do **not** qualify a live Telegram/WARP session or the Linux firewall.
+These local fixture tests do **not** qualify a live Telegram/WARP session or the Linux firewall.
+The later [CPU Ubuntu and WARP integration run](VERIFICATION.md#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
+records actual route isolation, provider reads, official-client startup and video verification.
 
 The optional-capture GitHub Actions workflow additionally builds the pinned image and
 runs `python tools/check_trusted_container.py --image tgwitness-trusted-ci` on Linux.
@@ -184,8 +187,9 @@ layout, cleanup and ZIP download in Chromium without console errors. Provider/dr
 responses and the Telegram screen were synthetic; FFmpeg encoding was real. Ruff,
 JavaScript syntax checks and source-archive checks passed. One upstream Starlette
 TestClient deprecation warning remains. The optional-capture CI job reports Linux
-image and namespace validation separately. Real account login, WARP/provider
-integration and TDX attestation remain unexecuted.
+image and namespace validation separately. Later WARP/provider network results are
+recorded in the integration run above. Real account login/export/hybrid comparison
+and TDX attestation of this recorder remain unexecuted.
 
 For a local synthetic UI demonstration (no Telegram connection is possible):
 

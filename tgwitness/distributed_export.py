@@ -1,6 +1,7 @@
 """Durable, exclusive multi-account acquisition and local message selection."""
 import asyncio
 import base64
+import errno
 import hashlib
 import json
 import os
@@ -10,24 +11,35 @@ import shutil
 import sqlite3
 import time
 from datetime import datetime, timedelta
+from collections import deque
+from itertools import chain, islice
 
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
-from telethon import errors, utils
+from telethon import errors as telegram_errors, utils
+from telethon.errors import TypeNotFoundError
 from telethon.tl import types
 
 from . import chat_export, replica, report, tuning
 from .account_export import durable_write, linked, read_json
-from .collector import message_record
+from .collector import AUTHORIZATION_ERRORS, message_record, unparsed_record
 from .export_timing import ExportTiming
 from .distributed_takeout import HistoryTakeout
 from .distributed_pages import FORMAT as PAGE_FORMAT, RangePages
 from .message_selection import Selection, SelectionIndex, utc
+from .message_numbers import MissingNumbers
 from .store import canonical, utcnow
 from .verify import fingerprint, verify_chat_export
 from .workers import complete_in_thread
 
 CHUNK = 2000
+PAGE_TIMEOUT = 60
+OUTAGE_RETRIES = 4
+OUTAGE_PAUSE = 30
+POISON_ACCOUNTS = 2
+ACCOUNT_ERRORS = 3
+RECHECK_EDGE = 1000
+RECHECK_PER_ACCOUNT = 1000
 JOB_ID = re.compile(r"[a-f0-9]{32}")
 
 
@@ -38,7 +50,8 @@ class DistributedExport:
         if linked(self.root):
             raise ValueError("Distributed-export storage must not be a link.")
         self.root.mkdir(mode=0o700, exist_ok=True)
-        self.state = self.job = self.task = self.db = None
+        self.state = self.job = self.task = self.db = self.recheck = None
+        self.chunk_failures = {}
         self.timing = None
         self.preparing = set()
         self.reserved = {}
@@ -185,10 +198,14 @@ class DistributedExport:
                           "ranges": 0, "wait_until": None, "error": None}
                 try:
                     peer = entity if profile == lead_id else await collector.resolve_for_export(chat_id, username)
-                    latest = await collector.client.get_messages(peer, limit=1,
-                        offset_date=datetime.fromisoformat(scan_end))
-                    upper = latest[0].id if latest else 0
-                    count = getattr(latest, "total", None)
+                    try:
+                        latest = await collector.client.get_messages(peer, limit=1,
+                            offset_date=datetime.fromisoformat(scan_end))
+                        upper = latest[0].id if latest else 0
+                        count = getattr(latest, "total", None)
+                    except TypeNotFoundError:
+                        upper = await collector.number_before(peer, datetime.fromisoformat(scan_end))
+                        count = None
                     if type(count) is int and count > 0:
                         # Planning only: this is not a count for the selected dates,
                         # nor evidence of deletion. Keep every ID in the plan.
@@ -198,9 +215,8 @@ class DistributedExport:
                     if upper and options.from_utc:
                         # Telegram can include messages exactly at offset_date.
                         # Read past the boundary; local selection applies [from, until).
-                        before = await collector.client.get_messages(peer, limit=1,
-                            offset_date=datetime.fromisoformat(options.from_utc) - timedelta(seconds=1))
-                        lower = before[0].id + 1 if before else 1
+                        lower = await collector.number_before(peer,
+                            datetime.fromisoformat(options.from_utc) - timedelta(seconds=1)) + 1
                     if upper >= lower:
                         bounds.append((lower, upper, profile))
                     worker.update(low=lower, high=upper)
@@ -208,10 +224,13 @@ class DistributedExport:
                 except asyncio.CancelledError:
                     raise
                 except Exception as exc:
-                    worker.update(state="skipped", error=type(exc).__name__)
+                    worker.update(state="skipped", error=type(exc).__name__,
+                                  reason=str(exc) if isinstance(exc, ValueError) else None)
                 workers.append(worker)
             if lead_id not in self.entities:
-                raise ValueError("The starting account cannot read this chat.")
+                lead_worker = next(w for w in workers if w["profile_id"] == lead_id)
+                raise ValueError("The starting account cannot read this chat: "
+                                 + (lead_worker.get("reason") or lead_worker.get("error") or "unknown reason") + ".")
             cuts = sorted({edge for low, high, _ in bounds for edge in (low, high + 1)})
             segments = []
             for low, end in zip(cuts, cuts[1:]):
@@ -383,10 +402,14 @@ class DistributedExport:
         self.db.commit()
 
     async def work(self, worker):
+        await self.read_ranges(worker)
+
+    async def read_ranges(self, worker):
         profile = worker["profile_id"]
         collector = self.app_for(profile).state.collector
         directory = self.directory(self.state["id"])
         worker["state"] = "running"
+        outages = errors = 0
         while True:
             task = self.db.execute("SELECT t.* FROM tasks t JOIN eligible e USING(low) WHERE e.profile=? "
                                    "AND t.phase='pending' ORDER BY low DESC LIMIT 1", (profile,)).fetchone()
@@ -419,14 +442,16 @@ class DistributedExport:
                         worker.update(state="running", wait_until=None)
                         self.update_counts()
                         self.persist()
-                    await pages.fetch(collector, self.entities[profile], profile, committed, waiting, transport)
+                    await pages.fetch(collector, self.entities[profile], profile, committed, waiting, transport,
+                                      page_timeout=PAGE_TIMEOUT, attempts=1)
                     # Recheck the durable data before sealing the whole range.
                     if await complete_in_thread(pages.verify) != pages.state:
                         raise ValueError("Checkpoint data changed during acquisition.")
                     count, digest = await complete_in_thread(self.check_chunk, path, task)
                 else:
                     await collector.fetch_range(self.entities[profile], task["low"], task["high"], temporary,
-                                                lambda: None, waiting, **({"history_client": transport.client} if transport else {}))
+                                                lambda: None, waiting, page_timeout=PAGE_TIMEOUT, attempts=1,
+                                                **({"history_client": transport.client} if transport else {}))
                     count, digest = self.check_chunk(temporary, task)
                     with temporary.open("r+b") as stream:
                         os.fsync(stream.fileno())
@@ -448,18 +473,41 @@ class DistributedExport:
                 self.persist()
             except asyncio.CancelledError:
                 raise
-            except errors.TakeoutInvalidError:
+            except telegram_errors.TakeoutInvalidError:
                 if transport:
                     transport.invalidate()
                 raise
             except Exception as exc:
                 self.db.execute("UPDATE tasks SET phase='pending' WHERE low=?", (task["low"],))
-                self.db.execute("DELETE FROM eligible WHERE profile=?", (profile,))
                 self.db.commit()
-                worker.update(state="failed", error=type(exc).__name__)
-                return
+                if isinstance(exc, OSError) and (exc.filename is not None or exc.errno in {
+                        errno.ENOSPC, errno.EDQUOT, errno.EROFS, errno.EACCES, errno.EPERM, errno.EIO}):
+                    raise
+                if isinstance(exc, (OSError, ConnectionError, TimeoutError)) and outages < OUTAGE_RETRIES:
+                    outages += 1
+                    pause = min(300, OUTAGE_PAUSE * 2 ** (outages - 1))
+                    worker.update(state="waiting", wait_until=time.time() + pause, error="no_connection")
+                    self.persist()
+                    await asyncio.sleep(pause)
+                    worker.update(state="running", wait_until=None, error=None)
+                    continue
+                reason = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
+                failed = self.chunk_failures.setdefault(task["low"], {})
+                failed[profile] = reason
+                self.db.execute("DELETE FROM eligible WHERE low=? AND profile=?", (task["low"], profile))
+                if len(failed) >= POISON_ACCOUNTS:
+                    self.db.execute("UPDATE tasks SET phase='failed' WHERE low=?", (task["low"],))
+                errors += 1
+                if isinstance(exc, AUTHORIZATION_ERRORS + (OSError, ConnectionError, TimeoutError)) or errors > ACCOUNT_ERRORS:
+                    self.db.execute("DELETE FROM eligible WHERE profile=?", (profile,))
+                    self.db.commit()
+                    worker.update(state="failed", error=type(exc).__name__, reason=reason)
+                    return
+                self.db.commit()
+                continue
             finally:
                 temporary.unlink(missing_ok=True)
+            outages = errors = 0
             await asyncio.sleep(0)
 
     async def context(self, index, options):
@@ -502,6 +550,7 @@ class DistributedExport:
                         index.add(json.loads(line), task["profile"])
                 index.db.commit()
                 await asyncio.sleep(0)
+            self.recheck = await self.recheck_absent(index, options)
             batches = index.classify_batches(options)
             uncertain = 0
             while (result := await complete_in_thread(next, batches, None)) is not None:
@@ -517,8 +566,10 @@ class DistributedExport:
                     if options.download_media and record.get("media_type"):
                         collector = self.app_for(profile).state.collector
                         message = await collector.client.get_messages(self.entities[profile], ids=record["id"])
-                        if message and message_record(message) == json.loads(index.db.execute(
-                                "SELECT record FROM messages WHERE id=?", (record["id"],)).fetchone()[0]):
+                        stored = json.loads(index.db.execute(
+                            "SELECT record FROM messages WHERE id=?", (record["id"],)).fetchone()[0])
+                        stored.pop("found_on_recheck", None)
+                        if message and message_record(message) == stored:
                             record.update(await collector.export_attachment(message, directory / "media"))
                         else:
                             record["file_status"] = "message_changed_or_unavailable_at_media_read"
@@ -537,6 +588,62 @@ class DistributedExport:
             return scratch, ranges
         finally:
             index.close()
+
+    async def recheck_absent(self, index, options):
+        if options.excludes_messages() or self.job["chat_id"] >= -1000000000000:
+            return None
+        present = [row[0] for row in index.db.execute("SELECT id FROM messages ORDER BY id")]
+        if not present:
+            return None
+        edge = list(range(max(1, present[0] - RECHECK_EDGE), present[0]))
+        gaps = MissingNumbers(present)
+        if not edge and not gaps:
+            return None
+        readers = [w["profile_id"] for w in self.state["workers"]
+                   if w["state"] not in ("skipped", "failed") and w["profile_id"] in self.entities]
+        wanted = len(edge) + len(gaps)
+        budget = len(gaps) if options.recheck_all else max(0, RECHECK_PER_ACCOUNT * len(readers) - len(edge))
+        step = max(1, -(-len(gaps) // budget)) if budget else len(gaps) + 1
+        planned = len(edge) + min(budget, -(-len(gaps) // step))
+        numbers = chain(edge, islice(gaps.sample(step), budget))
+        queue = deque()
+        found, errors, started = {}, {}, utcnow()
+        progress = self.state["recheck"] = {"asked": 0, "total": planned}
+
+        async def read(profile):
+            collector = self.app_for(profile).state.collector
+            while True:
+                batch = queue.popleft() if queue else list(islice(numbers, 100))
+                if not batch:
+                    return
+                try:
+                    answer = await collector.read_numbers(self.entities[profile], batch)
+                except asyncio.CancelledError:
+                    raise
+                except Exception as exc:
+                    errors[profile] = type(exc).__name__
+                    queue.append(batch)
+                    return
+                for number, value in answer.items():
+                    found[number] = (value, profile)
+                progress["asked"] += len(batch)
+        await asyncio.gather(*(read(profile) for profile in readers))
+        for number, (value, profile) in sorted(found.items()):
+            record = unparsed_record(number, value) if isinstance(value, TypeNotFoundError) else message_record(value)
+            index.add({**record, "found_on_recheck": True}, profile)
+        index.db.commit()
+        checked = progress["asked"]
+        returned = sorted(found)
+        return {"asked_at": started, "asked": checked, "absent_total": len(gaps), "empty": checked - len(returned),
+                "returned": returned, "unchecked": wanted - checked, "limit_reached": wanted > planned,
+                "sampling": "every number" if planned == wanted else "every " + str(step) + "th absent number",
+                "edge": [edge[0], edge[-1]] if edge else None,
+                "edge_found": sum(1 for number in returned if number < present[0]),
+                "accounts": len(readers), **({"errors": errors} if errors else {}),
+                "method": "channels.getMessages by number, shared by the accounts of this export",
+                "meaning": "An empty answer means Telegram has no message under that number for these accounts: "
+                           "deleted, or never visible to them. Telegram does not say which. Unchecked numbers "
+                           "cannot be told apart from deleted ones."}
 
     def sign_parts(self, ranges):
         parts = []
@@ -559,6 +666,7 @@ class DistributedExport:
         self.history_transports = {}
         try:
             await complete_in_thread(self.prepare_chunks)
+            self.chunk_failures = {}
             self.timing.baseline = self.state["captured"]
             for worker in self.job["workers"]:
                 profile_id = worker["profile_id"]
@@ -595,13 +703,23 @@ class DistributedExport:
                         interrupted = True
                 if interrupted:
                     raise asyncio.CancelledError
+            stuck = self.db.execute("SELECT low, high FROM tasks WHERE phase='failed' ORDER BY low DESC").fetchall()
+            if stuck:
+                low, high = stuck[0]["low"], stuck[0]["high"]
+                reasons = sorted(set(self.chunk_failures.get(low, {}).values()))
+                raise ValueError("Message numbers " + str(low) + "–" + str(high) + (" and " + str(len(stuck) - 1)
+                                 + " more ranges" if len(stuck) > 1 else "") + " failed on " + str(POISON_ACCOUNTS)
+                                 + " different accounts (" + "; ".join(reasons) + "). The accounts were kept; "
+                                 "saved chunks are retained.")
             if self.db.execute("SELECT 1 FROM tasks WHERE phase!='done' LIMIT 1").fetchone():
                 raise ValueError("Some ranges could not be read. Saved chunks are retained; resume when accounts are available.")
             self.set_phase("selecting")
             self.persist()
             scratch, ranges = await self.finish_selection(directory, Selection.model_validate(self.job["selection"]))
             meta = {"chat": {**self.job["chat"], "profile": profile, "profile_errors": problems},
-                    "observer": observer, "admin_log": log, "account": lead.store.get_setting("account", {}),
+                    "observer": observer, "admin_log": log, "recheck": self.recheck,
+                    "journal": chat_export.journal_changes(lead.store, self.job["chat_id"]),
+                    "account": lead.store.get_setting("account", {}),
                     "client": lead.client_identity(), "route": lead.route_receipt(),
                     "message_count": self.state["counts"]["selected"], "parts": self.sign_parts(ranges),
                     "collection": {"mode": "distributed_selection", "selection": self.job["selection"],
@@ -622,7 +740,7 @@ class DistributedExport:
                 try:
                     await network.finish()
                     self.state.get("transport_close_errors", {}).pop(profile_id, None)
-                except (errors.RPCError, OSError, ConnectionError, TimeoutError) as exc:
+                except (telegram_errors.RPCError, OSError, ConnectionError, TimeoutError) as exc:
                     self.state.setdefault("transport_close_errors", {})[profile_id] = type(exc).__name__
             if self.history_transports:
                 meta["acquisition"]["history_transports"] = {p: n.public() for p, n in self.history_transports.items()}
@@ -645,14 +763,14 @@ class DistributedExport:
                 if worker["state"] in ("pending", "running", "waiting"):
                     worker["state"] = "paused"
             raise
-        except errors.TakeoutInitDelayError as exc:
+        except telegram_errors.TakeoutInitDelayError as exc:
             self.state.update(phase="paused", ready=False, wait_until=time.time() + exc.seconds,
                 approval_profile=profile_id,
                 error="Telegram Takeout approval is pending. Approve the export in Telegram or wait, then resume. "
                       "No regular-speed fallback was started.")
             waiting = next(w for w in self.state["workers"] if w["profile_id"] == profile_id)
             waiting.update(state="waiting", wait_until=self.state["wait_until"], error="Takeout approval required")
-        except errors.TakeoutInvalidError:
+        except telegram_errors.TakeoutInvalidError:
             self.state.update(phase="paused", ready=False,
                 error="Telegram ended the Takeout session. Resume validates a new session against the saved range.")
         except Exception as exc:

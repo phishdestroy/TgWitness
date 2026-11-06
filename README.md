@@ -14,7 +14,7 @@
 <p align="center"><strong>Self-hosted workspace for Telegram investigations.</strong><br>Save chats, keep edits and deletions, see who's connected to whom<br>and hand over signed exports anyone can check.</p>
 
 <p align="center">
-  <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.8.0 · pre-release"></a>
+  <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.9.1 · pre-release"></a>
   <a href="docs/VERIFICATION.md"><img src="docs/assets/presentation/identity-meta-verification.svg" width="158" height="30" alt="Tested environments"></a>
   <img src="docs/assets/presentation/identity-meta-languages.svg" width="279" height="30" alt="25 interface languages · 26 guide languages">
   <a href="LICENSE"><img src="docs/assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a>
@@ -22,6 +22,11 @@
 
 <a name="quick-start"></a>
 <a name="run-it-on-your-machine"></a>
+
+The version badge describes this source tree. Installable builds are listed under
+[Releases](https://github.com/phishdestroy/TgWitness/releases); a feature merged into
+`main` is not automatically included in those downloads.
+[Current capabilities and qualification](docs/STATUS.md) · [Choose a collection method](docs/COLLECTION-MODES.md)
 
 ## Install
 
@@ -125,13 +130,16 @@ separate tested acquisition behavior from unmeasured live throughput.
 | [Existing sessions](docs/ACCOUNTS.md) | TData, Telethon, Pyrogram, StringSession, auth key; optional independent QR authorization from an imported donor |
 | [Proxies](docs/CONNECTION-SECURITY.md#ip-modes) | SOCKS5, HTTP CONNECT or MTProxy per workspace. **Hide IP** never falls back to direct |
 | [Search and AI](docs/ANALYSIS.md) | Local search, optional AI with sources you can check |
+| [Full-text search](docs/SEARCH.md) | Word forms, exact phrases, domains, @usernames and Chinese without spaces, best matches first (**Preview**) |
 | [MCP](docs/MCP.md) | Read-only access for MCP clients, limited to the chats you pick |
+| [Command line](docs/CLI.md) | `search`, `context`, `messages`, `stats` and JSON Lines `export` with `--json` for scripts and agents, locally or with a scoped token (**Preview**) |
 | [OCR and transcription](docs/MEDIA-ANALYSIS.md) | Runs locally, originals stay untouched |
 | [Independent capture](docs/OPTIONAL-CAPTURE.md) | Optional browser/AyuGram recorders in Extras (preview, off by default) |
 | [Trusted Live](docs/TRUSTED-LIVE.md) | Official Desktop/Web session, guarded video and native-export continuity analysis (preview; live qualification pending) |
 | [Sealed official Web](docs/OFFICIAL-WITNESS.md) | Fresh official browser on GitHub Actions，restricted controls，signed video and independently expected source/settings |
 | [Webhooks](docs/WEBHOOKS.md) | Signed outgoing events with retries, n8n example included |
 | [Shared access](docs/ACCESS.md) | Give someone selected chats only, with expiry and IP limits |
+| [Missing message numbers](docs/EVIDENCE.md#missing-message-numbers-gap_summary) | Numbers Telegram assigned that were never observed, per channel and for the whole account, in coverage, reports and MCP (**Preview**) |
 
 </details>
 
@@ -241,8 +249,9 @@ verification steps for a signed TgWitness archive.
 
 </details>
 
-It only sees what the connected account sees. Messages deleted before it saw them
-and Secret Chats are out of reach, and downtime leaves gaps.
+Collect cloud-chat data available to the connected account，with the selected period，
+attachment policy and recorded collection outcomes．See the [mode comparison](docs/COLLECTION-MODES.md)
+for history，live observation and sealed acquisition．
 
 <p align="center">
   <a href="docs/README.md"><img src="docs/assets/presentation/readme-button-docs.svg" height="34" alt="Technical documentation"></a>

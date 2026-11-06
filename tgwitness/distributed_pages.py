@@ -6,7 +6,7 @@ import shutil
 from telethon import utils
 
 from .account_export import durable_write, linked, read_json, sync_directory
-from .collector import message_record
+from .collector import message_record, unparsed_record
 from .store import canonical, utcnow
 from .verify import verify_distributed_pages
 from .workers import complete_in_thread
@@ -73,7 +73,8 @@ class RangePages:
                       "byte_end": value["byte_end"], "head_sha256": hashlib.sha256(encoded).hexdigest(),
                       "terminal": terminal, "profile_id": profile, "transport_generation": generation}
 
-    async def fetch(self, collector, entity, profile, on_commit, on_wait, transport=None):
+    async def fetch(self, collector, entity, profile, on_commit, on_wait, transport=None,
+                    page_timeout=None, attempts=8):
         if self.state["profile_id"] not in (None, profile):
             raise ValueError("An interrupted range must resume with its original observer.")
         if self.state["terminal"]:
@@ -102,23 +103,31 @@ class RangePages:
                     on_commit(self.state)
             pending, size, captured_from = [], 0, utcnow()
 
-        async def write(message):
+        async def append(record):
             nonlocal size, cursor
-            if utils.get_peer_id(message.peer_id) != utils.get_peer_id(entity):
-                raise ValueError("History returned a message from a different source.")
-            if type(message.id) is not int or not self.task["low"] <= message.id < cursor:
+            mid = record["id"]
+            if type(mid) is not int or not self.task["low"] <= mid < cursor:
                 raise ValueError("Checkpoint messages are outside their range or repeated.")
-            collector.remember(getattr(message, "sender", None))
-            encoded = canonical(message_record(message)) + b"\n"
+            encoded = canonical(record) + b"\n"
             if len(encoded) > 64 * 1024**2:
                 raise ValueError("Checkpoint message exceeds the supported record size.")
             if pending and size + len(encoded) > PAGE_BYTES:
                 await flush(False)
             pending.append(encoded)
-            size, cursor = size + len(encoded), message.id
+            size, cursor = size + len(encoded), mid
             if len(pending) >= PAGE_MESSAGES:
                 await flush(False)
 
+        async def write(message):
+            if utils.get_peer_id(message.peer_id) != utils.get_peer_id(entity):
+                raise ValueError("History returned a message from a different source.")
+            collector.remember(getattr(message, "sender", None))
+            await append(message_record(message))
+
+        async def unparsed(number, error):
+            await append(unparsed_record(number, error))
+
         await collector.iterate_history(entity, write, min_id=self.task["low"] - 1,
-            offset_id=self.state["cursor"], on_wait=on_wait, history_client=transport.client if transport else None)
+            offset_id=self.state["cursor"], on_wait=on_wait, history_client=transport.client if transport else None,
+            page_timeout=page_timeout, attempts=attempts, on_unparsed=unparsed)
         await flush(True)  # Iterator exhaustion, even after an exactly full checkpoint.

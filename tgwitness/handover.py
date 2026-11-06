@@ -115,8 +115,10 @@ def moment(value):
 
 
 class Survey:
-    def __init__(self, chats):
-        self.chats, self.people, self.coverage = set(chats), {}, Coverage()
+    def __init__(self, chats, gap_settings=None):
+        # A handover holds chosen chats, so the account-wide numbering is not measurable from it.
+        self.chats, self.people = set(chats), {}
+        self.coverage = Coverage(gap_settings, chats_selected=True)
         self.requests, self.result_chats, self.head = {}, {}, None
 
     def add(self, event):
@@ -392,7 +394,7 @@ class Minimiser:
             found["buttons"] = {"inline": bool(found["buttons"].get("inline")), "rows": rows}
         if found.get("media_info"):
             technical = {"kind", "mime_type", "size", "document_id", "photo_id", "dc_id", "width", "height",
-                         "duration_seconds", "self_destruct_seconds"}
+                         "duration_seconds", "self_destruct_seconds", "ephemeral_media"}
             textual = {"url", "site_name", "title", "file_name"} if show_text else set()
             if role == "other" and self.o.others != "show":
                 textual.discard("file_name")
@@ -440,7 +442,8 @@ def export(store, vault, options, report_options=None):
     try:
         account = store.get_setting("account", None) or {}
         with store.snapshot() as snapshot:
-            survey = Survey(options.chats)
+            from .gap_analysis import settings as gap_settings
+            survey = Survey(options.chats, gap_settings(store))
 
             def surveyed(events):
                 for event in events:

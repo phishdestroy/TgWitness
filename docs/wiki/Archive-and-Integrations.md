@@ -13,7 +13,9 @@ download queue, keep the signed progress report. [History guide](../HISTORY.md).
 ## Search and review
 
 **Journal** searches saved records locally, filter by source, event type or period. Open the
-records behind the hits.
+records behind the hits. **Best match · word forms** ranks results and finds other forms of a
+word, exact phrases, domains in hidden links and buttons, @usernames, and Chinese without spaces
+(preview). [Full-text search](../SEARCH.md).
 
 For AI, set up a provider in **Integrations** and open **Ask the archive**. Pick chats and a
 period, look at **Data sent to the model**, drop what you don't want sent, approve. Check the
@@ -25,6 +27,7 @@ citations before saving a report. Your notes never mix with captured events.
 | Task | Where | Guide |
 | --- | --- | --- |
 | Read the archive from an AI client | **Integrations → MCP** | [Scoped access and client setup](../MCP.md) |
+| Search, count or export from scripts and agents | `tgwitness search`, `stats`, `export` | [Command line](../CLI.md) (preview) |
 | Recognize saved images or audio | **Recognize attachment** on a `media.saved` record | [Local OCR / transcription](../MEDIA-ANALYSIS.md) |
 | Send events to another service | **Integrations → Outgoing webhooks** | [HMAC, retries and n8n](../WEBHOOKS.md) |
 
@@ -32,6 +35,11 @@ MCP lives at the panel's `/mcp`. In Integrations pick the client, tools, workspa
 expiry, copy the token and config (shown once). **Check connection** lists tools without
 reading messages. For the stdio bridge `tgwitness.mcp_server` use `TGWITNESS_MCP_TOKEN`; if
 the SDK is missing the panel shows the install command. [Client setup](../MCP.md).
+
+The same token works with the command line: set `TGWITNESS_URL` and `TGWITNESS_MCP_TOKEN`, then run
+`tgwitness search … --json`. With collection stopped, `--data-dir` reads the workspace directly.
+Only the command line can export messages, and only with a connection that allows it.
+[Command line](../CLI.md).
 
 OCR/transcription needs the local Docker worker. Webhook receivers should check the
 signature and dedupe on `event_id`.

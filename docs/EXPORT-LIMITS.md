@@ -91,12 +91,18 @@ Arguments and exception text are omitted. Counters begin with the client instanc
 they are not wire-level attempts and do not expose retries inside Telethon.
 The existing event kind and signed export format remain unchanged.
 
-Serialization is not proactive rate limiting: without an active deadline,
-`WitnessClient` does not impose an interval between consecutive calls. Specific
-operations and Telethon iterators can impose their own delays, but there is no
-shared admission policy for discovery, history and participant acquisition.
-An offline client probe completed eight consecutive stubbed calls without any
-pacing sleep. The existing profile guard rejects adding the same Telegram account
+The integrated main branch also supplies `AccountPacer` for history, dialogs and
+admin-log reads, including Takeout-wrapped requests. It starts with a one-second
+interval, decreases it after twenty successful bulk calls to a floor of half a
+second, and increases it after FloodWait, capped at ten seconds. These are local
+policy values, not Telegram quotas. The learned delay is persisted per account;
+the next-send timer belongs to the client instance. Full server deadlines remain
+authoritative, including FLOOD_PREMIUM_WAIT.
+
+The earlier source probe concerned the pre-integration branch: its serial queue
+alone did not add pacing. The current bulk pacer still does not cover unknown
+username discovery or participant enumeration, and does not give ordinary and
+Takeout history separate budgets. The existing profile guard rejects adding the same Telegram account
 to another workspace; that guard was also exercised and must not be duplicated.
 It does not coordinate independent installations on separate servers.
 
@@ -117,7 +123,7 @@ The next pacing change should:
 5. Expose time spent acquiring, pacing, waiting for Telegram and committing data.
    Calibrate rates with bounded live batches; advertise no unmeasured quota.
 
-These scheduler changes are a recommendation, not implemented behavior. Durable
+These extensions to the bulk scheduler are recommendations, not implemented behavior. Durable
 checkpoints already avoid reacquiring committed pages after interruption. Overlap
 of network reads and bounded local processing can improve throughput without
 increasing request concurrency; that overlap is also not implemented yet.

@@ -56,6 +56,8 @@ def test_backoff_keeps_method_wrapper_counts_and_deadline(tmp_path, monkeypatch,
             assert details["method"] == details["failed_method"] == "messages.getHistory"
             assert details["wrappers"] == ["invokeWithTakeout", "invokeWithMessagesRange"]
             assert details["wait_until"] == store.get_setting("rpc_backoff_until") == 10000
+            assert client.bulk_pacer.state()["floodwait_count"] == 1
+            assert client.bulk_pacer.state()["delay_seconds"] > 1
             stats = details["activity"]["methods"]
             assert stats["contacts.resolveUsername"]["ok"] == 1
             assert stats["invokeWithTakeout/invokeWithMessagesRange/messages.getHistory"]["flood_waits"] == 1
@@ -68,6 +70,7 @@ def test_backoff_keeps_method_wrapper_counts_and_deadline(tmp_path, monkeypatch,
             store.verify(vault.public_key)
             # A fresh client must respect the persisted deadline, before ANY method.
             fresh = collector.make_client(123456, "a" * 32)
+            assert fresh.bulk_pacer.state() == client.bulk_pacer.state()
             await fresh._call(None, f.help.GetConfigRequest())
             assert sent[-1][1] >= 10000
             assert store.get_setting("rpc_backoff") == details
@@ -107,3 +110,7 @@ def test_nested_resolution_batch_cancellation_and_snapshot(monkeypatch):
         assert len(client.rpc_activity()["methods"]) == 4
         await client._call(None, f.help.GetConfigRequest())
     asyncio.run(scenario())
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__, "-q"]))

@@ -4,11 +4,15 @@ import json
 import time
 import zipfile
 from datetime import datetime, timezone
+from pathlib import Path
+import sys
 
 import pytest
 from telethon import TelegramClient, errors, utils
 from telethon.sessions import MemorySession
 from telethon.tl import functions as f, types as t
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from tools.test_distributed_export import CHAT, close_entries, coordinator, message
 from tgwitness import distributed_export
@@ -353,3 +357,7 @@ def test_pending_rate_limit_rejects_export_before_any_preflight(tmp_path):
             await manager.close()
             close_entries(entries)
     asyncio.run(scenario())
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__, "-q"]))

@@ -63,14 +63,14 @@ def main():
         reopened = Store(path)
         reopened.bind(vault)
         expected(reopened.chat_overview()[CHAT])
+        source_status(reopened)
         reopened.close()
-    source_status()
     print("Chat counters and source status: one definition for list, header, health and notifications; "
           "older index rebuilt.")
 
 
-def source_status():
-    collector = SimpleNamespace(dialog_cache={}, dialogs_truncated=True, RECEIVING_DAYS=Collector.RECEIVING_DAYS)
+def source_status(store):
+    collector = SimpleNamespace(store=store, dialog_cache={}, dialogs_truncated=True, RECEIVING_DAYS=Collector.RECEIVING_DAYS)
     recent = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat(timespec="milliseconds")
     stale = (datetime.now(timezone.utc) - timedelta(days=30)).isoformat(timespec="milliseconds")
     receiving = Collector.source_visibility(collector, CHAT, {CHAT: {"last_observed_at": recent}})
@@ -81,8 +81,10 @@ def source_status():
     assert Collector.source_visibility(collector, CHAT, {})["reason"] == "not_in_dialogs"
     collector.dialog_cache = {CHAT: {"visibility": "public_username", "role": "member_or_unknown"}}
     assert Collector.source_visibility(collector, CHAT, {})["state"] == "visible_in_dialogs"
-    part = health.sources({"source_status": {str(CHAT): receiving}}, 1)
+    part = health.sources({"source_status": {str(CHAT): receiving}, "running": True}, 1)
     assert part["state"] == "working" and part["counts"]["receiving"] == 1, part
+    part = health.sources({"source_status": {str(CHAT): receiving}}, 1)
+    assert part["state"] == "off" and part["reason"] == "paused" and part["counts"]["receiving"] == 1, part
 
 
 if __name__ == "__main__":

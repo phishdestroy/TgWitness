@@ -249,6 +249,7 @@ class AccountExport:
             raise ValueError("Account-export storage must not be a filesystem link.")
         self.root.mkdir(mode=0o700, exist_ok=True)
         self.task, self.current, self.index = None, None, None
+        self.transfer = None
         self.packaging_copies, self.record_bytes = 1, 0
         self.transport_factory = transport.Transport  # replaced by deterministic fake transports in tests
 
@@ -287,7 +288,9 @@ class AccountExport:
             return {"phase": "none", "active": False}
         claimed = getattr(self.collector, "export_claim", None) == job_id
         if self.current and self.current["id"] == job_id:
-            return {**json.loads(json.dumps(self.current)), "active": self.busy() or claimed}
+            active = self.busy() or claimed
+            return {**json.loads(json.dumps(self.current)), "active": active,
+                    "transfer": dict(self.transfer) if active and self.transfer else None}
         directory = self.directory(job_id)
         if not directory.is_dir():
             return {"id": job_id, "phase": "unknown"}
@@ -311,7 +314,8 @@ class AccountExport:
 
     def persist(self):
         self.current["updated_at"] = utcnow()
-        durable_write(self.directory(self.current["id"]) / "status.json", canonical(self.current))
+        durable_write(self.directory(self.current["id"]) / "status.json",
+                      canonical({k: v for k, v in self.current.items() if k != "transfer"}))
 
     async def start(self, options):
         options = AccountExportOptions.model_validate(options).model_dump()
@@ -726,7 +730,15 @@ class AccountExport:
             async def progress(current, total):
                 if max(current, total if total is not None else current) > min(limit, remaining):
                     raise ValueError("attachment_size_limit")
+                self.transfer = {"received_bytes": current, "total_bytes": total,
+                                 "kind": info["kind"], "attempt": attempt}
+            attempt = 0
             async def download_once():
+                nonlocal attempt
+                attempt += 1
+                # Live transfer counters are not signed or counted as preserved bytes.
+                # A retry starts this file again; do not retain the previous attempt's progress.
+                await progress(0, info["expected_bytes"])
                 if shutil.disk_usage(directory).free < min(limit, remaining, info["expected_bytes"] or 1024**2) + 64 * 1024**2:
                     raise OSError("Insufficient free space for the next attachment.")
                 with temporary.open("wb") as stream:
@@ -736,7 +748,7 @@ class AccountExport:
                         raise ValueError("attachment_unavailable")
                     stream.flush()
                     os.fsync(stream.fileno())
-                if info["expected_bytes"] is not None and info["kind"] != "photo" and writer.total != info["expected_bytes"]:
+                if info["expected_bytes"] is not None and writer.total != info["expected_bytes"]:
                     raise ValueError("attachment_size_differs_from_observation")
                 return writer
             writer = await self.retry(download_once)
@@ -774,6 +786,7 @@ class AccountExport:
                 return {**info, "outcome": "excluded", "reason": "no_additional_data"}
             return {**info, "outcome": "failed", "reason": type(exc).__name__ if isinstance(exc, errors.RPCError) else str(exc)}
         finally:
+            self.transfer = None
             temporary.unlink(missing_ok=True)
 
     def selected(self, row, options):

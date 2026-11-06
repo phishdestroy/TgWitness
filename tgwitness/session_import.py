@@ -35,6 +35,7 @@ async def create_session(collector, api_id, api_hash, session, expected_user_id=
             if session_key(saved):
                 if session_key(saved) == key:
                     raise ValueError("Independent login unexpectedly reused the donor authorization key.")
+                c.lock_key(candidate)
                 pending["session"] = saved
                 c.vault.save("independent_login", pending)
 

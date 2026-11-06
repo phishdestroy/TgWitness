@@ -9,7 +9,7 @@ from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace as NS
 
 from telethon.crypto import AES, AuthKey
-from telethon.errors import InviteRequestSentError, SessionPasswordNeededError
+from telethon.errors import InviteRequestSentError, RPCError, SessionPasswordNeededError
 from telethon.sessions import StringSession
 from telethon.tl import functions, types
 
@@ -36,6 +36,13 @@ class FakeClient:
         self.connected = False
         self.handlers = []
         self.instances.append(self)
+
+    async def __call__(self, request):
+        if isinstance(request, functions.account.InitTakeoutSessionRequest):
+            raise RPCError(request, "TAKEOUT_UNAVAILABLE_IN_TEST", 400)
+        if isinstance(request, functions.channels.GetAdminLogRequest):
+            return NS(events=[], users=[], chats=[])
+        raise NotImplementedError(type(request).__name__)
 
     def add_event_handler(self, handler, spec):
         self.handlers.append(handler)
@@ -73,16 +80,17 @@ class FakeClient:
             raise SessionPasswordNeededError(None)
         self.authorized = True
 
-    async def iter_dialogs(self, limit):
+    async def iter_dialogs(self, limit, **kwargs):
         yield NS(id=CHAT, name="Synthetic group", is_group=True, is_channel=True,
-                 entity=NS(megagroup=True, id=123))
-        yield NS(id=55, name="Private dialog excluded", is_group=False, is_channel=False)
+                 entity=ENTITIES[CHAT], folder_id=None)
+        yield NS(id=55, name="Private dialog excluded", is_group=False, is_channel=False,
+                 entity=types.User(id=55, first_name="Synthetic private"), folder_id=None)
 
     async def iter_messages(self, entity, limit):
         for i in range(min(limit, 3)):
             yield telegram_message(i + 1)
 
-    async def download_media(self, message, file, progress_callback):
+    async def download_media(self, message, file, progress_callback, *, thumb=None):
         await progress_callback(4, 4)
         file.write(b"data")
         return file
@@ -190,7 +198,7 @@ ENTITIES = {
 
 
 class ScopeClient(FakeClient):
-    async def iter_dialogs(self, limit):
+    async def iter_dialogs(self, limit, **kwargs):
         yield NS(id=CHAT, name="Synthetic group", is_group=True, is_channel=True, entity=ENTITIES[CHAT], folder_id=None)
         yield NS(id=_SCOPE_ALICE, name="Alice", is_group=False, is_channel=False, entity=ENTITIES[_SCOPE_ALICE], folder_id=None)
         yield NS(id=SHOP_BOT, name="Shop", is_group=False, is_channel=False, entity=ENTITIES[SHOP_BOT], folder_id=None)

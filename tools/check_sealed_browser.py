@@ -56,6 +56,8 @@ def account_capture(context, root, record):
                 raise TakeoutInitDelayError(None, capture=3600)
 
         async def download(self, media, stream, progress, task):
+            await progress(1, len(CONTENT))
+            await asyncio.sleep(3)
             stream.write(CONTENT)
             return stream
 
@@ -135,11 +137,17 @@ def account_capture(context, root, record):
                 page.screenshot(path=str(ROOT / "test-results/sealed-experience" / f"runner-account-{width}.png"), full_page=True)
             page.locator("#collect").click()
             expect(page.locator("#status")).to_contain_text("3600 seconds", timeout=15000)
+            expect(page.locator("#status")).to_contain_text("another device")
             expect(page.locator("#resume")).to_have_text("Check export approval")
             approved[0] = True
             page.locator("#resume").click()
+            expect(page.locator("#capture-transfer")).to_contain_text("Current file", timeout=10000)
             expect(page.locator("#complete")).to_be_visible(timeout=20000)
             expect(page.locator("#complete-summary")).to_contain_text("Export completed within the selected scope")
+            page.locator("#language").select_option("ru")
+            expect(page.locator("#complete-summary")).to_contain_text("Выгрузка выбранных данных завершена")
+            expect(page.locator("#complete-summary")).to_contain_text("Отзыв сессии Telegram подтверждён")
+            expect(page.locator("#status")).to_contain_text("Сбор завершён")
             result = verify_bundle(root / "out/evidence.zip")["account_export"]
             assert result["counts"]["messages"] == 2 and result["complete_within_scope"]
             with zipfile.ZipFile(root / "out/evidence.zip") as z, z.open("account-export.zip") as nested, zipfile.ZipFile(nested) as a:
@@ -228,6 +236,92 @@ def credential_controls(page):
         page.unroute("**/api/qr", refused)
 
 
+def status_recovery(context, url, screenshots):
+    """Status failures recover without hiding action errors or losing final coverage."""
+    page = context.new_page()
+    errors, requests = [], []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    state = {"phase": "collecting", "authorized": True, "history": {"phase": "running", "captured": 42},
+             "media": {}, "remaining_seconds": 120, "context": {}, "account_export": None}
+    offline = [False]
+
+    def status(route):
+        requests.append(route.request.url)
+        if offline[0] == "unauthorized":
+            route.fulfill(status=401, json={"detail": "Synthetic access expired"})
+        elif offline[0]:
+            route.abort()
+        else:
+            route.fulfill(json=state)
+
+    page.route("**/api/status", status)
+    try:
+        page.goto(url + "/sealed.html#access=synthetic-status-test")
+        expect(page.locator("#progress")).to_be_visible()
+        offline[0] = True
+        expect(page.locator("#error")).to_contain_text("Connection unavailable")
+        offline[0] = False
+        expect(page.locator("#error")).to_be_empty()
+
+        offline[0] = "unauthorized"
+        expect(page.locator("#error")).to_have_text("Synthetic access expired")
+        offline[0] = False
+        expect(page.locator("#error")).to_be_empty()
+
+        state["account_export"] = {"phase": "failed", "error": "Synthetic export failed"}
+        expect(page.locator("#error")).to_have_text("Synthetic export failed")
+        state["account_export"] = {"phase": "running", "error": None}
+        expect(page.locator("#error")).to_be_empty()
+
+        # A successful action followed by a failed status request must also recover.
+        def resume(route):
+            offline[0] = True
+            state["account_export"] = {"phase": "running", "error": None}
+            route.fulfill(json={})
+        state["account_export"] = {"phase": "paused"}
+        page.route("**/api/resume", resume)
+        expect(page.locator("#resume")).to_be_visible()
+        page.locator("#resume").click()
+        expect(page.locator("#error")).to_contain_text("Connection unavailable")
+        offline[0] = False
+        expect(page.locator("#error")).to_be_empty()
+
+        # Background polling must not erase a rejected operator action.
+        page.route("**/api/finish", lambda route: route.fulfill(status=409, json={"detail": "Synthetic action rejected"}))
+        page.locator("#finish").click()
+        expect(page.locator("#error")).to_have_text("Synthetic action rejected")
+        with page.expect_response("**/api/status"):
+            pass
+        expect(page.locator("#error")).to_have_text("Synthetic action rejected")
+        page.unroute("**/api/finish")
+        page.route("**/api/finish", lambda route: route.fulfill(json={}))
+        page.locator("#finish").click()
+        expect(page.locator("#error")).to_be_empty()
+
+        state.update(phase="sealed", authorized=False, account_export=None, revocation="not_confirmed",
+                     history={"phase": "incomplete", "captured": 42, "unavailable": 2},
+                     media={"done": 5, "hashed": 3, "skipped": 1, "failed": 1, "retry": 2})
+        expect(page.locator("#complete")).to_be_visible()
+        summary = page.locator("#complete-summary")
+        expect(summary).to_contain_text("Partial capture")
+        expect(summary).to_contain_text("Messages preserved：42，unavailable：2")
+        expect(summary).to_contain_text("saved：5，hashes only：3，skipped：1，failed：1，unfinished：2")
+        assert page.evaluate("sessionStorage.getItem('sealed-access')") is None
+        completed_requests = len(requests)
+        page.locator("#language").select_option("ru")
+        expect(page.locator("#status")).to_contain_text("Сбор завершён")
+        expect(summary).to_contain_text("Неполный сбор")
+        expect(page.locator("#error")).to_contain_text("Отзыв сессии не подтверждён")
+        assert len(requests) == completed_requests
+        for width in (320, 390, 1440):
+            page.set_viewport_size({"width": width, "height": 1000})
+            check_layout(page)
+        page.screenshot(path=str(screenshots / "runner-partial-summary.png"), full_page=True)
+        assert not errors, errors
+    finally:
+        page.close()
+
+
 def main():
     asyncio.run(check_login())
     screenshots = ROOT / "test-results" / "sealed-experience"
@@ -244,6 +338,7 @@ def main():
         page.on("pageerror", lambda error: errors.append(str(error)))
         server = thread = sock = None
         try:
+            status_recovery(context, f"http://127.0.0.1:{files.server_port}", screenshots)
             page.goto(f"http://127.0.0.1:{files.server_port}/capture.html?lang=ru")
             expect(page.locator("html")).to_have_attribute("lang", "ru")
             expect(page.locator("#instructions")).to_have_attribute("href",
@@ -292,6 +387,7 @@ def main():
                 "https://github.com/synthetic/TgWitness/actions/workflows/sealed-witness.yml")
             page.locator('[data-capture-action="next"]').click()
             cfg = config(record)
+            cfg["seconds"] = 120
             connection(cfg, "https://synthetic.trycloudflare.com", root / "connection.tgwsealed")
             page.locator("#connection-file").set_input_files(root / "connection.tgwsealed")
             expect(page.locator("#open-connection")).to_be_visible()
@@ -337,7 +433,8 @@ def main():
             expect(capture.locator("#collect")).to_be_enabled()
             capture.locator("#media-action").select_option("hashes_only")
             capture.locator("#preflight").click()
-            expect(capture.locator("#preflight-result")).to_contain_text("Общий размер и длительность пока неизвестны")
+            expect(capture.locator("#preflight-budget")).to_contain_text("Оценка сбора")
+            expect(capture.locator("#preflight-budget")).to_contain_text("подготовка архива")
             assert app.state.session.store.get_setting("capture", None) is None
             capture.locator("#media-rules").locator("..").locator("summary").click()
             for width in (1280, 390, 320):
@@ -350,8 +447,17 @@ def main():
             capture.screenshot(path=str(screenshots / "runner-hash-preflight.png"), full_page=True, animations="disabled")
             capture.locator("#language").select_option("ru")
             capture.locator("#media-action").select_option("download")
+            capture.locator("#preflight").click()
+            expect(capture.locator("#budget-messages")).to_be_visible()
+            capture.locator("#budget-messages").click()
+            expect(capture.locator("#media-action")).to_have_value("exclude")
+            expect(capture.locator("#budget-messages")).to_be_hidden()
+            capture.locator("#media-action").select_option("download")
             capture.locator("#collect").click()
             expect(capture.locator("#status")).to_contain_text("Сбор завершён", timeout=15000)
+            expect(capture.locator("#complete-summary")).to_contain_text("Чтение истории в выбранном объёме завершено")
+            capture.locator("#language").select_option("en")
+            expect(capture.locator("#complete-summary")).to_contain_text("History reading completed within the selected scope")
             assert not capture.evaluate("sessionStorage.getItem('sealed-access')")
             check_layout(capture)
             fixture = root / "synthetic-attestation.jsonl"

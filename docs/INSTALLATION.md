@@ -57,6 +57,35 @@ Every installation includes **START-HERE.html** and **START-HERE.txt**, with loc
 paths, commands and links to the repository. Run `tgwitness guide` to open the guide.
 On Windows, use `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` in PowerShell.
 
+## Full-text search settings
+
+[Full-text search](SEARCH.md) (preview) needs no setup. Its index is built in the
+background after an update.
+
+| Variable or command | Effect |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | Default: the index is kept in `search/fulltext.sqlite3` of each workspace |
+| `TGWITNESS_FULLTEXT=memory` | No index file; the index is rebuilt at every start |
+| `TGWITNESS_FULLTEXT=off` | No index; only exact-text search |
+| `tgwitness index status` | Index state of every workspace |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | Rebuild every index from the signed journal |
+
+The administrator's choice in **Journal → Filters → Search index** overrides the
+variable for that workspace. Commands find the data directory of the installation
+that runs them; elsewhere, add `--data-dir` with the path from `tgwitness paths`.
+For a full Ukrainian dictionary (GPL-3.0 data), install `pymorphy3-dicts-uk` in the
+installation's Python environment.
+
+## Command-line access
+
+The [command line](CLI.md) (preview) reads the archive for scripts and agents.
+
+| Variable | Effect |
+| --- | --- |
+| `TGWITNESS_URL` | Panel address for `tgwitness search`, `context`, `messages`, `stats` and `export`; default `http://127.0.0.1:8787` when a token is set |
+| `TGWITNESS_MCP_TOKEN` | Archive connection token from **Integrations → MCP**, shared with MCP clients; `--token-file` reads it from a file instead |
+| `TGWITNESS_DATA` | Data directory read directly when no `--data-dir`, URL or token is given |
+
 ## Verify before running
 
 The one-line command trusts HTTPS for its initial script. That script checks

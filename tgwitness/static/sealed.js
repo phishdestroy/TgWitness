@@ -1,6 +1,7 @@
 "use strict";
 const $ = id => document.getElementById(id);
 let lang = "en", qrId = null, ended = false;
+let lastState = null, connectionFailed = false, statusError = "", actionError = "";
 const tr = (en, ru) => lang === "ru" ? ru : en;
 const fragment = new URLSearchParams(location.hash.slice(1));
 if (fragment.has("access")) {
@@ -13,7 +14,12 @@ function translate() {
   $("language").value = lang;
   document.querySelectorAll("[data-en]").forEach(el => {el.textContent = el.dataset[lang];});
 }
-$("language").onchange = () => {lang = $("language").value; translate(); describeMode(); if (assessmentResult) renderAssessment(assessmentResult); poll();};
+$("language").onchange = () => {
+  lang = $("language").value; translate(); describeMode();
+  if (assessmentResult) renderAssessment(assessmentResult);
+  if (lastState) renderState(lastState);
+  else renderError();
+};
 translate();
 async function api(path, body) {
   const response = await fetch("/api/" + path, {method: body === undefined ? "GET" : "POST",
@@ -21,14 +27,14 @@ async function api(path, body) {
       "X-TgWitness-System-Language": navigator.language},
     body: body === undefined ? undefined : JSON.stringify(body), cache: "no-store", redirect: "error"});
   const data = await response.json();
-  if (!response.ok) throw new Error(data.detail || "Request failed");
+  if (!response.ok) throw Object.assign(new Error(data.detail || "Request failed"), {status: response.status});
   return data;
 }
 function bind(id, action) {
   $(id).onclick = async () => {
-    $(id).disabled = true; $("error").textContent = "";
-    try {await action(); await poll();}
-    catch (error) {$("error").textContent = error.message;}
+    $(id).disabled = true; actionError = ""; renderError();
+    try {await action(); await poll().catch(() => {});}
+    catch (error) {actionError = error.message; renderError();}
     finally {$(id).disabled = false;}
   };
 }
@@ -118,7 +124,7 @@ function selection() {
   }
   return {chat_id: Number($("chats").value), capture: {download_media: true, media_action: $("media-action").value,
     oversized_media: $("oversized-media").value, include_avatars: $("include-avatars").checked,
-    messages_first: $("messages-first").checked, types}};
+    messages_first: $("messages-first").checked, preserve_ephemeral_media: $("preserve-ephemeral-media").checked, types}};
 }
 let assessedSelection = null, assessmentResult = null;
 function describeMode() {
@@ -137,6 +143,7 @@ function describeMode() {
 function clearAssessment() {
   assessedSelection = null; assessmentResult = null; $("save-selection").disabled = true;
   $("preflight-result").textContent = ""; $("preflight-details").hidden = true;
+  $("preflight-budget").textContent = ""; $("budget-actions").hidden = true;
   const journal = $("export-mode").value === "journal";
   $("account-options").hidden = journal;
   $("export-scope").disabled = journal;
@@ -151,6 +158,8 @@ function clearAssessment() {
   $("include-avatars").parentElement.hidden = !journal;
   if (!journal) $("include-avatars").checked = false;
   $("messages-first").disabled = !journal;
+  $("preserve-ephemeral-media").disabled = !journal;
+  $("preserve-ephemeral-media").parentElement.hidden = !journal;
   if (!journal) $("messages-first").checked = true;
   $("chat-picker").hidden = !journal && $("export-scope").value === "account";
   $("chats").multiple = !journal; $("chats").size = journal ? 1 : 6;
@@ -176,8 +185,8 @@ function renderAssessment(result) {
   const sample = result.sample || {}, format = bytes => bytes >= 1048576 ? (bytes / 1048576).toFixed(2) + " MiB" :
     bytes >= 1024 ? (bytes / 1024).toFixed(1) + " KiB" : (bytes || 0) + " B";
   $("preflight-result").textContent = (result.can_start ? tr("Settings accepted．", "Настройки приняты．") : tr("Cannot start with these resources．", "Недостаточно ресурсов для запуска．")) + " " + tr(
-    `Sample：${sample.messages_examined || 0} messages，file downloads ${format(sample.known_download_bytes)}，estimated unique hash data ${format(sample.hash_manifest_estimate_bytes)}．Total archive size and duration remain unknown．${Math.ceil(result.remaining_seconds / 60)} capture minutes remain．`,
-    `В выборке ${sample.messages_examined || 0} сообщений，файлы для скачивания ${format(sample.known_download_bytes)}，оценка объёма уникальных хешей ${format(sample.hash_manifest_estimate_bytes)}．Общий размер и длительность пока неизвестны，осталось ${Math.ceil(result.remaining_seconds / 60)} минут．`) + " " +
+    `Sample：${sample.messages_examined || 0} messages，file downloads ${format(sample.known_download_bytes)}，estimated unique hash data ${format(sample.hash_manifest_estimate_bytes)}．${Math.ceil(result.remaining_seconds / 60)} session minutes remain．`,
+    `В выборке ${sample.messages_examined || 0} сообщений，файлы для скачивания ${format(sample.known_download_bytes)}，оценка объёма уникальных хешей ${format(sample.hash_manifest_estimate_bytes)}．Осталось ${Math.ceil(result.remaining_seconds / 60)} минут сеанса．`) + " " +
     (result.issues || []).map(issue => lang === "ru" ? ({
       approval_not_checked: "Telegram может потребовать подтверждения экспорта，эта проверка не запускает Takeout и не определяет срок ожидания．",
       left_chats_unavailable: "Обычный API не перечисляет покинутые каналы и супергруппы．",
@@ -189,7 +198,29 @@ function renderAssessment(result) {
       sample_exceeds_free_disk: "Даже файлам из выборки требуется больше свободного места．",
       browser_delivery_size_risk: "Файлы из выборки превышают предел расшифровки в браузере，используйте локальную команду．"
     }[issue.code] || issue.message) : issue.message).join(" ");
+  const plan = result.time_plan;
+  if (!plan) return;
+  const minutes = seconds => Math.ceil(seconds / 60), states = {
+    estimated_fit: tr("Fits the time estimate．", "По расчёту помещается во время сеанса．"),
+    over_budget: tr("The selected volume exceeds the available time．", "Выбранный объём превышает доступное время．"),
+    no_collection_time: tr("Only archive preparation time remains．", "Оставшееся время требуется для подготовки архива．"),
+    unknown: tr("Not all selected data could be measured．", "Не все выбранные данные удалось оценить．")};
+  $("preflight-budget").textContent = (states[plan.fit] || "") + " " + tr(
+    `${plan.messages_to_read} history messages counted．Estimated work：${minutes(plan.acquisition_seconds)} min，archive preparation：${minutes(plan.sealing_reserve_seconds)} min，available：${minutes(plan.remaining_seconds)} min．Download assumption：1 MiB/s with a 2× time margin．`,
+    `В проверенной истории ${plan.messages_to_read} сообщений．Оценка сбора：${minutes(plan.acquisition_seconds)} мин，подготовка архива：${minutes(plan.sealing_reserve_seconds)} мин，доступно：${minutes(plan.remaining_seconds)} мин．Для файлов заложена скорость 1 МиБ/с и двукратный запас времени．`) +
+    (plan.approval === "not_requested" ? " " + tr("Takeout approval time will be added when Telegram reports it．", "Время подтверждения Takeout добавится после ответа Telegram．") : "") +
+    (plan.files_exceed_budget ? " " + tr("Estimated files also exceed the selected download budget．", "Оценка файлов также превышает выбранный бюджет скачивания．") : "");
+  $("budget-actions").hidden = !plan.suggestions.length;
+  $("budget-messages").hidden = !plan.suggestions.includes("messages_only");
+  $("budget-chats").hidden = !plan.suggestions.includes("fewer_chats") || $("export-mode").value === "journal";
 }
+$("budget-messages").onclick = () => {
+  $("media-action").value = "exclude";
+  for (const kind of Object.keys(mediaTypes)) $("action-" + kind).value = "";
+  for (const id of ["include-avatars", "preserve-ephemeral-media", "account-photos", "account-stories", "account-other"]) $(id).checked = false;
+  clearAssessment(); $("preflight").click();
+};
+$("budget-chats").onclick = () => {$("export-scope").value = "chat"; clearAssessment(); $("chats").focus();};
 $("save-selection").onclick = () => {
   if (!assessedSelection) return;
   const url = URL.createObjectURL(new Blob([JSON.stringify(assessedSelection, null, 2) + "\n"], {type: "application/json"}));
@@ -201,11 +232,26 @@ bind("resume", () => api("resume", {}));
 bind("finish", () => api("finish", {}));
 bind("cancel", () => api("cancel", {}));
 let polling = false;
-async function poll() {
-  if (polling || ended) return;
-  polling = true;
-  try {
-    const state = await api("status");
+function renderError() {
+  $("error").textContent = lastState?.revocation === "not_confirmed" ? tr(
+    "Session revocation was not confirmed．End this session in Telegram Settings > Devices．",
+    "Отзыв сессии не подтверждён．Завершите её в Telegram：Настройки → Устройства．") : connectionFailed ? statusError || tr(
+    "Connection unavailable．The runner may be finishing，check GitHub Artifacts．",
+    "Нет соединения．Возможно，запуск завершается，проверьте GitHub Artifacts．") : !token ? tr(
+    "Open the connection file with your private key in the setup helper first．",
+    "Сначала откройте файл подключения своим закрытым ключом в помощнике запуска．") :
+    actionError || (lastState?.phase === "collecting" ? lastState.account_export?.error || "" : "");
+}
+function chatSummary(state) {
+  const history = state.history, media = state.media || {};
+  const pending = ["queued", "retry", "running", "cancelled"].reduce((sum, key) => sum + (media[key] || 0), 0);
+  const complete = history.phase === "complete" && !history.unavailable && !media.failed && !pending;
+  return (complete ? tr("History reading completed within the selected scope．", "Чтение истории в выбранном объёме завершено．") : tr(
+    "Partial capture，check the gaps recorded in the archive．", "Неполный сбор，проверьте пропуски，указанные в архиве．")) + " " + tr(
+    `Messages preserved：${history.captured || 0}，unavailable：${history.unavailable || 0}．Attachments saved：${media.done || 0}，hashes only：${media.hashed || 0}，skipped：${media.skipped || 0}，failed：${media.failed || 0}，unfinished：${pending}．`,
+    `Сохранено сообщений：${history.captured || 0}，недоступно：${history.unavailable || 0}．Вложения：сохранено ${media.done || 0}，только хеши ${media.hashed || 0}，пропущено ${media.skipped || 0}，ошибок ${media.failed || 0}，не завершено ${pending}．`);
+}
+function renderState(state) {
     const terminal = ["sealed", "cancelled", "failed"].includes(state.phase);
     $("login").hidden = state.authorized || state.phase !== "login";
     $("selection").hidden = !state.authorized || state.phase !== "login";
@@ -217,10 +263,24 @@ async function poll() {
     $("complete-summary").textContent = account ?
       (account.phase === "done" ? tr("Export completed within the selected scope．", "Выгрузка выбранных данных завершена．") : tr("Partial export：some selected data could not be acquired．", "Неполная выгрузка，часть выбранных данных не получена．")) + " " + tr(
         `${account.counts?.messages || 0} messages preserved，${account.coverage?.failures || 0} recorded failures．See coverage details in the archive．`,
-        `Сохранено сообщений：${account.counts?.messages || 0}，ошибок：${account.coverage?.failures || 0}．Подробности о полноте есть в архиве．`) : "";
+        `Сохранено сообщений：${account.counts?.messages || 0}，ошибок：${account.coverage?.failures || 0}．Подробности о полноте есть в архиве．`) : chatSummary(state);
+    if (state.revocation === "revoked") $("complete-summary").textContent += " " + tr(
+      "Telegram session revocation confirmed．", "Отзыв сессии Telegram подтверждён．");
     $("capture-messages").textContent = String(account ? Math.max(account.counts?.messages || 0, account.acquisition?.messages_preserved || 0) : state.history.captured || 0);
     $("capture-unavailable").textContent = String(account ? account.coverage?.failures || 0 : state.history.unavailable || 0);
     $("capture-remaining").textContent = String(Math.ceil(state.remaining_seconds / 60));
+    const budget = state.time_budget;
+    $("capture-budget").textContent = budget ? tr(
+      `Collection time left：${Math.ceil(budget.collection_seconds / 60)} min，reserved for the archive：${Math.ceil(budget.sealing_reserve_seconds / 60)} min．`,
+      `На сбор осталось ${Math.ceil(budget.collection_seconds / 60)} мин，на подготовку архива отведено ${Math.ceil(budget.sealing_reserve_seconds / 60)} мин．`) +
+      (budget.estimated_remaining_seconds == null ? "" : tr(` Current completion estimate：${Math.ceil(budget.estimated_remaining_seconds / 60)} min．`, ` Текущая оценка до завершения：${Math.ceil(budget.estimated_remaining_seconds / 60)} мин．`)) +
+      (budget.fit === "wait_exceeds_window" ? tr(" Telegram's reported wait exceeds this session．Approve Takeout from an established session，or finish with the data already saved．", " Указанное Telegram ожидание выходит за время сеанса．Подтвердите Takeout из действующей сессии или завершите с уже сохранёнными данными．") :
+       budget.fit === "over_budget" ? tr(" At the current rate，the full selection will not fit；collection stops before packaging time．", " При текущем темпе весь выбранный объём не помещается，сбор завершится с резервом на упаковку．") : "") : "";
+    const transfer = account?.active && account.transfer;
+    $("capture-transfer").hidden = !transfer;
+    $("capture-transfer").textContent = transfer ? tr(
+      `Current file：${(transfer.received_bytes / 1024**2).toFixed(2)} MiB received` + (transfer.total_bytes == null ? "" : ` of ${(transfer.total_bytes / 1024**2).toFixed(2)} MiB`) + "．The file is preserved after the download completes．",
+      `Текущий файл：получено ${(transfer.received_bytes / 1024**2).toFixed(2)} МиБ` + (transfer.total_bytes == null ? "" : ` из ${(transfer.total_bytes / 1024**2).toFixed(2)} МиБ`) + "．Файл сохраняется после завершения скачивания．") : "";
     $("resume").hidden = account ? !["paused", "waiting", "failed"].includes(account.phase) || account.active : state.history.phase !== "paused";
     $("resume").textContent = account?.wait_reason === "takeout_approval" ? tr("Check export approval", "Проверить подтверждение экспорта") : tr("Resume paused capture", "Продолжить сбор");
     $("cancel").hidden = terminal || state.phase === "sealing";
@@ -236,17 +296,24 @@ async function poll() {
       state.authorized ? tr("Connected. Choose what to export.", "Вход выполнен. Выберите данные для выгрузки.") :
       tr("Sign in to Telegram to continue.", "Для продолжения войдите в Telegram.");
     if (account?.wait_reason === "takeout_approval" && state.phase === "collecting") $("status").textContent =
-      tr(`Telegram requires export approval．Review the request in an established Telegram session，then click Check export approval．Telegram reported ${account.delay_seconds} seconds of waiting，this runner has ${state.remaining_seconds} seconds left．A new runner may require approval again．`,
-        `Telegram требует подтверждения экспорта，проверьте запрос в уже действующей сессии и нажмите «Проверить подтверждение экспорта»．Telegram сообщил об ожидании ${account.delay_seconds} секунд，у этого запуска осталось ${state.remaining_seconds} секунд．Новый запуск может снова потребовать подтверждения．`);
-    else if (account?.error && state.phase === "collecting") $("error").textContent = account.error;
+      tr(`Telegram requires export approval from another device that was already signed in before this request．The requesting session and a fresh login cannot approve it．After allowing the export there，click Check export approval．Telegram reported ${account.delay_seconds} seconds of waiting，this runner has ${state.remaining_seconds} seconds left．A new runner may require approval again．`,
+        `Telegram требует подтверждения с другого устройства，на котором вход был выполнен до запроса экспорта．Запрашивающая сессия и новый вход не могут его подтвердить．Разрешите экспорт на том устройстве и нажмите «Проверить подтверждение экспорта»．Telegram сообщил об ожидании ${account.delay_seconds} секунд，у этого запуска осталось ${state.remaining_seconds} секунд．Новый запуск может снова потребовать подтверждения．`);
     if (state.authorized) {$("api-hash").value = ""; $("phone").value = ""; qrId = null;}
-    if (state.revocation === "not_confirmed") $("error").textContent = tr("Session revocation was not confirmed. End this session in Telegram Settings > Devices.", "Отзыв сессии не подтверждён. Завершите её в Telegram: Настройки → Устройства.");
+    renderError();
     if (terminal) {ended = true; sessionStorage.removeItem("sealed-access");}
+}
+async function poll() {
+  if (polling || ended) return;
+  polling = true;
+  try {
+    const state = await api("status");
+    lastState = state; connectionFailed = false; statusError = ""; renderState(state);
     if (qrId) {const qr = await api("qr/" + encodeURIComponent(qrId));
       if (["expired", "failed", "cancelled"].includes(qr.step)) {qrId = null; $("qr-image").hidden = true;
-        $("error").textContent = tr("QR expired or failed. Generate another code.", "QR истёк или вход не удался. Создайте новый код.");}}
+        actionError = tr("QR expired or failed. Generate another code.", "QR истёк или вход не удался. Создайте новый код."); renderError();}}
+  } catch (error) {connectionFailed = true; statusError = error.status ? error.message : ""; renderError(); throw error;
   } finally {polling = false;}
 }
-if (!token) {$("error").textContent = tr("Open the connection file with your private key in the setup helper first.", "Сначала откройте файл подключения своим закрытым ключом в помощнике запуска.");}
-else {poll().catch(error => {$("error").textContent = error.message;});
-  setInterval(() => {if (!ended) poll().catch(() => {$("error").textContent = tr("Connection unavailable. The runner may be finishing; check GitHub Artifacts.", "Нет соединения. Возможно, запуск завершается: проверьте GitHub Artifacts.");});}, 1500);}
+if (!token) renderError();
+else {poll().catch(() => {});
+  setInterval(() => {if (!ended) poll().catch(() => {});}, 1500);}
