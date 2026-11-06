@@ -1938,14 +1938,7 @@ class Collector:
         except Exception as exc:
             if self.handle_authorization_error(exc, name, client=client):
                 return
-            await self.failure(exc, name)
-            self.running = False
-            if self.phase not in ("storage_error", "authorization_required"):
-                self.phase = "collector_error"
-            await self.cancel_workers()
-            await self.avatar_history.close()
-            if self.client and not (self.export_busy() or self.export_claim):
-                await self.client.disconnect()
+            await self.failure(exc, name, client=client, fatal=True)
 
     async def cancel_workers(self):
         tasks = (self.watchdog, self.media_worker, self.urgent_media_worker, self.ephemeral_media_worker,
@@ -2074,15 +2067,24 @@ class Collector:
                 await catch_up()
             self.recheck_wakeup.set()
 
-    async def failure(self, exc, context, *, client=None):
+    async def failure(self, exc, context, *, client=None, fatal=False):
         if self.handle_authorization_error(exc, context, client=client):
             return
         self.last_error = type(exc).__name__
+        if fatal:
+            self.running, self.phase = False, "collector_error"
         try:
             self.store.append("collector.error", {"operation": context, "error_type": type(exc).__name__,
+                                                 "observation_stopped": fatal, "run_id": self.run_id,
                                                  "coverage": "this update may not have been recorded"})
+            if fatal:
+                self.store.append("observation.stopped", {"reason": "collector_error", "operation": context,
+                                                          "run_id": self.run_id})
         except Exception:
             self.running, self.phase = False, "storage_error"
+            fatal = True
+        if fatal:
+            self.buffered, self.buffering = [], False
             await self.cancel_workers()
             await self.avatar_history.close()
             if self.client and not (self.export_busy() or self.export_claim):

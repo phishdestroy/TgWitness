@@ -758,7 +758,8 @@ class Coverage:
     def __init__(self):
         self.periods, self.gaps, self.notes = [], [], []
         self.start = self.alive = self.closed_at = self.close_reason = None
-        self.observing = self.disconnected = False
+        self.observing = self.active = False
+        self.run_id = None
         self.ids, self.titles = {}, {}
         self.first = self.last = None
         self.allowed = LIVENESS_GAP_SECONDS
@@ -780,10 +781,11 @@ class Coverage:
         if self.observing and kind not in ("observation.started", "process.started"):
             silent = (parse_time(at) - parse_time(self.alive)).total_seconds()
             if silent > self.allowed:
-                self.close(self.alive, "no records for " + str(round(silent / 60)) + " min while observing: "
+                self.close(self.alive, "no capture heartbeat for " + str(round(silent / 60)) + " min while observing: "
                            "the process stopped, froze or the computer slept")
-                self.open(at)
-        interval = payload.get("interval_seconds") if kind == "collector.heartbeat" else \
+        heartbeat = (kind == "collector.heartbeat" and self.active
+                     and (self.run_id is None or payload.get("run_id") == self.run_id))
+        interval = payload.get("interval_seconds") if heartbeat else \
             (payload.get("parameters") or {}).get("heartbeat_seconds") if kind == "observation.started" else None
         if type(interval) is int and interval > 0:
             self.allowed = max(LIVENESS_GAP_SECONDS, 3 * interval)
@@ -794,27 +796,41 @@ class Coverage:
         if kind == "observation.started":
             self.close(self.alive, "observation restarted")
             self.open(at)
-            self.disconnected = False
+            self.active, self.run_id = True, payload.get("run_id")
         elif kind == "observation.stopped":
             self.close(at, "observation paused by the operator" if payload.get("reason") == "operator"
                        else "observation stopped: " + str(payload.get("reason") or "unknown"))
+            self.active = False
         elif kind == "process.stopped":
             self.close(at, "collector process stopped")
+            self.active = False
         elif kind == "process.started":
             self.close(self.alive, "collector process ended without an orderly stop")
+            self.active = False
+        elif kind == "collector.error":
+            self.close(self.alive, "collector error: capture may be incomplete")
+            self.notes.append({"at": at, "chat_id": chat_id, "reason": "collector_error",
+                               "operation": payload.get("operation"), "error_type": payload.get("error_type")})
+            if payload.get("observation_stopped") is True:
+                self.active = False
+        elif kind == "connection.closed" and payload.get("role") in (None, "current"):
+            self.close(at, "connection to Telegram closed")
         elif kind == "coverage.gap":
             reason = payload.get("reason")
             if chat_id is None and reason in INTERRUPTIONS:
                 cause = ACCOUNT_LOSS.get(payload.get("cause")) if reason == "authorization_required" else None
                 self.close(at, INTERRUPTIONS[reason] + (": " + cause if cause else ""))
-                self.disconnected = reason == "transport_disconnected"
+                if reason != "transport_disconnected":
+                    self.active = False
             else:
                 self.notes.append({"at": at, "chat_id": chat_id, "reason": reason})
-        elif kind == "connection.restored" and self.disconnected:
-            self.disconnected = False
-            self.open(at)
-        if self.observing:
-            self.alive = at
+        elif heartbeat:
+            if payload.get("connected") is True:
+                if not self.observing:
+                    self.open(at)
+                self.alive = at
+            elif payload.get("connected") is False:
+                self.close(at, "collector heartbeat reports Telegram disconnected")
         if chat_id is not None and isinstance(payload.get("title"), str) and kind in (
                 "target.changed", "source.discovered", "target.removed"):
             self.titles[chat_id] = payload["title"]
@@ -845,8 +861,9 @@ class Coverage:
                                "ranges_total": len(holes)})
         return {"continuous": periods, "gaps": gaps, "notes": self.notes[:200], "notes_total": len(self.notes),
                 "unobserved_ids": unobserved, "first_record": self.first, "last_record": self.last,
-                "meaning": "Continuous = observation on, connected and writing records at least every three "
-                           "minutes (or every three heartbeat intervals when they are longer). IDs not observed were never seen by this collector; that is not evidence "
+                "meaning": "Continuous = observation started and connected capture heartbeats recorded at least every three "
+                           "minutes (or every three heartbeat intervals when they are longer). Administrative and history records do not extend capture liveness. "
+                           "Still observing means not stopped as of the last capture confirmation, not proof of current activity or complete capture. IDs not observed were never seen by this collector; that is not evidence "
                            "that they were deleted. Only channels and supergroups number messages per chat."}
 
 
@@ -855,7 +872,7 @@ def coverage_lines(coverage):
         hours, rest = divmod(int(seconds), 3600)
         return (str(hours) + " h " if hours else "") + str(rest // 60) + " min"
     lines = ["Continuously observed from " + p["from"] + " to " + p["to"] + " (" + span(p["seconds"]) + ")"
-             + (", still observing at the last record" if p.get("still_observing") else "")
+             + (", observing at the last capture confirmation" if p.get("still_observing") else "")
              for p in coverage["continuous"]]
     lines += ["Gap from " + g["from"] + " to " + g["to"] + ": " + str(g["reason"]) for g in coverage["gaps"]]
     for chat in coverage["unobserved_ids"]:
@@ -1908,7 +1925,8 @@ def verify_chat_export(path, expected_fingerprint=None, max_gib=None):
 COMPARE_MEANING = {
     "number": "Both archives come from the same chat and account, so messages are matched by their number.",
     "content": "The archives come from different chats or accounts (for example both sides of a private chat), "
-               "so messages are matched by time, sender and text or file hash.",
+               "so candidate messages are matched by time, sender and full text or file hash. "
+               "A candidate match is not a claim that the message contents are equal.",
 }
 
 
@@ -1930,17 +1948,30 @@ def chat_rows(path, max_gib=None):
         return manifest, list(chat_messages(archive))
 
 
-def row_brief(row):
+def row_text(row):
     text = row.get("text")
     if isinstance(text, list):
         text = "".join(part if isinstance(part, str) else str(part.get("text", "")) for part in text)
+    return text or ""
+
+
+def row_brief(row):
     return {"id": row.get("id"), "date": row.get("date"), "from": row.get("from"), "from_id": row.get("from_id"),
-            "text": (text or "")[:300], "file_sha256": row.get("file_sha256"), "edited": row.get("edited")}
+            "text": row_text(row)[:300], "file_sha256": row.get("file_sha256"), "edited": row.get("edited")}
+
+
+COMPARE_FIELDS = ("type", "from_id", "text", "text_entities", "edited", "file_sha256", "media_type", "media_info",
+                  "reply_to_message_id", "reply_to", "forwarded_from", "via_bot_id", "author", "buttons",
+                  "action", "action_title", "auto_delete_seconds", "protected", "album_id", "reactions",
+                  "views", "forwards", "replies")
 
 
 def row_content(row):
-    brief = row_brief(row)
-    return brief["text"], brief["file_sha256"], row.get("media_type"), brief["edited"]
+    content = {field: row.get(field) for field in COMPARE_FIELDS}
+    content["text"] = row_text(row)
+    if not content["text_entities"] and isinstance(row.get("text"), list):
+        content["text_entities"] = [part for part in row["text"] if isinstance(part, dict)] or None
+    return content
 
 
 def compare_chat_exports(first, second, first_fingerprint=None, second_fingerprint=None, max_gib=None):
@@ -1949,7 +1980,9 @@ def compare_chat_exports(first, second, first_fingerprint=None, second_fingerpri
     (first_manifest, first_rows), (second_manifest, second_rows) = (chat_rows(first, max_gib), chat_rows(second, max_gib))
     same_chat = (first_manifest.get("chat") or {}).get("id") == (second_manifest.get("chat") or {}).get("id")
     same_account = ((first_manifest.get("account") or {}).get("id") == (second_manifest.get("account") or {}).get("id"))
-    method = "number" if same_chat and same_account else "content"
+    known_ids = all((manifest.get(field) or {}).get("id") is not None
+                    for manifest in (first_manifest, second_manifest) for field in ("chat", "account"))
+    method = "number" if known_ids and same_chat and same_account else "content"
     first_rows = [row for row in first_rows if row.get("type") != "unparsed"]
     second_rows = [row for row in second_rows if row.get("type") != "unparsed"]
     order = lambda rows: sorted(rows, key=lambda row: (str(row.get("date")), str(row.get("id"))))
@@ -1960,8 +1993,7 @@ def compare_chat_exports(first, second, first_fingerprint=None, second_fingerpri
         only_second = [right[k] for k in right.keys() - left.keys()]
     else:
         def content_key(row):
-            brief = row_brief(row)
-            return brief["from_id"], brief["file_sha256"] or brief["text"]
+            return row.get("from_id"), row.get("file_sha256") or row_text(row)
 
         waiting, pairs, only_first = {}, [], []
         for row in order(second_rows):
@@ -1975,9 +2007,16 @@ def compare_chat_exports(first, second, first_fingerprint=None, second_fingerpri
                 candidates.remove(match)
                 pairs.append((row, match))
         only_second = [row for rows in waiting.values() for row in rows]
-    changed = [{"first": row_brief(a), "second": row_brief(b)} for a, b in pairs
-               if method == "number" and row_content(a) != row_content(b)]
+    changed = []
+    for a, b in pairs:
+        left_content, right_content = row_content(a), row_content(b)
+        fields = [field for field in COMPARE_FIELDS if left_content[field] != right_content[field]]
+        if fields:
+            changed.append({"first": row_brief(a), "second": row_brief(b), "fields": fields})
     return {"format": "tgwitness-chat-comparison-v1", "method": method, "meaning": COMPARE_MEANING[method],
+            "compared_fields": list(COMPARE_FIELDS),
+            "comparison_limit": "Unchanged means equal in the listed message fields. It does not prove "
+                                "historical completeness, equal acquisition metadata or absence of unseen edits.",
             "first": {"file": str(first), "fingerprint": checked[0]["fingerprint"], "exported_at": first_manifest.get("exported_at"),
                       "chat_id": (first_manifest.get("chat") or {}).get("id"), "messages": len(first_rows),
                       "key_pinned": checked[0]["key_pinned"]},
@@ -1996,6 +2035,7 @@ def print_comparison(result, limit=50):
           + first["fingerprint"][:16] + "), second " + str(second["exported_at"]) + " (" + str(second["messages"])
           + " messages, key " + second["fingerprint"][:16] + ").")
     print(result["meaning"])
+    print(result["comparison_limit"])
     for title, name in (("Only in the first archive", "only_first"), ("Only in the second archive", "only_second")):
         rows = result[name]
         print(title + ": " + str(len(rows)))
@@ -2006,7 +2046,7 @@ def print_comparison(result, limit=50):
     print("Changed: " + str(len(result["changed"])))
     for item in result["changed"][:limit]:
         print("  #" + str(item["first"]["id"]) + ": " + " ".join(item["first"]["text"].split())[:80] + "  ->  "
-              + " ".join(item["second"]["text"].split())[:80])
+              + " ".join(item["second"]["text"].split())[:80] + " (" + ", ".join(item["fields"]) + ")")
     print("Unchanged: " + str(result["unchanged"]))
     if not (first["key_pinned"] and second["key_pinned"]):
         print("Signer identity is unpinned for at least one archive: compare the fingerprints with copies kept elsewhere.")
@@ -2112,8 +2152,14 @@ def check_attachments(archive, manifest):
     for name, digest in files.items():
         if name.startswith("media/") and name[len("media/"):] != digest:
             raise ValueError("Attachment name differs from its SHA-256: " + name)
-    referenced, hash_files = 0, set()
+    referenced, hash_files, count, numbers = 0, set(), 0, set()
     for message in chat_messages(archive):
+        count += 1
+        number = message.get("id")
+        if type(number) is int:
+            if number in numbers:
+                raise ValueError("Duplicate message ID in chat.json: " + str(number))
+            numbers.add(number)
         if message.get("server_hashes") is not None:
             hashes = message["server_hashes"]
             validate_server_hashes(hashes)
@@ -2131,21 +2177,50 @@ def check_attachments(archive, manifest):
         referenced += 1
     if {name for name in files if name.startswith("hashes/")} != hash_files:
         raise ValueError("Unreferenced chat file-hash manifest")
+    if type(manifest.get("message_count")) is not int or manifest["message_count"] != count:
+        raise ValueError("Chat message count differs from the signed manifest")
     return referenced
 
 
 def chat_messages(archive):
     with archive.open("chat.json") as stream:
-        inside = False
-        for raw in bounded_lines(io.TextIOWrapper(stream, encoding="utf-8")):
+        inside, header, header_bytes, separator = False, [], 0, None
+        lines = iter(bounded_lines(io.TextIOWrapper(stream, encoding="utf-8")))
+        for raw in lines:
             line = raw.strip()
             if not inside:
-                inside = line.endswith('"messages": [')
+                if line == '"messages": [':
+                    # The export wire format places one complete message on each line.
+                    # Reject other layouts instead of authenticating bytes but silently skipping records.
+                    json.loads("".join(header) + '"messages": []}')
+                    inside = True
+                else:
+                    header_bytes += len(raw.encode("utf-8"))
+                    if header_bytes > MAX_JSON_BYTES:
+                        raise ValueError("Chat header exceeds the verification limit")
+                    header.append(raw)
                 continue
             if line.startswith("]"):
+                if separator:
+                    raise ValueError("Trailing comma after chat message")
+                tail = "".join(line.split())
+                for rest in lines:
+                    tail += "".join(rest.split())
+                    if len(tail) > 2:
+                        raise ValueError("Unexpected data after chat messages")
+                if tail != "]}":
+                    raise ValueError("Invalid chat messages terminator")
                 return
-            if line.startswith("{"):
-                yield json.loads(line.rstrip(","))
+            if not line:
+                continue
+            if separator is False:
+                raise ValueError("Missing comma between chat messages")
+            separator = line.endswith(",")
+            message = json.loads(line.removesuffix(","))
+            if not isinstance(message, dict):
+                raise ValueError("Chat message must be an object")
+            yield message
+        raise ValueError("Missing or unsupported chat messages array")
 
 
 def verify_parts(archive, manifest):
