@@ -6320,5 +6320,12 @@
   "Record checks that found no change": "記錄未發現變更的檢查結果",
   "Read pinned messages": "閱讀置頂訊息",
   "Read gifts shown on channels and profiles": "讀取頻道與個人檔案上顯示的禮物",
-  "Pause between sources": "來源之間的停頓"
+  "Pause between sources": "來源之間的停頓",
+  "Messages of one day": "單日訊息",
+  "Pinned messages": "置頂訊息",
+  "Chat counts and gaps": "聊天次數與間隔",
+  "Forum topics": "論壇主題",
+  "Image previews with hashes": "附帶雜湊值的圖片預覽",
+  "Choose a chat.": "選擇一個聊天室。",
+  "Choose a file by its SHA-256.": "根據 SHA-256 值選擇檔案。"
 }

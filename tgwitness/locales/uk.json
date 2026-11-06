@@ -6437,5 +6437,12 @@
   "Record checks that found no change": "Записувати перевірки без змін",
   "Read pinned messages": "Читати закріплені повідомлення",
   "Read gifts shown on channels and profiles": "Читати подарунки на каналах і в профілях",
-  "Pause between sources": "Пауза між джерелами"
+  "Pause between sources": "Пауза між джерелами",
+  "Messages of one day": "Повідомлення за один день",
+  "Pinned messages": "Закріплені повідомлення",
+  "Chat counts and gaps": "Лічильники чату та пропуски",
+  "Forum topics": "Теми форуму",
+  "Image previews with hashes": "Прев'ю зображень із хешами",
+  "Choose a chat.": "Виберіть чат.",
+  "Choose a file by its SHA-256.": "Виберіть файл за його SHA-256."
 }

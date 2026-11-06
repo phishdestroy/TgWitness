@@ -6398,5 +6398,12 @@
   "Record checks that found no change": "תיעוד בדיקות שלא מצאו שינויים",
   "Read pinned messages": "קראו הודעות מוצמדות",
   "Read gifts shown on channels and profiles": "קראו את המתנות המוצגות בערוצים ובפרופילים",
-  "Pause between sources": "הפסקה בין מקורות"
+  "Pause between sources": "הפסקה בין מקורות",
+  "Messages of one day": "הודעות מיום אחד",
+  "Pinned messages": "הודעות מוצמדות",
+  "Chat counts and gaps": "מספר הצ'אטים והפערים",
+  "Forum topics": "נושאי פורום",
+  "Image previews with hashes": "תצוגה מקדימה של תמונות עם חתימות",
+  "Choose a chat.": "בחרו צ'אט.",
+  "Choose a file by its SHA-256.": "בחרו קובץ לפי ה-SHA-256 שלו."
 }

@@ -6515,5 +6515,12 @@
   "Record checks that found no change": "تسجيل عمليات الفحص التي لم تجد أي تغيير",
   "Read pinned messages": "قراءة الرسائل المثبتة",
   "Read gifts shown on channels and profiles": "قراءة الهدايا المعروضة على القنوات والملفات الشخصية",
-  "Pause between sources": "توقف مؤقت بين المصادر"
+  "Pause between sources": "توقف مؤقت بين المصادر",
+  "Messages of one day": "رسائل يوم واحد",
+  "Pinned messages": "الرسائل المثبتة",
+  "Chat counts and gaps": "عدد المحادثات والفجوات",
+  "Forum topics": "مواضيع المنتدى",
+  "Image previews with hashes": "معاينات الصور مع التجزئات",
+  "Choose a chat.": "اختر محادثة.",
+  "Choose a file by its SHA-256.": "اختر ملفًا باستخدام رمز SHA-256 الخاص به."
 }

@@ -6320,5 +6320,12 @@
   "Record checks that found no change": "记录未发现变更的检查结果",
   "Read pinned messages": "阅读置顶消息",
   "Read gifts shown on channels and profiles": "读取频道和个人资料中显示的礼物",
-  "Pause between sources": "不同来源之间的停顿"
+  "Pause between sources": "不同来源之间的停顿",
+  "Messages of one day": "某一天的消息",
+  "Pinned messages": "置顶消息",
+  "Chat counts and gaps": "聊天次数与间隔",
+  "Forum topics": "论坛主题",
+  "Image previews with hashes": "带哈希值的图片预览",
+  "Choose a chat.": "选择一个聊天室。",
+  "Choose a file by its SHA-256.": "根据 SHA-256 值选择文件。"
 }

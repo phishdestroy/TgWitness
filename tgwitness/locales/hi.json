@@ -6359,5 +6359,12 @@
   "Record checks that found no change": "उन जाँचों को रिकॉर्ड करें जिनमें कोई परिवर्तन नहीं मिला",
   "Read pinned messages": "पिन किए गए संदेश पढ़ें",
   "Read gifts shown on channels and profiles": "चैनलों और प्रोफाइल पर दिखाए गए उपहार पढ़ें",
-  "Pause between sources": "स्रोतों के बीच विराम"
+  "Pause between sources": "स्रोतों के बीच विराम",
+  "Messages of one day": "एक दिन के संदेश",
+  "Pinned messages": "पिन किए गए संदेश",
+  "Chat counts and gaps": "चैट की संख्या और अंतराल",
+  "Forum topics": "फोरम विषय",
+  "Image previews with hashes": "हैश के साथ छवि पूर्वावलोकन",
+  "Choose a chat.": "एक चैट चुनें।",
+  "Choose a file by its SHA-256.": "उस फ़ाइल को उसकी SHA-256 के आधार पर चुनें।"
 }

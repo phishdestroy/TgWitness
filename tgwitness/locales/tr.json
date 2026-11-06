@@ -6359,5 +6359,12 @@
   "Record checks that found no change": "Herhangi bir değişiklik tespit edilmeyen kontroller",
   "Read pinned messages": "Sabitlenmiş mesajları okuyun",
   "Read gifts shown on channels and profiles": "Kanallarda ve profillerde gösterilen hediyeleri okuyun",
-  "Pause between sources": "Kaynaklar arasında duraklama"
+  "Pause between sources": "Kaynaklar arasında duraklama",
+  "Messages of one day": "Bir günlük mesajlar",
+  "Pinned messages": "Sabitlenmiş mesajlar",
+  "Chat counts and gaps": "Sohbet sayıları ve boşluklar",
+  "Forum topics": "Forum konuları",
+  "Image previews with hashes": "Hash değerleri içeren resim önizlemeleri",
+  "Choose a chat.": "Bir sohbet seçin.",
+  "Choose a file by its SHA-256.": "SHA-256 değerine göre bir dosya seçin."
 }

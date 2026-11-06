@@ -6320,5 +6320,12 @@
   "Record checks that found no change": "Ghi lại các lần kiểm tra không phát hiện thấy thay đổi",
   "Read pinned messages": "Đọc các tin nhắn được ghim",
   "Read gifts shown on channels and profiles": "Đọc các món quà được hiển thị trên các kênh và hồ sơ",
-  "Pause between sources": "Dừng lại giữa các nguồn"
+  "Pause between sources": "Dừng lại giữa các nguồn",
+  "Messages of one day": "Các tin nhắn trong một ngày",
+  "Pinned messages": "Tin nhắn được ghim",
+  "Chat counts and gaps": "Số lượng cuộc trò chuyện và khoảng trống",
+  "Forum topics": "Các chủ đề trên diễn đàn",
+  "Image previews with hashes": "Xem trước hình ảnh kèm mã băm",
+  "Choose a chat.": "Chọn một cuộc trò chuyện.",
+  "Choose a file by its SHA-256.": "Chọn tệp theo mã SHA-256 của nó."
 }

@@ -6359,5 +6359,12 @@
   "Record checks that found no change": "ثبت بررسی‌هایی که هیچ تغییری یافتند",
   "Read pinned messages": "پیام‌های سنجاق‌شده را بخوانید",
   "Read gifts shown on channels and profiles": "هدایای نمایش‌داده‌شده در کانال‌ها و پروفایل‌ها را بخوانید",
-  "Pause between sources": " مکث بین منابع"
+  "Pause between sources": " مکث بین منابع",
+  "Messages of one day": "پیام‌های یک روز",
+  "Pinned messages": "پیام‌های سنجاق‌شده",
+  "Chat counts and gaps": "شمارش چت‌ها و فواصل",
+  "Forum topics": "موضوعات انجمن",
+  "Image previews with hashes": "پیش‌نمایش تصاویر با هش‌ها",
+  "Choose a chat.": "یک چت را انتخاب کنید.",
+  "Choose a file by its SHA-256.": "یک فایل را بر اساس SHA-256 آن انتخاب کنید."
 }

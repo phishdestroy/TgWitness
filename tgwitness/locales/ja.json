@@ -6320,5 +6320,12 @@
   "Record checks that found no change": "変更が確認されなかったチェックを記録する",
   "Read pinned messages": "固定されたメッセージを読む",
   "Read gifts shown on channels and profiles": "チャンネルやプロフィールに表示されている「ギフト」を読み取る",
-  "Pause between sources": "ソース間の間隔"
+  "Pause between sources": "ソース間の間隔",
+  "Messages of one day": "1日分のメッセージ",
+  "Pinned messages": "固定メッセージ",
+  "Chat counts and gaps": "チャット数と空白期間",
+  "Forum topics": "フォーラムのトピック",
+  "Image previews with hashes": "ハッシュ付き画像プレビュー",
+  "Choose a chat.": "チャットを選択してください。",
+  "Choose a file by its SHA-256.": "SHA-256値に基づいてファイルを選択してください。"
 }

@@ -6437,5 +6437,12 @@
   "Record checks that found no change": "Rejestruj kontrole, w których nie stwierdzono żadnych zmian",
   "Read pinned messages": "Przeczytaj przypięte wiadomości",
   "Read gifts shown on channels and profiles": "Odczytuj prezenty wyświetlane na kanałach i profilach",
-  "Pause between sources": "Przerwa między źródłami"
+  "Pause between sources": "Przerwa między źródłami",
+  "Messages of one day": "Wiadomości z jednego dnia",
+  "Pinned messages": "Przypięte wiadomości",
+  "Chat counts and gaps": "Liczba rozmów i luki",
+  "Forum topics": "Wątki na forum",
+  "Image previews with hashes": "Podglądy obrazów wraz z skrótami",
+  "Choose a chat.": "Wybierz czat.",
+  "Choose a file by its SHA-256.": "Wybierz plik na podstawie jego wartości SHA-256."
 }

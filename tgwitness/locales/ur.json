@@ -6359,5 +6359,12 @@
   "Record checks that found no change": "ان چیکس کو ریکارڈ کریں جن میں کوئی تبدیلی نہیں ملی",
   "Read pinned messages": "پن کیے گئے پیغامات پڑھیں",
   "Read gifts shown on channels and profiles": "چینلز اور پروفائلز پر دکھائے گئے تحائف پڑھیں",
-  "Pause between sources": "ماخذوں کے درمیان وقفہ"
+  "Pause between sources": "ماخذوں کے درمیان وقفہ",
+  "Messages of one day": "ایک دن کے پیغامات",
+  "Pinned messages": "پن کیے گئے پیغامات",
+  "Chat counts and gaps": "چٹ باتوں کی تعداد اور وقفے",
+  "Forum topics": "فورم کے موضوعات",
+  "Image previews with hashes": "ہیگز کے ساتھ تصویر کے پیش نظارے",
+  "Choose a chat.": "ایک چیٹ منتخب کریں۔",
+  "Choose a file by its SHA-256.": "فائل کو اس کے SHA-256 کے ذریعے منتخب کریں۔"
 }

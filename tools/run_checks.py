@@ -53,6 +53,7 @@ SUITES = {
         "test_verifier_comparison.py", "test_export_budget.py", "test_witness_continuity.py",
         "test_capture_liveness.py",
         "test_chat_state.py",
+        "test_archive_views.py",
         "check_audit_frontend_browser.py",
         "check_bootstrap_recovery_browser.py",
         "check_import_preflight.py", "check_chat_safety_browser.py", "check_workspace_downloads_browser.py",
