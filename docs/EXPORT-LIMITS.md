@@ -74,11 +74,13 @@ of seconds (plus a small timer margin). Official export does not mean zero waits
 
 [Account export](ACCOUNT-EXPORT.md) supports Takeout and durable page receipts.
 [Distributed chat export](DISTRIBUTED-EXPORT.md#history-acquisition) now has an
-opt-in Takeout history path for public channels and supergroups. Regular history
-retains 2,000-ID chunks; Takeout can widen sparse ranges up to 100,000 numeric IDs
-without excluding any IDs. Its transport and generation accompany signed receipts.
-This path has offline protocol/recovery tests and browser checks; its sustained
-live throughput has not been measured. New distributed plans also retain signed
+opt-in Takeout history path for public channels and supergroups. New plans for
+either transport can widen 2,000-ID chunks up to 100,000 numeric IDs in sparse
+histories without excluding any IDs. Existing signed plans keep their original
+chunk sizes. Transport and generation accompany signed receipts.
+This path has offline protocol/recovery tests and browser checks; sustained
+Takeout throughput has not been measured. Regular-mode observations are recorded
+in the [50-source qualification](EXPORT-BENCHMARK-2026-11-06.md). New distributed plans retain signed
 checkpoints of up to 100 decoded messages inside a chunk, with observer-bound
 recovery and standalone verification. These local batches differ from account
 export's API-page receipts; older distributed plans retain chunk-only recovery.

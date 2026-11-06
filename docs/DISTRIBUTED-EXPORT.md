@@ -71,6 +71,14 @@ Acquisition throughput is newly committed messages divided by acquisition wall t
 
 Large-list discovery has a different request mix from history acquisition. See the [exporter source comparison and limits](EXPORT-LIMITS.md) before extrapolating a small history benchmark to thousands of new sources.
 
+A [50-source live qualification](EXPORT-BENCHMARK-2026-11-06.md) on 2026-11-06
+produced 48 verified archives with 3,598,381 records. One eight-account regular-mode
+job acquired 768,007 history records in 1,117.082 seconds; its complete attempt took
+1,574.920 seconds. Rechecks added records that the history pass did not return.
+The run also exposed sparse-range overhead, connection timeouts and slower later
+jobs after learned pacing increased. It did not establish sustained Takeout speed
+or linear scaling across forty accounts; see the qualification's scope and checks.
+
 A bounded live pilot on 2026-11-06 UTC compared one and two accounts over the same approximately 4,000-ID ranges in two public supergroups. Acquisition of 3,313 messages took 33.672 s and 16.969 s; acquisition of 3,691 took 37.750 s and 19.188 s. All four ZIPs verified. ID sets matched between runs; differences in three reply-media headers were limited to access hashes and file references. These are small, sequential runs without attachments or Takeout, on a 32-logical-CPU Windows host; they do not establish sustained throughput for ten accounts or thousands of sources. Only authors and a bounded visible participant sample were collected, not complete membership.
 
 ### Archive
