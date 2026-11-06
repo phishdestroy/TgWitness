@@ -6241,5 +6241,19 @@
 "The account-wide numbering is measured where it applies.": "在适用情况下，应采用全账户范围的编号方式。",
 "The account-wide numbering is not measured.": "未对全账号范围内的编号进行统计。",
 "A service-message estimate is shown.": "此处显示的是服务消息的预估数量。",
-"No service-message estimate is shown.": "未显示服务消息的预估数量。"
+"No service-message estimate is shown.": "未显示服务消息的预估数量。",
+"Messages left out by the selection": "筛选后未包含的消息",
+"One marker for each run": "每次运行对应一个标记",
+"One marker for each message": "每条消息对应一个标记",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "标记用于显示选定内容中遗漏了哪些消息，但不显示其具体内容。被披露的回复所回应的那条消息，始终会拥有独立的标记。",
+"Withheld by selection, shown as markers": "因筛选而被隐藏，显示为标记",
+"Withheld by selection": "因筛选而未公开",
+"Rule: {rules}": "规则：{rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "此处未记录的消息：{count}。被屏蔽的消息既不属于删除，也不属于数据收集中的缺失。",
+"sender not selected": "未选择发送者",
+"text filter not matched": "未匹配文本过滤器",
+"outside the selected period": "选定时间段之外",
+"This reply answers a message included in this copy.": "此回复针对此副本中包含的一条消息。",
+"This reply answers a message withheld by the selection.": "此回复针对一条被筛选机制屏蔽的消息。",
+"This reply answers a message that is not in the source export.": "此回复针对一条未包含在源导出文件中的消息。"
 }

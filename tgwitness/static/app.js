@@ -105,7 +105,7 @@ const connectionViewReady=import('./views/connection.js?v=2').then(({createConne
 });
 const accountStateReady=import('./components/account-state.js?v=1').then(module=>{accountState=module.accountState;});
 let disclosurePreview;
-const disclosurePreviewReady=import('./views/disclosure-preview.js?v=1').then(({createDisclosurePreview})=>{
+const disclosurePreviewReady=import('./views/disclosure-preview.js?v=2').then(({createDisclosurePreview})=>{
   disclosurePreview=createDisclosurePreview({root:$('view-evidence'),tr,formatTime:accountExportTime});
 });
 let viewHost=null;
@@ -2430,6 +2430,7 @@ function accountDisclosurePolicy(){
     disclose_user_ids:identity_mode==="pseudonymize_third_parties"?
       accountExportIds($("account-disclosure-disclose-ids").value,"disclosed user"):[],
     text_mode:$("account-disclosure-text-mode").value,
+    withheld_markers:$("account-disclosure-withheld").value,
     include_media:$("account-disclosure-media").checked,
     include_contacts:false,include_profile:false,include_profile_photos:false,
     include_stories:false,include_session_metadata:false,include_other_data:false};

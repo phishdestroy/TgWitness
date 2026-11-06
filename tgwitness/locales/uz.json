@@ -6280,5 +6280,19 @@
 "The account-wide numbering is measured where it applies.": "Hisob bo'ylab raqamlash tegishli joylarda o'lchanadi.",
 "The account-wide numbering is not measured.": "Hisob bo'ylab raqamlash o'lchanmaydi.",
 "A service-message estimate is shown.": "Xizmat xabariga oid taxmin ko'rsatiladi.",
-"No service-message estimate is shown.": "Xizmat xabari bo'yicha taxmin ko'rsatilmagan."
+"No service-message estimate is shown.": "Xizmat xabari bo'yicha taxmin ko'rsatilmagan.",
+"Messages left out by the selection": "Tanlov orqali chiqarib tashlangan xabarlar",
+"One marker for each run": "Har bir ishga tushirish uchun bitta marker",
+"One marker for each message": "Har bir xabar uchun bitta marker",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Markerlar tanlov xabarlarni qayerda qoldirganini, ularning mazmuni ko'rsatilmagan holda ko'rsatadi. Ochiq javob bergan xabar har doim o'z markeriga ega bo'ladi.",
+"Withheld by selection, shown as markers": "Tanlov orqali yashirilgan, markerlar sifatida ko'rsatiladi",
+"Withheld by selection": "Tanlov orqali yashirilgan",
+"Rule: {rules}": "Qoidalar: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Bu yerda qoldirilgan xabarlar: {count}. Yashirilgan xabar o'chirilishni anglatmaydi va yig'indida bo'shliq hosil qilmaydi.",
+"sender not selected": "yuboruvchi tanlanmagan",
+"text filter not matched": "matn filtri mos kelmadi",
+"outside the selected period": "tanlangan davrdan tashqarida",
+"This reply answers a message included in this copy.": "Ushbu javob nusxaga kiritilgan xabarga javob beradi.",
+"This reply answers a message withheld by the selection.": "Ushbu javob tanlov tomonidan yashirilgan xabarga javob beradi.",
+"This reply answers a message that is not in the source export.": "Ushbu javob manba eksportida mavjud bo'lmagan xabarga javob beradi."
 }

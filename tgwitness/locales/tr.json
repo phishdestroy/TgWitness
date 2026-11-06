@@ -6280,5 +6280,19 @@
 "The account-wide numbering is measured where it applies.": "Hesap genelinde numaralandırma, geçerli olduğu yerlerde uygulanır.",
 "The account-wide numbering is not measured.": "Hesap genelindeki numaralandırma ölçülmemektedir.",
 "A service-message estimate is shown.": "Bir hizmet mesajı tahmini gösterilmektedir.",
-"No service-message estimate is shown.": "Hizmet mesajı tahmini gösterilmez."
+"No service-message estimate is shown.": "Hizmet mesajı tahmini gösterilmez.",
+"Messages left out by the selection": "Seçim dışında bırakılan mesajlar",
+"One marker for each run": "Her çalıştırma için bir işaretçi",
+"One marker for each message": "Her mesaj için bir işaretçi",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "İşaretçiler, seçimin hangi mesajları dışarıda bıraktığını gösterir; ancak mesajların içeriği gösterilmez. Açıklanan bir yanıtın cevapladığı mesaj her zaman kendine ait bir işaretçiye sahip olur.",
+"Withheld by selection, shown as markers": "Seçim nedeniyle gizlenmiş, işaretçiler olarak gösterilmiştir",
+"Withheld by selection": "Seçim nedeniyle gizlenmiştir",
+"Rule: {rules}": "Kural: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Burada dışarıda bırakılan mesajlar: {count}. Gizlenen bir mesaj, silinmiş bir mesaj değildir ve koleksiyonda bir boşluk oluşturmaz.",
+"sender not selected": "gönderen seçilmedi",
+"text filter not matched": "metin filtresi eşleşmedi",
+"outside the selected period": "seçilen dönem dışında",
+"This reply answers a message included in this copy.": "Bu yanıt, bu kopyada yer alan bir mesaja yanıt niteliğindedir.",
+"This reply answers a message withheld by the selection.": "Bu yanıt, seçim tarafından gizlenen bir mesaja yanıt niteliğindedir.",
+"This reply answers a message that is not in the source export.": "Bu yanıt, kaynak dışa aktarımında bulunmayan bir mesaja yanıt niteliğindedir."
 }

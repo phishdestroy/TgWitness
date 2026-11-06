@@ -2725,11 +2725,19 @@ def account_export_lines(result):
     return lines
 
 
+DISCLOSURE_FORMATS = ("tgwitness-account-disclosure-v1", "tgwitness-account-disclosure-v2")
+WITHHELD_RULES = ("sender", "text", "period")
+WITHHELD_FIELDS = {"id", "state", "rules", "count", "text", "attachments", "redacted_fields"}
+REPLY_STATES = ("disclosed", "withheld", "not_in_source")
+
+
 def verify_account_disclosure(path, expected_fingerprint=None, source=None, max_gib=None):
     with open_archive(path, max_gib=max_gib) as archive, tempfile.TemporaryDirectory() as temporary:
         manifest = read_manifest(archive)
-        if manifest.get("format") != "tgwitness-account-disclosure-v1":
+        if manifest.get("format") not in DISCLOSURE_FORMATS:
             raise ValueError("Unsupported account disclosure format")
+        # Version 2 keeps records the selection left out as content-free markers, and replies say what they answer.
+        marked = manifest["format"] == "tgwitness-account-disclosure-v2"
         public = manifest["public_key"]
         fp = fingerprint(public)
         if manifest.get("fingerprint") != fp:
@@ -2758,8 +2766,9 @@ def verify_account_disclosure(path, expected_fingerprint=None, source=None, max_
         if not isinstance(manifest.get("policy"), dict):
             raise ValueError("Disclosure must record its applied policy")
         seen = sqlite3.connect(Path(temporary) / "disclosure.sqlite3")
-        seen.execute("CREATE TABLE messages (chat TEXT, id TEXT, PRIMARY KEY(chat,id)) WITHOUT ROWID")
-        media, messages = set(), 0
+        seen.execute("CREATE TABLE messages (chat TEXT, id TEXT, state TEXT, PRIMARY KEY(chat,id)) WITHOUT ROWID")
+        seen.execute("CREATE TABLE replies (chat TEXT, id TEXT, state TEXT)")
+        media, messages, withheld = set(), 0, 0
         try:
             with archive.open("messages.jsonl") as stream:
                 for line in bounded_lines(stream):
@@ -2772,11 +2781,29 @@ def verify_account_disclosure(path, expected_fingerprint=None, source=None, max_
                     for value in (chat.get("id"), message.get("id")):
                         if type(value) not in (str, int) or not value:
                             raise ValueError("Invalid disclosure chat/message ID")
+                    state = message.get("state", "disclosed") if marked else "disclosed"
+                    if marked and state not in ("disclosed", "withheld"):
+                        raise ValueError("Invalid disclosure record state")
                     try:
-                        seen.execute("INSERT INTO messages VALUES (?,?)",
-                                     (canonical(chat["id"]).decode(), canonical(message["id"]).decode()))
+                        seen.execute("INSERT INTO messages VALUES (?,?,?)",
+                                     (canonical(chat["id"]).decode(), canonical(message["id"]).decode(), state))
                     except sqlite3.IntegrityError:
                         raise ValueError("Duplicate disclosure message") from None
+                    if state == "withheld":
+                        rules, count = message.get("rules"), message.get("count")
+                        if (not set(message) <= WITHHELD_FIELDS or message.get("attachments") != []
+                                or not isinstance(rules, list) or not rules or not set(rules) <= set(WITHHELD_RULES)
+                                or type(count) is not int or count < 1):
+                            raise ValueError("Invalid withheld-by-selection marker")
+                        withheld += count
+                        continue
+                    reply = message.get("reply_to") if marked else None
+                    if reply is not None:
+                        if (not isinstance(reply, dict) or type(reply.get("id")) not in (str, int) or not reply["id"]
+                                or reply.get("state") not in REPLY_STATES):
+                            raise ValueError("Invalid disclosure reply reference")
+                        seen.execute("INSERT INTO replies VALUES (?,?,?)",
+                                     (canonical(chat["id"]).decode(), canonical(reply["id"]).decode(), reply["state"]))
                     attachments = message.get("attachments", [])
                     if not isinstance(attachments, list):
                         raise ValueError("Invalid disclosure attachments")
@@ -2797,12 +2824,19 @@ def verify_account_disclosure(path, expected_fingerprint=None, source=None, max_
                             raise ValueError("Disclosure attachment bytes/hash mismatch")
                         media.add(name)
                     messages += 1
-            chats = seen.execute("SELECT COUNT(DISTINCT chat) FROM messages").fetchone()[0]
+            chats = seen.execute("SELECT COUNT(DISTINCT chat) FROM messages WHERE state='disclosed'").fetchone()[0]
+            # A reply to a disclosed or withheld message must point at that record; only not_in_source points nowhere.
+            dangling = seen.execute("SELECT count(*) FROM replies r LEFT JOIN messages m ON m.chat=r.chat AND m.id=r.id "
+                                    "WHERE r.state!='not_in_source' AND (m.id IS NULL OR m.state!=r.state)").fetchone()[0]
+            if dangling:
+                raise ValueError("A disclosed reply points at a record that is not in this disclosure")
         finally:
             seen.close()
         if {name for name in files if name.startswith("media/")} != media:
             raise ValueError("Unreferenced disclosure media")
         counts = {"messages": messages, "chats": chats, "media": len(media)}
+        if marked:
+            counts["withheld"] = withheld
         if (not isinstance(manifest.get("counts"), dict) or set(manifest["counts"]) != set(counts)
                 or any(type(manifest["counts"][name]) is not int or manifest["counts"][name] != count
                        for name, count in counts.items())):
@@ -3827,7 +3861,7 @@ def main():
                 shown = "dossier"
                 result = verify_dossier(args.bundle, args.fingerprint, args.evidence)
                 pinned = bool(args.fingerprint)
-        elif (archive_format := bundle_format(args.bundle)) == "tgwitness-account-disclosure-v1":
+        elif (archive_format := bundle_format(args.bundle)) in DISCLOSURE_FORMATS:
             if args.checkpoint or args.witness or args.tsa_ca or args.channel:
                 raise ValueError("Journal checkpoint/witness/timestamp options do not apply to disclosure archives")
             shown = "account_disclosure"

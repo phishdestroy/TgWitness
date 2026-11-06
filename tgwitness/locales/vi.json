@@ -6241,5 +6241,19 @@
 "The account-wide numbering is measured where it applies.": "Hệ thống đánh số chung cho toàn tài khoản được áp dụng ở những nơi phù hợp.",
 "The account-wide numbering is not measured.": "Hệ thống đánh số trên toàn tài khoản không được tính toán.",
 "A service-message estimate is shown.": "Một ước tính về tin nhắn dịch vụ được hiển thị.",
-"No service-message estimate is shown.": "Không hiển thị ước tính về tin nhắn dịch vụ."
+"No service-message estimate is shown.": "Không hiển thị ước tính về tin nhắn dịch vụ.",
+"Messages left out by the selection": "Các tin nhắn bị loại trừ khỏi kết quả chọn lọc",
+"One marker for each run": "Mỗi lần chạy tương ứng với một dấu mốc",
+"One marker for each message": "Mỗi tin nhắn tương ứng với một dấu hiệu",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Các dấu hiệu cho biết vị trí mà phần đã chọn đã bỏ qua các tin nhắn, mà không hiển thị nội dung của chúng. Một tin nhắn mà câu trả lời được tiết lộ trả lời luôn có dấu hiệu riêng của nó.",
+"Withheld by selection, shown as markers": "Được ẩn theo lựa chọn, hiển thị dưới dạng dấu hiệu",
+"Withheld by selection": "Được giữ lại theo lựa chọn",
+"Rule: {rules}": "Quy tắc: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Số tin nhắn bị loại trừ tại đây: {count}. Một tin nhắn bị ẩn không phải là tin nhắn bị xóa và cũng không phải là lỗ hổng trong quá trình thu thập dữ liệu.",
+"sender not selected": "người gửi chưa được chọn",
+"text filter not matched": "bộ lọc văn bản không khớp",
+"outside the selected period": "ngoài khoảng thời gian đã chọn",
+"This reply answers a message included in this copy.": "Trả lời này đáp lại một tin nhắn có trong bản sao này.",
+"This reply answers a message withheld by the selection.": "Trả lời này giải đáp một tin nhắn bị ẩn bởi bộ lọc.",
+"This reply answers a message that is not in the source export.": "Trả lời này đáp lại một tin nhắn không có trong tệp xuất nguồn."
 }

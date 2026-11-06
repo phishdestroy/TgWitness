@@ -6280,5 +6280,19 @@
 "The account-wide numbering is measured where it applies.": "অ্যাকাউন্ট-ব্যাপী নম্বরীকরণ যেখানে প্রযোজ্য সেখানে পরিমাপ করা হয়।",
 "The account-wide numbering is not measured.": "অ্যাকাউন্ট-ব্যাপী নম্বরীকরণ পরিমাপ করা হয়নি।",
 "A service-message estimate is shown.": "একটি সার্ভিস-মেসেজ অনুমান দেখানো হয়েছে।",
-"No service-message estimate is shown.": "কোনও সার্ভিস-মেসেজ অনুমান দেখানো হয়নি।"
+"No service-message estimate is shown.": "কোনও সার্ভিস-মেসেজ অনুমান দেখানো হয়নি।",
+"Messages left out by the selection": "নির্বাচন প্রক্রিয়ায় বাদ পড়া বার্তাগুলি",
+"One marker for each run": "প্রতিটি রানের জন্য একটি মার্কার",
+"One marker for each message": "প্রতিটি বার্তার জন্য একটি মার্কার",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "মার্কারের মাধ্যমে দেখানো হয় নির্বাচন কোন বার্তাগুলো বাদ দিয়েছে, সেগুলোর বিষয়বস্তু ছাড়া। প্রকাশিত উত্তর যে বার্তার উত্তর দেয়, সেটি সবসময় নিজস্ব একটি মার্ক পায়।",
+"Withheld by selection, shown as markers": "নির্বাচনের মাধ্যমে লুকানো, মার্কার হিসেবে প্রদর্শিত",
+"Withheld by selection": "নির্বাচনের মাধ্যমে গোপন",
+"Rule: {rules}": "নিয়ম: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "এখানে রাখা বার্তা: {count}। একটি লুকানো বার্তা মুছে ফেলা নয় এবং সংগ্রহের কোনো ফাঁকও নয়।",
+"sender not selected": "প্রেরক নির্বাচিত নয়",
+"text filter not matched": "টেক্সট ফিল্টার মিলেনি",
+"outside the selected period": "নির্বাচিত সময়সীমার বাইরে",
+"This reply answers a message included in this copy.": "এই উত্তরটি এই অনুলিপিতে অন্তর্ভুক্ত একটি বার্তার উত্তর দিচ্ছে।",
+"This reply answers a message withheld by the selection.": "এই উত্তরটি নির্বাচনের মাধ্যমে গোপন রাখা একটি বার্তার উত্তর।",
+"This reply answers a message that is not in the source export.": "এই উত্তরটি এমন একটি বার্তার উত্তর দিচ্ছে যা সোর্স এক্সপোর্টে নেই।"
 }

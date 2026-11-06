@@ -6241,5 +6241,19 @@
 "The account-wide numbering is measured where it applies.": "若適用，將採用全帳戶範圍的編號方式進行計數。",
 "The account-wide numbering is not measured.": "全帳戶範圍的編號並未被計入。",
 "A service-message estimate is shown.": "此處顯示一則服務訊息的預估數量。",
-"No service-message estimate is shown.": "未顯示服務訊息的預估數量。"
+"No service-message estimate is shown.": "未顯示服務訊息的預估數量。",
+"Messages left out by the selection": "篩選後未包含的訊息",
+"One marker for each run": "每次執行皆產生一個標記",
+"One marker for each message": "每則訊息對應一個標記",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "標記會顯示選取範圍中遺漏了哪些訊息，但不會顯示其內容。若某則訊息的回覆已被公開，該訊息本身始終會擁有專屬的標記。",
+"Withheld by selection, shown as markers": "因篩選而未顯示，以標記形式呈現",
+"Withheld by selection": "因篩選而未公開",
+"Rule: {rules}": "規則：{rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "此處未收錄的訊息：{count} 則。被隱藏的訊息既非刪除，亦非資料蒐集中的缺口。",
+"sender not selected": "未選取發送者",
+"text filter not matched": "未找到符合條件的文字篩選條件",
+"outside the selected period": "選定期間之外",
+"This reply answers a message included in this copy.": "此回覆是針對此副本中所包含的一則訊息所作的回應。",
+"This reply answers a message withheld by the selection.": "此回覆針對一則被篩選機制隱藏的訊息所作的回應。",
+"This reply answers a message that is not in the source export.": "此回覆是針對來源匯出檔案中未包含的一則訊息所作的回應。"
 }

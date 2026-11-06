@@ -6241,5 +6241,19 @@
 "The account-wide numbering is measured where it applies.": "해당되는 경우 계정 전체에 적용되는 번호 체계가 반영됩니다.",
 "The account-wide numbering is not measured.": "계정 전체의 번호 매기기는 측정 대상이 아닙니다.",
 "A service-message estimate is shown.": "서비스 메시지 예상량이 표시됩니다.",
-"No service-message estimate is shown.": "서비스 메시지 예상량은 표시되지 않습니다."
+"No service-message estimate is shown.": "서비스 메시지 예상량은 표시되지 않습니다.",
+"Messages left out by the selection": "선택 과정에서 제외된 메시지",
+"One marker for each run": "실행마다 하나의 마커",
+"One marker for each message": "메시지마다 하나의 마커",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "마커는 선택 영역에서 메시지가 누락된 위치를 표시하며, 메시지 내용은 포함하지 않습니다. 공개된 답장이 응답하는 메시지는 항상 별도의 마커가 부여됩니다.",
+"Withheld by selection, shown as markers": "선택에 따라 생략되었으며, 마커로 표시됨",
+"Withheld by selection": "선택에 따라 비공개",
+"Rule: {rules}": "규칙: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "여기에서 제외된 메시지: {count}. 제외된 메시지는 삭제가 아니며, 수집에 누락된 부분도 아닙니다.",
+"sender not selected": "발신자 미선택",
+"text filter not matched": "텍스트 필터와 일치하는 항목 없음",
+"outside the selected period": "선택한 기간 외",
+"This reply answers a message included in this copy.": "이 답장은 이 사본에 포함된 메시지에 대한 답변입니다.",
+"This reply answers a message withheld by the selection.": "이 답글은 선택 항목에 의해 숨겨진 메시지에 대한 답변입니다.",
+"This reply answers a message that is not in the source export.": "이 답글은 소스 내보내기 파일에 포함되지 않은 메시지에 대한 답변입니다."
 }

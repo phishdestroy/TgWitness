@@ -6436,5 +6436,19 @@
 "The account-wide numbering is measured where it applies.": "يتم قياس الترقيم على مستوى الحساب حيثما ينطبق ذلك.",
 "The account-wide numbering is not measured.": "لا يتم قياس الترقيم على مستوى الحساب بأكمله.",
 "A service-message estimate is shown.": "يتم عرض تقدير لعدد رسائل الخدمة.",
-"No service-message estimate is shown.": "لا يظهر تقدير لرسوم الخدمة."
+"No service-message estimate is shown.": "لا يظهر تقدير لرسوم الخدمة.",
+"Messages left out by the selection": "الرسائل التي تم استبعادها من عملية الاختيار",
+"One marker for each run": "علامة واحدة لكل عملية تشغيل",
+"One marker for each message": "علامة واحدة لكل رسالة",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "تُظهر العلامات الأماكن التي استبعد فيها التحديد الرسائل، دون ذكر محتواها. وتُخصص دائمًا علامة خاصة بالرسالة التي يرد عليها الرد المكشوف.",
+"Withheld by selection, shown as markers": "تم حجبها بناءً على الاختيار، وتظهر كعلامات",
+"Withheld by selection": "تم حجبها بناءً على الاختيار",
+"Rule: {rules}": "القاعدة: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "الرسائل التي تم استبعادها هنا: {count}. الرسالة المحجوبة لا تعتبر حذفًا ولا تمثل فجوة في عملية التجميع.",
+"sender not selected": "لم يتم تحديد المرسل",
+"text filter not matched": "لم يتم العثور على تطابق لمرشح النص",
+"outside the selected period": "خارج الفترة المحددة",
+"This reply answers a message included in this copy.": "يستجيب هذا الرد لرسالة مضمنة في هذه النسخة.",
+"This reply answers a message withheld by the selection.": "هذا الرد يرد على رسالة تم حجبها من قبل فريق الاختيار.",
+"This reply answers a message that is not in the source export.": "يرد هذا الرد على رسالة غير موجودة في ملف التصدير الأصلي."
 }

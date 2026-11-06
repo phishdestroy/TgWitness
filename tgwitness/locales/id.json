@@ -6241,5 +6241,19 @@
 "The account-wide numbering is measured where it applies.": "Penomoran di seluruh akun diterapkan di mana hal tersebut berlaku.",
 "The account-wide numbering is not measured.": "Penomoran di seluruh akun tidak diukur.",
 "A service-message estimate is shown.": "Tampilan perkiraan pesan layanan ditampilkan.",
-"No service-message estimate is shown.": "Tidak ditampilkan perkiraan pesan layanan."
+"No service-message estimate is shown.": "Tidak ditampilkan perkiraan pesan layanan.",
+"Messages left out by the selection": "Pesan yang tidak termasuk dalam pemilihan",
+"One marker for each run": "Satu penanda untuk setiap eksekusi",
+"One marker for each message": "Satu penanda untuk setiap pesan",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Penanda menunjukkan di mana pemilihan mengabaikan pesan, tanpa menampilkan isinya. Pesan yang dijawab oleh balasan yang diungkapkan selalu mendapatkan penanda tersendiri.",
+"Withheld by selection, shown as markers": "Disisihkan berdasarkan seleksi, ditampilkan sebagai penanda",
+"Withheld by selection": "Dihapus berdasarkan seleksi",
+"Rule: {rules}": "Aturan: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Pesan yang tidak disertakan di sini: {count}. Pesan yang ditahan bukanlah penghapusan dan bukan celah dalam pengumpulan data.",
+"sender not selected": "pengirim belum dipilih",
+"text filter not matched": "filter teks tidak cocok",
+"outside the selected period": "di luar periode yang dipilih",
+"This reply answers a message included in this copy.": "Balasan ini menjawab pesan yang tercantum dalam salinan ini.",
+"This reply answers a message withheld by the selection.": "Balasan ini menjawab pesan yang disembunyikan oleh penyaring.",
+"This reply answers a message that is not in the source export.": "Balasan ini menjawab pesan yang tidak terdapat dalam ekspor sumber."
 }

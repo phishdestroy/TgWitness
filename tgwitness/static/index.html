@@ -36,7 +36,7 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=1"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.9.1-search1"></script>
+<script defer src="/app.js?v=0.9.1-withheld1"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/account-import.js?v=1"></script>
@@ -525,6 +525,7 @@
       </fieldset>
       <fieldset class="account-export-fieldset"><legend>Remove or hide personal information</legend>
         <div class="account-export-fields"><div><label for="account-disclosure-identities">Names and user IDs</label><select id="account-disclosure-identities"><option value="pseudonymize_all" selected>Pseudonymize everyone</option><option value="pseudonymize_third_parties">Pseudonymize third parties</option><option value="keep">Keep identities</option></select></div><div><label for="account-disclosure-text-mode">Message text</label><select id="account-disclosure-text-mode"><option value="keep" selected>Keep matching text</option><option value="omit">Omit message text</option></select></div></div>
+        <div class="account-export-fields"><div><label for="account-disclosure-withheld">Messages left out by the selection</label><select id="account-disclosure-withheld"><option value="collapsed" selected>One marker for each run</option><option value="each">One marker for each message</option></select><p class="hint">Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.</p></div></div>
         <label for="account-disclosure-disclose-ids">User IDs allowed to remain identifiable</label><textarea id="account-disclosure-disclose-ids" rows="2" placeholder="Leave blank to identify no one"></textarea><p class="hint">Only applies to the third-party mode. Names, quotes, and attachments can still identify people; review the preview.</p>
         <label for="account-disclosure-redact-terms">Additional terms to hide</label><textarea id="account-disclosure-redact-terms" rows="2" placeholder="One literal word or phrase per line"></textarea><p class="hint">Each listed term is replaced in disclosed message text. This is literal matching, not a regular expression. Review the preview for context that still identifies people.</p>
         <div class="account-export-choices account-disclosure-inclusions"><label><input id="account-disclosure-media" type="checkbox"> Include media files</label></div><p class="hint">Account profile, contacts, photos, stories, session metadata and other account data are excluded from this derivative.</p>

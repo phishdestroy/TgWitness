@@ -6241,5 +6241,19 @@
 "The account-wide numbering is measured where it applies.": "ระบบการจัดลำดับหมายเลขสำหรับบัญชีทั้งหมดจะถูกวัดในส่วนที่นำไปใช้ได้",
 "The account-wide numbering is not measured.": "ระบบการจัดลำดับหมายเลขสำหรับบัญชีทั้งหมดไม่ถูกวัด",
 "A service-message estimate is shown.": "แสดงการประมาณการจำนวนข้อความบริการ",
-"No service-message estimate is shown.": "ไม่มีการแสดงการประมาณการข้อความบริการ"
+"No service-message estimate is shown.": "ไม่มีการแสดงการประมาณการข้อความบริการ",
+"Messages left out by the selection": "ข้อความที่ถูกตัดออกจากการคัดเลือก",
+"One marker for each run": "เครื่องหมายหนึ่งสำหรับแต่ละรอบการทำงาน",
+"One marker for each message": "เครื่องหมายหนึ่งสำหรับข้อความแต่ละข้อความ",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "เครื่องหมายจะแสดงจุดที่การเลือกได้ละเว้นข้อความ โดยไม่รวมเนื้อหาของข้อความนั้น ข้อความที่ได้รับการตอบกลับที่เปิดเผยแล้ว จะได้รับเครื่องหมายของตัวเองเสมอ",
+"Withheld by selection, shown as markers": "ถูกคัดออกจากการเลือก และแสดงเป็นเครื่องหมาย",
+"Withheld by selection": "ถูกระงับตามการคัดเลือก",
+"Rule: {rules}": "กฎ: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "ข้อความที่ถูกเว้นไว้ที่นี่: {count} ข้อความที่ถูกเว้นไว้ไม่ใช่การลบ และไม่ใช่ช่องว่างในการเก็บรวบรวมข้อมูล",
+"sender not selected": "ผู้ส่งยังไม่ถูกเลือก",
+"text filter not matched": "ไม่พบการตรงกันของตัวกรองข้อความ",
+"outside the selected period": "นอกช่วงเวลาที่เลือก",
+"This reply answers a message included in this copy.": "ข้อความตอบกลับนี้ตอบต่อข้อความที่รวมอยู่ในสำเนานี้",
+"This reply answers a message withheld by the selection.": "ข้อความตอบนี้ตอบกลับข้อความที่ถูกระงับโดยระบบคัดกรอง",
+"This reply answers a message that is not in the source export.": "ข้อความตอบกลับนี้ตอบต่อข้อความที่ไม่ได้อยู่ในไฟล์ส่งออกต้นฉบับ"
 }

@@ -6303,5 +6303,19 @@
 "The account-wide numbering is measured where it applies.": "Die kontoweite Nummerierung wird dort berücksichtigt, wo sie zutrifft.",
 "The account-wide numbering is not measured.": "Die kontoweite Nummerierung wird nicht erfasst.",
 "A service-message estimate is shown.": "Es wird eine Schätzung der Service-Nachrichten angezeigt.",
-"No service-message estimate is shown.": "Es wird keine Schätzung für Service-Nachrichten angezeigt."
+"No service-message estimate is shown.": "Es wird keine Schätzung für Service-Nachrichten angezeigt.",
+"Messages left out by the selection": "Durch die Auswahl ausgelassene Nachrichten",
+"One marker for each run": "Ein Marker pro Durchlauf",
+"One marker for each message": "Ein Marker pro Nachricht",
+"Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.": "Markierungen zeigen an, an welchen Stellen die Auswahl Nachrichten ausgelassen hat, ohne deren Inhalt anzuzeigen. Eine Nachricht, auf die eine offengelegte Antwort Bezug nimmt, erhält immer eine eigene Markierung.",
+"Withheld by selection, shown as markers": "Durch Auswahl ausgeblendet, als Markierungen dargestellt",
+"Withheld by selection": "Durch Auswahl zurückgehalten",
+"Rule: {rules}": "Regel: {rules}",
+"Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.": "Hier ausgelassene Nachrichten: {count}. Eine zurückgehaltene Nachricht ist weder eine Löschung noch eine Lücke in der Erfassung.",
+"sender not selected": "Absender nicht ausgewählt",
+"text filter not matched": "Textfilter nicht getroffen",
+"outside the selected period": "außerhalb des ausgewählten Zeitraums",
+"This reply answers a message included in this copy.": "Diese Antwort bezieht sich auf eine Nachricht, die in dieser Kopie enthalten ist.",
+"This reply answers a message withheld by the selection.": "Diese Antwort bezieht sich auf eine Nachricht, die durch die Auswahl ausgeblendet wurde.",
+"This reply answers a message that is not in the source export.": "Diese Antwort bezieht sich auf eine Nachricht, die nicht im Quell-Export enthalten ist."
 }
