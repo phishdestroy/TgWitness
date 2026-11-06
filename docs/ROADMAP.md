@@ -35,6 +35,9 @@ Other work runs alongside, each item judged on its own test:
 | Accounts and access | Revoking access stops reading, nobody sees other people's chats | [Shipped](ACCESS.md) |
 | Offline handover | Recipient reads and verifies without our server | [Shipped](CASE_REPORTS.md) |
 | Operations and cost | Published CPU, memory, disk and recovery numbers | Open |
+| Export request diagnostics | Identify the method and retain the full FloodWait deadline with argument-free client-call counters | Implemented locally; offline regression checks; [source comparison and limits](EXPORT-LIMITS.md). Sustained large-list throughput remains unmeasured |
+| Distributed Takeout history | Public-chat export reuses validated private Takeout handles, keeps signed receipts and reduces empty requests | Implemented locally; protocol, recovery, archive and browser tests. Live speed not yet measured; [limits and scope](DISTRIBUTED-EXPORT.md#history-acquisition) |
+| Distributed page checkpoints | Resume within an interrupted chunk from verified pages without weakening observer binding | Implemented locally; 100-message checkpoints, standalone working-directory verification, crash/disk/cancellation/tamper tests and old-plan compatibility. Live recovery speed remains unmeasured; [details](DISTRIBUTED-EXPORT.md#chunking-and-continuation) |
 | Independent verification | Rewritten chain, cut tail, key change or missing witness gets caught | [Shipped](WITNESS.md) |
 
 Importing third-party Desktop archives, device-cache dumps and recovered offline

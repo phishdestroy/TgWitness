@@ -2528,12 +2528,17 @@ class Collector:
                 scratch.unlink(missing_ok=True)
             shutil.rmtree(media_dir, ignore_errors=True)
 
-    async def iterate_history(self, entity, on_message, min_id=0, offset_id=0, on_wait=None):
+    async def iterate_history(self, entity, on_message, min_id=0, offset_id=0, on_wait=None,
+                              history_client=None):
         failures = 0
         while True:
             writing = False
             try:
-                async for message in self.client.iter_messages(entity, offset_id=offset_id, min_id=min_id):
+                client = history_client or self.client
+                if history_client is not None and hasattr(history_client, "_export_client"):
+                    history_client._export_client = self.client
+                options = {"wait_time": 0} if history_client is not None else {}
+                async for message in client.iter_messages(entity, offset_id=offset_id, min_id=min_id, **options):
                     writing = True
                     await on_message(message)
                     writing = False
@@ -2656,7 +2661,7 @@ class Collector:
                 raise ValueError("The public username now points to a different chat.")
             return entity
 
-    async def fetch_range(self, entity, low, high, path, progress=None, on_wait=None):
+    async def fetch_range(self, entity, low, high, path, progress=None, on_wait=None, history_client=None):
         digest, count = hashlib.sha256(), 0
         with path.open("w", encoding="utf-8") as handle:
             async def write(message):
@@ -2672,7 +2677,8 @@ class Collector:
                     progress()
                 if count % 200 == 0:
                     await asyncio.sleep(0)
-            await self.iterate_history(entity, write, min_id=low - 1, offset_id=high + 1, on_wait=on_wait)
+            await self.iterate_history(entity, write, min_id=low - 1, offset_id=high + 1, on_wait=on_wait,
+                                       history_client=history_client)
         return count, digest.hexdigest()
 
     def poll_export(self, export_id):

@@ -90,6 +90,11 @@ message history before attachments, file downloads or server hashes, and compati
 Telegram Desktop JSON/HTML views. GitHub capture supports an account or a selected
 chat, records partial results at its deadline, and splits large encrypted deliveries.
 
+[Distributed chat export](docs/DISTRIBUTED-EXPORT.md#history-acquisition) offers an
+opt-in Takeout path for public history, signed checkpoints every 100 messages,
+and recovery within a range using the same account. Its [performance design and remaining work](docs/FAST-ACQUISITION.md)
+separate tested acquisition behavior from unmeasured live throughput.
+
 ## Built for the rest of the investigation
 
 <picture>

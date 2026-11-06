@@ -264,6 +264,7 @@ class MultiExportStart(BaseModel):
     lead: str = Field(default="default", max_length=64)
     profiles: list[str] = Field(default_factory=list, max_length=256)
     selection: Selection = Field(default_factory=Selection)
+    transport: Literal["regular", "takeout"] = "regular"
 
 
 class ProfileCreate(BaseModel):
@@ -1026,7 +1027,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             if not opens_chat_everywhere(request.state.principal, body.chat_id, [body.lead, *body.profiles]):
                 raise HTTPException(403, "This access does not open this chat in every chosen account.")
             return await operation(app.state.multi_export.start, body.chat_id, body.profiles, body.lead,
-                                   panel_language(request), body.selection.model_dump())
+                                   panel_language(request), body.selection.model_dump(), body.transport)
 
         @app.get("/api/multi-export/current", dependencies=[Depends(authenticate)])
         async def multi_export_current(request: Request):

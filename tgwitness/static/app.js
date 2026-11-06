@@ -5079,6 +5079,9 @@ async function openExportDialog(){
   if(revision!==state.workspaceRevision||generation!==chatGeneration)return;
   show("toast",false);
   const info=state.chatInfo,basic=info?.kind==="group",facts=$("export-dialog-facts"),list=$("export-dialog-accounts");
+  const takeoutOption=$("export-transport").querySelector('[value="takeout"]');
+  takeoutOption.disabled=!["channel","supergroup"].includes(info?.kind);
+  if(takeoutOption.disabled)$("export-transport").value="regular";
   facts.replaceChildren();list.replaceChildren();
   facts.append(node("p","export-fact",info?.title||tr("This chat")));
   if(basic)facts.append(node("p","export-fact warn",tr("This is an ordinary group: message numbers differ between accounts, so only this account can download it.")));
@@ -5090,10 +5093,12 @@ async function openExportDialog(){
   for(const p of state.profiles){
     const c=p.collector,lead=p.id===state.profile,connected=!!c?.has_session&&!p.error_type,account=c?.account;
     const row=node("label","export-account"),box=node("input"),who=node("span","export-account-who"),text=node("span");
-    const occupied=c?.running||c?.account_task||c?.available_for_export===false;
+    const limited=c?.rpc_backoff_until>Date.now()/1000;
+    const occupied=limited||c?.running||c?.account_task||c?.available_for_export===false;
     box.type="checkbox";box.value=p.id;box.disabled=!connected||!!occupied||basic&&!lead;box.addEventListener("change",estimate);
     box.checked=!box.disabled&&(lead||!!exportPreselect?.has(p.id));
-    text.append(node("b","",p.label),node("small","",occupied?tr("Busy: pause the current task explicitly"):!connected?tr("no Telegram account connected"):
+    text.append(node("b","",p.label),node("small","",limited?tr("Telegram rate limit: wait until {time}.",{
+      time:formatTime(new Date(c.rpc_backoff_until*1000).toISOString())}):occupied?tr("Busy: pause the current task explicitly"):!connected?tr("no Telegram account connected"):
       basic?tr("not possible for ordinary groups"):account?(account.username?"@"+account.username+" · ":"")+"ID "+account.id:""));
     who.append(avatarNode(account?account.id:null,account&&account.username?account.username:p.label,"",p.id),text);
     row.append(box,who);list.append(row);
@@ -5129,7 +5134,8 @@ async function openExportDialog(){
     reply_scope:$("export-reply-scope").value,context_depth:Number($("export-context").value),
     max_context_messages:Number($("export-context-limit").value),text_contains:$("export-text").value.trim()?[$("export-text").value.trim()]:[],
     download_media:$("export-media").checked};
-  const x=await json("multi-export/start",{chat_id:chat,lead:profiles.includes(profile)?profile:profiles[0],profiles,selection},{root:true});
+  const x=await json("multi-export/start",{chat_id:chat,lead:profiles.includes(profile)?profile:profiles[0],profiles,selection,
+    transport:$("export-transport").value},{root:true});
   state.multi=x;state.multiHidden=null;renderMulti();pollMulti(x.id);
   toast(tr("Export started with {n} accounts reserved exclusively for this task.",{n:profiles.length}));
 }
@@ -5170,6 +5176,10 @@ function renderMulti(){
   if(x.phase==="done"&&x.ready)action("primary",tr("Save signed export"),b=>saveMulti(b));
   if(!running)action("quiet",tr("Hide"),()=>{state.multiHidden=x.id;renderMulti();});
   box.append(head);
+  box.append(node("p","hint",tr(x.transport==="takeout"?"Telegram Takeout session":"Regular session")));
+  if(x.phase==="paused"&&x.error)box.append(node("p","hint",tr(x.error)));
+  if(x.wait_until&&x.phase==="paused")box.append(node("p","hint",tr("Requests paused until")+": "+formatTime(new Date(x.wait_until*1000).toISOString())));
+  if(Object.keys(x.transport_close_errors||{}).length)box.append(node("p","hint",tr("Takeout finalization is pending. The saved archive remains verifiable.")));
   box.append(node("p","hint",tr("Read {done} of {total} planned ranges.",{done:x.ranges_done||0,total:x.ranges_total||0})+" "+tr(x.phase)));
   if(x.performance){
     const p=x.performance,s=p.phase_seconds,seconds=value=>tr("{n} s",{

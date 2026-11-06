@@ -1540,6 +1540,8 @@
     <h2 id="export-dialog-title">Export chat messages</h2>
     <div id="export-dialog-facts"></div>
     <div id="export-saved-jobs"></div>
+    <label>History acquisition <select id="export-transport"><option value="regular">Regular session</option><option value="takeout">Telegram Takeout session</option></select></label>
+    <p class="hint">Takeout can accelerate public channel and supergroup history. Telegram may require export approval. Server-requested waits still apply.</p>
     <fieldset class="export-accounts"><legend>Period and message selection</legend>
       <label>Period <select id="export-period"><option value="all">All available history</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="month">Previous calendar month</option><option value="custom">Custom dates</option></select></label>
       <div class="field-row"><label>From date <input id="export-from" type="datetime-local"></label><label>Until (excluded) <input id="export-to" type="datetime-local"></label></div>
