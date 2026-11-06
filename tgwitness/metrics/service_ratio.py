@@ -19,6 +19,9 @@ class ServiceRatio(Processor):
             return
         if kind in FIRST_KINDS:
             self.numbers.setdefault(chat, set()).add(number)
+            payload = event.get("payload")
+            if isinstance(payload, dict) and payload.get("service_action"):
+                self.service.setdefault(chat, set()).add(number)
         elif kind in SERVICE_KINDS:
             self.service.setdefault(chat, set()).add(number)
 

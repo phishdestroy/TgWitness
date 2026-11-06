@@ -157,8 +157,10 @@ account asks for the usual confirmation.
     who is not an administrator) is named in `errors`; its earlier value is kept and listed
     in `carried_forward`, never reported as removed.
   - A record whose only changes are counts, and a check that found no change, refer to the
-    last full state with `state_seq` instead of repeating it. A full state is written at
+    last full state with `state_seq` and cumulative `state_overrides`. A full state is written at
     least every seven days and whenever anything other than a count changes.
+  - `parts_complete` marks capped lists．Additions require a complete earlier list，
+    removals require a complete current list，and explicit empty values record clearing．
   - **Parameters → Chat state** sets the interval (12 hours by default, 0 turns snapshots
     off), the pause between sources, which parts are read, and whether checks that found no
     change are recorded. A FloodWait pauses snapshots and they resume afterwards.
@@ -322,7 +324,6 @@ the export; collection may continue beyond its boundary while it is being prepar
 boundary. Its result is cleared when the workspace changes, and the panel identifies
 new records added after the check. ZIP export also verifies collected media.
 
-A valid signature establishes integrity relative to the trusted key, not Telegram
-origin or truthful content. Retain fingerprints and checkpoints independently. See
-the [evidence model](EVIDENCE.md), [daily operations](OPERATIONS.md), and
-[live acceptance procedure](internal/LIVE_ACCEPTANCE.md) for trust and delivery requirements.
+Retain fingerprints and checkpoints independently．See the
+[verification scope](EVIDENCE.md#verification-scope) for acquisition checks in each mode，
+and [daily operations](OPERATIONS.md) for routine collection．

@@ -65,6 +65,22 @@ def test_service_share_counts_distinct_numbers():
     assert result["rows"][0][1:] == ["per chat", 8, 2, 0.2] and result["summary"]["service_share"] == 0.2
 
 
+def test_history_service_messages_are_classified_without_duplicate_service_record():
+    events = [message("2026-09-01", 1, 1),
+              {**message("2026-09-01", 2, 2, service_action="MessageActionPinMessage"), "kind": "message.snapshot"}]
+    ratio = metrics.load()["service_vs_message_ratio"].run(events)
+    assert ratio["summary"] == {"ordinary": 1, "service": 1, "service_share": 0.5}
+    posters = metrics.load()["first_time_posters_over_time"].run(events)
+    assert posters["summary"]["senders"] == 1
+
+
+def test_posters_warmup_uses_calendar_days():
+    events = [message("2026-09-01", 1, number) for number in range(10)]
+    events += [message("2026-10-01", 100 + number, 100 + number) for number in range(8)]
+    result = metrics.load()["first_time_posters_over_time"].run(events)
+    assert result["flags_total"] == 0, "A month without baseline observations cannot supply a 14-day baseline"
+
+
 def membership(day, action, actor, users=None, user=None):
     body = {"_": action, **({"users": users} if users else {}), **({"user_id": user} if user else {})}
     return {"kind": "membership.service", "chat_id": CHAT, "message_id": 1, "actor_id": actor,
@@ -106,6 +122,13 @@ def test_reports_list_processors_and_follow_parameters(tmp_path):
         store.set_setting("parameters", {"metric_first_time_posters": False, "metric_service_ratio": False,
                                          "metric_join_leave": False, "metric_pinned": False})
         archive = export_file(store, vault, "zip")
+        with zipfile.ZipFile(archive) as bundle:
+            assert "Anomaly indicators" not in bundle.read("report.html").decode("utf-8")
+        archive.unlink(missing_ok=True)
+        from tgwitness import report
+        options = report.resolved()
+        options["selection"] = {"enabled": True, "chats": [CHAT]}
+        archive = export_file(store, vault, "zip", options)
         with zipfile.ZipFile(archive) as bundle:
             assert "Anomaly indicators" not in bundle.read("report.html").decode("utf-8")
         archive.unlink(missing_ok=True)

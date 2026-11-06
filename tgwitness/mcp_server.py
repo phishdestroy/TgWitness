@@ -271,9 +271,12 @@ def build_server(api, local_token=None):
                                                    gaps=gap_summary))
 
     @server.tool(annotations=annotations)
-    async def get_topics(ctx: Context, chat_id: int, workspace: str = "default") -> Topics:
-        """Forum topics found in saved topic service messages, with title history and saved message counts."""
-        return Topics.model_validate(await read(ctx, "get_topics", chat_id=chat_id, workspace=workspace))
+    async def get_topics(ctx: Context, chat_id: int, workspace: str = "default", offset: int = 0,
+                         limit: int = 20) -> Topics:
+        """Forum topics from saved messages, with saved counts and the latest 20 title changes per topic.
+        Follow next_offset for more topics; scan_complete says whether the full journal was scanned."""
+        return Topics.model_validate(await read(ctx, "get_topics", chat_id=chat_id, workspace=workspace,
+                                               offset=offset, limit=limit))
 
     @server.tool(annotations=annotations)
     async def get_media(ctx: Context, media_sha256: str, workspace: str = "default") -> Media:

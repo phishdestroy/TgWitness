@@ -75,12 +75,25 @@ async def read_state(client, entity, options, timeout=TIMEOUT):
         except Exception as exc:
             errors[part] = type(exc).__name__
             return None
-    state["title"] = utils.get_display_name(entity) or None
-    names = [getattr(entity, "username", None)] + [getattr(u, "username", None) for u in getattr(entity, "usernames", None) or []]
-    state["usernames"] = sorted({name for name in names if name}) or None
-    state["photo_id"] = getattr(getattr(entity, "photo", None), "photo_id", None)
+    def identity(answer):
+        if answer is None:
+            return
+        candidates = list(getattr(answer, "chats", []) or []) + list(getattr(answer, "users", []) or [])
+        current = next((item for item in candidates if peer_id(item) == peer_id(entity)), None)
+        if current is None:
+            errors["identity"] = "Unavailable"
+            return
+        state["title"] = utils.get_display_name(current) or None
+        names = [getattr(current, "username", None)] + [getattr(u, "username", None)
+                 for u in getattr(current, "usernames", None) or [] if getattr(u, "active", False)]
+        state["usernames"] = sorted({name for name in names if name})
+        state["photo_id"] = getattr(getattr(current, "photo", None), "photo_id", None)
+
+    def completeness(part, complete):
+        state.setdefault("parts_complete", {})[part] = bool(complete)
     if isinstance(entity, types.Channel):
         answer = await ask("full", lambda: client(functions.channels.GetFullChannelRequest(entity)))
+        identity(answer)
         full = getattr(answer, "full_chat", None)
         if full is not None:
             state.update(about=full.about or None, participants_count=full.participants_count,
@@ -91,8 +104,11 @@ async def read_state(client, entity, options, timeout=TIMEOUT):
                 entity, types.ChannelParticipantsAdmins(), 0, ADMIN_LIMIT, 0)))
             if answer is not None:
                 state["admins"] = sorted((admin_entry(p) for p in answer.participants), key=lambda a: a["user_id"] or 0)
+                count = getattr(answer, "count", None)
+                completeness("admins", type(count) is int and count == len(state["admins"]))
     elif isinstance(entity, types.Chat):
         answer = await ask("full", lambda: client(functions.messages.GetFullChatRequest(entity.id)))
+        identity(answer)
         full = getattr(answer, "full_chat", None)
         if full is not None:
             parts = getattr(getattr(full, "participants", None), "participants", None)
@@ -102,8 +118,10 @@ async def read_state(client, entity, options, timeout=TIMEOUT):
                 state["admins"] = sorted(({"user_id": p.user_id, "role": "creator" if type(p).__name__.endswith("Creator")
                                            else "admin", "rights": [], "rank": None} for p in parts
                                           if type(p).__name__.endswith(("Admin", "Creator"))), key=lambda a: a["user_id"])
+                completeness("admins", True)
     elif isinstance(entity, types.User):
         answer = await ask("full", lambda: client(functions.users.GetFullUserRequest(entity)))
+        identity(answer)
         full = getattr(answer, "full_user", None)
         if full is not None:
             state["about"] = full.about or None
@@ -112,7 +130,8 @@ async def read_state(client, entity, options, timeout=TIMEOUT):
                                                                  filter=types.InputMessagesFilterPinned()))
         if found is not None:
             state["pinned"] = sorted(m.id for m in found if type(getattr(m, "id", None)) is int)
-            state["pinned_total"] = getattr(found, "total", None) or len(state["pinned"])
+            state["pinned_total"] = getattr(found, "total", None)
+            completeness("pinned", type(state["pinned_total"]) is int and state["pinned_total"] == len(state["pinned"]))
     gifted = isinstance(entity, types.User) or isinstance(entity, types.Channel) and not getattr(entity, "megagroup", False)
     if options["chat_state_gifts"] and gifted:
         answer = await ask("gifts", lambda: client(functions.payments.GetSavedStarGiftsRequest(
@@ -120,7 +139,10 @@ async def read_state(client, entity, options, timeout=TIMEOUT):
         if answer is not None:
             state["gifts"] = sorted((gift_entry(g) for g in answer.gifts), key=lambda g: g["key"] or "")
             state["gifts_total"] = getattr(answer, "count", None)
-    return {k: v for k, v in state.items() if v is not None}, errors
+            completeness("gifts", type(state["gifts_total"]) is int and state["gifts_total"] == len(state["gifts"])
+                         and not getattr(answer, "next_offset", None))
+    # Null descriptions/photos/linked chats are observed clearing; absent counts are unknown.
+    return {k: v for k, v in state.items() if v is not None or k not in VOLATILE}, errors
 
 
 def keyed(entries, key):
@@ -131,10 +153,14 @@ def differences(before, after):
     """Changes between two states. Parts missing from either state were not read and are not compared."""
     changes = {}
     for key in SCALARS:
-        if before.get(key) != after.get(key) and not (key in VOLATILE and (key not in before or key not in after)):
+        if key in before and key in after and before[key] != after[key]:
             changes[key] = {"before": before.get(key), "after": after.get(key)}
     if "pinned" in before and "pinned" in after:
         added, removed = sorted(set(after["pinned"]) - set(before["pinned"])), sorted(set(before["pinned"]) - set(after["pinned"]))
+        if not before.get("parts_complete", {}).get("pinned", True):
+            added = []
+        if not after.get("parts_complete", {}).get("pinned", True):
+            removed = []
         if added or removed:
             changes["pinned"] = {"added": added, "removed": removed}
     for part, key in (("admins", "user_id"), ("gifts", "key")):
@@ -145,6 +171,10 @@ def differences(before, after):
                  "no_longer_listed": [old[k] for k in sorted(set(old) - set(new), key=str)],
                  "changed": [{"before": old[k], "after": new[k]} for k in sorted(set(old) & set(new), key=str)
                              if old[k] != new[k]]}
+        if not before.get("parts_complete", {}).get(part, True):
+            found["added"] = []
+        if not after.get("parts_complete", {}).get(part, True):
+            found["no_longer_listed"] = []
         if any(found.values()):
             changes[part] = found
     return changes
@@ -164,9 +194,12 @@ def latest(store, chat_id):
     if not found or found[0]["seq"] != base or "state" not in found[0]["payload"]:
         return record, None, None
     state = json.loads(json.dumps(found[0]["payload"]["state"]))
-    for key, change in (payload.get("changes") or {}).items():
-        if key in SCALARS:
-            state[key] = change["after"]
+    if "state_overrides" in payload:
+        state.update(payload["state_overrides"])
+    else:
+        for key, change in (payload.get("changes") or {}).items():
+            if key in SCALARS:
+                state[key] = change["after"]
     return record, state, base
 
 
@@ -178,7 +211,9 @@ def record(store, chat_id, state, errors, *, unchanged=True, now=None):
     if before is not None:
         # A part that could not be read keeps its earlier value, named in carried_forward, so it is not
         # reported as removed and later snapshots compare with the last value actually read.
-        carried = sorted(k for k in errors_parts(errors) if k in before and k not in state)
+        carried = sorted(k for k in before if k not in state)
+        if "parts_complete" in state:
+            state = {**state, "parts_complete": {**before.get("parts_complete", {}), **state["parts_complete"]}}
         state = {**{k: before[k] for k in carried}, **state}
     changes = differences(before, state) if before is not None else {}
     digest = hashlib.sha256(canonical(state)).hexdigest()
@@ -186,18 +221,18 @@ def record(store, chat_id, state, errors, *, unchanged=True, now=None):
                "previous_seq": previous["seq"] if previous else None, "meaning": MEANING}
     base_record = store.events(chat_id=chat_id, kind=KIND, before=base + 1, limit=1) if base else []
     stale = not base_record or now - datetime.fromisoformat(base_record[0]["observed_at"]) >= FULL_EVERY
-    if before is None or stale or set(changes) - VOLATILE:
+    base_state = base_record[0]["payload"]["state"] if base_record else {}
+    structural = {k: v for k, v in state.items() if k not in VOLATILE}
+    base_structural = {k: v for k, v in base_state.items() if k not in VOLATILE}
+    if before is None or stale or structural != base_structural:
         payload["state"] = state
     else:
-        if not changes and not unchanged:
+        if state == before and not unchanged and not errors:
             return None
         payload["state_seq"] = base
+        payload["state_overrides"] = {k: state[k] for k in VOLATILE if k in state
+                                      and (k not in base_state or state[k] != base_state[k])}
     return store.append(KIND, payload, chat_id)
-
-
-def errors_parts(errors):
-    return {{"admins": "admins", "pinned": "pinned", "gifts": "gifts"}.get(part) for part in errors} | (
-        {"about", "participants_count", "admins_count", "slowmode_seconds", "linked_chat_id"} if "full" in errors else set())
 
 
 def options(collector):
@@ -211,7 +246,7 @@ def due(store, minutes, limit=100):
         rows = store.db.execute(
             "SELECT t.chat_id FROM targets t LEFT JOIN (SELECT chat_id, max(observed_at) AS last FROM events "
             "WHERE kind=? GROUP BY chat_id) s ON s.chat_id=t.chat_id WHERE t.enabled=1 AND (s.last IS NULL OR s.last<?) "
-            "ORDER BY s.last IS NOT NULL, s.last LIMIT ?", (KIND, cutoff, limit)).fetchall()
+            "ORDER BY s.last IS NOT NULL, s.last LIMIT ?", (KIND, cutoff, limit if limit is not None else -1)).fetchall()
     return [row[0] for row in rows]
 
 
@@ -220,15 +255,18 @@ async def run_due(collector, attempted):
     minutes = collector.param("chat_state_minutes")
     if minutes <= 0:
         return 0
-    done, now = 0, time.monotonic()
-    for chat_id in due(collector.store, minutes):
-        if not collector.running:
+    done = 0
+    for chat_id in due(collector.store, minutes, limit=None):
+        if not collector.running or done >= 100:
             break
+        now = time.monotonic()
         if now - attempted.get(chat_id, -1e12) < minutes * 60:
             continue
         attempted[chat_id] = now
         while collector.running and time.time() < collector.store.get_setting("rpc_backoff_until", 0):
             await asyncio.sleep(1)
+        if not collector.running:
+            break
         entity = collector.dialog_cache.get(chat_id, {}).get("entity") or await collector.lookup_entity(chat_id)
         if entity is None:
             continue

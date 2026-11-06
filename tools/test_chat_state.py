@@ -65,6 +65,35 @@ def test_records_keep_full_states_and_compact_count_changes(store):
     assert "state" in weekly["payload"], "A full state is kept at least weekly"
 
 
+def test_compact_snapshots_reconstruct_all_counts_and_digest(store):
+    import hashlib
+    first = {**BASE, "admins_count": 2}
+    chat_state.record(store, CHANNEL, first, {})
+    chat_state.record(store, CHANNEL, {**first, "participants_count": 11}, {})
+    expected = {**first, "participants_count": 11, "admins_count": 3}
+    chat_state.record(store, CHANNEL, expected, {})
+    last = chat_state.record(store, CHANNEL, expected, {})
+    assert chat_state.latest(store, CHANNEL)[1] == expected
+    assert last["payload"]["state_sha256"] == hashlib.sha256(chat_state.canonical(expected)).hexdigest()
+
+
+def test_unknown_scalars_are_not_cleared_but_explicit_null_is(store):
+    assert chat_state.differences(BASE, {"title": BASE["title"]}) == {}
+    chat_state.record(store, CHANNEL, BASE, {})
+    failed = chat_state.record(store, CHANNEL, {"title": BASE["title"]}, {"full": "TimeoutError"})
+    assert failed["payload"]["changes"] == {}
+    assert chat_state.latest(store, CHANNEL)[1] == BASE
+    cleared = chat_state.record(store, CHANNEL, {**BASE, "about": None}, {})
+    assert cleared["payload"]["changes"]["about"] == {"before": "First", "after": None}
+
+
+def test_partial_lists_do_not_claim_additions_or_removals():
+    partial = {**BASE, "pinned": [9], "admins": [], "gifts": [],
+               "parts_complete": {"pinned": False, "admins": False, "gifts": False}}
+    assert chat_state.differences(BASE, partial) == {}
+    assert chat_state.differences(partial, BASE) == {}
+
+
 class Unique(types.StarGiftUnique):
     def __init__(self, ident, slug):
         self.id, self.slug = ident, slug
@@ -79,11 +108,11 @@ class Client:
         if self.flood:
             raise FloodWaitError(request=None, capture=30)
         if isinstance(request, functions.channels.GetFullChannelRequest):
-            return SimpleNamespace(full_chat=SimpleNamespace(about="About", participants_count=42, admins_count=2,
+            return SimpleNamespace(chats=[channel()], full_chat=SimpleNamespace(about="About", participants_count=42, admins_count=2,
                                                              slowmode_seconds=0, linked_chat_id=None))
         if isinstance(request, functions.channels.GetParticipantsRequest):
             rights = types.ChatAdminRights(delete_messages=True, pin_messages=True)
-            return SimpleNamespace(participants=[
+            return SimpleNamespace(count=2, participants=[
                 types.ChannelParticipantAdmin(user_id=7, promoted_by=1, date=datetime(2026, 1, 1, tzinfo=timezone.utc),
                                               admin_rights=rights, rank="Mod"),
                 types.ChannelParticipantCreator(user_id=1, admin_rights=types.ChatAdminRights(), rank=None)])
@@ -114,6 +143,40 @@ def test_read_state_collects_parts_and_names_failures():
                                "refunded": False, "date": None, "from_id": None}]
     quiet, _ = asyncio.run(chat_state.read_state(Client(), channel(), {key: False for key in options}))
     assert not {"pinned", "admins", "gifts"} & set(quiet)
+
+
+def test_fresh_identity_cleared_fields_and_list_limits():
+    class Changed(Client):
+        async def __call__(self, request):
+            answer = await super().__call__(request)
+            if isinstance(request, functions.channels.GetFullChannelRequest):
+                answer.chats[0].title = "Renamed"
+                answer.chats[0].username = None
+                answer.full_chat.about = ""
+            if isinstance(request, functions.channels.GetParticipantsRequest):
+                answer.count = 300
+            if isinstance(request, functions.payments.GetSavedStarGiftsRequest):
+                answer.count = 200
+            return answer
+
+        async def get_messages(self, *args, **kwargs):
+            answer = await super().get_messages(*args, **kwargs)
+            answer.total = 150
+            return answer
+    options = {"chat_state_pinned": True, "chat_state_admins": True, "chat_state_gifts": True}
+    state, errors = asyncio.run(chat_state.read_state(Changed(), channel(), options))
+    assert not errors
+    assert state["title"] == "Renamed" and state["usernames"] == []
+    assert state["about"] is None and state["photo_id"] is None
+    assert state["parts_complete"] == {"pinned": False, "admins": False, "gifts": False}
+
+
+def test_resume_after_disabled_parts_and_newly_available_counts(store):
+    chat_state.record(store, CHANNEL, {"title": "Chat"}, {})
+    chat_state.record(store, CHANNEL, {"title": "Chat", "participants_count": 42}, {})
+    assert chat_state.latest(store, CHANNEL)[1]["participants_count"] == 42
+    chat_state.record(store, CHANNEL, {"title": "Chat", "about": "Description"}, {})
+    assert chat_state.latest(store, CHANNEL)[1] == {"title": "Chat", "participants_count": 42, "about": "Description"}
 
 
 def test_due_sources_are_snapshotted_and_floods_back_off(store):

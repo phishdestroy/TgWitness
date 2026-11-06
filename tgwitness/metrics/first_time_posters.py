@@ -1,4 +1,5 @@
 from collections import Counter
+from datetime import date, timedelta
 from statistics import median
 
 from . import FIRST_KINDS, Processor, moment, register
@@ -23,7 +24,7 @@ class FirstTimePosters(Processor):
         payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
         sender, chat, number = payload.get("sender_id"), event.get("chat_id"), event.get("message_id")
         when = moment(event)
-        if type(sender) is not int or chat is None or when is None:
+        if type(sender) is not int or type(number) is not int or chat is None or when is None or payload.get("service_action"):
             return
         day = when.date().isoformat()
         key = (chat, sender)
@@ -45,10 +46,15 @@ class FirstTimePosters(Processor):
         flags = []
         for chat in sorted({chat for chat, _ in self.messages}, key=str):
             active = sorted(day for c, day in self.messages if c == chat)
+            start = date.fromisoformat(active[0])
             for index, day in enumerate(active):
-                if index < WARM_UP_DAYS:
+                current = date.fromisoformat(day)
+                if (current - start).days < WARM_UP_DAYS:
                     continue
-                window = active[max(0, index - BASELINE_DAYS):index]
+                cutoff = (current - timedelta(days=BASELINE_DAYS)).isoformat()
+                window = [value for value in active[max(0, index - BASELINE_DAYS):index] if value >= cutoff]
+                if len(window) < WARM_UP_DAYS:
+                    continue
                 base_new = median(newcomers[(chat, d)] for d in window)
                 base_messages = median(self.messages[(chat, d)] for d in window)
                 found, volume = newcomers[(chat, day)], self.messages[(chat, day)]

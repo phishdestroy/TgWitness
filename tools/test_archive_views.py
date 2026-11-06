@@ -113,6 +113,41 @@ def test_topics_come_from_saved_service_messages(store):
     assert not reader(store).read(ArchiveQuery(tool="get_topics", chat_id=CHAT))["forum"]
 
 
+def test_chat_counts_reconstruct_compact_snapshots(store):
+    from tgwitness import chat_state
+    chat_state.record(store, CHAT, {"participants_count": 10, "admins_count": 1}, {})
+    chat_state.record(store, CHAT, {"participants_count": 12, "admins_count": 1}, {})
+    chat_state.record(store, CHAT, {"participants_count": 12, "admins_count": 2}, {})
+    result = reader(store).read(ArchiveQuery(tool="get_chat_stats", chat_id=CHAT))
+    assert result["chat_state"]["participants_count"] == 12
+    assert result["chat_state"]["admins_count"] == 2
+
+
+def test_topics_include_references_without_creation_and_ignore_replayed_history(store):
+    store.append("message.snapshot", {"service_action": "MessageActionTopicCreate",
+                                      "raw": {"action": {"title": "Payments"}}}, FORUM, 10)
+    store.append("message.new", {"raw": {"reply_to": {"forum_topic": True, "reply_to_msg_id": 80}}}, FORUM, 81)
+    result = reader(store).read(ArchiveQuery(tool="get_topics", chat_id=FORUM))
+    topics = {t["topic_id"]: t for t in result["topics"]}
+    assert topics[10]["title"] == "Payouts"
+    assert len(topics[10]["titles"]) == 2
+    assert topics[80]["messages_saved"] == 1
+
+
+def test_date_scan_can_resume_after_a_page_with_no_matching_messages(store, monkeypatch):
+    from tgwitness import archive_views
+    for number in range(100, 1200):
+        store.append("message.new", {"sent_at": "2026-11-01T00:00:00Z"}, CHAT, number)
+    ticks = iter((0, 0, 2))
+    monkeypatch.setattr(archive_views.time, "monotonic", lambda: next(ticks))
+    query = ArchiveQuery(tool="get_messages_by_date", chat_id=CHAT, date="2026-10-25")
+    result = archive_views.by_date(store, query, lambda workspace, event: {}, budget=1)
+    assert not result["complete"] and not result["items"] and result["next_before"]
+    monkeypatch.undo()
+    continued = reader(store).read(query.model_copy(update={"before": result["next_before"]}))
+    assert continued["items"] and continued["complete"]
+
+
 def save_media(store, chat, data):
     digest = hashlib.sha256(data).hexdigest()
     (store.root / "media").mkdir(exist_ok=True)
@@ -135,6 +170,29 @@ def test_media_preview_is_bounded_verified_and_scoped(store):
     assert tampered["verified"] is False and "preview" not in tampered
     other = save_media(store, CHAT, b"%PDF-1.4 synthetic")
     assert "preview" not in reader(store).read(ArchiveQuery(tool="get_media", media_sha256=other))
+
+
+def test_unreadable_or_large_images_return_metadata(store, monkeypatch):
+    from tgwitness import archive_views
+    broken = save_media(store, CHAT, b"\x89PNG\r\n\x1a\n" + b"broken" * 10)
+    result = reader(store).read(ArchiveQuery(tool="get_media", media_sha256=broken))
+    assert result["verified"] and "preview" not in result
+    valid = save_media(store, CHAT, image("blue"))
+    monkeypatch.setattr(archive_views, "IMAGE_BYTES", 8)
+    result = reader(store).read(ArchiveQuery(tool="get_media", media_sha256=valid))
+    assert not result["verified"] and "preview" not in result
+
+
+def test_topic_listing_marks_truncation(store):
+    for number in range(1000, 1210):
+        store.append("message.new", {"raw": {"reply_to": {"forum_topic": True, "reply_to_msg_id": number}}}, FORUM, number + 5000)
+    result = reader(store).read(ArchiveQuery(tool="get_topics", chat_id=FORUM))
+    assert len(result["topics"]) == 20 and result["topics_total"] == 212 and not result["complete"]
+    found = {t["topic_id"] for t in result["topics"]}
+    while result["next_offset"] is not None:
+        result = reader(store).read(ArchiveQuery(tool="get_topics", chat_id=FORUM, offset=result["next_offset"]))
+        found.update(t["topic_id"] for t in result["topics"])
+    assert result["complete"] and len(found) == 212
 
 
 def test_every_mcp_tool_declares_output_and_media_returns_an_image(store):

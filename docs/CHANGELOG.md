@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Reconstruct compact chat snapshots consistently in MCP，retain unknown fields，and distinguish capped lists from removals．Resume date scans，preserve topic names across history reads，and bound image previews．Apply metric choices to filtered reports and count historical service messages separately．
+
 - Plan sealed exports against the remaining session time，offer smaller selections，update progress estimates and reserve time for packaging．
 - Compare every message field，validate record counts and structure，enforce CLI verification options，and display OpenTimestamps states separately．
 - Close coverage on worker failure，bind heartbeats to the capture run，and verify TDX signing-key binding and supported component statuses．

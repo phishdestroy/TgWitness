@@ -5,13 +5,16 @@ import hashlib
 import io
 import json
 import time
+import warnings
 from datetime import date, datetime, timedelta, timezone
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 
 FIRST_KINDS = ("message.new", "message.snapshot", "message.recovered")
 PREVIEW_BYTES = 36000
-PREVIEW_SIDES = (1024, 768, 512, 384)
+PREVIEW_SIDES = (1024, 768, 512, 384, 256, 128, 64)
+IMAGE_BYTES = 32 * 1024 * 1024
+IMAGE_PIXELS = 40_000_000
 IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp", "image/gif"}
 BUDGET = 5
 
@@ -35,7 +38,10 @@ def day_bounds(day, zone):
     except ValueError:
         raise ValueError("Use a date such as 2026-10-01.") from None
     start = datetime(first.year, first.month, first.day, tzinfo=place)
-    following = first + timedelta(days=1)
+    try:
+        following = first + timedelta(days=1)
+    except OverflowError:
+        raise ValueError("Choose a date before 9999-12-31.") from None
     end = datetime(following.year, following.month, following.day, tzinfo=place)
     return start.astimezone(timezone.utc), end.astimezone(timezone.utc)
 
@@ -50,6 +56,7 @@ def message_time(event):
 def by_date(store, query, view, budget=BUDGET):
     start, end = day_bounds(query.date, query.timezone)
     deadline, items, more, complete = time.monotonic() + budget, [], False, True
+    cursor = query.before
     marks = ",".join("?" * len(FIRST_KINDS))
     with store.snapshot() as snapshot:
         rows = snapshot.connection.execute(
@@ -58,18 +65,21 @@ def by_date(store, query, view, budget=BUDGET):
         for number, row in enumerate(rows):
             if number % 1024 == 0 and time.monotonic() >= deadline:
                 complete = False
+                cursor = cursor or row["seq"] + 1
                 break
+            cursor = row["seq"]
             event = {**dict(row), "payload": json.loads(row["payload"])}
             moment, basis = message_time(event)
             if moment is None or not start <= moment < end:
                 continue
             if len(items) == query.limit:
                 more = True
+                cursor = row["seq"] + 1
                 break
             items.append({**view(query.workspace, event), "message_time": moment.isoformat(), "time_basis": basis})
     return {"date": query.date, "timezone": query.timezone or "UTC", "from_utc": start.isoformat(),
             "until_utc": end.isoformat(), "items": items,
-            "next_before": items[-1]["source"]["event_seq"] if (more or not complete) and items else None,
+            "next_before": cursor if more or not complete else None,
             "complete": complete and not more, "untrusted_content": True,
             "basis": "First saved versions whose Telegram sending time falls on this day in this time zone; the "
                      "observation time is used only when Telegram's time is missing. Edits and deletion records are "
@@ -77,19 +87,10 @@ def by_date(store, query, view, budget=BUDGET):
 
 
 def latest_state(store, chat_id):
-    """The newest chat.state snapshot that carries a full state, with the record it came from."""
-    records = store.events(chat_id=chat_id, kind="chat.state", limit=1)
-    if not records:
-        return None, None
-    record, payload = records[0], records[0]["payload"]
-    if "state" in payload:
-        return record, payload["state"]
-    base = payload.get("state_seq")
-    found = store.events(chat_id=chat_id, kind="chat.state", before=base + 1, limit=1) if type(base) is int else []
-    if found and found[0]["seq"] == base and "state" in found[0]["payload"]:
-        # Pinned messages and other non-count fields only change in records that carry a full state.
-        return record, found[0]["payload"]["state"]
-    return record, None
+    """Reconstruct the latest signed snapshot using the collector's compact-state format."""
+    from .chat_state import latest
+    record, state, _base = latest(store, chat_id)
+    return record, state
 
 
 def pinned(store, query, view):
@@ -98,7 +99,9 @@ def pinned(store, query, view):
     items = []
     if record is not None and state is not None and "pinned" in state:
         snapshot = {"event_seq": record["seq"], "observed_at": record["observed_at"], "pinned": state["pinned"],
-                    "pinned_total": state.get("pinned_total"), "errors": record["payload"].get("errors") or {}}
+                    "pinned_total": state.get("pinned_total"), "errors": record["payload"].get("errors") or {},
+                    "complete": state.get("parts_complete", {}).get("pinned"),
+                    "carried_forward": "pinned" in record["payload"].get("carried_forward", [])}
         for message_id in state["pinned"][:query.limit]:
             found = store.events(chat_id=query.chat_id, message_id=message_id, limit=1, message_only=True)
             items.append(view(query.workspace, found[0]) if found else
@@ -158,16 +161,20 @@ def topic_of(header):
 
 def topics(store, query, budget=BUDGET):
     deadline, found, members, complete, forum = time.monotonic() + budget, {}, {}, True, False
+    seen = set()
     marks = ",".join("?" * len(FIRST_KINDS))
     with store.snapshot() as journal:
         rows = journal.connection.execute(
             "SELECT seq,message_id,observed_at,json_extract(payload,'$.service_action'),json_extract(payload,'$.raw.action'),"
             "json_extract(payload,'$.raw.reply_to'),json_extract(payload,'$.sent_at') FROM events WHERE chat_id=? "
-            "AND kind IN (" + marks + ") ORDER BY seq", (query.chat_id, *FIRST_KINDS))
+            "AND kind IN (" + marks + ") ORDER BY message_id,seq", (query.chat_id, *FIRST_KINDS))
         for number, (seq, message_id, observed, service, action, header, sent) in enumerate(rows):
             if number % 2048 == 0 and time.monotonic() >= deadline:
                 complete = False
                 break
+            if type(message_id) is not int or message_id in seen:
+                continue
+            seen.add(message_id)
             action = json.loads(action) if action else {}
             header = json.loads(header) if header else None
             if service == "MessageActionTopicCreate":
@@ -177,6 +184,9 @@ def topics(store, query, budget=BUDGET):
                 entry["titles"].append({"title": action.get("title"), "event_seq": seq, "observed_at": observed})
                 continue
             topic = topic_of(header)
+            if topic and isinstance(header, dict) and header.get("forum_topic"):
+                forum = True
+                found.setdefault(topic, {"topic_id": topic, "titles": []})
             if service == "MessageActionTopicEdit" and topic:
                 forum = True
                 entry = found.setdefault(topic, {"topic_id": topic, "titles": []})
@@ -192,12 +202,20 @@ def topics(store, query, budget=BUDGET):
         found.setdefault(1, {"topic_id": 1, "titles": [{"title": "General", "event_seq": None, "observed_at": None}]})
         members.setdefault(1, set()).update(members.pop(None, set()))
     listed = []
-    for topic_id in sorted(found)[:200]:
+    topic_ids = sorted(found)
+    for topic_id in topic_ids[query.offset:query.offset + query.limit]:
         entry = found[topic_id]
         entry["title"] = entry["titles"][-1]["title"] if entry["titles"] else None
+        entry["titles_total"] = len(entry["titles"])
+        entry["titles_complete"] = len(entry["titles"]) <= 20
+        entry["titles"] = entry["titles"][-20:]
         entry["messages_saved"] = len(members.get(topic_id, ()))
         listed.append(entry)
-    return {"chat_id": query.chat_id, "forum": forum, "topics": listed, "complete": complete, "untrusted_content": True,
+    next_offset = query.offset + len(listed) if query.offset + len(listed) < len(found) else None
+    return {"chat_id": query.chat_id, "forum": forum, "topics": listed, "topics_total": len(found),
+            "next_offset": next_offset, "scan_complete": complete,
+            "complete": complete and next_offset is None and all(t["titles_complete"] for t in listed),
+            "untrusted_content": True,
             "meaning": "Topics found in saved topic-creation and topic-edit service messages; message counts are saved "
                        "messages that Telegram marked as belonging to each topic. Topics created before observation "
                        "appear once a saved message refers to them."}
@@ -223,8 +241,14 @@ def media_preview(store, query, allowed, source_ref):
               "untrusted_content": True}
     if path.is_symlink() or not path.is_file():
         return {**result, "available": False, "note": "The file is not on this computer (moved to storage or not kept)."}
+    if path.stat().st_size > IMAGE_BYTES:
+        return {**result, "available": True, "verified": False,
+                "note": "Preview size limit exceeded; open the preserved file in the panel."}
     with path.open("rb") as stream:
-        actual = hashlib.file_digest(stream, "sha256").hexdigest()
+        data = stream.read(IMAGE_BYTES + 1)
+    if len(data) > IMAGE_BYTES:
+        return {**result, "available": True, "verified": False, "note": "Preview size limit exceeded."}
+    actual = hashlib.sha256(data).hexdigest()
     if actual != digest:
         return {**result, "available": False, "verified": False,
                 "note": "The stored file does not match its recorded SHA-256; it is not shown."}
@@ -233,18 +257,27 @@ def media_preview(store, query, allowed, source_ref):
     result.update(available=True, verified=True, mime_type=mime)
     if mime not in IMAGE_TYPES:
         return {**result, "note": "Not an image; open the file in the panel."}
-    from PIL import Image
-    with Image.open(path) as picture:
-        picture.seek(0)
-        picture = picture.convert("RGB")
-        for side in PREVIEW_SIDES:
-            copy = picture.copy()
-            copy.thumbnail((side, side))
-            buffer = io.BytesIO()
-            copy.save(buffer, "JPEG", quality=72, optimize=True)
-            if buffer.tell() <= PREVIEW_BYTES:
-                break
+    from PIL import Image, ImageOps, UnidentifiedImageError
+    try:
+        with warnings.catch_warnings():
+            warnings.simplefilter("error", Image.DecompressionBombWarning)
+            with Image.open(io.BytesIO(data)) as picture:
+                if picture.width * picture.height > IMAGE_PIXELS:
+                    return {**result, "note": "Image dimensions exceed the preview limit."}
+                picture.seek(0)
+                picture = ImageOps.exif_transpose(picture).convert("RGB")
+                for side in PREVIEW_SIDES:
+                    copy = picture.copy()
+                    copy.thumbnail((side, side))
+                    buffer = io.BytesIO()
+                    copy.save(buffer, "JPEG", quality=72, optimize=True)
+                    if buffer.tell() <= PREVIEW_BYTES:
+                        break
+    except (OSError, ValueError, UnidentifiedImageError, Image.DecompressionBombError, Image.DecompressionBombWarning):
+        return {**result, "note": "The preserved image cannot be decoded for a preview."}
     data = buffer.getvalue()
+    if len(data) > PREVIEW_BYTES:
+        return {**result, "note": "The image cannot fit within the preview size limit."}
     result["preview"] = {"mime_type": "image/jpeg", "width": copy.width, "height": copy.height,
                          "data_base64": base64.b64encode(data).decode(), "sha256": hashlib.sha256(data).hexdigest(),
                          "derived": "Downscaled JPEG preview made on request; the preserved file and its SHA-256 "
