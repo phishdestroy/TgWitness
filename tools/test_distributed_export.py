@@ -9,7 +9,7 @@ import pytest
 from telethon.errors import FloodWaitError, FloodPremiumWaitError
 from telethon.tl import types
 
-from tgwitness import distributed_export, settings_hub, telegram_client
+from tgwitness import distributed_export, export_timing, settings_hub, telegram_client
 from tgwitness.account_export import AccountExport
 from tgwitness.collector import Collector, message_record
 from tgwitness.message_selection import Selection, SelectionIndex, detect_language
@@ -265,6 +265,36 @@ def close_entries(entries):
         entry["app"].state.store.close()
 
 
+@pytest.mark.parametrize("terminal", ["done", "paused", "failed"])
+def test_export_rate_includes_waits_but_excludes_reused_messages_and_packaging(monkeypatch, terminal):
+    clock = [100.0]
+    monkeypatch.setattr(export_timing, "time", SimpleNamespace(monotonic=lambda: clock[0]))
+    timer = export_timing.ExportTiming()
+    assert timer.snapshot(200)["messages_per_second"] is None
+    timer.baseline = 200
+    clock[0] = 112.0
+    timer.move("running")
+    clock[0] = 132.0
+    assert timer.snapshot(240)["messages_per_second"] == 2
+    # A wait without new committed messages lowers the average.
+    clock[0] = 142.0
+    assert timer.snapshot(240)["messages_per_second"] == pytest.approx(40 / 30, abs=.001)
+    timer.move("selecting")
+    clock[0] = 150.0
+    timer.move("packaging")
+    clock[0] = 155.0
+    timer.move(terminal)
+    result = timer.snapshot(260)
+    assert result["new_messages"] == 60 and result["reused_messages"] == 200
+    assert result["messages_per_second"] == 2 and result["elapsed_seconds"] == 55
+    assert result["phase_seconds"] == {"preparing": 12, "running": 30, "selecting": 8, "packaging": 5}
+    clock[0] = 5000.0
+    assert timer.snapshot(260) == result
+    resumed = export_timing.ExportTiming()
+    resumed.baseline = 260
+    assert resumed.snapshot(260)["new_messages"] == resumed.snapshot(260)["elapsed_seconds"] == 0
+
+
 def test_multi_start_is_atomic_when_one_account_monitors(tmp_path):
     async def scenario():
         manager, entries = coordinator(tmp_path, [message(1)])
@@ -292,6 +322,9 @@ def test_resume_reuses_signed_chunks_and_rejects_tampering(tmp_path, monkeypatch
             await asyncio.wait_for(c.client.blocked.wait(), 5)
             await manager.pause(state["id"])
             assert manager.state["phase"] == "paused" and c.export_claim is None
+            paused_performance = manager.public()["performance"]
+            await asyncio.sleep(.02)
+            assert manager.public()["performance"] == paused_performance
             directory = manager.directory(state["id"])
             receipts = list((directory / "receipts").glob("*.json"))
             assert len(receipts) == 1
@@ -309,6 +342,8 @@ def test_resume_reuses_signed_chunks_and_rejects_tampering(tmp_path, monkeypatch
             await restored.resume(state["id"])
             await asyncio.wait_for(restored.task, 10)
             assert restored.state["error"] == "Recovery reached selection"
+            performance = restored.public()["performance"]
+            assert performance["reused_messages"] == 2 and performance["new_messages"] == 4
             assert len(list((directory / "receipts").glob("*.json"))) == 3
             chunk = directory / "chunks" / (str(preserved["low"]) + ".jsonl")
             chunk.write_text(chunk.read_text().replace("English", "tampered"))
@@ -316,6 +351,7 @@ def test_resume_reuses_signed_chunks_and_rejects_tampering(tmp_path, monkeypatch
             await restored.resume(state["id"])
             await asyncio.wait_for(restored.task, 5)
             assert "differs" in restored.state["error"]
+            assert restored.public()["performance"]["new_messages"] == 0
             assert not c.client.reads and c.export_claim is None
         finally:
             await manager.close()
@@ -336,6 +372,11 @@ def test_filtered_archive_is_verifiable_and_contains_context(tmp_path, monkeypat
                 "reply_mode": "answered", "context_depth": 1})
             await asyncio.wait_for(manager.task, 60)
             assert manager.state["phase"] == "done", manager.state
+            performance = manager.public()["performance"]
+            assert performance["new_messages"] == 2 and performance["reused_messages"] == 0
+            assert performance["phase_seconds"]["packaging"] > 0
+            assert manager.verified(manager.directory(state["id"]) / "status.json",
+                                    entries["account0"]["app"].state.vault.public_key)["performance"] == performance
             path = manager.result_path(state["id"])
             public = entries["account0"]["app"].state.vault.public_key
             checked = verify_chat_export(path, fingerprint(public))
@@ -410,6 +451,11 @@ def test_cancelling_an_old_job_cannot_replace_active_state(tmp_path):
             await manager.pause(new["id"])
             assert manager.state["phase"] == "paused" and collector.export_claim is None
             assert len(manager.list_jobs()) == 2
+            old_performance = manager.public(old["id"])["performance"]
+            cancelled = await manager.cancel(old["id"])
+            assert cancelled["performance"] == old_performance
+            await asyncio.sleep(.02)
+            assert manager.public()["performance"] == old_performance
         finally:
             await manager.close()
             close_entries(entries)

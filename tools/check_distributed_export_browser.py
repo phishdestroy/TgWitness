@@ -109,6 +109,7 @@ def main():
             page.set_viewport_size({"width": 1440, "height": 1000})
             page.locator("#export-dialog-start").click()
             expect(page.locator("#export-box")).to_contain_text("Read 1 of 3", timeout=15000)
+            expect(page.locator("#export-box")).to_contain_text("messages/s (including waits)")
             rejected = post("collector/start")
             assert rejected.status == 400 and "busy" in rejected.text()
             page.locator("#export-box").get_by_role("button", name="Pause", exact=True).click()
@@ -122,6 +123,10 @@ def main():
             page.locator("#export-box").get_by_role("button", name="Resume saved chunks").click()
             expect(page.locator("#export-box")).to_contain_text("Export ready: 3 messages", timeout=60000)
             job = server.app.state.multi_export.public()
+            assert job["performance"]["reused_messages"] == 1
+            assert job["performance"]["new_messages"] == 4
+            expect(page.locator("#export-box")).to_contain_text("Current run: 4 new messages")
+            expect(page.locator("#export-box")).to_contain_text("Packaging and verification:")
             response = context.request.get(server.url + "/api/multi-export/" + job["id"] + "/download", headers=headers)
             assert response.ok, response.text()
             archive = output / "selected-export.zip"

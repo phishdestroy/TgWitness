@@ -28,6 +28,16 @@ Plans created before the inclusive-start fix retain their original signed ID ran
 
 ## Result and limits
 
+### Performance measurements
+
+The export panel and status API report elapsed time for the **current start or resume** using a monotonic clock. Preparation includes connection, boundary checks, saved-chunk verification and chat metadata. Acquisition measures the concurrent workers together, including Telegram waits, chunk writes and receipt signing. Selection and attachment retrieval, then packaging and verification, have separate timers. Pausing or finishing freezes the measurements; resuming starts a new measurement and excludes previously committed messages from its throughput numerator.
+
+Acquisition throughput is newly committed messages divided by acquisition wall time. It updates at chunk commits, so it is an average, not an instantaneous network rate. It does not include selection, attachments or ZIP/PDF creation. The signed job status retains these measurements; a successful run also records them in `chat_export.completed`. Jobs created before this feature have no performance record until resumed. Remaining message count is unknown, so the panel does not invent an ETA from numeric ID ranges. Compare runs with identical fixed scope, attachment settings and account access; more accounts do not guarantee linear speedup.
+
+A bounded live pilot on 2026-11-06 UTC compared one and two accounts over the same approximately 4,000-ID ranges in two public supergroups. Acquisition of 3,313 messages took 33.672 s and 16.969 s; acquisition of 3,691 took 37.750 s and 19.188 s. All four ZIPs verified. ID sets matched between runs; differences in three reply-media headers were limited to access hashes and file references. These are small, sequential runs without attachments or Takeout, on a 32-logical-CPU Windows host; they do not establish sustained throughput for ten accounts or thousands of sources. Only authors and a bounded visible participant sample were collected, not complete membership.
+
+### Archive
+
 The ZIP uses the existing independently verifiable chat-export format with per-account signed parts, selected messages, context labels, selection settings and acquisition scope. `chat.json` is authoritative. HTML and PDF distinguish omitted-by-selection message numbers from evidence of deletion. The app verifies the ZIP before marking it ready; downloads remain available afterwards.
 
 Coverage means accessible ranges actually read, not all historical messages. Accounts can have different access; distributed or resumed acquisition is not an atomic snapshot. No actor, deletion reason, ban or moderator identity is inferred from a missing ID or online status. More accounts do not guarantee linear speedup.

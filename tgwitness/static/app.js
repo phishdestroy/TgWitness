@@ -5166,6 +5166,16 @@ function renderMulti(){
   if(!running)action("quiet",tr("Hide"),()=>{state.multiHidden=x.id;renderMulti();});
   box.append(head);
   box.append(node("p","hint",tr("Read {done} of {total} planned ranges.",{done:x.ranges_done||0,total:x.ranges_total||0})+" "+tr(x.phase)));
+  if(x.performance){
+    const p=x.performance,s=p.phase_seconds,seconds=value=>tr("{n} s",{
+      n:value.toLocaleString(undefined,{maximumFractionDigits:1})});
+    box.append(node("p","hint",tr("Current run: {messages} new messages · {time} elapsed.",{
+      messages:p.new_messages.toLocaleString(),time:seconds(p.elapsed_seconds)})+
+      (p.messages_per_second!==null?" "+tr("Acquisition: {rate} messages/s (including waits).",{
+        rate:p.messages_per_second.toLocaleString(undefined,{maximumFractionDigits:1})}):"")));
+    box.append(node("p","hint",tr("Preparation: {preparing}. Acquisition: {running}. Selection and attachments: {selecting}. Packaging and verification: {packaging}.",{
+      preparing:seconds(s.preparing),running:seconds(s.running),selecting:seconds(s.selecting),packaging:seconds(s.packaging)})));
+  }
   if(x.counts?.selected!==undefined)box.append(node("p","hint",tr("Examined: {examined}. Matches: {matched}. Context: {context}. Uncertain language: {uncertain}.",{
     examined:x.counts.examined,matched:x.counts.matched,context:x.counts.context,uncertain:x.counts.uncertain_language||0})));
   if(x.counts?.context_limit_reached)box.append(node("p","hint",tr("Context cap reached; additional context may be omitted.")));

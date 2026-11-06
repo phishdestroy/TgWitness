@@ -19,6 +19,7 @@ from telethon.tl import types
 from . import chat_export, replica, report, tuning
 from .account_export import durable_write, linked, read_json
 from .collector import message_record
+from .export_timing import ExportTiming
 from .message_selection import Selection, SelectionIndex, utc
 from .store import canonical, utcnow
 from .verify import fingerprint, verify_chat_export
@@ -36,6 +37,7 @@ class DistributedExport:
             raise ValueError("Distributed-export storage must not be a link.")
         self.root.mkdir(mode=0o700, exist_ok=True)
         self.state = self.job = self.task = self.db = None
+        self.timing = None
         self.preparing = set()
         self.reserved = {}
         self.entities = {}
@@ -78,11 +80,13 @@ class DistributedExport:
         return envelope["statement"]
 
     def persist(self):
+        self.update_timing()
         self.state["updated_at"] = utcnow()
         durable_write(self.directory(self.state["id"]) / "status.json", canonical(self.signed(self.state)))
 
     def public(self, job_id=None):
         if job_id is None or self.state and job_id == self.state["id"]:
+            self.update_timing()
             return json.loads(json.dumps(self.state)) if self.state else {"phase": "none"}
         path = self.directory(job_id) / "status.json"
         if not path.is_file():
@@ -94,6 +98,15 @@ class DistributedExport:
         if state["phase"] in ("preparing", "running", "selecting", "packaging"):
             state.update(phase="paused", error="The process stopped. Resume verifies saved chunks first.")
         return state
+
+    def update_timing(self):
+        if self.timing is not None and self.state is not None:
+            self.state["performance"] = self.timing.snapshot(self.state["captured"])
+
+    def set_phase(self, phase):
+        self.state["phase"] = phase
+        self.timing.move(phase)
+        self.update_timing()
 
     def list_jobs(self):
         items = []
@@ -138,6 +151,7 @@ class DistributedExport:
         chosen = list(dict.fromkeys([lead_id, *profile_ids]))
         export_id = secrets.token_hex(16)
         self.reserve(chosen, export_id)  # Atomic before the first await, including monitoring accounts.
+        timing = ExportTiming()
         self.preparing = set(chosen)
         try:
             lead_app = self.app_for(lead_id)
@@ -188,6 +202,7 @@ class DistributedExport:
                 if eligible:
                     segments.append({"low": low, "high": end - 1, "profiles": eligible})
             info = lead.dialog_cache.get(chat_id, {})
+            self.timing = timing
             self.state = {"id": export_id, "chat_id": chat_id, "title": info.get("title"), "lead": lead_id,
                           "phase": "preparing", "started_at": now, "workers": workers,
                           "captured": 0, "ranges_done": 0, "ranges_total": sum(
@@ -233,6 +248,7 @@ class DistributedExport:
                     (app.state.store.get_setting("account", {}) or {}).get("id") != worker["account_id"]):
                 raise ValueError("A participating account or signing identity has changed.")
         self.reserve([w["profile_id"] for w in active], job_id)
+        self.timing = ExportTiming()
         self.preparing = {w["profile_id"] for w in active}
         try:
             self.state, self.job = state, job
@@ -458,16 +474,17 @@ class DistributedExport:
         lead = self.app_for(self.job["lead"]).state.collector
         try:
             await complete_in_thread(self.prepare_chunks)
+            self.timing.baseline = self.state["captured"]
             for worker in self.job["workers"]:
                 profile_id = worker["profile_id"]
                 if worker["state"] != "skipped" and profile_id not in self.entities:
                     self.entities[profile_id] = await self.app_for(profile_id).state.collector.resolve_for_export(
                         self.job["chat_id"], self.job["username"])
-            self.state["phase"] = "running"
-            self.persist()
             clock = await lead.telegram_clock()
             profile, observer, problems = await lead.chat_profile(self.entities[self.job["lead"]])
             log = await lead.admin_log(self.entities[self.job["lead"]]) if observer.get("role") in ("admin", "creator") else None
+            self.set_phase("running")
+            self.persist()
             workers = [asyncio.create_task(self.work(w)) for w in self.state["workers"] if w["state"] != "skipped"]
             try:
                 await asyncio.gather(*workers)
@@ -488,7 +505,7 @@ class DistributedExport:
                     raise asyncio.CancelledError
             if self.db.execute("SELECT 1 FROM tasks WHERE phase!='done' LIMIT 1").fetchone():
                 raise ValueError("Some ranges could not be read. Saved chunks are retained; resume when accounts are available.")
-            self.state["phase"] = "selecting"
+            self.set_phase("selecting")
             self.persist()
             scratch, ranges = await self.finish_selection(directory, Selection.model_validate(self.job["selection"]))
             meta = {"chat": {**self.job["chat"], "profile": profile, "profile_errors": problems},
@@ -503,7 +520,7 @@ class DistributedExport:
                                     "segments": self.job["segments"], "clock_at_start": clock,
                                     "clock_at_end": await lead.telegram_clock(),
                                     "clock_scope": "Current run; saved chunks retain their original local commit times."}}
-            self.state["phase"] = "packaging"
+            self.set_phase("packaging")
             self.persist()
             out = directory / "export.zip"
             max_gib = tuning.value(lead.store, "export_max_gib")
@@ -512,8 +529,9 @@ class DistributedExport:
             await complete_in_thread(verify_chat_export, out, fingerprint(lead.vault.public_key), max_gib)
             replica.outbox(lead.store, out)
             self.state.update(phase="done", ready=True, error=None)
+            self.set_phase("done")
             lead.store.append("chat_export.completed", {"export_id": self.job["id"], "mode": "distributed_selection",
-                              "counts": self.state["counts"]}, self.job["chat_id"])
+                              "counts": self.state["counts"], "performance": self.state["performance"]}, self.job["chat_id"])
         except asyncio.CancelledError:
             self.state.update(phase="paused", ready=False, error="Paused; committed chunks are retained.")
             for worker in self.state["workers"]:
@@ -524,6 +542,7 @@ class DistributedExport:
             self.state.update(phase="failed", ready=False,
                               error=str(exc) if isinstance(exc, ValueError) else type(exc).__name__)
         finally:
+            self.set_phase(self.state["phase"])
             if self.db:
                 self.db.close()
                 self.db = None
@@ -538,6 +557,7 @@ class DistributedExport:
             await asyncio.gather(self.task, return_exceptions=True)
             if self.state["phase"] not in ("done", "failed", "paused"):
                 self.state.update(phase="paused", ready=False, error="Paused; committed chunks are retained.")
+                self.set_phase("paused")
                 self.persist()
         return self.public(job_id)
 
@@ -546,6 +566,8 @@ class DistributedExport:
             raise ValueError("Pause the current distributed export before changing another job.")
         state = await self.pause(job_id)
         if state.get("phase") not in ("done", "unknown"):
+            if not self.state or self.state["id"] != job_id:
+                self.timing = None
             self.state = state
             self.state["phase"] = "cancelled"
             self.persist()
