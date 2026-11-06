@@ -303,6 +303,10 @@ class Witness:
                         raise ValueError("capture counters decreased in a growing journal")
             except Exception as exc:
                 raise InvalidAnswer("capture proof failed verification: " + type(exc).__name__) from None
+        keys = captured.get("keys") if capture is not None else None
+        if last and last.get("keys") is not None:
+            if keys is None or keys != last["keys"]:
+                status = "key_changed"
         continuity = answer.get("continuity")
         tree = self.store.get_setting("last_tree")
         committed = None
@@ -323,7 +327,7 @@ class Witness:
             if self.pinned is None:
                 self.pinned = key
                 self.store.set_setting("collector_fingerprint", key)
-            self.store.set_setting("last_seen", {"event_count": count, "head_hash": head})
+            self.store.set_setting("last_seen", {"event_count": count, "head_hash": head, "keys": keys})
             self.store.set_setting("last_capture_counts", captured["counts"] if capture is not None else None)
             if committed is not None:
                 self.store.set_setting("last_tree", {"root": committed["root"], "event_count": count, "head_hash": head})
@@ -334,6 +338,8 @@ class Witness:
         if capture is not None:
             payload.update(checkpoint={"statement": statement, "signature": value["signature"], "fingerprint": key},
                            capture=capture, capture_delta=delta)
+            if keys is not None:
+                payload["keys"] = keys
         if committed is not None:
             payload.update(continuity=continuity, continuity_status="extended" if tree is not None else "baseline")
         return payload

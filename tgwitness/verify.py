@@ -3221,7 +3221,7 @@ CAPTURE_KINDS = ("message.new", "message.edited", "message.deleted", "message.re
 def verify_capture(value, checkpoint):
     statement = value["statement"]
     fields = {"format", "created_at", "public_key", "event_count", "head_hash", "challenge", "counts", "last_message_at", "health"}
-    if set(value) != {"statement", "signature"} or set(statement) != fields:
+    if set(value) != {"statement", "signature"} or set(statement) not in (fields, fields | {"keys"}):
         raise ValueError("Unexpected capture proof fields")
     if set(checkpoint) != {"format", "created_at", "public_key", "event_count", "head_hash"}:
         raise ValueError("Unexpected checkpoint fields")
@@ -3257,6 +3257,15 @@ def verify_capture(value, checkpoint):
         raise ValueError("Invalid capture backoff")
     if health["last_heartbeat"] is not None:
         parse_time(health["last_heartbeat"])
+    if "keys" in statement:
+        keys = statement["keys"]
+        if (not isinstance(keys, dict) or set(keys) != {"count", "origin", "authorized_seq"}
+                or type(keys["count"]) is not int or not 0 <= keys["count"] <= statement["event_count"]
+                or keys["origin"] not in ("created", "imported", "unknown")
+                or (keys["count"] == 0 and (keys["authorized_seq"] is not None or keys["origin"] != "unknown"))
+                or (keys["count"] > 0 and (type(keys["authorized_seq"]) is not int
+                                          or not keys["count"] <= keys["authorized_seq"] <= statement["event_count"]))):
+            raise ValueError("Malformed collector key history")
     return statement
 
 
@@ -3264,9 +3273,10 @@ def bundle_capture_prefixes(bundle_path, boundaries):
     wanted, result = set(boundaries), {}
     tree = MerkleFrontier()
     counts, last = dict.fromkeys(CAPTURE_KINDS, 0), None
+    keys = {"count": 0, "origin": "unknown", "authorized_seq": None}
     if 0 in wanted:
         result[0] = {"head_hash": "0" * 64, "counts": dict(counts), "last_message_at": None,
-                     "root": tree.root().hex()}
+                     "root": tree.root().hex(), "keys": dict(keys)}
     if not wanted:
         return result
     limit = max(wanted)
@@ -3276,13 +3286,17 @@ def bundle_capture_prefixes(bundle_path, boundaries):
             if event["seq"] > limit:
                 break
             tree.append(event["hash"])
+            if event["kind"] == "account.authorized":
+                origin = event["payload"].get("key_origin")
+                keys = {"count": keys["count"] + 1, "authorized_seq": event["seq"],
+                        "origin": origin if origin in ("created", "imported") else "unknown"}
             if event["kind"] in counts:
                 counts[event["kind"]] += 1
                 if event["kind"].startswith("message."):
                     last = max(last or event["observed_at"], event["observed_at"])
             if event["seq"] in wanted:
                 result[event["seq"]] = {"head_hash": event["hash"], "counts": dict(counts), "last_message_at": last,
-                                        "root": tree.root().hex()}
+                                        "root": tree.root().hex(), "keys": dict(keys)}
     return result
 
 
@@ -3293,6 +3307,8 @@ def check_capture_prefix(value, bundle_path):
         raise ValueError("Capture proof head is absent from the evidence")
     if prefix["counts"] != statement["counts"] or prefix["last_message_at"] != statement.get("last_message_at"):
         raise ValueError("Capture counters differ from the evidence records")
+    if "keys" in statement and prefix["keys"] != statement["keys"]:
+        raise ValueError("Capture key history differs from the evidence records")
     return prefix["counts"]
 
 
@@ -3411,7 +3427,7 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
             if member_digest(archive, name) != digest:
                 raise ValueError("File hash mismatch: " + name)
         anchors, silent, posted, failures, statements, interval = [], [], {}, [], {}, None
-        retained = {}
+        retained, collector_keys = {}, {}
         journal, days, seals = DailyJournal(), [], {}
 
         def observed(stream):
@@ -3450,6 +3466,13 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
                                 or captured["head_hash"] != payload["head_hash"]):
                             raise ValueError("Witness capture proof differs from its anchor")
                         anchors[-1]["capture"] = payload["capture"]
+                        if captured.get("keys") is not None:
+                            if payload.get("keys") != captured["keys"]:
+                                raise ValueError("Witness key history differs from its signed capture")
+                            anchors[-1]["keys"] = captured["keys"]
+                            collector_keys[payload["collector_fingerprint"]] = key_history_summary(captured["keys"])
+                    if "keys" in payload and not payload.get("capture"):
+                        raise ValueError("Witness key history has no signed capture")
                     if payload.get("freshness") is not None:
                         fresh = payload["freshness"]
                         challenge = witness_challenge(fresh)
@@ -3459,6 +3482,8 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
                     collector_key = payload.get("collector_fingerprint")
                     if payload.get("status") == "ok":
                         prior = retained.get(collector_key)
+                        if prior and prior.get("keys") is not None and prior["keys"] != anchors[-1].get("keys"):
+                            raise ValueError("Witness accepted a changed or removed collector key history")
                         if payload.get("continuity") is not None:
                             if not payload.get("capture"):
                                 raise ValueError("Continuity proof has no matching capture proof")
@@ -3468,7 +3493,7 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
                             anchors[-1]["root"] = committed["root"]
                         elif prior and prior.get("root"):
                             raise ValueError("Witness accepted a continuity downgrade")
-                        retained[collector_key] = {k: anchors[-1][k] for k in ("event_count", "head_hash", "root")
+                        retained[collector_key] = {k: anchors[-1][k] for k in ("event_count", "head_hash", "root", "keys")
                                                   if k in anchors[-1]}
                     statements[event["seq"]] = post_statement(event, fp)
                 elif kind == "witness.no_response":
@@ -3532,7 +3557,12 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
             "head_hash": result["head_hash"], "interval_minutes": interval, "channel": manifest.get("channel"),
             "producer": manifest.get("producer"), "anchors": anchors, "no_response": silent, "posted": posted,
             "post_failures": failures, "statements": statements, "key_pinned": bool(expected_fingerprint),
-            "freshness": freshness, "days": days, "missing_days": missing_days}
+            "freshness": freshness, "days": days, "missing_days": missing_days, "collector_keys": collector_keys}
+
+
+def key_history_summary(keys):
+    return {**keys, "meaning": "Recorded Telegram authorizations; collector-signed claim, not proof that no key copies exist",
+            "note": "ключ импортирован: подтверждение зависит от доверия к источнику" if keys["origin"] == "imported" else None}
 
 
 def witnessed_periods(witness, key=None):
@@ -3574,7 +3604,8 @@ def cross_check_witness(witness, bundle_path, bundle_result):
         elif ("0" * 64 if anchor["event_count"] == 0 else hashes.get(anchor["event_count"])) == anchor["head_hash"]:
             capture = anchor.get("capture", {}).get("statement")
             prefix = prefixes.get(anchor["event_count"])
-            if (capture and (not prefix or any(prefix[k] != capture[k] for k in ("counts", "last_message_at")))
+            if (capture and (not prefix or any(prefix[k] != capture[k] for k in ("counts", "last_message_at"))
+                             or "keys" in capture and prefix["keys"] != capture["keys"])
                     or anchor.get("root") and (not prefix or prefix["root"] != anchor["root"])):
                 conflicts.append(anchor)
             else:
@@ -3606,7 +3637,8 @@ def cross_check_witness(witness, bundle_path, bundle_result):
             "continuity_verified_through_event": continuity_through,
             "export_head_witnessed": any(a["event_count"] == count for a in matched),
             "export_head_witness_records": [a["seq"] for a in matched if a["event_count"] == count],
-            "witness_key_pinned": bool(witness.get("key_pinned"))}
+            "witness_key_pinned": bool(witness.get("key_pinned")),
+            "collector_keys": witness.get("collector_keys", {}).get(key)}
 
 
 def channel_texts(source):
