@@ -212,8 +212,7 @@ class MultiExport:
                                            "error_type": type(exc).__name__}, []
                     if missed:
                         recovered = [{**message_record(m), "found_on_recheck": True} for m in missed]
-                        absent_ids = set(absent)
-                        if any(row["id"] not in absent_ids for row in recovered):
+                        if any(row["id"] not in absent for row in recovered):
                             raise ValueError("Recovered messages do not match the absent message IDs.")
                         parts = await complete_in_thread(self.recheck_parts, parts, recovered, state["lead"])
                         merge_history(scratch, recovered)
@@ -225,6 +224,7 @@ class MultiExport:
                              "visibility": info.get("visibility"), "profile": profile,
                              **({"profile_errors": problems} if problems else {})},
                     "observer": observer, "recheck": recheck, "admin_log": log,
+                    "journal": chat_export.journal_changes(lead.store, state["chat_id"]),
                     "account": lead.store.get_setting("account", None), "message_count": message_count,
                     "collection": {"mode": "multi_account", "range_size": CHUNK, "newest_message_id": newest,
                                    "scope": "message numbers 1..newest_message_id at export start"},

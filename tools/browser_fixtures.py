@@ -9,7 +9,7 @@ from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace as NS
 
 from telethon.crypto import AES, AuthKey
-from telethon.errors import InviteRequestSentError, SessionPasswordNeededError
+from telethon.errors import InviteRequestSentError, RPCError, SessionPasswordNeededError
 from telethon.sessions import StringSession
 from telethon.tl import functions, types
 
@@ -36,6 +36,11 @@ class FakeClient:
         self.connected = False
         self.handlers = []
         self.instances.append(self)
+
+    async def __call__(self, request):
+        if isinstance(request, functions.account.InitTakeoutSessionRequest):
+            raise RPCError(request, "TAKEOUT_UNAVAILABLE_IN_TEST", 400)
+        raise NotImplementedError(type(request).__name__)
 
     def add_event_handler(self, handler, spec):
         self.handlers.append(handler)
@@ -82,7 +87,7 @@ class FakeClient:
         for i in range(min(limit, 3)):
             yield telegram_message(i + 1)
 
-    async def download_media(self, message, file, progress_callback):
+    async def download_media(self, message, file, progress_callback, *, thumb=None):
         await progress_callback(4, 4)
         file.write(b"data")
         return file

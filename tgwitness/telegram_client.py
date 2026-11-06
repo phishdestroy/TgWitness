@@ -13,6 +13,29 @@ from .rpc_pacing import bulk_request
 _single_attempt = ContextVar("telegram_single_attempt", default=False)
 _ACTIONS = (functions.messages.GetBotCallbackAnswerRequest,
             functions.messages.ImportChatInviteRequest, functions.channels.JoinChannelRequest)
+_READ_RECEIPTS = (functions.messages.ReadHistoryRequest, functions.messages.ReadMessageContentsRequest,
+                  functions.channels.ReadHistoryRequest, functions.channels.ReadMessageContentsRequest,
+                  functions.messages.ReadDiscussionRequest, functions.messages.ReadMentionsRequest,
+                  functions.messages.ReadReactionsRequest, functions.messages.ReadEncryptedHistoryRequest,
+                  functions.stories.ReadStoriesRequest)
+
+
+class ReadReceiptBlocked(ValueError):
+    """The API collector must not mark messages or their contents as read."""
+
+
+def reject_read_receipts(request):
+    # Validate the whole batch before sending its first item, including Takeout
+    # and other invoke wrappers used by Telethon. Never include request data.
+    pending = [request]
+    while pending:
+        item = pending.pop()
+        if utils.is_list_like(item):
+            pending.extend(item)
+        elif isinstance(item, _READ_RECEIPTS):
+            raise ReadReceiptBlocked("Read receipts are disabled in the TgWitness API collector.")
+        elif (query := getattr(item, "query", None)) is not None:
+            pending.append(query)
 
 
 class WitnessClient(TelegramClient):
@@ -27,6 +50,25 @@ class WitnessClient(TelegramClient):
                 message._finish_init(self, entities, peer)
         return result.messages
 
+
+    async def connect(self):
+        self._connection_cleanup_pending = True
+        result = await super().connect()
+        if listener := getattr(self, "connection_listener", None):
+            listener("opened")
+        return result
+
+    async def _disconnect_coro(self):
+        pending = self.is_connected() or getattr(self, "_connection_cleanup_pending", False)
+        try:
+            return await super()._disconnect_coro()
+        finally:
+            # Telethon shields this coroutine even when its caller is cancelled.
+            # Keep the key reserved until the transport really has stopped.
+            if pending and not self.is_connected():
+                self._connection_cleanup_pending = False
+                if listener := getattr(self, "connection_listener", None):
+                    listener("closed")
 
     @property
     def _request_retries(self):
@@ -44,6 +86,9 @@ class WitnessClient(TelegramClient):
                                     if issubclass(self._connection, TcpMTProxy) else None)
 
     async def _call(self, sender, request, ordered=False, flood_sleep_threshold=None):
+        if utils.is_list_like(request):
+            request = tuple(request)
+        reject_read_receipts(request)
         # One outgoing RPC at a time for this authorization, including callers
         # in monitoring's background loops. Resolving a peer may re-enter _call
         # in the same task; that is sequential and must not deadlock.
