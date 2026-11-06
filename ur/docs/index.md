@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/
 
 جمع کریں
 
-[پینل گائیڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/)[جمع کرنے کا طریقہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/)[ماخذ کی تاریخ لوڈ کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/history/)[ورک فلو اور آپریشنز](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/)[تحقیقاتی موڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)[خصوصیات اور حدود](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
+[پینل گائیڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/)[جمع کرنے کا طریقہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/ur/docs/reference/secret-chats/)[ماخذ کی تاریخ لوڈ کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/history/)[ورک فلو اور آپریشنز](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/)[تحقیقاتی موڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)[خصوصیات اور حدود](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
 
 آرکائیو اور انضمامات
 

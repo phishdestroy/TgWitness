@@ -62,7 +62,7 @@ Fonti → **L’ambito di osservazione** determina quali chat vengono registrate
 
 Cosa non è possibile fare con queste modalità:
 
-- **Le chat segrete** sono crittografate end-to-end tra due dispositivi e non raggiungono mai TgWitness, in nessuna modalità.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/it/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **Non viene registrato nulla quando TgWitness non è in esecuzione.** Dopo un riavvio, l’applicazione richiede a Telegram gli aggiornamenti mancanti e ricontrolla le chat, ma Telegram non restituisce tutti i dati dopo lunghe interruzioni di servizio. I rapporti e `verify.py` mostrano tali periodi come lacune (vedere [la copertura](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - All’inizio vengono elencate solo le prime 1.000 conversazioni (il limite è indicato **nella sezione «Parametri»**); le chat più vecchie vengono aggiunte non appena tornano attive. La cronologia precedente di una chat aggiunta non viene recuperata: si consiglia di effettuare un’ istantanea della cronologia o un’esportazione completa della chat quando necessario.
 - Le condizioni delle cartelle soggette a continue variazioni (silenzioso, letto) non vengono applicate: tali chat rimangono sotto osservazione.

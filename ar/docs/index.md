@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/
 
 جمع
 
-[دليل اللوحة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/)[كيفية عمل عملية الجمع](https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/)[تحميل سجل المصدر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/history/)[سير العمل والعمليات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/)[وضع التحقيق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)[الميزات والقيود](https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/)
+[دليل اللوحة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/)[كيفية عمل عملية الجمع](https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/ar/docs/reference/secret-chats/)[تحميل سجل المصدر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/history/)[سير العمل والعمليات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/)[وضع التحقيق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)[الميزات والقيود](https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/)
 
 الأرشيف والتكاملات
 

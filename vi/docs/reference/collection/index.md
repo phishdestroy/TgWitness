@@ -62,7 +62,7 @@ Nguồn → **Phạm vi quan sát** quyết định những cuộc trò chuyện
 
 Những điều các chế độ này không thể thực hiện:
 
-- **Các cuộc trò chuyện bí mật** được mã hóa đầu cuối giữa hai thiết bị và tuyệt đối không bao giờ được truyền đến TgWitness, dưới bất kỳ hình thức nào.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/vi/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **Không có dữ liệu nào được ghi lại khi TgWitness không hoạt động.** Sau khi khởi động lại, công cụ sẽ yêu cầu Telegram cung cấp các bản cập nhật bị bỏ lỡ và kiểm tra lại các cuộc trò chuyện; tuy nhiên, Telegram không trả về toàn bộ dữ liệu sau những lần gián đoạn kéo dài. Các báo cáo và tệp `verify.py` sẽ hiển thị những khoảng thời gian này dưới dạng khoảng trống (xem [phần phạm vi bao phủ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - Ban đầu chỉ hiển thị 1.000 cuộc trò chuyện đầu tiên (giới hạn này được thiết lập trong **phần Thông số**); các cuộc trò chuyện cũ hơn sẽ được bổ sung khi chúng hoạt động trở lại. Lịch sử trước đó của một cuộc trò chuyện đã được thêm vào sẽ không được lấy về — quý vị nên tạo bản chụp nhanh lịch sử hoặc xuất toàn bộ nội dung cuộc trò chuyện khi cần thiết.
 - Các điều kiện của thư mục thay đổi liên tục (bị tắt tiếng, đã đọc) sẽ không được áp dụng: các cuộc trò chuyện đó vẫn tiếp tục được theo dõi.

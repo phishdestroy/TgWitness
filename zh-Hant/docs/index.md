@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/
 
 收集
 
-[面板指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/)[資料蒐集原理](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/)[載入來源歷史紀錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/history/)[工作流程與操作](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/operations/)[調查模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)[功能與限制](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/)
+[面板指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/)[資料蒐集原理](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/secret-chats/)[載入來源歷史紀錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/history/)[工作流程與操作](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/operations/)[調查模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)[功能與限制](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/)
 
 存檔與整合功能
 

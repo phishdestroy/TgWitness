@@ -92,7 +92,7 @@ Które rozmowy rejestruje ten obszar roboczy i jakie informacje z nich zachowuje
 - **Typy źródeł** ograniczają tryby folderów i całego konta do kanałów, grup, prywatnych czatów i botów. **Opcja „Własne działania”** dodaje wiadomości, edycje i naciśnięcia klawiszy odpowiedzi na klawiaturze związane z danym kontem.
 - **Gdy pojawi się nowy czat lub bot**: zapisz jego profil oraz do wybranej liczby jego najnowszych widocznych wiadomości.
 
-Ograniczenia: tajne czaty nigdy nie trafiają do TgWitness. Nic nie jest rejestrowane, gdy TgWitness nie działa; po ponownym uruchomieniu narzędzie odzyskuje tylko te dane, które Telegram nadal zwraca, a raport pokazuje tę lukę. Czaty wykraczające poza limit listy czatów (1 000 rozmów, o ile nie zmieniono tego w parametrach) są dodawane, gdy ponownie staną się aktywne. Przyciski bota wbudowane w inną aplikację są niewidoczne; rejestrowana jest odpowiedź bota.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/pl/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### Czat w zakresie
 

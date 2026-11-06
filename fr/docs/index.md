@@ -40,7 +40,7 @@ Configuration
 
 Collecter
 
-[Guide des panneaux](https://phishdestroy.github.io/TgWitness/fr/docs/reference/panel/)[Fonctionnement de la collecte](https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/)[Charger l'historique des sources](https://phishdestroy.github.io/TgWitness/fr/docs/reference/history/)[Workflows et opérations](https://phishdestroy.github.io/TgWitness/fr/docs/reference/operations/)[Mode enquête](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)[Fonctionnalités et limites](https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/)
+[Guide des panneaux](https://phishdestroy.github.io/TgWitness/fr/docs/reference/panel/)[Fonctionnement de la collecte](https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/fr/docs/reference/secret-chats/)[Charger l'historique des sources](https://phishdestroy.github.io/TgWitness/fr/docs/reference/history/)[Workflows et opérations](https://phishdestroy.github.io/TgWitness/fr/docs/reference/operations/)[Mode enquête](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)[Fonctionnalités et limites](https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/)
 
 Archives et intégrations
 

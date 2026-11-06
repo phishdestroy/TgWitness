@@ -92,7 +92,7 @@ Bu çalışma alanı hangi sohbetleri kaydeder ve bunlardan neleri saklar? Deği
 - **Kaynak türleri**, klasör ve tüm hesap modlarını kanallar, gruplar, özel sohbetler ve botlarla sınırlar. **Kendi eylemleri**, hesabın kendi mesajlarını, düzenlemelerini ve yanıt klavyesi tuş vuruşlarını ekler.
 - **Yeni bir sohbet veya bot ortaya çıktığında**: profilini ve seçilen sayıya kadar en son görünür mesajlarını kaydedin.
 
-Sınırlamalar: Gizli sohbetler asla TgWitness'ye ulaşmaz. TgWitness çalışmıyorken hiçbir şey kaydedilmez; yeniden başlatıldıktan sonra yalnızca Telegram'ın hâlâ döndürdüğü verileri yakalar ve rapor bu boşluğu gösterir. Sohbet listesi sınırını aşan sohbetler (Parametreler'de değiştirilmedikçe 1.000 diyalog), bir sonraki aktif hale geldiklerinde eklenir. Başka bir uygulamada basılan satır içi bot düğmeleri görünmez; botun yanıtı kaydedilir.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/tr/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### Kapsamdaki sohbetler
 

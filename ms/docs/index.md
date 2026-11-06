@@ -40,7 +40,7 @@ Pemasangan
 
 Kumpulkan
 
-[Panduan panel](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/)[Bagaimana pengumpulan berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/)[Muat sejarah sumber](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/)[Aliran kerja dan operasi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/)[Mod siasatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/)[Ciri dan had](https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/)
+[Panduan panel](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/)[Bagaimana pengumpulan berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/ms/docs/reference/secret-chats/)[Muat sejarah sumber](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/)[Aliran kerja dan operasi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/)[Mod siasatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/)[Ciri dan had](https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/)
 
 Arkib & integrasi
 

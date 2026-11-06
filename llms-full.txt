@@ -4222,7 +4222,7 @@ Which conversations this workspace records, and what it keeps from them. Changes
 - **Source types** limit folder and whole-account modes to channels, groups, private chats and bots. **Own actions** adds the account's own messages, edits and reply-keyboard presses.
 - **When a new chat or bot appears**: save its profile and up to the chosen number of its latest visible messages.
 
-Limits: secret chats never reach TgWitness. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### Chats in scope
 
@@ -4422,7 +4422,7 @@ Sources → **Observation scope** decides which chats a workspace records.
 
 What these modes cannot do:
 
-- **Secret chats** are end-to-end encrypted between two devices and never reach TgWitness, in any mode.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **Nothing is recorded while TgWitness is not running.** After a restart it asks Telegram for missed updates and rechecks chats, but Telegram does not return everything after long outages. Reports and `verify.py` show such periods as gaps (see [coverage](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - Only the first 1,000 dialogs are listed at start (the limit is under **Parameters**); older chats are added when they next become active. The earlier history of an added chat is not fetched — take a history snapshot or a full chat export when you need it.
 - Folder conditions that change all the time (muted, read) are not applied: such chats stay observed.
@@ -4537,6 +4537,58 @@ Each event includes the previous hash and an Ed25519 signature. Exports cover th
 **Verify journal** checks the event chain and signatures through the displayed boundary. Its result is cleared when the workspace changes, and the panel identifies new records added after the check. ZIP export also verifies collected media.
 
 Retain fingerprints and checkpoints independently. See the [verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) for acquisition checks in each mode, and [daily operations](https://phishdestroy.github.io/TgWitness/docs/reference/operations/) for routine collection.
+
+
+---
+
+# Secret Chats: implementation and demo
+
+Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/
+
+Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.
+
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+
+**Status checked on 6 November 2026:** a separate Secret Chat implementation exists in development. It has not been merged into published `main` at `3d23e52b647b`. The ordinary collector and Takeout export do not collect Secret Chats. The interactive website scenario demonstrates the interface with fictional data; it does not enable Telegram communication.
+
+## Where the implementation lives
+
+Commit `0e60f88e` added **Sources → Pseudo-secret** in the local development branch `fix/panel-routes-sessions`. The checked snapshot is `bb8788fb685c`. Its implementation includes `tgwitness/secret_chats.py`, application routes, `tgwitness/static/views/secret-chats.js` and dedicated tests.
+
+The optional `secret-chats` extra in that branch uses [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), pinned to `d87bf037b90060383c7b704d8a06ebb98c621c6f`. The library implements Telegram's end-to-end chat protocol on the account's existing Telethon authorization. Installing that library alone does not add the missing integration to `main`.
+
+## What the development interface does
+
+| Action | Recorded behavior |
+| --- | --- |
+| Start a chat by username or user ID | Send a request; the other participant must accept it. |
+| Accept an incoming request | TgWitness becomes the receiving endpoint for that chat. Automatic acceptance is a separate setting, off by default. |
+| Send or receive a message | Add an outgoing or incoming `secret_chat.message` record and show it in the thread. |
+| Receive an attachment | Decrypt it, store its bytes by SHA-256 and record `secret_chat.file`. |
+| Receive a timer or deletion notice | Record the notice and retain previously captured content. |
+| Review the conversation | Show messages, files, notices and the key visualization. The open tab refreshes every four seconds. |
+
+In a development build containing the integration, the operator enables the module for the selected account and connects it. Starting, accepting and sending require permission to interact and the account's read-only protection to be off. The other participant must accept a new outgoing chat. These controls are not present in the published application at the revision above.
+
+Only chats created or accepted by this TgWitness session are covered. Existing Secret Chats on a phone remain on that device. A session import does not supply their separate encryption keys. Secret-chat key material and counters are stored in the workspace vault; preserved messages and decrypted files follow the normal workspace storage protections.
+
+## Website demonstration
+
+The website's **Try Secret Chat** scenario opens a fictional conversation. It lets the reader start a request, simulate its acceptance, send a sample message, receive a scripted reply and file, and inspect a timer and deletion notice. An incoming request can also be accepted. The controls label simulated peer actions explicitly.
+
+This scenario runs in browser memory. Reset or reload clears it. It does not log in, contact Telegram, create real encryption keys or alter the signed sample downloads. Its displayed messages are not signed evidence. The scenario demonstrates intended interaction; it does not certify that the development implementation is ready.
+
+## Checks and outstanding defects
+
+The five existing tests cover encrypted key persistence, lifecycle and message records, incoming acceptance policy, read-only sending and attachment export. They passed against the pinned library during the 6 November review. Three additional synthetic checks reproduced defects in the same snapshot:
+
+| Finding | Consequence |
+| --- | --- |
+| Closing bypasses `read_only` | The close path can perform a remote action when interactions should be blocked. |
+| Duplicate detection searches only 500 recent records | An older replay can create a duplicate after restart. |
+| A failed attachment download removes its pending entry | A transient failure loses the retry job. |
+
+These are open defects, also recorded in the [published audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md). Five passing tests do not cover these failures. The review used synthetic workspaces and mocked Telegram operations; it did not repeat a live handshake or qualify production deployment.
 
 
 ---
@@ -7421,6 +7473,7 @@ Every change by version, including the changes not yet released.
 
 ## Unreleased
 
+- Add an English Secret Chat demo with fictional requests, replies, attachments and retained deletion notices. Document the separate development implementation and its open defects; the demo does not enable Telegram connections.
 - Remove the unused one-shot exporter and check recovery against the current exporter. Reject unexpected or repeated message IDs in recheck responses.
 - Combine concurrent exports with resumable Standard API and Takeout acquisition. Each job retains its own progress, timings and signed checkpoints; accounts remain reserved until that job stops. Include the account controls, batch import and report-verification updates in the same build.
 - Add offline `VERIFY.cmd` / `VERIFY.sh` launchers, plain-language verification explanations and saved UTF-8 transcripts to signed exports in all 25 panel languages. Build a separate Windows verifier with an embedded runtime and a language menu. Unpinned signers remain unconfirmed; successful integrity verification does not establish admissibility.

@@ -62,7 +62,7 @@ Manbalar → **Kuzatuv doirasi** ish maydonchasi qaysi suhbatlarni yozib olishin
 
 Ushbu rejimlar qila olmaydigan narsalar:
 
-- **Maxfiy suhbatlar** ikki qurilma o'rtasida oxirigacha shifrlanadi va hech qachon TgWitnessga yetib bormaydi, hech qanday rejimda.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/uz/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **TgWitness ishlamayotgan paytda hech narsa qayd etilmaydi.** Qayta ishga tushirilgandan so'ng u Telegramdan o'tkazib yuborilgan yangilanishlarni so'raydi va suhbatlarni qayta tekshiradi, lekin Telegram uzoq uzilishlardan keyin hamma narsani qaytarib bermaydi. Hisobotlar va `verify.py` bunday davrlarni bo'shliqlar sifatida ko'rsatadi ([qamrovga](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids) qarang).
 - Boshlanishda faqat birinchi 1 000 dialog ro'yxatga olinadi (chegara **Parametrlarda** belgilangan); eski suhbatlar keyingi faollashuvida qo'shiladi. Qo'shilgan suhbatning avvalgi tarixi olinmaydi — kerak bo'lganda tarixni snapshot qilib oling yoki butun suhbatni eksport qiling.
 - Doimiy ravishda o'zgarib turadigan papka holatlari (jim, o'qilgan) qo'llanilmaydi: bunday suhbatlar kuzatuvda qoladi.

@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 کارهایی که این حالت‌ها نمی‌توانند انجام دهند:
 
-- **گفت‌وگوهای مخفی** بین دو دستگاه به‌صورت انتها به انتها رمزگذاری می‌شوند و هرگز به TgWitness، در هیچ حالتی، نمی‌رسند.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/fa/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **هیچ چیزی ضبط نمی‌شود در حالی که TgWitness در حال اجرا نیست.** پس از راه‌اندازی مجدد، از تلگرام درخواست به‌روزرسانی‌های از دست رفته می‌کند و چت‌ها را مجدداً بررسی می‌کند، اما تلگرام پس از قطعی‌های طولانی همه چیز را بازنمی‌گرداند. گزارش‌ها و `verify.py` چنین دوره‌هایی را به صورت شکاف نشان می‌دهند (به [پوشش](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids) مراجعه کنید).
 - فقط ۱۰۰۰ گفتگوی اول در شروع فهرست می‌شوند (محدودیت در بخش **پارامترها** تعریف شده است)؛ چت‌های قدیمی‌تر وقتی دوباره فعال شوند اضافه می‌شوند. تاریخچه قبلی یک چت اضافه شده بازیابی نمی‌شود — در صورت نیاز از اسنپ‌شات تاریخچه یا خروجی کامل چت استفاده کنید.
 - شرایط پوشه که مدام تغییر می‌کنند (بی‌صدا، خوانده شده) اعمال نمی‌شوند: چنین گفتگوهایی همچنان زیر نظر باقی می‌مانند.

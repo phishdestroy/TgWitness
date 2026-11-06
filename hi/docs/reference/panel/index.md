@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **स्रोत प्रकार** फ़ोल्डर और पूरे-खाते मोड को चैनलों, समूहों, निजी चैट्स और बॉट्स तक सीमित करते हैं। **अपने क्रियाकलाप** खाते के अपने संदेश, संपादन और रिप्लाई-कीबोर्ड प्रेस जोड़ता है।
 - **जब कोई नई चैट या बॉट दिखाई देती है**: उसका प्रोफ़ाइल और चुने गए संख्या तक के उसके नवीनतम दृश्यमान संदेशों को सहेजें।
 
-सीमाएँ: गुप्त चैट कभी भी TgWitness तक नहीं पहुँचतीं। जब TgWitness चल नहीं रहा होता है तो कुछ भी रिकॉर्ड नहीं होता है; रीस्टार्ट के बाद यह केवल वही जानकारी कैप्चर करता है जो टेलीग्राम अभी भी लौटाता है, और रिपोर्ट में इस अंतर को दिखाया जाता है। चैट सूची सीमा (पैरामीटर्स में बदले जाने तक 1,000 डायलॉग) से परे की चैट अगली बार सक्रिय होने पर जोड़ी जाती हैं। किसी दूसरे ऐप में दबाए गए इनलाइन बॉट बटन अदृश्य होते हैं; बॉट का जवाब रिकॉर्ड किया जाता है।
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/hi/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### दायरे में चैट्स
 

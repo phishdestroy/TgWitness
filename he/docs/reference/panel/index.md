@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **סוגי המקורות** מגבילים את מצבי התיקייה והחשבון כולו לערוצים, קבוצות, צ'אטים פרטיים ובוטים. "**פעולות משלך**" מוסיף את ההודעות, העריכות והקשות המקלדת בתגובה של החשבון עצמו.
 - **כאשר מופיע צ'אט או בוט חדש**: שמור את הפרופיל שלו ואת מספר ההודעות האחרון הנראות שלו, עד למספר שנבחר .
 
-מגבלות: צ'אטים סודיים לעולם אינם מגיעים ל-TgWitness. לא מתבצע תיעוד כלשהו כאשר TgWitness אינו פועל; לאחר הפעלה מחדש הוא מתעד רק את מה ש-Telegram עדיין מחזיר, וה דוח מציג את הפער. צ'אטים החורגים ממגבלת רשימת הצ'אטים (1,000 שיחות, אלא אם שונו ב פרמטרים) מתווספים ברגע שהם הופכים לפעילים. לחצני בוט מוטמעים שנלחצו ב אפליקציה אחרת אינם נראים; תשובת הבוט מתועדת.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/he/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### צ'אטים הנכללים בהיקף
 

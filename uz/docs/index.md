@@ -40,7 +40,7 @@ Sozlash
 
 Yig'ish
 
-[Panel bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/)[Yig'ish qanday ishlaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/)[Manba tarixini yuklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/)[Ish jarayonlari va operatsiyalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/)[Tergov rejimi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)[Imkoniyatlar va cheklovlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
+[Panel bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/)[Yig'ish qanday ishlaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/uz/docs/reference/secret-chats/)[Manba tarixini yuklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/)[Ish jarayonlari va operatsiyalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/)[Tergov rejimi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)[Imkoniyatlar va cheklovlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
 
 Arxiv va integratsiyalar
 

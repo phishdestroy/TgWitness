@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **انواع منبع** حالت‌های پوشه و کل حساب را به کانال‌ها، گروه‌ها، چت‌های خصوصی و ربات‌ها محدود می‌کنند. **«اقدامات خود** حساب» پیام‌ها، ویرایش‌ها و فشارهای صفحه‌کلید پاسخ‌دادنِ خودِ حساب را اضافه می‌کند.
 - **وقتی یک چت یا ربات جدید ظاهر می‌شود**: پروفایل آن و تا تعداد انتخاب‌شده از جدیدترین پیام‌های قابل مشاهده‌اش را ذخیره کنید.
 
-محدودیت‌ها: چت‌های مخفی هرگز به TgWitness نمی‌رسند. هیچ چیزی زمانی که TgWitness در حال اجرا نیست، ثبت نمی‌شود؛ پس از راه‌اندازی مجدد، فقط مواردی را که تلگرام هنوز بازمی‌گرداند، جبران می‌کند و گزارش، این شکاف را نشان می‌دهد. چت‌هایی که از حد مجاز لیست چت (۱۰۰۰ دیالوگ مگر اینکه در پارامترها تغییر داده شود) فراتر هستند، در اولین باری که دوباره فعال شوند، اضافه می‌شوند. دکمه‌های بات درون‌خطی که در اپلیکیشن دیگری فشرده می‌شوند، نامرئی هستند؛ پاسخ بات ثبت می‌شود.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/fa/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### چت‌های در محدوده
 

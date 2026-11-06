@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/
 
 एकत्र करें
 
-[पैनल मार्गदर्शिका](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/)[संग्रह कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/)[स्रोत इतिहास लोड करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/history/)[कार्यप्रवाह और संचालन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/)[जांच मोड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)[विशेषताएँ और सीमाएँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/)
+[पैनल मार्गदर्शिका](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/)[संग्रह कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/hi/docs/reference/secret-chats/)[स्रोत इतिहास लोड करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/history/)[कार्यप्रवाह और संचालन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/)[जांच मोड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)[विशेषताएँ और सीमाएँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/)
 
 संग्रह और एकीकरण
 

@@ -62,7 +62,7 @@ Sources → **Le périmètre d’observation** détermine les discussions qu’u
 
 Ce que ces modes ne permettent pas de faire :
 
-- **Les discussions secrètes** sont chiffrées de bout en bout entre deux appareils et ne parviennent jamais à TgWitness, quel que soit le mode utilisé.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **Aucun enregistrement n’est effectué lorsque TgWitness n’est pas en cours d’exécution.** Après un redémarrage, il interroge Telegram pour récupérer les mises à jour manquées et vérifie à nouveau les discussions, mais Telegram ne restitue pas l’intégralité des données après de longues pannes. Les rapports et le fichier `verify.py` indiquent ces périodes sous forme de lacunes (voir [la section « Couverture »](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - Seules les 1 000 premières conversations sont répertoriées au démarrage (la limite est définie dans **les paramètres**) ; les conversations plus anciennes sont ajoutées dès qu’elles redeviennent actives. L’historique antérieur d’une conversation ajoutée n’est pas récupéré — effectuez un instantané de l’historique ou une exportation complète de la conversation lorsque vous en avez besoin.
 - Les conditions relatives aux dossiers qui changent constamment (silencieux, lu) ne sont pas prises en compte : ces discussions restent sous surveillance.

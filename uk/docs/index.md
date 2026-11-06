@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/
 
 Зібрати
 
-[Посібник з панелей](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/)[Як відбувається збір даних](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/)[Завантажити історію джерел](https://phishdestroy.github.io/TgWitness/uk/docs/reference/history/)[Робочі процеси та операції](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/)[Режим розслідування](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/)[Можливості та обмеження](https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/)
+[Посібник з панелей](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/)[Як відбувається збір даних](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/uk/docs/reference/secret-chats/)[Завантажити історію джерел](https://phishdestroy.github.io/TgWitness/uk/docs/reference/history/)[Робочі процеси та операції](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/)[Режим розслідування](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/)[Можливості та обмеження](https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/)
 
 Архів та інтеграції
 

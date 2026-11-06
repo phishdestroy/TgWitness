@@ -62,7 +62,7 @@ Autoryzacja, dostęp do źródła, działający moduł zbierający dane oraz pe�
 
 Czego te tryby nie potrafią:
 
-- **Prywatne czaty** są szyfrowane od końca do końca między dwoma urządzeniami i nigdy nie trafiają do TgWitness, niezależnie od trybu działania.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/pl/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **Nic nie jest rejestrowane, gdy aplikacja TgWitness nie jest uruchomiona.** Po ponownym uruchomieniu aplikacja zwraca się do serwisu Telegram z prośbą o brakujące aktualizacje i ponownie sprawdza czaty, jednak serwis Telegram nie zwraca wszystkich danych po długich przerwach w działaniu. Raporty oraz plik `verify.py` przedstawiają takie okresy jako luki (patrz: [zakres pokrycia](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - Początkowo wyświetlanych jest tylko pierwszych 1000 dialogów (limit określono w **sekcji „Parametry”**); starsze czaty są dodawane, gdy ponownie staną się aktywne. Wcześniejsza historia dodanego czatu nie jest pobierana — w razie potrzeby należy wykonać migawkę historii lub pełny eksport czatu.
 - Warunki dotyczące folderów, które ulegają ciągłym zmianom (wyciszone, przeczytane), nie mają zastosowania: takie czaty pozostają pod obserwacją.

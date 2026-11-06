@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **소스 유형은** 폴더 및 전체 계정 모드를 채널, 그룹, 비공개 채팅 및 봇으로 제한합니다. **‘자신의 활동’은** 계정의 메시지, 편집 내역 및 답장 키 입력 내역을 추가합니다.
 - **새로운 채팅이나 봇이 나타나면**: 해당 프로필과 선택한 개수만큼의 가장 최근에 표시된 메시지를 저장합니다.
 
-제한 사항: 비밀 채팅은 TgWitness에 절대 기록되지 않습니다. TgWitness가 실행 중이지 않을 때는 아무것도 기록되지 않으며, 재시작 후에는 텔레그램이 여전히 반환하는 내용만 추적되므로 보고서에 기록 누락 부분이 표시됩니다. 채팅 목록 제한(매개변수에서 변경하지 않는 한 1,000개 대화)을 초과한 채팅은 다음에 활성화될 때 추가됩니다. 다른 앱에서 누른 인라인 봇 버튼은 표시되지 않지만, 봇의 응답은 기록됩니다.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/ko/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### 적용 대상 채팅
 

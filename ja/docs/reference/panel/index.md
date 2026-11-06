@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **ソースタイプにより、**フォルダモードおよびアカウント全体モードの対象は、チャンネル、グループ、プライベート チャット、ボットに限定されます。「**自身のアクション」では**、そのアカウント自身のメッセージ、編集、 返信時のキーボード入力などが追加されます。
 - **新しいチャットやボットが表示されたら**、そのプロファイルと、指定した数までの 最新の表示可能なメッセージを保存します。
 
-制限事項：シークレットチャットはTgWitnessには一切記録されません。TgWitnessが 実行されていない間は何も記録されません。再起動後は、Telegramがまだ返しているデータのみを 追跡し、レポートにはその間の空白期間が表示されます。チャットリストの上限（[Parameters]で変更されていない限り 1,000件のダイアログ）を超えるチャットは、次にアクティブになった時点で追加されます。別のアプリ内で 押されたインラインボットボタンは表示されませんが、ボットの返信は記録されます。
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/ja/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### 対象となるチャット
 

@@ -92,7 +92,7 @@ Quali conversazioni vengono registrate in questo spazio di lavoro e quali dati v
 - **I tipi di origine** limitano le modalità «cartella» e «intero account» a canali, gruppi, chat private e bot. **«Azioni proprie»** aggiunge i messaggi, le modifiche e le pressioni sulla tastiera di risposta dell’account stesso.
 - **Quando compare una nuova chat o un nuovo bot**: salva il suo profilo e fino al numero scelto dei suoi ultimi messaggi visibili.
 
-Limiti: le chat segrete non vengono mai acquisite TgWitness. Non viene registrato nulla mentre TgWitness non è in esecuzione; dopo un riavvio, il programma recupera solo ciò che Telegram restituisce ancora e il rapporto mostra il divario. Le chat che superano il limite dell’elenco delle chat (1.000 conversazioni, salvo modifiche nei Parametri) vengono aggiunte non appena diventano attive. I pulsanti del bot integrati premuti in un’altra app non vengono rilevati; la risposta del bot viene registrata.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/it/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### Chat incluse
 

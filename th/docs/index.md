@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/
 
 Collect
 
-[คู่มือแผงควบคุม](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/)[วิธีการเก็บรวบรวมข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/)[โหลดประวัติแหล่งที่มา](https://phishdestroy.github.io/TgWitness/th/docs/reference/history/)[ขั้นตอนการทำงานและการดำเนินการ](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/)[โหมดการสืบสวน](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)[คุณสมบัติและข้อจำกัด](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
+[คู่มือแผงควบคุม](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/)[วิธีการเก็บรวบรวมข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/th/docs/reference/secret-chats/)[โหลดประวัติแหล่งที่มา](https://phishdestroy.github.io/TgWitness/th/docs/reference/history/)[ขั้นตอนการทำงานและการดำเนินการ](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/)[โหมดการสืบสวน](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)[คุณสมบัติและข้อจำกัด](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
 
 การเก็บรักษาข้อมูลและการบูรณาการ
 

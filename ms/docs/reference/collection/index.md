@@ -62,7 +62,7 @@ Sumber → **Skop pemerhatian** menentukan sembang mana yang direkodkan oleh rua
 
 Apa yang mod-mod ini tidak dapat lakukan:
 
-- **Perbualan rahsia** disulitkan hujung ke hujung antara dua peranti dan tidak pernah sampai ke TgWitness, dalam apa jua mod.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/ms/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **Tiada apa yang dirakam selagi TgWitness tidak berjalan.** Selepas dihidupkan semula, ia meminta kemas kini yang terlepas daripada Telegram dan menyemak semula sembang, tetapi Telegram tidak memulangkan semuanya selepas gangguan panjang. Laporan dan `verify.py` menunjukkan tempoh sedemikian sebagai jurang (lihat [liputan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - Hanya 1,000 dialog pertama disenaraikan pada permulaan (hadnya berada di bawah **Parameter**); sembang yang lebih lama akan ditambah apabila ia menjadi aktif semula. Sejarah awal sembang yang ditambah tidak dimuat — ambil tangkapan sejarah atau eksport sembang penuh apabila diperlukan.
 - Kondisi folder yang berubah-ubah (dibisukan, dibaca) tidak diterapkan: sembang seperti ini tetap dipantau.

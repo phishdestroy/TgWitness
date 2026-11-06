@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 מה שהמצבים הללו אינם יכולים לעשות:
 
-- **צ'אטים סודיים** מוצפנים מקצה לקצה בין שני מכשירים ואינם מגיעים לעולם ל-TgWitness, בשום מצב.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/he/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **אין תיעוד כלשהו כאשר TgWitness אינו פועל.** לאחר הפעלה מחדש, התוכנה מבקשת מ-Telegram עדכונים שהוחמצו ובודקת מחדש את הצ'אטים, אך Telegram אינה מחזירה את כל הנתונים לאחר הפסקות ארוכות. הדוחות ו-`verify.py` מציגים תקופות כאלה כפערים (ראו [כיסוי](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - בתחילה מופיעים רק 1,000 השיחות הראשונות (ההגבלה מפורטת תחת **"פרמטרים"**); שיחות ישנות יותר מתווספות ברגע שהן הופכות לפעילות שוב. ההיסטוריה המוקדמת יותר של שיחה שנוספה אינה נטענת — צרו תמונת מצב של ההיסטוריה או ייצאו את השיחה במלואה כשתזדקקו לכך.
 - תנאי תיקיות המשתנים כל הזמן (מושתק, נקרא) אינם חלים: צ'אטים כאלה נשארים תחת מעקב.

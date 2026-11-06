@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **Типи джерел** обмежують режими «папка» та «весь обліковий запис» каналами, групами, приватними чатами та ботами. **«Власні дії»** додають власні повідомлення облікового запису, редагування та натискання клавіш під час відповіді.
 - **Коли з’являється новий чат або бот**: збережіть його профіль та до обраної кількості його останніх видимих повідомлень.
 
-Обмеження: секретні чати ніколи не потрапляють до TgWitness. Нічого не записується, поки TgWitness не працює; після перезапуску він відстежує лише те, що Telegram ще повертає, і у звіті відображається пропуск. Чати, що перевищують обмеження списку чатів (1 000 діалогів, якщо не змінено в параметрах), додаються, коли вони знову стають активними. Кнопки бота, натиснуті в іншому додатку, невидимі; відповідь бота записується.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/uk/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### Чати, що входять до сфери застосування
 

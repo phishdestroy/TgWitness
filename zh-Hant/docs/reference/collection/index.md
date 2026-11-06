@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 這些模式無法做到的事：
 
-- **秘密聊天**在兩台裝置之間採用端對端加密，無論在何種模式下， 皆不會傳送至 TgWitness。
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **當 TgWitness 未運行時，將不會進行任何記錄。**重新啟動後，它會向 Telegram 查詢遺漏的更新並重新檢查聊天記錄，但若發生長時間 中斷，Telegram 並不會回傳所有資料。報告及 `verify.py` 會將此類期間標示為資料缺口（參見[覆蓋範圍](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)）。
 - 初始僅列出前 1,000 則對話（上限設定於**「參數」**中）；較舊的 對話將於下次變得活躍時被加入。已加入對話的早期歷史紀錄不會被擷取——如有需要，請自行 擷取歷史快照或匯出完整對話紀錄。
 - 不會套用那些隨時變動的資料夾條件（如靜音、已讀）：此類聊天室 仍會持續被監控。

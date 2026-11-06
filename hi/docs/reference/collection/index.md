@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 ये मोड क्या नहीं कर सकते:
 
-- गुप्त चैट दो उपकरणों के बीच एंड-टू-एंड एन्क्रिप्टेड होती हैं और किसी भी मोड में कभी भी TgWitness तक नहीं पहुँचतीं।
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/hi/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **जब TgWitness चल नहीं रहा होता है, तब कुछ भी रिकॉर्ड नहीं होता है।** पुनरारंभ के बाद यह Telegram से छूटे हुए अपडेट्स के लिए पूछता है और चैट्स को फिर से जांचता है, लेकिन लंबे समय तक सेवा बाधित रहने के बाद Telegram सब कुछ वापस नहीं करता है। रिपोर्ट्स और `verify.py` ऐसे अवधियों को अंतराल के रूप में दिखाते हैं (देखें [कवरेज](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids))।
 - केवल पहले 1,000 डायलॉग्स प्रारंभ में सूचीबद्ध होते हैं (सीमा **पैरामीटर** में है); पुराने चैट अगले बार सक्रिय होने पर जोड़े जाते हैं। जोड़े गए चैट का पिछला इतिहास प्राप्त नहीं किया जाता — जब आपको इसकी आवश्यकता हो तो इतिहास का स्नैपशॉट या पूरा चैट एक्सपोर्ट लें।
 - ऐसे फ़ोल्डर की स्थितियाँ जो लगातार बदलती रहती हैं (म्यूट, पढ़ा गया) लागू नहीं होतीं: ऐसी चैटें निगरानी में रहती हैं।

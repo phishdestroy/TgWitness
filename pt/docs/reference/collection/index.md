@@ -62,7 +62,7 @@ Fontes → **O escopo de observação** determina quais conversas um espaço de 
 
 O que esses modos não podem fazer:
 
-- **As conversas secretas** são criptografadas de ponta a ponta entre dois dispositivos e nunca chegam ao TgWitness, em nenhum modo.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/pt/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **Nada é registrado enquanto o TgWitness não estiver em execução.** Após uma reinicialização, ele solicita ao Telegram as atualizações perdidas e verifica novamente as conversas, mas o Telegram não retorna todas as informações após longas interrupções de serviço. Os relatórios e o `verify.py` mostram esses períodos como lacunas (consulte [a cobertura](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - Apenas as primeiras 1.000 conversas são listadas inicialmente (o limite está definido em **“Parâmetros”**); as conversas mais antigas são adicionadas assim que se tornarem ativas novamente. O histórico anterior de uma conversa adicionada não é recuperado — faça um instantâneo do histórico ou uma exportação completa da conversa quando necessário.
 - Condições de pastas que mudam constantemente (silenciadas, lidas) não são aplicadas: tais conversas continuam sendo monitoradas.

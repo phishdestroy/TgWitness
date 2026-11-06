@@ -92,7 +92,7 @@ Welche Unterhaltungen dieser Arbeitsbereich aufzeichnet und welche Inhalte darau
 - **Quellentypen** beschränken den Ordner- und den Gesamtkonto-Modus auf Kanäle, Gruppen, private Chats und Bots. **„Eigene Aktionen“** fügt die eigenen Nachrichten, Bearbeitungen und Tastenanschläge bei Antworten des Kontos hinzu.
 - **Wenn ein neuer Chat oder Bot erscheint**: Speichere dessen Profil und bis zu der gewählten Anzahl seiner zuletzt sichtbaren Nachrichten.
 
-Einschränkungen: Geheime Chats werden niemals an TgWitness übermittelt. Es wird nichts aufgezeichnet, solange TgWitness nicht läuft; nach einem Neustart holt es nur das nach, was Telegram noch zurückgibt, und der Bericht zeigt die Lücke an. Chats, die über das Limit der Chat-Liste hinausgehen (1.000 Dialoge, sofern nicht in den Parametern geändert), werden hinzugefügt, sobald sie das nächste Mal aktiv werden. Inline-Bot-Schaltflächen, die in einer anderen App gedrückt werden, sind unsichtbar; die Antwort des Bots wird jedoch aufgezeichnet.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/de/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### Betroffene Chats
 

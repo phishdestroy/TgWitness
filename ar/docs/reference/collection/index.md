@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 ما لا تستطيع هذه الأوضاع فعله:
 
-- يتم تشفير **المحادثات السرية** من طرف إلى طرف بين جهازين ولا تصل أبدًا إلى TgWitness، بأي شكل من الأشكال.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/ar/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **لا يتم تسجيل أي شيء أثناء توقف TgWitness عن العمل.** بعد إعادة التشغيل، تطلب الأداة من Telegram التحديثات الفائتة وتعيد فحص المحادثات، لكن Telegram لا تعيد جميع البيانات بعد فترات انقطاع طويلة. تظهر التقارير و`verify.py` هذه الفترات على أنها فجوات (انظر [التغطية](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - يتم سرد أول 1,000 محادثة فقط في البداية (الحد الأقصى موجود ضمن **«المعلمات»**); أما المحادثات الأقدم فتُضاف عند تفعيلها لاحقًا. لا يتم استرداد السجل السابق للمحادثة المضافة — قم بأخذ لقطة للسجل أو تصدير المحادثة بالكامل عند الحاجة.
 - لا يتم تطبيق حالات المجلدات التي تتغير باستمرار (مكتمة، مقروءة): تظل هذه المحادثات تخضع للمراقبة.

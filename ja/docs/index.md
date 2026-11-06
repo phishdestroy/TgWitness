@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/
 
 収集
 
-[パネルガイド](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/)[収集の仕組み](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/)[ソース履歴を読み込む](https://phishdestroy.github.io/TgWitness/ja/docs/reference/history/)[ワークフローと操作方法](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/)[調査モード](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)[機能と制限事項](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/)
+[パネルガイド](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/)[収集の仕組み](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/ja/docs/reference/secret-chats/)[ソース履歴を読み込む](https://phishdestroy.github.io/TgWitness/ja/docs/reference/history/)[ワークフローと操作方法](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/)[調査モード](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)[機能と制限事項](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/)
 
 アーカイブと連携機能
 

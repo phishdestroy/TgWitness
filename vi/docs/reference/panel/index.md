@@ -92,7 +92,7 @@ Không gian làm việc này ghi lại những cuộc trò chuyện nào và lư
 - **Các loại nguồn** giới hạn chế độ thư mục và chế độ toàn tài khoản cho các kênh, nhóm, cuộc trò chuyện riêng tư và bot. **Các hành động của chính mình** thêm các tin nhắn, thao tác chỉnh sửa và các lần nhấn phím trả lời của chính tài khoản đó.
 - **Khi có cuộc trò chuyện hoặc bot mới xuất hiện**: lưu hồ sơ của nó và tối đa số lượng tin nhắn mới nhất hiển thị đã chọn.
 
-Giới hạn: các cuộc trò chuyện bí mật không bao giờ được ghi lại TgWitness. Không có dữ liệu nào được ghi lại khi TgWitness không đang chạy; sau khi khởi động lại, công cụ chỉ ghi lại những gì Telegram vẫn trả về, và báo cáo sẽ hiển thị khoảng trống đó. Các cuộc trò chuyện vượt quá giới hạn danh sách trò chuyện (1.000 cuộc đối thoại trừ khi được thay đổi trong Tham số) sẽ được thêm vào khi chúng hoạt động trở lại. Các nút bot nhúng được nhấn trong một ứng dụng khác sẽ không hiển thị; phản hồi của bot sẽ được ghi lại.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/vi/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### Các cuộc trò chuyện trong phạm vi
 

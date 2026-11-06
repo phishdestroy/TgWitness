@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Secret Chats: implementation and demo · Reference | TgWitness</title>
+<meta name="description" content="Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Secret Chats: implementation and demo · Reference | TgWitness"><meta property="og:description" content="Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/secret-chats/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/secret-chats/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/secret-chats/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/secret-chats/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/secret-chats/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/secret-chats/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/secret-chats/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/secret-chats/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/secret-chats/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/secret-chats/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/secret-chats/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/secret-chats/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/secret-chats/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/secret-chats/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/secret-chats/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/secret-chats/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/secret-chats/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/secret-chats/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/secret-chats/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/secret-chats/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/secret-chats/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/secret-chats/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/secret-chats/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/secret-chats/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/", "name": "Secret Chats: implementation and demo · Reference | TgWitness", "description": "Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Secret Chats: implementation and demo", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/secret-chats/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/secret-chats/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/secret-chats/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/secret-chats/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/secret-chats/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/secret-chats/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/secret-chats/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/secret-chats/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/secret-chats/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/secret-chats/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/secret-chats/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/secret-chats/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../fr/docs/reference/secret-chats/" hreflang="fr" lang="fr">Français</a><a href="../../../de/docs/reference/secret-chats/" hreflang="de" lang="de">Deutsch</a><a href="../../../it/docs/reference/secret-chats/" hreflang="it" lang="it">Italiano</a><a href="../../../uz/docs/reference/secret-chats/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../ko/docs/reference/secret-chats/" hreflang="ko" lang="ko">한국어</a><a href="../../../zh-Hant/docs/reference/secret-chats/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../ms/docs/reference/secret-chats/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../pl/docs/reference/secret-chats/" hreflang="pl" lang="pl">Polski</a><a href="../../../ja/docs/reference/secret-chats/" hreflang="ja" lang="ja">日本語</a><a href="../../../th/docs/reference/secret-chats/" hreflang="th" lang="th">ไทย</a><a href="../../../he/docs/reference/secret-chats/" hreflang="he" lang="he">עברית</a><a href="../../../bn/docs/reference/secret-chats/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../dedicated-account/">Dedicated account</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><a href="../../capture/">GitHub Actions capture</a><p class="nav-label">Investigation & reporting</p><a href="../../cases/">Investigate across all chats</a><a href="../../case-board/">Build a Case Board</a><a href="../../reports/">Design a report</a><a href="../../handover/">Prepare a sharing copy</a><a href="../../groups/">Manage a group of accounts</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a lang="en" dir="ltr" href="../../export-clinic/">Export Clinic</a><a lang="en" dir="ltr" href="../../validation/">Export performance</a><a href="../../security/">Keep it secure</a><a href="../../witness/">Set up a witness bot</a><p class="nav-label">Go further</p><a href="../../archive/">Work the archive</a><a href="../../access/">Share a case</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../installation/">Install, verify and update</a><a href="../settings/">First setup and settings</a><a href="../accounts/">Accounts and session formats</a><a href="../access/">Access and permissions</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a><a href="../high-assurance/">High-assurance deployment</a></details><details class="wiki-group" open><summary>Collect</summary><a href="../panel/">Panel guide</a><a href="../collection/">How collection works</a><a href="./" aria-current="page">Secret Chats: implementation and demo</a><a href="../history/">Load source history</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Archive & integrations</summary><a href="../case-board/">Case Board reference</a><a href="../analysis/">Archive analysis</a><a href="../search/">Full-text search</a><a href="../mcp/">Read-only MCP</a><a href="../cli/">Command line</a><a href="../media-analysis/">Local OCR and transcription</a><a href="../webhooks/">Outgoing webhooks</a><a href="../showcase/">Public showcase</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../case-reports/">Report configuration and verification</a><a href="../account-export/">Account export</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a><a href="../storage/">Storage and recovery</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.9.1<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Secret Chats: implementation and demo</span></nav>
+<p class="verification-shortcut"><a href="../verification/">What has been tested →</a></p>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Collect</p><h1>Secret Chats: implementation and demo</h1><p class="guide-outcome">Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/README.md">TgWitness</a> / <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Documentation</a></p>
+<p><strong>Status checked on 6 November 2026:</strong> a separate Secret Chat implementation exists
+in development. It has not been merged into published <code>main</code> at <code>3d23e52b647b</code>.
+The ordinary collector and Takeout export do not collect Secret Chats. The
+interactive website scenario demonstrates the interface with fictional data;
+it does not enable Telegram communication.</p>
+<h2 id="where-the-implementation-lives">Where the implementation lives<a class="anchor" href="#where-the-implementation-lives" aria-label="Link to this section">#</a></h2>
+<p>Commit <code>0e60f88e</code> added <strong>Sources → Pseudo-secret</strong> in the local development branch
+<code>fix/panel-routes-sessions</code>. The checked snapshot is <code>bb8788fb685c</code>.
+Its implementation includes <code>tgwitness/secret_chats.py</code>, application routes,
+<code>tgwitness/static/views/secret-chats.js</code> and dedicated tests.</p>
+<p>The optional <code>secret-chats</code> extra in that branch uses
+<a href="https://github.com/KiaroSama/Telethon-Secret-Chat">KiaroSama/Telethon-Secret-Chat</a>,
+pinned to <code>d87bf037b90060383c7b704d8a06ebb98c621c6f</code>. The library implements
+Telegram's end-to-end chat protocol on the account's existing Telethon authorization.
+Installing that library alone does not add the missing integration to <code>main</code>.</p>
+<h2 id="what-the-development-interface-does">What the development interface does<a class="anchor" href="#what-the-development-interface-does" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Recorded behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start a chat by username or user ID</td>
+<td>Send a request; the other participant must accept it.</td>
+</tr>
+<tr>
+<td>Accept an incoming request</td>
+<td>TgWitness becomes the receiving endpoint for that chat. Automatic acceptance is a separate setting, off by default.</td>
+</tr>
+<tr>
+<td>Send or receive a message</td>
+<td>Add an outgoing or incoming <code>secret_chat.message</code> record and show it in the thread.</td>
+</tr>
+<tr>
+<td>Receive an attachment</td>
+<td>Decrypt it, store its bytes by SHA-256 and record <code>secret_chat.file</code>.</td>
+</tr>
+<tr>
+<td>Receive a timer or deletion notice</td>
+<td>Record the notice and retain previously captured content.</td>
+</tr>
+<tr>
+<td>Review the conversation</td>
+<td>Show messages, files, notices and the key visualization. The open tab refreshes every four seconds.</td>
+</tr>
+</tbody>
+</table></div>
+<p>In a development build containing the integration, the operator enables the module
+for the selected account and connects it. Starting, accepting and sending require
+permission to interact and the account's read-only protection to be off. The other
+participant must accept a new outgoing chat. These controls are not present in the
+published application at the revision above.</p>
+<p>Only chats created or accepted by this TgWitness session are covered. Existing
+Secret Chats on a phone remain on that device. A session import does not supply
+their separate encryption keys. Secret-chat key material and counters are stored
+in the workspace vault; preserved messages and decrypted files follow the normal
+workspace storage protections.</p>
+<h2 id="website-demonstration">Website demonstration<a class="anchor" href="#website-demonstration" aria-label="Link to this section">#</a></h2>
+<p>The website's <strong>Try Secret Chat</strong> scenario opens a fictional conversation. It lets
+the reader start a request, simulate its acceptance, send a sample message, receive
+a scripted reply and file, and inspect a timer and deletion notice. An incoming
+request can also be accepted. The controls label simulated peer actions explicitly.</p>
+<p>This scenario runs in browser memory. Reset or reload clears it. It does not log in,
+contact Telegram, create real encryption keys or alter the signed sample downloads.
+Its displayed messages are not signed evidence. The scenario demonstrates intended
+interaction; it does not certify that the development implementation is ready.</p>
+<h2 id="checks-and-outstanding-defects">Checks and outstanding defects<a class="anchor" href="#checks-and-outstanding-defects" aria-label="Link to this section">#</a></h2>
+<p>The five existing tests cover encrypted key persistence, lifecycle and message
+records, incoming acceptance policy, read-only sending and attachment export.
+They passed against the pinned library during the 6 November review. Three
+additional synthetic checks reproduced defects in the same snapshot:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Closing bypasses <code>read_only</code></td>
+<td>The close path can perform a remote action when interactions should be blocked.</td>
+</tr>
+<tr>
+<td>Duplicate detection searches only 500 recent records</td>
+<td>An older replay can create a duplicate after restart.</td>
+</tr>
+<tr>
+<td>A failed attachment download removes its pending entry</td>
+<td>A transient failure loses the retry job.</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are open defects, also recorded in the
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md">published audit</a>. Five passing tests do not
+cover these failures. The review used synthetic workspaces and mocked Telegram
+operations; it did not repeat a live handshake or qualify production deployment.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/PSEUDO-SECRET.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../history/"><span>Next step</span><strong>Load source history →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#where-the-implementation-lives">Where the implementation lives</a><a href="#what-the-development-interface-does">What the development interface does</a><a href="#website-demonstration">Website demonstration</a><a href="#checks-and-outstanding-defects">Checks and outstanding defects</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

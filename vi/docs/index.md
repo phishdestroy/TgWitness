@@ -40,7 +40,7 @@ Thiết lập
 
 Thu thập
 
-[Hướng dẫn sử dụng bảng điều khiển](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/)[Cách thức thu thập dữ liệu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/)[Tải lịch sử nguồn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/history/)[Quy trình làm việc và hoạt động](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/)[Chế độ điều tra](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/)[Các tính năng và giới hạn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/)
+[Hướng dẫn sử dụng bảng điều khiển](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/)[Cách thức thu thập dữ liệu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/vi/docs/reference/secret-chats/)[Tải lịch sử nguồn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/history/)[Quy trình làm việc và hoạt động](https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/)[Chế độ điều tra](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/)[Các tính năng và giới hạn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/)
 
 Lưu trữ & tích hợp
 

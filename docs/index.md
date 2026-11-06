@@ -40,7 +40,7 @@ Set up
 
 Collect
 
-[Panel guide](https://phishdestroy.github.io/TgWitness/docs/reference/panel/)[How collection works](https://phishdestroy.github.io/TgWitness/docs/reference/collection/)[Load source history](https://phishdestroy.github.io/TgWitness/docs/reference/history/)[Workflows and operations](https://phishdestroy.github.io/TgWitness/docs/reference/operations/)[Investigation mode](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/)[Features and limits](https://phishdestroy.github.io/TgWitness/docs/reference/features/)
+[Panel guide](https://phishdestroy.github.io/TgWitness/docs/reference/panel/)[How collection works](https://phishdestroy.github.io/TgWitness/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/)[Load source history](https://phishdestroy.github.io/TgWitness/docs/reference/history/)[Workflows and operations](https://phishdestroy.github.io/TgWitness/docs/reference/operations/)[Investigation mode](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/)[Features and limits](https://phishdestroy.github.io/TgWitness/docs/reference/features/)
 
 Archive & integrations
 

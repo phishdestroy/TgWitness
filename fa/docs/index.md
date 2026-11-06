@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/
 
 جمع‌آوری
 
-[راهنمای پنل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/)[نحوهٔ کارکرد جمع‌آوری](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/)[بارگذاری تاریخچه منبع](https://phishdestroy.github.io/TgWitness/fa/docs/reference/history/)[روندها و عملیات‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/)[حالت تحقیق](https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/)[ویژگی‌ها و محدودیت‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/)
+[راهنمای پنل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/)[نحوهٔ کارکرد جمع‌آوری](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/fa/docs/reference/secret-chats/)[بارگذاری تاریخچه منبع](https://phishdestroy.github.io/TgWitness/fa/docs/reference/history/)[روندها و عملیات‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/)[حالت تحقیق](https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/)[ویژگی‌ها و محدودیت‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/)
 
 آرشیو و یکپارچه‌سازی‌ها
 

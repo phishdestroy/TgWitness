@@ -62,7 +62,7 @@ Kaynaklar → **Gözlem kapsamı,** bir çalışma alanının hangi sohbetleri k
 
 Bu modların yapamadıkları şeyler:
 
-- **Gizli sohbetler,** iki cihaz arasında uçtan uca şifrelenir ve hiçbir şekilde, hiçbir modda TgWitness'e ulaşmaz.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **TgWitness çalışmadığı sürece hiçbir şey kaydedilmez.** Yeniden başlatıldıktan sonra, Telegram’dan kaçırılan güncellemeleri ister ve sohbetleri yeniden kontrol eder, ancak uzun süreli kesintilerden sonra Telegram tüm verileri geri göndermez. Raporlar ve `verify.py`, bu tür dönemleri boşluklar olarak gösterir (bkz. [kapsama alanı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - Başlangıçta yalnızca ilk 1.000 diyalog listelenir (sınır, **Parametreler** bölümünde belirtilmiştir); daha eski sohbetler, bir sonraki aktif hale geldiklerinde eklenir. Eklenen bir sohbetin daha önceki geçmişi alınmaz — ihtiyaç duyduğunuzda bir geçmiş anlık görüntüsü alın veya sohbeti tamamen dışa aktarın.
 - Sürekli değişen klasör koşulları (sessize alınmış, okunmuş) uygulanmaz: bu tür sohbetler gözlem altında kalır.

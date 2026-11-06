@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/
 
 수집
 
-[패널 가이드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/)[데이터 수집 방식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/)[소스 기록 불러오기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/history/)[워크플로우 및 운영](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/)[조사 모드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/)[기능 및 제한 사항](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/)
+[패널 가이드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/)[데이터 수집 방식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/ko/docs/reference/secret-chats/)[소스 기록 불러오기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/history/)[워크플로우 및 운영](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/)[조사 모드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/)[기능 및 제한 사항](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/)
 
 아카이브 및 연동 기능
 

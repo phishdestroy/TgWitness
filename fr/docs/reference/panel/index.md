@@ -92,7 +92,7 @@ Cet espace de travail enregistre certaines conversations et conserve certaines i
 - **Les types de source** limitent les modes « dossier » et « compte entier » aux chaînes, groupes, discussions privées et bots. L’option « **Propres actions »** ajoute les messages, modifications et frappes sur le clavier de réponse propres au compte.
 - **Lorsqu’une nouvelle discussion ou un nouveau bot apparaît** : enregistrez son profil et jusqu’au nombre choisi de ses derniers messages visibles.
 
-Limites : les discussions secrètes n’apparaissent jamais dans TgWitness. Rien n’est enregistré lorsque TgWitness n’est pas en cours d’exécution ; après un redémarrage, il ne récupère que ce que Telegram renvoie encore, et le rapport indique le manque de données. Les discussions dépassant la limite de la liste des discussions (1 000 dialogues, sauf modification dans les paramètres) sont ajoutées dès qu’elles deviennent actives. Les boutons du bot intégrés cliqués dans une autre application sont invisibles ; la réponse du bot est enregistrée.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/fr/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### Discussions concernées
 

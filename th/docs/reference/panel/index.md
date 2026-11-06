@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **ประเภทแหล่ง**ข้อมูลจำกัดโหมดโฟลเดอร์และโหมดบัญชีทั้งหมดให้ใช้ได้เฉพาะกับช่อง กลุ่ม การสนทนาส่วนตัว และบอต ส่วน "**การกระทำ**ของบัญชี" จะเพิ่มข้อความ การแก้ไข และ การกดปุ่มบนคีย์บอร์ดเพื่อตอบกลับของบัญชีนั้นเอง
 - **เมื่อมีแชทหรือบอทใหม่ปรากฏขึ้น**: บันทึกโปรไฟล์ของมันและข้อความล่าสุดที่มองเห็นได้ ตามจำนวนที่เลือกไว้
 
-ข้อจำกัด: การสนทนาลับจะไม่ถูกบันทึกใน TgWitness เลย ไม่มีข้อมูลใดถูกบันทึกเมื่อ TgWitness ไม่ทำงาน; หลังจากรีสตาร์ท ระบบจะบันทึกข้อมูลเพิ่มเติมได้เฉพาะส่วนที่ Telegram ยังส่งกลับมาเท่านั้น และ รายงานจะแสดงช่องว่างของข้อมูลที่ขาดหายไป การสนทนาที่เกินขีดจำกัดของรายการสนทนา (1,000 บทสนทนา เว้นแต่จะเปลี่ยนใน Parameters) จะถูกเพิ่มเมื่อการสนทนานั้นกลับมาใช้งานได้อีกครั้ง ปุ่มบอทแบบฝังที่กดใน แอปอื่นจะไม่ปรากฏ; แต่คำตอบของบอทจะถูกบันทึกไว้
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/th/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### การสนทนาที่อยู่ในขอบเขต
 

@@ -62,7 +62,7 @@ Sumber → **Ruang lingkup pengamatan** menentukan obrolan mana saja yang direka
 
 Hal-hal yang tidak dapat dilakukan oleh mode-mode ini:
 
-- **Obrolan rahasia** dienkripsi ujung-ke-ujung antara dua perangkat dan tidak pernah sampai ke TgWitness, dalam mode apa pun.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/id/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **Tidak ada yang direkam saat TgWitness tidak berjalan.** Setelah di-restart, TgWitness meminta Telegram untuk pembaruan yang terlewat dan memeriksa ulang obrolan, tetapi Telegram tidak mengembalikan semua data setelah gangguan yang lama. Laporan dan `verify.py` menampilkan periode tersebut sebagai celah (lihat [cakupan](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - Hanya 1.000 percakapan pertama yang ditampilkan pada awalnya (batasnya tercantum di **bagian Parameter**); percakapan yang lebih lama akan ditambahkan saat percakapan tersebut aktif kembali. Riwayat awal dari percakapan yang ditambahkan tidak diambil — ambil tangkapan layar riwayat atau ekspor percakapan lengkap saat Anda membutuhkannya.
 - Kondisi folder yang terus berubah (dibisukan, telah dibaca) tidak diterapkan: obrolan semacam itu tetap dipantau.

@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 สิ่งที่โหมดเหล่านี้ไม่สามารถทำได้:
 
-- **การสนทนาแบบลับ (Secret chats)** ได้รับการเข้ารหัสแบบ end-to-end ระหว่างอุปกรณ์สองเครื่อง และไม่เคยส่งถึง TgWitness ในรูปแบบใดก็ตาม
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/th/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **ไม่มีการบันทึกข้อมูลใดๆ เมื่อ TgWitness ไม่ทำงาน** หลังจากรีสตาร์ท ระบบจะขอข้อมูลอัปเดตที่พลาดไปจาก Telegram และตรวจสอบการสนทนาใหม่ แต่ Telegram ไม่ส่งข้อมูลทั้งหมดกลับมาหลังจาก การหยุดให้บริการเป็นเวลานาน รายงานและ`verify.py` แสดงช่วงเวลาดังกล่าวเป็นช่องว่าง (ดู[การครอบคลุม](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids))
 - ในตอนแรกจะแสดงเพียง 1,000 บทสนทนาแรกเท่านั้น (ขีดจำกัดนี้อยู่ในส่วน **Parameters**); บทสนทนา ที่เก่ากว่าจะถูกเพิ่มเข้ามาเมื่อมีการใช้งานอีกครั้ง ประวัติก่อนหน้านั้นของบทสนทนาที่เพิ่มเข้ามาจะไม่ถูกดึงมา — ให้ทำการ ถ่ายภาพประวัติ (snapshot) หรือส่งออกบทสนทนาทั้งหมดเมื่อจำเป็น
 - เงื่อนไขของโฟลเดอร์ที่เปลี่ยนแปลงตลอดเวลา (ปิดเสียง, อ่านแล้ว) จะไม่ถูกนำไปใช้: การสนทนาดังกล่าว ยังคงถูกติดตามต่อไป

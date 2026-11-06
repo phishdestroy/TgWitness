@@ -24,6 +24,7 @@ Todas as alterações por versão, incluindo as que ainda não foram lançadas.
 
 ## Unreleased
 
+- Add an English Secret Chat demo with fictional requests, replies, attachments and retained deletion notices. Document the separate development implementation and its open defects; the demo does not enable Telegram connections.
 - Remove the unused one-shot exporter and check recovery against the current exporter. Reject unexpected or repeated message IDs in recheck responses.
 - Combine concurrent exports with resumable Standard API and Takeout acquisition. Each job retains its own progress, timings and signed checkpoints; accounts remain reserved until that job stops. Include the account controls, batch import and report-verification updates in the same build.
 - Add offline `VERIFY.cmd` / `VERIFY.sh` launchers, plain-language verification explanations and saved UTF-8 transcripts to signed exports in all 25 panel languages. Build a separate Windows verifier with an embedded runtime and a language menu. Unpinned signers remain unconfirmed; successful integrity verification does not establish admissibility.

@@ -40,7 +40,7 @@ Configuração
 
 Coletar
 
-[Guia do painel](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/)[Como funciona a coleta](https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/)[Carregar histórico de origem](https://phishdestroy.github.io/TgWitness/pt/docs/reference/history/)[Fluxos de trabalho e operações](https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/)[Modo de investigação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/)[Recursos e limitações](https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/)
+[Guia do painel](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/)[Como funciona a coleta](https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/pt/docs/reference/secret-chats/)[Carregar histórico de origem](https://phishdestroy.github.io/TgWitness/pt/docs/reference/history/)[Fluxos de trabalho e operações](https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/)[Modo de investigação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/)[Recursos e limitações](https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/)
 
 Arquivo e integrações
 

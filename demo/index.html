@@ -55,7 +55,7 @@
 <link href="views/disclosure-preview.css?v=1" rel="stylesheet">
 <link href="components/forms.css?v=35" rel="stylesheet">
 <link href="components/feedback.css?v=36" rel="stylesheet">
-</head>
+<link rel="stylesheet" href="secret-chats.css?v=1"></head>
 <body>
 <svg class="icon-sprite" aria-hidden="true" focusable="false">
   <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3Z"/><path d="M9 20v-7h6v7"/></symbol>
@@ -216,7 +216,7 @@
 <div class="context-bar">
   <div class="notice demo" hidden id="demo-banner">
     <div class="demo-intro"><strong>Demo workspace</strong><span id="demo-caption">Fictional messages. No Telegram connection.</span></div>
-    <div class="demo-actions">
+    <div class="demo-actions"><button class="secondary" type="button" data-secret-demo-open lang="en" data-no-translate>Try Secret Chat</button>
       <button class="secondary" data-demo-filter="deleted" type="button"><svg aria-hidden="true" class="icon"><use href="#i-journal"/></svg> Review deletions</button>
       <button class="secondary" data-demo-filter="edited" type="button"><svg aria-hidden="true" class="icon"><use href="#i-clock"/></svg> Compare edits</button>
       <button class="primary" data-export="zip" data-mode-feature="signed_exports" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Export signed ZIP</button>
@@ -301,7 +301,7 @@
     <div class="source-refresh-status"><span class="hint" id="dialog-refresh-status" role="status" aria-live="polite">Not refreshed in this session.</span><button type="button" class="text-link" id="dialog-refresh-retry" hidden>Retry</button></div>
     <progress id="dialog-refresh-progress" aria-label="Refreshing chat list" hidden></progress>
   </div>
-  <div class="sources-summary" aria-label="Source overview"><span id="sources-scope-summary"></span><span id="sources-count-summary"></span><span id="sources-recording-summary"></span></div>
+  <p><button class="secondary" type="button" data-secret-demo-open lang="en" data-no-translate>Try Secret Chat</button></p><div class="sources-summary" aria-label="Source overview"><span id="sources-scope-summary"></span><span id="sources-count-summary"></span><span id="sources-recording-summary"></span></div>
   <div class="sources-tabs" role="tablist" aria-label="Source settings">
     <button type="button" id="sources-tab-scope" role="tab" aria-controls="sources-panel-scope" aria-selected="true" data-source-tab="scope">Scope</button>
     <button type="button" id="sources-tab-chats" role="tab" aria-controls="sources-panel-chats" aria-selected="false" tabindex="-1" data-source-tab="chats">Chats in scope <span id="sources-tab-count" class="tab-count">0</span></button>
@@ -1821,5 +1821,44 @@
   <div id="detail-content"></div>
 </aside>
 <div aria-live="polite" class="toast" hidden id="toast" role="status"></div>
-</body>
+<dialog id="secret-demo" class="secret-demo" aria-labelledby="secret-demo-title" aria-describedby="secret-demo-description" lang="en" dir="ltr" data-no-translate>
+  <header class="secret-demo-heading">
+    <div><span class="eyebrow">FICTIONAL INTERACTIVE PREVIEW</span><h2 id="secret-demo-title">Secret Chat</h2></div>
+    <button type="button" class="quiet" data-secret-action="dismiss" aria-label="Close Secret Chat preview">Close</button>
+  </header>
+  <p id="secret-demo-description">Start a request, exchange sample messages and see what stays after a deletion notice. Everything here is simulated in your browser.</p>
+  <div class="secret-demo-boundary"><strong>Development preview</strong><span>No Telegram connection or real encryption. These entries are not signed evidence.</span><a href="../docs/reference/secret-chats/">Implementation status and limitations →</a></div>
+  <div class="secret-demo-layout">
+    <aside class="secret-demo-sidebar" aria-label="Sample conversations">
+      <h3>Conversations</h3>
+      <div id="secret-demo-chats" class="secret-demo-chats"></div>
+      <form id="secret-demo-start">
+        <label for="secret-demo-user">Fictional username or ID</label>
+        <input id="secret-demo-user" value="@sample_peer" maxlength="64" required autocomplete="off">
+        <button type="submit" class="secondary">Start sample chat</button>
+      </form>
+      <button type="button" class="quiet" data-secret-action="incoming">Simulate incoming request</button>
+    </aside>
+    <section class="secret-demo-conversation" aria-label="Selected conversation">
+      <div class="secret-demo-thread-heading"><h3 id="secret-demo-peer"></h3><span id="secret-demo-state" role="status"></span></div>
+      <p id="secret-demo-step" class="hint"></p>
+      <div class="secret-demo-actions">
+        <button type="button" class="primary" data-secret-action="accept" hidden>Accept sample request</button>
+        <button type="button" class="secondary" data-secret-action="peer-accept" hidden>Simulate peer acceptance</button>
+        <button type="button" class="secondary" data-secret-action="file">Receive sample file</button>
+        <button type="button" class="quiet" data-secret-action="delete">Simulate peer deletion</button>
+        <button type="button" class="quiet" data-secret-action="end">End sample chat</button>
+      </div>
+      <ol id="secret-demo-feed" class="secret-demo-feed" aria-label="Simulated messages and notices"></ol>
+      <form id="secret-demo-send">
+        <label for="secret-demo-message">Sample message</label>
+        <textarea id="secret-demo-message" rows="2" maxlength="4096" required placeholder="Write a fictional message…"></textarea>
+        <button type="submit" class="primary">Send sample message</button>
+      </form>
+      <p id="secret-demo-update" class="hint" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+  <footer class="secret-demo-footer"><span>Sample timeline starts 6 November 2026 · Browser memory only · Reset or reload clears this scenario. Signed sample downloads stay unchanged.</span><button type="button" class="quiet" data-secret-action="reset">Reset scenario</button></footer>
+</dialog>
+<script src="secret-chats.js?v=1"></script></body>
 </html>

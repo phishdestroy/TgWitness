@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 Чего не могут сделать эти режимы:
 
-- **Секретные чаты** шифруются по принципу «от конца до конца» между двумя устройствами и ни при каких обстоятельствах не поступают в TgWitness, независимо от режима работы.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/ru/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **Ничто не записывается, пока TgWitness не запущен.** После перезапуска он запрашивает у Telegram пропущенные обновления и повторно проверяет чаты, однако Telegram не возвращает всю информацию после длительных перебоев в работе. В отчётах и файлах `verify.py` такие периоды отображаются как пробелы (см. [раздел «Охват»](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - Изначально отображаются только первые 1 000 диалогов (ограничение указано в **разделе «Параметры»**); более старые чаты добавляются при их следующей активации. Более ранняя история добавленного чата не загружается — создайте снимок истории или выполните полный экспорт чата, когда это понадобится.
 - Условия папок, которые постоянно меняются (заглушенные, прочитанные), не применяются: такие чаты остаются под наблюдением.

@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 これらのモードでは以下のことができません：
 
-- **シークレットチャットは**2台のデバイス間でエンドツーエンド暗号化されており、いかなるモードにおいても TgWitnessには一切送信されません。
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/ja/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **TgWitnessが実行されていない間は、何も記録されません。**再起動後、TgWitnessはTelegramに 見逃した更新情報を問い合わせ、チャットを再確認しますが、長時間の サービス停止後には、Telegramがすべてのデータを返してくれるわけではありません。レポートおよび`verify.py`では、そのような期間はギャップとして表示されます（[カバレッジを](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)参照）。
 - 最初は最初の 1,000 件のダイアログのみが表示されます（上限は**「パラメータ」**に記載されています）。それより古い チャットは、次にアクティブになった時点で追加されます。追加されたチャットのそれ以前の履歴は取得されません。必要な場合は、履歴の スナップショットまたはチャットの完全なエクスポートを行ってください。
 - 常に変化するフォルダの状態（ミュート、既読）は適用されません。そのようなチャットは 引き続き監視対象となります。

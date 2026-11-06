@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/
 
 সংগ্রহ করুন
 
-[প্যানেল গাইড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/)[সংগ্রহ কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/)[লোড সোর্সের ইতিহাস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/history/)[ওয়ার্কফ্লো এবং অপারেশনসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/)[তদন্ত মোড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)[বৈশিষ্ট্য এবং সীমাবদ্ধতা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/)
+[প্যানেল গাইড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/)[সংগ্রহ কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/bn/docs/reference/secret-chats/)[লোড সোর্সের ইতিহাস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/history/)[ওয়ার্কফ্লো এবং অপারেশনসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/)[তদন্ত মোড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)[বৈশিষ্ট্য এবং সীমাবদ্ধতা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/)
 
 আর্কাইভ ও ইন্টিগ্রেশনসমূহ
 

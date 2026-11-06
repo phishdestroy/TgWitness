@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 
 אסף
 
-[מדריך לפאנלים](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/)[כיצד מתבצע האיסוף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/)[טען היסטוריית המקור](https://phishdestroy.github.io/TgWitness/he/docs/reference/history/)[תהליכי עבודה ותפעול](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/)[מצב חקירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)[תכונות ומגבלות](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/)
+[מדריך לפאנלים](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/)[כיצד מתבצע האיסוף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/he/docs/reference/secret-chats/)[טען היסטוריית המקור](https://phishdestroy.github.io/TgWitness/he/docs/reference/history/)[תהליכי עבודה ותפעול](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/)[מצב חקירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)[תכונות ומגבלות](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/)
 
 ארכיון ושילובים
 

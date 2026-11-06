@@ -62,7 +62,7 @@ Quellen → **Der Beobachtungsumfang** bestimmt, welche Chats ein Arbeitsbereich
 
 Was diese Modi nicht leisten können:
 
-- **Geheime Chats** sind zwischen zwei Geräten Ende-zu-Ende-verschlüsselt und gelangen in keinem Modus jemals zu TgWitness.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/de/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **Solange TgWitness nicht ausgeführt wird, erfolgt keine Aufzeichnung.** Nach einem Neustart fragt das Programm bei Telegram nach versäumten Aktualisierungen und überprüft die Chats erneut; nach längeren Ausfällen liefert Telegram jedoch nicht alle Daten zurück. In Berichten und in „`verify.py`“ werden solche Zeiträume als Lücken dargestellt (siehe [Erfassungsbereich](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - Zu Beginn werden nur die ersten 1.000 Dialoge aufgelistet (die Obergrenze ist unter **„Parameter“** festgelegt); ältere Chats werden hinzugefügt, sobald sie wieder aktiv werden. Der frühere Verlauf eines hinzugefügten Chats wird nicht abgerufen – erstellen Sie bei Bedarf einen Verlaufs-Snapshot oder einen vollständigen Chat-Export.
 - Sich ständig ändernde Ordnerstatus (stummgeschaltet, gelesen) werden nicht berücksichtigt: Solche Chats bleiben weiterhin im Beobachtungsbereich.

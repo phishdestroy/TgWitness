@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - تحدد **أنواع المصادر** أوضاع المجلد والحساب بأكمله لتقتصر على القنوات والمجموعات والمحادثات الخاصة والروبوتات. تضيف **«الإجراءات الخاصة»** الرسائل الخاصة بالحساب، والتعديلات، و ضغطات لوحة مفاتيح الرد.
 - **عندما تظهر محادثة جديدة أو روبوت جديد**: احفظ ملفه الشخصي وما يصل إلى العدد المحدد من أحدث رسائله المرئية.
 
-القيود: لا تصل المحادثات السرية أبدًا إلى TgWitness. لا يتم تسجيل أي شيء أثناء توقف TgWitness عن العمل؛ وبعد إعادة التشغيل، لا يتم تسجيل سوى ما لا يزال Telegram يقدمه، ويظهر التقرير الفجوة. تُضاف المحادثات التي تتجاوز حد قائمة المحادثات (1,000 محادثة ما لم يتم تغييرها في المعلمات) عند تفعيلها في المرة التالية. أزرار الروبوت المضمنة التي يتم الضغط عليها في تطبيق آخر تكون غير مرئية؛ ويتم تسجيل رد الروبوت.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/ar/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### المحادثات المشمولة
 

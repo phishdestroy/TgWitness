@@ -62,7 +62,7 @@ Sources → **Observation scope** decides which chats a workspace records.
 
 What these modes cannot do:
 
-- **Secret chats** are end-to-end encrypted between two devices and never reach TgWitness, in any mode.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **Nothing is recorded while TgWitness is not running.** After a restart it asks Telegram for missed updates and rechecks chats, but Telegram does not return everything after long outages. Reports and `verify.py` show such periods as gaps (see [coverage](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - Only the first 1,000 dialogs are listed at start (the limit is under **Parameters**); older chats are added when they next become active. The earlier history of an added chat is not fetched — take a history snapshot or a full chat export when you need it.
 - Folder conditions that change all the time (muted, read) are not applied: such chats stay observed.

@@ -40,7 +40,7 @@ Einrichtung
 
 Sammeln
 
-[Anleitung zum Panel](https://phishdestroy.github.io/TgWitness/de/docs/reference/panel/)[So funktioniert die Datenerfassung](https://phishdestroy.github.io/TgWitness/de/docs/reference/collection/)[Quellhistorie laden](https://phishdestroy.github.io/TgWitness/de/docs/reference/history/)[Arbeitsabläufe und Funktionen](https://phishdestroy.github.io/TgWitness/de/docs/reference/operations/)[Untersuchungsmodus](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)[Funktionen und Einschränkungen](https://phishdestroy.github.io/TgWitness/de/docs/reference/features/)
+[Anleitung zum Panel](https://phishdestroy.github.io/TgWitness/de/docs/reference/panel/)[So funktioniert die Datenerfassung](https://phishdestroy.github.io/TgWitness/de/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/de/docs/reference/secret-chats/)[Quellhistorie laden](https://phishdestroy.github.io/TgWitness/de/docs/reference/history/)[Arbeitsabläufe und Funktionen](https://phishdestroy.github.io/TgWitness/de/docs/reference/operations/)[Untersuchungsmodus](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)[Funktionen und Einschränkungen](https://phishdestroy.github.io/TgWitness/de/docs/reference/features/)
 
 Archiv & Integrationen
 

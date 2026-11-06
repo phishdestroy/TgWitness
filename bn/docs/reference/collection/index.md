@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 এই মোডগুলো যা করতে পারে না:
 
-- **গোপন চ্যাটগুলো** দুইটি ডিভাইসের মধ্যে এন্ড-টু-এন্ড এনক্রিপ্টেড থাকে এবং কোনো অবস্থাতেই TgWitness-এ পৌঁছায় না।
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **TgWitness চলমান না থাকলে কিছুই রেকর্ড হয় না।** রিস্টার্টের পর এটি মিস হওয়া আপডেটের জন্য টেলিগ্রামকে জিজ্ঞাসা করে এবং চ্যাটগুলো পুনরায় যাচাই করে, কিন্তু দীর্ঘ সময়ের আউটেজের পর টেলিগ্রাম সবকিছু ফেরত দেয় না। রিপোর্ট এবং `verify.py` এমন সময়গুলোকে ফাঁক হিসেবে দেখায় ([কভারেজ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids) দেখুন)।
 - শুধুমাত্র প্রথম ১,০০০টি ডায়ালগ শুরুতেই তালিকাভুক্ত করা হয় (সীমাটি প্যারামিটারে নির্ধারিত); পুরনো চ্যাটগুলো পরের বার সক্রিয় হলে যোগ করা হয়। যোগ করা চ্যাটের পূর্ববর্তী ইতিহাস আনা হয় না — প্রয়োজন হলে ইতিহাসের স্ন্যাপশট বা সম্পূর্ণ চ্যাট এক্সপোর্ট করুন।
 - যে ফোল্ডারগুলির অবস্থা সবসময় পরিবর্তিত হয় (নীরব, পড়া) সেগুলো প্রয়োগ করা হয় না: এই ধরনের চ্যাটগুলো পর্যবেক্ষণে থাকে।

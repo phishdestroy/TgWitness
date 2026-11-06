@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **源类型**将文件夹模式和整个账户模式限制为频道、群组、私聊 和机器人。**自有操作**会添加该账户自身的消息、编辑操作以及 回复时的键盘按键记录。
 - **当出现新的聊天或机器人时**：保存其资料，并保存最多（根据所选数量） 其最新的可见消息。
 
-限制：秘密聊天内容绝不会被记录到TgWitness中。当TgWitness未 运行时，系统不会进行任何记录；重启后，它仅会补录 Telegram 仍能返回的内容，且 报告中会显示数据缺口。超出聊天列表限制（除非在 “参数”中更改，否则为 1,000 个对话）的聊天，将在其下次变为活跃状态时被添加进来。在 其他应用中点击的内嵌机器人按钮不会被记录；但机器人的回复会被记录下来。
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/zh/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### 涵盖的聊天
 

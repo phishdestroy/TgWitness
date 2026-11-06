@@ -92,7 +92,7 @@ Which conversations this workspace records, and what it keeps from them. Changes
 - **Source types** limit folder and whole-account modes to channels, groups, private chats and bots. **Own actions** adds the account's own messages, edits and reply-keyboard presses.
 - **When a new chat or bot appears**: save its profile and up to the chosen number of its latest visible messages.
 
-Limits: secret chats never reach TgWitness. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### Chats in scope
 

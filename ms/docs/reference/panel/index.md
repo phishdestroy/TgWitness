@@ -92,7 +92,7 @@ Perbualan mana yang dirakam oleh ruang kerja ini, dan apa yang disimpannya darip
 - **Jenis sumber** mengehadkan mod folder dan akaun keseluruhan kepada saluran, kumpulan, sembang peribadi dan bot. **Tindakan sendiri** menambah mesej, suntingan dan ketikan papan kekunci balasan milik akaun tersebut.
 - **Apabila sembang atau bot baru muncul**: simpan profilnya dan sehingga bilangan yang dipilih daripada mesej terbarunya yang boleh dilihat.
 
-Had: sembang rahsia tidak pernah sampai ke TgWitness. Tiada apa yang direkodkan semasa TgWitness tidak berjalan; selepas dihidupkan semula ia hanya mengemas kini apa yang masih dikembalikan oleh Telegram, dan laporan menunjukkan jurangnya. Sembang melebihi had senarai sembang (1,000 dialog melainkan diubah dalam Parameter) akan ditambah apabila ia aktif semula. Butang bot dalam talian yang ditekan di aplikasi lain tidak kelihatan; balasan bot direkodkan.
+Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/ms/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
 
 ### Perbualan yang termasuk dalam skop
 

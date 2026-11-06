@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/
 
 收集
 
-[面板指南](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/)[数据采集原理](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)[加载源代码历史记录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/history/)[工作流程与操作](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/)[调查模式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)[功能与限制](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/)
+[面板指南](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/)[数据采集原理](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/zh/docs/reference/secret-chats/)[加载源代码历史记录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/history/)[工作流程与操作](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/)[调查模式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)[功能与限制](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/)
 
 存档与集成
 

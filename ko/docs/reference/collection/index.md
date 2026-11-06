@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 다음과 같은 모드는 수행할 수 없습니다:
 
-- **비밀 채팅은** 두 기기 간에 종단 간 암호화가 적용되며, 어떤 모드에서도 TgWitness로 전송되지 않습니다.
+- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/ko/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
 - **TgWitness가 실행 중이지 않을 때는 아무것도 기록되지 않습니다.** 재시작 후에는 텔레그램에 놓친 업데이트를 요청하고 채팅 내용을 재확인하지만, 장시간의 서비스 중단 후에는 텔레그램이 모든 데이터를 반환하지는 않습니다. 보고서 및 `verify.py`에서는 이러한 기간을 공백으로 표시합니다([커버리지](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids) 참조).
 - 처음에는 첫 1,000개의 대화만 표시됩니다(한도는 **‘매개변수’** 항목에서 확인 가능). 그보다 오래된 채팅은 다음에 활성화될 때 추가됩니다. 추가된 채팅의 이전 기록은 불러오지 않으므로, 필요할 때 기록 스냅샷을 찍거나 전체 채팅 내역을 내보내십시오.
 - 수시로 변경되는 폴더 조건(알림 비활성화, 읽음)은 적용되지 않으며, 해당 채팅은 계속 모니터링됩니다.
