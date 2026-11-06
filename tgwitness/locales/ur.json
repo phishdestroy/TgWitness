@@ -6248,5 +6248,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "تاریخ لوڈ کرنے سے پہلے مشاہدہ معطل کریں۔ جب تاریخ لوڈ ہو رہی ہو تو نئی لائیو تبدیلیاں ریکارڈ نہیں ہوتیں؛ بعد میں پڑھنے سے ہر حذف شدہ یا درمیانی ترمیم کو بحال نہیں کیا جا سکتا۔",
  "Export saved records without reading Telegram. Observation can keep running.": "ٹیلیگرام پڑھے بغیر محفوظ شدہ ریکارڈز برآمد کریں۔ مشاہدہ چلتا رہ سکتا ہے۔",
  "Download selected chats into a separate archive. Pause observation on this account first.": "منتخب کی گئی چیٹس کو ایک علیحدہ آرکائیو میں ڈاؤن لوڈ کریں۔ سب سے پہلے اس اکاؤنٹ پر مشاہدہ معطل کریں۔",
- "Saved observations": "محفوظ شدہ مشاہدات"
+ "Saved observations": "محفوظ شدہ مشاہدات",
+"Chat state": "چٹ کی حالت",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "ہر فعال ماخذ کے عنوان، وضاحت، اراکین کی تعداد، پن کیے گئے پیغامات، منتظمین اور تحائف کی باقاعدہ تصاویر، پچھلی تصویر کے مقابلے میں فرق کے ساتھ۔",
+"Snapshot each source every": "ہر ماخذ کا ہر",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 چیٹ اسٹیٹ کے سنپ شاٹس کو بند کر دیتا ہے۔ ہر سنپ شاٹ وہی پڑھتا ہے جو ایک عام کلائنٹ دکھاتا ہے اور ہر ماخذ سے چند درخواستیں لیتا ہے۔",
+"Pause between sources": "ماخذوں کے درمیان وقفہ",
+"Read pinned messages": "پن کیے گئے پیغامات پڑھیں",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "ان پن کرنے سے پیغام کی سطح پر کوئی ریکارڈ نہیں رہتا؛ اسنیپ شاٹس دکھاتے ہیں کہ کون سے پیغامات پن ہونا بند ہوئے۔",
+"Read administrators and their rights": "منتظمین اور ان کے حقوق پڑھیں",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": " چینلز اس فہرست کو غیر منتظمین اراکین کو فراہم کرنے سے انکار کر سکتے ہیں؛ اس صورت میں سنپ شاٹ میں یہی بتایا جاتا ہے۔",
+"Read gifts shown on channels and profiles": "چینلز اور پروفائلز پر دکھائے گئے تحائف پڑھیں",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "تحائف کو بغیر سروس میسج کے چھپایا، تبدیل کیا، اپ گریڈ کیا یا رقم واپس کی جا سکتی ہے۔",
+"Record checks that found no change": "ان چیکس کو ریکارڈ کریں جن میں کوئی تبدیلی نہیں ملی",
+"A short record keeps the time of each check; turn off to record changes only.": "ایک مختصر ریکارڈ ہر چیک کا وقت محفوظ رکھتا ہے؛ صرف تبدیلیاں ریکارڈ کرنے کے لیے اسے بند کریں۔"
 }

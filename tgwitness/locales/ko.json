@@ -6209,5 +6209,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "기록 내역을 불러오기 전에 관찰을 일시 중지하십시오. 기록 내역이 불러오는 동안 새로운 실시간 변경 사항은 기록되지 않으며, 나중에 다시 읽을 때 모든 삭제 내역이나 중간 편집 내용을 복원할 수 없습니다.",
  "Export saved records without reading Telegram. Observation can keep running.": "텔레그램을 열지 않고도 저장된 기록을 내보낼 수 있습니다. 관찰 기능은 계속 실행될 수 있습니다.",
  "Download selected chats into a separate archive. Pause observation on this account first.": "선택한 채팅을 별도의 아카이브로 다운로드합니다. 먼저 이 계정의 관찰을 일시 중지하십시오.",
- "Saved observations": "저장된 관찰 내용"
+ "Saved observations": "저장된 관찰 내용",
+"Chat state": "채팅 상태",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "활성화된 모든 소스의 제목, 설명, 회원 수, 고정된 메시지, 관리자 및 선물에 대한 주기적인 스냅샷과 이전 스냅샷과의 차이점.",
+"Snapshot each source every": "각 소스에 대해 매",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0을 설정하면 채팅 상태 스냅샷 기능이 비활성화됩니다. 각 스냅샷은 일반 클라이언트에 표시되는 내용을 읽어들이며, 소스당 몇 번의 요청을 수행합니다.",
+"Pause between sources": "소스 간 일시 정지",
+"Read pinned messages": "고정된 메시지 읽기",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "고정 해제 시 메시지 수준의 기록은 남지 않으며, 스냅샷을 통해 어떤 메시지의 고정이 해제되었는지 확인할 수 있습니다.",
+"Read administrators and their rights": "관리자 및 해당 권한 알아보기",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "채널 관리자가 아닌 회원에게는 이 목록의 열람이 거부될 수 있으며, 이 경우 스냅샷에 해당 내용이 표시됩니다.",
+"Read gifts shown on channels and profiles": "채널 및 프로필에 표시된 선물 읽기",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "선물은 서비스 메시지 없이 숨기거나, 변환하거나, 업그레이드하거나, 환불할 수 있습니다.",
+"Record checks that found no change": "변경 사항이 발견되지 않은 검사 기록",
+"A short record keeps the time of each check; turn off to record changes only.": "'짧은 기록' 모드는 각 확인 시점을 기록합니다. 변경 사항만 기록하려면 이 기능을 해제하십시오."
 }

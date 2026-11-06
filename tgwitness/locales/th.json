@@ -6209,5 +6209,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "หยุดการสังเกตการณ์ก่อนโหลดประวัติ การเปลี่ยนแปลงสดใหม่จะไม่ถูกบันทึกขณะกำลังโหลดประวัติ; การอ่านข้อมูลในภายหลังอาจไม่สามารถกู้คืนการลบหรือการแก้ไขระหว่างขั้นตอนได้ทั้งหมด",
  "Export saved records without reading Telegram. Observation can keep running.": "ส่งออกบันทึกที่เก็บไว้โดยไม่ต้องเปิด Telegram การสังเกตการณ์สามารถทำงานต่อไปได้",
  "Download selected chats into a separate archive. Pause observation on this account first.": "ดาวน์โหลดการสนทนาที่เลือกไว้ลงในไฟล์เก็บถาวรแยกต่างหาก ให้หยุดการติดตามบัญชีนี้ก่อน",
- "Saved observations": "การสังเกตการณ์ที่บันทึกไว้"
+ "Saved observations": "การสังเกตการณ์ที่บันทึกไว้",
+"Chat state": "สถานะการสนทนา",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "ภาพถ่ายช่วงเวลาของชื่อหัวข้อ คำอธิบาย จำนวนสมาชิก ข้อความที่ติดไว้ ผู้ดูแลระบบ และของขวัญของทุกแหล่งข้อมูลที่เปิดใช้งาน พร้อมทั้งความแตกต่างจากภาพถ่ายช่วงเวลาครั้งก่อน",
+"Snapshot each source every": "สร้างภาพถ่ายของแต่ละแหล่งข้อมูลทุก",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 จะปิดการถ่ายภาพสถานะการสนทนา (chat-state snapshots) แต่ละภาพจะอ่านข้อมูลที่แสดงบนไคลเอนต์ทั่วไป และใช้คำขอเพียงไม่กี่ครั้งต่อแหล่งข้อมูล",
+"Pause between sources": "เว้นช่วงระหว่างแหล่งข้อมูล",
+"Read pinned messages": "อ่านข้อความที่ถูกปักหมุด",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "การยกเลิกการปักหมุดจะไม่ทิ้งบันทึกในระดับข้อความ; ภาพถ่ายหน้าจอจะแสดงข้อความใดที่ถูกยกเลิกการปักหมุด",
+"Read administrators and their rights": "อ่านข้อมูลเกี่ยวกับผู้ดูแลระบบและสิทธิของพวกเขา",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "ช่องอาจปฏิเสธการเข้าถึงรายชื่อนี้ให้กับสมาชิกที่ไม่ใช่ผู้ดูแลระบบ; ในกรณีนี้ สแนปช็อตจะแสดงข้อความดังกล่าว",
+"Read gifts shown on channels and profiles": "อ่านของขวัญที่แสดงบนช่องและโปรไฟล์",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "ของขวัญสามารถซ่อน แปลง อัปเกรด หรือขอคืนเงินได้โดยไม่ต้องส่งข้อความบริการ",
+"Record checks that found no change": "บันทึกการตรวจสอบที่พบว่าไม่มีการเปลี่ยนแปลง",
+"A short record keeps the time of each check; turn off to record changes only.": "การบันทึกแบบสั้นจะบันทึกเวลาของการตรวจสอบแต่ละครั้ง; ปิดตัวเลือกนี้เพื่อบันทึกเฉพาะการเปลี่ยนแปลงเท่านั้น"
 }

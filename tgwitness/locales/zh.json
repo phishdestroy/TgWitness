@@ -6209,5 +6209,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "在加载历史记录前请暂停观察。历史记录加载期间不会记录新的实时变更；后续读取无法恢复所有删除操作或中间编辑内容。",
  "Export saved records without reading Telegram. Observation can keep running.": "无需打开 Telegram 即可导出已保存的记录。监控可继续运行。",
  "Download selected chats into a separate archive. Pause observation on this account first.": "将选定的聊天记录下载到单独的存档中。请先暂停该账号的监控。",
- "Saved observations": "已保存的观察记录"
+ "Saved observations": "已保存的观察记录",
+"Chat state": "聊天状态",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "定期对每个已启用的消息源的标题、描述、成员数量、置顶消息、管理员和礼物进行快照，并显示与上一次快照的差异。",
+"Snapshot each source every": "每隔一段时间对每个来源进行快照",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 表示关闭聊天状态快照功能。每次快照都会读取普通客户端显示的内容，并针对每个消息源发送少量请求。",
+"Pause between sources": "不同来源之间的停顿",
+"Read pinned messages": "阅读置顶消息",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "取消置顶不会留下消息级别的记录；快照会显示哪些消息不再被置顶。",
+"Read administrators and their rights": "管理员及其权限说明",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "频道可拒绝向非管理员成员提供此列表；此时快照中会注明此情况。",
+"Read gifts shown on channels and profiles": "读取频道和个人资料中显示的礼物",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "礼物可以被隐藏、转换、升级或退款，且无需发送服务消息。",
+"Record checks that found no change": "记录未发现变更的检查结果",
+"A short record keeps the time of each check; turn off to record changes only.": "简短记录会保存每次检查的时间；关闭此功能仅记录更改内容。"
 }

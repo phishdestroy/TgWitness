@@ -6404,5 +6404,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "قم بإيقاف المراقبة مؤقتًا قبل تحميل السجل. لا يتم تسجيل التغييرات الحية الجديدة أثناء تحميل السجل؛ ولا يمكن لعمليات القراءة اللاحقة استعادة كل عمليات الحذف أو التعديلات الوسيطة.",
  "Export saved records without reading Telegram. Observation can keep running.": "تصدير السجلات المحفوظة دون قراءة Telegram. يمكن أن تستمر المراقبة في العمل.",
  "Download selected chats into a separate archive. Pause observation on this account first.": "قم بتنزيل المحادثات المحددة في أرشيف منفصل. قم بإيقاف المراقبة على هذا الحساب أولاً.",
- "Saved observations": "الملاحظات المحفوظة"
+ "Saved observations": "الملاحظات المحفوظة",
+"Chat state": "حالة الدردشة",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "لقطات دورية للعنوان والوصف وعدد الأعضاء والرسائل المثبتة والمسؤولين والهدايا لكل مصدر مفعل، مع توضيح الاختلافات عن اللقطة السابقة.",
+"Snapshot each source every": "التقاط لقطة لكل مصدر كل",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 يعطل لقطات حالة الدردشة. تقرأ كل لقطة ما يعرضه العميل العادي وتستغرق بضع طلبات لكل مصدر.",
+"Pause between sources": "توقف مؤقت بين المصادر",
+"Read pinned messages": "قراءة الرسائل المثبتة",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "لا يترك إلغاء التثبيت أي سجل على مستوى الرسائل؛ وتُظهر اللقطات الرسائل التي لم تعد مثبتة.",
+"Read administrators and their rights": "اطلع على قائمة المسؤولين وحقوقهم",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "قد ترفض القنوات إتاحة هذه القائمة للأعضاء غير الإداريين؛ وفي هذه الحالة، ستشير اللقطة إلى ذلك.",
+"Read gifts shown on channels and profiles": "قراءة الهدايا المعروضة على القنوات والملفات الشخصية",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "يمكن إخفاء الهدايا أو تحويلها أو ترقيتها أو استرداد قيمتها دون إرسال رسالة خدمة.",
+"Record checks that found no change": "تسجيل عمليات الفحص التي لم تجد أي تغيير",
+"A short record keeps the time of each check; turn off to record changes only.": "يحتفظ السجل المختصر بوقت كل عملية فحص؛ قم بإيقاف تشغيله لتسجيل التغييرات فقط."
 }

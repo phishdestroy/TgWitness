@@ -6248,5 +6248,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "Mettez l'observation en pause avant de charger l'historique. Les nouvelles modifications en temps réel ne sont pas enregistrées pendant le chargement de l'historique ; les lectures ultérieures ne permettent pas de récupérer toutes les suppressions ou modifications intermédiaires.",
  "Export saved records without reading Telegram. Observation can keep running.": "Exportez les enregistrements sauvegardés sans ouvrir Telegram. L'observation peut continuer à fonctionner.",
  "Download selected chats into a separate archive. Pause observation on this account first.": "Téléchargez les discussions sélectionnées dans une archive distincte. Mettez d’abord la surveillance de ce compte en pause.",
- "Saved observations": "Observations enregistrées"
+ "Saved observations": "Observations enregistrées",
+"Chat state": "État de la conversation",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Instantanés périodiques du titre, de la description, du nombre de membres, des messages épinglés, des administrateurs et des cadeaux de chaque source activée, avec les différences par rapport à l'instantané précédent.",
+"Snapshot each source every": "Effectuer un instantané de chaque source toutes les",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "La valeur 0 désactive les instantanés de l'état des discussions. Chaque instantané lit ce qu'affiche un client standard et nécessite quelques requêtes par source.",
+"Pause between sources": "Pause entre les sources",
+"Read pinned messages": "Lire les messages épinglés",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Le dépinage ne laisse aucune trace au niveau des messages ; les instantanés indiquent quels messages ont cessé d'être épinglés.",
+"Read administrators and their rights": "Liste des administrateurs et de leurs droits",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Les chaînes peuvent refuser l'accès à cette liste aux membres qui ne sont pas administrateurs ; l'instantané l'indique alors.",
+"Read gifts shown on channels and profiles": "Lire les cadeaux affichés sur les chaînes et les profils",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "Les cadeaux peuvent être masqués, convertis, améliorés ou remboursés sans message de service.",
+"Record checks that found no change": "Enregistrer les vérifications n'ayant révélé aucun changement",
+"A short record keeps the time of each check; turn off to record changes only.": "Un enregistrement succinct consigne l'heure de chaque vérification ; désactivez cette option pour n'enregistrer que les modifications."
 }

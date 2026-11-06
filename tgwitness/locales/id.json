@@ -6209,5 +6209,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "Jeda pemantauan sebelum memuat riwayat. Perubahan langsung yang baru tidak direkam saat riwayat sedang dimuat; pembacaan selanjutnya tidak dapat memulihkan setiap penghapusan atau pengeditan sementara.",
  "Export saved records without reading Telegram. Observation can keep running.": "Ekspor rekaman yang disimpan tanpa membuka Telegram. Pemantauan dapat terus berjalan.",
  "Download selected chats into a separate archive. Pause observation on this account first.": "Unduh obrolan yang dipilih ke dalam arsip terpisah. Jeda pemantauan pada akun ini terlebih dahulu.",
- "Saved observations": "Pengamatan yang disimpan"
+ "Saved observations": "Pengamatan yang disimpan",
+"Chat state": "Status obrolan",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Cuplikan berkala mengenai judul, deskripsi, jumlah anggota, pesan yang disematkan, administrator, dan hadiah dari setiap sumber yang diaktifkan, beserta perbedaannya dari cuplikan sebelumnya.",
+"Snapshot each source every": "Ambil snapshot setiap sumber setiap",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 menonaktifkan snapshot status obrolan. Setiap snapshot membaca apa yang ditampilkan oleh klien biasa dan melakukan beberapa permintaan per sumber.",
+"Pause between sources": "Jeda antar sumber",
+"Read pinned messages": "Baca pesan yang disematkan",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Melepaskan penandaan tidak meninggalkan catatan pada tingkat pesan; tangkapan layar menunjukkan pesan mana yang tidak lagi ditandai.",
+"Read administrators and their rights": "Baca tentang administrator dan hak akses mereka",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Saluran dapat menolak daftar ini bagi anggota yang bukan administrator; dalam hal ini, snapshot akan mencantumkan hal tersebut.",
+"Read gifts shown on channels and profiles": "Baca hadiah yang ditampilkan di saluran dan profil",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "Hadiah dapat disembunyikan, dikonversi, ditingkatkan, atau dikembalikan tanpa pesan layanan.",
+"Record checks that found no change": "Catat pemeriksaan yang tidak menemukan perubahan",
+"A short record keeps the time of each check; turn off to record changes only.": "Catatan singkat mencatat waktu setiap pemeriksaan; nonaktifkan untuk hanya mencatat perubahan."
 }

@@ -6248,5 +6248,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "Geçmişi yüklemeden önce gözlem işlemini duraklatın. Geçmiş yüklenirken yeni canlı değişiklikler kaydedilmez; daha sonraki okumalarda her silme işlemi veya ara düzenleme geri alınamayabilir.",
  "Export saved records without reading Telegram. Observation can keep running.": "Telegram'ı açmadan kaydedilmiş kayıtları dışa aktarın. Gözlem işlemi devam edebilir.",
  "Download selected chats into a separate archive. Pause observation on this account first.": "Seçilen sohbetleri ayrı bir arşive indirin. Önce bu hesaptaki gözlemlemeyi duraklatın.",
- "Saved observations": "Kaydedilen gözlemler"
+ "Saved observations": "Kaydedilen gözlemler",
+"Chat state": "Sohbet durumu",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Etkinleştirilmiş her kaynağın başlığı, açıklaması, üye sayısı, sabitlenmiş mesajları, yöneticileri ve hediyelerine ilişkin periyodik anlık görüntüler ile bir önceki anlık görüntüye göre farklılıklar.",
+"Snapshot each source every": "Her kaynağı her",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 değeri, sohbet durumu anlık görüntülerini devre dışı bırakır. Her anlık görüntü, sıradan bir istemcinin gösterdiği içeriği okur ve kaynak başına birkaç istek alır.",
+"Pause between sources": "Kaynaklar arasında duraklama",
+"Read pinned messages": "Sabitlenmiş mesajları okuyun",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Sabitlemeyi kaldırmak mesaj düzeyinde herhangi bir kayıt bırakmaz; anlık görüntüler hangi mesajların sabitlenmesinin kaldırıldığını gösterir.",
+"Read administrators and their rights": "Yöneticiler ve hakları hakkında bilgi edinin",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Kanallar, yönetici olmayan üyelere bu listeyi göstermeyebilir; bu durumda anlık görüntüde bu durum belirtilir.",
+"Read gifts shown on channels and profiles": "Kanallarda ve profillerde gösterilen hediyeleri okuyun",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "Hediyeler, hizmet mesajı gönderilmeden gizlenebilir, dönüştürülebilir, yükseltilebilir veya iade edilebilir.",
+"Record checks that found no change": "Herhangi bir değişiklik tespit edilmeyen kontroller",
+"A short record keeps the time of each check; turn off to record changes only.": "Kısa kayıt seçeneği, her kontrolün zamanını kaydeder; yalnızca değişiklikleri kaydetmek için bu seçeneği kapatın."
 }

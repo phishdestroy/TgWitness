@@ -6209,5 +6209,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "履歴を読み込む前に監視を一時停止してください。履歴の読み込み中は新しいライブの変更は記録されません。後で読み返しても、削除や中間的な編集のすべてを復元できるとは限りません。",
  "Export saved records without reading Telegram. Observation can keep running.": "Telegramを開かずに保存された記録をエクスポートできます。監視は引き続き実行可能です。",
  "Download selected chats into a separate archive. Pause observation on this account first.": "選択したチャットを別のアーカイブにダウンロードします。まず、このアカウントの監視を一時停止してください。",
- "Saved observations": "保存された観察記録"
+ "Saved observations": "保存された観察記録",
+"Chat state": "チャットの状態",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "有効化されているすべてのソースについて、タイトル、説明、メンバー数、固定メッセージ、管理者、ギフトの定期的なスナップショットを、前回のスナップショットとの差異とともに取得します。",
+"Snapshot each source every": "各ソースを",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 に設定すると、チャット状態のスナップショットがオフになります。各スナップショットは、通常のクライアントに表示される内容を読み取り、ソースごとに数回のリクエストを行います。",
+"Pause between sources": "ソース間の間隔",
+"Read pinned messages": "固定されたメッセージを読む",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "ピン留めを解除してもメッセージレベルの記録は残りません。スナップショットには、ピン留めが解除されたメッセージが表示されます。",
+"Read administrators and their rights": "管理者とその権限について",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "チャンネルによっては、管理者以外のメンバーに対してこのリストの閲覧を拒否する場合があります。その場合は、スナップショットにその旨が記載されます。",
+"Read gifts shown on channels and profiles": "チャンネルやプロフィールに表示されている「ギフト」を読み取る",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "ギフトは、サービスメッセージを送ることなく、非表示にしたり、変換したり、アップグレードしたり、払い戻したりすることができます。",
+"Record checks that found no change": "変更が確認されなかったチェックを記録する",
+"A short record keeps the time of each check; turn off to record changes only.": "「short record」モードでは、各チェックの時刻が記録されます。変更内容のみを記録したい場合は、この機能をオフにしてください。"
 }

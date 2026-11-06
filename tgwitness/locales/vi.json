@@ -6209,5 +6209,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "Tạm dừng quan sát trước khi tải lịch sử. Các thay đổi trực tiếp mới sẽ không được ghi lại trong khi lịch sử đang được tải; các lần đọc sau đó không thể khôi phục mọi thao tác xóa hoặc chỉnh sửa trung gian.",
  "Export saved records without reading Telegram. Observation can keep running.": "Xuất các bản ghi đã lưu mà không cần mở Telegram. Quá trình theo dõi vẫn có thể tiếp tục chạy.",
  "Download selected chats into a separate archive. Pause observation on this account first.": "Tải các cuộc trò chuyện đã chọn xuống thành một tệp lưu trữ riêng biệt. Trước tiên, hãy tạm dừng theo dõi trên tài khoản này.",
- "Saved observations": "Các quan sát đã lưu"
+ "Saved observations": "Các quan sát đã lưu",
+"Chat state": "Trạng thái cuộc trò chuyện",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Các bản chụp nhanh định kỳ về tiêu đề, mô tả, số lượng thành viên, tin nhắn được ghim, quản trị viên và quà tặng của mọi nguồn đã được kích hoạt, kèm theo sự khác biệt so với bản chụp nhanh trước đó.",
+"Snapshot each source every": "Tạo bản chụp nhanh từng nguồn mỗi",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 tắt tính năng chụp nhanh trạng thái cuộc trò chuyện. Mỗi bản chụp nhanh đọc những gì một ứng dụng khách thông thường hiển thị và thực hiện một vài yêu cầu cho mỗi nguồn.",
+"Pause between sources": "Dừng lại giữa các nguồn",
+"Read pinned messages": "Đọc các tin nhắn được ghim",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Việc gỡ ghim không để lại bản ghi ở cấp độ tin nhắn; các bản chụp nhanh cho thấy những tin nhắn nào đã ngừng được ghim.",
+"Read administrators and their rights": "Xem danh sách các quản trị viên và quyền hạn của họ",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Các kênh có thể từ chối hiển thị danh sách này cho các thành viên không phải là quản trị viên; bản chụp nhanh sẽ ghi rõ điều này.",
+"Read gifts shown on channels and profiles": "Đọc các món quà được hiển thị trên các kênh và hồ sơ",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "Quà tặng có thể được ẩn, chuyển đổi, nâng cấp hoặc hoàn tiền mà không cần thông báo dịch vụ.",
+"Record checks that found no change": "Ghi lại các lần kiểm tra không phát hiện thấy thay đổi",
+"A short record keeps the time of each check; turn off to record changes only.": "Chế độ ghi ngắn sẽ ghi lại thời gian của mỗi lần kiểm tra; tắt chế độ này để chỉ ghi lại các thay đổi."
 }

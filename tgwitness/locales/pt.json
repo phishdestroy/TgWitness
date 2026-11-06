@@ -6248,5 +6248,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "Pause a observação antes de carregar o histórico. Novas alterações em tempo real não são registradas enquanto o histórico está sendo carregado; leituras posteriores não podem recuperar todas as exclusões ou edições intermediárias.",
  "Export saved records without reading Telegram. Observation can keep running.": "Exporte registros salvos sem abrir o Telegram. A observação pode continuar em execução.",
  "Download selected chats into a separate archive. Pause observation on this account first.": "Baixe as conversas selecionadas em um arquivo separado. Pause primeiro a observação nesta conta.",
- "Saved observations": "Observações salvas"
+ "Saved observations": "Observações salvas",
+"Chat state": "Estado do chat",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Instantâneos periódicos do título, descrição, número de membros, mensagens fixadas, administradores e presentes de cada fonte ativada, com as diferenças em relação ao instantâneo anterior.",
+"Snapshot each source every": "Faça um snapshot de cada fonte a cada",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "O valor 0 desativa os instantâneos do estado do chat. Cada instantâneo lê o que um cliente comum exibe e realiza algumas solicitações por fonte.",
+"Pause between sources": "Pausa entre as fontes",
+"Read pinned messages": "Leia as mensagens fixadas",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Desfixar não deixa nenhum registro no nível da mensagem; os instantâneos mostram quais mensagens deixaram de estar fixadas.",
+"Read administrators and their rights": "Conheça os administradores e seus direitos",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Os canais podem recusar o acesso a essa lista a membros que não sejam administradores; nesse caso, o snapshot indicará isso.",
+"Read gifts shown on channels and profiles": "Leia os presentes exibidos nos canais e perfis",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "Presentes podem ser ocultados, convertidos, atualizados ou reembolsados sem uma mensagem de serviço.",
+"Record checks that found no change": "Registrar verificações que não encontraram alterações",
+"A short record keeps the time of each check; turn off to record changes only.": "Um registro breve mantém a hora de cada verificação; desative essa opção para registrar apenas as alterações."
 }

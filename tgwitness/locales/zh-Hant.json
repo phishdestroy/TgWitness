@@ -6209,5 +6209,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "在載入歷史紀錄前請暫停觀察。載入歷史紀錄期間，系統不會記錄新的即時變更；後續讀取時無法還原所有刪除或中間編輯的記錄。",
  "Export saved records without reading Telegram. Observation can keep running.": "無需開啟 Telegram 即可匯出已儲存的記錄。監測功能可持續運行。",
  "Download selected chats into a separate archive. Pause observation on this account first.": "將選定的聊天記錄下載至獨立的壓縮檔中。請先暫停此帳號的監看功能。",
- "Saved observations": "已儲存的观察记录"
+ "Saved observations": "已儲存的观察记录",
+"Chat state": "聊天狀態",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "定期擷取每個已啟用來源的標題、描述、成員數、置頂訊息、管理員及禮物等資料，並標示與前次快照的差異。",
+"Snapshot each source every": "每隔",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 會關閉聊天狀態快照功能。每次快照都會讀取一般客戶端所顯示的內容，並針對每個來源發出數個請求。",
+"Pause between sources": "來源之間的停頓",
+"Read pinned messages": "閱讀置頂訊息",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "取消釘選不會留下訊息層級的記錄；快照會顯示哪些訊息已不再被釘選。",
+"Read administrators and their rights": "閱讀管理員及其權限",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "頻道可拒絕向非管理員的成員提供此清單；若發生此情況，快照中將註明此事項。",
+"Read gifts shown on channels and profiles": "讀取頻道與個人檔案上顯示的禮物",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "禮物可隱藏、轉換、升級或退款，且無需發送服務訊息。",
+"Record checks that found no change": "記錄未發現變更的檢查結果",
+"A short record keeps the time of each check; turn off to record changes only.": "簡短記錄會保留每次檢查的時間；若要僅記錄變更，請關閉此功能。"
 }

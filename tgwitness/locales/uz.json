@@ -6248,5 +6248,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "Tarixni yuklashdan oldin kuzatuvni to'xtating. Tarix yuklanayotgan paytda yangi jonli o'zgarishlar yozib olinmaydi; keyingi o'qishlar har bir o'chirish yoki oraliq tahrirni tiklay olmaydi.",
  "Export saved records without reading Telegram. Observation can keep running.": "Telegramni o'qimasdan saqlangan yozuvlarni eksport qiling. Kuzatuv ishlashni davom ettirishi mumkin.",
  "Download selected chats into a separate archive. Pause observation on this account first.": "Tanlangan suhbatlarni alohida arxivga yuklab oling. Avvalo ushbu akkaunt bo'yicha kuzatuvni to'xtating.",
- "Saved observations": "Saqlangan kuzatuvlar"
+ "Saved observations": "Saqlangan kuzatuvlar",
+"Chat state": "Suhbat holati",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Har bir yoqitilgan manbaning sarlavhasi, tavsifi, a'zo soni, pinlangan xabarlari, administratorlari va sovg'alari bo'yicha muntazam snapshotlar hamda ularning avvalgi snapshotga nisbatan farqlari.",
+"Snapshot each source every": "Har bir manbani har",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 chat holati snapshotlarini o'chiradi. Har bir snapshot oddiy klient ko'rsatadigan ma'lumotni o'qiydi va har bir manba bo'yicha bir nechta so'rov yuboradi.",
+"Pause between sources": "Manbalar orasida tanaffus",
+"Read pinned messages": "Biriktirilgan xabarlarni o'qing",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Pinlashni bekor qilish xabar darajasida hech qanday yozuv qoldirmaydi; snapshotlar qaysi xabarlarning pinlashdan chiqarilganini ko'rsatadi.",
+"Read administrators and their rights": "Administratorlar va ularning huquqlarini o'qing",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Kanal ma'mur bo'lmagan a'zolarga ushbu ro'yxatni ko'rishni rad etishi mumkin; snapshot shunda shuni ko'rsatadi.",
+"Read gifts shown on channels and profiles": "Kanal va profillarda ko'rsatilgan sovg'alarni o'qing",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "Sovg'alar xizmat xabarisiz yashirilishi, konvertatsiya qilinishi, yangilanishi yoki qaytarilishi mumkin.",
+"Record checks that found no change": "O'zgarish topilmagan tekshiruvlarni qayd eting",
+"A short record keeps the time of each check; turn off to record changes only.": "Qisqa yozuv har bir tekshiruv vaqtini saqlaydi; o'zgarishlarni qayd etish uchun o'chirib qo'ying."
 }

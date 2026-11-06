@@ -1597,7 +1597,7 @@
 "chats": "чаты",
 "Re-read the chat list every": "Перечитывайте список чатов каждые",
 "Folder and whole-account modes: picks up folder changes and chats that appeared while offline.": "Режимы «Папка» и «Вся учетная запись»: фиксируют изменения в папках и чаты, появившиеся в автономном режиме.",
-"minutes": "протокол",
+"minutes": "минут",
 "Liveness record every": "Запись подтверждения подлинности каждой",
 "Reports treat silence longer than three of these intervals, and at least three minutes, as a gap.": "В отчётах отсутствие данных в течение периода, превышающего три указанных интервала, но не менее трёх минут, рассматривается как пробел.",
 "seconds": "секунд",
@@ -6616,5 +6616,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "Приостановите наблюдение перед загрузкой истории. Пока история загружается, новые изменения не записываются. Последующее чтение не гарантирует восстановление всех удалений и промежуточных правок.",
  "Export saved records without reading Telegram. Observation can keep running.": "Экспорт уже сохранённых записей без обращения к Telegram. Наблюдение можно продолжать.",
  "Download selected chats into a separate archive. Pause observation on this account first.": "Загрузка выбранных чатов в отдельный архив. Сначала приостановите наблюдение на этом аккаунте.",
- "Saved observations": "Сохраненные наблюдения"
+ "Saved observations": "Сохраненные наблюдения",
+"Chat state": "Состояние чата",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "Периодические снимки названия, описания, числа участников, закреплённых сообщений, администраторов и подарков каждого включённого источника с отличиями от предыдущего снимка.",
+"Snapshot each source every": "Снимать каждый источник раз в",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 отключает снимки состояния чата. Снимок читает то, что показывает обычный клиент, и занимает несколько запросов на источник.",
+"Pause between sources": "Пауза между источниками",
+"Read pinned messages": "Читать закреплённые сообщения",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "Открепление не оставляет записи на уровне сообщений; снимки показывают, какие сообщения перестали быть закреплены.",
+"Read administrators and their rights": "Читать администраторов и их права",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "Каналы могут не отдавать этот список участникам без прав администратора; тогда снимок это отметит.",
+"Read gifts shown on channels and profiles": "Читать подарки на каналах и в профилях",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "Подарок можно скрыть, обменять, улучшить или вернуть без служебного сообщения.",
+"Record checks that found no change": "Записывать проверки без изменений",
+"A short record keeps the time of each check; turn off to record changes only.": "Короткая запись сохраняет время каждой проверки; выключите, чтобы записывать только изменения."
 }

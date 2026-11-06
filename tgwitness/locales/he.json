@@ -6287,5 +6287,18 @@
  "Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.": "השהה את המעקב לפני טעינת ההיסטוריה. שינויים חדשים בשידור חי אינם מוקלטים בזמן טעינת ההיסטוריה; קריאות מאוחרות יותר לא יוכלו לשחזר כל מחיקה או עריכה ביניים.",
  "Export saved records without reading Telegram. Observation can keep running.": "ייצא רשומות שנשמרו מבלי לקרוא את Telegram. המעקב יכול להמשיך לפעול.",
  "Download selected chats into a separate archive. Pause observation on this account first.": "הורד צ'אטים נבחרים לארכיון נפרד. השעה תחילה את המעקב בחשבון זה.",
- "Saved observations": "תצפיות שנשמרו"
+ "Saved observations": "תצפיות שנשמרו",
+"Chat state": "מצב הצ'אט",
+"Periodic snapshots of title, description, member counts, pinned messages, administrators and gifts of every enabled source, with differences from the previous snapshot.": "תמונות מצב תקופתיות של כותרת, תיאור, מספר חברים, הודעות מוצמדות, מנהלים ומתנות של כל מקור מופעל, עם ציון ההבדלים ביחס לתמונת המצב הקודמת.",
+"Snapshot each source every": "יש ליצור תמונת מצב של כל מקור כל",
+"0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few requests per source.": "0 מכבה את צילום מצב הצ'אט. כל צילום מציג את מה שהלקוח הרגיל מציג ודורש מספר בקשות מועט לכל מקור.",
+"Pause between sources": "הפסקה בין מקורות",
+"Read pinned messages": "קראו הודעות מוצמדות",
+"Unpinning leaves no message-level record; snapshots show which messages stopped being pinned.": "ביטול ההצמדה אינו מותיר תיעוד ברמת ההודעה; תמונות מצב מראות אילו הודעות הפסיקו להיות מוצמדות.",
+"Read administrators and their rights": "קראו על מנהלים וזכויותיהם",
+"Channels may refuse this list to members who are not administrators; the snapshot then says so.": "ערוצים עשויים למנוע גישה לרשימה זו מחברים שאינם מנהלים; במקרה כזה, תופיע הערה מתאימה בתמונת המצב.",
+"Read gifts shown on channels and profiles": "קראו את המתנות המוצגות בערוצים ובפרופילים",
+"Gifts can be hidden, converted, upgraded or refunded without a service message.": "ניתן להסתיר, להמיר, לשדרג או להחזיר מתנות ללא הודעת שירות.",
+"Record checks that found no change": "תיעוד בדיקות שלא מצאו שינויים",
+"A short record keeps the time of each check; turn off to record changes only.": "רישום קצר מתעד את השעה של כל בדיקה; יש לכבות את האפשרות כדי לתעד שינויים בלבד."
 }
