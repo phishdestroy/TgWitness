@@ -103,6 +103,10 @@ An export through the panel needs a connection that allows **Export messages
 handover use the signed export in **Exports**, which `python -m tgwitness.verify`
 checks.
 
+The panel rechecks access before emitting each record, including the completion
+record. Revoked or expired access leaves an incomplete export. Lazy page reads
+share the archive worker limit with other queries and have a bounded wait.
+
 ## Agent skill
 
 [`.agents/skills/tgwitness-cli/SKILL.md`](../.agents/skills/tgwitness-cli/SKILL.md)

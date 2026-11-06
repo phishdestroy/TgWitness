@@ -12,7 +12,6 @@ from .archive import ArchiveQuery, ArchiveReader, Connections, ConnectionSetting
 from .workers import limited_in_thread
 
 QUERY_TIMEOUT = 8
-EXPORT_RECHECK = 500
 
 async def startup(app):
     app.state.archive_mcp = None
@@ -198,12 +197,16 @@ def register(app, authenticate):
         except TimeoutError:
             raise HTTPException(503, "Archive query timed out. Narrow the query.") from None
 
-        def stream():
+        async def stream():
             # Revocation, expiry or a timeout ends the stream without its completion line.
             try:
-                for number, line in enumerate(lines, 1):
-                    if number % EXPORT_RECHECK == 0:
-                        connections(app).resolve(token, count=False, tool=body.tool)
+                while True:
+                    # The generator reads pages lazily; creating it is not the expensive work.
+                    async with asyncio.timeout(QUERY_TIMEOUT):
+                        line = await limited_in_thread(app.state.archive_slots, next, lines, None)
+                    if line is None:
+                        return
+                    connections(app).resolve(token, count=False, tool=body.tool)
                     yield (json.dumps(line, ensure_ascii=False, separators=(",", ":")) + "\n").encode()
             except (Refused, TimeoutError):
                 return
