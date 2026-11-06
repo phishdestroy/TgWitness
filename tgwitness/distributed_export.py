@@ -239,7 +239,7 @@ class DistributedExport:
                 if eligible:
                     segments.append({"low": low, "high": end - 1, "profiles": eligible})
             info = lead.dialog_cache.get(chat_id, {})
-            chunk_size = CHUNK * min(50, min(densities, default=1)) if transport == "takeout" else CHUNK
+            chunk_size = CHUNK * min(50, min(densities, default=1))
             self.timing = timing
             self.state = {"id": export_id, "chat_id": chat_id, "title": info.get("title"), "lead": lead_id,
                           "phase": "preparing", "started_at": now, "workers": workers,
