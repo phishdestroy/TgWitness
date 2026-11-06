@@ -2519,6 +2519,11 @@ def compare_chat_exports(first, second, first_fingerprint=None, second_fingerpri
 
 
 def print_comparison(result, limit=50):
+    import builtins
+
+    def print(*values, **kwargs):
+        builtins.print(*(safe_text(v) if isinstance(v, str) else v for v in values), **kwargs)
+
     first, second = result["first"], result["second"]
     print("Both archives verified. First " + str(first["exported_at"]) + " (" + str(first["messages"]) + " messages, key "
           + first["fingerprint"][:16] + "), second " + str(second["exported_at"]) + " (" + str(second["messages"])
@@ -4449,14 +4454,24 @@ def main():
         try:
             compared = compare_chat_exports(args.bundle, args.compare, args.fingerprint, args.compare_fingerprint, args.max_gib)
         except Exception as exc:
+            code = 3 if args.strict and isinstance(exc, VerifierTooOld) else 1
             if mode == "json":
                 print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + str(exc)}, indent=2))
-                raise SystemExit(1)
-            parser.exit(1, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + str(exc) + "\n")
+                raise SystemExit(code)
+            print("ASSURANCE: fail")
+            parser.exit(code, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + safe_text(exc) + "\n")
+        pinned = bool(compared['first']['key_pinned'] and compared['second']['key_pinned'])
+        compared['assurance'] = assurance(compared)
+        compared['assurance']['scope'] = 'two authenticated chat exports; comparison does not prove event history'
         if mode == "json":
-            print(json.dumps({"verified": True, "kind": "comparison", "result": compared}, indent=2, ensure_ascii=False))
+            print(json.dumps({"verified": True, "kind": "comparison", "result": compared,
+                              "signer_pinned": pinned, "requirements_met": not args.strict or pinned},
+                             indent=2, ensure_ascii=True))
         else:
+            print(assurance_line(compared))
             print_comparison(compared)
+        if args.strict and not pinned:
+            raise SystemExit(2)
         return
     console = Console(sys.stdout, console_language(args.lang), not args.no_color and not os.environ.get("NO_COLOR")) \
         if mode == "pretty" else None

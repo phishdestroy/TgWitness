@@ -78,3 +78,26 @@ def test_console_cannot_execute_package_escape_sequences():
     console.say(console.paint('safe\x1b[2J', 'bold'))
     assert '\x1b[2J' not in stream.getvalue()
     assert 'safe' in stream.getvalue() and 'TGWSTYLE' not in stream.getvalue()
+
+
+def test_comparison_checks_both_pins_and_sanitizes_its_separate_output_path(tmp_path):
+    from test_chat_comparison import archive, row
+    first, pin = archive(tmp_path / 'first.zip', [{**row(), 'from': 'sender\x1b[2J\x85'}])
+    second, other_pin = archive(tmp_path / 'second.zip', [])
+    command = [sys.executable, '-m', 'tgwitness.verify', str(first), '--compare', str(second)]
+    plain = subprocess.run(command + ['--plain'], capture_output=True, text=True, encoding='utf-8')
+    assert plain.returncode == 0 and plain.stdout.startswith('ASSURANCE: self_attested')
+    assert '\x1b' not in plain.stdout and '\x85' not in plain.stdout
+    for flags, expected in [([], 2), (['--fingerprint', pin], 2),
+                            (['--fingerprint', pin, '--compare-fingerprint', other_pin], 0)]:
+        result = subprocess.run(command + ['--strict', '--json', *flags], capture_output=True)
+        assert result.returncode == expected
+        value = json.loads(result.stdout)
+        assert value['signer_pinned'] == (expected == 0)
+        assert value['result']['only_first'][0]['from'] == 'sender\x1b[2J\x85'
+
+
+def test_comparison_authenticated_future_format_keeps_strict_exit_three(tmp_path):
+    path = future(tmp_path)
+    command = [sys.executable, '-m', 'tgwitness.verify', str(path), '--compare', str(path), '--strict', '--json']
+    assert subprocess.run(command, capture_output=True).returncode == 3
