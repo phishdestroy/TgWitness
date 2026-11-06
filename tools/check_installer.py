@@ -117,6 +117,13 @@ with open(os.environ['TGW_CHECK_DOWNLOADS'], 'a') as stream:
                     "curl -fsSL " + shlex.quote(manifest["base_url"] + "/install.sh") + " | bash"]
                    if args.public else [bash, script, "--no-start"])
         subprocess.run(command, env=install_env, check=True, timeout=900)
+        receipts = list((app / "versions").glob("*/.ready"))
+        expected_receipt = app / "versions" / manifest["release_id"] / ".ready"
+        assert receipts == [expected_receipt], "Installed public source changed during acceptance"
+        wheel_name = next(name for name in manifest["files"] if name.endswith(".whl"))
+        assert expected_receipt.read_text().splitlines() == [manifest["release_id"], manifest["source_revision"],
+                                                           manifest["files"][wheel_name]["sha256"],
+                                                           manifest["files"]["constraints.txt"]["sha256"]]
         launcher = app / "bin" / "tgwitness"
         original = launcher.read_bytes()
         (app / "data").mkdir(exist_ok=True)
