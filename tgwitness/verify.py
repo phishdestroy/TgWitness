@@ -755,7 +755,8 @@ def parse_time(value):
 
 
 class Coverage:
-    def __init__(self):
+    def __init__(self, gap_settings=None, *, chats_selected=False, senders_selected=False):
+        self.sequences = Sequences(gap_settings, chats_selected=chats_selected, senders_selected=senders_selected)
         self.periods, self.gaps, self.notes = [], [], []
         self.start = self.alive = self.closed_at = self.close_reason = None
         self.observing = self.disconnected = False
@@ -823,6 +824,7 @@ class Coverage:
                 self.titles[added.get("chat_id")] = added.get("title")
         if kind in MESSAGE_KINDS and numbered_per_chat(chat_id) and isinstance(event["message_id"], int):
             self.ids.setdefault(chat_id, set()).add(event["message_id"])
+        self.sequences.add(event, MESSAGE_KINDS)
 
     def result(self, ranges_per_chat=50):
         periods = [dict(p) for p in self.periods]
@@ -844,10 +846,181 @@ class Coverage:
                                "ranges": [{"low": low, "high": high} for low, high in holes[:ranges_per_chat]],
                                "ranges_total": len(holes)})
         return {"continuous": periods, "gaps": gaps, "notes": self.notes[:200], "notes_total": len(self.notes),
-                "unobserved_ids": unobserved, "first_record": self.first, "last_record": self.last,
+                "unobserved_ids": unobserved, "gap_summary": self.sequences.result(self.titles),
+                "first_record": self.first, "last_record": self.last,
                 "meaning": "Continuous = observation on, connected and writing records at least every three "
                            "minutes (or every three heartbeat intervals when they are longer). IDs not observed were never seen by this collector; that is not evidence "
                            "that they were deleted. Only channels and supergroups number messages per chat."}
+
+
+# Missing message numbers. Telegram numbers messages once per channel or supergroup, and once per account
+# across private chats, bots and ordinary groups. A number between two observed messages that this
+# collector never saw is a gap: a message that existed and was not observed. A gap names no actor and no
+# reason, and every result lists the parameters that produced it.
+GAP_DEFAULTS = {"gap_analysis": True, "gap_account_sequence": True, "gap_cluster_min": 1, "gap_clusters_listed": 20,
+            "gap_service_estimate": False}
+WIDE_TYPES = ("private", "groups", "bots")
+GAP_MEANING = ("A gap is a message number between two observed messages that this collector never saw. Telegram assigns "
+           "these numbers; a gap does not say who removed a message or why, and it may be a message Telegram never "
+           "showed to this account.")
+ESTIMATE_MEANING = ("Estimate from the share of service messages among observed numbers. It does not explain any "
+                    "particular gap and is never subtracted from the missing count.")
+
+
+def account_numbered(chat_id):
+    return isinstance(chat_id, int) and chat_id > CHANNEL_IDS_BELOW
+
+
+def gap_parameters(values=None):
+    values = {**GAP_DEFAULTS, **(values or {})}
+    return {key: values[key] for key in GAP_DEFAULTS}
+
+
+def not_applicable(reason):
+    return {"status": "not_applicable", "reason": reason}
+
+
+NOTICE_KINDS = ("message.deleted", "message.missing_on_recheck")
+
+
+def summarize_gaps(times, settings, service=0, notices=()):
+    """times maps each observed message number to the time it was first observed; notices are numbers known
+    only from a deletion or recheck record, without saved content."""
+    ordered = sorted(times)
+    if len(ordered) < 2:
+        return not_applicable("Fewer than two observed messages; there is no range to measure.")
+    holes = [(low + 1, high - 1) for low, high in zip(ordered, ordered[1:]) if high - low > 1]
+    span = ordered[-1] - ordered[0] + 1
+    missing = sum(high - low + 1 for low, high in holes)
+    listed = [hole for hole in holes if hole[1] - hole[0] + 1 >= settings["gap_cluster_min"]]
+    largest = sorted(listed, key=lambda hole: (hole[0] - hole[1], hole[0]))[:settings["gap_clusters_listed"]]
+    result = {"status": "applicable", "observed_from": ordered[0], "observed_to": ordered[-1], "span": span,
+              "observed": len(ordered), "observed_without_content": len(notices),
+              "missing": missing, "density": round(missing / span, 6),
+              "gap_ranges": len(holes), "largest_gap": max((high - low + 1 for low, high in holes), default=0),
+              "clusters_total": len(listed),
+              "clusters": [{"low": low, "high": high, "missing": high - low + 1,
+                            "after": {"message_id": low - 1, "observed_at": times[low - 1]},
+                            "before": {"message_id": high + 1, "observed_at": times[high + 1]}}
+                           for low, high in sorted(largest)]}
+    if settings["gap_service_estimate"]:
+        share = service / len(ordered)
+        result["service_estimate"] = {"service_share": round(share, 4),
+                                      "expected_service_in_missing": round(missing * share),
+                                      "meaning": ESTIMATE_MEANING}
+    return result
+
+
+def wide(scope):
+    """Whether a collection scope records every message that takes a number from the account sequence."""
+    if not isinstance(scope, dict) or scope.get("mode") != "account":
+        return False
+    types = scope.get("types") if isinstance(scope.get("types"), dict) else {}
+    excluded = [chat for chat in scope.get("exclude") or scope.get("excluded") or [] if account_numbered(chat)]
+    return all(types.get(kind, True) for kind in WIDE_TYPES) and scope.get("own_actions", True) and not excluded
+
+
+def scope_reason(scope):
+    if not isinstance(scope, dict) or scope.get("mode") != "account":
+        return ("Private chats, bots and ordinary groups share one account-wide numbering. It can be measured only "
+                "while whole-account collection is on; this journal has no such period.")
+    return ("Whole-account collection left out private chats, bots, ordinary groups, the account's own messages or "
+            "excluded chats; those messages take numbers from the same sequence.")
+
+
+class Sequences:
+    """Collects observed numbers from journal records in order and measures their gaps."""
+
+    def __init__(self, settings=None, *, chats_selected=False, senders_selected=False):
+        self.settings = gap_parameters(settings)
+        self.chats_selected, self.senders_selected = chats_selected, senders_selected
+        self.channels, self.services, self.content = {}, {}, {}
+        self.account, self.account_service, self.account_content, self.window = {}, 0, set(), None
+        self.scope, self.wide_since, self.wide_periods = None, None, 0
+
+    def add(self, event, message_kinds):
+        kind, chat_id, message_id = event["kind"], event["chat_id"], event["message_id"]
+        payload = event["payload"] if isinstance(event["payload"], dict) else {}
+        if kind == "scope.changed" and isinstance(payload.get("after"), dict):
+            self.set_scope(payload["after"], event["observed_at"])
+        elif kind == "scope.applied":
+            self.set_scope({**(self.scope or {}), "mode": payload.get("mode"), "types": payload.get("types"),
+                            "exclude": payload.get("excluded") or []}, event["observed_at"])
+        elif kind == "deletion.unscoped":
+            # Account-level deletions name numbers of the account sequence that no saved message has.
+            for number in payload.get("message_ids") or []:
+                if isinstance(number, int):
+                    self.account.setdefault(number, event["observed_at"])
+        if not isinstance(message_id, int):
+            return
+        service = kind in ("chat.service", "membership.service")
+        if numbered_per_chat(chat_id):
+            if kind in message_kinds:
+                self.channels.setdefault(chat_id, {}).setdefault(message_id, event["observed_at"])
+                if kind not in NOTICE_KINDS:
+                    self.content.setdefault(chat_id, set()).add(message_id)
+            elif service:
+                self.services[chat_id] = self.services.get(chat_id, 0) + 1
+        elif account_numbered(chat_id):
+            if kind in message_kinds:
+                self.account.setdefault(message_id, event["observed_at"])
+                if kind not in NOTICE_KINDS:
+                    self.account_content.add(message_id)
+                if kind == "message.new" and self.wide_since is not None:
+                    # Only messages that arrived during whole-account collection bound the measured range.
+                    low, high = self.window or (message_id, message_id)
+                    self.window = (min(low, message_id), max(high, message_id))
+            elif service:
+                self.account_service += 1
+
+    def set_scope(self, scope, at):
+        self.scope = scope
+        if wide(scope):
+            if self.wide_since is None:
+                self.wide_since, self.wide_periods = at, self.wide_periods + 1
+        else:
+            self.wide_since = None
+
+    def result(self, titles=None, chat_limit=None):
+        titles = titles or {}
+        settings = self.settings
+        summary = {"parameters": settings, "meaning": GAP_MEANING, "chats": [], "account": None}
+        if not settings["gap_analysis"]:
+            summary["status"] = "off"
+            return summary
+        summary["status"] = "on"
+        for chat_id in sorted(self.channels)[:chat_limit]:
+            entry = {"chat_id": chat_id, "title": titles.get(chat_id), "numbering": "per chat"}
+            if self.senders_selected:
+                entry.update(not_applicable("Records were selected by sender, so other senders' numbers are absent."))
+            else:
+                times = self.channels[chat_id]
+                entry.update(summarize_gaps(times, settings, self.services.get(chat_id, 0),
+                                       [n for n in times if n not in self.content.get(chat_id, ())]))
+            summary["chats"].append(entry)
+        if chat_limit is not None and len(self.channels) > chat_limit:
+            summary["chats_truncated"] = len(self.channels) - chat_limit
+        summary["account"] = {"numbering": "account-wide: private chats, bots and ordinary groups",
+                              **self.account_result()}
+        return summary
+
+    def account_result(self):
+        if not self.settings["gap_account_sequence"]:
+            return not_applicable("Turned off in Parameters → Gap analysis.")
+        if self.chats_selected or self.senders_selected:
+            return not_applicable("Records were selected by chat or sender; other chats take numbers from the "
+                                  "same account-wide sequence.")
+        if not self.wide_periods or self.window is None:
+            return not_applicable(scope_reason(self.scope))
+        low, high = self.window
+        inside = {number: at for number, at in self.account.items() if low <= number <= high}
+        result = summarize_gaps(inside, self.settings, self.account_service,
+                           [n for n in inside if n not in self.account_content])
+        result["window"] = "from the first to the last message that arrived while whole-account collection was on"
+        if self.wide_periods > 1:
+            result["note"] = ("Whole-account collection was switched off and on again; numbers used while it was off "
+                              "appear as gaps.")
+        return result
 
 
 def coverage_lines(coverage):
@@ -863,7 +1036,15 @@ def coverage_lines(coverage):
             lines.append("Chat " + (chat["title"] or str(chat["chat_id"])) + ": IDs " + str(chat["observed_from"])
                          + "-" + str(chat["observed_to"]) + ", " + str(chat["not_observed"])
                          + " ID(s) not observed in " + str(chat["ranges_total"]) + " range(s) (not evidence of deletion)")
-    return lines or ["No observation period recorded."]
+    gaps, extra = coverage.get("gap_summary") or {}, []
+    account = gaps.get("account") if gaps.get("status") == "on" else None
+    if account and account.get("status") == "applicable":
+        extra.append("Account-wide sequence (private chats, bots, ordinary groups): IDs " + str(account["observed_from"])
+                     + "-" + str(account["observed_to"]) + ", " + str(account["missing"]) + " ID(s) not observed in "
+                     + str(account["gap_ranges"]) + " range(s)")
+    elif account:
+        extra.append("Account-wide sequence not measured: " + str(account.get("reason")))
+    return (lines or ["No observation period recorded."]) + extra
 
 
 def drand_time(number):
