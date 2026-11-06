@@ -3223,6 +3223,18 @@ def unb64url(text):
     return base64.urlsafe_b64decode(text + "=" * (-len(text) % 4))
 
 
+def witness_challenge(freshness):
+    if not isinstance(freshness, dict):
+        raise ValueError("Invalid witness freshness")
+    beacon = drand_beacon({"round": freshness.get("drand_round"),
+                          "randomness": freshness.get("drand_randomness"),
+                          "signature": freshness.get("drand_signature")})
+    nonce = freshness.get("nonce")
+    if not isinstance(nonce, str) or not re.fullmatch(r"[0-9a-f]{32}", nonce):
+        raise ValueError("Invalid witness freshness nonce")
+    return hashlib.sha256(bytes.fromhex(beacon["signature"]) + bytes.fromhex(nonce)).hexdigest()[:32]
+
+
 def post_statement(event, witness_fingerprint):
     payload = event["payload"]
     statement = {"format": "tgwitness-witness-post-v1", "witness": witness_fingerprint, "seq": event["seq"],
@@ -3233,6 +3245,8 @@ def post_statement(event, witness_fingerprint):
     if payload.get("capture"):
         statement.update(capture_sha256=hashlib.sha256(canonical(payload["capture"])).hexdigest(),
                          counts=payload["capture"]["statement"]["counts"], delta=payload.get("capture_delta"))
+    if payload.get("freshness") is not None:
+        statement["drand_round"] = payload["freshness"]["drand_round"]
     return statement
 
 
@@ -3240,7 +3254,7 @@ def post_token(statement, signature_b64):
     return "TGW1." + b64url(canonical(statement)) + "." + b64url(base64.b64decode(signature_b64))
 
 
-def verify_witness(path, expected_fingerprint=None):
+def verify_witness(path, expected_fingerprint=None, check_drand=False):
     with open_archive(path) as archive:
         names = archive.namelist()
         manifest = read_manifest(archive)
@@ -3281,6 +3295,12 @@ def verify_witness(path, expected_fingerprint=None):
                                 or captured["head_hash"] != payload["head_hash"]):
                             raise ValueError("Witness capture proof differs from its anchor")
                         anchors[-1]["capture"] = payload["capture"]
+                    if payload.get("freshness") is not None:
+                        fresh = payload["freshness"]
+                        challenge = witness_challenge(fresh)
+                        if not payload.get("capture") or captured.get("challenge") != challenge:
+                            raise ValueError("Witness freshness challenge differs from the signed capture")
+                        anchors[-1]["freshness"] = {**fresh, "verified": False, "not_before": None}
                     collector_key = payload.get("collector_fingerprint")
                     if payload.get("status") == "ok":
                         prior = retained.get(collector_key)
@@ -3307,10 +3327,26 @@ def verify_witness(path, expected_fingerprint=None):
             result = verify_events(observed(stream), public)
     if result["events"] != manifest["event_count"] or result["head_hash"] != manifest["head_hash"]:
         raise ValueError("Witness manifest does not match its journal")
+    bound = [a for a in anchors if a.get("freshness")]
+    confirmation = {"asked": 0, "confirmed": 0, "relays": []}
+    if check_drand and bound:
+        rounds = [{"round": a["freshness"]["drand_round"], "randomness": a["freshness"]["drand_randomness"],
+                   "seq": a["seq"]} for a in bound]
+        # Every credited anchor is checked; sampling must not certify unchecked rounds.
+        confirmation = confirm_drand(rounds, limit=len(rounds))
+        if confirmation["confirmed"] == len(rounds):
+            for anchor in bound:
+                anchor["freshness"].update(verified=True, not_before=drand_time(anchor["freshness"]["drand_round"]))
+    freshness = {"anchors": len(anchors), "drand_bound": len(bound), "confirmed": confirmation["confirmed"],
+                 "earliest_not_before": min((a["freshness"]["not_before"] for a in bound
+                                              if a["freshness"]["verified"]), default=None),
+                 "verification": "relay-confirmed" if confirmation["confirmed"] else "not-performed",
+                 "relays": confirmation["relays"]}
     return {"format": manifest["format"], "fingerprint": fp, "public_key": public, "events": result["events"],
             "head_hash": result["head_hash"], "interval_minutes": interval, "channel": manifest.get("channel"),
             "producer": manifest.get("producer"), "anchors": anchors, "no_response": silent, "posted": posted,
-            "post_failures": failures, "statements": statements, "key_pinned": bool(expected_fingerprint)}
+            "post_failures": failures, "statements": statements, "key_pinned": bool(expected_fingerprint),
+            "freshness": freshness}
 
 
 def witnessed_periods(witness, key=None):
@@ -4157,7 +4193,7 @@ def main():
                          "confirm their content against the complete journal by that hash.")
         elif is_format(archive_format, "witness-v1"):
             shown = "witness"
-            result = verify_witness(args.bundle, args.witness_fingerprint or args.fingerprint)
+            result = verify_witness(args.bundle, args.witness_fingerprint or args.fingerprint, args.check_drand)
             if args.channel:
                 result["channel_check"] = check_channel(result, args.channel)
             result.pop("statements")
@@ -4175,7 +4211,7 @@ def main():
             if args.witness and not args.witness_fingerprint:
                 notes.append("The witness key is not pinned: the witness journal is checked only against itself.")
             if args.witness:
-                witness = verify_witness(args.witness, args.witness_fingerprint)
+                witness = verify_witness(args.witness, args.witness_fingerprint, args.check_drand)
                 result["witness"] = cross_check_witness(witness, args.bundle, result)
                 if args.channel:
                     result["witness"]["channel_check"] = check_channel(witness, args.channel)

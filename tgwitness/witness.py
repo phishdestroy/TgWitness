@@ -25,6 +25,7 @@ from .security import InstanceLock, private_write
 from .store import Store, canonical, utcnow
 from .verify import fingerprint, is_format, post_statement, post_token, verify_events, verify_capture
 from .verify import verify_continuity
+from .verify import DRAND_CHAIN, DRAND_RELAYS, DRAND_GENESIS, DRAND_PERIOD, drand_beacon, witness_challenge
 
 DEFAULT_INTERVAL = 10
 TIMEOUT = 30
@@ -89,6 +90,21 @@ class WitnessKey:
 
 class InvalidAnswer(ValueError):
     pass
+
+
+async def drand_latest(network):
+    """Get a structurally valid beacon over TLS; independent verification is separate."""
+    for relay in DRAND_RELAYS:
+        try:
+            _, _, body = await request("GET", relay + "/" + DRAND_CHAIN + "/public/latest", network,
+                                       {"Accept": "application/json"}, timeout=5, limit=4096)
+            beacon = drand_beacon(json.loads(body))
+            if DRAND_GENESIS + (beacon["round"] - 1) * DRAND_PERIOD > time.time() + 60:
+                continue
+            return beacon
+        except Exception:
+            continue
+    return None
 
 
 def proxy_config(url):
@@ -179,13 +195,24 @@ class Witness:
         self.fetch = fetch or self.http_fetch
         self.send = send if send is not None else (self.discord_send if discord_webhook else self.bot_send if channel and bot_token else None)
         self.host = urlsplit(self.collector).hostname
+        self._freshness = None
 
     def close(self):
         self.store.close()
         self.lock.close()
 
     async def http_fetch(self):
-        challenge = secrets.token_hex(16)
+        self._freshness = None
+        nonce = secrets.token_hex(16)
+        try:
+            beacon = await asyncio.wait_for(drand_latest(self.network), 5)
+        except TimeoutError:
+            beacon = None
+        if beacon is not None:
+            # The signature is indispensable: randomness is its one-way hash.
+            self._freshness = {"drand_round": beacon["round"], "drand_randomness": beacon["randomness"],
+                               "drand_signature": beacon["signature"], "nonce": nonce}
+        challenge = witness_challenge(self._freshness) if self._freshness else nonce
         previous = self.store.get_setting("last_seen") or {"event_count": 0}
         _, _, data = await request("GET", self.collector + "/api/witness/head", self.network, {
             "Authorization": "Bearer " + self.token, "Accept": "application/json",
@@ -295,7 +322,7 @@ class Witness:
         payload = {"status": status, "collector": self.host, "collector_fingerprint": key,
                 "pinned_fingerprint": self.pinned, "event_count": count, "head_hash": head,
                 "checkpoint_created_at": statement.get("created_at"),
-                "checkpoint_sha256": hashlib.sha256(canonical(value)).hexdigest()}
+                "checkpoint_sha256": hashlib.sha256(canonical(value)).hexdigest(), "freshness": self._freshness}
         if capture is not None:
             payload.update(checkpoint={"statement": statement, "signature": value["signature"], "fingerprint": key},
                            capture=capture, capture_delta=delta)
@@ -339,6 +366,7 @@ class Witness:
         return True
 
     async def tick(self):
+        self._freshness = None
         try:
             answer = await asyncio.wait_for(self.fetch(), self.timeout + 5)
             with self.store.transaction():
